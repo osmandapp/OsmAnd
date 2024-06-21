@@ -59,6 +59,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
+import net.osmand.plus.plugins.weather.widgets.CustomWeatherWidget;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -288,15 +289,15 @@ public class WeatherPlugin extends OsmandPlugin {
 	public WeatherWidget createCustomLayoutWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @LayoutRes int customLayoutId) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_TEMPERATURE, customLayoutId);
+				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_TEMPERATURE);
 			case WEATHER_PRECIPITATION_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRECIPITATION, customLayoutId);
+				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRECIPITATION);
 			case WEATHER_WIND_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_WIND_SPEED, customLayoutId);
+				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_WIND_SPEED);
 			case WEATHER_CLOUDS_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD, customLayoutId);
+				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD);
 			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE, customLayoutId);
+				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE);
 		}
 		return null;
 	}

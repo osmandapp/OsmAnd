@@ -53,6 +53,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -82,7 +83,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
 	public static final int ANIM_DELAY_MILLIS = 70;
 	public static final int WAIT_FOR_NEW_DOWNLOAD_START_DELAY = 1000;
-	private static final int MAX_FORECAST_DAYS = 6;
+	private static final int MAX_FORECAST_DAYS = 7;
 
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
@@ -101,12 +102,10 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private WeatherContour previousWeatherContour;
 	private boolean isAnimatingForecast;
-	private View playForecastBtn;
 	private ImageView playForecastBtnIcon;
 	private int currentStep;
 	private int animateStepCount;
 
-	private List<ChipItem> chips;
 	private ImageButton chooseLayersBtn;
 	private ImageButton chooseContoursBtn;
 
@@ -199,7 +198,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupPLayForecastButton(View view) {
-		playForecastBtn = view.findViewById(R.id.play_forecast_button);
+		View playForecastBtn = view.findViewById(R.id.play_forecast_button);
 		playForecastBtnIcon = view.findViewById(R.id.play_forecast_button_icon);
 		playForecastBtn.setOnClickListener((v) -> onPlayForecastClicked());
 		updatePlayForecastButton();
@@ -249,7 +248,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private void updateSliderValue() {
 		float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
-		timeSlider.setValue(newValue);
+		timeSlider.setValue(Math.min(newValue, timeSlider.getValueTo()));
 	}
 
 	private int getStepsCount() {
@@ -331,7 +330,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupDatesView(@NonNull View view) {
-		chips = createDatesChipItems(currentDate, selectedDate);
+		List<ChipItem> chips = createDatesChipItems(currentDate);
 		HorizontalChipsView chipsView = view.findViewById(R.id.chips_view);
 		chipsView.setItems(chips);
 		chipsView.setOnSelectChipListener(chip -> {
@@ -342,49 +341,58 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			requireMapActivity().refreshMap();
 			return true;
 		});
-		ChipItem selected = chipsView.findChipByTag(currentDate.getTime());
+		ChipItem selected = chipsView.findChipByTag(selectedDate.getTime());
 		chipsView.setSelected(selected);
 	}
 
-	private List<ChipItem> createDatesChipItems(@NonNull Calendar currentDate, @NonNull Calendar selectedDate) {
-		Calendar calendar = WeatherForecastFragment.getDefaultCalendar();
+	@NonNull
+	private List<ChipItem> createDatesChipItems(@NonNull Calendar currentDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(currentDate.getTime());
 		List<ChipItem> chipItems = new ArrayList<>();
-		String today = app.getString(R.string.today);
-		ChipItem chip = new ChipItem(today);
-		chip.title = today;
-		chip.contentDescription = today;
-		chip.tag = currentDate.getTime();
-		chipItems.add(chip);
-		calendar.add(Calendar.DAY_OF_MONTH, 1);
-		String tomorrow = app.getString(R.string.tomorrow);
-		chip = new ChipItem(tomorrow);
-		chip.title = tomorrow;
-		chip.contentDescription = tomorrow;
-		chip.tag = calendar.getTime();
-		chipItems.add(chip);
 		SimpleDateFormat formatter = new SimpleDateFormat("E", Locale.getDefault());
-		formatter.format(calendar.getTime());
-		for (int i = 0; i <= MAX_FORECAST_DAYS - 1; i++) {
-			calendar.add(Calendar.DAY_OF_MONTH, 1);
-			String dayTitle = formatter.format(calendar.getTime());
-			chip = new ChipItem(dayTitle);
-			chip.title = dayTitle;
-			chip.contentDescription = dayTitle;
+		for (int i = 0; i <= MAX_FORECAST_DAYS; i++) {
+			String title;
+			switch (i) {
+				case 0:
+					title = app.getString(R.string.today);
+					break;
+				case 1:
+					title = app.getString(R.string.tomorrow);
+					break;
+				default:
+					title = formatter.format(calendar.getTime());
+					break;
+			}
+			ChipItem chip = new ChipItem(title);
+			chip.title = title;
+			chip.contentDescription = title;
 			chip.tag = calendar.getTime();
 			chipItems.add(chip);
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		return chipItems;
 	}
 
 	private void setupToolBar(@NonNull View view) {
-		ImageView backButton = view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(requireMapActivity())));
+		View toolBar = view.findViewById(R.id.toolbar);
+		toolBar.setBackgroundColor(app.getColor(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
+
+		ImageView backButton = view.findViewById(R.id.close_button);
+		backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode)));
 		backButton.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
+
+		TextViewEx title = view.findViewById(R.id.toolbar_title);
+		title.setText(R.string.shared_string_weather);
+		title.setTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)));
+
+		ImageView optionButton = view.findViewById(R.id.action_button);
+		optionButton.setImageDrawable(getIcon(R.drawable.ic_action_settings_outlined, ColorUtilities.getPrimaryIconColorId(nightMode)));
 	}
 
 	private void setupWeatherButtons(@NonNull View view) {

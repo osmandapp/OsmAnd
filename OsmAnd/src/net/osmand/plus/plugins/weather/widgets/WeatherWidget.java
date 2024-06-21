@@ -51,9 +51,9 @@ public class WeatherWidget extends SimpleWidget {
 		forecastNamingFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private  WeatherHelper weatherHelper;
-	private  IObtainValueAsyncCallback callback;
-	private  WeatherBand weatherBand;
+	private WeatherHelper weatherHelper;
+	private IObtainValueAsyncCallback callback;
+	private WeatherBand weatherBand;
 	private short band;
 	private int hideOldDataMessageId;
 
@@ -66,17 +66,8 @@ public class WeatherWidget extends SimpleWidget {
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
 
-	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band, @LayoutRes int customLayoutId) {
-		super(mapActivity, widgetType, customId, customLayoutId);
-		init(widgetType, band);
-	}
-
 	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band) {
 		super(mapActivity, widgetType, customId, null);
-		init(widgetType, band);
-	}
-
-	private void init(@NonNull WidgetType widgetType, short band) {
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();
@@ -131,7 +122,7 @@ public class WeatherWidget extends SimpleWidget {
 		} else {
 			setText(NO_VALUE, null);
 		}
-		mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();;
+		mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();
 	}
 
 	public void setDateTime(@Nullable Date date) {

@@ -11,7 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
     <string name="map_settings_weather_wind_animation">Wind animation</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="missing_maps_ignore">Use existing maps</string>

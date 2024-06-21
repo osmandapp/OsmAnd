@@ -47,23 +47,11 @@ public class WeatherWebClient extends interface_IWebClient {
 			}
 
 			@Override
-			public void startTask(String taskName, int work) {
-				super.startTask(taskName, work);
-				log.info("startTask: " + taskName);
-			}
-
-			@Override
 			public void startWork(int work) {
 				super.startWork(work);
-				log.info("startWork: " + url);
 				notifyDownloadStateChange(true);
 			}
 
-			@Override
-			public void finishTask() {
-				super.finishTask();
-				log.info("finishTask: " + url);
-			}
 		});
 		notifyDownloadStateChange(false);
 		return downloadResult;

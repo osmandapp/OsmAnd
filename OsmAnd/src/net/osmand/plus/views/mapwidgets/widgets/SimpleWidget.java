@@ -37,15 +37,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 	private boolean isFullRow;
-	private MapInfoLayer.TextState textState;
-	private int customLayoutId;
-
-	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @LayoutRes int customLayoutId) {
-		super(mapActivity, widgetType);
-		widgetState = new SimpleWidgetState(app, customId, widgetType);
-		this.customLayoutId = customLayoutId;
-		setupViews();
-	}
+	protected MapInfoLayer.TextState textState;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -60,10 +52,14 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = customLayoutId != 0 ? customLayoutId : verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
+	}
+
+	protected int getContentLayoutId() {
+		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}
 
 	public void updateValueAlign(boolean fullRow) {
@@ -267,19 +263,23 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
-		if (verticalWidget || customLayoutId != 0) {
-			nightMode = textState.night;
-			textView.setTextColor(textState.textColor);
-			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetNameTextView.setTextColor(textState.secondaryTextColor);
-			int iconId = getIconId();
-			if (iconId != 0) {
-				setImageDrawable(iconId);
-			}
-			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+		if (verticalWidget) {
+			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
 		}
+	}
+
+	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
+		nightMode = textState.night;
+		textView.setTextColor(textState.textColor);
+		smallTextView.setTextColor(textState.secondaryTextColor);
+		widgetNameTextView.setTextColor(textState.secondaryTextColor);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
+		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 	}
 
 	@Override
