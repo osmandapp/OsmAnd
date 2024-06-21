@@ -5746,4 +5746,6 @@
     <string name="missing_maps_ignore">Користи постојеће мапе</string>
     <string name="backup_error_failed_to_transfer_file">Пренос датотеке(а) у облаку није успео.</string>
     <string name="contact_support_retry">Покушајте поново или контактирајте подршку</string>
+    <string name="tomorrow">Сутрадан</string>
+    <string name="map_settings_weather_wind_animation">Анимација ветра</string>
 </resources>

@@ -466,8 +466,8 @@
     <string name="poi_craft_stonemason">石匠</string>
     <string name="poi_cave_entrance">洞穴入口</string>
     <string name="poi_ridge">山脊</string>
-    <string name="poi_sinkhole">落水洞</string>
-    <string name="poi_rapids">急湍</string>
+    <string name="poi_sinkhole">天坑/落水洞</string>
+    <string name="poi_rapids">急流/激流</string>
     <string name="poi_cape">岬</string>
     <string name="poi_bay">海湾</string>
     <string name="poi_fjord">峡湾</string>

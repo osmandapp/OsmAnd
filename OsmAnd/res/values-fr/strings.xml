@@ -5007,7 +5007,7 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation dépend du mouvement, centré dans tous les autres cas.</string>
+    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation suit le déplacement, centré dans tous les autres cas.</string>
     <string name="shared_string_apply_changes">Appliquer les modifications</string>
     <string name="no_visible_tracks_description">Sélectionnez les traces à afficher sur la carte.</string>
     <string name="no_visible_tracks">Aucune trace sur la carte</string>
@@ -5472,7 +5472,7 @@
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
     <string name="add_smart_folder">Ajouter un dossier intelligent</string>
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
-    <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé. (Aucune trace ne sera supprimée.)</string>
+    <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé. (Aucune trace ne sera supprimée)</string>
     <string name="empty_name">Sans nom</string>
     <string name="edit_filter">Modifier le filtre</string>
     <string name="empty_smart_folder_title">Aucune trace trouvée</string>
@@ -5724,20 +5724,20 @@
     <string name="rendering_value_dark_orange_name">Orange foncé</string>
     <string name="contact_support_retry">Réessayez ou contactez le support</string>
     <string name="shared_string_colors">Couleurs</string>
-    <string name="no_assigned_keys_desc">Sélectionnez une action et assignez une touche en touchant le bouton \"Ajouter\".</string>
-    <string name="no_assigned_keys">Pas de touche assignée</string>
+    <string name="no_assigned_keys_desc">Sélectionnez une action et affectez un raccourci en appuyant sur \"Ajouter\".</string>
+    <string name="no_assigned_keys">Aucun raccourci</string>
     <string name="shared_string_key">Touche</string>
-    <string name="clear_key_assignment_summary">L\'assignation de touches pour l\'action sélectionnée sera supprimée.</string>
+    <string name="clear_key_assignment_summary">Le raccourci pour l\'action sélectionnée sera supprimé.</string>
     <string name="clear_all_key_shortcuts">Supprimer tous les raccourcis</string>
     <string name="key_name_pattern">Touche \"%1$s\"</string>
-    <string name="height_legend_description">Les cartes d\'altitude en couleurs sont utilisées pour visualiser le relief.</string>
-    <string name="change_terrain_color_scheme">Changer la palette de couleurs pour le relief</string>
+    <string name="height_legend_description">Les cartes d\'altitude colorées sont utilisées pour visualiser le relief.</string>
+    <string name="change_terrain_color_scheme">Modifier la palette de couleurs pour le relief</string>
     <string name="play_weather_forecast">Lancer l\'animation des prévisions météo</string>
-    <string name="clear_all_key_shortcuts_summary">Toutes les assignations de touches pour le type sélectionné seront supprimées.</string>
+    <string name="clear_all_key_shortcuts_summary">Tous les raccourcis de touches pour le type sélectionné seront supprimés.</string>
     <string name="key_assignment_add_key">Ajouter une touche</string>
-    <string name="backup_error_failed_to_transfer_file">Le transfert des fichiers du cloud a échoué.</string>
+    <string name="backup_error_failed_to_transfer_file">Le transfert des fichiers cloud a échoué.</string>
     <string name="user_palette">Palette de l\'utilisateur</string>
     <string name="missing_maps_ignore">Utiliser les cartes existantes</string>
-    <string name="new_key_assignment">Nouvelle assignation de touche</string>
-    <string name="assigned_keys">Touches assignées</string>
+    <string name="new_key_assignment">Nouvelle affectation de touche</string>
+    <string name="assigned_keys">Raccourcis de touches</string>
 </resources>
