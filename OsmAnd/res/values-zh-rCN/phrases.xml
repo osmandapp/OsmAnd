@@ -1110,7 +1110,7 @@
     <string name="poi_boatyard">船坞</string>
     <string name="poi_standpipe">竖管</string>
     <string name="poi_escape_lane">避险车道</string>
-    <string name="poi_rest_area">休息区</string>
+    <string name="poi_rest_area">停车休息区</string>
     <string name="poi_motorway_junction">高速公路交汇处</string>
     <string name="poi_aeroway_terminal">机场航站楼</string>
     <string name="poi_public_transport_stop_position">公共交通停靠位置</string>
