@@ -3,6 +3,7 @@ package net.osmand.plus.widgets.multistatetoggle;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class RadioItem {
@@ -21,8 +22,10 @@ public class RadioItem {
 		this.enabled = enabled;
 	}
 
-	public void setOnClickListener(OnRadioItemClickListener listener) {
+	@NonNull
+	public RadioItem setOnClickListener(OnRadioItemClickListener listener) {
 		this.listener = listener;
+		return this;
 	}
 
 	@Nullable
@@ -30,8 +33,15 @@ public class RadioItem {
 		return tag;
 	}
 
-	public void setTag(@Nullable Object tag) {
+	@NonNull
+	public Object requireTag() {
+		return tag;
+	}
+
+	@NonNull
+	public RadioItem setTag(@Nullable Object tag) {
 		this.tag = tag;
+		return this;
 	}
 
 	public OnRadioItemClickListener getListener() {
@@ -44,8 +54,10 @@ public class RadioItem {
 		return customColor;
 	}
 
-	public void setCustomColor(@ColorInt @Nullable Integer customColor) {
+	@NonNull
+	public RadioItem setCustomColor(@ColorInt @Nullable Integer customColor) {
 		this.customColor = customColor;
+		return this;
 	}
 
 	public interface OnRadioItemClickListener {

@@ -190,10 +190,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			controller.askUnregisterFromDialogManager();
-		}
+		controller.finishProcessIfNeeded(getActivity());
 	}
 
 	private void dismiss() {
