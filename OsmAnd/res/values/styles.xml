@@ -412,4 +412,10 @@
         <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
     </style>
+
+    <style name="SearchPreferenceResultTextAppearance" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#0000FF</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:typeface">normal</item>
+    </style>
 </resources>
