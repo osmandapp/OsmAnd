@@ -5755,4 +5755,6 @@
     <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
     <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
     <string name="missing_maps_ignore">Koristi postojeće mape</string>
+    <string name="tomorrow">Sutradan</string>
+    <string name="map_settings_weather_wind_animation">Animacija vetra</string>
 </resources>
