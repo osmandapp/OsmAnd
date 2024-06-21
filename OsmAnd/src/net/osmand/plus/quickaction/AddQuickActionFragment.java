@@ -20,14 +20,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
-public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
+public class AddQuickActionFragment extends BaseOsmAndFragment
+		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddQuickActionFragment.class.getSimpleName();
 
@@ -61,9 +64,9 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 		controller = AddQuickActionController.getExistedInstance(app);
 		if (controller == null) {
-			closeFragment();
+			dismiss();
 		} else {
-			controller.registerDialog(TAG);
+			controller.registerDialog(TAG, this);
 			if (savedInstanceState != null) {
 				searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
 			}
@@ -173,7 +176,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		}
 	}
 
-	private void closeFragment() {
+	private void dismiss() {
 		FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -210,8 +213,26 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	}
 
 	@Override
-	public void onQuickActionAdded() {
-		closeFragment();
+	public void onAskDismissDialog(@NonNull String processId) {
+		dismiss();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

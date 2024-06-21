@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="key_event_action_continuous_zoom_out">Continuous zoom out</string>
+    <string name="key_event_action_continuous_zoom_in">Continuous zoom in</string>
+    <string name="remove_key_assignment_summary">Key assignment for the selected action will be removed.</string>
+    <string name="remove_key_assignment">Remove key assignment</string>
     <string name="map_settings_weather_wind_animation">Wind animation</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="missing_maps_ignore">Use existing maps</string>
