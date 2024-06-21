@@ -5458,7 +5458,7 @@
     <string name="smart_folder_name_present">Така розумна тека вже існує</string>
     <string name="smart_folder_saved">Розумну теку збережено</string>
     <string name="add_smart_folder">Додати розумну теку</string>
-    <string name="empty_name">Назва відсутня</string>
+    <string name="empty_name">Пуста назва</string>
     <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
     <string name="delete_smart_folder_dialog_message">Це призведе до вилучення смарттеки «%1$s». (Треки не буде видалено).</string>
@@ -5618,7 +5618,7 @@
     <string name="when_exceeded">Коли перевищено</string>
     <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
     <string name="add_button">Додати кнопку</string>
-    <string name="default_buttons">Типові кнопки</string>
+    <string name="default_buttons">Кнопки за замовчуванням</string>
     <string name="speed_limit_warning">Попередження щодо обмеження швидкості</string>
     <string name="speedometer_description">Показує вашу поточну швидкість за даними GPS</string>
     <string name="shared_string_speedometer">Спідометр</string>
@@ -5710,7 +5710,7 @@
     <string name="top_and_bottom">Зверху і внизу</string>
     <string name="title_3d_track">3D-трек</string>
     <string name="explore_3d_track_description">Досліджуйте трек в інтерактивному 3D! Візуалізуйте висоту, швидкість та багато іншого безпосередньо на мапі.</string>
-    <string name="maps_that_also_be_used">Мапи, які також можна використовувати: %1$s</string>
+    <string name="maps_that_also_be_used">Мапи, які також будуть використані: %1$s</string>
     <string name="getting_list_of_required_maps">Отримання списку необхідних мап…</string>
     <string name="required_maps">Необхідні мапи</string>
     <string name="missing_maps_description">Деякі офлайн-мапи, необхідні для прокладання цього маршруту, відсутні або неактуальні. Будь ласка, завантажте або оновіть їх.</string>
@@ -5753,4 +5753,9 @@
     <string name="key_assignment_add_key">Додати кнопку</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
+    <string name="missing_maps_ignore">Використати існуючі мапи</string>
+    <string name="backup_error_failed_to_transfer_file">Помилка перенесення хмарного файлу(ів).</string>
+    <string name="contact_support_retry">Спробуйте ще раз або зверніться до служби підтримки</string>
+    <string name="shared_string_colors">Кольори</string>
+    <string name="user_palette">Палітра користувача</string>
 </resources>

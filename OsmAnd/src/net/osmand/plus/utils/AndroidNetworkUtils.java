@@ -628,6 +628,9 @@ public class AndroidNetworkUtils {
 			@NonNull String url, @NonNull File fileToSave, boolean gzip, long lastTime, @Nullable IProgress progress) {
 		long result = -1;
 		try {
+			if (progress != null) {
+				progress.startTask(url, 0);
+			}
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setConnectTimeout(CONNECT_TIMEOUT);
 			connection.setReadTimeout(READ_TIMEOUT);

@@ -65,11 +65,6 @@ public abstract class BaseDialogController implements IDialogController {
 	}
 
 	@NonNull
-	public String getString(@StringRes int stringId) {
-		return app.getString(stringId);
-	}
-
-	@NonNull
 	public String getString(@StringRes int stringId, Object... formatArgs) {
 		return app.getString(stringId, formatArgs);
 	}
