@@ -5757,7 +5757,8 @@
     <string name="daynight_mode_night_summary">Afișează întotdeauna harta într-o temă întunecată, potrivită pentru timpul nopții sau în condiții de iluminare slabă.</string>
     <string name="daynight_mode_day_summary">Afișează întotdeauna harta într-o temă luminoasă, ideală pentru vizibilitatea în timpul zilei.</string>
     <string name="daynight_mode_app_theme">Tema aplicației</string>
-    <string name="key_event_action_continuous_zoom_out">Reducere continuă a zoom-ului</string>
-    <string name="key_event_action_continuous_zoom_in">Zoom continuu în</string>
+    <string name="key_event_action_continuous_zoom_out">Micșorare continuă</string>
+    <string name="key_event_action_continuous_zoom_in">Mărire continuă</string>
     <string name="remove_key_assignment_summary">Atribuirea tastelor pentru acțiunea selectată va fi eliminată.</string>
+    <string name="remove_key_assignment">Șterge asignarea tastei</string>
 </resources>
