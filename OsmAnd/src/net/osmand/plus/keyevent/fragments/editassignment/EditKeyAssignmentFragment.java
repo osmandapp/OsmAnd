@@ -23,6 +23,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -32,6 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -67,7 +69,9 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		updateNightMode();
 		View view = inflate(R.layout.fragment_edit_key_assignment, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
-		setupTransitions(view);
+		if (!settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
+			AndroidUiHelper.setupContainerTransformTransition(this, view);
+		}
 		setupToolbar(view);
 
 		adapter = new EditKeyAssignmentAdapter((MapActivity) requireMyActivity(), appMode, controller, isUsedOnMap());
@@ -76,18 +80,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		recyclerView.setAdapter(adapter);
 		updateScreen(view);
 		return view;
-	}
-
-	private void setupTransitions(@NonNull View view) {
-		view.setTransitionName(EditKeyAssignmentController.TRANSITION_NAME);
-
-		MaterialContainerTransform enterTransform = new MaterialContainerTransform();
-		enterTransform.setScrimColor(Color.TRANSPARENT);
-		setSharedElementEnterTransition(enterTransform);
-
-		MaterialContainerTransform returnTransform = new MaterialContainerTransform();
-		returnTransform.setScrimColor(Color.TRANSPARENT);
-		setSharedElementReturnTransition(returnTransform);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -235,9 +227,12 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		return nightMode;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager manager,
+	public static boolean showInstance(@NonNull FragmentActivity activity,
 	                                   @NonNull ApplicationMode appMode,
 	                                   @Nullable View anchorView) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
@@ -245,7 +240,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 			fragment.setArguments(arguments);
 
 			FragmentTransaction transaction = manager.beginTransaction();
-			if (anchorView != null) {
+			if (anchorView != null && !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
 				transaction.addSharedElement(anchorView, EditKeyAssignmentController.TRANSITION_NAME);
 			}
 			transaction.replace(R.id.fragmentContainer, fragment, TAG);

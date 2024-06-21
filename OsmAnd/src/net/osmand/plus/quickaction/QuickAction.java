@@ -91,8 +91,9 @@ public class QuickAction {
 
 	public String getExtendedName(@NonNull Context context) {
 		String name = getName(context);
-		if (getActionNameRes() != 0 && !name.contains(context.getString(getActionNameRes()))) {
-			String prefAction = context.getString(getActionNameRes());
+		int actionNameRes = getActionNameRes();
+		if (actionNameRes != 0 && !name.contains(context.getString(actionNameRes))) {
+			String prefAction = context.getString(actionNameRes);
 			return context.getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, name);
 		}
 		return name;

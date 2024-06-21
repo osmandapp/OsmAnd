@@ -89,6 +89,7 @@ public abstract class AddQuickActionController implements IDialogController {
 		}
 	}
 
+	@NonNull
 	private List<IDialog> getBoundDialogs() {
 		return new ArrayList<>(boundDialogs.values());
 	}

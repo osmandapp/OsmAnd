@@ -401,9 +401,8 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 			controller.enterEditMode();
 		}
 		DialogManager dialogManager = app.getDialogManager();
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		dialogManager.register(PROCESS_ID, controller);
-		if (!EditKeyAssignmentFragment.showInstance(fragmentManager, appMode, anchorView)) {
+		if (!EditKeyAssignmentFragment.showInstance(activity, appMode, anchorView)) {
 			dialogManager.unregister(PROCESS_ID);
 		}
 	}
