@@ -3,7 +3,6 @@ package net.osmand.plus.keyevent.fragments.editassignment;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
