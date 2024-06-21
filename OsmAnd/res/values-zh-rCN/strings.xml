@@ -5626,4 +5626,5 @@
     <string name="shared_string_delete_item">删除项目</string>
     <string name="cloud_trash_clear_confirmation">要永久删除回收箱中的所有项目吗？</string>
     <string name="zoom_non_animated">非动画缩放</string>
+    <string name="missing_maps_ignore">使用现有地图</string>
 </resources>
