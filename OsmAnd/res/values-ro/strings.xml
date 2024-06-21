@@ -5753,4 +5753,11 @@
     <string name="contact_support_retry">Încercați din nou sau contactați asistența</string>
     <string name="missing_maps_ignore">Utilizează hărțile existente</string>
     <string name="daynight_mode_app_theme_summary">Afișarea hărții se aliniază cu tema generală a aplicației - modul zi pentru o temă luminoasă și modul noapte pentru o temă întunecată</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Comută automat între temele de zi și de noapte în funcție de orele locale de răsărit și apus.</string>
+    <string name="daynight_mode_night_summary">Afișează întotdeauna harta într-o temă întunecată, potrivită pentru timpul nopții sau în condiții de iluminare slabă.</string>
+    <string name="daynight_mode_day_summary">Afișează întotdeauna harta într-o temă luminoasă, ideală pentru vizibilitatea în timpul zilei.</string>
+    <string name="daynight_mode_app_theme">Tema aplicației</string>
+    <string name="key_event_action_continuous_zoom_out">Reducere continuă a zoom-ului</string>
+    <string name="key_event_action_continuous_zoom_in">Zoom continuu în</string>
+    <string name="remove_key_assignment_summary">Atribuirea tastelor pentru acțiunea selectată va fi eliminată.</string>
 </resources>
