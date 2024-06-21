@@ -5,6 +5,7 @@ import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_NMEA_PROTO
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         setupIpAddress(currentProtocol);
         setupTcpPort(currentProtocol);
         setupUdpPort(currentProtocol);
+        setupObjectLostTimeout();
+        setupShipLostTimeout();
     }
 
     private int setupProtocol() {
@@ -56,46 +59,6 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
     }
 
     private void setupIpAddress(int currentProtocol) {
-        /*
-        InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart)
-                            + source.subSequence(start, end)
-                            + destTxt.substring(dend);
-                    if (!resultingTxt
-                            .matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
-                        return "";
-                    } else {
-                        String[] splits = resultingTxt.split("\\.");
-                        for (int i = 0; i < splits.length; i++) {
-                            if (Integer.valueOf(splits[i]) > 255) {
-                                return "";
-                            }
-                        }
-                    }
-                }
-                return null;
-            }
-        };
-         */
-        //EditTextPreferenceEx aisNmeaIpAddress = findPreference(plugin.AIS_NMEA_IP_ADDRESS.getId());
-        //Log.d("AisTrackerSettingsFragment","## findPreference()");
-        //aisNmeaIpAddress.setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
-        /*aisNmeaIpAddress.setOnBindEditTextListener(new OnBindEditTextListener() {
-            @Override
-            public void onBindEditText(@NonNull EditText editText) {
-                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
-                editText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(10)});
-                Log.d("AisTrackerSettingsFragment","## onBindEditText()");
-            }
-        });
-         */
-
         EditTextPreferenceEx aisNmeaIpAddress = findPreference(plugin.AIS_NMEA_IP_ADDRESS.getId());
         if (aisNmeaIpAddress != null) {
             aisNmeaIpAddress.setDescription(R.string.ais_address_nmea_server_description);
@@ -105,28 +68,10 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
                 aisNmeaIpAddress.setEnabled(true);
             }
         }
+        // TODO: the current value is not shown in the settings overview dialog(?)
     }
 
     private void setupTcpPort(int currentProtocol) {
-    /*    EditTextPreferenceEx aisNmeaPort = findPreference(plugin.AIS_NMEA_TCP_PORT.getId());
-        if (aisNmeaPort != null) {
-            Log.d("AisTrackerSettingsFragment","## setupTcpPort()");
-            aisNmeaPort.setOnBindEditTextListener(new OnBindEditTextListener() {
-                @Override
-                public void onBindEditText(@NonNull EditText editText) {
-                    Log.d("AisTrackerSettingsFragment","## onBindEditText()");
-                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
-                }
-            });
-            aisNmeaPort.setDescription(R.string.ais_port_nmea_server_description);
-            if (currentProtocol == AIS_NMEA_PROTOCOL_UDP) {
-                aisNmeaPort.setEnabled(false);
-            } else if (currentProtocol == AIS_NMEA_PROTOCOL_TCP) {
-                aisNmeaPort.setEnabled(true);
-            }
-        }
-     */
-
         EditTextPreferenceEx aisNmeaPort = findPreference(plugin.AIS_NMEA_TCP_PORT.getId());
         if (aisNmeaPort != null) {
             aisNmeaPort.setDescription(R.string.ais_port_nmea_server_description);
@@ -136,6 +81,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
                 aisNmeaPort.setEnabled(true);
             }
         }
+        // TODO: the current value is not shown in the settings overview dialog(?)
     }
 
     private void setupUdpPort(int currentProtocol) {
@@ -148,24 +94,56 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
                 aisNmeaPort.setEnabled(false);
             }
         }
+        // TODO: the current value is not shown in the settings overview dialog(?)
+    }
+    private void setupObjectLostTimeout() {
+        Integer[] entryValues = {3, 5, 7, 10, 12, 15, 20};
+        String[] entries = new String[entryValues.length];
+        for (int i = 0; i < entryValues.length; i++) {
+            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to ressource file
+        }
+        ListPreferenceEx objectLostTimeout = findPreference(plugin.AIS_OBJ_LOST_TIMEOUT.getId());
+        if (objectLostTimeout != null) {
+            objectLostTimeout.setEntries(entries);
+            objectLostTimeout.setEntryValues(entryValues);
+            objectLostTimeout.setDescription(R.string.ais_object_lost_timeout_description);
+        }
+    }
+    private void setupShipLostTimeout() {
+        Integer[] entryValues = {2, 3, 4, 5, 7, 10, 15, 100 /* disabled: must be bigger than the biggest value of setupObjectLostTimeout() */};
+        String[] entries = new String[entryValues.length];
+        for (int i = 0; i < entryValues.length - 1; i++) {
+            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to ressource file
+        }
+        entries[entryValues.length - 1] = "disabled"; // TODO: move to ressource file
+
+        ListPreferenceEx objectLostTimeout = findPreference(plugin.AIS_SHIP_LOST_TIMEOUT.getId());
+        if (objectLostTimeout != null) {
+            objectLostTimeout.setEntries(entries);
+            objectLostTimeout.setEntryValues(entryValues);
+            objectLostTimeout.setDescription(R.string.ais_ship_lost_timeout_description);
+        }
     }
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean restartNetworkListener = false;
         if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_IP_ADDRESS_ID)) {
             if (!isValidIpV4Address(newValue.toString())) {
                 showAlertDialog("Only IPv4 address accepted (\"a.b.c.d\", where a,b,c,d in range 0..255).");
                 return false;
             }
+            restartNetworkListener = true;
         } else if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_TCP_PORT_ID) ||
                 preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_UDP_PORT_ID)) {
             if (!isValidPortNumber(newValue.toString())) {
                 showAlertDialog("Only numerical values accepted in range 0..65535.");
                 return false;
             }
+            restartNetworkListener = true;
         }
         boolean ret = super.onPreferenceChange(preference, newValue);
         AisTrackerLayer layer = plugin.getLayer();
-        if (layer != null) {
+        if ((layer != null) && (restartNetworkListener)) {
             layer.restartNetworkListener();
         }
         return ret;

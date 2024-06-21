@@ -34,10 +34,12 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public static final String COMPONENT = "net.osmand.aistrackerPlugin";
     public static final String AISTRACKER_ID = "osmand.aistracker";
 
-    public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol";
-    public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server";
-    public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server";
-    public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local";
+    public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol"; // see xml/ais_settings.xml
+    public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server"; // see xml/ais_settings.xml
+    public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server"; // see xml/ais_settings.xml
+    public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local"; // see xml/ais_settings.xml
+    public static final String AIS_OBJ_LOST_TIMEOUT_ID = "ais_object_lost_timeout"; // see xml/ais_settings.xml
+    public static final String AIS_SHIP_LOST_TIMEOUT_ID = "ais_ship_lost_timeout"; // see xml/ais_settings.xml
     public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
     public static final int AIS_NMEA_PROTOCOL_UDP = 0;
     public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -47,14 +49,20 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public static final Integer AIS_NMEA_DEFAULT_TCP_PORT = 4001;
     public final CommonPreference<Integer> AIS_NMEA_UDP_PORT;
     public static final Integer AIS_NMEA_DEFAULT_UDP_PORT = 10110;
+    public final CommonPreference<Integer> AIS_OBJ_LOST_TIMEOUT;
+    public static final Integer AIS_OBJ_LOST_DEFAULT_TIMEOUT = 7;
+    public final CommonPreference<Integer> AIS_SHIP_LOST_TIMEOUT;
+    public static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
 
     public AisTrackerPlugin(OsmandApplication app) {
         super(app);
-        /* "ais_nmea_protocol" etc. is a reference to the content of ais_settings.xml */
+        /* "ais_nmea_protocol" etc. is a reference to the content of xml/ais_settings.xml */
         AIS_NMEA_PROTOCOL = registerIntPreference(AIS_NMEA_PROTOCOL_ID, AIS_NMEA_PROTOCOL_UDP);
         AIS_NMEA_IP_ADDRESS = registerStringPreference(AIS_NMEA_IP_ADDRESS_ID, AIS_NMEA_DEFAULT_IP);
         AIS_NMEA_TCP_PORT = registerIntPreference(AIS_NMEA_TCP_PORT_ID, AIS_NMEA_DEFAULT_TCP_PORT);
         AIS_NMEA_UDP_PORT = registerIntPreference(AIS_NMEA_UDP_PORT_ID, AIS_NMEA_DEFAULT_UDP_PORT);
+        AIS_OBJ_LOST_TIMEOUT = registerIntPreference(AIS_OBJ_LOST_TIMEOUT_ID, AIS_OBJ_LOST_DEFAULT_TIMEOUT);
+        AIS_SHIP_LOST_TIMEOUT = registerIntPreference(AIS_SHIP_LOST_TIMEOUT_ID, AIS_SHIP_LOST_DEFAULT_TIMEOUT);
 
         Log.d("AisTrackerPlugin", "constructor");
     }

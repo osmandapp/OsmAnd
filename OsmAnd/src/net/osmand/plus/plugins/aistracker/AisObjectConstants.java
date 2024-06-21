@@ -4,10 +4,6 @@ import java.util.AbstractMap;
 import java.util.Map;
 
 public final class AisObjectConstants {
-    /* after this time the object is outdated and can be removed: */
-    public final static long maxAgeInMinutes = 7;
-    /* after this time the (movable) object is lost, the bitmap can be changed: */
-    public final static long maxVesselAgeInMinutes = 4;
     public final static int INVALID_HEADING = 511;
     public final static int INVALID_NAV_STATUS = 15;
     public final static int INVALID_MANEUVER_INDICATOR = 0;

@@ -1144,6 +1144,11 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ais_port_nmea_server_description">Define TCP port number of the NMEA data source</string>
     <string name="ais_port_nmea_local">UDP port of local NMEA data receiver</string>
     <string name="ais_port_nmea_local_description">Define UPD port where OsmAnd receives NMEA data</string>
+    <string name="ais_object_lost_timeout">Timeout for visibility when object is lost</string>
+    <string name="ais_object_lost_timeout_description">Set Timeout for visibility of AIS objects: After this time without signal reception, the AIS object will be removed from screen.</string>
+    <string name="ais_ship_lost_timeout">Timeout for ship visibility when no signal received</string>
+    <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
+
     <string name="shared_string_weather">Weather</string>
     <string name="explore_weather_forecast">Explore Weather forecast.</string>
     <string name="shared_string_contours">Contours</string>
