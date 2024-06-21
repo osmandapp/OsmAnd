@@ -5629,4 +5629,6 @@
     <string name="missing_maps_ignore">使用现有地图</string>
     <string name="backup_error_failed_to_transfer_file">无法传输云文件。</string>
     <string name="contact_support_retry">重试或联系支持人员</string>
+    <string name="user_palette">用户调色板</string>
+    <string name="rendering_value_dark_orange_name">深橘色</string>
 </resources>

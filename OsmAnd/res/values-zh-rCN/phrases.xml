@@ -48,7 +48,7 @@
     <string name="poi_bitcoin_yes">比特币支付</string>
     <string name="poi_volcano">火山</string>
     <string name="poi_crater">火山口</string>
-    <string name="poi_glacier">冰山</string>
+    <string name="poi_glacier">冰川</string>
     <string name="poi_waterfall">瀑布</string>
     <string name="poi_river">河流</string>
     <string name="poi_payment_contactless_no">不接受非接触支付</string>
@@ -1244,7 +1244,7 @@
     <string name="poi_peak">山峰</string>
     <string name="poi_accountant">会计师</string>
     <string name="poi_bureau_de_change">外汇兑换处</string>
-    <string name="poi_pawnbroker">典当行</string>
+    <string name="poi_pawnbroker">典当行/当铺</string>
     <string name="poi_payment_terminal">支付终端</string>
     <string name="poi_car_sharing">共享汽车</string>
     <string name="poi_tattoo">纹身沙龙</string>
@@ -2855,4 +2855,5 @@
     <string name="poi_generator_method_battery_storage">发电方式：电池储能</string>
     <string name="poi_craft_sweep">烟囱清扫</string>
     <string name="poi_craft_sun_protection">遮阳工艺</string>
+    <string name="poi_cutline">林木切割线</string>
 </resources>
