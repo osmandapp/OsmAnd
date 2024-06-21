@@ -120,9 +120,11 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		dialogManager.register(PROCESS_ID, dialog);
 	}
 
-	public void askUnregisterFromDialogManager() {
-		dialogManager.unregister(PROCESS_ID);
-		dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(PROCESS_ID);
+			dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+		}
 	}
 
 	public void showOverflowMenu(@NonNull FragmentActivity activity, @Nullable View actionView) {

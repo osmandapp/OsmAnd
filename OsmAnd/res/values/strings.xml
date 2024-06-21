@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="daynight_mode_app_theme_summary">The map\'s display aligns with the app\'s overall theme—day mode for a light theme and night mode for a dark theme</string>
+    <string name="daynight_mode_sensor_summary">Uses the device\'s light sensor to toggle between light and dark themes according to ambient light levels.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatically switches between day and night themes based on local sunrise and sunset times.</string>
+    <string name="daynight_mode_night_summary">Always displays the map in a dark theme, suited for nighttime or low-light conditions.</string>
+    <string name="daynight_mode_day_summary">Always displays the map in a light theme, ideal for daytime visibility.</string>
+    <string name="daynight_mode_app_theme">App theme</string>
     <string name="key_event_action_continuous_zoom_out">Continuous zoom out</string>
     <string name="key_event_action_continuous_zoom_in">Continuous zoom in</string>
     <string name="remove_key_assignment_summary">Key assignment for the selected action will be removed.</string>
