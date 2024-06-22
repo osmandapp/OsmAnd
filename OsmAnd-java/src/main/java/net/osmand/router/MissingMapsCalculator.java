@@ -59,7 +59,8 @@ public class MissingMapsCalculator {
 	}
 
 
-	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
+	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets,
+											  boolean checkHHEditions, String tag)
 			throws IOException {
 //		start = testLatLons(targets);
 		long tm = System.nanoTime();
@@ -99,7 +100,7 @@ public class MissingMapsCalculator {
 		}
 		
 		List<LatLon> points = CollectionUtils.asOneList(Collections.singletonList(start), targets);
-		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points);
+		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points, tag);
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {

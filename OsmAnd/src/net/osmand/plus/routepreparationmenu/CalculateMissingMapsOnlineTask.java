@@ -36,6 +36,7 @@ import java.util.Objects;
 public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> {
 
 	private static final String ONLINE_CALCULATION_URL = "https://maptile.osmand.net/routing/route?routeMode=";
+	public static final String ONLINE_RESULT_TAG = "online";
 
 	private final OsmandApplication app;
 	private final CalculateMissingMapsOnlineListener listener;
@@ -67,11 +68,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				String response = helper.makeRequest(url.toString());
 				List<LatLon> locations = parseOnlineCalculationResponse(response);
 				calculator.checkIfThereAreMissingMaps(
-						routingContext, routePoints.get(0), locations, routingType.isHHRouting()
+						routingContext, routePoints.get(0), locations, routingType.isHHRouting(), ONLINE_RESULT_TAG
 				);
 				if (routingContext.calculationProgress.missingMapsCalculationResult != null) {
-					routingContext.calculationProgress.missingMapsCalculationResult
-							.setTag(RequiredMapsController.ONLINE_RESULT_TAG);
 					route.setMissingMapsCalculationResult(routingContext.calculationProgress.missingMapsCalculationResult);
 				}
 				listener.onSuccess();
