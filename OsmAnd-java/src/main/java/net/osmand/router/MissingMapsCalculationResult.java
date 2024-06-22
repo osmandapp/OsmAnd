@@ -23,10 +23,12 @@ public class MissingMapsCalculationResult {
 	private List<WorldRegion> missingRegions;
 	private List<WorldRegion> regionsToUpdate;
 	private List<WorldRegion> usedRegions;
+	private String tag;
 
-	public MissingMapsCalculationResult(RoutingContext missingMapsRoutingContext, List<LatLon> missingMapsPoints) {
+	public MissingMapsCalculationResult(RoutingContext missingMapsRoutingContext, List<LatLon> missingMapsPoints, String tag) {
 		this.missingMapsRoutingContext = missingMapsRoutingContext;
 		this.missingMapsPoints = missingMapsPoints;
+		this.tag = tag;
 	}
 	
 	public void addMissingMaps(String region) {
@@ -108,13 +110,7 @@ public class MissingMapsCalculationResult {
 		return this;
 	}
 
-	private String tag;
-
 	public String getTag() {
 		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
 	}
 }
