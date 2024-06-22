@@ -5743,4 +5743,7 @@
     <string name="user_palette">Propra koloro</string>
     <string name="shared_string_colors">Koloroj</string>
     <string name="missing_maps_ignore">Uzi ekzistajn mapojn</string>
+    <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
+    <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
 </resources>
