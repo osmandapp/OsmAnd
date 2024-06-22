@@ -5747,4 +5747,16 @@
     <string name="backup_error_failed_to_transfer_file">Nem sikerült a felhőfájl(ok) átvitele.</string>
     <string name="contact_support_retry">Próbálja újra, vagy lépjen kapcsolatba az ügyfélszolgálattal</string>
     <string name="missing_maps_ignore">Meglévő térképek használata</string>
+    <string name="daynight_mode_sensor_summary">Az eszköz fényérzékelőjét használja a világos és sötét témák közötti váltáshoz a környezeti megvilágítás szintjéhez igazodva.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatikusan vált a nappali és éjszakai témák között a helyi napkelte és napnyugta időpontja alapján.</string>
+    <string name="daynight_mode_app_theme">Alkalmazás téma</string>
+    <string name="key_event_action_continuous_zoom_out">Folyamatos kicsinyítés</string>
+    <string name="key_event_action_continuous_zoom_in">Folyamatos nagyítás</string>
+    <string name="remove_key_assignment_summary">A kiválasztott művelethez tartozó gomb-hozzárendelés el lesz távolítva.</string>
+    <string name="remove_key_assignment">Gomb-hozzárendelés eltávolítása</string>
+    <string name="tomorrow">Holnap</string>
+    <string name="daynight_mode_day_summary">Mindig világos témával jeleníti meg a térképet, ideális nappali fényviszonyoknál.</string>
+    <string name="daynight_mode_night_summary">Mindig sötét témában jeleníti meg a térképet, ideális éjszaka vagy gyenge fényviszonyoknál.</string>
+    <string name="daynight_mode_app_theme_summary">A térkép megjelenése igazodik az alkalmazás általános témájához – nappali mód világos témához, éjszakai mód sötét témához</string>
+    <string name="map_settings_weather_wind_animation">Szél animáció</string>
 </resources>
