@@ -5750,4 +5750,16 @@
     <string name="contact_support_retry">Inténtalo de nuevo o ponte en contacto con el soporte</string>
     <string name="backup_error_failed_to_transfer_file">La transferencia de el/los archivo(s) a la nube falló.</string>
     <string name="missing_maps_ignore">Usar mapas existentes</string>
+    <string name="map_settings_weather_wind_animation">Animación del viento</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="daynight_mode_sensor_summary">Utiliza el sensor de iluminación ambiental del dispositivo para alternar entre temas claros y oscuros según los niveles de luz ambiental.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Cambia automáticamente entre temas diurnos y nocturnos según las horas locales de salida y puesta del sol.</string>
+    <string name="daynight_mode_night_summary">Siempre muestra el mapa en un tema oscuro, adecuado para condiciones nocturnas o de poca luz.</string>
+    <string name="daynight_mode_day_summary">Muestra siempre el mapa en un tema claro, ideal para visibilidad diurna.</string>
+    <string name="daynight_mode_app_theme">Tema de la aplicación</string>
+    <string name="key_event_action_continuous_zoom_out">Reducción continua</string>
+    <string name="key_event_action_continuous_zoom_in">Zoom continuo</string>
+    <string name="remove_key_assignment_summary">Se eliminará la asignación de la clave para la acción seleccionada.</string>
+    <string name="remove_key_assignment">Eliminar asignación de la clave</string>
+    <string name="daynight_mode_app_theme_summary">La visualización del mapa se ajusta con el tema general de la aplicación: modo diurno para un tema claro y modo nocturno para un tema oscuro</string>
 </resources>
