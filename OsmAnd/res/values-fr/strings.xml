@@ -5748,4 +5748,8 @@
     <string name="daynight_mode_app_theme_summary">L\'affichage de la carte s\'aligne avec le thème de l\'application (mode jour pour un thème clair et mode nuit pour un thème sombre)</string>
     <string name="key_event_action_continuous_zoom_out">Dé-zoom continu</string>
     <string name="key_event_action_continuous_zoom_in">Zoom continu</string>
+    <string name="remove_key_assignment_summary">L\'assignation de touches pour l\'action sélectionnée sera supprimée.</string>
+    <string name="remove_key_assignment">Supprimer l\'assignation de touches</string>
+    <string name="map_settings_weather_wind_animation">Animation du vent</string>
+    <string name="tomorrow">Demain</string>
 </resources>
