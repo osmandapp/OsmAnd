@@ -1037,7 +1037,7 @@
     <string name="route_updated_loc_found">Čekam poziciju za izračunavanje rute</string>
     <string name="continue_follow_previous_route_auto">Nastavi prethodno nezavršeno navođenje? (%1$s sekundi)</string>
     <string name="avoid_toll_roads">Naplata putarina</string>
-    <string name="show_traffic_warnings">Upozorenja o saobraćaju</string>
+    <string name="show_traffic_warnings">Szanje na putevima</string>
     <string name="show_cameras">Kamere za merenje brzine</string>
     <string name="bg_service_interval">Podesi međuvreme buđenja:</string>
     <string name="map_widget_mini_route">Mala mapa rute</string>
@@ -1463,7 +1463,7 @@
     <string name="stop_navigation_service">Zaustaviti</string>
     <string name="sleep_mode_stop_dialog">Prekinuti pozadinski rad GPS-a?</string>
     <string name="background_service_is_enabled_question">OsmAnd pozadinski servis je i dalje pokrenut. Zaustavljaš ga?</string>
-    <string name="way_alarms">Upozorenja o gužvama u saobraćaju</string>
+    <string name="way_alarms">Stanje na putevima</string>
     <string name="speak_poi">TOI u blizini</string>
     <string name="speak_favorites">Favoriti u blizini</string>
     <string name="traffic_warning">Upozorenje o stanju na putevima</string>
