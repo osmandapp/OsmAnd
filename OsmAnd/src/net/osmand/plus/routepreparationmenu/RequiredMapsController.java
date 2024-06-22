@@ -226,6 +226,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private boolean isAlreadyCalcOnline() {
 		RoutingHelper helper = app.getRoutingHelper();
 		MissingMapsCalculationResult result = helper.getRoute().getMissingMapsCalculationResult();
-		return result != null && result.getMissingMapsPoints().size() > 2 + helper.getIntermediatePoints().size();
+//		return result != null && result.getMissingMapsPoints().size() > 2 + helper.getIntermediatePoints().size();
+		return result != null && result.isOnlineResultType();
 	}
 }
