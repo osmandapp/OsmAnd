@@ -228,6 +228,5 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		MissingMapsCalculationResult result = helper.getRoute().getMissingMapsCalculationResult();
 		return result != null && result.getTag() != null &&
 				result.getTag().equals(CalculateMissingMapsOnlineTask.ONLINE_RESULT_TAG);
-//		return result != null && result.getMissingMapsPoints().size() > 2 + helper.getIntermediatePoints().size();
 	}
 }
