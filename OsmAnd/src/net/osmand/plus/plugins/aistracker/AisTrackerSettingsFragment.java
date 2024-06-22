@@ -61,40 +61,42 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
     private void setupIpAddress(int currentProtocol) {
         EditTextPreferenceEx aisNmeaIpAddress = findPreference(plugin.AIS_NMEA_IP_ADDRESS.getId());
         if (aisNmeaIpAddress != null) {
+            String currentValue = plugin.AIS_NMEA_IP_ADDRESS.get();
+            if (currentValue == null) { currentValue = ""; }
             aisNmeaIpAddress.setDescription(R.string.ais_address_nmea_server_description);
+            aisNmeaIpAddress.setSummary(currentValue);
             if (currentProtocol == AIS_NMEA_PROTOCOL_UDP) {
                 aisNmeaIpAddress.setEnabled(false);
             } else if (currentProtocol == AIS_NMEA_PROTOCOL_TCP) {
                 aisNmeaIpAddress.setEnabled(true);
             }
         }
-        // TODO: the current value is not shown in the settings overview dialog(?)
     }
-
     private void setupTcpPort(int currentProtocol) {
         EditTextPreferenceEx aisNmeaPort = findPreference(plugin.AIS_NMEA_TCP_PORT.getId());
         if (aisNmeaPort != null) {
+            int currentValue = plugin.AIS_NMEA_TCP_PORT.get();
             aisNmeaPort.setDescription(R.string.ais_port_nmea_server_description);
+            aisNmeaPort.setSummary(String.valueOf(currentValue));
             if (currentProtocol == AIS_NMEA_PROTOCOL_UDP) {
                 aisNmeaPort.setEnabled(false);
             } else if (currentProtocol == AIS_NMEA_PROTOCOL_TCP) {
                 aisNmeaPort.setEnabled(true);
             }
         }
-        // TODO: the current value is not shown in the settings overview dialog(?)
     }
-
     private void setupUdpPort(int currentProtocol) {
         EditTextPreferenceEx aisNmeaPort = findPreference(plugin.AIS_NMEA_UDP_PORT.getId());
         if (aisNmeaPort != null) {
+            int currentValue = plugin.AIS_NMEA_UDP_PORT.get();
             aisNmeaPort.setDescription(R.string.ais_port_nmea_local_description);
+            aisNmeaPort.setSummary(String.valueOf(currentValue));
             if (currentProtocol == AIS_NMEA_PROTOCOL_UDP) {
                 aisNmeaPort.setEnabled(true);
             } else if (currentProtocol == AIS_NMEA_PROTOCOL_TCP) {
                 aisNmeaPort.setEnabled(false);
             }
         }
-        // TODO: the current value is not shown in the settings overview dialog(?)
     }
     private void setupObjectLostTimeout() {
         Integer[] entryValues = {3, 5, 7, 10, 12, 15, 20};
