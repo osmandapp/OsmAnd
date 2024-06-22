@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.quickaction.AddQuickActionFragment;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.MapButtonsHelper;
@@ -16,10 +18,9 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public abstract class AddQuickActionController implements IDialogController {
 
@@ -28,7 +29,7 @@ public abstract class AddQuickActionController implements IDialogController {
 	protected final OsmandApplication app;
 	protected final DialogManager dialogManager;
 	protected final MapButtonsHelper mapButtonsHelper;
-	private final Set<String> boundDialogs = new HashSet<>();
+	private final Map<String, IDialog> boundDialogs = new HashMap<>();
 
 	public AddQuickActionController(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -36,8 +37,8 @@ public abstract class AddQuickActionController implements IDialogController {
 		this.mapButtonsHelper = app.getMapButtonsHelper();
 	}
 
-	public void registerDialog(@NonNull String dialogTag) {
-		boundDialogs.add(dialogTag);
+	public void registerDialog(@NonNull String dialogTag, @NonNull IDialog dialog) {
+		boundDialogs.put(dialogTag, dialog);
 	}
 
 	public void unregisterDialog(@NonNull String dialogTag) {
@@ -72,7 +73,26 @@ public abstract class AddQuickActionController implements IDialogController {
 		}
 		return actionTypes;
 	}
+
+	public void onAskSaveAction(boolean isNew, @NonNull QuickAction action) {
+		askSaveAction(isNew, action);
+		finishProcess();
+	}
+
 	public abstract void askSaveAction(boolean isNew, @NonNull QuickAction action);
+
+	private void finishProcess() {
+		for (IDialog dialog : getBoundDialogs()) {
+			if (dialog instanceof IAskDismissDialog) {
+				((IAskDismissDialog) dialog).onAskDismissDialog(PROCESS_ID);
+			}
+		}
+	}
+
+	@NonNull
+	private List<IDialog> getBoundDialogs() {
+		return new ArrayList<>(boundDialogs.values());
+	}
 
 	public abstract void askRemoveAction(@NonNull QuickAction action);
 

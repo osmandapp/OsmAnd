@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
@@ -24,8 +25,12 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.UiContext;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
 
 /**
  * Created by dummy on 28.01.15.
@@ -235,5 +240,17 @@ public class AndroidUiHelper {
 				actionBar.hide();
 			}
 		}
+	}
+
+	public static void setupContainerTransformTransition(@NonNull Fragment fragment, @NonNull View view) {
+		view.setTransitionName(EditKeyAssignmentController.TRANSITION_NAME);
+
+		MaterialContainerTransform enterTransform = new MaterialContainerTransform();
+		enterTransform.setScrimColor(Color.TRANSPARENT);
+		fragment.setSharedElementEnterTransition(enterTransform);
+
+		MaterialContainerTransform returnTransform = new MaterialContainerTransform();
+		returnTransform.setScrimColor(Color.TRANSPARENT);
+		fragment.setSharedElementReturnTransition(returnTransform);
 	}
 }

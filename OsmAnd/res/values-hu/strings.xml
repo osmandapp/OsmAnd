@@ -4664,7 +4664,7 @@
     <string name="transport_hazmat_yes_desc">Válassza ki a megfelelő kategóriát.</string>
     <string name="transport_hazmat_no_desc">Egyes utakon és alagutakban korlátozott lehet a veszélyes anyagok szállítása.</string>
     <string name="transport_hazmat_title">Veszélyes anyag szállítása</string>
-    <string name="use_latin_name_if_missing">Latin név használata, ha hiányzik</string>
+    <string name="use_latin_name_if_missing">Latin betűs átírás, ha hiányzik</string>
     <string name="import_as_one_track">Importálás egyetlen nyomvonalként</string>
     <string name="routing_attr_goods_restrictions_description">Az (áruszállító) könnyű tehergépjárművekre vonatkozó behajtási engedélyek figyelembevétele</string>
     <string name="co2_mission">CO₂-kibocsátás</string>

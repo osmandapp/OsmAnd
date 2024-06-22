@@ -53,4 +53,6 @@ public class QuickActionIds {
 	public static final int NEXT_PROFILE_PROFILE_ACTION = 53;
 	public static final int PREVIOUS_PROFILE_PROFILE_ACTION = 54;
 	public static final int TERRAIN_COLOR_SCHEME_ACTION = 55;
+	public static final int CONTINUOUS_MAP_ZOOM_IN_ACTION = 56;
+	public static final int CONTINUOUS_MAP_ZOOM_OUT_ACTION = 57;
 }

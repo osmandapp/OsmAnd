@@ -4768,4 +4768,5 @@
     <string name="poi_padus_local_designation">Désignation locale</string>
     <string name="poi_via">Via</string>
     <string name="poi_padus_category_proclamation">Catégorie : proclamation</string>
+    <string name="poi_padus_category_fee">Catégorie : péage</string>
 </resources>

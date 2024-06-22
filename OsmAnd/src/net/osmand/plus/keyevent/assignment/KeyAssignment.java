@@ -112,7 +112,7 @@ public class KeyAssignment {
 
 	@Nullable
 	private String getDefaultName(@NonNull OsmandApplication context) {
-		return action != null ? action.getName(context) : commandId;
+		return action != null ? action.getExtendedName(context) : commandId;
 	}
 
 	public void setCustomName(@Nullable String customName) {
