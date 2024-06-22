@@ -223,10 +223,12 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return !onlineCalculationRequested && !isLoadingInProgress() && !isAlreadyCalcOnline();
 	}
 
+	public static final String ONLINE_RESULT_TAG = "online";
+
 	private boolean isAlreadyCalcOnline() {
 		RoutingHelper helper = app.getRoutingHelper();
 		MissingMapsCalculationResult result = helper.getRoute().getMissingMapsCalculationResult();
+		return result != null && result.getTag() != null && ONLINE_RESULT_TAG.equals(result.getTag());
 //		return result != null && result.getMissingMapsPoints().size() > 2 + helper.getIntermediatePoints().size();
-		return result != null && result.isOnlineResultType();
 	}
 }

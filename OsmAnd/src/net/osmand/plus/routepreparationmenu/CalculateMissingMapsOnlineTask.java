@@ -70,7 +70,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 						routingContext, routePoints.get(0), locations, routingType.isHHRouting()
 				);
 				if (routingContext.calculationProgress.missingMapsCalculationResult != null) {
-					routingContext.calculationProgress.missingMapsCalculationResult.setOnlineResultType();
+					routingContext.calculationProgress.missingMapsCalculationResult
+							.setTag(RequiredMapsController.ONLINE_RESULT_TAG);
 					route.setMissingMapsCalculationResult(routingContext.calculationProgress.missingMapsCalculationResult);
 				}
 				listener.onSuccess();
