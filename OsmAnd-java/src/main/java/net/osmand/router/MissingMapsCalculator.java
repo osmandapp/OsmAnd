@@ -160,11 +160,11 @@ public class MissingMapsCalculator {
 			}
 		}
 
+		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
+
 		if(!result.hasMissingMaps()) {
 			return false;
 		}
-
-		ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));

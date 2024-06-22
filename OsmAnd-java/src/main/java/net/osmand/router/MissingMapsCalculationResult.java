@@ -107,4 +107,18 @@ public class MissingMapsCalculationResult {
 		usedRegions = convert(or, usedMaps);
 		return this;
 	}
+
+	private enum ResultType {
+		OFFLINE, // calculated by straight line using DISTANCE_SPLIT intervals
+		ONLINE // calculated online using OsmAnd navigation API request (Calc online button)
+	}
+	private ResultType resultType = ResultType.OFFLINE;
+
+	public void setOnlineResultType() {
+		this.resultType = ResultType.ONLINE;
+	}
+
+	public boolean isOnlineResultType() {
+		return this.resultType == ResultType.ONLINE;
+	}
 }
