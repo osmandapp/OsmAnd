@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.ONLINE_RESULT_TAG;
+
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -226,7 +228,6 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private boolean isAlreadyCalcOnline() {
 		RoutingHelper helper = app.getRoutingHelper();
 		MissingMapsCalculationResult result = helper.getRoute().getMissingMapsCalculationResult();
-		return result != null && result.getTag() != null &&
-				result.getTag().equals(CalculateMissingMapsOnlineTask.ONLINE_RESULT_TAG);
+		return result != null && Algorithms.stringsEqual(result.getTag(), ONLINE_RESULT_TAG);
 	}
 }
