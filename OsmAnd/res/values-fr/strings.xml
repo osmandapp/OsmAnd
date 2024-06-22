@@ -5743,7 +5743,7 @@
     <string name="daynight_mode_sensor_summary">Utilise le capteur de luminosité de l\'appareil afin de basculer entre les modes clair et sombre en fonction du niveau de lumière ambiant.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Bascule automatiquement entre les thèmes clair et sombre en fonction du lever et du coucher du soleil.</string>
     <string name="daynight_mode_night_summary">Affiche toujours la carte en mode sombre, adapté pour la nuit ou une faible luminosité.</string>
-    <string name="daynight_mode_day_summary">Affiche toujours la carte en mode clair, adapté la journée.</string>
+    <string name="daynight_mode_day_summary">Affiche toujours la carte avec le thème clair, adapté à la journée.</string>
     <string name="daynight_mode_app_theme">Thème de l\'application</string>
     <string name="daynight_mode_app_theme_summary">L\'affichage de la carte s\'aligne avec le thème de l\'application (mode jour pour un thème clair et mode nuit pour un thème sombre)</string>
     <string name="key_event_action_continuous_zoom_out">Dé-zoom continu</string>
