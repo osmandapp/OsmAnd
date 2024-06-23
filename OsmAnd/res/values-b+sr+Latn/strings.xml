@@ -598,7 +598,7 @@
     <string name="show_poi_over_map">TOI vidljivi na mapi</string>
     <string name="show_poi_over_map_description">Prikazati poslednji korišćeni nivo TOI.</string>
     <string name="map_view_3d">3D mapa</string>
-    <string name="map_view_3d_descr">Omogućite 3D prikaz karte.</string>
+    <string name="map_view_3d_descr">Omogući 3D prikaz mape.</string>
     <string name="show_view_angle">Prikazati smer kretanja</string>
     <string name="ChooseCountry">Izaberi državu</string>
     <string name="choose_city">Izaberi grad ili poštanski broj</string>
