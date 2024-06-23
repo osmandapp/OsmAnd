@@ -784,8 +784,8 @@
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
     <string name="select_navigation_mode">Modo de transporte:</string>
-    <string name="day_night_info_description">Alba: %1$s
-\nOcaso: %2$s</string>
+    <string name="day_night_info_description">Amanecer: %1$s
+\nAtardecer: %2$s</string>
     <string name="day_night_info">Información diurna/nocturna</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -1216,7 +1216,7 @@
     <string name="voice_is_not_available_title">Elige un paquete de indicaciones por voz</string>
     <string name="daynight_mode_day">Diurno</string>
     <string name="daynight_mode_night">Nocturno</string>
-    <string name="daynight_mode_auto">Alba/ocaso</string>
+    <string name="daynight_mode_auto">Amanecer/atardecer</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
     <string name="daynight_descr">Alterna entre el modo nocturno y diurno.</string>
     <string name="daynight">Modo diurno/nocturno</string>
@@ -3368,7 +3368,7 @@
 \n
 \n • Se han alineado correctamente en el mapa los iconos de PDI
 \n
-\n • Se han añadido datos del amanecer y ocaso en «Configurar mapa»
+\n • Se han añadido datos del amanecer y atardecer en «Configurar mapa»
 \n
 \n • Se han añadido iconos de «Casa» y «Trabajo» en el mapa
 \n
@@ -4943,9 +4943,9 @@
     <string name="switch_mode_by_tapping_on_widget">Alterna el modo pulsando en el widget.</string>
     <string name="map_widget_sunset_desc">Muestra la hora del próximo atardecer o el tiempo que queda hasta éste.</string>
     <string name="shared_string_next_sunset">Próximo atardecer</string>
-    <string name="shared_string_sunset">Ocaso</string>
-    <string name="shared_string_sunrise">Alba</string>
-    <string name="map_widget_group_sunrise_sunset">Alba, ocaso</string>
+    <string name="shared_string_sunset">Atardecer</string>
+    <string name="shared_string_sunrise">Amanecer</string>
+    <string name="map_widget_group_sunrise_sunset">Amanecer, atardecer</string>
     <string name="map_widget_sunrise_desc">Muestra la hora del próximo amanecer o el tiempo que falta para éste.</string>
     <string name="shared_string_next_sunrise">Próximo amanecer</string>
     <string name="depth_contour_lines">Curvas de nivel de profundidad</string>
@@ -5765,4 +5765,17 @@
     <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
     <string name="contact_support_retry">Prueba de nuevo o contacta con nosotros</string>
     <string name="missing_maps_ignore">Ignorar mapas faltantes</string>
+    <string name="daynight_mode_app_theme_summary">La pantalla del mapa se vincula al tema general de la aplicación: «modo diurno» para un tema claro y «modo nocturno» para un tema oscuro</string>
+    <string name="daynight_mode_sensor_summary">Usa el sensor de luz del dispositivo para alternar entre temas claros y oscuros, según la luz de ambiente.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Alterna automáticamente entre los temas diurno y nocturno, basado en el amanecer y atardecer local.</string>
+    <string name="daynight_mode_night_summary">Siempre muestra el mapa con el tema oscuro, adecuado para las condiciones nocturnas o de baja iluminación.</string>
+    <string name="daynight_mode_day_summary">Siempre muestra el mapa con el tema claro, ideal con la luz del día.</string>
+    <string name="daynight_mode_app_theme">Aspecto de la aplicación</string>
+    <string name="key_event_action_continuous_zoom_out">Alejar siempre</string>
+    <string name="key_event_action_continuous_zoom_in">Acercar siempre</string>
+    <string name="remove_key_assignment_summary">Se quitará la asignación de tecla para la acción elegida.</string>
+    <string name="remove_key_assignment">Quitar asignación de tecla</string>
+    <string name="map_settings_weather_wind_animation">Animación del viento</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="shared_string_modify">Editar</string>
 </resources>
