@@ -5766,4 +5766,5 @@
     <string name="map_settings_weather_wind_animation">Animation af vind</string>
     <string name="tomorrow">I morgen</string>
     <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema - dagtilstand ved et lyst tema og nattilstand ved et mørkt tema</string>
+    <string name="shared_string_modify">Tilpas</string>
 </resources>
