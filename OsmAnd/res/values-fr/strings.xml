@@ -5752,4 +5752,5 @@
     <string name="remove_key_assignment">Supprimer l\'affectation de touche</string>
     <string name="map_settings_weather_wind_animation">Animation du vent</string>
     <string name="tomorrow">Demain</string>
+    <string name="shared_string_modify">Modifier</string>
 </resources>
