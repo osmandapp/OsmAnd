@@ -5687,7 +5687,7 @@
 \n
 \n</string>
     <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
-    <string name="maps_that_also_be_used">Hărți care vor fi de asemenea utilizate: %1$s</string>
+    <string name="maps_that_also_be_used">Hărți ce vor fi de asemenea utilizate: %1$s</string>
     <string name="shared_string_scale">Scară</string>
     <string name="required_maps_calculate_online_summary">Lista hărților lipsă se bazează pe traseul în linie dreaptă. Pentru a obține o listă precisă de hărți, OsmAnd vă poate precalcula traseul online.</string>
     <string name="use_terrain_maps">Folosește hărți de teren</string>
