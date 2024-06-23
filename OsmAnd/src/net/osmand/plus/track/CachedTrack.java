@@ -16,7 +16,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;

@@ -1,12 +1,12 @@
-package net.osmand.plus.card.color.palette.migration.v1;
+package net.osmand.plus.card.color.palette.migration;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionV1;
-import net.osmand.plus.card.color.palette.migration.v1.data.PaletteColorV1;
+import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
+import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;

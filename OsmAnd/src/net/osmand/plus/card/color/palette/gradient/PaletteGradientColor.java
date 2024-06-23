@@ -7,65 +7,51 @@ import androidx.annotation.NonNull;
 import net.osmand.ColorPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class PaletteGradientColor extends PaletteColor {
 
 	public static String DEFAULT_NAME = "default";
 
-	private String typeName;
-	private String paletteName;
-	private ColorPalette colorPalette;
+	private final String stringId;
+	private final ColorPalette colorPalette;
+	private int index;
 
-	public PaletteGradientColor(@NonNull String paletteName, @NonNull String typeName, @NonNull ColorPalette colorPalette, long creationTime) {
-		super(typeName + GRADIENT_ID_SPLITTER + paletteName, 0, creationTime);
-		this.paletteName = paletteName;
-		this.typeName = typeName;
+	public PaletteGradientColor(@NonNull String id, @NonNull ColorPalette colorPalette,
+	                            long creationTime, int initialIndex) {
+		super(null, creationTime);
+		this.stringId = id;
 		this.colorPalette = colorPalette;
+		this.index = initialIndex;
 	}
 
-	public PaletteGradientColor(@NonNull String paletteName, @NonNull String typeName, @NonNull ColorPalette colorPalette, long creationTime, long lastUsedTime) {
-		super(typeName + GRADIENT_ID_SPLITTER + paletteName, 0, creationTime);
-		this.colorPalette = colorPalette;
-		this.paletteName = paletteName;
-		this.typeName = typeName;
-		this.lastUsedTime = lastUsedTime;
+	public String getStringId() {
+		return stringId;
 	}
 
-	public PaletteGradientColor(@NonNull JSONObject jsonObject) throws JSONException {
-		super(jsonObject.getString(ID), 0, 0);
-		if (jsonObject.has(CREATION_TIME)) {
-			creationTime = jsonObject.getLong(CREATION_TIME);
-		} else {
-			creationTime = 0;
-		}
-		if (jsonObject.has(LAST_USED_TIME)) {
-			lastUsedTime = jsonObject.getLong(LAST_USED_TIME);
-		}
+	@Override
+	public int getIndex() {
+		return index;
 	}
 
-	@NonNull
-	public JSONObject toJson() throws JSONException {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put(ID, id);
-		if (creationTime > 0) {
-			jsonObject.put(CREATION_TIME, creationTime);
-		}
-		if (lastUsedTime > 0) {
-			jsonObject.put(LAST_USED_TIME, lastUsedTime);
-		}
-		return jsonObject;
+	@Override
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	@NonNull
 	public String getPaletteName() {
-		return paletteName;
+		return getPaletteName(getStringId());
 	}
 
 	@NonNull
-	public String getTypeName() {
-		return typeName;
+	public String getTypeName(){
+		String[] splitId = getStringId().split(GRADIENT_ID_SPLITTER);
+		return splitId[0].toLowerCase();
+	}
+
+	@NonNull
+	public static String getPaletteName(@NonNull String stringId) {
+		String[] splitId = stringId.split(GRADIENT_ID_SPLITTER);
+		return splitId[1];
 	}
 
 	@NonNull

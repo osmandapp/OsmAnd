@@ -44,8 +44,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	public void reloadGradientColors() {
 		Object gradientType = gradientCollection.getGradientType();
-		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(gradientType);
-		this.gradientCollection = new GradientCollection(colorPaletteMap, app.getSettings().GRADIENT_PALETTES, gradientType);
+		this.gradientCollection = new GradientColorsCollection(app, gradientType);
 		if (selectedPaletteColor instanceof PaletteGradientColor) {
 			notifyUpdatePaletteColors(null);
 		}

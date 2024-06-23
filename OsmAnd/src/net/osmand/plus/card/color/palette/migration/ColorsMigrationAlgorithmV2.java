@@ -1,19 +1,19 @@
-package net.osmand.plus.card.color.palette.migration.v2;
+package net.osmand.plus.card.color.palette.migration;
 
 import static net.osmand.plus.utils.ColorUtilities.getColor;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
-import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionV1;
+import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
-import net.osmand.plus.card.color.palette.migration.v1.data.PaletteColorV1;
-import net.osmand.plus.card.color.palette.migration.v1.data.PredefinedPaletteColor;
+import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
+import net.osmand.plus.card.color.palette.migration.data.PredefinedPaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -70,7 +70,7 @@ public class ColorsMigrationAlgorithmV2 {
 
 	private void execute() {
 		// Collect available colors from the user palette file
-		ColorsCollection newCollection = new ColorsCollection(app);
+		ColorsCollection newCollection = new FileColorsCollection(app);
 		List<PaletteColor> originalOrder = newCollection.getColors(PaletteSortingMode.ORIGINAL);
 
 		// Collect available colors from the old preferences

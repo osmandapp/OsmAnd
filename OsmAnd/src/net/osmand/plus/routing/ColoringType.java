@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.R;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;

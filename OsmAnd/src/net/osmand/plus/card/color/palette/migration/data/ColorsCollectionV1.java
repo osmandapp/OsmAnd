@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.migration.v1.data;
+package net.osmand.plus.card.color.palette.migration.data;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
