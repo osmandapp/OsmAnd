@@ -5743,4 +5743,16 @@
     <string name="user_palette">Propra koloro</string>
     <string name="shared_string_colors">Koloroj</string>
     <string name="missing_maps_ignore">Uzi ekzistajn mapojn</string>
+    <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
+    <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
+    <string name="daynight_mode_night_summary">Ĉiam vidigas la mapon en nokta map-reĝimo, kiu taŭgas por uzi nokte kaj mallume.</string>
+    <string name="daynight_mode_day_summary">Ĉiam vidigas mapon en taga map-reĝimo, kiu plej taŭgas por uzi tage.</string>
+    <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
+    <string name="key_event_action_continuous_zoom_out">Seninterrompa malgrandigo</string>
+    <string name="remove_key_assignment_summary">Forigi klav-asignon por la elektita ago.</string>
+    <string name="map_settings_weather_wind_animation">Movbildi venton</string>
+    <string name="tomorrow">Morgaŭ</string>
+    <string name="key_event_action_continuous_zoom_in">Seninterrompa pligrandigo</string>
+    <string name="remove_key_assignment">Forigi klav-asignon</string>
 </resources>

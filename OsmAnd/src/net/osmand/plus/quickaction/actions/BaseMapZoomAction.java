@@ -17,8 +17,6 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public abstract class BaseMapZoomAction extends QuickAction {
 
-	private boolean continuous = false; // todo
-
 	public BaseMapZoomAction(QuickActionType type) {
 		super(type);
 	}
@@ -34,7 +32,7 @@ public abstract class BaseMapZoomAction extends QuickAction {
 
 	@Override
 	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
-		if (continuous) {
+		if (isContinuous()) {
 			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
 			return true;
 		}
@@ -43,7 +41,7 @@ public abstract class BaseMapZoomAction extends QuickAction {
 
 	@Override
 	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
-		if (!continuous) {
+		if (!isContinuous()) {
 			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
 		}
 		return super.onKeyUp(mapActivity, keyCode, event);
@@ -56,6 +54,10 @@ public abstract class BaseMapZoomAction extends QuickAction {
 
 	private void changeZoom(@NonNull OsmandApplication app, int zoomStep) {
 		app.getOsmandMap().getMapView().changeZoomManually(zoomStep);
+	}
+
+	protected boolean isContinuous() {
+		return false;
 	}
 
 	@Override

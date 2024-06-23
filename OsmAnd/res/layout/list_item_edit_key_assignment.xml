@@ -59,6 +59,7 @@
 			android:id="@+id/assigned_key"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:minHeight="@dimen/acceptable_touch_radius"
 			android:layout_marginHorizontal="@dimen/content_padding"
 			android:visibility="gone"
 			tools:visibility="visible">

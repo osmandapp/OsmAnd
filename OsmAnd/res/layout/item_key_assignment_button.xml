@@ -3,6 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
+	android:minHeight="@dimen/dialog_button_height"
 	android:layout_gravity="center_vertical"
 	android:background="?attr/bg_keybinding">
 
@@ -12,6 +13,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:textColor="@color/preference_category_title"
+		android:layout_gravity="center"
 		android:layout_marginVertical="@dimen/content_padding_half"
 		android:layout_marginHorizontal="@dimen/content_padding"
 		tools:text="Summary" />

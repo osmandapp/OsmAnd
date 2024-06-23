@@ -283,7 +283,48 @@ public class Amenity extends MapObject {
 
 	public StringBuilder printNamesAndAdditional() {
 		StringBuilder s = new StringBuilder();
-		printNames(" ", getInternalAdditionalInfoMap(), s);
+		Map<String, String> additionals = new HashMap<>();
+		Map<String, String> poi_type = new HashMap<>();
+		Map<String, String> text = new HashMap<>();
+		if (additionalInfo != null) {
+			for (Map.Entry<String, String> e : additionalInfo.entrySet()) {
+				String key = e.getKey();
+				String val = e.getValue();
+				AbstractPoiType pt = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key);
+				if (pt == null && !Algorithms.isEmpty(val) && val.length() < 50) {
+					pt = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key + "_" + val);
+				}
+				if (pt != null) {
+					additionals.put(key, val);
+				} else {
+					PoiType pt2 = MapPoiTypes.getDefault().getPoiTypeByKey(key);
+					if (pt2 != null) {
+						String cat = pt2.getCategory().getKeyName();
+						if (poi_type.containsKey(cat)) {
+							val = poi_type.get(cat) + ";" + val;
+						}
+						poi_type.put(pt2.getCategory().getKeyName(), val);
+					} else {
+						text.put(key, val);
+					}
+				}
+			}
+		}
+		if (poi_type.size() > 0) {
+			s.append(" [ ");
+			printNames("", poi_type, s);
+			s.append(" ] ");
+		}
+		if (additionals.size() > 0) {
+			s.append(" poi_additional:[ ");
+			printNames("", additionals, s);
+			s.append(" ] ");
+		}
+		if (text.size() > 0) {
+			s.append(" non_default_poi_xml:[ ");
+			printNames("", text, s);
+			s.append(" ] ");
+		}
 		printNames(" name:", getNamesMap(true), s);
 		return s;
 	}

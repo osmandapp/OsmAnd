@@ -4837,8 +4837,8 @@
     <string name="show_map_symbols_desc">Texte, panneaux de signalisation routière et autres.</string>
     <string name="switch_mode_by_tapping_on_widget">Changez de mode en appuyant sur le widget.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="map_widget_sunrise_desc">Affiche l\'heure ou le temps restant jusqu\'au prochain lever de soleil.</string>
-    <string name="map_widget_sunset_desc">Affiche l\'heure ou le temps restant jusqu\'au prochain coucher de soleil.</string>
+    <string name="map_widget_sunrise_desc">Affiche l\'heure du prochain lever de soleil ou le temps restant jusqu\'à celui-ci.</string>
+    <string name="map_widget_sunset_desc">Affiche l\'heure du prochain coucher de soleil ou le temps restant jusqu\'à celui-ci.</string>
     <string name="shared_string_next_sunset">Prochain coucher de soleil</string>
     <string name="shared_string_next_sunrise">Prochain lever de soleil</string>
     <string name="shared_string_time_left">Temps restant</string>
@@ -5007,7 +5007,7 @@
     <string name="sound_beep_complex_loud">Bip : complexe fort</string>
     <string name="sound_beep_simple">Bip : simple</string>
     <string name="last_synchronized">Dernière synchronisation</string>
-    <string name="display_position_automatic_descr">Selon l’orientation de la carte : affiché en bas si l’orientation de la carte suit le déplacement, centré dans tous les autres cas.</string>
+    <string name="display_position_automatic_descr">Dépend de l\'orientation de la carte : en bas si l\'orientation suit le déplacement, centré dans tous les autres cas.</string>
     <string name="shared_string_apply_changes">Appliquer les modifications</string>
     <string name="no_visible_tracks_description">Sélectionnez les traces à afficher sur la carte.</string>
     <string name="no_visible_tracks">Aucune trace sur la carte</string>
@@ -5472,7 +5472,7 @@
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
     <string name="add_smart_folder">Ajouter un dossier intelligent</string>
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
-    <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé (aucune trace ne sera supprimée).</string>
+    <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé. (Aucune trace ne sera supprimée)</string>
     <string name="empty_name">Sans nom</string>
     <string name="edit_filter">Modifier le filtre</string>
     <string name="empty_smart_folder_title">Aucune trace trouvée</string>
@@ -5658,7 +5658,7 @@
 \n
 \n • Prise en charge de tags GPX supplémentaires
 \n
-\n • Affichage de \"Distance durant la navigation\": choix entre nombres exacts ou arrondis
+\n • Affichage de \"Distance durant la navigation\" : choix entre nombres exacts ou arrondis
 \n
 \n • Interface graphique unifiée pour la sélection de traces
 \n
@@ -5690,7 +5690,7 @@
     <string name="title_3d_track">Trace 3D</string>
     <string name="track_line">Ligne de la trace</string>
     <string name="downward_gradient">Gradient vers le bas</string>
-    <string name="maps_that_also_be_used">Cartes également utilisées : %1$s</string>
+    <string name="maps_that_also_be_used">Cartes qui seront également utilisées : %1$s</string>
     <string name="getting_list_of_required_maps">Récupération de la liste des cartes requises…</string>
     <string name="required_maps">Cartes requises</string>
     <string name="missing_maps_header">Cartes manquantes ou périmées</string>
@@ -5714,7 +5714,7 @@
     <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
     <string name="gpx_approximation_geo_cpp">Basé sur la géométrie (C++, rapide)</string>
     <string name="track_vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez modifier la hauteur de la trace 3D.</string>
-    <string name="steps_per_minute_unit">PPM (Pas Par Min)</string>
+    <string name="steps_per_minute_unit">PPM (Pas par minute)</string>
     <string name="disable_map_layers">Désactiver les couches de carte</string>
     <string name="disable_map_layers_descr">Désactive toutes les couches affichées au-dessus de la carte vectorielle (nécessite un redémarrage).</string>
     <string name="wall_height">Hauteur de mur</string>
@@ -5722,4 +5722,34 @@
     <string name="action_icon">Icône d\'action</string>
     <string name="key_assignment_add_action">Ajouter une action</string>
     <string name="rendering_value_dark_orange_name">Orange foncé</string>
+    <string name="contact_support_retry">Réessayez ou contactez le support</string>
+    <string name="shared_string_colors">Couleurs</string>
+    <string name="no_assigned_keys_desc">Sélectionnez une action et affectez un raccourci en appuyant sur \"Ajouter\".</string>
+    <string name="no_assigned_keys">Aucun raccourci</string>
+    <string name="shared_string_key">Touche</string>
+    <string name="clear_key_assignment_summary">Le raccourci pour l\'action sélectionnée sera supprimé.</string>
+    <string name="clear_all_key_shortcuts">Supprimer tous les raccourcis</string>
+    <string name="key_name_pattern">Touche \"%1$s\"</string>
+    <string name="height_legend_description">Les cartes d\'altitude colorées sont utilisées pour visualiser le relief.</string>
+    <string name="change_terrain_color_scheme">Modifier la palette de couleurs pour le relief</string>
+    <string name="play_weather_forecast">Lancer l\'animation des prévisions météo</string>
+    <string name="clear_all_key_shortcuts_summary">Tous les raccourcis de touches pour le type sélectionné seront supprimés.</string>
+    <string name="key_assignment_add_key">Ajouter une touche</string>
+    <string name="backup_error_failed_to_transfer_file">Le transfert des fichiers cloud a échoué.</string>
+    <string name="user_palette">Palette de l\'utilisateur</string>
+    <string name="missing_maps_ignore">Utiliser les cartes déjà téléchargées</string>
+    <string name="new_key_assignment">Nouvelle affectation de touche</string>
+    <string name="assigned_keys">Raccourcis de touches</string>
+    <string name="daynight_mode_sensor_summary">Utilise le capteur de luminosité de l\'appareil afin de basculer entre les thèmes clair et sombre selon la lumière ambiante.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Bascule automatiquement entre les thèmes clair et sombre en fonction du lever et du coucher du soleil.</string>
+    <string name="daynight_mode_night_summary">Affiche toujours la carte en mode sombre, adapté pour la nuit ou une faible luminosité.</string>
+    <string name="daynight_mode_day_summary">Affiche toujours la carte avec le thème clair, adapté à la journée.</string>
+    <string name="daynight_mode_app_theme">Thème de l\'application</string>
+    <string name="daynight_mode_app_theme_summary">L\'affichage de la carte s\'adapte au thème de l\'application (mode jour pour un thème clair et mode nuit pour un thème sombre)</string>
+    <string name="key_event_action_continuous_zoom_out">Zoom arrière en continu</string>
+    <string name="key_event_action_continuous_zoom_in">Zoom en continu</string>
+    <string name="remove_key_assignment_summary">L\'affectation de touche pour l\'action sélectionnée sera supprimée.</string>
+    <string name="remove_key_assignment">Supprimer l\'affectation de touche</string>
+    <string name="map_settings_weather_wind_animation">Animation du vent</string>
+    <string name="tomorrow">Demain</string>
 </resources>

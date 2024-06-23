@@ -139,7 +139,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 		AmenityInfoRow cuisineRow = null;
-		List<PoiType> collectedPoiTypes = new ArrayList<>();
+		Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 
 		boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 
@@ -198,6 +198,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 			if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
 				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
+			}
+			if (poiType == null && pt == null && key.equals(vl)) {
+				poiType = poiTypes.getPoiTypeByKey(key);
 			}
 			PoiType pType = null;
 			if (pt != null) {
@@ -364,7 +367,9 @@ public class AmenityUIHelper extends MenuBuilder {
 						iconId = R.drawable.ic_action_note_dark;
 					}
 				} else if (poiType != null) {
-					collectedPoiTypes.add(poiType);
+					String catKey = poiType.getCategory().getKeyName();
+					List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
+					list.add(poiType);
 				} else {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
@@ -470,21 +475,24 @@ public class AmenityUIHelper extends MenuBuilder {
 
 
 		if (collectedPoiTypes.size() > 0) {
-			CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, collectedPoiTypes, false, null, type);
-			PoiCategory poiCategory = type;
-			Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
-			StringBuilder sb = new StringBuilder();
-			for (PoiType pt : collectedPoiTypes) {
-				if (sb.length() > 0) {
-					sb.append(" • ");
+			for (Map.Entry<String, List<PoiType>> e : collectedPoiTypes.entrySet()) {
+				List<PoiType> poiTypeList = e.getValue();
+				CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, poiTypeList, false, null, type);
+				PoiCategory poiCategory = type;
+				StringBuilder sb = new StringBuilder();
+				for (PoiType pt : poiTypeList) {
+					if (sb.length() > 0) {
+						sb.append(" • ");
+					}
+					sb.append(pt.getTranslation());
+					poiCategory = pt.getCategory();
 				}
-				sb.append(pt.getTranslation());
+				Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
+				infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
+						poiCategory.getTranslation(), sb.toString(), null, true,
+						collapsableView, 0, false, false, false, 40,
+						poiCategory.getKeyName(), false, false, false, 1));
 			}
-
-			infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
-					poiCategory.getTranslation(), sb.toString(), null, true,
-					collapsableView, 0, false, false, false, 40,
-					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
 

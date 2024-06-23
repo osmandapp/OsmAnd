@@ -4031,7 +4031,7 @@
     <string name="poi_ticket_validator">Valideur de billets</string>
     <string name="poi_hampshire_gate">Barrière en barbelés</string>
     <string name="poi_research_institute">Institut de recherche</string>
-    <string name="poi_driver_training">Auto-école</string>
+    <string name="poi_driver_training">Lieu de formation à la conduite</string>
     <string name="poi_coffee_filter">Café</string>
     <string name="poi_ice_cream_filter">Glace</string>
     <string name="poi_mattress_filter">Matelas</string>
@@ -4225,7 +4225,7 @@
     <string name="poi_avalanche_transceiver">Détecteur de victime d\'avalanches;DVA;Appareil de recherche de victimes d\'avalanche;ARVA</string>
     <string name="poi_museum_type">Thème du musée</string>
     <string name="poi_board_type_art">Art</string>
-    <string name="poi_board_type_planet_walk">Map monde de randonnée</string>
+    <string name="poi_board_type_planet_walk">Sentier des planètes</string>
     <string name="poi_board_type_sight">Vue</string>
     <string name="poi_board_type_sport">Sport</string>
     <string name="poi_board_type_welcome_sign">Panneau de bienvenue</string>
@@ -4768,4 +4768,5 @@
     <string name="poi_padus_local_designation">Désignation locale</string>
     <string name="poi_via">Via</string>
     <string name="poi_padus_category_proclamation">Catégorie : proclamation</string>
+    <string name="poi_padus_category_fee">Catégorie : péage</string>
 </resources>

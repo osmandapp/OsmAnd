@@ -968,7 +968,7 @@ public class MapPoiTypes {
 					}
 					pat = poiTypesByTag.get(otag);
 				}
-				if (pat != null && pat.isAdditional()) {
+				if (pat != null) {
 					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}
 			}

@@ -5746,4 +5746,16 @@
     <string name="missing_maps_ignore">Користи постојеће мапе</string>
     <string name="backup_error_failed_to_transfer_file">Пренос датотеке(а) у облаку није успео.</string>
     <string name="contact_support_retry">Покушајте поново или контактирајте подршку</string>
+    <string name="tomorrow">Сутрадан</string>
+    <string name="map_settings_weather_wind_animation">Анимација ветра</string>
+    <string name="daynight_mode_sensor_summary">Користи светлосни сензор уређаја за пребацивање између светлих и тамних тема у складу са нивоима амбијенталног светла.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Аутоматски пребацује између дневне и ноћне теме на основу локалног времена изласка и заласка сунца.</string>
+    <string name="daynight_mode_night_summary">Увек приказује мапу у тамној теми, погодној за ноћне услове или услове слабог осветљења.</string>
+    <string name="daynight_mode_day_summary">Увек приказује мапу у светлој теми, идеално за видљивост током дана.</string>
+    <string name="daynight_mode_app_theme">Тема апликације</string>
+    <string name="key_event_action_continuous_zoom_out">Континуирано умањивање</string>
+    <string name="remove_key_assignment_summary">Додељивање тастера за изабрану радњу ће бити уклоњено.</string>
+    <string name="remove_key_assignment">Уклони додељивање тастера</string>
+    <string name="daynight_mode_app_theme_summary">Приказ мапе је у складу са општом темом апликације — дневни режим за светлу тему и ноћни режим за тамну тему</string>
+    <string name="key_event_action_continuous_zoom_in">Континуирано увећавање</string>
 </resources>

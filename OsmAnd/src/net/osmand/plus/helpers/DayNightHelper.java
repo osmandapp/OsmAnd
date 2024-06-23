@@ -180,6 +180,8 @@ public class DayNightHelper implements SensorEventListener {
 			return lastNightMode;
 		} else if (dayNightMode.isSensor()) {
 			return lastNightMode;
+		} else if (dayNightMode.isAppTheme()) {
+			return !settings.isLightContentForMode(mode);
 		}
 		return false;
 	}

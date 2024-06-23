@@ -360,7 +360,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			topMapControls = mapActivity.findViewById(R.id.top_controls_container);
 
 			infoTypeBtn = new IconToggleButton(app, infoButtonsContainer, nightMode);
-			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored, true);
+			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored).setUseDefaultColor();
 			graphBtn = new IconRadioItem(R.drawable.ic_action_analyze_intervals);
 
 			ScrollUtils.addOnGlobalLayoutListener(mainView, this::updateInfoViewAppearance);
