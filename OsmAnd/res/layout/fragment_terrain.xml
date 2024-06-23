@@ -142,7 +142,7 @@
 							android:layout_height="@dimen/map_small_button_size"
 							android:layout_gravity="center_vertical|end"
 							android:layout_margin="@dimen/content_padding"
-							android:src="@drawable/img_button_pro_night" />
+							tools:src="@drawable/img_button_pro_night" />
 
 					</FrameLayout>
 

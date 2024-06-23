@@ -1,7 +1,7 @@
 package net.osmand.plus.card.color.palette.gradient;
 
 import static net.osmand.IndexConstants.TXT_EXT;
-import static net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.*;
+import static net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.GradientViewHolder;
 import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
 import static net.osmand.plus.helpers.ColorPaletteHelper.ROUTE_PREFIX;
 
@@ -49,8 +49,8 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 
-	public AllGradientsPaletteAdapter(@NonNull OsmandApplication app, @NonNull Context context, @NonNull GradientColorsPaletteController controller,
-									  boolean nightMode) {
+	public AllGradientsPaletteAdapter(@NonNull OsmandApplication app, @NonNull Context context,
+	                                  @NonNull GradientColorsPaletteController controller, boolean nightMode) {
 		this.app = app;
 		this.nightMode = nightMode;
 		this.controller = controller;

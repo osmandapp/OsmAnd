@@ -17,7 +17,6 @@ import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.router.RouteColorize.ColorizationType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

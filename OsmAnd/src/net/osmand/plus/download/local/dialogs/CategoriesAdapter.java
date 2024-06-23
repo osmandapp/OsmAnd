@@ -48,18 +48,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		notifyDataSetChanged();
 	}
 
-	public LocalGroup getLocalGroup(@Nullable LocalItemType localItemType) {
-		for (Object object : items) {
-			if (object instanceof LocalGroup) {
-				LocalGroup group = (LocalGroup) object;
-				if (group.getType() == localItemType) {
-					return group;
-				}
-			}
-		}
-		return null;
-	}
-
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -114,6 +102,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	@Nullable
+	public LocalGroup getLocalGroup(@Nullable LocalItemType type) {
+		for (Object object : items) {
+			if (object instanceof LocalGroup) {
+				LocalGroup group = (LocalGroup) object;
+				if (group.getType() == type) {
+					return group;
+				}
+			}
+		}
+		return null;
 	}
 
 	public interface LocalTypeListener {

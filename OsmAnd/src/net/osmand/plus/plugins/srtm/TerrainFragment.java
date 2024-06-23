@@ -2,6 +2,14 @@ package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.TXT_EXT;
+import static net.osmand.plus.plugins.srtm.TerrainMode.ALTITUDE_DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.COLOR_SLOPE_PREFIX;
+import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HEIGHT_PREFIX;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE_SCND_PREFIX;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +28,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -156,11 +163,15 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
 		modifyButton.setOnClickListener(view -> {
-			if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
-				getMapActivity().getDashboard().hideDashboard();
-				ModifyGradientFragment.showInstance(requireActivity().getSupportFragmentManager(), srtmPlugin.getTerrainMode().getType());
-			} else {
-				ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.TERRAIN);
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
+					activity.getDashboard().hideDashboard();
+					FragmentManager manager = activity.getSupportFragmentManager();
+					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
+				} else {
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+				}
 			}
 		});
 
@@ -177,12 +188,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainMode mode = srtmPlugin.getTerrainMode();
 		TerrainType type = mode.getType();
-		String key = type == TerrainType.HEIGHT ? TerrainMode.ALTITUDE_DEFAULT_KEY : TerrainMode.DEFAULT_KEY;
-		String prefix = TerrainMode.HILLSHADE_SCND_PREFIX;
-		if (type == TerrainType.HEIGHT) {
-			prefix = TerrainMode.HEIGHT_PREFIX;
-		} else if(type == TerrainType.SLOPE) {
-			prefix = TerrainMode.COLOR_SLOPE_PREFIX;
+		String key = type == HEIGHT ? ALTITUDE_DEFAULT_KEY : DEFAULT_KEY;
+		String prefix = HILLSHADE_SCND_PREFIX;
+		if (type == HEIGHT) {
+			prefix = HEIGHT_PREFIX;
+		} else if (type == SLOPE) {
+			prefix = COLOR_SLOPE_PREFIX;
 		}
 		String defaultModeKey = prefix + key + TXT_EXT;
 		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(defaultModeKey);
@@ -212,11 +223,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	public void showCacheScreen() {
-		if (getMapActivity() != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
 			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
-			intent.putExtra(DownloadActivity.LOCAL_ITEM_TYPE, LocalItemType.CACHE.ordinal());
-			getMapActivity().startActivity(intent);
+			intent.putExtra(DownloadActivity.LOCAL_ITEM_TYPE, LocalItemType.CACHE.name());
+			activity.startActivity(intent);
 		}
 	}
 
@@ -235,7 +247,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		int maxZoom = srtmPlugin.getTerrainMaxZoom();
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
-		coloSchemeTv.setText(mode.getTranslatedType(app));
+		coloSchemeTv.setText(mode.getDescription(app));
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {
@@ -245,7 +257,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				if (mode.isDefaultMode()) {
 					menuItems.add(new PopUpMenuItem.Builder(app)
-							.setTitle(mode.getTranslatedType(app))
+							.setTitle(mode.getDescription(app))
 							.setOnClickListener(v -> setupTerrainMode(mode))
 							.create());
 				}
@@ -317,10 +329,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 
-			if (mode.getType() == TerrainType.HILLSHADE) {
+			if (mode.getType() == HILLSHADE) {
 				descriptionTv.setText(R.string.hillshade_description);
 				downloadDescriptionTv.setText(R.string.hillshade_download_description);
-			} else if (mode.getType() == TerrainType.SLOPE) {
+			} else if (mode.getType() == SLOPE) {
 				descriptionTv.setText(R.string.slope_legend_description);
 				String wikiString = getString(R.string.shared_string_wikipedia);
 				String readMoreText = String.format(
@@ -330,7 +342,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
 				setupClickableText(descriptionTv, readMoreText, wikiString, wikiSlopeUrl, false);
 				downloadDescriptionTv.setText(R.string.slope_download_description);
-			} else if (mode.getType() == TerrainType.HEIGHT) {
+			} else if (mode.getType() == HEIGHT) {
 				descriptionTv.setText(R.string.height_legend_description);
 			}
 			downloadMapsCard.updateDownloadSection(getMapActivity());
@@ -343,7 +355,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			stateTv.setText(R.string.shared_string_disabled);
 		}
 		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isOsmAndProAvailable(app));
-		proIv.setImageDrawable(AppCompatResources.getDrawable(app, nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day));
+		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);
@@ -358,10 +370,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-									String text,
-									String clickableText,
-									String url,
-									boolean medium) {
+	                                String text,
+	                                String clickableText,
+	                                String url,
+	                                boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override

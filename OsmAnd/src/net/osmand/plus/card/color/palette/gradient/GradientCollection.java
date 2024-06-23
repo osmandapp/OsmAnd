@@ -36,9 +36,9 @@ public class GradientCollection {
 	private String type;
 	private final Object gradientType;
 
-	public GradientCollection(@NonNull Map<String, Pair<ColorPalette, Long>> gradientPalettes,
-							  @NonNull CommonPreference<String> gradientPalettesPreference, @NonNull Object gradientType) {
-		this.gradientPalettesPreference = gradientPalettesPreference;
+	public GradientCollection(@NonNull Map<String, Pair<ColorPalette, Long>> palettes,
+							  @NonNull CommonPreference<String> preference, @NonNull Object gradientType) {
+		this.gradientPalettesPreference = preference;
 		this.gradientType = gradientType;
 
 		if (gradientType instanceof ColorizationType) {
@@ -46,7 +46,7 @@ public class GradientCollection {
 		} else if (gradientType instanceof TerrainType) {
 			type = ((TerrainType) gradientType).name();
 		}
-		loadPaletteColors(gradientPalettes);
+		loadPaletteColors(palettes);
 	}
 
 	private void loadPaletteColors(@NonNull Map<String, Pair<ColorPalette, Long>> gradientPalettes) {

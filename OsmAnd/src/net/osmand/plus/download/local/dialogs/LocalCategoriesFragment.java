@@ -26,7 +26,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
@@ -173,18 +172,17 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		}
 		updateAdapter();
 		updateFragments();
-		openCategoryIfNeeded();
+		openGroupIfNeeded();
 		updateProgressVisibility(false);
 	}
 
-	private void openCategoryIfNeeded() {
-		LocalItemType localItemType = requireDownloadActivity().getLocalItemType();
-		if (localItemType == null) {
-			return;
-		}
-		LocalGroup group = adapter.getLocalGroup(localItemType);
-		if (group != null) {
-			onGroupSelected(group);
+	private void openGroupIfNeeded() {
+		DownloadActivity activity = getDownloadActivity();
+		if (activity != null) {
+			LocalGroup group = adapter.getLocalGroup(activity.getLocalItemTypeAndClear());
+			if (group != null) {
+				onGroupSelected(group);
+			}
 		}
 	}
 

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.GradientChart;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.ColorPalette;
@@ -42,13 +41,13 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 
 
 	public GradientColorsPaletteCard(@NonNull FragmentActivity activity,
-									 @NonNull GradientColorsPaletteController controller) {
+	                                 @NonNull GradientColorsPaletteController controller) {
 		this(activity, controller, true);
 	}
 
 	public GradientColorsPaletteCard(@NonNull FragmentActivity activity,
-									 @NonNull GradientColorsPaletteController controller,
-									 boolean usedOnMap) {
+	                                 @NonNull GradientColorsPaletteController controller,
+	                                 boolean usedOnMap) {
 		super(activity, usedOnMap);
 		this.controller = controller;
 
@@ -77,7 +76,7 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		if (!(controller.selectedPaletteColor instanceof PaletteGradientColor)) {
 			return;
 		}
-		ColorPalette gradientColorPalette = ((PaletteGradientColor) controller.selectedPaletteColor).getColorPalette();
+		ColorPalette colorPalette = ((PaletteGradientColor) controller.selectedPaletteColor).getColorPalette();
 		GradientChart chart = view.findViewById(R.id.chart);
 
 		int labelsColor = ContextCompat.getColor(app, R.color.text_color_secondary_light);
@@ -85,21 +84,20 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 
 		ChartUtils.setupGradientChart(getMyApplication(), chart, 9, 24, false, xAxisGridColor, labelsColor);
 		Object gradientType = controller.gradientCollection.getGradientType();
-		LineData gradientChartData;
-		IAxisValueFormatter iAxisValueFormatter = null;
-		if (gradientType instanceof ColorizationType) {
-			iAxisValueFormatter = getColorizationTypeFormatter((ColorizationType) gradientType, controller.analysis);
-		} else if (gradientType instanceof TerrainType) {
-			iAxisValueFormatter = getTerrainTypeFormatter();
-		}
-		gradientChartData = ChartUtils.buildGradientChart(app, chart, gradientColorPalette, iAxisValueFormatter, nightMode);
 
-		chart.setData(gradientChartData);
+		IAxisValueFormatter formatter = null;
+		if (gradientType instanceof ColorizationType) {
+			formatter = getColorizationTypeFormatter((ColorizationType) gradientType, controller.analysis);
+		} else if (gradientType instanceof TerrainType) {
+			formatter = getTerrainTypeFormatter();
+		}
+		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();
 		chart.invalidate();
 	}
 
-	private IAxisValueFormatter getColorizationTypeFormatter(@NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis){
+	@NonNull
+	private IAxisValueFormatter getColorizationTypeFormatter(@NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis) {
 		return (value, axis) -> {
 			String stringValue = formatValue(value, 100);
 			String type = "%";
@@ -135,6 +133,7 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		};
 	}
 
+	@NonNull
 	private IAxisValueFormatter getTerrainTypeFormatter() {
 		return (value, axis) -> GradientUiHelper.formatTerrainTypeValues(value);
 	}
@@ -166,7 +165,7 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 	}
 
 	private void askScrollToTargetColorPosition(@Nullable PaletteColor targetPaletteColor,
-												boolean useSmoothScroll) {
+	                                            boolean useSmoothScroll) {
 		if (targetPaletteColor == null) {
 			return;
 		}

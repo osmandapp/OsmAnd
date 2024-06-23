@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -119,5 +120,15 @@ public enum LocalItemType {
 
 	public boolean isSortingByCountrySupported() {
 		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
+	}
+
+	@Nullable
+	public static LocalItemType getByName(@Nullable String name) {
+		for (LocalItemType type : values()) {
+			if (type.name().equalsIgnoreCase(name)) {
+				return type;
+			}
+		}
+		return null;
 	}
 }

@@ -76,12 +76,12 @@ public class ChartUtils {
 	}
 
 	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
-									boolean useGesturesAndScale) {
+	                                       boolean useGesturesAndScale) {
 		setupElevationChart(chart, topOffset, bottomOffset, useGesturesAndScale, null);
 	}
 
 	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
-									boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+	                                       boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
 		GpxMarkerView markerView = new GpxMarkerView(chart.getContext(), markerIcon);
 		setupElevationChart(chart, markerView, topOffset, bottomOffset, useGesturesAndScale);
 	}
@@ -338,8 +338,8 @@ public class ChartUtils {
 		return dataSet;
 	}
 
-	public static void setupGradientChart(OsmandApplication app, LineChart chart,float topOffset, float bottomOffset,
-										  boolean useGesturesAndScale, int xAxisGridColor, int labelsColor) {
+	public static void setupGradientChart(OsmandApplication app, LineChart chart, float topOffset, float bottomOffset,
+	                                      boolean useGesturesAndScale, int xAxisGridColor, int labelsColor) {
 		chart.setExtraRightOffset(16.0F);
 		chart.setExtraLeftOffset(16.0F);
 		chart.setExtraTopOffset(topOffset);
@@ -383,15 +383,15 @@ public class ChartUtils {
 
 	@NonNull
 	public static <E> LineData buildGradientChart(@NonNull OsmandApplication app,
-												  @NonNull LineChart chart,
-												  @NonNull ColorPalette gradientColorPalette,
-												  @Nullable IAxisValueFormatter iAxisValueFormatter,
-												  boolean nightMode) {
+	                                              @NonNull LineChart chart,
+	                                              @NonNull ColorPalette colorPalette,
+	                                              @Nullable IAxisValueFormatter valueFormatter,
+	                                              boolean nightMode) {
 
 		XAxis xAxis = chart.getXAxis();
 		xAxis.setEnabled(false);
 
-		List<ColorValue> colorValues = gradientColorPalette.getColors();
+		List<ColorValue> colorValues = colorPalette.getColors();
 		int[] colors = new int[colorValues.size()];
 		List<Entry> entries = new ArrayList<>();
 
@@ -406,7 +406,7 @@ public class ChartUtils {
 		barDataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		LineData dataSet = new LineData(barDataSet);
 		dataSet.setDrawValues(false);
-		chart.getXAxis().setValueFormatter(iAxisValueFormatter);
+		chart.getXAxis().setValueFormatter(valueFormatter);
 
 		return dataSet;
 	}
