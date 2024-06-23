@@ -223,9 +223,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			view.setLatLon(lat, lon);
 		}
 		inMovingMarkerMode = true;
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
-				R.id.map_ruler_layout, R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel);
 		updateMapDisplayPosition();
 		view.refreshMap();
 	}
