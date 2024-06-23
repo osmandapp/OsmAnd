@@ -36,14 +36,14 @@ public class AllGradientsPaletteFragment extends BaseOsmAndDialogFragment implem
 
 	public static final String TAG = AllGradientsPaletteFragment.class.getSimpleName();
 
-	private IColorsPaletteController controller;
+	private GradientColorsPaletteController controller;
 	private AllGradientsPaletteAdapter adapter;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (IColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (GradientColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
 		if (controller != null) {
 			controller.bindPalette(this);
 		}
