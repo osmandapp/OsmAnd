@@ -1037,7 +1037,7 @@
     <string name="route_updated_loc_found">Čekam poziciju za izračunavanje rute</string>
     <string name="continue_follow_previous_route_auto">Nastavi prethodno nezavršeno navođenje? (%1$s sekundi)</string>
     <string name="avoid_toll_roads">Naplata putarina</string>
-    <string name="show_traffic_warnings">Upozorenja o saobraćaju</string>
+    <string name="show_traffic_warnings">Szanje na putevima</string>
     <string name="show_cameras">Kamere za merenje brzine</string>
     <string name="bg_service_interval">Podesi međuvreme buđenja:</string>
     <string name="map_widget_mini_route">Mala mapa rute</string>
@@ -1463,7 +1463,7 @@
     <string name="stop_navigation_service">Zaustaviti</string>
     <string name="sleep_mode_stop_dialog">Prekinuti pozadinski rad GPS-a?</string>
     <string name="background_service_is_enabled_question">OsmAnd pozadinski servis je i dalje pokrenut. Zaustavljaš ga?</string>
-    <string name="way_alarms">Upozorenja o gužvama u saobraćaju</string>
+    <string name="way_alarms">Stanje na putevima</string>
     <string name="speak_poi">TOI u blizini</string>
     <string name="speak_favorites">Favoriti u blizini</string>
     <string name="traffic_warning">Upozorenje o stanju na putevima</string>
@@ -5757,4 +5757,14 @@
     <string name="missing_maps_ignore">Koristi postojeće mape</string>
     <string name="tomorrow">Sutradan</string>
     <string name="map_settings_weather_wind_animation">Animacija vetra</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatski se prebacuje između dnevne i noćne teme na temelju lokalnog izlaska i zalaska sunca.</string>
+    <string name="daynight_mode_night_summary">Mapu uvek prikazivati u tamnoj temi, prikladnoj za noć ili u uslovima slabog osvetljenja.</string>
+    <string name="daynight_mode_day_summary">Uvek prikazivati mapu u svetloj temi, idealno za dnevnu vidljivost.</string>
+    <string name="daynight_mode_app_theme">Tema aplikacije</string>
+    <string name="key_event_action_continuous_zoom_out">Kontinuirano smanjivanje</string>
+    <string name="key_event_action_continuous_zoom_in">Kontinuirano uvećavanje</string>
+    <string name="remove_key_assignment">Ukloni dodelu ključa</string>
+    <string name="remove_key_assignment_summary">Dodela ključa za odabranu akciju biće uklonjena.</string>
+    <string name="daynight_mode_app_theme_summary">Prikaz mape usklađen je s celokupnom temom aplikacije—dnevni način rada za svetlu temu i noćni način rada za tamnu temu</string>
+    <string name="daynight_mode_sensor_summary">Koristi svetlosni senzor uređaja za prebacivanje između svetlih i tamnih tema u skladu s nivom ambijentalnog osvetljenja.</string>
 </resources>

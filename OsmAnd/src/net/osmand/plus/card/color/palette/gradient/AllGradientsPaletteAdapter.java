@@ -1,6 +1,9 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.*;
+import static net.osmand.IndexConstants.TXT_EXT;
+import static net.osmand.plus.card.color.palette.gradient.AllGradientsPaletteAdapter.GradientViewHolder;
+import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
+import static net.osmand.plus.helpers.ColorPaletteHelper.ROUTE_PREFIX;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,15 +26,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.plugins.srtm.TerrainMode;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +44,13 @@ import java.util.List;
 public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientViewHolder> {
 
 	private final OsmandApplication app;
-	private final IColorsPaletteController controller;
+	private final GradientColorsPaletteController controller;
 	private List<PaletteColor> colors;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 
-	public AllGradientsPaletteAdapter(@NonNull OsmandApplication app, @NonNull Context context, @NonNull IColorsPaletteController controller,
-									  boolean nightMode) {
+	public AllGradientsPaletteAdapter(@NonNull OsmandApplication app, @NonNull Context context,
+	                                  @NonNull GradientColorsPaletteController controller, boolean nightMode) {
 		this.app = app;
 		this.nightMode = nightMode;
 		this.controller = controller;
@@ -99,9 +104,9 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		notifyDataSetChanged();
 	}
 
-	static class GradientViewHolder extends RecyclerView.ViewHolder {
+	public static class GradientViewHolder extends RecyclerView.ViewHolder {
 		private final OsmandApplication app;
-		private final IColorsPaletteController controller;
+		private final GradientColorsPaletteController controller;
 		public final AppCompatRadioButton radioButton;
 		public final ImageView icon;
 		public final TextView title;
@@ -110,7 +115,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		public final View bottomDivider;
 		public final View verticalDivider;
 
-		public GradientViewHolder(@NonNull OsmandApplication app, @NonNull IColorsPaletteController controller, @NonNull View itemView) {
+		public GradientViewHolder(@NonNull OsmandApplication app, @NonNull GradientColorsPaletteController controller, @NonNull View itemView) {
 			super(itemView);
 			this.app = app;
 			this.controller = controller;
@@ -140,7 +145,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				gradientDrawable.setCornerRadius(AndroidUtils.dpToPx(app, 2));
 				icon.setImageDrawable(gradientDrawable);
 
-				String titleString = gradientColor.getPaletteName().substring(0, 1).toUpperCase() + gradientColor.getPaletteName().substring(1);
+				String titleString = Algorithms.capitalizeFirstLetter(gradientColor.getPaletteName()).replace("_", " ");
 				title.setText(titleString);
 
 				StringBuilder descriptionBuilder = new StringBuilder();
@@ -149,7 +154,11 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 					if (i != 0) {
 						descriptionBuilder.append(" • ");
 					}
-					descriptionBuilder.append(colorValues.get(i).val);
+					String formattedValue = String.valueOf(colorValues.get(i).val);
+					if (controller.getGradientType() instanceof TerrainType) {
+						formattedValue = GradientUiHelper.formatTerrainTypeValues((float) colorValues.get(i).val);
+					}
+					descriptionBuilder.append(formattedValue);
 				}
 				description.setText(descriptionBuilder);
 				bottomDivider.setVisibility(View.VISIBLE);
@@ -160,29 +169,47 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		}
 
 		public void showItemOptionsMenu(@NonNull PaletteGradientColor gradientColor, @NonNull View view, boolean nightMode, boolean isSelected) {
-			List<PopUpMenuItem> items = new ArrayList<>();
+			Object gradientType = controller.getGradientType();
+			boolean isDefaultColor;
+			String colorPaletteFileName;
 
+			if (gradientType instanceof TerrainType) {
+				TerrainMode terrainMode = TerrainMode.getMode((TerrainType) gradientType, gradientColor.getPaletteName());
+				if (terrainMode == null) {
+					return;
+				}
+				colorPaletteFileName = terrainMode.getMainFile();
+				isDefaultColor = terrainMode.isDefaultMode();
+			} else {
+				colorPaletteFileName = ROUTE_PREFIX + gradientColor.getTypeName() + GRADIENT_ID_SPLITTER + gradientColor.getPaletteName() + TXT_EXT;
+				isDefaultColor = gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME);
+			}
+
+			List<PopUpMenuItem> items = new ArrayList<>();
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_duplicate)
 					.setIcon(getContentIcon(R.drawable.ic_action_copy))
-					.setOnClickListener(v -> app.getColorPaletteHelper().duplicateGradient(gradientColor, duplicated -> {
-						if (duplicated && controller instanceof GradientColorsPaletteController) {
-							((GradientColorsPaletteController) controller).reloadGradientColors();
+					.setOnClickListener(v -> app.getColorPaletteHelper().duplicateGradient(colorPaletteFileName, duplicated -> {
+						if (duplicated) {
+							if (gradientType instanceof TerrainType) {
+								TerrainMode.reloadTerrainMods(app);
+							}
+							controller.reloadGradientColors();
 						}
 					}))
 					.create());
-			if (!gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME) && !isSelected) {
+
+			if (!isDefaultColor && !isSelected) {
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(R.string.shared_string_remove)
 						.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-						.setOnClickListener(item -> app.getColorPaletteHelper().deleteGradient(gradientColor, deleted -> {
+						.setOnClickListener(item -> app.getColorPaletteHelper().deleteGradient(colorPaletteFileName, deleted -> {
 							if (deleted) {
-								if (controller instanceof GradientColorsPaletteController) {
-									GradientColorsPaletteController paletteController = (GradientColorsPaletteController) controller;
-									paletteController.reloadGradientColors();
+								if (gradientType instanceof TerrainMode) {
+									TerrainMode.reloadTerrainMods(app);
 								}
+								controller.reloadGradientColors();
 							}
-
 						}))
 						.create());
 			}

@@ -5549,4 +5549,12 @@
     <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
     <string name="show_debug_info">Vis avlusningsinfø</string>
     <string name="map_text">Karttekst</string>
+    <string name="wall_height">Vegghøyde</string>
+    <string name="backup_error_failed_to_transfer_file">Klarte ikke å overføre sky-fil(er).</string>
+    <string name="contact_support_retry">Prøv igjen eller kontakt brukerstøtte</string>
+    <string name="shared_string_colors">Farger</string>
+    <string name="key_assignment_add_action">Legg til handling</string>
+    <string name="missing_maps_ignore">Bruk eksisterende kart</string>
+    <string name="map_settings_weather_wind_animation">Vindanimasjon</string>
+    <string name="tomorrow">I morgen</string>
 </resources>
