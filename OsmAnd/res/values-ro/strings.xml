@@ -5597,7 +5597,7 @@
     <string name="shared_string_limit">Limită</string>
     <string name="when_exceeded">Atunci când este depășită</string>
     <string name="custom_buttons">Butoane personalizate</string>
-    <string name="default_buttons">Butoane implicite</string>
+    <string name="default_buttons">Butoane standard</string>
     <string name="sorted_sufolders_toast">Subfolderele din \"%1$s\" sunt sortate după: \"%2$s\"</string>
     <string name="shared_string_additional">Adițional</string>
     <string name="sort_subfolders">Sortarea subfolderelor</string>
@@ -5687,7 +5687,7 @@
 \n
 \n</string>
     <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
-    <string name="maps_that_also_be_used">Hărți care pot fi utilizate și în acest caz: %1$s</string>
+    <string name="maps_that_also_be_used">Hărți care vor fi de asemenea utilizate: %1$s</string>
     <string name="shared_string_scale">Scară</string>
     <string name="required_maps_calculate_online_summary">Lista hărților lipsă se bazează pe traseul în linie dreaptă. Pentru a obține o listă precisă de hărți, OsmAnd vă poate precalcula traseul online.</string>
     <string name="use_terrain_maps">Folosește hărți de teren</string>
@@ -5761,4 +5761,7 @@
     <string name="key_event_action_continuous_zoom_in">Mărire continuă</string>
     <string name="remove_key_assignment_summary">Atribuirea tastelor pentru acțiunea selectată va fi eliminată.</string>
     <string name="remove_key_assignment">Șterge asignarea tastei</string>
+    <string name="tomorrow">Mâine</string>
+    <string name="daynight_mode_sensor_summary">Utilizează senzorul de lumină al dispozitivului pentru a comuta între temele luminoase și întunecate în funcție de nivelul luminii ambientale.</string>
+    <string name="map_settings_weather_wind_animation">Animația vântului</string>
 </resources>
