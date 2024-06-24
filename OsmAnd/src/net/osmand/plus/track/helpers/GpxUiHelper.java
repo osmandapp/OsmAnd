@@ -9,8 +9,8 @@ import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
+import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -629,12 +629,24 @@ public class GpxUiHelper {
 		});
 	}
 
-	public static void saveAndShareGpxWithAppearance(@NonNull Context context, @NonNull GPXFile gpxFile) {
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		GpxDataItem item = getDataItem(app, gpxFile);
-		if (item != null) {
+	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+		if (gpxFile.showCurrentTrack) {
+			saveAndShareCurrentGpx(app, gpxFile);
+		} else if (!Algorithms.isEmpty(gpxFile.path)) {
+			File file = new File(gpxFile.path);
+			GpxDataItem item = app.getGpxDbHelper().getItem(file, dataItem -> saveAndShareGpxWithAppearance(app, gpxFile, dataItem));
+			if (item != null) {
+				saveAndShareGpxWithAppearance(app, gpxFile, item);
+			}
+		}
+	}
+
+	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull GpxDataItem item) {
+		if (item.hasAppearanceData()) {
 			addAppearanceToGpx(app, gpxFile, item);
 			saveAndShareGpx(app, gpxFile);
+		} else {
+			shareGpx(app, new File(gpxFile.path));
 		}
 	}
 
@@ -659,14 +671,6 @@ public class GpxUiHelper {
 				LOG.error(errorMessage);
 			}
 		});
-	}
-
-	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		GpxDataItemCallback callback = item -> {
-			addAppearanceToGpx(app, gpxFile, item);
-			saveAndShareGpx(app, gpxFile);
-		};
-		return app.getGpxDbHelper().getItem(new File(gpxFile.path), callback);
 	}
 
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull GpxDataItem item) {
