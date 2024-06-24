@@ -5709,7 +5709,7 @@
     <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie „%1$s“ mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
-    <string name="track_line">Spurlinie</string>
+    <string name="track_line">Track-Linie</string>
     <string name="fixed_height">Feste Höhe</string>
     <string name="downward_gradient">Abwärtsneigung</string>
     <string name="upward_gradient">Aufwärtsneigung</string>
