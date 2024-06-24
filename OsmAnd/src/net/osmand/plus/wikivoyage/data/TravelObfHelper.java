@@ -403,7 +403,8 @@ public class TravelObfHelper implements TravelHelper {
 			for (Entry<File, List<Amenity>> entry : amenityMap.entrySet()) {
 				File file = entry.getKey();
 				for (Amenity amenity : entry.getValue()) {
-					if (!uniqueIds.add(amenity.getId())) {
+					long routeId = Algorithms.parseLongSilently(amenity.getRouteId().replace("Q", ""), -1);
+					if (!uniqueIds.add(routeId)) {
 						continue;
 					}
 					Set<String> nameLangs = getLanguages(amenity);
