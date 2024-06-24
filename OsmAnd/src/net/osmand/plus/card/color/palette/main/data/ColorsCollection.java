@@ -4,42 +4,21 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
-import net.osmand.ColorPalette.ColorValue;
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ColorsCollection {
+public abstract class ColorsCollection {
 
-	private static final Log LOG = PlatformUtil.getLog(ColorsCollection.class);
+	protected static final Log LOG = PlatformUtil.getLog(ColorsCollection.class);
 
-	private static final String DEFAULT_USER_PALETTE_FILE = "user_palette_default.txt";
-
-	private final File file;
-	private final List<String> commentsFromFile = new ArrayList<>();
-	private final List<PaletteColor> originalOrder = new ArrayList<>();
-	private final List<PaletteColor> lastUsedOrder = new LinkedList<>();
-
-	public ColorsCollection(@NonNull OsmandApplication app) {
-		this(getSourceFile(app));
-	}
-
-	public ColorsCollection(@NonNull File file) {
-		this.file = file;
-		loadColors();
-	}
+	protected final List<PaletteColor> originalOrder = new ArrayList<>();
+	protected final List<PaletteColor> lastUsedOrder = new LinkedList<>();
 
 	@Nullable
 	public PaletteColor findPaletteColor(@ColorInt int colorInt) {
@@ -62,7 +41,7 @@ public class ColorsCollection {
 		this.lastUsedOrder.clear();
 		this.originalOrder.addAll(originalColors);
 		this.lastUsedOrder.addAll(lastUsedColors);
-		syncFile();
+		saveColors();
 	}
 
 	@NonNull
@@ -70,7 +49,7 @@ public class ColorsCollection {
 		PaletteColor duplicate = paletteColor.duplicate();
 		addColorDuplicate(originalOrder, paletteColor, duplicate);
 		addColorDuplicate(lastUsedOrder, paletteColor, duplicate);
-		syncFile();
+		saveColors();
 		return duplicate;
 	}
 
@@ -88,7 +67,7 @@ public class ColorsCollection {
 	public boolean askRemoveColor(@NonNull PaletteColor paletteColor) {
 		if (originalOrder.remove(paletteColor)) {
 			lastUsedOrder.remove(paletteColor);
-			syncFile();
+			saveColors();
 			return true;
 		}
 		return false;
@@ -106,14 +85,14 @@ public class ColorsCollection {
 		PaletteColor paletteColor = new PaletteColor(newColor, now);
 		originalOrder.add(paletteColor);
 		lastUsedOrder.add(0, paletteColor);
-		syncFile();
+		saveColors();
 		return paletteColor;
 	}
 
 	@NonNull
 	private PaletteColor updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
 		paletteColor.setColor(newColor);
-		syncFile();
+		saveColors();
 		return paletteColor;
 	}
 
@@ -124,67 +103,19 @@ public class ColorsCollection {
 		}
 	}
 
-	private void loadColors() {
-		long now = System.currentTimeMillis();
+	protected void loadColors() {
 		try {
-			ColorPalette palette = readFile();
 			originalOrder.clear();
 			lastUsedOrder.clear();
-			for (ColorValue color : palette.getColors()) {
-				lastUsedOrder.add(new PaletteColor(color, now++));
-			}
+			loadColorsInLastUsedOrder();
 			originalOrder.addAll(lastUsedOrder);
 			originalOrder.sort((a, b) -> Double.compare(a.getIndex(), b.getIndex()));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			LOG.error("Error when trying to read file: " + e.getMessage());
 		}
 	}
 
-	private ColorPalette readFile() throws IOException {
-		commentsFromFile.clear();
-		return ColorPalette.parseColorPalette(new FileReader(file), commentsFromFile, false);
-	}
+	protected abstract void loadColorsInLastUsedOrder() throws IOException;
 
-	private void syncFile() {
-		// Update indexes
-		for (PaletteColor paletteColor : originalOrder) {
-			int index = originalOrder.indexOf(paletteColor);
-			paletteColor.setIndex(index + 1);
-		}
-		// Use order of last used colors
-		List<ColorValue> colorValues = new ArrayList<>();
-		for (PaletteColor paletteColor : lastUsedOrder) {
-			colorValues.add(paletteColor.getColorValue());
-		}
-		StringBuilder content = new StringBuilder();
-		for (String comment : commentsFromFile) {
-			content.append(comment).append("\n");
-		}
-		content.append(ColorPalette.writeColorPalette(colorValues));
-
-		try {
-			FileWriter writer = new FileWriter(file);
-			BufferedWriter w = new BufferedWriter(writer);
-			w.write(content.toString());
-			w.flush();
-			w.close();
-		} catch (IOException e) {
-			LOG.error("Error when trying to write to the file: " + e.getMessage());
-		}
-	}
-
-	@NonNull
-	private static File getSourceFile(@NonNull OsmandApplication app) {
-		File dir = app.getAppPath(IndexConstants.COLOR_PALETTE_DIR);
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		File file = new File(dir, DEFAULT_USER_PALETTE_FILE);
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			LOG.debug("Can't create a color palette file: " + e.getMessage());
-		}
-		return file;
-	}
+	protected abstract void saveColors();
 }

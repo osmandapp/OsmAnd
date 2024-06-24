@@ -5,7 +5,6 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDraw
 import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,7 +14,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.ColorPalette;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,13 +27,14 @@ import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.gradient.GradientCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -50,7 +49,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.List;
-import java.util.Map;
 
 public class TrackColorController extends ColoringStyleCardController implements IDialogController, IControlsColorProvider {
 
@@ -93,7 +91,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new ColorsCollection(app);
+			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
@@ -102,11 +100,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 
 	@NonNull
 	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		OsmandSettings settings = app.getSettings();
-
 		ColorizationType colorizationType = gradientScaleType.toColorizationType();
-		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(colorizationType);
-		GradientCollection gradientCollection = new GradientCollection(colorPaletteMap, settings.GRADIENT_PALETTES, colorizationType);
+		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
 
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientColorsPaletteController(app, selectedGpx.getTrackAnalysis(app));

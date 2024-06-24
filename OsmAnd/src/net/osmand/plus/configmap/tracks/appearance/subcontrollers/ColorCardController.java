@@ -5,7 +5,6 @@ import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
@@ -25,7 +23,7 @@ import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.gradient.GradientCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
@@ -33,6 +31,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.chooseplan.PromoBannerCard;
@@ -40,7 +39,6 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.router.RouteColorize;
@@ -109,11 +107,8 @@ public class ColorCardController extends ColoringStyleCardController implements 
 
 	@NonNull
 	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
-		OsmandSettings settings = app.getSettings();
-
 		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(colorizationType);
-		GradientCollection gradientCollection = new GradientCollection(colorPaletteMap, settings.GRADIENT_PALETTES, colorizationType);
+		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
 
 		if (gradientPaletteController == null) {
 			gradientPaletteController = new GradientColorsPaletteController(app, null);
@@ -126,7 +121,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			ColorsCollection colorsCollection = new ColorsCollection(app);
+			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			Integer color = data.getParameter(COLOR);
 			if (color == null) {
 				List<PaletteColor> colors = colorsCollection.getColors(PaletteSortingMode.ORIGINAL);

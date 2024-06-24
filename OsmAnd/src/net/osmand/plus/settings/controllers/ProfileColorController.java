@@ -11,6 +11,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 
 public class ProfileColorController extends ColorsPaletteController implements IDialogController {
 
@@ -49,7 +50,7 @@ public class ProfileColorController extends ColorsPaletteController implements I
 		DialogManager dialogManager = app.getDialogManager();
 		ProfileColorController controller = (ProfileColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			ColorsCollection colorsCollection = new ColorsCollection(app);
+			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			controller = new ProfileColorController(app, colorsCollection, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);
 		}
