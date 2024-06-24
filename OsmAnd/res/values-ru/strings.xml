@@ -5764,4 +5764,12 @@
     <string name="map_settings_weather_wind_animation">Анимация ветра</string>
     <string name="tomorrow">Завтра</string>
     <string name="daynight_mode_app_theme_summary">Отображение карты соответствует теме приложения: дневной режим для светлой темы и ночной режим для темной темы</string>
+    <string name="data_source">Источник данных</string>
+    <string name="weather_data_sources_prompt">OsmAnd предоставляет данные о погоде из двух источников:</string>
+    <string name="weather_source_ecmwf_description">Европейский центр среднесрочных прогнозов погоды</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Изменить</string>
+    <string name="weather_source_GFS_description">Глобальная система прогнозов от национальных центров экологического прогнозирования</string>
+    <string name="missing_maps_ignore_details">Некоторые уже загруженные карты могут подойти для вашего маршрута. Если вы знакомы с местностью и картами, вы можете попробовать проложить маршрут, используя существующие карты.</string>
 </resources>
