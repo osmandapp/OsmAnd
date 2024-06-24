@@ -2863,8 +2863,8 @@
     <string name="shared_string_walk">Gang</string>
     <string name="save_poi_value_exceed_length_title">Længden af \"%s\" værdien</string>
     <string name="quick_action_day_night_mode">%s tilstand</string>
-    <string name="avoid_pt_types">Undgå transporttyper…</string>
-    <string name="avoid_pt_types_descr">Vælg offentlige transporttyper, der skal undgåes ved navigation:</string>
+    <string name="avoid_pt_types">Undgå transportformer…</string>
+    <string name="avoid_pt_types_descr">Vælg de typer offentlig transport, der skal undgås i forbindelse med navigation:</string>
     <string name="save_poi_value_exceed_length">Forkort længden af mærket \"%s\" til mindre end 255 tegn.</string>
     <string name="rendering_attr_surface_unpaved_name">Ikke befæstet</string>
     <string name="rendering_attr_surface_ground_name">Jord</string>
@@ -3420,7 +3420,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Bivirkning: Spor vil mangle alle sektioner, hvor minimumshastighedskriteriet ikke var opfyldt (f.eks. hvor cyklen skubbes op ad en stejl bakke). Der vil heller ikke være nogen oplysninger om hvileperioder, som pauser. Har indvirkning på alle analyser eller efterbehandlinger, som når det forsøges at bestemme den samlede længde af rejsen, tid i bevægelse, eller den gennemsnitlige hastighed.</string>
     <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data.</string>
     <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
-    <string name="route_recalculation_dist_title">Mindste afstand for at genberegne ruten</string>
+    <string name="route_recalculation_dist_title">Mindste afstand for at genberegne rute</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne som de importerede.
 \n
 \nVælg en handling.</string>
@@ -5324,7 +5324,7 @@
     <string name="routing_attr_hazmat_category_usa_4_name">Brandfarlige faste stoffer</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Brandfarlige væsker</string>
-    <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="dangerous_goods_description">På nogle veje og i nogle tunneler er det forbudt at transportere farlige materialer.</string>
     <string name="shared_string_not_checked">Ikke tjekket</string>
     <string name="shared_string_checked">Tjekket</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Den italienske alpinklub)</string>
@@ -5773,4 +5773,5 @@
     <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemlange vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
+    <string name="missing_maps_ignore_details">Nogle allerede downloadede kort kan være velegnede til din rute. Hvis du kender området og kortene, kan du prøve at lave en rute ved hjælp af de eksisterende kort.</string>
 </resources>
