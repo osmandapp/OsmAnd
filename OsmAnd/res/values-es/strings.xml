@@ -3724,7 +3724,7 @@
     <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
     <string name="street_level_imagery">Imágenes a nivel de calle</string>
     <string name="plan_route_exit_dialog_descr">¿Descartar todos los cambios en la ruta planificada\?</string>
-    <string name="in_case_of_reverse_direction">En caso de dirección inversa</string>
+    <string name="in_case_of_reverse_direction">En caso de dirección incorrecta</string>
     <string name="shared_string_save_as_gpx">Guardar como nuevo archivo de traza</string>
     <string name="add_segment_to_the_track">Añadir a un archivo de trazas</string>
     <string name="shared_string_gpx_files">Trazas</string>
@@ -5762,4 +5762,11 @@
     <string name="remove_key_assignment_summary">Se eliminará la asignación de la clave para la acción seleccionada.</string>
     <string name="remove_key_assignment">Eliminar asignación de la clave</string>
     <string name="daynight_mode_app_theme_summary">La visualización del mapa se ajusta con el tema general de la aplicación: modo diurno para un tema claro y modo nocturno para un tema oscuro</string>
+    <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Medio Plazo</string>
+    <string name="weather_source_GFS_description">Sistema de pronóstico global de los centros nacionales de predicción ambiental</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Fuente de datos</string>
+    <string name="weather_data_sources_prompt">OsmAnd proporciona datos meteorológicos de dos fuentes:</string>
+    <string name="shared_string_modify">Modificar</string>
 </resources>
