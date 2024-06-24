@@ -66,7 +66,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
-	private static final int MODEL_3D_MAX_SIZE_DP = 48;
+	private static final int MODEL_3D_MAX_SIZE_DP = 24;
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
@@ -147,7 +147,7 @@ public class PointLocationLayer extends OsmandMapLayer
 
 			if (model3D != null) {
 				myLocMarkerBuilder.setModel3D(model3D);
-				myLocMarkerBuilder.setModel3DMaxSizeInPixels(AndroidUtils.dpToPx(ctx, MODEL_3D_MAX_SIZE_DP));
+				myLocMarkerBuilder.setModel3DMaxSizeInPixels((int) (AndroidUtils.dpToPx(ctx, MODEL_3D_MAX_SIZE_DP) * scale));
 			} else {
 				int width = (int) (icon.getIntrinsicWidth() * scale);
 				int height = (int) (icon.getIntrinsicHeight() * scale);
