@@ -2869,7 +2869,7 @@
     <string name="shared_string_walk">Marche</string>
     <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
     <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
-    <string name="avoid_pt_types_descr">Sélectionnez les types de transports en commun à éviter lors de la navigation :</string>
+    <string name="avoid_pt_types_descr">Sélectionnez les types de transport en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
     <string name="shared_string_degrees">Degrés</string>
@@ -3699,7 +3699,7 @@
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
     <string name="plan_route_exit_dialog_descr">Ignorer toutes les modifications apportées à cet itinéraire \?</string>
-    <string name="in_case_of_reverse_direction">Inverser le sens</string>
+    <string name="in_case_of_reverse_direction">En cas de sens inverse</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
     <string name="access_hint_enter_address">Saisissez l\'adresse</string>
@@ -5753,4 +5753,10 @@
     <string name="map_settings_weather_wind_animation">Animation du vent</string>
     <string name="tomorrow">Demain</string>
     <string name="shared_string_modify">Modifier</string>
+    <string name="data_source">Source des données</string>
+    <string name="weather_data_sources_prompt">OsmAnd fournit des données météorologiques à partir de deux sources :</string>
+    <string name="weather_source_ecmwf_description">Centre européen pour les prévisions météorologiques à moyen terme</string>
+    <string name="weather_source_GFS_description">Système de prévision global des Centres Nationaux pour la Prédiction Environnementale</string>
+    <string name="weather_source_ecmwf_title">CEPMMT</string>
+    <string name="weather_source_GFS_title">GFS</string>
 </resources>
