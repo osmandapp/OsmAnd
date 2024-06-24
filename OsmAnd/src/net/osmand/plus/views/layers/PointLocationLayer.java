@@ -683,6 +683,20 @@ public class PointLocationLayer extends OsmandMapLayer
 		return mapViewTrackingUtilities.isMovingToMyLocation();
 	}
 
+	private void setLocationModel() {
+		locationModel = model3dHelper.getModel(locationIconName, model -> {
+			locationModel = model;
+			locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+			brokenLocationModel = model == null;
+			markersInvalidated = true;
+			return true;
+		});
+		if (locationModel != null) {
+			locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+		}
+		locationIcon = null;
+	}
+
 	private void updateParams(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
 		boolean hasMapRenderer = hasMapRenderer();
 		Context ctx = getContext();
@@ -723,10 +737,14 @@ public class PointLocationLayer extends OsmandMapLayer
 					navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
 					brokenNavigationModel = model == null;
 					markersInvalidated = true;
+					if (LocationIcon.isModel(locationIconName)) {
+						setLocationModel();
+					}
 					return true;
 				});
-				if (navigationModel != null)
+				if (navigationModel != null) {
 					navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+				}
 				navigationIcon = null;
 			} else {
 				int navigationIconId = NavigationIcon.fromName(navigationIconName).getIconId();
@@ -739,16 +757,9 @@ public class PointLocationLayer extends OsmandMapLayer
 
 			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
 			if (LocationIcon.isModel(locationIconName)) {
-				locationModel = model3dHelper.getModel(locationIconName, model -> {
-					locationModel = model;
-					locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
-					brokenLocationModel = model == null;
-					markersInvalidated = true;
-					return true;
-				});
-				if (locationModel != null)
-					locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
-				locationIcon = null;
+				if (!NavigationIcon.isModel(navigationIconName) || navigationModel != null) {
+					setLocationModel();
+				}
 			} else {
 				locationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconType.getIconId());
 				if (locationIcon != null) {
