@@ -60,9 +60,9 @@ class SearchPreferenceButtonHelper {
 			}
 
 			private Bundle createArguments() {
-				final Bundle bundle = new Bundle();
-				bundle.putBoolean(BaseSettingsFragment.CONFIGURE_PREFERENCE_SEARCH, true);
-				return bundle;
+				final Bundle arguments = new Bundle();
+				arguments.putBoolean(BaseSettingsFragment.CONFIGURE_PREFERENCE_SEARCH, true);
+				return arguments;
 			}
 		};
 	}
