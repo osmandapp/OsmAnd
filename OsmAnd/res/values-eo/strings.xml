@@ -5755,4 +5755,5 @@
     <string name="tomorrow">Morgaŭ</string>
     <string name="key_event_action_continuous_zoom_in">Seninterrompa pligrandigo</string>
     <string name="remove_key_assignment">Forigi klav-asignon</string>
+    <string name="shared_string_modify">Modifi</string>
 </resources>
