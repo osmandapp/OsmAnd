@@ -5767,4 +5767,10 @@
     <string name="tomorrow">I morgen</string>
     <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema - dagtilstand ved et lyst tema og nattilstand ved et mørkt tema</string>
     <string name="shared_string_modify">Tilpas</string>
+    <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_data_sources_prompt">OsmAnd leverer vejrdata fra to kilder:</string>
+    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemlange vejrprognoser</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Datakilde</string>
 </resources>

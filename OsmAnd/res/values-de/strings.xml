@@ -5709,7 +5709,7 @@
     <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie „%1$s“ mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
-    <string name="track_line">Bahnlinie</string>
+    <string name="track_line">Spurlinie</string>
     <string name="fixed_height">Feste Höhe</string>
     <string name="downward_gradient">Abwärtsneigung</string>
     <string name="upward_gradient">Aufwärtsneigung</string>
@@ -5766,4 +5766,10 @@
     <string name="daynight_mode_app_theme_summary">Die Kartendarstellung passt sich dem Gesamtthema der App an - Tagmodus für eine helle Darstellung und Nachtmodus für eine dunkle Darstellung</string>
     <string name="daynight_mode_sunrise_sunset_summary">Schaltet automatisch zwischen Tag- und Nachtmodus um, je nach Sonnenauf- und -untergangszeit vor Ort.</string>
     <string name="shared_string_modify">Ändern</string>
+    <string name="weather_data_sources_prompt">OsmAnd liefert Wetterdaten aus zwei Quellen:</string>
+    <string name="weather_source_ecmwf_description">Europäisches Zentrum für mittelfristige Wettervorhersage</string>
+    <string name="weather_source_GFS_description">Nationale Zentren zur Umweltvorhersage</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Datenquelle</string>
 </resources>
