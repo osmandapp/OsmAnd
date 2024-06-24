@@ -386,7 +386,7 @@ public class RoutePlannerFrontEnd {
 		targets.add(end);
 		if (CALCULATE_MISSING_MAPS) {
 			MissingMapsCalculator calculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
-			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null, null)) {
+			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
 		}
