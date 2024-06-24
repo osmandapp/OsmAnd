@@ -5772,4 +5772,5 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
+    <string name="missing_maps_ignore_details">Einige bereits heruntergeladene Karten könnten für Ihre Route geeignet sein. Wenn Sie mit dem Gebiet und den Karten vertraut sind, können Sie versuchen, die Routenführung mit den vorhandenen Karten zu berechnen.</string>
 </resources>
