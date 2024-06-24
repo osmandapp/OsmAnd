@@ -95,6 +95,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
+	public static final String CONFIGURE_PREFERENCE_SEARCH = "configurePreferenceSearch";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -109,6 +110,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	private boolean configurePreferenceSearch = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,6 +129,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 		}
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
+		configurePreferenceSearch = args.getBoolean(CONFIGURE_PREFERENCE_SEARCH, false);
 	}
 
 	@Override
@@ -150,7 +153,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			} else {
 				updateAllSettings();
 			}
-			createToolbar(inflater, view);
+			if (!configurePreferenceSearch) {
+				createToolbar(inflater, view);
+			}
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -170,7 +175,13 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		updateToolbar();
+		_updateToolbar();
+	}
+
+	private void _updateToolbar() {
+		if (!configurePreferenceSearch) {
+			updateToolbar();
+		}
 	}
 
 	@Override
@@ -354,7 +365,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			recreate();
 		} else {
 			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
-			updateToolbar();
+			_updateToolbar();
 			updateAllSettings();
 		}
 	}

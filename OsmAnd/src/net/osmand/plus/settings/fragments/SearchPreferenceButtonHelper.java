@@ -1,9 +1,12 @@
 package net.osmand.plus.settings.fragments;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 
@@ -11,6 +14,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
 import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.preferencesearch.fragment.IFragmentFactory;
 
 class SearchPreferenceButtonHelper {
 
@@ -30,11 +34,14 @@ class SearchPreferenceButtonHelper {
 	}
 
 	private void showSearchPreferenceFragment() {
-		final SearchPreferenceFragments searchPreferenceFragments =
-				new SearchPreferenceFragments(
-						createSearchConfiguration(),
-						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
-		searchPreferenceFragments.showSearchPreferenceFragment();
+		createSearchPreferenceFragments().showSearchPreferenceFragment();
+	}
+
+	private SearchPreferenceFragments createSearchPreferenceFragments() {
+		return new SearchPreferenceFragments(
+				createSearchConfiguration(),
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
+				createFragmentFactory());
 	}
 
 	private SearchConfiguration createSearchConfiguration() {
@@ -42,5 +49,21 @@ class SearchPreferenceButtonHelper {
 				fragmentContainerViewId,
 				Optional.empty(),
 				rootSearchPreferenceFragment.getClass());
+	}
+
+	private static IFragmentFactory createFragmentFactory() {
+		return new IFragmentFactory() {
+
+			@Override
+			public Fragment instantiate(final Context context, final String fragmentClassName) {
+				return Fragment.instantiate(context, fragmentClassName, createArguments());
+			}
+
+			private Bundle createArguments() {
+				final Bundle bundle = new Bundle();
+				bundle.putBoolean(BaseSettingsFragment.CONFIGURE_PREFERENCE_SEARCH, true);
+				return bundle;
+			}
+		};
 	}
 }
