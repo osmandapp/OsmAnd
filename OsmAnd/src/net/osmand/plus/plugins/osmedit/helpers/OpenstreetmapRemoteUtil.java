@@ -442,8 +442,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		} catch (IOException | NullPointerException | XmlPullParserException e) {
 			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
-					Toast.LENGTH_LONG).show();
+			ctx.runInUIThread(() -> Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show());
 		}
 		return null;
 	}
