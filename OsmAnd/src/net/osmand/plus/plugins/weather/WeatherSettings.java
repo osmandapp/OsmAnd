@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.weather;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.plugins.weather.units.CloudUnit;
 import net.osmand.plus.plugins.weather.units.PrecipitationUnit;
 import net.osmand.plus.plugins.weather.units.PressureUnit;
@@ -26,6 +27,7 @@ public class WeatherSettings {
 
 	public final OsmandPreference<Boolean> weatherEnabled;
 
+	public final OsmandPreference<String> weatherSource;
 	public final OsmandPreference<Boolean> weatherContoursEnabled;
 	public final OsmandPreference<Integer> weatherContoursTransparency;
 	public final EnumStringPreference<WeatherContour> weatherContoursType;
@@ -71,6 +73,7 @@ public class WeatherSettings {
 
 		weatherEnabled = settings.registerBooleanPreference("weatherEnabled", true).makeProfile();
 
+		weatherSource = settings.registerStringPreference("weatherSource", WeatherSource.Companion.getDefaultSource().getSettingValue()).makeProfile();
 		weatherContoursEnabled = settings.registerBooleanPreference("weatherContoursEnabled", true).makeProfile();
 		weatherContoursTransparency = settings.registerIntPreference("weatherContoursTransparency", DEFAULT_TRANSPARENCY).makeProfile();
 		weatherContoursType = (EnumStringPreference<WeatherContour>) settings.registerEnumStringPreference(

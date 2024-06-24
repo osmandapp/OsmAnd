@@ -12,7 +12,6 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_NOTHING;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_CLOUD_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR;
@@ -31,7 +30,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -59,7 +57,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
-import net.osmand.plus.plugins.weather.widgets.CustomWeatherWidget;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -468,6 +466,14 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public boolean isContoursEnabled() {
 		return weatherSettings.weatherContoursEnabled.get();
+	}
+
+	public WeatherSource getWeatherSource() {
+		return WeatherSource.Companion.getWeatherSourceBySettingsValue(weatherSettings.weatherSource.get());
+	}
+
+	public void setWeatherSource(WeatherSource source) {
+		weatherSettings.weatherSource.set(source.getSettingValue());
 	}
 
 	public boolean isAnyWeatherContourLinesEnabled() {
