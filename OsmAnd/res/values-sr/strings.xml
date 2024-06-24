@@ -1019,7 +1019,7 @@
     <string name="routing_attr_short_way_name">Пут који штеди гориво</string>
     <string name="replace_favorite_confirmation">Замените омиљеног %1$s\?</string>
     <string name="rendering_attr_hideOverground_name">Надземне грађевине</string>
-    <string name="shared_string_change">Измени</string>
+    <string name="shared_string_change">Промени</string>
     <string name="get_started">Почнимо</string>
     <string name="route_stops_before">%1$s стајања пре</string>
     <string name="coords_search">Претрага координата</string>
@@ -5758,4 +5758,11 @@
     <string name="remove_key_assignment">Уклони додељивање тастера</string>
     <string name="daynight_mode_app_theme_summary">Приказ мапе је у складу са општом темом апликације — дневни режим за светлу тему и ноћни режим за тамну тему</string>
     <string name="key_event_action_continuous_zoom_in">Континуирано увећавање</string>
+    <string name="weather_data_sources_prompt">ОсмАнд пружа временске податке из два извора:</string>
+    <string name="weather_source_ecmwf_description">Европски Центар за средњерочне временске прогнозе</string>
+    <string name="weather_source_GFS_description">Глобални систем прогнозе Националног центра за предвиђање животне средине</string>
+    <string name="weather_source_ecmwf_title">ЕЦМВП</string>
+    <string name="weather_source_GFS_title">ГФС</string>
+    <string name="data_source">Извор података</string>
+    <string name="shared_string_modify">Измени</string>
 </resources>
