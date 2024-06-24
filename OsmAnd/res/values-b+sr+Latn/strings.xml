@@ -5767,4 +5767,11 @@
     <string name="remove_key_assignment_summary">Dodela ključa za odabranu akciju biće uklonjena.</string>
     <string name="daynight_mode_app_theme_summary">Prikaz mape usklađen je s celokupnom temom aplikacije—dnevni način rada za svetlu temu i noćni način rada za tamnu temu</string>
     <string name="daynight_mode_sensor_summary">Koristi svetlosni senzor uređaja za prebacivanje između svetlih i tamnih tema u skladu s nivom ambijentalnog osvetljenja.</string>
+    <string name="shared_string_modify">Promeni</string>
+    <string name="weather_data_sources_prompt">OsmAnd pruža vremenske podatke iz dva izvora:</string>
+    <string name="weather_source_ecmwf_description">Evropski Centar za srednjeročne vremenske prognoze</string>
+    <string name="weather_source_GFS_description">Globalni sistem prognoze Nacionalnog centra za predviđanje životne sredine</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Izvor podataka</string>
 </resources>
