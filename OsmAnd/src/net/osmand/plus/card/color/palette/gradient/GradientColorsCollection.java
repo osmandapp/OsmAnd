@@ -82,6 +82,7 @@ public class GradientColorsCollection extends ColorsCollection {
 	protected void loadColorsInLastUsedOrder() throws IOException {
 		Map<String, Integer> loadedPreference = readPaletteColorsPreference();
 
+		long now = System.currentTimeMillis();
 		for (String key : gradientPalettes.keySet()) {
 			Pair<ColorPalette, Long> pair = gradientPalettes.get(key);
 			if (pair != null) {
@@ -90,7 +91,7 @@ public class GradientColorsCollection extends ColorsCollection {
 				String paletteId = createGradientPaletteId(type, key);
 				Integer index = loadedPreference.get(paletteId);
 				if (index == null) index = (int) creationTime;
-				lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, creationTime, index));
+				lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
 			}
 		}
 	}
