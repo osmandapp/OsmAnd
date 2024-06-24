@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="data_source">Data Source</string>
+    <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
+    <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
+    <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
     <string name="daynight_mode_app_theme_summary">The map\'s display aligns with the app\'s overall theme—day mode for a light theme and night mode for a dark theme</string>
     <string name="daynight_mode_sensor_summary">Uses the device\'s light sensor to toggle between light and dark themes according to ambient light levels.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automatically switches between day and night themes based on local sunrise and sunset times.</string>

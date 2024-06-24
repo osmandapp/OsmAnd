@@ -393,6 +393,12 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 		ImageView optionButton = view.findViewById(R.id.action_button);
 		optionButton.setImageDrawable(getIcon(R.drawable.ic_action_settings_outlined, ColorUtilities.getPrimaryIconColorId(nightMode)));
+		optionButton.setVisibility(View.VISIBLE);
+		optionButton.setOnClickListener((v) -> onOptionBtnClicked());
+	}
+
+	private void onOptionBtnClicked() {
+		SelectWeatherSourceBottomSheet.showInstance(requireMapActivity().getSupportFragmentManager(), this);
 	}
 
 	private void setupWeatherButtons(@NonNull View view) {
