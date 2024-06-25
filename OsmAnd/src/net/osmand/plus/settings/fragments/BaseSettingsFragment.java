@@ -110,6 +110,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	// FK-TODO: finde alle Stellen, an denen man für die Suche etwas weglassen und dadurch hoffentlich schneller sein kann.
 	private boolean configurePreferenceSearch = false;
 
 	@Override

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
 import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.preferencesearch.fragment.IFragmentFactory;
+import de.KnollFrank.lib.preferencesearch.fragment.FragmentFactory;
 
 class SearchPreferenceButtonHelper {
 
@@ -51,11 +51,11 @@ class SearchPreferenceButtonHelper {
 				rootSearchPreferenceFragment.getClass());
 	}
 
-	private static IFragmentFactory createFragmentFactory() {
-		return new IFragmentFactory() {
+	private static FragmentFactory createFragmentFactory() {
+		return new FragmentFactory() {
 
 			@Override
-			public Fragment instantiate(final Context context, final String fragmentClassName) {
+			public Fragment instantiate(final String fragmentClassName, final Context context) {
 				return Fragment.instantiate(context, fragmentClassName, createArguments());
 			}
 
