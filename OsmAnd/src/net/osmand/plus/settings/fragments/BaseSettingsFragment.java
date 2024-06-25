@@ -215,6 +215,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onResume() {
 		super.onResume();
+		if(configurePreferenceSearch) {
+			return;
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -240,7 +243,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onPause() {
 		super.onPause();
-
+		if(configurePreferenceSearch) {
+			return;
+		}
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
@@ -256,6 +261,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onDetach() {
 		super.onDetach();
+		if(configurePreferenceSearch) {
+			return;
+		}
 		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
