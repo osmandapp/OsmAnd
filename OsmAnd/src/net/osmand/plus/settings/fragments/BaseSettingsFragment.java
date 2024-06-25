@@ -119,6 +119,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
+		configurePreferenceSearch = args != null && args.getBoolean(CONFIGURE_PREFERENCE_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
@@ -130,7 +131,6 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 		}
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
-		configurePreferenceSearch = args.getBoolean(CONFIGURE_PREFERENCE_SEARCH, false);
 	}
 
 	@Override
