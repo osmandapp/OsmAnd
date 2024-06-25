@@ -26,9 +26,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class GradientColorsCollection extends ColorsCollection {
 
@@ -59,7 +61,7 @@ public class GradientColorsCollection extends ColorsCollection {
 
 	@NonNull
 	public List<PaletteColor> getPaletteColors() {
-		return getColors(PaletteSortingMode.ORIGINAL);
+		return getColors(PaletteSortingMode.LAST_USED_TIME);
 	}
 
 	@NonNull
@@ -71,7 +73,7 @@ public class GradientColorsCollection extends ColorsCollection {
 	public PaletteGradientColor getDefaultGradientPalette() {
 		for (PaletteColor paletteColor : getPaletteColors()) {
 			PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
-			if (gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME)) {
+			if (Objects.equals(gradientColor.getPaletteName(), PaletteGradientColor.DEFAULT_NAME)) {
 				return gradientColor;
 			}
 		}
@@ -80,26 +82,42 @@ public class GradientColorsCollection extends ColorsCollection {
 
 	@Override
 	protected void loadColorsInLastUsedOrder() throws IOException {
-		Map<String, Integer> loadedPreference = readPaletteColorsPreference();
+		Set<String> addedPaletteIds = new HashSet<>();
+		List<Pair<String, Integer>> loadedPreference = readPaletteColorsPreference();
 
+		// Firstly collect all items those already have last used order
 		long now = System.currentTimeMillis();
+		for (Pair<String, Integer> pair : loadedPreference) {
+			String paletteId = pair.first;
+			Integer index = pair.second;
+			String paletteName = PaletteGradientColor.getPaletteName(paletteId);
+			Pair<ColorPalette, Long> paletteInfo = gradientPalettes.get(paletteName);
+			if (paletteInfo != null) {
+				addedPaletteIds.add(paletteId);
+				ColorPalette palette = paletteInfo.first;
+				lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
+			}
+		}
+		// Collect all new palette files, those are not in cache
 		for (String key : gradientPalettes.keySet()) {
 			Pair<ColorPalette, Long> pair = gradientPalettes.get(key);
 			if (pair != null) {
 				ColorPalette palette = pair.first;
 				long creationTime = pair.second;
-				String paletteId = createGradientPaletteId(type, key);
-				Integer index = loadedPreference.get(paletteId);
-				if (index == null) index = (int) creationTime;
-				lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
+				String paletteId = createGradientPaletteId(key, type);
+				if (!addedPaletteIds.contains(paletteId)) {
+					addedPaletteIds.add(paletteId);
+					int index = (int) creationTime;
+					lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
+				}
 			}
 		}
 	}
 
 	@NonNull
-	private HashMap<String, Integer> readPaletteColorsPreference() {
+	private List<Pair<String, Integer>> readPaletteColorsPreference() {
 		String jsonAsString = preference.get();
-		HashMap<String, Integer> res = new HashMap<>();
+		List<Pair<String, Integer>> res = new ArrayList<>();
 
 		if (!Algorithms.isEmpty(jsonAsString)) {
 			try {
@@ -112,12 +130,12 @@ public class GradientColorsCollection extends ColorsCollection {
 	}
 
 	@NonNull
-	private static HashMap<String, Integer> readFromJson(@NonNull JSONObject json,
-	                                                     @NonNull String type) throws JSONException {
+	private static List<Pair<String, Integer>> readFromJson(@NonNull JSONObject json,
+	                                                        @NonNull String type) throws JSONException {
 		if (!json.has(type)) {
-			return new HashMap<>();
+			return new ArrayList<>();
 		}
-		HashMap<String, Integer> res = new HashMap<>();
+		List<Pair<String, Integer>> res = new ArrayList<>();
 
 		JSONArray typeGradients = json.getJSONArray(type);
 		for (int i = 0; i < typeGradients.length(); i++) {
@@ -125,7 +143,7 @@ public class GradientColorsCollection extends ColorsCollection {
 				JSONObject itemJson = typeGradients.getJSONObject(i);
 				String id = itemJson.getString(ATTR_ID);
 				int index = itemJson.getInt(ATTR_INDEX);
-				res.put(id, index);
+				res.add(new Pair<>(id, index));
 			} catch (JSONException e) {
 				LOG.debug("Error while reading a palette color from JSON ", e);
 			}

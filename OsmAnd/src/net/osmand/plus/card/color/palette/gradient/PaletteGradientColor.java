@@ -38,13 +38,18 @@ public class PaletteGradientColor extends PaletteColor {
 	}
 
 	@NonNull
+	public String getTypeName() {
+		return getTypeName(getStringId());
+	}
+
+	@NonNull
 	public String getPaletteName() {
 		return getPaletteName(getStringId());
 	}
 
 	@NonNull
-	public String getTypeName(){
-		String[] splitId = getStringId().split(GRADIENT_ID_SPLITTER);
+	public static String getTypeName(@NonNull String stringId){
+		String[] splitId = stringId.split(GRADIENT_ID_SPLITTER);
 		return splitId[0].toLowerCase();
 	}
 

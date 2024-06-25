@@ -100,6 +100,7 @@ public abstract class ColorsCollection {
 		if (paletteColor != null) {
 			lastUsedOrder.remove(paletteColor);
 			lastUsedOrder.add(0, paletteColor);
+			saveColors();
 		}
 	}
 
