@@ -20,8 +20,11 @@ public final class AisObjectConstants {
     public final static double INVALID_LON = 181.0;
     public final static double INVALID_ROT = 128.0;
     public final static double INVALID_DRAUGHT = 0.0;
+    public final static double INVALID_TCPA = -10000.0d;
+    public final static float INVALID_CPA = -1.0f;
 
-    public enum AisObjType {
+
+    public static enum AisObjType {
         AIS_VESSEL,
         AIS_VESSEL_SPORT,
         AIS_VESSEL_FAST,

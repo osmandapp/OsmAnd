@@ -561,7 +561,7 @@ public class AisObject {
                 loc.setBearing((float)ais_cog);
             }
             if (ais_sog != INVALID_SOG) {
-                loc.setSpeed((float)ais_sog);
+                loc.setSpeed((float)(ais_sog * 3600 / 1852)); // in m/s
             }
             if (ais_altitude != INVALID_ALTITUDE) {
                 loc.setAltitude((float)ais_altitude);
