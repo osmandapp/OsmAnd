@@ -2217,8 +2217,8 @@
     <string name="select_street">Seleziona la strada</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
-    <string name="animate_my_location">Simula la mia posizione</string>
-    <string name="animate_my_location_desc">Panoramica fluida della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
+    <string name="animate_my_location">Scorrimento uniforme della mappa</string>
+    <string name="animate_my_location_desc">Scorrimento fluido della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
     <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
