@@ -143,24 +143,23 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		if (view != null) {
-			if (getPreferenceScreen() != null && currentScreenType != null) {
-				PreferenceManager prefManager = getPreferenceManager();
-				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
-				if (prefManager.setPreferences(preferenceScreen)) {
-					setupPreferences();
-					registerPreferences(preferenceScreen);
-				}
-			} else {
-				updateAllSettings();
+		if (getPreferenceScreen() != null && currentScreenType != null) {
+			PreferenceManager prefManager = getPreferenceManager();
+			PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
+			if (prefManager.setPreferences(preferenceScreen)) {
+				setupPreferences();
+				registerPreferences(preferenceScreen);
 			}
-			if (!configurePreferenceSearch) {
-				createToolbar(inflater, view);
-			}
-			setDivider(null);
-			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		} else {
+			updateAllSettings();
 		}
+		if (configurePreferenceSearch) {
+			return view;
+		}
+		createToolbar(inflater, view);
+		setDivider(null);
+		view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		return view;
 	}
 
@@ -175,14 +174,11 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		_updateToolbar();
-	}
-
-	private void _updateToolbar() {
-		if (!configurePreferenceSearch) {
-			updateToolbar();
+		if (configurePreferenceSearch) {
+			return;
 		}
+		super.onViewCreated(view, savedInstanceState);
+		updateToolbar();
 	}
 
 	@Override
@@ -366,7 +362,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			recreate();
 		} else {
 			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
-			_updateToolbar();
+			if (!configurePreferenceSearch) {
+				updateToolbar();
+			}
 			updateAllSettings();
 		}
 	}
