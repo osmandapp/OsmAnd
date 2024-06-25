@@ -106,7 +106,6 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		if (activity != null && !activity.isChangingConfigurations()) {
 			controller.askCancelOnlineCalculation();
 			app.getDialogManager().unregister(PROCESS_ID);
-			// app.getRoutingHelper().onSettingsChanged(true); // recalculate route
 		}
 	}
 
