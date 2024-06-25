@@ -119,7 +119,8 @@ public class WidgetsSettingsHelper {
 				}
 
 				if (!Algorithms.isEmpty(widgetIdToAdd)) {
-					widgetInfoToCopy.widget.copySettingsFromMode(fromAppMode, appMode, widgetIdToAdd);
+					String customId = !widgetIdToAdd.equals(defaultWidgetInfo.key) ? widgetIdToAdd : null;
+					widgetInfoToCopy.widget.copySettingsFromMode(fromAppMode, appMode, customId);
 
 					if (previousPage != widgetInfoToCopy.pageIndex || newPagedOrder.size() == 0) {
 						previousPage = widgetInfoToCopy.pageIndex;
