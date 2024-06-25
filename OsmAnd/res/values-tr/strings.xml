@@ -5407,7 +5407,7 @@
     <string name="lang_zh_hans">Basitleştirilmiş Çince</string>
     <string name="required_maps">Gerekli Haritalar</string>
     <string name="maps_that_also_be_used">Ayrıca kullanılacak haritalar: %1$s</string>
-    <string name="missing_maps_header">Haritalar eksik veya güncel değil</string>
+    <string name="missing_maps_header">Eksik veya güncel olmayan haritalar</string>
     <string name="getting_list_of_required_maps">Gerekli haritaların listesi alınıyor…</string>
     <string name="use_terrain_maps">Arazi haritalarını kullan</string>
     <string name="bottom">Alt</string>
@@ -5460,4 +5460,17 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="map_text">Harita metinleri</string>
     <string name="routing_attr_avoid_cobblestone_description">Parke taşlarından kaçının</string>
+    <string name="release_4_8">• 4.8 için hazırlanacak</string>
+    <string name="required_maps_calculate_online_summary">Eksik haritaların listesi düz çizgi rotasına dayanmaktadır. Doğru bir harita listesi elde etmek için OsmAnd rotanızı çevrimiçi olarak önceden hesaplayabilir.</string>
+    <string name="route_line_use_coloring_speed">Rota çizgisi hareket hızına göre renklendirilmiştir.</string>
+    <string name="track_vertical_exaggeration_description">Ölçek değerini değiştirerek 3D iz yüksekliğini değiştirebilirsiniz.</string>
+    <string name="visualized_by">Görselleştiren</string>
+    <string name="track_line">Yol hattı</string>
+    <string name="title_3d_track">3D hattı</string>
+    <string name="explore_3d_track_description">Pisti interaktif 3D olarak keşfedin! Yükseklik, hız ve daha fazlasını doğrudan harita üzerinde görselleştirin.</string>
+    <string name="missing_maps_description">Bu rota için gerekli olan bazı çevrimdışı haritalar eksik veya güncel değil. Lütfen bu haritaları indirin veya güncelleyin.</string>
+    <string name="route_line_use_coloring_altitude">Rota çizgisi rakım yüksekliğine göre renklendirilmiştir.</string>
+    <string name="downward_gradient">Aşağı doğru eğim</string>
+    <string name="upward_gradient">Yukarı doğru eğim</string>
+    <string name="fixed_height">Sabit yükseklik</string>
 </resources>
