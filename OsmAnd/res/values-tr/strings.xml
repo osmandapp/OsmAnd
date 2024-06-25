@@ -5459,4 +5459,5 @@
     <string name="missing_maps_ignore_details">Rotanız için indirdiğiniz haritalar uygun olabilir. Eğer bölgeye ve haritaya tanıdık iseniz, yönlendirmeyi var olan haritaları kullanarak yapmayı deneyebilirsiniz.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="map_text">Harita metinleri</string>
+    <string name="routing_attr_avoid_cobblestone_description">Parke taşlarından kaçının</string>
 </resources>
