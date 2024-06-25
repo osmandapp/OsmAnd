@@ -5742,4 +5742,22 @@
     <string name="backup_error_failed_to_transfer_file">Il trasferimento file è fallito.</string>
     <string name="play_weather_forecast">Riproduci previsioni meteo</string>
     <string name="missing_maps_ignore">Usa le mappe già installate</string>
+    <string name="tomorrow">Domani</string>
+    <string name="daynight_mode_night_summary">Visualizza sempre la mappa con un tema scuro, adatto alle ore notturne o alle condizioni di scarsa illuminazione.</string>
+    <string name="daynight_mode_day_summary">Visualizza sempre la mappa con un tema chiaro, ideale per la visibilità diurna.</string>
+    <string name="daynight_mode_app_theme_summary">La visualizzazione della mappa si allinea al tema generale dell\'app: modalità giorno per un tema chiaro e modalità notturna per un tema scuro</string>
+    <string name="daynight_mode_sensor_summary">Utilizza il sensore di luce del dispositivo per alternare i temi chiari e scuri in base ai livelli di luce ambientale.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Passa automaticamente dai temi diurni a quelli notturni in base agli orari locali di alba e tramonto.</string>
+    <string name="remove_key_assignment">Rimuovi l\'assegnazione dei tasti</string>
+    <string name="map_settings_weather_wind_animation">Animazione del vento</string>
+    <string name="daynight_mode_app_theme">Tema dell\'applicazione</string>
+    <string name="remove_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà rimossa.</string>
+    <string name="weather_data_sources_prompt">OsmAnd fornisce dati meteorologici da due fonti:</string>
+    <string name="data_source">Fonte dati</string>
+    <string name="weather_source_ecmwf_description">Centro Europeo per le Previsioni Meteorologiche a Medio Termine</string>
+    <string name="weather_source_GFS_description">Sistema di previsione globale dei Centri Nazionali di Previsione Ambientale</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Modifica</string>
+    <string name="missing_maps_ignore_details">Alcune mappe già scaricate potrebbero essere adatte al tuo percorso. Se hai familiarità con l\'area e le mappe, puoi provare il percorso utilizzando le mappe esistenti.</string>
 </resources>
