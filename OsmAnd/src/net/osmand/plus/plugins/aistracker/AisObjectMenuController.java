@@ -7,9 +7,11 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -32,6 +34,39 @@ public class AisObjectMenuController extends MenuController {
         builder.setShowNearestWiki(false);
         // TODO: show an icon in the menu
     }
+    private float getOwnSpeed(@Nullable OsmAndLocationProvider locationProvider) {
+        if (locationProvider != null) {
+            Location myLocation = locationProvider.getLastKnownLocation();
+            if (myLocation != null) {
+                if (myLocation.hasSpeed()) {
+                    return myLocation.getSpeed();
+                }
+            }
+        }
+        return 0.0f;
+    }
+    private float getOwnBearing(@Nullable OsmAndLocationProvider locationProvider) {
+        if (locationProvider != null) {
+            Location myLocation = locationProvider.getLastKnownLocation();
+            if (myLocation != null) {
+                if (myLocation.hasBearing()) {
+                    return myLocation.getBearing();
+                }
+            }
+        }
+        return 0.0f;
+    }
+    /*
+    private String getOwnLocationAsString(@Nullable OsmAndLocationProvider locationProvider) {
+        if (locationProvider != null) {
+            Location myLocation = locationProvider.getLastKnownLocation();
+            if (myLocation != null) {
+                return myLocation.toString();
+            }
+        }
+        return null;
+    }
+     */
 
     private void addMenuItem(@NonNull String type, @Nullable String value) {
         if (value != null) {
@@ -79,8 +114,9 @@ public class AisObjectMenuController extends MenuController {
                     LocationConvert.convertLatitude(position.getLatitude(), FORMAT_MINUTES, true) +
                           ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
-                float distance = aisObject.getDistanceInNauticalMiles(app.getLocationProvider());
-                float bearing = aisObject.getBearing(app.getLocationProvider());
+                OsmAndLocationProvider locationProvider = app.getLocationProvider();
+                float distance = aisObject.getDistanceInNauticalMiles(locationProvider);
+                float bearing = aisObject.getBearing(locationProvider);
                 if (distance >= 0.0f) {
                     try {
                         addMenuItem("Distance",  String.format("%.1f nm", distance));
@@ -91,6 +127,12 @@ public class AisObjectMenuController extends MenuController {
                         addMenuItem("Bearing", String.format("%.1f", bearing));
                     } catch (Exception ignore) { }
                 }
+                /*
+                // test:
+                addMenuItem("# loc", getOwnLocationAsString(locationProvider));
+                addMenuItem("# ownSpeed", Float.toString(getOwnSpeed(locationProvider)));
+                addMenuItem("# ownBearing", Float.toString(getOwnBearing(locationProvider)));
+                 */
             }
         }
         if (msgTypes.contains(21)) { // ATON (aid to navigation)
@@ -175,7 +217,26 @@ public class AisObjectMenuController extends MenuController {
 
     @NonNull
     @Override
-    public String getTypeStr() {  return "AIS object";  }
+    public String getTypeStr() {
+        String res = "";
+        SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
+        for (Integer i : new Integer[]{5, 19, 24}) {
+            if (msgTypes.contains(i)) {
+                res += aisObject.getShipTypeString();
+                break;
+            }
+        }
+        for (Integer i : new Integer[]{1, 2, 3}) {
+            if (msgTypes.contains(i)) {
+                if (res.isEmpty()) {
+                    res = "Vessel";
+                }
+                res += ": " + aisObject.getNavStatusString() + ".";
+                break;
+            }
+        }
+        return (res.isEmpty() ? "AIS object" : res);
+    }
 
     @Override
     public boolean needStreetName() { return false; }
