@@ -80,6 +80,10 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
+		copyPrefFromAppMode(settings.POSITION_PLACEMENT_ON_MAP, fromAppMode);
+		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
+		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
+		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
 		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
 	}
 
@@ -115,6 +119,8 @@ public class WidgetsSettingsHelper {
 				}
 
 				if (!Algorithms.isEmpty(widgetIdToAdd)) {
+					widgetInfoToCopy.widget.copySettingsFromMode(fromAppMode, appMode, widgetIdToAdd);
+
 					if (previousPage != widgetInfoToCopy.pageIndex || newPagedOrder.size() == 0) {
 						previousPage = widgetInfoToCopy.pageIndex;
 						newPagedOrder.add(new ArrayList<>());
