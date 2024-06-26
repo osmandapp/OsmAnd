@@ -17,15 +17,6 @@ body:
           - label: OsmAnd's in-app offline routing
             required: true
           - label: Any online routing provider (YOURS, openrouteservice, OSRM, etc.)
-    -   type: textarea
-        id: describe-the-routing-engine
-        attributes:
-            label: Describe the routing engine used (required)
-            description: Which routing provider was used?
-            value: |
-                <!-- (please tick the proper box [x]) -->
-                - [ ] OsmAnd's in-app offline routing
-                - [ ] Any online routing provider (YOURS, openrouteservice, OSRM, etc.)
         validations:
             required: true
     -   type: textarea
@@ -40,10 +31,7 @@ body:
         attributes:
             label: Start and end points
             description: |
-                Please specify (as exactly as possible) the start and endpoint of your route by telling us 
-                the city and street name so that we can find it via the in-app address search easily.
-                Also, a permalink from [openstreetmap.org](https://www.openstreetmap.org/) can be helpful.
-                You may also provide the route as link to the [osmand.net/map](https://osmand.net/map/).
+                Please specify the start and endpoint of your route by providing the city and street name for easy in-app address search. A permalink from [OpenStreetMap.org](https://www.openstreetmap.org/) or a route link from o[osmand.net/map](https://osmand.net/map/) can also be helpful.
         validations:
             required: true
     -   type: textarea
