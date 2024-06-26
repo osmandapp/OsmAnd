@@ -79,6 +79,7 @@ public class MapModeFragment extends ConfigureMapOptionFragment implements IDial
 		IconRadioItem radioItem = new IconRadioItem(mode.getDefaultIcon());
 		radioItem.setSelectedIconId(mode.getSelectedIcon())
 				.setTag(mode)
+				.setContentDescription(mode.toHumanString(app))
 				.setOnClickListener((item, v) -> {
 					if (controller.askSelectMapTheme((DayNightMode) item.requireTag())) {
 						updateAfterThemeSelected();

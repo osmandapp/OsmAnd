@@ -12,6 +12,7 @@ public class RadioItem {
 	private OnRadioItemClickListener listener;
 	@ColorInt
 	private Integer customColor;
+	private String contentDescription;
 	private Object tag;
 
 	public boolean isEnabled() {
@@ -57,6 +58,17 @@ public class RadioItem {
 	@NonNull
 	public RadioItem setCustomColor(@ColorInt @Nullable Integer customColor) {
 		this.customColor = customColor;
+		return this;
+	}
+
+	@Nullable
+	public String getContentDescription() {
+		return contentDescription;
+	}
+
+	@NonNull
+	public RadioItem setContentDescription(@Nullable String contentDescription) {
+		this.contentDescription = contentDescription;
 		return this;
 	}
 
