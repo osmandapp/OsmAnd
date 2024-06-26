@@ -2803,7 +2803,7 @@
     <string name="shared_string_degrees">Graus</string>
     <string name="angular_measeurement">Unidade angular</string>
     <string name="angular_measeurement_descr">Mudar em que o azimute é medido.</string>
-    <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para a navegação:</string>
+    <string name="avoid_pt_types_descr">Selecionar tipos de transportes públicos a evitar para a navegação:</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="shared_string_walk">A pé</string>
@@ -3718,7 +3718,7 @@
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="street_level_imagery">Imagens das ruas</string>
     <string name="plan_route_exit_dialog_descr">Descartar todas as alterações na rota planeada\?</string>
-    <string name="in_case_of_reverse_direction">Na direção inversa</string>
+    <string name="in_case_of_reverse_direction">Em caso de inversão de direção</string>
     <string name="shared_string_gpx_route">Rota de trilho</string>
     <string name="shared_string_gpx_files">Trilhos</string>
     <string name="marker_save_as_track">Guardar como ficheiro de trilho</string>
@@ -5331,7 +5331,7 @@
     <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
     <string name="routing_attr_hazmat_category_usa_7_name">Substâncias radioativas</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
-    <string name="dangerous_goods_description">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
+    <string name="dangerous_goods_description">Em algumas estradas e túneis, o transporte de materiais perigosos é proibido.</string>
     <string name="write_bearing_description">Guardar a direção em cada ponto do trilho durante a gravação</string>
     <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
     <string name="rendering_value_sacScale_name">SAC</string>
@@ -5754,4 +5754,24 @@
     <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \"Adicionar\".</string>
     <string name="action_icon">Ícone da ação</string>
     <string name="assigned_keys">Teclas atribuídas</string>
+    <string name="missing_maps_ignore_details">É possível que alguns mapas já descarregados sejam adequados para o seu percurso. Se estiver familiarizado com a zona e os mapas, pode tentar fazer o percurso utilizando os mapas existentes.</string>
+    <string name="daynight_mode_app_theme_summary">O ecrã do mapa ajusta-se ao tema geral da aplicação - modo dia para um tema claro e modo noite para um tema escuro</string>
+    <string name="daynight_mode_sensor_summary">Utiliza o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Muda automaticamente entre temas diurnos e noturnos com base nas horas locais do nascer e do pôr do sol.</string>
+    <string name="daynight_mode_night_summary">Apresenta sempre o mapa num tema escuro, adequado para condições noturnas ou de fraca luminosidade.</string>
+    <string name="daynight_mode_day_summary">Apresenta sempre o mapa num tema claro, ideal para a visibilidade durante o dia.</string>
+    <string name="daynight_mode_app_theme">Tema da aplicação</string>
+    <string name="key_event_action_continuous_zoom_out">Diminuição contínua da ampliação</string>
+    <string name="key_event_action_continuous_zoom_in">Aumento contínuo da ampliação</string>
+    <string name="remove_key_assignment_summary">A atribuição da tecla para a ação selecionada será removida.</string>
+    <string name="remove_key_assignment">Remover atribuição de tecla</string>
+    <string name="map_settings_weather_wind_animation">Animação do vento</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="data_source">Fonte de dados</string>
+    <string name="weather_data_sources_prompt">OsmAnd fornece a previsão meteorológica de duas fontes:</string>
+    <string name="weather_source_ecmwf_description">Centro Europeu de Previsão do Tempo a Médio Prazo</string>
+    <string name="weather_source_GFS_description">Sistema de Previsão Global dos Centros Nacionais de Previsão Ambiental</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Alterar</string>
 </resources>
