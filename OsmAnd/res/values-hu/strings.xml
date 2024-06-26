@@ -5766,4 +5766,5 @@
     <string name="weather_source_GFS_description">Az amerikai Nemzeti Környezeti Előrejelző Központok adatait felhasználó Globális Előrejelzési Rendszer</string>
     <string name="weather_source_ecmwf_description">Középtávú Időjárás-előrejelzések Európai Központja</string>
     <string name="shared_string_modify">Módosít</string>
+    <string name="missing_maps_ignore_details">Néhány már letöltött térkép megfelelő lehet az útvonalhoz. Ha ismeri a környéket és a térképeket, megpróbálhatja az útvonaltervezést a meglévő térképek használatával.</string>
 </resources>
