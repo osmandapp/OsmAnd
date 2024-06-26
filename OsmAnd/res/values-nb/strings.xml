@@ -5557,4 +5557,12 @@
     <string name="missing_maps_ignore">Bruk eksisterende kart</string>
     <string name="map_settings_weather_wind_animation">Vindanimasjon</string>
     <string name="tomorrow">I morgen</string>
+    <string name="use_nearby_roads">Bruk veier i nærheten</string>
+    <string name="download_cloud_versions">Last ned skyversjoner</string>
+    <string name="shared_string_key">Tast</string>
+    <string name="round_up">Avrund oppover</string>
+    <string name="data_source">Datakilde</string>
+    <string name="weather_data_sources_prompt">OsmAnd tilbyr værdata fra to kilder:</string>
+    <string name="shared_string_modify">Endre</string>
+    <string name="action_icon">Handlingsikon</string>
 </resources>
