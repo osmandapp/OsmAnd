@@ -11,7 +11,7 @@ body:
     - type: checkboxes
       id: routing-engine
       attributes:
-        label: Describe the routing engine used (required)
+        label: Routing engine
         description: Which routing provider was used?
         options:
           - label: OsmAnd's in-app offline routing
