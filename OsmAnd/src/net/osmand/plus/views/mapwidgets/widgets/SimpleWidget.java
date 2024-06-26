@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
@@ -209,6 +210,13 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	@Nullable
 	protected String getWidgetName() {
 		return widgetType != null ? getString(widgetType.titleId) : null;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		if (widgetState != null) {
+			widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+		}
 	}
 
 	@Nullable
