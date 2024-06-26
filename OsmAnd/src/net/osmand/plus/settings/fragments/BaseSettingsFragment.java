@@ -150,20 +150,22 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 		}
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-		if (getPreferenceScreen() != null && currentScreenType != null) {
-			PreferenceManager prefManager = getPreferenceManager();
-			PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
-			if (prefManager.setPreferences(preferenceScreen)) {
-				setupPreferences();
-				registerPreferences(preferenceScreen);
+		if (view != null) {
+			if (getPreferenceScreen() != null && currentScreenType != null) {
+				PreferenceManager prefManager = getPreferenceManager();
+				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
+				if (prefManager.setPreferences(preferenceScreen)) {
+					setupPreferences();
+					registerPreferences(preferenceScreen);
+				}
+			} else {
+				updateAllSettings();
 			}
-		} else {
-			updateAllSettings();
+			createToolbar(inflater, view);
+			setDivider(null);
+			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
-		createToolbar(inflater, view);
-		setDivider(null);
-		view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		return view;
 	}
 
@@ -374,9 +376,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			recreate();
 		} else {
 			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
-			if (!configurePreferenceSearch) {
-				updateToolbar();
-			}
+			updateToolbar();
 			updateAllSettings();
 		}
 	}
