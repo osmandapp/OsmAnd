@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="240dp"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -63,9 +64,5 @@
 		android:layout_marginTop="@dimen/context_menu_subtitle_margin"
 		android:textColor="?android:textColorSecondary"
 		tools:text="Sunrise – 05:22, sunset – 20:28" />
-	
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/content_padding_small" />
 
 </LinearLayout>

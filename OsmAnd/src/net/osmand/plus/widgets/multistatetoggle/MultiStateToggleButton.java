@@ -174,6 +174,10 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 				borderBackgroundView.setBackground(layerDrawable);
 				updateItemView(button, item, false, itemColor);
 			}
+			String contentDescription = item.getContentDescription();
+			if (contentDescription != null) {
+				button.setContentDescription(contentDescription);
+			}
 			Drawable selectedDrawable = UiUtilities.getColoredSelectableDrawable(app, selectedBgColor, BACKGROUND_ALPHA);
 			borderBackgroundView.setForeground(selectedDrawable);
 		}
