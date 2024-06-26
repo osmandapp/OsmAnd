@@ -5765,4 +5765,5 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
+    <string name="missing_maps_ignore_details">Неке већ преузете мапе могу бити прикладне за вашу руту. Ако сте упознати са подручјем и мапама, можете покушати са рутирањем користећи постојеће мапе.</string>
 </resources>
