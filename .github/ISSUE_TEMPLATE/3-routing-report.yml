@@ -17,8 +17,6 @@ body:
           - label: OsmAnd's in-app offline routing
             required: true
           - label: Any online routing provider (YOURS, openrouteservice, OSRM, etc.)
-        validations:
-            required: true
     -   type: textarea
         id: describe-the-routing-profile
         attributes:
