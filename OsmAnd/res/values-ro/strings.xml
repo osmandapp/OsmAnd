@@ -5764,4 +5764,11 @@
     <string name="tomorrow">Mâine</string>
     <string name="daynight_mode_sensor_summary">Utilizează senzorul de lumină al dispozitivului pentru a comuta între temele luminoase și întunecate în funcție de nivelul luminii ambientale.</string>
     <string name="map_settings_weather_wind_animation">Animația vântului</string>
+    <string name="data_source">Sursa datelor</string>
+    <string name="weather_source_GFS_description">Sistemul de prognoză globală de la Centrele naționale pentru prognoza mediului</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="weather_data_sources_prompt">OsmAnd furnizează date meteorologice din două surse:</string>
+    <string name="weather_source_ecmwf_description">Centrul european pentru prognoze meteorologice pe termen mediu</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="shared_string_modify">Modifică</string>
 </resources>

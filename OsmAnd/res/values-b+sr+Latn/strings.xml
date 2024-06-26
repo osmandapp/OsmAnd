@@ -5110,7 +5110,7 @@
     <string name="help_article_start_with_first_steps_name">Početni koraci</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gasovi</string>
     <string name="dangerous_goods_description">Na nekim putevima i tunelima prevoz opasnih materije je zabranjen.</string>
-    <string name="dangerous_goods">Opasne materije</string>
+    <string name="dangerous_goods">Opasna roba</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Brzina kretanja</string>
     <string name="shared_string_apply_changes">Primeni izmene</string>
