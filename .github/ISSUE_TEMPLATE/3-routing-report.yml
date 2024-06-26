@@ -3,7 +3,7 @@ description: Report a routing issue in OsmAnd
 labels: [ ]
 assignees: [ ]
 body:
-    -   type: markdown
+    - type: markdown
         attributes:
             value: |
                 Before creating an issue, please search for existing open issues.
