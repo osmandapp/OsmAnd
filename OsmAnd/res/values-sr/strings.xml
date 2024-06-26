@@ -3396,7 +3396,7 @@
     <string name="shared_string_routing">Навођење</string>
     <string name="shared_string_app_default_w_val">Подразумевано у програму (%s)</string>
     <string name="no_recalculation_setting">Без прерачунавања</string>
-    <string name="route_recalculation_dist_title">Најмања удаљеност за прерачунавање пута</string>
+    <string name="route_recalculation_dist_title">Минимална удаљеност за поновно израчунавање руте</string>
     <string name="route_recalculation_dist_descr">Пут ће бити прерачунат ако је удаљеност до пута већа од одабране одреднице</string>
     <string name="profile_type_custom_string">Произвољни налог</string>
     <string name="shared_string_angle_param">Угао: %s°</string>
