@@ -110,7 +110,6 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
-	// FK-TODO: finde alle Stellen, an denen man für die Suche etwas weglassen und dadurch hoffentlich schneller sein kann.
 	private boolean configurePreferenceSearch = false;
 
 	@Override
@@ -136,11 +135,19 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		getPreferenceManager().setPreferenceDataStore(settings.getDataStore(getSelectedAppMode()));
+		if (configurePreferenceSearch) {
+			currentScreenType = getCurrentScreenType();
+			updateTheme();
+			updatePreferencesScreen();
+		}
 	}
 
 	@Override
 	@SuppressLint("RestrictedApi")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (configurePreferenceSearch) {
+			return super.onCreateView(inflater, container, savedInstanceState);
+		}
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (getPreferenceScreen() != null && currentScreenType != null) {
@@ -152,9 +159,6 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			}
 		} else {
 			updateAllSettings();
-		}
-		if (configurePreferenceSearch) {
-			return view;
 		}
 		createToolbar(inflater, view);
 		setDivider(null);
