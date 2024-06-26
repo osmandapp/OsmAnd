@@ -95,7 +95,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
-	public static final String CONFIGURE_PREFERENCE_SEARCH = "configurePreferenceSearch";
+	public static final String OPTIMIZE_PERFORMANCE_FOR_PREFERENCE_SEARCH = "optimizePerformanceForPreferenceSearch";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -110,7 +110,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
-	private boolean configurePreferenceSearch = false;
+	private boolean optimizePerformanceForPreferenceSearch = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,7 +118,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
-		configurePreferenceSearch = args != null && args.getBoolean(CONFIGURE_PREFERENCE_SEARCH, false);
+		optimizePerformanceForPreferenceSearch = args != null && args.getBoolean(OPTIMIZE_PERFORMANCE_FOR_PREFERENCE_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
@@ -135,7 +135,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		getPreferenceManager().setPreferenceDataStore(settings.getDataStore(getSelectedAppMode()));
-		if (configurePreferenceSearch) {
+		if (optimizePerformanceForPreferenceSearch) {
 			currentScreenType = getCurrentScreenType();
 			updateTheme();
 			updatePreferencesScreen();
@@ -145,7 +145,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	@SuppressLint("RestrictedApi")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (configurePreferenceSearch) {
+		if (optimizePerformanceForPreferenceSearch) {
 			return super.onCreateView(inflater, container, savedInstanceState);
 		}
 		updateTheme();
@@ -180,10 +180,10 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		if (configurePreferenceSearch) {
+		super.onViewCreated(view, savedInstanceState);
+		if (optimizePerformanceForPreferenceSearch) {
 			return;
 		}
-		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
 	}
 
@@ -221,7 +221,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(configurePreferenceSearch) {
+		if(optimizePerformanceForPreferenceSearch) {
 			return;
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -249,7 +249,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onPause() {
 		super.onPause();
-		if(configurePreferenceSearch) {
+		if(optimizePerformanceForPreferenceSearch) {
 			return;
 		}
 		Activity activity = getActivity();
@@ -267,7 +267,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if(configurePreferenceSearch) {
+		if(optimizePerformanceForPreferenceSearch) {
 			return;
 		}
 		if (getStatusBarColorId() != -1) {
