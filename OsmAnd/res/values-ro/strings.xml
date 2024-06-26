@@ -5771,4 +5771,5 @@
     <string name="weather_source_ecmwf_description">Centrul european pentru prognoze meteorologice pe termen mediu</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="shared_string_modify">Modifică</string>
+    <string name="missing_maps_ignore_details">Unele hărți deja descărcate ar putea fi potrivite pentru traseul dumneavoastră. Dacă sunteți familiarizat cu zona și hărțile, puteți încerca să folosiți hărțile existente.</string>
 </resources>
