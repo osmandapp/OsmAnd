@@ -1035,7 +1035,7 @@
     <string name="osmand_parking_minutes">Minuta</string>
     <string name="osmand_parking_hours">Časova</string>
     <string name="route_updated_loc_found">Čekam poziciju za izračunavanje rute</string>
-    <string name="continue_follow_previous_route_auto">Nastavi prethodno nezavršeno navođenje? (%1$s sekundi)</string>
+    <string name="continue_follow_previous_route_auto">Nastavljaš započetu rutu? (%1$s sekundi)</string>
     <string name="avoid_toll_roads">Naplata putarina</string>
     <string name="show_traffic_warnings">Szanje na putevima</string>
     <string name="show_cameras">Kamere za merenje brzine</string>
@@ -5774,4 +5774,5 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
+    <string name="missing_maps_ignore_details">Neke preuzete mape mogle bi biti prikladnije za rutu. Ako si upoznat s područjem i mapama, možeš pokušati odrediti rutu koristeći postojeće mape.</string>
 </resources>

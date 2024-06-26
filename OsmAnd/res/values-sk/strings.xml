@@ -5743,4 +5743,24 @@
     <string name="key_assignment_add_action">Pridať akciu</string>
     <string name="assigned_keys">Priradené klávesy</string>
     <string name="missing_maps_ignore">Použiť existujúce mapy</string>
+    <string name="daynight_mode_app_theme_summary">Zobrazenie mapy sa prispôsobuje všeobecnej téme aplikácie — denný režim pre svetlú tému a nočný režim pre tmavú tému</string>
+    <string name="daynight_mode_sensor_summary">Použije svetelný senzor zariadenia na prepnutie medzi svetlou a tmavou témou podľa úrovne okolitého svetla.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automaticky prepne medzi dennou a nočnou témou podľa východu a západu slnka na danom mieste.</string>
+    <string name="daynight_mode_night_summary">Vždy zobrazí mapu v tmavej téme, vhodnej pre noc a podmienky so slabým osvetlením.</string>
+    <string name="key_event_action_continuous_zoom_in">Sústavné približovanie</string>
+    <string name="remove_key_assignment_summary">Priradenie klávesu pre zvolenú akciu bude odstránené.</string>
+    <string name="remove_key_assignment">Odstrániť priradenie klávesu</string>
+    <string name="map_settings_weather_wind_animation">Animácia vetra</string>
+    <string name="tomorrow">Zajtra</string>
+    <string name="daynight_mode_day_summary">Vždy zobrazí mapu v svetlej téme, vhodnej pre viditeľnosť počas dňa.</string>
+    <string name="daynight_mode_app_theme">Téma aplikácie</string>
+    <string name="key_event_action_continuous_zoom_out">Sústavné odďaľovanie</string>
+    <string name="weather_data_sources_prompt">OsmAnd poskytuje údaje o počasí z dvoch zdrojov:</string>
+    <string name="weather_source_ecmwf_description">Európske centrum strednodobých predpovedí počasia</string>
+    <string name="shared_string_modify">Upraviť</string>
+    <string name="missing_maps_ignore_details">Niektoré už stiahnuté mapy môžu byť vhodné pre vašu trasu. Ak poznáte oblasť a tieto mapy, môžete skúsiť navigovať pomocou existujúcich máp.</string>
+    <string name="data_source">Zdroj údajov</string>
+    <string name="weather_source_GFS_description">Globálny systém predpovedí z národných centier predpovedí životného prostredia</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
 </resources>
