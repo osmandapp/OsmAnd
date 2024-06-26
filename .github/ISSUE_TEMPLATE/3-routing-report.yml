@@ -1,89 +1,89 @@
-name: 🚩 Routing report
-description: Report a routing issue in OsmAnd
-labels: [ ]
-assignees: [ ]
+name: "🚩 Routing report"
+description: "Report a routing issue in OsmAnd"
+labels: []
+assignees: []
 body:
-    - type: markdown
-        attributes:
-            value: |
-                Before creating an issue, please search for existing open issues.
-                For effective assistance, provide detailed information following the template below to help us reproduce your issue.
-    - type: checkboxes
-      id: routing-engine
-      attributes:
-        label: Describe the routing engine used (required)
-        description: Which routing provider was used?
-        options:
-          - label: OsmAnd's in-app offline routing
-            required: true
-          - label: Any online routing provider (YOURS, openrouteservice, OSRM, etc.)
-        validations:
-            required: true
-    -   type: textarea
-        id: describe-the-routing-profile
-        attributes:
-            label: Routing Profile
-            description: What routing profile is chosen in the OsmAnd app (car, bike, pedestrian, fastest or shortest, etc.)? Have you enabled any restrictions (e.g. avoid toll roads)?
-        validations:
-            required: true
-    -   type: textarea
-        id: describe-the-start-end
-        attributes:
-            label: Start and end points
-            description: |
-                Please specify the start and endpoint of your route by providing the city and street name for easy in-app address search. A permalink from [OpenStreetMap.org](https://www.openstreetmap.org/) or a route link from o[osmand.net/map](https://osmand.net/map/) can also be helpful.
-        validations:
-            required: true
-    -   type: textarea
-        id: describe-actual
-        attributes:
-            label: Actual route
-            description: |
-                Tell us how OsmAnd routes, or add screenshots here.
-        validations:
-            required: true
-    -   type: textarea
-        id: describe-expected
-        attributes:
-            label: Expected route
-            description: |
-                Tell us the expected routing, or add screenshots here.
-        validations:
-            required: true
-    -   type: textarea
-        id: describe-the-maps-used
-        attributes:
-            label: Maps you used (online or offline)
-            description: |
-                Which Maps are used for routing (online or offline)?
-                If you have an issue related to offline maps, tell us the **exact name** of the map file where the issue occurs and its **edition date**.
-            value: |
-                <!-- (please tick the proper box [x]) -->
-                - [ ] Offline maps offered within the OsmAnd app for download. <!-- Please include the **edition date** of the map -->
-                - [ ] Online (tile / raster) maps <!-- Please name it -->
-        validations:
-            required: true
-    -   type: textarea
-        id: environment
-        attributes:
-            label: Your Environment
-            description: |
-                Include as many relevant details about the environment you experienced the bug in.
-            value: |
-                ```
-                OsmAnd Version:
-                Android version:
-                Device model:
-                
-                ```
-        validations:
-            required: true
-    -   type: textarea
-        id: anything-else
-        attributes:
-            label: Anything else?
-            description: |
-                Feel free to add any other context or screenshots about this routing .
-                How are you affected? What is your goal? Anything else?
-        validations:
-            required: false
+  - type: markdown
+    attributes:
+      value: |
+        Before creating an issue, please search for existing open issues.
+        For effective assistance, provide detailed information following the template below to help us reproduce your issue.
+  - type: checkboxes
+    id: routing-engine
+    attributes:
+      label: "Describe the routing engine used (required)"
+      description: "Which routing provider was used?"
+      options:
+        - label: "OsmAnd's in-app offline routing"
+          required: true
+        - label: "Any online routing provider (YOURS, openrouteservice, OSRM, etc.)"
+    validations:
+      required: true
+  - type: textarea
+    id: describe-the-routing-profile
+    attributes:
+      label: "Routing Profile"
+      description: |
+        What routing profile is chosen in the OsmAnd app (car, bike, pedestrian, fastest or shortest, etc.)? Have you enabled any restrictions (e.g. avoid toll roads)?
+    validations:
+      required: true
+  - type: textarea
+    id: describe-the-start-end
+    attributes:
+      label: "Start and end points"
+      description: |
+        Please specify the start and endpoint of your route by providing the city and street name for easy in-app address search. A permalink from [OpenStreetMap.org](https://www.openstreetmap.org/) or a route link from [osmand.net/map](https://osmand.net/map/) can also be helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: describe-actual
+    attributes:
+      label: "Actual route"
+      description: |
+        Tell us how OsmAnd routes, or add screenshots here.
+    validations:
+      required: true
+  - type: textarea
+    id: describe-expected
+    attributes:
+      label: "Expected route"
+      description: |
+        Tell us the expected routing, or add screenshots here.
+    validations:
+      required: true
+  - type: textarea
+    id: describe-the-maps-used
+    attributes:
+      label: "Maps you used (online or offline)"
+      description: |
+        Which Maps are used for routing (online or offline)?
+        If you have an issue related to offline maps, tell us the **exact name** of the map file where the issue occurs and its **edition date**.
+      value: |
+        <!-- (please tick the proper box [x]) -->
+        - [ ] Offline maps offered within the OsmAnd app for download. <!-- Please include the **edition date** of the map -->
+        - [ ] Online (tile / raster) maps <!-- Please name it -->
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Your Environment"
+      description: |
+        Include as many relevant details about the environment you experienced the bug in.
+      value: |
+        ```
+        OsmAnd Version:
+        Android version:
+        Device model:
+        ```
+    validations:
+      required: true
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: "Anything else?"
+      description: |
+        Feel free to add any other context or screenshots about this routing.
+        How are you affected? What is your goal? Anything else?
+      validations:
+        required: false
