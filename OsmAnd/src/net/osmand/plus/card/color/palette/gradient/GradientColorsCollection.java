@@ -1,7 +1,5 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
-
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -36,7 +34,8 @@ public class GradientColorsCollection extends ColorsCollection {
 
 	private static final Log LOG = PlatformUtil.getLog(GradientColorsCollection.class);
 
-	private static final String ATTR_ID = "id";
+	private static final String ATTR_TYPE_NAME = "type_name";
+	private static final String ATTR_PALETTE_NAME = "palette_name";
 	private static final String ATTR_INDEX = "index";
 
 	private final Map<String, Pair<ColorPalette, Long>> gradientPalettes;
@@ -83,19 +82,20 @@ public class GradientColorsCollection extends ColorsCollection {
 	@Override
 	protected void loadColorsInLastUsedOrder() throws IOException {
 		Set<String> addedPaletteIds = new HashSet<>();
-		List<Pair<String, Integer>> loadedPreference = readPaletteColorsPreference();
+		List<GradientData> loadedPreference = readPaletteColorsPreference();
 
 		// Firstly collect all items those already have last used order
 		long now = System.currentTimeMillis();
-		for (Pair<String, Integer> pair : loadedPreference) {
-			String paletteId = pair.first;
-			Integer index = pair.second;
-			String paletteName = PaletteGradientColor.getPaletteName(paletteId);
+		for (GradientData gradientData : loadedPreference) {
+			int index = gradientData.index;
+			String typeName = gradientData.typeName;
+			String paletteName = gradientData.paletteName;
 			Pair<ColorPalette, Long> paletteInfo = gradientPalettes.get(paletteName);
 			if (paletteInfo != null) {
-				addedPaletteIds.add(paletteId);
 				ColorPalette palette = paletteInfo.first;
-				lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
+				PaletteGradientColor gradientColor = new PaletteGradientColor(typeName, paletteName, palette, now++, index);
+				lastUsedOrder.add(gradientColor);
+				addedPaletteIds.add(gradientColor.getStringId());
 			}
 		}
 		// Collect all new palette files, those are not in cache
@@ -104,20 +104,20 @@ public class GradientColorsCollection extends ColorsCollection {
 			if (pair != null) {
 				ColorPalette palette = pair.first;
 				long creationTime = pair.second;
-				String paletteId = createGradientPaletteId(key, type);
-				if (!addedPaletteIds.contains(paletteId)) {
-					addedPaletteIds.add(paletteId);
-					int index = (int) creationTime;
-					lastUsedOrder.add(new PaletteGradientColor(paletteId, palette, now++, index));
+				PaletteGradientColor gradientColor = new PaletteGradientColor(type, key, palette, now++, (int) creationTime);
+				String id = gradientColor.getStringId();
+				if (!addedPaletteIds.contains(id)) {
+					lastUsedOrder.add(gradientColor);
+					addedPaletteIds.add(id);
 				}
 			}
 		}
 	}
 
 	@NonNull
-	private List<Pair<String, Integer>> readPaletteColorsPreference() {
+	private List<GradientData> readPaletteColorsPreference() {
 		String jsonAsString = preference.get();
-		List<Pair<String, Integer>> res = new ArrayList<>();
+		List<GradientData> res = new ArrayList<>();
 
 		if (!Algorithms.isEmpty(jsonAsString)) {
 			try {
@@ -130,20 +130,21 @@ public class GradientColorsCollection extends ColorsCollection {
 	}
 
 	@NonNull
-	private static List<Pair<String, Integer>> readFromJson(@NonNull JSONObject json,
-	                                                        @NonNull String type) throws JSONException {
+	private static List<GradientData> readFromJson(@NonNull JSONObject json,
+	                                               @NonNull String type) throws JSONException {
 		if (!json.has(type)) {
 			return new ArrayList<>();
 		}
-		List<Pair<String, Integer>> res = new ArrayList<>();
+		List<GradientData> res = new ArrayList<>();
 
 		JSONArray typeGradients = json.getJSONArray(type);
 		for (int i = 0; i < typeGradients.length(); i++) {
 			try {
 				JSONObject itemJson = typeGradients.getJSONObject(i);
-				String id = itemJson.getString(ATTR_ID);
+				String typeName = itemJson.getString(ATTR_TYPE_NAME);
+				String paletteName = itemJson.getString(ATTR_PALETTE_NAME);
 				int index = itemJson.getInt(ATTR_INDEX);
-				res.add(new Pair<>(id, index));
+				res.add(new GradientData(typeName, paletteName, index));
 			} catch (JSONException e) {
 				LOG.debug("Error while reading a palette color from JSON ", e);
 			}
@@ -182,15 +183,23 @@ public class GradientColorsCollection extends ColorsCollection {
 		for (PaletteColor paletteColor : paletteColors) {
 			PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
 			JSONObject itemObject = new JSONObject();
-			itemObject.put(ATTR_ID, gradientColor.getStringId());
+			itemObject.put(ATTR_TYPE_NAME, gradientColor.getTypeName());
+			itemObject.put(ATTR_PALETTE_NAME, gradientColor.getPaletteName());
 			itemObject.put(ATTR_INDEX, gradientColor.getIndex());
 			jsonArray.put(itemObject);
 		}
 		jsonObject.put(type, jsonArray);
 	}
 
-	@NonNull
-	private String createGradientPaletteId(@NonNull String paletteName, @NonNull String colorizationName) {
-		return colorizationName + GRADIENT_ID_SPLITTER + paletteName;
+	private static class GradientData {
+		private final String typeName;
+		private final String paletteName;
+		private final int index;
+
+		public GradientData(@NonNull String typeName, @NonNull String paletteName, int index) {
+			this.typeName = typeName;
+			this.paletteName = paletteName;
+			this.index = index;
+		}
 	}
 }

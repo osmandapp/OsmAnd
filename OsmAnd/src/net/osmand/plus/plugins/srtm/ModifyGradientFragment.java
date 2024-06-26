@@ -32,8 +32,6 @@ import java.util.Map;
 
 public class ModifyGradientFragment extends ConfigureMapOptionFragment implements IColorCardControllerListener {
 
-	private static final String TAG = ModifyGradientFragment.class.getSimpleName();
-
 	private static final String TYPE = "type";
 	private static final String ORIGINAL_MODE = "original_mode";
 	private static final String SELECTED_MODE = "selected_mode";
