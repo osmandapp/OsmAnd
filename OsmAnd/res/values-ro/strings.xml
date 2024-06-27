@@ -5094,7 +5094,7 @@
     <string name="token_is_not_valid">Tokenul nu este valid</string>
     <string name="app_mode_climbing">Escaladare</string>
     <string name="free_maps_updates">Actualizări gratuite (de urgență)</string>
-    <string name="offline_weather_forecast">Prognoza meteo offline</string>
+    <string name="offline_weather_forecast">Prognoză meteo offline</string>
     <string name="offline_weather_forecast_desc">Puteți descărca prognoza meteo pentru 7 zile.</string>
     <string name="generate_slope_from_3d_maps">Generarea de hărți raster de pantă din hărți 3D</string>
     <string name="enable_3d_maps">Activează hărțile 3D</string>
@@ -5105,7 +5105,7 @@
     <string name="disable_vertex_hillshade_3d">Dezactivare vertexuri relief umbrit în 3D</string>
     <string name="common_weight_limit_error">Valoarea minimă este \"%1$s\" %2$s. Utilizați profilul \"%3$s\" dacă greutatea vehiculului este mai mică decât valoarea minimă.</string>
     <string name="weather_forecast_is_outdated">Prognoza este veche.</string>
-    <string name="weather_forecast">Prognoza meteo</string>
+    <string name="weather_forecast">Prognoză meteo</string>
     <string name="app_mode_moped">Moped</string>
     <string name="select_layer">Selectează stratul</string>
     <string name="rendering_value_defaultMedium_name">Predefinit (medium)</string>
