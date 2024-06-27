@@ -19,8 +19,8 @@ public class NavAddFirstIntermediateAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_ADD_FIRST_INTERMEDIATE_ACTION_ID,
 			"nav.intermediate.add", NavAddFirstIntermediateAction.class).
-			nameRes(R.string.quick_action_add_first_intermediate).iconRes(R.drawable.ic_action_intermediate).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			nameRes(R.string.quick_action_first_intermediate).iconRes(R.drawable.ic_action_intermediate).nonEditable().
+			category(QuickActionType.NAVIGATION).nameActionRes(R.string.shared_string_add);
 
 	public NavAddFirstIntermediateAction() {
 		super(TYPE);

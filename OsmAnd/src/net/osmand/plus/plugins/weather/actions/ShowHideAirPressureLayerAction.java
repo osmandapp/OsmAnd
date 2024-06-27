@@ -11,10 +11,10 @@ public class ShowHideAirPressureLayerAction extends BaseWeatherQuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_AIR_PRESSURE_LAYER_ACTION_ID,
 			"pressure.layer.showhide", ShowHideAirPressureLayerAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.pressure_layer)
 			.iconRes(R.drawable.ic_action_air_pressure).nonEditable()
-			.category(QuickActionType.WEATHER);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideAirPressureLayerAction() {
 		super(TYPE);

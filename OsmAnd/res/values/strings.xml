@@ -10,7 +10,40 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="quick_action_location_by_gpx">Location by GPX</string>
+    <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
+    <string name="quick_action_directions_from">Start point</string>
+    <string name="quick_action_destination">Destination</string>
+    <string name="quick_action_remove_next_destination">Next destination point</string>
+    <string name="quick_action_to_my_location">To My Location</string>
+    <string name="quick_action_move_map_left">Map to the left</string>
+    <string name="quick_action_move_map_right">Map to the right</string>
+    <string name="quick_action_move_map_down">Map down</string>
+    <string name="quick_action_move_map_up">Map up</string>
+    <string name="quick_action_new_route">New route</string>
+    <string name="quick_action_previous_app_profile">App profile to previous</string>
+    <string name="quick_action_next_app_profile">App profile to next</string>
+    <string name="app_profile">App profile</string>
+    <string name="shared_string_set">Set</string>
+    <string name="shared_string_create">Create</string>
+    <string name="shared_string_replace">Replace</string>
+    <string name="shared_string_simulate">Simulate</string>
+    <string name="quick_action_display_position_in_center">Display position always in center</string>
+    <string name="quick_action_terrain">Terrain colorization type</string>
+    <string name="quick_action_map_underlay">Underlay</string>
+    <string name="quick_action_map_overlay">Overlay</string>
+    <string name="quick_action_map_style">Map style</string>
+    <string name="quick_action_first_intermediate">First intermediate</string>
+    <string name="quick_action_audio_note">Audio note</string>
+    <string name="quick_action_video_note">Video note</string>
+    <string name="quick_action_photo_note">Photo note</string>
+    <string name="quick_action_track_waypoint">Track waypoint</string>
+    <string name="quick_action_parking_place">Parking place</string>
+    <string name="quick_action_verb_show_hide">Show / Hide</string>
+    <string name="quick_action_verb_pause_resume">Pause / Resume</string>
+    <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Weather screen</string>
     <string name="data_source">Data Source</string>
     <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
     <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
@@ -1877,7 +1910,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="follow_track">Follow track</string>
     <string name="marker_save_as_track">Save as track file</string>
     <string name="map_widget_monitoring">Trip recording</string>
-    <string name="quick_action_add_gpx">Add track waypoint</string>
     <string name="context_menu_item_add_waypoint">Add track waypoint</string>
     <string name="empty_state_my_tracks_desc">Import or record track files</string>
     <string name="empty_state_my_tracks">Add track files</string>
@@ -1932,7 +1964,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Control the map-zoom level using the volume buttons on the device.</string>
-    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
@@ -3139,9 +3170,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="quick_action_auto_zoom_desc">Button to turn speed-controlled auto-zooming on or off.</string>
     <string name="quick_action_auto_zoom_on">Turn on auto-zooming</string>
     <string name="quick_action_auto_zoom_off">Turn off auto-zooming</string>
-    <string name="quick_action_add_destination">Set destination</string>
-    <string name="quick_action_replace_destination">Replace destination</string>
-    <string name="quick_action_add_first_intermediate">Add first intermediate</string>
     <string name="quick_action_add_destination_desc">A button to make the screen center the route destination, a previously selected destination would become the last intermediate destination.</string>
     <string name="quick_action_directions_from_desc">A button to make the screen center the point of departure. Will then ask to set destination or trigger the route calculation.</string>
     <string name="quick_action_replace_destination_desc">A button to make the screen center the new route destination, replacing the previously selected destination (if any).</string>
@@ -5528,21 +5556,12 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
-    <string name="quick_action_add_marker">Add map marker</string>
-    <string name="quick_action_add_poi">Add POI</string>
-    <string name="quick_action_map_style">Change map style</string>
     <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
-    <string name="quick_action_take_audio_note">New audio note</string>
-    <string name="quick_action_take_video_note">New video note</string>
-    <string name="quick_action_take_photo_note">New photo note</string>
-    <string name="quick_action_add_osm_bug">Add OSM Note</string>
     <string name="quick_action_navigation_voice">Voice on/off</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
-    <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_new_action">Add action</string>
     <string name="quick_action_edit_action">Edit action</string>
-    <string name="quick_action_add_favorite">Add Favorite</string>
     <string name="dialog_add_action_title">Add action</string>
     <string name="quick_actions_delete">Delete action</string>
     <string name="quick_actions_delete_text">Delete the \"%s\" action?</string>
@@ -5584,15 +5603,12 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="quick_action_map_style_action">Add a map style</string>
     <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_styles">Map styles</string>
-    <string name="quick_action_map_overlay">Change map overlay</string>
     <string name="quick_action_map_overlay_title">Map overlays</string>
     <string name="quick_action_map_overlay_action">Add overlay</string>
     <string name="quick_action_map_overlay_switch">Map overlay changed to \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Map underlay changed to \"%s\".</string>
-    <string name="quick_action_map_underlay">Change map underlay</string>
     <string name="quick_action_map_underlay_title">Map underlays</string>
     <string name="quick_action_map_underlay_action">Add underlay</string>
-    <string name="quick_action_map_source">Change map source</string>
     <string name="quick_action_map_source_title">Map sources</string>
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_switch">Map source changed to \"%s\".</string>

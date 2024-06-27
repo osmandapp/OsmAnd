@@ -61,9 +61,10 @@ import java.io.File;
 public class GPXAction extends QuickAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(GPX_ACTION_ID, "gpx.add", GPXAction.class)
-			.nameRes(R.string.quick_action_add_gpx)
+			.nameRes(R.string.quick_action_track_waypoint)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
-			.category(QuickActionType.TRACKS);
+			.category(QuickActionType.MY_PLACES)
+			.nameActionRes(R.string.shared_string_add);
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
