@@ -2976,7 +2976,6 @@
     <string name="share_link">Препратка за споделяне</string>
     <string name="value_downloaded_of_mb">Изтегляне на %1$.1f/%2$.1f</string>
     <string name="weight_limit_error">Минималната стойност е „%1$s“ тона. Използвайте профила „%2$s“, ако теглото на превозното средство е по-малко от минималната стойност.</string>
-    <string name="quick_action_add_parking">Добавяне на място за паркиране</string>
     <string name="routing_attr_goods_restrictions_name">Доставка на стоки</string>
     <string name="empty_screen_weather_contours">Включете, за да видите контурите на времето на картата.</string>
     <string name="empty_screen_weather_pressure_layer">Включете, за да видите слой с атмосферното налягане на картата.</string>
@@ -3030,7 +3029,6 @@
     <string name="weather_precip_mm">мм</string>
     <string name="weather_widget_group_desc">Набор от приспособления с различна информация за прогнозата.</string>
     <string name="sound_beep_simple">Звуков сигнал: обикновен</string>
-    <string name="quick_action_map_style">Промяна на стила на картата</string>
     <string name="quick_action_map_style_switch">Стилът на картата е променен на „%s“.</string>
     <string name="route_line_use_map_style_width">Използване на подразбираната ширина на стила на картата (%1$s).</string>
     <string name="general_settings_profile_descr">Тема на приложението, единици, регион</string>
@@ -3082,7 +3080,6 @@
     <string name="rendering_attr_surface_asphalt_name">Асфалт</string>
     <string name="rendering_attr_highway_class_motorway_name">Автомагистрала</string>
     <string name="rendering_attr_highway_class_state_road_name">Главен път</string>
-    <string name="quick_action_add_gpx">Добавяне на отправна точка към трасе</string>
     <string name="external_device_low_battery">Изтощена батерия</string>
     <string name="metric_lbs">лири</string>
     <string name="shared_string_apply_changes">Прилагане на промените</string>
@@ -3161,7 +3158,6 @@
     <string name="cloud_recent_changes">Промени</string>
     <string name="deleted_file">Премахнат файл</string>
     <string name="waypoint_template">Шаблон за отправни точки</string>
-    <string name="quick_action_remove_next_destination">Премахване на следващото местоназначение</string>
     <string name="nav_profile_confirm_delete">Сигурни ли сте, че желаете да премахнете „%1$s“?</string>
     <string name="external_device_characteristic_gear_ratio">Съотношение на предавките</string>
     <string name="sort_date_ascending">Първо по-пресните</string>
@@ -3388,7 +3384,6 @@
     <string name="radius_rules_widget_desc">Инструментът „Линия за радиуси“ показва окръжности с разстояния около избрана точка от картата.</string>
     <string name="use_volume_buttons_as_zoom_descr">Променяйте увеличението на картата от бутоните за сила на звука.</string>
     <string name="in_case_of_reverse_direction">При направление в обратна посока</string>
-    <string name="quick_action_map_overlay">Променяне на насложената карта</string>
     <string name="location_simulation_speedup">Скорост на симулация</string>
     <string name="distance_by_tap_use_description">Докоснете картата, за да видите разстоянието между текущото местоположение и докоснатата точка.
 \nДокоснете с 2 пръста картата, за да видите разстоянието между докоснатите точки</string>

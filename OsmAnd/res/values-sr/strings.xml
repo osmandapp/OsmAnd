@@ -1256,10 +1256,7 @@
     <string name="quick_action_auto_zoom_desc">Дугме за укључивање/искључивање брзинско контролисаног аутозумирања мапе.</string>
     <string name="quick_action_auto_zoom_on">Укључи аутозумирање</string>
     <string name="quick_action_auto_zoom_off">Искључи аутозумирање</string>
-    <string name="quick_action_add_destination">Постави одредиште</string>
-    <string name="quick_action_replace_destination">Замени одредиште</string>
     <string name="quick_action_add_destination_desc">Дугме за центрирање одредишта на средину заслона, а свако претходно означено одредиште ће постати последња међутачка.</string>
-    <string name="quick_action_add_first_intermediate">Додај прву пролазну међутачку</string>
     <string name="quick_action_replace_destination_desc">Дугме које центрира ново одредиште на средину заслона, и замењује претходно означено одредиште (ако постоји).</string>
     <string name="no_overlay">Без слоја над картом</string>
     <string name="quick_action_add_first_intermediate_desc">Дугме за центрирање положаја заслона на прву међутачку ка одредишту.</string>
@@ -1332,7 +1329,6 @@
     <string name="download_hillshade_maps">Сенчење</string>
     <string name="offline_edition">Уређивање ван мреже</string>
     <string name="quick_action_new_action">Додај радњу</string>
-    <string name="quick_action_add_favorite">Додај омиљено</string>
     <string name="what_is_here">Овде су:</string>
     <string name="parked_at">остављена у</string>
     <string name="pick_up_till">Покупити до</string>
@@ -2180,17 +2176,10 @@
     <string name="configure_screen_quick_action">Брзе радње</string>
     <string name="quick_action_item_action">Радња %d</string>
     <string name="quick_action_item_screen">Заслон %d</string>
-    <string name="quick_action_add_poi">Додај тачку занимања</string>
-    <string name="quick_action_map_style">Измени начин приказа карте</string>
     <string name="quick_action_map_style_switch">Начин приказа карте је измењен на „%s“.</string>
-    <string name="quick_action_take_audio_note">Нова звучна белешка</string>
-    <string name="quick_action_take_video_note">Нова белешка видеа</string>
-    <string name="quick_action_take_photo_note">Нова сликовна белешка</string>
-    <string name="quick_action_add_osm_bug">Додај белешку ОСМ-а</string>
     <string name="quick_action_navigation_voice">Укљ/искљ глас</string>
     <string name="quick_action_navigation_voice_off">Укључи глас</string>
     <string name="quick_action_navigation_voice_on">Искључи глас</string>
-    <string name="quick_action_add_parking">Додај место паркирања</string>
     <string name="dialog_add_action_title">Додај радњу</string>
     <string name="quick_actions_delete">Обриши радњу</string>
     <string name="quick_actions_delete_text">Обрисати радњу „%s“\?</string>
@@ -2210,7 +2199,6 @@
     <string name="quick_action_map_style_action">Додај начин приказа карте</string>
     <string name="quick_action_empty_param_error">Попуните све одреднице</string>
     <string name="quick_action_map_styles">Начини приказа карте</string>
-    <string name="quick_action_map_source">Измени извор карте</string>
     <string name="quick_action_map_source_title">Додај извор карте</string>
     <string name="quick_action_map_source_action">Додај извор карте</string>
     <string name="quick_action_map_source_switch">Извор карте промењен на „%s“.</string>
@@ -2272,14 +2260,11 @@
     <string name="update_all">Освежи све (%1$s MB)</string>
     <string name="poi_context_menu_modify_osm_change">Промени измену ОСМ-а</string>
     <string name="last_map_change">Последња измена карте: %s</string>
-    <string name="quick_action_add_marker">Додај ознаку на карти</string>
     <string name="quick_action_fav_name_descr">Оставите празно да се користи адреса или име места.</string>
-    <string name="quick_action_map_overlay">Измени слој над картом</string>
     <string name="quick_action_map_overlay_title">Слојеви изнад карте</string>
     <string name="quick_action_map_overlay_action">Додај слој над картом</string>
     <string name="quick_action_map_overlay_switch">Слој изнад картом промењен на „%s“.</string>
     <string name="quick_action_map_underlay_switch">Слој испод карте промењен на „%s“.</string>
-    <string name="quick_action_map_underlay">Измени слој испод карте</string>
     <string name="quick_action_map_underlay_title">Слојеви испод карте</string>
     <string name="quick_action_map_underlay_action">Додај слој испод карте</string>
     <string name="day_off_label">искљ.</string>
@@ -3657,7 +3642,6 @@
 \n
 \n%2$s: су ступњеви при којима ће изворне плочице бити видљиве, а умањење или увећање биће изван ових вредности.</string>
     <string name="lenght_limit_description">Унесите дужину возила, нека ограничења пута могу бити примењена за дужа возила.</string>
-    <string name="quick_action_remove_next_destination">Обриши следећу одредишну тачку</string>
     <string name="please_provide_point_name_error">Молимо одредите име тачке</string>
     <string name="quick_action_remove_next_destination_descr">Уклања тренутну одредишну тачку. Ако је она и завршна тачка, навођење ће се зауставити.</string>
     <string name="search_download_wikipedia_maps">Преузмите карте Википедије</string>
@@ -3711,7 +3695,6 @@
     <string name="empty_state_my_tracks">Додај датотеке трагова</string>
     <string name="empty_state_my_tracks_desc">Увези или сними датотеке трагова</string>
     <string name="context_menu_item_add_waypoint">Додај тачку трага</string>
-    <string name="quick_action_add_gpx">Додај тачку трага</string>
     <string name="map_widget_monitoring">Снимање путовања</string>
     <string name="marker_save_as_track">Сачувај као датотеку трага</string>
     <string name="follow_track">Следи траг</string>

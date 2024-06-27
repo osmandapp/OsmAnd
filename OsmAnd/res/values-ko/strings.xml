@@ -2805,7 +2805,6 @@
     <string name="external_sensors_plugin_description">외부 센서에 액세스하여 심박수, 자전거 속도, 사이클링 파워 또는 케이던스 등을 읽습니다. 장치가 ANT+ 무선 개인 네트워크 프로토콜을 통해 각 센서에 연결되어 있어야 합니다.</string>
     <string name="shared_string_identifiers">활동추적</string>
     <string name="custom_search">사용자 지정 검색</string>
-    <string name="quick_action_add_favorite">즐겨찾기 추가</string>
     <string name="auto_backup_title">자동-백업</string>
     <string name="shared_string_weather">날씨</string>
     <string name="explore_weather_forecast">일기 예보를 탐색하십시오.</string>
@@ -4082,7 +4081,6 @@
     <string name="compass_visible_if_map_rotated">지도가 회전된 경우 표시</string>
     <string name="shared_string_hidden">숨김</string>
     <string name="development">개발</string>
-    <string name="quick_action_add_gpx">트랙 웨이 포인트 추가</string>
     <string name="step_by_step">턴-바이-턴</string>
     <string name="routeInfo_road_types_name">도로 유형</string>
     <string name="developer_plugin">Developer 플러그인</string>
@@ -4844,7 +4842,6 @@
     <string name="app_mode_wheelchair_forward">휠체어 앞으로</string>
     <string name="app_mode_enduro_motorcycle">엔듀로 오토바이</string>
     <string name="please_provide_point_name_error">포인트의 이름을 제공</string>
-    <string name="quick_action_remove_next_destination">다음 목적지 지점을 삭제</string>
     <string name="vessel_height_warning_link">세트 배 고도</string>
     <string name="shared_string_meters">미터</string>
     <string name="screen_timeout_descr">\"%1$s\"이 켜지면 활동 시간은 그것에 달려 있습니다.</string>
@@ -5153,12 +5150,9 @@
     <string name="quick_action_map_style_switch">맵 스타일은 \"%s\"로 변경됩니다.</string>
     <string name="quick_action_map_overlay_switch">지도 오버레이가 \"%s\"로 변경되었습니다.</string>
     <string name="last_map_change">마지막지도 변경: %s</string>
-    <string name="quick_action_map_style">지도 스타일 변경</string>
     <string name="quick_action_map_underlay_switch">지도 언레이는 \"%s\"로 변경됩니다.</string>
     <string name="change_default_appearance_confirmation">%1$s의 기본 외관 변경?</string>
     <string name="use_terrain_maps">Terrain 지도 사용</string>
-    <string name="quick_action_map_overlay">지도 overlay 변경</string>
-    <string name="quick_action_map_underlay">지도 밑줄 변경</string>
     <string name="use_nearby_roads_summary">도로 및 고도 데이터를 찾을 수있는 오프라인지도를 사용합니다. 트랙 형상을 조정할 수 있습니다.</string>
     <string name="shared_string_unchanged">변경되지 않음</string>
     <string name="allow_display_on_top">상단에 표시 허용</string>

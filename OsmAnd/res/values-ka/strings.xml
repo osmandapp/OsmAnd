@@ -1149,8 +1149,6 @@
     <string name="nearest_cities">უახლოესი ქალაქები</string>
     <string name="select_city">აირჩიეთ ქალაქი</string>
     <string name="select_postcode">საფოსტო კოდის ძებნა</string>
-    <string name="quick_action_add_destination">დანიშნულების წერტილის დაყენება</string>
-    <string name="quick_action_replace_destination">დანიშნულების წერტილის შეცვლა</string>
     <string name="subscribe_email_error">შეცდომა</string>
     <string name="fonts_header">რუკის ფონტები</string>
     <string name="parked_at">პარკირების ადგილი</string>
@@ -1944,13 +1942,11 @@
     <string name="quick_action_poi_show">%1$s-ის ჩვენება</string>
     <string name="quick_actions_delete">მოქმედების წაშლა</string>
     <string name="dialog_add_action_title">მოქმედების დამატება</string>
-    <string name="quick_action_add_favorite">რჩეულის დამატება</string>
     <string name="quick_action_edit_action">მოქმედების ჩასწორება</string>
     <string name="quick_action_new_action">მოქმედების დამატება</string>
     <string name="quick_action_navigation_voice_on">ხმის გაჩუმება</string>
     <string name="quick_action_navigation_voice_off">გაჩუმების გამორთვა</string>
     <string name="quick_action_navigation_voice">ხმის ჩართვა/გამორთვა</string>
-    <string name="quick_action_add_poi">POI-ს დამატება</string>
     <string name="quick_action_item_screen">ეკრანი %d</string>
     <string name="quick_action_item_action">მოქმედება %d</string>
     <string name="configure_screen_quick_action">სწრაფი მოქმედება</string>
@@ -2349,13 +2345,7 @@
     <string name="will_open_tomorrow_at">იღება ხვალ</string>
     <string name="winter_and_ski_renderer">ზამთარი და სრიალი</string>
     <string name="quick_action_map_source_action">რუკის წყაროს დამატება</string>
-    <string name="quick_action_map_source">რუკის წყაროს შეცვლა</string>
     <string name="quick_favorites_show_favorites_dialog">რჩეულების ჩვენება</string>
-    <string name="quick_action_add_parking">პარკინგის ადგილის დამატება</string>
-    <string name="quick_action_add_osm_bug">OSM შენიშვნის დამატება</string>
-    <string name="quick_action_take_photo_note">ახალი ფოტოშენიშვნა</string>
-    <string name="quick_action_take_video_note">ახალი ვიდეოშენიშვნა</string>
-    <string name="quick_action_take_audio_note">ახალი აუდიოშენიშვნა</string>
     <string name="osm_editing">OSM ჩასწორება</string>
     <string name="photo_notes">ფოტოშენიშვნები</string>
     <string name="video_notes">ვიდეოშენიშვნები</string>
@@ -2381,7 +2371,6 @@
     <string name="details_dialog_decr">რუკის დამატებითი დეტალების ჩვენება ან დამალვა</string>
     <string name="shared_string_uninstall_and_restart">ამოღება და რესტარტი</string>
     <string name="speed_cameras_removed_descr">მოწყობილობას სიჩქარის კამერები არ გააჩნია.</string>
-    <string name="quick_action_remove_next_destination">შემდეგი დანიშნულების პუნქტის წაშლა</string>
     <string name="use_volume_buttons_as_zoom">ხმის აწევის ღილაკებით გადიდება</string>
     <string name="please_provide_point_name_error">გთხოვთ შეიყვანოთ სახელი მითითებული წერტილისათვის</string>
     <string name="osm_edit_closed_note">OSM-ის დახურული განმარტება</string>
@@ -2394,7 +2383,6 @@
     <string name="empty_state_my_tracks">კურსის ფაილების დამატება</string>
     <string name="empty_state_my_tracks_desc">კურსის ფაილების შემოტანა ან ჩაწერა</string>
     <string name="context_menu_item_add_waypoint">კურსზე პუნქტის დამატება</string>
-    <string name="quick_action_add_gpx">კურსზე პუნქტის დამატება</string>
     <string name="marker_save_as_track">კურსის ფაილად ჩაწერა</string>
     <string name="select_another_track">სხვა კურსის დაწყება</string>
     <string name="start_of_the_track">კურსის დასაწყისი</string>
@@ -2583,8 +2571,6 @@
     <string name="navigate_point_olc">ლოკაციის კოდის გახსნა (OLC)</string>
     <string name="quick_action_btn_tutorial_title">ღილაკის მდებარეობის შეცვლა</string>
     <string name="quick_action_add_category">კატეგორიის დამატება</string>
-    <string name="quick_action_map_style">რუკის სტილის შეცვლა</string>
-    <string name="quick_action_add_marker">რუკის სანიშნის დამატება</string>
     <string name="rendering_attr_contourDensity_name">კონტურული ხაზის სიმკვრივე</string>
     <string name="rendering_attr_contourDensity_description">კონტურული ხაზის სიმკვრივე</string>
     <string name="rendering_attr_contourWidth_name">კონტურული ხაზის სიგანე</string>

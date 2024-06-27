@@ -69,10 +69,7 @@
     <string name="nearest_cities">Ближайшие города</string>
     <string name="select_city">Выберите город</string>
     <string name="select_postcode">Поиск почтового индекса</string>
-    <string name="quick_action_take_audio_note">Записать аудио</string>
-    <string name="quick_action_take_video_note">Записать видео</string>
-    <string name="quick_action_take_photo_note">Сделать фото</string>
-    <string name="quick_action_add_osm_bug">Добавить OSM-заметку</string>
+
     <string name="parking_options">Функции парковки</string>
     <string name="full_version_thanks">Благодарим вас за покупку платной версии OsmAnd.</string>
     <string name="do_not_show_startup_messages">Не показывать сообщения при запуске</string>
@@ -97,9 +94,6 @@
     <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
     <string name="quick_action_auto_zoom_on">Включить автомасштабирование</string>
     <string name="quick_action_auto_zoom_off">Выключить автомасштабирование</string>
-    <string name="quick_action_add_destination">Добавить пункт назначения</string>
-    <string name="quick_action_replace_destination">Заменить пункт назначения</string>
-    <string name="quick_action_add_first_intermediate">Первый промежуточный пункт</string>
     <string name="quick_action_add_destination_desc">Добавление нового пункта назначения в центре экрана. Ранее выбранный конечный пункт станет последним промежуточным.</string>
     <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем нужно будет выбрать пункт назначения или запустить расчёт маршрута.</string>
     <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения с заменой предыдущего (если был задан).</string>
@@ -154,15 +148,12 @@
     <string name="quick_action_sh_poi_descr">Добавьте одну или несколько категорий POI для отображения на карте.</string>
     <string name="quick_action_page_list_descr">Кнопка для переключения между элементами списка.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
-    <string name="quick_action_map_overlay">Сменить карту наложения</string>
     <string name="quick_action_map_overlay_title">Наложения</string>
     <string name="quick_action_map_overlay_action">Добавить карту наложения</string>
     <string name="quick_action_map_overlay_switch">Карта наложения изменена на «%s».</string>
     <string name="quick_action_map_underlay_switch">Карта подложки изменена на «%s».</string>
-    <string name="quick_action_map_underlay">Сменить подложку карты</string>
     <string name="quick_action_map_underlay_title">Подложки</string>
     <string name="quick_action_map_underlay_action">Добавить подложку</string>
-    <string name="quick_action_map_source">Сменить источник карты</string>
     <string name="quick_action_map_source_title">Источники карт</string>
     <string name="quick_action_map_source_action">Добавить источник карты</string>
     <string name="quick_action_map_source_switch">Источник карты изменён на «%s».</string>
@@ -2237,14 +2228,9 @@
     <string name="lang_zh_hk">Китайский (Гонконг)</string>
     <string name="configure_screen_quick_action">Быстрое действие</string>
     <string name="quick_action_item_action">Действие %d</string>
-    <string name="quick_action_add_marker">Добавить маркер</string>
-    <string name="quick_action_add_poi">Добавить POI</string>
-    <string name="quick_action_map_style">Сменить стиль карты</string>
     <string name="quick_action_map_style_switch">Стиль карты изменён на «%s».</string>
-    <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
-    <string name="quick_action_add_favorite">Добавить в избранные</string>
     <string name="dialog_add_action_title">Добавить</string>
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Удалить действие «%s»\?</string>
@@ -3673,7 +3659,6 @@
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии, карманного автономного путеводителя со статьями о местах и направлениях.</string>
@@ -3727,7 +3712,6 @@
     <string name="empty_state_my_tracks">Добавьте файлы треков</string>
     <string name="empty_state_my_tracks_desc">Импортируйте или запишите файлы треков</string>
     <string name="context_menu_item_add_waypoint">Добавить путевую точку</string>
-    <string name="quick_action_add_gpx">Добавить путевую точку</string>
     <string name="map_widget_monitoring">Запись маршрута</string>
     <string name="marker_save_as_track">Сохранить как файл трека</string>
     <string name="follow_track">Ведение по треку</string>

@@ -2072,11 +2072,7 @@
     <string name="rendering_value_low_name">Нізкая</string>
     <string name="rendering_attr_hideWaterPolygons_name">Схаваць ваду</string>
     <string name="quick_action_item_screen">Экран %d</string>
-    <string name="quick_action_add_marker">Дадаць адзнаку</string>
-    <string name="quick_action_add_poi">Дадаць POI</string>
-    <string name="quick_action_map_style">Змяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы зменены на \"%s\".</string>
-    <string name="quick_action_add_parking">Дадаць месца паркоўкі</string>
     <string name="save_track_min_speed_descr">Фільтр: не запісваць пункты ніжэй гэтай хуткасці.</string>
     <string name="save_track_min_distance">Запіс мінімальнага зруху</string>
     <string name="save_track_min_distance_descr">Фільтр: вызначце мінімальную адлегласць ад пункта для запісу новага.</string>
@@ -2092,7 +2088,6 @@
     <string name="quick_action_item_action">Дзеянне %d</string>
     <string name="quick_action_new_action">Дадаць дзеянне</string>
     <string name="quick_action_edit_action">Рэдагаваць дзеянне</string>
-    <string name="quick_action_add_favorite">Дадаць ва ўлюбёныя</string>
     <string name="dialog_add_action_title">Дадаць дзеянне</string>
     <string name="quick_actions_delete">Выдаліць дзеянне</string>
     <string name="quick_actions_delete_text">Выдаліць дзеянне \"%s\"\?</string>
@@ -2115,9 +2110,6 @@
     <string name="quick_action_map_source_switch">Крыніца мапы змененая на \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Змяніць становішча кнопкі</string>
     <string name="shared_string_action_name">Назва дзеяння</string>
-    <string name="quick_action_take_audio_note">Новая гукавая нататка</string>
-    <string name="quick_action_take_video_note">Новая відэанататка</string>
-    <string name="quick_action_take_photo_note">Новая фотанататка</string>
     <string name="quick_action_navigation_voice_off">Уключыць Голас</string>
     <string name="quick_action_navigation_voice_on">Прыглушыць Голас</string>
     <string name="rendering_attr_depthContours_description">Паказваць контуры і пункты глыбіні.</string>
@@ -2153,7 +2145,6 @@
     <string name="auto_split_recording_descr">Пачаць новы сегмент пасля 6-хвіліннага перапынку, новы след — пасля 2-гадзіннага перапынку, ці новы файл пасля доўгага перапынку (як змяніляся дата).</string>
     <string name="lang_ber">Берберская</string>
     <string name="navigate_point_olc">Адкрыты код месцазнаходжання (OLC)</string>
-    <string name="quick_action_add_osm_bug">Дадаць OSM-нататку</string>
     <string name="quick_action_navigation_voice">Голас укл/адкл</string>
     <string name="quick_favorites_show_favorites_dialog">Паказаць дыялог улюбёных</string>
     <string name="quick_favorites_name_preset">Назва перадналад</string>
@@ -2175,15 +2166,12 @@
     <string name="quick_action_add_create_items">Стварэнне элементаў</string>
     <string name="quick_action_gpx_category_descr">Абярыце катэгорыю (неабавязкова).</string>
     <string name="quick_action_page_list_descr">Кнопка для гартання дадзенага спіса.</string>
-    <string name="quick_action_map_overlay">Змяніць накладзеную мапу</string>
     <string name="quick_action_map_overlay_title">Накладзеная мапа</string>
     <string name="quick_action_map_overlay_action">Дадаць мапу накладання</string>
     <string name="quick_action_map_overlay_switch">Накладная мапа змененая на \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Падкладка мапы змененая на \"%s\".</string>
-    <string name="quick_action_map_underlay">Змяніць падкладку мапы</string>
     <string name="quick_action_map_underlay_title">Падкладка мапы</string>
     <string name="quick_action_map_underlay_action">Дадаць падкладку</string>
-    <string name="quick_action_map_source">Змяніць крыніцу мапы</string>
     <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазваляе змяніць пазіцыю на экране.</string>
     <string name="route_points_category_name">Павароты на маршруце</string>
     <string name="relief_smoothness_factor_descr">Пераважны рэльеф: раўнінны ці гарысты.</string>
@@ -2208,9 +2196,6 @@
     <string name="nearest_cities">Бліжэйшыя гарады</string>
     <string name="select_city">Абраць горад</string>
     <string name="select_postcode">Пошук паштовага індэкса</string>
-    <string name="quick_action_add_destination">Вызначыць пункт прызначэння</string>
-    <string name="quick_action_replace_destination">Замяніць пункт прызначэння</string>
-    <string name="quick_action_add_first_intermediate">Дадаць прамежкавы пункт</string>
     <string name="subscribe_email_error">Памылка</string>
     <string name="quick_action_auto_zoom_on">Уключыць аўтамаштабаванне мапы</string>
     <string name="quick_action_auto_zoom_off">Адключыць аўтамаштабаванне мапы</string>
@@ -3440,7 +3425,6 @@
     <string name="shared_string_uninstall_and_restart">Выдаліць і перазапусціць</string>
     <string name="speed_cameras_removed_descr">На гэтай прыладзе няма камер кантролю хуткасці.</string>
     <string name="app_mode_inline_skates">Ролікі</string>
-    <string name="quick_action_remove_next_destination">Выдаліць наступны пункт прызначэння</string>
     <string name="use_volume_buttons_as_zoom">Маштабаванне кнопкамі гучнасці</string>
     <string name="please_provide_point_name_error">Калі ласка, дайце пункту назву</string>
     <string name="quick_action_remove_next_destination_descr">Бягучы пункт прызначэння маршруту будзе выдалены. Калі гэта канцавы пункт прызначэння, то навігацыя спыніцца.</string>
@@ -3465,7 +3449,6 @@
     <string name="empty_state_my_tracks">Дадаць файлы слядоў</string>
     <string name="empty_state_my_tracks_desc">Імпартуйце альбо запішыце файлы следу</string>
     <string name="context_menu_item_add_waypoint">Дадаць пункт шляху</string>
-    <string name="quick_action_add_gpx">Дадаць пункт шляху</string>
     <string name="map_widget_monitoring">Запіс паездкі</string>
     <string name="marker_save_as_track">Захаваць як файл следу</string>
     <string name="number_of_gpx_files_selected_pattern">Абрана %s файлаў слядоў</string>
