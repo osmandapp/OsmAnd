@@ -596,7 +596,7 @@
     <string name="app_settings">Podešavanja programa</string>
     <string name="use_english_names">Koristi engleska imena na mapama</string>
     <string name="use_english_names_descr">Izaberi između lokalnih ili engleskih imena.</string>
-    <string name="mark_point">Odredište</string>
+    <string name="mark_point">Cilj</string>
     <string name="reload_tile">Ponovo učitavanje sličica mape</string>
     <string name="update_tile">Ažuriranje</string>
     <string name="additional_settings">Dodatna podešavanja</string>
@@ -1985,9 +1985,9 @@
     <string name="lang_hi">Indijski</string>
     <string name="lang_iw">Hebrejski</string>
     <string name="lang_he">Hebrejski</string>
-    <string name="access_direction_haptic_feedback_descr">Odredi pravac odredišta uz pomoć vibracije.</string>
+    <string name="access_direction_haptic_feedback_descr">Odredi ciljnu tačku uz pomoć vibracije.</string>
     <string name="access_direction_haptic_feedback">Uputstva vibracijom</string>
-    <string name="access_direction_audio_feedback_descr">Odredi smer do odredišta pomoću zvuka.</string>
+    <string name="access_direction_audio_feedback_descr">Odredi smer do cilja pomoću zvuka.</string>
     <string name="access_direction_audio_feedback">Usmeravanje glasom</string>
     <string name="follow_us">Prati nas</string>
     <string name="move_marker_bottom_sheet_title">Pomeri mapu radi izmena markera lokacije</string>
@@ -5758,4 +5758,8 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
     <string name="missing_maps_ignore_details">Neke preuzete mape mogle bi biti prikladnije za rutu. Ako si upoznat s područjem i mapama, možeš pokušati odrediti rutu koristeći postojeće mape.</string>
+    <string name="quick_action_directions_from">Polazna tačka</string>
+    <string name="quick_action_destination">Odredište</string>
+    <string name="quick_action_terrain_color_scheme">Šema boja terena</string>
+    <string name="quick_action_location_by_gpx">Lokacija putem GPX-a</string>
 </resources>
