@@ -1881,7 +1881,6 @@
     <string name="quick_action_btn_tutorial_title">Muuta painikkeen sijaintia</string>
     <string name="quick_action_map_source_action">Lisää karttalähde</string>
     <string name="quick_action_map_source_title">Karttalähteet</string>
-    <string name="quick_action_map_source">Muuta kartan lähdettä</string>
     <string name="gpx_split_interval">Jakoväli</string>
     <string name="prefs_plugins_descr">Liitännäiset aktivoivat laajennetut asetukset ja lisätoiminnallisuudet.</string>
     <string name="choose_auto_follow_route_descr">Aika kunnes karttanäyttö synkronoituu nykysijaintiin.</string>
@@ -2185,9 +2184,6 @@
     <string name="quick_action_auto_zoom_desc">Painike nopeusohjatun automaattisen zoomauksen kytkemiseksi päälle tai pois.</string>
     <string name="quick_action_auto_zoom_on">Ota automaattinen tarkennus käyttöön</string>
     <string name="quick_action_auto_zoom_off">Poista automaattinen tarkennus käytöstä</string>
-    <string name="quick_action_add_destination">Aseta määränpää</string>
-    <string name="quick_action_replace_destination">Korvaa määränpää</string>
-    <string name="quick_action_add_first_intermediate">Lisää ensimmäinen välietappi</string>
     <string name="quick_action_add_marker_descr">Painike karttamarkkerin lisäämiseen ruudun keskelle.</string>
     <string name="quick_action_add_gpx_descr">Painike, jolla lisäät GPX-väyläpisteen ruudun keskelle.</string>
     <string name="quick_action_take_audio_note_descr">Näpäyttämällä tätä toimintonäppäintä lisää äänimerkinnän ruudun keskelle.</string>
@@ -2415,8 +2411,6 @@
     <string name="thanks_yandex_traffic">Kiitos Yandexille liikennetiedoista.</string>
     <string name="voices">Äänikehotteet</string>
     <string name="configure_screen_quick_action">Pikatoiminto</string>
-    <string name="quick_action_add_poi">Lisää KP</string>
-    <string name="quick_action_map_style">Muuta karttatyyliä</string>
     <string name="quick_action_navigation_voice">Ääni päälle / pois</string>
     <string name="quick_action_navigation_voice_off">Poista äänen mykistys</string>
     <string name="quick_action_navigation_voice_on">Mykistä ääni</string>
@@ -2583,7 +2577,6 @@
     <string name="add_to_a_track">Lisää jälkeen</string>
     <string name="track_show_start_finish_icons">Näytä alku- ja lopetusikonit</string>
     <string name="set_working_days_to_continue">Laita työskentelypäivät jatkaaksesi</string>
-    <string name="quick_action_remove_next_destination">Poista lähin määränpääpiste</string>
     <string name="use_volume_buttons_as_zoom">Zoomaa äänenvoimakkuuspainikkeilla</string>
     <string name="use_volume_buttons_as_zoom_descr">Hallitse kartan zoomaustasoa laitteen äänenvoimakkuuspainikkeilla.</string>
     <string name="please_provide_point_name_error">Anna nimi pisteelle</string>
@@ -2616,7 +2609,6 @@
     <string name="shared_string_gpx_files">Jäljet</string>
     <string name="layer_gpx_layer">Jäljet</string>
     <string name="show_gpx">Jäljet</string>
-    <string name="quick_action_add_gpx">Lisää jäljen väyläpiste</string>
     <string name="map_widget_monitoring">Matkatallennus</string>
     <string name="empty_state_my_tracks">Lisää jälkitiedostoja</string>
     <string name="empty_state_my_tracks_desc">Tuo tai tallenna jälkitiedostoja</string>
@@ -2894,7 +2886,6 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Äärimmäinen</string>
     <string name="public_transport_ped_route_title">Jalkaisin kuljettava reitti on noin %1$s ja se voi olla nopeampi kuin joukkoliikenne</string>
     <string name="purchase_cancelled_dialog_title">Olet peruuttanut OsmAnd Live -tilauksesi</string>
-    <string name="quick_action_add_marker">Lisää karttamarkkeri</string>
     <string name="empty_state_markers_active_desc">Napauta pitkään tai lyhyesti kohtaa \"Paikat\" ja napauta sitten markkerilippupainiketta.</string>
     <string name="keep_passed_markers">Pidä ohitetut markkerit kartalla</string>
     <string name="keep_passed_markers_descr">Markkerit, jotka on lisätty ryhmänä suosikkeja tai GPX-väyläpisteinä, joissa on merkintä \"ohitettu\", pysyvät kartalla. Jos ryhmä ei ole aktiivinen, markkerit katoavat kartalta.</string>
@@ -3843,7 +3834,6 @@
     <string name="gpx_monitoring_disabled_warn">Kirjaa reittiä GPX-widgetin avulla tai Matkan tallennus -asetusten kautta.</string>
     <string name="osmand_distance_planning_plugin_description">Luo polkuja napauttamalla karttaa tai käyttämällä tai muokkaamalla olemassa olevia GPX-tiedostoja matkan suunnittelemiseksi ja pisteiden välisen etäisyyden mittaamiseksi. Tulos voidaan tallentaa GPX-tiedostoksi, jota voidaan käyttää myöhemmin opastamiseen.</string>
     <string name="enter_verification_code">Kirjoita kertakäyttöinen salasana</string>
-    <string name="quick_action_add_osm_bug">Lisää OSM-huomautus</string>
     <string name="in_app_purchase_desc_ex">Ostamisen jälkeen se on pysyvästi käytettävissäsi.</string>
     <string name="lang_ur">Urdu</string>
     <string name="lang_tg">Tadžikki</string>

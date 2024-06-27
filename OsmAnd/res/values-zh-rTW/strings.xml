@@ -2057,19 +2057,10 @@
     <string name="rendering_value_low_name">低</string>
     <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
     <string name="quick_action_item_screen">螢幕 %d</string>
-    <string name="quick_action_add_marker">增加地圖標記</string>
-    <string name="quick_action_add_poi">增加 POI</string>
-    <string name="quick_action_map_style">更改地圖樣式</string>
     <string name="quick_action_map_style_switch">地圖樣式變更為「%s」。</string>
-    <string name="quick_action_take_audio_note">新增音訊註解</string>
-    <string name="quick_action_take_video_note">新增視訊註解</string>
-    <string name="quick_action_take_photo_note">新增照片註解</string>
-    <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
     <string name="quick_action_navigation_voice_off">取消靜音</string>
     <string name="quick_action_navigation_voice_on">靜音</string>
-    <string name="quick_action_add_parking">增加停車地點</string>
-    <string name="quick_action_add_favorite">增加我的收藏</string>
     <string name="quick_favorites_show_favorites_dialog">顯示我的收藏對話框</string>
     <string name="quick_favorites_name_preset">預設的名稱</string>
     <string name="favorite_autofill_toast_text">" 儲存到 "</string>
@@ -2087,13 +2078,10 @@
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
     <string name="quick_action_empty_param_error">填寫所有參數</string>
     <string name="quick_action_map_styles">地圖樣式</string>
-    <string name="quick_action_map_overlay">更改地圖上圖層</string>
     <string name="quick_action_map_overlay_title">地圖上圖層</string>
     <string name="quick_action_map_overlay_action">增加上圖層</string>
-    <string name="quick_action_map_underlay">更改地圖底層</string>
     <string name="quick_action_map_underlay_title">地圖襯底層</string>
     <string name="quick_action_map_underlay_action">增加襯底層</string>
-    <string name="quick_action_map_source">更改地圖來源</string>
     <string name="quick_action_map_source_title">地圖來源</string>
     <string name="quick_action_map_source_action">增加地圖來源</string>
     <string name="quick_action_map_source_switch">地圖來源變更為「%s」。</string>
@@ -2191,8 +2179,6 @@
     <string name="quick_action_auto_zoom">自動縮放地圖</string>
     <string name="quick_action_auto_zoom_on">開啟自動縮放</string>
     <string name="quick_action_auto_zoom_off">關閉自動縮放</string>
-    <string name="quick_action_add_destination">設定目的地</string>
-    <string name="quick_action_replace_destination">更換目的地</string>
     <string name="no_overlay">無上圖層</string>
     <string name="no_underlay">無下圖層</string>
     <string name="subscribe_email_error">錯誤</string>
@@ -2281,7 +2267,6 @@
 \n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 
 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫
 \n</string>
-    <string name="quick_action_add_first_intermediate">增加第一個中轉</string>
     <string name="shared_string_visible">可見的</string>
     <string name="osmand_extended_description_part3">地圖 
 \n• 顯示您週遭的 POI（興趣點） 
@@ -3651,7 +3636,6 @@
     <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
     <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
-    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">刪除您路線上的下一個目的地。如果其為您最後的目的地，導航將會中止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
@@ -3705,7 +3689,6 @@
     <string name="empty_state_my_tracks">新增軌跡檔案</string>
     <string name="empty_state_my_tracks_desc">匯入或錄製軌跡檔案</string>
     <string name="context_menu_item_add_waypoint">新增軌跡航點</string>
-    <string name="quick_action_add_gpx">新增軌跡航點</string>
     <string name="map_widget_monitoring">旅程錄製</string>
     <string name="marker_save_as_track">儲存為軌跡檔案</string>
     <string name="follow_track">跟隨軌跡</string>

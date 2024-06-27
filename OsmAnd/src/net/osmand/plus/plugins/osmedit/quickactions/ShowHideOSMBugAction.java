@@ -21,9 +21,9 @@ public class ShowHideOSMBugAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_OSM_BUG_ACTION_ID,
 			"osmbug.showhide", ShowHideOSMBugAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.osm_notes).iconRes(R.drawable.ic_action_osm_note).nonEditable()
-			.category(QuickActionType.OSM_EDITING);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideOSMBugAction() {
 		super(TYPE);

@@ -262,9 +262,6 @@
     <string name="quick_action_auto_zoom_desc">Tombol untuk menyalakan atau mematikan pembesaran yang diatur oleh kecepatan.</string>
     <string name="quick_action_auto_zoom_on">Aktifkan pembesaran otomatis</string>
     <string name="quick_action_auto_zoom_off">Nonaktifkan pembesaran otomatis</string>
-    <string name="quick_action_add_destination">Tetapkan tujuan</string>
-    <string name="quick_action_replace_destination">Ubah tujuan</string>
-    <string name="quick_action_add_first_intermediate">Tambahkan perantara pertama</string>
     <string name="quick_action_add_destination_desc">Sebuah tombol untuk membuat layar di tengah tujuan rute, sebuah tujuan yang dipilih sebelumnya akan menjadi tujuan perantara terakhir.</string>
     <string name="quick_action_replace_destination_desc">Sebuah tombol untuk membuat layar di tengah tujuan rute baru, menggantikan tujuan yang sebelumnya dipilih (jika ada).</string>
     <string name="quick_action_add_first_intermediate_desc">Sebuah tombol untuk membuat layar di tengah tujuan perantara pertama.</string>
@@ -1534,7 +1531,6 @@
     <string name="quick_action_map_source_switch">Sumber peta diubah menjadi \"%s\".</string>
     <string name="quick_action_map_source_action">Tambahkan sumber peta</string>
     <string name="quick_action_map_source_title">Sumber-sumber peta</string>
-    <string name="quick_action_map_source">Ubah sumber peta</string>
     <string name="quick_action_poi_list">Daftar POI</string>
     <string name="quick_action_bug_message">Pesan</string>
     <string name="quick_action_fav_name_descr">Biarkan kosong untuk menggunakan alamat atau nama tempat.</string>
@@ -1549,16 +1545,9 @@
     <string name="quick_actions_delete">Hapus tindakan</string>
     <string name="quick_action_edit_action">Sunting tindakan</string>
     <string name="quick_action_new_action">Tambahkan tindakan</string>
-    <string name="quick_action_add_parking">Tambahkan tempat parkir</string>
     <string name="quick_action_navigation_voice_on">Bisukan Suara</string>
     <string name="quick_action_navigation_voice">Suara nyala/mati</string>
-    <string name="quick_action_add_osm_bug">Tambahkan Catatan OSM</string>
-    <string name="quick_action_take_photo_note">Catatan foto baru</string>
-    <string name="quick_action_take_video_note">Catatan video baru</string>
-    <string name="quick_action_take_audio_note">Catatan audio baru</string>
     <string name="quick_action_map_style_switch">Gaya peta diubah menjadi \"%s\".</string>
-    <string name="quick_action_map_style">Ubah gaya peta</string>
-    <string name="quick_action_add_poi">Tambahkan POI</string>
     <string name="file_name_containes_illegal_char">Karakter ilegal pada nama berkas</string>
     <string name="reports_for">Laporan untuk</string>
     <string name="number_of_edits">Jumlah suntingan</string>
@@ -2289,7 +2278,6 @@
     <string name="closing_changeset">Menutup perubahan…</string>
     <string name="commiting_node">Mengkomit node…</string>
     <string name="favourites_context_menu_add">Tambahkan Favorit</string>
-    <string name="quick_action_add_marker">Tambahkan penanda peta</string>
     <string name="quick_action_sh_poi_descr">Tambahkan satu atau lebih kategori POI untuk ditampilkan pada peta.</string>
     <string name="quick_action_map_overlay_action">Tambahkan hamparan</string>
     <string name="internal_app_storage_description">Penyimpanan internal, tersembunyi dari semua pengguna dan aplikasi lainnya, jadi hanya OsmAnd yang dapat mengakses data Anda.</string>
@@ -2302,7 +2290,6 @@
     <string name="gpx_timemoving">Waktu bergerak: %1$s</string>
     <string name="shared_string_api_key">Kunci API</string>
     <string name="shared_string_size">Ukuran</string>
-    <string name="quick_action_add_favorite">Tambahkan Favorit</string>
     <string name="reading_files">Membaca berkas…</string>
     <string name="add_tag">Tambahkan Tanda</string>
     <string name="context_menu_item_update_poi">Perbarui POI</string>
@@ -2554,7 +2541,6 @@
     <string name="quick_action_map_overlay_title">Hamparan peta</string>
     <string name="quick_action_map_overlay_switch">Hamparan peta diubah ke \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Dasaran peta diubah ke \"%s\".</string>
-    <string name="quick_action_map_underlay">Ubah dasaran peta</string>
     <string name="save_gpx_waypoint">Simpan titik jalan GPX</string>
     <string name="save_route_point">Simpan titik rute</string>
     <string name="touring_view_renderer">Pemandangan tur</string>
@@ -2576,7 +2562,6 @@
     <string name="commit_poi">Komit POI</string>
     <string name="please_specify_poi_type">Mohon tetapkan tipe POI.</string>
     <string name="quick_favorites_name_preset">Preset nama</string>
-    <string name="quick_action_map_overlay">Ubah hamparan peta</string>
     <string name="add_waypoint">Tambahkan Titik Jalan</string>
     <string name="quick_action_toggle_preference">Sebuah alihan untuk mengubah preferensi.</string>
     <string name="shared_string_travelbooks">Buku Perjalanan</string>
@@ -2887,7 +2872,6 @@
     <string name="nearest_point">Titik terdekat</string>
     <string name="start_of_the_track">Pemulaian trek</string>
     <string name="import_track_descr">Pilih file trek untuk mengikuti atau impor dari perangkat Anda.</string>
-    <string name="quick_action_add_gpx">Tambahkan titik jalan trek</string>
     <string name="context_menu_item_add_waypoint">Tambahkan titik jalan trek</string>
     <string name="empty_state_my_tracks_desc">Impor atau rekam file trek</string>
     <string name="save_track_to_gpx_globally">Catat trek ke file GPX</string>
@@ -3187,7 +3171,6 @@
     <string name="lang_th">Thai</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Jangan pergi offpiste</string>
     <string name="plugin_wikipedia_description">Dapatkan info tentang tempat menarik dari Wikipedia, panduan saku offline yang menampilkan artikel tentang tempat dan tujuan.</string>
-    <string name="quick_action_remove_next_destination">Hapus titik tujuan berikutnya</string>
     <string name="speed_cameras_removed_descr">Perangkat ini tidak memiliki kamera kecepatan.</string>
     <string name="nm">nmi</string>
     <string name="lang_is">Islandia</string>

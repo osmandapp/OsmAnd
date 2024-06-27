@@ -24,9 +24,9 @@ public class AddOSMBugAction extends QuickAction {
 	private static final String KEY_SHO_DIALOG = "dialog";
 
 	public static final QuickActionType TYPE = new QuickActionType(ADD_OSM_BUG_ACTION_ID,
-			"osmbug.add", AddOSMBugAction.class).
-			nameRes(R.string.quick_action_add_osm_bug).iconRes(R.drawable.ic_action_osm_note_add)
-			.category(QuickActionType.OSM_EDITING);
+			"osmbug.add", AddOSMBugAction.class)
+			.nameRes(R.string.osn_bug_name).iconRes(R.drawable.ic_action_osm_note_add)
+			.category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
 
 	public AddOSMBugAction() {
 		super(TYPE);

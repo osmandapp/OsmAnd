@@ -2023,16 +2023,10 @@
     <string name="driving_region_australia">Australien</string>
     <string name="rendering_attr_hideWaterPolygons_name">Dölj vatten</string>
     <string name="quick_action_item_screen">Skärm %d</string>
-    <string name="quick_action_add_marker">Lägg till kartmarkör</string>
-    <string name="quick_action_add_poi">Lägg till intressepunkt</string>
-    <string name="quick_action_map_style">Byt kartstil</string>
     <string name="quick_action_map_style_switch">Kartstilen ändrad till \"%s\".</string>
-    <string name="quick_action_add_osm_bug">Lägg till OSM-anteckning</string>
     <string name="quick_action_navigation_voice">Röst på/av</string>
     <string name="quick_action_navigation_voice_off">Sätt på röst</string>
     <string name="quick_action_navigation_voice_on">Stäng av röst</string>
-    <string name="quick_action_add_parking">Lägg till P-plats</string>
-    <string name="quick_action_add_favorite">Lägg till favorit</string>
     <string name="favorite_autofill_toast_text">" har sparats i "</string>
     <string name="favorite_empty_place_name">Plats</string>
     <string name="quick_action_poi_show">Visa %1$s</string>
@@ -2045,10 +2039,8 @@
     <string name="quick_action_map_source_switch">Kartkällan ändrad till \"%s\".</string>
     <string name="quick_action_map_source_action">Lägg till kartkälla</string>
     <string name="quick_action_map_source_title">Kartkällor</string>
-    <string name="quick_action_map_source">Ändra kartkälla</string>
     <string name="quick_action_map_underlay_action">Lägg till underlägg</string>
     <string name="quick_action_map_underlay_title">Kartunderlägg</string>
-    <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
     <string name="quick_action_map_underlay_switch">Kartunderlägget ändrat till \"%s\".</string>
     <string name="rendering_attr_depthContours_name">Nautiska djupkurvor</string>
     <string name="rendering_value_fine_name">Fin</string>
@@ -2079,9 +2071,6 @@
     <string name="lang_sr_latn">Serbiska (translittererat)</string>
     <string name="configure_screen_quick_action">Snabbåtgärd</string>
     <string name="quick_action_item_action">Åtgärd %d</string>
-    <string name="quick_action_take_audio_note">Ny ljudanteckning</string>
-    <string name="quick_action_take_video_note">Ny videoanteckning</string>
-    <string name="quick_action_take_photo_note">Ny fotoanteckning</string>
     <string name="quick_action_new_action">Lägg till åtgärd</string>
     <string name="quick_action_edit_action">Redigera åtgärd</string>
     <string name="dialog_add_action_title">Lägg till åtgärd</string>
@@ -2141,8 +2130,6 @@
     <string name="favorite_group_name">Gruppnamn</string>
     <string name="change_color">Ändra färg</string>
     <string name="edit_name">Redigera namn</string>
-    <string name="quick_action_add_destination">Ange destination</string>
-    <string name="quick_action_replace_destination">Ersätt destination</string>
     <string name="no_overlay">Inget överlägg</string>
     <string name="no_underlay">Inget underlägg</string>
     <string name="subscribe_email_error">Fel</string>
@@ -2387,7 +2374,6 @@
     <string name="quick_action_auto_zoom_desc">Knapp för att slå på eller av hastighetsstyrd automatisk zoom.</string>
     <string name="quick_action_auto_zoom_on">Aktivera autozoom</string>
     <string name="quick_action_auto_zoom_off">Inaktivera autozoom</string>
-    <string name="quick_action_add_first_intermediate">Lägg till första mellanliggande</string>
     <string name="quick_action_add_destination_desc">En knapp för att göra skärmen centrerad till ruttdestinationen, en tidigare vald destination skulle bli den sista mellandestinationen.</string>
     <string name="quick_action_replace_destination_desc">En knapp för att göra skärmen centrerad till den nya ruttdestinationen och ersätta den tidigare valda destinationen (om någon).</string>
     <string name="quick_action_add_first_intermediate_desc">En knapp för att göra skärmens centrum till den första mellanliggande destinationen.</string>
@@ -2683,7 +2669,6 @@
     <string name="quick_action_map_style_action">Lägg till en kartstil</string>
     <string name="quick_action_empty_param_error">Fyll i alla parametrar</string>
     <string name="quick_action_map_styles">Kartstilar</string>
-    <string name="quick_action_map_overlay">Ändra kartöversikt</string>
     <string name="mappilary_no_internet_desc">Foton från Mapillary är bara tillgängliga online.</string>
     <string name="add_route_points">Lägg till ruttpunkter</string>
     <string name="add_waypoint">Lägg till vägpunkt</string>
@@ -3151,7 +3136,6 @@
     <string name="shared_string_gpx_route">Spårrutt</string>
     <string name="empty_state_my_tracks">Lägg till spårfil</string>
     <string name="context_menu_item_add_waypoint">Lägg till spår waypoint</string>
-    <string name="quick_action_add_gpx">Lägg till spår waypoint</string>
     <string name="marker_save_as_track">Spara som spårfil</string>
     <string name="follow_track_descr">Välj spårfil att följa</string>
     <string name="import_track_descr">Välj spårfil att följa eller importera spåret från din enhet.</string>
@@ -3346,7 +3330,6 @@
     <string name="shared_string_uninstall_and_restart">Avinstallera och starta om</string>
     <string name="speed_cameras_removed_descr">Den här enheten har inte hastighetskameror.</string>
     <string name="app_mode_inline_skates">Rullskridskor</string>
-    <string name="quick_action_remove_next_destination">Ta bort nästa destinationspunkt</string>
     <string name="use_volume_buttons_as_zoom_descr">Kontrollera zoomningsnivån för kartan med volymknapparna på enheten.</string>
     <string name="use_volume_buttons_as_zoom">Volymknappar som zoom</string>
     <string name="please_provide_point_name_error">Ange ett namn för punkten</string>

@@ -661,7 +661,6 @@
     <string name="select_color">Chausissètz la color</string>
     <string name="day_off_label">Barrat</string>
     <string name="explore_wikipedia_offline">Explorar la Wiquipèdia fòra de linha.</string>
-    <string name="quick_action_remove_next_destination">Suprimir lo ponch d’etapa pus pròche</string>
     <string name="track_show_start_finish_icons">Mostrar lei icònas de començament e de fin</string>
     <string name="shared_string_terrain">Relèu</string>
     <string name="rendering_attr_showLez_name">Mostrar lei zònas d\'escampament bas</string>
@@ -836,7 +835,6 @@
     <string name="av_settings">Configuracion de son/ video</string>
     <string name="download_select_map_types">Autrei mapas</string>
     <string name="show_poi_over_map_description">Mostrar la darriera superposicion de PDI emplegada.</string>
-    <string name="quick_action_map_overlay">Modificar la superposicion de la mapa</string>
     <string name="layer_underlay">Mapa de fons…</string>
     <string name="map_underlay_descr">Chausissètz la mapa de fons</string>
     <string name="map_overlay">Mapa superpausada</string>
@@ -930,7 +928,6 @@
     <string name="keep_informing_descr">Tornar anonciar leis indicacions de navigacion a intervales regulars.</string>
     <string name="shared_string_get">Obtenir</string>
     <string name="quick_favorites_name_preset">Configuracion dau nom</string>
-    <string name="quick_action_map_underlay">Modificar lo fons de la mapa</string>
     <string name="gps_filter_precision">Precision GPS</string>
     <string name="is_disabled">%1$s es desactivat</string>
     <string name="history_actions_descr">Podètz exportar l\'istoric dins un fichier.</string>
@@ -1055,7 +1052,6 @@
     <string name="navigation_item_description">Configuracion de la navigacion.</string>
     <string name="activate_seamarks_plugin">Activatz l\'ajust \'Mapas marinas\'</string>
     <string name="activate_srtm_plugin">Activatz l\'ajust \'Corbas de nivèu\'</string>
-    <string name="quick_action_add_marker">Ajustar un marcador de mapa</string>
     <string name="quick_action_navigation_voice_on">Desactivar la votz</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar la finèstra dei Preferéncias</string>
     <string name="quick_action_add_marker_descr">Un boton per ajustar un marcador de mapa au centre de l\'ecran.</string>
@@ -1308,7 +1304,6 @@
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>
     <string name="rendering_attr_contourLines_name">Mostrar lei corbas de nivèu</string>
     <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs visibles sus la mapa.</string>
-    <string name="quick_action_map_style">Modificar la representacion de la mapa</string>
     <string name="quick_action_map_style_switch">Representacion de la mapa modificada en \"%s\".</string>
     <string name="quick_action_map_style_action">Ajustatz un mòde de representacion de la mapa</string>
     <string name="quick_action_map_styles">Representacions de la mapa</string>
@@ -1959,7 +1954,6 @@
     <string name="gpx_monitoring_stop">Pausar l\'enregistrament dau viatge</string>
     <string name="delete_address">Escafar l\'adreiça</string>
     <string name="map_widget_monitoring">Enregistrament dau percors</string>
-    <string name="quick_action_add_gpx">Ajustar un ponch d\'etapa a la traça</string>
     <string name="follow_track_descr">Chausir un fichier de traças a seguir</string>
     <string name="empty_state_my_tracks">Ajustar de fichiers de traças</string>
     <string name="shared_string_gpx_route">Traça d\'un percors</string>

@@ -31,6 +31,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	private final ItemClickListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
+	private boolean categoryMode = false;
 
 	public AddQuickActionsAdapter(@NonNull OsmandApplication app, @NonNull Context context, @Nullable ItemClickListener listener, boolean nightMode) {
 		this.app = app;
@@ -52,6 +53,10 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			items.add(new ListItem(ItemType.LIST_DIVIDER));
 		}
 		fillItems(actionItems);
+	}
+
+	public void setCategoryMode(boolean categoryMode){
+		this.categoryMode = categoryMode;
 	}
 
 	private void fillItems(@NonNull List<QuickActionType> typeActions) {
@@ -131,7 +136,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				}
 			}
 			QuickActionViewHolder viewHolder = (QuickActionViewHolder) holder;
-			viewHolder.bindView(item, descriptionCount, lastItem);
+			viewHolder.bindView(item, descriptionCount, lastItem, categoryMode);
 			viewHolder.itemView.setOnClickListener(v -> {
 				int adapterPosition = holder.getAdapterPosition();
 				if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {

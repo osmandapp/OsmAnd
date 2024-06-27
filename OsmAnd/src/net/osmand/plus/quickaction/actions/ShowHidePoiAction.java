@@ -46,7 +46,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_POI_ACTION_ID,
 			"poi.showhide", ShowHidePoiAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(defaultActionNameId)
 			.iconRes(R.drawable.ic_action_info_dark)
 			.category(QuickActionType.CONFIGURE_MAP);

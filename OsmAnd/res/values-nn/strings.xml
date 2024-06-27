@@ -430,7 +430,6 @@
     <string name="map_widget_next_turn">Neste sving</string>
     <string name="map_widget_next_turn_small">Neste sving (liten)</string>
     <string name="day_night_info">Dag/natt-info</string>
-    <string name="quick_action_remove_next_destination">Slett neste destinasjonspunkt</string>
     <string name="error_avoid_specific_road">Inga omkøyring funne</string>
     <string name="reset_plugin_to_default">Tilbakestill programtilleggsinnstillingane til standard</string>
     <string name="replace_destination_point">Erstatt reisemålet</string>
