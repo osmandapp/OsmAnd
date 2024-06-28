@@ -2856,4 +2856,9 @@
     <string name="poi_craft_sweep">烟囱清扫</string>
     <string name="poi_craft_sun_protection">遮阳工艺</string>
     <string name="poi_cutline">林木切割线</string>
+    <string name="poi_bicycle_dismount">自行车通行：下车推行</string>
+    <string name="poi_bicycle_customers">自行车通行：顾客</string>
+    <string name="poi_bicycle_permissive">自行车通行：容许</string>
+    <string name="poi_bicycle_private">自行车通行：私人</string>
+    <string name="poi_bicycle_destination">自行车通行：目的地</string>
 </resources>

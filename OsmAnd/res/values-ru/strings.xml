@@ -69,7 +69,6 @@
     <string name="nearest_cities">Ближайшие города</string>
     <string name="select_city">Выберите город</string>
     <string name="select_postcode">Поиск почтового индекса</string>
-
     <string name="parking_options">Функции парковки</string>
     <string name="full_version_thanks">Благодарим вас за покупку платной версии OsmAnd.</string>
     <string name="do_not_show_startup_messages">Не показывать сообщения при запуске</string>
@@ -1696,7 +1695,7 @@
     <string name="shared_string_show_all">Показать все</string>
     <string name="shared_string_show_on_map">Показать на карте</string>
     <string name="shared_string_map">Карта</string>
-    <string name="shared_string_favorite">Сохранено</string>
+    <string name="shared_string_favorite">Избранная точка</string>
     <string name="shared_string_favorites">Избранные</string>
     <string name="shared_string_add_to_favorites">Добавить к избранным</string>
     <string name="shared_string_audio">Аудио</string>
@@ -5756,4 +5755,39 @@
     <string name="shared_string_modify">Изменить</string>
     <string name="weather_source_GFS_description">Глобальная система прогнозов от национальных центров экологического прогнозирования</string>
     <string name="missing_maps_ignore_details">Некоторые уже загруженные карты могут подойти для вашего маршрута. Если вы знакомы с местностью и картами, вы можете попробовать проложить маршрут, используя существующие карты.</string>
+    <string name="quick_action_map_style">Стиль карты</string>
+    <string name="quick_action_to_my_location">В мое местоположение</string>
+    <string name="quick_action_terrain_color_scheme">Цветовая схема рельефа</string>
+    <string name="quick_action_move_map_right">Сдвиг вправо</string>
+    <string name="quick_action_move_map_down">Сдвиг вниз</string>
+    <string name="quick_action_move_map_up">Сдвиг вверх</string>
+    <string name="quick_action_previous_app_profile">Предыдущий профиль</string>
+    <string name="app_profile">Профиль приложения</string>
+    <string name="shared_string_create">Создать</string>
+    <string name="shared_string_replace">Заменить</string>
+    <string name="shared_string_set">Установить</string>
+    <string name="quick_action_terrain">Тип раскраски рельефа</string>
+    <string name="quick_action_first_intermediate">Первый промежуточный пункт</string>
+    <string name="quick_action_audio_note">Аудио заметка</string>
+    <string name="quick_action_display_position_in_center">Показывать позицию всегда по центру</string>
+    <string name="quick_action_photo_note">Фото заметка</string>
+    <string name="quick_action_track_waypoint">Путевая точка</string>
+    <string name="quick_action_verb_pause_resume">Пауза/возобновление</string>
+    <string name="quick_action_parking_place">Место парковки</string>
+    <string name="quick_action_verb_turn_on_off">Включить/выключить</string>
+    <string name="quick_action_verb_start_stop">Старт/стоп</string>
+    <string name="weather_screen">Экран погоды</string>
+    <string name="travel_topics">Темы путешествий</string>
+    <string name="quick_action_location_by_gpx">Местоположение по GPX</string>
+    <string name="quick_action_destination">Место назначения</string>
+    <string name="quick_action_new_route">Новый маршрут</string>
+    <string name="quick_action_map_overlay">Наложение</string>
+    <string name="shared_string_simulate">Моделировать</string>
+    <string name="quick_action_video_note">Видео заметка</string>
+    <string name="quick_action_verb_show_hide">Показать/скрыть</string>
+    <string name="quick_action_move_map_left">Сдвиг влево</string>
+    <string name="quick_action_map_underlay">Подложка</string>
+    <string name="quick_action_directions_from">Маршрут от этой точки</string>
+    <string name="quick_action_remove_next_destination">Следующий пункт назначения</string>
+    <string name="quick_action_next_app_profile">Следующий профиль</string>
 </resources>
