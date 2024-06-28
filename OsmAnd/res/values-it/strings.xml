@@ -5671,7 +5671,7 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il terreno sulla mappa.</string>
     <string name="use_nearby_roads_summary">Utilizza la mappa offline per trovare strade e dati di elevazione nelle vicinanze. Potrebbe correggere la geometria del tracciato.</string>
-    <string name="maps_that_also_be_used">Mappe già utilizzate: %1$s</string>
+    <string name="maps_that_also_be_used">Mappe che verranno utilizzate: %1$s</string>
     <string name="required_maps_calculate_online_summary">L\'elenco delle mappe mancanti si basa sul percorso in linea retta. Per avere una lista accurata delle mappe, OsmAnd può pre-calcolare il tuo percorso online.</string>
     <string name="missing_maps_description">Alcune mappe offline richieste per questo percorso mancano o non sono aggiornate. Scarica o aggiorna queste mappe.</string>
     <string name="getting_list_of_required_maps">Recupero una lista delle mappe richieste…</string>
@@ -5767,4 +5767,16 @@
     <string name="quick_action_first_intermediate">Primo intermedio</string>
     <string name="quick_action_audio_note">Nota audio</string>
     <string name="quick_action_parking_place">Parcheggio</string>
+    <string name="quick_action_previous_app_profile">Profilo app precedente</string>
+    <string name="quick_action_next_app_profile">Profilo app successivo</string>
+    <string name="app_profile">Profilo app</string>
+    <string name="quick_action_terrain">Tipo di colorazione del terreno</string>
+    <string name="quick_action_track_waypoint">Punti di passaggio della traccia</string>
+    <string name="quick_action_verb_pause_resume">Sospendi / Riprendi</string>
+    <string name="quick_action_verb_start_stop">Avvia / Ferma</string>
+    <string name="key_event_action_continuous_zoom_out">Zoom out continuo</string>
+    <string name="key_event_action_continuous_zoom_in">Zoom in continuo</string>
+    <string name="shared_string_set">Imposta</string>
+    <string name="quick_action_verb_turn_on_off">Accendi / Spegni</string>
+    <string name="weather_screen">Schermata meteo</string>
 </resources>

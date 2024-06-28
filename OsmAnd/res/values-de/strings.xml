@@ -4707,7 +4707,7 @@
     <string name="shared_string_duplicate">Duplizieren</string>
     <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget kann ein Foto aufgenommen werden.</string>
     <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget kann ein Video aufgenommen werden.</string>
-    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Sprachnotiz aufgenommen werden.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Audionotiz aufgenommen werden.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
@@ -5770,7 +5770,7 @@
     <string name="quick_action_next_app_profile">App-Profil zum nächsten</string>
     <string name="shared_string_replace">Ersetzen</string>
     <string name="shared_string_simulate">Simulieren</string>
-    <string name="quick_action_map_underlay">Untergrund</string>
+    <string name="quick_action_map_underlay">Unterlage</string>
     <string name="quick_action_map_style">Kartenstil</string>
     <string name="quick_action_move_map_down">Karte nach unten</string>
     <string name="quick_action_move_map_up">Karte nach oben</string>
@@ -5778,13 +5778,16 @@
     <string name="app_profile">App-Profil</string>
     <string name="shared_string_create">Erstellen</string>
     <string name="quick_action_display_position_in_center">Standort immer in der Bildschirmmitte anzeigen</string>
-    <string name="quick_action_audio_note">Audio-Notiz</string>
-    <string name="quick_action_video_note">Video-Notiz</string>
-    <string name="quick_action_photo_note">Foto-Notiz</string>
+    <string name="quick_action_audio_note">Audionotiz</string>
+    <string name="quick_action_video_note">Videonotiz</string>
+    <string name="quick_action_photo_note">Fotonotiz</string>
     <string name="quick_action_parking_place">Parkplatz</string>
     <string name="quick_action_verb_show_hide">Einblenden / Ausblenden</string>
     <string name="quick_action_verb_pause_resume">Pause / Fortsetzen</string>
     <string name="quick_action_verb_start_stop">Start / Stopp</string>
     <string name="weather_screen">Wetterbildschirm</string>
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>
+    <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
+    <string name="shared_string_set">Einstellen</string>
+    <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
 </resources>
