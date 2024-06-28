@@ -110,11 +110,8 @@ public class GpxDisplayHelper {
 		Route route = gpxFile.routes.get(routeIndex);
 		GpxDisplayGroup group = new RouteDisplayGroup(gpxFile, routeIndex);
 		group.applyName(app, name);
-		String description = getString(R.string.gpx_selection_number_of_points, String.valueOf(route.points.size()));
-		if (route.name != null && route.name.length() > 0) {
-			description = route.name + " " + description;
-		}
-		group.setDescription(description);
+		group.setDescription(route.name);
+
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int i = 0;
 		for (WptPt point : route.points) {
