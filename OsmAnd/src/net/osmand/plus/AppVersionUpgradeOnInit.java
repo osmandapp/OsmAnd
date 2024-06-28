@@ -273,9 +273,6 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
 				}
-				if (prevAppVersion < VERSION_4_6_10) {
-					migrateRoutingTypePrefs();
-				}
 				if (prevAppVersion < VERSION_4_7_01) {
 					ColorsMigrationAlgorithm.doMigration(app);
 				}
@@ -932,23 +929,6 @@ public class AppVersionUpgradeOnInit {
 		copyPreferenceForAllModes(oldPref.getFabMarginYPortrait(), newPref.getFabMarginYPortrait());
 		copyPreferenceForAllModes(oldPref.getFabMarginXLandscape(), newPref.getFabMarginXLandscape());
 		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
-	}
-
-	private void migrateRoutingTypePrefs() {
-		OsmandSettings settings = app.getSettings();
-		boolean hhRouting = new BooleanPreference(settings, "use_hh_routing", false).makeGlobal().get();
-		boolean hhRoutingCpp = new BooleanPreference(settings, "hh_routing_cpp", false).makeGlobal().get();
-		CommonPreference<Boolean> disableComplexRouting = new BooleanPreference(settings, "disable_complex_routing", false).makeProfile();
-
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			RoutingType routingType;
-			if (hhRouting) {
-				routingType = hhRoutingCpp ? HH_CPP : HH_JAVA;
-			} else {
-				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
-			}
-			settings.ROUTING_TYPE.setModeValue(mode, routingType);
-		}
 	}
 
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
