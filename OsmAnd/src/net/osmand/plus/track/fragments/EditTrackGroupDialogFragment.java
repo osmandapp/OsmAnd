@@ -2,6 +2,7 @@ package net.osmand.plus.track.fragments;
 
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -42,7 +43,6 @@ import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGrou
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,8 +55,7 @@ import java.util.Set;
 
 public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
 
-
-	public static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
+	private static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 
 	private OsmandApplication app;
 	private MapMarkersHelper mapMarkersHelper;
@@ -65,6 +64,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private GPXFile gpxFile;
 	private PointsGroup pointsGroup;
 	private GpxDisplayGroup displayGroup;
+	private boolean groupHidden;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (displayGroup != null) {
 			gpxFile = displayGroup.getGpxFile();
 			pointsGroup = gpxFile.getPointsGroups().get(displayGroup.getName());
+			groupHidden = pointsGroup != null && pointsGroup.isHidden();
 		}
 	}
 
@@ -94,7 +95,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		} else {
 			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		}
-		boolean trackPoints = displayGroup.getType() == GpxDisplayItemType.TRACK_POINTS;
+		boolean trackPoints = displayGroup.getType() == TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
 			items.add(createShowOnMapItem(selectedGpxFile));
 		}
@@ -104,7 +105,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new OptionsDividerItem(app));
 
-		if (!gpxFile.showCurrentTrack) {
+		if (!gpxFile.showCurrentTrack && trackPoints) {
 			items.add(createCopyToMarkersItem());
 		}
 		items.add(createCopyToFavoritesItem());
@@ -142,7 +143,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	private void updateGroupVisibility() {
 		MapActivity activity = (MapActivity) getActivity();
-		if (activity != null) {
+		if (activity != null && pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
 			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, pointsGroup);
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -250,12 +251,12 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull FragmentActivity activity) {
-		Context themedCtx = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder b = new AlertDialog.Builder(themedCtx);
-		b.setTitle(app.getString(R.string.are_you_sure));
-		b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> deleteGroupItems());
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();
+		Context context = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(app.getString(R.string.are_you_sure));
+		builder.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> deleteGroupItems());
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.show();
 	}
 
 	private void deleteGroupItems() {
@@ -315,10 +316,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		return Algorithms.isEmpty(category) ? ctx.getString(R.string.shared_string_waypoints) : category;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxDisplayGroup displayGroup, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxDisplayGroup group, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
-			fragment.displayGroup = displayGroup;
+			fragment.displayGroup = group;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
