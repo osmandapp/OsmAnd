@@ -5760,4 +5760,5 @@
     <string name="quick_action_destination">Destinație</string>
     <string name="quick_action_location_by_gpx">Localizare prin GPX</string>
     <string name="quick_action_remove_next_destination">Următorul punct de destinație</string>
+    <string name="quick_action_to_my_location">Către Locația Mea</string>
 </resources>
