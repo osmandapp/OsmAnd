@@ -2202,7 +2202,7 @@
     <string name="select_street">Seleziona la strada</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
-    <string name="animate_my_location">Scorrimento uniforme della mappa</string>
+    <string name="animate_my_location">Simula la mia posizione</string>
     <string name="animate_my_location_desc">Scorrimento fluido della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
@@ -5194,7 +5194,7 @@
     <string name="error_calculate">Il risultato del calcolo è vuoto</string>
     <string name="external_device_forget_sensor">Dimentica il sensore</string>
     <string name="external_device_menu_forget">Dimentica</string>
-    <string name="rendering_attr_lightDetail_name">Dettagli chiari</string>
+    <string name="rendering_attr_lightDetail_name">Chiaro, dettagliato</string>
     <string name="deleting_complete">Eliminazione completata</string>
     <string name="verify_account">Verifica il tuo account</string>
     <string name="manage_subscriptions">Gestisci le iscrizioni.</string>
@@ -5539,7 +5539,7 @@
     <string name="reset_key_assignments">Ripristina le associazioni dei tasti</string>
     <string name="clear_key_assignment_desc">L\'associazione dei tasti per l\'azione selezionata verrà cancellata e impostata su \"Nessuna\".</string>
     <string name="key_assignments">Assegnazioni chiave</string>
-    <string name="key_event_action_activity_back_pressed">Attività indietro premuta</string>
+    <string name="key_event_action_activity_back_pressed">Tasto \"Indietro\" premuto</string>
     <string name="shared_string_eta">ETA</string>
     <string name="rendering_attr_showToll_name">Mostra restrizioni di pedaggio</string>
     <string name="lang_zh_hans">Cinese semplificato</string>
@@ -5723,7 +5723,7 @@
     <string name="routing_attr_avoid_cobblestone_description">Evita il ciottolo</string>
     <string name="contact_support_retry">Riprova o contatta l\'Assistenza</string>
     <string name="backup_error_failed_to_transfer_file">Il trasferimento file è fallito.</string>
-    <string name="play_weather_forecast">Riproduci previsioni meteo</string>
+    <string name="play_weather_forecast">Riproduci le previsioni meteo</string>
     <string name="missing_maps_ignore">Usa le mappe già installate</string>
     <string name="tomorrow">Domani</string>
     <string name="daynight_mode_night_summary">Visualizza sempre la mappa con un tema scuro, adatto alle ore notturne o alle condizioni di scarsa illuminazione.</string>
