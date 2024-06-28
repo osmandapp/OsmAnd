@@ -135,19 +135,11 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		getPreferenceManager().setPreferenceDataStore(settings.getDataStore(getSelectedAppMode()));
-		if (optimizePerformanceForPreferenceSearch) {
-			currentScreenType = getCurrentScreenType();
-			updateTheme();
-			updatePreferencesScreen();
-		}
 	}
 
 	@Override
 	@SuppressLint("RestrictedApi")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (optimizePerformanceForPreferenceSearch) {
-			return super.onCreateView(inflater, container, savedInstanceState);
-		}
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
@@ -160,6 +152,9 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 				}
 			} else {
 				updateAllSettings();
+			}
+			if (optimizePerformanceForPreferenceSearch) {
+				return view;
 			}
 			createToolbar(inflater, view);
 			setDivider(null);
