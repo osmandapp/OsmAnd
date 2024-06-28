@@ -5009,7 +5009,7 @@
     <string name="recently_visible">%1$s vizibil recent</string>
     <string name="empty_tracks">Nu aveți fișiere cu trasee.</string>
     <string name="switch_folder">Schimbă folderul</string>
-    <string name="show_all_tracks">Afișați toate traseele</string>
+    <string name="show_all_tracks">Arată toate traseele</string>
     <string name="shared_string_on_map">Pe hartă</string>
     <string name="empty_tracks_description">Puteți importa, crea sau înregistra trasee folosind OsmAnd.</string>
     <string name="change_appearance">Modifică aspect</string>
@@ -5559,7 +5559,7 @@
     <string name="shared_string_next_event">Următorul eveniment</string>
     <string name="shared_string_eta">ETA</string>
     <string name="clear_key_assignment">Șterge asignarea tastelor</string>
-    <string name="map_widget_sun_position">Poziția soarelui</string>
+    <string name="map_widget_sun_position">Poziție soare</string>
     <string name="see_all_plans">Vezi toate planurile</string>
     <string name="clear_key_assignment_desc">Asocierea tastei pentru acțiunea selectată va fi ștearsă și setată la \"None\".</string>
     <string name="map_widget_sun_position_desc">Afișează timpul până la răsăritul sau apusul soarelui.</string>
@@ -5594,18 +5594,18 @@
 \nDacă vă confruntați cu oricare dintre aceste probleme, puteți încerca să modificați utilizarea bateriei la \' Fără restricții \'.</string>
     <string name="dont_ask_anymore">Nu mai întreba</string>
     <string name="battery_optimization">Optimizare baterie</string>
-    <string name="battery_optimization_banner_content">Optimizarea bateriei Android poate cauza goluri și inexactități în piesele înregistrate.</string>
+    <string name="battery_optimization_banner_content">Optimizarea bateriei din Android poate produce întreruperi și inexactități în traseele înregistrate.</string>
     <string name="shared_string_author">Autor</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
-    <string name="avg_sensor_bycicle_power">Puterea bicicletei, medie</string>
-    <string name="max_sensor_speed">Viteza senzorului, max</string>
+    <string name="avg_sensor_bycicle_power">Putere bicicletă, medie</string>
+    <string name="max_sensor_speed">Viteză senzor, maxim</string>
     <string name="shared_string_copyright">Drepturi de autor</string>
     <string name="shared_string_link">Link</string>
-    <string name="shared_string_all_tracks">Toate piesele</string>
-    <string name="max_sensor_bycicle_power">Puterea bicicletei, max</string>
-    <string name="avg_sensor_speed">Viteza senzorului, medie</string>
-    <string name="max_sensor_heartrate">Ritmul cardiac, max</string>
-    <string name="avg_sensor_heartrate">Frecvența cardiacă, medie</string>
+    <string name="shared_string_all_tracks">Toate traseele</string>
+    <string name="max_sensor_bycicle_power">Putere bicicletă, maxim</string>
+    <string name="avg_sensor_speed">Viteză senzor, medie</string>
+    <string name="max_sensor_heartrate">Ritm cardiac, maxim</string>
+    <string name="avg_sensor_heartrate">Ritm cardiac, mediu</string>
     <string name="max_sensor_temperature">Temperatură, maxim</string>
     <string name="avg_sensor_temperature">Temperatură, medie</string>
     <string name="max_sensor_cadence">Cadență bicicletă, maxim</string>
@@ -5640,7 +5640,7 @@
 \n
 \nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
     <string name="fix_north_up_descr">Nu roti harta prin gesturi când este orientată cu nordul în sus</string>
-    <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la piesele existente în dosar sau numai la cele noi?</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la traseele existente în folder sau doar la cele noi?</string>
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">- De pregătit pentru 4.8</string>
     <string name="precise">Precis</string>
