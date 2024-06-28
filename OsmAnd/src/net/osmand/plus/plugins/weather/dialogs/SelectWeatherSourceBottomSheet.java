@@ -95,6 +95,7 @@ public class SelectWeatherSourceBottomSheet extends BaseBottomSheetDialogFragmen
 				super(itemView);
 				title = itemView.findViewById(R.id.title);
 				description = itemView.findViewById(R.id.description);
+				description.setMaxLines(2);
 				radioButton = itemView.findViewById(R.id.compound_button);
 			}
 		}

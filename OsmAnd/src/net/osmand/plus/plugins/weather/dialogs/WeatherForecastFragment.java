@@ -14,11 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -47,13 +47,13 @@ import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.maphudbuttons.CustomMapButton;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -77,6 +77,8 @@ import java.util.TimeZone;
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
+	public static final String CHOOSE_LAYER_BTN = "CHOOSE_LAYER";
+	public static final String CHOOSE_CONTOURS_BTN = "CHOOSE_CONTOURS";
 	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
@@ -106,8 +108,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private int currentStep;
 	private int animateStepCount;
 
-	private ImageButton chooseLayersBtn;
-	private ImageButton chooseContoursBtn;
+	private ImageView chooseLayersBtn;
+	private ImageView chooseContoursBtn;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -375,26 +377,21 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupToolBar(@NonNull View view) {
-		View toolBar = view.findViewById(R.id.toolbar);
-		toolBar.setBackgroundColor(app.getColor(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
-
-		ImageView backButton = view.findViewById(R.id.close_button);
-		backButton.setImageDrawable(getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode)));
-		backButton.setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setTitleTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)));
+		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, ColorUtilities.getPrimaryIconColorId(nightMode)));
+		toolbar.setNavigationContentDescription(R.string.shared_string_close);
+		toolbar.setNavigationOnClickListener(v -> {
+			requireActivity().onBackPressed();
 		});
-
-		TextViewEx title = view.findViewById(R.id.toolbar_title);
-		title.setText(R.string.shared_string_weather);
-		title.setTextColor(app.getColor(ColorUtilities.getPrimaryTextColorId(nightMode)));
-
-		ImageView optionButton = view.findViewById(R.id.action_button);
-		optionButton.setImageDrawable(getIcon(R.drawable.ic_action_settings_outlined, ColorUtilities.getPrimaryIconColorId(nightMode)));
-		optionButton.setVisibility(View.VISIBLE);
-		optionButton.setOnClickListener((v) -> onOptionBtnClicked());
+		toolbar.setTitle(R.string.shared_string_weather);
+		toolbar.setBackgroundColor(app.getColor(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
+		toolbar.setOnMenuItemClickListener(item -> {
+			if (item.getItemId() == R.id.weather_data_source) {
+				onOptionBtnClicked();
+			}
+			return false;
+		});
 	}
 
 	private void onOptionBtnClicked() {
@@ -460,7 +457,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addAdditionalWidgetsContainer(widgetsPanel);
@@ -487,13 +483,12 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
-			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID, CHOOSE_CONTOURS_BTN, CHOOSE_LAYER_BTN));
 			layer.restoreCompassButton();
 
 			if (rulerWidget != null) {
@@ -588,19 +583,33 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateChooseLayersButton() {
+		MapActivity activity = requireMapActivity();
+		MapLayers mapLayers = activity.getMapLayers();
+		MapControlsLayer layer = mapLayers.getMapControlsLayer();
+
 		boolean anyBandSelected = weatherHelper.getVisibleForecastBands().size() > 0;
-		int iconResId = anyBandSelected ? R.drawable.ic_layer_top : R.drawable.ic_layer_top;
-		int colorId = anyBandSelected ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode);
-		Drawable iconDrawable = app.getUIUtilities().getIcon(iconResId, colorId);
-		chooseLayersBtn.setImageDrawable(iconDrawable);
+		layer.removeMapButtons(Collections.singletonList(CHOOSE_LAYER_BTN));
+		layer.addMapButton(new CustomMapButton(requireMapActivity(),
+				chooseLayersBtn,
+				CHOOSE_LAYER_BTN,
+				R.drawable.ic_layer_top, R.drawable.ic_layer_top,
+				anyBandSelected ? R.color.icon_color_active_dark : R.color.icon_color_default_dark,
+				anyBandSelected ? R.color.icon_color_active_light : R.color.icon_color_default_light));
 	}
 
 	private void updateChooseContoursButton() {
+		MapActivity activity = requireMapActivity();
+		MapLayers mapLayers = activity.getMapLayers();
+		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 		boolean contourSelected = plugin.getSelectedForecastContoursType() != null;
 		int iconResId = contourSelected ? R.drawable.ic_plugin_srtm : R.drawable.ic_action_contour_lines_disable;
-		int colorId = contourSelected ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode);
-		Drawable iconDrawable = app.getUIUtilities().getIcon(iconResId, colorId);
-		chooseContoursBtn.setImageDrawable(iconDrawable);
+		layer.removeMapButtons(Collections.singletonList(CHOOSE_CONTOURS_BTN));
+		layer.addMapButton(new CustomMapButton(requireMapActivity(),
+				chooseContoursBtn,
+				CHOOSE_CONTOURS_BTN,
+				iconResId, iconResId,
+				contourSelected ? R.color.icon_color_active_dark : R.color.icon_color_default_dark,
+				contourSelected ? R.color.icon_color_active_light : R.color.icon_color_default_light));
 	}
 
 	@Nullable
