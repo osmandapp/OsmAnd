@@ -2071,14 +2071,9 @@
     <string name="quick_action_item_action">Дія %d</string>
     <string name="configure_screen_quick_action">Швидка дія</string>
     <string name="quick_action_item_screen">Екран %d</string>
-    <string name="quick_action_add_marker">Додати позначку</string>
-    <string name="quick_action_add_poi">Додати POI</string>
-    <string name="quick_action_map_style">Змінити стиль мапи</string>
     <string name="quick_action_map_style_switch">Стиль мапи був змінений на «%s».</string>
-    <string name="quick_action_add_parking">Додати місце стоянки</string>
     <string name="quick_action_new_action">Додати дію</string>
     <string name="quick_action_edit_action">Редагувати дію</string>
-    <string name="quick_action_add_favorite">Додати Закладку</string>
     <string name="dialog_add_action_title">Додати дію</string>
     <string name="quick_actions_delete">Вилучити дію</string>
     <string name="quick_actions_delete_text">Вилучити дію «%s»\?</string>
@@ -2134,22 +2129,15 @@
     <string name="quick_action_showhide_poi_descr">Перемикач для показу або приховування POI на мапі.</string>
     <string name="quick_action_gpx_category_descr">Виберіть категорію (за бажанням).</string>
     <string name="quick_action_page_list_descr">Кнопка для перегортання списку нижче.</string>
-    <string name="quick_action_map_overlay">Змінити допоміжний шар</string>
     <string name="quick_action_map_overlay_title">Допоміжні шари</string>
     <string name="quick_action_map_overlay_action">Додати допоміжний шар</string>
     <string name="quick_action_map_overlay_switch">Допоміжний шар змінено на «%s».</string>
     <string name="quick_action_map_underlay_switch">Шар тла змінено на «%s».</string>
-    <string name="quick_action_map_underlay">Змінити тло мапи</string>
     <string name="quick_action_map_underlay_title">Тло мапи</string>
     <string name="quick_action_map_underlay_action">Додати тло</string>
-    <string name="quick_action_map_source">Змінити джерело мапи</string>
     <string name="quick_action_btn_tutorial_descr">Довге натискання з перетягуванням кнопки змінює її положення на екрані.</string>
-    <string name="quick_action_add_osm_bug">Додати Нотатку OSM</string>
     <string name="rendering_value_fine_name">Дуже тонкий</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
-    <string name="quick_action_take_audio_note">Нова аудіопримітка</string>
-    <string name="quick_action_take_video_note">Нова відеопримітка</string>
-    <string name="quick_action_take_photo_note">Нова фотопримітка</string>
     <string name="quick_favorites_name_preset">Найменування</string>
     <string name="quick_action_add_marker_descr">Кнопка для додавання позначки мапи посередині екрану.</string>
     <string name="quick_action_add_gpx_descr">Натискання на цю кнопку додасть маршрутну точку GPX посередині екрану.</string>
@@ -2224,9 +2212,6 @@
     <string name="quick_action_auto_zoom_desc">Кнопка для перемикання автоматичної зміни масштабу при зміні швидкості.</string>
     <string name="quick_action_auto_zoom_on">Увімкнути автомасштабування мапи</string>
     <string name="quick_action_auto_zoom_off">Вимкнути автомасштабування мапи</string>
-    <string name="quick_action_add_destination">Додати пункт призначення</string>
-    <string name="quick_action_replace_destination">Замінити пункт призначення</string>
-    <string name="quick_action_add_first_intermediate">Додати першу проміжну точку</string>
     <string name="quick_action_add_destination_desc">Кнопка додає пункт призначення по центру екрана, раніше вибраний пункт призначення стане останнім проміжним пунктом.</string>
     <string name="quick_action_directions_from_desc">Кнопка додає пункт відправлення по центру екрана. Далі буде запропоновано встановити пункт призначення або розпочате прокладання маршруту.</string>
     <string name="quick_action_replace_destination_desc">Кнопка додає новий пункт призначення по центру екрана, замінюючи попередньо вибраний пункт призначення (якщо такий є).</string>
@@ -3667,7 +3652,6 @@
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
     <string name="lenght_limit_description">Зазначте довжину вашого автомобіля. До довгомірних транспортних можуть застосовуватися певні маршрутні обмеження.</string>
-    <string name="quick_action_remove_next_destination">Вилучити наступну точку призначення</string>
     <string name="please_provide_point_name_error">Вкажіть назву точки</string>
     <string name="quick_action_remove_next_destination_descr">Вилучає наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
@@ -3721,7 +3705,6 @@
     <string name="empty_state_my_tracks">Додати файли треків</string>
     <string name="empty_state_my_tracks_desc">Імпортувати чи записати файли треків</string>
     <string name="context_menu_item_add_waypoint">Додати маршрутну точку</string>
-    <string name="quick_action_add_gpx">Додати маршрутну точку треку</string>
     <string name="map_widget_monitoring">Запис треку</string>
     <string name="marker_save_as_track">Зберегти як файл треку</string>
     <string name="follow_track">Навігація за треком</string>
@@ -5758,4 +5741,5 @@
     <string name="contact_support_retry">Спробуйте ще раз або зверніться до служби підтримки</string>
     <string name="shared_string_colors">Кольори</string>
     <string name="user_palette">Палітра користувача</string>
+    <string name="tomorrow">Завтра</string>
 </resources>

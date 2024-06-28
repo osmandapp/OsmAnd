@@ -149,6 +149,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 
 	private void setupContent(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
+		adapter.setCategoryMode(false);
 		adapter.setMap(controller.getAdapterItems());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));

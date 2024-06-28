@@ -19,10 +19,10 @@ public class ShowHideFavoritesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_FAVORITES_ACTION_ID,
 			"favorites.showhide", ShowHideFavoritesAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.shared_string_favorites)
 			.iconRes(R.drawable.ic_action_favorite).nonEditable()
-			.category(QuickActionType.FAVORITES);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHideFavoritesAction() {
 		super(TYPE);

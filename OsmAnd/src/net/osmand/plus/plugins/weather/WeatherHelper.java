@@ -24,6 +24,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
+import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -33,6 +35,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,7 +51,7 @@ public class WeatherHelper {
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
-	private WeatherWebClient.WeatherWebClientListener downloadStateListener;
+	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
 	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
@@ -117,15 +120,15 @@ public class WeatherHelper {
 		int tileSize = 256;
 		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
 		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
-		if(webClient != null) {
-			webClient.setDownloadStateListener(null);
+		if (webClient != null) {
+			webClient.cleanupResources();
 		}
 		webClient = new WeatherWebClient();
 		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
 				new BandIndexGeoBandSettingsHash(), cacheDir.getAbsolutePath(), projResourcesPath,
 				tileSize, densityFactor, webClient.instantiateProxy(true)
 		);
-		webClient.setDownloadStateListener(downloadStateListener);
+		webClient.setDownloadStateListener(this::onDownloadStateChanged);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
@@ -227,11 +230,26 @@ public class WeatherHelper {
 		return bandSettings;
 	}
 
-	public void setDownloadStateListener(WeatherWebClient.WeatherWebClientListener listener) {
-		downloadStateListener = listener;
-		if(webClient != null) {
-			webClient.setDownloadStateListener(downloadStateListener);
+	private void onDownloadStateChanged(@NonNull DownloadState downloadState, int activeRequestsCounter) {
+		List<WeakReference<WeatherWebClientListener>> listeners = downloadStateListeners;
+		for (WeakReference<WeatherWebClientListener> ref : listeners) {
+			WeatherWebClientListener listener = ref.get();
+			if (listener != null) {
+				listener.onDownloadStateChanged(downloadState, activeRequestsCounter);
+			}
 		}
+	}
+
+	public void addDownloadStateListener(@NonNull WeatherWebClientListener listener) {
+		downloadStateListeners = Algorithms.updateWeakReferencesList(downloadStateListeners, listener, true);
+	}
+
+	public void removeDownloadStateListener(@NonNull WeatherWebClientListener listener) {
+		downloadStateListeners = Algorithms.updateWeakReferencesList(downloadStateListeners, listener, false);
+	}
+
+	public int getActiveRequestsCount() {
+		return webClient != null ? webClient.getActiveRequestsCount() : 0;
 	}
 
 	public int getBandsSettingsVersion() {

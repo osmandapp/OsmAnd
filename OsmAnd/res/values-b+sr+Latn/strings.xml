@@ -422,15 +422,12 @@
     <string name="quick_action_map_source_switch">Izvor mape je promenjen na „%s“.</string>
     <string name="quick_action_map_source_action">Dodaj izvor mape</string>
     <string name="quick_action_map_source_title">Izvor mape</string>
-    <string name="quick_action_map_source">Izmeni izvor mape</string>
     <string name="quick_action_map_underlay_action">Dodaj sloj ispod mape</string>
     <string name="quick_action_map_underlay_title">Slojevi ispod mape</string>
-    <string name="quick_action_map_underlay">Izmeni sloj ispod mape</string>
     <string name="quick_action_map_underlay_switch">Sloj ispod mape promenjen na „%s“.</string>
     <string name="quick_action_map_overlay_switch">Nivo iznad mape promenjen na „%s“.</string>
     <string name="quick_action_map_overlay_action">Dodaj nivo iznad mape</string>
     <string name="quick_action_map_overlay_title">Slojevi iznad mape</string>
-    <string name="quick_action_map_overlay">Izmeni nivo iznad mape</string>
     <string name="quick_action_map_styles">Stil mape</string>
     <string name="quick_action_empty_param_error">Popuni sve odrednice</string>
     <string name="quick_action_map_style_action">Dodaj stil mape</string>
@@ -469,21 +466,12 @@
     <string name="quick_actions_delete_text">Brisanje radnje „%s“?</string>
     <string name="quick_actions_delete">Obriši radnju</string>
     <string name="dialog_add_action_title">Dodaj radnju</string>
-    <string name="quick_action_add_favorite">Dodaj favorit</string>
     <string name="quick_action_edit_action">Uredi akciju</string>
     <string name="quick_action_new_action">Dodaj radnju</string>
-    <string name="quick_action_add_parking">Dodaj mesto parkiranja</string>
     <string name="quick_action_navigation_voice_on">Isključi glas</string>
     <string name="quick_action_navigation_voice_off">Uključi glas</string>
     <string name="quick_action_navigation_voice">Uklj/isklj glas</string>
-    <string name="quick_action_add_osm_bug">Dodaj OSM belešku</string>
-    <string name="quick_action_take_photo_note">Nova slikovna beleška</string>
-    <string name="quick_action_take_video_note">Nova beleška videa</string>
-    <string name="quick_action_take_audio_note">Nova zvučna beleška</string>
     <string name="quick_action_map_style_switch">Stil mape je izmenjen na „%s“.</string>
-    <string name="quick_action_map_style">Izmeni stil mape</string>
-    <string name="quick_action_add_poi">Dodaj TOI</string>
-    <string name="quick_action_add_marker">Dodaj marker na mapu</string>
     <string name="quick_action_item_screen">Ekran %d</string>
     <string name="quick_action_item_action">Radnja %d</string>
     <string name="poi_dialog_poi_type">Vrsta TOI</string>
@@ -608,7 +596,7 @@
     <string name="app_settings">Podešavanja programa</string>
     <string name="use_english_names">Koristi engleska imena na mapama</string>
     <string name="use_english_names_descr">Izaberi između lokalnih ili engleskih imena.</string>
-    <string name="mark_point">Odredište</string>
+    <string name="mark_point">Cilj</string>
     <string name="reload_tile">Ponovo učitavanje sličica mape</string>
     <string name="update_tile">Ažuriranje</string>
     <string name="additional_settings">Dodatna podešavanja</string>
@@ -1035,7 +1023,7 @@
     <string name="osmand_parking_minutes">Minuta</string>
     <string name="osmand_parking_hours">Časova</string>
     <string name="route_updated_loc_found">Čekam poziciju za izračunavanje rute</string>
-    <string name="continue_follow_previous_route_auto">Nastavi prethodno nezavršeno navođenje? (%1$s sekundi)</string>
+    <string name="continue_follow_previous_route_auto">Nastavljaš započetu rutu? (%1$s sekundi)</string>
     <string name="avoid_toll_roads">Naplata putarina</string>
     <string name="show_traffic_warnings">Szanje na putevima</string>
     <string name="show_cameras">Kamere za merenje brzine</string>
@@ -1997,9 +1985,9 @@
     <string name="lang_hi">Indijski</string>
     <string name="lang_iw">Hebrejski</string>
     <string name="lang_he">Hebrejski</string>
-    <string name="access_direction_haptic_feedback_descr">Odredi pravac odredišta uz pomoć vibracije.</string>
+    <string name="access_direction_haptic_feedback_descr">Odredi ciljnu tačku uz pomoć vibracije.</string>
     <string name="access_direction_haptic_feedback">Uputstva vibracijom</string>
-    <string name="access_direction_audio_feedback_descr">Odredi smer do odredišta pomoću zvuka.</string>
+    <string name="access_direction_audio_feedback_descr">Odredi smer do cilja pomoću zvuka.</string>
     <string name="access_direction_audio_feedback">Usmeravanje glasom</string>
     <string name="follow_us">Prati nas</string>
     <string name="move_marker_bottom_sheet_title">Pomeri mapu radi izmena markera lokacije</string>
@@ -2039,9 +2027,6 @@
     <string name="quick_action_replace_destination_desc">Dugme koje centrira novo odredište na sredinu ekrana, i zamenjuje prethodno označeno odredište (ako postoji).</string>
     <string name="quick_action_directions_from_desc">Dugme za postavljanje centra ekrana na početnu tačku. Zatim ćeš morati odabrati odredište ili započeti proračun rute.</string>
     <string name="quick_action_add_destination_desc">Dugme za centriranje odredišta na sredinu ekrana, a svako prethodno označeno odredište će postati poslednja međutačka.</string>
-    <string name="quick_action_add_first_intermediate">Dodaj prvo prolazno međuodredište</string>
-    <string name="quick_action_replace_destination">Zameni odredište</string>
-    <string name="quick_action_add_destination">Postavi odredište</string>
     <string name="quick_action_auto_zoom_off">Isključi autozumiranje mape</string>
     <string name="quick_action_auto_zoom_on">Uključi autozumiranje mape</string>
     <string name="quick_action_auto_zoom_desc">Dugme za automatsko zumiranja mape.</string>
@@ -2931,7 +2916,6 @@
     <string name="shared_string_uninstall_and_restart">Deinstaliraj i restartuj</string>
     <string name="speed_cameras_removed_descr">Ovaj uređaj nema prekršajne kamere.</string>
     <string name="app_mode_inline_skates">Roleri</string>
-    <string name="quick_action_remove_next_destination">Obriši sledeću odredišnu tačku</string>
     <string name="use_volume_buttons_as_zoom_descr">Upravljaj stepenom zumiranje mape pomoću dugmića za jačinu zvuka na uređaju.</string>
     <string name="use_volume_buttons_as_zoom">Dugmići za jačinu zvuka za zumiranje mape</string>
     <string name="please_provide_point_name_error">Navedi naziv tačke</string>
@@ -2986,7 +2970,6 @@
     <string name="empty_state_my_tracks">Dodaj trasu</string>
     <string name="empty_state_my_tracks_desc">Uvezi ili snimi fajl trase</string>
     <string name="context_menu_item_add_waypoint">Dodaj tačku na trasu</string>
-    <string name="quick_action_add_gpx">Dodaj međuodredište na trasu</string>
     <string name="map_widget_monitoring">Snimanje putovanja</string>
     <string name="marker_save_as_track">Snimi kao fajl trase</string>
     <string name="follow_track">Navigacija snimljenom trasom</string>
@@ -5110,7 +5093,7 @@
     <string name="help_article_start_with_first_steps_name">Početni koraci</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gasovi</string>
     <string name="dangerous_goods_description">Na nekim putevima i tunelima prevoz opasnih materije je zabranjen.</string>
-    <string name="dangerous_goods">Opasne materije</string>
+    <string name="dangerous_goods">Opasna roba</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Brzina kretanja</string>
     <string name="shared_string_apply_changes">Primeni izmene</string>
@@ -5774,4 +5757,9 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
+    <string name="missing_maps_ignore_details">Neke preuzete mape mogle bi biti prikladnije za rutu. Ako si upoznat s područjem i mapama, možeš pokušati odrediti rutu koristeći postojeće mape.</string>
+    <string name="quick_action_directions_from">Polazna tačka</string>
+    <string name="quick_action_destination">Odredište</string>
+    <string name="quick_action_terrain_color_scheme">Šema boja terena</string>
+    <string name="quick_action_location_by_gpx">Lokacija putem GPX-a</string>
 </resources>

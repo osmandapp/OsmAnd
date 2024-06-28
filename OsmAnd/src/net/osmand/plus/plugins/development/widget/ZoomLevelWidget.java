@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -78,6 +79,12 @@ public class ZoomLevelWidget extends SimpleWidget {
 	@Override
 	public ZoomLevelWidgetState getWidgetState() {
 		return widgetState;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
 	}
 
 	@Override

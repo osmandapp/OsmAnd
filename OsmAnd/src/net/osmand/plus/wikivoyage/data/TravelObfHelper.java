@@ -403,7 +403,8 @@ public class TravelObfHelper implements TravelHelper {
 			for (Entry<File, List<Amenity>> entry : amenityMap.entrySet()) {
 				File file = entry.getKey();
 				for (Amenity amenity : entry.getValue()) {
-					if (!uniqueIds.add(amenity.getId())) {
+					long routeId = Algorithms.parseLongSilently(amenity.getRouteId().replace("Q", ""), -1);
+					if (!uniqueIds.add(routeId)) {
 						continue;
 					}
 					Set<String> nameLangs = getLanguages(amenity);
@@ -493,8 +494,8 @@ public class TravelObfHelper implements TravelHelper {
 		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2, SearchResultComparator c) {
 			String articleTitle1 = sr1.getArticleTitle();
 			String articleTitle2 = sr2.getArticleTitle();
-			boolean sr1Comparison = c.collator.compare(articleTitle1, c.searchQuery) != 0;
-			boolean sr2Comparison = c.collator.compare(articleTitle2, c.searchQuery) != 0;
+			boolean sr1Comparison = !c.collator.equals(articleTitle1, c.searchQuery.trim());
+			boolean sr2Comparison = !c.collator.equals(articleTitle2, c.searchQuery.trim());
 			switch (this) {
 				case MACH_TITLE:
 					return Boolean.compare(sr1Comparison, sr2Comparison);

@@ -25,7 +25,7 @@ public class DisplayPositionAction extends QuickAction {
 	public static final QuickActionType TYPE =
 			new QuickActionType(DISPLAY_POSITION_ACTION_ID, "display.position.switch", DisplayPositionAction.class)
 					.nameActionRes(R.string.shared_string_change)
-					.nameRes(R.string.always_center_position_on_map)
+					.nameRes(R.string.quick_action_display_position_in_center)
 					.iconRes(ENABLE_ICON_ID)
 					.nonEditable()
 					.category(QuickActionType.SETTINGS);

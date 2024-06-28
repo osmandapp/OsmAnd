@@ -21,9 +21,9 @@ import net.osmand.plus.utils.AndroidUtils;
 public class NavResumePauseAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_RESUME_PAUSE_ACTION_ID,
-			"nav.resumepause", NavResumePauseAction.class).
-			nameRes(R.string.quick_action_resume_pause_navigation).iconRes(R.drawable.ic_play_dark).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			"nav.resumepause", NavResumePauseAction.class)
+			.nameRes(R.string.shared_string_navigation).iconRes(R.drawable.ic_play_dark).nonEditable()
+			.category(QuickActionType.NAVIGATION).nameActionRes(R.string.quick_action_verb_pause_resume);
 
 
 	public NavResumePauseAction() {

@@ -1256,10 +1256,7 @@
     <string name="quick_action_auto_zoom_desc">Дугме за укључивање/искључивање брзинско контролисаног аутозумирања мапе.</string>
     <string name="quick_action_auto_zoom_on">Укључи аутозумирање</string>
     <string name="quick_action_auto_zoom_off">Искључи аутозумирање</string>
-    <string name="quick_action_add_destination">Постави одредиште</string>
-    <string name="quick_action_replace_destination">Замени одредиште</string>
     <string name="quick_action_add_destination_desc">Дугме за центрирање одредишта на средину заслона, а свако претходно означено одредиште ће постати последња међутачка.</string>
-    <string name="quick_action_add_first_intermediate">Додај прву пролазну међутачку</string>
     <string name="quick_action_replace_destination_desc">Дугме које центрира ново одредиште на средину заслона, и замењује претходно означено одредиште (ако постоји).</string>
     <string name="no_overlay">Без слоја над картом</string>
     <string name="quick_action_add_first_intermediate_desc">Дугме за центрирање положаја заслона на прву међутачку ка одредишту.</string>
@@ -1332,7 +1329,6 @@
     <string name="download_hillshade_maps">Сенчење</string>
     <string name="offline_edition">Уређивање ван мреже</string>
     <string name="quick_action_new_action">Додај радњу</string>
-    <string name="quick_action_add_favorite">Додај омиљено</string>
     <string name="what_is_here">Овде су:</string>
     <string name="parked_at">остављена у</string>
     <string name="pick_up_till">Покупити до</string>
@@ -2180,17 +2176,10 @@
     <string name="configure_screen_quick_action">Брзе радње</string>
     <string name="quick_action_item_action">Радња %d</string>
     <string name="quick_action_item_screen">Заслон %d</string>
-    <string name="quick_action_add_poi">Додај тачку занимања</string>
-    <string name="quick_action_map_style">Измени начин приказа карте</string>
     <string name="quick_action_map_style_switch">Начин приказа карте је измењен на „%s“.</string>
-    <string name="quick_action_take_audio_note">Нова звучна белешка</string>
-    <string name="quick_action_take_video_note">Нова белешка видеа</string>
-    <string name="quick_action_take_photo_note">Нова сликовна белешка</string>
-    <string name="quick_action_add_osm_bug">Додај белешку ОСМ-а</string>
     <string name="quick_action_navigation_voice">Укљ/искљ глас</string>
     <string name="quick_action_navigation_voice_off">Укључи глас</string>
     <string name="quick_action_navigation_voice_on">Искључи глас</string>
-    <string name="quick_action_add_parking">Додај место паркирања</string>
     <string name="dialog_add_action_title">Додај радњу</string>
     <string name="quick_actions_delete">Обриши радњу</string>
     <string name="quick_actions_delete_text">Обрисати радњу „%s“\?</string>
@@ -2210,7 +2199,6 @@
     <string name="quick_action_map_style_action">Додај начин приказа карте</string>
     <string name="quick_action_empty_param_error">Попуните све одреднице</string>
     <string name="quick_action_map_styles">Начини приказа карте</string>
-    <string name="quick_action_map_source">Измени извор карте</string>
     <string name="quick_action_map_source_title">Додај извор карте</string>
     <string name="quick_action_map_source_action">Додај извор карте</string>
     <string name="quick_action_map_source_switch">Извор карте промењен на „%s“.</string>
@@ -2272,14 +2260,11 @@
     <string name="update_all">Освежи све (%1$s MB)</string>
     <string name="poi_context_menu_modify_osm_change">Промени измену ОСМ-а</string>
     <string name="last_map_change">Последња измена карте: %s</string>
-    <string name="quick_action_add_marker">Додај ознаку на карти</string>
     <string name="quick_action_fav_name_descr">Оставите празно да се користи адреса или име места.</string>
-    <string name="quick_action_map_overlay">Измени слој над картом</string>
     <string name="quick_action_map_overlay_title">Слојеви изнад карте</string>
     <string name="quick_action_map_overlay_action">Додај слој над картом</string>
     <string name="quick_action_map_overlay_switch">Слој изнад картом промењен на „%s“.</string>
     <string name="quick_action_map_underlay_switch">Слој испод карте промењен на „%s“.</string>
-    <string name="quick_action_map_underlay">Измени слој испод карте</string>
     <string name="quick_action_map_underlay_title">Слојеви испод карте</string>
     <string name="quick_action_map_underlay_action">Додај слој испод карте</string>
     <string name="day_off_label">искљ.</string>
@@ -3396,7 +3381,7 @@
     <string name="shared_string_routing">Навођење</string>
     <string name="shared_string_app_default_w_val">Подразумевано у програму (%s)</string>
     <string name="no_recalculation_setting">Без прерачунавања</string>
-    <string name="route_recalculation_dist_title">Најмања удаљеност за прерачунавање пута</string>
+    <string name="route_recalculation_dist_title">Минимална удаљеност за поновно израчунавање руте</string>
     <string name="route_recalculation_dist_descr">Пут ће бити прерачунат ако је удаљеност до пута већа од одабране одреднице</string>
     <string name="profile_type_custom_string">Произвољни налог</string>
     <string name="shared_string_angle_param">Угао: %s°</string>
@@ -3657,7 +3642,6 @@
 \n
 \n%2$s: су ступњеви при којима ће изворне плочице бити видљиве, а умањење или увећање биће изван ових вредности.</string>
     <string name="lenght_limit_description">Унесите дужину возила, нека ограничења пута могу бити примењена за дужа возила.</string>
-    <string name="quick_action_remove_next_destination">Обриши следећу одредишну тачку</string>
     <string name="please_provide_point_name_error">Молимо одредите име тачке</string>
     <string name="quick_action_remove_next_destination_descr">Уклања тренутну одредишну тачку. Ако је она и завршна тачка, навођење ће се зауставити.</string>
     <string name="search_download_wikipedia_maps">Преузмите карте Википедије</string>
@@ -3711,7 +3695,6 @@
     <string name="empty_state_my_tracks">Додај датотеке трагова</string>
     <string name="empty_state_my_tracks_desc">Увези или сними датотеке трагова</string>
     <string name="context_menu_item_add_waypoint">Додај тачку трага</string>
-    <string name="quick_action_add_gpx">Додај тачку трага</string>
     <string name="map_widget_monitoring">Снимање путовања</string>
     <string name="marker_save_as_track">Сачувај као датотеку трага</string>
     <string name="follow_track">Следи траг</string>
@@ -5243,7 +5226,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Сви подаци из Облака ОсмАнда ће бити %1$s. Подаци на уређају ће остати нетакнути.</string>
     <string name="send_crash_log_descr">Садржи само податке о рушењима програма</string>
     <string name="help_article_plan_route_coordinate_input_name">Унос координата</string>
-    <string name="dangerous_goods_description">На неким путевима и тунелима превоз опасних твари је забрањен.</string>
+    <string name="dangerous_goods_description">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
     <string name="delete_account">Обриши налог</string>
     <string name="write_bearing">Пиши усмерење страна света</string>
     <string name="routing_attr_allow_via_ferrata_description">Планинарска путања опремљена постављеним ужадима, гредама, лествицама и брвнима.</string>
@@ -5375,7 +5358,7 @@
     <string name="osmand_cloud_deleting_account_descr">Кроз неколико тренутака ће сви Ваши подаци и налози бити избрисани из Облака ОсмАнда.
 \n
 \nСви подаци на уређају остаће целовити.</string>
-    <string name="shared_string_class">Врста</string>
+    <string name="shared_string_class">Класа</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Путања бициклом (МТБ)</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Плинови</string>
     <string name="dangerous_goods">Опасна роба</string>
@@ -5765,4 +5748,5 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
+    <string name="missing_maps_ignore_details">Неке већ преузете мапе могу бити прикладне за вашу руту. Ако сте упознати са подручјем и мапама, можете покушати са рутирањем користећи постојеће мапе.</string>
 </resources>

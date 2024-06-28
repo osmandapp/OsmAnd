@@ -38,8 +38,8 @@ import java.util.List;
 public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	public static final QuickActionType TYPE = new QuickActionType(TERRAIN_COLOR_SCHEME_ACTION,
 			"terrain.colorscheme.change", TerrainColorSchemeAction.class).
-			nameRes(R.string.change_terrain_color_scheme).iconRes(R.drawable.ic_action_appearance).
-			category(QuickActionType.TOPOGRAPHY);
+			nameRes(R.string.quick_action_terrain_color_scheme).iconRes(R.drawable.ic_action_appearance).
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 	private static final String KEY_TERRAIN_MODES = "terrain_modes";
 

@@ -2073,25 +2073,16 @@
     <string name="configure_screen_quick_action">إجراءات سريعة</string>
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
-    <string name="quick_action_add_marker">إضافة توجيه مباشر للخريطة</string>
-    <string name="quick_action_add_poi">إضافة POI</string>
-    <string name="quick_action_map_style">تغيير ثيم الخريطة</string>
     <string name="quick_action_map_style_switch">نمط الخرائط تغير ل \"%s\".</string>
-    <string name="quick_action_take_audio_note">أخذ ملاحظة صوتية</string>
-    <string name="quick_action_take_video_note">أخذ ملاحظة بالفيديو</string>
-    <string name="quick_action_take_photo_note">أخذ ملاحظة بالصورة</string>
     <string name="quick_action_navigation_voice">تشغيل/إيقاف الصوت</string>
     <string name="quick_action_navigation_voice_off">الصوت معطل</string>
     <string name="quick_action_navigation_voice_on">الصوت مشغل</string>
-    <string name="quick_action_add_parking">إضافة مكان موقف</string>
     <string name="quick_action_new_action">إضافة إجراء</string>
     <string name="quick_action_edit_action">تعديل الإجراء</string>
-    <string name="quick_action_add_favorite">إضافة للمفضلة</string>
     <string name="dialog_add_action_title">إضافة إجراء</string>
     <string name="quick_actions_delete">حذف إجراء</string>
     <string name="quick_actions_delete_text">حذف الإجراء \"%s\"؟</string>
     <string name="shared_string_action_name">اسم الإجراء</string>
-    <string name="quick_action_add_osm_bug">إضافة خطأ إلى OSM</string>
     <string name="quick_favorites_show_favorites_dialog">عرض مربع حوار الأماكن المفضلة</string>
     <string name="quick_action_add_marker_descr">الضغط على زر الإجراء سيقوم بإضافة الموقع المحدد وسط الشاشة كعلامة.</string>
     <string name="quick_action_take_video_note_descr">الضغط على زر الإجراء سيقوم بإضافة ملاحظة فيديو على الموقع المحدد.</string>
@@ -2118,8 +2109,6 @@
     <string name="quick_action_map_style_action">إضافة نمط خريطة</string>
     <string name="quick_action_empty_param_error">يجب ألا تكون الإعدادات فارغة</string>
     <string name="quick_action_map_styles">أنماط الخريطة</string>
-    <string name="quick_action_map_overlay">الخريطة العلوية</string>
-    <string name="quick_action_map_source">مصدر الخريطة</string>
     <string name="quick_action_map_source_title">مصادر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
     <string name="quick_action_map_source_switch">مصدر الخريطة \"%s\".</string>
@@ -2129,7 +2118,6 @@
     <string name="quick_action_map_overlay_title">طبقة الخريطة العلوية</string>
     <string name="quick_action_map_overlay_action">إضافة طبقة علوية</string>
     <string name="quick_action_map_overlay_switch">تغيير الخريطة العلوية ل \"%s\".</string>
-    <string name="quick_action_map_underlay">الخريطة السفلية</string>
     <string name="quick_action_map_underlay_title">طبقة الخريطة السفلية</string>
     <string name="quick_action_map_underlay_action">إضافة طبقة سفلية</string>
     <string name="quick_action_showhide_poi_descr">الضغط على زر الإجراء سيقوم بعرض أو إخفاء النقاط المهمة على الخريطة.</string>
@@ -2183,8 +2171,6 @@
     <string name="edit_name">إعادة تسمية</string>
     <string name="select_street">اختر شارع</string>
     <string name="shared_string_in_name">في %1$s</string>
-    <string name="quick_action_add_destination">تعيين الوجهة</string>
-    <string name="quick_action_replace_destination">تبديل الوجهة</string>
     <string name="subscribe_email_error">خطأ</string>
     <string name="nautical_maps">الخرائط البحرية</string>
     <string name="fonts_header">خطوط الخريطة</string>
@@ -2224,7 +2210,6 @@
     <string name="quick_action_auto_zoom">التكبير التلقائي</string>
     <string name="quick_action_auto_zoom_on">قم بتشغيل التكبير التلقائي</string>
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
-    <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
     <string name="analyze_on_map">تحليل</string>
     <string name="shared_string_visible">مرئي</string>
     <string name="restore_purchases">استعادة المشتريات</string>
@@ -3727,7 +3712,6 @@
     <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
     <string name="use_volume_buttons_as_zoom">أزرار مستوى الصوت</string>
     <string name="lenght_limit_description">أدل بوزن مركبتك ،قد يتم تطبيق بعض قيود الطرقات على المركبات الثقيلة.</string>
-    <string name="quick_action_remove_next_destination">حذف نقطة الوجهة التالية</string>
     <string name="please_provide_point_name_error">يرجى إعطاء اسم للنقطة</string>
     <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة الرئيسية، سوف تتوقف الملاحة.</string>
     <string name="search_download_wikipedia_maps">تنزيل بيانات ويكيبيديا</string>
@@ -3782,7 +3766,6 @@
     <string name="empty_state_my_tracks">إضافة ملفات المسار</string>
     <string name="empty_state_my_tracks_desc">استيراد أو تسجيل ملفات المسار</string>
     <string name="context_menu_item_add_waypoint">إضافة إلى مسار</string>
-    <string name="quick_action_add_gpx">أضف إحداثية مسار</string>
     <string name="map_widget_monitoring">تسجيل الرحلة</string>
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="follow_track">تتبع المسار</string>

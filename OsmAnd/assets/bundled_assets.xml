@@ -121,15 +121,43 @@
 
 
 	<!-- Color palettes -->
+	<!-- Terrain -->
     <asset source="color-palette/hillshade_color_default.txt" destination="color-palette/hillshade_color_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/hillshade_main_default.txt" destination="color-palette/hillshade_main_default.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/hillshade_color_hillshade_plains.txt" destination="color-palette/hillshade_color_hillshade_plains.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/hillshade_main_hillshade_plains.txt" destination="color-palette/hillshade_main_hillshade_plains.txt" mode="copyOnlyIfDoesNotExist" />
+
     <asset source="color-palette/slope_default.txt" destination="color-palette/slope_default.txt" mode="copyOnlyIfDoesNotExist" />
-    <asset source="color-palette/height_altitude_default.txt" destination="color-palette/height_altitude_default.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/slope_avalanche.txt" destination="color-palette/slope_avalanche.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/slope_slope_plains.txt" destination="color-palette/slope_slope_plains.txt" mode="copyOnlyIfDoesNotExist" />
+    
+	<asset source="color-palette/height_altitude_default.txt" destination="color-palette/height_altitude_default.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_-50_150.txt" destination="color-palette/height_altitude_-50_150.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_-50_2000.txt" destination="color-palette/height_altitude_-50_2000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_200.txt" destination="color-palette/height_altitude_0_200.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_500.txt" destination="color-palette/height_altitude_0_500.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_1000.txt" destination="color-palette/height_altitude_0_1000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_2000.txt" destination="color-palette/height_altitude_0_2000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_3000.txt" destination="color-palette/height_altitude_0_3000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_0_4000.txt" destination="color-palette/height_altitude_0_4000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_100_300.txt" destination="color-palette/height_altitude_100_300.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_100_500.txt" destination="color-palette/height_altitude_100_500.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_300_1000.txt" destination="color-palette/height_altitude_300_1000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_500_1500.txt" destination="color-palette/height_altitude_500_1500.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_500_2500.txt" destination="color-palette/height_altitude_500_2500.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_1000_3000.txt" destination="color-palette/height_altitude_1000_3000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_1000_4000.txt" destination="color-palette/height_altitude_1000_4000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_2000_4000.txt" destination="color-palette/height_altitude_2000_4000.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="color-palette/height_altitude_4000_6500.txt" destination="color-palette/height_altitude_4000_6500.txt" mode="copyOnlyIfDoesNotExist" />
+
+	<!-- Weather -->
     <asset source="color-palette/weather_cloud.txt" destination="color-palette/weather_cloud.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_precip.txt" destination="color-palette/weather_precip.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_pressure.txt" destination="color-palette/weather_pressure.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_temperature.txt" destination="color-palette/weather_temperature.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_wind.txt" destination="color-palette/weather_wind.txt" mode="copyOnlyIfDoesNotExist" />
+
+	<!-- Route -->
     <asset source="color-palette/route_elevation_default.txt" destination="color-palette/route_elevation_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/route_slope_default.txt" destination="color-palette/route_slope_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/route_speed_default.txt" destination="color-palette/route_speed_default.txt" mode="copyOnlyIfDoesNotExist" />

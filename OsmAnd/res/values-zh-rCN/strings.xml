@@ -1108,9 +1108,6 @@
     <string name="quick_action_auto_zoom">地图自动缩放开关</string>
     <string name="quick_action_auto_zoom_on">启用自动缩放</string>
     <string name="quick_action_auto_zoom_off">关闭自动缩放</string>
-    <string name="quick_action_add_destination">设置目的地</string>
-    <string name="quick_action_replace_destination">更换目的地</string>
-    <string name="quick_action_add_first_intermediate">添加第一个途径地</string>
     <string name="subscribe_email_error">错误</string>
     <string name="fonts_header">地图字体</string>
     <string name="right_side_navigation">右侧行驶</string>
@@ -1184,7 +1181,6 @@
     <string name="rendering_value_americanRoadAtlas_name">美国道路地图</string>
     <string name="layer_poi">兴趣点叠加层……</string>
     <string name="layer_map">地图来源…</string>
-    <string name="quick_action_map_source">改变地图来源</string>
     <string name="quick_action_map_source_action">添加地图来源</string>
     <string name="map_mode">地图模式</string>
     <string name="map_magnifier">地图缩放</string>
@@ -2333,20 +2329,11 @@
     <string name="file_name_containes_illegal_char">文件名中出现非法字符</string>
     <string name="quick_action_item_action">动作 %d</string>
     <string name="quick_action_item_screen">屏幕 %d</string>
-    <string name="quick_action_add_marker">添加地图标记</string>
-    <string name="quick_action_add_poi">添加 POI</string>
-    <string name="quick_action_map_style">更改地图样式</string>
     <string name="quick_action_map_style_switch">地图风格已变更为 “%s”。</string>
-    <string name="quick_action_take_audio_note">新音频注记</string>
-    <string name="quick_action_take_video_note">新视频注记</string>
-    <string name="quick_action_take_photo_note">新图片注记</string>
-    <string name="quick_action_add_osm_bug">添加 OSM 注记</string>
     <string name="quick_action_navigation_voice">打开／关闭语音</string>
     <string name="quick_action_navigation_voice_off">取消静音</string>
-    <string name="quick_action_add_parking">添加停车地点</string>
     <string name="quick_action_new_action">添加动作</string>
     <string name="quick_action_edit_action">编辑动作</string>
-    <string name="quick_action_add_favorite">添加到收藏夹</string>
     <string name="dialog_add_action_title">添加动作</string>
     <string name="quick_actions_delete">删除动作</string>
     <string name="quick_actions_delete_text">删除操作 \"%s\"？</string>
@@ -2383,12 +2370,10 @@
     <string name="quick_action_map_style_action">添加地图样式</string>
     <string name="quick_action_empty_param_error">请填写所有参数</string>
     <string name="quick_action_map_styles">地图样式</string>
-    <string name="quick_action_map_overlay">更改地图覆盖</string>
     <string name="quick_action_map_overlay_title">地图覆盖</string>
     <string name="quick_action_map_overlay_action">添加覆盖</string>
     <string name="quick_action_map_overlay_switch">地图覆盖层已更改为 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地图底层已更改为 \"%s\"。</string>
-    <string name="quick_action_map_underlay">更改地图衬底层</string>
     <string name="quick_action_map_underlay_title">地图衬底层</string>
     <string name="quick_action_map_underlay_action">添加衬底层</string>
     <string name="quick_action_map_source_title">地图来源</string>
@@ -2906,7 +2891,6 @@
     <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
     <string name="item_deleted">%1$s 已删除</string>
     <string name="shared_string_uninstall_and_restart">卸载并重新启动</string>
-    <string name="quick_action_remove_next_destination">删除下个目的地点</string>
     <string name="use_volume_buttons_as_zoom_descr">启用以使用设备音量键控制地图缩放级别。</string>
     <string name="use_volume_buttons_as_zoom">音量键用于缩放</string>
     <string name="please_provide_point_name_error">请提供该点的名称</string>
@@ -3194,7 +3178,6 @@
     <string name="route_point_one">路线点1</string>
     <string name="save_route_point">保存路线点</string>
     <string name="live_monitoring_max_interval_to_send">用于在线跟踪的时间缓冲</string>
-    <string name="quick_action_add_gpx">添加轨迹路径点</string>
     <string name="context_menu_item_add_waypoint">添加轨迹路径点</string>
     <string name="save_track_to_gpx_globally">将轨迹记录到GPX文件</string>
     <string name="disable_recording_once_app_killed_descrp">当应用程序被杀死时，轨迹记录将暂停（通过最近的应用程序）。(OsmAnd后台指示会从安卓通知栏中消失。）</string>

@@ -188,7 +188,13 @@ public class SensorTextWidget extends SimpleWidget {
 
 	@Override
 	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
-		registerSensorDevicePref(customId).setModeValue(appMode, deviceIdPref.getModeValue(appMode));
+		copySettingsFromMode(appMode, appMode, customId);
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		registerSensorDevicePref(customId).setModeValue(appMode, deviceIdPref.getModeValue(sourceAppMode));
 	}
 
 	public SensorWidgetDataFieldType getFieldType() {

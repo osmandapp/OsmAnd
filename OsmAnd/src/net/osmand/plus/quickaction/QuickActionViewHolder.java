@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,8 +46,24 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 		itemView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
-	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem) {
-		title.setText(type.getFullName(app));
+	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem, boolean categoryMode) {
+		boolean showActionNameRes = categoryMode;
+		if (categoryMode) {
+			int actionNameRes = type.getActionNameRes();
+			if (actionNameRes != 0) {
+				title.setText(app.getString(type.getActionNameRes()));
+				title.setTextSize(COMPLEX_UNIT_SP, 14);
+				title.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+			} else {
+				showActionNameRes = false;
+			}
+
+			description.setText(app.getString(type.getNameRes()));
+			description.setTextSize(COMPLEX_UNIT_SP, 16);
+			description.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+		} else {
+			title.setText(type.getFullName(app));
+		}
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		int iconRes = type.getIconRes();
@@ -57,7 +75,7 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 
 		setupListItemBackground(appMode, nightMode);
 		AndroidUiHelper.updateVisibility(itemsCountView, itemsCount != 0);
-		AndroidUiHelper.updateVisibility(description, false);
+		AndroidUiHelper.updateVisibility(description, showActionNameRes);
 		AndroidUiHelper.updateVisibility(shortDivider, !lastItem);
 	}
 

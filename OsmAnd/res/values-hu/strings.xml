@@ -2063,21 +2063,12 @@
     <string name="configure_screen_quick_action">Gyorsművelet</string>
     <string name="quick_action_item_action">%d. művelet</string>
     <string name="quick_action_item_screen">%d képernyő</string>
-    <string name="quick_action_add_marker">Térképjelölő hozzáadása</string>
-    <string name="quick_action_add_poi">Érdekes pont (POI) hozzáadása</string>
-    <string name="quick_action_map_style">Térképstílus módosítás</string>
     <string name="quick_action_map_style_switch">A térképstílus erre módosult: „%s”.</string>
-    <string name="quick_action_take_audio_note">Új hangjegyzet</string>
-    <string name="quick_action_take_video_note">Új videojegyzet</string>
-    <string name="quick_action_take_photo_note">Új fényképjegyzet</string>
-    <string name="quick_action_add_osm_bug">OSM-jegyzet hozzáadása</string>
     <string name="quick_action_navigation_voice">Hang be/ki</string>
     <string name="quick_action_navigation_voice_off">Hang visszakapcsolása</string>
     <string name="quick_action_navigation_voice_on">Hang némítása</string>
-    <string name="quick_action_add_parking">Parkolóhely hozzáadása</string>
     <string name="quick_action_new_action">Művelet hozzáadása</string>
     <string name="quick_action_edit_action">Művelet szerkesztése</string>
-    <string name="quick_action_add_favorite">Kedvenc hozzáadása</string>
     <string name="dialog_add_action_title">Művelet hozzáadása</string>
     <string name="quick_actions_delete">Művelet törlése</string>
     <string name="quick_actions_delete_text">Törli ezt a műveletet: „%s”\?</string>
@@ -2114,15 +2105,12 @@
     <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
     <string name="quick_action_empty_param_error">Töltse ki az összes paramétert</string>
     <string name="quick_action_map_styles">Térképstílusok</string>
-    <string name="quick_action_map_overlay">Térképfedőréteg módosítása</string>
     <string name="quick_action_map_overlay_title">Térképfedőrétegek</string>
     <string name="quick_action_map_overlay_action">Fedőréteg hozzáadása</string>
     <string name="quick_action_map_overlay_switch">A térképfedőréteg erre módosult: %s.</string>
     <string name="quick_action_map_underlay_switch">A térképalátét erre módosult: %s.</string>
-    <string name="quick_action_map_underlay">Térképalátét módosítása</string>
     <string name="quick_action_map_underlay_title">Térképalátétek</string>
     <string name="quick_action_map_underlay_action">Alátétréteg hozzáadása</string>
-    <string name="quick_action_map_source">Térképforrás módosítása</string>
     <string name="quick_action_map_source_title">Térképforrások</string>
     <string name="quick_action_map_source_action">Térképforrás hozzáadása</string>
     <string name="quick_action_map_source_switch">A térképforrás erre módosult: %s.</string>
@@ -2193,9 +2181,6 @@
     <string name="quick_action_auto_zoom_desc">Gomb, amely be- vagy kikapcsolja a sebességfüggő automatikus térképnagyítást.</string>
     <string name="quick_action_auto_zoom_on">Automatikus nagyítás bekapcsolása</string>
     <string name="quick_action_auto_zoom_off">Automatikus nagyítás kikapcsolása</string>
-    <string name="quick_action_add_destination">Célpont megadása</string>
-    <string name="quick_action_replace_destination">Célpont lecserélése</string>
-    <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
     <string name="quick_action_add_destination_desc">Gomb, amely beállítja a képernyő középpontját úticélnak, a korábban beállított célpont utolsó köztes célpont lesz.</string>
     <string name="quick_action_replace_destination_desc">Váltógomb, amely a képernyő középpontját beállítja új úti célként, lecserélve korábban kiválasztott célpontot (ha volt).</string>
     <string name="quick_action_add_first_intermediate_desc">Gomb, amely beállítja a képernyő közepét első köztes célpontnak.</string>
@@ -3606,7 +3591,6 @@
     <string name="app_mode_inline_skates">Görkorcsolya</string>
     <string name="please_provide_point_name_error">Kérjük, adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="quick_action_remove_next_destination">Következő célpont törlése</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatok kijelölése exportálásra a profillal együtt.</string>
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
@@ -3677,7 +3661,6 @@
     <string name="plan_route_import_track">Nyomvonal importálása</string>
     <string name="all_next_segments_will_be_recalc">Minden későbbi szakasz újra lesz számítva a kiválasztott profilnak megfelelően.</string>
     <string name="shared_string_gpx_files">Nyomvonalak</string>
-    <string name="quick_action_add_gpx">Útpont hozzáadása a nyomvonalhoz</string>
     <string name="save_track_to_gpx_globally">Nyomvonal rögzítése GPX-fájlba</string>
     <string name="layer_gpx_layer">Nyomvonalak</string>
     <string name="empty_state_my_tracks_desc">Nyomvonalfájlok importálása vagy felvétele</string>
@@ -5766,4 +5749,5 @@
     <string name="weather_source_GFS_description">Az amerikai Nemzeti Környezeti Előrejelző Központok adatait felhasználó Globális Előrejelzési Rendszer</string>
     <string name="weather_source_ecmwf_description">Középtávú Időjárás-előrejelzések Európai Központja</string>
     <string name="shared_string_modify">Módosít</string>
+    <string name="missing_maps_ignore_details">Néhány már letöltött térkép megfelelő lehet az útvonalhoz. Ha ismeri a környéket és a térképeket, megpróbálhatja az útvonaltervezést a meglévő térképek használatával.</string>
 </resources>

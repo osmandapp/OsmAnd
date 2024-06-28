@@ -169,8 +169,6 @@ public class PointLocationLayer extends OsmandMapLayer
 				Bitmap headingBitmap = AndroidUtils.createScaledBitmapWithTint(ctx, headingIconId, scale, profileColor);
 				if (headingBitmap != null) {
 					marker.onSurfaceHeadingIconKey = SwigUtilities.getOnSurfaceIconKey(2);
-					myLocMarkerBuilder.addOnMapSurfaceIcon(marker.onSurfaceHeadingIconKey,
-							NativeUtilities.createSkImageFromBitmap(headingBitmap));
 				}
 			}
 			marker.marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
@@ -306,6 +304,8 @@ public class PointLocationLayer extends OsmandMapLayer
 		PointI circleLocation31 = new PointI();
 		float circleRadius = 0.0f;
 		boolean withCircle = false;
+		float sectorDirection = 0.0f;
+		float sectorRadius = 0.0f;
 		switch (currentMarkerState) {
 			case Move:
 				navigationMarker.setVisibility(!showHeading);
@@ -322,6 +322,12 @@ public class PointLocationLayer extends OsmandMapLayer
 						? navigationMarkerWithHeading.marker.getAccuracyCircleRadius()
 						: navigationMarker.marker.getAccuracyCircleRadius());
 				withCircle = true;
+				sectorDirection = showHeading
+						? navigationMarkerWithHeading.marker.getOnMapSurfaceIconDirection(navigationMarkerWithHeading.onSurfaceHeadingIconKey)
+						: 0.0f;
+				sectorRadius = (float) (showHeading
+						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
+						: 0);
 				break;
 			case Stay:
 				navigationMarker.setVisibility(false);
@@ -338,6 +344,12 @@ public class PointLocationLayer extends OsmandMapLayer
 						? locationMarkerWithHeading.marker.getAccuracyCircleRadius()
 						: locationMarker.marker.getAccuracyCircleRadius());
 				withCircle = true;
+				sectorDirection = showHeading
+						? locationMarkerWithHeading.marker.getOnMapSurfaceIconDirection(locationMarkerWithHeading.onSurfaceHeadingIconKey)
+						: 0.0f;
+				sectorRadius = (float) (showHeading
+						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
+						: 0);
 				break;
 			case None:
 			default:
@@ -352,8 +364,11 @@ public class PointLocationLayer extends OsmandMapLayer
 				mapRenderer.setMyLocationCircleColor(circleColor.withAlpha(0.2f));
 				mapRenderer.setMyLocationCirclePosition(circleLocation31);
 				mapRenderer.setMyLocationCircleRadius(circleRadius);
+				mapRenderer.setMyLocationSectorDirection(sectorDirection);
+				mapRenderer.setMyLocationSectorRadius(sectorRadius);
 			} else {
 				mapRenderer.setMyLocationCircleRadius(0.0f);
+				mapRenderer.setMyLocationSectorRadius(0.0f);
 			}
 		}
 	}
@@ -463,6 +478,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (mapRenderer != null && view != null && locMarker != null && locMarker.marker != null) {
 			if (locMarker.onSurfaceHeadingIconKey != null) {
 				locMarker.marker.setOnMapSurfaceIconDirection(locMarker.onSurfaceHeadingIconKey, heading);
+				mapRenderer.setMyLocationSectorDirection(heading);
 			}
 		}
 	}
