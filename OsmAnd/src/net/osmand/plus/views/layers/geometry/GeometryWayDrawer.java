@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.track.Gpx3DWallColorType.NONE;
+import static net.osmand.plus.track.Gpx3DWallColorType.SOLID;
+import static net.osmand.plus.track.Gpx3DWallColorType.UPWARD_GRADIENT;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -155,10 +159,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               boolean approximationEnabled, boolean showPathBitmaps,
 	                               @Nullable Bitmap pathBitmap, @Nullable Bitmap specialPathBitmap,
 	                               float bitmapStep, float specialBitmapStep, boolean bitmapOnSurface,
-	                               @Nullable QListFColorARGB colorizationMapping, int colorizationScheme,
-	                               @NonNull List<DrawPathData31> pathsData) {
+	                               @Nullable QListFColorARGB colorizationMapping,
+	                               @Nullable QListFColorARGB outlineColorizationMapping,
+	                               int colorizationScheme, @NonNull List<DrawPathData31> pathsData) {
 		long startBuildVectorLineTime = System.currentTimeMillis();
 		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
+		boolean hasOutlineColorizationMapping = outlineColorizationMapping != null && !outlineColorizationMapping.isEmpty();
 		QVectorPointI points = new QVectorPointI();
 		QListFloat heights = new QListFloat();
 		QListFColorARGB traceColorizationMapping = new QListFColorARGB();
@@ -170,7 +176,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		boolean useFixedHeight = false;
 		float fixedHeight = 1000;
 		float additionalExaggeration = 1f;
-		Gpx3DWallColorType wallColorType = Gpx3DWallColorType.NONE;
+		Gpx3DWallColorType wallColorType = NONE;
 		Gpx3DLinePositionType linePositionType = null;
 		if (pathsData.size() > 0) {
 			GeometryWayStyle<?> style = pathsData.get(0).style;
@@ -233,16 +239,16 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
 					line.setColorizationMapping(new QListFColorARGB());
 					line.setOutlineColorizationMapping(traceColorizationMapping);
-					if (wallColorType == Gpx3DWallColorType.NONE) {
+					if (wallColorType == NONE) {
 						line.setColorizationScheme(1);
 						line.setNearOutlineColor(new FColorARGB(0, r, g, b));
 						line.setFarOutlineColor(new FColorARGB(0, r, g, b));
-					} else if (wallColorType == Gpx3DWallColorType.SOLID) {
+					} else if (wallColorType == SOLID) {
 						line.setOutlineColor(new FColorARGB(a, r, g, b));
-					} else {
+					} else if (!wallColorType.isGradient()) {
 						line.setColorizationScheme(1);
-						float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
-						float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
+						float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : 1f;
+						float toAlfa = wallColorType == UPWARD_GRADIENT ? 1f : 0f;
 						line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
 						line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
 					}
@@ -279,14 +285,17 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				}
 			}
 		}
-		if (hasColorizationMapping) {
-			builder.setColorizationScheme(colorizationScheme)
-					.setColorizationMapping(colorizationMapping)
-					.setOutlineColorizationMapping(colorizationMapping);
+		if (hasColorizationMapping || hasOutlineColorizationMapping) {
+			builder.setColorizationScheme(colorizationScheme);
+			if (hasColorizationMapping) {
+				builder.setColorizationMapping(colorizationMapping);
+			}
+			if (hasOutlineColorizationMapping) {
+				builder.setOutlineColorizationMapping(outlineColorizationMapping);
+			}
 		} else {
 			builder.setFillColor(NativeUtilities.createFColorARGB(color))
 					.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
-
 		}
 		if (showRaised) {
 			if (linePositionType != null) {
@@ -297,18 +306,18 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					.setColorizationScheme(colorizationScheme)
 					.setHeights(heights)
 					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
-			if (wallColorType == Gpx3DWallColorType.NONE) {
+			if (wallColorType == NONE) {
 				builder.setNearOutlineColor(new FColorARGB(0, r, g, b));
 				builder.setFarOutlineColor(new FColorARGB(0, r, g, b));
-			} else if (wallColorType == Gpx3DWallColorType.SOLID) {
+			} else if (wallColorType == SOLID) {
 				if (!hasColorizationMapping) {
 					builder.setOutlineColor(new FColorARGB(a, r, g, b))
 							.setFillColor(new FColorARGB(a, r, g, b))
 							.setOutlineColor(new FColorARGB(a, r, g, b));
 				}
-			} else {
-				float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : a;
-				float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? a : 0f;
+			} else if (!wallColorType.isGradient()) {
+				float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : a;
+				float toAlfa = wallColorType == UPWARD_GRADIENT ? a : 0f;
 				if (hasColorizationMapping) {
 					builder.setNearOutlineColor(new FColorARGB(fromAlfa, 1, 1, 1));
 					builder.setFarOutlineColor(new FColorARGB(toAlfa, 1, 1, 1));
@@ -374,7 +383,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float pxStep = (float) style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId, color, width, outlineColor, outlineWidth, dashPattern,
 				approximationEnabled, shouldDrawArrows, pointBitmap, null, pxStep,
-				pxStep, true, null, 0,
+				pxStep, true, null, null, 0,
 				pathsData);
 	}
 

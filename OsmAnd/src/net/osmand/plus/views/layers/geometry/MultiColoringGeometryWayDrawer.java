@@ -101,25 +101,33 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
 		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
 
-		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
+		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData, false);
+		QListFColorARGB outlineColorizationMapping = getColorizationMapping(pathsData, true);
+
 		buildVectorLine(collection, baseOrder, lineId,
-				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, specialPointBitmap, bitmapStep, specialBitmapStep, true, colorizationMapping, style.getColorizationScheme(),
-				pathsData);
+				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(),
+				approximationEnabled, shouldDrawArrows, pointBitmap, specialPointBitmap, bitmapStep,
+				specialBitmapStep, true, colorizationMapping, outlineColorizationMapping,
+				style.getColorizationScheme(), pathsData);
 	}
 
 	@NonNull
-	private QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData) {
+	private QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData, boolean outline) {
 		QListFColorARGB colors = new QListFColorARGB();
-		if (!pathsData.isEmpty() && !coloringType.isSolidSingleColor()) {
+		if (!pathsData.isEmpty()) {
 			int lastColor = 0;
 			for (DrawPathData31 data : pathsData) {
 				int color = 0;
 				GeometryWayStyle<?> style = data.style;
 				if (style != null) {
-					if (style instanceof GeometryGradientWayStyle) {
-						color = ((GeometryGradientWayStyle<?>) style).currColor;
-						lastColor = ((GeometryGradientWayStyle<?>) style).nextColor;
+					if (style instanceof GeometryGradient3DWayStyle) {
+						GeometryGradient3DWayStyle<?> wayStyle = (GeometryGradient3DWayStyle<?>) style;
+						color = outline ? wayStyle.currOutlineColor : wayStyle.currColor;
+						lastColor = outline ? wayStyle.nextOutlineColor : wayStyle.nextColor;
+					} else if (style instanceof GeometryGradientWayStyle) {
+						GeometryGradientWayStyle<?> wayStyle = (GeometryGradientWayStyle<?>) style;
+						color = wayStyle.currColor;
+						lastColor = wayStyle.nextColor;
 					} else {
 						color = style.getColor() == null ? 0 : style.getColor();
 						lastColor = color;
@@ -203,14 +211,14 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 				if (useSpecialArrow) {
 					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPxAuto(ctx, 2));
-					return new int[]{bitmapSize, bitmapSize};
+					return new int[] {bitmapSize, bitmapSize};
 				} else {
 					float scaleCoef = 1f;
 					float styleWidth = arrowsWayStyle.getWidth(0);
 					if (styleWidth > 0 && scaled) {
 						scaleCoef = (styleWidth / 2f) / bitmap.getWidth();
 					}
-					return new int[]{(int) (bitmap.getWidth() * scaleCoef), bitmap.getHeight()};
+					return new int[] {(int) (bitmap.getWidth() * scaleCoef), bitmap.getHeight()};
 				}
 			}
 			return null;

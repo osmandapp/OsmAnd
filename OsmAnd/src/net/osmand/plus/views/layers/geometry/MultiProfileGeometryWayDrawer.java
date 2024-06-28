@@ -73,7 +73,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, pxStep, pxStep, false, null,
+				pointBitmap, pointBitmap, pxStep, pxStep, false, null, null,
 				0, pathsData);
 	}
 

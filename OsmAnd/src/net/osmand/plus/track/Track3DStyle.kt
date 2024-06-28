@@ -11,7 +11,7 @@ class Track3DStyle(
 ) {
 
 	override fun equals(other: Any?): Boolean {
-		return super.equals(other) && other is Track3DStyle
+		return other is Track3DStyle
 				&& visualizationType == other.visualizationType
 				&& wallColorType == other.wallColorType
 				&& linePositionType == other.linePositionType
