@@ -4457,13 +4457,13 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunneler til vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandveje</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Alle</string>
@@ -5625,7 +5625,7 @@
     <string name="routing_type_a_star_classic">A* klassisk</string>
     <string name="auto_zoom_smooth">Jævn</string>
     <string name="auto_zoom_discrete">Diskret</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Auto-zoom</string>
     <string name="routing_type">Ruteberegningstype</string>
     <string name="routing_type_a_star_2_phase">A* 2-faset</string>
     <string name="shared_sting_all_colors">Alle farver</string>
