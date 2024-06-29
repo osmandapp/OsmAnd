@@ -36,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceManager;
@@ -82,9 +83,7 @@ import org.apache.commons.logging.Log;
 import java.io.Serializable;
 import java.util.Set;
 
-import de.KnollFrank.lib.preferencesearch.BaseSearchPreferenceFragment;
-
-public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment implements OnPreferenceChangeListener,
+public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
