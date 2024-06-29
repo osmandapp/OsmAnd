@@ -61,7 +61,7 @@ class SearchPreferenceButtonHelper {
 
 			private Bundle createArguments() {
 				final Bundle arguments = new Bundle();
-				arguments.putBoolean(BaseSettingsFragment.OPTIMIZE_PERFORMANCE_FOR_PREFERENCE_SEARCH, true);
+				arguments.putBoolean(BaseSettingsFragment.IMPROVE_PERFORMANCE_FOR_PREFERENCE_SEARCH, true);
 				return arguments;
 			}
 		};
