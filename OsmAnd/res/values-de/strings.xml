@@ -5755,7 +5755,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
-    <string name="missing_maps_ignore_details">Einige bereits heruntergeladene Karten könnten für Ihre Route geeignet sein. Wenn Sie mit dem Gebiet und den Karten vertraut sind, können Sie versuchen, die Routenführung mit den vorhandenen Karten zu berechnen.</string>
+    <string name="missing_maps_ignore_details">Einige bereits heruntergeladene Karten könnten für deine Route geeignet sein. Wenn du dich in der Gegend und mit den Karten auskennst, kannst du versuchen, deine Route mit den vorhandenen Karten zu planen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
