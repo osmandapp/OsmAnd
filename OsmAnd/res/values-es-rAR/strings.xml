@@ -5754,8 +5754,8 @@
     <string name="daynight_mode_night_summary">Siempre muestra el mapa con el tema oscuro, adecuado para las condiciones nocturnas o de baja iluminación.</string>
     <string name="daynight_mode_day_summary">Siempre muestra el mapa con el tema claro, ideal con la luz del día.</string>
     <string name="daynight_mode_app_theme">Aspecto de la aplicación</string>
-    <string name="key_event_action_continuous_zoom_out">Alejar siempre</string>
-    <string name="key_event_action_continuous_zoom_in">Acercar siempre</string>
+    <string name="key_event_action_continuous_zoom_out">Alejamiento continuo</string>
+    <string name="key_event_action_continuous_zoom_in">Acercamiento continuo</string>
     <string name="remove_key_assignment_summary">Se quitará la asignación de tecla para la acción elegida.</string>
     <string name="remove_key_assignment">Quitar asignación de tecla</string>
     <string name="map_settings_weather_wind_animation">Animación del viento</string>
