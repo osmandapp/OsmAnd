@@ -18,6 +18,7 @@ import net.sf.marineapi.ais.message.AISMessage24;
 import net.sf.marineapi.ais.message.AISMessage27;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -391,6 +392,10 @@ public class AisMessageListener {
     }
     private void initEmbeddedLister(int aisType, @NonNull SentenceListener listener) {
         AisMessageListener.this.sentenceReader.addSentenceListener(listener);
+        /*
+        AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDM);
+        AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDO);
+         */
         AisMessageListener.this.listenerList.push(listener);
         Log.d("AisMessageListener","Listener Type " + aisType + " started");
     }
