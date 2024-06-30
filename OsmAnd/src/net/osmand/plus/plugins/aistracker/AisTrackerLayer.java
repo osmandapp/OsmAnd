@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.aistracker;
 
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.knotsToMeterPerSecond;
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.meterToMiles;
+import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,6 +17,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
+import net.osmand.LocationConvert;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
@@ -85,6 +92,132 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         // aircraft
         ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
         updateAisObjectList(ais);
+
+        // here some tests for the geo (CPA) calculation
+        // define 3 (vessel) objects
+        Location x1 = new Location("test", 49.5d, -1.0d); // 49°30'N, 1°00'W
+        Location x2 = new Location("test", 49.916667d, 0.416667d); // 49°55'N, 0°25'E
+        Location x3 = new Location("test", 49.666667d, -0.75d); // 49°40'N, 0°45'W
+        Location y1, y2, y3;
+        Log.d("AisTrackerLayer", "# test0: position 1 after 0 hours: "
+                + LocationConvert.convertLatitude(x1.getLatitude(), FORMAT_MINUTES, true)
+                +  ", " + LocationConvert.convertLongitude(x1.getLongitude(), FORMAT_MINUTES, true));
+        Log.d("AisTrackerLayer", "# test0: position 2 after 0 hours: "
+                + LocationConvert.convertLatitude(x2.getLatitude(), FORMAT_MINUTES, true)
+                +  ", " + LocationConvert.convertLongitude(x2.getLongitude(), FORMAT_MINUTES, true));
+        Log.d("AisTrackerLayer", "# test0: position 3 after 0 hours: "
+                + LocationConvert.convertLatitude(x3.getLatitude(), FORMAT_MINUTES, true)
+                +  ", " + LocationConvert.convertLongitude(x3.getLongitude(), FORMAT_MINUTES, true));
+
+        // use case: x1: course 0°, speed 5kn, x3: course 270°, speed 10kn, time: 1h, 1.5h
+        x1.setSpeed(knotsToMeterPerSecond(5.0f));
+        x1.setBearing(0.0f);
+        x3.setSpeed(knotsToMeterPerSecond(10.0f));
+        x3.setBearing(270.0f);
+        AisTrackerHelper.Cpa cpa1 = new AisTrackerHelper.Cpa();
+        getCpa(x1, x3, cpa1);
+        Log.d("AisTrackerLayer", "# test1: tcpa(x1, x3): " + cpa1.getTcpa());
+        Log.d("AisTrackerLayer", "# test1: dist at tcpa: " + cpa1.getCpaDist());
+        Log.d("AisTrackerLayer", "# test1: dist0: " + meterToMiles(x1.distanceTo(x3)));
+        y1 = AisTrackerHelper.getNewPosition(x1, 1.0);
+        y3 = AisTrackerHelper.getNewPosition(x3, 1.0);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test1: position 1 after 1 hour: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+            +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: position 3 after 1 hour: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+        y1 = AisTrackerHelper.getNewPosition(x1, 1.18);
+        y3 = AisTrackerHelper.getNewPosition(x3, 1.18);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test1: position 1 after 1.18 hours: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: position 3 after 1.18 hours: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+        y1 = AisTrackerHelper.getNewPosition(x1, 1.5);
+        y3 = AisTrackerHelper.getNewPosition(x3, 1.5);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test1: position 1 after 1.5 hours: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: position 3 after 1.5 hours: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test1: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+
+        // use case: x1: course 0°, speed 5kn, x3: course 270°, speed 5kn, time 1h, 1.5h, 2h
+        x1.setSpeed(knotsToMeterPerSecond(5.0f));
+        x1.setBearing(0.0f);
+        x3.setSpeed(knotsToMeterPerSecond(5.0f));
+        x3.setBearing(270.0f);
+        cpa1.reset();
+        getCpa(x1, x3, cpa1);
+        Log.d("AisTrackerLayer", "# test2: tcpa(x1, x3): " + cpa1.getTcpa());
+        Log.d("AisTrackerLayer", "# test2: dist at tcpa: " + cpa1.getCpaDist());
+        Log.d("AisTrackerLayer", "# test2: dist0: " + meterToMiles(x1.distanceTo(x3)));
+        y1 = AisTrackerHelper.getNewPosition(x1, 1.0);
+        y3 = AisTrackerHelper.getNewPosition(x3, 1.0);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test2: position 1 after 1 hour: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: position 3 after 1 hour: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+        y1 = AisTrackerHelper.getNewPosition(x1, 1.5);
+        y3 = AisTrackerHelper.getNewPosition(x3, 1.5);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test2: position 1 after 1.5 hours: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: position 3 after 1.5 hours: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+        y1 = AisTrackerHelper.getNewPosition(x1, 2.0);
+        y3 = AisTrackerHelper.getNewPosition(x3, 2.0);
+        if ((y1 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test2: position 1 after 2 hours: "
+                    + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: position 3 after 2 hours: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test2: dist1: " + meterToMiles(y1.distanceTo(y3)));
+        }
+
+        // use case: x2: course 270°, speed 5kn, x3: course 45°, speed 5kn, time 5h
+        x2.setSpeed(knotsToMeterPerSecond(5.0f));
+        x2.setBearing(270.0f);
+        x3.setSpeed(knotsToMeterPerSecond(5.0f));
+        x3.setBearing(45.0f);
+        cpa1.reset();
+        getCpa(x2, x3, cpa1);
+        Log.d("AisTrackerLayer", "# test3: tcpa(x1, x3): " + cpa1.getTcpa());
+        Log.d("AisTrackerLayer", "# test3: dist at tcpa: " + cpa1.getCpaDist());
+        Log.d("AisTrackerLayer", "# test3: dist0: " + meterToMiles(x2.distanceTo(x3)));
+        y2 = AisTrackerHelper.getNewPosition(x2, 5.0);
+        y3 = AisTrackerHelper.getNewPosition(x3, 5.0);
+        if ((y2 != null) && (y3 != null)) {
+            Log.d("AisTrackerLayer", "# test3: position 2 after 5 hours: "
+                    + LocationConvert.convertLatitude(y2.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y2.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test3: position 3 after 5 hours: "
+                    + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test3: dist1: " + meterToMiles(y2.distanceTo(y3)));
+        }
 
         //removeOldestAisObjectListEntry();
         //removeLostAisObjects();
