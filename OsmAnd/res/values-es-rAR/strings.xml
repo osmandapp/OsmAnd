@@ -5212,7 +5212,7 @@
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
     <string name="external_sensors_not_found">Sensores no encontrados</string>
     <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
-    <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="external_sensors_source_of_data">Proveedor de datos</string>
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="write_data_from_sensor_to_track">Escribir datos de sensores externos en el GPX mientras se graba el viaje.</string>
     <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa topográfico (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
@@ -5561,7 +5561,7 @@
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
     <string name="topography_maps">Mapas topográficos</string>
-    <string name="reset_key_assignments_desc">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
     <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
     <string name="shared_string_reassign">Reasignar</string>
     <string name="reset_key_assignments">Restablecer asignaciones de teclas</string>
@@ -5732,9 +5732,9 @@
     <string name="wall_height">Altura del muro</string>
     <string name="rendering_value_dark_orange_name">Anaranjado oscuro</string>
     <string name="clear_key_assignment_summary">La asignación de tecla para la acción elegida, será vaciada.</string>
-    <string name="clear_all_key_shortcuts">Vaciar todos los atajos de teclas</string>
+    <string name="clear_all_key_shortcuts">Vaciar asignaciones de tecla</string>
     <string name="new_key_assignment">Nueva asignación de tecla</string>
-    <string name="clear_all_key_shortcuts_summary">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
     <string name="no_assigned_keys">Sin teclas asignadas</string>
     <string name="shared_string_key">Tecla</string>
     <string name="no_assigned_keys_desc">Elige una acción y asigna una tecla para el botón «Añadir».</string>
@@ -5754,8 +5754,8 @@
     <string name="daynight_mode_night_summary">Siempre muestra el mapa con el tema oscuro, adecuado para las condiciones nocturnas o de baja iluminación.</string>
     <string name="daynight_mode_day_summary">Siempre muestra el mapa con el tema claro, ideal con la luz del día.</string>
     <string name="daynight_mode_app_theme">Aspecto de la aplicación</string>
-    <string name="key_event_action_continuous_zoom_out">Alejar siempre</string>
-    <string name="key_event_action_continuous_zoom_in">Acercar siempre</string>
+    <string name="key_event_action_continuous_zoom_out">Alejamiento continuo</string>
+    <string name="key_event_action_continuous_zoom_in">Acercamiento continuo</string>
     <string name="remove_key_assignment_summary">Se quitará la asignación de tecla para la acción elegida.</string>
     <string name="remove_key_assignment">Quitar asignación de tecla</string>
     <string name="map_settings_weather_wind_animation">Animación del viento</string>
@@ -5787,19 +5787,19 @@
     <string name="shared_string_simulate">Simular</string>
     <string name="quick_action_display_position_in_center">Mostrar ubicación siempre en el centro</string>
     <string name="quick_action_terrain">Tipo de coloreado del terreno</string>
-    <string name="quick_action_first_intermediate">Primer intermedio</string>
+    <string name="quick_action_first_intermediate">Primer destino intermedio</string>
     <string name="quick_action_video_note">Nota de video</string>
     <string name="quick_action_photo_note">Nota fotográfica</string>
-    <string name="quick_action_verb_pause_resume">Pausa / Reanudar</string>
+    <string name="quick_action_verb_pause_resume">Pausar / Reanudar</string>
     <string name="quick_action_verb_turn_on_off">Activar / Desactivar</string>
     <string name="quick_action_verb_start_stop">Iniciar / Parar</string>
     <string name="weather_screen">Pantalla meteorológica</string>
-    <string name="quick_action_map_overlay">Superposición</string>
-    <string name="quick_action_map_underlay">Subyacente</string>
-    <string name="data_source">Origen de los datos</string>
-    <string name="weather_data_sources_prompt">OsmAnd ofrece datos meteorológicos desde dos proveedores:</string>
+    <string name="quick_action_map_overlay">Capa superpuesta</string>
+    <string name="quick_action_map_underlay">Capa subyacente</string>
+    <string name="data_source">Proveedor de datos</string>
+    <string name="weather_data_sources_prompt">OsmAnd ofrece datos meteorológicos de dos proveedores:</string>
     <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Plazo Medio</string>
-    <string name="weather_source_GFS_description">Sistema de Pronóstico Mundial de los Centros Nacionales de Predicción Medioambiental</string>
+    <string name="weather_source_GFS_description">Sistema Global de Predicción de los Centros Nacionales de Predicción Medioambiental</string>
     <string name="weather_source_ecmwf_title">CEPMPM (ECMWF)</string>
     <string name="weather_source_GFS_title">GFS</string>
 </resources>

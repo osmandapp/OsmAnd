@@ -89,6 +89,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	public static final int DOWNLOAD_COMPLETE_DELAY = 250;
 	public static final int ANIMATION_START_DELAY = 100;
 	private static final int MAX_FORECAST_DAYS = 7;
+	private static final int NEXT_DAY_START_HOUR = 9;
 
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
@@ -313,7 +314,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			calendar.set(Calendar.HOUR_OF_DAY, hour);
 			calendar.set(Calendar.MINUTE, (int) ((value - (float) hour) * 60.0f));
 
-			updateSelectedDate(calendar.getTime(), fromUser);
+			updateSelectedDate(calendar.getTime());
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 		timeSlider.setLabelBehavior(LABEL_FLOATING);
@@ -333,7 +334,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 9);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : NEXT_DAY_START_HOUR);
 		timeSlider.setStepSize(today ? 1.0f / 12.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 
@@ -370,7 +371,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		chipsView.setOnSelectChipListener(chip -> {
 			Date date = (Date) chip.tag;
 			selectedDate.setTime(date);
-			updateSelectedDate(date, true);
+			updateSelectedDate(date);
 			updateTimeSlider();
 			requireMapActivity().refreshMap();
 			return true;
@@ -404,6 +405,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			chip.tag = calendar.getTime();
 			chipItems.add(chip);
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
+			calendar.set(Calendar.HOUR_OF_DAY, NEXT_DAY_START_HOUR);
 		}
 		return chipItems;
 	}
@@ -439,8 +441,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		updateChooseContoursButton();
 	}
 
-	public void updateSelectedDate(@Nullable Date date, boolean updatePeriod) {
-		plugin.setForecastDate(date, updatePeriod);
+	public void updateSelectedDate(@Nullable Date date) {
+		plugin.setForecastDate(date);
 		if (date != null)
 			date.setTime(WeatherUtils.roundForecastTimeToHour(date.getTime()));
 		checkDateOffset(date);
@@ -493,7 +495,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
-		updateSelectedDate(selectedDate.getTime(), true);
+		updateSelectedDate(selectedDate.getTime());
 	}
 
 	@Override
@@ -504,7 +506,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.enableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().removeAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
-		updateSelectedDate(null, true);
+		updateSelectedDate(null);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {

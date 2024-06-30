@@ -1,5 +1,8 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.gpx.GPXUtilities.Route;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -20,7 +24,10 @@ import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
 import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -56,9 +63,18 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
 	private void renameGroupName() {
 		GPXFile gpxFile = group.getGpxFile();
-		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
-		if (pointsGroup != null) {
-			updateGpx(gpxFile, pointsGroup);
+		GpxDisplayItemType type = group.getType();
+		if (TRACK_POINTS == type) {
+			PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
+			if (pointsGroup != null) {
+				updateGpx(gpxFile, pointsGroup);
+			}
+		} else if (TRACK_ROUTE_POINTS == type) {
+			Route route = gpxFile.getRouteByName(group.getDescription());
+			if (route != null && !Algorithms.stringsEqual(route.name, groupName)) {
+				route.name = groupName;
+				SaveGpxHelper.saveGpx(gpxFile);
+			}
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {

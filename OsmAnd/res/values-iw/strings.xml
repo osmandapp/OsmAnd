@@ -5031,4 +5031,8 @@
     <string name="backup_error_failed_to_transfer_file">העברת קבצי ענן נכשלה.</string>
     <string name="contact_support_retry">נא לנסות שוב או ליצור קשר עם התמיכה</string>
     <string name="rendering_value_dark_orange_name">כתום כהה</string>
+    <string name="quick_action_remove_next_destination">נקודת היעד הבאה</string>
+    <string name="quick_action_map_underlay">שכבת רקע</string>
+    <string name="quick_action_map_overlay">שכבת על</string>
+    <string name="quick_action_map_style">סגנון מפה</string>
 </resources>

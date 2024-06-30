@@ -5752,7 +5752,7 @@
     <string name="data_source">Fuente de datos</string>
     <string name="weather_data_sources_prompt">OsmAnd proporciona datos meteorológicos de dos fuentes:</string>
     <string name="shared_string_modify">Modificar</string>
-    <string name="missing_maps_ignore_details">Algunos mapas que ya has descargado pueden ser adecuados para tu ruta. Si estas familiarizado con la zona y los mapas, puedes intentar calcular la ruta utilizando los mapas ya existentes.</string>
+    <string name="missing_maps_ignore_details">Es posible que algunos mapas ya descargados sean adecuados para su ruta. Si está familiarizado con la zona y los mapas, puede intentar trazar una ruta utilizando los mapas existentes.</string>
     <string name="quick_action_map_overlay">Superposición</string>
     <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
     <string name="app_profile">Perfil de la aplicación</string>

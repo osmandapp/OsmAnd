@@ -5755,4 +5755,20 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="shared_string_modify">Modifică</string>
     <string name="missing_maps_ignore_details">Unele hărți deja descărcate ar putea fi potrivite pentru traseul dumneavoastră. Dacă sunteți familiarizat cu zona și hărțile, puteți încerca să folosiți hărțile existente.</string>
+    <string name="quick_action_directions_from">Punct de plecare</string>
+    <string name="quick_action_terrain_color_scheme">Schema de culori a terenului</string>
+    <string name="quick_action_destination">Destinație</string>
+    <string name="quick_action_location_by_gpx">Localizare prin GPX</string>
+    <string name="quick_action_remove_next_destination">Următorul punct de destinație</string>
+    <string name="quick_action_to_my_location">Către Locația Mea</string>
+    <string name="quick_action_move_map_left">Harta spre stânga</string>
+    <string name="quick_action_move_map_right">Harta spre dreapta</string>
+    <string name="quick_action_move_map_down">Harta în jos</string>
+    <string name="quick_action_move_map_up">Harta în sus</string>
+    <string name="quick_action_new_route">Rută nouă</string>
+    <string name="shared_string_set">Setează</string>
+    <string name="shared_string_replace">Înlocuiește</string>
+    <string name="shared_string_simulate">Simulează</string>
+    <string name="app_profile">Profil aplicație</string>
+    <string name="shared_string_create">Crează</string>
 </resources>

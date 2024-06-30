@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.weather;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherRasterLayer extends BaseMapLayer {
-	public static final int FORECAST_ANIMATION_DURATION_HOURS = 6;
+	public static final int FORECAST_ANIMATION_DURATION_HOURS = 3;
 	private static final long MINUTE_IN_MILLISECONDS = 60 * 1000;
 	private static final long HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 	private static final long DAY_IN_MILLISECONDS = 24 * HOUR_IN_MILLISECONDS;
@@ -59,7 +60,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		this.weatherSettings = weatherHelper.getWeatherSettings();
 		this.weatherLayer = weatherLayer;
 		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		setDateTime(System.currentTimeMillis(), true);
+		setDateTime(System.currentTimeMillis(), false);
 	}
 
 	@Override
@@ -80,42 +81,45 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		return dateTime;
 	}
 
-	public void prepareForDayAnimation(long dateTime) {
-		timePeriodStart = dateTime;
-		timePeriodEnd = timePeriodStart + FORECAST_ANIMATION_DURATION_HOURS * HOUR_IN_MILLISECONDS;
-		timePeriodStep = 30 * MINUTE_IN_MILLISECONDS;
-		requireTimePeriodChange = true;
-		this.dateTime = dateTime;
-	}
-
-	public void setDateTime(long dateTime, boolean updatePeriod) {
-		if(updatePeriod) {
-			long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
-			long dayEnd = dayStart + DAY_IN_MILLISECONDS;
-			if (dateTime < dayStart || dateTime > dayEnd) {
-				dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
-				dayEnd = dayStart + DAY_IN_MILLISECONDS;
+	public void setDateTime(long dateTime, boolean goForward) {
+		long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
+		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		if (dateTime < dayStart || dateTime > dayEnd) {
+			dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
+			dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		}
+		long todayStep = HOUR_IN_MILLISECONDS;
+		long nextStep = todayStep * 3;
+		long startOfToday = OsmAndFormatter.getStartOfToday();
+		long step = dayStart == startOfToday ? todayStep : nextStep;
+		long switchStepTime = (System.currentTimeMillis() + DAY_IN_MILLISECONDS) / nextStep * nextStep;
+		if (switchStepTime > startOfToday && switchStepTime >= dayStart + todayStep && switchStepTime <= dayEnd - nextStep) {
+			if (dateTime < switchStepTime) {
+				dayEnd = switchStepTime;
+				step = todayStep;
+			} else
+				dayStart = switchStepTime;
+		}
+		if (goForward) {
+			long prevTime = (dateTime - dayStart) / step * step + dayStart;
+			long nextTime = prevTime + FORECAST_ANIMATION_DURATION_HOURS * HOUR_IN_MILLISECONDS;
+			if (timePeriodStep != step
+					|| (timePeriodStart > dayStart && prevTime <= timePeriodStart)
+					|| (timePeriodEnd < dayEnd && nextTime >= timePeriodEnd)) {
+				timePeriodStart = Math.max(prevTime - step, dayStart);
+				timePeriodEnd = Math.min(nextTime + step, dayEnd);
+				timePeriodStep = step;
+				requireTimePeriodChange = true;
 			}
-			long todayStep = HOUR_IN_MILLISECONDS;
-			long nextStep = todayStep * 3;
-			long startOfToday = OsmAndFormatter.getStartOfToday();
-			long step = dayStart == startOfToday ? todayStep : nextStep;
-			long switchStepTime = (System.currentTimeMillis() + DAY_IN_MILLISECONDS) / nextStep * nextStep;
-			if (switchStepTime > startOfToday && switchStepTime >= dayStart + todayStep && switchStepTime <= dayEnd - nextStep) {
-				if (dateTime < switchStepTime) {
-					dayEnd = switchStepTime;
-					step = todayStep;
-				} else
-					dayStart = switchStepTime;
-			}
+		} else {
 			long prevTime = (dateTime - dayStart) / step * step + dayStart;
 			long nextTime = prevTime + step;
 			long nearestTime = dateTime - prevTime < nextTime - dateTime ? prevTime : nextTime;
 			if (timePeriodStep != step
 					|| (timePeriodStart > dayStart && nearestTime <= timePeriodStart)
 					|| (timePeriodEnd < dayEnd && nearestTime >= timePeriodEnd)) {
-				timePeriodStart = Math.max(nearestTime - step * 2, dayStart);
-				timePeriodEnd = Math.min(nearestTime + step * 2, dayEnd);
+				timePeriodStart = Math.max(nearestTime - step, dayStart);
+				timePeriodEnd = Math.min(nearestTime + step, dayEnd);
 				timePeriodStep = step;
 				requireTimePeriodChange = true;
 			}
