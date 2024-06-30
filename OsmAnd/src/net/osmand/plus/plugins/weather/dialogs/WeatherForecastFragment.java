@@ -111,6 +111,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private boolean downloading = false;
 	private ImageView playForecastBtnIcon;
 	private int currentStep;
+	private int animationStartStep;
 	private int animateStepCount;
 
 	private ImageView chooseLayersBtn;
@@ -236,6 +237,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			plugin.prepareForDayAnimation(calendar.getTime());
 			requireMapActivity().refreshMap();
 			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
+			animationStartStep = currentStep;
 			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
 			updateSliderValue();
 			scheduleAnimationStart();
@@ -263,6 +265,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		}
 		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
 			this.animationState = AnimationState.IDLE;
+			currentStep = animationStartStep;
+			updateSliderValue();
 			updatePlayForecastButton();
 		} else {
 			currentStep++;
@@ -312,7 +316,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			calendar.setTime(selectedDate.getTime());
 			int hour = (int) value;
 			calendar.set(Calendar.HOUR_OF_DAY, hour);
-			calendar.set(Calendar.MINUTE, (int) ((value - (float) hour) * 60.0f));
+			calendar.set(Calendar.MINUTE, Math.round((value - (float) hour) * 60.0f));
 
 			updateSelectedDate(calendar.getTime());
 		});
@@ -328,6 +332,9 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		boolean twelveHoursFormat = !DateFormat.is24HourFormat(app);
 		return value -> {
 			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
+			int hour = (int) value;
+			int minute = Math.round((value - (float) hour) * 60.0f);
+			calendar.set(Calendar.MINUTE, minute);
 			return timeFormatter.format(calendar.getTime(), twelveHoursFormat);
 		};
 	}
@@ -335,7 +342,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : NEXT_DAY_START_HOUR);
-		timeSlider.setStepSize(today ? 1.0f / 12.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
+		timeSlider.setStepSize(today ? 1.0f / 12.0f : 3.0f / 9.0f); // today ? 5 minutes : 20 minutes
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
