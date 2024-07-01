@@ -44,8 +44,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
-		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-		additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
+		additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 	}
 
 	@Override
