@@ -4,13 +4,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -146,8 +145,7 @@ public class WptPtEditor extends PointEditor {
 				wpt.setIconName(preselectedIconName);
 			}
 			wpt.setAmenityOriginName(amenity.toStringEn());
-			AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-			wpt.getExtensionsToWrite().putAll(extensionsHelper.getAmenityExtensions(amenity));
+			wpt.getExtensionsToWrite().putAll(amenity.getAmenityExtensions(app.getPoiTypes(), true));
 		}
 
 		showEditorFragment();

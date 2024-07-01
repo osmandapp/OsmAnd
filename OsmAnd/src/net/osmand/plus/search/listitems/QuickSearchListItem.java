@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -41,7 +42,6 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 
 import java.io.File;
 import java.util.List;
@@ -121,12 +121,12 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		String[] alternateName = new String[]{searchResult.alternateName};
+		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity) {
-			((Amenity) searchResult.object).getAdditionalInfoAndCollectCategories(
-					app.getPoiTypes(), null, null, alternateName);
+			Amenity amenity = (Amenity) searchResult.object;
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 		}
-		return (alternateName[0] != null ? alternateName[0] + " • " : "") + typeName;
+		return alternateName != null ? alternateName + " • " : typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
