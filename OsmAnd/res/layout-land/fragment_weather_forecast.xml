@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -20,12 +21,27 @@
 			android:orientation="vertical"
 			tools:ignore="UselessParent">
 
-			<include layout="@layout/global_preference_toolbar" />
-
-			<View
+			<com.google.android.material.appbar.AppBarLayout
+				android:id="@+id/appbar"
 				android:layout_width="match_parent"
-				android:layout_height="10dp"
-				android:background="@drawable/bg_contextmenu_shadow_top_light" />
+				android:layout_height="@dimen/toolbar_height"
+				android:background="?attr/actionModeBackground"
+				osmand:contentInsetEnd="0dp"
+				osmand:contentInsetLeft="0dp"
+				osmand:contentInsetRight="0dp"
+				osmand:contentInsetStart="0dp"
+				osmand:elevation="2dp">
+
+				<androidx.appcompat.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/toolbar_height"
+					android:fitsSystemWindows="false"
+					android:gravity="center_vertical"
+					osmand:menu="@menu/weather_forecast_menu"
+					osmand:title="@string/shared_string_weather" />
+
+			</com.google.android.material.appbar.AppBarLayout>
 
 			<include layout="@layout/weather_forecast_content" />
 
