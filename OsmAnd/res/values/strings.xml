@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="load_avg_info">Average stats (1 / 5 / 15 minutes)</string>
+    <string name="load_avg_info_description">Battery per minute: %1$s\nFPS by 1k frames: %2$s\nGPU: %3$s\nCPU: %4$s</string>
     <string name="quick_action_location_by_gpx">Location by GPX</string>
     <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
     <string name="quick_action_directions_from">Start point</string>
