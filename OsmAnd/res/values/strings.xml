@@ -98,7 +98,16 @@
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
-        • To be prepared for 4.8
+        • New terrain colorization option \"Altitude\"\n\n
+        • Custom color palettes for terrain, tracks, and routes\n\n
+        • 3D variant for location position icons\n\n
+        • Quick Actions can now be assigned to external keyboards\n\n
+        • Weather: UI refresh, added wind animation\n\n
+        • 3D Track Improvements: new visualization and colorization options\n\n
+        • Added app theme option to follow map mode\n\n
+        • Fixed track stats, sorting &amp; search\n\n
+        • OSM Editing: deleted login / password authorization method\n\n
+        • Switching to system share sheet starting Android 14\n\n
     </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>
