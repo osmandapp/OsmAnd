@@ -72,7 +72,7 @@ public class Map3DButton extends MapButton {
 		if (map3DModeElevationAngle != DEFAULT_ELEVATION_ANGLE) {
 			return map3DModeElevationAngle;
 		} else {
-			return mapActivity.getMapView().getAdjustedTiltAngle(zoom);
+			return mapActivity.getMapView().getAdjustedTiltAngle(zoom, true);
 		}
 	}
 

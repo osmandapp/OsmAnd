@@ -589,17 +589,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
-		int angle = getAdjustedTiltAngle(zoom.getBaseZoom());
-		animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
+		int baseZoom = zoom.getBaseZoom();
+		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
+			int angle = getAdjustedTiltAngle(baseZoom, false);
+			animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
+		}
 	}
 
-	public int getAdjustedTiltAngle(int baseZoom) {
-		baseZoom = Math.max(MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT, Math.min(baseZoom, MAX_ZOOM_LIMIT));
-		int angle = 90 - (baseZoom - 2) * 5;
-		if (angle >= MIN_ALLOWED_ELEVATION_ANGLE && angle < DEFAULT_ELEVATION_ANGLE) {
-			return angle;
+	public int getAdjustedTiltAngle(int baseZoom, boolean enforceZoomRange) {
+		if (enforceZoomRange) {
+			baseZoom = Math.max(MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT, Math.min(baseZoom, MAX_ZOOM_LIMIT));
 		}
-		return (int) DEFAULT_ELEVATION_ANGLE;
+		int angle = 90 - (baseZoom - 2) * 5;
+		return (int) Math.max(MIN_ALLOWED_ELEVATION_ANGLE, Math.min(angle, DEFAULT_ELEVATION_ANGLE));
 	}
 
 	public void setIntZoom(int zoom) {
