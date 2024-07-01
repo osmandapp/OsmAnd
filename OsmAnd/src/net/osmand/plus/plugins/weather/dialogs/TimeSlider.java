@@ -118,10 +118,4 @@ public class TimeSlider extends Slider {
 		}
 		return coordinates;
 	}
-
-	@Override
-	public void setValue(float value) {
-		super.setValue(value);
-		log.debug("set value " + value + "; valueTo " + getValueTo());
-	}
 }
