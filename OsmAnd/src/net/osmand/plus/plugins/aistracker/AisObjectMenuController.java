@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.aistracker;
 
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
+
+import static java.lang.Math.ceil;
 
 import android.annotation.SuppressLint;
 
@@ -67,6 +70,38 @@ public class AisObjectMenuController extends MenuController {
         return null;
     }
      */
+    @SuppressLint("DefaultLocale")
+    private void addCpaInfo(@NonNull SortedSet<Integer> msgTypes,
+                            @Nullable OsmAndLocationProvider locationProvider) {
+        if (msgTypes.contains(21) || msgTypes.contains(9)) {
+            return;
+        }
+        if ((aisObject.getCog() != AisObjectConstants.INVALID_COG) &&
+                (aisObject.getSog() != AisObjectConstants.INVALID_SOG)) {
+            AisTrackerHelper.Cpa cpa = new AisTrackerHelper.Cpa();
+            Location aisLocation = aisObject.getLocation();
+            if (aisLocation != null) {
+                getCpa(aisLocation, locationProvider, cpa);
+                if (cpa.isValid()) {
+                    double cpaTime = cpa.getTcpa();
+                    double hours = ceil(cpaTime);
+                    double minutes = (cpaTime - hours) * 60.0;
+                    addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
+                    if (cpaTime > 0.0) {
+                        if (hours >= 2.0) {
+                            addMenuItem("TCPA", String.format("%.0f hours %.0f min", hours, minutes));
+                        } else if (hours >= 1.0) {
+                            addMenuItem("TCPA", String.format("%.0f hour %.0f min", hours, minutes));
+                        } else {
+                            addMenuItem("TCPA", String.format("%.0f min", minutes));
+                        }
+                    } else {
+                        addMenuItem("TCPA", String.format("%.1f hours", cpaTime));
+                    }
+                }
+            }
+        }
+    }
 
     private void addMenuItem(@NonNull String type, @Nullable String value) {
         if (value != null) {
@@ -127,6 +162,7 @@ public class AisObjectMenuController extends MenuController {
                         addMenuItem("Bearing", String.format("%.1f", bearing));
                     } catch (Exception ignore) { }
                 }
+                addCpaInfo(msgTypes, locationProvider);
                 /*
                 // test:
                 addMenuItem("# loc", getOwnLocationAsString(locationProvider));
