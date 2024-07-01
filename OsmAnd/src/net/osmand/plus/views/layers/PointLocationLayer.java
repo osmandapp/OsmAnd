@@ -117,7 +117,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	private MarkerState currentMarkerState = MarkerState.Stay;
 	private LatLon lastMarkerLocation;
 
-	private enum MarkerState {
+	public enum MarkerState {
 		Stay,
 		Move,
 		None,
@@ -435,7 +435,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
 			}
 			float circleRadius = location.getAccuracy();
-			boolean withCircle = !isLocationSnappedToRoad();
+			boolean withCircle = shouldShowLocationRadius(currentMarkerState);
 			locMarker.marker.setAccuracyCircleRadius(circleRadius);
 			locMarker.marker.setIsAccuracyCircleVisible(withCircle);
 			if (withCircle) {
@@ -509,8 +509,13 @@ public class PointLocationLayer extends OsmandMapLayer
 				: null;
 	}
 
-	private boolean shouldShowHeading() {
-		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle() && !isLocationSnappedToRoad();
+	private boolean shouldShowHeading(@NonNull MarkerState markerState) {
+		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle() && !isLocationSnappedToRoad()
+				&& settings.VIEW_ANGLE_VISIBILITY.getModeValue(appMode).isVisible(markerState);
+	}
+
+	private boolean shouldShowLocationRadius(@NonNull MarkerState markerState) {
+		return !isLocationSnappedToRoad() && settings.LOCATION_RADIUS_VISIBILITY.getModeValue(appMode).isVisible(markerState);
 	}
 
 	private boolean shouldShowBearing(@Nullable Location location) {
@@ -570,15 +575,16 @@ public class PointLocationLayer extends OsmandMapLayer
 			locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
-		if (!isLocationSnappedToRoad()) {
+		Float bearing = getBearingToShow(lastKnownLocation);
+		MarkerState state = bearing != null ? MarkerState.Move : MarkerState.Stay;
+		if (shouldShowLocationRadius(state)) {
 			drawLocationAccuracy(canvas, box, lastKnownLocation, locationX, locationY);
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			if (shouldShowHeading()) {
+			if (shouldShowHeading(state)) {
 				drawLocationHeading(canvas, locationX, locationY);
 			}
-			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
 				canvas.rotate(bearing - 90, locationX, locationY);
 				AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
@@ -625,7 +631,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				markersRecreated = recreateMarkerCollection();
 				markersInvalidated = false;
 			}
-			boolean showHeading = shouldShowHeading() && locationProvider.getHeading() != null;
+			boolean showHeading = shouldShowHeading(currentMarkerState) && locationProvider.getHeading() != null;
 			boolean showBearing = shouldShowBearing(lastKnownLocation);
 			boolean stateUpdated = setMarkerState(showBearing ?
 					MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);

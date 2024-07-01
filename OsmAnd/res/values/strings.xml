@@ -10,6 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="resting_position">Resting position</string>
+    <string name="navigation_position">Navigation position</string>
+    <string name="resting_navigation_position">Rest &amp; navigation position</string>
+    <string name="view_angle_description">Displays the cone-shaped area you\'re currently facing</string>
+    <string name="view_angle">View angle</string>
+    <string name="location_radius_description">Shows the circular area representing your current location accuracy</string>
+    <string name="location_radius">Location radius</string>
     <string name="quick_action_location_by_gpx">Location by GPX</string>
     <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
     <string name="quick_action_directions_from">Start point</string>

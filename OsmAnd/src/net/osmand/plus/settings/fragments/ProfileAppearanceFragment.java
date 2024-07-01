@@ -41,7 +41,9 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.controllers.ProfileColorController;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -97,11 +99,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	private static final String LOCATION_ICON_ITEMS = "location_icon_items";
 	private static final String SELECT_NAV_ICON = "select_nav_icon";
 	private static final String NAV_ICON_ITEMS = "nav_icon_items";
+	private static final String OPTIONS_CARD = "options_card";
 
 	private static final String PROFILE_NAME_KEY = "profile_name_key";
 	private static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
 	private static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	private static final String PROFILE_COLOR_KEY = "profile_color_key";
+	private static final String PROFILE_VIEW_ANGLE_KEY = "profile_view_angle_key";
+	private static final String PROFILE_LOCATION_RADIUS_KEY = "profile_location_radius_key";
 	private static final String PROFILE_CUSTOM_COLOR_KEY = "profile_custom_color_key";
 	private static final String PROFILE_PARENT_KEY = "profile_parent_key";
 	private static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
@@ -111,6 +116,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	private static final String IS_NEW_PROFILE_KEY = "is_new_profile_key";
 
 	private SettingsExportListener exportListener;
+	private ProfileOptionsController controller;
+	private ProfileOptionsCard optionsCard;
 
 	private ProgressDialog progress;
 
@@ -164,6 +171,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			changedProfile.routeService = profile.routeService;
 			changedProfile.locationIcon = profile.locationIcon;
 			changedProfile.navigationIcon = profile.navigationIcon;
+			changedProfile.viewAngle = profile.viewAngle;
+			changedProfile.locationRadius = profile.locationRadius;
 			isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -184,6 +193,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		profile.routeService = baseModeForNewProfile.getRouteService();
 		profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 		profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
+		profile.viewAngle = baseModeForNewProfile.getViewAngleVisibility();
+		profile.locationRadius = baseModeForNewProfile.getLocationRadiusVisibility();
 	}
 
 	@Override
@@ -294,6 +305,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
 		outState.putString(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
 		outState.putString(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
+		outState.putSerializable(PROFILE_LOCATION_RADIUS_KEY, changedProfile.locationRadius);
+		outState.putSerializable(PROFILE_VIEW_ANGLE_KEY, changedProfile.viewAngle);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -301,6 +314,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = AndroidUtils.getSerializable(savedInstanceState, PROFILE_COLOR_KEY, ProfileIconColors.class);
+		changedProfile.viewAngle = AndroidUtils.getSerializable(savedInstanceState, PROFILE_VIEW_ANGLE_KEY, MarkerDisplayOption.class);
+		changedProfile.locationRadius = AndroidUtils.getSerializable(savedInstanceState, PROFILE_LOCATION_RADIUS_KEY, MarkerDisplayOption.class);
 		changedProfile.customColor = AndroidUtils.getSerializable(savedInstanceState, PROFILE_CUSTOM_COLOR_KEY, Integer.class);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
@@ -388,6 +403,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			colorName.setTextColor(ContextCompat.getColor(app, R.color.preference_category_title));
 		} else if (COLOR_ITEMS.equals(preference.getKey())) {
 			createColorsCard(holder);
+		} else if (OPTIONS_CARD.equals(preference.getKey())) {
+			createOptionsCard(holder);
 		} else if (ICON_ITEMS.equals(preference.getKey())) {
 			iconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			iconItems.removeAllViews();
@@ -450,6 +467,60 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
 			container.addView(colorsPaletteCard.build(app));
 			updateColorName();
+		}
+	}
+
+	private void createOptionsCard(PreferenceViewHolder holder) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ViewGroup container = (ViewGroup) holder.itemView;
+			container.removeAllViews();
+			ProfileOptionsCard optionsCard = getOptionsCard(mapActivity);
+			container.addView(optionsCard.build(app));
+			updateColorName();
+		}
+	}
+
+	@NonNull
+	private ProfileOptionsCard getOptionsCard(@NonNull MapActivity mapActivity) {
+		if (optionsCard == null) {
+			optionsCard = new ProfileOptionsCard(mapActivity);
+			optionsCard.setOptionsController(getOptionsController());
+		}
+		return optionsCard;
+	}
+
+	@NonNull
+	private ProfileOptionsController getOptionsController(){
+		if (controller == null) {
+			controller = new ProfileOptionsController(app, getSelectedAppMode()) {
+				@Override
+				public void onItemSelected(@NonNull MarkerDisplayOption displayOption, @NonNull CommonPreference<MarkerDisplayOption> preference) {
+					if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getId())) {
+						changedProfile.viewAngle = displayOption;
+					} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getId())) {
+						changedProfile.locationRadius = displayOption;
+					}
+					updateOptionsCard();
+				}
+
+				@Override
+				public MarkerDisplayOption getSelectedItem(@NonNull CommonPreference<MarkerDisplayOption> preference) {
+					if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getId())) {
+						return changedProfile.viewAngle;
+					} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getId())) {
+						return changedProfile.locationRadius;
+					}
+					return preference.getModeValue(getSelectedAppMode());
+				}
+			};
+		}
+		return controller;
+	}
+
+	private void updateOptionsCard() {
+		if (optionsCard != null) {
+			optionsCard.updateContent();
 		}
 	}
 
@@ -721,6 +792,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			mode.updateCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
+			mode.setLocationRadius(changedProfile.locationRadius);
+			mode.setViewAngleVisibility(changedProfile.viewAngle);
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -741,7 +814,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 				.setIconColor(changedProfile.color)
 				.setCustomIconColor(changedProfile.customColor)
 				.setLocationIcon(changedProfile.locationIcon)
-				.setNavigationIcon(changedProfile.navigationIcon);
+				.setNavigationIcon(changedProfile.navigationIcon)
+				.setViewAngle(changedProfile.viewAngle)
+				.setLocationRadius(changedProfile.locationRadius);
 
 		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
@@ -961,6 +1036,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		RouteService routeService;
 		String navigationIcon;
 		String locationIcon;
+		MarkerDisplayOption viewAngle;
+		MarkerDisplayOption locationRadius;
 
 		@ColorInt
 		public int getActualColor() {
@@ -991,6 +1068,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 			if (name != null ? !name.equals(that.name) : that.name != null) return false;
 			if (color != that.color) return false;
+			if (viewAngle != that.viewAngle) return false;
+			if (locationRadius != that.locationRadius) return false;
 			if (customColor != null ? !customColor.equals(that.customColor) : that.customColor != null)
 				return false;
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
@@ -1012,6 +1091,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
 			result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
 			result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
+			result = 31 * result + (viewAngle != null ? viewAngle.hashCode() : 0);
+			result = 31 * result + (locationRadius != null ? locationRadius.hashCode() : 0);
 			return result;
 		}
 	}

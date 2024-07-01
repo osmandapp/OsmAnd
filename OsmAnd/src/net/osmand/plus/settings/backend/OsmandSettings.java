@@ -1443,6 +1443,9 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
+	public final CommonPreference<MarkerDisplayOption> VIEW_ANGLE_VISIBILITY = new EnumStringPreference<>(this, "view_angle_visibility", MarkerDisplayOption.RESTING, MarkerDisplayOption.values()).makeProfile().makeShared();
+	public final CommonPreference<MarkerDisplayOption> LOCATION_RADIUS_VISIBILITY = new EnumStringPreference<>(this, "location_radius_visibility", MarkerDisplayOption.RESTING_NAVIGATION, MarkerDisplayOption.values()).makeProfile().makeShared();
+
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference(this, "interrupt_music", false).makeProfile();
 
 	public final CommonPreference<Boolean> ENABLE_PROXY = new BooleanPreference(this, "enable_proxy", false) {
