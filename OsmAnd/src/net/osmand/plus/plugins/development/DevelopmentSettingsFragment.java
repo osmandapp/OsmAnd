@@ -92,6 +92,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
 		setupDayNightInfoPref();
+		setupLoadAvgInfoPref();
 
 		setupResetToDefaultButton();
 	}
@@ -250,6 +251,19 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		String sunset = sunriseSunset != null ? DATE_FORMAT.format(sunriseSunset.getSunset()) : "null";
 		dayNightInfo.setSummary(getString(R.string.day_night_info_description, sunrise, sunset));
 		dayNightInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupLoadAvgInfoPref() {
+		Preference loadAvgInfo = findPreference("load_avg_info");
+		OsmandDevelopmentPlugin.FpsStatsEntry m1 = plugin.getFpsStats(1);
+		OsmandDevelopmentPlugin.FpsStatsEntry m5 = plugin.getFpsStats(5);
+		OsmandDevelopmentPlugin.FpsStatsEntry m15 = plugin.getFpsStats(15);
+		String fps = String.format("%.0f %.0f %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
+		String gpu = String.format("%.2f %.2f %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
+		String idle = String.format("%.2f %.2f %.2f", m1.idle1k, m5.idle1k, m15.idle1k);
+		String battery = String.format("%.2f%% %.2f%% %.2f%%", m1.battery, m5.battery, m15.battery);
+		loadAvgInfo.setSummary(getString(R.string.load_avg_info_description, battery, fps, gpu, idle));
+		loadAvgInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupResetToDefaultButton() {
