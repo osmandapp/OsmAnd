@@ -39,6 +39,7 @@ public final class AisTrackerHelper {
         private float cpaDist; // in miles
         private Location newPos1; // position of first object at time tcpa
         private Location newPos2; // position of first object at time tcpa
+        private boolean valid;
         public Cpa() {
             reset();
         }
@@ -47,6 +48,7 @@ public final class AisTrackerHelper {
             tcpa = INVALID_TCPA;
             newPos1 = null;
             newPos2 = null;
+            valid = false;
         }
         public void setTcpa(double x) { this.tcpa = x; }
         public void setCpaDist(float x) { this.cpaDist = x; }
@@ -56,6 +58,8 @@ public final class AisTrackerHelper {
         public float getCpaDist() { return cpaDist; }
         public Location getCpaPos1() { return newPos1; }
         public Location getCpaPos2() { return newPos2; }
+        public void validate() { valid = true; }
+        public boolean isValid() { return valid; }
     }
 
     /* calculate the Time to Closest Point of Approach (TCPA) of two moving objects:
@@ -67,8 +71,12 @@ public final class AisTrackerHelper {
                                   @NonNull Vector vx, @NonNull Vector vy, double lonCorrection) {
         Vector dx = new Vector( y.sub(x));
         Vector dv = new Vector(vy.sub(vx));
-        double divisor = dv.dot(dv); // TODO: check for Div/0
-        return -(((dx.x * dv.x) + (dx.y * dv.y / lonCorrection)) / divisor); // TODO: check for Div/0
+        double divisor = dv.dot(dv);
+        if ((Math.abs(divisor) < 1.0E-10f) || (lonCorrection < 1.0E-10f)) {
+            // avoid div by 0 or invalid lonCorrection
+            return INVALID_TCPA;
+        }
+        return -(((dx.x * dv.x) + (dx.y * dv.y / lonCorrection)) / divisor);
     }
 
     /* to calculate the Time to Closest Point of Approach (TCPA) between the objects x and y,
@@ -77,7 +85,7 @@ public final class AisTrackerHelper {
         if (checkSpeedAndBearing(x, y)) {
             return INVALID_TCPA;
         }
-        if (lonCorrection < 0.001) {
+        if (lonCorrection < 1.0E-10f) {
             // in this case the lonCorrection is considered invalid -> new calculation
             lonCorrection = getLonCorrection(x);
         }
@@ -113,8 +121,12 @@ public final class AisTrackerHelper {
             return null;
         }
         double tcpa = getTcpa(x,y);
-        Location base = useFirstAsReference ? x : y;
-        return getNewPosition(base, tcpa);
+        if (tcpa == INVALID_TCPA) {
+            return null;
+        } else {
+            Location base = useFirstAsReference ? x : y;
+            return getNewPosition(base, tcpa);
+        }
     }
 
     /* to calculate the Closest Point of Approach (CPA) between the objects x and y,
@@ -159,13 +171,16 @@ public final class AisTrackerHelper {
                               @NonNull Cpa result) {
         if (!checkSpeedAndBearing(loc1, loc2)) {
             double tcpa = getTcpa(loc1, loc2);
-            Location cpaX = getNewPosition(loc1, tcpa);
-            Location cpaY = getNewPosition(loc2, tcpa);
-            result.setTcpa(tcpa);
-            result.setCpaPos1(cpaX);
-            result.setCpaPos2(cpaY);
-            if ((cpaX != null) && (cpaY != null)) {
-                result.setCpaDist(meterToMiles(cpaX.distanceTo(cpaY)));
+            if (tcpa != INVALID_TCPA) {
+                Location cpaX = getNewPosition(loc1, tcpa);
+                Location cpaY = getNewPosition(loc2, tcpa);
+                result.setTcpa(tcpa);
+                result.setCpaPos1(cpaX);
+                result.setCpaPos2(cpaY);
+                if ((cpaX != null) && (cpaY != null)) {
+                    result.setCpaDist(meterToMiles(cpaX.distanceTo(cpaY)));
+                    result.validate();
+                }
             }
         }
     }
@@ -191,7 +206,8 @@ public final class AisTrackerHelper {
         if (x != null) {
             if (x.hasBearing() && x.hasSpeed()) {
                 LatLonPoint a = new LatLonPoint(x.getLatitude(), x.getLongitude());
-                LatLonPoint b = a.getPoint(x.getSpeed() * time * Math.PI / 5556.0, bearingInRad(x.getBearing()));
+                LatLonPoint b = a.getPoint(x.getSpeed() * time * Math.PI / 5556.0,
+                        bearingInRad(x.getBearing()));
                 Location newX = new Location(x);
                 newX.setLongitude(b.getLongitude());
                 newX.setLatitude(b.getLatitude());
@@ -209,7 +225,7 @@ public final class AisTrackerHelper {
     private static double getLonCorrection(@Nullable Location loc) {
         if (loc != null) {
             Location x = new Location(loc);
-            // simulate a "measurement" trio towards East...
+            // simulate a "measurement" trip towards East...
             x.setSpeed(knotsToMeterPerSecond(1.0f)); // speed -> 1 kn
             x.setBearing(90.0f);                           // course -> east
             Location yEast = getNewPosition(x, 1.0);  // new position after 1 hour

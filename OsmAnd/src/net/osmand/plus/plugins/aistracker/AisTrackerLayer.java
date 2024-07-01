@@ -62,43 +62,22 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         initTimer();
         startNetworkListener();
 
-        initTestObjects();        // for test purposes:
+        // for test purposes: remove later...
+        initTestObjects();
+        testCpa();
     }
 
-    private void initTestObjects() {
-        // passenger ship
-        AisObject ais = new AisObject(34568, 1, 20, 0, 1, 320,
-                320.0, 8.4, 50.738d, 7.099d, 0.0);
-        updateAisObjectList(ais);
-        ais = new AisObject(34568, 5, 0, "TEST-CALLSIGN1", "TEST-Ship", 60 /* passenger */, 56,
-                65, 8, 12, 2,
-                "Potsdam", 8, 15, 22, 5);
-        updateAisObjectList(ais);
-        // sailing boat
-        ais = new AisObject(454011, 1, 20, 8, 0, 120,
-                125.0, 4.4, 50.737d, 7.098d, 0.0);
-        updateAisObjectList(ais);
-        ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
-                0, 0, 0, 0,
-                "@@@", 0, 0, 0, 0);
-        updateAisObjectList(ais);
-        // land station
-        ais = new AisObject(878121, 4, 50.736d, 7.100d);
-        updateAisObjectList(ais);
-        // AIDS
-        ais = new AisObject( 521077, 21, 50.735d, 7.101d, 2,
-                0, 0, 0, 0);
-        updateAisObjectList(ais);
-        // aircraft
-        ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
-        updateAisObjectList(ais);
-
+    private void testCpa() {
         // here some tests for the geo (CPA) calculation
         // define 3 (vessel) objects
+        // for coordinate transformation see https://www.koordinaten-umrechner.de
         Location x1 = new Location("test", 49.5d, -1.0d); // 49°30'N, 1°00'W
         Location x2 = new Location("test", 49.916667d, 0.416667d); // 49°55'N, 0°25'E
         Location x3 = new Location("test", 49.666667d, -0.75d); // 49°40'N, 0°45'W
-        Location y1, y2, y3;
+        Location x4 = new Location("test", 49.5d, -4.0d); // 49°30'N, 4°00'W
+        Location x5 = new Location("test", 50.0d, -3.75d); // 50°00'N, 3°45'W
+        // taken from marine chart: distances: x1 - x3: 13.8 nm, x2 - x3: 47,2 nm, x4 - x5: 31.4 nm
+        Location y1, y2, y3, y4, y5;
         Log.d("AisTrackerLayer", "# test0: position 1 after 0 hours: "
                 + LocationConvert.convertLatitude(x1.getLatitude(), FORMAT_MINUTES, true)
                 +  ", " + LocationConvert.convertLongitude(x1.getLongitude(), FORMAT_MINUTES, true));
@@ -108,8 +87,17 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         Log.d("AisTrackerLayer", "# test0: position 3 after 0 hours: "
                 + LocationConvert.convertLatitude(x3.getLatitude(), FORMAT_MINUTES, true)
                 +  ", " + LocationConvert.convertLongitude(x3.getLongitude(), FORMAT_MINUTES, true));
+        Log.d("AisTrackerLayer", "# test0: position 4 after 0 hours: "
+                + LocationConvert.convertLatitude(x4.getLatitude(), FORMAT_MINUTES, true)
+                +  ", " + LocationConvert.convertLongitude(x4.getLongitude(), FORMAT_MINUTES, true));
+        Log.d("AisTrackerLayer", "# test0: position 5 after 0 hours: "
+                + LocationConvert.convertLatitude(x5.getLatitude(), FORMAT_MINUTES, true)
+                +  ", " + LocationConvert.convertLongitude(x5.getLongitude(), FORMAT_MINUTES, true));
 
-        // use case: x1: course 0°, speed 5kn, x3: course 270°, speed 10kn, time: 1h, 1.5h
+        // test case: x1: course 0°, speed 5kn, x3: course 270°, speed 10kn, time: 1h, 1.5h
+        // taken from marine chart:
+        //  position after 1h: x1: 49°35'N, 1°00'W, x3: 49°40'N, 1°0.5'W, distance: 5.0nm
+        //  position after 1.5h: x1: 49°37.5'N, 1°00'W, x3: 49°40'N, 1°8.5'W, distance: 6.0nm
         x1.setSpeed(knotsToMeterPerSecond(5.0f));
         x1.setBearing(0.0f);
         x3.setSpeed(knotsToMeterPerSecond(10.0f));
@@ -124,7 +112,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         if ((y1 != null) && (y3 != null)) {
             Log.d("AisTrackerLayer", "# test1: position 1 after 1 hour: "
                     + LocationConvert.convertLatitude(y1.getLatitude(), FORMAT_MINUTES, true)
-            +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
+                    +  ", " + LocationConvert.convertLongitude(y1.getLongitude(), FORMAT_MINUTES, true));
             Log.d("AisTrackerLayer", "# test1: position 3 after 1 hour: "
                     + LocationConvert.convertLatitude(y3.getLatitude(), FORMAT_MINUTES, true)
                     +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
@@ -153,7 +141,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
             Log.d("AisTrackerLayer", "# test1: dist1: " + meterToMiles(y1.distanceTo(y3)));
         }
 
-        // use case: x1: course 0°, speed 5kn, x3: course 270°, speed 5kn, time 1h, 1.5h, 2h
+        // test case: x1: course 0°, speed 5kn, x3: course 270°, speed 5kn, time 1h, 1.5h, 2h
+        // taken from marine chart:
+        //  position after 1h: x1: 49°35'N, 1°00'W, x3: 49°40'N, 0°52.7'W, distance: 6.8nm
+        //  position after 1.5h: x1: 49°37.5'N, 1°00'W, x3: 49°40'N, 0°56.7'W, distance: 3.1nm
+        //  position after 2h: x1: 49°40'N, 1°00'W, x3: 49°40'N, 1°0.5'W, distance: 0.3nm
         x1.setSpeed(knotsToMeterPerSecond(5.0f));
         x1.setBearing(0.0f);
         x3.setSpeed(knotsToMeterPerSecond(5.0f));
@@ -197,7 +189,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
             Log.d("AisTrackerLayer", "# test2: dist1: " + meterToMiles(y1.distanceTo(y3)));
         }
 
-        // use case: x2: course 270°, speed 5kn, x3: course 45°, speed 5kn, time 5h
+        // test case: x2: course 270°, speed 5kn, x3: course 45°, speed 5kn, time 5h
+        // taken from marine chart:
+        //  position after 5h: x2: 49°55'N, 0°14.1'W, x3: 49°57.8'N, 0°17.5'W, distance: 3.5nm
         x2.setSpeed(knotsToMeterPerSecond(5.0f));
         x2.setBearing(270.0f);
         x3.setSpeed(knotsToMeterPerSecond(5.0f));
@@ -218,6 +212,58 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
                     +  ", " + LocationConvert.convertLongitude(y3.getLongitude(), FORMAT_MINUTES, true));
             Log.d("AisTrackerLayer", "# test3: dist1: " + meterToMiles(y2.distanceTo(y3)));
         }
+
+        // test case: x4: course 45°, speed 10kn, x5: course 70°, speed 5kn, time 6h
+        // taken from marine chart:
+        //  position after 6h: x4: 50°12.1'N, 2°54.4'W, x5: 50°10.1'N, 3°1.5'W, distance: 5nm
+        x4.setSpeed(knotsToMeterPerSecond(10.0f));
+        x4.setBearing(45.0f);
+        x5.setSpeed(knotsToMeterPerSecond(5.0f));
+        x5.setBearing(70.0f);
+        cpa1.reset();
+        getCpa(x4, x5, cpa1);
+        Log.d("AisTrackerLayer", "# test4: tcpa(x4, x5): " + cpa1.getTcpa());
+        Log.d("AisTrackerLayer", "# test4: dist at tcpa: " + cpa1.getCpaDist());
+        Log.d("AisTrackerLayer", "# test4: dist0: " + meterToMiles(x4.distanceTo(x5)));
+        y4 = AisTrackerHelper.getNewPosition(x4, 6.0);
+        y5 = AisTrackerHelper.getNewPosition(x5, 6.0);
+        if ((y4 != null) && (y5 != null)) {
+            Log.d("AisTrackerLayer", "# test4: position 4 after 6 hours: "
+                    + LocationConvert.convertLatitude(y4.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y4.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test4: position 5 after 6 hours: "
+                    + LocationConvert.convertLatitude(y5.getLatitude(), FORMAT_MINUTES, true)
+                    +  ", " + LocationConvert.convertLongitude(y5.getLongitude(), FORMAT_MINUTES, true));
+            Log.d("AisTrackerLayer", "# test4: dist1: " + meterToMiles(y4.distanceTo(y5)));
+        }
+    }
+    private void initTestObjects() {
+        // passenger ship
+        AisObject ais = new AisObject(34568, 1, 20, 0, 1, 320,
+                320.0, 8.4, 50.738d, 7.099d, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(34568, 5, 0, "TEST-CALLSIGN1", "TEST-Ship", 60 /* passenger */, 56,
+                65, 8, 12, 2,
+                "Potsdam", 8, 15, 22, 5);
+        updateAisObjectList(ais);
+        // sailing boat
+        ais = new AisObject(454011, 1, 20, 8, 0, 120,
+                125.0, 4.4, 50.737d, 7.098d, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
+                0, 0, 0, 0,
+                "@@@", 0, 0, 0, 0);
+        updateAisObjectList(ais);
+        // land station
+        ais = new AisObject(878121, 4, 50.736d, 7.100d);
+        updateAisObjectList(ais);
+        // AIDS
+        ais = new AisObject( 521077, 21, 50.735d, 7.101d, 2,
+                0, 0, 0, 0);
+        updateAisObjectList(ais);
+        // aircraft
+        ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
+        updateAisObjectList(ais);
 
         //removeOldestAisObjectListEntry();
         //removeLostAisObjects();
