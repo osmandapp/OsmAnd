@@ -428,7 +428,7 @@
     <string name="quick_action_map_overlay_switch">Nivo iznad mape promenjen na „%s“.</string>
     <string name="quick_action_map_overlay_action">Dodaj nivo iznad mape</string>
     <string name="quick_action_map_overlay_title">Slojevi iznad mape</string>
-    <string name="quick_action_map_styles">Stil mape</string>
+    <string name="quick_action_map_styles">Stilovi mapa</string>
     <string name="quick_action_empty_param_error">Popuni sve odrednice</string>
     <string name="quick_action_map_style_action">Dodaj stil mape</string>
     <string name="quick_action_page_list_descr">Dugme za prolaženje kroz listu ispod.</string>
@@ -5033,7 +5033,7 @@
     <string name="external_sensor_widgets">Spoljašnji senzori</string>
     <string name="map_widget_camera_distance_desc">Pokazuje visinu kamere iznad površine.</string>
     <string name="bluetooth_connected">Povezan, %s</string>
-    <string name="ant_plus_nothing_found_description">Proveri da li je: 
+    <string name="ant_plus_nothing_found_description">Proveri da li je:
 \n- Blutut uključen 
 \n- Prijemnik uključen 
 \n- Ovaj uređaj smešten blizu senzora</string>
