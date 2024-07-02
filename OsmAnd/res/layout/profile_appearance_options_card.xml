@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/title_view"
+		layout="@layout/bottom_sheet_item_title" />
+
+	<include
+		android:id="@+id/view_angle"
+		layout="@layout/configure_screen_list_item" />
+
+	<include
+		android:id="@+id/location_radius"
+		layout="@layout/configure_screen_list_item" />
+
+</LinearLayout>

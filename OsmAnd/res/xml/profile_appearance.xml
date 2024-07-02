@@ -76,4 +76,9 @@
 		android:title="@string/select_navigation_icon"
 		android:selectable="false"/>
 
+	<Preference
+		android:key="options_card"
+		android:layout="@layout/preference_container"
+		android:title="@string/select_icon_profile_dialog_title" />
+
 </PreferenceScreen>
