@@ -8,6 +8,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -262,5 +263,12 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
 					profileKey, imported);
 		}
+	}
+
+	@Override
+	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
+		super.createToolbar(inflater, view);
+		new SearchPreferenceButtonHelper(this, R.id.fragmentContainer)
+				.configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
 }
