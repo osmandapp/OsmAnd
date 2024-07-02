@@ -113,6 +113,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private int currentStep;
 	private int animationStartStep;
 	private int animateStepCount;
+	private int animationStartStepCount;
 
 	private ImageView chooseLayersBtn;
 	private ImageView chooseContoursBtn;
@@ -236,9 +237,10 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			calendar.set(Calendar.MINUTE, (int) ((timeSlider.getValue() - (float) hour) * 60.0f));
 			plugin.prepareForDayAnimation(calendar.getTime());
 			requireMapActivity().refreshMap();
-			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
+			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize());
 			animationStartStep = currentStep;
 			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
+			animationStartStepCount = animateStepCount;
 			updateSliderValue();
 			scheduleAnimationStart();
 		} else {
@@ -263,22 +265,27 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			this.animationState = AnimationState.SUSPENDED;
 			return;
 		}
+		if (weatherHelper.isProcessingTiles()) {
+			this.animationState = AnimationState.SUSPENDED;
+			showProgressBar(true);
+			animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIMATION_START_DELAY);
+			return;
+		}
 		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
-			this.animationState = AnimationState.IDLE;
 			currentStep = animationStartStep;
-			updateSliderValue();
-			updatePlayForecastButton();
-		} else {
-			currentStep++;
-			animateStepCount--;
-			updateSliderValue();
-			if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
-				animationState = AnimationState.IN_PROGRESS;
-				this.animationState = animationState;
-			}
-			if (animationState == AnimationState.IN_PROGRESS) {
-				animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIMATION_FRAME_DELAY);
-			}
+			animateStepCount = animationStartStepCount;
+			showProgressBar(false);
+		}
+		currentStep++;
+		animateStepCount--;
+		updateSliderValue();
+		if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
+			animationState = AnimationState.IN_PROGRESS;
+			this.animationState = animationState;
+			showProgressBar(false);
+		}
+		if (animationState == AnimationState.IN_PROGRESS) {
+			animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIMATION_FRAME_DELAY);
 		}
 	}
 
@@ -700,8 +707,12 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 				downloading = false;
 				if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
 					scheduleAnimationStart();
+					if (!weatherHelper.isProcessingTiles()) {
+						showProgressBar(false);
+					}
+				} else {
+					showProgressBar(false);
 				}
-				showProgressBar(false);
 			}
 		}, DOWNLOAD_COMPLETE_DELAY);
 	}

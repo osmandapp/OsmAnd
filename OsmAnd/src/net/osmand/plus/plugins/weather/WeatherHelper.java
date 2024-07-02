@@ -252,6 +252,10 @@ public class WeatherHelper {
 		return webClient != null ? webClient.getActiveRequestsCount() : 0;
 	}
 
+	public boolean isProcessingTiles() {
+		return weatherTileResourcesManager != null && weatherTileResourcesManager.isProcessingTiles();
+	}
+
 	public int getBandsSettingsVersion() {
 		return bandsSettingsVersion.get();
 	}
