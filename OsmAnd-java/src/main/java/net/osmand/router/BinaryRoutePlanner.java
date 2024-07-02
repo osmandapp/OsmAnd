@@ -36,7 +36,7 @@ public class BinaryRoutePlanner {
 	static int TEST_ID = 194349150;
 	static boolean TEST_SPECIFIC = false;
 
-	public static final float MIN_COST_TOLERANCE = 2.0f; // required due to imprecise nature of squareRootDist31
+	public static final float SQUARE_DISTANCE_INACCURACY = 1.00004f; // from 0.0015% to 0.0036% according to tests
 	public static boolean DEBUG_PRECISE_DIST_MEASUREMENT = false;
 	public static boolean DEBUG_BREAK_EACH_SEGMENT = false;
 
@@ -165,7 +165,9 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost + MIN_COST_TOLERANCE < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+			} else if (ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX &&
+					Math.max(cst.cost + 0.1, cst.cost * SQUARE_DISTANCE_INACCURACY) < minCost[forwardSearch ? 1 : 0]
+			) {
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}
