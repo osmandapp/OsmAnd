@@ -486,7 +486,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	public void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		if (oldColor != null && oldColor.isCustom()) {
+		if (oldColor != null) {
 			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
 		}
 		updateColorItems();
