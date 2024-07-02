@@ -46,7 +46,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -747,7 +746,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				brokenLocationModel = false;
 			}
 
-			if (NavigationIcon.isModel(navigationIconName)) {
+			if (LocationIcon.isModel(navigationIconName)) {
 				navigationModel = model3dHelper.getModel(navigationIconName, model -> {
 					navigationModel = model;
 					navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
@@ -763,7 +762,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				}
 				navigationIcon = null;
 			} else {
-				int navigationIconId = NavigationIcon.fromName(navigationIconName).getIconId();
+				int navigationIconId = LocationIcon.fromName(navigationIconName, false).getIconId();
 				navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 				if (navigationIcon != null) {
 					DrawableCompat.setTint(navigationIcon.getDrawable(1), profileColor);
@@ -771,9 +770,9 @@ public class PointLocationLayer extends OsmandMapLayer
 				navigationModel = null;
 			}
 
-			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
+			LocationIcon locationIconType = LocationIcon.fromName(locationIconName, true);
 			if (LocationIcon.isModel(locationIconName)) {
-				if (!NavigationIcon.isModel(navigationIconName) || navigationModel != null) {
+				if (!LocationIcon.isModel(navigationIconName) || navigationModel != null) {
 					setLocationModel();
 				}
 			} else {
@@ -854,8 +853,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getNavigationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String navigationIconName = appMode.getNavigationIcon();
-		boolean forceUseDefault = NavigationIcon.isModel(navigationIconName)
+		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
-		return forceUseDefault ? NavigationIcon.DEFAULT.name() : navigationIconName;
+		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;
 	}
 }

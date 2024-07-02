@@ -82,8 +82,9 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
+		String paletteName = controller.getPaletteTitle();
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(R.string.shared_string_all_icons); // todo use appropriate title
+		title.setText(paletteName != null ? paletteName : getString(R.string.shared_string_all_icons));
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));

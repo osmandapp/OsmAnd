@@ -24,14 +24,12 @@ import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.settings.fragments.profileappearance.elements.NavigationIconPaletteElements;
 import net.osmand.plus.settings.fragments.profileappearance.elements.ProfileIconPaletteElements;
-import net.osmand.plus.settings.fragments.profileappearance.elements.RestingIconPaletteElements;
+import net.osmand.plus.settings.fragments.profileappearance.elements.LocationIconPaletteElements;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -347,6 +345,11 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 				protected IconsPaletteElements<Integer> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new ProfileIconPaletteElements(context, nightMode);
 				}
+
+				@Override
+				public String getPaletteTitle() {
+					return getString(R.string.profile_icon);
+				}
 			};
 			profileIconCardController.setPaletteListener(icon -> {
 				changedProfile.iconRes = icon;
@@ -362,7 +365,12 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 			restingIconCardController = new ProfileIconsController<String>(app, listLocationIcons(), changedProfile.locationIcon) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
-					return new RestingIconPaletteElements(context, nightMode);
+					return new LocationIconPaletteElements(context, nightMode);
+				}
+
+				@Override
+				public String getPaletteTitle() {
+					return getString(R.string.resting_position_icon);
 				}
 			};
 			restingIconCardController.setPaletteListener(icon -> {
@@ -379,7 +387,12 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), changedProfile.navigationIcon) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
-					return new NavigationIconPaletteElements(context, nightMode);
+					return new LocationIconPaletteElements(context, nightMode);
+				}
+
+				@Override
+				public String getPaletteTitle() {
+					return getString(R.string.navigation_position_icon);
 				}
 			};
 			navigationIconCardController.setPaletteListener(icon -> {
@@ -410,15 +423,21 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 		locationIcons.add(LocationIcon.DEFAULT.name());
 		locationIcons.add(LocationIcon.CAR.name());
 		locationIcons.add(LocationIcon.BICYCLE.name());
+		locationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
+		locationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
+		locationIcons.add(LocationIcon.MOVEMENT_CAR.name());
 		locationIcons.addAll(Model3dHelper.listModels(app));
 		return locationIcons;
 	}
 
 	@NonNull List<String> listNavigationIcons() {
 		List<String> navigationIcons = new ArrayList<>();
-		navigationIcons.add(NavigationIcon.DEFAULT.name());
-		navigationIcons.add(NavigationIcon.NAUTICAL.name());
-		navigationIcons.add(NavigationIcon.CAR.name());
+		navigationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
+		navigationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
+		navigationIcons.add(LocationIcon.MOVEMENT_CAR.name());
+		navigationIcons.add(LocationIcon.DEFAULT.name());
+		navigationIcons.add(LocationIcon.CAR.name());
+		navigationIcons.add(LocationIcon.BICYCLE.name());
 		navigationIcons.addAll(Model3dHelper.listModels(app));
 		return navigationIcons;
 	}

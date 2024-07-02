@@ -43,4 +43,6 @@ public interface IIconsPaletteController<IconData> extends IDialogController {
 	@NonNull
 	IconsPaletteElements<IconData> getPaletteElements(@NonNull Context context, boolean nightMode);
 
+	@Nullable
+	String getPaletteTitle();
 }

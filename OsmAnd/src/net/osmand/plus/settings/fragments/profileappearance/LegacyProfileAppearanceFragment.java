@@ -33,7 +33,6 @@ import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
@@ -483,11 +482,11 @@ public class LegacyProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	private View createLocationIconView(@NonNull String locationIconName, ViewGroup rootView) {
-		LocationIcon locationIcon = LocationIcon.fromName(locationIconName);
+		LocationIcon locationIcon = LocationIcon.fromName(locationIconName, true);
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		int changedProfileColor = changedProfile.getActualColor(app, isNightMode());
-		Drawable locDrawable =  LocationIcon.getDrawable(app, locationIconName);
+		Drawable locDrawable =  LocationIcon.getDrawable(app, locationIconName, true);
 		if (locDrawable instanceof LayerDrawable) {
 			LayerDrawable locationIconDrawable = (LayerDrawable) locDrawable;
 			DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), changedProfileColor);
@@ -531,7 +530,7 @@ public class LegacyProfileAppearanceFragment extends BaseSettingsFragment
 	private View createNavigationIconView(@NonNull String navigationIconName, ViewGroup rootView) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), isNightMode());
 		FrameLayout navigationIconView = (FrameLayout) inflater.inflate(R.layout.preference_select_icon_button, rootView, false);
-		Drawable navDrawable = NavigationIcon.getDrawable(app, navigationIconName);
+		Drawable navDrawable = LocationIcon.getDrawable(app, navigationIconName, true);
 		if (navDrawable instanceof LayerDrawable) {
 			LayerDrawable navigationDrawable = (LayerDrawable) navDrawable;
 			Drawable topDrawable = DrawableCompat.wrap(navigationDrawable.getDrawable(1));
@@ -816,10 +815,10 @@ public class LegacyProfileAppearanceFragment extends BaseSettingsFragment
 
 	@NonNull List<String> listNavigationIcons() {
 		List<String> navigationIcons = new ArrayList<>();
-		navigationIcons.add(NavigationIcon.DEFAULT.name());
-		navigationIcons.add(NavigationIcon.NAUTICAL.name());
-		navigationIcons.add(NavigationIcon.CAR.name());
-		navigationIcons.addAll(Model3dHelper.listModels(app));
+//		navigationIcons.add(NavigationIcon.DEFAULT.name());
+//		navigationIcons.add(NavigationIcon.NAUTICAL.name());
+//		navigationIcons.add(NavigationIcon.CAR.name());
+//		navigationIcons.addAll(Model3dHelper.listModels(app));
 		return navigationIcons;
 	}
 
