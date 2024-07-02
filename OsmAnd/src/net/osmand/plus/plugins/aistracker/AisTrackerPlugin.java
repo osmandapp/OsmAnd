@@ -51,9 +51,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public final CommonPreference<Integer> AIS_NMEA_UDP_PORT;
     private static final Integer AIS_NMEA_DEFAULT_UDP_PORT = 10110;
     public final CommonPreference<Integer> AIS_OBJ_LOST_TIMEOUT;
-    private static final Integer AIS_OBJ_LOST_DEFAULT_TIMEOUT = 7;
+    public static final Integer AIS_OBJ_LOST_DEFAULT_TIMEOUT = 7;
     public final CommonPreference<Integer> AIS_SHIP_LOST_TIMEOUT;
-    private static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
+    public static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
     public final CommonPreference<Integer> AIS_CPA_WARNING_TIME;
     private static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
     public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE;

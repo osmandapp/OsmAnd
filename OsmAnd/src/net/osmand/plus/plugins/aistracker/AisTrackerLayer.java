@@ -310,15 +310,14 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         stopNetworkListener();
     }
     private void removeLostAisObjects() {
-        int maxAge = plugin.AIS_OBJ_LOST_TIMEOUT.get();
         for (Iterator<Map.Entry<Integer, AisObject>> iterator = aisObjectList.entrySet().iterator(); iterator.hasNext(); ) {
             Map.Entry<Integer, AisObject> entry = iterator.next();
-            if (entry.getValue().checkObjectAge(maxAge)) {
+            if (entry.getValue().checkObjectAge()) {
                 Log.d("AisTrackerLayer", "remove AIS object with MMSI " + entry.getValue().getMmsi());
                 iterator.remove();
             }
         }
-        // aisObjectList.entrySet().removeIf(entry -> entry.getValue().checkObjectAge(maxAge));
+        // aisObjectList.entrySet().removeIf(entry -> entry.getValue().checkObjectAge());
     }
     private void removeOldestAisObjectListEntry() {
         Log.d("AisTrackerLayer", "removeOldestAisObjectListEntry() called");
@@ -369,10 +368,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-        int maxAgeInMin = plugin.AIS_SHIP_LOST_TIMEOUT.get();
         for (AisObject ais : aisObjectList.values()) {
             if (isLocationVisible(tileBox, ais.getPosition())) {
-                ais.draw(this, bitmapPaint, canvas, tileBox, maxAgeInMin);
+                ais.draw(this, bitmapPaint, canvas, tileBox);
             }
         }
     }

@@ -30,6 +30,8 @@ import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ROT;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SHIP_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SOG;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
+import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_OBJ_LOST_DEFAULT_TIMEOUT;
+import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_SHIP_LOST_DEFAULT_TIMEOUT;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -82,8 +84,10 @@ public class AisObject {
     private String countryCode = null;
     private SortedSet<Integer> msgTypes = null;
     private long lastUpdate = 0;
-    /* after this time the object is outdated and can be removed: */
-
+    /* after this time of missing AIS signal the object is outdated and can be removed: */
+    private static int maxObjectAgeInMinutes = AIS_OBJ_LOST_DEFAULT_TIMEOUT;
+    /* after this time of missing AIS signal the vessel symbol can change to mark "lost": */
+    private static int vesselLostTimeoutInMinutes = AIS_SHIP_LOST_DEFAULT_TIMEOUT;
     private AisObjType objectClass;
     private Bitmap bitmap = null;
     private int bitmapColor;
@@ -368,8 +372,8 @@ public class AisObject {
         this.bitmapColor = 0;
     }
 
-    private void setBitmap(@NonNull AisTrackerLayer mapLayer, int maxAgeInMin) {
-        if (isLost(maxAgeInMin)) {
+    private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
+        if (isLost(vesselLostTimeoutInMinutes)) {
             if (isMovable()) {
                 this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel_cross);
             }
@@ -401,11 +405,11 @@ public class AisObject {
                     break;
             }
         }
-        this.setColor(maxAgeInMin);
+        this.setColor();
     }
 
-    private void setColor(int maxAgeInMin) {
-        if (isLost(maxAgeInMin)) {
+    private void setColor() {
+        if (isLost(vesselLostTimeoutInMinutes)) {
             if (isMovable()) {
                 this.bitmapColor = 0; // black
             }
@@ -436,10 +440,9 @@ public class AisObject {
     }
 
     public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
-                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
-                     int maxAgeInMin) {
-        if ((this.bitmap == null) || isLost(maxAgeInMin)) {
-            this.setBitmap(mapLayer, maxAgeInMin);
+                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+        if ((this.bitmap == null) || isLost(vesselLostTimeoutInMinutes)) {
+            this.setBitmap(mapLayer);
         }
         if (this.bitmapColor != 0) {
             paint.setColorFilter(new LightingColorFilter(this.bitmapColor, 0));
@@ -461,7 +464,7 @@ public class AisObject {
                 canvas.rotate(rotation, locationX, locationY);
             }
             canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
-            if ((speedFactor > 0) && (!isLost(maxAgeInMin))) {
+            if ((speedFactor > 0) && (!isLost(vesselLostTimeoutInMinutes))) {
                 float lineStartX = locationX;
                 float lineLength = (float)this.bitmap.getHeight() * speedFactor;
                 float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
@@ -515,13 +518,14 @@ public class AisObject {
     private boolean isLost(int maxAgeInMin) {
         return ((System.currentTimeMillis() - this.lastUpdate) / 1000 / 60) > maxAgeInMin;
     }
-
+    public static void setMaxObjectAge(int timeInMinutes) { maxObjectAgeInMinutes = timeInMinutes; }
+    public static void setVesselLostTimeout(int timeInMinutes) { vesselLostTimeoutInMinutes = timeInMinutes; }
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed
     * */
-    public boolean checkObjectAge(int maxAgeInMinutes) {
-        return isLost(maxAgeInMinutes);
+    public boolean checkObjectAge() {
+        return isLost(maxObjectAgeInMinutes);
     }
     public int getMsgType() { return this.ais_msgType; }
     public SortedSet<Integer> getMsgTypes() { return this.msgTypes; }
