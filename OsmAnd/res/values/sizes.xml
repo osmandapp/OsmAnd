@@ -443,6 +443,7 @@
 	<dimen name="setting_list_item_small_height">42dp</dimen>
 	<dimen name="setting_select_icon_button_height">128dp</dimen>
 	<dimen name="setting_select_icon_button_width">164dp</dimen>
+	<dimen name="setting_select_icon_button_size">144dp</dimen>
 	<dimen name="setting_list_item_group_height">68dp</dimen>
 
 	<dimen name="slider_thumb_size">6dp</dimen>
