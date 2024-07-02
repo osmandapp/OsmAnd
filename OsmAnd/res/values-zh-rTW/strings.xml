@@ -5655,7 +5655,27 @@
     <string name="change_default_tracks_appearance_confirmation">套用變更到資料夾中既有的軌跡或是僅套用到新的？</string>
     <string name="shared_string_changes">變更</string>
     <string name="apply_only_to_new">僅套用到新的</string>
-    <string name="release_4_8">• 為 4.8 準備</string>
+    <string name="release_4_8">• 新的地形著色選項「海拔」
+\n
+\n • 地形、軌跡與路線的自訂調色板
+\n
+\n • 位置圖示的 3D 變體
+\n
+\n • 現在可以將快速動作分配給外接鍵盤
+\n
+\n • 天氣：更新使用者介面，新增風的動畫
+\n
+\n • 3D 軌跡改進：新的視覺化與著色選項
+\n
+\n • 新增應用程式佈景主題選項以遵循地圖模式
+\n
+\n • 修復了軌跡統計、排序與搜尋
+\n
+\n • OSM 編輯：已刪除帳號/密碼授權方法
+\n
+\n • 從 Android 14 開始切換至系統 Sharesheet
+\n
+\n</string>
     <string name="shared_string_scale">比例尺</string>
     <string name="vertical_exaggeration">垂直誇大</string>
     <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
@@ -5721,8 +5741,8 @@
     <string name="shared_string_colors">顏色</string>
     <string name="backup_error_failed_to_transfer_file">無法傳輸檔案。</string>
     <string name="contact_support_retry">再試一次或聯絡客服</string>
-    <string name="missing_maps_ignore_details">一些已下載的地圖可能適合您的路線。如果您熟悉該區域與地圖，可以嘗試使用現有地圖進行路線規劃。</string>
-    <string name="missing_maps_ignore">使用既有的地圖</string>
+    <string name="missing_maps_ignore_details">已下載的地圖涵蓋了您的路線嗎？若您熟悉該區域，請使用它們來導航。</string>
+    <string name="missing_maps_ignore">使用已下載的地圖</string>
     <string name="daynight_mode_app_theme_summary">地圖的顯示與應用程式的整體主題一致，白天模式適用於淺色主題，夜間模式適用於深色主題</string>
     <string name="daynight_mode_sunrise_sunset_summary">根據當地日出與日落的時間自動切換日間與夜間主題。</string>
     <string name="daynight_mode_sensor_summary">使用裝置的光感測器根據環境光線在深淺主題之間切換。</string>
