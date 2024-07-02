@@ -565,7 +565,7 @@
     <string name="position_on_map_center">Centar</string>
     <string name="app_mode_pedestrian">Hodanje</string>
     <string name="app_mode_bicycle">Bicikla</string>
-    <string name="app_mode_car">Auto</string>
+    <string name="app_mode_car">Vožnja</string>
     <string name="Closest_Amenities">Najbliže usluge</string>
     <string name="choose_intersected_street">Odaberi ulicu koja se ukršta</string>
     <string name="choose_available_region">Odaberi region sa spiska</string>
