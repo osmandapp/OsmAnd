@@ -44,9 +44,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.util.MapUtils;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -821,26 +819,19 @@ public class AisObject {
                 return(Integer.toString(ais_aidType));
         }
     }
-    private float getDistanceOrBearing(@Nullable OsmAndLocationProvider locationProvider,
-                                       boolean needBearing) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            Location aisLocation = getLocation();
-            if ((myLocation != null) && (aisLocation != null)) {
-                return needBearing ? myLocation.bearingTo(aisLocation) : myLocation.distanceTo(aisLocation);
-            } else {
-                Log.e("AisObject", "getDistanceOrBearing(): mylocation -> " + myLocation +
-                        ", aisLocation -> " + aisLocation);
-                return -500.0f; // invalid
-            }
+    private float getDistanceOrBearing(@Nullable Location ownLocation, boolean needBearing) {
+        Location aisLocation = getLocation();
+        if ((ownLocation != null) && (aisLocation != null)) {
+            return needBearing ? ownLocation.bearingTo(aisLocation) : ownLocation.distanceTo(aisLocation);
         } else {
-            Log.e("AisObject", "getDistanceOrBearing(): locationProvider -> null");
+            Log.e("AisObject", "getDistanceOrBearing(): ownLocation -> " + ownLocation +
+                   ", aisLocation -> " + aisLocation);
             return -500.0f; // invalid
         }
     }
     /* get bearing from own position to the position of the AIS object */
-    public float getBearing(@Nullable OsmAndLocationProvider locationProvider) {
-        float bearing = getDistanceOrBearing(locationProvider, true);
+    public float getBearing(@Nullable Location ownLocation) {
+        float bearing = getDistanceOrBearing(ownLocation, true);
         if ((bearing < 0.0f) && (bearing > -200.0f)) {
             while (bearing < 0.0f) {
                 bearing += 360.0f;
@@ -849,11 +840,11 @@ public class AisObject {
         return bearing;
     }
     /* get distance from own position to the position of the AIS object in meters */
-    public float getDistanceInMeters(@Nullable OsmAndLocationProvider locationProvider) {
-        return getDistanceOrBearing(locationProvider, false);
+    public float getDistanceInMeters(@Nullable Location ownLocation) {
+        return getDistanceOrBearing(ownLocation, false);
     }
-    public float getDistanceInNauticalMiles(@Nullable OsmAndLocationProvider locationProvider) {
-        float dist = getDistanceInMeters(locationProvider);
+    public float getDistanceInNauticalMiles(@Nullable Location ownLocation) {
+        float dist = getDistanceInMeters(ownLocation);
         if (dist >= 0.0f) {
             dist = dist / 1852;
         }

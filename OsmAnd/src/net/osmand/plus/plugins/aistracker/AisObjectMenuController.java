@@ -71,8 +71,7 @@ public class AisObjectMenuController extends MenuController {
     }
      */
     @SuppressLint("DefaultLocale")
-    private void addCpaInfo(@NonNull SortedSet<Integer> msgTypes,
-                            @Nullable OsmAndLocationProvider locationProvider) {
+    private void addCpaInfo(@Nullable Location myLocation, @NonNull SortedSet<Integer> msgTypes) {
         if (msgTypes.contains(21) || msgTypes.contains(9)) {
             return;
         }
@@ -80,8 +79,8 @@ public class AisObjectMenuController extends MenuController {
                 (aisObject.getSog() != AisObjectConstants.INVALID_SOG)) {
             AisTrackerHelper.Cpa cpa = new AisTrackerHelper.Cpa();
             Location aisLocation = aisObject.getLocation();
-            if (aisLocation != null) {
-                getCpa(aisLocation, locationProvider, cpa);
+            if ((aisLocation != null) && (myLocation != null)) {
+                getCpa(myLocation, aisLocation, cpa);
                 if (cpa.isValid()) {
                     double cpaTime = cpa.getTcpa();
                     double hours = ceil(cpaTime);
@@ -150,8 +149,12 @@ public class AisObjectMenuController extends MenuController {
                           ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
                 OsmAndLocationProvider locationProvider = app.getLocationProvider();
-                float distance = aisObject.getDistanceInNauticalMiles(locationProvider);
-                float bearing = aisObject.getBearing(locationProvider);
+                Location ownLocation = null;
+                if (locationProvider != null) {
+                    ownLocation = locationProvider.getLastKnownLocation();
+                }
+                float distance = aisObject.getDistanceInNauticalMiles(ownLocation);
+                float bearing = aisObject.getBearing(ownLocation);
                 if (distance >= 0.0f) {
                     try {
                         addMenuItem("Distance",  String.format("%.1f nm", distance));
@@ -162,7 +165,7 @@ public class AisObjectMenuController extends MenuController {
                         addMenuItem("Bearing", String.format("%.1f", bearing));
                     } catch (Exception ignore) { }
                 }
-                addCpaInfo(msgTypes, locationProvider);
+                addCpaInfo(ownLocation, msgTypes);
                 /*
                 // test:
                 addMenuItem("# loc", getOwnLocationAsString(locationProvider));
