@@ -56,7 +56,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		bindBackground(item, holder.button, holder.container);
 		bindTitle(item, holder.title);
 		bindIcon(item, holder.image);
-		bindButton(item, holder.button);
+		bindButton(item, holder.clickArea);
 
 		if (item.onAfterViewBoundCallback != null) {
 			item.onAfterViewBoundCallback.onAfterViewBound(item, holder);

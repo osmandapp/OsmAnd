@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ColorPaletteHelper {
+
 	public static final String ROUTE_PREFIX = "route_";
 	public static final String GRADIENT_ID_SPLITTER = "_";
 

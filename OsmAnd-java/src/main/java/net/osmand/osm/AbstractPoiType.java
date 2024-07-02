@@ -75,14 +75,14 @@ public abstract class AbstractPoiType {
 	}
 
 	public String getTranslation() {
-		if(translation == null) {
+		if (translation == null) {
 			translation = registry.getTranslation(this);
 		}
 		return translation;
 	}
 
 	public String getSynonyms() {
-		if(synonyms == null) {
+		if (synonyms == null) {
 			synonyms = registry.getSynonyms(this);
 		}
 		return synonyms;

@@ -1,6 +1,5 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -8,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.ColorPalette;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
@@ -22,7 +20,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class GradientColorsPaletteController implements IColorsPaletteController {
@@ -32,7 +29,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	protected OnColorsPaletteListener externalListener;
 
-	protected GradientCollection gradientCollection;
+	protected GradientColorsCollection gradientCollection;
 	protected PaletteColor selectedPaletteColor;
 
 	protected GPXTrackAnalysis analysis;
@@ -44,21 +41,21 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	public void reloadGradientColors() {
 		Object gradientType = gradientCollection.getGradientType();
-		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(gradientType);
-		this.gradientCollection = new GradientCollection(colorPaletteMap, app.getSettings().GRADIENT_PALETTES, gradientType);
+		this.gradientCollection = new GradientColorsCollection(app, gradientType);
 		if (selectedPaletteColor instanceof PaletteGradientColor) {
 			notifyUpdatePaletteColors(null);
 		}
 	}
 
-	public void updateContent(@NonNull GradientCollection gradientCollection, @NonNull String selectedGradientName) {
+	public void updateContent(@NonNull GradientColorsCollection gradientCollection, @NonNull String selectedGradientName) {
 		this.gradientCollection = gradientCollection;
 		updateContent(selectedGradientName);
 	}
 
 	public void updateContent(@NonNull String selectedGradientName) {
 		PaletteGradientColor newColor = null;
-		for (PaletteGradientColor gradientColor : gradientCollection.getPaletteColors()) {
+		for (PaletteColor paletteColor : gradientCollection.getPaletteColors()) {
+			PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
 			if (gradientColor.getPaletteName().equals(selectedGradientName)) {
 				newColor = gradientColor;
 			}
@@ -151,7 +148,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 			PaletteColor oldSelectedColor = selectedPaletteColor;
 			selectColor(color);
 			if (renewLastUsedTime) {
-				color.renewLastUsedTime();
+				gradientCollection.askRenewLastUsedTime(color);
 				notifyUpdatePaletteColors(color);
 			} else {
 				notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);

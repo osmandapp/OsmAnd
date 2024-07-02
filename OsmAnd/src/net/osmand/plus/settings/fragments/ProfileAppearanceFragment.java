@@ -455,9 +455,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	@NonNull
 	private ProfileColorController getColorsPaletteController() {
-		return ProfileColorController.getInstance(
-				app, getSelectedAppMode(), this, changedProfile.getActualColor(), isNightMode()
-		);
+		OnColorsPaletteListener listener = ProfileAppearanceFragment.this;
+		return ProfileColorController.getInstance(app, listener, changedProfile.getActualColor());
 	}
 
 	private void updateProfileNameAppearance() {
@@ -908,13 +907,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		if (paletteColor.isDefault()) {
-			changedProfile.customColor = null;
-			changedProfile.color = changedProfile.getProfileColorByColorValue(paletteColor.getColor());
-		} else {
-			changedProfile.customColor = paletteColor.getColor();
-			changedProfile.color = null;
-		}
+		int colorInt = paletteColor.getColor();
+		changedProfile.color = changedProfile.getProfileColorByColorValue(colorInt);
+		changedProfile.customColor = changedProfile.color == null ? colorInt : null;
 		if (iconItems != null) {
 			updateIconColor(changedProfile.iconRes);
 		}
@@ -968,6 +963,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 					customColor : ContextCompat.getColor(app, color.getColor(isNightMode()));
 		}
 
+		@Nullable
 		public ProfileIconColors getProfileColorByColorValue(int colorValue) {
 			for (ProfileIconColors color : ProfileIconColors.values()) {
 				if (ContextCompat.getColor(app, color.getColor(true)) == colorValue
@@ -975,7 +971,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 					return color;
 				}
 			}
-			return ProfileIconColors.DEFAULT;
+			return null;
 		}
 
 		@Override

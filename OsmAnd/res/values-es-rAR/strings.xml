@@ -5689,7 +5689,25 @@
     <string name="use_terrain_maps">Usar mapas del terreno</string>
     <string name="use_nearby_roads_summary">Usa el mapa sin conexión para encontrar caminos cercanos y datos de elevación. La geometría de la traza puede ajustarse.</string>
     <string name="use_nearby_roads">Usar caminos cercanos</string>
-    <string name="release_4_8">• Prepárate para la versión 4.8</string>
+    <string name="release_4_8">• Nueva opción de coloración del terreno «Altitud»
+\n
+\n• Paletas de colores personalizadas para el terreno, trazas y rutas
+\n
+\n• Variante en 3D para los iconos de la ubicación
+\n
+\n• Las acciones rápidas ahora se pueden asignar a teclados externos
+\n
+\n• Meteorología: Se ha actualizado la interfaz de usuario y se ha añadido la animación del viento
+\n
+\n• Se han mejorado las trazas en 3D: nuevas opciones de visualización y coloración
+\n
+\n• Se ha añadido la opción de aspecto de la aplicación, para seguir el modo del mapa
+\n
+\n• Se han corregido las estadísticas de las trazas, el ordenamiento y la búsqueda
+\n
+\n• Edición de OSM: se ha borrado el método de autorización de usuario / contraseña
+\n
+\n• Desde Android 14, se ha cambiado el modo para compartir del sistema</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
     <string name="delete_actions_button_confirmation">¿Borrar «%1$s» con todas sus acciones añadidas?</string>
     <string name="delete_actions_button">Borrar botón</string>

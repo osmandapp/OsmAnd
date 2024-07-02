@@ -65,8 +65,8 @@
     <string name="map_settings_weather_wind_animation">Wind animation</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="shared_string_modify">Modify</string>
-    <string name="missing_maps_ignore">Use existing maps</string>
-    <string name="missing_maps_ignore_details">Some already downloaded maps might be suitable for your route. If you are familiar with the area and the maps, you can try routing using the existing maps.</string>
+    <string name="missing_maps_ignore">Use downloaded maps</string>
+    <string name="missing_maps_ignore_details">Downloaded maps cover your route? Navigate with them if you\'re familiar with the area.</string>
     <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
@@ -100,7 +100,16 @@
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
-        • To be prepared for 4.8
+        • New terrain colorization option \"Altitude\"\n\n
+        • Custom color palettes for terrain, tracks, and routes\n\n
+        • 3D variant for location position icons\n\n
+        • Quick Actions can now be assigned to external keyboards\n\n
+        • Weather: UI refresh, added wind animation\n\n
+        • 3D Track Improvements: new visualization and colorization options\n\n
+        • Added app theme option to follow map mode\n\n
+        • Fixed track stats, sorting &amp; search\n\n
+        • OSM Editing: deleted login / password authorization method\n\n
+        • Switching to system share sheet starting Android 14\n\n
     </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>

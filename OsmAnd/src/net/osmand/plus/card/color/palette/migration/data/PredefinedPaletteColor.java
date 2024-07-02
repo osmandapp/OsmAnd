@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.migration.data;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-public class PredefinedPaletteColor extends PaletteColor {
+public class PredefinedPaletteColor extends PaletteColorV1 {
 
 	@StringRes
 	private final int nameId;
