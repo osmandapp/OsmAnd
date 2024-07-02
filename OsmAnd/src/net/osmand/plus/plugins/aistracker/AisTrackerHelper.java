@@ -85,34 +85,18 @@ public final class AisTrackerHelper {
         if (checkSpeedAndBearing(x, y)) {
             return INVALID_TCPA;
         }
-        if (lonCorrection < 1.0E-10f) {
-            // in this case the lonCorrection is considered invalid -> new calculation
-            lonCorrection = getLonCorrection(x);
-        }
         return getTcpa(locationToVector(x), locationToVector(y),
                 courseToVector(x.getBearing(), getSpeedInKnots(x)),
                 courseToVector(y.getBearing(), getSpeedInKnots(y)), lonCorrection);
     }
 
-    public static double getTcpa(@NonNull Location x, @NonNull Location y) {
-        return getTcpa(x, y, 0.0d);
-    }
-
-    /* to calculate the Time to Closest Point of Approach (TCPA) between the objects x and own location,
-     *  it is presumed that x contains its position, speed and course */
-    public static double getTcpa(@NonNull Location x, @Nullable OsmAndLocationProvider locationProvider) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                long now = System.currentTimeMillis();
-                if (((now - lastCorrectionUpdate) / 1000 / 60) > maxCorrectionUpdateAgeInMin) {
-                    lastCorrectionUpdate = now;
-                    correctionFactor = getLonCorrection(myLocation);
-                }
-                return getTcpa(x, myLocation, correctionFactor);
-            }
+    public static double getTcpa(@NonNull Location ownLocation, @NonNull Location otherLocation) {
+        long now = System.currentTimeMillis();
+        if (((now - lastCorrectionUpdate) / 1000 / 60) > maxCorrectionUpdateAgeInMin) {
+            correctionFactor = getLonCorrection(ownLocation);
+            lastCorrectionUpdate = now;
         }
-        return INVALID_TCPA;
+        return getTcpa(ownLocation, otherLocation, correctionFactor);
     }
 
     @Nullable
@@ -156,24 +140,13 @@ public final class AisTrackerHelper {
         }
     }
 
-    /* caluclate the distance between the given object and own position at their Closest Point of Approach (CPA) */
-    public static float getCpaDistance(@NonNull Location x, @Nullable OsmAndLocationProvider locationProvider) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                return getCpaDistance(x, myLocation);
-            }
-        }
-        return INVALID_CPA;
-    }
-
-    public static void getCpa(@NonNull Location loc1, @NonNull Location loc2,
+    public static void getCpa(@NonNull Location ownLocation, @NonNull Location otherLocation,
                               @NonNull Cpa result) {
-        if (!checkSpeedAndBearing(loc1, loc2)) {
-            double tcpa = getTcpa(loc1, loc2);
+        if (!checkSpeedAndBearing(ownLocation, otherLocation)) {
+            double tcpa = getTcpa(ownLocation, otherLocation);
             if (tcpa != INVALID_TCPA) {
-                Location cpaX = getNewPosition(loc1, tcpa);
-                Location cpaY = getNewPosition(loc2, tcpa);
+                Location cpaX = getNewPosition(ownLocation, tcpa);
+                Location cpaY = getNewPosition(otherLocation, tcpa);
                 result.setTcpa(tcpa);
                 result.setCpaPos1(cpaX);
                 result.setCpaPos2(cpaY);
@@ -185,16 +158,6 @@ public final class AisTrackerHelper {
         }
     }
 
-    public static void getCpa(@NonNull Location loc, @Nullable OsmAndLocationProvider locationProvider,
-                              @NonNull Cpa result) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                getCpa(myLocation, loc, result);
-            }
-        }
-    }
-
     private static double bearingInRad(float bearingInDegrees) {
         double res = bearingInDegrees * 2 * Math.PI / 360.0;
         while (res >= Math.PI) { res -= (2 * Math.PI); }
@@ -202,19 +165,19 @@ public final class AisTrackerHelper {
     }
 
     @Nullable
-    public static Location getNewPosition(@Nullable Location x, double time) {
-        if (x != null) {
-            if (x.hasBearing() && x.hasSpeed()) {
-                LatLonPoint a = new LatLonPoint(x.getLatitude(), x.getLongitude());
-                LatLonPoint b = a.getPoint(x.getSpeed() * time * Math.PI / 5556.0,
-                        bearingInRad(x.getBearing()));
-                Location newX = new Location(x);
+    public static Location getNewPosition(@Nullable Location loc, double time) {
+        if (loc != null) {
+            if (loc.hasBearing() && loc.hasSpeed()) {
+                LatLonPoint a = new LatLonPoint(loc.getLatitude(), loc.getLongitude());
+                LatLonPoint b = a.getPoint(loc.getSpeed() * time * Math.PI / 5556.0,
+                        bearingInRad(loc.getBearing()));
+                Location newX = new Location(loc);
                 newX.setLongitude(b.getLongitude());
                 newX.setLatitude(b.getLatitude());
                 return newX;
             } else {
-                Log.d("AisTrackerHelper", "getNewPosition(): y.hasBearing->"
-                        + x.hasBearing() + ", x.hasSpeed->" + x.hasSpeed());
+                Log.d("AisTrackerHelper", "getNewPosition(): loc.hasBearing->"
+                        + loc.hasBearing() + ", loc.hasSpeed->" + loc.hasSpeed());
                 return null;
             }
         } else {
@@ -244,7 +207,6 @@ public final class AisTrackerHelper {
     public static float meterPerSecondToKnots(float speed) {
         return speed * 3600 / 1852;
     }
-
     public static float meterToMiles(float x) {
         return x / 1852.0f;
     }
