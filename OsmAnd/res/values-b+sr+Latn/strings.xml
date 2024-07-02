@@ -2923,7 +2923,7 @@
     <string name="search_download_wikipedia_maps">Preuzimanje Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom internet vodiču koji ima članke o mestima i odredištima.</string>
     <string name="add_hidden_group_info">Dodatu tačku možeš naći u „%s“. Otkrij sakrivenu označenu grupu pa je prikazati na mapi.</string>
-    <string name="app_mode_enduro_motorcycle">nduro motocikl</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motocikl</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="app_mode_wheelchair">Invalidska kolica</string>
     <string name="app_mode_wheelchair_forward">Invalidska kolica napred</string>
