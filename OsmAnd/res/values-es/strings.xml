@@ -5665,7 +5665,29 @@
     <string name="use_3d_track_visualization">Visualizar en 3D</string>
     <string name="shared_string_changes">Cambios</string>
     <string name="apply_only_to_new">Aplicar solo a nuevos</string>
-    <string name="release_4_8">• Preparado para 4.8</string>
+    <string name="release_4_8">• Nueva opción de coloración del terreno \"Altitud\"
+\n
+\n • Paletas de colores personalizadas para terrenos, pistas y rutas
+\n
+\n • Variante 3D para los iconos de posición de ubicación
+\n
+\n • Acciones rápidas ahora se pueden asignar a teclados externos
+\n
+\n • Tiempo: actualización de la interfaz de usuario, animación de viento añadida
+\n
+\n • Mejoras en 3D Track: nuevas opciones de visualización y coloración
+\n
+\n • Amplia selección de rutas turísticas en el mapa
+\n
+\n • Añadida opción de tema de aplicación para seguir el modo de mapa
+\n
+\n • Estadísticas de pista fija, clasificación y búsqueda
+\n
+\n • Edición OSM : método de autorización de inicio de sesión / contraseña eliminado
+\n
+\n • Cambiar a la hoja de recursos compartidos del sistema a partir de Android 14
+\n
+\n</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las pistas existentes en la carpeta o solo a las nuevas?</string>
     <string name="shared_string_scale">Escala</string>
     <string name="vertical_exaggeration_description">Cambiando el valor de la escala, puedes acentuar el relieve 3D.</string>
