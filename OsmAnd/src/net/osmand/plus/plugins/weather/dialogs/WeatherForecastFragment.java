@@ -252,6 +252,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void stopAnimation() {
 		animationState = AnimationState.IDLE;
 		animateForecastHandler.removeCallbacksAndMessages(null);
+		updateProgressBar();
 		updatePlayForecastButton();
 	}
 
@@ -267,14 +268,14 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		}
 		if (weatherHelper.isProcessingTiles()) {
 			this.animationState = AnimationState.SUSPENDED;
-			showProgressBar(true);
+			updateProgressBar();
 			animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIMATION_START_DELAY);
 			return;
 		}
 		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
 			currentStep = animationStartStep;
 			animateStepCount = animationStartStepCount;
-			showProgressBar(false);
+			updateProgressBar();
 		}
 		currentStep++;
 		animateStepCount--;
@@ -282,7 +283,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
 			animationState = AnimationState.IN_PROGRESS;
 			this.animationState = animationState;
-			showProgressBar(false);
+			updateProgressBar();
 		}
 		if (animationState == AnimationState.IN_PROGRESS) {
 			animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIMATION_FRAME_DELAY);
@@ -292,6 +293,10 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void updateSliderValue() {
 		float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
 		timeSlider.setValue(Math.min(newValue, timeSlider.getValueTo()));
+	}
+
+	private void updateProgressBar() {
+		showProgressBar(downloading || animationState != AnimationState.IDLE && weatherHelper.isProcessingTiles());
 	}
 
 	private int getStepsCount() {
@@ -699,7 +704,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		progressUpdateHandler.post(() -> {
 			if (!downloading) {
 				downloading = true;
-				showProgressBar(true);
+				updateProgressBar();
 			}
 		});
 		progressUpdateHandler.postDelayed(() -> {
@@ -707,12 +712,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 				downloading = false;
 				if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
 					scheduleAnimationStart();
-					if (!weatherHelper.isProcessingTiles()) {
-						showProgressBar(false);
-					}
-				} else {
-					showProgressBar(false);
 				}
+				updateProgressBar();
 			}
 		}, DOWNLOAD_COMPLETE_DELAY);
 	}
