@@ -112,6 +112,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
             objectLostTimeout.setEntries(entries);
             objectLostTimeout.setEntryValues(entryValues);
             objectLostTimeout.setDescription(R.string.ais_object_lost_timeout_description);
+            AisObject.setMaxObjectAge((Integer) objectLostTimeout.getValue());
         }
     }
     private void setupShipLostTimeout() {
@@ -127,6 +128,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
             objectLostTimeout.setEntries(entries);
             objectLostTimeout.setEntryValues(entryValues);
             objectLostTimeout.setDescription(R.string.ais_ship_lost_timeout_description);
+            AisObject.setVesselLostTimeout((Integer) objectLostTimeout.getValue());
         }
     }
     private boolean setupCpaWarningTime() {
@@ -180,6 +182,14 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
                 return false;
             }
             restartNetworkListener = true;
+        } else if (preference.getKey().equals(AisTrackerPlugin.AIS_OBJ_LOST_TIMEOUT_ID)) {
+            if (newValue instanceof Integer) {
+                AisObject.setMaxObjectAge((Integer) newValue);
+            }
+        } else if (preference.getKey().equals(AisTrackerPlugin.AIS_SHIP_LOST_TIMEOUT_ID)) {
+            if (newValue instanceof Integer) {
+                AisObject.setVesselLostTimeout((Integer) newValue);
+            }
         }
         boolean ret = super.onPreferenceChange(preference, newValue);
         AisTrackerLayer layer = plugin.getLayer();
