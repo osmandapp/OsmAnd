@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.IndexConstants;

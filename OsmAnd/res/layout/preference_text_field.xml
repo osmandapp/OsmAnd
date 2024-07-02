@@ -5,6 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical"
+	android:background="?attr/list_background_color"
 	android:orientation="horizontal">
 
 	<net.osmand.plus.widgets.OsmandTextFieldBoxes
@@ -18,7 +19,7 @@
 		app:primaryColor="@color/active_color_primary_dark"
 		app:secondaryColor="?android:textColorSecondary"
 		app:errorColor="@color/color_invalid"
-		app:labelText="@string/profile_name_hint">
+		app:labelText="@string/shared_string_name">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/profile_name_et"
