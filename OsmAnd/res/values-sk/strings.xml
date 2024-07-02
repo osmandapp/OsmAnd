@@ -5657,7 +5657,29 @@
     <string name="change_default_appearance_confirmation">Zmeniť predvolený vzhľad %1$s?</string>
     <string name="use_3d_track_visualization">3D vizualizácia</string>
     <string name="apply_only_to_new">Aplikovať iba na nové</string>
-    <string name="release_4_8">• Bude pripravené pre 4.8</string>
+    <string name="release_4_8">• Nová možnosť pre zafarbenie terénu podľa \"nadmorskej výšky\"
+\n
+\n • Vlastné palety farieb pre terén, stopy a trasy
+\n
+\n • 3D verzia pre ikony polohy
+\n
+\n • Rýchle akcie môžu byť priradené k externým klávesám
+\n
+\n • Počasie: zmena rozhrania, pridaná animácia vetra
+\n
+\n • Vylepšenia 3D stôp: nové možnosti zobrazenia a zafarbenia
+\n
+\n • Rozšírený výber turistických trás na mape
+\n
+\n • Možnosť aby téma aplikácie sledovala režim mapy
+\n
+\n • Opravené štatistiky stôp, triedenie a vyhľadávanie
+\n
+\n • Upravovanie OSM: odstránené prihlasovanie pomocou mena a hesla
+\n
+\n • Od Androidu 14 sa používa systémový panel zdieľania
+\n
+\n</string>
     <string name="change_default_tracks_appearance_confirmation">Aplikovať zmeny na existujúce stopy v priečinku, alebo iba na nové?</string>
     <string name="shared_string_changes">Zmeny</string>
     <string name="shared_string_scale">Mierka</string>
@@ -5725,7 +5747,7 @@
     <string name="key_name_pattern">Kláves \"%1$s\"</string>
     <string name="key_assignment_add_action">Pridať akciu</string>
     <string name="assigned_keys">Priradené klávesy</string>
-    <string name="missing_maps_ignore">Použiť existujúce mapy</string>
+    <string name="missing_maps_ignore">Použiť stiahnuté mapy</string>
     <string name="daynight_mode_app_theme_summary">Zobrazenie mapy sa prispôsobuje všeobecnej téme aplikácie — denný režim pre svetlú tému a nočný režim pre tmavú tému</string>
     <string name="daynight_mode_sensor_summary">Použije svetelný senzor zariadenia na prepnutie medzi svetlou a tmavou témou podľa úrovne okolitého svetla.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automaticky prepne medzi dennou a nočnou témou podľa východu a západu slnka na danom mieste.</string>
@@ -5741,9 +5763,43 @@
     <string name="weather_data_sources_prompt">OsmAnd poskytuje údaje o počasí z dvoch zdrojov:</string>
     <string name="weather_source_ecmwf_description">Európske centrum strednodobých predpovedí počasia</string>
     <string name="shared_string_modify">Upraviť</string>
-    <string name="missing_maps_ignore_details">Niektoré už stiahnuté mapy môžu byť vhodné pre vašu trasu. Ak poznáte oblasť a tieto mapy, môžete skúsiť navigovať pomocou existujúcich máp.</string>
+    <string name="missing_maps_ignore_details">Pokrývajú stiahnuté mapy vašu trasu? Navigujte s nimi ak poznáte danú oblasť.</string>
     <string name="data_source">Zdroj údajov</string>
     <string name="weather_source_GFS_description">Globálny systém predpovedí z národných centier predpovedí životného prostredia</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
+    <string name="quick_action_map_style">Štýl mapy</string>
+    <string name="quick_action_location_by_gpx">Poloha podľa GPX</string>
+    <string name="quick_action_move_map_left">Mapa doľava</string>
+    <string name="quick_action_move_map_down">Mapa nadol</string>
+    <string name="quick_action_to_my_location">K mojej polohe</string>
+    <string name="quick_action_verb_start_stop">Spustiť / Zastaviť</string>
+    <string name="weather_screen">Obrazovka počasia</string>
+    <string name="quick_action_move_map_right">Mapa doprava</string>
+    <string name="shared_string_replace">Nahradiť</string>
+    <string name="shared_string_simulate">Simulovať</string>
+    <string name="quick_action_video_note">Videopoznámka</string>
+    <string name="quick_action_photo_note">Fotopoznámka</string>
+    <string name="quick_action_track_waypoint">Bod trasy</string>
+    <string name="quick_action_remove_next_destination">Ďalší cieľový bod</string>
+    <string name="quick_action_terrain_color_scheme">Farebná schéma terénu</string>
+    <string name="quick_action_directions_from">Východzí bod</string>
+    <string name="quick_action_destination">Cieľový bod</string>
+    <string name="quick_action_move_map_up">Mapa nahor</string>
+    <string name="quick_action_new_route">Nová trasa</string>
+    <string name="quick_action_previous_app_profile">Profil aplikácie predošlý</string>
+    <string name="quick_action_next_app_profile">Profil aplikácie nasledujúci</string>
+    <string name="app_profile">Profil aplikácie</string>
+    <string name="shared_string_set">Nastaviť</string>
+    <string name="shared_string_create">Vytvoriť</string>
+    <string name="quick_action_display_position_in_center">Zobraziť polohu vždy v strede</string>
+    <string name="quick_action_terrain">Typ zafarbenia terénu</string>
+    <string name="quick_action_first_intermediate">Prvý prechodný bod</string>
+    <string name="quick_action_audio_note">Zvuková poznámka</string>
+    <string name="quick_action_parking_place">Parkovacie miesto</string>
+    <string name="quick_action_verb_show_hide">Zobraziť / Skryť</string>
+    <string name="quick_action_verb_pause_resume">Pozastaviť / Pokračovať</string>
+    <string name="quick_action_verb_turn_on_off">Zapnúť / Vypnúť</string>
+    <string name="quick_action_map_underlay">Podklad</string>
+    <string name="quick_action_map_overlay">Prekryv</string>
 </resources>
