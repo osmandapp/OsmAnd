@@ -5666,6 +5666,8 @@
 \n
 \n• Amélioration des traces 3D : nouvelles options de visualisation et de colorisation
 \n
+\n• Sélection élargie d\'itinéraires touristiques sur la carte
+\n
 \n• Ajout d\'une option de thème d\'application pour suivre le mode carte
 \n
 \n• Correction des statistiques des traces, du tri et de la recherche
@@ -5780,7 +5782,7 @@
     <string name="quick_action_verb_turn_on_off">Activer / Désactiver</string>
     <string name="quick_action_verb_start_stop">Démarrer / Arrêter</string>
     <string name="weather_screen">Écran de la météo</string>
-    <string name="missing_maps_ignore_details">Les cartes téléchargées couvrent votre itinéraire ? Utilisez les pour naviguez si vous connaissez la région.</string>
+    <string name="missing_maps_ignore_details">Les cartes téléchargées couvrent votre itinéraire ? Utilisez-les pour naviguer si vous connaissez la région.</string>
     <string name="quick_action_remove_next_destination">Prochaine étape</string>
     <string name="quick_action_terrain_color_scheme">Palette de couleurs du relief</string>
     <string name="quick_action_directions_from">Départ</string>
