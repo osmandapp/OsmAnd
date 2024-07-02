@@ -59,17 +59,7 @@ public class AisObjectMenuController extends MenuController {
         }
         return 0.0f;
     }
-    /*
-    private String getOwnLocationAsString(@Nullable OsmAndLocationProvider locationProvider) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                return myLocation.toString();
-            }
-        }
-        return null;
-    }
-     */
+
     @SuppressLint("DefaultLocale")
     private void addCpaInfo(@Nullable Location myLocation, @NonNull SortedSet<Integer> msgTypes) {
         if (msgTypes.contains(21) || msgTypes.contains(9)) {
@@ -166,12 +156,6 @@ public class AisObjectMenuController extends MenuController {
                     } catch (Exception ignore) { }
                 }
                 addCpaInfo(ownLocation, msgTypes);
-                /*
-                // test:
-                addMenuItem("# loc", getOwnLocationAsString(locationProvider));
-                addMenuItem("# ownSpeed", Float.toString(getOwnSpeed(locationProvider)));
-                addMenuItem("# ownBearing", Float.toString(getOwnBearing(locationProvider)));
-                 */
             }
         }
         if (msgTypes.contains(21)) { // ATON (aid to navigation)
