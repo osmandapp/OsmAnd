@@ -31,28 +31,33 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
     private AisTrackerLayer aisTrackerLayer = null;
 
-    public static final String COMPONENT = "net.osmand.aistrackerPlugin";
+    private static final String COMPONENT = "net.osmand.aistrackerPlugin";
     public static final String AISTRACKER_ID = "osmand.aistracker";
-
     public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol"; // see xml/ais_settings.xml
     public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server"; // see xml/ais_settings.xml
     public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server"; // see xml/ais_settings.xml
     public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local"; // see xml/ais_settings.xml
     public static final String AIS_OBJ_LOST_TIMEOUT_ID = "ais_object_lost_timeout"; // see xml/ais_settings.xml
     public static final String AIS_SHIP_LOST_TIMEOUT_ID = "ais_ship_lost_timeout"; // see xml/ais_settings.xml
+    public static final String AIS_CPA_WARNING_TIME_ID = "ais_cpa_warning_time"; // see xml/ais_settings.xml
+    public static final String AIS_CPA_WARNING_DISTANCE_ID = "ais_cpa_warning_distance"; // see xml/ais_settings.xml
     public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
     public static final int AIS_NMEA_PROTOCOL_UDP = 0;
     public static final int AIS_NMEA_PROTOCOL_TCP = 1;
     public final CommonPreference<String> AIS_NMEA_IP_ADDRESS;
     private static final String AIS_NMEA_DEFAULT_IP = "192.168.200.16";
     public final CommonPreference<Integer> AIS_NMEA_TCP_PORT;
-    public static final Integer AIS_NMEA_DEFAULT_TCP_PORT = 4001;
+    private static final Integer AIS_NMEA_DEFAULT_TCP_PORT = 4001;
     public final CommonPreference<Integer> AIS_NMEA_UDP_PORT;
-    public static final Integer AIS_NMEA_DEFAULT_UDP_PORT = 10110;
+    private static final Integer AIS_NMEA_DEFAULT_UDP_PORT = 10110;
     public final CommonPreference<Integer> AIS_OBJ_LOST_TIMEOUT;
-    public static final Integer AIS_OBJ_LOST_DEFAULT_TIMEOUT = 7;
+    private static final Integer AIS_OBJ_LOST_DEFAULT_TIMEOUT = 7;
     public final CommonPreference<Integer> AIS_SHIP_LOST_TIMEOUT;
-    public static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
+    private static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
+    public final CommonPreference<Integer> AIS_CPA_WARNING_TIME;
+    private static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
+    public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE;
+    private static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
 
     public AisTrackerPlugin(OsmandApplication app) {
         super(app);
@@ -63,6 +68,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
         AIS_NMEA_UDP_PORT = registerIntPreference(AIS_NMEA_UDP_PORT_ID, AIS_NMEA_DEFAULT_UDP_PORT);
         AIS_OBJ_LOST_TIMEOUT = registerIntPreference(AIS_OBJ_LOST_TIMEOUT_ID, AIS_OBJ_LOST_DEFAULT_TIMEOUT);
         AIS_SHIP_LOST_TIMEOUT = registerIntPreference(AIS_SHIP_LOST_TIMEOUT_ID, AIS_SHIP_LOST_DEFAULT_TIMEOUT);
+        AIS_CPA_WARNING_TIME = registerIntPreference(AIS_CPA_WARNING_TIME_ID, AIS_CPA_DEFAULT_WARNING_TIME);
+        AIS_CPA_WARNING_DISTANCE = registerFloatPreference(AIS_CPA_WARNING_DISTANCE_ID, AIS_CPA_WARNING_DEFAULT_DISTANCE);
 
         Log.d("AisTrackerPlugin", "constructor");
     }

@@ -3,10 +3,11 @@ package net.osmand.plus.plugins.aistracker;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP;
 
+import static java.lang.Math.ceil;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,12 +37,15 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
     @Override
     protected void setupPreferences() {
         int currentProtocol;
+        boolean cpaWarningEnabled;
         currentProtocol = setupProtocol();
         setupIpAddress(currentProtocol);
         setupTcpPort(currentProtocol);
         setupUdpPort(currentProtocol);
         setupObjectLostTimeout();
         setupShipLostTimeout();
+        cpaWarningEnabled = setupCpaWarningTime();
+        setupCpaWarningDistance(cpaWarningEnabled);
     }
 
     private int setupProtocol() {
@@ -57,7 +61,6 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         }
         return 0;
     }
-
     private void setupIpAddress(int currentProtocol) {
         EditTextPreferenceEx aisNmeaIpAddress = findPreference(plugin.AIS_NMEA_IP_ADDRESS.getId());
         if (aisNmeaIpAddress != null) {
@@ -126,6 +129,41 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
             objectLostTimeout.setDescription(R.string.ais_ship_lost_timeout_description);
         }
     }
+    private boolean setupCpaWarningTime() {
+        Integer[] entryValues = {0, 1, 5, 10, 20, 30, 60};
+        String[] entries = new String[entryValues.length];
+        entries[0] = "disabled";
+        for (int i = 1; i < entryValues.length; i++) {
+            entries[i] = entryValues[i] + " ";
+            entries[i] += entryValues[i].equals(1) ? "minute" : "minutes"; // TODO: move to ressource file
+        }
+        ListPreferenceEx cpaWarningTime = findPreference(plugin.AIS_CPA_WARNING_TIME.getId());
+        if (cpaWarningTime != null) {
+            cpaWarningTime.setEntries(entries);
+            cpaWarningTime.setEntryValues(entryValues);
+            cpaWarningTime.setDescription(R.string.ais_cpa_warning_time_description);
+            return !cpaWarningTime.getValue().equals(0);
+        }
+        return false;
+    }
+    @SuppressLint("DefaultLocale")
+    private void setupCpaWarningDistance(boolean enabled) {
+        Float[] entryValues = {0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+        String[] entries = new String[entryValues.length];
+        for (int i = 0; i < entryValues.length; i++) {
+            entries[i] = (ceil(entryValues[i]) == entryValues[i]) ?
+                    String.format("%.0f ", entryValues[i]) : String.format("%.1f ", entryValues[i]);
+            entries[i] += entryValues[i].equals(1.0f) ? "nautical mile" : "nautical miles"; // TODO: move to ressource file
+        }
+        ListPreferenceEx cpaWarningDistance = findPreference(plugin.AIS_CPA_WARNING_DISTANCE.getId());
+        if (cpaWarningDistance != null) {
+            cpaWarningDistance.setEntries(entries);
+            cpaWarningDistance.setEntryValues(entryValues);
+            cpaWarningDistance.setDescription(R.string.ais_cpa_warning_distance_description);
+            cpaWarningDistance.setEnabled(enabled);
+        }
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean restartNetworkListener = false;
