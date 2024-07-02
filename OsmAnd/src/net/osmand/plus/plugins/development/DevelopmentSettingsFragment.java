@@ -258,10 +258,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		OsmandDevelopmentPlugin.FpsStatsEntry m1 = plugin.getFpsStats(1);
 		OsmandDevelopmentPlugin.FpsStatsEntry m5 = plugin.getFpsStats(5);
 		OsmandDevelopmentPlugin.FpsStatsEntry m15 = plugin.getFpsStats(15);
-		String fps = String.format("%.0f %.0f %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
-		String gpu = String.format("%.2f %.2f %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
-		String idle = String.format("%.2f %.2f %.2f", m1.idle1k, m5.idle1k, m15.idle1k);
-		String battery = String.format("%.2f%% %.2f%% %.2f%%", m1.battery, m5.battery, m15.battery);
+		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
+		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
+		String idle = String.format("%.2f / %.2f / %.2f", m1.idle1k, m5.idle1k, m15.idle1k);
+		String battery = String.format("%.2f%% / %.2f%% / %.2f%%", m1.battery, m5.battery, m15.battery);
 		loadAvgInfo.setSummary(getString(R.string.load_avg_info_description, battery, fps, gpu, idle));
 		loadAvgInfo.setIconSpaceReserved(false);
 	}
