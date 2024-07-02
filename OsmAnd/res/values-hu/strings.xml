@@ -5663,7 +5663,29 @@
     <string name="shared_string_changes">Módosítások</string>
     <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
     <string name="apply_only_to_new">Alkalmazás csak az újra</string>
-    <string name="release_4_8">• Felkészítve a 4.8-ashoz</string>
+    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség
+\n
+\n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz
+\n
+\n • 3D változat a helypozíció ikonokhoz
+\n
+\n • A gyorsműveletek most külső billentyűzetekhez is rendelhetők
+\n
+\n • Időjárás: a felhasználói felület frissítése, hozzáadott szél animáció
+\n
+\n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek
+\n
+\n • Kibővített turistaútvonalak választéka a térképen
+\n
+\n • Hozzáadott alkalmazástéma opció a térképmód követéséhez
+\n
+\n • Javított nyomvonal statisztika, -rendezés és -keresés
+\n
+\n • OSM szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód
+\n
+\n • Váltás a rendszermegosztási lapra az Android 14-től
+\n
+\n</string>
     <string name="shared_string_scale">Skála</string>
     <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
     <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
@@ -5729,7 +5751,7 @@
     <string name="user_palette">Felhasználói paletta</string>
     <string name="backup_error_failed_to_transfer_file">Nem sikerült a felhőfájl(ok) átvitele.</string>
     <string name="contact_support_retry">Próbálja újra, vagy lépjen kapcsolatba az ügyfélszolgálattal</string>
-    <string name="missing_maps_ignore">Meglévő térképek használata</string>
+    <string name="missing_maps_ignore">Letöltött térképek használata</string>
     <string name="daynight_mode_sensor_summary">A környezeti megvilágítás szintjének megfelelően az eszköz fényérzékelőjét használja a világos és sötét témák közötti váltáshoz.</string>
     <string name="daynight_mode_sunrise_sunset_summary">A helyi napkelte és napnyugta időpontja alapján automatikusan vált a nappali és éjszakai téma között.</string>
     <string name="daynight_mode_app_theme">Alkalmazás témája</string>
@@ -5749,7 +5771,7 @@
     <string name="weather_source_GFS_description">Az amerikai Nemzeti Környezeti Előrejelző Központok adatait felhasználó Globális Előrejelzési Rendszer</string>
     <string name="weather_source_ecmwf_description">Középtávú Időjárás-előrejelzések Európai Központja</string>
     <string name="shared_string_modify">Módosítás</string>
-    <string name="missing_maps_ignore_details">Néhány már letöltött térkép megfelelő lehet az útvonalhoz. Ha ismeri a környéket és a térképeket, megpróbálhatja az útvonaltervezést a meglévő térképek használatával.</string>
+    <string name="missing_maps_ignore_details">A már letöltött térképek lefedik az útvonalat? Navigáljon velük, ha ismeri a környéket.</string>
     <string name="quick_action_map_style">Térképstílus</string>
     <string name="quick_action_location_by_gpx">Hely GPX alapján</string>
     <string name="quick_action_directions_from">Kezdőpont</string>

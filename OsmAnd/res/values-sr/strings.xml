@@ -5658,7 +5658,29 @@
     <string name="fix_north_up_descr">Не ротирајте мапу покретима у оријентацији карте Север Горе</string>
     <string name="fix_north_up">Омогући Фиксни Север Горе</string>
     <string name="change_default_appearance_confirmation">Променити подразумеван изглед за %1$s?</string>
-    <string name="release_4_8">• Биће урађено за 4.8</string>
+    <string name="release_4_8">• Нова опција бојења терена „Висина“
+\n
+\n • Прилагођене палете боја за терен, стазе и руте
+\n
+\n • 3Д варијанта за иконе положаја локације
+\n
+\n • Брзе радње се сада могу доделити спољним тастатурама
+\n
+\n • Време: Освежавање корисничког интерфејса, додата анимација ветра
+\n
+\n • Побољшања 3Д стаза: нове опције визуелизације и колоризације
+\n
+\n • Проширен избор туристичких рута на мапи
+\n
+\n • Додата опција теме апликације за праћење режима мапе
+\n
+\n • Поправљена статистика стаза, сортирање и претрага
+\n
+\n • ОСМ уређивање: избрисани начин ауторизације пријаве/лозинке
+\n
+\n • Прелазак на систем дељења листа почевши од Андроид 14
+\n
+\n</string>
     <string name="use_3d_track_visualization">3Д визуелизација</string>
     <string name="apply_only_to_new">Примени само на ново</string>
     <string name="change_default_tracks_appearance_confirmation">Применити промене на постојеће путање у фолдеру или само на нове?</string>
@@ -5726,7 +5748,7 @@
     <string name="action_icon">Додај икону</string>
     <string name="user_palette">Корисничка палета</string>
     <string name="shared_string_colors">Боје</string>
-    <string name="missing_maps_ignore">Користи постојеће мапе</string>
+    <string name="missing_maps_ignore">Користи преузете мапе</string>
     <string name="backup_error_failed_to_transfer_file">Пренос датотеке(а) у облаку није успео.</string>
     <string name="contact_support_retry">Покушајте поново или контактирајте подршку</string>
     <string name="tomorrow">Сутрадан</string>
@@ -5748,7 +5770,7 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
-    <string name="missing_maps_ignore_details">Неке већ преузете мапе могу бити прикладне за вашу руту. Ако сте упознати са подручјем и мапама, можете покушати са рутирањем користећи постојеће мапе.</string>
+    <string name="missing_maps_ignore_details">Преузете мапе покривају вашу руту? Крећите се са њима ако сте упознати са подручјем.</string>
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
     <string name="quick_action_to_my_location">Ка Мојој локацији</string>

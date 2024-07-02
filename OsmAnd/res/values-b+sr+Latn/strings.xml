@@ -2923,7 +2923,7 @@
     <string name="search_download_wikipedia_maps">Preuzimanje Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom internet vodiču koji ima članke o mestima i odredištima.</string>
     <string name="add_hidden_group_info">Dodatu tačku možeš naći u „%s“. Otkrij sakrivenu označenu grupu pa je prikazati na mapi.</string>
-    <string name="app_mode_enduro_motorcycle">nduro motocikl</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motocikl</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="app_mode_wheelchair">Invalidska kolica</string>
     <string name="app_mode_wheelchair_forward">Invalidska kolica napred</string>
@@ -5671,7 +5671,29 @@
     <string name="apply_only_to_new">Primenjivati samo na nove</string>
     <string name="change_default_tracks_appearance_confirmation">Primeniti promene na postojeće trase na mapi ili samo na nove?</string>
     <string name="shared_string_changes">Promene</string>
-    <string name="release_4_8">• Pripremi se za 4.8 verziju</string>
+    <string name="release_4_8">• Nova opcija bojenja terena „Visina“
+\n
+\n • Prilagođene palete boja za teren, staze i rute
+\n
+\n • 3D varijanta za ikone položaja lokacije
+\n
+\n • Brze radnje se sada mogu dodeliti spoljnim tastaturama
+\n
+\n • Vreme: Osvežavanje korisničkog interfejsa, dodata animacija vetra
+\n
+\n • Poboljšanja 3D staza: nove opcije vizuelizacije i kolorizacije
+\n
+\n • Proširen izbor turističkih ruta na mapi
+\n
+\n • Dodata opcija teme aplikacije za praćenje režima mape
+\n
+\n • Popravljena statistika staza, sortiranje i pretraga
+\n
+\n • OSM uređivanje: izbrisani način autorizacije prijave/lozinke
+\n
+\n • Prelazak na sistem deljenja lista počevši od Android 14
+\n
+\n</string>
     <string name="vertical_exaggeration">Vertikalno uvećanje</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
@@ -5737,7 +5759,7 @@
     <string name="shared_string_colors">Boje</string>
     <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
     <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
-    <string name="missing_maps_ignore">Koristi postojeće mape</string>
+    <string name="missing_maps_ignore">Koristi preuzete mape</string>
     <string name="tomorrow">Sutradan</string>
     <string name="map_settings_weather_wind_animation">Animacija vetra</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automatski se prebacuje između dnevne i noćne teme na temelju lokalnog izlaska i zalaska sunca.</string>
@@ -5757,7 +5779,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
-    <string name="missing_maps_ignore_details">Neke preuzete mape mogle bi biti prikladnije za rutu. Ako si upoznat s područjem i mapama, možeš pokušati odrediti rutu koristeći postojeće mape.</string>
+    <string name="missing_maps_ignore_details">Preuzete mape pokrivaju vašu rutu? Krećite se sa njima ako ste upoznati sa područjem.</string>
     <string name="quick_action_directions_from">Polazna tačka</string>
     <string name="quick_action_destination">Odredište</string>
     <string name="quick_action_terrain_color_scheme">Šema boja terena</string>
