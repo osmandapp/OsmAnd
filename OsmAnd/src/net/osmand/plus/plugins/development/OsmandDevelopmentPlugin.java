@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.development;
 
+import android.content.IntentFilter;
+import android.os.BatteryManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
@@ -46,7 +51,10 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -220,12 +228,21 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		super.init(app, activity);
+		fpsStatsEnabled = true;
+		fpsStatsCollector();
+		return true;
+	}
+
+	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		OsmEditingPlugin osmPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
+		fpsStatsEnabled = false;
 		super.disable(app);
 	}
 
@@ -261,5 +278,90 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	protected TrackPointsAnalyser getTrackPointsAnalyser() {
 		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
+	}
+
+	private boolean fpsStatsEnabled = false;
+	private final int FPS_STATS_INTERVAL_SECONDS = 1; // 10 ?
+	private final int FPS_STATS_LIFETIME_MINUTES = 15;
+	private Handler fpsStatsHandler = new Handler(Looper.getMainLooper());
+	private List<FpsStatsEntry> fpsStats = Collections.synchronizedList(new ArrayList<>());
+
+	public class FpsStatsEntry {
+		public long timestamp;
+		public float battery;
+		public float fps1k;
+		public float idle1k;
+		public float gpu1k;
+
+		public FpsStatsEntry(OsmandApplication app) {
+			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
+			if (renderer != null) {
+				this.timestamp = System.currentTimeMillis();
+
+				this.fps1k = renderer.getFrameRateLast1K();
+				this.idle1k = renderer.getIdleTimePartLast1K();
+				this.gpu1k = renderer.getGPUWaitTimePartLast1K();
+
+				Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+				int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+				this.battery = level != -1 && scale != -1 && scale > 0 ? level * 100 / scale : 0;
+			}
+		}
+
+		public FpsStatsEntry(List<FpsStatsEntry> list, int minutes) {
+			if (!list.isEmpty()) {
+				this.battery = minuteBatteryUsage(list, minutes);
+				this.fps1k = avgFloat(list, minutes, entry -> entry.fps1k);
+				this.gpu1k = avgFloat(list, minutes, entry -> entry.gpu1k);
+				this.idle1k = avgFloat(list, minutes, entry -> entry.idle1k);
+			}
+		}
+
+		private float avgFloat(List<FpsStatsEntry> list, int minutes, Function<FpsStatsEntry, Float> get) {
+			long earliest = System.currentTimeMillis() - minutes * 60 * 1000;
+			final float[] sum = { 0, 0 }; // sum, counter
+			list.forEach(entry -> {
+				if (entry.timestamp > 0 && entry.timestamp >= earliest) {
+					sum[0] += get.apply(entry);
+					sum[1]++;
+				}
+			});
+			return sum[1] > 0 ? (sum[0] / sum[1]) : 0;
+		}
+
+		private float minuteBatteryUsage(List<FpsStatsEntry> list, int minutes) {
+			long earliest = System.currentTimeMillis() - minutes * 60 * 1000;
+			for (int i = 0; i < list.size(); i++) {
+				long now = System.currentTimeMillis();
+				long timestamp = list.get(i).timestamp;
+				if (timestamp > 0 && timestamp >= earliest && now > timestamp) {
+					float pastBattery = list.get(i).battery;
+					float freshBattery = list.get(list.size() - 1).battery;
+					return (float) ((double) (freshBattery - pastBattery) / (double) (now - timestamp) * 1000 * 60);
+				}
+			}
+			return 0;
+		}
+	}
+
+	private void fpsStatsCleanup() {
+		long expiration = System.currentTimeMillis() - (long)(FPS_STATS_LIFETIME_MINUTES * 60 * 1000);
+		long slowDownCleanup = System.currentTimeMillis() - (long)(FPS_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
+		if (!fpsStats.isEmpty() && fpsStats.get(0).timestamp < slowDownCleanup) {
+			fpsStats = fpsStats.stream().filter(entry -> entry.timestamp >= expiration).collect(Collectors.toList());
+		}
+	}
+
+	private void fpsStatsCollector() {
+		if (fpsStatsEnabled) {
+			fpsStatsCleanup();
+			fpsStats.add(new FpsStatsEntry(app));
+			fpsStatsHandler.postDelayed(this::fpsStatsCollector, FPS_STATS_INTERVAL_SECONDS * 1000);
+		}
+	}
+
+	public FpsStatsEntry getFpsStats(int minutes) {
+		return new FpsStatsEntry(fpsStats, minutes);
 	}
 }
