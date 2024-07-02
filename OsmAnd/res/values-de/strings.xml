@@ -5669,7 +5669,27 @@
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
-    <string name="release_4_8">• Für 4.8 vorbereitet</string>
+    <string name="release_4_8">• Neue Geländefarboption \"Höhe\"
+\n
+\n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen
+\n
+\n• 3D-Variante für Standortpositionssymbole
+\n
+\n• Quick Actions können jetzt externen Tastaturen zugewiesen werden
+\n
+\n• Wetter: UI-Aktualisierung, Windanimation hinzugefügt
+\n
+\n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen
+\n
+\n• Hinzugefügt: App-Theme-Option, um dem Kartenmodus zu folgen
+\n
+\n• Track-Statistiken, Sortierung und Suche behoben
+\n
+\n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht
+\n
+\n• Wechsel zum System-Share-Sheet ab Android 14
+\n
+\n</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Gelände auf der Karte anzuzeigen.</string>
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
@@ -5735,7 +5755,7 @@
     <string name="action_icon">Aktionssymbol</string>
     <string name="backup_error_failed_to_transfer_file">Die Übertragung der Cloud-Datei(en) ist fehlgeschlagen.</string>
     <string name="user_palette">Benutzerpalette</string>
-    <string name="missing_maps_ignore">Vorhandene Karten verwenden</string>
+    <string name="missing_maps_ignore">Heruntergeladene Karten verwenden</string>
     <string name="daynight_mode_sensor_summary">Nutzt den Lichtsensor des Geräts, um je nach Umgebungslicht zwischen einer hellen und einer dunklen Darstellung umzuschalten.</string>
     <string name="daynight_mode_night_summary">Zeigt die Karte immer in einer dunklen Darstellung an, die für nächtliche oder lichtarme Bedingungen geeignet ist.</string>
     <string name="daynight_mode_day_summary">Zeigt die Karte immer in einer hellen Darstellung an, ideal für die Sichtbarkeit bei Tag.</string>
@@ -5755,7 +5775,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
-    <string name="missing_maps_ignore_details">Einige bereits heruntergeladene Karten könnten für deine Route geeignet sein. Wenn du dich in der Gegend und mit den Karten auskennst, kannst du versuchen, deine Route mit den vorhandenen Karten zu planen.</string>
+    <string name="missing_maps_ignore_details">Decken heruntergeladene Karten deine Route ab? Navigiere mit ihnen, wenn du mit der Gegend vertraut bist.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
