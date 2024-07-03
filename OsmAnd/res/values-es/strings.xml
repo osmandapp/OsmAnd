@@ -5665,7 +5665,29 @@
     <string name="use_3d_track_visualization">Visualizar en 3D</string>
     <string name="shared_string_changes">Cambios</string>
     <string name="apply_only_to_new">Aplicar solo a nuevos</string>
-    <string name="release_4_8">• Preparado para 4.8</string>
+    <string name="release_4_8">• Nueva opción de coloración del terreno \"Altitud\"
+\n
+\n • Paletas de colores personalizadas para terrenos, pistas y rutas
+\n
+\n • Variante 3D para los iconos de posición de ubicación
+\n
+\n • Acciones rápidas ahora se pueden asignar a teclados externos
+\n
+\n • Tiempo: actualización de la interfaz de usuario, animación de viento añadida
+\n
+\n • Mejoras en 3D Track: nuevas opciones de visualización y coloración
+\n
+\n • Amplia selección de rutas turísticas en el mapa
+\n
+\n • Añadida opción de tema de aplicación para seguir el modo de mapa
+\n
+\n • Estadísticas de pista fija, clasificación y búsqueda
+\n
+\n • Edición OSM : método de autorización de inicio de sesión / contraseña eliminado
+\n
+\n • Cambiar a la hoja de recursos compartidos del sistema a partir de Android 14
+\n
+\n</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las pistas existentes en la carpeta o solo a las nuevas?</string>
     <string name="shared_string_scale">Escala</string>
     <string name="vertical_exaggeration_description">Cambiando el valor de la escala, puedes acentuar el relieve 3D.</string>
@@ -5732,7 +5754,7 @@
     <string name="user_palette">Paleta del usuario</string>
     <string name="contact_support_retry">Inténtalo de nuevo o ponte en contacto con el soporte</string>
     <string name="backup_error_failed_to_transfer_file">La transferencia de el/los archivo(s) a la nube falló.</string>
-    <string name="missing_maps_ignore">Usar mapas existentes</string>
+    <string name="missing_maps_ignore">Utilizar mapas descargados</string>
     <string name="map_settings_weather_wind_animation">Animación del viento</string>
     <string name="tomorrow">Mañana</string>
     <string name="daynight_mode_sensor_summary">Utiliza el sensor de iluminación ambiental del dispositivo para alternar entre temas claros y oscuros según los niveles de luz ambiental.</string>
@@ -5752,7 +5774,7 @@
     <string name="data_source">Fuente de datos</string>
     <string name="weather_data_sources_prompt">OsmAnd proporciona datos meteorológicos de dos fuentes:</string>
     <string name="shared_string_modify">Modificar</string>
-    <string name="missing_maps_ignore_details">Es posible que algunos mapas ya descargados sean adecuados para su ruta. Si está familiarizado con la zona y los mapas, puede intentar trazar una ruta utilizando los mapas existentes.</string>
+    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Navega con ellos si estás familiarizado con la zona.</string>
     <string name="quick_action_map_overlay">Superposición</string>
     <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
     <string name="app_profile">Perfil de la aplicación</string>

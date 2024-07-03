@@ -5691,15 +5691,17 @@
     <string name="use_nearby_roads">Usar caminos cercanos</string>
     <string name="release_4_8">• Nueva opción de coloración del terreno «Altitud»
 \n
-\n• Paletas de colores personalizadas para el terreno, trazas y rutas
+\n• Paletas de colores personalizadas para el terreno, las trazas y las rutas
 \n
-\n• Variante en 3D para los iconos de la ubicación
+\n• Se ha añadido una variante en 3D, para los iconos de la ubicación
 \n
 \n• Las acciones rápidas ahora se pueden asignar a teclados externos
 \n
-\n• Meteorología: Se ha actualizado la interfaz de usuario y se ha añadido la animación del viento
+\n• Meteorología: actualización de la interfaz de usuario y adición de la animación del viento
 \n
 \n• Se han mejorado las trazas en 3D: nuevas opciones de visualización y coloración
+\n
+\n• Se han ampliado las rutas turísticas en el mapa
 \n
 \n• Se ha añadido la opción de aspecto de la aplicación, para seguir el modo del mapa
 \n
@@ -5707,7 +5709,9 @@
 \n
 \n• Edición de OSM: se ha borrado el método de autorización de usuario / contraseña
 \n
-\n• Desde Android 14, se ha cambiado el modo para compartir del sistema</string>
+\n• Desde Android 14, se ha cambiado el modo para compartir del sistema
+\n
+\n</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
     <string name="delete_actions_button_confirmation">¿Borrar «%1$s» con todas sus acciones añadidas?</string>
     <string name="delete_actions_button">Borrar botón</string>
@@ -5765,7 +5769,7 @@
     <string name="shared_string_colors">Colores</string>
     <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
     <string name="contact_support_retry">Prueba de nuevo o contacta con nosotros</string>
-    <string name="missing_maps_ignore">Ignorar mapas faltantes</string>
+    <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="daynight_mode_app_theme_summary">La pantalla del mapa se vincula al tema general de la aplicación: «modo diurno» para un tema claro y «modo nocturno» para un tema oscuro</string>
     <string name="daynight_mode_sensor_summary">Usa el sensor de luz del dispositivo para alternar entre temas claros y oscuros, según la luz de ambiente.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Alterna automáticamente entre los temas diurno y nocturno, basado en el amanecer y atardecer local.</string>
@@ -5791,7 +5795,7 @@
     <string name="quick_action_parking_place">Lugar de estacionamiento</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
-    <string name="missing_maps_ignore_details">Algunos mapas descargados pueden adecuarse a la ruta. Si conoces la zona y los mapas, intenta trazar la ruta usando los mapas existente.</string>
+    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes navegar con ellos si conoces la zona.</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_destination">Destino</string>
