@@ -169,7 +169,9 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		for (String s : execute) {
 			bld.append(s).append(' ');
 		}
-		sendAlertToPebble(bld.toString());
+		if (voiceRouter.pebbleVoiceEnabled()) {
+			sendAlertToPebble(bld.toString());
+		}
 		if (mTts != null && !voiceRouter.isMute() && speechAllowed) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
