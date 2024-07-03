@@ -85,7 +85,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
-	public static final int ANIMATION_FRAME_DELAY = 70;
+	public static final int ANIMATION_FRAME_DELAY = 83; // 12 frames per second
 	public static final int DOWNLOAD_COMPLETE_DELAY = 250;
 	public static final int ANIMATION_START_DELAY = 100;
 	private static final int MAX_FORECAST_DAYS = 7;
@@ -355,7 +355,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : NEXT_DAY_START_HOUR);
-		timeSlider.setStepSize(today ? 1.0f / 12.0f : 3.0f / 9.0f); // today ? 5 minutes : 20 minutes
+		timeSlider.setStepSize(1.0f / 12.0f); // 5 minutes
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -389,6 +389,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		HorizontalChipsView chipsView = view.findViewById(R.id.chips_view);
 		chipsView.setItems(chips);
 		chipsView.setOnSelectChipListener(chip -> {
+			stopAnimation();
 			Date date = (Date) chip.tag;
 			selectedDate.setTime(date);
 			updateSelectedDate(date, false, false);
