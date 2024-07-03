@@ -85,7 +85,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
-	public static final int ANIMATION_FRAME_DELAY = 83; // 12 frames per second
+	public static final int ANIMATION_FRAME_DELAY = 83;
 	public static final int DOWNLOAD_COMPLETE_DELAY = 250;
 	public static final int ANIMATION_START_DELAY = 100;
 	private static final int MAX_FORECAST_DAYS = 7;
@@ -251,6 +251,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	}
 
 	private void stopAnimation() {
+		timeSlider.hideLabel();
 		animationState = AnimationState.IDLE;
 		animateForecastHandler.removeCallbacksAndMessages(null);
 		updateProgressBar();
@@ -276,10 +277,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
 			currentStep = animationStartStep;
 			animateStepCount = animationStartStepCount;
-			updateProgressBar();
+		} else {
+			currentStep++;
+			animateStepCount--;
 		}
-		currentStep++;
-		animateStepCount--;
+		updateProgressBar();
 		updateSliderValue();
 		if (animationState == AnimationState.STARTED || animationState == AnimationState.SUSPENDED) {
 			animationState = AnimationState.IN_PROGRESS;
@@ -294,6 +296,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void updateSliderValue() {
 		float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
 		timeSlider.setValue(Math.min(newValue, timeSlider.getValueTo()));
+		timeSlider.showLabel();
 	}
 
 	private void updateProgressBar() {
@@ -311,8 +314,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	@Override
 	public void onStop() {
 		super.onStop();
-		animationState = AnimationState.IDLE;
-		animateForecastHandler.removeCallbacksAndMessages(null);
+		stopAnimation();
 	}
 
 	private void setupTimeSlider(@NonNull View view) {
@@ -355,7 +357,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : NEXT_DAY_START_HOUR);
-		timeSlider.setStepSize(1.0f / 12.0f); // 5 minutes
+		timeSlider.setStepSize(1.0f / 24.0f); //2.5 minutes
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
