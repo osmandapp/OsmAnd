@@ -5658,7 +5658,29 @@
     <string name="rendering_value_managerName_name">За іменем менеджера</string>
     <string name="max_sensor_bycicle_power">Максимальна потужність велосипеда</string>
     <string name="avg_sensor_speed">Середня швидкість датчика</string>
-    <string name="release_4_8">• Бути готовим до 4.8</string>
+    <string name="release_4_8">"•  Нова опція забарвлення місцевості \"Висота\"
+\n
+\n •  Кастомні палітри кольорів для місцевості, треків та маршрутів
+\n
+\n •  3D-варіант для значків положення локації
+\n
+\n •  Швидкі дії тепер можна призначати на зовнішні клавіатури
+\n
+\n •  Погода: Оновлення інтерфейсу, додано анімацію вітру
+\n
+\n •  Покращення 3D-треків: нові можливості візуалізації та розфарбовування
+\n
+\n •  Розширено вибір туристичних маршрутів на мапі
+\n
+\n •  Додано опцію зміни теми програми для режиму мапи
+\n
+\n •  Виправлено статистику треків, сортування та пошук
+\n
+\n •  Редагування OSM: видалено метод авторизації через логін/пароль
+\n
+\n •  Перехід до системного файлу спільного доступу, починаючи з Android 14
+\n
+\n"</string>
     <string name="shared_string_additional">Додатково</string>
     <string name="distance_during_navigation_description">Виберіть спосіб показу інформації про відстань у віджетах навігації (відстань до точки, наступного повороту, смуги руху).
 \n
@@ -5736,7 +5758,7 @@
     <string name="key_assignment_add_key">Додати кнопку</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
-    <string name="missing_maps_ignore">Використати існуючі мапи</string>
+    <string name="missing_maps_ignore">Використати завантажені мапи</string>
     <string name="backup_error_failed_to_transfer_file">Помилка перенесення хмарного файлу(ів).</string>
     <string name="contact_support_retry">Спробуйте ще раз або зверніться до служби підтримки</string>
     <string name="shared_string_colors">Кольори</string>
@@ -5793,6 +5815,6 @@
     <string name="shared_string_replace">Замінити</string>
     <string name="quick_action_audio_note">Аудіо нотатка</string>
     <string name="quick_action_map_style">Стиль мапи</string>
-    <string name="missing_maps_ignore_details">Деякі вже завантажені мапи можуть підійти для вашого маршруту. Якщо ви знайомі з місцевістю і мапами, ви можете спробувати прокласти маршрут, використовуючи наявні мапи.</string>
+    <string name="missing_maps_ignore_details">Завантажені карти покривають ваш маршрут? Орієнтуйтеся за ними, якщо ви знайомі з місцевістю.</string>
     <string name="quick_action_location_by_gpx">Розташування за GPX</string>
 </resources>
