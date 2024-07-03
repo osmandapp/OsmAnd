@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.profileappearance;
 
+import static net.osmand.plus.profiles.NavigationIconsPreviousNamesMapper.getActualNavigationIconName;
 import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_SEPARATOR;
 
 import android.app.Activity;
@@ -36,11 +37,12 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class ProfileAppearanceScreenController extends BaseDialogController {
+public class ProfileAppearanceController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "adjust_profile_appearance";
 
@@ -58,10 +60,10 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 	private final boolean isParentModeImported;
 	private final boolean isNewProfile;
 
-	public ProfileAppearanceScreenController(@NonNull OsmandApplication app,
-	                                         @NonNull IProfileAppearanceScreen screen,
-	                                         @Nullable ApplicationMode parentMode,
-	                                         boolean isParentModeImported) {
+	public ProfileAppearanceController(@NonNull OsmandApplication app,
+	                                   @NonNull IProfileAppearanceScreen screen,
+	                                   @Nullable ApplicationMode parentMode,
+	                                   boolean isParentModeImported) {
 		super(app);
 		bindScreen(screen);
 		this.isParentModeImported = isParentModeImported;
@@ -330,11 +332,24 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 				int colorInt = paletteColor.getColor();
 				changedProfile.color = changedProfile.getProfileColorByColorValue(app, colorInt);
 				changedProfile.customColor = changedProfile.color == null ? colorInt : null;
-				screen.updateColorItems();
-				screen.updateApplyButton();
+				updateColorItems();
+				screen.updateApplyButtonEnable();
 			});
 		}
 		return colorsCardController;
+	}
+
+	private void updateColorItems() {
+		screen.updateColorItems();
+		for (IconsPaletteController<?> controller : collectIconsControllers()) {
+			controller.askUpdateColoredPaletteElements();
+		}
+	}
+
+	@NonNull
+	private List<IconsPaletteController<?>> collectIconsControllers() {
+		return Arrays.asList(getProfileIconCardController(), getRestingIconCardController(),
+				getNavigationIconCardController());
 	}
 
 	@NonNull
@@ -353,7 +368,7 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 			};
 			profileIconCardController.setPaletteListener(icon -> {
 				changedProfile.iconRes = icon;
-				screen.updateApplyButton();
+				screen.updateApplyButtonEnable();
 			});
 		}
 		return profileIconCardController;
@@ -375,7 +390,7 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 			};
 			restingIconCardController.setPaletteListener(icon -> {
 				changedProfile.locationIcon = icon;
-				screen.updateApplyButton();
+				screen.updateApplyButtonEnable();
 			});
 		}
 		return restingIconCardController;
@@ -384,7 +399,8 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
-			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), changedProfile.navigationIcon) {
+			String movementIconName = getActualNavigationIconName(changedProfile.navigationIcon);
+			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), movementIconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -397,7 +413,7 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 			};
 			navigationIconCardController.setPaletteListener(icon -> {
 				changedProfile.navigationIcon = icon;
-				screen.updateApplyButton();
+				screen.updateApplyButtonEnable();
 			});
 		}
 		return navigationIconCardController;
@@ -481,15 +497,15 @@ public class ProfileAppearanceScreenController extends BaseDialogController {
 	}
 
 	@NonNull
-	public static ProfileAppearanceScreenController getInstance(@NonNull OsmandApplication app,
-	                                                            @NonNull IProfileAppearanceScreen screen,
-	                                                            @Nullable String parentModeKey,
-	                                                            boolean imported) {
+	public static ProfileAppearanceController getInstance(@NonNull OsmandApplication app,
+	                                                      @NonNull IProfileAppearanceScreen screen,
+	                                                      @Nullable String parentModeKey,
+	                                                      boolean imported) {
 		DialogManager dialogManager = app.getDialogManager();
-		ProfileAppearanceScreenController controller = (ProfileAppearanceScreenController) dialogManager.findController(PROCESS_ID);
+		ProfileAppearanceController controller = (ProfileAppearanceController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
 			ApplicationMode parent = ApplicationMode.valueOfStringKey(parentModeKey, null);
-			controller = new ProfileAppearanceScreenController(app, screen, parent, imported);
+			controller = new ProfileAppearanceController(app, screen, parent, imported);
 			dialogManager.register(PROCESS_ID, controller);
 		} else {
 			controller.bindScreen(screen);

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -71,11 +72,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	private static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
 	private static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
 
-	private ProfileAppearanceScreenController screenController;
+	private ProfileAppearanceController screenController;
 	private ProgressDialog progress;
 	private EditText profileName;
 	private OsmandTextFieldBoxes profileNameOtfb;
 	private DialogButton applyButton;
+
+	private boolean hasNameError;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			modeKey = args.getString(BASE_PROFILE_FOR_NEW);
 			imported = args.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		}
-		screenController = ProfileAppearanceScreenController.getInstance(app, this, modeKey, imported);
+		screenController = ProfileAppearanceController.getInstance(app, this, modeKey, imported);
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				FragmentActivity activity = getActivity();
@@ -133,13 +136,17 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 				}
 			});
 		}
-		updateApplyButton();
+		updateApplyButtonEnable();
 		return view;
 	}
 
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
+		ImageView closeButton = view.findViewById(R.id.close_button);
+		if (closeButton != null) {
+			closeButton.setImageResource(R.drawable.ic_action_close);
+		}
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		if (toolbarTitle != null) {
 			toolbarTitle.setText(screenController.getToolbarTitle());
@@ -153,6 +160,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		requirePreference(PROFILE_ICON_CARD_HEADER).setIconSpaceReserved(false);
 		requirePreference(RESTING_POSITION_ICON_CARD_HEADER).setIconSpaceReserved(false);
 		requirePreference(NAVIGATION_POSITION_ICON_CARD_HEADER).setIconSpaceReserved(false);
+		requirePreference(OPTIONS_CARD_HEADER).setIconSpaceReserved(false);
 		if (screenController.isNotAllParamsEditable()) {
 			requirePreference(PROFILE_ICON_CARD).setVisible(false);
 			requirePreference(PROFILE_ICON_CARD_HEADER).setVisible(false);
@@ -182,7 +190,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 					} else if (screenController.hasNameDuplicate()) {
 						disableSaveButtonWithErrorMessage(getString(R.string.profile_alert_duplicate_name_msg));
 					} else {
-						applyButton.setEnabled(true);
+						hasNameError = false;
+						updateApplyButtonEnable();
 					}
 				}
 			});
@@ -221,16 +230,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	@Override
 	public void updateColorItems() {
 		updateProfileNameAppearance();
-		setVerticalScrollBarEnabled(false);
-		updatePreference(findPreference(PROFILE_ICON_CARD));
-		updatePreference(findPreference(RESTRING_POSITION_ICON_CARD));
-		updatePreference(findPreference(NAVIGATION_POSITION_ICON_CARD));
-		updatePreference(findPreference(OPTIONS_CARD));
-		setVerticalScrollBarEnabled(true);
 	}
 
-	public void updateApplyButton() {
-		applyButton.setEnabled(screenController.hasChanges());
+	public void updateApplyButtonEnable() {
+		applyButton.setEnabled(screenController.hasChanges() && !hasNameError);
 	}
 
 	private void updateProfileNameAppearance() {
@@ -283,8 +286,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {
-		applyButton.setEnabled(false);
+		hasNameError = true;
 		profileNameOtfb.setError(errorMessage, true);
+		updateApplyButtonEnable();
 	}
 
 	private void setVerticalScrollBarEnabled(boolean enabled) {

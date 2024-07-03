@@ -1,5 +1,6 @@
 package net.osmand.plus.card.icon;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,15 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 		rvIcons.addItemDecoration(new HorizontalSpaceItemDecoration(getDimen(R.dimen.content_padding_small_half)));
 		rvIcons.setClipToPadding(false);
 		rvIcons.setAdapter(paletteAdapter);
+	}
+
+	@SuppressLint("NotifyDataSetChanged")
+	@Override
+	public void updatePaletteColors() {
+		if (controller.isAccentColorCanBeChanged()) {
+			paletteAdapter.notifyDataSetChanged();
+			setupAllIconsButton();
+		}
 	}
 
 	private void setupAllIconsButton() {

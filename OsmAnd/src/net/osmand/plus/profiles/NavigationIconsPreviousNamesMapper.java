@@ -1,11 +1,12 @@
 package net.osmand.plus.profiles;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LocationIconPreviousNamesMapper {
+public class NavigationIconsPreviousNamesMapper {
 
 	private final static Map<String, LocationIcon> navigationIconNames = new HashMap<>();
 
@@ -15,9 +16,15 @@ public class LocationIconPreviousNamesMapper {
 		navigationIconNames.put("CAR", LocationIcon.MOVEMENT_CAR);
 	}
 
-	public static LocationIcon findIconByPreviousName(@NonNull String name,
-	                                                  boolean forStaticLocation) {
-		return !forStaticLocation ? navigationIconNames.get(name) : null;
+	@NonNull
+	public static String getActualNavigationIconName(@NonNull String name) {
+		LocationIcon newIcon = findNavigationIconByPreviousName(name);
+		return newIcon != null ? newIcon.name() : name;
+	}
+
+	@Nullable
+	public static LocationIcon findNavigationIconByPreviousName(@NonNull String name) {
+		return navigationIconNames.get(name);
 	}
 
 }

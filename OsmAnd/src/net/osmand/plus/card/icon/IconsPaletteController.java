@@ -49,6 +49,16 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 		}
 	}
 
+	public void askUpdateColoredPaletteElements() {
+		notifyUpdatePaletteColors();
+	}
+
+	protected void notifyUpdatePaletteColors() {
+		for (IIconsPalette<IconData> palette : collectActivePalettes()) {
+			palette.updatePaletteColors();
+		}
+	}
+
 	protected void notifyUpdatePaletteSelection(@Nullable IconData oldIcon, @NonNull IconData newIcon) {
 		for (IIconsPalette<IconData> palette : collectActivePalettes()) {
 			palette.updatePaletteSelection(oldIcon, newIcon);

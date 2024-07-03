@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.LocationIconPreviousNamesMapper.findIconByPreviousName;
+import static net.osmand.plus.profiles.NavigationIconsPreviousNamesMapper.findNavigationIconByPreviousName;
 
 import android.graphics.drawable.Drawable;
 
@@ -101,15 +101,15 @@ public enum LocationIcon {
 			return MODEL;
 		}
 		try {
-			if (staticLocation != null) {
-				LocationIcon icon = findIconByPreviousName(name, staticLocation);
+			if (staticLocation != null && !staticLocation) {
+				LocationIcon icon = findNavigationIconByPreviousName(name);
 				if (icon != null) {
 					return icon;
 				}
 			}
 			return valueOf(name);
 		} catch (IllegalArgumentException e) {
-			return staticLocation != null && staticLocation ? DEFAULT : MOVEMENT_DEFAULT;
+			return staticLocation == null || staticLocation ? DEFAULT : MOVEMENT_DEFAULT;
 		}
 	}
 }

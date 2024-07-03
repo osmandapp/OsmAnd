@@ -94,6 +94,13 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 		AndroidUiHelper.updateVisibility(actionButton, false);
 	}
 
+	private void askSetupIconsPalette() {
+		View view = getView();
+		if (view != null) {
+			setupIconsPalette(view);
+		}
+	}
+
 	private void setupIconsPalette(@NonNull View view) {
 		FlowLayout flowLayout = view.findViewById(R.id.palette);
 		flowLayout.removeAllViews();
@@ -119,11 +126,13 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 	}
 
 	@Override
+	public void updatePaletteColors() {
+		askSetupIconsPalette();
+	}
+
+	@Override
 	public void updatePaletteIcons(@Nullable IconData targetIcon) {
-		View view = getView();
-		if (view != null) {
-			setupIconsPalette(view);
-		}
+		askSetupIconsPalette();
 	}
 
 	@Override
