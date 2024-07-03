@@ -81,7 +81,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		moveCompassButton(view);
 		moveMap3DButton(view);
 		setupBackgroundShadow(view);
-
+		setupBottomContainer(view.findViewById(R.id.bottom_container));
 		setupMainContent(view.findViewById(R.id.main_content));
 		updateApplyButton(false);
 
@@ -90,6 +90,8 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		return view;
 	}
+
+	protected void setupBottomContainer(@NonNull View bottomContainer) {}
 
 	@Nullable
 	protected abstract String getToolbarTitle();
