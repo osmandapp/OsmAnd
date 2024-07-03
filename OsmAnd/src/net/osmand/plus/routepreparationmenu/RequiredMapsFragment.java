@@ -63,7 +63,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		Dialog dialog = new Dialog(activity, getThemeId()) {
 			@Override
 			public void onBackPressed() {
-				dismiss();
+				RequiredMapsFragment.this.dismiss();
 			}
 		};
 		Window window = dialog.getWindow();

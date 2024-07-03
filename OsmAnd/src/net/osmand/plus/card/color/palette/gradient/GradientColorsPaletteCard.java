@@ -23,6 +23,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 
 public class GradientColorsPaletteCard extends BaseCard implements IColorsPalette {
+
 	public static final float MAX_ALTITUDE_ADDITION = 50f;
 
 	private final GradientColorsPaletteController controller;

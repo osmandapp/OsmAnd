@@ -95,7 +95,7 @@ public class ColorsPaletteController implements IColorsPaletteController {
 			PaletteColor oldSelectedColor = selectedPaletteColor;
 			selectColor(color);
 			if (renewLastUsedTime) {
-				color.renewLastUsedTime();
+				collection.askRenewLastUsedTime(color);
 				notifyUpdatePaletteColors(color);
 			} else {
 				notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);
@@ -162,29 +162,25 @@ public class ColorsPaletteController implements IColorsPaletteController {
 	                               @NonNull PaletteColor paletteColor, boolean nightMode) {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 
-		if (paletteColor.isCustom()) {
-			menuItems.add(new PopUpMenuItem.Builder(activity)
-					.setTitleId(R.string.shared_string_edit)
-					.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
-					.setOnClickListener(v -> showColorPickerDialog(activity, paletteColor))
-					.create()
-			);
-		}
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_edit)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
+				.setOnClickListener(v -> showColorPickerDialog(activity, paletteColor))
+				.create()
+		);
 		menuItems.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_duplicate)
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
 				.setOnClickListener(v -> duplicateColor(paletteColor))
 				.create()
 		);
-		if (paletteColor.isCustom()) {
-			menuItems.add(new PopUpMenuItem.Builder(activity)
-					.setTitleId(R.string.shared_string_remove)
-					.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-					.showTopDivider(true)
-					.setOnClickListener(v -> removeCustomColor(paletteColor))
-					.create()
-			);
-		}
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_remove)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.showTopDivider(true)
+				.setOnClickListener(v -> removeCustomColor(paletteColor))
+				.create()
+		);
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = view;

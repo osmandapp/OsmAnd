@@ -11,16 +11,17 @@
 	android:orientation="vertical"
 	android:paddingBottom="@dimen/content_padding">
 
-	<ProgressBar
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 		android:id="@+id/load_forecast_progress"
-		style="?android:attr/progressBarStyleHorizontal"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="0dp"
-		android:background="?attr/list_background_color"
+		android:layout_height="4dp"
 		android:indeterminate="true"
 		android:minHeight="0dp"
-		android:visibility="invisible"
+		android:visibility="gone"
+		app:mpb_progressStyle="horizontal"
+		app:mpb_showProgressBackground="false"
+		app:mpb_useIntrinsicPadding="false"
 		tools:visibility="visible" />
 
 	<net.osmand.plus.widgets.chips.HorizontalChipsView
@@ -28,23 +29,24 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingHorizontal="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingBottom="@dimen/content_padding_small"
+		android:paddingVertical="@dimen/content_padding_small_half"
 		tools:itemCount="3"
 		tools:listitem="@layout/custom_chip_view" />
 
 	<include
 		layout="@layout/divider"
 		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:layout_marginTop="@dimen/content_padding_half" />
+		android:layout_height="1dp" />
 
 	<net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel
 		android:id="@+id/weather_widgets_panel"
 		android:layout_width="match_parent"
-		android:layout_height="97dp" />
+		android:layout_height="95dp" />
 
-	<include layout="@layout/divider" />
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

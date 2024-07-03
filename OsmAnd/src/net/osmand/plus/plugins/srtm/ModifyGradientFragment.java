@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.srtm;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
 
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,12 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.gradient.GradientCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
@@ -110,8 +108,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		if (controller == null) {
 			controller = new GradientColorsPaletteController(app, null);
 		}
-		Map<String, Pair<ColorPalette, Long>> pallets = app.getColorPaletteHelper().getPalletsForType(type);
-		GradientCollection collection = new GradientCollection(pallets, app.getSettings().GRADIENT_PALETTES, type);
+		GradientColorsCollection collection = new GradientColorsCollection(app, type);
 		controller.updateContent(collection, plugin.getTerrainMode().getKeyName());
 		controller.setPaletteListener(this);
 
