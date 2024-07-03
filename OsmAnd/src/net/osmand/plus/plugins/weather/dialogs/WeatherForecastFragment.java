@@ -242,6 +242,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
 			animationStartStepCount = animateStepCount;
 			updateSliderValue();
+			updateSelectedDate(calendar.getTime(), true, true);
 			scheduleAnimationStart();
 		} else {
 			animateForecastHandler.removeCallbacksAndMessages(null);
@@ -330,7 +331,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			calendar.set(Calendar.HOUR_OF_DAY, hour);
 			calendar.set(Calendar.MINUTE, Math.round((value - (float) hour) * 60.0f));
 
-			updateSelectedDate(calendar.getTime());
+			updateSelectedDate(calendar.getTime(), !fromUser, false);
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 		timeSlider.setLabelBehavior(LABEL_FLOATING);
@@ -390,7 +391,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		chipsView.setOnSelectChipListener(chip -> {
 			Date date = (Date) chip.tag;
 			selectedDate.setTime(date);
-			updateSelectedDate(date);
+			updateSelectedDate(date, false, false);
 			updateTimeSlider();
 			requireMapActivity().refreshMap();
 			return true;
@@ -460,8 +461,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		updateChooseContoursButton();
 	}
 
-	public void updateSelectedDate(@Nullable Date date) {
-		plugin.setForecastDate(date);
+	public void updateSelectedDate(@Nullable Date date, boolean forAnimation, boolean resetPeriod) {
+		plugin.setForecastDate(date, forAnimation, resetPeriod);
 		if (date != null)
 			date.setTime(WeatherUtils.roundForecastTimeToHour(date.getTime()));
 		checkDateOffset(date);
@@ -514,7 +515,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
-		updateSelectedDate(selectedDate.getTime());
+		updateSelectedDate(selectedDate.getTime(), false, false);
 	}
 
 	@Override
@@ -525,7 +526,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		mapActivity.enableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().removeAdditionalWidgetsContainer(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
-		updateSelectedDate(null);
+		updateSelectedDate(null, false, false);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {

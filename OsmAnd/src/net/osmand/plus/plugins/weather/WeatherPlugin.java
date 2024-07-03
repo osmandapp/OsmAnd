@@ -447,7 +447,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherLayerLow = new WeatherRasterLayer(app, WeatherLayer.LOW);
 		weatherLayerHigh = new WeatherRasterLayer(app, WeatherLayer.HIGH);
 		weatherContourLayer = new WeatherContourLayer(app);
-		updateLayersDate();
+		updateLayersDate(false, false);
 	}
 
 	public void setWeatherEnabled(boolean enable) {
@@ -554,29 +554,29 @@ public class WeatherPlugin extends OsmandPlugin {
 		return forecastDate != null;
 	}
 
-	public void setForecastDate(@Nullable Date date) {
+	public void setForecastDate(@Nullable Date date, boolean forAnimation, boolean resetPeriod) {
 		forecastDate = date;
-		updateLayersDate();
+		updateLayersDate(forAnimation, resetPeriod);
 	}
 
 	public void prepareForDayAnimation(@NonNull Date date) {
 		forecastDate = date;
 		long time = forecastDate.getTime();
 		if (weatherLayerLow != null) {
-			weatherLayerLow.setDateTime(time, true);
+			weatherLayerLow.setDateTime(time, true, false);
 		}
 		if (weatherLayerHigh != null) {
-			weatherLayerHigh.setDateTime(time, true);
+			weatherLayerHigh.setDateTime(time, true, false);
 		}
 	}
 
-	private void updateLayersDate() {
+	private void updateLayersDate(boolean forAnimation, boolean resetPeriod) {
 		long time = forecastDate != null ? forecastDate.getTime() : System.currentTimeMillis();
 		if (weatherLayerLow != null) {
-			weatherLayerLow.setDateTime(time, false);
+			weatherLayerLow.setDateTime(time, forAnimation, resetPeriod);
 		}
 		if (weatherLayerHigh != null) {
-			weatherLayerHigh.setDateTime(time, false);
+			weatherLayerHigh.setDateTime(time, forAnimation, resetPeriod);
 		}
 		if (weatherContourLayer != null) {
 			weatherContourLayer.setDateTime(time);

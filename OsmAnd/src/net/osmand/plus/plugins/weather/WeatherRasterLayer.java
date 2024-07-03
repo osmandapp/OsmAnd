@@ -60,7 +60,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		this.weatherSettings = weatherHelper.getWeatherSettings();
 		this.weatherLayer = weatherLayer;
 		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		setDateTime(System.currentTimeMillis(), false);
+		setDateTime(System.currentTimeMillis(), false, false);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		return dateTime;
 	}
 
-	public void setDateTime(long dateTime, boolean goForward) {
+	public void setDateTime(long dateTime, boolean goForward, boolean resetPeriod) {
 		long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
 		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
 		if (dateTime < dayStart || dateTime > dayEnd) {
@@ -100,22 +100,20 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			} else
 				dayStart = switchStepTime;
 		}
+		long prevTime = (dateTime - dayStart) / step * step + dayStart;
+		long nextTime = prevTime + step;
 		if (goForward) {
-			long prevTime = (dateTime - dayStart) / step * step + dayStart;
-			long nextTime = prevTime + FORECAST_ANIMATION_DURATION_HOURS * HOUR_IN_MILLISECONDS;
-			if (timePeriodStep != step
-					|| (timePeriodStart > dayStart && prevTime <= timePeriodStart)
-					|| (timePeriodEnd < dayEnd && nextTime >= timePeriodEnd)) {
-				timePeriodStart = Math.max(prevTime - step, dayStart);
-				timePeriodEnd = Math.min(nextTime + step, dayEnd);
+			if (resetPeriod || timePeriodStep != step
+					|| (timePeriodStart > dayStart && prevTime < timePeriodStart)
+					|| (timePeriodEnd < dayEnd && nextTime > timePeriodEnd)) {
+				timePeriodStart = Math.max(prevTime, dayStart);
+				timePeriodEnd = Math.min(nextTime + FORECAST_ANIMATION_DURATION_HOURS * HOUR_IN_MILLISECONDS, dayEnd);
 				timePeriodStep = step;
 				requireTimePeriodChange = true;
 			}
 		} else {
-			long prevTime = (dateTime - dayStart) / step * step + dayStart;
-			long nextTime = prevTime + step;
 			long nearestTime = dateTime - prevTime < nextTime - dateTime ? prevTime : nextTime;
-			if (timePeriodStep != step
+			if (resetPeriod || timePeriodStep != step
 					|| (timePeriodStart > dayStart && nearestTime <= timePeriodStart)
 					|| (timePeriodEnd < dayEnd && nearestTime >= timePeriodEnd)) {
 				timePeriodStart = Math.max(nearestTime - step, dayStart);
