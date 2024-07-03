@@ -5669,7 +5669,7 @@
 \n
 \n • 3D változat a helypozíció ikonokhoz
 \n
-\n • A gyorsműveletek most külső billentyűzetekhez is rendelhetők
+\n • A gyorsműveletek most külső billentyűzethez is rendelhetők
 \n
 \n • Időjárás: a felhasználói felület frissítése, hozzáadott szél animáció
 \n
@@ -5677,9 +5677,9 @@
 \n
 \n • Kibővített turistaútvonalak választéka a térképen
 \n
-\n • Hozzáadott alkalmazástéma opció a térképmód követéséhez
+\n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez
 \n
-\n • Javított nyomvonal statisztika, -rendezés és -keresés
+\n • Javított nyomvonal-statisztika, -rendezés és -keresés
 \n
 \n • OSM szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód
 \n
@@ -5771,7 +5771,7 @@
     <string name="weather_source_GFS_description">Az amerikai Nemzeti Környezeti Előrejelző Központok adatait felhasználó Globális Előrejelzési Rendszer</string>
     <string name="weather_source_ecmwf_description">Középtávú Időjárás-előrejelzések Európai Központja</string>
     <string name="shared_string_modify">Módosítás</string>
-    <string name="missing_maps_ignore_details">A már letöltött térképek lefedik az útvonalat? Navigáljon velük, ha ismeri a környéket.</string>
+    <string name="missing_maps_ignore_details">Lefedik-e az útvonalat a már letöltött térképek? Navigáljon azokkal, ha ismeri a környéket.</string>
     <string name="quick_action_map_style">Térképstílus</string>
     <string name="quick_action_location_by_gpx">Hely GPX alapján</string>
     <string name="quick_action_directions_from">Kezdőpont</string>
