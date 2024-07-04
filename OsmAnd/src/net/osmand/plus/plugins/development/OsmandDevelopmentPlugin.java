@@ -52,7 +52,6 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -285,7 +284,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final int AVG_STATS_INTERVAL_SECONDS = 10;
 	private final int AVG_STATS_LIFETIME_MINUTES = 15;
 	private Handler avgStatsHandler = new Handler(Looper.getMainLooper());
-	private List<AvgStatsEntry> avgStats = Collections.synchronizedList(new ArrayList<>());
+	private List<AvgStatsEntry> avgStats = new ArrayList<>();
 
 	public class AvgStatsEntry {
 		public long timestamp;
@@ -364,7 +363,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private void avgStatsCollector() {
 		if (avgStatsEnabled) {
 			avgStatsCleanup();
-			avgStats.add(new AvgStatsEntry(app));
+
+			List<AvgStatsEntry> nextAvgStats = new ArrayList<>(avgStats);
+			nextAvgStats.add(new AvgStatsEntry(app)); // copy-on-write
+			avgStats = nextAvgStats;
+
 			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
 		}
 	}
