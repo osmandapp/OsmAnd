@@ -6,6 +6,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 import static java.lang.Math.ceil;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,19 +74,24 @@ public class AisObjectMenuController extends MenuController {
                 getCpa(myLocation, aisLocation, cpa);
                 if (cpa.isValid()) {
                     double cpaTime = cpa.getTcpa();
-                    double hours = ceil(cpaTime);
-                    double minutes = (cpaTime - hours) * 60.0;
-                    addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
-                    if (cpaTime > 0.0) {
-                        if (hours >= 2.0) {
-                            addMenuItem("TCPA", String.format("%.0f hours %.0f min", hours, minutes));
-                        } else if (hours >= 1.0) {
-                            addMenuItem("TCPA", String.format("%.0f hour %.0f min", hours, minutes));
-                        } else {
-                            addMenuItem("TCPA", String.format("%.0f min", minutes));
+                    boolean isPositive = cpaTime >= 0;
+                    cpaTime = Math.abs(cpaTime);
+                    if (cpaTime < Long.MAX_VALUE) {
+                        if (isPositive) {
+                            long hours = (long)cpaTime;
+                            double minutes = (cpaTime % 1 - hours) * 60.0;
+                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
+                            if (hours >= 2.0) {
+                                addMenuItem("TCPA", String.format("%d hours %.0f min", hours, minutes));
+                            } else if (hours >= 1.0) {
+                                addMenuItem("TCPA", String.format("%d hour %.0f min", hours, minutes));
+                            } else {
+                                addMenuItem("TCPA", String.format("%.0f min", minutes));
+                            }
+                        } else { // remove this later: don't show negative values...
+                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
+                            addMenuItem("TCPA", String.format("-%.1f hours", cpaTime));
                         }
-                    } else {
-                        addMenuItem("TCPA", String.format("%.1f hours", cpaTime));
                     }
                 }
             }
@@ -138,13 +144,10 @@ public class AisObjectMenuController extends MenuController {
                     LocationConvert.convertLatitude(position.getLatitude(), FORMAT_MINUTES, true) +
                           ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
-                OsmAndLocationProvider locationProvider = app.getLocationProvider();
-                Location ownLocation = null;
-                if (locationProvider != null) {
-                    ownLocation = locationProvider.getLastKnownLocation();
-                }
-                float distance = aisObject.getDistanceInNauticalMiles(ownLocation);
-                float bearing = aisObject.getBearing(ownLocation);
+                Location ownPosition = app.getLocationProvider().getLastKnownLocation();
+                AisObject.setOwnPosition(ownPosition);
+                float distance = aisObject.getDistanceInNauticalMiles();
+                float bearing = aisObject.getBearing();
                 if (distance >= 0.0f) {
                     try {
                         addMenuItem("Distance",  String.format("%.1f nm", distance));
@@ -155,7 +158,7 @@ public class AisObjectMenuController extends MenuController {
                         addMenuItem("Bearing", String.format("%.1f", bearing));
                     } catch (Exception ignore) { }
                 }
-                addCpaInfo(ownLocation, msgTypes);
+                addCpaInfo(ownPosition, msgTypes);
             }
         }
         if (msgTypes.contains(21)) { // ATON (aid to navigation)

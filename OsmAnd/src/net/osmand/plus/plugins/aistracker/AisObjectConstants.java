@@ -22,7 +22,7 @@ public final class AisObjectConstants {
     public final static double INVALID_DRAUGHT = 0.0;
     public final static double INVALID_TCPA = -10000.0d;
     public final static float INVALID_CPA = -1.0f;
-
+    public final static int CPA_UPDATE_TIMEOUT_IN_SECONDS = 10;
 
     public static enum AisObjType {
         AIS_VESSEL,

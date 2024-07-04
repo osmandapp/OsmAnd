@@ -228,14 +228,7 @@ public final class AisTrackerHelper {
     }
 
     private static boolean checkSpeedAndBearing(@NonNull Location x, @NonNull Location y) {
-        if (!x.hasBearing() || !y.hasBearing() || !x.hasSpeed() || !y.hasSpeed()) {
-            Log.d("AisTrackerHelper", "some input data is missing: x.hasBearing->"
-                    + x.hasBearing() + ", y.hasBearing->" + y.hasBearing() + ", x.hasSpeed->"
-                    + x.hasSpeed() + ", y.hasSpeed" + y.hasSpeed());
-            return true;
-        } else {
-            return false;
-        }
+        return !x.hasBearing() || !y.hasBearing() || !x.hasSpeed() || !y.hasSpeed();
     }
 
     private static float getSpeedInKnots(@NonNull Location loc) {
