@@ -370,7 +370,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			avgStatsCleanup();
 
 			List<AvgStatsEntry> nextAvgStats = new ArrayList<>(avgStats);
-			nextAvgStats.add(new AvgStatsEntry(app)); // copy-on-write
+			nextAvgStats.add(new AvgStatsEntry(app));
 			avgStats = nextAvgStats;
 
 			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
