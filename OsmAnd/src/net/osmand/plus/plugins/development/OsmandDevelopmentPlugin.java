@@ -231,8 +231,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		super.init(app, activity);
-		fpsStatsEnabled = true;
-		fpsStatsCollector();
+		avgStatsEnabled = true;
+		avgStatsCollector();
 		return true;
 	}
 
@@ -243,7 +243,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
-		fpsStatsEnabled = false;
+		avgStatsEnabled = false;
 		super.disable(app);
 	}
 
@@ -281,13 +281,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
 	}
 
-	private boolean fpsStatsEnabled = false;
-	private final int FPS_STATS_INTERVAL_SECONDS = 1; // 10 ?
-	private final int FPS_STATS_LIFETIME_MINUTES = 15;
-	private Handler fpsStatsHandler = new Handler(Looper.getMainLooper());
-	private List<FpsStatsEntry> fpsStats = Collections.synchronizedList(new ArrayList<>());
+	private boolean avgStatsEnabled = false;
+	private final int AVG_STATS_INTERVAL_SECONDS = 10;
+	private final int AVG_STATS_LIFETIME_MINUTES = 15;
+	private Handler avgStatsHandler = new Handler(Looper.getMainLooper());
+	private List<AvgStatsEntry> avgStats = Collections.synchronizedList(new ArrayList<>());
 
-	public class FpsStatsEntry {
+	public class AvgStatsEntry {
 		public long timestamp;
 		public float energyConsumption;
 		public float batteryLevel;
@@ -295,7 +295,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		public float idle1k;
 		public float gpu1k;
 
-		public FpsStatsEntry(OsmandApplication app) {
+		public AvgStatsEntry(OsmandApplication app) {
 			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
 			if (renderer != null) {
 				this.timestamp = System.currentTimeMillis();
@@ -316,60 +316,60 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		}
 
-		public FpsStatsEntry(List<FpsStatsEntry> list, int minutes) {
-			if (!list.isEmpty()) {
-				this.batteryLevel = minuteBatteryUsage(list, minutes);
-				this.fps1k = avgFloat(list, minutes, entry -> entry.fps1k);
-				this.gpu1k = avgFloat(list, minutes, entry -> entry.gpu1k);
-				this.idle1k = avgFloat(list, minutes, entry -> entry.idle1k);
-				this.energyConsumption = avgFloat(list, minutes, entry -> entry.energyConsumption);
+		public AvgStatsEntry(List<AvgStatsEntry> allEntries, int periodMinutes) {
+			if (!allEntries.isEmpty()) {
+				this.batteryLevel = minuteBatteryUsage(allEntries, periodMinutes);
+				this.fps1k = avgFloat(allEntries, periodMinutes, entry -> entry.fps1k);
+				this.gpu1k = avgFloat(allEntries, periodMinutes, entry -> entry.gpu1k);
+				this.idle1k = avgFloat(allEntries, periodMinutes, entry -> entry.idle1k);
+				this.energyConsumption = avgFloat(allEntries, periodMinutes, entry -> entry.energyConsumption);
 			}
 		}
 
-		private float avgFloat(List<FpsStatsEntry> list, int minutes, Function<FpsStatsEntry, Float> get) {
-			long earliest = System.currentTimeMillis() - minutes * 60 * 1000;
-			final float[] sum = { 0, 0 }; // sum, counter
-			list.forEach(entry -> {
-				if (entry.timestamp > 0 && entry.timestamp >= earliest) {
-					sum[0] += get.apply(entry);
-					sum[1]++;
+		private float avgFloat(List<AvgStatsEntry> allEntries, int periodMinutes, Function<AvgStatsEntry, Float> getter) {
+			long earliestTimestamp = System.currentTimeMillis() - periodMinutes * 60 * 1000;
+			final float[] pairSumCounter = { 0, 0 }; // sum, counter
+			allEntries.forEach(entry -> {
+				if (entry.timestamp > 0 && entry.timestamp >= earliestTimestamp) {
+					pairSumCounter[0] += getter.apply(entry);
+					pairSumCounter[1]++;
 				}
 			});
-			return sum[1] > 0 ? (sum[0] / sum[1]) : 0;
+			return pairSumCounter[1] > 0 ? (pairSumCounter[0] / pairSumCounter[1]) : 0;
 		}
 
-		private float minuteBatteryUsage(List<FpsStatsEntry> list, int minutes) {
-			long earliest = System.currentTimeMillis() - minutes * 60 * 1000;
-			for (int i = 0; i < list.size(); i++) {
-				long now = System.currentTimeMillis();
-				long timestamp = list.get(i).timestamp;
-				if (timestamp > 0 && timestamp >= earliest && now > timestamp) {
-					float pastBattery = list.get(i).batteryLevel;
-					float freshBattery = list.get(list.size() - 1).batteryLevel;
-					return (float) ((double) (freshBattery - pastBattery) / (double) (now - timestamp) * 1000 * 60);
+		private float minuteBatteryUsage(List<AvgStatsEntry> allEntries, int periodMinutes) {
+			long earliestTimestamp = System.currentTimeMillis() - periodMinutes * 60 * 1000;
+			for (int i = 0; i < allEntries.size(); i++) {
+				long nowTimestamp = System.currentTimeMillis();
+				long timestamp = allEntries.get(i).timestamp;
+				if (timestamp > 0 && timestamp >= earliestTimestamp && nowTimestamp > timestamp) {
+					float pastBattery = allEntries.get(i).batteryLevel;
+					float freshBattery = allEntries.get(allEntries.size() - 1).batteryLevel;
+					return (float) ((double) (freshBattery - pastBattery) / (double) (nowTimestamp - timestamp) * 1000 * 60);
 				}
 			}
 			return 0;
 		}
 	}
 
-	private void fpsStatsCleanup() {
-		long expiration = System.currentTimeMillis() - (long)(FPS_STATS_LIFETIME_MINUTES * 60 * 1000);
-		long slowDownCleanup = System.currentTimeMillis() - (long)(FPS_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
-		if (!fpsStats.isEmpty() && fpsStats.get(0).timestamp < slowDownCleanup) {
-			fpsStats = fpsStats.stream().filter(entry -> entry.timestamp >= expiration).collect(Collectors.toList());
+	private void avgStatsCleanup() {
+		long expirationTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000);
+		long delayedCleanupTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
+		if (!avgStats.isEmpty() && avgStats.get(0).timestamp < delayedCleanupTimestamp) {
+			avgStats = avgStats.stream().filter(entry -> entry.timestamp >= expirationTimestamp).collect(Collectors.toList());
 		}
 	}
 
-	private void fpsStatsCollector() {
-		if (fpsStatsEnabled) {
-			fpsStatsCleanup();
-			fpsStats.add(new FpsStatsEntry(app));
-			fpsStatsHandler.postDelayed(this::fpsStatsCollector, FPS_STATS_INTERVAL_SECONDS * 1000);
+	private void avgStatsCollector() {
+		if (avgStatsEnabled) {
+			avgStatsCleanup();
+			avgStats.add(new AvgStatsEntry(app));
+			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
 		}
 	}
 
-	public FpsStatsEntry getFpsStats(int minutes) {
-		return new FpsStatsEntry(fpsStats, minutes);
+	public AvgStatsEntry getAvgStats(int periodMinutes) {
+		return new AvgStatsEntry(avgStats, periodMinutes);
 	}
 }
