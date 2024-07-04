@@ -286,15 +286,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private Handler avgStatsHandler = new Handler(Looper.getMainLooper());
 	private List<AvgStatsEntry> avgStats = new ArrayList<>();
 
-	public class AvgStatsEntry {
-		public long timestamp;
-		public float energyConsumption;
-		public float batteryLevel;
-		public float fps1k;
-		public float idle1k;
-		public float gpu1k;
+	protected class AvgStatsEntry {
+		private long timestamp;
+		protected float energyConsumption;
+		protected float batteryLevel;
+		protected float fps1k;
+		protected float idle1k;
+		protected float gpu1k;
 
-		public AvgStatsEntry(OsmandApplication app) {
+		private AvgStatsEntry(OsmandApplication app) {
 			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
 			if (renderer != null) {
 				this.timestamp = System.currentTimeMillis();
@@ -315,7 +315,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		}
 
-		public AvgStatsEntry(List<AvgStatsEntry> allEntries, int periodMinutes) {
+		private AvgStatsEntry(List<AvgStatsEntry> allEntries, int periodMinutes) {
 			if (!allEntries.isEmpty()) {
 				this.batteryLevel = minuteBatteryUsage(allEntries, periodMinutes);
 				this.fps1k = avgFloat(allEntries, periodMinutes, entry -> entry.fps1k);
@@ -372,7 +372,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	public AvgStatsEntry getAvgStats(int periodMinutes) {
+	protected AvgStatsEntry getAvgStats(int periodMinutes) {
 		return new AvgStatsEntry(avgStats, periodMinutes);
 	}
 }
