@@ -30,6 +30,10 @@ import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ROT;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SHIP_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SOG;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.CPA_UPDATE_TIMEOUT_IN_SECONDS;
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
+import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_DEFAULT_WARNING_TIME;
+import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_WARNING_DEFAULT_DISTANCE;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_OBJ_LOST_DEFAULT_TIMEOUT;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_SHIP_LOST_DEFAULT_TIMEOUT;
 
@@ -88,9 +92,14 @@ public class AisObject {
     private static int maxObjectAgeInMinutes = AIS_OBJ_LOST_DEFAULT_TIMEOUT;
     /* after this time of missing AIS signal the vessel symbol can change to mark "lost": */
     private static int vesselLostTimeoutInMinutes = AIS_SHIP_LOST_DEFAULT_TIMEOUT;
+    private static int cpaWarningTime = AIS_CPA_DEFAULT_WARNING_TIME; // in minutes
+    private static float cpaWarningDistance = AIS_CPA_WARNING_DEFAULT_DISTANCE; // in miles
+    private static Location ownPosition = null; // used to calculate distances, CPA etc.
     private AisObjType objectClass;
     private Bitmap bitmap = null;
     private int bitmapColor;
+    private AisTrackerHelper.Cpa cpa;
+    private long lastCpaUpdate = 0;
 
     public AisObject(int mmsi, int msgType, double lat, double lon) {
         initObj(mmsi, msgType);
@@ -185,6 +194,7 @@ public class AisObject {
     /* to be called only by a contructor! */
     private void initObj(int mmsi, int msgType) {
         this.msgTypes = new TreeSet<>();
+        this.cpa = new AisTrackerHelper.Cpa();
         this.ais_mmsi = mmsi;
         this.ais_msgType = msgType;
         this.countryCode = getCountryCode(this.ais_mmsi);
@@ -366,8 +376,10 @@ public class AisObject {
             this.msgTypes = new TreeSet<>();
         }
         this.msgTypes.add(ais_msgType);
+        if (this.cpa == null) {
+            cpa = new AisTrackerHelper.Cpa();
+        }
         this.initObjectClass();
-        //this.objectClass = ais.getObjectClass(); // test only... remove later
         this.bitmap = null;
         this.bitmapColor = 0;
     }
@@ -442,7 +454,12 @@ public class AisObject {
     public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
                      @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
         if ((this.bitmap == null) || isLost(vesselLostTimeoutInMinutes)) {
-            this.setBitmap(mapLayer);
+            setBitmap(mapLayer);
+        }
+        if (checkCpaWarning()) {
+            activateCpaWarning();
+        } else {
+            deactivateCpaWarning();
         }
         if (this.bitmapColor != 0) {
             paint.setColorFilter(new LightingColorFilter(this.bitmapColor, 0));
@@ -515,11 +532,53 @@ public class AisObject {
         return false;
     }
 
+    /* return true if the vessel gets too close with the own position in the future
+    * (danger of collusion) */
+    private boolean checkCpaWarning() {
+        if (isMovable() && (objectClass != AIS_AIRPLANE) && (cpaWarningTime > 0)) {
+            if (checkForCpaTimeout() && (ownPosition != null)) {
+                Location aisPosition = getLocation();
+                if (aisPosition != null) {
+                    getCpa(ownPosition, getLocation(), cpa);
+                    lastCpaUpdate = System.currentTimeMillis();
+                }
+            }
+            if (cpa.isValid()) {
+                double tcpa = cpa.getTcpa();
+                if (tcpa > 0.0f) {
+                    return ((tcpa * 60.0d) <= cpaWarningTime) && (cpa.getCpaDist() <= cpaWarningDistance);
+                }
+            }
+        }
+        return false;
+    }
+
+    private void activateCpaWarning() {
+        bitmapColor = Color.RED;
+    }
+    private void deactivateCpaWarning() {
+        if (bitmapColor == Color.RED) {
+            setColor();
+        }
+    }
     private boolean isLost(int maxAgeInMin) {
         return ((System.currentTimeMillis() - this.lastUpdate) / 1000 / 60) > maxAgeInMin;
     }
+    private boolean checkForCpaTimeout() {
+        return ((System.currentTimeMillis() - this.lastCpaUpdate) / 1000) > CPA_UPDATE_TIMEOUT_IN_SECONDS;
+    }
     public static void setMaxObjectAge(int timeInMinutes) { maxObjectAgeInMinutes = timeInMinutes; }
     public static void setVesselLostTimeout(int timeInMinutes) { vesselLostTimeoutInMinutes = timeInMinutes; }
+    public static void setCpaWarningTime(int warningTime) { cpaWarningTime = warningTime; }
+    public static void setCpaWarningDistance(float warningDistance) { cpaWarningDistance = warningDistance; }
+    //public static void setOwnPosition(Location position) { ownPosition = position; }
+    public static void setOwnPosition(Location position) {
+        ownPosition = position;
+        if (ownPosition != null) {
+            ownPosition.setBearing(180.0f); // test
+            ownPosition.setSpeed(0.1f); // test (m/s)
+        }
+    }
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed
@@ -823,19 +882,19 @@ public class AisObject {
                 return(Integer.toString(ais_aidType));
         }
     }
-    private float getDistanceOrBearing(@Nullable Location ownLocation, boolean needBearing) {
+    private float getDistanceOrBearing(boolean needBearing) {
         Location aisLocation = getLocation();
-        if ((ownLocation != null) && (aisLocation != null)) {
-            return needBearing ? ownLocation.bearingTo(aisLocation) : ownLocation.distanceTo(aisLocation);
+        if ((ownPosition != null) && (aisLocation != null)) {
+            return needBearing ? ownPosition.bearingTo(aisLocation) : ownPosition.distanceTo(aisLocation);
         } else {
-            Log.e("AisObject", "getDistanceOrBearing(): ownLocation -> " + ownLocation +
+            Log.e("AisObject", "getDistanceOrBearing(): ownLocation -> " + ownPosition +
                    ", aisLocation -> " + aisLocation);
             return -500.0f; // invalid
         }
     }
     /* get bearing from own position to the position of the AIS object */
-    public float getBearing(@Nullable Location ownLocation) {
-        float bearing = getDistanceOrBearing(ownLocation, true);
+    public float getBearing() {
+        float bearing = getDistanceOrBearing(true);
         if ((bearing < 0.0f) && (bearing > -200.0f)) {
             while (bearing < 0.0f) {
                 bearing += 360.0f;
@@ -844,11 +903,11 @@ public class AisObject {
         return bearing;
     }
     /* get distance from own position to the position of the AIS object in meters */
-    public float getDistanceInMeters(@Nullable Location ownLocation) {
-        return getDistanceOrBearing(ownLocation, false);
+    public float getDistanceInMeters() {
+        return getDistanceOrBearing(false);
     }
-    public float getDistanceInNauticalMiles(@Nullable Location ownLocation) {
-        float dist = getDistanceInMeters(ownLocation);
+    public float getDistanceInNauticalMiles() {
+        float dist = getDistanceInMeters();
         if (dist >= 0.0f) {
             dist = dist / 1852;
         }

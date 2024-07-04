@@ -55,9 +55,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public final CommonPreference<Integer> AIS_SHIP_LOST_TIMEOUT;
     public static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
     public final CommonPreference<Integer> AIS_CPA_WARNING_TIME;
-    private static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
+    public static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
     public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE;
-    private static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
+    public static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
 
     public AisTrackerPlugin(OsmandApplication app) {
         super(app);

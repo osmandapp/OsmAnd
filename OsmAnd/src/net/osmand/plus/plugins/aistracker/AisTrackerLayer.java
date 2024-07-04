@@ -59,12 +59,15 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         this.bitmapPaint.setStrokeWidth(4);
         this.bitmapPaint.setColor(Color.DKGRAY);
 
+        AisObject.setCpaWarningTime(plugin.AIS_CPA_WARNING_TIME.get());
+        AisObject.setCpaWarningDistance(plugin.AIS_CPA_WARNING_DISTANCE.get());
+
         initTimer();
         startNetworkListener();
 
         // for test purposes: remove later...
         initTestObjects();
-        testCpa();
+        //testCpa();
     }
 
     private void testCpa() {
@@ -368,6 +371,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+        AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
         for (AisObject ais : aisObjectList.values()) {
             if (isLocationVisible(tileBox, ais.getPosition())) {
                 ais.draw(this, bitmapPaint, canvas, tileBox);
