@@ -27,6 +27,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 
 	private GradientColorsPaletteController controller;
 
+	private TextView titleView;
 
 	@Nullable
 	@Override
@@ -87,6 +89,11 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 		container.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
+	@Override
+	protected void setupBottomContainer(@NonNull View bottomContainer) {
+		bottomContainer.setPadding(0, 0, 0, bottomContainer.getPaddingBottom());
+	}
+
 	private void addChart(@NonNull ViewGroup container) {
 		LinearLayout linearLayout = new LinearLayout(app);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -118,16 +125,17 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 	@NonNull
 	private View getHeaderView(@NonNull ViewGroup container) {
 		View view = themedInflater.inflate(R.layout.list_item_text_header, container, false);
-		TextView title = view.findViewById(R.id.title);
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) title.getLayoutParams();
-		params.topMargin = 0;
-		params.bottomMargin = 0;
-		title.setLayoutParams(params);
+		titleView = view.findViewById(R.id.title);
+		updateTitle();
+		return view;
+	}
+
+	private void updateTitle(){
 		TerrainMode defaultMode = TerrainMode.getDefaultMode(type);
 		if (defaultMode != null) {
-			title.setText(defaultMode.getDescription());
+			String titleString = Algorithms.capitalizeFirstLetter(selectedMode.getKeyName()).replace("_", " ");
+			titleView.setText(titleString);
 		}
-		return view;
 	}
 
 	@Override
@@ -176,6 +184,7 @@ public class ModifyGradientFragment extends ConfigureMapOptionFragment implement
 				plugin.setTerrainMode(mode);
 				plugin.updateLayers(requireMapActivity(), requireMapActivity());
 				updateApplyButton(isChangesMade());
+				updateTitle();
 			}
 		}
 	}

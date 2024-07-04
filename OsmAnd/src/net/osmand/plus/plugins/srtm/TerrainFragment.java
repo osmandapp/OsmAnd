@@ -35,12 +35,14 @@ import androidx.fragment.app.FragmentManager;
 
 import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -187,32 +189,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainMode mode = srtmPlugin.getTerrainMode();
-		TerrainType type = mode.getType();
-		String key = type == HEIGHT ? ALTITUDE_DEFAULT_KEY : DEFAULT_KEY;
-		String prefix = HILLSHADE_SCND_PREFIX;
-		if (type == HEIGHT) {
-			prefix = HEIGHT_PREFIX;
-		} else if (type == SLOPE) {
-			prefix = COLOR_SLOPE_PREFIX;
-		}
-		String defaultModeKey = prefix + key + TXT_EXT;
-		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(defaultModeKey);
+		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFile());
 		if (colorPalette != null) {
 			AndroidUiHelper.updateVisibility(gradientChart, true);
-			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, (value, axis) -> {
-				String stringValue = formatChartValue(value);
-				String typeValue = "%";
-				switch (mode.getType()) {
-					case HEIGHT:
-						typeValue = "";
-						break;
-					case HILLSHADE:
-					case SLOPE:
-						typeValue = "°";
-						break;
-				}
-				return app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, typeValue);
-			}, nightMode);
+			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType(), null);
+			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, formatter, nightMode);
 
 			gradientChart.setData(barData);
 			gradientChart.notifyDataSetChanged();
@@ -247,7 +228,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		int maxZoom = srtmPlugin.getTerrainMaxZoom();
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
-		coloSchemeTv.setText(mode.getDescription(app));
+		coloSchemeTv.setText(mode.getType().getName(app));
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {
@@ -257,7 +238,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				if (mode.isDefaultMode()) {
 					menuItems.add(new PopUpMenuItem.Builder(app)
-							.setTitle(mode.getDescription(app))
+							.setTitle(mode.getType().getName(app))
 							.setOnClickListener(v -> setupTerrainMode(mode))
 							.create());
 				}

@@ -166,12 +166,11 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				description.setText(descriptionBuilder);
 				bottomDivider.setVisibility(View.VISIBLE);
 				verticalDivider.setVisibility(View.GONE);
-				menuButton.setVisibility(View.VISIBLE);
-				menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientColor, view, nightMode, isSelected));
+				setupMenuButton(gradientColor, nightMode, isSelected);
 			}
 		}
 
-		public void showItemOptionsMenu(@NonNull PaletteGradientColor gradientColor, @NonNull View view, boolean nightMode, boolean isSelected) {
+		private void setupMenuButton(@NonNull PaletteGradientColor gradientColor, boolean nightMode, boolean isSelected){
 			Object gradientType = controller.getGradientType();
 			boolean isDefaultColor;
 			String colorPaletteFileName;
@@ -179,6 +178,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 			if (gradientType instanceof TerrainType) {
 				TerrainMode terrainMode = TerrainMode.getMode((TerrainType) gradientType, gradientColor.getPaletteName());
 				if (terrainMode == null) {
+					menuButton.setVisibility(View.GONE);
 					return;
 				}
 				colorPaletteFileName = terrainMode.getMainFile();
@@ -188,16 +188,18 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 				isDefaultColor = gradientColor.getPaletteName().equals(PaletteGradientColor.DEFAULT_NAME);
 			}
 
+			menuButton.setVisibility(View.VISIBLE);
+			menuButton.setOnClickListener(view -> showItemOptionsMenu(gradientType, colorPaletteFileName, isDefaultColor, view, nightMode, isSelected));
+		}
+
+		public void showItemOptionsMenu(@NonNull Object gradientType, @NonNull String colorPaletteFileName, boolean isDefaultColor, @NonNull View view, boolean nightMode, boolean isSelected) {
 			List<PopUpMenuItem> items = new ArrayList<>();
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_duplicate)
 					.setIcon(getContentIcon(R.drawable.ic_action_copy))
 					.setOnClickListener(v -> app.getColorPaletteHelper().duplicateGradient(colorPaletteFileName, duplicated -> {
 						if (duplicated) {
-							if (gradientType instanceof TerrainType) {
-								TerrainMode.reloadTerrainMods(app);
-							}
-							controller.reloadGradientColors();
+							reloadGradientColors(gradientType);
 						}
 					}))
 					.create());
@@ -208,10 +210,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 						.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
 						.setOnClickListener(item -> app.getColorPaletteHelper().deleteGradient(colorPaletteFileName, deleted -> {
 							if (deleted) {
-								if (gradientType instanceof TerrainMode) {
-									TerrainMode.reloadTerrainMods(app);
-								}
-								controller.reloadGradientColors();
+								reloadGradientColors(gradientType);
 							}
 						}))
 						.create());
@@ -222,6 +221,13 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 			displayData.menuItems = items;
 			displayData.nightMode = nightMode;
 			PopUpMenu.show(displayData);
+		}
+
+		private void reloadGradientColors(@NonNull Object gradientType) {
+			if (gradientType instanceof TerrainType) {
+				TerrainMode.reloadTerrainMods(app);
+			}
+			controller.reloadGradientColors();
 		}
 
 		@Nullable
