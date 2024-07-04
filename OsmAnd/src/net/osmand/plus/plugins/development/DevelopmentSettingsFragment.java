@@ -254,9 +254,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupLoadAvgInfoPref() {
-		OsmandDevelopmentPlugin.FpsStatsEntry m1 = plugin.getFpsStats(1);
-		OsmandDevelopmentPlugin.FpsStatsEntry m5 = plugin.getFpsStats(5);
-		OsmandDevelopmentPlugin.FpsStatsEntry m15 = plugin.getFpsStats(15);
+		OsmandDevelopmentPlugin.AvgStatsEntry m1 = plugin.getAvgStats(1);
+		OsmandDevelopmentPlugin.AvgStatsEntry m5 = plugin.getAvgStats(5);
+		OsmandDevelopmentPlugin.AvgStatsEntry m15 = plugin.getAvgStats(15);
 
 		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
 		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
