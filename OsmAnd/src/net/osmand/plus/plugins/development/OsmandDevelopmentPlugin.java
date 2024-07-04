@@ -290,6 +290,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		private long timestamp;
 		protected float energyConsumption;
 		protected float batteryLevel;
+		protected float cpuBasic;
 		protected float fps1k;
 		protected float idle1k;
 		protected float gpu1k;
@@ -302,6 +303,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				this.fps1k = renderer.getFrameRateLast1K();
 				this.idle1k = renderer.getIdleTimePartLast1K();
 				this.gpu1k = renderer.getGPUWaitTimePartLast1K();
+
+				float cpuBasic = renderer.getBasicThreadsCPULoad();
+				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
 
 				Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
@@ -321,6 +325,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				this.fps1k = avgFloat(allEntries, periodMinutes, entry -> entry.fps1k);
 				this.gpu1k = avgFloat(allEntries, periodMinutes, entry -> entry.gpu1k);
 				this.idle1k = avgFloat(allEntries, periodMinutes, entry -> entry.idle1k);
+				this.cpuBasic = avgFloat(allEntries, periodMinutes, entry -> entry.cpuBasic);
 				this.energyConsumption = avgFloat(allEntries, periodMinutes, entry -> entry.energyConsumption);
 			}
 		}
