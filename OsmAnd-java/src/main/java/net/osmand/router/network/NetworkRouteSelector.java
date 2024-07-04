@@ -742,8 +742,9 @@ public class NetworkRouteSelector {
 			tags.add("route_" + type.getName() + ROUTE_KEY_VALUE_SEPARATOR + key + value);
 		}
 
-		public String getRouteName() {
-			String name = getValue("name");
+		public String getRouteName(String localeId) {
+			String localeExt = localeId != null ? (":" + localeId) : "";
+			String name = getValue("name" + localeExt);
 			if (name.isEmpty()) {
 				name = getValue("ref");
 			}
@@ -775,6 +776,18 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
+		}
+
+		public List<String> getSupportedNameLocales() {
+			List<String> localeIds = new ArrayList<>();
+			for (String tag : tags) {
+				String key = getKeyFromTag(tag);
+				String[] keySplit = key.split(":");
+				if (keySplit[0].equals("name") && keySplit.length == 2) {
+					localeIds.add(keySplit[1]);
+				}
+			}
+			return localeIds;
 		}
 
 		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {
