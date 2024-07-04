@@ -5809,4 +5809,12 @@
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
     <string name="weather_screen">Pantalla meteorológica</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
+    <string name="energy_avg_info_description">Nivel de batería por minuto: %1$s
+\nConsumo de energía (mAh): %2$s</string>
+    <string name="rendering_avg_info">Estadísticas de renderizado (promedio 1 / 5 / 15 minutos)</string>
+    <string name="energy_avg_info">Estadísticas de energía (promedio 1 / 5 / 15 minutos)</string>
+    <string name="rendering_avg_info_description">FPS por los últimos 1k fotogramas: %1$s
+\nCPU básica: %2$s
+\nGPU 1k: %3$s
+\nINACTIVO 1k: %4$s</string>
 </resources>
