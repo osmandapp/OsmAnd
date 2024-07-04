@@ -194,12 +194,24 @@
 		android:selectable="false" />
 
 	<Preference
-		android:key="load_avg_info"
+		android:key="energy_avg_info"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:selectable="false"
-		android:title="@string/load_avg_info"
-		tools:summary="@string/load_avg_info_description" />
+		android:title="@string/energy_avg_info"
+		tools:summary="@string/energy_avg_info_description" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="rendering_avg_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/rendering_avg_info"
+		tools:summary="@string/rendering_avg_info_description" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
