@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.development;
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Handler;
@@ -288,7 +289,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public class FpsStatsEntry {
 		public long timestamp;
-		public float battery;
+		public float energyConsumption;
+		public float batteryLevel;
 		public float fps1k;
 		public float idle1k;
 		public float gpu1k;
@@ -305,16 +307,22 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 				int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-				this.battery = level != -1 && scale != -1 && scale > 0 ? level * 100 / scale : 0;
+				this.batteryLevel = level != -1 && scale != -1 && scale > 0 ? level * 100 / scale : 0;
+
+				final int EMULATOR_CURRENT_NOW_STUB = 900000;
+				BatteryManager mBatteryManager = (BatteryManager) app.getSystemService(Context.BATTERY_SERVICE);
+				int mBatteryCurrent = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+				this.energyConsumption = mBatteryCurrent == EMULATOR_CURRENT_NOW_STUB ? 0 : mBatteryCurrent;
 			}
 		}
 
 		public FpsStatsEntry(List<FpsStatsEntry> list, int minutes) {
 			if (!list.isEmpty()) {
-				this.battery = minuteBatteryUsage(list, minutes);
+				this.batteryLevel = minuteBatteryUsage(list, minutes);
 				this.fps1k = avgFloat(list, minutes, entry -> entry.fps1k);
 				this.gpu1k = avgFloat(list, minutes, entry -> entry.gpu1k);
 				this.idle1k = avgFloat(list, minutes, entry -> entry.idle1k);
+				this.energyConsumption = avgFloat(list, minutes, entry -> entry.energyConsumption);
 			}
 		}
 
@@ -336,8 +344,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				long now = System.currentTimeMillis();
 				long timestamp = list.get(i).timestamp;
 				if (timestamp > 0 && timestamp >= earliest && now > timestamp) {
-					float pastBattery = list.get(i).battery;
-					float freshBattery = list.get(list.size() - 1).battery;
+					float pastBattery = list.get(i).batteryLevel;
+					float freshBattery = list.get(list.size() - 1).batteryLevel;
 					return (float) ((double) (freshBattery - pastBattery) / (double) (now - timestamp) * 1000 * 60);
 				}
 			}
