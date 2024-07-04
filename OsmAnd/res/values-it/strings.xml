@@ -5665,7 +5665,29 @@
     <string name="gpx_approximation_geo_java">Basato sulle geometrie (Java, fast)</string>
     <string name="auto_zoom_smooth">Liscio</string>
     <string name="gpx_approximation_java">Basato su routing (Java)</string>
-    <string name="release_4_8">• Predisposto per la 4.8</string>
+    <string name="release_4_8">• Nuova opzione di colorazione del terreno \"Altitudine\"
+\n
+\n • Tavolozze di colori personalizzate per terreno, piste e percorsi
+\n
+\n • Variante 3D per le icone della ubicazione della posizione
+\n
+\n • Le azioni rapide possono ora essere assegnate a tastiere esterne
+\n
+\n • Meteo: aggiornamento dell\'interfaccia utente, aggiunta animazione del vento
+\n
+\n • Miglioramenti al tracciato 3D: nuove opzioni di visualizzazione e colorazione
+\n
+\n • Selezione ampliata di percorsi turistici sulla mappa
+\n
+\n • Aggiunta l\'opzione del tema dell\'app per seguire la modalità mappa
+\n
+\n • Risolte le statistiche delle tracce, l\'ordinamento e la ricerca
+\n
+\n • Modifica OSM: metodo di autorizzazione login/password cancellato
+\n
+\n • Passaggio al foglio di condivisione del sistema a partire da Android 14
+\n
+\n</string>
     <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" e tutte le azioni aggiunte?</string>
     <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
     <string name="shared_string_osm_id">OSM ID</string>
