@@ -5813,4 +5813,12 @@
     <string name="quick_action_move_map_down">Kort ned</string>
     <string name="quick_action_new_route">Ny rute</string>
     <string name="quick_action_remove_next_destination">Næste destinationspunkt</string>
+    <string name="energy_avg_info">Energistatistik (gennemsnit 1 / 5 / 15 minutter)</string>
+    <string name="energy_avg_info_description">Batteriniveau pr. minut: %1$s
+\nEnergiforbrug (mAh): %2$s</string>
+    <string name="rendering_avg_info">Gengivelsesstatistik (gennemsnitlig 1 / 5 / 15 minutter)</string>
+    <string name="rendering_avg_info_description">FPS efter sidste 1k billeder: %1$s
+\nCPU basic: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
 </resources>
