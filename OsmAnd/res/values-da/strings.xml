@@ -5670,7 +5670,29 @@
     <string name="shared_string_changes">Ændringer</string>
     <string name="apply_only_to_new">Anvend kun på nye</string>
     <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
-    <string name="release_4_8">• For at være forberedt på 4.8</string>
+    <string name="release_4_8">• Ny mulighed for terrænfarvning \"Højde\"
+\n
+\n • Brugerdefinerede farvepaletter til terræn, spor og ruter
+\n
+\n • 3D-variant til ikoner for placeringsposition
+\n
+\n • Hurtige handlinger kan nu tildeles til eksterne tastaturer
+\n
+\n • Vejret: Brugerflade-opdatering, tilføjet vindanimation
+\n
+\n • Forbedringer af 3D-spor: nye visualiserings- og farvelægningsmuligheder
+\n
+\n • Udvidet udvalg af turistruter på kortet
+\n
+\n • Tilføjet mulighed for app-tema for at følge korttilstand
+\n
+\n • Rettet sporstatistik, sortering og søgning
+\n
+\n • OSM-redigering: slettet metode til godkendelse af login/adgangskode
+\n
+\n • Skift til systemdelingsark fra Android 14
+\n
+\n</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Yderligere kort er nødvendige for at se terræn på kortet.</string>
     <string name="vertical_exaggeration_description">Ved at ændre skalaværdien kan du fremhæve 3D-relieffet.</string>
@@ -5736,7 +5758,7 @@
     <string name="shared_string_colors">Farver</string>
     <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
     <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
-    <string name="missing_maps_ignore">Brug eksisterende kort</string>
+    <string name="missing_maps_ignore">Brug downloadede kort</string>
     <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
     <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til nattetid eller svage lysforhold.</string>
@@ -5756,7 +5778,7 @@
     <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemlange vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
-    <string name="missing_maps_ignore_details">Nogle allerede downloadede kort kan være velegnede til din rute. Hvis du kender området og kortene, kan du prøve at lave en rute ved hjælp af de eksisterende kort.</string>
+    <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
     <string name="quick_action_map_style">Kortstil</string>
     <string name="quick_action_terrain_color_scheme">Farvetema for terræn</string>
     <string name="quick_action_directions_from">Startpunkt</string>

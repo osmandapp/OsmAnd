@@ -5725,7 +5725,7 @@
     <string name="contact_support_retry">Reprovu aŭ kontaktu nian subtenan teamon</string>
     <string name="user_palette">Propra koloro</string>
     <string name="shared_string_colors">Koloroj</string>
-    <string name="missing_maps_ignore">Uzi ekzistajn mapojn</string>
+    <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
     <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
     <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
@@ -5745,7 +5745,7 @@
     <string name="weather_source_GFS_description">«Global Forecast System» de «National Centers for Environmental Prediction»</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
-    <string name="missing_maps_ignore_details">Kelkaj jam elŝutitaj mapoj povas taŭgi por kalkuli vian kurson. Se vi ekkonis kun la regiono kaj mapoj, vi povas navigi uzante nur la ekzistajn mapojn.</string>
+    <string name="missing_maps_ignore_details">Ĉu jam elŝutitaj mapoj taŭgos por via kurso? Navigu per ili se vi ekkonis kun la regiono.</string>
     <string name="quick_action_terrain_color_scheme">Kolor-skemo de tereno</string>
     <string name="quick_action_directions_from">Komencpunkto</string>
     <string name="quick_action_destination">Celo</string>
@@ -5780,4 +5780,27 @@
     <string name="quick_action_verb_show_hide">Montri / kaŝi</string>
     <string name="quick_action_map_underlay">Subtavolo</string>
     <string name="app_profile">Aplikaĵa profilo</string>
+    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo”
+\n
+\n•alĝustigeblaj koloroj por tereno, spuroj kaj kursoj
+\n
+\n• 3-dimensiaj bildsimboloj de pozicio
+\n
+\n• rapida ago povas esti asignita al ekstera klavaro
+\n
+\n• vetero: modernigita fasado, movbilda vento
+\n
+\n• spuroj: plibonigoj al 3-dimensia vidigo
+\n
+\n• etendita elekto de turismaj kursoj sur la mapo
+\n
+\n• eblo agordi aplikaĵan etoson laŭ map-reĝimo
+\n
+\n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado
+\n
+\n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon
+\n
+\n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14
+\n
+\n</string>
 </resources>

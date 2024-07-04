@@ -5771,4 +5771,9 @@
     <string name="shared_string_simulate">Simulează</string>
     <string name="app_profile">Profil aplicație</string>
     <string name="shared_string_create">Crează</string>
+    <string name="quick_action_terrain">Tip de colorare al terenului</string>
+    <string name="quick_action_previous_app_profile">Profilul aplicației la cel anterior</string>
+    <string name="quick_action_next_app_profile">Profilul aplicației la următorul</string>
+    <string name="quick_action_display_position_in_center">Afișează poziția întotdeauna în centru</string>
+    <string name="quick_action_map_underlay">Substrat</string>
 </resources>

@@ -5654,7 +5654,29 @@
     <string name="apply_only_to_new">Appliquer seulement aux nouvelles</string>
     <string name="change_default_tracks_appearance_confirmation">Appliquer les modifications aux traces présentes dans le dossier ou seulement aux nouvelles traces ?</string>
     <string name="gpx_approximation_java">Basé sur le routage (Java)</string>
-    <string name="release_4_8">• A préparer pour la version 4.8</string>
+    <string name="release_4_8">• Nouvelle option de colorisation du relief \"Altitude\"
+\n
+\n• Palettes de couleurs personnalisées pour le relief, les traces et les itinéraires
+\n
+\n• Variante 3D pour les icônes de position
+\n
+\n• Les actions rapides peuvent désormais être assignées à des claviers externes
+\n
+\n• Météo : rafraîchissement de l\'interface utilisateur, ajout d\'une animation du vent
+\n
+\n• Amélioration des traces 3D : nouvelles options de visualisation et de colorisation
+\n
+\n• Sélection élargie d\'itinéraires touristiques sur la carte
+\n
+\n• Ajout d\'une option de thème d\'application pour suivre le mode carte
+\n
+\n• Correction des statistiques des traces, du tri et de la recherche
+\n
+\n• Édition OSM : suppression de la méthode d\'authentification par login / mot de passe
+\n
+\n• Passage à l\'écran de partage du système à partir d\'Android 14
+\n
+\n</string>
     <string name="gpx_approximation_cpp">Basé sur le routage (C++)</string>
     <string name="gpx_approximation_geo_java">Basé sur la géométrie (Java, rapide)</string>
     <string name="shared_string_scale">Échelle</string>
@@ -5760,7 +5782,7 @@
     <string name="quick_action_verb_turn_on_off">Activer / Désactiver</string>
     <string name="quick_action_verb_start_stop">Démarrer / Arrêter</string>
     <string name="weather_screen">Écran de la météo</string>
-    <string name="missing_maps_ignore_details">Certaines cartes déjà téléchargées peuvent être adaptées pour votre itinéraire. Si vous connaissez la région et êtes familier avec les cartes, vous pouvez essayer la navigation en utilisant les cartes existantes.</string>
+    <string name="missing_maps_ignore_details">Les cartes téléchargées couvrent votre itinéraire ? Utilisez-les pour naviguer si vous connaissez la région.</string>
     <string name="quick_action_remove_next_destination">Prochaine étape</string>
     <string name="quick_action_terrain_color_scheme">Palette de couleurs du relief</string>
     <string name="quick_action_directions_from">Départ</string>
