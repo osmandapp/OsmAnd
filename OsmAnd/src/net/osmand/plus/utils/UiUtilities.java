@@ -111,6 +111,21 @@ public class UiUtilities {
 		return drawable;
 	}
 
+	private synchronized Drawable wrapDrawableWithColorImp(@NonNull Drawable srcDrawable, @DrawableRes int resId, @ColorRes int clrId) {
+		long key = (((long) resId) << 32L) + clrId;
+		Drawable drawable = drawableCache.get(key);
+		if (drawable == null) {
+			drawable = srcDrawable;
+			drawable = DrawableCompat.wrap(drawable);
+			drawable.mutate();
+			if (clrId != 0) {
+				DrawableCompat.setTint(drawable, ContextCompat.getColor(app, clrId));
+			}
+			drawableCache.put(key, drawable);
+		}
+		return drawable;
+	}
+
 	@Nullable
 	private synchronized Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
 		Drawable drawable = null;
@@ -127,6 +142,11 @@ public class UiUtilities {
 			LOG.warn("Invalid icon identifier");
 		}
 		return drawable;
+	}
+
+	@Nullable
+	public Drawable wrapDrawableWithColor(@NonNull Drawable srcDrawable, @DrawableRes int resId, @ColorRes int color) {
+		return wrapDrawableWithColorImp(srcDrawable, resId, color);
 	}
 
 	@Nullable

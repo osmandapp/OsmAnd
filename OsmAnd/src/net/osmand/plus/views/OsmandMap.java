@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.view.Display;
 
 import androidx.annotation.NonNull;
@@ -157,8 +158,16 @@ public class OsmandMap {
 			float carViewDensity = mapView.getCarViewDensity();
 			float density = mapView.getDensity();
 			return carViewDensity / density;
+		} else {
+			DisplayMetrics metrics = app.getResources().getDisplayMetrics();
+			float density = metrics.density;
+			density = metrics.densityDpi;
+			density = metrics.xdpi;
+			density = metrics.ydpi;
+			density = metrics.scaledDensity;
+			return 1f;
 		}
-		return 1f;
+//		return 1f;
 	}
 
 	public void fitCurrentRouteToMap(boolean portrait, int leftBottomPaddingPx) {
