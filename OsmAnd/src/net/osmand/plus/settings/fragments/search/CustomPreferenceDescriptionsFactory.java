@@ -8,9 +8,9 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import java.util.Arrays;
 import java.util.List;
 
-import de.KnollFrank.lib.preferencesearch.search.provider.CustomPreferenceDescription;
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummaryResetter;
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummarySetter;
+import de.KnollFrank.lib.preferencesearch.search.provider.PreferenceDescription;
 
 public class CustomPreferenceDescriptionsFactory {
 
@@ -22,25 +22,25 @@ public class CustomPreferenceDescriptionsFactory {
 	   + MultiSelectBooleanPreference
 	   + EditTextPreferenceEx
    */
-	public static List<CustomPreferenceDescription> createCustomPreferenceDescriptions() {
+	public static List<PreferenceDescription> createCustomPreferenceDescriptions() {
 		return Arrays.asList(
-				new CustomPreferenceDescription<>(
+				new PreferenceDescription<>(
 						ListPreferenceEx.class,
 						new ListPreferenceExSearchableInfoProvider(),
-						// FK-FIXME: problem: setSummary("test") dos not yield "test" when calling getSummary()
+						// FK-FIXME: problem: setSummary("test"), but then getSummary() != "test".
 						(preference, summary) -> new DefaultSummarySetter().setSummary(preference, summary),
 						DefaultSummaryResetter::new),
-				new CustomPreferenceDescription<>(
+				new PreferenceDescription<>(
 						SwitchPreferenceEx.class,
 						new SwitchPreferenceExSearchableInfoProvider(),
 						new SwitchPreferenceExSummarySetter(),
 						SwitchPreferenceExSummaryResetter::new),
-				new CustomPreferenceDescription<>(
+				new PreferenceDescription<>(
 						MultiSelectBooleanPreference.class,
 						new MultiSelectBooleanPreferenceSearchableInfoProvider(),
 						(preference, summary) -> new DefaultSummarySetter().setSummary(preference, summary),
 						DefaultSummaryResetter::new),
-				new CustomPreferenceDescription<>(
+				new PreferenceDescription<>(
 						EditTextPreferenceEx.class,
 						new EditTextPreferenceExSearchableInfoProvider(),
 						(preference, summary) -> new DefaultSummarySetter().setSummary(preference, summary),
