@@ -9,6 +9,7 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.fragments.search.CustomPreferenceDescriptionsFactory;
 
 import java.util.Optional;
 
@@ -40,8 +41,10 @@ class SearchPreferenceButtonHelper {
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
 		return new SearchPreferenceFragments(
 				createSearchConfiguration(),
-				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
-				createFragmentFactory());
+				(preference, host) -> true,
+				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
+				createFragmentFactory(),
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
 	}
 
 	private SearchConfiguration createSearchConfiguration() {
