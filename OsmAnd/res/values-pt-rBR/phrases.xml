@@ -4687,4 +4687,8 @@
     <string name="poi_impromptu">Improvisado</string>
     <string name="poi_reservation">Reserva</string>
     <string name="poi_us_maps_recreation_area_facility">Instalação de área de recreação</string>
+    <string name="poi_healthcare_speciality_abortion">Aborto</string>
+    <string name="poi_healthcare_speciality_travel_clinic">Clínica de viagens</string>
+    <string name="poi_healthcare_speciality_palliative">Paliativo</string>
+    <string name="poi_healthcare_speciality_denturist">Dentista</string>
 </resources>
