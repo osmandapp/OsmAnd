@@ -4440,7 +4440,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a basso zoom</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità per i tunnel dei corsi d\'acqua</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumenta visibilità tunnel corsi d\'acqua</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità per i tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -5663,7 +5663,7 @@
     <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. La geometria del tracciato rimane invariata.</string>
     <string name="use_nearby_roads">Usa strade vicine</string>
     <string name="gpx_approximation_geo_java">Basato sulle geometrie (Java, fast)</string>
-    <string name="auto_zoom_smooth">Liscio</string>
+    <string name="auto_zoom_smooth">Fluido</string>
     <string name="gpx_approximation_java">Basato su routing (Java)</string>
     <string name="release_4_8">• Nuova opzione di colorazione del terreno \"Altitudine\"
 \n
