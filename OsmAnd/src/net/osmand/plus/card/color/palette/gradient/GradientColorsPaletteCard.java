@@ -1,8 +1,5 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.gpx.GpxParameter.MAX_ELEVATION;
-import static net.osmand.gpx.GpxParameter.MIN_ELEVATION;
-
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -16,21 +13,14 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.ColorPalette;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
-import net.osmand.router.RouteColorize.ColorizationType;
-
-import java.text.DecimalFormat;
 
 public class GradientColorsPaletteCard extends BaseCard implements IColorsPalette {
 
@@ -85,64 +75,11 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 
 		ChartUtils.setupGradientChart(getMyApplication(), chart, 9, 24, false, xAxisGridColor, labelsColor);
 		Object gradientType = controller.gradientCollection.getGradientType();
+		IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, gradientType, controller.analysis);
 
-		IAxisValueFormatter formatter = null;
-		if (gradientType instanceof ColorizationType) {
-			formatter = getColorizationTypeFormatter((ColorizationType) gradientType, controller.analysis);
-		} else if (gradientType instanceof TerrainType) {
-			formatter = getTerrainTypeFormatter();
-		}
 		chart.setData(ChartUtils.buildGradientChart(app, chart, colorPalette, formatter, nightMode));
 		chart.notifyDataSetChanged();
 		chart.invalidate();
-	}
-
-	@NonNull
-	private IAxisValueFormatter getColorizationTypeFormatter(@NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis) {
-		return (value, axis) -> {
-			String stringValue = formatValue(value, 100);
-			String type = "%";
-			FormattedValue formattedValue;
-			switch (colorizationType) {
-				case SPEED:
-					if (analysis != null && analysis.getMaxSpeed() != 0) {
-						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString(app);
-						stringValue = formatValue(value, analysis.getMaxSpeed());
-					}
-					break;
-				case ELEVATION:
-					if (analysis != null) {
-						float calculatedValue;
-						float minElevation = (float) analysis.getMinElevation();
-						float maxElevation = (float) analysis.getMaxElevation() + MAX_ALTITUDE_ADDITION;
-						if (minElevation != (double) MIN_ELEVATION.getDefaultValue() && maxElevation != (double) MAX_ELEVATION.getDefaultValue()) {
-							if (value == 0) {
-								calculatedValue = minElevation;
-							} else {
-								calculatedValue = minElevation + (value * ((maxElevation - minElevation)));
-							}
-						} else {
-							break;
-						}
-						formattedValue = OsmAndFormatter.getFormattedDistanceValue(calculatedValue, app, null, app.getSettings().METRIC_SYSTEM.get());
-						stringValue = formattedValue.value;
-						type = formattedValue.unit;
-					}
-					break;
-			}
-			return app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, type);
-		};
-	}
-
-	@NonNull
-	private IAxisValueFormatter getTerrainTypeFormatter() {
-		return (value, axis) -> GradientUiHelper.formatTerrainTypeValues(value);
-	}
-
-	@NonNull
-	private String formatValue(float value, float multiplier) {
-		DecimalFormat decimalFormat = new DecimalFormat("#");
-		return decimalFormat.format(value * multiplier);
 	}
 
 	private void setupColorsPalette() {

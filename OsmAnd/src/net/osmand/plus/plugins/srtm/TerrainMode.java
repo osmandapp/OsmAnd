@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -32,7 +33,20 @@ public class TerrainMode {
 	private static TerrainMode[] terrainModes;
 
 	public enum TerrainType {
-		HILLSHADE, SLOPE, HEIGHT
+		HILLSHADE(R.string.shared_string_hillshade),
+		SLOPE(R.string.shared_string_slope),
+		HEIGHT(R.string.altitude);
+
+		final int nameRes;
+
+		TerrainType(@StringRes int nameRes) {
+			this.nameRes = nameRes;
+		}
+
+		@NonNull
+		public String getName(@NonNull OsmandApplication app) {
+			return app.getString(nameRes);
+		}
 	}
 
 	private final String translateName;
@@ -216,16 +230,5 @@ public class TerrainMode {
 	@NonNull
 	public String getDescription() {
 		return translateName;
-	}
-
-	@NonNull
-	public String getDescription(@NonNull OsmandApplication app) {
-		if (type == HILLSHADE) {
-			return app.getString(R.string.shared_string_hillshade);
-		} else if (type == SLOPE) {
-			return app.getString(R.string.shared_string_slope);
-		} else {
-			return app.getString(R.string.altitude);
-		}
 	}
 }

@@ -476,7 +476,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		TerrainMode terrainMode = TerrainMode.getByKey(TERRAIN_MODE.get());
 		adapter.addItem(new ContextMenuItem(TERRAIN_ID)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
-				.setDescription(terrainMode.getDescription(app))
+				.setDescription(terrainMode.getType().getName(app))
 				.setSelected(terrainEnabled)
 				.setColor(app, terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)

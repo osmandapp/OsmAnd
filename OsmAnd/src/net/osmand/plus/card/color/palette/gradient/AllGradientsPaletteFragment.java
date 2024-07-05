@@ -111,6 +111,7 @@ public class AllGradientsPaletteFragment extends BaseOsmAndDialogFragment implem
 			adapter.askNotifyItemChanged(oldColor);
 			adapter.askNotifyItemChanged(newColor);
 		}
+		dismiss();
 	}
 
 	@Override
