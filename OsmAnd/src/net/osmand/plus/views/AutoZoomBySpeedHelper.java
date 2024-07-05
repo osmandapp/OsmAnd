@@ -136,7 +136,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 
 		LatLon myLocationLatLon = new LatLon(myLocation.getLatitude(), myLocation.getLongitude());
 		PointI myLocation31 = NativeUtilities.getPoint31FromLatLon(myLocationLatLon);
-		float myLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, myLocation31);
+		float myLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, myLocation31, myLocationLatLon);
 		PointI myLocationPixel = mapRenderer.getState().getFixedPixel();
 
 		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, nextTurn, filteredSpeed);
@@ -144,7 +144,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		LatLon anotherLatLon = MapUtils.rhumbDestinationPoint(myLocationLatLon, showDistanceToDrive, rotation);
 
 		PointI anotherLocation31 = NativeUtilities.getPoint31FromLatLon(anotherLatLon);
-		float anotherLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, anotherLocation31);
+		float anotherLocationHeight = NativeUtilities.getLocationHeightOrZero(mapRenderer, anotherLocation31, anotherLatLon);
 		PointI windowSize = mapRenderer.getState().getWindowSize();
 		PointI anotherPixel = getFocusPixel(windowSize.getX(), windowSize.getY());
 
@@ -191,13 +191,13 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		PointI fixedLocation31 = NativeUtilities.getPoint31FromLatLon(lat, lon);
 
 		PointI firstLocation31 = fixedLocation31;
-		float firstHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, firstLocation31);
+		float firstHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, firstLocation31, new LatLon(lat, lon));
 		PointI firstPixel = state.getFixedPixel();
 
 		float showDistanceToDrive = getShowDistanceToDrive(autoZoomScale, null, speed);
 		LatLon secondLatLon = MapUtils.rhumbDestinationPoint(lat, lon, showDistanceToDrive, rotation);
 		PointI secondLocation31 = NativeUtilities.getPoint31FromLatLon(secondLatLon);
-		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31);
+		float secondHeightInMeters = NativeUtilities.getLocationHeightOrZero(mapRenderer, secondLocation31, secondLatLon);
 		PointI windowSize = state.getWindowSize();
 		PointI secondPixel = getFocusPixel(windowSize.getX(), windowSize.getY());
 

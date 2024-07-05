@@ -5812,4 +5812,12 @@
     <string name="quick_action_directions_from">Маршрут от этой точки</string>
     <string name="quick_action_remove_next_destination">Следующий пункт назначения</string>
     <string name="quick_action_next_app_profile">Следующий профиль</string>
+    <string name="energy_avg_info_description">Расход батареи в минуту: %1$s
+\nПотребление энергии (мАч): %2$s</string>
+    <string name="rendering_avg_info">Статистика рендеринга (в среднем за 1/5/15 минут)</string>
+    <string name="energy_avg_info">Статистика потребления энергии (в среднем за 1/5/15 минут)</string>
+    <string name="rendering_avg_info_description">FPS по последним 1k кадрам: %1$s
+\nCPU базовый: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
 </resources>

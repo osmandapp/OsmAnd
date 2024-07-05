@@ -4000,4 +4000,5 @@
     <string name="poi_health_facility_type_therapy">Struttura sanitaria: terapia</string>
     <string name="poi_health_facility_type_first_aid">Struttura sanitaria: pronto soccorso</string>
     <string name="poi_sport_free_flying">Volo libero (sport)</string>
+    <string name="poi_impromptu">Improvviso</string>
 </resources>

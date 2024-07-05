@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Pair;
 
 import net.osmand.OnResultCallback;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
@@ -25,6 +26,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.utils.HeightsResolverTask.HeightsResolverCallback;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
@@ -475,9 +477,21 @@ public class NativeUtilities {
 		return new PointI(x31, y31);
 	}
 
-	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31) {
+	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31, @NonNull LatLon location) {
 		float height = mapRenderer.getLocationHeightInMeters(location31);
-		return height > MIN_ALTITUDE_VALUE ? height : 0.0f;
+		if (height > MIN_ALTITUDE_VALUE) {
+			return height;
+		} else {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				List<LatLon> locations = new ArrayList<LatLon>();
+				locations.add(location);
+				float[] heights = mapRendererContext.calculateHeights(locations);
+				if (heights != null && heights.length > 0)
+					return heights[0];
+			}
+		}
+		return 0.0f;
 	}
 
 	@Nullable

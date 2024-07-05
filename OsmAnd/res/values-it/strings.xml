@@ -5665,7 +5665,29 @@
     <string name="gpx_approximation_geo_java">Basato sulle geometrie (Java, fast)</string>
     <string name="auto_zoom_smooth">Liscio</string>
     <string name="gpx_approximation_java">Basato su routing (Java)</string>
-    <string name="release_4_8">• Predisposto per la 4.8</string>
+    <string name="release_4_8">• Nuova opzione di colorazione del terreno \"Altitudine\"
+\n
+\n • Tavolozze di colori personalizzate per terreno, piste e percorsi
+\n
+\n • Variante 3D per le icone della ubicazione della posizione
+\n
+\n • Le azioni rapide possono ora essere assegnate a tastiere esterne
+\n
+\n • Meteo: aggiornamento dell\'interfaccia utente, aggiunta animazione del vento
+\n
+\n • Miglioramenti al tracciato 3D: nuove opzioni di visualizzazione e colorazione
+\n
+\n • Selezione ampliata di percorsi turistici sulla mappa
+\n
+\n • Aggiunta l\'opzione del tema dell\'app per seguire la modalità mappa
+\n
+\n • Risolte le statistiche delle tracce, l\'ordinamento e la ricerca
+\n
+\n • Modifica OSM: metodo di autorizzazione login/password cancellato
+\n
+\n • Passaggio al foglio di condivisione del sistema a partire da Android 14
+\n
+\n</string>
     <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" e tutte le azioni aggiunte?</string>
     <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
     <string name="shared_string_osm_id">OSM ID</string>
@@ -5724,7 +5746,7 @@
     <string name="contact_support_retry">Riprova o contatta l\'Assistenza</string>
     <string name="backup_error_failed_to_transfer_file">Il trasferimento file è fallito.</string>
     <string name="play_weather_forecast">Riproduci le previsioni meteo</string>
-    <string name="missing_maps_ignore">Usa le mappe già installate</string>
+    <string name="missing_maps_ignore">Usa le mappe già scaricate</string>
     <string name="tomorrow">Domani</string>
     <string name="daynight_mode_night_summary">Visualizza sempre la mappa con un tema scuro, adatto alle ore notturne o alle condizioni di scarsa illuminazione.</string>
     <string name="daynight_mode_day_summary">Visualizza sempre la mappa con un tema chiaro, ideale per la visibilità diurna.</string>
@@ -5742,7 +5764,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Modifica</string>
-    <string name="missing_maps_ignore_details">Alcune mappe già scaricate potrebbero essere adatte al tuo percorso. Se hai familiarità con l\'area e le mappe, puoi provare il percorso utilizzando le mappe esistenti.</string>
+    <string name="missing_maps_ignore_details">Le mappe scaricate coprono il tuo percorso? Naviga con quelle se hai familiarità con la zona.</string>
     <string name="quick_action_remove_next_destination">Punto di destinazione successivo</string>
     <string name="quick_action_map_overlay">Cambia la mappa di sovrapposizione</string>
     <string name="quick_action_map_style">Stile della mappa</string>
@@ -5767,8 +5789,8 @@
     <string name="quick_action_first_intermediate">Primo intermedio</string>
     <string name="quick_action_audio_note">Nota audio</string>
     <string name="quick_action_parking_place">Parcheggio</string>
-    <string name="quick_action_previous_app_profile">Profilo app precedente</string>
-    <string name="quick_action_next_app_profile">Profilo app successivo</string>
+    <string name="quick_action_previous_app_profile">Profilo dell\'applicazione precedente</string>
+    <string name="quick_action_next_app_profile">Profilo applicazione successivo</string>
     <string name="app_profile">Profilo app</string>
     <string name="quick_action_terrain">Tipo di colorazione del terreno</string>
     <string name="quick_action_track_waypoint">Punti di passaggio della traccia</string>
@@ -5779,4 +5801,12 @@
     <string name="shared_string_set">Imposta</string>
     <string name="quick_action_verb_turn_on_off">Accendi / Spegni</string>
     <string name="weather_screen">Schermata meteo</string>
+    <string name="energy_avg_info_description">Livello della batteria per minuto: %1$s
+\nConsumo energetico (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS degli ultimi 1.000 frames: %1$s
+\nCPU di base: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Statistiche energetiche (media 1 / 5 / 15 minuti)</string>
+    <string name="rendering_avg_info">Statistiche di rendering (media 1 / 5 / 15 minuti)</string>
 </resources>
