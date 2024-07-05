@@ -5799,4 +5799,8 @@
     <string name="quick_action_map_style">Style de carte</string>
     <string name="quick_action_map_overlay">Sur-couche</string>
     <string name="quick_action_map_underlay">Sous-couche</string>
+    <string name="energy_avg_info_description">Diminution de la batterie par minute : %1$s
+\nConsommation d\'énergie (mAh) : %2$s</string>
+    <string name="rendering_avg_info">Statistiques d\'affichage (moyenne / 1 / 5 / 15 minutes)</string>
+    <string name="energy_avg_info">Statistiques de consommation (moyenne / 1 / 5 / 15 minutes)</string>
 </resources>
