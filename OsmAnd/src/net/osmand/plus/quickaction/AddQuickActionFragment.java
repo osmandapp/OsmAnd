@@ -28,6 +28,7 @@ import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.util.Algorithms;
 
 public class AddQuickActionFragment extends BaseOsmAndFragment
 		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
@@ -195,7 +196,10 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(QUICK_ACTION_SEARCH_KEY, adapter.getSearchQuery());
+		String searchQuery = adapter.getSearchQuery();
+		if (!Algorithms.isEmpty(searchQuery)) {
+			outState.putString(QUICK_ACTION_SEARCH_KEY, adapter.getSearchQuery());
+		}
 		outState.putBoolean(QUICK_ACTION_SEARCH_MODE_KEY, searchMode);
 		super.onSaveInstanceState(outState);
 	}

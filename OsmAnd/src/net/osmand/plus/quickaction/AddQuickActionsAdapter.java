@@ -136,7 +136,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 				}
 			}
 			QuickActionViewHolder viewHolder = (QuickActionViewHolder) holder;
-			viewHolder.bindView(item, descriptionCount, lastItem, categoryMode);
+			viewHolder.bindView(item, descriptionCount, lastItem, categoryMode || searchMode);
 			viewHolder.itemView.setOnClickListener(v -> {
 				int adapterPosition = holder.getAdapterPosition();
 				if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {

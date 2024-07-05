@@ -62,6 +62,8 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 			description.setTextSize(COMPLEX_UNIT_SP, 16);
 			description.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 		} else {
+			title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+			title.setTextSize(COMPLEX_UNIT_SP, 16);
 			title.setText(type.getFullName(app));
 		}
 
