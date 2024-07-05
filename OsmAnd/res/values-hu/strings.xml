@@ -5806,4 +5806,12 @@
     <string name="weather_screen">Időjárás-képernyő</string>
     <string name="quick_action_map_underlay">Alátétréteg</string>
     <string name="quick_action_remove_next_destination">Következő célpont</string>
+    <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s
+\nEnergiafogyasztás (mAh): %2$s</string>
+    <string name="rendering_avg_info">Renderelési statisztika (1/5/15 perces átlagok)</string>
+    <string name="rendering_avg_info_description">Képkockaszám a legutóbbi 1000 képre: %1$s
+\nCPU alap: %2$s
+\nGPU 1k: %3$s
+\nTÉTLEN 1k: %4$s</string>
+    <string name="energy_avg_info">Energia statisztika (1/5/15 perces átlagok)</string>
 </resources>
