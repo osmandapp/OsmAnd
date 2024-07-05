@@ -645,7 +645,7 @@
     <string name="osmand_background_plugin_description">Mostrar configurações para ativar o rastreamento e navegação em segundo plano, ativando periodicamente o dispositivo GPS (com tela desligada).</string>
     <string name="contribution_activity">Instalar a versão</string>
     <string name="choose_osmand_theme_descr">Personalizar a aparência do aplicativo.</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Tema do aplicativo</string>
     <string name="accessibility_options">Opções de acessibilidade</string>
     <string name="select_address_activity">Especificar o endereço</string>
     <string name="favourites_list_activity">Selecionar favorito</string>
@@ -5701,4 +5701,26 @@
     <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
+    <string name="missing_maps_ignore">Usar mapas baixados</string>
+    <string name="rendering_value_dark_orange_name">Laranja escuro</string>
+    <string name="user_palette">Paleta do usuário</string>
+    <string name="shared_string_create">Criar</string>
+    <string name="shared_string_replace">Substituir</string>
+    <string name="shared_string_simulate">Simular</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Alterar</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="quick_action_remove_next_destination">Próximo ponto de destino</string>
+    <string name="quick_action_map_overlay">Sobreposição</string>
+    <string name="quick_action_map_style">Estilo do mapa</string>
+    <string name="daynight_mode_app_theme">Tema do aplicativo</string>
+    <string name="key_event_action_continuous_zoom_out">Diminuição contínua do zoom</string>
+    <string name="key_event_action_continuous_zoom_in">Aumento contínuo do zoom</string>
+    <string name="map_settings_weather_wind_animation">Animação do vento</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="weather_data_sources_prompt">OsmAnd fornece a previsão meteorológica de duas fontes:</string>
+    <string name="weather_source_ecmwf_description">Centro Europeu de Previsões Meteorológicas de Médio Prazo</string>
+    <string name="weather_source_GFS_description">Sistema de Previsão Global dos Centros Nacionais de Previsão Ambiental</string>
+    <string name="wall_height">Altura da parede</string>
+    <string name="shared_string_colors">Cores</string>
 </resources>
