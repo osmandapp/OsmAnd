@@ -5814,4 +5814,12 @@
     <string name="weather_screen">Ekran s vremenskom prognozom</string>
     <string name="quick_action_map_style">Stil mape</string>
     <string name="quick_action_remove_next_destination">Sledeća odredišna tačka</string>
+    <string name="energy_avg_info_description">Nivo baterije u minuti: %1$s
+\nPotrošnja energije (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS prema poslednjih 1k kadrova: %1$s
+\nCPU bazično: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Energetska statistika (prosek 1 / 5 / 15 minuta)</string>
+    <string name="rendering_avg_info">Statistika prikazivanja (prosečno 1 / 5 / 15 minuta)</string>
 </resources>
