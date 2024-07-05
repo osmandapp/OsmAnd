@@ -536,8 +536,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		if (type == MapGestureType.TWO_POINTERS_ROTATION &&
-				settings.getCompassMode() == CompassMode.NORTH_IS_UP &&
-				settings.FIXED_NORTH_MAP.get()) {
+				settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
 			return false;
 		}
 		for (OsmandMapLayer layer : getLayers()) {
