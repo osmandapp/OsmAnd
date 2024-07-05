@@ -5798,4 +5798,12 @@
     <string name="quick_action_map_overlay">覆蓋層</string>
     <string name="quick_action_remove_next_destination">下一個目的地點</string>
     <string name="quick_action_map_style">地圖樣式</string>
+    <string name="rendering_avg_info">繪製統計（1 / 5 / 15 分鐘平均）</string>
+    <string name="energy_avg_info">能源統計（1 / 5 /15 分鐘平均）</string>
+    <string name="energy_avg_info_description">每分鐘電池電量：%1$s
+\n能源消耗 (mAh)：%2$s</string>
+    <string name="rendering_avg_info_description">最後一千個影格的 FPS：%1$s
+\nCPU 基本：%2$s
+\nGPU 1k：%3$s
+\n閒置 1k：%4$s</string>
 </resources>
