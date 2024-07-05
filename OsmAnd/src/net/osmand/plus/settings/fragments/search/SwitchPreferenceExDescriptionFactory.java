@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SearchableInfoProviderHelper.joinNonNullElements;
+import static net.osmand.plus.settings.fragments.search.Strings.joinNonNullElements;
 
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 

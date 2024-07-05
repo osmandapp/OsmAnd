@@ -1,9 +1,10 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.ListPreferenceExDescriptionFactory.SearchableInfoProvider.getSearchableInfos;
-import static net.osmand.plus.settings.fragments.search.SearchableInfoProviderHelper.join;
+import static net.osmand.plus.settings.fragments.search.ListPreferenceExDescriptionFactory.SearchableInfoProvider.concat;
 
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
+
+import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummaryResetter;
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummarySetter;
@@ -20,11 +21,11 @@ class MultiSelectBooleanPreferenceDescriptionFactory {
 
 					@Override
 					public String getSearchableInfo(final MultiSelectBooleanPreference preference) {
-						return join(
+						return String.join(
 								", ",
-								getSearchableInfos(
-										preference.getEntries(),
-										preference.getDescription()));
+								concat(
+										Optional.ofNullable(preference.getEntries()),
+										Optional.ofNullable(preference.getDescription())));
 					}
 				},
 				new ISummarySetter<MultiSelectBooleanPreference>() {

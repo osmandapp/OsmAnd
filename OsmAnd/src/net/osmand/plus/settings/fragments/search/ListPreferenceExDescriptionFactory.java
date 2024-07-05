@@ -1,8 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SearchableInfoProviderHelper.join;
-import static net.osmand.plus.settings.fragments.search.SearchableInfoProviderHelper.nullToEmpty;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
@@ -10,6 +7,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummaryResetter;
 import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummarySetter;
@@ -37,19 +35,18 @@ class ListPreferenceExDescriptionFactory {
 
 		@Override
 		public String getSearchableInfo(final ListPreferenceEx preference) {
-			return join(
+			return String.join(
 					", ",
-					getSearchableInfos(
-							preference.getEntries(),
-							preference.getDescription()));
+					concat(
+							Optional.ofNullable(preference.getEntries()),
+							Optional.ofNullable(preference.getDescription())));
 		}
 
-		static List<CharSequence> getSearchableInfos(final CharSequence[] entries, final String description) {
+		static List<CharSequence> concat(final Optional<CharSequence[]> entries,
+										 final Optional<String> description) {
 			final Builder<CharSequence> builder = ImmutableList.builder();
-			builder.addAll(Arrays.asList(nullToEmpty(entries)));
-			if (description != null) {
-				builder.add(description);
-			}
+			entries.map(Arrays::asList).ifPresent(builder::addAll);
+			description.ifPresent(builder::add);
 			return builder.build();
 		}
 	}
