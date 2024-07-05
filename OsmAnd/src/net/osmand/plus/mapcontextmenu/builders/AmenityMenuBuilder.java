@@ -1,22 +1,19 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -25,7 +22,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -70,7 +66,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
 		if (namesMap.values().size() > 0) {
-			Locale nameLocale = getPreferredNameLocale(app, namesMap.keySet());
+			Locale nameLocale = LocaleHelper.getPreferredNameLocale(app, namesMap.keySet());
 			if (nameLocale == null) {
 				String localeId = (String) namesMap.values().toArray()[0];
 				nameLocale = new Locale(localeId);
@@ -183,31 +179,5 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
 		return AmenityExtensionsHelper.getImagesParams(additionalInfo);
-	}
-
-	@Nullable
-	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
-		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
-		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
-
-		return localeIds.contains(preferredLocaleId)
-				? new Locale(preferredLocaleId)
-				: availablePreferredLocale;
-	}
-
-	@Nullable
-	private static Locale getAvailablePreferredLocale(@NonNull Collection<String> localeIds) {
-		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
-
-		for (int index = 0; index < deviceLanguages.size(); index++) {
-			Locale locale = deviceLanguages.get(index);
-			if (locale != null) {
-				String localeId = locale.getLanguage();
-				if (localeIds.contains(localeId)) {
-					return locale;
-				}
-			}
-		}
-		return null;
 	}
 }

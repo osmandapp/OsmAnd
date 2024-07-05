@@ -20,7 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -334,7 +334,7 @@ public class RouteInfoCard extends MapBaseCard {
 				}
 			}
 
-			Locale preferredLocale = AmenityMenuBuilder.getPreferredNameLocale(app, localeIds);
+			Locale preferredLocale = LocaleHelper.getPreferredNameLocale(app, localeIds);
 			String preferredLocaleId = preferredLocale != null ? preferredLocale.getLanguage() : null;
 			boolean finalHasNativeName = hasNativeName;
 
