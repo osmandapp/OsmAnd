@@ -5824,4 +5824,12 @@
     <string name="weather_source_GFS_description">Sistema Global de Predicción de los Centros Nacionales de Predicción Medioambiental</string>
     <string name="weather_source_ecmwf_title">CEPMPM (ECMWF)</string>
     <string name="weather_source_GFS_title">GFS</string>
+    <string name="energy_avg_info_description">Nivel de batería por minuto: %1$s
+\nConsumo de energía (mAh): %2$s</string>
+    <string name="rendering_avg_info">Estadísticas de visualización (rangos en 1, 5 y 15 min.)</string>
+    <string name="energy_avg_info">Estadísticas de energía (rangos en 1, 5 y 15 min.)</string>
+    <string name="rendering_avg_info_description">FPS (últimos mil fotogramas): %1$s
+\nCPU básica: %2$s
+\nGPU (1k): %3$s
+\nInactivo (1k): %4$s</string>
 </resources>

@@ -5812,4 +5812,12 @@
     <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
     <string name="shared_string_set">Einstellen</string>
     <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
+    <string name="energy_avg_info_description">Batteriestand pro Minute: %1$s
+\nEnergieverbrauch (mAh): %2$s</string>
+    <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
+    <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
+    <string name="rendering_avg_info_description">FPS der letzten 1.000 Frames: %1$s
+\nCPU Basis: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
 </resources>

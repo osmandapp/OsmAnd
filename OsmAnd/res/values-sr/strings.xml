@@ -5805,4 +5805,12 @@
     <string name="quick_action_verb_turn_on_off">Укључи / Искључи</string>
     <string name="quick_action_verb_start_stop">Почни / Стопирај</string>
     <string name="weather_screen">Екран временске прогнозе</string>
+    <string name="energy_avg_info_description">Ниво батерије у минути: %1$s
+\nПотрошња енергије (mAh): %2$s</string>
+    <string name="rendering_avg_info">Статистика приказивања (просечно 1 / 5/ 15 минута)</string>
+    <string name="rendering_avg_info_description">FPS према последњих 1k кадрова: %1$s
+\nCPU базично: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Енергетска статистика (просек 1 / 5 / 15 минута)</string>
 </resources>
