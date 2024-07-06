@@ -1,7 +1,5 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.NavigationIconsPreviousNamesMapper.findNavigationIconByPreviousName;
-
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.DrawableRes;
@@ -12,6 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 
@@ -29,24 +28,20 @@ public enum LocationIcon {
 	private final int iconId;
 	@DrawableRes
 	private final int headingIconId;
-	private final boolean originallyUsedForNavigation;
 
 	LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId) {
 		this.iconId = iconId;
 		this.headingIconId = headingIconId;
-		originallyUsedForNavigation = false;
 	}
 
 	LocationIcon(@DrawableRes int iconId) {
 		this.iconId = iconId;
 		this.headingIconId = R.drawable.map_location_default_view_angle;
-		originallyUsedForNavigation = true;
 	}
 
 	LocationIcon() {
 		this.iconId = R.drawable.map_location_default;
 		this.headingIconId = R.drawable.map_location_default_view_angle;
-		originallyUsedForNavigation = false;
 	}
 
 	@DrawableRes
@@ -60,7 +55,7 @@ public enum LocationIcon {
 	}
 
 	public boolean isOriginallyUsedForNavigation() {
-		return originallyUsedForNavigation;
+		return CollectionUtils.equalsToAny(this, MOVEMENT_DEFAULT, MOVEMENT_NAUTICAL, MOVEMENT_CAR);
 	}
 
 	public static boolean isModel(@NonNull String name) {
@@ -110,6 +105,21 @@ public enum LocationIcon {
 			return valueOf(name);
 		} catch (IllegalArgumentException e) {
 			return staticLocation == null || staticLocation ? DEFAULT : MOVEMENT_DEFAULT;
+		}
+	}
+
+	@NonNull
+	public static String getActualNavigationIconName(@NonNull String name) {
+		LocationIcon newIcon = findNavigationIconByPreviousName(name);
+		return newIcon != null ? newIcon.name() : name;
+	}
+
+	@Nullable
+	public static LocationIcon findNavigationIconByPreviousName(@NonNull String name) {
+		try {
+			return valueOf("MOVEMENT_" + name);
+		} catch (IllegalArgumentException e) {
+			return null;
 		}
 	}
 }

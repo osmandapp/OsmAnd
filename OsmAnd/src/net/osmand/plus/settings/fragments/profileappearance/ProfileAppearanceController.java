@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.profileappearance;
 
-import static net.osmand.plus.profiles.NavigationIconsPreviousNamesMapper.getActualNavigationIconName;
 import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_SEPARATOR;
 
 import android.app.Activity;
@@ -399,7 +398,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
-			String movementIconName = getActualNavigationIconName(changedProfile.navigationIcon);
+			String movementIconName = LocationIcon.getActualNavigationIconName(changedProfile.navigationIcon);
 			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), movementIconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
