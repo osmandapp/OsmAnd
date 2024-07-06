@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.AddQuickActionsAdapter.DEFAULT_MODE;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -48,6 +51,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 
 	private AddQuickActionController controller;
 	private boolean searchMode = false;
+	private OnBackPressedCallback backPressedCallback;
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
@@ -85,8 +89,27 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 		setupSearchBar(view);
 		setupToolbar(view);
 		setupContent(view, savedInstanceState);
+		setupOnBackPressedCallback();
 
 		return view;
+	}
+
+	private void setupOnBackPressedCallback(){
+		backPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				if (searchMode) {
+					setSearchMode(false);
+				} else {
+					this.setEnabled(false);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						activity.onBackPressed();
+					}
+				}
+			}
+		};
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -95,7 +118,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 		title.setText(R.string.dialog_add_action_title);
 
 		backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setOnClickListener(v -> onBackPressed());
+		backButton.setOnClickListener(v -> backPressedCallback.handleOnBackPressed());
 
 		searchButton = toolbar.findViewById(R.id.search_button);
 		searchButton.setOnClickListener(v -> setSearchMode(true));
@@ -129,6 +152,8 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 		this.searchMode = searchMode;
 		if (!searchMode) {
 			resetSearchQuery();
+		} else {
+			backPressedCallback.setEnabled(true);
 		}
 		updateToolbar();
 		updateAdapter();
@@ -150,7 +175,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 
 	private void setupContent(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
-		adapter.setCategoryMode(false);
+		adapter.setAdapterMode(DEFAULT_MODE);
 		adapter.setMap(controller.getAdapterItems());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -165,17 +190,6 @@ public class AddQuickActionFragment extends BaseOsmAndFragment
 
 	private void updateAdapter() {
 		adapter.setSearchMode(searchMode);
-	}
-
-	private void onBackPressed() {
-		if (searchMode) {
-			setSearchMode(false);
-		} else {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		}
 	}
 
 	private void dismiss() {
