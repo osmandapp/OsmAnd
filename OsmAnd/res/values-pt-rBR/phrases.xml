@@ -4708,4 +4708,5 @@
     <string name="poi_from">De</string>
     <string name="poi_to">Para</string>
     <string name="poi_state_connection">Estado: conexão</string>
+    <string name="poi_state_inuse">Estado: em uso</string>
 </resources>
