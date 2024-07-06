@@ -4691,4 +4691,20 @@
     <string name="poi_healthcare_speciality_travel_clinic">Clínica de viagens</string>
     <string name="poi_healthcare_speciality_palliative">Paliativo</string>
     <string name="poi_healthcare_speciality_denturist">Dentista</string>
+    <string name="poi_state_proposed">Estado: proposto</string>
+    <string name="poi_healthcare_speciality_pain_control">Controle da dor</string>
+    <string name="poi_healthcare_speciality_first_aid_training">Treinamento em primeiros socorros</string>
+    <string name="poi_healthcare_speciality_proctology">Proctologia</string>
+    <string name="poi_healthcare_speciality_audiology">Audiologia</string>
+    <string name="poi_healthcare_speciality_autism">Autismo</string>
+    <string name="poi_healthcare_speciality_microbiology">Microbiologia</string>
+    <string name="poi_via">Via</string>
+    <string name="poi_healthcare_speciality_pedorthist">Pedortista</string>
+    <string name="poi_healthcare_speciality_sleep">Sono</string>
+    <string name="poi_healthcare_speciality_venereology">Venereologia</string>
+    <string name="poi_distance">Distância</string>
+    <string name="poi_healthcare_speciality_chronic">Doenças crónicas</string>
+    <string name="poi_healthcare_speciality_physical_therapy">Fisioterapia</string>
+    <string name="poi_from">De</string>
+    <string name="poi_to">Para</string>
 </resources>
