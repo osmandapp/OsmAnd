@@ -571,14 +571,15 @@ public class AisObject {
     public static void setVesselLostTimeout(int timeInMinutes) { vesselLostTimeoutInMinutes = timeInMinutes; }
     public static void setCpaWarningTime(int warningTime) { cpaWarningTime = warningTime; }
     public static void setCpaWarningDistance(float warningDistance) { cpaWarningDistance = warningDistance; }
-    //public static void setOwnPosition(Location position) { ownPosition = position; }
-    public static void setOwnPosition(Location position) {
+    public static void setOwnPosition(Location position) { ownPosition = position; }
+/*    public static void setOwnPosition(Location position) {
         ownPosition = position;
         if (ownPosition != null) {
             ownPosition.setBearing(180.0f); // test
             ownPosition.setSpeed(0.1f); // test (m/s)
         }
     }
+ */
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed
