@@ -4709,4 +4709,18 @@
     <string name="poi_to">Para</string>
     <string name="poi_state_connection">Estado: conexão</string>
     <string name="poi_state_inuse">Estado: em uso</string>
+    <string name="poi_state_recommended">Estado: recomendado</string>
+    <string name="poi_state_disused">Estado: fora de uso</string>
+    <string name="poi_state_abandoned">Estado: abandonado</string>
+    <string name="poi_state_approved">Estado: aprovado</string>
+    <string name="poi_state_active">Estado: ativo</string>
+    <string name="poi_state_under_construction">Estado: em construção</string>
+    <string name="poi_state_main">Estado: principal</string>
+    <string name="poi_state_detour">Estado: desvio</string>
+    <string name="poi_ascent">Subida</string>
+    <string name="poi_descent">Descida</string>
+    <string name="poi_direction">Direção</string>
+    <string name="poi_state_closed">Estado: fechado</string>
+    <string name="poi_state_temporary">Estado: temporário</string>
+    <string name="poi_state_suspended">Estado: suspenso</string>
 </resources>
