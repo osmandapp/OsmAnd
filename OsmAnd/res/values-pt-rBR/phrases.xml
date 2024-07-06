@@ -4707,4 +4707,5 @@
     <string name="poi_healthcare_speciality_physical_therapy">Fisioterapia</string>
     <string name="poi_from">De</string>
     <string name="poi_to">Para</string>
+    <string name="poi_state_connection">Estado: conexão</string>
 </resources>
