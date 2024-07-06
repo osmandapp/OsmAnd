@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.AddQuickActionsAdapter.CATEGORY_MODE;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -93,7 +95,7 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment
 
 	private void setupContent(@NonNull View view) {
 		AddQuickActionsAdapter adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
-		adapter.setCategoryMode(true);
+		adapter.setAdapterMode(CATEGORY_MODE);
 		adapter.setItems(controller.getCategoryTypes(categoryAction));
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
