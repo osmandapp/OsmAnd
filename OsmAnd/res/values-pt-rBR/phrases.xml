@@ -4723,4 +4723,22 @@
     <string name="poi_state_closed">Estado: fechado</string>
     <string name="poi_state_temporary">Estado: temporário</string>
     <string name="poi_state_suspended">Estado: suspenso</string>
+    <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Acampamento disperso</string>
+    <string name="poi_us_maps_recreation_area_activity_fossil_collecting">Coleta de fósseis</string>
+    <string name="poi_us_maps_recreation_area_activity_gold_panning">Garimpagem de ouro</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_camping">Acampamento de cavalos</string>
+    <string name="poi_us_maps_recreation_area_activity_ice_fishing">Pesca no gelo</string>
+    <string name="poi_us_maps_recreation_area_activity_interpretive_areas">Áreas interpretativas</string>
+    <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">Pesca em lagos e lagoas</string>
+    <string name="poi_us_maps_recreation_area_activity_metal_detecting">Detecção de metais</string>
+    <string name="poi_us_maps_recreation_area_activity_disc_golf">Golfe de disco</string>
+    <string name="poi_us_maps_recreation_area_activity_fishing">Pesca</string>
+    <string name="poi_us_maps_recreation_area_activity_hang_gliding">Asa-delta</string>
+    <string name="poi_us_maps_recreation_area_activity_ice_skating">Patinação no gelo</string>
+    <string name="poi_us_maps_recreation_area_activity_group_picnicking">Piquenique em grupo</string>
+    <string name="poi_us_maps_recreation_area_activity_group_camping">Acampamento em grupo</string>
+    <string name="poi_us_maps_recreation_area_activity_hiking">Caminhada</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_riding">Passeios a cavalo</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_riding_and_camping">Passeios a cavalo e acampamento</string>
+    <string name="poi_us_maps_recreation_area_activity_hunting">Caça</string>
 </resources>
