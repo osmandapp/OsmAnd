@@ -54,7 +54,7 @@ public class CompassButton extends MapButton {
 	}
 
 	private void setupTouchListener() {
-		setOnTouchListener(new View.OnTouchListener() {
+		view.setOnTouchListener(new View.OnTouchListener() {
 
 			private final GestureDetector gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
 				@Override
@@ -90,8 +90,8 @@ public class CompassButton extends MapButton {
 					return true;
 				});
 		ViewCompat.replaceAccessibilityAction(view, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_LONG_CLICK,
-				app.getString(R.string.choose_map_orientation_accessibility), (view, arguments) -> {
-					rotateMapToNorth();
+				app.getString(R.string.choose_map_orientation), (view, arguments) -> {
+					showCompassModeWidgetDialog();
 					return true;
 				});
 	}

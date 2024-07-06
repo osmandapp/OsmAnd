@@ -2,12 +2,10 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
 
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
@@ -228,18 +226,6 @@ public abstract class MapButton {
 
 	protected void setOnLongClickListener(@Nullable OnLongClickListener listener) {
 		view.setOnLongClickListener(listener);
-	}
-
-	/**
-	 * Sets an OnTouchListener for view. If the OnTouchListener handles
-	 * any click-based accessibility action (e.g., ACTION_CLICK, ACTION_LONG_CLICK), the ViewCompat.replaceAccessibilityAction()
-	 * method must be called for each such action to ensure accessibility features are correctly updated.
-	 *
-	 * @param listener The OnTouchListener to be set on the view.
-	 */
-	@SuppressLint("ClickableViewAccessibility")
-	protected void setOnTouchListener(@Nullable OnTouchListener listener) {
-		view.setOnTouchListener(listener);
 	}
 
 	protected void setContentDesc(@StringRes int descId) {
