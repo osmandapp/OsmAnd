@@ -5776,4 +5776,6 @@
     <string name="quick_action_next_app_profile">Profilul aplicației la următorul</string>
     <string name="quick_action_display_position_in_center">Afișează poziția întotdeauna în centru</string>
     <string name="quick_action_map_underlay">Substrat</string>
+    <string name="rendering_avg_info">Statistici de randare (medie 1 / 5 / 15 minute)</string>
+    <string name="energy_avg_info">Statistici energetice (medie 1 / 5 / 15 minute)</string>
 </resources>
