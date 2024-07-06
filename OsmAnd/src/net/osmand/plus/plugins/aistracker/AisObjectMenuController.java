@@ -3,8 +3,6 @@ package net.osmand.plus.plugins.aistracker;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 
-import static java.lang.Math.ceil;
-
 import android.annotation.SuppressLint;
 import android.util.Log;
 
@@ -15,10 +13,8 @@ import net.osmand.Location;
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
 import java.util.Iterator;
@@ -29,7 +25,9 @@ public class AisObjectMenuController extends MenuController {
     private final OsmandApplication app;
     public AisObjectMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
                                    AisObject aisObject) {
-        super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+        //super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+        super(new AisObjectMenuBuilder(mapActivity), pointDescription, mapActivity);
+
         this.aisObject = aisObject;
         this.app = builder.getApplication();
         builder.setShowTitleIfTruncated(false);
@@ -37,28 +35,6 @@ public class AisObjectMenuController extends MenuController {
         builder.setShowOnlinePhotos(false);
         builder.setShowNearestWiki(false);
         // TODO: show an icon in the menu
-    }
-    private float getOwnSpeed(@Nullable OsmAndLocationProvider locationProvider) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                if (myLocation.hasSpeed()) {
-                    return myLocation.getSpeed();
-                }
-            }
-        }
-        return 0.0f;
-    }
-    private float getOwnBearing(@Nullable OsmAndLocationProvider locationProvider) {
-        if (locationProvider != null) {
-            Location myLocation = locationProvider.getLastKnownLocation();
-            if (myLocation != null) {
-                if (myLocation.hasBearing()) {
-                    return myLocation.getBearing();
-                }
-            }
-        }
-        return 0.0f;
     }
 
     @SuppressLint("DefaultLocale")
@@ -88,7 +64,7 @@ public class AisObjectMenuController extends MenuController {
                             } else {
                                 addMenuItem("TCPA", String.format("%.0f min", minutes));
                             }
-                        } else { // remove this later: don't show negative values...
+                        } else { // TODO: remove this later: don't show negative values...
                             addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
                             addMenuItem("TCPA", String.format("-%.1f hours", cpaTime));
                         }
@@ -155,7 +131,7 @@ public class AisObjectMenuController extends MenuController {
                 }
                 if (bearing >= 0.0f) {
                     try {
-                        addMenuItem("Bearing", String.format("%.1f", bearing));
+                        addMenuItem("Bearing", String.format("%.0f", bearing));
                     } catch (Exception ignore) { }
                 }
                 addCpaInfo(ownPosition, msgTypes);
@@ -167,10 +143,10 @@ public class AisObjectMenuController extends MenuController {
         } else if (msgTypes.contains(9)) { // SAR aircraft
             addMenuItem("Object Type", "SAR Aircraft");
             if (aisObject.getCog() != AisObjectConstants.INVALID_COG) {
-                addMenuItem("COG", String.valueOf(aisObject.getCog()));
+                addMenuItem("COG", String.format("%.0f", aisObject.getCog()));
             }
             if (aisObject.getSog() != AisObjectConstants.INVALID_SOG) {
-                addMenuItem("SOG", String.valueOf(aisObject.getSog()) + " kt");
+                addMenuItem("SOG", String.format("%.1f kts", aisObject.getSog()));
             }
             if (aisObject.getAltitude() != AisObjectConstants.INVALID_ALTITUDE) {
                 addMenuItem("Altitude", String.valueOf(aisObject.getAltitude()) + " m");
@@ -186,10 +162,10 @@ public class AisObjectMenuController extends MenuController {
                 addMenuItem("Navigation Status", aisObject.getNavStatusString());
             }
             if (aisObject.getCog() != AisObjectConstants.INVALID_COG) {
-                addMenuItem("COG", String.valueOf(aisObject.getCog()));
+                addMenuItem("COG", String.format("%.0f", aisObject.getCog()));
             }
             if (aisObject.getSog() != AisObjectConstants.INVALID_SOG) {
-                addMenuItem("SOG", String.valueOf(aisObject.getSog()) + " kt");
+                addMenuItem("SOG", String.format("%.1f kts", aisObject.getSog()));
             }
             if (aisObject.getHeading() != AisObjectConstants.INVALID_HEADING) {
                 addMenuItem("Heading", String.valueOf(aisObject.getHeading()));
@@ -225,6 +201,7 @@ public class AisObjectMenuController extends MenuController {
             if (hasNext) { msgTypesString = msgTypesString.concat(", "); }
         }
         addMenuItem("Message Type(s)", msgTypesString);
+        super.addPlainMenuItems(typeStr, pointDescription, latLon);
     }
 
     @Override
