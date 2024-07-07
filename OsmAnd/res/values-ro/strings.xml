@@ -5778,4 +5778,5 @@
     <string name="quick_action_map_underlay">Substrat</string>
     <string name="rendering_avg_info">Statistici de randare (medie 1 / 5 / 15 minute)</string>
     <string name="energy_avg_info">Statistici energetice (medie 1 / 5 / 15 minute)</string>
+    <string name="choose_map_orientation">Alegeți orientarea hărții</string>
 </resources>
