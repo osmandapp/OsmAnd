@@ -5803,4 +5803,5 @@
     <string name="clear_all_key_shortcuts">Limpar todos os atalhos de teclas</string>
     <string name="data_source">Fonte de dados</string>
     <string name="contact_support_retry">Tente novamente ou entre em contato com o suporte</string>
+    <string name="choose_map_orientation">Escolha a orientação do mapa</string>
 </resources>
