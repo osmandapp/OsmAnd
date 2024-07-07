@@ -9,7 +9,6 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.fragments.search.CustomPreferenceDescriptionsFactory;
 
 import java.util.Optional;
 

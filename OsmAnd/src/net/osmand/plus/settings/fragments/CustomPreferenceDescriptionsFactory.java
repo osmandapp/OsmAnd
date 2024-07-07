@@ -1,6 +1,9 @@
-package net.osmand.plus.settings.fragments.search;
+package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.settings.fragments.search.Strings.joinNonNullElements;
+import static de.KnollFrank.lib.preferencesearch.common.Strings.joinNonNullElements;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.search.provider.PreferenceDescription;
 
-public class CustomPreferenceDescriptionsFactory {
+class CustomPreferenceDescriptionsFactory {
 
 	/* FK-TODO: make custom Preferences searchable:
 	   - ColorPreferenceCompat
@@ -34,11 +37,12 @@ public class CustomPreferenceDescriptionsFactory {
 	private static PreferenceDescription<ListPreferenceEx> getListPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				ListPreferenceEx.class,
-				preference -> String.join(
-						", ",
-						Strings.concat(
-								Optional.ofNullable(preference.getEntries()),
-								Optional.ofNullable(preference.getDescription()))));
+				preference ->
+						String.join(
+								", ",
+								concat(
+										Optional.ofNullable(preference.getEntries()),
+										Optional.ofNullable(preference.getDescription()))));
 	}
 
 	private static PreferenceDescription<SwitchPreferenceEx> getSwitchPreferenceExDescription() {
@@ -59,7 +63,7 @@ public class CustomPreferenceDescriptionsFactory {
 				preference ->
 						String.join(
 								", ",
-								Strings.concat(
+								concat(
 										Optional.ofNullable(preference.getEntries()),
 										Optional.ofNullable(preference.getDescription()))));
 	}
@@ -73,5 +77,13 @@ public class CustomPreferenceDescriptionsFactory {
 								Arrays.asList(
 										preference.getText(),
 										preference.getDescription())));
+	}
+
+	private static List<CharSequence> concat(final Optional<CharSequence[]> entries,
+											 final Optional<String> description) {
+		final Builder<CharSequence> builder = ImmutableList.builder();
+		entries.map(Arrays::asList).ifPresent(builder::addAll);
+		description.ifPresent(builder::add);
+		return builder.build();
 	}
 }
