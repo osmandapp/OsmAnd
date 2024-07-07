@@ -22,12 +22,17 @@ public abstract class ColorsCollection {
 
 	@Nullable
 	public PaletteColor findPaletteColor(@ColorInt int colorInt) {
+		return findPaletteColor(colorInt, false);
+	}
+
+	@Nullable
+	public PaletteColor findPaletteColor(@ColorInt int colorInt, boolean registerIfNotFound) {
 		for (PaletteColor paletteColor : originalOrder) {
 			if (paletteColor.getColor() == colorInt) {
 				return paletteColor;
 			}
 		}
-		return null;
+		return registerIfNotFound ? addNewColor(colorInt, false) : null;
 	}
 
 	@NonNull
@@ -76,15 +81,19 @@ public abstract class ColorsCollection {
 	@Nullable
 	public PaletteColor addOrUpdateColor(@Nullable PaletteColor oldColor,
 	                                     @ColorInt int newColor) {
-		return oldColor == null ? addNewColor(newColor) : updateColor(oldColor, newColor);
+		return oldColor == null ? addNewColor(newColor, true) : updateColor(oldColor, newColor);
 	}
 
 	@NonNull
-	private PaletteColor addNewColor(@ColorInt int newColor) {
+	private PaletteColor addNewColor(@ColorInt int newColor, boolean updateLastUsedOrder) {
 		long now = System.currentTimeMillis();
 		PaletteColor paletteColor = new PaletteColor(newColor, now);
 		originalOrder.add(paletteColor);
-		lastUsedOrder.add(0, paletteColor);
+		if (updateLastUsedOrder) {
+			lastUsedOrder.add(0, paletteColor);
+		} else {
+			lastUsedOrder.add(paletteColor);
+		}
 		saveColors();
 		return paletteColor;
 	}

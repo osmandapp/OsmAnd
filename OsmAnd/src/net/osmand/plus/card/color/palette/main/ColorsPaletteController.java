@@ -39,7 +39,7 @@ public class ColorsPaletteController implements IColorsPaletteController {
 	public ColorsPaletteController(@NonNull OsmandApplication app, @NonNull ColorsCollection collection, @Nullable Integer color) {
 		this.app = app;
 		this.collection = collection;
-		this.selectedPaletteColor = color != null ? collection.findPaletteColor(color) : null;
+		this.selectedPaletteColor = color != null ? collection.findPaletteColor(color, true) : null;
 	}
 
 	@Override

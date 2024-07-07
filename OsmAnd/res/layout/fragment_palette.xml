@@ -17,7 +17,7 @@
 		android:fillViewport="true">
 
 		<net.osmand.plus.widgets.FlowLayout
-			android:id="@+id/colors_palette"
+			android:id="@+id/palette"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginVertical="@dimen/content_padding"
