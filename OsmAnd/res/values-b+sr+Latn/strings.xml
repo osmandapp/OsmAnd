@@ -4390,7 +4390,7 @@
     <string name="use_latin_name_if_missing">Koristi latinično ime ako nedostaje</string>
     <string name="transport_hazmat_yes_desc">Odaberi primenljivu kategoriju.</string>
     <string name="transport_hazmat_no_desc">Na nekim putevima i tunelima može biti zabranjen prevoz opasnih materije.</string>
-    <string name="transport_hazmat_title">Prevoz opasnih materija</string>
+    <string name="transport_hazmat_title">Prevoženje opasnih materija</string>
     <string name="routing_attr_hazmat_category_description">Vrsta opasnih materije / razmotri dozvole za pristup sa opasnim materijema</string>
     <string name="distance_circles">Krugovi rastojanja</string>
     <string name="circle_settings">Podešavanja kruga</string>

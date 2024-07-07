@@ -4658,7 +4658,7 @@
     <string name="routing_attr_motor_type_diesel_name">Дизел</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="transport_hazmat_yes_desc">Одаберите применљиву врсту.</string>
-    <string name="transport_hazmat_title">Превожење опасних твари</string>
+    <string name="transport_hazmat_title">Превожење опасних материја</string>
     <string name="download_heightmap_maps">Висинска карта</string>
     <string name="av_notes_photo_widget_desc">Тап по справици ће усликати слику.</string>
     <string name="compass_always_visible">Увек видљиво</string>
