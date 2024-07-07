@@ -5710,4 +5710,35 @@
     <string name="play_weather_forecast">Erreproduzitu eguraldiaren iragarpena</string>
     <string name="change_terrain_color_scheme">Aldatu Lurraren kolore-eskema</string>
     <string name="travel_topics">Bidaiaen gaiak</string>
+    <string name="quick_action_map_overlay">Gaineko geruza</string>
+    <string name="rendering_avg_info">Errendatze-estatistikak (batez beste 1/5/15 minutu)</string>
+    <string name="quick_action_location_by_gpx">GPX bidezko kokapena</string>
+    <string name="quick_action_terrain_color_scheme">Lurraren kolore-eskema</string>
+    <string name="quick_action_move_map_left">Mapa ezkerrera</string>
+    <string name="quick_action_move_map_right">Mapa eskuinera</string>
+    <string name="quick_action_move_map_down">Mapa behera</string>
+    <string name="quick_action_move_map_up">Mapa gora</string>
+    <string name="quick_action_new_route">Ibilbide berria</string>
+    <string name="quick_action_previous_app_profile">Aplikazioaren profila aurrekora</string>
+    <string name="quick_action_next_app_profile">Aplikazioaren profila hurrengora</string>
+    <string name="shared_string_simulate">Simulatu</string>
+    <string name="quick_action_remove_next_destination">Hurrengo helmuga puntua</string>
+    <string name="energy_avg_info_description">Bateriaren maila minutuko: %1$s
+\nEnergia-kontsumoa (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS azken 1k fotogramen arabera: %1$s
+\nCPU oinarrizkoa: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Energia-estatistikak (batez beste 1 / 5 / 15 minutu)</string>
+    <string name="quick_action_map_style">Mapa estiloa</string>
+    <string name="quick_action_directions_from">Abiapuntua</string>
+    <string name="quick_action_destination">Helmuga</string>
+    <string name="quick_action_to_my_location">Nire kokapenera</string>
+    <string name="shared_string_create">Sortu</string>
+    <string name="shared_string_replace">Ordeztu</string>
+    <string name="app_profile">Aplikazioaren profila</string>
+    <string name="shared_string_set">Ezarri</string>
+    <string name="quick_action_display_position_in_center">Bistaratzeko posizioa beti erdian</string>
+    <string name="quick_action_terrain">Lurraren kolorazio mota</string>
+    <string name="quick_action_map_underlay">Azpiko geruza</string>
 </resources>

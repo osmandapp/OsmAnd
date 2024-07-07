@@ -4995,7 +4995,7 @@
     <string name="value_downloaded_of_mb">Elŝutado %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Preterpasi elŝutadon</string>
     <string name="determine_location">Permesu al OsmAnd trovi vian pozicion</string>
-    <string name="display_position_automatic_descr">Dependas de map-orientiĝo: sube por “Laŭ direkto de movado” kaj centre por ĉiuj aliaj.</string>
+    <string name="display_position_automatic_descr">Dependas de map-orientiĝo: sube por “Direkto de movado” kaj centre por ĉiuj aliaj.</string>
     <string name="shared_string_kilograms">kilogramoj</string>
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
@@ -5782,7 +5782,7 @@
     <string name="app_profile">Aplikaĵa profilo</string>
     <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo”
 \n
-\n•alĝustigeblaj koloroj por tereno, spuroj kaj kursoj
+\n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj
 \n
 \n• 3-dimensiaj bildsimboloj de pozicio
 \n
@@ -5803,4 +5803,12 @@
 \n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14
 \n
 \n</string>
+    <string name="rendering_avg_info_description">Kadroj / sekundo dum lastaj 1k kadroj: %1$s
+\nCPU: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Statistiko pri energio (mezume 1 /5 /15 minutoj)</string>
+    <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
+\nKonsumo de energio (mAh): %2$s</string>
+    <string name="rendering_avg_info">Statistiko pri bildigado: (mezume 1 /5 / 15 minutoj)</string>
 </resources>
