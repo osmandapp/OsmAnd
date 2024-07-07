@@ -5741,4 +5741,24 @@
     <string name="quick_action_display_position_in_center">Bistaratzeko posizioa beti erdian</string>
     <string name="quick_action_terrain">Lurraren kolorazio mota</string>
     <string name="quick_action_map_underlay">Azpiko geruza</string>
+    <string name="quick_action_video_note">Bideo-oharra</string>
+    <string name="quick_action_verb_show_hide">Erakutsi / Ezkutatu</string>
+    <string name="quick_action_verb_pause_resume">Pausatu / Berrekin</string>
+    <string name="quick_action_verb_turn_on_off">Piztu / Itzali</string>
+    <string name="quick_action_verb_start_stop">Hasi / Gelditu</string>
+    <string name="quick_action_photo_note">Argazki-oharra</string>
+    <string name="quick_action_track_waypoint">Jarraitu bide-puntua</string>
+    <string name="quick_action_parking_place">Aparkalekua</string>
+    <string name="quick_action_first_intermediate">Lehenengo geldiunea</string>
+    <string name="quick_action_audio_note">Audio-oharra</string>
+    <string name="weather_screen">Eguraldiaren pantaila</string>
+    <string name="choose_map_orientation">Aukeratu maparen orientazioa</string>
+    <string name="daynight_mode_app_theme_summary">Maparen pantaila aplikazioaren gai orokorrarekin bat dator: eguneko modua gai argi baterako eta gaueko modua gai ilun baterako</string>
+    <string name="daynight_mode_sensor_summary">Gailuaren argi-sentsorea erabiltzen du gai argiak eta ilunak giroko argi-mailen arabera aldatzeko.</string>
+    <string name="weather_source_ecmwf_description">Epe Ertaineko Eguraldi Iragarpenen Europako Zentroa</string>
+    <string name="weather_source_GFS_description">Eguraldia Iragartzeko Zentro Nazionaletako Iragarpen Sistema Globala</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Datu-iturria</string>
+    <string name="weather_data_sources_prompt">OsmAnd-ek bi iturritatik eskaintzen ditu eguraldiaren datuak:</string>
 </resources>
