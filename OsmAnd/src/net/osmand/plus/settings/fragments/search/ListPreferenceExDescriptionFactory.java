@@ -9,9 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummaryResetter;
-import de.KnollFrank.lib.preferencesearch.search.provider.DefaultSummarySetter;
-import de.KnollFrank.lib.preferencesearch.search.provider.ISummarySetter;
 import de.KnollFrank.lib.preferencesearch.search.provider.PreferenceDescription;
 
 class ListPreferenceExDescriptionFactory {
@@ -19,16 +16,7 @@ class ListPreferenceExDescriptionFactory {
 	public static PreferenceDescription<ListPreferenceEx> getListPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				ListPreferenceEx.class,
-				new SearchableInfoProvider(),
-				// FK-FIXME: problem: setSummary("test"), but then getSummary() != "test".
-				new ISummarySetter<ListPreferenceEx>() {
-
-					@Override
-					public void setSummary(final ListPreferenceEx preference, final CharSequence summary) {
-						new DefaultSummarySetter().setSummary(preference, summary);
-					}
-				},
-				DefaultSummaryResetter::new);
+				new SearchableInfoProvider());
 	}
 
 	static class SearchableInfoProvider implements de.KnollFrank.lib.preferencesearch.search.provider.SearchableInfoProvider<ListPreferenceEx> {
@@ -42,6 +30,8 @@ class ListPreferenceExDescriptionFactory {
 							Optional.ofNullable(preference.getDescription())));
 		}
 
+
+		// FK-TODO: move method to Strings class
 		static List<CharSequence> concat(final Optional<CharSequence[]> entries,
 										 final Optional<String> description) {
 			final Builder<CharSequence> builder = ImmutableList.builder();
