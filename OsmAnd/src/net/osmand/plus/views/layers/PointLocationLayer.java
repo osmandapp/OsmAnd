@@ -158,11 +158,9 @@ public class PointLocationLayer extends OsmandMapLayer
 				Canvas canvas = new Canvas(markerBitmap);
 				AndroidUtils.drawScaledLayerDrawable(canvas, icon, locationX, locationY, scale);
 
-				if (markerBitmap != null) {
-					marker.onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
-					myLocMarkerBuilder.addOnMapSurfaceIcon(marker.onSurfaceIconKey,
-							NativeUtilities.createSkImageFromBitmap(markerBitmap));
-				}
+				marker.onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
+				myLocMarkerBuilder.addOnMapSurfaceIcon(marker.onSurfaceIconKey,
+						NativeUtilities.createSkImageFromBitmap(markerBitmap));
 			}
 
 			if (withHeading) {
@@ -702,7 +700,9 @@ public class PointLocationLayer extends OsmandMapLayer
 	private void setLocationModel() {
 		locationModel = model3dHelper.getModel(locationIconName, model -> {
 			locationModel = model;
-			locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+			if (locationModel != null) {
+				locationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+			}
 			brokenLocationModel = model == null;
 			markersInvalidated = true;
 			return true;
@@ -750,7 +750,9 @@ public class PointLocationLayer extends OsmandMapLayer
 			if (NavigationIcon.isModel(navigationIconName)) {
 				navigationModel = model3dHelper.getModel(navigationIconName, model -> {
 					navigationModel = model;
-					navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+					if (navigationModel != null) {
+						navigationModel.setMainColor(NativeUtilities.createFColorARGB(profileColor));
+					}
 					brokenNavigationModel = model == null;
 					markersInvalidated = true;
 					if (LocationIcon.isModel(locationIconName)) {
