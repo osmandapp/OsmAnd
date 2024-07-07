@@ -80,13 +80,18 @@ public class AisTrackerPlugin extends OsmandPlugin {
     }
 
     @Override
+    public int getVersion() {
+        return -1;
+    }
+
+    @Override
     public String getComponentId1() {
         return COMPONENT;
     }
 
     @Override
     public CharSequence getDescription(boolean linksEnabled) {
-        return app.getString(R.string.plugin_aistracker_description);
+        return app.getString(R.string.plugin_aistracker_description).concat("\n\n").concat(app.getString(R.string.plugin_aistracker_disclaimer));
     }
 
     @Override

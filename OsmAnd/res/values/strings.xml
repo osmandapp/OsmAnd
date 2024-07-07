@@ -4251,6 +4251,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="plugin_aistracker_name">AIS vessel tracker</string>
     <string name="plugin_aistracker_description">Display AIS positions and information about surrounding vessels. The AIS data is received via network from an external AIS receiver.</string>
+    <string name="plugin_aistracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and not designed for reliability and correctness. DO NOT rely upon this software in any way including for navigation and/or safety of life.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto-announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
