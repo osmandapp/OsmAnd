@@ -5825,4 +5825,5 @@
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
+    <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
 </resources>
