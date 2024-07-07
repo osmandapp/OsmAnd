@@ -1,8 +1,10 @@
 package net.osmand.plus.views;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +12,7 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -140,7 +143,7 @@ public class OsmandMap {
 
 	public float getTextScale() {
 		float scale = app.getSettings().TEXT_SCALE.get();
-		return scale * getCarDensityScaleCoef();
+		return scale * getDisplayDensityScaleCoef();
 	}
 
 	public float getOriginalTextScale() {
@@ -149,25 +152,29 @@ public class OsmandMap {
 
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getCarDensityScaleCoef();
+		return scale * getDisplayDensityScaleCoef();
 	}
 
-	public float getCarDensityScaleCoef() {
+	public float getDisplayDensityScaleCoef() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
 			float density = mapView.getDensity();
 			return carViewDensity / density;
 		} else {
-			DisplayMetrics metrics = app.getResources().getDisplayMetrics();
-			float density = metrics.density;
-			density = metrics.densityDpi;
-			density = metrics.xdpi;
-			density = metrics.ydpi;
-			density = metrics.scaledDensity;
-			return 1f;
+			Display display;
+			MapActivity mapActivity = getMapView().getMapActivity();
+			if (mapActivity != null) {
+				WindowManager manager = (WindowManager) mapActivity.getSystemService(Context.WINDOW_SERVICE);
+				display = manager.getDefaultDisplay();
+			} else {
+				WindowManager manager = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
+				display = manager.getDefaultDisplay();
+			}
+			DisplayMetrics displayMetrics = new DisplayMetrics();
+			display.getRealMetrics(displayMetrics);
+			return displayMetrics.density / mapView.getDensity();
 		}
-//		return 1f;
 	}
 
 	public void fitCurrentRouteToMap(boolean portrait, int leftBottomPaddingPx) {

@@ -33,15 +33,8 @@ public class NoImagesCard extends AbstractCard {
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			MapActivity ctx = getMapActivity();
 			AndroidUtils.setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
-			Drawable smileDrawableSrc = getMyApplication().getDrawable(R.drawable.ic_action_sadface);
-			if(smileDrawableSrc != null) {
-			Bitmap srcBitmap = AndroidUtils.getBitmapFromDrawable(smileDrawableSrc);
-				float scale = getMyApplication().getOsmandMap().getTextScale();
-				Bitmap smileBitmap = AndroidUtils.scaleBitmap(srcBitmap,
-						(int) (srcBitmap.getWidth() * scale), (int) (srcBitmap.getHeight() * scale), false);
-				((ImageView) view.findViewById(R.id.icon_sadface)).setImageDrawable(ic.wrapDrawableWithColor(new BitmapDrawable(getMyApplication().getResources(), smileBitmap), R.drawable.ic_action_sadface,
-						night ? R.color.card_and_list_background_light : R.color.icon_color_default_light));
-			}
+			Drawable smileIcon = ic.getScaledIcon(R.drawable.ic_action_sadface, R.color.card_and_list_background_light, R.color.icon_color_default_light, night);
+			((ImageView) view.findViewById(R.id.icon_sadface)).setImageDrawable(smileIcon);
 			AndroidUtils.setTextPrimaryColor(ctx, view.findViewById(R.id.title), night);
 			AndroidUtils.setBackgroundColor(ctx, view.findViewById(R.id.button_background), night,
 					R.color.inactive_buttons_and_links_bg_light, R.color.inactive_buttons_and_links_bg_dark);

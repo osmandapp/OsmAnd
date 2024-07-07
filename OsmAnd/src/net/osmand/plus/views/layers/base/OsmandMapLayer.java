@@ -422,13 +422,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
 		return AndroidUtils.getScaledBitmap(getApplication(), drawableId, scale);
-//		OsmandApplication app = getApplication();
-//		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
-//		if (bitmap != null && scale != 1f && scale > 0) {
-//			bitmap = AndroidUtils.scaleBitmap(bitmap,
-//					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
-//		}
-//		return bitmap;
 	}
 
 	public float getTextScale() {

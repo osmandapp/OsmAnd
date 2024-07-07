@@ -701,7 +701,7 @@ public class AndroidUtils {
 
 	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		float scaleCoef = app.getOsmandMap().getCarDensityScaleCoef();
+		float scaleCoef = app.getOsmandMap().getDisplayDensityScaleCoef();
 		Resources r = ctx.getResources();
 		return (int) (TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
