@@ -5808,4 +5808,10 @@
 \nCarte graphique : %3$s
 \nVeille : %4$s</string>
     <string name="choose_map_orientation">Choisir l\'orientation de la carte</string>
+    <string name="profile_icon">Icône du profil</string>
+    <string name="navigation_position_icon">Icône de votre position lors du guidage</string>
+    <string name="resting_position_icon">Icône de la position actuelle statique</string>
+    <string name="navigation_position_icon_summary">Icône affichée lorsque vous naviguez ou vous déplacez.</string>
+    <string name="shared_string_all_icons">Toutes les icônes</string>
+    <string name="resting_position_icon_summary">Icône affichée lorsque vous ne bougez pas.</string>
 </resources>

@@ -5822,4 +5822,12 @@
 \nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Energetska statistika (prosek 1 / 5 / 15 minuta)</string>
     <string name="rendering_avg_info">Statistika prikazivanja (prosečno 1 / 5 / 15 minuta)</string>
+    <string name="choose_map_orientation">Odaberite orjentaciju mape</string>
+    <string name="rendering_value_pale_name">Bledo</string>
+    <string name="shared_string_all_icons">Sve ikone</string>
+    <string name="navigation_position_icon_summary">Ikona koja se prikazuje dok ste usmeravani ili se krećete.</string>
+    <string name="navigation_position_icon">Ikona navigacione pozicije</string>
+    <string name="resting_position_icon_summary">Ikona se prikazuje kada se ne krećete.</string>
+    <string name="resting_position_icon">Ikona položaja za odmor</string>
+    <string name="profile_icon">Ikona profila</string>
 </resources>

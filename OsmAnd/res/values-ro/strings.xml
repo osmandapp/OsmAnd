@@ -5779,4 +5779,5 @@
     <string name="rendering_avg_info">Statistici de randare (medie 1 / 5 / 15 minute)</string>
     <string name="energy_avg_info">Statistici energetice (medie 1 / 5 / 15 minute)</string>
     <string name="choose_map_orientation">Alegeți orientarea hărții</string>
+    <string name="rendering_value_pale_name">Palid</string>
 </resources>
