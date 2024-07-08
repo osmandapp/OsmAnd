@@ -5802,4 +5802,13 @@
     <string name="quick_action_verb_turn_on_off">Zapnúť / Vypnúť</string>
     <string name="quick_action_map_underlay">Podklad</string>
     <string name="quick_action_map_overlay">Prekryv</string>
+    <string name="energy_avg_info">Štatistika energie (priemer za 1 / 5 / 15 minút)</string>
+    <string name="energy_avg_info_description">Úroveň batérie za minútu: %1$s
+\nSpotreba energie (mAh): %2$s</string>
+    <string name="rendering_avg_info">Štatistika vykresľovania (priemer za 1 / 5 / 15 minút)</string>
+    <string name="rendering_avg_info_description">FPS za posledných 1k snímok: %1$s
+\nProcesor: %2$s
+\nGrafika 1k: %3$s
+\nNečinné 1k: %4$s</string>
+    <string name="choose_map_orientation">Zvoľte orientáciu mapy</string>
 </resources>
