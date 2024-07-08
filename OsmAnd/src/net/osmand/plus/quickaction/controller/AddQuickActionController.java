@@ -18,7 +18,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public abstract class AddQuickActionController implements IDialogController {
 	protected final OsmandApplication app;
 	protected final DialogManager dialogManager;
 	protected final MapButtonsHelper mapButtonsHelper;
-	private final Map<String, IDialog> boundDialogs = new HashMap<>();
+	private final Map<String, IDialog> boundDialogs = new LinkedHashMap<>();
 
 	public AddQuickActionController(@NonNull OsmandApplication app) {
 		this.app = app;
