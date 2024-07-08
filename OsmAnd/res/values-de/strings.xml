@@ -5821,4 +5821,7 @@
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Kartenorientierung wählen</string>
+    <string name="rendering_value_pale_name">Blass</string>
+    <string name="shared_string_all_icons">Alle Icons</string>
+    <string name="profile_icon">Profilsymbol</string>
 </resources>
