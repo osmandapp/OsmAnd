@@ -614,7 +614,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		});
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
-		updateApplicationModeSettings();
+		updateApplicationModeSettings(!app.getPoiFilters().isShowingAnyPoi());
 
 
 		// if destination point was changed try to recalculate route
@@ -1058,9 +1058,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings() {
+		updateApplicationModeSettings(true);
+	}
+
+	public void updateApplicationModeSettings(boolean forceUpdatePoiFilters) {
 		changeKeyguardFlags();
 		updateMapSettings(false);
-		app.getPoiFilters().loadSelectedPoiFilters();
+		if (forceUpdatePoiFilters) {
+			app.getPoiFilters().loadSelectedPoiFilters();
+		}
 		app.getSearchUICore().refreshCustomPoiFilters();
 		app.getMapButtonsHelper().updateActiveActions();
 		getMapViewTrackingUtilities().appModeChanged();

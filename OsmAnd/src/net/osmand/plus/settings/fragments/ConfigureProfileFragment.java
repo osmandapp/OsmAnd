@@ -208,7 +208,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void updateCopiedOrResetPrefs() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			app.getPoiFilters().loadSelectedPoiFilters();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
