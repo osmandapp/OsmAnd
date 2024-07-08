@@ -5820,4 +5820,5 @@
 \nCPU Basis: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
+    <string name="choose_map_orientation">Kartenorientierung wählen</string>
 </resources>
