@@ -52,7 +52,7 @@
 		android:summary="@string/resting_position_icon_summary"/>
 
 	<Preference
-		android:key="restring_position_icon_card"
+		android:key="resting_position_icon_card"
 		android:layout="@layout/preference_simple_container"
 		android:selectable="false"/>
 
