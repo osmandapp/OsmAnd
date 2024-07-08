@@ -4641,7 +4641,7 @@
     <string name="import_as_one_track">Importa come un\'unica traccia</string>
     <string name="use_latin_name_if_missing">Usa nomi latini se mancano</string>
     <string name="transport_hazmat_no_desc">Strade e tunnel possono proibire il trasporto di materiale pericoloso.</string>
-    <string name="transport_hazmat_title">Trasporto di materiale pericoloso</string>
+    <string name="transport_hazmat_title">Trasporto di materiali pericolosi</string>
     <string name="routing_attr_goods_restrictions_description">Considerare le autorizzazioni di accesso per i veicoli commerciali leggeri (merci)</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
     <string name="routing_attr_motor_type_electric_name">Elettrico</string>
@@ -5809,4 +5809,5 @@
 \nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Statistiche energetiche (media 1 / 5 / 15 minuti)</string>
     <string name="rendering_avg_info">Statistiche di rendering (media 1 / 5 / 15 minuti)</string>
+    <string name="choose_map_orientation">Scegli l\'orientamento della mappa</string>
 </resources>
