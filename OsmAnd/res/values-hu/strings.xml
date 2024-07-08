@@ -2127,7 +2127,7 @@
     <string name="quick_action_page_list_descr">Gomb, amely lépteti az alábbi listát.</string>
     <string name="select_gpx_folder">GPX-fájlok mappájának kijelölése</string>
     <string name="file_can_not_be_moved">Nem sikerült áthelyezni a fájlt.</string>
-    <string name="shared_string_move">Áthelyezés</string>
+    <string name="shared_string_move">Mozgatás</string>
     <string name="shared_string_gpx_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
     <string name="route_altitude">Útvonal magassági profilja</string>
@@ -2841,7 +2841,7 @@
     <string name="files_copied">%1$d fájl átmásolva (%2$s).</string>
     <string name="files_failed">Nem sikerült %1$d fájl másolása (%2$s).</string>
     <string name="files_present">%1$d fájl (%2$s) megtalálható az előző helyen: \'%3$s\'.</string>
-    <string name="move_maps">Térképek áthelyezése</string>
+    <string name="move_maps">Térképek mozgatása</string>
     <string name="dont_move_maps">Ne mozogjon</string>
     <string name="public_transport_ped_route_title">Az út gyalogosan körülbelül %1$s, vagyis lehet, hogy gyorsabb, mint tömegközlekedéssel</string>
     <string name="public_transport_no_route_title">Az OsmAnd sajnos nem talál a beállításoknak megfelelő útvonalat.</string>
@@ -3042,7 +3042,7 @@
     <string name="shared_string_select_folder">Mappa…</string>
     <string name="paste_Osmand_data_folder_path">Az OsmAnd-adatokat tartalmazó mappa elérési útvonalának beillesztése</string>
     <string name="change_osmand_data_folder_question">Módosítod az OsmAnd adatok mappáját\?</string>
-    <string name="move_maps_to_new_destination">Áthelyezés az új helyre</string>
+    <string name="move_maps_to_new_destination">Mozgatás az új helyre</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
@@ -5815,4 +5815,11 @@
 \nTÉTLEN 1000: %4$s</string>
     <string name="energy_avg_info">Energiastatisztika (1/5/15 perces átlagok)</string>
     <string name="choose_map_orientation">Térkép irányának kiválasztása</string>
+    <string name="profile_icon">Profil ikon</string>
+    <string name="navigation_position_icon">Navigáció pozíció ikon</string>
+    <string name="resting_position_icon">Ikon pihenő helyzetben</string>
+    <string name="shared_string_all_icons">Minden ikon</string>
+    <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
+    <string name="navigation_position_icon_summary">A navigálás vagy mozgás közben megjelenő ikon.</string>
+    <string name="rendering_value_pale_name">Halvány</string>
 </resources>
