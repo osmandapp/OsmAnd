@@ -5820,6 +5820,6 @@
     <string name="resting_position_icon">Ikon pihenő helyzetben</string>
     <string name="shared_string_all_icons">Minden ikon</string>
     <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
-    <string name="navigation_position_icon_summary">A navigálás vagy mozgás közben megjelenő ikon.</string>
+    <string name="navigation_position_icon_summary">Navigálás vagy mozgás közben megjelenő ikon.</string>
     <string name="rendering_value_pale_name">Halvány</string>
 </resources>
