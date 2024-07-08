@@ -5826,4 +5826,11 @@
 \nIDLE 1k: %4$s</string>
     <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
     <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
+    <string name="shared_string_all_icons">Всі іконки</string>
+    <string name="profile_icon">Іконка профілю</string>
+    <string name="navigation_position_icon">Піктограма позиції розташування</string>
+    <string name="resting_position_icon_summary">Іконка показується, коли ви не рухаєтеся.</string>
+    <string name="resting_position_icon">Іконка положення спокою</string>
+    <string name="rendering_value_pale_name">Блідий</string>
+    <string name="navigation_position_icon_summary">Іконка показується під час навігації або руху.</string>
 </resources>
