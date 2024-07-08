@@ -5832,4 +5832,5 @@
 \nCPU básica: %2$s
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>
+    <string name="choose_map_orientation">Elige la orientación del mapa</string>
 </resources>

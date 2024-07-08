@@ -5756,7 +5756,7 @@
     <string name="user_palette">Пользовательская палитра</string>
     <string name="backup_error_failed_to_transfer_file">Не удалось передать облачные файлы.</string>
     <string name="contact_support_retry">Попробуйте еще раз или обратитесь в службу поддержки</string>
-    <string name="missing_maps_ignore">Использовать существующие карты</string>
+    <string name="missing_maps_ignore">Использовать загруженные карты</string>
     <string name="daynight_mode_sensor_summary">Используется датчик освещенности устройства для переключения между дневным и ночным режимами в зависимости от уровня окружающего освещения.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Автоматическое переключение между дневным и ночным режимами в соответствии с местным временем восхода и захода солнца.</string>
     <string name="daynight_mode_night_summary">Карта всегда отображается в темных тонах, подходящих для ночного времени или условий недостаточной освещенности.</string>
@@ -5820,4 +5820,5 @@
 \nCPU базовый: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
+    <string name="choose_map_orientation">Выберите ориентацию карты</string>
 </resources>
