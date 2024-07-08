@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -173,6 +174,10 @@ public class OsmandMap {
 			}
 			DisplayMetrics displayMetrics = new DisplayMetrics();
 			display.getRealMetrics(displayMetrics);
+			Log.d("OsmandMap", "displayId: " + display.getDisplayId());
+			Log.d("OsmandMap", "displayMetrics.density: " + displayMetrics.density);
+			Log.d("OsmandMap", "mapView.getDensity(): " + mapView.getDensity());
+
 			return displayMetrics.density / mapView.getDensity();
 		}
 	}
