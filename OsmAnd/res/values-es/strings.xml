@@ -5818,4 +5818,11 @@
 \nGPU 1k: %3$s
 \nINACTIVO 1k: %4$s</string>
     <string name="choose_map_orientation">Elegir la orientación del mapa</string>
+    <string name="shared_string_all_icons">Todos los iconos</string>
+    <string name="navigation_position_icon">Icono de posición de navegación</string>
+    <string name="resting_position_icon_summary">Icono que se muestra cuando no te estás moviendo.</string>
+    <string name="resting_position_icon">Icono de posición cuando éstas parado</string>
+    <string name="profile_icon">Icono de perfil</string>
+    <string name="navigation_position_icon_summary">Icono que se muestra mientras navegas o te mueves.</string>
+    <string name="rendering_value_pale_name">Pálido</string>
 </resources>
