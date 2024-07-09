@@ -231,6 +231,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onPause() {
 		super.onPause();
+
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
