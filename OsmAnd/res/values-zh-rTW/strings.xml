@@ -5807,4 +5807,11 @@
 \nGPU 1k：%3$s
 \n閒置 1k：%4$s</string>
     <string name="choose_map_orientation">選擇地圖方向</string>
+    <string name="shared_string_all_icons">所有圖示</string>
+    <string name="profile_icon">設定檔圖示</string>
+    <string name="navigation_position_icon_summary">當您導航或移動時顯示的圖示。</string>
+    <string name="navigation_position_icon">導航位置圖示</string>
+    <string name="resting_position_icon_summary">當您不動時顯示的圖示。</string>
+    <string name="resting_position_icon">還原位置圖示</string>
+    <string name="rendering_value_pale_name">灰白</string>
 </resources>
