@@ -487,7 +487,11 @@ public class RoutingHelper {
 					Location currentRouteLocation = routeNodes.get(currentRoute);
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
 							currentRouteLocation);
-					locationBearing = previousRouteLocation.bearingTo(currentRouteLocation);
+					if (Algorithms.objectEquals(previousRouteLocation, currentRouteLocation)) {
+						locationBearing = currentRouteLocation.getBearing();
+					} else {
+						locationBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
+					}
 					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
 						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
 						RoutingHelperUtils.approximateBearingIfNeeded(this,

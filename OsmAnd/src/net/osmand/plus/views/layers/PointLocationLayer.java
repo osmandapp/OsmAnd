@@ -244,7 +244,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.onUpdateFrame(mapRenderer);
 		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			Location location = getPointLocation();
-			if (location != null) {
+			if (location != null && location.hasBearing()) {
 				location.setBearing(getPointBearing());
 			}
 			PointI target31 = mapRenderer.getTarget();
