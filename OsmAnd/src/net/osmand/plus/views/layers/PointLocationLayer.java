@@ -401,7 +401,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				boolean updateBearing = cachedBearing == null || Math.abs(bearing - cachedBearing) > 0.1;
 				if (updateBearing) {
 					lastBearingCached = bearing;
-					boolean animateBearing = isAnimateMyLocation() && !settings.SNAP_TO_ROAD.get();
+					boolean animateBearing = isAnimateMyLocation();
 					updateMarkerBearing(bearing, animateBearing);
 				}
 			}
