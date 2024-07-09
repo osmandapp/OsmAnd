@@ -214,10 +214,8 @@ public class QuickActionsWidget extends LinearLayout {
 				((ImageView) view.findViewById(imageView))
 						.setImageResource(action.getIconRes(app));
 
-				String name = app.getString(action.getActionType().getNameRes());
-				String actionVerb = app.getString(action.getActionType().getActionNameRes());
 				((TextView) view.findViewById(R.id.title))
-						.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, actionVerb, name));
+						.setText(action.getActionText(app));
 
 				if (action.isActionWithSlash(app)) {
 					((ImageView) view.findViewById(R.id.imageSlash))

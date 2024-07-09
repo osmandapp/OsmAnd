@@ -53,14 +53,14 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 		return app.getSelectedGpxHelper().isAnyGpxFileSelected();
 	}
 }

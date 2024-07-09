@@ -58,7 +58,7 @@ public class NavResumePauseAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		RoutingHelper helper = app.getRoutingHelper();
 		if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
 			return app.getString(R.string.continue_navigation);

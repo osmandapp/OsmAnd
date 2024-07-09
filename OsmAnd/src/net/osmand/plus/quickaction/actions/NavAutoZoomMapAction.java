@@ -55,14 +55,14 @@ public class NavAutoZoomMapAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 
 		return app.getSettings().AUTO_ZOOM_MAP.get()
 				? app.getString(R.string.quick_action_auto_zoom_off) : app.getString(R.string.quick_action_auto_zoom_on);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 
 		return app.getSettings().AUTO_ZOOM_MAP.get();
 	}

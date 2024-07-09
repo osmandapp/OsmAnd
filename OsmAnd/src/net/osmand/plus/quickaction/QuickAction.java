@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -81,20 +82,24 @@ public class QuickAction {
 		this.actionType = actionType;
 	}
 
-    public boolean isActionEditable() {
-        return actionType != null && actionType.isActionEditable();
-    }
+	public boolean isActionEditable() {
+		return actionType != null && actionType.isActionEditable();
+	}
 
-    public boolean isActionEnable(OsmandApplication app) {
-        return true;
-    }
+	public boolean isActionEnable(OsmandApplication app) {
+		return true;
+	}
 
-	public String getExtendedName(@NonNull Context context) {
+	public String getExtendedName(@NonNull Context context, boolean useDash) {
+		return getExtendedName(context, useDash ? R.string.ltr_or_rtl_combine_via_dash : R.string.ltr_or_rtl_combine_via_space);
+	}
+
+	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
 		String name = getName(context);
 		int actionNameRes = getActionNameRes();
 		if (actionNameRes != 0 && !name.contains(context.getString(actionNameRes))) {
 			String prefAction = context.getString(actionNameRes);
-			return context.getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, name);
+			return context.getString(combineId, prefAction, name);
 		}
 		return name;
 	}
@@ -141,7 +146,7 @@ public class QuickAction {
     }
 
     public String getActionText(@NonNull OsmandApplication app){
-        return getName(app);
+        return getExtendedName(app, false);
     }
 
 	public QuickActionType getActionType() {

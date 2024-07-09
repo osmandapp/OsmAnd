@@ -48,14 +48,14 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		return app.getSettings().VOICE_MUTE.get()
 				? app.getString(R.string.quick_action_navigation_voice_off)
 				: app.getString(R.string.quick_action_navigation_voice_on);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 		return !app.getSettings().VOICE_MUTE.get();
 	}
 }
