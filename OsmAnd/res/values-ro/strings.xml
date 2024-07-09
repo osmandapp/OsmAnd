@@ -5780,4 +5780,15 @@
     <string name="energy_avg_info">Statistici energetice (medie 1 / 5 / 15 minute)</string>
     <string name="choose_map_orientation">Alegeți orientarea hărții</string>
     <string name="rendering_value_pale_name">Palid</string>
+    <string name="energy_avg_info_description">Nivelul bateriei pe minut: %1$s
+\nConsumul de energie (mAh): %2$s</string>
+    <string name="quick_action_audio_note">Notă audio</string>
+    <string name="quick_action_first_intermediate">Primul intermediar</string>
+    <string name="rendering_avg_info_description">FPS prin ultimele 1k cadre: %1$s
+\nCPU de bază: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="quick_action_video_note">Notă video</string>
+    <string name="quick_action_map_overlay">Suprapunere</string>
+    <string name="quick_action_map_style">Stilul hărții</string>
 </resources>
