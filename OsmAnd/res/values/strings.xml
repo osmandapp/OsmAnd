@@ -56,7 +56,7 @@
     <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>
     <string name="navigation_position_icon">Navigation position icon</string>
     <string name="resting_position_icon_summary">Icon displayed when you\'re not moving.</string>
-    <string name="resting_position_icon">Restring position icon</string>
+    <string name="resting_position_icon">Resting position icon</string>
     <string name="data_source">Data Source</string>
     <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
     <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>

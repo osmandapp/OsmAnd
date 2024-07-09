@@ -63,7 +63,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	private final static String PROFILE_ICON_CARD = "profile_icon_card";
 	private final static String PROFILE_ICON_CARD_DIVIDER = "profile_icon_card_divider";
 	private final static String RESTING_POSITION_ICON_CARD_HEADER = "resting_position_icon_card_header";
-	private final static String RESTRING_POSITION_ICON_CARD = "restring_position_icon_card";
+	private final static String RESTING_POSITION_ICON_CARD = "resting_position_icon_card";
 	private final static String NAVIGATION_POSITION_ICON_CARD_HEADER = "navigation_position_icon_card_header";
 	private final static String NAVIGATION_POSITION_ICON_CARD = "navigation_position_icon_card";
 	private final static String OPTIONS_CARD_HEADER = "options_card_header";
@@ -211,7 +211,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			bindCard(holder, new ColorsPaletteCard(activity, screenController.getColorsCardController()));
 		} else if (PROFILE_ICON_CARD.equals(key)) {
 			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getProfileIconCardController()));
-		} else if (RESTRING_POSITION_ICON_CARD.equals(key)) {
+		} else if (RESTING_POSITION_ICON_CARD.equals(key)) {
 			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getRestingIconCardController()));
 		} else if (NAVIGATION_POSITION_ICON_CARD.equals(key)) {
 			bindCard(holder, new IconsPaletteCard<>(activity, screenController.getNavigationIconCardController()));
