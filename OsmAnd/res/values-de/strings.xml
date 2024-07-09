@@ -5773,7 +5773,7 @@
     <string name="shared_string_modify">Ändern</string>
     <string name="weather_data_sources_prompt">OsmAnd liefert Wetterdaten aus zwei Quellen:</string>
     <string name="weather_source_ecmwf_description">Europäisches Zentrum für mittelfristige Wettervorhersage</string>
-    <string name="weather_source_GFS_description">Globales Vorhersagesystem der Nationalen Zentren für Umweltvorhersage</string>
+    <string name="weather_source_GFS_description">Globales Vorhersagesystem der Nationalen Zentren zur Umweltvorhersage</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
@@ -5824,4 +5824,8 @@
     <string name="rendering_value_pale_name">Blass</string>
     <string name="shared_string_all_icons">Alle Icons</string>
     <string name="profile_icon">Profilsymbol</string>
+    <string name="navigation_position_icon_summary">Das Symbol wird angezeigt, während du navigierst oder dich bewegst.</string>
+    <string name="navigation_position_icon">Symbol für die Navigationsposition</string>
+    <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn du dich nicht bewegst.</string>
+    <string name="resting_position_icon">Symbol für die Sperrposition</string>
 </resources>

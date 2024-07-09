@@ -846,7 +846,7 @@
     <string name="overlay_transparency">Transparetnost sloja iznad</string>
     <string name="overlay_transparency_descr">Podesi transparetnost gornjeg sloja.</string>
     <string name="warning_tile_layer_not_downloadable">Program nije uspeo da preuzme nivo sa mapama %1$s, reinstalacija programa može da pomogne.</string>
-    <string name="voice_stream_music">Zvuk preko medija/ navođenja</string>
+    <string name="voice_stream_music">Zvuk multimedije/ navođenja</string>
     <string name="choose_audio_stream_descr">Odaberi govornika za glasovno navođenje.</string>
     <string name="switch_to_vector_map_to_see">Postojeće vektorske mape za ovaj lokaciju. 
 \n\t 

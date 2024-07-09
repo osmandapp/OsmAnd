@@ -5822,4 +5822,11 @@
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Vælg kortets orientering</string>
+    <string name="shared_string_all_icons">Alle ikoner</string>
+    <string name="navigation_position_icon_summary">Ikonet vises, mens du navigerer eller bevæger dig.</string>
+    <string name="resting_position_icon">Ikon for hvileposition</string>
+    <string name="rendering_value_pale_name">Bleg</string>
+    <string name="profile_icon">Profil-ikon</string>
+    <string name="navigation_position_icon">Ikon for navigationsposition</string>
+    <string name="resting_position_icon_summary">Ikonet vises, når du ikke er i bevægelse.</string>
 </resources>
