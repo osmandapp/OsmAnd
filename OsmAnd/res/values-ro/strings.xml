@@ -5790,5 +5790,5 @@
 \nIDLE 1k: %4$s</string>
     <string name="quick_action_video_note">Notă video</string>
     <string name="quick_action_map_overlay">Suprapunere</string>
-    <string name="quick_action_map_style">Stilul hărții</string>
+    <string name="quick_action_map_style">Stil hartă</string>
 </resources>
