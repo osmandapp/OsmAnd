@@ -94,7 +94,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
-	public static final String IMPROVE_PERFORMANCE_FOR_PREFERENCE_SEARCH = "improvePerformanceForPreferenceSearch";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -109,7 +108,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
-	private boolean improvePerformanceForPreferenceSearch = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,7 +115,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
-		improvePerformanceForPreferenceSearch = args != null && args.getBoolean(IMPROVE_PERFORMANCE_FOR_PREFERENCE_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
@@ -152,9 +149,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			} else {
 				updateAllSettings();
 			}
-			if (improvePerformanceForPreferenceSearch) {
-				return view;
-			}
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
@@ -175,9 +169,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (improvePerformanceForPreferenceSearch) {
-			return;
-		}
 		updateToolbar();
 	}
 
@@ -215,9 +206,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(improvePerformanceForPreferenceSearch) {
-			return;
-		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -243,9 +231,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onPause() {
 		super.onPause();
-		if(improvePerformanceForPreferenceSearch) {
-			return;
-		}
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
@@ -261,9 +246,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if(improvePerformanceForPreferenceSearch) {
-			return;
-		}
 		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
