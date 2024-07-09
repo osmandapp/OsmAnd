@@ -129,7 +129,7 @@ public class RoutingHelperUtils {
 		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
 		float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
 		float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing)
-				* projectionOffsetN;
+				* projectionOffsetN * projectionOffsetN;
 		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
 
 		boolean setApproximated = true;
