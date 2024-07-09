@@ -20,9 +20,8 @@ public class PaletteGradientColor extends PaletteColor {
 	private int index;
 
 	public PaletteGradientColor(@NonNull String typeName, @NonNull String paletteName,
-	                            @NonNull ColorPalette colorPalette,
-	                            long creationTime, int initialIndex) {
-		super(null, creationTime);
+	                            @NonNull ColorPalette colorPalette, int initialIndex) {
+		super(null);
 		this.stringId = typeName + GRADIENT_ID_SPLITTER + paletteName;
 		this.typeName = typeName;
 		this.paletteName = paletteName;
