@@ -6,7 +6,8 @@
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
 	android:clickable="true"
-	android:focusable="true">
+	android:focusable="true"
+	android:transitionName="shared_element_container">
 
 	<FrameLayout
 		android:layout_width="match_parent"
