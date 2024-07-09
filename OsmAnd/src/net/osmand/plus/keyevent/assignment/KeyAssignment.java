@@ -7,7 +7,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.CommandToActionConverter;
@@ -34,12 +33,12 @@ public class KeyAssignment {
 	private QuickAction action;
 	private List<Integer> keyCodes = new ArrayList<>();
 
-	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
+	public KeyAssignment(@NonNull String commandId, @NonNull Integer... keyCodes) {
 		this(CommandToActionConverter.createQuickAction(commandId), keyCodes);
 		this.commandId = commandId;
 	}
 
-	public KeyAssignment(@Nullable QuickAction action, @NonNull Integer ... keyCodes) {
+	public KeyAssignment(@Nullable QuickAction action, @NonNull Integer... keyCodes) {
 		this.id = generateUniqueId();
 		this.action = action;
 		this.keyCodes = new ArrayList<>(Arrays.asList(keyCodes));
@@ -112,7 +111,7 @@ public class KeyAssignment {
 
 	@Nullable
 	private String getDefaultName(@NonNull OsmandApplication context) {
-		return action != null ? action.getExtendedName(context) : commandId;
+		return action != null ? action.getExtendedName(context, true) : commandId;
 	}
 
 	public void setCustomName(@Nullable String customName) {
