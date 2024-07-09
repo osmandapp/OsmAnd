@@ -2,14 +2,12 @@ package net.osmand.plus.settings.fragments;
 
 import static de.KnollFrank.lib.preferencesearch.common.Strings.joinNonNullElements;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -81,9 +79,9 @@ class CustomPreferenceDescriptionsFactory {
 
 	private static List<CharSequence> concat(final Optional<CharSequence[]> entries,
 											 final Optional<String> description) {
-		final Builder<CharSequence> builder = ImmutableList.builder();
-		entries.map(Arrays::asList).ifPresent(builder::addAll);
-		description.ifPresent(builder::add);
-		return builder.build();
+		final ArrayList<CharSequence> elements = new ArrayList<>();
+		entries.map(Arrays::asList).ifPresent(elements::addAll);
+		description.ifPresent(elements::add);
+		return elements;
 	}
 }
