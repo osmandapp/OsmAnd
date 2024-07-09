@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments.editassignment;
 
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController.TRANSITION_NAME;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
@@ -68,7 +69,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		View view = inflate(R.layout.fragment_edit_key_assignment, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		if (!settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
-			AndroidUiHelper.setupContainerTransformTransition(this, view);
+			AndroidUiHelper.setSharedElementTransition(this, view, TRANSITION_NAME);
 		}
 		setupToolbar(view);
 
@@ -236,7 +237,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 			FragmentTransaction transaction = manager.beginTransaction();
 			if (anchorView != null && !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode)) {
-				transaction.addSharedElement(anchorView, EditKeyAssignmentController.TRANSITION_NAME);
+				transaction.addSharedElement(anchorView, TRANSITION_NAME);
 			}
 			transaction.replace(R.id.fragmentContainer, fragment, TAG);
 			transaction.addToBackStack(TAG);

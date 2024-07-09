@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
 
 /**
  * Created by dummy on 28.01.15.
@@ -242,15 +241,10 @@ public class AndroidUiHelper {
 		}
 	}
 
-	public static void setupContainerTransformTransition(@NonNull Fragment fragment, @NonNull View view) {
-		view.setTransitionName(EditKeyAssignmentController.TRANSITION_NAME);
-
-		MaterialContainerTransform enterTransform = new MaterialContainerTransform();
-		enterTransform.setScrimColor(Color.TRANSPARENT);
-		fragment.setSharedElementEnterTransition(enterTransform);
-
-		MaterialContainerTransform returnTransform = new MaterialContainerTransform();
-		returnTransform.setScrimColor(Color.TRANSPARENT);
-		fragment.setSharedElementReturnTransition(returnTransform);
+	public static void setSharedElementTransition(@NonNull Fragment fragment, @NonNull View view, @NonNull String transitionName) {
+		MaterialContainerTransform transform = new MaterialContainerTransform();
+		transform.setScrimColor(Color.TRANSPARENT);
+		fragment.setSharedElementEnterTransition(transform);
+		view.setTransitionName(transitionName);
 	}
 }
