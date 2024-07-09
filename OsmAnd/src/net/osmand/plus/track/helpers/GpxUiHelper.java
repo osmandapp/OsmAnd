@@ -5,7 +5,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
@@ -519,8 +518,6 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
-		double lastHeight = HEIGHT_UNDEFINED;
-		double lastValidHeight = Double.NaN;
 		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
 		if (locations != null) {
 			Track track = new Track();
@@ -532,19 +529,7 @@ public class GpxUiHelper {
 				point.lon = l.getLongitude();
 				if (l.hasAltitude()) {
 					gpx.hasAltitude = true;
-					float h = (float) l.getAltitude();
-					point.ele = h;
-					lastValidHeight = h;
-					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
-						for (WptPt pt : pts) {
-							if (Double.isNaN(pt.ele)) {
-								pt.ele = h;
-							}
-						}
-					}
-					lastHeight = h;
-				} else {
-					lastHeight = HEIGHT_UNDEFINED;
+					point.ele = l.getAltitude();
 				}
 				if (pts.size() == 0) {
 					if (l.hasSpeed() && l.getSpeed() > 0) {
@@ -563,19 +548,87 @@ public class GpxUiHelper {
 				}
 				pts.add(point);
 			}
-			if (!Double.isNaN(lastValidHeight) && lastHeight == HEIGHT_UNDEFINED) {
-				for (ListIterator<WptPt> iterator = pts.listIterator(pts.size()); iterator.hasPrevious(); ) {
-					WptPt point = iterator.previous();
-					if (!Double.isNaN(point.ele)) {
-						break;
-					}
-					point.ele = lastValidHeight;
-				}
-			}
+			recalculateEmptyElevationWpts(pts);
 			track.segments.add(seg);
 			gpx.tracks.add(track);
 		}
 		return gpx;
+	}
+
+	private static void recalculateEmptyElevationWpts(List<WptPt> pts) {
+		double veryFirstElevation = Double.NaN;
+		double veryLastElevation = Double.NaN;
+		boolean hasEmptyElevation = false;
+
+		for (int i = 0; i < pts.size(); i++) {
+			if (Double.isNaN(pts.get(i).ele)) {
+				hasEmptyElevation = true;
+			} else {
+				veryLastElevation = pts.get(i).ele;
+				if (Double.isNaN(veryFirstElevation)) {
+					veryFirstElevation = veryLastElevation;
+				}
+			}
+		}
+
+		if (Double.isNaN(veryFirstElevation) || Double.isNaN(veryLastElevation)) {
+			LOG.error("interpolateWptsEmptyElevation: no elevation at all");
+			return;
+		}
+
+		if (hasEmptyElevation) {
+			for (int i = 0; i < pts.size(); i++) {
+				if (Double.isNaN(pts.get(i).ele)) {
+					interpolateEmptyElevationSection(i, pts, veryFirstElevation, veryLastElevation);
+				}
+			}
+		}
+	}
+
+	private static void interpolateEmptyElevationSection(int startIndex, List<WptPt> pts,
+	                                                     double veryFirstElevation, double veryLastElevation) {
+		int prevValidIndex = -1, nextValidIndex = -1;
+		for (int i = startIndex - 1; i >= 0; i--) {
+			if (!Double.isNaN(pts.get(i).ele)) {
+				prevValidIndex = i;
+				break;
+			}
+		}
+		for (int i = startIndex + 1; i < pts.size(); i++) {
+			if (!Double.isNaN(pts.get(i).ele)) {
+				nextValidIndex = i;
+				break;
+			}
+		}
+
+		if (prevValidIndex == -1 || nextValidIndex == -1) {
+			// fill outermost section without interpolation
+			for (int i = startIndex; i < pts.size(); i++) {
+				if (Double.isNaN(pts.get(i).ele)) {
+					pts.get(i).ele = startIndex == 0 ? veryFirstElevation : veryLastElevation;
+					continue;
+				}
+				break;
+			}
+		} else {
+			double totalDistance = 0;
+			for (int i = prevValidIndex; i < nextValidIndex; i++) {
+				totalDistance += MapUtils
+						.getDistance(pts.get(i).lat, pts.get(i).lon, pts.get(i + 1).lat, pts.get(i + 1).lon);
+			}
+			double deltaElevation = pts.get(nextValidIndex).ele - pts.get(prevValidIndex).ele;
+			for (int i = startIndex; totalDistance > 0 && i < pts.size(); i++) {
+				// interpolate inner section
+				if (Double.isNaN(pts.get(i).ele)) {
+					double currentDistance = MapUtils
+							.getDistance(pts.get(i).lat, pts.get(i).lon, pts.get(i - 1).lat, pts.get(i - 1).lon);
+					double increaseElevation = deltaElevation * (currentDistance / totalDistance);
+					pts.get(i).ele = pts.get(i - 1).ele + increaseElevation;
+					continue;
+				}
+				break;
+			}
+		}
 	}
 
 	@Nullable
