@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:title="@string/profile_appearance">
 
 	<!--Name input area-->
 	<Preference
 		android:key="profile_name"
 		android:layout="@layout/preference_text_field"
-		android:title="@string/shared_string_name"
-		android:selectable="false"/>
+		android:selectable="false"
+		android:title="@string/shared_string_name" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"
@@ -22,7 +23,7 @@
 	<Preference
 		android:key="colors_card"
 		android:layout="@layout/preference_simple_container"
-		android:selectable="false"/>
+		android:selectable="false" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"
@@ -37,7 +38,7 @@
 	<Preference
 		android:key="profile_icon_card"
 		android:layout="@layout/preference_simple_container"
-		android:selectable="false"/>
+		android:selectable="false" />
 
 	<Preference
 		android:key="profile_icon_card_divider"
@@ -48,13 +49,13 @@
 	<PreferenceCategory
 		android:key="resting_position_icon_card_header"
 		android:layout="@layout/preference_header_with_bottom_summary"
-		android:title="@string/resting_position_icon"
-		android:summary="@string/resting_position_icon_summary"/>
+		android:summary="@string/resting_position_icon_summary"
+		android:title="@string/resting_position_icon" />
 
 	<Preference
 		android:key="restring_position_icon_card"
 		android:layout="@layout/preference_simple_container"
-		android:selectable="false"/>
+		android:selectable="false" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"
@@ -64,28 +65,31 @@
 	<PreferenceCategory
 		android:key="navigation_position_icon_card_header"
 		android:layout="@layout/preference_header_with_bottom_summary"
-		android:title="@string/navigation_position_icon"
-		android:summary="@string/navigation_position_icon_summary"/>
+		android:summary="@string/navigation_position_icon_summary"
+		android:title="@string/navigation_position_icon" />
 
 	<Preference
 		android:key="navigation_position_icon_card"
 		android:layout="@layout/preference_simple_container"
-		android:selectable="false"/>
+		android:selectable="false" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"
-		android:selectable="false" />
+		android:selectable="false"
+		app:isPreferenceVisible="false" />
 
 	<!--Options card-->
 	<PreferenceCategory
 		android:key="options_card_header"
 		android:layout="@layout/preference_header"
-		android:title="@string/shared_string_options" />
+		android:title="@string/shared_string_options"
+		app:isPreferenceVisible="false" />
 
 	<Preference
 		android:key="options_card"
 		android:layout="@layout/preference_simple_container"
-		android:selectable="false"/>
+		android:selectable="false"
+		app:isPreferenceVisible="false" />
 
 	<Preference
 		android:layout="@layout/card_bottom_divider"
