@@ -5811,4 +5811,12 @@
     <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
 \nKonsumo de energio (mAh): %2$s</string>
     <string name="rendering_avg_info">Statistiko pri bildigado: (mezume 1 /5 / 15 minutoj)</string>
+    <string name="rendering_value_pale_name">Pala</string>
+    <string name="choose_map_orientation">Elekti map-orientiĝon</string>
+    <string name="profile_icon">Emblemo de profilo</string>
+    <string name="navigation_position_icon">Emblemo de navigi</string>
+    <string name="resting_position_icon_summary">Bildsimbolo montrata kiam vi ne moviĝas.</string>
+    <string name="shared_string_all_icons">Ĉiuj emblemoj</string>
+    <string name="navigation_position_icon_summary">Bildsimbolo montrata kiam vi navigas aŭ moviĝas.</string>
+    <string name="resting_position_icon">Emblemo dum ne moviĝi</string>
 </resources>
