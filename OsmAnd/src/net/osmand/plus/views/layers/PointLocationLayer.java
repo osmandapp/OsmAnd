@@ -244,6 +244,9 @@ public class PointLocationLayer extends OsmandMapLayer
 		super.onUpdateFrame(mapRenderer);
 		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			Location location = getPointLocation();
+			if (location != null) {
+				location.setBearing(getPointBearing());
+			}
 			PointI target31 = mapRenderer.getTarget();
 			updateMarker(location, target31, 0);
 		}
@@ -549,6 +552,27 @@ public class PointLocationLayer extends OsmandMapLayer
 			location = app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
 		}
 		return location != null ? location : locationProvider.getLastStaleKnownLocation();
+	}
+
+	@Nullable
+	public float getPointBearing() {
+		float result = 0.0f;
+		Location location = null;
+		OsmandApplication app = getApplication();
+		if (app.getRoutingHelper().isFollowingMode() && app.getSettings().SNAP_TO_ROAD.get()) {
+			RouteLayer routeLayer = app.getOsmandMap().getMapLayers().getRouteLayer();
+			location = routeLayer.getLastRouteProjection();
+			if (location != null) {
+				result = routeLayer.getLastRouteBearing();
+			}
+		}
+		if (location == null) {
+			location = locationProvider.getLastStaleKnownLocation();
+			if (location != null && location.hasBearing()) {
+				result = location.getBearing();
+			}
+		}
+		return result;
 	}
 
 	private boolean isLocationVisible(@NonNull RotatedTileBox tb, @NonNull Location l) {
