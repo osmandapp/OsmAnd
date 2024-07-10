@@ -1447,7 +1447,7 @@
     <string name="nautical_maps_missing">Laden Sie die spezielle Offline-Karte zur Anzeige nautischer Details herunter.</string>
     <string name="shared_string_get">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
-    <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
+    <string name="shared_string_currently_recording_track">Momentane Trackaufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
     <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil „Nautisch“ unter „Menü → Karte konfigurieren → Kartendarstellung“.
 \n
@@ -2865,7 +2865,7 @@
     <string name="rendering_attr_highway_class_path_name">Weg</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
     <string name="rendering_attr_undefined_name">Undefiniert</string>
-    <string name="avoid_pt_types_descr">Wähle die öffentlichen Verkehrsmittel aus, die Du für die Navigation vermeiden möchtest:</string>
+    <string name="avoid_pt_types_descr">Wählen Sie die öffentlichen Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
     <string name="shared_string_walk">Gehen</string>
     <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
@@ -3730,7 +3730,7 @@
     <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
     <string name="shared_string_gpx_route">Trackroute</string>
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder vom Gerät importieren.</string>
-    <string name="disable_recording_once_app_killed_descrp">Die Track-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Die Trackaufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Trackaufzeichnung festlegen (wird über die Schaltfläche „Routenaufzeichnung“ auf dem Kartenbildschirm angeschaltet).</string>
     <string name="number_of_gpx_files_selected_pattern">%s Trackdateien ausgewählt</string>
     <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
@@ -5669,21 +5669,21 @@
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
-    <string name="release_4_8">• Neue Geländefarboption \"Höhe\"
+    <string name="release_4_8">• Neue Geländefarboption „Höhe“
 \n
 \n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen
 \n
 \n• 3D-Variante für Standortpositionssymbole
 \n
-\n• Quick Actions können jetzt externen Tastaturen zugewiesen werden
+\n• Schnellaktionen können jetzt externen Tastaturen zugewiesen werden
 \n
-\n• Wetter: UI-Aktualisierung, Windanimation hinzugefügt
+\n• Wetter: Benutzeroberfläche aktualisiert, Windanimation hinzugefügt
 \n
 \n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen
 \n
 \n• Erweiterte Auswahl an Touristenrouten auf der Karte
 \n
-\n• Hinzugefügt: App-Theme-Option, um dem Kartenmodus zu folgen
+\n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen
 \n
 \n• Track-Statistiken, Sortierung und Suche behoben
 \n
@@ -5777,7 +5777,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datenquelle</string>
-    <string name="missing_maps_ignore_details">Decken heruntergeladene Karten deine Route ab? Navigiere mit ihnen, wenn du mit der Gegend vertraut bist.</string>
+    <string name="missing_maps_ignore_details">Decken heruntergeladene Karten Ihre Route ab? Navigieren Sie mit ihnen, wenn Sie sich in der Gegend auskennen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
@@ -5812,20 +5812,20 @@
     <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
     <string name="shared_string_set">Einstellen</string>
     <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
-    <string name="energy_avg_info_description">Batteriestand pro Minute: %1$s
+    <string name="energy_avg_info_description">Akkustand pro Minute: %1$s
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
-    <string name="rendering_avg_info_description">FPS der letzten 1.000 Frames: %1$s
-\nCPU Basis: %2$s
+    <string name="rendering_avg_info_description">FPS der letzten 1000 Frames: %1$s
+\nCPU-Basis: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Kartenorientierung wählen</string>
     <string name="rendering_value_pale_name">Blass</string>
     <string name="shared_string_all_icons">Alle Icons</string>
     <string name="profile_icon">Profilsymbol</string>
-    <string name="navigation_position_icon_summary">Das Symbol wird angezeigt, während du navigierst oder dich bewegst.</string>
+    <string name="navigation_position_icon_summary">Das Symbol wird angezeigt, während Sie navigieren oder sich bewegen.</string>
     <string name="navigation_position_icon">Symbol für die Navigationsposition</string>
-    <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn du dich nicht bewegst.</string>
+    <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn Sie sich nicht bewegen.</string>
     <string name="resting_position_icon">Symbol für die Sperrposition</string>
 </resources>
