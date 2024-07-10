@@ -2167,8 +2167,9 @@ public class GPXUtilities {
 					double totalDistance = 0;
 					double[] distanceArray = new double[nextValidIndex - prevValidIndex];
 					for (int j = prevValidIndex; j < nextValidIndex; j++) {
-						double distance = MapUtils
-								.getDistance(pts.get(j).lat, pts.get(j).lon, pts.get(j + 1).lat, pts.get(j + 1).lon);
+						WptPt thisPt = pts.get(j);
+						WptPt nextPt = pts.get(j + 1);
+						double distance = MapUtils.getDistance(thisPt.lat, thisPt.lon, nextPt.lat, nextPt.lon);
 						distanceArray[j - prevValidIndex] = distance;
 						totalDistance += distance;
 					}
