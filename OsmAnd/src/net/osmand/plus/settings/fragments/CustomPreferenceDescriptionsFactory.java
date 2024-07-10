@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static de.KnollFrank.lib.preferencesearch.common.Strings.joinNonNullElements;
-
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -12,17 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import de.KnollFrank.lib.preferencesearch.common.Lists;
 import de.KnollFrank.lib.preferencesearch.search.provider.PreferenceDescription;
 
 class CustomPreferenceDescriptionsFactory {
 
 	/* FK-TODO: make custom Preferences searchable:
-	   - ColorPreferenceCompat
-	   + SwitchPreferenceEx
 	   - SizePreference
-	   + ListPreferenceEx
-	   + MultiSelectBooleanPreference
-	   + EditTextPreferenceEx
    */
 	public static List<PreferenceDescription> createCustomPreferenceDescriptions() {
 		return Arrays.asList(
@@ -40,19 +34,21 @@ class CustomPreferenceDescriptionsFactory {
 								", ",
 								concat(
 										Optional.ofNullable(preference.getEntries()),
-										Optional.ofNullable(preference.getDescription()))));
+										Optional.ofNullable(preference.getDescription()),
+										Optional.ofNullable(preference.getDialogTitle()))));
 	}
 
 	private static PreferenceDescription<SwitchPreferenceEx> getSwitchPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				SwitchPreferenceEx.class,
 				preference ->
-						joinNonNullElements(
+						String.join(
 								", ",
-								Arrays.asList(
-										preference.getSummaryOff(),
-										preference.getSummaryOn(),
-										preference.getDescription())));
+								Lists.getNonEmptyElements(
+										Arrays.asList(
+												Optional.ofNullable(preference.getSummaryOff()),
+												Optional.ofNullable(preference.getSummaryOn()),
+												Optional.ofNullable(preference.getDescription())))));
 	}
 
 	private static PreferenceDescription<MultiSelectBooleanPreference> getMultiSelectBooleanPreferenceDescription() {
@@ -63,25 +59,27 @@ class CustomPreferenceDescriptionsFactory {
 								", ",
 								concat(
 										Optional.ofNullable(preference.getEntries()),
-										Optional.ofNullable(preference.getDescription()))));
+										Optional.ofNullable(preference.getDescription()),
+										Optional.ofNullable(preference.getDialogTitle()))));
 	}
 
 	private static PreferenceDescription<EditTextPreferenceEx> getEditTextPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				EditTextPreferenceEx.class,
 				preference ->
-						joinNonNullElements(
+						String.join(
 								", ",
-								Arrays.asList(
-										preference.getText(),
-										preference.getDescription())));
+								Lists.getNonEmptyElements(
+										Arrays.asList(
+												Optional.ofNullable(preference.getText()),
+												Optional.ofNullable(preference.getDescription())))));
 	}
 
-	private static List<CharSequence> concat(final Optional<CharSequence[]> entries,
-											 final Optional<String> description) {
-		final ArrayList<CharSequence> elements = new ArrayList<>();
-		entries.map(Arrays::asList).ifPresent(elements::addAll);
-		description.ifPresent(elements::add);
-		return elements;
+	private static List<CharSequence> concat(final Optional<CharSequence[]> elements,
+											 final Optional<? extends CharSequence>... evenMoreElements) {
+		final List<CharSequence> result = new ArrayList<>();
+		result.addAll(Lists.asList(elements));
+		result.addAll(Lists.getNonEmptyElements(Arrays.asList(evenMoreElements)));
+		return result;
 	}
 }
