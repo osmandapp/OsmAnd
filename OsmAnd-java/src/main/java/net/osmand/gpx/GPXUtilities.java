@@ -2155,8 +2155,9 @@ public class GPXUtilities {
 				if (prevValidIndex == -1 || nextValidIndex == -1) {
 					// outermost section without interpolation
 					for (int j = startIndex; j < pts.size(); j++) {
-						if (Double.isNaN(pts.get(j).ele)) {
-							pts.get(j).ele = startIndex == 0 ? nextValidElevation : prevValidElevation;
+						WptPt pt = pts.get(j);
+						if (Double.isNaN(pt.ele)) {
+							pt.ele = startIndex == 0 ? nextValidElevation : prevValidElevation;
 							processedPoints++;
 						} else {
 							break;
