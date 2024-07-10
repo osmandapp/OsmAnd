@@ -14,6 +14,7 @@ public interface IProfileAppearanceScreen extends IAskDismissDialog {
 	void goBackWithoutSaving();
 	void customProfileSaved();
 	void updateColorItems();
+	void updateOptionsCard();
 	void updateApplyButtonEnable();
 	void hideKeyboard();
 }

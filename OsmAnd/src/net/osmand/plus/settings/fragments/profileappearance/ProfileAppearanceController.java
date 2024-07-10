@@ -26,8 +26,12 @@ import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.ProfileIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
+import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.profileappearance.elements.ProfileIconPaletteElements;
 import net.osmand.plus.settings.fragments.profileappearance.elements.LocationIconPaletteElements;
 import net.osmand.plus.utils.FileUtils;
@@ -55,6 +59,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	private IconsPaletteController<Integer> profileIconCardController;
 	private IconsPaletteController<String> restingIconCardController;
 	private IconsPaletteController<String> navigationIconCardController;
+	private ProfileOptionsDialogController profileOptionsDialogController;
 
 	private final boolean isParentModeImported;
 	private final boolean isNewProfile;
@@ -91,6 +96,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 		changedProfile.routeService = profile.routeService;
 		changedProfile.locationIcon = profile.locationIcon;
 		changedProfile.navigationIcon = profile.navigationIcon;
+		changedProfile.viewAngleVisibility = profile.viewAngleVisibility;
+		changedProfile.locationRadiusVisibility = profile.locationRadiusVisibility;
 		isNewProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
 	}
 
@@ -125,6 +132,16 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@Nullable
 	public ApplicationMode getChangedAppMode() {
 		return ApplicationMode.valueOfStringKey(changedProfile.stringKey, null);
+	}
+
+	@NonNull
+	public MarkerDisplayOption getViewAngleVisibility(){
+		return changedProfile.viewAngleVisibility;
+	}
+
+	@NonNull
+	public MarkerDisplayOption getLocationRadiusVisibility(){
+		return changedProfile.locationRadiusVisibility;
 	}
 
 	public void askCloseScreen(@NonNull FragmentActivity activity) {
@@ -230,6 +247,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 			mode.updateCustomIconColor(changedProfile.customColor);
 			mode.setLocationIcon(changedProfile.locationIcon);
 			mode.setNavigationIcon(changedProfile.navigationIcon);
+			mode.setViewAngleVisibility(changedProfile.viewAngleVisibility);
+			mode.setLocationRadius(changedProfile.locationRadiusVisibility);
 			screen.onAskDismissDialog(PROCESS_ID);
 		}
 	}
@@ -246,7 +265,9 @@ public class ProfileAppearanceController extends BaseDialogController {
 				.setIconColor(changedProfile.color)
 				.setCustomIconColor(changedProfile.customColor)
 				.setLocationIcon(changedProfile.locationIcon)
-				.setNavigationIcon(changedProfile.navigationIcon);
+				.setNavigationIcon(changedProfile.navigationIcon)
+				.setViewAngle(changedProfile.viewAngleVisibility)
+				.setLocationRadius(changedProfile.locationRadiusVisibility);
 
 		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
@@ -430,6 +451,38 @@ public class ProfileAppearanceController extends BaseDialogController {
 			};
 		}
 		return exportListener;
+	}
+
+	@NonNull
+	public ProfileOptionsDialogController getProfileOptionController() {
+		if (profileOptionsDialogController == null) {
+			OsmandSettings settings = app.getSettings();
+			profileOptionsDialogController = new ProfileOptionsDialogController(app) {
+				@Override
+				public void onItemSelected(@NonNull MarkerDisplayOption displayOption, @NonNull CommonPreference<MarkerDisplayOption> preference) {
+					if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getId())) {
+						changedProfile.viewAngleVisibility = displayOption;
+					} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getId())) {
+						changedProfile.locationRadiusVisibility = displayOption;
+					}
+					screen.updateOptionsCard();
+					screen.updateApplyButtonEnable();
+				}
+
+				@Override
+				public MarkerDisplayOption getSelectedItem(@NonNull CommonPreference<MarkerDisplayOption> preference) {
+					MarkerDisplayOption option;
+					if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getId())) {
+						option = changedProfile.viewAngleVisibility;
+					} else {
+						option = changedProfile.locationRadiusVisibility;
+					}
+					return option;
+				}
+			};
+
+		}
+		return profileOptionsDialogController;
 	}
 
 	@NonNull

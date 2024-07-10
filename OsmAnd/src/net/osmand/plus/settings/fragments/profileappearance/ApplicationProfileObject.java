@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
@@ -25,6 +26,8 @@ class ApplicationProfileObject {
 	RouteService routeService;
 	String navigationIcon;
 	String locationIcon;
+	MarkerDisplayOption viewAngleVisibility;
+	MarkerDisplayOption locationRadiusVisibility;
 
 	@ColorInt
 	public int getActualColor(@NonNull Context context, boolean nightMode) {
@@ -53,6 +56,8 @@ class ApplicationProfileObject {
 		this.routeService = sourceMode.getRouteService();
 		this.locationIcon = sourceMode.getLocationIcon();
 		this.navigationIcon = sourceMode.getNavigationIcon();
+		this.viewAngleVisibility = sourceMode.getViewAngleVisibility();
+		this.locationRadiusVisibility = sourceMode.getLocationRadiusVisibility();
 	}
 
 	@Override
@@ -68,6 +73,8 @@ class ApplicationProfileObject {
 		if (parent != null ? !parent.equals(that.parent) : that.parent != null) return false;
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		if (color != that.color) return false;
+		if (viewAngleVisibility != that.viewAngleVisibility) return false;
+		if (locationRadiusVisibility != that.locationRadiusVisibility) return false;
 		if (customColor != null ? !customColor.equals(that.customColor) : that.customColor != null)
 			return false;
 		if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
@@ -89,6 +96,8 @@ class ApplicationProfileObject {
 		result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
 		result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
 		result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
+		result = 31 * result + (viewAngleVisibility != null ? viewAngleVisibility.hashCode() : 0);
+		result = 31 * result + (locationRadiusVisibility != null ? locationRadiusVisibility.hashCode() : 0);
 		return result;
 	}
 }

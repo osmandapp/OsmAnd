@@ -25,19 +25,16 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class ProfileOptionsController extends BaseDialogController implements IDisplayDataProvider, IDialogItemSelected {
+public class ProfileOptionsDialogController extends BaseDialogController implements IDisplayDataProvider, IDialogItemSelected {
 
 	public static final String PROCESS_ID = "profile_appearance_options_controller";
 
-	private final ApplicationMode appMode;
 	private String title;
 	private String description;
 	private CommonPreference<MarkerDisplayOption> preference;
 
-	public ProfileOptionsController(@NonNull OsmandApplication app,
-	                                @NonNull ApplicationMode appMode) {
+	public ProfileOptionsDialogController(@NonNull OsmandApplication app) {
 		super(app);
-		this.appMode = appMode;
 	}
 
 	@Override
@@ -49,7 +46,7 @@ public class ProfileOptionsController extends BaseDialogController implements ID
 	}
 
 	public MarkerDisplayOption getSelectedItem(@NonNull CommonPreference<MarkerDisplayOption> preference) {
-		return preference.getModeValue(appMode);
+		return preference.get();
 	}
 
 	public void onItemSelected(@NonNull MarkerDisplayOption displayOption, @NonNull CommonPreference<MarkerDisplayOption> preference) {
@@ -59,19 +56,18 @@ public class ProfileOptionsController extends BaseDialogController implements ID
 	@Override
 	public DisplayData getDisplayData(@NonNull String processId) {
 		boolean nightMode = isNightMode();
-		int profileColor = appMode.getProfileColor(nightMode);
-		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(TITLE, title);
 		displayData.putExtra(SUBTITLE, description);
-		displayData.putExtra(BACKGROUND_COLOR, profileColorAlpha);
+		displayData.putExtra(BACKGROUND_COLOR, activeColor);
 		displayData.putExtra(SHOW_BOTTOM_BUTTONS, true);
 		for (MarkerDisplayOption displayOption : MarkerDisplayOption.values()) {
 			displayData.addDisplayItem(new DisplayItem()
 					.setTitle(getString(displayOption.getNameRes()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
-					.setControlsColor(profileColor)
+					.setControlsColor(activeColor)
 					.setTag(displayOption));
 		}
 		displayData.putExtra(SELECTED_INDEX, getSelectedItem(preference).ordinal());
