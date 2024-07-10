@@ -72,7 +72,6 @@ public class RoutingHelper {
 
 	private LatLon finalLocation;
 	private List<LatLon> intermediatePoints;
-	private float lastBearing;
 	private Location lastProjection;
 	private Location lastFixedLocation;
 	private Location lastGoodRouteLocation;
@@ -333,9 +332,6 @@ public class RoutingHelper {
 		return voiceRouter;
 	}
 
-	public float getLastBearing() {
-		return lastBearing;
-	}
 	@Nullable
 	public Location getLastProjection() {
 		return lastProjection;
@@ -398,15 +394,10 @@ public class RoutingHelper {
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation,
 	                                    RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
-		float locationBearing = 0.0f;
-		if (locationProjection != null) {
-			locationProjection.getBearing();
-		}
 		if (isPublicTransportMode() && currentLocation != null && finalLocation != null &&
 				(targetPointsChanged || transportRoutingHelper.getStartLocation() == null)) {
 			lastFixedLocation = currentLocation;
 			lastProjection = locationProjection;
-			lastBearing = locationBearing;
 			transportRoutingHelper.setApplicationMode(mode);
 			transportRoutingHelper.setFinalAndCurrentLocation(finalLocation,
 					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()));
@@ -487,11 +478,6 @@ public class RoutingHelper {
 					Location currentRouteLocation = routeNodes.get(currentRoute);
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
 							currentRouteLocation);
-					if (Algorithms.objectEquals(previousRouteLocation, currentRouteLocation)) {
-						locationBearing = currentRouteLocation.getBearing();
-					} else {
-						locationBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
-					}
 					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
 						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
 						RoutingHelperUtils.approximateBearingIfNeeded(this,
@@ -502,7 +488,6 @@ public class RoutingHelper {
 			}
 			lastFixedLocation = currentLocation;
 			lastProjection = locationProjection;
-			lastBearing = locationBearing;
 			if (!route.isEmpty()) {
 				lastGoodRouteLocation = currentLocation;
 			}
