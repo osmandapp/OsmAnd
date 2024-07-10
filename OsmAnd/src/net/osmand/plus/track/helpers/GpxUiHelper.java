@@ -5,7 +5,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
@@ -86,7 +85,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GpxUiHelper {
 
@@ -519,8 +517,6 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
-		double lastHeight = HEIGHT_UNDEFINED;
-		double lastValidHeight = Double.NaN;
 		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
 		if (locations != null) {
 			Track track = new Track();
@@ -532,19 +528,7 @@ public class GpxUiHelper {
 				point.lon = l.getLongitude();
 				if (l.hasAltitude()) {
 					gpx.hasAltitude = true;
-					float h = (float) l.getAltitude();
-					point.ele = h;
-					lastValidHeight = h;
-					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
-						for (WptPt pt : pts) {
-							if (Double.isNaN(pt.ele)) {
-								pt.ele = h;
-							}
-						}
-					}
-					lastHeight = h;
-				} else {
-					lastHeight = HEIGHT_UNDEFINED;
+					point.ele = l.getAltitude();
 				}
 				if (pts.size() == 0) {
 					if (l.hasSpeed() && l.getSpeed() > 0) {
@@ -563,15 +547,7 @@ public class GpxUiHelper {
 				}
 				pts.add(point);
 			}
-			if (!Double.isNaN(lastValidHeight) && lastHeight == HEIGHT_UNDEFINED) {
-				for (ListIterator<WptPt> iterator = pts.listIterator(pts.size()); iterator.hasPrevious(); ) {
-					WptPt point = iterator.previous();
-					if (!Double.isNaN(point.ele)) {
-						break;
-					}
-					point.ele = lastValidHeight;
-				}
-			}
+			GPXUtilities.interpolateEmptyElevationWpts(pts);
 			track.segments.add(seg);
 			gpx.tracks.add(track);
 		}
