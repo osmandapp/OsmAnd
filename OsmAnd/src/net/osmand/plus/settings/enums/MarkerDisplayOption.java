@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum MarkerDisplayOption {
-	OFF(R.string.shared_string_off),
+	OFF(R.string.shared_string_off, MarkerState.None),
 	RESTING(R.string.resting_position, MarkerState.Stay),
 	NAVIGATION(R.string.navigation_position, MarkerState.Move),
 	RESTING_NAVIGATION(R.string.resting_navigation_position, MarkerState.Move, MarkerState.Stay);
@@ -23,10 +23,12 @@ public enum MarkerDisplayOption {
 
 	MarkerDisplayOption(@StringRes int nameRes, MarkerState... states) {
 		this.nameRes = nameRes;
-		markerStates = new ArrayList<>(Arrays.asList(states));
+		markerStates = Arrays.asList(states);
 	}
 
 	public boolean isVisible(@NonNull MarkerState markerState) {
+		if (this == OFF)
+			return false;
 		return markerStates.contains(markerState);
 	}
 

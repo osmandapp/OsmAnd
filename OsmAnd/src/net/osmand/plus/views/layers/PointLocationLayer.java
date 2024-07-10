@@ -573,13 +573,12 @@ public class PointLocationLayer extends OsmandMapLayer
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
 		Float bearing = getBearingToShow(lastKnownLocation);
-		MarkerState state = bearing != null ? MarkerState.Move : MarkerState.Stay;
-		if (shouldShowLocationRadius(state)) {
+		if (shouldShowLocationRadius(currentMarkerState)) {
 			drawLocationAccuracy(canvas, box, lastKnownLocation, locationX, locationY);
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			if (shouldShowHeading(state)) {
+			if (shouldShowHeading(currentMarkerState)) {
 				drawLocationHeading(canvas, locationX, locationY);
 			}
 			if (bearing != null) {
@@ -622,16 +621,16 @@ public class PointLocationLayer extends OsmandMapLayer
 			return;
 		}
 		MapRendererView mapRenderer = getMapRenderer();
+		boolean markersRecreated = false;
+		if (markersInvalidated || mapMarkersCollection == null) {
+			markersRecreated = recreateMarkerCollection();
+			markersInvalidated = false;
+		}
+		boolean showHeading = shouldShowHeading(currentMarkerState) && locationProvider.getHeading() != null;
+		boolean showBearing = shouldShowBearing(lastKnownLocation);
+		boolean stateUpdated = setMarkerState(showBearing ?
+				MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);
 		if (mapRenderer != null) {
-			boolean markersRecreated = false;
-			if (markersInvalidated || mapMarkersCollection == null) {
-				markersRecreated = recreateMarkerCollection();
-				markersInvalidated = false;
-			}
-			boolean showHeading = shouldShowHeading(currentMarkerState) && locationProvider.getHeading() != null;
-			boolean showBearing = shouldShowBearing(lastKnownLocation);
-			boolean stateUpdated = setMarkerState(showBearing ?
-					MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);
 			if (showHeading != showHeadingCached) {
 				showHeadingCached = showHeading;
 				if (!stateUpdated) {

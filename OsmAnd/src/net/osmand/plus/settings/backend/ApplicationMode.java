@@ -424,10 +424,8 @@ public class ApplicationMode {
 		}
 	}
 
-	public void setViewAngleVisibility(MarkerDisplayOption viewAngle) {
-		if (viewAngle != null) {
-			app.getSettings().VIEW_ANGLE_VISIBILITY.setModeValue(this, viewAngle);
-		}
+	public void setViewAngleVisibility(@NonNull MarkerDisplayOption viewAngle) {
+		app.getSettings().VIEW_ANGLE_VISIBILITY.setModeValue(this, viewAngle);
 	}
 
 	@NonNull
@@ -435,10 +433,8 @@ public class ApplicationMode {
 		return app.getSettings().VIEW_ANGLE_VISIBILITY.getModeValue(this);
 	}
 
-	public void setLocationRadius(MarkerDisplayOption locationRadius) {
-		if (locationRadius != null) {
-			app.getSettings().LOCATION_RADIUS_VISIBILITY.setModeValue(this, locationRadius);
-		}
+	public void setLocationRadius(@NonNull MarkerDisplayOption locationRadius) {
+		app.getSettings().LOCATION_RADIUS_VISIBILITY.setModeValue(this, locationRadius);
 	}
 
 	@NonNull
@@ -814,11 +810,11 @@ public class ApplicationMode {
 			this.navigationIcon = navIcon;
 			return this;
 		}
-		public ApplicationModeBuilder setViewAngle(MarkerDisplayOption viewAngle) {
+		public ApplicationModeBuilder setViewAngle(@NonNull MarkerDisplayOption viewAngle) {
 			this.viewAngle = viewAngle;
 			return this;
 		}
-		public ApplicationModeBuilder setLocationRadius(MarkerDisplayOption locationRadius) {
+		public ApplicationModeBuilder setLocationRadius(@NonNull MarkerDisplayOption locationRadius) {
 			this.locationRadius = locationRadius;
 			return this;
 		}
