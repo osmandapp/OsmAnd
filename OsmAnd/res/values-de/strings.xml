@@ -5827,5 +5827,5 @@
     <string name="navigation_position_icon_summary">Das Symbol wird angezeigt, während Sie navigieren oder sich bewegen.</string>
     <string name="navigation_position_icon">Symbol für die Navigationsposition</string>
     <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn Sie sich nicht bewegen.</string>
-    <string name="resting_position_icon">Symbol für die Sperrposition</string>
+    <string name="resting_position_icon">Symbol für die Ruheposition</string>
 </resources>
