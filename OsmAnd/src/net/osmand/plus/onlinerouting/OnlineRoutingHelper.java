@@ -273,4 +273,13 @@ public class OnlineRoutingHelper {
 			settings.ONLINE_ROUTING_ENGINES.set(null);
 		}
 	}
+
+	public boolean wasOnlineEngineWithApproximationUsed() {
+		for (OnlineRoutingEngine engine : cachedEngines.values()) {
+			if (engine.isOnlineEngineWithApproximation()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -110,6 +110,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return !Algorithms.isEmpty(value);
 	}
 
+	public boolean isOnlineEngineWithApproximation() {
+		return get(EngineParameter.CUSTOM_URL) != null && shouldApproximateRoute();
+	}
 
 	@Nullable
 	public String getApproximationRoutingProfile() {
