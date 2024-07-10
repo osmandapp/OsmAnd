@@ -112,7 +112,7 @@ public class BinaryMapPoiReaderAdapter {
 				tl = (id >> 1) & ((1 << 5) - 1);
 				sl = id >> 6;
 			} else {
-				tl = (id >> 1) & ((1 << 16) - 1);
+				tl = (id >> 1) & ((1 << 15) - 1);
 				sl = id >> 16;
 			}
 			if (subTypes.size() > tl) {
