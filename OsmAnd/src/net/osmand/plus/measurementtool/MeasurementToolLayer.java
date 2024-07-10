@@ -378,6 +378,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			clearCachedCounters();
 			clearCachedRenderables();
 			clearPointsProvider();
+			clearXAxisPoints();
+			setHighlightedPointMarkerVisibility(false);
 			multiProfileGeometry.clearWay();
 		}
 		mapActivityInvalidated = false;
@@ -974,14 +976,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					&& (highlightedPosition.getX() != highlightedMarkerPosition.getX()
 					|| highlightedPosition.getY() != highlightedMarkerPosition.getY());
 			if (highlightedPosition == null) {
-				if (highlightedPointMarker != null) {
-					highlightedPointMarker.setIsHidden(true);
-				}
+				setHighlightedPointMarkerVisibility(false);
 			} else if (highlightedPositionChanged) {
-				if (highlightedPointMarker != null) {
-					highlightedPointMarker.setPosition(highlightedPosition);
-					highlightedPointMarker.setIsHidden(false);
-				}
+				setHighlightedPointMarkerPosition(highlightedPosition);
+				setHighlightedPointMarkerVisibility(true);
 			}
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
 			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints)
@@ -998,9 +996,20 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			xAxisPointsCached = new ArrayList<>();
 			clearXAxisPoints();
-			if (highlightedPointMarker != null) {
-				highlightedPointMarker.setIsHidden(true);
-			}
+			setHighlightedPointMarkerVisibility(false);
+		}
+	}
+
+	private void setHighlightedPointMarkerPosition(PointI position) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && highlightedPointMarker != null) {
+			highlightedPointMarker.setPosition(position);
+		}
+	}
+
+	private void setHighlightedPointMarkerVisibility(boolean visible) {
+		if (highlightedPointMarker != null) {
+			highlightedPointMarker.setIsHidden(!visible);
 		}
 	}
 

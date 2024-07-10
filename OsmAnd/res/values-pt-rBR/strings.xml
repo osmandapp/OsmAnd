@@ -645,7 +645,7 @@
     <string name="osmand_background_plugin_description">Mostrar configurações para ativar o rastreamento e navegação em segundo plano, ativando periodicamente o dispositivo GPS (com tela desligada).</string>
     <string name="contribution_activity">Instalar a versão</string>
     <string name="choose_osmand_theme_descr">Personalizar a aparência do aplicativo.</string>
-    <string name="choose_osmand_theme">Tema</string>
+    <string name="choose_osmand_theme">Tema do aplicativo</string>
     <string name="accessibility_options">Opções de acessibilidade</string>
     <string name="select_address_activity">Especificar o endereço</string>
     <string name="favourites_list_activity">Selecionar favorito</string>
@@ -5501,23 +5501,27 @@
     <string name="shared_string_show_less">Mostrar menos</string>
     <string name="key_event_action_next_app_profile">Perfil do aplicativo seguinte</string>
     <string name="folder">Pasta</string>
-    <string name="release_4_6">• Adicionada capacidade de alterar os atalhos de teclas para dispositivos de entrada externos
+    <string name="release_4_6">- Android Auto: Adicionado o modo 3D
 \n
-\n• Adicionado widget \"Rácio de planar\"
+\n - Faixas: Introdução de filtros e pastas inteligentes, memória otimizada para arquivos maiores
 \n
-\n• Filtros adicionados e pastas inteligentes para trilhas
+\n - Painéis de widgets superior e inferior aprimorados para acomodar todos os widgets
 \n
-\n• Linhas adicionadas aos painéis de widgets no topo e em baixo com suporte para todos os widgets
+\n - Gerenciamento aprimorado de recursos locais
 \n
-\n• Adicionado suporte a ANT + widget de temperatura
+\n - Mapeamento de botões personalizável para controladores externos
 \n
-\n• Melhor gestão de memória para trilhos GPX grandes
+\n - Novos widgets: \"Glide Ratio\" e \"Posição do sol\".
 \n
-\n• Gestão de recursos locais atualizada em \"Descarregamentos\"
+\n - OsmAnd Cloud: Agora, acesse arquivos excluídos
 \n
-\n• Adicionado widget \"RAM disponível\"
+\n - Coloração aprimorada da trilha no modo Slope com novo gradiente simétrico
 \n
-\n• Problemas corrigidos com a barra de estado transparente
+\n - Problemas resolvidos com a barra de status transparente
+\n
+\n - Adicionado suporte para o widget de temperatura ANT+
+\n
+\n - Introduzido o widget \"RAM disponível\".
 \n
 \n</string>
     <plurals name="tracks">
@@ -5633,17 +5637,19 @@
 \n
 \n - Adicionados filtros por dados do sensor para trilhas
 \n
+\n - Personalização aprimorada da aparência do grupo de trilhas
+\n
 \n - Adicionado suporte para etiquetas GPX adicionais
 \n
 \n - Personalização da \"Distância durante a navegação\": escolha entre números exatos ou arredondados
 \n
-\n - Interface unificada para seleção de trilhos
+\n - Interface unificada para seleção de trilhas
 \n
 \n - Entrada do OpenStreetMap alterado para OAuth 2.0
 \n
 \n</string>
     <string name="shared_string_changes">Alterações</string>
-    <string name="maps_that_also_be_used">Mapas que também podem ser usados: %1$s</string>
+    <string name="maps_that_also_be_used">Mapas que também serão usados: %1$s</string>
     <string name="getting_list_of_required_maps">Obtendo uma lista de mapas necessários…</string>
     <string name="required_maps_calculate_online_summary">A lista de mapas ausentes é baseada na rota em linha reta. Para obter uma lista precisa de mapas, o OsmAnd pode pré-calcular sua rota online.</string>
     <string name="required_maps">Mapas obrigatórios</string>
@@ -5665,7 +5671,29 @@
     <string name="title_3d_track">Trilha 3D</string>
     <string name="use_terrain_maps_summary">Usa mapas de terreno para dados de elevação. A geometria da trilha permanece inalterada.</string>
     <string name="use_terrain_maps">Usar mapas de terreno</string>
-    <string name="release_4_8">• Estar preparado para 4.8</string>
+    <string name="release_4_8">- Nova opção de coloração de terreno \"Altitude\"
+\n
+\n - Paletas de cores personalizadas para terreno, trilhas e rotas
+\n
+\n - Variante 3D para ícones de posição de localização
+\n
+\n - As ações rápidas agora podem ser atribuídas a teclados externos
+\n
+\n - Clima: Atualização da interface do usuário, adição de animação de vento
+\n
+\n - Melhorias na trilha 3D: novas opções de visualização e coloração
+\n
+\n - Seleção ampliada de rotas turísticas no mapa
+\n
+\n - Adicionada a opção de tema do aplicativo para seguir o modo de mapa
+\n
+\n - Correção das estatísticas de trilha, classificação e pesquisa
+\n
+\n - Edição do OSM: método de autorização de login/senha excluído
+\n
+\n - Mudança para a planilha de compartilhamento do sistema a partir do Android 14
+\n
+\n</string>
     <string name="track_vertical_exaggeration_description">Ao alterar o valor da escala, você pode alterar a altura da trilha 3D.</string>
     <string name="visualized_by">Visualizado por</string>
     <string name="track_line">Linha da trilha</string>
@@ -5701,4 +5729,79 @@
     <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
     <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
     <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
+    <string name="missing_maps_ignore">Usar mapas baixados</string>
+    <string name="rendering_value_dark_orange_name">Laranja escuro</string>
+    <string name="user_palette">Paleta do usuário</string>
+    <string name="shared_string_create">Criar</string>
+    <string name="shared_string_replace">Substituir</string>
+    <string name="shared_string_simulate">Simular</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Alterar</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="quick_action_remove_next_destination">Próximo ponto de destino</string>
+    <string name="quick_action_map_overlay">Sobreposição</string>
+    <string name="quick_action_map_style">Estilo do mapa</string>
+    <string name="daynight_mode_app_theme">Tema do aplicativo</string>
+    <string name="key_event_action_continuous_zoom_out">Diminuição contínua do zoom</string>
+    <string name="key_event_action_continuous_zoom_in">Aumento contínuo do zoom</string>
+    <string name="map_settings_weather_wind_animation">Animação do vento</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="weather_data_sources_prompt">OsmAnd fornece a previsão meteorológica de duas fontes:</string>
+    <string name="weather_source_ecmwf_description">Centro Europeu de Previsões Meteorológicas de Médio Prazo</string>
+    <string name="weather_source_GFS_description">Sistema de Previsão Global dos Centros Nacionais de Previsão Ambiental</string>
+    <string name="wall_height">Altura da parede</string>
+    <string name="shared_string_colors">Cores</string>
+    <string name="clear_key_assignment_summary">A atribuição de teclas para a ação selecionada será apagada.</string>
+    <string name="app_profile">Perfil do aplicativo</string>
+    <string name="quick_action_parking_place">Lugar de estacionamento</string>
+    <string name="quick_action_verb_pause_resume">Pausa / Retomar</string>
+    <string name="quick_action_verb_turn_on_off">Ligar / Desligar</string>
+    <string name="weather_screen">Tela de clima</string>
+    <string name="key_assignment_add_action">Adicionar ação</string>
+    <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \'Adicionar\'.</string>
+    <string name="assigned_keys">Teclas atribuídas</string>
+    <string name="energy_avg_info">Estatísticas de energia (média de 1 / 5 / 15 minutos)</string>
+    <string name="quick_action_to_my_location">Para o meu local</string>
+    <string name="quick_action_move_map_left">Mapa à esquerda</string>
+    <string name="quick_action_previous_app_profile">Perfil do aplicativo para o anterior</string>
+    <string name="quick_action_move_map_right">Mapa à direita</string>
+    <string name="quick_action_next_app_profile">Perfil do aplicativo para o próximo</string>
+    <string name="quick_action_display_position_in_center">Posição da tela sempre no centro</string>
+    <string name="quick_action_video_note">Nota de vídeo</string>
+    <string name="quick_action_photo_note">Nota de foto</string>
+    <string name="quick_action_verb_start_stop">Iniciar / Parar</string>
+    <string name="missing_maps_ignore_details">Os mapas baixados cobrem sua rota? Navegue com eles se você estiver familiarizado com a área.</string>
+    <string name="clear_all_key_shortcuts_summary">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
+    <string name="play_weather_forecast">Reproduzir a previsão do tempo</string>
+    <string name="rendering_avg_info">Estatísticas de renderização (média de 1 / 5 / 15 minutos)</string>
+    <string name="quick_action_location_by_gpx">Local por GPX</string>
+    <string name="quick_action_terrain_color_scheme">Esquema de cores do terreno</string>
+    <string name="quick_action_directions_from">Ponto inicial</string>
+    <string name="quick_action_destination">Destino</string>
+    <string name="quick_action_move_map_up">Mapa para cima</string>
+    <string name="quick_action_move_map_down">Mapa para baixo</string>
+    <string name="quick_action_new_route">Nova rota</string>
+    <string name="shared_string_set">Definir</string>
+    <string name="quick_action_terrain">Tipo de colorização do terreno</string>
+    <string name="quick_action_audio_note">Nota de áudio</string>
+    <string name="quick_action_first_intermediate">Primeiro intermediário</string>
+    <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
+    <string name="no_assigned_keys">Nenhuma tecla atribuída</string>
+    <string name="key_assignment_add_key">Adicionar tecla</string>
+    <string name="key_name_pattern">Tecla \"%1$s\"</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="action_icon">Ícone de ação</string>
+    <string name="new_key_assignment">Nova atribuição de tecla</string>
+    <string name="backup_error_failed_to_transfer_file">Falha ao transferir arquivo(s) da nuvem.</string>
+    <string name="daynight_mode_night_summary">Sempre exibe o mapa em um tema escuro, adequado para condições noturnas ou de baixa luminosidade.</string>
+    <string name="daynight_mode_day_summary">Sempre exibe o mapa em um tema claro, ideal para visibilidade durante o dia.</string>
+    <string name="remove_key_assignment_summary">A atribuição de tecla para a ação selecionada será removida.</string>
+    <string name="remove_key_assignment">Remover atribuição de tecla</string>
+    <string name="daynight_mode_app_theme_summary">A exibição do mapa se alinha ao tema geral do aplicativo - modo dia para um tema claro e modo noite para um tema escuro</string>
+    <string name="daynight_mode_sensor_summary">Usa o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Alterna automaticamente entre temas claro e escuro com base nos horários locais do nascer e do pôr do sol.</string>
+    <string name="clear_all_key_shortcuts">Limpar todos os atalhos de teclas</string>
+    <string name="data_source">Fonte de dados</string>
+    <string name="contact_support_retry">Tente novamente ou entre em contato com o suporte</string>
+    <string name="choose_map_orientation">Escolha a orientação do mapa</string>
 </resources>

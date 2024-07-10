@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,22 +17,36 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	public static final int DEFAULT_MODE = 0;
+	public static final int SEARCH_MODE = 1;
+	public static final int CATEGORY_MODE = 2;
+
+	@IntDef(value = {DEFAULT_MODE, SEARCH_MODE, CATEGORY_MODE})
+
+	@Retention(RetentionPolicy.SOURCE)
+	public @interface QuickActionAdapterMode {
+	}
+
 	private final OsmandApplication app;
 	private final Map<QuickActionType, List<QuickActionType>> quickActionsMap = new HashMap<>();
 	private final List<ListItem> items = new ArrayList<>();
-	private boolean searchMode = false;
 	private String filterQuery;
 
 	private final ItemClickListener listener;
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
-	private boolean categoryMode = false;
+
+	@QuickActionAdapterMode
+	private int mode;
 
 	public AddQuickActionsAdapter(@NonNull OsmandApplication app, @NonNull Context context, @Nullable ItemClickListener listener, boolean nightMode) {
 		this.app = app;
@@ -49,14 +64,14 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	public void setItems(@NonNull List<QuickActionType> actionItems) {
 		this.items.clear();
 		actionItems.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
-		if (actionItems.size() > 0) {
+		if (!actionItems.isEmpty()) {
 			items.add(new ListItem(ItemType.LIST_DIVIDER));
 		}
 		fillItems(actionItems);
 	}
 
-	public void setCategoryMode(boolean categoryMode){
-		this.categoryMode = categoryMode;
+	public void setAdapterMode(@QuickActionAdapterMode int mode){
+		this.mode = mode;
 	}
 
 	private void fillItems(@NonNull List<QuickActionType> typeActions) {
@@ -67,7 +82,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private void setItemsFromMap() {
 		items.clear();
-		if (searchMode) {
+		if (mode == SEARCH_MODE) {
 			List<QuickActionType> sortedActions = new ArrayList<>();
 			for (List<QuickActionType> typeActions : quickActionsMap.values()) {
 				if (Algorithms.isEmpty(filterQuery)) {
@@ -129,14 +144,14 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			QuickActionType item = (QuickActionType) items.get(position).value;
 			boolean lastItem = position == getItemCount() - 1;
 			int descriptionCount = 0;
-			if (!searchMode && item.getId() == 0) {
+			if (mode == DEFAULT_MODE && item.getId() == 0) {
 				List<QuickActionType> typeActions = quickActionsMap.get(item);
 				if (typeActions != null) {
 					descriptionCount = typeActions.size();
 				}
 			}
 			QuickActionViewHolder viewHolder = (QuickActionViewHolder) holder;
-			viewHolder.bindView(item, descriptionCount, lastItem, categoryMode);
+			viewHolder.bindView(item, descriptionCount, lastItem, mode);
 			viewHolder.itemView.setOnClickListener(v -> {
 				int adapterPosition = holder.getAdapterPosition();
 				if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
@@ -152,12 +167,12 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	}
 
 	public void setSearchMode(boolean searchMode) {
-		this.searchMode = searchMode;
+		mode = searchMode ? SEARCH_MODE : DEFAULT_MODE;
 		setItemsFromMap();
 		notifyDataSetChanged();
 	}
 
-	private class ListDivider extends RecyclerView.ViewHolder {
+	private static class ListDivider extends RecyclerView.ViewHolder {
 
 		public ListDivider(View itemView) {
 			super(itemView);

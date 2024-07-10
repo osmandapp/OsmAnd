@@ -103,8 +103,12 @@ public class ColorPalette {
 	public String toString() {
 		return writeColorPalette();
 	}
-	
+
 	public String writeColorPalette() {
+		return writeColorPalette(colors);
+	}
+
+	public static String writeColorPalette(List<ColorValue> colors) {
 		StringBuilder bld = new StringBuilder();
 		for (ColorValue v : colors) {
 			bld.append(v.val).append(",");
@@ -127,8 +131,8 @@ public class ColorPalette {
 		public final int g;
 		public final int b;
 		public final int a;
-		public final double val;
 		public final int clr;
+		public double val;
 
 		public ColorValue(double val, int r, int g, int b, int a) {
 			this.r = r;
@@ -139,12 +143,20 @@ public class ColorPalette {
 			this.val = val;
 		}
 
+		public ColorValue(int clr) {
+			this(0, clr);
+		}
+
 		public ColorValue(double val, int clr) {
 			this.r = red(clr);
 			this.g = green(clr);
 			this.b = blue(clr);
 			this.a = alpha(clr);
 			this.clr = clr;
+			this.val = val;
+		}
+
+		public void setValue(double val) {
 			this.val = val;
 		}
 
@@ -178,15 +190,18 @@ public class ColorPalette {
 		palette.sortPalette();
 		return palette;
 	}
-	
-
 	public static ColorPalette parseColorPalette(Reader reader) throws IOException {
+		return parseColorPalette(reader, new ArrayList<>(), true);
+	}
+
+	public static ColorPalette parseColorPalette(Reader reader, List<String> comments, boolean shouldSort) throws IOException {
 		ColorPalette palette = new ColorPalette();
 		BufferedReader r = new BufferedReader(reader);
 		String line;
 		while ((line = r.readLine()) != null) {
 			String t = line.trim();
 			if (t.startsWith("#")) {
+				comments.add(t);
 				continue;
 			}
 			String[] values = t.split(",");
@@ -201,7 +216,9 @@ public class ColorPalette {
 				}
 			}
 		}
-		palette.sortPalette();
+		if (shouldSort) {
+			palette.sortPalette();
+		}
 		return palette;
 	}
 

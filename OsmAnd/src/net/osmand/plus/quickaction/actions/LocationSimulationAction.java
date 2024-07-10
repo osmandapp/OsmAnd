@@ -306,7 +306,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
 			return app.getString(R.string.stop_navigation_service);

@@ -2,6 +2,9 @@ package net.osmand.plus.quickaction;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
+import static net.osmand.plus.quickaction.AddQuickActionsAdapter.CATEGORY_MODE;
+import static net.osmand.plus.quickaction.AddQuickActionsAdapter.SEARCH_MODE;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.AddQuickActionsAdapter.QuickActionAdapterMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,9 +50,9 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 		itemView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
-	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem, boolean categoryMode) {
-		boolean showActionNameRes = categoryMode;
-		if (categoryMode) {
+	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem, @QuickActionAdapterMode int mode) {
+		boolean showActionNameRes = mode == SEARCH_MODE || mode == CATEGORY_MODE;
+		if (showActionNameRes) {
 			int actionNameRes = type.getActionNameRes();
 			if (actionNameRes != 0) {
 				title.setText(app.getString(type.getActionNameRes()));
@@ -62,6 +66,8 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 			description.setTextSize(COMPLEX_UNIT_SP, 16);
 			description.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 		} else {
+			title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+			title.setTextSize(COMPLEX_UNIT_SP, 16);
 			title.setText(type.getFullName(app));
 		}
 

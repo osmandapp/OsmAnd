@@ -5658,7 +5658,29 @@
     <string name="rendering_value_managerName_name">За іменем менеджера</string>
     <string name="max_sensor_bycicle_power">Максимальна потужність велосипеда</string>
     <string name="avg_sensor_speed">Середня швидкість датчика</string>
-    <string name="release_4_8">• Бути готовим до 4.8</string>
+    <string name="release_4_8">• Нова опція забарвлення місцевості \"Висота\"
+\n
+\n • Власні палітри кольорів для місцевості, треків та маршрутів
+\n
+\n • 3D-варіант для піктограм локації
+\n
+\n • Швидкі дії тепер можна призначати на зовнішні клавіатури
+\n
+\n • Погода: Оновлення інтерфейсу, додано анімацію вітру
+\n
+\n • Удосконалення 3D-треків: нові можливості візуалізації та розфарбовування
+\n
+\n • Розширено вибір туристичних маршрутів на мапі
+\n
+\n • Додано опцію зміни теми застосунку залежно від режиму мапи
+\n
+\n • Виправлено статистику треків, сортування та пошук
+\n
+\n • Редагування OSM: видалено метод авторизації через ім\'я/пароль
+\n
+\n • Перехід до системного файлу спільного доступу, починаючи з Android 14
+\n
+\n</string>
     <string name="shared_string_additional">Додатково</string>
     <string name="distance_during_navigation_description">Виберіть спосіб показу інформації про відстань у віджетах навігації (відстань до точки, наступного повороту, смуги руху).
 \n
@@ -5706,15 +5728,15 @@
     <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
     <string name="missing_maps_header">Зниклі або неактуальні мапи</string>
     <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
-    <string name="track_vertical_exaggeration_description">Змінюючи значення масштабу, ви можете змінювати висоту 3D-доріжки.</string>
+    <string name="track_vertical_exaggeration_description">Змінюючи масштаб, ви можете змінювати висоту 3D-трека.</string>
     <string name="gpx_approximation_geo_cpp">На основі геометрії (C++, швидко)</string>
     <string name="allow_display_on_top">Дозволити показ зверху</string>
     <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="show_debug_info">Показати інформацію про налагодження</string>
-    <string name="show_debug_info_description">Відображати графічну інформацію про розміщення кожного тексту на карті</string>
+    <string name="show_debug_info_description">Показувати графічну інформацію про розміщення кожного тексту на мапі</string>
     <string name="map_text">Тексти мап</string>
-    <string name="routing_attr_avoid_cobblestone_name">Уникайте бруківки</string>
-    <string name="routing_attr_avoid_cobblestone_description">Уникайте бруківки</string>
+    <string name="routing_attr_avoid_cobblestone_name">Уникати бруківки</string>
+    <string name="routing_attr_avoid_cobblestone_description">Уникати бруківки</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
     <string name="disable_map_layers_descr">Вимкнути всі шари мапи над векторною мапою (потрібен перезапуск).</string>
     <string name="steps_per_minute_unit">Кроки/хв</string>
@@ -5736,7 +5758,7 @@
     <string name="key_assignment_add_key">Додати кнопку</string>
     <string name="action_icon">Піктограма дії</string>
     <string name="key_assignment_add_action">Додати дію</string>
-    <string name="missing_maps_ignore">Використати існуючі мапи</string>
+    <string name="missing_maps_ignore">Використати завантажені мапи</string>
     <string name="backup_error_failed_to_transfer_file">Помилка перенесення хмарного файлу(ів).</string>
     <string name="contact_support_retry">Спробуйте ще раз або зверніться до служби підтримки</string>
     <string name="shared_string_colors">Кольори</string>
@@ -5793,6 +5815,22 @@
     <string name="shared_string_replace">Замінити</string>
     <string name="quick_action_audio_note">Аудіо нотатка</string>
     <string name="quick_action_map_style">Стиль мапи</string>
-    <string name="missing_maps_ignore_details">Деякі вже завантажені мапи можуть підійти для вашого маршруту. Якщо ви знайомі з місцевістю і мапами, ви можете спробувати прокласти маршрут, використовуючи наявні мапи.</string>
+    <string name="missing_maps_ignore_details">Завантажені карти покривають ваш маршрут? Орієнтуйтеся за ними, якщо ви знайомі з місцевістю.</string>
     <string name="quick_action_location_by_gpx">Розташування за GPX</string>
+    <string name="energy_avg_info_description">Розряджання акумулятора на хвилину: %1$s
+\nСпоживання енергії (мАг): %2$s</string>
+    <string name="rendering_avg_info">Статистика рендерингу (в середньому 1/5/15 хвилин)</string>
+    <string name="rendering_avg_info_description">FPS за останніми 1k кадрами: %1$s
+\nЦП базовий: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Статистика споживання енергії (в середньому 1/5/15 хвилин)</string>
+    <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
+    <string name="shared_string_all_icons">Усі піктограми</string>
+    <string name="profile_icon">Піктограма профілю</string>
+    <string name="navigation_position_icon">Піктограма позиції розташування</string>
+    <string name="resting_position_icon_summary">Піктограма показується, коли ви не рухаєтеся.</string>
+    <string name="resting_position_icon">Піктограма положення у стані спокою</string>
+    <string name="rendering_value_pale_name">Блідий</string>
+    <string name="navigation_position_icon_summary">Піктограма показується під час навігації або руху.</string>
 </resources>

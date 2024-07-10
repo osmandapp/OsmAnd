@@ -56,7 +56,7 @@ public class DayNightModeAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		if (app.getDaynightHelper().isNightMode()) {
 			return String.format(app.getString(R.string.quick_action_day_night_mode),
 				DayNightMode.DAY.toHumanString(app));

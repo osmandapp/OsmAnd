@@ -10,13 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="resting_position">Resting position</string>
-    <string name="navigation_position">Navigation position</string>
-    <string name="resting_navigation_position">Rest &amp; navigation position</string>
-    <string name="view_angle_description">Displays the cone-shaped area you\'re currently facing</string>
-    <string name="view_angle">View angle</string>
-    <string name="location_radius_description">Shows the circular area representing your current location accuracy</string>
-    <string name="location_radius">Location radius</string>
+	<string name="resting_position">Resting position</string>
+	<string name="navigation_position">Navigation position</string>
+	<string name="resting_navigation_position">Rest &amp; navigation position</string>
+	<string name="view_angle_description">Displays the cone-shaped area you\'re currently facing</string>
+	<string name="view_angle">View angle</string>
+	<string name="location_radius_description">Shows the circular area representing your current location accuracy</string>
+	<string name="location_radius">Location radius</string>
+    <string name="rendering_value_pale_name">Pale</string>
+    <string name="choose_map_orientation">Choose map orientation</string>
+    <string name="energy_avg_info">Energy statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="energy_avg_info_description">Battery level per minute: %1$s\nEnergy consumption (mAh): %2$s</string>
+    <string name="rendering_avg_info">Rendering statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="rendering_avg_info_description">FPS by last 1k frames: %1$s\nCPU basic: %2$s\nGPU 1k: %3$s\nIDLE 1k: %4$s</string>
     <string name="quick_action_location_by_gpx">Location by GPX</string>
     <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
     <string name="quick_action_directions_from">Start point</string>
@@ -51,6 +57,13 @@
     <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Weather screen</string>
+
+    <string name="shared_string_all_icons">All icons</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>
+    <string name="navigation_position_icon">Navigation position icon</string>
+    <string name="resting_position_icon_summary">Icon displayed when you\'re not moving.</string>
+    <string name="resting_position_icon">Resting position icon</string>
     <string name="data_source">Data Source</string>
     <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
     <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
@@ -70,8 +83,8 @@
     <string name="map_settings_weather_wind_animation">Wind animation</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="shared_string_modify">Modify</string>
-    <string name="missing_maps_ignore">Use existing maps</string>
-    <string name="missing_maps_ignore_details">Some already downloaded maps might be suitable for your route. If you are familiar with the area and the maps, you can try routing using the existing maps.</string>
+    <string name="missing_maps_ignore">Use downloaded maps</string>
+    <string name="missing_maps_ignore_details">Downloaded maps cover your route? Navigate with them if you\'re familiar with the area.</string>
     <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
@@ -105,7 +118,17 @@
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
-        • To be prepared for 4.8
+        • New terrain colorization option \"Altitude\"\n\n
+        • Custom color palettes for terrain, tracks, and routes\n\n
+        • 3D variant for location position icons\n\n
+        • Quick Actions can now be assigned to external keyboards\n\n
+        • Weather: UI refresh, added wind animation\n\n
+        • 3D Track Improvements: new visualization and colorization options\n\n
+        • Expanded selection of tourist routes on the map\n\n
+        • Added app theme option to follow map mode\n\n
+        • Fixed track stats, sorting &amp; search\n\n
+        • OSM Editing: deleted login / password authorization method\n\n
+        • Switching to system share sheet starting Android 14\n\n
     </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>

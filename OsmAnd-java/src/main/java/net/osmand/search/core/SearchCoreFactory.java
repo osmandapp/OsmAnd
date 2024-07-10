@@ -1066,6 +1066,9 @@ public class SearchCoreFactory {
 		}
 
 		public void searchTopIndexPoiAdditional(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if (phrase.isEmpty()) {
+				return;
+			}
 			initPoiAdditionalTopIndex(phrase);
 			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI);
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();

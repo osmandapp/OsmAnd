@@ -5115,4 +5115,12 @@
     <string name="key_event_action_activity_back_pressed">Націснута кнопка назад</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Адкрыць набор даных WunderLINQ</string>
     <string name="change_key_binding">Змяніць прывязку клавіш</string>
+    <string name="round_up">Акругленая</string>
+    <string name="fix_north_up">Зафіксаваць поўнач зверху</string>
+    <string name="maps_and_resources">Мапы і рэсурсы</string>
+    <string name="distance_during_navigation">Адлегласць падчас навігацыі</string>
+    <string name="precise">Дакладная</string>
+    <string name="distance_during_navigation_description">Выберыце спосаб адлюстравання інфармацыі аб адлегласці ў віджэтах навігацыі (адлегласць да пункту прызначэння, наступнага павароту, паласы).
+\n
+\n Выберыце «%1$s» для дакладных лічбаў або «%2$s» для больш зручнай чытальнасці.</string>
 </resources>

@@ -5213,7 +5213,7 @@
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
     <string name="external_sensors_not_found">Sensores no encontrados</string>
-    <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="external_sensors_source_of_data">Proveedor de datos</string>
     <string name="calculate_offline">Calcular sin conexión</string>
     <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa topográfico (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
@@ -5557,7 +5557,7 @@
     <string name="row_number">Fila %1$s</string>
     <string name="see_all_plans">Ver todos los planes</string>
     <string name="key_assignments">Asignaciones de teclas</string>
-    <string name="reset_key_assignments_desc">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
     <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
     <string name="topography_maps">Mapas topográficos</string>
     <string name="lang_zh_hans">Chino simplificado</string>
@@ -5687,10 +5687,10 @@
     <string name="key_assignment_add_key">Añadir tecla</string>
     <string name="apply_only_to_new">Aplicar sólo para nuevos</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
-    <string name="missing_maps_ignore">Ignorar mapas faltantes</string>
+    <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="shared_string_colors">Colores</string>
     <string name="clear_key_assignment_summary">La asignación de tecla para la acción elegida, será vaciada.</string>
-    <string name="clear_all_key_shortcuts_summary">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
     <string name="getting_list_of_required_maps">Obteniendo una lista de mapas necesarios…</string>
     <string name="bottom">Abajo</string>
     <string name="top_and_bottom">Arriba y abajo</string>
@@ -5738,15 +5738,15 @@
     <string name="daynight_mode_night_summary">Siempre muestra el mapa con el tema oscuro, adecuado para las condiciones nocturnas o de baja iluminación.</string>
     <string name="daynight_mode_day_summary">Siempre muestra el mapa con el tema claro, ideal con la luz del día.</string>
     <string name="daynight_mode_app_theme">Aspecto de la aplicación</string>
-    <string name="key_event_action_continuous_zoom_out">Alejar siempre</string>
+    <string name="key_event_action_continuous_zoom_out">Alejamiento continuo</string>
     <string name="tomorrow">Mañana</string>
     <string name="user_palette">Paleta del usuario</string>
-    <string name="key_event_action_continuous_zoom_in">Acercar siempre</string>
+    <string name="key_event_action_continuous_zoom_in">Acercamiento continuo</string>
     <string name="remove_key_assignment_summary">Se quitará la asignación de tecla para la acción elegida.</string>
     <string name="remove_key_assignment">Quitar asignación de tecla</string>
     <string name="map_settings_weather_wind_animation">Animación del viento</string>
     <string name="shared_string_modify">Editar</string>
-    <string name="clear_all_key_shortcuts">Vaciar todos los atajos de teclas</string>
+    <string name="clear_all_key_shortcuts">Vaciar asignaciones de tecla</string>
     <string name="new_key_assignment">Nueva asignación de tecla</string>
     <string name="key_assignment_add_action">Añadir acción</string>
     <string name="action_icon">Añadir icono</string>
@@ -5756,8 +5756,80 @@
     <string name="map_text">Textos del mapa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar adoquinado</string>
     <string name="routing_attr_avoid_cobblestone_description">Evita pasar por caminos adoquinados</string>
-    <string name="release_4_8">• Prepárate para la versión 4.8</string>
+    <string name="release_4_8">• Nueva opción de coloración del terreno «Altitud»
+\n
+\n• Paletas de colores personalizadas para el terreno, las trazas y las rutas
+\n
+\n• Se ha añadido una variante en 3D, para los iconos de la ubicación
+\n
+\n• Las acciones rápidas ahora se pueden asignar a teclados externos
+\n
+\n• Meteorología: actualización de la interfaz de usuario y adición de la animación del viento
+\n
+\n• Se han mejorado las trazas en 3D: nuevas opciones de visualización y coloración
+\n
+\n• Se han ampliado las rutas turísticas en el mapa
+\n
+\n• Se ha añadido la opción de aspecto de la aplicación, para seguir el modo del mapa
+\n
+\n• Se han corregido las estadísticas de las trazas, el ordenamiento y la búsqueda
+\n
+\n• Edición de OSM: se ha borrado el método de autorización de usuario / contraseña
+\n
+\n• Desde Android 14, se ha cambiado el modo para compartir del sistema
+\n
+\n</string>
     <string name="allow_display_on_top">Permitir superposición de elementos</string>
     <string name="allow_display_on_top_description">Permite mostrar los textos del mapa encima del otro</string>
     <string name="show_debug_info">Mostrar información de depuración</string>
+    <string name="quick_action_map_style">Estilo del mapa</string>
+    <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
+    <string name="app_profile">Perfil de la aplicación</string>
+    <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
+    <string name="shared_string_set">Definir</string>
+    <string name="quick_action_terrain">Tipo de coloreado del terreno</string>
+    <string name="quick_action_first_intermediate">Primer destino intermedio</string>
+    <string name="quick_action_map_underlay">Capa subyacente</string>
+    <string name="quick_action_location_by_gpx">Ubicación por GPX</string>
+    <string name="quick_action_terrain_color_scheme">Esquema de color del terreno</string>
+    <string name="quick_action_directions_from">Punto de inicio</string>
+    <string name="quick_action_destination">Destino</string>
+    <string name="quick_action_move_map_right">Mapa a la derecha</string>
+    <string name="quick_action_move_map_down">Mapa hacia abajo</string>
+    <string name="quick_action_new_route">Nueva ruta</string>
+    <string name="quick_action_previous_app_profile">Perfil de la aplicación anterior</string>
+    <string name="shared_string_create">Crear</string>
+    <string name="shared_string_replace">Reemplazar</string>
+    <string name="shared_string_simulate">Simular</string>
+    <string name="quick_action_display_position_in_center">Mostrar ubicación siempre en el centro</string>
+    <string name="quick_action_video_note">Nota de video</string>
+    <string name="quick_action_photo_note">Nota fotográfica</string>
+    <string name="quick_action_track_waypoint">Punto de referencia de la traza</string>
+    <string name="weather_screen">Pantalla meteorológica</string>
+    <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Plazo Medio</string>
+    <string name="weather_source_GFS_description">Sistema Global de Predicción de los Centros Nacionales de Predicción Medioambiental</string>
+    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes navegar con ellos si conoces la zona.</string>
+    <string name="choose_map_orientation">Elige la orientación del mapa</string>
+    <string name="energy_avg_info">Estadísticas de energía (rangos en 1, 5 y 15 min.)</string>
+    <string name="energy_avg_info_description">Nivel de batería por minuto: %1$s
+\nConsumo de energía (mAh): %2$s</string>
+    <string name="rendering_avg_info">Estadísticas de visualización (rangos en 1, 5 y 15 min.)</string>
+    <string name="rendering_avg_info_description">FPS (últimos mil fotogramas): %1$s
+\nCPU básica: %2$s
+\nGPU (1k): %3$s
+\nInactivo (1k): %4$s</string>
+    <string name="quick_action_to_my_location">Para mi ubicación</string>
+    <string name="quick_action_move_map_left">Mapa a la izquierda</string>
+    <string name="quick_action_move_map_up">Mapa hacia arriba</string>
+    <string name="quick_action_audio_note">Nota de audio</string>
+    <string name="quick_action_parking_place">Lugar de estacionamiento</string>
+    <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
+    <string name="quick_action_verb_pause_resume">Pausar / Reanudar</string>
+    <string name="quick_action_verb_turn_on_off">Activar / Desactivar</string>
+    <string name="quick_action_verb_start_stop">Iniciar / Parar</string>
+    <string name="weather_data_sources_prompt">OsmAnd ofrece datos meteorológicos de dos proveedores:</string>
+    <string name="weather_source_ecmwf_title">CEPMPM (ECMWF)</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="quick_action_map_overlay">Capa superpuesta</string>
+    <string name="data_source">Proveedor de datos</string>
 </resources>

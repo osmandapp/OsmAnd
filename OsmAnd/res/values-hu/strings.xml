@@ -2127,7 +2127,7 @@
     <string name="quick_action_page_list_descr">Gomb, amely lépteti az alábbi listát.</string>
     <string name="select_gpx_folder">GPX-fájlok mappájának kijelölése</string>
     <string name="file_can_not_be_moved">Nem sikerült áthelyezni a fájlt.</string>
-    <string name="shared_string_move">Áthelyezés</string>
+    <string name="shared_string_move">Mozgatás</string>
     <string name="shared_string_gpx_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
     <string name="route_altitude">Útvonal magassági profilja</string>
@@ -2841,7 +2841,7 @@
     <string name="files_copied">%1$d fájl átmásolva (%2$s).</string>
     <string name="files_failed">Nem sikerült %1$d fájl másolása (%2$s).</string>
     <string name="files_present">%1$d fájl (%2$s) megtalálható az előző helyen: \'%3$s\'.</string>
-    <string name="move_maps">Térképek áthelyezése</string>
+    <string name="move_maps">Térképek mozgatása</string>
     <string name="dont_move_maps">Ne mozogjon</string>
     <string name="public_transport_ped_route_title">Az út gyalogosan körülbelül %1$s, vagyis lehet, hogy gyorsabb, mint tömegközlekedéssel</string>
     <string name="public_transport_no_route_title">Az OsmAnd sajnos nem talál a beállításoknak megfelelő útvonalat.</string>
@@ -3042,7 +3042,7 @@
     <string name="shared_string_select_folder">Mappa…</string>
     <string name="paste_Osmand_data_folder_path">Az OsmAnd-adatokat tartalmazó mappa elérési útvonalának beillesztése</string>
     <string name="change_osmand_data_folder_question">Módosítod az OsmAnd adatok mappáját\?</string>
-    <string name="move_maps_to_new_destination">Áthelyezés az új helyre</string>
+    <string name="move_maps_to_new_destination">Mozgatás az új helyre</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
@@ -5663,7 +5663,29 @@
     <string name="shared_string_changes">Módosítások</string>
     <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
     <string name="apply_only_to_new">Alkalmazás csak az újra</string>
-    <string name="release_4_8">• Felkészítve a 4.8-ashoz</string>
+    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség
+\n
+\n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz
+\n
+\n • 3D változat a helypozíció ikonokhoz
+\n
+\n • A gyorsműveletek most külső billentyűzethez is rendelhetők
+\n
+\n • Időjárás: a felhasználói felület frissítése, hozzáadott szél animáció
+\n
+\n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek
+\n
+\n • Kibővített turistaútvonalak választéka a térképen
+\n
+\n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez
+\n
+\n • Javított nyomvonal-statisztika, -rendezés és -keresés
+\n
+\n • OSM szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód
+\n
+\n • Váltás a rendszermegosztási lapra az Android 14-től
+\n
+\n</string>
     <string name="shared_string_scale">Skála</string>
     <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
     <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
@@ -5729,9 +5751,9 @@
     <string name="user_palette">Felhasználói paletta</string>
     <string name="backup_error_failed_to_transfer_file">Nem sikerült a felhőfájl(ok) átvitele.</string>
     <string name="contact_support_retry">Próbálja újra, vagy lépjen kapcsolatba az ügyfélszolgálattal</string>
-    <string name="missing_maps_ignore">Meglévő térképek használata</string>
+    <string name="missing_maps_ignore">Letöltött térképek használata</string>
     <string name="daynight_mode_sensor_summary">A környezeti megvilágítás szintjének megfelelően az eszköz fényérzékelőjét használja a világos és sötét témák közötti váltáshoz.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Automatikusan vált a nappali és éjszakai téma között a helyi napkelte és napnyugta időpontja alapján.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">A helyi napkelte és napnyugta időpontja alapján automatikusan vált a nappali és éjszakai téma között.</string>
     <string name="daynight_mode_app_theme">Alkalmazás témája</string>
     <string name="key_event_action_continuous_zoom_out">Folyamatos kicsinyítés</string>
     <string name="key_event_action_continuous_zoom_in">Folyamatos nagyítás</string>
@@ -5748,19 +5770,19 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="weather_source_GFS_description">Az amerikai Nemzeti Környezeti Előrejelző Központok adatait felhasználó Globális Előrejelzési Rendszer</string>
     <string name="weather_source_ecmwf_description">Középtávú Időjárás-előrejelzések Európai Központja</string>
-    <string name="shared_string_modify">Módosít</string>
-    <string name="missing_maps_ignore_details">Néhány már letöltött térkép megfelelő lehet az útvonalhoz. Ha ismeri a környéket és a térképeket, megpróbálhatja az útvonaltervezést a meglévő térképek használatával.</string>
-    <string name="quick_action_map_style">Térkép stílus</string>
+    <string name="shared_string_modify">Módosítás</string>
+    <string name="missing_maps_ignore_details">Lefedik-e az útvonalat a már letöltött térképek? Navigáljon azokkal, ha ismeri a környéket.</string>
+    <string name="quick_action_map_style">Térképstílus</string>
     <string name="quick_action_location_by_gpx">Hely GPX alapján</string>
     <string name="quick_action_directions_from">Kezdőpont</string>
     <string name="quick_action_to_my_location">A Saját helyhez</string>
     <string name="quick_action_move_map_right">Térkép jobbra</string>
     <string name="quick_action_previous_app_profile">Alkalmazásprofil az előzőre</string>
-    <string name="quick_action_verb_show_hide">Mutatás / elrejtés</string>
+    <string name="quick_action_verb_show_hide">Megjelenítés / elrejtés</string>
     <string name="quick_action_video_note">Videójegyzet</string>
     <string name="quick_action_parking_place">Parkolóhely</string>
     <string name="quick_action_terrain_color_scheme">Domborzati színséma</string>
-    <string name="quick_action_destination">Úticél</string>
+    <string name="quick_action_destination">Úti cél</string>
     <string name="quick_action_move_map_left">Térkép balra</string>
     <string name="quick_action_move_map_down">Térkép le</string>
     <string name="quick_action_move_map_up">Térkép fel</string>
@@ -5772,16 +5794,32 @@
     <string name="shared_string_replace">Csere</string>
     <string name="shared_string_simulate">Szimuláció</string>
     <string name="quick_action_display_position_in_center">A pozíció mindig középen</string>
-    <string name="quick_action_terrain">Domborzati színezés típusa</string>
+    <string name="quick_action_terrain">Domborzatszínezés típusa</string>
     <string name="quick_action_map_overlay">Fedvény</string>
     <string name="quick_action_first_intermediate">Első köztes</string>
     <string name="quick_action_audio_note">Hangjegyzet</string>
     <string name="quick_action_photo_note">Fotójegyzet</string>
-    <string name="quick_action_track_waypoint">Nyomvonal útpont</string>
+    <string name="quick_action_track_waypoint">Nyomvonal útpontja</string>
     <string name="quick_action_verb_pause_resume">Szünet / folytatás</string>
-    <string name="quick_action_verb_turn_on_off">Be/kikapcsolás</string>
-    <string name="quick_action_verb_start_stop">Kezdés / Béfejezés</string>
-    <string name="weather_screen">Időjárási képernyő</string>
-    <string name="quick_action_map_underlay">Alátét</string>
+    <string name="quick_action_verb_turn_on_off">Be-/kikapcsolás</string>
+    <string name="quick_action_verb_start_stop">Kezdés / Befejezés</string>
+    <string name="weather_screen">Időjárás-képernyő</string>
+    <string name="quick_action_map_underlay">Alátétréteg</string>
     <string name="quick_action_remove_next_destination">Következő célpont</string>
+    <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s
+\nEnergiafogyasztás (mAh): %2$s</string>
+    <string name="rendering_avg_info">Megjelenítési statisztika (1/5/15 perces átlagok)</string>
+    <string name="rendering_avg_info_description">Képkocka/másodperc a legutóbbi 1000 képre: %1$s
+\nCPU alap: %2$s
+\nGPU 1000: %3$s
+\nTÉTLEN 1000: %4$s</string>
+    <string name="energy_avg_info">Energiastatisztika (1/5/15 perces átlagok)</string>
+    <string name="choose_map_orientation">Térkép irányának kiválasztása</string>
+    <string name="profile_icon">Profil ikon</string>
+    <string name="navigation_position_icon">Navigáció pozíció ikon</string>
+    <string name="resting_position_icon">Ikon pihenő helyzetben</string>
+    <string name="shared_string_all_icons">Minden ikon</string>
+    <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
+    <string name="navigation_position_icon_summary">Navigálás vagy mozgás közben megjelenő ikon.</string>
+    <string name="rendering_value_pale_name">Halvány</string>
 </resources>

@@ -428,7 +428,7 @@
     <string name="quick_action_map_overlay_switch">Nivo iznad mape promenjen na „%s“.</string>
     <string name="quick_action_map_overlay_action">Dodaj nivo iznad mape</string>
     <string name="quick_action_map_overlay_title">Slojevi iznad mape</string>
-    <string name="quick_action_map_styles">Stil mape</string>
+    <string name="quick_action_map_styles">Stilovi mapa</string>
     <string name="quick_action_empty_param_error">Popuni sve odrednice</string>
     <string name="quick_action_map_style_action">Dodaj stil mape</string>
     <string name="quick_action_page_list_descr">Dugme za prolaženje kroz listu ispod.</string>
@@ -565,7 +565,7 @@
     <string name="position_on_map_center">Centar</string>
     <string name="app_mode_pedestrian">Hodanje</string>
     <string name="app_mode_bicycle">Bicikla</string>
-    <string name="app_mode_car">Auto</string>
+    <string name="app_mode_car">Vožnja</string>
     <string name="Closest_Amenities">Najbliže usluge</string>
     <string name="choose_intersected_street">Odaberi ulicu koja se ukršta</string>
     <string name="choose_available_region">Odaberi region sa spiska</string>
@@ -846,7 +846,7 @@
     <string name="overlay_transparency">Transparetnost sloja iznad</string>
     <string name="overlay_transparency_descr">Podesi transparetnost gornjeg sloja.</string>
     <string name="warning_tile_layer_not_downloadable">Program nije uspeo da preuzme nivo sa mapama %1$s, reinstalacija programa može da pomogne.</string>
-    <string name="voice_stream_music">Zvuk preko medija/ navođenja</string>
+    <string name="voice_stream_music">Zvuk multimedije/ navođenja</string>
     <string name="choose_audio_stream_descr">Odaberi govornika za glasovno navođenje.</string>
     <string name="switch_to_vector_map_to_see">Postojeće vektorske mape za ovaj lokaciju. 
 \n\t 
@@ -2923,7 +2923,7 @@
     <string name="search_download_wikipedia_maps">Preuzimanje Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom internet vodiču koji ima članke o mestima i odredištima.</string>
     <string name="add_hidden_group_info">Dodatu tačku možeš naći u „%s“. Otkrij sakrivenu označenu grupu pa je prikazati na mapi.</string>
-    <string name="app_mode_enduro_motorcycle">nduro motocikl</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motocikl</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="app_mode_wheelchair">Invalidska kolica</string>
     <string name="app_mode_wheelchair_forward">Invalidska kolica napred</string>
@@ -4390,7 +4390,7 @@
     <string name="use_latin_name_if_missing">Koristi latinično ime ako nedostaje</string>
     <string name="transport_hazmat_yes_desc">Odaberi primenljivu kategoriju.</string>
     <string name="transport_hazmat_no_desc">Na nekim putevima i tunelima može biti zabranjen prevoz opasnih materije.</string>
-    <string name="transport_hazmat_title">Prevoz opasnih materija</string>
+    <string name="transport_hazmat_title">Prevoženje opasnih materija</string>
     <string name="routing_attr_hazmat_category_description">Vrsta opasnih materije / razmotri dozvole za pristup sa opasnim materijema</string>
     <string name="distance_circles">Krugovi rastojanja</string>
     <string name="circle_settings">Podešavanja kruga</string>
@@ -5033,7 +5033,7 @@
     <string name="external_sensor_widgets">Spoljašnji senzori</string>
     <string name="map_widget_camera_distance_desc">Pokazuje visinu kamere iznad površine.</string>
     <string name="bluetooth_connected">Povezan, %s</string>
-    <string name="ant_plus_nothing_found_description">Proveri da li je: 
+    <string name="ant_plus_nothing_found_description">Proveri da li je:
 \n- Blutut uključen 
 \n- Prijemnik uključen 
 \n- Ovaj uređaj smešten blizu senzora</string>
@@ -5671,7 +5671,29 @@
     <string name="apply_only_to_new">Primenjivati samo na nove</string>
     <string name="change_default_tracks_appearance_confirmation">Primeniti promene na postojeće trase na mapi ili samo na nove?</string>
     <string name="shared_string_changes">Promene</string>
-    <string name="release_4_8">• Pripremi se za 4.8 verziju</string>
+    <string name="release_4_8">• Nova opcija bojenja terena „Visina“
+\n
+\n • Prilagođene palete boja za teren, staze i rute
+\n
+\n • 3D varijanta za ikone položaja lokacije
+\n
+\n • Brze radnje se sada mogu dodeliti spoljnim tastaturama
+\n
+\n • Vreme: Osvežavanje korisničkog interfejsa, dodata animacija vetra
+\n
+\n • Poboljšanja 3D staza: nove opcije vizuelizacije i kolorizacije
+\n
+\n • Proširen izbor turističkih ruta na mapi
+\n
+\n • Dodata opcija teme aplikacije za praćenje režima mape
+\n
+\n • Popravljena statistika staza, sortiranje i pretraga
+\n
+\n • OSM uređivanje: izbrisani način autorizacije prijave/lozinke
+\n
+\n • Prelazak na sistem deljenja lista počevši od Android 14
+\n
+\n</string>
     <string name="vertical_exaggeration">Vertikalno uvećanje</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
@@ -5737,7 +5759,7 @@
     <string name="shared_string_colors">Boje</string>
     <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
     <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
-    <string name="missing_maps_ignore">Koristi postojeće mape</string>
+    <string name="missing_maps_ignore">Koristi preuzete mape</string>
     <string name="tomorrow">Sutradan</string>
     <string name="map_settings_weather_wind_animation">Animacija vetra</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automatski se prebacuje između dnevne i noćne teme na temelju lokalnog izlaska i zalaska sunca.</string>
@@ -5757,7 +5779,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Izvor podataka</string>
-    <string name="missing_maps_ignore_details">Neke preuzete mape mogle bi biti prikladnije za rutu. Ako si upoznat s područjem i mapama, možeš pokušati odrediti rutu koristeći postojeće mape.</string>
+    <string name="missing_maps_ignore_details">Preuzete mape pokrivaju vašu rutu? Krećite se sa njima ako ste upoznati sa područjem.</string>
     <string name="quick_action_directions_from">Polazna tačka</string>
     <string name="quick_action_destination">Odredište</string>
     <string name="quick_action_terrain_color_scheme">Šema boja terena</string>
@@ -5779,7 +5801,7 @@
     <string name="shared_string_simulate">Simulirati</string>
     <string name="quick_action_display_position_in_center">Položaj displeja uvek u sredini</string>
     <string name="quick_action_terrain">Vrsta bojenja terena</string>
-    <string name="quick_action_first_intermediate">Prva putna tačka</string>
+    <string name="quick_action_first_intermediate">Prvo međuodredište</string>
     <string name="quick_action_audio_note">Audio beleška</string>
     <string name="quick_action_video_note">Video beleška</string>
     <string name="quick_action_photo_note">Foto beleška</string>
@@ -5792,4 +5814,20 @@
     <string name="weather_screen">Ekran s vremenskom prognozom</string>
     <string name="quick_action_map_style">Stil mape</string>
     <string name="quick_action_remove_next_destination">Sledeća odredišna tačka</string>
+    <string name="energy_avg_info_description">Nivo baterije u minuti: %1$s
+\nPotrošnja energije (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS prema poslednjih 1k kadrova: %1$s
+\nCPU bazično: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Energetska statistika (prosek 1 / 5 / 15 minuta)</string>
+    <string name="rendering_avg_info">Statistika prikazivanja (prosečno 1 / 5 / 15 minuta)</string>
+    <string name="choose_map_orientation">Odaberite orjentaciju mape</string>
+    <string name="rendering_value_pale_name">Bledo</string>
+    <string name="shared_string_all_icons">Sve ikone</string>
+    <string name="navigation_position_icon_summary">Ikona koja se prikazuje dok ste usmeravani ili se krećete.</string>
+    <string name="navigation_position_icon">Ikona navigacione pozicije</string>
+    <string name="resting_position_icon_summary">Ikona se prikazuje kada se ne krećete.</string>
+    <string name="resting_position_icon">Ikona položaja za odmor</string>
+    <string name="profile_icon">Ikona profila</string>
 </resources>

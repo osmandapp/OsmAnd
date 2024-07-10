@@ -200,7 +200,7 @@ public class CreateEditActionDialog extends DialogFragment
 
 	@Override
 	public void onAskDismissDialog(@NonNull String processId) {
-		dismiss();
+		app.runInUIThread(this::dismiss);
 	}
 
 	private void showDuplicatedDialog() {
