@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.editors;
+package net.osmand.plus.mapcontextmenu.editors.controller;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -11,13 +11,13 @@ import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
 
-public class EditorColorController extends ColorsPaletteController implements IDialogController {
+public class PointColorController extends ColorsPaletteController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_map_point_color";
 
-	public EditorColorController(@NonNull OsmandApplication app,
-	                             @NonNull ColorsCollection colorsCollection,
-	                             @ColorInt int selectedColorInt) {
+	public PointColorController(@NonNull OsmandApplication app,
+	                            @NonNull ColorsCollection colorsCollection,
+	                            @ColorInt int selectedColorInt) {
 		super(app, colorsCollection, selectedColorInt);
 	}
 
@@ -27,14 +27,14 @@ public class EditorColorController extends ColorsPaletteController implements ID
 	}
 
 	@NonNull
-	public static EditorColorController getInstance(@NonNull OsmandApplication app,
-	                                                @NonNull OnColorsPaletteListener listener,
-	                                                @ColorInt int selectedColor) {
+	public static PointColorController getInstance(@NonNull OsmandApplication app,
+	                                               @NonNull OnColorsPaletteListener listener,
+	                                               @ColorInt int selectedColor) {
 		DialogManager dialogManager = app.getDialogManager();
-		EditorColorController controller = (EditorColorController) dialogManager.findController(PROCESS_ID);
+		PointColorController controller = (PointColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
 			ColorsCollection colorsCollection = new FileColorsCollection(app);
-			controller = new EditorColorController(app, colorsCollection, selectedColor);
+			controller = new PointColorController(app, colorsCollection, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setPaletteListener(listener);
