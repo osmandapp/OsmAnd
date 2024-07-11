@@ -3,6 +3,8 @@ package net.osmand.plus.views.layers;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static net.osmand.plus.views.AnimateMapMarkersThread.ROTATE_ANIMATION_TIME;
+import static net.osmand.plus.views.layers.PointLocationLayer.MarkerState.MOVE;
+import static net.osmand.plus.views.layers.PointLocationLayer.MarkerState.STAY;
 import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
 
 import android.content.Context;
@@ -113,13 +115,13 @@ public class PointLocationLayer extends OsmandMapLayer
 	private boolean showHeadingCached = false;
 	private Float lastBearingCached;
 	private Float lastHeadingCached;
-	private MarkerState currentMarkerState = MarkerState.Stay;
+	private MarkerState currentMarkerState = STAY;
 	private LatLon lastMarkerLocation;
 
-	private enum MarkerState {
-		Stay,
-		Move,
-		None,
+	public enum MarkerState {
+		STAY,
+		MOVE,
+		NONE,
 	}
 
 	private static class CoreMapMarker {
@@ -307,7 +309,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		float sectorDirection = 0.0f;
 		float sectorRadius = 0.0f;
 		switch (currentMarkerState) {
-			case Move:
+			case MOVE:
 				navigationMarker.setVisibility(!showHeading);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(showHeading);
@@ -329,7 +331,7 @@ public class PointLocationLayer extends OsmandMapLayer
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
 				break;
-			case Stay:
+			case STAY:
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(!showHeading);
 				navigationMarkerWithHeading.setVisibility(false);
@@ -351,7 +353,7 @@ public class PointLocationLayer extends OsmandMapLayer
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
 				break;
-			case None:
+			case NONE:
 			default:
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(false);
@@ -378,13 +380,13 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case Move:
+			case MOVE:
 				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
 				break;
-			case Stay:
+			case STAY:
 				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
 				break;
-			case None:
+			case NONE:
 			default:
 				return null;
 		}
@@ -435,7 +437,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
 			}
 			float circleRadius = location.getAccuracy();
-			boolean withCircle = !isLocationSnappedToRoad();
+			boolean withCircle = shouldShowLocationRadius(currentMarkerState);
 			locMarker.marker.setAccuracyCircleRadius(circleRadius);
 			locMarker.marker.setIsAccuracyCircleVisible(withCircle);
 			if (withCircle) {
@@ -488,13 +490,13 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case Move:
+			case MOVE:
 				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
 				break;
-			case Stay:
+			case STAY:
 				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
 				break;
-			case None:
+			case NONE:
 			default:
 				return null;
 		}
@@ -509,8 +511,13 @@ public class PointLocationLayer extends OsmandMapLayer
 				: null;
 	}
 
-	private boolean shouldShowHeading() {
-		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle() && !isLocationSnappedToRoad();
+	private boolean shouldShowHeading(@NonNull MarkerState markerState) {
+		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle() && !isLocationSnappedToRoad()
+				&& settings.VIEW_ANGLE_VISIBILITY.getModeValue(appMode).isVisible(markerState);
+	}
+
+	private boolean shouldShowLocationRadius(@NonNull MarkerState markerState) {
+		return !isLocationSnappedToRoad() && settings.LOCATION_RADIUS_VISIBILITY.getModeValue(appMode).isVisible(markerState);
 	}
 
 	private boolean shouldShowBearing(@Nullable Location location) {
@@ -591,12 +598,12 @@ public class PointLocationLayer extends OsmandMapLayer
 			locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
-		if (!isLocationSnappedToRoad()) {
+		if (shouldShowLocationRadius(currentMarkerState)) {
 			drawLocationAccuracy(canvas, box, lastKnownLocation, locationX, locationY);
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			if (shouldShowHeading()) {
+			if (shouldShowHeading(currentMarkerState)) {
 				drawLocationHeading(canvas, locationX, locationY);
 			}
 			Float bearing = getBearingToShow(lastKnownLocation);
@@ -640,16 +647,15 @@ public class PointLocationLayer extends OsmandMapLayer
 			return;
 		}
 		MapRendererView mapRenderer = getMapRenderer();
+		boolean markersRecreated = false;
+		if (mapRenderer != null && (markersInvalidated || mapMarkersCollection == null)) {
+			markersRecreated = recreateMarkerCollection();
+			markersInvalidated = false;
+		}
+		boolean showHeading = shouldShowHeading(currentMarkerState) && locationProvider.getHeading() != null;
+		boolean showBearing = shouldShowBearing(lastKnownLocation);
+		boolean stateUpdated = setMarkerState(showBearing ? MOVE : STAY, showHeading, markersRecreated);
 		if (mapRenderer != null) {
-			boolean markersRecreated = false;
-			if (markersInvalidated || mapMarkersCollection == null) {
-				markersRecreated = recreateMarkerCollection();
-				markersInvalidated = false;
-			}
-			boolean showHeading = shouldShowHeading() && locationProvider.getHeading() != null;
-			boolean showBearing = shouldShowBearing(lastKnownLocation);
-			boolean stateUpdated = setMarkerState(showBearing ?
-					MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);
 			if (showHeading != showHeadingCached) {
 				showHeadingCached = showHeading;
 				if (!stateUpdated) {

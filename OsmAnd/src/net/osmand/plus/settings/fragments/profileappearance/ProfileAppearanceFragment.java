@@ -39,6 +39,7 @@ import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -166,6 +167,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			requirePreference(PROFILE_ICON_CARD_HEADER).setVisible(false);
 			requirePreference(PROFILE_ICON_CARD_DIVIDER).setVisible(false);
 		}
+		setupViewAnglePref();
+		setupLocationRadiusPref();
 	}
 
 	@Override
@@ -221,6 +224,22 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 	}
 
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
+			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
+				optionsDialogController.showDialog(mapActivity, app.getString(R.string.view_angle),
+						app.getString(R.string.view_angle_description), settings.VIEW_ANGLE_VISIBILITY);
+			} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
+				optionsDialogController.showDialog(mapActivity, app.getString(R.string.location_radius),
+						app.getString(R.string.location_radius_description), settings.LOCATION_RADIUS_VISIBILITY);
+			}
+		}
+		return super.onPreferenceClick(preference);
+	}
+
 	private void bindCard(@NonNull PreferenceViewHolder holder, @NonNull BaseCard card) {
 		ViewGroup container = (ViewGroup) holder.itemView;
 		container.removeAllViews();
@@ -230,6 +249,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	@Override
 	public void updateColorItems() {
 		updateProfileNameAppearance();
+	}
+
+	@Override
+	public void updateOptionsCard() {
+		Preference viewAnglePref = findPreference(settings.VIEW_ANGLE_VISIBILITY.getId());
+		viewAnglePref.setSummary(screenController.getViewAngleVisibility().getNameId());
+		Preference locationRadiusPref = findPreference(settings.LOCATION_RADIUS_VISIBILITY.getId());
+		locationRadiusPref.setSummary(screenController.getLocationRadiusVisibility().getNameId());
 	}
 
 	public void updateApplyButtonEnable() {
@@ -283,6 +310,18 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 						SettingsScreenType.CONFIGURE_PROFILE, screenController.getChangedAppMode());
 			}
 		}
+	}
+
+	private void setupViewAnglePref() {
+		Preference preference = findPreference(settings.VIEW_ANGLE_VISIBILITY.getId());
+		preference.setIcon(getActiveIcon(R.drawable.ic_action_location_view_angle));
+		preference.setSummary(screenController.getViewAngleVisibility().getNameId());
+	}
+
+	private void setupLocationRadiusPref() {
+		Preference preference = findPreference(settings.LOCATION_RADIUS_VISIBILITY.getId());
+		preference.setIcon(getActiveIcon(R.drawable.ic_action_location_radius));
+		preference.setSummary(screenController.getLocationRadiusVisibility().getNameId());
 	}
 
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {
