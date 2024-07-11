@@ -4284,7 +4284,7 @@
     <string name="routing_attr_allow_gate_description">Permite folosirea porților</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferă pavaj tactil</string>
     <string name="routing_attr_only_permitted_streets_name">Străzi permise în mod expres</string>
-    <string name="horseback_riding">Echitație</string>
+    <string name="horseback_riding">Călărie</string>
     <string name="routing_attr_only_permitted_streets_description">Folosește numai străzile care sunt permise în mod expres</string>
     <string name="routing_attr_only_permitted_ways_name">Căi permise în mod expres</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferă rute pentru cai</string>
@@ -5642,7 +5642,29 @@
     <string name="fix_north_up_descr">Nu roti harta prin gesturi când este orientată cu nordul în sus</string>
     <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la traseele existente în folder sau doar la cele noi?</string>
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
-    <string name="release_4_8">- De pregătit pentru 4.8</string>
+    <string name="release_4_8">"• Noua opțiune de colorare a terenului \"Altitudine\"
+\n
+\n • Palete de culori personalizate pentru teren, trasee și rute
+\n
+\n • Variantă 3D la pictogramele poziției locației
+\n
+\n • Acțiunile rapide se pot atribui tastaturilor externe
+\n
+\n • Vremea: Reîmprospătare UI, adăugare animație vânt
+\n
+\n •  Îmbunătățiri ale traseelor 3D: noi opțiuni de vizualizare și colorizare
+\n
+\n • Selecție extinsă de rute turistice pe hartă
+\n
+\n • S-a adăugat opțiunea temei app pentru a urmări modul hartă
+\n
+\n • Statistici, sortare și căutare fixă a pistelor
+\n
+\n •  Editare OSM: s-a eliminat metoda de autorizare a login-ului / parolei
+\n
+\n • Trecerea la foaia de partajare a sistemului începând cu Android 14
+\n
+\n"</string>
     <string name="precise">Precis</string>
     <string name="round_up">Rotunjește în sus</string>
     <string name="upload_local_versions">Încărcați versiuni locale</string>
@@ -5792,7 +5814,7 @@
     <string name="quick_action_map_overlay">Suprapunere</string>
     <string name="quick_action_map_style">Stil hartă</string>
     <string name="quick_action_parking_place">Loc parcare</string>
-    <string name="quick_action_verb_show_hide">Afișare / Ascundere</string>
+    <string name="quick_action_verb_show_hide">Arată / Ascunde</string>
     <string name="quick_action_photo_note">Notă fotografică</string>
     <string name="quick_action_verb_pause_resume">Pauză / Reluare</string>
     <string name="quick_action_verb_turn_on_off">Pornit / Oprit</string>

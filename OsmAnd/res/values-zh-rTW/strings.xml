@@ -5812,6 +5812,6 @@
     <string name="navigation_position_icon_summary">當您導航或移動時顯示的圖示。</string>
     <string name="navigation_position_icon">導航位置圖示</string>
     <string name="resting_position_icon_summary">當您不動時顯示的圖示。</string>
-    <string name="resting_position_icon">還原位置圖示</string>
+    <string name="resting_position_icon">休息位置圖示</string>
     <string name="rendering_value_pale_name">灰白</string>
 </resources>

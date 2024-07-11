@@ -3533,11 +3533,11 @@
 \n
 \nDalje čitanje na %1$s.</string>
     <string name="record_plugin_name">Snimanje putovanja</string>
-    <string name="osmand_rastermaps_plugin_description">Pristupi različitim vrstama online mapa (takozvanim sličicama ili rasterskim), od predefinisanih sličica OSM-a (kao što je Mapnik) do satelitskih slika i slojevima sa uskom specijalizacijom, kao što su meteorološke, klimatske, geološke mape, osenčeni slojevi, itd.
+    <string name="osmand_rastermaps_plugin_description">Pristupi različitim vrstama online mapa (takozvanim tilovima ili rasterskim), od predefinisanih sličica OSM-a (kao što je Mapnik) do satelitskih slika i slojevima sa uskom specijalizacijom, kao što su meteorološke, klimatske, geološke mape, osenčeni slojevi, itd.
 \n
 \nSvaka od ovih mapa može biti korišćena ili kao glavna (osnovna) mapa koja se prikazuje, ili kao nivo iznad ili ispod osnovne mape. Određeni elementi vektorskih mapa OsmAnda se mogu sakriti preko menia „Podesi mapu“.
 \n
-\nPreuzmi mape sa pločicama neposredno sa intereneta, ili ih pripremi za upotrebu bez interneta (ručno snimiti u folder OsmAnda sa podacima), i to kao baza podataka SQLite koju može da napravi veliki broj alata treće strane.</string>
+\nPreuzmi mape sa tilovima neposredno sa intereneta, ili ih pripremi za upotrebu bez interneta (ručno snimiti u folder OsmAnda sa podacima), i to kao baza podataka SQLite koju može da napravi veliki broj alata treće strane.</string>
     <string name="shared_string_online_maps">Internet mape</string>
     <string name="track_points">Tačke trase</string>
     <string name="track_segments">Segmenti trase</string>
@@ -5140,7 +5140,7 @@
     <string name="select_layer">Odaberi nivo</string>
     <string name="shutter_sound">Zvuk okidača</string>
     <string name="speak_route_deviation">Obaveštava o napuštanju rute</string>
-    <string name="clear_online_cache_description">Ovo će očistiti keš internet slika vremenskih pločica.</string>
+    <string name="clear_online_cache_description">Ovo će očistiti keš, tilove za vreme.</string>
     <string name="weather_widget_group_desc">Skup vidžeta koji prikazuju razne podatke o vremenskim prilikama.</string>
     <string name="precipitation_widget_desc">Prikazuje padavine na trenutnom središtu mape.</string>
     <string name="rendering_engine_failed">Render OsmAnd mape se srušio.</string>
@@ -5326,7 +5326,7 @@
 \n
 \n • Ispravljena je greška prilikom prikaza mesta pošćenja
 \n
-\n • Dodata je mogućnost preuzimanja pločica sa mreže koristeći „pročeljne“ ili „podmetnute“ mape
+\n • Dodata je mogućnost preuzimanja tilova sa interneta koristeći „frontalne“ ili „podmetnute“ mape
 \n
 \n • Dodata je mogućnost upotrebe imperijalne merne jedinice za „osobine vozila“
 \n
