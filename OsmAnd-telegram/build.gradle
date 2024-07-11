@@ -96,7 +96,7 @@ android {
 
 task downloadTdLibzip {
 	doLast {
-		ant.get(src: 'https://core.telegram.org/tdlib/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
+//		ant.get(src: 'https://core.telegram.org/tdlib/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
 		ant.unzip(src: 'tdlib.zip', dest: 'tdlib/')
 	}
 }
@@ -109,8 +109,8 @@ task copyNativeLibs(type: Copy) {
 
 task copyJavaSources(type: Copy) {
 	dependsOn downloadTdLibzip
-	from "tdlib/libtd/src/main/java/org/drinkless/td"
-	into "src/org/drinkless/td"
+	from "tdlib/tdlib/java"
+	into "src"
 }
 
 task downloadPrebuiltTelegram {
