@@ -278,7 +278,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		energyAvgInfo.setIconSpaceReserved(false);
 
 		Preference renderingAvgInfo = findPreference("rendering_avg_info");
-		renderingAvgInfo.setSummary(getString(R.string.rendering_avg_info_description, fps, cpu, idle, gpu));
+		renderingAvgInfo.setSummary(getString(R.string.rendering_avg_info_details, fps, cpu, idle, gpu));
 		renderingAvgInfo.setIconSpaceReserved(false);
 	}
 
