@@ -647,7 +647,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void resetRotation() {
+	public void resetRotation() {
 		setRotate(0, true);
 	}
 
