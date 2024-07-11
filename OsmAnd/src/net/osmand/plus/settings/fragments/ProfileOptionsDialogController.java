@@ -19,7 +19,6 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
@@ -65,7 +64,7 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 		displayData.putExtra(SHOW_BOTTOM_BUTTONS, true);
 		for (MarkerDisplayOption displayOption : MarkerDisplayOption.values()) {
 			displayData.addDisplayItem(new DisplayItem()
-					.setTitle(getString(displayOption.getNameRes()))
+					.setTitle(getString(displayOption.getNameId()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
 					.setControlsColor(activeColor)
 					.setTag(displayOption));

@@ -254,9 +254,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	@Override
 	public void updateOptionsCard() {
 		Preference viewAnglePref = findPreference(settings.VIEW_ANGLE_VISIBILITY.getId());
-		viewAnglePref.setSummary(screenController.getViewAngleVisibility().getNameRes());
+		viewAnglePref.setSummary(screenController.getViewAngleVisibility().getNameId());
 		Preference locationRadiusPref = findPreference(settings.LOCATION_RADIUS_VISIBILITY.getId());
-		locationRadiusPref.setSummary(screenController.getLocationRadiusVisibility().getNameRes());
+		locationRadiusPref.setSummary(screenController.getLocationRadiusVisibility().getNameId());
 	}
 
 	public void updateApplyButtonEnable() {
@@ -315,13 +315,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	private void setupViewAnglePref() {
 		Preference preference = findPreference(settings.VIEW_ANGLE_VISIBILITY.getId());
 		preference.setIcon(getActiveIcon(R.drawable.ic_action_location_view_angle));
-		preference.setSummary(screenController.getViewAngleVisibility().getNameRes());
+		preference.setSummary(screenController.getViewAngleVisibility().getNameId());
 	}
 
 	private void setupLocationRadiusPref() {
 		Preference preference = findPreference(settings.LOCATION_RADIUS_VISIBILITY.getId());
 		preference.setIcon(getActiveIcon(R.drawable.ic_action_location_radius));
-		preference.setSummary(screenController.getLocationRadiusVisibility().getNameRes());
+		preference.setSummary(screenController.getLocationRadiusVisibility().getNameId());
 	}
 
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {

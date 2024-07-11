@@ -6,34 +6,32 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.views.layers.PointLocationLayer.MarkerState;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public enum MarkerDisplayOption {
-	OFF(R.string.shared_string_off, MarkerState.None),
-	RESTING(R.string.resting_position, MarkerState.Stay),
-	NAVIGATION(R.string.navigation_position, MarkerState.Move),
-	RESTING_NAVIGATION(R.string.resting_navigation_position, MarkerState.Move, MarkerState.Stay);
 
+	OFF(R.string.shared_string_off, MarkerState.NONE),
+	RESTING(R.string.resting_position, MarkerState.STAY),
+	NAVIGATION(R.string.navigation_position, MarkerState.MOVE),
+	RESTING_NAVIGATION(R.string.resting_navigation_position, MarkerState.MOVE, MarkerState.STAY);
+
+	@StringRes
+	private final int nameId;
 	private final List<MarkerState> markerStates;
 
-	@StringRes
-	private final int nameRes;
 
-	MarkerDisplayOption(@StringRes int nameRes, MarkerState... states) {
-		this.nameRes = nameRes;
-		markerStates = Arrays.asList(states);
-	}
-
-	public boolean isVisible(@NonNull MarkerState markerState) {
-		if (this == OFF)
-			return false;
-		return markerStates.contains(markerState);
+	MarkerDisplayOption(@StringRes int nameId, @NonNull MarkerState... states) {
+		this.nameId = nameId;
+		this.markerStates = Arrays.asList(states);
 	}
 
 	@StringRes
-	public int getNameRes() {
-		return nameRes;
+	public int getNameId() {
+		return nameId;
+	}
+
+	public boolean isVisible(@NonNull MarkerState state) {
+		return this != OFF && markerStates.contains(state);
 	}
 }
