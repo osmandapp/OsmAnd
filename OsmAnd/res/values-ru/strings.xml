@@ -5821,4 +5821,10 @@
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Выберите ориентацию карты</string>
+    <string name="shared_string_all_icons">Все значки</string>
+    <string name="profile_icon">Значок профиля</string>
+    <string name="navigation_position_icon_summary">Значок отображается во время навигации или перемещения.</string>
+    <string name="navigation_position_icon">Значок местоположения при движении</string>
+    <string name="resting_position_icon_summary">Значок отображается, когда вы не двигаетесь.</string>
+    <string name="resting_position_icon">Значок местоположения в покое</string>
 </resources>
