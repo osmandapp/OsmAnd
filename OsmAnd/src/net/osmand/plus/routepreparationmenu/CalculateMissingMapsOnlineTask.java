@@ -19,6 +19,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RoutingConfiguration;
@@ -103,7 +104,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	private String getRoutingProfile() {
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
 		RoutingConfiguration config = prevRoute.getMissingMapsCalculationResult().getMissingMapsRoutingContext().config;
-		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
+		GeneralRouterProfile profile = config.router.getProfile();
+		boolean useBicycle = profile == GeneralRouterProfile.BICYCLE || profile == GeneralRouterProfile.PEDESTRIAN;
 		return useBicycle ? "bicycle" : "car";
 	}
 
@@ -125,8 +127,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				}
 			}
 		}
+		String profile = getRoutingProfile();
 		return !Algorithms.isEmpty(activeParameters)
-				? "&params=car" + "," + TextUtils.join(",", activeParameters)
+				? "&params=" + profile + "," + TextUtils.join(",", activeParameters)
 				: "";
 	}
 
