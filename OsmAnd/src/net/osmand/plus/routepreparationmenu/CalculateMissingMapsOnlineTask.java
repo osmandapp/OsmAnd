@@ -103,7 +103,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	private String getRoutingProfile() {
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
 		RoutingConfiguration config = prevRoute.getMissingMapsCalculationResult().getMissingMapsRoutingContext().config;
-		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
+		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE
+				|| config.router.getProfile() == GeneralRouter.GeneralRouterProfile.PEDESTRIAN;
 		return useBicycle ? "bicycle" : "car";
 	}
 
@@ -125,8 +126,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				}
 			}
 		}
+		String profile = getRoutingProfile();
 		return !Algorithms.isEmpty(activeParameters)
-				? "&params=car" + "," + TextUtils.join(",", activeParameters)
+				? "&params=" + profile + "," + TextUtils.join(",", activeParameters)
 				: "";
 	}
 
