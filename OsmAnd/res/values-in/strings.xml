@@ -1335,8 +1335,8 @@
     <string name="si_kmh">Kilometer per jam</string>
     <string name="km_h">km/j</string>
     <string name="m_s">m/d</string>
-    <string name="min_km">men/km</string>
-    <string name="min_mile">men/m</string>
+    <string name="min_km">mnt/km</string>
+    <string name="min_mile">mnt/m</string>
     <string name="yard">yd</string>
     <string name="shared_string_name">Nama</string>
     <string name="shared_string_hide">Sembunyikan</string>
