@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
@@ -28,6 +29,7 @@ public class RouteCalculationParams {
 	public boolean inPublicTransportMode;
 	public boolean extraIntermediates;
 	public boolean initialCalculation;
+	public GPXFile gpxFile;
 
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressListener calculationProgressListener;

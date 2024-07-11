@@ -5781,4 +5781,21 @@
     <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
     <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
     <string name="release_4_8">• الاستعداد لـ 4.8</string>
+    <string name="quick_action_move_map_right">الخريطة إلى اليمين</string>
+    <string name="quick_action_move_map_left">الخريطة إلى اليسار</string>
+    <string name="shared_string_replace">استبدال</string>
+    <string name="shared_string_simulate">محاكاة</string>
+    <string name="choose_map_orientation">اختر توجه الخريطة</string>
+    <string name="quick_action_directions_from">نقطة البداية</string>
+    <string name="quick_action_destination">الوجهة</string>
+    <string name="energy_avg_info_description">مستوى البطارية في الدقيقة: %1$s
+\nاستهلاك الطاقة (ميليأمبير): %2$s</string>
+    <string name="quick_action_terrain_color_scheme">مخطط لون الإقليم</string>
+    <string name="quick_action_to_my_location">إلى موقعي</string>
+    <string name="quick_action_move_map_down">الخريطة الى الأسفل</string>
+    <string name="quick_action_move_map_up">الخريطة الى الأعلى</string>
+    <string name="quick_action_new_route">مسار جديد</string>
+    <string name="shared_string_set">تحديد</string>
+    <string name="shared_string_create">انشئ</string>
+    <string name="quick_action_remove_next_destination">نقطة الوجهة التالية</string>
 </resources>

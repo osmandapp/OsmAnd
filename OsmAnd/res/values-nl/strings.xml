@@ -4599,7 +4599,7 @@
     <string name="rendering_attr_showFunicularRoutes_name">Kabelspoorwegen</string>
     <string name="rendering_attr_showMonorailRoutes_name">Monorail spoorwegen</string>
     <string name="rendering_attr_showLightRailRoutes_name">Lichte spoorwegen</string>
-    <string name="location_source">Bron van locatiebepaling</string>
+    <string name="location_source">Locatiebron</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Toon MTB IMBA paden</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Toon bestemde mountainbike paden.</string>
     <string name="auto_25_chars_route_tu_kl">U-bocht maken en links aanhouden</string>
@@ -5264,4 +5264,5 @@
     <string name="show_debug_info">Debug-informatie tonen</string>
     <string name="show_debug_info_description">Grafische informatie weergeven over de plaatsing van elke kaarttekst</string>
     <string name="map_text">Kaartteksten</string>
+    <string name="choose_map_orientation">Kies kaartoriëntatie</string>
 </resources>

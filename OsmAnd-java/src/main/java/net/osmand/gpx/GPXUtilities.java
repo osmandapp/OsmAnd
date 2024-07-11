@@ -2122,4 +2122,68 @@ public class GPXUtilities {
 		double speed = previous.speed + (next.speed - previous.speed) * projectionCoeff;
 		return new WptPt(lat, lon, time, ele, speed, Double.NaN);
 	}
+
+	public static void interpolateEmptyElevationWpts(List<WptPt> pts) {
+		for (int i = 0; i < pts.size(); ) {
+			int processedPoints = 0;
+			if (Double.isNaN(pts.get(i).ele)) {
+				int startIndex = i, prevValidIndex = -1, nextValidIndex = -1;
+				double prevValidElevation = Double.NaN, nextValidElevation = Double.NaN;
+
+				for (int j = startIndex - 1; j >= 0; j--) {
+					double ele = pts.get(j).ele;
+					if (!Double.isNaN(ele)) {
+						prevValidElevation = ele;
+						prevValidIndex = j;
+						break;
+					}
+				}
+
+				for (int j = startIndex + 1; j < pts.size(); j++) {
+					double ele = pts.get(j).ele;
+					if (!Double.isNaN(ele)) {
+						nextValidElevation = ele;
+						nextValidIndex = j;
+						break;
+					}
+				}
+
+				if (prevValidIndex == -1 && nextValidIndex == -1) {
+					return; // no elevation at all
+				}
+
+				if (prevValidIndex == -1 || nextValidIndex == -1) {
+					// outermost section without interpolation
+					for (int j = startIndex; j < pts.size(); j++) {
+						WptPt pt = pts.get(j);
+						if (Double.isNaN(pt.ele)) {
+							pt.ele = startIndex == 0 ? nextValidElevation : prevValidElevation;
+							processedPoints++;
+						} else {
+							break;
+						}
+					}
+				} else {
+					// inner section
+					double totalDistance = 0;
+					double[] distanceArray = new double[nextValidIndex - prevValidIndex];
+					for (int j = prevValidIndex; j < nextValidIndex; j++) {
+						WptPt thisPt = pts.get(j);
+						WptPt nextPt = pts.get(j + 1);
+						double distance = MapUtils.getDistance(thisPt.lat, thisPt.lon, nextPt.lat, nextPt.lon);
+						distanceArray[j - prevValidIndex] = distance;
+						totalDistance += distance;
+					}
+					double deltaElevation = pts.get(nextValidIndex).ele - pts.get(prevValidIndex).ele;
+					for (int j = startIndex; totalDistance > 0 && j < nextValidIndex; j++) {
+						double currentDistance = distanceArray[j - startIndex];
+						double increaseElevation = deltaElevation * (currentDistance / totalDistance);
+						pts.get(j).ele = pts.get(j - 1).ele + increaseElevation;
+						processedPoints++;
+					}
+				}
+			}
+			i += processedPoints > 0 ? processedPoints : 1;
+		}
+	}
 }

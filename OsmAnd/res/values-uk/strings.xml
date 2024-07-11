@@ -5830,7 +5830,7 @@
     <string name="profile_icon">Піктограма профілю</string>
     <string name="navigation_position_icon">Піктограма позиції розташування</string>
     <string name="resting_position_icon_summary">Піктограма показується, коли ви не рухаєтеся.</string>
-    <string name="resting_position_icon">Піктограма положення у стані спокою</string>
+    <string name="resting_position_icon">Піктограма положення спокою</string>
     <string name="rendering_value_pale_name">Блідий</string>
     <string name="navigation_position_icon_summary">Піктограма показується під час навігації або руху.</string>
 </resources>

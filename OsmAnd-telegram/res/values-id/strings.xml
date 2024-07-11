@@ -10,8 +10,8 @@
     <string name="si_kmh">Kilometer per jam</string>
     <string name="km_h">km/j</string>
     <string name="m_s">m/d</string>
-    <string name="min_km">men/km</string>
-    <string name="min_mile">men/m</string>
+    <string name="min_km">mnt/km</string>
+    <string name="min_mile">mnt/m</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Selamat datang</string>
     <string name="shared_string_authorization_descr">Masukkan nomor telepon Telegram Anda dengan format internasional</string>
