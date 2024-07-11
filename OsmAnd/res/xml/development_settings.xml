@@ -211,7 +211,7 @@
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/rendering_avg_info"
-		tools:summary="@string/rendering_avg_info_description" />
+		tools:summary="@string/rendering_avg_info_details" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
