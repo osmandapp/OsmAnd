@@ -5532,9 +5532,9 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
+    <string name="remove_type_q">¿Quitar el periférico «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
-    <string name="add_new_type">Añadir nuevo tipo</string>
+    <string name="add_new_type">Añadir nuevo periférico</string>
     <string name="key_event_action_move_up">Mover arriba</string>
     <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
     <string name="key_event_action_zoom_out">Alejar</string>
@@ -5561,7 +5561,7 @@
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
     <string name="topography_maps">Mapas topográficos</string>
-    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
+    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>
     <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
     <string name="shared_string_reassign">Reasignar</string>
     <string name="reset_key_assignments">Restablecer asignaciones de teclas</string>
@@ -5756,7 +5756,7 @@
     <string name="clear_key_assignment_summary">La asignación de tecla para la acción elegida, será vaciada.</string>
     <string name="clear_all_key_shortcuts">Vaciar asignaciones de tecla</string>
     <string name="new_key_assignment">Nueva asignación de tecla</string>
-    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
+    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>
     <string name="no_assigned_keys">Sin teclas asignadas</string>
     <string name="shared_string_key">Tecla</string>
     <string name="no_assigned_keys_desc">Elige una acción y asigna una tecla para el botón «Añadir».</string>

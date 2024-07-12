@@ -5817,8 +5817,8 @@
     <string name="choose_map_orientation">Térkép irányának kiválasztása</string>
     <string name="profile_icon">Profil ikon</string>
     <string name="navigation_position_icon">Navigáció pozíció ikon</string>
-    <string name="resting_position_icon">Ikon pihenő helyzetben</string>
-    <string name="shared_string_all_icons">Minden ikon</string>
+    <string name="resting_position_icon">Ikon álló helyzetben</string>
+    <string name="shared_string_all_icons">Összes ikon</string>
     <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
     <string name="navigation_position_icon_summary">Navigálás vagy mozgás közben megjelenő ikon.</string>
     <string name="rendering_value_pale_name">Halvány</string>
