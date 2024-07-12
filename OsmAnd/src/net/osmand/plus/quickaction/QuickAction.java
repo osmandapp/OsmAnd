@@ -96,7 +96,7 @@ public class QuickAction {
 
 	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
 		String name = getName(context);
-		if (!name.equals(getDefaultName(context))) {
+		if (name.equals(getRawName())) {
 			return name;
 		}
 		int actionNameRes = getActionNameRes();
