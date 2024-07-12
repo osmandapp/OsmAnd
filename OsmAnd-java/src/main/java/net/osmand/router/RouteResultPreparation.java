@@ -999,7 +999,6 @@ public class RouteResultPreparation {
 					if (dist < mergeDistance) {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
-						modifyGoAheadAfterMerge(currentSegment, nextSegment);
 						merged = true;
 					}
 				}
@@ -1009,26 +1008,6 @@ public class RouteResultPreparation {
 				}
 				nextSegment = currentSegment;
 				dist = 0;
-			}
-		}
-	}
-
-	private void modifyGoAheadAfterMerge(RouteSegmentResult current, RouteSegmentResult next) {
-		final TurnType currentTurnType = current.getTurnType();
-		final int lane = currentTurnType.getActiveCommonLaneTurn();
-		if (currentTurnType.goAhead() && !next.getTurnType().goAhead() && !TurnType.isKeepDirectionTurn(lane)) {
-			int newValue = currentTurnType.getValue();
-
-			if (TurnType.isLeftTurn(lane)) {
-				newValue = TurnType.KL;
-			} else if (TurnType.isRightTurn(lane)) {
-				newValue = TurnType.KR;
-			}
-
-			if (newValue != currentTurnType.getValue()) {
-				current.setTurnType(new TurnType(newValue, currentTurnType.getExitOut(), currentTurnType.getTurnAngle(),
-						currentTurnType.isSkipToSpeak(), currentTurnType.getLanes(), currentTurnType.isPossibleLeftTurn(),
-						currentTurnType.isPossibleRightTurn()));
 			}
 		}
 	}
