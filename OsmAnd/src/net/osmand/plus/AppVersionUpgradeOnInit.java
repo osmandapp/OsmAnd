@@ -158,8 +158,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_04 = 4704;
 	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
 	public static final int VERSION_4_7_05 = 4705;
+	public static final int VERSION_4_7_06 = 4706;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_05;
+	public static final int LAST_APP_VERSION = VERSION_4_7_06;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 

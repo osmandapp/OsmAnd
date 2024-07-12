@@ -236,6 +236,12 @@ task collectTestResources(type: Copy) {
 	}
 }
 
+task copyModels(type: Copy) {
+	from "../../resources/models"
+	into "assets/models"
+	include "**/*.*"
+}
+
 task collectExternalResources {
 	dependsOn collectVoiceAssets,
 			collectFonts,
@@ -249,7 +255,8 @@ task collectExternalResources {
 			copyColorPalettes,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
-			collectTestResources
+			collectTestResources,
+			copyModels
 }
 
 // Legacy core build
