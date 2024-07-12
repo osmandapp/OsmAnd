@@ -2280,6 +2280,9 @@ public class RouteResultPreparation {
 						curr.setTurnType(null);
 					}
 				}
+			} else if (turnType.goAhead()) {
+				System.err.printf("WARN: XXX muteAndRemoveTurns [%d] %s\n", i, turnType);
+//				turnType.setSkipToSpeak(true);
 			}
 		}
 	}
