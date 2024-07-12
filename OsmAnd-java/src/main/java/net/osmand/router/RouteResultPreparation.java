@@ -999,7 +999,7 @@ public class RouteResultPreparation {
 					if (dist < mergeDistance) {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
-						modifyGoAheadAfterMerge(currentSegment, nextSegment);
+						muteGoAheadAfterMerge(currentSegment, nextSegment);
 						merged = true;
 					}
 				}
@@ -1013,22 +1013,12 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void modifyGoAheadAfterMerge(RouteSegmentResult current, RouteSegmentResult next) {
+	private void muteGoAheadAfterMerge(RouteSegmentResult current, RouteSegmentResult next) {
 		final TurnType currentTurnType = current.getTurnType();
 		final int lane = currentTurnType.getActiveCommonLaneTurn();
 		if (currentTurnType.goAhead() && !next.getTurnType().goAhead() && !TurnType.isKeepDirectionTurn(lane)) {
-			int newValue = currentTurnType.getValue();
-
-			if (TurnType.isLeftTurn(lane)) {
-				newValue = TurnType.KL;
-			} else if (TurnType.isRightTurn(lane)) {
-				newValue = TurnType.KR;
-			}
-
-			if (newValue != currentTurnType.getValue()) {
-				current.setTurnType(new TurnType(newValue, currentTurnType.getExitOut(), currentTurnType.getTurnAngle(),
-						currentTurnType.isSkipToSpeak(), currentTurnType.getLanes(), currentTurnType.isPossibleLeftTurn(),
-						currentTurnType.isPossibleRightTurn()));
+			if (TurnType.isLeftTurn(lane) || TurnType.isRightTurn(lane)) {
+				currentTurnType.setSkipToSpeak(true);
 			}
 		}
 	}
@@ -2301,9 +2291,6 @@ public class RouteResultPreparation {
 						curr.setTurnType(null);
 					}
 				}
-			} else if (turnType.goAhead()) {
-				System.err.printf("WARN: XXX muteAndRemoveTurns [%d] %s\n", i, turnType);
-//				turnType.setSkipToSpeak(true);
 			}
 		}
 	}
