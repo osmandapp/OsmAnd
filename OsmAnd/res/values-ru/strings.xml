@@ -5824,7 +5824,18 @@
     <string name="shared_string_all_icons">Все значки</string>
     <string name="profile_icon">Значок профиля</string>
     <string name="navigation_position_icon_summary">Значок отображается во время навигации или перемещения.</string>
-    <string name="navigation_position_icon">Значок местоположения при движении</string>
+    <string name="navigation_position_icon">Значок местоположения в движении</string>
     <string name="resting_position_icon_summary">Значок отображается, когда вы не двигаетесь.</string>
     <string name="resting_position_icon">Значок местоположения в покое</string>
+    <string name="view_angle">Угол обзора</string>
+    <string name="location_radius">Радиус местоположения</string>
+    <string name="resting_position">В покое</string>
+    <string name="navigation_position">В движении</string>
+    <string name="resting_navigation_position">В покое и движении</string>
+    <string name="rendering_avg_info_details">FPS на последние 1k кадров: %1$s
+\nCPU (тайлы): %2$s
+\nCPU (время простоя): %3$s
+\nCPU (ожидание CPU): %4$s</string>
+    <string name="location_radius_description">Показывает круглую область, отражающую точность вашего текущего местоположения</string>
+    <string name="view_angle_description">Показывает конусовидную зону вашего направления взгляда</string>
 </resources>
