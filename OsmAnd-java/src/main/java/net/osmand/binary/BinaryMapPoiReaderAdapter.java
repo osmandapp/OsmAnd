@@ -796,12 +796,13 @@ public class BinaryMapPoiReaderAdapter {
 				retValue.setLength(0);
 				hasSubcategoriesField = true;
 				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
+				boolean topIndex = region.topIndexSubTypes.contains(st);
 				if (req.poiAdditionalFilter != null) {
 					if (st != null && req.poiAdditionalFilter.accept(st, retValue.toString())) {
 						topIndexAdditonalFound = true;
 					}
 				}
-				if (st != null) {
+				if (st != null && !topIndex) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
 				break;
