@@ -5825,4 +5825,15 @@
     <string name="profile_icon">Icono de perfil</string>
     <string name="navigation_position_icon_summary">Icono que se muestra mientras navegas o te mueves.</string>
     <string name="rendering_value_pale_name">Pálido</string>
+    <string name="navigation_position">Posición de navegación</string>
+    <string name="resting_navigation_position">Posición de reposo y navegación</string>
+    <string name="view_angle_description">Muestra el área en forma de cono a la que te enfrentas actualmente</string>
+    <string name="view_angle">Ángulo de visión</string>
+    <string name="location_radius_description">Muestra el área circular que representa la precisión de la ubicación actual</string>
+    <string name="location_radius">Radio de la ubicación</string>
+    <string name="resting_position">Posición de reposo</string>
+    <string name="rendering_avg_info_details">FPS por últimos 1k fotogramas: %1$s
+\nCPU (celdas): %2$s
+\nCPU (tiempo de inactividad): %3$s
+\nCPU (CPU sin usar): %4$s</string>
 </resources>
