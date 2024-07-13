@@ -5822,4 +5822,15 @@
     <string name="resting_position_icon_summary">Ikon, ami akkor jelenik meg, ha nem mozog.</string>
     <string name="navigation_position_icon_summary">Navigálás vagy mozgás közben megjelenő ikon.</string>
     <string name="rendering_value_pale_name">Halvány</string>
+    <string name="navigation_position">Navigálás közben</string>
+    <string name="location_radius_description">Megjeleníti a kör alakú területet, amely az aktuális hely pontosságát jelzi</string>
+    <string name="location_radius">Hely sugár</string>
+    <string name="view_angle_description">Megjeleníti azt a kúp alakú területet, amellyel éppen szemben áll</string>
+    <string name="view_angle">Látószög</string>
+    <string name="rendering_avg_info_details">FPS (utolsó 1000 képkocka): %1$s
+\nCPU (csempék): %2$s
+\nCPU (üresjárat): %3$s
+\nCPU (CPU-ra várás): %4$s</string>
+    <string name="resting_position">Állóhelyzet</string>
+    <string name="resting_navigation_position">Állóhelyzeti és navigálási pozíció</string>
 </resources>
