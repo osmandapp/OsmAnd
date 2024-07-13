@@ -5804,4 +5804,19 @@
     <string name="data_source">Fonte de dados</string>
     <string name="contact_support_retry">Tente novamente ou entre em contato com o suporte</string>
     <string name="choose_map_orientation">Escolha a orientação do mapa</string>
+    <string name="quick_action_map_underlay">Camada inferior</string>
+    <string name="quick_action_track_waypoint">Ponto de passagem da trilha</string>
+    <string name="energy_avg_info_description">Nível da bateria por minuto: %1$s
+\nConsumo de energia (mAh): %2$s</string>
+    <string name="navigation_position_icon_summary">Ícone exibido enquanto você está navegando ou se movendo.</string>
+    <string name="shared_string_all_icons">Todos os ícones</string>
+    <string name="profile_icon">Ícone do perfil</string>
+    <string name="resting_position_icon">Ícone de posição de parada</string>
+    <string name="view_angle_description">Exibe a área em forma de cone que você está vendo no momento</string>
+    <string name="view_angle">Ângulo de visão</string>
+    <string name="location_radius_description">Mostra a área circular que representa a precisão de sua localização atual</string>
+    <string name="location_radius">Raio de localização</string>
+    <string name="navigation_position_icon">Ícone da posição de navegação</string>
+    <string name="resting_position_icon_summary">Ícone exibido quando você não está se movendo.</string>
+    <string name="navigation_position">Posição de navegação</string>
 </resources>
