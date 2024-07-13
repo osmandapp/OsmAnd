@@ -5828,4 +5828,5 @@
     <string name="profile_icon">Pictograma profilului</string>
     <string name="resting_position_icon_summary">Pictogramă afișată atunci când nu vă deplasați.</string>
     <string name="resting_position">Poziția de repaus</string>
+    <string name="resting_navigation_position">Poziția de odihnă și navigație</string>
 </resources>
