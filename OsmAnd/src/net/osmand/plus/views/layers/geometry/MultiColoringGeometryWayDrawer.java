@@ -203,14 +203,14 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 				if (useSpecialArrow) {
 					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPxAuto(ctx, 2));
-					return new int[]{bitmapSize, bitmapSize};
+					return new int[] {bitmapSize, bitmapSize};
 				} else {
 					float scaleCoef = 1f;
 					float styleWidth = arrowsWayStyle.getWidth(0);
 					if (styleWidth > 0 && scaled) {
 						scaleCoef = (styleWidth / 2f) / bitmap.getWidth();
 					}
-					return new int[]{(int) (bitmap.getWidth() * scaleCoef), bitmap.getHeight()};
+					return new int[] {(int) (bitmap.getWidth() * scaleCoef), bitmap.getHeight()};
 				}
 			}
 			return null;
