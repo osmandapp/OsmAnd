@@ -661,14 +661,14 @@
 \n
 \nTöltse le közvetlenül a csempetérképeket, vagy másolja őket SQLite adatbázis-fájlként az OsmAnd adatmappájába a számos harmadik féltől származó térkép-előkészítő eszköz egyikével.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
-    <string name="osmand_accessibility_description">Az eszköz kisegítő lehetőségeit közvetlenül elérhetővé teszi az OsmAndban. Ez megkönnyíti például a beszédsebesség beállítását a szövegfelolvasásánál (TTS) esetében, a D-pad navigációs beállítását, a trackball használatát a nagyítás vezérléséhez vagy a szövegfelolvasó visszajelzését, például a pozíció automatikus bemondásához.</string>
+    <string name="osmand_accessibility_description">Az eszköz kisegítő lehetőségeit közvetlenül elérhetővé teszi az OsmAndban. Ez megkönnyíti például a beszédsebesség beállítását a szövegfelolvasásnál (TTS), a D-pad navigációs beállítását, a trackball használatát a nagyítás vezérléséhez vagy a szövegfelolvasó visszajelzést, például a pozíció automatikus bemondásához.</string>
     <string name="osmand_development_plugin_description">Funkciókat biztosít az OsmAnd teszteléshez: navigációs útvonalak szimulálása, a képernyőn való megjelenítés, a teljesítmény ellenőrzése stb. Ez a bővítmény az alkalmazás normál használatához nem szükséges.</string>
     <string name="plugins_screen">Bővítmények</string>
     <string name="prefs_plugins_descr">A bővítmények speciális beállításokat és kiegészítő funkciókat aktiválnak.</string>
     <string name="prefs_plugins">Bővítmények</string>
-    <string name="osm_editing_plugin_description">Szerkessze Ön is az OpenStreetMapet azzal a globális közösséggel, amelynek célja a világ átfogó térképének létrehozása és naprakész és nyílt forráskódú adatok biztosítása mindenkinek.
+    <string name="osm_editing_plugin_description">Szerkessze Ön is az OpenStreetMapet azzal a globális közösséggel, amelynek célja a világ átfogó térképének létrehozása és naprakész, nyílt forráskódú adatok biztosítása mindenki számára.
 \n
-\nA térkép szerkesztésére vonatkozó tudnivalókat a %1$s weboldalon találja .</string>
+\nA térkép szerkesztésére vonatkozó tudnivalókat a %1$s weboldalon találja.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
     <string name="play_commands_of_currently_selected_voice">Hang kijelölése és tesztelése bemondások lejátszásával:</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
@@ -876,7 +876,7 @@
     <string name="download_select_map_types">Egyéb térképek</string>
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
-    <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
+    <string name="audionotes_plugin_name">Hang- és videójegyzetek</string>
     <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás, lejtviszonyok segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen szintvonalakkal, domborzatárnyékolással és/vagy meredekségszínezéssel ábrázolhatók.
 \n
 \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak.
@@ -896,10 +896,10 @@
     <string name="recording_context_menu_play">Lejátszás</string>
     <string name="recording_default_name">Felvétel</string>
     <string name="shared_string_control_start">Indítás</string>
-    <string name="map_widget_av_notes">Hang/videojegyzetek</string>
+    <string name="map_widget_av_notes">Hang- és videójegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-bővítmény offline topográfiai jellemzőkkel, mint szintvonalak, árnyékolás, lejtés</string>
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
-    <string name="audionotes_plugin_description">Készítsen hang-/fénykép-/videójegyzeteket utazás közben egy térképgomb vagy a pozíció helyi menüjének használatával.</string>
+    <string name="audionotes_plugin_description">Készítsen hang-, fénykép-, vagy videójegyzeteket utazás közben egy térképgomb vagy a pozíció helyi menüjének használatával.</string>
     <string name="av_def_action_video">Videofelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
     <string name="av_video_format_descr">Kimeneti videoformátum:</string>
@@ -917,7 +917,7 @@
     <string name="srtm_paid_version_msg">Kérjük, fontolja meg a „Topográfia” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Topográfia bővítmény</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
-    <string name="dropbox_plugin_description">Szinkronizálja a hang/videó jegyzeteket a Dropbox fiókjával.</string>
+    <string name="dropbox_plugin_description">Szinkronizálja a hang- és videójegyzeteket a Dropbox fiókjával.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
     <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
     <string name="stop_routing_confirm">Megszakadjon a navigáció\?</string>
@@ -1500,7 +1500,7 @@
     <string name="plugin_nautical_descr">Gazdagítsa a térképet a hajózási útvonalakra, navigációs fényekre, hajózási veszélyzónákra, hajózási vagy kikötési korlátozásokkal érintett zónákra stb. vonatkozó adatokkal. Használatához töltse le a megfelelő tengeri térképeket, és engedélyezze a „Térkép beállítása” menüpontban a „Hajózási térkép” stílust.
 \n
 \nTovábbi olvasnivalók a %1$s oldalon.</string>
-    <string name="plugin_ski_descr">Télisporthelyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint lépjen a „Térkép beállítása” menüpontban a „Tél és síelés” térképstílust.</string>
+    <string name="plugin_ski_descr">Télisport helyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint a „Térkép beállítása” menüpontban a „Tél és síelés” térképstílust.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépeljen az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">Nem sikerült létrehozni a térképeket a megadott könyvtárban</string>
@@ -2416,7 +2416,7 @@
     <string name="add_group">Csoport hozzáadása</string>
     <string name="add_group_descr">Csoportok importálása Kedvencekből vagy GPX útpontokból.</string>
     <string name="empty_state_markers_active">Készítsen térképjelölőket!</string>
-    <string name="empty_state_markers_active_desc">Koppintson hosszan vagy röviden a \'Helyek\'-re ,majd koppintson a jelölő zászlógombjára.</string>
+    <string name="empty_state_markers_active_desc">Koppintson hosszan vagy röviden a \'Helyek\'-re, majd koppintson a jelölő zászlógombra.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
     <string name="empty_state_markers_groups_desc">Jelölők importálása a Kedvencek csoportokból, vagy útpontokból.</string>
     <string name="shared_string_two">Kettő</string>
@@ -2548,17 +2548,17 @@
     <string name="purchase_cancelled_dialog_descr">Előfizetés megújítása az alábbi funkciók használatának folytatásához:</string>
     <string name="travel_card_update_descr">Új Wikivoyage adat érhető el, a használatához frissíts.</string>
     <string name="travel_card_download_descr">Töltse le a Wikivoyage útikalauzokat, hogy internetkapcsolat nélkül olvashasson cikkeket a világ érdekes helyeiről.</string>
-    <string name="start_editing_card_image_text">Az ingyenes, világméretű útikönyv, amit bárki szerkeszthet.</string>
+    <string name="start_editing_card_image_text">Az ingyenes, világméretű útikalauz, amit bárki szerkeszthet.</string>
     <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Teszteld a lehetőségeit a nyílt bétateszt során ingyenesen.</string>
     <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és figyelmességét.</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözlünk a nyílt bétatesztben</string>
     <string name="wikivoyage_travel_guide">Útikalauzok</string>
-    <string name="wikivoyage_travel_guide_descr">Útikönyv a Bolygó legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
+    <string name="wikivoyage_travel_guide_descr">Útikalauz a bolygó legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
     <string name="purchase_dialog_travel_description">Az offline útikalauz funkció használatához vásárolja meg az alábbiak egyikét:</string>
     <string name="purchase_dialog_subtitle">Megfelelő elem kiválasztása</string>
-    <string name="download_maps_travel">Útikönyvek</string>
+    <string name="download_maps_travel">Útikalauzok</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Szócikk eltávolítva</string>
     <string name="wikivoyage_search_hint">Ország, város vagy tartomány keresése</string>
@@ -2568,7 +2568,7 @@
     <string name="shared_string_contents">Tartalomjegyzék</string>
     <string name="shared_string_result">Eredmény</string>
     <string name="use_two_digits_longitude">Kétszámjegyű hosszúsági fok használata</string>
-    <string name="shared_string_travel_guides">Útikönyvek</string>
+    <string name="shared_string_travel_guides">Útikalauzok</string>
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
     <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása vagy külön kategóriák kijelölése.</string>
@@ -3282,7 +3282,7 @@
     <string name="save_track_logging_accuracy">Naplózás pontossága</string>
     <string name="tracks_view_descr">Az összes felvett nyomvonal megtalálható a %1$s helyen vagy a fájlkezelővel az OsmAnd mappában.</string>
     <string name="multimedia_notes_view_descr">Az OSM-jegyzeteit megtalálja itt: %1$s.</string>
-    <string name="video_notes">Videojegyzetek</string>
+    <string name="video_notes">Videójegyzetek</string>
     <string name="photo_notes">Fényképes jegyzetek</string>
     <string name="route_recalculation">Útvonal újratervezése</string>
     <string name="accessibility_announce">Bemondás</string>
@@ -3384,7 +3384,7 @@
     <string name="shared_string_divider">Elválasztó</string>
     <string name="divider_descr">Az e pont alatti elemek el vannak különítve egy elválasztóval.</string>
     <string name="hidden_items_descr">Ezek az elemek a menüből elrejtésre kerültek, azonban az általuk képviselt beállítások vagy bővítmények továbbra is érvényben maradnak.</string>
-    <string name="main_actions_descr">Csak 4 elemet tartalmaz.</string>
+    <string name="main_actions_descr">Csak 4 gomb lehet.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
     <string name="multimedia_photo_play_sound">Fényképező zárhang</string>
     <string name="osm_authorization_success">Hitelesítés sikeres</string>
@@ -3402,11 +3402,11 @@
     <string name="shared_string_language">Nyelv</string>
     <string name="shared_string_all_languages">Összes nyelv</string>
     <string name="wiki_menu_download_descr">További térképek szükségesek a Wikipédia POI-k térképen való megjelenítéséhez.</string>
-    <string name="context_menu_actions">Opciók menü elemei</string>
+    <string name="context_menu_actions">Opciók menü</string>
     <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menüben, a Térkép beállításában és az Opciókban. 
 \n 
 \nA használaton kívüli bővítmények kikapcsolásával elrejtheti őket a %1$s menüből.</string>
-    <string name="ui_customization_short_descr">Menü elemek, Opciók</string>
+    <string name="ui_customization_short_descr">Menü elemek, opciók</string>
     <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia-szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
     <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia-szócikk nem érhető el az ön nyelvén.</string>
     <string name="select_track_file">Nyomvonalfájl kijelölése</string>
@@ -4127,7 +4127,7 @@
     <string name="send_logcat_log">Logcat napló elküldése</string>
     <string name="backup_promocode">Promóciós kód</string>
     <string name="cancel_anytime_in_gplay">Bármikor lemondhatja a Google Play-ben.</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage útikönyv</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage útikalauz</string>
     <string name="you_can_get_feature_as_part_of_pattern">%2$s csomag részeként ezt kapja: %1$s. Összehasonlítás:</string>
     <string name="shared_string_view_all">Összes megtekintése</string>
     <string name="shared_string_discussion">Vitafórum</string>
@@ -4148,15 +4148,15 @@
     <string name="ltr_or_rtl_combine_via_or">%1$s vagy %2$s</string>
     <string name="nautical_depth">Vízmélység</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
+    <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikalauz</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
     <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Gyakoribb térképfrissítések: hetente, naponta vagy akár óránként. A frissítések fokozatosan töltődnek le, mindig csak a módosult területhez.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Havi frissítés az offline térképekhez.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Az összes kontinens és régió offline térképeinek korlátlan számú letöltése.</string>
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
-    <string name="purchases_feature_desc_wikipedia">A Wikipédia összes helyhez kapcsolódó szócikkét elérhetővé teszi offline módon, így a térképen egyszerű koppintásokkal megismerheti az utazás során meglátogatott helyeket. Ne felejtse el letölteni az adott régiók Wikipédia-térképfájljait.</string>
-    <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikönyvet offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
+    <string name="purchases_feature_desc_wikipedia">A Wikipédia összes, helyhez kapcsolódó szócikkét elérhetővé teszi offline módon, így a térképen egyszerű koppintásokkal megismerheti az utazás során meglátogatott helyeket. Ne felejtse el letölteni az adott régiók Wikipédia-térképfájljait.</string>
+    <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikalauzt offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
     <string name="purchases_feature_desc_terrain">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>
     <string name="backup_error_no_valid_subscription">Jelenleg nincs érvényes előfizetése</string>
