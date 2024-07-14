@@ -12,15 +12,15 @@ import java.util.List;
 class GradientGeometryWayProvider implements GeometryWayProvider {
 
 	private final RouteColorize routeColorize;
-	private final List<RouteColorizationPoint> locations;
-	private final List<Float> pointHeights;
+	private final List<RouteColorizationPoint> points;
+	private final List<Float> heights;
 
 	public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
-	                                   @NonNull List<RouteColorizationPoint> locations,
-	                                   @Nullable List<Float> pointHeights) {
+	                                   @NonNull List<RouteColorizationPoint> points,
+	                                   @Nullable List<Float> heights) {
 		this.routeColorize = routeColorize;
-		this.locations = locations;
-		this.pointHeights = pointHeights;
+		this.points = points;
+		this.heights = heights;
 	}
 
 	@Nullable
@@ -29,26 +29,26 @@ class GradientGeometryWayProvider implements GeometryWayProvider {
 	}
 
 	public int getColor(int index) {
-		return locations.get(index).color;
+		return points.get(index).color;
 	}
 
 	@Override
 	public double getLatitude(int index) {
-		return locations.get(index).lat;
+		return points.get(index).lat;
 	}
 
 	@Override
 	public double getLongitude(int index) {
-		return locations.get(index).lon;
+		return points.get(index).lon;
 	}
 
 	@Override
 	public int getSize() {
-		return locations.size();
+		return points.size();
 	}
 
 	@Override
 	public float getHeight(int index) {
-		return pointHeights == null ? 0 : pointHeights.get(index);
+		return heights == null ? 0 : heights.get(index);
 	}
 }
