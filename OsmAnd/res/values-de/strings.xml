@@ -5839,4 +5839,13 @@
     <string name="resting_position">Ruheposition</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Ruhe- und Navigationsposition</string>
+    <string name="auto_25_chars_route_kl">Links halten</string>
+    <string name="auto_25_chars_route_kr">Rechts halten</string>
+    <string name="auto_25_chars_route_tr">Rechts abbiegen</string>
+    <string name="auto_25_chars_route_tshr">Scharf rechts abbiegen</string>
+    <string name="auto_25_chars_route_tslr">Leicht rechts abbiegen</string>
+    <string name="auto_25_chars_route_tl">Links abbiegen</string>
+    <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
+    <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
+    <string name="auto_25_chars_route_tu">Bitte wenden</string>
 </resources>
