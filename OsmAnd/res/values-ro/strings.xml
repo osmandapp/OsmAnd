@@ -5829,4 +5829,6 @@
     <string name="resting_position_icon_summary">Pictogramă afișată atunci când nu vă deplasați.</string>
     <string name="resting_position">Poziție de repaus</string>
     <string name="resting_navigation_position">Poziția de odihnă și navigație</string>
+    <string name="auto_25_chars_route_kr">Țineți dreapta</string>
+    <string name="auto_25_chars_route_kl">Țineți stânga</string>
 </resources>
