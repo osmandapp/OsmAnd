@@ -25,9 +25,13 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 
 	public IconsPaletteController(@NonNull OsmandApplication app,
 	                              @NonNull List<IconData> icons, @Nullable IconData selectedIcon) {
-		this.app = app;
+		this(app);
 		this.icons = icons;
 		this.selectedIcon = selectedIcon;
+	}
+
+	public IconsPaletteController(@NonNull OsmandApplication app) {
+		this.app = app;
 	}
 
 	@Override
@@ -47,6 +51,14 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 		if (referenceToRemove != null) {
 			palettes.remove(referenceToRemove);
 		}
+	}
+
+	public void setIcons(@NonNull List<IconData> icons) {
+		this.icons = icons;
+	}
+
+	public void setSelectedIcon(@NonNull IconData selectedIcon) {
+		this.selectedIcon = selectedIcon;
 	}
 
 	public void askUpdateColoredPaletteElements() {

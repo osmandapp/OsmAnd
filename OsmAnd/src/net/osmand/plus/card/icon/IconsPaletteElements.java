@@ -45,4 +45,8 @@ public abstract class IconsPaletteElements<IconData> {
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return app.getUIUtilities().getIcon(id, colorId);
 	}
+
+	public boolean isNightMode() {
+		return nightMode;
+	}
 }

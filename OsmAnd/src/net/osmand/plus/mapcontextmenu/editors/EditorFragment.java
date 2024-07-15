@@ -41,7 +41,7 @@ import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.controller.PointColorController;
-import net.osmand.plus.mapcontextmenu.editors.controller.PointIconControllerJava;
+import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -261,8 +261,9 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	private void createIconSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			EditorIconController iconController = getIconController();
 			ViewGroup iconsCardContainer = view.findViewById(R.id.icons_card_container);
-			iconsCardContainer.addView(new MultiStateCard(mapActivity, getIconsPaletteController()).build());
+			iconsCardContainer.addView(new MultiStateCard(mapActivity, iconController.getCardController()).build());
 		}
 	}
 
@@ -311,13 +312,13 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	@NonNull
-	private PointIconControllerJava getIconsPaletteController() {
-		return PointIconControllerJava.getInstance(app, this, getPreselectedIconName());
+	private EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, getPreselectedIconName());
 	}
 
 	protected void updateContent() {
 		updateSelectedColorText();
-		getIconsPaletteController().updateAccentColor(color);
+		getIconController().updateAccentColor(color);
 		shapesCard.updateSelectedShape(color, backgroundType);
 	}
 
@@ -357,7 +358,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	protected void addLastUsedIcon(@NonNull String iconName) {
-		getIconsPaletteController().addLastUsedIcon(iconName);
+		getIconController().addIconToLastUsed(iconName);
 	}
 
 	@Override
