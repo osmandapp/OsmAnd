@@ -24,7 +24,7 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 		super(ctx, density);
 		borderPaint = createBorderPaint();
 		circlePaint = createCirclePaint();
-		float scale = getApp().getOsmandMap().getDisplayDensityScaleCoef();
+		float scale = getApp().getOsmandMap().getCarDensityScaleCoef();
 		Bitmap specialArrowBitmap = AndroidUtils.drawableToBitmap(ContextCompat.getDrawable(ctx, R.drawable.mm_special_arrow_up));
 		if (specialArrowBitmap != null && scale != 1f && scale > 0) {
 			specialArrowBitmap = AndroidUtils.scaleBitmap(specialArrowBitmap,
