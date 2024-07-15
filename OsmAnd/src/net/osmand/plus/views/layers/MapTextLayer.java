@@ -99,8 +99,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 			updateTextSize();
 			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
-			float textScale = getApplication().getOsmandMap().getDisplayDensityScaleCoef();
-			float textSize = paintTextIcon.getTextSize() * textScale;
+			float textSize = paintTextIcon.getTextSize();
 			for (Object o : entry.getValue()) {
 				LatLon loc = provider.getTextLocation(o);
 				String name = provider.getText(o);

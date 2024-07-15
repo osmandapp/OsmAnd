@@ -216,7 +216,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private void updateTextSize() {
 		mTextPaint.setTextSize(18f * Resources.getSystem().getDisplayMetrics().scaledDensity
-				* getApplication().getOsmandMap().getDisplayDensityScaleCoef());
+				* getApplication().getOsmandMap().getCarDensityScaleCoef());
 	}
 
 	private void recreateBitmaps() {

@@ -51,7 +51,7 @@ public abstract class GeometryWayContext {
 		paintIconCustom.setColor(Color.BLACK);
 		paintIconCustom.setStrokeWidth(density);
 
-		float scale = getApp().getOsmandMap().getDisplayDensityScaleCoef();
+		float scale = getApp().getOsmandMap().getCarDensityScaleCoef();
 		arrowBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, getArrowBitmapResId(), scale);
 	}
 

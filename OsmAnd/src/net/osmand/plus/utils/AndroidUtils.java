@@ -25,7 +25,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -169,26 +168,6 @@ public class AndroidUtils {
 
 	}
 
-	public static Bitmap getScaledBitmap(@NonNull OsmandApplication app, @DrawableRes int drawableId, float scale) {
-		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
-		if (bitmap != null && scale != 1f && scale > 0) {
-			bitmap = AndroidUtils.scaleBitmap(bitmap,
-					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
-		}
-		return bitmap;
-	}
-
-
-	public static Bitmap getBitmapFromDrawable(@NonNull  Drawable drawable) {
-			drawable = (DrawableCompat.wrap(drawable)).mutate();
-		Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-				drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(bitmap);
-		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-		drawable.draw(canvas);
-
-		return bitmap;
-	}
 	public static Bitmap scaleBitmap(Bitmap bm, int newWidth, int newHeight, boolean keepOriginalBitmap) {
 		int width = bm.getWidth();
 		int height = bm.getHeight();
@@ -701,7 +680,7 @@ public class AndroidUtils {
 
 	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		float scaleCoef = app.getOsmandMap().getDisplayDensityScaleCoef();
+		float scaleCoef = app.getOsmandMap().getCarDensityScaleCoef();
 		Resources r = ctx.getResources();
 		return (int) (TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
