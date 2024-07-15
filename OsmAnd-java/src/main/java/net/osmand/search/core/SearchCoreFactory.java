@@ -1092,6 +1092,8 @@ public class SearchCoreFactory {
 		private TopIndexMatch matchTopIndex(BinaryMapIndexReader r, SearchPhrase phrase) throws IOException {
 			String search = phrase.getText(true);
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
+			String lang = phrase.getSettings().getLang();
+			List<TopIndexMatch> matches = new ArrayList<>();
 			for (PoiSubType subType : poiSubTypes) {
 				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 				String topIndexValue = null;
@@ -1105,8 +1107,19 @@ public class SearchCoreFactory {
 				}
 				if (topIndexValue != null) {
 					TopIndexMatch topIndexMatch = new TopIndexMatch(subType, topIndexValue, translate);
-					return topIndexMatch;
+					if (!Algorithms.isEmpty(lang) && subType.name.contains(":" + lang)) {
+						return topIndexMatch;
+					}
+					matches.add(topIndexMatch);
 				}
+			}
+			for (TopIndexMatch m : matches) {
+				if (!m.subType.name.contains(":")) {
+					return m;
+				}
+			}
+			if (matches.size() > 0) {
+				return matches.get(0);
 			}
 			return null;
 		}
