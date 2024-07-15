@@ -5841,4 +5841,7 @@
 \nCPU (čekanje CPU)): %4$s</string>
     <string name="resting_position">U mirovanju</string>
     <string name="navigation_position">U pokretu</string>
+    <string name="auto_25_chars_route_kr">Drži desno</string>
+    <string name="auto_25_chars_route_tr">Skreni desno</string>
+    <string name="auto_25_chars_route_kl">Drži levo</string>
 </resources>
