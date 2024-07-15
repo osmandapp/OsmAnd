@@ -5851,4 +5851,13 @@
     <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
     <string name="resting_position">Ubicación en reposo</string>
     <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
+    <string name="auto_25_chars_route_tr">Gira a la derecha</string>
+    <string name="auto_25_chars_route_tshr">Gira fuerte a la derecha</string>
+    <string name="auto_25_chars_route_tslr">Gira leve a la derecha</string>
+    <string name="auto_25_chars_route_tl">Gira a la izquierda</string>
+    <string name="auto_25_chars_route_tshl">Gira fuerte a la izquierda</string>
+    <string name="auto_25_chars_route_tsll">Gira leve a la izquierda</string>
+    <string name="auto_25_chars_route_tu">Da la vuelta</string>
+    <string name="auto_25_chars_route_kl">Mantente a la izquierda</string>
+    <string name="auto_25_chars_route_kr">Mantente a la derecha</string>
 </resources>
