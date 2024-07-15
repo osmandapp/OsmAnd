@@ -7,18 +7,19 @@ import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.search.core.ObjectType.SEARCH_FINISHED;
 
+import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconSearchResult;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.utils.UiUtilities;
@@ -140,7 +141,13 @@ public class EditorIconScreenController implements IDialogController {
 	}
 
 	private void onSelectCategory(@NonNull IconsCategory category) {
-		screen.askSelectCategory(category);
+		centralController.setSelectedCategory(category);
+	}
+
+	public void updateSelectedCategory() {
+		if (screen != null) {
+			screen.updateSelectedCategory();
+		}
 	}
 
 	public void enterSearchMode() {
@@ -202,9 +209,23 @@ public class EditorIconScreenController implements IDialogController {
 		});
 	}
 
-	@Nullable
+	@NonNull
+	public IconsPaletteElements<String> getPaletteElements(@NonNull Context context, boolean nightMode) {
+		return centralController.getPaletteElements(context, nightMode);
+	}
+
+	public void onIconSelectedFromPalette(@NonNull String iconKey) {
+		centralController.onIconSelectedFromPalette(iconKey, false);
+		screen.dismiss();
+	}
+
+	@NonNull
 	public IconsCategory getSelectedCategory() {
-		return null;
+		return centralController.getSelectedCategory();
+	}
+
+	public boolean isSelectedIcon(@NonNull String iconKey) {
+		return centralController.isSelectedIcon(iconKey);
 	}
 
 	@NonNull
@@ -212,13 +233,8 @@ public class EditorIconScreenController implements IDialogController {
 		return app.getString(R.string.select_icon_profile_dialog_title);
 	}
 
-	@NonNull
-	public EditorIconController getCentralController() {
-		return centralController;
-	}
-
-	@NonNull
-	private String getCategoryName(@NonNull PoiCategory poiCategory) {
-		return poiCategory.getTranslation();
+	@ColorInt
+	public int getControlsAccentColor() {
+		return centralController.getControlsAccentColor();
 	}
 }

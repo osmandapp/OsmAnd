@@ -63,7 +63,7 @@ public class EditorIconController extends BaseDialogController {
 		super(app);
 		initIconCategories();
 		this.selectedIconKey = selectedIconKey;
-		this.selectedCategory = getInitialCategory();
+		this.selectedCategory = findIconCategory(selectedIconKey);
 		this.cardController = new EditorIconCardController(app, this);
 		this.screenController = new EditorIconScreenController(app, this);
 	}
@@ -164,14 +164,10 @@ public class EditorIconController extends BaseDialogController {
 		return categories;
 	}
 
-	@NonNull
-	private IconsCategory getInitialCategory() {
-		for (IconsCategory category : categories) {
-			if (category.containsIcon(selectedIconKey)) {
-				return category;
-			}
-		}
-		return categories.get(0);
+	public void setSelectedCategory(@NonNull IconsCategory category) {
+		this.selectedCategory = category;
+		cardController.updateSelectedCardState();
+		screenController.updateSelectedCategory();
 	}
 
 	@NonNull
@@ -234,20 +230,37 @@ public class EditorIconController extends BaseDialogController {
 		return Objects.equals(iconKey, selectedIconKey);
 	}
 
-	public void onIconSelectedFromPaletteScreen(@NonNull String iconKey) {
-		onIconSelectedFromPalette(iconKey);
-		// todo close dialog
+	public void onIconSelectedFromPalette(@NonNull String iconKey, boolean fromCard) {
+		this.selectedIconKey = iconKey;
+		if (!fromCard) {
+			setSelectedCategory(findIconCategory(selectedIconKey));
+			cardController.updateIconsSelection();
+			addIconToLastUsed(iconKey);
+		}
+		listener.onIconSelectedFromPalette(iconKey);
 	}
 
-	public void onIconSelectedFromPalette(String iconKey) {
-		this.selectedIconKey = iconKey;
-		listener.onIconSelectedFromPalette(iconKey);
+	@NonNull
+	private IconsCategory findIconCategory(@Nullable String iconKey) {
+		if (iconKey != null) {
+			for (IconsCategory category : categories) {
+				if (category.containsIcon(iconKey)) {
+					return category;
+				}
+			}
+		}
+		return categories.get(0);
 	}
 
 	@NonNull
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
+	}
+
+	public static void onDestroy(@NonNull OsmandApplication app) {
+		DialogManager manager = app.getDialogManager();
+		manager.unregister(PROCESS_ID);
 	}
 
 	@NonNull

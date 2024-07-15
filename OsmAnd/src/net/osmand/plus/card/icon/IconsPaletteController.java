@@ -83,6 +83,11 @@ public abstract class IconsPaletteController<IconData> implements IIconsPaletteC
 	}
 
 	@Override
+	public int getIconsAccentColor(boolean nightMode) {
+		return getControlsAccentColor(nightMode);
+	}
+
+	@Override
 	public int getControlsAccentColor(boolean nightMode) {
 		return ColorUtilities.getActiveColor(app, nightMode);
 	}

@@ -44,10 +44,10 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private List<ScreenItem> screenItems = new ArrayList<>();
 	private final boolean usedOnMap;
-	private final EditorIconController controller;
+	private final EditorIconScreenController controller;
 
 	public EditorIconScreenAdapter(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-	                               @NonNull EditorIconController controller, boolean usedOnMap) {
+	                               @NonNull EditorIconScreenController controller, boolean usedOnMap) {
 		this.app = mapActivity.getMyApplication();
 		this.iconsCache = app.getUIUtilities();
 		this.appMode = appMode;
@@ -65,7 +65,7 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 			case CATEGORY_ICONS:
 				return new IconsCategoryViewHolder(inflate(R.layout.card_icons_by_category));
 			case ICON_SEARCH_RESULT:
-				return new IconSearchResultViewHolder(inflate(R.layout.bottom_sheet_item_with_descr_56dp));
+				return new IconSearchResultViewHolder(inflate(R.layout.list_item_icon_search_result));
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -74,6 +74,7 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		int itemType = getItemViewType(position);
+		boolean lastItem = position == getItemCount() - 1;
 		ScreenItem screenItem = screenItems.get(position);
 		if (itemType == CATEGORY_ICONS) {
 			IconsCategoryViewHolder h = (IconsCategoryViewHolder) holder;
@@ -84,7 +85,6 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 			for (String icon : category.getIconKeys()) {
 				h.iconsContainer.addView(createIconItemView(icon, h.iconsContainer));
 			}
-			boolean lastItem = position == getItemCount() - 1;
 			AndroidUiHelper.updateVisibility(h.bottomDivider, !lastItem);
 		} else if (itemType == ICON_SEARCH_RESULT) {
 			IconSearchResultViewHolder h = (IconSearchResultViewHolder) holder;
@@ -92,6 +92,8 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 			h.icon.setImageDrawable(iconsCache.getThemedIcon(searchResult.getIconId()));
 			h.title.setText(searchResult.getIconName());
 			h.description.setText(searchResult.getCategoryName());
+			h.itemView.setOnClickListener(v -> controller.onIconSelectedFromPalette(searchResult.getIconKey()));
+			AndroidUiHelper.updateVisibility(h.bottomDivider, !lastItem);
 		}
 	}
 
@@ -104,7 +106,6 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 		view.setOnClickListener(v -> {
 			controller.onIconSelectedFromPalette(iconKey);
-			// todo dismiss();
 		});
 		view.setTag(iconKey);
 		return view;
@@ -166,13 +167,14 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 		private final ImageView icon;
 		private final TextView title;
 		private final TextView description;
-
+		private final View bottomDivider;
 
 		public IconSearchResultViewHolder(@NonNull View itemView) {
 			super(itemView);
 			icon = itemView.findViewById(R.id.icon);
 			title = itemView.findViewById(R.id.title);
 			description = itemView.findViewById(R.id.description);
+			bottomDivider = itemView.findViewById(R.id.bottom_divider);
 		}
 	}
 }

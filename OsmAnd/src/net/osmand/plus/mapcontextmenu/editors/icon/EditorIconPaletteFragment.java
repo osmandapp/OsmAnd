@@ -1,21 +1,21 @@
 package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import static net.osmand.plus.card.icon.IIconsPaletteController.ALL_ICONS_PROCESS_ID;
-import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -87,6 +87,13 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 			}
 			window.setStatusBarColor(getColor(getStatusBarColorId()));
 		}
+		dialog.setOnKeyListener((d, keyCode, event) -> {
+			if (KeyEvent.KEYCODE_BACK == keyCode && KeyEvent.ACTION_UP == event.getAction()) {
+				onBackPressed();
+				return true;
+			}
+			return false;
+		});
 		return dialog;
 	}
 
@@ -95,16 +102,17 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflate(R.layout.fragment_icon_categories, container);
+		progressBar = view.findViewById(R.id.progress_bar);
 		setupToolbar(view);
 		setupSearch(view);
-		setupProgressBar(view);
 		setupCategorySelector(view);
-		setupIconCategories(view);
+		setupContentContainer(view);
 		onScreenModeChanged();
+		updateSelectedCategory();
 		return view;
 	}
 
-	protected void setupToolbar(@NonNull View view) {
+	private void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
 		appbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
@@ -117,20 +125,14 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 
 		backButton = view.findViewById(R.id.back_button);
 		backButton.setVisibility(View.VISIBLE);
-		backButton.setOnClickListener((v) -> {
-			if (controller.isInSearchMode()) {
-				controller.exitSearchMode();
-			} else {
-				dismiss();
-			}
-		});
+		backButton.setOnClickListener((v) -> onBackPressed());
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(controller.getToolbarTitle());
 	}
 
-	protected void setStatusBarBackgroundColor(@ColorInt int color) {
+	private void setStatusBarBackgroundColor(@ColorInt int color) {
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
@@ -138,7 +140,19 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		}
 	}
 
-	protected void setupSearch(@NonNull View view) {
+	private void onBackPressed() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.hideSoftKeyboard(activity, searchEditText);
+		}
+		if (controller.isInSearchMode()) {
+			controller.exitSearchMode();
+		} else {
+			dismiss();
+		}
+	}
+
+	private void setupSearch(@NonNull View view) {
 		searchContainer = view.findViewById(R.id.search_container);
 		clearSearchQueryButton = searchContainer.findViewById(R.id.clearButton);
 		clearSearchQueryButton.setVisibility(View.GONE);
@@ -149,10 +163,18 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable query) {
-				controller.searchIcons(query.toString());
 				updateProgressBarVisibility(true);
+				controller.searchIcons(query.toString());
 				AndroidUiHelper.updateVisibility(clearSearchQueryButton, query.length() > 0);
 				adapter.notifyItemChanged(0);
+			}
+		});
+		searchEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				searchEditText.setSelection(searchEditText.getText().length());
+				AndroidUtils.showSoftKeyboard(requireActivity(), v);
+			} else {
+				AndroidUtils.hideSoftKeyboard(requireActivity(), v);
 			}
 		});
 		clearSearchQueryButton.setOnClickListener((v) -> {
@@ -160,13 +182,6 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 			searchEditText.setText(null);
 			updateProgressBarVisibility(false);
 		});
-	}
-
-	private void setupProgressBar(@NonNull View view) {
-//		int activeColor = getActiveColor(app, nightMode);
-//		int colorWithAlpha = ColorUtilities.getColorWithAlpha(activeColor, 0.3f);
-		progressBar = view.findViewById(R.id.progress_bar);
-//		progressBar.setBackgroundColor(colorWithAlpha);
 	}
 
 	private void setupCategorySelector(@NonNull View view) {
@@ -187,20 +202,14 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		categorySelector.setOnSelectChipListener(chip -> controller.onChipClick(chip));
 	}
 
-	private void setupIconCategories(@NonNull View view) {
+	private void setupContentContainer(@NonNull View view) {
 		OsmandSettings settings = app.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		adapter = new EditorIconScreenAdapter(mapActivity, appMode, controller.getCentralController(), isUsedOnMap());
+		adapter = new EditorIconScreenAdapter(mapActivity, appMode, controller, isUsedOnMap());
 		recyclerView = view.findViewById(R.id.icon_categories);
 		recyclerView.setLayoutManager(new LinearLayoutManager(mapActivity));
 		recyclerView.setAdapter(adapter);
-	}
-
-	@Override
-	public void updateScreenContent() {
-		updateProgressBarVisibility(false);
-		adapter.setScreenData(controller.populateScreenItems());
 	}
 
 	@Override
@@ -211,11 +220,21 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		AndroidUiHelper.updateVisibility(searchButton, !inSearchMode);
 		AndroidUiHelper.updateVisibility(toolbarTitle, !inSearchMode);
 		backButton.setImageResource(getNavigationIconId());
+		if (inSearchMode) {
+			searchEditText.requestFocus();
+		}
 		updateScreenContent();
 	}
 
 	@Override
-	public void askSelectCategory(@NonNull IconsCategory category) {
+	public void updateScreenContent() {
+		updateProgressBarVisibility(false);
+		adapter.setScreenData(controller.populateScreenItems());
+	}
+
+	@Override
+	public void updateSelectedCategory() {
+		IconsCategory category = controller.getSelectedCategory();
 		ChipItem selected = categorySelector.findChipByTag(category);
 		if (selected != null) {
 			categorySelector.setSelected(selected);

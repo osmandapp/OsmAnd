@@ -13,6 +13,7 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
+import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 
 import java.util.ArrayList;
@@ -48,8 +49,16 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
-		selectedState = cardState;
+		centralController.setSelectedCategory((IconsCategory) cardState.getTag());
+	}
+
+	public void updateSelectedCardState() {
+		selectedState = findCardState(centralController.getSelectedCategory());
 		card.updateSelectedCardState();
+	}
+
+	public void updateIconsSelection() {
+		paletteController.onSelectIconFromPalette(centralController.getSelectedIconKey());
 	}
 
 	@NonNull
@@ -104,7 +113,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 			}
 
 			@Override
-			public int getControlsAccentColor(boolean nightMode) {
+			public int getIconsAccentColor(boolean nightMode) {
 				return centralController.getControlsAccentColor();
 			}
 
@@ -113,7 +122,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 				return true;
 			}
 		};
-		paletteController.setPaletteListener(centralController::onIconSelectedFromPalette);
+		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, true));
 	}
 
 	public void askUpdateColoredPaletteElements() {

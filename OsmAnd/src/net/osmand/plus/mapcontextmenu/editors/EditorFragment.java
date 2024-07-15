@@ -181,6 +181,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			PointColorController.onDestroy(app);
+			EditorIconController.onDestroy(app);
 		}
 	}
 
@@ -263,7 +264,12 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		if (mapActivity != null) {
 			EditorIconController iconController = getIconController();
 			ViewGroup iconsCardContainer = view.findViewById(R.id.icons_card_container);
-			iconsCardContainer.addView(new MultiStateCard(mapActivity, iconController.getCardController()).build());
+			iconsCardContainer.addView(new MultiStateCard(mapActivity, iconController.getCardController()) {
+				@Override
+				public int getCardLayoutId() {
+					return R.layout.card_select_editor_icon;
+				}
+			}.build());
 		}
 	}
 
@@ -304,6 +310,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	@Override
 	public void onIconSelectedFromPalette(@NonNull String icon) {
 		setIconName(icon);
+		updateContent();
 	}
 
 	@NonNull
@@ -313,7 +320,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 
 	@NonNull
 	private EditorIconController getIconController() {
-		return EditorIconController.getInstance(app, this, getPreselectedIconName());
+		return EditorIconController.getInstance(app, this, iconName);
 	}
 
 	protected void updateContent() {
