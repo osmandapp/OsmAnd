@@ -261,7 +261,7 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
-		muteAndRemoveTurns(result);
+		muteAndRemoveUselessTurns(result);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -2252,7 +2252,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private void muteAndRemoveTurns(List<RouteSegmentResult> result) {
+	private void muteAndRemoveUselessTurns(List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
@@ -2260,7 +2260,8 @@ public class RouteResultPreparation {
 				continue;
 			}
 			int active = turnType.getActiveCommonLaneTurn();
-			if (TurnType.isKeepDirectionTurn(active)) {
+			int activeGoAheadLanesCount = turnType.countTurnTypeDirections(TurnType.C, true);
+			if (TurnType.isKeepDirectionTurn(active) || (turnType.goAhead() && activeGoAheadLanesCount > 0)) {
 				if (i > 0 && isSwitchToLink(curr, result.get(i - 1))) {
 					continue;
 				}
