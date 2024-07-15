@@ -52,13 +52,16 @@ public class GpxRouteApproximation {
 		this.router = router;
 		GpxRouteApproximation result;
 		if (router.isUseGeometryBasedApproximation()) {
-			result = searchGpxSegments(this, gpxPoints, resultMatcher);
+			result = searchGpxSegments(this, gpxPoints);
 		} else {
-			result = searchGpxRouteByRouting(this, gpxPoints, resultMatcher);
+			result = searchGpxRouteByRouting(this, gpxPoints);
 		}
 		result.reconstructFinalPointsFromFullRoute();
 		if (useExternalTimestamps) {
 			result.applyExternalTimestamps(gpxPoints);
+		}
+		if (resultMatcher != null) {
+			resultMatcher.publish(this.ctx.calculationProgress.isCancelled ? null : this);
 		}
 		return result;
 	}
@@ -171,7 +174,7 @@ public class GpxRouteApproximation {
 		}
 	}
 
-	private GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+	private GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException, InterruptedException {
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && router.isUseNativeApproximation()) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
@@ -188,13 +191,10 @@ public class GpxRouteApproximation {
 				log.info(gctx);
 			}
 		}
-		if (resultMatcher != null) {
-			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
-		}
 		return gctx;
 	}
 
-	private GpxRouteApproximation searchGpxRouteByRouting(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+	private GpxRouteApproximation searchGpxRouteByRouting(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && router.isUseNativeApproximation()) {
@@ -287,9 +287,6 @@ public class GpxRouteApproximation {
 						gpxPoints.get(gpxPoints.size() - 1).loc, gctx.fullRoute);
 				log.info(gctx);
 			}
-		}
-		if (resultMatcher != null) {
-			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
 		}
 		return gctx;
 	}
