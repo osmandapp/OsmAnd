@@ -5814,4 +5814,15 @@
     <string name="resting_position_icon_summary">當您不動時顯示的圖示。</string>
     <string name="resting_position_icon">休息位置圖示</string>
     <string name="rendering_value_pale_name">灰白</string>
+    <string name="navigation_position">導航位置</string>
+    <string name="resting_navigation_position">暫停與導航位置</string>
+    <string name="view_angle_description">為您目前面對的方向顯示錐形區域</string>
+    <string name="view_angle">檢視角度</string>
+    <string name="location_radius_description">顯示代表您目前位置準確度的圓形區域</string>
+    <string name="location_radius">定位半徑</string>
+    <string name="rendering_avg_info_details">最近一千個影格的 FPS：%1$s
+\nCPU（圖磚）：%2$s
+\nCPU（閒置時間）：%3$s
+\nCPU（等待 CPU）%4$s</string>
+    <string name="resting_position">暫停位置</string>
 </resources>
