@@ -158,6 +158,7 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_04 = 4704;
 	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
 	public static final int VERSION_4_7_05 = 4705;
+	// 4706 - 4.7-06 (Import location 3D icon models)
 	public static final int VERSION_4_7_06 = 4706;
 
 	public static final int LAST_APP_VERSION = VERSION_4_7_06;

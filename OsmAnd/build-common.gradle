@@ -236,7 +236,7 @@ task collectTestResources(type: Copy) {
 	}
 }
 
-task copyModels(type: Copy) {
+task copy3DModels(type: Copy) {
 	from "../../resources/models"
 	into "assets/models"
 	include "**/*.*"
@@ -256,7 +256,7 @@ task collectExternalResources {
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
 			collectTestResources,
-			copyModels
+			copy3DModels
 }
 
 // Legacy core build
