@@ -562,7 +562,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (menu.navigateInPedestrianMode()) {
 			iconResId = R.drawable.ic_action_pedestrian_dark;
 		}
-		Drawable drawable = getIcon(iconResId, bottomButtonsColor);
+		Drawable drawable = uiUtilities.getScaledIcon(iconResId, bottomButtonsColor, bottomButtonsColor, nightMode);
 		directionsButton.setTextColor(ContextCompat.getColor(mapActivity, bottomButtonsColor));
 		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(
 				directionsButton, null, null, drawable, null);

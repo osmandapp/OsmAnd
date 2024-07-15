@@ -148,7 +148,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private void recreateBitmaps(boolean night) {
-		float scale = getApplication().getOsmandMap().getCarDensityScaleCoef();
+		float scale = getApplication().getOsmandMap().getDisplayDensityScaleCoef();
 		circle = getScaledBitmap(R.drawable.ic_white_shield_small, scale);
 		smallIconBg = getScaledBitmap(night
 				? R.drawable.map_pin_user_location_small_night

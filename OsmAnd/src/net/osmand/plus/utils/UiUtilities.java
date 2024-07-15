@@ -2,8 +2,10 @@ package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -111,6 +113,21 @@ public class UiUtilities {
 		return drawable;
 	}
 
+	private synchronized Drawable wrapDrawableWithColorImp(@NonNull Drawable srcDrawable, @DrawableRes int resId, @ColorRes int clrId) {
+		long key = (((long) resId) << 32L) + clrId;
+		Drawable drawable = drawableCache.get(key);
+		if (drawable == null) {
+			drawable = srcDrawable;
+			drawable = DrawableCompat.wrap(drawable);
+			drawable.mutate();
+			if (clrId != 0) {
+				DrawableCompat.setTint(drawable, ContextCompat.getColor(app, clrId));
+			}
+			drawableCache.put(key, drawable);
+		}
+		return drawable;
+	}
+
 	@Nullable
 	private synchronized Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
 		Drawable drawable = null;
@@ -127,6 +144,11 @@ public class UiUtilities {
 			LOG.warn("Invalid icon identifier");
 		}
 		return drawable;
+	}
+
+	@Nullable
+	public Drawable wrapDrawableWithColor(@NonNull Drawable srcDrawable, @DrawableRes int resId, @ColorRes int color) {
+		return wrapDrawableWithColorImp(srcDrawable, resId, color);
 	}
 
 	@Nullable
@@ -167,6 +189,29 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
+	}
+
+	@Nullable
+	public Drawable getScaledIcon(@DrawableRes int iconId, @ColorRes int nightColor, @ColorRes int dayColor, boolean isNight) {
+		Drawable scaledDrawable = getScaledDrawable(iconId);
+		if(scaledDrawable != null) {
+			return wrapDrawableWithColor(scaledDrawable, iconId, isNight ? nightColor : dayColor);
+		} else {
+			return null;
+		}
+	}
+
+	@Nullable
+	public Drawable getScaledDrawable(@DrawableRes int iconId) {
+		Drawable smileDrawableSrc = AppCompatResources.getDrawable(app, iconId);
+		if (smileDrawableSrc != null) {
+			Bitmap srcBitmap = AndroidUtils.getBitmapFromDrawable(smileDrawableSrc);
+			float scale = app.getOsmandMap().getTextScale();
+			Bitmap smileBitmap = AndroidUtils.scaleBitmap(srcBitmap,
+					(int) (srcBitmap.getWidth() * scale), (int) (srcBitmap.getHeight() * scale), false);
+			return new BitmapDrawable(app.getResources(), smileBitmap);
+		}
+		return null;
 	}
 
 	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
