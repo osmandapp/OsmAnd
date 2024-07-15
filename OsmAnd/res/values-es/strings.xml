@@ -5836,4 +5836,13 @@
 \nCPU (celdas): %2$s
 \nCPU (tiempo de inactividad): %3$s
 \nCPU (CPU sin usar): %4$s</string>
+    <string name="auto_25_chars_route_tsll">Gire ligeramente a la izquierda</string>
+    <string name="auto_25_chars_route_tu">De la vuelta</string>
+    <string name="auto_25_chars_route_tshr">Gire bruscamente a la derecha</string>
+    <string name="auto_25_chars_route_tl">Gire a la izquierda</string>
+    <string name="auto_25_chars_route_tshl">Gire bruscamente a la izquierda</string>
+    <string name="auto_25_chars_route_kl">Mantengase a la izquierda</string>
+    <string name="auto_25_chars_route_tr">Gire a la derecha</string>
+    <string name="auto_25_chars_route_tslr">Gire ligeramente a la derecha</string>
+    <string name="auto_25_chars_route_kr">Mantengase a la derecha</string>
 </resources>
