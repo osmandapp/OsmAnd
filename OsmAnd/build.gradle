@@ -18,6 +18,11 @@ apply plugin: 'kotlin-android'
 //            </patternset>
 //        </unzip>
 // Less important
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 
 android {
 	signingConfigs {
@@ -105,6 +110,10 @@ android {
 	}
 
 	flavorDimensions "version", "coreversion", "abi"
+	buildFeatures {
+		renderScript true
+		aidl true
+	}
 	productFlavors {
 		// Version
 		nightlyFree {
@@ -167,6 +176,37 @@ android {
 		}
 		release {
 			signingConfig signingConfigs.publishing
+		}
+	}
+
+	applicationVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		def osmandTask = tasks.findByName(mergeAssetsTaskName)
+		if (osmandTask != null) {
+			println(osmandTask.getName())
+			osmandTask.dependsOn(collectHelpContentsStyle)
+			osmandTask.dependsOn(copyColorPalettes)
+			osmandTask.dependsOn(copy3DModels)
+			osmandTask.dependsOn(collectUiFonts)
+			osmandTask.dependsOn(collectVoiceAssets)
+			osmandTask.dependsOn(downloadWorldMiniBasemap)
+		}
+		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+		osmandTask = tasks.findByName(mapSourceSetPathsName)
+		if(osmandTask != null) {
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def mergeResources= "merge${taskName}Resources"
+		osmandTask = tasks.findByName(mergeResources)
+		if(osmandTask != null) {
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
 		}
 	}
 

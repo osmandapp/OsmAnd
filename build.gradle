@@ -1,4 +1,7 @@
 buildscript {
+    ext {
+        agp_version = '8.2'
+    }
     ext.kotlin_version = '1.9.23'
     repositories {
         google()
@@ -8,9 +11,8 @@ buildscript {
         }
     }
     dependencies {
-        //classpath 'com.android.tools.build:gradle:2.+'
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.android.tools.build:gradle:8.2.1'
+        classpath 'com.google.gms:google-services:4.3.10'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {

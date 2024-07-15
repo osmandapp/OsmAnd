@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
+	compileSdk 34
+	buildToolsVersion = "34.0.0"
 
+	namespace = "net.osmand.nauticalPlugin"
 	signingConfigs {
 		development {
 			storeFile file("../../keystores/debug.keystore")
@@ -21,7 +22,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 15
-		targetSdkVersion 33
+		targetSdkVersion 34
 	}
 
 	lintOptions {
@@ -49,6 +50,10 @@ android {
 		release {
 			signingConfig signingConfigs.release
 		}
+	}
+	buildFeatures {
+		renderScript true
+		aidl true
 	}
 }
 

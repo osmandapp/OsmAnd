@@ -86,8 +86,8 @@ task androidJar(type: Jar) {
 	} else {
 		dependsOn build
 	}
-	appendix = "android"
-	from (sourceSets.main.java.outputDir) {
+	archiveAppendix = "android"
+	from (sourceSets.main.java.classesDirectory) {
 		exclude("**/PlatformUtil.*")
 	}
 	from sourceSets.main.resources
@@ -117,7 +117,7 @@ publishing {
         }
 		ivyJava(IvyPublication) {
 			artifact androidJar {
-				classifier 'android'
+				archiveClassifier = 'android'
 			}
 		}
 	}

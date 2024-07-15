@@ -2,9 +2,18 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
+	compileSdk 34
+	buildToolsVersion = "34.0.0"
+
+	namespace = "net.osmand.telegram"
 
 	sourceSets {
 		main {
@@ -22,7 +31,7 @@ android {
 	defaultConfig {
 		applicationId "net.osmand.telegram"
 		minSdkVersion 15
-		targetSdkVersion 33
+		targetSdkVersion 34
 		multiDexEnabled true
 		versionCode 1
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
@@ -92,6 +101,26 @@ android {
 	packagingOptions {
 		exclude 'META-INF/proguard/androidx-annotations.pro'
 	}
+	buildFeatures {
+		aidl true
+	}
+
+	applicationVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		def osmandTask = tasks.findByName(mergeAssetsTaskName)
+		if (osmandTask != null) {
+			println(osmandTask.getName())
+			osmandTask.dependsOn(collectFonts)
+		}
+		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+		osmandTask = tasks.findByName(mapSourceSetPathsName)
+		if(osmandTask != null) {
+			println(osmandTask.getName())
+		}
+	}
+
 }
 
 task downloadTdLibzip {

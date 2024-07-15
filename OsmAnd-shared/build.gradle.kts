@@ -43,7 +43,7 @@ kotlin {
 
 android {
     namespace = "net.osmand.shared"
-    compileSdk = 33
+    compileSdk = 34
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

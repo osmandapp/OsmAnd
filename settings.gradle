@@ -5,4 +5,5 @@ include ':OsmAnd-telegram'
 include ':OsmAnd-shared'
 include ':plugins:Osmand-Nautical'
 include ':plugins:Osmand-SRTMPlugin'
-include ':plugins:Osmand-Skimaps'		
+include ':plugins:Osmand-Skimaps'
+include ":org.gradle.toolchains.foojay-resolver-convention:0.5.0"

@@ -3,16 +3,18 @@ task printc {
 }
 
 android {
-	compileSdk 34
-	buildToolsVersion = "34.0.0"
-	// compileNdkVersion "android-ndk-r17b"
-
-	defaultConfig {
-		targetSdkVersion 33
-		multiDexEnabled true
-		vectorDrawables.useSupportLibrary = true
-		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-	}
+    compileSdk 34
+    buildToolsVersion = "34.0.0"
+    // compileNdkVersion "android-ndk-r17b"
+    namespace = "net.osmand.plus"
+    defaultConfig {
+        targetSdkVersion 34
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
+    }
 
 	lintOptions {
 		abortOnError false
@@ -97,13 +99,32 @@ android {
 		}
 	}
 
-	buildTypes {
-		debug {
-			debuggable true
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+        }
+    }
+
+	applicationVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		def osmandTask = tasks.findByName(mergeAssetsTaskName)
+		if (osmandTask != null) {
+            println(osmandTask.getName())
+            osmandTask.dependsOn(copyProjDb)
+            osmandTask.dependsOn(collectFonts)
+            osmandTask.dependsOn(copyPoiCategories)
 		}
-		release {
-			debuggable false
-		}
+        def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+        osmandTask = tasks.findByName(mapSourceSetPathsName)
+        if(osmandTask != null) {
+            println(osmandTask.getName())
+            osmandTask.dependsOn(copyMapShaderIcons)
+        }
 	}
 }
 
