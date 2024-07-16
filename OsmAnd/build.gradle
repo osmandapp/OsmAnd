@@ -18,11 +18,6 @@ apply plugin: 'kotlin-android'
 //            </patternset>
 //        </unzip>
 // Less important
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
 
 android {
 	signingConfigs {
