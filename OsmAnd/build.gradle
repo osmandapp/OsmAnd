@@ -36,6 +36,11 @@ android {
 		}
 	}
 
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
 	defaultConfig {
 		minSdkVersion 24
 		versionCode 4800
@@ -178,8 +183,7 @@ android {
 		def variant = it
 		def taskName = variant.name.capitalize()
 		def mergeAssetsTaskName = "merge${taskName}Assets"
-		def osmandTask = tasks.findByName(mergeAssetsTaskName)
-		if (osmandTask != null) {
+		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(collectHelpContentsStyle)
 			osmandTask.dependsOn(copyColorPalettes)
@@ -189,15 +193,13 @@ android {
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
-		osmandTask = tasks.findByName(mapSourceSetPathsName)
-		if(osmandTask != null) {
+		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)
 		}
 		def mergeResources= "merge${taskName}Resources"
-		osmandTask = tasks.findByName(mergeResources)
-		if(osmandTask != null) {
+		tasks.named(mergeResources).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyMapShaderIcons)
 			osmandTask.dependsOn(copyMapPOIIcons)
@@ -208,13 +210,18 @@ android {
 }
 
 afterEvaluate {
-	android.applicationVariants.all { variant ->
+	android.applicationVariants.configureEach { variant ->
 		if (variant.name.contains('Opengldebug')) {
-			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
+			variant.javaCompileProvider.configure {
+				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore
+			}
 		} else {
-			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+			variant.javaCompileProvider.configure {
+				dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
+			}
 		}
 	}
+
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
 	if (tskReqStr.contains("huawei")) {
@@ -222,7 +229,7 @@ afterEvaluate {
 	}
 }
 
-task copyOsmAndCoreWithJNI() {
+tasks.register('copyOsmAndCoreWithJNI') {
 	dependsOn buildOsmAndCore
 	doLast {
 		file("libs/armeabi-v7a").mkdirs()
