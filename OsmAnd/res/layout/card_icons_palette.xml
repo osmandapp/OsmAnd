@@ -16,8 +16,7 @@
 	<include
 		layout="@layout/simple_divider_item"
 		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:layout_marginStart="@dimen/list_content_padding" />
+		android:layout_height="1dp"/>
 
 	<FrameLayout
 		android:id="@+id/button_all_icons"

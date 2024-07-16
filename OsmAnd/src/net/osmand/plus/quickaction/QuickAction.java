@@ -96,6 +96,9 @@ public class QuickAction {
 
 	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
 		String name = getName(context);
+		if (name.equals(getRawName())) {
+			return name;
+		}
 		int actionNameRes = getActionNameRes();
 		if (actionNameRes != 0 && !name.contains(context.getString(actionNameRes))) {
 			String prefAction = context.getString(actionNameRes);

@@ -4283,7 +4283,7 @@
     <string name="travel_route_types">Tipos de rotas</string>
     <string name="sample_wikivoyage">Exemplo do Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
-    <string name="horseback_riding">Equitação</string>
+    <string name="horseback_riding">Andar a cavalo</string>
     <string name="routing_attr_only_permitted_ways_name">Vias com permissão expressa</string>
     <string name="routing_attr_only_permitted_ways_description">Usar apenas vias (trilhos, caminhos) com utilização permitida assinalada</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferir percursos que podem ser utilizador a cavalo</string>
@@ -4651,7 +4651,7 @@
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
-    <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
+    <string name="transport_hazmat_title">Transporte de matérias perigosas</string>
     <string name="transport_hazmat_yes_desc">Selecione a categoria aplicável.</string>
     <string name="import_as_one_track">Importar como um só trilho</string>
     <string name="use_latin_name_if_missing">Usar nome latino se faltar</string>
@@ -5670,7 +5670,29 @@
     <string name="shared_string_changes">Alterações</string>
     <string name="change_default_tracks_appearance_confirmation">Aplicar alterações aos trilhos existentes na pasta ou apenas aos novos?</string>
     <string name="apply_only_to_new">Aplicar apenas a novos</string>
-    <string name="release_4_8">• A ser preparado para 4.8</string>
+    <string name="release_4_8">• Nova opção de coloração do terreno \"Altitude\"
+\n
+\n • Paletas de cores personalizadas para terreno, trilhos e rotas
+\n
+\n • Variante 3D para ícones de posição de localização
+\n
+\n • As ações rápidas podem agora ser atribuídas a teclados externos
+\n
+\n • Previsão meteorológica: atualização da interface do utilizador, adição de animação do vento
+\n
+\n • Melhorias nos percursos 3D: novas opções de visualização e coloração
+\n
+\n • Seleção alargada de percursos turísticos no mapa
+\n
+\n • Adicionada a opção de tema da aplicação para seguir o modo de mapa
+\n
+\n • Correção das estatísticas dos percursos, ordenação e pesquisa
+\n
+\n • Edição OSM: método de autorização de login/palavra-passe eliminado
+\n
+\n • Mudança para a folha de partilha do sistema a partir do Android 14
+\n
+\n</string>
     <string name="shared_string_scale">Escala</string>
     <string name="relief_3d_download_description">São necessários mapas adicionais para visualizar o terreno no mapa.</string>
     <string name="vertical_exaggeration_description">Ao alterar o valor da escala, o relevo 3D é realçado.</string>
@@ -5716,7 +5738,7 @@
     <string name="disable_map_layers_descr">Desativar todas as camadas de mapas por cima do mapa vetorial (é necessário reiniciar).</string>
     <string name="height_legend_description">São utilizados mapas de cores de altitude para visualizar o relevo.</string>
     <string name="wall_height">Altura da parede</string>
-    <string name="missing_maps_ignore">Usar mapas existentes</string>
+    <string name="missing_maps_ignore">Usar mapas descarregados</string>
     <string name="change_terrain_color_scheme">Alterar o esquema de cores do terreno</string>
     <string name="clear_all_key_shortcuts_summary">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
     <string name="no_assigned_keys">Sem teclas atribuídas</string>
@@ -5737,7 +5759,7 @@
     <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \"Adicionar\".</string>
     <string name="action_icon">Ícone da ação</string>
     <string name="assigned_keys">Teclas atribuídas</string>
-    <string name="missing_maps_ignore_details">É possível que alguns mapas já descarregados sejam adequados para o seu percurso. Se estiver familiarizado com a zona e os mapas, pode tentar fazer o percurso utilizando os mapas existentes.</string>
+    <string name="missing_maps_ignore_details">Os mapas descarregados cobrem o seu percurso? Navegue com eles se estiver familiarizado com a zona.</string>
     <string name="daynight_mode_app_theme_summary">O ecrã do mapa ajusta-se ao tema geral da aplicação - modo dia para um tema claro e modo noite para um tema escuro</string>
     <string name="daynight_mode_sensor_summary">Utiliza o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Muda automaticamente entre temas diurnos e noturnos com base nas horas locais do nascer e do pôr do sol.</string>
@@ -5751,10 +5773,60 @@
     <string name="map_settings_weather_wind_animation">Animação do vento</string>
     <string name="tomorrow">Amanhã</string>
     <string name="data_source">Fonte de dados</string>
-    <string name="weather_data_sources_prompt">OsmAnd fornece a previsão meteorológica de duas fontes:</string>
+    <string name="weather_data_sources_prompt">O OsmAnd fornece a previsão meteorológica de duas fontes:</string>
     <string name="weather_source_ecmwf_description">Centro Europeu de Previsão do Tempo a Médio Prazo</string>
     <string name="weather_source_GFS_description">Sistema de Previsão Global dos Centros Nacionais de Previsão Ambiental</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Alterar</string>
+    <string name="quick_action_map_overlay">Camada superior</string>
+    <string name="shared_string_create">Criar</string>
+    <string name="choose_map_orientation">Escolha a orientação do mapa</string>
+    <string name="quick_action_location_by_gpx">Localização por GPX</string>
+    <string name="quick_action_terrain_color_scheme">Esquema de cores do terreno</string>
+    <string name="quick_action_to_my_location">Para a minha localização</string>
+    <string name="quick_action_move_map_left">Mapa para a esquerda</string>
+    <string name="quick_action_destination">Destino</string>
+    <string name="quick_action_move_map_right">Mapa para a direita</string>
+    <string name="quick_action_move_map_down">Mapa para baixo</string>
+    <string name="quick_action_move_map_up">Mapa para cima</string>
+    <string name="quick_action_previous_app_profile">Perfil anterior da aplicação</string>
+    <string name="shared_string_replace">Substituir</string>
+    <string name="shared_string_simulate">Simular</string>
+    <string name="quick_action_audio_note">Nota de áudio</string>
+    <string name="quick_action_video_note">Nota de vídeo</string>
+    <string name="quick_action_photo_note">Nota de foto</string>
+    <string name="quick_action_track_waypoint">Ponto de passagem do trilho</string>
+    <string name="quick_action_parking_place">Local de estacionamento</string>
+    <string name="quick_action_verb_pause_resume">Pausa / retomar</string>
+    <string name="quick_action_verb_turn_on_off">Ativar / desativar</string>
+    <string name="rendering_value_pale_name">Pálido</string>
+    <string name="energy_avg_info">Estatísticas de energia (média de 1 / 5 / 15 minutos)</string>
+    <string name="energy_avg_info_description">Nível da bateria por minuto: %1$s
+\nConsumo de energia (mAh): %2$s</string>
+    <string name="rendering_avg_info">Estatísticas de renderização (média de 1 / 5 / 15 minutos)</string>
+    <string name="rendering_avg_info_description">FPS dos últimos 1k fotogramas: %1$s
+\nCPU básico: %2$s
+\nGPU 1k: %3$s
+\nINATIVO 1k: %4$s</string>
+    <string name="quick_action_directions_from">Ponto inicial</string>
+    <string name="quick_action_new_route">Nova rota</string>
+    <string name="quick_action_next_app_profile">Perfil seguinte da aplicação</string>
+    <string name="app_profile">Perfil da aplicação</string>
+    <string name="shared_string_set">Definir</string>
+    <string name="quick_action_display_position_in_center">Posição do ecrã sempre no centro</string>
+    <string name="quick_action_terrain">Tipo de colorização do terreno</string>
+    <string name="quick_action_first_intermediate">Primeiro intermédio</string>
+    <string name="quick_action_verb_show_hide">Mostrar / ocultar</string>
+    <string name="weather_screen">Ecrã de previsão meteorológica</string>
+    <string name="quick_action_verb_start_stop">Iniciar / parar</string>
+    <string name="shared_string_all_icons">Todos os ícones</string>
+    <string name="profile_icon">Ícone do perfil</string>
+    <string name="navigation_position_icon_summary">Ícone apresentado enquanto está a navegar ou a deslocar-se.</string>
+    <string name="navigation_position_icon">Ícone de posição de navegação</string>
+    <string name="resting_position_icon_summary">Ícone apresentado quando não está em movimento.</string>
+    <string name="resting_position_icon">Ícone da posição parado</string>
+    <string name="quick_action_remove_next_destination">Próximo ponto de destino</string>
+    <string name="quick_action_map_style">Estilo do mapa</string>
+    <string name="quick_action_map_underlay">Camada inferior</string>
 </resources>

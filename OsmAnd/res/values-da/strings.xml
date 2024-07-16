@@ -5829,4 +5829,11 @@
     <string name="profile_icon">Profil-ikon</string>
     <string name="navigation_position_icon">Ikon for navigationsposition</string>
     <string name="resting_position_icon_summary">Ikonet vises, når du ikke er i bevægelse.</string>
+    <string name="navigation_position">Navigationsposition</string>
+    <string name="resting_navigation_position">Hvile- og navigationsposition</string>
+    <string name="view_angle_description">Viser det kegleformede område, du aktuelt vender mod</string>
+    <string name="view_angle">Synsvinkel</string>
+    <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
+    <string name="location_radius">Placeringsradius</string>
+    <string name="resting_position">Hvileposition</string>
 </resources>

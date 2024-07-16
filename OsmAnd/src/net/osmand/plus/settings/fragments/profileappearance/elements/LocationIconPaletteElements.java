@@ -51,10 +51,16 @@ public class LocationIconPaletteElements extends IconsPaletteElements<String> {
 			LayerDrawable locationIconDrawable = (LayerDrawable) locDrawable;
 			DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), controlsColor);
 		}
-		itemView.<ImageView>findViewById(R.id.icon).setImageDrawable(locDrawable);
+		ImageView imageView = itemView.findViewById(R.id.icon);
+		imageView.setImageDrawable(locDrawable);
+		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setImageMatrix(null);
+
 		ImageView headingIcon = itemView.findViewById(R.id.headingIcon);
 		headingIcon.setImageDrawable(AppCompatResources.getDrawable(app, locationIcon.getHeadingIconId()));
 		headingIcon.setColorFilter(new PorterDuffColorFilter(controlsColor, PorterDuff.Mode.SRC_IN));
+		headingIcon.setVisibility(View.VISIBLE);
+
 		ImageView coloredRect = itemView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
@@ -84,6 +90,9 @@ public class LocationIconPaletteElements extends IconsPaletteElements<String> {
 		float height = imageView.getDrawable().getIntrinsicHeight() / 2f;
 		matrix.postRotate((float) -90, width, height);
 		imageView.setImageMatrix(matrix);
+
+		ImageView headingIcon = itemView.findViewById(R.id.headingIcon);
+		headingIcon.setVisibility(View.GONE);
 
 		ImageView coloredRect = itemView.findViewById(R.id.backgroundRect);
 		Drawable coloredDrawable = UiUtilities.tintDrawable(

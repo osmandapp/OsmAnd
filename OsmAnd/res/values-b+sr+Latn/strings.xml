@@ -5830,4 +5830,20 @@
     <string name="resting_position_icon_summary">Ikona se prikazuje kada se ne krećete.</string>
     <string name="resting_position_icon">Ikona položaja za odmor</string>
     <string name="profile_icon">Ikona profila</string>
+    <string name="resting_navigation_position">Položaj u mirovanju i navigaciji</string>
+    <string name="view_angle_description">Prikazuje oblast u obliku kupe, u kojoj ste sada</string>
+    <string name="view_angle">Ugao gledanja</string>
+    <string name="location_radius_description">Prikazuje kružno područje koje predstavlja tačnost trenutne lokacije</string>
+    <string name="location_radius">Radijus lokacije</string>
+    <string name="rendering_avg_info_details">FPS po poslednjim hiljadu frejmova : %1$s
+\nCPU (tilova): %2$s
+\nCPU (vreme neaktivnosti): %3$s
+\nCPU (čekanje CPU)): %4$s</string>
+    <string name="resting_position">U mirovanju</string>
+    <string name="navigation_position">U pokretu</string>
+    <string name="auto_25_chars_route_kr">Drži desno</string>
+    <string name="auto_25_chars_route_tr">Skreni desno</string>
+    <string name="auto_25_chars_route_kl">Drži levo</string>
+    <string name="auto_25_chars_route_tshr">Skreni oštro desno</string>
+    <string name="auto_25_chars_route_tslr">Skreni blago desno</string>
 </resources>

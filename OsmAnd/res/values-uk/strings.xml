@@ -5833,4 +5833,15 @@
     <string name="resting_position_icon">Піктограма положення спокою</string>
     <string name="rendering_value_pale_name">Блідий</string>
     <string name="navigation_position_icon_summary">Піктограма показується під час навігації або руху.</string>
+    <string name="navigation_position">Навігаційна позиція</string>
+    <string name="resting_navigation_position">Положення відпочинку та навігації</string>
+    <string name="view_angle_description">Відображає конусоподібну область, перед якою ви зараз перебуваєте</string>
+    <string name="view_angle">Кут огляду</string>
+    <string name="location_radius_description">Показує круглу область, що відображає точність вашого поточного місцезнаходження</string>
+    <string name="location_radius">Радіус розміщення</string>
+    <string name="rendering_avg_info_details">FPS за останні 1k кадрів: %1$s
+\nПроцесор (тайли): %2$s
+\nПроцесор (час простою): %3$s
+\nCPU (очікує CPU): %4$s</string>
+    <string name="resting_position">Положення спокою</string>
 </resources>

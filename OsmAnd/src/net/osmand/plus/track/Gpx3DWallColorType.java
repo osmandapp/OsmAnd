@@ -31,6 +31,7 @@ public enum Gpx3DWallColorType {
 		return NONE;
 	}
 
+	@NonNull
 	public String getTypeName() {
 		return typeName;
 	}
