@@ -16,6 +16,7 @@ import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIOR
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
@@ -66,6 +67,8 @@ public class SearchUtils {
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof BinaryMapIndexReader.SearchPoiAdditionalFilter) {
+				filter = new PoiUIFilter(null, app, "");
 			} else {
 				filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
