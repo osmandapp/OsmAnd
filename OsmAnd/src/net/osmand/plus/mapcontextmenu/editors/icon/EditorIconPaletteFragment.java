@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -272,7 +271,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
-			controller.unbindScreen();
+			controller.onDestroyScreen();
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_ICONS_PROCESS_ID);
 		}

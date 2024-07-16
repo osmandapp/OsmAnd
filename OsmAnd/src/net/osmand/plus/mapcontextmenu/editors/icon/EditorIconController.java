@@ -233,11 +233,14 @@ public class EditorIconController extends BaseDialogController {
 	public void onIconSelectedFromPalette(@NonNull String iconKey, boolean fromCard) {
 		this.selectedIconKey = iconKey;
 		if (!fromCard) {
-			setSelectedCategory(findIconCategory(selectedIconKey));
+			onPaletteScreenClosed();
 			cardController.updateIconsSelection();
-			addIconToLastUsed(iconKey);
 		}
 		listener.onIconSelectedFromPalette(iconKey);
+	}
+
+	public void onPaletteScreenClosed() {
+		setSelectedCategory(findIconCategory(selectedIconKey));
 	}
 
 	@NonNull

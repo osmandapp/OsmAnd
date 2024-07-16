@@ -12,6 +12,7 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiType;
@@ -60,9 +61,10 @@ public class EditorIconScreenController implements IDialogController {
 		this.screen = screen;
 	}
 
-	public void unbindScreen() {
+	public void onDestroyScreen() {
 		this.screen = null;
 		exitSearchModeIfNeeded();
+		centralController.onPaletteScreenClosed();
 	}
 
 	@NonNull
