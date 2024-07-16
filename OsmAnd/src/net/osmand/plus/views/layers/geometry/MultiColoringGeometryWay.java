@@ -145,8 +145,8 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		Track3DStyle track3DStyle = getTrack3DStyle();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
-			style.currColor = points.get(i).color;
-			style.nextColor = points.get(i + 1).color;
+			style.currColor = points.get(i).primaryColor;
+			style.nextColor = points.get(i + 1).primaryColor;
 			styleMap.put(i, style);
 			updateTrack3DStyle(style, track3DStyle);
 		}
@@ -154,16 +154,20 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 	}
 
 	@NonNull
-	protected Map<Integer, GeometryWayStyle<?>> createGradient3DStyles(@NonNull int[][] colorization) {
+	protected Map<Integer, GeometryWayStyle<?>> createGradient3DStyles(@NonNull List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 		updateTrack3DStyle(getTrack3DStyle());
 		Track3DStyle track3DStyle = getTrack3DStyle();
-		for (int i = 0; i < colorization.length - 1; i++) {
+		for (int i = 0; i < points.size() - 1; i++) {
+			RouteColorizationPoint currentPoint = points.get(i);
+			RouteColorizationPoint nextPoint = points.get(i + 1);
+
 			GeometryGradient3DWayStyle<?> style = getGradient3DWayStyle();
-			style.currColor = colorization[i][0];
-			style.nextColor = colorization[i + 1][0];
-			style.currOutlineColor = colorization[i][1];
-			style.nextOutlineColor = colorization[i + 1][1];
+			style.currColor = currentPoint.primaryColor;
+			style.nextColor = nextPoint.primaryColor;
+			style.currOutlineColor = currentPoint.secondaryColor;
+			style.nextOutlineColor = nextPoint.secondaryColor;
+
 			styleMap.put(i, style);
 			updateTrack3DStyle(style, track3DStyle);
 		}
@@ -190,7 +194,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		updateWay(locations, styleMap, tileBox);
 	}
 
-	private List<Integer> getRouteInfoAttributesColors(List<Location> locations, List<RouteSegmentResult> routeSegments) {
+	protected List<Integer> getRouteInfoAttributesColors(List<Location> locations, List<RouteSegmentResult> routeSegments) {
 		if (Algorithms.isEmpty(routeSegments)) {
 			return Collections.emptyList();
 		}

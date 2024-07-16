@@ -45,6 +45,10 @@ public enum Gpx3DWallColorType {
 	}
 
 	public boolean isGradient() {
-		return this == SPEED || this == ALTITUDE || this == SLOPE;
+		return this == ALTITUDE || this == SLOPE || this == SPEED;
+	}
+
+	public boolean isVerticalGradient() {
+		return this == UPWARD_GRADIENT || this == DOWNWARD_GRADIENT;
 	}
 }

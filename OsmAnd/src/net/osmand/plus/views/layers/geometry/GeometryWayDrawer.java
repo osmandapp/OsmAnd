@@ -1,8 +1,13 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.track.Gpx3DLinePositionType.BOTTOM;
+import static net.osmand.plus.track.Gpx3DLinePositionType.TOP;
+import static net.osmand.plus.track.Gpx3DLinePositionType.TOP_BOTTOM;
 import static net.osmand.plus.track.Gpx3DWallColorType.NONE;
 import static net.osmand.plus.track.Gpx3DWallColorType.SOLID;
 import static net.osmand.plus.track.Gpx3DWallColorType.UPWARD_GRADIENT;
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_GRADIENT;
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -33,6 +38,7 @@ import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.geometry.GeometryWayStyle.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -161,10 +167,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               float bitmapStep, float specialBitmapStep, boolean bitmapOnSurface,
 	                               @Nullable QListFColorARGB colorizationMapping,
 	                               @Nullable QListFColorARGB outlineColorizationMapping,
-	                               int colorizationScheme, @NonNull List<DrawPathData31> pathsData) {
+	                               @ColorizationType int colorizationScheme, @NonNull List<DrawPathData31> pathsData) {
 		long startBuildVectorLineTime = System.currentTimeMillis();
-		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
-		boolean hasOutlineColorizationMapping = outlineColorizationMapping != null && !outlineColorizationMapping.isEmpty();
 		QVectorPointI points = new QVectorPointI();
 		QListFloat heights = new QListFloat();
 		QListFColorARGB traceColorizationMapping = new QListFColorARGB();
@@ -197,6 +201,14 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				}
 			}
 		}
+		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
+		boolean hasOutlineColorizationMapping = outlineColorizationMapping != null && !outlineColorizationMapping.isEmpty();
+
+		if (!hasOutlineColorizationMapping && hasColorizationMapping && wallColorType.isVerticalGradient()) {
+			hasOutlineColorizationMapping = true;
+			outlineColorizationMapping = colorizationMapping;
+		}
+
 		if (showRaised && hasColorizationMapping) {
 			long size = colorizationMapping.size();
 			traceColorizationMapping = new QListFColorARGB();
@@ -232,21 +244,21 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				line.setHeights(heights);
 				if (showRaised) {
 					if (linePositionType != null) {
-						line.setElevatedLineVisibility(linePositionType == Gpx3DLinePositionType.TOP || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
-						line.setSurfaceLineVisibility(linePositionType == Gpx3DLinePositionType.BOTTOM || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
+						line.setElevatedLineVisibility(linePositionType == TOP || linePositionType == TOP_BOTTOM);
+						line.setSurfaceLineVisibility(linePositionType == BOTTOM || linePositionType == TOP_BOTTOM);
 					}
 					line.setFillColor(new FColorARGB(a, r, g, b));
 					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
 					line.setColorizationMapping(new QListFColorARGB());
 					line.setOutlineColorizationMapping(traceColorizationMapping);
 					if (wallColorType == NONE) {
-						line.setColorizationScheme(1);
+						line.setColorizationScheme(COLORIZATION_GRADIENT);
 						line.setNearOutlineColor(new FColorARGB(0, r, g, b));
 						line.setFarOutlineColor(new FColorARGB(0, r, g, b));
 					} else if (wallColorType == SOLID) {
 						line.setOutlineColor(new FColorARGB(a, r, g, b));
-					} else if (!wallColorType.isGradient()) {
-						line.setColorizationScheme(1);
+					} else if (wallColorType.isVerticalGradient()) {
+						line.setColorizationScheme(COLORIZATION_GRADIENT);
 						float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : 1f;
 						float toAlfa = wallColorType == UPWARD_GRADIENT ? 1f : 0f;
 						line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
@@ -285,22 +297,23 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				}
 			}
 		}
-		if (hasColorizationMapping || hasOutlineColorizationMapping) {
-			builder.setColorizationScheme(colorizationScheme);
-			if (hasColorizationMapping) {
-				builder.setColorizationMapping(colorizationMapping);
-			}
-			if (hasOutlineColorizationMapping) {
-				builder.setOutlineColorizationMapping(outlineColorizationMapping);
-			}
+
+		builder.setColorizationScheme(colorizationScheme);
+		if (hasColorizationMapping) {
+			builder.setColorizationMapping(colorizationMapping);
 		} else {
-			builder.setFillColor(NativeUtilities.createFColorARGB(color))
-					.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
+			builder.setFillColor(NativeUtilities.createFColorARGB(color));
 		}
+		if (hasOutlineColorizationMapping) {
+			builder.setOutlineColorizationMapping(outlineColorizationMapping);
+		} else {
+			builder.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
+		}
+
 		if (showRaised) {
 			if (linePositionType != null) {
-				builder.setElevatedLineVisibility(linePositionType == Gpx3DLinePositionType.TOP || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
-				builder.setSurfaceLineVisibility(linePositionType == Gpx3DLinePositionType.BOTTOM || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
+				builder.setElevatedLineVisibility(linePositionType == TOP || linePositionType == TOP_BOTTOM);
+				builder.setSurfaceLineVisibility(linePositionType == BOTTOM || linePositionType == TOP_BOTTOM);
 			}
 			builder.setElevationScaleFactor(additionalExaggeration)
 					.setColorizationScheme(colorizationScheme)
@@ -310,12 +323,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				builder.setNearOutlineColor(new FColorARGB(0, r, g, b));
 				builder.setFarOutlineColor(new FColorARGB(0, r, g, b));
 			} else if (wallColorType == SOLID) {
-				if (!hasColorizationMapping) {
+				if (!hasOutlineColorizationMapping) {
 					builder.setOutlineColor(new FColorARGB(a, r, g, b))
-							.setFillColor(new FColorARGB(a, r, g, b))
-							.setOutlineColor(new FColorARGB(a, r, g, b));
+							.setFillColor(new FColorARGB(a, r, g, b));
 				}
-			} else if (!wallColorType.isGradient()) {
+			} else if (wallColorType.isVerticalGradient()) {
 				float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : a;
 				float toAlfa = wallColorType == UPWARD_GRADIENT ? a : 0f;
 				if (hasColorizationMapping) {
@@ -383,7 +395,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float pxStep = (float) style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId, color, width, outlineColor, outlineWidth, dashPattern,
 				approximationEnabled, shouldDrawArrows, pointBitmap, null, pxStep,
-				pxStep, true, null, null, 0,
+				pxStep, true, null, null, COLORIZATION_NONE,
 				pathsData);
 	}
 

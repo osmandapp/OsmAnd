@@ -147,6 +147,8 @@ public enum ColoringType {
 			return ALTITUDE;
 		} else if (type == Gpx3DWallColorType.SLOPE) {
 			return SLOPE;
+		} else if (type == Gpx3DWallColorType.SOLID) {
+			return TRACK_SOLID;
 		}
 		return null;
 	}

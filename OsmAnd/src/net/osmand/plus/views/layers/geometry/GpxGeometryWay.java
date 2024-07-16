@@ -10,12 +10,13 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Track3DStyle;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updateTrack3DStyle(track3DStyle);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
+		getDrawer().setOutlineColoringType(getOutlineColoringType());
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;
@@ -84,32 +86,35 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			this.points = points;
 			this.routeSegments = routeSegments;
 
+			if (points == null) {
+				clearWay();
+				return;
+			}
+
 			ColoringType outlineColoringType = getOutlineColoringType();
-			if (coloringType.isGradient() || (outlineColoringType != null && outlineColoringType.isGradient())) {
-				if (points != null) {
-					if (hasMapRenderer()) {
-						updateGpxGradientWay(tb, points);
-					} else {
-						updateWay(new GeometryWayWptPtProvider(points), tb);
-					}
+			if (outlineColoringType != null) {
+				if (hasMapRenderer()) {
+					updateGpx3dWay(tb, points, outlineColoringType, routeSegments);
 				} else {
-					clearWay();
+					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
 			} else if (coloringType.isTrackSolid()) {
-				if (points != null) {
-					if (hasMapRenderer()) {
-						Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-						GeometrySolidWayStyle<?> style = getSolidWayStyle(customColor);
-						styleMap.put(0, style);
-						updateWay(new GeometryWayWptPtProvider(points), styleMap, tb);
-					} else {
-						updateWay(new GeometryWayWptPtProvider(points), tb);
-					}
+				if (hasMapRenderer()) {
+					Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+					GeometrySolidWayStyle<?> style = getSolidWayStyle(customColor);
+					styleMap.put(0, style);
+					updateWay(new GeometryWayWptPtProvider(points), styleMap, tb);
 				} else {
-					clearWay();
+					updateWay(new GeometryWayWptPtProvider(points), tb);
+				}
+			} else if (coloringType.isGradient()) {
+				if (hasMapRenderer()) {
+					updateGpxGradientWay(tb, points);
+				} else {
+					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
 			} else if (coloringType.isRouteInfoAttribute()) {
-				if (points != null && routeSegments != null) {
+				if (routeSegments != null) {
 					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromWpts(points), routeSegments);
 				} else {
 					clearWay();
@@ -119,38 +124,56 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	protected void updateGpxGradientWay(@NonNull RotatedTileBox tb, @NonNull List<WptPt> points) {
-		int size = points.size();
-		int[][] colorization = new int[size][2];
-		ColoringType outlineType = getOutlineColoringType();
+		List<RouteColorizationPoint> colorizationPoints = new ArrayList<>();
+		List<Float> pointHeights = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
-			WptPt point = points.get(i);
-			colorization[i][0] = getPointColor(coloringType, point);
-			colorization[i][1] = getPointColor(outlineType != null ? outlineType : coloringType, point);
+			WptPt wptPt = points.get(i);
+			pointHeights.add((float) wptPt.ele);
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, 0);
+			point.primaryColor = getPointGradientColor(coloringType, wptPt);
+			colorizationPoints.add(point);
 		}
-		ColorizationType colorizationType = coloringType.toColorizationType();
-		ColorizationType outlineColorizationType = (outlineType != null ? outlineType : coloringType).toColorizationType();
-		updateWay(new Geometry3DWayProvider(points, colorizationType, outlineColorizationType), createGradient3DStyles(colorization), tb);
+		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
+	}
+
+	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points,
+	                              @NonNull ColoringType outlineType, @Nullable List<RouteSegmentResult> segments) {
+		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
+		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
+				? getRouteInfoAttributesColors(RouteProvider.locationsFromWpts(points), segments) : null;
+
+		for (int i = 0; i < points.size(); i++) {
+			WptPt wptPt = points.get(i);
+
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, 0);
+			point.primaryColor = getPointColor(coloringType, wptPt, routeColors, i);
+			point.secondaryColor = getPointColor(outlineType, wptPt, routeColors, i);
+			colorization.add(point);
+		}
+		updateWay(new Geometry3DWayProvider(colorization), createGradient3DStyles(colorization), tileBox);
 	}
 
 	@ColorInt
-	private int getPointColor(@NonNull ColoringType coloringType, @NonNull WptPt point) {
-		switch (coloringType) {
-			case SPEED:
-				return point.getColor(ColorizationType.SPEED);
-			case ALTITUDE:
-				return point.getColor(ColorizationType.ELEVATION);
-			case SLOPE:
-				return point.getColor(ColorizationType.SLOPE);
-			default:
-				return point.getColor();
+	private int getPointGradientColor(@NonNull ColoringType type, @NonNull WptPt point) {
+		return type.isGradient() ? point.getColor(type.toColorizationType()) : point.getColor();
+	}
+
+	@ColorInt
+	private int getPointColor(@NonNull ColoringType type, @NonNull WptPt point, @Nullable List<Integer> routeColors, int index) {
+		if (type.isGradient()) {
+			return getPointGradientColor(type, point);
+		} else if (type.isRouteInfoAttribute()) {
+			if (routeColors != null && routeColors.size() > index) {
+				return routeColors.get(index);
+			}
 		}
+		return type.isTrackSolid() ? customColor : point.getColor();
 	}
 
 	@Override
 	protected GeometryWayStyle<?> getStyle(int index, GeometryWayStyle<?> defaultWayStyle) {
-		ColoringType type = getOutlineColoringType();
-		boolean gradient = coloringType.isGradient() || (type != null && type.isGradient());
-		return gradient && styleMap.containsKey(index) ? styleMap.get(index) : super.getStyle(index, defaultWayStyle);
+		return coloringType.isGradient() && styleMap.containsKey(index)
+				? styleMap.get(index) : super.getStyle(index, defaultWayStyle);
 	}
 
 	@NonNull

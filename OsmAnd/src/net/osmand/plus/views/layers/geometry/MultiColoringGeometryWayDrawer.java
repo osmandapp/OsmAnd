@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -101,20 +102,25 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
 		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
 
-		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData, false);
-		QListFColorARGB outlineColorizationMapping = getColorizationMapping(pathsData, true);
+		Pair<QListFColorARGB, QListFColorARGB> mappings = getColorizationMappings(pathsData);
 
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(),
 				approximationEnabled, shouldDrawArrows, pointBitmap, specialPointBitmap, bitmapStep,
-				specialBitmapStep, true, colorizationMapping, outlineColorizationMapping,
+				specialBitmapStep, true, mappings.first, mappings.second,
 				style.getColorizationScheme(), pathsData);
 	}
 
 	@NonNull
-	private QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData, boolean outline) {
+	protected Pair<QListFColorARGB, QListFColorARGB> getColorizationMappings(@NonNull List<DrawPathData31> pathsData) {
+		QListFColorARGB mapping = getColorizationMapping(pathsData, coloringType, false);
+		return new Pair<>(mapping, null);
+	}
+
+	@NonNull
+	protected QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData, @NonNull ColoringType type, boolean outline) {
 		QListFColorARGB colors = new QListFColorARGB();
-		if (!pathsData.isEmpty()) {
+		if (!pathsData.isEmpty() && !type.isSolidSingleColor()) {
 			int lastColor = 0;
 			for (DrawPathData31 data : pathsData) {
 				int color = 0;

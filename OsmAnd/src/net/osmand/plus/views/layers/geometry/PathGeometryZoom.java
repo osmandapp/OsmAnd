@@ -19,18 +19,17 @@ class PathGeometryZoom {
 	private final List<Double> distances;
 	private final List<Double> angles;
 
-	public PathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
-	                        @NonNull List<Integer> forceIncludedIndexes) {
-		//  this.locations = locations;
+	public PathGeometryZoom(@NonNull GeometryWayProvider provider, @NonNull RotatedTileBox tb,
+	                        boolean simplify, @NonNull List<Integer> forceIncludedIndexes) {
 		tb = new RotatedTileBox(tb);
 		tb.setZoomAndAnimation(tb.getZoom(), 0, tb.getZoomFloatPart());
-		int size = locationProvider.getSize();
+		int size = provider.getSize();
 		simplifyPoints = new TByteArrayList(size);
 		distances = new ArrayList<>(size);
 		angles = new ArrayList<>(size);
 		if (simplify) {
 			simplifyPoints.fill(0, size, (byte) 0);
-			simplify(tb, locationProvider, simplifyPoints);
+			simplify(tb, provider, simplifyPoints);
 		} else {
 			simplifyPoints.fill(0, size, (byte) 1);
 		}
@@ -40,10 +39,10 @@ class PathGeometryZoom {
 			double angle = 0;
 			if (simplifyPoints.get(i) > 0 || forceIncludedIndexes.contains(i)) {
 				if (previousIndex > -1) {
-					float x = tb.getPixXFromLatLon(locationProvider.getLatitude(i), locationProvider.getLongitude(i));
-					float y = tb.getPixYFromLatLon(locationProvider.getLatitude(i), locationProvider.getLongitude(i));
-					float px = tb.getPixXFromLatLon(locationProvider.getLatitude(previousIndex), locationProvider.getLongitude(previousIndex));
-					float py = tb.getPixYFromLatLon(locationProvider.getLatitude(previousIndex), locationProvider.getLongitude(previousIndex));
+					float x = tb.getPixXFromLatLon(provider.getLatitude(i), provider.getLongitude(i));
+					float y = tb.getPixYFromLatLon(provider.getLatitude(i), provider.getLongitude(i));
+					float px = tb.getPixXFromLatLon(provider.getLatitude(previousIndex), provider.getLongitude(previousIndex));
+					float py = tb.getPixYFromLatLon(provider.getLatitude(previousIndex), provider.getLongitude(previousIndex));
 					d = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 					if (px != x || py != y) {
 						double angleRad = Math.atan2(y - py, x - px);
@@ -67,14 +66,17 @@ class PathGeometryZoom {
 		cullRamerDouglasPeucker(simplifyPoints, locationProvider, 0, size - 1, cullDistance);
 	}
 
+	@NonNull
 	public List<Double> getDistances() {
 		return distances;
 	}
 
+	@NonNull
 	public List<Double> getAngles() {
 		return angles;
 	}
 
+	@NonNull
 	public TByteArrayList getSimplifyPoints() {
 		return simplifyPoints;
 	}

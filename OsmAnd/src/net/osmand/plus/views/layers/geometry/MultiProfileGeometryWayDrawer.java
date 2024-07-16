@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -74,7 +76,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
 				pointBitmap, pointBitmap, pxStep, pxStep, false, null, null,
-				0, pathsData);
+				COLORIZATION_NONE, pathsData);
 	}
 
 	@Override

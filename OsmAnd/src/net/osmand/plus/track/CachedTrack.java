@@ -3,6 +3,8 @@ package net.osmand.plus.track;
 import static net.osmand.ColorPalette.LIGHT_GREY;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -84,16 +86,16 @@ public class CachedTrack {
 	@NonNull
 	public List<TrkSegment> getTrackSegments(@Nullable GradientScaleType scaleType,
 	                                         @Nullable GradientScaleType outlineScaleType,
-	                                         @NonNull String gradientPalette) {
+	                                         @NonNull String palette) {
 		if (isCachedTrackChanged()) {
 			clearCaches();
 		}
 
-		String trackId = scaleType + "_" + outlineScaleType + "_" + gradientPalette;
+		String trackId = scaleType + "_" + palette + "_" + outlineScaleType;
 		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(trackId);
 		if (segments == null) {
-			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, gradientPalette) : null;
-			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, gradientPalette) : null;
+			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, palette) : null;
+			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, palette) : null;
 
 			Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors = null;
 			Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors = null;
@@ -111,28 +113,17 @@ public class CachedTrack {
 	}
 
 	@NonNull
-	public List<TrkSegment> getSimplifiedTrackSegments(int zoom, @Nullable GradientScaleType scaleType,
-	                                                   @Nullable GradientScaleType outlineScaleType,
-	                                                   @NonNull String gradientPalette) {
+	public List<TrkSegment> getSimplifiedTrackSegments(int zoom, @NonNull GradientScaleType scaleType, @NonNull String palette) {
 		if (isCachedTrackChanged()) {
 			clearCaches();
 		}
 
-		String trackId = zoom + "_" + scaleType + "_" + outlineScaleType + "_" + gradientPalette;
+		String trackId = zoom + "_" + scaleType + "_" + palette;
 		List<TrkSegment> segments = simplifiedSegmentsCache.get(trackId);
 		if (segments == null) {
-			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, gradientPalette) : null;
-			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, gradientPalette) : null;
-
-			Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors = null;
-			Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors = null;
-			if (colorization != null) {
-				lineColors = new Pair<>(scaleType, colorization.getSimplifiedResult(zoom));
-			}
-			if (outlineColorization != null) {
-				outlineColors = new Pair<>(outlineScaleType, outlineColorization.getSimplifiedResult(zoom));
-			}
-			segments = createColoredSegments(lineColors, outlineColors);
+			RouteColorize colorization = createGpxColorization(scaleType, palette);
+			List<RouteColorizationPoint> colorsOfPoints = colorization.getSimplifiedResult(zoom);
+			segments = createColoredSegments(Pair.create(scaleType, colorsOfPoints), null);
 			simplifiedSegmentsCache.put(trackId, segments);
 		}
 
@@ -196,10 +187,10 @@ public class CachedTrack {
 				if (point != null && point.id == id || outlinePoint != null && outlinePoint.id == id) {
 					simplifiedSegment.points.add(pt);
 					if (point != null) {
-						pt.setColor(colorizationType, point.color);
+						pt.setColor(colorizationType, point.primaryColor);
 					}
 					if (outlinePoint != null) {
-						pt.setColor(outlineColorizationType, outlinePoint.color);
+						pt.setColor(outlineColorizationType, outlinePoint.primaryColor);
 					}
 					colorPointIdx++;
 				}
