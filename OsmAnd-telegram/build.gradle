@@ -96,14 +96,14 @@ android {
 
 task downloadTdLibzip {
 	doLast {
-//		ant.get(src: 'https://core.telegram.org/tdlib/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
+		ant.get(src: 'https://osmand.net/uploads/libs/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
 		ant.unzip(src: 'tdlib.zip', dest: 'tdlib/')
 	}
 }
 
 task copyNativeLibs(type: Copy) {
 	dependsOn downloadTdLibzip
-	from "tdlib/libtd/src/main/libs"
+	from "tdlib/tdlib/libs"
 	into "libs"
 }
 
