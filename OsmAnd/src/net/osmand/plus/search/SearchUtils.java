@@ -16,7 +16,6 @@ import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIOR
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
