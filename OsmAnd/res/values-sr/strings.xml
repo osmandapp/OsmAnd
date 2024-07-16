@@ -5821,4 +5821,15 @@
     <string name="profile_icon">Икона профила</string>
     <string name="navigation_position_icon_summary">Икона се приказује док сте усмеравани или се крећете.</string>
     <string name="resting_position_icon_summary">Икона се приказује када се не крећете.</string>
+    <string name="navigation_position">Положај навигације</string>
+    <string name="resting_navigation_position">Положај мировања и навигације</string>
+    <string name="view_angle">Угао гледања</string>
+    <string name="location_radius">Опсег локације</string>
+    <string name="view_angle_description">Приказује област у облику конуса према којој сте тренутно постављени</string>
+    <string name="resting_position">Положај мировања</string>
+    <string name="location_radius_description">Приказује кружну област која представља вашу тренутну тачност локације</string>
+    <string name="rendering_avg_info_details">FPS према последњим 1k кадрова: %1$s
+\nCPU (плочице): %2$s
+\nCPU (време мировања): %3$s
+\nCPU (чекање CPU): %4$s</string>
 </resources>

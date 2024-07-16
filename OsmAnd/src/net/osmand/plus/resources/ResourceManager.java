@@ -1,6 +1,7 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.IndexConstants.MODEL_3D_DIR;
 import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
@@ -649,6 +650,8 @@ public class ResourceManager {
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
 							copyAssets(context.getAssets(), asset.source, oggFile);
 						}
+					} else if (asset.destination.startsWith(MODEL_3D_DIR) && !jsFile.exists()) {
+						copyAssets(context.getAssets(), asset.source, jsFile);
 					}
 					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
 						copyAssets(context.getAssets(), asset.source, jsFile);

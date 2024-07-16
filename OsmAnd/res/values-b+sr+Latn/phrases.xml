@@ -1409,7 +1409,7 @@
     <string name="poi_tactile_paving">Taktilno popločavanje</string>
     <string name="poi_brushless">Bez četkica</string>
     <string name="poi_observatory_designation">Označeno</string>
-    <string name="poi_pharmacy_dispensing">Apoteka (na recept)</string>
+    <string name="poi_pharmacy_dispensing">Lekovi na recept</string>
     <string name="poi_denomination">Veroispovest</string>
     <string name="poi_backcountry">Zabit</string>
     <string name="poi_beauty_salon_service">Servis</string>
@@ -1810,7 +1810,7 @@
     <string name="poi_drive_in_yes">Da;Ulazak autom</string>
     <string name="poi_drive_in_no">Ulazak kolima: ne</string>
     <string name="poi_drive_through_yes">Da;Prolazak autom</string>
-    <string name="poi_drive_through_no">Prolazak kroz: ne</string>
+    <string name="poi_drive_through_no">Kupovina iz auta: ne</string>
     <string name="poi_brewery_additional">Ime pivare</string>
     <string name="poi_microbrewery_yes">Da;Kraft pivare</string>
     <string name="poi_microbrewery_no">Ne mikropivara</string>

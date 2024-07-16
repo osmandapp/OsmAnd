@@ -1288,7 +1288,7 @@
     <string name="poi_craft_photographic_laboratory">相片工作间</string>
     <string name="poi_craft_pottery">陶艺</string>
     <string name="poi_craft_roofer">屋顶工</string>
-    <string name="poi_craft_tiler">瓦匠</string>
+    <string name="poi_craft_tiler">砖瓦匠</string>
     <string name="poi_craft_tinsmith">锡匠</string>
     <string name="poi_funeral_directors">殡仪馆</string>
     <string name="poi_dry_cleaning">干洗店</string>
@@ -1968,7 +1968,7 @@
     <string name="poi_snowmobile_designated">指定；雪地摩托指定通行</string>
     <string name="poi_motorcar_forestry">机动车通行：林业</string>
     <string name="poi_motor_vehicle_forestry">摩托化载具通行：林业</string>
-    <string name="poi_craft_cabinet_maker">橱柜制作</string>
+    <string name="poi_craft_cabinet_maker">橱柜制造商</string>
     <string name="poi_horse_forestry">马匹通行：林业</string>
     <string name="poi_historic_railway">历史性铁路</string>
     <string name="poi_historic_farm">历史性农场</string>
@@ -2865,4 +2865,6 @@
     <string name="poi_craft_joiner">细木工</string>
     <string name="poi_craft_distillery">蒸馏酒厂</string>
     <string name="poi_craft_floorer">地板工</string>
+    <string name="poi_craft_builder">建筑工</string>
+    <string name="poi_craft_confectionery">糖果生产</string>
 </resources>

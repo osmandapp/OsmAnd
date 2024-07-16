@@ -4596,7 +4596,7 @@
     <string name="poi_foot_designated">Designado para pedestres</string>
     <string name="poi_vehicle_designated">Designado para veículos</string>
     <string name="poi_assembly_point">Ponto de encontro</string>
-    <string name="poi_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
+    <string name="poi_not_pt_shelter_yes">Abrigo (não para transporte público)</string>
     <string name="poi_socket_typee_voltage_filter">Tensão do conector tipo E</string>
     <string name="poi_socket_typee_output_filter">Saída do conector tipo E</string>
     <string name="poi_socket_typee_output_medium">Médio</string>

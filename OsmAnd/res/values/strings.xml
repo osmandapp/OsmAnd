@@ -10,6 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="auto_25_chars_route_kl">Keep left</string>
+	<string name="auto_25_chars_route_kr">Keep right</string>
+	<string name="auto_25_chars_route_tr">Turn right</string>
+	<string name="auto_25_chars_route_tshr">Turn sharply right</string>
+	<string name="auto_25_chars_route_tslr">Turn slightly right</string>
+	<string name="auto_25_chars_route_tl">Turn left</string>
+	<string name="auto_25_chars_route_tshl">Turn sharply left</string>
+	<string name="auto_25_chars_route_tsll">Turn slightly left</string>
+	<string name="auto_25_chars_route_tu">Make U-turn</string>
 	<string name="resting_position">Resting position</string>
 	<string name="navigation_position">Navigation position</string>
 	<string name="resting_navigation_position">Rest &amp; navigation position</string>
