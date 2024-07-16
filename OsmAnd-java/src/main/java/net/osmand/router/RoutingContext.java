@@ -63,6 +63,7 @@ public class RoutingContext {
 	public int startY;
 	public long startRoadId;
 	public int startSegmentInd;
+	public int startSegmentIndEnd;
 	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;
@@ -70,6 +71,7 @@ public class RoutingContext {
 	public int[] intermediatesY;
 	public long targetRoadId;
 	public int targetSegmentInd;
+	public int targetSegmentIndEnd;
 	public boolean targetTransportStop;
 	public int dijkstraMode;
 	public boolean publicTransport;
@@ -191,6 +193,7 @@ public class RoutingContext {
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
+		startSegmentIndEnd = start.getSegmentEnd();
 	}
 
 	public void initTargetPoint(RouteSegmentPoint end) {
@@ -198,6 +201,7 @@ public class RoutingContext {
 		targetY = end.preciseY;
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
+		targetSegmentIndEnd = end.getSegmentEnd();
 	}
 	
 	public void unloadAllData() {
