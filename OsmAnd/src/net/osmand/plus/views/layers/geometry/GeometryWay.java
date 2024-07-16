@@ -446,16 +446,12 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
 	                             List<GeometryWayPoint> points, double distToFinish) {
-		boolean hasMapRenderer = hasMapRenderer();
-		if (hasMapRenderer) {
-			if (points.size() < 2) {
-				return;
-			}
-		} else if (points.size() < 2) {
+		if (points.size() < 2) {
 			return;
 		}
 		boolean hasPathLine = false;
 		boolean canvasRotated = false;
+		boolean hasMapRenderer = hasMapRenderer();
 		try {
 			for (GeometryWayPoint p : points) {
 				GeometryWayStyle<?> style = p.style;

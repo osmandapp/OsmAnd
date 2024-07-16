@@ -3,8 +3,6 @@ package net.osmand.plus.track;
 import static net.osmand.ColorPalette.LIGHT_GREY;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 

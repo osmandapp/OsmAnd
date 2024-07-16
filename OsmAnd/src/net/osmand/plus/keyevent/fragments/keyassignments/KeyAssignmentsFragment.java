@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.transition.Hold;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -59,6 +60,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		} else {
 			dismiss();
 		}
+		setExitTransition(new Hold());
 	}
 
 	@Nullable
@@ -163,7 +165,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	private void updateFabButton(@NonNull View view) {
 		FloatingActionButton addButton = view.findViewById(R.id.fabButton);
 		addButton.setVisibility(controller.isDeviceTypeEditable() && !controller.isInEditMode() ? View.VISIBLE : View.GONE);
-		addButton.setOnClickListener(v -> controller.askAddAssignment());
+		addButton.setOnClickListener(v -> controller.askAddAssignment(addButton));
 	}
 
 	private void updateListContent() {

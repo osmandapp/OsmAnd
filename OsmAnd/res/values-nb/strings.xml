@@ -1897,16 +1897,11 @@
     <string name="quick_action_auto_zoom">Auto-zoom på/av</string>
     <string name="quick_action_auto_zoom_on">Aktiver auto-zoom</string>
     <string name="quick_action_auto_zoom_off">Deaktiver auto-zoom</string>
-    <string name="quick_action_add_destination">Sett reisemål</string>
-    <string name="quick_action_replace_destination">Erstatt reisemål</string>
-    <string name="quick_action_add_first_intermediate">Legg til første mellomliggende punkt</string>
     <string name="no_overlay">Ingen overlegg</string>
     <string name="no_underlay">Ingen underlag</string>
     <string name="quick_action_map_underlay_switch">Kartunderlag er endret til \"%s\".</string>
-    <string name="quick_action_map_underlay">Endre kartunderlag</string>
     <string name="quick_action_map_underlay_title">Kartunderlag</string>
     <string name="quick_action_map_underlay_action">Legg til underlag</string>
-    <string name="quick_action_map_overlay">Endre overleggskart</string>
     <string name="quick_action_map_overlay_title">Overleggskart</string>
     <string name="quick_action_map_overlay_action">Legg til overlegg</string>
     <string name="quick_action_map_overlay_switch">Kartoverlegg er endret til \"%s\".</string>
@@ -1947,7 +1942,6 @@
     <string name="quick_action_map_source_switch">Kartkilde endret til \"%s\".</string>
     <string name="quick_action_map_source_action">Legg til kartkilde</string>
     <string name="quick_action_map_source_title">Kartkilder</string>
-    <string name="quick_action_map_source">Endre kartkilde</string>
     <string name="quick_action_map_styles">Kartstiler</string>
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
@@ -1958,7 +1952,6 @@
     <string name="quick_action_poi_show">Vis %1$s</string>
     <string name="quick_action_poi_hide">Skjul %1$s</string>
     <string name="favorite_empty_place_name">Sted</string>
-    <string name="quick_action_add_favorite">Legg til favoritt</string>
     <string name="quick_action_navigation_voice">Tale på/av</string>
     <string name="quick_action_navigation_voice_off">Slå på tale</string>
     <string name="quick_action_navigation_voice_on">Slå av tale</string>
@@ -2213,14 +2206,7 @@
     <string name="live_update">Live-oppdatering</string>
     <string name="quick_action_item_action">Handling %d</string>
     <string name="quick_action_item_screen">Skjerm %d</string>
-    <string name="quick_action_add_marker">Legg til kartmarkør</string>
-    <string name="quick_action_map_style">Endre kartstil</string>
     <string name="quick_action_map_style_switch">Kartstil endret til \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nytt lydnotat</string>
-    <string name="quick_action_take_video_note">Nytt videonotat</string>
-    <string name="quick_action_take_photo_note">Nytt bildenotat</string>
-    <string name="quick_action_add_osm_bug">Legg til OSM-notat</string>
-    <string name="quick_action_add_parking">Legg til parkeringsplass</string>
     <string name="quick_action_edit_action">Rediger handling</string>
     <string name="quick_actions_delete">Slett handling</string>
     <string name="quick_favorites_name_preset">Forhåndsinnstilt navn</string>
@@ -2348,7 +2334,6 @@
     <string name="downloading_number_of_files">Laster ned %1$d fil …</string>
     <string name="activate_seamarks_plugin">Aktiver tillegget \"Sjøkartvisning\"</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Fortsett\?</string>
-    <string name="quick_action_add_poi">Legg til interessepunkt</string>
     <string name="quick_action_showhide_poi_descr">En knapp til å vise eller skjule interessepunkter på kartet.</string>
     <string name="quick_action_page_list_descr">En knapp til å bla gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Fyll ut alle parametere</string>
@@ -3533,7 +3518,6 @@
     <string name="speed_camera_pois">Fotoboks-interessepunkter</string>
     <string name="shared_string_uninstall">Avinstaller</string>
     <string name="vessel_height_warning">Sett fartøyhøyde for å unngå lave broer. Hvis broen endrer høyde, brukes høyden i åpen tilstand.</string>
-    <string name="quick_action_remove_next_destination">Slett nærmeste reisemål</string>
     <string name="please_provide_point_name_error">Navngi punktet</string>
     <string name="shared_string_bearing">Peiling</string>
     <string name="item_deleted">%1$s slettet</string>
@@ -3690,7 +3674,6 @@
     <string name="in_case_of_reverse_direction">I tilfelle motsatt retning</string>
     <string name="simplified_track_description">Kun rutelinjen vil lagres, rutepunktene vil slettes.</string>
     <string name="context_menu_item_add_waypoint">Legg til spor-rutepunkt</string>
-    <string name="quick_action_add_gpx">Legg til spor-rutepunkt</string>
     <string name="complex_routing_descr">To-fase-ruting for bilnavigering.</string>
     <string name="osm_live_payment_desc_hw">Abonnementet belastes for den valgte perioden. Avbryt det når som helst i AppGallery.</string>
     <string name="attach_to_the_roads">Følg veier</string>
@@ -5549,4 +5532,20 @@
     <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
     <string name="show_debug_info">Vis avlusningsinfø</string>
     <string name="map_text">Karttekst</string>
+    <string name="wall_height">Vegghøyde</string>
+    <string name="backup_error_failed_to_transfer_file">Klarte ikke å overføre sky-fil(er).</string>
+    <string name="contact_support_retry">Prøv igjen eller kontakt brukerstøtte</string>
+    <string name="shared_string_colors">Farger</string>
+    <string name="key_assignment_add_action">Legg til handling</string>
+    <string name="missing_maps_ignore">Bruk eksisterende kart</string>
+    <string name="map_settings_weather_wind_animation">Vindanimasjon</string>
+    <string name="tomorrow">I morgen</string>
+    <string name="use_nearby_roads">Bruk veier i nærheten</string>
+    <string name="download_cloud_versions">Last ned skyversjoner</string>
+    <string name="shared_string_key">Tast</string>
+    <string name="round_up">Avrund oppover</string>
+    <string name="data_source">Datakilde</string>
+    <string name="weather_data_sources_prompt">OsmAnd tilbyr værdata fra to kilder:</string>
+    <string name="shared_string_modify">Endre</string>
+    <string name="action_icon">Handlingsikon</string>
 </resources>

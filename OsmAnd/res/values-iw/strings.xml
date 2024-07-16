@@ -1603,21 +1603,12 @@
     <string name="configure_screen_quick_action">פעולה מהירה</string>
     <string name="quick_action_item_action">פעולה %d</string>
     <string name="quick_action_item_screen">מסך %d</string>
-    <string name="quick_action_add_marker">הוספת סמן מפה</string>
-    <string name="quick_action_add_poi">הוספת נקודת עניין</string>
-    <string name="quick_action_map_style">שינוי סגנון מפה</string>
     <string name="quick_action_map_style_switch">סגנון המפה הוחלף לכדי „%s”.</string>
-    <string name="quick_action_take_audio_note">הערת שמע חדשה</string>
-    <string name="quick_action_take_video_note">הערת וידאו חדשה</string>
-    <string name="quick_action_take_photo_note">הערת תמונה חדשה</string>
-    <string name="quick_action_add_osm_bug">הוספת הערת OSM</string>
     <string name="quick_action_navigation_voice">הנחייה קולית כבויה/פעילה</string>
     <string name="quick_action_navigation_voice_off">ביטול השתקת הנחייה קולית</string>
     <string name="quick_action_navigation_voice_on">השתקת הנחייה קולית</string>
-    <string name="quick_action_add_parking">הוספת מקום חנייה</string>
     <string name="quick_action_new_action">הוספת פעולה</string>
     <string name="quick_action_edit_action">עריכת פעולה</string>
-    <string name="quick_action_add_favorite">הוספת מועדף</string>
     <string name="dialog_add_action_title">הוספת פעולה</string>
     <string name="quick_actions_delete">מחיקת פעולה</string>
     <string name="quick_actions_delete_text">למחוק את הפעולה „%s”\?</string>
@@ -1651,15 +1642,12 @@
     <string name="quick_action_map_style_action">הוספת סגנון מפה</string>
     <string name="quick_action_empty_param_error">מילוי כל המשתנים</string>
     <string name="quick_action_map_styles">סגנונות מפה</string>
-    <string name="quick_action_map_overlay">החלפת שכבה מעל למפה</string>
     <string name="quick_action_map_overlay_title">שכבות מעל למפה</string>
     <string name="quick_action_map_overlay_action">הוספת שכבה מעל למפה</string>
     <string name="quick_action_map_overlay_switch">השכבה שמעל המפה הוחלפה לכדי „%s”.</string>
     <string name="quick_action_map_underlay_switch">המפה שמתחת הוחלפה לכדי „%s”.</string>
-    <string name="quick_action_map_underlay">החלפת המפה שמתחת</string>
     <string name="quick_action_map_underlay_title">מפות שמתחת</string>
     <string name="quick_action_map_underlay_action">הוספת מפה מתחת</string>
-    <string name="quick_action_map_source">החלפת מקור מפה</string>
     <string name="quick_action_map_source_title">מקורות מפה</string>
     <string name="quick_action_map_source_action">הוספת מקור מפה</string>
     <string name="quick_action_map_source_switch">מקור המפה הוחלף לכדי „%s”.</string>
@@ -1731,9 +1719,6 @@
     <string name="quick_action_auto_zoom">הפעלה/כיבוי של תקריב מפה אוטומטי</string>
     <string name="quick_action_auto_zoom_on">הפעלת תקריב אוטומטי</string>
     <string name="quick_action_auto_zoom_off">כיבוי תקריב אוטומטי</string>
-    <string name="quick_action_add_destination">הגדרת יעד</string>
-    <string name="quick_action_replace_destination">החלפת יעד</string>
-    <string name="quick_action_add_first_intermediate">הוספת נקודת ביניים ראשונה</string>
     <string name="subscribe_email_error">שגיאה</string>
     <string name="analyze_on_map">ניתוח במפה</string>
     <string name="shared_string_visible">גלוי</string>
@@ -3662,7 +3647,6 @@
     <string name="use_volume_buttons_as_zoom_descr">ניתן לשלוט ברמת התקריב של המפה עם כפתורי עצמת השמע של המכשיר.</string>
     <string name="use_volume_buttons_as_zoom">כפתורי עצמת שמע כתקריב</string>
     <string name="lenght_limit_description">נא לספק את אורך כלי הרכב שלך, מגבלות מסלול מסוימות עשויות לחול על כלי רכב ארוכים.</string>
-    <string name="quick_action_remove_next_destination">מחיקת נקודת היעד הקרובה ביותר</string>
     <string name="please_provide_point_name_error">נא לספק שם לנקודה</string>
     <string name="quick_action_remove_next_destination_descr">מוחק את נקודת היעד הבאה במסלול שלך. אם זו נקודת היעד, הניווט ייפסק.</string>
     <string name="search_download_wikipedia_maps">הורדת מפות ויקיפדיה</string>
@@ -3716,7 +3700,6 @@
     <string name="empty_state_my_tracks">הוספת קובצי מסלול</string>
     <string name="empty_state_my_tracks_desc">ייבוא או הקלטה של קובצי מסלול</string>
     <string name="context_menu_item_add_waypoint">הוספת נקודת דרך במסלול</string>
-    <string name="quick_action_add_gpx">הוספת נקודת דרך במסלול</string>
     <string name="map_widget_monitoring">הקלטת טיול</string>
     <string name="marker_save_as_track">שמירה כקובץ מסלול</string>
     <string name="follow_track">מעקב אחר מסלול</string>
@@ -5044,4 +5027,13 @@
     <string name="sorted_sufolders_toast">תת־תיקיות תחת „%1$s” מסודרות לפי: „%2$s”</string>
     <string name="dont_ask_anymore">לא לשאול שוב</string>
     <string name="use_nearby_roads">להשתמש בדרכים סמוכות</string>
+    <string name="missing_maps_ignore">להשתמש במפות שהורדו</string>
+    <string name="backup_error_failed_to_transfer_file">העברת קובצי ענן נכשלה.</string>
+    <string name="contact_support_retry">נא לנסות שוב או ליצור קשר עם התמיכה</string>
+    <string name="rendering_value_dark_orange_name">כתום כהה</string>
+    <string name="quick_action_remove_next_destination">נקודת היעד הבאה</string>
+    <string name="quick_action_map_underlay">שכבת רקע</string>
+    <string name="quick_action_map_overlay">שכבת על</string>
+    <string name="quick_action_map_style">סגנון מפה</string>
+    <string name="missing_maps_ignore_details">המפות שהורדו מכסות את הנתיב שלך? אפשר לנווט באמצעות אם האזור הזה לא מוכר לך.</string>
 </resources>

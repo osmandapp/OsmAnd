@@ -2062,18 +2062,9 @@
     <string name="configure_screen_quick_action">Hitro dejanje</string>
     <string name="quick_action_item_action">Dejanje %d</string>
     <string name="quick_action_item_screen">Zaslon %d</string>
-    <string name="quick_action_add_marker">Dodaj označbo na zemljevidu</string>
-    <string name="quick_action_add_poi">Dodaj točko POI</string>
-    <string name="quick_action_map_style">Spremeni slog zemljevida</string>
     <string name="quick_action_map_style_switch">Slog zemljevida je spremenjen na »%s«.</string>
-    <string name="quick_action_take_audio_note">Novo zvočno sporočilo</string>
-    <string name="quick_action_take_video_note">Novo video sporočilo</string>
-    <string name="quick_action_take_photo_note">Novo slikovno sporočilo</string>
-    <string name="quick_action_add_osm_bug">Vpiši opombo OSM</string>
-    <string name="quick_action_add_parking">Dodaj parkirno mesto</string>
     <string name="quick_action_new_action">Dodaj dejanje</string>
     <string name="quick_action_edit_action">Uredi dejanje</string>
-    <string name="quick_action_add_favorite">Dodaj priljubljeno</string>
     <string name="dialog_add_action_title">Dodaj dejanje</string>
     <string name="quick_actions_delete">Izbriši dejanje</string>
     <string name="quick_actions_delete_text">Izbrisati dejanje »%s«\?</string>
@@ -2091,10 +2082,8 @@
     <string name="quick_action_map_styles">Slogi zemljevida</string>
     <string name="quick_action_map_overlay_title">Prekrivne plasti zemljevida</string>
     <string name="quick_action_map_overlay_action">Dodaj prekrivno plast</string>
-    <string name="quick_action_map_underlay">Spremeni podlogo zemljevida</string>
     <string name="quick_action_map_underlay_title">Podloge zemljevida</string>
     <string name="quick_action_map_underlay_action">Dodaj podlogo zemljevida</string>
-    <string name="quick_action_map_source">Spremeni vir zemljevida</string>
     <string name="quick_action_map_source_title">Viri zemljevida</string>
     <string name="quick_action_map_source_action">Dodaj vir zemljevida</string>
     <string name="quick_action_map_source_switch">Vir zemljevida spremenjen na »%s«.</string>
@@ -2112,7 +2101,6 @@
     <string name="quick_favorites_show_favorites_dialog">Pokaži pogovorno okno priljubljenih točk</string>
     <string name="quick_favorites_name_preset">Shranjena imena</string>
     <string name="quick_action_duplicate">Podvojeno ime hitrega dejanja</string>
-    <string name="quick_action_map_overlay">Spremeni prekrivno plast zemljevida</string>
     <string name="quick_action_map_overlay_switch">Prekrivna plast spremenjena na »%s«.</string>
     <string name="quick_action_map_underlay_switch">Podloga zemljevida spremenjena na »%s«.</string>
     <string name="auto_split_recording_title">Samodejno razdeli beleženje po vmesnih točkah</string>
@@ -2188,8 +2176,6 @@
     <string name="quick_action_auto_zoom">Omogoči/Onemogoči samodejno približanje zemljevida</string>
     <string name="quick_action_auto_zoom_on">Vklopi samodejno povečavo</string>
     <string name="quick_action_auto_zoom_off">Izklopi samodejno povečavo</string>
-    <string name="quick_action_add_destination">Nastavi cilj</string>
-    <string name="quick_action_replace_destination">Zamenjaj cilj</string>
     <string name="subscribe_email_error">Napaka</string>
     <string name="nautical_maps">Navtični zemljevidi</string>
     <string name="analyze_on_map">Preuči na zemljevidu</string>
@@ -2240,7 +2226,6 @@
     <string name="search_favorites">Išči med priljubljenimi</string>
     <string name="shared_string_plugin">Vstavek</string>
     <string name="restore_purchases">Obnovi nakupe</string>
-    <string name="quick_action_add_first_intermediate">Dodaj prvo vmesno točko</string>
     <string name="no_overlay">Brez prekrivnih plasti</string>
     <string name="no_underlay">Brez podlog</string>
     <string name="shared_string_visible">Prikazano</string>
@@ -3202,7 +3187,6 @@
     <string name="app_mode_inline_skates">rolerji</string>
     <string name="speed_cameras_removed_descr">Naprava nima kamer z merilci hitrosti.</string>
     <string name="please_provide_point_name_error">Vpišite ime točke</string>
-    <string name="quick_action_remove_next_destination">Zbriši naslednjo ciljno točko</string>
     <string name="quick_action_remove_next_destination_descr">Trenutna ciljna točka na poti bo izbrisana. Če je ta vaš cilj, bo navigacija zaustavljena.</string>
     <string name="plugin_wikipedia_description">Oglej si informacije o zanimivih točkah iz Wikipedije, žepnega vodnika brez povezave, ki vključuje članke o krajih in destinacijah.</string>
     <string name="use_volume_buttons_as_zoom_descr">Nadziraj stopnjo povečave zemljevida z gumbi za glasnost na napravi.</string>
@@ -3879,7 +3863,6 @@
     <string name="monthly_subscription">Mesečna naročnina</string>
     <string name="empty_purchases_description">Če tvoji nakupi niso prikazani tukaj, tapni na »%1$s« ali se obrni na našo ekipo za podporo.</string>
     <string name="routing_attr_height_obstacles_description">Predvideni potovalni čas bo odražal vpliv višinske razlike. Z nastavitvami usmerjanja se lahko izogneš strmim vzponom:</string>
-    <string name="quick_action_add_gpx">Dodaj točko poti</string>
     <string name="context_menu_item_add_waypoint">Dodaj točko sledi</string>
     <string name="shared_string_gpx_files">Sledi</string>
     <string name="add_segment_to_the_track">Dodaj v datoteko sledi</string>

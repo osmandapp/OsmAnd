@@ -4960,4 +4960,7 @@
     <string name="poi_us_maps_recreation_area_facility_warming_hut">Cabaña calefaccionada;Calentamiento de cabaña</string>
     <string name="poi_us_maps_recreation_area_facility_parking">Área de estacionamiento;Zona de estacionamiento</string>
     <string name="poi_via">Vía</string>
+    <string name="poi_mcdonalds">McDonald\'s</string>
+    <string name="poi_engineer">Oficina del ingeniero</string>
+    <string name="poi_property_management">Oficina del gestor inmobiliario</string>
 </resources>

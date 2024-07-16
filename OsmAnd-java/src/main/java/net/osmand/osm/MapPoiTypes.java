@@ -453,9 +453,15 @@ public class MapPoiTypes {
 							for (String lng : MapRenderingTypes.langs) {
 								parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng, baseType,
 										lastPoiAdditionalCategory, textPoiAdditionals);
+								if (baseType.isTopIndex()) {
+									topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":" + lng, baseType);
+								}
 							}
 							parsePoiAdditional(parser, lastCategory, lastFilter, lastType, "en", baseType,
 									lastPoiAdditionalCategory, textPoiAdditionals);
+							if (baseType.isTopIndex()) {
+								topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName() + ":en", baseType);
+							}
 						}
 						if (lastPoiAdditionalCategory != null) {
 							List<PoiType> categoryAdditionals = categoryPoiAdditionalMap.get(lastPoiAdditionalCategory);
@@ -968,7 +974,7 @@ public class MapPoiTypes {
 					}
 					pat = poiTypesByTag.get(otag);
 				}
-				if (pat != null && pat.isAdditional()) {
+				if (pat != null) {
 					a.setAdditionalInfo(pat.getKeyName(), e.getValue());
 				}
 			}

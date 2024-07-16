@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -423,6 +424,24 @@ public class ApplicationMode {
 		}
 	}
 
+	public void setViewAngleVisibility(@NonNull MarkerDisplayOption viewAngle) {
+		app.getSettings().VIEW_ANGLE_VISIBILITY.setModeValue(this, viewAngle);
+	}
+
+	@NonNull
+	public MarkerDisplayOption getViewAngleVisibility() {
+		return app.getSettings().VIEW_ANGLE_VISIBILITY.getModeValue(this);
+	}
+
+	public void setLocationRadius(@NonNull MarkerDisplayOption locationRadius) {
+		app.getSettings().LOCATION_RADIUS_VISIBILITY.setModeValue(this, locationRadius);
+	}
+
+	@NonNull
+	public MarkerDisplayOption getLocationRadiusVisibility() {
+		return app.getSettings().LOCATION_RADIUS_VISIBILITY.getModeValue(this);
+	}
+
 	public Integer getCustomIconColor() {
 		try {
 			String customColor = app.getSettings().CUSTOM_ICON_COLOR.getModeValue(this);
@@ -564,6 +583,8 @@ public class ApplicationMode {
 			mode.setNavigationIcon(builder.navigationIcon);
 			mode.setOrder(builder.order);
 			mode.setVersion(builder.version);
+			mode.setViewAngleVisibility(builder.viewAngle);
+			mode.setLocationRadius(builder.locationRadius);
 		} else {
 			mode = builder.customReg();
 			WidgetsAvailabilityHelper.initRegVisibility();
@@ -689,6 +710,8 @@ public class ApplicationMode {
 		private Integer customIconColor;
 		private String locationIcon;
 		private String navigationIcon;
+		private MarkerDisplayOption viewAngle;
+		private MarkerDisplayOption locationRadius;
 		private int order = -1;
 		private int version = -1;
 
@@ -717,6 +740,8 @@ public class ApplicationMode {
 			applicationMode.setNavigationIcon(navigationIcon);
 			applicationMode.setOrder(order != -1 ? order : values.size());
 			applicationMode.setVersion(version);
+			applicationMode.setViewAngleVisibility(viewAngle);
+			applicationMode.setLocationRadius(locationRadius);
 
 			return applicationMode;
 		}
@@ -783,6 +808,14 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder setNavigationIcon(String navIcon) {
 			this.navigationIcon = navIcon;
+			return this;
+		}
+		public ApplicationModeBuilder setViewAngle(@NonNull MarkerDisplayOption viewAngle) {
+			this.viewAngle = viewAngle;
+			return this;
+		}
+		public ApplicationModeBuilder setLocationRadius(@NonNull MarkerDisplayOption locationRadius) {
+			this.locationRadius = locationRadius;
 			return this;
 		}
 	}

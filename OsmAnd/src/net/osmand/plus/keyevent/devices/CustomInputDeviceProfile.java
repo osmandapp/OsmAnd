@@ -73,6 +73,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 			}
 			assignment.setAction(action);
 			assignment.setKeyCodes(keyCodes);
+			assignmentsCollection.syncCache();
 		}
 	}
 

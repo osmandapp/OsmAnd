@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.migration.data;
 
 import androidx.annotation.Nullable;
 
@@ -22,14 +22,14 @@ public class ColorsCollectionBundle {
 	/**
 	 * Predefined colors for the current palette.
 	 */
-	public List<PaletteColor> predefinedColors;
+	public List<PaletteColorV1> predefinedColors;
 
 	/**
 	 * Uses only for migration purposes from old to a new app version,
 	 * when we started to use palette colors instead of the simple int colors.
 	 */
 	@Nullable
-	public List<PaletteColor> paletteColors;
+	public List<PaletteColorV1> paletteColors;
 
 	/**
 	 * Preference that include all (predefined and custom) colors for the current palette.

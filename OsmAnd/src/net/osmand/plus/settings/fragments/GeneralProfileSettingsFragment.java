@@ -66,7 +66,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
-		setupNotRotateNorthUpPref();
 		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
 		setupTrackballForMovementsPref();
@@ -246,13 +245,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
-
-	private void setupNotRotateNorthUpPref() {
-		SwitchPreferenceEx mapEmptyStateAllowedPref = findPreference(settings.FIXED_NORTH_MAP.getId());
-		mapEmptyStateAllowedPref.setTitle(getString(R.string.fix_north_up));
-		mapEmptyStateAllowedPref.setDescription(getString(R.string.fix_north_up_descr));
-	}
-
 
 	private void setupAnimatePositionPref() {
 		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());

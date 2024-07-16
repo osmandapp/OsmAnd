@@ -54,7 +54,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
-import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV1;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
@@ -155,8 +156,12 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_02 = 4702;
 	public static final int VERSION_4_7_03 = 4703;
 	public static final int VERSION_4_7_04 = 4704;
+	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
+	public static final int VERSION_4_7_05 = 4705;
+	// 4706 - 4.7-06 (Import location 3D icon models)
+	public static final int VERSION_4_7_06 = 4706;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_04;
+	public static final int LAST_APP_VERSION = VERSION_4_7_06;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -273,11 +278,8 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
 				}
-				if (prevAppVersion < VERSION_4_6_10) {
-					migrateRoutingTypePrefs();
-				}
 				if (prevAppVersion < VERSION_4_7_01) {
-					ColorsMigrationAlgorithm.doMigration(app);
+					ColorsMigrationAlgorithmV1.doMigration(app);
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);
@@ -291,6 +293,14 @@ public class AppVersionUpgradeOnInit {
 						@Override
 						public void onStart(@NonNull AppInitializer init) {
 							migrateProfileQuickActionButtons();
+						}
+					});
+				}
+				if (prevAppVersion < VERSION_4_7_05) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+						@Override
+						public void onFinish(@NonNull AppInitializer init) {
+							ColorsMigrationAlgorithmV2.doMigration(app);
 						}
 					});
 				}
@@ -932,23 +942,6 @@ public class AppVersionUpgradeOnInit {
 		copyPreferenceForAllModes(oldPref.getFabMarginYPortrait(), newPref.getFabMarginYPortrait());
 		copyPreferenceForAllModes(oldPref.getFabMarginXLandscape(), newPref.getFabMarginXLandscape());
 		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
-	}
-
-	private void migrateRoutingTypePrefs() {
-		OsmandSettings settings = app.getSettings();
-		boolean hhRouting = new BooleanPreference(settings, "use_hh_routing", false).makeGlobal().get();
-		boolean hhRoutingCpp = new BooleanPreference(settings, "hh_routing_cpp", false).makeGlobal().get();
-		CommonPreference<Boolean> disableComplexRouting = new BooleanPreference(settings, "disable_complex_routing", false).makeProfile();
-
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			RoutingType routingType;
-			if (hhRouting) {
-				routingType = hhRoutingCpp ? HH_CPP : HH_JAVA;
-			} else {
-				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
-			}
-			settings.ROUTING_TYPE.setModeValue(mode, routingType);
-		}
 	}
 
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {

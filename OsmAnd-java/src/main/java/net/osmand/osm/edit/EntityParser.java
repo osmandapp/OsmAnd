@@ -173,11 +173,19 @@ public class EntityParser {
 				String key = e.getKey();
 				if (value.indexOf(';') != -1) {
 					String[] vls = value.split(";");
+					Amenity multiAmenity = null;
 					for(String v : vls) {
 						v = v.trim();
 						Amenity am = poiTypes.parseAmenity(key, v, purerelation, ts);
-						addAmenity(entity, amenitiesList, ts, am);
+						if (am != null) {
+							if (multiAmenity != null) {
+								multiAmenity.setSubType(multiAmenity.getSubType() + ";" + am.getSubType());
+							} else {
+								multiAmenity = am;
+							}
+						}
 					}
+					addAmenity(entity, amenitiesList, ts, multiAmenity);
 				} else {
 					Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
 					addAmenity(entity, amenitiesList, ts, am);

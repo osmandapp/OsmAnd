@@ -1,10 +1,9 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.*;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_COLOR_SCHEME_ACTION;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,8 +38,8 @@ import java.util.List;
 public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	public static final QuickActionType TYPE = new QuickActionType(TERRAIN_COLOR_SCHEME_ACTION,
 			"terrain.colorscheme.change", TerrainColorSchemeAction.class).
-			nameRes(R.string.change_terrain_color_scheme).iconRes(R.drawable.ic_action_appearance).
-			category(QuickActionType.TOPOGRAPHY);
+			nameRes(R.string.quick_action_terrain_color_scheme).iconRes(R.drawable.ic_action_appearance).
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 	private static final String KEY_TERRAIN_MODES = "terrain_modes";
 
@@ -118,7 +117,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
-		return TerrainMode.getByKey(item).translateName;
+		return TerrainMode.getByKey(item).getDescription();
 	}
 
 	@NonNull
@@ -168,7 +167,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 			List<String> items = new ArrayList<>();
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				items.add(mode.getKeyName());
-				visibleNamesList.add(mode.translateName);
+				visibleNamesList.add(mode.getDescription());
 			}
 
 			ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
@@ -263,7 +262,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	protected String getTitle(List<String> filters) {
 		if (filters.isEmpty()) return "";
 
-		String translatedFirstItem = TerrainMode.getByKey(filters.get(0)).translateName;
+		String translatedFirstItem = TerrainMode.getByKey(filters.get(0)).getDescription();
 		return filters.size() > 1
 				? translatedFirstItem + " +" + (filters.size() - 1)
 				: translatedFirstItem;

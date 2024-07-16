@@ -1733,8 +1733,6 @@
     <string name="select_postcode">جست‌وجوی کدپستی</string>
     <string name="quick_action_auto_zoom_on">روشن‌کردن زوم خودکار</string>
     <string name="quick_action_auto_zoom_off">خاموش‌کردن زوم خودکار</string>
-    <string name="quick_action_add_destination">تنظیم مقصد</string>
-    <string name="quick_action_replace_destination">تغییر مقصد</string>
     <string name="subscribe_email_error">خطا</string>
     <string name="sea_depth_thanks">از اینکه «منحنی‌های میزان عمق دریایی» را خریدید سپاسگزاریم</string>
     <string name="analyze_on_map">تحلیل روی نقشه</string>
@@ -1769,7 +1767,6 @@
     <string name="shared_string_overview">مرور کلی</string>
     <string name="nearest_cities">نزدیکترین شهرها</string>
     <string name="quick_action_auto_zoom_desc">دکمه‌ای برای روشن/خاموش کردن زوم خودکار وابسته به سرعت.</string>
-    <string name="quick_action_add_first_intermediate">افزودن اولین میانی</string>
     <string name="subscribe_email_desc">مشترک خبرنامهٔ ایمیلی ما شوید و ۳ نقشهٔ دیگر بارگیری کنید!</string>
     <string name="index_item_depth_contours_osmand_ext">منحنی‌های میزان عمق دریایی</string>
     <string name="index_item_depth_points_southern_hemisphere">نقاط عمق دریایی در نیمکرهٔ جنوبی</string>
@@ -2030,7 +2027,6 @@
     <string name="live_monitoring_max_interval_to_send_desrc">مدت‌زمانی را مشخص کنید تا اگر اتصال برقرار نبود، مکان‌ها تا این مدت برای ارسال حفظ شوند.</string>
     <string name="shared_string_others">دیگر</string>
     <string name="shared_string_release">تاریخ انتشار</string>
-    <string name="quick_action_add_marker">افزودن نشانهٔ نقشه</string>
     <string name="favourites_context_menu_add">افزودن علاقه‌مندی</string>
     <string name="poi_action_delete">حذف</string>
     <string name="poi_dialog_reopen">بازگشایی</string>
@@ -2127,20 +2123,12 @@
     <string name="configure_screen_quick_action">کنش فوری</string>
     <string name="quick_action_item_action">کنش %d</string>
     <string name="quick_action_item_screen">صفحهٔ %d</string>
-    <string name="quick_action_add_poi">افزودن POI</string>
-    <string name="quick_action_map_style">تغییر سبک نقشه</string>
     <string name="quick_action_map_style_switch">سبک نقشه به «%s» تغییر کرد.</string>
-    <string name="quick_action_take_audio_note">یادداشت صوتی جدید</string>
-    <string name="quick_action_take_video_note">یادداشت ویدئویی جدید</string>
-    <string name="quick_action_take_photo_note">یادداشت عکسی جدید</string>
-    <string name="quick_action_add_osm_bug">افزودن یادداشت OSM</string>
     <string name="quick_action_navigation_voice">گفتار روشن/خاموش</string>
     <string name="quick_action_navigation_voice_off">روشن‌کردن گفتار</string>
     <string name="quick_action_navigation_voice_on">خاموش‌کردن گفتار</string>
-    <string name="quick_action_add_parking">افزودن جای پارک</string>
     <string name="quick_action_new_action">افزودن کنش</string>
     <string name="quick_action_edit_action">اصلاح کنش</string>
-    <string name="quick_action_add_favorite">افزودن علاقه‌مندی</string>
     <string name="dialog_add_action_title">افزودن کنش</string>
     <string name="quick_actions_delete">حذف کنش</string>
     <string name="quick_actions_delete_text">آیا کنش «%s» حذف شود؟</string>
@@ -2172,15 +2160,12 @@
     <string name="quick_action_sh_poi_descr">یک یا چند دسته‌بندی POI را اضافه کنید تا روی نقشه نشان داده شوند.</string>
     <string name="quick_action_empty_param_error">همهٔ پارامترها را پر کنید</string>
     <string name="quick_action_map_styles">سبک‌های نقشه</string>
-    <string name="quick_action_map_overlay">تغییر لایهٔ رویی نقشه</string>
     <string name="quick_action_map_overlay_title">لایه‌های رویی نقشه</string>
     <string name="quick_action_map_overlay_action">افزودن لایهٔ رویی</string>
     <string name="quick_action_map_overlay_switch">لایهٔ رویی نقشه به «%s» تغییر کرد.</string>
     <string name="quick_action_map_underlay_switch">لایهٔ زیری نقشه به «%s» تغییر کرد.</string>
-    <string name="quick_action_map_underlay">تغییر لایهٔ زیری نقشه</string>
     <string name="quick_action_map_underlay_title">لایه‌های زیری نقشه</string>
     <string name="quick_action_map_underlay_action">افزودن لایهٔ زیری</string>
-    <string name="quick_action_map_source">تغییر منبع نقشه</string>
     <string name="quick_action_map_source_title">منابع نقشه</string>
     <string name="quick_action_map_source_action">افزودن منبع نقشه</string>
     <string name="quick_action_map_source_switch">منبع نقشه به «%s» تغییر کرد.</string>
@@ -3678,7 +3663,6 @@
     <string name="routing_attr_length_description">طول مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="speed_cameras_removed_descr">این دستگاه دوربین‌های سرعت را ندارد.</string>
     <string name="keep_active">فعال بماند</string>
-    <string name="quick_action_remove_next_destination">حذف نزدیک‌ترین مقصد</string>
     <string name="please_provide_point_name_error">لطفاً نام نقطه را بنویسید</string>
     <string name="search_download_wikipedia_maps">بارگیری نقشه‌های ویکی‌پدیا</string>
     <string name="plugin_wikipedia_description">دربارهٔ نقاط توجه، از ویکی‌پدیا اطلاعات کسب کنید. یک راهنمای آفلاینِ جیبی که مقاله‌هایی دربارهٔ مکان‌ها و مقصدها دارد.</string>
@@ -3776,7 +3760,6 @@
     <string name="empty_state_my_tracks">پرونده‌های رد اضافه کنید</string>
     <string name="empty_state_my_tracks_desc">ردها را درون‌برد یا ضبط کنید</string>
     <string name="context_menu_item_add_waypoint">افزودن راه‌نشان رد</string>
-    <string name="quick_action_add_gpx">افزودن راه‌نشان رد</string>
     <string name="map_widget_monitoring">ضبط سفر</string>
     <string name="marker_save_as_track">ذخیره در قالب پروندهٔ رد</string>
     <string name="number_of_gpx_files_selected_pattern">%s پروندهٔ رد انتخاب شده است</string>

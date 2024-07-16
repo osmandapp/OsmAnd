@@ -650,6 +650,19 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return pointsGroups;
 	}
 
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public Route getRouteByName(String name) {
+		for (Route route : getRoutes()) {
+			if (Algorithms.stringsEqual(route.name, name)) {
+				return route;
+			}
+		}
+		return null;
+	}
+
 	public QuadRect getRect() {
 		return getBounds(0, 0);
 	}

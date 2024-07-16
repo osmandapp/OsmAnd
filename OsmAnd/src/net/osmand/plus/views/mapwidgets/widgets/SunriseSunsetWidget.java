@@ -11,6 +11,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -145,6 +146,12 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	@Nullable
 	public OsmandPreference<SunPositionMode> getSunPositionPreference() {
 		return widgetState != null ? widgetState.getSunPositionPreference() : null;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
 	}
 
 	private void updateCachedLocation() {

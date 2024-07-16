@@ -2065,21 +2065,12 @@
     <string name="configure_screen_quick_action">Rychlá akce</string>
     <string name="quick_action_item_action">Akce %d</string>
     <string name="quick_action_item_screen">Obrazovka %d</string>
-    <string name="quick_action_add_marker">Přidat mapovou značku</string>
-    <string name="quick_action_add_poi">Přidat POI</string>
-    <string name="quick_action_map_style">Změnit styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byl změněn na \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nová zvuková poznámka</string>
-    <string name="quick_action_take_video_note">Nová video poznámka</string>
-    <string name="quick_action_take_photo_note">Nová foto poznámka</string>
-    <string name="quick_action_add_osm_bug">Přidat OSM poznámku</string>
     <string name="quick_action_navigation_voice">Hlas zapnout/vypnout</string>
     <string name="quick_action_navigation_voice_off">Zrušit ztlumení hlasu</string>
     <string name="quick_action_navigation_voice_on">Ztlumit hlas</string>
-    <string name="quick_action_add_parking">Přidat parkovací místo</string>
     <string name="quick_action_new_action">Přidat akci</string>
     <string name="quick_action_edit_action">Upravit akci</string>
-    <string name="quick_action_add_favorite">Přidat Oblíbené místo</string>
     <string name="dialog_add_action_title">Přidat akci</string>
     <string name="quick_actions_delete">Odstranit akci</string>
     <string name="quick_actions_delete_text">Odstranit akci \"%s\"\?</string>
@@ -2114,13 +2105,10 @@
     <string name="quick_action_map_style_action">Přidat styl mapy</string>
     <string name="quick_action_empty_param_error">Vyplňte všechny parametry</string>
     <string name="quick_action_map_styles">Styly mapy</string>
-    <string name="quick_action_map_overlay">Změnit překryvnou mapu</string>
     <string name="quick_action_map_overlay_title">Překryvy mapy</string>
     <string name="quick_action_map_overlay_action">Přidat překrytí</string>
-    <string name="quick_action_map_underlay">Změna mapy podkladu</string>
     <string name="quick_action_map_underlay_title">Mapa podkladu</string>
     <string name="quick_action_map_underlay_action">Přidat podklad</string>
-    <string name="quick_action_map_source">Změnit zdroj mapy</string>
     <string name="quick_action_map_source_title">Mapové zdroje</string>
     <string name="quick_action_map_source_action">Přidat zdroj mapy</string>
     <string name="quick_action_map_source_switch">Zdroj mapy změněn na \"%s\".</string>
@@ -2200,9 +2188,6 @@
     <string name="quick_action_auto_zoom_desc">Tlačítko pro zapnutí nebo vypnutí automatického přibližování mapy podle rychlosti.</string>
     <string name="quick_action_auto_zoom_on">Zapnout automatické přibližování</string>
     <string name="quick_action_auto_zoom_off">Vypnout automatické přibližování</string>
-    <string name="quick_action_add_destination">Zadat cíl</string>
-    <string name="quick_action_replace_destination">Nahradit cíl</string>
-    <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
     <string name="quick_action_showhide_osmbugs_descr">Tlačítko pro zobrazení nebo skrytí OpenStreetMap poznámek na mapě.</string>
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Hledat v Oblíbených</string>
@@ -3398,7 +3383,6 @@
     <string name="app_mode_wheelchair">Invalidní vozík</string>
     <string name="app_mode_wheelchair_forward">Invalidní vozík vpřed</string>
     <string name="context_menu_item_add_waypoint">Přidat mezicíl</string>
-    <string name="quick_action_add_gpx">Přidat mezicíl</string>
     <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="marker_save_as_track">Uložit jako soubor trasy</string>
     <string name="follow_track">Sledovat stopu</string>
@@ -3429,7 +3413,6 @@
     <string name="shared_string_uninstall_and_restart">Odinstalovat a restartovat</string>
     <string name="speed_cameras_removed_descr">Toto zařízení nemá rychlostní kamery.</string>
     <string name="app_mode_inline_skates">Inline brusle</string>
-    <string name="quick_action_remove_next_destination">Smazat následující cílový bod</string>
     <string name="use_volume_buttons_as_zoom_descr">Ovládat úroveň přiblížení mapy pomocí tlačítek hlasitosti zařízení.</string>
     <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
     <string name="threshold_distance">Mezní vzdálenost</string>
@@ -5678,4 +5661,11 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Pro zobrazení terénu na mapě jsou potřeba další mapy.</string>
     <string name="shared_string_scale">Měřítko</string>
+    <string name="missing_maps_ignore">Použít existující mapy</string>
+    <string name="weather_data_sources_prompt">OsmAnd poskytuje data o počasí ze dvou zdrojů:</string>
+    <string name="weather_source_ecmwf_description">Evropské centrum pro střednědobé předpovědi počasí</string>
+    <string name="weather_source_GFS_description">Globální předpovědní systém od Národních center pro environmentální předpovědi</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Zdroj dat</string>
 </resources>

@@ -18,9 +18,10 @@ public class MoveToMyLocationAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(MOVE_TO_MY_LOCATION_ACTION,
 			"map.move.my_location", MoveToMyLocationAction.class)
-			.nameRes(R.string.key_event_action_move_to_my_location)
+			.nameRes(R.string.quick_action_to_my_location)
 			.iconRes(R.drawable.ic_action_my_location).nonEditable()
-			.category(QuickActionType.MAP_INTERACTIONS);
+			.category(QuickActionType.MAP_INTERACTIONS)
+			.nameActionRes(R.string.shared_string_move);
 
 	public MoveToMyLocationAction() {
 		super(TYPE);

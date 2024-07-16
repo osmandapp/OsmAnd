@@ -112,7 +112,7 @@ public class BinaryMapPoiReaderAdapter {
 				tl = (id >> 1) & ((1 << 5) - 1);
 				sl = id >> 6;
 			} else {
-				tl = (id >> 1) & ((1 << 16) - 1);
+				tl = (id >> 1) & ((1 << 15) - 1);
 				sl = id >> 16;
 			}
 			if (subTypes.size() > tl) {
@@ -796,12 +796,13 @@ public class BinaryMapPoiReaderAdapter {
 				retValue.setLength(0);
 				hasSubcategoriesField = true;
 				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
+				boolean topIndex = region.topIndexSubTypes.contains(st);
 				if (req.poiAdditionalFilter != null) {
 					if (st != null && req.poiAdditionalFilter.accept(st, retValue.toString())) {
 						topIndexAdditonalFound = true;
 					}
 				}
-				if (st != null) {
+				if (st != null && !topIndex) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
 				break;

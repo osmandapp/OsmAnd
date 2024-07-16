@@ -2026,9 +2026,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_time">Laikas</string>
     <string name="gpx_add_track">Pridėti dar…</string>
     <string name="quick_action_item_action">Veiksmas %d</string>
-    <string name="quick_action_add_poi">Pridėti LV</string>
-    <string name="quick_action_map_style">Pakeisti žemėlapio stilių</string>
-    <string name="quick_action_add_parking">Pridėti parkavimo vietą</string>
     <string name="quick_action_new_action">Pridėti veiksmą</string>
     <string name="quick_action_edit_action">Redaguoti veiksmą</string>
     <string name="dialog_add_action_title">Pridėti veiksmą</string>
@@ -2039,7 +2036,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_map_styles">Žemėlapio stiliai</string>
     <string name="quick_action_map_source_title">Žemėlapio šaltiniai</string>
     <string name="quick_action_map_source_action">Pridėti žemėlapio šaltinį</string>
-    <string name="quick_action_map_source">Pakeisti žemėlapio šaltinį</string>
     <string name="restore_purchases">Atkurti pirkinius</string>
     <string name="fonts_header">Žemėlapio šriftai</string>
     <string name="right_side_navigation">Vairavimas dešinėje</string>
@@ -2069,8 +2065,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="nearest_cities">Artimiausi miestai</string>
     <string name="select_city">Pasirinkite miestą</string>
     <string name="select_postcode">Pasirinkite pašto kodą</string>
-    <string name="quick_action_add_destination">Pridėti paskirties vietą</string>
-    <string name="quick_action_add_first_intermediate">Pridėti pirmąjį tarpinį tašką</string>
     <string name="subscribe_email_error">Klaida</string>
     <string name="nautical_maps">Jūrų žemėlapiai</string>
     <string name="do_not_show_startup_messages">Nerodyti pranešimų paleisties metu</string>
@@ -2112,13 +2106,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_poi_too_many_uppercase">Pavadinime yra per daug didžiųjų raidžių. Ar norite tęsti?</string>
     <string name="configure_screen_quick_action">Spartusis veiksmas</string>
     <string name="quick_action_item_screen">Ekrano %d</string>
-    <string name="quick_action_add_marker">Pridėti žemėlapio žymeklį</string>
     <string name="quick_action_map_style_switch">Žemėlapis stilius buvo pakeistas į \"%s\".</string>
-    <string name="quick_action_take_audio_note">Įrašyti garsinę pastabą</string>
-    <string name="quick_action_take_video_note">Įrašyti vaizdo pastabą</string>
-    <string name="quick_action_take_photo_note">Fotografuoti</string>
-    <string name="quick_action_add_osm_bug">Pridėti OSM Pastabą</string>
-    <string name="quick_action_add_favorite">Įtraukti į parankinius</string>
     <string name="quick_actions_delete_text">Ar tikrai norite ištrinti veiksmą \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Rodyti parankinių dialogą</string>
     <string name="quick_action_interim_dialog">Rodyti tarpinį dialogo langą</string>
@@ -2180,7 +2168,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_auto_zoom_desc">Mygtuko paspaudimas į/išjungs automatinį žemėlapio mąstelio keitimą pagal jūsų greitį.</string>
     <string name="quick_action_auto_zoom_on">Įjungti auto. žemėl. mąstelį</string>
     <string name="quick_action_auto_zoom_off">Išjungti aut. žemėl. mąstelį</string>
-    <string name="quick_action_replace_destination">Pakeisti kelionės tikslą</string>
     <string name="quick_action_add_destination_desc">Paspaudus mygtuką ekrano centre esanti vieta bus pridėta kaip naujas kelionės tikslas. Anksčiau buvęs tikslas taps paskutiniuoju tarpiniu tikslu.</string>
     <string name="quick_action_replace_destination_desc">Paspaudus mygtuką kelionės tikslas bus pakeistas ekrano centre esančia vieta.</string>
     <string name="quick_action_add_first_intermediate_desc">Paspaudus mygtuką ekrano centre esanti vieta bus pridėta kaip pirmas tarpinis tikslas.</string>
@@ -2721,7 +2708,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_uninstall_and_restart">Išinstaliuoti ir perkrauti</string>
     <string name="speed_cameras_removed_descr">Šis įrenginys neturi greičio kamerų.</string>
     <string name="app_mode_inline_skates">dailiojo čiuožimo pačiūžos</string>
-    <string name="quick_action_remove_next_destination">Ištrinti sekančio atvykimo tašką</string>
     <string name="use_volume_buttons_as_zoom_descr">Leisti kontroliuoti žemėlapio mastelį naudojant įrenginio garsumo mygtukus.</string>
     <string name="use_volume_buttons_as_zoom">Garsumo mygtukai mastelio keitimui</string>
     <string name="please_provide_point_name_error">Prašome taškui suteikti pavadinimą</string>
@@ -2767,7 +2753,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="show_gpx">Maršrutai</string>
     <string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
     <string name="empty_state_my_tracks">Pridėti maršruto failus</string>
-    <string name="quick_action_add_gpx">Pridėti maršruto tašką</string>
     <string name="map_widget_monitoring">Kelionės įrašymas</string>
     <string name="marker_save_as_track">Išsaugoti kaip maršruto failą</string>
     <string name="number_of_gpx_files_selected_pattern">%s pasirinkti maršruto failai</string>

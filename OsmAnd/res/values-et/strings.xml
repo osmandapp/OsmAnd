@@ -284,9 +284,6 @@
     <string name="subscribe_email_error">Viga</string>
     <string name="no_overlay">Ülekate puudub</string>
     <string name="no_underlay">Aluskiht puudub</string>
-    <string name="quick_action_add_destination">Määra sihtkoht</string>
-    <string name="quick_action_replace_destination">Asenda sihtkoht</string>
-    <string name="quick_action_add_first_intermediate">Lisa esimene vahepealne</string>
     <string name="quick_action_auto_zoom">Automaatne kaardi suurendamine sisse/välja</string>
     <string name="quick_action_auto_zoom_on">Lülita kaardi automaatne suumimine sisse</string>
     <string name="quick_action_auto_zoom_off">Lülita kaardi automaatne suumimine välja</string>
@@ -1332,7 +1329,7 @@
     <string name="rendering_attr_moreDetailed_name">Rohkem üksikasju</string>
     <string name="rendering_attr_lessDetailed_name">Vähem üksikasju</string>
     <string name="rendering_attr_hideAccess_name">Ligipääsupiirangud</string>
-    <string name="rendering_attr_showAccess_name">Kuva ligipääsupiirangud ja toll</string>
+    <string name="rendering_attr_showAccess_name">Kuva ligipääsu- ja teemaksu piirangud</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kuva tee kvaliteet</string>
     <string name="rendering_attr_showSurfaces_name">Kuva tee pind</string>
     <string name="no_index_file_to_download">Allalaadimisi ei leitud, palun kontrolli internetiühendust.</string>
@@ -1459,7 +1456,7 @@
     <string name="routing_attr_avoid_motorway_name">Väldi kiirteid</string>
     <string name="routing_attr_avoid_motorway_description">Väldib kiirteid</string>
     <string name="routing_attr_avoid_borders_description">Väldib riigipiiride ületusi</string>
-    <string name="routing_attr_weight_name">Kaalupiirang</string>
+    <string name="routing_attr_weight_name">Kaal</string>
     <string name="routing_attr_weight_description">Määra teedel lubatud sõiduki kaal.</string>
     <string name="routing_attr_height_name">Kõrguspiirang</string>
     <string name="routing_attr_height_description">Määra teedel lubatud sõiduki kõrgus.</string>
@@ -1979,8 +1976,8 @@
     <string name="search_offline_clear_search">Uus otsing</string>
     <string name="map_text_size_descr">Nimede tekstisuurus kaardil:</string>
     <string name="map_text_size">Kaardi tekstisuurus</string>
-    <string name="trace_rendering">Silumisteabe kuvamine</string>
-    <string name="trace_rendering_descr">Näita kuvamisjõudlust.</string>
+    <string name="trace_rendering">Jõudlusega seotud silumisteave</string>
+    <string name="trace_rendering_descr">Näita graafilise liidese kuvamis- ja teekonna juhatamise jõudlust.</string>
     <string name="installing_new_resources">Uute andmete lahti pakkimine…</string>
     <string name="internet_connection_required_for_online_route">Veebipõhine navigeerimine ei tööta ilma võrguühenduseta.</string>
     <string name="tts_language_not_supported_title">Mittetoetatud keel</string>
@@ -2006,7 +2003,7 @@
     <string name="map_overlay_descr">Vali ülekatte kaart</string>
     <string name="tile_source_already_installed">Kaart on juba paigaldatud, uuendatakse \'Seaded\'.</string>
     <string name="select_tile_source_to_install">Vali kaardipaanide allikad:</string>
-    <string name="install_more">Paigalda veel…</string>
+    <string name="install_more">Lisa veel…</string>
     <string name="error_doing_search">Võrguühenduseta otsing ebaõnnestus.</string>
     <string name="search_osm_offline">Otsi geoasukoha järgi</string>
     <string name="system_locale">Süsteem</string>
@@ -2063,7 +2060,7 @@
     <string name="build_installed">Versioon {0} paigaldati ({1}).</string>
     <string name="downloading_build">Versiooni alla laadimine…</string>
     <string name="install_selected_build">Paigaldada OsmAnd - {0} / {1} {2} MB \?</string>
-    <string name="loading_builds_failed">OsmAnd versioonide nimekirja hankimine ebaõnnestus</string>
+    <string name="loading_builds_failed">OsmAndi versioonide loendi laadimine ei õnnestunud</string>
     <string name="loading_builds">OsmAnd versioonide laadimine…</string>
     <string name="select_build_to_install">Vali paigaldatav OsmAnd versioon</string>
     <string name="gps_status_app_not_found">GPS oleku rakendust ei ole paigaldatud. Otsida turult\?</string>
@@ -2662,8 +2659,7 @@
 \n
 \nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
     <string name="audionotes_plugin_description">Tee reisi ajal heli-, pildi- või videomärkmeid, kasutades kas nuppu kaardil või asukoha kontekstimenüüd.</string>
-    <string name="osmand_parking_plugin_description">Võimaldab registreerida oma auto parkimiskoha ja jälgida järelejäänud parkimisaega.
-\nNii asukoht kui aeg on nähtavad nii OsmAnd armatuurlaual kui kaardi vidinas. Meeldetuletust saab lisada Androidi kalendrisse.</string>
+    <string name="osmand_parking_plugin_description">Jäta meelde oma auto parkimiskoht ja teavita oma kalendrirakendust, kui parkimise aeg hakkab lõppema. Parkimismarkeri lisamiseks vali vajalik koht kaardil, ava „Tegevused“ ja klõpsi „Lisa parkimine“.</string>
     <string name="unit_of_length_descr">Muuda pikkusühikuid.</string>
     <string name="osmand_distance_planning_plugin_description">Selleks, et reise kavandada ja punktide vahelist kaugust mõõta, loo teekondi kaardil koputades või olemasolevaid GPX-faile kasutades, Tulemusi saad salvestada GPX-failina, mida on hiljem võimalik juhendamiseks kasutada.</string>
     <string name="osmand_accessibility_description">Teeb seadme erivajadusega kasutajatele mõeldud funktsioonid otse OsmAndis kättesaadavaks. See lihtsustab näiteks kõnesünteesi häälte kõnekiiruse reguleerimist, ekraanil navigeerimise suuna seadistamist, rulliku kasutamist suurenduse juhtimiseks või kõnesünteesi tagasisidet, näiteks oma asukoha automaatseks teatamiseks.</string>
@@ -2717,7 +2713,7 @@
     <string name="rendering_attr_appMode_description">Optimeeri kaarti</string>
     <string name="rendering_attr_contourLines_description">Kuva alates suurendustasemest (vajab kõrgusandmeid):</string>
     <string name="local_index_description">Täpsema teabe saamiseks puuduta mõnda olemasolevat üksust, mitteaktiveerimiseks või kustutamiseks puuduta pikalt. Seadme praegused andmed (%1$s vaba):</string>
-    <string name="first_time_msg">Täname OsmAnd kasutamise eest. Laadi piirkondlikud andmed võrguühenduseta kasutamiseks alla menüüst „Seaded“ → „Halda kaardifaile“, et vaadata kaarte, otsida aadresse, leida huvipunkte, ühistransporti ja palju muud.</string>
+    <string name="first_time_msg">Täname OsmAndi kasutamise eest. Laadi piirkondlikud andmed võrguühenduseta kasutamiseks alla menüüst „Menüü“ → „Halda kaardifaile“, et vaadata kaarte, otsida aadresse, leida huvipunkte, ühistransporti ja palju muud.</string>
     <string name="local_indexes_cat_tile">Veebis ja vahemällu salvestatud paanikaardid</string>
     <string name="index_settings_descr">Laadi alla ja halda oma seadmesse salvestatud võrguühenduseta kaardifaile.</string>
     <string name="map_online_data">Veebipõhised ja paanikaardid</string>
@@ -2726,7 +2722,7 @@
     <string name="play_commands_of_currently_selected_voice">Vali hääl ja proovi esitades teateid:</string>
     <string name="native_rendering">Sisseehitatud renderdamine</string>
     <string name="test_voice_prompts">Testi hääljuhiseid</string>
-    <string name="switch_to_raster_map_to_see">Laadi selle asukoha jaoks võrguühenduseta vektorkaart alla menüüst „Seaded“ („Halda kaardifaile“) või lülitu ümber „Veebikaardid“ lisamoodulile.</string>
+    <string name="switch_to_raster_map_to_see">Laadi selle asukoha jaoks võrguühenduseta vektorkaart alla ikoonist „Menüü“ („Halda kaardifaile“) või lülitu ümber „Veebikaardid“ lisamoodulile.</string>
     <string name="validate_gpx_upload_name_pwd">GPX failide üleslaadimiseks täpsusta palun oma OSM kasutajanimi ja salasõna.</string>
     <string name="zoom_by_trackball_descr">Muuda kaardi suurendustaset juhtkuuli horisontaalse liigutusega.</string>
     <string name="zoom_by_trackball">Kasuta juhtkuuli suurendustaseme juhtimiseks</string>
@@ -3068,21 +3064,12 @@
     <string name="configure_screen_quick_action">Kiirtoiming</string>
     <string name="quick_action_item_action">Tegevus %d</string>
     <string name="quick_action_item_screen">Ekraan %d</string>
-    <string name="quick_action_add_marker">Lisa kaardimarker</string>
-    <string name="quick_action_add_poi">Lisa huvipunkt</string>
-    <string name="quick_action_map_style">Muuda kaardi stiili</string>
     <string name="quick_action_map_style_switch">Kaardi stiiliks muudetud \"%s\".</string>
-    <string name="quick_action_take_audio_note">Uus häälmärge</string>
-    <string name="quick_action_take_video_note">Uus videomärge</string>
-    <string name="quick_action_take_photo_note">Uus fotomärge</string>
-    <string name="quick_action_add_osm_bug">Lisa OSM märge</string>
     <string name="quick_action_navigation_voice">Hääl sisse/välja</string>
     <string name="quick_action_navigation_voice_off">Tühista hääle vaigistus</string>
     <string name="quick_action_navigation_voice_on">Vaigista hääl</string>
-    <string name="quick_action_add_parking">Lisa parkimiskoht</string>
     <string name="quick_action_new_action">Lisa tegevus</string>
     <string name="quick_action_edit_action">Muuda tegevust</string>
-    <string name="quick_action_add_favorite">Lisa lemmik</string>
     <string name="dialog_add_action_title">Lisa tegevus</string>
     <string name="quick_actions_delete">Kustuta tegevus</string>
     <string name="quick_actions_delete_text">Kustutada \"%s\" tegevus\?</string>
@@ -3102,13 +3089,10 @@
     <string name="quick_action_map_style_action">Lisa kaardi stiil</string>
     <string name="quick_action_empty_param_error">Täida kõik parameetrid</string>
     <string name="quick_action_map_styles">Kaardistiilid</string>
-    <string name="quick_action_map_overlay">Muuda kaardi ülekatet</string>
     <string name="quick_action_map_overlay_title">Kaardi ülekatted</string>
     <string name="quick_action_map_overlay_action">Lisa ülekate</string>
-    <string name="quick_action_map_underlay">Muuda kaardi aluskihti</string>
     <string name="quick_action_map_underlay_title">Kaardi aluskihid</string>
     <string name="quick_action_map_underlay_action">Lisa aluskiht</string>
-    <string name="quick_action_map_source">Muuda kaardiallikat</string>
     <string name="quick_action_map_source_title">Kaardiallikad</string>
     <string name="quick_action_map_source_action">Lisa kaardiallikas</string>
     <string name="quick_action_map_source_switch">Kaardiallikaks muudetud \"%s\".</string>
@@ -3497,7 +3481,6 @@
     <string name="quick_action_showhide_mapillary_descr">Selle tegevusnupu puudutamisel kuvatakse või peidetakse kaardil Mapillary kiht.</string>
     <string name="shared_string_uninstall_and_restart">Eemalda ja taaskäivita</string>
     <string name="app_mode_inline_skates">Rulluisud</string>
-    <string name="quick_action_remove_next_destination">Kustuta järgmine sihtpunkt</string>
     <string name="use_volume_buttons_as_zoom_descr">Nutiseadme helitugevuse nuppudega kontrollida saad kaardi suumi taset.</string>
     <string name="use_volume_buttons_as_zoom">Helitugevuse nupud toimivad suumina</string>
     <string name="please_provide_point_name_error">Palun sisestage punkti nimi</string>
@@ -3624,7 +3607,6 @@
     <string name="shared_string_gpx_route">Raja teekond</string>
     <string name="empty_state_my_tracks">Lisa rajafaile</string>
     <string name="context_menu_item_add_waypoint">Lisa rajale teekonnapunkt</string>
-    <string name="quick_action_add_gpx">Lisa rajale teekonnapunkt</string>
     <string name="map_widget_monitoring">Teekonna salvestamine</string>
     <string name="marker_save_as_track">Salvesta rada failina</string>
     <string name="follow_track">Järgi teekonda</string>
@@ -4286,7 +4268,7 @@
     <string name="no_items_of_type_message">Sul ei ole ühtegi sellist liiki eset</string>
     <string name="routeInfo_tracktype_description">Teekonna või raja joone värvimine vastavalt teede seisukorrale, mis põhineb nende pinna koostisel. Kasutatakse kui peamine teedevõrk koosneb pindamata teedest.</string>
     <string name="routeInfo_winter_ice_road_description">Värvi teekond või rada vastavalt talvise tee klassifikatsioonile.</string>
-    <string name="routeInfo_smoothness_description">Pakub klassifikatsioonisüsteemi, mis käsitleb tee füüsilist kasutatavust ratassõidukitele, eelkõige pinna korrapärasust ja tasasust.</string>
+    <string name="routeInfo_smoothness_description">Tee või raja klassifikatsioonisüsteem ratassõidukitele, arvestades eelkõige pinna korrapärasust ja tasasust.</string>
     <string name="routeInfo_surface_description">Anna lisateavet teede ja radade füüsilise pinna kohta.</string>
     <string name="routeInfo_roadClass_description">Teekonna või raja värvimine vastavalt teede klassifikatsioonile.</string>
     <string name="add_group_to_markers">Lisa grupp markerite nimekirja</string>
@@ -4583,7 +4565,7 @@
     <string name="import_export">Import/eksport</string>
     <string name="add_new_type">Lisa uus tüüp</string>
     <string name="explore_3d_track_description">Tutvu rajaga interaktiivses 3D-vaates! Visualiseeri kõrgust, kiirust ja palju muud otse kaardil.</string>
-    <string name="maps_that_also_be_used">Lisaks kasutatavad kaardid: %1$s</string>
+    <string name="maps_that_also_be_used">Lisaks kasutatame kaarte: %1$s</string>
     <string name="getting_list_of_required_maps">Laadime vajalike kaartide loendit…</string>
     <string name="required_maps_calculate_online_summary">Puuduvate kaartide loend põhineb sirgjoonel. Täpse kaartide loendi saamiseks võib OsmAnd sinu teekonna koostada võrguteenuse abil.</string>
     <string name="route_line_use_coloring_altitude">Teekonna joon on värvitud kõrgusjoonte alusel.</string>
@@ -4628,4 +4610,52 @@
     <string name="clear_all_key_shortcuts">Eemalda kõik kiirklahvid</string>
     <string name="clear_key_assignment_summary">Valitud tegevuse jaoks määratud klahvikombinatsioon nüüd eemaldatakse.</string>
     <string name="clear_all_key_shortcuts_summary">Kõik valitud tüübi jaoks määratud klahvikombinatsioonid nüüd eemaldatakse.</string>
+    <string name="cloud_trash_clear_confirmation">Kas kustutame kõik objektid prügikastist jäädavalt?</string>
+    <string name="no_assigned_keys">Kiirklahve pole määratud</string>
+    <string name="action_icon">Tegevuse ikoon</string>
+    <string name="change_key_binding">Muuda kiirklahvi seoseid</string>
+    <string name="delete_trash_item_confirmation_desc">Kas kustutame „%1$s“ jäädavalt?</string>
+    <string name="shared_string_delete_immediately">Kustuta kohe</string>
+    <string name="backup_error_failed_to_transfer_file">Pilvefaili(de) ülekandmine ei õnnestunud.</string>
+    <string name="contact_support_retry">Proovi uuesti või võta ühendust kasutajatoega</string>
+    <string name="no_assigned_keys_desc">Klõpsides nuppu „Lisa“ vali tegevus ja määra talle kiirklahv.</string>
+    <string name="user_palette">Kasutaja palett</string>
+    <string name="shared_string_colors">Värvid</string>
+    <string name="assigned_keys">Määratud kiirklahvid</string>
+    <string name="press_button_to_link_with_action">Määramaks seda tegevusele vajuta oma seadmes nuppu: %1$s</string>
+    <string name="shared_string_delete_item">Kustuta objekt</string>
+    <string name="steps_per_minute_unit">Sammu minutis</string>
+    <string name="key_is_already_assigned_error">„%1$s“ kiirklahv on juba on määratud tegevusele „%2$s“</string>
+    <string name="missing_maps_ignore">Kasuta olemasolevaid kaarte</string>
+    <string name="add_smart_folder">Lisa nutikas kaust</string>
+    <string name="shared_string_created">Loodud</string>
+    <string name="empty_name">Tühi nimi</string>
+    <string name="restore_from_trash">Taasta prügikastist</string>
+    <string name="cloud_item_restored">%1$s on taastatud pilve.</string>
+    <string name="shared_string_key">Kiirklahve</string>
+    <string name="new_key_assignment">Uue kiirklahvi määramine</string>
+    <string name="key_name_pattern">Kiirklahv „%1$s“</string>
+    <string name="key_assignment_add_key">Lisa kiirklahv</string>
+    <string name="key_assignment_add_action">Lisa tegevus</string>
+    <string name="height_legend_description">Värvilised kõrgusjoonte kaardid aitavad paremini reljeefi kuvada.</string>
+    <string name="shared_string_is_deleted">%1$s on kustutatud.</string>
+    <string name="delete_all_items">Kustuta kõik objektid</string>
+    <string name="save_as_smart_folder">Salvesta nutika kaustana</string>
+    <string name="shared_string_rows">Read</string>
+    <string name="shared_string_show_icon">Näita ikooni</string>
+    <string name="maps_and_resources">Kaardid ja andmed</string>
+    <string name="release_4_8">• Koostamisel versiooni 4.8 jaoks</string>
+    <string name="delete_history_items">Kas kustutame %1$s ajalookirjet?</string>
+    <string name="rendering_attr_alpineHiking_name">Raskusastme klassifikatsioon</string>
+    <string name="delete_history_items_descr">Kas kustutame valitud ajalookirjed?</string>
+    <string name="quick_action_toggle_preference">Võimalus eelistust sisse/välja lülitada.</string>
+    <string name="rendering_attr_alpineHiking_description">Radade keerukuse klassifikatsioonitüübid.</string>
+    <string name="quick_action_remove_next_destination">Järgmine sihtpunkt</string>
+    <string name="quick_action_map_style">Kaardi stiil</string>
+    <string name="quick_action_map_underlay">Aluskiht</string>
+    <string name="files_remaining">Faile jäänud: %1$s %2$s</string>
+    <string name="copying_file">Kopeerime %1$s faili…</string>
+    <string name="from_to_with_params">Asukohast %1$s asukohta %2$s</string>
+    <string name="progress_complete">%1$s on tehtud</string>
+    <string name="quick_action_map_overlay">Ülekate</string>
 </resources>

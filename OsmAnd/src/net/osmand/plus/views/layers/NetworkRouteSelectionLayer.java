@@ -22,6 +22,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -90,7 +92,9 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
 				RouteKey routeKey = (RouteKey) pair.first;
-				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName());
+				Locale locale = LocaleHelper.getPreferredNameLocale(app, routeKey.getSupportedNameLocales());
+				String localeId = locale != null ? locale.getLanguage() : null;
+				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName(localeId));
 			}
 		}
 		return null;

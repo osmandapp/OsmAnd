@@ -57,8 +57,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -331,43 +331,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
-						PoiUIFilter filter;
-						if (searchPhrase.isNoSelectedType()) {
-							AbstractPoiType uselectedPoiType = searchUICore.getUnselectedPoiType();
-							if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-								app.getPoiFilters().resetNominatimFilters();
-								filter = app.getPoiFilters().getNominatimAddressFilter();
-								filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
-								filter.clearCurrentResults();
-							} else if (uselectedPoiType != null) {
-								filter = new PoiUIFilter(uselectedPoiType, app, "");
-								String customName = searchUICore.getCustomNameFilter();
-								if (!Algorithms.isEmpty(customName)) {
-									filter.setFilterByName(customName);
-								}
-							} else {
-								filter = app.getPoiFilters().getSearchByNamePOIFilter();
-								if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-									filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
-									filter.clearCurrentResults();
-								}
-							}
-						} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
-							if (searchPhrase.isNoSelectedType()) {
-								filter = new PoiUIFilter(null, app, "");
-							} else {
-								AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
-								filter = new PoiUIFilter(abstractPoiType, app, "");
-							}
-							if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-								filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
-							}
-						} else {
-							filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
-							if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
-								filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
-							}
-						}
+						PoiUIFilter filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						app.getPoiFilters().clearSelectedPoiFilters();
 						app.getPoiFilters().addSelectedPoiFilter(filter);
 
@@ -530,7 +494,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				updateClearButtonAndHint();
 				updateClearButtonVisibility(true);
 				boolean textEmpty = newQueryText.length() == 0;
-				updateTabBarVisibility(textEmpty && !isOnlineSearch());
+				updateTabBarVisibility(textEmpty && !SearchUtils.isOnlineSearch(searchUICore));
 				updateSendEmptySearchBottomBar(false);
 				if (textEmpty) {
 					if (addressSearch) {
@@ -1056,7 +1020,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		} else {
 			tabToolbarView.setVisibility(View.GONE);
 			SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
-			boolean buttonToolbarVisible = (isOnlineSearch() && !isTextEmpty())
+			boolean buttonToolbarVisible = (SearchUtils.isOnlineSearch(searchUICore) && !isTextEmpty())
 					|| !searchUICore.getSearchSettings().isCustomSearch();
 			if (searchType.isTargetPoint() && (lastWord == null || lastWord.getLocation() == null)) {
 				buttonToolbarVisible = false;
@@ -1065,10 +1029,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
-	}
-
-	private boolean isOnlineSearch() {
-		return searchUICore.getSearchSettings().hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
 	private boolean isSearchViewVisible() {
@@ -1823,7 +1783,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
-			moreListItem.setSecondaryButtonVisible(isOnlineSearch());
+			moreListItem.setSecondaryButtonVisible(SearchUtils.isOnlineSearch(searchUICore));
 			mainSearchFragment.addListItem(moreListItem);
 			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}

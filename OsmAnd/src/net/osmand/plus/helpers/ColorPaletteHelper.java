@@ -14,10 +14,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask;
 import net.osmand.plus.card.color.palette.gradient.DuplicateGradientTask.DuplicateGradientListener;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.plugins.srtm.CollectColorPalletTask;
 import net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import net.osmand.plus.plugins.srtm.TerrainMode;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ColorPaletteHelper {
+
 	public static final String ROUTE_PREFIX = "route_";
 	public static final String GRADIENT_ID_SPLITTER = "_";
 
@@ -41,18 +42,44 @@ public class ColorPaletteHelper {
 		this.app = app;
 	}
 
-	public Map<String, Pair<ColorPalette, Long>> getPalletsForType(@NonNull ColorizationType colorizationType) {
+	public Map<String, Pair<ColorPalette, Long>> getPalletsForType(@NonNull Object gradientType) {
 		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
+		if (gradientType instanceof ColorizationType) {
+			colorPalettes = getColorizationTypePallets((ColorizationType) gradientType);
+		} else if (gradientType instanceof TerrainType) {
+			colorPalettes = getTerrainModePallets((TerrainType) gradientType);
+		}
+		return colorPalettes;
+	}
+
+	private Map<String, Pair<ColorPalette, Long>> getColorizationTypePallets(@NonNull ColorizationType type){
+		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
+		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
+
 		File colorPalletsDir = getColorPaletteDir();
 		File[] colorFiles = colorPalletsDir.listFiles();
 		if (colorFiles != null) {
-			String colorTypePrefix = ROUTE_PREFIX + colorizationType.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 			for (File file : colorFiles) {
 				String fileName = file.getName();
 				if (fileName.startsWith(colorTypePrefix) && fileName.endsWith(TXT_EXT)) {
 					String colorPalletName = fileName.replace(colorTypePrefix, "").replace(TXT_EXT, "");
 					ColorPalette colorPalette = getGradientColorPalette(fileName);
 					colorPalettes.put(colorPalletName, new Pair<>(colorPalette, file.lastModified()));
+				}
+			}
+		}
+		return colorPalettes;
+	}
+
+	private Map<String, Pair<ColorPalette, Long>> getTerrainModePallets(@NonNull TerrainType type) {
+		Map<String, Pair<ColorPalette, Long>> colorPalettes = new HashMap<>();
+		for (TerrainMode mode : TerrainMode.values(app)) {
+			if (mode.getType() == type) {
+				String fileName = mode.getMainFile();
+				File file = new File(getColorPaletteDir(), fileName);
+				ColorPalette colorPalette = getGradientColorPalette(fileName);
+				if (colorPalette != null && file.exists()) {
+					colorPalettes.put(mode.getKeyName(), new Pair<>(colorPalette, file.lastModified()));
 				}
 			}
 		}
@@ -81,9 +108,7 @@ public class ColorPaletteHelper {
 
 	@Nullable
 	public ColorPalette getGradientColorPaletteSync(@NonNull String modeKey) {
-		TerrainMode mode = TerrainMode.getByKey(modeKey);
-		String colorPaletteFileName = mode.getMainFile();
-		return getGradientColorPalette(colorPaletteFileName);
+		return getGradientColorPalette(modeKey);
 	}
 
 	@Nullable
@@ -139,15 +164,12 @@ public class ColorPaletteHelper {
 		}
 	}
 
-	public void duplicateGradient(@NonNull PaletteGradientColor gradientColor, @NonNull DuplicateGradientListener duplicateGradientListener) {
-		String colorPaletteFileName = ROUTE_PREFIX + gradientColor.getColorizationTypeName() + GRADIENT_ID_SPLITTER + gradientColor.getPaletteName() + TXT_EXT;
-
+	public void duplicateGradient(@NonNull String colorPaletteFileName, @NonNull DuplicateGradientListener duplicateGradientListener) {
 		DuplicateGradientTask duplicateGradientTask = new DuplicateGradientTask(app, colorPaletteFileName, duplicateGradientListener);
 		duplicateGradientTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void deleteGradient(@NonNull PaletteGradientColor gradientColor, @NonNull DeleteGradientListener deleteGradientListener) {
-		String colorPaletteFileName = ROUTE_PREFIX + gradientColor.getColorizationTypeName() + GRADIENT_ID_SPLITTER + gradientColor.getPaletteName() + TXT_EXT;
+	public void deleteGradient(@NonNull String colorPaletteFileName, @NonNull DeleteGradientListener deleteGradientListener) {
 		File gradientToDelete = new File(getColorPaletteDir(), colorPaletteFileName);
 
 		boolean deleted = Algorithms.removeAllFiles(gradientToDelete);
@@ -156,6 +178,7 @@ public class ColorPaletteHelper {
 		}
 		deleteGradientListener.onGradientDeleted(deleted);
 	}
+
 	public interface DeleteGradientListener {
 		void onGradientDeleted(boolean deleted);
 	}
