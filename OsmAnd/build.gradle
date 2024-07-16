@@ -109,11 +109,11 @@ android {
 		}
 	}
 
-	flavorDimensions "version", "coreversion", "abi"
 	buildFeatures {
-		renderScript true
 		aidl true
 	}
+
+	flavorDimensions "version", "coreversion", "abi"
 	productFlavors {
 		// Version
 		nightlyFree {

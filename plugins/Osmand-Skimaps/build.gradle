@@ -39,7 +39,6 @@ android {
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
-			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
@@ -54,7 +53,6 @@ android {
 		}
 	}
 	buildFeatures {
-		renderScript true
 		aidl true
 	}
 }
