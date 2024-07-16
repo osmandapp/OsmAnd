@@ -3,14 +3,15 @@ apply plugin: 'ivy-publish'
 
 
 android {
-    compileSdk 33
-    buildToolsVersion = "33.0.2"
+    compileSdk 34
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 2
         versionName "2.0"
+        namespace = "net.osmand.aidlapi"
     }
     lintOptions {
         abortOnError false
@@ -22,12 +23,26 @@ android {
             java.srcDirs = ["src"]
         }
     }
+    buildFeatures {
+        aidl true
+    }
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+        singleVariant('debug') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
 afterEvaluate {
     publishing {
-        repositories {    
+        repositories {
             ivy {
                 url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
             }
@@ -56,7 +71,7 @@ dependencies {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
 }
 
