@@ -20,6 +20,7 @@ OsmAndCore_*.aar
 **/.project
 **/.classpath
 out/
+.kotlin/
 
 # Huawei
 agconnect-services.json
