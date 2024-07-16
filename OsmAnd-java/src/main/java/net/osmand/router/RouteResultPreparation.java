@@ -284,11 +284,13 @@ public class RouteResultPreparation {
 				distanceToNextTurn += currentSegment.getDistance();
 				if (currentSegment.getTurnType() != null &&
 						currentSegment.getTurnType().getValue() == TurnType.C &&
-						distanceToNextTurn <= 100) {
-					result.get(i).getTurnType().setSkipToSpeak(true);
+						distanceToNextTurn <= 200) {
+					currentSegment.getTurnType().setSkipToSpeak(true);
 				} else {
 					nextSegment = currentSegment;
-					distanceToNextTurn = 999999;
+					if (currentSegment.getTurnType() != null) {
+						distanceToNextTurn = 999999;
+					}
 				}
 			}
 		}

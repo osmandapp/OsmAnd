@@ -821,25 +821,34 @@ public class ResourceManager {
 
 			File destinationFile = new File(appDataDir, asset.destination);
 			boolean exists = destinationFile.exists();
-
-			boolean unconditional = false;
-			if (installMode != null) {
-				unconditional = ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode)
-						&& (firstInstall || forceCheck && !exists);
+			boolean shouldCopy = false;
+			if (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode)) {
+				if (firstInstall || (forceCheck && !exists)) {
+					shouldCopy = true;
+				}
 			}
 			if (copyMode == null) {
 				log.error("No copy mode was defined for " + asset.source);
 			}
-			if (firstInstall || overwrite) {
-				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
-			} else if (forceCheck) {
-				unconditional |= ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode) && !exists;
+			if (ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode)) {
+				if (firstInstall || overwrite) {
+					shouldCopy = true;
+				} else if (forceCheck && !exists) {
+					shouldCopy = true;
+				}
 			}
-
-			boolean shouldCopy = unconditional;
-			if (firstInstall || overwrite) {
-				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists;
-				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
+			if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists) {
+				if (firstInstall || overwrite) {
+					shouldCopy = true;
+				}
+			}
+			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
+				if (!exists) {
+					shouldCopy = true;
+				} else if (asset.version != null &&
+						destinationFile.lastModified() < asset.version.getTime()) {
+					shouldCopy = true;
+				}
 			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);

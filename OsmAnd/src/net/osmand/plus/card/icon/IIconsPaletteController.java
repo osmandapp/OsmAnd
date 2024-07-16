@@ -45,4 +45,6 @@ public interface IIconsPaletteController<IconData> extends IDialogController {
 
 	@Nullable
 	String getPaletteTitle();
+	int getHorizontalIconsSpace();
+	int getRecycleViewHorizontalPadding();
 }

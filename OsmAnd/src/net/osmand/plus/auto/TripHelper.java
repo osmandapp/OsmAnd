@@ -261,38 +261,38 @@ public class TripHelper {
 			} else if (shouldKeepRight(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_tu_kr);
 			} else {
-				return ctx.getString(R.string.route_tu);
+				return ctx.getString(R.string.auto_25_chars_route_tu);
 			}
 		} else if (type.getValue() == TurnType.C) {
 			return ctx.getString(R.string.route_head);
 		} else if (type.getValue() == TurnType.TSLL) {
-			return ctx.getString(R.string.route_tsll);
+			return ctx.getString(R.string.auto_25_chars_route_tsll);
 		} else if (type.getValue() == TurnType.TL) {
 			if (shouldKeepLeft(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_tl_kl);
 			} else if (shouldKeepRight(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_tl_kr);
 			} else {
-				return ctx.getString(R.string.route_tl);
+				return ctx.getString(R.string.auto_25_chars_route_tl);
 			}
 		} else if (type.getValue() == TurnType.TSHL) {
-			return ctx.getString(R.string.route_tshl);
+			return ctx.getString(R.string.auto_25_chars_route_tshl);
 		} else if (type.getValue() == TurnType.TSLR) {
-			return ctx.getString(R.string.route_tslr);
+			return ctx.getString(R.string.auto_25_chars_route_tslr);
 		} else if (type.getValue() == TurnType.TR) {
 			if (shouldKeepLeft(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_tr_kl);
 			} else if (shouldKeepRight(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_tr_kr);
 			} else {
-				return ctx.getString(R.string.route_tr);
+				return ctx.getString(R.string.auto_25_chars_route_tr);
 			}
 		} else if (type.getValue() == TurnType.TSHR) {
-			return ctx.getString(R.string.route_tshr);
+			return ctx.getString(R.string.auto_25_chars_route_tshr);
 		} else if (type.getValue() == TurnType.KL) {
-			return ctx.getString(R.string.route_kl);
+			return ctx.getString(R.string.auto_25_chars_route_kl);
 		} else if (type.getValue() == TurnType.KR) {
-			return ctx.getString(R.string.route_kr);
+			return ctx.getString(R.string.auto_25_chars_route_kr);
 		}
 		return "";
 	}

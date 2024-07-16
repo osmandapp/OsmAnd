@@ -99,7 +99,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
-	private float displayScale;
+	private boolean carView;
 
 	// OpenGl
 	private VectorLinesCollection outlineCollection;
@@ -168,7 +168,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private void updateContextMarker() {
-		float scale = getApplication().getOsmandMap().getDisplayDensityScaleCoef();
+		float scale = getApplication().getOsmandMap().getCarDensityScaleCoef();
 		int width = (int) (contextMarker.getDrawable().getMinimumWidth() * scale);
 		int height = (int) (contextMarker.getDrawable().getMinimumHeight() * scale);
 		contextMarker.layout(0, 0, width, height);
@@ -189,15 +189,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (mapActivity == null) {
 			return;
 		}
-		float displayScale = getApplication().getOsmandMap().getDisplayDensityScaleCoef();
-		boolean displayScaleChanged = this.displayScale != displayScale;
-		this.displayScale = displayScale;
-		if (displayScaleChanged) {
+		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
+		boolean carViewChanged = this.carView != carView;
+		this.carView = carView;
+		if (carViewChanged) {
 			updateContextMarker();
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		boolean hasMapRenderer = mapRenderer != null;
-		if (contextMarkerCollection == null || mapActivityInvalidated || displayScaleChanged) {
+		if (contextMarkerCollection == null || mapActivityInvalidated || carViewChanged) {
 			recreateContextMarkerCollection();
 		}
 		boolean markerCustomized = false;

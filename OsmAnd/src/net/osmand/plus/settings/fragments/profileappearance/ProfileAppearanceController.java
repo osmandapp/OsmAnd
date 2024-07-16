@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -407,6 +408,16 @@ public class ProfileAppearanceController extends BaseDialogController {
 				public String getPaletteTitle() {
 					return getString(R.string.resting_position_icon);
 				}
+
+				@Override
+				public int getHorizontalIconsSpace() {
+					return 0;
+				}
+
+				@Override
+				public int getRecycleViewHorizontalPadding() {
+					return getDimen(R.dimen.content_padding_half);
+				}
 			};
 			restingIconCardController.setPaletteListener(icon -> {
 				changedProfile.locationIcon = icon;
@@ -429,6 +440,16 @@ public class ProfileAppearanceController extends BaseDialogController {
 				@Override
 				public String getPaletteTitle() {
 					return getString(R.string.navigation_position_icon);
+				}
+
+				@Override
+				public int getHorizontalIconsSpace() {
+					return 0;
+				}
+
+				@Override
+				public int getRecycleViewHorizontalPadding() {
+					return getDimen(R.dimen.content_padding_half);
 				}
 			};
 			navigationIconCardController.setPaletteListener(icon -> {
@@ -545,6 +566,20 @@ public class ProfileAppearanceController extends BaseDialogController {
 		@Override
 		public boolean isAccentColorCanBeChanged() {
 			return true;
+		}
+
+		@Override
+		public int getHorizontalIconsSpace() {
+			return getDimen(R.dimen.content_padding_small_half);
+		}
+
+		@Override
+		public int getRecycleViewHorizontalPadding() {
+			return getDimen(R.dimen.content_padding);
+		}
+
+		protected int getDimen(@DimenRes int id){
+			return app.getResources().getDimensionPixelSize(id);
 		}
 	}
 

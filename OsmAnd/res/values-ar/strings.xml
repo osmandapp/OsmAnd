@@ -3468,7 +3468,7 @@
     <string name="listed_exist">المدرج %1$s, موجودة بالفعل في أوسماند.</string>
     <string name="keep_both">احتفظ بكليهما</string>
     <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع زيادة قبل اسمها</string>
-    <string name="import_duplicates_description">OsmAnd يحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها.
+    <string name="import_duplicates_description">OsmAndيحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها. 
 \n 
 \nحدد إجراء.</string>
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
@@ -5534,7 +5534,7 @@
     <string name="add_smart_folder">أضف ملف ذكي</string>
     <string name="empty_name">اسم فارغ</string>
     <string name="save_as_smart_folder">احفظ كملف ذكي</string>
-    <string name="delete_smart_folder_dialog_message">هذا سيحذف \"%1$s\" ملف ذكي.</string>
+    <string name="delete_smart_folder_dialog_message">سيؤدي هذا إلى إزالة المجلد الذكي \"%1$s\". (لن يتم حذف أي مسارات.)</string>
     <string name="empty_smart_folder_title">لا يوجد مسار مطابق</string>
     <string name="empty_smart_folder_description">كل المسارات المطابقة ستظهر تلقائياً هنا</string>
     <string name="configure_filter">تعديل الفلتر</string>
@@ -5780,7 +5780,29 @@
     <string name="map_text">نصوص الخريطة</string>
     <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
     <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
-    <string name="release_4_8">• الاستعداد لـ 4.8</string>
+    <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\"
+\n
+\n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق
+\n
+\n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع
+\n
+\n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية
+\n
+\n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح
+\n
+\n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة
+\n
+\n • توسيع نطاق اختيار الطرق السياحية على الخريطة
+\n
+\n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة
+\n
+\n • احصائيات المسار الثابت، والفرز والبحث
+\n
+\n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور
+\n
+\n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14
+\n
+\n</string>
     <string name="quick_action_move_map_right">الخريطة إلى اليمين</string>
     <string name="quick_action_move_map_left">الخريطة إلى اليسار</string>
     <string name="shared_string_replace">استبدال</string>
@@ -5798,4 +5820,86 @@
     <string name="shared_string_set">تحديد</string>
     <string name="shared_string_create">انشئ</string>
     <string name="quick_action_remove_next_destination">نقطة الوجهة التالية</string>
+    <string name="missing_maps_ignore_details">هل تغطي الخرائط التي تم تنزيلها مسارك؟ تواصل معهم إذا كنت على دراية بالمنطقة.</string>
+    <string name="assigned_keys">المفاتيح المخصصة</string>
+    <string name="missing_maps_ignore">استخدام الخرائط المحملة</string>
+    <string name="contact_support_retry">حاول مرة أخرى أو اتصل بالدعم</string>
+    <string name="no_assigned_keys_desc">حدد إجراء وقم بتعيين مفتاح من خلال النقر على الزر \"إضافة\".</string>
+    <string name="quick_action_map_overlay">العلوية</string>
+    <string name="quick_action_display_position_in_center">اظهر الموقع في الوسط دائما</string>
+    <string name="weather_screen">شاشة الطقس</string>
+    <string name="shared_string_colors">الألوان</string>
+    <string name="travel_topics">مواضيع السفر</string>
+    <string name="backup_error_failed_to_transfer_file">فشل في نقل ملف (ملفات) السحابة.</string>
+    <string name="change_terrain_color_scheme">تغيير نظام ألوان التضاريس</string>
+    <string name="rendering_value_dark_orange_name">برتقالي قاتم</string>
+    <string name="wall_height">ارتفاع الحائط</string>
+    <string name="quick_action_map_style">ثيم الخريطة</string>
+    <string name="rendering_avg_info">عرض الإحصائيات (متوسط 1/5/15 دقيقة)</string>
+    <string name="quick_action_location_by_gpx">الموقع عن طريق GPX</string>
+    <string name="quick_action_next_app_profile">ملف تعريف التطبيق إلى التالي</string>
+    <string name="quick_action_previous_app_profile">ملف تعريف التطبيق إلى السابق</string>
+    <string name="profile_icon">رمز الملف الشخصي</string>
+    <string name="clear_all_key_shortcuts_summary">ستتم إزالة كافة تعيينات المفاتيح للنوع المحدد.</string>
+    <string name="clear_all_key_shortcuts">مسح كافة الاختصارات الرئيسية</string>
+    <string name="clear_key_assignment_summary">سيتم مسح تعيين المفتاح للإجراء المحدد.</string>
+    <string name="map_settings_weather_wind_animation">رسوم الرياح المتحركة</string>
+    <string name="tomorrow">غداً</string>
+    <string name="quick_action_map_underlay">السفلية</string>
+    <string name="daynight_mode_app_theme_summary">تتماشى شاشة الخريطة مع المظهر العام للتطبيق — الوضع النهاري للثيم الفاتح والوضع الليلي للثيم الداكن</string>
+    <string name="daynight_mode_sensor_summary">يستخدم مستشعر الضوء بالجهاز للتبديل بين السمات الفاتحة والداكنة وفقًا لمستويات الإضاءة المحيطة.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">يقوم بالتبديل تلقائيا بين سمات النهار والليل بناءً على أوقات شروق الشمس وغروبها المحلية.</string>
+    <string name="daynight_mode_night_summary">يعرض دائمًا الخريطة بمظهر داكن، مناسب لظروف الليل أو الإضاءة المنخفضة.</string>
+    <string name="daynight_mode_day_summary">تعرض الخريطة دائما بمظهر فاتح، مما يجعلها مثالية للرؤية أثناء النهار.</string>
+    <string name="daynight_mode_app_theme">مظهر التطبيق</string>
+    <string name="key_event_action_continuous_zoom_out">التصغير المستمر</string>
+    <string name="user_palette">لوحة المستخدم</string>
+    <string name="new_key_assignment">تعيين مفتاح جديد</string>
+    <string name="no_assigned_keys">لا توجد مفاتيح مخصصة</string>
+    <string name="shared_string_key">مفتاح</string>
+    <string name="navigation_position">مركز الملاحة</string>
+    <string name="resting_navigation_position">وضع التنقل أثناء الراحة</string>
+    <string name="view_angle_description">يعرض المنطقة ذات الشكل المخروطي التي تواجهها حاليا</string>
+    <string name="view_angle">زاوية الرؤية</string>
+    <string name="rendering_value_pale_name">باهت</string>
+    <string name="location_radius_description">إظهار المنطقة الدائرية التي تمثل دقة موقعك الحالي</string>
+    <string name="location_radius">نصف قطر الموقع</string>
+    <string name="energy_avg_info">إحصائيات النشاط(متوسط 1/5/15 دقيقة)</string>
+    <string name="rendering_avg_info_details">FPS حسب آخر ألف إطار: %1$s
+\nCPU (الطبقات): %2$s
+\nCPU (وقت الخمول): %3$s
+\nCPU (في انتظار وحدة المعالجة المركزية): %4$s</string>
+    <string name="app_profile">تطبيق الملف الشخصي</string>
+    <string name="quick_action_first_intermediate">اول متوسط</string>
+    <string name="quick_action_audio_note">ملاحظة صوتية</string>
+    <string name="quick_action_photo_note">ملاحظة مصورة</string>
+    <string name="quick_action_verb_turn_on_off">تشغيل / ايقاف</string>
+    <string name="shared_string_all_icons">جميع الرموز</string>
+    <string name="navigation_position_icon_summary">يتم عرض الرمز أثناء التنقل أو التحرك.</string>
+    <string name="navigation_position_icon">رمز موضع التنقل</string>
+    <string name="resting_position_icon">أيقونة وضعية الراحة</string>
+    <string name="play_weather_forecast">تشغيل توقعات الطقس</string>
+    <string name="key_name_pattern">مفتاح \"%1$s</string>
+    <string name="action_icon">رمز الإجراء</string>
+    <string name="data_source">مصدر البيانات</string>
+    <string name="weather_data_sources_prompt">يوفر أوسماند بيانات الطقس من مصدرين:</string>
+    <string name="weather_source_ecmwf_description">المركز الأوروبي للتنبؤات الجوية متوسطة المدى</string>
+    <string name="weather_source_GFS_description">نظام التنبؤ العالمي من المراكز الوطنية للتنبؤ البيئي</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="key_event_action_continuous_zoom_in">التكبير المستمر</string>
+    <string name="remove_key_assignment_summary">ستتم إزالة تعيين المفتاح للإجراء المحدد.</string>
+    <string name="remove_key_assignment">إزالة تعيين المفتاح</string>
+    <string name="shared_string_modify">تغيير</string>
+    <string name="resting_position">وضعية الراحة</string>
+    <string name="quick_action_verb_start_stop">بدء / توقف</string>
+    <string name="key_assignment_add_key">إضافة مفتاح</string>
+    <string name="key_assignment_add_action">إضافة إجراء</string>
+    <string name="resting_position_icon_summary">يتم عرض الرمز عندعدم الحركة.</string>
+    <string name="quick_action_terrain">نوع تلوين التضاريس</string>
+    <string name="quick_action_video_note">ملاحظة فيديو</string>
+    <string name="quick_action_track_waypoint">تتبع نقطة الطريق</string>
+    <string name="quick_action_parking_place">مكان وقوف السيارات</string>
+    <string name="quick_action_verb_show_hide">إظهار/إخفاء</string>
+    <string name="quick_action_verb_pause_resume">توقف/تشغيل</string>
 </resources>
