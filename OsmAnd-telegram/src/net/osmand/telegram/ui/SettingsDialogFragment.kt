@@ -21,7 +21,7 @@ import net.osmand.telegram.helpers.TelegramHelper.Companion.OSMAND_BOT_USERNAME
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandApiUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import org.json.JSONObject
 
 class SettingsDialogFragment : BaseDialogFragment() {
