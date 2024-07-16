@@ -43,7 +43,8 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 	private void setupIconsPalette() {
 		rvIcons = view.findViewById(R.id.icons_list);
 		rvIcons.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
-		rvIcons.addItemDecoration(new HorizontalSpaceItemDecoration(getDimen(R.dimen.content_padding_small_half)));
+		rvIcons.setPadding(controller.getRecycleViewHorizontalPadding(), rvIcons.getPaddingTop(), controller.getRecycleViewHorizontalPadding(), rvIcons.getPaddingBottom());
+		rvIcons.addItemDecoration(new HorizontalSpaceItemDecoration(controller.getHorizontalIconsSpace()));
 		rvIcons.setClipToPadding(false);
 		rvIcons.setAdapter(paletteAdapter);
 	}

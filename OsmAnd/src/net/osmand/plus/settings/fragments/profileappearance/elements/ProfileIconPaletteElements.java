@@ -42,7 +42,8 @@ public class ProfileIconPaletteElements extends IconsPaletteElements<Integer> {
 			GradientDrawable circleContourDrawable = (GradientDrawable)
 					AppCompatResources.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {
-				circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), controlsColor);
+				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+				circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), activeColor);
 			}
 			outlineCircle.setImageDrawable(circleContourDrawable);
 			outlineCircle.setVisibility(View.VISIBLE);
