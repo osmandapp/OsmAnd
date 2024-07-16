@@ -5825,4 +5825,13 @@
 \nCPU（閒置時間）：%3$s
 \nCPU（等待 CPU）%4$s</string>
     <string name="resting_position">暫停位置</string>
+    <string name="auto_25_chars_route_kr">靠右</string>
+    <string name="auto_25_chars_route_tr">右轉</string>
+    <string name="auto_25_chars_route_tshr">向右急轉</string>
+    <string name="auto_25_chars_route_tslr">稍向右轉</string>
+    <string name="auto_25_chars_route_tl">左轉</string>
+    <string name="auto_25_chars_route_tshl">向左急轉</string>
+    <string name="auto_25_chars_route_tsll">稍向左轉</string>
+    <string name="auto_25_chars_route_tu">迴轉</string>
+    <string name="auto_25_chars_route_kl">靠左</string>
 </resources>

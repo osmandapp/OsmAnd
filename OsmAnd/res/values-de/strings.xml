@@ -5828,9 +5828,9 @@
     <string name="navigation_position_icon">Symbol für die Navigationsposition</string>
     <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn Sie sich nicht bewegen.</string>
     <string name="resting_position_icon">Symbol für die Ruheposition</string>
-    <string name="view_angle_description">Zeigt den kegelförmigen Bereich an, in dem du dich gerade befindest</string>
+    <string name="view_angle_description">Zeigt den kegelförmigen Bereich an, in dem Sie sich gerade befinden</string>
     <string name="view_angle">Blickwinkel</string>
-    <string name="location_radius_description">Zeigt den kreisförmigen Bereich an, der die Genauigkeit deines aktuellen Standorts darstellt</string>
+    <string name="location_radius_description">Zeigt den kreisförmigen Bereich an, der die Genauigkeit Ihres aktuellen Standorts darstellt</string>
     <string name="location_radius">Standortradius</string>
     <string name="rendering_avg_info_details">FPS der letzten 1.000 Frames: %1$s
 \nCPU (Tiles): %2$s
@@ -5839,4 +5839,13 @@
     <string name="resting_position">Ruheposition</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Ruhe- und Navigationsposition</string>
+    <string name="auto_25_chars_route_kl">Links halten</string>
+    <string name="auto_25_chars_route_kr">Rechts halten</string>
+    <string name="auto_25_chars_route_tr">Rechts abbiegen</string>
+    <string name="auto_25_chars_route_tshr">Scharf rechts abbiegen</string>
+    <string name="auto_25_chars_route_tslr">Leicht rechts abbiegen</string>
+    <string name="auto_25_chars_route_tl">Links abbiegen</string>
+    <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
+    <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
+    <string name="auto_25_chars_route_tu">Bitte wenden</string>
 </resources>

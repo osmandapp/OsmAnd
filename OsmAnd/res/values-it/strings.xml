@@ -5816,4 +5816,14 @@
     <string name="navigation_position_icon">Icona della posizione di navigazione</string>
     <string name="resting_position_icon_summary">Icona visualizzata quando non ti stai muovendo.</string>
     <string name="resting_position_icon">Icona della posizione di riposo</string>
+    <string name="auto_25_chars_route_kr">Tieni la destra</string>
+    <string name="auto_25_chars_route_tslr">Gira leggermente a destra</string>
+    <string name="auto_25_chars_route_tl">Gira a sinistra</string>
+    <string name="auto_25_chars_route_tshl">Gira tutto a sinistra</string>
+    <string name="auto_25_chars_route_tu">Fai una inversione a U</string>
+    <string name="location_radius_description">Mostra l\'area circolare che rappresenta la precisione della tua posizione attuale</string>
+    <string name="auto_25_chars_route_tshr">Gira tutto a destra</string>
+    <string name="auto_25_chars_route_kl">Tieni la sinistra</string>
+    <string name="auto_25_chars_route_tr">Gira a destra</string>
+    <string name="auto_25_chars_route_tsll">Gira leggermente a sinistra</string>
 </resources>

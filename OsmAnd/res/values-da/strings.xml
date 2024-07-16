@@ -5836,4 +5836,17 @@
     <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
     <string name="location_radius">Placeringsradius</string>
     <string name="resting_position">Hvileposition</string>
+    <string name="auto_25_chars_route_kl">Hold til venstre</string>
+    <string name="auto_25_chars_route_kr">Hold til højre</string>
+    <string name="auto_25_chars_route_tr">Drej til højre</string>
+    <string name="auto_25_chars_route_tshr">Drej skarpt til højre</string>
+    <string name="auto_25_chars_route_tslr">Drej let til højre</string>
+    <string name="auto_25_chars_route_tl">Drej til venstre</string>
+    <string name="auto_25_chars_route_tshl">Drej skarpt til venstre</string>
+    <string name="auto_25_chars_route_tsll">Drej let til venstre</string>
+    <string name="auto_25_chars_route_tu">Lav U-vending</string>
+    <string name="rendering_avg_info_details">BPS for sidste 1k billeder: %1$s
+\nCPU (fliser): %2$s
+\nCPU (inaktiv tid): %3$s
+\nCPU (venter på CPU): %4$s</string>
 </resources>
