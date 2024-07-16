@@ -23,8 +23,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.card.color.palette.main.ColorsPaletteFragment;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.icon.IIconsPalette;
 import net.osmand.plus.card.icon.IIconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
@@ -104,7 +102,8 @@ public class IconsPaletteFragment<IconData> extends BaseOsmAndDialogFragment imp
 	private void setupIconsPalette(@NonNull View view) {
 		FlowLayout flowLayout = view.findViewById(R.id.palette);
 		flowLayout.removeAllViews();
-		flowLayout.setHorizontalAutoSpacing(true);
+		flowLayout.setHorizontalAutoSpacing(false);
+		flowLayout.setAlignToCenter(true);
 		for (IconData icon : controller.getIcons()) {
 			flowLayout.addView(createIconItemView(icon, flowLayout));
 		}
