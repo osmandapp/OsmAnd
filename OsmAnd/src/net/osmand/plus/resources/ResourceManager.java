@@ -838,8 +838,16 @@ public class ResourceManager {
 
 			boolean shouldCopy = unconditional;
 			if (firstInstall || overwrite) {
-				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists;
-				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
+				if (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists) {
+					shouldCopy = true;
+				} else if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
+					if (!exists) {
+						shouldCopy = true;
+					} else if (asset.version != null &&
+							destinationFile.lastModified() < asset.version.getTime()) {
+						shouldCopy = true;
+					}
+				}
 			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);
