@@ -66,11 +66,13 @@ public class SearchUtils {
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
-			} else {
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof PoiUIFilter) {
 				filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
+			} else {
+				filter = new PoiUIFilter(null, app, "");
 			}
 		}
 		return filter;
