@@ -5848,5 +5848,5 @@
     <string name="rendering_avg_info_details">BPS for sidste 1k billeder: %1$s
 \nCPU (fliser): %2$s
 \nCPU (inaktiv tid): %3$s
-\nCPU (venter på CPU): %4$s</string>
+\nCPU (venter på GPU): %4$s</string>
 </resources>
