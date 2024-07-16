@@ -4,11 +4,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
-	android:minHeight="@dimen/setting_list_item_group_height"
-	android:paddingStart="@dimen/content_padding"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding">
+	android:orientation="horizontal"
+	android:minHeight="@dimen/setting_list_item_group_height">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
@@ -16,6 +13,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center_vertical"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin_large"
+		android:layout_marginStart="@dimen/content_padding"
 		tools:src="@drawable/list_destination" />
 
 	<LinearLayout
@@ -26,7 +24,8 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="0dp"
+			android:layout_weight="1"
 			android:layout_gravity="center_vertical"
 			android:orientation="vertical"
 			android:paddingTop="@dimen/content_padding_small"

@@ -40,7 +40,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
-import net.osmand.plus.mapcontextmenu.editors.controller.PointColorController;
+import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -180,7 +180,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
-			PointColorController.onDestroy(app);
+			EditorColorController.onDestroy(app);
 			EditorIconController.onDestroy(app);
 		}
 	}
@@ -276,7 +276,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	private void createColorSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorController());
 			ViewGroup colorsCardContainer = view.findViewById(R.id.colors_card_container);
 			colorsCardContainer.addView(colorsPaletteCard.build(view.getContext()));
 		}
@@ -314,8 +314,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	@NonNull
-	private ColorsPaletteController getColorsPaletteController() {
-		return PointColorController.getInstance(app, this, getColor());
+	private ColorsPaletteController getColorController() {
+		return EditorColorController.getInstance(app, this, getColor());
 	}
 
 	@NonNull
@@ -334,7 +334,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	protected void updateSelectedColorText() {
-		ColorsPaletteController controller = getColorsPaletteController();
+		ColorsPaletteController controller = getColorController();
 		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
@@ -396,7 +396,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	protected void savePressed() {
-		getColorsPaletteController().refreshLastUsedTime();
+		getColorController().refreshLastUsedTime();
 		save(true);
 	}
 

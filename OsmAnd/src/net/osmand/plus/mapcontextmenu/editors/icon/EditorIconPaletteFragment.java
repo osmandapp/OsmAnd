@@ -239,7 +239,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		if (selected != null) {
 			categorySelector.setSelected(selected);
 			categorySelector.notifyDataSetChanged();
-			categorySelector.scrollTo(selected);
+			categorySelector.smoothScrollTo(selected);
 		}
 		updateProgressBarVisibility(true);
 		recyclerView.setVisibility(View.INVISIBLE);
@@ -272,6 +272,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
+			controller.unbindScreen();
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_ICONS_PROCESS_ID);
 		}

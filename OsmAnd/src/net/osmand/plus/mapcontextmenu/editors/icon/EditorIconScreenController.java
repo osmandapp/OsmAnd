@@ -60,6 +60,11 @@ public class EditorIconScreenController implements IDialogController {
 		this.screen = screen;
 	}
 
+	public void unbindScreen() {
+		this.screen = null;
+		exitSearchModeIfNeeded();
+	}
+
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
 		List<ScreenItem> screenItems = new ArrayList<>();
@@ -150,15 +155,26 @@ public class EditorIconScreenController implements IDialogController {
 		}
 	}
 
+	private void exitSearchModeIfNeeded() {
+		if (inSearchMode) {
+			exitSearchMode();
+		}
+	}
+
 	public void enterSearchMode() {
 		inSearchMode = true;
-		screen.onScreenModeChanged();
+		if (screen != null) {
+			screen.onScreenModeChanged();
+		}
 	}
 
 	public void exitSearchMode() {
 		inSearchMode = false;
+		searchCancelled = true;
 		lastSearchResults.clear();
-		screen.onScreenModeChanged();
+		if (screen != null) {
+			screen.onScreenModeChanged();
+		}
 	}
 
 	public boolean isInSearchMode() {
@@ -173,7 +189,9 @@ public class EditorIconScreenController implements IDialogController {
 	public void searchIcons(@NonNull String text) {
 		lastSearchResults.clear();
 		if (Algorithms.isEmpty(text)) {
-			screen.updateScreenContent();
+			if (screen != null) {
+				screen.updateScreenContent();
+			}
 			return;
 		}
 		searchCancelled = false;
@@ -196,7 +214,9 @@ public class EditorIconScreenController implements IDialogController {
 					}
 					lastSearchResults.addAll(results);
 					app.runInUIThread(() -> {
-						screen.updateScreenContent();
+						if (screen != null) {
+							screen.updateScreenContent();
+						}
 					});
 				}
 				return true;
@@ -216,7 +236,9 @@ public class EditorIconScreenController implements IDialogController {
 
 	public void onIconSelectedFromPalette(@NonNull String iconKey) {
 		centralController.onIconSelectedFromPalette(iconKey, false);
-		screen.dismiss();
+		if (screen != null) {
+			screen.dismiss();
+		}
 	}
 
 	@NonNull
