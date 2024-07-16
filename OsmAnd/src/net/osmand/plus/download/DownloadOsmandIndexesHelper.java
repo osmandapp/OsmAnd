@@ -206,15 +206,15 @@ public class DownloadOsmandIndexesHelper {
 				String destination = xmlParser.getAttributeValue(null, "destination");
 				String combinedMode = xmlParser.getAttributeValue(null, "mode");
 				AssetEntry ae = new AssetEntry(source, destination, combinedMode);
-				assets.add(ae);
 				String version = xmlParser.getAttributeValue(null, "version");
-				if(!Algorithms.isEmpty(version)) {
+				if (!Algorithms.isEmpty(version)) {
 					try {
 						ae.version = DATE_FORMAT.parse(version);
 					} catch (ParseException e) {
 						log.error(e.getMessage(), e);
 					}
 				}
+				assets.add(ae);
 			}
 		}
 		isBundledAssetsXml.close();
