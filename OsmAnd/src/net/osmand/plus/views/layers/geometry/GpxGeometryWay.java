@@ -145,7 +145,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);
 
-			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, 0);
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, wptPt.ele);
 			point.primaryColor = getPointColor(coloringType, wptPt, routeColors, i);
 			point.secondaryColor = getPointColor(outlineType, wptPt, routeColors, i);
 			colorization.add(point);
