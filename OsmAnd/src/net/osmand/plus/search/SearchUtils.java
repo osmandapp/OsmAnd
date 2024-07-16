@@ -67,13 +67,13 @@ public class SearchUtils {
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
-			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof BinaryMapIndexReader.SearchPoiAdditionalFilter) {
-				filter = new PoiUIFilter(null, app, "");
-			} else {
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof PoiUIFilter) {
 				filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
+			} else {
+				filter = new PoiUIFilter(null, app, "");
 			}
 		}
 		return filter;
