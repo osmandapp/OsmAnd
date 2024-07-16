@@ -5835,7 +5835,7 @@
     <string name="rendering_avg_info_details">FPS der letzten 1.000 Frames: %1$s
 \nCPU (Tiles): %2$s
 \nCPU (Leerlaufzeit): %3$s
-\nCPU (wartet auf CPU): %4$s</string>
+\nCPU (wartet auf GPU): %4$s</string>
     <string name="resting_position">Ruheposition</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Ruhe- und Navigationsposition</string>
