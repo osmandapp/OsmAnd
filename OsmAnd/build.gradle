@@ -187,11 +187,13 @@ android {
 			println(osmandTask.getName() + " merge assets")
 			osmandTask.dependsOn(collectExternalResources)
 		}
-//		def mergeAndroidTestAssetsTaskName = "merge${taskName}AndroidTestAssets"
-//		tasks.named(mergeAndroidTestAssetsTaskName).configure { osmandTask ->
-//			println(osmandTask.getName() + " merge test assets")
-//			osmandTask.dependsOn(collectExternalResources)
-//		}
+		if (taskName.endsWith("Debug")) {
+			def mergeAndroidTestAssetsTaskName = "merge${taskName}AndroidTestAssets"
+			tasks.named(mergeAndroidTestAssetsTaskName).configure { osmandTask ->
+				println(osmandTask.getName() + " merge test assets")
+				osmandTask.dependsOn(collectExternalResources)
+			}
+		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
