@@ -58,41 +58,31 @@ public class NavigationNotification extends OsmandNotification {
 		super(app, GROUP_NAME);
 	}
 
-	public static class PauseNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.getRoutingHelper().pauseNavigation();
-		}
-	}
-
-	public static class ResumeNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.getRoutingHelper().resumeNavigation();
-		}
-	}
-
-	public static class StopNavigationReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			app.stopNavigation();
-		}
-	}
-
 	@Override
 	public void init() {
 		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
-		app.registerReceiver(new PauseNavigationReceiver(),
-				new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
+		app.registerReceiver(new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.getRoutingHelper().pauseNavigation();
+			}
+		}, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
 
-		app.registerReceiver(new ResumeNavigationReceiver(),
-				new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+		app.registerReceiver(new BroadcastReceiver() {
 
-		app.registerReceiver(new StopNavigationReceiver(),
-				new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.getRoutingHelper().resumeNavigation();
+			}
+		}, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+
+		app.registerReceiver(new BroadcastReceiver() {
+
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				app.stopNavigation();
+			}
+		}, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
 	}
 
 	@Override
