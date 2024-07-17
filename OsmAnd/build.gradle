@@ -184,7 +184,7 @@ android {
 		def taskName = variant.name.capitalize()
 		def mergeAssetsTaskName = "merge${taskName}Assets"
 		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
-			println(osmandTask.getName())
+			println(osmandTask.getName() + " merge assets")
 			osmandTask.dependsOn(collectExternalResources)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
@@ -196,7 +196,7 @@ android {
 		}
 		def mergeResources= "merge${taskName}Resources"
 		tasks.named(mergeResources).configure { osmandTask ->
-			println(osmandTask.getName())
+			println(osmandTask.getName() + " merge resources")
 			osmandTask.dependsOn(collectExternalResources)
 		}
 	}
