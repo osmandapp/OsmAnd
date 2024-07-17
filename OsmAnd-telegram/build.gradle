@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply from: '../versions.gradle'
 
 android {
 	compileSdk 34
@@ -26,7 +27,7 @@ android {
 
 	defaultConfig {
 		applicationId "net.osmand.telegram"
-		minSdkVersion 15
+		minSdkVersion minSdk
 		targetSdkVersion 34
 		multiDexEnabled true
 		versionCode 1
@@ -179,5 +180,5 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 
-	implementation 'com.google.android.gms:play-services-location:21.0.1'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 }

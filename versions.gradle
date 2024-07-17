@@ -1,0 +1,4 @@
+ext {
+    play_servises_location = "21.3.0"
+    minSdk = 24
+}

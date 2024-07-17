@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: '../../versions.gradle'
 
 android {
 	compileSdk 34
@@ -21,7 +22,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 15
+		minSdkVersion minSdk
 		targetSdkVersion 34
 	}
 
