@@ -35,9 +35,8 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 	@NonNull
 	@Override
 	protected Pair<QListFColorARGB, QListFColorARGB> getColorizationMappings(@NonNull List<DrawPathData31> pathsData) {
-		ColoringType outlineType = outlineColoringType != null ? outlineColoringType : getContext().getDefaultColoringType();
 		QListFColorARGB mapping = getColorizationMapping(pathsData, coloringType, false);
-		QListFColorARGB outlineMapping = getColorizationMapping(pathsData, outlineType, true);
+		QListFColorARGB outlineMapping = outlineColoringType != null ? getColorizationMapping(pathsData, outlineColoringType, true) : null;
 
 		return new Pair<>(mapping, outlineMapping);
 	}

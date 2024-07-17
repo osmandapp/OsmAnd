@@ -92,13 +92,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				return;
 			}
 
-			ColoringType outlineColoringType = getOutlineColoringType();
-			if (outlineColoringType != null) {
-				if (hasMapRenderer()) {
-					updateGpx3dWay(tb, points, outlineColoringType, routeSegments);
-				} else {
-					updateWay(new GeometryWayWptPtProvider(points), tb);
-				}
+			Track3DStyle track3DStyle = getTrack3DStyle();
+			if (hasMapRenderer() && track3DStyle != null && track3DStyle.getVisualizationType().is3dType()) {
+				updateGpx3dWay(tb, points, routeSegments);
 			} else if (coloringType.isTrackSolid()) {
 				if (hasMapRenderer()) {
 					Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
@@ -137,8 +133,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
 	}
 
-	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points,
-	                              @NonNull ColoringType outlineType, @Nullable List<RouteSegmentResult> segments) {
+	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points, @Nullable List<RouteSegmentResult> segments) {
+		ColoringType outlineColoringType = getOutlineColoringType();
 		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
 		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
 				? getRouteInfoAttributesColors(RouteProvider.locationsFromWpts(points), segments) : null;
@@ -148,7 +144,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			double value = getPointElevation(wptPt);
 			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, value);
 			point.primaryColor = getPointColor(coloringType, wptPt, routeColors, i);
-			point.secondaryColor = getPointColor(outlineType, wptPt, routeColors, i);
+			if (outlineColoringType != null) {
+				point.secondaryColor = getPointColor(outlineColoringType, wptPt, routeColors, i);
+			}
 			colorization.add(point);
 		}
 		updateWay(new Geometry3DWayProvider(colorization), createGradient3DStyles(colorization), tileBox);
