@@ -5835,7 +5835,7 @@
     <string name="rendering_avg_info_details">FPS por últimos 1k fotogramas: %1$s
 \nCPU (celdas): %2$s
 \nCPU (tiempo de inactividad): %3$s
-\nCPU (CPU sin usar): %4$s</string>
+\nCPU (GPU sin usar): %4$s</string>
     <string name="auto_25_chars_route_tsll">Gire ligeramente a la izquierda</string>
     <string name="auto_25_chars_route_tu">De la vuelta</string>
     <string name="auto_25_chars_route_tshr">Gire bruscamente a la derecha</string>

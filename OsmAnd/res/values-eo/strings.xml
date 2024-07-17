@@ -5837,6 +5837,6 @@
     <string name="rendering_avg_info_details">Kadroj/sekundo dum 1k lastaj kadroj: %1$s
 \nĈefprocesoro (kaheloj): %2$s
 \nĈefprocesoro (senokupa): %3$s
-\nĈefprocesoro (atenda): %4$s</string>
+\nĈefprocesoro (atendas GPU): %4$s</string>
     <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
 </resources>

@@ -5838,4 +5838,12 @@
 \nCPU (ожидание CPU): %4$s</string>
     <string name="location_radius_description">Показывает круглую область, отражающую точность вашего текущего местоположения</string>
     <string name="view_angle_description">Показывает конусовидную зону вашего направления взгляда</string>
+    <string name="rendering_value_pale_name">Бледный</string>
+    <string name="auto_25_chars_route_tr">Поверните направо</string>
+    <string name="auto_25_chars_route_tshr">Резко поверните направо</string>
+    <string name="auto_25_chars_route_tl">Поверните налево</string>
+    <string name="auto_25_chars_route_tshl">Резко поверните налево</string>
+    <string name="auto_25_chars_route_tu">Сделайте разворот</string>
+    <string name="auto_25_chars_route_kl">Держитесь левее</string>
+    <string name="auto_25_chars_route_kr">Держитесь правее</string>
 </resources>
