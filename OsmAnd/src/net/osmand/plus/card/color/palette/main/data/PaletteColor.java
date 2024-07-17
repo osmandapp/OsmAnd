@@ -12,12 +12,12 @@ public class PaletteColor {
 	private final long id;
 	private ColorValue colorValue;
 
-	public PaletteColor(@ColorInt int color, long creationTime) {
-		this(new ColorValue(color), creationTime);
+	public PaletteColor(@ColorInt int color) {
+		this(new ColorValue(color));
 	}
 
-	public PaletteColor(@NonNull ColorValue colorValue, long creationTime) {
-		this.id = creationTime;
+	public PaletteColor(@NonNull ColorValue colorValue) {
+		this.id = generateUniqueId();
 		this.colorValue = colorValue;
 	}
 
@@ -50,8 +50,7 @@ public class PaletteColor {
 
 	@NonNull
 	public PaletteColor duplicate() {
-		long now = System.currentTimeMillis();
-		return new PaletteColor(colorValue, now);
+		return new PaletteColor(colorValue);
 	}
 
 	@NonNull
@@ -72,5 +71,11 @@ public class PaletteColor {
 	@Override
 	public int hashCode() {
 		return getId().hashCode();
+	}
+
+	private static long lastGeneratedId = 0;
+
+	private static long generateUniqueId() {
+		return lastGeneratedId == 0 ? lastGeneratedId = System.currentTimeMillis() : ++lastGeneratedId;
 	}
 }
