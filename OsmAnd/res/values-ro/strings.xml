@@ -5769,7 +5769,7 @@
     <string name="tomorrow">Mâine</string>
     <string name="daynight_mode_sensor_summary">Utilizează senzorul de lumină al dispozitivului pentru a comuta între temele luminoase și întunecate în funcție de nivelul luminii ambientale.</string>
     <string name="map_settings_weather_wind_animation">Animația vântului</string>
-    <string name="data_source">Sursa datelor</string>
+    <string name="data_source">Sursa Datelor</string>
     <string name="weather_source_GFS_description">Sistemul de prognoză globală de la Centrele naționale pentru prognoza mediului</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="weather_data_sources_prompt">OsmAnd furnizează date meteorologice din două surse:</string>
@@ -5834,4 +5834,17 @@
     <string name="auto_25_chars_route_tr">Întoarceți la dreapta</string>
     <string name="auto_25_chars_route_tshr">Virați brusc la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
+    <string name="navigation_position">Poziția de navigare</string>
+    <string name="view_angle_description">Afișează zona în formă de con cu care vă confruntați în prezent</string>
+    <string name="view_angle">Unghi de vizualizare</string>
+    <string name="location_radius_description">Afișează zona circulară care reprezintă precizia locației dumneavoastră curente</string>
+    <string name="location_radius">Raza de localizare</string>
+    <string name="auto_25_chars_route_tl">Virați la stânga</string>
+    <string name="auto_25_chars_route_tshl">Virați brusc la stânga</string>
+    <string name="auto_25_chars_route_tsll">Virați ușor la stânga</string>
+    <string name="auto_25_chars_route_tu">Faceți cale întoarsă</string>
+    <string name="rendering_avg_info_details">FPS prin ultimele 1k cadre: %1$s
+\nCPU (plăci): %2$s
+\nCPU (timp inactiv): %3$s
+\nCPU (așteaptă GPU): %4$s</string>
 </resources>
