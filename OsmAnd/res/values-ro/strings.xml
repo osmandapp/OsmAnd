@@ -5831,4 +5831,7 @@
     <string name="resting_navigation_position">Poziția de odihnă și navigație</string>
     <string name="auto_25_chars_route_kr">Țineți dreapta</string>
     <string name="auto_25_chars_route_kl">Țineți stânga</string>
+    <string name="auto_25_chars_route_tr">Întoarceți la dreapta</string>
+    <string name="auto_25_chars_route_tshr">Virați brusc la dreapta</string>
+    <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
 </resources>

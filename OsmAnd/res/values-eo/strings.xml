@@ -5818,5 +5818,25 @@
     <string name="resting_position_icon_summary">Bildsimbolo montrata kiam vi ne moviĝas.</string>
     <string name="shared_string_all_icons">Ĉiuj emblemoj</string>
     <string name="navigation_position_icon_summary">Bildsimbolo montrata kiam vi navigas aŭ moviĝas.</string>
-    <string name="resting_position_icon">Emblemo dum ne moviĝi</string>
+    <string name="resting_position_icon">Emblemo dum nemoviĝi</string>
+    <string name="navigation_position">Dum navigi</string>
+    <string name="resting_position">Dum nemoviĝi</string>
+    <string name="resting_navigation_position">Dum navigi kaj nemoviĝi</string>
+    <string name="view_angle_description">Vidigi konus-forman figuron reprezentantan la rigardatan direkton.</string>
+    <string name="view_angle">Rigardata angulo</string>
+    <string name="auto_25_chars_route_kr">Veturu je dekstre</string>
+    <string name="auto_25_chars_route_tr">Turniĝu dekstren</string>
+    <string name="auto_25_chars_route_tshr">Turniĝegu dekstren</string>
+    <string name="auto_25_chars_route_tslr">Turniĝetu dekstren</string>
+    <string name="auto_25_chars_route_tl">Turniĝu maldekstren</string>
+    <string name="auto_25_chars_route_tshl">Turniĝegu maldekstren</string>
+    <string name="auto_25_chars_route_tsll">Turniĝetu maldekstren</string>
+    <string name="auto_25_chars_route_tu">Turniĝu malantaŭen</string>
+    <string name="location_radius_description">Vidigi diskon reprezentantan precizon de determinita pozicio.</string>
+    <string name="location_radius">Radiuso de pozicio</string>
+    <string name="rendering_avg_info_details">Kadroj/sekundo dum 1k lastaj kadroj: %1$s
+\nĈefprocesoro (kaheloj): %2$s
+\nĈefprocesoro (senokupa): %3$s
+\nĈefprocesoro (atendas GPU): %4$s</string>
+    <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
 </resources>

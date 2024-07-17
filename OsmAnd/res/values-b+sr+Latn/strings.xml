@@ -5846,4 +5846,8 @@
     <string name="auto_25_chars_route_kl">Drži levo</string>
     <string name="auto_25_chars_route_tshr">Skreni oštro desno</string>
     <string name="auto_25_chars_route_tslr">Skreni blago desno</string>
+    <string name="auto_25_chars_route_tl">Skreni levo</string>
+    <string name="auto_25_chars_route_tu">Uradi polukružno okretanje</string>
+    <string name="auto_25_chars_route_tshl">Skreni oštro levo</string>
+    <string name="auto_25_chars_route_tsll">Skreni blago levo</string>
 </resources>

@@ -325,7 +325,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
-			if (fromUser) {
+			if (fromUser && animationState != AnimationState.IDLE) {
 				stopAnimation();
 			}
 			calendar.setTime(selectedDate.getTime());
@@ -443,6 +443,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		});
 		toolbar.setTitle(R.string.shared_string_weather);
 		toolbar.setBackgroundColor(app.getColor(nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
+		toolbar.getMenu().findItem(R.id.weather_data_source).setVisible(false);
 		toolbar.setOnMenuItemClickListener(item -> {
 			if (item.getItemId() == R.id.weather_data_source) {
 				onOptionBtnClicked();

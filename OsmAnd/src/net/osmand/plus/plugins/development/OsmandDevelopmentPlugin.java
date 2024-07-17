@@ -307,10 +307,17 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				float cpuBasic = renderer.getBasicThreadsCPULoad();
 				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
 
-				Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-				int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-				int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-				this.batteryLevel = level != -1 && scale != -1 && scale > 0 ? level * 100 / scale : 0;
+				Intent batteryIntent;
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
+				} else {
+					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+				}
+				if (batteryIntent != null) {
+					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+					this.batteryLevel = level != -1 && scale > 0 ? (float) (level * 100) / scale : 0;
+				}
 
 				final int EMULATOR_CURRENT_NOW_STUB = 900000;
 				BatteryManager mBatteryManager = (BatteryManager) app.getSystemService(Context.BATTERY_SERVICE);

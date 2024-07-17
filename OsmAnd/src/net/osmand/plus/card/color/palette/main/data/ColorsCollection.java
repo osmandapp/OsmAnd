@@ -10,8 +10,11 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ColorsCollection {
 
@@ -86,8 +89,7 @@ public abstract class ColorsCollection {
 
 	@NonNull
 	private PaletteColor addNewColor(@ColorInt int newColor, boolean updateLastUsedOrder) {
-		long now = System.currentTimeMillis();
-		PaletteColor paletteColor = new PaletteColor(newColor, now);
+		PaletteColor paletteColor = new PaletteColor(newColor);
 		originalOrder.add(paletteColor);
 		if (updateLastUsedOrder) {
 			lastUsedOrder.add(0, paletteColor);
@@ -103,6 +105,23 @@ public abstract class ColorsCollection {
 		paletteColor.setColor(newColor);
 		saveColors();
 		return paletteColor;
+	}
+
+	public void addAllUniqueColors(@NonNull Collection<Integer> colorInts) {
+		List<PaletteColor> originalOrder = getColors(PaletteSortingMode.ORIGINAL);
+		List<PaletteColor> lastUsedOrder = getColors(PaletteSortingMode.LAST_USED_TIME);
+		Set<Integer> presentColors = new HashSet<>();
+		for (PaletteColor paletteColor : originalOrder) {
+			presentColors.add(paletteColor.getColor());
+		}
+		for (int colorInt : colorInts) {
+			if (!presentColors.contains(colorInt)) {
+				PaletteColor paletteColor = new PaletteColor(colorInt);
+				originalOrder.add(paletteColor);
+				lastUsedOrder.add(paletteColor);
+			}
+		}
+		setColors(originalOrder, lastUsedOrder);
 	}
 
 	public void askRenewLastUsedTime(@Nullable PaletteColor paletteColor) {

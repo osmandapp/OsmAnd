@@ -5815,4 +5815,24 @@
     <string name="shared_string_all_icons">Toutes les icônes</string>
     <string name="resting_position_icon_summary">Icône affichée lorsque vous ne bougez pas.</string>
     <string name="rendering_value_pale_name">Pâle</string>
+    <string name="auto_25_chars_route_tr">Tourner à droite</string>
+    <string name="auto_25_chars_route_tshr">Tourner en épingle à droite</string>
+    <string name="auto_25_chars_route_tl">Tourner à gauche</string>
+    <string name="resting_position">Position de repos</string>
+    <string name="navigation_position">Position de guidage</string>
+    <string name="resting_navigation_position">Positions de repos et de guidage</string>
+    <string name="view_angle_description">Affiche la zone de forme conique que vous regardez actuellement</string>
+    <string name="view_angle">Angle de vue</string>
+    <string name="location_radius_description">Affiche un rond représentant la précision de votre position actuelle</string>
+    <string name="location_radius">Rayon de position</string>
+    <string name="auto_25_chars_route_tu">Faire demi-tour</string>
+    <string name="auto_25_chars_route_kl">Rester à gauche</string>
+    <string name="auto_25_chars_route_kr">Rester à droite</string>
+    <string name="auto_25_chars_route_tslr">Tourner légèrement à droite</string>
+    <string name="auto_25_chars_route_tshl">Tourner en épingle à gauche</string>
+    <string name="auto_25_chars_route_tsll">Tourner légèrement à gauche</string>
+    <string name="rendering_avg_info_details">Images par sec. sur les 1 000 dernières images : %1$s
+\nProcesseur (tuiles) : %2$s
+\nProcesseur (durée d\'inactivité) : %3$s
+\nProcesseur (attente du GPU) : %4$s</string>
 </resources>
