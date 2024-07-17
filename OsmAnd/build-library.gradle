@@ -14,6 +14,11 @@ android {
 		tasks.lint.enabled = false
 	}
 
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest-library.xml"
@@ -33,8 +38,8 @@ android {
 	libraryVariants.configureEach {
 		def variant = it
 		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
+		def packageAssetsTaskName = "package${taskName}Assets"
+		tasks.named(packageAssetsTaskName).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyProjDb)
 			osmandTask.dependsOn(collectFonts)
@@ -53,8 +58,8 @@ android {
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)
 		}
-		def mergeResources= "merge${taskName}Resources"
-		tasks.named(mergeResources).configure { osmandTask ->
+		def packageResources= "package${taskName}Resources"
+		tasks.named(packageResources).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyMapShaderIcons)
 			osmandTask.dependsOn(copyMapPOIIcons)
