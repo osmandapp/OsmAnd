@@ -138,14 +138,36 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		}
 	}
 
-	protected Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
+	@NonNull
+	protected Map<Integer, GeometryWayStyle<?>> createGradientStyles(@NonNull List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 		updateTrack3DStyle(getTrack3DStyle());
 		Track3DStyle track3DStyle = getTrack3DStyle();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
-			style.currColor = points.get(i).color;
-			style.nextColor = points.get(i + 1).color;
+			style.currColor = points.get(i).primaryColor;
+			style.nextColor = points.get(i + 1).primaryColor;
+			styleMap.put(i, style);
+			updateTrack3DStyle(style, track3DStyle);
+		}
+		return styleMap;
+	}
+
+	@NonNull
+	protected Map<Integer, GeometryWayStyle<?>> createGradient3DStyles(@NonNull List<RouteColorizationPoint> points) {
+		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+		updateTrack3DStyle(getTrack3DStyle());
+		Track3DStyle track3DStyle = getTrack3DStyle();
+		for (int i = 0; i < points.size() - 1; i++) {
+			RouteColorizationPoint currentPoint = points.get(i);
+			RouteColorizationPoint nextPoint = points.get(i + 1);
+
+			GeometryGradient3DWayStyle<?> style = getGradient3DWayStyle();
+			style.currColor = currentPoint.primaryColor;
+			style.nextColor = nextPoint.primaryColor;
+			style.currOutlineColor = currentPoint.secondaryColor;
+			style.nextOutlineColor = nextPoint.secondaryColor;
+
 			styleMap.put(i, style);
 			updateTrack3DStyle(style, track3DStyle);
 		}
@@ -172,7 +194,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		updateWay(locations, styleMap, tileBox);
 	}
 
-	private List<Integer> getRouteInfoAttributesColors(List<Location> locations, List<RouteSegmentResult> routeSegments) {
+	protected List<Integer> getRouteInfoAttributesColors(List<Location> locations, List<RouteSegmentResult> routeSegments) {
 		if (Algorithms.isEmpty(routeSegments)) {
 			return Collections.emptyList();
 		}
@@ -243,11 +265,21 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
 	                           GeometryWayStyle<?> style, List<GeometryWayPoint> points) {
 		super.addLocation(tb, locationIdx, dist, style, points);
-		if (style instanceof GeometryGradientWayStyle<?> && points.size() > 1) {
-			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) points.get(points.size() - 2).style;
-			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
-			if (!prevStyle.equals(currStyle)) {
-				prevStyle.nextColor = currStyle.currColor;
+
+		if (points.size() > 1) {
+			if (style instanceof GeometryGradientWayStyle<?>) {
+				GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) points.get(points.size() - 2).style;
+				GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
+				if (!prevStyle.equals(currStyle)) {
+					prevStyle.nextColor = currStyle.currColor;
+				}
+			}
+			if (style instanceof GeometryGradient3DWayStyle<?>) {
+				GeometryGradient3DWayStyle<?> prevStyle = (GeometryGradient3DWayStyle<?>) points.get(points.size() - 2).style;
+				GeometryGradient3DWayStyle<?> currStyle = (GeometryGradient3DWayStyle<?>) style;
+				if (!prevStyle.equals(currStyle)) {
+					prevStyle.nextOutlineColor = currStyle.currOutlineColor;
+				}
 			}
 		}
 	}
@@ -261,26 +293,41 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		if (!added) {
 			return false;
 		}
-
-		if (style instanceof GeometryGradientWayStyle) {
-			GeometryGradientWayStyle<?> gradientWayStyle = (GeometryGradientWayStyle<?>) style;
-			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
+		if (style instanceof GeometryGradient3DWayStyle) {
+			GeometryGradient3DWayStyle<?> gradientStyle = (GeometryGradient3DWayStyle<?>) style;
+			Geometry3DWayProvider provider = get3DLocationProvider();
 			if (startLocationIndex == 0) {
-				int startColor = locationProvider.getColor(0);
-				gradientWayStyle.currColor = startColor;
-				gradientWayStyle.nextColor = startColor;
+				int startColor = provider.getColor(0);
+				int startOutlineColor = provider.getOutlineColor(0);
+				gradientStyle.currColor = startColor;
+				gradientStyle.nextColor = startColor;
+				gradientStyle.currOutlineColor = startOutlineColor;
+				gradientStyle.nextOutlineColor = startOutlineColor;
 			} else {
-				double currLat = lastPoint.getLatitude();
-				double currLon = lastPoint.getLongitude();
-				double prevLat = locationProvider.getLatitude(startLocationIndex - 1);
-				double prevLon = locationProvider.getLongitude(startLocationIndex - 1);
-				double nextLat = locationProvider.getLatitude(startLocationIndex);
-				double nextLon = locationProvider.getLongitude(startLocationIndex);
-				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
-				int prevColor = locationProvider.getColor(startLocationIndex - 1);
-				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
-				gradientWayStyle.nextColor = nextColor;
+				double percent = getProjectionCoeff(provider, lastPoint, startLocationIndex);
+				int prevColor = provider.getColor(startLocationIndex - 1);
+				int nextColor = provider.getColor(startLocationIndex);
+				int prevOutlineColor = provider.getColor(startLocationIndex - 1);
+				int nextOutlineColor = provider.getColor(startLocationIndex);
+
+				gradientStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
+				gradientStyle.nextColor = nextColor;
+				gradientStyle.currOutlineColor = ColorPalette.getIntermediateColor(prevOutlineColor, nextOutlineColor, percent);
+				gradientStyle.nextOutlineColor = nextOutlineColor;
+			}
+		} else if (style instanceof GeometryGradientWayStyle) {
+			GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
+			GradientGeometryWayProvider provider = getGradientLocationProvider();
+			if (startLocationIndex == 0) {
+				int startColor = provider.getColor(0);
+				gradientStyle.currColor = startColor;
+				gradientStyle.nextColor = startColor;
+			} else {
+				double percent = getProjectionCoeff(provider, lastPoint, startLocationIndex);
+				int prevColor = provider.getColor(startLocationIndex - 1);
+				int nextColor = provider.getColor(startLocationIndex);
+				gradientStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
+				gradientStyle.nextColor = nextColor;
 			}
 		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {
 			GeometrySolidWayStyle<?> prevStyle = (GeometrySolidWayStyle<?>) style;
@@ -289,6 +336,16 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
 		return true;
+	}
+
+	private double getProjectionCoeff(@NonNull GeometryWayProvider provider, @NonNull Location location, int startIndex) {
+		double currLat = location.getLatitude();
+		double currLon = location.getLongitude();
+		double prevLat = provider.getLatitude(startIndex - 1);
+		double prevLon = provider.getLongitude(startIndex - 1);
+		double nextLat = provider.getLatitude(startIndex);
+		double nextLon = provider.getLongitude(startIndex);
+		return MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 	}
 
 	@Override
@@ -311,6 +368,15 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		return new GeometryGradientWayStyle<>(getContext(), customColor, customWidth);
 	}
 
+	@NonNull
+	public GeometryGradient3DWayStyle<?> getGradient3DWayStyle() {
+		return new GeometryGradient3DWayStyle<>(getContext(), customColor, customWidth);
+	}
+
+	private Geometry3DWayProvider get3DLocationProvider() {
+		return (Geometry3DWayProvider) getLocationProvider();
+	}
+
 	private GradientGeometryWayProvider getGradientLocationProvider() {
 		return (GradientGeometryWayProvider) getLocationProvider();
 	}
@@ -320,7 +386,23 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		return ColorUtilities.getContrastColor(getContext().getCtx(), lineColor, false);
 	}
 
+	@Nullable
 	protected Track3DStyle getTrack3DStyle() {
 		return track3DStyle;
+	}
+
+	@Nullable
+	protected ColoringType getOutlineColoringType() {
+		return ColoringType.valueOf(getGpx3DWallColorType());
+	}
+
+	@NonNull
+	protected Gpx3DWallColorType getGpx3DWallColorType() {
+		return getGpx3DWallColorType(getTrack3DStyle());
+	}
+
+	@NonNull
+	protected Gpx3DWallColorType getGpx3DWallColorType(@Nullable Track3DStyle style) {
+		return style != null && style.getVisualizationType().is3dType() ? style.getWallColorType() : Gpx3DWallColorType.NONE;
 	}
 }
