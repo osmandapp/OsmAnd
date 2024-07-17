@@ -1786,7 +1786,7 @@
     <string name="storage_directory_shared">Deljena memorija</string>
     <string name="storage_directory_readonly_desc">Prebačeno na unutrašnje skladište pošto je označeno skladište podataka zaštićeno od pisanja. Izaberi upisivu folder skladišta.</string>
     <string name="avoid_road">Izbegavaj put</string>
-    <string name="finish_navigation">Završi navođenje</string>
+    <string name="finish_navigation">Kraj navođenja</string>
     <string name="shared_string_move_down">Pomeri ↓</string>
     <string name="shared_string_move_up">Pomeri ↑</string>
     <string name="storage_permission_restart_is_required">Programu je sada dozvoljen upis na spoljnju karticu, mora da se restartuje aplikacija.</string>

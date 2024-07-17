@@ -5531,9 +5531,9 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
+    <string name="remove_type_q">¿Quitar el periférico «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
-    <string name="add_new_type">Añadir nuevo tipo</string>
+    <string name="add_new_type">Añadir nuevo periférico</string>
     <string name="key_event_action_move_up">Mover arriba</string>
     <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
     <string name="key_event_action_zoom_out">Alejar</string>
@@ -5557,7 +5557,7 @@
     <string name="row_number">Fila %1$s</string>
     <string name="see_all_plans">Ver todos los planes</string>
     <string name="key_assignments">Asignaciones de teclas</string>
-    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
+    <string name="reset_key_assignments_desc">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>
     <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
     <string name="topography_maps">Mapas topográficos</string>
     <string name="lang_zh_hans">Chino simplificado</string>
@@ -5690,7 +5690,7 @@
     <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="shared_string_colors">Colores</string>
     <string name="clear_key_assignment_summary">La asignación de tecla para la acción elegida, será vaciada.</string>
-    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el dispositivo elegido.</string>
+    <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>
     <string name="getting_list_of_required_maps">Obteniendo una lista de mapas necesarios…</string>
     <string name="bottom">Abajo</string>
     <string name="top_and_bottom">Arriba y abajo</string>
@@ -5832,4 +5832,31 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="quick_action_map_overlay">Capa superpuesta</string>
     <string name="data_source">Proveedor de datos</string>
+    <string name="rendering_value_pale_name">Pálido</string>
+    <string name="shared_string_all_icons">Todos los iconos</string>
+    <string name="profile_icon">Icono del perfil</string>
+    <string name="resting_position_icon">Icono de la ubicación al estar en reposo</string>
+    <string name="navigation_position_icon">Icono de la ubicación al navegar</string>
+    <string name="resting_position_icon_summary">Icono que se muestra en reposo.</string>
+    <string name="auto_25_chars_route_kr">Mantente a la derecha</string>
+    <string name="auto_25_chars_route_tr">Gira a la derecha</string>
+    <string name="auto_25_chars_route_kl">Mantente a la izquierda</string>
+    <string name="auto_25_chars_route_tshr">Gira fuerte a la derecha</string>
+    <string name="auto_25_chars_route_tslr">Gira leve a la derecha</string>
+    <string name="auto_25_chars_route_tl">Gira a la izquierda</string>
+    <string name="auto_25_chars_route_tshl">Gira fuerte a la izquierda</string>
+    <string name="auto_25_chars_route_tsll">Gira leve a la izquierda</string>
+    <string name="auto_25_chars_route_tu">Da la vuelta</string>
+    <string name="resting_position">Ubicación en reposo</string>
+    <string name="navigation_position">Ubicación al navegar</string>
+    <string name="resting_navigation_position">Ubicación en reposo y al navegar</string>
+    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
+    <string name="view_angle">Ángulo de vista</string>
+    <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
+    <string name="location_radius">Radio de ubicación</string>
+    <string name="rendering_avg_info_details">FPS (últimos mil fotogramas): %1$s
+\nCPU (celdas): %2$s
+\nCPU (inactiva): %3$s
+\nCPU (GPU libre): %4$s</string>
+    <string name="navigation_position_icon_summary">Icono que se muestra al navegar o moverse.</string>
 </resources>

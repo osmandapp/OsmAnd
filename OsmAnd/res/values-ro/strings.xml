@@ -2799,15 +2799,15 @@
     <string name="shared_string_nothing_selected">Nimic selectat</string>
     <string name="shared_string_quick_actions">Acțiuni rapide</string>
     <string name="shared_string_profiles">Profiluri</string>
-    <string name="replace_all">Înlocuiți tot</string>
-    <string name="keep_both">Păstrați ambele</string>
+    <string name="replace_all">Înlocuire toate</string>
+    <string name="keep_both">Păstrare ambele</string>
     <string name="import_duplicates_title">Unele elemente există deja</string>
     <string name="select_data_to_import">Selectați datele care vor fi importate.</string>
     <string name="shared_string_rendering_style">Stil randare</string>
     <string name="restore_all_profile_settings">Restaurați setările tuturor profilurilor\?</string>
     <string name="saving_new_profile">Se salvează noul profil</string>
     <string name="profile_backup_failed">Profilul nu a putut fi salvat.</string>
-    <string name="importing_from">Se importă date de la %1$s</string>
+    <string name="importing_from">Se importă date din %1$s</string>
     <string name="shared_string_importing">Se importă</string>
     <string name="items_added">Elemente adăugate</string>
     <string name="shared_string_import_complete">Importarea s-a finalizat</string>
@@ -3080,7 +3080,7 @@
 \nO săptămână reprezintă 10 080 de minute.
 \nO lună reprezintă 43 829 de minute.</string>
     <string name="tiles_storage_descr">Alegeți cum să stocați segmentele descărcate.</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Exportați sau importați acțiuni rapide cu profiluri de aplicație.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Exportă sau importă acțiunile rapide prin profiluri de aplicație.</string>
     <string name="delete_all_actions_message_q">Ștergeți irevocabil %d acțiuni rapide\?</string>
     <string name="screen_timeout">Timeout ecran</string>
     <string name="screen_timeout_descr">Dacă \"%1$s\" este activat, timpul activității va depinde de acesta.</string>
@@ -3756,7 +3756,7 @@
     <string name="make_round_trip">Efectuați o călătorie dus-întors</string>
     <string name="map_imported_successfully">Harta importată</string>
     <string name="map_import_error">Eroare de import al hărții</string>
-    <string name="import_rendering_file">Importați fișierul de randare</string>
+    <string name="import_rendering_file">Importă fișierul de randare</string>
     <string name="shared_string_terrain">Teren</string>
     <string name="hillshade_description">Harta cu relief umbrit utilizează nuanțe întunecate pentru a arăta pante, vârfuri și zone joase.</string>
     <string name="slope_description">Panta folosește culori pentru a vizualiza cât de abrupt este terenul.</string>
@@ -4249,7 +4249,7 @@
     <string name="map_updates_are_unavailable_yet">Actualizările hărților nu sunt încă disponibile. :-(</string>
     <string name="connect_track_points_as">Сonectează puncte de traseu</string>
     <string name="layer_gpx_layer">Trasee</string>
-    <string name="empty_state_my_tracks_desc">Importați sau înregistrați fișiere traseu</string>
+    <string name="empty_state_my_tracks_desc">Importă sau înregistrează fișiere traseu</string>
     <string name="map_widget_monitoring">Înregistrare călătorie</string>
     <string name="save_global_track_interval_descr">Specificați intervalul de înregistrare pentru înregistrarea generală a traseului (activat prin intermediul widget-ului \'Trip recording\' de pe hartă).</string>
     <string name="gpx_monitoring_stop">Suspendă înregistrarea călătoriei</string>
@@ -4554,7 +4554,7 @@
     <string name="get_altitude_information">Obține informații despre elevație</string>
     <string name="routing_attr_goods_restrictions_description">Ține cont de permisiunile de acces pentru vehiculele ușoare de marfă (mărfuri)</string>
     <string name="use_latin_name_if_missing">Folosește numele latin dacă lipsește</string>
-    <string name="import_as_one_track">Importați ca un singur traseu</string>
+    <string name="import_as_one_track">Importă ca un singur traseu</string>
     <string name="transport_hazmat_yes_desc">Selectați categoria aplicabilă.</string>
     <string name="calculating_altitude">Se calculează elevația</string>
     <string name="routing_attr_avoid_4wd_only_name">Evită drumuri 4WD</string>
@@ -4977,7 +4977,7 @@
     <string name="shared_string_do_not_exist">Nu există</string>
     <string name="last_sync">Ultima sincronizare</string>
     <string name="import_export">Import/Export</string>
-    <string name="export_to_file">Exportați într-un fișier</string>
+    <string name="export_to_file">Exportă în fișier</string>
     <string name="shared_string_expires">Expiră</string>
     <string name="open_weather_action_description">Vă permite să deschideți un ecran cu informații meteo detaliate.</string>
     <string name="open_weather_action">Deschide meteo</string>
@@ -5769,7 +5769,7 @@
     <string name="tomorrow">Mâine</string>
     <string name="daynight_mode_sensor_summary">Utilizează senzorul de lumină al dispozitivului pentru a comuta între temele luminoase și întunecate în funcție de nivelul luminii ambientale.</string>
     <string name="map_settings_weather_wind_animation">Animația vântului</string>
-    <string name="data_source">Sursa datelor</string>
+    <string name="data_source">Sursa Datelor</string>
     <string name="weather_source_GFS_description">Sistemul de prognoză globală de la Centrele naționale pentru prognoza mediului</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="weather_data_sources_prompt">OsmAnd furnizează date meteorologice din două surse:</string>
@@ -5834,4 +5834,17 @@
     <string name="auto_25_chars_route_tr">Întoarceți la dreapta</string>
     <string name="auto_25_chars_route_tshr">Virați brusc la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
+    <string name="navigation_position">Poziția de navigare</string>
+    <string name="view_angle_description">Afișează zona în formă de con cu care vă confruntați în prezent</string>
+    <string name="view_angle">Unghi de vizualizare</string>
+    <string name="location_radius_description">Afișează zona circulară care reprezintă precizia locației dumneavoastră curente</string>
+    <string name="location_radius">Raza de localizare</string>
+    <string name="auto_25_chars_route_tl">Virați la stânga</string>
+    <string name="auto_25_chars_route_tshl">Virați brusc la stânga</string>
+    <string name="auto_25_chars_route_tsll">Virați ușor la stânga</string>
+    <string name="auto_25_chars_route_tu">Faceți cale întoarsă</string>
+    <string name="rendering_avg_info_details">FPS prin ultimele 1k cadre: %1$s
+\nCPU (plăci): %2$s
+\nCPU (timp inactiv): %3$s
+\nCPU (așteaptă GPU): %4$s</string>
 </resources>

@@ -5847,7 +5847,7 @@
     <string name="rendering_avg_info_details">FPS (últimos mil fotogramas): %1$s
 \nCPU (celdas): %2$s
 \nCPU (inactiva): %3$s
-\nCPU (sin usar): %4$s</string>
+\nCPU (GPU libre): %4$s</string>
     <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
     <string name="resting_position">Ubicación en reposo</string>
     <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
