@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.2.1'
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.gms:google-services:4.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
@@ -26,7 +26,7 @@ plugins {
 allprojects {
     group "net.osmand"
     // Configure all test tasks
-    tasks.withType(Test) {
+    tasks.withType(Test).configureEach {
         // Set a system property for all unit tests
         systemProperty 'isAndroidBuild', 'true'
     }
