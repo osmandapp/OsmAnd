@@ -230,17 +230,13 @@ public class EditorIconController extends BaseDialogController {
 		return Objects.equals(iconKey, selectedIconKey);
 	}
 
-	public void onIconSelectedFromPalette(@NonNull String iconKey, boolean fromCard) {
+	public void onIconSelectedFromPalette(@NonNull String iconKey, @Nullable String categoryKey) {
 		this.selectedIconKey = iconKey;
-		if (!fromCard) {
-			onPaletteScreenClosed();
+		if (categoryKey != null) {
+			setSelectedCategory(findCategoryByKey(categoryKey));
 			cardController.updateIconsSelection();
 		}
 		listener.onIconSelectedFromPalette(iconKey);
-	}
-
-	public void onPaletteScreenClosed() {
-		setSelectedCategory(findIconCategory(selectedIconKey));
 	}
 
 	@NonNull
@@ -248,6 +244,18 @@ public class EditorIconController extends BaseDialogController {
 		if (iconKey != null) {
 			for (IconsCategory category : categories) {
 				if (category.containsIcon(iconKey)) {
+					return category;
+				}
+			}
+		}
+		return categories.get(0);
+	}
+
+	@NonNull
+	private IconsCategory findCategoryByKey(@Nullable String categoryKey) {
+		if (categoryKey != null) {
+			for (IconsCategory category : categories) {
+				if (Objects.equals(category.getKey(), categoryKey)) {
 					return category;
 				}
 			}

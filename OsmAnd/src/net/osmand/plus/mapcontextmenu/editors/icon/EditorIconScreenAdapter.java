@@ -83,7 +83,7 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 			h.iconsContainer.removeAllViews();
 			h.iconsContainer.setHorizontalAutoSpacing(true);
 			for (String icon : category.getIconKeys()) {
-				h.iconsContainer.addView(createIconItemView(icon, h.iconsContainer));
+				h.iconsContainer.addView(createIconItemView(icon, h.iconsContainer, category.getKey()));
 			}
 			AndroidUiHelper.updateVisibility(h.bottomDivider, !lastItem);
 		} else if (itemType == ICON_SEARCH_RESULT) {
@@ -92,20 +92,22 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 			h.icon.setImageDrawable(iconsCache.getThemedIcon(searchResult.getIconId()));
 			h.title.setText(searchResult.getIconName());
 			h.description.setText(searchResult.getCategoryName());
-			h.itemView.setOnClickListener(v -> controller.onIconSelectedFromPalette(searchResult.getIconKey()));
+			h.itemView.setOnClickListener(v -> controller.onIconSelectedFromPalette(searchResult.getIconKey(), searchResult.getCategoryKey()));
 			AndroidUiHelper.updateVisibility(h.bottomDivider, !lastItem);
 		}
 	}
 
 	@NonNull
-	private View createIconItemView(@NonNull String iconKey, @NonNull FlowLayout rootView) {
+	private View createIconItemView(@NonNull String iconKey,
+	                                @NonNull FlowLayout rootView,
+	                                @NonNull String categoryKey) {
 		View view = paletteElements.createView(rootView);
 		boolean isSelected = controller.isSelectedIcon(iconKey);
 		int controlsColor = controller.getControlsAccentColor();
 		paletteElements.bindView(view, iconKey, controlsColor, isSelected);
 
 		view.setOnClickListener(v -> {
-			controller.onIconSelectedFromPalette(iconKey);
+			controller.onIconSelectedFromPalette(iconKey, categoryKey);
 		});
 		view.setTag(iconKey);
 		return view;

@@ -122,7 +122,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 				return true;
 			}
 		};
-		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, true));
+		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, null));
 	}
 
 	public void askUpdateColoredPaletteElements() {

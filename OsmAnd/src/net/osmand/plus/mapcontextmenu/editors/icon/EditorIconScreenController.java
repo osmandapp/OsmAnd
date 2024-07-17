@@ -64,7 +64,6 @@ public class EditorIconScreenController implements IDialogController {
 	public void onDestroyScreen() {
 		this.screen = null;
 		exitSearchModeIfNeeded();
-		centralController.onPaletteScreenClosed();
 	}
 
 	@NonNull
@@ -236,8 +235,8 @@ public class EditorIconScreenController implements IDialogController {
 		return centralController.getPaletteElements(context, nightMode);
 	}
 
-	public void onIconSelectedFromPalette(@NonNull String iconKey) {
-		centralController.onIconSelectedFromPalette(iconKey, false);
+	public void onIconSelectedFromPalette(@NonNull String iconKey, @NonNull String categoryKey) {
+		centralController.onIconSelectedFromPalette(iconKey, categoryKey);
 		if (screen != null) {
 			screen.dismiss();
 		}
