@@ -99,29 +99,12 @@ android {
 		}
 	}
 
-    buildTypes {
-        debug {
-            debuggable true
-        }
-        release {
-            debuggable false
-        }
-    }
-
-	applicationVariants.configureEach {
-		def variant = it
-		def taskName = variant.name.capitalize()
-		def mergeAssetsTaskName = "merge${taskName}Assets"
-		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyProjDb)
-			osmandTask.dependsOn(collectFonts)
-			osmandTask.dependsOn(copyPoiCategories)
+	buildTypes {
+		debug {
+			debuggable true
 		}
-        def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
-		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
-			println(osmandTask.getName())
-			osmandTask.dependsOn(copyMapShaderIcons)
+		release {
+			debuggable false
 		}
 	}
 }
