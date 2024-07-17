@@ -185,15 +185,7 @@ android {
 		def mergeAssetsTaskName = "merge${taskName}Assets"
 		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
 			println(osmandTask.getName())
-			osmandTask.dependsOn(copyProjDb)
-			osmandTask.dependsOn(collectFonts)
-			osmandTask.dependsOn(copyPoiCategories)
-			osmandTask.dependsOn(collectHelpContentsStyle)
-			osmandTask.dependsOn(copyColorPalettes)
-			osmandTask.dependsOn(copy3DModels)
-			osmandTask.dependsOn(collectUiFonts)
-			osmandTask.dependsOn(collectVoiceAssets)
-			osmandTask.dependsOn(downloadWorldMiniBasemap)
+			osmandTask.dependsOn(collectExternalResources)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
@@ -205,9 +197,7 @@ android {
 		def mergeResources= "merge${taskName}Resources"
 		tasks.named(mergeResources).configure { osmandTask ->
 			println(osmandTask.getName())
-			osmandTask.dependsOn(copyMapShaderIcons)
-			osmandTask.dependsOn(copyMapPOIIcons)
-			osmandTask.dependsOn(copyLargePOIIcons)
+			osmandTask.dependsOn(collectExternalResources)
 		}
 	}
 }
