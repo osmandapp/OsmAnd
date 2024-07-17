@@ -5819,4 +5819,14 @@
     <string name="navigation_position_icon">Ícone da posição de navegação</string>
     <string name="resting_position_icon_summary">Ícone exibido quando você não está se movendo.</string>
     <string name="navigation_position">Posição de navegação</string>
+    <string name="rendering_value_pale_name">Pálido</string>
+    <string name="auto_25_chars_route_tr">Vire à direita</string>
+    <string name="auto_25_chars_route_tslr">Vire ligeiramente à direita</string>
+    <string name="auto_25_chars_route_tl">Vire à esquerda</string>
+    <string name="auto_25_chars_route_tshl">Vire bruscamente à esquerda</string>
+    <string name="auto_25_chars_route_tsll">Vire ligeiramente à esquerda</string>
+    <string name="auto_25_chars_route_tu">Faça o retorno</string>
+    <string name="auto_25_chars_route_kr">Mantenha-se à direita</string>
+    <string name="auto_25_chars_route_tshr">Vire bruscamente à direita</string>
+    <string name="auto_25_chars_route_kl">Mantenha-se à esquerda</string>
 </resources>
