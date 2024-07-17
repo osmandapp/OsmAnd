@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -101,25 +102,38 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
 		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
 
-		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
+		Pair<QListFColorARGB, QListFColorARGB> mappings = getColorizationMappings(pathsData);
+
 		buildVectorLine(collection, baseOrder, lineId,
-				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, specialPointBitmap, bitmapStep, specialBitmapStep, true, colorizationMapping, style.getColorizationScheme(),
-				pathsData);
+				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(),
+				approximationEnabled, shouldDrawArrows, pointBitmap, specialPointBitmap, bitmapStep,
+				specialBitmapStep, true, mappings.first, mappings.second,
+				style.getColorizationScheme(), pathsData);
 	}
 
 	@NonNull
-	private QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData) {
+	protected Pair<QListFColorARGB, QListFColorARGB> getColorizationMappings(@NonNull List<DrawPathData31> pathsData) {
+		QListFColorARGB mapping = getColorizationMapping(pathsData, coloringType, false);
+		return new Pair<>(mapping, null);
+	}
+
+	@NonNull
+	protected QListFColorARGB getColorizationMapping(@NonNull List<DrawPathData31> pathsData, @NonNull ColoringType type, boolean outline) {
 		QListFColorARGB colors = new QListFColorARGB();
-		if (!pathsData.isEmpty() && !coloringType.isSolidSingleColor()) {
+		if (!pathsData.isEmpty() && !type.isSolidSingleColor()) {
 			int lastColor = 0;
 			for (DrawPathData31 data : pathsData) {
 				int color = 0;
 				GeometryWayStyle<?> style = data.style;
 				if (style != null) {
-					if (style instanceof GeometryGradientWayStyle) {
-						color = ((GeometryGradientWayStyle<?>) style).currColor;
-						lastColor = ((GeometryGradientWayStyle<?>) style).nextColor;
+					if (style instanceof GeometryGradient3DWayStyle) {
+						GeometryGradient3DWayStyle<?> wayStyle = (GeometryGradient3DWayStyle<?>) style;
+						color = outline ? wayStyle.currOutlineColor : wayStyle.currColor;
+						lastColor = outline ? wayStyle.nextOutlineColor : wayStyle.nextColor;
+					} else if (style instanceof GeometryGradientWayStyle) {
+						GeometryGradientWayStyle<?> wayStyle = (GeometryGradientWayStyle<?>) style;
+						color = wayStyle.currColor;
+						lastColor = wayStyle.nextColor;
 					} else {
 						color = style.getColor() == null ? 0 : style.getColor();
 						lastColor = color;
