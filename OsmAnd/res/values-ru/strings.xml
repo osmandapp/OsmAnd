@@ -828,7 +828,7 @@
     <string name="save_track_interval_descr">Укажите интервал фиксирования точек для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
     <string name="save_track_to_gpx">Автозапись трека при навигации</string>
-    <string name="update_tile">Обновить карту</string>
+    <string name="update_tile">Обновить</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="open_street_map_login_descr">Необходимы для авторизации на openstreetmap.org.</string>
     <string name="user_name">Имя пользователя OSM</string>
