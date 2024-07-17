@@ -77,16 +77,15 @@ project.afterEvaluate {
 		repositories {
 			ivy {
 				url = System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./"
-				
 			}
 		}
 		publications {
 			aar(IvyPublication) {
 				artifact bundleLegacyFatDebugAar {
-					classifier 'debug'
+					archiveClassifier = 'debug'
 				}
 				artifact bundleLegacyFatReleaseAar {
-					classifier 'release'
+					archiveClassifier = 'release'
 				}
 			}
 		}
@@ -94,5 +93,5 @@ project.afterEvaluate {
 }
 
 dependencies {
-	implementation 'com.google.android.gms:play-services-location:18.0.0'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 }
