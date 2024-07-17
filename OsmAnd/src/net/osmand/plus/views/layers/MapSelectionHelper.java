@@ -286,7 +286,7 @@ public class MapSelectionHelper {
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
 				IBillboardMapSymbol billboardMapSymbol = null;
-				Amenity amenity = null;
+				List<Amenity> amenityList = new ArrayList<>();
 				net.osmand.core.jni.Amenity jniAmenity = null;
 				try {
 					billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
@@ -321,7 +321,7 @@ public class MapSelectionHelper {
 					List<String> names = getValues(jniAmenity.getLocalizedNames());
 					names.add(jniAmenity.getNativeName());
 					long id = jniAmenity.getId().getId().longValue();
-					amenity = findAmenity(app, result.objectLatLon, names, id);
+					amenityList = findAmenities(app, result.objectLatLon, names, id);
 				} else {
 					MapObject mapObject;
 					try {
@@ -348,9 +348,11 @@ public class MapSelectionHelper {
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
-								amenity = getAmenity(result.objectLatLon, obfMapObject);
-								if (amenity != null) {
-									amenity.setMapIconName(getMapIconName(symbolInfo));
+								amenityList = getAmenities(result.objectLatLon, obfMapObject);
+								if (amenityList.size() > 0) {
+									for (Amenity a : amenityList) {
+										a.setMapIconName(getMapIconName(symbolInfo));
+									}
 								} else if (!isRoute) {
 									addRenderedObject(result, symbolInfo, obfMapObject);
 								}
@@ -358,8 +360,10 @@ public class MapSelectionHelper {
 						}
 					}
 				}
-				if (amenity != null && isUniqueAmenity(result.selectedObjects.keySet(), amenity)) {
-					result.selectedObjects.put(amenity, mapLayers.getPoiMapLayer());
+				for (Amenity a : amenityList) {
+					if (isUniqueAmenity(result.selectedObjects.keySet(), a)) {
+						result.selectedObjects.put(a, mapLayers.getPoiMapLayer());
+					}
 				}
 			}
 		}
@@ -417,23 +421,25 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
-		Amenity amenity;
+	private List<Amenity> getAmenities(LatLon latLon, ObfMapObject obfMapObject) {
+		List<Amenity> list;
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
 			names.add(caption);
 		}
 		long id = obfMapObject.getId().getId().longValue();
-		amenity = findAmenity(app, latLon, names, id);
-		if (amenity != null && obfMapObject.getPoints31().size() > 1) {
+		list = findAmenities(app, latLon, names, id);
+		if (list.size() > 0 && obfMapObject.getPoints31().size() > 1) {
 			QVectorPointI points31 = obfMapObject.getPoints31();
-			for (int k = 0; k < points31.size(); k++) {
-				amenity.getX().add(points31.get(k).getX());
-				amenity.getY().add(points31.get(k).getY());
+			for (Amenity amenity : list) {
+				for (int k = 0; k < points31.size(); k++) {
+					amenity.getX().add(points31.get(k).getX());
+					amenity.getY().add(points31.get(k).getY());
+				}
 			}
 		}
-		return amenity;
+		return list;
 	}
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @NonNull RenderedObject object, @Nullable String filter) {
@@ -633,6 +639,55 @@ public class MapSelectionHelper {
 			}
 		}
 		return res;
+	}
+
+	public static List<Amenity> findAmenities(@NonNull OsmandApplication app, @NonNull LatLon latLon,
+	                                  @Nullable List<String> names, long id) {
+		int searchRadius = isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
+				? AMENITY_SEARCH_RADIUS_FOR_RELATION
+				: AMENITY_SEARCH_RADIUS;
+		id = getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), searchRadius);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+
+		List<Amenity> list = findAmenitiesByOsmId(amenities, id);
+		if (list.size() == 0) {
+			list = findAmenitiesByName(amenities, names);
+		}
+		return list;
+	}
+
+	public static List<Amenity> findAmenitiesByOsmId(@NonNull List<Amenity> amenities, long id) {
+		List<Amenity> list = new ArrayList<>();
+		for (Amenity amenity : amenities) {
+			Long initAmenityId = amenity.getId();
+			if (initAmenityId != null) {
+				long amenityId;
+				if (isShiftedID(initAmenityId)) {
+					amenityId = getOsmId(initAmenityId);
+				} else {
+					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
+				}
+				if (amenityId == id && !amenity.isClosed()) {
+					list.add(amenity);
+				}
+			}
+		}
+		return list;
+	}
+
+	public static List<Amenity> findAmenitiesByName(@NonNull List<Amenity> amenities, @Nullable List<String> names) {
+		List<Amenity> list = new ArrayList<>();
+		if (!Algorithms.isEmpty(names)) {
+			for (Amenity amenity : amenities) {
+				for (String name : names) {
+					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
+						list.add(amenity);
+					}
+				}
+			}
+		}
+		return list;
 	}
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
