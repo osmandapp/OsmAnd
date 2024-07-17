@@ -121,6 +121,16 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 			public boolean isAccentColorCanBeChanged() {
 				return true;
 			}
+
+			@Override
+			public int getHorizontalIconsSpace() {
+				return 0;
+			}
+
+			@Override
+			public int getRecycleViewHorizontalPadding() {
+				return 0;
+			}
 		};
 		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, null));
 	}
