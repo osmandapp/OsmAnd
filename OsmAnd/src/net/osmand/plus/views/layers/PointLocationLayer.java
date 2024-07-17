@@ -67,7 +67,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
-	private static final int MODEL_3D_MAX_SIZE_DP = 48;
+	private static final float MODEL_3D_MAX_SIZE_DP = 4.8f;
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
