@@ -31,7 +31,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	private List<WptPt> points;
 	private List<RouteSegmentResult> routeSegments;
 
-	protected boolean track3DChanged;
 	private boolean drawDirectionArrows;
 
 	public GpxGeometryWay(GpxGeometryWayContext context) {
@@ -48,10 +47,10 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                @Nullable String gradientPaletteName) {
 		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
 				|| this.coloringType != coloringType
-				|| coloringType == ColoringType.ATTRIBUTE
-				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
+				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
+
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
-		this.track3DChanged = !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 		if (coloringTypeChanged) {
 			resetSymbolProviders();
 		}
@@ -64,7 +63,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (track3DChanged) {
+		if (getTrack3DStyle() != track3DStyle) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
@@ -82,7 +81,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
-		if (coloringChanged || track3DChanged || tb.getMapDensity() != getMapDensity()
+		if (coloringChanged || tb.getMapDensity() != getMapDensity()
 				|| this.points != points || this.routeSegments != routeSegments) {
 			this.points = points;
 			this.routeSegments = routeSegments;
