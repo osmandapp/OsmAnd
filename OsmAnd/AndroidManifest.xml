@@ -104,6 +104,22 @@
 				android:resource="@xml/paths" />
 		</provider>
 
+
+		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$PauseNavigationReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="net.osmand.plus.OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$ResumeNavigationReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="net.osmand.plus.OSMAND_RESUME_NAVIGATION_SERVICE_ACTION" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name="net.osmand.plus.notifications.NavigationNotification$StopNavigationReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="net.osmand.plus.OSMAND_STOP_NAVIGATION_SERVICE_ACTION" />
+			</intent-filter>
+		</receiver>
 		<receiver android:name="net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver" android:exported="false" />
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" android:exported="false" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" android:exported="false" />
