@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
-
+apply from: '../versions.gradle'
 
 android {
     compileSdk 34
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion minSdk
         targetSdkVersion 34
         versionCode 2
         versionName "2.0"
