@@ -463,7 +463,7 @@ public class OsmandAidlApi {
 		try {
 			receivers.put(filter, rec);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-				ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_NOT_EXPORTED);
+				ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_EXPORTED);
 			} else {
 				ma.registerReceiver(rec, new IntentFilter(filter));
 			}

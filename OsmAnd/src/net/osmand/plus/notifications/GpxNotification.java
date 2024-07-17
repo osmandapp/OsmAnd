@@ -48,7 +48,7 @@ public class GpxNotification extends OsmandNotification {
 			}
 		};
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
 		} else {
 			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
 		}
@@ -64,7 +64,7 @@ public class GpxNotification extends OsmandNotification {
 			}
 		};
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
 		} else {
 			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
 		}
@@ -80,7 +80,7 @@ public class GpxNotification extends OsmandNotification {
 			}
 		};
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
+			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
 		} else {
 			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
 		}

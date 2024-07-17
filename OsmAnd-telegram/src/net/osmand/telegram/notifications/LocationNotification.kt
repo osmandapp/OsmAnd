@@ -27,7 +27,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			app.registerReceiver(stopSharingLocationReceiver, IntentFilter(DISABLE_SHARING_ACTION),
-				Context.RECEIVER_NOT_EXPORTED)
+				Context.RECEIVER_EXPORTED)
 		} else {
 			app.registerReceiver(stopSharingLocationReceiver, IntentFilter(DISABLE_SHARING_ACTION))
 		}
@@ -39,7 +39,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			app.registerReceiver(stopMonitoringReceiver, IntentFilter(DISABLE_MONITORING_ACTION),
-				Context.RECEIVER_NOT_EXPORTED)
+				Context.RECEIVER_EXPORTED)
 		} else {
 			app.registerReceiver(stopMonitoringReceiver, IntentFilter(DISABLE_MONITORING_ACTION))
 		}
