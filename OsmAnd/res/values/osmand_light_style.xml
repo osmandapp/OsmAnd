@@ -292,6 +292,8 @@
         <item name="toolbar_active_color">@color/app_bar_active_light</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
         <item name="active_color_secondary">@color/active_color_secondary_light</item>
+        <item name="active_color_primary">@color/active_color_primary_light</item>
+        <item name="slider_label_text_dark">@color/slider_label_text_light</item>
     </style>
 
 </resources>

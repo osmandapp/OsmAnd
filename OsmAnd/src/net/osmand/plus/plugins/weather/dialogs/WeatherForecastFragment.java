@@ -325,7 +325,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
-			if (fromUser) {
+			if (fromUser && animationState != AnimationState.IDLE) {
 				stopAnimation();
 			}
 			calendar.setTime(selectedDate.getTime());
