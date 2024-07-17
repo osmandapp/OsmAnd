@@ -876,6 +876,9 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getLocationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String locationIconName = appMode.getLocationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(locationIconName)) {
+			locationIconName = LocationIcon.fromName(locationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
 		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
@@ -885,6 +888,9 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getNavigationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String navigationIconName = appMode.getNavigationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(navigationIconName)) {
+			navigationIconName = LocationIcon.fromName(navigationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
 		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;
