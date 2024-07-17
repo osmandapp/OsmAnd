@@ -46,7 +46,7 @@ public class GpxNotification extends OsmandNotification {
 					plugin.saveCurrentTrack();
 				}
 			}
-		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
+		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 
 		app.registerReceiver(new BroadcastReceiver() {
 
@@ -58,7 +58,7 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
+		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 
 		app.registerReceiver(new BroadcastReceiver() {
 
@@ -70,7 +70,7 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
+		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 	}
 
 	@Override

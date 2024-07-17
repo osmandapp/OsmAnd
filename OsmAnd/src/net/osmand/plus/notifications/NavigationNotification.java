@@ -86,13 +86,13 @@ public class NavigationNotification extends OsmandNotification {
 	public void init() {
 		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
 		app.registerReceiver(new PauseNavigationReceiver(),
-				new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
+				new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 
 		app.registerReceiver(new ResumeNavigationReceiver(),
-				new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+				new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 
 		app.registerReceiver(new StopNavigationReceiver(),
-				new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
+				new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_NOT_EXPORTED);
 	}
 
 	@Override

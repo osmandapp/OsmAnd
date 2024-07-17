@@ -461,7 +461,7 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			ma.registerReceiver(rec, new IntentFilter(filter));
+			ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_NOT_EXPORTED);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}
