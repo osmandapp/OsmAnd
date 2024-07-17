@@ -412,4 +412,9 @@
         <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
     </style>
+
+    <style name="TimeSlider" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">?attr/active_color_primary</item>
+        <item name="android:textColor">?attr/slider_label_text_dark</item>
+    </style>
 </resources>

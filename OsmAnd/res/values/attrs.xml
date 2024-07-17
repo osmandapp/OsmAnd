@@ -184,6 +184,8 @@
 	    <attr name="toolbar_active_color" format="reference" />
 	    <attr name="status_bar_active_color" format="reference" />
 	    <attr name="alert_dialog_theme" format="reference" />
+	    <attr name="active_color_primary" format="reference" />
+	    <attr name="slider_label_text_dark" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
