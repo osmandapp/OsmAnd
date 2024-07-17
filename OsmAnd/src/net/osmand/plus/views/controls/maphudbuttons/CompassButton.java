@@ -97,7 +97,8 @@ public class CompassButton extends MapButton {
 	}
 
 	private void rotateMapToNorth() {
-		mapActivity.getMapView().setRotate(0, true);
+		mapActivity.getMapView().resetRotation();
+		app.getMapViewTrackingUtilities().setLastResetRotationToNorth(System.currentTimeMillis());
 	}
 
 	private void showCompassModeWidgetDialog() {

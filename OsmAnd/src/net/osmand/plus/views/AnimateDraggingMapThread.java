@@ -277,9 +277,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 		float animationDuration = Math.max(movingTime, NAV_ANIMATION_TIME / 4);
 
 		boolean animateZoom = zoomParams != null && (zoom != startZoom || zoomFP != startZoomFP);
+		boolean allowRotationAfterReset = app.getMapViewTrackingUtilities().allowRotationAfterReset();
 		float rotationDiff = finalRotation != null
 				? Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation)) : 0;
-		boolean animateRotation = rotationDiff > 0.1;
+		boolean animateRotation = rotationDiff > 0.1 && allowRotationAfterReset;
 		boolean animateTarget;
 
 		MapAnimator animator = getAnimator();
@@ -331,7 +332,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			if (!animateZoom) {
 				tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 			}
-			if (!animateRotation && finalRotation != null) {
+			if (!animateRotation && finalRotation != null && allowRotationAfterReset) {
 				tileView.rotateToAnimate(rotation);
 			}
 			if (!animateTarget) {
