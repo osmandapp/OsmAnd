@@ -5823,7 +5823,7 @@
     <string name="rendering_avg_info_details">最近一千個影格的 FPS：%1$s
 \nCPU（圖磚）：%2$s
 \nCPU（閒置時間）：%3$s
-\nCPU（等待 CPU）%4$s</string>
+\nCPU（等待 GPU）%4$s</string>
     <string name="resting_position">暫停位置</string>
     <string name="auto_25_chars_route_kr">靠右</string>
     <string name="auto_25_chars_route_tr">右轉</string>
