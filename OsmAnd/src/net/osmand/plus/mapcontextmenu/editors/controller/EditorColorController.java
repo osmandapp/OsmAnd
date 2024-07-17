@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.editors;
+package net.osmand.plus.mapcontextmenu.editors.controller;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;

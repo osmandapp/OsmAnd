@@ -22,6 +22,9 @@ public interface IIconsPaletteController<IconData> extends IDialogController {
 	void setPaletteListener(@NonNull OnIconsPaletteListener<IconData> onIconsPaletteListener);
 
 	@ColorInt
+	int getIconsAccentColor(boolean nightMode);
+
+	@ColorInt
 	int getControlsAccentColor(boolean nightMode);
 
 	boolean isAccentColorCanBeChanged();
