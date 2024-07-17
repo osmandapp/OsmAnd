@@ -104,9 +104,9 @@
 				android:resource="@xml/paths" />
 		</provider>
 
-		<receiver android:name="net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver"/>
-		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
-		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
+		<receiver android:name="net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver" android:exported="false" />
+		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" android:exported="false" />
+		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" android:exported="false" />
 		<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver"
 			android:exported="true">
 			<intent-filter>
@@ -1158,7 +1158,8 @@
 		<service
 			android:name="net.osmand.plus.download.DownloadService"
 			android:label="@string/process_downloading_service"
-			android:stopWithTask="false" />
+			android:stopWithTask="false"
+			android:exported="true" />
 
 		<meta-data android:name="com.google.android.gms.car.application"
 			android:resource="@xml/car_app_desc"
