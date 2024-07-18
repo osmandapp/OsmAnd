@@ -62,6 +62,7 @@ import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -160,8 +161,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_05 = 4705;
 	// 4706 - 4.7-06 (Import location 3D icon models)
 	public static final int VERSION_4_7_06 = 4706;
+	// 4707 - 4.7-07 (Migrate chosen 3D model key to 2D icon base key)
+	public static final int VERSION_4_7_07 = 4707;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_06;
+	public static final int LAST_APP_VERSION = VERSION_4_7_07;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -303,6 +306,9 @@ public class AppVersionUpgradeOnInit {
 							ColorsMigrationAlgorithmV2.doMigration(app);
 						}
 					});
+				}
+				if (prevAppVersion < VERSION_4_7_07) {
+					migrate3DModelKey(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -950,6 +956,22 @@ public class AppVersionUpgradeOnInit {
 			LocalSortMode sortMode = oldPref.get();
 			LocalItemUtils.getSortModePref(app, MAP_DATA).set(sortMode);
 			LocalItemUtils.getSortModePref(app, ROAD_DATA).set(sortMode);
+		}
+	}
+
+	private void migrate3DModelKey(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			String locationIcon = settings.LOCATION_ICON.getModeValue(mode);
+			String migrateLocationIconKey = LocationIcon.getIconForDefaultModel(locationIcon);
+			if (migrateLocationIconKey != null) {
+				settings.LOCATION_ICON.setModeValue(mode, migrateLocationIconKey);
+			}
+
+			String navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
+			String migrateNavigationIconKey = LocationIcon.getIconForDefaultModel(navigationIcon);
+			if (migrateNavigationIconKey != null) {
+				settings.NAVIGATION_ICON.setModeValue(mode, migrateNavigationIconKey);
+			}
 		}
 	}
 }
