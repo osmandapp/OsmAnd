@@ -3939,4 +3939,6 @@
     <string name="dont_ask_anymore">Без повторно питане</string>
     <string name="shared_string_all_tracks">Всички трасета</string>
     <string name="shared_string_itinerary">Маршрут</string>
+    <string name="weather_screen">Екран за времето</string>
+    <string name="weather_data_sources_prompt">OsmAnd черпи прогноза за времето от два изтичника:</string>
 </resources>
