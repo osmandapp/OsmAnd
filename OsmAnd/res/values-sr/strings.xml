@@ -5831,5 +5831,14 @@
     <string name="rendering_avg_info_details">FPS према последњим 1k кадрова: %1$s
 \nCPU (плочице): %2$s
 \nCPU (време мировања): %3$s
-\nCPU (чекање CPU): %4$s</string>
+\nCPU (чекање GPU): %4$s</string>
+    <string name="auto_25_chars_route_kr">Настави десно</string>
+    <string name="auto_25_chars_route_tr">Скрени десно</string>
+    <string name="auto_25_chars_route_tshr">Скрени оштро десно</string>
+    <string name="auto_25_chars_route_tslr">Скрени мало десно</string>
+    <string name="auto_25_chars_route_tl">Скрени лево</string>
+    <string name="auto_25_chars_route_tu">Направи полукруг</string>
+    <string name="auto_25_chars_route_kl">Настави лево</string>
+    <string name="auto_25_chars_route_tshl">Скрени оштро лево</string>
+    <string name="auto_25_chars_route_tsll">Скрени мало лево</string>
 </resources>
