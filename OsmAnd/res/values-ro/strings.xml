@@ -3220,7 +3220,7 @@
     <string name="activity_type_snowmobile_name">Snowmobil</string>
     <string name="activity_type_riding_name">Echitație</string>
     <string name="activity_type_racing_name">Cursă</string>
-    <string name="activity_type_mountainbike_name">Mountain bike</string>
+    <string name="activity_type_mountainbike_name">Bicicletă de munte</string>
     <string name="activity_type_cycling_name">Ciclism</string>
     <string name="activity_type_hiking_name">Drumeție</string>
     <string name="activity_type_running_name">Alergare</string>
@@ -4968,7 +4968,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflict</string>
+    <string name="cloud_conflict">Conflictul</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>
@@ -5644,23 +5644,33 @@
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">"• Noua opțiune de colorare a terenului \"Altitudine\"
 \n
+\n
 \n • Palete de culori personalizate pentru teren, trasee și rute
+\n
 \n
 \n • Variantă 3D la pictogramele poziției locației
 \n
+\n
 \n • Acțiunile rapide se pot atribui tastaturilor externe
+\n
 \n
 \n • Vremea: Reîmprospătare UI, adăugare animație vânt
 \n
+\n
 \n •  Îmbunătățiri ale traseelor 3D: noi opțiuni de vizualizare și colorizare
+\n
 \n
 \n • Selecție extinsă de rute turistice pe hartă
 \n
+\n
 \n • S-a adăugat opțiunea temei app pentru a urmări modul hartă
+\n
 \n
 \n • Statistici, sortare și căutare fixă a pistelor
 \n
+\n
 \n •  Editare OSM: s-a eliminat metoda de autorizare a login-ului / parolei
+\n
 \n
 \n • Trecerea la foaia de partajare a sistemului începând cu Android 14
 \n
