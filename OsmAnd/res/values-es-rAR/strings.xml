@@ -5842,7 +5842,7 @@
     <string name="profile_icon">Icono del perfil</string>
     <string name="navigation_position">Ubicación al navegar</string>
     <string name="resting_navigation_position">Ubicación en reposo y al navegar</string>
-    <string name="view_angle">Ángulo de vista</string>
+    <string name="view_angle">Ángulo de visión</string>
     <string name="location_radius">Radio de ubicación</string>
     <string name="rendering_avg_info_details">FPS (últimos mil fotogramas): %1$s
 \nCPU (celdas): %2$s
