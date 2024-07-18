@@ -3941,4 +3941,5 @@
     <string name="shared_string_itinerary">Маршрут</string>
     <string name="weather_screen">Екран за времето</string>
     <string name="weather_data_sources_prompt">OsmAnd черпи прогноза за времето от два изтичника:</string>
+    <string name="weather_source_ecmwf_description">Европейски център за средносрочни прогнози на времето</string>
 </resources>
