@@ -13,6 +13,7 @@ import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
@@ -133,7 +134,10 @@ public class Model3dHelper {
 		if (!Algorithms.isEmpty(modelsDirs)) {
 			for (File model : modelsDirs) {
 				if (isModelExist(model)) {
-					modelsDirNames.add(IndexConstants.MODEL_NAME_PREFIX + model.getName());
+					String modelKey = IndexConstants.MODEL_NAME_PREFIX + model.getName();
+					if (!LocationIcon.isDefaultModel(modelKey)) {
+						modelsDirNames.add(IndexConstants.MODEL_NAME_PREFIX + model.getName());
+					}
 				}
 			}
 		}

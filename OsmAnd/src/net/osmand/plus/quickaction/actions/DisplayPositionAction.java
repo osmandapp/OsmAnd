@@ -71,11 +71,13 @@ public class DisplayPositionAction extends QuickAction {
 
 	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
+		String nameRes = app.getString(getNameRes());
+		String actionName;
 		if (getPreference(app).get() == 1) {
-			return app.getString(R.string.shared_string_disable);
+			actionName = app.getString(R.string.shared_string_disable);
 		} else {
-			return app.getString(R.string.shared_string_enable);
+			actionName = app.getString(R.string.shared_string_enable);
 		}
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
-
 }
