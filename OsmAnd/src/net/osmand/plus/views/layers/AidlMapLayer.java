@@ -491,7 +491,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	/** OpenGL */
 	public void showAidlTileProvider(float density) {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null || !isLayerEnabled() || aidlMapLayerProvider != null) {
+		if (mapRenderer == null || !isLayerEnabled()) {
 			return;
 		}
 
