@@ -68,15 +68,20 @@ public enum LocationIcon {
 	}
 
 	public static boolean isDefaultModel(@NonNull String name) {
-		if (!isModel(name)) {
-			return false;
+		return getIconForDefaultModel(name) != null;
+	}
+
+	@Nullable
+	public static String getIconForDefaultModel(@NonNull String modelName){
+		if (!isModel(modelName)) {
+			return null;
 		}
 		for (LocationIcon icon : getDefaultIcons()) {
-			if (name.equals(icon.represented3DModelKey)) {
-				return true;
+			if (modelName.equals(icon.represented3DModelKey)) {
+				return icon.name();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public static boolean isModel(@NonNull String name) {
