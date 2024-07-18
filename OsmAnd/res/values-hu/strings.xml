@@ -5830,7 +5830,16 @@
     <string name="rendering_avg_info_details">FPS (utolsó 1000 képkocka): %1$s
 \nCPU (csempék): %2$s
 \nCPU (üresjárat): %3$s
-\nCPU (CPU-ra várás): %4$s</string>
+\nCPU (GPU-ra várás): %4$s</string>
     <string name="resting_position">Állóhelyzet</string>
     <string name="resting_navigation_position">Állóhelyzeti és navigálási pozíció</string>
+    <string name="auto_25_chars_route_tshr">Forduljon élesen jobbra</string>
+    <string name="auto_25_chars_route_kl">Tartson balra</string>
+    <string name="auto_25_chars_route_tl">Forduljon balra</string>
+    <string name="auto_25_chars_route_kr">Tartson jobbra</string>
+    <string name="auto_25_chars_route_tr">Forduljon jobbra</string>
+    <string name="auto_25_chars_route_tshl">Forduljon élesen balra</string>
+    <string name="auto_25_chars_route_tsll">Forduljon enyhén balra</string>
+    <string name="auto_25_chars_route_tslr">Forduljon enyhén jobbra</string>
+    <string name="auto_25_chars_route_tu">Forduljon meg</string>
 </resources>
