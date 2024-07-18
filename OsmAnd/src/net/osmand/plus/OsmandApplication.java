@@ -894,8 +894,14 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public Resources getResources() {
-		Resources localizedResources = localeHelper.getLocalizedResources();
-		return localizedResources != null ? localizedResources : super.getResources();
+		OsmandMap map = getOsmandMap();
+		MapActivity a = null;
+		if (map != null) {
+			a = map.getMapView().getMapActivity();
+		}
+		Resources localizedResources = localeHelper.getLocalizedResources(a == null ? this : a);
+		return localizedResources != null ? localizedResources :
+				(a == null ? super.getResources() : a.getResources());
 	}
 
 	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
