@@ -447,7 +447,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		for (AidlMapPointWrapper point : displayedPoints) {
 			AidlMapPointWrapper updatedPoint = aidlLayer.getPoint(point.getId());
-			if (!point.getLocation().equals(updatedPoint.getLocation())) {
+			if (updatedPoint != null && !point.getLocation().equals(updatedPoint.getLocation())) {
 				return true;
 			}
 		}
