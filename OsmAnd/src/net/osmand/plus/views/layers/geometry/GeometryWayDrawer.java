@@ -327,9 +327,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					builder.setOutlineColor(new FColorARGB(a, r, g, b))
 							.setFillColor(new FColorARGB(a, r, g, b));
 				}
-			} else if (wallColorType.isVerticalGradient()) {
+			} else {
+				boolean gradient = wallColorType.isGradient();
 				float fromAlfa = wallColorType == UPWARD_GRADIENT ? 0f : a;
-				float toAlfa = wallColorType == UPWARD_GRADIENT ? a : 0f;
+				float toAlfa = wallColorType == UPWARD_GRADIENT || gradient ? a : 0f;
 				if (hasColorizationMapping) {
 					builder.setNearOutlineColor(new FColorARGB(fromAlfa, 1, 1, 1));
 					builder.setFarOutlineColor(new FColorARGB(toAlfa, 1, 1, 1));
