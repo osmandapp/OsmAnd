@@ -1968,8 +1968,8 @@
     <string name="analyze_on_map">Analyser på kartet</string>
     <string name="shared_string_slope">Bakkehelning</string>
     <string name="route_altitude">Rutehøydeprofil</string>
-    <string name="altitude_descent">Nedstigning</string>
-    <string name="altitude_ascent">Stigning</string>
+    <string name="altitude_descent">Nedoverbakke</string>
+    <string name="altitude_ascent">Oppoverbakke</string>
     <string name="altitude_range">Høydeintervall</string>
     <string name="average_altitude">Gjennomsnittshøyde</string>
     <string name="route_head">Følg</string>
@@ -3228,7 +3228,7 @@
     <string name="rendering_attr_piste_type_hike_name">Fottur</string>
     <string name="rendering_attr_piste_type_connection_name">Forbindelse</string>
     <string name="rendering_attr_piste_type_skitour_name">Skitur</string>
-    <string name="rendering_attr_piste_type_downhill_name">Alpint</string>
+    <string name="rendering_attr_piste_type_downhill_name">Utfor</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Nybegynner</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Enkel</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Middels</string>
@@ -5047,7 +5047,7 @@
 \n - Fikset problemer med visning av veganske steder
 \n
 \n</string>
-    <string name="sort_duration_ascending">Kortere varighet først</string>
+    <string name="sort_duration_ascending">Korteste varighet først</string>
     <string name="sort_duration_descending">Lengste varighet først</string>
     <string name="shared_string_nearest">Nærmeste</string>
     <string name="sort_distance_descending">Lengste avstand først</string>
@@ -5149,7 +5149,7 @@
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">o/min</string>
     <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på data fra terrengkart (3D). Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
-    <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s) den inneholder.</string>
+    <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle %2$s spor den inneholder.</string>
     <string name="rendering_value_sectors_name">Sektorer</string>
     <string name="shared_string_close_the_dialog">Lukk dialogen</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
@@ -5380,7 +5380,7 @@
     <string name="add_smart_folder">Legg til smart-mappe</string>
     <string name="empty_name">Tomt navn</string>
     <string name="save_as_smart_folder">Lagre som smart-mappe</string>
-    <string name="delete_smart_folder_dialog_message">Dette sletter smart-mappen \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Dette fjerner smart-mappen \"%1$s\". (Ingen spor slettes.)</string>
     <string name="precise_distance_numbers">Presise avstandstall</string>
     <string name="complex_widget_alert">%1$s-miniprogram kan kun plasseres på egen rad.</string>
     <string name="button_already_assigned_to_this_action">Denne knappen er allerede tilknyttet denne handlingen.</string>
@@ -5484,8 +5484,8 @@
     <string name="key_event_category_actions">Handlinger</string>
     <string name="key_event_action_previous_app_profile">Forrige programprofil</string>
     <string name="add_new_button">Legg til ny knapp</string>
-    <string name="telegram_chats_descr">Ta del i en av våre lokale Telegram-sludringer.</string>
-    <string name="telegram_chats">Telegram-sludringer</string>
+    <string name="telegram_chats_descr">Bli med i en av våre lokale Telegram-chatter.</string>
+    <string name="telegram_chats">Telegramprat</string>
     <string name="shared_string_eta">ETA</string>
     <string name="all_folders">Alle mapper</string>
     <string name="battery_optimization">Batterioptimalisering</string>
@@ -5516,7 +5516,7 @@
     <string name="missing_maps_header">Manglende eller utdaterte kart</string>
     <string name="wall_color">Veggfarge</string>
     <string name="track_line">Sporlinje</string>
-    <string name="fixed_height">Fastsatt høyde</string>
+    <string name="fixed_height">Fast høyde</string>
     <string name="shared_string_changes">Endringer</string>
     <string name="add_button">Legg til knapp</string>
     <string name="java_safe">Java (trygt)</string>
@@ -5530,14 +5530,14 @@
     <string name="play_weather_forecast">Spill av værmelding</string>
     <string name="routing_attr_avoid_cobblestone_name">Unngå brostein</string>
     <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
-    <string name="show_debug_info">Vis avlusningsinfø</string>
-    <string name="map_text">Karttekst</string>
+    <string name="show_debug_info">Vis feilsøkingsinformasjon</string>
+    <string name="map_text">Karttekster</string>
     <string name="wall_height">Vegghøyde</string>
     <string name="backup_error_failed_to_transfer_file">Klarte ikke å overføre sky-fil(er).</string>
     <string name="contact_support_retry">Prøv igjen eller kontakt brukerstøtte</string>
     <string name="shared_string_colors">Farger</string>
     <string name="key_assignment_add_action">Legg til handling</string>
-    <string name="missing_maps_ignore">Bruk eksisterende kart</string>
+    <string name="missing_maps_ignore">Bruk nedlastede kart</string>
     <string name="map_settings_weather_wind_animation">Vindanimasjon</string>
     <string name="tomorrow">I morgen</string>
     <string name="use_nearby_roads">Bruk veier i nærheten</string>
@@ -5551,11 +5551,11 @@
     <string name="quick_action_parking_place">Parkeringsplass</string>
     <string name="quick_action_video_note">Videonotat</string>
     <string name="quick_action_photo_note">Bildenotat</string>
-    <string name="quick_action_verb_start_stop">Start/stopp</string>
-    <string name="quick_action_verb_turn_on_off">Skru av/på</string>
-    <string name="rendering_value_dark_orange_name">Mørkeoransje</string>
+    <string name="quick_action_verb_start_stop">Start / Stopp</string>
+    <string name="quick_action_verb_turn_on_off">Slå av/på</string>
+    <string name="rendering_value_dark_orange_name">Mørk oransje</string>
     <string name="quick_action_map_style">Kartstil</string>
-    <string name="quick_action_destination">Mål</string>
+    <string name="quick_action_destination">Bestemmelsessted</string>
     <string name="quick_action_directions_from">Startpunkt</string>
     <string name="quick_action_remove_next_destination">Neste målpunkt</string>
     <string name="quick_action_new_route">Ny rute</string>
@@ -5566,17 +5566,54 @@
     <string name="auto_25_chars_route_tshl">Sving hardt til venstre</string>
     <string name="auto_25_chars_route_tsll">Sving lett til venstre</string>
     <string name="auto_25_chars_route_tu">Utfør u-sving</string>
-    <string name="quick_action_location_by_gpx">Posisjon fra GPX</string>
+    <string name="quick_action_location_by_gpx">Posisjon etter GPX</string>
     <string name="quick_action_move_map_left">Kart til venstre</string>
     <string name="quick_action_move_map_right">Kart til høyre</string>
     <string name="app_profile">Programprofil</string>
     <string name="shared_string_create">Opprett</string>
     <string name="shared_string_replace">Erstatt</string>
     <string name="shared_string_simulate">Simuler</string>
-    <string name="quick_action_verb_show_hide">Vis/skjul</string>
+    <string name="quick_action_verb_show_hide">Vis / Skjul</string>
     <string name="shared_string_all_icons">Alle ikoner</string>
     <string name="profile_icon">Profilikon</string>
     <string name="auto_25_chars_route_kr">Hold til høyre</string>
     <string name="auto_25_chars_route_kl">Hold til venstre</string>
     <string name="auto_25_chars_route_tr">Sving til høyre</string>
+    <string name="change_terrain_color_scheme">Endre terrengfargeskjema</string>
+    <string name="quick_action_map_overlay">Overlegg</string>
+    <string name="quick_action_map_underlay">Underlag</string>
+    <string name="weather_screen">Værskjerm</string>
+    <string name="missing_maps_ignore_details">Dekker nedlastede kart ruten din? Naviger med dem hvis du er kjent i området.</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="show_debug_info_description">Vis grafisk informasjon om plassering av hver karttekst</string>
+    <string name="fix_north_up">Aktiver Fast nord opp</string>
+    <string name="quick_action_verb_pause_resume">Pause / Fortsett</string>
+    <string name="height_legend_description">Høydefargekart brukes til å visualisere relieff.</string>
+    <string name="route_line_use_coloring_altitude">Rutelinje er farget etter høyde.</string>
+    <string name="use_terrain_maps">Bruk terrengkart</string>
+    <string name="track_vertical_exaggeration_description">Ved å endre skalaverdien kan du endre 3D-sporets høyde.</string>
+    <string name="user_palette">Brukerpalett</string>
+    <string name="fix_north_up_descr">Ikke roter kartet med bevegelser i kartretningen Nord opp</string>
+    <string name="choose_map_orientation">Velg kartorientering</string>
+    <string name="energy_avg_info">Energistatistikk (gjennomsnitt 1 / 5 / 15 minutter)</string>
+    <string name="quick_action_move_map_up">Kart opp</string>
+    <string name="quick_action_terrain">Terrengfargeleggingstype</string>
+    <string name="navigation_position_icon_summary">Ikonet vises mens du navigerer eller forflytter deg.</string>
+    <string name="navigation_position_icon">Ikon for navigeringsposisjon</string>
+    <string name="resting_position_icon_summary">Ikonet vises når du ikke forflytter deg.</string>
+    <string name="resting_position_icon">Ikon for stillestående posisjon</string>
+    <string name="route_line_use_coloring_speed">Rutelinje er farget etter bevegelseshastighet.</string>
+    <string name="key_event_action_continuous_zoom_out">Kontinuerlig utzooming</string>
+    <string name="view_angle">Synsvinkel</string>
+    <string name="view_angle_description">Viser det kjegleformede området du for øyeblikket er vendt mot</string>
+    <string name="energy_avg_info_description">Batterinivå per minutt: %1$s
+\nEnergiforbruk (mAh): %2$s</string>
+    <string name="location_radius">Posisjonsradius</string>
+    <string name="location_radius_description">Viser det sirkulære området som representerer din nåværende posisjonsnøyaktighet</string>
+    <string name="quick_action_terrain_color_scheme">Terrengfargeskjema</string>
+    <string name="quick_action_to_my_location">Til min posisjon</string>
+    <string name="quick_action_move_map_down">Kart ned</string>
+    <string name="quick_action_display_position_in_center">Vis alltid posisjon i midten</string>
+    <string name="allow_display_on_top">Tillat visning oppå</string>
+    <string name="allow_display_on_top_description">Tillat visning av karttekster oppå hverandre</string>
 </resources>
