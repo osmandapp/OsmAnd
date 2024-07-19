@@ -149,6 +149,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private View buttonToolbarView;
 	private View sendEmptySearchView;
 	private ImageButton buttonToolbarFilter;
+	private View buttonToolbarMap;
 	private TextView buttonToolbarText;
 	private TextView sendEmptySearchText;
 	private FrameLayout sendEmptySearchButton;
@@ -209,7 +210,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
-	private boolean processTopIndexAfterLoad = false;
+	private ProcessTopIndex processTopIndexAfterLoad = ProcessTopIndex.NO;
+
+	private enum ProcessTopIndex {
+		FILTER,
+		MAP,
+		NO
+	}
 
 	public enum QuickSearchTab {
 		HISTORY,
@@ -325,12 +332,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 				} else if (object instanceof TopIndexFilter) {
 					TopIndexFilter topIndexFilter = (TopIndexFilter) object;
-					PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter);
+					PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
 					if (poiUIFilter != null) {
 						filterId = poiUIFilter.getFilterId();
 						filterByName = topIndexFilter.getValue();
-					} else {
-						processTopIndexAfterLoad = true;
 					}
 				}
 				if (filterId != null) {
@@ -340,13 +345,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		});
 
 		buttonToolbarText = view.findViewById(R.id.buttonToolbarTitle);
-		view.findViewById(R.id.buttonToolbar).setOnClickListener(v -> {
+		buttonToolbarMap = view.findViewById(R.id.buttonToolbar);
+		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
 					if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
-						PoiUIFilter filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
+						PoiUIFilter filter;
+						Object object = searchPhrase.getLastSelectedWord().getResult().object;
+						if (object instanceof TopIndexFilter) {
+							TopIndexFilter topIndexFilter = (TopIndexFilter) object;
+							filter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.MAP);
+							if (filter != null) {
+								filter.setFilterByName(topIndexFilter.getValue());
+							} else {
+								return;
+							}
+						} else {
+							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
+						}
+
+
 						app.getPoiFilters().clearSelectedPoiFilters();
 						app.getPoiFilters().addSelectedPoiFilter(filter);
 
@@ -1565,12 +1585,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						regionResultCollection = null;
 						results = new ArrayList<>();
 						showApiResults(searchApi, apiResults, phrase, hasRegionCollection, resultListener);
-						if (processTopIndexAfterLoad) {
-							app.runInUIThread(() -> {
-								buttonToolbarFilter.performClick();
-							});
-							processTopIndexAfterLoad = false;
+						switch (processTopIndexAfterLoad) {
+							case FILTER:
+								app.runInUIThread(() -> {
+									buttonToolbarFilter.performClick();
+								});
+								break;
+							case MAP:
+								app.runInUIThread(() -> {
+									buttonToolbarMap.performClick();
+								});
+								break;
 						}
+						processTopIndexAfterLoad = ProcessTopIndex.NO;
 						break;
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
@@ -2112,11 +2139,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean searchFinished(SearchPhrase phrase);
 	}
 
-	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter) {
+	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter, ProcessTopIndex processAfter) {
 		PoiUIFilter poiUIFilter = app.getPoiFilters().getFilterById(topIndexFilter.getFilterId());
 		if (poiUIFilter != null) {
 			// use saved filter
-			processTopIndexAfterLoad = false;
+			processTopIndexAfterLoad = ProcessTopIndex.NO;
 			return poiUIFilter;
 		} else if (searchHelper != null && searchHelper.getResultCollection() != null) {
 			// collect poi categories and subtypes from searching result
@@ -2130,9 +2157,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 			poiUIFilter = app.getPoiFilters().getFilter(topIndexFilter, acceptedTypes);
-			processTopIndexAfterLoad = false;
+			processTopIndexAfterLoad = ProcessTopIndex.NO;
 			return poiUIFilter;
 		}
+		processTopIndexAfterLoad = processAfter;
 		return null;
 	}
 }

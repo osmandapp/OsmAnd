@@ -71,8 +71,6 @@ public class SearchUtils {
 				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
 				}
-			} else {
-				filter = new PoiUIFilter(null, app, "");
 			}
 		}
 		return filter;
