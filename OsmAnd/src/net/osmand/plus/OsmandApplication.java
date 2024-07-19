@@ -220,6 +220,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
+	private float density = 1f;
 	// Typeface
 
 	@Override
@@ -494,6 +495,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+		if(density != resources.getDisplayMetrics().density) {
+			density = resources.getDisplayMetrics().density;
+			getUIUtilities().clearCache();
+		}
 
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {

@@ -130,6 +130,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		redLinesPaint = initPaintWithStyle(Style.STROKE, colorNorthArrow);
 		blueLinesPaint = initPaintWithStyle(Style.STROKE, colorHeadingArrow);
 
+		updatePaints();
+
+		for (int i = 0; i < 72; i++) {
+			degrees[i] = Math.toRadians(i * 5);
+		}
+	}
+
+	private void updatePaints() {
 		float circleTextSize = TEXT_SIZE * app.getResources().getDisplayMetrics().density;
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
@@ -139,10 +147,12 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		circleAttrsAlt = new RenderingLineAttributes("rulerCircleAlt");
 		circleAttrsAlt.paint2.setTextSize(circleTextSize);
 		circleAttrsAlt.paint3.setTextSize(circleTextSize);
+	}
 
-		for (int i = 0; i < 72; i++) {
-			degrees[i] = Math.toRadians(i * 5);
-		}
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updatePaints();
 	}
 
 	private void initCenterIcon(@NonNull OsmandMapTileView view) {

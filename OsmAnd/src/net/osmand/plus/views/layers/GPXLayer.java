@@ -322,6 +322,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		initUI();
+	}
+
+	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		drawMovableWpt(canvas, tileBox);
 	}

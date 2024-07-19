@@ -177,6 +177,12 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		canvas.rotate(90, centerX, centerY);
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		previewIcon = null;
+	}
+
 	private void fillPreviewLineArrays(List<GeometryWayPoint> points) {
 		fillDistancesAngles(points);
 		if (routeColoringType.isSolidSingleColor()) {
