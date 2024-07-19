@@ -18,6 +18,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
@@ -211,6 +212,12 @@ public class PoiFiltersHelper {
 			}
 		}
 		return null;
+	}
+
+	@Nullable
+	public PoiUIFilter getFilter(TopIndexFilter topIndexFilter, Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+		PoiUIFilter poiUIFilter = new PoiUIFilter(topIndexFilter, acceptedTypes, application);
+		return addTopPoiFilter(poiUIFilter);
 	}
 
 	public void reloadAllPoiFilters() {

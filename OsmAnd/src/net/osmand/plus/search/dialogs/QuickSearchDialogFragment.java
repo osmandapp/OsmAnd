@@ -51,6 +51,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -107,13 +108,17 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchWord;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -204,6 +209,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
+	private boolean processTopIndexAfterLoad = false;
 
 	public enum QuickSearchTab {
 		HISTORY,
@@ -316,6 +322,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						custom.clearFilter();
 						custom.updateTypesToAccept(abstractPoiType);
 						filterId = custom.getFilterId();
+					}
+				} else if (object instanceof TopIndexFilter) {
+					TopIndexFilter topIndexFilter = (TopIndexFilter) object;
+					PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter);
+					if (poiUIFilter != null) {
+						filterId = poiUIFilter.getFilterId();
+						filterByName = topIndexFilter.getValue();
+					} else {
+						processTopIndexAfterLoad = true;
 					}
 				}
 				if (filterId != null) {
@@ -1550,6 +1565,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						regionResultCollection = null;
 						results = new ArrayList<>();
 						showApiResults(searchApi, apiResults, phrase, hasRegionCollection, resultListener);
+						if (processTopIndexAfterLoad) {
+							app.runInUIThread(() -> {
+								buttonToolbarFilter.performClick();
+							});
+							processTopIndexAfterLoad = false;
+						}
 						break;
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
@@ -2089,5 +2110,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		// return true if search done, false if next search will be ran immediately
 		boolean searchFinished(SearchPhrase phrase);
+	}
+
+	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter) {
+		PoiUIFilter poiUIFilter = app.getPoiFilters().getFilterById(topIndexFilter.getFilterId());
+		if (poiUIFilter != null) {
+			// use saved filter
+			processTopIndexAfterLoad = false;
+			return poiUIFilter;
+		} else if (searchHelper != null && searchHelper.getResultCollection() != null) {
+			// collect poi categories and subtypes from searching result
+			List<SearchResult> searchResults = searchHelper.getResultCollection().getCurrentSearchResults();
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new HashMap<>();
+			for (SearchResult res : searchResults) {
+				if (res.object instanceof Amenity) {
+					Amenity am = (Amenity) res.object;
+					LinkedHashSet<String> subtypes = acceptedTypes.computeIfAbsent(am.getType(), s -> new LinkedHashSet<>());
+					subtypes.add(am.getSubType());
+				}
+			}
+			poiUIFilter = app.getPoiFilters().getFilter(topIndexFilter, acceptedTypes);
+			processTopIndexAfterLoad = false;
+			return poiUIFilter;
+		}
+		return null;
 	}
 }
