@@ -611,20 +611,41 @@ public class RoutingOptionsHelper {
 		return null;
 	}
 
-	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
-		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = app.getRouter(applicationMode);
+	@NonNull
+	public List<RoutingParameter> getAvoidParameters(@NonNull ApplicationMode mode) {
+		List<RoutingParameter> list = new ArrayList<>();
+		GeneralRouter router = app.getRouter(mode);
 		if (router != null) {
-			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
-				String param = e.getKey();
-				GeneralRouter.RoutingParameter routingParameter = e.getValue();
-				if (param.startsWith("avoid_")) {
-					avoidParameters.add(routingParameter);
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
+			for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
+				String key = entry.getKey();
+				if (key.startsWith(AVOID_ROUTING_PARAMETER_PREFIX)) {
+					list.add(entry.getValue());
 				}
 			}
 		}
-		return avoidParameters;
+		Collator collator = OsmAndCollator.primaryCollator();
+		list.sort((o1, o2) -> {
+			String name1 = AndroidUtils.getRoutingStringPropertyName(app, o1.getId(), o1.getName());
+			String name2 = AndroidUtils.getRoutingStringPropertyName(app, o2.getId(), o2.getName());
+
+			return collator.compare(name1, name2);
+		});
+		return list;
+	}
+
+	@NonNull
+	public Map<RoutingParameter, Boolean> getAvoidParametersWithStates(@NonNull OsmandApplication app) {
+		Map<RoutingParameter, Boolean> map = new LinkedHashMap<>();
+		ApplicationMode mode = app.getRoutingHelper().getAppMode();
+		List<RoutingParameter> parameters = getAvoidParameters(mode);
+
+		for (RoutingParameter parameter : parameters) {
+			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			map.put(parameter, preference.getModeValue(mode));
+		}
+
+		return map;
 	}
 
 	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {

@@ -1297,15 +1297,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 		if (item != null) {
 			item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-			List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
-			if (parameter instanceof AvoidRoadsRoutingParameter) {
-				impassableRoads.addAll(app.getAvoidSpecificRoads().getImpassableRoads());
-			}
 
-			List<RoutingParameter> avoidedParameters = getAvoidedParameters(app);
-			createImpassableRoadsItems(mapActivity, impassableRoads, parameter, mode, item);
-			createAvoidParametersItems(mapActivity, avoidedParameters, parameter, mode, item);
-			if (avoidedParameters.size() > 0 || impassableRoads.size() > 0) {
+			List<RoutingParameter> parameters = getAvoidedParameters(app);
+			createAvoidParametersItems(mapActivity, parameters, parameter, mode, item);
+
+			List<AvoidRoadInfo> avoidRoadInfos = new ArrayList<>();
+			if (parameter instanceof AvoidRoadsRoutingParameter) {
+				avoidRoadInfos.addAll(app.getAvoidSpecificRoads().getImpassableRoads());
+			}
+			createImpassableRoadsItems(mapActivity, avoidRoadInfos, parameter, mode, item);
+
+			if (parameters.size() > 0 || avoidRoadInfos.size() > 0) {
 				optionsContainer.addView(item, getContainerButtonLayoutParams(mapActivity, true));
 			}
 		}
@@ -1313,17 +1315,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	@NonNull
 	private List<RoutingParameter> getAvoidedParameters(@NonNull OsmandApplication app) {
-		ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
-		List<RoutingParameter> avoidParameters = app.getRoutingOptionsHelper().getAvoidRoutingPrefsForAppMode(applicationMode);
-		List<RoutingParameter> avoidedParameters = new ArrayList<>();
-		for (int i = 0; i < avoidParameters.size(); i++) {
-			RoutingParameter p = avoidParameters.get(i);
-			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-			if (preference.getModeValue(app.getRoutingHelper().getAppMode())) {
-				avoidedParameters.add(p);
+		List<RoutingParameter> parameters = new ArrayList<>();
+		Map<RoutingParameter, Boolean> map = app.getRoutingOptionsHelper().getAvoidParametersWithStates(app);
+
+		for (Map.Entry<RoutingParameter, Boolean> entry : map.entrySet()) {
+			if (entry.getValue()) {
+				parameters.add(entry.getKey());
 			}
 		}
-		return avoidedParameters;
+		return parameters;
 	}
 
 	private void createImpassableRoadsItems(MapActivity mapActivity, List<AvoidRoadInfo> impassableRoads,
