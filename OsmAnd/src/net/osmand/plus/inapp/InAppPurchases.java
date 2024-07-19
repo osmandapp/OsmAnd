@@ -650,7 +650,7 @@ public abstract class InAppPurchases {
 			Period subscriptionPeriod = subscription.getSubscriptionPeriod();
 			long originalNumberOfUnits = subscriptionPeriod != null ? subscriptionPeriod.getNumberOfUnits() : 1;
 			String originalUnitsStr = getTotalUnitsString(ctx, true).toLowerCase();
-			String originalPriceStr = subscription.getPrice(ctx);
+			String originalPriceStr = subscription.getOriginalPrice(ctx);
 			String priceStr = introductoryPrice;
 
 			String pricePeriod;
