@@ -164,7 +164,9 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost + 0.1 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+			} else if (cst.cost + 2.0 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+				// squareRootDist is inaccurate by 0.0015%-0.0036% according to tests
+				// think about multiplier * 1.00004f instead of the const (2.0)
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}
