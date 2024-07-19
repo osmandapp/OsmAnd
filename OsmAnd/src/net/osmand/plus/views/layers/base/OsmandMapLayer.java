@@ -83,6 +83,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
+	protected float density = 1f;
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
@@ -235,6 +236,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
 		}
+		float density = getContext().getResources().getDisplayMetrics().density;
+		if (this.density != density) {
+			this.density = density;
+			updateResources();
+		}
+	}
+
+	protected void updateResources(){
+
 	}
 
 	@Override

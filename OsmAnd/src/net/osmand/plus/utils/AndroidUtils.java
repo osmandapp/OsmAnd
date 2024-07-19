@@ -97,6 +97,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1207,7 +1208,7 @@ public class AndroidUtils {
 	}
 
 	@DrawableRes
-	public static int getActivityTypeIcon(@NonNull Context ctx,  @NonNull OsmRouteType activityType) {
+	public static int getActivityTypeIcon(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
 		int iconId = ctx.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", ctx.getPackageName());
 		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
 	}
@@ -1438,6 +1439,14 @@ public class AndroidUtils {
 
 	public static Display getDisplay(@NonNull Context context) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			OsmandMap osmandMap = app.getOsmandMap();
+			if (osmandMap != null) {
+				MapActivity activity = osmandMap.getMapView().getMapActivity();
+				if (activity != null) {
+					return activity.getDisplay();
+				}
+			}
 			DisplayManager manager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
 			return manager.getDisplay(Display.DEFAULT_DISPLAY);
 		} else {

@@ -149,7 +149,8 @@ public class LocaleHelper {
 
 	@Nullable
 	public Resources getLocalizedResources(Context ctx) {
-		if (localizedResources == null && localizedConf != null) {
+		if (localizedResources == null && localizedConf != null
+				|| (localizedResources != null && localizedResources.getDisplayMetrics().density != ctx.getResources().getDisplayMetrics().density)) {
 			localizedResources = ctx.createConfigurationContext(localizedConf).getResources();
 		}
 		return localizedResources;
