@@ -3510,7 +3510,7 @@
     <string name="shared_string_meters">meter</string>
     <string name="vessel_height_warning_link">Sett skipshøyde</string>
     <string name="vessel_height_limit_description">Sett skipshøyde for å unngå lave broer. Husk at hvis broen åpner seg, brukes høyden fra åpen tilstand.</string>
-    <string name="vessel_width_limit_description">Sett skipsbredde for å unngå smale broer</string>
+    <string name="vessel_width_limit_description">Still inn fartøyets bredde for å unngå smale broer</string>
     <string name="width_limit_description">Angi kjøretøybredde, noen rutebegrensninger for brede kjøretøy kan tilkomme.</string>
     <string name="height_limit_description">Angi kjøretøyhøyde, noen rutebegrensninger for høye kjøretøy kan tilkomme.</string>
     <string name="weight_limit_description">Angi kjøretøyvekt, noen rutebegrensninger for tunge kjøretøy kan tilkomme.</string>
