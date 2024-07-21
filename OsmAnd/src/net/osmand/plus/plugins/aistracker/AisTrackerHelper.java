@@ -165,11 +165,11 @@ public final class AisTrackerHelper {
     }
 
     @Nullable
-    public static Location getNewPosition(@Nullable Location loc, double time) {
+    public static Location getNewPosition(@Nullable Location loc, double timeInHours) {
         if (loc != null) {
             if (loc.hasBearing() && loc.hasSpeed()) {
                 LatLonPoint a = new LatLonPoint(loc.getLatitude(), loc.getLongitude());
-                LatLonPoint b = a.getPoint(loc.getSpeed() * time * Math.PI / 5556.0,
+                LatLonPoint b = a.getPoint(loc.getSpeed() * timeInHours * Math.PI / 5556.0,
                         bearingInRad(loc.getBearing()));
                 Location newX = new Location(loc);
                 newX.setLongitude(b.getLongitude());

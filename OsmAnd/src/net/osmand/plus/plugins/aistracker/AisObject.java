@@ -32,6 +32,7 @@ import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SOG;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.CPA_UPDATE_TIMEOUT_IN_SECONDS;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
+import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getNewPosition;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_DEFAULT_WARNING_TIME;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_WARNING_DEFAULT_DISTANCE;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_OBJ_LOST_DEFAULT_TIMEOUT;
@@ -550,9 +551,9 @@ public class AisObject {
     private boolean checkCpaWarning() {
         if (isMovable() && (objectClass != AIS_AIRPLANE) && (cpaWarningTime > 0)) {
             if (checkForCpaTimeout() && (ownPosition != null)) {
-                Location aisPosition = getLocation();
+                Location aisPosition = getCurrentLocation();
                 if (aisPosition != null) {
-                    getCpa(ownPosition, getLocation(), cpa);
+                    getCpa(ownPosition, aisPosition, cpa);
                     lastCpaUpdate = System.currentTimeMillis();
                 }
             }
@@ -636,6 +637,19 @@ public class AisObject {
             return loc;
         }
         return null;
+    }
+    /* in contrast to getLocation(), this method considers the timestamp of the creation
+    *  of the AIS object and adjusts the received position using the time difference
+    *  between now and the timestamp (assuming that course and speed is constant) */
+    @Nullable
+    public Location getCurrentLocation() {
+        Location loc = getLocation();
+        Location newLocation = null;
+        if (loc != null) {
+            double ageInHours = (System.currentTimeMillis() - this.lastUpdate) / 1000.0 / 3600.0;
+            newLocation = getNewPosition(loc, ageInHours);
+        }
+        return newLocation;
     }
     @Nullable
     public String getCallSign() {

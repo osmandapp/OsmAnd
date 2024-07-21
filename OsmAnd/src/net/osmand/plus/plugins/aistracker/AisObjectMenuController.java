@@ -44,7 +44,7 @@ public class AisObjectMenuController extends MenuController {
         if ((aisObject.getCog() != AisObjectConstants.INVALID_COG) &&
                 (aisObject.getSog() != AisObjectConstants.INVALID_SOG)) {
             AisTrackerHelper.Cpa cpa = new AisTrackerHelper.Cpa();
-            Location aisLocation = aisObject.getLocation();
+            Location aisLocation = aisObject.getCurrentLocation();
             if ((aisLocation != null) && (myLocation != null)) {
                 getCpa(myLocation, aisLocation, cpa);
                 if (cpa.isValid()) {
