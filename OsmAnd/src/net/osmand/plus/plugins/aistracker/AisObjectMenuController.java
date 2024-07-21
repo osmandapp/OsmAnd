@@ -4,7 +4,6 @@ import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -118,7 +117,7 @@ public class AisObjectMenuController extends MenuController {
         if (position != null) {
             addMenuItem("Position",
                     LocationConvert.convertLatitude(position.getLatitude(), FORMAT_MINUTES, true) +
-                          ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
+                            ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
                 Location ownPosition = app.getLocationProvider().getLastKnownLocation();
                 AisObject.setOwnPosition(ownPosition);
