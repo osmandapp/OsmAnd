@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-	<string name="auto_25_chars_route_kl">Keep left</string>
+    <string name="quick_action_routes_summary">A toggle to show or hide %1$s on the map.</string>
+    <string name="auto_25_chars_route_kl">Keep left</string>
 	<string name="auto_25_chars_route_kr">Keep right</string>
 	<string name="auto_25_chars_route_tr">Turn right</string>
 	<string name="auto_25_chars_route_tshr">Turn sharply right</string>

@@ -96,7 +96,7 @@ public class QuickAction {
 
 	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
 		String name = getName(context);
-		if (name.equals(getRawName())) {
+		if (name.equals(getRawName()) && !forceUseExtendedName()) {
 			return name;
 		}
 		int actionNameRes = getActionNameRes();
@@ -117,6 +117,10 @@ public class QuickAction {
 
 	public String getRawName() {
 		return name;
+	}
+
+	protected boolean forceUseExtendedName() {
+		return false;
 	}
 
 	@NonNull
