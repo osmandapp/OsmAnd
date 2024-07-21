@@ -2199,14 +2199,14 @@
 \n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich
 \n • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen
 \n</string>
-    <string name="osmand_extended_description_part3">Karten 
-\n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an 
-\n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus 
-\n • zeigen an, wo Sie sind und worauf Sie sehen 
-\n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können 
-\n • speichern Ihre wichtigsten Orte als Favoriten 
-\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise 
-\n • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
+    <string name="osmand_extended_description_part3">Karten
+\n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an
+\n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus
+\n • zeigen an, wo Sie sind und worauf Sie sehen
+\n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können
+\n • speichern Ihre wichtigsten Orte als Favoriten
+\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise
+\n • stellen spezielle Online-Kacheln, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
 \n</string>
     <string name="osmand_extended_description_part4">Skisport
 \n Die OsmAnd-Erweiterung „Skikarte“ ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und anderer Einrichtungen.</string>
@@ -2300,12 +2300,12 @@
 \n • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes) 
 \nOsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung, Programmierung neuer Funktionen oder Kontakt mit anderen Benutzern an der App mitarbeiten. Der Projektfortschritt hängt auch von finanziellen Beiträgen für die Programmierung und das Testen neuer Funktionen ab.
 \n</string>
-    <string name="osmand_plus_extended_description_part3">Kartenansicht 
-\n • Positions- und Richtungsanzeige 
-\n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung 
-\n • Sicherung Ihrer wichtigsten Orte als Favoriten 
-\n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung 
-\n • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz 
+    <string name="osmand_plus_extended_description_part3">Kartenansicht
+\n • Positions- und Richtungsanzeige
+\n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung
+\n • Sicherung Ihrer wichtigsten Orte als Favoriten
+\n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung
+\n • Anzeige spezieller Online-Kacheln, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
 \n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise
 \n</string>
     <string name="quick_action_auto_zoom">Automatische Vergrößerung</string>
@@ -5685,7 +5685,7 @@
 \n
 \n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen
 \n
-\n• Track-Statistiken, Sortierung und Suche behoben
+\n• Track-Statistiken, Sortierung und Suche korrigiert
 \n
 \n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht
 \n
@@ -5833,7 +5833,7 @@
     <string name="location_radius_description">Zeigt den kreisförmigen Bereich an, der die Genauigkeit Ihres aktuellen Standorts darstellt</string>
     <string name="location_radius">Standortradius</string>
     <string name="rendering_avg_info_details">FPS der letzten 1.000 Frames: %1$s
-\nCPU (Tiles): %2$s
+\nCPU (Kacheln): %2$s
 \nCPU (Leerlaufzeit): %3$s
 \nCPU (wartet auf GPU): %4$s</string>
     <string name="resting_position">Ruheposition</string>
