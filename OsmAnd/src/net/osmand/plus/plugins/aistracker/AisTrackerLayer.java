@@ -29,22 +29,22 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
     private static final int START_ZOOM = 10;
     private final AisTrackerPlugin plugin;
-    private Map<Integer, AisObject> aisObjectList;
-    private final int aisObjectListCounterMax = 100;
+    private ConcurrentMap<Integer, AisObject> aisObjectList;
+    private static final int aisObjectListCounterMax = 100;
     private final Context context;
-    private Paint bitmapPaint;
+    private final Paint bitmapPaint;
     private Timer timer;
-    private TimerTask taskCheckAisObjectList;
     private AisMessageListener listener;
     public AisTrackerLayer(@NonNull Context context, @NonNull AisTrackerPlugin plugin) {
         super(context);
@@ -52,7 +52,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         this.context = context;
         this.listener = null;
 
-        this.aisObjectList = new HashMap<>();
+        this.aisObjectList = new ConcurrentHashMap<>();
         this.bitmapPaint = new Paint();
         this.bitmapPaint.setAntiAlias(true);
         this.bitmapPaint.setFilterBitmap(true);
@@ -66,7 +66,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         startNetworkListener();
 
         // for test purposes: remove later...
-        initTestObjects();
+        //initTestObjects();
         //testCpa();
     }
 
@@ -272,7 +272,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         //removeLostAisObjects();
     }
     private void initTimer() {
-        this.taskCheckAisObjectList = new TimerTask() {
+        TimerTask taskCheckAisObjectList;
+        taskCheckAisObjectList = new TimerTask() {
             @Override
             public void run() {
                 Log.d("AisTrackerLayer", "timer task taskCheckAisObjectList running");
@@ -346,7 +347,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         if (obj == null) {
             Log.d("AisTrackerLayer", "add AIS object with MMSI " + ais.getMmsi());
             aisObjectList.put(mmsi, new AisObject(ais));
-            if (aisObjectList.size() >= this.aisObjectListCounterMax) {
+            if (aisObjectList.size() >= aisObjectListCounterMax) {
                 this.removeOldestAisObjectListEntry();
             }
         } else {

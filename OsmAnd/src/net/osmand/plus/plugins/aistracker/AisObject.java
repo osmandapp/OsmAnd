@@ -97,6 +97,7 @@ public class AisObject {
     private static Location ownPosition = null; // used to calculate distances, CPA etc.
     private AisObjType objectClass;
     private Bitmap bitmap = null;
+    private boolean bitmapValid = false;
     private int bitmapColor;
     private AisTrackerHelper.Cpa cpa;
     private long lastCpaUpdate = 0;
@@ -340,6 +341,10 @@ public class AisObject {
         }
     }
 
+    private void invalidateBitmap() {
+        this.bitmapValid = false;
+    }
+
     public void set(@NonNull AisObject ais) {
         this.ais_mmsi = ais.getMmsi();
         this.ais_msgType = ais.getMsgType();
@@ -380,14 +385,16 @@ public class AisObject {
             cpa = new AisTrackerHelper.Cpa();
         }
         this.initObjectClass();
-        this.bitmap = null;
+        this.invalidateBitmap();
         this.bitmapColor = 0;
     }
 
     private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
+        invalidateBitmap();
         if (isLost(vesselLostTimeoutInMinutes)) {
             if (isMovable()) {
                 this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel_cross);
+                this.bitmapValid = true;
             }
         } else {
             switch (this.objectClass) {
@@ -399,21 +406,27 @@ public class AisObject {
                 case AIS_VESSEL_COMMERCIAL:
                 case AIS_INVALID:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel);
+                    this.bitmapValid = true;
                     break;
                 case AIS_LANDSTATION:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_land);
+                    this.bitmapValid = true;
                     break;
                 case AIS_AIRPLANE:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_plane);
+                    this.bitmapValid = true;
                     break;
                 case AIS_SART:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_sar);
+                    this.bitmapValid = true;
                     break;
                 case AIS_ATON:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_aton);
+                    this.bitmapValid = true;
                     break;
                 case AIS_ATON_VIRTUAL:
                     this.bitmap = mapLayer.getBitmap(R.drawable.ais_aton_virt);
+                    this.bitmapValid = true;
                     break;
             }
         }
@@ -453,7 +466,7 @@ public class AisObject {
 
     public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
                      @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-        if ((this.bitmap == null) || isLost(vesselLostTimeoutInMinutes)) {
+        if ((!this.bitmapValid) || isLost(vesselLostTimeoutInMinutes)) {
             setBitmap(mapLayer);
         }
         if (checkCpaWarning()) {
@@ -572,14 +585,6 @@ public class AisObject {
     public static void setCpaWarningTime(int warningTime) { cpaWarningTime = warningTime; }
     public static void setCpaWarningDistance(float warningDistance) { cpaWarningDistance = warningDistance; }
     public static void setOwnPosition(Location position) { ownPosition = position; }
-/*    public static void setOwnPosition(Location position) {
-        ownPosition = position;
-        if (ownPosition != null) {
-            ownPosition.setBearing(180.0f); // test
-            ownPosition.setSpeed(0.1f); // test (m/s)
-        }
-    }
- */
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed
@@ -663,18 +668,6 @@ public class AisObject {
                 return("WIG, Hazardous category C");
             case 24:
                 return("WIG, Hazardous category D");
-            case 40:
-                return("High Speed Craft (HSC)");
-            case 41:
-                return("HSC, Hazardous category A");
-            case 42:
-                return("HSC, Hazardous category B");
-            case 43:
-                return("HSC, Hazardous category C");
-            case 44:
-                return("HSC, Hazardous category D");
-            case 49: // HSC, No additional information
-                return("High Speed Craft (HSC)");
             case 30:
                 return("Fishing");
             case 31:
@@ -687,6 +680,22 @@ public class AisObject {
                 return("Diving ops");
             case 35:
                 return("Military ops");
+            case 36:
+                return("Sailing");
+            case 37:
+                return("Pleasure Craft");
+            case 40:
+                return("High Speed Craft (HSC)");
+            case 41:
+                return("HSC, Hazardous category A");
+            case 42:
+                return("HSC, Hazardous category B");
+            case 43:
+                return("HSC, Hazardous category C");
+            case 44:
+                return("HSC, Hazardous category D");
+            case 49: // HSC, No additional information
+                return("High Speed Craft (HSC)");
             case 50:
                 return("Pilot Vessel");
             case 51:
@@ -707,10 +716,6 @@ public class AisObject {
                 return("Medical Transport");
             case 59:
                 return("Noncombatant ship according to RR Resolution No. 18");
-            case 36:
-                return("Sailing");
-            case 37:
-                return("Pleasure Craft");
             case 60:
                 return("Passenger");
             case 61:
@@ -722,7 +727,7 @@ public class AisObject {
             case 64:
                 return("Passenger, Hazardous category D");
             case 69: // Passenger, No additional information
-                return("Passenger");
+                return("Passenger/Cruise/Ferry");
             case 70: // Cargo, all ships of this type
                 return("Cargo");
             case 71:

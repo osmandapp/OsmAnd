@@ -34,7 +34,6 @@ import java.util.TimerTask;
 public class AisMessageListener {
     private AisTrackerLayer aisLayer;
     private Timer timer;
-    private TimerTask taskCheckNetworkConnection;
     private DatagramSocket udpSocket;
     private Socket tcpSocket;
     private InputStream tcpStream;
@@ -54,6 +53,7 @@ public class AisMessageListener {
         }
     }
     public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer aisLayer) {
+        TimerTask taskCheckNetworkConnection;
         initMembers(aisLayer);
         taskCheckNetworkConnection = new TimerTask() {
             @Override
@@ -186,9 +186,8 @@ public class AisMessageListener {
         switch (aisType) {
             case 1: AISMessage01 aisMsg01 = (AISMessage01)obj; // position report class A
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg01.getMMSI()
-                        + " Type: " + aisMsg01.getMessageType()
-                        + " ROT: " + aisMsg01.getRateOfTurn());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg01);
+                        + " Type: " + aisMsg01.getMessageType());
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg01);
                 mmsi = aisMsg01.getMMSI();
                 msgType = aisMsg01.getMessageType();
                 navStatus = aisMsg01.getNavigationalStatus();
@@ -207,7 +206,7 @@ public class AisMessageListener {
             case 2: AISMessage02 aisMsg02 = (AISMessage02)obj; // position report class A
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg02.getMMSI()
                         + " Type: " + aisMsg02.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg02);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg02);
                 mmsi = aisMsg02.getMMSI();
                 msgType = aisMsg02.getMessageType();
                 navStatus = aisMsg02.getNavigationalStatus();
@@ -226,7 +225,7 @@ public class AisMessageListener {
             case 3: AISMessage03 aisMsg03 = (AISMessage03)obj; // position report class A
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg03.getMMSI()
                         + " Type: " + aisMsg03.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg03);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg03);
                 mmsi = aisMsg03.getMMSI();
                 msgType = aisMsg03.getMessageType();
                 navStatus = aisMsg03.getNavigationalStatus();
@@ -245,7 +244,7 @@ public class AisMessageListener {
             case 4: AISMessage04 aisMsg04 = (AISMessage04)obj; // base station report
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg04.getMMSI()
                         + " Type: " + aisMsg04.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg04);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg04);
                 mmsi = aisMsg04.getMMSI();
                 msgType = aisMsg04.getMessageType();
                 if (aisMsg04.hasLatitude()) { lat = aisMsg04.getLatitudeInDegrees(); }
@@ -256,7 +255,7 @@ public class AisMessageListener {
             case 5: AISMessage05 aisMsg05 = (AISMessage05)obj; // static and voyage related data
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg05.getMMSI()
                         + " Type: " + aisMsg05.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg05);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg05);
                 mmsi = aisMsg05.getMMSI();
                 msgType = aisMsg05.getMessageType();
                 imo = aisMsg05.getIMONumber();
@@ -281,7 +280,7 @@ public class AisMessageListener {
             case 9: AISMessage09 aisMsg09 = (AISMessage09)obj; // SAR aircraft position report
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg09.getMMSI()
                         + " Type: " + aisMsg09.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg09);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg09);
                 mmsi = aisMsg09.getMMSI();
                 msgType = aisMsg09.getMessageType();
                 timeStamp = aisMsg09.getTimeStamp();
@@ -296,7 +295,7 @@ public class AisMessageListener {
             case 18: AISMessage18 aisMsg18 = (AISMessage18)obj; // basic class B position report
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg18.getMMSI()
                         + " Type: " + aisMsg18.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg18);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg18);
                 mmsi = aisMsg18.getMMSI();
                 msgType = aisMsg18.getMessageType();
                 if (aisMsg18.hasTimeStamp()) { timeStamp = aisMsg18.getTimeStamp(); }
@@ -312,7 +311,7 @@ public class AisMessageListener {
             case 19: AISMessage19 aisMsg19 = (AISMessage19)obj; // extended class B position report
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg19.getMMSI()
                         + " Type: " + aisMsg19.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg19);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg19);
                 mmsi = aisMsg19.getMMSI();
                 msgType = aisMsg19.getMessageType();
                 shipType = aisMsg19.getTypeOfShipAndCargoType();
@@ -333,7 +332,7 @@ public class AisMessageListener {
             case 21: AISMessage21 aisMsg21 = (AISMessage21)obj; // aid-to-navigation report
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg21.getMMSI()
                         + " Type: " + aisMsg21.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg21);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg21);
                 mmsi = aisMsg21.getMMSI();
                 msgType = aisMsg21.getMessageType();
                 dimensionToBow = aisMsg21.getBow();
@@ -350,7 +349,7 @@ public class AisMessageListener {
             case 24: AISMessage24 aisMsg24 = (AISMessage24)obj; // static data report (like type 5)
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg24.getMMSI()
                         + " Type: " + aisMsg24.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg24);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg24);
                 mmsi = aisMsg24.getMMSI();
                 msgType = aisMsg24.getMessageType();
                 callSign = aisMsg24.getCallSign();
@@ -368,7 +367,7 @@ public class AisMessageListener {
             case 27: AISMessage27 aisMsg27 = (AISMessage27)obj; // long range broadcast message
                 Log.d("AisMessageListener","handleAisMessage() MMSI: " + aisMsg27.getMMSI()
                         + " Type: " + aisMsg27.getMessageType());
-                Log.d("AisMessageListener","handleAisMessage() " + aisMsg27);
+                Log.d("AisMessageListener","handleAisMessage()" + aisMsg27);
                 mmsi = aisMsg27.getMMSI();
                 msgType = aisMsg27.getMessageType();
                 navStatus = aisMsg27.getNavigationalStatus();
@@ -391,11 +390,9 @@ public class AisMessageListener {
         aisLayer.updateAisObjectList(ais);
     }
     private void initEmbeddedLister(int aisType, @NonNull SentenceListener listener) {
-        AisMessageListener.this.sentenceReader.addSentenceListener(listener);
-        /*
+        //AisMessageListener.this.sentenceReader.addSentenceListener(listener); // listen to all (!) NMEA messages
         AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDM);
         AisMessageListener.this.sentenceReader.addSentenceListener(listener, SentenceId.VDO);
-         */
         AisMessageListener.this.listenerList.push(listener);
         Log.d("AisMessageListener","Listener Type " + aisType + " started");
     }
