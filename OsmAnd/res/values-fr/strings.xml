@@ -5834,4 +5834,6 @@
 \nProcesseur (tuiles) : %2$s
 \nProcesseur (durée d\'inactivité) : %3$s
 \nProcesseur (attente du GPU) : %4$s</string>
+    <string name="driving_region_india">Inde</string>
+    <string name="driving_region_uk">Royaume-Uni et équivalents</string>
 </resources>
