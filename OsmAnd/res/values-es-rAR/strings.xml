@@ -5859,4 +5859,6 @@
     <string name="auto_25_chars_route_tu">Da la vuelta</string>
     <string name="auto_25_chars_route_kl">Mantente a la izquierda</string>
     <string name="auto_25_chars_route_kr">Mantente a la derecha</string>
+    <string name="driving_region_india">India</string>
+    <string name="driving_region_uk">Reino Unido y similares</string>
 </resources>
