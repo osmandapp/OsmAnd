@@ -20,7 +20,6 @@
     <string name="driving_region_us">EEBB</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asia, Hego Amerika eta antzekoak</string>
-    <string name="driving_region_uk">Erresuma Batua, India eta antzekoak</string>
     <string name="speak_title">Iragarri…</string>
     <string name="speak_descr">Ezarri iragarpenak: Kaleen izenak, trafiko abisuak (geldialdi behartuak, abiadura murriztaileak), Abiadura-kameren iragarpena, eta abiadura mugak.</string>
     <string name="speak_street_names">Kaleen izenak (TTS)</string>

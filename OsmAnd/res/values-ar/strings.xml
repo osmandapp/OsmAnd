@@ -176,7 +176,6 @@
     <string name="driving_region_us">الولايات المتحدة</string>
     <string name="driving_region_canada">كندا</string>
     <string name="driving_region_europe_asia">أوروبا، آسيا، أمريكا اللاتينية، ومناطق مماثلة</string>
-    <string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
     <string name="speak_title">الإشعارات…</string>
     <string name="osb_author_or_password_not_specified">أدخل اسم المستخدم وكلمة السر في الإعدادات</string>
     <string name="clear_intermediate_points">إزالة الوجهات الوسطى</string>

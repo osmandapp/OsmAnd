@@ -599,7 +599,6 @@
     <string name="edit_tilesource_choose_existing">നിലവിലുള്ളത് തെരഞ്ഞെടുക്കുക…</string>
     <string name="driving_region_descr">ഡ്രൈവിങ്ങ് ദിശ തിരഞ്ഞെടുക്കുക(രാജ്യം): യുഎസ്, യൂറോപ്പ്, യൂകെ , ഏഷ്യ , മറ്റുള്ളവ</string>
     <string name="driving_region">ഡ്രൈ‌വിങ്ങ് റീജിയണ്‍(രാജ്യം)</string>
-    <string name="driving_region_uk">ഇന്ത്യ, യൂകെ, ജപ്പാന്‍</string>
     <string name="speak_street_names">തെരുവ് നാമങ്ങള്‍ (ടിടിഎസ്)</string>
     <string name="speak_speed_limit">വേഗപരിധി</string>
     <string name="speak_cameras">സ്പീഡ് ക്യാമറ</string>

@@ -1104,7 +1104,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und ähnliche</string>
-    <string name="driving_region_uk">GB, Indien und andere</string>
     <string name="driving_region_australia">Australien</string>
     <string name="driving_region">Verkehrsregion</string>
     <string name="about_version">Version:</string>

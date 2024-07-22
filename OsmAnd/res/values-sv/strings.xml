@@ -969,7 +969,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika och liknande</string>
-    <string name="driving_region_uk">UK, Indien och liknande</string>
     <string name="local_osm_changes_backup_successful">OSM-ändringsfil genererades %1$s</string>
     <string name="about_version">Version:</string>
     <string name="shared_string_about">Om</string>
