@@ -5844,4 +5844,6 @@
     <string name="auto_25_chars_route_tr">Gire a la derecha</string>
     <string name="auto_25_chars_route_tslr">Gire ligeramente a la derecha</string>
     <string name="auto_25_chars_route_kr">Mantengase a la derecha</string>
+    <string name="driving_region_uk">Reino Unido y similares</string>
+    <string name="driving_region_india">India</string>
 </resources>
