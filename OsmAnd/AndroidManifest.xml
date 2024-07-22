@@ -4,6 +4,10 @@
 	android:installLocation="auto"
 	package="net.osmand.plus">
 
+	<permission
+		android:name="net.osmand.SERVICE_PERMISSION"
+		android:protectionLevel="signature" />
+
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -1135,11 +1139,9 @@
 			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"
+			android:permission="net.osmand.SERVICE_PERMISSION"
 			android:foregroundServiceType="location"
 			android:stopWithTask="false">
-			<intent-filter>
-				<action android:name="net.osmand.plus.NavigationService" />
-			</intent-filter>
 		</service>
 
 		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
@@ -1161,6 +1163,7 @@
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false"
 			android:exported="true"
+			android:permission="net.osmand.SERVICE_PERMISSION"
 			android:foregroundServiceType="dataSync" />
 
 		<meta-data android:name="com.google.android.gms.car.application"
