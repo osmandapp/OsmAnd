@@ -26,7 +26,6 @@
     <string name="driving_region_us">Sjedinjene Američke Države</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Evropa, Azija, Južna Amerika i slične</string>
-    <string name="driving_region_uk">Velika Britanija, Indija i slične</string>
     <string name="local_index_tile_data_minzoom">Najmanje uveličanje: %1$s</string>
     <string name="speak_title">Najavi…</string>
     <string name="speak_descr">Podesi najave naziva ulica, saobraćajnih upozorenja (ležeći policajci, znaci zaustavljanja), radara i ograničenja brzine.</string>

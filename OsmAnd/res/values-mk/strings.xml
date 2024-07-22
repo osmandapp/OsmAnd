@@ -3583,7 +3583,6 @@
     <string name="driving_region_us">SAD</string>
     <string name="driving_region_europe_asia">Evropa, Azija, Latinska Amerika i slično</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_uk">UK, India i slicno</string>
     <string name="driving_region_australia">Avstralija</string>
     <string name="speak_title">Objavete…</string>
     <string name="speak_descr">Postavete objavuvanje na iminja na ulici, soobraḱajni predupreduvanja (prisilni zapiranja, udari so brzina), predupreduvanja za kameri za brzina i ograničuvanja na brzinata.</string>

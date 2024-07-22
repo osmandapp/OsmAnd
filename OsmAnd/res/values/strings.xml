@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="driving_region_uk">UK and similar</string>
+	<string name="driving_region_india">India</string>
 	<string name="auto_25_chars_route_kl">Keep left</string>
 	<string name="auto_25_chars_route_kr">Keep right</string>
 	<string name="auto_25_chars_route_tr">Turn right</string>
@@ -4352,7 +4354,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
-    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings, and speed limits.</string>

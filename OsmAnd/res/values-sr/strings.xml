@@ -27,7 +27,6 @@
     <string name="driving_region_us">Сједињене Америчке Државе</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Европа, Aзија, Јужна Америка и сличне</string>
-    <string name="driving_region_uk">Велика Британија, Индија и сличне</string>
     <string name="local_index_tile_data_minzoom">Најмање увеличање: %1$s</string>
     <string name="speak_title">Најави…</string>
     <string name="speak_descr">Подесите најаве назива улица, саобраћајних упозорења (лежећи, знаци заустављања), радара и ограничења брзине.</string>

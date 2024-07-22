@@ -29,7 +29,6 @@
     <string name="driving_region_us">ЗША</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Еўропа, Азія, Лацінская Амерыка ды іншыя</string>
-    <string name="driving_region_uk">Вялікабрытанія, Індыія ды іншыя</string>
     <string name="speak_title">Агалошваць…</string>
     <string name="speak_descr">Наладжванне агалошвання назваў вуліц, дарожных апавяшчэнняў (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярог пра камеры хуткасці, абмежаванні хуткасці.</string>
     <string name="speak_street_names">Назвы вуліц (TTS)</string>

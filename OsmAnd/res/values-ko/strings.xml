@@ -678,7 +678,6 @@
     <string name="driving_region_us">미국</string>
     <string name="driving_region_canada">캐나다</string>
     <string name="driving_region_europe_asia">한국 &amp; 유럽</string>
-    <string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
     <string name="speak_title">안내…</string>
     <string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
     <string name="speak_street_names">도로명 (TTS)</string>

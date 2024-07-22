@@ -1041,7 +1041,6 @@
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
-    <string name="driving_region_uk">Reino Unido, India y similares</string>
     <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="edit_tilesource_minzoom">Zum mínimo</string>
