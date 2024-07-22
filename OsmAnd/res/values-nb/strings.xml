@@ -5615,4 +5615,6 @@
     <string name="quick_action_display_position_in_center">Vis alltid posisjon i midten</string>
     <string name="allow_display_on_top">Tillat visning oppå</string>
     <string name="allow_display_on_top_description">Tillat visning av karttekster oppå hverandre</string>
+    <string name="driving_region_india">India</string>
+    <string name="driving_region_uk">Storbritannia og lignende</string>
 </resources>
