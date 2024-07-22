@@ -5847,4 +5847,6 @@
     <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
     <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Bitte wenden</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">UK und ähnlich</string>
 </resources>
