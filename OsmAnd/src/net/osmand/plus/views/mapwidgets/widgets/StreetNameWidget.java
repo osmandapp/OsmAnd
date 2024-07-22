@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-
 import static java.lang.Math.min;
 
 import android.graphics.Bitmap;
@@ -34,9 +33,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.CurrentPositionHelper;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.LocationPointWrapper;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TextDrawInfo;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -65,6 +65,8 @@ public class StreetNameWidget extends MapWidget {
 	public static final int MAX_SHIELDS_QUANTITY = 3;
 
 	private final WaypointHelper waypointHelper;
+	private final RendererRegistry rendererRegistry;
+
 	private LocationPointWrapper lastPoint;
 
 	private final TextView addressText;
@@ -88,6 +90,7 @@ public class StreetNameWidget extends MapWidget {
 		super(mapActivity, STREET_NAME);
 
 		waypointHelper = app.getWaypointHelper();
+		rendererRegistry = app.getRendererRegistry();
 
 		addressText = view.findViewById(R.id.map_address_text);
 		addressTextShadow = view.findViewById(R.id.map_address_text_shadow);
@@ -133,7 +136,7 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
 			List<RoadShield> shields = streetName.shields;
-			if (!shields.isEmpty() && !shields.equals(cachedRoadShields)) {
+			if (!shields.isEmpty() && !shields.equals(cachedRoadShields) && rendererRegistry.getCurrentSelectedRenderer() != null) {
 				if (setRoadShield(shields)) {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
 					int indexOf = streetName.text.indexOf("»");
@@ -236,7 +239,8 @@ public class StreetNameWidget extends MapWidget {
 		String shieldValue = shield.getValue();
 		String shieldTag = shield.getTag();
 		int[] types = object.getTypes();
-		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+
+		RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
 				.getSearchRequestWithAppliedCustomRules(storage, isNightMode());
 

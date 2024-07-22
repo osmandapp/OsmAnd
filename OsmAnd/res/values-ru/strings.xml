@@ -1289,7 +1289,6 @@
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
     <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и тому подобное</string>
-    <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Маршрут до этой точки</string>
     <string name="context_menu_item_directions_from">Маршрут от этой точки</string>
     <string name="driving_region_canada">Канада</string>

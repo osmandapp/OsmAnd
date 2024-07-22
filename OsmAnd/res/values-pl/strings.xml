@@ -1032,7 +1032,6 @@
     <string name="driving_region_japan">Japonia</string>
     <string name="driving_region_us">Stany Zjednoczone</string>
     <string name="driving_region_europe_asia">Europa, Azja, Ameryka Łacińska i podobne</string>
-    <string name="driving_region_uk">Wielka Brytania, Indie i inne</string>
     <string name="driving_region_descr">Wybierz region jazdy: USA, Europa, Wielka Brytania, Azja i inne.</string>
     <string name="driving_region">Region ruchu</string>
     <string name="driving_region_canada">Kanada</string>

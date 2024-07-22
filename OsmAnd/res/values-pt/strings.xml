@@ -960,7 +960,6 @@
     <string name="driving_region_japan">Japão</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
-    <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Avisar por voz…</string>
     <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos para afrouxar (sinal de STOP, lombas), radares e limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>

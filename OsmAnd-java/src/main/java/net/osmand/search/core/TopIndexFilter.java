@@ -30,6 +30,10 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 		return tag;
 	}
 
+	public String getFilterId() {
+		return MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + tag + "_" + getValueKey(value);
+	}
+
 	@Override
 	public String getName() {
 		// type of object: brand, operator
@@ -48,5 +52,9 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	public static String getValueKey(String value) {
 		return value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
+	}
+
+	public String getValue() {
+		return value;
 	}
 }
