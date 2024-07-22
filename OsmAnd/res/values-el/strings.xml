@@ -4313,4 +4313,20 @@
     <string name="visible_in_3d_mode">Ορατό σε λειτουργία 3D</string>
     <string name="map_3d_mode_hint">Με το παρατεταμένο πάτημα του κουμπιού επιτρέπει την αλλαγή της θέσης του κουμπιού.</string>
     <string name="shared_strings_all_regions">Όλες οι περιοχές</string>
+    <string name="default_buttons">Προεπιλεγμένα κουμπιά</string>
+    <string name="top_widgets_panel">Πάνω πίνακας</string>
+    <string name="shared_string_speedometer">Ταχύμετρο</string>
+    <string name="copy_to_map_favorites">Αντιγραφή στα αγαπημένα</string>
+    <string name="add_button">Προσθήκη κουμπιού</string>
+    <string name="shared_string_last_used">Τελευταίας χρήσης</string>
+    <string name="shared_string_limit">Όριο</string>
+    <string name="speedometer_description">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS</string>
+    <string name="modified_file">Τροποποιημένο αρχείο</string>
+    <string name="bottom_widgets_panel">Κάτω πίνακας</string>
+    <string name="empty_name">Κενό όνομα</string>
+    <string name="simulation_preview_mode_title">Προεπισκόπηση γρήγορης λειτουργίας</string>
+    <string name="exit_number">Αριθμός εξόδου</string>
+    <string name="shared_string_modified">Τροποποιημένα</string>
+    <string name="current_speed_widget_desc">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS.</string>
+    <string name="battery_widget_desc">Εμφανίζετε η στάθμη της μπαταρίας της συσκευή σας.</string>
 </resources>
