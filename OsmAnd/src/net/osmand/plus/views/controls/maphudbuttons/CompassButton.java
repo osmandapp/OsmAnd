@@ -58,7 +58,7 @@ public class CompassButton extends MapButton {
 	private void setupTouchListener() {
 		view.setOnTouchListener(new View.OnTouchListener() {
 
-			private final GestureDetector gestureDetector = new GestureDetector(AndroidUtils.createDisplayContext(app), new GestureDetector.SimpleOnGestureListener() {
+			private final GestureDetector gestureDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public boolean onDoubleTap(@NonNull MotionEvent e) {
 					app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
