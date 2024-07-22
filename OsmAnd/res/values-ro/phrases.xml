@@ -2311,7 +2311,7 @@
     <string name="poi_official_name">Denumire oficială</string>
     <string name="poi_boxing">Box</string>
     <string name="poi_lacrosse">Crosă</string>
-    <string name="poi_shuffleboard">Tabla de șah</string>
+    <string name="poi_shuffleboard">Shuffleboard</string>
     <string name="poi_squash">Dovleac</string>
     <string name="poi_rc_car">Curse de mașini radiocomandate</string>
     <string name="poi_futsal">Fotbal de sală</string>
@@ -2851,7 +2851,7 @@
     <string name="poi_aerodrome_type_military_public">Militar/public</string>
     <string name="poi_aerodrome_type_military">Militară</string>
     <string name="poi_aerodrome_type_public">Publicul</string>
-    <string name="poi_aerodrome_type_regional">Regională</string>
+    <string name="poi_aerodrome_type_regional">Regional</string>
     <string name="poi_aerodrome_type_international">Internațional</string>
     <string name="poi_dispensing_no">Distribuție: nu</string>
     <string name="poi_dispensing_yes">Da;Distribuție</string>
