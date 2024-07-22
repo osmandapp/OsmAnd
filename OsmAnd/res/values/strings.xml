@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="driving_region_uk">UK and similar</string>
+	<string name="hugerock_promo">Hugerock Promo for %1$s months</string>
+	<string name="hugerock_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+	<string name="driving_region_uk">UK and similar</string>
 	<string name="driving_region_india">India</string>
 	<string name="auto_25_chars_route_kl">Keep left</string>
 	<string name="auto_25_chars_route_kr">Keep right</string>

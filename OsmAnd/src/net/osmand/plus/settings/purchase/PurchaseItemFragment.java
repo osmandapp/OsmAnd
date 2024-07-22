@@ -1,6 +1,8 @@
 package net.osmand.plus.settings.purchase;
 
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.GOOGLE;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -24,7 +26,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.chooseplan.TripltekPromoFragment;
+import net.osmand.plus.chooseplan.PromoCompanyFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
@@ -101,6 +103,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			purchase = PurchaseUiDataUtils.createFreeAccPurchaseUiData(app);
 		} else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.tripltek))) {
 			purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
+		} else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.hugerock))) {
+			purchase = PurchaseUiDataUtils.createHugerockPurchaseUiData(app);
 		} else {
 			purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
 		}
@@ -156,9 +160,11 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		// Bottom buttons
 		boolean manageVisible = purchase.isSubscription() && origin == GOOGLE;
 		boolean liveVisible = purchase.isLiveUpdateSubscription();
+
 		setupLiveButton(liveVisible);
 		setupManageButton(manageVisible);
-		setupTripltekPromoDetails(CollectionUtils.startsWithAny(promoType, app.getString(R.string.tripltek)));
+		setupPromoDetails(origin);
+
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
@@ -222,21 +228,21 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		AndroidUiHelper.updateVisibility(osmandLive, visible);
 	}
 
-	private void setupTripltekPromoDetails(boolean visible) {
+	private void setupPromoDetails(@NonNull PurchaseOrigin origin) {
 		FragmentActivity activity = getActivity();
-		if (activity == null) {
-			return;
+		if (activity != null) {
+			boolean visible = CollectionUtils.equalsToAny(origin, TRIPLTEK_PROMO, HUGEROCK_PROMO);
+			View button = view.findViewById(R.id.promo_details);
+			button.setOnClickListener(v -> PromoCompanyFragment.showInstance(activity.getSupportFragmentManager(), origin));
+
+			TextView title = button.findViewById(android.R.id.title);
+			title.setText(R.string.shared_string_details);
+
+			setupSelectableBackground(button);
+			AndroidUiHelper.updateVisibility(button, visible);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.promo_divider), visible);
+			AndroidUiHelper.updateVisibility(button.findViewById(android.R.id.icon), false);
 		}
-		View button = view.findViewById(R.id.promo_details);
-		button.setOnClickListener(v -> TripltekPromoFragment.showInstance(activity.getSupportFragmentManager()));
-
-		TextView title = button.findViewById(android.R.id.title);
-		title.setText(R.string.shared_string_details);
-
-		setupSelectableBackground(button);
-		AndroidUiHelper.updateVisibility(button, visible);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promo_divider), visible);
-		AndroidUiHelper.updateVisibility(button.findViewById(android.R.id.icon), false);
 	}
 
 	@Override
