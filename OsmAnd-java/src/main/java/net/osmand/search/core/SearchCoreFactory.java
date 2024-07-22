@@ -1072,6 +1072,7 @@ public class SearchCoreFactory {
 			initPoiAdditionalTopIndex(phrase);
 			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI);
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
+			Map<String, HashSet<String>> matchedValues = new HashMap<>();
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
 				if (!poiAdditionalTopIndexCache.containsKey(r)) {
@@ -1080,10 +1081,15 @@ public class SearchCoreFactory {
 				if (nm.matches(poiAdditionalTopIndexCache.get(r))) {
 					TopIndexMatch match = matchTopIndex(r, phrase);
 					if (match != null) {
+						if (matchedValues.containsKey(match.subType.name) && matchedValues.get(match.subType.name).contains(match.value)) {
+							continue;
+						}
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = match.translatedValue;
 						res.object = new TopIndexFilter(match.subType, types, match.value);
 						addPoiTypeResult(phrase, resultMatcher, false, null, res);
+						HashSet<String> values = matchedValues.computeIfAbsent(match.subType.name, s -> new HashSet<>());
+						values.add(match.value);
 					}
 				}
 			}
