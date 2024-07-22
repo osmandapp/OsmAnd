@@ -5,9 +5,9 @@ import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_S
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +21,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.helpers.Model3dHelper;
@@ -33,7 +34,6 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
-import net.osmand.plus.settings.fragments.profileappearance.elements.ProfileIconPaletteElements;
 import net.osmand.plus.settings.fragments.profileappearance.elements.LocationIconPaletteElements;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -376,10 +376,15 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<Integer> getProfileIconCardController() {
 		if (profileIconCardController == null) {
-			profileIconCardController = new ProfileIconsController<Integer>(app, ProfileIcons.getIcons(), changedProfile.iconRes) {
+			profileIconCardController = new ProfileIconsController<>(app, ProfileIcons.getIcons(), changedProfile.iconRes) {
 				@Override
 				protected IconsPaletteElements<Integer> createPaletteElements(@NonNull Context context, boolean nightMode) {
-					return new ProfileIconPaletteElements(context, nightMode);
+					return new CircleIconPaletteElements<>(context, nightMode) {
+						@Override
+						protected Drawable getIconDrawable(@NonNull Integer iconId, boolean isSelected) {
+							return getIcon(iconId, R.color.icon_color_default_light);
+						}
+					};
 				}
 
 				@Override

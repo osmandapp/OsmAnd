@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors.icon;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -14,9 +15,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -44,7 +47,7 @@ public class EditorIconController extends BaseDialogController {
 	private static final int LAST_USED_ICONS_LIMIT = 12;
 
 	private static final String POI_CATEGORIES_FILE = "poi_categories.json";
-	public static final String LAST_USED_KEY = "last used icons";
+	public static final String LAST_USED_KEY = "last_used_icons";
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
 
@@ -55,7 +58,7 @@ public class EditorIconController extends BaseDialogController {
 
 	private final EditorIconCardController cardController;
 	private final EditorIconScreenController screenController;
-	private EditorIconPaletteElements paletteElements;
+	private IconsPaletteElements<String> paletteElements;
 	private OnIconsPaletteListener<String> listener;
 	private int controlsAccentColor;
 
@@ -221,7 +224,13 @@ public class EditorIconController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteElements<String> getPaletteElements(@NonNull Context context, boolean nightMode) {
 		if (paletteElements == null || paletteElements.isNightMode() != nightMode) {
-			paletteElements = new EditorIconPaletteElements(context, nightMode);
+			paletteElements = new CircleIconPaletteElements<>(context, nightMode) {
+				@Override
+				protected Drawable getIconDrawable(@NonNull String iconName, boolean isSelected) {
+					int iconId = RenderingIcons.getBigIconResourceId(iconName);
+					return getIcon(iconId, R.color.icon_color_default_light);
+				}
+			};
 		}
 		return paletteElements;
 	}

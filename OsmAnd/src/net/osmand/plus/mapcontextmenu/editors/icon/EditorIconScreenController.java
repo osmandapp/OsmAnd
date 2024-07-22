@@ -198,7 +198,7 @@ public class EditorIconScreenController implements IDialogController {
 		searchCancelled = false;
 		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
 		searchUICore.updateSettings(searchSettings);
-		searchUICore.search(text, true, new ResultMatcher<SearchResult>() {
+		searchUICore.search(text, true, new ResultMatcher<>() {
 			@Override
 			public boolean publish(SearchResult searchResult) {
 				if (searchResult.objectType == SEARCH_FINISHED) {
@@ -206,8 +206,7 @@ public class EditorIconScreenController implements IDialogController {
 					List<PoiType> results = new ArrayList<>();
 					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
 						Object poiObject = result.object;
-						if (poiObject instanceof PoiType) {
-							PoiType poiType = (PoiType) poiObject;
+						if (poiObject instanceof PoiType poiType) {
 							if (!poiType.isAdditional()) {
 								results.add(poiType);
 							}

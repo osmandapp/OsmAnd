@@ -95,7 +95,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	}
 
 	private void initPaletteController() {
-		paletteController = new IconsPaletteController<String>(app) {
+		paletteController = new IconsPaletteController<>(app) {
 			@NonNull
 			@Override
 			public IconsPaletteElements<String> getPaletteElements(@NonNull Context context, boolean nightMode) {
