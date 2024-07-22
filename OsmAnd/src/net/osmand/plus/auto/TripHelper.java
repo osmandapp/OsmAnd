@@ -1,17 +1,8 @@
 package net.osmand.plus.auto;
 
+import static androidx.car.app.navigation.model.TravelEstimate.REMAINING_TIME_UNKNOWN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
-import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS;
-import static net.osmand.plus.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_METERS;
-import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,13 +17,7 @@ import androidx.annotation.StringRes;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
-import androidx.car.app.navigation.model.Destination;
-import androidx.car.app.navigation.model.Lane;
-import androidx.car.app.navigation.model.LaneDirection;
-import androidx.car.app.navigation.model.Maneuver;
-import androidx.car.app.navigation.model.Step;
-import androidx.car.app.navigation.model.TravelEstimate;
-import androidx.car.app.navigation.model.Trip;
+import androidx.car.app.navigation.model.*;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
@@ -160,7 +145,7 @@ public class TripHelper {
 					NextDirectionInfo nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
 					if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
 							(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
-							|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
+									|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
 						nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
 					}
 				}
@@ -223,7 +208,7 @@ public class TripHelper {
 			Distance stepDistance = getFormattedDistance(app, nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
-			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
+			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec >= 0 ? leftTurnTimeSec : REMAINING_TIME_UNKNOWN);
 			Step step = stepBuilder.build();
 			TravelEstimate stepTravelEstimate = stepTravelEstimateBuilder.build();
 			tripBuilder.addStep(step, stepTravelEstimate);
@@ -313,7 +298,7 @@ public class TripHelper {
 		int leftTimeSec = routingHelper.getLeftTime();
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
-		travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec);
+		travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec >= 0 ? leftTimeSec : REMAINING_TIME_UNKNOWN);
 		Destination destination = destBuilder.build();
 		TravelEstimate travelEstimate = travelEstimateBuilder.build();
 		return new Pair<>(destination, travelEstimate);
