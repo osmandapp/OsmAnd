@@ -237,6 +237,9 @@ public class StreetNameWidget extends MapWidget {
 		String shieldTag = shield.getTag();
 		int[] types = object.getTypes();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			return false;
+		}
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
 				.getSearchRequestWithAppliedCustomRules(storage, isNightMode());
 

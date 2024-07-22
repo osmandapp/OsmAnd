@@ -413,6 +413,7 @@ public class RendererRegistry {
 		return "";
 	}
 
+	@Nullable
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
 		if (currentSelectedRender == null) {
 			return defaultRender();
