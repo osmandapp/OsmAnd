@@ -996,7 +996,6 @@
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asia, America Latina e simili</string>
-    <string name="driving_region_uk">UK, India e simili</string>
     <string name="local_index_tile_data_zooms">Livelli zoom scaricati: %1$s</string>
     <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
     <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>

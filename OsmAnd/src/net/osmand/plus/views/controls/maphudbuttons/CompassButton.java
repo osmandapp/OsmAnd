@@ -30,6 +30,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 
 public class CompassButton extends MapButton {
@@ -53,10 +54,11 @@ public class CompassButton extends MapButton {
 		setupAccessibilityActions();
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	private void setupTouchListener() {
 		view.setOnTouchListener(new View.OnTouchListener() {
 
-			private final GestureDetector gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+			private final GestureDetector gestureDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public boolean onDoubleTap(@NonNull MotionEvent e) {
 					app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
@@ -75,7 +77,6 @@ public class CompassButton extends MapButton {
 				}
 			});
 
-			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				return gestureDetector.onTouchEvent(event);

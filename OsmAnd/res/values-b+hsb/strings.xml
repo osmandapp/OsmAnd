@@ -361,7 +361,6 @@
     <string name="driving_region_us">Zjednoćene staty Ameriki</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Azija, Łaćonska Amerika a podobne</string>
-    <string name="driving_region_uk">Zjednoćene kralestwo, Indiska a podobne</string>
     <string name="speak_street_names">Dróhowe mjena (TTS)</string>
     <string name="speak_cameras">Błyskače</string>
     <string name="speak_traffic_warnings">Wobchadne warnowanja</string>

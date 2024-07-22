@@ -986,7 +986,6 @@
     <string name="driving_region_us">JAV</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Azija, Lotynų Amerika ir panašiai</string>
-    <string name="driving_region_uk">JK, Indija ir kitos</string>
     <string name="speak_title">Pranešti…</string>
     <string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinių sustojimų, greičio ribotuvų), greičio radarų, greičio apribojimų pranešimą.</string>
     <string name="speak_street_names">Gatvių pavadinimai (TTS)</string>

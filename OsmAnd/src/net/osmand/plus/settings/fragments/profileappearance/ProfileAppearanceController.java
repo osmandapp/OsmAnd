@@ -568,19 +568,6 @@ public class ProfileAppearanceController extends BaseDialogController {
 			return true;
 		}
 
-		@Override
-		public int getHorizontalIconsSpace() {
-			return getDimen(R.dimen.content_padding_small_half);
-		}
-
-		@Override
-		public int getRecycleViewHorizontalPadding() {
-			return getDimen(R.dimen.content_padding);
-		}
-
-		protected int getDimen(@DimenRes int id){
-			return app.getResources().getDimensionPixelSize(id);
-		}
 	}
 
 	@NonNull
