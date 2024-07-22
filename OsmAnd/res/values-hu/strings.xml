@@ -5841,4 +5841,6 @@
     <string name="auto_25_chars_route_tsll">Forduljon enyhén balra</string>
     <string name="auto_25_chars_route_tslr">Forduljon enyhén jobbra</string>
     <string name="auto_25_chars_route_tu">Forduljon meg</string>
+    <string name="driving_region_india">India</string>
+    <string name="driving_region_uk">Angol és hasonló</string>
 </resources>
