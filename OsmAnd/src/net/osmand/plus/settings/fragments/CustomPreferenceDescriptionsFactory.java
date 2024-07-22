@@ -29,50 +29,58 @@ class CustomPreferenceDescriptionsFactory {
 	private static PreferenceDescription<ListPreferenceEx> getListPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				ListPreferenceEx.class,
-				preference ->
-						String.join(
-								", ",
-								concat(
-										Optional.ofNullable(preference.getEntries()),
-										Optional.ofNullable(preference.getDescription()),
-										Optional.ofNullable(preference.getDialogTitle()))));
+				preference -> {
+					final ListPreferenceEx listPreferenceEx = (ListPreferenceEx) preference;
+					return String.join(
+							", ",
+							concat(
+									Optional.ofNullable(listPreferenceEx.getEntries()),
+									Optional.ofNullable(listPreferenceEx.getDescription()),
+									Optional.ofNullable(listPreferenceEx.getDialogTitle())));
+				});
 	}
 
 	private static PreferenceDescription<SwitchPreferenceEx> getSwitchPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				SwitchPreferenceEx.class,
-				preference ->
-						String.join(
-								", ",
-								Lists.getNonEmptyElements(
-										Arrays.asList(
-												Optional.ofNullable(preference.getSummaryOff()),
-												Optional.ofNullable(preference.getSummaryOn()),
-												Optional.ofNullable(preference.getDescription())))));
+				preference -> {
+					final SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) preference;
+					return String.join(
+							", ",
+							Lists.getNonEmptyElements(
+									Arrays.asList(
+											Optional.ofNullable(switchPreferenceEx.getSummaryOff()),
+											Optional.ofNullable(switchPreferenceEx.getSummaryOn()),
+											Optional.ofNullable(switchPreferenceEx.getDescription()))));
+				});
 	}
 
 	private static PreferenceDescription<MultiSelectBooleanPreference> getMultiSelectBooleanPreferenceDescription() {
 		return new PreferenceDescription<>(
 				MultiSelectBooleanPreference.class,
-				preference ->
-						String.join(
-								", ",
-								concat(
-										Optional.ofNullable(preference.getEntries()),
-										Optional.ofNullable(preference.getDescription()),
-										Optional.ofNullable(preference.getDialogTitle()))));
+				preference -> {
+					final MultiSelectBooleanPreference multiSelectBooleanPreference = (MultiSelectBooleanPreference) preference;
+					return String.join(
+							", ",
+							concat(
+									Optional.ofNullable(multiSelectBooleanPreference.getEntries()),
+									Optional.ofNullable(multiSelectBooleanPreference.getDescription()),
+									Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle())));
+				});
 	}
 
 	private static PreferenceDescription<EditTextPreferenceEx> getEditTextPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				EditTextPreferenceEx.class,
-				preference ->
-						String.join(
-								", ",
-								Lists.getNonEmptyElements(
-										Arrays.asList(
-												Optional.ofNullable(preference.getText()),
-												Optional.ofNullable(preference.getDescription())))));
+				preference -> {
+					final EditTextPreferenceEx textPreferenceEx = (EditTextPreferenceEx) preference;
+					return String.join(
+							", ",
+							Lists.getNonEmptyElements(
+									Arrays.asList(
+											Optional.ofNullable(textPreferenceEx.getText()),
+											Optional.ofNullable(textPreferenceEx.getDescription()))));
+				});
 	}
 
 	private static List<CharSequence> concat(final Optional<CharSequence[]> elements,

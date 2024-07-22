@@ -4,14 +4,20 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.R;
+import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 
 import java.util.Optional;
 
 import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
 import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.preferencesearch.fragment.DefaultFragmentFactory;
+import de.KnollFrank.lib.preferencesearch.provider.DialogFragmentByPreference;
 
 class SearchPreferenceButtonHelper {
 
@@ -40,7 +46,19 @@ class SearchPreferenceButtonHelper {
 				(preference, host) -> true,
 				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
 				new DefaultFragmentFactory(),
-				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
+				new DialogFragmentByPreference() {
+
+					@Override
+					public boolean hasDialogFragment(final Class<? extends PreferenceFragmentCompat> host, final Preference preference) {
+						return GlobalSettingsFragment.SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey());
+					}
+
+					@Override
+					public DialogFragment getDialogFragment(final Class<? extends PreferenceFragmentCompat> host, final Preference preference, final FragmentManager fragmentManager) {
+						return (DialogFragment) fragmentManager.findFragmentByTag(SendAnalyticsBottomSheetDialogFragment.TAG);
+					}
+				});
 	}
 
 	private SearchConfiguration createSearchConfiguration() {
