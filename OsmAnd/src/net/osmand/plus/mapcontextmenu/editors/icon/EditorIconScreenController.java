@@ -12,7 +12,6 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiType;
