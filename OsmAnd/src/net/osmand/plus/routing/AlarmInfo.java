@@ -108,7 +108,7 @@ public class AlarmInfo implements LocationPoint {
 			} else if ("border_control".equals(ruleType.getValue())) {
 				alarmInfo = new AlarmInfo(BORDER_CONTROL, locInd);
 			}
-		} else if ("traffic_calming".equals(ruleType.getTag())) {
+		} else if ("traffic_calming".equals(ruleType.getTag()) && !"no".equals(ruleType.getValue())) {
 			alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locInd);
 		} else if ("hazard".equals(ruleType.getTag())) {
 			alarmInfo = new AlarmInfo(HAZARD, locInd);
