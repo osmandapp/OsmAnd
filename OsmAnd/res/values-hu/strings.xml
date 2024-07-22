@@ -4132,7 +4132,7 @@
     <string name="shared_string_discussion">Vitafórum</string>
     <string name="backup_delete_types">Letiltott adattípusok törlése</string>
     <string name="backup_delete_types_descr">Törli az összes elavult adattípus adatát az OsmAnd Cloudból\?</string>
-    <string name="from_with_param">Innentől: %1$s</string>
+    <string name="from_with_param">%1$s-tól</string>
     <string name="regular_price">Rendes ár</string>
     <string name="complete_purchase">Vásárlás befejezése</string>
     <string name="shared_string_includes">Tartalmazza</string>
