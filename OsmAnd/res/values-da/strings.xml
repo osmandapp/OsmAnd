@@ -5848,4 +5848,6 @@
 \nCPU (fliser): %2$s
 \nCPU (inaktiv tid): %3$s
 \nCPU (venter på GPU): %4$s</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">Storbritannien og lignende</string>
 </resources>
