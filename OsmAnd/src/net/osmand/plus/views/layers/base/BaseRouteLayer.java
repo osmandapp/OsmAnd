@@ -202,6 +202,9 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 			}
 		} else {
 			RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
+			if (rrs == null) {
+				return DEFAULT_WIDTH_MULTIPLIER * view.getDensity();
+			}
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
 			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
 			req.setIntFilter(rrs.PROPS.R_MINZOOM, tileBox.getZoom());

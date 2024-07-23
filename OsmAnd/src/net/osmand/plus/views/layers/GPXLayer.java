@@ -451,6 +451,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private boolean updatePaints(int color, String width, boolean routePoints, boolean currentTrack, DrawSettings drawSettings, RotatedTileBox tileBox) {
 		RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (rrs == null) {
+			return false;
+		}
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		int hash;
 		if (!hasMapRenderer()) {
