@@ -52,7 +52,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.Objects;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener, InAppPurchaseHelper.InAppPurchaseListener {
+		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener,
+		InAppPurchaseHelper.InAppPurchaseListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
