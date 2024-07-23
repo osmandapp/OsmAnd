@@ -4657,4 +4657,5 @@
     <string name="from_to_with_params">Asukohast %1$s asukohta %2$s</string>
     <string name="progress_complete">%1$s on tehtud</string>
     <string name="quick_action_map_overlay">Ülekate</string>
+    <string name="weather_source_ecmwf_description">Euroopa Keskpika Ilmaennustuse Keskus (ECMWF)</string>
 </resources>
