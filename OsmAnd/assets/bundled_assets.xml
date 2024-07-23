@@ -163,28 +163,28 @@
     <asset source="color-palette/user_palette_default.txt" destination="color-palette/user_palette_default.txt" mode="copyOnlyIfDoesNotExist" version="01.01.2024"/>
 
 	<!-- Models -->
-	<asset source="models/map_bicycle_location/map_bicycle_location.mtl" destination="models/map_bicycle_location/map_bicycle_location.mtl" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_bicycle_location/map_bicycle_location.obj" destination="models/map_bicycle_location/map_bicycle_location.obj" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_bicycle_location/map_bicycle_location.png" destination="models/map_bicycle_location/map_bicycle_location.png" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="models/map_bicycle_location/map_bicycle_location.mtl" destination="models/map_bicycle_location/map_bicycle_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_bicycle_location/map_bicycle_location.obj" destination="models/map_bicycle_location/map_bicycle_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_bicycle_location/map_bicycle_location.png" destination="models/map_bicycle_location/map_bicycle_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
-	<asset source="models/map_car_bearing/map_car_bearing.mtl" destination="models/map_car_bearing/map_car_bearing.mtl" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_car_bearing/map_car_bearing.obj" destination="models/map_car_bearing/map_car_bearing.obj" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_car_bearing/map_car_bearing.png" destination="models/map_car_bearing/map_car_bearing.png" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="models/map_car_bearing/map_car_bearing.mtl" destination="models/map_car_bearing/map_car_bearing.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_bearing/map_car_bearing.obj" destination="models/map_car_bearing/map_car_bearing.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_bearing/map_car_bearing.png" destination="models/map_car_bearing/map_car_bearing.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
-	<asset source="models/map_car_location/map_car_location.mtl" destination="models/map_car_location/map_car_location.mtl" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_car_location/map_car_location.obj" destination="models/map_car_location/map_car_location.obj" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_car_location/map_car_location.png" destination="models/map_car_location/map_car_location.png" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="models/map_car_location/map_car_location.mtl" destination="models/map_car_location/map_car_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_location/map_car_location.obj" destination="models/map_car_location/map_car_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_location/map_car_location.png" destination="models/map_car_location/map_car_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
-	<asset source="models/map_default_location/map_default_location.mtl" destination="models/map_default_location/map_default_location.mtl" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_default_location/map_default_location.obj" destination="models/map_default_location/map_default_location.obj" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_default_location/map_default_location.png" destination="models/map_default_location/map_default_location.png" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="models/map_default_location/map_default_location.mtl" destination="models/map_default_location/map_default_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_default_location/map_default_location.obj" destination="models/map_default_location/map_default_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_default_location/map_default_location.png" destination="models/map_default_location/map_default_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
-	<asset source="models/map_navigation_car/map_navigation_car.mtl" destination="models/map_navigation_car/map_navigation_car.mtl" mode="copyOnlyIfDoesNotExist" version="22.07.2024"/>
-	<asset source="models/map_navigation_car/map_navigation_car.obj" destination="models/map_navigation_car/map_navigation_car.obj" mode="copyOnlyIfDoesNotExist" version="22.07.2024"/>
-	<asset source="models/map_navigation_car/map_navigation_car.png" destination="models/map_navigation_car/map_navigation_car.png" mode="copyOnlyIfDoesNotExist" version="22.07.2024"/>
+	<asset source="models/map_navigation_car/map_navigation_car.mtl" destination="models/map_navigation_car/map_navigation_car.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_car/map_navigation_car.obj" destination="models/map_navigation_car/map_navigation_car.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_car/map_navigation_car.png" destination="models/map_navigation_car/map_navigation_car.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
-	<asset source="models/map_navigation_nautical/map_navigation_nautical.mtl" destination="models/map_navigation_nautical/map_navigation_nautical.mtl" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_navigation_nautical/map_navigation_nautical.obj" destination="models/map_navigation_nautical/map_navigation_nautical.obj" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
-	<asset source="models/map_navigation_nautical/map_navigation_nautical.png" destination="models/map_navigation_nautical/map_navigation_nautical.png" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.mtl" destination="models/map_navigation_nautical/map_navigation_nautical.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.obj" destination="models/map_navigation_nautical/map_navigation_nautical.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.png" destination="models/map_navigation_nautical/map_navigation_nautical.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
 
 </assets>
