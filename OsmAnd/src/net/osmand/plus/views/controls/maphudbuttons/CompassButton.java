@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 
 public class CompassButton extends MapButton {
@@ -58,7 +58,7 @@ public class CompassButton extends MapButton {
 	private void setupTouchListener() {
 		view.setOnTouchListener(new View.OnTouchListener() {
 
-			private final GestureDetector gestureDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
+			private final GestureDetector gestureDetector = new GestureDetector(view.getContext(), new SimpleOnGestureListener() {
 				@Override
 				public boolean onDoubleTap(@NonNull MotionEvent e) {
 					app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
