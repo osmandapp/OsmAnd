@@ -20,7 +20,6 @@ import net.osmand.util.MapUtils;
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	// private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction of seg dist to pnt-to-gpx dist (0.001)
 	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // penalty by the difference between gpx and road angle (25)
 	private final double CRUSH_SEGMENTS_BY_DISTANCE_M = 25; // crush road segments to match gpx points better (25)
 
@@ -170,12 +169,6 @@ public class GpxSegmentsApproximation {
 
 		newMinDist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
 
-		// Sometimes, more than 1 segment from (pnt+others) to next-gpx-point might have the same distance.
-		// To make difference, a small fraction (1/1000) of real-segment-distance is added as "dilution" value.
-		// Such a small dilution prevents from interfering with main searching of minimal distance to gpx-point.
-		// https://test.osmand.net/map/?start=52.481439,13.386036&end=52.483094,13.386060&profile=rescuetrack&params=rescuetrack,geoapproximation#18/52.48234/13.38672
-//		newMinDist += sumPntDistanceSqr(pnt, pnt.getSegmentStart(), bestSegmentEnd) * DILUTE_BY_SEGMENT_DISTANCE;
-
 		// Add penalty by the difference between angle-to-next-gpx-point (gpxAngle) and average-road-segments-angle.
 		// Maximum is limited to MAX_PENALTY_BY_GPX_ANGLE_M and should be not less than default minPointApproximation.
 		double penalty = calcGpxAnglePenalty(pnt, pnt.getSegmentStart(), bestSegmentEnd, gpxAngle);
@@ -225,22 +218,6 @@ public class GpxSegmentsApproximation {
 
 		return minDistSqr;
 	}
-
-//	private double sumPntDistanceSqr(RouteSegmentPoint pnt, int start, int end) {
-//		if (start == end) return 0;
-//		if (start > end) {
-//			int swap = start;
-//			start = end;
-//			end = swap;
-//		}
-//		double dist = 0;
-//		for (int i = start; i < end; i++) {
-//			dist += MapUtils.squareRootDist31(
-//					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i),
-//					pnt.getRoad().getPoint31XTile(i + 1), pnt.getRoad().getPoint31YTile(i + 1));
-//		}
-//		return dist * dist;
-//	}
 
 	private double calcGpxAnglePenalty(RouteSegmentPoint pnt, int start, int end, double gpxAngle) {
 		if (start == end) return 0;
