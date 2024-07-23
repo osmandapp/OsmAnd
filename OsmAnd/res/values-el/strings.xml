@@ -4329,4 +4329,5 @@
     <string name="shared_string_modified">Τροποποιημένα</string>
     <string name="current_speed_widget_desc">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS.</string>
     <string name="battery_widget_desc">Εμφανίζετε η στάθμη της μπαταρίας της συσκευή σας.</string>
+    <string name="map_widget_current_speed">Τρέχουσα ταχύτητα</string>
 </resources>
