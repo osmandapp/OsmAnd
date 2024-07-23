@@ -153,6 +153,11 @@ public class AisMessageListener {
             udpSocket.close();
         }
     }
+
+    public boolean checkTcpSocket() {
+        return (tcpSocket != null) && (tcpStream != null);
+    }
+
     private void handleAisMessage(int aisType, Object obj) {
         AisObject ais = null;
         int msgType = 0;

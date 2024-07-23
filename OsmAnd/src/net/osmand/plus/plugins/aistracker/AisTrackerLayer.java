@@ -297,6 +297,23 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
             this.listener = null;
         }
     }
+
+    /* this method restarts the TCP listeners after a "resume" event (the smartphone resumed
+    *  from sleep or from switched off state): in this case the TCP connection might be broken,
+    *  but the sockets are still (logically) open.
+    *  as additional indication of a broken TCP connection it is checked whether any AIS message
+    *  was received in the last 20 seconds  */
+    public void checkTcpConnection() {
+        if (listener != null) {
+            if (listener.checkTcpSocket()) {
+                if (((System.currentTimeMillis() - AisObject.getAndUpdateLastMessageReceived()) / 1000) > 20) {
+                    Log.d("AisTrackerLayer", "checkTcpConnection(): restart TCP socket");
+                    restartNetworkListener();
+                }
+            }
+        }
+    }
+
     public void restartNetworkListener() {
         stopNetworkListener();
         startNetworkListener();
