@@ -5849,4 +5849,8 @@
     <string name="auto_25_chars_route_tu">Uradi polukružno okretanje</string>
     <string name="auto_25_chars_route_tshl">Skreni oštro levo</string>
     <string name="auto_25_chars_route_tsll">Skreni blago levo</string>
+    <string name="driving_region_india">Indija</string>
+    <string name="driving_region_uk">Velika Britanija i slični</string>
+    <string name="hugerock_promo_description">Besplatan pristup funkcijama, uključujući neograničen broj preuzimanja karata, 3D reljef i sl. samo za %1$s dolar mesečno</string>
+    <string name="hugerock_promo">Promocija Hugerock %1$s dolar mesečno</string>
 </resources>
