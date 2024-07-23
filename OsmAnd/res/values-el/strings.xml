@@ -1925,7 +1925,7 @@
     <string name="osm_live_subscription_desc">Η εγγραφή ενεργοποιεί ωριαίες, ημερήσιες και εβδομαδιαίες ενημερώσεις και απεριόριστες λήψεις για όλους τους χάρτες παγκοσμίως.</string>
     <string name="get_it">Εγγραφείτε</string>
     <string name="get_for">Εγγραφείτε για %1$s</string>
-    <string name="osm_live_banner_desc">Κάντε απεριόριστες λήψεις χαρτών, προσθέτοντας εβδομαδιαία, ημερησίως, ή ακόμα και ωριαίες ενημερώσεις.</string>
+    <string name="osm_live_banner_desc">Αποκτήστε απεριόριστες λήψεις χάρτη, προσθέτοντας εβδομαδιαίες, ημερήσιες, ή ακόμα και ωριαίες ενημερώσεις.</string>
     <string name="osmand_plus_banner_desc">Απεριόριστες λήψεις χαρτών, ενημερώσεις και πρόσθετο βικιπαίδεια.</string>
     <string name="si_mi_meters">Μίλια/μέτρα</string>
     <string name="skip_map_downloading">Παράλειψη λήψης χαρτών</string>
@@ -2652,7 +2652,7 @@
     <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
     <string name="in_app_purchase_desc_ex">Μόλις αγοραστεί, θα είναι μονίμως διαθέσιμη για σας.</string>
     <string name="purchase_unlim_title">Αγορά - %1$s</string>
-    <string name="wikivoyage_offline">Βικιταξίδια χωρίς διαδίκτυο</string>
+    <string name="wikivoyage_offline">Βικιταξίδια εκτός σύνδεσης</string>
     <string name="unlimited_downloads">Απεριόριστες λήψεις</string>
     <string name="wikipedia_offline">Βικιπαίδεια χωρίς διαδίκτυο</string>
     <string name="unlock_all_features">Ξεκλείδωμα όλων των χαρακτηριστικών του OsmAnd</string>
@@ -4330,4 +4330,6 @@
     <string name="current_speed_widget_desc">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS.</string>
     <string name="battery_widget_desc">Εμφανίζετε η στάθμη της μπαταρίας της συσκευή σας.</string>
     <string name="map_widget_current_speed">Τρέχουσα ταχύτητα</string>
+    <string name="offline_wikivoyage">Βικιταξίδια χωρίς σύνδεσης</string>
+    <string name="wikipedia_and_wikivoyage_offline">Βικιπαίδεια και Βικιταξίδια εκτός σύνδεσης</string>
 </resources>
