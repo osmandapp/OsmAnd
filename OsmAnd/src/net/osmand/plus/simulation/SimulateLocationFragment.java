@@ -28,6 +28,7 @@ import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
@@ -233,7 +234,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 
 		TextView startTextview = startItem.findViewById(R.id.title);
 		startTextview.setText(simulation.isRouteAnimating() ? R.string.shared_string_control_stop : R.string.shared_string_control_start);
-		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop  : R.drawable.ic_play_dark,
+		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop : R.drawable.ic_play_dark,
 				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 	}
 
@@ -286,7 +287,10 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	public String getSearchableInfo() {
-		// FK-FIXME: add searchable infos from instance variables
-		return "that is true";
+		final String title = getView().<TextViewEx>findViewById(R.id.title).getText().toString();
+		final String trackTitle = trackItem.<TextViewEx>findViewById(R.id.title).getText().toString();
+		final String speedTitle = speedItem.<TextViewEx>findViewById(R.id.title).getText().toString();
+		final String startTitle = startItem.<TextViewEx>findViewById(R.id.title).getText().toString();
+		return String.join(", ", title, trackTitle, speedTitle, startTitle);
 	}
 }
