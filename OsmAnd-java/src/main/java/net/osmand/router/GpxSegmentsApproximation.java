@@ -220,6 +220,7 @@ public class GpxSegmentsApproximation {
 	}
 
 	private double calcGpxAnglePenalty(RouteSegmentPoint pnt, int start, int end, double gpxAngle) {
+		if (Double.isNaN(gpxAngle)) return 0;
 		if (start == end) return 0;
 		if (start > end) {
 			int swap = start;
