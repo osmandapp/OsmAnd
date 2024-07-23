@@ -5617,4 +5617,5 @@
     <string name="allow_display_on_top_description">Tillat visning av karttekster oppå hverandre</string>
     <string name="driving_region_india">India</string>
     <string name="driving_region_uk">Storbritannia og lignende</string>
+    <string name="weather_source_ecmwf_description">Europeisk senter for middels lange værvarsler (ECMWF)</string>
 </resources>
