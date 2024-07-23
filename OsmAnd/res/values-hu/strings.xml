@@ -5843,4 +5843,6 @@
     <string name="auto_25_chars_route_tu">Forduljon meg</string>
     <string name="driving_region_india">India</string>
     <string name="driving_region_uk">Angol és hasonló</string>
+    <string name="hugerock_promo_description">Ingyenes hozzáférés %1$s hónapig különböző funkciókhoz, beleértve a korlátlan térképletöltést, 3D domborzatot stb.</string>
+    <string name="hugerock_promo">Hugerock promóció %1$s hónapig</string>
 </resources>

@@ -5734,7 +5734,7 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers_descr">Alle Kartenebenen oberhalb der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
-    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um das Relief zu visualisieren.</string>
+    <string name="height_legend_description">Höhenfarbkarten werden verwendet, um Relief darzustellen.</string>
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
@@ -5849,4 +5849,6 @@
     <string name="auto_25_chars_route_tu">Bitte wenden</string>
     <string name="driving_region_india">Indien</string>
     <string name="driving_region_uk">UK und ähnlich</string>
+    <string name="hugerock_promo_description">Kostenloser Zugang zu Funktionen wie unbegrenzten Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
+    <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
 </resources>
