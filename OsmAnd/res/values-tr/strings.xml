@@ -5457,4 +5457,5 @@
     <string name="fixed_height">Sabit yükseklik</string>
     <string name="map_markers_desc">Pencere öğesi, harita işaretçileri listesindeki ilk iki işaretçi için mesafeyi veya tahmini varış zamanını (TVZ) gösterir.</string>
     <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, yön={6}.</string>
+    <string name="weather_source_ecmwf_description">Avrupa Orta Vadeli Hava Tahminleri Merkezi (ECMWF)</string>
 </resources>
