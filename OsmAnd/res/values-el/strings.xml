@@ -4345,4 +4345,5 @@
     <string name="purchases_feature_desc_nautical">Αποκτήστε πρόσβαση σε πληροφορίες ναυτικού βάθους</string>
     <string name="purchases_feature_desc_wikivoyage">Εξερευνήστε τα Βικιταξίδια εκτός σύνδεσης. Άρθρα χωρισμένες ανά χώρες και περιοχές και είναι διαθέσιμα σε όλες τις γλώσσες.</string>
     <string name="routing_attr_goods_restrictions_name">Παράδοση αγαθών</string>
+    <string name="weather_source_ecmwf_description">Ευρωπαϊκό Κέντρο Μεσοπρόθεσμων Μετεωρολογικών Προγνώσεων (ECMWF)</string>
 </resources>
