@@ -70,32 +70,11 @@ public class MapButtonsHelper {
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS).iconRes(R.drawable.ic_action_settings);
 	@QuickActionCategoryType
-	public static final QuickActionType TYPE_OPEN = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_AUDIO_VIDEO_NOTES = new QuickActionType(0, "").
-			nameRes(R.string.audionotes_plugin_name).category(QuickActionType.AUDIO_VIDEO_NOTES).iconRes(R.drawable.ic_action_micro_dark);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_FAVORITES = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_favorites).category(QuickActionType.FAVORITES).iconRes(R.drawable.ic_action_favorite);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_MAP_APPEARANCE = new QuickActionType(0, "").
-			nameRes(R.string.map_look_descr).category(QuickActionType.MAP_APPEARANCE).iconRes(R.drawable.ic_action_map_style);
-	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MAP_INTERACTIONS = new QuickActionType(0, "").
 			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_map_move_up);
 	@QuickActionCategoryType
-	public static final QuickActionType TYPE_OSM_EDITING = new QuickActionType(0, "").
-			nameRes(R.string.osm_editing_plugin_name).category(QuickActionType.OSM_EDITING).iconRes(R.drawable.ic_action_openstreetmap_logo);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_TOPOGRAPHY = new QuickActionType(0, "").
-			nameRes(R.string.srtm_plugin_name).category(QuickActionType.TOPOGRAPHY).iconRes(R.drawable.ic_action_terrain);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_TRACKS = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_tracks).category(QuickActionType.TRACKS).iconRes(R.drawable.ic_action_polygom_dark);
-	@QuickActionCategoryType
-	public static final QuickActionType TYPE_WEATHER = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_weather).category(QuickActionType.WEATHER).iconRes(R.drawable.ic_action_umbrella);
+	public static final QuickActionType TYPE_MY_PLACES = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_my_places).category(QuickActionType.MY_PLACES).iconRes(R.drawable.ic_action_favorite);
 
 	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
 		List<QuickActionType> annotatedFields = new ArrayList<>();
@@ -410,15 +389,8 @@ public class MapButtonsHelper {
 		filterQuickActions(buttonState, TYPE_NAVIGATION, quickActions);
 //		filterQuickActions(buttonState, TYPE_CONFIGURE_SCREEN, actionTypes);
 		filterQuickActions(buttonState, TYPE_SETTINGS, quickActions);
-
-		filterQuickActions(buttonState, TYPE_AUDIO_VIDEO_NOTES, quickActions);
-		filterQuickActions(buttonState, TYPE_FAVORITES, quickActions);
-		filterQuickActions(buttonState, TYPE_MAP_APPEARANCE, quickActions);
 		filterQuickActions(buttonState, TYPE_MAP_INTERACTIONS, quickActions);
-		filterQuickActions(buttonState, TYPE_OSM_EDITING, quickActions);
-		filterQuickActions(buttonState, TYPE_TOPOGRAPHY, quickActions);
-		filterQuickActions(buttonState, TYPE_TRACKS, quickActions);
-		filterQuickActions(buttonState, TYPE_WEATHER, quickActions);
+		filterQuickActions(buttonState, TYPE_MY_PLACES, quickActions);
 
 		return quickActions;
 	}

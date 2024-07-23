@@ -1004,7 +1004,6 @@
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲與類似地區</string>
-    <string name="driving_region_uk">英國、印度與類似地區</string>
     <string name="driving_region">駕駛區域</string>
     <string name="local_index_tile_data_zooms">縮放等級已下載：%1$s</string>
     <string name="local_index_tile_data_expire">有效時間（分鐘）：%1$s</string>
@@ -2057,19 +2056,10 @@
     <string name="rendering_value_low_name">低</string>
     <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
     <string name="quick_action_item_screen">螢幕 %d</string>
-    <string name="quick_action_add_marker">增加地圖標記</string>
-    <string name="quick_action_add_poi">增加 POI</string>
-    <string name="quick_action_map_style">更改地圖樣式</string>
     <string name="quick_action_map_style_switch">地圖樣式變更為「%s」。</string>
-    <string name="quick_action_take_audio_note">新增音訊註解</string>
-    <string name="quick_action_take_video_note">新增視訊註解</string>
-    <string name="quick_action_take_photo_note">新增照片註解</string>
-    <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
     <string name="quick_action_navigation_voice_off">取消靜音</string>
     <string name="quick_action_navigation_voice_on">靜音</string>
-    <string name="quick_action_add_parking">增加停車地點</string>
-    <string name="quick_action_add_favorite">增加我的收藏</string>
     <string name="quick_favorites_show_favorites_dialog">顯示我的收藏對話框</string>
     <string name="quick_favorites_name_preset">預設的名稱</string>
     <string name="favorite_autofill_toast_text">" 儲存到 "</string>
@@ -2087,13 +2077,10 @@
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
     <string name="quick_action_empty_param_error">填寫所有參數</string>
     <string name="quick_action_map_styles">地圖樣式</string>
-    <string name="quick_action_map_overlay">更改地圖上圖層</string>
     <string name="quick_action_map_overlay_title">地圖上圖層</string>
     <string name="quick_action_map_overlay_action">增加上圖層</string>
-    <string name="quick_action_map_underlay">更改地圖底層</string>
     <string name="quick_action_map_underlay_title">地圖襯底層</string>
     <string name="quick_action_map_underlay_action">增加襯底層</string>
-    <string name="quick_action_map_source">更改地圖來源</string>
     <string name="quick_action_map_source_title">地圖來源</string>
     <string name="quick_action_map_source_action">增加地圖來源</string>
     <string name="quick_action_map_source_switch">地圖來源變更為「%s」。</string>
@@ -2191,8 +2178,6 @@
     <string name="quick_action_auto_zoom">自動縮放地圖</string>
     <string name="quick_action_auto_zoom_on">開啟自動縮放</string>
     <string name="quick_action_auto_zoom_off">關閉自動縮放</string>
-    <string name="quick_action_add_destination">設定目的地</string>
-    <string name="quick_action_replace_destination">更換目的地</string>
     <string name="no_overlay">無上圖層</string>
     <string name="no_underlay">無下圖層</string>
     <string name="subscribe_email_error">錯誤</string>
@@ -2281,7 +2266,6 @@
 \n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 
 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫
 \n</string>
-    <string name="quick_action_add_first_intermediate">增加第一個中轉</string>
     <string name="shared_string_visible">可見的</string>
     <string name="osmand_extended_description_part3">地圖 
 \n• 顯示您週遭的 POI（興趣點） 
@@ -3651,7 +3635,6 @@
     <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
     <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
-    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">刪除您路線上的下一個目的地。如果其為您最後的目的地，導航將會中止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
@@ -3705,7 +3688,6 @@
     <string name="empty_state_my_tracks">新增軌跡檔案</string>
     <string name="empty_state_my_tracks_desc">匯入或錄製軌跡檔案</string>
     <string name="context_menu_item_add_waypoint">新增軌跡航點</string>
-    <string name="quick_action_add_gpx">新增軌跡航點</string>
     <string name="map_widget_monitoring">旅程錄製</string>
     <string name="marker_save_as_track">儲存為軌跡檔案</string>
     <string name="follow_track">跟隨軌跡</string>
@@ -5672,7 +5654,29 @@
     <string name="change_default_tracks_appearance_confirmation">套用變更到資料夾中既有的軌跡或是僅套用到新的？</string>
     <string name="shared_string_changes">變更</string>
     <string name="apply_only_to_new">僅套用到新的</string>
-    <string name="release_4_8">• 為 4.8 準備</string>
+    <string name="release_4_8">• 新的地形著色選項「海拔」
+\n
+\n • 地形、軌跡與路線的自訂調色板
+\n
+\n • 位置圖示的 3D 變體
+\n
+\n • 現在可以將快速動作分配給外接鍵盤
+\n
+\n • 天氣：更新使用者介面，新增風的動畫
+\n
+\n • 3D 軌跡改進：新的視覺化與著色選項
+\n
+\n • 地圖上旅遊路線的更多選擇
+\n
+\n • 新增應用程式佈景主題選項以遵循地圖模式
+\n
+\n • 修復了軌跡統計、排序與搜尋
+\n
+\n • OSM 編輯：已刪除帳號/密碼授權方法
+\n
+\n • 從 Android 14 開始切換至系統 Sharesheet
+\n
+\n</string>
     <string name="shared_string_scale">比例尺</string>
     <string name="vertical_exaggeration">垂直誇大</string>
     <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
@@ -5687,7 +5691,7 @@
     <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
     <string name="required_maps">所需的地圖</string>
     <string name="missing_maps_header">缺少或過時的地圖</string>
-    <string name="maps_that_also_be_used">也可以使用的地圖：%1$s</string>
+    <string name="maps_that_also_be_used">將要使用的地圖：%1$s</string>
     <string name="getting_list_of_required_maps">取得所需地圖的清單……</string>
     <string name="required_maps_calculate_online_summary">缺少的地圖清單是以直線路線為基礎。為了取得準確的地圖清單，OsmAnd 可以線上預先計算您的路線。</string>
     <string name="missing_maps_description">此路線所需的一些離線地圖遺失或非最新。請下載貨更新這些地圖。</string>
@@ -5721,4 +5725,114 @@
     <string name="play_weather_forecast">播放天氣預報</string>
     <string name="travel_topics">旅遊話題</string>
     <string name="wall_height">牆的高度</string>
+    <string name="rendering_value_dark_orange_name">深橘色</string>
+    <string name="clear_all_key_shortcuts_summary">將會移除所選類型的所有按鍵分配。</string>
+    <string name="shared_string_key">鍵</string>
+    <string name="assigned_keys">分配按鍵</string>
+    <string name="clear_all_key_shortcuts">清除所有快捷鍵</string>
+    <string name="no_assigned_keys_desc">選擇一個操作並透過點擊「新增」按鈕分配一個鍵。</string>
+    <string name="new_key_assignment">分配新按鍵</string>
+    <string name="key_assignment_add_action">新增動作</string>
+    <string name="clear_key_assignment_summary">將會清除所選動作的按鍵分配。</string>
+    <string name="no_assigned_keys">沒有分配的按鍵</string>
+    <string name="key_name_pattern">按鍵「%1$s」</string>
+    <string name="key_assignment_add_key">新增鍵</string>
+    <string name="action_icon">動作圖示</string>
+    <string name="user_palette">使用者調色板</string>
+    <string name="shared_string_colors">顏色</string>
+    <string name="backup_error_failed_to_transfer_file">無法傳輸檔案。</string>
+    <string name="contact_support_retry">再試一次或聯絡客服</string>
+    <string name="missing_maps_ignore_details">已下載的地圖涵蓋了您的路線嗎？若您熟悉該區域，請使用它們來導航。</string>
+    <string name="missing_maps_ignore">使用已下載的地圖</string>
+    <string name="daynight_mode_app_theme_summary">地圖的顯示與應用程式的整體主題一致，白天模式適用於淺色主題，夜間模式適用於深色主題</string>
+    <string name="daynight_mode_sunrise_sunset_summary">根據當地日出與日落的時間自動切換日間與夜間主題。</string>
+    <string name="daynight_mode_sensor_summary">使用裝置的光感測器根據環境光線在深淺主題之間切換。</string>
+    <string name="daynight_mode_day_summary">一律以淺色主題顯示地圖，非常適合白天的可讀性。</string>
+    <string name="daynight_mode_app_theme">應用程式佈景主題</string>
+    <string name="key_event_action_continuous_zoom_out">連續縮小</string>
+    <string name="key_event_action_continuous_zoom_in">連續放大</string>
+    <string name="remove_key_assignment_summary">選定動作的按鍵分配將被移除。</string>
+    <string name="remove_key_assignment">移除按鍵分配</string>
+    <string name="map_settings_weather_wind_animation">風動畫</string>
+    <string name="tomorrow">明天</string>
+    <string name="data_source">資料來源</string>
+    <string name="weather_data_sources_prompt">OsmAnd 提供來自兩個來源的天氣資料：</string>
+    <string name="weather_source_ecmwf_description">歐洲中期天氣預報中心</string>
+    <string name="weather_source_GFS_description">國家環境預報中心的全球預報系統</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="daynight_mode_night_summary">一律以深色主題顯示地圖，適合夜間或低光源條件。</string>
+    <string name="shared_string_modify">修改</string>
+    <string name="quick_action_destination">目的地</string>
+    <string name="quick_action_move_map_left">地圖向左</string>
+    <string name="quick_action_move_map_down">地圖向下</string>
+    <string name="quick_action_location_by_gpx">GPX 定位</string>
+    <string name="quick_action_move_map_right">地圖向右</string>
+    <string name="quick_action_move_map_up">地圖向上</string>
+    <string name="quick_action_next_app_profile">應用程式設定檔到下一個</string>
+    <string name="shared_string_set">設定</string>
+    <string name="app_profile">應用程式設定檔</string>
+    <string name="shared_string_replace">取代</string>
+    <string name="quick_action_display_position_in_center">顯示位置一律置中</string>
+    <string name="quick_action_terrain_color_scheme">地形配色方案</string>
+    <string name="quick_action_directions_from">起始點</string>
+    <string name="quick_action_to_my_location">到我的位置</string>
+    <string name="quick_action_new_route">新路線</string>
+    <string name="quick_action_previous_app_profile">應用程式設定檔到上一個</string>
+    <string name="shared_string_create">建立</string>
+    <string name="shared_string_simulate">模擬</string>
+    <string name="quick_action_terrain">地形著色類型</string>
+    <string name="quick_action_first_intermediate">第一中繼</string>
+    <string name="quick_action_audio_note">音訊註記</string>
+    <string name="quick_action_video_note">視訊註記</string>
+    <string name="quick_action_photo_note">照片註記</string>
+    <string name="quick_action_track_waypoint">軌跡航點</string>
+    <string name="quick_action_parking_place">停車位</string>
+    <string name="quick_action_verb_show_hide">顯示/隱藏</string>
+    <string name="quick_action_verb_pause_resume">暫停/復原</string>
+    <string name="quick_action_verb_turn_on_off">開啟/關閉</string>
+    <string name="quick_action_verb_start_stop">開始/停止</string>
+    <string name="weather_screen">天氣畫面</string>
+    <string name="quick_action_map_underlay">底層</string>
+    <string name="quick_action_map_overlay">覆蓋層</string>
+    <string name="quick_action_remove_next_destination">下一個目的地點</string>
+    <string name="quick_action_map_style">地圖樣式</string>
+    <string name="rendering_avg_info">繪製統計（1 / 5 / 15 分鐘平均）</string>
+    <string name="energy_avg_info">能源統計（1 / 5 /15 分鐘平均）</string>
+    <string name="energy_avg_info_description">每分鐘電池電量：%1$s
+\n能源消耗 (mAh)：%2$s</string>
+    <string name="rendering_avg_info_description">最後一千個影格的 FPS：%1$s
+\nCPU 基本：%2$s
+\nGPU 1k：%3$s
+\n閒置 1k：%4$s</string>
+    <string name="choose_map_orientation">選擇地圖方向</string>
+    <string name="shared_string_all_icons">所有圖示</string>
+    <string name="profile_icon">設定檔圖示</string>
+    <string name="navigation_position_icon_summary">當您導航或移動時顯示的圖示。</string>
+    <string name="navigation_position_icon">導航位置圖示</string>
+    <string name="resting_position_icon_summary">當您不動時顯示的圖示。</string>
+    <string name="resting_position_icon">休息位置圖示</string>
+    <string name="rendering_value_pale_name">灰白</string>
+    <string name="navigation_position">導航位置</string>
+    <string name="resting_navigation_position">暫停與導航位置</string>
+    <string name="view_angle_description">為您目前面對的方向顯示錐形區域</string>
+    <string name="view_angle">檢視角度</string>
+    <string name="location_radius_description">顯示代表您目前位置準確度的圓形區域</string>
+    <string name="location_radius">定位半徑</string>
+    <string name="rendering_avg_info_details">最近一千個影格的 FPS：%1$s
+\nCPU（圖磚）：%2$s
+\nCPU（閒置時間）：%3$s
+\nCPU（等待 GPU）%4$s</string>
+    <string name="resting_position">暫停位置</string>
+    <string name="auto_25_chars_route_kr">靠右</string>
+    <string name="auto_25_chars_route_tr">右轉</string>
+    <string name="auto_25_chars_route_tshr">向右急轉</string>
+    <string name="auto_25_chars_route_tslr">稍向右轉</string>
+    <string name="auto_25_chars_route_tl">左轉</string>
+    <string name="auto_25_chars_route_tshl">向左急轉</string>
+    <string name="auto_25_chars_route_tsll">稍向左轉</string>
+    <string name="auto_25_chars_route_tu">迴轉</string>
+    <string name="auto_25_chars_route_kl">靠左</string>
+    <string name="driving_region_uk">英國及類似國家</string>
+    <string name="driving_region_india">印度</string>
 </resources>

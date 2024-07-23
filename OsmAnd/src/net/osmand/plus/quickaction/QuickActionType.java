@@ -16,15 +16,8 @@ public class QuickActionType {
 	public static final int NAVIGATION = 2;
 	public static final int CONFIGURE_SCREEN = 3;
 	public static final int SETTINGS = 4;
-	public static final int OPEN = 5;
-	public static final int AUDIO_VIDEO_NOTES = 6;
-	public static final int FAVORITES = 7;
-	public static final int MAP_APPEARANCE = 8;
-	public static final int MAP_INTERACTIONS = 9;
-	public static final int OSM_EDITING = 10;
-	public static final int TOPOGRAPHY = 11;
-	public static final int TRACKS = 12;
-	public static final int WEATHER = 13;
+	public static final int MAP_INTERACTIONS = 5;
+	public static final int MY_PLACES = 6;
 
 	private final int id;
 	private final String stringId;

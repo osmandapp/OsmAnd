@@ -26,29 +26,15 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.RouteExporter;
-import net.osmand.router.RouteImporter;
-import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.*;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
@@ -1046,7 +1032,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		List<RouteSegmentResult> routeToTarget = gpxPoints.get(index).routeToTarget;
 		List<RouteSegmentResult> routeToTargetNext = gpxPoints.get(index + 1).routeToTarget;
-		return routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
+		return !Algorithms.isEmpty(routeToTarget) && !Algorithms.isEmpty(routeToTargetNext)
+				&& routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
 				.equals(routeToTargetNext.get(0).getStartPoint());
 	}
 
@@ -1304,7 +1291,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 		List<WptPt> points = new ArrayList<>(intermediatePointsCount);
 		for (int i = 0; i < intermediatePointsCount; i++) {
-			double coeff = (double) (i + 1) / ( intermediatePointsCount + 1);
+			double coeff = (double) (i + 1) / (intermediatePointsCount + 1);
 			LatLon intermediateLatLon = MapUtils.calculateIntermediatePoint(start.lat, start.lon, end.lat, end.lon, coeff);
 			WptPt intermediatePoint = new WptPt();
 			intermediatePoint.lat = intermediateLatLon.getLatitude();

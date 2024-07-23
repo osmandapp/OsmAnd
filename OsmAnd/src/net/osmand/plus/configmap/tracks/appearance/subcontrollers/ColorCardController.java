@@ -16,24 +16,32 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.fragments.controller.TrackColorController;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
+import net.osmand.router.RouteColorize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +52,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private final boolean addUnchanged;
 
 	private IColorsPaletteController colorsPaletteController;
+	private GradientColorsPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
 	public ColorCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
@@ -86,6 +95,9 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			container.addView(new DescriptionCard(activity, R.string.unchanged_parameter_summary).build());
 		} else if (!isAvailableInSubscription(coloringStyle)) {
 			container.addView(new PromoBannerCard(activity).build());
+		} else if (ColoringType.isColorTypeInPurpose(coloringType, ColoringPurpose.TRACK) && coloringType.toGradientScaleType() != null) {
+			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
+			container.addView(new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType)).build());
 		} else if (coloringType.isTrackSolid()) {
 			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController()).build());
 		} else {
@@ -94,18 +106,27 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@NonNull
+	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
+		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
+
+		if (gradientPaletteController == null) {
+			gradientPaletteController = new GradientColorsPaletteController(app, null);
+		}
+		gradientPaletteController.updateContent(gradientCollection, PaletteGradientColor.DEFAULT_NAME);
+		gradientPaletteController.setPaletteListener(getExternalListener());
+		return gradientPaletteController;
+	}
+
+	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			OsmandSettings settings = app.getSettings();
-			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = TrackColorController.getPredefinedColors(app);
-			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
-			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
+			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			Integer color = data.getParameter(COLOR);
 			if (color == null) {
-				color = bundle.predefinedColors.get(0).getColor();
+				List<PaletteColor> colors = colorsCollection.getColors(PaletteSortingMode.ORIGINAL);
+				color = !Algorithms.isEmpty(colors) ? colors.get(0).getColor() : null;
 			}
-			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());

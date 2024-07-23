@@ -172,7 +172,18 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		}
 		updateAdapter();
 		updateFragments();
+		openGroupIfNeeded();
 		updateProgressVisibility(false);
+	}
+
+	private void openGroupIfNeeded() {
+		DownloadActivity activity = getDownloadActivity();
+		if (activity != null) {
+			LocalGroup group = adapter.getLocalGroup(activity.getLocalItemTypeAndClear());
+			if (group != null) {
+				onGroupSelected(group);
+			}
+		}
 	}
 
 	@NonNull

@@ -27,5 +27,4 @@ public class MissingMapsWarningCard extends MapBaseCard {
 	private void showMissingMapsDialog() {
 		RequiredMapsController.showDialog(getMapActivity());
 	}
-
 }

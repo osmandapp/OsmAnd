@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
@@ -298,6 +299,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(TRACK_VISUALIZATION_TYPE, settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
+		item.setParameter(COLOR_PALETTE, settings.CURRENT_GRADIENT_PALETTE);
 
 		app.getGpxDbHelper().updateDataItem(item);
 	}

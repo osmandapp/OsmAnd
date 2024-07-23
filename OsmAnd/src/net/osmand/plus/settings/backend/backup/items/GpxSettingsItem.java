@@ -2,6 +2,7 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -128,6 +129,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 		dataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType());
 		dataItem.setParameter(SPLIT_INTERVAL, appearanceInfo.splitInterval);
 		dataItem.setParameter(COLORING_TYPE, appearanceInfo.coloringType);
+		dataItem.setParameter(COLOR_PALETTE, appearanceInfo.gradientPaletteName);
 		app.getGpxDbHelper().updateDataItem(dataItem);
 	}
 

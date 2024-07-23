@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.annotation.SuppressLint;
@@ -314,10 +313,6 @@ public class IconsCard extends MapBaseCard {
 		icon.setImageDrawable(UiUtilities.createTintedDrawable(mapActivity, iconId, ContextCompat.getColor(mapActivity, R.color.icon_color_default_light)));
 	}
 
-	public void updateSelectedIconId(@DrawableRes int iconId) {
-		reselectIcon(iconId, true);
-	}
-
 	public void updateSelectedIcon(@ColorInt int newColor, @NonNull String iconName) {
 		selectedColor = newColor;
 
@@ -340,17 +335,6 @@ public class IconsCard extends MapBaseCard {
 	public int getIconId(@NonNull String iconName) {
 		int iconId = RenderingIcons.getBigIconResourceId(iconName);
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
-	}
-
-	@NonNull
-	public String getSelectedIconName() {
-		String iconName = RenderingIcons.getBigIconName(selectedIconId);
-		return Algorithms.isEmpty(iconName) ? DEFAULT_ICON_NAME : iconName;
-	}
-
-	@Nullable
-	public String getLastUsedIconName() {
-		return Algorithms.isEmpty(lastUsedIcons) ? null : lastUsedIcons.get(0);
 	}
 
 	public void addLastUsedIcon(@NonNull String iconName) {

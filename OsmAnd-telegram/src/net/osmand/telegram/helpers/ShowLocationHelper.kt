@@ -20,7 +20,9 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageOsmAndBotLocation
 import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
-import org.drinkless.td.libcore.telegram.TdApi
+import net.osmand.util.Algorithms
+import org.drinkless.tdlib.TdApi
+import org.drinkless.tdlib.TdApi.User
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -313,15 +315,9 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		val content = message.content
 		val senderId = OsmandLocationUtils.getSenderMessageId(message)
 		if ((content is TdApi.MessageLocation || (content is MessageUserLocation && content.isValid()))) {
-			val user = telegramHelper.getUser(senderId)
+			val user:User? = telegramHelper.getUser(senderId)
 			if (user != null) {
-				name = "${user.firstName} ${user.lastName}".trim()
-				if (name.isEmpty()) {
-					name = user.username
-				}
-				if (name.isEmpty()) {
-					name = user.phoneNumber
-				}
+				name = user.getName();
 			}
 			if (name.isEmpty()) {
 				name = senderId.toString()

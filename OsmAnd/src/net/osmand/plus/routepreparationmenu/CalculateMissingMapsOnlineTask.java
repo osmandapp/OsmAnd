@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -17,18 +19,20 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,6 +57,20 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		MissingMapsCalculationResult previousResult = route.getMissingMapsCalculationResult();
 		RoutingContext routingContext = previousResult.getMissingMapsRoutingContext();
 		List<LatLon> routePoints = previousResult.getMissingMapsPoints();
+
+		TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
+		TargetPointsHelper.TargetPoint start = pointsHelper.getPointToStart();
+		TargetPointsHelper.TargetPoint end = pointsHelper.getPointToNavigate();
+		Location lastKnownLocation = app.getLocationProvider().getLastStaleKnownLocation();
+		if ((start != null || lastKnownLocation != null) && end != null) {
+			LatLon startPoint = start != null ? start.point
+					: new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+			routePoints = CollectionUtils.asOneList(
+					Collections.singletonList(startPoint),
+					pointsHelper.getIntermediatePointsLatLon(),
+					Collections.singletonList(end.point)
+			);
+		}
 
 		if (routingContext != null && routePoints != null)  {
 			StringBuilder url = new StringBuilder(ONLINE_CALCULATION_URL)
@@ -86,7 +104,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	private String getRoutingProfile() {
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
 		RoutingConfiguration config = prevRoute.getMissingMapsCalculationResult().getMissingMapsRoutingContext().config;
-		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
+		GeneralRouterProfile profile = config.router.getProfile();
+		boolean useBicycle = profile == GeneralRouterProfile.BICYCLE || profile == GeneralRouterProfile.PEDESTRIAN;
 		return useBicycle ? "bicycle" : "car";
 	}
 
@@ -108,8 +127,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				}
 			}
 		}
+		String profile = getRoutingProfile();
 		return !Algorithms.isEmpty(activeParameters)
-				? "&params=car" + "," + TextUtils.join(",", activeParameters)
+				? "&params=" + profile + "," + TextUtils.join(",", activeParameters)
 				: "";
 	}
 

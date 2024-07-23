@@ -34,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
@@ -461,7 +462,11 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			ma.registerReceiver(rec, new IntentFilter(filter));
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+				ma.registerReceiver(rec, new IntentFilter(filter), Context.RECEIVER_EXPORTED);
+			} else {
+				ma.registerReceiver(rec, new IntentFilter(filter));
+			}
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}

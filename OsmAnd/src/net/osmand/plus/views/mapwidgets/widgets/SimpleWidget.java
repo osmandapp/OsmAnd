@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,7 +38,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 	private boolean isFullRow;
-	private MapInfoLayer.TextState textState;
+	protected MapInfoLayer.TextState textState;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -52,10 +53,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
+	}
+
+	@LayoutRes
+	protected int getContentLayoutId() {
+		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}
 
 	public void updateValueAlign(boolean fullRow) {
@@ -206,6 +212,13 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		return widgetType != null ? getString(widgetType.titleId) : null;
 	}
 
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		if (widgetState != null) {
+			widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+		}
+	}
+
 	@Nullable
 	protected String getAdditionalWidgetName() {
 		return null;
@@ -260,18 +273,22 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
 		if (verticalWidget) {
-			nightMode = textState.night;
-			textView.setTextColor(textState.textColor);
-			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetNameTextView.setTextColor(textState.secondaryTextColor);
-			int iconId = getIconId();
-			if (iconId != 0) {
-				setImageDrawable(iconId);
-			}
-			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
 		}
+	}
+
+	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
+		nightMode = textState.night;
+		textView.setTextColor(textState.textColor);
+		smallTextView.setTextColor(textState.secondaryTextColor);
+		widgetNameTextView.setTextColor(textState.secondaryTextColor);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
+		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 	}
 
 	@Override

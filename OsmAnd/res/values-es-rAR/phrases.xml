@@ -4867,4 +4867,5 @@
     <string name="poi_indoor_seating_no">Asientos en interior: No</string>
     <string name="poi_property_management">Oficina del gestor inmobiliario</string>
     <string name="poi_engineer">Oficina del ingeniero</string>
+    <string name="poi_mcdonalds">McDonald\'s</string>
 </resources>

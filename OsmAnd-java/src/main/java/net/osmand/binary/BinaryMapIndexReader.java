@@ -1469,6 +1469,15 @@ public class BinaryMapIndexReader {
 		return list;
 	}
 
+	public List<PoiSubType> getTopIndexSubTypes() throws IOException {
+		List<PoiSubType> list = new ArrayList<>();
+		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
+			list.addAll(poiIndex.topIndexSubTypes);
+		}
+		return list;
+	}
+
 	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
 		req.numberOfVisitedObjects = 0;
 		req.numberOfAcceptedObjects = 0;
@@ -1617,9 +1626,14 @@ public class BinaryMapIndexReader {
 		request.resultMatcher = resultMatcher;
 		return request;
 	}
-	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
-			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher) {
+		return 	buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, poiTypeFilter, null, matcher);
+	}
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter, SearchPoiAdditionalFilter poiTopIndexAdditionalFilter, ResultMatcher<Amenity> matcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
@@ -1627,6 +1641,7 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.poiTypeFilter = poiTypeFilter;
+		request.poiAdditionalFilter = poiTopIndexAdditionalFilter;
 		request.resultMatcher = matcher;
 
 		return request;
@@ -1716,6 +1731,12 @@ public class BinaryMapIndexReader {
 		public boolean isEmpty();
 	}
 
+	public static interface SearchPoiAdditionalFilter {
+		public boolean accept(PoiSubType poiSubType, String value);
+		String getName();
+		String getIconResource();
+	}
+
 	public static class MapObjectStat {
 		public int lastStringNamesSize;
 		public int lastObjectIdSize;
@@ -1784,6 +1805,7 @@ public class BinaryMapIndexReader {
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
+		SearchPoiAdditionalFilter poiAdditionalFilter;
 
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();

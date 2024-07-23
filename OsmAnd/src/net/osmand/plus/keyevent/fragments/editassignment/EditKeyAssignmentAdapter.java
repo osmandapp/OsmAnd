@@ -66,7 +66,6 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public EditKeyAssignmentAdapter(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 	                                @NonNull EditKeyAssignmentController controller, boolean usedOnMap) {
-		setHasStableIds(true);
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.appMode = appMode;
@@ -165,6 +164,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.title.setText(app.getString(R.string.key_name_pattern, keyName));
 			h.icon.setVisibility(View.GONE);
 			h.summaryContainer.setVisibility(View.VISIBLE);
+			h.summaryContainer.setOnClickListener(v -> controller.askChangeKeyCode(mapActivity, keyCode));
 			h.summary.setText(keyName);
 		}
 		int color = appMode.getProfileColor(isNightMode());

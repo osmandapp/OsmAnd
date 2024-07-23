@@ -7,7 +7,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment.SELECTED_FOLDER_KEY;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -17,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
@@ -308,9 +306,8 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	@NonNull
 	private MapDrawParams getTracksDrawParams() {
-		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics metrics = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(metrics);
+		AndroidUtils.getDisplay(requireContext()).getMetrics(metrics);
 
 		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
 		int height = getResources().getDimensionPixelSize(R.dimen.track_image_height);

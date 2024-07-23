@@ -1,21 +1,31 @@
 package net.osmand.router.network;
 
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
@@ -254,7 +264,7 @@ public class NetworkRouteSelector {
 			}
 		});
 		int mergedCount = 0;
-		for(int i = 0; i < chainsFlat.size(); ) {
+		for (int i = 0; i < chainsFlat.size(); ) {
 			NetworkRouteSegmentChain first = chainsFlat.get(i);
 			boolean merged = false;
 			for (int j = i + 1; j < chainsFlat.size() && !merged && !isCancelled(); j++) {
@@ -421,7 +431,7 @@ public class NetworkRouteSelector {
 		remove(chains, NetworkRouteContext.convertPointToLong(toAdd.start.getStartPointX(), toAdd.start.getStartPointY()), toAdd);
 		remove(endChains, NetworkRouteContext.convertPointToLong(toAdd.getEndPointX(), toAdd.getEndPointY()), toAdd);
 		remove(endChains, NetworkRouteContext.convertPointToLong(it.getEndPointX(), it.getEndPointY()), it);
-		double minStartDist = MapUtils.squareRootDist31(it.getEndPointX(), it.getEndPointY(), toAdd.start.getStartPointX(),toAdd.start.getStartPointY());
+		double minStartDist = MapUtils.squareRootDist31(it.getEndPointX(), it.getEndPointY(), toAdd.start.getStartPointX(), toAdd.start.getStartPointY());
 		double minLastDist = minStartDist;
 		int minStartInd = toAdd.start.start;
 		for (int i = 0; i < toAdd.start.getPointsLength(); i++) {
@@ -614,7 +624,7 @@ public class NetworkRouteSelector {
 			rCtx.loadRouteSegment(obj.getEndPointX(), obj.getEndPointY());
 		for (NetworkRouteSegment ld : objs) {
 			debug("  CHECK", reverse, ld);
-			if (ld.routeKey.equals(obj.routeKey) && !visitedIds.contains(ld.getId()) ) {
+			if (ld.routeKey.equals(obj.routeKey) && !visitedIds.contains(ld.getId())) {
 				// && ld.getId() != obj.getId() && otherSide.getId() != ld.getId()) {
 				// visitedIds.add((ld.getId() << 14) + (reverse ? ld.end : ld.start))
 				if (visitedIds.add(ld.getId())) { // forbid same segment twice
@@ -743,7 +753,12 @@ public class NetworkRouteSelector {
 		}
 
 		public String getRouteName() {
-			String name = getValue("name");
+			return getRouteName(null);
+		}
+
+		public String getRouteName(String localeId) {
+			String key = localeId != null ? "name:" + localeId : "name";
+			String name = getValue(key);
 			if (name.isEmpty()) {
 				name = getValue("ref");
 			}
@@ -775,6 +790,18 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
+		}
+
+		public List<String> getSupportedNameLocales() {
+			List<String> localeIds = new ArrayList<>();
+			for (String tag : tags) {
+				String key = getKeyFromTag(tag);
+				String[] keySplit = key.split(":");
+				if (keySplit[0].equals("name") && keySplit.length == 2) {
+					localeIds.add(keySplit[1]);
+				}
+			}
+			return localeIds;
 		}
 
 		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {

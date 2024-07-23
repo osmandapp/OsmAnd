@@ -88,7 +88,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 								));
 								if (trackFilterType == TrackFilterType.FOLDER) {
 									if (currentFolder != null) {
-										filter.setFirstItem(currentFolder.getDirName());
+										filter.setFirstItem(currentFolder.getRelativePath());
 									}
 								}
 							}

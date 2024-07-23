@@ -1,8 +1,12 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
-import static net.osmand.data.Amenity.*;
+import static net.osmand.data.Amenity.MAPILLARY;
+import static net.osmand.data.Amenity.WIKIDATA;
+import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
+import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,8 +14,6 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -28,9 +30,6 @@ import java.util.Map;
 public class AmenityExtensionsHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
-
-	private static final String COLLAPSABLE_PREFIX = "collapsable_";
-	private static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
 
 	private final OsmandApplication app;
 
@@ -55,65 +54,33 @@ public class AmenityExtensionsHelper {
 	public Map<String, String> getUpdatedAmenityExtensions(@NonNull Map<String, String> savedExtensions,
 	                                                       @Nullable String amenityOriginName,
 	                                                       double lat, double lon) {
-		Map<String, String> updatedExtensions = new HashMap<>(savedExtensions);
+		Map<String, String> updatedExtensions = new HashMap<>();
+		for (Map.Entry<String, String> entry : savedExtensions.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			if (key.startsWith(AMENITY_PREFIX)) {
+				updatedExtensions.put(key.replace(AMENITY_PREFIX, ""), value);
+			} else if (key.startsWith(OSM_PREFIX)) {
+				updatedExtensions.put(key.replace(OSM_PREFIX, ""), value);
+			} else {
+				updatedExtensions.put(key, value);
+			}
+		}
 		if (amenityOriginName != null) {
 			Amenity amenity = findAmenity(amenityOriginName, lat, lon);
 			if (amenity != null) {
-				updatedExtensions.putAll(getAmenityExtensions(amenity));
+				updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 			}
 		}
 		return updatedExtensions;
 	}
 
-	public Map<String, String> getAmenityExtensions(@NonNull Amenity amenity) {
-		Map<String, String> result = new HashMap<String, String>();
-		Map<String, List<PoiType>> collectedPoiAdditionalCategories = new HashMap<>();
-
-		String name = amenity.getName();
-		if (name != null) {
-			result.put(AMENITY_PREFIX + NAME, name);
-		}
-		String subType = amenity.getSubType();
-		if (subType != null) {
-			result.put(AMENITY_PREFIX + SUBTYPE, subType);
-		}
-		PoiCategory type = amenity.getType();
-		if (type != null) {
-			result.put(AMENITY_PREFIX + TYPE, type.getKeyName());
-		}
-		String openingHours = amenity.getOpeningHours();
-		if (openingHours != null) {
-			result.put(AMENITY_PREFIX + OPENING_HOURS, openingHours);
-		}
-		if (amenity.hasAdditionalInfo()) {
-			result.putAll(amenity.getAdditionalInfoAndCollectCategories(app.getPoiTypes(),
-					HIDING_EXTENSIONS_AMENITY_TAGS, collectedPoiAdditionalCategories, null));
-
-			//join collected tags by category into one string
-			for (Map.Entry<String, List<PoiType>> entry : collectedPoiAdditionalCategories.entrySet()) {
-				String categoryName = COLLAPSABLE_PREFIX + entry.getKey();
-				List<PoiType> categoryTypes = entry.getValue();
-				if (categoryTypes.size() > 0) {
-					StringBuilder builder = new StringBuilder();
-					for (PoiType poiType : categoryTypes) {
-						if (builder.length() > 0) {
-							builder.append(SEPARATOR);
-						}
-						builder.append(poiType.getKeyName());
-					}
-					result.put(categoryName, builder.toString());
-				}
-			}
-		}
-		return result;
-	}
-
 	@NonNull
-	public static Map<String, String> getImagesParams(@NonNull Map<String, String> amenityExtensions) {
+	public static Map<String, String> getImagesParams(@NonNull Map<String, String> extensions) {
 		Map<String, String> params = new HashMap<>();
 		List<String> imageTags = Arrays.asList("image", MAPILLARY, WIKIDATA, WIKIPEDIA, WIKIMEDIA_COMMONS);
 		for (String imageTag : imageTags) {
-			String value = amenityExtensions.get(imageTag);
+			String value = extensions.get(imageTag);
 			if (!Algorithms.isEmpty(value)) {
 				if (imageTag.equals("image")) {
 					params.put("osm_image", getDecodedAdditionalInfo(value));
@@ -125,12 +92,12 @@ public class AmenityExtensionsHelper {
 		return params;
 	}
 
-	private static String getDecodedAdditionalInfo(String additionalInfo) {
+	private static String getDecodedAdditionalInfo(@NonNull String value) {
 		try {
-			return URLDecoder.decode(additionalInfo, "UTF-8");
+			return URLDecoder.decode(value, "UTF-8");
 		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
 			LOG.error(e);
 		}
-		return additionalInfo;
+		return value;
 	}
 }

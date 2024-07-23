@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 public class InAppPurchaseUtils {
 
+	public static final int HUGEROCK_PROMO_MONTHS = 6;
 	public static final int TRIPLTEK_PROMO_MONTHS = 12;
 	private static final long ANDROID_AUTO_START_DATE_MS = 10L * 1000L * 60L * 60L * 24L; // 10 days
 
@@ -85,7 +86,8 @@ public class InAppPurchaseUtils {
 				|| isOsmAndProAvailable(app, checkDevBuild)
 				|| isMapperUpdatesSubscribed(app)
 				|| isLiveUpdatesPurchased(app)
-				|| isTripltekPromoAvailable(app);
+				|| isTripltekPromoAvailable(app)
+				|| isHugerockPromoAvailable(app);
 	}
 
 	public static boolean isLiveUpdatesAvailable(@NonNull OsmandApplication app) {
@@ -93,15 +95,16 @@ public class InAppPurchaseUtils {
 				|| isOsmAndProAvailable(app)
 				|| isMapperUpdatesSubscribed(app)
 				|| checkDeveloperBuildIfNeeded(app, true)
+				|| isHugerockPromoAvailable(app)
 				|| isTripltekPromoAvailable(app);
 	}
 
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app);
+		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app) || isHugerockPromoAvailable(app);
 	}
 
 	public static boolean is3dMapsAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app);
+		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app) || isHugerockPromoAvailable(app);
 	}
 
 	public static boolean isExportTypeAvailable(@NonNull OsmandApplication app,
@@ -114,11 +117,11 @@ public class InAppPurchaseUtils {
 	}
 
 	public static boolean isWeatherAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app);
+		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app) || isHugerockPromoAvailable(app);
 	}
 
 	public static boolean isColoringTypeAvailable(@NonNull OsmandApplication app) {
-		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app);
+		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app) || isHugerockPromoAvailable(app);
 	}
 
 	public static boolean isDepthContoursAvailable(@NonNull OsmandApplication app) {
@@ -153,6 +156,25 @@ public class InAppPurchaseUtils {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTimeInMillis(Version.getInstallTime(app));
 			calendar.add(Calendar.MONTH, TRIPLTEK_PROMO_MONTHS);
+
+			return calendar.getTimeInMillis();
+		}
+		return 0;
+	}
+
+	public static boolean isHugerockPromoAvailable(@NonNull OsmandApplication app) {
+		if (Version.isHugerockBuild()) {
+			long expirationTime = getHugerockPromoExpirationTime(app);
+			return expirationTime >= System.currentTimeMillis();
+		}
+		return false;
+	}
+
+	public static long getHugerockPromoExpirationTime(@NonNull OsmandApplication app) {
+		if (Version.isHugerockBuild()) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(Version.getInstallTime(app));
+			calendar.add(Calendar.MONTH, HUGEROCK_PROMO_MONTHS);
 
 			return calendar.getTimeInMillis();
 		}

@@ -31,6 +31,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.core.CustomSearchPoiFilter;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -100,6 +101,23 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			}
 			updateTypesToAccept(type);
 		}
+	}
+
+	public PoiUIFilter(TopIndexFilter topIndexFilter, @Nullable Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, @NonNull OsmandApplication app) {
+		this.app = app;
+		isStandardFilter = true;
+		standardIconId = topIndexFilter.getIconResource();
+		filterId = topIndexFilter.getFilterId();
+		this.name = topIndexFilter.getName();
+		poiTypes = app.getPoiTypes();
+
+		if (acceptedTypes == null) {
+			initSearchAll();
+		} else {
+			this.acceptedTypes.putAll(acceptedTypes);
+		}
+		updatePoiAdditionals();
+		updateAcceptedTypeOrigins();
 	}
 
 	// search by name standard

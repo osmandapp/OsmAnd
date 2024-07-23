@@ -413,6 +413,11 @@
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
     </style>
 
+    <style name="TimeSlider" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">?attr/active_color_primary</item>
+        <item name="android:textColor">?attr/slider_label_text_dark</item>
+    </style>
+
     <style name="SearchPreferenceResultTextAppearance" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">#000000</item>
         <item name="android:textStyle">normal</item>

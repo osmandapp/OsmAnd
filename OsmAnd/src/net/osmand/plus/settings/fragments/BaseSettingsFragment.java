@@ -870,6 +870,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return listPreference;
 	}
 
+	@NonNull
+	protected Preference requirePreference(@NonNull CharSequence key) {
+		Preference preference = findPreference(key);
+		if (preference == null) {
+			throw new IllegalArgumentException("Preference with key '" + key + "' not found.");
+		}
+		return preference;
+	}
+
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {
 		return showInstance(activity, screenType, null);
 	}

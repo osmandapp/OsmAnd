@@ -13,9 +13,10 @@ public class MapScrollRightAction extends BaseMapScrollAction{
 
 	public static final QuickActionType TYPE = new QuickActionType(MAP_SCROLL_RIGHT_ACTION,
 			"map.scroll.right", MapScrollRightAction.class)
-			.nameRes(R.string.key_event_action_move_right)
+			.nameRes(R.string.quick_action_move_map_right)
 			.iconRes(R.drawable.ic_action_map_move_right).nonEditable()
-			.category(QuickActionType.MAP_INTERACTIONS);
+			.category(QuickActionType.MAP_INTERACTIONS)
+			.nameActionRes(R.string.shared_string_move);
 
 	public MapScrollRightAction() {
 		super(TYPE);

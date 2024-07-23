@@ -796,7 +796,6 @@
     <string name="driving_region_us">SAD</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa i Azija</string>
-    <string name="driving_region_uk">Velika Britanija, Indija, Australija i ostalo</string>
     <string name="speak_title">Najaviti…</string>
     <string name="route_descr_map_location">Karta: </string>
     <string name="clear_intermediate_points">Obriši srednje točke</string>
@@ -1490,4 +1489,5 @@
     <string name="m_s">m/s</string>
     <string name="external_sensors_plugin_name">Vanjski senzor</string>
     <string name="current_location_widget">Trenutni položaj</string>
+    <string name="weather_source_ecmwf_description">Europski centar za srednjoročne prognoze vremena (ECMWF)</string>
 </resources>

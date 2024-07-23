@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
@@ -37,8 +38,7 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public void init() {
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver saveTrackReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -46,10 +46,14 @@ public class GpxNotification extends OsmandNotification {
 					plugin.saveCurrentTrack();
 				}
 			}
-		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver startGpxRecReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -58,10 +62,14 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver stopGpxRecReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -70,7 +78,12 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
+		}
 	}
 
 	@Override

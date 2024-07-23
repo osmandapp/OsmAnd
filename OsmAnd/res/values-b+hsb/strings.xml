@@ -361,7 +361,6 @@
     <string name="driving_region_us">Zjednoćene staty Ameriki</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Azija, Łaćonska Amerika a podobne</string>
-    <string name="driving_region_uk">Zjednoćene kralestwo, Indiska a podobne</string>
     <string name="speak_street_names">Dróhowe mjena (TTS)</string>
     <string name="speak_cameras">Błyskače</string>
     <string name="speak_traffic_warnings">Wobchadne warnowanja</string>
@@ -933,8 +932,6 @@
     <string name="select_postcode">Pytanje po póstowym čisle</string>
     <string name="quick_action_auto_zoom_on">Awtomatiski zoom zmóžnić</string>
     <string name="quick_action_auto_zoom_off">Awtomatiski zoom zakazać</string>
-    <string name="quick_action_add_destination">Cil postajić</string>
-    <string name="quick_action_replace_destination">Cil zarunać</string>
     <string name="subscribe_email_error">Zmylk</string>
     <string name="nautical_maps">Nawtiske karty</string>
     <string name="analyze_on_map">Na karće analyzować</string>
@@ -1023,10 +1020,8 @@
     <string name="quick_action_empty_param_error">Wupjelń wšitke parametry</string>
     <string name="quick_action_map_styles">Kartowe stile</string>
     <string name="quick_action_map_underlay_switch">Kartowa podłoha je so změniła na \"%s\".</string>
-    <string name="quick_action_map_underlay">Kartowu podłohu změnić</string>
     <string name="quick_action_map_underlay_title">Kartowe podłohi</string>
     <string name="quick_action_map_underlay_action">Podłohu dodać</string>
-    <string name="quick_action_map_source">Kartowe žórło změnić</string>
     <string name="quick_action_map_source_title">Kartowe žórła</string>
     <string name="quick_action_map_source_action">Kartowe žórło dodać</string>
     <string name="retry">Znowa spytać</string>
@@ -1132,7 +1127,6 @@
     <string name="select_month_and_country">Měsac a kraj wubrać</string>
     <string name="number_of_edits">Ličba změnow</string>
     <string name="file_name_containes_illegal_char">Mjeno dataje wobsahuje zakazany pismik</string>
-    <string name="quick_action_map_style">Stil karty změnić</string>
     <string name="show_arrows_on_the_map">Kłoki na karće pokazaćssss</string>
     <string name="today">dźensa</string>
     <string name="yesterday">wčera</string>

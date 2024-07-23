@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.util.Algorithms;
 
 public class PreviewRouteLineInfo {
@@ -32,6 +33,7 @@ public class PreviewRouteLineInfo {
 	@ColorInt
 	private int customColorNight;
 	private ColoringType coloringType = ColoringType.DEFAULT;
+	private String gradientPalette = PaletteGradientColor.DEFAULT_NAME;
 	private String routeInfoAttribute;
 	private String width;
 	private boolean showTurnArrows;
@@ -52,6 +54,7 @@ public class PreviewRouteLineInfo {
 	                            @NonNull ColoringType coloringType,
 	                            @Nullable String routeInfoAttribute,
 	                            @Nullable String width,
+	                            @NonNull String gradientPalette,
 	                            boolean showTurnArrows) {
 		this.customColorDay = customColorDay;
 		this.customColorNight = customColorNight;
@@ -59,6 +62,7 @@ public class PreviewRouteLineInfo {
 		this.routeInfoAttribute = routeInfoAttribute;
 		this.width = width;
 		this.showTurnArrows = showTurnArrows;
+		this.gradientPalette = gradientPalette;
 	}
 
 	public PreviewRouteLineInfo(@NonNull Bundle bundle) {
@@ -71,6 +75,15 @@ public class PreviewRouteLineInfo {
 		} else {
 			customColorDay = color;
 		}
+	}
+
+	public void setGradientPalette(@NonNull String gradientPalette) {
+		this.gradientPalette = gradientPalette;
+	}
+
+	@NonNull
+	public String getGradientPalette() {
+		return gradientPalette;
 	}
 
 	public void setRouteColoringStyle(@NonNull ColoringStyle coloringStyle) {

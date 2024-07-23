@@ -38,8 +38,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	public static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
 	public static final QuickActionType TYPE = new QuickActionType(MAP_SOURCE_ACTION_ID,
 			"mapsource.change", MapSourceAction.class).
-			nameRes(R.string.quick_action_map_source).iconRes(R.drawable.ic_world_globe_dark).
-			category(QuickActionType.CONFIGURE_MAP);
+			nameRes(R.string.map_source).iconRes(R.drawable.ic_world_globe_dark).
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 	private static final String KEY_SOURCE = "source";
 

@@ -40,6 +40,10 @@ public abstract class DataItem {
 		return !map.isEmpty();
 	}
 
+	public boolean hasAppearanceData() {
+		return hasData() && GpxParameter.getAppearanceParameters().stream().anyMatch(key -> map.get(key) != null);
+	}
+
 	@NonNull
 	@SuppressWarnings("unchecked")
 	public <T> T requireParameter(@NonNull GpxParameter parameter) {
