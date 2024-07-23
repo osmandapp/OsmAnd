@@ -1,7 +1,9 @@
 package net.osmand.plus.voice;
 
 import android.content.Context;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -181,9 +183,7 @@ public abstract class CommandPlayer {
 	}
 
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
-	// Hardy, 2024-07-23: Perhaps from API Level 34 on replace deprecated:
-	//        startBluetoothSco() -> setCommunicationDevice(AudioDeviceInfo.TYPE_BLUETOOTH_SCO)
-	//        stopBluetoothSco()  -> clearCommunicationDevice()
+	// Hardy, 2024-07-23: Adjust for API Level 34 deprecation of startBluetoothSco(), stopBluetoothSco()
 	private synchronized void startBluetoothSco() {
 		try {
 			AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
@@ -194,7 +194,11 @@ public abstract class CommandPlayer {
 			}
 
 			mAudioManager.setMode(AudioManager.MODE_NORMAL);
-			mAudioManager.startBluetoothSco();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+				mAudioManager.setCommunicationDevice(AudioDeviceInfo.TYPE_BLUETOOTH_SCO);
+			} else {
+				mAudioManager.startBluetoothSco();
+			}
 			mAudioManager.setBluetoothScoOn(true);
 			mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 			bluetoothScoRunning = true;
@@ -210,7 +214,11 @@ public abstract class CommandPlayer {
 		AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 		if (mAudioManager != null) {
 			mAudioManager.setBluetoothScoOn(false);
-			mAudioManager.stopBluetoothSco();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+				mAudioManager.clearCommunicationDevice();
+			} else {
+				mAudioManager.stopBluetoothSco();
+			}
 			mAudioManager.setMode(AudioManager.MODE_NORMAL);
 			bluetoothScoRunning = false;
 		}
