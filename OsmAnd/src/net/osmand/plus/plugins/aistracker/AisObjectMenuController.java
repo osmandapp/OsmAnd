@@ -13,6 +13,7 @@ import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
@@ -33,7 +34,13 @@ public class AisObjectMenuController extends MenuController {
         builder.setShowNearestPoi(false);
         builder.setShowOnlinePhotos(false);
         builder.setShowNearestWiki(false);
-        // TODO: show an icon in the menu
+    }
+
+    @Override
+    public int getRightIconId() { return R.drawable.ic_plugin_nautical_map; }
+    @Override
+    public boolean isBigRightIcon() {
+        return true;
     }
 
     @SuppressLint("DefaultLocale")

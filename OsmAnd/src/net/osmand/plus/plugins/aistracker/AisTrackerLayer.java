@@ -66,7 +66,10 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         startNetworkListener();
 
         // for test purposes: remove later...
-        //initTestObjects();
+        //initTestObject1();
+        //initTestObject2();
+        //initTestObject3();
+        //initTestObject4();
         //testCpa();
     }
 
@@ -240,7 +243,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
             Log.d("AisTrackerLayer", "# test4: dist1: " + meterToMiles(y4.distanceTo(y5)));
         }
     }
-    private void initTestObjects() {
+
+    private void initTestObject1() {
         // passenger ship
         AisObject ais = new AisObject(34568, 1, 20, 0, 1, 320,
                 320.0, 8.4, 50.738d, 7.099d, 0.0);
@@ -249,28 +253,32 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
                 65, 8, 12, 2,
                 "Potsdam", 8, 15, 22, 5);
         updateAisObjectList(ais);
+    }
+    private void initTestObject2() {
         // sailing boat
-        ais = new AisObject(454011, 1, 20, 8, 0, 120,
+        AisObject ais = new AisObject(454011, 1, 20, 8, 0, 120,
                 125.0, 4.4, 50.737d, 7.098d, 0.0);
         updateAisObjectList(ais);
         ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
                 0, 0, 0, 0,
                 "@@@", 0, 0, 0, 0);
         updateAisObjectList(ais);
+    }
+    private void initTestObject3() {
         // land station
-        ais = new AisObject(878121, 4, 50.736d, 7.100d);
+        AisObject ais = new AisObject(878121, 4, 50.736d, 7.100d);
         updateAisObjectList(ais);
         // AIDS
         ais = new AisObject( 521077, 21, 50.735d, 7.101d, 2,
                 0, 0, 0, 0);
         updateAisObjectList(ais);
-        // aircraft
-        ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
-        updateAisObjectList(ais);
-
-        //removeOldestAisObjectListEntry();
-        //removeLostAisObjects();
     }
+    private void initTestObject4() {
+        // aircraft
+        AisObject ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
+        updateAisObjectList(ais);
+    }
+
     private void initTimer() {
         TimerTask taskCheckAisObjectList;
         taskCheckAisObjectList = new TimerTask() {
