@@ -5850,4 +5850,6 @@
 \nCPU (venter på GPU): %4$s</string>
     <string name="driving_region_india">Indien</string>
     <string name="driving_region_uk">Storbritannien og lignende</string>
+    <string name="hugerock_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief osv. i %1$s måned</string>
+    <string name="hugerock_promo">Hugerock-kampagne i %1$s måneder</string>
 </resources>
