@@ -5651,4 +5651,5 @@
     <string name="action_icon">Táknmynd aðgerðar</string>
     <string name="driving_region_uk">Bretland og svipað</string>
     <string name="data_source">Gagnagjafi</string>
+    <string name="weather_source_ecmwf_description">Evrópumiðstöð fyrir meðallangar veðurspár</string>
 </resources>
