@@ -20,7 +20,6 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.base.dialog.interfaces.other.IDialogStateListener;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -36,7 +35,6 @@ public class DialogManager {
 
 	private final Map<String, IDialog> dialogs = new HashMap<>();
 	private final Map<String, IDialogController> controllers = new HashMap<>();
-	private final Map<String, IDialogStateListener> stateListeners = new HashMap<>();
 
 	public void register(@NonNull String processId, @NonNull IDialog dialog) {
 		dialogs.put(processId, dialog);
@@ -44,29 +42,11 @@ public class DialogManager {
 
 	public void register(@NonNull String processId, @NonNull IDialogController controller) {
 		controllers.put(processId, controller);
-
-		IDialogStateListener listener = findStateListener(processId);
-		if (listener != null) {
-			listener.onDialogRegistered(processId);
-		}
 	}
 
 	public void unregister(@NonNull String processId) {
 		dialogs.remove(processId);
 		controllers.remove(processId);
-
-		IDialogStateListener listener = findStateListener(processId);
-		if (listener != null) {
-			listener.onDialogUnregistered(processId);
-		}
-	}
-
-	public void registerListener(@NonNull String processId, @NonNull IDialogStateListener listener) {
-		stateListeners.put(processId, listener);
-	}
-
-	public void removeListener(@NonNull String processId) {
-		stateListeners.remove(processId);
 	}
 
 	@Nullable
@@ -77,11 +57,6 @@ public class DialogManager {
 	@Nullable
 	public IDialog findDialog(@NonNull String processId) {
 		return dialogs.get(processId);
-	}
-
-	@Nullable
-	public IDialogStateListener findStateListener(@NonNull String processId) {
-		return stateListeners.get(processId);
 	}
 
 	@Nullable

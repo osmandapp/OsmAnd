@@ -22,6 +22,8 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 
 	void unbindPalette(@NonNull IColorsPalette palette);
 
+	default void onAllColorsScreenClosed() { }
+
 	void setPaletteListener(@NonNull OnColorsPaletteListener onColorsPaletteListener);
 
 	@ColorInt

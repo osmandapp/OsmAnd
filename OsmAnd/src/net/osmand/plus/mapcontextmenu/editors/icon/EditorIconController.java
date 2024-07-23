@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
@@ -59,7 +60,7 @@ public class EditorIconController extends BaseDialogController {
 	private final EditorIconCardController cardController;
 	private final EditorIconScreenController screenController;
 	private IconsPaletteElements<String> paletteElements;
-	private OnIconsPaletteListener<String> listener;
+	private Fragment targetFragment;
 	private int controlsAccentColor;
 
 	public EditorIconController(@NonNull OsmandApplication app, @Nullable String selectedIconKey) {
@@ -178,8 +179,13 @@ public class EditorIconController extends BaseDialogController {
 		return selectedCategory;
 	}
 
-	public void setListener(@NonNull OnIconsPaletteListener<String> listener) {
-		this.listener = listener;
+	public void setTargetFragment(@NonNull Fragment targetFragment) {
+		this.targetFragment = targetFragment;
+	}
+
+	@Nullable
+	public Fragment getTargetFragment() {
+		return targetFragment;
 	}
 
 	public void addIconToLastUsed(@NonNull String iconKey) {
@@ -228,6 +234,9 @@ public class EditorIconController extends BaseDialogController {
 				@Override
 				protected Drawable getIconDrawable(@NonNull String iconName, boolean isSelected) {
 					int iconId = RenderingIcons.getBigIconResourceId(iconName);
+					if (iconId <= 0) {
+						iconId = R.drawable.ic_action_search_dark;
+					}
 					return getIcon(iconId, R.color.icon_color_default_light);
 				}
 			};
@@ -245,7 +254,9 @@ public class EditorIconController extends BaseDialogController {
 			setSelectedCategory(findCategoryByKey(categoryKey));
 			cardController.updateIconsSelection();
 		}
-		listener.onIconSelectedFromPalette(iconKey);
+		if (targetFragment instanceof OnIconsPaletteListener<?>) {
+			((OnIconsPaletteListener<String>) targetFragment).onIconSelectedFromPalette(iconKey);
+		}
 	}
 
 	@NonNull
@@ -285,7 +296,7 @@ public class EditorIconController extends BaseDialogController {
 
 	@NonNull
 	public static EditorIconController getInstance(@NonNull OsmandApplication app,
-	                                               @NonNull OnIconsPaletteListener<String> listener,
+	                                               @NonNull Fragment targetFragment,
 	                                               @Nullable String preselectedIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
 		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
@@ -293,7 +304,7 @@ public class EditorIconController extends BaseDialogController {
 			controller = new EditorIconController(app, preselectedIconKey);
 			dialogManager.register(PROCESS_ID, controller);
 		}
-		controller.setListener(listener);
+		controller.setTargetFragment(targetFragment);
 		return controller;
 	}
 }

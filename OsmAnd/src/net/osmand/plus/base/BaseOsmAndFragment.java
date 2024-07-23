@@ -82,7 +82,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		}
 	}
 
-	protected void askUpdateStatusBar() {
+	public void updateStatusBar() {
 		Activity activity = getActivity();
 		if (activity != null) {
 			updateStatusBar(activity);

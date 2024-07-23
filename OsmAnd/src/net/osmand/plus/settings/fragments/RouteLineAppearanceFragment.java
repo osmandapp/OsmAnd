@@ -1,10 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.util.Algorithms.objectEquals;
 
-import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,8 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
-import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.other.IDialogStateListener;
 import net.osmand.plus.card.base.multistate.IMultiStateCardController;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -57,7 +53,7 @@ import java.util.Objects;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener,
-		InAppPurchaseHelper.InAppPurchaseListener, IDialogStateListener {
+		InAppPurchaseHelper.InAppPurchaseListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -439,9 +435,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		super.onResume();
 		setDrawInfoOnRouteLayer(previewRouteLineInfo);
 		getColorCardController().onResume();
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.registerListener(ALL_COLORS_PROCESS_ID, this);
 	}
 
 	@Override
@@ -449,14 +442,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		super.onPause();
 		setDrawInfoOnRouteLayer(null);
 		getColorCardController().onPause();
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.removeListener(ALL_COLORS_PROCESS_ID);
-	}
-
-	@Override
-	public void onDialogUnregistered(@NonNull String processId) {
-		askUpdateStatusBar();
 	}
 
 	private void setDrawInfoOnRouteLayer(@Nullable PreviewRouteLineInfo drawInfo) {

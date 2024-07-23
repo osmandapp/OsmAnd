@@ -3,8 +3,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
-import static net.osmand.plus.card.icon.IIconsPaletteController.ALL_ICONS_PROCESS_ID;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,8 +34,6 @@ import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.other.IDialogStateListener;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
@@ -60,8 +56,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public abstract class EditorFragment extends BaseOsmAndFragment implements CardListener,
-		OnColorsPaletteListener, OnIconsPaletteListener<String>, IDialogStateListener {
+public abstract class EditorFragment extends BaseOsmAndFragment
+		implements CardListener, OnColorsPaletteListener, OnIconsPaletteListener<String> {
 
 	protected ShapesCard shapesCard;
 
@@ -170,10 +166,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements CardL
 		super.onResume();
 		requireMapActivity().disableDrawer();
 		view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.registerListener(ALL_COLORS_PROCESS_ID, this);
-		dialogManager.registerListener(ALL_ICONS_PROCESS_ID, this);
 	}
 
 	@Override
@@ -181,10 +173,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements CardL
 		super.onPause();
 		requireMapActivity().enableDrawer();
 		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.removeListener(ALL_COLORS_PROCESS_ID);
-		dialogManager.removeListener(ALL_ICONS_PROCESS_ID);
 	}
 
 	@Override
@@ -333,11 +321,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements CardL
 	@NonNull
 	private EditorIconController getIconController() {
 		return EditorIconController.getInstance(app, this, iconName);
-	}
-
-	@Override
-	public void onDialogUnregistered(@NonNull String processId) {
-		askUpdateStatusBar();
 	}
 
 	protected void updateContent() {

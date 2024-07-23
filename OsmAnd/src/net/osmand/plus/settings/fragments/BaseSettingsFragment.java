@@ -213,7 +213,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				mapActivity.disableDrawer();
 			}
 		}
-		askUpdateStatusBarColor();
+		updateStatusBar();
 	}
 
 	@Override
@@ -244,15 +244,14 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected void askUpdateStatusBarColor() {
+	public void updateStatusBar() {
 		Activity activity = getActivity();
 		if (activity != null) {
-			updateStatusBarColor(activity);
+			updateStatusBar(activity);
 		}
-
 	}
 
-	protected void updateStatusBarColor(@NonNull Activity activity) {
+	protected void updateStatusBar(@NonNull Activity activity) {
 		int colorId = getStatusBarColorId();
 		if (colorId != -1) {
 			if (activity instanceof MapActivity) {

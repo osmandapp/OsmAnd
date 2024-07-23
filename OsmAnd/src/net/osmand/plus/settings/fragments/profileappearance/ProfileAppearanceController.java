@@ -337,6 +337,13 @@ public class ProfileAppearanceController extends BaseDialogController {
 			ColorsCollection colorsCollection = new FileColorsCollection(app);
 			colorsCardController = new ColorsPaletteController(app, colorsCollection, selectedColor) {
 				@Override
+				public void onAllColorsScreenClosed() {
+					if (screen != null) {
+						screen.updateStatusBar();
+					}
+				}
+
+				@Override
 				public int getControlsAccentColor(boolean nightMode) {
 					if (selectedPaletteColor != null) {
 						return selectedPaletteColor.getColor();
@@ -403,7 +410,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getRestingIconCardController() {
 		if (restingIconCardController == null) {
-			restingIconCardController = new ProfileIconsController<String>(app, listLocationIcons(), changedProfile.locationIcon) {
+			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), changedProfile.locationIcon) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -436,7 +443,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
 			String movementIconName = LocationIcon.getActualNavigationIconName(changedProfile.navigationIcon);
-			navigationIconCardController = new ProfileIconsController<String>(app, listNavigationIcons(), movementIconName) {
+			navigationIconCardController = new ProfileIconsController<>(app, listNavigationIcons(), movementIconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -562,6 +569,13 @@ public class ProfileAppearanceController extends BaseDialogController {
 		}
 
 		protected abstract IconsPaletteElements<IconData> createPaletteElements(@NonNull Context context, boolean nightMode);
+
+		@Override
+		public void onAllIconsScreenClosed() {
+			if (screen != null) {
+				screen.updateStatusBar();
+			}
+		}
 
 		@Override
 		public int getControlsAccentColor(boolean nightMode) {

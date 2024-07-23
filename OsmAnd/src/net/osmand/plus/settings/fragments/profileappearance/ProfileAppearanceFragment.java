@@ -37,7 +37,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.other.IDialogStateListener;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -55,8 +54,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import org.apache.commons.logging.Log;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment
-		implements IProfileAppearanceScreen, IDialogStateListener {
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -351,11 +349,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onDialogUnregistered(@NonNull String processId) {
-		askUpdateStatusBarColor();
-	}
-
-	@Override
 	public void onAskDismissDialog(@NonNull String processId) {
 		dismiss();
 	}
@@ -373,20 +366,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	public void onResume() {
 		super.onResume();
 		screenController.checkSavingProfile();
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.registerListener(ALL_COLORS_PROCESS_ID, this);
-		dialogManager.registerListener(ALL_ICONS_PROCESS_ID, this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		screenController.onScreenPause();
-
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.removeListener(ALL_COLORS_PROCESS_ID);
-		dialogManager.removeListener(ALL_ICONS_PROCESS_ID);
 	}
 
 	@Override

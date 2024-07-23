@@ -12,11 +12,13 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
@@ -63,6 +65,9 @@ public class EditorIconScreenController implements IDialogController {
 	public void onDestroyScreen() {
 		this.screen = null;
 		exitSearchModeIfNeeded();
+		if (centralController.getTargetFragment() instanceof BaseOsmAndFragment targetFragment) {
+			targetFragment.updateStatusBar();
+		}
 	}
 
 	@NonNull
