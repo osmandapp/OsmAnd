@@ -19,7 +19,7 @@
 		android:id="@+id/icons_selector"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginHorizontal="@dimen/content_padding"
 		android:layout_marginTop="@dimen/content_padding_small_half"
 		android:layout_marginBottom="@dimen/content_padding_small" />
 

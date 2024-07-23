@@ -12,12 +12,13 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
@@ -64,6 +65,9 @@ public class EditorIconScreenController implements IDialogController {
 	public void onDestroyScreen() {
 		this.screen = null;
 		exitSearchModeIfNeeded();
+		if (centralController.getTargetFragment() instanceof BaseOsmAndFragment targetFragment) {
+			targetFragment.updateStatusBar();
+		}
 	}
 
 	@NonNull
@@ -198,7 +202,7 @@ public class EditorIconScreenController implements IDialogController {
 		searchCancelled = false;
 		SearchSettings searchSettings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POI_TYPE);
 		searchUICore.updateSettings(searchSettings);
-		searchUICore.search(text, true, new ResultMatcher<SearchResult>() {
+		searchUICore.search(text, true, new ResultMatcher<>() {
 			@Override
 			public boolean publish(SearchResult searchResult) {
 				if (searchResult.objectType == SEARCH_FINISHED) {
@@ -206,8 +210,7 @@ public class EditorIconScreenController implements IDialogController {
 					List<PoiType> results = new ArrayList<>();
 					for (SearchResult result : resultCollection.getCurrentSearchResults()) {
 						Object poiObject = result.object;
-						if (poiObject instanceof PoiType) {
-							PoiType poiType = (PoiType) poiObject;
+						if (poiObject instanceof PoiType poiType) {
 							if (!poiType.isAdditional()) {
 								results.add(poiType);
 							}
