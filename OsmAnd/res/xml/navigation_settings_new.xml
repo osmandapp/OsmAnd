@@ -62,4 +62,10 @@
 		android:title="@string/map_during_navigation"
 		app:fragment="net.osmand.plus.settings.fragments.MapDuringNavigationFragment" />
 
+	<Preference
+		android:key="detailed_track_guidance"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/detailed_track_guidance"
+		tools:icon="@drawable/ic_action_attach_track" />
+
 </PreferenceScreen>

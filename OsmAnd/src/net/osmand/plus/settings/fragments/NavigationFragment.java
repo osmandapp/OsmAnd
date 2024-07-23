@@ -40,6 +40,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	public static final String NAVIGATION_TYPE = "navigation_type";
 
 	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
+	private static final String DETAILED_TRACK_GUIDANCE = "detailed_track_guidance";
 
 	private RoutingProfilesHolder routingProfiles;
 	private RoutingDataUtils routingDataUtils;
@@ -84,9 +85,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+		Preference detailedTrackGuidance = findPreference(DETAILED_TRACK_GUIDANCE);
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
+		detailedTrackGuidance.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
+		detailedTrackGuidance.setSummary(settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(getSelectedAppMode()) ? R.string.ask_every_time : R.string.shared_string_automatically);
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
@@ -150,6 +154,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 			if (mapActivity != null) {
 				ApplicationMode appMode = getSelectedAppMode();
 				RouteLineAppearanceFragment.showInstance(mapActivity, appMode);
+			}
+		} else if (DETAILED_TRACK_GUIDANCE.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				DetailedTrackGuidanceFragment.showInstance(mapActivity, appMode, this);
 			}
 		}
 		return false;

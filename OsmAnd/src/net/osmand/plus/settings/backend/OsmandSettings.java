@@ -3114,6 +3114,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> ASK_ATTACH_TO_THE_ROADS = new BooleanPreference(this, "ask_attach_to_the_roads", true).makeProfile().makeShared();
+	public final OsmandPreference<Integer> AUTO_ATTACH_THRESHOLD_DISTANCE = new IntPreference(this, "auto_attach_to_the_roads_threshold_distance", 50).makeProfile().makeShared();
 
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference(this, "map_activity_enabled", false).makeGlobal();
