@@ -181,6 +181,9 @@ public abstract class CommandPlayer {
 	}
 
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
+	// Hardy, 2024-07-23: Perhaps from API Level 34 on replace deprecated:
+	//        startBluetoothSco() -> setCommunicationDevice(AudioDeviceInfo.TYPE_BLUETOOTH_SCO)
+	//        stopBluetoothSco()  -> clearCommunicationDevice()
 	private synchronized void startBluetoothSco() {
 		try {
 			AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
