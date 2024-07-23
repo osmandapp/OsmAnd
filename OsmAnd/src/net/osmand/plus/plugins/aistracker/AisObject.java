@@ -88,7 +88,10 @@ public class AisObject {
     private String ais_destination = null;
     private String countryCode = null;
     private SortedSet<Integer> msgTypes = null;
+    /* timestamp of last AIS message received for the current instance: */
     private long lastUpdate = 0;
+    /* timestamp of last AIS message received for all instances: */
+    private static long lastMessageReceived = 0;
     /* after this time of missing AIS signal the object is outdated and can be removed: */
     private static int maxObjectAgeInMinutes = AIS_OBJ_LOST_DEFAULT_TIMEOUT;
     /* after this time of missing AIS signal the vessel symbol can change to mark "lost": */
@@ -202,6 +205,7 @@ public class AisObject {
         this.countryCode = getCountryCode(this.ais_mmsi);
         this.msgTypes.add(ais_msgType);
         this.lastUpdate = System.currentTimeMillis();
+        lastMessageReceived = this.lastUpdate;
     }
     private void initLatLon(double lat, double lon) {
         if ((lat != INVALID_LAT) && (lon != INVALID_LON)) {
@@ -378,6 +382,7 @@ public class AisObject {
 
         /* this method does not produce an exact copy of the given object, here are the differences: */
         this.lastUpdate = System.currentTimeMillis();
+        lastMessageReceived = this.lastUpdate;
         if (this.msgTypes == null) {
             this.msgTypes = new TreeSet<>();
         }
@@ -667,6 +672,12 @@ public class AisObject {
     public String getCountryCode() { return this.countryCode; }
     public AisObjType getObjectClass() { return this.objectClass; }
     public long getLastUpdate() { return this.lastUpdate; }
+    public static long getLastMessageReceived() { return lastMessageReceived; }
+    public static long getAndUpdateLastMessageReceived() {
+        long timestamp = getLastMessageReceived();
+        lastMessageReceived = System.currentTimeMillis();
+        return timestamp;
+    }
     @NonNull
     public String getShipTypeString() {
         switch (this.ais_shipType) {

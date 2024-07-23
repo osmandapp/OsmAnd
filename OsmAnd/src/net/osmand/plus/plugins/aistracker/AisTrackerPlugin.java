@@ -88,7 +88,10 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public String getComponentId1() {
         return COMPONENT;
     }
-
+    @Override
+    public String getComponentId2() {
+        return "net.osmand.dev"; // for test purposes to enable logcat at adb connected physical device
+    }
     @Override
     public CharSequence getDescription(boolean linksEnabled) {
         return app.getString(R.string.plugin_aistracker_description).concat("\n\n").concat(app.getString(R.string.plugin_aistracker_disclaimer));
@@ -135,6 +138,13 @@ public class AisTrackerPlugin extends OsmandPlugin {
     @Override
     public String getPrefsDescription() {
         return app.getString(R.string.ais_address_settings_description);
+    }
+
+    @Override
+    public void mapActivityResume(@NonNull MapActivity activity) {
+        if (aisTrackerLayer != null) {
+            aisTrackerLayer.checkTcpConnection();
+        }
     }
 
     @Override
