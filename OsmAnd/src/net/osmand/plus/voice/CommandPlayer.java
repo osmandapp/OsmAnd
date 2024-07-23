@@ -51,7 +51,7 @@ public abstract class CommandPlayer {
 	protected final ScriptableObject jsScope;
 	protected final VoiceRouter voiceRouter;
 
-	private AudioFocusHelper mAudioFocusHelper;
+	private AudioFocusHelper focusHelper;
 
 	protected final File voiceProviderDir;
 	protected final String language;
@@ -152,9 +152,9 @@ public abstract class CommandPlayer {
 		log.debug("requestAudioFocus");
 		streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 		updateAudioStream(streamType);
-		mAudioFocusHelper = createAudioFocusHelper();
-		if (mAudioFocusHelper != null && app != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(app);
+		focusHelper = createAudioFocusHelper();
+		if (focusHelper != null && app != null) {
+			boolean audioFocusGranted = focusHelper.requestAudFocus(app);
 			if (audioFocusGranted && streamType == 0) {
 				startBluetoothSco();
 			}
@@ -176,10 +176,10 @@ public abstract class CommandPlayer {
 		if (streamType == 0 || bluetoothScoRunning) {
 			stopBluetoothSco();
 		}
-		if (app != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonAudFocus(app);
+		if (app != null && focusHelper != null) {
+			focusHelper.abandonAudFocus(app);
 		}
-		mAudioFocusHelper = null;
+		focusHelper = null;
 	}
 
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
@@ -217,15 +217,15 @@ public abstract class CommandPlayer {
 	}
 
 	private synchronized void stopBluetoothSco() {
-		AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-		if (mAudioManager != null) {
-			mAudioManager.setBluetoothScoOn(false);
+		AudioManager manager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		if (manager != null) {
+			manager.setBluetoothScoOn(false);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-				mAudioManager.clearCommunicationDevice();
+				manager.clearCommunicationDevice();
 			} else {
-				mAudioManager.stopBluetoothSco();
+				manager.stopBluetoothSco();
 			}
-			mAudioManager.setMode(AudioManager.MODE_NORMAL);
+			manager.setMode(AudioManager.MODE_NORMAL);
 			bluetoothScoRunning = false;
 		}
 	}
