@@ -287,10 +287,15 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	public String getSearchableInfo() {
-		final String title = getView().<TextViewEx>findViewById(R.id.title).getText().toString();
-		final String trackTitle = trackItem.<TextViewEx>findViewById(R.id.title).getText().toString();
-		final String speedTitle = speedItem.<TextViewEx>findViewById(R.id.title).getText().toString();
-		final String startTitle = startItem.<TextViewEx>findViewById(R.id.title).getText().toString();
-		return String.join(", ", title, trackTitle, speedTitle, startTitle);
+		return String.join(
+				", ",
+				getView().<TextViewEx>findViewById(R.id.title).getText().toString(),
+				getTitle(trackItem),
+				getTitle(speedItem),
+				getTitle(startItem));
+	}
+
+	private String getTitle(final LinearLayout item) {
+		return item.<TextViewEx>findViewById(R.id.title).getText().toString();
 	}
 }
