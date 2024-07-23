@@ -18,6 +18,13 @@ public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
 	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction of seg dist to pnt-to-gpx dist (0.001)
+	private final double CRUSH_SEGMENTS_BY_DISTANCE_M = 10; // crush road segments to match GPX points better (meters)
+
+	private class MinDistResult {
+		private double minDist;
+		private RouteSegmentResult segment;
+		private int preciseIndex, preciseX, preciseY;
+	}
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
 	// private List<Integer> DEBUG_IDS = Arrays.asList(499257893, 126338247, 237816930); // good, wrong, turn
@@ -32,38 +39,45 @@ public class GpxSegmentsApproximation {
 		GpxPoint currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, 0);
 
 		while (currentPoint != null && currentPoint.pnt != null) {
-			double minDistSqrSegment = 0;
-			RouteSegmentResult fres = null;
+			double minDistAhead = Double.POSITIVE_INFINITY;
+			MinDistResult bestMinDistResult = null;
 			int minNextInd = -1;
-			for (int j = currentPoint.ind + 1; j < Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size()); j++) {
-				RouteSegmentResult[] res = new RouteSegmentResult[1];
-				double minDistSqr = Double.POSITIVE_INFINITY;
+
+			double bonus = 1.0; // TODO remove
+
+			int start = currentPoint.ind + 1;
+			int end = Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size());
+
+			for (int j = start; j < end; j++) {
 				GpxPoint ps = gpxPoints.get(j);
-				minDistSqr = minDistResult(res, minDistSqr, currentPoint.pnt, ps);
-				if (currentPoint.pnt.others != null) {
-					for (RouteSegmentPoint oth : currentPoint.pnt.others) {
-						minDistSqr = minDistResult(res, minDistSqr, oth, ps);
-					}
-				}
-				if (fres == null || minDistSqr <= minDistSqrSegment) {
-					fres = res[0];
-					minDistSqrSegment = minDistSqr;
+				MinDistResult currentMinDistResult = findMinDistInLoadedPoints(currentPoint, ps);
+//				System.err.printf("WARN: XXX min %.2f cur %.2f (%.2f) bonus %.2f\n",
+//						minDistAhead, currentMinDistResult.minDist, currentMinDistResult.minDist * bonus, bonus);
+				if (currentMinDistResult.minDist * bonus <= minDistAhead) {
+					minDistAhead = currentMinDistResult.minDist;
+					bestMinDistResult = currentMinDistResult;
 					minNextInd = j;
 				}
 				if (MapUtils.getDistance(currentPoint.loc, gpxPoints.get(j).loc) > minPointApproximation) {
 					break; // avoid shortcutting of loops
 				}
+//				bonus *= 0.8;
 			}
+
 			if (minNextInd < 0) {
 				break;
 			}
-			if (minDistSqrSegment > minPointApproximation * minPointApproximation) {
+
+			if (minDistAhead > minPointApproximation * minPointApproximation) {
 				final int nextIndex = currentPoint.ind + 1;
 				currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, nextIndex);
 				continue;
 			}
-			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
+
+			RouteSegmentResult fres = bestMinDistResult.segment;
 			fres.setGpxPointIndex(currentPoint.ind);
+
+			currentPoint.routeToTarget = new ArrayList<>();
 			currentPoint.routeToTarget.add(fres);
 			currentPoint.targetInd = minNextInd;
 
@@ -75,7 +89,7 @@ public class GpxSegmentsApproximation {
 			while (sg != null) {
 				if (sg.getRoad().getId() != fres.getObject().getId() || sg.getSegmentEnd() != fres.getEndPointIndex()) {
 					RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(),
-							0);
+							0); // TODO init distToProjSquare to next-gpx-point
 					if (currentPoint.pnt == null) {
 						currentPoint.pnt = p;
 					} else {
@@ -114,34 +128,101 @@ public class GpxSegmentsApproximation {
 		return false;
 	}
 
-	private double minDistResult(RouteSegmentResult[] res, double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc) {
-		int segmentEnd = -1;
-		double dist = 0;
-		int start = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
-		int end = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
-		for (int i = start; i < end; i++) {
-			if (i == pnt.getSegmentStart()) {
-				continue;
-			}
-			double d = MapUtils.squareDist31TileMetric(loc.x31, loc.y31,
-					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i));
-			if (segmentEnd < 0 || d < dist) {
-				segmentEnd = i;
-				dist = d;
+	private MinDistResult findMinDistInLoadedPoints(GpxPoint loadedPoint, GpxPoint nextPoint) {
+		MinDistResult best = findOneMinDist(Double.POSITIVE_INFINITY, loadedPoint.pnt, nextPoint);
+		if (loadedPoint.pnt.others != null) {
+			for (RouteSegmentPoint oth : loadedPoint.pnt.others) {
+				MinDistResult fresh = findOneMinDist(best.minDist, oth, nextPoint);
+				if (fresh != null) {
+					best = fresh;
+				}
 			}
 		}
-		dist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
+		return best;
+	}
+
+	private MinDistResult findOneMinDist(double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc) {
+		double newMinDist = 0;
+		int bestSegmentEnd = -1;
+		int preciseX = -1, preciseY = -1;
+
+		int startPointIndex = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
+		int endPointIndex = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
+
+		for (int i = startPointIndex; i < endPointIndex; i++) {
+			int[] resultPreciseXY = { -1, -1 };
+			double dist = findPreciseMinDist(loc, pnt, i, resultPreciseXY);
+			if (bestSegmentEnd < 0 || dist < newMinDist) {
+				preciseX = resultPreciseXY[0];
+				preciseY = resultPreciseXY[1];
+				bestSegmentEnd = i;
+				newMinDist = dist;
+			}
+		}
+
+		// TODO distToProj (any) must be replaced with distToProj to the next-gpx-point
+		// TODO dilution should be replaced with distToProj for non-findRouteSegment segments
+		newMinDist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
 
 		// Sometimes, more than 1 segment from (pnt+others) to next-gpx-point might have the same distance.
 		// To make difference, a small fraction (1/1000) of real-segment-distance is added as "dilution" value.
 		// Such a small dilution prevents from interfering with main searching of minimal distance to gpx-point.
 		// https://test.osmand.net/map/?start=52.481439,13.386036&end=52.483094,13.386060&profile=rescuetrack&params=rescuetrack,geoapproximation#18/52.48234/13.38672
-		dist += sumPntDistanceSqr(pnt, pnt.getSegmentStart(), segmentEnd) * DILUTE_BY_SEGMENT_DISTANCE;
+		newMinDist += sumPntDistanceSqr(pnt, pnt.getSegmentStart(), bestSegmentEnd) * DILUTE_BY_SEGMENT_DISTANCE;
 
-		if ((res[0] == null || dist < minDistSqr) && segmentEnd >= 0) {
-			minDistSqr = dist;
-			res[0] = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), segmentEnd);
+		MinDistResult result = new MinDistResult();
+
+		if (newMinDist < minDistSqr && bestSegmentEnd >= 0) {
+			if (preciseX != -1 && preciseY != -1) {
+				result.preciseX = preciseX;
+				result.preciseY = preciseY;
+				result.preciseIndex = bestSegmentEnd;
+			}
+			result.segment = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), bestSegmentEnd);
+			result.minDist = newMinDist;
+			return result;
 		}
+
+		return null;
+	}
+
+	private double findPreciseMinDist(GpxPoint loc, RouteSegmentPoint pnt, int endIndex, int [] resultXY) {
+		int x1 = pnt.getRoad().getPoint31XTile(endIndex);
+		int y1 = pnt.getRoad().getPoint31YTile(endIndex);
+		int x2 = pnt.getRoad().getPoint31XTile(endIndex > 0 ? endIndex - 1 : 0);
+		int y2 = pnt.getRoad().getPoint31YTile(endIndex > 0 ? endIndex - 1 : 0);
+		double segmentDistanceMeters = MapUtils.squareRootDist31(x1, y1, x2, y2);
+
+		int nVirtualSegments = CRUSH_SEGMENTS_BY_DISTANCE_M > 0
+				? (int) (segmentDistanceMeters / CRUSH_SEGMENTS_BY_DISTANCE_M) : 0;
+
+		double minDistSqr = Double.POSITIVE_INFINITY;
+
+		int tmp = -1;
+
+		for (int i = 0; i <= nVirtualSegments; i++) {
+			int px = nVirtualSegments > 0 ? (x1 - (x1 - x2) * i / nVirtualSegments) : x1;
+			int py = nVirtualSegments > 0 ? (y1 - (y1 - y2) * i / nVirtualSegments) : y1;
+
+			double distSqr = MapUtils.squareDist31TileMetric(px, py, loc.x31, loc.y31);
+
+			if (distSqr < minDistSqr) {
+				tmp = i;
+				resultXY[0] = px;
+				resultXY[1] = py;
+				minDistSqr = distSqr;
+			}
+		}
+
+		double oldDist = MapUtils.squareDist31TileMetric(x1, y1, loc.x31, loc.y31);
+
+//		if(oldDist != minDistSqr)
+//			System.err.printf("WARN: XXX [%d/%d] old %.2f new %.2f\n",
+//				tmp, nVirtualSegments, Math.sqrt(oldDist), Math.sqrt(minDistSqr));
+
+//		System.err.printf("WARN: XXX [%d] %.2f (%d) = %.2f (%s)\n",
+//				endIndex, segmentDistanceMeters, nVirtualSegments, Math.sqrt(minDistSqr), pnt);
+//
 		return minDistSqr;
 	}
 
