@@ -33,9 +33,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import org.apache.commons.logging.Log;
 
-import de.KnollFrank.lib.preferencesearch.search.provider.HasSearchableInfo;
-
-public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements HasSearchableInfo {
+public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = "SendAnalyticsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
@@ -212,7 +210,6 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
-	@Override
 	public String getSearchableInfo() {
 		// FK-FIXME: add searchable infos from instance variables
 		return "so isses";

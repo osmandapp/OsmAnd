@@ -284,4 +284,9 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		this.gpxFile = gpxFile;
 		updateCard();
 	}
+
+	public String getSearchableInfo() {
+		// FK-FIXME: add searchable infos from instance variables
+		return "that is true";
+	}
 }

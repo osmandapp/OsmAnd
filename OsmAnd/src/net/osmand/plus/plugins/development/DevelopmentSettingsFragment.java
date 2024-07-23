@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat;
 public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
-	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
+	public static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
