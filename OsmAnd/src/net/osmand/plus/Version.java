@@ -26,7 +26,8 @@ public class Version {
 	private static final Log log = PlatformUtil.getLog(Version.class);
 
 	public static final String TRIPLTEK_NAME = "TRIPLTEK";
-	public static final String HUGEROCK_NAME = "HUGEROCK";
+	public static final String HUGEROCK_BRAND_NAME = "alps";
+	public static final String HUGEROCK_MANUFACTURER_NAME = "SOTEN";
 	public static final String FULL_VERSION_NAME = "net.osmand.plus";
 	private static final String FREE_VERSION_NAME = "net.osmand";
 	private static final String FREE_DEV_VERSION_NAME = "net.osmand.dev";
@@ -170,15 +171,12 @@ public class Version {
 	}
 
 	public static boolean isTripltekBuild() {
-		return isPromoBuild(TRIPLTEK_NAME);
+		return TRIPLTEK_NAME.equalsIgnoreCase(Build.BRAND) || TRIPLTEK_NAME.equalsIgnoreCase(Build.MANUFACTURER);
 	}
 
 	public static boolean isHugerockBuild() {
-		return isPromoBuild(HUGEROCK_NAME);
-	}
-
-	public static boolean isPromoBuild(@NonNull String name) {
-		return CollectionUtils.equalsToAny(name, Build.BRAND, Build.MANUFACTURER);
+		return HUGEROCK_BRAND_NAME.equalsIgnoreCase(Build.BRAND)
+				&& HUGEROCK_MANUFACTURER_NAME.equalsIgnoreCase(Build.MANUFACTURER);
 	}
 
 	public static String getVersionForTracker(@NonNull OsmandApplication app) {
