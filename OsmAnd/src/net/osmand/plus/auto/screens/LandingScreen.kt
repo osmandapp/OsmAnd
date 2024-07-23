@@ -19,6 +19,12 @@ class LandingScreen(
         val listBuilder = ItemList.Builder()
         val app = app
         for (category in PlaceCategory.values()) {
+            if (category == PlaceCategory.FREE_MODE) {
+                if(app.navigationService.isCarNavigationActive) {
+                    listBuilder.addItem(createContinueNavigationItem())
+                    continue
+                }
+            }
             val title = app.getString(category.titleId)
             val icon = CarIcon.Builder(IconCompat.createWithResource(app, category.iconId)).build()
             listBuilder.addItem(
@@ -88,6 +94,27 @@ class LandingScreen(
             .setHeaderAction(Action.APP_ICON)
             .setMapActionStrip(mapActionStripBuilder)
             .setActionStrip(actionStripBuilder.build())
+            .build()
+    }
+
+    private fun createContinueNavigationItem(): Item {
+        val title = app.getString(R.string.continue_navigation)
+        val icon = CarIcon.Builder(
+            IconCompat.createWithResource(
+                app,
+                R.drawable.ic_action_gdirections_dark)).build()
+        return Row.Builder()
+            .setTitle(title)
+            .setImage(icon)
+            .setOnClickListener {
+                app.carNavigationSession?.let {
+                    it.startNavigation()
+                    val navigationScreen = it.navigationScreen
+                    navigationScreen?.let {
+                        screenManager.push(navigationScreen)
+                    }
+                }
+            }
             .build()
     }
 
