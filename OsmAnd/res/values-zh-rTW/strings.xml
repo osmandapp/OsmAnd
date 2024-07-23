@@ -5833,4 +5833,6 @@
     <string name="auto_25_chars_route_tsll">稍向左轉</string>
     <string name="auto_25_chars_route_tu">迴轉</string>
     <string name="auto_25_chars_route_kl">靠左</string>
+    <string name="driving_region_uk">英國及類似國家</string>
+    <string name="driving_region_india">印度</string>
 </resources>
