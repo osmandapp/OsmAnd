@@ -211,8 +211,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public String getSearchableInfo() {
-		// FK-FIXME: add searchable infos from instance variables
-		return "so isses";
+		return new SendAnalyticsSearchableInfoProvider(items).getSearchableInfo();
 	}
 
 	public interface OnSendAnalyticsPrefsUpdate {
