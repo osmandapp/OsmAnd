@@ -5264,4 +5264,5 @@
     <string name="show_debug_info_description">Grafische informatie weergeven over de plaatsing van elke kaarttekst</string>
     <string name="map_text">Kaartteksten</string>
     <string name="choose_map_orientation">Kies kaartoriëntatie</string>
+    <string name="weather_source_ecmwf_description">Europees Centrum voor weersvoorspellingen op middellange termijn (ECMWF)</string>
 </resources>

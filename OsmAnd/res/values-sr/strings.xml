@@ -5840,4 +5840,8 @@
     <string name="auto_25_chars_route_kl">Настави лево</string>
     <string name="auto_25_chars_route_tshl">Скрени оштро лево</string>
     <string name="auto_25_chars_route_tsll">Скрени мало лево</string>
+    <string name="hugerock_promo_description">Бесплатан приступ функцијама укључујући неограничено преузимање мапа, 3Д рељеф итд. за %1$s месец</string>
+    <string name="driving_region_india">Индија</string>
+    <string name="hugerock_promo">Хјуџрок Промоција за %1$s месеца</string>
+    <string name="driving_region_uk">ВБ и слично</string>
 </resources>
