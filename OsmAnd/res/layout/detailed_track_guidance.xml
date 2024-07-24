@@ -11,7 +11,7 @@
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" >
+		android:layout_height="wrap_content">
 
 		<include
 			android:id="@+id/toolbar"
@@ -43,12 +43,9 @@
 				android:layout_margin="16dp"
 				android:text="@string/detailed_track_guidance_description"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size"/>
+				android:textSize="@dimen/default_list_text_size" />
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:background="?attr/divider_color_basic" />
+			<include layout="@layout/simple_divider_item" />
 
 			<include
 				android:id="@+id/ask_every_time"
@@ -58,10 +55,7 @@
 				android:id="@+id/always"
 				layout="@layout/bottom_sheet_item_with_descr_and_left_radio_btn" />
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:background="?attr/divider_color_basic" />
+			<include layout="@layout/simple_divider_item" />
 
 			<include
 				android:id="@+id/distance_slider"
@@ -73,9 +67,9 @@
 			android:id="@+id/apply_button"
 			layout="@layout/bottom_sheet_button"
 			android:layout_width="match_parent"
-			android:layout_height="36dp"
+			android:layout_height="@dimen/dialog_button_height"
 			android:layout_gravity="bottom"
-			android:layout_margin="16dp"/>
+			android:layout_margin="@dimen/content_padding" />
 
 	</FrameLayout>
 

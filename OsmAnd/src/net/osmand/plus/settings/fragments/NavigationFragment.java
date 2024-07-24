@@ -85,16 +85,14 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		Preference detailedTrackGuidance = findPreference(DETAILED_TRACK_GUIDANCE);
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
-		detailedTrackGuidance.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
-		detailedTrackGuidance.setSummary(settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(getSelectedAppMode()) ? R.string.ask_every_time : R.string.shared_string_automatically);
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
 		showHideCustomizeRouteLinePref();
+		showTrackGuidancePref();
 	}
 
 	private void setupNavigationTypePref() {
@@ -129,6 +127,15 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		}
 	}
 
+	private void showTrackGuidancePref() {
+		boolean alwaysAsk = settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(getSelectedAppMode());
+
+		Preference preference = requirePreference(DETAILED_TRACK_GUIDANCE);
+		preference.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
+		preference.setSummary(alwaysAsk ? R.string.ask_every_time : R.string.shared_string_automatically);
+
+	}
+
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.VOICE_MUTE.getId().equals(prefId) && newValue instanceof Boolean) {
@@ -142,24 +149,16 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (NAVIGATION_TYPE.equals(prefId)) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
 			ApplicationMode appMode = getSelectedAppMode();
-			String selected = appMode != null ? appMode.getRoutingProfile() : null;
-			if (getActivity() != null) {
-				SelectNavProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), selected, false);
-			}
-		} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ApplicationMode appMode = getSelectedAppMode();
-				RouteLineAppearanceFragment.showInstance(mapActivity, appMode);
-			}
-		} else if (DETAILED_TRACK_GUIDANCE.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ApplicationMode appMode = getSelectedAppMode();
-				DetailedTrackGuidanceFragment.showInstance(mapActivity, appMode, this);
+			if (NAVIGATION_TYPE.equals(prefId)) {
+				String selected = appMode.getRoutingProfile();
+				SelectNavProfileBottomSheet.showInstance(activity, this, appMode, selected, false);
+			} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
+				RouteLineAppearanceFragment.showInstance(activity, appMode);
+			} else if (DETAILED_TRACK_GUIDANCE.equals(prefId)) {
+				DetailedTrackGuidanceFragment.showInstance(activity, appMode, this);
 			}
 		}
 		return false;

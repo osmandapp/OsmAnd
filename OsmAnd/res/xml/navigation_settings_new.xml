@@ -46,10 +46,10 @@
 		tools:icon="@drawable/ic_action_car_dark" />
 
 	<Preference
+		android:icon="@drawable/ic_action_appearance"
 		android:key="customize_route_line"
 		android:layout="@layout/preference_customize_route_line"
-		android:title="@string/customize_route_line"
-		android:icon="@drawable/ic_action_appearance" />
+		android:title="@string/customize_route_line" />
 
 	<PreferenceCategory
 		android:key="other"
