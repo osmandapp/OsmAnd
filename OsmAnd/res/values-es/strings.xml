@@ -5848,4 +5848,9 @@
     <string name="driving_region_india">India</string>
     <string name="hugerock_promo_description">Acceso gratuito a funciones que incluyen descargas ilimitadas de mapas, relieves en 3D, etc. Durante %1$s mes(es)</string>
     <string name="hugerock_promo">Promoción de Hugerock para %1$s meses</string>
+    <string name="ask_every_time">Preguntar siempre</string>
+    <string name="detailed_track_guidance">Guía detallada de la pista</string>
+    <string name="quick_action_routes_summary">Un interruptor para mostrar u ocultar %1$s en el mapa.</string>
+    <string name="detailed_track_guidance_description">OsmAnd adaptará tu ruta a las carreteras cercanas para ofrecerte una mejor guía paso a paso.</string>
+    <string name="shared_string_automatically">Automáticamente</string>
 </resources>
