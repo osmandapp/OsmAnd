@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -22,9 +22,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -52,6 +49,9 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
 		actionButton.setOnClickListener(this::showAddButtonDialog);
 		actionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_add_no_bg));
+
+		ImageView optionsButton = toolbar.findViewById(R.id.options_button);
+		AndroidUiHelper.updateVisibility(optionsButton, false);
 	}
 
 	@NonNull
@@ -68,30 +68,6 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 				QuickActionListFragment.showInstance(activity, (QuickActionButtonState) buttonState);
 			}
 		}
-	}
-
-	@Override
-	protected void showOptionsMenu(@NonNull View view) {
-		List<PopUpMenuItem> items = new ArrayList<>();
-
-		items.add(new PopUpMenuItem.Builder(view.getContext())
-				.setTitle(getString(R.string.copy_from_other_profile))
-				.setIcon(getContentIcon(R.drawable.ic_action_copy))
-				.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						ApplicationMode appMode = settings.getApplicationMode();
-						FragmentManager manager = activity.getSupportFragmentManager();
-						SelectCopyAppModeBottomSheet.showInstance(manager, this, appMode);
-					}
-				}).create());
-
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = view;
-		displayData.menuItems = items;
-		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
-		PopUpMenu.show(displayData);
 	}
 
 	private void showAddButtonDialog(@NonNull View view) {
