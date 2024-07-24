@@ -12,10 +12,6 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
-// TODO fix overlapped segments/U-turn (use precise X/Y)
-// TODO init distToProjSquare (new RouteSegmentPoint) to next-gpx-point
-// TODO distToProj (any) should be replaced with distToProj to next-gpx-point
-
 // TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
 
@@ -37,7 +33,7 @@ public class GpxSegmentsApproximation {
 
 		initGpxPointsXY31(gpxPoints);
 
-		float minPointApproximation = 150; //gctx.ctx.config.minPointApproximation;
+		float minPointApproximation = gctx.ctx.config.minPointApproximation;
 		GpxPoint currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, 0);
 
 		while (currentPoint != null && currentPoint.pnt != null) {
@@ -47,7 +43,6 @@ public class GpxSegmentsApproximation {
 
 			int start = currentPoint.ind + 1;
 			int end = Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size());
-			System.out.println("----");
 			for (int j = start; j < end; j++) {
 				GpxPoint ps = gpxPoints.get(j);
 				double gpxAngle = Double.NaN;
@@ -62,9 +57,7 @@ public class GpxSegmentsApproximation {
 					bestMinDistResult = currentMinDistResult;
 					minNextInd = j;
 				}
-//				System.out.println(ps.ind + "  " + ps.loc + " " + currentMinDistResult.segment);
 				if (currentMinDistResult.minDist > minPointApproximation) {
-					System.out.println("Avoid shortcuts");
 					break; // avoid shortcutting of loops
 				}
 			}
@@ -85,7 +78,6 @@ public class GpxSegmentsApproximation {
 			currentPoint.routeToTarget = new ArrayList<>();
 			currentPoint.routeToTarget.add(fres);
 			currentPoint.targetInd = minNextInd;
-			System.out.printf("%d -> %d %s \n", currentPoint.ind, currentPoint.targetInd, currentPoint.routeToTarget);
 			currentPoint = gpxPoints.get(minNextInd); // next point
 			currentPoint.pnt = new RouteSegmentPoint(fres.getObject(),
 					fres.getEndPointIndex() + (fres.isForwardDirection() ? -1 : 1), fres.getEndPointIndex(), 0);
@@ -128,7 +120,6 @@ public class GpxSegmentsApproximation {
 					}
 				}
 				if (p.routeToTarget.size() > 0) {
-					System.out.println(p.routeToTarget);
 					prev = p;
 				} else {
 					prev.targetInd = p.targetInd;
