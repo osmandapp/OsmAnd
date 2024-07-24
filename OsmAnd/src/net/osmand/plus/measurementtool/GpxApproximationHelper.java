@@ -75,14 +75,12 @@ public class GpxApproximationHelper {
 
 	private void approximateGpx(@NonNull GpxApproximator gpxApproximator) {
 		notifyOnApproximationStarted();
-		gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
+		gpxApproximator.calculateGpxApproximation(new ResultMatcher<>() {
 			@Override
 			public boolean publish(GpxRouteApproximation gpxApproximation) {
 				app.runInUIThread(() -> {
 					if (!gpxApproximator.isCancelled()) {
-						if (gpxApproximation != null) {
-							resultMap.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
-						}
+						resultMap.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
 						if (!calculateGpxApproximation(false)) {
 							notifyOnApproximationFinished();
 						}
