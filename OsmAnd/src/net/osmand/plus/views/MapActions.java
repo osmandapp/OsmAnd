@@ -55,6 +55,7 @@ public class MapActions {
 				params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
 				GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
 					setParams(approxGpx);
+					app.getTargetPointsHelper().updateRouteAndRefresh(true);
 					return true;
 				});
 			} else {
