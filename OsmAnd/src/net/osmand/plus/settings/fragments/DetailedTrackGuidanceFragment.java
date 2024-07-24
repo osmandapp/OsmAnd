@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.TrackApproximationType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -52,21 +52,22 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	private List<View> radioButtons;
 	private DialogButton applyButton;
 
-	private DetailedTrackGuidance changedTrackGuidance;
+	private TrackApproximationType changedTrackGuidance;
 	private int changedThresholdDistance;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setupAppMode(savedInstanceState);
-		DetailedTrackGuidance detailedTrackGuidancePref = settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode);
-		int thresholdDistancePref = settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode);
+
+		int distance = settings.GPX_APPROXIMATION_DISTANCE.getModeValue(selectedAppMode);
+		TrackApproximationType type = settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode);
 		if (savedInstanceState != null) {
-			changedTrackGuidance = DetailedTrackGuidance.values()[savedInstanceState.getInt(DETAILED_TRACK_GUIDANCE_KEY, detailedTrackGuidancePref.ordinal())];
-			changedThresholdDistance = savedInstanceState.getInt(THRESHOLD_DISTANCE_KEY, thresholdDistancePref);
+			changedTrackGuidance = TrackApproximationType.values()[savedInstanceState.getInt(DETAILED_TRACK_GUIDANCE_KEY, type.ordinal())];
+			changedThresholdDistance = savedInstanceState.getInt(THRESHOLD_DISTANCE_KEY, distance);
 		} else {
-			changedTrackGuidance = detailedTrackGuidancePref;
-			changedThresholdDistance = thresholdDistancePref;
+			changedTrackGuidance = type;
+			changedThresholdDistance = distance;
 		}
 	}
 
@@ -113,7 +114,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		navigationIcon.setOnClickListener(iconView -> dismiss());
 	}
 
-	private void setupApplyButton(@NonNull View view){
+	private void setupApplyButton(@NonNull View view) {
 		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.apply_button), getCardAndListBackgroundColorId(nightMode));
 		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
 		view.findViewById(R.id.buttons_divider).setVisibility(View.GONE);
@@ -125,7 +126,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		applyButton.setOnClickListener(v -> {
 			if (isParametersChanged()) {
 				settings.DETAILED_TRACK_GUIDANCE.setModeValue(selectedAppMode, changedTrackGuidance);
-				settings.AUTO_ATTACH_THRESHOLD_DISTANCE.setModeValue(selectedAppMode, changedThresholdDistance);
+				settings.GPX_APPROXIMATION_DISTANCE.setModeValue(selectedAppMode, changedThresholdDistance);
 				Fragment fragment = getTargetFragment();
 				if (fragment instanceof NavigationFragment) {
 					((NavigationFragment) fragment).showTrackGuidancePref();
@@ -148,16 +149,16 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		radioButtons = new ArrayList<>();
 		LinearLayout buttonsContainer = view.findViewById(R.id.buttons_container);
 
-		for (int i = 0; i < DetailedTrackGuidance.values().length; i++) {
-			DetailedTrackGuidance trackGuidance = DetailedTrackGuidance.values()[i];
+		for (int i = 0; i < TrackApproximationType.values().length; i++) {
+			TrackApproximationType type = TrackApproximationType.values()[i];
 			View button = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
-			boolean isSelected = changedTrackGuidance == trackGuidance;
-			boolean shouldShowDivider = i != DetailedTrackGuidance.values().length - 1;
-			setupRadioButton(button, trackGuidance.nameRes, isSelected, shouldShowDivider, v -> {
-				changedTrackGuidance = trackGuidance;
+			boolean isSelected = changedTrackGuidance == type;
+			boolean shouldShowDivider = i != TrackApproximationType.values().length - 1;
+			setupRadioButton(button, type.getNameRes(), isSelected, shouldShowDivider, v -> {
+				changedTrackGuidance = type;
 				updateContent();
 			});
-			button.setTag(trackGuidance);
+			button.setTag(type);
 			buttonsContainer.addView(button);
 			radioButtons.add(button);
 		}
@@ -197,12 +198,12 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 
 	private void updateContent() {
 		for (View button : radioButtons) {
-			DetailedTrackGuidance viewTrackGuidance = (DetailedTrackGuidance) button.getTag();
+			TrackApproximationType approximation = (TrackApproximationType) button.getTag();
 			RadioButton radioButton = button.findViewById(R.id.compound_button);
-			radioButton.setChecked(viewTrackGuidance == changedTrackGuidance);
+			radioButton.setChecked(approximation == changedTrackGuidance);
 		}
 
-		sliderView.setVisibility(changedTrackGuidance == DetailedTrackGuidance.ALWAYS ? View.VISIBLE : View.INVISIBLE);
+		sliderView.setVisibility(changedTrackGuidance == TrackApproximationType.AUTOMATIC ? View.VISIBLE : View.INVISIBLE);
 		updateApplyButton();
 	}
 
@@ -211,7 +212,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	}
 
 	private boolean isParametersChanged() {
-		return settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode) != changedThresholdDistance
+		return settings.GPX_APPROXIMATION_DISTANCE.getModeValue(selectedAppMode) != changedThresholdDistance
 				|| settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode) != changedTrackGuidance;
 	}
 
@@ -270,32 +271,6 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-		}
-	}
-
-	public enum DetailedTrackGuidance {
-		ASK_ATTACH_TO_THE_ROADS(R.string.ask_every_time, R.string.ask_every_time),
-		ALWAYS(R.string.shared_string_always, R.string.shared_string_automatically);
-
-		@StringRes
-		private final int nameRes;
-
-		@StringRes
-		private final int actionRes;
-
-		DetailedTrackGuidance(@StringRes int nameRes, @StringRes int actionRes) {
-			this.nameRes = nameRes;
-			this.actionRes = actionRes;
-		}
-
-		@StringRes
-		public int getNameRes() {
-			return nameRes;
-		}
-
-		@StringRes
-		public int getActionRes() {
-			return actionRes;
 		}
 	}
 }

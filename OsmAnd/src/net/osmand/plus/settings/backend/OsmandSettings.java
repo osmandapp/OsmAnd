@@ -99,7 +99,7 @@ import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.*;
-import net.osmand.plus.settings.fragments.DetailedTrackGuidanceFragment.DetailedTrackGuidance;
+import net.osmand.plus.settings.enums.TrackApproximationType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -3116,9 +3116,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
-	public final CommonPreference<DetailedTrackGuidance> DETAILED_TRACK_GUIDANCE = new EnumStringPreference<>(this, "detailed_track_guidance",
-			DetailedTrackGuidance.ASK_ATTACH_TO_THE_ROADS, DetailedTrackGuidance.values()).makeProfile().makeShared();
-	public final OsmandPreference<Integer> AUTO_ATTACH_THRESHOLD_DISTANCE = new IntPreference(this, "gpx_approximation_distance", DEFAULT_POINT_APPROXIMATION).makeProfile().makeShared();
+	public final CommonPreference<TrackApproximationType> DETAILED_TRACK_GUIDANCE = new EnumStringPreference<>(this, "detailed_track_guidance",
+			TrackApproximationType.MANUAL, TrackApproximationType.values()).makeProfile().makeShared();
+	public final OsmandPreference<Integer> GPX_APPROXIMATION_DISTANCE = new IntPreference(this, "gpx_approximation_distance", DEFAULT_POINT_APPROXIMATION).makeProfile().makeShared();
 
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference(this, "map_activity_enabled", false).makeGlobal();

@@ -1,13 +1,15 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.settings.enums.TrackApproximationType.AUTOMATIC;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -19,7 +21,6 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.fragments.DetailedTrackGuidanceFragment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.MapUtils;
 
@@ -41,36 +42,36 @@ public class MapActions {
 		return false;
 	}
 
-	public void setGPXRouteParams(@Nullable GPXFile result) {
-		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.path : null));
-		if (result == null) {
+	public void setGPXRouteParams(@Nullable GPXFile gpxFile) {
+		app.logRoutingEvent("setGPXRouteParams result " + (gpxFile != null ? gpxFile.path : null));
+		if (gpxFile == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
-			ApplicationMode routingAppMode = app.getRoutingHelper().getAppMode();
-			if (!result.isAttachedToRoads() && app.getSettings().DETAILED_TRACK_GUIDANCE.getModeValue(routingAppMode) == DetailedTrackGuidanceFragment.DetailedTrackGuidance.ALWAYS) {
-				GpxApproximationParams approxParams = new GpxApproximationParams();
-				approxParams.setAppMode(routingAppMode);
-				approxParams.setDistanceThreshold(app.getSettings().AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(routingAppMode));
-				GpxApproximationHelper.approximateGpxSilently(app, result, approxParams, approxGpx -> {
+			ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+			if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+				GpxApproximationParams params = new GpxApproximationParams();
+				params.setAppMode(appMode);
+				params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
+				GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
 					setParams(approxGpx);
 					return true;
 				});
-			} else{
-				setParams(result);
+			} else {
+				setParams(gpxFile);
 			}
 		}
 	}
 
-	private void setParams(@NonNull GPXFile result){
-		GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
+	private void setParams(@NonNull GPXFile gpxFile) {
+		GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(gpxFile, settings);
 		params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
 		params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 		params.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
 		params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 		List<Location> ps = params.getPoints(settings.getContext());
 		app.getRoutingHelper().setGpxParams(params);
-		settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
+		settings.FOLLOW_THE_GPX_ROUTE.set(gpxFile.path);
 		if (!ps.isEmpty()) {
 			Location startLoc = ps.get(0);
 			Location finishLoc = ps.get(ps.size() - 1);
