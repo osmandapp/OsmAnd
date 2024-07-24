@@ -278,7 +278,6 @@
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Lationoamérica e semellantes</string>
-    <string name="driving_region_uk">Reino Unido, India e semellantes</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura os avisos para nomes de rúas, avisos de tráfico (detencións forzosas, bandas sonoras), avisos de radar e límites de velocidade.</string>
     <string name="speak_street_names">Nomes das rúas (TTS)</string>

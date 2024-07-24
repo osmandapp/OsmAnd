@@ -213,19 +213,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				mapActivity.disableDrawer();
 			}
 		}
-
-		Activity activity = getActivity();
-		if (activity != null) {
-			int colorId = getStatusBarColorId();
-			if (colorId != -1) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).updateStatusBarColor();
-				} else {
-					statusBarColor = activity.getWindow().getStatusBarColor();
-					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-				}
-			}
-		}
+		updateStatusBar();
 	}
 
 	@Override
@@ -252,6 +240,25 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (activity instanceof MapActivity) {
 				((MapActivity) activity).updateStatusBarColor();
 				((MapActivity) activity).updateNavigationBarColor();
+			}
+		}
+	}
+
+	public void updateStatusBar() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			updateStatusBar(activity);
+		}
+	}
+
+	protected void updateStatusBar(@NonNull Activity activity) {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
+			} else {
+				statusBarColor = activity.getWindow().getStatusBarColor();
+				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 			}
 		}
 	}

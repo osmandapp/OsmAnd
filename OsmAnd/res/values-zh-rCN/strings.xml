@@ -366,7 +366,6 @@
     <string name="driving_region_us">美国</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">欧洲、亚洲、拉丁美洲和类似地区</string>
-    <string name="driving_region_uk">英国、印度和类似地区</string>
     <string name="speak_title">播报…</string>
     <string name="speak_descr">设置街道名称、交通警告（强制停车、减速带）、测速仪警告、限速等公告。</string>
     <string name="speak_speed_limit">播报限速</string>

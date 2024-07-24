@@ -501,7 +501,6 @@ POIの更新は利用できません</string>
     <string name="driving_region_us">アメリカ</string>
     <string name="driving_region_canada">カナダ</string>
     <string name="driving_region_europe_asia">ヨーロッパ、アジア、ラテンアメリカなど</string>
-    <string name="driving_region_uk">イギリス、インドなど</string>
     <string name="speak_title">音声案内…</string>
     <string name="speak_descr">道路名、交通指示警告(強制停止、スピードバンプ等含む)、スピードカメラ、法定速度の音声アナウンスの設定をします。</string>
     <string name="speak_street_names">通りの名前 (TTS形式音声のみ)</string>

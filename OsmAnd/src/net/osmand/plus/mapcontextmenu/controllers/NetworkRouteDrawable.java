@@ -88,6 +88,9 @@ public class NetworkRouteDrawable extends Drawable {
 		if (!Algorithms.isEmpty(osmcText)) {
 			MapRenderRepositories renderer = app.getResourceManager().getRenderer();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+			if (storage == null) {
+				 return;
+			}
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 

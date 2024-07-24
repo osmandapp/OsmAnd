@@ -1001,7 +1001,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og tilsvarende</string>
-    <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
     <string name="driving_region_descr">Vælg kørselsregion: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
