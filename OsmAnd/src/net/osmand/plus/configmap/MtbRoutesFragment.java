@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.osm.OsmRouteType.MTB;
-import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_MTB_SCALE_IMBA_TRAILS;
+import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE_IMBA_TRAILS;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
