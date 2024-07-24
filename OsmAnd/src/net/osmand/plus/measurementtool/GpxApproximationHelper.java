@@ -98,10 +98,10 @@ public class GpxApproximationHelper {
 		});
 	}
 
-	public GpxApproximator createApproximator(@NonNull LocationsHolder locationsHolder) {
+	public GpxApproximator createApproximator(@NonNull LocationsHolder holder) {
 		GpxApproximator approximator = null;
 		try {
-			approximator = new GpxApproximator(app, getAppMode(), getDistanceThreshold(), locationsHolder);
+			approximator = new GpxApproximator(app, getAppMode(), getDistanceThreshold(), holder);
 			approximator.setApproximationListener(listener);
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
@@ -185,17 +185,11 @@ public class GpxApproximationHelper {
 		}
 	}
 
-	public static void approximateGpxSilently(@NonNull OsmandApplication app,
-	                                          @NonNull GPXFile gpxFile,
-	                                          @NonNull GpxApproximationParams params,
-	                                          @NonNull CallbackWithObject<GPXFile> callback) {
-		GpxData gpxData = new GpxData(gpxFile);
-		MeasurementEditingContext ctx = new MeasurementEditingContext(app);
-		ctx.setGpxData(gpxData);
-		ctx.setAppMode(params.getAppMode());
-		ctx.addPoints();
-		params.setTrackPoints(ctx.getSegmentsPoints());
-
+	public static void approximateGpxAsync(@NonNull OsmandApplication app,
+	                                       @NonNull GPXFile gpxFile,
+	                                       @NonNull GpxApproximationParams params,
+	                                       @NonNull CallbackWithObject<GPXFile> callback) {
+		MeasurementEditingContext ctx = createEditingContext(app, gpxFile, params);
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		helper.setListener(new GpxApproximationListener() {
 			@Override
@@ -216,5 +210,18 @@ public class GpxApproximationHelper {
 		} else {
 			callback.processResult(gpxFile);
 		}
+	}
+
+	@NonNull
+	private static MeasurementEditingContext createEditingContext(@NonNull OsmandApplication app,
+	                                                              @NonNull GPXFile gpxFile,
+	                                                              @NonNull GpxApproximationParams params) {
+		MeasurementEditingContext ctx = new MeasurementEditingContext(app);
+		ctx.setGpxData(new GpxData(gpxFile));
+		ctx.setAppMode(params.getAppMode());
+		ctx.addPoints();
+		params.setTrackPoints(ctx.getSegmentsPoints());
+
+		return ctx;
 	}
 }

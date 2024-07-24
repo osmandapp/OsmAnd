@@ -51,13 +51,13 @@ public abstract class BaseRouteQuickAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		String attrName = getAttrName();
 		OsmandApplication app = mapActivity.getMyApplication();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		RenderingRuleProperty property = getProperty(app);
 		if (property != null) {
 			switchPreference(app);
 			mapActivity.refreshMapComplete();
 			mapActivity.updateLayers();
 		} else {
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			showRendererSnackbarForAttr(mapActivity, attrName, nightMode, null);
 		}
 	}
@@ -94,15 +94,11 @@ public abstract class BaseRouteQuickAction extends QuickAction {
 
 	protected boolean isEnabled(@NonNull OsmandApplication app) {
 		String attrName = getAttrName();
-		OsmandSettings settings = app.getSettings();
-		CommonPreference<Boolean> preference = settings.getCustomRenderBooleanProperty(attrName);
-		return preference.get();
+		return app.getRouteLayersHelper().isRoutesTypeEnabled(attrName);
 	}
 
 	protected void switchPreference(@NonNull OsmandApplication app) {
 		String attrName = getAttrName();
-		OsmandSettings settings = app.getSettings();
-		CommonPreference<Boolean> preference = settings.getCustomRenderBooleanProperty(attrName);
-		preference.set(!preference.get());
+		app.getRouteLayersHelper().toggleRoutesType(attrName);
 	}
 }

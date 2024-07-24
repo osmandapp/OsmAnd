@@ -72,6 +72,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
@@ -330,33 +331,62 @@ public class ConfigureMapMenu {
 
 	private ContextMenuItem createMtbRoutesItem(@NonNull MapActivity activity, @NonNull String attrName,
 	                                            @Nullable RenderingRuleProperty property, boolean nightMode) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
-
+		RouteLayersHelper routeLayersHelper = app.getRouteLayersHelper();
+		boolean enabled = routeLayersHelper.isMtbRoutesEnabled();
 		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, property != null ? property.getName() : attrName))
 				.setIcon(getIconIdForAttr(attrName))
-				.setSelected(pref.get())
-				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setSelected(enabled)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setColor(enabled ? settings.getApplicationMode().getProfileColor(nightMode) : null)
 				//.setLayout(R.layout.configure_map_item_with_additional_right_desc)
 //				.setSecondaryDescription(pref.get() ? null : app.getString(R.string.shared_string_off))
-				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : app.getString(R.string.shared_string_disabled))
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					activity.getDashboard().setDashboardVisibility(true, DashboardType.MTB_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
-					return false;
+				.setDescription(enabled ? routeLayersHelper.getSelectedMtbClassificationName(app) : app.getString(R.string.shared_string_disabled))
+				.setListener(new OnRowItemClick() {
+
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
+						if (property != null) {
+							activity.getDashboard().setDashboardVisibility(true, DashboardType.MTB_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
+						} else {
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
+						}
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item,
+					                                  boolean isChecked) {
+						routeLayersHelper.toggleMtbRoutes(isChecked);
+						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(isChecked ? routeLayersHelper.getSelectedMtbClassificationName(app) : app.getString(R.string.shared_string_disabled));
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						if (property != null) {
+							activity.refreshMapComplete();
+							activity.updateLayers();
+						} else {
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
+						}
+						return false;
+					}
 				});
 	}
 
 	private ContextMenuItem createCycleRoutesItem(@NonNull MapActivity activity, @NonNull String attrName,
 	                                              @Nullable RenderingRuleProperty property, boolean nightMode) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
-
+		RouteLayersHelper routeLayersHelper = app.getRouteLayersHelper();
+		boolean enabled = routeLayersHelper.isCycleRoutesEnabled();
 		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
 				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, attrName, property != null ? property.getName() : attrName))
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setSelected(pref.get())
-				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
-				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+				.setSelected(enabled)
+				.setColor(enabled ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setDescription(app.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setListener(new OnRowItemClick() {
 
 					@Override
@@ -374,7 +404,7 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
 					                                  @Nullable View view, @NotNull ContextMenuItem item,
 					                                  boolean isChecked) {
-						pref.set(isChecked);
+						routeLayersHelper.toggleCycleRoutes(isChecked);
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 						if (uiAdapter != null) {
@@ -392,10 +422,8 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createHikingRoutesItem(@NonNull MapActivity activity, @NonNull String attrName, @Nullable RenderingRuleProperty property, boolean nightMode) {
-		CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
-
-		boolean enabled = property != null && Arrays.asList(property.getPossibleValues()).contains(pref.get());
-		String previousValue = enabled || property == null ? pref.get() : property.getPossibleValues()[0];
+		RouteLayersHelper routeLayersHelper = app.getRouteLayersHelper();
+		boolean enabled = routeLayersHelper.isHikingRoutesEnabled();
 		String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, attrName, property != null ? property.getName() : attrName);
 
 		return new ContextMenuItem(ROUTES_ITEMS_ID_SCHEME + attrName)
@@ -418,7 +446,7 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
 					                                  @Nullable View view, @NonNull ContextMenuItem item,
 					                                  boolean isChecked) {
-						pref.set(isChecked ? previousValue : "");
+						routeLayersHelper.toggleHikingRoutes(isChecked);
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 						item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 						if (uiAdapter != null) {
