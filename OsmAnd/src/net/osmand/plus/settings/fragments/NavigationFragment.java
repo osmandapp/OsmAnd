@@ -127,13 +127,10 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		}
 	}
 
-	private void showTrackGuidancePref() {
-		boolean alwaysAsk = settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(getSelectedAppMode());
-
+	public void showTrackGuidancePref() {
 		Preference preference = requirePreference(DETAILED_TRACK_GUIDANCE);
 		preference.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
-		preference.setSummary(alwaysAsk ? R.string.ask_every_time : R.string.shared_string_automatically);
-
+		preference.setSummary(settings.DETAILED_TRACK_GUIDANCE.getModeValue(getSelectedAppMode()).getActionRes());
 	}
 
 	@Override

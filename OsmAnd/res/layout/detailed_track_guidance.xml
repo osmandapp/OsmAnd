@@ -19,58 +19,62 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<FrameLayout
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:orientation="vertical">
 
-		<LinearLayout
+		<ScrollView
+			android:id="@+id/scroll_view"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:layout_height="0dp"
+			android:layout_weight="1">
 
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/descriptionImage"
+			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:adjustViewBounds="true"
-				tools:src="@drawable/img_detailed_track_guidance" />
+				android:orientation="vertical">
 
-			<TextView
-				android:id="@+id/title"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="16dp"
-				android:text="@string/detailed_track_guidance_description"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/descriptionImage"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					tools:src="@drawable/img_detailed_track_guidance" />
 
-			<include layout="@layout/simple_divider_item" />
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="16dp"
+					android:text="@string/detailed_track_guidance_description"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size" />
 
-			<include
-				android:id="@+id/ask_every_time"
-				layout="@layout/bottom_sheet_item_with_descr_and_left_radio_btn" />
+				<include layout="@layout/simple_divider_item" />
 
-			<include
-				android:id="@+id/always"
-				layout="@layout/bottom_sheet_item_with_descr_and_left_radio_btn" />
+				<LinearLayout
+					android:id="@+id/buttons_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
 
-			<include layout="@layout/simple_divider_item" />
+				</LinearLayout>
 
-			<include
-				android:id="@+id/distance_slider"
-				layout="@layout/plan_route_threshold_slider" />
+				<include layout="@layout/simple_divider_item" />
 
-		</LinearLayout>
+				<include
+					android:id="@+id/distance_slider"
+					layout="@layout/plan_route_threshold_slider" />
+
+			</LinearLayout>
+
+		</ScrollView>
 
 		<include
 			android:id="@+id/apply_button"
-			layout="@layout/bottom_sheet_button"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
-			android:layout_gravity="bottom"
-			android:layout_margin="@dimen/content_padding" />
+			layout="@layout/bottom_buttons"/>
 
-	</FrameLayout>
+	</LinearLayout>
 
 </LinearLayout>

@@ -19,6 +19,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.DetailedTrackGuidanceFragment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.MapUtils;
 
@@ -47,7 +48,7 @@ public class MapActions {
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
 			ApplicationMode routingAppMode = app.getRoutingHelper().getAppMode();
-			if (!result.isAttachedToRoads() && !app.getSettings().ASK_ATTACH_TO_THE_ROADS.getModeValue(routingAppMode)) {
+			if (!result.isAttachedToRoads() && app.getSettings().DETAILED_TRACK_GUIDANCE.getModeValue(routingAppMode) == DetailedTrackGuidanceFragment.DetailedTrackGuidance.ALWAYS) {
 				GpxApproximationParams approxParams = new GpxApproximationParams();
 				approxParams.setAppMode(routingAppMode);
 				approxParams.setDistanceThreshold(app.getSettings().AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(routingAppMode));

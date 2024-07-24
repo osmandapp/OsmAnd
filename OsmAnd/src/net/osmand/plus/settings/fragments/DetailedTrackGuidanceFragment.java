@@ -1,11 +1,15 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.utils.ColorUtilities.getCardAndListBackgroundColorId;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,37 +32,41 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 
-	public static final String TAG = DetailedTrackGuidanceFragment.class.getSimpleName();
-	public static final String ASK_EVERY_TIME_KEY = "ask_every_time";
-	public static final String THRESHOLD_DISTANCE_KEY = "threshold_distance";
-	public static final String SELECTED_APP_MODE_KEY = "selected_app_mode_key";
-
-	private View askEveryTimeButton;
-	private View alwaysButton;
-	private View applyButton;
+	private static final String TAG = DetailedTrackGuidanceFragment.class.getSimpleName();
+	private static final String DETAILED_TRACK_GUIDANCE_KEY = "detailed_track_guidance_key";
+	private static final String THRESHOLD_DISTANCE_KEY = "threshold_distance_key";
+	private static final String SELECTED_APP_MODE_KEY = "selected_app_mode_key";
 
 	private ApplicationMode selectedAppMode;
 
 	private View sliderView;
 	private TextView sliderTv;
+	private List<View> radioButtons;
+	private DialogButton applyButton;
 
-	private boolean changedDetailedTrackGuidance;
+	private DetailedTrackGuidance changedTrackGuidance;
 	private int changedThresholdDistance;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setupAppMode(savedInstanceState);
+		DetailedTrackGuidance detailedTrackGuidancePref = settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode);
+		int thresholdDistancePref = settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode);
 		if (savedInstanceState != null) {
-			changedDetailedTrackGuidance = savedInstanceState.getBoolean(ASK_EVERY_TIME_KEY, settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(selectedAppMode));
-			changedThresholdDistance = savedInstanceState.getInt(THRESHOLD_DISTANCE_KEY, settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode));
-		} else{
-			changedDetailedTrackGuidance = settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(selectedAppMode);
-			changedThresholdDistance = settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode);
+			changedTrackGuidance = DetailedTrackGuidance.values()[savedInstanceState.getInt(DETAILED_TRACK_GUIDANCE_KEY, detailedTrackGuidancePref.ordinal())];
+			changedThresholdDistance = savedInstanceState.getInt(THRESHOLD_DISTANCE_KEY, thresholdDistancePref);
+		} else {
+			changedTrackGuidance = detailedTrackGuidancePref;
+			changedThresholdDistance = thresholdDistancePref;
 		}
 	}
 
@@ -81,10 +89,6 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
-		askEveryTimeButton = view.findViewById(R.id.ask_every_time);
-		alwaysButton = view.findViewById(R.id.always);
-		applyButton = view.findViewById(R.id.apply_button);
-
 		setupToolbar(view);
 		setupSlider(view);
 		setupContent(view);
@@ -94,7 +98,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(ASK_EVERY_TIME_KEY, changedDetailedTrackGuidance);
+		outState.putInt(DETAILED_TRACK_GUIDANCE_KEY, changedTrackGuidance.ordinal());
 		outState.putInt(THRESHOLD_DISTANCE_KEY, changedThresholdDistance);
 		outState.putString(SELECTED_APP_MODE_KEY, selectedAppMode.getStringKey());
 	}
@@ -109,33 +113,54 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 		navigationIcon.setOnClickListener(iconView -> dismiss());
 	}
 
-	private void setupContent(@NonNull View view) {
-		ImageView imageView = view.findViewById(R.id.descriptionImage);
-		imageView.setImageResource(nightMode ? R.drawable.img_detailed_track_guidance_dark : R.drawable.img_detailed_track_guidance);
-
-		boolean askEveryTime = changedDetailedTrackGuidance;
-		setupRadioButton(askEveryTimeButton, R.string.ask_every_time, askEveryTime, true, v -> setAskEveryTimePref(true));
-		setupRadioButton(alwaysButton, R.string.shared_string_always, !askEveryTime, false, v -> setAskEveryTimePref(false));
+	private void setupApplyButton(@NonNull View view){
+		AndroidUtils.setBackground(getContext(), view.findViewById(R.id.apply_button), getCardAndListBackgroundColorId(nightMode));
+		view.findViewById(R.id.dismiss_button).setVisibility(View.GONE);
+		view.findViewById(R.id.buttons_divider).setVisibility(View.GONE);
+		applyButton = view.findViewById(R.id.right_bottom_button);
+		applyButton.setVisibility(View.VISIBLE);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 
 		applyButton.setOnClickListener(v -> {
 			if (isParametersChanged()) {
-				settings.ASK_ATTACH_TO_THE_ROADS.setModeValue(selectedAppMode, changedDetailedTrackGuidance);
+				settings.DETAILED_TRACK_GUIDANCE.setModeValue(selectedAppMode, changedTrackGuidance);
 				settings.AUTO_ATTACH_THRESHOLD_DISTANCE.setModeValue(selectedAppMode, changedThresholdDistance);
 				Fragment fragment = getTargetFragment();
-				if(fragment instanceof NavigationFragment){
-					((NavigationFragment) fragment).setupPreferences();
+				if (fragment instanceof NavigationFragment) {
+					((NavigationFragment) fragment).showTrackGuidancePref();
 				}
 				dismiss();
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
+	}
 
+	private void setupContent(@NonNull View view) {
+		ImageView imageView = view.findViewById(R.id.descriptionImage);
+		imageView.setImageResource(nightMode ? R.drawable.img_detailed_track_guidance_dark : R.drawable.img_detailed_track_guidance);
+
+		setupApplyButton(view);
+		setupRadioButtons(view);
 		updateContent();
 	}
 
-	private void setAskEveryTimePref(boolean askEveryTime) {
-		changedDetailedTrackGuidance = askEveryTime;
-		updateContent();
+	private void setupRadioButtons(@NonNull View view) {
+		radioButtons = new ArrayList<>();
+		LinearLayout buttonsContainer = view.findViewById(R.id.buttons_container);
+
+		for (int i = 0; i < DetailedTrackGuidance.values().length; i++) {
+			DetailedTrackGuidance trackGuidance = DetailedTrackGuidance.values()[i];
+			View button = themedInflater.inflate(R.layout.bottom_sheet_item_with_descr_and_left_radio_btn, buttonsContainer, false);
+			boolean isSelected = changedTrackGuidance == trackGuidance;
+			boolean shouldShowDivider = i != DetailedTrackGuidance.values().length - 1;
+			setupRadioButton(button, trackGuidance.nameRes, isSelected, shouldShowDivider, v -> {
+				changedTrackGuidance = trackGuidance;
+				updateContent();
+			});
+			button.setTag(trackGuidance);
+			buttonsContainer.addView(button);
+			radioButtons.add(button);
+		}
 	}
 
 	private final Slider.OnChangeListener sliderChangeListener = new Slider.OnChangeListener() {
@@ -171,15 +196,13 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateContent() {
-		boolean askEveryTime = changedDetailedTrackGuidance;
-		AndroidUiHelper.updateVisibility(sliderView, !askEveryTime);
+		for (View button : radioButtons) {
+			DetailedTrackGuidance viewTrackGuidance = (DetailedTrackGuidance) button.getTag();
+			RadioButton radioButton = button.findViewById(R.id.compound_button);
+			radioButton.setChecked(viewTrackGuidance == changedTrackGuidance);
+		}
 
-		RadioButton askEveryTimeRadioButton = askEveryTimeButton.findViewById(R.id.compound_button);
-		askEveryTimeRadioButton.setChecked(askEveryTime);
-
-		RadioButton alwaysRadioButton = alwaysButton.findViewById(R.id.compound_button);
-		alwaysRadioButton.setChecked(!askEveryTime);
-
+		sliderView.setVisibility(changedTrackGuidance == DetailedTrackGuidance.ALWAYS ? View.VISIBLE : View.INVISIBLE);
 		updateApplyButton();
 	}
 
@@ -189,7 +212,7 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 
 	private boolean isParametersChanged() {
 		return settings.AUTO_ATTACH_THRESHOLD_DISTANCE.getModeValue(selectedAppMode) != changedThresholdDistance
-				|| settings.ASK_ATTACH_TO_THE_ROADS.getModeValue(selectedAppMode) != changedDetailedTrackGuidance;
+				|| settings.DETAILED_TRACK_GUIDANCE.getModeValue(selectedAppMode) != changedTrackGuidance;
 	}
 
 	private void setupRadioButton(@NonNull View button, @StringRes int titleId, boolean selected, boolean showDivider, @NonNull View.OnClickListener listener) {
@@ -247,6 +270,32 @@ public class DetailedTrackGuidanceFragment extends BaseOsmAndFragment {
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	public enum DetailedTrackGuidance {
+		ASK_ATTACH_TO_THE_ROADS(R.string.ask_every_time, R.string.ask_every_time),
+		ALWAYS(R.string.shared_string_always, R.string.shared_string_automatically);
+
+		@StringRes
+		private final int nameRes;
+
+		@StringRes
+		private final int actionRes;
+
+		DetailedTrackGuidance(@StringRes int nameRes, @StringRes int actionRes) {
+			this.nameRes = nameRes;
+			this.actionRes = actionRes;
+		}
+
+		@StringRes
+		public int getNameRes() {
+			return nameRes;
+		}
+
+		@StringRes
+		public int getActionRes() {
+			return actionRes;
 		}
 	}
 }
