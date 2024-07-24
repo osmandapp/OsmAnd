@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.osm.OsmRouteType.BICYCLE;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
+import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
