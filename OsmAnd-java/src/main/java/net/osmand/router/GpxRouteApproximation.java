@@ -354,6 +354,11 @@ public class GpxRouteApproximation {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
+				if (pnt.routeToTarget.size() == 1 &&
+						pnt.getFirstRouteRes().getStartPointIndex() == pnt.getFirstRouteRes().getEndPointIndex()) {
+					i = pnt.targetInd; // ignore points with empty routeToTarget
+					continue;
+				}
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					router.makeSegmentPointPrecise(gctx.ctx, pnt.getFirstRouteRes(), pnt.loc, true);
