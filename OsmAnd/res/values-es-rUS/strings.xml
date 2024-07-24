@@ -5858,4 +5858,8 @@
 \nCPU (inactiva): %3$s
 \nCPU (GPU libre): %4$s</string>
     <string name="navigation_position_icon_summary">Icono que se muestra al navegar o moverse.</string>
+    <string name="driving_region_india">India</string>
+    <string name="hugerock_promo">Promoción de Hugerock por %1$s meses</string>
+    <string name="hugerock_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
+    <string name="driving_region_uk">Reino Unido y similares</string>
 </resources>
