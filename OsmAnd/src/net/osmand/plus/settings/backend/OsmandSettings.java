@@ -63,6 +63,7 @@ import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.OsmandBackupAgent;
@@ -3267,6 +3268,15 @@ public class OsmandSettings {
 		}
 		return res;
 	}
+
+	public final CommonPreference<Boolean> LAST_CYCLE_ROUTES_NODE_NETWORK_STATE =
+			new BooleanPreference(this, "cycle_routes_last_node_network_state", false).makeProfile();
+
+	public final CommonPreference<String> LAST_MTB_ROUTES_CLASSIFICATION =
+			new StringPreference(this, "mtb_routes_last_classification", MtbClassification.SCALE.attrName).makeProfile();
+
+	public final CommonPreference<String> LAST_HIKING_ROUTES_VALUE =
+			new StringPreference(this, "hiking_routes_last_selected_value", "").makeProfile();
 
 	public final OsmandPreference<Boolean> FAVORITES_FREE_ACCOUNT_CARD_DISMISSED =
 			new BooleanPreference(this, "favorites_free_account_card_dismissed", false).makeGlobal();

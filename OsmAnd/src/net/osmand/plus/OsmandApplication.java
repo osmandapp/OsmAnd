@@ -49,6 +49,7 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -212,6 +213,7 @@ public class OsmandApplication extends MultiDexApplication {
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
+	RouteLayersHelper routeLayersHelper;
 
 	Model3dHelper model3dHelper;
 
@@ -612,6 +614,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public SmartFolderHelper getSmartFolderHelper() {
 		return smartFolderHelper;
+	}
+
+	@NonNull
+	public RouteLayersHelper getRouteLayersHelper() {
+		return routeLayersHelper;
 	}
 
 	@NonNull
