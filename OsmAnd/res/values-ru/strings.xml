@@ -5847,4 +5847,8 @@
     <string name="auto_25_chars_route_kr">Держитесь правее</string>
     <string name="auto_25_chars_route_tsll">Плавно поверните налево</string>
     <string name="auto_25_chars_route_tslr">Плавно поверните направо</string>
+    <string name="driving_region_india">Индия</string>
+    <string name="hugerock_promo_description">Бесплатный доступ к функциям, включая неограниченное количество загрузок карт, 3D-рельеф и другим в течение %1$s месяцев</string>
+    <string name="hugerock_promo">Промоакция Hugerock на %1$s месяцев</string>
+    <string name="driving_region_uk">Великобритания и аналогичные</string>
 </resources>
