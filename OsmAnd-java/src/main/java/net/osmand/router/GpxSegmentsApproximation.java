@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
@@ -20,14 +22,10 @@ import net.osmand.util.MapUtils;
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // penalty by the difference between gpx and road angle (25)
-	private final double CRUSH_SEGMENTS_BY_DISTANCE_M = 25; // crush road segments to match gpx points better (25)
 
-	private class MinDistResult {
+	private static class RouteSegmentApproximationResult {
 		private double minDist;
 		private RouteSegmentResult segment;
-		private int preciseIndex, preciseX, preciseY; // use to fix overlapped segments
-		private double penalty; // DEBUG: count penalties > 0.1 (rescuetrack should be empty)
 	}
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
@@ -39,34 +37,34 @@ public class GpxSegmentsApproximation {
 
 		initGpxPointsXY31(gpxPoints);
 
-		float minPointApproximation = gctx.ctx.config.minPointApproximation;
+		float minPointApproximation = 150; //gctx.ctx.config.minPointApproximation;
 		GpxPoint currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, 0);
 
 		while (currentPoint != null && currentPoint.pnt != null) {
 			double minDistAhead = Double.POSITIVE_INFINITY;
-			MinDistResult bestMinDistResult = null;
+			RouteSegmentApproximationResult bestMinDistResult = null;
 			int minNextInd = -1;
 
 			int start = currentPoint.ind + 1;
 			int end = Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size());
-
+			System.out.println("----");
 			for (int j = start; j < end; j++) {
 				GpxPoint ps = gpxPoints.get(j);
-
 				double gpxAngle = Double.NaN;
 				if (j > 0) {
 					GpxPoint prev = gpxPoints.get(j - 1);
 					gpxAngle = Math.atan2(ps.y31 - prev.y31, ps.x31 - prev.x31);
-					if (gpxAngle < 0) gpxAngle += Math.PI;
 				}
-
-				MinDistResult currentMinDistResult = findMinDistInLoadedPoints(currentPoint, ps, gpxAngle);
+				RouteSegmentApproximationResult currentMinDistResult = findMinDistInLoadedPoints(currentPoint, ps, gpxAngle,
+						minPointApproximation);
 				if (currentMinDistResult.minDist <= minDistAhead) {
 					minDistAhead = currentMinDistResult.minDist;
 					bestMinDistResult = currentMinDistResult;
 					minNextInd = j;
 				}
-				if (MapUtils.getDistance(currentPoint.loc, gpxPoints.get(j).loc) > minPointApproximation) {
+//				System.out.println(ps.ind + "  " + ps.loc + " " + currentMinDistResult.segment);
+				if (currentMinDistResult.minDist > minPointApproximation) {
+					System.out.println("Avoid shortcuts");
 					break; // avoid shortcutting of loops
 				}
 			}
@@ -75,7 +73,7 @@ public class GpxSegmentsApproximation {
 				break;
 			}
 
-			if (minDistAhead > minPointApproximation * minPointApproximation) {
+			if (minDistAhead > minPointApproximation) {
 				final int nextIndex = currentPoint.ind + 1;
 				currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, nextIndex);
 				continue;
@@ -87,34 +85,70 @@ public class GpxSegmentsApproximation {
 			currentPoint.routeToTarget = new ArrayList<>();
 			currentPoint.routeToTarget.add(fres);
 			currentPoint.targetInd = minNextInd;
-
+			System.out.printf("%d -> %d %s \n", currentPoint.ind, currentPoint.targetInd, currentPoint.routeToTarget);
 			currentPoint = gpxPoints.get(minNextInd); // next point
-
+			currentPoint.pnt = new RouteSegmentPoint(fres.getObject(),
+					fres.getEndPointIndex() + (fres.isForwardDirection() ? -1 : 1), fres.getEndPointIndex(), 0);
 			RouteSegment sg = gctx.ctx.loadRouteSegment(fres.getEndPointX(), fres.getEndPointY(),
 					gctx.ctx.config.memoryLimitation);
-
 			while (sg != null) {
-				if (sg.getRoad().getId() != fres.getObject().getId() || sg.getSegmentEnd() != fres.getEndPointIndex()) {
-					RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(),
-							0);
-					if (currentPoint.pnt == null) {
-						currentPoint.pnt = p;
-					} else {
-						if (currentPoint.pnt.others == null) {
-							currentPoint.pnt.others = new ArrayList<>();
-						}
-						currentPoint.pnt.others.add(p);
-					}
-				}
+				addSegment(currentPoint, sg);
+				addSegment(currentPoint, sg.initRouteSegment(!sg.isPositive()));
 				sg = sg.getNext();
 			}
 		}
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
+		removeOverlappingSegments(gpxPoints);
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
 		return gctx;
+	}
+
+	private void removeOverlappingSegments(List<GpxPoint> gpxPoints) {
+		GpxPoint prev = null;
+		for (GpxPoint p : gpxPoints) {
+			if (p.routeToTarget != null) {
+				if (prev != null) {
+					RouteSegmentResult prevLast = prev.routeToTarget.get(prev.routeToTarget.size() - 1);
+					RouteSegmentResult firstNext = p.routeToTarget.get(0);
+					if (prevLast.getObject().getId() == firstNext.getObject().getId()) {
+						// check overlap
+						if (prevLast.isForwardDirection()
+								&& prevLast.getEndPointIndex() > firstNext.getStartPointIndex()) {
+							firstNext.setStartPointIndex(prevLast.getEndPointIndex());
+						} else if (!prevLast.isForwardDirection()
+								&& prevLast.getEndPointIndex() < firstNext.getStartPointIndex()) {
+							firstNext.setStartPointIndex(prevLast.getEndPointIndex());
+						}
+					}
+					if (firstNext.getStartPointIndex() == firstNext.getEndPointIndex()) {
+						p.routeToTarget.remove(0);
+					}
+				}
+				if (p.routeToTarget.size() > 0) {
+					System.out.println(p.routeToTarget);
+					prev = p;
+				} else {
+					prev.targetInd = p.targetInd;
+				}
+			}
+		}
+	}
+
+	private void addSegment(GpxPoint currentPoint, RouteSegment sg) {
+		if (sg == null) {
+			return;
+		}
+		if (sg.getRoad().getId() != currentPoint.pnt.road.getId() || Math.min(sg.getSegmentStart(),
+				sg.getSegmentEnd()) != Math.min(currentPoint.pnt.getSegmentStart(), currentPoint.pnt.getSegmentEnd())) {
+			RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(), 0);
+			if (currentPoint.pnt.others == null) {
+				currentPoint.pnt.others = new ArrayList<>();
+			}
+			currentPoint.pnt.others.add(p);
+		}
 	}
 
 	private boolean initRoutingPoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, GpxPoint start,
@@ -135,113 +169,46 @@ public class GpxSegmentsApproximation {
 		return false;
 	}
 
-	private MinDistResult findMinDistInLoadedPoints(GpxPoint loadedPoint, GpxPoint nextPoint, double gpxAngle) {
-		MinDistResult best = findOneMinDist(Double.POSITIVE_INFINITY, loadedPoint.pnt, nextPoint, gpxAngle);
+	private RouteSegmentApproximationResult findMinDistInLoadedPoints(GpxPoint loadedPoint, GpxPoint nextPoint, double gpxAngle, float minPointApproximation) {
+		RouteSegmentApproximationResult best = findBestSegmentMinDist(null, loadedPoint.pnt, nextPoint, gpxAngle, minPointApproximation);
 		if (loadedPoint.pnt.others != null) {
 			for (RouteSegmentPoint oth : loadedPoint.pnt.others) {
-				MinDistResult fresh = findOneMinDist(best.minDist, oth, nextPoint, gpxAngle);
-				if (fresh != null) {
-					best = fresh;
-				}
+				best = findBestSegmentMinDist(best, oth, nextPoint, gpxAngle, minPointApproximation);
 			}
 		}
 		return best;
 	}
 
-	private MinDistResult findOneMinDist(double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc, double gpxAngle) {
-		double newMinDist = 0;
-		int bestSegmentEnd = -1;
-		int preciseX = -1, preciseY = -1;
-
-		int startPointIndex = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
-		int endPointIndex = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
-
-		for (int i = startPointIndex; i < endPointIndex; i++) {
-			int[] resultPreciseXY = { -1, -1 };
-			double dist = findPreciseMinDist(loc, pnt, i, resultPreciseXY);
-			if (bestSegmentEnd < 0 || dist < newMinDist) {
-				preciseX = resultPreciseXY[0];
-				preciseY = resultPreciseXY[1];
-				bestSegmentEnd = i;
-				newMinDist = dist;
+	private RouteSegmentApproximationResult findBestSegmentMinDist(RouteSegmentApproximationResult res,
+			RouteSegmentPoint pnt, GpxPoint loc, double gpxAngle, float minPointApproximation) {
+		int pointIndex = pnt.getSegmentStart();
+		int nextInd = pnt.isPositive() ? pointIndex + 1 : pointIndex - 1; 
+		while (nextInd < pnt.getRoad().getPointsLength() && nextInd > 0
+				&& Math.abs(pointIndex - nextInd) < LOOKUP_AHEAD) {
+			RouteDataObject r = pnt.getRoad();
+			QuadPointDouble pp = MapUtils.getProjectionPoint31(loc.x31, loc.y31, r.getPoint31XTile(pointIndex), r.getPoint31YTile(pointIndex), 
+					r.getPoint31XTile(nextInd), r.getPoint31YTile(nextInd));
+			double currentsDist = BinaryRoutePlanner.squareRootDist((int) pp.x, (int) pp.y, loc.x31, loc.y31);
+			// Add penalty by the difference between angle-to-next-gpx-point (gpxAngle) and average-road-segments-angle.
+			if (!Double.isNaN(gpxAngle)) {
+				double segmentAngle = Math.atan2(
+						pnt.getRoad().getPoint31YTile(nextInd) - pnt.getRoad().getPoint31YTile(pointIndex),
+						pnt.getRoad().getPoint31XTile(nextInd) - pnt.getRoad().getPoint31XTile(pointIndex));
+				double penalty = (1 - Math.cos(MapUtils.alignAngleDifference(gpxAngle - segmentAngle))); // [0 - 2]
+				currentsDist += penalty * minPointApproximation / 3; // maximum penalty 2/3
 			}
+			if (res == null || currentsDist < res.minDist) {
+				res = new RouteSegmentApproximationResult();
+				res.segment = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), nextInd);
+				res.minDist = currentsDist;
+			}
+			pointIndex = nextInd;
+			nextInd = pnt.isPositive() ? pointIndex + 1 : pointIndex - 1;
 		}
 
-		newMinDist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
-
-		// Add penalty by the difference between angle-to-next-gpx-point (gpxAngle) and average-road-segments-angle.
-		// Maximum is limited to MAX_PENALTY_BY_GPX_ANGLE_M and should be not less than default minPointApproximation.
-		double penalty = calcGpxAnglePenalty(pnt, pnt.getSegmentStart(), bestSegmentEnd, gpxAngle);
-		newMinDist += Math.pow(penalty * MAX_PENALTY_BY_GPX_ANGLE_M, 2);
-
-		MinDistResult result = new MinDistResult();
-
-		if (newMinDist < minDistSqr && bestSegmentEnd >= 0) {
-			if (preciseX != -1 && preciseY != -1) {
-				result.preciseX = preciseX;
-				result.preciseY = preciseY;
-				result.preciseIndex = bestSegmentEnd;
-				result.penalty = penalty;
-			}
-			result.segment = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), bestSegmentEnd);
-			result.minDist = newMinDist;
-			return result;
-		}
-
-		return null;
+		return res;
 	}
 
-	private double findPreciseMinDist(GpxPoint loc, RouteSegmentPoint pnt, int endIndex, int [] resultXY) {
-		int x1 = pnt.getRoad().getPoint31XTile(endIndex);
-		int y1 = pnt.getRoad().getPoint31YTile(endIndex);
-		int x2 = pnt.getRoad().getPoint31XTile(endIndex > 0 ? endIndex - 1 : 0);
-		int y2 = pnt.getRoad().getPoint31YTile(endIndex > 0 ? endIndex - 1 : 0);
-		double segmentDistanceMeters = MapUtils.squareRootDist31(x1, y1, x2, y2);
-
-		int nVirtualSegments = CRUSH_SEGMENTS_BY_DISTANCE_M > 0
-				? (int) (segmentDistanceMeters / CRUSH_SEGMENTS_BY_DISTANCE_M) : 0;
-
-		double minDistSqr = Double.POSITIVE_INFINITY;
-
-		for (int i = 0; i <= nVirtualSegments; i++) {
-			int px = nVirtualSegments > 0 ? (x1 - (x1 - x2) * i / nVirtualSegments) : x1;
-			int py = nVirtualSegments > 0 ? (y1 - (y1 - y2) * i / nVirtualSegments) : y1;
-
-			double distSqr = MapUtils.squareDist31TileMetric(px, py, loc.x31, loc.y31);
-
-			if (distSqr < minDistSqr) {
-				resultXY[0] = px;
-				resultXY[1] = py;
-				minDistSqr = distSqr;
-			}
-		}
-
-		return minDistSqr;
-	}
-
-	private double calcGpxAnglePenalty(RouteSegmentPoint pnt, int start, int end, double gpxAngle) {
-		if (Double.isNaN(gpxAngle)) return 0;
-		if (start == end) return 0;
-		if (start > end) {
-			int swap = start;
-			start = end;
-			end = swap;
-		}
-		int counter = 0;
-		double roadAngle = 0;
-		for (int i = start; i < end; i++) {
-			int sx = pnt.getRoad().getPoint31XTile(i);
-			int sy = pnt.getRoad().getPoint31YTile(i);
-			int ex = pnt.getRoad().getPoint31XTile(i + 1);
-			int ey = pnt.getRoad().getPoint31YTile(i + 1);
-			double segmentAngle = Math.atan2(ey - sy, ex - sx);
-			if (segmentAngle < 0) segmentAngle += Math.PI;
-			roadAngle += segmentAngle;
-			counter++;
-		}
-		roadAngle /= counter;
-		return Math.abs(gpxAngle - roadAngle) / Math.PI;
-	}
 
 	private GpxPoint findNextRoutablePoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                       double distThreshold, List<GpxPoint> gpxPoints, int searchStart) throws IOException {
