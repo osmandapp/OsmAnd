@@ -1504,7 +1504,6 @@
     <string name="driving_region_us">Ameerika Ühendriigid</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Euroopa, Aasia, Ladina-Ameerika ja sarnased</string>
-    <string name="driving_region_uk">Suurbritannia, India, Austraalia ja sarnased</string>
     <string name="speak_title">Teata…</string>
     <string name="speak_street_names">Tänavanimed (TTS)</string>
     <string name="speak_speed_limit">Kiiruspiirang</string>

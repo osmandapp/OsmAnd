@@ -345,7 +345,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="driving_region_us">ZŠA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Eŭropa, Azіja, Łacinskaja Amieryka dy inšyja</string>
-    <string name="driving_region_uk">Vialikabrytanija, Indyija dy inšyja</string>
     <string name="speak_title">Ahałošvać…</string>
     <string name="speak_descr">Ahalošvać nazvy vulic, darožnyja pierasciarohi (vymušanyja prypynki, liažačyja palicejskija), pierasciarohi ab kamierach chutkasci, abmiežavanni chutkasci.</string>
     <string name="speak_street_names">Nazvy vulic (TTS)</string>

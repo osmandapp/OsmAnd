@@ -796,7 +796,6 @@
     <string name="driving_region_us">SAD</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa i Azija</string>
-    <string name="driving_region_uk">Velika Britanija, Indija, Australija i ostalo</string>
     <string name="speak_title">Najaviti…</string>
     <string name="route_descr_map_location">Karta: </string>
     <string name="clear_intermediate_points">Obriši srednje točke</string>

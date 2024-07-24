@@ -861,7 +861,6 @@
     <string name="speak_traffic_warnings">Peringatan lalu lintas</string>
     <string name="speak_speed_limit">Batas kecepatan</string>
     <string name="speak_street_names">Nama jalan (TTS)</string>
-    <string name="driving_region_uk">Inggris Raya, India, dan yang mirip</string>
     <string name="driving_region_europe_asia">Eropa, Asia, Amerika Latin, dan yang mirip</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_japan">Jepang</string>

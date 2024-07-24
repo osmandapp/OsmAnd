@@ -1,6 +1,6 @@
 package net.osmand.plus.chooseplan;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_TRIPLTEK_PROMO_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_HUGEROCK_PROMO_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.ANDROID_AUTO;
 import static net.osmand.plus.chooseplan.OsmAndFeature.EXTERNAL_SENSORS_SUPPORT;
 import static net.osmand.plus.chooseplan.OsmAndFeature.HOURLY_MAP_UPDATES;
@@ -12,7 +12,7 @@ import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WIKIPEDIA;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WIKIVOYAGE;
-import static net.osmand.plus.inapp.InAppPurchaseUtils.TRIPLTEK_PROMO_MONTHS;
+import static net.osmand.plus.inapp.InAppPurchaseUtils.HUGEROCK_PROMO_MONTHS;
 
 import android.view.View;
 import android.widget.TextView;
@@ -29,14 +29,14 @@ import net.osmand.plus.utils.AndroidUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class TripltekPromoFragment extends PromoCompanyFragment {
+public class HugerockPromoFragment extends PromoCompanyFragment {
 
-	public static final String TAG = TripltekPromoFragment.class.getSimpleName();
+	public static final String TAG = HugerockPromoFragment.class.getSimpleName();
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		settings.TRIPLTEK_PROMO_SHOWED.set(true);
+		settings.HUGEROCK_PROMO_SHOWED.set(true);
 	}
 
 	@NonNull
@@ -51,20 +51,20 @@ public class TripltekPromoFragment extends PromoCompanyFragment {
 		TextView title = view.findViewById(R.id.title);
 		TextView description = view.findViewById(R.id.description);
 
-		title.setText(getString(R.string.tripltek_promo, String.valueOf(TRIPLTEK_PROMO_MONTHS)));
-		description.setText(getString(R.string.tripltek_promo_description, String.valueOf(TRIPLTEK_PROMO_MONTHS)));
+		title.setText(getString(R.string.hugerock_promo, String.valueOf(HUGEROCK_PROMO_MONTHS)));
+		description.setText(getString(R.string.hugerock_promo_description, String.valueOf(HUGEROCK_PROMO_MONTHS)));
 	}
 
 	public static boolean shouldShow(@NonNull OsmandApplication app) {
-		if (Version.isTripltekBuild() && app.getAppCustomization().isFeatureEnabled(FRAGMENT_TRIPLTEK_PROMO_ID)) {
-			return InAppPurchaseUtils.isTripltekPromoAvailable(app) && !app.getSettings().TRIPLTEK_PROMO_SHOWED.get();
+		if (Version.isHugerockBuild() && app.getAppCustomization().isFeatureEnabled(FRAGMENT_HUGEROCK_PROMO_ID)) {
+			return InAppPurchaseUtils.isHugerockPromoAvailable(app) && !app.getSettings().HUGEROCK_PROMO_SHOWED.get();
 		}
 		return false;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
-			TripltekPromoFragment fragment = new TripltekPromoFragment();
+			HugerockPromoFragment fragment = new HugerockPromoFragment();
 			fragment.show(manager, TAG);
 		}
 	}

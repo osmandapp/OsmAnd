@@ -1026,7 +1026,6 @@
     <string name="driving_region_us">САЩ</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Европа, Азия, Латинска Америка и подобни</string>
-    <string name="driving_region_uk">Великобритания, Индия, Австралия и подобни</string>
     <string name="amenity_type_seamark">Навигационен ориентир</string>
     <string name="app_modes_choose_descr">Изберете видимите профили.</string>
     <string name="app_modes_choose">Профили на приложението</string>

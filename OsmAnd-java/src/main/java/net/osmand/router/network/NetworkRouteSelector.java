@@ -12,6 +12,7 @@ import net.osmand.osm.OsmRouteType;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.TransliterationHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -757,15 +758,23 @@ public class NetworkRouteSelector {
 		}
 
 		public String getRouteName(String localeId) {
-			String key = localeId != null ? "name:" + localeId : "name";
-			String name = getValue(key);
-			if (name.isEmpty()) {
-				name = getValue("ref");
+			return getRouteName(localeId, false);
+		}
+
+		public String getRouteName(String localeId, boolean transliteration) {
+			String name;
+			if (localeId != null) {
+				name = getValue("name:" + localeId);
+				if (!name.isEmpty()) {
+					return name;
+				}
 			}
-			if (name.isEmpty()) {
-				name = getRelationID();
+			name = getValue("name");
+			if (!name.isEmpty()) {
+				return transliteration ? TransliterationHelper.transliterate(name) : name;
 			}
-			return name;
+			name = getValue("ref");
+			return !name.isEmpty() ? name : getRelationID();
 		}
 
 		public String getRelationID() {
@@ -790,18 +799,6 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
-		}
-
-		public List<String> getSupportedNameLocales() {
-			List<String> localeIds = new ArrayList<>();
-			for (String tag : tags) {
-				String key = getKeyFromTag(tag);
-				String[] keySplit = key.split(":");
-				if (keySplit[0].equals("name") && keySplit.length == 2) {
-					localeIds.add(keySplit[1]);
-				}
-			}
-			return localeIds;
 		}
 
 		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {

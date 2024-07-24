@@ -603,7 +603,6 @@
     <string name="driving_region_us">Yhdysvallat</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Eurooppa, Aasia, Latinalainen Amerikka ja vastaavat</string>
-    <string name="driving_region_uk">Yhdistynyt kuningaskunta, Intia ja vastaavat</string>
     <string name="amenity_type_seamark">Merimerkki</string>
     <string name="app_modes_choose_descr">Valitse näkyvät profiilit.</string>
     <string name="shared_string_is_open">Avoinna nyt</string>

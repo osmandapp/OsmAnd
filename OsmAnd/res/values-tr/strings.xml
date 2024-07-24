@@ -646,7 +646,6 @@
     <string name="driving_region_us">Birleşik Devletler</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Avrupa, Asya, Latin Amerika ve benzeri</string>
-    <string name="driving_region_uk">Birleşik Krallık (İngiltere), Hindistan ve benzeri</string>
     <string name="speak_title">Bildir…</string>
     <string name="speak_descr">Sokak adları, trafik uyarıları (zorunlu duruşlar, hız tümsekleri), hız kamerası uyarıları ve hız sınırları duyurularını ayarlayın.</string>
     <string name="speak_street_names">Cadde adları (TTS)</string>
