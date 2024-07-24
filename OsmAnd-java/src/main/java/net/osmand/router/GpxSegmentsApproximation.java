@@ -19,7 +19,7 @@ public class GpxSegmentsApproximation {
 	private class MinDistResult {
 		private double minDist;
 		private RouteSegmentResult segment;
-		private int preciseIndex, preciseX, preciseY; // use to fix overlapped segments
+		// private int preciseIndex, preciseX, preciseY;
 	}
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
@@ -128,10 +128,10 @@ public class GpxSegmentsApproximation {
 	}
 
 	private MinDistResult findMinDistInLoadedPoints(GpxPoint loadedPoint, GpxPoint nextPoint, double gpxAngle) {
-		MinDistResult best = findOneMinDist(Double.POSITIVE_INFINITY, loadedPoint.pnt, nextPoint, gpxAngle);
+		MinDistResult best = findMinDistInOnePoint(Double.POSITIVE_INFINITY, loadedPoint.pnt, nextPoint, gpxAngle);
 		if (loadedPoint.pnt.others != null) {
 			for (RouteSegmentPoint oth : loadedPoint.pnt.others) {
-				MinDistResult fresh = findOneMinDist(best.minDist, oth, nextPoint, gpxAngle);
+				MinDistResult fresh = findMinDistInOnePoint(best.minDist, oth, nextPoint, gpxAngle);
 				if (fresh != null) {
 					best = fresh;
 				}
@@ -140,20 +140,16 @@ public class GpxSegmentsApproximation {
 		return best;
 	}
 
-	private MinDistResult findOneMinDist(double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc, double gpxAngle) {
+	private MinDistResult findMinDistInOnePoint(double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc, double gpxAngle) {
 		double newMinDist = 0;
 		int bestSegmentEnd = -1;
-		int preciseX = -1, preciseY = -1;
 
 		int startPointIndex = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
 		int endPointIndex = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
 
 		for (int i = startPointIndex; i < endPointIndex; i++) {
-			int[] resultPreciseXY = { -1, -1 };
-			double dist = findPreciseMinDist(loc, pnt, i, resultPreciseXY);
+			double dist = findMinDistInCrushedSegments(loc, pnt, i);
 			if (bestSegmentEnd < 0 || dist < newMinDist) {
-				preciseX = resultPreciseXY[0];
-				preciseY = resultPreciseXY[1];
 				bestSegmentEnd = i;
 				newMinDist = dist;
 			}
@@ -168,11 +164,6 @@ public class GpxSegmentsApproximation {
 		MinDistResult result = new MinDistResult();
 
 		if (newMinDist < minDistSqr && bestSegmentEnd >= 0) {
-			if (preciseX != -1 && preciseY != -1) {
-				result.preciseX = preciseX;
-				result.preciseY = preciseY;
-				result.preciseIndex = bestSegmentEnd;
-			}
 			result.segment = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), bestSegmentEnd);
 			result.minDist = newMinDist;
 			return result;
@@ -181,7 +172,7 @@ public class GpxSegmentsApproximation {
 		return null;
 	}
 
-	private double findPreciseMinDist(GpxPoint loc, RouteSegmentPoint pnt, int endIndex, int [] resultXY) {
+	private double findMinDistInCrushedSegments(GpxPoint loc, RouteSegmentPoint pnt, int endIndex) {
 		int x1 = pnt.getRoad().getPoint31XTile(endIndex);
 		int y1 = pnt.getRoad().getPoint31YTile(endIndex);
 		int x2 = pnt.getRoad().getPoint31XTile(endIndex > 0 ? endIndex - 1 : 0);
@@ -200,8 +191,6 @@ public class GpxSegmentsApproximation {
 			double distSqr = MapUtils.squareDist31TileMetric(px, py, loc.x31, loc.y31);
 
 			if (distSqr < minDistSqr) {
-				resultXY[0] = px;
-				resultXY[1] = py;
 				minDistSqr = distSqr;
 			}
 		}
