@@ -5836,4 +5836,6 @@
 \nProcesseur (attente du GPU) : %4$s</string>
     <string name="driving_region_india">Inde</string>
     <string name="driving_region_uk">Royaume-Uni et équivalents</string>
+    <string name="hugerock_promo">Énorme promotion pour %1$s mois</string>
+    <string name="hugerock_promo_description">Accès gratuit à des fonctionnalités comme les téléchargements illimités de cartes, le relief 3D, etc. pendant %1$s mois</string>
 </resources>
