@@ -1820,7 +1820,7 @@
     <string name="routing_attr_driving_style_balance_name">Jafnvægi</string>
     <string name="routing_attr_driving_style_safety_name">Velja frekar hjáleiðir</string>
     <string name="relief_smoothness_factor_descr">Kjörið landslag: slétt eða hæðótt.</string>
-    <string name="shared_string_slope">Halli</string>
+    <string name="shared_string_slope">Brekka</string>
     <string name="add_new_folder">Bæta við nýrri möppu</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Á að eyða %1$d punkti/punktum\?</string>
@@ -5183,11 +5183,27 @@
     <string name="feature_available_as_part_of_plan">%1$s er boði sem hluti af %2$s-áskriftinni</string>
     <string name="github_discussion">Umræður á GitHub</string>
     <string name="free_favorites_backup">Ókeypis öryggisafrit eftirlæta</string>
-    <string name="release_4_6">• Viðmótshluti fyrir rennslishlutfall
+    <string name="release_4_6">• Android Auto: Bætt við 3D-þrívíddarham
 \n
-\n • Bætt við ANT+ hitastigshluta
+\n • Ferlar: bætt við síum og snjallmöppum, betri minnisstýring fyrir stórar skrár
 \n
-\n • Betri minnisstýring fyrir stóra GPX-ferla
+\n • Bæting á viðmótshlutaspjöldum uppi og niðri þannig að þau taki við öllum viðmótshlutum
+\n
+\n • Bæting á umsýslu staðværra tilfanga
+\n
+\n • Sérsníðanleg úthlutun hnappa fyrir utanaðkomandi stýringar
+\n
+\n • Nýir viðmótshlutar: \"Rennslishlutfall\" og \"Staða sólar\"
+\n
+\n • OsmAnd Cloud: Nú er aðgangur að eyddum skrám
+\n
+\n • Bætt litun ferla í brekkuham (Slope) með nýjum samhverfum litstigli
+\n
+\n • Lagfærð vandamál með gegnsæi stöðustiku
+\n
+\n • Bætt við stuðningi við ANT+ hitastigshluta
+\n
+\n • Kynning á viðmótshluta \"Tiltækt RAM-vinnsluminni\"
 \n
 \n</string>
     <string name="deleting_complete">Eyðingu lokið</string>
@@ -5524,7 +5540,7 @@
     <string name="routing_type_a_star_classic">A* klassískt</string>
     <string name="auto_zoom">Sjálfvirkur aðdráttur</string>
     <string name="java_safe">Java (öruggt)</string>
-    <string name="gpx_approximation">GPX nálgun</string>
+    <string name="gpx_approximation">GPX-nálgun</string>
     <string name="routing_type">Tegund leiðargerðar</string>
     <string name="rendering_attr_padusDisplayMode_name">Birtingarhamur almenningslands</string>
     <string name="help_article_setup_a_route_name">Útbúa leið</string>
@@ -5532,7 +5548,7 @@
     <string name="missing_maps_header">Kort sem vantar eða eru úrelt</string>
     <string name="route_line_use_coloring_speed">Leiðarlína er lituð miðað við hraða.</string>
     <string name="route_line_use_coloring_altitude">Leiðarlína er lituð miðað við hæð.</string>
-    <string name="delete_actions_button">Eyða hnappur</string>
+    <string name="delete_actions_button">Eyða-hnappur</string>
     <string name="shared_string_osm_id">OSM-auðkenni</string>
     <string name="change_default_appearance_confirmation">Breyta sjálfgefnu útliti %1$s?</string>
     <string name="fix_north_up">Virkja fast norður upp</string>
@@ -5652,4 +5668,43 @@
     <string name="driving_region_uk">Bretland og svipað</string>
     <string name="data_source">Gagnagjafi</string>
     <string name="weather_source_ecmwf_description">Evrópumiðstöð fyrir meðallangar veðurspár</string>
+    <string name="relief_3d_download_description">Viðbótarkort þarf til að skoða yfirborð á kortinu.</string>
+    <string name="allow_display_on_top">Leyfa birtingu ofan á</string>
+    <string name="change_default_tracks_appearance_confirmation">Virkja breytingar á fyrirliggjandi ferla í möppunni eða aðeins á nýja ferla?</string>
+    <string name="gpx_approximation_geo_cpp">Byggt á flatarmálsreikningum (C++, hraðvirkt)</string>
+    <string name="rendering_avg_info">Tölfræði myndgerðar (meðaltal 1 / 5 / 15 mínútur)</string>
+    <string name="view_angle">Horn sýnar</string>
+    <string name="rendering_avg_info_details">FPS síðustu 1000 ramma: %1$s
+\nCPU (tíglar): %2$s
+\nCPU (tími aðgerðaleysis): %3$s
+\nCPU (bið eftir GPU): %4$s</string>
+    <string name="view_angle_description">Birtir keilulagaða svæðið fyrir framan þig</string>
+    <string name="location_radius_description">Sýnir hringlaga svæðið sem stendur fyrir nákvæmni núverandi staðsetningar þinnar</string>
+    <string name="allow_display_on_top_description">Leyfa birtingu kortatexta ofan á hver öðrum</string>
+    <string name="maps_that_also_be_used">Kort sem verða einnig notuð: %1$s</string>
+    <string name="gpx_approximation_geo_java">Byggt á flatarmálsreikningum (Java, hraðvirkt)</string>
+    <string name="app_profile">Forritssnið</string>
+    <string name="energy_avg_info">Tölfræði um orkunotkun (meðaltal 1 / 5 / 15 mínútur)</string>
+    <string name="energy_avg_info_description">Rafhleðsla á hverri mínútu: %1$s
+\nOrkunotkun (mAh): %2$s</string>
+    <string name="quick_action_previous_app_profile">Forritssnið í fyrra</string>
+    <string name="quick_action_next_app_profile">Forritssnið í næsta</string>
+    <string name="quick_action_display_position_in_center">Birting staðsetningar alltaf á miðju</string>
+    <string name="quick_action_terrain">Gerð litunar yfirborðs</string>
+    <string name="quick_action_track_waypoint">Leiðarpunktur í ferli</string>
+    <string name="quick_action_verb_pause_resume">Bið / Halda áfram</string>
+    <string name="height_legend_description">Lituð hæðakort eru notuð til að myndgera upphleypt yfirborð.</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Fela afmarkanir á opinberu landi</string>
+    <string name="rendering_value_pale_name">Fölt</string>
+    <string name="quick_action_first_intermediate">Fyrsti milliáfangi</string>
+    <string name="show_debug_info">Birta villuleitarupplýsingar</string>
+    <string name="travel_topics">Ferðatengt efni</string>
+    <string name="backup_error_failed_to_transfer_file">Mistókst að millifæra skrá(r) á tölvuskýi.</string>
+    <string name="gpx_approximation_java">Byggt á leiðagerð (Java)</string>
+    <string name="map_settings_weather_wind_animation">Vindhreyfing</string>
+    <string name="gpx_approximation_cpp">Byggt á leiðagerð (C++)</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Fela afmarkanir á opinberu landi en skilja eftir svæði</string>
+    <string name="apply_only_to_new">Beita aðeins á nýtt</string>
+    <string name="unchanged_parameter_summary">Hver ferill mun halda sínum færibreytum.</string>
+    <string name="location_radius">Radíus staðsetningar</string>
 </resources>
