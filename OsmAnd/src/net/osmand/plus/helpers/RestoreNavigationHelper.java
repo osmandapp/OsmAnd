@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.settings.enums.TrackApproximationType.AUTOMATIC;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -12,15 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.measurementtool.GpxApproximationHelper;
+import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -152,33 +157,46 @@ public class RestoreNavigationHelper {
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile result) {
-				GPXRouteParamsBuilder gpxRoute;
-				if (result != null) {
-					gpxRoute = new GPXRouteParamsBuilder(result, settings);
+			protected void onPostExecute(GPXFile gpxFile) {
+				if (pointToNavigate == null) {
+					notRestoreRoutingMode();
+				} else {
+					ApplicationMode appMode = routingHelper.getAppMode();
+					if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+						GpxApproximationParams params = new GpxApproximationParams();
+						params.setAppMode(appMode);
+						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
+						GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
+							enterRoutingMode(createGpxRouteParams(approxGpx));
+							return true;
+						});
+					} else {
+						enterRoutingMode(createGpxRouteParams(gpxFile));
+					}
+				}
+			}
+
+			@Nullable
+			private GPXRouteParamsBuilder createGpxRouteParams(@Nullable GPXFile gpxFile) {
+				GPXRouteParamsBuilder builder = null;
+				if (gpxFile != null) {
+					builder = new GPXRouteParamsBuilder(gpxFile, settings);
 					if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
-						gpxRoute.setCalculateOsmAndRouteParts(true);
+						builder.setCalculateOsmAndRouteParts(true);
 					}
 					if (settings.GPX_ROUTE_CALC.get()) {
-						gpxRoute.setCalculateOsmAndRoute(true);
+						builder.setCalculateOsmAndRoute(true);
 					}
 					int segmentIndex = settings.GPX_SEGMENT_INDEX.get();
 					if (segmentIndex != -1) {
-						gpxRoute.setSelectedSegment(segmentIndex);
+						builder.setSelectedSegment(segmentIndex);
 					}
 					int routeIndex = settings.GPX_ROUTE_INDEX.get();
 					if (routeIndex != -1) {
-						gpxRoute.setSelectedRoute(routeIndex);
+						builder.setSelectedRoute(routeIndex);
 					}
-				} else {
-					gpxRoute = null;
 				}
-				TargetPoint endPoint = pointToNavigate;
-				if (endPoint == null) {
-					notRestoreRoutingMode();
-				} else {
-					enterRoutingMode(gpxRoute);
-				}
+				return builder;
 			}
 		};
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxPath);
