@@ -10,24 +10,16 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
-// TODO fix overlapped segments/U-turn (use precise X/Y)
-// TODO init distToProjSquare (new RouteSegmentPoint) to next-gpx-point
-// TODO distToProj (any) should be replaced with distToProj to next-gpx-point
-
-// TO-THINK ? fix minor "Points are not connected" (~0.01m)
-// TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
-
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // penalty by the difference between gpx and road angle (25)
+	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // penalty by the angle between gpx and road (25)
 	private final double CRUSH_SEGMENTS_BY_DISTANCE_M = 25; // crush road segments to match gpx points better (25)
 
 	private class MinDistResult {
 		private double minDist;
 		private RouteSegmentResult segment;
 		private int preciseIndex, preciseX, preciseY; // use to fix overlapped segments
-		private double penalty; // DEBUG: count penalties > 0.1 (rescuetrack should be empty)
 	}
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
@@ -170,7 +162,6 @@ public class GpxSegmentsApproximation {
 		newMinDist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
 
 		// Add penalty by the difference between angle-to-next-gpx-point (gpxAngle) and average-road-segments-angle.
-		// Maximum is limited to MAX_PENALTY_BY_GPX_ANGLE_M and should be not less than default minPointApproximation.
 		double penalty = calcGpxAnglePenalty(pnt, pnt.getSegmentStart(), bestSegmentEnd, gpxAngle);
 		newMinDist += Math.pow(penalty * MAX_PENALTY_BY_GPX_ANGLE_M, 2);
 
@@ -181,7 +172,6 @@ public class GpxSegmentsApproximation {
 				result.preciseX = preciseX;
 				result.preciseY = preciseY;
 				result.preciseIndex = bestSegmentEnd;
-				result.penalty = penalty;
 			}
 			result.segment = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), bestSegmentEnd);
 			result.minDist = newMinDist;
