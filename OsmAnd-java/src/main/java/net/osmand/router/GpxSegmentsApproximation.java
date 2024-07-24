@@ -8,7 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 // TODO fix overlapped segments/U-turn (use precise X/Y)
@@ -110,46 +109,12 @@ public class GpxSegmentsApproximation {
 				sg = sg.getNext();
 			}
 		}
-
-		connectGpxPoints(gpxPoints);
-
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
-
 		return gctx;
-	}
-
-	private void connectGpxPoints(List<GpxPoint> gpxPoints) {
-		for (int i = 0, x = -1, y = -1; i < gpxPoints.size();) {
-			GpxPoint p = gpxPoints.get(i);
-			if (x >= 0 && y >= 0 && !Algorithms.isEmpty(p.routeToTarget)) {
-				RouteSegmentResult segment = p.getFirstRouteRes();
-				int px = segment.getStartPointX();
-				int py = segment.getStartPointY();
-				double dist = MapUtils.squareRootDist31(x, y, px, py);
-				if (dist > 0) {
-//					System.err.printf("WARN: XXX [%d] !!! %.2f\n", i, dist);
-					segment.getObject().pointsX[segment.getStartPointIndex()] = x;
-					segment.getObject().pointsY[segment.getStartPointIndex()] = y;
-				}
-			}
-			if (!Algorithms.isEmpty(p.routeToTarget)) {
-				RouteSegmentResult segment = p.getLastRouteRes();
-				x = segment.getEndPointX();
-				y = segment.getEndPointY();
-				i = p.targetInd;
-//				System.err.printf("WARN: XXX [%d] route (%d, %d) - %d (%s)\n", i, x, y, p.targetInd, p.routeToTarget);
-			} else {
-				p = gpxPoints.get(i - 1);
-				x = MapUtils.get31TileNumberX(p.loc.getLongitude());
-				y = MapUtils.get31TileNumberY(p.loc.getLatitude());
-//				System.err.printf("WARN: XXX [%d] gpx (%d, %d) - %d\n", i, x, y, p.targetInd);
-				i++;
-			}
-		}
 	}
 
 	private boolean initRoutingPoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, GpxPoint start,
