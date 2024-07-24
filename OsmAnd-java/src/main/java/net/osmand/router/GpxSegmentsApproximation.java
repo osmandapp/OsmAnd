@@ -19,7 +19,7 @@ public class GpxSegmentsApproximation {
 	private class MinDistResult {
 		private double minDist;
 		private RouteSegmentResult segment;
-		// private int preciseIndex, preciseX, preciseY;
+		// private int preciseIndex, preciseX, preciseY; // removed by 86df47685491f91fe13e16da1e12cc08afa21aff commit
 	}
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
