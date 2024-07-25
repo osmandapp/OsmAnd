@@ -3,9 +3,6 @@ package net.osmand.plus.helpers;
 import static net.osmand.plus.settings.enums.TrackApproximationType.AUTOMATIC;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.widget.TextView;
@@ -86,41 +83,26 @@ public class RestoreNavigationHelper {
 			@Override
 			public void run() {
 				AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-				TextView tv = new TextView(mapActivity);
-				tv.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, delay + ""));
-				tv.setPadding(7, 5, 7, 5);
-				builder.setView(tv);
-				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						quitRouteRestoreDialog = true;
-						restoreRoutingModeInner(pointToNavigate, gpxPath);
-					}
+				TextView textView = new TextView(mapActivity);
+				textView.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, String.valueOf(delay)));
+				textView.setPadding(7, 5, 7, 5);
+				builder.setView(textView);
+				builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+					quitRouteRestoreDialog = true;
+					restoreRoutingModeInner(pointToNavigate, gpxPath);
 				});
-				builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						quitRouteRestoreDialog = true;
-						notRestoreRoutingMode();
-					}
+				builder.setNegativeButton(R.string.shared_string_no, (dialog, which) -> {
+					quitRouteRestoreDialog = true;
+					notRestoreRoutingMode();
 				});
 				AlertDialog dialog = builder.show();
-				dialog.setOnDismissListener(new OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						quitRouteRestoreDialog = true;
-					}
-				});
-				dialog.setOnCancelListener(new OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						quitRouteRestoreDialog = true;
-					}
-				});
+				dialog.setOnDismissListener(d -> quitRouteRestoreDialog = true);
+				dialog.setOnCancelListener(d -> quitRouteRestoreDialog = true);
+
 				delayDisplay = () -> {
 					if (!quitRouteRestoreDialog) {
 						delay--;
-						tv.setText(mapActivity.getString(R.string.continue_follow_previous_route_auto, delay + ""));
+						textView.setText(app.getString(R.string.continue_follow_previous_route_auto, String.valueOf(delay)));
 						if (delay <= 0) {
 							try {
 								if (dialog.isShowing() && !quitRouteRestoreDialog) {
@@ -130,7 +112,7 @@ public class RestoreNavigationHelper {
 								restoreRoutingModeInner(pointToNavigate, gpxPath);
 							} catch (Exception e) {
 								// swalow view not attached exception
-								log.error(e.getMessage() + "", e);
+								log.error(e.getMessage(), e);
 							}
 						} else {
 							uiHandler.postDelayed(delayDisplay, 1000);
@@ -145,7 +127,7 @@ public class RestoreNavigationHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void restoreRoutingModeInner(@Nullable TargetPoint pointToNavigate, @Nullable String gpxPath) {
-		AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
+		AsyncTask<String, Void, GPXFile> task = new AsyncTask<>() {
 			@Override
 			protected GPXFile doInBackground(String... params) {
 				if (gpxPath != null) {
@@ -157,12 +139,13 @@ public class RestoreNavigationHelper {
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile gpxFile) {
+			protected void onPostExecute(@Nullable GPXFile gpxFile) {
 				if (pointToNavigate == null) {
 					notRestoreRoutingMode();
 				} else {
 					ApplicationMode appMode = routingHelper.getAppMode();
-					if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+					if (gpxFile != null && !gpxFile.isAttachedToRoads()
+							&& settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
 						GpxApproximationParams params = new GpxApproximationParams();
 						params.setAppMode(appMode);
 						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
