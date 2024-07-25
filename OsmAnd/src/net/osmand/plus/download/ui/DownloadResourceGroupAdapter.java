@@ -114,7 +114,7 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 	}
 
 	private void updateSRTMMetricSystem(@NonNull SrtmDownloadItem srtmDownloadItem) {
-		srtmDownloadItem.setUseMetric(SrtmDownloadItem.isUseMetricByDefault(ctx.getMyApplication()));
+		srtmDownloadItem.updateMetric(ctx.getMyApplication());
 	}
 
 	@Override

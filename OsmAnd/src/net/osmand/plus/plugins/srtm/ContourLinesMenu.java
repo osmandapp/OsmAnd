@@ -261,7 +261,7 @@ public class ContourLinesMenu {
 		List<DownloadItem> individualResources = srtms.get(0).getRelatedGroup().getIndividualDownloadItems();
 		for (DownloadItem downloadItem : individualResources) {
 			if (downloadItem instanceof SrtmDownloadItem srtmDownloadItem) {
-				srtmDownloadItem.setUseMetric(SrtmDownloadItem.isUseMetricByDefault(app));
+				srtmDownloadItem.updateMetric(app);
 				return srtmDownloadItem;
 			}
 		}
