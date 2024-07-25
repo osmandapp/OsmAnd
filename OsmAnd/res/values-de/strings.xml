@@ -5851,4 +5851,9 @@
     <string name="driving_region_uk">UK und ähnlich</string>
     <string name="hugerock_promo_description">Kostenloser Zugang zu Funktionen wie unbegrenzten Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
+    <string name="shared_string_automatically">Automatisch</string>
+    <string name="ask_every_time">Jedes Mal fragen</string>
+    <string name="detailed_track_guidance">Detaillierte Streckenführung</string>
+    <string name="detailed_track_guidance_description">OsmAnd wird deine Strecke an nahegelegene Straßen anpassen, um eine verbesserte Abbiegeführung zu bieten.</string>
+    <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
 </resources>
