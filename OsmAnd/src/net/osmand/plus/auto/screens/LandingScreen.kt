@@ -18,7 +18,7 @@ class LandingScreen(
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
-        for (category in PlaceCategory.values()) {
+        for (category in PlaceCategory.entries) {
             if (category == PlaceCategory.FREE_MODE) {
                 if(app.navigationService.isCarNavigationActive) {
                     listBuilder.addItem(createContinueNavigationItem())
@@ -47,10 +47,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                getCarContext(),
-                                R.drawable.ic_my_location))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_my_location)
+                        ).build()
+                    )
                     .setOnClickListener {
                         session?.navigationCarSurface?.handleRecenter()
                     }
@@ -59,10 +58,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                carContext,
-                                R.drawable.ic_zoom_in))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_zoom_in)
+                        ).build()
+                    )
                     .setOnClickListener {
                         app.carNavigationSession?.navigationCarSurface?.handleScale(
 	                        NavigationSession.INVALID_FOCAL_POINT_VAL,
@@ -106,6 +104,7 @@ class LandingScreen(
         return Row.Builder()
             .setTitle(title)
             .setImage(icon)
+            .setBrowsable(true)
             .setOnClickListener {
                 app.carNavigationSession?.let {
                     it.startNavigation()
