@@ -4350,4 +4350,5 @@
     <string name="quick_action_map_underlay">Υπόστρωμα</string>
     <string name="quick_action_remove_next_destination">Επόμενο σημείο προορισμού</string>
     <string name="quick_action_map_overlay">Επικάλυψη</string>
+    <string name="show_borders_of_downloaded_maps">Εμφάνιση συνόρων από τους κατεβασμένους χάρτες</string>
 </resources>
