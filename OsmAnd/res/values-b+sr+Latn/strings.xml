@@ -5853,4 +5853,9 @@
     <string name="driving_region_uk">Velika Britanija i slični</string>
     <string name="hugerock_promo_description">Besplatan pristup funkcijama, uključujući neograničen broj preuzimanja karata, 3D reljef i sl. samo za %1$s dolar mesečno</string>
     <string name="hugerock_promo">Promocija Hugerock %1$s dolar mesečno</string>
+    <string name="shared_string_automatically">Automatski</string>
+    <string name="ask_every_time">Pitati svaki put</string>
+    <string name="detailed_track_guidance">Detaljan vodič snimljenom stazom</string>
+    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju snimljenu stazi s obližnjim putevima za bolju, detaljnuju navigaciju.</string>
+    <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
 </resources>

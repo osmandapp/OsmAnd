@@ -5856,4 +5856,6 @@
 \nCPU (plăci): %2$s
 \nCPU (timp inactiv): %3$s
 \nCPU (așteaptă GPU): %4$s</string>
+    <string name="ask_every_time">Întreabă de fiecare dată</string>
+    <string name="shared_string_automatically">Automat</string>
 </resources>
