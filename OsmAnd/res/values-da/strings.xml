@@ -5852,4 +5852,9 @@
     <string name="driving_region_uk">Storbritannien og lignende</string>
     <string name="hugerock_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief osv. i %1$s måned</string>
     <string name="hugerock_promo">Hugerock-kampagne i %1$s måneder</string>
+    <string name="ask_every_time">Spørg hver gang</string>
+    <string name="detailed_track_guidance">Detaljeret sporvejledning</string>
+    <string name="detailed_track_guidance_description">OsmAnd vil matche dit spor med nærliggende veje for at forbedre sving-for-sving-vejledningen.</string>
+    <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
+    <string name="shared_string_automatically">Automatisk</string>
 </resources>
