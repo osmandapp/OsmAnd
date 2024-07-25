@@ -1526,7 +1526,7 @@
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε τίποτα</string>
     <string name="shared_string_to">Προς</string>
-    <string name="rendering_attr_hidePOILabels_name">Ετικέτες POI</string>
+    <string name="rendering_attr_hidePOILabels_name">Ετικέτες ΣΕ</string>
     <string name="shared_string_without_name">Χωρίς όνομα</string>
     <string name="what_is_here">Τι είναι εδώ:</string>
     <string name="parked_at">σταθμευμένο στο</string>
@@ -4351,4 +4351,18 @@
     <string name="quick_action_remove_next_destination">Επόμενο σημείο προορισμού</string>
     <string name="quick_action_map_overlay">Επικάλυψη</string>
     <string name="show_borders_of_downloaded_maps">Εμφάνιση συνόρων από τους κατεβασμένους χάρτες</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Χρωματίζονται οι διαδρομές ανάλογα με τον τύπο του δικτύου κόμβων (διεθνές, περιφερειακό, τοπικό).</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Απόκρυψη στρατοπέδων</string>
+    <string name="rendering_attr_showRunningRoutes_description">Εμφάνιση διαδρομών τρεξίματος</string>
+    <string name="show_map_symbols">Εμφάνιση συμβόλων χάρτη</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Απόκρυψη στρατιωτικών περιοχών</string>
+    <string name="routes_color_by_type">Χρωματισμός διαδρομών ανά…</string>
+    <string name="shared_string_layers">Επίπεδα</string>
+    <string name="rendering_attr_showFitnessTrails_name">Μονοπάτια γυμναστικής</string>
+    <string name="rendering_attr_showFitnessTrails_description">Εμφάνιση μονοπατιών γυμναστικής</string>
+    <string name="walking_route_osmc_description">Χρωματίζονται οι διαδρομές ανάλογα με το δικό του τοπικό χρώμα (αν υπάρχει στο OpenStreetMap) και τον τύπο (διεθνές, περιφερειακό, τοπικό).</string>
+    <string name="rendering_attr_showRunningRoutes_name">Διαδρομές τρεξίματος</string>
+    <string name="routeInfo_horse_scale_name">Δυσκολία των μονοπάτιών για άλογο</string>
+    <string name="rendering_attr_alpineHiking_name">Κατηγοριοποίηση δυσκολίας</string>
+    <string name="rendering_attr_natureReserves_name">Φυσικό καταφύγιο</string>
 </resources>
