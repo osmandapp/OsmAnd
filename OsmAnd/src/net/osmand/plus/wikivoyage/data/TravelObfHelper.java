@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -102,6 +103,7 @@ public class TravelObfHelper implements TravelHelper {
 	private int searchRadius = ARTICLE_SEARCH_RADIUS;
 	private int foundAmenitiesIndex;
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
+	public volatile int requestNumber = 0;
 
 
 	public TravelObfHelper(OsmandApplication app) {
@@ -354,28 +356,37 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery, int requestNumber) {
 		String appLang = app.getLanguage();
-		List<WikivoyageSearchResult> res = searchWithLang(searchQuery, appLang);
+		List<WikivoyageSearchResult> res = searchWithLang(searchQuery, appLang, requestNumber);
 		if (Algorithms.isEmpty(res)) {
-			res = searchWithLang(searchQuery, "en");
+			res = searchWithLang(searchQuery, "en", requestNumber);
 		}
 		return res;
 	}
 
 	@NonNull
-	private synchronized List<WikivoyageSearchResult> searchWithLang(@NonNull String searchQuery, @NonNull String appLang) {
+	private synchronized List<WikivoyageSearchResult> searchWithLang(@NonNull String searchQuery, @NonNull String appLang, int reqNumber) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		SearchSettings settings = searchUICore.getSearchSettings();
 		SearchPhrase phrase = searchUICore.getPhrase().generateNewPhrase(searchQuery, settings);
 		NameStringMatcher matcher = phrase.getFirstUnknownNameStringMatcher();
+		List<WikivoyageSearchResult> empty = new ArrayList<>();
 
 		for (BinaryMapIndexReader reader : getReaders()) {
+			if (requestNumber != reqNumber) {
+				return empty;
+			}
 			try {
+				List<BinaryMapPoiReaderAdapter.PoiRegion> poiIndexes = reader.getPoiIndexes();
+				QuadRect bbox = new QuadRect();
+				for (BinaryMapPoiReaderAdapter.PoiRegion poiRegion : poiIndexes) {
+					bbox.expand(poiRegion.getLeft31(), poiRegion.getTop31(), poiRegion.getRight31(), poiRegion.getBottom31());
+				}
 				SearchRequest<Amenity> searchRequest = BinaryMapIndexReader.buildSearchPoiRequest(0, 0, searchQuery,
-						0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
+						(int)bbox.left, (int)bbox.right, (int)bbox.top, (int)bbox.bottom, getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity object) {
 								List<String> otherNames = object.getOtherNames(false);
@@ -385,11 +396,14 @@ public class TravelObfHelper implements TravelHelper {
 
 							@Override
 							public boolean isCancelled() {
-								return false;
+								return requestNumber != reqNumber;
 							}
 						}, null);
 
 				List<Amenity> amenities = reader.searchPoiByName(searchRequest);
+				if (requestNumber != reqNumber) {
+					return empty;
+				}
 				if (!Algorithms.isEmpty(amenities)) {
 					amenityMap.put(reader.getFile(), amenities);
 				}
