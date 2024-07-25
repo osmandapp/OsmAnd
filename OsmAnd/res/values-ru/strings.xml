@@ -5851,4 +5851,9 @@
     <string name="hugerock_promo_description">Бесплатный доступ к функциям, включая неограниченное количество загрузок карт, 3D-рельеф и другим в течение %1$s месяцев</string>
     <string name="hugerock_promo">Промоакция Hugerock на %1$s месяцев</string>
     <string name="driving_region_uk">Великобритания и аналогичные</string>
+    <string name="ask_every_time">Спрашивать каждый раз</string>
+    <string name="detailed_track_guidance">Подробное руководство по треку</string>
+    <string name="shared_string_automatically">Автоматически</string>
+    <string name="detailed_track_guidance_description">OsmAnd сопоставит ваш трек с близлежащими дорогами для улучшенного пошагового руководства.</string>
+    <string name="quick_action_routes_summary">Переключатель для отображения или скрытия %1$s на карте.</string>
 </resources>
