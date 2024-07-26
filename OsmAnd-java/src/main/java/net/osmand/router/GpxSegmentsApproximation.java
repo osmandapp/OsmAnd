@@ -14,12 +14,12 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
 public class GpxSegmentsApproximation {
-	private final int LOOKUP_AHEAD = 10;
-	private final boolean TEST_SHIFT_GPX_POINTS = false;
+	private final int LOOKUP_AHEAD = 10; // the number of gpx points and road segment points to discover (10)
+	private final boolean USE_BIDIRECTIONAL_SEGMENTS = false; // follow direction for gpxAngle (twice slower) (true)
+	private final boolean USE_PROJECTION_TO_SEGMENT = false; // prefer projection-to-seg instead of pnt-pnt-dist (true)
+	private final double CRUSH_UNIDIRECTIONAL_SEGMENTS_M = 25; // crush road segments to match gpx points better (25)
 	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // penalty by the angle between gpx and road (25)
-	private final double CRUSH_SEGMENTS_BY_DISTANCE_M = 25; // crush road segments to match gpx points better (25)
-	private final boolean USE_BIDIRECTIONAL_SEGMENTS = false; // follow direction for gpxAngle (twice slower) (false)
-	private final boolean USE_PROJECTION_TO_SEGMENT = false; // prefer projection-to-seg instead of pnt-pnt-dist (false)
+	private final boolean TEST_SHIFT_GPX_POINTS = false; // shift gpx by ~15 meters before approximation
 
 	private static class MinDistResult {
 		private double minDist;
@@ -67,15 +67,15 @@ public class GpxSegmentsApproximation {
 				continue;
 			}
 
-			int nextPointIndexIncrement = 0;
 			RouteSegmentResult fres = bestSegment.segment;
+			int nextPointIndexIncrement = fres.isForwardDirection() ? -1 : 1;
+
 			correctOverlappingSegments(previousGpxPoint, fres);
 
 			if (previousGpxPoint != null && fres.getStartPointIndex() == fres.getEndPointIndex()) {
 				previousGpxPoint.targetInd = bestSegment.nextPoint.ind; // ignore empty segment
-//				nextPointIndexIncrement = 0; // TODO FIXME try to ignore in better way
+//				nextPointIndexIncrement = 0; // TODO try to ignore in better way (holes in zlzk7)
 			} else {
-				nextPointIndexIncrement = fres.isForwardDirection() ? -1 : 1;
 				currentPoint.targetInd = bestSegment.nextPoint.ind;
 				currentPoint.routeToTarget = new ArrayList<>();
 				fres.setGpxPointIndex(currentPoint.ind);
@@ -102,6 +102,8 @@ public class GpxSegmentsApproximation {
 			}
 		}
 
+//		removeOverlappingSegments(gpxPoints); // TODO remove method
+
 //		for (GpxPoint p : gpxPoints) { // DEBUG
 //			if (p.routeToTarget != null) {
 //				System.err.println("XXX " + p.ind + " " + p.targetInd + " " + p.routeToTarget);
@@ -114,18 +116,6 @@ public class GpxSegmentsApproximation {
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
 		return gctx;
-	}
-
-	private void correctOverlappingSegments(GpxPoint prevGpxPoint, RouteSegmentResult next) {
-		if (prevGpxPoint != null && prevGpxPoint.routeToTarget != null) {
-			RouteSegmentResult prev = prevGpxPoint.routeToTarget.get(prevGpxPoint.routeToTarget.size() - 1);
-			if (prev.getObject().getId() == next.getObject().getId()) {
-				if ((prev.isForwardDirection() && next.getStartPointIndex() < prev.getEndPointIndex()) ||
-						(!prev.isForwardDirection() && next.getStartPointIndex() > prev.getEndPointIndex())) {
-					next.setStartPointIndex(prev.getEndPointIndex());
-				}
-			}
-		}
 	}
 
 	private void addSegment(GpxPoint currentPoint, RouteSegment sg) {
@@ -268,8 +258,8 @@ public class GpxSegmentsApproximation {
 		int ey = pnt.getRoad().getPoint31YTile(Math.max(startIndex, endIndex));
 		double segmentDistanceMeters = MapUtils.squareRootDist31(sx, sy, ex, ey);
 
-		int nVirtualSegments = CRUSH_SEGMENTS_BY_DISTANCE_M > 0
-				? (int) (segmentDistanceMeters / CRUSH_SEGMENTS_BY_DISTANCE_M) : 0;
+		int nVirtualSegments = CRUSH_UNIDIRECTIONAL_SEGMENTS_M > 0
+				? (int) (segmentDistanceMeters / CRUSH_UNIDIRECTIONAL_SEGMENTS_M) : 0;
 
 		double minDist = Double.POSITIVE_INFINITY;
 
@@ -304,7 +294,6 @@ public class GpxSegmentsApproximation {
 			int ex = pnt.getRoad().getPoint31XTile(i + 1);
 			int ey = pnt.getRoad().getPoint31YTile(i + 1);
 			double segmentAngle = Math.atan2(ey - sy, ex - sx);
-//			if (segmentAngle < 0) segmentAngle += Math.PI; // TODO remove me
 			roadAngle += segmentAngle;
 			counter++;
 		}
@@ -331,11 +320,54 @@ public class GpxSegmentsApproximation {
 	private void initGpxPointsXY31(List<GpxPoint> gpxPoints) {
 		for (GpxPoint p : gpxPoints) {
 			if (TEST_SHIFT_GPX_POINTS) {
-				final double shift = 0.00015; // shift ~15 meters to check attached geometry visually
+				final double shift = 0.00015;
 				p.loc = new LatLon(p.loc.getLatitude() - shift, p.loc.getLongitude() + shift);
 			}
 			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
 			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
 		}
 	}
+
+	private void correctOverlappingSegments(GpxPoint prevGpxPoint, RouteSegmentResult next) {
+		if (prevGpxPoint != null && prevGpxPoint.routeToTarget != null) {
+			RouteSegmentResult prev = prevGpxPoint.routeToTarget.get(prevGpxPoint.routeToTarget.size() - 1);
+			if (prev.getObject().getId() == next.getObject().getId()) {
+				if ((prev.isForwardDirection() && next.getStartPointIndex() < prev.getEndPointIndex()) ||
+						(!prev.isForwardDirection() && next.getStartPointIndex() > prev.getEndPointIndex())) {
+					next.setStartPointIndex(prev.getEndPointIndex());
+				}
+			}
+		}
+	}
+
+//	private void removeOverlappingSegments(List<GpxPoint> gpxPoints) {
+//		GpxPoint prev = null;
+//		for (GpxPoint p : gpxPoints) {
+//			if (p.routeToTarget != null) {
+//				if (prev != null) {
+//					RouteSegmentResult prevLast = prev.routeToTarget.get(prev.routeToTarget.size() - 1);
+//					RouteSegmentResult firstNext = p.routeToTarget.get(0);
+//					if (prevLast.getObject().getId() == firstNext.getObject().getId()) {
+//						// check overlap
+//						if (prevLast.isForwardDirection()
+//								&& prevLast.getEndPointIndex() > firstNext.getStartPointIndex()) {
+//							firstNext.setStartPointIndex(prevLast.getEndPointIndex());
+//						} else if (!prevLast.isForwardDirection()
+//								&& prevLast.getEndPointIndex() < firstNext.getStartPointIndex()) {
+//							firstNext.setStartPointIndex(prevLast.getEndPointIndex());
+//						}
+//					}
+//					if (firstNext.getStartPointIndex() == firstNext.getEndPointIndex()) {
+//						p.routeToTarget.remove(0);
+//					}
+//				}
+//				if (p.routeToTarget.size() > 0) {
+//					prev = p;
+//				} else {
+//					p.routeToTarget = null;
+//					prev.targetInd = p.targetInd;
+//				}
+//			}
+//		}
+//	}
 }
