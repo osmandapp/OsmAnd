@@ -5858,4 +5858,5 @@
 \nCPU (așteaptă GPU): %4$s</string>
     <string name="ask_every_time">Întreabă de fiecare dată</string>
     <string name="shared_string_automatically">Automat</string>
+    <string name="detailed_track_guidance">Ghid detaliat pentru traseu</string>
 </resources>
