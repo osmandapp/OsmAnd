@@ -5835,4 +5835,11 @@
     <string name="auto_25_chars_route_kl">靠左</string>
     <string name="driving_region_uk">英國及類似國家</string>
     <string name="driving_region_india">印度</string>
+    <string name="ask_every_time">每次都詢問</string>
+    <string name="detailed_track_guidance">詳細的軌跡引導</string>
+    <string name="detailed_track_guidance_description">OsmAnd 會將您的軌跡與附近的道路貼齊，以提供強化的路線導航。</string>
+    <string name="quick_action_routes_summary">用來在地圖上顯示或隱藏 %1$s 的開關。</string>
+    <string name="hugerock_promo">%1$s 個月的 Hugerock 促銷</string>
+    <string name="hugerock_promo_description">%1$s 個月的免費使用功能，包含無限制的地圖下載、3D 地形等</string>
+    <string name="shared_string_automatically">自動</string>
 </resources>
