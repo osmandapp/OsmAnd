@@ -652,6 +652,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
+	@Nullable
 	public NavigationService getNavigationService() {
 		return navigationService;
 	}

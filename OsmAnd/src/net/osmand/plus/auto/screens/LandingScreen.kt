@@ -20,7 +20,7 @@ class LandingScreen(
         val app = app
         for (category in PlaceCategory.entries) {
             if (category == PlaceCategory.FREE_MODE) {
-                if(app.navigationService.isCarNavigationActive) {
+                if (app.navigationService?.isCarNavigationActive == true) {
                     listBuilder.addItem(createContinueNavigationItem())
                     continue
                 }
