@@ -5838,4 +5838,9 @@
     <string name="driving_region_uk">Royaume-Uni et équivalents</string>
     <string name="hugerock_promo">Énorme promotion pour %1$s mois</string>
     <string name="hugerock_promo_description">Accès gratuit à des fonctionnalités comme les téléchargements illimités de cartes, le relief 3D, etc. pendant %1$s mois</string>
+    <string name="shared_string_automatically">Automatiquement</string>
+    <string name="ask_every_time">Demander à chaque fois</string>
+    <string name="detailed_track_guidance">Guidage de trace détaillé</string>
+    <string name="detailed_track_guidance_description">OsmAnd va faire correspondre votre trace aux routes à proximité pour un guidage pas-à-pas amélioré.</string>
+    <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
 </resources>
