@@ -5844,7 +5844,7 @@
     <string name="auto_25_chars_route_tshr">Virați brusc la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
     <string name="navigation_position">Poziția de navigare</string>
-    <string name="view_angle_description">Afișează zona în formă de con cu care vă confruntați în prezent</string>
+    <string name="view_angle_description">Afișează zona în formă de con spre care priviți</string>
     <string name="view_angle">Unghi de vizualizare</string>
     <string name="location_radius_description">Afișează zona circulară care reprezintă precizia locației dumneavoastră curente</string>
     <string name="location_radius">Raza de localizare</string>
