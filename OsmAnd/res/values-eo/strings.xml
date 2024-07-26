@@ -427,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turno-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -714,7 +714,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon turno-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -5838,4 +5838,13 @@
 \nĈefprocesoro (senokupa): %3$s
 \nĈefprocesoro (atendas GPU): %4$s</string>
     <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
+    <string name="driving_region_uk">Britujo kaj similaj</string>
+    <string name="shared_string_automatically">Aŭtomate</string>
+    <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu turno.</string>
+    <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
+    <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
+    <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="driving_region_india">Hindujo</string>
+    <string name="ask_every_time">Ĉiam demandi</string>
 </resources>
