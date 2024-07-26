@@ -21,7 +21,7 @@
     <string name="please_select_address">Първо задайте град или улица</string>
     <string name="search_street_in_neighborhood_cities">Търсене на улицата в съседните градове</string>
     <string name="intermediate_items_sort_return">Междинните точки са подредени с цел оптимизиране на пътя до местоназначението.</string>
-    <string name="intermediate_items_sort_by_distance">Сортиране врата-до-врата</string>
+    <string name="intermediate_items_sort_by_distance">Сортиране в оптимален ред</string>
     <string name="local_osm_changes_backup_successful">Файл с промени е създаден за %1$s</string>
     <string name="local_osm_changes_backup_failed">Грешка при създаване на резервно копие на промените на OSM.</string>
     <string name="local_osm_changes_backup">Резервно копие като промяна в OSM</string>
@@ -256,7 +256,7 @@
     <string name="recalculate_route_to_your_location">Придвижване:</string>
     <string name="select_navigation_mode">Вид транспорт:</string>
     <string name="day_night_info_description">Изгрев: %1$s \nЗалез: %2$s</string>
-    <string name="day_night_info">Информация за изгрев и залез</string>
+    <string name="day_night_info">Изгрев и залез</string>
     <string name="map_widget_vector_attributes">Артибути за изчертаване</string>
     <string name="map_widget_renderer">Стил на картата</string>
     <string name="layer_map_appearance">Настройки на екрана</string>
@@ -395,7 +395,7 @@
     <string name="support_new_features">Поддръжка за нови подобрения</string>
     <string name="support_new_features_descr">Моля, направете дарение за да има нови неща в приложението</string>
     <string name="show_ruler_level">Покажи линийка</string>
-    <string name="info_button">Инфо</string>
+    <string name="info_button">Информация</string>
     <string name="back_to_location">Назад към позицията</string>
     <string name="shared_string_help">Помощ</string>
     <string name="accessibility_mode">режим на достъпност</string>
@@ -435,7 +435,7 @@
     <string name="towards">към</string>
     <string name="accuracy">Точност</string>
     <string name="altitude">Надморска височина</string>
-    <string name="no_info">Няма инфо</string>
+    <string name="no_info">Няма информация</string>
     <string name="direction_style_sidewise">По посоките на света (8 сектора)</string>
     <string name="direction_style_clockwise">По часовника (12 сектора)</string>
     <string name="settings_direction_style">Стил на посоката</string>
@@ -748,7 +748,7 @@
     <string name="shared_string_import">Внасяне</string>
     <string name="error_occurred_loading_gpx">Възникна грешка при зареждане на GPX</string>
     <string name="send_report">Изпращане на доклад</string>
-    <string name="none_region_found">На SD картата няма данни за този район. Свалете от интернет.</string>
+    <string name="none_region_found">На картата с памет няма изтеглени карти.</string>
     <string name="poi_namefinder_query_empty">Въведете израз за търсене на забележителност</string>
     <string name="any_poi">Всички</string>
     <string name="thanks_yandex_traffic">Информацията за трафика е любезно предоставена от Яндекс.</string>
@@ -801,7 +801,7 @@
     <string name="route_tu">Направете обратен завой</string>
     <string name="route_head">Напред</string>
     <string name="first_time_continue">По-късно</string>
-    <string name="first_time_download">Изтегляне на региони</string>
+    <string name="first_time_download">Изтегляне подробни карти на области</string>
     <string name="search_poi_location">Търсене на сигнал…</string>
     <string name="search_near_map">Търсене около центъра на картата</string>
     <string name="search_nearby">Търси наблизо</string>
@@ -862,8 +862,8 @@
     <string name="address">Адрес</string>
     <string name="shared_string_download_successful">Изтеглено</string>
     <string name="shared_string_downloading">Изтегляне…</string>
-    <string name="downloading_list_indexes">Изтегля се списък с наличните региони…</string>
-    <string name="list_index_files_was_not_loaded">Списъкът с районите не беше свален от osmand.net.</string>
+    <string name="downloading_list_indexes">Изтегля се списък с наличните области…</string>
+    <string name="list_index_files_was_not_loaded">Грешка при получаване на списък с областите от https://osmand.net.</string>
     <string name="fav_points_edited">Мястото от любими беше редактирано</string>
     <string name="fav_points_not_exist">Не съществуват любими точки</string>
     <string name="update_existing">Заместване</string>
@@ -941,7 +941,7 @@
     <string name="search_POI_level_btn">Търси още</string>
     <string name="incremental_search_street">Търсене на улица по възходящ ред</string>
     <string name="incremental_search_building">Номерата са по възходящ ред</string>
-    <string name="choose_available_region">Изберете район от списъка</string>
+    <string name="choose_available_region">Изберете област от списъка</string>
     <string name="choose_intersected_street">Изберете пресичаща улица</string>
     <string name="Closest_Amenities">Забележителности наоколо</string>
     <string name="app_mode_car">Автомобил</string>
@@ -957,7 +957,7 @@
     <string name="navigate_point_format_DMS">ГГГ ММ СС.С</string>
     <string name="shared_string_show_on_map">Показване на картата</string>
     <string name="search_address_top_text">Изберете адрес</string>
-    <string name="search_address_region">Област/регион</string>
+    <string name="search_address_region">Област</string>
     <string name="search_address_city">Град</string>
     <string name="search_address_street">Улица</string>
     <string name="search_address_building">Номер</string>
@@ -996,7 +996,7 @@
     <string name="poi_dialog_opening_hours">Отворено</string>
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Промяна на POI</string>
-    <string name="poi_dialog_other_tags_message">Всички други тагове се запазват</string>
+    <string name="poi_dialog_other_tags_message">Всички други етикети се запазват</string>
     <string name="default_buttons_commit">Изпрати</string>
     <string name="shared_string_clear">Изчистване</string>
     <string name="filter_current_poiButton">Филтър</string>
@@ -1556,8 +1556,8 @@
     <string name="favorite_category_dublicate_message">Моля, посочете име на категория, което не е заето.</string>
     <string name="favorite_category_name">Име на категория</string>
     <string name="favorite_category_add_new_title">Добавяне на нова категория</string>
-    <string name="regions">Региони</string>
-    <string name="region_maps">Карти на региони</string>
+    <string name="regions">Области</string>
+    <string name="region_maps">Карти на области</string>
     <string name="world_maps">Световни карти</string>
     <string name="hillshade_layer_disabled">Слоят за засенчване на релефа е изключен</string>
     <string name="favorite_category_add_new">Добавяне на нов</string>
@@ -1809,7 +1809,7 @@
     <string name="n_items_removed">изтрити елемента</string>
     <string name="shared_string_undo_all">Отмяна на всичко</string>
     <string name="shared_string_type">Вид</string>
-    <string name="starting_point">Начална точка</string>
+    <string name="starting_point">Отправна точка</string>
     <string name="select_month_and_country">Месец и държава:</string>
     <string name="number_of_contributors">Брой участници</string>
     <string name="number_of_edits">Брой редакции</string>
@@ -1835,7 +1835,7 @@
     <string name="osm_live_subscribe_btn">Абониране</string>
     <string name="osm_live_user_public_name">Видимо име</string>
     <string name="osm_live_hide_user_name">Не показвай името ми в отчети</string>
-    <string name="osm_live_support_region">Поддръжка регион</string>
+    <string name="osm_live_support_region">Поддръжана област</string>
     <string name="osm_live_month_cost">Разходи на месец</string>
     <string name="osm_live_month_cost_desc">Месечна вноска</string>
     <string name="osm_live_active">Активен</string>
@@ -1859,7 +1859,7 @@
     <string name="shared_string_toolbar">Лента с инструменти</string>
     <string name="shared_string_widgets">Приспособления</string>
     <string name="add_points_to_map_markers_q">Добавяне на всички точки като маркери\?</string>
-    <string name="shared_string_add_to_map_markers">Добави към карта маркери</string>
+    <string name="shared_string_add_to_map_markers">Добавяне към маркери</string>
     <string name="select_map_markers">Изберете маркерите на картата</string>
     <string name="shared_string_reverse_order">В обратен ред</string>
     <string name="show_map_markers_description">Включва възможността за използване на маркери на картата.</string>
@@ -1916,9 +1916,9 @@
     <string name="si_mi_meters">Мили / метри</string>
     <string name="skip_map_downloading">Пропускане на картите</string>
     <string name="skip_map_downloading_desc">Липсва инсталирана карта. Можете сега да изберете от списъка или по-късно да изтеглите карти от „Меню - %1$s“.</string>
-    <string name="search_another_country">Изберете друг регион</string>
+    <string name="search_another_country">Изберете друга област</string>
     <string name="search_map">Търсене на карти …</string>
-    <string name="first_usage_wizard_desc">Нека OsmAnd определи Вашето местоположение и да Ви предложи карти за изтегляне.</string>
+    <string name="first_usage_wizard_desc">Нека OsmAnd определи вашето местоположение и да ви предложи карти за изтегляне.</string>
     <string name="location_not_found">Местоположението не е намерено</string>
     <string name="no_inet_connection">Няма връзка с Интернет</string>
     <string name="no_inet_connection_desc_map">Задължително за изтегляне на карти.</string>
@@ -2193,7 +2193,7 @@
     <string name="multimedia_notes_view_descr">Вашите OSM бележки са в %1$s.</string>
     <string name="save_track_logging_accuracy">Точност на регистриране</string>
     <string name="osm_editing_prefs_descr">Вход, парола, редактиране офлайн</string>
-    <string name="reset_plugin_to_default">Възстановяване на настройките на добавката към фабричните</string>
+    <string name="reset_plugin_to_default">Нулиране на настройките на добавката</string>
     <string name="routing_profile_direct_to">Директно към точката</string>
     <string name="import_rendering_file">Импортиране на файл за изобразяване</string>
     <string name="terrain_slider_description">Задайте минималните и максималните увеличения, при които слоят ще е видим.</string>
@@ -2361,9 +2361,9 @@
     <string name="send_logcat_log">Изпращане на logcat log</string>
     <string name="purchases_feature_desc_nautical">Информация за морската дълбочина</string>
     <string name="purchases_feature_desc_terrain">Контурни линии на терена, пълна карта със засенчване на релефа с нюанси на сивото и карти на склоновете с оцветяване на върховете и низините.</string>
-    <string name="purchases_feature_desc_wikivoyage">Разгледайте Wikivoyage офлайн. Статиите са разделени по държави и региони и са достъпни на всички езици.</string>
-    <string name="purchases_feature_desc_wikipedia">Осигурява без мрежа всички статии в Уикипедия, свързани с места, като ви помага да научите повече за местата, които посещавате по време на пътуването си, само с едно докосване на картата. Не забравяйте да изтеглите файловете с карти на Уикипедия за съответните региони.</string>
-    <string name="purchases_feature_desc_unlimited_map_download">Получете неограничени изтегляния на офлайн карти на всички континенти и региони.</string>
+    <string name="purchases_feature_desc_wikivoyage">Разгледайте Wikivoyage извън мрежа. Статиите са разделени по държави и области и са достъпни на всички езици.</string>
+    <string name="purchases_feature_desc_wikipedia">Осигурява без мрежа всички статии в Уикипедия, свързани с места, като ви помага да научите повече за местата, които посещавате по време на пътуването си, само с едно докосване на картата. Не забравяйте да изтеглите файловете с карти на Уикипедия за съответните райони.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Получете неограничени изтегляния на офлайн карти на всички континенти и области.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Достъп до редовни месечни обновявания за изтеглени карти.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Достъп до по-често обновяване на картите. Почасови, ежедневни или ежеседмични обновявания. Изтеглят поетапно, само за променената област.</string>
     <string name="unlimited_map_downloads">Неограничено изтегляне на карти</string>
@@ -2692,7 +2692,7 @@
     <string name="map_widget_trip_recording_duration">Продължителност</string>
     <string name="routing_attr_avoid_highway_description">Избягване на магистрали</string>
     <string name="map_widget_trip_recording_uphill">Изкачване</string>
-    <string name="srtm_menu_download_descr">Изтеглете картата „Контурни линии“, която да ползвате в този регион.</string>
+    <string name="srtm_menu_download_descr">Изтеглете картата „Контурни линии“, която да ползвате в тази област.</string>
     <string name="shared_string_mode">Режим</string>
     <string name="map_widget_time_to_destination">Време до местоназначението</string>
     <string name="map_widget_time_to_intermediate">Междинно време</string>
@@ -3030,7 +3030,7 @@
     <string name="sound_beep_simple">Звуков сигнал: обикновен</string>
     <string name="quick_action_map_style_switch">Стилът на картата е променен на „%s“.</string>
     <string name="route_line_use_map_style_width">Използване на подразбираната ширина на стила на картата (%1$s).</string>
-    <string name="general_settings_profile_descr">Тема на приложението, единици, регион</string>
+    <string name="general_settings_profile_descr">Тема на приложението, единици, област</string>
     <string name="weather_precip_inches">Инчове</string>
     <string name="weather_wind_kn">вз</string>
     <string name="external_device_menu_forget">Забравяне</string>
@@ -3043,11 +3043,11 @@
     <string name="shared_string_delete_file">Изтриване на файл</string>
     <string name="open_weather_action_description">Отваря екран с подробности за прогнозата.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии на скоростта на вятъра (изотахи)</string>
-    <string name="shared_string_weather">Време</string>
+    <string name="shared_string_weather">Времето</string>
     <string name="weather_wind_ms">м/с</string>
     <string name="weather_wind_kilimeters_per_hour">Километри в час</string>
     <string name="weather_wind_meters_per_second">Метри в секунда</string>
-    <string name="weather_widgets_secondary_desc">Мерните единици могат да бъдат променени в настройките на добавката „Време“.</string>
+    <string name="weather_widgets_secondary_desc">Мерните единици могат да бъдат променени в настройките на добавката „Времето“.</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_prefs_descr">24-часова и 7-дневна прогноза, обновявана през 3 часа</string>
     <string name="weather_temperature_celsius">Градуси по Целзий</string>
@@ -3443,7 +3443,7 @@
     <string name="marker_moved_to_active">Маркерът е преместен във включените</string>
     <string name="plugin_mapillary_descr">Снимки от нивото на улицата. Можете да дадете своя принос. За да видите съществуващите данни като слой на картата, включете „Снимки от улицата“ в менюто „Настройки на картата“.</string>
     <string name="hillshade_description">За да бъдат онагледени склоновете, върховете и низините се използват нюанси на сивото.</string>
-    <string name="speed_cameras_legal_descr">В някои страни или региони използването на приложения за предупреждение за камери за контрол на скоростта е незаконно.
+    <string name="speed_cameras_legal_descr">В някои страни или области използването на приложения за предупреждение за камери за контрол на скоростта е незаконно.
 \n
 \nТрябва да направите избор в зависимост от закона на вашата държава.
 \n
@@ -3905,7 +3905,7 @@
     <string name="custom_buttons">Потребителски бутони</string>
     <string name="default_buttons">Подразбирани бутони</string>
     <string name="shared_string_keywords">Ключови думи</string>
-    <string name="downloaded_maps_collect_descr">Помага ни да разберем популярността на картите по държави и региони.</string>
+    <string name="downloaded_maps_collect_descr">Помага ни да разберем популярността на картите по държави и области.</string>
     <string name="visited_screens_collect_descr">Помага ни да разберем кои възможности на OsmAnd са популярни.</string>
     <string name="settings_privacy_and_security_desc">Изберете какви данни да споделяте</string>
     <string name="shared_string_no_thank_you">Не, благодаря</string>
@@ -3938,4 +3938,48 @@
     <string name="dont_ask_anymore">Без повторно питане</string>
     <string name="shared_string_all_tracks">Всички трасета</string>
     <string name="shared_string_itinerary">Маршрут</string>
+    <string name="weather_screen">Екран за времето</string>
+    <string name="weather_data_sources_prompt">OsmAnd черпи прогноза за времето от два изтичника:</string>
+    <string name="weather_source_ecmwf_description">Европейски център за средносрочни прогнози на времето</string>
+    <string name="maps_and_resources">Карти и ресурси</string>
+    <string name="sort_size_descending">Първо големите</string>
+    <string name="sort_country_name_ascending">Име на държавата: А – Я</string>
+    <string name="play_weather_forecast">Възпроизвеждане на прогнозата</string>
+    <string name="shared_string_created">Дата на създаване</string>
+    <string name="help_article_widgets_markers_name">Приспособления за маркери</string>
+    <string name="search_map_hint">Град или област</string>
+    <string name="topography_maps">Карти на релефа</string>
+    <string name="swap_two_places">Разменяне местата на %1$s и %2$s</string>
+    <string name="markers_remove_dialog_msg">Премахване на маркера „%s“?</string>
+    <string name="widget_available_ram">Достъпна оперативна памет</string>
+    <string name="empty_state_markers_active">Създайте маркери на картата!</string>
+    <string name="shared_string_cache">Временни файлове</string>
+    <string name="weather_online">Времето от интернет</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Маршрут по маркери</string>
+    <string name="shared_string_markers">Маркери</string>
+    <string name="sort_by">Сортиране</string>
+    <string name="delete_map">Премахване на карта</string>
+    <string name="rendering_styles">Стилове за карти</string>
+    <string name="map_settings_weather_wind_animation">Анимиран вятър</string>
+    <string name="widget_available_ram_desc">Показва достъпната за OsmAnd памет.</string>
+    <string name="select_another_track">Изберете друго трасе</string>
+    <string name="sorted_by_distance">Сортирано по разстояние</string>
+    <string name="sort_by_category">Сортиране по категория</string>
+    <string name="standard_maps">Стандартни карти</string>
+    <string name="shared_strings_all_regions">Всички области</string>
+    <string name="download_wiki_region_placeholder">тази област</string>
+    <string name="weather_source_GFS_description">Глобална система за прогнози от национални центрове за предсказване на околната среда</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="empty_state_markers_groups">Внасяне на групи</string>
+    <string name="map_is_up_to_date">Картата „%1$s“ е обновена.</string>
+    <string name="terrain_maps">Релефни карти</string>
+    <string name="copy_to_map_markers">Копиране в маркери</string>
+    <string name="shared_string_other">Други</string>
+    <string name="driving_region_australia">Австралия</string>
+    <string name="new_plugin_added">Инсталирана е добавка</string>
+    <string name="sort_size_ascending">Първо малките</string>
+    <string name="sort_country_name_descending">Име на държавата: Я – А</string>
+    <string name="delete_map_description">Премахване на картата „%1$s“?</string>
+    <string name="wikipedia_and_travel_maps">Уикипедия и пътеводители</string>
 </resources>

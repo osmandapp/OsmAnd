@@ -5774,7 +5774,7 @@
     <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_data_sources_prompt">OsmAnd leverer vejrdata fra to kilder:</string>
-    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemlange vejrprognoser</string>
+    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemfristede vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
     <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
@@ -5848,4 +5848,13 @@
 \nCPU (fliser): %2$s
 \nCPU (inaktiv tid): %3$s
 \nCPU (venter på GPU): %4$s</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">Storbritannien og lignende</string>
+    <string name="hugerock_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief osv. i %1$s måned</string>
+    <string name="hugerock_promo">Hugerock-kampagne i %1$s måneder</string>
+    <string name="ask_every_time">Spørg hver gang</string>
+    <string name="detailed_track_guidance">Detaljeret sporvejledning</string>
+    <string name="detailed_track_guidance_description">OsmAnd vil matche dit spor med nærliggende veje for at forbedre sving-for-sving-vejledningen.</string>
+    <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
+    <string name="shared_string_automatically">Automatisk</string>
 </resources>

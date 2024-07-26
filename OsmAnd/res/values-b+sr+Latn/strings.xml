@@ -1785,7 +1785,7 @@
     <string name="storage_directory_shared">Deljena memorija</string>
     <string name="storage_directory_readonly_desc">Prebačeno na unutrašnje skladište pošto je označeno skladište podataka zaštićeno od pisanja. Izaberi upisivu folder skladišta.</string>
     <string name="avoid_road">Izbegavaj put</string>
-    <string name="finish_navigation">Završi navođenje</string>
+    <string name="finish_navigation">Kraj navođenja</string>
     <string name="shared_string_move_down">Pomeri ↓</string>
     <string name="shared_string_move_up">Pomeri ↑</string>
     <string name="storage_permission_restart_is_required">Programu je sada dozvoljen upis na spoljnju karticu, mora da se restartuje aplikacija.</string>
@@ -5837,7 +5837,7 @@
     <string name="rendering_avg_info_details">FPS po poslednjim hiljadu frejmova : %1$s
 \nCPU (tilova): %2$s
 \nCPU (vreme neaktivnosti): %3$s
-\nCPU (čekanje CPU)): %4$s</string>
+\nCPU (čekanje GPU)): %4$s</string>
     <string name="resting_position">U mirovanju</string>
     <string name="navigation_position">U pokretu</string>
     <string name="auto_25_chars_route_kr">Drži desno</string>
@@ -5849,4 +5849,13 @@
     <string name="auto_25_chars_route_tu">Uradi polukružno okretanje</string>
     <string name="auto_25_chars_route_tshl">Skreni oštro levo</string>
     <string name="auto_25_chars_route_tsll">Skreni blago levo</string>
+    <string name="driving_region_india">Indija</string>
+    <string name="driving_region_uk">Velika Britanija i slični</string>
+    <string name="hugerock_promo_description">Besplatan pristup funkcijama, uključujući neograničen broj preuzimanja karata, 3D reljef i sl. samo za %1$s dolar mesečno</string>
+    <string name="hugerock_promo">Promocija Hugerock %1$s dolar mesečno</string>
+    <string name="shared_string_automatically">Automatski</string>
+    <string name="ask_every_time">Pitati svaki put</string>
+    <string name="detailed_track_guidance">Detaljan vodič snimljenom stazom</string>
+    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju snimljenu stazi s obližnjim putevima za bolju, detaljnuju navigaciju.</string>
+    <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
 </resources>

@@ -5523,7 +5523,7 @@
     <string name="key_event_action_emit_navigation_hint">Dai un suggerimento di navigazione</string>
     <string name="download_to_device">Scarica sul dispositivo</string>
     <string name="tripltek_promo">Promozione Tripltek per %1$s mesi</string>
-    <string name="tripltek_promo_description">Accesso libero a funzionalità quali scaricamento illimitato di mappe, 3D relief ecc. per %1$s mensili</string>
+    <string name="tripltek_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
     <string name="key_event_action_open_search_view">Apri la ricerca</string>
     <string name="remove_widget_first">Per favore prima rimuovi il widget</string>
     <string name="key_event_action_open_navigation_view">Apri la schermata di navigazione</string>
@@ -5758,7 +5758,7 @@
     <string name="remove_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà rimossa.</string>
     <string name="weather_data_sources_prompt">OsmAnd fornisce dati meteorologici da due fonti:</string>
     <string name="data_source">Fonte dati</string>
-    <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
+    <string name="weather_source_ecmwf_description">Centro europeo per le previsioni meteorologiche a medio termine (ECMWF)</string>
     <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
@@ -5825,4 +5825,7 @@
     <string name="auto_25_chars_route_kl">Tieni la sinistra</string>
     <string name="auto_25_chars_route_tr">Gira a destra</string>
     <string name="auto_25_chars_route_tsll">Gira leggermente a sinistra</string>
+    <string name="driving_region_india">India</string>
+    <string name="hugerock_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
+    <string name="driving_region_uk">UK e simili</string>
 </resources>

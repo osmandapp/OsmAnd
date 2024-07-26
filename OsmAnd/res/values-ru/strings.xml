@@ -828,7 +828,7 @@
     <string name="save_track_interval_descr">Укажите интервал фиксирования точек для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
     <string name="save_track_to_gpx">Автозапись трека при навигации</string>
-    <string name="update_tile">Обновить карту</string>
+    <string name="update_tile">Обновить</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="open_street_map_login_descr">Необходимы для авторизации на openstreetmap.org.</string>
     <string name="user_name">Имя пользователя OSM</string>
@@ -5834,7 +5834,7 @@
     <string name="rendering_avg_info_details">FPS на последние 1k кадров: %1$s
 \nCPU (тайлы): %2$s
 \nCPU (время простоя): %3$s
-\nCPU (ожидание CPU): %4$s</string>
+\nCPU (ожидание GPU): %4$s</string>
     <string name="location_radius_description">Показывает круглую область, отражающую точность вашего текущего местоположения</string>
     <string name="view_angle_description">Показывает конусовидную зону вашего направления взгляда</string>
     <string name="rendering_value_pale_name">Бледный</string>
@@ -5842,7 +5842,13 @@
     <string name="auto_25_chars_route_tshr">Резко поверните направо</string>
     <string name="auto_25_chars_route_tl">Поверните налево</string>
     <string name="auto_25_chars_route_tshl">Резко поверните налево</string>
-    <string name="auto_25_chars_route_tu">Сделайте разворот</string>
+    <string name="auto_25_chars_route_tu">Выполните разворот</string>
     <string name="auto_25_chars_route_kl">Держитесь левее</string>
     <string name="auto_25_chars_route_kr">Держитесь правее</string>
+    <string name="auto_25_chars_route_tsll">Плавно поверните налево</string>
+    <string name="auto_25_chars_route_tslr">Плавно поверните направо</string>
+    <string name="driving_region_india">Индия</string>
+    <string name="hugerock_promo_description">Бесплатный доступ к функциям, включая неограниченное количество загрузок карт, 3D-рельеф и другим в течение %1$s месяцев</string>
+    <string name="hugerock_promo">Промоакция Hugerock на %1$s месяцев</string>
+    <string name="driving_region_uk">Великобритания и аналогичные</string>
 </resources>

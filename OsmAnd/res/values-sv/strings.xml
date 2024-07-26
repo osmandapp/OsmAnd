@@ -5563,4 +5563,5 @@
     <string name="delete_actions_button">Ta bort knapp</string>
     <string name="auto_zoom_smooth">Jämn</string>
     <string name="auto_zoom_discrete">Diskret</string>
+    <string name="weather_source_ecmwf_description">Europeiskt center för medellånga väderprognoser (ECMWF)</string>
 </resources>
