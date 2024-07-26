@@ -1975,7 +1975,7 @@
     <string name="search_my_location">Găsește-mi poziția</string>
     <string name="update_all_maps_now">Actualizez acum toate hărțiile?</string>
     <string name="routing_attr_short_way_name">Varianta eficientă de combustibil</string>
-    <string name="shared_string_change">Modificați</string>
+    <string name="shared_string_change">Schimbă</string>
     <string name="coords_search">Căutare coordonate</string>
     <string name="advanced_coords_search">Căutare avansată de coordonate</string>
     <string name="back_to_search">Înapoi la căutare</string>
@@ -5797,8 +5797,8 @@
     <string name="quick_action_move_map_down">Harta în jos</string>
     <string name="quick_action_move_map_up">Harta în sus</string>
     <string name="quick_action_new_route">Rută nouă</string>
-    <string name="shared_string_set">Setați</string>
-    <string name="shared_string_replace">Înlocuiți</string>
+    <string name="shared_string_set">Setează</string>
+    <string name="shared_string_replace">Înlocuiește</string>
     <string name="shared_string_simulate">Simulează</string>
     <string name="app_profile">Profil aplicație</string>
     <string name="shared_string_create">Crează</string>
@@ -5841,7 +5841,7 @@
     <string name="auto_25_chars_route_kr">Țineți dreapta</string>
     <string name="auto_25_chars_route_kl">Țineți stânga</string>
     <string name="auto_25_chars_route_tr">Întoarceți la dreapta</string>
-    <string name="auto_25_chars_route_tshr">Virați brusc la dreapta</string>
+    <string name="auto_25_chars_route_tshr">Virați strâns la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
     <string name="navigation_position">Poziția de navigare</string>
     <string name="view_angle_description">Afișează zona în formă de con spre care priviți</string>
@@ -5849,9 +5849,9 @@
     <string name="location_radius_description">Afișează zona circulară care reprezintă precizia locației dumneavoastră curente</string>
     <string name="location_radius">Raza de localizare</string>
     <string name="auto_25_chars_route_tl">Virați la stânga</string>
-    <string name="auto_25_chars_route_tshl">Virați brusc la stânga</string>
+    <string name="auto_25_chars_route_tshl">Virați strâns la stânga</string>
     <string name="auto_25_chars_route_tsll">Virați ușor la stânga</string>
-    <string name="auto_25_chars_route_tu">Faceți cale întoarsă</string>
+    <string name="auto_25_chars_route_tu">Efectuați întoarcere în \"U\"</string>
     <string name="rendering_avg_info_details">FPS prin ultimele 1k cadre: %1$s
 \nCPU (plăci): %2$s
 \nCPU (timp inactiv): %3$s
