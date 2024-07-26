@@ -1045,7 +1045,7 @@
     <string name="use_displayed_track_for_navigation">Utilizați track-ul afișat pentru navigație\?</string>
     <string name="keep_and_add_destination_point">Adăugă ca destinație subsecventă</string>
     <string name="shared_string_select_on_map">Selectare pe hartă</string>
-    <string name="shared_string_favorite">Favorită</string>
+    <string name="shared_string_favorite">Favorit</string>
     <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
     <string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
     <string name="disable_complex_routing_descr">Dezactivează rutarea în două faze pentru navigarea auto.</string>
@@ -1975,7 +1975,7 @@
     <string name="search_my_location">Găsește-mi poziția</string>
     <string name="update_all_maps_now">Actualizez acum toate hărțiile?</string>
     <string name="routing_attr_short_way_name">Varianta eficientă de combustibil</string>
-    <string name="shared_string_change">Schimbă</string>
+    <string name="shared_string_change">Modificați</string>
     <string name="coords_search">Căutare coordonate</string>
     <string name="advanced_coords_search">Căutare avansată de coordonate</string>
     <string name="back_to_search">Înapoi la căutare</string>
@@ -5499,7 +5499,7 @@
     <string name="key_event_action_zoom_out">Micșorează</string>
     <string name="key_event_action_toggle_drower">Arată/ascunde meniu lateral</string>
     <string name="key_is_already_assigned_error">Tasta \"%1$s\" este deja asignată acțiunii: \"%2$s\"</string>
-    <string name="key_event_category_map_interactions">Harta interacțiunilor</string>
+    <string name="key_event_category_map_interactions">Interacțiuni pe hartă</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Deschide WunderLINQ Datagrid</string>
     <string name="key_event_category_actions">Acțiuni</string>
     <string name="key_event_action_move_left">Mută la stânga</string>
@@ -5797,8 +5797,8 @@
     <string name="quick_action_move_map_down">Harta în jos</string>
     <string name="quick_action_move_map_up">Harta în sus</string>
     <string name="quick_action_new_route">Rută nouă</string>
-    <string name="shared_string_set">Setează</string>
-    <string name="shared_string_replace">Înlocuiește</string>
+    <string name="shared_string_set">Setați</string>
+    <string name="shared_string_replace">Înlocuiți</string>
     <string name="shared_string_simulate">Simulează</string>
     <string name="app_profile">Profil aplicație</string>
     <string name="shared_string_create">Crează</string>
