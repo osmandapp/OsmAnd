@@ -960,7 +960,7 @@
     <string name="srtm_paid_version_title">Topografie-Erweiterung</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung „Topografie“, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
-    <string name="download_srtm_maps">Höhenlinien</string>
+    <string name="download_srtm_maps">Konturlinie</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
     <string name="av_camera_pic_size_descr">Bildgröße der Kamera festlegen</string>
     <string name="av_def_action_video">Video aufzeichnen</string>
@@ -4932,9 +4932,9 @@
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
     <string name="temperature_layer">Temperaturebene</string>
-    <string name="pressure_layer">Luftdruckebene</string>
+    <string name="pressure_layer">Druckebene</string>
     <string name="wind_layer">Windebene</string>
-    <string name="cloud_layer">Bewölkungsebene</string>
+    <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
     <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
@@ -5520,7 +5520,7 @@
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
-    <string name="key_event_category_map_interactions">Karteninteraktionen</string>
+    <string name="key_event_category_map_interactions">Karten-Interaktionen</string>
     <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ-Datenraster öffnen</string>
     <string name="key_event_category_actions">Aktionen</string>
     <string name="change_button">Schaltfläche ändern</string>
@@ -5782,10 +5782,10 @@
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
-    <string name="quick_action_first_intermediate">Erste Zwischenstufe</string>
+    <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
     <string name="quick_action_directions_from">Startpunkt</string>
     <string name="quick_action_location_by_gpx">Standort nach GPX</string>
-    <string name="quick_action_destination">Ziel</string>
+    <string name="quick_action_destination">Zielort</string>
     <string name="quick_action_to_my_location">Zu meinem Standort</string>
     <string name="quick_action_move_map_left">Karte nach links</string>
     <string name="quick_action_next_app_profile">App-Profil zum nächsten</string>
@@ -5804,13 +5804,13 @@
     <string name="quick_action_photo_note">Fotonotiz</string>
     <string name="quick_action_parking_place">Parkplatz</string>
     <string name="quick_action_verb_show_hide">Einblenden / Ausblenden</string>
-    <string name="quick_action_verb_pause_resume">Pause / Fortsetzen</string>
+    <string name="quick_action_verb_pause_resume">Einschalten / Ausschalten</string>
     <string name="quick_action_verb_start_stop">Start / Stopp</string>
     <string name="weather_screen">Wetterbildschirm</string>
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>
     <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
     <string name="shared_string_set">Einstellen</string>
-    <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
+    <string name="quick_action_track_waypoint">Wegpunkt</string>
     <string name="energy_avg_info_description">Akkustand pro Minute: %1$s
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
