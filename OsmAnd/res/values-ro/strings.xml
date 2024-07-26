@@ -5859,4 +5859,8 @@
     <string name="ask_every_time">Întreabă de fiecare dată</string>
     <string name="shared_string_automatically">Automat</string>
     <string name="detailed_track_guidance">Ghid detaliat pentru traseu</string>
+    <string name="driving_region_india">India</string>
+    <string name="hugerock_promo_description">Acces gratuit la funcții, inclusiv descărcări nelimitate de hărți, relief 3D etc. pentru %1$s lună</string>
+    <string name="driving_region_uk">Regatul Unit și similare</string>
+    <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
 </resources>
