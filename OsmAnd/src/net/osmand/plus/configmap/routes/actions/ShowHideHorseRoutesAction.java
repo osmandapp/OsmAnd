@@ -16,7 +16,8 @@ public class ShowHideHorseRoutesAction extends BaseRouteQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.rendering_attr_horseRoutes_name)
 			.iconRes(R.drawable.ic_action_horse)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.nonEditable();
 
 	public ShowHideHorseRoutesAction() {
 		super(TYPE);

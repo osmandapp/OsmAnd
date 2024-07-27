@@ -16,7 +16,8 @@ public class ShowHideWhitewaterSportsAction extends BaseRouteQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.rendering_attr_whiteWaterSports_name)
 			.iconRes(R.drawable.ic_action_kayak)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.nonEditable();
 
 	public ShowHideWhitewaterSportsAction() {
 		super(TYPE);
