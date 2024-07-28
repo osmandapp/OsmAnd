@@ -5840,7 +5840,7 @@
     <string name="resting_navigation_position">Poziția de odihnă și navigație</string>
     <string name="auto_25_chars_route_kr">Țineți dreapta</string>
     <string name="auto_25_chars_route_kl">Țineți stânga</string>
-    <string name="auto_25_chars_route_tr">Întoarceți la dreapta</string>
+    <string name="auto_25_chars_route_tr">Virați la dreapta</string>
     <string name="auto_25_chars_route_tshr">Virați strâns la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
     <string name="navigation_position">Poziția de navigare</string>
@@ -5851,7 +5851,7 @@
     <string name="auto_25_chars_route_tl">Virați la stânga</string>
     <string name="auto_25_chars_route_tshl">Virați strâns la stânga</string>
     <string name="auto_25_chars_route_tsll">Virați ușor la stânga</string>
-    <string name="auto_25_chars_route_tu">Efectuați întoarcere în \"U\"</string>
+    <string name="auto_25_chars_route_tu">Efectuați o întoarcere în \"U\"</string>
     <string name="rendering_avg_info_details">FPS prin ultimele 1k cadre: %1$s
 \nCPU (plăci): %2$s
 \nCPU (timp inactiv): %3$s
