@@ -5863,4 +5863,5 @@
     <string name="hugerock_promo_description">Acces gratuit la funcții, inclusiv descărcări nelimitate de hărți, relief 3D etc. pentru %1$s luni</string>
     <string name="driving_region_uk">Regatul Unit și similare</string>
     <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
+    <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
 </resources>
