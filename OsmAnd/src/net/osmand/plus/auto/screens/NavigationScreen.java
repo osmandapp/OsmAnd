@@ -40,7 +40,9 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
@@ -239,13 +241,24 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 						.setOnClickListener(this::compassClick)
 						.build());
 		if (getApp().useOpenGlRenderer()) {
+			int dButtonResource = R.drawable.ic_action_2d;
+			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+				OsmandMapTileView mapView = surfaceRenderer.getMapView();
+				AnimateDraggingMapThread animationThread = mapView.getAnimatedDraggingThread();
+				float angle = mapView.getElevationAngle();
+				if ((animationThread.isAnimating() && animationThread.getTargetTilt() == 90) ||
+						(!animationThread.isAnimating() && angle == 90)) {
+					dButtonResource = R.drawable.ic_action_3d;
+				}
+			}
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_3d)).build())
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), dButtonResource)).build())
 							.setOnClickListener(() -> {
 								if (surfaceRenderer != null) {
 									surfaceRenderer.handleTilt();
 								}
+								invalidate();
 							})
 							.build());
 		}

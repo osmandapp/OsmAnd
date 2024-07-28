@@ -69,6 +69,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	private double targetLongitude;
 	private int targetIntZoom;
 	private double targetFloatZoom;
+	private float targetTilt;
 
 	private boolean animatingMapZoom;
 	private boolean animatingMapMove;
@@ -905,7 +906,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	public void startTilting(float elevationAngle, float elevationTime) {
 		if (animationsDisabled)
 			return;
-
+		targetTilt = elevationAngle;
 		stopAnimatingSync();
 
 		float initialElevationAngle = tileView.getElevationAngle();
@@ -981,6 +982,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	private void clearTargetValues() {
 		targetIntZoom = 0;
+		targetTilt = 0;
 	}
 
 	private void suspendSymbolsUpdate() {
@@ -1048,6 +1050,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 	public int getTargetIntZoom() {
 		return targetIntZoom;
+	}
+
+	public float getTargetTilt() {
+		return targetTilt;
 	}
 
 	public double getTargetLatitude() {
