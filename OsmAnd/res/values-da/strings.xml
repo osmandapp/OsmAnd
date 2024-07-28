@@ -1322,7 +1322,7 @@
     <string name="dash_download_msg">%1$s kort er hentet</string>
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
-    <string name="voices">Talevejledning</string>
+    <string name="voices">Stemmemeddelelser</string>
     <string name="rendering_attr_roadStyle_name">Vejformat</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -5790,15 +5790,15 @@
     <string name="quick_action_photo_note">Fotonote</string>
     <string name="quick_action_track_waypoint">Sporrutepunkt</string>
     <string name="quick_action_parking_place">Parkeringssted</string>
-    <string name="quick_action_verb_show_hide">Vis / Skjul</string>
-    <string name="quick_action_verb_pause_resume">Pause / Genoptag</string>
+    <string name="quick_action_verb_show_hide">Vis / skjul</string>
+    <string name="quick_action_verb_pause_resume">Pause / genoptag</string>
     <string name="weather_screen">Vejrskærm</string>
     <string name="quick_action_map_underlay">Underlejring</string>
     <string name="quick_action_map_overlay">Overlejring</string>
     <string name="quick_action_first_intermediate">Første mellemliggende</string>
     <string name="quick_action_video_note">Videonote</string>
     <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
-    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_verb_start_stop">Start / stop</string>
     <string name="quick_action_previous_app_profile">App-profil til forrige</string>
     <string name="quick_action_next_app_profile">App profile to næste</string>
     <string name="app_profile">App-profil</string>
