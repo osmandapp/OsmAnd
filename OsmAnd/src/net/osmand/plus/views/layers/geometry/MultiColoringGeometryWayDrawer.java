@@ -1,16 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -60,25 +51,30 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	@Override
-	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
-	                     @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
+	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
+	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		if (coloringType.isDefault() || coloringType.isCustomColor() || coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			super.drawPath(collection, baseOrder, shouldDrawArrows, pathsData);
 		} else if (coloringType.isGradient()) {
-			GeometryWayStyle<?> prevStyle = null;
-			List<DrawPathData31> dataArr = new ArrayList<>();
-			for (DrawPathData31 data : pathsData) {
-				if (prevStyle != null && data.style == null) {
-					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
-					dataArr.clear();
-				}
-				prevStyle = data.style;
-				dataArr.add(data);
+			drawGradient(collection, baseOrder, shouldDrawArrows, pathsData);
+		}
+	}
+
+	protected void drawGradient(@NonNull VectorLinesCollection collection, int baseOrder,
+	                            boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
+		int lineId = LINE_ID;
+		GeometryWayStyle<?> prevStyle = null;
+		List<DrawPathData31> dataArr = new ArrayList<>();
+		for (DrawPathData31 data : pathsData) {
+			if (prevStyle != null && data.style == null) {
+				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
+				dataArr.clear();
 			}
-			if (!dataArr.isEmpty() && prevStyle != null) {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
-			}
+			prevStyle = data.style;
+			dataArr.add(data);
+		}
+		if (!dataArr.isEmpty() && prevStyle != null) {
+			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 		}
 	}
 
