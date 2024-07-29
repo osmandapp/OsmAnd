@@ -5786,7 +5786,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="shared_string_modify">Modifică</string>
     <string name="missing_maps_ignore_details">Hărțile descărcate acoperă traseul dumneavoastră? Navigați cu ajutorul acestora dacă sunteți familiarizat cu zona.</string>
-    <string name="quick_action_directions_from">Punct de plecare</string>
+    <string name="quick_action_directions_from">Punctul de plecare</string>
     <string name="quick_action_terrain_color_scheme">Schema de culori a terenului</string>
     <string name="quick_action_destination">Destinație</string>
     <string name="quick_action_location_by_gpx">Localizare prin GPX</string>
@@ -5822,7 +5822,7 @@
     <string name="quick_action_video_note">Notă video</string>
     <string name="quick_action_map_overlay">Suprapunere</string>
     <string name="quick_action_map_style">Stil hartă</string>
-    <string name="quick_action_parking_place">Loc parcare</string>
+    <string name="quick_action_parking_place">Loc de parcare</string>
     <string name="quick_action_verb_show_hide">Arată / Ascunde</string>
     <string name="quick_action_photo_note">Notă fotografică</string>
     <string name="quick_action_verb_pause_resume">Pauză / Reia</string>
@@ -5833,7 +5833,7 @@
     <string name="navigation_position_icon_summary">Pictograma afișată în timp ce navigați sau vă deplasați.</string>
     <string name="navigation_position_icon">Pictograma poziției de navigare</string>
     <string name="resting_position_icon">Pictograma poziției de odihnă</string>
-    <string name="quick_action_track_waypoint">Urmărire punct de referință</string>
+    <string name="quick_action_track_waypoint">Urmărește punctul de cale</string>
     <string name="profile_icon">Pictogramă profil</string>
     <string name="resting_position_icon_summary">Pictogramă afișată atunci când nu vă deplasați.</string>
     <string name="resting_position">Poziție de repaus</string>
@@ -5864,4 +5864,5 @@
     <string name="driving_region_uk">Regatul Unit și similare</string>
     <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
     <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
+    <string name="hugerock_promo">Hugerock Promo pentru %1$s luni</string>
 </resources>
