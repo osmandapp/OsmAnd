@@ -70,10 +70,12 @@ public class AisObjectMenuController extends MenuController {
                             } else {
                                 addMenuItem("TCPA", String.format("%.0f min", minutes));
                             }
-                        } else { // TODO: remove this later: don't show negative values...
+                        }
+                        /* else {
                             addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
                             addMenuItem("TCPA", String.format("-%.1f hours", cpaTime));
                         }
+                         */
                     }
                 }
             }
