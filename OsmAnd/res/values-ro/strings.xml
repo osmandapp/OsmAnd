@@ -5786,7 +5786,7 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="shared_string_modify">Modifică</string>
     <string name="missing_maps_ignore_details">Hărțile descărcate acoperă traseul dumneavoastră? Navigați cu ajutorul acestora dacă sunteți familiarizat cu zona.</string>
-    <string name="quick_action_directions_from">Punctul de plecare</string>
+    <string name="quick_action_directions_from">Punct de plecare</string>
     <string name="quick_action_terrain_color_scheme">Schema de culori a terenului</string>
     <string name="quick_action_destination">Destinație</string>
     <string name="quick_action_location_by_gpx">Localizare prin GPX</string>
