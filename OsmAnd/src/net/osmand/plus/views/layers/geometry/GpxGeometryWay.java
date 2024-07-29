@@ -45,10 +45,10 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                @NonNull ColoringType coloringType,
 	                                @Nullable String routeInfoAttribute,
 	                                @Nullable String gradientPaletteName) {
+		boolean track3DStyleChanged = !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
-				|| this.coloringType != coloringType
-				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
-				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
+				|| this.coloringType != coloringType || track3DStyleChanged
+				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
 		if (coloringTypeChanged) {
@@ -63,13 +63,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (getTrack3DStyle() != track3DStyle) {
+		if (track3DStyleChanged) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
-		getDrawer().setOutlineColoringType(getOutlineColoringType());
+		getDrawer().setTrack3DStyle(track3DStyle);
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;
