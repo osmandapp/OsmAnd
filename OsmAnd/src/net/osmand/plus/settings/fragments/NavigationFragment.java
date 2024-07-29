@@ -130,7 +130,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	public void showTrackGuidancePref() {
 		Preference preference = requirePreference(DETAILED_TRACK_GUIDANCE);
 		preference.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
-		preference.setSummary(settings.DETAILED_TRACK_GUIDANCE.getModeValue(getSelectedAppMode()).getActionRes());
+		preference.setSummary(settings.DETAILED_TRACK_GUIDANCE.getModeValue(getSelectedAppMode()).getNameRes());
 	}
 
 	@Override
