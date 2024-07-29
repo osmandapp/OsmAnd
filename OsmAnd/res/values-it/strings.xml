@@ -5828,4 +5828,15 @@
     <string name="driving_region_india">India</string>
     <string name="hugerock_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
     <string name="driving_region_uk">UK e simili</string>
+    <string name="hugerock_promo">Promozione prodotti Hugerock per %1$s mesi</string>
+    <string name="shared_string_automatically">Automaticamente</string>
+    <string name="ask_every_time">Chiedi ogni volta</string>
+    <string name="detailed_track_guidance">Guida dettagliata della traccia</string>
+    <string name="detailed_track_guidance_description">OsmAnd abbinerà il tuo percorso alle strade vicine per una guida dettagliata passo dopo passo.</string>
+    <string name="quick_action_routes_summary">Un pulsante per mostrare o nascondere %1$s sulla mappa.</string>
+    <string name="resting_position">Posizione di riposo</string>
+    <string name="navigation_position">Posizione di navigazione</string>
+    <string name="resting_navigation_position">Posizione di riposo e navigazione</string>
+    <string name="view_angle_description">Visualizza l\'area a forma di cono che stai guardando attualmente</string>
+    <string name="view_angle">Vista ad angolo</string>
 </resources>
