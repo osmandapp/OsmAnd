@@ -1,8 +1,5 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.osm.OsmRouteType.MTB;
-import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_MTB_SCALE_IMBA_TRAILS;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,28 +9,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.routes.MtbClassification;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MtbRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = MtbRoutesFragment.class.getSimpleName();
 
-	private CommonPreference<Boolean> showMtbRoutesPref;
+	private RouteLayersHelper routeLayersHelper;
 	private final List<View> itemsViews = new ArrayList<>();
 
 	@Override
@@ -44,7 +41,7 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		showMtbRoutesPref = settings.getCustomRenderBooleanProperty(MTB.getRenderingPropertyAttr());
+		routeLayersHelper = app.getRouteLayersHelper();
 	}
 
 	@Override
@@ -52,10 +49,11 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_mtb_routes, container, false);
 
+		boolean enabled = routeLayersHelper.isMtbRoutesEnabled();
 		setupHeader(view);
-		updateScreenMode(view, showMtbRoutesPref.get());
+		updateScreenMode(view, enabled);
 		setupClassifications(view);
-		setupClassificationPreference(showMtbRoutesPref.get());
+		updateClassificationPreferences();
 
 		return view;
 	}
@@ -65,13 +63,12 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 				view.findViewById(R.id.main_toggle),
 				R.drawable.ic_action_mountain_bike,
 				getString(R.string.rendering_attr_showMtbRoutes_name),
-				showMtbRoutesPref.get(),
+				routeLayersHelper.isMtbRoutesEnabled(),
 				false,
 				v -> {
-					boolean enabled = !showMtbRoutesPref.get();
-					setupClassificationPreference(enabled);
-					showMtbRoutesPref.set(enabled);
-					updateScreenMode(view, enabled);
+					routeLayersHelper.toggleMtbRoutes();
+					updateClassificationPreferences();
+					updateScreenMode(view, routeLayersHelper.isMtbRoutesEnabled());
 					refreshMap();
 				});
 	}
@@ -106,7 +103,8 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 
 		View button = view.findViewById(R.id.button);
 		button.setOnClickListener(v -> {
-			updateClassificationPreferences(classification);
+			routeLayersHelper.updateSelectedMtbClassification(classification.attrName);
+			updateClassificationPreferences();
 			refreshMap();
 		});
 
@@ -115,19 +113,13 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
-	private void updateClassificationPreferences(@Nullable MtbClassification selectedClassification) {
+	private void updateClassificationPreferences() {
 		for (View itemView : itemsViews) {
 			MtbClassification classification = (MtbClassification) itemView.getTag();
 			AppCompatRadioButton radioButton = itemView.findViewById(R.id.compound_button);
-
-			boolean selected = classification == selectedClassification;
+			boolean selected = Objects.equals(classification.attrName, routeLayersHelper.getSelectedMtbClassificationId());
 			radioButton.setChecked(selected);
-			settings.getCustomRenderBooleanProperty(classification.attrName).set(selected);
 		}
-	}
-
-	private void setupClassificationPreference(boolean mtbRoutesEnabled) {
-		updateClassificationPreferences(mtbRoutesEnabled ? getSelectedClassification(settings) : null);
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
@@ -143,17 +135,6 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	@NonNull
-	public static MtbClassification getSelectedClassification(@NonNull OsmandSettings settings) {
-		MtbClassification classification = null;
-		for (MtbClassification mtbClassification : MtbClassification.values()) {
-			if (settings.getCustomRenderBooleanProperty(mtbClassification.attrName).get()) {
-				classification = mtbClassification;
-			}
-		}
-		return classification != null ? classification : MtbClassification.SCALE;
-	}
-
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
@@ -162,22 +143,4 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public enum MtbClassification {
-
-		SCALE("showMtbScale", R.string.mtb_scale, null),
-		IMBA(SHOW_MTB_SCALE_IMBA_TRAILS, R.string.mtb_imba, R.string.mtb_imba_full);
-
-		public final String attrName;
-		@StringRes
-		public final int nameId;
-		@Nullable
-		@StringRes
-		public final Integer descriptionId;
-
-		MtbClassification(String attrName, int nameId, @Nullable Integer descriptionId) {
-			this.attrName = attrName;
-			this.nameId = nameId;
-			this.descriptionId = descriptionId;
-		}
-	}
 }

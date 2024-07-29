@@ -94,7 +94,7 @@ public class NavigateGpxHelper {
 			GpxApproximationParams approxParams = new GpxApproximationParams();
 			approxParams.setAppMode(ApplicationMode.valueOfStringKey(navigationParams.getSnapToRoadMode(), null));
 			approxParams.setDistanceThreshold(navigationParams.getSnapToRoadThreshold());
-			GpxApproximationHelper.approximateGpxSilently(app, gpxFile, approxParams, approxGpx -> {
+			GpxApproximationHelper.approximateGpxAsync(app, gpxFile, approxParams, approxGpx -> {
 				step5_startNavigation(approxGpx);
 				return true;
 			});

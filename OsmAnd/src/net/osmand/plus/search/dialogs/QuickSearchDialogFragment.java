@@ -353,7 +353,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
-						Object object = searchPhrase.getLastSelectedWord().getResult().object;
+						Object object = searchPhrase.isLastWord(POI_TYPE) ? searchPhrase.getLastSelectedWord().getResult().object : null;
 						if (object instanceof TopIndexFilter) {
 							TopIndexFilter topIndexFilter = (TopIndexFilter) object;
 							filter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.MAP);

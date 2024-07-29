@@ -6,6 +6,7 @@ import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENC
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -62,6 +63,21 @@ public class ConfigureMapUtils {
 			String rightValue = unsortedLanguages.get(rightKey);
 			return Algorithms.compare(leftValue, rightValue);
 		};
+	}
+
+	@Nullable
+	public static RenderingRuleProperty getPropertyForAttr(@NonNull OsmandApplication app, @NonNull String attrName) {
+		return getPropertyForAttr(getCustomRules(app), attrName);
+	}
+
+	@Nullable
+	public static RenderingRuleProperty getPropertyForAttr(@NonNull List<RenderingRuleProperty> customRules, @NonNull String attrName) {
+		for (RenderingRuleProperty property : customRules) {
+			if (Algorithms.stringsEqual(property.getAttrName(), attrName)) {
+				return property;
+			}
+		}
+		return null;
 	}
 
 	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app, String... skipCategories) {

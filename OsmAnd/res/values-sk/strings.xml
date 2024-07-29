@@ -997,7 +997,6 @@
     <string name="driving_region_us">Spojené štáty</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa, Ázia, Latinská Amerika a podobné</string>
-    <string name="driving_region_uk">UK, India a podobné</string>
     <string name="speak_title">Ohlásiť…</string>
     <string name="speak_descr">Nastavte ohlásenia názvov ulíc, dopravné varovania (vynútené zastavenia, spomaľovače), upozornenia na radary a obmedzenia rýchlosti.</string>
     <string name="speak_street_names">Názvy ulíc (TTS)</string>

@@ -1,17 +1,21 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.settings.enums.TrackApproximationType.AUTOMATIC;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
+import net.osmand.plus.measurementtool.GpxApproximationHelper;
+import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -38,33 +42,49 @@ public class MapActions {
 		return false;
 	}
 
-	public void setGPXRouteParams(@Nullable GPXFile result) {
-		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.path : null));
-		if (result == null) {
+	public void setGPXRouteParams(@Nullable GPXFile gpxFile) {
+		app.logRoutingEvent("setGPXRouteParams result " + (gpxFile != null ? gpxFile.path : null));
+		if (gpxFile == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
-			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, settings);
-			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
-			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
-			params.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
-			params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
-			List<Location> ps = params.getPoints(settings.getContext());
-			app.getRoutingHelper().setGpxParams(params);
-			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
-			if (!ps.isEmpty()) {
-				Location startLoc = ps.get(0);
-				Location finishLoc = ps.get(ps.size() - 1);
-				Location location = app.getLocationProvider().getLastKnownLocation();
-				TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
-				pointsHelper.clearAllIntermediatePoints(false);
-				if (location == null || MapUtils.getDistance(location, startLoc) <= START_TRACK_POINT_MY_LOCATION_RADIUS_METERS) {
-					pointsHelper.clearStartPoint(false);
-				} else {
-					pointsHelper.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
-				}
-				pointsHelper.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+			ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+			if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+				GpxApproximationParams params = new GpxApproximationParams();
+				params.setAppMode(appMode);
+				params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
+				GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
+					setParams(approxGpx);
+					app.getTargetPointsHelper().updateRouteAndRefresh(true);
+					return true;
+				});
+			} else {
+				setParams(gpxFile);
 			}
+		}
+	}
+
+	private void setParams(@NonNull GPXFile gpxFile) {
+		GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(gpxFile, settings);
+		params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
+		params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
+		params.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
+		params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
+		List<Location> ps = params.getPoints(settings.getContext());
+		app.getRoutingHelper().setGpxParams(params);
+		settings.FOLLOW_THE_GPX_ROUTE.set(gpxFile.path);
+		if (!ps.isEmpty()) {
+			Location startLoc = ps.get(0);
+			Location finishLoc = ps.get(ps.size() - 1);
+			Location location = app.getLocationProvider().getLastKnownLocation();
+			TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
+			pointsHelper.clearAllIntermediatePoints(false);
+			if (location == null || MapUtils.getDistance(location, startLoc) <= START_TRACK_POINT_MY_LOCATION_RADIUS_METERS) {
+				pointsHelper.clearStartPoint(false);
+			} else {
+				pointsHelper.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
+			}
+			pointsHelper.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
 		}
 	}
 
