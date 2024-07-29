@@ -1531,13 +1531,14 @@ public class RouteResultPreparation {
 		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes);
 		int activeBeginIndex = act[0];
 		int activeEndIndex = act[1];
+		int activeTurn = act[2];
 		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 			// something went wrong
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
 		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
-			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex);
+			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn);
 			int tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight);
 			// Checking to see that there is only one unique turn
 			if (tp != 0) {
@@ -1563,10 +1564,8 @@ public class RouteResultPreparation {
 				}
 			}
 		} else {
-			if (activeBeginIndex != -1 && activeEndIndex != -1) {
-				setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex);
-				t = getActiveTurnType(rawLanes, leftSide, t);
-			}
+			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn);
+			t = getActiveTurnType(rawLanes, leftSide, t);
 		}
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
@@ -1574,7 +1573,7 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex) {
+	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex, int activeTurn) {
 		Set<Integer> possibleTurns = new TreeSet<>();
 		Set<Integer> upossibleTurns = new TreeSet<>();
 		for (int k = activeBeginIndex; k < rawLanes.length && k <= activeEndIndex; k++) {
@@ -1592,15 +1591,6 @@ public class RouteResultPreparation {
 			} else {
 				possibleTurns.retainAll(upossibleTurns);
 			}
-		}
-		int activeTurn = 0;
-		// rough guess
-		if(possibleTurns.size() >= 1) {
-			activeTurn = possibleTurns.iterator().next();
-		} else if (activeBeginIndex == 0) {
-			activeTurn = TurnType.getPrimaryTurn(rawLanes[activeBeginIndex]);
-		} else {
-			activeTurn = TurnType.getPrimaryTurn(rawLanes[activeEndIndex]);
 		}
 		for (int k = activeBeginIndex; k < rawLanes.length && k <= activeEndIndex; k++) {
 			if(TurnType.getPrimaryTurn(rawLanes[k]) != activeTurn) {
@@ -2306,7 +2296,7 @@ public class RouteResultPreparation {
 	}
 
 	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs, String turnLanes) {
-		int[] pair = {-1, -1};
+		int[] pair = {-1, -1, 0};
 		if (turnLanes == null) {
 			return pair;
 		}
@@ -2329,6 +2319,7 @@ public class RouteResultPreparation {
 				int t = TurnType.getTertiaryTurn(rawLanes[i]);
 				if (p == startDirection || s == startDirection || t == startDirection) {
 					pair[0] = i;
+					pair[2] = startDirection;
 					break;
 				}
 			}
