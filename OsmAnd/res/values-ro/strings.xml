@@ -780,7 +780,7 @@
     <string name="show_poi_over_map">Arată strat cu punctele de interes</string>
     <string name="map_tile_source_descr">Alegeți sursa hărților online sau a hărților segmentate din cache.</string>
     <string name="map_tile_source">Sursă hartă segmentată</string>
-    <string name="map_source">Sursă hartă</string>
+    <string name="map_source">Sursa hărții</string>
     <string name="use_internet">Utilizați internetul</string>
     <string name="show_location">Arată-ți poziția</string>
     <string name="show_gps_coordinates_text">Afișați coordonatele GPS pe hartă</string>
@@ -876,7 +876,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Nu afișa limitele regionale (niveluri administrative 5-9).</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Alte hărți</string>
-    <string name="download_srtm_maps">Curbe (izolinii)</string>
+    <string name="download_srtm_maps">Izolinii</string>
     <string name="audionotes_plugin_name">Notițe audio/video</string>
     <string name="audionotes_plugin_description">Luați note audio/foto/video în timpul unei călătorii, utilizând fie un buton de pe hartă, fie meniul contextual al locației.</string>
     <string name="audionotes_location_not_defined">Atingeți \'Folosește locația...\' pentru a adăuga o notă la locație.</string>
@@ -2083,7 +2083,7 @@
     <string name="keep_informing">Repetare instrucțiuni de navigație</string>
     <string name="shared_string_others">Altele</string>
     <string name="shared_string_release">Lansat</string>
-    <string name="voices">Indicații vocale</string>
+    <string name="voices">Instrucțiuni vocale</string>
     <string name="favourites_context_menu_add">Adăugare la favorite</string>
     <string name="poi_action_delete">șters</string>
     <string name="poi_dialog_reopen">Redeschide</string>
