@@ -128,8 +128,14 @@ public class GpxSegmentsApproximation {
 		if (prevGpxPoint != null && prevGpxPoint.routeToTarget != null) {
 			RouteSegmentResult prev = prevGpxPoint.routeToTarget.get(prevGpxPoint.routeToTarget.size() - 1);
 			if (prev.getObject().getId() == next.getObject().getId()) {
-				if ((prev.isForwardDirection() && next.getStartPointIndex() < prev.getEndPointIndex()) ||
-						(!prev.isForwardDirection() && next.getStartPointIndex() > prev.getEndPointIndex())) {
+				if ((prev.isForwardDirection()
+						&& next.getStartPointIndex() < prev.getEndPointIndex()
+						&& next.getEndPointIndex() >= prev.getStartPointIndex())
+						||
+						(!prev.isForwardDirection()
+								&& next.getStartPointIndex() > prev.getEndPointIndex()
+								&& next.getEndPointIndex() <= prev.getStartPointIndex())
+				) {
 					next.setStartPointIndex(prev.getEndPointIndex());
 				}
 			}
