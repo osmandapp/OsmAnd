@@ -19,10 +19,9 @@ public class GeometryGradient3DWayStyle<C extends MultiColoringGeometryWayContex
 		if (!super.equals(other)) {
 			return false;
 		}
-		if (!(other instanceof GeometryGradient3DWayStyle)) {
+		if (!(other instanceof GeometryGradient3DWayStyle<?> o)) {
 			return false;
 		}
-		GeometryGradient3DWayStyle<?> o = (GeometryGradient3DWayStyle<?>) other;
 		return currColor == o.currColor && nextColor == o.nextColor
 				&& currOutlineColor == o.currOutlineColor && nextOutlineColor == o.nextOutlineColor;
 	}
