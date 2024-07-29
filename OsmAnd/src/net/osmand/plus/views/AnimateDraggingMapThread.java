@@ -905,7 +905,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	public void startTilting(float elevationAngle, float elevationTime) {
 		if (animationsDisabled)
 			return;
-		
+
 		stopAnimatingSync();
 
 		float initialElevationAngle = tileView.getElevationAngle();
