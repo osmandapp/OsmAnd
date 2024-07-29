@@ -17,7 +17,8 @@ public class ShowHideFitnessTrailsAction extends BaseRouteQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.rendering_attr_showFitnessTrails_name)
 			.iconRes(R.drawable.mx_sport_athletics)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.nonEditable();
 
 	public ShowHideFitnessTrailsAction() {
 		super(TYPE);

@@ -16,7 +16,8 @@ public class ShowHideMtbRoutesAction extends BaseRouteQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.rendering_attr_showMtbRoutes_name)
 			.iconRes(R.drawable.ic_action_mountain_bike)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.nonEditable();
 
 	public ShowHideMtbRoutesAction() {
 		super(TYPE);

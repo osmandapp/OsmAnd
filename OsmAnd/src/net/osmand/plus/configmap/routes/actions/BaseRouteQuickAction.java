@@ -71,11 +71,6 @@ public abstract class BaseRouteQuickAction extends QuickAction {
 	}
 
 	@Override
-	protected boolean forceUseExtendedName() {
-		return true;
-	}
-
-	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);

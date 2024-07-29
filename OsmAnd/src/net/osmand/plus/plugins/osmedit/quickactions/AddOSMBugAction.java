@@ -26,7 +26,8 @@ public class AddOSMBugAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(ADD_OSM_BUG_ACTION_ID,
 			"osmbug.add", AddOSMBugAction.class)
 			.nameRes(R.string.osn_bug_name).iconRes(R.drawable.ic_action_osm_note_add)
-			.category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
+			.category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add)
+			.forceUseExtendedName();
 
 	public AddOSMBugAction() {
 		super(TYPE);
