@@ -16,7 +16,8 @@ public class ShowHideDifficultyClassificationAction extends BaseRouteQuickAction
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.rendering_attr_alpineHiking_name)
 			.iconRes(R.drawable.ic_action_trekking_dark)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.nonEditable();
 
 	public ShowHideDifficultyClassificationAction() {
 		super(TYPE);
