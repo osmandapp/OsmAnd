@@ -876,7 +876,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Nu afișa limitele regionale (niveluri administrative 5-9).</string>
     <string name="srtm_plugin_name">Topografie</string>
     <string name="download_select_map_types">Alte hărți</string>
-    <string name="download_srtm_maps">Izolinii</string>
+    <string name="download_srtm_maps">Linii de contur</string>
     <string name="audionotes_plugin_name">Notițe audio/video</string>
     <string name="audionotes_plugin_description">Luați note audio/foto/video în timpul unei călătorii, utilizând fie un buton de pe hartă, fie meniul contextual al locației.</string>
     <string name="audionotes_location_not_defined">Atingeți \'Folosește locația...\' pentru a adăuga o notă la locație.</string>
