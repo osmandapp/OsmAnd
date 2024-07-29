@@ -1702,7 +1702,7 @@
     <string name="empty_state_av_notes">Déan nótaí!</string>
     <string name="storage_free_space">Spás ar fáil</string>
     <string name="coordinate_input">Iontráil na gcomhordanáidí</string>
-    <string name="sort_duration_ascending">Fad ama is lú ar dtús</string>
+    <string name="sort_duration_ascending">An fad ama is lú ar dtús</string>
     <string name="interrupt_music">Cuir ceol ar sos</string>
     <string name="make_active">Cumasaigh</string>
     <string name="shared_string_close_the_dialog">Dún an dialóg</string>
@@ -2216,4 +2216,20 @@
     <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
     <string name="shared_string_copyright">Cóipcheart</string>
     <string name="weather_source_ecmwf_description">Airmheán Eorpach um Réamhaisnéisí Aimsire Meántréimhseacha (ECMWF)</string>
+    <string name="cache_size">Méid na taisce</string>
+    <string name="driving_region_india">An India</string>
+    <string name="auto_25_chars_route_tslr">Cas beagáinín ar dheis</string>
+    <string name="auto_25_chars_route_tl">Cas ar chlé</string>
+    <string name="no_visible_tracks">Níl aon bhealach ar an léarscáil</string>
+    <string name="ask_every_time">Fiafraigh i gcónaí</string>
+    <string name="auto_25_chars_route_tr">Cas ar dheis</string>
+    <string name="auto_25_chars_route_tshr">Cas go géar ar dheis</string>
+    <string name="auto_25_chars_route_tshl">Cas go géar ar chlé</string>
+    <string name="auto_25_chars_route_tu">Déan U-chasadh</string>
+    <string name="shared_string_original">Bunaidh</string>
+    <string name="shared_string_automatically">Go hUathoibríoch</string>
+    <string name="auto_25_chars_route_tsll">Cas beagáinín ar chlé</string>
+    <string name="speak_route_deviation">Fógraigh malairt ón slí</string>
+    <string name="auto_25_chars_route_kl">Tiomáin ar chlé</string>
+    <string name="auto_25_chars_route_kr">Tiomáin ar dheis</string>
 </resources>
