@@ -71,6 +71,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	private TravelEstimate destinationTravelEstimate;
 	private boolean shouldShowNextStep;
 	private boolean shouldShowLanes;
+	private boolean use3DButton = true;
 
 	@Nullable
 	CarIcon junctionImage;
@@ -93,7 +94,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, null, null);
-
+		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
 
@@ -112,7 +113,35 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(this);
 			}
 		}
+		OsmandMapTileView mapView = getMapView();
+		if (mapView != null) {
+			mapView.addElevationListener(elevationListener);
+		}
 	}
+
+	@Nullable
+	OsmandMapTileView getMapView() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+			return surfaceRenderer.getMapView();
+		}
+		return null;
+	}
+
+	OsmandMapTileView.ElevationListener elevationListener = new OsmandMapTileView.ElevationListener() {
+		@Override
+		public void onElevationChanging(float angle) {
+			boolean currentUse3DButton = use3DButton;
+			updateUse3DButton();
+			if (currentUse3DButton != use3DButton) {
+				invalidate();
+			}
+		}
+
+		@Override
+		public void onStopChangingElevation(float angle) {
+		}
+	};
 
 	@Override
 	public void onPause(@NonNull LifecycleOwner owner) {
@@ -123,6 +152,10 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			if(surfaceRenderer != null) {
 				surfaceRenderer.setCallback(null);
 			}
+		}
+		OsmandMapTileView mapView = getMapView();
+		if (mapView != null) {
+			mapView.removeElevationListener(elevationListener);
 		}
 	}
 
@@ -241,16 +274,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 						.setOnClickListener(this::compassClick)
 						.build());
 		if (getApp().useOpenGlRenderer()) {
-			int dButtonResource = R.drawable.ic_action_2d;
-			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
-				OsmandMapTileView mapView = surfaceRenderer.getMapView();
-				AnimateDraggingMapThread animationThread = mapView.getAnimatedDraggingThread();
-				float angle = mapView.getElevationAngle();
-				if ((animationThread.isAnimating() && animationThread.getTargetTilt() == 90) ||
-						(!animationThread.isAnimating() && angle == 90)) {
-					dButtonResource = R.drawable.ic_action_3d;
-				}
-			}
+			int dButtonResource = use3DButton ? R.drawable.ic_action_3d : R.drawable.ic_action_2d;
 			actionStripBuilder.addAction(
 					new Action.Builder()
 							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), dButtonResource)).build())
@@ -402,6 +426,20 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		boolean nightMode = getCarContext().isDarkMode();
 		CompassMode compassMode = settings.getCompassMode();
 		compassResId = compassMode.getIconId(nightMode);
+	}
+
+	private void updateUse3DButton() {
+		if (getApp().useOpenGlRenderer()) {
+			SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+				OsmandMapTileView mapView = surfaceRenderer.getMapView();
+				use3DButton = mapView.getElevationAngle() == 90;
+			} else {
+				use3DButton = false;
+			}
+		} else {
+			use3DButton = false;
+		}
 	}
 
 	private boolean isRerouting() {
