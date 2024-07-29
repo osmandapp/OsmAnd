@@ -430,9 +430,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private void updateUse3DButton() {
 		if (getApp().useOpenGlRenderer()) {
-			SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
-			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
-				OsmandMapTileView mapView = surfaceRenderer.getMapView();
+			OsmandMapTileView mapView = getMapView();
+			if (mapView != null) {
 				use3DButton = mapView.getElevationAngle() == 90;
 			} else {
 				use3DButton = false;
