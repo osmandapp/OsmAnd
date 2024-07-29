@@ -4930,7 +4930,7 @@
     <string name="temperature_layer">Strat temperaturi</string>
     <string name="pressure_layer">Strat presiuni</string>
     <string name="wind_layer">Strat vânturi</string>
-    <string name="cloud_layer">Strat nori</string>
+    <string name="cloud_layer">Strat de nor</string>
     <string name="precipitation_layer">Strat precipitații</string>
     <string name="quick_action_precipitation_layer">Un comutator pentru a arăta/ascunde stratul precipitațiilor pe/de pe hartă.</string>
     <string name="quick_action_temperature_layer">Un comutator pentru a arăta/ascunde stratul temperaturilor pe/de pe hartă.</string>
