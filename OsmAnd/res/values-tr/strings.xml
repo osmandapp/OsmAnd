@@ -646,7 +646,6 @@
     <string name="driving_region_us">Birleşik Devletler</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Avrupa, Asya, Latin Amerika ve benzeri</string>
-    <string name="driving_region_uk">Birleşik Krallık (İngiltere), Hindistan ve benzeri</string>
     <string name="speak_title">Bildir…</string>
     <string name="speak_descr">Sokak adları, trafik uyarıları (zorunlu duruşlar, hız tümsekleri), hız kamerası uyarıları ve hız sınırları duyurularını ayarlayın.</string>
     <string name="speak_street_names">Cadde adları (TTS)</string>
@@ -5458,4 +5457,5 @@
     <string name="fixed_height">Sabit yükseklik</string>
     <string name="map_markers_desc">Pencere öğesi, harita işaretçileri listesindeki ilk iki işaretçi için mesafeyi veya tahmini varış zamanını (TVZ) gösterir.</string>
     <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, yön={6}.</string>
+    <string name="weather_source_ecmwf_description">Avrupa Orta Vadeli Hava Tahminleri Merkezi (ECMWF)</string>
 </resources>

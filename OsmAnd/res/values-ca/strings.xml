@@ -1053,7 +1053,6 @@
     <string name="driving_region_us">Estats Units</string>
     <string name="driving_region_canada">Canadà</string>
     <string name="driving_region_europe_asia">Europa, Àsia, Amèrica llatina i similars</string>
-    <string name="driving_region_uk">Regne Unit, Índia i semblants</string>
     <string name="guidance_preferences_descr">Preferències de navegació</string>
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
     <string name="speech_rate_descr">Especifiqueu la velocitat en la síntesi de veu.</string>

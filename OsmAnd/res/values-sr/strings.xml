@@ -27,7 +27,6 @@
     <string name="driving_region_us">Сједињене Америчке Државе</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Европа, Aзија, Јужна Америка и сличне</string>
-    <string name="driving_region_uk">Велика Британија, Индија и сличне</string>
     <string name="local_index_tile_data_minzoom">Најмање увеличање: %1$s</string>
     <string name="speak_title">Најави…</string>
     <string name="speak_descr">Подесите најаве назива улица, саобраћајних упозорења (лежећи, знаци заустављања), радара и ограничења брзине.</string>
@@ -5831,5 +5830,18 @@
     <string name="rendering_avg_info_details">FPS према последњим 1k кадрова: %1$s
 \nCPU (плочице): %2$s
 \nCPU (време мировања): %3$s
-\nCPU (чекање CPU): %4$s</string>
+\nCPU (чекање GPU): %4$s</string>
+    <string name="auto_25_chars_route_kr">Настави десно</string>
+    <string name="auto_25_chars_route_tr">Скрени десно</string>
+    <string name="auto_25_chars_route_tshr">Скрени оштро десно</string>
+    <string name="auto_25_chars_route_tslr">Скрени мало десно</string>
+    <string name="auto_25_chars_route_tl">Скрени лево</string>
+    <string name="auto_25_chars_route_tu">Направи полукруг</string>
+    <string name="auto_25_chars_route_kl">Настави лево</string>
+    <string name="auto_25_chars_route_tshl">Скрени оштро лево</string>
+    <string name="auto_25_chars_route_tsll">Скрени мало лево</string>
+    <string name="hugerock_promo_description">Бесплатан приступ функцијама укључујући неограничено преузимање мапа, 3Д рељеф итд. за %1$s месец</string>
+    <string name="driving_region_india">Индија</string>
+    <string name="hugerock_promo">Хјуџрок Промоција за %1$s месеца</string>
+    <string name="driving_region_uk">ВБ и слично</string>
 </resources>

@@ -296,7 +296,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		super.onCardPressed(card);
-		if (card instanceof ShapesCard || card instanceof IconsCard) {
+		if (card instanceof ShapesCard) {
 			updateNameIcon();
 		}
 	}

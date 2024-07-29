@@ -2215,4 +2215,5 @@
     <string name="dangerous_goods">Earraí contúirteacha</string>
     <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
     <string name="shared_string_copyright">Cóipcheart</string>
+    <string name="weather_source_ecmwf_description">Airmheán Eorpach um Réamhaisnéisí Aimsire Meántréimhseacha (ECMWF)</string>
 </resources>

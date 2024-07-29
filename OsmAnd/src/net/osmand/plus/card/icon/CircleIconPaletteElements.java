@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.editors.icon;
+package net.osmand.plus.card.icon;
 
 import static net.osmand.plus.utils.ColorUtilities.getDefaultIconColor;
 
@@ -8,20 +8,17 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.icon.IconsPaletteElements;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class EditorIconPaletteElements extends IconsPaletteElements<String> {
+public abstract class CircleIconPaletteElements<IconData> extends IconsPaletteElements<IconData> {
 
-	public EditorIconPaletteElements(@NonNull Context context, boolean nightMode) {
+	public CircleIconPaletteElements(@NonNull Context context, boolean nightMode) {
 		super(context, nightMode);
 	}
 
@@ -31,10 +28,9 @@ public class EditorIconPaletteElements extends IconsPaletteElements<String> {
 	}
 
 	@Override
-	public void bindView(@NonNull View itemView, @NonNull String icon, int controlsColor, boolean isSelected) {
-		int iconId = getIconId(icon);
+	public void bindView(@NonNull View itemView, @NonNull IconData icon, int controlsColor, boolean isSelected) {
 		View background = itemView.findViewById(R.id.background);
-		int bgColor = isSelected ? controlsColor : getDefaultIconColor(app, nightMode);
+		int bgColor = getDefaultIconColor(app, nightMode);
 		int bgColorWithAlpha = ColorUtilities.getColorWithAlpha(bgColor, 0.1f);
 		Drawable bgDrawable = AppCompatResources.getDrawable(app, R.drawable.circle_background_light);
 		AndroidUtils.setBackground(background, UiUtilities.tintDrawable(bgDrawable, bgColorWithAlpha));
@@ -44,24 +40,18 @@ public class EditorIconPaletteElements extends IconsPaletteElements<String> {
 			GradientDrawable circleContourDrawable = (GradientDrawable)
 					AppCompatResources.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {
-				circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), controlsColor);
+				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+				circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), activeColor);
 			}
 			outlineCircle.setImageDrawable(circleContourDrawable);
 			outlineCircle.setVisibility(View.VISIBLE);
 		} else {
-			outlineCircle.setVisibility(View.GONE);
+			outlineCircle.setVisibility(View.INVISIBLE);
 		}
 
 		ImageView checkMark = itemView.findViewById(R.id.checkMark);
-		if (isSelected) {
-			checkMark.setImageDrawable(getPaintedIcon(iconId, controlsColor));
-		} else {
-			checkMark.setImageDrawable(getIcon(iconId, R.color.icon_color_default_light));
-		}
+		checkMark.setImageDrawable(getIconDrawable(icon, isSelected));
 	}
 
-	@DrawableRes
-	private int getIconId(@NonNull String iconKey) {
-		return RenderingIcons.getBigIconResourceId(iconKey);
-	}
+	protected abstract Drawable getIconDrawable(@NonNull IconData icon, boolean isSelected);
 }

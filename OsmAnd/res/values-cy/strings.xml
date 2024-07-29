@@ -718,7 +718,6 @@
     <string name="driving_region_descr">Dewisa gyfandir gyrru: DU, Ewrop, UDA, Asia, ac eraill.</string>
     <string name="driving_region">Rhanbarth gyrru</string>
     <string name="driving_region_europe_asia">Ewrop, Asia, De America, a thebyg</string>
-    <string name="driving_region_uk">DU, India, a thebyg</string>
     <string name="speak_street_names">Enwau strydoedd (TTS)</string>
     <string name="speak_traffic_warnings">Rhybuddion traffig</string>
     <string name="clear_intermediate_points">Clirio cyrchfannau ar y ffordd</string>

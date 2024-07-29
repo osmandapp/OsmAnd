@@ -3203,13 +3203,13 @@
     <string name="poi_cuisine_fried_chicken">Pui prăjit</string>
     <string name="poi_cuisine_couscous">Cușcuș</string>
     <string name="poi_cuisine_bakery">Brutărie</string>
-    <string name="poi_cuisine_bistro">Bistro</string>
+    <string name="poi_cuisine_bistro">Bistrou</string>
     <string name="poi_cuisine_savory_pancakes">Clătite savuroase</string>
     <string name="poi_cuisine_fried_food">Mâncare prăjită</string>
     <string name="poi_cuisine_frozen_yogurt">Iaurt înghețat</string>
     <string name="poi_cuisine_salad">Salată</string>
     <string name="poi_cuisine_deli">Delicatese</string>
-    <string name="poi_cuisine_hotdog">Hotdog</string>
+    <string name="poi_cuisine_hotdog">Hot dog</string>
     <string name="poi_cuisine_pie">Plăcinte</string>
     <string name="poi_cuisine_soup">Supă</string>
     <string name="poi_cuisine_tea_shop">Magazin de ceai</string>
@@ -3225,7 +3225,7 @@
     <string name="poi_cuisine_diner">Diner</string>
     <string name="poi_cuisine_bagel">Covrigi</string>
     <string name="poi_cuisine_grill">Grătar</string>
-    <string name="poi_cuisine_buschenschank">Buschenschank</string>
+    <string name="poi_cuisine_buschenschank">Lanț de autobuz</string>
     <string name="poi_cuisine_curry">Curry</string>
     <string name="poi_cuisine_heuriger">Heuriger</string>
     <string name="poi_cuisine_gastropub">Gastropub</string>

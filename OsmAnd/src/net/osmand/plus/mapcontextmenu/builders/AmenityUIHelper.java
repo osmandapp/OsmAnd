@@ -187,7 +187,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
 				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
 			}
-			if (poiType == null && pt == null && key.equals(vl)) {
+			if (poiType == null && pt == null) {
 				poiType = poiTypes.getPoiTypeByKey(key);
 			}
 			PoiType pType = null;

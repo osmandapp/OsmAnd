@@ -1029,7 +1029,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa, Ázsia, Latin-Amerika és hasonlók</string>
-    <string name="driving_region_uk">Egyesült Királyság, India és hasonlók</string>
     <string name="speak_title">Bemondás…</string>
     <string name="speak_descr">Utcanevek, forgalmi figyelmeztetések (közúti ellenőrzés, fekvőrendőr), traffipaxriasztás és sebességkorlátozás bemondásának beállítása.</string>
     <string name="speak_street_names">Utcanevek (TTS)</string>
@@ -4133,7 +4132,7 @@
     <string name="shared_string_discussion">Vitafórum</string>
     <string name="backup_delete_types">Letiltott adattípusok törlése</string>
     <string name="backup_delete_types_descr">Törli az összes elavult adattípus adatát az OsmAnd Cloudból\?</string>
-    <string name="from_with_param">Innentől: %1$s</string>
+    <string name="from_with_param">%1$s-tól</string>
     <string name="regular_price">Rendes ár</string>
     <string name="complete_purchase">Vásárlás befejezése</string>
     <string name="shared_string_includes">Tartalmazza</string>
@@ -5830,7 +5829,25 @@
     <string name="rendering_avg_info_details">FPS (utolsó 1000 képkocka): %1$s
 \nCPU (csempék): %2$s
 \nCPU (üresjárat): %3$s
-\nCPU (CPU-ra várás): %4$s</string>
+\nCPU (GPU-ra várás): %4$s</string>
     <string name="resting_position">Állóhelyzet</string>
     <string name="resting_navigation_position">Állóhelyzeti és navigálási pozíció</string>
+    <string name="auto_25_chars_route_tshr">Forduljon élesen jobbra</string>
+    <string name="auto_25_chars_route_kl">Tartson balra</string>
+    <string name="auto_25_chars_route_tl">Forduljon balra</string>
+    <string name="auto_25_chars_route_kr">Tartson jobbra</string>
+    <string name="auto_25_chars_route_tr">Forduljon jobbra</string>
+    <string name="auto_25_chars_route_tshl">Forduljon élesen balra</string>
+    <string name="auto_25_chars_route_tsll">Forduljon enyhén balra</string>
+    <string name="auto_25_chars_route_tslr">Forduljon enyhén jobbra</string>
+    <string name="auto_25_chars_route_tu">Forduljon meg</string>
+    <string name="driving_region_india">India</string>
+    <string name="driving_region_uk">Angol és hasonló</string>
+    <string name="hugerock_promo_description">Ingyenes hozzáférés %1$s hónapig különböző funkciókhoz, beleértve a korlátlan térképletöltést, 3D domborzatot stb.</string>
+    <string name="hugerock_promo">Hugerock promóció %1$s hónapig</string>
+    <string name="detailed_track_guidance_description">Az OsmAnd a nyomvonalát a közeli utakhoz igazítja a jobb, részletes navigáció érdekében.</string>
+    <string name="quick_action_routes_summary">Egy kapcsoló %1$s mutatásához vagy rejtéséhez a térképen.</string>
+    <string name="shared_string_automatically">Automatikusan</string>
+    <string name="ask_every_time">Kérdezzen rá mindig</string>
+    <string name="detailed_track_guidance">Részletes útmutatás</string>
 </resources>

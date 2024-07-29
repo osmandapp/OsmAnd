@@ -105,6 +105,11 @@ public class RouteLineColorController extends ColoringStyleCardController
 					int tag = night ? PALETTE_MODE_ID_NIGHT : PALETTE_MODE_ID_DAY;
 					return new PaletteMode(title, tag);
 				}
+
+				@Override
+				public void onAllColorsScreenClosed() {
+					notifyAllColorsScreenClosed();
+				}
 			};
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
@@ -177,7 +182,12 @@ public class RouteLineColorController extends ColoringStyleCardController
 		GradientColorsCollection gradientCollection = new GradientColorsCollection(app, colorizationType);
 
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, null);
+			gradientPaletteController = new GradientColorsPaletteController(app, null) {
+				@Override
+				public void onAllColorsScreenClosed() {
+					notifyAllColorsScreenClosed();
+				}
+			};
 		}
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		gradientPaletteController.updateContent(gradientCollection, routeLinePreview.getGradientPalette());
@@ -255,6 +265,12 @@ public class RouteLineColorController extends ColoringStyleCardController
 		return layer.getRouteLineColor(isNightMap());
 	}
 
+	private void notifyAllColorsScreenClosed() {
+		if (getExternalListener() instanceof IRouteLineColorControllerListener listener) {
+			listener.updateStatusBar();
+		}
+	}
+
 	@NonNull
 	public static RouteLineColorController getInstance(@NonNull OsmandApplication app,
 	                                                   @NonNull PreviewRouteLineInfo routeLinePreview,
@@ -270,5 +286,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 		return controller;
 	}
 
-	public interface IRouteLineColorControllerListener extends IColorCardControllerListener, OnPaletteModeSelectedListener {}
+	public interface IRouteLineColorControllerListener
+			extends IColorCardControllerListener, OnPaletteModeSelectedListener {
+		void updateStatusBar();
+	}
 }

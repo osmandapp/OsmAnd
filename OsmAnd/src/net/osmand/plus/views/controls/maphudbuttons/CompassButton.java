@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +54,11 @@ public class CompassButton extends MapButton {
 		setupAccessibilityActions();
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	private void setupTouchListener() {
 		view.setOnTouchListener(new View.OnTouchListener() {
 
-			private final GestureDetector gestureDetector = new GestureDetector(app, new GestureDetector.SimpleOnGestureListener() {
+			private final GestureDetector gestureDetector = new GestureDetector(view.getContext(), new SimpleOnGestureListener() {
 				@Override
 				public boolean onDoubleTap(@NonNull MotionEvent e) {
 					app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
@@ -75,7 +77,6 @@ public class CompassButton extends MapButton {
 				}
 			});
 
-			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				return gestureDetector.onTouchEvent(event);

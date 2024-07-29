@@ -20,10 +20,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
@@ -31,14 +31,13 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = DifficultyClassificationFragment.class.getSimpleName();
 
-	private CommonPreference<Boolean> alpineHikingPref;
-	private CommonPreference<String> alpineHikingScaleSchemePref;
-
+	private RouteLayersHelper routeLayersHelper;
 	private final List<View> itemsViews = new ArrayList<>();
 	private ImageView headerIcon;
 	private TextView headerDescription;
@@ -52,8 +51,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		alpineHikingPref = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
-		alpineHikingScaleSchemePref = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
+		routeLayersHelper = app.getRouteLayersHelper();
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		View view = themedInflater.inflate(R.layout.fragment_alpine_difficult_classification, container, false);
 
 		setupHeader(view);
-		updateScreenMode(view, alpineHikingPref.get());
+		updateScreenMode(view, routeLayersHelper.isAlpineHikingRoutesEnabled());
 		setupClassifications(view);
 		updateClassificationPreferences();
 
@@ -83,10 +81,9 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		compoundButton.setFocusable(false);
 
 		container.setOnClickListener(v -> {
-			boolean enabled = !alpineHikingPref.get();
-			alpineHikingPref.set(enabled);
+			routeLayersHelper.toggleAlpineHikingRoutes();
 			updateHeader();
-			updateScreenMode(view, enabled);
+			updateScreenMode(view, routeLayersHelper.isAlpineHikingRoutesEnabled());
 			refreshMap();
 		});
 
@@ -96,18 +93,19 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateHeader() {
+		boolean enabled = routeLayersHelper.isAlpineHikingRoutesEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
-		headerIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, alpineHikingPref.get() ? selectedColor : disabledColor));
+		headerIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
 
 		headerDescription.setText(getDifficultyClassificationDescription(app));
-		AndroidUiHelper.updateVisibility(headerDescription, alpineHikingPref.get());
+		AndroidUiHelper.updateVisibility(headerDescription, enabled);
 
-		compoundButton.setChecked(alpineHikingPref.get());
+		compoundButton.setChecked(enabled);
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, compoundButton);
 	}
 
-	@Nullable
+	@NonNull
 	public static String getDifficultyClassificationDescription(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (!settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr()).get()) {
@@ -160,7 +158,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 
 		View button = view.findViewById(R.id.button);
 		button.setOnClickListener(v -> {
-			alpineHikingScaleSchemePref.set(value);
+			routeLayersHelper.updateAlpineHikingScaleScheme(value);
 			updateClassificationPreferences();
 			updateHeader();
 			refreshMap();
@@ -172,10 +170,10 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateClassificationPreferences() {
-		String selectedValue = alpineHikingScaleSchemePref.get();
+		String selectedValue = routeLayersHelper.getSelectedAlpineHikingScaleScheme();
 		for (View itemView : itemsViews) {
 			String itemValue = (String) itemView.getTag();
-			boolean selected = selectedValue.equals(itemValue);
+			boolean selected = Objects.equals(selectedValue, itemValue);
 			CompoundButton button = itemView.findViewById(R.id.compound_button);
 			button.setChecked(selected);
 		}

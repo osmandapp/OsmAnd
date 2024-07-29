@@ -214,7 +214,6 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode);
 	}
 

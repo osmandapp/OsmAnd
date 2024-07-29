@@ -95,7 +95,7 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	}
 
 	private void initPaletteController() {
-		paletteController = new IconsPaletteController<String>(app) {
+		paletteController = new IconsPaletteController<>(app) {
 			@NonNull
 			@Override
 			public IconsPaletteElements<String> getPaletteElements(@NonNull Context context, boolean nightMode) {
@@ -120,16 +120,6 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 			@Override
 			public boolean isAccentColorCanBeChanged() {
 				return true;
-			}
-
-			@Override
-			public int getHorizontalIconsSpace() {
-				return 0;
-			}
-
-			@Override
-			public int getRecycleViewHorizontalPadding() {
-				return 0;
 			}
 		};
 		paletteController.setPaletteListener(icon -> centralController.onIconSelectedFromPalette(icon, null));
