@@ -155,9 +155,9 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 
 	@NonNull
 	protected Map<Integer, GeometryWayStyle<?>> createGradient3DStyles(@NonNull List<RouteColorizationPoint> points) {
-		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-		updateTrack3DStyle(getTrack3DStyle());
 		Track3DStyle track3DStyle = getTrack3DStyle();
+		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+		updateTrack3DStyle(track3DStyle);
 		for (int i = 0; i < points.size() - 1; i++) {
 			RouteColorizationPoint currentPoint = points.get(i);
 			RouteColorizationPoint nextPoint = points.get(i + 1);

@@ -312,6 +312,14 @@ public class OsmandApplication extends MultiDexApplication {
 		return appInForeground || androidAutoInForeground;
 	}
 
+	public boolean isAppInForegroundOnRootDevice() {
+		return appInForeground;
+	}
+
+	public boolean isAppInForegroundOnAndroidAuto() {
+		return androidAutoInForeground;
+	}
+
 	private void createInUiThread() {
 		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
 		new AsyncTask<View, Void, Void>() {
