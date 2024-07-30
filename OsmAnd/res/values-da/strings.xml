@@ -1001,7 +1001,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og tilsvarende</string>
-    <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
     <string name="driving_region_descr">Vælg kørselsregion: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
@@ -1323,7 +1322,7 @@
     <string name="dash_download_msg">%1$s kort er hentet</string>
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
-    <string name="voices">Talevejledning</string>
+    <string name="voices">Stemmemeddelelser</string>
     <string name="rendering_attr_roadStyle_name">Vejformat</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -5775,7 +5774,7 @@
     <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_data_sources_prompt">OsmAnd leverer vejrdata fra to kilder:</string>
-    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemlange vejrprognoser</string>
+    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemfristede vejrprognoser</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Datakilde</string>
     <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
@@ -5791,15 +5790,15 @@
     <string name="quick_action_photo_note">Fotonote</string>
     <string name="quick_action_track_waypoint">Sporrutepunkt</string>
     <string name="quick_action_parking_place">Parkeringssted</string>
-    <string name="quick_action_verb_show_hide">Vis / Skjul</string>
-    <string name="quick_action_verb_pause_resume">Pause / Genoptag</string>
+    <string name="quick_action_verb_show_hide">Vis / skjul</string>
+    <string name="quick_action_verb_pause_resume">Pause / genoptag</string>
     <string name="weather_screen">Vejrskærm</string>
     <string name="quick_action_map_underlay">Underlejring</string>
     <string name="quick_action_map_overlay">Overlejring</string>
     <string name="quick_action_first_intermediate">Første mellemliggende</string>
     <string name="quick_action_video_note">Videonote</string>
     <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
-    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_verb_start_stop">Start / stop</string>
     <string name="quick_action_previous_app_profile">App-profil til forrige</string>
     <string name="quick_action_next_app_profile">App profile to næste</string>
     <string name="app_profile">App-profil</string>
@@ -5836,4 +5835,26 @@
     <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
     <string name="location_radius">Placeringsradius</string>
     <string name="resting_position">Hvileposition</string>
+    <string name="auto_25_chars_route_kl">Hold til venstre</string>
+    <string name="auto_25_chars_route_kr">Hold til højre</string>
+    <string name="auto_25_chars_route_tr">Drej til højre</string>
+    <string name="auto_25_chars_route_tshr">Drej skarpt til højre</string>
+    <string name="auto_25_chars_route_tslr">Drej let til højre</string>
+    <string name="auto_25_chars_route_tl">Drej til venstre</string>
+    <string name="auto_25_chars_route_tshl">Drej skarpt til venstre</string>
+    <string name="auto_25_chars_route_tsll">Drej let til venstre</string>
+    <string name="auto_25_chars_route_tu">Lav U-vending</string>
+    <string name="rendering_avg_info_details">BPS for sidste 1k billeder: %1$s
+\nCPU (fliser): %2$s
+\nCPU (inaktiv tid): %3$s
+\nCPU (venter på GPU): %4$s</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">Storbritannien og lignende</string>
+    <string name="hugerock_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief osv. i %1$s måned</string>
+    <string name="hugerock_promo">Hugerock-kampagne i %1$s måneder</string>
+    <string name="ask_every_time">Spørg hver gang</string>
+    <string name="detailed_track_guidance">Detaljeret sporvejledning</string>
+    <string name="detailed_track_guidance_description">OsmAnd vil matche dit spor med nærliggende veje for at forbedre sving-for-sving-vejledningen.</string>
+    <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
+    <string name="shared_string_automatically">Automatisk</string>
 </resources>

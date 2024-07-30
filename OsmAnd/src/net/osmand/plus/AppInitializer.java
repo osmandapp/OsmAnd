@@ -38,6 +38,7 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
@@ -134,6 +135,7 @@ public class AppInitializer implements IProgress {
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
+	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
 
@@ -161,6 +163,10 @@ public class AppInitializer implements IProgress {
 
 	public boolean isAppInitializing() {
 		return appInitializing;
+	}
+
+	public boolean isRoutingConfigInitialized() {
+		return routingConfigInitialized;
 	}
 
 	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
@@ -347,6 +353,7 @@ public class AppInitializer implements IProgress {
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 		app.smartFolderHelper = startupInit(new SmartFolderHelper(app), SmartFolderHelper.class);
+		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 
 		initOpeningHoursParser();
@@ -406,7 +413,10 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	private void getLazyRoutingConfig() {
-		loadRoutingFiles(app, () -> notifyEvent(ROUTING_CONFIG_INITIALIZED));
+		loadRoutingFiles(app, () -> {
+			routingConfigInitialized = true;
+			notifyEvent(ROUTING_CONFIG_INITIALIZED);
+		});
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {

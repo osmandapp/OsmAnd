@@ -996,7 +996,6 @@
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asia, America Latina e simili</string>
-    <string name="driving_region_uk">UK, India e simili</string>
     <string name="local_index_tile_data_zooms">Livelli zoom scaricati: %1$s</string>
     <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
     <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
@@ -5524,7 +5523,7 @@
     <string name="key_event_action_emit_navigation_hint">Dai un suggerimento di navigazione</string>
     <string name="download_to_device">Scarica sul dispositivo</string>
     <string name="tripltek_promo">Promozione Tripltek per %1$s mesi</string>
-    <string name="tripltek_promo_description">Accesso libero a funzionalità quali scaricamento illimitato di mappe, 3D relief ecc. per %1$s mensili</string>
+    <string name="tripltek_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
     <string name="key_event_action_open_search_view">Apri la ricerca</string>
     <string name="remove_widget_first">Per favore prima rimuovi il widget</string>
     <string name="key_event_action_open_navigation_view">Apri la schermata di navigazione</string>
@@ -5759,7 +5758,7 @@
     <string name="remove_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà rimossa.</string>
     <string name="weather_data_sources_prompt">OsmAnd fornisce dati meteorologici da due fonti:</string>
     <string name="data_source">Fonte dati</string>
-    <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
+    <string name="weather_source_ecmwf_description">Centro europeo per le previsioni meteorologiche a medio termine (ECMWF)</string>
     <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
@@ -5816,4 +5815,28 @@
     <string name="navigation_position_icon">Icona della posizione di navigazione</string>
     <string name="resting_position_icon_summary">Icona visualizzata quando non ti stai muovendo.</string>
     <string name="resting_position_icon">Icona della posizione di riposo</string>
+    <string name="auto_25_chars_route_kr">Tieni la destra</string>
+    <string name="auto_25_chars_route_tslr">Gira leggermente a destra</string>
+    <string name="auto_25_chars_route_tl">Gira a sinistra</string>
+    <string name="auto_25_chars_route_tshl">Gira tutto a sinistra</string>
+    <string name="auto_25_chars_route_tu">Fai una inversione a U</string>
+    <string name="location_radius_description">Mostra l\'area circolare che rappresenta la precisione della tua posizione attuale</string>
+    <string name="auto_25_chars_route_tshr">Gira tutto a destra</string>
+    <string name="auto_25_chars_route_kl">Tieni la sinistra</string>
+    <string name="auto_25_chars_route_tr">Gira a destra</string>
+    <string name="auto_25_chars_route_tsll">Gira leggermente a sinistra</string>
+    <string name="driving_region_india">India</string>
+    <string name="hugerock_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
+    <string name="driving_region_uk">UK e simili</string>
+    <string name="hugerock_promo">Promozione prodotti Hugerock per %1$s mesi</string>
+    <string name="shared_string_automatically">Automaticamente</string>
+    <string name="ask_every_time">Chiedi ogni volta</string>
+    <string name="detailed_track_guidance">Guida dettagliata della traccia</string>
+    <string name="detailed_track_guidance_description">OsmAnd abbinerà il tuo percorso alle strade vicine per una guida dettagliata passo dopo passo.</string>
+    <string name="quick_action_routes_summary">Un pulsante per mostrare o nascondere %1$s sulla mappa.</string>
+    <string name="resting_position">Posizione di riposo</string>
+    <string name="navigation_position">Posizione di navigazione</string>
+    <string name="resting_navigation_position">Posizione di riposo e navigazione</string>
+    <string name="view_angle_description">Visualizza l\'area a forma di cono che stai guardando attualmente</string>
+    <string name="view_angle">Vista ad angolo</string>
 </resources>

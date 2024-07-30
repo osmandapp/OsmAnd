@@ -304,7 +304,6 @@
     <string name="driving_region_us">Estaos Xuníos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
-    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="speak_speed_limit">Llende de velocidá</string>
     <string name="osb_author_or_password_not_specified">Please specify OSM user and password in \'Settings\'</string>
     <string name="route_descr_map_location">Mapa:</string>

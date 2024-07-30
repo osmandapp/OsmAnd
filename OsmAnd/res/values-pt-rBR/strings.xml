@@ -552,7 +552,6 @@
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
-    <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_descr">Configure o anúncio de nomes de ruas, avisos de trânsito (paradas forçadas, lombadas), avisos de radares de velocidade, limites de velocidade.</string>
     <string name="speak_street_names">Nome das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
@@ -5819,4 +5818,22 @@
     <string name="navigation_position_icon">Ícone da posição de navegação</string>
     <string name="resting_position_icon_summary">Ícone exibido quando você não está se movendo.</string>
     <string name="navigation_position">Posição de navegação</string>
+    <string name="rendering_value_pale_name">Pálido</string>
+    <string name="auto_25_chars_route_tr">Vire à direita</string>
+    <string name="auto_25_chars_route_tslr">Vire ligeiramente à direita</string>
+    <string name="auto_25_chars_route_tl">Vire à esquerda</string>
+    <string name="auto_25_chars_route_tshl">Vire bruscamente à esquerda</string>
+    <string name="auto_25_chars_route_tsll">Vire ligeiramente à esquerda</string>
+    <string name="auto_25_chars_route_tu">Faça o retorno</string>
+    <string name="auto_25_chars_route_kr">Mantenha-se à direita</string>
+    <string name="auto_25_chars_route_tshr">Vire bruscamente à direita</string>
+    <string name="auto_25_chars_route_kl">Mantenha-se à esquerda</string>
+    <string name="driving_region_india">Índia</string>
+    <string name="driving_region_uk">Reino Unido, Índia e similares</string>
+    <string name="ask_every_time">Perguntar sempre</string>
+    <string name="detailed_track_guidance">Orientação detalhada na trilha</string>
+    <string name="detailed_track_guidance_description">O OsmAnd combinará sua trilha com as estradas próximas para uma orientação aprimorada curva a curva.</string>
+    <string name="quick_action_routes_summary">Uma alternância para mostrar ou ocultar %1$s no mapa.</string>
+    <string name="hugerock_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
+    <string name="shared_string_automatically">Automaticamente</string>
 </resources>

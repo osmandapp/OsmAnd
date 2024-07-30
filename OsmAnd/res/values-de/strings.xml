@@ -960,7 +960,7 @@
     <string name="srtm_paid_version_title">Topografie-Erweiterung</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung „Topografie“, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
-    <string name="download_srtm_maps">Höhenlinien</string>
+    <string name="download_srtm_maps">Konturlinie</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
     <string name="av_camera_pic_size_descr">Bildgröße der Kamera festlegen</string>
     <string name="av_def_action_video">Video aufzeichnen</string>
@@ -1104,7 +1104,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Lateinamerika und ähnliche</string>
-    <string name="driving_region_uk">GB, Indien und andere</string>
     <string name="driving_region_australia">Australien</string>
     <string name="driving_region">Verkehrsregion</string>
     <string name="about_version">Version:</string>
@@ -2199,14 +2198,14 @@
 \n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich
 \n • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen
 \n</string>
-    <string name="osmand_extended_description_part3">Karten 
-\n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an 
-\n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus 
-\n • zeigen an, wo Sie sind und worauf Sie sehen 
-\n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können 
-\n • speichern Ihre wichtigsten Orte als Favoriten 
-\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise 
-\n • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
+    <string name="osmand_extended_description_part3">Karten
+\n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an
+\n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus
+\n • zeigen an, wo Sie sind und worauf Sie sehen
+\n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können
+\n • speichern Ihre wichtigsten Orte als Favoriten
+\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise
+\n • stellen spezielle Online-Kacheln, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
 \n</string>
     <string name="osmand_extended_description_part4">Skisport
 \n Die OsmAnd-Erweiterung „Skikarte“ ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und anderer Einrichtungen.</string>
@@ -2300,12 +2299,12 @@
 \n • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes) 
 \nOsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung, Programmierung neuer Funktionen oder Kontakt mit anderen Benutzern an der App mitarbeiten. Der Projektfortschritt hängt auch von finanziellen Beiträgen für die Programmierung und das Testen neuer Funktionen ab.
 \n</string>
-    <string name="osmand_plus_extended_description_part3">Kartenansicht 
-\n • Positions- und Richtungsanzeige 
-\n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung 
-\n • Sicherung Ihrer wichtigsten Orte als Favoriten 
-\n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung 
-\n • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz 
+    <string name="osmand_plus_extended_description_part3">Kartenansicht
+\n • Positions- und Richtungsanzeige
+\n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung
+\n • Sicherung Ihrer wichtigsten Orte als Favoriten
+\n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung
+\n • Anzeige spezieller Online-Kacheln, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
 \n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise
 \n</string>
     <string name="quick_action_auto_zoom">Automatische Vergrößerung</string>
@@ -4933,9 +4932,9 @@
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
     <string name="temperature_layer">Temperaturebene</string>
-    <string name="pressure_layer">Luftdruckebene</string>
+    <string name="pressure_layer">Druckebene</string>
     <string name="wind_layer">Windebene</string>
-    <string name="cloud_layer">Bewölkungsebene</string>
+    <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
     <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
@@ -5521,7 +5520,7 @@
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
-    <string name="key_event_category_map_interactions">Karteninteraktionen</string>
+    <string name="key_event_category_map_interactions">Karten-Interaktionen</string>
     <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ-Datenraster öffnen</string>
     <string name="key_event_category_actions">Aktionen</string>
     <string name="change_button">Schaltfläche ändern</string>
@@ -5685,7 +5684,7 @@
 \n
 \n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen
 \n
-\n• Track-Statistiken, Sortierung und Suche behoben
+\n• Track-Statistiken, Sortierung und Suche korrigiert
 \n
 \n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht
 \n
@@ -5735,7 +5734,7 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers_descr">Alle Kartenebenen oberhalb der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
-    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um das Relief zu visualisieren.</string>
+    <string name="height_legend_description">Höhenfarbkarten werden verwendet, um Relief darzustellen.</string>
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
@@ -5783,10 +5782,10 @@
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
-    <string name="quick_action_first_intermediate">Erste Zwischenstufe</string>
+    <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
     <string name="quick_action_directions_from">Startpunkt</string>
     <string name="quick_action_location_by_gpx">Standort nach GPX</string>
-    <string name="quick_action_destination">Ziel</string>
+    <string name="quick_action_destination">Zielort</string>
     <string name="quick_action_to_my_location">Zu meinem Standort</string>
     <string name="quick_action_move_map_left">Karte nach links</string>
     <string name="quick_action_next_app_profile">App-Profil zum nächsten</string>
@@ -5805,13 +5804,13 @@
     <string name="quick_action_photo_note">Fotonotiz</string>
     <string name="quick_action_parking_place">Parkplatz</string>
     <string name="quick_action_verb_show_hide">Einblenden / Ausblenden</string>
-    <string name="quick_action_verb_pause_resume">Pause / Fortsetzen</string>
+    <string name="quick_action_verb_pause_resume">Einschalten / Ausschalten</string>
     <string name="quick_action_verb_start_stop">Start / Stopp</string>
     <string name="weather_screen">Wetterbildschirm</string>
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>
     <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
     <string name="shared_string_set">Einstellen</string>
-    <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
+    <string name="quick_action_track_waypoint">Wegpunkt</string>
     <string name="energy_avg_info_description">Akkustand pro Minute: %1$s
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
@@ -5828,15 +5827,33 @@
     <string name="navigation_position_icon">Symbol für die Navigationsposition</string>
     <string name="resting_position_icon_summary">Das Symbol wird angezeigt, wenn Sie sich nicht bewegen.</string>
     <string name="resting_position_icon">Symbol für die Ruheposition</string>
-    <string name="view_angle_description">Zeigt den kegelförmigen Bereich an, in dem du dich gerade befindest</string>
+    <string name="view_angle_description">Zeigt den kegelförmigen Bereich an, in dem Sie sich gerade befinden</string>
     <string name="view_angle">Blickwinkel</string>
-    <string name="location_radius_description">Zeigt den kreisförmigen Bereich an, der die Genauigkeit deines aktuellen Standorts darstellt</string>
+    <string name="location_radius_description">Zeigt den kreisförmigen Bereich an, der die Genauigkeit Ihres aktuellen Standorts darstellt</string>
     <string name="location_radius">Standortradius</string>
     <string name="rendering_avg_info_details">FPS der letzten 1.000 Frames: %1$s
-\nCPU (Tiles): %2$s
+\nCPU (Kacheln): %2$s
 \nCPU (Leerlaufzeit): %3$s
-\nCPU (wartet auf CPU): %4$s</string>
+\nCPU (wartet auf GPU): %4$s</string>
     <string name="resting_position">Ruheposition</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Ruhe- und Navigationsposition</string>
+    <string name="auto_25_chars_route_kl">Links halten</string>
+    <string name="auto_25_chars_route_kr">Rechts halten</string>
+    <string name="auto_25_chars_route_tr">Rechts abbiegen</string>
+    <string name="auto_25_chars_route_tshr">Scharf rechts abbiegen</string>
+    <string name="auto_25_chars_route_tslr">Leicht rechts abbiegen</string>
+    <string name="auto_25_chars_route_tl">Links abbiegen</string>
+    <string name="auto_25_chars_route_tshl">Scharf links abbiegen</string>
+    <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
+    <string name="auto_25_chars_route_tu">Bitte wenden</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">UK und ähnlich</string>
+    <string name="hugerock_promo_description">Kostenloser Zugang zu Funktionen wie unbegrenzten Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
+    <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
+    <string name="shared_string_automatically">Automatisch</string>
+    <string name="ask_every_time">Jedes Mal fragen</string>
+    <string name="detailed_track_guidance">Detaillierte Streckenführung</string>
+    <string name="detailed_track_guidance_description">OsmAnd wird deine Strecke an nahegelegene Straßen anpassen, um eine verbesserte Abbiegeführung zu bieten.</string>
+    <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
 </resources>

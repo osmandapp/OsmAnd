@@ -1,21 +1,8 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_PT_TYPES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_AVOID_ROADS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_CUSTOMIZE_ROUTE_LINE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_FOLLOW_TRACK_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_INTERRUPT_MUSIC_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_GROUP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_LOCAL_ROUTING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OTHER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_CALCULATE_ALTITUDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_SIMULATION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SHOW_ALONG_THE_ROUTE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_SOUND_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_TIME_CONDITIONAL_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_VOICE_GUIDANCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.AVOID_ROUTING_PARAMETER_PREFIX;
+import static net.osmand.router.GeneralRouter.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,8 +21,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -64,18 +53,11 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class RoutingOptionsHelper {
@@ -225,7 +207,7 @@ public class RoutingOptionsHelper {
 		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		// if short way that it should set valut to fast mode opposite of current
-		if (rp.routingParameter != null && rp.routingParameter.getId().equals(GeneralRouter.USE_SHORTEST_WAY)) {
+		if (rp.routingParameter != null && rp.routingParameter.getId().equals(USE_SHORTEST_WAY)) {
 			settings.FAST_ROUTE_MODE.setModeValue(routingHelper.getAppMode(), !isChecked);
 		}
 		rp.setSelected(settings, isChecked);
@@ -436,16 +418,16 @@ public class RoutingOptionsHelper {
 		}
 
 		LocalRoutingParameter rp;
-		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
-		GeneralRouter.RoutingParameter routingParameter = parameters.get(parameterId);
+		Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
+		RoutingParameter routingParameter = parameters.get(parameterId);
 
 		if (routingParameter != null) {
 			rp = new LocalRoutingParameter(am);
 			rp.routingParameter = routingParameter;
 		} else {
 			LocalRoutingParameterGroup rpg = null;
-			for (GeneralRouter.RoutingParameter r : parameters.values()) {
-				if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN
+			for (RoutingParameter r : parameters.values()) {
+				if (r.getType() == RoutingParameterType.BOOLEAN
 						&& !Algorithms.isEmpty(r.getGroup()) && r.getGroup().equals(parameterId)) {
 					if (rpg == null) {
 						rpg = new LocalRoutingParameterGroup(am, r.getGroup());
@@ -515,9 +497,9 @@ public class RoutingOptionsHelper {
 		if (rm == null || isFollowNonApproximatedGpxTrack()) {
 			return list;
 		}
-		Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
-		for (GeneralRouter.RoutingParameter r : parameters.values()) {
-			if (r.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
+		Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(am, rm);
+		for (RoutingParameter r : parameters.values()) {
+			if (r.getType() == RoutingParameterType.BOOLEAN) {
 				if ("relief_smoothness_factor".equals(r.getGroup())) {
 					continue;
 				}
@@ -562,43 +544,22 @@ public class RoutingOptionsHelper {
 			return;
 		}
 		switch (rp.routingParameter.getId()) {
-			case GeneralRouter.USE_SHORTEST_WAY:
+			case USE_SHORTEST_WAY, AVOID_UNPAVED, AVOID_TOLL, AVOID_FERRIES -> {
 				rp.activeIconId = R.drawable.ic_action_fuel;
 				rp.disabledIconId = R.drawable.ic_action_fuel;
-				break;
-			case GeneralRouter.USE_HEIGHT_OBSTACLES:
+			}
+			case USE_HEIGHT_OBSTACLES -> {
 				rp.activeIconId = R.drawable.ic_action_altitude_average;
 				rp.disabledIconId = R.drawable.ic_action_altitude_average;
-				break;
-			case GeneralRouter.AVOID_FERRIES:
-				rp.activeIconId = R.drawable.ic_action_fuel;
-				rp.disabledIconId = R.drawable.ic_action_fuel;
-				break;
-			case GeneralRouter.AVOID_TOLL:
-				rp.activeIconId = R.drawable.ic_action_fuel;
-				rp.disabledIconId = R.drawable.ic_action_fuel;
-				break;
-			case GeneralRouter.AVOID_MOTORWAY:
+			}
+			case AVOID_MOTORWAY, ALLOW_MOTORWAYS, PREFER_MOTORWAYS -> {
 				rp.activeIconId = R.drawable.ic_action_motorways;
 				rp.disabledIconId = R.drawable.ic_action_avoid_motorways;
-				break;
-			case GeneralRouter.AVOID_UNPAVED:
-				rp.activeIconId = R.drawable.ic_action_fuel;
-				rp.disabledIconId = R.drawable.ic_action_fuel;
-				break;
-			case GeneralRouter.PREFER_MOTORWAYS:
-				rp.activeIconId = R.drawable.ic_action_motorways;
-				rp.activeIconId = R.drawable.ic_action_avoid_motorways;
-				break;
-			case GeneralRouter.ALLOW_PRIVATE:
-			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
+			}
+			case ALLOW_PRIVATE, ALLOW_PRIVATE_FOR_TRUCK -> {
 				rp.activeIconId = R.drawable.ic_action_allow_private_access;
 				rp.disabledIconId = R.drawable.ic_action_forbid_private_access;
-				break;
-			case GeneralRouter.ALLOW_MOTORWAYS:
-				rp.activeIconId = R.drawable.ic_action_motorways;
-				rp.disabledIconId = R.drawable.ic_action_avoid_motorways;
-				break;
+			}
 		}
 	}
 
@@ -611,25 +572,46 @@ public class RoutingOptionsHelper {
 		return null;
 	}
 
-	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
-		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-		GeneralRouter router = app.getRouter(applicationMode);
+	@NonNull
+	public List<RoutingParameter> getAvoidParameters(@NonNull ApplicationMode mode) {
+		List<RoutingParameter> list = new ArrayList<>();
+		GeneralRouter router = app.getRouter(mode);
 		if (router != null) {
-			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);
-			for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
-				String param = e.getKey();
-				GeneralRouter.RoutingParameter routingParameter = e.getValue();
-				if (param.startsWith("avoid_")) {
-					avoidParameters.add(routingParameter);
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
+			for (Map.Entry<String, RoutingParameter> entry : parameters.entrySet()) {
+				String key = entry.getKey();
+				if (key.startsWith(AVOID_ROUTING_PARAMETER_PREFIX)) {
+					list.add(entry.getValue());
 				}
 			}
 		}
-		return avoidParameters;
+		Collator collator = OsmAndCollator.primaryCollator();
+		list.sort((o1, o2) -> {
+			String name1 = AndroidUtils.getRoutingStringPropertyName(app, o1.getId(), o1.getName());
+			String name2 = AndroidUtils.getRoutingStringPropertyName(app, o2.getId(), o2.getName());
+
+			return collator.compare(name1, name2);
+		});
+		return list;
 	}
 
-	public GeneralRouter.RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
+	@NonNull
+	public Map<RoutingParameter, Boolean> getAvoidParametersWithStates(@NonNull OsmandApplication app) {
+		Map<RoutingParameter, Boolean> map = new LinkedHashMap<>();
+		ApplicationMode mode = app.getRoutingHelper().getAppMode();
+		List<RoutingParameter> parameters = getAvoidParameters(mode);
+
+		for (RoutingParameter parameter : parameters) {
+			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			map.put(parameter, preference.getModeValue(mode));
+		}
+
+		return map;
+	}
+
+	public RoutingParameter getRoutingPrefsForAppModeById(ApplicationMode applicationMode, String parameterId) {
 		GeneralRouter router = app.getRouter(applicationMode);
-		GeneralRouter.RoutingParameter parameter = null;
+		RoutingParameter parameter = null;
 
 		if (router != null) {
 			parameter = RoutingHelperUtils.getParameterForDerivedProfile(parameterId, applicationMode, router);
@@ -637,7 +619,7 @@ public class RoutingOptionsHelper {
 
 		return parameter;
 	}
-	
+
 	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightModeForMapControls();
 	}
@@ -729,7 +711,7 @@ public class RoutingOptionsHelper {
 			this.groupName = groupName;
 		}
 
-		public void addRoutingParameter(GeneralRouter.RoutingParameter routingParameter) {
+		public void addRoutingParameter(RoutingParameter routingParameter) {
 			LocalRoutingParameter p = new LocalRoutingParameter(getApplicationMode());
 			p.routingParameter = routingParameter;
 			routingParameters.add(p);
@@ -1110,12 +1092,12 @@ public class RoutingOptionsHelper {
 	public enum PermanentAppModeOptions {
 
 		CAR(MuteSoundRoutingParameter.KEY, AvoidRoadsRoutingParameter.KEY),
-		BICYCLE(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
-		PEDESTRIAN(MuteSoundRoutingParameter.KEY, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		BICYCLE(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, USE_HEIGHT_OBSTACLES),
+		PEDESTRIAN(MuteSoundRoutingParameter.KEY, USE_HEIGHT_OBSTACLES),
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
-		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, USE_HEIGHT_OBSTACLES),
 		HORSE(MuteSoundRoutingParameter.KEY),
 		OTHER(MuteSoundRoutingParameter.KEY);
 

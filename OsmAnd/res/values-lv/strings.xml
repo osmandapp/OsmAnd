@@ -849,7 +849,6 @@
     <string name="driving_region_us">ASV</string>
     <string name="driving_region_canada">Kanāda</string>
     <string name="driving_region_europe_asia">Eiropa, Āzija, Latīņamerika</string>
-    <string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
     <string name="speak_title">Paziņot…</string>
     <string name="speak_descr">Ziņot ielu nosaukumus, satiksmes brīdinājumus (stop zīmes, ātrumvaļņus), ātruma kameras un ierobežojumus.</string>
     <string name="speak_street_names">Ielu nosaukumi (TTS)</string>

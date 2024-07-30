@@ -1023,7 +1023,6 @@
     <string name="driving_region_descr">Sélectionnez la région de conduite : États-Unis, Europe, Royaume-Uni, Asie ou autre.</string>
     <string name="driving_region">Région de conduite</string>
     <string name="driving_region_europe_asia">Europe, Asie, Amérique latine et équivalent</string>
-    <string name="driving_region_uk">Royaume-Uni, Inde et équivalents</string>
     <string name="speak_title">Annoncer…</string>
     <string name="speak_cameras">Radars</string>
     <string name="speak_traffic_warnings">Alertes de circulation</string>
@@ -5815,4 +5814,33 @@
     <string name="shared_string_all_icons">Toutes les icônes</string>
     <string name="resting_position_icon_summary">Icône affichée lorsque vous ne bougez pas.</string>
     <string name="rendering_value_pale_name">Pâle</string>
+    <string name="auto_25_chars_route_tr">Tourner à droite</string>
+    <string name="auto_25_chars_route_tshr">Tourner en épingle à droite</string>
+    <string name="auto_25_chars_route_tl">Tourner à gauche</string>
+    <string name="resting_position">Position de repos</string>
+    <string name="navigation_position">Position de guidage</string>
+    <string name="resting_navigation_position">Positions de repos et de guidage</string>
+    <string name="view_angle_description">Affiche la zone de forme conique que vous regardez actuellement</string>
+    <string name="view_angle">Angle de vue</string>
+    <string name="location_radius_description">Affiche un rond représentant la précision de votre position actuelle</string>
+    <string name="location_radius">Rayon de position</string>
+    <string name="auto_25_chars_route_tu">Faire demi-tour</string>
+    <string name="auto_25_chars_route_kl">Rester à gauche</string>
+    <string name="auto_25_chars_route_kr">Rester à droite</string>
+    <string name="auto_25_chars_route_tslr">Tourner légèrement à droite</string>
+    <string name="auto_25_chars_route_tshl">Tourner en épingle à gauche</string>
+    <string name="auto_25_chars_route_tsll">Tourner légèrement à gauche</string>
+    <string name="rendering_avg_info_details">Images par sec. sur les 1 000 dernières images : %1$s
+\nProcesseur (tuiles) : %2$s
+\nProcesseur (durée d\'inactivité) : %3$s
+\nProcesseur (attente du GPU) : %4$s</string>
+    <string name="driving_region_india">Inde</string>
+    <string name="driving_region_uk">Royaume-Uni et équivalents</string>
+    <string name="hugerock_promo">Énorme promotion pour %1$s mois</string>
+    <string name="hugerock_promo_description">Accès gratuit à des fonctionnalités comme les téléchargements illimités de cartes, le relief 3D, etc. pendant %1$s mois</string>
+    <string name="shared_string_automatically">Automatiquement</string>
+    <string name="ask_every_time">Demander à chaque fois</string>
+    <string name="detailed_track_guidance">Navigation détaillée sur la trace</string>
+    <string name="detailed_track_guidance_description">Pour améliorer votre navigation, OsmAnd va déplacer la trace sur les routes.</string>
+    <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
 </resources>

@@ -304,7 +304,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		tvTitle.setText(getString(R.string.shared_string_sound));
 		tvDescription.setText(getString(R.string.voice_announcements));
-		icon.setImageDrawable(getContentIcon(active ?
+		icon.setImageDrawable(getPaintedContentIcon(active ?
 				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 		cb.setChecked(active);
 		cb.setFocusable(false);
@@ -322,7 +322,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
 				} else {
 					cb.setChecked(!active);
-					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 				}
 				updateMenu();
 			}
@@ -451,7 +451,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
-
 		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		ImageView icon = itemView.findViewById(R.id.icon);
@@ -664,7 +663,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				});
 			}
 			if (iconId != -1) {
-				builder.setIcon(getContentIcon(iconId));
+				builder.setIcon(getPaintedContentIcon(iconId));
 			}
 			item[0] = builder.create();
 			items.add(item[0]);
@@ -746,7 +745,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		bottomSheetItem.setChecked(selected);
 		int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 		if (iconId != -1) {
-			bottomSheetItem.setIcon(getContentIcon(iconId));
+			bottomSheetItem.setIcon(getPaintedContentIcon(iconId));
 		}
 		updateMenu();
 	}

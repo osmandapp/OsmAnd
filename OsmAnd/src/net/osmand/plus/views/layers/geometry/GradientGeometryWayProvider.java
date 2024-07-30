@@ -29,7 +29,7 @@ class GradientGeometryWayProvider implements GeometryWayProvider {
 	}
 
 	public int getColor(int index) {
-		return points.get(index).color;
+		return points.get(index).primaryColor;
 	}
 
 	@Override

@@ -4849,4 +4849,13 @@
     <string name="poi_us_maps_recreation_area_facility_parking">Área de estacionamento</string>
     <string name="poi_blm_yes">Gerenciado pelo Bureau Of Land Management</string>
     <string name="poi_property_management">Escritório de gerenciamento de propriedades</string>
+    <string name="poi_us_maps_recreation_area_activity_mountain_climbing">Escalada de montanha</string>
+    <string name="poi_us_maps_recreation_area_activity_ohv_riding_and_camping">Passeios e acampamentos de veículos motorizados</string>
+    <string name="poi_us_maps_recreation_area_activity_ohv_road_riding">Passeios em estradas de veículos motorizados</string>
+    <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Pista de pouso de aviões</string>
+    <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Estação de descarga sanitária</string>
+    <string name="poi_us_maps_recreation_area_activity_ohv_camping">Acampamento de veículos motorizados</string>
+    <string name="poi_us_maps_recreation_area_activity_ohv_open_area_riding">Passeio em área aberta para veículos motorizados</string>
+    <string name="poi_us_maps_recreation_area_activity_ohv_trail_riding">Passeios em trilhas de veículos motorizados</string>
+    <string name="poi_us_maps_recreation_area_activity_surfing">Surf</string>
 </resources>

@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.search;
 
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class WikivoyageSearchHelper {
 
 	public void search(String query, ResultMatcher<List<WikivoyageSearchResult>> rm) {
 		int req = requestNumber.incrementAndGet();
+		if (application.getTravelHelper() instanceof TravelObfHelper) {
+			((TravelObfHelper) application.getTravelHelper()).requestNumber = req;
+		}
 
 		singleThreadExecutor.submit(new Runnable() {
 
@@ -42,7 +46,7 @@ public class WikivoyageSearchHelper {
 					}
 
 					if (!isCancelled()) {
-						List<WikivoyageSearchResult> results = application.getTravelHelper().search(query);
+						List<WikivoyageSearchResult> results = application.getTravelHelper().search(query, request);
 						if (!isCancelled()) {
 							rm.publish(results);
 						}

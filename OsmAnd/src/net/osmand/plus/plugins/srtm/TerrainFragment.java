@@ -1,12 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.TXT_EXT;
-import static net.osmand.plus.plugins.srtm.TerrainMode.ALTITUDE_DEFAULT_KEY;
-import static net.osmand.plus.plugins.srtm.TerrainMode.COLOR_SLOPE_PREFIX;
-import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HEIGHT_PREFIX;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE_SCND_PREFIX;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
@@ -53,7 +47,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -167,7 +160,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		modifyButton.setOnClickListener(view -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
+				if (InAppPurchaseUtils.isColoringTypeAvailable(app)) {
 					activity.getDashboard().hideDashboard();
 					FragmentManager manager = activity.getSupportFragmentManager();
 					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
@@ -335,7 +328,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 							: R.color.icon_color_secondary_light));
 			stateTv.setText(R.string.shared_string_disabled);
 		}
-		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isOsmAndProAvailable(app));
+		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isColoringTypeAvailable(app));
 		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 
 		adjustGlobalVisibility();

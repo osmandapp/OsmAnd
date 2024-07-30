@@ -67,7 +67,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
-	private static final int MODEL_3D_MAX_SIZE_DP = 24;
+	private static final int MODEL_3D_MAX_SIZE_DP = 6;
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
@@ -876,6 +876,9 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getLocationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String locationIconName = appMode.getLocationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(locationIconName)) {
+			locationIconName = LocationIcon.fromName(locationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
 		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
@@ -885,6 +888,9 @@ public class PointLocationLayer extends OsmandMapLayer
 	private String getNavigationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
 		String navigationIconName = appMode.getNavigationIcon();
+		if (hasMapRenderer && LocationIcon.isModelRepresented(navigationIconName)) {
+			navigationIconName = LocationIcon.fromName(navigationIconName).getRepresented3DModelKey();
+		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
 		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;

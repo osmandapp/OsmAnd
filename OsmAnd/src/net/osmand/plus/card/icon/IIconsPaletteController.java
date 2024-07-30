@@ -18,8 +18,12 @@ public interface IIconsPaletteController<IconData> extends IDialogController {
 	void bindPalette(@NonNull IIconsPalette<IconData> palette);
 
 	void unbindPalette(@NonNull IIconsPalette<IconData> palette);
+	default void onAllIconsScreenClosed() { }
 
 	void setPaletteListener(@NonNull OnIconsPaletteListener<IconData> onIconsPaletteListener);
+
+	@ColorInt
+	int getIconsAccentColor(boolean nightMode);
 
 	@ColorInt
 	int getControlsAccentColor(boolean nightMode);

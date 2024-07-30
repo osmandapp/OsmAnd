@@ -1036,7 +1036,6 @@
     <string name="driving_region_us">США</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Європа, Азія, Латинська Америка та подібні</string>
-    <string name="driving_region_uk">Велика Британія, Індія та подібні</string>
     <string name="about_version">Версія:</string>
     <string name="shared_string_about">Про застосунок</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проєкту</string>
@@ -5844,4 +5843,13 @@
 \nПроцесор (час простою): %3$s
 \nCPU (очікує CPU): %4$s</string>
     <string name="resting_position">Положення спокою</string>
+    <string name="auto_25_chars_route_kl">Тримайся ліворуч</string>
+    <string name="auto_25_chars_route_kr">Тримайся праворуч</string>
+    <string name="auto_25_chars_route_tr">Поверни праворуч</string>
+    <string name="auto_25_chars_route_tshr">Різко поверни праворуч</string>
+    <string name="auto_25_chars_route_tslr">Поверни трохи праворуч</string>
+    <string name="auto_25_chars_route_tl">Поверни наліво</string>
+    <string name="auto_25_chars_route_tshl">Різко поверни ліворуч</string>
+    <string name="auto_25_chars_route_tsll">Поверни трохи ліворуч</string>
+    <string name="auto_25_chars_route_tu">Зроби розворот</string>
 </resources>

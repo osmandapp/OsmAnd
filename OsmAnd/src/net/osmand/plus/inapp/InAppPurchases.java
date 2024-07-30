@@ -12,15 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -266,7 +266,8 @@ public abstract class InAppPurchases {
 			HUAWEI(R.string.huawei_market),
 			IOS(R.string.apple_app_store),
 			PROMO(R.string.promo),
-			TRIPLTEK_PROMO(R.string.tripltek);
+			TRIPLTEK_PROMO(R.string.tripltek),
+			HUGEROCK_PROMO(R.string.hugerock);
 
 			private final int storeNameId;
 
@@ -650,7 +651,7 @@ public abstract class InAppPurchases {
 			Period subscriptionPeriod = subscription.getSubscriptionPeriod();
 			long originalNumberOfUnits = subscriptionPeriod != null ? subscriptionPeriod.getNumberOfUnits() : 1;
 			String originalUnitsStr = getTotalUnitsString(ctx, true).toLowerCase();
-			String originalPriceStr = subscription.getPrice(ctx);
+			String originalPriceStr = subscription.getOriginalPrice(ctx);
 			String priceStr = introductoryPrice;
 
 			String pricePeriod;

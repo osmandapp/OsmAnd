@@ -1004,7 +1004,6 @@
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲與類似地區</string>
-    <string name="driving_region_uk">英國、印度與類似地區</string>
     <string name="driving_region">駕駛區域</string>
     <string name="local_index_tile_data_zooms">縮放等級已下載：%1$s</string>
     <string name="local_index_tile_data_expire">有效時間（分鐘）：%1$s</string>
@@ -5823,6 +5822,24 @@
     <string name="rendering_avg_info_details">最近一千個影格的 FPS：%1$s
 \nCPU（圖磚）：%2$s
 \nCPU（閒置時間）：%3$s
-\nCPU（等待 CPU）%4$s</string>
+\nCPU（等待 GPU）%4$s</string>
     <string name="resting_position">暫停位置</string>
+    <string name="auto_25_chars_route_kr">靠右</string>
+    <string name="auto_25_chars_route_tr">右轉</string>
+    <string name="auto_25_chars_route_tshr">向右急轉</string>
+    <string name="auto_25_chars_route_tslr">稍向右轉</string>
+    <string name="auto_25_chars_route_tl">左轉</string>
+    <string name="auto_25_chars_route_tshl">向左急轉</string>
+    <string name="auto_25_chars_route_tsll">稍向左轉</string>
+    <string name="auto_25_chars_route_tu">迴轉</string>
+    <string name="auto_25_chars_route_kl">靠左</string>
+    <string name="driving_region_uk">英國及類似國家</string>
+    <string name="driving_region_india">印度</string>
+    <string name="ask_every_time">每次都詢問</string>
+    <string name="detailed_track_guidance">詳細的軌跡引導</string>
+    <string name="detailed_track_guidance_description">OsmAnd 會將您的軌跡與附近的道路貼齊，以提供強化的路線導航。</string>
+    <string name="quick_action_routes_summary">用來在地圖上顯示或隱藏 %1$s 的開關。</string>
+    <string name="hugerock_promo">%1$s 個月的 Hugerock 促銷</string>
+    <string name="hugerock_promo_description">%1$s 個月的免費使用功能，包含無限制的地圖下載、3D 地形等</string>
+    <string name="shared_string_automatically">自動</string>
 </resources>

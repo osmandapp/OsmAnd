@@ -27,7 +27,6 @@
     <string name="driving_region_us">Сједињене Америчке Државе</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Европа, Aзија, Јужна Америка и сличне</string>
-    <string name="driving_region_uk">Велика Британија, Индија и сличне</string>
     <string name="local_index_tile_data_minzoom">Најмање увеличање: %1$s</string>
     <string name="speak_title">Најави…</string>
     <string name="speak_descr">Подесите најаве назива улица, саобраћајних упозорења (лежећи, знаци заустављања), радара и ограничења брзине.</string>
@@ -90,7 +89,7 @@
     <string name="map_widget_audionotes">Звучне белешке</string>
     <string name="download_select_map_types">Остале карте</string>
     <string name="download_roads_only_item">Само путеви</string>
-    <string name="download_srtm_maps">Изохипсе</string>
+    <string name="download_srtm_maps">Контурне линије</string>
     <string name="rendering_attr_noAdminboundaries_name">Границе</string>
     <string name="map_widget_max_speed">Ограничење брзине</string>
     <string name="no_buildings_found">Нема пронађених предмета.</string>
@@ -559,8 +558,8 @@
     <string name="shared_string_collapse">Склопи</string>
     <string name="shared_string_show_on_map">Прикажи на карти</string>
     <string name="shared_string_map">Карта</string>
-    <string name="shared_string_favorite">Омиљено</string>
-    <string name="shared_string_favorites">Омиљено</string>
+    <string name="shared_string_favorite">Омиљен</string>
+    <string name="shared_string_favorites">Омиљени</string>
     <string name="shared_string_address">Адреса</string>
     <string name="shared_string_add">Додај</string>
     <string name="shared_string_add_to_favorites">Додај у Омиљено</string>
@@ -1019,7 +1018,7 @@
     <string name="routing_attr_short_way_name">Пут који штеди гориво</string>
     <string name="replace_favorite_confirmation">Замените омиљеног %1$s\?</string>
     <string name="rendering_attr_hideOverground_name">Надземне грађевине</string>
-    <string name="shared_string_change">Промени</string>
+    <string name="shared_string_change">Промена</string>
     <string name="get_started">Почнимо</string>
     <string name="route_stops_before">%1$s стајања пре</string>
     <string name="coords_search">Претрага координата</string>
@@ -2043,7 +2042,7 @@
     <string name="poi_context_menu_website">Прикажи веб сајтове у тачкама од интереса</string>
     <string name="poi_context_menu_call">Прикажи телефоне у тачкама од интереса</string>
     <string name="use_high_res_maps_descr">Не растежи (и не чини мутним) сличице карте на екранима са великом густином.</string>
-    <string name="voices">Гласовна навођења</string>
+    <string name="voices">Гласовна обавештења</string>
     <string name="fav_imported_sucessfully">Омиљене тачке су увезене</string>
     <string name="fav_saved_sucessfully">Омиљене тачке сачуване у {0}</string>
     <string name="no_fav_to_save">Нема Омиљених тачака за снимање</string>
@@ -4761,7 +4760,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Линије обриса налета ветрова</string>
     <string name="open_weather_action">Отвори временске прилике</string>
     <string name="pressure_layer">Слој притиска</string>
-    <string name="temperature_layer">Слој топлоте</string>
+    <string name="temperature_layer">Слој температуре</string>
     <string name="wind_layer">Слој ветра</string>
     <string name="shared_string_next_sunrise">Следећи излазак Сунца</string>
     <string name="shared_string_time_left">Преостало време</string>
@@ -5441,7 +5440,7 @@
     <string name="discard_changes_prompt">Одбаци промене?</string>
     <string name="shared_string_button">Дугме</string>
     <string name="shared_string_action">Акција</string>
-    <string name="key_event_category_map_interactions">Интеракције мапе</string>
+    <string name="key_event_category_map_interactions">Интеракције са мапом</string>
     <string name="avg_sensor_heartrate">Број откуцаја, просечно</string>
     <string name="max_sensor_cadence">Ритам бицикла, макс</string>
     <string name="max_sensor_bycicle_power">Снага бицикла, макс</string>
@@ -5774,7 +5773,7 @@
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
     <string name="quick_action_to_my_location">Ка Мојој локацији</string>
-    <string name="shared_string_set">Постави</string>
+    <string name="shared_string_set">Поставка</string>
     <string name="shared_string_simulate">Симулирај</string>
     <string name="quick_action_remove_next_destination">Следећа одредишна тачка</string>
     <string name="quick_action_map_style">Стил мапе</string>
@@ -5789,12 +5788,12 @@
     <string name="quick_action_new_route">Нова рута</string>
     <string name="quick_action_previous_app_profile">Додај профил претходном</string>
     <string name="quick_action_next_app_profile">Додај профил следећем</string>
-    <string name="app_profile">Додај профил</string>
+    <string name="app_profile">Апликациони профил</string>
     <string name="shared_string_create">Креирај</string>
-    <string name="shared_string_replace">Замени</string>
+    <string name="shared_string_replace">Замена</string>
     <string name="quick_action_display_position_in_center">Прикажи позицију увек у центру</string>
     <string name="quick_action_terrain">Теренски тип бојења</string>
-    <string name="quick_action_first_intermediate">Прво између</string>
+    <string name="quick_action_first_intermediate">Прво међупролазно</string>
     <string name="quick_action_audio_note">Звучна белешка</string>
     <string name="quick_action_video_note">Видео белешка</string>
     <string name="quick_action_photo_note">Сликовна белешка</string>
@@ -5831,5 +5830,23 @@
     <string name="rendering_avg_info_details">FPS према последњим 1k кадрова: %1$s
 \nCPU (плочице): %2$s
 \nCPU (време мировања): %3$s
-\nCPU (чекање CPU): %4$s</string>
+\nCPU (чекање GPU): %4$s</string>
+    <string name="auto_25_chars_route_kr">Настави десно</string>
+    <string name="auto_25_chars_route_tr">Скрени десно</string>
+    <string name="auto_25_chars_route_tshr">Скрени оштро десно</string>
+    <string name="auto_25_chars_route_tslr">Скрени мало десно</string>
+    <string name="auto_25_chars_route_tl">Скрени лево</string>
+    <string name="auto_25_chars_route_tu">Направи полукруг</string>
+    <string name="auto_25_chars_route_kl">Настави лево</string>
+    <string name="auto_25_chars_route_tshl">Скрени оштро лево</string>
+    <string name="auto_25_chars_route_tsll">Скрени мало лево</string>
+    <string name="hugerock_promo_description">Бесплатан приступ функцијама укључујући неограничено преузимање мапа, 3Д рељеф итд. за %1$s месец</string>
+    <string name="driving_region_india">Индија</string>
+    <string name="hugerock_promo">Хјуџрок Промоција за %1$s месеца</string>
+    <string name="driving_region_uk">ВБ и слично</string>
+    <string name="ask_every_time">Питај сваки пут</string>
+    <string name="detailed_track_guidance">Детаљан водич за стазу</string>
+    <string name="detailed_track_guidance_description">ОсмАнд ће ускладити вашу руту са оближњим путевима како би се боље оријентисао на сваком завоју.</string>
+    <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на мапи.</string>
+    <string name="shared_string_automatically">Аутоматски</string>
 </resources>

@@ -175,7 +175,6 @@
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
     <string name="driving_region_europe_asia">Eŭropo, Azio, Latin-Ameriko kaj similaj</string>
-    <string name="driving_region_uk">Britujo, Hindujo kaj similaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
     <string name="index_name_us">Nordameriko - Usono</string>
@@ -428,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turno-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -715,7 +714,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon turno-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -5818,5 +5817,34 @@
     <string name="resting_position_icon_summary">Bildsimbolo montrata kiam vi ne moviĝas.</string>
     <string name="shared_string_all_icons">Ĉiuj emblemoj</string>
     <string name="navigation_position_icon_summary">Bildsimbolo montrata kiam vi navigas aŭ moviĝas.</string>
-    <string name="resting_position_icon">Emblemo dum ne moviĝi</string>
+    <string name="resting_position_icon">Emblemo dum nemoviĝi</string>
+    <string name="navigation_position">Dum navigi</string>
+    <string name="resting_position">Dum nemoviĝi</string>
+    <string name="resting_navigation_position">Dum navigi kaj nemoviĝi</string>
+    <string name="view_angle_description">Vidigi konus-forman figuron reprezentantan la rigardatan direkton.</string>
+    <string name="view_angle">Rigardata angulo</string>
+    <string name="auto_25_chars_route_kr">Veturu je dekstre</string>
+    <string name="auto_25_chars_route_tr">Turniĝu dekstren</string>
+    <string name="auto_25_chars_route_tshr">Turniĝegu dekstren</string>
+    <string name="auto_25_chars_route_tslr">Turniĝetu dekstren</string>
+    <string name="auto_25_chars_route_tl">Turniĝu maldekstren</string>
+    <string name="auto_25_chars_route_tshl">Turniĝegu maldekstren</string>
+    <string name="auto_25_chars_route_tsll">Turniĝetu maldekstren</string>
+    <string name="auto_25_chars_route_tu">Turniĝu malantaŭen</string>
+    <string name="location_radius_description">Vidigi diskon reprezentantan precizon de determinita pozicio.</string>
+    <string name="location_radius">Radiuso de pozicio</string>
+    <string name="rendering_avg_info_details">Kadroj/sekundo dum 1k lastaj kadroj: %1$s
+\nĈefprocesoro (kaheloj): %2$s
+\nĈefprocesoro (senokupa): %3$s
+\nĈefprocesoro (atendas GPU): %4$s</string>
+    <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
+    <string name="driving_region_uk">Britujo kaj similaj</string>
+    <string name="shared_string_automatically">Aŭtomate</string>
+    <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu turno.</string>
+    <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
+    <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
+    <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="driving_region_india">Hindujo</string>
+    <string name="ask_every_time">Ĉiam demandi</string>
 </resources>

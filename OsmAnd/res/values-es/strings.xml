@@ -1041,7 +1041,6 @@
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
-    <string name="driving_region_uk">Reino Unido, India y similares</string>
     <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="edit_tilesource_minzoom">Zum mínimo</string>
@@ -5732,7 +5731,7 @@
     <string name="steps_per_minute_unit">PPM</string>
     <string name="disable_map_layers">Deshabilitar capas de mapas</string>
     <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
-    <string name="height_legend_description">Los mapas de color de altitud se utilizan para visualizar el relieve.</string>
+    <string name="height_legend_description">Los mapas de colores de altitud se utilizan para visualizar el relieve.</string>
     <string name="travel_topics">Temas de los viajes</string>
     <string name="play_weather_forecast">Reproducir pronóstico del tiempo</string>
     <string name="change_terrain_color_scheme">Cambiar esquema de color del terreno</string>
@@ -5767,7 +5766,7 @@
     <string name="remove_key_assignment_summary">Se eliminará la asignación de la clave para la acción seleccionada.</string>
     <string name="remove_key_assignment">Eliminar asignación de la clave</string>
     <string name="daynight_mode_app_theme_summary">La visualización del mapa se ajusta con el tema general de la aplicación: modo diurno para un tema claro y modo nocturno para un tema oscuro</string>
-    <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Medio Plazo</string>
+    <string name="weather_source_ecmwf_description">Centro Europeo de Previsiones Meteorológicas a Plazo Medio</string>
     <string name="weather_source_GFS_description">Sistema de pronóstico global de los centros nacionales de predicción ambiental</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
@@ -5778,10 +5777,10 @@
     <string name="quick_action_map_overlay">Superposición</string>
     <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
     <string name="app_profile">Perfil de la aplicación</string>
-    <string name="shared_string_replace">Remplazar</string>
+    <string name="shared_string_replace">Reemplazar</string>
     <string name="shared_string_simulate">Simular</string>
     <string name="quick_action_map_underlay">Capa base</string>
-    <string name="quick_action_first_intermediate">Primera parada</string>
+    <string name="quick_action_first_intermediate">Primer destino intermedio</string>
     <string name="quick_action_audio_note">Nota de voz</string>
     <string name="quick_action_video_note">Nota de vídeo</string>
     <string name="quick_action_photo_note">Nota de la foto</string>
@@ -5835,5 +5834,23 @@
     <string name="rendering_avg_info_details">FPS por últimos 1k fotogramas: %1$s
 \nCPU (celdas): %2$s
 \nCPU (tiempo de inactividad): %3$s
-\nCPU (CPU sin usar): %4$s</string>
+\nCPU (GPU sin usar): %4$s</string>
+    <string name="auto_25_chars_route_tsll">Gire ligeramente a la izquierda</string>
+    <string name="auto_25_chars_route_tu">De la vuelta</string>
+    <string name="auto_25_chars_route_tshr">Gire bruscamente a la derecha</string>
+    <string name="auto_25_chars_route_tl">Gire a la izquierda</string>
+    <string name="auto_25_chars_route_tshl">Gire bruscamente a la izquierda</string>
+    <string name="auto_25_chars_route_kl">Mantengase a la izquierda</string>
+    <string name="auto_25_chars_route_tr">Gire a la derecha</string>
+    <string name="auto_25_chars_route_tslr">Gire ligeramente a la derecha</string>
+    <string name="auto_25_chars_route_kr">Mantengase a la derecha</string>
+    <string name="driving_region_uk">Reino Unido y similares</string>
+    <string name="driving_region_india">India</string>
+    <string name="hugerock_promo_description">Acceso gratuito a funciones que incluyen descargas ilimitadas de mapas, relieves en 3D, etc. Durante %1$s mes(es)</string>
+    <string name="hugerock_promo">Promoción de Hugerock para %1$s meses</string>
+    <string name="ask_every_time">Preguntar siempre</string>
+    <string name="detailed_track_guidance">Guía detallada de la pista</string>
+    <string name="quick_action_routes_summary">Un interruptor para mostrar u ocultar %1$s en el mapa.</string>
+    <string name="detailed_track_guidance_description">OsmAnd adaptará tu ruta a las carreteras cercanas para ofrecerte una mejor guía paso a paso.</string>
+    <string name="shared_string_automatically">Automáticamente</string>
 </resources>

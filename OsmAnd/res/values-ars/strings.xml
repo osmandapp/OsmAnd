@@ -4217,7 +4217,6 @@
     <string name="quick_action_take_photo_note_descr">الضغط على زر الإجراء سيضيف ملاحظة بالصورة وسط مركز الشاشة.</string>
     <string name="filter_screen_title">فلتر</string>
     <string name="base_profile_descr_pedestrian">مشي, عصا المشي, جري</string>
-    <string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
     <string name="local_openstreetmap_act_title">تعديلات OSM</string>
     <string name="navpoint_search_desc">إحداثيات</string>
     <string name="rendering_attr_smoothness_impassable_name">غير سالك</string>

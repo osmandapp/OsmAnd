@@ -844,8 +844,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	private boolean isRecordingAutomatically() {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
 				&& lastRoutingApplicationMode == settings.getApplicationMode()
-				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get() &&
-				shouldAutomaticallyRecord);
+				&& shouldAutomaticallyRecord);
 	}
 
 	public float getDistance() {
