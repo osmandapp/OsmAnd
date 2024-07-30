@@ -73,7 +73,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(viewOnCLick -> {
 			applyChanges();
-			activity.onBackPressed();
+			dismiss();
 		});
 
 		setupToolBar(view);
@@ -81,7 +81,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		moveCompassButton(view);
 		moveMap3DButton(view);
 		setupBackgroundShadow(view);
-
+		setupBottomContainer(view.findViewById(R.id.bottom_container));
 		setupMainContent(view.findViewById(R.id.main_content));
 		updateApplyButton(false);
 
@@ -90,6 +90,8 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		return view;
 	}
+
+	protected void setupBottomContainer(@NonNull View bottomContainer) {}
 
 	@Nullable
 	protected abstract String getToolbarTitle();
@@ -150,12 +152,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		ImageView backButton = appbar.findViewById(R.id.back_button);
 		backButton.setImageDrawable(getContentIcon(R.drawable.ic_action_close));
-		backButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		});
+		backButton.setOnClickListener(v -> dismiss());
 
 		ImageButton resetButton = appbar.findViewById(R.id.reset_button);
 		resetButton.setImageDrawable(getIcon(R.drawable.ic_action_reset, ColorUtilities.getDefaultIconColorId(nightMode)));
@@ -208,6 +205,13 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = requireMapActivity();
 		activity.enableDrawer();
 		updateWidgetsVisibility(activity, View.VISIBLE);
+	}
+
+	protected void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.onBackPressed();
+		}
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {

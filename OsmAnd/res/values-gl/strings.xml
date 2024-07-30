@@ -278,7 +278,6 @@
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Asia, Lationoamérica e semellantes</string>
-    <string name="driving_region_uk">Reino Unido, India e semellantes</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura os avisos para nomes de rúas, avisos de tráfico (detencións forzosas, bandas sonoras), avisos de radar e límites de velocidade.</string>
     <string name="speak_street_names">Nomes das rúas (TTS)</string>
@@ -2039,18 +2038,9 @@
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
-    <string name="quick_action_add_marker">Engadir unha marcaxe do mapa</string>
-    <string name="quick_action_add_poi">Engadir un PDI</string>
-    <string name="quick_action_map_style">Mudar o estilo do mapa</string>
     <string name="quick_action_map_style_switch">Estilo do mapa mudado para \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nova nota de son</string>
-    <string name="quick_action_take_video_note">Nova nota de vídeo</string>
-    <string name="quick_action_take_photo_note">Nova nota da imaxe</string>
-    <string name="quick_action_add_osm_bug">Engadir unha nota do OSM</string>
-    <string name="quick_action_add_parking">Engadir un lugar de aparcamento</string>
     <string name="quick_action_new_action">Engadir unha acción</string>
     <string name="quick_action_edit_action">Engadir unha acción</string>
-    <string name="quick_action_add_favorite">Engadir ós Favorito</string>
     <string name="dialog_add_action_title">Engadir unha acción</string>
     <string name="quick_actions_delete">Eliminar a acción</string>
     <string name="quick_actions_delete_text">Tes a certeza de querer eliminar a acción \"%s\"\?</string>
@@ -2085,7 +2075,6 @@
     <string name="quick_action_map_style_action">Engadir un estilo do mapa</string>
     <string name="quick_action_empty_param_error">Rechear tódolos parámetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_source">Mudar a fonte do mapa</string>
     <string name="quick_action_map_source_title">Fontes de mapas</string>
     <string name="quick_action_map_source_action">Engadir unha fonte de mapas</string>
     <string name="quick_action_map_source_switch">A fonte do mapa foi mudada a \"%s\".</string>
@@ -2107,8 +2096,6 @@
     <string name="quick_action_auto_zoom_desc">Un botón para activar o desactivar o achegamento automático controlado por velocidade.</string>
     <string name="quick_action_auto_zoom_on">Activar o achegamento automático</string>
     <string name="quick_action_auto_zoom_off">Desactivar o achegamento automático</string>
-    <string name="quick_action_add_destination">Estabelecer destino</string>
-    <string name="quick_action_replace_destination">Substituír destino</string>
     <string name="quick_action_add_destination_desc">Un botón que engade o destino da ruta na posición central da pantalla, calquera destino estabelecido anteriormente convértese no derradeiro destino intermedio.</string>
     <string name="quick_action_replace_destination_desc">Un botón para facer na posición central da pantalla o novo destino de ruta, substituíndo o anterior destino (se existe).</string>
     <string name="quick_action_add_first_intermediate_desc">Un botón que engade o primeiro destino intermedio na posición central da pantalla.</string>
@@ -2530,7 +2517,6 @@
     <string name="hide_from_zoom_level">Agochar a partir do nivel de achegamento</string>
     <string name="srtm_menu_download_descr">Baixar o mapa de \'Curvas de nivel\' para empregalas nesta rexión.</string>
     <string name="show_from_zoom_level">Amosar dende o nivel de achegamento</string>
-    <string name="quick_action_add_first_intermediate">Engadir primeiro destino intermedio</string>
     <string name="no_underlay">Sen subxacencia</string>
     <string name="subscribe_email_desc">Subscríbete á nosa listaxe de correo electrónico para recibir descontos da aplicación e obter 3 descargas de mapas máis!</string>
     <string name="depth_contour_descr">Curvas do afundimento e marcaxes náuticas.</string>
@@ -2612,12 +2598,10 @@
     <string name="quick_favorites_name_preset">Nome predefinido</string>
     <string name="quick_action_add_gpx_descr">Un botón que engade un punto de pasaxe GPX no centro da pantalla.</string>
     <string name="quick_action_interim_dialog">Amosar un diálogo temporal</string>
-    <string name="quick_action_map_overlay">Mudar mapa sobreposto</string>
     <string name="quick_action_map_overlay_title">Mapas sobrepostos</string>
     <string name="quick_action_map_overlay_action">Engadir sobreposición</string>
     <string name="quick_action_map_overlay_switch">Sobreposición do mapa mudada a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">A capa inferior do mapa foi mudada a \"%s\".</string>
-    <string name="quick_action_map_underlay">Mudar mapa de embaixo (subxacente)</string>
     <string name="quick_action_map_underlay_title">Mapas de embaixo (subxacentes)</string>
     <string name="quick_action_map_underlay_action">Engadir embaixo (subxacencia)</string>
     <string name="mappilary_no_internet_desc">As imaxes do Mapillary só están dispoñíbeis en liña.</string>
@@ -3660,7 +3644,6 @@
     <string name="use_volume_buttons_as_zoom_descr">Controlar o nivel de achegamento (zoom) do mapa cos botóns de volume do dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Os botóns de volume mudan o achegamento</string>
     <string name="lenght_limit_description">Fornece a lonxitude do teu vehículo. Algunhas restricións de ruta poden ser aplicadas a vehículos longos.</string>
-    <string name="quick_action_remove_next_destination">Eliminar punto de destino máis preto</string>
     <string name="please_provide_point_name_error">Fornece un nome para o punto</string>
     <string name="quick_action_remove_next_destination_descr">Elimina o seguinte destino da ruta. Se é o destino final, a navegación será detida.</string>
     <string name="search_download_wikipedia_maps">Baixar mapas da Wikipedia</string>
@@ -3742,7 +3725,6 @@
     <string name="empty_state_my_tracks">Engadir ficheiros de pista</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de pista</string>
     <string name="context_menu_item_add_waypoint">Engadir punto de referencia da pista</string>
-    <string name="quick_action_add_gpx">Engadir punto de pasaxe da pista</string>
     <string name="map_widget_monitoring">Gravación da viaxe</string>
     <string name="marker_save_as_track">Gardar coma ficheiro de pista</string>
     <string name="follow_track">Seguir pista</string>

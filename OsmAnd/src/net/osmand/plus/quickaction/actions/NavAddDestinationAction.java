@@ -20,8 +20,8 @@ public class NavAddDestinationAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_ADD_DESTINATION_ACTION_ID,
 			"nav.destination.add", NavAddDestinationAction.class).
-			nameRes(R.string.quick_action_add_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			nameRes(R.string.quick_action_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable().
+			category(QuickActionType.NAVIGATION).nameActionRes(R.string.shared_string_set);
 
 	public NavAddDestinationAction() {
 		super(TYPE);

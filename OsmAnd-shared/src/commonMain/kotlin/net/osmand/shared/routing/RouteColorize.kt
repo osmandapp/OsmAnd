@@ -1,11 +1,9 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.ColorPalette
-import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.KMapAlgorithms
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
@@ -480,6 +478,7 @@ class RouteColorize {
 
 	class RouteColorizationPoint(var id: Int, var lat: Double, var lon: Double, var value: Double) {
 		var color = 0
+		var secondaryColor = 0
 	}
 
 	private data class Node(val lat: Double, val lon: Double, val id: Int)

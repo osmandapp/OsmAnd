@@ -166,13 +166,17 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 				background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_ALPHA));
 				background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_STROKE_ALPHA));
 				borderBackgroundView.setBackground(background);
-				updateItemView(button, item, textColor);
+				updateItemView(button, item, true, textColor);
 			} else {
 				LayerDrawable layerDrawable = new LayerDrawable(new GradientDrawable[]{background});
 				setupLayerInset(i, selectedItemIndex, radius, layerDrawable);
 				background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode));
 				borderBackgroundView.setBackground(layerDrawable);
-				updateItemView(button, item, itemColor);
+				updateItemView(button, item, false, itemColor);
+			}
+			String contentDescription = item.getContentDescription();
+			if (contentDescription != null) {
+				button.setContentDescription(contentDescription);
 			}
 			Drawable selectedDrawable = UiUtilities.getColoredSelectableDrawable(app, selectedBgColor, BACKGROUND_ALPHA);
 			borderBackgroundView.setForeground(selectedDrawable);
@@ -199,7 +203,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	protected abstract void initItemView(@NonNull ViewGroup view, @NonNull _Radio item);
 
 	protected abstract void updateItemView(@NonNull ViewGroup view, @NonNull _Radio item,
-	                                       @ColorInt int color);
+	                                       boolean selected, @ColorInt int color);
 
 	private boolean isLastItem(int index) {
 		return index == items.size() - 1;

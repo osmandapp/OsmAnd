@@ -6,12 +6,13 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.track.GradientScaleType;
+
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -20,6 +21,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.ColoringType;
 
 import java.util.ArrayList;
 import java.util.Collections;

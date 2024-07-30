@@ -536,8 +536,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		if (type == MapGestureType.TWO_POINTERS_ROTATION &&
-				settings.getCompassMode() == CompassMode.NORTH_IS_UP &&
-				settings.FIXED_NORTH_MAP.get()) {
+				settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
 			return false;
 		}
 		for (OsmandMapLayer layer : getLayers()) {
@@ -591,11 +590,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
 		int baseZoom = zoom.getBaseZoom();
 		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
-			int angle = 90 - (baseZoom - 2) * 5;
-			if (angle >= MIN_ALLOWED_ELEVATION_ANGLE && angle < DEFAULT_ELEVATION_ANGLE) {
-				animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
-			}
+			int angle = getAdjustedTiltAngle(baseZoom, false);
+			animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
 		}
+	}
+
+	public int getAdjustedTiltAngle(int baseZoom, boolean enforceZoomRange) {
+		if (enforceZoomRange) {
+			baseZoom = Math.max(MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT, Math.min(baseZoom, MAX_ZOOM_LIMIT));
+		}
+		int angle = 90 - (baseZoom - 2) * 5;
+		return (int) Math.max(MIN_ALLOWED_ELEVATION_ANGLE, Math.min(angle, DEFAULT_ELEVATION_ANGLE));
 	}
 
 	public void setIntZoom(int zoom) {
@@ -642,7 +647,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void resetRotation() {
+	public void resetRotation() {
 		setRotate(0, true);
 	}
 

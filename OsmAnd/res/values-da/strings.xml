@@ -1001,7 +1001,6 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og tilsvarende</string>
-    <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
     <string name="driving_region_descr">Vælg kørselsregion: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="local_index_tile_data_expire">Udløbstid (minutter): %1$s</string>
@@ -2073,21 +2072,12 @@
     <string name="configure_screen_quick_action">Genvej</string>
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
-    <string name="quick_action_add_marker">Tilføj kortmarkør</string>
-    <string name="quick_action_add_poi">Tilføj IP</string>
-    <string name="quick_action_map_style">Skift kortstil</string>
     <string name="quick_action_map_style_switch">Korttypografien er ændret til \"%s\".</string>
-    <string name="quick_action_take_audio_note">Ny lydnote</string>
-    <string name="quick_action_take_video_note">Ny videonote</string>
-    <string name="quick_action_take_photo_note">Ny fotonote</string>
-    <string name="quick_action_add_osm_bug">Tilføj OSM-note</string>
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
     <string name="quick_action_navigation_voice_off">Aktiver talevejledning</string>
     <string name="quick_action_navigation_voice_on">Deaktiver talevejledning</string>
-    <string name="quick_action_add_parking">Tilføj parkeringssted</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
     <string name="quick_action_edit_action">Rediger genvej</string>
-    <string name="quick_action_add_favorite">Tilføj Favorit</string>
     <string name="dialog_add_action_title">Tilføj genvej</string>
     <string name="quick_actions_delete">Slet genvej</string>
     <string name="quick_actions_delete_text">Slet genvejen \"%s\"\?</string>
@@ -2123,13 +2113,10 @@
     <string name="quick_action_map_style_action">Tilføj en kortstilart</string>
     <string name="quick_action_empty_param_error">Udfyld alle parametre</string>
     <string name="quick_action_map_styles">Kortstilarter</string>
-    <string name="quick_action_map_overlay">Skift kortoverlejring</string>
     <string name="quick_action_map_overlay_title">Kortoverlejringer</string>
     <string name="quick_action_map_overlay_action">Tilføj overlejring</string>
-    <string name="quick_action_map_underlay">Skift kortunderlejring</string>
     <string name="quick_action_map_underlay_title">Kortunderlejring</string>
     <string name="quick_action_map_underlay_action">Tilføj underlejring</string>
-    <string name="quick_action_map_source">Skift kortkilde</string>
     <string name="quick_action_map_source_title">Kortkilder</string>
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilden er ændret til \"%s\".</string>
@@ -2333,9 +2320,6 @@
     <string name="subscribe_email_desc">Abonner på postlisten om rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overlejring</string>
     <string name="no_underlay">Ingen underlejring</string>
-    <string name="quick_action_add_destination">Angiv destination</string>
-    <string name="quick_action_replace_destination">Udskift destination</string>
-    <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende punkt</string>
     <string name="quick_action_add_destination_desc">En knap til at gøre centrum af skærmen til rutedestinationen. En tidligere valgt destination bliver i stedet den sidste mellemliggende destination.</string>
     <string name="quick_action_replace_destination_desc">En knap til at gøre skærmens centrum til den nye rutedestination og erstatte den tidligere valgte destination (hvis nogen).</string>
     <string name="quick_action_add_first_intermediate_desc">En knap til at gøre skærmens centrum til den første mellemliggende destination.</string>
@@ -2863,8 +2847,8 @@
     <string name="shared_string_walk">Gang</string>
     <string name="save_poi_value_exceed_length_title">Længden af \"%s\" værdien</string>
     <string name="quick_action_day_night_mode">%s tilstand</string>
-    <string name="avoid_pt_types">Undgå transporttyper…</string>
-    <string name="avoid_pt_types_descr">Vælg offentlige transporttyper, der skal undgåes ved navigation:</string>
+    <string name="avoid_pt_types">Undgå transportformer…</string>
+    <string name="avoid_pt_types_descr">Vælg de typer offentlig transport, der skal undgås i forbindelse med navigation:</string>
     <string name="save_poi_value_exceed_length">Forkort længden af mærket \"%s\" til mindre end 255 tegn.</string>
     <string name="rendering_attr_surface_unpaved_name">Ikke befæstet</string>
     <string name="rendering_attr_surface_ground_name">Jord</string>
@@ -3420,7 +3404,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Bivirkning: Spor vil mangle alle sektioner, hvor minimumshastighedskriteriet ikke var opfyldt (f.eks. hvor cyklen skubbes op ad en stejl bakke). Der vil heller ikke være nogen oplysninger om hvileperioder, som pauser. Har indvirkning på alle analyser eller efterbehandlinger, som når det forsøges at bestemme den samlede længde af rejsen, tid i bevægelse, eller den gennemsnitlige hastighed.</string>
     <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data.</string>
     <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
-    <string name="route_recalculation_dist_title">Mindste afstand for at genberegne ruten</string>
+    <string name="route_recalculation_dist_title">Mindste afstand for at genberegne rute</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne som de importerede.
 \n
 \nVælg en handling.</string>
@@ -3558,7 +3542,6 @@
     <string name="details_dialog_decr">Vis eller skjul yderligere kort-detaljer</string>
     <string name="shared_string_night_map">Natkort</string>
     <string name="add_online_source">Tilføj onlinekilde</string>
-    <string name="quick_action_remove_next_destination">Slet næste destinationspunkt</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper som zoom</string>
     <string name="please_provide_point_name_error">Angiv et navn til punktet</string>
     <string name="search_download_wikipedia_maps">Hent Wikipedia-kort</string>
@@ -4171,7 +4154,6 @@
     <string name="route_between_points_desc">Vælg, hvordan du vil forbinde punkterne, enten ved hjælp af en lige linje eller ved at beregne en rute mellem dem som angivet nedenfor.</string>
     <string name="shared_string_gpx_route">Spor rute</string>
     <string name="context_menu_item_add_waypoint">Tilføj spor-rutepunkt</string>
-    <string name="quick_action_add_gpx">Tilføj spor-rutepunkt</string>
     <string name="release_3_9">• Tilføjet mulighed for at eksportere eller importere alle data inklusiv indstillinger, ressourcer, mine steder
 \n
 \n • Planlæg rute: grafer for sporsegmenter med rute og tilføjet mulighed for at oprette og redigere flere sporelementer
@@ -4474,13 +4456,13 @@
     <string name="shared_string_not_used">Ikke anvendt</string>
     <string name="navigate_point_format_swiss_grid">Schweizisk koordinatsystem (CH1903)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunneler til vandveje</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandveje</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Vis notat-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Skjul ikke vandvejstunneller</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Kategori</string>
     <string name="rendering_value_all_name">Alle</string>
@@ -4542,7 +4524,7 @@
     <string name="shared_string_visible_widgets">Synlige moduler</string>
     <string name="top_widgets_panel">Øverste panel</string>
     <string name="bottom_widgets_panel">Bundpanel</string>
-    <string name="shared_string_item">Emne</string>
+    <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Knapper</string>
     <string name="configure_screen_widgets_descr">Vælg skærmsektion for at tilføje eller omarrangere moduler.</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
@@ -5324,7 +5306,7 @@
     <string name="routing_attr_hazmat_category_usa_4_name">Brandfarlige faste stoffer</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Brandfarlige væsker</string>
-    <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="dangerous_goods_description">På nogle veje og i nogle tunneler er det forbudt at transportere farlige materialer.</string>
     <string name="shared_string_not_checked">Ikke tjekket</string>
     <string name="shared_string_checked">Tjekket</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Den italienske alpinklub)</string>
@@ -5623,7 +5605,7 @@
     <string name="special_routing_cpp">Speciel type ruteberegning</string>
     <string name="custom_buttons">Tilpassede knapper</string>
     <string name="default_buttons">Standardknapper</string>
-    <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
+    <string name="custom_map_button_name_present">Sådan en knap findes allerede</string>
     <string name="add_button">Tilføj knap</string>
     <string name="shared_string_speedometer">Speedometer</string>
     <string name="speed_limit_warning">Advarsel om fartgrænse</string>
@@ -5642,7 +5624,7 @@
     <string name="routing_type_a_star_classic">A* klassisk</string>
     <string name="auto_zoom_smooth">Jævn</string>
     <string name="auto_zoom_discrete">Diskret</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Auto-zoom</string>
     <string name="routing_type">Ruteberegningstype</string>
     <string name="routing_type_a_star_2_phase">A* 2-faset</string>
     <string name="shared_sting_all_colors">Alle farver</string>
@@ -5687,7 +5669,29 @@
     <string name="shared_string_changes">Ændringer</string>
     <string name="apply_only_to_new">Anvend kun på nye</string>
     <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
-    <string name="release_4_8">• For at være forberedt på 4.8</string>
+    <string name="release_4_8">• Ny mulighed for terrænfarvning \"Højde\"
+\n
+\n • Brugerdefinerede farvepaletter til terræn, spor og ruter
+\n
+\n • 3D-variant til ikoner for placeringsposition
+\n
+\n • Hurtige handlinger kan nu tildeles til eksterne tastaturer
+\n
+\n • Vejret: Brugerflade-opdatering, tilføjet vindanimation
+\n
+\n • Forbedringer af 3D-spor: nye visualiserings- og farvelægningsmuligheder
+\n
+\n • Udvidet udvalg af turistruter på kortet
+\n
+\n • Tilføjet mulighed for app-tema for at følge korttilstand
+\n
+\n • Rettet sporstatistik, sortering og søgning
+\n
+\n • OSM-redigering: slettet metode til godkendelse af login/adgangskode
+\n
+\n • Skift til systemdelingsark fra Android 14
+\n
+\n</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Yderligere kort er nødvendige for at se terræn på kortet.</string>
     <string name="vertical_exaggeration_description">Ved at ændre skalaværdien kan du fremhæve 3D-relieffet.</string>
@@ -5702,7 +5706,7 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="getting_list_of_required_maps">Henter en liste over nødvendige kort…</string>
     <string name="required_maps_calculate_online_summary">Listen over manglende kort er baseret på ruten i lige linje. For at få en nøjagtig liste over kort kan OsmAnd forudberegne din rute online.</string>
-    <string name="maps_that_also_be_used">Kort, der også kan bruges: %1$s</string>
+    <string name="maps_that_also_be_used">Kort, der også vil blive brugt: %1$s</string>
     <string name="route_line_use_coloring_speed">Rutelinjen er farvet efter bevægelseshastighed.</string>
     <string name="route_line_use_coloring_altitude">Rutelinjen er farvet efter højde over havet.</string>
     <string name="required_maps">Nødvendige kort</string>
@@ -5749,4 +5753,103 @@
     <string name="no_assigned_keys_desc">Vælg en handling, og tildel en tast ved at trykke på knappen \'Tilføj\'.</string>
     <string name="no_assigned_keys">Ingen tildelte taster</string>
     <string name="shared_string_key">Tast</string>
+    <string name="user_palette">Brugerpalet</string>
+    <string name="shared_string_colors">Farver</string>
+    <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
+    <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
+    <string name="missing_maps_ignore">Brug downloadede kort</string>
+    <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
+    <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til nattetid eller svage lysforhold.</string>
+    <string name="daynight_mode_day_summary">Viser altid kortet i et lyst tema, ideelt til synlighed i dagtimerne.</string>
+    <string name="daynight_mode_app_theme">App-tema</string>
+    <string name="key_event_action_continuous_zoom_out">Kontinuerligt zoom ud</string>
+    <string name="key_event_action_continuous_zoom_in">Kontinuerligt zoom ind</string>
+    <string name="remove_key_assignment_summary">Tasttildeling for den valgte handling fjernes.</string>
+    <string name="remove_key_assignment">Fjern tasttildeling</string>
+    <string name="map_settings_weather_wind_animation">Animation af vind</string>
+    <string name="tomorrow">I morgen</string>
+    <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema - dagtilstand ved et lyst tema og nattilstand ved et mørkt tema</string>
+    <string name="shared_string_modify">Tilpas</string>
+    <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_data_sources_prompt">OsmAnd leverer vejrdata fra to kilder:</string>
+    <string name="weather_source_ecmwf_description">Det Europæiske Center for mellemfristede vejrprognoser</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Datakilde</string>
+    <string name="missing_maps_ignore_details">Dækker downloadede kort din rute? Naviger med dem, hvis du er fortrolig med området.</string>
+    <string name="quick_action_map_style">Kortstil</string>
+    <string name="quick_action_terrain_color_scheme">Farvetema for terræn</string>
+    <string name="quick_action_directions_from">Startpunkt</string>
+    <string name="quick_action_destination">Destination</string>
+    <string name="quick_action_to_my_location">Til min placering</string>
+    <string name="quick_action_move_map_right">Kort til højre</string>
+    <string name="shared_string_set">Indstil</string>
+    <string name="quick_action_terrain">Type af terrænfarvelægning</string>
+    <string name="quick_action_audio_note">Lydnote</string>
+    <string name="quick_action_photo_note">Fotonote</string>
+    <string name="quick_action_track_waypoint">Sporrutepunkt</string>
+    <string name="quick_action_parking_place">Parkeringssted</string>
+    <string name="quick_action_verb_show_hide">Vis / Skjul</string>
+    <string name="quick_action_verb_pause_resume">Pause / Genoptag</string>
+    <string name="weather_screen">Vejrskærm</string>
+    <string name="quick_action_map_underlay">Underlejring</string>
+    <string name="quick_action_map_overlay">Overlejring</string>
+    <string name="quick_action_first_intermediate">Første mellemliggende</string>
+    <string name="quick_action_video_note">Videonote</string>
+    <string name="quick_action_verb_turn_on_off">Tænd / sluk</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_previous_app_profile">App-profil til forrige</string>
+    <string name="quick_action_next_app_profile">App profile to næste</string>
+    <string name="app_profile">App-profil</string>
+    <string name="shared_string_create">Opret</string>
+    <string name="shared_string_replace">Erstat</string>
+    <string name="shared_string_simulate">Simulér</string>
+    <string name="quick_action_location_by_gpx">Placering efter GPX</string>
+    <string name="quick_action_move_map_left">Kort til venstre</string>
+    <string name="quick_action_display_position_in_center">Viser altid position i centrum</string>
+    <string name="quick_action_move_map_up">Kort op</string>
+    <string name="quick_action_move_map_down">Kort ned</string>
+    <string name="quick_action_new_route">Ny rute</string>
+    <string name="quick_action_remove_next_destination">Næste destinationspunkt</string>
+    <string name="energy_avg_info">Energistatistik (gennemsnit 1 / 5 / 15 minutter)</string>
+    <string name="energy_avg_info_description">Batteriniveau pr. minut: %1$s
+\nEnergiforbrug (mAh): %2$s</string>
+    <string name="rendering_avg_info">Gengivelsesstatistik (gennemsnitlig 1 / 5 / 15 minutter)</string>
+    <string name="rendering_avg_info_description">FPS efter sidste 1k billeder: %1$s
+\nCPU basic: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="choose_map_orientation">Vælg kortets orientering</string>
+    <string name="shared_string_all_icons">Alle ikoner</string>
+    <string name="navigation_position_icon_summary">Ikonet vises, mens du navigerer eller bevæger dig.</string>
+    <string name="resting_position_icon">Ikon for hvileposition</string>
+    <string name="rendering_value_pale_name">Bleg</string>
+    <string name="profile_icon">Profil-ikon</string>
+    <string name="navigation_position_icon">Ikon for navigationsposition</string>
+    <string name="resting_position_icon_summary">Ikonet vises, når du ikke er i bevægelse.</string>
+    <string name="navigation_position">Navigationsposition</string>
+    <string name="resting_navigation_position">Hvile- og navigationsposition</string>
+    <string name="view_angle_description">Viser det kegleformede område, du aktuelt vender mod</string>
+    <string name="view_angle">Synsvinkel</string>
+    <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
+    <string name="location_radius">Placeringsradius</string>
+    <string name="resting_position">Hvileposition</string>
+    <string name="auto_25_chars_route_kl">Hold til venstre</string>
+    <string name="auto_25_chars_route_kr">Hold til højre</string>
+    <string name="auto_25_chars_route_tr">Drej til højre</string>
+    <string name="auto_25_chars_route_tshr">Drej skarpt til højre</string>
+    <string name="auto_25_chars_route_tslr">Drej let til højre</string>
+    <string name="auto_25_chars_route_tl">Drej til venstre</string>
+    <string name="auto_25_chars_route_tshl">Drej skarpt til venstre</string>
+    <string name="auto_25_chars_route_tsll">Drej let til venstre</string>
+    <string name="auto_25_chars_route_tu">Lav U-vending</string>
+    <string name="rendering_avg_info_details">BPS for sidste 1k billeder: %1$s
+\nCPU (fliser): %2$s
+\nCPU (inaktiv tid): %3$s
+\nCPU (venter på GPU): %4$s</string>
+    <string name="driving_region_india">Indien</string>
+    <string name="driving_region_uk">Storbritannien og lignende</string>
+    <string name="hugerock_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief osv. i %1$s måned</string>
+    <string name="hugerock_promo">Hugerock-kampagne i %1$s måneder</string>
 </resources>

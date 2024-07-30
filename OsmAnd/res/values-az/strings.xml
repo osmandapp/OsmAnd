@@ -735,9 +735,6 @@
     <string name="morning">Səhər</string>
     <string name="night">Gecə</string>
     <string name="select_month_and_country">Ay və ölkə:</string>
-    <string name="quick_action_add_poi">POI əlavə et</string>
-    <string name="quick_action_map_style">Xəritə stilini dəyiş</string>
-    <string name="quick_action_add_favorite">Favorit əlavə et</string>
     <string name="favorite_autofill_toast_text">" burda saxlandı: "</string>
     <string name="favorite_empty_place_name">Yer</string>
     <string name="quick_action_poi_show">%1$s-i göstər</string>
@@ -764,8 +761,6 @@
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
     <string name="select_postcode">Poçt kodu axtar</string>
-    <string name="quick_action_add_destination">Təyinat seç</string>
-    <string name="quick_action_replace_destination">Təyinatı əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
     <string name="shared_string_time_moving">Hərəkət vaxtı</string>
     <string name="altitude_descent">Eniş</string>
@@ -1215,7 +1210,6 @@
 \nƏfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …
 \n</string>
     <string name="avoid_in_routing_title">Yayın…</string>
-    <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
     <string name="quick_action_add_destination_desc">Ekranın mərkəzini təyinat nöqtəsi etmək üçün düymə, əvvəl seçilmiş hər hansı təyinat nöqtəsi son ara təyinat nöqtəsi olacaq.</string>
     <string name="quick_action_replace_destination_desc">Ekranın mərkəzini yeni marşrut təyinatı edən düymə. Əvvəl seçilmiş təyinatı (əgər varsa) əvəz edəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranın mərkəzini birinci aralıq təyinat nöqtəsi etmək üçün düymə.</string>
@@ -1230,12 +1224,10 @@
     <string name="edit_tilesource_choose_existing">Mövcud olanı seçin…</string>
     <string name="maps_define_edit">Müəyyənləşdir/Düzəliş et…</string>
     <string name="driving_region_europe_asia">Avropa, Asiya, Latın Amerikası və oxşar</string>
-    <string name="driving_region_uk">Böyük Britaniya, Hindistan və oxşar</string>
     <string name="map_widget_view_direction">Baxış istiqaməti</string>
     <string name="pref_raster_map">Xəritə mənbəyi parametrləri</string>
     <string name="layer_map">Xəritə mənbəyi…</string>
     <string name="map_source">Xəritə mənbəyi</string>
-    <string name="quick_action_map_source">Xəritə mənbəyini dəyiş</string>
     <string name="quick_action_map_source_title">Xəritə mənbələri</string>
     <string name="quick_action_map_source_action">Xəritə mənbəyi əlavə et</string>
     <string name="quick_action_map_source_switch">Xəritə mənbəyi “%s” olaraq dəyişdirildi.</string>
@@ -1253,7 +1245,6 @@
     <string name="planning_trip_item">Səfər planlaşdırma</string>
     <string name="map_viewing_item">Xəritəyə baxış</string>
     <string name="quick_action_map_style_switch">Xəritə stili “%s” olaraq dəyişdirildi.</string>
-    <string name="quick_action_add_osm_bug">OSM qeyd əlavə et</string>
     <string name="shared_string_recorded">Qeyd edilən</string>
     <string name="shared_string_record">Qeyd et</string>
     <string name="shared_string_trip_recording">Səfər qeydetmə</string>
@@ -1484,7 +1475,6 @@
     <string name="active_markers">Aktiv işarələr</string>
     <string name="map_markers">Xəritə işarələri</string>
     <string name="map_marker">Xəritə işarəsi</string>
-    <string name="quick_action_add_marker">Xəritə işarəsi əlavə et</string>
     <string name="shared_string_reload">Yenilə</string>
     <string name="wrong_user_name">Yanlış istifadəçi adı</string>
     <string name="shared_string_to">Bu tarixədək:</string>
@@ -1769,12 +1759,10 @@
     <string name="quick_action_category_descr">Favoriti yadda saxlamaq üçün kateqoriya:</string>
     <string name="quick_action_sh_poi_descr">Xəritədə göstərmək üçün bir və ya bir neçə POI kateqoriyası əlavə edin.</string>
     <string name="quick_action_empty_param_error">Bütün parametrləri doldurun</string>
-    <string name="quick_action_map_overlay">Xəritə örtüyünü dəyiş</string>
     <string name="quick_action_map_overlay_title">Xəritə örtükləri</string>
     <string name="quick_action_map_overlay_action">Örtük əlavə et</string>
     <string name="quick_action_map_overlay_switch">Xəritə örtüyü “%s” olaraq dəyişdirildi.</string>
     <string name="quick_action_map_underlay_switch">Xəritə altlığı “%s” olaraq dəyişdirildi.</string>
-    <string name="quick_action_map_underlay">Xəritə altlığını dəyiş</string>
     <string name="quick_action_map_underlay_title">Xəritə altlıqları</string>
     <string name="quick_action_map_underlay_action">Altlıq əlavə et</string>
     <string name="quick_action_btn_tutorial_descr">Düyməni basıb saxlayaraq sürüşdürmək onun ekrandakı mövqeyini dəyişir.</string>
@@ -2767,9 +2755,6 @@
     <string name="empty_purchases_description">Alışlarınız burada görünmürsə, “%1$s”ə toxunun və ya dəstək komandamızla əlaqə saxlayın.</string>
     <string name="si_mi_yard">Mil/yard</string>
     <string name="si_mi_feet">Mil/fut</string>
-    <string name="quick_action_take_audio_note">Yeni səsli qeyd</string>
-    <string name="quick_action_take_video_note">Yeni video qeydi</string>
-    <string name="quick_action_take_photo_note">Yeni şəkil qeydi</string>
     <string name="quick_action_switch_day_mode">Gündüz rejimi</string>
     <string name="quick_action_switch_night_mode">Gecə rejimi</string>
     <string name="quick_action_day_night_switch_mode">Gündüz/gecə rejimini dəyiş</string>
@@ -2902,7 +2887,6 @@
     <string name="keep_passed_markers">Keçilmiş işarələri xəritədə saxla</string>
     <string name="hide_passed">Keçilmişi gizlət</string>
     <string name="plan_route_add_new_segment">Yeni seqment əlavə et</string>
-    <string name="quick_action_remove_next_destination">Ən yaxın təyinat nöqtəsini sil</string>
     <string name="add_destination_point">Təyinatı seçin</string>
     <string name="plan_route_split_after">Sonra böl</string>
     <string name="quick_action_remove_next_destination_descr">Marşrutunuzdakı növbəti təyinatı silir. Əgər bu son təyinatdırsa, naviqasiya dayanacaq.</string>
@@ -3191,7 +3175,6 @@
     <string name="rendering_value_category_name">Kateqoriya</string>
     <string name="overwrite_profile_q">“%1$s” artıq mövcuddur. Üzərinə yazılsın\?</string>
     <string name="osmand_parking_warning_text">Avtomobilinizi götürmək üçün bildiriş təqviminizə əlavə edildi, orada düzəliş edilə və ya silinə bilər.</string>
-    <string name="quick_action_add_parking">Parkinq yeri əlavə et</string>
     <string name="quick_action_add_parking_descr">Ekranın mərkəzində parkinq məkanı əlavə etmək üçün düymə.</string>
     <string name="poi_filter_parking">Parkinq</string>
     <string name="map_widget_parking">Parkinq</string>

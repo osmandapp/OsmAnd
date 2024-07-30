@@ -65,6 +65,7 @@ assets/weather/*
 assets/proj.db
 assets/heightmap/*
 assets/color-palette/*
+assets/models/*
 
 # Android Studio
 /.idea

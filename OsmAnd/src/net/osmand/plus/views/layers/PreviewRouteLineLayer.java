@@ -23,18 +23,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
+import net.osmand.plus.views.layers.geometry.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.GeometryWayPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
-import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.render.RenderingRule;
@@ -43,6 +48,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.routing.RouteColorize;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -139,7 +145,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		points.add(new GeometryWayPoint(points.size(), endX, endY));
 
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
-				true, directionArrowsColor, routeColoringType, routeInfoAttribute);
+				true, directionArrowsColor, routeColoringType, routeInfoAttribute, routeGradientPalette);
 		fillPreviewLineArrays(points);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, points, 0);
@@ -213,11 +219,19 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private void fillSlopeGradientArrays(List<GeometryWayPoint> points) {
-		List<Integer> palette = new ArrayList<>();
-		for (int color : ColorPalette.Companion.getSLOPE_COLORS()) {
-			palette.add(color);
+		ColorPalette previewPalette = ColorPalette.Companion.getMIN_MAX_PALETTE();
+		GradientScaleType gradientScaleType = routeColoringType.toGradientScaleType();
+		if (gradientScaleType != null) {
+			RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
+			previewPalette = getApplication().getColorPaletteHelper().requireGradientColorPaletteSync(colorizationType, routeGradientPalette);
 		}
-		List<Double> gradientLengthsRatio = Arrays.asList(0.145833, 0.130209, 0.291031);
+		List<Integer> palette = new ArrayList<>();
+		for (ColorPalette.ColorValue colorValue : previewPalette.getColors()) {
+			palette.add(colorValue.getClr());
+		}
+		int ratiosAmount = palette.size() - 1;
+		double lengthRatio = 1d / palette.size();
+		List<Double> gradientLengthsRatio = new ArrayList<>(Collections.nCopies(ratiosAmount, lengthRatio));
 		List<Integer> colors = new ArrayList<>();
 
 		fillMultiColorLineArrays(palette, gradientLengthsRatio, points, colors);

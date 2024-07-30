@@ -2,7 +2,6 @@ package net.osmand.shared.routing
 
 import net.osmand.shared.gpx.ColoringPurpose
 import net.osmand.shared.gpx.GradientScaleType
-import kotlin.String
 
 enum class ColoringType(val id: String, val titleId: String, val iconId: String) {
 	// For route only
@@ -61,6 +60,23 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 		fun valuesOf(purpose: ColoringPurpose): Array<ColoringType> {
 			return if (purpose == ColoringPurpose.TRACK) TRACK_TYPES else ROUTE_TYPES
 		}
+
+		fun valueOf(type: Gpx3DWallColorType?): ColoringType? {
+			return when (type) {
+				Gpx3DWallColorType.SPEED -> SPEED
+				Gpx3DWallColorType.ALTITUDE -> return ALTITUDE
+				Gpx3DWallColorType.SLOPE -> return SLOPE
+				Gpx3DWallColorType.SOLID -> return TRACK_SOLID
+				else -> return null
+			}
+		}
+
+		fun isColorTypeInPurpose(
+			type: ColoringType,
+			purpose: ColoringPurpose): Boolean {
+			return ColoringType.valuesOf(purpose).contains(type)
+		}
+
 	}
 
 	fun getName(routeInfoAttribute: String?): String? {
@@ -91,6 +107,16 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 			else -> null
 		}
 	}
+
+	open fun toColorizationType(): RouteColorize.ColorizationType? {
+		return when(this){
+			SPEED -> RouteColorize.ColorizationType.SPEED
+			ALTITUDE -> RouteColorize.ColorizationType.ELEVATION
+			SLOPE -> RouteColorize.ColorizationType.SLOPE
+			else -> null
+		}
+	}
+
 }
 
 object RouteStatisticsHelper {

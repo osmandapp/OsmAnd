@@ -24,7 +24,6 @@ import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.Calcu
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,6 +106,11 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return result;
 	}
 
+	public void onIgnoreMissingMapsButtonClicked() {
+		app.getSettings().IGNORE_MISSING_MAPS = true;
+		app.getRoutingHelper().onSettingsChanged(true);
+	}
+
 	public void onCalculateOnlineButtonClicked() {
 		onlineCalculationRequested = true;
 		loadingMapsInProgress = true;
@@ -185,10 +189,6 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return itemsSelectionHelper.isAllItemsSelected();
 	}
 
-	public boolean isOnlineCalculationRequested() {
-		return onlineCalculationRequested;
-	}
-
 	public boolean isLoadingInProgress() {
 		return loadingMapsInProgress;
 	}
@@ -216,5 +216,9 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, new RequiredMapsController(app));
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
+	}
+
+	public boolean shouldShowOnlineCalculation() {
+		return !onlineCalculationRequested && !isLoadingInProgress();
 	}
 }

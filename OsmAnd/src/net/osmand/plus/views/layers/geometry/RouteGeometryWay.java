@@ -8,6 +8,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -16,7 +19,7 @@ import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
@@ -65,8 +68,9 @@ public class RouteGeometryWay extends
 	                                boolean drawDirectionArrows,
 	                                @Nullable @ColorInt Integer directionArrowColor,
 	                                @NonNull ColoringType routeColoringType,
-	                                @Nullable String routeInfoAttribute) {
-		this.coloringChanged = this.coloringType != routeColoringType
+	                                @Nullable String routeInfoAttribute,
+									@Nullable String gradientPalette) {
+		this.coloringChanged = this.coloringType != routeColoringType || !this.gradientPalette.equals(gradientPalette)
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
@@ -86,6 +90,7 @@ public class RouteGeometryWay extends
 		this.customDirectionArrowColor = directionArrowColor;
 		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+		this.gradientPalette = gradientPalette;
 	}
 
 	@Override

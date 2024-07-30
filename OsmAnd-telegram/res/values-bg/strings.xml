@@ -142,4 +142,5 @@
     <string name="shared_string_continue">Напред</string>
     <string name="shared_string_disable">Изключване</string>
     <string name="shared_string_logout">Излизане</string>
+    <string name="shared_string_sort_by">Сортиране</string>
 </resources>

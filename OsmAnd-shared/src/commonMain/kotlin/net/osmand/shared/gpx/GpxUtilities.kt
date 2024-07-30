@@ -51,6 +51,7 @@ object GpxUtilities {
 	const val PROFILE_TYPE_EXTENSION = "profile"
 	const val ADDRESS_EXTENSION = "address"
 	const val HIDDEN_EXTENSION = "hidden"
+	const val POINT_TYPE_EXTENSION = "point_type"
 
 	const val GPXTPX_PREFIX = "gpxtpx:"
 	const val OSMAND_EXTENSIONS_PREFIX = "osmand:"
@@ -300,8 +301,8 @@ object GpxUtilities {
 		fun toStringBundle(): StringBundle {
 			val bundle = StringBundle()
 			bundle.putString("name", name)
-			if (color != 0) {
-				bundle.putString("color", KAlgorithms.colorToString(color))
+			color?.let {
+				bundle.putString("color", KAlgorithms.colorToString(it))
 			}
 			if (!KAlgorithms.isEmpty(iconName)) {
 				bundle.putString(ICON_NAME_EXTENSION, iconName)
@@ -1551,4 +1552,75 @@ object GpxUtilities {
 		val speed = previous.speed + (next.speed - previous.speed) * projectionCoeff
 		return WptPt(lat, lon, time, ele, speed, Double.NaN)
 	}
+
+	fun interpolateEmptyElevationWpts(pts: List<WptPt>) {
+		var i = 0
+		while (i < pts.size) {
+			var processedPoints = 0
+			if (pts[i].ele.isNaN()) {
+				val startIndex = i
+				var prevValidIndex = -1
+				var nextValidIndex = -1
+				var prevValidElevation = Double.NaN
+				var nextValidElevation = Double.NaN
+				for (j in startIndex - 1 downTo 0) {
+					val ele: Double = pts[j].ele
+					if (!ele.isNaN()) {
+						prevValidElevation = ele
+						prevValidIndex = j
+						break
+					}
+				}
+				for (j in startIndex + 1 until pts.size) {
+					val ele: Double = pts[j].ele
+					if (!ele.isNaN()) {
+						nextValidElevation = ele
+						nextValidIndex = j
+						break
+					}
+				}
+				if (prevValidIndex == -1 && nextValidIndex == -1) {
+					return  // no elevation at all
+				}
+				if (prevValidIndex == -1 || nextValidIndex == -1) {
+					// outermost section without interpolation
+					for (j in startIndex until pts.size) {
+						val pt:WptPt = pts[j]
+						if (pt.ele.isNaN()) {
+							pt.ele = if (startIndex == 0) nextValidElevation else prevValidElevation
+							processedPoints++
+						} else {
+							break
+						}
+					}
+				} else {
+					// inner section
+					var totalDistance = 0.0
+					val distanceArray = DoubleArray(nextValidIndex - prevValidIndex)
+					for (j in prevValidIndex until nextValidIndex) {
+						val thisPt: WptPt = pts[j]
+						val nextPt: WptPt = pts[j + 1]
+						val distance: Double = KMapUtils.getDistance(
+							thisPt.lat,
+							thisPt.lon,
+							nextPt.lat,
+							nextPt.lon)
+						distanceArray[j - prevValidIndex] = distance
+						totalDistance += distance
+					}
+					val deltaElevation: Double = pts[nextValidIndex].ele - pts[prevValidIndex].ele
+					var j = startIndex
+					while (totalDistance > 0 && j < nextValidIndex) {
+						val currentDistance = distanceArray[j - startIndex]
+						val increaseElevation = deltaElevation * (currentDistance / totalDistance)
+						pts[j].ele = pts[j - 1].ele + increaseElevation
+						processedPoints++
+						j++
+					}
+				}
+			}
+			i += if (processedPoints > 0) processedPoints else 1
+		}
+	}
+
 }

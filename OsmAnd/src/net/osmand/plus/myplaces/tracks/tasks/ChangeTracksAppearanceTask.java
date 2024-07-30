@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
-import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
+import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
@@ -18,7 +19,7 @@ import net.osmand.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -114,8 +115,8 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		}
 		String coloringType = data.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
-			settings.CURRENT_TRACK_COLORING_TYPE.set(ColoringType.requireValueOf(TRACK, coloringType));
-			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(ColoringType.getRouteInfoAttribute(coloringType));
+			settings.CURRENT_TRACK_COLORING_TYPE.set(ColoringType.Companion.requireValueOf(TRACK, coloringType));
+			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(ColoringType.Companion.getRouteInfoAttribute(coloringType));
 		}
 		String width = data.getParameter(WIDTH);
 		if (width != null) {
@@ -130,8 +131,12 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinish);
 		}
 		String trackVisualizationType = data.getParameter(TRACK_VISUALIZATION_TYPE);
-		if(trackVisualizationType != null) {
+		if (trackVisualizationType != null) {
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackVisualizationType);
+		}
+		String gradientPalette = data.getParameter(COLOR_PALETTE);
+		if (gradientPalette != null) {
+			settings.CURRENT_GRADIENT_PALETTE.set(gradientPalette);
 		}
 	}
 

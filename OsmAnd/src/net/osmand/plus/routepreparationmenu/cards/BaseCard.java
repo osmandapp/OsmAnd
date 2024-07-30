@@ -227,6 +227,12 @@ public abstract class BaseCard {
 	}
 
 	@NonNull
+	public final String getString(String resId) {
+		int resourceId = app.getResources().getIdentifier(resId, "string", app.getPackageName());
+		return app.getString(resourceId);
+	}
+
+	@NonNull
 	public final String getString(@StringRes int resId) {
 		return app.getString(resId);
 	}

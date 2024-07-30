@@ -79,6 +79,20 @@ class KFile {
 		}
 	}
 
+	fun listFiles():Array<KFile> {
+		val pathList = FileSystem.SYSTEM.list(path)
+		return pathList.map{KFile(it)}.toTypedArray()
+	}
+
+	fun delete():Boolean {
+		val existed = exists()
+		if (!existed) {
+			return false
+		}
+		FileSystem.SYSTEM.delete(path, false)
+		return !exists()
+	}
+
 	override fun hashCode(): Int {
 		return path.hashCode()
 	}

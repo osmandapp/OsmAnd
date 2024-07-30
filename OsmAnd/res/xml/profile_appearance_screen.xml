@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:title="@string/profile_appearance">
+
+	<!--Name input area-->
+	<Preference
+		android:key="profile_name"
+		android:layout="@layout/preference_text_field"
+		android:selectable="false"
+		android:title="@string/shared_string_name" />
+
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<!--Colors card-->
+	<PreferenceCategory
+		android:key="colors_card_header"
+		android:layout="@layout/preference_header"
+		android:title="@string/shared_string_color" />
+
+	<Preference
+		android:key="colors_card"
+		android:layout="@layout/preference_simple_container"
+		android:selectable="false" />
+
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<!--Icons card-->
+	<PreferenceCategory
+		android:key="profile_icon_card_header"
+		android:layout="@layout/preference_header"
+		android:title="@string/profile_icon" />
+
+	<Preference
+		android:key="profile_icon_card"
+		android:layout="@layout/preference_simple_container"
+		android:selectable="false" />
+
+	<Preference
+		android:key="profile_icon_card_divider"
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<!--Resting position icons card-->
+	<PreferenceCategory
+		android:key="resting_position_icon_card_header"
+		android:layout="@layout/preference_header_with_bottom_summary"
+		android:summary="@string/resting_position_icon_summary"
+		android:title="@string/resting_position_icon" />
+
+	<Preference
+		android:key="resting_position_icon_card"
+		android:layout="@layout/preference_simple_container"
+		android:selectable="false" />
+
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<!--Navigation position icons card-->
+	<PreferenceCategory
+		android:key="navigation_position_icon_card_header"
+		android:layout="@layout/preference_header_with_bottom_summary"
+		android:summary="@string/navigation_position_icon_summary"
+		android:title="@string/navigation_position_icon" />
+
+	<Preference
+		android:key="navigation_position_icon_card"
+		android:layout="@layout/preference_simple_container"
+		android:selectable="false" />
+
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<!--Options card-->
+	<PreferenceCategory
+		android:key="options_card_header"
+		android:layout="@layout/preference_header"
+		android:title="@string/shared_string_options" />
+
+	<Preference
+		android:key="view_angle_visibility"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/view_angle" />
+
+	<Preference
+		android:key="location_radius_visibility"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/location_radius" />
+
+	<Preference
+		android:layout="@layout/card_bottom_divider"
+		android:selectable="false" />
+
+</PreferenceScreen>

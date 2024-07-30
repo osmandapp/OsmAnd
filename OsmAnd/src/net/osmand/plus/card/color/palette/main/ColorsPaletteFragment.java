@@ -72,7 +72,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_colors_palette, container, false);
+		View view = themedInflater.inflate(R.layout.fragment_palette, container, false);
 		setupToolbar(view);
 		setupColorsPalette(view);
 		return view;
@@ -97,7 +97,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 	}
 
 	private void setupColorsPalette(@NonNull View view) {
-		FlowLayout flowLayout = view.findViewById(R.id.colors_palette);
+		FlowLayout flowLayout = view.findViewById(R.id.palette);
 		flowLayout.removeAllViews();
 		flowLayout.setHorizontalAutoSpacing(true);
 		for (PaletteColor paletteColor : controller.getColors(PaletteSortingMode.ORIGINAL)) {
@@ -173,6 +173,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_COLORS_PROCESS_ID);
+			controller.onAllColorsScreenClosed();
 		}
 	}
 

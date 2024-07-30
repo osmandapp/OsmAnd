@@ -1,13 +1,18 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
 import static net.osmand.plus.settings.enums.CompassVisibility.VISIBLE_IF_MAP_ROTATED;
 import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -19,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,11 +50,60 @@ public class CompassButton extends MapButton {
 
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		setOnClickListener(v -> app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode());
-		setOnLongClickListener(v -> {
-			CompassModeWidgetDialogController.showDialog(mapActivity);
-			return true;
+		setupTouchListener();
+		setupAccessibilityActions();
+	}
+
+	@SuppressLint("ClickableViewAccessibility")
+	private void setupTouchListener() {
+		view.setOnTouchListener(new View.OnTouchListener() {
+
+			private final GestureDetector gestureDetector = new GestureDetector(view.getContext(), new SimpleOnGestureListener() {
+				@Override
+				public boolean onDoubleTap(@NonNull MotionEvent e) {
+					app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+					return true;
+				}
+
+				@Override
+				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+					rotateMapToNorth();
+					return true;
+				}
+
+				@Override
+				public void onLongPress(@NonNull MotionEvent e) {
+					showCompassModeWidgetDialog();
+				}
+			});
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return gestureDetector.onTouchEvent(event);
+			}
 		});
+	}
+
+	private void setupAccessibilityActions() {
+		ViewCompat.replaceAccessibilityAction(view, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
+				app.getString(NORTH_IS_UP.getTitleId()), (view, arguments) -> {
+					rotateMapToNorth();
+					return true;
+				});
+		ViewCompat.replaceAccessibilityAction(view, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_LONG_CLICK,
+				app.getString(R.string.choose_map_orientation), (view, arguments) -> {
+					showCompassModeWidgetDialog();
+					return true;
+				});
+	}
+
+	private void rotateMapToNorth() {
+		mapActivity.getMapView().resetRotation();
+		app.getMapViewTrackingUtilities().setLastResetRotationToNorth(System.currentTimeMillis());
+	}
+
+	private void showCompassModeWidgetDialog() {
+		CompassModeWidgetDialogController.showDialog(mapActivity);
 	}
 
 	@Nullable

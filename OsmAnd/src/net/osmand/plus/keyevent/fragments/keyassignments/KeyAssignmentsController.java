@@ -8,6 +8,8 @@ import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAd
 import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.KEY_ASSIGNMENT_ITEM;
 import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsAdapter.SPACE;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -148,15 +150,15 @@ public class KeyAssignmentsController implements IDialogController {
 		return inputDevice.hasActiveAssignments();
 	}
 
-	public void askAddAssignment() {
+	public void askAddAssignment(@Nullable View sharedElement) {
 		if (inputDevice != null) {
-			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, inputDevice.getId());
+			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, inputDevice.getId(), sharedElement);
 		}
 	}
 
-	public void askEditAssignment(@NonNull KeyAssignment assignment) {
+	public void askEditAssignment(@NonNull KeyAssignment assignment, @NonNull View anchorView) {
 		if (inputDevice != null) {
-			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, inputDevice.getId(), assignment.getId());
+			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, inputDevice.getId(), assignment.getId(), anchorView);
 		}
 	}
 

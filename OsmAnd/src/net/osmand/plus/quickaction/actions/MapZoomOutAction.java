@@ -12,7 +12,8 @@ public class MapZoomOutAction extends BaseMapZoomAction {
 			"map.zoom.out", MapZoomOutAction.class)
 			.nameRes(R.string.key_event_action_zoom_out)
 			.iconRes(R.drawable.ic_action_magnifier_minus).nonEditable()
-			.category(QuickActionType.MAP_INTERACTIONS);
+			.category(QuickActionType.MAP_INTERACTIONS)
+			.nameActionRes(R.string.shared_string_map);
 
 	public MapZoomOutAction() {
 		super(TYPE);

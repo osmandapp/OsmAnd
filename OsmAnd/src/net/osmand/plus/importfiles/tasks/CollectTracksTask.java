@@ -57,6 +57,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				trackFile.setSplitInterval(gpxFile.getSplitInterval());
 				trackFile.setSplitType(gpxFile.getSplitType());
 				trackFile.setColoringType(gpxFile.getColoringType());
+				trackFile.setGradientColorPalette(gpxFile.getGradientColorPalette());
 				trackFile.set3DVisualizationType(gpxFile.get3DVisualizationType());
 				trackFile.set3DWallColoringType(gpxFile.get3DWallColoringType());
 				trackFile.set3DLinePositionType(gpxFile.get3DLinePositionType());

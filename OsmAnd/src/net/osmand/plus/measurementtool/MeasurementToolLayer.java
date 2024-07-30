@@ -26,13 +26,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXUtilities;
+//import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
@@ -378,6 +380,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			clearCachedCounters();
 			clearCachedRenderables();
 			clearPointsProvider();
+			clearXAxisPoints();
+			setHighlightedPointMarkerVisibility(false);
 			multiProfileGeometry.clearWay();
 		}
 		mapActivityInvalidated = false;
@@ -526,7 +530,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						segment.setRenderer(renderer);
 						GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 						geometryWay.baseOrder = baseOrder--;
-						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 						renderer.setDrawArrows(false);
 						renderer.setGeometryWay(geometryWay);
 						cached.add(renderer);
@@ -571,7 +575,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							renderer = new StandardTrack(new ArrayList<>(points), 17.2);
 							GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 							geometryWay.baseOrder = baseOrder--;
-							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null);
+							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null, null);
 							renderer.setDrawArrows(false);
 							renderer.setGeometryWay(geometryWay);
 							cached.add(renderer);
@@ -797,7 +801,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						geometryWay.baseOrder = getBaseOrder() - 100;
 					}
 					renderer = new StandardTrack(new ArrayList<>(beforeAfterWpt), 17.2);
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					renderer.drawGeometry(canvas, tb, tb.getLatLonBounds(), lineAttrs.paint.getColor(),
@@ -974,14 +978,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					&& (highlightedPosition.getX() != highlightedMarkerPosition.getX()
 					|| highlightedPosition.getY() != highlightedMarkerPosition.getY());
 			if (highlightedPosition == null) {
-				if (highlightedPointMarker != null) {
-					highlightedPointMarker.setIsHidden(true);
-				}
+				setHighlightedPointMarkerVisibility(false);
 			} else if (highlightedPositionChanged) {
-				if (highlightedPointMarker != null) {
-					highlightedPointMarker.setPosition(highlightedPosition);
-					highlightedPointMarker.setIsHidden(false);
-				}
+				setHighlightedPointMarkerPosition(highlightedPosition);
+				setHighlightedPointMarkerVisibility(true);
 			}
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
 			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints)
@@ -998,9 +998,20 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			xAxisPointsCached = new ArrayList<>();
 			clearXAxisPoints();
-			if (highlightedPointMarker != null) {
-				highlightedPointMarker.setIsHidden(true);
-			}
+			setHighlightedPointMarkerVisibility(false);
+		}
+	}
+
+	private void setHighlightedPointMarkerPosition(PointI position) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && highlightedPointMarker != null) {
+			highlightedPointMarker.setPosition(position);
+		}
+	}
+
+	private void setHighlightedPointMarkerVisibility(boolean visible) {
+		if (highlightedPointMarker != null) {
+			highlightedPointMarker.setIsHidden(!visible);
 		}
 	}
 

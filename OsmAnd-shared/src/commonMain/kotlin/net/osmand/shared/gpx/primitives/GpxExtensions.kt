@@ -62,12 +62,14 @@ open class GpxExtensions {
 		return GpxUtilities.parseColor(clrValue, defColor)
 	}
 
-	fun setColor(color: Int) {
-		setColor(KAlgorithms.colorToString(color))
+	fun setColor(color: Int?) {
+		setColor(if (color != null) KAlgorithms.colorToString(color) else null)
 	}
 
-	fun setColor(color: String) {
-		getExtensionsToWrite()[GpxUtilities.COLOR_NAME_EXTENSION] = color
+	fun setColor(color: String?) {
+		color?.let {
+			getExtensionsToWrite()[GpxUtilities.COLOR_NAME_EXTENSION] = it
+		}
 	}
 
 	fun removeColor() {

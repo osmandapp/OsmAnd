@@ -304,7 +304,6 @@
     <string name="driving_region_us">Estaos Xuníos</string>
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
-    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="speak_speed_limit">Llende de velocidá</string>
     <string name="osb_author_or_password_not_specified">Please specify OSM user and password in \'Settings\'</string>
     <string name="route_descr_map_location">Mapa:</string>
@@ -549,7 +548,6 @@
     <string name="type_address">Type address</string>
     <string name="nearest_cities">Les ciudaes más cercanes</string>
     <string name="select_postcode">Busca de códigos postales</string>
-    <string name="quick_action_replace_destination">Trocar el destín</string>
     <string name="subscribe_email_error">Fallu</string>
     <string name="nautical_maps">Mapes náuticos</string>
     <string name="shared_string_visible">Visible</string>
@@ -1098,7 +1096,6 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="configure_screen_quick_action">Aición rápida</string>
     <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nota d\'audiu nueva</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
     <string name="quick_actions_delete_text">¿Quies desniciar l\'aición «%s»\?</string>
@@ -1182,7 +1179,6 @@
     <string name="updates_size">Tamañu del anovamientu</string>
     <string name="last_map_change">Last map change: %s</string>
     <string name="reports_for">Report for</string>
-    <string name="quick_action_take_video_note">Nota de videu nueva</string>
     <string name="quick_action_category_descr">Category to save the Favorite in:</string>
     <string name="quick_action_map_overlay_switch">Map overlay changed to \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Map underlay changed to \"%s\".</string>
@@ -1298,7 +1294,6 @@
     <string name="reading_cached_tiles">Lleendo les teseles de la caché…</string>
     <string name="reading_indexes">Reading local data…</string>
     <string name="update_all">Anovar too (%1$s MB)</string>
-    <string name="quick_action_map_style">Change map style</string>
     <string name="quick_action_day_night_switch_mode">Switch day/night mode</string>
     <string name="quick_action_add_create_items">Creación d\'elementos</string>
     <string name="quick_action_add_configure_map">Configuración del mapa</string>
@@ -1509,13 +1504,10 @@
     <string name="quick_action_btn_tutorial_title">Change button position</string>
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_title">Map sources</string>
-    <string name="quick_action_map_source">Change map source</string>
     <string name="quick_action_map_underlay_action">Add underlay</string>
     <string name="quick_action_map_underlay_title">Map underlays</string>
-    <string name="quick_action_map_underlay">Change map underlay</string>
     <string name="quick_action_map_overlay_action">Add overlay</string>
     <string name="quick_action_map_overlay_title">Map overlays</string>
-    <string name="quick_action_map_overlay">Change map overlay</string>
     <string name="quick_action_map_styles">Map styles</string>
     <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_style_action">Add a map style</string>
@@ -1542,15 +1534,9 @@
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
     <string name="quick_actions_delete">Delete action</string>
     <string name="dialog_add_action_title">Add action</string>
-    <string name="quick_action_add_favorite">Amestar un favoritu</string>
     <string name="quick_action_edit_action">Edit action</string>
     <string name="quick_action_new_action">Amestar una aición</string>
-    <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_navigation_voice">Voice on/off</string>
-    <string name="quick_action_add_osm_bug">Amestar una nota d\'OSM</string>
-    <string name="quick_action_take_photo_note">Nota de semeya nueva</string>
-    <string name="quick_action_add_poi">Amestar un PdI</string>
-    <string name="quick_action_add_marker">Amestar un marcador nel mapa</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="file_name_containes_illegal_char">Illegal character in filename</string>
@@ -2739,8 +2725,6 @@
     <string name="quick_action_replace_destination_desc">A button to make the screen center the new route destination, replacing the previously selected destination (if any).</string>
     <string name="quick_action_directions_from_desc">A button to make the screen center the point of departure. Will then ask to set destination or trigger the route calculation.</string>
     <string name="quick_action_add_destination_desc">A button to make the screen center the route destination, a previously selected destination would become the last intermediate destination.</string>
-    <string name="quick_action_add_first_intermediate">Amestar el primer puntu intermediu</string>
-    <string name="quick_action_add_destination">Afitar el destín</string>
     <string name="quick_action_auto_zoom_off">Turn off auto zooming</string>
     <string name="quick_action_auto_zoom_on">Turn on auto zooming</string>
     <string name="shared_string_none">Nada</string>
@@ -3389,7 +3373,6 @@
     <string name="shared_string_uninstall_and_restart">Desinstalar y reaniciar</string>
     <string name="speed_cameras_removed_descr">Esti preséu nun tien radares de velocidá.</string>
     <string name="app_mode_inline_skates">Inline skates</string>
-    <string name="quick_action_remove_next_destination">Desaniciar el puntu de destín más cercanu</string>
     <string name="use_volume_buttons_as_zoom_descr">Control the map-zoom level using the volume buttons on the device.</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
@@ -3444,7 +3427,6 @@
     <string name="empty_state_my_tracks">Add track files</string>
     <string name="empty_state_my_tracks_desc">Importa o rexistra ficheros de trazáu</string>
     <string name="context_menu_item_add_waypoint">Add track waypoint</string>
-    <string name="quick_action_add_gpx">Add track waypoint</string>
     <string name="map_widget_monitoring">Trip recording</string>
     <string name="marker_save_as_track">Save as track file</string>
     <string name="follow_track">Siguir un trazáu</string>

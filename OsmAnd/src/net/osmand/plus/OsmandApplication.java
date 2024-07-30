@@ -58,6 +58,7 @@ import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
+import net.osmand.plus.helpers.ColorPaletteHelper;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
@@ -122,6 +123,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -170,6 +172,7 @@ public class OsmandApplication extends MultiDexApplication {
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
 	GpxDisplayHelper gpxDisplayHelper;
+	ColorPaletteHelper colorPaletteHelper;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	FeedbackHelper feedbackHelper;
@@ -538,6 +541,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return onlineRoutingHelper;
 	}
 
+	public ColorPaletteHelper getColorPaletteHelper() {
+		return colorPaletteHelper;
+	}
+
 	public BackupHelper getBackupHelper() {
 		return backupHelper;
 	}
@@ -822,6 +829,12 @@ public class OsmandApplication extends MultiDexApplication {
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(externalStorageDirectory, child);
+	}
+
+	@NonNull
+	public KFile getAppPathKFile(@Nullable String path) {
+		String child = path != null ? path : "";
+		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
 	}
 
 	@NonNull

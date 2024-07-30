@@ -61,28 +61,41 @@ public class NavigationNotification extends OsmandNotification {
 	@Override
 	public void init() {
 		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
-		app.registerReceiver(new BroadcastReceiver() {
+		BroadcastReceiver pauseReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				app.getRoutingHelper().pauseNavigation();
 			}
-		}, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(pauseReceiver, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver resumeReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				app.getRoutingHelper().resumeNavigation();
 			}
-		}, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(resumeReceiver, new IntentFilter(OSMAND_RESUME_NAVIGATION_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver stopReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				app.stopNavigation();
 			}
-		}, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(stopReceiver, new IntentFilter(OSMAND_STOP_NAVIGATION_SERVICE_ACTION));
+		}
 	}
 
 	@Override

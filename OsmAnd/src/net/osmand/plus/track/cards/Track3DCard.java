@@ -1,7 +1,6 @@
 package net.osmand.plus.track.cards;
 
 import static net.osmand.plus.chooseplan.OsmAndFeature.TERRAIN;
-import static net.osmand.plus.track.Gpx3DVisualizationType.NONE;
 
 import android.content.Context;
 import android.view.View;
@@ -23,7 +22,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.OsmAndFormatter;
 
@@ -175,7 +174,7 @@ public class Track3DCard extends BaseCard {
 			}
 			wallHeightTitle.setText(fixedHeight ? R.string.wall_height : R.string.vertical_exaggeration);
 
-			boolean paramsVisible = type != NONE;
+			boolean paramsVisible = type.is3dType();
 			AndroidUiHelper.updateVisibility(wallColor, paramsVisible);
 			AndroidUiHelper.updateVisibility(trackLine, paramsVisible);
 			AndroidUiHelper.updateVisibility(wallColorContainer, paramsVisible);

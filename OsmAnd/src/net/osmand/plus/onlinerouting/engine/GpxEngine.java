@@ -107,6 +107,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
 			params.initialCalculation = true;
 		}
+		if (previousRoute != null && previousRoute.isInitialCalculation()) {
+			params.gpxFile = previousRoute.getGpxFile(); // catch gpx from 1st phase
+		}
 	}
 
 	@Override
@@ -116,15 +119,15 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Override
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation, boolean initialCalculation,
-	                                           @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByContent(@NonNull OsmandApplication app, @NonNull String content,
+	                                               boolean leftSideNavigation, boolean initialCalculation,
+	                                               @Nullable RouteCalculationProgress calculationProgress) {
 		GpxFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress) : null;
+		return gpxFile != null ? responseByGpxFile(app, gpxFile, initialCalculation, calculationProgress) : null;
 	}
 
-	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
-	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                               boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
 			GpxFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);

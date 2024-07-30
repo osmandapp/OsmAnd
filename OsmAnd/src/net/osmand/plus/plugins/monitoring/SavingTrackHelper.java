@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
@@ -34,7 +35,6 @@ import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -43,6 +43,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -302,6 +303,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(TRACK_VISUALIZATION_TYPE, settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
+		item.setParameter(COLOR_PALETTE, settings.CURRENT_GRADIENT_PALETTE);
 
 		app.getGpxDbHelper().updateDataItem(item);
 	}

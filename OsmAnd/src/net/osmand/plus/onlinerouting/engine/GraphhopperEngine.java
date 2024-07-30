@@ -5,12 +5,15 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.GeoPolylineParserUtil;
 
 import org.json.JSONArray;
@@ -53,6 +56,11 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 	@Override
 	public String getStandardUrl() {
 		return "https://graphhopper.com/api/1/route";
+	}
+
+	@Override
+	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
+		return null;
 	}
 
 	@Override

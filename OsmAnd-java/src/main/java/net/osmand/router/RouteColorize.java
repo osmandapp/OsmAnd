@@ -235,7 +235,7 @@ public class RouteColorize {
 
 	private void setColorsToPoints(List<RouteColorizationPoint> points) {
 		for (RouteColorizationPoint point : points) {
-			point.color = palette.getColorByValue(point.val);
+			point.primaryColor = palette.getColorByValue(point.val);
 		}
 	}
 
@@ -439,11 +439,14 @@ public class RouteColorize {
 	}
 
 	public static class RouteColorizationPoint {
-		public int id;
-		public double lat;
-		public double lon;
-		public double val;
-		public int color;
+
+		public final int id;
+		public final double lat;
+		public final double lon;
+		public final double val;
+
+		public int primaryColor;
+		public int secondaryColor;
 
 		public RouteColorizationPoint(int id, double lat, double lon, double val) {
 			this.id = id;

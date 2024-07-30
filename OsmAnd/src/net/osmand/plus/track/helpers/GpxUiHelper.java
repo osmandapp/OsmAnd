@@ -5,11 +5,12 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
@@ -71,6 +72,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -564,6 +566,7 @@ public class GpxUiHelper {
 				}
 				pts.add(point);
 			}
+			GpxUtilities.INSTANCE.interpolateEmptyElevationWpts(pts);
 			if (!Double.isNaN(lastValidHeight) && lastHeight == HEIGHT_UNDEFINED) {
 				for (ListIterator<WptPt> iterator = pts.listIterator(pts.size()); iterator.hasPrevious(); ) {
 					WptPt point = iterator.previous();
@@ -630,12 +633,24 @@ public class GpxUiHelper {
 		});
 	}
 
-	public static void saveAndShareGpxWithAppearance(@NonNull Context context, @NonNull GpxFile gpxFile) {
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		GpxDataItem item = getDataItem(app, gpxFile);
-		if (item != null) {
+	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
+		if (gpxFile.isShowCurrentTrack()) {
+			saveAndShareCurrentGpx(app, gpxFile);
+		} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
+			File file = new File(gpxFile.getPath());
+			GpxDataItem item = app.getGpxDbHelper().getItem(file, dataItem -> saveAndShareGpxWithAppearance(app, gpxFile, dataItem));
+			if (item != null) {
+				saveAndShareGpxWithAppearance(app, gpxFile, item);
+			}
+		}
+	}
+
+	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
+		if (item.hasAppearanceData()) {
 			addAppearanceToGpx(app, gpxFile, item);
 			saveAndShareGpx(app, gpxFile);
+		} else {
+			shareGpx(app, new File(gpxFile.getPath()));
 		}
 	}
 
@@ -681,9 +696,10 @@ public class GpxUiHelper {
 		gpxFile.set3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		gpxFile.setAdditionalExaggeration(((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue());
 		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
+		gpxFile.setGradientColorPalette((helper.getParameter(item, COLOR_PALETTE)));
 
-		int color = helper.requireParameter(item, COLOR);
-		if (color != 0) {
+		Integer color = helper.getParameter(item, COLOR);
+		if (color != null) {
 			gpxFile.setColor(color);
 		}
 		String width = helper.getParameter(item, WIDTH);
@@ -693,6 +709,10 @@ public class GpxUiHelper {
 		String coloringType = item.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
 			gpxFile.setColoringType(coloringType);
+		}
+		String gradientPalette = item.getParameter(COLOR_PALETTE);
+		if (gradientPalette != null) {
+			gpxFile.setGradientColorPalette(gradientPalette);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), item);
 	}
