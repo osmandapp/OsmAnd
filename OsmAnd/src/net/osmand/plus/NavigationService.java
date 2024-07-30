@@ -323,7 +323,7 @@ public class NavigationService extends Service {
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		if (carNavigationActive && tripHelper != null
+		if (carNavigationActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {

@@ -74,12 +74,14 @@ public final class NavigationCarAppService extends CarAppService {
 
 							@Override
 							public void onStart(@NonNull LifecycleOwner owner) {
+								getApp().onCarNavigationSessionStart(session);
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onStop(@NonNull LifecycleOwner owner) {
 								getApp().getOsmandMap().getMapView().setupRenderingView();
+								getApp().onCarNavigationSessionStop(session);
 							}
 
 							@Override
