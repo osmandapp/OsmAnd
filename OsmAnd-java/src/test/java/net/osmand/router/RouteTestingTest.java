@@ -87,6 +87,7 @@ public class RouteTestingTest {
 		String fl = "src/test/resources/routing/Routing_test_archive.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+		fe.CALCULATE_MISSING_MAPS = false;
 
 		BinaryMapIndexReader[] binaryMapIndexReaders;// = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
@@ -119,6 +120,10 @@ public class RouteTestingTest {
 			);
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					memoryLimits, params);
+
+			if (params.containsKey("routeCalculationTime")) {
+				config.routeCalculationTime = Long.parseLong(params.get("routeCalculationTime")); // conditional
+			}
 //			config.heuristicCoefficient = DEFAULT_HR;
 
 			System.out.println("planRoadDirection: " + planRoadDirection);
