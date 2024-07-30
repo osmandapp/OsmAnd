@@ -247,9 +247,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			OsmandMapTileView mapView = this.mapView;
 			if (mapView != null) {
 				if (scaleFactor > 1) {
-					mapView.zoomIn();
+					mapView.zoomInAndAdjustTiltAngle();
 				} else if (scaleFactor < 1) {
-					mapView.zoomOut();
+					mapView.zoomOutAndAdjustTiltAngle();
 				}
 			}
 		}
