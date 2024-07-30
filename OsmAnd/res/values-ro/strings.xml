@@ -4931,7 +4931,7 @@
     <string name="pressure_layer">Strat presiuni</string>
     <string name="wind_layer">Strat vânturi</string>
     <string name="cloud_layer">Strat de nori</string>
-    <string name="precipitation_layer">Strat precipitații</string>
+    <string name="precipitation_layer">Stratul de precipitații</string>
     <string name="quick_action_precipitation_layer">Un comutator pentru a arăta/ascunde stratul precipitațiilor pe/de pe hartă.</string>
     <string name="quick_action_temperature_layer">Un comutator pentru a arăta/ascunde stratul temperaturilor pe/de pe hartă.</string>
     <string name="quick_action_cloud_layer">Un comutator pentru a arăta/ascunde stratul norilor pe/de pe hartă.</string>
@@ -5823,9 +5823,9 @@
     <string name="quick_action_map_overlay">Suprapunere</string>
     <string name="quick_action_map_style">Stil hartă</string>
     <string name="quick_action_parking_place">Loc de parcare</string>
-    <string name="quick_action_verb_show_hide">Arată / Ascunde</string>
+    <string name="quick_action_verb_show_hide">Afișează / Ascunde</string>
     <string name="quick_action_photo_note">Notă fotografică</string>
-    <string name="quick_action_verb_pause_resume">Pauză / Reia</string>
+    <string name="quick_action_verb_pause_resume">Pauză / Reluare</string>
     <string name="quick_action_verb_turn_on_off">Pornește / Oprește</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Ecran meteorologic</string>
