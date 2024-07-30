@@ -21,7 +21,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.configmap.MapOptionSliderFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
@@ -197,22 +196,11 @@ public class Track3DCard extends BaseCard {
 	}
 
 	private void setupFreeUserCard() {
-		View container = view.findViewById(R.id.settings_container);
-		container.setOnClickListener((v) -> openChoosePlan());
+		View container = view.findViewById(R.id.free_user_card);
+		container.findViewById(R.id.get_btn).setOnClickListener((v) -> ChoosePlanFragment.showInstance(activity, TERRAIN));
 
-		boolean needPurchases = needPurchases();
-		AndroidUiHelper.updateVisibility(container, !needPurchases);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.free_user_card), needPurchases);
-	}
-
-	private boolean needPurchases() {
-		boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
-		return !isFullVersion && !InAppPurchaseUtils.isSubscribedToAny(app, false);
-	}
-
-	private void openChoosePlan() {
-		if (activity != null) {
-			ChoosePlanFragment.showInstance(activity, TERRAIN);
-		}
+		boolean paidVersion = Version.isPaidVersion(app);
+		AndroidUiHelper.updateVisibility(container, !paidVersion);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_container), paidVersion);
 	}
 }
