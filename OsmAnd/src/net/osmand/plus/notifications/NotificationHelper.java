@@ -83,7 +83,7 @@ public class NotificationHelper {
 			return navigationNotification;
 		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
 			return gpxNotification;
-		} else if (carAppNotification.isEnabled() && carAppNotification.isActive()) {
+		} else if (carAppNotification.isEnabled()) {
 			return carAppNotification;
 		} else {
 			return null;
