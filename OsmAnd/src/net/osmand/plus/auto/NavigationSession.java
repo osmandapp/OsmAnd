@@ -114,7 +114,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private final LocationPermissionCheckCallback locationPermissionGrantedCallback =
-			() -> getApp().startNavigationService(NavigationService.USED_BY_CAR_APP);
+			() -> getApp().startNavigationService(getCarContext(), NavigationService.USED_BY_CAR_APP);
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
