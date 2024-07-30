@@ -194,13 +194,16 @@ public class RouteTestingTest {
 	}
 	
 	private void checkRouteLength(Map<String, String> params, List<RouteSegmentResult> routeSegments) {
-		if (params.containsKey("maxRouteLength")) {
-			float maxRouteLength = Float.parseFloat(params.get("maxRouteLength"));
-			float routeLength = 0;
-			for (RouteSegmentResult segment : routeSegments) {
-				routeLength += segment.getDistance();
-			}
-			Assert.assertTrue("Calculated route length " + routeLength + " is greater then max route length " + maxRouteLength, routeLength < maxRouteLength);
+		String min = params.get("minRouteLength");
+		String max = params.get("maxRouteLength");
+		float minRouteLength = min == null ? Float.NEGATIVE_INFINITY : Float.parseFloat(min);
+		float maxRouteLength = max == null ? Float.POSITIVE_INFINITY : Float.parseFloat(max);
+		float routeLength = 0;
+		for (RouteSegmentResult segment : routeSegments) {
+			routeLength += segment.getDistance();
 		}
+		Assert.assertTrue(
+				"Calculated route length " + routeLength + " is out of limits " + minRouteLength + "-" + maxRouteLength,
+				routeLength >= minRouteLength && routeLength <= maxRouteLength);
 	}
 }
