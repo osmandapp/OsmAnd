@@ -226,7 +226,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
 		keyEventHelper = app.getKeyEventHelper();
-		restoreNavigationHelper = new RestoreNavigationHelper(this);
+		restoreNavigationHelper = new RestoreNavigationHelper(app, this);
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -951,7 +951,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		unregisterReceiver(screenOffReceiver);
 		app.getAidlApi().onDestroyMapActivity(this);
 		app.getImportHelper().resetUIActivity(this);
-		restoreNavigationHelper.quitRouteRestoreDialog();
 		PluginsHelper.onMapActivityDestroy(this);
 		app.unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
