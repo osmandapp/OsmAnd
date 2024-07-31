@@ -277,7 +277,7 @@ public class MapTileDownloader {
 
 	public void fireLoadCallback(DownloadRequest request) {
 		for (WeakReference<IMapDownloaderCallback> callback : callbacks) {
-			IMapDownloaderCallback c = callback.get();
+			IMapDownloaderCallback c = callback != null ? callback.get() : null;
 			if (c != null) {
 				c.tileDownloaded(request);
 			}

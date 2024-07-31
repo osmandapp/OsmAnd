@@ -91,18 +91,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.cards.AuthorCard;
-import net.osmand.plus.track.cards.CopyrightCard;
-import net.osmand.plus.track.cards.DescriptionCard;
-import net.osmand.plus.track.cards.GpxInfoCard;
-import net.osmand.plus.track.cards.InfoCard;
-import net.osmand.plus.track.cards.MetadataExtensionsCard;
-import net.osmand.plus.track.cards.OptionsCard;
-import net.osmand.plus.track.cards.OverviewCard;
-import net.osmand.plus.track.cards.PointsGroupsCard;
-import net.osmand.plus.track.cards.RouteInfoCard;
-import net.osmand.plus.track.cards.SegmentsCard;
-import net.osmand.plus.track.cards.TrackPointsCard;
+import net.osmand.plus.track.cards.*;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
@@ -110,17 +99,9 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
-import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
+import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxFileLoaderTask;
-import net.osmand.plus.track.helpers.GpxNavigationHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -1039,8 +1020,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
-		outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
+		if (selectedGpxFile != null) {
+			outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+			outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
+		}
 		if (latLon != null) {
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
