@@ -3536,7 +3536,7 @@
     <string name="map_markers_item">Kortamerki</string>
     <string name="system_screen_timeout">Nota tímamörk kerfis fyrir skjá</string>
     <string name="edit_online_source">Breyta nettengdum gagnagjafa</string>
-    <string name="tracker_item">OsmAnd rekjari</string>
+    <string name="tracker_item">OsmAnd-rekjari</string>
     <string name="create_edit_poi">Búa til eða breyta merkisstað</string>
     <string name="storage_format">Geymslusnið</string>
     <string name="expire_time">Rennur út</string>
