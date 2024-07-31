@@ -395,6 +395,51 @@ public class AisObject {
         this.bitmapColor = 0;
     }
 
+    public static int selectBitmap(AisObjType objType) {
+        switch (objType) {
+            case AIS_VESSEL:
+            case AIS_VESSEL_SPORT:
+            case AIS_VESSEL_FAST:
+            case AIS_VESSEL_PASSENGER:
+            case AIS_VESSEL_FREIGHT:
+            case AIS_VESSEL_COMMERCIAL:
+            case AIS_INVALID:
+                return R.drawable.ais_vessel;
+            case AIS_VESSEL_LOST:
+                return R.drawable.ais_vessel_cross;
+            case AIS_LANDSTATION:
+                return R.drawable.ais_land;
+            case AIS_AIRPLANE:
+                return R.drawable.ais_plane;
+            case AIS_SART:
+                return R.drawable.ais_sar;
+            case AIS_ATON:
+                return R.drawable.ais_aton;
+            case AIS_ATON_VIRTUAL:
+                return R.drawable.ais_aton_virt;
+        }
+        return -1;
+    }
+
+    public static int selectColor(AisObjType objType) {
+        switch (objType) {
+            case AIS_VESSEL:
+                return Color.GREEN;
+            case AIS_VESSEL_SPORT:
+                return Color.YELLOW;
+            case AIS_VESSEL_FAST:
+                return Color.BLUE;
+            case AIS_VESSEL_PASSENGER:
+                return Color.CYAN;
+            case AIS_VESSEL_FREIGHT:
+                return Color.GRAY;
+            case AIS_VESSEL_COMMERCIAL:
+                return Color.LTGRAY;
+            default:
+                return 0; // black
+        }
+    }
+
     private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
         invalidateBitmap();
         if (isLost(vesselLostTimeoutInMinutes)) {
@@ -403,37 +448,10 @@ public class AisObject {
                 this.bitmapValid = true;
             }
         } else {
-            switch (this.objectClass) {
-                case AIS_VESSEL:
-                case AIS_VESSEL_SPORT:
-                case AIS_VESSEL_FAST:
-                case AIS_VESSEL_PASSENGER:
-                case AIS_VESSEL_FREIGHT:
-                case AIS_VESSEL_COMMERCIAL:
-                case AIS_INVALID:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel);
-                    this.bitmapValid = true;
-                    break;
-                case AIS_LANDSTATION:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_land);
-                    this.bitmapValid = true;
-                    break;
-                case AIS_AIRPLANE:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_plane);
-                    this.bitmapValid = true;
-                    break;
-                case AIS_SART:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_sar);
-                    this.bitmapValid = true;
-                    break;
-                case AIS_ATON:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_aton);
-                    this.bitmapValid = true;
-                    break;
-                case AIS_ATON_VIRTUAL:
-                    this.bitmap = mapLayer.getBitmap(R.drawable.ais_aton_virt);
-                    this.bitmapValid = true;
-                    break;
+            int bitmapId = selectBitmap(this.objectClass);
+            if (bitmapId >= 0) {
+                this.bitmap = mapLayer.getBitmap(bitmapId);
+                this.bitmapValid = true;
             }
         }
         this.setColor();
@@ -445,28 +463,7 @@ public class AisObject {
                 this.bitmapColor = 0; // black
             }
         } else {
-            switch (this.objectClass) {
-                case AIS_VESSEL:
-                    this.bitmapColor = Color.GREEN;
-                    break;
-                case AIS_VESSEL_SPORT:
-                    this.bitmapColor = Color.YELLOW;
-                    break;
-                case AIS_VESSEL_FAST:
-                    this.bitmapColor = Color.BLUE;
-                    break;
-                case AIS_VESSEL_PASSENGER:
-                    this.bitmapColor = Color.CYAN;
-                    break;
-                case AIS_VESSEL_FREIGHT:
-                    this.bitmapColor = Color.GRAY;
-                    break;
-                case AIS_VESSEL_COMMERCIAL:
-                    this.bitmapColor = Color.LTGRAY;
-                    break;
-                default:
-                    this.bitmapColor = 0; // black
-            }
+            this.bitmapColor = selectColor(this.objectClass);
         }
     }
 
