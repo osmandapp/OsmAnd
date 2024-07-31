@@ -218,7 +218,7 @@
     <string name="direction">Direzione</string>
     <string name="precision">Precisione</string>
     <string name="altitude">Altitudine</string>
-    <string name="bearing">Orientamento</string>
+    <string name="bearing">Direzione</string>
     <string name="proxy_key">Chiave</string>
     <string name="proxy_password">Password</string>
     <string name="proxy_username">Nome utente</string>
