@@ -46,6 +46,10 @@ public class SrtmDownloadItem extends DownloadItem {
 		return useMetric;
 	}
 
+	public void updateMetric(@NonNull OsmandApplication app){
+		setUseMetric(isUseMetricByDefault(app));
+	}
+
 	@NonNull
 	public IndexItem getIndexItem() {
 		return getIndexItem(null);
