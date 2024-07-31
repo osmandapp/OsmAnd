@@ -2,13 +2,16 @@ package net.osmand.plus.notifications;
 
 import static net.osmand.plus.NavigationService.USED_BY_GPX;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
@@ -36,6 +39,7 @@ public class GpxNotification extends OsmandNotification {
 		super(app, GROUP_NAME);
 	}
 
+	@SuppressLint("UnspecifiedRegisterReceiverFlag")
 	@Override
 	public void init() {
 		BroadcastReceiver saveTrackReceiver = new BroadcastReceiver() {
@@ -98,15 +102,14 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		NavigationService service = app.getNavigationService();
-		return isEnabled()
-				&& service != null
-				&& (service.getUsedBy() & USED_BY_GPX) != 0;
+		return PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+	public boolean isUsedByService(@Nullable Service service) {
+		NavigationService navService = service instanceof NavigationService
+				? (NavigationService) service : app.getNavigationService();
+		return navService != null && (navService.getUsedBy() & USED_BY_GPX) != 0;
 	}
 
 	@Override
@@ -122,8 +125,8 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
+	public Builder buildNotification(@Nullable Service service, boolean wearable) {
+		if (!isEnabled(service)) {
 			return null;
 		}
 		String notificationTitle;
