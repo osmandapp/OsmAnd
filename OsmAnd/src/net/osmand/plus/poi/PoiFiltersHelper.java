@@ -2,6 +2,8 @@ package net.osmand.plus.poi;
 
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
+import android.util.ArraySet;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -32,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -54,6 +55,7 @@ public class PoiFiltersHelper {
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
+	private Set<PoiUIFilter> tmpSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
 
 	private static final String UDF_CAR_AID = "car_aid";
@@ -459,26 +461,17 @@ public class PoiFiltersHelper {
 	}
 
 	@NonNull
-	public Set<PoiUIFilter> getSelectedPoiFilters(PoiUIFilter ... filtersToExclude) {
-		if (filtersToExclude != null && filtersToExclude.length > 0) {
-			Set<PoiUIFilter> filters = new TreeSet<>();
-			for (PoiUIFilter filter : selectedPoiFilters) {
-				boolean skip = false;
-				for (PoiUIFilter filterToExclude : filtersToExclude) {
-					if (filterToExclude != null) {
-						String filterToExcludeId = filterToExclude.getFilterId();
-						if (filterToExcludeId != null && filterToExcludeId.equals(filter.getFilterId())) {
-							skip = true;
-							break;
-						}
-					}
-				}
-				if (!skip) {
-					filters.add(filter);
-				}
-			}
-			return filters;
+	public Set<PoiUIFilter> getGeneralSelectedPoiFilters() {
+		if (isWikiFilterVisible()) {
+			Set<PoiUIFilter> result = new TreeSet<>(selectedPoiFilters);
+			result.remove(getTopWikiPoiFilter());
+			return result;
 		}
+		return selectedPoiFilters;
+	}
+
+	@NonNull
+	public Set<PoiUIFilter> getSelectedPoiFilters() {
 		return selectedPoiFilters;
 	}
 
@@ -514,35 +507,37 @@ public class PoiFiltersHelper {
 		}
 	}
 
-	public boolean isShowingAnyPoi(PoiUIFilter ... filtersToExclude) {
-		return !getSelectedPoiFilters(filtersToExclude).isEmpty();
+	public boolean isShowingAnyPoi() {
+		return !getSelectedPoiFilters().isEmpty();
 	}
 
-	public void clearSelectedPoiFilters(PoiUIFilter ... filtersToExclude) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
-		if (filtersToExclude != null && filtersToExclude.length > 0) {
-			Iterator<PoiUIFilter> it = selectedPoiFilters.iterator();
-			while (it.hasNext()) {
-				PoiUIFilter filter = it.next();
-				boolean skip = false;
-				for (PoiUIFilter filterToExclude : filtersToExclude) {
-					if (filterToExclude != null) {
-						String filterToExcludeId = filterToExclude.getFilterId();
-						if (filterToExcludeId != null && filterToExcludeId.equals(filter.getFilterId())) {
-							skip = true;
-							break;
-						}
-					}
-				}
-				if (!skip) {
-					it.remove();
-				}
-			}
-		} else {
-			selectedPoiFilters.clear();
+	public boolean isShowingAnyGeneralPoi() {
+		return !getGeneralSelectedPoiFilters().isEmpty();
+	}
+
+	public void clearGeneralSelectedPoiFilters() {
+		clearSelectedPoiFilters(true);
+	}
+
+	public void clearAllSelectedPoiFilters() {
+		clearSelectedPoiFilters(false);
+	}
+
+	private void clearSelectedPoiFilters(boolean saveWiki) {
+		Set<PoiUIFilter> selectedPoiFilters = new ArraySet<>();
+		if (saveWiki && isPoiFilterSelected(getTopWikiPoiFilterId())) {
+			selectedPoiFilters.add(getTopWikiPoiFilter());
 		}
 		saveSelectedPoiFilters(selectedPoiFilters);
 		this.selectedPoiFilters = selectedPoiFilters;
+	}
+
+	public String getSelectedPoiFiltersName() {
+		return getFiltersName(getSelectedPoiFilters());
+	}
+
+	public String getGeneralSelectedPoiFiltersName() {
+		return getFiltersName(getGeneralSelectedPoiFilters());
 	}
 
 	public String getFiltersName(Set<PoiUIFilter> filters) {
@@ -557,8 +552,8 @@ public class PoiFiltersHelper {
 		}
 	}
 
-	public String getSelectedPoiFiltersName(PoiUIFilter ... filtersToExclude) {
-		return getFiltersName(getSelectedPoiFilters(filtersToExclude));
+	public boolean isWikiFilterVisible() {
+		return isPoiFilterSelected(getTopWikiPoiFilterId());
 	}
 
 	public boolean isPoiFilterSelected(PoiUIFilter filter) {
