@@ -150,7 +150,7 @@ class WptPt : GpxExtensions {
 		getExtensionsToWrite()[GpxUtilities.AMENITY_ORIGIN_EXTENSION] = originName
 	}
 
-	fun getColor(type: RouteColorize.ColorizationType): Int {
+	fun getColor(type: RouteColorize.ColorizationType?): Int {
 		return when (type) {
 			RouteColorize.ColorizationType.SPEED -> speedColor
 			RouteColorize.ColorizationType.ELEVATION -> altitudeColor
@@ -322,4 +322,13 @@ class WptPt : GpxExtensions {
 			setHidden(hidden)
 		}
 	}
+
+	fun getSpecialPointType(): String? {
+		return getExtensionsToRead()[GpxUtilities.POINT_TYPE_EXTENSION]
+	}
+
+	fun setSpecialPointType(type: String?) {
+		getExtensionsToWrite()[GpxUtilities.POINT_TYPE_EXTENSION] = type!!
+	}
+
 }

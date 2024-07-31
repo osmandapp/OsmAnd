@@ -1325,7 +1325,6 @@
     <string name="save_global_track_interval_descr">Navedete go intervalot za evidentiranje za opštoto snimanje na pesna (vklučeno preku grafičkata kontrola „Patuvanje snimanje“ na kartata).</string>
     <string name="navigate_to_track_descr">Odete od mojata pozicija do patekata</string>
     <string name="in_case_of_reverse_direction">Vo slučaj na obratna nasoka</string>
-    <string name="quick_action_add_gpx">Dodadete točka na patekata</string>
     <string name="context_menu_item_add_waypoint">Dodadete točka na patekata</string>
     <string name="show_gpx">Trasi</string>
     <string name="navigation_profile">Profil za navigacija</string>
@@ -1333,7 +1332,6 @@
     <string name="gpx_split_interval_descr">Izberete go intervalot vo koj ḱe se prikažuvaat oznakite so rastojanie ili vreme na patekata.</string>
     <string name="add_hidden_group_info">Dodadenata točka može da se najde vo „%s“. Otkrijte ja izbranata grupa za da ja prikažete na kartata.</string>
     <string name="quick_action_remove_next_destination_descr">Ja briše slednata destinacija na vašata maršruta. Ako toa e krajnata destinacija, navigacijata ḱe prestane.</string>
-    <string name="quick_action_remove_next_destination">Izbrišete ja najbliskata destinacija</string>
     <string name="shared_string_tones">toni</string>
     <string name="vessel_height_limit_description">Postavete visina na brodot za da izbegnete niski mostovi. Imajte na um, ako mostot e podvižen, ḱe ja koristime negovata visina vo otvorena sostojba.</string>
     <string name="add_online_source">Dodadete izvor na onlajn</string>
@@ -2110,8 +2108,6 @@
     <string name="quick_action_auto_zoom">Vklučuvanje/isklučuvanje na mapata za avtomatsko zumiranje</string>
     <string name="quick_action_add_destination_desc">Kopče za da se napravi ekranot vo centarot na destinacijata na rutata, prethodno izbranata destinacija ḱe stane poslednata sredna destinacija.</string>
     <string name="quick_action_directions_from_desc">Kopče za da se napravi ekranot vo centarot na pojdovnata točka. Potoa ḱe pobara da postavite destinacija ili da ja aktivirate presmetkata na maršrutata.</string>
-    <string name="quick_action_replace_destination">Zameni ja destinacijata</string>
-    <string name="quick_action_add_first_intermediate">Dodadi prvo sredno</string>
     <string name="quick_action_add_first_intermediate_desc">Kopče za da go napravi ekranot centar na prvata sredna destinacija.</string>
     <string name="no_underlay">Bez podloga</string>
     <string name="subscribe_email_error">Greska</string>
@@ -2274,7 +2270,6 @@
     <string name="select_postcode">Baraj postanski kod</string>
     <string name="quick_action_auto_zoom_desc">Kopče za vklučuvanje ili isklučuvanje na avtomatskoto zumiranje so kontrolirana brzina.</string>
     <string name="quick_action_auto_zoom_on">Vklučete avtomatsko zumiranje</string>
-    <string name="quick_action_add_destination">Postavi destinacija</string>
     <string name="subscribe_email_desc">Pretplatete se na našata mejling lista za popusti za aplikacii i dobijte ušte 3 prevzemanja na karti!</string>
     <string name="sea_depth_thanks">Vi blagodarime što kupivte „Konturi za pomorska dlabočina“</string>
     <string name="index_item_depth_contours_osmand_ext">Konturi za pomorska dlabočina</string>
@@ -3588,7 +3583,6 @@
     <string name="driving_region_us">SAD</string>
     <string name="driving_region_europe_asia">Evropa, Azija, Latinska Amerika i slično</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_uk">UK, India i slicno</string>
     <string name="driving_region_australia">Avstralija</string>
     <string name="speak_title">Objavete…</string>
     <string name="speak_descr">Postavete objavuvanje na iminja na ulici, soobraḱajni predupreduvanja (prisilni zapiranja, udari so brzina), predupreduvanja za kameri za brzina i ograničuvanja na brzinata.</string>
@@ -4466,10 +4460,6 @@
     <string name="configure_screen_quick_action">Brzo dejstvie</string>
     <string name="quick_action_item_action">Dejstvie %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
-    <string name="quick_action_take_audio_note">Nova audio beleška</string>
-    <string name="quick_action_take_video_note">Nova video beleška</string>
-    <string name="quick_action_take_photo_note">Nova foto beleška</string>
-    <string name="quick_action_add_osm_bug">Dodadete OSM beleska</string>
     <string name="quick_action_new_action">Dodadete dejstvie</string>
     <string name="quick_favorites_name_preset">Prethodno postaveno ime</string>
     <string name="quick_action_take_video_note_descr">Kopče za dodavanje video beleška na sredinata na ekranot.</string>
@@ -4509,10 +4499,8 @@
     <string name="last_map_change">Последна промена на картата: %s</string>
     <string name="number_of_contributors">Broj na sorabotnici</string>
     <string name="number_of_edits">Broj na ureduvanja</string>
-    <string name="quick_action_add_parking">Dodadete mesto za parkiranje</string>
     <string name="quick_actions_delete_text">Da se izbriše dejstvieto „%s“\?</string>
     <string name="quick_action_edit_action">Uredete go dejstvieto</string>
-    <string name="quick_action_add_favorite">Dodadete omilen</string>
     <string name="dialog_add_action_title">Dodadete dejstvie</string>
     <string name="quick_action_add_marker_descr">Kopče za dodavanje marker na mapa na lokacijata vo centarot na ekranot.</string>
     <string name="quick_action_add_gpx_descr">Kopče za dodavanje na GPX točka na sredinata na ekranot.</string>
@@ -4520,7 +4508,6 @@
     <string name="quick_action_navigation_voice_descr">Prekinuvač za onevozmožuvanje ili ovozmožuvanje glasovno vodenje za vreme na navigacijata.</string>
     <string name="quick_action_switch_day_night_descr">Prefrlanje za prefrlanje pomeǵu dnevnite i noḱnite režimi za OsmAnd.</string>
     <string name="quick_action_map_overlay_switch">Preklopuvanjeto na kartata e smeneto vo „%s“.</string>
-    <string name="quick_action_map_underlay">Promenete ja podlogata na kartata</string>
     <string name="touring_view_renderer">Pogled na patuvanjeto</string>
     <string name="routing_attr_allow_intermediate_description">Poteški pravci so poostri delnici. Generalno nekoi prečki što treba da se izbegnuvaat.</string>
     <string name="routing_attr_difficulty_preference_name">Pretpočitana teškotija</string>
@@ -4608,10 +4595,7 @@
     <string name="last_update">Posledno ažuriranje: %s</string>
     <string name="dashboard_or_drawer_description">Ponuden e izbor primarno da se kontrolira aplikacijata preku fleksibilnata kontrolna tabla ili statičnoto meni. Vašiot izbor sekogaš može da se promeni vo postavkite na kontrolnata tabla.</string>
     <string name="update_time">Vreme na ažuriranje</string>
-    <string name="quick_action_map_style">Promenete go stilot na kartata</string>
     <string name="quick_action_map_style_switch">Stilot na kartata e promenet vo „%s“.</string>
-    <string name="quick_action_add_marker">Dodadete marker na karta</string>
-    <string name="quick_action_add_poi">Dodadete POI</string>
     <string name="quick_favorites_show_favorites_dialog">Prikaži dijalog za omileni</string>
     <string name="quick_action_take_audio_note_descr">Kopče za dodavanje audio beleška na sredinata na ekranot.</string>
     <string name="quick_action_interim_dialog">Prikaži privremen dijalog</string>
@@ -4640,7 +4624,6 @@
     <string name="quick_action_page_list_descr">Kopče za stranica niz spisokot podolu.</string>
     <string name="quick_action_empty_param_error">Popolnete gi site parametri</string>
     <string name="quick_action_map_styles">Stilovi na karta</string>
-    <string name="quick_action_map_overlay">Promenete go preklopuvanjeto na kartata</string>
     <string name="waypoint_one">Patna točka 1</string>
     <string name="route_point_one">Točka 1 na rutata</string>
     <string name="empty_state_favourites">Dodadete omileni</string>
@@ -4679,7 +4662,6 @@
     <string name="shared_string_contact">Kontakt</string>
     <string name="quick_action_map_underlay_title">Podlogi na kartata</string>
     <string name="quick_action_map_underlay_action">Dodadete podloga</string>
-    <string name="quick_action_map_source">Promenete go izvorot na kartata</string>
     <string name="quick_action_map_source_title">Izvori na kartata</string>
     <string name="quick_action_map_source_action">Dodadete izvor na kartata</string>
     <string name="quick_action_map_source_switch">Izvorot na kartata e promenet vo „%s“.</string>

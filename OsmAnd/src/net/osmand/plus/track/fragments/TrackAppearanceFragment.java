@@ -1,4 +1,5 @@
 package net.osmand.plus.track.fragments;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
@@ -47,9 +48,11 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
@@ -58,6 +61,7 @@ import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -430,11 +434,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				TrackColorController colorController = getColorCardController();
 				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
 
-				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
-				paletteController.selectColor(trackDrawInfo.getColor());
+				colorController.getColorsPaletteController().selectColor(trackDrawInfo.getColor());
 
-				WidthComponentController widthComponentController = getWidthCardController().getWidthComponentController();
-				widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
+				WidthComponentController widthController = getWidthCardController().getWidthComponentController();
+				widthController.askSelectWidthMode(trackDrawInfo.getWidth());
 
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
@@ -455,18 +458,35 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			View saveButton = view.findViewById(R.id.right_bottom_button);
 			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
 			updateColorItems();
+			updateGradientPalette(coloringStyle);
+		}
+	}
+
+	private void updateGradientPalette(@NonNull ColoringStyle coloringStyle) {
+		if (coloringStyle.getType().isGradient() && gpxDataItem != null) {
+			ColoringType coloringType = ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, gpxDataItem.getParameter(COLORING_TYPE));
+			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteGradientColor.DEFAULT_NAME);
+		} else {
+			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
 		}
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		trackDrawInfo.setColor(paletteColor.getColor());
-		updateColorItems();
+		if (paletteColor instanceof PaletteGradientColor) {
+			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+			trackDrawInfo.setGradientColorName(paletteGradientColor.getPaletteName());
+			refreshMap();
+		} else {
+			trackDrawInfo.setColor(paletteColor.getColor());
+			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
+			updateColorItems();
+		}
 	}
 
 	@Override
 	public void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		if (oldColor != null && oldColor.isCustom()) {
+		if (oldColor != null) {
 			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
 		}
 		updateColorItems();
@@ -497,10 +517,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		TrackColorController trackColorController = getColorCardController();
-		int color = trackColorController.getSelectedControlsColor();
-		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
-		trackIcon.setImageDrawable(icon);
+		int color = getColorCardController().getSelectedControlsColor();
+		trackIcon.setImageDrawable(getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color));
 	}
 
 	@Override
@@ -606,6 +624,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void onSaveButtonClicked() {
 		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
+		if (gradientColorsPaletteController != null) {
+			gradientColorsPaletteController.refreshLastUsedTime();
+		}
 		saveTrackInfo();
 		dismiss();
 	}
@@ -679,6 +701,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_3D_LINE_POSITION_TYPE.set(trackDrawInfo.getTrackLinePositionType().getTypeName());
 			settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.set(trackDrawInfo.getAdditionalExaggeration());
 			settings.CURRENT_TRACK_ELEVATION_METERS.set(trackDrawInfo.getElevationMeters());
+			settings.CURRENT_GRADIENT_PALETTE.set(trackDrawInfo.getGradientColorName());
 		} else if (gpxDataItem != null) {
 			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
 			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
@@ -692,6 +715,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(TRACK_3D_LINE_POSITION_TYPE, trackDrawInfo.getTrackLinePositionType().getTypeName());
 			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, (double) trackDrawInfo.getAdditionalExaggeration());
 			gpxDataItem.setParameter(ELEVATION_METERS, (double) trackDrawInfo.getElevationMeters());
+			gpxDataItem.setParameter(COLOR_PALETTE, trackDrawInfo.getGradientColorName());
 			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}

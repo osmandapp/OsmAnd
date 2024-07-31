@@ -18,7 +18,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 public class NewAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NEW_ACTION_ID, "new", NewAction.class)
-			.iconRes(R.drawable.ic_action_plus).nameRes(R.string.quick_action_new_action);
+			.iconRes(R.drawable.ic_action_plus).nameRes(R.string.shared_string_action).nameActionRes(R.string.shared_string_add);
 
 	public NewAction() {
 		super(TYPE);

@@ -3,6 +3,11 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
+import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
+import static net.osmand.data.Amenity.NAME;
+import static net.osmand.data.Amenity.OPENING_HOURS;
+import static net.osmand.data.Amenity.SUBTYPE;
+import static net.osmand.data.Amenity.TYPE;
 import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_ORIGIN_EXTENSION;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
@@ -43,6 +48,7 @@ import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -92,9 +98,6 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 
-	public static final String COLLAPSABLE_PREFIX = "collapsable_";
-	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
-
 	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 
 	private final MetricsConstants metricSystem;
@@ -105,8 +108,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(COLOR_NAME_EXTENSION,
 			ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION, PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION,
-			AMENITY_ORIGIN_EXTENSION, AMENITY_PREFIX + Amenity.NAME, AMENITY_PREFIX + Amenity.TYPE,
-			AMENITY_PREFIX + Amenity.SUBTYPE);
+			AMENITY_ORIGIN_EXTENSION, NAME, TYPE, SUBTYPE);
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang, Map<String, String> additionalInfo) {
 		super(mapActivity);
@@ -122,15 +124,14 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		PoiCategory type = null;
-		String typeTag = getAdditionalInfo(AMENITY_PREFIX + Amenity.TYPE);
+		String typeTag = getAdditionalInfo(TYPE);
 		if (!Algorithms.isEmpty(typeTag)) {
 			type = MapPoiTypes.getDefault().getPoiCategoryByName(typeTag);
 		}
 		if (type == null) {
 			type = MapPoiTypes.getDefault().getOtherPoiCategory();
 		}
-
-		String subtype = getAdditionalInfo(AMENITY_PREFIX + Amenity.SUBTYPE);
+		String subtype = getAdditionalInfo(SUBTYPE);
 
 		boolean hasWiki = false;
 		MapPoiTypes poiTypes = app.getPoiTypes();
@@ -139,7 +140,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 		AmenityInfoRow cuisineRow = null;
-		List<PoiType> collectedPoiTypes = new ArrayList<>();
+		Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 
 		boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 
@@ -153,16 +154,14 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else {
 				key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 			}
-			if (HIDDEN_EXTENSIONS.contains(key)) {
-				continue;
+			if (!HIDDEN_EXTENSIONS.contains(key)) {
+				additionalInfoFiltered.put(key, getAdditionalInfo(key));
 			}
-			additionalInfoFiltered.put(key, getAdditionalInfo(origKey));
 		}
 
-
-		for (Map.Entry<String, String> e : additionalInfoFiltered.entrySet()) {
-			String key = e.getKey();
-			String vl = e.getValue();
+		for (Map.Entry<String, String> entry : additionalInfoFiltered.entrySet()) {
+			String key = entry.getKey();
+			String vl = entry.getValue();
 
 			if (key.startsWith(COLLAPSABLE_PREFIX) || key.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
 				continue;
@@ -186,7 +185,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !(CollectionUtils.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
+			boolean needLinks = !(CollectionUtils.equalsToAny(key, OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -198,6 +197,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 			if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
 				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
+			}
+			if (poiType == null && pt == null && key.equals(vl)) {
+				poiType = poiTypes.getPoiTypeByKey(key);
 			}
 			PoiType pType = null;
 			if (pt != null) {
@@ -270,7 +272,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else if (Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				needLinks = false;
-			} else if (Amenity.OPENING_HOURS.equals(key)) {
+			} else if (OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				collapsableView = getCollapsableTextView(view.getContext(), true,
 						vl.replace("; ", "\n").replace(",", ", "));
@@ -364,7 +366,9 @@ public class AmenityUIHelper extends MenuBuilder {
 						iconId = R.drawable.ic_action_note_dark;
 					}
 				} else if (poiType != null) {
-					collectedPoiTypes.add(poiType);
+					String catKey = poiType.getCategory().getKeyName();
+					List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
+					list.add(poiType);
 				} else {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				}
@@ -470,21 +474,24 @@ public class AmenityUIHelper extends MenuBuilder {
 
 
 		if (collectedPoiTypes.size() > 0) {
-			CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, collectedPoiTypes, false, null, type);
-			PoiCategory poiCategory = type;
-			Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
-			StringBuilder sb = new StringBuilder();
-			for (PoiType pt : collectedPoiTypes) {
-				if (sb.length() > 0) {
-					sb.append(" • ");
+			for (Map.Entry<String, List<PoiType>> e : collectedPoiTypes.entrySet()) {
+				List<PoiType> poiTypeList = e.getValue();
+				CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, poiTypeList, false, null, type);
+				PoiCategory poiCategory = type;
+				StringBuilder sb = new StringBuilder();
+				for (PoiType pt : poiTypeList) {
+					if (sb.length() > 0) {
+						sb.append(" • ");
+					}
+					sb.append(pt.getTranslation());
+					poiCategory = pt.getCategory();
 				}
-				sb.append(pt.getTranslation());
+				Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
+				infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
+						poiCategory.getTranslation(), sb.toString(), null, true,
+						collapsableView, 0, false, false, false, 40,
+						poiCategory.getKeyName(), false, false, false, 1));
 			}
-
-			infoRows.add(new AmenityInfoRow(poiCategory.getKeyName(), icon,
-					poiCategory.getTranslation(), sb.toString(), null, true,
-					collapsableView, 0, false, false, false, 40,
-					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
 

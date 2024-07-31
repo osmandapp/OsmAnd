@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
@@ -18,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDirItem;
@@ -106,13 +107,13 @@ public class GpxAppearanceHelper {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getTrackWallColorType();
 		} else if (gpxFile.isShowCurrentTrack()) {
-			return Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
+			return Gpx3DWallColorType.Companion.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 		} else {
 			String trackWallColorType = getAppearanceParameter(new File(gpxFile.getPath()), TRACK_3D_WALL_COLORING_TYPE);
 			if (trackWallColorType != null) {
-				return Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+				return Gpx3DWallColorType.Companion.get3DWallColorType(trackWallColorType);
 			}
-			return Gpx3DWallColorType.get3DWallColorType(gpxFile.get3DWallColoringType());
+			return Gpx3DWallColorType.Companion.get3DWallColorType(gpxFile.get3DWallColoringType());
 		}
 	}
 
@@ -181,6 +182,27 @@ public class GpxAppearanceHelper {
 			color = getAppearanceParameter(new File(gpxFile.getPath()), COLOR);
 		}
 		return color != null ? color : gpxFile.getColor(defaultColor);
+	}
+
+	@Nullable
+	public String getGradientPaletteName(@NonNull GpxFile gpxFile) {
+		String gradientPalette;
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			gradientPalette = trackDrawInfo.getGradientColorName();
+		} else if (gpxFile.isShowCurrentTrack()) {
+			gradientPalette = settings.CURRENT_GRADIENT_PALETTE.get();
+		} else {
+			gradientPalette = getAppearanceParameter(new File(gpxFile.getPath()), COLOR_PALETTE);
+		}
+		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
+	}
+
+	@Nullable
+	public String getColoringType(@NonNull GpxFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
+		}
+		return null;
 	}
 
 	@NonNull

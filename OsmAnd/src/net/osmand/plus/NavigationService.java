@@ -23,7 +23,9 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.auto.screens.NavigationScreen;
@@ -34,10 +36,14 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Collections;
 import java.util.List;
 
 public class NavigationService extends Service {
+
+	public static final Log LOG = PlatformUtil.getLog(NavigationService.class);
 
 	public static class NavigationServiceBinder extends Binder {
 	}
@@ -132,20 +138,24 @@ public class NavigationService extends Service {
 			if (isUsedBy(USED_BY_NAVIGATION)) {
 				startCarNavigation();
 			}
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
-			} else {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
+			try {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
+				} else {
+					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
+				}
+				app.getNotificationHelper().refreshNotifications();
+			} catch (Exception e) {
+				setCarContext(null);
+				app.setNavigationService(null);
+				usedBy = 0;
+				LOG.error("Failed to start NavigationService", e);
+				return START_NOT_STICKY;
 			}
-			app.getNotificationHelper().refreshNotifications();
 		} else {
-			notification = app.getNotificationHelper().buildErrorNotification();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
-			} else {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
-			}
+			LOG.error("NavigationService could not be started because the notification is null.");
 			stopSelf();
+			return START_NOT_STICKY;
 		}
 		requestLocationUpdates();
 
@@ -154,7 +164,7 @@ public class NavigationService extends Service {
 				routingHelper.resumeNavigation();
 			}
 		}
-		return hasNotification ? START_REDELIVER_INTENT : START_NOT_STICKY;
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override

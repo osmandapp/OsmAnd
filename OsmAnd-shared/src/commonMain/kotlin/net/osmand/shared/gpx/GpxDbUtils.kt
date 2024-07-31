@@ -120,6 +120,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, ELEVATION_METERS);
 			addIfMissingGpxTableColumn(columnNames, db, WIDTH);
 			addIfMissingGpxTableColumn(columnNames, db, COLORING_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, COLOR_PALETTE);
 			addIfMissingGpxTableColumn(columnNames, db, SMOOTHING_THRESHOLD);
 			addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_SPEED);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_SPEED);
@@ -202,12 +203,12 @@ object GpxDbUtils {
 		file.parent()?.let {
 			val gpxDir = PlatformUtil.getGpxDir()
 			if (file == gpxDir) {
-				return ""
+				return@let ""
 			}
 			val relativePath = KFile(file.path().replace("${gpxDir.path}/", ""))
 			val fileDir = if (file.isDirectory()) relativePath.path else relativePath.parent()
 			val res = fileDir.toString()
-			return if (res == ".") "" else res
+			return@let if (res == ".") "" else res
 		}
 		return ""
 	}

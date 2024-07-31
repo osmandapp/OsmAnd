@@ -18,9 +18,9 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class NavReplaceDestinationAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_REPLACE_DESTINATION_ACTION_ID,
-			"nav.destination.replace", NavReplaceDestinationAction.class).
-			nameRes(R.string.quick_action_replace_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			"nav.destination.replace", NavReplaceDestinationAction.class)
+			.nameRes(R.string.quick_action_destination).iconRes(R.drawable.ic_action_point_add_destination).nonEditable()
+			.category(QuickActionType.NAVIGATION).nameActionRes(R.string.shared_string_replace);
 
 	public NavReplaceDestinationAction() {
 		super(TYPE);

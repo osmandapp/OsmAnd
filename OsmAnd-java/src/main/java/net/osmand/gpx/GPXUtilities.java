@@ -63,6 +63,7 @@ public class GPXUtilities {
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
 	public static final String HIDDEN_EXTENSION = "hidden";
+	public static final String POINT_TYPE_EXTENSION = "point_type";
 
 	public static final String GPXTPX_PREFIX = "gpxtpx:";
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
@@ -210,7 +211,7 @@ public class GPXUtilities {
 			getExtensionsWriters().remove(key);
 		}
 
-		public int getColor(int defColor) {
+		public Integer getColor(Integer defColor) {
 			String value = getColorValue();
 			return parseColor(value, defColor);
 		}
@@ -249,7 +250,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static int parseColor(String colorString, int defColor) {
+	public static Integer parseColor(String colorString, Integer defColor) {
 		Integer color = parseColor(colorString);
 		return color != null ? color : defColor;
 	}
@@ -435,8 +436,16 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
 		}
 
-		public void setBackgroundType(String backType) {
-			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		public void setBackgroundType(String type) {
+			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, type);
+		}
+
+		public String getSpecialPointType() {
+			return getExtensionsToRead().get(POINT_TYPE_EXTENSION);
+		}
+
+		public void setSpecialPointType(String type) {
+			getExtensionsToWrite().put(POINT_TYPE_EXTENSION, type);
 		}
 
 		public String getProfileType() {
@@ -2112,5 +2121,69 @@ public class GPXUtilities {
 				: previous.ele + (next.ele - previous.ele) * projectionCoeff;
 		double speed = previous.speed + (next.speed - previous.speed) * projectionCoeff;
 		return new WptPt(lat, lon, time, ele, speed, Double.NaN);
+	}
+
+	public static void interpolateEmptyElevationWpts(List<WptPt> pts) {
+		for (int i = 0; i < pts.size(); ) {
+			int processedPoints = 0;
+			if (Double.isNaN(pts.get(i).ele)) {
+				int startIndex = i, prevValidIndex = -1, nextValidIndex = -1;
+				double prevValidElevation = Double.NaN, nextValidElevation = Double.NaN;
+
+				for (int j = startIndex - 1; j >= 0; j--) {
+					double ele = pts.get(j).ele;
+					if (!Double.isNaN(ele)) {
+						prevValidElevation = ele;
+						prevValidIndex = j;
+						break;
+					}
+				}
+
+				for (int j = startIndex + 1; j < pts.size(); j++) {
+					double ele = pts.get(j).ele;
+					if (!Double.isNaN(ele)) {
+						nextValidElevation = ele;
+						nextValidIndex = j;
+						break;
+					}
+				}
+
+				if (prevValidIndex == -1 && nextValidIndex == -1) {
+					return; // no elevation at all
+				}
+
+				if (prevValidIndex == -1 || nextValidIndex == -1) {
+					// outermost section without interpolation
+					for (int j = startIndex; j < pts.size(); j++) {
+						WptPt pt = pts.get(j);
+						if (Double.isNaN(pt.ele)) {
+							pt.ele = startIndex == 0 ? nextValidElevation : prevValidElevation;
+							processedPoints++;
+						} else {
+							break;
+						}
+					}
+				} else {
+					// inner section
+					double totalDistance = 0;
+					double[] distanceArray = new double[nextValidIndex - prevValidIndex];
+					for (int j = prevValidIndex; j < nextValidIndex; j++) {
+						WptPt thisPt = pts.get(j);
+						WptPt nextPt = pts.get(j + 1);
+						double distance = MapUtils.getDistance(thisPt.lat, thisPt.lon, nextPt.lat, nextPt.lon);
+						distanceArray[j - prevValidIndex] = distance;
+						totalDistance += distance;
+					}
+					double deltaElevation = pts.get(nextValidIndex).ele - pts.get(prevValidIndex).ele;
+					for (int j = startIndex; totalDistance > 0 && j < nextValidIndex; j++) {
+						double currentDistance = distanceArray[j - startIndex];
+						double increaseElevation = deltaElevation * (currentDistance / totalDistance);
+						pts.get(j).ele = pts.get(j - 1).ele + increaseElevation;
+						processedPoints++;
+					}
+				}
+			}
+			i += processedPoints > 0 ? processedPoints : 1;
+		}
 	}
 }

@@ -321,7 +321,7 @@
     <string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
     <string name="poi_node_networks">Вузли пішохідних/велосипедних маршрутів</string>
     <string name="poi_railway_buffer_stop">Залізничний буфер (тупиковий упор)</string>
-    <string name="poi_slipway">Суднопідіймальний елінг</string>
+    <string name="poi_slipway">Пандус для човнів</string>
     <string name="poi_aerialway_pylon">Опора канатної дороги</string>
     <string name="poi_groyne">Хвилеріз</string>
     <string name="poi_recycling_waste_oil">Відпрацьоване масло</string>
@@ -4866,5 +4866,6 @@
     <string name="poi_us_maps_recreation_area_open_status_unreachable_2">Статус доступу до зони відпочинку (2): недосяжно</string>
     <string name="poi_us_maps_recreation_area_restrictions">Інформація про обмеження</string>
     <string name="poi_property_management">Офіс управління майном</string>
+    <string name="poi_mcdonalds">МакДональдз</string>
     <string name="poi_engineer">Інженерний кабінет</string>
 </resources>

@@ -3,11 +3,11 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:padding="@dimen/map_button_margin">
+	android:padding="4dp">
 
 	<FrameLayout
-		android:layout_width="@dimen/setting_select_icon_button_width"
-		android:layout_height="@dimen/setting_select_icon_button_height">
+		android:layout_width="@dimen/setting_select_icon_button_size"
+		android:layout_height="@dimen/setting_select_icon_button_size">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/outlineRect"

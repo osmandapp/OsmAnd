@@ -345,7 +345,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="driving_region_us">ZŠA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Eŭropa, Azіja, Łacinskaja Amieryka dy inšyja</string>
-    <string name="driving_region_uk">Vialikabrytanija, Indyija dy inšyja</string>
     <string name="speak_title">Ahałošvać…</string>
     <string name="speak_descr">Ahalošvać nazvy vulic, darožnyja pierasciarohi (vymušanyja prypynki, liažačyja palicejskija), pierasciarohi ab kamierach chutkasci, abmiežavanni chutkasci.</string>
     <string name="speak_street_names">Nazvy vulic (TTS)</string>
@@ -2028,8 +2027,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_auto_zoom">Aŭtamaštab mapy ŭkł/adkł</string>
     <string name="quick_action_auto_zoom_on">Ukliučyć aŭtamaštab mapy</string>
     <string name="quick_action_auto_zoom_off">Adkliučyć aŭtamaštab mapy</string>
-    <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
-    <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
     <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
     <string name="subscribe_email_error">Pamyłka</string>
     <string name="depth_contour_descr">Konturnyja linii marskich hlybiń i marskija znaki.</string>
@@ -2105,7 +2102,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_action_name">Nazva dziejańnia</string>
     <string name="quick_action_btn_tutorial_title">Zmianić stanovišča knopki</string>
     <string name="quick_action_map_source_switch">Krynica mapy była źmieniena na \"%s\".</string>
-    <string name="quick_action_map_source">Zmianić krynicu mapy</string>
     <string name="quick_action_map_source_title">Krynicy mapaŭ</string>
     <string name="quick_action_map_source_action">Dadać krynicu mapy</string>
     <string name="quick_action_poi_list">Spis POI</string>
@@ -2113,14 +2109,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="configure_screen_quick_action">Chutkaje dziejańnie</string>
     <string name="quick_action_item_action">Dziejańnie %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
-    <string name="quick_action_add_marker">Dadać paznaku</string>
-    <string name="quick_action_add_poi">Dadać POI</string>
-    <string name="quick_action_map_style">Zmianić styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byŭ zmienieny na \"%s\".</string>
-    <string name="quick_action_take_audio_note">Novaja hukavaja natatka</string>
-    <string name="quick_action_take_video_note">Novaja videa-natatka</string>
-    <string name="quick_action_take_photo_note">Novaja fota-natatka</string>
-    <string name="quick_action_add_osm_bug">Dadać OSM natatku</string>
     <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
     <string name="shared_string_add_photos">Dadać fatahrafii</string>
     <string name="no_photos_descr">My nie majem fatahrafij dlia hetaha miesca.</string>
@@ -2128,14 +2117,11 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="mapillary">Мapillary</string>
     <string name="quick_action_map_underlay_action">Dadać padkladku</string>
     <string name="quick_action_navigation_voice_on">Pryhlušyć Holas</string>
-    <string name="quick_action_add_parking">Dadać miesca parkoŭki</string>
     <string name="quick_action_edit_action">Redahavać dziejańnie</string>
-    <string name="quick_action_add_favorite">Dadać upadabanaje</string>
     <string name="dialog_add_action_title">Dadać dziejańnie</string>
     <string name="quick_actions_delete">Vydalić dziejańnie</string>
     <string name="quick_actions_delete_text">Vy ŭpeŭnienyja, što chočacie vydalić dziejańnie \"%s\"?</string>
     <string name="quick_action_navigation_voice_off">Ukliučyć Holas</string>
-    <string name="quick_action_add_first_intermediate">Dadać pieršy pramiežkavy punkt</string>
     <string name="quick_action_interim_dialog">Pakazać pramiežkavy dyjaloh</string>
     <string name="quick_action_poi_show">Pakazać %1$s</string>
     <string name="quick_action_poi_hide">Schavać %1$s</string>
@@ -2145,12 +2131,10 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_map_style_action">Dadać styl mapy</string>
     <string name="quick_action_empty_param_error">Zapoŭnicie ŭsie paramietry</string>
     <string name="quick_action_map_styles">Styli mapy</string>
-    <string name="quick_action_map_overlay">Zmianić mapu pakryćcia</string>
     <string name="quick_action_map_overlay_title">Mapy pakryćcia</string>
     <string name="quick_action_map_overlay_action">Dadać nakładku</string>
     <string name="quick_action_map_overlay_switch">Nakładka mapy była źmieniena na \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Padkładka mapy była źmieniena na \"%s\".</string>
-    <string name="quick_action_map_underlay">Zmianić padkładku mapy</string>
     <string name="quick_action_map_underlay_title">Padkładki mapy</string>
     <string name="no_underlay">Biez padkładki</string>
     <string name="no_overlay">Biez nakładki</string>

@@ -192,7 +192,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					|| nightModeChanged || pointImagesSize != pointImages.size()
 					|| (pointsType == PointsType.STANDARD && radius != getRadiusPoi(tileBox))
 					|| (selectedPointId != null && !selectedPointId.equals(getSelectedContextMenuPointId()))
-					|| (selectedPointId == null && getSelectedContextMenuPointId() != null)) {
+					|| (selectedPointId == null && getSelectedContextMenuPointId() != null)
+					|| pointsLocationChanged()) {
 				clearAidlTileProvider();
 			}
 			pointImagesSize = pointImages.size();
@@ -440,6 +441,19 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return r * 3 / 2;
 	}
 
+	private boolean pointsLocationChanged() {
+		if (displayedPoints.size() != aidlLayer.getPointsSize()) {
+			return true;
+		}
+		for (AidlMapPointWrapper point : displayedPoints) {
+			AidlMapPointWrapper updatedPoint = aidlLayer.getPoint(point.getId());
+			if (updatedPoint != null && !point.getLocation().equals(updatedPoint.getLocation())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AidlMapPointWrapper> points) {
 		List<AidlMapPointWrapper> aidlPoints = aidlLayer.getPoints();
 		if (view == null || Algorithms.isEmpty(aidlPoints) || tb.getZoom() < START_ZOOM) {
@@ -497,6 +511,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		clearAidlTileProvider();
 		imageRequests.clear();
+		displayedPoints.clear();
 		float yOffset = ((float)bigIconBg.getHeight()) * (1.0f - POINT_IMAGE_VERTICAL_OFFSET);
 		aidlMapLayerProvider = new AidlTileProvider(this, density, yOffset);
 		mapMarkersCollection = new MapMarkersCollection();
@@ -541,6 +556,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 							.setCaption(getText(point));
 					mapMarkerBuilder.buildAndAddToCollection(mapMarkersCollection);
 				}
+				displayedPoints.add(point);
 			}
 		}
 		aidlMapLayerProvider.drawSymbols(mapRenderer);

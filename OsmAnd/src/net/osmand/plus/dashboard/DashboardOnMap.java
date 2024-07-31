@@ -35,6 +35,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -1204,13 +1206,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
 			int originalPosition = mFlexibleSpaceImageHeight - (int) (64 * scale);
 			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
-			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) compassButton.getLayoutParams();
+			MarginLayoutParams lp = (MarginLayoutParams) compassButton.getLayoutParams();
 			if (minTop > originalPosition - scrollY) {
 				hideActionButton();
 			} else {
 				compassButton.setVisibility(View.VISIBLE);
 				lp.topMargin = originalPosition - scrollY;
-				((FrameLayout) compassButton.getParent()).updateViewLayout(compassButton, lp);
+				((ViewGroup) compassButton.getParent()).updateViewLayout(compassButton, lp);
 			}
 		}
 	}

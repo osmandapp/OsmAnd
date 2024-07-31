@@ -1,13 +1,15 @@
 package net.osmand.plus.views.layers.geometry;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Track3DStyle;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -27,39 +29,10 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	public static final int VECTOR_LINES_RESERVED = 1000;
 	private final Log log = PlatformUtil.getLog(GpxGeometryWay.class);
 
-
 	private List<WptPt> points;
 	private List<RouteSegmentResult> routeSegments;
 
 	private boolean drawDirectionArrows;
-
-	private static class GeometryWayWptPtProvider implements GeometryWayProvider {
-		private final List<WptPt> points;
-
-		public GeometryWayWptPtProvider(@NonNull List<WptPt> points) {
-			this.points = points;
-		}
-
-		@Override
-		public double getLatitude(int index) {
-			return points.get(index).getLatitude();
-		}
-
-		@Override
-		public double getLongitude(int index) {
-			return points.get(index).getLongitude();
-		}
-
-		@Override
-		public float getHeight(int index) {
-			return (float) points.get(index).getEle();
-		}
-
-		@Override
-		public int getSize() {
-			return points.size();
-		}
-	}
 
 	public GpxGeometryWay(GpxGeometryWayContext context) {
 		super(context, new GpxGeometryWayDrawer(context));
@@ -71,10 +44,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                boolean drawDirectionArrows,
 	                                @Nullable Track3DStyle track3DStyle,
 	                                @NonNull ColoringType coloringType,
-	                                @Nullable String routeInfoAttribute) {
-		boolean coloringTypeChanged = this.coloringType != coloringType
-				|| coloringType == ColoringType.ATTRIBUTE
-				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+	                                @Nullable String routeInfoAttribute,
+	                                @Nullable String gradientPaletteName) {
+		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
+				|| this.coloringType != coloringType
+				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
+				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
+
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
 		if (coloringTypeChanged) {
 			resetSymbolProviders();
@@ -88,12 +64,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (!Algorithms.objectEquals(getTrack3DStyle(), track3DStyle)) {
+		if (getTrack3DStyle() != track3DStyle) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
+		getDrawer().setOutlineColoringType(getOutlineColoringType());
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;
@@ -101,39 +78,40 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.drawDirectionArrows = drawDirectionArrows;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+		this.gradientPalette = gradientPaletteName;
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
-		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.points != points
-				|| this.routeSegments != routeSegments) {
+		if (coloringChanged || tb.getMapDensity() != getMapDensity()
+				|| this.points != points || this.routeSegments != routeSegments) {
 			this.points = points;
 			this.routeSegments = routeSegments;
 
-			if (coloringType.isTrackSolid()) {
-				if (points != null) {
-					if (hasMapRenderer()) {
-						Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
-						GeometrySolidWayStyle<?> style = getSolidWayStyle(customColor);
-						styleMap.put(0, style);
-						updateWay(new GeometryWayWptPtProvider(points), styleMap, tb);
-					} else {
-						updateWay(new GeometryWayWptPtProvider(points), tb);
-					}
+			if (points == null) {
+				clearWay();
+				return;
+			}
+
+			Track3DStyle track3DStyle = getTrack3DStyle();
+			if (hasMapRenderer() && track3DStyle != null && track3DStyle.getVisualizationType().is3dType()) {
+				updateGpx3dWay(tb, points, routeSegments);
+			} else if (coloringType.isTrackSolid()) {
+				if (hasMapRenderer()) {
+					Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+					GeometrySolidWayStyle<?> style = getSolidWayStyle(customColor);
+					styleMap.put(0, style);
+					updateWay(new GeometryWayWptPtProvider(points), styleMap, tb);
 				} else {
-					clearWay();
+					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
 			} else if (coloringType.isGradient()) {
-				if (points != null) {
-					if (hasMapRenderer()) {
-						updateGpxGradientWay(tb, points);
-					} else {
-						updateWay(new GeometryWayWptPtProvider(points), tb);
-					}
+				if (hasMapRenderer()) {
+					updateGpxGradientWay(tb, points);
 				} else {
-					clearWay();
+					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
 			} else if (coloringType.isRouteInfoAttribute()) {
-				if (points != null && routeSegments != null) {
+				if (routeSegments != null) {
 					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromSharedWpts(points), routeSegments);
 				} else {
 					clearWay();
@@ -142,40 +120,64 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		}
 	}
 
-	protected void updateGpxGradientWay(RotatedTileBox tb, List<WptPt> points) {
+	protected void updateGpxGradientWay(@NonNull RotatedTileBox tb, @NonNull List<WptPt> points) {
 		List<RouteColorizationPoint> colorizationPoints = new ArrayList<>();
 		List<Float> pointHeights = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
-			WptPt point = points.get(i);
-			RouteColorizationPoint cp = new RouteColorizationPoint(i, point.getLat(), point.getLon(), 0);
-			pointHeights.add((float) point.getEle());
-			switch (coloringType) {
-				case SPEED:
-					cp.setColor(point.getColor(ColorizationType.SPEED));
-					break;
-				case ALTITUDE:
-					cp.setColor(point.getColor(ColorizationType.ELEVATION));
-					break;
-				case SLOPE:
-					cp.setColor(point.getColor(ColorizationType.SLOPE));
-					break;
-				case DEFAULT:
-				case CUSTOM_COLOR:
-				case TRACK_SOLID:
-				case ATTRIBUTE:
-					cp.setColor(point.getColor());
-					break;
-			}
-			colorizationPoints.add(cp);
+			WptPt wptPt = points.get(i);
+			pointHeights.add((float) getPointElevation(wptPt));
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), 0);
+			point.setColor(getPointGradientColor(coloringType, wptPt));
+			colorizationPoints.add(point);
 		}
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
+	}
+
+	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points, @Nullable List<RouteSegmentResult> segments) {
+		ColoringType outlineColoringType = getOutlineColoringType();
+		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
+		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
+ 				? getRouteInfoAttributesColors(RouteProvider.locationsFromSharedWpts(points), segments) : null;
+
+		for (int i = 0; i < points.size(); i++) {
+			WptPt wptPt = points.get(i);
+			double value = getPointElevation(wptPt);
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), value);
+			point.setColor(getPointColor(coloringType, wptPt, routeColors, i));
+			if (outlineColoringType != null) {
+				point.setSecondaryColor(getPointColor(outlineColoringType, wptPt, routeColors, i));
+			}
+			colorization.add(point);
+		}
+		updateWay(new Geometry3DWayProvider(colorization), createGradient3DStyles(colorization), tileBox);
+	}
+
+	private double getPointElevation(@NonNull WptPt point) {
+		Track3DStyle style = getTrack3DStyle();
+		return style != null ? Gpx3DVisualizationType.getPointElevation(point, style, false) : 0;
+	}
+
+	@ColorInt
+	private int getPointGradientColor(@NonNull ColoringType type, @NonNull WptPt point) {
+		return type.isGradient() ? point.getColor(type.toColorizationType()) : point.getColor();
+	}
+
+	@ColorInt
+	private int getPointColor(@NonNull ColoringType type, @NonNull WptPt point, @Nullable List<Integer> routeColors, int index) {
+		if (type.isGradient()) {
+			return getPointGradientColor(type, point);
+		} else if (type.isRouteInfoAttribute()) {
+			if (routeColors != null && routeColors.size() > index) {
+				return routeColors.get(index);
+			}
+		}
+		return type.isTrackSolid() ? customColor : point.getColor();
 	}
 
 	@Override
 	protected GeometryWayStyle<?> getStyle(int index, GeometryWayStyle<?> defaultWayStyle) {
 		return coloringType.isGradient() && styleMap.containsKey(index)
-				? styleMap.get(index)
-				: super.getStyle(index, defaultWayStyle);
+				? styleMap.get(index) : super.getStyle(index, defaultWayStyle);
 	}
 
 	@NonNull
@@ -203,8 +205,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			style.trackVisualizationType = getTrack3DStyle().getVisualizationType();
 			style.trackWallColorType = getTrack3DStyle().getWallColorType();
 			style.trackLinePositionType = getTrack3DStyle().getLinePositionType();
-			style.additionalExaggeration = getTrack3DStyle().getAdditionalExaggeration();
-			style.elevationMeters = getTrack3DStyle().getElevationMeters();
+			style.additionalExaggeration = getTrack3DStyle().getExaggeration();
+			style.elevationMeters = getTrack3DStyle().getElevation();
 		}
 	}
 

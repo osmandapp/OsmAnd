@@ -9,6 +9,7 @@ import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTH
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
@@ -29,14 +30,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -49,7 +50,8 @@ public class GpxAppearanceInfo {
 
 	public String width;
 	public String coloringType;
-	public int color;
+	public String gradientPaletteName;
+	public Integer color;
 	public int splitType;
 	public double splitInterval;
 	public boolean showArrows;
@@ -76,15 +78,16 @@ public class GpxAppearanceInfo {
 
 	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		color = helper.requireParameter(item, COLOR);
+		color = helper.getParameter(item, COLOR);
 		width = helper.getParameter(item, WIDTH);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
 		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
 		splitType = helper.requireParameter(item, SPLIT_TYPE);
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		coloringType = helper.getParameter(item, COLORING_TYPE);
+		gradientPaletteName = helper.getParameter(item, COLOR_PALETTE);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
-		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
@@ -111,6 +114,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "coloring_type", coloringType);
+		writeParam(json, "color_palette", gradientPaletteName);
 		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
@@ -145,20 +149,22 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		hasAnyParam |= json.has("coloring_type");
 		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
-		if (ColoringType.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
+		if (ColoringType.Companion.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
 			hasAnyParam |= json.has("gradient_scale_type");
 			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
-			ColoringType coloringType = ColoringType.valueOf(scaleType);
+			ColoringType coloringType = ColoringType.Companion.valueOf(scaleType);
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}
 
+		hasAnyParam |= json.has("color_palette");
+		gpxAppearanceInfo.gradientPaletteName = json.optString("color_palette");
 		hasAnyParam |= json.has("line_3d_visualization_by_type");
 		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
 		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
 		hasAnyParam |= json.has("line_3d_visualization_wall_color_type");
 		String trackWallColorType = json.optString("line_3d_visualization_wall_color_type");
-		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(trackWallColorType);
 		hasAnyParam |= json.has("line_3d_visualization_position_type");
 		String trackLinePositionType = json.optString("line_3d_visualization_position_type");
 		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);

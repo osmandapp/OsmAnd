@@ -3815,4 +3815,9 @@
     <string name="poi_ice_cream_filter">Παγωτό</string>
     <string name="poi_access_scooter">Πρόσβαση σκούτερ</string>
     <string name="poi_authentication_contactless">Ανέπαφη επαλήθευση</string>
+    <string name="poi_membership_filter">Απαιτείται συνδρομή</string>
+    <string name="poi_drinking_water_refill">Γέμισμα πόσιμου νερού</string>
+    <string name="poi_permanent_camping">Μόνιμη κατασκήνωση</string>
+    <string name="poi_antenna">Κεραία</string>
+    <string name="poi_escape_game">Παιχνίδι απόδρασης</string>
 </resources>

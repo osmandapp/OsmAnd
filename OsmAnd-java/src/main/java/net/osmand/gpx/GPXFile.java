@@ -654,6 +654,19 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return pointsGroups;
 	}
 
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public Route getRouteByName(String name) {
+		for (Route route : getRoutes()) {
+			if (Algorithms.stringsEqual(route.name, name)) {
+				return route;
+			}
+		}
+		return null;
+	}
+
 	public QuadRect getRect() {
 		return getBounds(0, 0);
 	}
@@ -690,6 +703,17 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 			return extensions.get("gradient_scale_type");
 		}
 		return null;
+	}
+
+	public String getGradientColorPalette() {
+		if (extensions != null) {
+			return extensions.get("color_palette");
+		}
+		return null;
+	}
+
+	public void setGradientColorPalette(String gradientColorPaletteName) {
+		getExtensionsToWrite().put("color_palette", gradientColorPaletteName);
 	}
 
 	public void setColoringType(String coloringType) {

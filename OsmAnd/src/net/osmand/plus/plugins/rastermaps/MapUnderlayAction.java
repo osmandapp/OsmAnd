@@ -39,7 +39,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	public static final QuickActionType TYPE = new QuickActionType(MAP_UNDERLAY_ACTION_ID,
 			"mapunderlay.change", MapUnderlayAction.class).
 			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).
-			category(QuickActionType.CONFIGURE_MAP);
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 
 	public MapUnderlayAction() {

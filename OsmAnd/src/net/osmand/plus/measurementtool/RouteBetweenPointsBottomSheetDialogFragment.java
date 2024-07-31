@@ -4,7 +4,7 @@ import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.widgets.multistatetoggle.TextToggleButton.*;
+import static net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,7 +35,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
@@ -140,8 +139,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	}
 
 	private void createProfileRows(@NonNull ViewGroup container) {
-		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
-		modes.remove(ApplicationMode.DEFAULT);
+		List<ApplicationMode> modes = ApplicationMode.getModesForRouting(app);
 
 		View.OnClickListener onClickListener = view -> {
 			ApplicationMode mode = DEFAULT_APP_MODE;

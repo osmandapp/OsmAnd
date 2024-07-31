@@ -24,6 +24,7 @@ import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -67,6 +68,7 @@ public class RouteCalculationResult {
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 	protected final boolean initialCalculation;
+	protected GpxFile gpxFile;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -138,12 +140,17 @@ public class RouteCalculationResult {
 			this.routeVisibleAngle = 0;
 		}
 		this.initialCalculation = params.initialCalculation;
+		this.gpxFile = params.gpxFile;
 	}
 
-	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end,
-	                              List<LatLon> intermediates, OsmandApplication ctx, boolean leftSide,
-	                              RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode,
-								  boolean calculateFirstAndLastPoint, boolean initialCalculation) {
+	public RouteCalculationResult(List<RouteSegmentResult> list, RouteCalculationParams params, RoutingContext rctx,
+	                              List<LocationPoint> waypoints, boolean calculateFirstAndLastPoint) {
+		OsmandApplication ctx = params.ctx;
+		ApplicationMode mode = params.mode;
+		Location start = params.start;
+		LatLon end = params.end;
+		List <LatLon> intermediates = params.intermediates;
+
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -185,7 +192,8 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
-		this.initialCalculation = initialCalculation;
+		this.initialCalculation = params.initialCalculation;
+		this.gpxFile = params.gpxFile;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -1451,6 +1459,10 @@ public class RouteCalculationResult {
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
 		currentStraightAnglePoint = mp;
 		currentStraightAngleRoute = nextPoint;
+	}
+
+	public GpxFile getGpxFile() {
+		return gpxFile;
 	}
 
 	public static class NextDirectionInfo {

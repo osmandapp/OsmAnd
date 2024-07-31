@@ -28,7 +28,7 @@ public enum GpxParameter {
 	AVG_SPEED("avgSpeed", "double", Double.class, 0d, true),
 	POINTS("points", "int", Integer.class, 0, true),
 	WPT_POINTS("wptPoints", "int", Integer.class, 0, true),
-	COLOR("color", "TEXT", Integer.class, 0, false),
+	COLOR("color", "TEXT", Integer.class, null, false),
 	FILE_LAST_MODIFIED_TIME("fileLastModifiedTime", "bigint", Long.class, 0L, false),
 	FILE_LAST_UPLOADED_TIME("fileLastUploadedTime", "bigint", Long.class, 0L, false),
 	FILE_CREATION_TIME("fileCreationTime", "bigint", Long.class, -1L, false),
@@ -47,6 +47,7 @@ public enum GpxParameter {
 	ELEVATION_METERS("elevation_meters", "double", Double.class, 1000d, false),
 	WIDTH("width", "TEXT", String.class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String.class, null, false),
+	COLOR_PALETTE("colorPalette", "TEXT", String.class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double.class, Double.NaN, false),
 	MIN_FILTER_SPEED("minFilterSpeed", "double", Double.class, Double.NaN, false),
 	MAX_FILTER_SPEED("maxFilterSpeed", "double", Double.class, Double.NaN, false),
@@ -136,7 +137,8 @@ public enum GpxParameter {
 
 	public static List<GpxParameter> getAppearanceParameters() {
 		return Arrays.asList(COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
-				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL, TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE);
+				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL, TRACK_3D_LINE_POSITION_TYPE,
+				TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE, COLOR_PALETTE);
 	}
 
 	public static List<GpxParameter> getGpxDirParameters() {

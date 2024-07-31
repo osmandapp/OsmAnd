@@ -6,6 +6,7 @@ import static net.osmand.search.core.ObjectType.HOUSE;
 import static net.osmand.search.core.ObjectType.LOCATION;
 import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
 import static net.osmand.search.core.ObjectType.PARTIAL_LOCATION;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.POSTCODE;
 import static net.osmand.search.core.ObjectType.STREET;
 import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
@@ -13,6 +14,7 @@ import static net.osmand.search.core.ObjectType.VILLAGE;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
@@ -25,8 +27,58 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.util.Algorithms;
 
 public class SearchUtils {
+
+	@Nullable
+	public static PoiUIFilter getShowOnMapFilter(@NonNull OsmandApplication app, @NonNull SearchPhrase searchPhrase) {
+		PoiUIFilter filter = null;
+		if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
+			SearchUICore searchUICore = app.getSearchUICore().getCore();
+			if (searchPhrase.isNoSelectedType()) {
+				AbstractPoiType unselectedPoiType = searchUICore.getUnselectedPoiType();
+				if (isOnlineSearch(searchUICore) && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					app.getPoiFilters().resetNominatimFilters();
+					filter = app.getPoiFilters().getNominatimAddressFilter();
+					filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
+					filter.clearCurrentResults();
+				} else if (unselectedPoiType != null) {
+					filter = new PoiUIFilter(unselectedPoiType, app, "");
+					String customName = searchUICore.getCustomNameFilter();
+					if (!Algorithms.isEmpty(customName)) {
+						filter.setFilterByName(customName);
+					}
+				} else {
+					filter = app.getPoiFilters().getSearchByNamePOIFilter();
+					if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+						filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+						filter.clearCurrentResults();
+					}
+				}
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
+				if (searchPhrase.isNoSelectedType()) {
+					filter = new PoiUIFilter(null, app, "");
+				} else {
+					AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
+					filter = new PoiUIFilter(abstractPoiType, app, "");
+				}
+				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+				}
+			} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof PoiUIFilter) {
+				filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
+				if (!Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
+					filter.setFilterByName(searchPhrase.getFirstUnknownSearchWord());
+				}
+			}
+		}
+		return filter;
+	}
+
+	public static boolean isOnlineSearch(@NonNull SearchUICore searchUICore) {
+		return searchUICore.getSearchSettings().hasCustomSearchType(ONLINE_SEARCH);
+	}
 
 	public static void selectSearchResult(@NonNull OsmandApplication app, @NonNull SearchResult result) {
 		if (result.object instanceof AbstractPoiType) {

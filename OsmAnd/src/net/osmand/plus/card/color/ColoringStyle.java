@@ -7,7 +7,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -58,7 +59,7 @@ public class ColoringStyle {
 	public String toHumanString(@NonNull Context context) {
 		return coloringType == ColoringType.ATTRIBUTE
 				? getRouteInfoAttributeName(context)
-				: context.getString(coloringType.getTitleId());
+				: context.getString(context.getResources().getIdentifier(coloringType.getTitleId(), "string", context.getPackageName()));
 	}
 
 	@NonNull

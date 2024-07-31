@@ -2,16 +2,16 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.gpx.primitives.GpxExtensions
-import net.osmand.shared.gpx.primitives.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
-import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
+import net.osmand.shared.gpx.GpxUtilities.updateQR
+import net.osmand.shared.gpx.primitives.GpxExtensions
+import net.osmand.shared.gpx.primitives.Metadata
+import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
-import net.osmand.shared.gpx.GpxUtilities.updateQR
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import kotlin.collections.set
@@ -680,8 +680,8 @@ class GpxFile : GpxExtensions {
 		return extensions?.containsKey("show_start_finish") ?: false
 	}
 
-	fun isShowStartFinish(): Boolean {
-		return extensions?.get("show_start_finish")?.toBoolean() ?: true
+	fun isShowStartFinish(): Boolean? {
+		return extensions?.get("show_start_finish")?.toBoolean()
 	}
 
 	fun setShowStartFinish(showStartFinish: Boolean) {
@@ -861,6 +861,25 @@ class GpxFile : GpxExtensions {
 		dest.tag = source.tag
 		dest.value = source.value
 		return dest
+	}
+
+	fun getGradientColorPalette(): String? {
+		return if (extensions != null) {
+			extensions!!["color_palette"]
+		} else null
+	}
+
+	fun setGradientColorPalette(gradientColorPaletteName: String?) {
+		getExtensionsToWrite()["color_palette"] = gradientColorPaletteName!!
+	}
+
+	fun getRouteByName(name: String?): Route? {
+		for (route in routes) {
+			if (route.name == name) {
+				return route
+			}
+		}
+		return null
 	}
 
 	companion object {

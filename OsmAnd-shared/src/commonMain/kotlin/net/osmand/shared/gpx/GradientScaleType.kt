@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.Localization
 
 enum class GradientScaleType(
@@ -29,15 +30,14 @@ enum class GradientScaleType(
 
 	fun getHumanString(): String = Localization.getString(resId)
 
-	/* TODO
-	fun toColorizationType(): ColorizationType {
+	fun toColorizationType(): RouteColorize.ColorizationType {
 		return when (this) {
-			SPEED -> ColorizationType.SPEED
-			ALTITUDE -> ColorizationType.ELEVATION
-			SLOPE -> ColorizationType.SLOPE
+			SPEED -> RouteColorize.ColorizationType.SPEED
+			ALTITUDE -> RouteColorize.ColorizationType.ELEVATION
+			SLOPE -> RouteColorize.ColorizationType.SLOPE
+			else -> RouteColorize.ColorizationType.NONE
 		}
 	}
-	 */
 
 	companion object {
 		fun getGradientTypeByName(name: String?): GradientScaleType? {

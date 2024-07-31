@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 
 import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
 import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
+import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -218,13 +219,10 @@ public class RouteProvider {
 			}
 			if ((calcWholeRoute && !calculateOsmAndRouteParts)
 					|| routeParams.mode.getRouteService() == RouteService.ONLINE) {
-				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
-						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
+				return new RouteCalculationResult(gpxRouteResult, routeParams, null, gpxParams.wpt, true);
 			}
-			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult,
-					routeParams.start, routeParams.end, routeParams.intermediates, routeParams.ctx,
-					routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false, routeParams.initialCalculation);
+			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams, null,
+					gpxParams.wpt, false);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location nearestGpxLocation = null;
@@ -283,9 +281,7 @@ public class RouteProvider {
 						routeParams.previousToRecalculate, newGpxRoute, routeParams.start);
 			}
 
-			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
-					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
-					gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
+			return new RouteCalculationResult(newGpxRoute, routeParams, null, gpxParams.wpt, true);
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
@@ -725,6 +721,8 @@ public class RouteProvider {
 
 		OsmandSettings settings = params.ctx.getSettings();
 
+		router.CALCULATE_MISSING_MAPS = !settings.IGNORE_MISSING_MAPS;
+
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {
 			router.setDefaultHHRoutingConfig();
@@ -795,7 +793,8 @@ public class RouteProvider {
 			}
 		}
 		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)
-				&& routingType == A_STAR_2_PHASE && precalculated == null && router.getRecalculationEnd(ctx) == null;
+				&& (routingType == A_STAR_2_PHASE || routingType == HH_JAVA || routingType == HH_CPP)
+				&& precalculated == null && router.getRecalculationEnd(ctx) == null;
 
 		RoutingContext complexCtx = null;
 		if (complex) {
@@ -917,9 +916,8 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
-				RouteCalculationResult res = new RouteCalculationResult(result.getList(), params.start, params.end,
-						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode, true, params.initialCalculation);
+				RouteCalculationResult res = new RouteCalculationResult(result.getList(), params, ctx,
+						params.gpxRoute == null ? null : params.gpxRoute.wpt, true);
 				return res;
 			}
 		} catch (RuntimeException e) {
@@ -1210,14 +1208,13 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params),
-						params.start.hasBearing() ? params.start.getBearing() : null,
-						params.leftSide, params.initialCalculation, params.calculationProgress);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {
 				GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(response.getGpxFile(), settings);
 				builder.setCalculatedRouteTimeSpeed(response.hasCalculatedTimeSpeed());
+				params.gpxFile = response.getGpxFile();
 				params.gpxRoute = builder.build(app);
 				return calculateGpxRoute(params);
 			}

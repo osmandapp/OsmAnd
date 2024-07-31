@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.io.KFile
 import kotlin.math.max
 import kotlin.math.min
 
@@ -171,4 +172,22 @@ object KAlgorithms {
 		mapRect.top = max(mapRect.top, gpxRect.top)
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
+
+	fun removeAllFiles(file: KFile?): Boolean {
+		if (file == null) {
+			return false
+		}
+		return if (file.isDirectory()) {
+			val files: Array<KFile> = file.listFiles()
+			if (!isEmpty<KFile>(files)) {
+				for (f in files) {
+					removeAllFiles(f)
+				}
+			}
+			file.delete()
+		} else {
+			file.delete()
+		}
+	}
+
 }

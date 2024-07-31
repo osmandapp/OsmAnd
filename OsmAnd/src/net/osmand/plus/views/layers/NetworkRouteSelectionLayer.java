@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
 import net.osmand.plus.utils.FileUtils;
@@ -89,9 +90,11 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Pair) {
 			Pair<?, ?> pair = (Pair<?, ?>) o;
-			if (pair.first instanceof RouteKey && pair.second instanceof QuadRect) {
-				RouteKey routeKey = (RouteKey) pair.first;
-				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName());
+			if (pair.first instanceof RouteKey routeKey && pair.second instanceof QuadRect) {
+				OsmandSettings settings = app.getSettings();
+				String locale = settings.MAP_PREFERRED_LOCALE.get();
+				boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+				return new PointDescription(POINT_TYPE_ROUTE, routeKey.getRouteName(locale, transliterate));
 			}
 		}
 		return null;

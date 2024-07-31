@@ -51,7 +51,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -310,7 +310,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 					geometryWay.baseOrder = baseOrder;
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					cachedRenderer = renderer;

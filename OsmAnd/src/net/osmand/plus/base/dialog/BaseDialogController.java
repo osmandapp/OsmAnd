@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
+import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseDialogController implements IDialogController {
@@ -51,6 +52,8 @@ public abstract class BaseDialogController implements IDialogController {
 		IDialog dialog = getDialog();
 		if (dialog instanceof CustomizableBottomSheet) {
 			return ((CustomizableBottomSheet) dialog).isNightMode(app);
+		} else if (dialog instanceof ProfileAppearanceFragment) {
+			return ((ProfileAppearanceFragment) dialog).isNightMode();
 		}
 		return false;
 	}
@@ -62,11 +65,6 @@ public abstract class BaseDialogController implements IDialogController {
 
 	public int getDimension(@DimenRes int id) {
 		return app.getResources().getDimensionPixelSize(id);
-	}
-
-	@NonNull
-	public String getString(@StringRes int stringId) {
-		return app.getString(stringId);
 	}
 
 	@NonNull

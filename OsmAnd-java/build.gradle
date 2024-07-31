@@ -6,19 +6,18 @@ configurations {
 	android
 }
 
-//tasks.withType(JavaCompile) {
-//	sourceCompatibility = "1.7"
-//	targetCompatibility = "1.7"
-//	options.encoding = 'UTF-8'
-//}
+tasks.withType(JavaCompile).configureEach {
+	sourceCompatibility = "17"
+	targetCompatibility = "17"
+}
 
-task collectRoutingResources(type: Sync) {
+tasks.register('collectRoutingResources', Sync) {
 	from "../../resources/routing"
 	into "src/main/resources/net/osmand/router"
 	include "*.xml"
 }
 
-task collectMiscResources(type: Copy) {
+tasks.register('collectMiscResources', Copy) {
 	into "src/main/resources/net/osmand/osm"
 	from("../../resources/obf_creation") {
 		include "rendering_types.xml"
@@ -28,27 +27,27 @@ task collectMiscResources(type: Copy) {
 	}
 }
 
-task collectRenderingStylesResources(type: Sync) {
+tasks.register('collectRenderingStylesResources', Sync) {
 	from "../../resources/rendering_styles"
 	into "src/main/resources/net/osmand/render"
 	include "*.xml"
 }
 
-task collectRegionsInfoResources(type: Download)  {
+tasks.register('collectRegionsInfoResources', Download) {
 	src 'https://creator.osmand.net/basemap/regions.ocbf'
 	dest 'src/main/resources/net/osmand/map/regions.ocbf'
 	onlyIfModified true
 }
 
 
-task collectTestPhrasesResources(type: Copy) {
+tasks.register('collectTestPhrasesResources', Copy) {
 	into "src/test/resources/phrases/en/"
 	from("../OsmAnd/res/values") {
 		include "phrases.xml"
 	}
 }
 
-task collectTestResources(type: Copy) {
+tasks.register('collectTestResources', Copy) {
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
 		include "*"
@@ -71,23 +70,23 @@ processTestResources {
 	dependsOn collectTestResources, collectTestPhrasesResources
 }
 
-task collectExternalResources {
+tasks.register('collectExternalResources') {
 	dependsOn collectRoutingResources,
-		collectRenderingStylesResources,
-		collectRegionsInfoResources,
-		collectTestResources,
-		collectTestPhrasesResources,
-		collectMiscResources
+			collectRenderingStylesResources,
+			collectRegionsInfoResources,
+			collectTestResources,
+			collectTestPhrasesResources,
+			collectMiscResources
 }
 
-task androidJar(type: Jar) {
+tasks.register('androidJar', Jar) {
 	if (!project.hasProperty('osmandCoreSimple')) {
 		dependsOn collectExternalResources, build
 	} else {
 		dependsOn build
 	}
-	appendix = "android"
-	from (sourceSets.main.java.outputDir) {
+	archiveAppendix = "android"
+	from(sourceSets.main.java.classesDirectory) {
 		exclude("**/PlatformUtil.*")
 	}
 	from sourceSets.main.resources
@@ -117,7 +116,7 @@ publishing {
         }
 		ivyJava(IvyPublication) {
 			artifact androidJar {
-				classifier 'android'
+				archiveClassifier = 'android'
 			}
 		}
 	}

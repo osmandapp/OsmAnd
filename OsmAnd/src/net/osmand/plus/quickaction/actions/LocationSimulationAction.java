@@ -50,9 +50,10 @@ import java.io.File;
 public class LocationSimulationAction extends QuickAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(LOCATION_SIMULATION_ACTION_ID, "location.simulation", LocationSimulationAction.class)
-			.nameRes(R.string.simulate_location_by_gpx)
+			.nameRes(R.string.quick_action_location_by_gpx)
 			.iconRes(R.drawable.ic_action_start_navigation).nonEditable()
-			.category(QuickActionType.NAVIGATION);
+			.category(QuickActionType.NAVIGATION)
+			.nameActionRes(R.string.shared_string_simulate);
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
@@ -305,7 +306,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
 			return app.getString(R.string.stop_navigation_service);

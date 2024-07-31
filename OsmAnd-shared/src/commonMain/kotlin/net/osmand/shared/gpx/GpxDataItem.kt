@@ -91,17 +91,21 @@ class GpxDataItem(
 		when (parameter) {
 			GpxParameter.COLOR -> setParameter(GpxParameter.COLOR, gpxFile.getColor(0))
 			GpxParameter.WIDTH -> setParameter(GpxParameter.WIDTH, gpxFile.getWidth(null))
-			GpxParameter.SHOW_ARROWS -> setParameter(
-				GpxParameter.SHOW_ARROWS,
-				gpxFile.isShowArrows()
-			)
+			GpxParameter.SHOW_ARROWS ->
+				setParameter(
+					GpxParameter.SHOW_ARROWS,
+					if (gpxFile.isShowArrowsSet()) gpxFile.isShowArrows() else null)
 
 			GpxParameter.SHOW_START_FINISH -> {
+				//todo check
+//				setParameter(
+//					GpxParameter.TRACK_VISUALIZATION_TYPE,
+//					gpxFile.get3DVisualizationType()
+//				)
 				setParameter(
-					GpxParameter.TRACK_VISUALIZATION_TYPE,
-					gpxFile.get3DVisualizationType()
-				)
-				setParameter(GpxParameter.SHOW_START_FINISH, gpxFile.isShowStartFinish())
+					GpxParameter.SHOW_START_FINISH,
+					if (gpxFile.isShowStartFinishSet()) gpxFile.isShowStartFinish() else null);
+
 			}
 
 			GpxParameter.SPLIT_TYPE -> {
@@ -128,7 +132,12 @@ class GpxDataItem(
 				}
 			}
 
-			GpxParameter.TRACK_VISUALIZATION_TYPE -> setParameter(
+			GpxParameter.COLOR_PALETTE ->
+				if (gpxFile.getGradientColorPalette()?.isNotEmpty() == true) {
+					setParameter(GpxParameter.COLOR_PALETTE, gpxFile.getGradientColorPalette())
+				}
+
+				GpxParameter.TRACK_VISUALIZATION_TYPE -> setParameter(
 				GpxParameter.TRACK_VISUALIZATION_TYPE,
 				gpxFile.get3DVisualizationType()
 			)

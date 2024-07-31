@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -32,11 +33,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
@@ -189,6 +194,7 @@ public class DownloadOsmandIndexesHelper {
 
 	@NonNull
 	public static List<AssetEntry> getBundledAssets(@NonNull AssetManager assetManager) throws XmlPullParserException, IOException {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser();
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
 		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
@@ -199,7 +205,16 @@ public class DownloadOsmandIndexesHelper {
 				String source = xmlParser.getAttributeValue(null, "source");
 				String destination = xmlParser.getAttributeValue(null, "destination");
 				String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				assets.add(new AssetEntry(source, destination, combinedMode));
+				AssetEntry ae = new AssetEntry(source, destination, combinedMode);
+				String version = xmlParser.getAttributeValue(null, "version");
+				if (!Algorithms.isEmpty(version)) {
+					try {
+						ae.version = DATE_FORMAT.parse(version);
+					} catch (ParseException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+				assets.add(ae);
 			}
 		}
 		isBundledAssetsXml.close();
@@ -404,6 +419,7 @@ public class DownloadOsmandIndexesHelper {
 		public final String source;
 		public final String destination;
 		public final String combinedMode;
+		public Date version = null;
 
 		public AssetEntry(String source, String destination, String combinedMode) {
 			this.source = source;

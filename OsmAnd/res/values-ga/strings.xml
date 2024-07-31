@@ -688,7 +688,6 @@
     <string name="map_rendering_engine_v1">Leagan 1</string>
     <string name="save_track_external_sensors_data">Sonraí</string>
     <string name="stop_download_desc">Níl an íoslódáil críochnaithe. Má bhriseann tú anois í, ní bheidh tú in ann ach páirt de na tíleanna a fheiceáil.</string>
-    <string name="quick_action_add_favorite">Cuir ceanán leis</string>
     <string name="bg_service_screen_lock">Glasáil</string>
     <string name="amenity_type_administrative">Riaracháin</string>
     <string name="map_is_up_to_date">Tá an léarscáil %1$s cothrom le dáta.</string>
@@ -1786,7 +1785,6 @@
     <string name="local_openstreetmap_uploadall">Uaslódáil uile</string>
     <string name="daynight_mode_sensor">Braiteoir solais</string>
     <string name="use_location">Úsáid mo shuíomh</string>
-    <string name="quick_action_add_destination">Socraigh an ceann scríbe</string>
     <string name="show_all_tracks">Taispeáin gach conair</string>
     <string name="amenity_type_osmwiki">Vicipéid (as líne)</string>
     <string name="continuous_rendering">Rindreáil leanúnach</string>
@@ -2217,4 +2215,5 @@
     <string name="dangerous_goods">Earraí contúirteacha</string>
     <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
     <string name="shared_string_copyright">Cóipcheart</string>
+    <string name="weather_source_ecmwf_description">Airmheán Eorpach um Réamhaisnéisí Aimsire Meántréimhseacha (ECMWF)</string>
 </resources>

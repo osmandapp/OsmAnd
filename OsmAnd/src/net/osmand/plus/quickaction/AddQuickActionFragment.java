@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.AddQuickActionsAdapter.DEFAULT_MODE;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -20,14 +23,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.util.Algorithms;
 
-public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
+public class AddQuickActionFragment extends BaseOsmAndFragment
+		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddQuickActionFragment.class.getSimpleName();
 
@@ -44,6 +51,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	private AddQuickActionController controller;
 	private boolean searchMode = false;
+	private OnBackPressedCallback backPressedCallback;
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
@@ -61,9 +69,9 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 		controller = AddQuickActionController.getExistedInstance(app);
 		if (controller == null) {
-			closeFragment();
+			dismiss();
 		} else {
-			controller.registerDialog(TAG);
+			controller.registerDialog(TAG, this);
 			if (savedInstanceState != null) {
 				searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
 			}
@@ -81,8 +89,27 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		setupSearchBar(view);
 		setupToolbar(view);
 		setupContent(view, savedInstanceState);
+		setupOnBackPressedCallback();
 
 		return view;
+	}
+
+	private void setupOnBackPressedCallback(){
+		backPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				if (searchMode) {
+					setSearchMode(false);
+				} else {
+					this.setEnabled(false);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						activity.onBackPressed();
+					}
+				}
+			}
+		};
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -91,7 +118,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		title.setText(R.string.dialog_add_action_title);
 
 		backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setOnClickListener(v -> onBackPressed());
+		backButton.setOnClickListener(v -> backPressedCallback.handleOnBackPressed());
 
 		searchButton = toolbar.findViewById(R.id.search_button);
 		searchButton.setOnClickListener(v -> setSearchMode(true));
@@ -125,6 +152,8 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		this.searchMode = searchMode;
 		if (!searchMode) {
 			resetSearchQuery();
+		} else {
+			backPressedCallback.setEnabled(true);
 		}
 		updateToolbar();
 		updateAdapter();
@@ -146,6 +175,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	private void setupContent(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
+		adapter.setAdapterMode(DEFAULT_MODE);
 		adapter.setMap(controller.getAdapterItems());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -162,18 +192,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		adapter.setSearchMode(searchMode);
 	}
 
-	private void onBackPressed() {
-		if (searchMode) {
-			setSearchMode(false);
-		} else {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		}
-	}
-
-	private void closeFragment() {
+	private void dismiss() {
 		FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -191,7 +210,10 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(QUICK_ACTION_SEARCH_KEY, adapter.getSearchQuery());
+		String searchQuery = adapter.getSearchQuery();
+		if (!Algorithms.isEmpty(searchQuery)) {
+			outState.putString(QUICK_ACTION_SEARCH_KEY, adapter.getSearchQuery());
+		}
 		outState.putBoolean(QUICK_ACTION_SEARCH_MODE_KEY, searchMode);
 		super.onSaveInstanceState(outState);
 	}
@@ -210,8 +232,26 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	}
 
 	@Override
-	public void onQuickActionAdded() {
-		closeFragment();
+	public void onAskDismissDialog(@NonNull String processId) {
+		dismiss();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).enableDrawer();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
