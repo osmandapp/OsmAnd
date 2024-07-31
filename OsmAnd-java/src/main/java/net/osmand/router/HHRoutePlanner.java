@@ -416,7 +416,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					break;
 				}
 			}
-			updateCtxStartEndRoads(hctx.rctx, startP, endP);
+			hctx.rctx.initStartAndTargetPoints(startP, endP);
 			Double prev = hctx.rctx.config.initialDirection;
 			hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
@@ -449,15 +449,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
 		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
-	}
-
-	private void updateCtxStartEndRoads(RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end) {
-		ctx.startRoadId = start.road.getId();
-		ctx.startSegmentInd = start.getSegmentStart();
-		ctx.startSegmentIndEnd = start.getSegmentEnd();
-		ctx.targetRoadId = end.road.getId();
-		ctx.targetSegmentInd = end.getSegmentStart();
-		ctx.targetSegmentIndEnd = end.getSegmentEnd();
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
