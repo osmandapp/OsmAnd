@@ -107,7 +107,7 @@ public class ShowHidePoiAction extends QuickAction {
 		PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
 		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
-			pf.clearSelectedPoiFilters();
+			pf.clearGeneralSelectedPoiFilters();
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
@@ -115,7 +115,7 @@ public class ShowHidePoiAction extends QuickAction {
 				pf.addSelectedPoiFilter(filter);
 			}
 		} else {
-			pf.clearSelectedPoiFilters();
+			pf.clearGeneralSelectedPoiFilters();
 		}
 
 		mapActivity.getMapLayers().updateLayers(mapActivity);

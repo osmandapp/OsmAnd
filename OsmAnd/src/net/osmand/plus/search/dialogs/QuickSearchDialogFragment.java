@@ -796,7 +796,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearSelectedPoiFilters();
+		app.getPoiFilters().clearGeneralSelectedPoiFilters();
 		dismiss();
 	}
 
