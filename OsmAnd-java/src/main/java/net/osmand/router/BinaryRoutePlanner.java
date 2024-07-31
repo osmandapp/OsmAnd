@@ -451,6 +451,22 @@ public class BinaryRoutePlanner {
 		System.out.println(logMsg);
 	}
 
+	private boolean ignoreObstaclesOnStartEndPoints(RoutingContext ctx, long roadId, int segmentInd, boolean dir) {
+		if (roadId == ctx.startRoadId) {
+			int ignoreIndex = dir ? ctx.startSegmentIndEnd : ctx.startSegmentInd;
+			if (segmentInd == ignoreIndex) {
+				return true;
+			}
+		}
+		if (roadId == ctx.targetRoadId) {
+			int ignoreIndex = dir ? ctx.targetSegmentInd : ctx.targetSegmentIndEnd;
+			if (segmentInd == ignoreIndex) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private double calculateRouteSegmentTime(RoutingContext ctx, boolean reverseWaySearch, RouteSegment segment) {
 		final RouteDataObject road = segment.road;
 		// store <segment> in order to not have unique <segment, direction> in visitedSegments
@@ -458,6 +474,11 @@ public class BinaryRoutePlanner {
 		short prevSegmentInd = !reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 
 		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
+
+		if (ignoreObstaclesOnStartEndPoints(ctx, road.getId(), segmentInd, prevSegmentInd > segmentInd)) {
+			return distTimeOnRoadToPass;
+		}
+
 		// calculate possible obstacle plus time
 		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
 		if (obstacle < 0) {
@@ -468,7 +489,6 @@ public class BinaryRoutePlanner {
 			return -1;
 		}
 		return obstacle + heightObstacle + distTimeOnRoadToPass;
-
 	}
 
 	

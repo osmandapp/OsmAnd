@@ -416,6 +416,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					break;
 				}
 			}
+			hctx.rctx.initStartAndTargetPoints(startP, endP);
 			Double prev = hctx.rctx.config.initialDirection;
 			hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
