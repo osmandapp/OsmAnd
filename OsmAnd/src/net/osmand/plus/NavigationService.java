@@ -25,7 +25,6 @@ import androidx.car.app.navigation.model.Trip;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.auto.screens.NavigationScreen;
@@ -132,7 +131,7 @@ public class NavigationService extends Service {
 			setCarContext(carNavigationSession.getCarContext());
 		}
 
-		Notification notification = app.getNotificationHelper().buildTopNotification();
+		Notification notification = app.getNotificationHelper().buildTopNotification(this);
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			if (isUsedBy(USED_BY_NAVIGATION)) {
@@ -148,12 +147,14 @@ public class NavigationService extends Service {
 			} catch (Exception e) {
 				setCarContext(null);
 				app.setNavigationService(null);
+				LOG.error("Failed to start NavigationService (usedBy=" + usedBy + ", "
+						+ "carNavigationSession = " + (carNavigationSession != null ? "yes" : "no") + ")", e);
 				usedBy = 0;
-				LOG.error("Failed to start NavigationService", e);
 				return START_NOT_STICKY;
 			}
 		} else {
-			LOG.error("NavigationService could not be started because the notification is null.");
+			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy
+					+ " carNavigationSession = " + (carNavigationSession != null ? "yes" : "no"));
 			stopSelf();
 			return START_NOT_STICKY;
 		}
