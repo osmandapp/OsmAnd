@@ -230,6 +230,7 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		this.lastGoodRouteLocation = null;
 		this.intermediatePoints = newIntermediatePoints;
 		routeRecalculationHelper.stopCalculation();
 		if (newFinalLocation == null) {
