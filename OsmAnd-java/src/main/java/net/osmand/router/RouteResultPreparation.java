@@ -2459,7 +2459,7 @@ public class RouteResultPreparation {
 		if (countLanesMinOne(curr) < countLanesMinOne(prev)) {
 			List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
 			if (attachedRoutes.size() == 1) {
-				return countLanesMinOne(attachedRoutes.get(0)) > 2;
+				return countLanesMinOne(attachedRoutes.get(0)) >= 2;
 			}
 		}
 		return false;
