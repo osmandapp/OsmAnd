@@ -3196,7 +3196,7 @@
     <string name="poi_cuisine_souvlaki">Souvlaki</string>
     <string name="poi_cuisine_smoothie">Smoothie</string>
     <string name="poi_cuisine_falafel">Falafel</string>
-    <string name="poi_cuisine_piadina">Piadina</string>
+    <string name="poi_cuisine_piadina">Piadină</string>
     <string name="poi_cuisine_tacos">Taco</string>
     <string name="poi_cuisine_canteen">Cantină</string>
     <string name="poi_cuisine_dessert">Desert</string>
@@ -3215,7 +3215,7 @@
     <string name="poi_cuisine_tea_shop">Magazin de ceai</string>
     <string name="poi_cuisine_tea">Ceai</string>
     <string name="poi_cuisine_fine_dining">Mâncare rafinată</string>
-    <string name="poi_cuisine_soba">Soba</string>
+    <string name="poi_cuisine_soba">Sobă</string>
     <string name="poi_cuisine_juice">Suc de fructe</string>
     <string name="poi_cuisine_fast_food">Fast food</string>
     <string name="poi_cuisine_pasta">Paste</string>
