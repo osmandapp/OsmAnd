@@ -42,6 +42,7 @@ import java.util.TimeZone;
 public class TripHelper {
 
 	public static final float TURN_IMAGE_SIZE_DP = 128f;
+	public static final float NEXT_TURN_IMAGE_SIZE_DP = 48f;
 	public static final float TURN_LANE_IMAGE_SIZE = 64f;
 	public static final float TURN_LANE_IMAGE_MIN_DELTA = 36f;
 	public static final float TURN_LANE_IMAGE_MARGIN = 4f;
@@ -107,6 +108,7 @@ public class TripHelper {
 			int turnImminent = 0;
 			int nextTurnDistance = 0;
 			NextDirectionInfo nextDirInfo = null;
+			NextDirectionInfo nextNextDirInfo = null;
 			NextDirectionInfo calc = new NextDirectionInfo();
 			if (deviatedFromRoute) {
 				turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
@@ -141,8 +143,8 @@ public class TripHelper {
 			if (nextDirInfo != null && atd != null) {
 				float speed = atd.getSpeed(currentLocation);
 				int dist = nextDirInfo.distanceTo;
+				nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
 				if (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
-					NextDirectionInfo nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
 					if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
 							(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
 									|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
@@ -212,8 +214,46 @@ public class TripHelper {
 			Step step = stepBuilder.build();
 			TravelEstimate stepTravelEstimate = stepTravelEstimateBuilder.build();
 			tripBuilder.addStep(step, stepTravelEstimate);
+
 			lastStep = step;
 			lastStepTravelEstimate = stepTravelEstimate;
+
+			if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0 && nextNextDirInfo.directionInfo != null) {
+				Step.Builder nextStepBuilder = new Step.Builder();
+				Maneuver.Builder nextTurnBuilder;
+				nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
+				if (nextTurnType != null) {
+					TurnDrawable drawable = new TurnDrawable(app, false);
+					int height = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
+					int width = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
+					drawable.setBounds(0, 0, width, height);
+					drawable.setTurnType(nextTurnType);
+					drawable.setTurnImminent(nextNextDirInfo.imminent, deviatedFromRoute);
+					Bitmap turnBitmap = drawableToBitmap(drawable, width, height);
+					nextTurnBuilder = new Maneuver.Builder(getManeuverType(nextTurnType));
+					if (nextTurnType.isRoundAbout()) {
+						nextTurnBuilder.setRoundaboutExitNumber(nextTurnType.getExitOut());
+					}
+					nextTurnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(turnBitmap)).build());
+				} else {
+					nextTurnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
+				}
+				Maneuver nextManeuver = nextTurnBuilder.build();
+				nextStepBuilder.setManeuver(nextManeuver);
+
+				int leftNextTurnTimeSec = leftTurnTimeSec + nextNextDirInfo.directionInfo.getExpectedTime();
+				long nextTurnArrivalTime = System.currentTimeMillis() + leftNextTurnTimeSec * 1000L;
+				Distance nextStepDistance = getFormattedDistance(app, nextNextDirInfo.distanceTo);
+				DateTimeWithZone nextStepDateTime = DateTimeWithZone.create(nextTurnArrivalTime, TimeZone.getDefault());
+				TravelEstimate.Builder nextStepTravelEstimateBuilder = new TravelEstimate.Builder(nextStepDistance, nextStepDateTime);
+				nextStepTravelEstimateBuilder.setRemainingTimeSeconds(leftNextTurnTimeSec >= 0 ? leftNextTurnTimeSec : REMAINING_TIME_UNKNOWN);
+
+				nextStepBuilder.setCue(getFormattedDistanceStr(app, nextNextDirInfo.distanceTo));
+
+				Step nextStep = nextStepBuilder.build();
+				TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
+				tripBuilder.addStep(nextStep, nextStepTravelEstimate);
+			}
 		} else {
 			lastStep = null;
 			lastStepTravelEstimate = null;
@@ -312,6 +352,11 @@ public class TripHelper {
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 		drawable.draw(canvas);
 		return bitmap;
+	}
+
+	private static String getFormattedDistanceStr(@NonNull OsmandApplication app, double meters) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		return OsmAndFormatter.getFormattedDistance((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
 	}
 
 	private static Distance getFormattedDistance(@NonNull OsmandApplication app, double meters) {
