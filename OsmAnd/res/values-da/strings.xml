@@ -2943,7 +2943,7 @@
     <string name="profile_alert_need_save_title">Gem ændringer</string>
     <string name="profile_alert_need_save_msg">Gem ændringer til profilen først</string>
     <string name="profile_alert_delete_title">Slet profil</string>
-    <string name="profile_alert_delete_msg">Slet profilen \"%s\"\?</string>
+    <string name="profile_alert_delete_msg">Slet profilen \"%s\"</string>
     <string name="select_base_profile_dialog_title">Vælg en profil til at starte med</string>
     <string name="select_base_profile_dialog_message">Basér den brugerdefinerede profil på en af standard app-profilerne, dette definerer den grundlæggende opsætning som standard synlighed for moduler og enheder for hastighed og distance. Dette er standard app-profilerne, sammen med eksempler på brugerdefinerede profiler kan de udvides til:</string>
     <string name="select_nav_profile_dialog_title">Vælg navigationstype</string>

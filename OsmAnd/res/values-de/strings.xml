@@ -4932,7 +4932,7 @@
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
     <string name="temperature_layer">Temperaturebene</string>
-    <string name="pressure_layer">Druckebene</string>
+    <string name="pressure_layer">Luftdruckebene</string>
     <string name="wind_layer">Windebene</string>
     <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
@@ -5804,7 +5804,7 @@
     <string name="quick_action_photo_note">Fotonotiz</string>
     <string name="quick_action_parking_place">Parkplatz</string>
     <string name="quick_action_verb_show_hide">Einblenden / Ausblenden</string>
-    <string name="quick_action_verb_pause_resume">Einschalten / Ausschalten</string>
+    <string name="quick_action_verb_pause_resume">Pause / Fortsetzen</string>
     <string name="quick_action_verb_start_stop">Start / Stopp</string>
     <string name="weather_screen">Wetterbildschirm</string>
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>

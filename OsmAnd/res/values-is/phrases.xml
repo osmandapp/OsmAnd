@@ -4899,4 +4899,17 @@
     <string name="poi_us_maps_recreation_area_facility_parking">Bílastæði</string>
     <string name="poi_impromptu">Án fyrirvara</string>
     <string name="poi_reservation">Pöntun</string>
+    <string name="poi_mcdonalds">McDonalds</string>
+    <string name="poi_engineer">Skrifstofa verkfræðings</string>
+    <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Lendingarstaður flugvéla</string>
+    <string name="poi_us_maps_recreation_area_facility_ranger_station_office">Landvarðastöð/Svæðisskrifstofa</string>
+    <string name="poi_us_maps_recreation_area_facility_boat_launch">Bátavör</string>
+    <string name="poi_us_maps_recreation_area_facility_horse_corral">Hestagerði</string>
+    <string name="poi_nfs_yes">Stýrt af United States Forest Service</string>
+    <string name="poi_us_maps_recreation_area_facility_boat_ramp">Bátarampur</string>
+    <string name="poi_us_maps_recreation_area_facility_group_shelter">Skýli fyrir hópa</string>
+    <string name="poi_us_maps_recreation_area_facility_fire_lookout">Útsýnisturn vegna gróðurelda</string>
+    <string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Náttúruverndarsvæði</string>
+    <string name="poi_blm_yes">Stýrt af Bureau Of Land Management</string>
+    <string name="poi_property_management">Skrifstofa eignaumsýslu</string>
 </resources>
