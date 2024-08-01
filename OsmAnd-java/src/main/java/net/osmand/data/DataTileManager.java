@@ -66,7 +66,7 @@ public class DataTileManager<T> {
 
 	public List<T> getAllObjects() {
 		List<T> l = new ArrayList<>();
-		for (List<T> s : objects.valueCollection()) {
+		for (List<T> s : getAllEditObjects()) {
 			l.addAll(s);
 		}
 		return l;

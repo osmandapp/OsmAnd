@@ -210,7 +210,7 @@ public class AndroidUtils {
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
 		width += width % 2 == 1 ? 1 : 0;
 		height += height % 2 == 1 ? 1 : 0;
-		return createScaledBitmap(drawable, width, height);
+		return scaleBitmap(drawableToBitmap(drawable), width, height, true);
 	}
 
 	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
