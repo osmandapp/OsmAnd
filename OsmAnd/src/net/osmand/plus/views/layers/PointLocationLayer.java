@@ -281,6 +281,12 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateMarkerCollection();
+	}
+
 	private boolean recreateMarkerCollection() {
 		if (view == null || !hasMapRenderer()) {
 			return false;

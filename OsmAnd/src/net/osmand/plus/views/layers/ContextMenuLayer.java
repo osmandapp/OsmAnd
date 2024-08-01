@@ -175,6 +175,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		contextMarkerImage = getScaledBitmap(R.drawable.map_pin_context_menu, scale);
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateContextMarker();
+	}
+
 	public Object getSelectedObject() {
 		return selectedObject;
 	}

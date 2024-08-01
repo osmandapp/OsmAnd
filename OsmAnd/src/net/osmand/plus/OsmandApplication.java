@@ -222,6 +222,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
+	private float density = 1f;
 	// Typeface
 
 	@Override
@@ -504,6 +505,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+		if(density != resources.getDisplayMetrics().density) {
+			density = resources.getDisplayMetrics().density;
+			getUIUtilities().clearCache();
+		}
 
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
@@ -920,8 +926,14 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public Resources getResources() {
-		Resources localizedResources = localeHelper.getLocalizedResources();
-		return localizedResources != null ? localizedResources : super.getResources();
+		OsmandMap map = getOsmandMap();
+		MapActivity a = null;
+		if (map != null) {
+			a = map.getMapView().getMapActivity();
+		}
+		Resources localizedResources = localeHelper.getLocalizedResources(a == null ? this : a);
+		return localizedResources != null ? localizedResources :
+				(a == null ? super.getResources() : a.getResources());
 	}
 
 	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {

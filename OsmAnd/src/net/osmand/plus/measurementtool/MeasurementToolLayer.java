@@ -135,6 +135,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 		this.chartPointsHelper = new ChartPointsHelper(getContext());
 
+		createResources(view);
+	}
+
+	private void createResources(@NonNull OsmandMapTileView view) {
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
@@ -158,6 +162,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		createResources(view);
 	}
 
 	@Override
