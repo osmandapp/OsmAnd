@@ -27,6 +27,8 @@ import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.avoidroads.DirectionPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.measurementtool.GpxApproximationHelper;
+import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
@@ -37,23 +39,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.RoutingType;
-import net.osmand.router.GeneralRouter;
+import net.osmand.router.*;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
-import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.PrecalculatedRouteDirection;
-import net.osmand.router.RouteExporter;
-import net.osmand.router.RouteImporter;
-import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-import net.osmand.router.RoutingContext;
-import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -65,13 +57,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.FactoryConfigurationError;
@@ -89,16 +75,16 @@ public class RouteProvider {
 	private static final int MIN_INTERMEDIATE_DIST = 10;
 	private static final int NEAREST_POINT_EXTRA_SEARCH_DISTANCE = 300;
 
-	public static Location createLocation(WptPt pt){
+	public static Location createLocation(@NonNull WptPt pt) {
 		Location loc = new Location("OsmandRouteProvider");
 		loc.setLatitude(pt.lat);
 		loc.setLongitude(pt.lon);
 		loc.setSpeed((float) pt.speed);
-		if(!Double.isNaN(pt.ele)) {
+		if (!Double.isNaN(pt.ele)) {
 			loc.setAltitude(pt.ele);
 		}
 		loc.setTime(pt.time);
-		if(!Double.isNaN(pt.hdop)) {
+		if (!Double.isNaN(pt.hdop)) {
 			loc.setAccuracy((float) pt.hdop);
 		}
 		return loc;
@@ -112,7 +98,7 @@ public class RouteProvider {
 		return locations;
 	}
 
-	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params) {
+	public RouteCalculationResult calculateRouteImpl(@NonNull RouteCalculationParams params) {
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
 			params.calculationProgress.routeCalculationStartTime = time;
@@ -122,8 +108,7 @@ public class RouteProvider {
 			}
 			try {
 				RouteCalculationResult res;
-				boolean calcGPXRoute = params.gpxRoute != null && (!params.gpxRoute.points.isEmpty()
-						|| (params.gpxRoute.reverse && !params.gpxRoute.routePoints.isEmpty()));
+				boolean calcGPXRoute = shouldCalculateGpxRoute(params);
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
@@ -165,6 +150,21 @@ public class RouteProvider {
 			}
 		}
 		return new RouteCalculationResult(null);
+	}
+
+	private boolean shouldCalculateGpxRoute(@NonNull RouteCalculationParams params) {
+		if (params.gpxRoute != null) {
+			GpxApproximationParams approximationParams = params.gpxRoute.approximationParams;
+			if (approximationParams != null && !params.gpxRoute.gpxFile.isAttachedToRoads()) {
+				GPXFile gpxFile = GpxApproximationHelper.approximateGpxSync(params.ctx, params.gpxRoute.gpxFile, approximationParams);
+				if (gpxFile.error == null && gpxFile.isAttachedToRoads()) {
+					params.gpxRoute = new GPXRouteParamsBuilder(gpxFile, params.gpxRoute).build(params.ctx, params.end);
+				}
+			}
+			return params.gpxRoute != null && (!params.gpxRoute.points.isEmpty()
+					|| (params.gpxRoute.reverse && !params.gpxRoute.routePoints.isEmpty()));
+		}
+		return false;
 	}
 
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
