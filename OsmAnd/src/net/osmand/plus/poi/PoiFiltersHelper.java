@@ -22,6 +22,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
