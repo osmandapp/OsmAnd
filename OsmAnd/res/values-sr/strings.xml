@@ -5640,82 +5640,82 @@
 \n • ОпенСтритМап пријављивање је пребачено на ОАут 2.0
 \n
 \n</string>
-    <string name="distance_during_navigation">Растојање током навигације</string>
-    <string name="precise">Прецизно</string>
-    <string name="distance_during_navigation_description">Одаберите како се информације о удаљености приказују у навигационим виџетима (удаљеност до тачке, следеће скретање, траке).
+    <string name="distance_during_navigation">Растојање током навођења</string>
+    <string name="precise">Тачно</string>
+    <string name="distance_during_navigation_description">Одаберите како се подаци о удаљености приказују у навођењским справицама (удаљеност до тачке, следеће скретање, траке).
 \n
 \nИзаберите „%1$s“ за тачне бројеве или „%2$s“ за лакшу читљивост.</string>
     <string name="round_up">Заокружено</string>
-    <string name="upload_local_versions">Отпреми локалне верзије</string>
-    <string name="download_cloud_versions">Преузми верзије облака</string>
-    <string name="map_widget_map_scale">Размера мапе</string>
-    <string name="unchanged_parameter_summary">Свака путања задржаће своје сопствене параметре.</string>
+    <string name="upload_local_versions">Отпреми местна издања</string>
+    <string name="download_cloud_versions">Преузми издања из облака</string>
+    <string name="map_widget_map_scale">Размера карте</string>
+    <string name="unchanged_parameter_summary">Сваки траг задржаће своје сопствене одреднице.</string>
     <string name="shared_string_unchanged">Непромењено</string>
     <string name="gpx_approximation_cpp">Рутирање-базирано (C++)</string>
     <string name="gpx_approximation_geo_java">Рутирање-базирано (Јава, брзо)</string>
     <string name="gpx_approximation_java">Рутирање-базирано (Јава)</string>
-    <string name="fix_north_up_descr">Не ротирајте мапу покретима у оријентацији карте Север Горе</string>
-    <string name="fix_north_up">Омогући Фиксни Север Горе</string>
-    <string name="change_default_appearance_confirmation">Променити подразумеван изглед за %1$s?</string>
+    <string name="fix_north_up_descr">Не окреће карту покретима у усмерењу карте Север навише</string>
+    <string name="fix_north_up">Омогући причвршћавање Севера навише</string>
+    <string name="change_default_appearance_confirmation">Да ли променит подразумеван изглед за %1$s?</string>
     <string name="release_4_8">• Нова могућност бојења тла „Висина“
 \n
 \n • Прилагођени обрасци боја тла, стазе и путање
 \n
-\n • 3Д варијанта за иконе положаја локације
+\n • Просторни приказ смештаја сличица положаја
 \n
-\n • Брзе радње се сада могу доделити спољним тастатурама
+\n • Брза дејства се сада могу доделити спољним тастатурама
 \n
-\n • Време: Освежавање корисничког интерфејса, додата анимација ветра
+\n • Време: Освежавање корисничког сучеља, додат живи ветар
 \n
-\n • Побољшања 3Д стаза: нове опције визуелизације и колоризације
+\n • Побољшања просторног приказа трагова: нове могућности приказа и бојења
 \n
-\n • Проширен избор туристичких рута на мапи
+\n • Проширен избор туристичких путања на карти
 \n
-\n • Додата опција теме апликације за праћење режима мапе
+\n • Додата могућност теме програма за праћење начина приказа карте
 \n
-\n • Поправљена статистика стаза, сортирање и претрага
+\n • Поправљена статистика стаза, разврставање и претрага
 \n
-\n • ОСМ уређивање: избрисани начин ауторизације пријаве/лозинке
+\n • Уређивање ОСМ-а: избрисани начин одобравања пријаве/лозинке
 \n
-\n • Прелазак на систем дељења листа почевши од Андроид 14
+\n • Прелазак на устројство дељења табела почевши од Андроид 14
 \n
 \n</string>
-    <string name="use_3d_track_visualization">3Д визуелизација</string>
+    <string name="use_3d_track_visualization">Просторни приказ</string>
     <string name="apply_only_to_new">Примени само на ново</string>
-    <string name="change_default_tracks_appearance_confirmation">Применити промене на постојеће путање у фолдеру или само на нове?</string>
-    <string name="shared_string_changes">Промене</string>
-    <string name="shared_string_scale">Skala</string>
-    <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
-    <string name="vertical_exaggeration_description">Promenom vrednosti skale možete naglasiti 3D reljef.</string>
-    <string name="vertical_exaggeration">Vertikalno uvećanje</string>
-    <string name="use_terrain_maps">Користи Теренске мапе</string>
+    <string name="change_default_tracks_appearance_confirmation">Да ли применити на постојеће путање у фасцикли или само на нове?</string>
+    <string name="shared_string_changes">Измене</string>
+    <string name="shared_string_scale">Лествица</string>
+    <string name="relief_3d_download_description">Потребне су додатне карте за преглед тла на карти.</string>
+    <string name="vertical_exaggeration_description">Променом вредности лествице можете нагласити просторне облине.</string>
+    <string name="vertical_exaggeration">Усправно претеривање</string>
+    <string name="use_terrain_maps">Користи карте тла</string>
     <string name="use_nearby_roads">Користи оближње путеве</string>
-    <string name="use_terrain_maps_summary">Користе се мапе терена за податке о надморској висини. Геометрија путање остаје непромењена.</string>
-    <string name="use_nearby_roads_summary">Користи се ванмрежна мапа ради проналажења оближњих путева и података о надморској висини. Може прилагодити геометрију путање.</string>
-    <string name="retrieve_elevation_data_summary">ОсмАнд може да преузме податке о надморској висини са оближњих путева или мапа терена.</string>
-    <string name="delete_actions_button">Дугме за брисање</string>
+    <string name="use_terrain_maps_summary">Користе се карте тла за податке о надморској висини. Изглед путање остаје непромењен.</string>
+    <string name="use_nearby_roads_summary">Користи се ванмрежна карта ради проналажења оближњих путева и података о надморској висини. Може прилагодити изглед трага.</string>
+    <string name="retrieve_elevation_data_summary">ОсмАнд може да преузме податке о надморској висини са оближњих путева или карата тла.</string>
+    <string name="delete_actions_button">Дугме брисања</string>
     <string name="shared_string_osm_id">ОСМ ИД</string>
-    <string name="delete_actions_button_confirmation">Да ли сте сигурни да желите да избришете „%1$s“ са свим додатим радњама?</string>
-    <string name="route_line_use_coloring_altitude">Линија руте је обојена по надморској висини.</string>
-    <string name="getting_list_of_required_maps">Преузима се листа потребних мапа…</string>
-    <string name="required_maps">Потребне Мапе</string>
-    <string name="missing_maps_description">Неке ванмрежне мапе потребне за ову руту недостају или нису ажуриране. Преузмите или ажурирајте ове мапе.</string>
-    <string name="missing_maps_header">Недостајуће или застареле мапе</string>
-    <string name="route_line_use_coloring_speed">Линија руте је обојена по брзини кретања.</string>
-    <string name="maps_that_also_be_used">Мапе које ће се такође користити: %1$s</string>
-    <string name="required_maps_calculate_online_summary">Листа мапа које недостају заснива се на праволинијској рути. Да бисте добили тачну листу мапа, ОсмАнд може унапред да израчуна вашу руту на мрежи.</string>
-    <string name="downward_gradient">Надоле градијент</string>
-    <string name="upward_gradient">Градијент навише</string>
+    <string name="delete_actions_button_confirmation">Да ли поуздано да желите да избришете „%1$s“ са свим додатим дејствима?</string>
+    <string name="route_line_use_coloring_altitude">Линија путање је обојена по надморској висини.</string>
+    <string name="getting_list_of_required_maps">Преузима се списак потребних карата…</string>
+    <string name="required_maps">Потребне карте</string>
+    <string name="missing_maps_description">Неке ванмрежне карте потребне за ову путању недостају или нису свеже. Молим, преузмите или надградите ове карте.</string>
+    <string name="missing_maps_header">Недостајуће или застареле карте</string>
+    <string name="route_line_use_coloring_speed">Линија путање је обојена по брзини кретања.</string>
+    <string name="maps_that_also_be_used">Карте које ће се такође користити: %1$s</string>
+    <string name="required_maps_calculate_online_summary">Списак карата које недостају заснива се на праволинијској путањи. Ради добављања тачног списка карата ОсмАнд може унапред да израчуна вашу путању на мрежи.</string>
+    <string name="downward_gradient">Прелив наниже</string>
+    <string name="upward_gradient">Прелив навише</string>
     <string name="bottom">Дно</string>
-    <string name="explore_3d_track_description">Истражите путању у интерактивном 3Д! Визуелизујте висину, брзину и још много тога директно на мапи.</string>
+    <string name="explore_3d_track_description">Истражите путању у просторном приказу! Прегледајте по висини, брзини и још много тога непосредно на карти.</string>
     <string name="gpx_approximation_geo_cpp">Засновано на геометрији (C++, брзо)</string>
-    <string name="track_vertical_exaggeration_description">Променом вредности размере, можете променити висину 3Д стазе.</string>
+    <string name="track_vertical_exaggeration_description">Променом вредности размере, можете променити висину стазе просторног приказа.</string>
     <string name="top_and_bottom">Врх и дно</string>
-    <string name="title_3d_track">3Д Путања</string>
-    <string name="visualized_by">Визуализовано од</string>
+    <string name="title_3d_track">Просторни приказ трага</string>
+    <string name="visualized_by">Приказано помоћу</string>
     <string name="wall_color">Боја зида</string>
-    <string name="track_line">Линија стазе</string>
-    <string name="fixed_height">Фиксна висина</string>
+    <string name="track_line">Линија трага</string>
+    <string name="fixed_height">Непромењива висина</string>
     <string name="top">Врх</string>
     <string name="allow_display_on_top">Дозволи приказ на врху</string>
     <string name="allow_display_on_top_description">Дозволи преклапање натписа на карти</string>
