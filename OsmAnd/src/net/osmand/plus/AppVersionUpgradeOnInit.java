@@ -164,6 +164,7 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_06 = 4706;
 	// 4707 - 4.7-07 (Migrate chosen 3D model key to 2D icon base key)
 	public static final int VERSION_4_7_07 = 4707;
+	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
 	public static final int VERSION_4_8_01 = 4801;
 
 	public static final int LAST_APP_VERSION = VERSION_4_8_01;
