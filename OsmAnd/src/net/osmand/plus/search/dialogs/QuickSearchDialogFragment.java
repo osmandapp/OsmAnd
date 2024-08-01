@@ -653,6 +653,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				dialog.cancel();
 			}
 		}
+		app.getPoiFilters().restoreSelectedPoiFilters();
 	}
 
 	public void saveCustomFilter() {
@@ -796,7 +797,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearGeneralSelectedPoiFilters();
+		app.getPoiFilters().restoreSelectedPoiFilters();
 		dismiss();
 	}
 
