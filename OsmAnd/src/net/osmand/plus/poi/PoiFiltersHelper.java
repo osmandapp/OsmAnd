@@ -224,7 +224,7 @@ public class PoiFiltersHelper {
 
 	@Nullable
 	public PoiUIFilter getFilter(TopIndexFilter topIndexFilter, Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
-		PoiUIFilter poiUIFilter = new PoiUIFilter(topIndexFilter, acceptedTypes, application);
+		PoiUIFilter poiUIFilter = new PoiUIFilter(topIndexFilter, acceptedTypes, app);
 		return addTopPoiFilter(poiUIFilter);
 	}
 
