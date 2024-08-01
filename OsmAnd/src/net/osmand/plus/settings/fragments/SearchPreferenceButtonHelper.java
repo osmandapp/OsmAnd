@@ -7,6 +7,7 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
@@ -45,6 +46,7 @@ class SearchPreferenceButtonHelper {
 		return new SearchPreferenceFragments(
 				createSearchConfiguration(),
 				(preference, host) -> true,
+				preference -> !(preference instanceof PreferenceGroup),
 				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
 				new DefaultFragmentFactory(),
 				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
