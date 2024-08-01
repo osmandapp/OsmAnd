@@ -250,6 +250,7 @@ public class MapRendererContext {
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
+	@Nullable
 	public MapPresentationEnvironment getMapPresentationEnvironment() {
 		return mapPresentationEnvironment;
 	}
