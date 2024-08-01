@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,8 +56,9 @@ public class PoiFiltersHelper {
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
 	private List<PoiUIFilter> cacheTopStandardFilters;
-	private Set<PoiUIFilter> tmpSelectedPoiFilters = new TreeSet<>();
+	private Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
+	private boolean useOverwrittenFilters;
 
 	private static final String UDF_CAR_AID = "car_aid";
 	private static final String UDF_FOR_TOURISTS = "for_tourists";
@@ -462,9 +464,11 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public Set<PoiUIFilter> getGeneralSelectedPoiFilters() {
-		if (isWikiFilterVisible()) {
+		Set<PoiUIFilter> selectedPoiFilters = getSelectedPoiFilters();
+		PoiUIFilter wiki = getTopWikiPoiFilter();
+		if (isPoiFilterSelected(wiki)) {
 			Set<PoiUIFilter> result = new TreeSet<>(selectedPoiFilters);
-			result.remove(getTopWikiPoiFilter());
+			result.remove(wiki);
 			return result;
 		}
 		return selectedPoiFilters;
@@ -472,22 +476,43 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public Set<PoiUIFilter> getSelectedPoiFilters() {
-		return selectedPoiFilters;
+		return useOverwrittenFilters ? overwrittenSelectedPoiFilters : selectedPoiFilters;
+	}
+
+	public void replaceSelectedPoiFilters(PoiUIFilter filter) {
+		Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
+		overwrittenSelectedPoiFilters.add(filter);
+		PoiUIFilter wiki = getTopWikiPoiFilter();
+		if (isPoiFilterSelected(wiki)) {
+			overwrittenSelectedPoiFilters.add(wiki);
+		}
+		this.overwrittenSelectedPoiFilters = overwrittenSelectedPoiFilters;
+		useOverwrittenFilters = true;
+	}
+
+	public void restoreSelectedPoiFilters() {
+		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
+		PoiUIFilter wiki = getTopWikiPoiFilter();
+		if (isPoiFilterSelected(wiki)) {
+			selectedPoiFilters.add(wiki);
+		} else {
+			selectedPoiFilters.remove(wiki);
+		}
+		this.selectedPoiFilters = selectedPoiFilters;
+		useOverwrittenFilters = false;
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
+		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
 		selectedPoiFilters.add(filter);
 		PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
-		saveSelectedPoiFilters(selectedPoiFilters);
-		this.selectedPoiFilters = selectedPoiFilters;
+		setSelectedPoiFilters(selectedPoiFilters);
 	}
 
 	public void removeSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
+		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
 		selectedPoiFilters.remove(filter);
-		saveSelectedPoiFilters(selectedPoiFilters);
-		this.selectedPoiFilters = selectedPoiFilters;
+		setSelectedPoiFilters(selectedPoiFilters);
 	}
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
@@ -528,8 +553,16 @@ public class PoiFiltersHelper {
 		if (saveWiki && isPoiFilterSelected(getTopWikiPoiFilterId())) {
 			selectedPoiFilters.add(getTopWikiPoiFilter());
 		}
-		saveSelectedPoiFilters(selectedPoiFilters);
-		this.selectedPoiFilters = selectedPoiFilters;
+		setSelectedPoiFilters(selectedPoiFilters);
+	}
+
+	private void setSelectedPoiFilters(@NonNull Set<PoiUIFilter> filters) {
+		if (useOverwrittenFilters) {
+			overwrittenSelectedPoiFilters = filters;
+		} else {
+			selectedPoiFilters = filters;
+			saveSelectedPoiFilters(selectedPoiFilters);
+		}
 	}
 
 	public String getSelectedPoiFiltersName() {
@@ -552,16 +585,21 @@ public class PoiFiltersHelper {
 		}
 	}
 
-	public boolean isWikiFilterVisible() {
-		return isPoiFilterSelected(getTopWikiPoiFilterId());
+	public boolean isPoiFiltersSelected(@NonNull Collection<PoiUIFilter> filters) {
+		for (PoiUIFilter filter : filters) {
+			if (!isPoiFilterSelected(filter)) {
+				return false;
+			}
+		}
+		return !filters.isEmpty();
 	}
 
 	public boolean isPoiFilterSelected(PoiUIFilter filter) {
-		return selectedPoiFilters.contains(filter);
+		return filter!= null && isPoiFilterSelected(filter.filterId);
 	}
 
 	public boolean isPoiFilterSelected(String filterId) {
-		for (PoiUIFilter filter : selectedPoiFilters) {
+		for (PoiUIFilter filter : getSelectedPoiFilters()) {
 			if (filter.filterId.equals(filterId)) {
 				return true;
 			}

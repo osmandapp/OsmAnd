@@ -332,8 +332,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
-						app.getPoiFilters().clearGeneralSelectedPoiFilters();
-						app.getPoiFilters().addSelectedPoiFilter(filter);
+						app.getPoiFilters().replaceSelectedPoiFilters(filter);
 
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
 						contextMenu.close();
@@ -618,6 +617,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				dialog.cancel();
 			}
 		}
+		app.getPoiFilters().restoreSelectedPoiFilters();
 	}
 
 	public void saveCustomFilter() {
@@ -761,7 +761,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearGeneralSelectedPoiFilters();
+		app.getPoiFilters().restoreSelectedPoiFilters();
 		dismiss();
 	}
 
