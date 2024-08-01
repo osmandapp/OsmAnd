@@ -137,6 +137,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		super.updateResources();
 		if (view != null) {
 			createBitmaps(view);
+			updateTextSize();
 		}
 	}
 

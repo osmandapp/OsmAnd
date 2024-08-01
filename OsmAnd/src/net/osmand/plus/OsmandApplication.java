@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
@@ -496,9 +497,11 @@ public class OsmandApplication extends MultiDexApplication {
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 
-		if(density != resources.getDisplayMetrics().density) {
-			density = resources.getDisplayMetrics().density;
+		DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+		if(density != displayMetrics.density) {
+			density = displayMetrics.density;
 			getUIUtilities().clearCache();
+			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
 		}
 
 		Locale preferredLocale = localeHelper.getPreferredLocale();
