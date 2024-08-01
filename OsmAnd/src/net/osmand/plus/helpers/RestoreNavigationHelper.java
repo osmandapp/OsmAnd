@@ -14,7 +14,6 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.measurementtool.GpxApproximationHelper;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -82,19 +81,7 @@ public class RestoreNavigationHelper {
 				if (pointToNavigate == null) {
 					notRestoreRoutingMode();
 				} else {
-					ApplicationMode appMode = routingHelper.getAppMode();
-					if (gpxFile != null && !gpxFile.isAttachedToRoads()
-							&& settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
-						GpxApproximationParams params = new GpxApproximationParams();
-						params.setAppMode(appMode);
-						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
-						GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
-							enterRoutingMode(createGpxRouteParams(approxGpx));
-							return true;
-						});
-					} else {
-						enterRoutingMode(createGpxRouteParams(gpxFile));
-					}
+					enterRoutingMode(createGpxRouteParams(gpxFile));
 				}
 			}
 
@@ -103,6 +90,7 @@ public class RestoreNavigationHelper {
 				GPXRouteParamsBuilder builder = null;
 				if (gpxFile != null) {
 					builder = new GPXRouteParamsBuilder(gpxFile, settings);
+
 					if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 						builder.setCalculateOsmAndRouteParts(true);
 					}
@@ -116,6 +104,14 @@ public class RestoreNavigationHelper {
 					int routeIndex = settings.GPX_ROUTE_INDEX.get();
 					if (routeIndex != -1) {
 						builder.setSelectedRoute(routeIndex);
+					}
+					ApplicationMode appMode = routingHelper.getAppMode();
+					if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+						GpxApproximationParams params = new GpxApproximationParams();
+						params.setAppMode(appMode);
+						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
+
+						builder.setApproximationParams(params);
 					}
 				}
 				return builder;
