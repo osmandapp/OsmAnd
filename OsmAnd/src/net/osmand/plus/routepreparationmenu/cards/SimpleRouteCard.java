@@ -1,11 +1,12 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
-import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
-import static net.osmand.plus.utils.AndroidUtils.spToPx;
-import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
+import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
+import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
+import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
+import static net.osmand.plus.settings.enums.TrackApproximationType.MANUAL;
+import static net.osmand.plus.utils.AndroidUtils.spToPx;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryIconColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
@@ -33,12 +34,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -199,11 +201,13 @@ public class SimpleRouteCard extends MapBaseCard {
 	private void setupAttachToRoadsCard() {
 		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
 		container.removeAllViews();
-		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
-		if (gpxFile != null && !gpxFile.isAttachedToRoads()) {
-			AttachTrackToRoadsBannerCard bannerCard = new AttachTrackToRoadsBannerCard(mapActivity);
-			bannerCard.setListener(getListener());
-			container.addView(bannerCard.build(mapActivity));
+
+		GPXFile gpxFile = routingHelper.getCurrentGPX();
+		ApplicationMode appMode = routingHelper.getAppMode();
+		if (gpxFile != null && !gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == MANUAL) {
+			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);
+			card.setListener(getListener());
+			container.addView(card.build(mapActivity));
 			AndroidUiHelper.updateVisibility(container, true);
 		} else {
 			AndroidUiHelper.updateVisibility(container, false);
