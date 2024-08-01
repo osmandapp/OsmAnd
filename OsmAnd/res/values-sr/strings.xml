@@ -5657,9 +5657,9 @@
     <string name="fix_north_up_descr">Не ротирајте мапу покретима у оријентацији карте Север Горе</string>
     <string name="fix_north_up">Омогући Фиксни Север Горе</string>
     <string name="change_default_appearance_confirmation">Променити подразумеван изглед за %1$s?</string>
-    <string name="release_4_8">• Нова опција бојења терена „Висина“
+    <string name="release_4_8">• Нова могућност бојења тла „Висина“
 \n
-\n • Прилагођене палете боја за терен, стазе и руте
+\n • Прилагођени обрасци боја тла, стазе и путање
 \n
 \n • 3Д варијанта за иконе положаја локације
 \n
@@ -5718,17 +5718,17 @@
     <string name="fixed_height">Фиксна висина</string>
     <string name="top">Врх</string>
     <string name="allow_display_on_top">Дозволи приказ на врху</string>
-    <string name="allow_display_on_top_description">Дозволи приказивање текстова мапе један на другом</string>
-    <string name="show_debug_info">Прикажи информације за отклањање грешака</string>
-    <string name="show_debug_info_description">Приказ графичке информације о положају сваког текста на мапи</string>
-    <string name="map_text">Текстови мапе</string>
+    <string name="allow_display_on_top_description">Дозволи преклапање натписа на карти</string>
+    <string name="show_debug_info">Прикажи податке за отклањање грешака</string>
+    <string name="show_debug_info_description">Приказ сликовне податке о положају сваког натписа на карти</string>
+    <string name="map_text">Натписи карте</string>
     <string name="routing_attr_avoid_cobblestone_name">Избегавај калдрму</string>
     <string name="routing_attr_avoid_cobblestone_description">Избегавање калдрме</string>
     <string name="steps_per_minute_unit">КПМ</string>
     <string name="disable_map_layers_descr">Онемогућите све слојеве карте изнад векторске карте (потребно је поновно покретање).</string>
     <string name="disable_map_layers">Онемогући слојеве карте</string>
-    <string name="height_legend_description">За визуелизацију рељефа користе се висинске карте у боји.</string>
-    <string name="travel_topics">Теме путовања</string>
+    <string name="height_legend_description">За приказ рељефа користе се висинске карте у боји.</string>
+    <string name="travel_topics">Предмети путовања</string>
     <string name="play_weather_forecast">Пусти временске прилике</string>
     <string name="change_terrain_color_scheme">Промена обрасца боја тла</string>
     <string name="clear_all_key_shortcuts_summary">Сва додељења дугмади за изабрану врсту ће бити уклоњена.</string>
@@ -5741,10 +5741,10 @@
     <string name="wall_height">Висина зида</string>
     <string name="clear_all_key_shortcuts">Уклони све пречице дугмади</string>
     <string name="rendering_value_dark_orange_name">Тамно поморанџаста</string>
-    <string name="clear_key_assignment_summary">Додељивање дугмади за изабрану радњу ће бити обрисано.</string>
+    <string name="clear_key_assignment_summary">Додељивање дугмади за изабрано дејство ће бити обрисано.</string>
     <string name="key_assignment_add_action">Додај дејство</string>
-    <string name="assigned_keys">Додељења дугмади</string>
-    <string name="action_icon">Додај сличицу</string>
+    <string name="assigned_keys">Додељена дугмад</string>
+    <string name="action_icon">Сличица дејства</string>
     <string name="user_palette">Кориснички образац боја</string>
     <string name="shared_string_colors">Боје</string>
     <string name="missing_maps_ignore">Користи преузете карте</string>
@@ -5753,15 +5753,15 @@
     <string name="tomorrow">Сутрадан</string>
     <string name="map_settings_weather_wind_animation">Опонашање ветра</string>
     <string name="daynight_mode_sensor_summary">Користи светлосни пријемник уређаја као прекидач између светлих и тамних тема у складу са разинама околишног светла.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Аутоматски пребацује између дневне и ноћне теме на основу локалног времена изласка и заласка сунца.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Аутоматски пребацује између дневне и ноћне теме на основу местног времена изласка и заласка сунца.</string>
     <string name="daynight_mode_night_summary">Увек приказује карту у тамној теми, погодној за ноћне услове или услове слабог осветљења.</string>
-    <string name="daynight_mode_day_summary">Увек приказује кару у светлој теми, погодној за видљивост током дана.</string>
+    <string name="daynight_mode_day_summary">Увек приказуј карту у светлој теми, погодној за видљивост током дана.</string>
     <string name="daynight_mode_app_theme">Тема програма</string>
-    <string name="key_event_action_continuous_zoom_out">Непрекидно умањивање</string>
+    <string name="key_event_action_continuous_zoom_out">Непрекидно умањење</string>
     <string name="remove_key_assignment_summary">Додељивање дугмади за изабрану радњу ће бити уклоњено.</string>
     <string name="remove_key_assignment">Уклони додељивање дугмади</string>
     <string name="daynight_mode_app_theme_summary">Приказ карте је у складу са општом темом програма — дневни начин за светлу тему и ноћни начин за тамну тему</string>
-    <string name="key_event_action_continuous_zoom_in">Непрекидно увећавање</string>
+    <string name="key_event_action_continuous_zoom_in">Непрекидно увећање</string>
     <string name="weather_data_sources_prompt">ОсмАнд пружа податке временских прилика из два извора:</string>
     <string name="weather_source_ecmwf_description">Европско средиште за средњерочна предвиђања временских прилика</string>
     <string name="weather_source_GFS_description">Светско устројство предвиђања временских прилика Народног средишта за предвиђање животног околиша</string>
@@ -5769,12 +5769,12 @@
     <string name="weather_source_GFS_title">ГФС</string>
     <string name="data_source">Извор података</string>
     <string name="shared_string_modify">Измени</string>
-    <string name="missing_maps_ignore_details">Да ли преузете карте покривају вашу путању? Крећите се са њима уколико сте упознати са околином.</string>
+    <string name="missing_maps_ignore_details">Да ли преузете карте покривају вашу путању? Крећите се помоћу њих уколико познајете област.</string>
     <string name="quick_action_map_underlay">Подслој</string>
     <string name="quick_action_map_overlay">Надслој</string>
     <string name="quick_action_to_my_location">Ка мом положају</string>
-    <string name="shared_string_set">Поставка</string>
-    <string name="shared_string_simulate">Образуј</string>
+    <string name="shared_string_set">Постави</string>
+    <string name="shared_string_simulate">Опонашај</string>
     <string name="quick_action_remove_next_destination">Следећа одредишна тачка</string>
     <string name="quick_action_map_style">Начин приказа карте</string>
     <string name="quick_action_location_by_gpx">Положај по ГПИксу</string>
@@ -5783,26 +5783,26 @@
     <string name="quick_action_destination">Одредиште</string>
     <string name="quick_action_move_map_left">Карту према лево</string>
     <string name="quick_action_move_map_right">Карту према десно</string>
-    <string name="quick_action_move_map_down">Карту на доле</string>
-    <string name="quick_action_move_map_up">Карту на горе</string>
+    <string name="quick_action_move_map_down">Карту наниже</string>
+    <string name="quick_action_move_map_up">Карту навише</string>
     <string name="quick_action_new_route">Нова путања</string>
-    <string name="quick_action_previous_app_profile">Пребаци програм на претходни пресек</string>
-    <string name="quick_action_next_app_profile">Пребаци програм на следећи пресек</string>
-    <string name="app_profile">Пресек програма</string>
+    <string name="quick_action_previous_app_profile">Пребаци програм на претходни налог</string>
+    <string name="quick_action_next_app_profile">Пребаци програм на следећи налог</string>
+    <string name="app_profile">Налог програма</string>
     <string name="shared_string_create">Створи</string>
     <string name="shared_string_replace">Замени</string>
-    <string name="quick_action_display_position_in_center">Прикажи положај увек у средишту</string>
+    <string name="quick_action_display_position_in_center">Приказуј положај увек у средишту</string>
     <string name="quick_action_terrain">Врста бојења околиша</string>
     <string name="quick_action_first_intermediate">Прво међупролазно</string>
     <string name="quick_action_audio_note">Звучна белешка</string>
-    <string name="quick_action_video_note">Снимљена белешка</string>
+    <string name="quick_action_video_note">Видео-белешка</string>
     <string name="quick_action_photo_note">Сликовна белешка</string>
     <string name="quick_action_track_waypoint">Пролазна тачка стазе</string>
     <string name="quick_action_parking_place">Место оставке возила</string>
     <string name="quick_action_verb_show_hide">Прикажи / сакриј</string>
     <string name="quick_action_verb_pause_resume">Застани / настави</string>
     <string name="quick_action_verb_turn_on_off">Укључи / искључи</string>
-    <string name="quick_action_verb_start_stop">Почни / Заустави</string>
+    <string name="quick_action_verb_start_stop">Крени / заустави</string>
     <string name="weather_screen">Заслон временских прилика</string>
     <string name="energy_avg_info_description">Ниво батерије у минути: %1$s
 \nПотрошња енергије (mAh): %2$s</string>
@@ -5818,12 +5818,12 @@
     <string name="shared_string_all_icons">Све сличице</string>
     <string name="rendering_value_pale_name">Бледо</string>
     <string name="profile_icon">Сличица налога</string>
-    <string name="navigation_position_icon_summary">Сличица приказујућа приликом навођења или кретања.</string>
-    <string name="resting_position_icon_summary">Сличица приказујућа приликом некретања.</string>
+    <string name="navigation_position_icon_summary">Сличица видљива приликом навођења или кретања.</string>
+    <string name="resting_position_icon_summary">Сличица видљива приликом некретања.</string>
     <string name="navigation_position">Положај навођења</string>
     <string name="resting_navigation_position">Положај мировања и навођења</string>
     <string name="view_angle">Угао погледа</string>
-    <string name="location_radius">Опсег положаја</string>
+    <string name="location_radius">Пречник положаја</string>
     <string name="view_angle_description">Приказуј област у облику купе према којој сте тренутно усмерени</string>
     <string name="resting_position">Положај мировања</string>
     <string name="location_radius_description">Приказује кружну област која представља Вашу тренутну тачност положаја</string>
@@ -5845,7 +5845,7 @@
     <string name="hugerock_promo">Попуст цена Хјуџрока за %1$s месеца</string>
     <string name="driving_region_uk">ВБ и слично</string>
     <string name="ask_every_time">Питај сваки пут</string>
-    <string name="detailed_track_guidance">Подробни водич за стазу</string>
+    <string name="detailed_track_guidance">Подробни водич за траг</string>
     <string name="detailed_track_guidance_description">ОсмАнд ће ускладити ваш траг са оближњим путевима како ради бољег навођења на кривинама.</string>
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
