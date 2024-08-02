@@ -295,8 +295,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		animatedMapMarkersThread = new AnimateMapMarkersThread(this);
 
-		dm = new DisplayMetrics();
+		DisplayMetrics dm = new DisplayMetrics();
 		AndroidUtils.getDisplay(ctx).getMetrics(dm);
+
+		updateDisplayMetrics(dm, width, height);
+		elevationAngle = settings.getLastKnownMapElevation();
+
+		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
+		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
+		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
+	}
+
+	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
+		this.dm = dm;
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBoxBuilder()
 				.setLocation(ll.getLatitude(), ll.getLongitude())
@@ -307,11 +318,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
-		elevationAngle = settings.getLastKnownMapElevation();
-
-		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
-		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
-		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
 	}
 
 	private float getCurrentDensity() {
