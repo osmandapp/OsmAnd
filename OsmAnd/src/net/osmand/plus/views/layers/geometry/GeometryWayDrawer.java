@@ -159,9 +159,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float r = (float) Color.red(color) / 256;
 		float g = (float) Color.green(color) / 256;
 		float b = (float) Color.blue(color) / 256;
+
 		boolean showRaised = false;
-		boolean useFixedHeight = false;
-		float fixedHeight = 1000;
 		float additionalExaggeration = 1f;
 		Gpx3DWallColorType wallColorType = NONE;
 		Gpx3DLinePositionType linePositionType = null;
@@ -169,8 +168,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			GeometryWayStyle<?> style = pathsData.get(0).style;
 			showRaised = style.trackVisualizationType != Gpx3DVisualizationType.NONE;
 			additionalExaggeration = style.additionalExaggeration;
-			fixedHeight = style.elevationMeters;
-			useFixedHeight = style.trackVisualizationType == Gpx3DVisualizationType.FIXED_HEIGHT;
 			wallColorType = style.trackWallColorType;
 			linePositionType = style.trackLinePositionType;
 		}
@@ -179,7 +176,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
 				if (showRaised) {
 					if (data.heights != null && i < data.heights.size()) {
-						heights.add(useFixedHeight ? fixedHeight : data.heights.get(i));
+						heights.add(data.heights.get(i));
 					}
 				}
 			}

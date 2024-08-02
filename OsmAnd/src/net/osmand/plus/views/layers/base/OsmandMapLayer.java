@@ -60,6 +60,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected OsmandMapTileView view;
 	protected boolean mapActivityInvalidated;
 	protected boolean mapRendererChanged;
+	protected boolean invalidated;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -145,6 +146,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	public void setInvalidated(boolean invalidated) {
+		this.invalidated = invalidated;
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
