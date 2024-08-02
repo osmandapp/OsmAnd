@@ -9,11 +9,10 @@ import net.osmand.plus.base.containers.ThemedIconId;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public enum CompassMode {
-
-	NORTH_IS_UP(
-			OsmandSettings.ROTATE_MAP_NONE,
-			R.string.rotate_map_north_opt,
-			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
+	MANUALLY_ROTATED(
+			OsmandSettings.ROTATE_MAP_MANUAL,
+			R.string.rotate_map_manual_opt,
+			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
 	),
 
 	MOVEMENT_DIRECTION(
@@ -28,10 +27,10 @@ public enum CompassMode {
 			new ThemedIconId(R.drawable.ic_compass, R.drawable.ic_compass_white)
 	),
 
-	MANUALLY_ROTATED(
-			OsmandSettings.ROTATE_MAP_MANUAL,
-			R.string.rotate_map_manual_opt,
-			new ThemedIconId(R.drawable.ic_compass_manual, R.drawable.ic_compass_manual_white)
+	NORTH_IS_UP(
+			OsmandSettings.ROTATE_MAP_NONE,
+			R.string.rotate_map_north_opt,
+			new ThemedIconId(R.drawable.ic_compass_niu, R.drawable.ic_compass_niu_white)
 	);
 
 	@StringRes
