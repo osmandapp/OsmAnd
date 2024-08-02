@@ -90,11 +90,11 @@ public enum Gpx3DVisualizationType {
 			case TEMPERATURE: {
 				float airTemp = SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_TEMPERATURE_A, Float.NaN);
 				if (!Float.isNaN(airTemp)) {
-					return airTemp * TEMPERATURE_TO_HEIGHT_OFFSET;
+					return airTemp + TEMPERATURE_TO_HEIGHT_OFFSET;
 				}
 				float waterTemp = SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_TEMPERATURE_W, Float.NaN);
 				if (!Float.isNaN(waterTemp)) {
-					return waterTemp * TEMPERATURE_TO_HEIGHT_OFFSET;
+					return waterTemp + TEMPERATURE_TO_HEIGHT_OFFSET;
 				}
 			}
 			case SPEED_SENSOR: {
