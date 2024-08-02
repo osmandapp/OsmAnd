@@ -5,17 +5,18 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
 import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 
 import java.util.List;
 
 class GradientGeometryWayProvider implements GeometryWayProvider {
 
 	private final RouteColorize routeColorize;
-	private final List<RouteColorize.RouteColorizationPoint> points;
+	private final List<RouteColorizationPoint> points;
 	private final List<Float> heights;
 
 	public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
-	                                   @NonNull List<RouteColorize.RouteColorizationPoint> points,
+	                                   @NonNull List<RouteColorizationPoint> points,
 	                                   @Nullable List<Float> heights) {
 		this.routeColorize = routeColorize;
 		this.points = points;

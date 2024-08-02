@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -356,12 +357,13 @@ public class TrackDrawInfo {
 			showStartFinish = true;
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
 			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
+			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
 			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 			trackVisualizationType = Gpx3DVisualizationType.NONE;
 			trackWallColorType = Gpx3DWallColorType.NONE;
 			trackLinePositionType = Gpx3DLinePositionType.TOP;
 		} else if (gpxFile != null) {
-			color = gpxFile.getColor(0);
+			color = gpxFile.getColor(null);
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
 			showStartFinish = gpxFile.isShowStartFinish();

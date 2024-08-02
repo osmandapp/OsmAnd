@@ -51,11 +51,14 @@ public class MapAppInitializeListener implements AppInitializeListener {
 			activity.getMapView().refreshMap(false);
 			activity.getDashboard().updateLocation(true, true, false);
 			app.getTargetPointsHelper().lookupAddressAll();
+			if (app.getAppInitializer().isRoutingConfigInitialized()) {
+				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			}
 		}
 		if (event == FAVORITES_INITIALIZED) {
 			activity.refreshMap();
 		}
-		if (event == ROUTING_CONFIG_INITIALIZED) {
+		if (event == ROUTING_CONFIG_INITIALIZED && app.getResourceManager().isIndexesLoadedOnStart()) {
 			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
 		}
 		if (event == BROUTER_INITIALIZED) {

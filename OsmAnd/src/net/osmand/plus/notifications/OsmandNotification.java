@@ -3,9 +3,10 @@ package net.osmand.plus.notifications;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
@@ -16,14 +17,12 @@ public abstract class OsmandNotification {
 
 	public static final int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public static final int GPX_NOTIFICATION_SERVICE_ID = 6;
-	public static final int ERROR_NOTIFICATION_SERVICE_ID = 7;
 	public static final int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
 	public static final int CAR_APP_NOTIFICATION_SERVICE_ID = 9;
 	public static final int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public static final int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public static final int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
-	public static final int WEAR_ERROR_NOTIFICATION_SERVICE_ID = 1007;
 	public static final int WEAR_DOWNLOAD_NOTIFICATION_SERVICE_ID = 1008;
 	public static final int WEAR_CAR_APP_NOTIFICATION_SERVICE_ID = 1009;
 
@@ -97,7 +96,7 @@ public abstract class OsmandNotification {
 		return builder;
 	}
 
-	public abstract Builder buildNotification(boolean wearable);
+	public abstract Builder buildNotification(@Nullable Service service, boolean wearable);
 
 	public abstract int getOsmandNotificationId();
 
@@ -107,7 +106,15 @@ public abstract class OsmandNotification {
 
 	public abstract boolean isActive();
 
-	public abstract boolean isEnabled();
+	public abstract boolean isUsedByService(@Nullable Service service);
+
+	public boolean isEnabled() {
+		return isUsedByService(null) || isActive();
+	}
+
+	public boolean isEnabled(@Nullable Service service) {
+		return isUsedByService(service) || isActive();
+	}
 
 	public abstract Intent getContentIntent();
 
@@ -117,18 +124,20 @@ public abstract class OsmandNotification {
 	public void onNotificationDismissed() {
 	}
 
+	@SuppressLint("MissingPermission")
 	private void notifyWearable(NotificationManagerCompat notificationManager) {
-		Builder wearNotificationBuilder = buildNotification(true);
+		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
 			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
 		}
 	}
 
+	@SuppressLint("MissingPermission")
 	public boolean showNotification() {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder notificationBuilder = buildNotification(false);
+			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
@@ -140,10 +149,11 @@ public abstract class OsmandNotification {
 		return false;
 	}
 
+	@SuppressLint("MissingPermission")
 	public boolean refreshNotification() {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder notificationBuilder = buildNotification(false);
+			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
@@ -182,11 +192,6 @@ public abstract class OsmandNotification {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
-	}
-
-	public void closeSystemDialogs(Context context) {
-		Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-		context.sendBroadcast(it);
 	}
 }
 

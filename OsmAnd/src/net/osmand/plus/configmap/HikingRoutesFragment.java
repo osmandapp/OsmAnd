@@ -18,8 +18,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -34,10 +34,9 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
 
-	private CommonPreference<String> pref;
+	private RouteLayersHelper routeLayersHelper;
 	@Nullable
 	private RenderingRuleProperty property;
-	private String previousValue;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -47,24 +46,12 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pref = settings.getCustomRenderProperty(HIKING.getRenderingPropertyAttr());
+		routeLayersHelper = app.getRouteLayersHelper();
 		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING.getRenderingPropertyAttr());
-		if (property == null) {
-			previousValue = pref.get();
-		} else {
-			previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
-		}
 	}
 
 	private boolean isEnabled() {
-		if (property != null) {
-			for (String value : property.getPossibleValues()) {
-				if (Algorithms.stringsEqual(value, pref.get())) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return routeLayersHelper.isHikingRoutesEnabled();
 	}
 
 	@Override
@@ -106,7 +93,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
 		container.setOnClickListener(v -> {
-			pref.set(!button.isChecked() ? previousValue : "");
+			routeLayersHelper.toggleHikingRoutes();
 			setupHeader(view);
 			setupTypesCard(view);
 			refreshMap();
@@ -120,11 +107,12 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		boolean enabled = property != null && isEnabled();
 		if (enabled) {
+			String selectedValue = routeLayersHelper.getSelectedHikingRoutesValue();
 			TextRadioItem selectedItem = null;
 			List<TextRadioItem> items = new ArrayList<>();
 			for (String value : property.getPossibleValues()) {
 				TextRadioItem item = createRadioButton(value);
-				if (Algorithms.stringsEqual(value, pref.get())) {
+				if (Algorithms.stringsEqual(value, selectedValue)) {
 					selectedItem = item;
 				}
 				items.add(item);
@@ -134,7 +122,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			TextView description = container.findViewById(R.id.description);
 
 			title.setText(R.string.routes_color_by_type);
-			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, pref.get()));
+			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, selectedValue));
 
 			LinearLayout radioButtonsContainer = view.findViewById(R.id.custom_radio_buttons);
 			TextToggleButton radioGroup = new TextToggleButton(app, radioButtonsContainer, nightMode, true);
@@ -151,9 +139,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		String name = AndroidUtils.getRenderingStringPropertyValue(app, value);
 		TextRadioItem item = new TextRadioItem(name);
 		item.setOnClickListener((radioItem, v) -> {
-			pref.set(value);
-			previousValue = value;
-
+			routeLayersHelper.updateHikingRoutesValue(value);
 			View view = getView();
 			if (view != null) {
 				setupHeader(view);

@@ -1,12 +1,12 @@
 package net.osmand.router;
 
+import net.osmand.ColorPalette;
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.ColorPalette;
-import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.util.Algorithms;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteColorize {
-	
+
 	public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
 	public static int SLOPE_RANGE = 150;// 150 meters
 	private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);

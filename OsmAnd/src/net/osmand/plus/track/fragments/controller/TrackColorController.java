@@ -198,7 +198,6 @@ public class TrackColorController extends ColoringStyleCardController implements
 	protected ColoringType[] getSupportedColoringTypes() {
 		return ColoringType.Companion.valuesOf(ColoringPurpose.TRACK);
 	}
-
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();

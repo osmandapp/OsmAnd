@@ -160,7 +160,7 @@ object GpxUtilities {
 		fun readExtensions(res: GpxFile, parser: XmlPullParser): Boolean
 	}
 
-	fun parseColor(colorString: String?, defColor: Int): Int {
+	fun parseColor(colorString: String?, defColor: Int?): Int? {
 		val color = parseColor(colorString)
 		return color ?: defColor
 	}
@@ -301,9 +301,9 @@ object GpxUtilities {
 		fun toStringBundle(): StringBundle {
 			val bundle = StringBundle()
 			bundle.putString("name", name)
-			color?.let {
-				bundle.putString("color", KAlgorithms.colorToString(it))
-			}
+//			color?.let {
+				bundle.putString("color", KAlgorithms.colorToString(color))
+//			}
 			if (!KAlgorithms.isEmpty(iconName)) {
 				bundle.putString(ICON_NAME_EXTENSION, iconName)
 			}
@@ -320,7 +320,7 @@ object GpxUtilities {
 			fun parsePointsGroupAttributes(parser: XmlPullParser): PointsGroup {
 				val name = parser.getAttributeValue("", "name")
 				val category = PointsGroup(name ?: "")
-				category.color = parseColor(parser.getAttributeValue("", "color"), 0)
+				category.color = parseColor(parser.getAttributeValue("", "color"), 0)!!
 				category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION)
 				category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION)
 				category.hidden = parser.getAttributeValue("", HIDDEN_EXTENSION).toBoolean()

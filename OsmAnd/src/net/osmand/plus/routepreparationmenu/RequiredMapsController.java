@@ -38,6 +38,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private List<DownloadItem> mapsToDownload = new ArrayList<>();
 	private List<DownloadItem> missingMaps = new ArrayList<>();
 	private List<DownloadItem> usedMaps = new ArrayList<>();
+	private boolean usedMapsPresent;
 	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private boolean loadingMapsInProgress = false;
@@ -51,9 +52,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	public void initContent() {
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		boolean internetConnectionAvailable = app.getSettings().isInternetConnectionAvailable();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (internetConnectionAvailable) {
+			if (isInternetConnectionAvailable()) {
 				downloadThread.runReloadIndexFiles();
 				loadingMapsInProgress = true;
 			}
@@ -88,7 +88,9 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
 		this.mapsToDownload = collectMapsForRegions(result.getMapsToDownload());
 		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
-		this.usedMaps = collectMapsForRegions(result.getUsedMaps());
+		List<WorldRegion> usedMapRegions = result.getUsedMaps();
+		this.usedMapsPresent = !Algorithms.isEmpty(usedMapRegions);
+		this.usedMaps = collectMapsForRegions(usedMapRegions);
 	}
 
 	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
@@ -218,7 +220,15 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
 	}
 
-	public boolean shouldShowOnlineCalculation() {
-		return !onlineCalculationRequested && !isLoadingInProgress();
+	public boolean shouldShowOnlineCalculationBanner() {
+		return !onlineCalculationRequested && !isLoadingInProgress() && isInternetConnectionAvailable();
+	}
+
+	public boolean shouldShowUseDownloadedMapsBanner() {
+		return usedMapsPresent;
+	}
+
+	private boolean isInternetConnectionAvailable() {
+		return app.getSettings().isInternetConnectionAvailable();
 	}
 }

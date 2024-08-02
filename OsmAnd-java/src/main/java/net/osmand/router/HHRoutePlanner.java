@@ -175,7 +175,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
 		filterPointsBasedOnConfiguration(hctx);
-		
+
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
 		progress.hhIteration(HHIteration.START_END_POINT);
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);

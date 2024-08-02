@@ -1,7 +1,9 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 import static net.osmand.ColorPalette.LIGHT_GREY;
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
+
+import android.util.Pair;
 
 import android.util.Pair;
 
@@ -219,6 +221,8 @@ public class CachedTrack {
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
 		firstPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
 		lastPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
+		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
+		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
 		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
 		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
 		straightSegment.getPoints().add(firstPoint);

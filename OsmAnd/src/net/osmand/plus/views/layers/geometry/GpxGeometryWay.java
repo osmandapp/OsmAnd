@@ -46,8 +46,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                @NonNull ColoringType coloringType,
 	                                @Nullable String routeInfoAttribute,
 	                                @Nullable String gradientPaletteName) {
+		boolean track3DStyleChanged = !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
-				|| this.coloringType != coloringType
+				|| this.coloringType != coloringType || track3DStyleChanged
 				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
 				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 
@@ -71,6 +72,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
 		getDrawer().setOutlineColoringType(getOutlineColoringType());
+		getDrawer().setTrack3DStyle(track3DStyle);
 
 		this.customColor = trackColor;
 		this.customWidth = trackWidth;

@@ -1,6 +1,7 @@
 package net.osmand.plus.track.fragments;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 
+import static net.osmand.gpx.GpxParameter.*;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
@@ -790,7 +791,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
-			track3DCard = new Track3DCard(mapActivity, trackDrawInfo);
+			track3DCard = new Track3DCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), trackDrawInfo);
 			addCard(container, track3DCard);
 			addCard(container, new ActionsCard(mapActivity));
 		}

@@ -132,7 +132,7 @@ public class NavigationService extends Service {
 			setCarContext(carNavigationSession.getCarContext());
 		}
 
-		Notification notification = app.getNotificationHelper().buildTopNotification();
+		Notification notification = app.getNotificationHelper().buildTopNotification(this);
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			if (isUsedBy(USED_BY_NAVIGATION)) {
@@ -148,12 +148,14 @@ public class NavigationService extends Service {
 			} catch (Exception e) {
 				setCarContext(null);
 				app.setNavigationService(null);
+				LOG.error("Failed to start NavigationService (usedBy=" + usedBy + ", "
+						+ "carNavigationSession = " + (carNavigationSession != null ? "yes" : "no") + ")", e);
 				usedBy = 0;
-				LOG.error("Failed to start NavigationService", e);
 				return START_NOT_STICKY;
 			}
 		} else {
-			LOG.error("NavigationService could not be started because the notification is null.");
+			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy
+					+ " carNavigationSession = " + (carNavigationSession != null ? "yes" : "no"));
 			stopSelf();
 			return START_NOT_STICKY;
 		}
@@ -323,7 +325,7 @@ public class NavigationService extends Service {
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		if (carNavigationActive && tripHelper != null
+		if (carNavigationActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {

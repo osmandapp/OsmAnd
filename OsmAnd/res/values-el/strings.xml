@@ -153,7 +153,7 @@
     <string name="rendering_attr_noPolygons_name">Πολύγωνα</string>
     <string name="rendering_attr_appMode_name">Τρόπος απεικόνισης</string>
     <string name="rendering_attr_appMode_description">Βελτιστοποίηση του χάρτη για</string>
-    <string name="rendering_attr_contourLines_description">Εμφάνιση από το επίπεδο εστίασης (χρειάζεται αρχείο ισοϋψών):</string>
+    <string name="rendering_attr_contourLines_description">Εμφάνιση από το επίπεδο εστίασης (χρειάζεται αρχείο ισοϋψών γραμμών):</string>
     <string name="rendering_attr_contourLines_name">Εμφάνιση ισοϋψών γραμμών</string>
     <string name="rendering_attr_hmRendered_description">Αύξηση λεπτομέρειας χάρτη.</string>
     <string name="rendering_attr_hmRendered_name">Εμφάνιση περισσότερων λεπτομερειών χάρτη</string>
@@ -735,7 +735,7 @@
     <string name="map_view_3d_descr">Ενεργοποίηση προβολής 3Δ του χάρτη.</string>
     <string name="map_view_3d">Εμφάνιση χάρτη 3Δ</string>
     <string name="show_poi_over_map_description">Εμφάνιση του τελευταίου χρησιμοποιούμενου επιστρώματος ΣΕ.</string>
-    <string name="show_poi_over_map">Εμφάνιση επιστρώματος ΣΕ</string>
+    <string name="show_poi_over_map">Εμφάνιση επικάλυψης ΣΕ</string>
     <string name="map_tile_source_descr">Επιλέξτε την πηγή των πλακιδίων χαρτών με σύνδεση ή κρυφή μνήμη.</string>
     <string name="map_tile_source">Πηγή πλακιδίων χάρτη</string>
     <string name="map_source">Πηγή χάρτη</string>
@@ -887,7 +887,7 @@
     <string name="av_settings">Ρυθμίσεις ήχου/video </string>
     <string name="recording_error">Αποτυχία εγγραφής</string>
     <string name="recording_camera_not_available">Μη διαθέσιμη κάμερα</string>
-    <string name="shared_string_control_stop">Σταμάτημα</string>
+    <string name="shared_string_control_stop">Στάση</string>
     <string name="av_video_format_descr">Μορφή εξόδου βίντεο:</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση του καταγραφέα της συσκευής για βίντεο.</string>
@@ -1184,7 +1184,7 @@
     <string name="rendering_attr_moreDetailed_name">Περισσότερες λεπτομέρειες</string>
     <string name="rendering_attr_lessDetailed_name">Λιγότερες λεπτομέρειες</string>
     <string name="rendering_attr_hideAccess_name">Περιορισμοί πρόσβασης</string>
-    <string name="rendering_attr_showAccess_name">Εμφάνιση περιορισμών πρόσβασης και διοδίων</string>
+    <string name="rendering_attr_showAccess_name">Εμφάνιση πρόσβασης και περιορισμών διοδίων</string>
     <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
     <string name="rendering_attr_coloredBuildings_name">Χρωματισμός κτιρίων κατά τύπο</string>
     <string name="continue_navigation">Συνέχιση της Πλοήγησης</string>
@@ -1526,7 +1526,7 @@
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε τίποτα</string>
     <string name="shared_string_to">Προς</string>
-    <string name="rendering_attr_hidePOILabels_name">Ετικέτες POI</string>
+    <string name="rendering_attr_hidePOILabels_name">Ετικέτες ΣΕ</string>
     <string name="shared_string_without_name">Χωρίς όνομα</string>
     <string name="what_is_here">Τι είναι εδώ:</string>
     <string name="parked_at">σταθμευμένο στο</string>
@@ -1778,7 +1778,7 @@
     <string name="nearest_cities">Πλησιέστερες πόλεις</string>
     <string name="select_city">Επιλογή πόλης</string>
     <string name="select_postcode">Αναζήτησε ταχυδρομικό κώδικα</string>
-    <string name="quick_action_auto_zoom">Αυτόματη εστίαση χάρτη ναι/όχι</string>
+    <string name="quick_action_auto_zoom">Αυτόματη εστίαση χάρτη</string>
     <string name="quick_action_auto_zoom_desc">Πλήκτρο ενεργοποίησης/απενεργοποίησης της αυτόματης εστίασης της ταχύτητας.</string>
     <string name="quick_action_auto_zoom_on">Ενεργοποίηση αυτόματης εστίασης</string>
     <string name="quick_action_auto_zoom_off">Απενεργοποίηση αυτόματης εστίασης</string>
@@ -2499,7 +2499,7 @@
     <string name="saved_at_time">Τώρα αποθηκεύτηκε στο: %1$s</string>
     <string name="count_of_lines">Πλήθος γραμμών</string>
     <string name="are_you_sure">Είσαστε σίγουρος;</string>
-    <string name="unsaved_changes_will_be_lost">Οι μη αποθηκευμένες αλλαγές θα χαθούν. Συνέχεια;</string>
+    <string name="unsaved_changes_will_be_lost">Οι μη αποθηκευμένες αλλαγές θα χαθούν. Θέλετε να συνεχίσετε;</string>
     <string name="downloads_left_template">Απέμειναν %1$s λήψεις</string>
     <string name="roads">Δρόμοι</string>
     <string name="downloading_number_of_files">Λήψη %1$d αρχείου…</string>
@@ -2537,7 +2537,7 @@
     <string name="feedback">Ανατροφοδότηση</string>
     <string name="shared_string_contact">Επαφή</string>
     <string name="map_legend">Υπόμνημα χάρτη</string>
-    <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Συνέχεια;</string>
+    <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Θέλετε να συνεχίσετε;</string>
     <string name="save_poi_without_poi_type_message">Αποθήκευση ΣΕ χωρίς τύπο;</string>
     <string name="poi_context_menu_modify_osm_change">Τροποποίηση αλλαγής OSM</string>
     <string name="use_dashboard_btn">Χρήση πίνακα εργαλείων</string>
@@ -2607,8 +2607,8 @@
     <string name="quick_action_map_style_action">Προσθήκη τύπου χάρτη</string>
     <string name="quick_action_empty_param_error">Συμπληρώστε όλες τις παραμέτρους</string>
     <string name="quick_action_map_styles">Τύποι χάρτη</string>
-    <string name="quick_action_map_overlay_title">Επιστρώματα χάρτη</string>
-    <string name="quick_action_map_overlay_action">Προσθήκη επιστρώματος</string>
+    <string name="quick_action_map_overlay_title">Επικάλυψη χάρτη</string>
+    <string name="quick_action_map_overlay_action">Προσθήκη επικάλυψης</string>
     <string name="quick_action_map_overlay_switch">Το επίστρωμα χάρτη άλλαξε σε \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Το υπόστρωμα χάρτη άλλαξε σε \"%s\".</string>
     <string name="quick_action_map_underlay_title">Υποστρώματα χάρτη</string>
@@ -3647,7 +3647,7 @@
     <string name="shared_string_circle">Κύκλος</string>
     <string name="shared_string_octagon">Οκτάγωνο</string>
     <string name="shared_string_square">Τετράγωνο</string>
-    <string name="shared_string_min">Ελαχ</string>
+    <string name="shared_string_min">Ελάχιστο</string>
     <string name="ui_customization_description">Προσαρμογή της ποσότητας στοιχείων στον \"Σχεδιαστή\", \"Χάρτη διαμόρφωσης\" και \"Μενού περιβάλλοντος\".
 \n
 \nΑπενεργοποιήστε τα μη χρησιμοποιούμενα πρόσθετα για να αποκρύψετε όλα τα στοιχεία ελέγχου τους. %1$s.</string>
@@ -3826,8 +3826,8 @@
     <string name="shared_string_redo">Επανάληψη</string>
     <string name="announcement_time_prepare">Προετοιμασία</string>
     <string name="av_def_action_choose">Σε αίτημα</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Σήραγγες οδών νερού</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Μη απόκρυψη σηραγγών νερού</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Αύξηση ορατότητας για σήραγγες οδών νερού</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Αύξηση ορατότητας για σήραγγες οδών νερού</string>
     <string name="icon_group_service">Υπηρεσία</string>
     <string name="shared_string_turn">Στροφή</string>
     <string name="icon_group_sport">Άθληση</string>
@@ -4346,4 +4346,23 @@
     <string name="purchases_feature_desc_wikivoyage">Εξερευνήστε τα Βικιταξίδια εκτός σύνδεσης. Άρθρα χωρισμένες ανά χώρες και περιοχές και είναι διαθέσιμα σε όλες τις γλώσσες.</string>
     <string name="routing_attr_goods_restrictions_name">Παράδοση αγαθών</string>
     <string name="weather_source_ecmwf_description">Ευρωπαϊκό Κέντρο Μεσοπρόθεσμων Μετεωρολογικών Προγνώσεων (ECMWF)</string>
+    <string name="quick_action_map_style">Στυλ χάρτη</string>
+    <string name="quick_action_map_underlay">Υπόστρωμα</string>
+    <string name="quick_action_remove_next_destination">Επόμενο σημείο προορισμού</string>
+    <string name="quick_action_map_overlay">Επικάλυψη</string>
+    <string name="show_borders_of_downloaded_maps">Εμφάνιση συνόρων από τους κατεβασμένους χάρτες</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Χρωματίζονται οι διαδρομές ανάλογα με τον τύπο του δικτύου κόμβων (διεθνές, περιφερειακό, τοπικό).</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Απόκρυψη στρατοπέδων</string>
+    <string name="rendering_attr_showRunningRoutes_description">Εμφάνιση διαδρομών τρεξίματος</string>
+    <string name="show_map_symbols">Εμφάνιση συμβόλων χάρτη</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Απόκρυψη στρατιωτικών περιοχών</string>
+    <string name="routes_color_by_type">Χρωματισμός διαδρομών ανά…</string>
+    <string name="shared_string_layers">Επίπεδα</string>
+    <string name="rendering_attr_showFitnessTrails_name">Μονοπάτια γυμναστικής</string>
+    <string name="rendering_attr_showFitnessTrails_description">Εμφάνιση μονοπατιών γυμναστικής</string>
+    <string name="walking_route_osmc_description">Χρωματίζονται οι διαδρομές ανάλογα με το δικό του τοπικό χρώμα (αν υπάρχει στο OpenStreetMap) και τον τύπο (διεθνές, περιφερειακό, τοπικό).</string>
+    <string name="rendering_attr_showRunningRoutes_name">Διαδρομές τρεξίματος</string>
+    <string name="routeInfo_horse_scale_name">Δυσκολία των μονοπάτιών για άλογο</string>
+    <string name="rendering_attr_alpineHiking_name">Κατηγοριοποίηση δυσκολίας</string>
+    <string name="rendering_attr_natureReserves_name">Φυσικό καταφύγιο</string>
 </resources>

@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="shared_string_automatically">Automatically</string>
+	<string name="ask_every_time">Ask every time</string>
+	<string name="detailed_track_guidance">Detailed track guidance</string>
+	<string name="detailed_track_guidance_description">OsmAnd will match your track to nearby roads for enhanced turn-by-turn guidance.</string>
+	<string name="quick_action_routes_summary">A toggle to show or hide %1$s on the map.</string>
 	<string name="hugerock_promo">Hugerock Promo for %1$s months</string>
 	<string name="hugerock_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
 	<string name="driving_region_uk">UK and similar</string>

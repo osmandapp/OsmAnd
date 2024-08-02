@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.shared.routing.ColoringType;
 
 public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {

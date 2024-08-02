@@ -88,7 +88,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GpxUiHelper {
 
@@ -522,8 +521,6 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static GpxFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
-		double lastHeight = HEIGHT_UNDEFINED;
-		double lastValidHeight = Double.NaN;
 		GpxFile gpx = new GpxFile(Version.getFullVersion(app));
 		if (locations != null) {
 			Track track = new Track();
@@ -535,19 +532,7 @@ public class GpxUiHelper {
 				point.setLon(l.getLongitude());
 				if (l.hasAltitude()) {
 					gpx.setHasAltitude(true);
-					float h = (float) l.getAltitude();
-					point.setEle(h);
-					lastValidHeight = h;
-					if (lastHeight == HEIGHT_UNDEFINED && pts.size() > 0) {
-						for (WptPt pt : pts) {
-							if (Double.isNaN(pt.getEle())) {
-								pt.setEle(h);
-							}
-						}
-					}
-					lastHeight = h;
-				} else {
-					lastHeight = HEIGHT_UNDEFINED;
+					point.setEle(l.getAltitude());
 				}
 				if (pts.size() == 0) {
 					if (l.hasSpeed() && l.getSpeed() > 0) {
@@ -567,15 +552,6 @@ public class GpxUiHelper {
 				pts.add(point);
 			}
 			GpxUtilities.INSTANCE.interpolateEmptyElevationWpts(pts);
-			if (!Double.isNaN(lastValidHeight) && lastHeight == HEIGHT_UNDEFINED) {
-				for (ListIterator<WptPt> iterator = pts.listIterator(pts.size()); iterator.hasPrevious(); ) {
-					WptPt point = iterator.previous();
-					if (!Double.isNaN(point.getEle())) {
-						break;
-					}
-					point.setEle(lastValidHeight);
-				}
-			}
 			track.getSegments().add(seg);
 			gpx.getTracks().add(track);
 		}
@@ -675,14 +651,6 @@ public class GpxUiHelper {
 				LOG.error(errorMessage);
 			}
 		});
-	}
-
-	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
-		GpxDataItemCallback callback = item -> {
-			addAppearanceToGpx(app, gpxFile, item);
-			saveAndShareGpx(app, gpxFile);
-		};
-		return app.getGpxDbHelper().getItem(new File(gpxFile.getPath()), callback);
 	}
 
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {

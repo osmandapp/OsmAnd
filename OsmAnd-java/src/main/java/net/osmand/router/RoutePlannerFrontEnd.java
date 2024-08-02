@@ -411,7 +411,7 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
-		
+
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;

@@ -1322,6 +1322,13 @@ public class AndroidUtils {
 
 	public static final int POST_NOTIFICATIONS_REQUEST_CODE = 6;
 
+	public static boolean hasPostNotificationPermission(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+		} else {
+			return true;
+		}
+	}
 	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.POST_NOTIFICATIONS)) {

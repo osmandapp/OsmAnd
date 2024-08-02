@@ -167,7 +167,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		modifyButton.setOnClickListener(view -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				if (InAppPurchaseUtils.isOsmAndProAvailable(app)) {
+				if (InAppPurchaseUtils.isColoringTypeAvailable(app)) {
 					activity.getDashboard().hideDashboard();
 					FragmentManager manager = activity.getSupportFragmentManager();
 					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
@@ -335,7 +335,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 							: R.color.icon_color_secondary_light));
 			stateTv.setText(R.string.shared_string_disabled);
 		}
-		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isOsmAndProAvailable(app));
+		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isColoringTypeAvailable(app));
 		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 
 		adjustGlobalVisibility();

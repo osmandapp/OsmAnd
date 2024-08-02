@@ -32,7 +32,7 @@ public interface TravelHelper {
 	boolean isAnyTravelBookPresent();
 
 	@NonNull
-	List<WikivoyageSearchResult> search(@NonNull String searchQuery);
+	List<WikivoyageSearchResult> search(@NonNull String searchQuery, int requestNumber);
 
 	@NonNull
 	List<TravelArticle> getPopularArticles();

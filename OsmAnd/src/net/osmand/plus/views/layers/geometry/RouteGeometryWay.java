@@ -11,6 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;

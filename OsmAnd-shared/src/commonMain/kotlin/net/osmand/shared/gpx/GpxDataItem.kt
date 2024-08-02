@@ -97,11 +97,6 @@ class GpxDataItem(
 					if (gpxFile.isShowArrowsSet()) gpxFile.isShowArrows() else null)
 
 			GpxParameter.SHOW_START_FINISH -> {
-				//todo check
-//				setParameter(
-//					GpxParameter.TRACK_VISUALIZATION_TYPE,
-//					gpxFile.get3DVisualizationType()
-//				)
 				setParameter(
 					GpxParameter.SHOW_START_FINISH,
 					if (gpxFile.isShowStartFinishSet()) gpxFile.isShowStartFinish() else null);

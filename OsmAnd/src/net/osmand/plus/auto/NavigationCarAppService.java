@@ -1,5 +1,7 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
+
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -11,7 +13,12 @@ import androidx.car.app.validation.HostValidator;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.AppInitEvents;
+import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 
 /**
  * Entry point for the templated app.
@@ -21,6 +28,8 @@ import net.osmand.plus.OsmandApplication;
  * Cars Library developer guide</a>.
  */
 public final class NavigationCarAppService extends CarAppService {
+
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -58,16 +67,21 @@ public final class NavigationCarAppService extends CarAppService {
 							@Override
 							public void onCreate(@NonNull LifecycleOwner owner) {
 								getApp().setCarNavigationSession(session);
+								if (!getApp().isAppInForegroundOnRootDevice()) {
+									checkAppInitialization(new RestoreNavigationHelper(getApp(), null));
+								}
 							}
 
 							@Override
 							public void onStart(@NonNull LifecycleOwner owner) {
+								getApp().onCarNavigationSessionStart(session);
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onStop(@NonNull LifecycleOwner owner) {
 								getApp().getOsmandMap().getMapView().setupRenderingView();
+								getApp().onCarNavigationSessionStop(session);
 							}
 
 							@Override
@@ -78,6 +92,29 @@ public final class NavigationCarAppService extends CarAppService {
 						});
 
 		return session;
+	}
+
+	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
+		OsmandApplication app = getApp();
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == AppInitEvents.MAPS_INITIALIZED) {
+						if (app.getAppInitializer().isRoutingConfigInitialized()) {
+							restoreNavigationHelper.checkRestoreRoutingMode();
+						}
+					}
+					if (event == ROUTING_CONFIG_INITIALIZED) {
+						if (app.getResourceManager().isIndexesLoadedOnStart()) {
+							restoreNavigationHelper.checkRestoreRoutingMode();
+						}
+					}
+				}
+			});
+		} else {
+			restoreNavigationHelper.checkRestoreRoutingMode();
+		}
 	}
 
 	@NonNull

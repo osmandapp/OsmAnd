@@ -44,7 +44,7 @@ open class GpxExtensions {
 		}
 	}
 
-	fun getColor(defColor: Int): Int {
+	fun getColor(defColor: Int?): Int? {
 		var clrValue: String? = null
 		val extensions = this.extensions
 		if (extensions != null) {

@@ -5655,16 +5655,86 @@
     <string name="lang_ta_in">Tamilština (Indie)</string>
     <string name="delete_actions_button_confirmation">Opravdu chcete odstranit \"%1$s\" se všemi přidanými akcemi?</string>
     <string name="delete_actions_button">Tlačítko Smazat</string>
-    <string name="release_4_8">• Připraveno pro 4.8</string>
+    <string name="release_4_8">• Nová možnost pre obarvení terénu podle \"nadmořské výšky\"
+\n
+\n • Vlastní palety barev pro terén, stopy a trasy
+\n
+\n • 3D verze ikon polohy
+\n
+\n • Rychlé akce mohou být přiřazené k externím klávesám
+\n
+\n • Počasí: změna rozhraní, přidána animace větru
+\n
+\n • Vylepšení 3D stop: nové možnosti zobrazení a obarvení
+\n
+\n • Rozšířený výběr turistických tras na mapě
+\n
+\n • Přidána možnost, aby motiv aplikace sledoval režim mapy
+\n
+\n • Opraveny statistiky stop, jejich řazení a vyhledávání
+\n
+\n • Úpravy OSM: odstraněné přihlašování pomocí jména a hesla
+\n
+\n • Od Androidu 14 se používá systémový panel sdílení
+\n
+\n</string>
     <string name="use_terrain_maps_summary">Používá terénní mapy pro údaje o nadmořské výšce. Geometrie trasy zůstává nezměněna.</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Pro zobrazení terénu na mapě jsou potřeba další mapy.</string>
     <string name="shared_string_scale">Měřítko</string>
-    <string name="missing_maps_ignore">Použít existující mapy</string>
+    <string name="missing_maps_ignore">Použít stažené mapy</string>
     <string name="weather_data_sources_prompt">OsmAnd poskytuje data o počasí ze dvou zdrojů:</string>
     <string name="weather_source_ecmwf_description">Evropské centrum pro střednědobé předpovědi počasí</string>
     <string name="weather_source_GFS_description">Globální předpovědní systém od Národních center pro environmentální předpovědi</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="data_source">Zdroj dat</string>
+    <string name="navigation_position">Během navigace</string>
+    <string name="auto_25_chars_route_tu">Otočte se</string>
+    <string name="resting_position">V klidu</string>
+    <string name="resting_navigation_position">V klidu i během navigace</string>
+    <string name="view_angle_description">Zobrazí oblast ve tvaru kužele, kam se právě díváte</string>
+    <string name="view_angle">Zorný úhel</string>
+    <string name="location_radius">Poloměr polohy</string>
+    <string name="quick_action_remove_next_destination">Další cílový bod</string>
+    <string name="location_radius_description">Zobrazí oblast ve tvaru kruhu znázorňující přesnost vaší aktuální polohy</string>
+    <string name="quick_action_to_my_location">K mojí poloze</string>
+    <string name="quick_action_move_map_left">Mapa doleva</string>
+    <string name="quick_action_map_underlay">Podklad</string>
+    <string name="choose_map_orientation">Zvolte orientaci mapy</string>
+    <string name="shared_string_automatically">Automaticky</string>
+    <string name="ask_every_time">Pokaždé se zeptat</string>
+    <string name="detailed_track_guidance">Detailní navádění stopou</string>
+    <string name="quick_action_routes_summary">Přepínač pro zobrazení nebo skrytí %1$s na mapě.</string>
+    <string name="hugerock_promo">Promoakce Hugerock na %1$s měsíců</string>
+    <string name="hugerock_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu atd. na %1$s měsíců</string>
+    <string name="driving_region_india">Indie</string>
+    <string name="auto_25_chars_route_tr">Odbočte doprava</string>
+    <string name="auto_25_chars_route_tshr">Odbočte ostře doprava</string>
+    <string name="auto_25_chars_route_tslr">Odbočte mírně doprava</string>
+    <string name="auto_25_chars_route_tl">Odbočte doleva</string>
+    <string name="auto_25_chars_route_tshl">Odbočte ostře doleva</string>
+    <string name="auto_25_chars_route_tsll">Odbočte mírně doleva</string>
+    <string name="energy_avg_info">Statistika energie (průměr za 1 / 5 / 15 minut)</string>
+    <string name="energy_avg_info_description">Úroveň baterie za minutu: %1$s
+\nSpotřeba energie (mAh): %2$s</string>
+    <string name="rendering_avg_info">Statistika vykreslování (průměr za 1 / 5 / 15 minut)</string>
+    <string name="quick_action_location_by_gpx">Poloha podle GPX</string>
+    <string name="quick_action_move_map_up">Mapa nahoru</string>
+    <string name="quick_action_new_route">Nová trasa</string>
+    <string name="quick_action_map_overlay">Překryv</string>
+    <string name="rendering_value_pale_name">Světlá</string>
+    <string name="quick_action_terrain_color_scheme">Barevné schéma terénu</string>
+    <string name="quick_action_directions_from">Výchozí bod</string>
+    <string name="quick_action_destination">Cílový bod</string>
+    <string name="quick_action_move_map_right">Mapa doprava</string>
+    <string name="quick_action_move_map_down">Mapa dolů</string>
+    <string name="quick_action_map_style">Styl mapy</string>
+    <string name="driving_region_uk">Spojené království a podobné</string>
+    <string name="auto_25_chars_route_kl">Držte se vlevo</string>
+    <string name="auto_25_chars_route_kr">Držte se vpravo</string>
+    <string name="rendering_avg_info_details">FPS za posledních 1000 snímků: %1$s
+\nCPU (dlaždice): %2$s
+\nCPU (nečinnost): %3$s
+\nCPU (čeká na GPU): %4$s</string>
 </resources>

@@ -46,3 +46,6 @@ build
 
 #Rendering test files
 OsmAnd-java/src/test/resources/rendering/*
+
+# ApproximationTest resources
+OsmAnd-java/src/test/resources/approximation/*

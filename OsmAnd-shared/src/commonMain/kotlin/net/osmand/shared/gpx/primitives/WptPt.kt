@@ -53,7 +53,7 @@ class WptPt : GpxExtensions {
 	}
 
 	fun getColor(): Int {
-		return getColor(0)
+		return getColor(0)!!
 	}
 
 	fun getLatitude(): Double {
