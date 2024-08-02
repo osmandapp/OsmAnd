@@ -722,6 +722,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) throws IOException {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
+		HashSet<Long> startEditions = new HashSet<>();
+		HashSet<Long> endEditions = new HashSet<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
 //		String profile = router.getProfileName();
@@ -741,7 +743,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 		}
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end);
+			boolean cStart = g.contains(start);
+			boolean cEnd = g.contains(end);
+			if (cStart) {
+				startEditions.add(g.edition);
+			}
+			if (cEnd) {
+				endEditions.add(g.edition);
+			}
+			g.containsStartEnd = cStart && cEnd;
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {
@@ -753,6 +763,35 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					g.matchParam++;
 				}
 			}
+		}
+
+		if (startEditions.size() != 1 || endEditions.size() != 1) {
+			int x31;
+			int y31;
+			String type;
+			LatLon point;
+			if (startEditions.size() != 1) {
+				x31 = MapUtils.get31TileNumberX(start.getLongitude());
+				y31 = MapUtils.get31TileNumberY(start.getLatitude());
+				type = "Start";
+				point = start;
+
+			} else {
+				x31 = MapUtils.get31TileNumberX(end.getLongitude());
+				y31 = MapUtils.get31TileNumberY(end.getLatitude());
+				type = "End";
+				point = end;
+			}
+			String regions = "";
+			for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
+				if (r.containsRouteData()) {
+					if (r.containsActualRouteData(x31, y31, null)) {
+						regions += "\"" + r.getRegionName() + "\" ";
+					}
+				}
+			}
+			System.out.println(String.format("%s point %s in the maps %s with different timestamp. HH routing", type, point, regions));
+			return null;
 		}
 		Collections.sort(groups, new Comparator<HHRouteRegionsGroup<T>>() {
 
