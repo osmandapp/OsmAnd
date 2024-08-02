@@ -931,9 +931,10 @@ public class OsmandApplication extends MultiDexApplication {
 		if (map != null) {
 			a = map.getMapView().getMapActivity();
 		}
-		Resources localizedResources = localeHelper.getLocalizedResources(a == null ? this : a);
-		return localizedResources != null ? localizedResources :
-				(a == null ? super.getResources() : a.getResources());
+		Context mainContext = a == null ? this : a;
+		Resources mainResources = (a == null ? super.getResources() : a.getResources()).getResources();
+		Resources localizedResources = localeHelper.getLocalizedResources(mainContext, mainResources);
+		return localizedResources != null ? localizedResources : mainResources;
 	}
 
 	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {
