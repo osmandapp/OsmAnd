@@ -163,8 +163,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public boolean allowRotationAfterReset() {
 		CompassMode currentMode = settings.getCompassMode();
-		if (currentMode == MANUALLY_ROTATED || currentMode == NORTH_IS_UP) {
+		if (currentMode == MANUALLY_ROTATED) {
 			return true;
+		} else if (currentMode == NORTH_IS_UP) {
+			return false;
 		}
 		return System.currentTimeMillis() - lastResetRotationToNorth > DELAY_TO_ROTATE_AFTER_RESET_ROTATION;
 	}
