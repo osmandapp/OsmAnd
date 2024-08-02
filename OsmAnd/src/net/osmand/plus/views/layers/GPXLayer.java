@@ -172,7 +172,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
 	private long trackMarkersChangedTime;
-	private boolean needRedraw;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -209,10 +208,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		defaultWidthPref = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
 
 		initUI();
-	}
-
-	public void setNeedRedraw(boolean needRedraw) {
-		this.needRedraw = needRedraw;
 	}
 
 	public void setTrackChartPoints(@Nullable TrackChartPoints trackChartPoints) {
@@ -354,7 +349,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				textLayer.putData(this, pointsCache);
 			}
 		}
-		needRedraw = false;
+		invalidated = false;
 		mapActivityInvalidated = false;
 	}
 
@@ -573,7 +568,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 			changed |= startFinishPointsCount != startFinishPointsCountCached;
 			changed |= splitLabelsCount != splitLabelsCountCached;
-			if (!changed && !mapActivityInvalidated && !needRedraw) {
+			if (!changed && !mapActivityInvalidated && !invalidated) {
 				return;
 			}
 			startFinishPointsCountCached = startFinishPointsCount;
@@ -763,7 +758,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
 						((RenderableSegment) segment.renderer).drawGeometry(canvas, tileBox, correctedQuadRect,
-								trackColor, trackWidth, null, true, null, needRedraw);
+								trackColor, trackWidth, null, true, null, invalidated);
 					}
 				}
 			}
@@ -919,7 +914,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					&& hiddenGroupsCountCached == hiddenGroupsCount
 					&& textVisible == textVisibleCached
 					&& changeMarkerPositionModeCached == changeMarkerPositionMode
-					&& !mapActivityInvalidated && !needRedraw) {
+					&& !mapActivityInvalidated && !invalidated) {
 				return;
 			}
 			pointCountCached = pointsCount;
@@ -1028,7 +1023,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (chartPoints != null) {
 			List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
 			if (Algorithms.objectEquals(xAxisPointsCached, xAxisPoints)
-					&& trackChartPointsProvider != null && !mapActivityInvalidated && !needRedraw) {
+					&& trackChartPointsProvider != null && !mapActivityInvalidated && !invalidated) {
 				return;
 			}
 			xAxisPointsCached = xAxisPoints;
@@ -1199,7 +1194,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				newTsRenderer = true;
 			}
 			boolean updated = updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox)
-					|| mapActivityInvalidated || needRedraw || newTsRenderer || !renderedSegments.contains(ts);
+					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.renderer instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
@@ -1215,7 +1210,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
-								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, needRedraw);
+								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, invalidated);
 						renderedSegments.add(ts);
 					}
 				} else {

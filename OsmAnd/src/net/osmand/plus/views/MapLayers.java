@@ -210,7 +210,7 @@ public class MapLayers {
 		enable3DMapsListener = change -> app.runInUIThread(() -> {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
-				gpxLayer.setNeedRedraw(true);
+				gpxLayer.setInvalidated(true);
 				mapRenderer.requestRender();
 			}
 		});
