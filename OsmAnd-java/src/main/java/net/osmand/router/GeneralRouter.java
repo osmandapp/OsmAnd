@@ -731,6 +731,12 @@ public class GeneralRouter implements VehicleRouter {
 				totalPenalty += getLeftTurn();
 			} else if (diff > Math.PI / 3) {
 				totalPenalty += getRightTurn();
+			} else if (diff > Math.PI / 3 / 2) {
+				// increase sensitivity for highway *_link
+				String prevHighway = prev.getRoad().getHighway();
+				String nextHighway = segment.getRoad().getHighway();
+				if (prevHighway != null && prevHighway.endsWith("_link")) totalPenalty += getRightTurn();
+				if (nextHighway != null && nextHighway.endsWith("_link")) totalPenalty += getRightTurn();
 			}
 		}
 		
