@@ -138,4 +138,9 @@ public class ListStringPreference extends StringPreference {
 	public String getDelimiter() {
 		return delimiter;
 	}
+
+	@NonNull
+	public String getRawModeValue(@NonNull ApplicationMode mode) {
+		return super.getModeValue(mode);
+	}
 }
