@@ -498,7 +498,7 @@ public class OsmandApplication extends MultiDexApplication {
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 
 		DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-		if(density != displayMetrics.density) {
+		if (density != displayMetrics.density) {
 			density = displayMetrics.density;
 			getUIUtilities().clearCache();
 			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
