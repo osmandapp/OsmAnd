@@ -932,7 +932,7 @@ public class OsmandApplication extends MultiDexApplication {
 			a = map.getMapView().getMapActivity();
 		}
 		Context mainContext = a == null ? this : a;
-		Resources mainResources = (a == null ? super.getResources() : a.getResources()).getResources();
+		Resources mainResources = a == null ? super.getResources() : a.getResources();
 		Resources localizedResources = localeHelper.getLocalizedResources(mainContext, mainResources);
 		return localizedResources != null ? localizedResources : mainResources;
 	}
