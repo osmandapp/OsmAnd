@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.SensorAttributesUtils;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.util.CollectionUtils;
 
 public enum Gpx3DVisualizationType {
 
@@ -62,26 +63,23 @@ public enum Gpx3DVisualizationType {
 	private static final Float SPEED_TO_HEIGHT_SCALE = 10.0f;
 	private static final Float TEMPERATURE_TO_HEIGHT_OFFSET = 100.0f;
 
-	public static double getPointElevation(@NonNull WptPt point, @NonNull Track3DStyle style, boolean useExaggeration) {
+	public static double getPointElevation(@NonNull WptPt point, @NonNull Track3DStyle style) {
+		double pointElevation = getValidElevation(point.ele);
 		Gpx3DVisualizationType type = style.getVisualizationType();
+
 		double elevation = switch (type) {
 			case NONE -> 0;
-			case ALTITUDE -> getValidElevation(point.ele);
+			case ALTITUDE -> pointElevation;
 			case SPEED -> point.speed * SPEED_TO_HEIGHT_SCALE;
 			case FIXED_HEIGHT -> style.getElevation();
 			case HEART_RATE, BICYCLE_CADENCE, BICYCLE_POWER, TEMPERATURE, SPEED_SENSOR ->
 					getSensorElevation(point, type);
 		};
-		return type != FIXED_HEIGHT && useExaggeration ? elevation * style.getExaggeration() : elevation;
+		boolean addGpxHeight = is3DMapsEnabled() && !CollectionUtils.equalsToAny(type, ALTITUDE, NONE);
+		return addGpxHeight ? elevation + pointElevation : elevation;
 	}
 
 	public static float getSensorElevation(@NonNull WptPt point, @NonNull Gpx3DVisualizationType type) {
-		double elevationValue = getValidElevation(point.ele);
-		float processedValue = processSensorData(point, type);
-		return is3DMapsEnabled() ? processedValue + (float) elevationValue : processedValue;
-	}
-
-	public static float processSensorData(@NonNull WptPt point, @NonNull Gpx3DVisualizationType type) {
 		switch (type) {
 			case HEART_RATE:
 				return SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_HEART_RATE, 0);
@@ -92,11 +90,11 @@ public enum Gpx3DVisualizationType {
 			case TEMPERATURE: {
 				float airTemp = SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_TEMPERATURE_A, Float.NaN);
 				if (!Float.isNaN(airTemp)) {
-					return airTemp * TEMPERATURE_TO_HEIGHT_OFFSET;
+					return airTemp + TEMPERATURE_TO_HEIGHT_OFFSET;
 				}
 				float waterTemp = SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_TEMPERATURE_W, Float.NaN);
 				if (!Float.isNaN(waterTemp)) {
-					return waterTemp * TEMPERATURE_TO_HEIGHT_OFFSET;
+					return waterTemp + TEMPERATURE_TO_HEIGHT_OFFSET;
 				}
 			}
 			case SPEED_SENSOR: {
