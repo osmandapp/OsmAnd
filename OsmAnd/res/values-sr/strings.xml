@@ -5727,7 +5727,7 @@
     <string name="steps_per_minute_unit">КПМ</string>
     <string name="disable_map_layers_descr">Онемогућите све слојеве карте изнад векторске карте (потребно је поновно покретање).</string>
     <string name="disable_map_layers">Онемогући слојеве карте</string>
-    <string name="height_legend_description">За приказ рељефа користе се висинске карте у боји.</string>
+    <string name="height_legend_description">За приказ рељефа користе се висинске мапе у боји.</string>
     <string name="travel_topics">Предмети путовања</string>
     <string name="play_weather_forecast">Пусти временске прилике</string>
     <string name="change_terrain_color_scheme">Промена обрасца боја тла</string>
