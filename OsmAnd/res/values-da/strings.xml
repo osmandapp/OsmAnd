@@ -5857,4 +5857,5 @@
     <string name="detailed_track_guidance_description">OsmAnd vil matche dit spor med nærliggende veje for at forbedre sving-for-sving-vejledningen.</string>
     <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
     <string name="shared_string_automatically">Automatisk</string>
+    <string name="compass_click_north_is_up">Klik og hold for at ændre orienteringstilstand</string>
 </resources>
