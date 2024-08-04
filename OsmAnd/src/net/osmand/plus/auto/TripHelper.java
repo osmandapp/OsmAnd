@@ -17,7 +17,13 @@ import androidx.annotation.StringRes;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
-import androidx.car.app.navigation.model.*;
+import androidx.car.app.navigation.model.Destination;
+import androidx.car.app.navigation.model.Lane;
+import androidx.car.app.navigation.model.LaneDirection;
+import androidx.car.app.navigation.model.Maneuver;
+import androidx.car.app.navigation.model.Step;
+import androidx.car.app.navigation.model.TravelEstimate;
+import androidx.car.app.navigation.model.Trip;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
@@ -161,7 +167,9 @@ public class TripHelper {
 				int[] lanes = nextDirInfo.directionInfo.getTurnType().getLanes();
 				int locimminent = nextDirInfo.imminent;
 				// Do not show too far
-				if ((nextDirInfo.distanceTo > 800 && nextDirInfo.directionInfo.getTurnType().isSkipToSpeak()) || nextDirInfo.distanceTo > 1200) {
+				if ((nextDirInfo.distanceTo > 800 && nextDirInfo.directionInfo.getTurnType().isSkipToSpeak())
+						|| nextDirInfo.distanceTo > 1200
+						|| (nextTurnDistance != nextDirInfo.distanceTo && locimminent != 0)) {
 					lanes = null;
 				}
 				//int dist = nextDirInfo.distanceTo;
