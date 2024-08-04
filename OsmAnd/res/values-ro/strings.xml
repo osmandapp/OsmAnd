@@ -2393,13 +2393,13 @@
     <string name="shared_string_min_speed">Viteza minimă</string>
     <string name="shared_string_max_speed">Viteză maximă</string>
     <string name="default_speed_setting_title">Viteză implicită</string>
-    <string name="default_speed_setting_descr">Modificați setările de viteză implicită</string>
+    <string name="default_speed_setting_descr">Modificare setări implicite pentru viteză</string>
     <string name="minmax_speed_dialog_title">Setați viteza min/max</string>
     <string name="new_profile">Profil nou</string>
     <string name="apply_preference_to_all_profiles">Aplicați această modificare la toate profilurile sau la profilul selectat.</string>
     <string name="shared_preference">Partajat</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer drumurile nepavate</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferați drumurile neasfaltate în locul celor asfaltate pentru traseu.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferă drumuri nepavate</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferă drumuri neasfaltate în locul celor asfaltate pentru rutare.</string>
     <string name="layer_osm_edits">editare OSM</string>
     <string name="quick_action_contour_lines_descr">Buton ce arată sau ascunde liniile de contur de pe hartă.</string>
     <string name="quick_action_hillshade_descr">Un buton care să afișeze sau ascundă umbrirea reliefului pe hartă.</string>
