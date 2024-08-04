@@ -218,7 +218,8 @@ public class TripHelper {
 			lastStep = step;
 			lastStepTravelEstimate = stepTravelEstimate;
 
-			if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0 && nextNextDirInfo.directionInfo != null) {
+			// Next next turn
+			if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0 && nextNextDirInfo.imminent >= 0 && nextNextDirInfo.directionInfo != null) {
 				Step.Builder nextStepBuilder = new Step.Builder();
 				Maneuver.Builder nextTurnBuilder;
 				nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
