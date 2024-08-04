@@ -467,21 +467,29 @@ public class AisObject {
         }
     }
 
-    public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
-                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-        if ((!this.bitmapValid) || isLost(vesselLostTimeoutInMinutes)) {
+    private void updateBitmap(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint) {
+        if (isLost(vesselLostTimeoutInMinutes)) {
             setBitmap(mapLayer);
-        }
-        if (checkCpaWarning()) {
-            activateCpaWarning();
         } else {
-            deactivateCpaWarning();
+            if (!this.bitmapValid) {
+                setBitmap(mapLayer);
+            }
+            if (checkCpaWarning()) {
+                activateCpaWarning();
+            } else {
+                deactivateCpaWarning();
+            }
         }
         if (this.bitmapColor != 0) {
             paint.setColorFilter(new LightingColorFilter(this.bitmapColor, 0));
         } else {
             paint.setColorFilter(null);
         }
+    }
+
+    public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
+                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+        updateBitmap(mapLayer, paint);
         if (this.bitmap != null) {
             canvas.save();
             canvas.rotate(tileBox.getRotate(), (float)tileBox.getCenterPixelX(), (float)tileBox.getCenterPixelY());
