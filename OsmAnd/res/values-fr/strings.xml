@@ -1188,9 +1188,9 @@
     <string name="rendering_value_brown_name">Brun</string>
     <string name="osmo_edit_color">Sélectionnez la couleur</string>
     <string name="gpx_file_is_empty">Fichier GPX vide</string>
-    <string name="shared_string_tracks">Traces</string>
-    <string name="shared_string_my_favorites">Favoris</string>
-    <string name="shared_string_my_places">Lieux favoris</string>
+    <string name="shared_string_tracks">Mes traces</string>
+    <string name="shared_string_my_favorites">Lieux favoris</string>
+    <string name="shared_string_my_places">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer le guidage pas à pas automatiquement</string>
     <string name="shared_string_selected_lowercase">sélectionné(s)</string>
@@ -1362,7 +1362,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
-    <string name="download_tab_local">Mémoire</string>
+    <string name="download_tab_local">Stockage</string>
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
