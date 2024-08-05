@@ -1054,7 +1054,7 @@
     <string name="local_osm_changes_delete_all_confirm">Chceš %1$d změnow na OSM wotstronić. Sy sej wěsty/a?</string>
     <string name="recording_delete_confirm">Tute nahraće wotstronić?</string>
     <string name="recording_context_menu_delete">Nahraće wotstronić</string>
-    <string name="local_openstreetmap_delete">modifikaciju wotstronić</string>
+    <string name="local_openstreetmap_delete">Změnu wotstronić</string>
     <string name="local_openstreetmap_settings">Na nastroju składowane zajimawostki/noticy</string>
     <string name="free_version_message">Móžeš %1$s kartow sćahnyć abo aktualizować.</string>
     <string name="index_name_other">Swětadaloke a tematiske karte</string>
@@ -1293,7 +1293,7 @@
     <string name="shared_string_deleted">Wotstronjene</string>
     <string name="shared_string_edited">Wobdźěłane</string>
     <string name="shared_string_added">Přidate</string>
-    <string name="notes_by_date">Noticy po datumje</string>
+    <string name="notes_by_date">A/W noticy po datumje</string>
     <string name="by_date">po datumje</string>
     <string name="by_type">po družinje</string>
     <string name="empty_state_markers_groups_desc">Faworitowe skupiny abo pućne dypki jako markěrowanja importować.</string>
@@ -1850,4 +1850,23 @@
     <string name="choose_icon_color_name">Symbol, barba a mjeno</string>
     <string name="language_and_output">Rěč a wudawanje</string>
     <string name="osmand_settings_descr">Płaća za cyłu aplikaciju</string>
+    <string name="standard_maps">Standardne karty</string>
+    <string name="cache_size">Wulkosć mjezyskłada</string>
+    <string name="shared_string_itinerary">Pućowanske</string>
+    <string name="ask_every_time">kóždy raz so prašeć</string>
+    <string name="shared_string_automatically">awtomatisce</string>
+    <string name="wikipedia_and_travel_maps">Wikipedija a pućowanske karty</string>
+    <string name="notes">A/W noticy</string>
+    <string name="weather_online_cache">Mjezyskład online</string>
+    <string name="topography_maps">Topografiske karty</string>
+    <string name="rendering_styles">Stile renderowanja</string>
+    <string name="delete_map">Kartu wotstronić</string>
+    <string name="internal_app_storage_description">Interny skład, schowany před wužiwarjemi a druhimi aplikacijemi, jenož za OsmAnd přistupny.</string>
+    <string name="maps_and_resources">Karty a resursy</string>
+    <string name="mapillary_menu_title_tile_cache">Mjezyskład kachličkow</string>
+    <string name="offline_cache">Mjezyskład offline</string>
+    <string name="images_cache">Mjezyskład wobrazow</string>
+    <string name="delete_map_description">Kartu %1$s wotstronić?</string>
+    <string name="shared_string_cache">Mjezyskład</string>
+    <string name="markers_remove_dialog_msg">Chorhojčku \'%s\' wotstronić?</string>
 </resources>
