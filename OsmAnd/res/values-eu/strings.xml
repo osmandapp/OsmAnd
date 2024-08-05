@@ -5025,31 +5025,45 @@
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
     <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
 \n
+\n
 \n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
+\n
 \n
 \n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
 \n
+\n
 \n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
+\n
 \n
 \n • Maparen orientazioak modu finko berria gehitu du
 \n
+\n
 \n • Hasierako pantaila sinplifikatua
+\n
 \n
 \n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
 \n
+\n
 \n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
+\n
 \n
 \n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
 \n
+\n
 \n • Leku beganoak bistaratzeko arazoak konpondu dira
+\n
 \n
 \n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da
 \n
+\n
 \n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"
+\n
 \n
 \n • Ziklomotor profil berria
 \n
+\n
 \n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"
+\n
 \n
 \n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
 \n
@@ -5629,7 +5643,29 @@
     <string name="upward_gradient">Goranzko gradientea</string>
     <string name="top_and_bottom">Goian eta behean</string>
     <string name="title_3d_track">3D arrastoa</string>
-    <string name="release_4_8">• 4.8rako prest egon</string>
+    <string name="release_4_8">• \"Altitudea\" lurraren koloreztatzeko aukera berria
+\n
+\n • Kolore paleta pertsonalizatuak lur, arrasto eta ibilbideetarako
+\n
+\n • Kokapen-ikonoetarako 3D aldaera
+\n
+\n • Ekintza azkarrak kanpoko teklatuei eslei dakizkieke orain
+\n
+\n • Eguraldia: interfazea freskatu, haizearen animazioa gehitu da
+\n
+\n • 3D arrastoen hobekuntzak: bistaratzeko eta koloreztatzeko aukera berriak
+\n
+\n • Ibilbide turistikoen aukeraketa hedatua mapan
+\n
+\n• Aplikazioaren gaiaren aukera gehitu da mapa modua jarraitzeko
+\n
+\n • Pistaren estatistikak, ordenatzea eta bilaketa konpondu ditu
+\n
+\n • OSM edizioa: saioa hasteko/pasahitza baimentzeko metodoa ezabatu da
+\n
+\n • Android 14 abiarazteko sistema partekatzeko orrira aldatzea
+\n
+\n</string>
     <string name="shared_string_scale">Eskala</string>
     <string name="upload_local_versions">Kargatu tokiko bertsioak</string>
     <string name="download_cloud_versions">Deskargatu hodeiko bertsioak</string>
@@ -5822,4 +5858,10 @@
     <string name="compass_click_north_is_up">Orientazio modua aldatzeko, mantendu sakatuta</string>
     <string name="auto_25_chars_route_kl">Mantendu ezkerrean</string>
     <string name="auto_25_chars_route_kr">Mantendu eskuinean</string>
+    <string name="location_radius">Kokapen erradioa</string>
+    <string name="resting_position_icon">Atseden-kokapenaren ikonoa</string>
+    <string name="rendering_avg_info_details">FPS azken 1.000 fotogramen arabera: %1$s
+\nCPU (lauzak): %2$s
+\nCPU (inaktibo-denbora): %3$s
+\nCPU (GPU zain): %4$s</string>
 </resources>
