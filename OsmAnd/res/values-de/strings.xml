@@ -5662,7 +5662,7 @@
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
     <string name="fix_north_up">Festen Norden oben aktivieren</string>
-    <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
+    <string name="fix_north_up_descr">In der Kartenausrichtung \"Nord oben\" Karte nicht mit Gesten drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
