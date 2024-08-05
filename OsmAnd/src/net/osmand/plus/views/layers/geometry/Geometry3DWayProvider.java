@@ -16,7 +16,7 @@ public class Geometry3DWayProvider implements GeometryWayProvider {
 	}
 
 	public int getColor(int index) {
-		return points.get(index).getColor();
+		return points.get(index).getPrimaryColor();
 	}
 
 	public int getOutlineColor(int index) {

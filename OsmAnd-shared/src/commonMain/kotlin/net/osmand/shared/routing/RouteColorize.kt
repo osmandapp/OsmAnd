@@ -264,7 +264,7 @@ class RouteColorize {
 
 	private fun setColorsToPoints(points: List<RouteColorizationPoint>) {
 		for (point in points) {
-			point.color = palette.getColorByValue(point.value)
+			point.primaryColor = palette.getColorByValue(point.value)
 		}
 	}
 
@@ -477,7 +477,7 @@ class RouteColorize {
 	}
 
 	class RouteColorizationPoint(var id: Int, var lat: Double, var lon: Double, var value: Double) {
-		var color = 0
+		var primaryColor = 0
 		var secondaryColor = 0
 	}
 

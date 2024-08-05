@@ -129,7 +129,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			WptPt wptPt = points.get(i);
 			pointHeights.add((float) getPointElevation(wptPt));
 			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), 0);
-			point.setColor(getPointGradientColor(coloringType, wptPt));
+			point.setPrimaryColor(getPointGradientColor(coloringType, wptPt));
 			colorizationPoints.add(point);
 		}
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
@@ -145,7 +145,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			WptPt wptPt = points.get(i);
 			double value = getPointElevation(wptPt);
 			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), value);
-			point.setColor(getPointColor(coloringType, wptPt, routeColors, i));
+			point.setPrimaryColor(getPointColor(coloringType, wptPt, routeColors, i));
 			if (outlineColoringType != null) {
 				point.setSecondaryColor(getPointColor(outlineColoringType, wptPt, routeColors, i));
 			}

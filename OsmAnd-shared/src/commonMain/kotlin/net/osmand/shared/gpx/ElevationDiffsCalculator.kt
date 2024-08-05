@@ -1,5 +1,7 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KMapUtils
 import kotlin.math.sqrt
 
@@ -91,5 +93,69 @@ abstract class ElevationDiffsCalculator {
 				diffElevationDown -= eleDiffSumm
 			}
 		}
+	}
+
+	companion object {
+		fun calculateDiffs(points: List<WptPt>) {
+			val approximator: ElevationApproximator =
+				object : ElevationApproximator() {
+					override fun getPointLatitude(index: Int): Double {
+						return points[index].lat
+					}
+
+					override fun getPointLongitude(index: Int): Double {
+						return points[index].lon
+					}
+
+					override fun getPointElevation(index: Int): Double {
+						return points[index].ele
+					}
+
+					override fun getPointsCount(): Int {
+						return points.size
+					}
+				}
+			approximator.approximate()
+			val distances: DoubleArray? = approximator.getDistances()
+			val elevations: DoubleArray? = approximator.getElevations()
+			if (distances != null && elevations != null) {
+				var diffElevationUp = 0.0
+				var diffElevationDown = 0.0
+				val elevationDiffsCalc: ElevationDiffsCalculator =
+					object : ElevationDiffsCalculator() {
+						override fun getPointDistance(index: Int): Double {
+							return distances[index]
+						}
+
+						override fun getPointElevation(index: Int): Double {
+							return elevations[index]
+						}
+
+						override fun getPointsCount(): Int {
+							return distances.size
+						}
+					}
+				elevationDiffsCalc.calculateElevationDiffs()
+				diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
+				diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
+				println(
+					"GPX points=" + points.size + " approx points=" + distances.size
+							+ " diffUp=" + diffElevationUp + " diffDown=" + diffElevationDown)
+			}
+
+		}
+
+	}
+}
+
+fun main() {
+	val gpxFile: GpxFile =
+		GpxUtilities.loadGpxFile(KFile("/Users/crimean/Downloads/2011-09-27_Mulhacen.gpx"))
+	val points: List<WptPt> =
+		gpxFile.tracks.get(0).segments.get(0).points
+	ElevationDiffsCalculator.calculateDiffs(points)
+	val start = 200
+	for (i in start + 150 until start + 160) {
+		ElevationDiffsCalculator.calculateDiffs(points.subList(start, i))
 	}
 }

@@ -192,10 +192,10 @@ public class CachedTrack {
 				if (point != null && point.getId() == id || outlinePoint != null && outlinePoint.getId() == id) {
 					simplifiedSegment.getPoints().add(pt);
 					if (point != null) {
-						pt.setColor(colorizationType, point.getColor());
+						pt.setColor(colorizationType, point.getPrimaryColor());
 					}
 					if (outlinePoint != null) {
-						pt.setColor(outlineColorizationType, outlinePoint.getColor());
+						pt.setColor(outlineColorizationType, outlinePoint.getPrimaryColor());
 					}
 					colorPointIdx++;
 				}
