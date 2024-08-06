@@ -5839,4 +5839,9 @@
     <string name="resting_navigation_position">Posizione di riposo e navigazione</string>
     <string name="view_angle_description">Visualizza l\'area a forma di cono che stai guardando attualmente</string>
     <string name="view_angle">Vista ad angolo</string>
+    <string name="rendering_avg_info_details">FPS per ultimi 1k frame: %1$s
+\nCPU (tile): %2$s
+\nCPU (tempo di inattività): %3$s
+\nCPU (attesa GPU): %4$s</string>
+    <string name="compass_click_north_is_up">Per cambiare la modalità di orientamento fare clic e tenere premuto</string>
 </resources>
