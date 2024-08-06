@@ -2233,6 +2233,9 @@ public class RouteResultPreparation {
 			if (isKeepTurn(turnType) && isHighSpeakPriority(curr)) {
 				continue;
 			}
+			if (isForkByLanes(curr, result.get(i - 1))) {
+				continue;
+			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll) {
@@ -2446,6 +2449,17 @@ public class RouteResultPreparation {
 			String c = attach.getObject().getHighway();
 			if( highwaySpeakPriority(h) >= highwaySpeakPriority(c)) {
 				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isForkByLanes(RouteSegmentResult curr, RouteSegmentResult prev) {
+		//check for Y-intersections with many lanes
+		if (countLanesMinOne(curr) < countLanesMinOne(prev)) {
+			List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
+			if (attachedRoutes.size() == 1) {
+				return countLanesMinOne(attachedRoutes.get(0)) >= 2;
 			}
 		}
 		return false;

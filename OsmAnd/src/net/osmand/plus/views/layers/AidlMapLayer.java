@@ -172,6 +172,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateBitmaps(nightMode);
+	}
+
+	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 

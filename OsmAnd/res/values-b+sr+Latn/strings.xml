@@ -5858,4 +5858,5 @@
     <string name="detailed_track_guidance">Detaljan vodič snimljenom stazom</string>
     <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju snimljenu stazi s obližnjim putevima za bolju, detaljnuju navigaciju.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
+    <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
 </resources>

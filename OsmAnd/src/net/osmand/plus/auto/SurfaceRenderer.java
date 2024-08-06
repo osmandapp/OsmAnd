@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.AppManager;
 import androidx.car.app.CarContext;
+import androidx.car.app.HostException;
 import androidx.car.app.SurfaceCallback;
 import androidx.car.app.SurfaceContainer;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -204,7 +205,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		Log.i(TAG, "SurfaceRenderer created");
-		carContext.getCarService(AppManager.class).setSurfaceCallback(mSurfaceCallback);
+		try {
+			carContext.getCarService(AppManager.class).setSurfaceCallback(mSurfaceCallback);
+		} catch (SecurityException | HostException e) {
+			Log.e(TAG, "setSurfaceCallback failed ", e);
+		}
 	}
 
 	/**
@@ -353,6 +358,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							getApp().getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 							PluginsHelper.refreshLayers(getApp(), null);
 							offscreenMapRendererView.addListener(this);
+							mapView.getAnimatedDraggingThread().toggleAnimations();
 						}
 					}
 				}
@@ -363,12 +369,17 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public void stopOffscreenRenderer() {
 		Log.i(TAG, "stopOffscreenRenderer");
 		if (offscreenMapRendererView != null) {
-			if (mapView != null && mapView.getMapRenderer() == offscreenMapRendererView)
-				mapView.setMapRenderer(null);
+			AtlasMapRendererView offscreenMapRendererView = this.offscreenMapRendererView;
+			this.offscreenMapRendererView = null;
+			if (mapView != null) {
+				mapView.getAnimatedDraggingThread().toggleAnimations();
+				if (mapView.getMapRenderer() == offscreenMapRendererView) {
+					mapView.setMapRenderer(null);
+				}
+			}
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 			if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
 				offscreenMapRendererView.stopRenderer();
-			offscreenMapRendererView = null;
 		}
 	}
 

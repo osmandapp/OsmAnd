@@ -5868,4 +5868,5 @@
     <string name="detailed_track_guidance_description">OsmAnd hará coincidir la traza con los caminos cercanos para mejorar la navegación giro a giro.</string>
     <string name="quick_action_routes_summary">Un botón que muestra u oculta «%1$s» en el mapa.</string>
     <string name="shared_string_automatically">Automáticamente</string>
+    <string name="compass_click_north_is_up">Para cambiar el modo de orientación, mantén pulsado</string>
 </resources>

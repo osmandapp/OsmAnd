@@ -90,6 +90,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		initIcons();
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		init();
+	}
+
 	protected void initAttrs(float density) {
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * density);

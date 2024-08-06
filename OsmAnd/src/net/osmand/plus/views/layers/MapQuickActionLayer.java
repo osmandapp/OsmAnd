@@ -78,7 +78,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
+		createContextMarker();
+	}
 
+	private void createContextMarker() {
 		Context context = AndroidUtils.createDisplayContext(getContext());
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
@@ -87,6 +90,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		int width = contextMarker.getDrawable().getMinimumWidth();
 		int height = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, width, height);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		createContextMarker();
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

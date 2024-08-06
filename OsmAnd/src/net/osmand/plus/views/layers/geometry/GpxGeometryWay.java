@@ -83,8 +83,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.gradientPalette = gradientPaletteName;
 	}
 
-	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
-		if (coloringChanged || tb.getMapDensity() != getMapDensity()
+	public void updateSegment(RotatedTileBox tb, List<WptPt> points,
+	                          List<RouteSegmentResult> routeSegments, boolean forceUpdate) {
+		if (coloringChanged || forceUpdate || tb.getMapDensity() != getMapDensity()
 				|| this.points != points || this.routeSegments != routeSegments) {
 			this.points = points;
 			this.routeSegments = routeSegments;
@@ -156,7 +157,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	private double getPointElevation(@NonNull WptPt point) {
 		Track3DStyle style = getTrack3DStyle();
-		return style != null ? Gpx3DVisualizationType.getPointElevation(point, style, false) : 0;
+		return style != null ? Gpx3DVisualizationType.getPointElevation(point, style) : 0;
 	}
 
 	@ColorInt
@@ -202,13 +203,14 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		return style;
 	}
 
-	private void updateTrack3dStyle(GeometrySolidWayStyle<GpxGeometryWayContext> style) {
-		if (getTrack3DStyle() != null) {
-			style.trackVisualizationType = getTrack3DStyle().getVisualizationType();
-			style.trackWallColorType = getTrack3DStyle().getWallColorType();
-			style.trackLinePositionType = getTrack3DStyle().getLinePositionType();
-			style.additionalExaggeration = getTrack3DStyle().getExaggeration();
-			style.elevationMeters = getTrack3DStyle().getElevation();
+	private void updateTrack3dStyle(@NonNull GeometrySolidWayStyle<GpxGeometryWayContext> style) {
+		Track3DStyle track3DStyle = getTrack3DStyle();
+		if (track3DStyle != null) {
+			style.trackVisualizationType = track3DStyle.getVisualizationType();
+			style.trackWallColorType = track3DStyle.getWallColorType();
+			style.trackLinePositionType = track3DStyle.getLinePositionType();
+			style.additionalExaggeration = track3DStyle.getExaggeration();
+			style.elevationMeters = track3DStyle.getElevation();
 		}
 	}
 

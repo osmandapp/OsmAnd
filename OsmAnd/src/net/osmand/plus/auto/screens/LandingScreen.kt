@@ -20,9 +20,7 @@ class LandingScreen(
         val app = app
         for (category in PlaceCategory.entries) {
             if (category == PlaceCategory.FREE_MODE) {
-
-                if (app.navigationService?.isCarNavigationActive == true
-                    || (!app.settings.FOLLOW_THE_ROUTE.get() && app.routingHelper.isRouteCalculated)) {
+                if (app.routingHelper.isRouteCalculated) {
                     listBuilder.addItem(createContinueNavigationItem())
                     continue
                 }
@@ -109,8 +107,8 @@ class LandingScreen(
             .setBrowsable(true)
             .setOnClickListener {
                 app.carNavigationSession?.let { carNavigationSession ->
-                    if (app.navigationService?.isCarNavigationActive == false && app.routingHelper.isRouteCalculated) {
-                        app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
+                    if (app.routingHelper.isRouteCalculated) {
+                        app.routingHelper.resumeNavigation()
                     }
                     carNavigationSession.startNavigation()
                     val navigationScreen = carNavigationSession.navigationScreen

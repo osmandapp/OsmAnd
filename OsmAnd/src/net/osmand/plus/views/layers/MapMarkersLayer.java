@@ -186,6 +186,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		initUI();
+	}
+
+	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {

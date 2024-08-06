@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
@@ -224,6 +225,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
+	private float density = 1f;
 	// Typeface
 
 	@Override
@@ -509,6 +511,13 @@ public class OsmandApplication extends MultiDexApplication {
 
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+		DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+		if (density != displayMetrics.density) {
+			density = displayMetrics.density;
+			getUIUtilities().clearCache();
+			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+		}
 
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
@@ -931,8 +940,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public Resources getResources() {
-		Resources localizedResources = localeHelper.getLocalizedResources();
-		return localizedResources != null ? localizedResources : super.getResources();
+		OsmandMap map = getOsmandMap();
+		MapActivity a = null;
+		if (map != null) {
+			a = map.getMapView().getMapActivity();
+		}
+		Context mainContext = a == null ? this : a;
+		Resources mainResources = a == null ? super.getResources() : a.getResources();
+		Resources localizedResources = localeHelper.getLocalizedResources(mainContext, mainResources);
+		return localizedResources != null ? localizedResources : mainResources;
 	}
 
 	public List<RoutingConfiguration.Builder> getAllRoutingConfigs() {

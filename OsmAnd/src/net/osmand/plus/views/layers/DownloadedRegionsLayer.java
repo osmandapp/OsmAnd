@@ -174,11 +174,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		paintBackuped = getPaint(getColor(R.color.region_backuped));
 
 		textPaint = new TextPaint();
-		DisplayMetrics metrics = new DisplayMetrics();
-		AndroidUtils.getDisplay(app).getMetrics(metrics);
-		textPaint.setStrokeWidth(21 * metrics.scaledDensity);
-		textPaint.setAntiAlias(true);
-		textPaint.setTextAlign(Paint.Align.CENTER);
+
+		updatePaints();
 
 		pathDownloaded = new Path();
 		pathSelected = new Path();
@@ -212,6 +209,20 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 		};
 		addMapsInitializedListener();
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updatePaints();
+	}
+
+	private void updatePaints() {
+		DisplayMetrics metrics = new DisplayMetrics();
+		AndroidUtils.getDisplay(app).getMetrics(metrics);
+		textPaint.setStrokeWidth(21 * metrics.scaledDensity);
+		textPaint.setAntiAlias(true);
+		textPaint.setTextAlign(Paint.Align.CENTER);
 	}
 
 	private Paint getPaint(int color) {

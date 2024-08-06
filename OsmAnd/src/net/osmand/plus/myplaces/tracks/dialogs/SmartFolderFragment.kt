@@ -113,8 +113,8 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		app.smartFolderHelper.removeUpdateListener(this)
 	}
 
-	override fun getCurrentTrackGroup(): TracksGroup {
-		return smartFolder!!
+	override fun getCurrentTrackGroup(): TracksGroup? {
+		return smartFolder
 	}
 
 	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {

@@ -1,6 +1,7 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
 import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
 import static net.osmand.plus.settings.enums.CompassVisibility.VISIBLE_IF_MAP_ROTATED;
@@ -25,9 +26,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
@@ -50,12 +53,12 @@ public class CompassButton extends MapButton {
 
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		setupTouchListener();
+		setupTouchListener(mapActivity);
 		setupAccessibilityActions();
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
-	private void setupTouchListener() {
+	private void setupTouchListener(@NonNull MapActivity mapActivity) {
 		view.setOnTouchListener(new View.OnTouchListener() {
 
 			private final GestureDetector gestureDetector = new GestureDetector(view.getContext(), new SimpleOnGestureListener() {
@@ -67,7 +70,16 @@ public class CompassButton extends MapButton {
 
 				@Override
 				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-					rotateMapToNorth();
+					Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG);
+					if (fragment != null) {
+						showCompassModeWidgetDialog();
+						return true;
+					}
+					if (settings.getCompassMode() == NORTH_IS_UP) {
+						app.showShortToastMessage(R.string.compass_click_north_is_up);
+					} else {
+						rotateMapToNorth();
+					}
 					return true;
 				}
 
@@ -100,6 +112,9 @@ public class CompassButton extends MapButton {
 	private void rotateMapToNorth() {
 		mapActivity.getMapView().resetRotation();
 		app.getMapViewTrackingUtilities().setLastResetRotationToNorth(System.currentTimeMillis());
+		if (settings.getCompassMode() == MANUALLY_ROTATED) {
+			settings.setManuallyMapRotation(0);
+		}
 	}
 
 	private void showCompassModeWidgetDialog() {

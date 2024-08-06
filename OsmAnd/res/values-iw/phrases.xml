@@ -2440,4 +2440,7 @@
     <string name="poi_us_maps_recreation_area_activity_viewing_wildlife">צפייה בחיי בר</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_scenery">צפייה בנוף</string>
     <string name="poi_socket_typee_voltage_filter">מתח מחבר מסוג E‏ (Type E)</string>
+    <string name="poi_us_maps_recreation_area_facility_lighthouse">מגדלור</string>
+    <string name="poi_us_maps_recreation_area_activity_poi">נקודת עניין</string>
+    <string name="poi_us_maps_recreation_area_facility_fire_lookout"></string>
 </resources>

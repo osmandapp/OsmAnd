@@ -5850,4 +5850,5 @@
     <string name="shared_string_automatically">Automatikusan</string>
     <string name="ask_every_time">Kérdezzen rá mindig</string>
     <string name="detailed_track_guidance">Részletes útmutatás</string>
+    <string name="compass_click_north_is_up">Tájolási mód megváltoztatásához kattintson és tartsa nyomva</string>
 </resources>

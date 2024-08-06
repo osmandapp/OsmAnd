@@ -747,7 +747,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		extendedMapActivity.onResume(this);
 
-		getMapView().getAnimatedDraggingThread().allowAnimations();
+		getMapView().getAnimatedDraggingThread().toggleAnimations();
 	}
 
 	@Override
@@ -1003,15 +1003,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onPause() {
 		super.onPause();
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
-		boolean blockAnimations = true;
-		NavigationSession navigationSession = app.getCarNavigationSession();
-		if (navigationSession != null) {
-			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if (!app.useOpenGlRenderer() || (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()))
-				blockAnimations = false;
-		}
-		if (blockAnimations)
-			getMapView().getAnimatedDraggingThread().blockAnimations();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
 		} else {
@@ -1060,6 +1051,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.setLastKnownMapRotation(mapView.getRotate());
 		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
+		getMapView().getAnimatedDraggingThread().toggleAnimations();
 		app.getResourceManager().interruptRendering();
 		PluginsHelper.onMapActivityPause(this);
 	}

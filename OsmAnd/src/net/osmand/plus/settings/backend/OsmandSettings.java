@@ -1792,6 +1792,10 @@ public class OsmandSettings {
 		ROTATE_MAP.set(compassMode.getValue());
 	}
 
+	public void setCompassMode(@NonNull CompassMode compassMode, @NonNull ApplicationMode appMode) {
+		ROTATE_MAP.setModeValue(appMode, compassMode.getValue());
+	}
+
 	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
 	public static final int POSITION_PLACEMENT_CENTER = 1;
 	public static final int POSITION_PLACEMENT_BOTTOM = 2;

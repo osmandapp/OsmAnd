@@ -82,16 +82,19 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 	}
 
 	protected void updateTrack3DStyle(@NonNull GeometryWayStyle<?> style, @Nullable Track3DStyle track3DStyle) {
-		Gpx3DVisualizationType trackVisualizationType = track3DStyle == null ? Gpx3DVisualizationType.NONE : track3DStyle.getVisualizationType();
-		Gpx3DWallColorType trackWallColorType = track3DStyle == null ? Gpx3DWallColorType.NONE : track3DStyle.getWallColorType();
-		Gpx3DLinePositionType trackLinePositionType = track3DStyle == null ? Gpx3DLinePositionType.TOP : track3DStyle.getLinePositionType();
-		float exaggeration = track3DStyle == null ? 1f : track3DStyle.getExaggeration();
-		float elevationMeters = track3DStyle == null ? 1000f : track3DStyle.getElevation();
-		style.trackVisualizationType = trackVisualizationType;
-		style.trackWallColorType = trackWallColorType;
-		style.trackLinePositionType = trackLinePositionType;
-		style.additionalExaggeration = exaggeration;
-		style.elevationMeters = elevationMeters;
+		if (track3DStyle != null) {
+			style.trackVisualizationType = track3DStyle.getVisualizationType();
+			style.trackWallColorType = track3DStyle.getWallColorType();
+			style.trackLinePositionType = track3DStyle.getLinePositionType();
+			style.additionalExaggeration = track3DStyle.getExaggeration();
+			style.elevationMeters = track3DStyle.getElevation();
+		} else {
+			style.trackVisualizationType = Gpx3DVisualizationType.NONE;
+			style.trackWallColorType = Gpx3DWallColorType.NONE;
+			style.trackLinePositionType = Gpx3DLinePositionType.TOP;
+			style.additionalExaggeration = 1f;
+			style.elevationMeters = 1000f;
+		}
 	}
 
 	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {

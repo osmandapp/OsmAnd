@@ -5842,4 +5842,5 @@
     <string name="hugerock_promo">%1$s 個月的 Hugerock 促銷</string>
     <string name="hugerock_promo_description">%1$s 個月的免費使用功能，包含無限制的地圖下載、3D 地形等</string>
     <string name="shared_string_automatically">自動</string>
+    <string name="compass_click_north_is_up">若要變更方向模式，請點選並按住</string>
 </resources>
