@@ -489,7 +489,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (app.getRoutingHelper().isFollowingMode()) {
 			return true;
 		}
-		if ((System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
+		if ((System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS || lastTimeGPSLocationFixed == 0) {
 			return true;
 		}
 		return isRunningOnEmulator();
