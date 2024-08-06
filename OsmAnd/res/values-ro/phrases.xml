@@ -3109,7 +3109,7 @@
     <string name="poi_cuisine_cantonese">Cantonez</string>
     <string name="poi_cuisine_swiss">Elvețian</string>
     <string name="poi_cuisine_basque">Basc</string>
-    <string name="poi_cuisine_belgian">Belgian</string>
+    <string name="poi_cuisine_belgian">Belgiană</string>
     <string name="poi_cuisine_afghan">Afgan</string>
     <string name="poi_cuisine_ukrainian">Ucrainean</string>
     <string name="poi_cuisine_middle_eastern">Orientul Mijlociu</string>
@@ -3134,7 +3134,7 @@
     <string name="poi_cuisine_croatian">Croat</string>
     <string name="poi_cuisine_peruvian">Peruan</string>
     <string name="poi_cuisine_balkan">Balcanic</string>
-    <string name="poi_cuisine_argentinian">Argentinian</string>
+    <string name="poi_cuisine_argentinian">Argentiniană</string>
     <string name="poi_cuisine_caribbean">Caraibean</string>
     <string name="poi_cuisine_african">African</string>
     <string name="poi_cuisine_indonesian">Indonezian</string>
@@ -3171,7 +3171,7 @@
     <string name="poi_cuisine_burrito">Burito</string>
     <string name="poi_cuisine_pastel">Pasteis</string>
     <string name="poi_cuisine_baguette">Baghetă</string>
-    <string name="poi_cuisine_fondue">Fondue</string>
+    <string name="poi_cuisine_fondue">Fondant</string>
     <string name="poi_cuisine_pita">Pită</string>
     <string name="poi_cuisine_sub">Sandviș (tip \"sub\")</string>
     <string name="poi_cuisine_brunch">Brunch</string>
