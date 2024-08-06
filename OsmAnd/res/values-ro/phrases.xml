@@ -3760,7 +3760,7 @@
     <string name="poi_horseshoes">Potcoavele</string>
     <string name="poi_fencing">Scrimă</string>
     <string name="poi_cycle_polo">Bike polo</string>
-    <string name="poi_curling">Curlingul</string>
+    <string name="poi_curling">Curling</string>
     <string name="poi_crossfit">Cross fit</string>
     <string name="poi_cockfighting">Lupte de cocoși</string>
     <string name="poi_cliff_diving">Scufundări de pe faleză</string>
@@ -4701,7 +4701,7 @@
     <string name="poi_healthcare_speciality_sleep">Somnologie</string>
     <string name="poi_healthcare_speciality_proctology">Proctologie</string>
     <string name="poi_healthcare_speciality_audiology">Audiologie</string>
-    <string name="poi_healthcare_speciality_autism">Autismul</string>
+    <string name="poi_healthcare_speciality_autism">Autism</string>
     <string name="poi_state_closed">Stare: închisă</string>
     <string name="poi_state_approved">Stare: aprobată</string>
     <string name="poi_ascent">Urcare</string>
