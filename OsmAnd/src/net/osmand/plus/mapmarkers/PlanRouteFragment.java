@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
@@ -703,10 +703,10 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			boolean defaultMode = appMode == ApplicationMode.DEFAULT;
 
 			float dist = 0;
-			for (int i = 1; i < snapTrkSegment.points.size(); i++) {
-				WptPt pt1 = snapTrkSegment.points.get(i - 1);
-				WptPt pt2 = snapTrkSegment.points.get(i);
-				dist += MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+			for (int i = 1; i < snapTrkSegment.getPoints().size(); i++) {
+				WptPt pt1 = snapTrkSegment.getPoints().get(i - 1);
+				WptPt pt2 = snapTrkSegment.getPoints().get(i);
+				dist += MapUtils.getDistance(pt1.getLat(), pt1.getLon(), pt2.getLat(), pt2.getLon());
 			}
 			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + (defaultMode ? "" : ","));
 
@@ -754,7 +754,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(planRouteContext.getSnapTrkSegment());
 			mapActivity.refreshMap();
 			if (adjustMap) {
-				showRouteOnMap(planRouteContext.getSnapTrkSegment().points);
+				showRouteOnMap(planRouteContext.getSnapTrkSegment().getPoints());
 			}
 		}
 	}

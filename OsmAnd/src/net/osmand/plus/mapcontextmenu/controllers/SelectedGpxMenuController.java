@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -42,7 +42,7 @@ public class SelectedGpxMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				WptPt selectedPoint = selectedGpxPoint.getSelectedPoint();
-				GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
+				GpxFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
 
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint);
 				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

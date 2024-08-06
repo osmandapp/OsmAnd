@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -228,9 +228,9 @@ public class TrackTabsHelper {
 	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
-		for (GPXFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
-			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
-			if (selectedGpxFile == null && (!gpxFile.showCurrentTrack || monitoringActive)) {
+		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
+			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
+			if (selectedGpxFile == null && (!gpxFile.isShowCurrentTrack() || monitoringActive)) {
 				recentlyVisibleTrackItem.add(new TrackItem(app, gpxFile));
 			}
 		}

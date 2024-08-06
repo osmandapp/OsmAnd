@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.enums.TrackApproximationType.AUTOMATIC;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -21,6 +22,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -41,8 +43,8 @@ public class MapActions {
 		return false;
 	}
 
-	public void setGPXRouteParams(@Nullable GPXFile gpxFile) {
-		app.logRoutingEvent("setGPXRouteParams result " + (gpxFile != null ? gpxFile.path : null));
+	public void setGPXRouteParams(@Nullable GpxFile gpxFile) {
+		app.logRoutingEvent("setGPXRouteParams result " + (gpxFile != null ? gpxFile.getPath() : null));
 		if (gpxFile == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -63,7 +65,7 @@ public class MapActions {
 
 			List<Location> points = builder.getPoints(settings.getContext());
 			app.getRoutingHelper().setGpxParams(builder);
-			settings.FOLLOW_THE_GPX_ROUTE.set(gpxFile.path);
+			settings.FOLLOW_THE_GPX_ROUTE.set(gpxFile.getPath());
 			if (!points.isEmpty()) {
 				Location startLoc = points.get(0);
 				Location finishLoc = points.get(points.size() - 1);
@@ -85,30 +87,30 @@ public class MapActions {
 		enterRoutePlanningModeGivenGpx(null, from, fromName, true, true);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
 	                                           boolean useIntermediatePointsByDefault, boolean showMenu, boolean passWholeRoute) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE, passWholeRoute);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
 	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
 	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState, false);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
 	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState, boolean passWholeRoute) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		if (gpxFile != null && gpxFile.hasRtePt() && appMode == null) {
-			GPXUtilities.WptPt routePoint = gpxFile.getRoutePoints().get(0);
+			WptPt routePoint = gpxFile.getRoutePoints().get(0);
 			ApplicationMode routePointAppMode = ApplicationMode.valueOfStringKey(routePoint.getProfileType(), ApplicationMode.DEFAULT);
 			if (routePointAppMode != ApplicationMode.DEFAULT) {
 				appMode = routePointAppMode;

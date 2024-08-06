@@ -25,8 +25,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.ColorPalette.ColorValue;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -79,7 +79,7 @@ public class GradientUiHelper {
 		int[] colors = new int[values.size()];
 		for (int i = 0; i < values.size(); i++) {
 			ColorValue value = values.get(i);
-			colors[i] = Color.argb(value.a, value.r, value.g, value.b);
+			colors[i] = Color.argb(value.getA(), value.getR(), value.getG(), value.getB());
 		}
 		GradientDrawable drawable = new GradientDrawable(LEFT_RIGHT, colors);
 		drawable.setGradientType(LINEAR_GRADIENT);
@@ -112,7 +112,7 @@ public class GradientUiHelper {
 	}
 
 	@NonNull
-	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app, @NonNull Object gradientType, @Nullable GPXTrackAnalysis analysis) {
+	public static IAxisValueFormatter getGradientTypeFormatter(@NonNull OsmandApplication app, @NonNull Object gradientType, @Nullable GpxTrackAnalysis analysis) {
 		if (gradientType instanceof TerrainType) {
 			return getTerrainTypeFormatter(app, (TerrainType) gradientType);
 		}
@@ -139,7 +139,7 @@ public class GradientUiHelper {
 		};
 	}
 
-	private static IAxisValueFormatter getColorizationTypeFormatter(@NonNull OsmandApplication app, @NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis) {
+	private static IAxisValueFormatter getColorizationTypeFormatter(@NonNull OsmandApplication app, @NonNull ColorizationType colorizationType, @Nullable GpxTrackAnalysis analysis) {
 		return (value, axis) -> {
 			boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
 			String stringValue = formatValue(value, 100);

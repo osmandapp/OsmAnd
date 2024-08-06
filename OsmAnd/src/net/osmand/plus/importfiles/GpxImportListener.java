@@ -1,6 +1,6 @@
 package net.osmand.plus.importfiles;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 
 public interface GpxImportListener {
 
@@ -13,6 +13,6 @@ public interface GpxImportListener {
 	default void onImportComplete(boolean success) {
 	}
 
-	default void onSaveComplete(boolean success, GPXFile gpxFile) {
+	default void onSaveComplete(boolean success, GpxFile gpxFile) {
 	}
 }

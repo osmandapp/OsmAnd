@@ -1,28 +1,46 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.gpx.GpxParameter.*;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
+import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -69,12 +87,12 @@ public class GpxAppearanceInfo {
 		coloringType = helper.getParameter(item, COLORING_TYPE);
 		gradientPaletteName = helper.getParameter(item, COLOR_PALETTE);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
-		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
 
-		GPXTrackAnalysis analysis = item.getAnalysis();
+		GpxTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
 			timeSpan = analysis.getTimeSpan();
 			wptPoints = analysis.getWptPoints();
@@ -131,10 +149,10 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		hasAnyParam |= json.has("coloring_type");
 		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
-		if (ColoringType.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
+		if (ColoringType.Companion.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
 			hasAnyParam |= json.has("gradient_scale_type");
 			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
-			ColoringType coloringType = ColoringType.valueOf(scaleType);
+			ColoringType coloringType = ColoringType.Companion.valueOf(scaleType);
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}
@@ -146,7 +164,7 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
 		hasAnyParam |= json.has("line_3d_visualization_wall_color_type");
 		String trackWallColorType = json.optString("line_3d_visualization_wall_color_type");
-		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(trackWallColorType);
 		hasAnyParam |= json.has("line_3d_visualization_position_type");
 		String trackLinePositionType = json.optString("line_3d_visualization_position_type");
 		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);

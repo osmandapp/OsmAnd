@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -61,10 +61,10 @@ public abstract class GroupEditorFragment extends EditorFragment {
 		super.onCreate(savedInstanceState);
 
 		if (pointsGroup != null) {
-			groupName = pointsGroup.name;
-			setColor(pointsGroup.color);
-			setIconName(pointsGroup.iconName);
-			setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE));
+			groupName = pointsGroup.getName();
+			setColor(pointsGroup.getColor());
+			setIconName(pointsGroup.getIconName());
+			setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 		} else {
 			setColor(getDefaultColor());
 		}
@@ -133,7 +133,7 @@ public abstract class GroupEditorFragment extends EditorFragment {
 			if (editor != null && activity != null) {
 				String tag = editor.getFragmentTag();
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SaveGroupConfirmationBottomSheet.showInstance(manager, this, tag, pointsGroup.points.size());
+				SaveGroupConfirmationBottomSheet.showInstance(manager, this, tag, pointsGroup.getPoints().size());
 			}
 		} else {
 			save(true);

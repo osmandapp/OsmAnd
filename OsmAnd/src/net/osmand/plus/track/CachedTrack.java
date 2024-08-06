@@ -5,26 +5,31 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDraw
 
 import android.util.Pair;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.SharedUtil;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -131,13 +136,13 @@ public class CachedTrack {
 	}
 
 	private boolean isCachedTrackChanged() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean useJoinSegments = selectedGpxFile.isJoinSegments();
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 		if (useFilteredGpx != params.useFilteredGpx
 				|| useJoinSegments != params.useJoinSegments
-				|| gpxFile.modifiedTime != params.prevModifiedTime) {
-			params = new CachedTrackParams(gpxFile.modifiedTime, useFilteredGpx, useJoinSegments);
+				|| gpxFile.getModifiedTime() != params.prevModifiedTime) {
+			params = new CachedTrackParams(gpxFile.getModifiedTime(), useFilteredGpx, useJoinSegments);
 			return true;
 		}
 		return false;
@@ -145,8 +150,8 @@ public class CachedTrack {
 
 	@NonNull
 	private RouteColorize createGpxColorization(@NonNull GradientScaleType scaleType, @NonNull String gradientPalette) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
-		GPXTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
 		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(colorizationType, gradientPalette);
@@ -157,7 +162,7 @@ public class CachedTrack {
 	@NonNull
 	private List<TrkSegment> createColoredSegments(@Nullable Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors,
 	                                               @Nullable Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean joinSegments = selectedGpxFile.isJoinSegments();
 		ColorizationType colorizationType = lineColors != null ? lineColors.first.toColorizationType() : null;
 		ColorizationType outlineColorizationType = outlineColors != null ? outlineColors.first.toColorizationType() : null;
@@ -172,25 +177,25 @@ public class CachedTrack {
 			TrkSegment segment = segments.get(i);
 
 			// Such segments are not processed by colorization
-			if (segment.points.size() < 2) {
+			if (segment.getPoints().size() < 2) {
 				continue;
 			}
 
 			TrkSegment simplifiedSegment = new TrkSegment();
 			simplifiedSegments.add(simplifiedSegment);
-			for (WptPt pt : segment.points) {
+			for (WptPt pt : segment.getPoints()) {
 				if (colorPointIdx >= size) {
 					return simplifiedSegments;
 				}
 				RouteColorizationPoint point = lineColors != null && lineColors.second.size() > colorPointIdx ? lineColors.second.get(colorPointIdx) : null;
 				RouteColorizationPoint outlinePoint = outlineColors != null && outlineColors.second.size() > colorPointIdx ? outlineColors.second.get(colorPointIdx) : null;
-				if (point != null && point.id == id || outlinePoint != null && outlinePoint.id == id) {
-					simplifiedSegment.points.add(pt);
+				if (point != null && point.getId() == id || outlinePoint != null && outlinePoint.getId() == id) {
+					simplifiedSegment.getPoints().add(pt);
 					if (point != null) {
-						pt.setColor(colorizationType, point.primaryColor);
+						pt.setColor(colorizationType, point.getPrimaryColor());
 					}
 					if (outlinePoint != null) {
-						pt.setColor(outlineColorizationType, outlinePoint.primaryColor);
+						pt.setColor(outlineColorizationType, outlinePoint.getPrimaryColor());
 					}
 					colorPointIdx++;
 				}
@@ -210,21 +215,23 @@ public class CachedTrack {
 	                                         @Nullable ColorizationType outlineColorizationType,
 	                                         @NonNull List<TrkSegment> segments, int segIdx) {
 		TrkSegment straightSegment = new TrkSegment();
-		WptPt currentSegmentLastPoint = segments.get(segIdx).points.get(segments.get(segIdx).points.size() - 1);
-		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).points.get(0);
+		WptPt currentSegmentLastPoint = segments.get(segIdx).getPoints().get(segments.get(segIdx).getPoints().size() - 1);
+		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).getPoints().get(0);
 		WptPt firstPoint = new WptPt(currentSegmentLastPoint);
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
-		firstPoint.setColor(colorizationType, LIGHT_GREY);
-		lastPoint.setColor(colorizationType, LIGHT_GREY);
+		firstPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
+		lastPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
 		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
 		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
-		straightSegment.points.add(firstPoint);
-		straightSegment.points.add(lastPoint);
+		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
+		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
+		straightSegment.getPoints().add(firstPoint);
+		straightSegment.getPoints().add(lastPoint);
 		return straightSegment;
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
+		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().getModifiedTime() || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));
@@ -241,7 +248,7 @@ public class CachedTrack {
 	@NonNull
 	private Set<String> listAvailableStaticColoringTypes() {
 		Set<String> availableStaticTypes = new HashSet<>();
-		for (ColoringType coloringType : ColoringType.valuesOf(ColoringPurpose.TRACK)) {
+		for (ColoringType coloringType : ColoringType.Companion.valuesOf(ColoringPurpose.TRACK)) {
 			if (!coloringType.isRouteInfoAttribute()
 					&& isAvailableForDrawingTrack(app, new ColoringStyle(coloringType), selectedGpxFile)) {
 				availableStaticTypes.add(coloringType.getName(null));

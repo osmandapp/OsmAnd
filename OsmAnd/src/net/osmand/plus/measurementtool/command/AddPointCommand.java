@@ -3,7 +3,7 @@ package net.osmand.plus.measurementtool.command;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
@@ -33,8 +33,8 @@ public class AddPointCommand extends MeasurementModeCommand {
 		MeasurementEditingContext ctx = getEditingCtx();
 		if (latLon != null) {
 			point = new WptPt();
-			point.lat = latLon.getLatitude();
-			point.lon = latLon.getLongitude();
+			point.setLat(latLon.getLatitude());
+			point.setLon(latLon.getLongitude());
 		}
 		this.center = center;
 		position = ctx.getPointsCount();

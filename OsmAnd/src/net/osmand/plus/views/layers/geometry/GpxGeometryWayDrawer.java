@@ -1,6 +1,6 @@
 package net.osmand.plus.views.layers.geometry;
 
-import static net.osmand.plus.track.Gpx3DWallColorType.NONE;
+import static net.osmand.shared.routing.Gpx3DWallColorType.NONE;
 
 import android.graphics.Canvas;
 import android.util.Pair;
@@ -10,19 +10,27 @@ import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
-import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.Track3DStyle;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 
 import java.util.List;
 
 public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeometryWayContext> {
 
 	@Nullable
+	protected ColoringType outlineColoringType;
+
+	@Nullable
 	private Track3DStyle track3DStyle;
 
 	public GpxGeometryWayDrawer(GpxGeometryWayContext context) {
 		super(context);
+		outlineColoringType = context.getDefaultColoringType();
+	}
+
+	public void setOutlineColoringType(@Nullable ColoringType outlineColoringType) {
+		this.outlineColoringType = outlineColoringType;
 	}
 
 	public void setTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
@@ -50,7 +58,7 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 	@Override
 	protected Pair<QListFColorARGB, QListFColorARGB> getColorizationMappings(@NonNull List<DrawPathData31> pathsData) {
 		Gpx3DWallColorType wallColorType = track3DStyle != null && track3DStyle.getVisualizationType().is3dType() ? track3DStyle.getWallColorType() : NONE;
-		ColoringType outlineColoringType = ColoringType.valueOf(wallColorType);
+		ColoringType outlineColoringType = ColoringType.Companion.valueOf(wallColorType);
 
 		QListFColorARGB mapping = getColorizationMapping(pathsData, coloringType, false);
 		QListFColorARGB outlineMapping = outlineColoringType != null ? getColorizationMapping(pathsData, outlineColoringType, true) : null;

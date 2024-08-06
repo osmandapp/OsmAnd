@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
@@ -413,11 +413,11 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		FragmentActivity activity = requireActivity();
 		if (trackItem.isShowCurrentTrack()) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-			GPXFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
+			GpxFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, this, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, this, new File(gpxFile.getPath()));
 				}
 			});
 		} else {

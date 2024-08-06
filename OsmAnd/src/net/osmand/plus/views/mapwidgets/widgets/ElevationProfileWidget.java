@@ -32,10 +32,10 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.ElevationDiffsCalculator;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -75,7 +75,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private GpxDisplayItem gpxItem;
 	private TrkSegment segment;
-	private GPXFile gpx;
+	private GpxFile gpx;
 	private float toMetersMultiplier;
 	private Location myLocation;
 	private List<WptPt> allPoints;
@@ -222,7 +222,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private void setupChart() {
 		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
-		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ROUTE, analysis);
 		firstVisiblePointIndex = -1;
@@ -465,12 +465,12 @@ public class ElevationProfileWidget extends MapWidget {
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
 				public double getPointDistance(int index) {
-					return points.get(index).distance;
+					return points.get(index).getDistance();
 				}
 
 				@Override
 				public double getPointElevation(int index) {
-					return points.get(index).ele;
+					return points.get(index).getEle();
 				}
 
 				@Override

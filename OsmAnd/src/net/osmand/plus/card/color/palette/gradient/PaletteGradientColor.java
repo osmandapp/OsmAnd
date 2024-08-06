@@ -4,8 +4,8 @@ import static net.osmand.plus.helpers.ColorPaletteHelper.GRADIENT_ID_SPLITTER;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.shared.ColorPalette;
 
 import java.util.Objects;
 

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.ColorPalette;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -21,6 +20,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
+import net.osmand.shared.ColorPalette;
 
 public class GradientColorsPaletteCard extends BaseCard implements IColorsPalette {
 

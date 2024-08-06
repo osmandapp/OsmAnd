@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Pair
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import net.osmand.gpx.GpxParameter
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.util.Algorithms

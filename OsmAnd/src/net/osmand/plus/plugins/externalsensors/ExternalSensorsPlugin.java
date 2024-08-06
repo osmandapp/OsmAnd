@@ -22,8 +22,8 @@ import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -453,7 +453,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Nullable
 	@Override
 	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
-	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GpxTrackAnalysis analysis,
 	                                                @NonNull GPXDataSetType graphType,
 	                                                @NonNull GPXDataSetAxisType axisType,
 	                                                boolean calcWithoutGaps, boolean useRightAxis) {
@@ -461,7 +461,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
 	}
 

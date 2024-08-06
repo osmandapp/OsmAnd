@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,8 +46,8 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	private TrackDisplayHelper createTrackDisplayHelper() {
 		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
-		GPXFile gpxFile = filteredSelectedGpxFile.getGpxFile();
-		displayHelper.setFile(new File(gpxFile.path));
+		GpxFile gpxFile = filteredSelectedGpxFile.getGpxFile();
+		displayHelper.setFile(new File(gpxFile.getPath()));
 		displayHelper.setGpx(gpxFile);
 		displayHelper.setSelectedGpxFile(filteredSelectedGpxFile);
 		return displayHelper;

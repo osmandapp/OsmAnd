@@ -8,12 +8,13 @@ import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
 import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS;
@@ -43,6 +44,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
+import net.osmand.data.LatLon;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -142,7 +145,15 @@ public class AmenityUIHelper extends MenuBuilder {
 		boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 
 		Map<String, String> additionalInfoFiltered = new HashMap<>();
-		for (String key : getAdditionalInfoKeys()) {
+		for (String origKey : getAdditionalInfoKeys()) {
+			String key = origKey;
+			if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
+				key = origKey.replace(AMENITY_PREFIX, "");
+			} else if (origKey.startsWith(AMENITY_PREFIX)) {
+				continue;
+			} else {
+				key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
+			}
 			if (!HIDDEN_EXTENSIONS.contains(key)) {
 				additionalInfoFiltered.put(key, getAdditionalInfo(key));
 			}

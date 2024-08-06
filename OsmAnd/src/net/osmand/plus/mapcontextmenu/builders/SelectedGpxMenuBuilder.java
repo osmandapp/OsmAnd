@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -31,7 +31,7 @@ import java.util.Date;
 public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	private final SelectedGpxPoint selectedGpxPoint;
-	private final GPXTrackAnalysis analysis;
+	private final GpxTrackAnalysis analysis;
 	private final WptPt selectedPoint;
 
 	public SelectedGpxMenuBuilder(@NonNull MapActivity mapActivity, @NonNull SelectedGpxPoint selectedGpxPoint) {
@@ -39,7 +39,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		this.selectedGpxPoint = selectedGpxPoint;
 		selectedPoint = selectedGpxPoint.getSelectedPoint();
 		analysis = selectedGpxPoint.getSelectedGpxFile() == null
-				? new GPXTrackAnalysis()
+				? new GpxTrackAnalysis()
 				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
 	}
 
@@ -134,23 +134,23 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		buildCategoryView(view, app.getString(R.string.plugin_distance_point));
 
 		buildRow(view, getThemedIcon(R.drawable.ic_action_polygom_dark), null, app.getString(R.string.distance),
-				OsmAndFormatter.getFormattedDistance((float) selectedPoint.distance, app), 0, null,
+				OsmAndFormatter.getFormattedDistance((float) selectedPoint.getDistance(), app), 0, null,
 				false, null, false, 0, false, false, false, null, false);
 
-		if (selectedPoint.time != 0) {
+		if (selectedPoint.getTime() != 0) {
 			DateFormat format = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
 			buildRow(view, getThemedIcon(R.drawable.ic_action_time_start), null, app.getString(R.string.shared_string_time),
-					format.format(selectedPoint.time), 0, null,
+					format.format(selectedPoint.getTime()), 0, null,
 					false, null, false, 0, false, false, false, null, true);
 		}
-		if (!Double.isNaN(selectedPoint.ele)) {
+		if (!Double.isNaN(selectedPoint.getEle())) {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_altitude), null, app.getString(R.string.altitude),
-					OsmAndFormatter.getFormattedAlt(selectedPoint.ele, app), 0, null,
+					OsmAndFormatter.getFormattedAlt(selectedPoint.getEle(), app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}
-		if (!Double.isNaN(selectedPoint.speed)) {
+		if (!Double.isNaN(selectedPoint.getSpeed())) {
 			buildRow(view, getThemedIcon(R.drawable.ic_action_speed), null, app.getString(R.string.shared_string_speed),
-					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.speed, app), 0, null,
+					OsmAndFormatter.getFormattedSpeed((float) selectedPoint.getSpeed(), app), 0, null,
 					false, null, false, 0, false, false, false, null, false);
 		}
 		if (!Float.isNaN(selectedGpxPoint.getBearing())) {

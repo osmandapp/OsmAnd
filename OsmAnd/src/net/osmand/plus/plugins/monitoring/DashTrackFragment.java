@@ -17,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -109,9 +109,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		List<String> list = new ArrayList<String>();
 		for (SelectedGpxFile sg : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
 			if (!sg.isShowCurrentTrack()) {
-				GPXFile gpxFile = sg.getGpxFile();
+				GpxFile gpxFile = sg.getGpxFile();
 				if (gpxFile != null) {
-					list.add(gpxFile.path);
+					list.add(gpxFile.getPath());
 				}
 			}
 		}
@@ -263,7 +263,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	private void showOnMap(@NonNull Activity activity, @NonNull GPXFile gpxFile) {
+	private void showOnMap(@NonNull Activity activity, @NonNull GpxFile gpxFile) {
 		if (gpxFile.isEmpty()) {
 			app.showToastMessage(R.string.gpx_file_is_empty);
 			return;
@@ -274,7 +274,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			point = gpxFile.findPointToShow();
 		}
 		if (point != null) {
-			settings.setMapLocationToShow(point.lat, point.lon, settings.getLastKnownMapZoom());
+			settings.setMapLocationToShow(point.getLat(), point.getLon(), settings.getLastKnownMapZoom());
 		}
 		app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 		MapActivity.launchMapActivityMoveToTop(activity);

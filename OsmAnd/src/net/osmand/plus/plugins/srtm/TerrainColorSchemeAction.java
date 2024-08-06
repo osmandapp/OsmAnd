@@ -17,8 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
-import net.osmand.ColorPalette;
-import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -29,6 +27,8 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

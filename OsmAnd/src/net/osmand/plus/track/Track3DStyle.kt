@@ -1,5 +1,6 @@
 package net.osmand.plus.track
 
+import net.osmand.shared.routing.Gpx3DWallColorType
 import net.osmand.util.Algorithms
 
 class Track3DStyle(

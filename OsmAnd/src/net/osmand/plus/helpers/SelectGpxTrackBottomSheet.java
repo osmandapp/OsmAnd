@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -33,7 +33,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<GPXInfo> gpxInfoList;
 	private boolean showCurrentGpx;
-	private CallbackWithObject<GPXFile[]> callbackWithObject;
+	private CallbackWithObject<GpxFile[]> callbackWithObject;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 				app.getSettings().LAST_SELECTED_GPX_TRACK_FOR_NEW_POINT.set(fileName);
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 				if (selectedGpxFile != null) {
-					callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
+					callbackWithObject.processResult(new GpxFile[] {selectedGpxFile.getGpxFile()});
 				} else {
 					File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 					Activity activity = getActivity();
@@ -88,7 +88,7 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, boolean showCurrentGpx,
-	                                CallbackWithObject<GPXFile[]> callbackWithObject, @NonNull List<GPXInfo> gpxInfoList) {
+	                                CallbackWithObject<GpxFile[]> callbackWithObject, @NonNull List<GPXInfo> gpxInfoList) {
 		if (!fragmentManager.isStateSaved()) {
 			SelectGpxTrackBottomSheet fragment = new SelectGpxTrackBottomSheet();
 			fragment.setUsedOnMap(true);

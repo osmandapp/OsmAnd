@@ -60,7 +60,6 @@ public class MapPoiTypes {
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
 	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
 
-
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
 	}

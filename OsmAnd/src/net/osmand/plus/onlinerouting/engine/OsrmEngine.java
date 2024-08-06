@@ -14,6 +14,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.GeoPolylineParserUtil;
 import net.osmand.util.MapUtils;
 
@@ -61,7 +62,7 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 	}
 
 	@Override
-	public OnlineRoutingResponse responseByGpxFile(OsmandApplication app, GPXFile gpxFile, boolean initialCalculation, RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByGpxFile(OsmandApplication app, GpxFile gpxFile, boolean initialCalculation, RouteCalculationProgress calculationProgress) {
 		return null;
 	}
 

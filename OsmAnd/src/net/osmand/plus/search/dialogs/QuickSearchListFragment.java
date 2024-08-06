@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -208,7 +208,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 	}
 
-	private void selectTrack(@NonNull GPXFile gpxFile) {
+	private void selectTrack(@NonNull GpxFile gpxFile) {
 		MapRouteInfoMenu routeInfoMenu = requireMapActivity().getMapRouteInfoMenu();
 		routeInfoMenu.selectTrack(gpxFile, true);
 

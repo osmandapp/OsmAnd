@@ -2,20 +2,17 @@ package net.osmand.plus.mapmarkers;
 
 import android.util.Pair;
 
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.routing.RouteCalculationProgressListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -141,7 +138,8 @@ public class MarkersPlanRouteContext {
 		for (int i = 0; i < points.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
 			if (snappedToRoadPoints.get(pair) == null) {
-				double dist = MapUtils.getDistance(pair.first.lat, pair.first.lon, pair.second.lat, pair.second.lon);
+				double dist = MapUtils.getDistance(pair.first.getLat(), pair.first.getLon(),
+						pair.second.getLat(), pair.second.getLon());
 				if (dist < MAX_DIST_FOR_SNAP_TO_ROAD) {
 					snapToRoadPairsToCalculate.add(pair);
 				}
@@ -150,19 +148,19 @@ public class MarkersPlanRouteContext {
 	}
 
 	void recreateSnapTrkSegment(boolean adjustMap) {
-		snapTrkSegment.points.clear();
+		snapTrkSegment.getPoints().clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
-			snapTrkSegment.points.addAll(points);
+			snapTrkSegment.getPoints().addAll(points);
 		} else if (points.size() > 1) {
 			for (int i = 0; i < points.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
 				List<WptPt> pts = snappedToRoadPoints.get(pair);
 				if (pts != null) {
-					snapTrkSegment.points.addAll(pts);
+					snapTrkSegment.getPoints().addAll(pts);
 				} else {
 					scheduleRouteCalculateIfNotEmpty(points);
-					snapTrkSegment.points.addAll(Arrays.asList(pair.first, pair.second));
+					snapTrkSegment.getPoints().addAll(Arrays.asList(pair.first, pair.second));
 				}
 			}
 		}
@@ -189,8 +187,8 @@ public class MarkersPlanRouteContext {
 
 	private void addWptPt(List<WptPt> points, double lat, double lon) {
 		WptPt pt = new WptPt();
-		pt.lat = lat;
-		pt.lon = lon;
+		pt.setLat(lat);
+		pt.setLon(lon);
 		points.add(pt);
 	}
 
@@ -243,8 +241,8 @@ public class MarkersPlanRouteContext {
 				ArrayList<WptPt> pts = new ArrayList<>(locations.size());
 				for (Location loc : locations) {
 					WptPt pt = new WptPt();
-					pt.lat = loc.getLatitude();
-					pt.lon = loc.getLongitude();
+					pt.setLat(loc.getLatitude());
+					pt.setLon(loc.getLongitude());
 					pts.add(pt);
 				}
 				calculatedPairs++;

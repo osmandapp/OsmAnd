@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -167,7 +167,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateGroupVisibility(String groupName, boolean visible) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(groupName);
 		if (pointsGroup != null) {
 			pointsGroup.setHidden(!visible);
@@ -252,7 +252,7 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateGroupsVisibility() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		MapActivity activity = (MapActivity) getActivity();
 		if (activity != null) {
 			Map<String, PointsGroup> groups = new HashMap<>(gpxFile.getPointsGroups());

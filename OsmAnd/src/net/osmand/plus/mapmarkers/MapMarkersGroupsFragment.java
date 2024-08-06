@@ -22,13 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -41,7 +42,7 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.ColorUtilities;
@@ -408,10 +409,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	private GpxDataItemSelectionListener getGpxDataItemSelectionListener() {
 		return gpxDataItem -> {
 			if (gpxDataItem != null) {
-				GPXTrackAnalysis analysis = gpxDataItem.getAnalysis();
+				GpxTrackAnalysis analysis = gpxDataItem.getAnalysis();
 				if (analysis != null && analysis.getWptCategoryNamesSet() != null && analysis.getWptCategoryNamesSet().size() > 1) {
 					Bundle args = new Bundle();
-					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getAbsolutePath());
+					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getParentFile().absolutePath());
 
 					SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
 					fragment.setArguments(args);
@@ -419,7 +420,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 				} else {
 					GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-					File gpx = gpxDataItem.getFile();
+					File gpx = SharedUtil.jFile(gpxDataItem.getFile());
 					if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 						GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
 							GpxSelectionParams params = GpxSelectionParams.newInstance()
@@ -440,7 +441,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		return trackItem -> {
 			GpxDataItem item = trackItem.getDataItem();
 			if (item != null) {
-				GPXTrackAnalysis analysis = item.getAnalysis();
+				GpxTrackAnalysis analysis = item.getAnalysis();
 				return analysis != null && analysis.getWptPoints() > 0;
 			}
 			return false;

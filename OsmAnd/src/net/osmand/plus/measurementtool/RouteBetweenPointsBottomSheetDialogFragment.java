@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -31,6 +30,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -302,7 +302,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 		if (dialogMode == RouteBetweenPointsDialogMode.SINGLE) {
 			WptPt selectedPoint = points.get(pos);
 			WptPt second = points.get(before ? pos - 1 : pos + 1);
-			dist += MapUtils.getDistance(selectedPoint.lat, selectedPoint.lon, second.lat, second.lon);
+			dist += MapUtils.getDistance(selectedPoint.getLat(), selectedPoint.getLon(), second.getLat(), second.getLon());
 		} else {
 			int startIdx;
 			int endIdx;
@@ -316,7 +316,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			for (int i = startIdx; i <= endIdx; i++) {
 				WptPt first = points.get(i - 1);
 				WptPt second = points.get(i);
-				dist += MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+				dist += MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
 			}
 		}
 		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());

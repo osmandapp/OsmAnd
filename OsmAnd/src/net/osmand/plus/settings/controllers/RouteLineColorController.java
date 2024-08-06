@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
@@ -34,13 +34,13 @@ import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.PreviewRouteLineLayer;
-import net.osmand.router.RouteColorize;
+import net.osmand.shared.routing.RouteColorize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -168,7 +168,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 			return new PromoBannerCard(activity);
 		} else if (coloringType.isCustomColor()) {
 			return new ModedColorsPaletteCard(activity, getColorsPaletteController());
-		} else if (ColoringType.isColorTypeInPurpose(coloringType, ColoringPurpose.ROUTE_LINE) && coloringType.toGradientScaleType() != null) {
+		} else if (ColoringType.Companion.isColorTypeInPurpose(coloringType, ColoringPurpose.ROUTE_LINE) && coloringType.toGradientScaleType() != null) {
 			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 			return new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType));
 		} else {
@@ -220,7 +220,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@Override
 	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE);
+		return ColoringType.Companion.valuesOf(ColoringPurpose.ROUTE_LINE);
 	}
 
 	@Override

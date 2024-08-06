@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
+//import net.osmand.router.RouteColorize.RouteColorizationPoint;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ class GradientPathGeometryZoom extends PathGeometryZoom {
 			List<RouteColorizationPoint> simplified = provider.simplify(tb.getZoom());
 			if (simplified != null) {
 				for (RouteColorizationPoint location : simplified) {
-					simplifyPoints.set(location.id, (byte) 1);
+					simplifyPoints.set(location.getId(), (byte) 1);
 				}
 			}
 		}

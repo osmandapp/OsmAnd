@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -395,9 +395,9 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 			}
 
 			@Override
-			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.path)));
+					addTrackItem(new TrackItem(new File(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}

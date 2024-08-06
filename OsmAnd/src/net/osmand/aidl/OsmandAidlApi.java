@@ -16,12 +16,12 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.gpx.GpxParameter.API_IMPORTED;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+import static net.osmand.shared.gpx.GpxParameter.API_IMPORTED;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -50,6 +50,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -70,9 +71,6 @@ import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -124,7 +122,6 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -143,6 +140,9 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1285,7 +1285,7 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem item = new GpxDataItem(app, destination);
+			GpxDataItem item = new GpxDataItem(SharedUtil.kFile(destination));
 			item.setParameter(COLOR, col);
 			item.setParameter(API_IMPORTED, true);
 			app.getGpxDbHelper().add(item);
@@ -1301,16 +1301,16 @@ public class OsmandAidlApi {
 		SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(destination.getAbsolutePath());
 		if (selectedGpx != null) {
 			if (show) {
-				new AsyncTask<File, Void, GPXFile>() {
+				new AsyncTask<File, Void, GpxFile>() {
 
 					@Override
-					protected GPXFile doInBackground(File... files) {
-						return GPXUtilities.loadGPXFile(files[0]);
+					protected GpxFile doInBackground(File... files) {
+						return SharedUtil.loadGpxFile(files[0]);
 					}
 
 					@Override
-					protected void onPostExecute(GPXFile gpx) {
-						if (gpx.error == null) {
+					protected void onPostExecute(GpxFile gpx) {
+						if (gpx.getError() == null) {
 							if (col != -1) {
 								gpx.setColor(col);
 							}
@@ -1327,16 +1327,16 @@ public class OsmandAidlApi {
 				refreshMap();
 			}
 		} else if (show) {
-			new AsyncTask<File, Void, GPXFile>() {
+			new AsyncTask<File, Void, GpxFile>() {
 
 				@Override
-				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(files[0]);
+				protected GpxFile doInBackground(File... files) {
+					return SharedUtil.loadGpxFile(files[0]);
 				}
 
 				@Override
-				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.error == null) {
+				protected void onPostExecute(GpxFile gpx) {
+					if (gpx.getError() == null) {
 						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						helper.selectGpxFile(gpx, params);
 						refreshMap();
@@ -1445,16 +1445,16 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
 			File fi = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileName);
-			AsyncTask<File, Void, GPXFile> asyncTask = new AsyncTask<File, Void, GPXFile>() {
+			AsyncTask<File, Void, GpxFile> asyncTask = new AsyncTask<File, Void, GpxFile>() {
 
 				@Override
-				protected GPXFile doInBackground(File... files) {
-					return GPXUtilities.loadGPXFile(files[0]);
+				protected GpxFile doInBackground(File... files) {
+					return SharedUtil.loadGpxFile(files[0]);
 				}
 
 				@Override
-				protected void onPostExecute(GPXFile gpx) {
-					if (gpx.error == null) {
+				protected void onPostExecute(GpxFile gpx) {
+					if (gpx.getError() == null) {
 						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
@@ -1494,14 +1494,14 @@ public class OsmandAidlApi {
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			String path = gpxFile.path;
+			GpxFile gpxFile = selectedGpxFile.getGpxFile();
+			String path = gpxFile.getPath();
 			if (!Algorithms.isEmpty(path)) {
 				if (path.startsWith(gpxPath)) {
 					path = path.substring(gpxPath.length() + 1);
 				}
-				long modifiedTime = gpxFile.modifiedTime;
-				long fileSize = new File(gpxFile.path).length();
+				long modifiedTime = gpxFile.getModifiedTime();
+				long fileSize = new File(gpxFile.getPath()).length();
 				files.add(new ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetails(selectedGpxFile.getTrackAnalysis(app))));
 			}
 		}
@@ -1512,14 +1512,14 @@ public class OsmandAidlApi {
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
-			String path = gpxFile.path;
+			GpxFile gpxFile = selectedGpxFile.getGpxFile();
+			String path = gpxFile.getPath();
 			if (!Algorithms.isEmpty(path)) {
 				if (path.startsWith(gpxPath)) {
 					path = path.substring(gpxPath.length() + 1);
 				}
-				long modifiedTime = gpxFile.modifiedTime;
-				long fileSize = new File(gpxFile.path).length();
+				long modifiedTime = gpxFile.getModifiedTime();
+				long fileSize = new File(gpxFile.getPath()).length();
 				files.add(new net.osmand.aidlapi.gpx.ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetailsV2(selectedGpxFile.getTrackAnalysis(app))));
 			}
 		}
@@ -1529,7 +1529,7 @@ public class OsmandAidlApi {
 	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = dataItem.getFile();
+			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
@@ -1542,7 +1542,7 @@ public class OsmandAidlApi {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
-				GPXTrackAnalysis analysis = dataItem.getAnalysis();
+				GpxTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
@@ -1558,14 +1558,14 @@ public class OsmandAidlApi {
 	boolean getImportedGpx(List<AGpxFile> files) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = dataItem.getFile();
+			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
 				String fileName = file.getName();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
 				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
 				AGpxFileDetails details = null;
-				GPXTrackAnalysis analysis = dataItem.getAnalysis();
+				GpxTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetails(analysis);
 				}
@@ -1578,7 +1578,7 @@ public class OsmandAidlApi {
 	String getGpxColor(String gpxFileName) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = dataItem.getFile();
+			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
 					Integer color = dataItem.getParameter(COLOR);
@@ -2660,27 +2660,27 @@ public class OsmandAidlApi {
 		return res;
 	}
 
-	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 
 		private final OsmandApplication app;
-		private final CallbackWithObject<GPXFile> callback;
+		private final CallbackWithObject<GpxFile> callback;
 		private final Uri gpxUri;
 
-		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, CallbackWithObject<GPXFile> callback) {
+		GpxAsyncLoaderTask(@NonNull OsmandApplication app, @NonNull Uri gpxUri, CallbackWithObject<GpxFile> callback) {
 			this.app = app;
 			this.gpxUri = gpxUri;
 			this.callback = callback;
 		}
 
 		@Override
-		protected void onPostExecute(GPXFile gpxFile) {
-			if (gpxFile.error == null && callback != null) {
+		protected void onPostExecute(GpxFile gpxFile) {
+			if (gpxFile.getError() == null && callback != null) {
 				callback.processResult(gpxFile);
 			}
 		}
 
 		@Override
-		protected GPXFile doInBackground(Void... voids) {
+		protected GpxFile doInBackground(Void... voids) {
 			ParcelFileDescriptor gpxParcelDescriptor = null;
 			try {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
@@ -2689,20 +2689,20 @@ public class OsmandAidlApi {
 			}
 			if (gpxParcelDescriptor != null) {
 				FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-				return GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
+				return SharedUtil.loadGpxFile(new FileInputStream(fileDescriptor));
 			}
 			return null;
 		}
 	}
 
-	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
+	private static AGpxFileDetails createGpxFileDetails(@NonNull GpxTrackAnalysis a) {
 		return new AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
 				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
 	}
 
-	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GPXTrackAnalysis a) {
+	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GpxTrackAnalysis a) {
 		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),

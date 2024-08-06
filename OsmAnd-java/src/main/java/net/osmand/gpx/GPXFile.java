@@ -103,6 +103,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		pointsModifiedTime = modifiedTime;
 	}
 
+	public void addParsedPoint(GPXUtilities.WptPt point) {
+		points.add(point);
+	}
+
 	public void addPoint(GPXUtilities.WptPt point) {
 		points.add(point);
 		addPointsToGroups(Collections.singleton(point));

@@ -24,7 +24,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -39,9 +40,9 @@ public class Track3DCard extends BaseCard {
 	public static final int WALL_HEIGHT_BUTTON_INDEX = 0;
 
 	private final TrackDrawInfo drawInfo;
-	private final GPXTrackAnalysis analysis;
+	private final GpxTrackAnalysis analysis;
 
-	public Track3DCard(@NonNull FragmentActivity activity, @NonNull GPXTrackAnalysis analysis,
+	public Track3DCard(@NonNull FragmentActivity activity, @NonNull GpxTrackAnalysis analysis,
 	                   @NonNull TrackDrawInfo drawInfo) {
 		super(activity);
 		this.drawInfo = drawInfo;
@@ -95,7 +96,7 @@ public class Track3DCard extends BaseCard {
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), visible);
 	}
 
-	private boolean isVisualizationTypeAvailable(@NonNull Gpx3DVisualizationType type, @NonNull GPXTrackAnalysis analysis) {
+	private boolean isVisualizationTypeAvailable(@NonNull Gpx3DVisualizationType type, @NonNull GpxTrackAnalysis analysis) {
 		return switch (type) {
 			case ALTITUDE -> analysis.hasElevationData();
 			case SPEED -> analysis.hasSpeedData();
@@ -146,7 +147,7 @@ public class Track3DCard extends BaseCard {
 			for (Gpx3DWallColorType type : Gpx3DWallColorType.values()) {
 				if (isWallColorAvailable(type, analysis)) {
 					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(type.getDisplayNameResId())
+							.setTitleId(app.getResources().getIdentifier(type.getDisplayNameResId(), "string", app.getPackageName()))
 							.setOnClickListener(item -> {
 								description.setText(item.getTitle());
 								drawInfo.setTrackWallColorType(type);
@@ -160,7 +161,7 @@ public class Track3DCard extends BaseCard {
 		AndroidUiHelper.updateVisibility(container, visible);
 	}
 
-	private boolean isWallColorAvailable(@NonNull Gpx3DWallColorType type, @NonNull GPXTrackAnalysis analysis) {
+	private boolean isWallColorAvailable(@NonNull Gpx3DWallColorType type, @NonNull GpxTrackAnalysis analysis) {
 		return switch (type) {
 			case ALTITUDE -> analysis.hasElevationData();
 			case SPEED, SLOPE -> analysis.hasSpeedData();

@@ -28,7 +28,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -138,11 +138,6 @@ public class AppInitializer implements IProgress {
 	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
-
-	static {
-		//Set old time format of GPX for Android 6.0 and lower
-		GPXUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
-	}
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();

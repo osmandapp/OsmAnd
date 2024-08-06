@@ -2,7 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.router.GpxRouteApproximation;
 

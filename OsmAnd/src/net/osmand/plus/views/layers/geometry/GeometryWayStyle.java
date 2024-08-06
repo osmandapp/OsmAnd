@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;

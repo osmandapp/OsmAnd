@@ -10,8 +10,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.OsmRouteType;
@@ -60,12 +60,12 @@ public class RouteInfoCard extends MapBaseCard {
 
 
 	private final RouteKey routeKey;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
 	public RouteInfoCard(
 			@NonNull MapActivity activity,
 			@NonNull RouteKey routeKey,
-			@NonNull GPXFile gpxFile
+			@NonNull GpxFile gpxFile
 	) {
 		super(activity);
 		this.routeKey = routeKey;
@@ -238,7 +238,7 @@ public class RouteInfoCard extends MapBaseCard {
 		List<LatLon> points = new ArrayList<>();
 		if (gpxFile != null) {
 			for (WptPt wptPt : gpxFile.getAllPoints()) {
-				points.add(new LatLon(wptPt.lat, wptPt.lon));
+				points.add(new LatLon(wptPt.getLat(), wptPt.getLon()));
 			}
 		}
 		return points;

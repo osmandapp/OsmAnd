@@ -6,8 +6,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
@@ -163,19 +163,19 @@ public class FavoriteGroup {
 		PointsGroup pointsGroup = new PointsGroup(getName(), getIconName(), getBackgroundType().getTypeName(), getColor());
 		List<FavouritePoint> points = new ArrayList<>(this.points);
 		for (FavouritePoint point : points) {
-			pointsGroup.points.add(point.toWpt(ctx));
+			pointsGroup.getPoints().add(point.toWpt(ctx));
 		}
 		return pointsGroup;
 	}
 
 	public static FavoriteGroup fromPointsGroup(@NonNull PointsGroup pointsGroup) {
 		FavoriteGroup favoriteGroup = new FavoriteGroup();
-		favoriteGroup.name = pointsGroup.name;
-		favoriteGroup.color = pointsGroup.color;
-		favoriteGroup.iconName = pointsGroup.iconName;
-		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE);
+		favoriteGroup.name = pointsGroup.getName();
+		favoriteGroup.color = pointsGroup.getColor();
+		favoriteGroup.iconName = pointsGroup.getIconName();
+		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
 
-		for (WptPt point : pointsGroup.points) {
+		for (WptPt point : pointsGroup.getPoints()) {
 			favoriteGroup.points.add(FavouritePoint.fromWpt(point));
 		}
 		if (!Algorithms.isEmpty(favoriteGroup.points)) {

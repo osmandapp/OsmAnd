@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
@@ -145,7 +145,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    @Override
    public String getCaption(int index) {
       MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-      return data != null ? data.wptPt.name : "";
+      return data != null ? data.wptPt.getName() : "";
    }
 
    @Override

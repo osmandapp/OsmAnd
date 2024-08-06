@@ -1,14 +1,16 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.plus.track.GpxSplitType.NO_SPLIT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -23,8 +25,8 @@ public class TrackDisplayHelper {
 	private final GpxAppearanceHelper gpxAppearanceHelper;
 
 	private File file;
-	private GPXFile gpxFile;
-	private GPXFile filteredGpxFile;
+	private GpxFile gpxFile;
+	private GpxFile filteredGpxFile;
 	private GpxDataItem gpxDataItem;
 	private SelectedGpxFile selectedGpxFile;
 
@@ -38,12 +40,12 @@ public class TrackDisplayHelper {
 	}
 
 	@Nullable
-	public GPXFile getGpx() {
+	public GpxFile getGpx() {
 		return gpxFile;
 	}
 
 	@Nullable
-	public GPXFile getGpxFileToDisplay() {
+	public GpxFile getGpxFileToDisplay() {
 		return filteredGpxFile != null ? filteredGpxFile : gpxFile;
 	}
 
@@ -60,14 +62,14 @@ public class TrackDisplayHelper {
 		this.file = file;
 	}
 
-	public void setGpx(@NonNull GPXFile result) {
+	public void setGpx(@NonNull GpxFile result) {
 		this.gpxFile = result;
 		if (file == null) {
 			this.gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 		}
 	}
 
-	public void setFilteredGpxFile(@Nullable GPXFile filteredGpxFile) {
+	public void setFilteredGpxFile(@Nullable GpxFile filteredGpxFile) {
 		this.filteredGpxFile = filteredGpxFile;
 	}
 
@@ -82,10 +84,10 @@ public class TrackDisplayHelper {
 	@NonNull
 	public QuadRect getRect() {
 		if (filteredGpxFile != null) {
-			return filteredGpxFile.getRect();
+			return SharedUtil.jQuadRect(filteredGpxFile.getRect());
 		}
 		if (gpxFile != null) {
-			return gpxFile.getRect();
+			return SharedUtil.jQuadRect(gpxFile.getRect());
 		} else {
 			return new QuadRect(0, 0, 0, 0);
 		}
@@ -96,7 +98,7 @@ public class TrackDisplayHelper {
 			gpxDataItem.setParameter(JOIN_SEGMENTS, joinSegments);
 			boolean updated = app.getGpxDbHelper().updateDataItem(gpxDataItem);
 
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 			if (updated && selectedGpxFile != null) {
 				selectedGpxFile.setJoinSegments(joinSegments);
 			}
@@ -113,7 +115,7 @@ public class TrackDisplayHelper {
 		if (filteredGpxFile == null && gpxFile == null) {
 			return new ArrayList<>();
 		}
-		if (gpxFile.modifiedTime != modifiedTime) {
+		if (gpxFile.getModifiedTime() != modifiedTime) {
 			updateDisplayGroups();
 		}
 		if (useDisplayGroups) {
@@ -124,8 +126,8 @@ public class TrackDisplayHelper {
 	}
 
 	public void updateDisplayGroups() {
-		modifiedTime = gpxFile.modifiedTime;
-		GPXFile gpx = filteredGpxFile != null ? filteredGpxFile : gpxFile;
+		modifiedTime = gpxFile.getModifiedTime();
+		GpxFile gpx = filteredGpxFile != null ? filteredGpxFile : gpxFile;
 		displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(selectedGpxFile, gpx, true, useCachedGroups());
 		originalGroups.clear();
 		for (GpxDisplayGroup group : displayGroups) {
