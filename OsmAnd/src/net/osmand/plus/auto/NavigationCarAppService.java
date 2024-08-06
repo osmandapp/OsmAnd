@@ -100,13 +100,13 @@ public final class NavigationCarAppService extends CarAppService {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-					if (event == AppInitEvents.MAPS_INITIALIZED) {
+					if (event == AppInitEvents.INDEX_REGION_BOUNDARIES) {
 						if (app.getAppInitializer().isRoutingConfigInitialized()) {
 							restoreNavigationHelper.checkRestoreRoutingMode();
 						}
 					}
 					if (event == ROUTING_CONFIG_INITIALIZED) {
-						if (app.getResourceManager().isIndexesLoadedOnStart()) {
+						if (app.getRegions() != null) {
 							restoreNavigationHelper.checkRestoreRoutingMode();
 						}
 					}
