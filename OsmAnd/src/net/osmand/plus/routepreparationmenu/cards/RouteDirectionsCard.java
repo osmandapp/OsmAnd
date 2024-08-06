@@ -1,8 +1,9 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.settings.enums.TrackApproximationType.MANUAL;
+
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +19,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.TurnPathHelper.RouteDrawable;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
@@ -28,8 +30,11 @@ import java.util.List;
 
 public class RouteDirectionsCard extends MapBaseCard {
 
+	private final RoutingHelper routingHelper;
+
 	public RouteDirectionsCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+		routingHelper = mapActivity.getRoutingHelper();
 	}
 
 	@Override
@@ -46,8 +51,10 @@ public class RouteDirectionsCard extends MapBaseCard {
 	private void setupAttachToRoadsBanner() {
 		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
 		container.removeAllViews();
-		GPXFile gpxFile = app.getRoutingHelper().getCurrentGPX();
-		if (gpxFile != null && !gpxFile.isAttachedToRoads()) {
+
+		ApplicationMode appMode = routingHelper.getAppMode();
+		GPXFile gpxFile = routingHelper.getCurrentGPX();
+		if (gpxFile != null && !gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == MANUAL) {
 			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);
 			card.setListener(getListener());
 			container.addView(card.build(mapActivity));
@@ -64,7 +71,7 @@ public class RouteDirectionsCard extends MapBaseCard {
 	}
 
 	private void createRouteDirections(LinearLayout cardsContainer) {
-		List<RouteDirectionInfo> routeDirections = app.getRoutingHelper().getRouteDirections();
+		List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
 			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections);
@@ -79,9 +86,6 @@ public class RouteDirectionsCard extends MapBaseCard {
 
 	private View getRouteDirectionView(int directionInfoIndex, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return null;
-		}
 		View row = themedInflater.inflate(R.layout.route_info_list_item, null);
 
 		TextView label = row.findViewById(R.id.description);
