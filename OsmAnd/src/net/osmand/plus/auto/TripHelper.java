@@ -169,7 +169,7 @@ public class TripHelper {
 				// Do not show too far
 				if ((nextDirInfo.distanceTo > 800 && nextDirInfo.directionInfo.getTurnType().isSkipToSpeak())
 						|| nextDirInfo.distanceTo > 1200
-						|| (nextTurnDistance != nextDirInfo.distanceTo && locimminent != 0)) {
+						|| (nextTurnDistance != nextDirInfo.distanceTo && nextDirInfo.distanceTo > 150)) {
 					lanes = null;
 				}
 				//int dist = nextDirInfo.distanceTo;
