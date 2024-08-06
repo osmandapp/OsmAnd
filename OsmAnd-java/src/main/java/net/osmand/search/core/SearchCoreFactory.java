@@ -1101,7 +1101,9 @@ public class SearchCoreFactory {
 				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 				String topIndexValue = null;
 				String translate = null;
-				for (String s : subType.possibleValues) {
+				List<String> possibleValues = new ArrayList<>(subType.possibleValues);
+				Collections.sort(possibleValues);
+				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
 					if (nm.matches(s) || nm.matches(translate)) {
 						topIndexValue = s;
