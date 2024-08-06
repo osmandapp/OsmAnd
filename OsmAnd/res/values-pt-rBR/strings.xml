@@ -5829,7 +5829,7 @@
     <string name="auto_25_chars_route_tshr">Vire bruscamente à direita</string>
     <string name="auto_25_chars_route_kl">Mantenha-se à esquerda</string>
     <string name="driving_region_india">Índia</string>
-    <string name="driving_region_uk">Reino Unido, Índia e similares</string>
+    <string name="driving_region_uk">Reino Unido e similares</string>
     <string name="ask_every_time">Perguntar sempre</string>
     <string name="detailed_track_guidance">Orientação detalhada na trilha</string>
     <string name="detailed_track_guidance_description">O OsmAnd combinará sua trilha com as estradas próximas para uma orientação aprimorada curva a curva.</string>
