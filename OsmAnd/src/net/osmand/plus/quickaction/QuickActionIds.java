@@ -64,4 +64,5 @@ public class QuickActionIds {
 	public static final int SHOW_HIDE_WHITEWATER_SPORTS_ROUTES_ACTION = 64;
 	public static final int SHOW_HIDE_FITNESS_TRAILS_ROUTES_ACTION = 65;
 	public static final int SHOW_HIDE_RUNNING_ROUTES_ACTION = 66;
+	public static final int OPEN_WUNDERLINQ_DATAGRID_ACTION = 67;
 }
