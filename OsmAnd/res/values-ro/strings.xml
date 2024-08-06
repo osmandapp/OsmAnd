@@ -870,7 +870,7 @@
     <string name="incomplete_locale">incomplet</string>
     <string name="search_villages_and_postcodes">Căută mai multe sate/coduri poștale</string>
     <string name="no_buildings_found">Nicio clădire găsită.</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Latitudine %1$.3f, longitudine %2$.3f</string>
     <string name="map_widget_max_speed">Limită de viteză</string>
     <string name="rendering_attr_noAdminboundaries_name">Limite</string>
     <string name="rendering_attr_noAdminboundaries_description">Nu afișa limitele regionale (niveluri administrative 5-9).</string>
@@ -914,7 +914,7 @@
     <string name="av_settings">Setări audio/video </string>
     <string name="recording_error">Înregistrare eșuată</string>
     <string name="recording_camera_not_available">Camera video indisponibilă</string>
-    <string name="dropbox_plugin_description">"Sincronizați traseele  și notele audio/video cu contul Dropbox."</string>
+    <string name="dropbox_plugin_description">Sincronizați traseele și notele audio/video cu contul Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     <string name="intermediate_points_change_order">Schimbă ordinea</string>
     <string name="select_gpx">Selectează GPX…</string>
