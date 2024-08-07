@@ -410,8 +410,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getRestingIconCardController() {
 		if (restingIconCardController == null) {
-			String movementIconName = LocationIcon.getActualIconName(changedProfile.locationIcon, false);
-			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), changedProfile.locationIcon) {
+			String iconName = LocationIcon.getActualIconName(changedProfile.locationIcon, false);
+			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), iconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
