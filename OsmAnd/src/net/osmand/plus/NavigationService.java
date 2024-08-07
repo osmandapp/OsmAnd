@@ -223,7 +223,7 @@ public class NavigationService extends Service {
 						Location location = locations.get(locations.size() - 1);
 						NavigationSession carNavigationSession = app.getCarNavigationSession();
 						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
-						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
+						if (!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) {
 							locationProvider.setLocationFromService(location);
 						}
 					}
