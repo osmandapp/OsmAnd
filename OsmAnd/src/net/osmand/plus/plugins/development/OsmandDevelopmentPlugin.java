@@ -40,6 +40,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -382,6 +383,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
 		}
+	}
+
+	@Override
+	public boolean isMapPositionIconNeeded() {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
+		boolean linkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		return !linkedToLocation && animatedThread.isAnimatingMapZoom();
 	}
 
 	protected AvgStatsEntry getAvgStats(int periodMinutes) {

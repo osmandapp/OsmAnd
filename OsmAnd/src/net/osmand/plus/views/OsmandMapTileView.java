@@ -1,12 +1,8 @@
 package net.osmand.plus.views;
 
 
-import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
-import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
-import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
-import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
 import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
 import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
 
@@ -34,7 +30,6 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -72,7 +67,6 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -1202,12 +1196,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				// skip it
 			}
 		}
-		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-		boolean linkedToLocation = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		if (showMapPosition
-				|| (animatedDraggingThread.isAnimatingMapZoom() && devPlugin != null && devPlugin.isEnabled() && !linkedToLocation)
-				|| (plugin != null && plugin.hasCustomForecast())) {
+		if (showMapPosition || PluginsHelper.isMapPositionIconNeeded()) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
