@@ -394,7 +394,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private void drawProjectionPoint(@NonNull Canvas canvas, double[] projectionXY) {
 		if (projectionIcon == null) {
 			helper.getSettings().getApplicationMode().getLocationIcon();
-			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), LocationIcon.DEFAULT.getIconId());
+			projectionIcon = (LayerDrawable) AppCompatResources.getDrawable(getContext(), LocationIcon.STATIC_DEFAULT.getIconId());
 		}
 		if (projectionIcon != null) {
 			int locationX = (int) projectionXY[0];
