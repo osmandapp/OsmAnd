@@ -385,14 +385,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		}
 	}
 
-	@Override
-	public boolean isMapPositionIconNeeded() {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-		boolean linkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		return !linkedToLocation && animatedThread.isAnimatingMapZoom();
-	}
-
 	protected AvgStatsEntry getAvgStats(int periodMinutes) {
 		return new AvgStatsEntry(avgStats, periodMinutes);
 	}

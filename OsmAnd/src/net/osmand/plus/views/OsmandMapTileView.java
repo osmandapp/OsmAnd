@@ -591,9 +591,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		mapViewTrackingUtilities.setZoomTime(System.currentTimeMillis());
-		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		boolean linkedToLocation = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		if (developmentPlugin != null && developmentPlugin.isEnabled() && !linkedToLocation) {
+		if (!linkedToLocation) {
 			showAndHideMapPosition();
 		}
 		if (application.accessibilityEnabled()) {
