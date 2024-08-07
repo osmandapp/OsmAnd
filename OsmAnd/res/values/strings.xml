@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="help_article_map_tracks_name">Tracks</string>
+    <string name="help_article_map_routes_name">Routes</string>
 	<string name="compass_click_north_is_up">To change orientation mode click and hold</string>
 	<string name="shared_string_automatically">Automatically</string>
 	<string name="ask_every_time">Ask every time</string>
