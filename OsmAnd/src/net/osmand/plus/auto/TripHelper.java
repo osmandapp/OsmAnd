@@ -151,9 +151,8 @@ public class TripHelper {
 				}
 			}
 		}
-		String cue = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : "";
 		stepBuilder.setManeuver(maneuver);
-		stepBuilder.setCue(cue);
+		stepBuilder.setCue(getNextCue(nextDirInfo, turnType, nextTurnType));
 
 		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 		if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
@@ -250,7 +249,7 @@ public class TripHelper {
 			TravelEstimate.Builder nextStepTravelEstimateBuilder = new TravelEstimate.Builder(nextStepDistance, nextStepDateTime);
 			nextStepTravelEstimateBuilder.setRemainingTimeSeconds(leftNextTurnTimeSec >= 0 ? leftNextTurnTimeSec : REMAINING_TIME_UNKNOWN);
 
-				nextStepBuilder.setCue(getFormattedDistanceStr(app, nextNextDirInfo.distanceTo));
+			nextStepBuilder.setCue(getNextNextCue(nextNextDirInfo));
 
 			Step nextStep = nextStepBuilder.build();
 			TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
@@ -280,6 +279,32 @@ public class TripHelper {
 	private boolean shouldKeepRight(@Nullable TurnType t) {
 		return t != null && (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR
 				|| t.getValue() == TurnType.TSLR || t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR);
+	}
+
+	@NonNull
+	private String getNextCue(@Nullable NextDirectionInfo info, @Nullable TurnType type, @Nullable TurnType nextTurnType) {
+		String cue = getCue(info);
+		String turnName = type != null ? nextTurnsToString(app, type, nextTurnType) : "";
+
+		if (type != null && type.isRoundAbout() && !Algorithms.isEmpty(cue)) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, turnName, cue);
+		}
+		return !Algorithms.isEmpty(cue) ? cue : turnName;
+	}
+
+	@NonNull
+	private String getNextNextCue(@NonNull NextDirectionInfo directionInfo) {
+		String cue = getCue(directionInfo);
+		String distance = getFormattedDistanceStr(app, directionInfo.distanceTo);
+
+		return Algorithms.isEmpty(cue) ? distance : app.getString(R.string.ltr_or_rtl_combine_via_comma, distance, cue);
+	}
+
+	@Nullable
+	private String getCue(@Nullable NextDirectionInfo info) {
+		String name = defineStreetName(info);
+		String ref = info != null && info.directionInfo != null ? info.directionInfo.getRef() : null;
+		return !Algorithms.isEmpty(name) ? name : ref;
 	}
 
 	private String nextTurnsToString(@NonNull Context ctx, @NonNull TurnType type, @Nullable TurnType nextTurnType) {
@@ -471,18 +496,23 @@ public class TripHelper {
 
 	@Nullable
 	private String defineStreetName() {
-		RoutingHelper routingHelper = app.getRoutingHelper();
-		NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-		CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
-		String streetName = currentStreetName.text;
+		NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+		return defineStreetName(directionInfo);
+	}
 
-		if (Algorithms.isEmpty(streetName)) {
-			return null;
+	@Nullable
+	private String defineStreetName(@Nullable NextDirectionInfo nextDirInfo) {
+		if (nextDirInfo != null) {
+			CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
+			String streetName = currentStreetName.text;
+
+			if (!Algorithms.isEmpty(streetName)) {
+				String exitRef = currentStreetName.exitRef;
+				return Algorithms.isEmpty(exitRef)
+						? streetName
+						: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
+			}
 		}
-
-		String exitRef = currentStreetName.exitRef;
-		return Algorithms.isEmpty(exitRef)
-				? streetName
-				: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
+		return null;
 	}
 }
