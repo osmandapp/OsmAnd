@@ -1255,7 +1255,7 @@ public class MenuBuilder {
 			@Override
 			public void onClick(View v) {
 				PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
-				poiFiltersHelper.clearSelectedPoiFilters();
+				poiFiltersHelper.clearGeneralSelectedPoiFilters();
 				poiFiltersHelper.addSelectedPoiFilter(filter);
 				QuickSearchToolbarController controller = new QuickSearchToolbarController();
 				controller.setTitle(filter.getName());
@@ -1276,7 +1276,7 @@ public class MenuBuilder {
 				controller.setOnCloseButtonClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						poiFiltersHelper.clearSelectedPoiFilters();
+						poiFiltersHelper.clearGeneralSelectedPoiFilters();
 						mapActivity.hideTopToolbar(controller);
 						mapActivity.refreshMap();
 					}

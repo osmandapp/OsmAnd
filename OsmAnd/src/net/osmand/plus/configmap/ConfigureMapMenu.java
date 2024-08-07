@@ -77,7 +77,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -178,12 +178,12 @@ public class ConfigureMapMenu {
 		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAmenityRepositories())
 				|| !Algorithms.isEmpty(resourceManager.getTravelRepositories());
 		if (hasPoiData) {
-			PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();
-			selected = app.getPoiFilters().isShowingAnyPoi(wiki);
+			PoiFiltersHelper poiFilters = app.getPoiFilters();
+			selected = poiFilters.isShowingAnyGeneralPoi();
 			adapter.addItem(new ContextMenuItem(POI_OVERLAY_ID)
 					.setTitleId(R.string.layer_poi, activity)
 					.setSelected(selected)
-					.setDescription(app.getPoiFilters().getSelectedPoiFiltersName(wiki))
+					.setDescription(poiFilters.getGeneralSelectedPoiFiltersName())
 					.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
 					.setIcon(R.drawable.ic_action_info_dark)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)

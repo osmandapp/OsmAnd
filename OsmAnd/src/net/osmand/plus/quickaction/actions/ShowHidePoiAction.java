@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,7 +72,6 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-
 		return isCurrentFilters(app);
 	}
 
@@ -102,33 +102,36 @@ public class ShowHidePoiAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		mapActivity.getFragmentsHelper().closeQuickSearch();
+		OsmandApplication app = mapActivity.getMyApplication();
+		PoiFiltersHelper helper = app.getPoiFilters();
+		List<PoiUIFilter> poiFilters = loadPoiFilters(helper);
+		boolean currentFilters = isCurrentFilters(app, poiFilters);
 
-		PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
-		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
-		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
-			pf.clearSelectedPoiFilters();
+		mapActivity.getFragmentsHelper().closeQuickSearch();
+		helper.clearGeneralSelectedPoiFilters();
+		if (!currentFilters) {
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
-				pf.addSelectedPoiFilter(filter);
+				helper.addSelectedPoiFilter(filter);
 			}
-		} else {
-			pf.clearSelectedPoiFilters();
 		}
 
 		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
-	private boolean isCurrentFilters(OsmandApplication application) {
-		PoiFiltersHelper pf = application.getPoiFilters();
-		List<PoiUIFilter> poiFilters = loadPoiFilters(application.getPoiFilters());
-		return isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters);
+	private boolean isCurrentFilters(@NonNull OsmandApplication app) {
+		return isCurrentFilters(app, null);
 	}
 
-	private boolean isCurrentFilters(Set<PoiUIFilter> currentPoiFilters, List<PoiUIFilter> poiFilters) {
-		return currentPoiFilters.size() == poiFilters.size() && currentPoiFilters.containsAll(poiFilters);
+	private boolean isCurrentFilters(@NonNull OsmandApplication app,
+	                                 @Nullable List<PoiUIFilter> poiFilters) {
+		PoiFiltersHelper helper = app.getPoiFilters();
+		if (poiFilters == null) {
+			poiFilters = loadPoiFilters(helper);
+		}
+		return helper.isPoiFiltersSelected(poiFilters);
 	}
 
 	@Override
