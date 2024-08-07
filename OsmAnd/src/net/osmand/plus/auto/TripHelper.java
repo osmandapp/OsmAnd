@@ -314,7 +314,7 @@ public class TripHelper {
 			} else if (shouldKeepRight(nextTurnType)) {
 				return ctx.getString(R.string.auto_25_chars_route_roundabout_kr, type.getExitOut());
 			} else {
-				return ctx.getString(R.string.route_roundabout_short, type.getExitOut());
+				return ctx.getString(R.string.route_roundabout_exit, type.getExitOut());
 			}
 		} else if (type.getValue() == TurnType.TU || type.getValue() == TurnType.TRU) {
 			if (shouldKeepLeft(nextTurnType)) {
