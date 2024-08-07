@@ -173,7 +173,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	}
 
 	public void toggleAnimations() {
-		boolean mapActivityActive = app.getSettings().MAP_ACTIVITY_ENABLED.get();
+		boolean mapActivityActive = app.getSettings().MAP_ACTIVITY_ENABLED;
 		boolean carSessionActive = false;
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {
