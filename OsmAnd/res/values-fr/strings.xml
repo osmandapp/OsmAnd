@@ -915,7 +915,7 @@
     <string name="recording_context_menu_play">Lire</string>
     <string name="recording_description">Enregistrement %1$s %3$s %2$s</string>
     <string name="recording_default_name">Enregistrement en cours</string>
-    <string name="shared_string_control_stop">Arrêter</string>
+    <string name="shared_string_control_stop">Terminer</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="shared_string_control_start">Démarrer</string>
     <string name="srtm_paid_version_msg">Veuillez achetez l\'extension « Topographie » pour soutenir les futurs développements.</string>
