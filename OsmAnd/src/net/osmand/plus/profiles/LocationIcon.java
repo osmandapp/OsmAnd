@@ -97,6 +97,10 @@ public enum LocationIcon {
 		return false;
 	}
 
+	private static List<LocationIcon> getDefaultIcons(){
+		return Arrays.asList(DEFAULT, CAR, BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
+	}
+
 	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name) {
 		Drawable mp = getModelPreviewDrawable(ctx, name);
 		if (mp != null) {
@@ -118,17 +122,18 @@ public enum LocationIcon {
 
 	@NonNull
 	public static LocationIcon fromName(@NonNull String name) {
+		return fromName(name, null);
+	}
+
+	@NonNull
+	public static LocationIcon fromName(@NonNull String name, @Nullable Boolean staticLocation) {
 		if (isModel(name)) {
 			return MODEL;
 		}
 		try {
 			return valueOf(name);
 		} catch (IllegalArgumentException e) {
-			return DEFAULT;
+			return staticLocation != null && staticLocation ? DEFAULT : MOVEMENT_DEFAULT;
 		}
-	}
-
-	private static List<LocationIcon> getDefaultIcons(){
-		return Arrays.asList(DEFAULT, CAR, BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
 	}
 }

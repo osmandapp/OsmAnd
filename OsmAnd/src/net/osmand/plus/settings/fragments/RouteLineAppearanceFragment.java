@@ -157,7 +157,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		String navigationIconName = appMode.getNavigationIcon();
 		LocationIcon navigationIcon = LocationIcon.isModel(navigationIconName)
 				? LocationIcon.MOVEMENT_DEFAULT
-				: LocationIcon.fromName(navigationIconName);
+				: LocationIcon.fromName(navigationIconName, false);
 		previewRouteLineInfo.setIconId(navigationIcon.getIconId());
 		previewRouteLineInfo.setIconColor(appMode.getProfileColor(isNightMode()));
 

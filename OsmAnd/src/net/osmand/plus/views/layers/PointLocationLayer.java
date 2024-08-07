@@ -784,7 +784,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				}
 				navigationIcon = null;
 			} else {
-				int navigationIconId = LocationIcon.fromName(navigationIconName).getIconId();
+				int navigationIconId = LocationIcon.fromName(navigationIconName, false).getIconId();
 				navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 				if (navigationIcon != null) {
 					DrawableCompat.setTint(navigationIcon.getDrawable(1), profileColor);
@@ -792,7 +792,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				navigationModel = null;
 			}
 
-			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
+			LocationIcon locationIconType = LocationIcon.fromName(locationIconName, true);
 			if (LocationIcon.isModel(locationIconName)) {
 				if (!LocationIcon.isModel(navigationIconName) || navigationModel != null) {
 					setLocationModel();
