@@ -831,6 +831,15 @@ public class PluginsHelper {
 		}
 	}
 
+	public static boolean isMapPositionIconNeeded() {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			if (p.isMapPositionIconNeeded()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static TrackPointsAnalyser getTrackPointsAnalyser() {
 		List<TrackPointsAnalyser> trackPointsAnalysers = new ArrayList<>();
 		for (OsmandPlugin plugin : getActivePlugins()) {
