@@ -872,7 +872,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
 		return forceUseDefault
-				? getDefaultIcon(locationIconName, LocationIcon.DEFAULT.name())
+				? getDefaultIcon(locationIconName, LocationIcon.STATIC_DEFAULT.name())
 				: locationIconName;
 	}
 
