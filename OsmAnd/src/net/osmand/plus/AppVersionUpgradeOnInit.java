@@ -63,6 +63,7 @@ import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.migration.MergeLocationAndNavigationIconsAlgorithm;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -166,8 +167,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_07 = 4707;
 	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
 	public static final int VERSION_4_8_01 = 4801;
+	// 4802 - 4.8-02 (Merge Location and Navigation icons for profile into one list)
+	public static final int VERSION_4_8_02 = 4802;
 
-	public static final int LAST_APP_VERSION = VERSION_4_8_01;
+	public static final int LAST_APP_VERSION = VERSION_4_8_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -315,6 +318,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_8_01) {
 					migrateFixedNorthToManualRotatedCompassMode(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_02) {
+					MergeLocationAndNavigationIconsAlgorithm.doMigration();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();

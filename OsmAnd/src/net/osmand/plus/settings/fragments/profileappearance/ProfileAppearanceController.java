@@ -442,8 +442,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
-			String movementIconName = LocationIcon.getActualNavigationIconName(changedProfile.navigationIcon);
-			navigationIconCardController = new ProfileIconsController<>(app, listNavigationIcons(), movementIconName) {
+			navigationIconCardController = new ProfileIconsController<>(app, listNavigationIcons(), changedProfile.navigationIcon) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);

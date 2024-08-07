@@ -101,16 +101,12 @@ public enum LocationIcon {
 		return Arrays.asList(DEFAULT, CAR, BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
 	}
 
-	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name) {
-		return getDrawable(ctx, name, null);
-	}
-
-	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name, @Nullable Boolean staticLocation) {
+	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name, boolean forStatic) {
 		Drawable mp = getModelPreviewDrawable(ctx, name);
 		if (mp != null) {
 			return mp;
 		}
-		return AppCompatResources.getDrawable(ctx, fromName(name, staticLocation).getIconId());
+		return AppCompatResources.getDrawable(ctx, fromName(name, forStatic).getIconId());
 	}
 
 	public static Drawable getModelPreviewDrawable(OsmandApplication ctx, @NonNull String name) {
@@ -125,40 +121,14 @@ public enum LocationIcon {
 	}
 
 	@NonNull
-	public static LocationIcon fromName(@NonNull String name) {
-		return fromName(name, null);
-	}
-
-	@NonNull
-	public static LocationIcon fromName(@NonNull String name, @Nullable Boolean staticLocation) {
+	public static LocationIcon fromName(@NonNull String name, boolean forStatic) {
 		if (isModel(name)) {
 			return MODEL;
 		}
 		try {
-			if (staticLocation != null && !staticLocation) {
-				LocationIcon icon = findNavigationIconByPreviousName(name);
-				if (icon != null) {
-					return icon;
-				}
-			}
 			return valueOf(name);
 		} catch (IllegalArgumentException e) {
-			return staticLocation == null || staticLocation ? DEFAULT : MOVEMENT_DEFAULT;
-		}
-	}
-
-	@NonNull
-	public static String getActualNavigationIconName(@NonNull String name) {
-		LocationIcon newIcon = findNavigationIconByPreviousName(name);
-		return newIcon != null ? newIcon.name() : name;
-	}
-
-	@Nullable
-	public static LocationIcon findNavigationIconByPreviousName(@NonNull String name) {
-		try {
-			return valueOf("MOVEMENT_" + name);
-		} catch (IllegalArgumentException e) {
-			return null;
+			return forStatic ? DEFAULT : MOVEMENT_DEFAULT;
 		}
 	}
 }
