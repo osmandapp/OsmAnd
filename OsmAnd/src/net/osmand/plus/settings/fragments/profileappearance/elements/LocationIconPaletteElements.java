@@ -36,7 +36,7 @@ public class LocationIconPaletteElements extends IconsPaletteElements<String> {
 	@Override
 	public void bindView(@NonNull View itemView, @NonNull String icon,
 	                     int controlsColor, boolean isSelected) {
-		LocationIcon locationIcon = LocationIcon.fromName(icon, true);
+		LocationIcon locationIcon = LocationIcon.fromName(icon);
 		if (locationIcon.isOriginallyUsedForNavigation()) {
 			bindMovementLocationView(itemView, icon, controlsColor, isSelected);
 		} else {
@@ -46,7 +46,7 @@ public class LocationIconPaletteElements extends IconsPaletteElements<String> {
 
 	private void bindStaticLocationView(@NonNull View itemView, @NonNull LocationIcon locationIcon,
 	                                    @NonNull String icon, int controlsColor, boolean isSelected) {
-		Drawable locDrawable = LocationIcon.getDrawable(app, icon, true);
+		Drawable locDrawable = LocationIcon.getDrawable(app, icon);
 		if (locDrawable instanceof LayerDrawable) {
 			LayerDrawable locationIconDrawable = (LayerDrawable) locDrawable;
 			DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), controlsColor);
@@ -76,7 +76,7 @@ public class LocationIconPaletteElements extends IconsPaletteElements<String> {
 
 	private void bindMovementLocationView(@NonNull View itemView, @NonNull String icon,
 	                                      int controlsColor, boolean isSelected) {
-		Drawable navDrawable = LocationIcon.getDrawable(app, icon, false);
+		Drawable navDrawable = LocationIcon.getDrawable(app, icon);
 		if (navDrawable instanceof LayerDrawable) {
 			LayerDrawable navigationDrawable = (LayerDrawable) navDrawable;
 			Drawable topDrawable = DrawableCompat.wrap(navigationDrawable.getDrawable(1));

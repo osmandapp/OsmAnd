@@ -784,7 +784,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				}
 				navigationIcon = null;
 			} else {
-				int navigationIconId = LocationIcon.fromName(navigationIconName, false).getIconId();
+				int navigationIconId = LocationIcon.fromName(navigationIconName).getIconId();
 				navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 				if (navigationIcon != null) {
 					DrawableCompat.setTint(navigationIcon.getDrawable(1), profileColor);
@@ -792,7 +792,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				navigationModel = null;
 			}
 
-			LocationIcon locationIconType = LocationIcon.fromName(locationIconName, true);
+			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
 			if (LocationIcon.isModel(locationIconName)) {
 				if (!LocationIcon.isModel(navigationIconName) || navigationModel != null) {
 					setLocationModel();
@@ -867,7 +867,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		boolean hasMapRenderer = hasMapRenderer();
 		String locationIconName = appMode.getLocationIcon();
 		if (hasMapRenderer && LocationIcon.isModelRepresented(locationIconName)) {
-			locationIconName = LocationIcon.fromName(locationIconName, true).getRepresented3DModelKey();
+			locationIconName = LocationIcon.fromName(locationIconName).getRepresented3DModelKey();
 		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
@@ -881,7 +881,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		boolean hasMapRenderer = hasMapRenderer();
 		String navigationIconName = appMode.getNavigationIcon();
 		if (hasMapRenderer && LocationIcon.isModelRepresented(navigationIconName)) {
-			navigationIconName = LocationIcon.fromName(navigationIconName, false).getRepresented3DModelKey();
+			navigationIconName = LocationIcon.fromName(navigationIconName).getRepresented3DModelKey();
 		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));

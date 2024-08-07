@@ -97,16 +97,12 @@ public enum LocationIcon {
 		return false;
 	}
 
-	private static List<LocationIcon> getDefaultIcons(){
-		return Arrays.asList(DEFAULT, CAR, BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
-	}
-
-	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name, boolean forStatic) {
+	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name) {
 		Drawable mp = getModelPreviewDrawable(ctx, name);
 		if (mp != null) {
 			return mp;
 		}
-		return AppCompatResources.getDrawable(ctx, fromName(name, forStatic).getIconId());
+		return AppCompatResources.getDrawable(ctx, fromName(name, false).getIconId());
 	}
 
 	public static Drawable getModelPreviewDrawable(OsmandApplication ctx, @NonNull String name) {
@@ -121,14 +117,18 @@ public enum LocationIcon {
 	}
 
 	@NonNull
-	public static LocationIcon fromName(@NonNull String name, boolean forStatic) {
+	public static LocationIcon fromName(@NonNull String name) {
 		if (isModel(name)) {
 			return MODEL;
 		}
 		try {
 			return valueOf(name);
 		} catch (IllegalArgumentException e) {
-			return forStatic ? DEFAULT : MOVEMENT_DEFAULT;
+			return DEFAULT;
 		}
+	}
+
+	private static List<LocationIcon> getDefaultIcons(){
+		return Arrays.asList(DEFAULT, CAR, BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
 	}
 }
