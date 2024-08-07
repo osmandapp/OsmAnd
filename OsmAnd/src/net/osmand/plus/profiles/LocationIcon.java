@@ -102,11 +102,15 @@ public enum LocationIcon {
 	}
 
 	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name) {
+		return getDrawable(ctx, name, null);
+	}
+
+	public static Drawable getDrawable(OsmandApplication ctx, @NonNull String name, @Nullable Boolean staticLocation) {
 		Drawable mp = getModelPreviewDrawable(ctx, name);
 		if (mp != null) {
 			return mp;
 		}
-		return AppCompatResources.getDrawable(ctx, fromName(name, false).getIconId());
+		return AppCompatResources.getDrawable(ctx, fromName(name, staticLocation).getIconId());
 	}
 
 	public static Drawable getModelPreviewDrawable(OsmandApplication ctx, @NonNull String name) {
