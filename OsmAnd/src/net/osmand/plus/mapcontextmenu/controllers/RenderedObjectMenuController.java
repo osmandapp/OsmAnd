@@ -12,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.Map;
@@ -77,7 +78,7 @@ public class RenderedObjectMenuController extends MenuController {
 		} else if (!Algorithms.isEmpty(renderedObject.getName())) {
 			return renderedObject.getName();
 		}
-		return "";
+		return getKnownObjectName();
 	}
 
 	@NonNull
@@ -93,7 +94,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !getPointDescription().isAddress();
+		return !getPointDescription().isAddress() || isRecognizedObjectType();
 	}
 
 	@Override
@@ -112,11 +113,31 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	public boolean needTypeStr() {
+		return !isRecognizedObjectType();
+	}
+
 	private boolean isStartingWithRTLChar(String s) {
 		byte directionality = Character.getDirectionality(s.charAt(0));
 		return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
+	}
+
+	private boolean isRecognizedObjectType() {
+		return !Algorithms.isEmpty(getKnownObjectName());
+	}
+
+	@NonNull
+	private String getKnownObjectName() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			String content = renderedObject.getIconRes();
+			mapActivity.getMyApplication().showToastMessage(content); // todo delete
+			return AndroidUtils.getRenderingStringPropertyName(mapActivity, content, "");
+		}
+		return "";
 	}
 }

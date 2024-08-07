@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="rendering_attr_barrier_gate_name">Barrier</string>
+    <string name="rendering_attr_osmand_steps_name">Steps</string>
+    <string name="rendering_attr_barrier_lift_gate_name">Gate</string>
 	<string name="route_roundabout_exit">Take %1$d exit</string>
     <string name="help_article_map_tracks_name">Tracks</string>
     <string name="help_article_map_routes_name">Routes</string>

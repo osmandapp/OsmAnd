@@ -82,6 +82,6 @@ public class MenuObject extends MenuTitleController {
 
 	@Override
 	protected boolean needStreetName() {
-		return false;
+		return controller != null && controller.needStreetName();
 	}
 }
