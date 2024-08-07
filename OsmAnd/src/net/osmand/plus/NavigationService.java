@@ -218,6 +218,8 @@ public class NavigationService extends Service {
 
 	private void requestLocationUpdates() {
 		try {
+			LOG.info(">>>> requestLocationUpdates from NavigationService");
+
 			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 				@Override
 				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
@@ -227,6 +229,7 @@ public class NavigationService extends Service {
 						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
 						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
 						if (!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) {
+							LOG.info(">>>> setGPSLocationFromService");
 							locationProvider.setLocationFromService(location);
 						}
 					}
@@ -240,6 +243,7 @@ public class NavigationService extends Service {
 						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
 						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
 						if ((!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) && !locations.isEmpty() && !useOnlyGPS()) {
+							LOG.info(">>>> setNetworkLocationFromService");
 							locationProvider.setLocationFromService(locations.get(locations.size() - 1));
 						}
 					}
@@ -253,6 +257,7 @@ public class NavigationService extends Service {
 	}
 
 	private void removeLocationUpdates() {
+		LOG.info(">>>> removeLocationUpdates from NavigationService");
 		if (locationServiceHelper != null) {
 			try {
 				locationServiceHelper.removeLocationUpdates();

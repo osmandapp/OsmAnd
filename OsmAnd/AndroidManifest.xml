@@ -1174,6 +1174,7 @@
 			tools:ignore="MetadataTagInsideApplicationTag" />
 
 		<service
+			android:process="net.osmand.plus"
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
 			android:foregroundServiceType="location"
 			android:exported="true">

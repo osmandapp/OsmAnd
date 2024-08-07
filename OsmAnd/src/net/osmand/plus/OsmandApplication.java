@@ -697,9 +697,11 @@ public class OsmandApplication extends MultiDexApplication {
 		NavigationService navigationService = this.navigationService;
 		if (navigationService != null) {
 			if (!navigationService.isUsedBy(NavigationService.USED_BY_CAR_APP)) {
+				LOG.info(">>>> Start car nav service 1");
 				startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
 			}
 		} else {
+			LOG.info(">>>> Start car nav service 2");
 			startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
 		}
 	}
@@ -708,6 +710,7 @@ public class OsmandApplication extends MultiDexApplication {
 		androidAutoInForeground = false;
 		NavigationService navigationService = this.navigationService;
 		if (navigationService != null) {
+			LOG.info(">>>> Stop car nav service");
 			navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
 		}
 	}
