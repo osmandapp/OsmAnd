@@ -603,7 +603,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		mapViewTrackingUtilities.setZoomTime(System.currentTimeMillis());
-		showAndHideMapPosition();
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		boolean linkedToLocation = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		if (developmentPlugin != null && developmentPlugin.isEnabled() && !linkedToLocation) {
+			showAndHideMapPosition();
+		}
 		if (application.accessibilityEnabled()) {
 			Toast.makeText(application, application.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
 		}
@@ -1199,7 +1203,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		if (showMapPosition || animatedDraggingThread.isAnimatingMapZoom() || (plugin != null && plugin.hasCustomForecast())) {
+		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		boolean linkedToLocation = application.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		if (showMapPosition
+				|| (animatedDraggingThread.isAnimatingMapZoom() && devPlugin != null && devPlugin.isEnabled() && !linkedToLocation)
+				|| (plugin != null && plugin.hasCustomForecast())) {
 			drawMapPosition(canvas, c.x, c.y);
 		} else if (multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode()) {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
