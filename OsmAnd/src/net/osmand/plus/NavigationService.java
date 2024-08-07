@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
+import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS;
+import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
 import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
 
 import android.app.Notification;
@@ -64,6 +66,7 @@ public class NavigationService extends Service {
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
 	private StateChangedListener<LocationSource> locationSourceListener;
+	private long lastTimeGPSLocationFixed;
 
 	// Android Auto
 	private CarContext carContext;
@@ -214,14 +217,14 @@ public class NavigationService extends Service {
 	}
 
 	private void requestLocationUpdates() {
-		OsmandApplication app = getApp();
 		try {
 			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 				@Override
 				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
-						NavigationSession carNavigationSession = app.getCarNavigationSession();
+						lastTimeGPSLocationFixed = System.currentTimeMillis();
+						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
 						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
 						if (!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) {
 							locationProvider.setLocationFromService(location);
@@ -229,6 +232,19 @@ public class NavigationService extends Service {
 					}
 				}
 			});
+			// try to always ask for network provide : it is faster way to find location
+			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
+				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
+					@Override
+					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
+						if ((!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) && !locations.isEmpty() && !useOnlyGPS()) {
+							locationProvider.setLocationFromService(locations.get(locations.size() - 1));
+						}
+					}
+				});
+			}
 		} catch (SecurityException e) {
 			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
 		} catch (IllegalArgumentException e) {
@@ -242,8 +258,20 @@ public class NavigationService extends Service {
 				locationServiceHelper.removeLocationUpdates();
 			} catch (SecurityException e) {
 				// Location service permission not granted
+			} finally {
+				lastTimeGPSLocationFixed = 0;
 			}
 		}
+	}
+
+	private boolean useOnlyGPS() {
+		if (routingHelper.isFollowingMode()) {
+			return true;
+		}
+		if (lastTimeGPSLocationFixed > 0 && (System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
+			return true;
+		}
+		return isRunningOnEmulator();
 	}
 
 	/**
