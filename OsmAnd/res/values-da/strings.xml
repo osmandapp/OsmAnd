@@ -5858,4 +5858,7 @@
     <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
     <string name="shared_string_automatically">Automatisk</string>
     <string name="compass_click_north_is_up">Klik og hold for at ændre orienteringstilstand</string>
+    <string name="help_article_map_tracks_name">Spor</string>
+    <string name="help_article_map_routes_name">Ruter</string>
+    <string name="route_roundabout_exit">Tag %1$d afkørsel</string>
 </resources>
