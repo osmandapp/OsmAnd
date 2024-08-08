@@ -5851,4 +5851,7 @@
     <string name="ask_every_time">Kérdezzen rá mindig</string>
     <string name="detailed_track_guidance">Részletes útmutatás</string>
     <string name="compass_click_north_is_up">Tájolási mód megváltoztatásához kattintson és tartsa nyomva</string>
+    <string name="route_roundabout_exit">Hajtson ki a %1$d kijáraton</string>
+    <string name="help_article_map_tracks_name">Nyomvonalak</string>
+    <string name="help_article_map_routes_name">Útvonalak</string>
 </resources>
