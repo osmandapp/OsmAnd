@@ -5869,4 +5869,7 @@
     <string name="quick_action_routes_summary">Un botón que muestra u oculta «%1$s» en el mapa.</string>
     <string name="shared_string_automatically">Automáticamente</string>
     <string name="compass_click_north_is_up">Para cambiar el modo de orientación, mantén pulsado</string>
+    <string name="help_article_map_tracks_name">Trazas</string>
+    <string name="help_article_map_routes_name">Rutas</string>
+    <string name="route_roundabout_exit">Toma la %1$dª salida</string>
 </resources>
