@@ -277,6 +277,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	protected void cleanupResources() {
+		clearMapMarkersCollections();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.removeListener(this);
