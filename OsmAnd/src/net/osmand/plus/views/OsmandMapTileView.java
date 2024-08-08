@@ -472,7 +472,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrderLegacy, float zOrderOpenGL) {
-		int i = 0;
+		int i;
 		for (i = 0; i < layersLegacy.size(); i++) {
 			if (zOrdersLegacy.get(layersLegacy.get(i)) > zOrderLegacy) {
 				break;
@@ -481,7 +481,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		zOrdersLegacy.put(layer, zOrderLegacy);
 		layersLegacy.add(i, layer);
 
-		i = 0;
 		for (i = 0; i < layersOpenGL.size(); i++) {
 			if (zOrdersOpenGL.get(layersOpenGL.get(i)) > zOrderOpenGL) {
 				break;
@@ -489,7 +488,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		zOrdersOpenGL.put(layer, zOrderOpenGL);
 		layersOpenGL.add(i, layer);
-		layer.initLayer(this);
+		layer.setView(this);
 	}
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {

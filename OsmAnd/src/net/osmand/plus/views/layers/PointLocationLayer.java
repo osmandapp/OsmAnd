@@ -220,8 +220,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		initCoreRenderer();
 		initLegacyRenderer();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);

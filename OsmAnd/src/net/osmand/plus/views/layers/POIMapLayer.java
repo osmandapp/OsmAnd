@@ -264,8 +264,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 

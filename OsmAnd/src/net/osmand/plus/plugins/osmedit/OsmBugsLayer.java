@@ -91,8 +91,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
