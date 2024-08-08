@@ -5850,4 +5850,7 @@
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
     <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>
+    <string name="help_article_map_routes_name">Руте</string>
+    <string name="route_roundabout_exit">Идите на %1$d излаз</string>
+    <string name="help_article_map_tracks_name">Путање</string>
 </resources>
