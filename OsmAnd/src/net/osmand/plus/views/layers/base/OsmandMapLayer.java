@@ -181,6 +181,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
 	                                @Nullable MapRendererView newMapRenderer) {
+		checkLayerInitialized();
 		if (newMapRenderer == null) {
 			cleanupResources();
 		} else {
@@ -276,7 +277,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	protected void cleanupResources() {
-		clearMapMarkersCollections();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.removeListener(this);
