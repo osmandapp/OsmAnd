@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +24,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private LatLon latLon;
 	private final LinkedList<MenuObject> objects = new LinkedList<>();
 	private final Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+	private final OnCompleteCallback onSearchAddressDone = this::updateDialogContent;
 
 	public MapMultiSelectionMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -71,6 +73,9 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 
 			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
+			if (menuObject.needStreetName()) {
+				menuObject.setOnSearchAddressDoneCallback(onSearchAddressDone);
+			}
 			objects.add(menuObject);
 
 			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
@@ -156,5 +161,12 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 		}
 		selectedObjects.clear();
+	}
+
+	private void updateDialogContent() {
+		Fragment fragmentByTag = getFragmentByTag();
+		if (fragmentByTag instanceof MapMultiSelectionMenuFragment fragment) {
+			fragment.updateContent();
+		}
 	}
 }
