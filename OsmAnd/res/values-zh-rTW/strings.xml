@@ -5843,4 +5843,7 @@
     <string name="hugerock_promo_description">%1$s 個月的免費使用功能，包含無限制的地圖下載、3D 地形等</string>
     <string name="shared_string_automatically">自動</string>
     <string name="compass_click_north_is_up">若要變更方向模式，請點選並按住</string>
+    <string name="help_article_map_tracks_name">軌跡</string>
+    <string name="route_roundabout_exit">自第 %1$d 個出口離開</string>
+    <string name="help_article_map_routes_name">路線</string>
 </resources>
