@@ -18,6 +18,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -83,7 +84,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
-	protected float density = 1f;
+	protected float density = 0f;
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
@@ -432,7 +433,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
 		OsmandApplication app = getApplication();
-		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		MapActivity activity = getMapActivity();
+		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);

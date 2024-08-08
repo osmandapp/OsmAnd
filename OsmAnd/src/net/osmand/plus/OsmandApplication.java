@@ -113,6 +113,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
@@ -221,7 +222,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
-	private float density = 1f;
+	private float density = 0f;
 	// Typeface
 
 	@Override
@@ -501,6 +502,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (density != displayMetrics.density) {
 			density = displayMetrics.density;
 			getUIUtilities().clearCache();
+			PointImageUtils.clearCache();
 			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
 		}
 
