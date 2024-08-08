@@ -1134,7 +1134,6 @@
 
 		<!-- keep android:process on a separate line !! -->
 		<service
-			android:process="net.osmand.plus"
 			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"

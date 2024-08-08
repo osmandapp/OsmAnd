@@ -69,7 +69,7 @@ public class NavigationService extends Service {
 	private long lastTimeGPSLocationFixed;
 
 	// Android Auto
-	private CarContext carContext;
+//	private CarContext carContext;
 	private NavigationManager navigationManager;
 	private boolean carNavigationActive;
 	private TripHelper tripHelper;
@@ -283,7 +283,7 @@ public class NavigationService extends Service {
 	 * Sets the {@link CarContext} to use while the service is running.
 	 */
 	public void setCarContext(@Nullable CarContext carContext) {
-		this.carContext = carContext;
+//		this.carContext = carContext;
 		if (carContext != null) {
 			this.tripHelper = new TripHelper(getApp());
 			this.navigationManager = carContext.getCarService(NavigationManager.class);
@@ -315,14 +315,6 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/**
-	 * Clears the currently used {@link CarContext}.
-	 */
-	public void clearCarContext() {
-		carContext = null;
-		navigationManager = null;
-		tripHelper = null;
-	}
 
 	/**
 	 * Starts navigation.

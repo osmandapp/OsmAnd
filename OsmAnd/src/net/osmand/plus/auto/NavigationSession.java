@@ -365,6 +365,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void updateLocation(Location location) {
+		getApp().getLocationProvider().setLocationFromService(location);
 		navigationCarSurface.updateLocation(location);
 	}
 

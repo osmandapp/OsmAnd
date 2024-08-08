@@ -49,7 +49,10 @@ public class RestoreNavigationHelper {
 		// This situation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+			LOG.info("Try to restore route - proceed");
 			restoreRoutingMode();
+		} else {
+			LOG.info("Try to restore route - nothing to restore");
 		}
 	}
 

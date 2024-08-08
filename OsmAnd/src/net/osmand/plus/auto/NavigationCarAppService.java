@@ -60,15 +60,15 @@ public final class NavigationCarAppService extends CarAppService {
 	@NonNull
 	public Session onCreateSession() {
 		NavigationSession session = new NavigationSession();
-		LOG.info(">>>> onCreateSession = " + session);
+		LOG.info("Start Android Auto session");
 		getApp().getLocationProvider().addLocationListener(session);
 		session.getLifecycle()
 				.addObserver(
 						new DefaultLifecycleObserver() {
 							@Override
 							public void onCreate(@NonNull LifecycleOwner owner) {
-								LOG.info(">>>> car session onCreate = " + session);
 								getApp().setCarNavigationSession(session);
+								LOG.info("On create Android Auto session - app foreground device =" + getApp().isAppInForegroundOnRootDevice());
 								if (!getApp().isAppInForegroundOnRootDevice()) {
 									checkAppInitialization(new RestoreNavigationHelper(getApp(), null));
 								}
@@ -76,21 +76,21 @@ public final class NavigationCarAppService extends CarAppService {
 
 							@Override
 							public void onStart(@NonNull LifecycleOwner owner) {
-								LOG.info(">>>> car session onStart = " + session);
+								LOG.info("On Start Android Auto");
 								getApp().onCarNavigationSessionStart(session);
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onStop(@NonNull LifecycleOwner owner) {
-								LOG.info(">>>> car session onStop = " + session);
+								LOG.info("On stop Android Auto");
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 								getApp().onCarNavigationSessionStop(session);
 							}
 
 							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
-								LOG.info(">>>> car session onDestroy = " + session);
+								LOG.info("On destroy Android Auto");
 								getApp().setCarNavigationSession(null);
 								getApp().getLocationProvider().removeLocationListener(session);
 							}
@@ -102,6 +102,7 @@ public final class NavigationCarAppService extends CarAppService {
 	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
 		OsmandApplication app = getApp();
 		if (app.isApplicationInitializing()) {
+			LOG.info("Try to restore route after app initialized");
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
