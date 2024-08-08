@@ -82,7 +82,7 @@ public class RenderedObjectMenuController extends MenuController {
 		} else if (!Algorithms.isEmpty(renderedObject.getName())) {
 			return renderedObject.getName();
 		}
-		return getKnownObjectName();
+		return searchNameByObjectId();
 	}
 
 	@NonNull
@@ -98,7 +98,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !getPointDescription().isAddress() || isRecognizedObjectType();
+		return !getPointDescription().isAddress() || isObjectTypeRecognized();
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !isRecognizedObjectType();
+		return !isObjectTypeRecognized();
 	}
 
 	private boolean isStartingWithRTLChar(String s) {
@@ -130,12 +130,12 @@ public class RenderedObjectMenuController extends MenuController {
 				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
 	}
 
-	private boolean isRecognizedObjectType() {
-		return !Algorithms.isEmpty(getKnownObjectName());
+	private boolean isObjectTypeRecognized() {
+		return !Algorithms.isEmpty(searchNameByObjectId());
 	}
 
 	@NonNull
-	private String getKnownObjectName() {
+	private String searchNameByObjectId() {
 		String content = getActualContent();
 		MapActivity mapActivity = getMapActivity();
 		if (content != null && mapActivity != null) {
