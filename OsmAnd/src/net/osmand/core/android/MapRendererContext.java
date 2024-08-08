@@ -660,4 +660,54 @@ public class MapRendererContext {
 			return vectorLayerEnabled ? MAIN : CONTOUR_LINES;
 		}
 	}
+
+	public Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> getPolygonsAndPoints(PointI point, ZoomLevel zoomLevel) {
+		PolygonsAndPointsHash polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+		Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res = new HashMap<>();
+		if (polygons.size() > 0) {
+			MapObjectList keys = polygons.keys();
+			for (int i = 0; i < keys.size(); i++) {
+				MapObject polygon = keys.get(i);
+				NativeLibrary.RenderedObject key = convert(polygon);
+				MapObjectList list = polygons.get(polygon);
+				List<NativeLibrary.RenderedObject> resList = new ArrayList<>();
+				for (int j = 0; j < list.size(); j++) {
+					resList.add(convert(list.get(j)));
+				}
+				res.put(key, resList);
+			}
+		}
+		return res;
+	}
+
+	private NativeLibrary.RenderedObject convert(MapObject mapObject) {
+		//System.out.println("convert 1");
+		NativeLibrary.RenderedObject res = new NativeLibrary.RenderedObject();
+		QStringStringHash tags = mapObject.getResolvedAttributes();
+		QStringList tagsKeys = tags.keys();
+		for (int i = 0; i < tagsKeys.size(); i++) {
+			String key = tagsKeys.get(i);
+			String value = tags.get(key);
+			res.putTag(key, value);
+		}
+		//System.out.println("convert 2");
+		String name = mapObject.getCaptionInNativeLanguage();
+		res.setName(name);
+		QStringStringHash names = mapObject.getCaptionsInAllLanguages();
+		QStringList namesKeys = names.keys();
+		for (int i = 0; i < namesKeys.size(); i++) {
+			String key = namesKeys.get(i);
+			String value = names.get(key);
+			res.setName(key, value);
+		}
+
+		//System.out.println("convert 3");
+		QVectorPointI points31 = mapObject.getPoints31();
+		for (int i = 0; i < points31.size(); i++) {
+			PointI p = points31.get(i);
+			res.addLocation(p.getX(), p.getY());
+		}
+		//System.out.println("convert 4");
+		return res;
+	}
 }
