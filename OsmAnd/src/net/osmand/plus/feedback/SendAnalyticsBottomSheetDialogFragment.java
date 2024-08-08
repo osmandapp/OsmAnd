@@ -210,6 +210,10 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
+	public String getSearchableInfo() {
+		return new SendAnalyticsSearchableInfoProvider(items).getSearchableInfo();
+	}
+
 	public interface OnSendAnalyticsPrefsUpdate {
 
 		void onAnalyticsPrefsUpdate();

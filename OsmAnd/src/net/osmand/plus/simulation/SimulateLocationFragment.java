@@ -28,6 +28,7 @@ import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
@@ -233,7 +234,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 
 		TextView startTextview = startItem.findViewById(R.id.title);
 		startTextview.setText(simulation.isRouteAnimating() ? R.string.shared_string_control_stop : R.string.shared_string_control_start);
-		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop  : R.drawable.ic_play_dark,
+		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop : R.drawable.ic_play_dark,
 				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 	}
 
@@ -283,5 +284,18 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	public void onSelectGpxFile(@NonNull GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
 		updateCard();
+	}
+
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getView().<TextViewEx>findViewById(R.id.title).getText().toString(),
+				getTitle(trackItem),
+				getTitle(speedItem),
+				getTitle(startItem));
+	}
+
+	private String getTitle(final LinearLayout item) {
+		return item.<TextViewEx>findViewById(R.id.title).getText().toString();
 	}
 }
