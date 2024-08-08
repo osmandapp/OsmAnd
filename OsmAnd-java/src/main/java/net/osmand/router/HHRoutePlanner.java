@@ -174,6 +174,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx == null) {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
+		hctx.rctx.mapIndexReaderFilter = new HashSet<>();
+		for (HHRouteRegionPointsCtx<T> reg : hctx.regions) {
+			hctx.rctx.mapIndexReaderFilter.add(reg.file);
+		}
 		filterPointsBasedOnConfiguration(hctx);
 
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();

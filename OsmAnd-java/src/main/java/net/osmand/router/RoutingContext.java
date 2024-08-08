@@ -2,13 +2,7 @@ package net.osmand.router;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -73,6 +67,7 @@ public class RoutingContext {
 	public boolean targetTransportStop;
 	public int dijkstraMode;
 	public boolean publicTransport;
+	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
 	
 	
 	public RouteCalculationProgress calculationProgress;
@@ -374,6 +369,9 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
+			if (mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
+				continue;
+			}
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
 				boolean intersect = false;
