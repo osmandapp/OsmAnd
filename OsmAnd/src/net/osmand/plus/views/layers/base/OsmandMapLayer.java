@@ -79,6 +79,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
+	protected boolean isInitialized;
 
 	//OpenGL
 	protected MapMarkersCollection mapMarkersCollection;
@@ -226,13 +227,18 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return false;
 	}
 
-	public void initLayer(@NonNull OsmandMapTileView view) {
+	public void setView(@NonNull OsmandMapTileView view) {
 		this.view = view;
+	}
+
+	public void initLayer() {
+		isInitialized = true;
 	}
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		checkLayerInitialized();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
@@ -241,6 +247,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (this.density != density) {
 			this.density = density;
 			updateResources();
+		}
+	}
+
+	protected void checkLayerInitialized() {
+		if (!isInitialized) {
+			if (view == null) {
+				throw new IllegalStateException("Layer's view should be set prior to calling init");
+			}
+			initLayer();
 		}
 	}
 

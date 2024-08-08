@@ -76,8 +76,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		createContextMarker();
 	}
 

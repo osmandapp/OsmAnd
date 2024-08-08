@@ -104,8 +104,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = getApplication();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();

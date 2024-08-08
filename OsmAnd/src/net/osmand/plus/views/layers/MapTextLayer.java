@@ -53,8 +53,8 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		paintTextIcon = new Paint();
 		updateTextSize();

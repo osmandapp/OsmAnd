@@ -237,8 +237,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = view.getApplication();
 		settings = app.getSettings();
@@ -267,6 +267,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	public boolean isInTrackAppearanceMode() {
+		checkLayerInitialized();
 		return gpxAppearanceHelper.isInTrackAppearanceMode();
 	}
 
