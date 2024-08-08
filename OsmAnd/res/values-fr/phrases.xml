@@ -1404,6 +1404,13 @@
     <string name="poi_payment_coins_0_5">Pièces de 0,5$</string>
     <string name="poi_payment_cash_yes">Espèces</string>
     <string name="poi_payment_cash_no">Espèces non acceptées</string>
+    <string name="payment_cash_xlt_bule_yes">Espèce monnaie locale La Bulle</string>
+    <string name="payment_cash_xlt_eusk_yes">Espèce monnaie locale L'Eusko</string>
+    <string name="payment_cash_xlt_flor_yes">Espèce monnaie locale Le Florain</string>
+    <string name="payment_cash_xlt_pive_yes">Espèce monnaie locale La Pive</string>
+    <string name="payment_cash_xlt_roue_yes">Espèce monnaie locale La Roue</string>
+    <string name="payment_cash_xlt_valh_yes">Espèce monnaie locale Le Val'heureux </string>
+    <string name="payment_cash_xlt_zinn_yes">Espèce monnaie locale La Zinne</string>
     <string name="poi_payment_debit_cards_yes">Cartes de débit</string>
     <string name="poi_payment_debit_cards_no">Cartes de débit non acceptées</string>
     <string name="poi_social_facility_for_senior">Seniors</string>
@@ -3141,6 +3148,9 @@
     <string name="poi_end_date">Date de fin</string>
     <string name="poi_payment_contactless_yes">Sans contact</string>
     <string name="poi_payment_contactless_no">Sans contact non accepté</string>
+    <string name="payment_contactless_xlt_bule_yes">Monnaie locale La Bulle numérique</string>
+    <string name="payment_contactless_xlt_eusk_yes">Monnaie locale L'Eusko numérique</string>
+    <string name="payment_contactless_xlt_flor_yes">Monnaie locale Le Florain numérique</string>
     <string name="poi_hazard_nuclear">Risque nucléaire</string>
     <string name="poi_hazard_erosion">Risque d\'érosion</string>
     <string name="poi_hazard_avalanche">Risque d\'avalanche</string>
