@@ -5643,33 +5643,23 @@
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">"• Noua opțiune de colorare a terenului \"Altitudine\"
 \n
-\n
 \n • Palete de culori personalizate pentru teren, trasee și rute
-\n
 \n
 \n • Variantă 3D la pictogramele poziției locației
 \n
-\n
 \n • Acțiunile rapide se pot atribui tastaturilor externe
-\n
 \n
 \n • Vremea: Reîmprospătare UI, adăugare animație vânt
 \n
-\n
 \n •  Îmbunătățiri ale traseelor 3D: noi opțiuni de vizualizare și colorizare
-\n
 \n
 \n • Selecție extinsă de rute turistice pe hartă
 \n
-\n
 \n • S-a adăugat opțiunea temei app pentru a urmări modul hartă
-\n
 \n
 \n • Statistici, sortare și căutare fixă a pistelor
 \n
-\n
 \n •  Editare OSM: s-a eliminat metoda de autorizare a login-ului / parolei
-\n
 \n
 \n • Trecerea la foaia de partajare a sistemului începând cu Android 14
 \n
@@ -5866,4 +5856,6 @@
     <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
     <string name="hugerock_promo">Hugerock Promo pentru %1$s luni</string>
     <string name="route_roundabout_exit">Luați-o pe ieșirea %1$d</string>
+    <string name="help_article_map_routes_name">Rute</string>
+    <string name="compass_click_north_is_up">Pentru a schimba modul de orientare, faceți clic și țineți apăsat</string>
 </resources>
