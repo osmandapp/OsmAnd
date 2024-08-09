@@ -53,6 +53,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -286,6 +287,14 @@ public class MapSelectionHelper {
 			Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res;
 			if (mapContext != null) {
 				res = mapContext.getPolygonsAndPoints(NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y), rendererView.getZoomLevel());
+
+				for (Map.Entry<RenderedObject, List<RenderedObject>> entry : res.entrySet()) {
+					System.out.println(entry.getKey());
+					for (RenderedObject m : entry.getValue()) {
+						System.out.println("        " + m);
+					}
+					System.out.println("------------------------");
+				}
 			}
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
