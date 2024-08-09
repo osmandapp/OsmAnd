@@ -5844,4 +5844,7 @@
 \nCPU (tempo di inattività): %3$s
 \nCPU (attesa GPU): %4$s</string>
     <string name="compass_click_north_is_up">Per cambiare la modalità di orientamento fare clic e tenere premuto</string>
+    <string name="help_article_map_routes_name">Percorsi</string>
+    <string name="route_roundabout_exit">Prendi l\'uscita %1$d</string>
+    <string name="help_article_map_tracks_name">Tracce</string>
 </resources>
