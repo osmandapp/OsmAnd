@@ -870,7 +870,7 @@
     <string name="incomplete_locale">incomplet</string>
     <string name="search_villages_and_postcodes">Căută mai multe sate/coduri poștale</string>
     <string name="no_buildings_found">Nicio clădire găsită.</string>
-    <string name="route_descr_lat_lon">Latitudine %1$.3f, longitudine %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="map_widget_max_speed">Limită de viteză</string>
     <string name="rendering_attr_noAdminboundaries_name">Limite</string>
     <string name="rendering_attr_noAdminboundaries_description">Nu afișa limitele regionale (niveluri administrative 5-9).</string>
@@ -2741,7 +2741,7 @@
     <string name="open_wikipedia_link_online">Deschideți linkul Wikipedia online</string>
     <string name="open_wikipedia_link_online_description">Link-ul va fi deschis într-un browser web.</string>
     <string name="read_wikipedia_offline">Citiți Wikipedia offline</string>
-    <string name="button_rate">Evaluați</string>
+    <string name="button_rate">Evaluează</string>
     <string name="sett_no_ext_input">Niciunul</string>
     <string name="reset_all_profile_settings">Resetați toate setările profilului\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -4967,7 +4967,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflictul</string>
+    <string name="cloud_conflict">Conflict</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>
@@ -5865,5 +5865,5 @@
     <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
     <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
     <string name="hugerock_promo">Hugerock Promo pentru %1$s luni</string>
-    <string name="route_roundabout_exit">Luați %1$d ieșire</string>
+    <string name="route_roundabout_exit">Luați-o pe ieșirea %1$d</string>
 </resources>
