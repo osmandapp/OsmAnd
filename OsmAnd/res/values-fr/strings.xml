@@ -5844,4 +5844,7 @@
     <string name="detailed_track_guidance_description">Pour améliorer votre navigation, OsmAnd va déplacer la trace sur les routes.</string>
     <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
     <string name="compass_click_north_is_up">Pour modifier le mode d\'orientation, faites un appui long</string>
+    <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
+    <string name="help_article_map_routes_name">Itinéraires</string>
+    <string name="help_article_map_tracks_name">Traces</string>
 </resources>

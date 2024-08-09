@@ -148,7 +148,7 @@
     <string name="send_report">Pošalji izveštaj</string>
     <string name="none_region_found">Preuzete mape na memorijsku karticu nisu nađene.</string>
     <string name="any_poi">Bilo koji</string>
-    <string name="layer_route">Rute</string>
+    <string name="layer_route">Ruta</string>
     <string name="auto_follow_route_navigation_descr">Auto centriranje.</string>
     <string name="auto_follow_location_enabled">Auto centriranje mape.</string>
     <string name="day_night_info_description">Izlazak sunca: %1$s 
@@ -1361,11 +1361,11 @@
     <string name="gpx_info_subtracks">Podtrase: %1$s</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nZadrži radi prikaza opcija"</string>
+\nPritisni duže za opcije"</string>
     <string name="delay_navigation_start">Automatski pokreni vodiča za skretanje</string>
     <string name="selected_gpx_info_show">"
 \n
-\nZadrži radi prikaza mape"</string>
+\nPritisni duže za prikaz na mapi"</string>
     <string name="shared_string_waypoint">Međuodredište</string>
     <string name="map_widget_plain_time">Trenutno vreme</string>
     <string name="loading_smth">Učitavanje %1$s…</string>
@@ -5859,4 +5859,7 @@
     <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju snimljenu stazi s obližnjim putevima za bolju, detaljnuju navigaciju.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
     <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
+    <string name="help_article_map_tracks_name">Snimljene trase</string>
+    <string name="help_article_map_routes_name">Rute</string>
+    <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
 </resources>
