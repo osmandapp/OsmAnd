@@ -4967,7 +4967,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflictul</string>
+    <string name="cloud_conflict">Conflict</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>
