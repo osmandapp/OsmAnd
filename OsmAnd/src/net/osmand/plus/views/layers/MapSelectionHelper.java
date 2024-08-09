@@ -294,6 +294,7 @@ public class MapSelectionHelper {
 						System.out.println("        " + m);
 					}
 					System.out.println("------------------------");
+					result.selectedObjects.put(entry.getKey(), mapLayers.getPoiMapLayer());
 				}
 			}
 			int delta = 20;

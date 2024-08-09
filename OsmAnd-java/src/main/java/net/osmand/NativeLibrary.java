@@ -734,7 +734,14 @@ public class NativeLibrary {
 
 		@Override
 		public String toString() {
-			String s = id != null ? super.toString() : name;
+			String s = /*getClass().getSimpleName() + " " +*/ name;
+			if (id != null && id > 0) {
+				if (x.size() > 1 && String.valueOf(id / 2).length() > 10) {
+					s += "(" + id + ") OSM relation";
+				} else {
+					s += "(" + id + ") https://osm.org/" + (x.size() > 1 ? "way/" : "node/") + (id / 2);
+				}
+			}
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				s += " " + entry.getKey() + ":" + entry.getValue();
 			}

@@ -32,6 +32,7 @@ import net.osmand.core.jni.MapPrimitivesProvider.Mode;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
+import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
@@ -681,6 +682,9 @@ public class MapRendererContext {
 				for (int j = 0; j < list.size(); j++) {
 					resList.add(convert(list.get(j)));
 				}
+				/*For test only*/
+				key.setName(key.getName() + " [inside: " + list.size() + " ] ");
+				/*---*/
 				res.put(key, resList);
 			}
 		}
@@ -714,6 +718,21 @@ public class MapRendererContext {
 			rect.expand(p.getX(), p.getY(), p.getX(), p.getY());
 		}
 		res.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
+		ObfMapObject obfMapObject;
+		try {
+			obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
+		} catch (Exception eObfMapObject) {
+			obfMapObject = null;
+		}
+		if (obfMapObject != null) {
+			res.setId(obfMapObject.getId().getOsmId());
+		}
+
+		/*For test only*/
+		if (res.getName().isEmpty()) {
+			res.setName(res.toString());
+		}
+		/*---*/
 		return res;
 	}
 }
