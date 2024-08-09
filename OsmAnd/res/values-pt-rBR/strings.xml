@@ -5836,4 +5836,14 @@
     <string name="quick_action_routes_summary">Uma alternância para mostrar ou ocultar %1$s no mapa.</string>
     <string name="hugerock_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
     <string name="shared_string_automatically">Automaticamente</string>
+    <string name="rendering_avg_info_details">FPS dos últimos 1k fotogramas: %1$s
+\nCPU (mosaicos): %2$s
+\nCPU (tempo de inatividade): %3$s
+\nCPU (à espera da GPU): %4$s</string>
+    <string name="hugerock_promo">Promoção Hugerock para %1$s meses</string>
+    <string name="resting_position">Posição de repouso</string>
+    <string name="resting_navigation_position">Posição de repouso e navegação</string>
+    <string name="help_article_map_tracks_name">Trilhas</string>
+    <string name="help_article_map_routes_name">Rotas</string>
+    <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha pressionado</string>
 </resources>
