@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary;
 import net.osmand.core.jni.ElevationConfiguration;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
@@ -21,6 +22,8 @@ import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
+import net.osmand.core.jni.MapObject;
+import net.osmand.core.jni.MapObjectList;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -32,15 +35,18 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.PolygonsAndPointsHash;
 import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -59,6 +65,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -659,5 +666,54 @@ public class MapRendererContext {
 		public static ProviderType getProviderType(boolean vectorLayerEnabled) {
 			return vectorLayerEnabled ? MAIN : CONTOUR_LINES;
 		}
+	}
+
+	public Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> getPolygonsAndPoints(PointI point, ZoomLevel zoomLevel) {
+		PolygonsAndPointsHash polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+		Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res = new HashMap<>();
+		if (polygons.size() > 0) {
+			MapObjectList keys = polygons.keys();
+			for (int i = 0; i < keys.size(); i++) {
+				MapObject polygon = keys.get(i);
+				NativeLibrary.RenderedObject key = convert(polygon);
+				MapObjectList list = polygons.get(polygon);
+				List<NativeLibrary.RenderedObject> resList = new ArrayList<>();
+				for (int j = 0; j < list.size(); j++) {
+					resList.add(convert(list.get(j)));
+				}
+				res.put(key, resList);
+			}
+		}
+		return res;
+	}
+
+	private NativeLibrary.RenderedObject convert(MapObject mapObject) {
+		NativeLibrary.RenderedObject res = new NativeLibrary.RenderedObject();
+		QStringStringHash tags = mapObject.getResolvedAttributes();
+		QStringList tagsKeys = tags.keys();
+		for (int i = 0; i < tagsKeys.size(); i++) {
+			String key = tagsKeys.get(i);
+			String value = tags.get(key);
+			res.putTag(key, value);
+		}
+		String name = mapObject.getCaptionInNativeLanguage();
+		res.setName(name);
+		QStringStringHash names = mapObject.getCaptionsInAllLanguages();
+		QStringList namesKeys = names.keys();
+		for (int i = 0; i < namesKeys.size(); i++) {
+			String key = namesKeys.get(i);
+			String value = names.get(key);
+			res.setName(key, value);
+		}
+
+		QVectorPointI points31 = mapObject.getPoints31();
+		QuadRect rect = new QuadRect();
+		for (int i = 0; i < points31.size(); i++) {
+			PointI p = points31.get(i);
+			res.addLocation(p.getX(), p.getY());
+			rect.expand(p.getX(), p.getY(), p.getX(), p.getY());
+		}
+		res.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
+		return res;
 	}
 }

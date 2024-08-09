@@ -20,10 +20,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -51,6 +53,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -66,6 +69,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -77,6 +81,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.annotation.Native;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -278,6 +283,19 @@ public class MapSelectionHelper {
 	                                     @NonNull PointF point) {
 		MapRendererView rendererView = view.getMapRenderer();
 		if (rendererView != null) {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res;
+			if (mapContext != null) {
+				res = mapContext.getPolygonsAndPoints(NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y), rendererView.getZoomLevel());
+
+				for (Map.Entry<RenderedObject, List<RenderedObject>> entry : res.entrySet()) {
+					System.out.println(entry.getKey());
+					for (RenderedObject m : entry.getValue()) {
+						System.out.println("        " + m);
+					}
+					System.out.println("------------------------");
+				}
+			}
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);

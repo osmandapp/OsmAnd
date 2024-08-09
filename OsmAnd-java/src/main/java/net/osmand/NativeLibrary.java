@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import net.osmand.router.*;
@@ -560,6 +561,7 @@ public class NativeLibrary {
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
+		private int hashCode;
 
 		public Map<String, String> getTags() {
 			return tags;
@@ -689,6 +691,54 @@ public class NativeLibrary {
 				}
 			}
 			return null;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null || getClass() != o.getClass())
+				return false;
+			if (tags.size() != ((RenderedObject) o).tags.size())
+				return false;
+			if (x.size() != ((RenderedObject) o).x.size())
+				return false;
+			if (!name.equals(((RenderedObject) o).name)) {
+				return false;
+			}
+			Map<String, String> otherTags = ((RenderedObject) o).tags;
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				if (!otherTags.containsKey(entry.getKey())) {
+					return false;
+				}
+				if (!otherTags.get(entry.getKey()).equals(entry.getValue())) {
+					return false;
+				}
+			}
+			Map<String, String> otherNames = ((RenderedObject) o).names;
+			for (Map.Entry<String, String> entry : names.entrySet()) {
+				if (!otherNames.containsKey(entry.getKey())) {
+					return false;
+				}
+				if (!otherNames.get(entry.getKey()).equals(entry.getValue())) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(x, y, tags, names);
+		}
+
+		@Override
+		public String toString() {
+			String s = id != null ? super.toString() : name;
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				s += " " + entry.getKey() + ":" + entry.getValue();
+			}
+			return s;
 		}
 	}
 }
