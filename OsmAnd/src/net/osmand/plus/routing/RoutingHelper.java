@@ -775,6 +775,10 @@ public class RoutingHelper {
 		return route.getLeftTimeToNextIntermediate(lastFixedLocation);
 	}
 
+	public boolean hasIntermediatePointsToPass() {
+		return route.getIntermediatePointsToPass() > 0;
+	}
+
 	public OsmandSettings getSettings() {
 		return settings;
 	}
