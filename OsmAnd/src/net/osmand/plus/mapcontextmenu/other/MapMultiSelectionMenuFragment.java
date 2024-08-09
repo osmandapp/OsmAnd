@@ -177,6 +177,12 @@ public class MapMultiSelectionMenuFragment extends Fragment
 		}
 	}
 
+	public void updateContent() {
+		if (listAdapter != null) {
+			listAdapter.notifyDataSetChanged();
+		}
+	}
+
 	private void updateNightMode() {
 		menu.updateNightMode();
 		nightMode = !menu.isLight();
