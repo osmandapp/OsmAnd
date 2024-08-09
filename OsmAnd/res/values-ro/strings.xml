@@ -5865,4 +5865,5 @@
     <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
     <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
     <string name="hugerock_promo">Hugerock Promo pentru %1$s luni</string>
+    <string name="route_roundabout_exit">Luați %1$d ieșire</string>
 </resources>
