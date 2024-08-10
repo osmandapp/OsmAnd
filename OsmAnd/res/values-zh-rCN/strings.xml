@@ -5618,7 +5618,7 @@
     <string name="quick_action_terrain_color_scheme">地形配色方案</string>
     <string name="location_radius">定位半径</string>
     <string name="quick_action_routes_summary">在地图上显示或隐藏 %1$s 的切换按钮。</string>
-    <string name="auto_25_chars_route_tr"></string>
+    <string name="auto_25_chars_route_tr"/>
     <string name="view_angle">视线角</string>
     <string name="quick_action_directions_from">起始点</string>
     <string name="navigation_position">导航位置</string>
@@ -5641,4 +5641,26 @@
 \nCPU （图砖）： %2$s
 \nCPU （空闲时间）： %3$s
 \nCPU（等待 GPU）：%4$s</string>
+    <string name="quick_action_audio_note">音频注记</string>
+    <string name="quick_action_photo_note">照片注记</string>
+    <string name="shared_string_all_icons">所有图标</string>
+    <string name="quick_action_terrain">地形着色类型</string>
+    <string name="quick_action_map_style">地图样式</string>
+    <string name="quick_action_track_waypoint">轨迹路点</string>
+    <string name="weather_screen">天气画面</string>
+    <string name="quick_action_verb_turn_on_off">打开 / 关闭</string>
+    <string name="quick_action_verb_start_stop">开始 / 停止</string>
+    <string name="quick_action_destination">目的地</string>
+    <string name="quick_action_to_my_location">到我的位置</string>
+    <string name="shared_string_simulate">模拟</string>
+    <string name="quick_action_display_position_in_center">显示位置始终居中</string>
+    <string name="quick_action_video_note">视频注记</string>
+    <string name="quick_action_parking_place">停车位</string>
+    <string name="quick_action_verb_show_hide">显示 / 隐藏</string>
+    <string name="quick_action_verb_pause_resume">暂停 / 恢复</string>
+    <string name="shared_string_set">设置</string>
+    <string name="shared_string_create">创建</string>
+    <string name="shared_string_replace">替换</string>
+    <string name="profile_icon">配置文件图标</string>
+    <string name="quick_action_remove_next_destination">下一个目的地点</string>
 </resources>
