@@ -5848,4 +5848,7 @@
     <string name="driving_region_india">Hindujo</string>
     <string name="ask_every_time">Ĉiam demandi</string>
     <string name="compass_click_north_is_up">Por ŝanĝi orientiĝon frapetadu tiun ĉi butonon</string>
+    <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
+    <string name="help_article_map_routes_name">Kursoj</string>
+    <string name="help_article_map_tracks_name">Spuroj</string>
 </resources>
