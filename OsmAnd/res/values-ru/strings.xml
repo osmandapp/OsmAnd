@@ -5857,4 +5857,7 @@
     <string name="detailed_track_guidance_description">OsmAnd сопоставит ваш трек с близлежащими дорогами для улучшенного пошагового руководства.</string>
     <string name="quick_action_routes_summary">Переключатель для отображения или скрытия %1$s на карте.</string>
     <string name="compass_click_north_is_up">Чтобы изменить режим ориентации, нажмите и удерживайте</string>
+    <string name="help_article_map_tracks_name">Треки</string>
+    <string name="help_article_map_routes_name">Маршруты</string>
+    <string name="route_roundabout_exit">Сверните на %1$d съезде</string>
 </resources>
