@@ -827,7 +827,7 @@
     <string name="poi_quarry">矿场</string>
     <string name="poi_landfill">垃圾填埋场</string>
     <string name="poi_korfbal">合球</string>
-    <string name="poi_mountain_pass">山囗／隘（ài）口</string>
+    <string name="poi_mountain_pass">隘口</string>
     <string name="poi_ambulance_station">救护站</string>
     <string name="poi_fire_hose">消防水带</string>
     <string name="poi_fire_extinguisher">灭火器</string>
@@ -896,7 +896,7 @@
     <string name="poi_abandoned">遗弃的</string>
     <string name="poi_adit">矿道口</string>
     <string name="poi_emergency_access_point">紧急逃生通道</string>
-    <string name="poi_grit_bin">砂箱</string>
+    <string name="poi_grit_bin">消防砂箱</string>
     <string name="poi_second_hand">二手商店</string>
     <string name="poi_kiosk">售货亭</string>
     <string name="poi_herbalist">草药店</string>
@@ -2867,4 +2867,18 @@
     <string name="poi_craft_floorer">地板工</string>
     <string name="poi_craft_builder">建筑工</string>
     <string name="poi_craft_confectionery">糖果生产</string>
+    <string name="poi_shop_fuel">燃料商店</string>
+    <string name="poi_trade_wood">木材供应</string>
+    <string name="poi_trade_agricultural_supplies">农业用品供应</string>
+    <string name="poi_trade_building_supplies">建筑材料供应</string>
+    <string name="poi_waste_cigarettes">香烟</string>
+    <string name="poi_aerialway_summer_access_entry">夏季通行：只能进入</string>
+    <string name="poi_aerialway_summer_access_exit">夏季通行：只能出去</string>
+    <string name="poi_aerialway_summer_access_both">夏季通行：进出皆可</string>
+    <string name="poi_water_place_access_multifamilies">多户家庭</string>
+    <string name="poi_crossfit">混合健身</string>
+    <string name="poi_access_yes">允许通行</string>
+    <string name="poi_trade_plumbing">管道供应</string>
+    <string name="poi_waste_dog_excrement">狗排泄物</string>
+    <string name="poi_assembly_point">集合点</string>
 </resources>
