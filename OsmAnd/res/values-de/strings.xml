@@ -3589,7 +3589,7 @@
     <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
     <string name="turn_screen_on_power_button">Einschaltknopf</string>
     <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
-    <string name="turn_screen_on_wake_time_descr">Wählen Sie den Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen. („%1$s“, um keinen Timeout anzuwenden.)</string>
+    <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. („%1$s“, um keinen Timeout anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
     <string name="screen_timeout_descr">Wenn „%1$s“ eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
