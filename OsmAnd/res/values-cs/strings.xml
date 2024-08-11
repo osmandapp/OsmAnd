@@ -5730,11 +5730,18 @@
     <string name="quick_action_move_map_right">Mapa doprava</string>
     <string name="quick_action_move_map_down">Mapa dolů</string>
     <string name="quick_action_map_style">Styl mapy</string>
-    <string name="driving_region_uk">Spojené království a podobné</string>
+    <string name="driving_region_uk">Velká Británie a podobné země</string>
     <string name="auto_25_chars_route_kl">Držte se vlevo</string>
     <string name="auto_25_chars_route_kr">Držte se vpravo</string>
     <string name="rendering_avg_info_details">FPS za posledních 1000 snímků: %1$s
 \nCPU (dlaždice): %2$s
 \nCPU (nečinnost): %3$s
 \nCPU (čeká na GPU): %4$s</string>
+    <string name="quick_action_parking_place">Parkoviště</string>
+    <string name="quick_action_verb_show_hide">Zobrazit / skrýt</string>
+    <string name="shared_string_replace">Nahradit</string>
+    <string name="quick_action_track_waypoint">Bod trasy</string>
+    <string name="quick_action_verb_turn_on_off">Zapnout / vypnout</string>
+    <string name="shared_string_set">Nastavit</string>
+    <string name="shared_string_colors">Barvy</string>
 </resources>
