@@ -278,7 +278,6 @@ You will be able to pair this scanner again at any time.</string>
 	<string name="quick_action_routes_summary">A toggle to show or hide %1$s on the map.</string>
 	<string name="hugerock_promo">Hugerock Promo for %1$s months</string>
 	<string name="hugerock_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
-	<string name="driving_region_uk">UK and similar</string>
 	<string name="driving_region_india">India</string>
 	<string name="auto_25_chars_route_kl">Keep left</string>
 	<string name="auto_25_chars_route_kr">Keep right</string>
@@ -306,7 +305,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
     <string name="quick_action_directions_from">Start point</string>
     <string name="quick_action_destination">Destination</string>
-    <string name="quick_action_remove_next_destination">Next destination point</string>
     <string name="quick_action_to_my_location">To My Location</string>
     <string name="quick_action_move_map_left">Map to the left</string>
     <string name="quick_action_move_map_right">Map to the right</string>
@@ -322,9 +320,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="shared_string_simulate">Simulate</string>
     <string name="quick_action_display_position_in_center">Display position always in center</string>
     <string name="quick_action_terrain">Terrain colorization type</string>
-    <string name="quick_action_map_underlay">Underlay</string>
-    <string name="quick_action_map_overlay">Overlay</string>
-    <string name="quick_action_map_style">Map style</string>
     <string name="quick_action_first_intermediate">First intermediate</string>
     <string name="quick_action_audio_note">Audio note</string>
     <string name="quick_action_video_note">Video note</string>
