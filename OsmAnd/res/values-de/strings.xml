@@ -5661,7 +5661,7 @@
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
-    <string name="fix_north_up">Festen Norden oben aktivieren</string>
+    <string name="fix_north_up">Norden oben fixieren</string>
     <string name="fix_north_up_descr">In der Kartenausrichtung \"Nord oben\" Karte nicht mit Gesten drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
