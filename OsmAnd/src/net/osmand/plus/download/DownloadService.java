@@ -73,7 +73,7 @@ public class DownloadService extends Service {
 		app.setDownloadService(null);
 
 		// remove notification
-		stopForeground(Boolean.TRUE);
+		stopForeground(STOP_FOREGROUND_REMOVE);
 		app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD);
 		app.runInUIThread(() -> app.getNotificationHelper().refreshNotification(NotificationType.DOWNLOAD), 500);
 	}

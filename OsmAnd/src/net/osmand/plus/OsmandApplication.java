@@ -685,22 +685,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
-		NavigationService navigationService = this.navigationService;
-		if (navigationService != null) {
-			if (!navigationService.isUsedBy(NavigationService.USED_BY_CAR_APP)) {
-				startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
-			}
-		} else {
-			startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
-		}
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = false;
-		NavigationService navigationService = this.navigationService;
-		if (navigationService != null) {
-			navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
-		}
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
@@ -1001,16 +989,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(@NonNull Context context, int usageIntent) {
-		NavigationService service = getNavigationService();
-		if (service != null) {
-			usageIntent |= service.getUsedBy();
-			service.stopSelf();
-		}
+		LOG.info(">>>> APP - startNavigationService");
 		Intent intent = new Intent(context, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				if (isAppInForeground()) {
+					LOG.info(">>>> APP --- startForegroundService");
 					context.startForegroundService(intent);
 				}
 			});
