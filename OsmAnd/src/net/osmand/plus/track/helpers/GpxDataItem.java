@@ -88,11 +88,10 @@ public class GpxDataItem extends DataItem {
 				setParameter(WIDTH, gpxFile.getWidth(null));
 				break;
 			case SHOW_ARROWS:
-				setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
+				setParameter(SHOW_ARROWS, gpxFile.isShowArrowsSet() ? gpxFile.isShowArrows() : null);
 				break;
 			case SHOW_START_FINISH:
-				setParameter(TRACK_VISUALIZATION_TYPE, gpxFile.get3DVisualizationType());
-				setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
+				setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinishSet() ? gpxFile.isShowStartFinish() : null);
 				break;
 			case SPLIT_TYPE:
 				if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
@@ -112,6 +111,11 @@ public class GpxDataItem extends DataItem {
 					GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
 					ColoringType coloringType = ColoringType.valueOf(scaleType);
 					setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
+				}
+				break;
+			case COLOR_PALETTE:
+				if (!Algorithms.isEmpty(gpxFile.getGradientColorPalette())) {
+					setParameter(COLOR_PALETTE, gpxFile.getGradientColorPalette());
 				}
 				break;
 			case TRACK_VISUALIZATION_TYPE:

@@ -42,6 +42,7 @@
 		android:id="@+id/add_button"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:transitionName="add_button_shared_element_container"
 		app:dialogButtonTitle="@string/shared_string_add"
 		app:dialogButtonType="secondary" />
 

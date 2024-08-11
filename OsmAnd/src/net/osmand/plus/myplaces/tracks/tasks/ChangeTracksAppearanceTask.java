@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.tasks;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
@@ -130,8 +131,12 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinish);
 		}
 		String trackVisualizationType = data.getParameter(TRACK_VISUALIZATION_TYPE);
-		if(trackVisualizationType != null) {
+		if (trackVisualizationType != null) {
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackVisualizationType);
+		}
+		String gradientPalette = data.getParameter(COLOR_PALETTE);
+		if (gradientPalette != null) {
+			settings.CURRENT_GRADIENT_PALETTE.set(gradientPalette);
 		}
 	}
 

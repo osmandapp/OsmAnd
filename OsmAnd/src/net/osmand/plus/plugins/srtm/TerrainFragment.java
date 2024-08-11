@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,16 +23,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.github.mikephil.charting.charts.GradientChart;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+
+import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -45,6 +61,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,17 +81,17 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private TextView coloSchemeTv;
 	private TextView cacheSizeValueTv;
 
-	private View legend;
-
 	private TextView downloadDescriptionTv;
 	private TextView descriptionTv;
 	private TextView stateTv;
 	private SwitchCompat switchCompat;
 	private ImageView iconIv;
+	private ImageView proIv;
 	private LinearLayout emptyState;
 	private View emptyStateDivider;
 	private LinearLayout contentContainer;
 	private View titleBottomDivider;
+	private GradientChart gradientChart;
 
 	private DownloadMapsCard downloadMapsCard;
 
@@ -112,8 +129,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		zoomLevelsTv = root.findViewById(R.id.zoom_value);
 		coloSchemeTv = root.findViewById(R.id.color_scheme_name);
 		cacheSizeValueTv = root.findViewById(R.id.cache_size_value);
-
-		legend = root.findViewById(R.id.legend);
+		View cacheButton = root.findViewById(R.id.cache_button);
+		cacheButton.setOnClickListener(view -> showCacheScreen());
 
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
 		TextView titleTv = root.findViewById(R.id.title_tv);
@@ -126,6 +143,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		emptyStateDivider = root.findViewById(R.id.empty_state_divider);
 		stateTv = root.findViewById(R.id.state_tv);
 		iconIv = root.findViewById(R.id.icon_iv);
+		proIv = root.findViewById(R.id.pro_icon);
+		gradientChart = root.findViewById(R.id.chart);
+		View modifyButton = root.findViewById(R.id.button_modify);
 		downloadMapsCard = new DownloadMapsCard(app, srtmPlugin, root.findViewById(R.id.download_maps_card), nightMode);
 
 		titleTv.setText(R.string.shared_string_terrain);
@@ -137,10 +157,59 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		switchCompat.setOnClickListener(this);
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
+		modifyButton.setOnClickListener(view -> {
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				if (InAppPurchaseUtils.isColoringTypeAvailable(app)) {
+					activity.getDashboard().hideDashboard();
+					FragmentManager manager = activity.getSupportFragmentManager();
+					ModifyGradientFragment.showInstance(manager, srtmPlugin.getTerrainMode().getType());
+				} else {
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+				}
+			}
+		});
+
 		setupColorSchemeCard(root);
 		setupCacheSizeCard();
 		updateUiMode();
 		return root;
+	}
+
+	private void updateChart() {
+		int labelsColor = ContextCompat.getColor(app, R.color.text_color_secondary_light);
+		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
+
+		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
+		TerrainMode mode = srtmPlugin.getTerrainMode();
+		ColorPalette colorPalette = app.getColorPaletteHelper().getGradientColorPaletteSync(mode.getMainFile());
+		if (colorPalette != null) {
+			AndroidUiHelper.updateVisibility(gradientChart, true);
+			IAxisValueFormatter formatter = GradientUiHelper.getGradientTypeFormatter(app, mode.getType(), null);
+			LineData barData = ChartUtils.buildGradientChart(app, gradientChart, colorPalette, formatter, nightMode);
+
+			gradientChart.setData(barData);
+			gradientChart.notifyDataSetChanged();
+			gradientChart.invalidate();
+		} else {
+			AndroidUiHelper.updateVisibility(gradientChart, false);
+		}
+	}
+
+	public void showCacheScreen() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
+			intent.putExtra(DownloadActivity.LOCAL_ITEM_TYPE, LocalItemType.CACHE.name());
+			activity.startActivity(intent);
+		}
+	}
+
+	@NonNull
+	private String formatChartValue(float value) {
+		DecimalFormat decimalFormat = new DecimalFormat("#");
+		return decimalFormat.format(value);
 	}
 
 	private void updateColorSchemeCard(TerrainMode mode) {
@@ -152,8 +221,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		int maxZoom = srtmPlugin.getTerrainMaxZoom();
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
-		coloSchemeTv.setText(mode.getDescription());
-		AndroidUiHelper.updateVisibility(legend, mode.getType() == TerrainMode.TerrainType.SLOPE);
+		coloSchemeTv.setText(mode.getType().getName(app));
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {
@@ -161,10 +229,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		colorSchemeBtn.setOnClickListener(view -> {
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
 			for (TerrainMode mode : TerrainMode.values(app)) {
-				menuItems.add(new PopUpMenuItem.Builder(app)
-						.setTitle(mode.getDescription())
-						.setOnClickListener(v -> setupTerrainMode(mode))
-						.create());
+				if (mode.isDefaultMode()) {
+					menuItems.add(new PopUpMenuItem.Builder(app)
+							.setTitle(mode.getType().getName(app))
+							.setOnClickListener(v -> setupTerrainMode(mode))
+							.create());
+				}
 			}
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 			displayData.anchorView = view;
@@ -233,10 +303,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 
-			if (mode.getType() == TerrainMode.TerrainType.HILLSHADE) {
+			if (mode.getType() == HILLSHADE) {
 				descriptionTv.setText(R.string.hillshade_description);
 				downloadDescriptionTv.setText(R.string.hillshade_download_description);
-			} else if (mode.getType() == TerrainMode.TerrainType.SLOPE) {
+			} else if (mode.getType() == SLOPE) {
 				descriptionTv.setText(R.string.slope_legend_description);
 				String wikiString = getString(R.string.shared_string_wikipedia);
 				String readMoreText = String.format(
@@ -246,7 +316,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
 				setupClickableText(descriptionTv, readMoreText, wikiString, wikiSlopeUrl, false);
 				downloadDescriptionTv.setText(R.string.slope_download_description);
-			} else if (mode.getType() == TerrainMode.TerrainType.HEIGHT) {
+			} else if (mode.getType() == HEIGHT) {
 				descriptionTv.setText(R.string.height_legend_description);
 			}
 			downloadMapsCard.updateDownloadSection(getMapActivity());
@@ -258,8 +328,12 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 							: R.color.icon_color_secondary_light));
 			stateTv.setText(R.string.shared_string_disabled);
 		}
+		AndroidUiHelper.updateVisibility(proIv, !InAppPurchaseUtils.isColoringTypeAvailable(app));
+		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);
+		updateChart();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -270,10 +344,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-									String text,
-									String clickableText,
-									String url,
-									boolean medium) {
+	                                String text,
+	                                String clickableText,
+	                                String url,
+	                                boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override

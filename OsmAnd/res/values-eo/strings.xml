@@ -175,7 +175,6 @@
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
     <string name="driving_region_europe_asia">Eŭropo, Azio, Latin-Ameriko kaj similaj</string>
-    <string name="driving_region_uk">Britujo, Hindujo kaj similaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
     <string name="index_name_us">Nordameriko - Usono</string>
@@ -428,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turno-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -715,7 +714,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon turno-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -2064,21 +2063,12 @@
     <string name="configure_screen_quick_action">Rapida ago</string>
     <string name="quick_action_item_action">Ago %d</string>
     <string name="quick_action_item_screen">Ekrano %d</string>
-    <string name="quick_action_add_marker">Aldoni map-markon</string>
-    <string name="quick_action_add_poi">Aldoni interesejon</string>
-    <string name="quick_action_map_style">Ŝanĝi map-stilon</string>
     <string name="quick_action_map_style_switch">Map-stilo ŝanĝita al \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nova sona noto</string>
-    <string name="quick_action_take_video_note">Nova videa noto</string>
-    <string name="quick_action_take_photo_note">Nova fota noto</string>
-    <string name="quick_action_add_osm_bug">Aldoni OSM-rimarkon</string>
     <string name="quick_action_navigation_voice">Voĉo ek/for</string>
     <string name="quick_action_navigation_voice_off">Malsilentigi voĉon</string>
     <string name="quick_action_navigation_voice_on">Silentigi voĉon</string>
-    <string name="quick_action_add_parking">Aldoni parkumejon</string>
     <string name="quick_action_new_action">Aldoni agon</string>
     <string name="quick_action_edit_action">Redakti agon</string>
-    <string name="quick_action_add_favorite">Aldoni ŝatatan ejon</string>
     <string name="dialog_add_action_title">Aldoni agon</string>
     <string name="quick_actions_delete">Forigi agon</string>
     <string name="quick_actions_delete_text">Ĉu forigi la agon “%s”\?</string>
@@ -2114,13 +2104,10 @@
     <string name="quick_action_map_style_action">Aldoni map-stilon</string>
     <string name="quick_action_empty_param_error">Enmetu ĉiujn parametrojn</string>
     <string name="quick_action_map_styles">Map-stiloj</string>
-    <string name="quick_action_map_overlay">Ŝanĝi mapan surtavolon</string>
     <string name="quick_action_map_overlay_title">Mapaj surtavoloj</string>
     <string name="quick_action_map_overlay_action">Aldoni surtavolon</string>
-    <string name="quick_action_map_underlay">Ŝanĝi mapan subtavolon</string>
     <string name="quick_action_map_underlay_title">Mapaj subtavoloj</string>
     <string name="quick_action_map_underlay_action">Aldoni subtavolon</string>
-    <string name="quick_action_map_source">Ŝanĝi mapan fonton</string>
     <string name="quick_action_map_source_title">Map-fontoj</string>
     <string name="quick_action_map_source_action">Aldoni map-fonton</string>
     <string name="quick_action_map_source_switch">Map‑fonto ŝanĝita al \"%s\".</string>
@@ -2318,9 +2305,6 @@
     <string name="download_depth_countours">Maraj profundec-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
     <string name="depth_contour_descr">Maraj profundec-kurboj kaj marnavigadaj punktoj.</string>
-    <string name="quick_action_add_destination">Agordi celon</string>
-    <string name="quick_action_replace_destination">Anstataŭigi celon</string>
-    <string name="quick_action_add_first_intermediate">Aldoni unuan intercelon</string>
     <string name="quick_action_add_destination_desc">Butono por agordi la ekranan centron kiel celon, la antaŭa celo iĝas fina intercelo.</string>
     <string name="quick_action_replace_destination_desc">Butono por agordi la ekranan centron kiel finpunkton, anstataŭigante la antaŭe elektitan celon (se ekzistas).</string>
     <string name="quick_action_add_first_intermediate_desc">Butono por agordi la ekranan centron kiel unuan intercelon.</string>
@@ -3655,7 +3639,6 @@
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
     <string name="use_volume_buttons_as_zoom_descr">Pligrandigi/malgrandigi la mapon per butonoj de sonforteco.</string>
     <string name="lenght_limit_description">Enigu longon de via veturilo, iuj vojaj limigoj aplikiĝas al longaj veturiloj.</string>
-    <string name="quick_action_remove_next_destination">Forigi sekvan celon</string>
     <string name="please_provide_point_name_error">Enigu nomon por la punkto</string>
     <string name="quick_action_remove_next_destination_descr">La markita celo de la kurso estos forigita. Se tio ĉi estos la fina celo, la navigado ĉesos.</string>
     <string name="search_download_wikipedia_maps">Elŝuti vikipediajn mapojn</string>
@@ -3709,7 +3692,6 @@
     <string name="empty_state_my_tracks">Aldoni spuron</string>
     <string name="empty_state_my_tracks_desc">Registru novan spuron aŭ enportu dosierojn de spuroj</string>
     <string name="context_menu_item_add_waypoint">Aldoni navigadpunkton al spuro</string>
-    <string name="quick_action_add_gpx">Aldoni navigadpunkton al spuro</string>
     <string name="map_widget_monitoring">Registri spuron</string>
     <string name="marker_save_as_track">Konservi kiel dosieron de kurso</string>
     <string name="import_track_descr">Elekti dosieron de spuro por ĝin sekvi aŭ enporti el via aparato.</string>
@@ -5012,7 +4994,7 @@
     <string name="value_downloaded_of_mb">Elŝutado %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Preterpasi elŝutadon</string>
     <string name="determine_location">Permesu al OsmAnd trovi vian pozicion</string>
-    <string name="display_position_automatic_descr">Dependas de map-orientiĝo: sube por “Laŭ direkto de movado” kaj centre por ĉiuj aliaj.</string>
+    <string name="display_position_automatic_descr">Dependas de map-orientiĝo: sube por “Direkto de movado” kaj centre por ĉiuj aliaj.</string>
     <string name="shared_string_kilograms">kilogramoj</string>
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
@@ -5738,4 +5720,135 @@
     <string name="key_assignment_add_key">Aldoni klavon</string>
     <string name="key_assignment_add_action">Aldoni agon</string>
     <string name="assigned_keys">Asignitaj klavoj</string>
+    <string name="backup_error_failed_to_transfer_file">Malsukcesis transigi dosiero(j)n el/al la nubo.</string>
+    <string name="contact_support_retry">Reprovu aŭ kontaktu nian subtenan teamon</string>
+    <string name="user_palette">Propra koloro</string>
+    <string name="shared_string_colors">Koloroj</string>
+    <string name="missing_maps_ignore">Uzi elŝutitajn mapojn</string>
+    <string name="daynight_mode_sensor_summary">Uzas lum-sentilon de la aparato kaj agordas map-reĝimon laŭ nivelo de media lumo.</string>
+    <string name="daynight_mode_app_theme_summary">La map-reĝimo agordiĝas laŭ etoso de la aplikaĵo – taga reĝimo por hela etoso kaj nokta reĝimo por malhela etoso.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Aŭtomate baskulas inter taga kaj nokta map-reĝimoj surbaze de tempoj de sunleviĝo kaj sunsubiro.</string>
+    <string name="daynight_mode_night_summary">Ĉiam vidigas la mapon en nokta map-reĝimo, kiu taŭgas por uzi nokte kaj mallume.</string>
+    <string name="daynight_mode_day_summary">Ĉiam vidigas mapon en taga map-reĝimo, kiu plej taŭgas por uzi tage.</string>
+    <string name="daynight_mode_app_theme">Etoso de aplikaĵo</string>
+    <string name="key_event_action_continuous_zoom_out">Seninterrompa malgrandigo</string>
+    <string name="remove_key_assignment_summary">Forigi klav-asignon por la elektita ago.</string>
+    <string name="map_settings_weather_wind_animation">Movbildi venton</string>
+    <string name="tomorrow">Morgaŭ</string>
+    <string name="key_event_action_continuous_zoom_in">Seninterrompa pligrandigo</string>
+    <string name="remove_key_assignment">Forigi klav-asignon</string>
+    <string name="shared_string_modify">Modifi</string>
+    <string name="data_source">Fonto de datumoj</string>
+    <string name="weather_data_sources_prompt">OsmAnd liveras veterajn datumojn el du fontoj:</string>
+    <string name="weather_source_ecmwf_description">Eŭropa Centro por Meztemplimaj Veterprognozoj</string>
+    <string name="weather_source_GFS_description">«Global Forecast System» de «National Centers for Environmental Prediction»</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="missing_maps_ignore_details">Ĉu jam elŝutitaj mapoj taŭgos por via kurso? Navigu per ili se vi ekkonis kun la regiono.</string>
+    <string name="quick_action_terrain_color_scheme">Kolor-skemo de tereno</string>
+    <string name="quick_action_directions_from">Komencpunkto</string>
+    <string name="quick_action_destination">Celo</string>
+    <string name="quick_action_to_my_location">Mia pozicio</string>
+    <string name="quick_action_move_map_left">Mapo maldekstren</string>
+    <string name="quick_action_move_map_right">Mapo dekstren</string>
+    <string name="quick_action_move_map_down">Mapo malsupren</string>
+    <string name="quick_action_new_route">Nova kurso</string>
+    <string name="quick_action_previous_app_profile">Antaŭa aplikaĵa profilo</string>
+    <string name="shared_string_simulate">Simuli</string>
+    <string name="quick_action_terrain">Maniero kolorigi terenon</string>
+    <string name="quick_action_first_intermediate">Unua intercelo</string>
+    <string name="quick_action_video_note">Videa noto</string>
+    <string name="quick_action_photo_note">Fota noto</string>
+    <string name="quick_action_track_waypoint">Navigadpunkto al spuro</string>
+    <string name="quick_action_parking_place">Parkumeja pozicio</string>
+    <string name="quick_action_verb_pause_resume">Paŭzigi / daŭrigi</string>
+    <string name="quick_action_verb_turn_on_off">Ŝalti / malŝalti</string>
+    <string name="quick_action_map_style">Map-stilo</string>
+    <string name="quick_action_remove_next_destination">Sekva celo</string>
+    <string name="weather_screen">Ekrano de vetero</string>
+    <string name="quick_action_verb_start_stop">Ekigi / ĉesigi</string>
+    <string name="quick_action_map_overlay">Surtavolo</string>
+    <string name="quick_action_location_by_gpx">Pozicio laŭ GPX</string>
+    <string name="quick_action_move_map_up">Mapo supren</string>
+    <string name="shared_string_set">Agordi</string>
+    <string name="quick_action_next_app_profile">Sekva aplikaĵa profilo</string>
+    <string name="shared_string_create">Krei</string>
+    <string name="shared_string_replace">Anstataŭigi</string>
+    <string name="quick_action_display_position_in_center">Markilo de nuna pozicio: ĉiam centre</string>
+    <string name="quick_action_audio_note">Sona noto</string>
+    <string name="quick_action_verb_show_hide">Montri / kaŝi</string>
+    <string name="quick_action_map_underlay">Subtavolo</string>
+    <string name="app_profile">Aplikaĵa profilo</string>
+    <string name="release_4_8">• nova eblo por kolorigi terenon: “Altitudo”
+\n
+\n• alĝustigeblaj koloroj por tereno, spuroj kaj kursoj
+\n
+\n• 3-dimensiaj bildsimboloj de pozicio
+\n
+\n• rapida ago povas esti asignita al ekstera klavaro
+\n
+\n• vetero: modernigita fasado, movbilda vento
+\n
+\n• spuroj: plibonigoj al 3-dimensia vidigo
+\n
+\n• etendita elekto de turismaj kursoj sur la mapo
+\n
+\n• eblo agordi aplikaĵan etoson laŭ map-reĝimo
+\n
+\n• riparitaj statistikoj pri spuroj, ordigado kaj serĉado
+\n
+\n• OSM-redaktilo: forigis simplan (uzantnomo+pasvorto) aŭtentigan metodon
+\n
+\n• transiro al la operaciuma koniga folio «System Share Sheet» komence de Android 14
+\n
+\n</string>
+    <string name="rendering_avg_info_description">Kadroj / sekundo dum lastaj 1k kadroj: %1$s
+\nCPU: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Statistiko pri energio (mezume 1 /5 /15 minutoj)</string>
+    <string name="energy_avg_info_description">Bateri-nivelo je minuto: %1$s
+\nKonsumo de energio (mAh): %2$s</string>
+    <string name="rendering_avg_info">Statistiko pri bildigado: (mezume 1 /5 / 15 minutoj)</string>
+    <string name="rendering_value_pale_name">Pala</string>
+    <string name="choose_map_orientation">Elekti map-orientiĝon</string>
+    <string name="profile_icon">Emblemo de profilo</string>
+    <string name="navigation_position_icon">Emblemo de navigi</string>
+    <string name="resting_position_icon_summary">Bildsimbolo montrata kiam vi ne moviĝas.</string>
+    <string name="shared_string_all_icons">Ĉiuj emblemoj</string>
+    <string name="navigation_position_icon_summary">Bildsimbolo montrata kiam vi navigas aŭ moviĝas.</string>
+    <string name="resting_position_icon">Emblemo dum nemoviĝi</string>
+    <string name="navigation_position">Dum navigi</string>
+    <string name="resting_position">Dum nemoviĝi</string>
+    <string name="resting_navigation_position">Dum navigi kaj nemoviĝi</string>
+    <string name="view_angle_description">Vidigi konus-forman figuron reprezentantan la rigardatan direkton.</string>
+    <string name="view_angle">Rigardata angulo</string>
+    <string name="auto_25_chars_route_kr">Veturu je dekstre</string>
+    <string name="auto_25_chars_route_tr">Turniĝu dekstren</string>
+    <string name="auto_25_chars_route_tshr">Turniĝegu dekstren</string>
+    <string name="auto_25_chars_route_tslr">Turniĝetu dekstren</string>
+    <string name="auto_25_chars_route_tl">Turniĝu maldekstren</string>
+    <string name="auto_25_chars_route_tshl">Turniĝegu maldekstren</string>
+    <string name="auto_25_chars_route_tsll">Turniĝetu maldekstren</string>
+    <string name="auto_25_chars_route_tu">Turniĝu malantaŭen</string>
+    <string name="location_radius_description">Vidigi diskon reprezentantan precizon de determinita pozicio.</string>
+    <string name="location_radius">Radiuso de pozicio</string>
+    <string name="rendering_avg_info_details">Kadroj/sekundo dum 1k lastaj kadroj: %1$s
+\nĈefprocesoro (kaheloj): %2$s
+\nĈefprocesoro (senokupa): %3$s
+\nĈefprocesoro (atendas GPU): %4$s</string>
+    <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
+    <string name="driving_region_uk">Britujo kaj similaj</string>
+    <string name="shared_string_automatically">Aŭtomate</string>
+    <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu turno.</string>
+    <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
+    <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
+    <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="driving_region_india">Hindujo</string>
+    <string name="ask_every_time">Ĉiam demandi</string>
+    <string name="compass_click_north_is_up">Por ŝanĝi orientiĝon frapetadu tiun ĉi butonon</string>
+    <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
+    <string name="help_article_map_routes_name">Kursoj</string>
+    <string name="help_article_map_tracks_name">Spuroj</string>
 </resources>

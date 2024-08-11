@@ -10,7 +10,103 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="route_roundabout_exit">Take %1$d exit</string>
+    <string name="help_article_map_tracks_name">Tracks</string>
+    <string name="help_article_map_routes_name">Routes</string>
+	<string name="compass_click_north_is_up">To change orientation mode click and hold</string>
+	<string name="shared_string_automatically">Automatically</string>
+	<string name="ask_every_time">Ask every time</string>
+	<string name="detailed_track_guidance">Detailed track guidance</string>
+	<string name="detailed_track_guidance_description">OsmAnd will match your track to nearby roads for enhanced turn-by-turn guidance.</string>
+	<string name="quick_action_routes_summary">A toggle to show or hide %1$s on the map.</string>
+	<string name="hugerock_promo">Hugerock Promo for %1$s months</string>
+	<string name="hugerock_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+	<string name="driving_region_uk">UK and similar</string>
+	<string name="driving_region_india">India</string>
+	<string name="auto_25_chars_route_kl">Keep left</string>
+	<string name="auto_25_chars_route_kr">Keep right</string>
+	<string name="auto_25_chars_route_tr">Turn right</string>
+	<string name="auto_25_chars_route_tshr">Turn sharply right</string>
+	<string name="auto_25_chars_route_tslr">Turn slightly right</string>
+	<string name="auto_25_chars_route_tl">Turn left</string>
+	<string name="auto_25_chars_route_tshl">Turn sharply left</string>
+	<string name="auto_25_chars_route_tsll">Turn slightly left</string>
+	<string name="auto_25_chars_route_tu">Make U-turn</string>
+	<string name="resting_position">Resting position</string>
+	<string name="navigation_position">Navigation position</string>
+	<string name="resting_navigation_position">Rest &amp; navigation position</string>
+	<string name="view_angle_description">Displays the cone-shaped area you\'re currently facing</string>
+	<string name="view_angle">View angle</string>
+	<string name="location_radius_description">Shows the circular area representing your current location accuracy</string>
+	<string name="location_radius">Location radius</string>
+    <string name="rendering_value_pale_name">Pale</string>
+    <string name="choose_map_orientation">Choose map orientation</string>
+    <string name="energy_avg_info">Energy statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="energy_avg_info_description">Battery level per minute: %1$s\nEnergy consumption (mAh): %2$s</string>
+    <string name="rendering_avg_info">Rendering statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="rendering_avg_info_details">FPS by last 1k frames: %1$s\nCPU (tiles): %2$s\nCPU (idle time): %3$s\nCPU (waits GPU): %4$s</string>
+    <string name="quick_action_location_by_gpx">Location by GPX</string>
+    <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
+    <string name="quick_action_directions_from">Start point</string>
+    <string name="quick_action_destination">Destination</string>
+    <string name="quick_action_remove_next_destination">Next destination point</string>
+    <string name="quick_action_to_my_location">To My Location</string>
+    <string name="quick_action_move_map_left">Map to the left</string>
+    <string name="quick_action_move_map_right">Map to the right</string>
+    <string name="quick_action_move_map_down">Map down</string>
+    <string name="quick_action_move_map_up">Map up</string>
+    <string name="quick_action_new_route">New route</string>
+    <string name="quick_action_previous_app_profile">App profile to previous</string>
+    <string name="quick_action_next_app_profile">App profile to next</string>
+    <string name="app_profile">App profile</string>
+    <string name="shared_string_set">Set</string>
+    <string name="shared_string_create">Create</string>
+    <string name="shared_string_replace">Replace</string>
+    <string name="shared_string_simulate">Simulate</string>
+    <string name="quick_action_display_position_in_center">Display position always in center</string>
+    <string name="quick_action_terrain">Terrain colorization type</string>
+    <string name="quick_action_map_underlay">Underlay</string>
+    <string name="quick_action_map_overlay">Overlay</string>
+    <string name="quick_action_map_style">Map style</string>
+    <string name="quick_action_first_intermediate">First intermediate</string>
+    <string name="quick_action_audio_note">Audio note</string>
+    <string name="quick_action_video_note">Video note</string>
+    <string name="quick_action_photo_note">Photo note</string>
+    <string name="quick_action_track_waypoint">Track waypoint</string>
+    <string name="quick_action_parking_place">Parking place</string>
+    <string name="quick_action_verb_show_hide">Show / Hide</string>
+    <string name="quick_action_verb_pause_resume">Pause / Resume</string>
+    <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Weather screen</string>
 
+    <string name="shared_string_all_icons">All icons</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>
+    <string name="navigation_position_icon">Navigation position icon</string>
+    <string name="resting_position_icon_summary">Icon displayed when you\'re not moving.</string>
+    <string name="resting_position_icon">Resting position icon</string>
+    <string name="data_source">Data Source</string>
+    <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
+    <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
+    <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="daynight_mode_app_theme_summary">The map\'s display aligns with the app\'s overall theme—day mode for a light theme and night mode for a dark theme</string>
+    <string name="daynight_mode_sensor_summary">Uses the device\'s light sensor to toggle between light and dark themes according to ambient light levels.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatically switches between day and night themes based on local sunrise and sunset times.</string>
+    <string name="daynight_mode_night_summary">Always displays the map in a dark theme, suited for nighttime or low-light conditions.</string>
+    <string name="daynight_mode_day_summary">Always displays the map in a light theme, ideal for daytime visibility.</string>
+    <string name="daynight_mode_app_theme">App theme</string>
+    <string name="key_event_action_continuous_zoom_out">Continuous zoom out</string>
+    <string name="key_event_action_continuous_zoom_in">Continuous zoom in</string>
+    <string name="remove_key_assignment_summary">Key assignment for the selected action will be removed.</string>
+    <string name="remove_key_assignment">Remove key assignment</string>
+    <string name="map_settings_weather_wind_animation">Wind animation</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="shared_string_modify">Modify</string>
+    <string name="missing_maps_ignore">Use downloaded maps</string>
+    <string name="missing_maps_ignore_details">Downloaded maps cover your route? Navigate with them if you\'re familiar with the area.</string>
     <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
@@ -44,7 +140,17 @@
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
-        • To be prepared for 4.8
+        • New terrain colorization option \"Altitude\"\n\n
+        • Custom color palettes for terrain, tracks, and routes\n\n
+        • 3D variant for location position icons\n\n
+        • Quick Actions can now be assigned to external keyboards\n\n
+        • Weather: UI refresh, added wind animation\n\n
+        • 3D Track Improvements: new visualization and colorization options\n\n
+        • Expanded selection of tourist routes on the map\n\n
+        • Added app theme option to follow map mode\n\n
+        • Fixed track stats, sorting &amp; search\n\n
+        • OSM Editing: deleted login / password authorization method\n\n
+        • Switching to system share sheet starting Android 14\n\n
     </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>
@@ -58,7 +164,7 @@
     <string name="top_and_bottom">Top and bottom</string>
     <string name="title_3d_track">3D Track</string>
     <string name="explore_3d_track_description">Explore the track in interactive 3D! Visualize height, speed, and more directly on the map.</string>
-    <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
+    <string name="maps_that_also_be_used">Maps that will also be used: %1$s</string>
     <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
     <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
     <string name="required_maps">Required Maps</string>

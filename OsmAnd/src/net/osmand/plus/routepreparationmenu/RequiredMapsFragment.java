@@ -63,7 +63,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		Dialog dialog = new Dialog(activity, getThemeId()) {
 			@Override
 			public void onBackPressed() {
-				dismiss();
+				RequiredMapsFragment.this.dismiss();
 			}
 		};
 		Window window = dialog.getWindow();
@@ -147,9 +147,8 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 			setupItemsList();
 			updateUsedMapsSummary();
 		}
-		boolean showOnlineCalculationBanner = !controller.isOnlineCalculationRequested() && !controller.isLoadingInProgress();
-		updateVisibility(view.findViewById(R.id.card_calculate_online), showOnlineCalculationBanner);
 		updateSelectionButtonVisibility();
+		updateIgnoreMissingMapsCard();
 		updateDownloadButton();
 	}
 
@@ -257,9 +256,20 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 	}
 
 	private void setupCalculateOnlineCard() {
+		boolean showOnlineCalculationBanner = controller.shouldShowOnlineCalculationBanner();
+		updateVisibility(view.findViewById(R.id.card_calculate_online), showOnlineCalculationBanner);
 		View buttonCalculateOnline = view.findViewById(R.id.calculate_online_button);
 		buttonCalculateOnline.setOnClickListener(v -> controller.onCalculateOnlineButtonClicked());
 		setupSelectableBackground(buttonCalculateOnline);
+	}
+
+	private void updateIgnoreMissingMapsCard() {
+		updateVisibility(view.findViewById(R.id.card_ignore_missing_maps), controller.shouldShowUseDownloadedMapsBanner());
+		View buttonIgnoreMissingMaps = view.findViewById(R.id.ignore_missing_maps_button);
+		buttonIgnoreMissingMaps.setOnClickListener(v -> {
+			controller.onIgnoreMissingMapsButtonClicked();
+			dismiss();
+		});
 	}
 
 	private void updateDownloadButton() {

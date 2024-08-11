@@ -49,6 +49,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
+import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -207,7 +208,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void updateCopiedOrResetPrefs() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			app.getPoiFilters().loadSelectedPoiFilters();
 			mapActivity.updateApplicationModeSettings();
 			updateToolbar();
 			updateAllSettings();
@@ -366,9 +366,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		Preference configureMap = findPreference(PROFILE_APPEARANCE);
-		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		configureMap.setFragment(ProfileAppearanceFragment.TAG);
+		Preference profileAppearance = findPreference(PROFILE_APPEARANCE);
+		profileAppearance.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		profileAppearance.setFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	private void setupCopyProfileSettingsPref() {

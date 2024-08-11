@@ -58,7 +58,6 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.skimaps.SkiMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
@@ -118,7 +117,6 @@ public class PluginsHelper {
 		checkMarketPlugin(app, new SRTMPlugin(app));
 		allPlugins.add(new WeatherPlugin(app));
 		checkMarketPlugin(app, new NauticalMapsPlugin(app));
-		allPlugins.add(new AisTrackerPlugin(app));
 		checkMarketPlugin(app, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app));
@@ -557,7 +555,7 @@ public class PluginsHelper {
 		List<String> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			List<String> ls = plugin.indexingFiles(progress);
-			if (ls != null && !ls.isEmpty()) {
+			if (ls != null && ls.size() > 0) {
 				l.addAll(ls);
 			}
 		}
@@ -831,6 +829,15 @@ public class PluginsHelper {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.updateMapPresentationEnvironment(mapRendererContext);
 		}
+	}
+
+	public static boolean isMapPositionIconNeeded() {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			if (p.isMapPositionIconNeeded()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static TrackPointsAnalyser getTrackPointsAnalyser() {

@@ -1,5 +1,7 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
+
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -11,7 +13,12 @@ import androidx.car.app.validation.HostValidator;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.AppInitEvents;
+import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
 
 /**
  * Entry point for the templated app.
@@ -21,6 +28,8 @@ import net.osmand.plus.OsmandApplication;
  * Cars Library developer guide</a>.
  */
 public final class NavigationCarAppService extends CarAppService {
+
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -51,6 +60,7 @@ public final class NavigationCarAppService extends CarAppService {
 	@NonNull
 	public Session onCreateSession() {
 		NavigationSession session = new NavigationSession();
+		LOG.info("Start Android Auto session");
 		getApp().getLocationProvider().addLocationListener(session);
 		session.getLifecycle()
 				.addObserver(
@@ -58,26 +68,59 @@ public final class NavigationCarAppService extends CarAppService {
 							@Override
 							public void onCreate(@NonNull LifecycleOwner owner) {
 								getApp().setCarNavigationSession(session);
+								LOG.info("On create Android Auto session - app foreground device =" + getApp().isAppInForegroundOnRootDevice());
+								if (!getApp().isAppInForegroundOnRootDevice()) {
+									checkAppInitialization(new RestoreNavigationHelper(getApp(), null));
+								}
 							}
 
 							@Override
 							public void onStart(@NonNull LifecycleOwner owner) {
+								LOG.info("On Start Android Auto");
+								getApp().onCarNavigationSessionStart(session);
 								getApp().getOsmandMap().getMapView().setupRenderingView();
 							}
 
 							@Override
 							public void onStop(@NonNull LifecycleOwner owner) {
+								LOG.info("On stop Android Auto");
 								getApp().getOsmandMap().getMapView().setupRenderingView();
+								getApp().onCarNavigationSessionStop(session);
 							}
 
 							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
+								LOG.info("On destroy Android Auto");
 								getApp().setCarNavigationSession(null);
 								getApp().getLocationProvider().removeLocationListener(session);
 							}
 						});
 
 		return session;
+	}
+
+	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
+		OsmandApplication app = getApp();
+		if (app.isApplicationInitializing()) {
+			LOG.info("Try to restore route after app initialized");
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == AppInitEvents.INDEX_REGION_BOUNDARIES) {
+						if (app.getAppInitializer().isRoutingConfigInitialized()) {
+							restoreNavigationHelper.checkRestoreRoutingMode();
+						}
+					}
+					if (event == ROUTING_CONFIG_INITIALIZED) {
+						if (app.getRegions() != null) {
+							restoreNavigationHelper.checkRestoreRoutingMode();
+						}
+					}
+				}
+			});
+		} else {
+			restoreNavigationHelper.checkRestoreRoutingMode();
+		}
 	}
 
 	@NonNull

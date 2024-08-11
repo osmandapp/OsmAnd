@@ -17,6 +17,7 @@ public enum DrivingRegion {
 	CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false),
 	UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true),
 	JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true),
+	INDIA(R.string.driving_region_india, MetricsConstants.KILOMETERS_AND_METERS, true),
 	AUSTRALIA(R.string.driving_region_australia, MetricsConstants.KILOMETERS_AND_METERS, true);
 
 	public final boolean leftHandDriving;
@@ -56,6 +57,8 @@ public enum DrivingRegion {
 			return AUSTRALIA;
 		} else if (df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
 			return UK_AND_OTHERS;
+		} else if (df.getCountry().equalsIgnoreCase("in")) {
+			return INDIA;
 		}
 		return EUROPE_ASIA;
 	}

@@ -69,7 +69,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 	private OsmandApplication app;
 	private AccessibilityAssistant accessibilityAssistant;
 
-	private static final String FAV_SEARCH_QUERY_KEY = "fav_search_query_key";
+	public static final String FAV_SEARCH_QUERY_KEY = "fav_search_query_key";
 
 	private EditText searchEditText;
 	private ProgressBar progressBar;
@@ -166,6 +166,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 				}
 			});
 			listAdapter = new FavoritesSearchListAdapter(getMyApplication());
+			if (!Algorithms.isEmpty(searchQuery)) {
+				listAdapter.getFilter().filter(searchQuery);
+				searchEditText.setText(searchQuery);
+			}
 			listAdapter.setAssistant(accessibilityAssistant);
 			listAdapter.synchronizePoints();
 			listView.setAdapter(listAdapter);
@@ -212,7 +216,10 @@ public class FavoritesSearchFragment extends DialogFragment {
 				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
 				true,
 				point);
-		MapActivity.launchMapActivityMoveToTop(requireActivity());
+
+		Bundle bundle = new Bundle();
+		bundle.putString(FAV_SEARCH_QUERY_KEY, searchQuery);
+		MapActivity.launchMapActivityMoveToTop(requireActivity(), bundle, null, null);
 	}
 
 	private OsmandApplication getMyApplication() {

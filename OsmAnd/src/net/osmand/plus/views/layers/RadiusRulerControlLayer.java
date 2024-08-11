@@ -104,8 +104,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = getApplication();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -130,6 +130,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		redLinesPaint = initPaintWithStyle(Style.STROKE, colorNorthArrow);
 		blueLinesPaint = initPaintWithStyle(Style.STROKE, colorHeadingArrow);
 
+		updatePaints();
+
+		for (int i = 0; i < 72; i++) {
+			degrees[i] = Math.toRadians(i * 5);
+		}
+	}
+
+	private void updatePaints() {
 		float circleTextSize = TEXT_SIZE * app.getResources().getDisplayMetrics().density;
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
@@ -139,10 +147,15 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		circleAttrsAlt = new RenderingLineAttributes("rulerCircleAlt");
 		circleAttrsAlt.paint2.setTextSize(circleTextSize);
 		circleAttrsAlt.paint3.setTextSize(circleTextSize);
+	}
 
-		for (int i = 0; i < 72; i++) {
-			degrees[i] = Math.toRadians(i * 5);
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		if (view != null) {
+			initCenterIcon(view);
 		}
+		updatePaints();
 	}
 
 	private void initCenterIcon(@NonNull OsmandMapTileView view) {
@@ -187,10 +200,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 
-		if (mapView.isCarView() != isCarViewMap) {
-			isCarViewMap = mapView.isCarView();
-			initCenterIcon(mapView);
-		}
 		if (isRulerWidgetOn() && !animatedThread.isAnimatingMapZoom()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
@@ -199,12 +208,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 
-			float density = isCarViewMap ? mapView.getCarViewDensity() : tb.getDensity();
-			float circleTextSize = TEXT_SIZE * density;
-			circleAttrs.paint2.setTextSize(circleTextSize);
-			circleAttrs.paint3.setTextSize(circleTextSize);
-			circleAttrsAlt.paint2.setTextSize(circleTextSize);
-			circleAttrsAlt.paint3.setTextSize(circleTextSize);
 			QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
@@ -309,7 +312,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center,
-								boolean nightMode, boolean radiusRulerNightMode) {
+	                            boolean nightMode, boolean radiusRulerNightMode) {
 		if (nightMode || radiusRulerNightMode) {
 			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f,
 					center.y - centerIconNight.getHeight() / 2f, bitmapPaint);
@@ -402,7 +405,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
-							RenderingLineAttributes attrs) {
+	                        RenderingLineAttributes attrs) {
 		float circleRadius = radius * circleNumber;
 		List<List<QuadPoint>> arrays = new ArrayList<>();
 		List<QuadPoint> points = new ArrayList<>();
@@ -484,7 +487,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCompassCircle(Canvas canvas, RotatedTileBox tb, int circleNumber,
-								   QuadPoint center, RenderingLineAttributes attrs) {
+	                               QuadPoint center, RenderingLineAttributes attrs) {
 		float radiusLength = radius * circleNumber;
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
 		QuadPoint centerPixels = tb.getCenterPixelPoint();
@@ -499,7 +502,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCompassCircleText(Canvas canvas, RotatedTileBox tb, int circleNumber, float radiusLength,
-									   QuadPoint center, RenderingLineAttributes attrs) {
+	                                   QuadPoint center, RenderingLineAttributes attrs) {
 		String distance = cacheDistances.get(circleNumber - 1);
 		String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
 
@@ -570,8 +573,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
 
 		arrowArc.reset();
-		int startArcAngle = (int)angle - 45;
-		int endArcAngle = (int)angle + 45;
+		int startArcAngle = (int) angle - 45;
+		int endArcAngle = (int) angle + 45;
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
@@ -700,8 +703,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				float h2 = AndroidUtils.getTextHeight(attrs.paint2);
 				float h3 = AndroidUtils.getTextHeight(attrs.paint3);
 				canvas.save();
-				canvas.drawText(cardinalDirection, point.x , point.y + h3/4, attrs.paint3);
-				canvas.drawText(cardinalDirection, point.x, point.y + h2/4, attrs.paint2);
+				canvas.drawText(cardinalDirection, point.x, point.y + h3 / 4, attrs.paint3);
+				canvas.drawText(cardinalDirection, point.x, point.y + h2 / 4, attrs.paint2);
 				canvas.restore();
 			}
 		}

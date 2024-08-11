@@ -100,15 +100,14 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = getApplication();
 		touchPoint = new PointF();
 		acceptableTouchRadius = app.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+		createBitmaps(view);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
@@ -126,6 +125,20 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		};
 		addTextSizeListener();
 		updateTextSize();
+	}
+
+	private void createBitmaps(@NonNull OsmandMapTileView view) {
+		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		if (view != null) {
+			createBitmaps(view);
+			updateTextSize();
+		}
 	}
 
 	@Override

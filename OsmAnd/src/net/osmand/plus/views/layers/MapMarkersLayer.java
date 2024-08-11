@@ -63,7 +63,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
@@ -187,6 +186,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		initUI();
+	}
+
+	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
@@ -263,8 +268,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		handler = new Handler();
 		initUI();
@@ -311,7 +316,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 					geometryWay.baseOrder = baseOrder;
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					cachedRenderer = renderer;

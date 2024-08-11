@@ -993,7 +993,6 @@
     <string name="driving_region_us">Verenigde Staten</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Azië, Latijns-Amerika en dergelijke</string>
-    <string name="driving_region_uk">Verenigd Koninkrijk, India en dergelijke</string>
     <string name="local_index_tile_data_zooms">Gedownloade zoomniveau\'s: %1$s</string>
     <string name="local_index_tile_data_expire">Vervaltijd (minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
@@ -2072,21 +2071,12 @@
     <string name="configure_screen_quick_action">Sneltoets</string>
     <string name="quick_action_item_action">Sneltoets %d</string>
     <string name="quick_action_item_screen">Scherm %d</string>
-    <string name="quick_action_add_marker">Markeervlaggetje toevoegen</string>
-    <string name="quick_action_add_poi">POI toevoegen</string>
-    <string name="quick_action_map_style">Kaartstijl wijzigen</string>
     <string name="quick_action_map_style_switch">De kaartstijl is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_take_audio_note">Audionotitie maken</string>
-    <string name="quick_action_take_video_note">Videonotitie maken</string>
-    <string name="quick_action_take_photo_note">Fotonotitie maken</string>
-    <string name="quick_action_add_osm_bug">OSM-opmerking toevoegen</string>
     <string name="quick_action_navigation_voice">Stembegeleiding aan/uit</string>
     <string name="quick_action_navigation_voice_off">Stembegeleiding aan</string>
     <string name="quick_action_navigation_voice_on">Stembegeleiding uit</string>
-    <string name="quick_action_add_parking">Parkeerlocatie instellen</string>
     <string name="quick_action_new_action">Sneltoets toevoegen</string>
     <string name="quick_action_edit_action">Sneltoets bewerken</string>
-    <string name="quick_action_add_favorite">Favoriet toevoegen</string>
     <string name="dialog_add_action_title">Actie toevoegen</string>
     <string name="quick_actions_delete">Sneltoets verwijderen</string>
     <string name="quick_actions_delete_text">Sneltoets \"%s\" verwijderen\?</string>
@@ -2124,15 +2114,12 @@
     <string name="quick_action_map_style_action">Kaartstijl toevoegen</string>
     <string name="quick_action_empty_param_error">Alle parameters invullen</string>
     <string name="quick_action_map_styles">Kaartstijlen</string>
-    <string name="quick_action_map_overlay">Extra kaartlaag wijzigen</string>
     <string name="quick_action_map_overlay_title">Extra kaartlagen</string>
     <string name="quick_action_map_overlay_action">Extra kaartlaag toevoegen</string>
     <string name="quick_action_map_overlay_switch">Extra kaartlaag gewijzigd naar \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Achtergrondkaart is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_map_underlay">Achtergrondkaart wijzigen</string>
     <string name="quick_action_map_underlay_title">Achtergrondkaarten</string>
     <string name="quick_action_map_underlay_action">Achtergrondkaart toevoegen</string>
-    <string name="quick_action_map_source">Kaartbron wijzigen</string>
     <string name="quick_action_map_source_title">Kaartbronnen</string>
     <string name="quick_action_map_source_action">Kaartbron toevoegen</string>
     <string name="quick_action_map_source_switch">Kaartbron is gewijzigd naar \"%s\".</string>
@@ -2181,9 +2168,6 @@
     <string name="quick_action_auto_zoom_desc">Knop om de snelheidsgebaseerde automatische zoom aan of uit te zetten.</string>
     <string name="quick_action_auto_zoom_on">Autozoom aan</string>
     <string name="quick_action_auto_zoom_off">Autozoom uit</string>
-    <string name="quick_action_add_destination">Bestemming instellen</string>
-    <string name="quick_action_replace_destination">Bestemming vervangen</string>
-    <string name="quick_action_add_first_intermediate">Eerste tussenpunt toevoegen</string>
     <string name="quick_action_add_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, de vorige bestemming wordt het laatste tussenpunt.</string>
     <string name="quick_action_replace_destination_desc">Een knop om het midden van het scherm in te stellen als bestemming, waardoor de (eventueel) eerder ingestelde bestemming wordt vervangen.</string>
     <string name="quick_action_add_first_intermediate_desc">Een knop om het midden van het scherm als eerste tussenpunt toe te voegen.</string>
@@ -3594,7 +3578,6 @@
     <string name="plugin_wikipedia_description">Verkrijg informatie over POIs uit Wikipedia, een offline reisgids met artikelen over de bezienswaardigheden in je omgeving.</string>
     <string name="lenght_limit_description">Geef de voertuiglengte op, er zijn mogelijk routebeperkingen voor lange voertuigen.</string>
     <string name="quick_action_remove_next_destination_descr">Verwijdert het volgende routepunt. Als dit de eindbestemming was stopt de navigatie.</string>
-    <string name="quick_action_remove_next_destination">Het dichstbijzijnde routepunt verwijderen</string>
     <string name="please_provide_point_name_error">Kies een naam voor het punt</string>
     <string name="search_download_wikipedia_maps">Wikipedia-kaarten downloaden</string>
     <string name="app_mode_motor_scooter">Motorscooter</string>
@@ -3798,7 +3781,6 @@
     <string name="icon_group_emergency">Noodgevallen</string>
     <string name="icon_group_travel">Reizen</string>
     <string name="empty_state_my_tracks_desc">Trackbestanden importeren of opnemen</string>
-    <string name="quick_action_add_gpx">Track waypoint toevoegen</string>
     <string name="marker_save_as_track">Opslaan als trackbestand</string>
     <string name="monitoring_control_start">Rec</string>
     <string name="message_you_need_add_two_points_to_show_graphs">U moet minimaal twee punten toevoegen</string>
@@ -4616,7 +4598,7 @@
     <string name="rendering_attr_showFunicularRoutes_name">Kabelspoorwegen</string>
     <string name="rendering_attr_showMonorailRoutes_name">Monorail spoorwegen</string>
     <string name="rendering_attr_showLightRailRoutes_name">Lichte spoorwegen</string>
-    <string name="location_source">Bron van locatiebepaling</string>
+    <string name="location_source">Locatiebron</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Toon MTB IMBA paden</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Toon bestemde mountainbike paden.</string>
     <string name="auto_25_chars_route_tu_kl">U-bocht maken en links aanhouden</string>
@@ -5271,14 +5253,152 @@
     <string name="fixed_height">Vaste hoogte</string>
     <string name="visualized_by">Weergegeven door</string>
     <string name="wall_color">Muurkleur</string>
-    <string name="track_line">Track lijn</string>
+    <string name="track_line">Tracklijn</string>
     <string name="top_and_bottom">Top en onderkant</string>
-    <string name="title_3d_track">3D Track</string>
+    <string name="title_3d_track">3D-track</string>
     <string name="routing_attr_avoid_cobblestone_name">Vermijd kinderkopjes</string>
     <string name="routing_attr_avoid_cobblestone_description">Vermijd kinderkopjes</string>
-    <string name="release_4_8">• Om voorbereid te zijn op 4.8</string>
+    <string name="release_4_8">• Nieuwe terreinkleur optie \"Hoogte\"
+\n
+\n • Instelbare kleurenpaletten voor terrein, tracks, en routes
+\n
+\n • 3D-variant voor locatiepositie-iconen
+\n
+\n • Snelle Acties kunnen nu worden toegewezen aan externe toetsenborden
+\n
+\n • Weer: UI verversing, wind-animatie toegevoegd
+\n
+\n • 3D-track verbeteringen: nieuwe visualisatie- en kleurenopties
+\n
+\n • Selectie van toeristenroutes op de kaart is uitgebreid
+\n
+\n • Optie toegevoegd om app-kleurenschema aan te passen aan kaartmodus
+\n
+\n • Reparaties aan trackstatistieken, -sortering &amp; -zoeken
+\n
+\n • OSM Aanpassen: login/wachtwoord authorisatiemethode is verwijderd
+\n
+\n • Overschakeling naar systeemdeelschema vanaf Android 14
+\n
+\n</string>
     <string name="allow_display_on_top_description">Sta weergave van kaartteksten toe over elkaar heen</string>
     <string name="show_debug_info">Debug-informatie tonen</string>
     <string name="show_debug_info_description">Grafische informatie weergeven over de plaatsing van elke kaarttekst</string>
     <string name="map_text">Kaartteksten</string>
+    <string name="choose_map_orientation">Kies kaartoriëntatie</string>
+    <string name="weather_source_ecmwf_description">Europees Centrum voor weersvoorspellingen op middellange termijn (ECMWF)</string>
+    <string name="shared_string_key">Toets</string>
+    <string name="route_line_use_coloring_speed">De kleur van de routelijn is gebaseerd op de bewegingssnelheid.</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="quick_action_map_underlay">Onderlaag</string>
+    <string name="quick_action_map_overlay">Bovenlaag</string>
+    <string name="delete_actions_button">Verwijder knop</string>
+    <string name="auto_25_chars_route_tshl">Scherp links afslaan</string>
+    <string name="quick_action_move_map_down">Kaart naar beneden</string>
+    <string name="quick_action_previous_app_profile">App-profiel naar vorige</string>
+    <string name="delete_actions_button_confirmation">Weet u zeker dat u \"%1$s\" met alle toegevoegde acties wil verwijderen?</string>
+    <string name="quick_action_photo_note">Fotonotitie</string>
+    <string name="missing_maps_ignore_details">Dekken gedownloade kaarten je route? Gebruik ze om te navigeren als je bekent met het gebied.</string>
+    <string name="user_palette">Gebruikerspalet</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Weerscherm</string>
+    <string name="hugerock_promo">Hugerock-promo voor %1$s maanden</string>
+    <string name="hugerock_promo_description">Gratis toegang tot functies zoals onbeperkte kaart-downloads, 3D-relief etc., voor %1$s maanden</string>
+    <string name="driving_region_india">India</string>
+    <string name="auto_25_chars_route_kl">Links aanhouden</string>
+    <string name="navigation_position">Navigatiepositie</string>
+    <string name="view_angle_description">Laat het kegelvormige gebied zien waar u momenteel op gericht staat</string>
+    <string name="resting_navigation_position">Rust- en navigatiepositie</string>
+    <string name="location_radius">Locatieradius</string>
+    <string name="quick_action_move_map_up">Kaart naar boven</string>
+    <string name="shared_string_simulate">Simuleren</string>
+    <string name="quick_action_audio_note">Audionotitie</string>
+    <string name="quick_action_video_note">Videonotitie</string>
+    <string name="quick_action_terrain_color_scheme">Kleurenschema voor terrein</string>
+    <string name="quick_action_new_route">Nieuwe route</string>
+    <string name="action_icon">Actie-icoon</string>
+    <string name="app_profile">App-profiel</string>
+    <string name="shared_string_set">Instellen</string>
+    <string name="shared_string_create">Aanmaken</string>
+    <string name="getting_list_of_required_maps">Lijst van benodigde kaarten ophalen…</string>
+    <string name="missing_maps_description">Sommige offlinekaarten die nodig zijn voor deze route, ontbreken of zijn niet up to date. Download of update deze kaarten.</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="route_line_use_coloring_altitude">De kleur van de routelijn is gebaseerd op de hoogte.</string>
+    <string name="route_roundabout_exit">Neem %1$d afslag</string>
+    <string name="help_article_map_tracks_name">Tracks</string>
+    <string name="help_article_map_routes_name">Routes</string>
+    <string name="data_source">Databron</string>
+    <string name="weather_data_sources_prompt">OsmAnd biedt weerdata uit twee bronnen:</string>
+    <string name="weather_source_GFS_description">Global Forecast System van National Centers for Environmental Prediction</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Aanpassen</string>
+    <string name="assigned_keys">Toegewezen toetsen</string>
+    <string name="shared_string_automatically">Automatisch</string>
+    <string name="ask_every_time">Vraag iedere keer</string>
+    <string name="detailed_track_guidance_description">OsmAnd vergelijkt je track met nabijgelegen wegen, om de richtingaanwijzingen te verbeteren.</string>
+    <string name="quick_action_routes_summary">Een schakel om %1$s te laten zien of verbergen op de kaart.</string>
+    <string name="auto_25_chars_route_kr">Rechts aanhouden</string>
+    <string name="auto_25_chars_route_tr">Rechts afslaan</string>
+    <string name="auto_25_chars_route_tl">Links afslaan</string>
+    <string name="auto_25_chars_route_tu">Keer om</string>
+    <string name="resting_position">Rustpositie</string>
+    <string name="location_radius_description">Laat het cirkelvormige gebied zien dat uw locatienauwkeurigheid aangeeft</string>
+    <string name="rendering_avg_info_details">FPS over de laatste 1000 frames: %1$s
+\nCPU (tegels): %2$s
+\nCPU (inactieve tijd): %3$s
+\nCPU (wacht op GPU): %4$s</string>
+    <string name="quick_action_directions_from">Startpunt</string>
+    <string name="quick_action_parking_place">Parkeerplaats</string>
+    <string name="quick_action_verb_show_hide">Tonen / verbergen</string>
+    <string name="quick_action_verb_pause_resume">Pauzeren / Hervatten</string>
+    <string name="shared_string_all_icons">Alle iconen</string>
+    <string name="profile_icon">Profiel-icoon</string>
+    <string name="quick_action_verb_turn_on_off">Aan-/Uitzetten</string>
+    <string name="navigation_position_icon_summary">Icoon dat wordt getoond als u navigeert of beweegt.</string>
+    <string name="no_assigned_keys_desc">Selecteer een actie en wijs een toets toe met de \"Toevoegen\" knop.</string>
+    <string name="required_maps_calculate_online_summary">De lijst van ontbrekende kaarten is gebaseerd op de rechte lijn voor de route. Voor een nauwkeurige lijst van kaarten kan OsmAnd je route online voorberekenen.</string>
+    <string name="contact_support_retry">Probeer het opnieuw, of neem contact op met gebruikersondersteuning</string>
+    <string name="no_assigned_keys">Geen toegewezen toetsen</string>
+    <string name="clear_all_key_shortcuts_summary">Verwijdert alle toetstoewijzingen voor het geselecteerde type.</string>
+    <string name="key_name_pattern">Toets \"%1$s\"</string>
+    <string name="missing_maps_header">Ontbrekende of verouderde kaarten</string>
+    <string name="new_key_assignment">Nieuwe toetstoewijzing</string>
+    <string name="rendering_value_pale_name">Bleek</string>
+    <string name="energy_avg_info">Energiestatistieken (gemiddelde 1 / 5/ 15 minuten)</string>
+    <string name="energy_avg_info_description">Batterijniveau per minuut: %1$s
+\nEnergieverbruik (mAh): %2$s</string>
+    <string name="rendering_avg_info">Renderingstatistieken (gemiddelde 1 / 5/ 15 minuten)</string>
+    <string name="quick_action_location_by_gpx">Locatie met GPX</string>
+    <string name="quick_action_destination">Bestemming</string>
+    <string name="quick_action_to_my_location">Naar Mijn Locatie</string>
+    <string name="quick_action_move_map_left">Kaart naar links</string>
+    <string name="quick_action_move_map_right">Kaart naar rechts</string>
+    <string name="quick_action_next_app_profile">App-profiel naar volgende</string>
+    <string name="shared_string_replace">Vervangen</string>
+    <string name="key_assignment_add_action">Actie toevoegen</string>
+    <string name="navigation_position_icon">Icoon voor navigatiepositie</string>
+    <string name="resting_position_icon_summary">Icoon dat wordt getoond als u niet beweegt.</string>
+    <string name="resting_position_icon">Icoon voor rustpositie</string>
+    <string name="shared_string_colors">Kleuren</string>
+    <string name="key_assignment_add_key">Toets toevoegen</string>
+    <string name="driving_region_uk">Verenigd Koninkrijk en dergelijke</string>
+    <string name="quick_action_map_style">Kaartstijl</string>
+    <string name="map_settings_weather_wind_animation">Wind-animatie</string>
+    <string name="daynight_mode_app_theme_summary">De weergave van de map is aangepast aan het kleurenschema van de app - dagmodus voor een licht schema, en nachtmodus voor een donker schema</string>
+    <string name="daynight_mode_sensor_summary">Gebruikt de lichtsensor van het apparaat om te schakelen tussen lichte en donkere kleurenschema\'s, op basis van de hoeveelheid omgevingslicht.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Schakelt automatisch tussen dacht- en nachtschema\'s op basis van de lokale zonsopgangs- en zonsondergangstijden.</string>
+    <string name="daynight_mode_night_summary">Toont de kaart altijd in een donker kleurenschema, geschikt voor \'s nachts of in lichtarme omstandigheden.</string>
+    <string name="daynight_mode_day_summary">Toont de kaart altijd in een licht kleurenschema, ideaal voor zichtbaarheid in daglicht.</string>
+    <string name="daynight_mode_app_theme">App-kleurenschema</string>
+    <string name="remove_key_assignment_summary">Verwijdert de toetstoewijzing voor de geselecteerde actie.</string>
+    <string name="remove_key_assignment">Verwijder toetstoewijzing</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="missing_maps_ignore">Gebruik gedownloade kaart</string>
+    <string name="required_maps">Benodigde kaarten</string>
+    <string name="auto_25_chars_route_tshr">Scherp rechts afslaan</string>
+    <string name="quick_action_display_position_in_center">Laat positie altijd in het midden zien</string>
+    <string name="explore_3d_track_description">Verken de track in interactieve 3D! Visualiseer hoogte, snelheid en, meer direct, op de kaart.</string>
+    <string name="maps_that_also_be_used">Kaarten die ook worden gebruikt: %1$s</string>
+    <string name="quick_action_remove_next_destination">Volgende bestemmingspunt</string>
+    <string name="allow_display_on_top">Weergave bovenop toelaten</string>
 </resources>

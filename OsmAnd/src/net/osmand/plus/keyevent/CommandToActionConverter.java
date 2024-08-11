@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.ContinuousMapZoomInAction;
+import net.osmand.plus.quickaction.actions.ContinuousMapZoomOutAction;
 import net.osmand.plus.quickaction.actions.MapScrollDownAction;
 import net.osmand.plus.quickaction.actions.MapScrollLeftAction;
 import net.osmand.plus.quickaction.actions.MapScrollRightAction;
@@ -13,6 +15,7 @@ import net.osmand.plus.quickaction.actions.MapZoomInAction;
 import net.osmand.plus.quickaction.actions.MapZoomOutAction;
 import net.osmand.plus.quickaction.actions.MoveToMyLocationAction;
 import net.osmand.plus.quickaction.actions.NextAppProfileAction;
+import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.quickaction.actions.PreviousAppProfileAction;
 
 import java.util.HashMap;
@@ -36,12 +39,14 @@ public class CommandToActionConverter {
 		map.put("map_scroll_right", MapScrollRightAction.TYPE);
 		map.put("zoom_in", MapZoomInAction.TYPE);
 		map.put("zoom_out", MapZoomOutAction.TYPE);
+		map.put("continuous_zoom_in", ContinuousMapZoomInAction.TYPE);
+		map.put("continuous_zoom_out", ContinuousMapZoomOutAction.TYPE);
 
 //		map.put("emit_navigation_hint", null);
 //		map.put("toggle_drawer", null);
 //		map.put("activity_back_pressed", null);
 //		map.put("take_media_note", null);
-//		map.put("open_wunderlinq_datagrid", null);
+		map.put("open_wunderlinq_datagrid", OpenWunderLINQDatagridAction.TYPE);
 	}
 
 	@Nullable

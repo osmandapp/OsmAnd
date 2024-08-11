@@ -45,6 +45,8 @@
         <attr name="right_menu_view_bg" format="reference" />
         <attr name="stroked_buttons_and_links_outline" format="color" />
 		<attr name="widget_background_color" format="reference" />
+		<attr name="icon_color_primary" format="reference" />
+		<attr name="active_color_secondary" format="reference" />
 
         <attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
@@ -182,6 +184,8 @@
 	    <attr name="toolbar_active_color" format="reference" />
 	    <attr name="status_bar_active_color" format="reference" />
 	    <attr name="alert_dialog_theme" format="reference" />
+	    <attr name="active_color_primary" format="reference" />
+	    <attr name="slider_label_text_dark" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

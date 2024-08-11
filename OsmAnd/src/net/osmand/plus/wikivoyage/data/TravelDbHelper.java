@@ -235,7 +235,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	@NonNull
-	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public List<WikivoyageSearchResult> search(@NonNull String searchQuery, int reqNumber) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");

@@ -129,7 +129,7 @@ public class RoutingHelperUtils {
 		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
 		float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
 		float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing)
-				* projectionOffsetN;
+				* projectionOffsetN * projectionOffsetN;
 		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
 
 		boolean setApproximated = true;
@@ -174,7 +174,11 @@ public class RoutingHelperUtils {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
 		if (currentLocation.hasBearing() && nextRouteLocation != null) {
+			final float ASSUME_AS_INVALID_BEARING = 90.0f; // special case (possibly only in the Android emulator)
 			float bearingMotion = currentLocation.getBearing();
+			if (bearingMotion == ASSUME_AS_INVALID_BEARING) {
+				return false;
+			}
 			float bearingToRoute = prevRouteLocation != null
 					? prevRouteLocation.bearingTo(nextRouteLocation)
 					: currentLocation.bearingTo(nextRouteLocation);

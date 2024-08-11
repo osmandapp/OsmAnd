@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
@@ -55,7 +56,12 @@ public class MapAppInitializeListener implements AppInitializeListener {
 		if (event == FAVORITES_INITIALIZED) {
 			activity.refreshMap();
 		}
-		if (event == ROUTING_CONFIG_INITIALIZED) {
+		if (event == INDEX_REGION_BOUNDARIES) {
+			if (app.getAppInitializer().isRoutingConfigInitialized()) {
+				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			}
+		}
+		if (event == ROUTING_CONFIG_INITIALIZED && app.getRegions() != null) {
 			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
 		}
 		if (event == BROUTER_INITIALIZED) {

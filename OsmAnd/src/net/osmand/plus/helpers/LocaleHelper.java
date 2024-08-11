@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
 import net.osmand.StateChangedListener;
@@ -20,6 +21,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class LocaleHelper {
 
 	private Locale preferredLocale;
 	private Resources localizedResources;
+	private Configuration localizedConf;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -106,9 +109,9 @@ public class LocaleHelper {
 
 			Resources resources = app.getBaseContext().getResources();
 			resources.updateConfiguration(config, resources.getDisplayMetrics());
-			Configuration conf = new Configuration(config);
-			conf.locale = selectedLocale;
-			localizedResources = app.createConfigurationContext(conf).getResources();
+			localizedConf = new Configuration(config);
+			localizedConf.locale = selectedLocale;
+
 		}
 	}
 
@@ -145,7 +148,11 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public Resources getLocalizedResources() {
+	public Resources getLocalizedResources(Context ctx, Resources ctxRes) {
+		if (localizedResources == null && localizedConf != null
+				|| (localizedResources != null && localizedResources.getDisplayMetrics().density != ctxRes.getDisplayMetrics().density)) {
+			localizedResources = ctx.createConfigurationContext(localizedConf).getResources();
+		}
 		return localizedResources;
 	}
 
@@ -202,6 +209,32 @@ public class LocaleHelper {
 		configuration = new Configuration(configuration);
 		configuration.setLocale(locale);
 		return app.createConfigurationContext(configuration);
+	}
+
+	@Nullable
+	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
+		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
+		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
+
+		return localeIds.contains(preferredLocaleId)
+				? new Locale(preferredLocaleId)
+				: availablePreferredLocale;
+	}
+
+	@Nullable
+	private static Locale getAvailablePreferredLocale(@NonNull Collection<String> localeIds) {
+		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
+
+		for (int index = 0; index < deviceLanguages.size(); index++) {
+			Locale locale = deviceLanguages.get(index);
+			if (locale != null) {
+				String localeId = locale.getLanguage();
+				if (localeIds.contains(localeId)) {
+					return locale;
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull

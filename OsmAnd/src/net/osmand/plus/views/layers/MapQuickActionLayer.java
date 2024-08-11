@@ -76,9 +76,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
+		createContextMarker();
+	}
 
+	private void createContextMarker() {
 		Context context = AndroidUtils.createDisplayContext(getContext());
 		contextMarker = new ImageView(context);
 		contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
@@ -87,6 +90,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		int width = contextMarker.getDrawable().getMinimumWidth();
 		int height = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, width, height);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		createContextMarker();
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -223,9 +232,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			view.setLatLon(lat, lon);
 		}
 		inMovingMarkerMode = true;
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
-				R.id.map_ruler_layout, R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE, R.id.map_ruler_layout, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel);
 		updateMapDisplayPosition();
 		view.refreshMap();
 	}

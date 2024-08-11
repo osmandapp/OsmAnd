@@ -114,7 +114,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private final LocationPermissionCheckCallback locationPermissionGrantedCallback =
-			() -> getApp().startNavigationService(NavigationService.USED_BY_CAR_APP);
+			() -> getApp().startNavigationService(getCarContext(), NavigationService.USED_BY_CAR_APP);
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
@@ -154,11 +154,16 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
-		getApp().getRoutingHelper().removeListener(this);
-		if (defaultAppMode != null) {
-			getApp().getSettings().setApplicationMode(defaultAppMode);
-			defaultAppMode = null;
+		OsmandApplication app = getApp();
+		OsmandSettings settings = app.getSettings();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+
+		routingHelper.removeListener(this);
+		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated();
+		if (defaultAppMode != null && !routing) {
+			settings.setApplicationMode(defaultAppMode);
 		}
+		defaultAppMode = null;
 	}
 
 	@Override

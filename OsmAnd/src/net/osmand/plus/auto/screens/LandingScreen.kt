@@ -18,7 +18,13 @@ class LandingScreen(
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
-        for (category in PlaceCategory.values()) {
+        for (category in PlaceCategory.entries) {
+            if (category == PlaceCategory.FREE_MODE) {
+                if (app.routingHelper.isRouteCalculated) {
+                    listBuilder.addItem(createContinueNavigationItem())
+                    continue
+                }
+            }
             val title = app.getString(category.titleId)
             val icon = CarIcon.Builder(IconCompat.createWithResource(app, category.iconId)).build()
             listBuilder.addItem(
@@ -41,10 +47,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                getCarContext(),
-                                R.drawable.ic_my_location))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_my_location)
+                        ).build()
+                    )
                     .setOnClickListener {
                         session?.navigationCarSurface?.handleRecenter()
                     }
@@ -53,10 +58,9 @@ class LandingScreen(
                 Action.Builder()
                     .setIcon(
                         CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                carContext,
-                                R.drawable.ic_zoom_in))
-                            .build())
+                            IconCompat.createWithResource(carContext, R.drawable.ic_zoom_in)
+                        ).build()
+                    )
                     .setOnClickListener {
                         app.carNavigationSession?.navigationCarSurface?.handleScale(
 	                        NavigationSession.INVALID_FOCAL_POINT_VAL,
@@ -88,6 +92,31 @@ class LandingScreen(
             .setHeaderAction(Action.APP_ICON)
             .setMapActionStrip(mapActionStripBuilder)
             .setActionStrip(actionStripBuilder.build())
+            .build()
+    }
+
+    private fun createContinueNavigationItem(): Item {
+        val title = app.getString(R.string.continue_navigation)
+        val icon = CarIcon.Builder(
+            IconCompat.createWithResource(
+                app,
+                R.drawable.ic_action_gdirections_dark)).build()
+        return Row.Builder()
+            .setTitle(title)
+            .setImage(icon)
+            .setBrowsable(true)
+            .setOnClickListener {
+                app.carNavigationSession?.let { carNavigationSession ->
+                    if (app.routingHelper.isRouteCalculated) {
+                        app.routingHelper.resumeNavigation()
+                    }
+                    carNavigationSession.startNavigation()
+                    val navigationScreen = carNavigationSession.navigationScreen
+                    navigationScreen?.let {
+                        screenManager.push(navigationScreen)
+                    }
+                }
+            }
             .build()
     }
 

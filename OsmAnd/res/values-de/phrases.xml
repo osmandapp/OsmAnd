@@ -2817,7 +2817,7 @@
     <string name="poi_self_service">Selbstbedienung</string>
     <string name="poi_pharmacy_dispensing">Nach Rezept</string>
     <string name="poi_archaeological_site_type">Art</string>
-    <string name="poi_star_rating">Sterne Bewertung</string>
+    <string name="poi_star_rating">Sternebewertung</string>
     <string name="poi_denomination">Konfession</string>
     <string name="poi_information_type">Art</string>
     <string name="poi_drive_in">Bedienung im Fahrzeug</string>
@@ -3526,7 +3526,7 @@
     <string name="poi_childcare">Kinderbetreuung</string>
     <string name="poi_denotation_natural_monument">Naturdenkmal</string>
     <string name="poi_denotation_landmark">Orientierungspunkt</string>
-    <string name="poi_park_ride">Park and Ride</string>
+    <string name="poi_park_ride">Park-and-ride</string>
     <string name="poi_park_ride_yes">Ja;Parken und Reisen</string>
     <string name="poi_park_ride_train">Zug</string>
     <string name="poi_park_ride_bus">Bus</string>
@@ -4867,4 +4867,5 @@
     <string name="poi_indoor_seating_bar_table">Sitzplätze innen: Tresen</string>
     <string name="poi_property_management">Immobilienverwaltung</string>
     <string name="poi_engineer">Ingenieurbüro</string>
+    <string name="poi_mcdonalds">McDonald\'s</string>
 </resources>

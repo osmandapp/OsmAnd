@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -32,12 +33,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 public class DownloadOsmandIndexesHelper {
@@ -156,39 +154,37 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 
-	private static void addTtsVoiceIndexes(OsmandApplication app, IndexFileList indexes) {
-		List<IndexItem> ttsIndexes = listTtsVoiceIndexes(app, false);
-		for (IndexItem index : ttsIndexes) {
-			indexes.add(index);
+	private static void addTtsVoiceIndexes(@NonNull OsmandApplication app, @NonNull IndexFileList indexes) {
+		List<IndexItem> items = listTtsVoiceIndexes(app, false);
+		for (IndexItem item : items) {
+			indexes.add(item);
 		}
 	}
 
 	@NonNull
-	public static List<IndexItem> listTtsVoiceIndexes(OsmandApplication app) {
+	public static List<IndexItem> listTtsVoiceIndexes(@NonNull OsmandApplication app) {
 		return listTtsVoiceIndexes(app, true);
 	}
 
 	@NonNull
-	private static List<IndexItem> listTtsVoiceIndexes(OsmandApplication app, boolean sort) {
-		List<IndexItem> ttsList = new ArrayList<>();
-
+	private static List<IndexItem> listTtsVoiceIndexes(@NonNull OsmandApplication app, boolean sort) {
+		List<IndexItem> items = new ArrayList<>();
 		try {
 			List<AssetEntry> bundledAssets = getBundledAssets(app.getAssets());
-			ttsList.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
-			ttsList.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
-		} catch (IOException | XmlPullParserException e) {
+			items.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
+			items.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
+		} catch (Exception e) {
 			log.error("Error while loading tts files from assets", e);
 		}
-
 		if (sort) {
-			Collections.sort(ttsList, DownloadResourceGroup.getComparator(app));
+			items.sort(DownloadResourceGroup.getComparator(app));
 		}
-
-		return ttsList;
+		return items;
 	}
 
 	@NonNull
 	public static List<AssetEntry> getBundledAssets(@NonNull AssetManager assetManager) throws XmlPullParserException, IOException {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser();
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
 		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
@@ -199,7 +195,16 @@ public class DownloadOsmandIndexesHelper {
 				String source = xmlParser.getAttributeValue(null, "source");
 				String destination = xmlParser.getAttributeValue(null, "destination");
 				String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				assets.add(new AssetEntry(source, destination, combinedMode));
+				AssetEntry ae = new AssetEntry(source, destination, combinedMode);
+				String version = xmlParser.getAttributeValue(null, "version");
+				if (!Algorithms.isEmpty(version)) {
+					try {
+						ae.version = DATE_FORMAT.parse(version);
+					} catch (ParseException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+				assets.add(ae);
 			}
 		}
 		isBundledAssetsXml.close();
@@ -404,6 +409,7 @@ public class DownloadOsmandIndexesHelper {
 		public final String source;
 		public final String destination;
 		public final String combinedMode;
+		public Date version = null;
 
 		public AssetEntry(String source, String destination, String combinedMode) {
 			this.source = source;

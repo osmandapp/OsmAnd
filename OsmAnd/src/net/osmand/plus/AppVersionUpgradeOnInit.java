@@ -54,13 +54,15 @@ import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
-import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV1;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -75,6 +77,7 @@ import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -155,8 +158,16 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_02 = 4702;
 	public static final int VERSION_4_7_03 = 4703;
 	public static final int VERSION_4_7_04 = 4704;
+	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
+	public static final int VERSION_4_7_05 = 4705;
+	// 4706 - 4.7-06 (Import location 3D icon models)
+	public static final int VERSION_4_7_06 = 4706;
+	// 4707 - 4.7-07 (Migrate chosen 3D model key to 2D icon base key)
+	public static final int VERSION_4_7_07 = 4707;
+	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
+	public static final int VERSION_4_8_01 = 4801;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_04;
+	public static final int LAST_APP_VERSION = VERSION_4_8_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -273,11 +284,8 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
 				}
-				if (prevAppVersion < VERSION_4_6_10) {
-					migrateRoutingTypePrefs();
-				}
 				if (prevAppVersion < VERSION_4_7_01) {
-					ColorsMigrationAlgorithm.doMigration(app);
+					ColorsMigrationAlgorithmV1.doMigration(app);
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);
@@ -293,6 +301,20 @@ public class AppVersionUpgradeOnInit {
 							migrateProfileQuickActionButtons();
 						}
 					});
+				}
+				if (prevAppVersion < VERSION_4_7_05) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+						@Override
+						public void onFinish(@NonNull AppInitializer init) {
+							ColorsMigrationAlgorithmV2.doMigration(app);
+						}
+					});
+				}
+				if (prevAppVersion < VERSION_4_7_07) {
+					migrate3DModelKey(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_01) {
+					migrateFixedNorthToManualRotatedCompassMode(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -934,29 +956,36 @@ public class AppVersionUpgradeOnInit {
 		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
 	}
 
-	private void migrateRoutingTypePrefs() {
-		OsmandSettings settings = app.getSettings();
-		boolean hhRouting = new BooleanPreference(settings, "use_hh_routing", false).makeGlobal().get();
-		boolean hhRoutingCpp = new BooleanPreference(settings, "hh_routing_cpp", false).makeGlobal().get();
-		CommonPreference<Boolean> disableComplexRouting = new BooleanPreference(settings, "disable_complex_routing", false).makeProfile();
-
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			RoutingType routingType;
-			if (hhRouting) {
-				routingType = hhRoutingCpp ? HH_CPP : HH_JAVA;
-			} else {
-				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
-			}
-			settings.ROUTING_TYPE.setModeValue(mode, routingType);
-		}
-	}
-
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
 		CommonPreference<LocalSortMode> oldPref = settings.registerEnumStringPreference("local_maps_sort_mode", COUNTRY_NAME_ASCENDING, LocalSortMode.values(), LocalSortMode.class).makeGlobal().makeShared();
 		if (oldPref.isSet()) {
 			LocalSortMode sortMode = oldPref.get();
 			LocalItemUtils.getSortModePref(app, MAP_DATA).set(sortMode);
 			LocalItemUtils.getSortModePref(app, ROAD_DATA).set(sortMode);
+		}
+	}
+
+	private void migrate3DModelKey(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			String locationIcon = settings.LOCATION_ICON.getModeValue(mode);
+			String migrateLocationIconKey = LocationIcon.getIconForDefaultModel(locationIcon);
+			if (migrateLocationIconKey != null) {
+				settings.LOCATION_ICON.setModeValue(mode, migrateLocationIconKey);
+			}
+
+			String navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
+			String migrateNavigationIconKey = LocationIcon.getIconForDefaultModel(navigationIcon);
+			if (migrateNavigationIconKey != null) {
+				settings.NAVIGATION_ICON.setModeValue(mode, migrateNavigationIconKey);
+			}
+		}
+	}
+
+	private void migrateFixedNorthToManualRotatedCompassMode(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (settings.getCompassMode(mode) == CompassMode.NORTH_IS_UP) {
+				settings.setCompassMode(CompassMode.MANUALLY_ROTATED, mode);
+			}
 		}
 	}
 }

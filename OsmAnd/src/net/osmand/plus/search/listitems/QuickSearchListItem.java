@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -120,12 +121,12 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		String[] alternateName = new String[]{searchResult.alternateName};
+		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity) {
-			((Amenity) searchResult.object).getAdditionalInfoAndCollectCategories(
-					app.getPoiTypes(), null, null, alternateName);
+			Amenity amenity = (Amenity) searchResult.object;
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 		}
-		return (alternateName[0] != null ? alternateName[0] + " • " : "") + typeName;
+		return alternateName != null ? alternateName + " • " : typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -208,19 +209,14 @@ public class QuickSearchListItem {
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					res = ((CustomSearchPoiFilter) searchResult.object).getName();
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					String name = ((SearchPoiAdditionalFilter) searchResult.object).getName();
+					res = name;
 				}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-				String typeStr = amenity.getSubType();
-				if (pt != null) {
-					typeStr = pt.getTranslation();
-				} else if (typeStr != null) {
-					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
-				}
-				return typeStr;
+				return amenity.getSubTypeStr();
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				if (latLon != null && searchResult.localeRelatedObjectName == null) {
@@ -345,6 +341,9 @@ public class QuickSearchListItem {
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					SearchPoiAdditionalFilter filter = (SearchPoiAdditionalFilter) searchResult.object;
+					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
 					return getIcon(app, iconId);

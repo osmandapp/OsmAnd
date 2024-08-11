@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
+import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS;
+import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
 import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
 
 import android.app.Notification;
@@ -23,6 +25,7 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
@@ -34,10 +37,14 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Collections;
 import java.util.List;
 
 public class NavigationService extends Service {
+
+	public static final Log LOG = PlatformUtil.getLog(NavigationService.class);
 
 	public static class NavigationServiceBinder extends Binder {
 	}
@@ -59,9 +66,10 @@ public class NavigationService extends Service {
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
 	private StateChangedListener<LocationSource> locationSourceListener;
+	private long lastTimeGPSLocationFixed;
 
 	// Android Auto
-	private CarContext carContext;
+//	private CarContext carContext;
 	private NavigationManager navigationManager;
 	private boolean carNavigationActive;
 	private TripHelper tripHelper;
@@ -126,26 +134,32 @@ public class NavigationService extends Service {
 			setCarContext(carNavigationSession.getCarContext());
 		}
 
-		Notification notification = app.getNotificationHelper().buildTopNotification();
+		Notification notification = app.getNotificationHelper().buildTopNotification(this);
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			if (isUsedBy(USED_BY_NAVIGATION)) {
 				startCarNavigation();
 			}
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
-			} else {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
+			try {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
+				} else {
+					startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
+				}
+				app.getNotificationHelper().refreshNotifications();
+			} catch (Exception e) {
+				setCarContext(null);
+				app.setNavigationService(null);
+				LOG.error("Failed to start NavigationService (usedBy=" + usedBy + ", "
+						+ "carNavigationSession = " + (carNavigationSession != null ? "yes" : "no") + ")", e);
+				usedBy = 0;
+				return START_NOT_STICKY;
 			}
-			app.getNotificationHelper().refreshNotifications();
 		} else {
-			notification = app.getNotificationHelper().buildErrorNotification();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
-			} else {
-				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
-			}
+			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy
+					+ " carNavigationSession = " + (carNavigationSession != null ? "yes" : "no"));
 			stopSelf();
+			return START_NOT_STICKY;
 		}
 		requestLocationUpdates();
 
@@ -154,7 +168,7 @@ public class NavigationService extends Service {
 				routingHelper.resumeNavigation();
 			}
 		}
-		return hasNotification ? START_REDELIVER_INTENT : START_NOT_STICKY;
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override
@@ -203,21 +217,38 @@ public class NavigationService extends Service {
 	}
 
 	private void requestLocationUpdates() {
-		OsmandApplication app = getApp();
 		try {
+			LOG.info(">>>> requestLocationUpdates from NavigationService");
+
 			locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 				@Override
 				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
-						NavigationSession carNavigationSession = app.getCarNavigationSession();
+						lastTimeGPSLocationFixed = System.currentTimeMillis();
+						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
 						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
-						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
+						if (!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) {
+							LOG.info(">>>> setGPSLocationFromService");
 							locationProvider.setLocationFromService(location);
 						}
 					}
 				}
 			});
+			// try to always ask for network provide : it is faster way to find location
+			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
+				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
+					@Override
+					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
+						if ((!settings.MAP_ACTIVITY_ENABLED || hasCarSurface) && !locations.isEmpty() && !useOnlyGPS()) {
+							LOG.info(">>>> setNetworkLocationFromService");
+							locationProvider.setLocationFromService(locations.get(locations.size() - 1));
+						}
+					}
+				});
+			}
 		} catch (SecurityException e) {
 			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show();
 		} catch (IllegalArgumentException e) {
@@ -226,20 +257,33 @@ public class NavigationService extends Service {
 	}
 
 	private void removeLocationUpdates() {
+		LOG.info(">>>> removeLocationUpdates from NavigationService");
 		if (locationServiceHelper != null) {
 			try {
 				locationServiceHelper.removeLocationUpdates();
 			} catch (SecurityException e) {
 				// Location service permission not granted
+			} finally {
+				lastTimeGPSLocationFixed = 0;
 			}
 		}
+	}
+
+	private boolean useOnlyGPS() {
+		if (routingHelper.isFollowingMode()) {
+			return true;
+		}
+		if (lastTimeGPSLocationFixed > 0 && (System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
+			return true;
+		}
+		return isRunningOnEmulator();
 	}
 
 	/**
 	 * Sets the {@link CarContext} to use while the service is running.
 	 */
 	public void setCarContext(@Nullable CarContext carContext) {
-		this.carContext = carContext;
+//		this.carContext = carContext;
 		if (carContext != null) {
 			this.tripHelper = new TripHelper(getApp());
 			this.navigationManager = carContext.getCarService(NavigationManager.class);
@@ -271,14 +315,6 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/**
-	 * Clears the currently used {@link CarContext}.
-	 */
-	public void clearCarContext() {
-		carContext = null;
-		navigationManager = null;
-		tripHelper = null;
-	}
 
 	/**
 	 * Starts navigation.
@@ -313,7 +349,7 @@ public class NavigationService extends Service {
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		if (carNavigationActive && tripHelper != null
+		if (carNavigationActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
@@ -341,7 +377,7 @@ public class NavigationService extends Service {
 							false/*routingHelper.isRouteWasFinished()*/,
 							destinations, trip.getSteps(), destinationTravelEstimate,
 							lastStepTravelEstimate != null ? lastStepTravelEstimate.getRemainingDistance() : null,
-							false, true, null);
+							true, true, null);
 				}
 			}
 		}

@@ -106,11 +106,11 @@
     <string name="poi_toll_booth">Betalingsanlæg</string>
     <string name="poi_border_control">Grænsekontrol</string>
     <string name="poi_traffic_calming_bump">Vejbumb</string>
-    <string name="poi_traffic_calming_hump">Vejbumb, bredt</string>
+    <string name="poi_traffic_calming_hump">Vejbump, bredt</string>
     <string name="poi_traffic_calming_cushion">Pudebumb</string>
     <string name="poi_traffic_calming_chicane">Chikane</string>
     <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
-    <string name="poi_traffic_calming_table">Plateaubumb</string>
+    <string name="poi_traffic_calming_table">Trapezbump</string>
     <string name="poi_traffic_calming_choker">Indsnævring</string>
     <string name="poi_traffic_signals">Lyskryds</string>
     <string name="poi_car_repair">Autoværksted</string>
@@ -789,7 +789,7 @@
     <string name="poi_bus_trap">Bussluse</string>
     <string name="poi_cattle_grid">Færist</string>
     <string name="poi_full_height_turnstile">Fuld højde adgangsmølle</string>
-    <string name="poi_bump_gate">Bumplåge</string>
+    <string name="poi_bump_gate">Skubbeled</string>
     <string name="poi_general_barrier">Almindelig forhindring</string>
     <string name="poi_stile">Stente</string>
     <string name="poi_height_restrictor">Højdebegrænser</string>
@@ -2731,7 +2731,7 @@
     <string name="poi_diplomatic_ambassadors_residence">Ambassadørens residens</string>
     <string name="poi_diplomatic_high_commission">Højkommissær</string>
     <string name="poi_fire_operator">Brandoperatør</string>
-    <string name="poi_diaper_table_count">Puslebord</string>
+    <string name="poi_diaper_table_count">Antal pusleborde</string>
     <string name="poi_water_tank">Vandtank</string>
     <string name="poi_toilets_disposal_flush">Toilettype: vandkloset</string>
     <string name="poi_toilets_disposal_pitlatrine">Toilettype: latrin</string>
@@ -4049,4 +4049,5 @@
     <string name="poi_us_maps_recreation_area_activity_horse_camping">Hestecamping</string>
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Spredt camping</string>
     <string name="poi_us_maps_recreation_area_activity_group_camping">Gruppecamping</string>
+    <string name="poi_indoor_seating_bar_table">Indendørs siddepladser: barbord</string>
 </resources>

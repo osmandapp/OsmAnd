@@ -20,6 +20,8 @@ import net.osmand.core.jni.TimingFunction;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
@@ -158,7 +160,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	/**
 	 * Block animations
 	 */
-	public void blockAnimations() {
+	private void blockAnimations() {
 		stopAnimatingSync();
 		animationsDisabled = true;
 	}
@@ -166,8 +168,24 @@ public class AnimateDraggingMapThread implements TouchListener {
 	/**
 	 * Allow animations
 	 */
-	public void allowAnimations() {
+	private void allowAnimations() {
 		animationsDisabled = false;
+	}
+
+	public void toggleAnimations() {
+		boolean mapActivityActive = app.getSettings().MAP_ACTIVITY_ENABLED;
+		boolean carSessionActive = false;
+		NavigationSession navigationSession = app.getCarNavigationSession();
+		if (navigationSession != null) {
+			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+			if (!app.useOpenGlRenderer() || (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()))
+				carSessionActive = true;
+		}
+		if (mapActivityActive || carSessionActive) {
+			allowAnimations();
+		} else {
+			blockAnimations();
+		}
 	}
 
 	/**
@@ -277,9 +295,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 		float animationDuration = Math.max(movingTime, NAV_ANIMATION_TIME / 4);
 
 		boolean animateZoom = zoomParams != null && (zoom != startZoom || zoomFP != startZoomFP);
+		boolean allowRotationAfterReset = app.getMapViewTrackingUtilities().allowRotationAfterReset();
 		float rotationDiff = finalRotation != null
 				? Math.abs(MapUtils.unifyRotationDiff(rotation, startRotation)) : 0;
-		boolean animateRotation = rotationDiff > 0.1;
+		boolean animateRotation = rotationDiff > 0.1 && allowRotationAfterReset;
 		boolean animateTarget;
 
 		MapAnimator animator = getAnimator();
@@ -331,7 +350,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			if (!animateZoom) {
 				tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 			}
-			if (!animateRotation && finalRotation != null) {
+			if (!animateRotation && finalRotation != null && allowRotationAfterReset) {
 				tileView.rotateToAnimate(rotation);
 			}
 			if (!animateTarget) {

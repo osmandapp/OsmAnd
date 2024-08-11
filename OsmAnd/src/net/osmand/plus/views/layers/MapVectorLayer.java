@@ -51,8 +51,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
@@ -158,7 +158,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				updateLayerProviderAlpha(alpha);
 			}
 
-			if (mapActivityInvalidated) {
+			if (mapActivityInvalidated || mapRendererChanged) {
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());
 				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect

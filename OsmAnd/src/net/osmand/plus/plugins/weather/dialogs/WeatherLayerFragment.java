@@ -1,11 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.plugins.weather.WeatherBand.*;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -39,6 +34,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherLayerFragment.class.getSimpleName();
 
+	private static final String WEATHER_BAND_KEY = "weather_band_key";
 	private static final int TRANSPARENCY_MIN = 0;
 	private static final int TRANSPARENCY_MAX = 100;
 
@@ -52,9 +48,16 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		if (plugin != null) {
-			weatherBand = app.getWeatherHelper().getWeatherBand(plugin.getCurrentConfigureBand());
+		short bandIndex = plugin != null ? plugin.getCurrentConfigureBand() : WEATHER_BAND_NOTHING;
+
+		if (bandIndex == WEATHER_BAND_NOTHING && savedInstanceState != null) {
+			bandIndex = savedInstanceState.getShort(WEATHER_BAND_KEY);
+		}
+		weatherBand = app.getWeatherHelper().getWeatherBand(bandIndex);
+		if (weatherBand == null) {
+			requireActivity().onBackPressed();
 		}
 	}
 
@@ -64,14 +67,22 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
 
-		setupHeader(view);
-		setupEmptyScreenContent(view);
-		setupTransparencySliderCard(view);
-		setupMeasurementUnitsBlock(view);
+		if (weatherBand != null) {
+			setupHeader(view);
+			setupEmptyScreenContent(view);
+			setupTransparencySliderCard(view);
+			setupMeasurementUnitsBlock(view);
 
-		updateScreenMode(view, weatherBand.isBandVisible());
+			updateScreenMode(view, weatherBand.isBandVisible());
+		}
 
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putShort(WEATHER_BAND_KEY, weatherBand.getBandIndex());
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -184,14 +195,14 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				return app.getString(R.string.empty_screen_weather_temperature_layer);
 			case WEATHER_BAND_PRESSURE:
 				return app.getString(R.string.empty_screen_weather_pressure_layer);
+			case WEATHER_BAND_WIND_ANIMATION:
 			case WEATHER_BAND_WIND_SPEED:
 				return app.getString(R.string.empty_screen_weather_wind_layer);
 			case WEATHER_BAND_PRECIPITATION:
 				return app.getString(R.string.empty_screen_weather_precipitation_layer);
-			case WEATHER_BAND_UNDEFINED:
+			default:
 				return null;
 		}
-		return null;
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {

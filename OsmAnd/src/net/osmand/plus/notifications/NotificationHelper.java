@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.Service;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -11,15 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.CarAppNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationHelper {
+
+	public static final Log LOG = PlatformUtil.getLog(NotificationHelper.class);
 
 	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
 	private final OsmandApplication app;
@@ -28,7 +34,6 @@ public class NotificationHelper {
 	private GpxNotification gpxNotification;
 	private CarAppNotification carAppNotification;
 	private DownloadNotification downloadNotification;
-	private ErrorNotification errorNotification;
 	private final List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(@NonNull OsmandApplication app) {
@@ -41,7 +46,6 @@ public class NotificationHelper {
 		gpxNotification = new GpxNotification(app);
 		downloadNotification = new DownloadNotification(app);
 		carAppNotification = new CarAppNotification(app);
-		errorNotification = new ErrorNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
 		all.add(downloadNotification);
@@ -49,12 +53,12 @@ public class NotificationHelper {
 	}
 
 	@Nullable
-	public Notification buildTopNotification() {
-		OsmandNotification notification = acquireTopNotification();
+	public Notification buildTopNotification(@NonNull Service service) {
+		OsmandNotification notification = acquireTopNotification(service);
 		if (notification != null) {
 			removeNotification(notification.getType());
 			setTopNotification(notification);
-			Builder notificationBuilder = notification.buildNotification(false);
+			Builder notificationBuilder = notification.buildNotification(service, false);
 			if (notificationBuilder != null) {
 				return notificationBuilder.build();
 			} else {
@@ -67,31 +71,24 @@ public class NotificationHelper {
 
 	@NonNull
 	public Notification buildDownloadNotification() {
-		return downloadNotification.buildNotification(false).build();
-	}
-
-	@NonNull
-	public Notification buildErrorNotification() {
-		removeNotification(errorNotification.getType());
-		setTopNotification(errorNotification);
-		return errorNotification.buildNotification(false).build();
+		return downloadNotification.buildNotification(null, false).build();
 	}
 
 	@Nullable
-	private OsmandNotification acquireTopNotification() {
-		if (navigationNotification.isEnabled()) {
-			return navigationNotification;
-		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
-			return gpxNotification;
-		} else if (carAppNotification.isEnabled() && carAppNotification.isActive()) {
+	private OsmandNotification acquireTopNotification(@Nullable Service service) {
+		if (carAppNotification.isEnabled(service)) {
 			return carAppNotification;
+		} else if (navigationNotification.isEnabled(service)) {
+			return navigationNotification;
+		} else if (gpxNotification.isEnabled(service)) {
+			return gpxNotification;
 		} else {
 			return null;
 		}
 	}
 
 	public void updateTopNotification() {
-		OsmandNotification notification = acquireTopNotification();
+		OsmandNotification notification = acquireTopNotification(null);
 		setTopNotification(notification);
 	}
 
@@ -162,7 +159,7 @@ public class NotificationHelper {
 
 	public void removeNotifications(boolean inactiveOnly) {
 		for (OsmandNotification notification : all) {
-			if (!inactiveOnly || !notification.isActive()) {
+			if (!inactiveOnly || !notification.isEnabled()) {
 				notification.removeNotification();
 			}
 		}

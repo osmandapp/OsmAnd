@@ -384,7 +384,6 @@
     <string name="driving_region_us">Bandaríkin</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Evrópa, Asía, Mið- og Suður-Ameríka o.þ.h.</string>
-    <string name="driving_region_uk">Bretland, Indland og svipað</string>
     <string name="driving_region_australia">Ástralía</string>
     <string name="speak_title">Tilkynna…</string>
     <string name="speak_speed_limit">Hraðatakmörk</string>
@@ -1769,21 +1768,12 @@
     <string name="configure_screen_quick_action">Flýtiaðgerð</string>
     <string name="quick_action_item_action">Aðgerð %d</string>
     <string name="quick_action_item_screen">Skjár %d</string>
-    <string name="quick_action_add_marker">Bæta við kortamerki</string>
-    <string name="quick_action_add_poi">Bæta við merkisstað</string>
-    <string name="quick_action_map_style">Breyta stíl korts</string>
     <string name="quick_action_map_style_switch">Stíl kortsins var breytt yfir í \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nýr hljóðupptöku-minnispunktur</string>
-    <string name="quick_action_take_video_note">Nýr myndskeiðs-minnispunktur</string>
-    <string name="quick_action_take_photo_note">Nýr ljósmynda-minnispunktur</string>
-    <string name="quick_action_add_osm_bug">Bæta við OSM-minnispunkti</string>
     <string name="quick_action_navigation_voice">Tal af/á</string>
     <string name="quick_action_navigation_voice_off">Kveikja á tali</string>
     <string name="quick_action_navigation_voice_on">Þagga niður í tali</string>
-    <string name="quick_action_add_parking">Bæta við bílastæði</string>
     <string name="quick_action_new_action">Bæta við aðgerð</string>
     <string name="quick_action_edit_action">Breyta aðgerð</string>
-    <string name="quick_action_add_favorite">Bæta við sem eftirlæti</string>
     <string name="dialog_add_action_title">Bæta við aðgerð</string>
     <string name="quick_actions_delete">Eyða aðgerð</string>
     <string name="quick_actions_delete_text">Eyða \"%s\" aðgerðinni\?</string>
@@ -1802,13 +1792,10 @@
     <string name="quick_action_map_style_action">Bæta við kortastíl</string>
     <string name="quick_action_empty_param_error">Fylltu inn í öll viðföng</string>
     <string name="quick_action_map_styles">Stílar landakorta</string>
-    <string name="quick_action_map_overlay">Breyta þekju korts</string>
     <string name="quick_action_map_overlay_title">Þekjur korts</string>
     <string name="quick_action_map_overlay_action">Bæta við þekju</string>
-    <string name="quick_action_map_underlay">Breyta undirlagi korts</string>
     <string name="quick_action_map_underlay_title">Undirlög korts</string>
     <string name="quick_action_map_underlay_action">Bæta við undirlagi</string>
-    <string name="quick_action_map_source">Breyta gagnagjafa korts</string>
     <string name="quick_action_map_source_title">Gagnagjafar korta</string>
     <string name="quick_action_map_source_action">Bæta við gagnagjafa korts</string>
     <string name="quick_action_map_source_switch">Gagnagjafa kortsins var breytt yfir í \"%s\".</string>
@@ -1833,7 +1820,7 @@
     <string name="routing_attr_driving_style_balance_name">Jafnvægi</string>
     <string name="routing_attr_driving_style_safety_name">Velja frekar hjáleiðir</string>
     <string name="relief_smoothness_factor_descr">Kjörið landslag: slétt eða hæðótt.</string>
-    <string name="shared_string_slope">Halli</string>
+    <string name="shared_string_slope">Brekka</string>
     <string name="add_new_folder">Bæta við nýrri möppu</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Á að eyða %1$d punkti/punktum\?</string>
@@ -2056,9 +2043,6 @@
     <string name="quick_action_auto_zoom">Sjálfvirkur aðdráttur korts</string>
     <string name="quick_action_auto_zoom_on">Kveikja á sjálfvirkum aðdrætti</string>
     <string name="quick_action_auto_zoom_off">Slökkva á sjálfvirkum aðdrætti</string>
-    <string name="quick_action_add_destination">Settu inn áfangastað</string>
-    <string name="quick_action_replace_destination">Skipta út áfangastað</string>
-    <string name="quick_action_add_first_intermediate">Bæta við fyrsta milliáfanga</string>
     <string name="access_smart_autoannounce">Snjallar sjálfvirkar tilkynningar</string>
     <string name="access_autoannounce_period">Tímabil sjálfvirka tilkynninga</string>
     <string name="access_autoannounce_period_descr">Lágmarkstími á milli tilkynninga.</string>
@@ -3552,7 +3536,7 @@
     <string name="map_markers_item">Kortamerki</string>
     <string name="system_screen_timeout">Nota tímamörk kerfis fyrir skjá</string>
     <string name="edit_online_source">Breyta nettengdum gagnagjafa</string>
-    <string name="tracker_item">OsmAnd rekjari</string>
+    <string name="tracker_item">OsmAnd-rekjari</string>
     <string name="create_edit_poi">Búa til eða breyta merkisstað</string>
     <string name="storage_format">Geymslusnið</string>
     <string name="expire_time">Rennur út</string>
@@ -3646,7 +3630,6 @@
     <string name="speed_cameras_removed_descr">Þetta tæki er ekki með hraðamyndavélar.</string>
     <string name="app_mode_go_cart">Gókart</string>
     <string name="set_working_days_to_continue">Skilgreindu virka daga til að halda áfram</string>
-    <string name="quick_action_remove_next_destination">Eyða næsta áfangastað</string>
     <string name="navigation_profile">Leiðsagnarsnið</string>
     <string name="app_mode_wheelchair_forward">Hjólastóll áfram</string>
     <string name="plugin_wikipedia_description">Náðu í upplýsingar um merka staði frá Wikipedia, þetta er þá orðið að vasaleiðsögn án nettengingar.</string>
@@ -3731,7 +3714,6 @@
     <string name="context_menu_item_add_waypoint">Bæta við leiðarpunkti í feril</string>
     <string name="plan_route_change_route_type_after">Skipta um gerð leiðar eftir</string>
     <string name="plan_route_trim_after">Klippa á eftir</string>
-    <string name="quick_action_add_gpx">Bæta við leiðarpunkti í feril</string>
     <string name="pass_whole_track_descr">Punktur ferilsins sem nota á við leiðsögn</string>
     <string name="add_hidden_group_info">Viðbættur punktur verður tiltækur í \"%s\". Gerðu hann sýnilegan á kortinu með því að affela valda hópinn.</string>
     <string name="shared_string_gpx_route">Skrá leið í feril</string>
@@ -5201,11 +5183,27 @@
     <string name="feature_available_as_part_of_plan">%1$s er boði sem hluti af %2$s-áskriftinni</string>
     <string name="github_discussion">Umræður á GitHub</string>
     <string name="free_favorites_backup">Ókeypis öryggisafrit eftirlæta</string>
-    <string name="release_4_6">• Viðmótshluti fyrir rennslishlutfall
+    <string name="release_4_6">• Android Auto: Bætt við 3D-þrívíddarham
 \n
-\n • Bætt við ANT+ hitastigshluta
+\n • Ferlar: bætt við síum og snjallmöppum, betri minnisstýring fyrir stórar skrár
 \n
-\n • Betri minnisstýring fyrir stóra GPX-ferla
+\n • Bæting á viðmótshlutaspjöldum uppi og niðri þannig að þau taki við öllum viðmótshlutum
+\n
+\n • Bæting á umsýslu staðværra tilfanga
+\n
+\n • Sérsníðanleg úthlutun hnappa fyrir utanaðkomandi stýringar
+\n
+\n • Nýir viðmótshlutar: \"Rennslishlutfall\" og \"Staða sólar\"
+\n
+\n • OsmAnd Cloud: Nú er aðgangur að eyddum skrám
+\n
+\n • Bætt litun ferla í brekkuham (Slope) með nýjum samhverfum litstigli
+\n
+\n • Lagfærð vandamál með gegnsæi stöðustiku
+\n
+\n • Bætt við stuðningi við ANT+ hitastigshluta
+\n
+\n • Kynning á viðmótshluta \"Tiltækt RAM-vinnsluminni\"
 \n
 \n</string>
     <string name="deleting_complete">Eyðingu lokið</string>
@@ -5346,7 +5344,7 @@
     <string name="shared_string_all_tracks">Allir ferlar</string>
     <string name="shared_string_road_maps">Vegakort</string>
     <string name="topography_maps">Landslagskort</string>
-    <string name="tripltek_promo">Tripltek Promo kynningaráskrift í %1$s mánuði</string>
+    <string name="tripltek_promo">Tripltek kynningaráskrift í %1$s mánuði</string>
     <string name="key_event_action_toggle_drower">Birta eða fela hliðarvalmynd</string>
     <string name="key_event_action_emit_navigation_hint">Gefa ábendingu við leiðsögn</string>
     <string name="key_event_action_move_right">Færa til hægri</string>
@@ -5392,7 +5390,7 @@
     <string name="shared_string_loading">Hleð inn</string>
     <string name="empty_smart_folder_title">Enginn samsvarandi ferill</string>
     <string name="discard_filter_changes">Henda breytingum síu</string>
-    <string name="delete_smart_folder_dialog_message">Þetta mun eyða snjallmöppunni \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Þetta mun eyða snjallmöppunni \"%1$s\". (Engum ferlum verður eytt.)</string>
     <string name="date_of_creation">Búið til þann</string>
     <string name="help_article_navigation_routing_moped_routing_name">Leiðagerð fyrir skellinöðrur</string>
     <string name="sort_distance_ascending">Stysta vegalengd fyrst</string>
@@ -5490,7 +5488,7 @@
     <string name="rendering_value_sector2_name">Geiri 2</string>
     <string name="rendering_value_sector5_name">Geiri 5</string>
     <string name="no_visible_tracks_description">Veldu ferla til birtingar á kortinu.</string>
-    <string name="delete_track_folder_dialog_message">Þetta mun eyða möppunni \"%1$s\" að meðtöldum öllum ferlum (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Þetta mun eyða möppunni \"%1$s\" að meðtöldum öllum %2$s ferlum.</string>
     <string name="ant_plus_searching_text_description">Haltu tækinu nálægt skynjaranum. Þú þarft að virkja skynjarann til að OsmAnd geti fundið hann.</string>
     <string name="rendering_value_sectors_name">Geirar</string>
     <string name="reset_key_assignments">Frumstilla úthlutanir lykla</string>
@@ -5542,7 +5540,7 @@
     <string name="routing_type_a_star_classic">A* klassískt</string>
     <string name="auto_zoom">Sjálfvirkur aðdráttur</string>
     <string name="java_safe">Java (öruggt)</string>
-    <string name="gpx_approximation">GPX nálgun</string>
+    <string name="gpx_approximation">GPX-nálgun</string>
     <string name="routing_type">Tegund leiðargerðar</string>
     <string name="rendering_attr_padusDisplayMode_name">Birtingarhamur almenningslands</string>
     <string name="help_article_setup_a_route_name">Útbúa leið</string>
@@ -5550,7 +5548,7 @@
     <string name="missing_maps_header">Kort sem vantar eða eru úrelt</string>
     <string name="route_line_use_coloring_speed">Leiðarlína er lituð miðað við hraða.</string>
     <string name="route_line_use_coloring_altitude">Leiðarlína er lituð miðað við hæð.</string>
-    <string name="delete_actions_button">Eyða hnappur</string>
+    <string name="delete_actions_button">Eyða-hnappur</string>
     <string name="shared_string_osm_id">OSM-auðkenni</string>
     <string name="change_default_appearance_confirmation">Breyta sjálfgefnu útliti %1$s?</string>
     <string name="fix_north_up">Virkja fast norður upp</string>
@@ -5584,8 +5582,129 @@
     <string name="shared_string_changes">Breytingar</string>
     <string name="shared_string_unchanged">Óbreytt</string>
     <string name="map_widget_map_scale">Kvarði korts</string>
-    <string name="routing_attr_avoid_cobblestone_description"/>
-    <string name="routing_attr_avoid_cobblestone_name"/>
-    <string name="map_text"/>
+    <string name="routing_attr_avoid_cobblestone_description">Forðast götusteina</string>
+    <string name="routing_attr_avoid_cobblestone_name">Forðast götusteina</string>
+    <string name="map_text">Textar á korti</string>
     <string name="show_debug_info_description"/>
+    <string name="auto_25_chars_route_tu">Taktu U-beygju</string>
+    <string name="resting_position">Staðsetning hvíldar</string>
+    <string name="navigation_position">Staða leiðsagnar</string>
+    <string name="resting_navigation_position">Staða leiðsagnar og hvíldar</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="missing_maps_ignore">Nota sótt kort</string>
+    <string name="clear_all_key_shortcuts">Hreinsa alla flýtilykla</string>
+    <string name="assigned_keys">Úthlutaðir lyklar</string>
+    <string name="quick_action_remove_next_destination">Eyða næsta áfangastað</string>
+    <string name="quick_action_map_style">Stíll korts</string>
+    <string name="auto_25_chars_route_kl">Vertu til vinstri</string>
+    <string name="auto_25_chars_route_tshl">Beygðu skarpt til vinstri</string>
+    <string name="auto_25_chars_route_tsll">Beygðu örlítið til vinstri</string>
+    <string name="resting_position_icon_summary">Táknið sem birtist þegar ekki er verið á ferðinni.</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="driving_region_india">Indland</string>
+    <string name="hugerock_promo">Hugerock kynningaráskrift í %1$s mánuði</string>
+    <string name="hugerock_promo_description">Ókeypis aðgangur að eiginleikum á borð við ótakmörkuð niðurhöl korta, þrívíddarlandslag, o.fl. fyrir %1$s á mánuði</string>
+    <string name="auto_25_chars_route_kr">Vertu til hægri</string>
+    <string name="auto_25_chars_route_tr">Beygðu til hægri</string>
+    <string name="auto_25_chars_route_tshr">Beygðu skarpt til hægri</string>
+    <string name="auto_25_chars_route_tslr">Beygðu örlítið til hægri</string>
+    <string name="auto_25_chars_route_tl">Beygðu til vinstri</string>
+    <string name="weather_data_sources_prompt">OsmAnd gefur upp veðurgögn frá tveimur gagnaveitum:</string>
+    <string name="weather_source_GFS_description">Global Forecast System frá National Centers for Environmental Prediction</string>
+    <string name="key_event_action_continuous_zoom_out">Samfellt rennt frá</string>
+    <string name="remove_key_assignment_summary">Úthlutun lykils fyrir valda aðgerð verður fjarlægð.</string>
+    <string name="remove_key_assignment">Fjarlægja úthlutun lykils</string>
+    <string name="choose_map_orientation">Veldu stefnu kortsins</string>
+    <string name="rendering_value_dark_orange_name">Dökkappelsínugult</string>
+    <string name="wall_height">Hæð veggs</string>
+    <string name="change_terrain_color_scheme">Breyta litastefi yfirborðs</string>
+    <string name="quick_action_location_by_gpx">Staðsetning með GPX-ferli</string>
+    <string name="quick_action_terrain_color_scheme">Litastef yfirborðs</string>
+    <string name="quick_action_directions_from">Upphafspunktur</string>
+    <string name="quick_action_destination">Áfangastaður</string>
+    <string name="quick_action_to_my_location">Á staðsetninguna mína</string>
+    <string name="quick_action_move_map_left">Kort til vinstri</string>
+    <string name="quick_action_move_map_right">Kort til hægri</string>
+    <string name="quick_action_move_map_down">Kort niður</string>
+    <string name="quick_action_move_map_up">Kort upp</string>
+    <string name="quick_action_new_route">Ný leið</string>
+    <string name="shared_string_set">Setja</string>
+    <string name="shared_string_create">Búa til</string>
+    <string name="shared_string_replace">Skipta út</string>
+    <string name="shared_string_simulate">Herma eftir</string>
+    <string name="quick_action_audio_note">Hljóðupptöku-minnispunktur</string>
+    <string name="quick_action_video_note">Myndskeiðs-minnispunktur</string>
+    <string name="quick_action_photo_note">Ljósmynda-minnispunktur</string>
+    <string name="quick_action_parking_place">Bílastæði</string>
+    <string name="quick_action_verb_show_hide">Birta / Fela</string>
+    <string name="quick_action_verb_turn_on_off">Víxla Af / Á</string>
+    <string name="quick_action_verb_start_stop">Ræsa / Stöðva</string>
+    <string name="shared_string_colors">Litir</string>
+    <string name="weather_screen">Veðurskjár</string>
+    <string name="shared_string_all_icons">Allar táknmyndir</string>
+    <string name="profile_icon">Táknmynd notkunarsniðs</string>
+    <string name="navigation_position_icon_summary">Táknið sem birtist þegar leiðsögn er í gangi eða á meðan verið er á ferðinni.</string>
+    <string name="navigation_position_icon">Táknmynd stöðu leiðsagnar</string>
+    <string name="resting_position_icon">Staðsetningartáknmynd við hvíld</string>
+    <string name="key_name_pattern">Lykill \"%1$s\"</string>
+    <string name="key_assignment_add_key">Bæta við lykli</string>
+    <string name="key_assignment_add_action">Bæta við aðgerð</string>
+    <string name="contact_support_retry">Prófaðu aftur eða hafðu samband við aðstoðarteymi</string>
+    <string name="user_palette">Litaspjald notanda</string>
+    <string name="shared_string_key">Lykill</string>
+    <string name="no_assigned_keys">Engir úthlutaðir lyklar</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="tomorrow">Á morgun</string>
+    <string name="use_nearby_roads">Nota nálæga vegi</string>
+    <string name="quick_action_map_overlay">Yfirlag</string>
+    <string name="quick_action_map_underlay">Undirlag</string>
+    <string name="key_event_action_continuous_zoom_in">Samfellt rennt að</string>
+    <string name="daynight_mode_app_theme">Þema forrits</string>
+    <string name="shared_string_modify">Breyta</string>
+    <string name="play_weather_forecast">Spila veðurspá</string>
+    <string name="new_key_assignment">Ný úthlutun lykils</string>
+    <string name="disable_map_layers">Gera lög á korti óvirk</string>
+    <string name="action_icon">Táknmynd aðgerðar</string>
+    <string name="driving_region_uk">Bretland og svipað</string>
+    <string name="data_source">Gagnagjafi</string>
+    <string name="weather_source_ecmwf_description">Evrópumiðstöð fyrir meðallangar veðurspár</string>
+    <string name="relief_3d_download_description">Viðbótarkort þarf til að skoða yfirborð á kortinu.</string>
+    <string name="allow_display_on_top">Leyfa birtingu ofan á</string>
+    <string name="change_default_tracks_appearance_confirmation">Virkja breytingar á fyrirliggjandi ferla í möppunni eða aðeins á nýja ferla?</string>
+    <string name="gpx_approximation_geo_cpp">Byggt á flatarmálsreikningum (C++, hraðvirkt)</string>
+    <string name="rendering_avg_info">Tölfræði myndgerðar (meðaltal 1 / 5 / 15 mínútur)</string>
+    <string name="view_angle">Horn sýnar</string>
+    <string name="rendering_avg_info_details">FPS síðustu 1000 ramma: %1$s
+\nCPU (tíglar): %2$s
+\nCPU (tími aðgerðaleysis): %3$s
+\nCPU (bið eftir GPU): %4$s</string>
+    <string name="view_angle_description">Birtir keilulagaða svæðið fyrir framan þig</string>
+    <string name="location_radius_description">Sýnir hringlaga svæðið sem stendur fyrir nákvæmni núverandi staðsetningar þinnar</string>
+    <string name="allow_display_on_top_description">Leyfa birtingu kortatexta ofan á hver öðrum</string>
+    <string name="maps_that_also_be_used">Kort sem verða einnig notuð: %1$s</string>
+    <string name="gpx_approximation_geo_java">Byggt á flatarmálsreikningum (Java, hraðvirkt)</string>
+    <string name="app_profile">Forritssnið</string>
+    <string name="energy_avg_info">Tölfræði um orkunotkun (meðaltal 1 / 5 / 15 mínútur)</string>
+    <string name="energy_avg_info_description">Rafhleðsla á hverri mínútu: %1$s
+\nOrkunotkun (mAh): %2$s</string>
+    <string name="quick_action_previous_app_profile">Forritssnið í fyrra</string>
+    <string name="quick_action_next_app_profile">Forritssnið í næsta</string>
+    <string name="quick_action_display_position_in_center">Birting staðsetningar alltaf á miðju</string>
+    <string name="quick_action_terrain">Gerð litunar yfirborðs</string>
+    <string name="quick_action_track_waypoint">Leiðarpunktur í ferli</string>
+    <string name="quick_action_verb_pause_resume">Bið / Halda áfram</string>
+    <string name="height_legend_description">Lituð hæðakort eru notuð til að myndgera upphleypt yfirborð.</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Fela afmarkanir á opinberu landi</string>
+    <string name="rendering_value_pale_name">Fölt</string>
+    <string name="quick_action_first_intermediate">Fyrsti milliáfangi</string>
+    <string name="show_debug_info">Birta villuleitarupplýsingar</string>
+    <string name="travel_topics">Ferðatengt efni</string>
+    <string name="backup_error_failed_to_transfer_file">Mistókst að millifæra skrá(r) á tölvuskýi.</string>
+    <string name="gpx_approximation_java">Byggt á leiðagerð (Java)</string>
+    <string name="map_settings_weather_wind_animation">Vindhreyfing</string>
+    <string name="gpx_approximation_cpp">Byggt á leiðagerð (C++)</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Fela afmarkanir á opinberu landi en skilja eftir svæði</string>
+    <string name="apply_only_to_new">Beita aðeins á nýtt</string>
+    <string name="unchanged_parameter_summary">Hver ferill mun halda sínum færibreytum.</string>
+    <string name="location_radius">Radíus staðsetningar</string>
 </resources>

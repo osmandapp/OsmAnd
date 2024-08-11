@@ -92,6 +92,7 @@ public class MapLayers {
 
 	private StateChangedListener<Integer> transparencyListener;
 	private StateChangedListener<Integer> overlayTransparencyListener;
+	private StateChangedListener<Boolean> enable3DMapsListener;
 
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -205,6 +206,15 @@ public class MapLayers {
 			}
 		});
 		app.getSettings().MAP_OVERLAY_TRANSPARENCY.addListener(overlayTransparencyListener);
+
+		enable3DMapsListener = change -> app.runInUIThread(() -> {
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				gpxLayer.setInvalidated(true);
+				mapRenderer.requestRender();
+			}
+		});
+		app.getSettings().ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
 		createAdditionalLayers(null);
 	}

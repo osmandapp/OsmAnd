@@ -56,6 +56,8 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
+	public static final String TRANSITION_NAME = "shared_element_container";
+
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final DialogManager dialogManager;
@@ -118,9 +120,11 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		dialogManager.register(PROCESS_ID, dialog);
 	}
 
-	public void askUnregisterFromDialogManager() {
-		dialogManager.unregister(PROCESS_ID);
-		dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(PROCESS_ID);
+			dialogManager.unregister(AddQuickActionController.PROCESS_ID);
+		}
 	}
 
 	public void showOverflowMenu(@NonNull FragmentActivity activity, @Nullable View actionView) {
@@ -188,13 +192,13 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 	public void askRemoveAssignment(@NonNull FragmentActivity activity) {
 		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
-				.setTitle(R.string.clear_key_assignment)
+				.setTitle(R.string.remove_key_assignment)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
 					deviceHelper.removeKeyAssignmentCompletely(appMode, deviceId, assignmentId);
 					askDismissDialog();
 				});
-		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);
+		CustomAlert.showSimpleMessage(dialogData, R.string.remove_key_assignment_summary);
 	}
 
 	@Nullable
@@ -232,14 +236,25 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public void askAddKeyCode(@NonNull FragmentActivity activity) {
+		showKeyCodeSelectionScreen(activity, KeyEvent.KEYCODE_UNKNOWN);
+	}
+
+	public void askChangeKeyCode(@NonNull FragmentActivity activity, int keyCode) {
+		showKeyCodeSelectionScreen(activity, keyCode);
+	}
+
+	private void showKeyCodeSelectionScreen(@NonNull FragmentActivity activity, int keyCode) {
 		SelectKeyCodeFragment.showInstance(
 				activity.getSupportFragmentManager(),
-				appMode, deviceId, assignmentId, KeyEvent.KEYCODE_UNKNOWN);
+				appMode, deviceId, assignmentId, keyCode);
 	}
 
 	@Override
 	public void onKeyCodeSelected(@Nullable Integer oldKeyCode, @NonNull Integer newKeyCode) {
 		if (editBundle != null) {
+			if (oldKeyCode != null && oldKeyCode != KeyEvent.KEYCODE_UNKNOWN) {
+				editBundle.keyCodes.remove(oldKeyCode);
+			}
 			editBundle.keyCodes.add(newKeyCode);
 		}
 		askRefreshDialog();
@@ -364,20 +379,23 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	public static void showEditAssignmentDialog(@NonNull FragmentActivity activity,
 	                                            @NonNull ApplicationMode appMode,
 	                                            @NonNull String deviceId,
-	                                            @NonNull String assignmentId) {
-		showDialog(activity, appMode, deviceId, assignmentId);
+	                                            @NonNull String assignmentId,
+	                                            @Nullable View anchorView) {
+		showDialog(activity, appMode, deviceId, assignmentId, anchorView);
 	}
 
 	public static void showAddAssignmentDialog(@NonNull FragmentActivity activity,
 	                                           @NonNull ApplicationMode appMode,
-	                                           @NonNull String deviceId) {
-		showDialog(activity, appMode, deviceId, null);
+	                                           @NonNull String deviceId,
+	                                           @Nullable View anchorView) {
+		showDialog(activity, appMode, deviceId, null, anchorView);
 	}
 
 	private static void showDialog(@NonNull FragmentActivity activity,
 	                               @NonNull ApplicationMode appMode,
 	                               @NonNull String deviceId,
-	                               @Nullable String assignmentId) {
+	                               @Nullable String assignmentId,
+	                               @Nullable View anchorView) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		EditKeyAssignmentController controller =
 				new EditKeyAssignmentController(app, appMode, deviceId, assignmentId);
@@ -385,9 +403,8 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 			controller.enterEditMode();
 		}
 		DialogManager dialogManager = app.getDialogManager();
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		dialogManager.register(PROCESS_ID, controller);
-		if (!EditKeyAssignmentFragment.showInstance(fragmentManager, appMode)) {
+		if (!EditKeyAssignmentFragment.showInstance(activity, appMode, anchorView)) {
 			dialogManager.unregister(PROCESS_ID);
 		}
 	}
