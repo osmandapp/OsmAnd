@@ -2053,7 +2053,7 @@
     <string name="shared_string_plugin">Dodatak</string>
     <string name="srtm_menu_download_descr">Preuzimanje mape izohipsa za ovaj region.</string>
     <string name="hide_from_zoom_level">Sakrij počevši od nivoa zumiranja</string>
-    <string name="hillshade_purchase_header">Instaliraj dodatak \"Topografija\" radi prikaza uspravnog nagiba oblasti.</string>
+    <string name="hillshade_purchase_header">Instaliraj dodatak \"Topografija\" za prikaz vertikalnog nagiba oblasti.</string>
     <string name="hillshade_menu_download_descr">Preuzmi mapu sloja sa osenčenim reljefom radi pregleda okoline na mapi.</string>
     <string name="search_favorites">Traži u favoritima</string>
     <string name="sorted_by_distance">Razvrstano po udaljenosti</string>
@@ -2072,7 +2072,7 @@
     <string name="no_photos_descr">Nema slika ovde.</string>
     <string name="shared_string_add_photos">Dodaj slike</string>
     <string name="online_photos">Slike sa interneta</string>
-    <string name="improve_coverage_install_mapillary_desc">Instaliraj Mapillaryda doda slike na ovaj lokaciju.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instaliraj Mapillary da doda slike za ovu lokaciju.</string>
     <string name="improve_coverage_mapillary">Poboljšaj pokrivenost slika koristeći Mapilari</string>
     <string name="shared_string_install">Instaliraj</string>
     <string name="open_mapillary">Otvori Mapilari</string>
