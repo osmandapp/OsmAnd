@@ -2018,8 +2018,8 @@
     <string name="poi_ramp_no">斜坡道：無</string>
     <string name="poi_ramp_wheelchair_yes">供輪椅使用的斜坡道：有</string>
     <string name="poi_ramp_wheelchair_no">供輪椅的斜坡道：無</string>
-    <string name="poi_ramp_stroller_yes">斜坡道(折疊式)：有</string>
-    <string name="poi_ramp_stroller_no">斜坡道(折疊式)：無</string>
+    <string name="poi_ramp_stroller_yes">斜坡道(嬰兒車)：有</string>
+    <string name="poi_ramp_stroller_no">斜坡道(嬰兒車)：無</string>
     <string name="poi_ramp_bicycle_yes">供自行車使用的斜坡道：有</string>
     <string name="poi_ramp_bicycle_no">供自行車的斜坡道：無</string>
     <string name="poi_ramp_luggage_yes">供行李使用的斜坡道：有</string>
