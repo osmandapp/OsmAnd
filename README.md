@@ -89,6 +89,22 @@ The project experiences continuous improvement by all such forms of developer an
 The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality.
 By buying OsmAnd+ and subscribing to OsmAnd Pro (see https://osmand.net/docs/user/purchases/), you help the application become even more awesome!
 
+##### Development setup
+
+Check out `OsmAnd`, and check out `OsmAnd-resources` into a directory called `resources`
+next to it, as the `OsmAnd` build imports resources via its parent directory.
+
+You may need to edit `gradle.properties` to configure memory and locale settings, for example:
+
+```
+org.gradle.jvmargs=-Xmx4096m -XX:MetaspaceSize=512m -Dfile.encoding=UTF-8 -Duser.country=EN -Duser.language=en -Duser.variant=EN
+```
+
+And to disable Kotlin JVM target validation:
+
+```
+kotlin.jvm.target.validation.mode = IGNORE
+```
 
 #### Map Coverage and Quality - How Good is OSM Data?
 
