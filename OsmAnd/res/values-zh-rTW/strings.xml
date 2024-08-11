@@ -1963,7 +1963,7 @@
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
-    <string name="route_stops_before">%1$s 之前停止</string>
+    <string name="route_stops_before">此前 %1$s 站</string>
     <string name="rendering_attr_hideOverground_name">地上的物件</string>
     <string name="routing_attr_short_way_name">省油的方式</string>
     <string name="replace_favorite_confirmation">取代「%1$s」收藏？</string>
