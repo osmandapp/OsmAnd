@@ -1432,7 +1432,7 @@
     <string name="rendering_attr_hideOverground_name">地上物体</string>
     <string name="shared_string_change">更改</string>
     <string name="get_started">使用入门</string>
-    <string name="route_stops_before">%1$s 之前停止</string>
+    <string name="route_stops_before">此前%1$s站</string>
     <string name="coords_search">坐标搜索</string>
     <string name="advanced_coords_search">高级坐标搜索</string>
     <string name="back_to_search">返回到搜索</string>
