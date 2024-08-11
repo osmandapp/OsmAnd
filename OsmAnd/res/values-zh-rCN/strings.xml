@@ -548,7 +548,7 @@
     <string name="animate_route">开始模拟</string>
     <string name="file_can_not_be_renamed">无法重命名文件。</string>
     <string name="file_with_name_already_exists">已经有一个同名的文件存在。</string>
-    <string name="poi_query_by_name_matches_categories">找到了几个相关的兴趣点类别。</string>
+    <string name="poi_query_by_name_matches_categories">找到多个相关的 POI 类别。</string>
     <string name="data_to_search_poi_not_available">下载离线数据以搜索兴趣点。</string>
     <string name="poi_filter_by_name">按名称搜索</string>
     <string name="old_poi_file_should_be_deleted">兴趣点数据文件 \'%1$s\' 是多余的，可以删除。</string>
@@ -803,7 +803,7 @@
     <string name="monitoring_settings_descr">设置如何记录你的旅程。</string>
     <string name="lang_zh_cn">简体中文</string>
     <string name="lang_zh_tw">繁体中文</string>
-    <string name="find_parking">找到一个停车位</string>
+    <string name="find_parking">寻找停车位</string>
     <string name="shared_string_status">状态</string>
     <string name="shared_string_save_changes">保存更改</string>
     <string name="no_map_markers_found">请通过地图添加地图标记</string>
@@ -1072,7 +1072,7 @@
     <string name="shared_string_export">导出</string>
     <string name="shared_string_more">更多…</string>
     <string name="upload_osm_note_description">匿名上传您的 OSM 注记，或者使用您的 OpenStreetMap.org 账号。</string>
-    <string name="wiki_around">附近的维基百科文章</string>
+    <string name="wiki_around">附近的维基百科条目</string>
     <string name="search_map_hint">城市或地区</string>
     <string name="upload_poi">上传兴趣点</string>
     <string name="route_calculation">路线计算</string>
@@ -1410,7 +1410,7 @@
     <string name="get_it">获取</string>
     <string name="get_for">获取 %1$s</string>
     <string name="osm_live_banner_desc">获取无限的地图下载，添加每周，每日甚至每小时的更新。</string>
-    <string name="osmand_plus_banner_desc">无限的地图下载、更新，以及维基百科插件。</string>
+    <string name="osmand_plus_banner_desc">无限制的地图下载、更新，以及维基百科插件。</string>
     <string name="skip_map_downloading">跳过下载地图</string>
     <string name="skip_map_downloading_desc">你没有安装离线地图。你可以从列表中选择一张地图，或者稍后通过 \"菜单 - %1$s\"下载地图。</string>
     <string name="search_another_country">选择另一区域</string>
@@ -1524,7 +1524,7 @@
     <string name="lang_als">阿尔巴尼亚语 (Tosk)</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的低缩放层级）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">%1$s 地图已准备就绪，可以使用。</string>
-    <string name="simulate_initial_startup_descr">设置指示应用程序首次启动的标志，保持所有其他设置不变。</string>
+    <string name="simulate_initial_startup_descr">设置表示首次启动应用程序的标志，其他设置将保持不变。</string>
     <string name="favorite_category_dublicate_message">请使用尚不存在的类别名称。</string>
     <string name="shared_string_trip_recording">行程记录</string>
     <string name="download_live_updates">实时更新</string>
@@ -1648,7 +1648,7 @@
 \n代表区域：%1$s x %2$s</string>
     <string name="navigate_point_northing">北距</string>
     <string name="navigate_point_easting">东距</string>
-    <string name="error_avoid_specific_road">没有找到支线</string>
+    <string name="error_avoid_specific_road">没有发现支路</string>
     <string name="home_button">家</string>
     <string name="map_update">有 %1$s 个地图可更新</string>
     <string name="search_for">搜索</string>
@@ -2193,7 +2193,7 @@
     <string name="rotate_map_compass_opt">罗盘方向</string>
     <string name="rotate_map_bearing_opt">行进方向</string>
     <string name="import_file_favourites">将数据保存为 GPX 文件，还是将路径点导入到“收藏夹”？</string>
-    <string name="fav_file_to_load_not_found">在 {0} 未找到包含收藏的 GPX 文件</string>
+    <string name="fav_file_to_load_not_found">在 {0} 未找到包含我的收藏的 GPX 文件</string>
     <string name="fav_saved_sucessfully">收藏已保存至 {0}</string>
     <string name="no_fav_to_save">没有收藏的点要保存</string>
     <string name="share_fav_subject">通过 OsmAnd 分享我的收藏夹</string>
@@ -2290,8 +2290,8 @@
     <string name="downloads_left_template">剩余 %1$s 次下载</string>
     <string name="roads">道路</string>
     <string name="downloading_number_of_files">正在下载 %1$d 个文件……</string>
-    <string name="show_free_version_banner">显示免费版横幅</string>
-    <string name="show_free_version_banner_description">即使在付费版本中也显示免费版本的横幅。</string>
+    <string name="show_free_version_banner">显示免费版标语</string>
+    <string name="show_free_version_banner_description">即使在付费版本中，也显示免费版本的标语。</string>
     <string name="activate_seamarks_plugin">请启用 \"航海地图视图 \"插件</string>
     <string name="activate_srtm_plugin">请启用 \"地形 \"插件</string>
     <string name="confirm_download_roadmaps">由于您已经拥有标准（完整）地图，只含有道路的地图是不需要的。仍然要下载它吗？</string>
@@ -2424,7 +2424,7 @@
     <string name="coordinate_input">坐标输入</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
-    <string name="context_menu_read_full_article">阅读完整文章</string>
+    <string name="context_menu_read_full_article">阅读全文</string>
     <string name="context_menu_read_article">阅读文章</string>
     <string name="shared_string_without_name">没有名称</string>
     <string name="what_is_here">这里的内容:</string>
@@ -2464,7 +2464,7 @@
     <string name="add_group">添加组</string>
     <string name="add_group_descr">从收藏或 GPX 路径点导入群组。</string>
     <string name="empty_state_markers_active">创建地图标记!</string>
-    <string name="empty_state_markers_active_desc">长按或短按“地点”，然后点标记标志按钮。</string>
+    <string name="empty_state_markers_active_desc">长按或轻点任何“地点”，然后点击旗帜样的标记按钮。</string>
     <string name="empty_state_markers_groups">导入群组</string>
     <string name="empty_state_markers_groups_desc">导入收藏群组或路径点作为标记。</string>
     <string name="empty_state_markers_history_desc">标记为已通过的标记将显示在此屏幕上。</string>
@@ -2660,7 +2660,7 @@
     <string name="move_maps">移动地图</string>
     <string name="dont_move_maps">不要移动</string>
     <string name="public_transport_ped_route_title">步行路线约为 %1$s，可能比公共交通更快</string>
-    <string name="public_transport_no_route_title">非常抱歉，OsmAnd 无法找到符合您的设置的路线。</string>
+    <string name="public_transport_no_route_title">非常抱歉，OsmAnd 找不到符合您设置的路线。</string>
     <string name="public_transport_try_ped">尝试步行导航。</string>
     <string name="public_transport_try_change_settings">尝试更改设置。</string>
     <string name="public_transport_calc_pedestrian">规划步行路径</string>
@@ -2732,7 +2732,7 @@
     <string name="angular_measeurement">角度单位</string>
     <string name="angular_measeurement_descr">更改方位角测量方式。</string>
     <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
-    <string name="poi_cannot_be_found">无法找到节点或道路。</string>
+    <string name="poi_cannot_be_found">找不到节点或道路。</string>
     <string name="shared_string_total">一共</string>
     <string name="wikivoyage_download_pics">下载图像</string>
     <string name="shared_string_travel_book">旅游书</string>
@@ -2961,7 +2961,7 @@
     <string name="purchase_dialog_title">选择计划</string>
     <string name="images_cache">图片缓存</string>
     <string name="article_removed">已删除文章</string>
-    <string name="saved_articles">已存书签文章</string>
+    <string name="saved_articles">已存书签的文章</string>
     <string name="group_deleted">群组已删除</string>
     <string name="rendering_attr_whiteWaterSports_name">白水运动</string>
     <string name="touring_view_renderer">旅游风景</string>
@@ -3689,7 +3689,7 @@
     <string name="track_has_no_needed_data">轨迹缺少相应的数据。</string>
     <string name="option_available_only_in_osmand_pro">作为 OsmAnd Pro 订阅的一部分提供。</string>
     <string name="purchases_feature_desc_pro_widgets">获得 OsmAnd Pro 功能：路线着色等。</string>
-    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 套餐以找到适合您的产品。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到适合您的产品。</string>
     <string name="routes_color_by_type">路线着色依据…</string>
     <string name="rendering_value_walkingRoutesOSMC_description">根据路线各自的本地颜色（如果 OpenStreetMap 上存在）和远足盾牌符号为路线着色。</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">按网络从属着色。</string>
@@ -3809,7 +3809,7 @@
     <string name="storage_found_files_descr">轻按 “%1$s”将 %2$s 个文件从 “%3$s” 复制到 “%4$s”。这可能需要一会儿。</string>
     <string name="storage_copied_files_size">已处理 %1$s 个文件 ，%2$s</string>
     <string name="storage_copying_files_size">正在复制 %1$s 个文件 %2$s</string>
-    <string name="storage_found_files_size">找到了 %1$s 个文件 %2$s</string>
+    <string name="storage_found_files_size">已找到 %1$s 个文件 %2$s</string>
     <string name="start_copying">开始复制</string>
     <string name="skip_confirmation">好，跳过</string>
     <string name="shared_storage">共享存储</string>
@@ -4303,7 +4303,7 @@
     <string name="use_latin_name_if_missing">若缺失，则使用拉丁名</string>
     <string name="routing_attr_allow_expert_description">极其困难的路线，有危险的障碍物和周边环境。</string>
     <string name="import_track_desc">文件 %1$s 不含有路径点，将其作为轨迹导入吗？</string>
-    <string name="start_editing_card_description">你可以而且应该编辑Wikivoyage上的任何文章。分享知识、经验、才能和你的注意力。</string>
+    <string name="start_editing_card_description">您可以而且应该编辑Wikivoyage上的任何文章。以分享知识、经验、才能和您关心的事物。</string>
     <string name="rate_dialog_descr">请在Google Play上分享您的反馈并为我们的作品评分。</string>
     <string name="auto_backup_preference_desc">默认情况下，安卓系统会保存收藏夹、地图标记和OsmAnd设置的备份，以便在新设备或重新安装后恢复它们。这个备份被限制在25MB。
 \n当使用OsmAnd云时，这可能导致重新安装后的误解。</string>
@@ -4437,8 +4437,8 @@
     <string name="keep_passed_markers_descr">标记为已通过的收藏夹或 GPX 路径点群组，添加过的地图标记将保留在地图上。如果群组处于未活动状态，则标记将从地图上消失。</string>
     <string name="nautical_render_descr">用于航海导航。特点是浮标、灯塔、河道、海道和航迹、港口、海标服务和等深线。</string>
     <string name="ski_map_render_descr">用于滑雪。特点是滑雪道、滑雪缆车、越野赛道等。淡化次要地图对象。</string>
-    <string name="wikivoyage_download_pics_descr">文章图片可以下载以供离线使用。
-\n在“探索”→“选项”中始终可用。</string>
+    <string name="wikivoyage_download_pics_descr">文章中的图片可以下载以供离线使用。
+\n始终可在 \"探索\"→\"选项 \"中进行操作。</string>
     <string name="subsequent_dest_description">向上移动目的地，并创建它</string>
     <string name="marker_save_as_track_descr">将您的标记导出到以下 GPX 文件：</string>
     <string name="marker_moved_to_history">地图标记已移至历史记录</string>
@@ -4943,7 +4943,7 @@
 \n • 修正了倾斜、缩放和旋转的地图手势
 \n
 \n</string>
-    <string name="get_discount_second_part">然后 %1$s</string>
+    <string name="get_discount_second_part">接着 %1$s</string>
     <string name="empty_tracks">您没有轨迹文件。</string>
     <string name="shared_string_select_recent">选择最近的</string>
     <string name="shared_string_original">原始</string>
@@ -5097,7 +5097,7 @@
 \n
 \n - 向 \"OsmAnd 云 \"免费备份收藏夹和设置
 \n
-\n - 支持 3D 浮雕的新地形图形式
+\n - 支持 3D 地形的新地形图形式
 \n
 \n - 轨迹管理：更新用户界面，增加排序功能，支持嵌套文件夹
 \n
@@ -5514,7 +5514,7 @@
     <string name="sorted_sufolders_toast">%1$s \"中的子文件夹按该方式排序： \"%2$s\"</string>
     <string name="custom_map_button_name_present">此按钮已经存在</string>
     <string name="dont_ask_anymore">不再询问</string>
-    <string name="battery_optimization_banner_content">Android 电池优化可导致录制的轨迹出现间隔和不准确。</string>
+    <string name="battery_optimization_banner_content">Android 电池优化可导致录制的轨迹出现间断和不准确。</string>
     <string name="map_widget_sun_position">太阳位置</string>
     <string name="speedometer_description">通过 GPS 报告显示您的当前速度</string>
     <string name="custom_buttons">自定义按钮</string>
@@ -5618,7 +5618,7 @@
     <string name="quick_action_terrain_color_scheme">地形配色方案</string>
     <string name="location_radius">定位半径</string>
     <string name="quick_action_routes_summary">在地图上显示或隐藏 %1$s 的切换按钮。</string>
-    <string name="auto_25_chars_route_tr"/>
+    <string name="auto_25_chars_route_tr">右转</string>
     <string name="view_angle">视线角</string>
     <string name="quick_action_directions_from">起始点</string>
     <string name="navigation_position">导航位置</string>
@@ -5663,4 +5663,16 @@
     <string name="shared_string_replace">替换</string>
     <string name="profile_icon">配置文件图标</string>
     <string name="quick_action_remove_next_destination">下一个目的地点</string>
+    <string name="daynight_mode_sunrise_sunset_summary">根据当地日出和日落时间，自动切换日间和夜间主题。</string>
+    <string name="auto_25_chars_route_tl">左转</string>
+    <string name="hugerock_promo_description">在 %1$s 个月内免费使用包括无限制地图下载、3D 地形等功能</string>
+    <string name="auto_25_chars_route_kl">保持在左侧</string>
+    <string name="auto_25_chars_route_kr">保持在右侧</string>
+    <string name="auto_25_chars_route_tshr">向右急转</string>
+    <string name="auto_25_chars_route_tshl">向左急转</string>
+    <string name="auto_25_chars_route_tslr">稍向右转</string>
+    <string name="auto_25_chars_route_tu">调头</string>
+    <string name="auto_25_chars_route_tsll">稍向左转</string>
+    <string name="detailed_track_guidance">详细的轨迹指引</string>
+    <string name="use_v1_auto_zoom">不连续自动缩放（旧版）</string>
 </resources>
