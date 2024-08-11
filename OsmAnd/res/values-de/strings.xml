@@ -3112,7 +3112,7 @@
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
-    <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
+    <string name="wake_time">Timeout (Abschaltzeit) nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
