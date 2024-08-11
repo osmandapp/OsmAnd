@@ -3620,7 +3620,7 @@
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
     <string name="shared_string_night_map">Nachtkarte</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Zeitüberschreitung nach dem Aufwachen“.</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Timeout nach dem Aufwachen“.</string>
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
