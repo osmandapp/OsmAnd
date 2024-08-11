@@ -5091,7 +5091,7 @@
     <string name="weather_download_error">Nepodařilo se stáhnout %1$s dlaždic.</string>
     <string name="proxy_port_max_warning">Maximální hodnota portu je %1$s</string>
     <string name="external_device_low_battery">Slabá baterie</string>
-    <string name="external_device_forget_sensor_description">Senzor bude ze seznamu odstraněn. Tento senzor budete moci kdykoli znovu spárovat.</string>
+    <string name="external_device_forget_sensor_description">Senzor bude ze seznamu odstraněn. Tento snímač budete moci kdykoli znovu spárovat.</string>
     <string name="external_device_disconnected">Odpojeno</string>
     <string name="external_device_connected">Připojeno</string>
     <string name="external_device_forget_sensor">Zapomenout senzor</string>
@@ -5127,7 +5127,7 @@
     <string name="ant_plus_bluetooth_off">Bluetooth je vypnuté</string>
     <string name="ant_plus_bluetooth_off_description">Zapněte vyhledání Bluetooth a spárujte senzory.</string>
     <string name="ant_plus_searching_text">Hledání senzorů</string>
-    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti senzoru. Senzor je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
+    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti snímače. Snímač je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
     <string name="ant_plus_help_title">Nevím, jaký typ senzoru mám</string>
     <string name="ant_plus_searching">Hledání</string>
     <string name="ant_plus_pair_new_sensor">Spárování nového senzoru</string>
@@ -5744,4 +5744,12 @@
     <string name="quick_action_verb_turn_on_off">Zapnout / vypnout</string>
     <string name="shared_string_set">Nastavit</string>
     <string name="shared_string_colors">Barvy</string>
+    <string name="routing_attr_avoid_cobblestone_description">Vyhnout se dlažbě</string>
+    <string name="required_maps">Vyžadované mapy</string>
+    <string name="wall_height">Výška zdi</string>
+    <string name="rendering_value_dark_orange_name">Tmavě oranžová</string>
+    <string name="vertical_exaggeration">Vertikální převýšení</string>
+    <string name="vertical_exaggeration_description">Změnou hodnoty měřítka můžete zvýraznit 3D reliéf.</string>
+    <string name="map_settings_weather_wind_animation">Animace větru</string>
+    <string name="routing_attr_avoid_cobblestone_name">Vyhnout se dlažbě</string>
 </resources>

@@ -54,7 +54,7 @@
     <string name="download_roads_only_item">仅道路</string>
     <string name="download_srtm_maps">等高线</string>
     <string name="download_regular_maps">定期地图</string>
-    <string name="rendering_attr_noAdminboundaries_name">隐藏边界</string>
+    <string name="rendering_attr_noAdminboundaries_name">边界线</string>
     <string name="no_buildings_found">未找到建筑物。</string>
     <string name="incremental_search_city">增量搜寻城市</string>
     <string name="search_villages_and_postcodes">搜索更多村庄/邮政编码</string>
@@ -505,7 +505,7 @@
     <string name="map_online_data_descr">使用在线地图（在存储卡上下载并缓存瓦片）。</string>
     <string name="shared_string_online_maps">在线地图</string>
     <string name="online_map_settings_descr">选择在线或缓存的瓦片地图来源。</string>
-    <string name="osmand_accessibility_description">使设备的辅助功能直接在 OsmAnd 中可用。例如，它可以方便地调整文本到语音转换语音的语速，配置D-pad导航，使用轨迹球进行缩放控制，或文本到语音转换反馈，例如自动宣布您的位置。</string>
+    <string name="osmand_accessibility_description">使设备的辅助功能直接在 OsmAnd 中可用。例如，它可以方便地调整文本到语音转换语音的语速，配置D-pad导航，使用轨迹球进行缩放控制，或文本到语音转换反馈，例如自动播报您的位置。</string>
     <string name="vector_maps_may_display_faster_on_some_devices">矢量地图很可能显示更快速。但在某些设备上不能正常工作。</string>
     <string name="test_voice_prompts">测试语音提示</string>
     <string name="switch_to_raster_map_to_see">在 \"菜单\"（\"下载地图\"）中下载该位置的离线矢量地图，或切换到 \"在线地图 \"插件。</string>
@@ -859,7 +859,7 @@
     <string name="rendering_attr_showMtbRoutes_name">山地自行车路线</string>
     <string name="show_polygons">显示多边形</string>
     <string name="shared_string_email_address">电子邮件地址</string>
-    <string name="rendering_attr_hideUnderground_name">隐藏地下物体</string>
+    <string name="rendering_attr_hideUnderground_name">地下物体</string>
     <string name="data_is_not_available">数据不可用</string>
     <string name="shared_string_remove">移除</string>
     <string name="shared_string_read_more">阅读更多</string>
@@ -1104,7 +1104,7 @@
     <string name="nearest_cities">最近的城市</string>
     <string name="select_city">选择城市</string>
     <string name="select_postcode">邮政编码搜索</string>
-    <string name="quick_action_auto_zoom">地图自动缩放开关</string>
+    <string name="quick_action_auto_zoom">自动缩放地图</string>
     <string name="quick_action_auto_zoom_on">启用自动缩放</string>
     <string name="quick_action_auto_zoom_off">关闭自动缩放</string>
     <string name="subscribe_email_error">错误</string>
@@ -1118,7 +1118,7 @@
     <string name="do_not_show_startup_messages">不显示启动消息</string>
     <string name="full_version_thanks">感谢你购买 OsmAnd 的付费版。</string>
     <string name="shared_string_action_name">操作名称</string>
-    <string name="quick_action_auto_zoom_desc">打开或关闭速度控制自动缩放的按钮。</string>
+    <string name="quick_action_auto_zoom_desc">用以打开或关闭随速度而自动控制缩放的按钮。</string>
     <string name="parking_options">泊车选项</string>
     <string name="points_delete_multiple_succesful">点已删除。</string>
     <string name="points_delete_multiple">删除 %1$d 个点？</string>
@@ -1327,7 +1327,7 @@
     <string name="search_favorites">在我的收藏中搜索</string>
     <string name="hillshade_menu_download_descr">下载“山体阴影”叠加层地图以显示垂直阴影。</string>
     <string name="hillshade_purchase_header">安装“地形”插件以显示渐变的垂直区域。</string>
-    <string name="hide_from_zoom_level">基于缩放级别开始隐藏</string>
+    <string name="hide_from_zoom_level">从该缩放级别开始隐藏</string>
     <string name="srtm_menu_download_descr">下载此地区的“等高线”地图。</string>
     <string name="shared_string_plugin">插件</string>
     <string name="srtm_purchase_header">购买并安装“地形”插件以显示渐变的垂直区域。</string>
@@ -1374,8 +1374,8 @@
     <string name="routing_attr_height_obstacles_name">使用海拔数据</string>
     <string name="rendering_attr_depthContours_description">显示等深线和标记。</string>
     <string name="rendering_attr_depthContours_name">航海等深线</string>
-    <string name="auto_split_recording_title">自动拆分录音后的间隙</string>
-    <string name="auto_split_recording_descr">6分钟间隔后开始新区段，2小时间隔后开始新轨迹，或间隔更长时间，日期已改变则启用新文件。</string>
+    <string name="auto_split_recording_title">自动拆分录制之后的间隔</string>
+    <string name="auto_split_recording_descr">间隔 6 分钟后开始新片段，间隔 2 小时后开始新轨迹。或间隔更长时间后，如在日期发生变化时，建立新文件。</string>
     <string name="rendering_attr_contourDensity_description">等高线密度</string>
     <string name="rendering_attr_contourDensity_name">等高线密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -1465,7 +1465,7 @@
     <string name="access_disable_offroute_recalc_descr">偏离路线后不重新计算路线。</string>
     <string name="access_disable_wrong_direction_recalc">向反方向行驶时不要重新计算路线</string>
     <string name="access_disable_wrong_direction_recalc_descr">仅向相反方向移动时无需重新计算路线。</string>
-    <string name="access_smart_autoannounce">自动智能播报</string>
+    <string name="access_smart_autoannounce">智能自动播报</string>
     <string name="access_smart_autoannounce_descr">仅在目标点方向变化时才发出通知。</string>
     <string name="access_autoannounce_period">自动播报周期</string>
     <string name="access_autoannounce_period_descr">播报之间的最小时间间隔。</string>
@@ -1508,7 +1508,7 @@
     <string name="switch_start_finish">交换起始点和目的地</string>
     <string name="rec_split">录制器拆分</string>
     <string name="rec_split_title">使用录制器拆分</string>
-    <string name="rec_split_desc">重写剪辑时，使用的空间超过存储大小。</string>
+    <string name="rec_split_desc">当已用空间超出存储空间时，重写片段。</string>
     <string name="rec_split_clip_length">剪辑长度</string>
     <string name="rec_split_clip_length_desc">录制片段的时间上限。</string>
     <string name="rec_split_storage_size_desc">全部录制片段可以使用的空间量。</string>
@@ -1915,24 +1915,24 @@
     <string name="use_compass_navigation_descr">没有检测到朝向的时候使用罗盘。</string>
     <string name="auto_zoom_map_descr">缩放级别将根据你的速度而定（当地图与当前的位置同步时）。</string>
     <string name="snap_to_road_descr">当前位置图标将与当前导航路径对齐</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd(OSM自动导航方向)
+    <string name="osmand_long_description_1000_chars">OsmAnd(OSM自动导航指示)
 \n
 \n OsmAnd是一款开源软件导航应用，可以访问各种全球OSM数据。所有的地图数据（矢量图或磁贴图）都可以存储在手机存储卡上，供离线使用。还提供离线和在线路线功能，包括逐个转弯的语音引导。
 \n
-\n 一些核心功能。
+\n 部分核心功能：
 \n - 完整的离线功能（将下载的矢量图或瓷砖图存储在设备存储中）。
 \n - 紧凑的离线矢量地图，可供全世界使用。
 \n - 直接从应用中下载国家或地区地图
 \n - 可叠加多个地图层，如GPX或导航轨迹、兴趣点、收藏夹、公共交通站点、可自定义透明度的附加地图，等高线/山体阴影/坡度等地形特征。
 \n - 离线搜索地址和地点(POI)
-\n - 中程距离的离线路由
-\n - 汽车、自行车和行人模式，可选。
-\n - 自动日/夜景切换
+\n - 中程距离的离线路径规划
+\n - 汽车、自行车和行人模式可选。
+\n - 自动日 / 夜视图切换
 \n - 基于速度的地图缩放
 \n - 根据指南针或运动方向进行地图定位
 \n - 车道引导、限速显示、录音和文本到语音语音
 \n
-\n OsmAnd这个免费版本的限制。
+\n 该OsmAnd免费版本的限制：
 \n - 地图下载数量限制
 \n - 不能离线访问维基百科的POI
 \n
@@ -2261,7 +2261,7 @@
     <string name="successfully_uploaded_pattern">已上传 {0} / {1}</string>
     <string name="try_again">再试一次</string>
     <string name="error_message_pattern">错误︰ {0}</string>
-    <string name="shared_string_card_was_hidden">卡片被隐藏</string>
+    <string name="shared_string_card_was_hidden">卡片已被隐藏</string>
     <string name="shared_string_undo">撤消</string>
     <string name="shared_string_skip">跳过</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -2351,8 +2351,8 @@
     <string name="favorite_empty_place_name">地点</string>
     <string name="quick_action_duplicates">快捷操作被重命名为 %1$s 以避免重复。</string>
     <string name="quick_action_duplicate">快速动作的名称重复</string>
-    <string name="quick_action_showhide_favorites_descr">在地图上显示或隐藏收藏点的切换按钮。</string>
-    <string name="quick_action_showhide_poi_descr">在地图上显示或隐藏兴趣点的切换按钮。</string>
+    <string name="quick_action_showhide_favorites_descr">用以在地图上显示或隐藏收藏点的切换按钮。</string>
+    <string name="quick_action_showhide_poi_descr">用以在地图上显示或隐藏兴趣点的切换按钮。</string>
     <string name="quick_action_poi_show">显示 %1$s</string>
     <string name="quick_action_poi_hide">隐藏 %1$s</string>
     <string name="quick_action_add_category">添加一个类别</string>
@@ -2909,9 +2909,9 @@
     <string name="routing_attr_allow_expert_name">允许专家路线</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">节点网络</string>
     <string name="hide_compass_ruler">隐藏罗盘标尺</string>
-    <string name="quick_action_terrain_descr">在地图上显示或隐藏地形图层的按钮。</string>
-    <string name="details_dialog_decr">显示或隐藏其他地图细节</string>
-    <string name="quick_action_showhide_mapillary_descr">在地图上显示或隐藏Mapillary图层的开关。</string>
+    <string name="quick_action_terrain_descr">用以在地图上显示或隐藏地形图层的按钮。</string>
+    <string name="details_dialog_decr">显示或隐藏额外的地图细节</string>
+    <string name="quick_action_showhide_mapillary_descr">用以在地图上显示或隐藏 Mapillary 图层的开关。</string>
     <string name="slope_description">坡度使用颜色来可视化地形陡度。</string>
     <string name="accessibility_prefs_descr">选择图标、颜色与名称</string>
     <string name="track_coloring_solid">实线</string>
@@ -2922,7 +2922,7 @@
     <string name="routeInfo_tracktype_name">表面坚固度</string>
     <string name="rendering_attr_streetLightingNight_name">仅在夜晚显示</string>
     <string name="layer_osm_edits">OSM 编辑</string>
-    <string name="quick_action_transport_descr">在地图上显示或隐藏公共交通的按钮。</string>
+    <string name="quick_action_transport_descr">用以在地图上显示或隐藏公共交通的按钮。</string>
     <string name="base_profile_descr_public_transport">公共交通类型</string>
     <string name="rendering_attr_showLez_description">在地图上显示低排放区。不会影响路线规划。</string>
     <string name="rendering_attr_showLez_name">显示低排放区</string>
@@ -2972,7 +2972,7 @@
     <string name="route_is_calculated">路线已计算</string>
     <string name="rendering_value_darkyellow_name">暗黄色</string>
     <string name="plan_route">规划路线</string>
-    <string name="hide_passed">隐藏已经过</string>
+    <string name="hide_passed">隐藏已路过的</string>
     <string name="show_passed">显示已经过</string>
     <string name="add_line">添加线路</string>
     <string name="edit_line">编辑线路</string>
@@ -3493,7 +3493,7 @@
     <string name="select_category_descr">选择类别或添加新类别</string>
     <string name="track_recording_will_be_continued">录制将继续。</string>
     <string name="copy_poi_name">复制兴趣点名称</string>
-    <string name="quick_action_show_hide_title">显示/隐藏</string>
+    <string name="quick_action_show_hide_title">显示 / 隐藏</string>
     <string name="shared_string_interval">间隔</string>
     <string name="track_has_no_altitude">轨迹不包含高度数据。</string>
     <string name="track_has_no_speed">轨迹不包含速度数据。</string>
@@ -3835,7 +3835,7 @@
     <string name="use_external_timestamps">使用外部时间戳</string>
     <string name="use_external_timestamps_description">使用在线路径规划服务的时间戳来调整估计时间和平均速度</string>
     <string name="history_preferences_descr">你可以为每种历史记录类型单独禁用历史日志记录。</string>
-    <string name="android_auto_map_placeholder_title">地图显示在车辆屏幕上。</string>
+    <string name="android_auto_map_placeholder_title">地图已显示在车辆屏幕上。</string>
     <string name="android_auto_map_placeholder_descr">要在程序中查看地图，请断开设备与 Android Auto 的连接。</string>
     <string name="android_auto_purchase_request_title">要将 OsmAnd 与 Android Auto 搭配使用，请购买 OsmAnd Pro 或 Maps+</string>
     <string name="continue_on_phone">在移动设备上继续</string>
@@ -4650,7 +4650,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">显示 fixme 标签</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">注记标签</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低缩放层级的图标简略显示</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">不要隐藏水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">提高水路隧道的能见度</string>
     <string name="files_with_route_restrictions">有路线限制的文件</string>
     <string name="show_borders_of_downloaded_maps">显示已下载地图的边框</string>
     <string name="widget_with_dot">小工具。</string>
@@ -4737,7 +4737,7 @@
     <string name="press_again_to_change_the_map_orientation">再次点击可更改地图方向</string>
     <string name="snowmobile_render_descr">适用于有专用道路和轨道的雪地摩托驾驶。</string>
     <string name="precision_hdop_and_vdop">水平精度：%1$s，垂直：%2$s</string>
-    <string name="quick_action_contour_lines_descr">显示或隐藏地图上等高线的按钮。</string>
+    <string name="quick_action_contour_lines_descr">用以显示或隐藏地图等高线的按钮。</string>
     <string name="quick_action_hillshade_descr">用于在地图上显示或隐藏山体阴影的按钮。</string>
     <string name="what_is_new">最新消息</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">在路径规划时，首选未铺砌的道路而不是已铺砌的道路。</string>
@@ -5225,11 +5225,27 @@
     <string name="shared_string_foot">脚</string>
     <string name="number_of_tracks">%1$s 个轨迹</string>
     <string name="revolutions_per_minute_unit">每分钟转速</string>
-    <string name="release_4_6">- 滑翔比小工具
+    <string name="release_4_6">- Android Auto： 新增 3D 模式
 \n
-\n - 增加 ANT+ 温度小工具
+\n - 轨迹： 引入了过滤器和智能文件夹，优化了内存以容纳较大文件
 \n
-\n - 更优的大型 GPX 轨迹存储管理
+\n - 增强了顶部和底部小部件面板，以容纳所有小部件
+\n
+\n - 改进了本地资源管理
+\n
+\n - 外部控制器的自定义按钮映射
+\n
+\n - 新小部件 \"滑翔比率 \"和 \"太阳位置
+\n
+\n - OsmAnd Cloud： 现在可访问已删除的文件
+\n
+\n - 使用新的对称梯度增强了斜坡模式下的轨道着色功能
+\n
+\n - 解决了透明状态栏的问题
+\n
+\n - 添加了对 ANT+ 温度部件的支持
+\n
+\n - 推出 \"可用内存 \"小部件
 \n
 \n</string>
     <string name="help_article_navigation_routing_train_routing_name">火车路线规划</string>
