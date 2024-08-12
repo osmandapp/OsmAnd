@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.util.*;
 
 public class GpxRouteApproximation {
+	
+	public static final int GPX_OSM_POINTS_MATCH_ALGORITHM = 1;
+	public static final int GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM = 2;
+	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_POINTS_MATCH_ALGORITHM;
+	
+	
 	public List<RoutePlannerFrontEnd.GpxPoint> finalPoints = new ArrayList<>();
 	public List<RouteSegmentResult> fullRoute = new ArrayList<>();
 
@@ -179,11 +185,16 @@ public class GpxRouteApproximation {
 		if (nativeLib != null && router.isUseNativeApproximation()) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
 		} else {
-			GpxSegmentsApproximation app = new GpxSegmentsApproximation();
 			if (gctx.ctx.calculationProgress == null) {
 				gctx.ctx.calculationProgress = new RouteCalculationProgress();
 			}
-			app.fastGpxApproximation(router, gctx, gpxPoints);
+			if (GPX_SEGMENT_ALGORITHM == GPX_OSM_POINTS_MATCH_ALGORITHM) {
+				GpxPointsMatchApproximation app = new GpxPointsMatchApproximation();
+				app.gpxApproximation(router, gctx, gpxPoints);
+			} else if (GPX_SEGMENT_ALGORITHM == GPX_OSM_POINTS_MATCH_ALGORITHM) {
+				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation();
+				app.gpxApproximation(router, gctx, gpxPoints);
+			}
 			calculateGpxRoute(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
@@ -628,7 +639,7 @@ public class GpxRouteApproximation {
 				RouteDataObject r = sr.getObject();
 				QuadPointDouble pp = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(i), r.getPoint31YTile(i),
 						r.getPoint31XTile(i + 1), r.getPoint31YTile(i + 1));
-				double currentsDist = router.squareDist((int) pp.x, (int) pp.y, px, py);
+				double currentsDist = RoutePlannerFrontEnd.squareDist((int) pp.x, (int) pp.y, px, py);
 				if (currentsDist <= SQR) {
 					return true;
 				}

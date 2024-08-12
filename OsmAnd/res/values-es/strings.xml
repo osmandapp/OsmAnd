@@ -5857,4 +5857,8 @@
     <string name="route_roundabout_exit">Toma la salida %1$d</string>
     <string name="help_article_map_tracks_name">Pistas</string>
     <string name="help_article_map_routes_name">Rutas</string>
+    <string name="add_widget_below">Añadir widget a continuación</string>
+    <string name="add_widget_above">Añadir widget arriba</string>
+    <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
+    <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
 </resources>

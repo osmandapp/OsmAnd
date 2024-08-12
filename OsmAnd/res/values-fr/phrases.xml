@@ -4868,4 +4868,9 @@
     <string name="poi_us_maps_recreation_area_facility_boat_launch">Mise à l\'eau</string>
     <string name="poi_us_maps_recreation_area_facility_boat_ramp">Rampe de mise à l\'eau</string>
     <string name="poi_blm_yes">Géré par le Bureau Of Land Management</string>
+    <string name="poi_cash_in">Dépôt d\'espèces</string>
+    <string name="poi_cash_in_customers">Clients</string>
+    <string name="poi_diet_pescetarian_no">Régime pescétarien : non</string>
+    <string name="poi_cash_in_yes">Oui</string>
+    <string name="poi_cash_in_no">Non</string>
 </resources>

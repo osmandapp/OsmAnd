@@ -571,7 +571,7 @@ public class MapSelectionHelper {
 				publicTransportTypes = new ArrayList<>();
 				List<PoiFilter> filters = category.getPoiFilters();
 				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport")) {
+					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
 						for (PoiType poiType : poiFilter.getPoiTypes()) {
 							publicTransportTypes.add(poiType.getKeyName());
 							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {

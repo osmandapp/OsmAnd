@@ -163,8 +163,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
-		LOG.info(">>>> NavigationSession - onCreate");
-
 		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
@@ -180,8 +178,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
-		LOG.info(">>>> NavigationSession - onStart");
-
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
 
@@ -190,8 +186,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			List<ApplicationMode> availableAppModes = ApplicationMode.values(app);
 			for (ApplicationMode availableAppMode : availableAppModes) {
 				if (isAppModeDerivedFromCar(availableAppMode)) {
-					LOG.info(">>>> Set app mode = " + availableAppMode.getStringKey());
-
 					settings.setApplicationMode(availableAppMode);
 					break;
 				}
@@ -205,15 +199,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		app.getOsmandMap().getMapView().setupRenderingView();
 
 		if (!app.isAppInForegroundOnRootDevice()) {
-			LOG.info(">>>> checkAppInitialization");
 			checkAppInitialization(new RestoreNavigationHelper(app, null));
 		}
 	}
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
-		LOG.info(">>>> NavigationSession - onStop");
-
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
 		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated();
@@ -228,8 +219,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
-		LOG.info(">>>> NavigationSession - onDestroy");
-
 		OsmandApplication app = getApp();
 		removeLocationUpdates();
 		removeLocationSourceListener();

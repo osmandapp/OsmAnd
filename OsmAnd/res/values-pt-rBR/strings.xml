@@ -5846,4 +5846,9 @@
     <string name="help_article_map_tracks_name">Trilhas</string>
     <string name="help_article_map_routes_name">Rotas</string>
     <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha pressionado</string>
+    <string name="add_widget_below">Adicione um widget abaixo</string>
+    <string name="height_cache">Cache de altitude</string>
+    <string name="add_widget_to_the_right">Adicionar widget à direita</string>
+    <string name="add_widget_to_the_left">Adicionar widget à esquerda</string>
+    <string name="add_widget_above">Adicionar widget acima</string>
 </resources>
