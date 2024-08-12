@@ -127,10 +127,10 @@ public class QuickActionButtonState extends MapButtonState {
 
 	@Nullable
 	@Override
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int colorId) {
+	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int color) {
 		if (isSingleAction()) {
 			QuickAction action = quickActions.get(0);
-			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), colorId);
+			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), color);
 
 			if (mapIcon && action.isActionWithSlash(app)) {
 				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
@@ -138,7 +138,7 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 			return icon;
 		}
-		return super.getIcon(nightMode, mapIcon, colorId);
+		return super.getIcon(nightMode, mapIcon, color);
 	}
 
 	public void resetForMode(@NonNull ApplicationMode appMode) {
