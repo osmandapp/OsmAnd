@@ -54,6 +54,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
+	private static final String SCROLL_TO_AVAILABLE = "scroll_to_available";
+	private static final String CONTEXT_SELECTED_WIDGET = "context_widget_page";
+	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
+	private static final String ADD_TO_NEXT = "widget_order";
 
 	private MapLayers mapLayers;
 	private MapWidgetRegistry widgetRegistry;
@@ -79,6 +83,13 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	public void setSelectedFragment(@Nullable WidgetsListFragment fragment) {
 		this.selectedFragment = fragment;
+		Bundle args = getArguments();
+		if (fragment != null && args != null && args.containsKey(SCROLL_TO_AVAILABLE)) {
+			int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
+			if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == fragment.getSelectedPanel()) {
+				selectedFragment.scrollToAvailable();
+			}
+		}
 	}
 
 	@Override
@@ -231,6 +242,19 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel, boolean recreateControls) {
+		Bundle args = getArguments();
+		if (args != null) {
+			int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
+			if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == panel) {
+				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
+				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
+				if (selectedWidget != null) {
+					createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls, selectedWidget, addToNext);
+					onWidgetsConfigurationChanged();
+					return;
+				}
+			}
+		}
 		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls);
 		onWidgetsConfigurationChanged();
 	}
@@ -265,6 +289,24 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.setSelectedPanel(panel);
 			fragment.setSelectedAppMode(appMode);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
+	}
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @NonNull String selectedWidget, boolean addNext) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
+			fragment.setSelectedPanel(panel);
+			fragment.setSelectedAppMode(appMode);
+			Bundle args = new Bundle();
+			args.putBoolean(SCROLL_TO_AVAILABLE, true);
+			args.putString(CONTEXT_SELECTED_WIDGET, selectedWidget);
+			args.putInt(CONTEXT_SELECTED_PANEL, panel.ordinal());
+			args.putBoolean(ADD_TO_NEXT, addNext);
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
