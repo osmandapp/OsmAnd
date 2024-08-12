@@ -3199,4 +3199,11 @@
     <string name="top">ზედა</string>
     <string name="bottom">ქვედა</string>
     <string name="steps_per_minute_unit">SPM</string>
+    <string name="keep_and_add_destination_point">დამატება გასავლელ წერტილად</string>
+    <string name="quick_action_map_style">რუკის სტილი</string>
+    <string name="quick_action_remove_next_destination">შემდეგი სამიზნე წერტილი</string>
+    <string name="upload_to_openstreetmap">ატვირთვა OpenStreetMap-ზე</string>
+    <string name="rendering_category_others">სხვა რუკის ატრიბუტები</string>
+    <string name="driving_region_uk">UK და მსგავსები</string>
+    <string name="simulate_your_location">თქვენი მდებარეობის სიმულაცია</string>
 </resources>
