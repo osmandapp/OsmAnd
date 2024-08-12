@@ -369,7 +369,9 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
-			if (mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
+			BinaryMapIndexReader reader = r.getKey();
+			boolean isLiveUpdate = reader.getHHRoutingIndexes().size() == 0;
+			if (!isLiveUpdate && mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
 				continue;
 			}
 			// NOTE: load headers same as we do in non-native (it is not native optimized)

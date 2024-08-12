@@ -174,10 +174,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx == null) {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
-		hctx.rctx.mapIndexReaderFilter = new HashSet<>();
-		for (HHRouteRegionPointsCtx<T> reg : hctx.regions) {
-			hctx.rctx.mapIndexReaderFilter.add(reg.file);
-		}
 		filterPointsBasedOnConfiguration(hctx);
 
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
@@ -660,6 +656,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}		
 		if (DEBUG_VERBOSE_LEVEL > 0) {
 			hctx.pointsRect.printStatsDistribution("  Points distributed");
+		}
+		hctx.rctx.mapIndexReaderFilter = new HashSet<>();
+		for (HHRouteRegionPointsCtx<T> reg : hctx.regions) {
+			hctx.rctx.mapIndexReaderFilter.add(reg.file);
 		}
 		hctx.initialized = true;
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
