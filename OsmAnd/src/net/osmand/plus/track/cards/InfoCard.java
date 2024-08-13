@@ -1,9 +1,12 @@
 package net.osmand.plus.track.cards;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.gpx.GPXActivityUtils;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.R;
@@ -13,6 +16,7 @@ import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 
 public class InfoCard extends BaseMetadataCard {
+
 	private final RouteKey routeKey;
 
 	public InfoCard(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.Metadata metadata, @Nullable RouteKey routeKey) {
@@ -30,21 +34,27 @@ public class InfoCard extends BaseMetadataCard {
 	public void updateContent() {
 		super.updateContent();
 
-		boolean visible = metadata != null && (!Algorithms.isEmpty(metadata.keywords)
-				|| !Algorithms.isEmpty(metadata.link) || routeKey != null);
+		OsmRouteType activityType = GPXActivityUtils.fetchActivityType(metadata, routeKey);
+		String keywords = metadata != null ? metadata.keywords : null;
+		String link = metadata != null ? metadata.link : null;
+		boolean keywordsAvailable = !Algorithms.isEmpty(keywords);
+		boolean linkAvailable = !Algorithms.isEmpty(link);
 
-		updateVisibility(visible);
+		String title = activityType != null
+				? AndroidUtils.getActivityTypeTitle(app, activityType)
+				: app.getString(R.string.shared_string_none);
 
-		if (visible) {
-			if (routeKey != null) {
-				OsmRouteType activityType = routeKey.type;
-				String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, activityType);
-				createItemRow(getString(R.string.shared_string_activity), routeTypeToDisplay, 
-						getContentIcon(AndroidUtils.getActivityTypeIcon(app, activityType)));
-			}
-			if (!Algorithms.isEmpty(metadata.keywords)) {
-				createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));
-			}
+		Drawable icon = activityType != null
+				? getContentIcon(AndroidUtils.getActivityTypeIcon(app, activityType))
+				: getContentIcon(R.drawable.ic_action_bicycle_dark); // todo use ic_action_activity
+
+		createItemRow(getString(R.string.shared_string_activity), title, icon).setOnClickListener(v -> {
+			// todo show select activity screen
+		});
+		if (keywordsAvailable) {
+			createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));
+		}
+		if (linkAvailable) {
 			createLinkItemRow(getString(R.string.shared_string_link), metadata.link, R.drawable.ic_action_link);
 		}
 	}

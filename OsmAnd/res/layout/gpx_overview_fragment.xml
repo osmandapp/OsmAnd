@@ -65,6 +65,45 @@
 			tools:text="300 km" />
 
 		<LinearLayout
+			android:id="@+id/activity_container"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			tools:visibility="visible">
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="•"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:textColor="?attr/secondary_icon_color"
+				android:textSize="@dimen/default_desc_text_size"/>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/activity_icon"
+				android:layout_width="@dimen/context_menu_transport_icon_size"
+				android:layout_height="@dimen/context_menu_transport_icon_size"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:tint="@color/icon_color_default_light"
+				tools:srcCompat="@drawable/mx_sport_cycling" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/activity_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/content_padding_small_half"
+				android:maxLines="1"
+				android:textColor="?attr/active_color_basic"
+				android:textSize="@dimen/default_desc_text_size"
+				android:textStyle="normal"
+				tools:text="Sport cycling" />
+
+		</LinearLayout>
+
+		<LinearLayout
 			android:id="@+id/region_container"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -100,6 +139,7 @@
 				android:textSize="@dimen/default_desc_text_size"
 				android:textStyle="normal"
 				tools:text="North Holland" />
+
 		</LinearLayout>
 
 	</LinearLayout>
