@@ -19,7 +19,7 @@
 		android:text="@string/import_track_descr"
 		android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 		android:textColor="?android:textColorSecondary"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingStart="@dimen/content_padding" />
 

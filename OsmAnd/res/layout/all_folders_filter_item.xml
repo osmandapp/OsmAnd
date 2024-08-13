@@ -40,7 +40,7 @@
 			android:maxLines="1"
 			android:text="@string/all_folders"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="Some title" />
 
 		<net.osmand.view.ThreeStateCheckbox

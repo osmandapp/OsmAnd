@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
@@ -36,7 +37,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -330,7 +331,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void setupTextSpan(@NonNull SpannableStringBuilder builder) {
 		int length = builder.length();
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), 0, length, 0);
-		builder.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), 0, length, 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, length, 0);
 	}
 
 	public interface TrackSelectionListener {

@@ -43,7 +43,7 @@
 			android:ellipsize="end"
 			android:textColor="@color/list_background_color_light"
 			android:textSize="@dimen/dialog_header_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:text="Amsterdam" />
 
 		<FrameLayout
@@ -100,7 +100,7 @@
 					android:id="@+id/content_plain"
 					android:textSize="@dimen/default_list_text_size"
 					android:textColor="?android:textColorPrimary"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content" />
 
@@ -139,7 +139,7 @@
 					osmand:drawableLeftCompat="@drawable/ic_action_edit_dark"
 					osmand:drawableStartCompat="@drawable/ic_action_edit_dark"
 					osmand:drawableTint="?attr/active_color_basic"
-					osmand:typeface="@string/font_roboto_medium" />
+					android:textStyle="bold" />
 
 			</FrameLayout>
 

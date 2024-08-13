@@ -206,7 +206,7 @@
                         android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                         android:text="@string/shared_string_options"
                         android:textColor="?attr/color_dialog_buttons"
-                        osmand:typeface="@string/font_roboto_medium"/>
+                        android:textStyle="bold"/>
                 </FrameLayout>
 
                 <ImageButton
@@ -274,7 +274,7 @@
                     android:padding="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    android:textStyle="bold"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -295,7 +295,7 @@
                     android:padding="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"/>
+                    android:textStyle="bold"/>
 
                 <View
                     android:layout_width="0dp"

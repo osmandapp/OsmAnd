@@ -77,7 +77,7 @@
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_sub_text_size"
 					osmand:textAllCapsCompat="true"
-					osmand:typeface="@string/font_roboto_medium" />
+					android:textStyle="bold" />
 
 				<FrameLayout
 					android:layout_width="139dp"
@@ -105,7 +105,7 @@
 						android:textOn="@string/shared_string_on"
 						android:textSize="@dimen/default_sub_text_size"
 						osmand:textAllCapsCompat="true"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 				</FrameLayout>
 
@@ -133,7 +133,7 @@
 				android:textSize="@dimen/default_sub_text_size"
 				android:visibility="visible"
 				osmand:textAllCapsCompat="true"
-				osmand:typeface="@string/font_roboto_medium" />
+				android:textStyle="bold" />
 
 			<LinearLayout
 				android:id="@+id/plugin_install_header"
@@ -164,7 +164,7 @@
 					android:paddingRight="@dimen/content_padding"
 					android:text="@string/plugin_install_needs_network"
 					android:textColor="?android:textColorSecondary"
-					osmand:typeface="@string/font_roboto_regular" />
+					android:textStyle="normal" />
 
 			</LinearLayout>
 
@@ -180,7 +180,7 @@
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:textAllCapsCompat="true"
-				osmand:typeface="@string/font_roboto_medium" />
+				android:textStyle="bold" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/plugin_description"
@@ -193,7 +193,7 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular" />
+				android:textStyle="normal" />
 
 		</LinearLayout>
 

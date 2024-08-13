@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
@@ -16,7 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
@@ -81,7 +83,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 		String keepActive = getString(R.string.keep_active);
 		String uninstall = getString(R.string.shared_string_uninstall);
 		String text = getString(R.string.speed_cameras_legal_descr, keepActive, uninstall);
-		return UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), text, keepActive, uninstall);
+		return UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, text, keepActive, uninstall);
 	}
 
 	private void setDialogShowed() {

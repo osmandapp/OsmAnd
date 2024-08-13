@@ -150,7 +150,7 @@
                 android:text="@string/add_tag"
                 android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"
+                android:textStyle="bold"
                 android:layout_marginStart="@dimen/content_padding"
                 android:paddingEnd="@dimen/content_padding"
                 android:paddingStart="@dimen/content_padding" />
@@ -167,7 +167,7 @@
                 <!--android:text="Add type test"-->
                 <!--android:textColor="@color/card_and_list_background_light"-->
                 <!--android:textSize="@dimen/default_sub_text_size"-->
-                <!--osmand:typeface="@string/font_roboto_medium"/>-->
+                <!--android:textStyle="bold"/>-->
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView

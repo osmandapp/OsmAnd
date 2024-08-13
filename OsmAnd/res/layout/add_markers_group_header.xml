@@ -17,7 +17,7 @@
         android:paddingStart="@dimen/content_padding"
         tools:text="@string/shared_string_gpx_file"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
-        osmand:typeface="@string/font_roboto_medium"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/description"

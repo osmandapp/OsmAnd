@@ -117,7 +117,7 @@
 								android:textColor="?attr/wikivoyage_active_color"
 								android:textSize="@dimen/default_list_text_size"
 								android:visibility="gone"
-								osmand:typeface="@string/font_roboto_medium"
+								android:textStyle="bold"
 								tools:text="Some button"
 								tools:visibility="visible"/>
 
@@ -160,7 +160,7 @@
 							android:text="@string/shared_string_save"
 							tools:visibility="visible"
 							android:visibility="gone"
-							osmand:typeface="@string/font_roboto_medium"/>
+							android:textStyle="bold"/>
 
 						<androidx.appcompat.widget.SwitchCompat
 							android:id="@+id/widget_top_bar_switch"
