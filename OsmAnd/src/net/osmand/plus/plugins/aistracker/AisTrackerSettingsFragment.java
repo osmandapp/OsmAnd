@@ -8,6 +8,7 @@ import static java.lang.Math.ceil;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -196,7 +197,10 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
             if (newValue instanceof Float) {
                 AisObject.setCpaWarningDistance((Float) newValue);
             }
+        } else if (preference.getKey().equals(AisTrackerPlugin.AIS_NMEA_PROTOCOL_ID)) {
+            restartNetworkListener = true;
         }
+
         boolean ret = super.onPreferenceChange(preference, newValue);
         AisTrackerLayer layer = plugin.getLayer();
         if ((layer != null) && (restartNetworkListener)) {
