@@ -4567,7 +4567,7 @@
     <string name="you_can_get_feature_as_part_of_pattern">Uzmi „%1$s“ kao deo: %2$s plana. Uporedi planove:</string>
     <string name="purchases_feature_desc_osmand_cloud">Nabavi OsmAnd Cloud za skladištenje svih podataka OsmAnd -a na internetu. Zaboravi na gubitak podataka nakon ponovne instalacije, napravi rezervne kopije i vrati sve podatke bez problema.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedi pristup češćem ažuriranju mapa, Izaberi između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="offline_wikivoyage">Oflajn Vikivojaž</string>
     <string name="purchases_feature_desc_unlimited_map_download">Nabavi neograničena preuzimanja offline mapa za sve kontinente i regione.</string>
     <string name="send_logcat_log">Pošalji logkat log</string>
     <string name="delete_version_history">Obriši istoriju verzije</string>
@@ -5862,4 +5862,5 @@
     <string name="help_article_map_tracks_name">Trase</string>
     <string name="help_article_map_routes_name">Rute</string>
     <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
+    <string name="height_cache">Keš visine</string>
 </resources>
