@@ -41,7 +41,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     private static final int START_ZOOM = 10;
     private final AisTrackerPlugin plugin;
     private ConcurrentMap<Integer, AisObject> aisObjectList;
-    private static final int aisObjectListCounterMax = 100;
+    private static final int aisObjectListCounterMax = 200;
     private final Context context;
     private final Paint bitmapPaint;
     private Timer timer;
