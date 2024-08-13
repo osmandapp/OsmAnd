@@ -228,6 +228,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 							WidgetSettingsBaseFragment.showFragment(manager, args, null, fragment);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
+						.showTopDivider(true)
 						.create());
 			}
 
@@ -244,6 +245,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 						builder.show();
 					})
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
+					.showTopDivider(true)
 					.create());
 
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
