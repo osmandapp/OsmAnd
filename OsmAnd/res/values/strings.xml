@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="height_cache">Height cache</string>
 	<string name="route_roundabout_exit">Take %1$d exit</string>
     <string name="help_article_map_tracks_name">Tracks</string>
     <string name="help_article_map_routes_name">Routes</string>
