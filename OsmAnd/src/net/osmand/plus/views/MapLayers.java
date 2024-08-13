@@ -388,8 +388,7 @@ public class MapLayers {
 				if (filter.isStandardFilter()) {
 					filter.removeUnsavedFilterByName();
 				}
-				PoiUIFilter wiki = poiFilters.getTopWikiPoiFilter();
-				poiFilters.clearSelectedPoiFilters(wiki);
+				poiFilters.clearGeneralSelectedPoiFilters();
 				poiFilters.addSelectedPoiFilter(filter);
 				updateRoutingPoiFiltersIfNeeded();
 				mapActivity.getMapView().refreshMap();
