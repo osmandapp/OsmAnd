@@ -5771,4 +5771,9 @@
     <string name="quick_action_terrain">Typ obarvení terénu</string>
     <string name="quick_action_first_intermediate">První mezicíl</string>
     <string name="navigation_position_icon_summary">Ikona zobrazená během navigace nebo pohybu.</string>
+    <string name="add_widget_below">Přidat widget níže</string>
+    <string name="add_widget_above">Přidat widget nad</string>
+    <string name="add_widget_to_the_right">Přidat widget vpravo</string>
+    <string name="add_widget_to_the_left">Přidat widget vlevo</string>
+    <string name="height_cache">výšková mezipaměť</string>
 </resources>
