@@ -2089,7 +2089,7 @@
     <string name="mapillary_menu_title_dates">Datum</string>
     <string name="mapillary_menu_descr_dates">Pregledaj samo dodate slike</string>
     <string name="mapillary_menu_date_from">Od</string>
-    <string name="shared_string_to">Prema</string>
+    <string name="shared_string_to">Do</string>
     <string name="wrong_user_name">Pogrešno korisničko ime</string>
     <string name="mapillary_menu_title_tile_cache">Keš sličica mape</string>
     <string name="mapillary_menu_descr_tile_cache">Ponovo učitati sličice mape radi postavljanja podataka dana.</string>
@@ -5863,4 +5863,8 @@
     <string name="help_article_map_routes_name">Rute</string>
     <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
     <string name="height_cache">Keš visine</string>
+    <string name="add_widget_above">Dodaj widžet iznad</string>
+    <string name="add_widget_below">Dodaj widžet ispod</string>
+    <string name="add_widget_to_the_right">Dodaj widžet desno</string>
+    <string name="add_widget_to_the_left">Dodaj widžet levo</string>
 </resources>
