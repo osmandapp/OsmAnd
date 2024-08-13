@@ -5862,7 +5862,7 @@
     <string name="help_article_map_tracks_name">Trase</string>
     <string name="help_article_map_routes_name">Rute</string>
     <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
-    <string name="height_cache">Visina</string>
+    <string name="height_cache">Keš visine</string>
     <string name="add_widget_above">Dodaj widžet iznad</string>
     <string name="add_widget_below">Dodaj widžet ispod</string>
     <string name="add_widget_to_the_right">Dodaj widžet desno</string>
