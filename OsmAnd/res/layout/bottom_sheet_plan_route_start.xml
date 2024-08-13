@@ -25,7 +25,7 @@
 			android:text="@string/plan_route_last_edited"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			android:textStyle="bold" />
 
 	</LinearLayout>
 

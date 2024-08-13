@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.Typeface;
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -10,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.utils.UiUtilities;
+
 
 public class SelectTrackCard extends MapBaseCard {
 
@@ -27,9 +28,8 @@ public class SelectTrackCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		String title = app.getString(R.string.select_another_track);
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, title, title, title);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, title, title, title);
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(getActiveColor());
 		spannable.setSpan(colorSpan, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

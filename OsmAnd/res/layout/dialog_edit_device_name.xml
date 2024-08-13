@@ -63,7 +63,7 @@
                 android:text="@string/shared_string_save"
                 android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium" />
+                android:textStyle="bold" />
 
         </FrameLayout>
 
@@ -79,7 +79,7 @@
 		android:text="@string/context_menu_edit_descr"
 		android:textColor="?attr/searchbar_text"
 		android:textSize="@dimen/dialog_header_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		android:textStyle="bold" />
 
 	<View
 		android:layout_width="match_parent"

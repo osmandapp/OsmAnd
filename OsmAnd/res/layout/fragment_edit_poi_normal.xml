@@ -19,7 +19,7 @@
             android:layout_marginTop="18dp"
             android:text="@string/contact_info"
             android:textColor="?android:textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"
+            android:textStyle="bold"
 	        android:layout_marginStart="@dimen/content_padding" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -105,7 +105,7 @@
             android:layout_marginBottom="@dimen/content_padding"
             android:text="@string/opening_hours"
             android:textColor="?android:textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium" />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/openHoursContainer"
@@ -131,7 +131,7 @@
             android:layout_marginLeft="72dp"
             android:text="@string/add_opening_hours"
             android:textSize="@dimen/default_sub_text_size"
-            osmand:typeface="@string/font_roboto_medium"
+            android:textStyle="bold"
 	        android:layout_marginStart="72dp" />
 
     </RelativeLayout>

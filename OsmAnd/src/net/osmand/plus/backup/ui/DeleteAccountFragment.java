@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.FINISHED;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.NOT_STARTED;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.RUNNING;
@@ -36,7 +37,7 @@ import net.osmand.plus.backup.BackupListeners.OnDeleteAccountListener;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -190,13 +191,13 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		String cloud = getString(R.string.osmand_cloud);
 		String warning = getString(R.string.delete_account_warning, cloud);
 		TextView title = view.findViewById(R.id.warning);
-		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), warning, cloud));
+		title.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, warning, cloud));
 	}
 
 	private void setupDataDeletedWarning(@NonNull View view) {
 		String deleted = getString(R.string.shared_string_deleted).toLowerCase();
 		String warning = getString(R.string.osmand_cloud_deletion_all_data_warning, deleted);
-		CharSequence text = UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), warning, deleted);
+		CharSequence text = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, warning, deleted);
 
 		View container = view.findViewById(R.id.data_deleted);
 		setupWarning(container, text, R.drawable.ic_action_file_delete);
@@ -205,7 +206,7 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	private void setupAccountDeletedWarning(@NonNull View view) {
 		String deleted = getString(R.string.shared_string_deleted).toLowerCase();
 		String warning = getString(R.string.osmand_cloud_deletion_account_warning, deleted);
-		CharSequence text = UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), warning, deleted);
+		CharSequence text = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, warning, deleted);
 
 		View container = view.findViewById(R.id.account_deleted);
 		setupWarning(container, text, R.drawable.ic_action_user_account_delete);
