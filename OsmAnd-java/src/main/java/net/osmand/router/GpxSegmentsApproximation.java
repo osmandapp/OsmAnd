@@ -15,17 +15,17 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
-// TO-THINK ? fix minor "Points are not connected" (~0.01m)
-// TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
-
+// TODO fix minor "Points are not connected" (~0.01m) - probably not?
+// TODO makePrecise for start / end segments (just check how correctly they are calculated)
+// TODO RouteSegmentAppr structures could be optimized (visited for single visited) 
+// TODO MAX_DEPTH_ROLLBACK rollback in meters?
+// TEST missing roads
+// TEST performance
 public class GpxSegmentsApproximation {
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	private static final int MAX_DEPTH_ROLLBACK = 15; // TODO rollback in meters?
-	private static final int POINT_CF = 2; // TODO replace with meaningfull constant
-
-	// TODO structures could be optimized (visited for single visited) 
-	// TODO implement hops (missing roads) - TEST
-	// ToDO implement precise start / end
+	private static final int MAX_DEPTH_ROLLBACK = 15; 
+	private static boolean DEBUG = false;
+	
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
 		private final RouteSegmentAppr parent;
@@ -75,8 +75,10 @@ public class GpxSegmentsApproximation {
 				if (parent == null || !parent.isVisited(sg)) {
 					RouteSegmentAppr c = new RouteSegmentAppr(this, sg);
 					boolean accept = approximateSegment(c, gpxPoints, minPointApproximation);
-//					System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment,
-//							c.maxDistToGpx, accept); // DEBUG
+					if (DEBUG) {
+						System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment,
+								c.maxDistToGpx, accept);
+					}
 					if (accept) {
 						connected.add(c);
 					}
@@ -144,7 +146,9 @@ public class GpxSegmentsApproximation {
  			}
 			if (bestNext == null) {
 				if (last.parent != null && (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() < MAX_DEPTH_ROLLBACK)) {
-//					System.out.print(" ^ "); // DEBUG
+					if (DEBUG) {
+						System.out.print(" ^ ");
+					}
 					last = last.parent;
 					continue;
 				} else if (bestRoute != null) {
@@ -153,18 +157,24 @@ public class GpxSegmentsApproximation {
 				GpxPoint pnt = findNextRoutablePoint(frontEnd, gctx, initDist, gpxPoints,
 						bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
 				if (pnt == null) {
-//					System.out.println("------"); // DEBUG
+					if (DEBUG) {
+						System.out.println("------------------");
+					}
 					break;
 				} else {
-//					System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt); // DEBUG
+					if (DEBUG) {
+						System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt);
+					}
 					last = new RouteSegmentAppr(pnt.pnt, pnt.ind);
 					approximateSegment(last, gpxPoints, minPointApproximation);
 					bestRoute = null;
 				}
 			} else {
-//				System.out.printf("%d -> %d %s %s - %.2f \n", bestNext.gpxStart, bestNext.gpxStart + bestNext.gpxLen,
-//						gpxPoints.get(bestNext.gpxStart + bestNext.gpxLen).loc, bestNext.segment,
-//						bestNext.maxDistToGpx); // DEBUG
+				if (DEBUG) {
+					System.out.printf("%d -> %d %s %s - %.2f \n", bestNext.gpxStart,
+							bestNext.gpxStart + bestNext.gpxLen, gpxPoints.get(bestNext.gpxStart + bestNext.gpxLen).loc,
+							bestNext.segment, bestNext.maxDistToGpx);
+				}
 				last.visit(bestNext.segment);
 				if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
 					bestRoute = last;
