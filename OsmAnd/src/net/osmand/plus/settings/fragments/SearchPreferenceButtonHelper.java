@@ -1,5 +1,10 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.settings.fragments.MainSettingsFragment.APP_PROFILES;
+
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,14 +17,20 @@ import androidx.preference.PreferenceGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 
 import java.util.Optional;
 
+import de.KnollFrank.lib.preferencesearch.PreferenceWithHost;
 import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
 import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.preferencesearch.fragment.DefaultFragmentFactory;
-import de.KnollFrank.lib.preferencesearch.provider.PreferenceDialogProvider;
+import de.KnollFrank.lib.preferencesearch.fragment.FragmentFactory;
+import de.KnollFrank.lib.preferencesearch.provider.IsPreferenceSearchable;
+import de.KnollFrank.lib.preferencesearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+import de.KnollFrank.lib.preferencesearch.provider.PreferenceDialogAndSearchableInfoProvider;
+import de.KnollFrank.lib.preferencesearch.provider.ShowPreferencePath;
 
 class SearchPreferenceButtonHelper {
 
@@ -45,24 +56,60 @@ class SearchPreferenceButtonHelper {
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
 		return new SearchPreferenceFragments(
 				createSearchConfiguration(),
-				(preference, host) -> true,
-				preference -> !(preference instanceof PreferenceGroup),
-				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
-				new DefaultFragmentFactory(),
-				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
-				new PreferenceDialogProvider() {
+				new IsPreferenceSearchable() {
 
 					@Override
-					public Optional<Fragment> getPreferenceDialog(final Class<? extends PreferenceFragmentCompat> hostOfPreference, final Preference preference) {
+					public boolean isPreferenceOfHostSearchable(final Preference preference, final PreferenceFragmentCompat host) {
+						return true;
+					}
+				},
+				new ShowPreferencePath() {
+
+					@Override
+					public boolean showPreferencePath(final Preference preference) {
+						return !(preference instanceof PreferenceGroup);
+					}
+				},
+				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
+				new FragmentFactory() {
+
+					@Override
+					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
+						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
+						if (src.isPresent()) {
+							final Preference preference = src.get().preference;
+							if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
+								final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
+								final Bundle args = new Bundle();
+								if (appMode != null) {
+									args.putString(APP_MODE_KEY, appMode.getStringKey());
+								}
+								fragment.setArguments(args);
+							}
+						}
+						return fragment;
+					}
+				},
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
+				new PreferenceDialogAndSearchableInfoProvider() {
+
+					@Override
+					public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final PreferenceFragmentCompat hostOfPreference, final Preference preference) {
 						// FK-TODO: handle more preference dialogs, which shall be searchable
 						if (isSendAnonymousData(preference)) {
-							return Optional.of(new SendAnalyticsBottomSheetDialogFragment());
+							return Optional.of(
+									new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
+											new SendAnalyticsBottomSheetDialogFragment(),
+											customDialogFragment -> ((SendAnalyticsBottomSheetDialogFragment) customDialogFragment).getSearchableInfo()));
 						}
 						if (isSimulateYourLocation(preference)) {
 							final SimulateLocationFragment preferenceDialog = new SimulateLocationFragment();
 							preferenceDialog.setGpxFile(null);
 							// fragment.usedOnMap = false;
-							return Optional.of(preferenceDialog);
+							return Optional.of(
+									new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
+											preferenceDialog,
+											customDialogFragment -> ((SimulateLocationFragment) customDialogFragment).getSearchableInfo()));
 						}
 						return Optional.empty();
 					}
@@ -74,15 +121,6 @@ class SearchPreferenceButtonHelper {
 					private boolean isSimulateYourLocation(final Preference preference) {
 						return DevelopmentSettingsFragment.SIMULATE_YOUR_LOCATION.equals(preference.getKey());
 					}
-				},
-				preferenceDialog -> {
-					if (preferenceDialog instanceof SendAnalyticsBottomSheetDialogFragment) {
-						return ((SendAnalyticsBottomSheetDialogFragment) preferenceDialog).getSearchableInfo();
-					}
-					if (preferenceDialog instanceof SimulateLocationFragment) {
-						return ((SimulateLocationFragment) preferenceDialog).getSearchableInfo();
-					}
-					throw new IllegalArgumentException();
 				});
 	}
 
