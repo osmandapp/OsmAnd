@@ -183,7 +183,7 @@ public class GpxSegmentsApproximation {
 						System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt);
 					}
 					last = new RouteSegmentAppr(pnt.ind);
-					last.addStartSegments(currentPoint.pnt, gpxPoints, minPointApproximation);
+					last.addStartSegments(pnt.pnt, gpxPoints, minPointApproximation);
 					bestRoute = null;
 				}
 			} else {
