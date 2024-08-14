@@ -5847,4 +5847,9 @@
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
     <string name="help_article_map_routes_name">Itinéraires</string>
     <string name="help_article_map_tracks_name">Traces</string>
+    <string name="height_cache">Cache de l\'altitude</string>
+    <string name="add_widget_to_the_left">Ajouter le gadget à gauche</string>
+    <string name="add_widget_above">Ajouter le gadget au-dessus</string>
+    <string name="add_widget_below">Ajouter le gadget en dessous</string>
+    <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
 </resources>
