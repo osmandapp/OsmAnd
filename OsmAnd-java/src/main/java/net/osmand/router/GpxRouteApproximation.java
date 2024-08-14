@@ -183,7 +183,7 @@ public class GpxRouteApproximation {
 			if (gctx.ctx.calculationProgress == null) {
 				gctx.ctx.calculationProgress = new RouteCalculationProgress();
 			}
-			app.fastGpxApproximation(router, gctx, gpxPoints);
+			app.gpxApproximation(router, gctx, gpxPoints);
 			calculateGpxRoute(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
