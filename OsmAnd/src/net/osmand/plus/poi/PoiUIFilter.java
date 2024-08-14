@@ -80,6 +80,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	protected String filterByName;
 	protected String savedFilterByName;
 	protected List<Amenity> currentSearchResult;
+	protected String filterByKey = null;
 
 	private boolean deleted;
 
@@ -214,6 +215,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		updateFilterResults();
 	}
 
+	public void setFilterByKey(String key) {
+		filterByKey = key;
+	}
+
 	public void removeUnsavedFilterByName() {
 		filterByName = savedFilterByName;
 		updateFilterResults();
@@ -222,7 +227,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public void updateFilterResults() {
 		List<Amenity> prev = currentSearchResult;
 		if (prev != null) {
-			AmenityNameFilter nameFilter = getNameFilter(filterByName);
+			AmenityNameFilter nameFilter = getNameFilter();
 			List<Amenity> newResults = new ArrayList<>();
 			for (Amenity a : prev) {
 				if (nameFilter.accept(a)) {
@@ -388,11 +393,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 
-	public PoiFilterUtils.AmenityNameFilter getNameFilter(String filter) {
-		if (Algorithms.isEmpty(filter)) {
+	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
+		if (Algorithms.isEmpty(filterByName)) {
 			return a -> true;
 		}
-		String[] items = filter.split(" ");
+		if (!Algorithms.isEmpty(filterByKey)) {
+			return getKeyNameFilter(filterByKey, filterByName);
+		}
+		String[] items = filterByName.split(" ");
 		boolean allTime = false;
 		boolean open = false;
 		List<PoiType> poiAdditionalsFilter = null;
@@ -443,6 +451,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 				return false;
 			}
 			return acceptedAnyFilterOfEachCategory(amenity, selectedFilters);
+		};
+	}
+
+	public PoiFilterUtils.AmenityNameFilter getKeyNameFilter(String key, String value) {
+		return amenity -> {
+			String val = amenity.getAdditionalInfo(key);
+			return val != null && val.equals(value);
 		};
 	}
 
@@ -587,7 +602,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(@Nullable ResultMatcher<Amenity> matcher) {
-		PoiFilterUtils.AmenityNameFilter nm = getNameFilter(filterByName);
+		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
 		Set<String> searchedPois = new TreeSet<>();
 		return new ResultMatcher<Amenity>() {
 
