@@ -282,7 +282,7 @@ public class GpxSegmentsApproximation {
 			if (rsp.others != null) {
 				start.pnt.others = new ArrayList<>();
 				for (RouteSegmentPoint o : rsp.others) {
-					if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
+					if (MapUtils.getDistance(o.getPreciseLatLon(), start.loc) < distThreshold) {
 						start.pnt.others.add(initStartPoint(start, gpxDir, o));
 					}
 				}
