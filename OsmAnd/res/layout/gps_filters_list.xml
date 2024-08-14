@@ -32,7 +32,7 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="Points: 1234 / 5678"/>
 
 	</LinearLayout>

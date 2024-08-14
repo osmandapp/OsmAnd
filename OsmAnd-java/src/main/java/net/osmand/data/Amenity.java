@@ -289,7 +289,7 @@ public class Amenity extends MapObject {
 			if (e.getValue().startsWith(" gz ")) {
 				s.append(prefix).append(e.getKey()).append("='gzip ...'");
 			} else {
-				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("'");
+				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("' ");
 			}
 		}
 	}

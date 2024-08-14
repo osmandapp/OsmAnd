@@ -97,7 +97,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="0 m" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -108,7 +108,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="125 m" />
 
 	</LinearLayout>

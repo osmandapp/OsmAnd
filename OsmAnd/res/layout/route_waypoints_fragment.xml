@@ -51,7 +51,7 @@
 					android:text="@string/shared_string_target_points"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_medium"/>
+					android:textStyle="bold"/>
 
 			</LinearLayout>
 
@@ -70,7 +70,7 @@
 				android:text="@string/shared_string_sort"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:ignore="UnusedAttribute"
 				android:paddingEnd="16dp"
 				android:paddingStart="16dp" />
@@ -131,7 +131,7 @@
 						android:text="@string/shared_string_add"
 						android:textSize="@dimen/text_button_text_size"
 						android:textColor="?attr/active_color_basic"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						tools:drawableLeft="@drawable/ic_action_plus"
 						tools:ignore="UnusedAttribute"
 						android:paddingEnd="8dp"
@@ -169,7 +169,7 @@
 						android:textColor="?attr/active_color_basic"
 						android:text="@string/shared_string_clear_all"
 						android:textSize="@dimen/text_button_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						tools:drawableLeft="@drawable/ic_action_clear_all"
 						tools:ignore="UnusedAttribute"
 						tools:drawableStart="@drawable/ic_action_clear_all"

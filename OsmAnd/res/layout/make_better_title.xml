@@ -23,7 +23,7 @@
 		android:text="@string/help_us_make_osmand_better"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/dialog_header_text_size"
-		osmand:typeface="@string/font_roboto_medium"
+		android:textStyle="bold"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding" />
 
@@ -47,7 +47,7 @@
 		android:text="@string/choose_data_to_share"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_medium"
+		android:textStyle="bold"
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingStart="@dimen/content_padding" />
 

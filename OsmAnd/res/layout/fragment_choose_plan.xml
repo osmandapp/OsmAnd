@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_header_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
                     tools:text="@string/osmand_cloud" />
 
             </LinearLayout>
@@ -106,7 +106,7 @@
                         android:layout_marginLeft="@dimen/content_padding"
                         android:layout_weight="1"
                         android:textSize="@dimen/dialog_header_text_size"
-                        osmand:typeface="@string/font_roboto_medium"
+                        android:textStyle="bold"
                         tools:text="Title" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -163,7 +163,7 @@
                         android:paddingRight="@dimen/content_padding"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
-                        osmand:typeface="@string/font_roboto_regular"
+                        android:textStyle="normal"
                         tools:text="Get OsmAnd Cloud to store all OsmAnd data online. Forget about loosing your data after reinstall, backup and restore all information without a problem." />
 
                     <!-- Secondary description -->
@@ -178,7 +178,7 @@
                         android:paddingRight="@dimen/content_padding"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
-                        osmand:typeface="@string/font_roboto_regular"
+                        android:textStyle="normal"
                         tools:text="You can get “OsmAnd Cloud” as part of: OsmAnd Pro plan. Compare the plans:" />
 
                     <View
@@ -248,7 +248,7 @@
                             android:text="@string/later"
                             android:textColor="?attr/active_color_basic"
                             android:textSize="@dimen/text_button_text_size"
-                            osmand:typeface="@string/font_roboto_medium" />
+                            android:textStyle="bold" />
 
                     </FrameLayout>
 

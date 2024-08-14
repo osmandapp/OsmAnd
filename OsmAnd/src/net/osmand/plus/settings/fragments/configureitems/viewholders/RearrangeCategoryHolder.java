@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.View;
@@ -10,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
@@ -23,7 +24,7 @@ public class RearrangeCategoryHolder extends ViewHolder implements UnmovableItem
 		Context context = itemView.getContext();
 
 		title = itemView.findViewById(R.id.title);
-		title.setTypeface(FontCache.getFont(context, context.getString(R.string.font_roboto_medium)));
+		title.setTypeface(DEFAULT_BOLD);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.default_list_text_size));
 
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), true);

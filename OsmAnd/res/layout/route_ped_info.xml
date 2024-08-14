@@ -95,7 +95,7 @@
 				android:text="@string/public_transport_calc_pedestrian"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:ignore="UnusedAttribute" />
 
 		</FrameLayout>

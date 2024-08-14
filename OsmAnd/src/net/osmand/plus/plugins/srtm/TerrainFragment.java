@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
@@ -44,7 +45,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -363,7 +364,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		try {
 			int startIndex = text.indexOf(clickableText);
 			if (medium) {
-				spannableString.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spannableString.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			textView.setText(spannableString);

@@ -466,7 +466,7 @@
     <string name="day_night_info">日/夜信息</string>
     <string name="map_widget_vector_attributes">渲染属性</string>
     <string name="layer_map_appearance">配置屏幕</string>
-    <string name="map_widget_transparent">透明皮肤</string>
+    <string name="map_widget_transparent">透明小部件</string>
     <string name="bg_service_sleep_mode_off">运行
 \n 应用位于后台</string>
     <string name="bg_service_sleep_mode_on">停止
@@ -1939,7 +1939,7 @@
 \n OsmAnd正在积极开发中，我们的项目及其持续进展依赖于财政捐款，用于新功能的开发和测试。请考虑购买OsmAnd+，或资助特定的新功能，或在https://osmand.net 上进行一般捐赠。</string>
     <string name="osmand_extended_description_part1">OsmAnd（OSM Automated Navigation Directions）是一款地图和导航应用程序，可访问免费的全球高质量 OSM 数据。
 \n
-\n 您可以使用语音和光学导航仪，查看 POI（兴趣点），创建和管理 GPX 轨迹，使用等高线可视化和地形信息（通过插件），选择驾驶、骑行和步行模式，以及 OSM 编辑及更多。</string>
+\n 享用使用语音和光学导航仪，查看 POI（兴趣点），创建和管理 GPX 轨迹，使用等高线可视化和地形信息（通过插件），选择驾驶、骑行和步行模式， OSM 编辑及更多。</string>
     <string name="osmand_extended_description_part2">GPS导航
 \n - 可选择离线（在国外时无漫游费）或在线（更快）模式。
 \n - 语音导览带领您一路前行（真人和合成声音）。
@@ -3765,7 +3765,7 @@
     <string name="shared_string_memory">内存</string>
     <string name="shared_string_size">尺寸</string>
     <string name="distance_between_points">点之间的距离</string>
-    <string name="use_routing_fallback_description">联网路线规划不可用时，使用离线路线规划。</string>
+    <string name="use_routing_fallback_description">当在线路线规划不可用时，将使用离线路线规划。</string>
     <string name="gps_filter_smoothing_desc">设置点与点之间的最小距离。
 \n在最后的可见点之间，低于该距离的轨迹点将被隐藏。
 \n请注意，较高的最小距离可能会过度简化轨迹的几何形状。</string>
@@ -4602,7 +4602,7 @@
     <string name="map_markers_desc">小工具会显示地图标记列表中前两个标记的距离或预计到达时间（ETA）。</string>
     <string name="get_altitude_information">获取海拔信息</string>
     <string name="on_with_params">%1$s 鱼%2$s</string>
-    <string name="rendering_value_omit_name">忽略</string>
+    <string name="rendering_value_omit_name">省略</string>
     <string name="shared_string_used">已使用</string>
     <string name="quick_action_map_center_widget_descr">显示或隐藏地图上的地图中心工具。</string>
     <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置的小工具。</string>
@@ -4649,7 +4649,7 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">偏好越野滑雪道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">显示 fixme 标签</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">注记标签</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低缩放层级的图标简略显示</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">在低缩放层级下显示概略图标</string>
     <string name="rendering_attr_showWaterwayTunnels_description">提高水路隧道的能见度</string>
     <string name="files_with_route_restrictions">有路线限制的文件</string>
     <string name="show_borders_of_downloaded_maps">显示已下载地图的边框</string>
@@ -5691,4 +5691,9 @@
     <string name="auto_25_chars_route_tsll">稍向左转</string>
     <string name="detailed_track_guidance">详细的轨迹指引</string>
     <string name="use_v1_auto_zoom">不连续自动缩放（旧版）</string>
+    <string name="driving_region_uk">英国及类似区域</string>
+    <string name="driving_region_india">印度</string>
+    <string name="assigned_keys">已分配的按键</string>
+    <string name="steps_per_minute_unit">步数每分钟</string>
+    <string name="wall_height">墙壁高度</string>
 </resources>

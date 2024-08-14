@@ -1,5 +1,7 @@
 package net.osmand.plus.dashboard;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
 import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
 import net.osmand.plus.feedback.FeedbackHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.text.MessageFormat;
@@ -40,7 +42,7 @@ public class DashErrorFragment extends DashBaseFragment {
 		OsmandApplication app = requireMyApplication();
 		View view = inflater.inflate(R.layout.dash_error_fragment, container, false);
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), FeedbackHelper.EXCEPTION_PATH);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
+		Typeface typeface = DEFAULT_BOLD;
 		ImageView iv = view.findViewById(R.id.error_icon);
 		iv.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_crashlog));
 		TextView message = view.findViewById(R.id.error_header);

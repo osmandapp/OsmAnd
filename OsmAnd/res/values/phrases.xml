@@ -191,6 +191,7 @@
 	<string name="poi_reservation">Reservation</string>
 	<string name="poi_us_maps_recreation_area_facility">Recreation area facility</string>
 	<string name="poi_live_music">Live music</string>
+	<string name="poi_cash_in">Cash deposit</string>
 
 
 <!--  categories -->
@@ -5449,5 +5450,10 @@
 	<string name="poi_mcdonalds">McDonald\'s</string>
 
 	<string name="poi_engineer">Engineer office</string>
+
+	<string name="poi_cash_in_yes">Yes</string>
+	<string name="poi_cash_in_no">No</string>
+	<string name="poi_cash_in_customers">Customers</string>
+	<string name="poi_diet_pescetarian_no">Pescetarian diet: no</string>
 
 </resources>

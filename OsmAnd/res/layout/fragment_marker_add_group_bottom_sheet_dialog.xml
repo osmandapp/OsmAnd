@@ -32,7 +32,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
         android:visibility="gone"
-        osmand:typeface="@string/font_roboto_medium"
+        android:textStyle="bold"
         tools:visibility="visible"/>
 
 </LinearLayout>

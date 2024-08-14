@@ -50,7 +50,7 @@
 				android:singleLine="true"
 				android:textColor="?colorAccent"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="Button text" />
 
 			<View

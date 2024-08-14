@@ -166,6 +166,13 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		scrollView.smoothScrollTo(0, (int) actionsCardContainer.getY());
 	}
 
+	public void scrollToAvailable() {
+		scrollView.post(() -> {
+			View availableWidgetsDivider = view.findViewById(R.id.available_widgets_divider);
+			scrollView.scrollTo(0, availableWidgetsContainer.getTop() + enabledWidgetsContainer.getBottom() + (availableWidgetsDivider.getBottom() * 2));
+		});
+	}
+
 	private void setupActionsCard() {
 		int panelTitleId = selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app));
 		View cardView = new ConfigureActionsCard(requireMapActivity(), this, panelTitleId)
@@ -207,6 +214,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	public void updateContent() {
 		updateEnabledWidgets();
 		updateAvailableWidgets();
+	}
+
+	public WidgetsPanel getSelectedPanel(){
+		return selectedPanel;
 	}
 
 	private void updateEnabledWidgets() {

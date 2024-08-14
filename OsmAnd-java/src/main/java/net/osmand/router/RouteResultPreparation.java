@@ -1002,6 +1002,7 @@ public class RouteResultPreparation {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
+						replaceConfusingKeepTurnsWithLaneTurn(currentSegment, leftside);
 					}
 				}
 				if (!merged) {
@@ -1011,6 +1012,28 @@ public class RouteResultPreparation {
 				nextSegment = currentSegment;
 				dist = 0;
 			}
+		}
+	}
+
+	private void replaceConfusingKeepTurnsWithLaneTurn(RouteSegmentResult currentSegment, boolean leftSide) {
+		if (currentSegment.getTurnType() == null) {
+			return;
+		}
+		int currentTurn = currentSegment.getTurnType().getValue();
+		int activeTurn = currentSegment.getTurnType().getActiveCommonLaneTurn();
+		boolean changeToActive = false;
+		if (TurnType.isKeepDirectionTurn(currentTurn) && !TurnType.isKeepDirectionTurn(activeTurn)) {
+			if (TurnType.isLeftTurn(currentTurn) && !TurnType.isLeftTurn(activeTurn)) {
+				changeToActive = true;
+			}
+			if (TurnType.isRightTurn(currentTurn) && !TurnType.isRightTurn(activeTurn)) {
+				changeToActive = true;
+			}
+		}
+		if (changeToActive) {
+			TurnType turn = TurnType.valueOf(activeTurn, leftSide);
+			turn.setLanes(currentSegment.getTurnType().getLanes());
+			currentSegment.setTurnType(turn);
 		}
 	}
 
