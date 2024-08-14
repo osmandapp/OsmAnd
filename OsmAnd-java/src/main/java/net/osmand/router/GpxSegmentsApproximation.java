@@ -3,7 +3,6 @@ package net.osmand.router;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import gnu.trove.set.hash.TLongHashSet;
@@ -24,7 +23,7 @@ import net.osmand.util.MapUtils;
 public class GpxSegmentsApproximation {
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
 	private static final int MAX_DEPTH_ROLLBACK = 15; 
-	private static boolean DEBUG = false;
+	private static boolean DEBUG = true;
 	
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
@@ -57,9 +56,8 @@ public class GpxSegmentsApproximation {
 				return;
 			}
 			connected = new ArrayList<>();
-			RouteSegment sg = gctx.ctx.loadRouteSegment(segment.getEndPointX(), segment.getEndPointY(),
-					gctx.ctx.config.memoryLimitation);
-			while(sg != null) {
+			RouteSegment sg = gctx.ctx.loadRouteSegment(segment.getEndPointX(), segment.getEndPointY(),gctx.ctx.config.memoryLimitation);
+			while (sg != null) {
 				addSegment(sg.initRouteSegment(!sg.isPositive()), gpxPoints, minPointApproximation);
 				addSegment(sg, gpxPoints, minPointApproximation);
 				sg = sg.getNext();
@@ -76,8 +74,7 @@ public class GpxSegmentsApproximation {
 					RouteSegmentAppr c = new RouteSegmentAppr(this, sg);
 					boolean accept = approximateSegment(c, gpxPoints, minPointApproximation);
 					if (DEBUG) {
-						System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment,
-								c.maxDistToGpx, accept);
+						System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment, c.maxDistToGpx, accept);
 					}
 					if (accept) {
 						connected.add(c);
@@ -87,10 +84,14 @@ public class GpxSegmentsApproximation {
 		}
 		
 		public void visit(RouteSegment r) {
-			if (visited == null) {
-				visited = new TLongHashSet();
+			if (parent == null) {
+				if (visited == null) {
+					visited = new TLongHashSet();
+				}
+				visited.add(calculateRoutePointId(r));
+			} else {
+				parent.visit(r);
 			}
-			visited.add(calculateRoutePointId(r));
 		}
 		
 		public boolean isVisited(RouteSegment r) {
@@ -134,16 +135,18 @@ public class GpxSegmentsApproximation {
 		while (last.gpxNext() < gpxPoints.size()) { 
 			last.loadConnections(gctx, gpxPoints, minPointApproximation);
  			RouteSegmentAppr bestNext = null;
-			for(RouteSegmentAppr c : last.connected) {
+			for (RouteSegmentAppr c : last.connected) {
 				if (last.isVisited(c.segment)) {
 					continue;
 				}
 				if (bestNext == null) {
 					bestNext = c;
-				} else if (c.maxDistToGpx / Math.sqrt(c.gpxLen + 1) < bestNext.maxDistToGpx / Math.sqrt(bestNext.gpxLen + 1)) {
+				} else if (c.maxDistToGpx / Math.sqrt(c.gpxLen + 1) < bestNext.maxDistToGpx
+						/ Math.sqrt(bestNext.gpxLen + 1)) { // heuristics for eager algorithm
+//				} else if (c.maxDistToGpx < bestNext.maxDistToGpx ) { // heuristics for eager algorithm
 					bestNext = c;
 				}
- 			}
+			}
 			if (bestNext == null) {
 				if (last.parent != null && (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() < MAX_DEPTH_ROLLBACK)) {
 					if (DEBUG) {
