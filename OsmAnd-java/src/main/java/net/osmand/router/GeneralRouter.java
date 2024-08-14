@@ -727,11 +727,12 @@ public class GeneralRouter implements VehicleRouter {
 			double a2 = prev.getRoad().directionRoute(prev.getSegmentEnd(), !prev.isPositive());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 			if (diff > Math.PI / 1.5) {
-				totalPenalty += getLeftTurn(); // >120 degree (like U-turn)
+				totalPenalty += getLeftTurn(); // >120 degree (U-turn)
 			} else if (diff > Math.PI / 3) {
-				totalPenalty += getRightTurn(); // >60 degree (fixed penalty)
+				totalPenalty += getRightTurn(); // >60 degree (standard)
 			} else if (diff > Math.PI / 6) {
-				totalPenalty += getRightTurn() * diff * 3 / Math.PI; // >30 (linear penalty)
+				totalPenalty += getRightTurn() / 2; // >30 degree (light)
+				// totalPenalty += getRightTurn() * diff * 3 / Math.PI; // to think
 			}
 		}
 		
