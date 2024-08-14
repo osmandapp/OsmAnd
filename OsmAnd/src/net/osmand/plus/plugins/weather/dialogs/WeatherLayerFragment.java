@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -37,6 +38,8 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private static final String WEATHER_BAND_KEY = "weather_band_key";
 	private static final int TRANSPARENCY_MIN = 0;
 	private static final int TRANSPARENCY_MAX = 100;
+	private static final int MAX_FORECAST_DAYS = 7;
+	private static final long MS_IN_DAY = 24 * 60 * 60 * 1000;
 
 	private WeatherBand weatherBand;
 
@@ -125,7 +128,10 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				if (fromUser) {
 					weatherBand.getAlphaPreference().set(newValue);
 					tvCurrentValue.setText(formatAlpha(newValue));
-					refreshMap((MapActivity) getMyActivity());
+					WeatherTileResourcesManager weatherTileResourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
+					if (weatherTileResourcesManager != null) {
+						weatherTileResourcesManager.clearDbCache(System.currentTimeMillis() + MAX_FORECAST_DAYS * MS_IN_DAY);
+					}
 				}
 			});
 			int activeColor = settings.getApplicationMode().getProfileColor(nightMode);
