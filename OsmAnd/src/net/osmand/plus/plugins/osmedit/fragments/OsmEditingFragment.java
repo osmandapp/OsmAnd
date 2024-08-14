@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
@@ -24,7 +25,7 @@ import androidx.preference.PreferenceViewHolder;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -93,7 +94,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		if (OSM_EDITING_INFO.equals(preference.getKey())) {
 			TextView titleView = (TextView) holder.findViewById(android.R.id.title);
@@ -186,8 +187,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 		int startIndex = osmEditsPathDescr.indexOf(osmEditsPath);
 		SpannableString titleSpan = new SpannableString(osmEditsPathDescr);
 		if (startIndex != -1) {
-			Typeface typeface = FontCache.getRobotoMedium(getContext());
-			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + osmEditsPath.length(), 0);
+			titleSpan.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, startIndex + osmEditsPath.length(), 0);
 		}
 
 		Preference osmEditsDescription = findPreference("osm_edits_description");

@@ -35,6 +35,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -195,7 +196,7 @@ public class GpsFilterHelper {
 			if (successfulFinish && !isCancelled()) {
 				filteredSelectedGpxFile.updateGpxFile(app, filteredGpxFile);
 				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
-				filteredSelectedGpxFile.setDisplayGroups(displayGroups);
+				filteredSelectedGpxFile.setSplitGroups(displayGroups);
 				for (GpsFilterListener listener : listeners) {
 					listener.onFinishFiltering(filteredGpxFile);
 				}
@@ -209,6 +210,7 @@ public class GpsFilterHelper {
 		copy.author = source.author;
 		copy.metadata = new Metadata(source.metadata);
 		copy.tracks = copyTracks(source.tracks);
+		copy.setPointsGroups(new LinkedHashMap<>(source.getPointsGroups()));
 		copy.addPoints(source.getPoints());
 		copy.routes = new ArrayList<>(source.routes);
 		copy.path = source.path;

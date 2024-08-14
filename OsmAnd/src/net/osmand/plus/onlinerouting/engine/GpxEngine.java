@@ -20,9 +20,9 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -110,6 +110,9 @@ public class GpxEngine extends OnlineRoutingEngine {
 		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
 			params.initialCalculation = true;
 		}
+		if (previousRoute != null && previousRoute.isInitialCalculation()) {
+			params.gpxFile = previousRoute.getGpxFile(); // catch gpx from 1st phase
+		}
 	}
 
 	@Override
@@ -119,15 +122,15 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Override
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation, boolean initialCalculation,
-	                                           @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByContent(@NonNull OsmandApplication app, @NonNull String content,
+	                                               boolean leftSideNavigation, boolean initialCalculation,
+	                                               @Nullable RouteCalculationProgress calculationProgress) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress) : null;
+		return gpxFile != null ? responseByGpxFile(app, gpxFile, initialCalculation, calculationProgress) : null;
 	}
 
-	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                               boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
 			GPXFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
@@ -161,7 +164,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				gctx.ctx.calculationProgress = calculationProgress;
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
-				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null, calculatedTimeSpeed[0]);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
 				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();

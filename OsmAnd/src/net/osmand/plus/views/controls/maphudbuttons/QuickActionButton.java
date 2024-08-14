@@ -85,14 +85,14 @@ public class QuickActionButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
+		return buttonState.isEnabled() && mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
 	}
 
 	@NonNull
 	private View.OnClickListener getOnCLickListener() {
 		return v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			if (buttonState.isSingleAction()) {
+			if (!buttonState.isDefaultButton() && buttonState.isSingleAction()) {
 				List<QuickAction> actions = buttonState.getQuickActions();
 				layer.onActionSelected(buttonState, actions.get(0));
 			} else if (!showTutorialIfNeeded()) {

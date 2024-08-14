@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
+	compileSdk 34
+	buildToolsVersion = "34.0.0"
+
+	namespace = "net.osmand.srtmPlugin.paid"
 
 	signingConfigs {
 		development {
@@ -21,8 +23,8 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 15
-		targetSdkVersion 33
+		minSdkVersion 24
+		targetSdkVersion 34
 	}
 
 	lintOptions {
@@ -36,7 +38,6 @@ android {
 			jniLibs.srcDirs = []
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
-			renderscript.srcDirs = ["src"]
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
@@ -49,6 +50,9 @@ android {
 		release {
 			signingConfig signingConfigs.release
 		}
+	}
+	buildFeatures {
+		aidl true
 	}
 }
 

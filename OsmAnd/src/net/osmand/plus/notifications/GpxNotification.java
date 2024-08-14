@@ -2,12 +2,16 @@ package net.osmand.plus.notifications;
 
 import static net.osmand.plus.NavigationService.USED_BY_GPX;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
@@ -35,10 +39,10 @@ public class GpxNotification extends OsmandNotification {
 		super(app, GROUP_NAME);
 	}
 
+	@SuppressLint("UnspecifiedRegisterReceiverFlag")
 	@Override
 	public void init() {
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver saveTrackReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -46,10 +50,14 @@ public class GpxNotification extends OsmandNotification {
 					plugin.saveCurrentTrack();
 				}
 			}
-		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver startGpxRecReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -58,10 +66,14 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
+		}
 
-		app.registerReceiver(new BroadcastReceiver() {
-
+		BroadcastReceiver stopGpxRecReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
@@ -70,7 +82,12 @@ public class GpxNotification extends OsmandNotification {
 					plugin.updateWidgets();
 				}
 			}
-		}, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
+		} else {
+			app.registerReceiver(stopGpxRecReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
+		}
 	}
 
 	@Override
@@ -85,15 +102,14 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		NavigationService service = app.getNavigationService();
-		return isEnabled()
-				&& service != null
-				&& (service.getUsedBy() & USED_BY_GPX) != 0;
+		return PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return PluginsHelper.isActive(OsmandMonitoringPlugin.class);
+	public boolean isUsedByService(@Nullable Service service) {
+		NavigationService navService = service instanceof NavigationService
+				? (NavigationService) service : app.getNavigationService();
+		return navService != null && (navService.getUsedBy() & USED_BY_GPX) != 0;
 	}
 
 	@Override
@@ -109,8 +125,8 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
+	public Builder buildNotification(@Nullable Service service, boolean wearable) {
+		if (!isEnabled(service)) {
 			return null;
 		}
 		String notificationTitle;

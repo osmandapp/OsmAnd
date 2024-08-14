@@ -41,7 +41,7 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFilterUtils;
@@ -56,6 +56,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -201,6 +202,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		};
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		cleanupResources();
+		data.clearCache();
+	}
+
 	private Set<PoiUIFilter> collectFilters() {
 		Set<PoiUIFilter> calculatedFilters = new TreeSet<>(filters);
 		if (showTravel) {
@@ -256,8 +264,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
@@ -284,7 +292,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 			String colorStr = amenity.getColor();
 			if (colorStr != null) {
-				color = ColorDialogs.getColorByTag(colorStr);
+				color = DefaultColors.valueOf(colorStr);
 			}
 		}
 		return color != 0 ? color : ContextCompat.getColor(app, R.color.osmand_orange);
@@ -416,7 +424,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				WaypointHelper wph = app.getWaypointHelper();
 				for (Amenity o : objects) {
 					if (shouldDraw(tileBox, o)) {
-						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
+						PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 								getContext(), getColor(o), true);
 						pointImageDrawable.setAlpha(0.8f);
 						LatLon latLon = o.getLocation();
@@ -447,7 +455,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							id = RenderingIcons.getIconNameForAmenity(o);
 						}
 						if (id != null) {
-							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
+							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 									getContext(), getColor(o), true, RenderingIcons.getResId(id));
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);

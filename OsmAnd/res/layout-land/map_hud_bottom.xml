@@ -21,43 +21,27 @@
 
 			<!-- ALARM -->
 
-			<FrameLayout
-				android:id="@+id/map_alarm_warning"
-				android:layout_width="@dimen/map_alarm_size"
-				android:layout_height="@dimen/map_alarm_size"
-				android:layout_gravity="bottom|start"
+			<LinearLayout
+				android:id="@+id/alarms_container"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/map_button_shadow_margin"
-				android:layout_marginLeft="@dimen/map_button_shadow_margin"
-				android:layout_marginBottom="@dimen/map_alarm_bottom_margin_land">
+				android:layout_marginBottom="@dimen/map_alarm_bottom_margin_land"
+				android:orientation="horizontal">
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/map_alarm_warning_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					osmand:srcCompat="@drawable/warnings_limit" />
+				<include
+					android:id="@+id/speedometer_widget"
+					layout="@layout/speedometer_widget" />
 
-				<TextView
-					android:id="@+id/map_alarm_warning_text"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center"
-					android:textColor="@color/activity_background_color_dark"
-					android:textSize="@dimen/map_alarm_text_size"
-					android:textStyle="bold"
-					tools:text="60" />
+				<include
+					android:id="@+id/map_alarm_warning"
+					layout="@layout/map_alarm_warning"
+					android:layout_width="@dimen/map_alarm_size"
+					android:layout_height="@dimen/map_alarm_size"
+					android:layout_gravity="center_vertical"
+					android:layout_marginStart="@dimen/content_padding_medium" />
 
-				<TextView
-					android:id="@+id/map_alarm_warning_text_bottom"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="bottom|center_horizontal"
-					android:layout_marginBottom="@dimen/map_alarm_bottom_text_margin"
-					android:textSize="@dimen/map_alarm_bottom_text_size"
-					android:textStyle="bold"
-					tools:text="1.2 km"
-					tools:textColor="@color/activity_background_color_dark" />
-			</FrameLayout>
+			</LinearLayout>
 
 			<LinearLayout
 				android:layout_width="wrap_content"

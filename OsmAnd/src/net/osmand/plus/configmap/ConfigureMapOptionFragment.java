@@ -14,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
@@ -26,7 +24,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -45,9 +42,9 @@ import java.util.Collections;
 public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
+
 	private RulerWidget rulerWidget;
 	private DialogButton applyButton;
-	protected LinearLayout contentContainer;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -65,20 +62,6 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		return nightMode;
 	}
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		MapActivity activity = requireMapActivity();
-		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, false);
-			}
-		});
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,11 +70,10 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
-		contentContainer = view.findViewById(R.id.main_content);
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(viewOnCLick -> {
-			onApplyButtonClick();
-			activity.onBackPressed();
+			applyChanges();
+			dismiss();
 		});
 
 		setupToolBar(view);
@@ -99,8 +81,8 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		moveCompassButton(view);
 		moveMap3DButton(view);
 		setupBackgroundShadow(view);
-
-		setupMainContent();
+		setupBottomContainer(view.findViewById(R.id.bottom_container));
+		setupMainContent(view.findViewById(R.id.main_content));
 		updateApplyButton(false);
 
 		refreshMap();
@@ -109,16 +91,18 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	protected void setupBottomContainer(@NonNull View bottomContainer) {}
 
+	@Nullable
 	protected abstract String getToolbarTitle();
 
-	protected void onResetToDefault() {
+	protected void resetToDefault() {
 	}
 
-	protected void onApplyButtonClick() {
+	protected void applyChanges() {
 	}
 
-	protected abstract void setupMainContent();
+	protected abstract void setupMainContent(@NonNull ViewGroup container);
 
 	protected void updateApplyButton(boolean enable) {
 		applyButton.setEnabled(enable);
@@ -159,24 +143,20 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void setupToolBar(@NonNull View view) {
-		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+	protected void setupToolBar(@NonNull View view) {
+		View appbar = view.findViewById(R.id.appbar);
+		ViewCompat.setElevation(appbar, 5.0f);
 
-		TextView title = view.findViewById(R.id.title);
+		TextView title = appbar.findViewById(R.id.title);
 		title.setText(getToolbarTitle());
 
-		ImageView backButton = view.findViewById(R.id.back_button);
+		ImageView backButton = appbar.findViewById(R.id.back_button);
 		backButton.setImageDrawable(getContentIcon(R.drawable.ic_action_close));
-		backButton.setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
-		});
+		backButton.setOnClickListener(v -> dismiss());
 
-		ImageButton resetButton = view.findViewById(R.id.reset_button);
+		ImageButton resetButton = appbar.findViewById(R.id.reset_button);
 		resetButton.setImageDrawable(getIcon(R.drawable.ic_action_reset, ColorUtilities.getDefaultIconColorId(nightMode)));
-		resetButton.setOnClickListener(v -> onResetToDefault());
+		resetButton.setOnClickListener(v -> resetToDefault());
 	}
 
 	private void moveCompassButton(@NonNull View view) {
@@ -213,18 +193,25 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 
-		MapActivity mapActivity = requireMapActivity();
-		mapActivity.disableDrawer();
-		updateWidgetsVisibility(mapActivity, View.GONE);
+		MapActivity activity = requireMapActivity();
+		activity.disableDrawer();
+		updateWidgetsVisibility(activity, View.GONE);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 
-		MapActivity mapActivity = requireMapActivity();
-		mapActivity.enableDrawer();
-		updateWidgetsVisibility(mapActivity, View.VISIBLE);
+		MapActivity activity = requireMapActivity();
+		activity.enableDrawer();
+		updateWidgetsVisibility(activity, View.VISIBLE);
+	}
+
+	protected void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.onBackPressed();
+		}
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -236,9 +223,9 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MapLayers mapLayers = mapActivity.getMapLayers();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			MapLayers mapLayers = activity.getMapLayers();
 
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));

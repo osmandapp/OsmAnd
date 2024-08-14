@@ -21,9 +21,9 @@ import net.osmand.plus.utils.AndroidUtils;
 public class NavResumePauseAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_RESUME_PAUSE_ACTION_ID,
-			"nav.resumepause", NavResumePauseAction .class).
-			nameRes(R.string.quick_action_resume_pause_navigation).iconRes(R.drawable.ic_play_dark).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			"nav.resumepause", NavResumePauseAction.class)
+			.nameRes(R.string.shared_string_navigation).iconRes(R.drawable.ic_play_dark).nonEditable()
+			.category(QuickActionType.NAVIGATION).nameActionRes(R.string.quick_action_verb_pause_resume);
 
 
 	public NavResumePauseAction() {
@@ -38,13 +38,9 @@ public class NavResumePauseAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (routingHelper.isRoutePlanningMode()) {
-			routingHelper.setRoutePlanningMode(false);
-			routingHelper.setFollowingMode(true);
-			routingHelper.setCurrentLocation(mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation(), false);
+			routingHelper.resumeNavigation();
 		} else {
-			routingHelper.setRoutePlanningMode(true);
-			routingHelper.setFollowingMode(false);
-			routingHelper.setPauseNavigation(true);
+			routingHelper.pauseNavigation();
 		}
 		AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 		mapActivity.getMapViewTrackingUtilities().switchRoutePlanningMode();
@@ -62,7 +58,7 @@ public class NavResumePauseAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		RoutingHelper helper = app.getRoutingHelper();
 		if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
 			return app.getString(R.string.continue_navigation);

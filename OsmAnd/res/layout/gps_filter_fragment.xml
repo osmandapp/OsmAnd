@@ -109,7 +109,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?attr/app_bar_primary_item_color"
 					android:textSize="@dimen/dialog_header_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					android:textStyle="bold" />
 
 				<ImageButton
 					android:id="@+id/reset_to_original_button"

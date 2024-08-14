@@ -21,8 +21,8 @@ public class DayNightModeAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(DAY_NIGHT_MODE_ACTION_ID,
 			"daynight.switch", DayNightModeAction.class).
-			nameRes(R.string.quick_action_day_night_switch_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			nameRes(R.string.map_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 	public DayNightModeAction() {super(TYPE);}
 
@@ -56,7 +56,7 @@ public class DayNightModeAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		if (app.getDaynightHelper().isNightMode()) {
 			return String.format(app.getString(R.string.quick_action_day_night_mode),
 				DayNightMode.DAY.toHumanString(app));

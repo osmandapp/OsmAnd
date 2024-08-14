@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.purchase.data;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState.ACTIVE;
@@ -182,16 +183,30 @@ public class PurchaseUiDataUtils {
 
 	@NonNull
 	public static PurchaseUiData createTripltekPurchaseUiData(@NonNull OsmandApplication app) {
-		String title = app.getString(R.string.tripltek);
-		String purchaseType = app.getString(R.string.free_account);
-
-		long installTime = Version.getInstallTime(app);
 		long expireTime = InAppPurchaseUtils.getTripltekPromoExpirationTime(app);
 		SubscriptionState state = InAppPurchaseUtils.isTripltekPromoAvailable(app) ? ACTIVE : EXPIRED;
 
+		return createPromoUiData(app, TRIPLTEK_PROMO, state, expireTime);
+	}
+
+	@NonNull
+	public static PurchaseUiData createHugerockPurchaseUiData(@NonNull OsmandApplication app) {
+		long expireTime = InAppPurchaseUtils.getHugerockPromoExpirationTime(app);
+		SubscriptionState state = InAppPurchaseUtils.isHugerockPromoAvailable(app) ? ACTIVE : EXPIRED;
+
+		return createPromoUiData(app, HUGEROCK_PROMO, state, expireTime);
+	}
+
+	@NonNull
+	public static PurchaseUiData createPromoUiData(@NonNull OsmandApplication app, @NonNull PurchaseOrigin origin,
+	                                               @NonNull SubscriptionState state, long expireTime) {
+		long installTime = Version.getInstallTime(app);
+		String title = app.getString(origin.getStoreNameId());
+		String purchaseType = app.getString(R.string.free_account);
+
 		return new PurchaseUiData(null, title, R.drawable.ic_action_osmand_start, purchaseType,
 				expireTime, installTime, false, false,
-				false, false, state, TRIPLTEK_PROMO);
+				false, false, state, origin);
 	}
 
 	@NonNull

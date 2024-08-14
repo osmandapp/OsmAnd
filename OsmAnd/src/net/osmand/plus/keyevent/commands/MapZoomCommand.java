@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 
 public class MapZoomCommand extends KeyEventCommand {
 
@@ -42,12 +41,6 @@ public class MapZoomCommand extends KeyEventCommand {
 
 	private void changeZoom(int zoomStep) {
 		app.getOsmandMap().getMapView().changeZoomManually(zoomStep);
-	}
-
-	@NonNull
-	@Override
-	public KeyAssignmentCategory getCategory() {
-		return KeyAssignmentCategory.MAP_INTERACTIONS;
 	}
 
 	@NonNull

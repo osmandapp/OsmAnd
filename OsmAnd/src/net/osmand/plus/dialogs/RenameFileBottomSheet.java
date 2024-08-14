@@ -131,6 +131,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		File dest = renameFile();
 		if (dest != null) {
+			app.getSmartFolderHelper().onTrackRenamed(srcFile, dest);
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof RenameCallback) {
 				((RenameCallback) fragment).fileRenamed(srcFile, dest);

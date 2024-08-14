@@ -2,6 +2,7 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -92,7 +93,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 			}
 			if (savedFile != null) {
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-				boolean readItem = gpxDbHelper.hasItem(savedFile);
+				boolean readItem = gpxDbHelper.hasGpxDataItem(savedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
 					dataItem = new GpxDataItem(app, savedFile);
@@ -128,13 +129,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 		dataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType).getType());
 		dataItem.setParameter(SPLIT_INTERVAL, appearanceInfo.splitInterval);
 		dataItem.setParameter(COLORING_TYPE, appearanceInfo.coloringType);
+		dataItem.setParameter(COLOR_PALETTE, appearanceInfo.gradientPaletteName);
 		app.getGpxDbHelper().updateDataItem(dataItem);
 	}
 
 	private void createGpxAppearanceInfo() {
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(item));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(app, item));
 		if (dataItem != null) {
-			appearanceInfo = new GpxAppearanceInfo(dataItem);
+			appearanceInfo = new GpxAppearanceInfo(app, dataItem);
 		}
 	}
 
@@ -153,6 +155,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
 				super.readFromStream(inputStream, inputFile, entryName);
+
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 				if (selectedGpxFile != null) {
@@ -160,6 +163,10 @@ public class GpxSettingsItem extends FileSettingsItem {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
+				}
+				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+				if (!gpxDbHelper.hasGpxDataItem(file)) {
+					gpxDbHelper.add(new GpxDataItem(app, file));
 				}
 			}
 		};

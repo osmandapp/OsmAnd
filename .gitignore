@@ -1,3 +1,4 @@
+*.test.txt
 *.render.xml
 *.render_template.xml
 poi_types.xml
@@ -19,12 +20,14 @@ OsmAndCore_*.aar
 **/.project
 **/.classpath
 out/
+.kotlin/
 
 # Huawei
 agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+.attach_pid*
 /.idea
 *.iml
 
@@ -43,3 +46,6 @@ build
 
 #Rendering test files
 OsmAnd-java/src/test/resources/rendering/*
+
+# ApproximationTest resources
+OsmAnd-java/src/test/resources/approximation/*

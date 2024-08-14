@@ -4,10 +4,14 @@ import android.util.Xml;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.map.OsmandRegions;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
 
 /**
  * That class is replacing of standard LogFactory due to
@@ -23,7 +27,11 @@ import org.xmlpull.v1.XmlSerializer;
  *
  */
 public class PlatformUtil {
+
 	public static String TAG = "net.osmand"; //$NON-NLS-1$
+
+	private static OsmandRegions osmandRegions;
+
 	private static class OsmandLogImplementation implements Log {
 
 		private final String fullName;
@@ -177,6 +185,14 @@ public class PlatformUtil {
 
 	public static Log getLog(Class<?> cl){
 		return getLog(cl.getName());
+	}
+
+	public static void setOsmandRegions(OsmandRegions or) {
+		osmandRegions = or;
+	}
+
+	public static OsmandRegions getOsmandRegions() throws IOException {
+		return osmandRegions;
 	}
 
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {

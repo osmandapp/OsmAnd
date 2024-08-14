@@ -601,7 +601,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (InAppPurchaseData purchase : tokensToSend) {
 					purchaseInfoList.add(getPurchaseInfo(purchase));
 				}
-				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
+				onProductDetailsResponseDone(purchaseInfoList, userRequested);
 			}
 
 			private void onSubscriptionExpired() {

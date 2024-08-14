@@ -58,7 +58,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -318,11 +318,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	@Override
-	public void onPointsDeletionStarted() {
-
-	}
-
-	@Override
 	public void onPointsDeleted() {
 		updateGroups();
 		update();
@@ -575,7 +570,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				if (groupColor == 0) {
 					groupColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 				}
-				icon.setImageDrawable(PointImageDrawable.getFromWpt(app, groupColor, false, wpt));
+				icon.setImageDrawable(PointImageUtils.getFromPoint(app, groupColor, false, wpt));
 			} else {
 				icon.setImageDrawable(getContentIcon(R.drawable.ic_action_marker_dark));
 			}

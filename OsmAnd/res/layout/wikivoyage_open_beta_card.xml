@@ -70,7 +70,7 @@
 			android:paddingTop="@dimen/wikivoyage_travel_card_button_padding"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:text="@string/get_unlimited_access" />
 
 

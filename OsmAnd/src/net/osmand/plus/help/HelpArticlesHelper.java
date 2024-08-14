@@ -2,11 +2,11 @@ package net.osmand.plus.help;
 
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 import static net.osmand.plus.feedback.FeedbackHelper.EXCEPTION_PATH;
+import static net.osmand.plus.help.HelpArticleUtils.createArticleItem;
 import static net.osmand.plus.help.HelpArticleUtils.createCategory;
 import static net.osmand.plus.help.HelpArticleUtils.createMenuItem;
 import static net.osmand.plus.help.HelpArticleUtils.getArticleItemClickListener;
 import static net.osmand.plus.help.HelpArticleUtils.getUrlItemClickListener;
-import static net.osmand.plus.help.HelpArticleUtils.createArticleItem;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -35,6 +35,7 @@ import java.util.Map;
 public class HelpArticlesHelper implements LoadArticlesListener {
 
 	private static final int MAX_VISIBLE_POPULAR_ARTICLES = 5;
+	private static final String TROUBLESHOOTING_CATEGORY = "Troubleshooting";
 
 	private final OsmandApplication app;
 	private final HelpActivity activity;
@@ -99,7 +100,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 			int counter = 0;
 			for (Map.Entry<String, String> entry : popularArticles.entrySet()) {
 				String url = SERVER_URL + entry.getValue();
-				String title = HelpArticleUtils.getArticleName(app, url);
+				String title = HelpArticleUtils.getArticleName(app, url, entry.getKey());
 
 				items.add(createMenuItem(title, null, R.drawable.ic_action_file_info,
 						getArticleItemClickListener(activity, title, url)));
@@ -113,13 +114,12 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 	}
 
 	private void createDocsCategories(@NonNull List<ContextMenuItem> items) {
-		HelpArticle troubleshootingNode = articles.remove("troubleshooting");
-
 		if (!Algorithms.isEmpty(articles)) {
 			createUserGuideCategory(items, articles);
 		}
-		if (troubleshootingNode != null && !Algorithms.isEmpty(troubleshootingNode.articles)) {
-			createTroubleshootingCategory(items, troubleshootingNode);
+		HelpArticle article = articles.get(TROUBLESHOOTING_CATEGORY);
+		if (article != null && !Algorithms.isEmpty(article.articles)) {
+			createTroubleshootingCategory(items, article);
 		}
 	}
 
@@ -127,8 +127,10 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		items.add(createCategory(app.getString(R.string.user_guide)));
 
 		for (Map.Entry<String, HelpArticle> entry : articles.entrySet()) {
-			HelpArticle article = entry.getValue();
-			items.add(createArticleItem(activity, article));
+			if (!TROUBLESHOOTING_CATEGORY.equals(entry.getKey())) {
+				HelpArticle article = entry.getValue();
+				items.add(createArticleItem(activity, article));
+			}
 		}
 	}
 
@@ -136,7 +138,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		items.add(createCategory(app.getString(R.string.troubleshooting)));
 
 		for (HelpArticle article : helpArticle.articles.values()) {
-			int iconId = HelpArticleUtils.getArticleIconId(article.url);
+			int iconId = HelpArticleUtils.getArticleIconId(article);
 			String title = HelpArticleUtils.getArticleName(app, article);
 			items.add(createMenuItem(title, null, iconId, getArticleItemClickListener(activity, title, article.url)));
 		}

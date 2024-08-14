@@ -1,26 +1,13 @@
 package net.osmand.plus.track.fragments;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_HEIGHTMAP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.track.cards.OptionsCard.ALTITUDE_CORRECTION_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.GPS_FILTER_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.SIMULATE_POSITION_BUTTON_INDEX;
-import static net.osmand.plus.track.cards.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.cards.OptionsCard.*;
 import static net.osmand.plus.track.cards.TrackPointsCard.ADD_WAYPOINT_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
 import static net.osmand.plus.track.cards.TrackPointsCard.OPEN_WAYPOINT_INDEX;
@@ -77,13 +64,11 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -98,25 +83,16 @@ import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.cards.AuthorCard;
-import net.osmand.plus.track.cards.CopyrightCard;
-import net.osmand.plus.track.cards.DescriptionCard;
-import net.osmand.plus.track.cards.InfoCard;
-import net.osmand.plus.track.cards.MetadataExtensionsCard;
-import net.osmand.plus.track.cards.GpxInfoCard;
-import net.osmand.plus.track.cards.OptionsCard;
-import net.osmand.plus.track.cards.OverviewCard;
-import net.osmand.plus.track.cards.PointsGroupsCard;
-import net.osmand.plus.track.cards.RouteInfoCard;
-import net.osmand.plus.track.cards.SegmentsCard;
-import net.osmand.plus.track.cards.TrackPointsCard;
+import net.osmand.plus.track.cards.*;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescriptionCallback;
@@ -124,17 +100,9 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
-import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
+import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxFileLoaderTask;
-import net.osmand.plus.track.helpers.GpxNavigationHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -370,7 +338,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setFile(file);
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
-		displayHelper.setGpx(selectedGpxFile.getGpxFile());
+		displayHelper.setGpx(selectedGpxFile.getGpxFileToDisplay());
 		displayHelper.setSelectedGpxFile(selectedGpxFile);
 		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
@@ -514,7 +482,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private CharSequence getHeaderTitle() {
 		if (menuType == TrackMenuTab.TRACK) {
 			String title = app.getString(R.string.shared_string_gpx_track) + "\n" + gpxTitle;
-			return UiUtilities.createCustomFontSpannable(FontCache.getRobotoRegular(app), title, gpxTitle);
+			return UiUtilities.createCustomFontSpannable(DEFAULT, title, gpxTitle);
 		} else if (menuType == TrackMenuTab.OPTIONS) {
 			return app.getString(menuType.titleId);
 		} else {
@@ -656,9 +624,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void setupDisplayGroupsWidget() {
 		OnClickListener listener = view -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null && getDisplayGroupsHolder().getTotalTrackGroupsNumber() > 0) {
-				DisplayGroupsBottomSheet.showInstance(mapActivity, this, true);
+			MapActivity activity = getMapActivity();
+			if (activity != null && getDisplayGroupsHolder().getTotalTrackGroupsNumber() > 0) {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				DisplayGroupsBottomSheet.showInstance(manager, this, true);
 			}
 		};
 		displayGroupsButton.setOnClickListener(listener);
@@ -747,7 +716,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void setupOverviewCards(MapActivity mapActivity, ViewGroup cardsContainer, boolean shouldReattachCards){
+	private void setupOverviewCards(MapActivity mapActivity, ViewGroup cardsContainer, boolean shouldReattachCards) {
 		if (shouldReattachCards && overviewCard != null && overviewCard.getView() != null) {
 			reattachCard(cardsContainer, overviewCard);
 		} else {
@@ -784,7 +753,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 
 		if (shouldReattachCards && infoCard != null && infoCard.getView() != null) {
-			reattachCard(cardsContainer, authorCard);
+			reattachCard(cardsContainer, infoCard);
 		} else {
 			infoCard = new InfoCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata, routeKey);
 			cardsContainer.addView(infoCard.build(mapActivity));
@@ -1052,8 +1021,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
-		outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
+		if (selectedGpxFile != null) {
+			outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
+			outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
+		}
 		if (latLon != null) {
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
@@ -1141,7 +1112,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
 				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				dismiss();
+				hide();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
 				if (segment == null) {
@@ -1156,12 +1127,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					SplitSegmentDialogFragment.showInstance(fragmentManager, displayHelper, items.get(0), segment);
 				}
 			} else if (buttonIndex == SHARE_BUTTON_INDEX) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				if (gpxFile.showCurrentTrack) {
-					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-				} else if (!Algorithms.isEmpty(gpxFile.path)) {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
-				}
+				GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
@@ -1448,10 +1414,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onPointsDeletionStarted() {
-	}
-
-	@Override
 	public void onPointsDeleted() {
 		if (pointsCard != null) {
 			pointsCard.onPointsDeleted();
@@ -1616,7 +1578,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (selectedGpxFile != null) {
 				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
 						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
-				selectedGpxFile.setDisplayGroups(groups, app);
+				selectedGpxFile.setSplitGroups(groups, app);
 				selectedGpxFile.processPoints(app);
 			}
 			updateContent();

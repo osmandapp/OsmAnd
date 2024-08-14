@@ -19,7 +19,7 @@ import net.osmand.telegram.helpers.location.LocationCallback
 import net.osmand.telegram.helpers.location.LocationServiceHelper
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 
 private const val UPDATE_WIDGET_INTERVAL_MS = 1000L // 1 sec
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
@@ -97,7 +97,12 @@ class TelegramService : Service(), TelegramIncomingMessagesListener, TelegramOut
 
 		val locationNotification = app.notificationHelper.locationNotification
 		val notification = app.notificationHelper.buildNotification(locationNotification)
-		startForeground(locationNotification.telegramNotificationId, notification)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			startForeground(locationNotification.telegramNotificationId, notification,
+				android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION)
+		} else {
+			startForeground(locationNotification.telegramNotificationId, notification)
+		}
 		app.notificationHelper.refreshNotification(locationNotification.type)
 
 		if (isUsedByMyLocation(usedBy)) {

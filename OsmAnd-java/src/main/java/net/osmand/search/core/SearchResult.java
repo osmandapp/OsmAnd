@@ -14,6 +14,7 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import static net.osmand.search.core.SearchCoreFactory.PREFERRED_DEFAULT_ZOOM;
 
 
 public class SearchResult {
@@ -44,7 +45,7 @@ public class SearchResult {
 	public double priorityDistance;
 
 	public LatLon location;
-	public int preferredZoom = 15;
+	public int preferredZoom = PREFERRED_DEFAULT_ZOOM;
 
 	public String localeName;
 	public String alternateName;

@@ -1,5 +1,6 @@
 package net.osmand.plus.firstusage;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 
 import android.Manifest;
@@ -36,8 +37,8 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -54,7 +55,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
@@ -75,13 +75,7 @@ import net.osmand.util.MapUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
@@ -694,7 +688,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		int endInd = startInd + part.length();
 		int color = ColorUtilities.getColor(app, R.color.active_color_primary_light);
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		Typeface typeface = DEFAULT_BOLD;
 		CustomTypefaceSpan typefaceSpan = new CustomTypefaceSpan(typeface);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override

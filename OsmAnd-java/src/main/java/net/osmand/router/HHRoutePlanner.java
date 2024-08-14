@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
@@ -22,11 +23,9 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -51,7 +50,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.MapUtils;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
-	static int DEBUG_VERBOSE_LEVEL = 0;
+	public static int DEBUG_VERBOSE_LEVEL = 0;
 	static int DEBUG_ALT_ROUTE_SELECTION = -1;
 	static final double MINIMAL_COST = 0.01;
 	private static final int PNT_SHORT_ROUTE_START_END = -1000;
@@ -158,21 +157,25 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
-		RouteCalculationProgress progress = currentCtx.rctx.calculationProgress;
-
 		long startTime = System.nanoTime();
+		int SL = HHRoutingConfig.STATS_VERBOSE_LEVEL;
+		RouteCalculationProgress progress = currentCtx.rctx.calculationProgress;
+		// important assumption that routing context match!
+		if (config.cacheCtx != null && config.cacheCtx.rctx  == currentCtx.rctx) {
+			currentCtx = (HHRoutingContext<T>) config.cacheCtx;
+		}
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
+		if (config.CACHE_CALCULATION_CONTEXT) {
+			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
+		}
 		if (hctx == null) {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
-		if (hctx.config.USE_GC_MORE_OFTEN) {
-			printGCInformation();
-		}
-		System.out.println(config.toString(start, end));
 		filterPointsBasedOnConfiguration(hctx);
-		
+
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
 		progress.hhIteration(HHIteration.START_END_POINT);
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);
@@ -182,49 +185,56 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		boolean recalc = false;
 		double firstIterationTime = 0; 
 		int iteration = 0;
+		int calcCount = 0;
 		while (route == null) {
 			progress.hhIteration(HHIteration.ROUTING);
 			iteration++;
 			if (recalc && firstIterationTime == 0) {
-				printf(DEBUG_VERBOSE_LEVEL == 0, "  Recalculating route due to route structure changes...");
+				printf(DEBUG_VERBOSE_LEVEL == 0 && SL > 0, "  Recalculating route due to route structure changes...");
 				firstIterationTime = hctx.stats.routingTime;
 			}
-			printf(!recalc || DEBUG_VERBOSE_LEVEL > 0, " Routing...");
+			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+			if (finalPnt == null) {
+				printf(SL > 0, " finalPnt is null (stop)\n");
+				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
+			}
+			calcCount++;
 			if (progress.isCancelled) {
 				return cancelledStatus();
 			}
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
 			time = (System.nanoTime() - time) ;
-			printf(!recalc || DEBUG_VERBOSE_LEVEL > 0,"%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
+			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0,"%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			
 			progress.hhIteration(HHIteration.DETAILED);
-			printf(!recalc || DEBUG_VERBOSE_LEVEL > 0, " Parse detailed route segments...");
+			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments...");
 			time = System.nanoTime();
 			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
 			if (progress.isCancelled) {
 				return cancelledStatus();
 			}
 			time = (System.nanoTime() - time);
-			printf(firstIterationTime == 0 || DEBUG_VERBOSE_LEVEL > 0, "%.2f ms\n", time / 1e6);
+			printf((firstIterationTime == 0 || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, "%.2f ms\n", time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
-				if (hctx.stats.prepTime + hctx.stats.routingTime > hctx.config.MAX_TIME_REITERATION_MS) {
-					return new HHNetworkRouteRes(" Too many route recalculations (maps are outdated).");
+				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
+					printf(SL > 0, "Too many recalculations (stop)\n");
+					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
 				route = null;
 			}
 		}
 		if (firstIterationTime > 0) {
-			printf(DEBUG_VERBOSE_LEVEL == 0, "%d iterations, %.2f ms\n", iteration, hctx.stats.routingTime - firstIterationTime);
+			printf(DEBUG_VERBOSE_LEVEL == 0 && SL > 0, "%d iterations, %.2f ms\n", iteration, hctx.stats.routingTime - firstIterationTime);
 		}
 		double altRoutes = 0;
 		if (hctx.config.CALC_ALTERNATIVES) {
 			progress.hhIteration(HHIteration.ALTERNATIVES);
-			System.out.printf(" Alternative routes...");
+			printf(SL > 0, " Alternative routes...");
 			long time = System.nanoTime();
 			calcAlternativeRoute(hctx, route, stPoints, endPoints, progress);
 			if (progress.isCancelled) {
@@ -232,7 +242,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			hctx.stats.altRoutingTime += (System.nanoTime() - time) / 1e6;
 			hctx.stats.routingTime += hctx.stats.altRoutingTime;
-			System.out.printf("%d %.2f ms\n", route.altRoutes.size(), hctx.stats.altRoutingTime);
+			printf(SL > 0, "%d %.2f ms\n", route.altRoutes.size(), hctx.stats.altRoutingTime);
 
 			time = System.nanoTime();
 			for (HHNetworkRouteRes alt : route.altRoutes) {
@@ -242,15 +252,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 			altRoutes = (System.nanoTime() - time) / 1e6;
-			System.out.printf("%.2f ms\n", altRoutes);
+			printf(SL > 0, "%.2f ms\n", altRoutes);
 			
 		}
 		long time = System.nanoTime();
-		System.out.printf(" Prepare results (turns, alt routes)...");
+		printf(SL > 0, " Prepare results (turns, alt routes)...");
 
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			hctx.unloadAllConnections();
-			printGCInformation();
+			printGCInformation(true);
 		}
 		
 		prepareRouteResults(hctx, route, start, end, rrp);
@@ -264,38 +274,56 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
 		}
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
-		System.out.printf("%.2f ms\n", hctx.stats.prepTime);
-		
-		System.out.println(String.format("Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
-				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / route.getHHRoutingTime()),
-				route.segments.size(), hctx.stats.firstRouteVisitedVertices, hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices));
-		System.out.println(hctx.config.toString(start, end));
+		printf(SL > 0, "%.2f ms\n", hctx.stats.prepTime);
+		printf(SL > 0, "Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
+				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / (route.getHHRoutingTime() + 0.01)),
+				route.segments.size(), hctx.stats.firstRouteVisitedVertices, hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices);
 		hctx.stats.prepTime += altRoutes;
-		RouteResultPreparation.printResults(hctx.rctx, start, end, route.detailed);
-		System.out.printf("Routing finished all %.1f ms: last mile %.1f ms, load data %.1f ms (%,d edges), routing %.1f ms (queue  - %.1f add ms + %.1f poll ms), prep result %.1f ms\n",
-				(System.nanoTime() - startTime) / 1e6, hctx.stats.searchPointsTime,
-				hctx.stats.loadEdgesTime + hctx.stats.loadPointsTime, hctx.stats.loadEdgesCnt, hctx.stats.routingTime, 
-				hctx.stats.addQueueTime, hctx.stats.pollQueueTime, hctx.stats.prepTime);
-		printGCInformation();
+		if (SL > 0) {
+			RouteResultPreparation.printResults(hctx.rctx, start, end, route.detailed);
+		}
+		printGCInformation(false);
+		hctx.clearAll(stPoints, endPoints);
+		printf(SL >= 0,
+				"Routing %.1f ms: load/filter points %.1f ms, last mile %.1f ms, routing %.1f ms (queue  - %.1f ms, %.1f ms - %,d edges), prep result %.1f ms - %s (selected %s)\n",
+				(System.nanoTime() - startTime) / 1e6, 
+				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
+				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
+				hctx.stats.loadEdgesTime, hctx.stats.loadEdgesCnt, hctx.stats.prepTime,
+				hctx.config.toString(start, end), hctx.getRoutingInfo());
 		return route;
 	}
 
-	private void filterPointsBasedOnConfiguration(HHRoutingContext<T> hctx) {
-		GeneralRouter vr = (GeneralRouter) hctx.rctx.getRouter();
-		boolean parameterExisting = false;
-		Map<String, RoutingParameter> parameters = vr.getParameters();
-		for (String e : vr.getParameterValues().keySet()) {
-			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)
-					&& !e.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)) {
-				parameterExisting = true;
+	public static TreeMap<String, String> getFilteredTags(GeneralRouter generalRouter) {
+		Map<String, RoutingParameter> parameters = generalRouter.getParameters();
+		TreeMap<String, String> tm = new TreeMap<String, String>();
+		for (Entry<String, String> es : generalRouter.getParameterValues().entrySet()) {
+			String paramId = es.getKey();
+			// These parameters don't affect the routing filters
+			// This assumption probably shouldn't be used in general and only for popular parameters)
+			if (parameters.containsKey(paramId) && !paramId.equals(GeneralRouter.USE_SHORTEST_WAY)
+					&& !paramId.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)
+					&& !paramId.startsWith(GeneralRouter.GROUP_RELIEF_SMOOTHNESS_FACTOR)) {
+				tm.put(paramId, es.getValue());
 			}
 		}
-		if (!parameterExisting) {
-			// no parameters
+		return tm;
+	}
+
+	private void filterPointsBasedOnConfiguration(HHRoutingContext<T> hctx) {
+		TreeMap<String, String> tm = getFilteredTags((GeneralRouter) hctx.rctx.getRouter());
+		if (hctx.filterRoutingParameters.equals(tm)) {
 			return;
 		}
-		
-		System.out.print(" Filter points based on parameters...");
+		for (T pnt : hctx.pointsById.valueCollection()) {
+			pnt.rtExclude = false;
+		}
+		if (tm.isEmpty()) {
+			// no parameters
+			hctx.filterRoutingParameters = tm;
+			return;
+		}
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Filter points based on parameters...");
 		long nt = System.nanoTime();
 		RouteRegion regR = new RouteRegion();
 		TIntArrayList tint = new TIntArrayList(50);
@@ -334,15 +362,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
-		System.out.printf("%d excluded from %d, %.2f ms\n", filtered, hctx.pointsById.size(),
-				(System.nanoTime() - nt) / 1e6);
+		hctx.filterRoutingParameters = tm;
+		double time = (System.nanoTime() - nt) / 1e6;
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "%d excluded from %d, %.2f ms\n", filtered, hctx.pointsById.size(), time);
+		hctx.stats.loadPointsTime += time;
+
 	}
 
 	private void findFirstLastSegments(HHRoutingContext<T> hctx, LatLon start, LatLon end,
 	                                   TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints,
 	                                   RouteCalculationProgress progress) throws IOException, InterruptedException {
 		long time = System.nanoTime();
-		System.out.println(" Finding first / last segments...");
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...\n");
 		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
 		int startReiterate = -1, endReiterate = -1;
 		boolean found = false;
@@ -393,7 +424,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			initStart(hctx, startP, false, stPoints);
 			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
-				System.out.println("   Reiterate with next start point: " + startP);
+				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "   Reiterate with next start point: " + startP + "\n");
 				startReiterate++;
 				found = false;
 				continue;
@@ -407,7 +438,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			progress.hhIterationProgress(0.75); // %
 			initStart(hctx, endP, true, endPoints);
 			if (endPoints.isEmpty()) {
-				System.out.println("   Reiterate with next end point: " + endP);
+				printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "   Reiterate with next end point: " + endP + "\n");
 				endReiterate++;
 				found = false;
 				continue;
@@ -416,7 +447,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		hctx.stats.searchPointsTime = (System.nanoTime() - time) / 1e6;
-		System.out.printf(" Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...%.2f ms\n", hctx.stats.searchPointsTime);
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
@@ -550,13 +581,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					}
 				}
 				if (route.altRoutes.size() > 0) {
-					System.out.printf("Cost %.2f - %.2f [%d unique / %d]...", route.altRoutes.get(0).getHHRoutingTime(),
+					printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "Cost %.2f - %.2f [%d unique / %d]...", route.altRoutes.get(0).getHHRoutingTime(),
 						route.altRoutes.get(route.altRoutes.size() - 1).getHHRoutingTime(), route.altRoutes.size(), size);
 				}
 				int ind = DEBUG_ALT_ROUTE_SELECTION % (route.altRoutes.size() + 1);
 				if (ind > 0) {
 					HHNetworkRouteRes rts = route.altRoutes.get(ind - 1);
-					System.out.printf(DEBUG_ALT_ROUTE_SELECTION + " select %.2f ", rts.getHHRoutingTime());
+					printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, DEBUG_ALT_ROUTE_SELECTION + " select %.2f ", rts.getHHRoutingTime());
 					route.detailed = rts.detailed;
 					route.segments = rts.segments;
 					route.altRoutes = Collections.singletonList(rts);
@@ -577,9 +608,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			progress.hhIteration(HHIteration.SELECT_REGIONS);
 			hctx = selectBestRoutingFiles(start, end, hctx);
 		}
-		System.out.println("Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
 		if (hctx == null) {
+			System.out.println("No files found for routing");
 			return hctx;
+		}
+		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 0) {
+			System.out.println("Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
 		}
 		hctx.stats = new RoutingStats();
 		hctx.config = c;
@@ -591,16 +625,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		
 		long time = System.nanoTime();
 		progress.hhIteration(HHIteration.LOAD_POINTS);
-		System.out.print("Loading points... ");
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "Loading points... ");
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<T>();
 		if (c.PRELOAD_SEGMENTS) {
 			time = System.nanoTime();
-			System.out.printf("Loading segments...");
+			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "Loading segments...");
 			int cntEdges = hctx.loadNetworkSegments(hctx.pointsById.valueCollection());
 			hctx.stats.loadEdgesTime = (System.nanoTime() - time) / 1e6;
-			System.out.printf(" %,d - %.2fms\n", cntEdges, hctx.stats.loadEdgesTime);
+			printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " %,d - %.2fms\n", cntEdges, hctx.stats.loadEdgesTime);
 			hctx.stats.loadEdgesCnt = cntEdges;
 		} else {
 			for (NetworkDBPoint p : hctx.pointsById.valueCollection()) {
@@ -620,10 +654,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.pointsByGeo.put(pos, pnt);
 			hctx.regions.get(pnt.mapId).pntsByFileId.put(pnt.fileId, pnt);
 		}		
-		hctx.pointsRect.printStatsDistribution("  Points distributed");
+		if (DEBUG_VERBOSE_LEVEL > 0) {
+			hctx.pointsRect.printStatsDistribution("  Points distributed");
+		}
 		hctx.initialized = true;
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
-		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
+		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		return hctx;
 	}
 
@@ -664,39 +700,23 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 
 		public boolean contains(LatLon p) throws IOException {
-			int zoomToLoad = 14;
 			int x31 = MapUtils.get31TileNumberX(p.getLongitude());
-			int x = x31 >> zoomToLoad;
 			int y31 = MapUtils.get31TileNumberY(p.getLatitude());
-			int y = MapUtils.get31TileNumberY(p.getLatitude()) >> zoomToLoad;
-			boolean contains = false;
-			SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
-					(x + 1) << zoomToLoad, y << zoomToLoad, (y + 1) << zoomToLoad, null);
 			Set<String> checked = new HashSet<>();
 			for (int i = 0; i < regions.size(); i++) {
 				BinaryMapIndexReader rd = readers.get(i);
 				if (rd.containsRouteData()) {
-					for (RouteRegion reg : rd.getRoutingIndexes()) {
-						if (checked.contains(reg.getName())) {
-							continue;
-						}
-						checked.add(reg.getName());
-						List<RouteSubregion> res = rd.searchRouteIndexTree(request, reg.getSubregions());
-						if (!res.isEmpty()) {
-							contains = true;
-						}
+					if (rd.containsActualRouteData(x31, y31, checked)) {
+						return true;
 					}
 				} else {
 					HHRouteRegion reg = regions.get(i);
 					if (reg.top.contains(x31, y31)) {
-						contains = true;
+						return true;
 					}
 				}
-				if (contains) {
-					break;
-				}
 			}
-			return contains;
+			return false;
 		}
 	}
 
@@ -846,14 +866,17 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			finitePnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, finitePnt));
 			finitePnt.setCostParentRt(reverse, plusCost, null, plusCost);
 			pnts.put(finitePnt.index, finitePnt);
-			
+
 			T dualPoint = (T) finitePnt.dualPoint;
 			dualPoint.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, dualPoint));
 			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
 			pnts.put(dualPoint.index, dualPoint);
-			
+
 			return pnts;
 		}
+		int savedMaxVisited = hctx.rctx.config.MAX_VISITED;
+		int savedPlanRoadDirectrion = hctx.rctx.config.planRoadDirection;
+		float savedHeuristicCoefficient = hctx.rctx.config.heuristicCoefficient;
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING;
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
@@ -862,8 +885,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
-		hctx.rctx.config.MAX_VISITED = -1;
-		System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));		
+		hctx.rctx.config.heuristicCoefficient = savedHeuristicCoefficient;
+		hctx.rctx.config.planRoadDirection = savedPlanRoadDirectrion;
+		hctx.rctx.config.MAX_VISITED = savedMaxVisited;
+		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 0) {
+			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
+		}
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
@@ -908,7 +935,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			hctx.rctx.unloadAllData();
-			printGCInformation();
+			printGCInformation(true);
 		}
 		return pnts;
 	}
@@ -1268,6 +1295,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						System.err.println("Error calculations new final boundary not found");
 						continue;
 					}
+					p.startX = o.getStartPointX();
+					p.startY = o.getStartPointY();
+					p.endX = o.getEndPointX();
+					p.endY = o.getEndPointY();
 					float routeTime = o.getDistanceFromStart()
 							+ plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
 					NetworkDBSegment c = start.getSegment(p, true);
@@ -1339,10 +1370,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
 				int segments = routeSegment.list == null ? 0 : routeSegment.list.size();
 				if (s == null) {
-					System.out.printf("First / last segment - %d segments, %.2fs \n", segments,
+					printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "First / last segment - %d segments, %.2fs \n", segments,
 							routeSegment.rtTimeDetailed);
 				} else {
-					System.out.printf("\nRoute %d [%d] -> %d [%d] %s - hh dist %.2f s, detail %.2f s (%.1f%%) segments %d ( end %.5f/%.5f - %d ) ",
+					printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, "\nRoute %d [%d] -> %d [%d] %s - hh dist %.2f s, detail %.2f s (%.1f%%) segments %d ( end %.5f/%.5f - %d ) ",
 							s.start.index, s.start.chInd(), s.end.index, s.end.chInd(), s.shortcut ? "sh" : "bs",
 							s.dist, routeSegment.rtTimeDetailed, 100 * (1 - routeSegment.rtTimeDetailed / s.dist),
 							segments, MapUtils.get31LatitudeY(s.end.startY), MapUtils.get31LongitudeX(s.end.startX),
@@ -1448,8 +1479,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 	
-	public static void printGCInformation() {
-		System.gc();
+	public static void printGCInformation(boolean gc) {
+		if (gc) {
+			System.gc();
+		}
 		long MEMORY_LAST_USED_MB = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20;
 		System.out.printf("***** Memory used %d MB *****\n", MEMORY_LAST_USED_MB);		
 	}

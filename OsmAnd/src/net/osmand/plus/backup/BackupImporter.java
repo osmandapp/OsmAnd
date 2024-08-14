@@ -1,7 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
-import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
+import static net.osmand.plus.backup.BackupUtils.getRemoteFilesSettingsItems;
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -24,6 +25,8 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -149,6 +152,9 @@ class BackupImporter {
 				fileItem.getValue().setLastModifiedTime(fileItem.getKey().getClienttimems());
 			}
 		}
+		if (!isCancelled()) {
+			backupHelper.updateBackupDownloadTime();
+		}
 		operationLog.finishOperation();
 	}
 
@@ -163,6 +169,9 @@ class BackupImporter {
 				File tempFile = new File(tempDir, fileName);
 				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
 				boolean error = !Algorithms.isEmpty(errorStr);
+				if (PluginsHelper.isDevelopment()) {
+					LOG.debug("Temp file downloaded " + errorStr + " " + tempFile.getAbsolutePath());
+				}
 				if (!error) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, tempFile, remoteFile.getName());
@@ -172,13 +181,11 @@ class BackupImporter {
 						}
 						item.apply();
 					}
-					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getUpdatetimems());
-					if (item instanceof FileSettingsItem) {
-						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
-						if (app.getAppPath(itemFileName).isDirectory()) {
-							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-									remoteFile.getUpdatetimems());
-						}
+					updateFileM5Digest(remoteFile, item);
+					updateFileUploadTime(remoteFile, item);
+					if (PluginsHelper.isDevelopment()) {
+						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+						LOG.debug(" importItemFile file info " + info);
 					}
 				}
 				if (tempFile.exists()) {
@@ -196,6 +203,45 @@ class BackupImporter {
 			LOG.error("Error reading item: " + item.getName(), err);
 		} finally {
 			Algorithms.closeStream(is);
+		}
+	}
+
+	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
+		if (!(item instanceof FileSettingsItem)) {
+			return;
+		}
+		FileSettingsItem settingsItem = (FileSettingsItem) item;
+		if (settingsItem.needMd5Digest()) {
+			BackupDbHelper dbHelper = backupHelper.getDbHelper();
+			UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+			String lastMd5 = fileInfo != null ? fileInfo.getMd5Digest() : null;
+
+			if (Algorithms.isEmpty(lastMd5)) {
+				FileInputStream is = null;
+				try {
+					is = new FileInputStream(settingsItem.getFile());
+					String md5Digest = new String(Hex.encodeHex(DigestUtils.md5(is)));
+					if (!Algorithms.isEmpty(md5Digest)) {
+						backupHelper.updateFileMd5Digest(item.getType().name(), remoteFile.getName(), md5Digest);
+					}
+				} catch (IOException e) {
+					LOG.error(e.getMessage(), e);
+				} finally {
+					Algorithms.closeStream(is);
+				}
+			}
+		}
+	}
+
+	private void updateFileUploadTime(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
+		long time = remoteFile.getUpdatetimems();
+		backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), time);
+		if (item instanceof FileSettingsItem) {
+			OsmandApplication app = backupHelper.getApp();
+			String itemFileName = BackupUtils.getFileItemName((FileSettingsItem) item);
+			if (app.getAppPath(itemFileName).isDirectory()) {
+				backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, time);
+			}
 		}
 	}
 
@@ -575,7 +621,7 @@ class BackupImporter {
 	}
 
 	private OnDownloadFileListener getOnDownloadItemFileListener(@NonNull SettingsItem item) {
-		String itemFileName = BackupHelper.getItemFileName(item);
+		String itemFileName = BackupUtils.getItemFileName(item);
 		return new OnDownloadFileListener() {
 			@Override
 			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {

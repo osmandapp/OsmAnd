@@ -19,10 +19,11 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class RouteAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(ROUTE_ACTION_ID, "route.add", RouteAction.class)
-			.nameRes(R.string.plan_route_create_new_route)
+			.nameRes(R.string.quick_action_new_route)
 			.iconRes(R.drawable.ic_action_plan_route)
 			.nonEditable()
-			.category(QuickActionType.CREATE_CATEGORY);
+			.category(QuickActionType.MY_PLACES)
+			.nameActionRes(R.string.shared_string_create);
 
 	public RouteAction() {
 		super(TYPE);

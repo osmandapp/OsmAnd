@@ -9,6 +9,7 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -36,6 +37,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +55,7 @@ import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -60,6 +63,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -87,11 +91,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -205,7 +211,7 @@ public class AndroidUtils {
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
 		width += width % 2 == 1 ? 1 : 0;
 		height += height % 2 == 1 ? 1 : 0;
-		return createScaledBitmap(drawable, width, height);
+		return scaleBitmap(drawableToBitmap(drawable), width, height, true);
 	}
 
 	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
@@ -1201,13 +1207,28 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
-	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
+	@DrawableRes
+	public static int getActivityTypeIcon(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
+		int iconId = ctx.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", ctx.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
+	}
+
+	@NonNull
+	public static String getActivityTypeTitle(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
+		return getActivityTypeStringPropertyName(ctx, activityType.getName(),
+				Algorithms.capitalizeFirstLetterAndLowercase(activityType.getName()));
+	}
+
+	@NonNull
+	public static String getActivityTypeStringPropertyName(@NonNull Context ctx, @NonNull String propertyName,
+	                                                       @NonNull String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
 		return value != null ? value : defValue;
 	}
 
 	public static String getLangTranslation(@NonNull Context context, @NonNull String lang) {
-		String value = getStringByProperty(context, "lang_" + lang);
+		String property = lang.replace("-", "_").toLowerCase();
+		String value = getStringByProperty(context, "lang_" + property);
 		return value != null ? value : lang;
 	}
 
@@ -1302,6 +1323,13 @@ public class AndroidUtils {
 
 	public static final int POST_NOTIFICATIONS_REQUEST_CODE = 6;
 
+	public static boolean hasPostNotificationPermission(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+		} else {
+			return true;
+		}
+	}
 	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.POST_NOTIFICATIONS)) {
@@ -1414,5 +1442,32 @@ public class AndroidUtils {
 		BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
 		BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
 		return bluetoothAdapter != null && bluetoothAdapter.isEnabled();
+	}
+
+	public static Display getDisplay(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			OsmandMap osmandMap = app.getOsmandMap();
+			if (osmandMap != null) {
+				MapActivity activity = osmandMap.getMapView().getMapActivity();
+				if (activity != null) {
+					return activity.getDisplay();
+				}
+			}
+			DisplayManager manager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+			return manager.getDisplay(Display.DEFAULT_DISPLAY);
+		} else {
+			WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+			return manager.getDefaultDisplay();
+		}
+	}
+
+	@NonNull
+	public static Context createDisplayContext(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			return context.createDisplayContext(getDisplay(context))
+					.createWindowContext(TYPE_APPLICATION_OVERLAY, null);
+		}
+		return context;
 	}
 }

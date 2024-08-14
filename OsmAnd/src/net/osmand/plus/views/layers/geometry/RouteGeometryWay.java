@@ -4,6 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.ColorPalette;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -19,7 +24,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.RouteLayer.ActionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
-import net.osmand.router.RouteColorize;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -29,9 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
 
 public class RouteGeometryWay extends
@@ -56,6 +57,7 @@ public class RouteGeometryWay extends
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
+		this.linesPriority = Long.MAX_VALUE;
 	}
 
 	public void setRouteStyleParams(int pathColor,
@@ -63,8 +65,9 @@ public class RouteGeometryWay extends
 	                                boolean drawDirectionArrows,
 	                                @Nullable @ColorInt Integer directionArrowColor,
 	                                @NonNull ColoringType routeColoringType,
-	                                @Nullable String routeInfoAttribute) {
-		this.coloringChanged = this.coloringType != routeColoringType
+	                                @Nullable String routeInfoAttribute,
+									@Nullable String gradientPalette) {
+		this.coloringChanged = this.coloringType != routeColoringType || !this.gradientPalette.equals(gradientPalette)
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
@@ -84,6 +87,7 @@ public class RouteGeometryWay extends
 		this.customDirectionArrowColor = directionArrowColor;
 		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+		this.gradientPalette = gradientPalette;
 	}
 
 	@Override
@@ -128,7 +132,9 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
+	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude,
+	                         double leftLongitude, double bottomLatitude, double rightLongitude,
+	                         Location lastProjection, int startLocationIndex) {
 		cachedSegments.clear();
 		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
 	}
@@ -202,12 +208,17 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<GeometryWayPoint> points, double distToFinish) {
+		super.drawRouteSegment(tb, canvas, points, distToFinish);
 
+		// FIXME do we always call on draw?
 		Segment segment = currentCachedSegment != null ? currentCachedSegment : new Segment();
-		segment.indexes = new ArrayList<>(indexes);
-		segment.styles = new ArrayList<>(styles);
+		segment.indexes = new ArrayList<>();
+		segment.styles = new ArrayList<>();
+		for (GeometryWayPoint p : points) {
+			segment.indexes.add(p.index);
+			segment.styles.add(p.style);
+		}
 		cachedSegments.add(segment);
 		currentCachedSegment = null;
 	}
@@ -409,11 +420,9 @@ public class RouteGeometryWay extends
 		}
 
 		for (Segment segment : cachedSegments) {
-
 			if (!segment.isCompleted()) {
 				return null;
 			}
-
 			int pointOrder = segment.getPointOrders(actionPoint.index);
 			if (pointOrder == -1) {
 				return null;
@@ -427,7 +436,7 @@ public class RouteGeometryWay extends
 				} else {
 					int startColor = gradientStyle.currColor;
 					int endColor = gradientStyle.nextColor;
-					return RouteColorize.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+					return ColorPalette.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
 				}
 			} else {
 				return style.getColor();

@@ -36,7 +36,7 @@
             android:text="@string/empty_state_osm_edits"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/empty_state_text_size"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"

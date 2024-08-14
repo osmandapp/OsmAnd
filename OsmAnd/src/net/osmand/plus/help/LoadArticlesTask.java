@@ -31,6 +31,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 	private static final Log log = PlatformUtil.getLog(LoadArticlesTask.class);
 
 	private static final String HELP_STRUCTURE_FILE_NAME = "help-structure.json";
+	public static final String DOCS_LINKS_URL = SERVER_URL + "/docs/user/";
 	private static final String HELP_LINKS_URL = SERVER_URL + "/" + HELP_STRUCTURE_FILE_NAME;
 
 	private final OsmandApplication app;
@@ -111,7 +112,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		while (lastArticlesPerLevel.size() < article.level) {
 			lastArticlesPerLevel.add(null);
 		}
-		if (article.level == 1) {
+		if (article.level == 2) {
 			topArticles.put(article.label, article);
 		} else {
 			HelpArticle parent = lastArticlesPerLevel.get(article.level - 2);
@@ -135,17 +136,17 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		List<HelpArticle> articles = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
-			boolean available = object.optBoolean("android", true);
-			if (!available) {
-				continue;
-			}
-			int level = object.optInt("level");
-			String label = object.optString("label");
+
 			String url = object.optString("url");
-			if (!Algorithms.isEmpty(url)) {
-				url = SERVER_URL + url;
+			boolean hasUrl = !Algorithms.isEmpty(url);
+			url = hasUrl ? SERVER_URL + url : "";
+
+			boolean available = object.optBoolean("android", true);
+			if (available && (url.startsWith(DOCS_LINKS_URL) || !hasUrl)) {
+				int level = object.optInt("level");
+				String label = object.optString("label");
+				articles.add(new HelpArticle(url, label, level));
 			}
-			articles.add(new HelpArticle(url, label, level));
 		}
 		return articles;
 	}

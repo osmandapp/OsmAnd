@@ -37,6 +37,7 @@ import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
@@ -44,7 +45,7 @@ import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.download.local.dialogs.SortMapsBottomSheet.MapsSortModeListener;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.settings.enums.MapsSortMode;
+import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
@@ -215,9 +216,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void sortItems(@NonNull List<BaseLocalItem> items) {
-		if (type.isMapsSortingSupported()) {
-			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
-			Collections.sort(items, new MapsComparator(app, sortMode));
+		if (type.isSortingSupported()) {
+			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
+			Collections.sort(items, new LocalItemsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
 			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
@@ -325,8 +326,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void setMapsSortMode(@NonNull MapsSortMode sortMode) {
-		settings.LOCAL_MAPS_SORT_MODE.set(sortMode);
+	public void setMapsSortMode(@NonNull LocalSortMode sortMode) {
+		LocalItemUtils.getSortModePref(app, type).set(sortMode);
 		updateAdapter();
 	}
 

@@ -1,16 +1,18 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static android.graphics.Typeface.DEFAULT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.MAIN_BUTTONS_QUANTITY;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -18,26 +20,20 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.util.TypedValue;
-import android.view.GestureDetector;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.VelocityTracker;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnLayoutChangeListener;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.OverScroller;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -51,7 +47,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
 import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
@@ -88,20 +83,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHelper.MAIN_BUTTONS_QUANTITY;
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents,
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
@@ -1258,8 +1239,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			int startIndex = title.length();
 			title.append(" ").append(buttonController.rightTextCaption);
 			Context context = view.getContext();
-			Typeface typeface = FontCache.getRobotoRegular(context);
-			title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			title.setSpan(new CustomTypefaceSpan(DEFAULT), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			title.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(context, nightMode)),
 					startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
@@ -1484,7 +1464,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		boolean moreLocalItems = localRoutesMoreTv.getVisibility() == View.VISIBLE;
 		if (maxLocalRows <= 5 && !moreLocalItems && nearbyRoutesSize > 0) {
 			String nearInDistance = getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app) + ":";
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS_UI, app) + ":";
 			nearbyRoutesWithinTv.setText(nearInDistance);
 			int minBadgeWidth = getMinBadgeWidth(nearbyTransportStopRoutes);
 			int nearbyColumnsPerRow = getRoutesBadgesColumnsPerRow(nearInDistance, minBadgeWidth);
@@ -2260,10 +2240,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateMapDisplayPosition(boolean newPosition) {
-		if (portrait) {
-			displayPositionManager.updateMapPositionProviders(this, newPosition);
-			displayPositionManager.updateMapDisplayPosition();
-		} else {
+		if (!portrait) {
 			displayPositionManager.updateCoveredScreenRectProvider(this, newPosition);
 			if (newPosition) {
 				view.addOnLayoutChangeListener(mainViewBoundsChangeListener);

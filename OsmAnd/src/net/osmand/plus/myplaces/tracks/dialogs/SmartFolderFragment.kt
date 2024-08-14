@@ -51,7 +51,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_select)
 			.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-			.setOnClickListener { v: View? ->
+			.setOnClickListener {
 				smartFolder?.let {
 					showTracksSelection(
 						folder = it,
@@ -65,7 +65,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_update))
-			.setOnClickListener { v: View? ->
+			.setOnClickListener {
 				reloadTracks()
 			}
 			.showTopDivider(true)
@@ -74,7 +74,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.edit_filter)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
-			.setOnClickListener { v: View? ->
+			.setOnClickListener {
 				editFilters()
 			}
 			.showTopDivider(true)
@@ -113,8 +113,8 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		app.smartFolderHelper.removeUpdateListener(this)
 	}
 
-	override fun getCurrentTrackGroup(): TracksGroup {
-		return smartFolder!!
+	override fun getCurrentTrackGroup(): TracksGroup? {
+		return smartFolder
 	}
 
 	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
@@ -153,5 +153,4 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	override fun onDialogClosed() {
 		updateContent()
 	}
-
 }

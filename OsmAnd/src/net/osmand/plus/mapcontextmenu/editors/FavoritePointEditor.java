@@ -3,14 +3,16 @@ package net.osmand.plus.mapcontextmenu.editors;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditor extends PointEditor {
@@ -63,15 +65,21 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setAddress(address.isEmpty() ? title : address);
 
 		if (object instanceof Amenity) {
-			Amenity amenity = ((Amenity) object);
-			AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-
-			favorite.setAmenityOriginName(amenity.toStringEn());
-			favorite.setIconId(RenderingIcons.getPreselectedIconId(amenity));
-			favorite.setAmenityExtensions(extensionsHelper.getAmenityExtensions(amenity));
+			setAmenity(((Amenity) object));
+		} else if (object instanceof OpenstreetmapPoint) {
+			Entity entity = ((OpenstreetmapPoint) object).getEntity();
+			Amenity amenity = MapSelectionHelper.findAmenityByOsmId(app, latLon, entity.getId());
+			if (amenity != null) {
+				setAmenity(amenity);
+			}
 		}
-
 		FavoritePointEditorFragment.showInstance(mapActivity);
+	}
+
+	private void setAmenity(@NonNull Amenity amenity) {
+		favorite.setAmenityOriginName(amenity.toStringEn());
+		favorite.setIconId(RenderingIcons.getPreselectedIconId(amenity));
+		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true));
 	}
 
 	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {

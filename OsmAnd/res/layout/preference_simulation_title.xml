@@ -25,7 +25,7 @@
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:text="@string/plugin_settings"
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding" />

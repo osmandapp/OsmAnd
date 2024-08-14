@@ -3,6 +3,7 @@ package net.osmand.plus.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +51,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
 
-	private static final int CONNECTION_TIMEOUT = 15000;
+	public static final int CONNECT_TIMEOUT = 30000;
+	public static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
 
 	public static final String CANCELLED_MSG = "cancelled";
@@ -492,7 +494,8 @@ public class AndroidNetworkUtils {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
 		connection.setRequestProperty("User-Agent", app != null ? Version.getFullVersion(app) : "OsmAnd");
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(CONNECT_TIMEOUT);
+		connection.setReadTimeout(READ_TIMEOUT);
 		if (body != null && post) {
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
@@ -560,8 +563,8 @@ public class AndroidNetworkUtils {
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 			try {
 				res = BitmapFactory.decodeStream(inputStream);
@@ -580,13 +583,15 @@ public class AndroidNetworkUtils {
 		String error = null;
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
 			connection.connect();
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = connection.getResponseCode() + " " + connection.getResponseMessage();
+			} else if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				return streamToString(connection.getErrorStream());
 			} else {
 				InputStream inputStream = gzip
@@ -623,19 +628,33 @@ public class AndroidNetworkUtils {
 			@NonNull String url, @NonNull File fileToSave, boolean gzip, long lastTime, @Nullable IProgress progress) {
 		long result = -1;
 		try {
+			if (progress != null) {
+				progress.startTask(url, 0);
+			}
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				if (progress != null) {
+					progress.finishTask();
+				}
 				return result;
 			} else {
+				int bytesDivisor = 1024;
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
+					if (progress != null) {
+						progress.finishTask();
+					}
 					return 0;
+				}
+				if (progress != null) {
+					int work = (int) (connection.getContentLengthLong() / bytesDivisor);
+					progress.startWork(work);
 				}
 				InputStream inputStream = gzip
 						? new GZIPInputStream(connection.getInputStream())
@@ -644,13 +663,13 @@ public class AndroidNetworkUtils {
 				OutputStream stream = null;
 				try {
 					stream = new FileOutputStream(fileToSave);
-					Algorithms.streamCopy(inputStream, stream, progress, 1024);
+					Algorithms.streamCopy(inputStream, stream, progress, bytesDivisor);
 					stream.flush();
+					result = lastModified > 0 ? lastModified : 1;
 				} finally {
 					Algorithms.closeStream(inputStream);
 					Algorithms.closeStream(stream);
 				}
-				result = lastModified > 0 ? lastModified : 1;
 			}
 		} catch (UnknownHostException e) {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
@@ -772,7 +791,9 @@ public class AndroidNetworkUtils {
 			LOG.info("Finish uploading file " + fileName);
 			LOG.info("Response code and message : " + responseCode + " " + responseMessage);
 
-			if (responseCode != HttpURLConnection.HTTP_OK) {
+			if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = responseCode + " " + responseMessage;
+			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				InputStream errorStream = conn.getErrorStream();
 				error = errorStream != null ? streamToString(errorStream) : responseMessage;
 			} else {
@@ -1036,5 +1057,10 @@ public class AndroidNetworkUtils {
 		@Override
 		public void setGeneralProgress(String genProgress) {
 		}
+	}
+
+	@NonNull
+	public static String getHttpProtocol() {
+		return Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1 ? "http://" : "https://";
 	}
 }

@@ -75,8 +75,8 @@ public class AddPOIAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(ADD_POI_ACTION_ID,
 			"osmpoi.add", AddPOIAction.class).
-			nameRes(R.string.quick_action_add_poi).iconRes(R.drawable.ic_action_plus_dark).
-			category(QuickActionType.CREATE_CATEGORY);
+			nameRes(R.string.poi).iconRes(R.drawable.ic_action_plus_dark).
+			category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
 	public static final String KEY_TAG = "key_tag";
 	public static final String KEY_DIALOG = "dialog";
 

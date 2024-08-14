@@ -23,7 +23,7 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.RouteParametersFragment.ListParameters;
+import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -99,7 +99,7 @@ public class EmissionHelper {
 				ListParameters parameters = populateListParameters(app, parameter);
 				int index = parameters.findIndexOfValue(pref.getModeValue(mode));
 				if (index != -1) {
-					return MotorType.getMotorTypeByName(parameters.names[index]);
+					return MotorType.getMotorTypeByName(parameters.originalNames[index]);
 				}
 			}
 		}

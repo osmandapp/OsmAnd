@@ -3,7 +3,6 @@ package net.osmand.plus.utils;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.DOWNLOAD_EXT;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
 import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
@@ -180,6 +179,7 @@ public class FileUtils {
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
 			app.getGpxDbHelper().remove(file);
+			app.getSmartFolderHelper().onGpxFileDeleted(file);
 			return true;
 		}
 		return false;
@@ -288,18 +288,30 @@ public class FileUtils {
 	}
 
 	@NonNull
-	public static List<File> collectDirFiles(@NonNull File dir) {
-		List<File> files = new ArrayList<>();
-		collectDirFiles(dir, files);
-		return files;
+	public static List<File> collectFiles(@NonNull File dir, boolean includeDirs) {
+		List<File> list = new ArrayList<>();
+		if (dir.isDirectory()) {
+			File[] files = dir.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					collectFiles(file, list, includeDirs);
+				}
+			}
+		} else {
+			list.add(dir);
+		}
+		return list;
 	}
 
-	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {
+	public static void collectFiles(@NonNull File file, @NonNull List<File> list, boolean includeDirs) {
 		if (file.isDirectory()) {
+			if (includeDirs) {
+				list.add(file);
+			}
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					collectDirFiles(subfolderFile, list);
+					collectFiles(subfolderFile, list, includeDirs);
 				}
 			}
 		} else {
@@ -354,7 +366,6 @@ public class FileUtils {
 		FileUtils.removeFilesWithExtensions(app.getAppPath(NAUTICAL_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKI_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKIVOYAGE_INDEX_DIR), false, DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(app.getAppPath(HEIGHTMAP_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(GEOTIFF_DIR), false, DOWNLOAD_EXT);
 	}
 

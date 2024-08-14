@@ -20,7 +20,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -81,6 +80,10 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
+		copyPrefFromAppMode(settings.POSITION_PLACEMENT_ON_MAP, fromAppMode);
+		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
+		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
+		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
 		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
 	}
 
@@ -116,6 +119,9 @@ public class WidgetsSettingsHelper {
 				}
 
 				if (!Algorithms.isEmpty(widgetIdToAdd)) {
+					String customId = !widgetIdToAdd.equals(defaultWidgetInfo.key) ? widgetIdToAdd : null;
+					widgetInfoToCopy.widget.copySettingsFromMode(fromAppMode, appMode, customId);
+
 					if (previousPage != widgetInfoToCopy.pageIndex || newPagedOrder.size() == 0) {
 						previousPage = widgetInfoToCopy.pageIndex;
 						newPagedOrder.add(new ArrayList<>());
@@ -164,11 +170,14 @@ public class WidgetsSettingsHelper {
 		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType, panel);
 		if (duplicateWidget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
-			MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
-					duplicateWidgetId, duplicateWidget, widgetType, panel);
-			widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
-			return duplicateWidgetInfo;
+			MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(
+					duplicateWidgetId, duplicateWidget, widgetType, panel
+			);
+			if (duplicateWidgetInfo != null) {
+				settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
+				widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
+				return duplicateWidgetInfo;
+			}
 		}
 		return null;
 	}
@@ -187,9 +196,13 @@ public class WidgetsSettingsHelper {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, MATCHING_PANELS_MODE, panels);
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
-			Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
-			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, enabled, false);
+			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)) {
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
+			} else {
+				// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
+				Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, enabled, false);
+			}
 		}
 		panel.getOrderPreference(settings).resetModeToDefault(appMode);
 	}

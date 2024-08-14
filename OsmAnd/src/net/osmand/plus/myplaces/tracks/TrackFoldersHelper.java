@@ -28,7 +28,7 @@ import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
+import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -122,6 +122,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void reloadTracks() {
+		if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
+			asyncLoader.cancel(false);
+		}
 		asyncLoader = new TrackFolderLoaderTask(app, rootFolder, loadTracksListener);
 		asyncLoader.executeOnExecutor(singleThreadExecutor);
 	}
@@ -224,11 +227,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					if (gpxFile.showCurrentTrack) {
-						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-					} else if (!Algorithms.isEmpty(gpxFile.path)) {
-						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
-					}
+					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 					return true;
 				}))
 				.create());
@@ -267,7 +266,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems);
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, false);
 					dismissFragment(fragment, false);
 				})
 				.create()
@@ -307,7 +306,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					if (selectedTrackItems.isEmpty()) {
 						showEmptyItemsToast(changeAppearance);
 					} else {
-						TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), fragment);
+						ChangeAppearanceController.showDialog(activity, fragment, selectedTrackItems);
 					}
 				})
 				.create()

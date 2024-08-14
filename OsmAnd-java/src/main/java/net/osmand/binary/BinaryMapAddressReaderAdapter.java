@@ -644,8 +644,8 @@ public class BinaryMapAddressReaderAdapter {
 					refsContainer[i] = new TIntArrayList();
 				}
 
-				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
-						+ " subtress");
+//				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
+//						+ " subtress");
 				for (int j = 0; j < loffsets.size(); j++) {
 					long fp = indexOffset + loffsets.get(j);
 					codedIS.seek(fp);
@@ -744,8 +744,8 @@ public class BinaryMapAddressReaderAdapter {
 						}
 					}
 				}
-				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
-						+ req.getSearchResults().size());
+//				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
+//						+ req.getSearchResults().size());
 				return;
 			default:
 				skipUnknownField(t);

@@ -16,7 +16,6 @@ import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 
-import net.osmand.Period;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -166,12 +165,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 								productDetailsList.addAll(productDetailsListSubs);
 								InAppPurchaseHelperImpl.this.productDetailsList = productDetailsList;
 								getProductDetailsResponseListener(runnable.userRequested()).onProductDetailsResponse(billingResult, productDetailsList);
+								processIncompletePurchases(purchases);
 							}
 						});
 					});
+				} else {
+					processIncompletePurchases(purchases);
 				}
+			}
+
+			private void processIncompletePurchases(List<Purchase> purchases) {
 				for (Purchase purchase : purchases) {
-					List<String> skus = purchase.getSkus();
+					List<String> skus = purchase.getProducts();
 					if (!Algorithms.isEmpty(skus)) {
 						InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(skus.get(0));
 						if (!purchase.isAcknowledged() || (subscription != null && !subscription.isPurchased())) {
@@ -289,7 +294,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			List<Purchase> purchases = billingManager.getPurchases();
 			if (purchases != null) {
 				for (Purchase p : purchases) {
-					if (p.getSkus().contains(sku)) {
+					if (p.getProducts().contains(sku)) {
 						return p;
 					}
 				}
@@ -471,7 +476,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (needRestoreUserInfo()) {
 							restoreUserInfo(purchase);
 						}
-						List<String> skus = purchase.getSkus();
+						List<String> skus = purchase.getProducts();
 						if (!Algorithms.isEmpty(skus) && !tokensSent.contains(skus.get(0))) {
 							tokensToSend.add(purchase);
 						}
@@ -524,7 +529,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(Purchase purchase) {
-		return new PurchaseInfo(purchase.getSkus(), purchase.getOrderId(), purchase.getPurchaseToken(),
+		return new PurchaseInfo(purchase.getProducts(), purchase.getOrderId(), purchase.getPurchaseToken(),
 				purchase.getPurchaseTime(), purchase.getPurchaseState(), purchase.isAcknowledged(), purchase.isAutoRenewing());
 	}
 
@@ -541,7 +546,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			if (!Algorithms.isEmpty(basePlans)) {
 				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
 				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
-				ProductDetails.SubscriptionOfferDetails offer = basePlanOffers == null ? basePlan : basePlanOffers.get(0);
+				ProductDetails.SubscriptionOfferDetails offer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
 				ProductDetails.PricingPhase pricingPhrase = offer.getPricingPhases().getPricingPhaseList().get(0);
 				if (pricingPhrase != null) {
 					inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
@@ -574,7 +579,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
 						}
-						if (basePlanOffers != null) {
+						if (!Algorithms.isEmpty(basePlanOffers)) {
 							ProductDetails.PricingPhase introPricingPhase = basePlanOffers.get(0).getPricingPhases().getPricingPhaseList().get(0);
 							if (introPricingPhase != null) {
 								String introductoryPrice = introPricingPhase.getFormattedPrice();

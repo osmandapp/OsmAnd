@@ -5,7 +5,6 @@ import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 
@@ -34,6 +33,7 @@ public class MapUtils {
 	public static final double MAX_LONGITUDE = 180.0;
 	public static final double LONGITUDE_TURN = 360.0;
 	public static final double DEFAULT_LATLON_PRECISION = 0.00001;
+	public static final double HIGH_LATLON_PRECISION = 0.0000001;
 
 	// TODO change the hostname back to osm.org once HTTPS works for it
 	// https://github.com/openstreetmap/operations/issues/2
@@ -126,6 +126,28 @@ public class MapUtils {
 		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
 		return new double[] {MapUtils.checkLatitude(latMid * 180 / Math.PI),
 				MapUtils.checkLongitude(lonMid * 180 / Math.PI)};
+	}
+
+	public static LatLon calculateIntermediatePoint(double fromLat, double fromLon, double toLat, double toLon, double coeff) {
+		double lat1 = toRadians(fromLat);
+		double lon1 = toRadians(fromLon);
+		double lat2 = toRadians(toLat);
+		double lon2 = toRadians(toLon);
+
+		double lat1Cos = Math.cos(lat1);
+		double lat2Cos = Math.cos(lat2);
+
+		double d = 2 * Math.asin(Math.sqrt(Math.pow((Math.sin((lat1 - lat2) / 2)), 2)
+					+ lat1Cos * lat2Cos * Math.pow(Math.sin((lon1 - lon2) / 2), 2)));
+		double A = Math.sin((1 - coeff) * d) / Math.sin(d);
+		double B = Math.sin(coeff * d) / Math.sin(d);
+		double x = A * lat1Cos * Math.cos(lon1) + B * lat2Cos * Math.cos(lon2);
+		double y = A * lat1Cos * Math.sin(lon1) + B * lat2Cos * Math.sin(lon2);
+		double z = A * Math.sin(lat1) + B * Math.sin(lat2);
+
+		double lat = Math.atan2(z, Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+		double lon = Math.atan2(y, x);
+		return new LatLon(checkLatitude(lat * 180 / Math.PI), checkLongitude(lon * 180 / Math.PI));
 	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
@@ -731,9 +753,9 @@ public class MapUtils {
 				|| (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));
 	}
 
-	public static boolean areLatLonEqualPrecise(Location l1, Location l2) {
-		return l1 == null && l2 == null
-				|| (l2 != null && areLatLonEqualPrecise(l1, l2.getLatitude(), l2.getLongitude()));
+	public static boolean areLatLonEqual(Location l1, Location l2, double precision) {
+		return l1 == null && l2 == null || l1 != null && l2 != null
+				&& areLatLonEqual(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude(), precision);
 	}
 
 	public static boolean areLatLonEqual(Location l, double lat, double lon) {
@@ -749,13 +771,16 @@ public class MapUtils {
 	}
 
 	public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
-		return Math.abs(lat1 - lat2) < DEFAULT_LATLON_PRECISION && Math.abs(lon1 - lon2) < DEFAULT_LATLON_PRECISION;
+		return areLatLonEqual(lat1, lon1, lat2, lon2, DEFAULT_LATLON_PRECISION);
 	}
 
-	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {
-		return l != null
-				&& Math.abs(l.getLatitude() - lat) < 0.0000001
-				&& Math.abs(l.getLongitude() - lon) < 0.0000001;
+	public static boolean areLatLonEqual(LatLon l1, LatLon l2, double precision) {
+		return l1 == null && l2 == null || l1 != null && l2 != null
+				&& areLatLonEqual(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude(), precision);
+	}
+
+	public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2, double precision) {
+		return Math.abs(lat1 - lat2) < precision && Math.abs(lon1 - lon2) < precision;
 	}
 
 	public static LatLon rhumbDestinationPoint(LatLon latLon, double distance, double bearing) {

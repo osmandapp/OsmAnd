@@ -14,12 +14,14 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 public class WidgetInfoCreator {
 
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final ApplicationMode appMode;
 
 	public WidgetInfoCreator(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
-		settings = app.getSettings();
+		this.app = app;
 		this.appMode = appMode;
+		settings = app.getSettings();
 	}
 
 	@Nullable
@@ -32,12 +34,12 @@ public class WidgetInfoCreator {
 	}
 
 	@Nullable
-	public MapWidgetInfo createCustomWidgetInfo(@NonNull MapWidgetsFactory factory,
-	                                            @NonNull String key, @NonNull WidgetType widgetType) {
+	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory,
+	                                      @NonNull String key, @NonNull WidgetType widgetType) {
 		WidgetsPanel panel = widgetType.getPanel(key, appMode, settings);
 		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
-			return createCustomWidgetInfo(key, widget, widgetType, panel);
+			return askCreateWidgetInfo(key, widget, widgetType, panel);
 		}
 		return null;
 	}
@@ -87,9 +89,19 @@ public class WidgetInfoCreator {
 		return defaultPanel;
 	}
 
+	@Nullable
+	public MapWidgetInfo askCreateWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
+	                                         @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
+		if (widgetType == WidgetType.AIDL_WIDGET) {
+			return app.getAidlApi().askCreateExternalWidgetInfo(this, widget, widgetId, panel);
+		} else {
+			return createCustomWidgetInfo(widgetId, widget, widgetType, panel);
+		}
+	}
+
 	@NonNull
-	public MapWidgetInfo createCustomWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
-	                                            @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
+	private MapWidgetInfo createCustomWidgetInfo(@NonNull String widgetId, @NonNull MapWidget widget,
+	                                             @NonNull WidgetType widgetType, @NonNull WidgetsPanel panel) {
 		int page = panel.getWidgetPage(appMode, widgetId, settings);
 		int order = panel.getWidgetOrder(appMode, widgetId, settings);
 		return createWidgetInfo(widgetId, widget, widgetType.dayIconId, widgetType.nightIconId,

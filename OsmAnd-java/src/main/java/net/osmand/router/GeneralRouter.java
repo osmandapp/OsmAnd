@@ -28,8 +28,10 @@ public class GeneralRouter implements VehicleRouter {
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static int IMPASSABLE_ROAD_SHIFT = 0; // 6 is better
+	
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
+	public static final String GROUP_RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
@@ -48,6 +50,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WIDTH = "width";
 	public static final String VEHICLE_LENGTH = "length";
 	public static final String MOTOR_TYPE = "motor_type";
+	public static final String MAX_AXLE_LOAD = "maxaxleload";
+	public static final String WEIGHT_RATING = "weightrating";
 	public static final String ALLOW_VIA_FERRATA = "allow_via_ferrata";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
 
@@ -89,6 +93,10 @@ public class GeneralRouter implements VehicleRouter {
 	private GeneralRouterProfile profile;
 	
 	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;
+
+	public String[] hhNativeFilter = new String[0]; // getFilteredTags() as flat Array (JNI)
+	public String[] hhNativeParameterValues = new String[0]; // parameterValues as flat Array (JNI)
+	private final GeneralRouter root;
 		
 	
 	public enum RouteDataObjectAttribute {
@@ -126,7 +134,11 @@ public class GeneralRouter implements VehicleRouter {
 		MOPED,
 		TRAIN,
 		PUBLIC_TRANSPORT,
-		HORSEBACKRIDING
+		HORSEBACKRIDING;
+		
+		public String getBaseProfile() {
+			return this.toString().toLowerCase();
+		}
 	}
 	
 	public enum RoutingParameterType {
@@ -135,7 +147,9 @@ public class GeneralRouter implements VehicleRouter {
 		SYMBOLIC
 	}
 	
-	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
+	public GeneralRouter(GeneralRouter copy, Map<String, String> params) {
+		this.root = copy.root;
+		GeneralRouter parent = root;
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
@@ -185,6 +199,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
+		this.root = this;
 		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
@@ -252,12 +267,11 @@ public class GeneralRouter implements VehicleRouter {
 	public List<String> serializeParameterValues(Map<String, String> vls) {
 		List<String> ls = new ArrayList<String>();
 		for (Entry<String, String> e : vls.entrySet()) {
-			if (parameters.containsKey(e.getKey())) {
-				if (parameters.get(e.getKey()).type == RoutingParameterType.BOOLEAN) {
-					ls.add(e.getKey());
-				} else {
-					ls.add(e.getKey() + "=" + e.getValue());
-				}
+			String val = e.getValue();
+			if (val.isEmpty() || "true".equals(val) || "false".equals(val)) {
+				ls.add(e.getKey());
+			} else {
+				ls.add(e.getKey() + "=" + val);
 			}
 		}
 		return ls;
@@ -712,11 +726,13 @@ public class GeneralRouter implements VehicleRouter {
 			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.isPositive());
 			double a2 = prev.getRoad().directionRoute(prev.getSegmentEnd(), !prev.isPositive());
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
-			// more like UT
-			if (diff > 2 * Math.PI / 3) {
-				totalPenalty += getLeftTurn();
+			if (diff > Math.PI / 1.5) {
+				totalPenalty += getLeftTurn(); // >120 degree (U-turn)
 			} else if (diff > Math.PI / 3) {
-				totalPenalty += getRightTurn();
+				totalPenalty += getRightTurn(); // >60 degree (standard)
+			} else if (diff > Math.PI / 6) {
+				totalPenalty += getRightTurn() / 2; // >30 degree (light)
+				// totalPenalty += getRightTurn() * diff * 3 / Math.PI; // to think
 			}
 		}
 		

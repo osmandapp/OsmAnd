@@ -2,6 +2,8 @@ package net.osmand.plus.settings.backend.preferences;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -165,6 +167,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 			return getProfileDefaultValue(parentMode);
 		}
 		return defaultValue;
+	}
+
+	public void setDefaultValue(T defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 	public final boolean hasDefaultValues() {
@@ -334,5 +340,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	public final String asStringModeValue(ApplicationMode m) {
 		T v = getModeValue(m);
 		return toString(v);
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getId();
 	}
 }

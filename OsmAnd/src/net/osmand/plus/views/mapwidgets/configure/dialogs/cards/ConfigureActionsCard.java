@@ -18,7 +18,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
+import net.osmand.plus.utils.UiUtilities;
 
 public class ConfigureActionsCard extends MapBaseCard {
 
@@ -79,6 +79,6 @@ public class ConfigureActionsCard extends MapBaseCard {
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		View container = view.findViewById(R.id.container);
-		WidgetsListFragment.setupListItemBackground(app, container, appMode.getProfileColor(nightMode));
+		UiUtilities.setupListItemBackground(app, container, appMode.getProfileColor(nightMode));
 	}
 }

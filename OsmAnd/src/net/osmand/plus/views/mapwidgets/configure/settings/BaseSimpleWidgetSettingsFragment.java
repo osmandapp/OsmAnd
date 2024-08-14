@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
-import static net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.*;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -32,6 +32,7 @@ import java.util.Set;
 public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
 	private static final String SHOW_ICON_KEY = "show_icon_key";
+	private static final String WIDGET_TYPE_KEY = "widget_type_key";
 	private boolean isWidgetVertical = false;
 
 	public CommonPreference<Boolean> shouldShowIconPref;
@@ -59,6 +60,10 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 			selectedWidgetSize = bundle.containsKey(SELECTED_WIDGET_SIZE_ID_KEY) ? WidgetSize.values()[bundle.getInt(SELECTED_WIDGET_SIZE_ID_KEY)] : widgetSizePref.get();
 			showIcon = bundle.containsKey(SHOW_ICON_KEY) ? bundle.getBoolean(SHOW_ICON_KEY) : shouldShowIconPref.get();
 		}
+		String type = bundle.getString(WIDGET_TYPE_KEY);
+		if (widgetType == null && type != null) {
+			widgetType = WidgetType.getById(type);
+		}
 	}
 
 	@Override
@@ -66,6 +71,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_WIDGET_SIZE_ID_KEY, selectedWidgetSize.ordinal());
 		outState.putBoolean(SHOW_ICON_KEY, showIcon);
+		outState.putString(WIDGET_TYPE_KEY, getWidget().name());
 	}
 
 	@NonNull
@@ -83,7 +89,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 			widgetSizeContainer.setOnClickListener(v -> showPreferenceDialog(container));
 			widgetSizeContainer.setBackground(getPressedStateDrawable());
 			TextView widgetSizeDescription = container.findViewById(R.id.widget_size_description);
-			widgetSizeDescription.setText(selectedWidgetSize.descriptionId);
+			widgetSizeDescription.setText(selectedWidgetSize.titleId);
 
 			SwitchCompat switchCompat = container.findViewById(R.id.show_icon_toggle);
 			switchCompat.setChecked(showIcon);
@@ -97,7 +103,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		int selected = selectedWidgetSize.ordinal();
 		String[] items = new String[WidgetSize.values().length];
 		for (int i = 0; i < items.length; i++) {
-			items[i] = WidgetSize.values()[i].getTitle(app);
+			items[i] = app.getString(WidgetSize.values()[i].getTitleId());
 		}
 
 		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
@@ -107,7 +113,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
 			int which = (int) v.getTag();
 			selectedWidgetSize = WidgetSize.values()[which];
-			((TextView) container.findViewById(R.id.widget_size_description)).setText(selectedWidgetSize.getTitle(app));
+			((TextView) container.findViewById(R.id.widget_size_description)).setText(selectedWidgetSize.getTitleId());
 		});
 
 	}

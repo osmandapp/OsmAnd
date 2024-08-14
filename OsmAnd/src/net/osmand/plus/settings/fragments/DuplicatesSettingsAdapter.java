@@ -17,7 +17,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
@@ -161,6 +162,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconId, activeColorRes));
 				} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, activeColorRes));
+				} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
+					itemHolder.title.setText(ColorsPaletteUtils.getPaletteName(file));
+					itemHolder.subTitle.setText(ColorsPaletteUtils.getPaletteTypeName(app, file));
 				} else if (fileSubtype.isMap()
 						|| fileSubtype == FileSubtype.TTS_VOICE
 						|| fileSubtype == FileSubtype.VOICE) {
@@ -168,7 +173,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
 				}
 			} else if (currentItem instanceof AvoidRoadInfo) {
-				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
+				itemHolder.title.setText(((AvoidRoadInfo) currentItem).getName(app));
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
 			} else if (currentItem instanceof FavoriteGroup) {
 				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));

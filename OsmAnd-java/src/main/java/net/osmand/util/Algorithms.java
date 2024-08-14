@@ -4,10 +4,10 @@ import static net.osmand.util.CollectionUtils.startsWithAny;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -324,14 +325,31 @@ public class Algorithms {
 		};
 	}
 
-    private static String simplifyFileName(String fn) {
-        String lc = fn.toLowerCase();
+	public static String getRegionName(String filename) {
+		String lc = filename.toLowerCase();
+		int firstPoint = lc.indexOf(".");
+		if (firstPoint != -1) {
+			lc = lc.substring(0, firstPoint);
+		}
+		int ind = lc.length() - 1;
+		for (; ind > 0; ind--) {
+			if ((lc.charAt(ind) >= '0' && lc.charAt(ind) <= '9') || lc.charAt(ind) == '_') {
+				// timestamp ending or version ending
+			} else {
+				break;
+			}
+		}
+		return lc.substring(0, ind + 1);
+	}
+	
+    private static String simplifyFileName(String filename) {
+        String lc = filename.toLowerCase();
         if (lc.contains(".")) {
             lc = lc.substring(0, lc.indexOf("."));
         }
-        if (lc.endsWith("_2")) {
-            lc = lc.substring(0, lc.length() - "_2".length());
-        }
+        if (lc.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+			lc = lc.substring(0, lc.length() - ("_" + IndexConstants.BINARY_MAP_VERSION).length());
+		}
         boolean hasTimestampEnd = false;
         for (int i = 0; i < lc.length(); i++) {
             if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
@@ -732,11 +750,18 @@ public class Algorithms {
 
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
+		streamCopy(in, out, pg, bytesDivisor, null);
+	}
+
+	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor, MessageDigest digest) throws IOException {
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
 		int cp = 0;
 		while ((read = in.read(b)) != -1) {
 			out.write(b, 0, read);
+			if (digest != null) {
+				digest.update(b, 0, read);
+			}
 			cp += read;
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
@@ -1157,43 +1182,6 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
-		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
-		if (isBlank(str)) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		String[] arr = str.split(" ");
-		if (arr.length < 2) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		int[] colors = new int[arr.length];
-		try {
-			for (int i = 0; i < arr.length; i++) {
-				colors[i] = parseColor(arr[i]);
-			}
-		} catch (IllegalArgumentException e) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		return colors;
-	}
-
-	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
-		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
-		int[] src;
-		if (palette != null && palette.length >= 2) {
-			src = palette;
-		} else {
-			src = isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		StringBuilder stringPalette = new StringBuilder();
-		for (int i = 0; i < src.length; i++) {
-			stringPalette.append(colorToString(src[i]));
-			if (i + 1 != src.length) {
-				stringPalette.append(" ");
-			}
-		}
-		return stringPalette.toString();
-	}
 
 	public static boolean isUrl(String value) {
 		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};

@@ -1,9 +1,12 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +18,34 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.WidgetSize;
+import net.osmand.plus.settings.enums.WidgetSize;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class SimpleWidget extends TextInfoWidget {
 
@@ -38,10 +53,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
+	private boolean isFullRow;
+	protected MapInfoLayer.TextState textState;
+	@Nullable
+	protected String customId;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
 		widgetState = new SimpleWidgetState(app, customId, widgetType);
+		this.customId = customId;
 
 		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		setVerticalWidget(selectedPanel);
@@ -52,36 +72,27 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
+		view.setOnLongClickListener(v -> {
+			showContextWidgetMenu(v);
+			return true;
+		});
+	}
+
+	@LayoutRes
+	protected int getContentLayoutId() {
+		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}
 
 	public void updateValueAlign(boolean fullRow) {
-		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
-			if (!(container instanceof ConstraintLayout)) {
-				return;
-			}
-			ConstraintSet constraintSet = new ConstraintSet();
-			constraintSet.clone((ConstraintLayout) container);
-			if (fullRow) {
-				constraintSet.connect(R.id.widget_text, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
-				constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
-			} else {
-				constraintSet.clear(R.id.widget_text, ConstraintSet.END);
-				if (shouldShowIcon()) {
-					constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, dpToPx(app, 12));
-				} else {
-					constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dpToPx(app, 0));
-				}
-			}
-			constraintSet.applyTo((ConstraintLayout) container);
-		} else {
+		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
-				params.gravity = fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL;
+				textView.setGravity(fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL);
 				params.setMarginStart(dpToPx(app, (shouldShowIcon() || fullRow) ? 36 : 0));
 				params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 			}
@@ -106,10 +117,10 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@LayoutRes
-	private static int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
+	private int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
 		switch (simpleWidgetState.getWidgetSizePref().get()) {
 			case SMALL:
-				return R.layout.simple_map_widget_small;
+				return isFullRow ? R.layout.simple_map_widget_small_full : R.layout.simple_map_widget_small;
 			case LARGE:
 				return R.layout.simple_map_widget_large;
 			default:
@@ -144,7 +155,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@NonNull
-	public OsmandPreference<SimpleWidgetState.WidgetSize> getWidgetSizePref() {
+	public OsmandPreference<WidgetSize> getWidgetSizePref() {
 		return widgetState.getWidgetSizePref();
 	}
 
@@ -183,9 +194,71 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateWidgetView();
 	}
 
+	public void showContextWidgetMenu(@NonNull View view) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		String widgetId = customId != null ? customId : widgetType.id;
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+		ApplicationMode appMode = settings.getApplicationMode();
+
+		if (widgetInfo != null) {
+			UiUtilities uiUtilities = app.getUIUtilities();
+			int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(isVerticalWidget() ? R.string.add_widget_to_the_left : R.string.add_widget_above)
+					.setIcon(uiUtilities.getPaintedIcon(isVerticalWidget() ? R.drawable.ic_action_add_item_left : R.drawable.ic_action_add_item_above, iconColor))
+					.setOnClickListener(item -> ConfigureWidgetsFragment.showInstance(mapActivity, widgetInfo.getWidgetPanel(), appMode, widgetId, false))
+					.create());
+
+			items.add(new PopUpMenuItem.Builder(app)
+					.setIcon(uiUtilities.getPaintedIcon(isVerticalWidget() ? R.drawable.ic_action_add_item_right : R.drawable.ic_action_add_item_below, iconColor))
+					.setTitleId(isVerticalWidget() ? R.string.add_widget_to_the_right : R.string.add_widget_below)
+					.setOnClickListener(item -> ConfigureWidgetsFragment.showInstance(mapActivity, widgetInfo.getWidgetPanel(), appMode, widgetId, true))
+					.create());
+
+			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
+			if (fragment != null) {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitleId(R.string.shared_string_settings)
+						.setOnClickListener(item -> {
+							Bundle args = new Bundle();
+							args.putString(KEY_WIDGET_ID, widgetInfo.key);
+							args.putString(KEY_APP_MODE, appMode.getStringKey());
+							FragmentManager manager = mapActivity.getSupportFragmentManager();
+							WidgetSettingsBaseFragment.showFragment(manager, args, null, fragment);
+						})
+						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
+						.showTopDivider(true)
+						.create());
+			}
+
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_delete)
+					.setOnClickListener(item -> {
+						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
+						builder.setTitle(getString(R.string.delete_confirmation_msg, getString(widgetType.titleId)));
+						builder.setMessage(R.string.are_you_sure);
+						builder.setNegativeButton(R.string.shared_string_cancel, null)
+								.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
+								});
+						builder.show();
+					})
+					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
+					.showTopDivider(true)
+					.create());
+
+			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+			displayData.anchorView = view;
+			displayData.menuItems = items;
+			displayData.nightMode = nightMode;
+			PopUpMenu.show(displayData);
+		}
+	}
+
 	@Override
 	public final void updateInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
-		boolean shouldHideTopWidgets = (verticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideTopWidgets());
+		boolean shouldHideTopWidgets = (verticalWidget && mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets());
 		boolean emptyValueTextView = Algorithms.isEmpty(textView.getText());
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
 		boolean visible = typeAllowed && !(shouldHideTopWidgets || emptyValueTextView);
@@ -224,8 +297,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		return widgetType != null ? getString(widgetType.titleId) : null;
 	}
 
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		if (widgetState != null) {
+			widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+		}
+	}
+
 	@Nullable
-	protected String getAdditionalWidgetName(){
+	protected String getAdditionalWidgetName() {
 		return null;
 	}
 
@@ -276,23 +356,39 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
+		this.textState = textState;
 		if (verticalWidget) {
-			nightMode = textState.night;
-			textView.setTextColor(textState.textColor);
-			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetNameTextView.setTextColor(textState.secondaryTextColor);
-			int iconId = getIconId();
-			if (iconId != 0) {
-				setImageDrawable(iconId);
-			}
-			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
 		}
 	}
 
+	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
+		nightMode = textState.night;
+		textView.setTextColor(textState.textColor);
+		smallTextView.setTextColor(textState.secondaryTextColor);
+		widgetNameTextView.setTextColor(textState.secondaryTextColor);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
+		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+	}
+
 	@Override
 	protected View getContentView() {
 		return verticalWidget ? view : container;
+	}
+
+	public void updateFullRowState(boolean fullRow) {
+		if (isFullRow != fullRow) {
+			isFullRow = fullRow;
+			recreateView();
+			if (textState != null) {
+				updateColors(textState);
+			}
+			updateInfo(null);
+		}
 	}
 }

@@ -19,9 +19,9 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class MarkerAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(MARKER_ACTION_ID,
-			"marker.add", MarkerAction.class).
-			nameRes(R.string.quick_action_add_marker).iconRes(R.drawable.ic_action_flag).nonEditable().
-			category(QuickActionType.CREATE_CATEGORY);
+			"marker.add", MarkerAction.class)
+			.nameRes(R.string.map_marker).iconRes(R.drawable.ic_action_flag).nonEditable().
+			category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
 
 
 	public MarkerAction() {

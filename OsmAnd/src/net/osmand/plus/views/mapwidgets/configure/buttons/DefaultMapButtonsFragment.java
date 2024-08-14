@@ -58,6 +58,10 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
 		AndroidUiHelper.updateVisibility(actionButton, false);
+
+		ImageView optionsButton = toolbar.findViewById(R.id.options_button);
+		optionsButton.setOnClickListener(this::showOptionsMenu);
+		optionsButton.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
 	}
 
 	@NonNull
@@ -86,7 +90,6 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 		}
 	}
 
-	@Override
 	protected void showOptionsMenu(@NonNull View view) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 

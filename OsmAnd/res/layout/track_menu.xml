@@ -63,7 +63,7 @@
 							android:minHeight="@dimen/default_title_line_height"
 							android:textSize="@dimen/default_list_text_size"
 							osmand:lineHeight="@dimen/default_title_line_height"
-							osmand:typeface="@string/font_roboto_medium"
+							android:textStyle="bold"
 							tools:text="@string/search_address_building" />
 
 						<TextView
@@ -159,7 +159,7 @@
 				android:paddingStart="0dp"
 				android:paddingEnd="@dimen/text_margin_small"
 				android:textColor="?attr/active_color_basic"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="@string/shared_string_tracks" />
 
 		</LinearLayout>
@@ -203,7 +203,7 @@
 				android:textColor="?active_color_basic"
 				android:textSize="@dimen/default_desc_text_size"
 				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="5/6" />
 
 		</LinearLayout>
@@ -257,7 +257,7 @@
 					android:maxLines="2"
 					android:textColor="?attr/app_bar_primary_item_color"
 					android:textSize="@dimen/dialog_header_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					android:textStyle="bold"
 					tools:text="@string/routing_settings_2" />
 
 				<include

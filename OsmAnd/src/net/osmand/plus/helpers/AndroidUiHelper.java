@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
@@ -24,6 +25,9 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.UiContext;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.PlatformUtil;
 
@@ -178,9 +182,9 @@ public class AndroidUiHelper {
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 
-	public static void setStatusBarContentColor(@Nullable View view, boolean isNightMode) {
+	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
 		if (view != null) {
-			setStatusBarContentColor(view, view.getSystemUiVisibility(), !isNightMode);
+			setStatusBarContentColor(view, view.getSystemUiVisibility(), !nightMode);
 		}
 	}
 
@@ -235,5 +239,12 @@ public class AndroidUiHelper {
 				actionBar.hide();
 			}
 		}
+	}
+
+	public static void setSharedElementTransition(@NonNull Fragment fragment, @NonNull View view, @NonNull String transitionName) {
+		MaterialContainerTransform transform = new MaterialContainerTransform();
+		transform.setScrimColor(Color.TRANSPARENT);
+		fragment.setSharedElementEnterTransition(transform);
+		view.setTransitionName(transitionName);
 	}
 }

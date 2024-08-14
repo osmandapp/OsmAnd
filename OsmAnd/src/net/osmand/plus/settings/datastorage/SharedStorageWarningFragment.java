@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.datastorage;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,7 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment.StorageSelectionListener;
 import net.osmand.plus.settings.datastorage.task.DocumentFilesCollectTask;
@@ -165,7 +167,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			String sharedStorage = getString(R.string.shared_storage);
 			String warning = getString(R.string.shared_storage_migration_descr, sharedStorage);
 			TextView migrationDescr = stepsContainer.findViewById(R.id.shared_storage_migration);
-			migrationDescr.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), warning, sharedStorage));
+			migrationDescr.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, warning, sharedStorage));
 
 			TextView firstStep = stepsContainer.findViewById(R.id.shared_storage_first_step);
 			firstStep.setText(getString(R.string.shared_storage_first_step, getString(R.string.shared_string_continue)));
@@ -194,7 +196,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		String storageName = selectedStorage.getTitle();
 		SpannableString spannable = new SpannableString(storageName);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), 0, storageName.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, storageName.length(), 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), 0, storageName.length(), 0);
 		summary.setText(spannable);
 
@@ -217,7 +219,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 		SpannableString spannable = new SpannableString(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -263,7 +265,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			skipButton.setOnClickListener(v -> showSkipMigrationDialog());
 			rightButton.setOnClickListener(v -> {
 				Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-				startActivityForResult(intent, FOLDER_ACCESS_REQUEST);
+				AndroidUtils.startActivityForResultIfSafe(this, intent, FOLDER_ACCESS_REQUEST);
 			});
 			skipButton.setButtonType(DialogButtonType.SECONDARY);
 			skipButton.setTitleId(R.string.shared_string_skip);

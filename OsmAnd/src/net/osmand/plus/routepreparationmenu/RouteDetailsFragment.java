@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static android.graphics.Typeface.DEFAULT;
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 
 import android.annotation.SuppressLint;
@@ -46,7 +48,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -425,7 +426,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = DEFAULT_BOLD;
 		startTime[0] += (int) boardingTime;
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
@@ -628,7 +629,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
-		title.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		title.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
 		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -698,7 +699,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private void buildDestinationItem(@NonNull View view, TargetPoint destination, int[] startTime,
 									  TransportRouteResultSegment segment, double walkSpeed) {
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = DEFAULT_BOLD;
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer(view.getContext());
@@ -1263,7 +1264,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		TextViewEx titleView = new TextViewEx(container.getContext());
 		FrameLayout.LayoutParams titleParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
-		titleView.setTypeface(FontCache.getRobotoRegular(container.getContext()));
+		titleView.setTypeface(DEFAULT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
 		titleView.setTextColor(getMainFontColor());
@@ -1277,7 +1278,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		LinearLayout.LayoutParams descriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(descriptionParams, 0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
 		textViewDescription.setLayoutParams(descriptionParams);
-		textViewDescription.setTypeface(FontCache.getRobotoRegular(container.getContext()));
+		textViewDescription.setTypeface(DEFAULT);
 		textViewDescription.setTextSize(14);
 		textViewDescription.setTextColor(getSecondaryColor());
 		textViewDescription.setText(description);

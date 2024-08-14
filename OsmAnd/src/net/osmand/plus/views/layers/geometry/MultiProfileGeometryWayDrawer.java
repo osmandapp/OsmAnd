@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -35,14 +37,16 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
+	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
+	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		for (DrawPathData31 data : pathsData) {
 			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
 			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
-				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
+				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows,
+						true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = style;
@@ -51,7 +55,8 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 			}
 		}
 		if (!dataArr.isEmpty()) {
-			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle,
+					dataArr);
 		}
 	}
 
@@ -70,7 +75,8 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, pxStep, pxStep, false, null, 0, pathsData);
+				pointBitmap, pointBitmap, pxStep, pxStep, false, null, null,
+				COLORIZATION_NONE, pathsData);
 	}
 
 	@Override
@@ -89,12 +95,11 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
-	                               List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
+	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<GeometryWayPoint> points, double distPixToFinish) {
 		path.reset();
 		GeometryMultiProfileWayStyle prevStyle = null;
-		for (int i = 0; i < styles.size(); i++) {
-			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(styles.get(i));
+		for (int i = 0; i < points.size(); i++) {
+			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(points.get(i).style);
 			if (style != null && !style.equals(prevStyle) && !style.isGap()) {
 				PointF center = MultiProfileGeometryWay.getIconCenter(tb, style.getRoutePoints(), path, pathMeasure);
 				float profileIconSize = MultiProfileGeometryWayContext.getProfileIconSizePx(getContext().getDensity());

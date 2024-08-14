@@ -51,7 +51,7 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new BikeCadenceDataField(R.string.map_widget_ant_bicycle_cadence, -1, calculatedCadence));
+					new BikeCadenceDataField(R.string.map_widget_ant_bicycle_cadence, R.string.revolutions_per_minute_unit, calculatedCadence));
 		}
 
 		@NonNull
@@ -65,7 +65,7 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
 			return Collections.singletonList(
-					new BikeCadenceDataField(R.string.map_widget_ant_bicycle_cadence, -1, calculatedCadence));
+					new BikeCadenceDataField(R.string.map_widget_ant_bicycle_cadence, R.string.revolutions_per_minute_unit, calculatedCadence));
 		}
 
 		@NonNull

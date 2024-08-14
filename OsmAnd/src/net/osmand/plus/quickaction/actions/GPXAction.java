@@ -33,8 +33,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
@@ -50,7 +50,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -61,9 +61,11 @@ import java.io.File;
 public class GPXAction extends QuickAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(GPX_ACTION_ID, "gpx.add", GPXAction.class)
-			.nameRes(R.string.quick_action_add_gpx)
+			.nameRes(R.string.quick_action_track_waypoint)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
-			.category(QuickActionType.CREATE_CATEGORY);
+			.category(QuickActionType.MY_PLACES)
+			.nameActionRes(R.string.shared_string_add)
+			.forceUseExtendedName();
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
@@ -349,7 +351,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			WptPt waypoint = createWaypoint();
 
 			ImageView predefinedIcon = container.findViewById(R.id.predefined_icon);
-			Drawable icon = PointImageDrawable.getFromWpt(context, waypoint.getColor(),
+			Drawable icon = PointImageUtils.getFromPoint(context, waypoint.getColor(),
 					false, waypoint);
 			predefinedIcon.setImageDrawable(icon);
 
@@ -452,7 +454,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	@ColorInt
 	private int getWaypointColorFromParams() {
-		return getColorFromParams(KEY_WPT_COLOR, ColorDialogs.pallette[0]);
+		return getColorFromParams(KEY_WPT_COLOR, DefaultColors.values()[0].getColor());
 	}
 
 	@NonNull

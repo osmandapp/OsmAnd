@@ -8,12 +8,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
@@ -60,7 +60,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (amenity == null || !(amenity instanceof Amenity)) {
+		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -93,6 +93,10 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	@Override
 	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
+	}
+
+	protected Map<String, String> getAdditionalCardParams() {
+		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
 	}
 
 	@Override

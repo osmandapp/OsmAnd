@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -78,6 +79,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
 				((MapActivity) activity).exitFromFullScreen(getView());
 			}
+		}
+	}
+
+	public void updateStatusBar() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			updateStatusBar(activity);
 		}
 	}
 
@@ -189,6 +197,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
+		return app.getDaynightHelper().isNightMode(usedOnMap, params);
 	}
 }

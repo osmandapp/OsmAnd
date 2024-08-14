@@ -200,8 +200,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			}
 		};
 
-		Date date = OsmAndFormatter.getStartOfToday();
-		long dateTime = date.getTime();
+		long dateTime = OsmAndFormatter.getStartOfToday();
 		for (int i = 0; i < FORECAST_DATES_COUNT; i++) {
 			if (!isDownloadStateInProgress(regionId)) {
 				// download was canceled by user
@@ -551,8 +550,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			int daysGone = 0;
 			long lastUpdate = getPreferenceLastUpdate(regionId);
 			if (lastUpdate != -1) {
-				Date dayNow = OsmAndFormatter.getStartOfToday();
-				long passedTime = dayNow.getTime() - lastUpdate;
+				long passedTime = OsmAndFormatter.getStartOfToday() - lastUpdate;
 				daysGone = (int) (passedTime / DateUtils.DAY_IN_MILLIS);
 			}
 			outdated = daysGone >= 7;

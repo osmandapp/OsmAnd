@@ -233,7 +233,7 @@
 					android:paddingTop="@dimen/context_menu_padding_margin_tiny"
 					android:text="@string/search_no_results_feedback"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					android:textStyle="bold"
 					android:paddingStart="@dimen/bottom_sheet_content_margin"
 					android:paddingEnd="@dimen/bottom_sheet_content_margin" />
 
@@ -265,7 +265,7 @@
 						android:text="@string/shared_string_send"
 						android:textColor="?attr/wikivoyage_active_color"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						android:paddingStart="@dimen/context_menu_padding_margin_small"
 						android:paddingEnd="@dimen/context_menu_padding_margin_small" />
 

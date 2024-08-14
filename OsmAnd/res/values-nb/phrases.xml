@@ -1026,11 +1026,11 @@
     <string name="poi_crossing_uncontrolled">Ukontrollert</string>
     <string name="poi_crossing_unmarked">Umarkert</string>
     <string name="poi_wholesale">Engros</string>
-    <string name="poi_access_private">Privat tilgang</string>
+    <string name="poi_access_private">Privat adgang</string>
     <string name="poi_access_no">Ingen adgang</string>
     <string name="poi_access_customers">Kundeadgang</string>
     <string name="poi_access_delivery">Leveringsadgang</string>
-    <string name="poi_access_agricultural">Landbrukstilgang</string>
+    <string name="poi_access_agricultural">Landbruksadgang</string>
     <string name="poi_content_water">Innhold: Vann</string>
     <string name="poi_content_oil">Innhold: Olje</string>
     <string name="poi_content_fuel">Innhold: Drivstoff</string>
@@ -1232,7 +1232,7 @@
     <string name="poi_socket_cee_blue_output_filter">Blått CEE-uttak</string>
     <string name="poi_socket_schuko_output_filter">Schuko-uttak</string>
     <string name="poi_charity">Veldedighetsbutikk</string>
-    <string name="poi_shop_yes">Landhandel</string>
+    <string name="poi_shop_yes">Butikk</string>
     <string name="poi_medical_supply">Medisinsk utstyr</string>
     <string name="poi_stationery">Kontorrekvisita</string>
     <string name="poi_tobacco">Tobakksbutikk</string>
@@ -1395,8 +1395,8 @@
     <string name="poi_motorcycle_sales_yes_used">Salg: Ja, brukt</string>
     <string name="poi_motorcycle_sales_no">Salg: Nei</string>
     <string name="poi_beds">Senger</string>
-    <string name="poi_reservation_members_only">Reservasjon: kun medlemmer</string>
-    <string name="poi_reservation_no">Reservasjon: nei</string>
+    <string name="poi_reservation_members_only">Kun medlemmer</string>
+    <string name="poi_reservation_no">Nei</string>
     <string name="poi_direction_all">Retning: alle</string>
     <string name="poi_direction_exit">Retning: utgang</string>
     <string name="poi_direction_entrance">Retning: inngang</string>
@@ -1599,9 +1599,9 @@
     <string name="poi_boat_pedalboat_rental_yes">Pedalbåter: ja</string>
     <string name="poi_boat_motorboat_rental_yes">Motorbåter: ja</string>
     <string name="poi_boat_rental">Båtutleie</string>
-    <string name="poi_reservation_recommended">Reservasjon: anbefalt</string>
-    <string name="poi_reservation_required">Reservasjon: påkrevd</string>
-    <string name="poi_reservation_yes">Reservasjon: ja</string>
+    <string name="poi_reservation_recommended">Anbefalt</string>
+    <string name="poi_reservation_required">Påkrevd</string>
+    <string name="poi_reservation_yes">Ja</string>
     <string name="poi_direction_wnw">Retning: vest-nordvest</string>
     <string name="poi_direction_nne">Retning: nord-nordøst</string>
     <string name="poi_direction_n">Retning: nord</string>
@@ -1823,7 +1823,7 @@
     <string name="poi_socket_type2_cable_voltage_filter">Type 2-kabelkonnektorspenning</string>
     <string name="poi_socket_type3a_voltage_filter">Type 3a-konnektorspenning</string>
     <string name="poi_socket_type3c_voltage_filter">Type 3c-konnektorspenning</string>
-    <string name="poi_access_general">Almentilgang</string>
+    <string name="poi_access_general">Allmenn adgang</string>
     <string name="poi_dog">Hunder</string>
     <string name="poi_authentication_phone_call">Identitetsbekreftelse med telefonanrop</string>
     <string name="poi_socket_cee_blue_voltage_filter">CEE blå-konnektorspenning</string>
@@ -1928,4 +1928,20 @@
     <string name="poi_horse_designated">Beregnet for hester</string>
     <string name="poi_foot_designated">Beregnet for fotgjengere</string>
     <string name="poi_not_pt_shelter_yes">Alle unntatt kollektivtransportskur</string>
+    <string name="poi_stream">Bekk</string>
+    <string name="poi_impromptu_yes">Ja</string>
+    <string name="poi_descent">Nedstigning</string>
+    <string name="poi_direction">Retning</string>
+    <string name="poi_from">Fra</string>
+    <string name="poi_to">Til</string>
+    <string name="poi_distance">Distanse</string>
+    <string name="poi_ascent">Stigning</string>
+    <string name="poi_impromptu_no">Nei</string>
+    <string name="poi_parking_fee_yes">Ja</string>
+    <string name="poi_parking_fee">Parkeringsavgift</string>
+    <string name="poi_charge">Gebyr</string>
+    <string name="poi_parking_fee_no">Nei</string>
+    <string name="poi_level">Nivå</string>
+    <string name="poi_internet_access_fee_customers">Internettilgang: kunder</string>
+    <string name="poi_access_yes">Adgang tillatt</string>
 </resources>

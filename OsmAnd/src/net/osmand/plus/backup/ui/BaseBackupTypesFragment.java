@@ -27,10 +27,11 @@ import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,8 +45,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
-		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
+public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment implements OnItemSelectedListener,
+		OnClearTypesListener, OnDeleteFilesListener, InAppPurchaseListener {
 
 	protected BackupHelper backupHelper;
 
@@ -53,8 +54,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 
 	protected ProgressBar progressBar;
+	protected BackupTypesAdapter adapter;
 	protected BackupClearType clearType;
 
+	protected boolean cloudRestore;
 	protected boolean wasDrawerDisabled;
 
 	@Override
@@ -69,6 +72,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		clearType = getClearType();
 		dataList = getDataList();
 		selectedItemsMap = getSelectedItems();
+		cloudRestore = requireMapActivity().getFragmentsHelper().isFirstScreenShowing();
 	}
 
 	protected abstract int getTitleId();
@@ -89,7 +93,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		BackupTypesAdapter adapter = new BackupTypesAdapter(app, this, nightMode);
+		adapter = new BackupTypesAdapter(app, this, cloudRestore, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 
 		ExpandableListView expandableList = view.findViewById(R.id.list);
@@ -145,7 +149,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
 		List<ExportType> exportTypes = categoryItems.getTypes();
 		for (ExportType exportType : exportTypes) {
-			if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+			if (isExportTypeAvailable(exportType)) {
 				List<?> items = getItemsForType(exportType);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(exportType, selected ? items : null);
@@ -158,7 +162,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+		if (isExportTypeAvailable(exportType)) {
 			List<?> items = getItemsForType(exportType);
 			selectedItemsMap.put(exportType, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
@@ -167,6 +171,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		} else {
 			OsmAndProPlanFragment.showInstance(requireActivity());
 		}
+	}
+
+	protected boolean isExportTypeAvailable(@NonNull ExportType exportType) {
+		return InAppPurchaseUtils.isExportTypeAvailable(app, exportType) || cloudRestore;
 	}
 
 	protected void showClearTypesBottomSheet(List<ExportType> types) {
@@ -222,8 +230,23 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		backupHelper.prepareBackup();
 	}
 
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		dataList = getDataList();
+		selectedItemsMap = getSelectedItems();
+
+		if (isResumed() && adapter != null) {
+			adapter.updateSettingsItems(dataList, selectedItemsMap);
+		}
+	}
+
 	protected void updateProgressVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(progressBar, visible);
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return ((MapActivity) requireActivity());
 	}
 
 	@Nullable

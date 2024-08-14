@@ -71,7 +71,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.external_device_characteristic_cadence, -1, cadence));
+					new SensorDataField(R.string.external_device_characteristic_cadence, R.string.revolutions_per_minute_unit, cadence));
 		}
 
 		@NonNull
@@ -86,7 +86,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
 			return Collections.singletonList(
-					new SensorWidgetDataField(SensorWidgetDataFieldType.BIKE_CADENCE, R.string.external_device_characteristic_cadence, -1, cadence));
+					new SensorWidgetDataField(SensorWidgetDataFieldType.BIKE_CADENCE, R.string.external_device_characteristic_cadence, R.string.revolutions_per_minute_unit, cadence));
 		}
 
 		@NonNull

@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -39,6 +40,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFr
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
@@ -323,6 +325,8 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetSettingsFragment();
+		} else if (this == DEV_ZOOM_LEVEL) {
+			return new ZoomLevelSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
@@ -342,8 +346,11 @@ public enum WidgetType {
 
 	@Nullable
 	public static WidgetType getById(@NonNull String id) {
+		String defaultId = getDefaultWidgetId(id);
+		if (defaultId.startsWith(OsmandAidlApi.WIDGET_ID_PREFIX)) {
+			return AIDL_WIDGET;
+		}
 		for (WidgetType widget : values()) {
-			String defaultId = getDefaultWidgetId(id);
 			if (widget.id.equals(defaultId)) {
 				return widget;
 			}

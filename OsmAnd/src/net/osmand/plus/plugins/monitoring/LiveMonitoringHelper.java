@@ -14,6 +14,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -28,6 +29,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LiveMonitoringHelper {
 
@@ -39,7 +41,6 @@ public class LiveMonitoringHelper {
 
 	private LatLon lastPoint;
 	private long lastTimeUpdated;
-	private boolean started;
 
 	public LiveMonitoringHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -54,15 +55,6 @@ public class LiveMonitoringHelper {
 	public void updateLocation(@Nullable net.osmand.Location location) {
 		long locationTime = System.currentTimeMillis();
 
-		if (isLiveMonitoringEnabled()) {
-			if (!started) {
-				new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
-				started = true;
-			}
-		} else {
-			started = false;
-		}
-
 		if (shouldRecordLocation(location, locationTime)) {
 			LiveMonitoringData data = new LiveMonitoringData((float) location.getLatitude(), (float) location.getLongitude(),
 					(float) location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
@@ -70,6 +62,9 @@ public class LiveMonitoringHelper {
 			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
+		}
+		if (isLiveMonitoringEnabled() && !queue.isEmpty())  {
+			new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
 		}
 	}
 
@@ -163,35 +158,45 @@ public class LiveMonitoringHelper {
 		}
 	}
 
+	private static AtomicBoolean LOCKED_LIVE_SENDER = new AtomicBoolean();
 	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
+
 
 		@Override
 		protected Void doInBackground(ConcurrentLinkedQueue<LiveMonitoringData>... concurrentLinkedQueues) {
-			while (isLiveMonitoringEnabled()) {
-				int maxSendInterval = app.getSettings().LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get();
-				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
-					if (!queue.isEmpty()) {
-						LiveMonitoringData data = (LiveMonitoringData) queue.peek();
-						if (!(System.currentTimeMillis() - data.time > maxSendInterval)) {
-							sendData(data);
-						} else {
-							queue.poll();
+			boolean lock = LOCKED_LIVE_SENDER.compareAndSet(false, true);
+			if (!lock) {
+				return null;
+			}
+			try {
+				while (!queue.isEmpty()) {
+					int maxSendInterval = app.getSettings().LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get();
+					LiveMonitoringData data = queue.peek();
+					if (!(System.currentTimeMillis() - data.time > maxSendInterval)) {
+						boolean retry = sendData(data);
+						if (!retry) {
+							break;
 						}
+					} else {
+						queue.poll();
 					}
 				}
+			} finally {
+				LOCKED_LIVE_SENDER.set(false);
 			}
 			return null;
 		}
 	}
 
-	public void sendData(@NonNull LiveMonitoringData data) {
+	public boolean sendData(@NonNull LiveMonitoringData data) {
 		String baseUrl = app.getSettings().LIVE_MONITORING_URL.get();
+		boolean retry = false;
 		String urlStr;
 		try {
 			urlStr = getLiveUrl(baseUrl, data);
 		} catch (IllegalArgumentException e) {
 			log.error("Could not construct live url from base url: " + baseUrl, e);
-			return;
+			return retry;
 		}
 		try {
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
@@ -199,18 +204,15 @@ public class LiveMonitoringHelper {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
 					url.getPath(), url.getQuery(), url.getRef());
-
-			urlConnection.setConnectTimeout(15000);
-			urlConnection.setReadTimeout(15000);
-
+			urlConnection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+			urlConnection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 			log.info("Monitor " + uri);
-
 			if (urlConnection.getResponseCode() / 100 != 2) {
-
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 						urlConnection.getResponseMessage();
 				log.error("Error sending monitor request: " + msg);
 			} else {
+				retry = true; // move to next point
 				queue.poll();
 				InputStream is = urlConnection.getInputStream();
 				StringBuilder responseBody = new StringBuilder();
@@ -225,12 +227,12 @@ public class LiveMonitoringHelper {
 				}
 				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody);
 			}
-
 			urlConnection.disconnect();
-
 		} catch (Exception e) {
+			retry = false;
 			log.error("Failed connect to " + urlStr + ": " + e.getMessage(), e);
 		}
+		return retry;
 	}
 
 	private String getLiveUrl(@NonNull String baseUrl, @NonNull LiveMonitoringData data) {

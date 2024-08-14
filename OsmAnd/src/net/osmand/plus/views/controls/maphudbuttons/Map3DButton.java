@@ -62,27 +62,17 @@ public class Map3DButton extends MapButton {
 		return view -> {
 			boolean defaultElevationAngle = isDefaultElevationAngle();
 			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
-			animateDraggingMapThread.startTilting(tiltAngle);
+			animateDraggingMapThread.startTilting(tiltAngle, 0.0f);
 			mapView.refreshMap();
 		};
 	}
 
 	private float getElevationAngle(int zoom) {
 		float map3DModeElevationAngle = buttonState.getElevationAngle();
-		if (map3DModeElevationAngle != 90) {
+		if (map3DModeElevationAngle != DEFAULT_ELEVATION_ANGLE) {
 			return map3DModeElevationAngle;
-		} else if (zoom < 10) {
-			return 55;
-		} else if (zoom < 12) {
-			return 50;
-		} else if (zoom < 14) {
-			return 45;
-		} else if (zoom < 16) {
-			return 40;
-		} else if (zoom < 17) {
-			return 35;
 		} else {
-			return 30;
+			return mapActivity.getMapView().getAdjustedTiltAngle(zoom, true);
 		}
 	}
 

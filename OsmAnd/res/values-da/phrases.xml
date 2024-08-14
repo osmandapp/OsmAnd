@@ -74,7 +74,7 @@
     <string name="poi_tobacco">Tobak</string>
     <string name="poi_toys">Legetøjsbuttik</string>
     <string name="poi_trade">Handelsplads</string>
-    <string name="poi_vacuum_cleaner">Støvsuger</string>
+    <string name="poi_vacuum_cleaner">Støvsuger-butik</string>
     <string name="poi_variety_store">Fastpris butik</string>
     <string name="poi_video">Video</string>
     <string name="poi_window_blind">Persienner</string>
@@ -106,11 +106,11 @@
     <string name="poi_toll_booth">Betalingsanlæg</string>
     <string name="poi_border_control">Grænsekontrol</string>
     <string name="poi_traffic_calming_bump">Vejbumb</string>
-    <string name="poi_traffic_calming_hump">Vejbumb, bredt</string>
+    <string name="poi_traffic_calming_hump">Vejbump, bredt</string>
     <string name="poi_traffic_calming_cushion">Pudebumb</string>
     <string name="poi_traffic_calming_chicane">Chikane</string>
     <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
-    <string name="poi_traffic_calming_table">Plateaubumb</string>
+    <string name="poi_traffic_calming_table">Trapezbump</string>
     <string name="poi_traffic_calming_choker">Indsnævring</string>
     <string name="poi_traffic_signals">Lyskryds</string>
     <string name="poi_car_repair">Autoværksted</string>
@@ -789,7 +789,7 @@
     <string name="poi_bus_trap">Bussluse</string>
     <string name="poi_cattle_grid">Færist</string>
     <string name="poi_full_height_turnstile">Fuld højde adgangsmølle</string>
-    <string name="poi_bump_gate">Bumplåge</string>
+    <string name="poi_bump_gate">Skubbeled</string>
     <string name="poi_general_barrier">Almindelig forhindring</string>
     <string name="poi_stile">Stente</string>
     <string name="poi_height_restrictor">Højdebegrænser</string>
@@ -1649,7 +1649,7 @@
     <string name="poi_shelter_type_public_transport">Offentlig transport</string>
     <string name="poi_shelter_type_picnic_shelter">Picnic</string>
     <string name="poi_shelter_type_weather_shelter">Tarp</string>
-    <string name="poi_shelter_type_lean_to">Bivuak</string>
+    <string name="poi_shelter_type_lean_to">Shelter</string>
     <string name="poi_shelter_type_basic_hut">Hytte</string>
     <string name="poi_shelter_type_building">Bygning</string>
     <string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
@@ -2422,7 +2422,7 @@
     <string name="poi_compressed_air_yes">Ja</string>
     <string name="poi_compressed_air_no">Trykluft: nej</string>
     <string name="poi_car_wash_yes">Ja</string>
-    <string name="poi_vacuum_cleaner_yes">Ja</string>
+    <string name="poi_vacuum_cleaner_yes">Ja;Støvsuger</string>
     <string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
     <string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
     <string name="poi_sport_free_flying">Freeflying (sport)</string>
@@ -2731,7 +2731,7 @@
     <string name="poi_diplomatic_ambassadors_residence">Ambassadørens residens</string>
     <string name="poi_diplomatic_high_commission">Højkommissær</string>
     <string name="poi_fire_operator">Brandoperatør</string>
-    <string name="poi_diaper_table_count">Puslebord</string>
+    <string name="poi_diaper_table_count">Antal pusleborde</string>
     <string name="poi_water_tank">Vandtank</string>
     <string name="poi_toilets_disposal_flush">Toilettype: vandkloset</string>
     <string name="poi_toilets_disposal_pitlatrine">Toilettype: latrin</string>
@@ -3803,7 +3803,7 @@
     <string name="poi_traffic_signals_vibration">Vibration</string>
     <string name="poi_city_block">Karré</string>
     <string name="poi_borough">Bydistrikt</string>
-    <string name="poi_give_box">Donationsboks</string>
+    <string name="poi_give_box">Bytteboks</string>
     <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
     <string name="poi_elevator">Elevator</string>
     <string name="poi_nuts">Nøddebutik</string>
@@ -3907,7 +3907,7 @@
     <string name="poi_water_polo">Vandpolo</string>
     <string name="poi_jiu_jitsu">Jiu Jitsu</string>
     <string name="poi_karate">Karate</string>
-    <string name="poi_camp_pitch">Lejrplads</string>
+    <string name="poi_camp_pitch">Standplads</string>
     <string name="poi_wildlife_crossing">Vildtpassage</string>
     <string name="poi_consulate_consular_office">Konsulat</string>
     <string name="poi_embassy_interests_section">Interessersektion</string>
@@ -4042,4 +4042,12 @@
     <string name="poi_bicycle_designated">Beregnet til cykler</string>
     <string name="poi_vehicle_designated">Beregnet til køretøjer</string>
     <string name="poi_research_institute">Forskningscenter</string>
+    <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Camping og hytter</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_riding_and_camping">Ridning og camping</string>
+    <string name="poi_permanent_camping_only">Udelukkende;Udelukkende permanent camping</string>
+    <string name="poi_permanent_camping_yes">Ja;Permanent camping</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_camping">Hestecamping</string>
+    <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Spredt camping</string>
+    <string name="poi_us_maps_recreation_area_activity_group_camping">Gruppecamping</string>
+    <string name="poi_indoor_seating_bar_table">Indendørs siddepladser: barbord</string>
 </resources>

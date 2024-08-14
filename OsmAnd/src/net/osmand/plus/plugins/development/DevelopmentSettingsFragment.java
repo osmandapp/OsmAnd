@@ -62,20 +62,17 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference safeCategory = findPreference("safe");
 		safeCategory.setIconSpaceReserved(false);
 		setupSafeModePref();
-		setupApproximationSafeModePref();
 
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
-		setupUseV1AutoZoom();
-		setupUseHHRoutingPref();
-		setupHHRoutingCppPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
 		setupDebugRenderingInfoPref();
+		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -87,8 +84,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMapTextsPrefs();
 
-		setupRoutesPrefs();
-
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
@@ -97,6 +92,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
 		setupDayNightInfoPref();
+		setupLoadAvgInfoPref();
 
 		setupResetToDefaultButton();
 	}
@@ -110,28 +106,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			safeMode.setEnabled(false);
 			safeMode.setChecked(true);
 		}
-	}
-
-	private void setupApproximationSafeModePref() {
-		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
-		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
-		safeMode.setIconSpaceReserved(false);
-	}
-
-	private void setupUseHHRoutingPref() {
-		SwitchPreferenceEx preference = findPreference(settings.USE_HH_ROUTING.getId());
-		findPreference(settings.HH_ROUTING_CPP.getId()).setEnabled(preference.isChecked());
-		preference.setIconSpaceReserved(false);
-	}
-
-	private void setupHHRoutingCppPref() {
-		SwitchPreferenceEx preference = findPreference(settings.HH_ROUTING_CPP.getId());
-		preference.setIconSpaceReserved(false);
-	}
-
-	private void setupUseV1AutoZoom() {
-		SwitchPreferenceEx preference = findPreference(settings.USE_V1_AUTO_ZOOM.getId());
-		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupHeightmapRelatedPrefs() {
@@ -153,6 +127,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupDisableMapLayersPref() {
+		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
+		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
+		disableMapLayers.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateInitialStartupPref() {
@@ -209,24 +189,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
 		syminfoPref.setIconSpaceReserved(false);
-		syminfoPref.setDescription("Display graphical info about placement of each map text");
+		syminfoPref.setDescription(R.string.show_debug_info_description);
 
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
-		symtopPref.setDescription("Allow displaying map texts on top of each other");
-	}
-
-	private void setupRoutesPrefs() {
-		Preference textsCategory = findPreference("routes");
-		textsCategory.setIconSpaceReserved(false);
-
-		SwitchPreferenceEx raiseRoutesPref = findPreference(plugin.RAISE_ROUTES_ABOVE_RELIEF.getId());
-		raiseRoutesPref.setIconSpaceReserved(false);
-		raiseRoutesPref.setDescription("Display routes 1000 meters higher above the ground");
-
-		SwitchPreferenceEx showTracesPref = findPreference(plugin.SHOW_TRANSPARENT_TRACES.getId());
-		showTracesPref.setIconSpaceReserved(false);
-		showTracesPref.setDescription("Display semi-transparent trace under the route");
+		symtopPref.setDescription(R.string.allow_display_on_top_description);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
@@ -284,6 +251,35 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		String sunset = sunriseSunset != null ? DATE_FORMAT.format(sunriseSunset.getSunset()) : "null";
 		dayNightInfo.setSummary(getString(R.string.day_night_info_description, sunrise, sunset));
 		dayNightInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupLoadAvgInfoPref() {
+		OsmandDevelopmentPlugin.AvgStatsEntry m1 = plugin.getAvgStats(1);
+		OsmandDevelopmentPlugin.AvgStatsEntry m5 = plugin.getAvgStats(5);
+		OsmandDevelopmentPlugin.AvgStatsEntry m15 = plugin.getAvgStats(15);
+
+		final int AUTO_DETECT_MICROAMPERES = 10000;
+		// Samsung's BatteryManager API reported instantaneous and
+		// average battery current in milliamperes (mA) rather than
+		// in microamperes (µA) as specified in the API documentation.
+		if (Math.abs(m1.energyConsumption) > AUTO_DETECT_MICROAMPERES) m1.energyConsumption /= 1000;
+		if (Math.abs(m5.energyConsumption) > AUTO_DETECT_MICROAMPERES) m5.energyConsumption /= 1000;
+		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES) m15.energyConsumption /= 1000;
+
+		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
+		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
+		String idle = String.format("%.2f / %.2f / %.2f", m1.idle1k, m5.idle1k, m15.idle1k);
+		String cpu = String.format("%.2f / %.2f / %.2f", m1.cpuBasic, m5.cpuBasic, m15.cpuBasic);
+		String battery = String.format("%.2f%% / %.2f%% / %.2f%%", m1.batteryLevel, m5.batteryLevel, m15.batteryLevel);
+		String energy = String.format("%.0f / %.0f / %.0f", m1.energyConsumption, m5.energyConsumption, m15.energyConsumption);
+
+		Preference energyAvgInfo = findPreference("energy_avg_info");
+		energyAvgInfo.setSummary(getString(R.string.energy_avg_info_description, battery, energy));
+		energyAvgInfo.setIconSpaceReserved(false);
+
+		Preference renderingAvgInfo = findPreference("rendering_avg_info");
+		renderingAvgInfo.setSummary(getString(R.string.rendering_avg_info_details, fps, cpu, idle, gpu));
+		renderingAvgInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupResetToDefaultButton() {
@@ -367,9 +363,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
 			return true;
-		} else if (settings.USE_HH_ROUTING.getId().equals(prefId)) {
-			boolean checked = (Boolean) newValue;
-			findPreference(settings.HH_ROUTING_CPP.getId()).setEnabled(checked);
 		}
 		return super.onPreferenceChange(preference, newValue);
 	}

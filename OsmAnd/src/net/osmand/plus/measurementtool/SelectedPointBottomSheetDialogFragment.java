@@ -1,5 +1,7 @@
 package net.osmand.plus.measurementtool;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -10,8 +12,13 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,8 +26,9 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -30,11 +38,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -54,7 +57,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		View titleView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
 		TextView title = titleView.findViewById(R.id.title);
-		title.setTypeface(FontCache.getRobotoMedium(getActivity()));
+		title.setTypeface(DEFAULT_BOLD);
 
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))

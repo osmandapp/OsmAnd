@@ -159,7 +159,7 @@
 					android:singleLine="true"
 					android:textColor="?attr/searchbar_text"
 					android:textSize="@dimen/default_list_text_size_large"
-					osmand:typeface="@string/font_roboto_medium" />
+					android:textStyle="bold" />
 
 			</LinearLayout>
 

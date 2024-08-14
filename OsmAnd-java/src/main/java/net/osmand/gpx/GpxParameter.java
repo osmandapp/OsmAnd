@@ -1,6 +1,11 @@
 package net.osmand.gpx;
 
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum GpxParameter {
 
@@ -8,11 +13,10 @@ public enum GpxParameter {
 	FILE_DIR("fileDir", "TEXT", String.class, null, false),
 	TOTAL_DISTANCE("totalDistance", "double", Double.class, 0d, true),
 	TOTAL_TRACKS("totalTracks", "int", Integer.class, 0, true),
-	START_TIME("startTime", "long", Long.class, Long.MAX_VALUE, true),
-	END_TIME("endTime", "long", Long.class, Long.MIN_VALUE, true),
-	TIME_SPAN("timeSpan", "long", Long.class, 0L, true),
-	EXPECTED_ROUTE_DURATION("expectedRouteDuration", "long", Long.class, -1L, true),
-	TIME_MOVING("timeMoving", "long", Long.class, 0L, true),
+	START_TIME("startTime", "bigint", Long.class, Long.MAX_VALUE, true),
+	END_TIME("endTime", "bigint", Long.class, Long.MIN_VALUE, true),
+	TIME_SPAN("timeSpan", "bigint", Long.class, 0L, true),
+	TIME_MOVING("timeMoving", "bigint", Long.class, 0L, true),
 	TOTAL_DISTANCE_MOVING("totalDistanceMoving", "double", Double.class, 0d, true),
 	DIFF_ELEVATION_UP("diffElevationUp", "double", Double.class, 0d, true),
 	DIFF_ELEVATION_DOWN("diffElevationDown", "double", Double.class, 0d, true),
@@ -24,10 +28,10 @@ public enum GpxParameter {
 	AVG_SPEED("avgSpeed", "double", Double.class, 0d, true),
 	POINTS("points", "int", Integer.class, 0, true),
 	WPT_POINTS("wptPoints", "int", Integer.class, 0, true),
-	COLOR("color", "TEXT", Integer.class, 0, false),
-	FILE_LAST_MODIFIED_TIME("fileLastModifiedTime", "long", Long.class, 0L, false),
-	FILE_LAST_UPLOADED_TIME("fileLastUploadedTime", "long", Long.class, 0L, false),
-	FILE_CREATION_TIME("fileCreationTime", "long", Long.class, -1L, false),
+	COLOR("color", "TEXT", Integer.class, null, false),
+	FILE_LAST_MODIFIED_TIME("fileLastModifiedTime", "bigint", Long.class, 0L, false),
+	FILE_LAST_UPLOADED_TIME("fileLastUploadedTime", "bigint", Long.class, 0L, false),
+	FILE_CREATION_TIME("fileCreationTime", "bigint", Long.class, -1L, false),
 	SPLIT_TYPE("splitType", "int", Integer.class, 0, false),
 	SPLIT_INTERVAL("splitInterval", "double", Double.class, 0d, false),
 	API_IMPORTED("apiImported", "int", Boolean.class, false, false),
@@ -36,8 +40,14 @@ public enum GpxParameter {
 	JOIN_SEGMENTS("joinSegments", "int", Boolean.class, false, false),
 	SHOW_ARROWS("showArrows", "int", Boolean.class, false, false),
 	SHOW_START_FINISH("showStartFinish", "int", Boolean.class, true, false),
+	TRACK_VISUALIZATION_TYPE("track_visualization_type", "TEXT", String.class, "none", false),
+	TRACK_3D_WALL_COLORING_TYPE("track_3d_wall_coloring_type", "TEXT", String.class, "none", false),
+	TRACK_3D_LINE_POSITION_TYPE("track_3d_line_position_type", "TEXT", String.class, "top", false),
+	ADDITIONAL_EXAGGERATION("additional_exaggeration", "double", Double.class, 1d, false),
+	ELEVATION_METERS("elevation_meters", "double", Double.class, 1000d, false),
 	WIDTH("width", "TEXT", String.class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String.class, null, false),
+	COLOR_PALETTE("colorPalette", "TEXT", String.class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double.class, Double.NaN, false),
 	MIN_FILTER_SPEED("minFilterSpeed", "double", Double.class, Double.NaN, false),
 	MAX_FILTER_SPEED("maxFilterSpeed", "double", Double.class, Double.NaN, false),
@@ -57,7 +67,7 @@ public enum GpxParameter {
 	AVG_SENSOR_CADENCE("avgSensorCadence", "double", Double.class, 0d, true),
 	MAX_SENSOR_HEART_RATE("maxSensorHr", "int", Integer.class, 0, true),
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double.class, 0d, true),
-	DATA_VERSION("dataVersion", "int", Integer.class, 0, true);
+	DATA_VERSION("dataVersion", "int", Integer.class, 0, false);
 
 
 	private final String columnName;
@@ -102,29 +112,41 @@ public enum GpxParameter {
 		return analysisParameter;
 	}
 
-	public boolean isValidValue(Object value) {
-		return value == null && isNullSupported() || value != null && getTypeClass() == value.getClass();
-	}
-
 	public Object convertToDbValue(Object value) {
-		if (getTypeClass() == Boolean.class) {
-			return value instanceof Boolean && ((Boolean) value) ? 1 : 0;  // 1 = true, 0 = false
-		} else if (this == COLOR) {
-			if (value instanceof Integer) {
-				int color = (Integer) value;
-				return color == 0 ? "" : Algorithms.colorToString(color);
+		if (value != null) {
+			if (getTypeClass() == Boolean.class) {
+				return value instanceof Boolean && ((Boolean) value) ? 1 : 0;  // 1 = true, 0 = false
+			} else if (this == COLOR) {
+				if (value instanceof Integer) {
+					int color = (Integer) value;
+					return color == 0 ? "" : Algorithms.colorToString(color);
+				}
 			}
 		}
 		return value;
 	}
 
-	public int getSelectColumnIndex() {
-		return ordinal();
-	}
-
-
 	@Override
 	public String toString() {
 		return columnName;
+	}
+
+	public boolean isAppearanceParameter() {
+		return CollectionUtils.containsAny(getAppearanceParameters(), this);
+	}
+
+	public static List<GpxParameter> getAppearanceParameters() {
+		return Arrays.asList(COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
+				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL, TRACK_3D_LINE_POSITION_TYPE,
+				TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE, COLOR_PALETTE);
+	}
+
+	public static List<GpxParameter> getGpxDirParameters() {
+		List<GpxParameter> list = new ArrayList<>();
+		list.add(FILE_NAME);
+		list.add(FILE_DIR);
+		list.add(FILE_LAST_MODIFIED_TIME);
+		list.addAll(getAppearanceParameters());
+		return list;
 	}
 }

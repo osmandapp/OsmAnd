@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.osmedit;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,8 +26,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
@@ -40,6 +42,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -85,8 +88,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
@@ -185,7 +188,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			backgroundType = BackgroundType.COMMENT;
 		}
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
 				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
@@ -402,7 +405,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		int x = MapUtils.get31TileNumberX(osmPoint.getLongitude());
 		int y = MapUtils.get31TileNumberY(osmPoint.getLatitude());
 		PointI position = new PointI(x, y);
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
 				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
@@ -438,11 +441,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	private void addInitPoiTypesListener() {
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 
 				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-					if (event == AppInitializer.InitEvents.POI_TYPES_INITIALIZED) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == POI_TYPES_INITIALIZED) {
 						poiTypesInitialized = true;
 					}
 				}

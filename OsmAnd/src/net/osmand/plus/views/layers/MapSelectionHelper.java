@@ -1,4 +1,5 @@
 package net.osmand.plus.views.layers;
+
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
@@ -50,10 +51,10 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -217,7 +218,7 @@ public class MapSelectionHelper {
 		if (renderedObjects != null) {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-			NetworkRouteSelectorFilter routeSelectorFilter = null;
+			boolean selectedRoutes = false;
 			for (RenderedObject renderedObject : renderedObjects) {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
@@ -257,11 +258,12 @@ public class MapSelectionHelper {
 				if (isTravelGpx) {
 					addTravelGpx(result, renderedObject, filter);
 				} else {
-					if (isRoute) {
-						if (routeSelectorFilter == null) {
-							routeSelectorFilter = createRouteFilter();
+					if (isRoute && !selectedRoutes) {
+						selectedRoutes = true;
+						NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+						if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+							addRoute(result, tileBox, point, routeFilter);
 						}
-						addRoute(result, tileBox, point, routeSelectorFilter);
 					}
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded && !isRoute) {
@@ -279,7 +281,7 @@ public class MapSelectionHelper {
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-			NetworkRouteSelectorFilter routeSelectorFilter = null;
+			boolean selectedRoutes = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
@@ -337,11 +339,12 @@ public class MapSelectionHelper {
 						if (obfMapObject != null) {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
 							boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-							if (isRoute) {
-								if (routeSelectorFilter == null) {
-									routeSelectorFilter = createRouteFilter();
+							if (isRoute && !selectedRoutes) {
+								selectedRoutes = true;
+								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+								if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+									addRoute(result, tileBox, point, routeFilter);
 								}
-								addRoute(result, tileBox, point, routeSelectorFilter);
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
@@ -568,7 +571,7 @@ public class MapSelectionHelper {
 				publicTransportTypes = new ArrayList<>();
 				List<PoiFilter> filters = category.getPoiFilters();
 				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport")) {
+					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
 						for (PoiType poiType : poiFilter.getPoiTypes()) {
 							publicTransportTypes.add(poiType.getKeyName());
 							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
@@ -647,7 +650,23 @@ public class MapSelectionHelper {
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
-		Amenity res = null;
+		Amenity amenity = findAmenityByOsmId(amenities, id);
+		if (amenity == null) {
+			amenity = findAmenityByName(amenities, names);
+		}
+		return amenity;
+	}
+
+	@Nullable
+	public static Amenity findAmenityByOsmId(@NonNull OsmandApplication app, @NonNull LatLon latLon, long osmId) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), AMENITY_SEARCH_RADIUS);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
+
+		return findAmenityByOsmId(amenities, osmId);
+	}
+
+	@Nullable
+	public static Amenity findAmenityByOsmId(@NonNull List<Amenity> amenities, long id) {
 		for (Amenity amenity : amenities) {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
@@ -658,25 +677,25 @@ public class MapSelectionHelper {
 					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
 				}
 				if (amenityId == id && !amenity.isClosed()) {
-					res = amenity;
-					break;
+					return amenity;
 				}
 			}
 		}
-		if (res == null && !Algorithms.isEmpty(names)) {
+		return null;
+	}
+
+	@Nullable
+	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities, @Nullable List<String> names) {
+		if (!Algorithms.isEmpty(names)) {
 			for (Amenity amenity : amenities) {
 				for (String name : names) {
 					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
-						res = amenity;
-						break;
+						return amenity;
 					}
-				}
-				if (res != null) {
-					break;
 				}
 			}
 		}
-		return res;
+		return null;
 	}
 
 	public static boolean isIdFromRelation(long id) {

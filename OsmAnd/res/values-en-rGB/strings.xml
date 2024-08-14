@@ -32,7 +32,6 @@
     <string name="search_favorites">Search favourites</string>
     <string name="favourites_edit_dialog_title">Favourite information</string>
     <string name="save_as_favorites_points">Save as group of favourites</string>
-    <string name="quick_action_add_favorite">Add favourite</string>
     <string name="change_color">Change colour</string>
     <string name="srtm_color_scheme">Colour scheme</string>
     <string name="towards">towards</string>
@@ -199,4 +198,5 @@
     <string name="routing_attr_avoid_highway_name">Avoid motorways</string>
     <string name="routing_attr_allow_private_for_truck_name">Allow private access (lorry)</string>
     <string name="routing_attr_allow_private_for_truck_description">Allow access to private areas for lorries.</string>
+    <string name="gpx_info_distance">Distance: %1$s (%2$s points)</string>
 </resources>

@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -14,7 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -126,7 +128,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		String prefId = preference.getKey();
 		if (HISTORY_INFO.equals(prefId)) {
 			TextView title = holder.itemView.findViewById(android.R.id.title);
@@ -136,7 +138,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 			title.setTextColor(ContextCompat.getColor(app, R.color.color_osm_edit_delete));
 		} else if (ACTIONS.equals(prefId)) {
 			TextView title = holder.itemView.findViewById(android.R.id.title);
-			title.setTypeface(FontCache.getFont(app, getString(R.string.font_roboto_medium)));
+			title.setTypeface(DEFAULT_BOLD);
 		}
 		super.onBindPreferenceViewHolder(preference, holder);
 	}

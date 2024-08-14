@@ -74,6 +74,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	private StateChangedListener<Integer> displayPositionListener;
 	private StateChangedListener<Boolean> distanceByTapListener;
+	private StateChangedListener<Boolean> speedometerListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,15 +116,28 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onResume();
 		updateCard(widgetsCard);
 		updateCard(buttonsCard);
-		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
+
 		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
+		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
+		settings.SHOW_SPEEDOMETER.addListener(getSpeedometerListener());
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
+		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
+		settings.SHOW_SPEEDOMETER.removeListener(getSpeedometerListener());
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	@Override
@@ -327,6 +341,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 			distanceByTapListener = change -> app.runInUIThread(() -> updateCard(otherCard));
 		}
 		return distanceByTapListener;
+	}
+
+	@NonNull
+	private StateChangedListener<Boolean> getSpeedometerListener() {
+		if (speedometerListener == null) {
+			speedometerListener = change -> app.runInUIThread(() -> updateCard(otherCard));
+		}
+		return speedometerListener;
 	}
 
 	@NonNull

@@ -149,6 +149,10 @@ public class UiUtilities {
 		return getLayeredIcon(background, foreground);
 	}
 
+	public void clearCache() {
+		drawableCache.clear();
+	}
+
 	public static Drawable getLayeredIcon(Drawable... icons) {
 		return new LayerDrawable(icons);
 	}
@@ -167,6 +171,11 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
+	}
+
+	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
+		Drawable background = getColoredSelectableDrawable(context, color, 0.3f);
+		AndroidUtils.setBackground(view, background);
 	}
 
 	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {

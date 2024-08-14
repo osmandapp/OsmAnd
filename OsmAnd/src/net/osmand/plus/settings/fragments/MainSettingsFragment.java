@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -28,6 +29,7 @@ import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -83,7 +85,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
@@ -258,8 +260,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		if (activity != null) {
 			String profileKey = args.getString(PROFILE_KEY_ARG);
 			boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
-			ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
-					profileKey, imported);
+			ProfileAppearanceFragment.showInstance(activity, profileKey, imported);
 		}
 	}
 }

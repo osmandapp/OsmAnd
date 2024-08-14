@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui;
 
-import android.graphics.Typeface;
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -52,11 +52,13 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 	private final int activeColor;
 	private final boolean nightMode;
+	private final boolean cloudRestore;
 
-	public BackupTypesAdapter(OsmandApplication app, OnItemSelectedListener listener, boolean nightMode) {
+	public BackupTypesAdapter(OsmandApplication app, OnItemSelectedListener listener, boolean cloudRestore, boolean nightMode) {
 		this.app = app;
 		this.listener = listener;
 		this.nightMode = nightMode;
+		this.cloudRestore = cloudRestore;
 		uiUtilities = app.getUIUtilities();
 		themedInflater = UiUtilities.getInflater(app, nightMode);
 		activeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
@@ -72,9 +74,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		SettingsCategoryItems items = itemsMap.get(category);
 
 		String name = app.getString(category.getTitleId());
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		TextView titleTv = view.findViewById(R.id.title);
-		titleTv.setText(UiUtilities.createCustomFontSpannable(typeface, name, name));
+		titleTv.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, name, name));
 
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getCategoryDescr(category));
@@ -86,8 +87,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		}
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		compoundButton.setChecked(available ? selectedTypes == items.getTypes().size() : false);
+		boolean available = InAppPurchaseUtils.isBackupAvailable(app) || cloudRestore;
+		compoundButton.setChecked(available && selectedTypes == items.getTypes().size());
 		compoundButton.setEnabled(available);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 		View switchContainer = view.findViewById(R.id.switch_container);
@@ -135,7 +136,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
-		boolean showProIcon = !InAppPurchaseUtils.isExportTypeAvailable(app, exportType);
+		boolean showProIcon = !InAppPurchaseUtils.isExportTypeAvailable(app, exportType) && !cloudRestore;
 		setupChildIcon(view, exportType.getIconId(), selected && !showProIcon);
 		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 		view.setOnClickListener(view1 -> {
@@ -175,7 +176,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	}
 
 	public void updateSettingsItems(@NonNull Map<ExportCategory, SettingsCategoryItems> itemsMap,
-									@NonNull Map<ExportType, List<?>> selectedItemsMap) {
+	                                @NonNull Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		this.selectedItemsMap = selectedItemsMap;

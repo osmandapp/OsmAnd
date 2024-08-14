@@ -66,12 +66,10 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/default_speed_system" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<Preference
 		android:key="precise_distance_numbers"
-		android:layout="@layout/preference_switch_with_descr"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/precise_distance_numbers" />
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/distance_during_navigation" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"
@@ -109,7 +107,7 @@
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/use_magnetic_sensor" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="map_empty_state_allowed"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"

@@ -1,9 +1,13 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
+
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
@@ -11,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -35,6 +40,14 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 		} else if (srtmPlugin != null) {
 			originalVisibilityValue = srtmPlugin.getTerrainTransparency();
 		}
+		MapActivity activity = requireMapActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				activity.getSupportFragmentManager().popBackStack();
+				activity.getDashboard().setDashboardVisibility(true, TERRAIN, false);
+			}
+		});
 	}
 
 	@Override
@@ -49,13 +62,14 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 		outState.putInt(VISIBILITY, originalVisibilityValue);
 	}
 
+	@Nullable
 	@Override
 	protected String getToolbarTitle() {
 		return getString(R.string.gpx_visibility_txt);
 	}
 
 	@Override
-	protected void onResetToDefault() {
+	protected void resetToDefault() {
 		srtmPlugin.resetTransparencyToDefault();
 		updateApplyButton(isChangesMade());
 		setupSlider();
@@ -63,17 +77,17 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 	}
 
 	@Override
-	protected void setupMainContent() {
-		View view = themedInflater.inflate(R.layout.terrain_visibility_fragment, null, false);
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		View view = themedInflater.inflate(R.layout.terrain_visibility_fragment, container, false);
 		visibilitySlider = view.findViewById(R.id.transparency_slider);
 		visibilityTv = view.findViewById(R.id.transparency_value_tv);
 
 		setupSlider();
-		contentContainer.addView(view);
+		container.addView(view);
 	}
 
 	@Override
-	protected void onApplyButtonClick() {
+	protected void applyChanges() {
 		originalVisibilityValue = srtmPlugin.getTerrainTransparency();
 	}
 

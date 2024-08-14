@@ -42,6 +42,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
+import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -99,15 +100,14 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = getApplication();
 		touchPoint = new PointF();
 		acceptableTouchRadius = app.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+		createBitmaps(view);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
@@ -125,6 +125,20 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		};
 		addTextSizeListener();
 		updateTextSize();
+	}
+
+	private void createBitmaps(@NonNull OsmandMapTileView view) {
+		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		if (view != null) {
+			createBitmaps(view);
+			updateTextSize();
+		}
 	}
 
 	@Override
@@ -458,7 +472,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		ty.add(end.y);
 
 		linePath.reset();
-		GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+		GeometryWayPathAlgorithms.calculatePath(tileBox, tx, ty, linePath);
 	}
 
 	private void hideDistanceRulerOpenGl() {

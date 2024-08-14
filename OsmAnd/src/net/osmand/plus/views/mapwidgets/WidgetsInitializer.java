@@ -138,7 +138,7 @@ public class WidgetsInitializer {
 			for (String key : widgetKeys) {
 				WidgetType widgetType = WidgetType.getById(key);
 				if (widgetType != null) {
-					MapWidgetInfo widgetInfo = creator.createCustomWidgetInfo(factory, key, widgetType);
+					MapWidgetInfo widgetInfo = creator.createWidgetInfo(factory, key, widgetType);
 					if (widgetInfo != null) {
 						mapWidgetsCache.add(widgetInfo);
 					}

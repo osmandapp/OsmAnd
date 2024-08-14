@@ -83,7 +83,9 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	public interface OnPointsDeleteListener {
-		void onPointsDeletionStarted();
+		default void onPointsDeletionStarted() {
+
+		}
 
 		void onPointsDeleted();
 	}

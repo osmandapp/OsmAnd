@@ -331,7 +331,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
 					if (fileExists && gpxFileNonEmpty) {
 						if (openTrack) {
-							TrackMenuFragment.openTrack(mapActivity, file, null);
+							TrackMenuFragment.openTrack(fragmentActivity, file, null);
 						} else {
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
@@ -375,6 +375,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording() {
+		app.getSavingTrackHelper().onStopRecording();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);

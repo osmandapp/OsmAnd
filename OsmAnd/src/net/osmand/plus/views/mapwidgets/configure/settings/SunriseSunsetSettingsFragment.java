@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import static net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget.formatNextTime;
 import static net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget.formatTimeLeft;
-import static net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState.*;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +18,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -100,7 +100,7 @@ public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragm
 	private void showSunPositionDialog() {
 		CharSequence[] items = new CharSequence[SunPositionMode.values().length];
 		for (int i = 0; i < SunPositionMode.values().length; i++) {
-			items[i] = getString(SunPositionMode.values()[i].getPrefId());
+			items[i] = getString(SunPositionMode.values()[i].getTitleId());
 		}
 
 		AlertDialogData dialogData = new AlertDialogData(timeDescription.getContext(), nightMode)
@@ -114,7 +114,7 @@ public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragm
 	}
 
 	private void updateSunPositionDescription() {
-		sunPositionDescription.setText(getString(SunPositionMode.values()[selectedSunPositionMode].getPrefId()));
+		sunPositionDescription.setText(getString(SunPositionMode.values()[selectedSunPositionMode].getTitleId()));
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState.*;
-
 import android.content.Context;
 import android.view.View;
 
@@ -13,13 +11,16 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +34,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private static final String NEXT_TIME_FORMAT = "HH:mm E";
 
 	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
+	private static final float LOCATION_CHANGE_ACCURACY = 0.0001f; // approximately 10 meters
 
 	private final OsmandMapTileView mapView;
 	private final DayNightHelper dayNightHelper;
@@ -48,7 +50,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
-		dayNightHelper = app.getDaynightHelper();
+		this.dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetState.getWidgetType());
@@ -146,22 +148,23 @@ public class SunriseSunsetWidget extends SimpleWidget {
 		return widgetState != null ? widgetState.getSunPositionPreference() : null;
 	}
 
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+	}
+
 	private void updateCachedLocation() {
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
 		LatLon newCenterLatLon = tileBox.getCenterLatLon();
-		if (!isLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
+		if (!areLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
 			cachedCenterLatLon = newCenterLatLon;
 			isLocationChanged = true;
 		}
 	}
 
-	private boolean isLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
-		if (previousLatLon != null && newLatLon != null) {
-			double lat = previousLatLon.getLatitude();
-			double newLat = newLatLon.getLatitude();
-			return Math.abs(lat - newLat) <= 0.001;
-		}
-		return false;
+	private boolean areLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
+		return MapUtils.areLatLonEqual(previousLatLon, newLatLon, LOCATION_CHANGE_ACCURACY);
 	}
 
 	public long getTimeLeft() {

@@ -191,11 +191,11 @@
     <string name="poi_direction_se">כיוון: דרום מזרח</string>
     <string name="poi_direction_sse">כיוון: דרום - דרום מזרח</string>
     <string name="poi_direction_s">כיוון: דרום</string>
-    <string name="poi_reservation_required">הזמנה: נדרשת</string>
-    <string name="poi_reservation_recommended">הזמנה: מומלצת</string>
-    <string name="poi_reservation_yes">הזמנה: יש</string>
-    <string name="poi_reservation_no">הזמנה: אין</string>
-    <string name="poi_reservation_members_only">הזמנה: חברים בלבד</string>
+    <string name="poi_reservation_required">נדרשת</string>
+    <string name="poi_reservation_recommended">מומלצת</string>
+    <string name="poi_reservation_yes">יש</string>
+    <string name="poi_reservation_no">אין</string>
+    <string name="poi_reservation_members_only">חברים בלבד</string>
     <string name="poi_beds">מיטות</string>
     <string name="poi_boat_rental">סירות להשכרה</string>
     <string name="poi_boat_motorboat_rental_yes">סירות מנוע: יש</string>
@@ -2440,4 +2440,7 @@
     <string name="poi_us_maps_recreation_area_activity_viewing_wildlife">צפייה בחיי בר</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_scenery">צפייה בנוף</string>
     <string name="poi_socket_typee_voltage_filter">מתח מחבר מסוג E‏ (Type E)</string>
+    <string name="poi_us_maps_recreation_area_facility_lighthouse">מגדלור</string>
+    <string name="poi_us_maps_recreation_area_activity_poi">נקודת עניין</string>
+    <string name="poi_us_maps_recreation_area_facility_fire_lookout"></string>
 </resources>

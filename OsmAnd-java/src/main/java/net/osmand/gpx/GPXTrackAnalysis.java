@@ -10,6 +10,7 @@ import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -18,12 +19,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
 
+	// Increase carefully if really necessary! This causes the statistics of all tracks to be recalculated.
+	// Next value is 3!
 	public static final int ANALYSIS_VERSION = 1;
 
 	public String name;
@@ -53,21 +57,21 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public List<PointAttributes> pointAttributes;
-	public Set<String> availableAttributes;
+	public List<PointAttributes> pointAttributes = new ArrayList<>();
+	public Set<String> availableAttributes = new HashSet<>();
 
 	public boolean hasSpeedInTrack = false;
 
-	public Object getGpxParameter(GpxParameter gpxParameter) {
-		Object value = gpxParameter.getDefaultValue();
-		if (parameters.containsKey(gpxParameter)) {
-			value = parameters.get(gpxParameter);
+	public Object getGpxParameter(GpxParameter parameter) {
+		Object value = parameter.getDefaultValue();
+		if (parameters.containsKey(parameter)) {
+			value = parameters.get(parameter);
 		}
 		return value;
 	}
 
-	public void setGpxParameter(GpxParameter gpxParameter, Object value) {
-		parameters.put(gpxParameter, value);
+	public void setGpxParameter(GpxParameter parameter, Object value) {
+		parameters.put(parameter, value);
 	}
 
 	public void setStartTime(long startTime) {
@@ -384,6 +388,12 @@ public class GPXTrackAnalysis {
 	}
 
 	public boolean hasData(String tag) {
+		if (Objects.equals(tag, PointAttributes.SENSOR_TAG_TEMPERATURE)) {
+			return CollectionUtils.containsAny(availableAttributes,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_W,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_A
+			);
+		}
 		return availableAttributes.contains(tag);
 	}
 
@@ -595,10 +605,11 @@ public class GPXTrackAnalysis {
 					totalSensorHrSum += attribute.heartRate;
 				}
 
-				if (attribute.temperature > 0) {
-					setMaxSensorTemperature(Math.max((int) attribute.temperature, getMaxSensorTemperature()));
+				float temperature = attribute.getTemperature();
+				if (temperature > 0) {
+					setMaxSensorTemperature(Math.max((int) temperature, getMaxSensorTemperature()));
 					sensorTemperatureCount++;
-					totalSensorTemperatureSum += attribute.temperature;
+					totalSensorTemperatureSum += temperature;
 				}
 
 				if (attribute.bikePower > 0) {

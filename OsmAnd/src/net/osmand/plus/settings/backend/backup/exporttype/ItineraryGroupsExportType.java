@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,14 @@ class ItineraryGroupsExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return app.getMapMarkersHelper().getVisibleMapMarkersGroups();
+		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getVisibleMapMarkersGroups();
+		if (groups.size() == 1) {
+			MapMarkersGroup group = groups.get(0);
+			if (Algorithms.isEmpty(group.getId()) && Algorithms.isEmpty(group.getMarkers())) {
+				return Collections.emptyList();
+			}
+		}
+		return groups;
 	}
 
 	@NonNull

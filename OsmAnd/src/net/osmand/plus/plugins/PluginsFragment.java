@@ -2,17 +2,14 @@ package net.osmand.plus.plugins;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -24,24 +21,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.ConnectedApp;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
+import net.osmand.plus.plugins.online.OnlineOsmandPlugin;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class PluginsFragment extends BaseOsmAndFragment implements PluginStateListener {
 
@@ -54,10 +49,15 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	private PluginsListAdapter adapter;
 	private LayoutInflater themedInflater;
 	private boolean wasDrawerDisabled;
+	private ProgressBar progressBar;
 
 	@Override
 	public int getStatusBarColorId() {
 		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	public LayoutInflater getThemedInflater() {
+		return themedInflater;
 	}
 
 	@Override
@@ -82,6 +82,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.plugins, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		progressBar = view.findViewById(R.id.progress_bar);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.plugins_screen);
@@ -95,7 +96,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		});
 		UiUtilities.rotateImageByLayoutDirection(closeButton);
 
-		adapter = new PluginsListAdapter(requireContext());
+		adapter = new PluginsListAdapter(this, requireContext());
 
 		ListView listView = view.findViewById(R.id.plugins_list);
 		listView.setAdapter(adapter);
@@ -110,6 +111,18 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				switchEnabled((ConnectedApp) tag);
 			}
 		});
+
+		updateProgressVisibility(true);
+		PluginsHelper.fetchOnlinePlugins(app, plugins -> {
+			for (OnlineOsmandPlugin plugin : plugins) {
+				OsmandPlugin p = PluginsHelper.getPlugin(plugin.getId());
+				if (p == null) {
+					adapter.add(plugin);
+				}
+			}
+			updateProgressVisibility(false);
+		});
+
 		return view;
 	}
 
@@ -136,14 +149,18 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		}
 	}
 
-	private void enableDisablePlugin(OsmandPlugin plugin) {
+	void enableDisablePlugin(OsmandPlugin plugin) {
 		if (PluginsHelper.enablePlugin(getActivity(), app, plugin, !plugin.isEnabled())) {
 			adapter.notifyDataSetChanged();
 			notifyPluginStateListener(plugin);
 		}
 	}
 
-	private void switchEnabled(@NonNull ConnectedApp connectedApp) {
+	void installPlugin(OsmandPlugin plugin) {
+		PluginsHelper.installPlugin(getActivity(), plugin, this::dismissImmediate);
+	}
+
+	void switchEnabled(@NonNull ConnectedApp connectedApp) {
 		app.getAidlApi().switchEnabled(connectedApp);
 		OsmandPlugin plugin = PluginsHelper.getPlugin(connectedApp.getPack());
 		if (plugin != null) {
@@ -159,6 +176,11 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		notifyPluginStateListener(plugin);
 	}
 
+	@Override
+	public void onPluginInstalled(@NonNull OsmandPlugin plugin) {
+		dismissImmediate();
+	}
+
 	private void notifyPluginStateListener(@NonNull OsmandPlugin plugin) {
 		Fragment target = getTargetFragment();
 		if (target instanceof PluginStateListener) {
@@ -166,116 +188,26 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		}
 	}
 
-	protected class PluginsListAdapter extends ArrayAdapter<Object> {
-
-		PluginsListAdapter(Context context) {
-			super(context, R.layout.plugins_list_item, new ArrayList<>());
-			addAll(getFilteredPluginsAndApps());
-		}
-
-		private List<Object> getFilteredPluginsAndApps() {
-			List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
-			List<OsmandPlugin> visiblePlugins = PluginsHelper.getAvailablePlugins();
-
-			for (Iterator<OsmandPlugin> iterator = visiblePlugins.iterator(); iterator.hasNext(); ) {
-				OsmandPlugin plugin = iterator.next();
-				for (ConnectedApp app : connectedApps) {
-					if (plugin.getId().equals(app.getPack())) {
-						iterator.remove();
-					}
-				}
-			}
-			List<Object> list = new ArrayList<>();
-			list.addAll(connectedApps);
-			list.addAll(visiblePlugins);
-
-			return list;
-		}
-
-		@NonNull
-		@Override
-		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-			View view = convertView;
-			if (view == null) {
-				view = themedInflater.inflate(R.layout.plugins_list_item, parent, false);
-			}
-			Context context = view.getContext();
-
-			boolean active = false;
-			int logoContDescId = R.string.shared_string_disable;
-			String name = "";
-
-			ImageButton pluginLogo = view.findViewById(R.id.plugin_logo);
-			ImageView pluginOptions = view.findViewById(R.id.plugin_options);
-			TextView pluginDescription = view.findViewById(R.id.plugin_description);
-
-			Object item = getItem(position);
-			if (item instanceof ConnectedApp) {
-				ConnectedApp app = (ConnectedApp) item;
-				active = app.isEnabled();
-				if (!active) {
-					logoContDescId = R.string.shared_string_enable;
-				}
-				name = app.getName();
-				pluginDescription.setText(R.string.third_party_application);
-				pluginLogo.setImageDrawable(app.getIcon());
-				pluginLogo.setOnClickListener(v -> switchEnabled(app));
-				pluginOptions.setVisibility(View.GONE);
-				pluginOptions.setOnClickListener(null);
-				view.setTag(app);
-			} else if (item instanceof OsmandPlugin) {
-				OsmandPlugin plugin = (OsmandPlugin) item;
-				active = plugin.isEnabled();
-				if (!active) {
-					logoContDescId = plugin.isLocked()
-							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
-				}
-				name = plugin.getName();
-				pluginDescription.setText(plugin.getDescription(false));
-
-				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
-				Drawable pluginIcon = plugin.getLogoResource();
-				if (pluginIcon.getConstantState() != null) {
-					pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
-				}
-				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(pluginIcon, color));
-				pluginLogo.setOnClickListener(v -> enableDisablePlugin(plugin));
-				pluginOptions.setVisibility(View.VISIBLE);
-				pluginOptions.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-				pluginOptions.setOnClickListener(v -> showOptionsMenu(v, plugin));
-				view.setTag(plugin);
-			}
-
-			pluginLogo.setContentDescription(getString(logoContDescId));
-			if (active) {
-				pluginLogo.setBackgroundResource(nightMode ? R.drawable.bg_plugin_logo_enabled_dark : R.drawable.bg_plugin_logo_enabled_light);
-			} else {
-				TypedArray attributes = context.getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
-				pluginLogo.setBackground(attributes.getDrawable(0));
-				attributes.recycle();
-			}
-
-			TextView pluginName = view.findViewById(R.id.plugin_name);
-			pluginName.setText(name);
-			pluginName.setContentDescription(name + " " + getString(active
-					? R.string.item_checked
-					: R.string.item_unchecked));
-
-			return view;
-		}
-	}
-
-	private void showOptionsMenu(View view, OsmandPlugin plugin) {
+	void showOptionsMenu(View view, OsmandPlugin plugin) {
 		PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
-		MenuItem enableDisableItem = optionsMenu.getMenu().add(
-				plugin.isEnabled() ?
-						R.string.shared_string_disable :
-						R.string.shared_string_enable);
-		enableDisableItem.setOnMenuItemClickListener(item -> {
-			enableDisablePlugin(plugin);
-			optionsMenu.dismiss();
-			return true;
-		});
+		if (!plugin.isOnline()) {
+			MenuItem enableDisableItem = optionsMenu.getMenu().add(
+					plugin.isEnabled() ?
+							R.string.shared_string_disable :
+							R.string.shared_string_enable);
+			enableDisableItem.setOnMenuItemClickListener(item -> {
+				enableDisablePlugin(plugin);
+				optionsMenu.dismiss();
+				return true;
+			});
+		} else {
+			MenuItem installItem = optionsMenu.getMenu().add(R.string.shared_string_install);
+			installItem.setOnMenuItemClickListener(item -> {
+				installPlugin(plugin);
+				optionsMenu.dismiss();
+				return true;
+			});
+		}
 
 		SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
 		if (settingsScreenType != null && plugin.isActive()) {
@@ -290,7 +222,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			});
 		}
 
-		if (plugin instanceof CustomOsmandPlugin) {
+		if (!plugin.isOnline() && plugin instanceof CustomOsmandPlugin) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_delete);
 			settingsItem.setOnMenuItemClickListener(item -> {
 				showDeletePluginDialog((CustomOsmandPlugin) plugin);
@@ -315,6 +247,10 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			});
 			builder.show();
 		}
+	}
+
+	private void updateProgressVisibility(boolean visible) {
+		AndroidUiHelper.updateVisibility(progressBar, visible);
 	}
 
 	public void dismissImmediate() {

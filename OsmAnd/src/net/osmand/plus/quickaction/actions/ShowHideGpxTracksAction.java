@@ -20,7 +20,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_GPX_TRACKS_ACTION_ID,
 			"gpx.showhide", ShowHideGpxTracksAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.show_gpx).iconRes(R.drawable.ic_action_polygom_dark).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
@@ -53,14 +53,14 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication app) {
+	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
 		return app.getSelectedGpxHelper().isAnyGpxFileSelected();
 	}
 }

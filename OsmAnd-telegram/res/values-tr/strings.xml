@@ -159,7 +159,7 @@
     <string name="by_distance">Mesafeye göre</string>
     <string name="by_name">Ada göre</string>
     <string name="by_group">Gruba göre</string>
-    <string name="shared_string_sort_by">Sıralama kriteri</string>
+    <string name="shared_string_sort_by">Sıralama ölçütü</string>
     <string name="choose_osmand_desc">Kişilerin haritada görüntüleneceği OsmAnd sürümünü seçin.</string>
     <string name="choose_osmand">Kullanılacak OsmAnd sürümünü seçin</string>
     <string name="disable_all_sharing_desc">Konum paylaşımını tüm seçili sohbetlere kapatır (%1$d).</string>
@@ -275,4 +275,8 @@
     <string name="shared_string_error">Hata</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="send_live_location_error">Canlı konum hatası gönder: %1$s</string>
+    <string name="location_source_summary">Öntanımlı olarak, Google Play\'den kurulan OsmAnd konum belirlemek için Google Play Hizmetlerini kullanır.
+\n
+\nYanlış konum bilgisi alırsanız veya Google Play Hizmetleri olmayan bir aygıt kullanıyorsanız, Android API\'ye geçmeyi deneyin</string>
+    <string name="location_source">Konum kaynağı</string>
 </resources>

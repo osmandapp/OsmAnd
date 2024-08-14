@@ -1,24 +1,19 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.MAPILLARY;
-
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -26,11 +21,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.net.URLDecoder;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -41,6 +32,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
+	private final Map<String, String> additionalInfo;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -48,6 +40,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
+		additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 	}
 
 	@Override
@@ -60,9 +53,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-		Map<String, String> additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
-
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
 		rowsBuilder.setLight(light);
 		rowsBuilder.setLatLon(getLatLon());
@@ -76,7 +66,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
 		if (namesMap.values().size() > 0) {
-			Locale nameLocale = getPreferredNameLocale(app, namesMap.keySet());
+			Locale nameLocale = LocaleHelper.getPreferredNameLocale(app, namesMap.keySet());
 			if (nameLocale == null) {
 				String localeId = (String) namesMap.values().toArray()[0];
 				nameLocale = new Locale(localeId);
@@ -188,58 +178,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
-		Map<String, String> params = new HashMap<>();
-		String imageValue = amenity.getAdditionalInfo("image");
-		String mapillaryValue = amenity.getAdditionalInfo(MAPILLARY);
-		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
-		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
-		if (!Algorithms.isEmpty(imageValue)) {
-			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
-		}
-		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put(MAPILLARY, getDecodedAdditionalInfo(mapillaryValue));
-		}
-		if (!Algorithms.isEmpty(wikidataValue)) {
-			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));
-		}
-		if (!Algorithms.isEmpty(wikimediaValue)) {
-			params.put(Amenity.WIKIMEDIA_COMMONS, getDecodedAdditionalInfo(wikimediaValue));
-		}
-		return params;
-	}
-
-	private String getDecodedAdditionalInfo(String additionalInfo) {
-		try {
-			return URLDecoder.decode(additionalInfo, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			LOG.error(e);
-		}
-		return additionalInfo;
-	}
-
-	@Nullable
-	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
-		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
-		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
-
-		return localeIds.contains(preferredLocaleId)
-				? new Locale(preferredLocaleId)
-				: availablePreferredLocale;
-	}
-
-	@Nullable
-	private static Locale getAvailablePreferredLocale(@NonNull Collection<String> localeIds) {
-		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
-
-		for (int index = 0; index < deviceLanguages.size(); index++) {
-			Locale locale = deviceLanguages.get(index);
-			if (locale != null) {
-				String localeId = locale.getLanguage();
-				if (localeIds.contains(localeId)) {
-					return locale;
-				}
-			}
-		}
-		return null;
+		return AmenityExtensionsHelper.getImagesParams(additionalInfo);
 	}
 }

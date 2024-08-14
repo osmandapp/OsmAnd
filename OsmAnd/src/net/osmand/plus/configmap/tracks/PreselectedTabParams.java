@@ -17,6 +17,7 @@ public class PreselectedTabParams {
 	public static final String PRESELECTED_TRACKS_TAB_NAME = "preselected_tab_name";
 	public static final String PRESELECTED_TRACKS_TAB_TYPE = "preselected_tab_type";
 	public static final String SELECT_ALL_ITEMS_ON_TAB = "select_all_items_on_tab";
+	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 
 	@NonNull
 	private final String name;

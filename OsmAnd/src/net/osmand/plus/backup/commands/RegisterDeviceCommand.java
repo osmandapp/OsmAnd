@@ -25,6 +25,8 @@ import static net.osmand.plus.backup.BackupHelper.STATUS_PARSE_JSON_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SUCCESS;
 
+import android.os.Build;
+
 public class RegisterDeviceCommand extends BackupCommand {
 
 	private final String token;
@@ -57,6 +59,9 @@ public class RegisterDeviceCommand extends BackupCommand {
 			params.put("deviceid", androidId);
 		}
 		params.put("token", token);
+		params.put("brand", Build.BRAND);
+		params.put("model", Build.MODEL);
+		params.put("lang", getApp().getLocaleHelper().getLanguage());
 		OperationLog operationLog = createOperationLog("registerDevice");
 		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error, resultCode) -> {
 			int status;

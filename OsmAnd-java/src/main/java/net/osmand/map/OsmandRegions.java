@@ -42,6 +42,8 @@ public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
 	public static final String ROADS_TYPE = "region_roads";
+	public static final String MAP_JOIN_TYPE = "region_join_map";
+	public static final String ROADS_JOIN_TYPE = "region_join_roads";
 
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
@@ -922,6 +924,19 @@ public class OsmandRegions {
 		return foundObjects;
 	}
 
+	public List<BinaryMapDataObject> getRegionsToDownload(double lat, double lon) throws IOException {
+		List<BinaryMapDataObject> l = new ArrayList<BinaryMapDataObject>();
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		List<BinaryMapDataObject> cs = query(x31, y31);
+		for (BinaryMapDataObject b : cs) {
+			if (contain(b, x31, y31) && !Algorithms.isEmpty(getDownloadName(b))) {
+				l.add(b);
+			}
+		}
+		return l;
+	}
+	
 	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames) throws IOException {
 		keyNames.clear();
 		int x31 = MapUtils.get31TileNumberX(lon);

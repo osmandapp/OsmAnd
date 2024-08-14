@@ -2,19 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:background="?attr/bg_color"
 	android:orientation="vertical"
 	android:clickable="true"
 	android:focusable="true">
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/appbar"
+	<include layout="@layout/simple_toolbar" />
+
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+		android:id="@+id/progress_bar"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
-		<include layout="@layout/global_preference_toolbar" />
-
-	</com.google.android.material.appbar.AppBarLayout>
+		android:layout_height="4dp"
+		android:indeterminate="true"
+		android:visibility="invisible"
+		osmand:mpb_progressStyle="horizontal"
+		osmand:mpb_setBothDrawables="true"
+		osmand:mpb_useIntrinsicPadding="false"
+		tools:visibility="visible" />
 
 	<ListView
 		android:id="@+id/plugins_list"

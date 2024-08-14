@@ -37,8 +37,8 @@ public class QuickActionButtonState extends MapButtonState {
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
 		this.statePref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
-		this.namePref = settings.registerStringPreference(id + "_name", null).makeProfile();
-		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeProfile().storeLastModifiedTime();
+		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
+		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
 		this.fabMarginPref = new FabMarginPreference(settings, id + "_fab_margin");
 	}
 
@@ -98,6 +98,21 @@ public class QuickActionButtonState extends MapButtonState {
 		return fabMarginPref;
 	}
 
+	@NonNull
+	public CommonPreference<Boolean> getStatePref() {
+		return statePref;
+	}
+
+	@NonNull
+	public CommonPreference<String> getNamePref() {
+		return namePref;
+	}
+
+	@NonNull
+	public CommonPreference<String> getQuickActionsPref() {
+		return quickActionsPref;
+	}
+
 	public long getLastModifiedTime() {
 		return quickActionsPref.getLastModifiedTime();
 	}
@@ -128,15 +143,11 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public void resetForMode(@NonNull ApplicationMode appMode) {
 		statePref.resetModeToDefault(appMode);
-		namePref.resetModeToDefault(appMode);
-		quickActionsPref.resetModeToDefault(appMode);
 		fabMarginPref.resetModeToDefault(appMode);
 	}
 
 	public void copyForMode(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode) {
 		statePref.setModeValue(toAppMode, statePref.getModeValue(fromAppMode));
-		namePref.setModeValue(toAppMode, namePref.getModeValue(fromAppMode));
-		quickActionsPref.setModeValue(toAppMode, quickActionsPref.getModeValue(fromAppMode));
 		fabMarginPref.copyForMode(fromAppMode, toAppMode);
 	}
 
@@ -162,5 +173,15 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 		}
 		this.quickActions = resQuickActions;
+	}
+
+	public boolean isDefaultButton() {
+		return Algorithms.stringsEqual(DEFAULT_BUTTON_ID, getId());
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getId();
 	}
 }

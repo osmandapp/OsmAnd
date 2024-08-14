@@ -10,9 +10,17 @@ import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWi
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
+import static net.osmand.plus.routing.GpxApproximator.DEFAULT_POINT_APPROXIMATION;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS_DESCRIPTION;
+import static net.osmand.plus.settings.enums.ApproximationType.APPROX_CPP;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
+import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
+import static net.osmand.plus.settings.enums.WidgetSize.MEDIUM;
+import static net.osmand.plus.settings.enums.WidgetSize.SMALL;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
@@ -51,10 +59,13 @@ import net.osmand.plus.Version;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
@@ -65,7 +76,6 @@ import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -90,6 +100,7 @@ import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.*;
+import net.osmand.plus.settings.enums.TrackApproximationType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -683,6 +694,15 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
+	public void resetLastGlobalPreferencesEditTime() {
+		settingsAPI.edit(globalPreferences).remove(LAST_PREFERENCES_EDIT_TIME).commit();
+	}
+
+	public void resetLastPreferencesEditTime(@NonNull ApplicationMode mode) {
+		Object profilePrefs = getProfilePreferences(mode);
+		settingsAPI.edit(profilePrefs).remove(LAST_PREFERENCES_EDIT_TIME).commit();
+	}
+
 	public void removeFromGlobalPreferences(@NonNull String... prefIds) {
 		SettingsEditor editor = settingsAPI.edit(globalPreferences);
 		for (String prefId : prefIds) {
@@ -831,6 +851,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeProfile().makeShared().cache();
+	public final CommonPreference<Float> VERTICAL_EXAGGERATION_SCALE = registerFloatPreference("vertical_exaggeration_scale", 1f).makeProfile();
 
 	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal().makeShared();
 
@@ -840,6 +861,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
+
+	public final CommonPreference<SpeedLimitWarningState> SHOW_SPEED_LIMIT_WARNING = new EnumStringPreference<>(this, "show_speed_limit_warning", WHEN_EXCEEDED, SpeedLimitWarningState.values()).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -855,7 +878,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> COORDS_INPUT_USE_OSMAND_KEYBOARD = new BooleanPreference(this, "coords_input_use_osmand_keyboard", Build.VERSION.SDK_INT >= 16).makeGlobal().makeShared();
 	public final CommonPreference<Boolean> COORDS_INPUT_TWO_DIGITS_LONGTITUDE = new BooleanPreference(this, "coords_input_two_digits_longitude", false).makeGlobal().makeShared();
 
-	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference(this, "use_fast_recalculation", true).makeProfile().cache();
 	public final CommonPreference<Boolean> FORCE_PRIVATE_ACCESS_ROUTING_ASKED = new BooleanPreference(this, "force_private_access_routing", false).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_CARD_TO_CHOOSE_DRAWER = new BooleanPreference(this, "show_card_to_choose_drawer", false).makeGlobal().makeShared();
@@ -990,7 +1012,6 @@ public class OsmandSettings {
 	}.makeGlobal();
 
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(this, "first_map_is_downloaded", false);
-	public final CommonPreference<MapsSortMode> LOCAL_MAPS_SORT_MODE = new EnumStringPreference<>(this, "local_maps_sort_mode", MapsSortMode.getDefaultSortMode(), MapsSortMode.values()).makeGlobal().makeShared();
 
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
@@ -1151,8 +1172,6 @@ public class OsmandSettings {
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
 			"app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
 
-	public final ListStringPreference CUSTOM_ICON_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_icon_colors", null, ",").makeProfile().cache();
-
 	public final CommonPreference<String> CUSTOM_ICON_COLOR = new StringPreference(this, "custom_icon_color", null).makeProfile().cache();
 
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
@@ -1199,31 +1218,48 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().makeShared().storeLastModifiedTime();
 
-	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
+	public final CommonPreference<String> NAVIGATION_ICON = new StringPreference(this, "navigation_icon", LocationIcon.MOVEMENT_DEFAULT.name()).makeProfile().cache();
 
 	{
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.CAR, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, NavigationIcon.NAUTICAL);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.MOVEMENT_DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.MOVEMENT_DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.MOVEMENT_DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.MOVEMENT_NAUTICAL.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.MOVEMENT_DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.MOVEMENT_DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.MOVEMENT_DEFAULT.name());
 	}
 
-	public final CommonPreference<LocationIcon> LOCATION_ICON = new EnumStringPreference<>(this, "location_icon", LocationIcon.DEFAULT, LocationIcon.values()).makeProfile().cache();
+	public final CommonPreference<String> LOCATION_ICON = new StringPreference(this, "location_icon", LocationIcon.STATIC_DEFAULT.name()).makeProfile().cache();
 
 	{
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.DEFAULT);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.CAR);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.BICYCLE);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.DEFAULT);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.BICYCLE);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.STATIC_DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.STATIC_CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.STATIC_BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.STATIC_DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.STATIC_CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.STATIC_BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.STATIC_BICYCLE.name());
 	}
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference(this, "app_mode_order", 0).makeProfile().cache();
+
+	{
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.DEFAULT, 0);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.CAR, 1);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.BICYCLE, 2);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 3);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.TRUCK, 4);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.MOTORCYCLE, 5);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.MOPED, 6);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, 7);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.TRAIN, 8);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.BOAT, 9);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.AIRCRAFT, 10);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.SKI, 11);
+		APP_MODE_ORDER.setModeDefaultValue(ApplicationMode.HORSE, 12);
+	}
+
 	public final CommonPreference<Integer> APP_MODE_VERSION = new IntPreference(this, "app_mode_version", 0).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
@@ -1277,6 +1313,8 @@ public class OsmandSettings {
 			Version.isGooglePlayEnabled() ? GOOGLE_PLAY_SERVICES : ANDROID_API, LocationSource.values()).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
+
+	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "fix_north_map", false).makeProfile().cache();
 
 
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference(this, "text_scale", 1f).makeProfile().cache();
@@ -1355,6 +1393,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
 	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_LAST_DOWNLOADED_TIME = new LongPreference(this, "backup_last_downloaded_time", 0L).makeGlobal();
 	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> AUTO_BACKUP_ENABLED = new BooleanPreference(this, OsmandBackupAgent.AUTO_BACKUP_ENABLED, true).makeGlobal().makeShared();
@@ -1404,6 +1443,9 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
+	public final CommonPreference<MarkerDisplayOption> VIEW_ANGLE_VISIBILITY = new EnumStringPreference<>(this, "view_angle_visibility", MarkerDisplayOption.RESTING, MarkerDisplayOption.values()).makeProfile().makeShared();
+	public final CommonPreference<MarkerDisplayOption> LOCATION_RADIUS_VISIBILITY = new EnumStringPreference<>(this, "location_radius_visibility", MarkerDisplayOption.RESTING_NAVIGATION, MarkerDisplayOption.values()).makeProfile().makeShared();
+
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference(this, "interrupt_music", false).makeProfile();
 
 	public final CommonPreference<Boolean> ENABLE_PROXY = new BooleanPreference(this, "enable_proxy", false) {
@@ -1450,11 +1492,15 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference(this, "track_storage_directory", 0).makeProfile();
 
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
-	// dev version
-	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference(this, "disable_complex_routing", false).makeProfile();
+
+	public static boolean IGNORE_MISSING_MAPS = false;
+	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_method", HH_CPP, RoutingType.values()).makeProfile().cache();
+	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_type_r48_fallback", APPROX_CPP, ApproximationType.values()).makeProfile().cache();
+
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public boolean simulateNavigation;
+	public boolean simulateNavigationStartedFromAdb;
 	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
 	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 
@@ -1465,6 +1511,23 @@ public class OsmandSettings {
 	{
 		SHOW_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
+
+	public final CommonPreference<Boolean> SHOW_SPEEDOMETER = new BooleanPreference(this, "show_speedometer", false).makeProfile().cache();
+
+	{
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.CAR, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.TRUCK, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.MOTORCYCLE, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.MOPED, true);
+	}
+
+	public final CommonPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
+
+	{
+		SPEEDOMETER_SIZE.setModeDefaultValue(ApplicationMode.CAR, SMALL);
+	}
+
+	public final CommonPreference<Boolean> SHOW_SPEED_LIMIT_WARNINGS = new BooleanPreference(this, "show_speed_limit_warnings", false).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_PEDESTRIAN = new BooleanPreference(this, "show_pedestrian", false).makeProfile().cache();
 
@@ -1563,14 +1626,20 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
-			"current_track_coloring_type", ColoringType.TRACK_SOLID,
-			ColoringType.getTrackColoringTypes().toArray(new ColoringType[0])).makeGlobal().makeShared().cache();
+			"current_track_coloring_type", ColoringType.TRACK_SOLID, ColoringType.valuesOf(ColoringPurpose.TRACK)).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE = new StringPreference(this,
 			"current_track_route_info_attribute", null);
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
-	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_track_colors", null, ",").makeShared().makeGlobal();
+	public final CommonPreference<String> CURRENT_TRACK_3D_VISUALIZATION_TYPE = new StringPreference(this, "currentTrackVisualization3dByType", "none").makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_3D_WALL_COLORING_TYPE = new StringPreference(this, "currentTrackVisualization3dWallColorType", "none").makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_TRACK_3D_LINE_POSITION_TYPE = new StringPreference(this, "currentTrackVisualization3dPositionType", "none").makeGlobal().makeShared().cache();
+	public final CommonPreference<Float> CURRENT_TRACK_ADDITIONAL_EXAGGERATION = new FloatPreference(this, "currentTrackVerticalExaggerationScale", 1f).makeGlobal().makeShared().cache();
+	public final CommonPreference<Float> CURRENT_TRACK_ELEVATION_METERS = new FloatPreference(this, "current_track_elevation_meters", 1000f).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_GRADIENT_PALETTE = new StringPreference(this, "current_track_gradient_palette", PaletteGradientColor.DEFAULT_NAME).makeGlobal().makeShared().cache();
+
+	public final CommonPreference<String> GRADIENT_PALETTES = new StringPreference(this, "gradient_color_palettes", null).makeGlobal().makeShared();
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
 	public final CommonPreference<Boolean> SORT_FAV_BY_DISTANCE = new BooleanPreference(this, "sort_fav_by_distance", false).makeGlobal().makeShared();
 
@@ -1625,6 +1694,8 @@ public class OsmandSettings {
 	}
 
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference(this, "debug_rendering", false).makeGlobal().makeShared();
+
+	public final OsmandPreference<Boolean> DISABLE_MAP_LAYERS = new BooleanPreference(this, "disable_map_layers", false).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference(this, "show_favorites", true).makeProfile().cache();
 
@@ -1695,7 +1766,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public static final int ROTATE_MAP_MANUAL = 3;
 
-	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
+	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_MANUAL).makeProfile().cache();
 
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
@@ -1719,6 +1790,10 @@ public class OsmandSettings {
 
 	public void setCompassMode(@NonNull CompassMode compassMode) {
 		ROTATE_MAP.set(compassMode.getValue());
+	}
+
+	public void setCompassMode(@NonNull CompassMode compassMode, @NonNull ApplicationMode appMode) {
+		ROTATE_MAP.setModeValue(appMode, compassMode.getValue());
 	}
 
 	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
@@ -1800,84 +1875,74 @@ public class OsmandSettings {
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> USE_HH_ROUTING = new BooleanPreference(this, "use_hh_routing", false).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> HH_ROUTING_CPP = new BooleanPreference(this, "hh_routing_cpp", false).makeGlobal().makeShared().cache();
-	public final OsmandPreference<Boolean> USE_V1_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
+
+	public final OsmandPreference<Boolean> USE_DISCRETE_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
 
-	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
-
-		@Override
-		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			if (appMode != null) {
-				String modeValue = json.getString(getId());
-				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
-				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
-			}
-		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
-		}
-	}.makeProfile();
-
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
-		@Override
-		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			if (appMode != null) {
-				String modeValue = json.getString(getId());
-				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
-				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
-			}
-		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
-		}
-	}.makeProfile();
-
-	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
-
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
 			String value = super.getModeValue(mode);
 			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(PAGE_SEPARATOR)));
+				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
 			}
 			return value;
 		}
 	}.makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
 			String value = super.getModeValue(mode);
 			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(PAGE_SEPARATOR)));
+				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
 			}
 			return value;
+		}
+	}.makeProfile();
+
+	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	@Deprecated
+	public final ListStringPreference WIDGET_TOP_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String value = json.getString(getId());
+				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(value));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
+	@Deprecated
+	public final ListStringPreference WIDGET_BOTTOM_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String value = json.getString(getId());
+				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(value));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
 		}
 	}.makeProfile();
 
@@ -1914,7 +1979,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 
@@ -2466,8 +2530,6 @@ public class OsmandSettings {
 	public static final String START_POINT_LON = "start_point_lon";
 	public static final String START_POINT_DESCRIPTION = "start_point_description";
 
-	public static final String INTERMEDIATE_POINTS = "intermediate_points";
-	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description";
 
 	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup";
 	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup";
@@ -2481,11 +2543,6 @@ public class OsmandSettings {
 	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
-	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
-	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
-	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
-	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
-	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
@@ -2734,16 +2791,16 @@ public class OsmandSettings {
 		return impassableRoadsStorage.deletePoint(index);
 	}
 
-	public boolean removeImpassableRoad(LatLon latLon) {
+	public boolean removeImpassableRoad(@NonNull LatLon latLon) {
 		return impassableRoadsStorage.deletePoint(latLon);
 	}
 
-	public boolean moveImpassableRoad(LatLon latLonEx, LatLon latLonNew) {
+	public boolean moveImpassableRoad(@NonNull LatLon latLonEx, @NonNull LatLon latLonNew) {
 		return impassableRoadsStorage.movePoint(latLonEx, latLonNew);
 	}
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeProfile();
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal().makeShared().storeLastModifiedTime();
 
 
 	/**
@@ -3046,14 +3103,15 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
 
-	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_DAY = new IntPreference(this,
-			"route_line_color", ColorDialogs.pallette[0]).cache().makeProfile();
+			"route_line_color", DefaultColors.values()[0].getColor()).cache().makeProfile();
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
-			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
+			"route_line_color_night", DefaultColors.values()[0].getColor()).cache().makeProfile();
 	public final CommonPreference<ColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
-			"route_line_coloring_type", ColoringType.DEFAULT,
-			ColoringType.getRouteColoringTypes().toArray(new ColoringType[0])).cache().makeProfile();
+			"route_line_coloring_type", ColoringType.DEFAULT, ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE)).cache().makeProfile();
+
+	public final CommonPreference<String> ROUTE_GRADIENT_PALETTE = new StringPreference(this, "route_gradient_palette", PaletteGradientColor.DEFAULT_NAME).makeProfile().cache();
+
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
 			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();
@@ -3064,13 +3122,15 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
+	public final CommonPreference<TrackApproximationType> DETAILED_TRACK_GUIDANCE = new EnumStringPreference<>(this, "detailed_track_guidance",
+			TrackApproximationType.MANUAL, TrackApproximationType.values()).makeProfile().makeShared();
+	public final OsmandPreference<Integer> GPX_APPROXIMATION_DISTANCE = new IntPreference(this, "gpx_approximation_distance", DEFAULT_POINT_APPROXIMATION).makeProfile().makeShared();
 
 	// for background service
-	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference(this, "map_activity_enabled", false).makeGlobal();
+	public boolean MAP_ACTIVITY_ENABLED = false;
 
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference(this, "safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
-	public final OsmandPreference<Boolean> APPROX_SAFE_MODE = new BooleanPreference(this, "approx_safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
@@ -3214,6 +3274,15 @@ public class OsmandSettings {
 		return res;
 	}
 
+	public final CommonPreference<Boolean> LAST_CYCLE_ROUTES_NODE_NETWORK_STATE =
+			new BooleanPreference(this, "cycle_routes_last_node_network_state", false).makeProfile();
+
+	public final CommonPreference<String> LAST_MTB_ROUTES_CLASSIFICATION =
+			new StringPreference(this, "mtb_routes_last_classification", MtbClassification.SCALE.attrName).makeProfile();
+
+	public final CommonPreference<String> LAST_HIKING_ROUTES_VALUE =
+			new StringPreference(this, "hiking_routes_last_selected_value", "").makeProfile();
+
 	public final OsmandPreference<Boolean> FAVORITES_FREE_ACCOUNT_CARD_DISMISSED =
 			new BooleanPreference(this, "favorites_free_account_card_dismissed", false).makeGlobal();
 
@@ -3221,4 +3290,5 @@ public class OsmandSettings {
 			new BooleanPreference(this, "configure_profile_free_account_card_dismissed", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> TRIPLTEK_PROMO_SHOWED = new BooleanPreference(this, "tripltek_promo_showed", false).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> HUGEROCK_PROMO_SHOWED = new BooleanPreference(this, "hugerock_promo_showed", false).makeGlobal().makeShared();
 }

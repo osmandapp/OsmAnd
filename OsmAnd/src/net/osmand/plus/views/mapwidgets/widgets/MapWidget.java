@@ -79,6 +79,9 @@ public abstract class MapWidget {
 		}
 	}
 
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+	}
+
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
 						   @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
@@ -106,7 +109,7 @@ public abstract class MapWidget {
 	}
 
 	public boolean isExternal() {
-		return getWidgetType() == null;
+		return getWidgetType() == WidgetType.AIDL_WIDGET;
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {

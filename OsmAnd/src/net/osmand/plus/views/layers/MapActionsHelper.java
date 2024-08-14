@@ -108,7 +108,6 @@ public class MapActionsHelper {
 
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				mapRouteInfoMenu.clearSuggestedMissingMaps();
 				TargetPointsHelper.TargetPoint start = app.getTargetPointsHelper().getPointToStart();
 				if (start != null) {
 					LatLon latLon = new LatLon(start.getLatitude(), start.getLongitude());
@@ -297,11 +296,11 @@ public class MapActionsHelper {
 
 	public void startNavigation() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (settings.getApplicationMode() != routingHelper.getAppMode()) {
+			settings.setApplicationMode(routingHelper.getAppMode(), false);
+		}
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
-//			if (settings.getApplicationMode() != routingHelper.getAppMode()) {
-//				settings.setApplicationMode(routingHelper.getAppMode(), false);
-//			}
 		} else {
 			MapActivity activity = layer.getMapActivity();
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
@@ -311,7 +310,6 @@ public class MapActionsHelper {
 			} else {
 				layer.resetTouchEvent();
 				app.logEvent("start_navigation");
-//				settings.setApplicationMode(routingHelper.getAppMode(), false);
 				app.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);

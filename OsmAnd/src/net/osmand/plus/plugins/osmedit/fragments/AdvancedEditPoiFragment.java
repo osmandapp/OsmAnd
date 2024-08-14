@@ -94,7 +94,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 
 		View addTagButton = view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(v -> {
-			mAdapter.addTagView("", "");
+			mAdapter.addTagView("", "", true);
 			scrollToBottom(view);
 		});
 
@@ -217,7 +217,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 						|| tag.getKey().equals(currentPoiTypeKey)) {
 					continue;
 				}
-				addTagView(tag.getKey(), tag.getValue());
+				addTagView(tag.getKey(), tag.getValue(), false);
 			}
 			if (linearLayout.getChildCount() != 0) {
 				View v = linearLayout.getChildAt(0);
@@ -232,7 +232,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			editPoiData.setIsInEdit(false);
 		}
 
-		public void addTagView(@NonNull String tag, @NonNull String value) {
+		public void addTagView(@NonNull String tag, @NonNull String value, boolean isNew) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.list_item_poi_tag, null, false);
 
@@ -250,7 +250,9 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			tagEditText.setText(tag);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
-//			showKeyboard(tagEditText);
+			if (isNew) {
+				showKeyboard(tagEditText);
+			}
 
 			String[] previousTag = {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {

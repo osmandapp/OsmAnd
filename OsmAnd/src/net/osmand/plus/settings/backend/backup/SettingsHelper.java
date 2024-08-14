@@ -10,7 +10,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -43,7 +43,7 @@ import java.util.Map;
 
 public abstract class SettingsHelper {
 
-	public static final int VERSION = 1;
+	public static final int VERSION = 3;
 
 	public static final String EXPORT_TYPE_LIST_KEY = "export_type_list_key";
 	public static final String REPLACE_KEY = "replace";

@@ -20,8 +20,8 @@ public class TakeAudioNoteAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(TAKE_AUDIO_NOTE_ACTION_ID,
 			"audio.note", TakeAudioNoteAction.class).
-			nameRes(R.string.quick_action_take_audio_note).iconRes(R.drawable.ic_action_micro_dark).nonEditable().
-			category(QuickActionType.CREATE_CATEGORY);
+			nameRes(R.string.quick_action_audio_note).iconRes(R.drawable.ic_action_micro_dark).nonEditable().
+			category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
 
 	public TakeAudioNoteAction() {
 		super(TYPE);

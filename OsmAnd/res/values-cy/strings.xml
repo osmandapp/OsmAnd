@@ -242,11 +242,7 @@
     <string name="quick_action_map_style_action">Ychwanegu arddull map</string>
     <string name="quick_action_add_category">Ychwanegu categori</string>
     <string name="dialog_add_action_title">Ychwanegu gweithred</string>
-    <string name="quick_action_add_favorite">Ychwanegu Ffefryn</string>
     <string name="quick_action_new_action">Ychwanegu gweithred</string>
-    <string name="quick_action_add_parking">Ychwanegu man parcio</string>
-    <string name="quick_action_add_osm_bug">Ychwanegu Nodyn OSM</string>
-    <string name="quick_action_add_poi">Ychwanegu pwynt o ddiddordeb</string>
     <string name="quick_action_item_action">Gweithred %d</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%1$.1f o %2$.1f MB</string>
@@ -722,7 +718,6 @@
     <string name="driving_region_descr">Dewisa gyfandir gyrru: DU, Ewrop, UDA, Asia, ac eraill.</string>
     <string name="driving_region">Rhanbarth gyrru</string>
     <string name="driving_region_europe_asia">Ewrop, Asia, De America, a thebyg</string>
-    <string name="driving_region_uk">DU, India, a thebyg</string>
     <string name="speak_street_names">Enwau strydoedd (TTS)</string>
     <string name="speak_traffic_warnings">Rhybuddion traffig</string>
     <string name="clear_intermediate_points">Clirio cyrchfannau ar y ffordd</string>
@@ -1665,7 +1660,6 @@
 \n</string>
     <string name="save_global_track_interval_descr">Noda\'r ysbaid logio ar gyfer recordio traciau cyffredinol (caiff ei droi ymlaen gyda\'r teclyn \'Recordio taith\' ar y map).</string>
     <string name="simplified_track_description">Dim ond llinell y llwybr caiff ei gadw. Caiff y cyfeirbwyntiau eu dileu.</string>
-    <string name="quick_action_add_gpx">Ychwanegu cyfeirbwynt i\'r trac</string>
     <string name="context_menu_item_add_waypoint">Ychwanegu cyfeirbwynt i\'r trac</string>
     <string name="empty_state_my_tracks_desc">Mewnforio neu recordio ffeiliau traciau</string>
     <string name="empty_state_my_tracks">Ychwanegu ffeiliau traciau</string>
@@ -1718,7 +1712,6 @@
     <string name="online_photos">Lluniau arlein</string>
     <string name="no_overlay">Dim troshaen</string>
     <string name="no_underlay">Dim is-haen</string>
-    <string name="quick_action_add_destination">Gosodwch pen y daith</string>
     <string name="parking_options">Dewisiadau parcio</string>
     <string name="nautical_maps">Mapiau morwrol</string>
     <string name="do_not_show_startup_messages">Peidio â dangos negeseuon wrth ddechrau</string>
@@ -1825,7 +1818,7 @@
     <string name="shared_string_currently_recording_track">Yn recordio trac ar hyn o bryd</string>
     <string name="shared_string_show_all">Dangos y cwbl</string>
     <string name="shared_string_my_location">Fy Lleoliad</string>
-    <string name="shared_string_my_places">Fy Llefydd</string>
+    <string name="shared_string_my_places">Fy llefydd</string>
     <string name="shared_string_show_on_map">Dangos ar y map</string>
     <string name="track_segments">Segmentau trac</string>
     <string name="route_points">Pwyntiau\'r llwybr</string>
@@ -2147,7 +2140,6 @@
     <string name="reports_for">Adroddiadau am</string>
     <string name="shared_string_move_up">Symud ↑</string>
     <string name="routing_attr_allow_motorway_name">Defnyddio traffyrdd</string>
-    <string name="quick_action_replace_destination">Newid y gyrchfan</string>
     <string name="routing_attr_allow_motorway_description">Mae\'n caniatau traffyrdd.</string>
     <string name="configure_screen_quick_action">Gweithred gyflym</string>
     <string name="quick_action_map_overlay_title">Troshaenau mapiau</string>
@@ -2369,7 +2361,6 @@
     <string name="lang_an">Aragoneg</string>
     <string name="rendering_value_default_name">Rhagosodedig</string>
     <string name="quick_action_item_screen">Sgrin %d</string>
-    <string name="quick_action_add_marker">Ychwanegu nod map</string>
     <string name="welmode_download_maps">Lawrlwytho mapiau</string>
     <string name="live_monitoring_url">URL tracio arlein</string>
     <string name="live_monitoring_interval">Ysbaid tracio arlein</string>
@@ -2964,7 +2955,6 @@
     <string name="osm_edits_view_descr">Gweld dy holl olygiadau heb eu llwytho i fyny eto neu fygiau OSM yn %1$s. Ni fydd newidiadau sydd wedi\'u llwytho i fyny eisoes yn ymddangos mwyach.</string>
     <string name="all_next_segments_will_be_recalc">Bydd yr holl segmentau dilynol yn cael eu hailgyfrifo gan ddefnyddio\'r proffil a ddewiswyd.</string>
     <string name="shared_string_uninstall_and_restart">Dadosod ac Ailgychwyn</string>
-    <string name="quick_action_remove_next_destination">Dileu\'r pwynt cyrchfan agosaf</string>
     <string name="routing_attr_length_description">Nodwch hyd y cerbyd sydd i\'w ganiatáu ar y llwybrau.</string>
     <string name="select_data_to_import">Dewis y data i\'w fewnforio.</string>
     <string name="no_recalculation_setting">Dim ailgyfrifo</string>
@@ -3475,7 +3465,6 @@
     <string name="make_round_trip_descr">Ychwanegu copi o\'r pwynt gadael fel cyrchfan.</string>
     <string name="add_intermediate_point">Ychwanegu canolradd</string>
     <string name="intermediate_waypoint">Pwynt canolradd</string>
-    <string name="quick_action_add_first_intermediate">Ychwanegu\'r rhyngol cyntaf</string>
     <string name="last_intermediate_dest_description">Yn ychwanegu stop canolradd</string>
     <string name="application_dir_change_warning3">Symud ffeiliau data OsmAnd i\'r gyrchfan newydd\?</string>
     <string name="subsequent_dest_description">Symud y gyrchfan i fyny, a\'i greu</string>
@@ -4168,4 +4157,6 @@
     <string name="help_article_start_with_first_steps_name">Camau cyntaf</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Recordio traciau</string>
     <string name="ant_plus_searching">Wrthi\'n chwilio</string>
+    <string name="shared_string_weather">Tywydd</string>
+    <string name="maps_and_resources">Mapiau ac adnoddau</string>
 </resources>

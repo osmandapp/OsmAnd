@@ -118,7 +118,9 @@ public class RenderingIcons {
 
 	@Nullable
 	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		String subType = amenity.getSubType();
+		String[] subtypes = subType.split(";");//multivalued
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(subtypes[0]);
 		return poiType != null ? getIconNameForPoiType(poiType) : null;
 	}
 

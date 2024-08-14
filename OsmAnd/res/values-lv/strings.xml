@@ -849,7 +849,6 @@
     <string name="driving_region_us">ASV</string>
     <string name="driving_region_canada">Kanāda</string>
     <string name="driving_region_europe_asia">Eiropa, Āzija, Latīņamerika</string>
-    <string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
     <string name="speak_title">Paziņot…</string>
     <string name="speak_descr">Ziņot ielu nosaukumus, satiksmes brīdinājumus (stop zīmes, ātrumvaļņus), ātruma kameras un ierobežojumus.</string>
     <string name="speak_street_names">Ielu nosaukumi (TTS)</string>
@@ -2024,21 +2023,12 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
 Lūdzu ievadiet pilnu kodu</string>
     <string name="navigate_point_olc_info_area">Korekts pilns OLC
 Apraksta laukumu: %1$s x %2$s</string>
-    <string name="quick_action_add_marker">Pievienot marķieri</string>
-    <string name="quick_action_add_poi">Pievienot POI</string>
-    <string name="quick_action_map_style">Mainīt kartes stilu</string>
     <string name="quick_action_map_style_switch">Kartes stils ir nomainīts uz \"%s\".</string>
-    <string name="quick_action_take_audio_note">Sākt audio piezīmi</string>
-    <string name="quick_action_take_video_note">Sākt video piezīmi</string>
-    <string name="quick_action_take_photo_note">Sākt foto piezīmi</string>
-    <string name="quick_action_add_osm_bug">Pievienot OSM kļūdu</string>
     <string name="quick_action_navigation_voice">Balss ieslēgt/izslēgt</string>
     <string name="quick_action_navigation_voice_off">Balss ir izslēgta</string>
     <string name="quick_action_navigation_voice_on">Balss ir ieslēgta</string>
-    <string name="quick_action_add_parking">Pievienot stāvvietu</string>
     <string name="quick_action_new_action">Pievienot darbību</string>
     <string name="quick_action_edit_action">Labot darbību</string>
-    <string name="quick_action_add_favorite">Pievienot favorītu</string>
     <string name="dialog_add_action_title">Pievienot darbību</string>
     <string name="quick_actions_delete">Dzēst darbību</string>
     <string name="quick_actions_delete_text">Vai vēlaties dzēst darbību \"%s\"?</string>
@@ -2072,15 +2062,12 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_map_style_action">Pievienot kartes stilu</string>
     <string name="quick_action_empty_param_error">Parametriem nevajadzētu būt tukšiem</string>
     <string name="quick_action_map_styles">Kartes stili</string>
-    <string name="quick_action_map_overlay">Nomainīt kartes virsklāju</string>
     <string name="quick_action_map_overlay_title">Kartes virsklāji</string>
     <string name="quick_action_map_overlay_action">Pievienot virsklāju</string>
     <string name="quick_action_map_overlay_switch">Kartes virsklājs tika nomainīts uz \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Kartes apakšklājs tika nomainīts uz \"%s\".</string>
-    <string name="quick_action_map_underlay">Nomainīt kartes apakšklāju</string>
     <string name="quick_action_map_underlay_title">Kartes apakšklāji</string>
     <string name="quick_action_map_underlay_action">Pievienot apakšklāju</string>
-    <string name="quick_action_map_source">Nomainīt kartes avotu</string>
     <string name="quick_action_map_source_title">Kartes avoti</string>
     <string name="quick_action_map_source_action">Pievienot kartes avotu</string>
     <string name="quick_action_map_source_switch">Kartes avots tika nomainīts uz \"%s\".</string>
@@ -2181,9 +2168,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām teritorijām.</string>
     <string name="animate_my_location_desc">Navigācijas laikā iespējot kartes rotēšanu ap manu atrašanās vietu.</string>
     <string name="quick_action_auto_zoom_desc">Ieslēdz vai izslēdz automātisko tālummaiņu, atkarībā no kustības ātruma.</string>
-    <string name="quick_action_add_destination">Pievienot mērķi</string>
-    <string name="quick_action_replace_destination">Nomainīt mērķi</string>
-    <string name="quick_action_add_first_intermediate">Pievienot pirmo starppunktu</string>
     <string name="quick_action_add_destination_desc">Spiežot šo darbības pogu, ekrāna centrs kļūst par galamērķi, bet iepriekš izvēlētais galamērķis par pēdējo starppunktu.</string>
     <string name="quick_action_replace_destination_desc">Poga ekrāna centra iestatīšanai par jauno galamērķi, nomainot iepriekšējo galamērķi (ja tāds bija).</string>
     <string name="quick_action_add_first_intermediate_desc">Spiežot šo darbības pogu, ekrāna centrs kļūst par pirmo starppunku maršrutā.</string>

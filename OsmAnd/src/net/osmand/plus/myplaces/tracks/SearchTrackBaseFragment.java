@@ -38,6 +38,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.MapUtils;
 
@@ -172,8 +173,8 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	protected void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.app_bar_main_light));
-		setStatusBarBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light));
+		appbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+		setStatusBarBackgroundColor(ColorUtilities.getStatusBarColor(app, nightMode));
 	}
 
 	protected void setStatusBarBackgroundColor(@ColorInt int color) {

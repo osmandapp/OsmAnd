@@ -476,6 +476,9 @@ public abstract class InAppPurchaseHelper {
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}
+			if (userRequested) {
+				ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
+			}
 			return new String[] {activeSubscriptionsIds, subscriptionsState};
 		}
 
@@ -701,10 +704,12 @@ public abstract class InAppPurchaseHelper {
 
 	protected void addUserInfo(Map<String, String> parameters) {
 		parameters.put("version", Version.getFullVersion(ctx));
-		parameters.put("lang", ctx.getLanguage() + "");
-		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");
-		parameters.put("ns", ctx.getAppInitializer().getNumberOfStarts() + "");
-		parameters.put("aid", ctx.getUserAndroidId());
+		parameters.put("lang", ctx.getLanguage());
+		parameters.put("nd", String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
+		parameters.put("ns", String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
+		if (ctx.isUserAndroidIdAllowed()) {
+			parameters.put("aid", ctx.getUserAndroidId());
+		}
 	}
 
 	protected void onPurchaseDone(PurchaseInfo info) {
@@ -757,6 +762,8 @@ public abstract class InAppPurchaseHelper {
 				}
 			});
 
+			sendPurchaseComplete(info);
+
 		} else if (fullVersion != null && info.getSku().contains(fullVersion.getSku())) {
 			// bought full version
 			fullVersion.setPurchaseState(PurchaseState.PURCHASED);
@@ -764,6 +771,8 @@ public abstract class InAppPurchaseHelper {
 			logDebug("Full version purchased.");
 			showToast(ctx.getString(R.string.full_version_thanks));
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+
+			sendPurchaseComplete(info);
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 			notifyItemPurchased(fullVersion.getSku(), false);
@@ -779,6 +788,8 @@ public abstract class InAppPurchaseHelper {
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 			ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
+			sendPurchaseComplete(info);
+
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
 			notifyItemPurchased(depthContours.getSku(), false);
 			stop(true);
@@ -790,6 +801,8 @@ public abstract class InAppPurchaseHelper {
 			logDebug("Contours lines purchased.");
 			showToast(ctx.getString(R.string.contour_lines_thanks));
 			ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
+
+			sendPurchaseComplete(info);
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES);
 			notifyItemPurchased(contourLines.getSku(), false);
@@ -838,7 +851,20 @@ public abstract class InAppPurchaseHelper {
 		}
 	}
 
-	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, OnRequestResultListener listener) {
+	private void sendPurchaseComplete(@NonNull PurchaseInfo info) {
+		try {
+			String url = "https://osmand.net/api/purchase-complete";
+			Map<String, String> params = new HashMap<>();
+			params.put("purchaseId", info.getSku().get(0));
+			params.put("orderId", info.getOrderId());
+			addUserInfo(params);
+			AndroidNetworkUtils.sendRequestAsync(ctx, url, params, "Sending purchase complete...", false, false, null);
+		} catch (Exception e) {
+			logError("SendPurchaseComplete Error", e);
+		}
+	}
+
+	protected void sendTokens(@NonNull List<PurchaseInfo> purchaseInfoList, @Nullable OnRequestResultListener listener) {
 		String userId = ctx.getSettings().BILLING_USER_ID.get();
 		String token = ctx.getSettings().BILLING_USER_TOKEN.get();
 		String email = ctx.getSettings().BILLING_USER_EMAIL.get();

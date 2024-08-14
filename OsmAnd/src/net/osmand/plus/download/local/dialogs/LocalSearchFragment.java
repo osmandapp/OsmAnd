@@ -32,9 +32,10 @@ import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.enums.MapsSortMode;
+import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -194,8 +195,8 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 
 	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type == MAP_DATA) {
-			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
-			Collections.sort(items, new MapsComparator(app, sortMode));
+			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
+			Collections.sort(items, new LocalItemsComparator(app, sortMode));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
 			Collections.sort(items, (o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));

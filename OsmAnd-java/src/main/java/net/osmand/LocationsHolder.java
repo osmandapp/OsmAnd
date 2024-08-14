@@ -130,6 +130,14 @@ public class LocationsHolder {
 		}
 	}
 
+	public long getTime(int index) {
+		if (this.locationType == LOCATION_TYPE_WPTPT) {
+			return wptPtList.get(index).time;
+		} else {
+			return 0;
+		}
+	}
+
 	public LatLon getLatLon(int index) {
 		if (this.locationType == LOCATION_TYPE_LATLON) {
 			return latLonList.get(index);

@@ -17,7 +17,6 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
@@ -27,35 +26,22 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.RouteExporter;
-import net.osmand.router.RouteImporter;
-import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.*;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
-import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MeasurementEditingContext.class);
 	public static final ApplicationMode DEFAULT_APP_MODE = ApplicationMode.DEFAULT;
+	private static final int MIN_METERS_BETWEEN_INTERMEDIATES = 100;
 
 	private final OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
@@ -82,6 +68,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private ApplicationMode appMode;
 	private boolean calculatedTimeSpeed;
 	private boolean checkApproximation = true;
+	private boolean insertIntermediates;
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -186,6 +173,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public void setShouldCheckApproximation(boolean checkApproximation) {
 		this.checkApproximation = checkApproximation;
+	}
+
+	public void setInsertIntermediates(boolean insertIntermediates) {
+		if (this.insertIntermediates != insertIntermediates) {
+			this.insertIntermediates = insertIntermediates;
+			recalculateRouteSegments(DEFAULT_APP_MODE);
+		}
 	}
 
 	public List<List<WptPt>> getOriginalSegmentPointsList() {
@@ -359,7 +353,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	@NonNull
 	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
-		List<WptPt> allPoints = getAllBeforePoints();
+		List<WptPt> beforePoints = getPoints();
+		List<WptPt> allBeforePoints = getAllBeforePoints();
+		List<WptPt> allPoints = beforePoints.size() > 2 ? beforePoints : allBeforePoints;
 		List<WptPt> segment = new ArrayList<>();
 		String prevProfileType = null;
 		for (WptPt point : allPoints) {
@@ -442,8 +438,17 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			roadSegmentData.clear();
 			changed = true;
 		} else {
+			String modeKey = mode.getStringKey();
+			boolean isDefaultMode = modeKey.equals(DEFAULT_APP_MODE.getStringKey());
 			for (Pair<WptPt, WptPt> pair : getOrderedRoadSegmentDataKeys()) {
-				if (mode.getStringKey().equals(pair.first.getProfileType())) {
+				String pointModeKey = pair.first.getProfileType();
+				boolean recalculateStraightSegment = isDefaultMode
+						&& (pointModeKey == null || modeKey.equals(pointModeKey))
+						&& shouldAddIntermediates(pair.first, pair.second);
+				if (recalculateStraightSegment) {
+					roadSegmentData.remove(pair);
+					changed = true;
+				} else if (modeKey.equals(pointModeKey)) {
 					RoadSegmentData data = roadSegmentData.get(pair);
 					if (data != null) {
 						roadSegmentData.remove(pair);
@@ -724,14 +729,22 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return false;
 	}
 
+	@NonNull
 	public ApplicationMode getSelectedPointAppMode() {
 		return getPointAppMode(selectedPointPosition);
 	}
 
+	@NonNull
 	public ApplicationMode getBeforeSelectedPointAppMode() {
 		return getPointAppMode(Math.max(selectedPointPosition - 1, 0));
 	}
 
+	@NonNull
+	public ApplicationMode getLastPointAppMode() {
+		return getPointAppMode(getPointsCount() - 1);
+	}
+
+	@NonNull
 	private ApplicationMode getPointAppMode(int pointPosition) {
 		String profileType = getPoints().get(pointPosition).getProfileType();
 		return ApplicationMode.valueOfStringKey(profileType, DEFAULT_APP_MODE);
@@ -745,8 +758,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (progressListener != null && !routingHelper.isRouteBeingCalculated()) {
 			RouteCalculationParams params = getParams(true);
 			if (params != null) {
-				routingHelper.startRouteCalculationThread(params);
 				application.runInUIThread(() -> progressListener.showProgressBar());
+				routingHelper.startRouteCalculationThread(params);
 			}
 		}
 	}
@@ -758,7 +771,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				WptPt startPoint = points.get(i);
 				WptPt endPoint = points.get(i + 1);
 				Pair<WptPt, WptPt> pair = new Pair<>(startPoint, endPoint);
-				if (roadSegmentData.get(pair) == null && (startPoint.hasProfile() || hasRoute())) {
+
+				boolean calculate = roadSegmentData.get(pair) == null
+						&& (startPoint.hasProfile() || hasRoute() || shouldAddIntermediates(startPoint, endPoint));
+				if (calculate) {
 					res.add(pair);
 				}
 			}
@@ -784,12 +800,15 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (points.size() > 1) {
 			for (int i = 0; i < points.size(); i++) {
 				WptPt point = points.get(i);
+				WptPt nextPoint = i + 1 < points.size() ? points.get(i + 1) : null;
+
 				s.points.add(point);
 				String profileType = point.getProfileType();
-				if (profileType != null) {
-					boolean isDefault = profileType.equals(DEFAULT_APP_MODE.getStringKey());
+				boolean addIntermediates = nextPoint != null && shouldAddIntermediates(point, nextPoint);
+				if (profileType != null || addIntermediates) {
+					boolean isDefault = profileType == null || profileType.equals(DEFAULT_APP_MODE.getStringKey());
 					boolean isGap = point.isGap();
-					if (defaultMode && !isDefault && !isGap) {
+					if (defaultMode && (!isDefault || addIntermediates) && !isGap) {
 						roadSegmentIndexes.add(segments.size() - 1);
 						defaultMode = false;
 					}
@@ -933,27 +952,20 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
-	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
-		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
+	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
+                                 ApplicationMode mode, boolean useExternalTimestamps) {
+		if (gpxApproximation == null ||
+				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
 			return null;
 		}
+
+		calculatedTimeSpeed = useExternalTimestamps;
+
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		WptPt firstOriginalPoint = originalPoints.get(0);
 		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
-		int originalPointIndex = -1;
-		long lastOriginalPointTime = 0;
-		double dist = 0;
-		WptPt originalPoint = null;
-		List<RouteSegmentResult> pendingSegments = new ArrayList<>();
-		boolean modifySegments = useExternalTimestamps && firstOriginalPoint.time > 0 && lastOriginalPoint.time > 0;
-		if (modifySegments) {
-			originalPointIndex = 1;
-			lastOriginalPointTime = firstOriginalPoint.time;
-			originalPoint = originalPoints.get(originalPointIndex);
-		}
 		List<WptPt> routePoints = new ArrayList<>();
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
-		WptPt addedPoint = null;
 		for (int i = 0; i < gpxPoints.size(); i++) {
 			GpxPoint gp1 = gpxPoints.get(i);
 			boolean lastGpxPoint = MeasurementEditingContextUtils.isLastGpxPoint(gpxPoints, i);
@@ -965,88 +977,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					segments.add(seg);
 				}
 			}
-			List<RouteSegmentResult> modifiedSegments = new ArrayList<>();
 			boolean duplicatePoint = needDuplicatePoint(gpxPoints, i);
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
-				if (!modifySegments) {
-					MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
-				} else {
-					int ind = seg.getStartPointIndex();
-					boolean plus = seg.isForwardDirection();
-					float[] heightArray = seg.getObject().calculateHeightArray();
-					boolean segmentAdded = false;
-					while (ind != seg.getEndPointIndex()) {
-						WptPt prevAddedPoint = addedPoint;
-						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-						if (prevAddedPoint != null) {
-							dist += MapUtils.getDistance(prevAddedPoint.lat, prevAddedPoint.lon, addedPoint.lat, addedPoint.lon);
-						}
-						ind = plus ? ind + 1 : ind - 1;
-						if (originalPoint != null && MapUtils.getDistance(originalPoint.lat, originalPoint.lon, addedPoint.lat, addedPoint.lon) < 20) {
-							if (ind != seg.getEndPointIndex()) {
-							/* Could be used for more precise estimation
-							RouteSegmentResult newSeg = new RouteSegmentResult(seg.getObject(), seg.getStartPointIndex(), ind);
-							modifiedSegments.add(newSeg);
-							pendingSegments.add(newSeg);
-							seg = new RouteSegmentResult(seg.getObject(), ind, seg.getEndPointIndex());
-							*/
-							} else {
-								modifiedSegments.add(seg);
-								pendingSegments.add(seg);
-								segmentAdded = true;
-							}
-							long originalPointTime = originalPoint.time;
-							if (originalPointIndex + 1 < originalPoints.size()) {
-								originalPoint = originalPoints.get(++originalPointIndex);
-							}
-							if (originalPointTime > 0 && originalPointTime > lastOriginalPointTime
-									&& originalPoint != lastOriginalPoint && originalPoint.time > originalPointTime) {
-								double speed = dist / ((originalPointTime - lastOriginalPointTime) / 1000.0);
-								if (speed > 0 && !pendingSegments.isEmpty()) {
-									for (RouteSegmentResult segment : pendingSegments) {
-										segment.setSegmentSpeed((float) speed);
-									}
-									dist = 0;
-									pendingSegments.clear();
-									lastOriginalPointTime = originalPointTime;
-								}
-							}
-						}
-					}
-					if (!segmentAdded) {
-						modifiedSegments.add(seg);
-						pendingSegments.add(seg);
-					}
-					if (lastGpxPoint && k == segments.size() - 1) {
-						WptPt prevAddedPoint = addedPoint;
-						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-						if (prevAddedPoint != null) {
-							dist += MapUtils.getDistance(prevAddedPoint.lat, prevAddedPoint.lon, addedPoint.lat, addedPoint.lon);
-						}
-						if (originalPoint != null) {
-							long originalPointTime = lastOriginalPoint.time;
-							if (originalPointTime > 0 && originalPointTime > lastOriginalPointTime) {
-								double speed = dist / ((originalPointTime - lastOriginalPointTime) / 1000.0);
-								if (speed > 0) {
-									for (RouteSegmentResult segment : pendingSegments) {
-										segment.setSegmentSpeed((float) speed);
-									}
-									dist = 0;
-									pendingSegments.clear();
-									lastOriginalPointTime = originalPointTime;
-								}
-							}
-						}
-					}
-					if (duplicatePoint && k == segments.size() - 1) {
-						MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-					}
-				}
-			}
-			if (modifySegments) {
-				segments = modifiedSegments;
+				MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
 			}
 			allSegments.addAll(segments);
 
@@ -1075,21 +1010,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 		}
 
-		if (modifySegments) {
-			RouteResultPreparation.recalculateTimeDistance(allSegments);
-			/* Could be used after split segments
-			RouteResultPreparation preparation = new RouteResultPreparation();
-			for (RouteSegmentResult r : allSegments) {
-				r.setTurnType(null);
-				r.setDescription("");
-			}
-			preparation.prepareTurnResults(gpxApproximation.ctx, allSegments);
-			*/
-			calculatedTimeSpeed = true;
-		} else {
-			calculatedTimeSpeed = false;
-		}
-
 		double calculatedDuration = 0;
 		for (RouteSegmentResult s : allSegments) {
 			calculatedDuration += s.getSegmentTime();
@@ -1112,7 +1032,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		List<RouteSegmentResult> routeToTarget = gpxPoints.get(index).routeToTarget;
 		List<RouteSegmentResult> routeToTargetNext = gpxPoints.get(index + 1).routeToTarget;
-		return routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
+		return !Algorithms.isEmpty(routeToTarget) && !Algorithms.isEmpty(routeToTargetNext)
+				&& routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
 				.equals(routeToTargetNext.get(0).getStartPoint());
 	}
 
@@ -1191,10 +1112,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
-			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-			}
-
-			@Override
 			public void onCalculationFinish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;
@@ -1202,7 +1119,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		};
 		params.alternateResultListener = route -> {
 			List<Location> locations = route.getRouteLocations();
-			ArrayList<WptPt> pts = new ArrayList<>(locations.size());
+			List<WptPt> pts = new ArrayList<>(locations.size());
 			double prevAltitude = Double.NaN;
 			for (Location loc : locations) {
 				WptPt pt = new WptPt();
@@ -1220,6 +1137,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			params.calculationProgressListener.onUpdateCalculationProgress(0);
 			List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 			if (Algorithms.isEmpty(originalRoute)) {
+				if (pts.size() >= 2 && insertIntermediates) {
+					pts = insertIntermediatePoints(pts);
+				}
 				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
 						DEFAULT_APP_MODE.getDefaultSpeed(), new LocationsHolder(pts).getLatLonList()));
 			}
@@ -1332,6 +1252,61 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			firstPointIndex = lastPointIndex + 1;
 		}
 		return res;
+	}
+
+	@NonNull
+	private List<WptPt> insertIntermediatePoints(@NonNull List<WptPt> originalPoints) {
+		if (originalPoints.size() < 2) {
+			return originalPoints;
+		}
+
+		List<WptPt> newPoints = new ArrayList<>();
+
+		for (int i = 0; i < originalPoints.size() - 1; i++) {
+			WptPt startPoint = originalPoints.get(i);
+			WptPt endPoint = originalPoints.get(i + 1);
+
+			newPoints.add(startPoint);
+
+			List<WptPt> intermediatePoints = calculateIntermediatePoints(startPoint, endPoint);
+			if (!Algorithms.isEmpty(intermediatePoints)) {
+				newPoints.addAll(intermediatePoints);
+			}
+
+			if (i + 1 == originalPoints.size() - 1) {
+				newPoints.add(endPoint);
+			}
+		}
+
+		return newPoints;
+	}
+
+	@Nullable
+	private List<WptPt> calculateIntermediatePoints(@NonNull WptPt start, @NonNull WptPt end) {
+		double distance = MapUtils.getDistance(start.lat, start.lon, end.lat, end.lon);
+		int intermediatePointsCount = (int) (distance / MIN_METERS_BETWEEN_INTERMEDIATES) - 1;
+		if (intermediatePointsCount < 1) {
+			return null;
+		}
+
+		List<WptPt> points = new ArrayList<>(intermediatePointsCount);
+		for (int i = 0; i < intermediatePointsCount; i++) {
+			double coeff = (double) (i + 1) / (intermediatePointsCount + 1);
+			LatLon intermediateLatLon = MapUtils.calculateIntermediatePoint(start.lat, start.lon, end.lat, end.lon, coeff);
+			WptPt intermediatePoint = new WptPt();
+			intermediatePoint.lat = intermediateLatLon.getLatitude();
+			intermediatePoint.lon = intermediateLatLon.getLongitude();
+			points.add(intermediatePoint);
+		}
+
+		return points;
+	}
+
+	private boolean shouldAddIntermediates(@NonNull WptPt start, @NonNull WptPt end) {
+		return insertIntermediates
+				&& (start.getProfileType() == null || start.getProfileType().equals(DEFAULT_APP_MODE.getStringKey()))
+				&& !end.isGap()
+				&& (int) (MapUtils.getDistance(start.lat, start.lon, end.lat, end.lon) / MIN_METERS_BETWEEN_INTERMEDIATES) >= 2;
 	}
 
 	public boolean isInMultiProfileMode() {

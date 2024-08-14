@@ -29,7 +29,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         style="@style/DashboardSubHeader"
-        osmand:typeface="@string/font_roboto_medium"
+        android:textStyle="bold"
 	    android:layout_marginStart="@dimen/content_padding" />
 
     <LinearLayout
@@ -55,7 +55,7 @@
         android:text="@string/shared_string_options"
         android:visibility="gone"
         osmand:textAllCapsCompat="true"
-        osmand:typeface="@string/font_roboto_medium"
+        android:textStyle="bold"
         tools:textColor="?attr/color_dialog_buttons"
 	    android:paddingStart="@dimen/content_padding"
 	    android:paddingEnd="@dimen/content_padding" />
