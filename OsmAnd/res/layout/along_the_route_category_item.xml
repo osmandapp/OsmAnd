@@ -39,7 +39,7 @@
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:text="Some Title" />
 
 		<androidx.appcompat.widget.SwitchCompat

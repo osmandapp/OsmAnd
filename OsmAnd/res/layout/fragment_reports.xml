@@ -427,7 +427,7 @@
                     android:gravity="start|center_vertical"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:textAllCapsCompat="false"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
                     tools:text="http://osmand.net/osm_live"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

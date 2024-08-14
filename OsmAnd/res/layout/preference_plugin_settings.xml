@@ -18,7 +18,7 @@
 		android:paddingTop="@dimen/list_header_settings_top_margin"
 		android:textColor="?attr/active_color_basic"
 		android:textSize="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_medium"
+		android:textStyle="bold"
 		tools:text="@string/plugin_settings" />
 
 	<LinearLayout
@@ -52,7 +52,7 @@
 				android:textSize="@dimen/default_desc_text_size"
 				android:letterSpacing="@dimen/description_letter_spacing"
 				osmand:lineHeight="@dimen/default_desc_line_height"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="@string/no_plugins_enabled" />
 
 			<net.osmand.plus.widgets.dialogbutton.DialogButton

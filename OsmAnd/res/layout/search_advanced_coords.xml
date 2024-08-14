@@ -44,7 +44,7 @@
                     android:singleLine="true"
                     android:text="@string/coords_search"
                     android:textColor="@color/card_and_list_background_light"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
                     android:textSize="@dimen/dialog_header_text_size"/>
 
                 <ProgressBar

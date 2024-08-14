@@ -32,7 +32,7 @@
 			android:layout_marginRight="8dp"
 			android:textColor="@color/card_and_list_background_light"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:text="MT231: Start - Stop" />
 
 	</LinearLayout>

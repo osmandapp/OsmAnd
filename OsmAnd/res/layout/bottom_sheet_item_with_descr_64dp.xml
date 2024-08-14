@@ -38,7 +38,7 @@
             android:ellipsize="end"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            app:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             tools:text="Some title" />
 
         <net.osmand.plus.widgets.TextViewEx
@@ -49,7 +49,7 @@
             android:maxLines="2"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"
-            app:typeface="@string/font_roboto_regular"
+            android:textStyle="normal"
             tools:text="Some description" />
 
     </LinearLayout>

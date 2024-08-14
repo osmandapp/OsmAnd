@@ -78,7 +78,7 @@
 						android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						tools:text="Available until 10 August"
 						tools:textColor="?attr/active_color_basic" />
 
@@ -91,7 +91,7 @@
 						android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular"
+						android:textStyle="normal"
 						tools:text="@string/enough_contributions_descr" />
 
 				</LinearLayout>
@@ -122,7 +122,7 @@
 						android:text="@string/shared_string_contributions"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/icon"
@@ -179,7 +179,7 @@
 							android:text="@string/shared_string_refresh"
 							android:textColor="?attr/text_color_tab_active"
 							android:textSize="@dimen/text_button_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 					</FrameLayout>
 
@@ -192,7 +192,7 @@
 						android:text="@string/contributions_may_calculate_with_delay"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						android:textStyle="normal" />
 
 				</LinearLayout>
 

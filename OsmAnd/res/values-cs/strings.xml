@@ -5737,7 +5737,7 @@
 \nCPU (dlaždice): %2$s
 \nCPU (nečinnost): %3$s
 \nCPU (čeká na GPU): %4$s</string>
-    <string name="quick_action_parking_place">Parkoviště</string>
+    <string name="quick_action_parking_place">Parkovací místo</string>
     <string name="quick_action_verb_show_hide">Zobrazit / skrýt</string>
     <string name="shared_string_replace">Nahradit</string>
     <string name="quick_action_track_waypoint">Bod trasy</string>
@@ -5748,8 +5748,38 @@
     <string name="required_maps">Vyžadované mapy</string>
     <string name="wall_height">Výška zdi</string>
     <string name="rendering_value_dark_orange_name">Tmavě oranžová</string>
-    <string name="vertical_exaggeration">Vertikální převýšení</string>
+    <string name="vertical_exaggeration">Vertikální zvýraznění</string>
     <string name="vertical_exaggeration_description">Změnou hodnoty měřítka můžete zvýraznit 3D reliéf.</string>
     <string name="map_settings_weather_wind_animation">Animace větru</string>
     <string name="routing_attr_avoid_cobblestone_name">Vyhnout se dlažbě</string>
+    <string name="quick_action_verb_start_stop">Spustit / Zastavit</string>
+    <string name="shared_string_all_icons">Všechny ikony</string>
+    <string name="profile_icon">Ikona profilu</string>
+    <string name="route_roundabout_exit">Použijte %1$d. výjezd</string>
+    <string name="help_article_map_tracks_name">Stopy</string>
+    <string name="weather_screen">Obrazovka počasí</string>
+    <string name="app_profile">Profil aplikace</string>
+    <string name="quick_action_display_position_in_center">Zobrazit polohu vždy uprostřed</string>
+    <string name="shared_string_simulate">Simulovat</string>
+    <string name="quick_action_video_note">Videopoznámka</string>
+    <string name="quick_action_audio_note">Audiopoznámka</string>
+    <string name="quick_action_photo_note">Fotopoznámka</string>
+    <string name="quick_action_verb_pause_resume">Pozastavit / Pokračovat</string>
+    <string name="shared_string_create">Vytvořit</string>
+    <string name="help_article_map_routes_name">Trasy</string>
+    <string name="compass_click_north_is_up">Klepněte a držte pro změnu režimu orientace</string>
+    <string name="quick_action_terrain">Typ obarvení terénu</string>
+    <string name="quick_action_first_intermediate">První mezicíl</string>
+    <string name="navigation_position_icon_summary">Ikona zobrazená během navigace nebo pohybu.</string>
+    <string name="add_widget_below">Přidat widget níže</string>
+    <string name="add_widget_above">Přidat widget nad</string>
+    <string name="add_widget_to_the_right">Přidat widget vpravo</string>
+    <string name="add_widget_to_the_left">Přidat widget vlevo</string>
+    <string name="height_cache">výšková mezipaměť</string>
+    <string name="daynight_mode_sensor_summary">Použije světelný senzor zařízení pro přepínání mezi světlým a tmavým režimem podle úrovně okolního světla.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automaticky přepíná mezi denním a nočním režimem podle místního času východu a západu slunce.</string>
+    <string name="daynight_mode_night_summary">Vždy zobrazí mapu ve tmavém režimu, vhodné v noci a v podmínkách se slabým osvětlením.</string>
+    <string name="daynight_mode_app_theme_summary">Zobrazení mapy se přizpůsobí obecnému motivu aplikace — denní režim pro světlý motiv a noční režim pro tmavý motiv</string>
+    <string name="daynight_mode_day_summary">Vždy zobrazí mapu ve světlém režimu, vhodné pro viditelnost během dne.</string>
+    <string name="daynight_mode_app_theme">Motiv aplikace</string>
 </resources>
