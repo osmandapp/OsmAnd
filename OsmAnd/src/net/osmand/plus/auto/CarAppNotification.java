@@ -1,14 +1,11 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.NavigationService.USED_BY_CAR_APP;
-
 import android.app.Service;
 import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,14 +31,12 @@ public class CarAppNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		return app.getCarNavigationSession() != null;
+		return app.getNavigationCarAppService() != null;
 	}
 
 	@Override
 	public boolean isUsedByService(@Nullable Service service) {
-		NavigationService navService = service instanceof NavigationService
-				? (NavigationService) service : app.getNavigationService();
-		return navService != null && (navService.getUsedBy() & USED_BY_CAR_APP) != 0;
+		return service instanceof NavigationCarAppService;
 	}
 
 	@Override

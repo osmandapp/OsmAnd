@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.datastorage;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -28,7 +30,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
@@ -239,7 +241,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableStringBuilder spannable = new SpannableStringBuilder(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -272,7 +274,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		String description = getString(R.string.from_to_with_params, currentStorageName, selectedStorageName);
 
 		TextView summary = copyFilesDescr.findViewById(android.R.id.summary);
-		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), description, currentStorageName, selectedStorageName));
+		summary.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, description, currentStorageName, selectedStorageName));
 	}
 
 	private void setupRestartDescr() {
@@ -292,7 +294,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableString spannable = new SpannableString(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -318,7 +320,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			String description = getString(R.string.copying_file, fileName);
 			SpannableString spannable = new SpannableString(description);
 			int index = description.indexOf(fileName);
-			spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + fileName.length(), 0);
+			spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + fileName.length(), 0);
 			spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), index, index + fileName.length(), 0);
 
 			TextView summary = remainingFiles.findViewById(android.R.id.summary);

@@ -1,5 +1,10 @@
 package net.osmand.plus.dialogs;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,7 +25,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,10 +35,6 @@ import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -102,7 +102,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 		TextView title = new TextView(app);
 		title.setPadding(padding, paddingHalf, padding, 0);
-		title.setTypeface(FontCache.getRobotoMedium(app));
+		title.setTypeface(DEFAULT_BOLD);
 		title.setText(R.string.rendering_category_details);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));

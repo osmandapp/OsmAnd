@@ -5727,7 +5727,7 @@
     <string name="steps_per_minute_unit">КПМ</string>
     <string name="disable_map_layers_descr">Онемогућите све слојеве карте изнад векторске карте (потребно је поновно покретање).</string>
     <string name="disable_map_layers">Онемогући слојеве карте</string>
-    <string name="height_legend_description">За приказ рељефа користе се висинске карте у боји.</string>
+    <string name="height_legend_description">За приказ рељефа користе се висинске мапе у боји.</string>
     <string name="travel_topics">Предмети путовања</string>
     <string name="play_weather_forecast">Пусти временске прилике</string>
     <string name="change_terrain_color_scheme">Промена обрасца боја тла</string>
@@ -5849,4 +5849,13 @@
     <string name="detailed_track_guidance_description">ОсмАнд ће ускладити ваш траг са оближњим путевима како ради бољег навођења на кривинама.</string>
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
+    <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>
+    <string name="help_article_map_routes_name">Руте</string>
+    <string name="route_roundabout_exit">Идите на %1$d излаз</string>
+    <string name="help_article_map_tracks_name">Путање</string>
+    <string name="add_widget_above">Додај виџет изнад</string>
+    <string name="add_widget_below">Додај виџет испод</string>
+    <string name="add_widget_to_the_right">Додај виџет десно</string>
+    <string name="height_cache">Кеш висине</string>
+    <string name="add_widget_to_the_left">Додај виџет лево</string>
 </resources>

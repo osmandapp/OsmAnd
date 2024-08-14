@@ -523,7 +523,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public void smoothScrollToBottom() {
-		NestedScrollView scrollView = view.findViewById(R.id.nested_scroll);
+		ScrollView scrollView = view.findViewById(R.id.scroll_view);
 		int height = scrollView.getHeight();
 		int bottom = scrollView.getChildAt(0).getBottom();
 		int maxScrollY = Math.max(0, bottom - height);

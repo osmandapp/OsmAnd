@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces;
 
 import static net.osmand.plus.backup.ui.BackupAuthorizationFragment.OPEN_BACKUP_AUTH;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
@@ -70,17 +72,26 @@ public class MyPlacesActivity extends TabActivity {
 
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
-			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
-				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
-				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-				int pagerItem = 0;
-				for (int n = 0; n < tabItems.size(); n++) {
-					if (tabItems.get(n).resId == tabId) {
-						pagerItem = n;
-						break;
-					}
+
+			if (intent != null) {
+				Bundle bundle = intent.getExtras();
+				if (bundle != null && bundle.containsKey(FAV_SEARCH_QUERY_KEY)) {
+					String searchQuery = bundle.getString(FAV_SEARCH_QUERY_KEY, "");
+					FavoritesSearchFragment.showInstance(this, searchQuery);
 				}
-				viewPager.setCurrentItem(pagerItem, false);
+
+				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
+					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
+					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+					int pagerItem = 0;
+					for (int n = 0; n < tabItems.size(); n++) {
+						if (tabItems.get(n).resId == tabId) {
+							pagerItem = n;
+							break;
+						}
+					}
+					viewPager.setCurrentItem(pagerItem, false);
+				}
 			}
 		}
 	}

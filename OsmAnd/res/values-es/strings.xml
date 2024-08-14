@@ -5853,4 +5853,12 @@
     <string name="quick_action_routes_summary">Un interruptor para mostrar u ocultar %1$s en el mapa.</string>
     <string name="detailed_track_guidance_description">OsmAnd adaptará tu ruta a las carreteras cercanas para ofrecerte una mejor guía paso a paso.</string>
     <string name="shared_string_automatically">Automáticamente</string>
+    <string name="compass_click_north_is_up">Para cambiar la orientación, haz clic y mantén presionado</string>
+    <string name="route_roundabout_exit">Toma la salida %1$d</string>
+    <string name="help_article_map_tracks_name">Pistas</string>
+    <string name="help_article_map_routes_name">Rutas</string>
+    <string name="add_widget_below">Añadir widget a continuación</string>
+    <string name="add_widget_above">Añadir widget arriba</string>
+    <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
+    <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
 </resources>

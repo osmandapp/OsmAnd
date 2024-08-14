@@ -9,6 +9,7 @@ import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -64,12 +65,13 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
+	protected boolean isInitialized;
 
 	//OpenGL
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
-	protected float density = 1f;
+	protected float density = 0f;
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
@@ -169,6 +171,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
 	                                @Nullable MapRendererView newMapRenderer) {
+		checkLayerInitialized();
 		if (newMapRenderer == null) {
 			cleanupResources();
 		} else {
@@ -215,13 +218,18 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return false;
 	}
 
-	public void initLayer(@NonNull OsmandMapTileView view) {
+	public void setView(@NonNull OsmandMapTileView view) {
 		this.view = view;
+	}
+
+	public void initLayer() {
+		isInitialized = true;
 	}
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		checkLayerInitialized();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
@@ -230,6 +238,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (this.density != density) {
 			this.density = density;
 			updateResources();
+		}
+	}
+
+	protected void checkLayerInitialized() {
+		if (!isInitialized) {
+			if (view == null) {
+				throw new IllegalStateException("Layer's view should be set prior to calling init");
+			}
+			initLayer();
 		}
 	}
 
@@ -422,7 +439,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
 		OsmandApplication app = getApplication();
-		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		MapActivity activity = getMapActivity();
+		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);

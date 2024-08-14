@@ -11,5 +11,5 @@
 	android:textColor="@color/preference_action_button_text"
 	android:textSize="@dimen/default_desc_text_size"
 	osmand:lineHeight="@dimen/default_desc_line_height"
-	osmand:typeface="@string/font_roboto_medium"
+	android:textStyle="bold"
 	tools:text="@string/shared_string_apply" />

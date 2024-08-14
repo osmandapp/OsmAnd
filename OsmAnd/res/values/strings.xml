@@ -10,6 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+	<string name="add_widget_below">Add widget below</string>
+	<string name="add_widget_above">Add widget above</string>
+	<string name="add_widget_to_the_right">Add widget to the right</string>
+	<string name="add_widget_to_the_left">Add widget to the left</string>
+	<string name="height_cache">Height cache</string>
+	<string name="route_roundabout_exit">Take %1$d exit</string>
+	<string name="help_article_map_tracks_name">Tracks</string>
+	<string name="help_article_map_routes_name">Routes</string>
 	<string name="compass_click_north_is_up">To change orientation mode click and hold</string>
 	<string name="shared_string_automatically">Automatically</string>
 	<string name="ask_every_time">Ask every time</string>

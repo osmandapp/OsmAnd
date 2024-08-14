@@ -74,11 +74,14 @@ public class NotificationHelper {
 		return downloadNotification.buildNotification(null, false).build();
 	}
 
+	@NonNull
+	public Notification buildCarAppNotification() {
+		return carAppNotification.buildNotification(null, false).build();
+	}
+
 	@Nullable
 	private OsmandNotification acquireTopNotification(@Nullable Service service) {
-		if (carAppNotification.isEnabled(service)) {
-			return carAppNotification;
-		} else if (navigationNotification.isEnabled(service)) {
+		if (navigationNotification.isEnabled(service)) {
 			return navigationNotification;
 		} else if (gpxNotification.isEnabled(service)) {
 			return gpxNotification;
@@ -123,6 +126,15 @@ public class NotificationHelper {
 				break;
 			}
 		}
+	}
+
+	public int getOsmandNotificationId(NotificationType notificationType) {
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				return notification.getOsmandNotificationId();
+			}
+		}
+		return -1;
 	}
 
 	public boolean hasAnyTopNotification() {

@@ -947,7 +947,9 @@ public class MapPoiTypes {
 		if (!hasName && pt.isNameOnly()) {
 			return null;
 		}
-		if (relation && !pt.isRelation()) {
+		boolean multy = "multipolygon".equals(otherTags.get("type")) || "site".equals(otherTags.get("type"));
+		// example of site is scottish parliament POI
+		if (!multy && relation && !pt.isRelation()) {
 			return null;
 		}
 

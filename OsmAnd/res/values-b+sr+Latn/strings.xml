@@ -148,7 +148,7 @@
     <string name="send_report">Pošalji izveštaj</string>
     <string name="none_region_found">Preuzete mape na memorijsku karticu nisu nađene.</string>
     <string name="any_poi">Bilo koji</string>
-    <string name="layer_route">Rute</string>
+    <string name="layer_route">Ruta</string>
     <string name="auto_follow_route_navigation_descr">Auto centriranje.</string>
     <string name="auto_follow_location_enabled">Auto centriranje mape.</string>
     <string name="day_night_info_description">Izlazak sunca: %1$s 
@@ -1361,11 +1361,11 @@
     <string name="gpx_info_subtracks">Podtrase: %1$s</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nZadrži radi prikaza opcija"</string>
+\nPritisni duže za opcije"</string>
     <string name="delay_navigation_start">Automatski pokreni vodiča za skretanje</string>
     <string name="selected_gpx_info_show">"
 \n
-\nZadrži radi prikaza mape"</string>
+\nPritisni duže za prikaz na mapi"</string>
     <string name="shared_string_waypoint">Međuodredište</string>
     <string name="map_widget_plain_time">Trenutno vreme</string>
     <string name="loading_smth">Učitavanje %1$s…</string>
@@ -2053,7 +2053,7 @@
     <string name="shared_string_plugin">Dodatak</string>
     <string name="srtm_menu_download_descr">Preuzimanje mape izohipsa za ovaj region.</string>
     <string name="hide_from_zoom_level">Sakrij počevši od nivoa zumiranja</string>
-    <string name="hillshade_purchase_header">Instaliraj dodatak \"Topografija\" radi prikaza uspravnog nagiba oblasti.</string>
+    <string name="hillshade_purchase_header">Instaliraj dodatak \"Topografija\" za prikaz vertikalnog nagiba oblasti.</string>
     <string name="hillshade_menu_download_descr">Preuzmi mapu sloja sa osenčenim reljefom radi pregleda okoline na mapi.</string>
     <string name="search_favorites">Traži u favoritima</string>
     <string name="sorted_by_distance">Razvrstano po udaljenosti</string>
@@ -2072,7 +2072,7 @@
     <string name="no_photos_descr">Nema slika ovde.</string>
     <string name="shared_string_add_photos">Dodaj slike</string>
     <string name="online_photos">Slike sa interneta</string>
-    <string name="improve_coverage_install_mapillary_desc">Instaliraj Mapillaryda doda slike na ovaj lokaciju.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instaliraj Mapillary da doda slike za ovu lokaciju.</string>
     <string name="improve_coverage_mapillary">Poboljšaj pokrivenost slika koristeći Mapilari</string>
     <string name="shared_string_install">Instaliraj</string>
     <string name="open_mapillary">Otvori Mapilari</string>
@@ -2089,7 +2089,7 @@
     <string name="mapillary_menu_title_dates">Datum</string>
     <string name="mapillary_menu_descr_dates">Pregledaj samo dodate slike</string>
     <string name="mapillary_menu_date_from">Od</string>
-    <string name="shared_string_to">Prema</string>
+    <string name="shared_string_to">Do</string>
     <string name="wrong_user_name">Pogrešno korisničko ime</string>
     <string name="mapillary_menu_title_tile_cache">Keš sličica mape</string>
     <string name="mapillary_menu_descr_tile_cache">Ponovo učitati sličice mape radi postavljanja podataka dana.</string>
@@ -4567,14 +4567,14 @@
     <string name="you_can_get_feature_as_part_of_pattern">Uzmi „%1$s“ kao deo: %2$s plana. Uporedi planove:</string>
     <string name="purchases_feature_desc_osmand_cloud">Nabavi OsmAnd Cloud za skladištenje svih podataka OsmAnd -a na internetu. Zaboravi na gubitak podataka nakon ponovne instalacije, napravi rezervne kopije i vrati sve podatke bez problema.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedi pristup češćem ažuriranju mapa, Izaberi između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
-    <string name="offline_wikivoyage">Bezmrežni Vikivojaž</string>
+    <string name="offline_wikivoyage">Oflajn Vikivojaž</string>
     <string name="purchases_feature_desc_unlimited_map_download">Nabavi neograničena preuzimanja offline mapa za sve kontinente i regione.</string>
     <string name="send_logcat_log">Pošalji logkat log</string>
     <string name="delete_version_history">Obriši istoriju verzije</string>
     <string name="backup_version_history">Istorija verzija</string>
     <string name="choose_what_to_restore">Izaberi šta vraćaš.</string>
     <string name="restore_from_osmand_cloud">Vrati iz OsmAnd Cloud</string>
-    <string name="purchases_feature_desc_wikivoyage">Istraži bezmrežni Vikivojaž. Članci su podeljeni po zemljama i regionima i dostupni na svim jezicima.</string>
+    <string name="purchases_feature_desc_wikivoyage">Istraži offline Wikivoyage. Članci su podeljeni po zemljama i regionima i dostupni na svim jezicima.</string>
     <string name="backup_pause_all">Pauziraj sve</string>
     <string name="local_backup_descr">Napravi rezervnu kopiju ili vrati podatke iz lokalnog fajla.</string>
     <string name="local_backup">Lokalna rezervna kopija</string>
@@ -4650,7 +4650,7 @@
     <string name="backup_version_history_removed">Sva izdanja istorije su uklonjena.</string>
     <string name="backup_deleted_all_data_descr">Svi podaci su uspešno izbrisani sa OsmAnda Cloud.</string>
     <string name="backup_error_gzip_only_supported_upload">Datoteku treba poslati u .gzip formatu</string>
-    <string name="wikipedia_and_wikivoyage_offline">Vikipedia i Vikivojaž bezmrežni</string>
+    <string name="wikipedia_and_wikivoyage_offline">Vikipedia i Wikivoyage offline</string>
     <string name="delete_history_items_descr">Obrisati odabrane stavke iz istorije?</string>
     <string name="altitude_widget_desc">Prikazuje visinu iznad nivoa mora trenutne geolokacije.</string>
     <string name="max_speed_widget_desc">Prikazuje ograničenje brzine puta kojim se trenutno vozi.</string>
@@ -5855,7 +5855,16 @@
     <string name="hugerock_promo">Promocija Hugerock %1$s dolar mesečno</string>
     <string name="shared_string_automatically">Automatski</string>
     <string name="ask_every_time">Pitati svaki put</string>
-    <string name="detailed_track_guidance">Detaljan vodič snimljenom stazom</string>
-    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju snimljenu stazi s obližnjim putevima za bolju, detaljnuju navigaciju.</string>
+    <string name="detailed_track_guidance">Detaljan vodič trasom</string>
+    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju trasu s obližnjim putevima za bolju, detaljniju navigaciju.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
+    <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
+    <string name="help_article_map_tracks_name">Trase</string>
+    <string name="help_article_map_routes_name">Rute</string>
+    <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
+    <string name="height_cache">Keš visine</string>
+    <string name="add_widget_above">Dodaj widžet iznad</string>
+    <string name="add_widget_below">Dodaj widžet ispod</string>
+    <string name="add_widget_to_the_right">Dodaj widžet desno</string>
+    <string name="add_widget_to_the_left">Dodaj widžet levo</string>
 </resources>

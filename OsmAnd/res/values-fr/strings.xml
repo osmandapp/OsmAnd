@@ -915,7 +915,7 @@
     <string name="recording_context_menu_play">Lire</string>
     <string name="recording_description">Enregistrement %1$s %3$s %2$s</string>
     <string name="recording_default_name">Enregistrement en cours</string>
-    <string name="shared_string_control_stop">Arrêter</string>
+    <string name="shared_string_control_stop">Terminer</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="shared_string_control_start">Démarrer</string>
     <string name="srtm_paid_version_msg">Veuillez achetez l\'extension « Topographie » pour soutenir les futurs développements.</string>
@@ -1188,9 +1188,9 @@
     <string name="rendering_value_brown_name">Brun</string>
     <string name="osmo_edit_color">Sélectionnez la couleur</string>
     <string name="gpx_file_is_empty">Fichier GPX vide</string>
-    <string name="shared_string_tracks">Traces</string>
-    <string name="shared_string_my_favorites">Favoris</string>
-    <string name="shared_string_my_places">Lieux favoris</string>
+    <string name="shared_string_tracks">Mes traces</string>
+    <string name="shared_string_my_favorites">Lieux favoris</string>
+    <string name="shared_string_my_places">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer le guidage pas à pas automatiquement</string>
     <string name="shared_string_selected_lowercase">sélectionné(s)</string>
@@ -1362,7 +1362,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
-    <string name="download_tab_local">Mémoire</string>
+    <string name="download_tab_local">Stockage</string>
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
@@ -2033,7 +2033,7 @@
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
     <string name="shared_string_recorded">Enregistré</string>
-    <string name="shared_string_record">Terminer</string>
+    <string name="shared_string_record">Enregistrer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
@@ -3185,7 +3185,7 @@
     <string name="update_all_maps_q">Mettre à jour %1$d cartes \?</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
-    <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
+    <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers quotidiens</string>
     <string name="store_tracks_in_daily_directories_descrp">Enregistrer les traces dans des sous-dossiers journaliers (par exemple 2019-01-01).</string>
     <string name="release_3_5">• Mise à jour des paramètres de l\'application et des profiles : les paramètres sont désormais organisés par type ; chaque profile peut être paramétré indépendamment. 
 \n 
@@ -3971,7 +3971,7 @@
     <string name="shared_strings_all_regions">Toutes les régions</string>
     <string name="delete_number_files_question">Supprimer %1$d fichiers \?</string>
     <string name="track_recording_stop_without_saving">Arrêter sans enregistrer</string>
-    <string name="track_recording_save_and_stop">Enregistrer et arrêter l\'enregistrement</string>
+    <string name="track_recording_save_and_stop">Arrêter et enregistrer la trace</string>
     <string name="track_recording_title">Enregistrement de la trace arrêté</string>
     <string name="select_segments">Sélectionnez les segments</string>
     <string name="update_frequency">Fréquence de mise à jour</string>
@@ -5843,4 +5843,8 @@
     <string name="detailed_track_guidance">Navigation détaillée sur la trace</string>
     <string name="detailed_track_guidance_description">Pour améliorer votre navigation, OsmAnd va déplacer la trace sur les routes.</string>
     <string name="quick_action_routes_summary">Un interrupteur pour afficher ou masquer %1$s sur la carte.</string>
+    <string name="compass_click_north_is_up">Pour modifier le mode d\'orientation, faites un appui long</string>
+    <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
+    <string name="help_article_map_routes_name">Itinéraires</string>
+    <string name="help_article_map_tracks_name">Traces</string>
 </resources>

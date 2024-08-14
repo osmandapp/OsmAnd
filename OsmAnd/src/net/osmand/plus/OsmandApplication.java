@@ -114,6 +114,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
@@ -223,7 +224,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
-	private float density = 1f;
+	private float density = 0f;
 	// Typeface
 
 	@Override
@@ -511,6 +512,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (density != displayMetrics.density) {
 			density = displayMetrics.density;
 			getUIUtilities().clearCache();
+			PointImageUtils.clearCache();
 			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
 		}
 
@@ -694,22 +696,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
-		NavigationService navigationService = this.navigationService;
-		if (navigationService != null) {
-			if (!navigationService.isUsedBy(NavigationService.USED_BY_CAR_APP)) {
-				startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
-			}
-		} else {
-			startNavigationService(carNavigationSession.getCarContext(), NavigationService.USED_BY_CAR_APP);
-		}
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = false;
-		NavigationService navigationService = this.navigationService;
-		if (navigationService != null) {
-			navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
-		}
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
@@ -1017,16 +1007,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(@NonNull Context context, int usageIntent) {
-		NavigationService service = getNavigationService();
-		if (service != null) {
-			usageIntent |= service.getUsedBy();
-			service.stopSelf();
-		}
+		LOG.info(">>>> APP - startNavigationService");
 		Intent intent = new Intent(context, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				if (isAppInForeground()) {
+					LOG.info(">>>> APP --- startForegroundService");
 					context.startForegroundService(intent);
 				}
 			});

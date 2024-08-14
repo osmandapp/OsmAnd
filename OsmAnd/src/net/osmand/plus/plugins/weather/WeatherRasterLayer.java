@@ -64,8 +64,8 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
 			CommonPreference<Float> preference = weatherBand.getAlphaPreference();

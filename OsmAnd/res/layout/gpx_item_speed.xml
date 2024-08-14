@@ -33,7 +33,7 @@
 			android:text="@string/join_segments"
 			android:textColor="?android:attr/textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular" />
+			android:textStyle="normal" />
 
 		<androidx.appcompat.widget.SwitchCompat
 			android:id="@+id/gpx_join_gaps_switch"

@@ -44,7 +44,7 @@
 					android:layout_height="48dp"
 					android:layout_gravity="center"
 					android:contentDescription="@string/shared_string_other"
-					android:tint="?attr/active_color_basic"
+					osmand:tint="?attr/active_color_basic"
 					osmand:layout_constraintEnd_toEndOf="parent"
 					osmand:layout_constraintTop_toTopOf="parent"
 					osmand:srcCompat="@drawable/ic_overflow_menu_with_background" />
@@ -57,10 +57,9 @@
 					android:text="@string/welcome_header"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="24sp"
-					android:textStyle="bold"
 					osmand:layout_constraintStart_toStartOf="parent"
 					osmand:layout_constraintTop_toBottomOf="@+id/logo"
-					osmand:typeface="@string/font_roboto_medium" />
+					android:textStyle="bold" />
 
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -145,7 +144,7 @@
 						android:layout_height="48dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_location"
-						android:tint="?attr/default_icon_color"
+						osmand:tint="?attr/default_icon_color"
 						osmand:srcCompat="@drawable/ic_action_my_location" />
 
 				</LinearLayout>

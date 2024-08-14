@@ -188,7 +188,7 @@
                     android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_options"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
 					android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
 					android:paddingStart="@dimen/measurement_tool_text_button_padding_small" />
 
@@ -269,7 +269,7 @@
                     android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium" />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -296,7 +296,7 @@
                     android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
                     android:text="@string/shared_string_cancel"
                     android:textColor="?attr/color_dialog_buttons"
-                    osmand:typeface="@string/font_roboto_medium" />
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="0dp"

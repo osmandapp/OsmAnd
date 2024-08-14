@@ -59,8 +59,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		avoidRoadsHelper = getApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);

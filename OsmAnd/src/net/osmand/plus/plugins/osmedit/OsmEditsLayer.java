@@ -88,8 +88,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
