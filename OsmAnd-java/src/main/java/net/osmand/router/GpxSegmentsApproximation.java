@@ -40,14 +40,16 @@ public class GpxSegmentsApproximation {
 			return gpxStart + gpxLen + 1;
 		}
 		
+		private RouteSegmentAppr(RouteSegment segment, int start) {
+			this.parent = null;
+			this.segment = segment;
+			this.gpxStart = start;
+		}
+		
 		private RouteSegmentAppr(RouteSegmentAppr parent, RouteSegment segment) {
 			this.parent = parent;
 			this.segment = segment;
-			if (parent != null) {
 				this.gpxStart = parent.gpxStart + parent.gpxLen;
-			} else {
-				this.gpxLen = 1;
-			}
 		}
 		
 		public void loadConnections(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, float minPointApproximation) {
@@ -109,7 +111,7 @@ public class GpxSegmentsApproximation {
 		return (road.getId() << ROUTE_POINTS) + (pntId << 1) + (positive > 0 ? 1 : 0);
 	}
 	
-	private static  long calculateRoutePointId(RouteSegment segm) {
+	private static long calculateRoutePointId(RouteSegment segm) {
 		return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), 
 				segm.isPositive() ? segm.getSegmentStart() + 1 : segm.getSegmentStart() - 1);
 	}
@@ -124,10 +126,10 @@ public class GpxSegmentsApproximation {
 		if (currentPoint == null) {
 			return gctx;
 		}
-		RouteSegmentAppr last = new RouteSegmentAppr(null, currentPoint.pnt);
+		RouteSegmentAppr last = new RouteSegmentAppr(currentPoint.pnt, 0);
 		approximateSegment(last, gpxPoints, minPointApproximation);
 		RouteSegmentAppr bestRoute = null;
-		while (last.gpxNext() < gpxPoints.size()) {
+		while (last.gpxNext() < gpxPoints.size()) { 
 			last.loadConnections(gctx, gpxPoints, minPointApproximation);
  			RouteSegmentAppr bestNext = null;
 			for(RouteSegmentAppr c : last.connected) {
@@ -141,8 +143,8 @@ public class GpxSegmentsApproximation {
 				}
  			}
 			if (bestNext == null) {
-				if (last.parent != null || (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() > MAX_DEPTH_ROLLBACK)) {
-					System.out.println("----"); // DEBUG
+				if (last.parent != null && (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() < MAX_DEPTH_ROLLBACK)) {
+					System.out.print(" ^ "); // DEBUG
 					last = last.parent;
 					continue;
 				} else if (bestRoute != null) {
@@ -151,7 +153,8 @@ public class GpxSegmentsApproximation {
 					if (pnt == null) {
 						break;
 					} else {
-						last = new RouteSegmentAppr(null, pnt.pnt);
+						System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt); // DEBUG
+						last = new RouteSegmentAppr(pnt.pnt, pnt.ind);
 						approximateSegment(last, gpxPoints, minPointApproximation);
 						bestRoute = null;
 					}
@@ -173,7 +176,9 @@ public class GpxSegmentsApproximation {
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
-		wrapupRoute(gpxPoints, bestRoute);
+		if (bestRoute != null) {
+			wrapupRoute(gpxPoints, bestRoute);
+		}
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
 		return gctx;
