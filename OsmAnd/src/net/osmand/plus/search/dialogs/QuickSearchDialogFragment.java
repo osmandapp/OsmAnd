@@ -358,6 +358,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							filter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.MAP);
 							if (filter != null) {
 								filter.setFilterByName(topIndexFilter.getValue());
+								filter.setFilterByKey(topIndexFilter.getTag());
 							} else {
 								return;
 							}
