@@ -1002,7 +1002,7 @@ public class RouteResultPreparation {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
-						checkKeepAfterMerge(currentSegment, leftside);
+						replaceConfusingKeepTurnsWithLaneTurn(currentSegment, leftside);
 					}
 				}
 				if (!merged) {
@@ -1015,7 +1015,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void checkKeepAfterMerge(RouteSegmentResult currentSegment, boolean leftSide) {
+	private void replaceConfusingKeepTurnsWithLaneTurn(RouteSegmentResult currentSegment, boolean leftSide) {
 		if (currentSegment.getTurnType() == null) {
 			return;
 		}
