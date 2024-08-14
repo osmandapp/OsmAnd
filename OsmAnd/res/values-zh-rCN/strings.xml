@@ -5695,4 +5695,5 @@
     <string name="driving_region_india">印度</string>
     <string name="assigned_keys">已分配的按键</string>
     <string name="steps_per_minute_unit">步数每分钟</string>
+    <string name="wall_height">墙壁高度</string>
 </resources>
