@@ -75,8 +75,8 @@ public class GpxSegmentsApproximation {
 				if (parent == null || !parent.isVisited(sg)) {
 					RouteSegmentAppr c = new RouteSegmentAppr(this, sg);
 					boolean accept = approximateSegment(c, gpxPoints, minPointApproximation);
-					System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment,
-							c.maxDistToGpx, accept); // DEBUG
+//					System.out.printf("** %d -> %d  ( %s ) %.2f - %s \n", c.gpxStart, c.gpxNext(), c.segment,
+//							c.maxDistToGpx, accept); // DEBUG
 					if (accept) {
 						connected.add(c);
 					}
@@ -144,27 +144,27 @@ public class GpxSegmentsApproximation {
  			}
 			if (bestNext == null) {
 				if (last.parent != null && (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() < MAX_DEPTH_ROLLBACK)) {
-					System.out.print(" ^ "); // DEBUG
+//					System.out.print(" ^ "); // DEBUG
 					last = last.parent;
 					continue;
 				} else if (bestRoute != null) {
 					wrapupRoute(gpxPoints, bestRoute);
-					GpxPoint pnt = findNextRoutablePoint(frontEnd, gctx, initDist, gpxPoints, bestRoute.gpxNext());
-					if (pnt == null) {
-						break;
-					} else {
-						System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt); // DEBUG
-						last = new RouteSegmentAppr(pnt.pnt, pnt.ind);
-						approximateSegment(last, gpxPoints, minPointApproximation);
-						bestRoute = null;
-					}
-				} else {
+				}
+				GpxPoint pnt = findNextRoutablePoint(frontEnd, gctx, initDist, gpxPoints,
+						bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
+				if (pnt == null) {
+//					System.out.println("------"); // DEBUG
 					break;
+				} else {
+//					System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt); // DEBUG
+					last = new RouteSegmentAppr(pnt.pnt, pnt.ind);
+					approximateSegment(last, gpxPoints, minPointApproximation);
+					bestRoute = null;
 				}
 			} else {
-				System.out.printf("%d -> %d %s %s - %.2f \n", bestNext.gpxStart, bestNext.gpxStart + bestNext.gpxLen,
-						gpxPoints.get(bestNext.gpxStart + bestNext.gpxLen).loc, bestNext.segment,
-						bestNext.maxDistToGpx); // DEBUG
+//				System.out.printf("%d -> %d %s %s - %.2f \n", bestNext.gpxStart, bestNext.gpxStart + bestNext.gpxLen,
+//						gpxPoints.get(bestNext.gpxStart + bestNext.gpxLen).loc, bestNext.segment,
+//						bestNext.maxDistToGpx); // DEBUG
 				last.visit(bestNext.segment);
 				if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
 					bestRoute = last;
@@ -216,7 +216,7 @@ public class GpxSegmentsApproximation {
 			}
 			double dist = BinaryRoutePlanner.squareRootDist((int) pp.x, (int) pp.y, p.x31, p.y31);
 			if (dist > minPointApproximation) {
-				if (beforeStart) {
+				if (beforeStart || c.gpxLen > 0 ) {
 					break;
 				}
 				return false;
