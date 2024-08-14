@@ -461,7 +461,9 @@ public class BinaryRoutePlanner {
 		// calculate possible obstacle plus time
 		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
 		if (obstacle < 0) {
-			return -1;
+			if (segment.distanceFromStart > 0) { // ignore obstacle on first point for very first segment
+				return -1;
+			}
 		}
 		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd);
 		if (heightObstacle < 0) {
