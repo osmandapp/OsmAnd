@@ -5851,4 +5851,9 @@
     <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
     <string name="help_article_map_routes_name">Kursoj</string>
     <string name="help_article_map_tracks_name">Spuroj</string>
+    <string name="height_cache">Datumoj pri altitudo</string>
+    <string name="add_widget_below">Aldoni fenestraĵon malsupren</string>
+    <string name="add_widget_above">Aldoni fenestraĵon supren</string>
+    <string name="add_widget_to_the_right">Aldoni fenestraĵon dekstren</string>
+    <string name="add_widget_to_the_left">Aldoni fenestraĵon maldekstren</string>
 </resources>
