@@ -304,9 +304,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		app.getGpxDbHelper().updateDataItem(item);
 	}
 
-	public void clearRecordedData(boolean isWarningEmpty) {
+	public void clearRecordedData(boolean clearDb) {
 		long time = System.currentTimeMillis();
-		if (isWarningEmpty) {
+		if (clearDb) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				try {
@@ -832,8 +832,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		}
 	}
 
-	public void onStopRecording(){
+	public void onStopRecording(boolean clearData) {
 		shouldAutomaticallyRecord = false;
+		if (clearData) {
+			clearRecordedData(true);
+		}
 	}
 
 	public boolean getIsRecording() {

@@ -989,13 +989,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(@NonNull Context context, int usageIntent) {
-		LOG.info(">>>> APP - startNavigationService");
 		Intent intent = new Intent(context, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				if (isAppInForeground()) {
-					LOG.info(">>>> APP --- startForegroundService");
 					context.startForegroundService(intent);
 				}
 			});
