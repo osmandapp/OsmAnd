@@ -5725,7 +5725,7 @@
     <string name="wall_color">Колір стіни</string>
     <string name="top">Зверху</string>
     <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
-    <string name="missing_maps_header">Зниклі або неактуальні мапи</string>
+    <string name="missing_maps_header">Відсутні або неактуальні мапи</string>
     <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
     <string name="track_vertical_exaggeration_description">Змінюючи масштаб, ви можете змінювати висоту 3D-трека.</string>
     <string name="gpx_approximation_geo_cpp">На основі геометрії (C++, швидко)</string>
