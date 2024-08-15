@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
 
 import net.osmand.router.*;
@@ -561,7 +560,6 @@ public class NativeLibrary {
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
-		private int hashCode;
 
 		public Map<String, String> getTags() {
 			return tags;
