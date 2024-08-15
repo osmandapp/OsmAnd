@@ -5796,7 +5796,7 @@
     <string name="shared_string_simulate">Імітувати</string>
     <string name="quick_action_display_position_in_center">Положення дисплея завжди по центру</string>
     <string name="quick_action_video_note">Відео нотатка</string>
-    <string name="quick_action_track_waypoint">Відстежити маршрутну точку</string>
+    <string name="quick_action_track_waypoint">Маршрутна точка</string>
     <string name="quick_action_previous_app_profile">Профіль додатку до попереднього</string>
     <string name="quick_action_terrain">Тип забарвлення рельєфу</string>
     <string name="daynight_mode_app_theme">Тема додатку</string>
