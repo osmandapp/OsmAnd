@@ -1,5 +1,7 @@
 package net.osmand.plus.notifications;
 
+import static net.osmand.plus.notifications.NotificationHelper.NOTIFICATION_CHANEL_ID;
+
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -35,6 +37,7 @@ public abstract class OsmandNotification {
 	private final String groupName;
 
 	private Notification currentNotification;
+	private final NotificationManagerCompat notificationManager;
 
 	public enum NotificationType {
 		NAVIGATION,
@@ -48,6 +51,7 @@ public abstract class OsmandNotification {
 	public OsmandNotification(OsmandApplication app, String groupName) {
 		this.app = app;
 		this.groupName = groupName;
+		this.notificationManager = NotificationManagerCompat.from(app);
 		init();
 	}
 
@@ -76,7 +80,7 @@ public abstract class OsmandNotification {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}
-		Builder builder = new Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
+		Builder builder = new Builder(app, NOTIFICATION_CHANEL_ID)
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 				.setLocalOnly(true) // Probably should be deleted to not limit notifications
@@ -135,7 +139,6 @@ public abstract class OsmandNotification {
 
 	@SuppressLint("MissingPermission")
 	public boolean showNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
@@ -151,7 +154,6 @@ public abstract class OsmandNotification {
 
 	@SuppressLint("MissingPermission")
 	public boolean refreshNotification() {
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(null, false);
 			if (notificationBuilder != null) {
@@ -185,7 +187,6 @@ public abstract class OsmandNotification {
 
 	public void removeNotification() {
 		currentNotification = null;
-		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
 	}
