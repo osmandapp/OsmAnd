@@ -5875,6 +5875,6 @@
     <string name="add_widget_above">Añadir widget encima</string>
     <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
     <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
-    <string name="height_cache">Caché de la altura</string>
+    <string name="height_cache">Caché de la altitud</string>
     <string name="add_widget_below">Añadir widget debajo</string>
 </resources>
