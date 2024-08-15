@@ -3171,7 +3171,7 @@
     <string name="poi_cuisine_burrito">Burito</string>
     <string name="poi_cuisine_pastel">Pasteis</string>
     <string name="poi_cuisine_baguette">Baghetă</string>
-    <string name="poi_cuisine_fondue">Fondantă</string>
+    <string name="poi_cuisine_fondue">Fondue</string>
     <string name="poi_cuisine_pita">Pită</string>
     <string name="poi_cuisine_sub">Sandviș (tip \"sub\")</string>
     <string name="poi_cuisine_brunch">Mic dejun</string>
@@ -3557,7 +3557,7 @@
     <string name="poi_glacier_type_icecap">Ghețar</string>
     <string name="poi_via_ferrata_scale">Dificultate</string>
     <string name="poi_cable_number">Număr de cablu</string>
-    <string name="poi_via_ferrata">Calea ferată</string>
+    <string name="poi_via_ferrata">Via ferrata</string>
     <string name="poi_climbing_adventure">Aventură de cățărare</string>
     <string name="poi_aerialway_zip_line">Tiroliană</string>
     <string name="poi_service_vehicle_tyres_yes">Anvelope</string>
