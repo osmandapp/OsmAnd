@@ -125,7 +125,6 @@ public class RestoreNavigationHelper {
 
 	public void enterRoutingMode(@Nullable GPXRouteParamsBuilder gpxRoute) {
 		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
-		LOG.info(">>>> RESTORE ROUTE - enterRoutingMode");
 
 		app.getMapViewTrackingUtilities().backToLocationImpl();
 		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);

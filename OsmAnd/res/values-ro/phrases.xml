@@ -2311,7 +2311,7 @@
     <string name="poi_official_name">Denumire oficială</string>
     <string name="poi_boxing">Box</string>
     <string name="poi_lacrosse">Crosă</string>
-    <string name="poi_shuffleboard">Shuffleboard</string>
+    <string name="poi_shuffleboard">Tabla de șotron</string>
     <string name="poi_squash">Dovleac</string>
     <string name="poi_rc_car">Curse de mașini radiocomandate</string>
     <string name="poi_futsal">Fotbal de sală</string>
@@ -3174,7 +3174,7 @@
     <string name="poi_cuisine_fondue">Fondue</string>
     <string name="poi_cuisine_pita">Pită</string>
     <string name="poi_cuisine_sub">Sandviș (tip \"sub\")</string>
-    <string name="poi_cuisine_brunch">Brunch</string>
+    <string name="poi_cuisine_brunch">Mic dejun</string>
     <string name="poi_cuisine_potato">Cartofi</string>
     <string name="poi_cuisine_wine">Vin</string>
     <string name="poi_cuisine_chocolate">Ciocolată</string>
@@ -3874,7 +3874,7 @@
     <string name="poi_bowling_alley">Centru de bowling</string>
     <string name="poi_shop_security">Magazin de securitate</string>
     <string name="poi_mountain_rescue">Salvare montană</string>
-    <string name="poi_paintball">Paintball</string>
+    <string name="poi_paintball">Joc de Paintball</string>
     <string name="poi_memorial_ghost_bike">Bicicletă comemorativă</string>
     <string name="poi_volcano_number_of_eruptions">Numărul de erupții</string>
     <string name="poi_volcano_status_inactive">Inactiv</string>

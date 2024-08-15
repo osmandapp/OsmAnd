@@ -111,24 +111,17 @@ public class NavigationService extends Service {
 		}
 		onServiceChanged(false);
 		if (usedBy == 0) {
-			LOG.info(">>>> NavigationService - Stop = " + usedBy);
-
 			context.stopService(new Intent(context, NavigationService.class));
 		} else {
-			LOG.info(">>>> NavigationService - Not Stop = " + usedBy);
-
 			app.getNotificationHelper().updateTopNotification();
-			app.getNotificationHelper().refreshNotifications();
+			app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
 		}
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		LOG.info(">>>> NavigationService - onStartCommand");
-
 		if (isUsed()) {
 			addUsageIntent(intent.getIntExtra(USAGE_INTENT, 0));
-			LOG.info(">>>> NavigationService - addUsageIntent = " + usedBy);
 			return START_REDELIVER_INTENT;
 		}
 
@@ -136,8 +129,6 @@ public class NavigationService extends Service {
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
-
-		LOG.info(">>>> NavigationService - Start = " + usedBy);
 
 		locationProvider = app.getLocationProvider();
 		locationServiceHelper = app.createLocationServiceHelper();
@@ -174,16 +165,12 @@ public class NavigationService extends Service {
 
 	@Override
 	public void onCreate() {
-		LOG.info(">>>> NavigationService - onCreate");
-
 		super.onCreate();
 		addLocationSourceListener();
 	}
 
 	@Override
 	public void onDestroy() {
-		LOG.info(">>>> NavigationService - onDestroy");
-
 		super.onDestroy();
 		OsmandApplication app = getApp();
 		app.setNavigationService(null);
@@ -199,8 +186,6 @@ public class NavigationService extends Service {
 
 	@Override
 	public void onTaskRemoved(Intent rootIntent) {
-		LOG.info(">>>> NavigationService - onTaskRemoved");
-
 		OsmandApplication app = getApp();
 		app.getNotificationHelper().removeNotifications(false);
 		if (app.getNavigationService() != null && app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {

@@ -4365,4 +4365,10 @@
     <string name="routeInfo_horse_scale_name">Δυσκολία των μονοπάτιών για άλογο</string>
     <string name="rendering_attr_alpineHiking_name">Κατηγοριοποίηση δυσκολίας</string>
     <string name="rendering_attr_natureReserves_name">Φυσικό καταφύγιο</string>
+    <string name="quick_action_parking_place">Θέση στάθμευσης</string>
+    <string name="quick_action_video_note">Σημείωση βίντεο</string>
+    <string name="quick_action_verb_show_hide">Εμφάνιση / Απόκρυψη</string>
+    <string name="quick_action_verb_pause_resume">Παύση / Επαναφορά</string>
+    <string name="add_to_group">Προσθήκη σε ομάδα</string>
+    <string name="add_smart_folder">Προσθήκη έξυπνου φακέλου</string>
 </resources>

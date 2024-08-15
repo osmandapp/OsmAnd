@@ -207,7 +207,7 @@
     <string name="send_location">Envoyer le point</string>
     <string name="context_menu_item_share_location">Partager ce point</string>
     <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté</string>
-    <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX enregistrée</string>
+    <string name="add_waypoint_dialog_title">Ajouter un point de passage à la trace GPX</string>
     <string name="amenity_type_administrative">Territoire</string>
     <string name="amenity_type_barrier">Obstacle</string>
     <string name="amenity_type_education">Éducation</string>
@@ -897,12 +897,12 @@
     <string name="av_video_format_descr">Format de sortie vidéo :</string>
     <string name="av_video_format">Format d\'enregistrement vidéo de sortie</string>
     <string name="av_use_external_recorder_descr">Utiliser l\'application système pour l\'enregistrement des vidéos.</string>
-    <string name="av_use_external_recorder">Option caméra</string>
+    <string name="av_use_external_recorder">Utiliser l\'enregistreur système</string>
     <string name="av_settings_descr">Configurer les paramètres audio et vidéo.</string>
     <string name="av_settings">Paramètres audio/vidéo </string>
-    <string name="recording_error">Échec d\'enregistrement</string>
+    <string name="recording_error">Erreur d\'enregistrement</string>
     <string name="recording_camera_not_available">Caméra non disponible</string>
-    <string name="recording_is_recorded">Enregistrement Audio/vidéo en cours. Arrêtez en appuyant sur le widget Audio/vidéo.</string>
+    <string name="recording_is_recorded">Enregistrement Audio/vidéo en cours. Arrêtez en appuyant sur le widget Audio/Vidéo.</string>
     <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
     <string name="recording_open_external_player">Ouvrir dans un lecteur externe</string>
     <string name="recording_delete_confirm">Supprimer cet élément ?</string>
@@ -5847,4 +5847,9 @@
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
     <string name="help_article_map_routes_name">Itinéraires</string>
     <string name="help_article_map_tracks_name">Traces</string>
+    <string name="height_cache">Cache des altitudes</string>
+    <string name="add_widget_to_the_left">Ajouter le gadget à gauche</string>
+    <string name="add_widget_above">Ajouter le gadget au dessus</string>
+    <string name="add_widget_below">Ajouter le gadget en dessous</string>
+    <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
 </resources>
