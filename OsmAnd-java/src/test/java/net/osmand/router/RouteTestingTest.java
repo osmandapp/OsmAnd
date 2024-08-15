@@ -170,7 +170,7 @@ public class RouteTestingTest {
 			
 			checkRouteLength(params, routeSegments);
 			checkRoutingTime(ctx, params);
-			
+
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
@@ -185,6 +185,20 @@ public class RouteTestingTest {
 					case "visitedSegments":
 						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
 								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
+						break;
+					default: // case ID:N to check exact point within the ID's segment
+						boolean isFound = false;
+						int point = Integer.parseInt(es.getValue());
+						for (RouteSegmentResult seg : routeSegments) {
+							if (seg.getObject().getId() / 64 == id) {
+								if (point >= Math.min(seg.getStartPointIndex(), seg.getEndPointIndex()) &&
+										point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex())) {
+									isFound = true;
+									break;
+								}
+							}
+						}
+						Assert.assertTrue("Expected point " + point + " is not found in segment " + id, isFound);
 						break;
 				}
 			}
