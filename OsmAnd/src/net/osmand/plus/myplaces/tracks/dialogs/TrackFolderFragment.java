@@ -54,7 +54,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		return TAG;
 	}
 
-	@NonNull
+	@Nullable
 	protected TracksGroup getCurrentTrackGroup() {
 		return selectedFolder;
 	}
@@ -112,8 +112,9 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		if (itemId == R.id.action_folder_search) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
+				TracksGroup group = getCurrentTrackGroup();
+				TrackFolder currentFolder = group instanceof TrackFolder ? (TrackFolder) group : null;
 				FragmentManager manager = activity.getSupportFragmentManager();
-				TrackFolder currentFolder = getCurrentTrackGroup() instanceof TrackFolder ? (TrackFolder) getCurrentTrackGroup() : null;
 				SearchMyPlacesTracksFragment.showInstance(manager,
 						getTargetFragment(),
 						false,
@@ -174,10 +175,11 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	}
 
 	private void updateTitle() {
+		TracksGroup group = getCurrentTrackGroup();
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
-		if (actionBar != null) {
-			actionBar.setTitle(getCurrentTrackGroup().getName(app));
+		if (actionBar != null && group != null) {
+			actionBar.setTitle(group.getName(app));
 		}
 	}
 

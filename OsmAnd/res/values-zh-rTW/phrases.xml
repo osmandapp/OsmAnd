@@ -395,7 +395,7 @@
     <string name="poi_climbing">攀岩</string>
     <string name="poi_cricket">板球</string>
     <string name="poi_croquet">槌球</string>
-    <string name="poi_cycling">自行車</string>
+    <string name="poi_cycling">自行車運動</string>
     <string name="poi_diving">跳水</string>
     <string name="poi_scuba_diving">水肺潛水</string>
     <string name="poi_dog_racing">賽狗</string>
@@ -415,7 +415,7 @@
     <string name="poi_paddle_tennis">槳網球</string>
     <string name="poi_paragliding">飛行傘</string>
     <string name="poi_pelota">回力球</string>
-    <string name="poi_racquet">球拍</string>
+    <string name="poi_racquet">美式壁球</string>
     <string name="poi_roller_skating">直排輪</string>
     <string name="poi_rowing">划艇</string>
     <string name="poi_rugby_union">聯合式橄欖球</string>
@@ -1128,7 +1128,7 @@
     <string name="poi_trees_date">日期</string>
     <string name="poi_trees_coffea">咖啡</string>
     <string name="poi_trees_pomegranate">石榴</string>
-    <string name="poi_aerialway_pylon">高架作業臺塔</string>
+    <string name="poi_aerialway_pylon">架空索道塔</string>
     <string name="poi_power_tower">高壓輸電塔</string>
     <string name="poi_power_pole">電線桿</string>
     <string name="poi_cooling_tower">冷卻塔</string>
@@ -2018,8 +2018,8 @@
     <string name="poi_ramp_no">斜坡道：無</string>
     <string name="poi_ramp_wheelchair_yes">供輪椅使用的斜坡道：有</string>
     <string name="poi_ramp_wheelchair_no">供輪椅的斜坡道：無</string>
-    <string name="poi_ramp_stroller_yes">斜坡道(折疊式)：有</string>
-    <string name="poi_ramp_stroller_no">斜坡道(折疊式)：無</string>
+    <string name="poi_ramp_stroller_yes">斜坡道(嬰兒車)：有</string>
+    <string name="poi_ramp_stroller_no">斜坡道(嬰兒車)：無</string>
     <string name="poi_ramp_bicycle_yes">供自行車使用的斜坡道：有</string>
     <string name="poi_ramp_bicycle_no">供自行車的斜坡道：無</string>
     <string name="poi_ramp_luggage_yes">供行李使用的斜坡道：有</string>

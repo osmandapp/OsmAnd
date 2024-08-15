@@ -47,7 +47,7 @@
 				android:paddingStart="@dimen/list_content_padding"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:ignore="UnusedAttribute"
 				tools:text="Van Gogh Museum" />
 
@@ -81,7 +81,7 @@
 				android:text="@string/search_categories"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:drawableRight="@drawable/ic_action_filter_dark"
 				tools:ignore="UnusedAttribute"
 				android:paddingEnd="@dimen/bottom_sheet_content_padding_small"

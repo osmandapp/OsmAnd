@@ -40,7 +40,7 @@
 			android:maxLines="1"
 			android:text="@string/shared_string_visible_on_map"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
-			osmand:typeface="@string/font_roboto_regular" />
+			android:textStyle="normal" />
 
 		<include layout="@layout/divider" />
 

@@ -62,7 +62,7 @@
             android:padding="8dp"
             android:text="@string/add_waypoint"
             android:textColor="?android:attr/textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textStyle="bold"/>
 
     </FrameLayout>
 
@@ -108,7 +108,7 @@
             android:padding="8dp"
             android:text="@string/add_route_points"
             android:textColor="?android:attr/textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textStyle="bold"/>
 
     </FrameLayout>
 
@@ -155,7 +155,7 @@
             android:padding="8dp"
             android:text="@string/add_line"
             android:textColor="?android:attr/textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"/>
+            android:textStyle="bold"/>
 
     </FrameLayout>
 

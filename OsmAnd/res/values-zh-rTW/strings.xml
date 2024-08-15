@@ -1963,7 +1963,7 @@
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
-    <string name="route_stops_before">%1$s 之前停止</string>
+    <string name="route_stops_before">此前 %1$s 站</string>
     <string name="rendering_attr_hideOverground_name">地上的物件</string>
     <string name="routing_attr_short_way_name">省油的方式</string>
     <string name="replace_favorite_confirmation">取代「%1$s」收藏？</string>
@@ -5842,4 +5842,8 @@
     <string name="hugerock_promo">%1$s 個月的 Hugerock 促銷</string>
     <string name="hugerock_promo_description">%1$s 個月的免費使用功能，包含無限制的地圖下載、3D 地形等</string>
     <string name="shared_string_automatically">自動</string>
+    <string name="compass_click_north_is_up">若要變更方向模式，請點選並按住</string>
+    <string name="help_article_map_tracks_name">軌跡</string>
+    <string name="route_roundabout_exit">自第 %1$d 個出口離開</string>
+    <string name="help_article_map_routes_name">路線</string>
 </resources>

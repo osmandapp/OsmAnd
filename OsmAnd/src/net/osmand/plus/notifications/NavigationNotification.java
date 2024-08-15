@@ -3,8 +3,10 @@ package net.osmand.plus.notifications;
 import static net.osmand.plus.NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN;
 import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.car.app.notification.CarAppExtender;
 import androidx.car.app.notification.CarPendingIntent;
 import androidx.core.app.NotificationCompat;
@@ -58,6 +61,7 @@ public class NavigationNotification extends OsmandNotification {
 		super(app, GROUP_NAME);
 	}
 
+	@SuppressLint("UnspecifiedRegisterReceiverFlag")
 	@Override
 	public void init() {
 		leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
@@ -110,17 +114,16 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		NavigationService service = app.getNavigationService();
-		return isEnabled()
-				&& service != null
-				&& (service.getUsedBy() & USED_BY_NAVIGATION) != 0;
-	}
-
-	@Override
-	public boolean isEnabled() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		return routingHelper.isFollowingMode()
 				|| (routingHelper.isRoutePlanningMode() && routingHelper.isPauseNavigation());
+	}
+
+	@Override
+	public boolean isUsedByService(@Nullable Service service) {
+		NavigationService navService = service instanceof NavigationService
+				? (NavigationService) service : app.getNavigationService();
+		return navService != null && (navService.getUsedBy() & USED_BY_NAVIGATION) != 0;
 	}
 
 	@Override
@@ -129,11 +132,10 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification(boolean wearable) {
-		if (!isEnabled()) {
+	public Builder buildNotification(@Nullable Service service, boolean wearable) {
+		if (!isEnabled(service)) {
 			return null;
 		}
-		NavigationService service = app.getNavigationService();
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
@@ -141,7 +143,7 @@ public class NavigationNotification extends OsmandNotification {
 		Bitmap turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
+		if (isUsedByService(service)) {
 			color = app.getColor(R.color.osmand_orange);
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app,
@@ -165,7 +167,6 @@ public class NavigationNotification extends OsmandNotification {
 				deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 
 				if (deviatedFromRoute) {
-					turnImminent = 0;
 					turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
 					nextTurnDistance = (int) routingHelper.getRouteDeviation();
 				} else {
@@ -281,19 +282,16 @@ public class NavigationNotification extends OsmandNotification {
 
 	@Override
 	public void setupNotification(Notification notification) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			int smallIconViewId = app.getResources().getIdentifier("right_icon", "id", android.R.class.getPackage().getName());
+		int smallIconViewId = app.getResources().getIdentifier("right_icon", "id", android.R.class.getPackage().getName());
+		if (smallIconViewId != 0) {
+			if (notification.contentView != null)
+				notification.contentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 
-			if (smallIconViewId != 0) {
-				if (notification.contentView != null)
-					notification.contentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
+			if (notification.headsUpContentView != null)
+				notification.headsUpContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 
-				if (notification.headsUpContentView != null)
-					notification.headsUpContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
-
-				if (notification.bigContentView != null)
-					notification.bigContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
-			}
+			if (notification.bigContentView != null)
+				notification.bigContentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 		}
 	}
 

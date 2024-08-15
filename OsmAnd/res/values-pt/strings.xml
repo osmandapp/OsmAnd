@@ -5848,4 +5848,14 @@
 \nCPU (mosaicos): %2$s
 \nCPU (tempo de inatividade): %3$s
 \nCPU (à espera da GPU): %4$s</string>
+    <string name="driving_region_uk">Reino Unido e similares</string>
+    <string name="ask_every_time">Perguntar todas as vezes</string>
+    <string name="detailed_track_guidance">Orientação pormenorizada do trilho</string>
+    <string name="shared_string_automatically">Automaticamente</string>
+    <string name="hugerock_promo">Promoção Hugerock para %1$s meses</string>
+    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trajeto a estradas próximas para uma melhor orientação curva a curva.</string>
+    <string name="quick_action_routes_summary">Uma opção para mostrar ou ocultar %1$s no mapa.</string>
+    <string name="hugerock_promo_description">Acesso gratuito a funcionalidades, incluindo descarregamentos ilimitados de mapas, relevo 3D, etc. por %1$s /mês</string>
+    <string name="driving_region_india">Índia</string>
+    <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha premido</string>
 </resources>

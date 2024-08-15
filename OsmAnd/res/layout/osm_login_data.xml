@@ -23,7 +23,7 @@
 		android:minHeight="@dimen/bottom_sheet_icon_margin"
 		android:text="@string/login_open_street_map"
 		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		android:textStyle="bold" />
 
 	<com.google.android.material.textfield.TextInputLayout
 		android:id="@+id/name_text_box"

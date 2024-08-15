@@ -53,7 +53,7 @@
 				android:text="@string/shared_string_read"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:drawableLeft="@drawable/ic_action_read_article"
 				tools:drawableTint="?attr/wikivoyage_active_color"
 				tools:ignore="UnusedAttribute"

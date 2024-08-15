@@ -777,7 +777,7 @@
     <string name="map_view_3d_descr">Activați afișarea în 3D a hărții.</string>
     <string name="map_view_3d">Vedere hartă în 3D</string>
     <string name="show_poi_over_map_description">Arată stratul cu ultimul punct de interes utilizat.</string>
-    <string name="show_poi_over_map">Arată strat cu punctele de interes</string>
+    <string name="show_poi_over_map">Arată stratul cu puncte de interes</string>
     <string name="map_tile_source_descr">Alegeți sursa hărților online sau a hărților segmentate din cache.</string>
     <string name="map_tile_source">Sursă hartă segmentată</string>
     <string name="map_source">Sursa hărții</string>
@@ -914,7 +914,7 @@
     <string name="av_settings">Setări audio/video </string>
     <string name="recording_error">Înregistrare eșuată</string>
     <string name="recording_camera_not_available">Camera video indisponibilă</string>
-    <string name="dropbox_plugin_description">"Sincronizați traseele  și notele audio/video cu contul Dropbox."</string>
+    <string name="dropbox_plugin_description">Sincronizați traseele și notele audio/video cu contul Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     <string name="intermediate_points_change_order">Schimbă ordinea</string>
     <string name="select_gpx">Selectează GPX…</string>
@@ -2393,13 +2393,13 @@
     <string name="shared_string_min_speed">Viteza minimă</string>
     <string name="shared_string_max_speed">Viteză maximă</string>
     <string name="default_speed_setting_title">Viteză implicită</string>
-    <string name="default_speed_setting_descr">Modificați setările de viteză implicită</string>
+    <string name="default_speed_setting_descr">Modificare setări implicite pentru viteză</string>
     <string name="minmax_speed_dialog_title">Setați viteza min/max</string>
     <string name="new_profile">Profil nou</string>
     <string name="apply_preference_to_all_profiles">Aplicați această modificare la toate profilurile sau la profilul selectat.</string>
     <string name="shared_preference">Partajat</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer drumurile nepavate</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferați drumurile neasfaltate în locul celor asfaltate pentru traseu.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferă drumuri nepavate</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferă drumuri neasfaltate în locul celor asfaltate pentru rutare.</string>
     <string name="layer_osm_edits">editare OSM</string>
     <string name="quick_action_contour_lines_descr">Buton ce arată sau ascunde liniile de contur de pe hartă.</string>
     <string name="quick_action_hillshade_descr">Un buton care să afișeze sau ascundă umbrirea reliefului pe hartă.</string>
@@ -2741,7 +2741,7 @@
     <string name="open_wikipedia_link_online">Deschideți linkul Wikipedia online</string>
     <string name="open_wikipedia_link_online_description">Link-ul va fi deschis într-un browser web.</string>
     <string name="read_wikipedia_offline">Citiți Wikipedia offline</string>
-    <string name="button_rate">Evaluați</string>
+    <string name="button_rate">Evaluează</string>
     <string name="sett_no_ext_input">Niciunul</string>
     <string name="reset_all_profile_settings">Resetați toate setările profilului\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -4931,7 +4931,7 @@
     <string name="pressure_layer">Strat presiuni</string>
     <string name="wind_layer">Strat vânturi</string>
     <string name="cloud_layer">Strat de nori</string>
-    <string name="precipitation_layer">Strat precipitații</string>
+    <string name="precipitation_layer">Stratul de precipitații</string>
     <string name="quick_action_precipitation_layer">Un comutator pentru a arăta/ascunde stratul precipitațiilor pe/de pe hartă.</string>
     <string name="quick_action_temperature_layer">Un comutator pentru a arăta/ascunde stratul temperaturilor pe/de pe hartă.</string>
     <string name="quick_action_cloud_layer">Un comutator pentru a arăta/ascunde stratul norilor pe/de pe hartă.</string>
@@ -4967,7 +4967,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflict</string>
+    <string name="cloud_conflict">Conflictul</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>
@@ -5643,33 +5643,23 @@
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">"• Noua opțiune de colorare a terenului \"Altitudine\"
 \n
-\n
 \n • Palete de culori personalizate pentru teren, trasee și rute
-\n
 \n
 \n • Variantă 3D la pictogramele poziției locației
 \n
-\n
 \n • Acțiunile rapide se pot atribui tastaturilor externe
-\n
 \n
 \n • Vremea: Reîmprospătare UI, adăugare animație vânt
 \n
-\n
 \n •  Îmbunătățiri ale traseelor 3D: noi opțiuni de vizualizare și colorizare
-\n
 \n
 \n • Selecție extinsă de rute turistice pe hartă
 \n
-\n
 \n • S-a adăugat opțiunea temei app pentru a urmări modul hartă
-\n
 \n
 \n • Statistici, sortare și căutare fixă a pistelor
 \n
-\n
 \n •  Editare OSM: s-a eliminat metoda de autorizare a login-ului / parolei
-\n
 \n
 \n • Trecerea la foaia de partajare a sistemului începând cu Android 14
 \n
@@ -5825,7 +5815,7 @@
     <string name="quick_action_parking_place">Loc de parcare</string>
     <string name="quick_action_verb_show_hide">Arată / Ascunde</string>
     <string name="quick_action_photo_note">Notă fotografică</string>
-    <string name="quick_action_verb_pause_resume">Pauză / Reia</string>
+    <string name="quick_action_verb_pause_resume">Pauză / Reluare</string>
     <string name="quick_action_verb_turn_on_off">Pornește / Oprește</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Ecran meteorologic</string>
@@ -5865,4 +5855,7 @@
     <string name="quick_action_routes_summary">O comutare pentru a afișa sau a ascunde %1$s pe hartă.</string>
     <string name="detailed_track_guidance_description">OsmAnd va potrivi traseul dumneavoastră cu drumurile din apropiere pentru o ghidare pas cu pas îmbunătățită.</string>
     <string name="hugerock_promo">Hugerock Promo pentru %1$s luni</string>
+    <string name="route_roundabout_exit">Luați-o pe ieșirea %1$d</string>
+    <string name="help_article_map_routes_name">Rute</string>
+    <string name="compass_click_north_is_up">Pentru a schimba modul de orientare, faceți clic și țineți apăsat</string>
 </resources>

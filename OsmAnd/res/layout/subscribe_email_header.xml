@@ -71,7 +71,7 @@
                 android:layout_marginLeft="64dp"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                osmand:typeface="@string/font_roboto_medium"
+                android:textStyle="bold"
                 osmand:textAllCapsCompat="true"
 	            android:layout_marginStart="64dp" />
 

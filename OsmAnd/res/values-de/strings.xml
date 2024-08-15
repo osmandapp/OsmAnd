@@ -3112,7 +3112,7 @@
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
-    <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
+    <string name="wake_time">Timeout (Abschaltzeit) nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
@@ -3589,7 +3589,7 @@
     <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
     <string name="turn_screen_on_power_button">Einschaltknopf</string>
     <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
-    <string name="turn_screen_on_wake_time_descr">Wählen Sie die Zeitüberschreitung des Bildschirms nach dem Aufwachen. („%1$s“, um keine Zeitüberschreitung anzuwenden.)</string>
+    <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. („%1$s“, um keinen Timeout anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
     <string name="screen_timeout_descr">Wenn „%1$s“ eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
@@ -3608,7 +3608,7 @@
 \nEine Woche hat 10 080 Minuten. 
 \nEin Monat hat 43 829 Minuten.</string>
     <string name="tiles_storage_descr">Wählen Sie, wie heruntergeladene Kacheln gespeichert werden sollen.</string>
-    <string name="default_screen_timeout">Zeitüberschreitung des Standardbildschirms</string>
+    <string name="default_screen_timeout">Timeout (Abschaltzeit) des Standardbildschirms</string>
     <string name="width_limit_description">Geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
@@ -3620,7 +3620,7 @@
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
     <string name="shared_string_night_map">Nachtkarte</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Zeitüberschreitung nach dem Aufwachen“.</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Timeout nach dem Aufwachen“.</string>
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
@@ -4932,7 +4932,7 @@
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
     <string name="temperature_layer">Temperaturebene</string>
-    <string name="pressure_layer">Druckebene</string>
+    <string name="pressure_layer">Luftdruckebene</string>
     <string name="wind_layer">Windebene</string>
     <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
@@ -5542,7 +5542,7 @@
     <string name="discard_changes_prompt">Änderungen verwerfen?</string>
     <string name="row_number">Zeile %1$s</string>
     <string name="tripltek_promo">Tripltek-Promo für %1$s Monate</string>
-    <string name="tripltek_promo_description">Kostenloser Zugriff für %1$s Monate auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw.</string>
+    <string name="tripltek_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="see_all_plans">Alle Pläne anzeigen</string>
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
@@ -5661,8 +5661,8 @@
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
-    <string name="fix_north_up">Festen Norden oben aktivieren</string>
-    <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
+    <string name="fix_north_up">Norden oben fixieren</string>
+    <string name="fix_north_up_descr">In der Kartenausrichtung \"Nord oben\" Karte nicht mit Gesten drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
@@ -5804,7 +5804,7 @@
     <string name="quick_action_photo_note">Fotonotiz</string>
     <string name="quick_action_parking_place">Parkplatz</string>
     <string name="quick_action_verb_show_hide">Einblenden / Ausblenden</string>
-    <string name="quick_action_verb_pause_resume">Einschalten / Ausschalten</string>
+    <string name="quick_action_verb_pause_resume">Pause / Fortsetzen</string>
     <string name="quick_action_verb_start_stop">Start / Stopp</string>
     <string name="weather_screen">Wetterbildschirm</string>
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>
@@ -5848,12 +5848,21 @@
     <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Bitte wenden</string>
     <string name="driving_region_india">Indien</string>
-    <string name="driving_region_uk">UK und ähnlich</string>
-    <string name="hugerock_promo_description">Kostenloser Zugang zu Funktionen wie unbegrenzten Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
+    <string name="driving_region_uk">UK und andere</string>
+    <string name="hugerock_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Jedes Mal fragen</string>
     <string name="detailed_track_guidance">Detaillierte Streckenführung</string>
-    <string name="detailed_track_guidance_description">OsmAnd wird deine Strecke an nahegelegene Straßen anpassen, um eine verbesserte Abbiegeführung zu bieten.</string>
+    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Track mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
+    <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
+    <string name="help_article_map_tracks_name">Strecken</string>
+    <string name="help_article_map_routes_name">Routen</string>
+    <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
+    <string name="height_cache">Höhen-Cache</string>
+    <string name="add_widget_below">Widget unten hinzufügen</string>
+    <string name="add_widget_above">Widget oben hinzufügen</string>
+    <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
+    <string name="add_widget_to_the_left">Widget links hinzufügen</string>
 </resources>

@@ -35,7 +35,7 @@
 				android:paddingTop="@dimen/content_padding_medium"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="Monthly subscription" />
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -71,7 +71,7 @@
 				android:gravity="center"
 				tools:visibility="visible"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				osmand:lineHeight="@dimen/default_desc_line_height"
 				tools:text="-50%" />
 
@@ -84,7 +84,7 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				osmand:lineHeight="@dimen/map_top_widget_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="€ 3 / month" />
 
 		</LinearLayout>
@@ -97,7 +97,7 @@
 			android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			android:visibility="gone"
 			tools:visibility="visible"
 			tools:text="Regular price: € 24,99 / Year" />

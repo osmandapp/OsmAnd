@@ -1002,6 +1002,7 @@ public class RouteResultPreparation {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
+						replaceConfusingKeepTurnsWithLaneTurn(currentSegment, leftside);
 					}
 				}
 				if (!merged) {
@@ -1011,6 +1012,28 @@ public class RouteResultPreparation {
 				nextSegment = currentSegment;
 				dist = 0;
 			}
+		}
+	}
+
+	private void replaceConfusingKeepTurnsWithLaneTurn(RouteSegmentResult currentSegment, boolean leftSide) {
+		if (currentSegment.getTurnType() == null) {
+			return;
+		}
+		int currentTurn = currentSegment.getTurnType().getValue();
+		int activeTurn = currentSegment.getTurnType().getActiveCommonLaneTurn();
+		boolean changeToActive = false;
+		if (TurnType.isKeepDirectionTurn(currentTurn) && !TurnType.isKeepDirectionTurn(activeTurn)) {
+			if (TurnType.isLeftTurn(currentTurn) && !TurnType.isLeftTurn(activeTurn)) {
+				changeToActive = true;
+			}
+			if (TurnType.isRightTurn(currentTurn) && !TurnType.isRightTurn(activeTurn)) {
+				changeToActive = true;
+			}
+		}
+		if (changeToActive) {
+			TurnType turn = TurnType.valueOf(activeTurn, leftSide);
+			turn.setLanes(currentSegment.getTurnType().getLanes());
+			currentSegment.setTurnType(turn);
 		}
 	}
 
@@ -2233,6 +2256,9 @@ public class RouteResultPreparation {
 			if (isKeepTurn(turnType) && isHighSpeakPriority(curr)) {
 				continue;
 			}
+			if (isForkByLanes(curr, result.get(i - 1))) {
+				continue;
+			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll) {
@@ -2446,6 +2472,17 @@ public class RouteResultPreparation {
 			String c = attach.getObject().getHighway();
 			if( highwaySpeakPriority(h) >= highwaySpeakPriority(c)) {
 				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isForkByLanes(RouteSegmentResult curr, RouteSegmentResult prev) {
+		//check for Y-intersections with many lanes
+		if (countLanesMinOne(curr) < countLanesMinOne(prev)) {
+			List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
+			if (attachedRoutes.size() == 1) {
+				return countLanesMinOne(attachedRoutes.get(0)) >= 2;
 			}
 		}
 		return false;

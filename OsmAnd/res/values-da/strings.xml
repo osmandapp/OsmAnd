@@ -2943,7 +2943,7 @@
     <string name="profile_alert_need_save_title">Gem ændringer</string>
     <string name="profile_alert_need_save_msg">Gem ændringer til profilen først</string>
     <string name="profile_alert_delete_title">Slet profil</string>
-    <string name="profile_alert_delete_msg">Slet profilen \"%s\"\?</string>
+    <string name="profile_alert_delete_msg">Slet profilen \"%s\"</string>
     <string name="select_base_profile_dialog_title">Vælg en profil til at starte med</string>
     <string name="select_base_profile_dialog_message">Basér den brugerdefinerede profil på en af standard app-profilerne, dette definerer den grundlæggende opsætning som standard synlighed for moduler og enheder for hastighed og distance. Dette er standard app-profilerne, sammen med eksempler på brugerdefinerede profiler kan de udvides til:</string>
     <string name="select_nav_profile_dialog_title">Vælg navigationstype</string>
@@ -5857,4 +5857,13 @@
     <string name="detailed_track_guidance_description">OsmAnd vil matche dit spor med nærliggende veje for at forbedre sving-for-sving-vejledningen.</string>
     <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
     <string name="shared_string_automatically">Automatisk</string>
+    <string name="compass_click_north_is_up">Klik og hold for at ændre orienteringstilstand</string>
+    <string name="help_article_map_tracks_name">Spor</string>
+    <string name="help_article_map_routes_name">Ruter</string>
+    <string name="route_roundabout_exit">Tag %1$d afkørsel</string>
+    <string name="add_widget_above">Tilføj modul ovenfor</string>
+    <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
+    <string name="height_cache">Højde-cache</string>
+    <string name="add_widget_below">Tilføj modul nedenfor</string>
+    <string name="add_widget_to_the_right">Tilføj modul til højre</string>
 </resources>

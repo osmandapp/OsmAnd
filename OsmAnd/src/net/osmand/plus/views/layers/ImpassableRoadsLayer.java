@@ -59,17 +59,27 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		avoidRoadsHelper = getApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
+		createResources();
 		activePaint = new Paint();
 		ColorMatrix matrix = new ColorMatrix();
 		matrix.setSaturation(0);
 		paint = new Paint();
 		paint.setColorFilter(new ColorMatrixColorFilter(matrix));
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		createResources();
+	}
+
+	private void createResources(){
+		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
 	}
 
 	@Override

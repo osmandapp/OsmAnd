@@ -83,7 +83,6 @@ public class RoutingHelper {
 	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped;
-	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -230,6 +229,7 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		this.lastGoodRouteLocation = null;
 		this.intermediatePoints = newIntermediatePoints;
 		routeRecalculationHelper.stopCalculation();
 		if (newFinalLocation == null) {
@@ -629,10 +629,8 @@ public class RoutingHelper {
 
 		// 5. Update car navigation
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		NavigationService navigationService = app.getNavigationService();
-		if (carNavigationSession != null && navigationService != null && System.currentTimeMillis() - lastCarNavUpdateTime > 1000) {
-			lastCarNavUpdateTime = System.currentTimeMillis();
-			app.runInUIThread(() -> navigationService.updateCarNavigation(currentLocation));
+		if (carNavigationSession != null) {
+			app.runInUIThread(() -> carNavigationSession.updateCarNavigation(currentLocation));
 		}
 		return false;
 	}

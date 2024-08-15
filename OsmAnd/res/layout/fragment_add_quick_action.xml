@@ -51,7 +51,7 @@
 						android:layout_marginVertical="@dimen/content_padding_half"
 						android:text="@string/dialog_add_action_title"
 						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 					<include
 						layout="@layout/search_text_layout"

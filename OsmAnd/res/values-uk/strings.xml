@@ -5705,7 +5705,7 @@
 \n • Вхід до OpenStreetMap переключено на OAuth 2.0
 \n
 \n</string>
-    <string name="visualized_by">Візуаліовано</string>
+    <string name="visualized_by">Візуалізовано</string>
     <string name="track_line">Лінія треку</string>
     <string name="fixed_height">Фіксована висота</string>
     <string name="downward_gradient">Спадний градієнт</string>
@@ -5843,13 +5843,23 @@
 \nПроцесор (час простою): %3$s
 \nCPU (очікує CPU): %4$s</string>
     <string name="resting_position">Положення спокою</string>
-    <string name="auto_25_chars_route_kl">Тримайся ліворуч</string>
-    <string name="auto_25_chars_route_kr">Тримайся праворуч</string>
-    <string name="auto_25_chars_route_tr">Поверни праворуч</string>
-    <string name="auto_25_chars_route_tshr">Різко поверни праворуч</string>
-    <string name="auto_25_chars_route_tslr">Поверни трохи праворуч</string>
-    <string name="auto_25_chars_route_tl">Поверни наліво</string>
-    <string name="auto_25_chars_route_tshl">Різко поверни ліворуч</string>
-    <string name="auto_25_chars_route_tsll">Поверни трохи ліворуч</string>
-    <string name="auto_25_chars_route_tu">Зроби розворот</string>
+    <string name="auto_25_chars_route_kl">Тримайтеся ліворуч</string>
+    <string name="auto_25_chars_route_kr">Тримайтеся праворуч</string>
+    <string name="auto_25_chars_route_tr">Поверніть праворуч</string>
+    <string name="auto_25_chars_route_tshr">Різко поверніть праворуч</string>
+    <string name="auto_25_chars_route_tslr">Плавно поверніть праворуч</string>
+    <string name="auto_25_chars_route_tl">Поверніть ліворуч</string>
+    <string name="auto_25_chars_route_tshl">Різко поверніть ліворуч</string>
+    <string name="auto_25_chars_route_tsll">Плавно поверніть ліворуч</string>
+    <string name="auto_25_chars_route_tu">Виконайте розворот</string>
+    <string name="driving_region_uk">Велика Британія та подібні</string>
+    <string name="hugerock_promo_description">Безплатний доступ до функцій, включно з необмеженою кількістю завантажень мап, 3D-рельєф тощо на %1$s місяця</string>
+    <string name="driving_region_india">Індія</string>
+    <string name="hugerock_promo">Промо Hugerock на %1$s місяців</string>
+    <string name="detailed_track_guidance_description">OsmAnd зіставить ваш трек із сусідніми дорогами для поліпшення покрокового супроводу.</string>
+    <string name="quick_action_routes_summary">Перемикач, щоб показати або прибрати %1$s на мапі.</string>
+    <string name="detailed_track_guidance">Покрокова маршрутизація треком</string>
+    <string name="ask_every_time">Запитувати щоразу</string>
+    <string name="shared_string_automatically">Автоматично</string>
+    <string name="compass_click_north_is_up">Затисніть, щоб змінити режим орієнтації</string>
 </resources>

@@ -14,7 +14,6 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.measurementtool.GpxApproximationHelper;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -50,7 +49,10 @@ public class RestoreNavigationHelper {
 		// This situation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+			LOG.info("Try to restore route - proceed");
 			restoreRoutingMode();
+		} else {
+			LOG.info("Try to restore route - nothing to restore");
 		}
 	}
 
@@ -82,19 +84,7 @@ public class RestoreNavigationHelper {
 				if (pointToNavigate == null) {
 					notRestoreRoutingMode();
 				} else {
-					ApplicationMode appMode = routingHelper.getAppMode();
-					if (gpxFile != null && !gpxFile.isAttachedToRoads()
-							&& settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
-						GpxApproximationParams params = new GpxApproximationParams();
-						params.setAppMode(appMode);
-						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
-						GpxApproximationHelper.approximateGpxAsync(app, gpxFile, params, approxGpx -> {
-							enterRoutingMode(createGpxRouteParams(approxGpx));
-							return true;
-						});
-					} else {
-						enterRoutingMode(createGpxRouteParams(gpxFile));
-					}
+					enterRoutingMode(createGpxRouteParams(gpxFile));
 				}
 			}
 
@@ -103,6 +93,7 @@ public class RestoreNavigationHelper {
 				GPXRouteParamsBuilder builder = null;
 				if (gpxFile != null) {
 					builder = new GPXRouteParamsBuilder(gpxFile, settings);
+
 					if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 						builder.setCalculateOsmAndRouteParts(true);
 					}
@@ -117,6 +108,14 @@ public class RestoreNavigationHelper {
 					if (routeIndex != -1) {
 						builder.setSelectedRoute(routeIndex);
 					}
+					ApplicationMode appMode = routingHelper.getAppMode();
+					if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
+						GpxApproximationParams params = new GpxApproximationParams();
+						params.setAppMode(appMode);
+						params.setDistanceThreshold(settings.GPX_APPROXIMATION_DISTANCE.getModeValue(appMode));
+
+						builder.setApproximationParams(params);
+					}
 				}
 				return builder;
 			}
@@ -126,6 +125,7 @@ public class RestoreNavigationHelper {
 
 	public void enterRoutingMode(@Nullable GPXRouteParamsBuilder gpxRoute) {
 		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
+		LOG.info(">>>> RESTORE ROUTE - enterRoutingMode");
 
 		app.getMapViewTrackingUtilities().backToLocationImpl();
 		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);

@@ -50,7 +50,7 @@
 				android:layout_marginBottom="@dimen/bottom_sheet_title_padding_top"
 				android:textColor="?attr/wikivoyage_primary_text_color"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="Point title" />
 
 			<androidx.appcompat.widget.AppCompatImageView

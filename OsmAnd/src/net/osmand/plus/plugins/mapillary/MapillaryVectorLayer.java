@@ -88,8 +88,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		paintPoint = new Paint();
 		paintLine = new Paint();
@@ -116,6 +116,12 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		selectedImage = getScaledBitmap(R.drawable.map_mapillary_location);
 		headingImage = getScaledBitmap(R.drawable.map_mapillary_location_view_angle);
 		point = getScaledBitmap(R.drawable.map_mapillary_photo_dot);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateBitmaps(true);
 	}
 
 	@Override

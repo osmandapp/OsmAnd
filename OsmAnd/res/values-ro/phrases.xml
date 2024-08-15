@@ -2311,7 +2311,7 @@
     <string name="poi_official_name">Denumire oficială</string>
     <string name="poi_boxing">Box</string>
     <string name="poi_lacrosse">Crosă</string>
-    <string name="poi_shuffleboard">Shuffleboard</string>
+    <string name="poi_shuffleboard">Tablă de șah</string>
     <string name="poi_squash">Dovleac</string>
     <string name="poi_rc_car">Curse de mașini radiocomandate</string>
     <string name="poi_futsal">Fotbal de sală</string>
@@ -2851,7 +2851,7 @@
     <string name="poi_aerodrome_type_military_public">Militar/public</string>
     <string name="poi_aerodrome_type_military">Militară</string>
     <string name="poi_aerodrome_type_public">Publicul</string>
-    <string name="poi_aerodrome_type_regional">Regional</string>
+    <string name="poi_aerodrome_type_regional">Regională</string>
     <string name="poi_aerodrome_type_international">Internațional</string>
     <string name="poi_dispensing_no">Distribuție: nu</string>
     <string name="poi_dispensing_yes">Da;Distribuție</string>
@@ -3109,7 +3109,7 @@
     <string name="poi_cuisine_cantonese">Cantonez</string>
     <string name="poi_cuisine_swiss">Elvețian</string>
     <string name="poi_cuisine_basque">Basc</string>
-    <string name="poi_cuisine_belgian">Belgian</string>
+    <string name="poi_cuisine_belgian">Belgiană</string>
     <string name="poi_cuisine_afghan">Afgan</string>
     <string name="poi_cuisine_ukrainian">Ucrainean</string>
     <string name="poi_cuisine_middle_eastern">Orientul Mijlociu</string>
@@ -3134,7 +3134,7 @@
     <string name="poi_cuisine_croatian">Croat</string>
     <string name="poi_cuisine_peruvian">Peruan</string>
     <string name="poi_cuisine_balkan">Balcanic</string>
-    <string name="poi_cuisine_argentinian">Argentinian</string>
+    <string name="poi_cuisine_argentinian">Argentiniană</string>
     <string name="poi_cuisine_caribbean">Caraibean</string>
     <string name="poi_cuisine_african">African</string>
     <string name="poi_cuisine_indonesian">Indonezian</string>
@@ -3165,10 +3165,10 @@
     <string name="poi_cuisine_mexican">Mexican</string>
     <string name="poi_cuisine_chinese">Chinezesc</string>
     <string name="poi_cuisine_italian">Italian</string>
-    <string name="poi_cuisine_regional">Regional</string>
+    <string name="poi_cuisine_regional">Regională</string>
     <string name="poi_cuisine_shawarma">Șaorma</string>
     <string name="poi_cuisine_teriyaki">Teriyaki</string>
-    <string name="poi_cuisine_burrito">Burrito</string>
+    <string name="poi_cuisine_burrito">Burito</string>
     <string name="poi_cuisine_pastel">Pasteis</string>
     <string name="poi_cuisine_baguette">Baghetă</string>
     <string name="poi_cuisine_fondue">Fondue</string>
@@ -3196,7 +3196,7 @@
     <string name="poi_cuisine_souvlaki">Souvlaki</string>
     <string name="poi_cuisine_smoothie">Smoothie</string>
     <string name="poi_cuisine_falafel">Falafel</string>
-    <string name="poi_cuisine_piadina">Piadina</string>
+    <string name="poi_cuisine_piadina">Piadină</string>
     <string name="poi_cuisine_tacos">Taco</string>
     <string name="poi_cuisine_canteen">Cantină</string>
     <string name="poi_cuisine_dessert">Desert</string>
@@ -3215,7 +3215,7 @@
     <string name="poi_cuisine_tea_shop">Magazin de ceai</string>
     <string name="poi_cuisine_tea">Ceai</string>
     <string name="poi_cuisine_fine_dining">Mâncare rafinată</string>
-    <string name="poi_cuisine_soba">Soba</string>
+    <string name="poi_cuisine_soba">Sobă</string>
     <string name="poi_cuisine_juice">Suc de fructe</string>
     <string name="poi_cuisine_fast_food">Fast food</string>
     <string name="poi_cuisine_pasta">Paste</string>
@@ -3761,7 +3761,7 @@
     <string name="poi_fencing">Scrimă</string>
     <string name="poi_cycle_polo">Bike polo</string>
     <string name="poi_curling">Curling</string>
-    <string name="poi_crossfit">Crossfit</string>
+    <string name="poi_crossfit">Cross fit</string>
     <string name="poi_cockfighting">Lupte de cocoși</string>
     <string name="poi_cliff_diving">Scufundări de pe faleză</string>
     <string name="poi_bullfighting">Coridă</string>
@@ -3772,7 +3772,7 @@
     <string name="poi_zurkhaneh_sport">Sport Zurkhaneh</string>
     <string name="poi_wrestling">Lupte libere</string>
     <string name="poi_weightlifting">Haltere</string>
-    <string name="poi_wakeboarding">Wakeboarding</string>
+    <string name="poi_wakeboarding">Nautism</string>
     <string name="poi_ultimate">Ultimate frisbee</string>
     <string name="poi_table_soccer">Fotbal de masă</string>
     <string name="poi_speedway">Circuit speedway</string>

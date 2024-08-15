@@ -35,14 +35,7 @@ import java.io.Serializable;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 public class DownloadOsmandIndexesHelper {
@@ -161,35 +154,32 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 
-	private static void addTtsVoiceIndexes(OsmandApplication app, IndexFileList indexes) {
-		List<IndexItem> ttsIndexes = listTtsVoiceIndexes(app, false);
-		for (IndexItem index : ttsIndexes) {
-			indexes.add(index);
+	private static void addTtsVoiceIndexes(@NonNull OsmandApplication app, @NonNull IndexFileList indexes) {
+		List<IndexItem> items = listTtsVoiceIndexes(app, false);
+		for (IndexItem item : items) {
+			indexes.add(item);
 		}
 	}
 
 	@NonNull
-	public static List<IndexItem> listTtsVoiceIndexes(OsmandApplication app) {
+	public static List<IndexItem> listTtsVoiceIndexes(@NonNull OsmandApplication app) {
 		return listTtsVoiceIndexes(app, true);
 	}
 
 	@NonNull
-	private static List<IndexItem> listTtsVoiceIndexes(OsmandApplication app, boolean sort) {
-		List<IndexItem> ttsList = new ArrayList<>();
-
+	private static List<IndexItem> listTtsVoiceIndexes(@NonNull OsmandApplication app, boolean sort) {
+		List<IndexItem> items = new ArrayList<>();
 		try {
 			List<AssetEntry> bundledAssets = getBundledAssets(app.getAssets());
-			ttsList.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
-			ttsList.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
-		} catch (IOException | XmlPullParserException e) {
+			items.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
+			items.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
+		} catch (Exception e) {
 			log.error("Error while loading tts files from assets", e);
 		}
-
 		if (sort) {
-			Collections.sort(ttsList, DownloadResourceGroup.getComparator(app));
+			items.sort(DownloadResourceGroup.getComparator(app));
 		}
-
-		return ttsList;
+		return items;
 	}
 
 	@NonNull

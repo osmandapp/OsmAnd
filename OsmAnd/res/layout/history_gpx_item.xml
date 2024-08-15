@@ -48,7 +48,7 @@
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					tools:text="@string/current_track" />
 
 				<LinearLayout
@@ -81,7 +81,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						android:textStyle="normal"
 						tools:text="13 km" />
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -103,7 +103,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						android:textStyle="normal"
 						tools:text="1:23:56" />
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -123,7 +123,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						android:textStyle="normal"
 						tools:text="14" />
 
 				</LinearLayout>

@@ -1230,16 +1230,16 @@ public class OsmandSettings {
 		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.MOVEMENT_DEFAULT.name());
 	}
 
-	public final CommonPreference<String> LOCATION_ICON = new StringPreference(this, "location_icon", LocationIcon.DEFAULT.name()).makeProfile().cache();
+	public final CommonPreference<String> LOCATION_ICON = new StringPreference(this, "location_icon", LocationIcon.STATIC_DEFAULT.name()).makeProfile().cache();
 
 	{
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.DEFAULT.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.CAR.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.BICYCLE.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.DEFAULT.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE.name());
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.STATIC_DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.STATIC_CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.STATIC_BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.STATIC_DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.STATIC_CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.STATIC_BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.STATIC_BICYCLE.name());
 	}
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference(this, "app_mode_order", 0).makeProfile().cache();
@@ -1789,6 +1789,10 @@ public class OsmandSettings {
 
 	public void setCompassMode(@NonNull CompassMode compassMode) {
 		ROTATE_MAP.set(compassMode.getValue());
+	}
+
+	public void setCompassMode(@NonNull CompassMode compassMode, @NonNull ApplicationMode appMode) {
+		ROTATE_MAP.setModeValue(appMode, compassMode.getValue());
 	}
 
 	public static final int POSITION_PLACEMENT_AUTOMATIC = 0;
@@ -3122,7 +3126,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> GPX_APPROXIMATION_DISTANCE = new IntPreference(this, "gpx_approximation_distance", DEFAULT_POINT_APPROXIMATION).makeProfile().makeShared();
 
 	// for background service
-	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference(this, "map_activity_enabled", false).makeGlobal();
+	public boolean MAP_ACTIVITY_ENABLED = false;
 
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference(this, "safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();

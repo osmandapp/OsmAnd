@@ -35,7 +35,7 @@
 				android:lines="1"
 				android:textColor="?android:attr/textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				android:textStyle="bold"
 				tools:text="700 km" />
 
 			<FrameLayout

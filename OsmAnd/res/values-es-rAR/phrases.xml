@@ -827,7 +827,7 @@
     <string name="poi_breakwater">Rompeolas</string>
     <string name="poi_basin">Cuenca</string>
     <string name="poi_crane">Grúa</string>
-    <string name="poi_tree">Árbol</string>
+    <string name="poi_tree">Árbol;Arbol</string>
     <string name="poi_abandoned">Abandonado</string>
     <string name="poi_disused">En desuso</string>
     <string name="poi_groyne">Espigón</string>
@@ -2817,7 +2817,7 @@
     <string name="poi_xmas_pyramid">Pirámide navideña</string>
     <string name="poi_xmas_shop">Tienda navideña</string>
     <string name="poi_xmas_shop_christmas_tree">Venta de árboles</string>
-    <string name="poi_xmas_tree">Árbol navideño</string>
+    <string name="poi_xmas_tree">Árbol navideño;Árbol de navidad;Arbol navideño</string>
     <string name="poi_xmas_day_date">Período de fecha para evento navideño</string>
     <string name="poi_xmas_note">Navidad: nota</string>
     <string name="poi_xmas_opening_hours">Navidad: horario de atención;horario de apertura</string>
@@ -4216,7 +4216,7 @@
     <string name="poi_computer_parts_no">Partes de computadora: no</string>
     <string name="poi_computer_sales">Venta de computadoras</string>
     <string name="poi_computer_parts">Partes para computadoras</string>
-    <string name="poi_computer_repair">Reparación de computadoras</string>
+    <string name="poi_computer_repair">Reparación de computadoras;Reparación de ordenadores</string>
     <string name="poi_post_office_type">Tipo de oficina postal</string>
     <string name="poi_museum_art">Arte</string>
     <string name="poi_museum_aviation">Aviación</string>

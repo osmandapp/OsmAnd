@@ -18,7 +18,7 @@
     <string name="way_alarms">Avisos de tráfico</string>
     <string name="background_service_is_enabled_question">O servizo en segundo plano do OsmAnd aínda está en execución. Desexas detelo tamén\?</string>
     <string name="sleep_mode_stop_dialog">Deter o modo de segundo plano do GPS?</string>
-    <string name="stop_navigation_service">Deter</string>
+    <string name="stop_navigation_service">Finalizar</string>
     <string name="confirm_every_run">Preguntar sempre</string>
     <string name="save_global_track_interval">Intre de rexistro xeral</string>
     <string name="background_service_int">Intre de activación do GPS</string>
@@ -367,7 +367,7 @@
     <string name="download_hillshade_maps">Sombreado</string>
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos de son/vídeo</string>
-    <string name="stop_routing_confirm">Tes a certeza de querer deter a navegación\?</string>
+    <string name="stop_routing_confirm">Tes a certeza de querer finalizar a navegación?</string>
     <string name="clear_dest_confirm">Tes a certeza de querer limpar o destino (e os destinos intermedios)\?</string>
     <string name="precise_routing_mode_descr">Calcular rutas precisas sen interferencias. Aínda está limitado polas distancias e é tardo.</string>
     <string name="precise_routing_mode">Navegación precisa (alfa)</string>
