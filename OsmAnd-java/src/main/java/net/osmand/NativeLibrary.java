@@ -694,54 +694,28 @@ public class NativeLibrary {
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (o == null || getClass() != o.getClass())
-				return false;
-			if (tags.size() != ((RenderedObject) o).tags.size())
-				return false;
-			if (x.size() != ((RenderedObject) o).x.size())
-				return false;
-			if (!name.equals(((RenderedObject) o).name)) {
-				return false;
-			}
-			Map<String, String> otherTags = ((RenderedObject) o).tags;
-			for (Map.Entry<String, String> entry : tags.entrySet()) {
-				if (!otherTags.containsKey(entry.getKey())) {
-					return false;
-				}
-				if (!otherTags.get(entry.getKey()).equals(entry.getValue())) {
-					return false;
-				}
-			}
-			Map<String, String> otherNames = ((RenderedObject) o).names;
-			for (Map.Entry<String, String> entry : names.entrySet()) {
-				if (!otherNames.containsKey(entry.getKey())) {
-					return false;
-				}
-				if (!otherNames.get(entry.getKey()).equals(entry.getValue())) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(x, y, tags, names);
-		}
-
-		@Override
 		public String toString() {
-			String s = /*getClass().getSimpleName() + " " +*/ name;
+			String s = getClass().getSimpleName() + " " + name;
+			String link = getLink();
+			String tags = getPrintTags();
+			s += s.contains(link) ? "" : link;
+			s += s.contains(tags) ? "" : tags;
+			return s;
+		}
+		public String getLink() {
+			String s = "";
 			if (id != null && id > 0) {
 				if (x.size() > 1 && String.valueOf(id / 2).length() > 10) {
-					s += "(" + id + ") OSM relation";
+					s +=  "OSM relation";
 				} else {
-					s += "(" + id + ") https://osm.org/" + (x.size() > 1 ? "way/" : "node/") + (id / 2);
+					s += "https://osm.org/" + (x.size() > 1 ? "way/" : "node/") + (id / 2);
 				}
 			}
+			return s;
+		}
+
+		public String getPrintTags() {
+			String s = "";
 			for (Map.Entry<String, String> entry : tags.entrySet()) {
 				s += " " + entry.getKey() + ":" + entry.getValue();
 			}

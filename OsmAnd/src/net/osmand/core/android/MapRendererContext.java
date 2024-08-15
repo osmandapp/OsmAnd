@@ -36,7 +36,6 @@ import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.PolygonsAndPointsHash;
 import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.QStringList;
@@ -48,6 +47,7 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -669,29 +669,20 @@ public class MapRendererContext {
 		}
 	}
 
-	public Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> getPolygonsAndPoints(PointI point, ZoomLevel zoomLevel) {
-		PolygonsAndPointsHash polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
-		Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res = new HashMap<>();
+	public List<NativeLibrary.RenderedObject> getPolygons(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
+		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+		List<NativeLibrary.RenderedObject> res = new ArrayList<>();
 		if (polygons.size() > 0) {
-			MapObjectList keys = polygons.keys();
-			for (int i = 0; i < keys.size(); i++) {
-				MapObject polygon = keys.get(i);
-				NativeLibrary.RenderedObject key = convert(polygon);
-				MapObjectList list = polygons.get(polygon);
-				List<NativeLibrary.RenderedObject> resList = new ArrayList<>();
-				for (int j = 0; j < list.size(); j++) {
-					resList.add(convert(list.get(j)));
-				}
-				/*For test only*/
-				key.setName(key.getName() + " [inside: " + list.size() + " ] ");
-				/*---*/
-				res.put(key, resList);
+			for (int i = 0; i < polygons.size(); i++) {
+				MapObject polygon = polygons.get(i);
+				NativeLibrary.RenderedObject renderedObject = convert(polygon, i);
+				res.add(renderedObject);
 			}
 		}
 		return res;
 	}
 
-	private NativeLibrary.RenderedObject convert(MapObject mapObject) {
+	private NativeLibrary.RenderedObject convert(MapObject mapObject, int order) {
 		NativeLibrary.RenderedObject res = new NativeLibrary.RenderedObject();
 		QStringStringHash tags = mapObject.getResolvedAttributes();
 		QStringList tagsKeys = tags.keys();
@@ -728,10 +719,19 @@ public class MapRendererContext {
 			res.setId(obfMapObject.getId().getOsmId());
 		}
 
+		res.setOrder(order);
+
 		/*For test only*/
 		if (res.getName().isEmpty()) {
-			res.setName(res.toString());
+			MapPoiTypes mapPoiTypes = app.getPoiTypes();
+			for (Map.Entry<String, String> entry : res.getTags().entrySet()) {
+				String n = mapPoiTypes.getPoiTranslation(entry.getValue());
+				if (!Algorithms.isEmpty(n) && !n.toLowerCase().equals(entry.getValue())) {
+					name += n + ", ";
+				}
+			}
 		}
+		res.setName(name + " " + res.getLink() + " " + res.getPrintTags());
 		/*---*/
 		return res;
 	}

@@ -284,17 +284,12 @@ public class MapSelectionHelper {
 		MapRendererView rendererView = view.getMapRenderer();
 		if (rendererView != null) {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			Map<NativeLibrary.RenderedObject, List<NativeLibrary.RenderedObject>> res;
 			if (mapContext != null) {
-				res = mapContext.getPolygonsAndPoints(NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y), rendererView.getZoomLevel());
-
-				for (Map.Entry<RenderedObject, List<RenderedObject>> entry : res.entrySet()) {
-					System.out.println(entry.getKey());
-					for (RenderedObject m : entry.getValue()) {
-						System.out.println("        " + m);
-					}
+				List<NativeLibrary.RenderedObject> res = mapContext.getPolygons(NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y), rendererView.getZoomLevel(), false);
+				for (RenderedObject polygon : res) {
+					System.out.println(polygon);
 					System.out.println("------------------------");
-					result.selectedObjects.put(entry.getKey(), mapLayers.getPoiMapLayer());
+					result.selectedObjects.put(polygon, mapLayers.getPoiMapLayer());
 				}
 			}
 			int delta = 20;
