@@ -28,6 +28,7 @@ OsmAndHms.jks
 
 # Android Studio
 .attach_pid*
+hs_err_pid*
 /.idea
 *.iml
 
