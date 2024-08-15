@@ -5193,7 +5193,7 @@
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Tidak ada sensor dengan jenis ini yang terhubung</string>
     <string name="external_sensors_not_found">Sensor tidak ditemukan</string>
-    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder \"%1$s\" dan termasuk semua trek (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Pilihan uni akan menghapus folder \"%1$s\" dan termasuk semua trek (%2$s).</string>
     <string name="tracks_empty_folder_description">Folder ini belum memiliki trek apa pun.</string>
     <string name="delete_folder">Hapus folder</string>
     <string name="rssi_widget_desc">Menampilkan tingkat RSSI dari perangkat eksternal Anda.</string>
@@ -5471,7 +5471,7 @@
     <string name="empty_name">Nama kosong</string>
     <string name="edit_filter">Sunting saringan</string>
     <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
-    <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Pilihan ini akan menghapus folder pintar \"%1$s\".</string>
     <string name="empty_smart_folder_title">Tidak ada trek yang cocok</string>
     <string name="empty_smart_folder_description">Trek yang cocok akan muncul di sini</string>
     <string name="configure_filter">Atur saringan</string>

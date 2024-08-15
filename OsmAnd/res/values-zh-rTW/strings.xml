@@ -5846,4 +5846,9 @@
     <string name="help_article_map_tracks_name">軌跡</string>
     <string name="route_roundabout_exit">自第 %1$d 個出口離開</string>
     <string name="help_article_map_routes_name">路線</string>
+    <string name="add_widget_above">在上方新增小工具</string>
+    <string name="add_widget_to_the_right">在右方新增小工具</string>
+    <string name="add_widget_to_the_left">在左方新增小工具</string>
+    <string name="height_cache">高度快取</string>
+    <string name="add_widget_below">在下方新增小工具</string>
 </resources>
