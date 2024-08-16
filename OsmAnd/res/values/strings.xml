@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="background_opacity">Background opacity</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="shared_string_dp">dp</string>
 	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
 	<string name="delete_widget">Delete widget?</string>
 	<string name="add_widget_below">Add widget below</string>

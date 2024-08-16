@@ -1,13 +1,15 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.widget.ImageView.ScaleType.CENTER;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,6 +38,8 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 	private ButtonAppearanceParams appearanceParams;
 	private ButtonAppearanceParams customAppearanceParams;
 
+	private final int strokeWidth;
+
 	private boolean nightMode;
 	private boolean widgetVisible;
 
@@ -53,7 +57,7 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.uiUtilities = app.getUIUtilities();
 		this.layer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
-		this.nightMode = app.getDaynightHelper().isNightMode();
+		this.strokeWidth = app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke);
 	}
 
 	@NonNull
@@ -84,8 +88,11 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 			this.widgetVisible = widgetVisible;
 			this.appearanceParams = params;
 
+			int size = AndroidUtils.dpToPx(getContext(), appearanceParams.getSize());
+
 			updateIcon();
-			setBackground(AppCompatResources.getDrawable(app, nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans));
+			updateSize(size);
+			updateBackground(size);
 		}
 	}
 
@@ -110,5 +117,34 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 				OsmandMapLayer.setMapButtonIcon(this, uiUtilities.getPaintedIcon(R.drawable.ic_quick_action, iconColor), CENTER);
 			}
 		}
+	}
+
+	private void updateSize(int size) {
+		ViewGroup.LayoutParams params = getLayoutParams();
+		params.height = size;
+		params.width = size;
+		setLayoutParams(params);
+	}
+
+	private void updateBackground(int size) {
+		Context context = getContext();
+		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
+		int backgroundColor = ColorUtilities.getColor(context, nightMode ? R.color.map_button_background_color_dark : R.color.map_button_background_color_light);
+
+		GradientDrawable normal = new GradientDrawable();
+		normal.setSize(size, size);
+		normal.setShape(RECTANGLE);
+		normal.setColor(ColorUtilities.getColorWithAlpha(backgroundColor, appearanceParams.getOpacity()));
+		normal.setCornerRadius(cornerRadius);
+		normal.setStroke(strokeWidth, ColorUtilities.getColor(context, nightMode ? R.color.map_widget_dark_stroke : R.color.map_widget_light_trans));
+
+		GradientDrawable pressed = new GradientDrawable();
+		pressed.setSize(size, size);
+		pressed.setShape(RECTANGLE);
+		pressed.setColor(ColorUtilities.getColor(context, nightMode ? R.color.map_widget_dark_pressed : R.color.map_widget_light_pressed));
+		pressed.setCornerRadius(cornerRadius);
+		pressed.setStroke(strokeWidth, ColorUtilities.getColor(context, nightMode ? R.color.map_widget_dark_stroke : R.color.map_widget_light_pressed));
+
+		setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
 	}
 }

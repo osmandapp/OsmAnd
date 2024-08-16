@@ -31,10 +31,14 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements CardListener {
 
 	public static final String TAG = MapButtonAppearanceFragment.class.getSimpleName();
 
+	private List<BaseCard> cards;
 	private DialogButton applyButton;
 	private QuickActionButton actionButton;
 	private QuickActionButtonState buttonState;
@@ -119,13 +123,25 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void setupCards(@NonNull View view) {
+		cards = new ArrayList<>();
 		MapActivity activity = requireMapActivity();
 		ViewGroup container = view.findViewById(R.id.cards_container);
 		container.removeAllViews();
 
-		ButtonIconsCard iconsCard = 	new ButtonIconsCard(activity, buttonState, appearanceParams);
-		iconsCard.setListener(this);
-		container.addView(iconsCard.build());
+		addCard(container, new ButtonIconsCard(activity, buttonState, appearanceParams), false);
+		addCard(container, new CornerRadiusCard(activity, appearanceParams), false);
+		addCard(container, new ButtonSizeCard(activity, appearanceParams), false);
+		addCard(container, new OpacitySliderCard(activity, appearanceParams), true);
+	}
+
+	private void addCard(@NonNull ViewGroup container, @NonNull BaseCard card, boolean lastItem) {
+		cards.add(card);
+		card.setListener(this);
+		container.addView(card.build());
+
+		if (!lastItem) {
+			container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
+		}
 	}
 
 	private void setupApplyButton(@NonNull View view) {
@@ -148,7 +164,14 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void updateContent() {
+		updateCards();
 		updateButtons();
+	}
+
+	private void updateCards() {
+		for (BaseCard card : cards) {
+			card.update();
+		}
 	}
 
 	private void updateButtons() {
