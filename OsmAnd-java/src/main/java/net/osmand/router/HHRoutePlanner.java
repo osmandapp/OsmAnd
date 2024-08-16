@@ -657,10 +657,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (DEBUG_VERBOSE_LEVEL > 0) {
 			hctx.pointsRect.printStatsDistribution("  Points distributed");
 		}
-		hctx.rctx.mapIndexReaderFilter = new HashSet<>();
-		for (HHRouteRegionPointsCtx<T> reg : hctx.regions) {
-			hctx.rctx.mapIndexReaderFilter.add(reg.file);
-		}
 		hctx.initialized = true;
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
 		printf(HHRoutingConfig.STATS_VERBOSE_LEVEL > 0, " %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
@@ -800,6 +796,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		if (allMatched) {
 			return currentCtx;
+		}
+		if (RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS && groups.size() > 1) {
+			hctx.rctx.mapIndexReaderFilter = new HashSet<>();
+			for (HHRouteRegionPointsCtx<T> reg : regions) {
+				hctx.rctx.mapIndexReaderFilter.add(reg.file);
+			}
 		}
 		return initNewContext(hctx.rctx, regions);
 	}
