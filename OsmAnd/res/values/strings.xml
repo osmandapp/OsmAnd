@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
+	<string name="delete_widget">Delete widget?</string>
 	<string name="add_widget_below">Add widget below</string>
 	<string name="add_widget_above">Add widget above</string>
 	<string name="add_widget_to_the_right">Add widget to the right</string>
