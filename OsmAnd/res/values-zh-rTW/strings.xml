@@ -4506,7 +4506,7 @@
     <string name="rendering_attr_showFunicularRoutes_name">纜車路線</string>
     <string name="rendering_attr_showBusRoutes_name">公車路線</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">無軌電車路線</string>
-    <string name="rendering_attr_showShareTaxiRoutes_name">快速公車路線</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">穿梭公車路線</string>
     <string name="map_markers_bar">地圖標記欄</string>
     <string name="shared_string_visible_widgets">可見的小工具</string>
     <string name="top_widgets_panel">頂部面板</string>
