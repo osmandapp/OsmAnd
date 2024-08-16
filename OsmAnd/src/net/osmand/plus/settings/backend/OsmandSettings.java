@@ -1692,6 +1692,8 @@ public class OsmandSettings {
 		}
 	}
 
+	public final OsmandPreference<Boolean> BATTERY_SAVING_MODE = new BooleanPreference(this, "battery_saving", false).makeGlobal().makeShared();
+
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference(this, "debug_rendering", false).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> DISABLE_MAP_LAYERS = new BooleanPreference(this, "disable_map_layers", false).makeGlobal().makeShared();
