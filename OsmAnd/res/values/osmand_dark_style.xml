@@ -261,5 +261,7 @@
         <item name="active_color_secondary">@color/active_color_secondary_dark</item>
         <item name="active_color_primary">@color/active_color_primary_dark</item>
         <item name="slider_label_text_dark">@color/slider_label_text_dark</item>
+        <item name="app_bar_secondary_color">@color/app_bar_secondary_dark</item>
+        <item name="map_button_icon_color">@color/map_button_icon_color_dark</item>
     </style>
 </resources>
