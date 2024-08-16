@@ -106,6 +106,7 @@ import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -800,6 +801,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (infoCard != null) {
 			infoCard.updateContent();
+		}
+		GPXFile gpxFile = displayHelper.getGpx();
+		if (gpxFile != null) {
+			saveGpx(gpxFile, null);
 		}
 	}
 
@@ -1579,7 +1584,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					params.hideFromMap();
 				}
 				selectedGpxFile = gpxSelectionHelper.selectGpxFile(gpx, params);
-				saveGpx(showOnMap ? selectedGpxFile : null, gpx);
+				saveGpx(gpx, errorMessage -> {
+					SelectedGpxFile selectedGpxFile = showOnMap ? this.selectedGpxFile : null;
+					if (selectedGpxFile != null) {
+						List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
+								new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+						selectedGpxFile.setSplitGroups(groups, app);
+						selectedGpxFile.processPoints(app);
+					}
+					updateContent();
+				});
 			}
 		}
 	}
@@ -1594,16 +1608,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		return false;
 	}
 
-	private void saveGpx(SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
-		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
-			if (selectedGpxFile != null) {
-				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
-						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
-				selectedGpxFile.setSplitGroups(groups, app);
-				selectedGpxFile.processPoints(app);
-			}
-			updateContent();
-		});
+	private void saveGpx(GPXFile gpxFile, SaveGpxListener listener) {
+		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, listener);
 	}
 
 	private boolean isCurrentRecordingTrack() {
