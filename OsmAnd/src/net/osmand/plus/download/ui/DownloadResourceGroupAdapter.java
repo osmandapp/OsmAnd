@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 
 import java.util.ArrayList;
@@ -56,9 +59,11 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
 	                         View convertView, ViewGroup parent) {
 		Object child = getChild(groupPosition, childPosition);
-		if (child instanceof DownloadItem) {
+		if (child instanceof DownloadItem item) {
 
-			DownloadItem item = (DownloadItem) child;
+			if (item instanceof SrtmDownloadItem srtmDownloadItem) {
+				updateSRTMMetricSystem(srtmDownloadItem);
+			}
 			DownloadResourceGroup group = getGroupObj(groupPosition);
 			ItemViewHolder viewHolder;
 			if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
@@ -108,6 +113,9 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 		return convertView;
 	}
 
+	private void updateSRTMMetricSystem(@NonNull SrtmDownloadItem srtmDownloadItem) {
+		srtmDownloadItem.updateMetric(ctx.getMyApplication());
+	}
 
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {

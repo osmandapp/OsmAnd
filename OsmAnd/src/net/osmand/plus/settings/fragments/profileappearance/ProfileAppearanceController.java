@@ -410,7 +410,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getRestingIconCardController() {
 		if (restingIconCardController == null) {
-			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), changedProfile.locationIcon) {
+			String iconName = LocationIcon.getActualIconName(changedProfile.locationIcon, false);
+			restingIconCardController = new ProfileIconsController<>(app, listLocationIcons(), iconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
 					return new LocationIconPaletteElements(context, nightMode);
@@ -442,7 +443,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	public IconsPaletteController<String> getNavigationIconCardController() {
 		if (navigationIconCardController == null) {
-			String movementIconName = LocationIcon.getActualNavigationIconName(changedProfile.navigationIcon);
+			String movementIconName = LocationIcon.getActualIconName(changedProfile.navigationIcon, true);
 			navigationIconCardController = new ProfileIconsController<>(app, listNavigationIcons(), movementIconName) {
 				@Override
 				protected IconsPaletteElements<String> createPaletteElements(@NonNull Context context, boolean nightMode) {
@@ -521,9 +522,9 @@ public class ProfileAppearanceController extends BaseDialogController {
 	@NonNull
 	private List<String> listLocationIcons() {
 		List<String> locationIcons = new ArrayList<>();
-		locationIcons.add(LocationIcon.DEFAULT.name());
-		locationIcons.add(LocationIcon.CAR.name());
-		locationIcons.add(LocationIcon.BICYCLE.name());
+		locationIcons.add(LocationIcon.STATIC_DEFAULT.name());
+		locationIcons.add(LocationIcon.STATIC_CAR.name());
+		locationIcons.add(LocationIcon.STATIC_BICYCLE.name());
 		locationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
 		locationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
 		locationIcons.add(LocationIcon.MOVEMENT_CAR.name());
@@ -536,9 +537,9 @@ public class ProfileAppearanceController extends BaseDialogController {
 		navigationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
 		navigationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());
 		navigationIcons.add(LocationIcon.MOVEMENT_CAR.name());
-		navigationIcons.add(LocationIcon.DEFAULT.name());
-		navigationIcons.add(LocationIcon.CAR.name());
-		navigationIcons.add(LocationIcon.BICYCLE.name());
+		navigationIcons.add(LocationIcon.STATIC_DEFAULT.name());
+		navigationIcons.add(LocationIcon.STATIC_CAR.name());
+		navigationIcons.add(LocationIcon.STATIC_BICYCLE.name());
 		navigationIcons.addAll(Model3dHelper.listModels(app));
 		return navigationIcons;
 	}

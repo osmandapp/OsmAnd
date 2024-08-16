@@ -120,10 +120,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
-		Resources res = view.getResources();
 		boolean night = getApplication().getDaynightHelper().isNightMode();
 
 		pointInnerCircle = new Paint();
@@ -169,6 +168,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		smallIconSize = AndroidUtils.dpToPxAuto(getContext(), SMALL_ICON_SIZE_DP);
 		bigIconSize = AndroidUtils.dpToPxAuto(getContext(), BIG_ICON_SIZE_DP);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateBitmaps(nightMode);
 	}
 
 	@Override

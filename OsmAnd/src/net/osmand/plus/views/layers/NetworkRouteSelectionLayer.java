@@ -55,8 +55,8 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 
 		app = view.getApplication();
 		resourceManager = app.getResourceManager();

@@ -184,7 +184,7 @@
 								android:text="@string/shared_string_swap"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								android:textStyle="bold"
 								android:visibility="gone"
 								tools:ignore="UnusedAttribute" />
 
@@ -295,7 +295,7 @@
 								android:text="@string/shared_string_edit"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								android:textStyle="bold"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -404,7 +404,7 @@
 								android:text="@string/shared_string_add"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								android:textStyle="bold"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -474,7 +474,7 @@
 						android:text="@string/shared_string_settings"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/text_button_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						tools:ignore="UnusedAttribute" />
 
 					<androidx.appcompat.widget.AppCompatImageView

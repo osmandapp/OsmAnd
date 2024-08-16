@@ -81,6 +81,7 @@ public class RoutePlannerFrontEnd {
 		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;
 		public boolean straightLine = false;
+		public RouteDataObject object;
 
 		public GpxPoint() {
 		}
@@ -312,11 +313,17 @@ public class RoutePlannerFrontEnd {
 	public List<GpxPoint> generateGpxPoints(GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
 		List<GpxPoint> gpxPoints = new ArrayList<>(locationsHolder.getSize());
 		GpxPoint prev = null;
-		for(int i = 0; i < locationsHolder.getSize(); i++) {
+		List<LatLon> points = new ArrayList<>();
+		for (int i = 0; i < locationsHolder.getSize(); i++) {
+			points.add(locationsHolder.getLatLon(i));
+		}
+		RouteDataObject o = generateStraightLineSegment(0, points).getObject();
+		for (int i = 0; i < points.size(); i++) {
 			GpxPoint p = new GpxPoint();
 			p.ind = i;
 			p.time = locationsHolder.getTime(i);
 			p.loc = locationsHolder.getLatLon(i);
+			p.object = o;
 			if (prev != null) {
 				p.cumDist = MapUtils.getDistance(p.loc, prev.loc) + prev.cumDist;
 			}

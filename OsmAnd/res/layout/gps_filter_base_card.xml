@@ -48,7 +48,7 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				osmand:typeface="@string/font_roboto_medium" />
+				android:textStyle="bold" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/up_down_button"
@@ -77,7 +77,7 @@
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_regular" />
+				android:textStyle="normal" />
 
 			<LinearLayout
 				android:id="@+id/action_buttons_container"

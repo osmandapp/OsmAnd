@@ -1,5 +1,6 @@
 package net.osmand.plus.notifications;
 
+import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
 import static net.osmand.plus.NavigationService.USED_BY_GPX;
 
 import android.annotation.SuppressLint;
@@ -12,10 +13,10 @@ import android.content.IntentFilter;
 import android.os.Build;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,7 +26,11 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 public class GpxNotification extends OsmandNotification {
+
+	public static final Log LOG = PlatformUtil.getLog(GpxNotification.class);
 
 	public static final String OSMAND_SAVE_GPX_SERVICE_ACTION = "OSMAND_SAVE_GPX_SERVICE_ACTION";
 	public static final String OSMAND_START_GPX_SERVICE_ACTION = "OSMAND_START_GPX_SERVICE_ACTION";
@@ -60,6 +65,12 @@ public class GpxNotification extends OsmandNotification {
 		BroadcastReceiver startGpxRecReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
+				// Add code to start the activity
+				/*
+				Intent activityIntent = new Intent(context, MapActivity.class);
+				activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Required to start an activity from a non-activity context
+				context.startActivity(activityIntent);
+				*/
 				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
@@ -97,7 +108,7 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public int getPriority() {
-		return NotificationCompat.PRIORITY_DEFAULT;
+		return PRIORITY_DEFAULT;
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,11 +73,14 @@ public class NotificationHelper {
 		return downloadNotification.buildNotification(null, false).build();
 	}
 
+	@NonNull
+	public Notification buildCarAppNotification() {
+		return carAppNotification.buildNotification(null, false).build();
+	}
+
 	@Nullable
 	private OsmandNotification acquireTopNotification(@Nullable Service service) {
-		if (carAppNotification.isEnabled(service)) {
-			return carAppNotification;
-		} else if (navigationNotification.isEnabled(service)) {
+		if (navigationNotification.isEnabled(service)) {
 			return navigationNotification;
 		} else if (gpxNotification.isEnabled(service)) {
 			return gpxNotification;
@@ -123,6 +125,15 @@ public class NotificationHelper {
 				break;
 			}
 		}
+	}
+
+	public int getOsmandNotificationId(NotificationType notificationType) {
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				return notification.getOsmandNotificationId();
+			}
+		}
+		return -1;
 	}
 
 	public boolean hasAnyTopNotification() {
@@ -172,9 +183,7 @@ public class NotificationHelper {
 					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
 			channel.enableVibration(false);
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
-			NotificationManager mNotificationManager = (NotificationManager) app
-					.getSystemService(Context.NOTIFICATION_SERVICE);
-			mNotificationManager.createNotificationChannel(channel);
+			NotificationManagerCompat.from(app).createNotificationChannel(channel);
 		}
 	}
 }

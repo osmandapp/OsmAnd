@@ -33,8 +33,8 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		app = view.getApplication();
 	}
 

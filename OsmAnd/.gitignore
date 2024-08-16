@@ -60,7 +60,6 @@ assets/*.obf
 assets/poi_categories.json
 assets/OsmAndCore_ResourcesBundle.index
 assets/OsmAndCore_ResourcesBundle/
-assets/ui-fonts/*
 assets/weather/*
 assets/proj.db
 assets/heightmap/*

@@ -159,12 +159,6 @@ tasks.register('collectFonts', Copy) {
 	include "*.ttf"
 }
 
-tasks.register('collectUiFonts', Copy) {
-	from "../../resources/fonts"
-	into "assets/ui-fonts"
-	include "*.ttf"
-}
-
 tasks.register('collectHelpContentsStyle', Copy) {
 	from("../../help/website/help/") {
 		include "style.css"
@@ -245,7 +239,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectUiFonts,
 			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
@@ -351,7 +344,7 @@ dependencies {
 // implementation 'com.ibm.icu:icu4j:50.1'
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
 
-	legacyImplementation "net.osmand:OsmAndCore_android:4.8@jar"
+	legacyImplementation "net.osmand:OsmAndCore_android:master-snapshot@jar"
 
 	implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.2") {
 		exclude group: 'com.android.support'

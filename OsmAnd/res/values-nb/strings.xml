@@ -5628,4 +5628,7 @@
 \nCPU (lediggangstid): %3$s
 \nCPU (venter på GPU): %4$s</string>
     <string name="shared_string_set">Bruk</string>
+    <string name="shared_string_automatically">Automatisk</string>
+    <string name="ask_every_time">Spør hver gang</string>
+    <string name="compass_click_north_is_up">For å endre orienteringsmodus trykk og hold</string>
 </resources>

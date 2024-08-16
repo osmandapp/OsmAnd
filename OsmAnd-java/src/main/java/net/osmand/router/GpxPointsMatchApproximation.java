@@ -14,7 +14,7 @@ import net.osmand.util.MapUtils;
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
 // TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
 
-public class GpxSegmentsApproximation {
+public class GpxPointsMatchApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
 	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction of seg dist to pnt-to-gpx dist (0.001)
@@ -22,7 +22,7 @@ public class GpxSegmentsApproximation {
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
 	// private List<Integer> DEBUG_IDS = Arrays.asList(499257893, 126338247, 237816930); // good, wrong, turn
 
-	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
+	public GpxRouteApproximation gpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                  List<GpxPoint> gpxPoints) throws IOException {
 		long timeToCalculate = System.nanoTime();
 

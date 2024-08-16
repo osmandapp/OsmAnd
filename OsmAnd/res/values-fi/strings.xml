@@ -517,7 +517,7 @@
     <string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
     <string name="voice_is_not_available_title">Valitse ääniohjaus paketti</string>
     <string name="unknown_from_location">Aloituspistettä ei ole vielä määritelty.</string>
-    <string name="modify_transparency">Säädä läpinäkyvyyttä (0 - läpinäkyvä, 255 - läpinäkymätön)</string>
+    <string name="modify_transparency">Aseta läpinäkyvyys (0 - läpinäkyvä, 255 - läpinäkymätön)</string>
     <string name="confirm_interrupt_download">Peruutetaanko tiedoston lataus\?</string>
     <string name="basemap_was_selected_to_download">Peruskartta vaaditaan sovelluksen kunnolliseen toimintaan ja siksi se on valittu ladattavaksi.</string>
     <string name="select_index_file_to_download">Ei löydetty mitään, mutta voit tehdä sen itse (katso http://osmand.net).</string>

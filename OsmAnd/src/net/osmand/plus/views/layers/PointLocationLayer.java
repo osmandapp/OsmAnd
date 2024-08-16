@@ -220,8 +220,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	@Override
-	public void initLayer(@NonNull OsmandMapTileView view) {
-		super.initLayer(view);
+	public void initLayer() {
+		super.initLayer();
 		initCoreRenderer();
 		initLegacyRenderer();
 		updateParams(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
@@ -279,6 +279,12 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (mapRenderer != null && mapMarkersCollection != null) {
 			mapRenderer.addSymbolsProvider(mapMarkersCollection);
 		}
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateMarkerCollection();
 	}
 
 	private boolean recreateMarkerCollection() {
@@ -871,7 +877,9 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
-		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
+		return forceUseDefault
+				? getDefaultIcon(locationIconName, LocationIcon.STATIC_DEFAULT.name())
+				: locationIconName;
 	}
 
 	@NonNull
@@ -883,6 +891,19 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
-		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;
+		return forceUseDefault
+				? getDefaultIcon(navigationIconName, LocationIcon.MOVEMENT_DEFAULT.name())
+				: navigationIconName;
+	}
+
+	private String getDefaultIcon(@NonNull String iconName, @NonNull String defaultIconName) {
+		String defaultIcon = defaultIconName;
+		if (LocationIcon.isDefaultModel(iconName)) {
+			String iconForDefaultModel = LocationIcon.getIconForDefaultModel(iconName);
+			if (!Algorithms.isEmpty(iconForDefaultModel)) {
+				defaultIcon = iconForDefaultModel;
+			}
+		}
+		return defaultIcon;
 	}
 }

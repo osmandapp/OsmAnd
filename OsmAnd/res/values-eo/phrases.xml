@@ -4868,4 +4868,9 @@
     <string name="poi_property_management">Oficejo de administranto de apartamentaro</string>
     <string name="poi_engineer">Oficejo de inĝeniero</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
+    <string name="poi_cash_in_yes">jes</string>
+    <string name="poi_cash_in">Enpagoj</string>
+    <string name="poi_cash_in_no">ne</string>
+    <string name="poi_cash_in_customers">nur klientoj</string>
+    <string name="poi_diet_pescetarian_no">Senvianda (escepte fiŝoj) dieto: ne</string>
 </resources>

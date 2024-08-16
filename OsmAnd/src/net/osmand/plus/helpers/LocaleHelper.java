@@ -36,6 +36,7 @@ public class LocaleHelper {
 
 	private Locale preferredLocale;
 	private Resources localizedResources;
+	private Configuration localizedConf;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -108,9 +109,9 @@ public class LocaleHelper {
 
 			Resources resources = app.getBaseContext().getResources();
 			resources.updateConfiguration(config, resources.getDisplayMetrics());
-			Configuration conf = new Configuration(config);
-			conf.locale = selectedLocale;
-			localizedResources = app.createConfigurationContext(conf).getResources();
+			localizedConf = new Configuration(config);
+			localizedConf.locale = selectedLocale;
+
 		}
 	}
 
@@ -147,7 +148,11 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public Resources getLocalizedResources() {
+	public Resources getLocalizedResources(Context ctx, Resources ctxRes) {
+		if (localizedResources == null && localizedConf != null
+				|| (localizedResources != null && localizedResources.getDisplayMetrics().density != ctxRes.getDisplayMetrics().density)) {
+			localizedResources = ctx.createConfigurationContext(localizedConf).getResources();
+		}
 		return localizedResources;
 	}
 

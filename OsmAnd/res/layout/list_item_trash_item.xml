@@ -45,7 +45,7 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:fontFamily="@string/font_roboto_regular"
+					android:textStyle="normal"
 					osmand:lineHeight="@dimen/default_title_line_height"
 					tools:text="Favorites" />
 
@@ -70,7 +70,7 @@
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:fontFamily="@string/font_roboto_regular"
+						android:textStyle="normal"
 						osmand:lineHeight="@dimen/default_desc_line_height"
 						tools:text="Deleted: Dec 13, 12:53" />
 

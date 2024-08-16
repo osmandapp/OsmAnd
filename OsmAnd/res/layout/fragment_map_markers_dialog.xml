@@ -48,7 +48,7 @@
 							android:text="@string/map_markers"
 							android:textColor="@color/card_and_list_background_light"
 							android:textSize="@dimen/dialog_header_text_size"
-							osmand:typeface="@string/font_roboto_medium"/>
+							android:textStyle="bold"/>
 
 						<ProgressBar
 							android:id="@+id/progress_bar"

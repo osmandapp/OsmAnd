@@ -644,7 +644,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapView.initMapRotationByCompassMode();
 		}
 
-		settings.MAP_ACTIVITY_ENABLED.set(true);
+		settings.MAP_ACTIVITY_ENABLED = true;
+		LOG.info(">>>> MAP_ACTIVITY_ENABLED = true");
+
 		mapView.showAndHideMapPosition();
 
 		readLocationToShow();
@@ -799,7 +801,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentsHelper.isFragmentVisible()) {
 			return false;
 		}
-		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get()
+		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED
 				&& !dashboardOnMap.isVisible();
 	}
 
@@ -1050,7 +1052,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
 		settings.setLastKnownMapElevation(mapView.getElevationAngle());
-		settings.MAP_ACTIVITY_ENABLED.set(false);
+		settings.MAP_ACTIVITY_ENABLED = false;
+		LOG.info(">>>> MAP_ACTIVITY_ENABLED = false");
+
 		getMapView().getAnimatedDraggingThread().toggleAnimations();
 		app.getResourceManager().interruptRendering();
 		PluginsHelper.onMapActivityPause(this);

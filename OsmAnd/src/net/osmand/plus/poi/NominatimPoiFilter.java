@@ -61,7 +61,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	
 	// do nothing test jackdaw lane, oxford"
 	@Override
-	public AmenityNameFilter getNameFilter(String filter) {
+	public AmenityNameFilter getNameFilter() {
 		return a -> true;
 	}
 	

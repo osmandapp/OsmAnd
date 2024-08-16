@@ -22,7 +22,7 @@
 		android:ellipsize="end"
 		android:maxLines="1"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
-		app:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		tools:text="Some Title" />
 
 	<androidx.appcompat.widget.SwitchCompat
