@@ -252,6 +252,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			displayData.anchorView = view;
 			displayData.menuItems = items;
 			displayData.nightMode = nightMode;
+			displayData.showBelowAnchorView = true;
 			PopUpMenu.show(displayData);
 		}
 	}
