@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import de.KnollFrank.lib.preferencesearch.common.Lists;
-import de.KnollFrank.lib.preferencesearch.search.provider.PreferenceDescription;
+import de.KnollFrank.lib.settingssearch.common.Lists;
+import de.KnollFrank.lib.settingssearch.search.provider.PreferenceDescription;
 
 class CustomPreferenceDescriptionsFactory {
 

@@ -22,15 +22,15 @@ import net.osmand.plus.simulation.SimulateLocationFragment;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.preferencesearch.PreferenceWithHost;
-import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
-import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.preferencesearch.fragment.DefaultFragmentFactory;
-import de.KnollFrank.lib.preferencesearch.fragment.FragmentFactory;
-import de.KnollFrank.lib.preferencesearch.provider.IsPreferenceSearchable;
-import de.KnollFrank.lib.preferencesearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-import de.KnollFrank.lib.preferencesearch.provider.PreferenceDialogAndSearchableInfoProvider;
-import de.KnollFrank.lib.preferencesearch.provider.ShowPreferencePath;
+import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
+import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
+import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentFactory;
+import de.KnollFrank.lib.settingssearch.fragment.FragmentFactory;
+import de.KnollFrank.lib.settingssearch.provider.IsPreferenceSearchable;
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoProvider;
+import de.KnollFrank.lib.settingssearch.provider.ShowPreferencePath;
 
 class SearchPreferenceButtonHelper {
 
@@ -78,6 +78,7 @@ class SearchPreferenceButtonHelper {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
 						if (src.isPresent()) {
 							final Preference preference = src.get().preference;
+							// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
 							if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
 								final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
 								final Bundle args = new Bundle();
