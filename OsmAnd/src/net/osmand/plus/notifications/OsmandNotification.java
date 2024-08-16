@@ -17,6 +17,8 @@ import net.osmand.plus.OsmandApplication;
 
 public abstract class OsmandNotification {
 
+	private static final boolean CLEAR_NOTIFICATION_IF_CHANGED = false;
+
 	public static final int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public static final int GPX_NOTIFICATION_SERVICE_ID = 6;
 	public static final int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
@@ -37,6 +39,8 @@ public abstract class OsmandNotification {
 	private final String groupName;
 
 	private Notification currentNotification;
+	protected boolean stateChanged;
+
 	private final NotificationManagerCompat notificationManager;
 
 	public enum NotificationType {
@@ -129,10 +133,13 @@ public abstract class OsmandNotification {
 	}
 
 	@SuppressLint("MissingPermission")
-	private void notifyWearable(NotificationManagerCompat notificationManager) {
+	private void notifyWearable(NotificationManagerCompat notificationManager, boolean stateChanged) {
 		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
+			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+				notificationManager.cancel(getOsmandWearableNotificationId());
+			}
 			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
 		}
 	}
@@ -144,8 +151,12 @@ public abstract class OsmandNotification {
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
-				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
-				notifyWearable(notificationManager);
+				int notificationId = top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId();
+				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+					notificationManager.cancel(notificationId);
+				}
+				notificationManager.notify(notificationId, notification);
+				notifyWearable(notificationManager, stateChanged);
 				return true;
 			}
 		}
@@ -159,13 +170,12 @@ public abstract class OsmandNotification {
 			if (notificationBuilder != null) {
 				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
-				if (top) {
-					//notificationManager.cancel(getOsmandNotificationId());
-					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
-				} else {
-					notificationManager.notify(getOsmandNotificationId(), notification);
+				int notificationId = top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId();
+				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
+					notificationManager.cancel(notificationId);
 				}
-				notifyWearable(notificationManager);
+				notificationManager.notify(notificationId, notification);
+				notifyWearable(notificationManager, stateChanged);
 				return true;
 			} else {
 				notificationManager.cancel(getOsmandNotificationId());
