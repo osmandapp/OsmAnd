@@ -236,10 +236,10 @@ public abstract class SimpleWidget extends TextInfoWidget {
 					.setTitleId(R.string.shared_string_delete)
 					.setOnClickListener(item -> {
 						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
-						builder.setTitle(getString(R.string.delete_confirmation_msg, getString(widgetType.titleId)));
-						builder.setMessage(R.string.are_you_sure);
+						builder.setTitle(getString(R.string.delete_widget));
+						builder.setMessage(R.string.delete_widget_description);
 						builder.setNegativeButton(R.string.shared_string_cancel, null)
-								.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+								.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
 								});
 						builder.show();
