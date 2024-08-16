@@ -536,10 +536,6 @@ public class RoutePlannerFrontEnd {
 			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
-			if (cfg.cacheCtx != null && cfg.cacheCtx.rctx != null) {
-				cfg.cacheCtx.rctx.unloadAllData();
-				cfg.cacheCtx.rctx.mapIndexReaderFilter = new HashSet<>();
-			}
 			if (res != null && res.error == null) {
 				ctx.calculationProgress.hhIteration(HHIteration.DONE);
 				makeStartEndPointsPrecise(ctx, res, start, end, new ArrayList<LatLon>());

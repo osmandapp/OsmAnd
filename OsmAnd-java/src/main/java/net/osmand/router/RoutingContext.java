@@ -213,6 +213,7 @@ public class RoutingContext {
 		}
 		subregionTiles.clear();
 		indexedSubregions.clear();
+		mapIndexReaderFilter = new HashSet<>();
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
