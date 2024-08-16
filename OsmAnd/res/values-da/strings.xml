@@ -5866,4 +5866,6 @@
     <string name="height_cache">Højde-cache</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
+    <string name="delete_widget">Slet modul?</string>
+    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
 </resources>
