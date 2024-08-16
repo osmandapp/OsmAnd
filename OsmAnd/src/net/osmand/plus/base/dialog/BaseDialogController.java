@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
 import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.utils.UiUtilities;
@@ -50,10 +51,8 @@ public abstract class BaseDialogController implements IDialogController {
 
 	public boolean isNightMode() {
 		IDialog dialog = getDialog();
-		if (dialog instanceof CustomizableBottomSheet) {
-			return ((CustomizableBottomSheet) dialog).isNightMode(app);
-		} else if (dialog instanceof ProfileAppearanceFragment) {
-			return ((ProfileAppearanceFragment) dialog).isNightMode();
+		if (dialog instanceof IDialogNightModeInfoProvider nightModeInfoProvider) {
+			return nightModeInfoProvider.isNightMode();
 		}
 		return false;
 	}

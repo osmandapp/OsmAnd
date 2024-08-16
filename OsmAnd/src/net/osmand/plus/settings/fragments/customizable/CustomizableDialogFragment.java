@@ -1,35 +1,33 @@
-package net.osmand.plus.settings.bottomsheets;
+package net.osmand.plus.settings.fragments.customizable;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
+import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.data.DisplayData;
+import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.base.dialog.data.DisplayData;
-import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
-public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragment
+public abstract class CustomizableDialogFragment extends BaseOsmAndDialogFragment
 		implements IDialog, IAskDismissDialog, IAskRefreshDialogCompletely, IDialogNightModeInfoProvider {
 
 	private static final String PROCESS_ID_ATTR = "process_id";
 
-	protected OsmandApplication app;
 	protected DialogManager manager;
 	protected DisplayData displayData;
 	protected String processId;
@@ -41,7 +39,6 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.app = requiredMyApplication();
 		this.manager = app.getDialogManager();
 		if (savedInstanceState != null) {
 			processId = savedInstanceState.getString(PROCESS_ID_ATTR);
@@ -50,6 +47,23 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 			manager.register(processId, this);
 			refreshDisplayData();
 		}
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		updateNightMode();
+		Activity ctx = requireActivity();
+		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
+		Dialog dialog = new Dialog(ctx, themeId);
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
+				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
+			}
+			window.setStatusBarColor(getColor(getStatusBarColorId()));
+		}
+		return dialog;
 	}
 
 	@Override
@@ -74,6 +88,11 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 		displayData = manager.getDisplayData(processId);
 	}
 
+	@Override
+	public boolean isNightMode() {
+		return nightMode;
+	}
+
 	protected void onItemClicked(@NonNull DisplayItem item) {
 		manager.onDialogItemClick(processId, item);
 	}
@@ -90,37 +109,24 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	@Override
 	public void onAskRefreshDialogCompletely(@NonNull String processId) {
 		refreshDisplayData();
-		updateMenuItems();
+		askUpdateContent();
 	}
 
-	@NonNull
-	public ColorStateList createCompoundButtonTintList(@NonNull DisplayItem displayItem) {
-		int controlsColor = displayData.getControlsColor(app, displayItem, nightMode);
-		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		return AndroidUtils.createCheckedColorIntStateList(defaultColor, controlsColor);
+	protected void askUpdateContent() {
+		View view = getView();
+		if (view != null) {
+			updateContent(view);
+		}
+	}
+
+	protected abstract void updateContent(@NonNull View view);
+
+	protected int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Nullable
-	public Drawable createSelectableBackground(@NonNull DisplayItem displayItem) {
-		Integer color = displayData.getBackgroundColor(displayItem);
-		if (color != null) {
-			return UiUtilities.getColoredSelectableDrawable(app, color);
-		}
-		return null;
-	}
-
-	@Nullable
-	public DividerItem createDividerIfNeeded(@NonNull Context ctx, @NonNull DisplayItem displayItem) {
-		if (displayItem.shouldShowBottomDivider()) {
-			DividerItem divider = new DividerItem(ctx);
-			divider.setMargins(displayItem.getDividerStartPadding(), 0, 0, 0);
-			return divider;
-		}
-		return null;
-	}
-
-	@Override
-	public boolean isNightMode() {
-		return super.isNightMode(app);
+	protected BaseDialogController getController() {
+		return (BaseDialogController) manager.findController(processId);
 	}
 }

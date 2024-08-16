@@ -1,7 +1,15 @@
 package net.osmand.plus.base.dialog.data;
 
+import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
+import static net.osmand.plus.base.dialog.data.DialogExtra.CONTROLS_COLOR;
+
+import android.content.Context;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,5 +42,27 @@ public class DisplayData {
 	public void clear() {
 		items.clear();
 		extras.clear();
+	}
+
+	@ColorInt
+	public int getControlsColor(@NonNull Context context, @NonNull DisplayItem item, boolean nightMode) {
+		Integer color = item.getControlsColor();
+		if (color == null) {
+			color = (Integer) getExtra(CONTROLS_COLOR);
+		}
+		if (color == null) {
+			color = ColorUtilities.getActiveColor(context, nightMode);
+		}
+		return color;
+	}
+
+	@ColorInt
+	@Nullable
+	public Integer getBackgroundColor(@NonNull DisplayItem item) {
+		Integer color = item.getBackgroundColor();
+		if (color == null) {
+			color = (Integer) getExtra(BACKGROUND_COLOR);
+		}
+		return color;
 	}
 }

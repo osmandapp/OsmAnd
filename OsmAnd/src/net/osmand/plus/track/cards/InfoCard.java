@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.gpx.GPXActivityUtils;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.track.fragments.controller.RouteActivityController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
@@ -18,10 +20,13 @@ import net.osmand.util.Algorithms;
 public class InfoCard extends BaseMetadataCard {
 
 	private final RouteKey routeKey;
+	private final OnCompleteCallback onActivitySelectionComplete;
 
-	public InfoCard(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.Metadata metadata, @Nullable RouteKey routeKey) {
+	public InfoCard(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.Metadata metadata,
+	                @Nullable RouteKey routeKey, @NonNull OnCompleteCallback onActivitySelectionComplete) {
 		super(mapActivity, metadata);
 		this.routeKey = routeKey;
+		this.onActivitySelectionComplete = onActivitySelectionComplete;
 	}
 
 	@Override
@@ -49,7 +54,9 @@ public class InfoCard extends BaseMetadataCard {
 				: getContentIcon(R.drawable.ic_action_bicycle_dark); // todo use ic_action_activity
 
 		createItemRow(getString(R.string.shared_string_activity), title, icon).setOnClickListener(v -> {
-			// todo show select activity screen
+			if (metadata != null) {
+				RouteActivityController.showDialog(activity, metadata, routeKey, onActivitySelectionComplete);
+			}
 		});
 		if (keywordsAvailable) {
 			createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));

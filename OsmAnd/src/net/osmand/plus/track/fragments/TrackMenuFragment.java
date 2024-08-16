@@ -49,6 +49,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.OnCompleteCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -100,6 +101,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
+import net.osmand.plus.track.fragments.controller.RouteActivityController;
 import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -197,6 +199,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
+
+	private final OnCompleteCallback onActivitySelectionComplete = this::onRouteActivityChanged;
 
 	public enum TrackMenuTab {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -755,8 +759,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (shouldReattachCards && infoCard != null && infoCard.getView() != null) {
 			reattachCard(cardsContainer, infoCard);
 		} else {
-			infoCard = new InfoCard(mapActivity, selectedGpxFile.getGpxFile().metadata, routeKey);
+			infoCard = new InfoCard(mapActivity, selectedGpxFile.getGpxFile().metadata, routeKey, onActivitySelectionComplete);
 			cardsContainer.addView(infoCard.build(mapActivity));
+			updateRouteActivityListener();
 		}
 
 		if (shouldReattachCards && authorCard != null && authorCard.getView() != null) {
@@ -787,6 +792,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			oldParent.removeAllViews();
 		}
 		cardsContainer.addView(card.getView());
+	}
+
+	private void onRouteActivityChanged() {
+		if (overviewCard != null) {
+			overviewCard.setupActivity();
+		}
+		if (infoCard != null) {
+			infoCard.updateContent();
+		}
+	}
+
+	private void updateRouteActivityListener() {
+		RouteActivityController controller = RouteActivityController.getExistedInstance(app);
+		if (controller != null) {
+			controller.setOnSelectionCompletedCallback(onActivitySelectionComplete);
+		}
 	}
 
 	private void updateCardsLayout() {

@@ -121,7 +121,7 @@ public class OverviewCard extends MapBaseCard {
 		setupRegion();
 	}
 
-	private void setupActivity() {
+	public void setupActivity() {
 		Metadata metadata = selectedGpxFile.getGpxFile().metadata;
 		OsmRouteType activityType = GPXActivityUtils.fetchActivityType(metadata, routeKey);
 		if (activityType != null) {
