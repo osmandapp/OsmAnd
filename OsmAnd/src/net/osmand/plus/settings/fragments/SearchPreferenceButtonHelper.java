@@ -76,18 +76,19 @@ class SearchPreferenceButtonHelper {
 					@Override
 					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
-						if (src.isPresent()) {
-							final Preference preference = src.get().preference;
-							// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
-							if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-								final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
-								final Bundle args = new Bundle();
-								if (appMode != null) {
-									args.putString(APP_MODE_KEY, appMode.getStringKey());
-								}
-								fragment.setArguments(args);
-							}
-						}
+						src
+								.map(preferenceWithHost -> preferenceWithHost.preference)
+								.ifPresent(preference -> {
+									// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
+									if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
+										final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
+										final Bundle args = new Bundle();
+										if (appMode != null) {
+											args.putString(APP_MODE_KEY, appMode.getStringKey());
+										}
+										fragment.setArguments(args);
+									}
+								});
 						return fragment;
 					}
 				},
