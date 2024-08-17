@@ -5859,4 +5859,6 @@
     <string name="height_cache">Magasság gyorsítótár</string>
     <string name="add_widget_below">Widget hozzáadása alulra</string>
     <string name="add_widget_above">Widget hozzáadása felülre</string>
+    <string name="delete_widget_description">Ez a widget törölve lesz. Később visszaállíthatja a konfigurációs képernyőn.</string>
+    <string name="delete_widget">Widget törlése?</string>
 </resources>
