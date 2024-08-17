@@ -5852,6 +5852,6 @@
     <string name="add_widget_above">Ajouter le gadget au dessus</string>
     <string name="add_widget_below">Ajouter le gadget en dessous</string>
     <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
-    <string name="delete_widget_description">Ce gadget sera supprimé. Vous pourrez le restaurer plus tard dans \"Configurer l\'écran\".</string>
+    <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
     <string name="delete_widget">Supprimer le gadget ?</string>
 </resources>
