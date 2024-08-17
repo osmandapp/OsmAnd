@@ -5868,5 +5868,5 @@
     <string name="add_widget_to_the_right">Dodaj widžet desno</string>
     <string name="add_widget_to_the_left">Dodaj widžet levo</string>
     <string name="delete_widget">Brišeš vidžet?</string>
-    <string name="delete_widget_description">Ovaj widžet će biti izbrisan. Možeš ga vratiti kasnije na ekranu za konfiguraciju.</string>
+    <string name="delete_widget_description">Ovaj widžet će biti izbrisan. Možeš ga vratiti kasnije u podešavanjima ekrana.</string>
 </resources>
