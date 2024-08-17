@@ -382,7 +382,7 @@
     <string name="search_position_address">Adresă…</string>
     <string name="search_position_favorites">Favorite…</string>
     <string name="shared_string_undefined">Nedefinit</string>
-    <string name="search_position_map_view">Centrul hărții curente</string>
+    <string name="search_position_map_view">Centru hartă curentă</string>
     <string name="select_search_position">Origine:</string>
     <string name="context_menu_item_search">Căutare în apropiere</string>
     <string name="route_successfully_saved_at">Traseu salvat ca \"%1$s\".</string>
@@ -2648,7 +2648,7 @@
     <string name="configure_navigation">Configurează navigația</string>
     <string name="screen_alerts_descr">Alerte sunt arătate în stânga jos pe timpul navigației.</string>
     <string name="language_and_output">Limbă și ieșire</string>
-    <string name="reset_to_default">Resetează la valorile implicite</string>
+    <string name="reset_to_default">Resetează la valori implicite</string>
     <string name="voice_announces_info">Anunțurile vocale apar doar pe timpul navigației.</string>
     <string name="voice_announces_descr">Instrucțiuni și anunțuri de navigație</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Arată rutele pentru biciclete</string>
@@ -4005,7 +4005,7 @@
     <string name="turn_screen_on_router">Trezirea la întoarcere</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd utilizează MGRS, care este similar cu formatul UTM NATO.</string>
-    <string name="reset_all_profile_settings_descr">Resetează toate setările profilului la valorile implicite de la instalare.</string>
+    <string name="reset_all_profile_settings_descr">Resetează toate setările profilului la valorile implicite de instalare.</string>
     <string name="reset_confirmation_descr">Atingerea lui %1$s anulează toate modificările efectuate.</string>
     <string name="select_map_icon_descr">Iconul reprezentat în repaus.</string>
     <string name="select_nav_icon_descr">Icon afișat în timpul navigației sau deplasării.</string>
@@ -4634,7 +4634,7 @@
     <string name="altitude_widget_desc">Arată înălțimea peste nivel mării a geolocației curente.</string>
     <string name="coordinates_widget_desc">Arată coordonatele geografice ale geolocalizării curente.</string>
     <string name="no_widgets_descr">Adăugați unul sau mai multe widgeturi din lista de widgeturi disponibile.</string>
-    <string name="no_widgets_here_yet">Niciun widget aici</string>
+    <string name="no_widgets_here_yet">Nu aveți niciun widget încă</string>
     <string name="available_widgets">Widgeturi disponibile</string>
     <string name="routing_attr_motor_type_name">Combustibil folosit</string>
     <string name="routing_attr_motor_type_hybrid_name">Hibrid</string>
@@ -4745,8 +4745,8 @@
     <string name="show_borders_of_downloaded_maps">Arată contururile hărților descărcate</string>
     <string name="map_rendering_engine">Motor de randare a hărților</string>
     <string name="favorites_backup">Backup pentru favorite</string>
-    <string name="current_location_widget">Coordonate: Locația curentă</string>
-    <string name="map_widget_altitude_current_location">Altitudine: locația curentă</string>
+    <string name="current_location_widget">Coordonate: Locație curentă</string>
+    <string name="map_widget_altitude_current_location">Altitudine: locație curentă</string>
     <string name="map_widget_altitude_current_location_desc">Arată altitudinea deasupra nivelului mării a geolocației curente.</string>
     <string name="simulate_location_by_gpx">Simulează poziția folosind GPX</string>
     <string name="purchases_feature_desc_external_sensors">Afișați și înregistrați date de la senzorii externi: viteza bicicletei, puterea exercitată, cadența pedalării și pulsul.</string>
@@ -4778,12 +4778,12 @@
 \n</string>
     <string name="speak_gps_signal_status">Pierdere și recuperare semnal GPS</string>
     <string name="speak_route_recalculation">Recalculare rută</string>
-    <string name="map_center_widget">Coordonate: Centrul hărții</string>
+    <string name="map_center_widget">Coordonate: Centru hartă</string>
     <string name="external_sensors_plugin_name">Senzori externi</string>
     <string name="external_sensors_plugin_description">Accesați senzori externi pentru a citi, spre exemplu, pulsul, viteza biciclete, puterea produsă sau cadența pedalatului. Necesită ca dispozitivul d-voastră să fie conectat la respectivii senzori prin protocolul de rețea personală wireless ANT+.</string>
     <string name="map_widget_altitude_map_center">Elevație: centrul hărții</string>
-    <string name="map_widget_altitude_map_center_desc">Arată altitudinea deasupra nivelului mării a centrului actual al hărții.</string>
-    <string name="map_widget_altitude_desc">Arată altitudinea geolocației curente sau altitudinea centrului actual al hărții</string>
+    <string name="map_widget_altitude_map_center_desc">Arată altitudinea deasupra nivelului mării a centrului curent al hărții.</string>
+    <string name="map_widget_altitude_desc">Arată altitudinea geolocației curente sau altitudinea centrului curent al hărții</string>
     <string name="map_widget_rendering_fps">FPS randare hartă</string>
     <string name="map_widget_rendering_fps_desc">Arată cât de repede sunt afișate și reîmprospătate harta și elementele hărții, exprimat în cadre pe secundă (FPS).</string>
     <string name="location_simulation_cutoff">Simularea sare peste primii metri</string>
@@ -4863,7 +4863,7 @@
     <string name="developer_widgets">Widgeturi pentru dezvoltatori</string>
     <string name="quick_action_current_location_widget_descr">Un comutator pentru a arăta/ascunde widgetul pentru locație curentă pe/de pe hartă.</string>
     <string name="coordinates_widget_current_location_desc">Arată coordonatele geografice ale geolocalizării curente</string>
-    <string name="coordinates_widget_current_location">Coordonate: locația actuală</string>
+    <string name="coordinates_widget_current_location">Coordonate: locație curentă</string>
     <string name="go_to_marker_location">Mergi la locația marcajului</string>
     <string name="shared_string_switch_mode">Schimbă modul</string>
     <string name="click_on_widget">Atingeți widgetul</string>
@@ -4877,7 +4877,7 @@
     <string name="map_widget_zoom_level">Nivel de zoom</string>
     <string name="favorite_delete_group">Ștergere grup</string>
     <string name="download_heightmap_maps">Hartă înălțimi</string>
-    <string name="coordinates_widget_map_center_desc">Arată coordonatele geografice ale centrului actual al hărții</string>
+    <string name="coordinates_widget_map_center_desc">Arată coordonatele geografice ale centrului curent al hărții</string>
     <string name="display_position">Afișare poziție</string>
     <string name="weather_plugin_description">Oferă
 \n- prognoza meteo pe 24 de ore și 7 zile, cu 5 straturi
@@ -4900,7 +4900,7 @@
     <string name="map_widget_ant_bicycle_cadence_desc">Afișați viteza la care pedalează utilizatorul</string>
     <string name="map_marker_interval_dialog_desc">Specificați intervalul de timp în care viteza medie va fi măsurată pentru a putea estimara ora de sosire.</string>
     <string name="quick_action_map_center_widget_descr">Un comutator pentru a afișa sau a ascunde widgetul de centru al hărții pe hartă.</string>
-    <string name="coordinates_widget_map_center">Coordonate: centrul hărții</string>
+    <string name="coordinates_widget_map_center">Coordonate: centru hartă</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Mare</string>
     <string name="rotate_map_manual_opt">Rotită manual</string>
