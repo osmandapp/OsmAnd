@@ -5858,4 +5858,6 @@
     <string name="add_widget_to_the_right">Додај виџет десно</string>
     <string name="height_cache">Кеш висине</string>
     <string name="add_widget_to_the_left">Додај виџет лево</string>
+    <string name="delete_widget">Обисати виџет?</string>
+    <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
 </resources>
