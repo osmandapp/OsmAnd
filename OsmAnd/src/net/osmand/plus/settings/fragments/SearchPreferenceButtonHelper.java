@@ -22,6 +22,7 @@ import net.osmand.plus.simulation.SimulateLocationFragment;
 
 import java.util.Optional;
 
+import de.KnollFrank.lib.settingssearch.PreferencePath;
 import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
@@ -56,26 +57,12 @@ class SearchPreferenceButtonHelper {
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
 		return new SearchPreferenceFragments(
 				createSearchConfiguration(),
-				new IsPreferenceSearchable() {
-
-					@Override
-					public boolean isPreferenceOfHostSearchable(final Preference preference, final PreferenceFragmentCompat host) {
-						return true;
-					}
-				},
-				new ShowPreferencePath() {
-
-					@Override
-					public boolean showPreferencePath(final Preference preference) {
-						return !(preference instanceof PreferenceGroup);
-					}
-				},
-				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
 				new FragmentFactory() {
 
 					@Override
 					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
+						// FK-FIXME: use for "speed cameras" then only one result for Moped (Moped > Navigation Settings > {Voice prompts, Screen alerts} > Speed cameras) is displayed instead many results for car, truck, ...
 						src
 								.map(preferenceWithHost -> preferenceWithHost.preference)
 								.ifPresent(preference -> {
@@ -92,7 +79,7 @@ class SearchPreferenceButtonHelper {
 						return fragment;
 					}
 				},
-				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
+				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
 				new PreferenceDialogAndSearchableInfoProvider() {
 
 					@Override
@@ -123,7 +110,25 @@ class SearchPreferenceButtonHelper {
 					private boolean isSimulateYourLocation(final Preference preference) {
 						return DevelopmentSettingsFragment.SIMULATE_YOUR_LOCATION.equals(preference.getKey());
 					}
-				});
+				},
+				new IsPreferenceSearchable() {
+
+					@Override
+					public boolean isPreferenceOfHostSearchable(final Preference preference, final PreferenceFragmentCompat host) {
+						return true;
+					}
+				},
+				new ShowPreferencePath() {
+
+					@Override
+					public boolean show(final PreferencePath preferencePath) {
+						return preferencePath
+								.getPreference()
+								.map(preference -> !(preference instanceof PreferenceGroup))
+								.orElse(false);
+					}
+				},
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
 	}
 
 	private SearchConfiguration createSearchConfiguration() {
