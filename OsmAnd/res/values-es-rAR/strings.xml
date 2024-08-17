@@ -5877,4 +5877,6 @@
     <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
     <string name="height_cache">Caché de la altitud</string>
     <string name="add_widget_below">Añadir widget debajo</string>
+    <string name="delete_widget">¿Borrar widget?</string>
+    <string name="delete_widget_description">Este widget puede borrarse. Puedes restaurarlo luego en «Configurar pantalla».</string>
 </resources>
