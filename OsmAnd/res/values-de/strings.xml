@@ -5865,4 +5865,6 @@
     <string name="add_widget_above">Widget oben hinzufügen</string>
     <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
     <string name="add_widget_to_the_left">Widget links hinzufügen</string>
+    <string name="delete_widget">Widget löschen?</string>
+    <string name="delete_widget_description">Dieses Widget wird gelöscht. Du kannst es später im Bildschirm Konfigurieren wiederherstellen.</string>
 </resources>
