@@ -80,6 +80,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
+	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -93,6 +94,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		pluginPreferences.add(settings.SAFE_MODE);
+		pluginPreferences.add(settings.BATTERY_SAVING_MODE);
 		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
 		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
 		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
@@ -122,6 +124,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+
+		batterySavingModeListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapView.applyBatterySavingModeSetting(mapRenderer);
+			}
+		};
+		settings.BATTERY_SAVING_MODE.addListener(batterySavingModeListener);
 	}
 
 	@Override
