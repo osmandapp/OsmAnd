@@ -5867,4 +5867,5 @@
     <string name="add_widget_to_the_left">Widget links hinzufügen</string>
     <string name="delete_widget">Widget löschen?</string>
     <string name="delete_widget_description">Dieses Widget wird gelöscht. Du kannst es später im Bildschirm Konfigurieren wiederherstellen.</string>
+    <string name="battery_saving_mode">Batteriesparmodus</string>
 </resources>
