@@ -7,7 +7,7 @@ import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
 import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
 import static net.osmand.plus.chooseplan.OsmAndFeature.TERRAIN;
 import static net.osmand.plus.track.Gpx3DVisualizationType.FIXED_HEIGHT;
-import static net.osmand.plus.track.Gpx3DVisualizationType.NONE;
+import static net.osmand.plus.track.Gpx3DWallColorType.UPWARD_GRADIENT;
 
 import android.view.View;
 import android.widget.TextView;
@@ -81,7 +81,7 @@ public class Track3DCard extends BaseCard {
 				if (isVisualizationTypeAvailable(type, analysis)) {
 					items.add(new PopUpMenuItem.Builder(app)
 							.setTitleId(type.getDisplayNameResId())
-							.showTopDivider(FIXED_HEIGHT == type || NONE == previous)
+							.showTopDivider(FIXED_HEIGHT == type || Gpx3DVisualizationType.NONE == previous)
 							.setOnClickListener(item -> {
 								drawInfo.setTrackVisualizationType(type);
 								updateContent();
@@ -144,16 +144,20 @@ public class Track3DCard extends BaseCard {
 
 		container.findViewById(R.id.button).setOnClickListener(v -> {
 			List<PopUpMenuItem> items = new ArrayList<>();
+
+			Gpx3DWallColorType previous = null;
 			for (Gpx3DWallColorType type : Gpx3DWallColorType.values()) {
 				if (isWallColorAvailable(type, analysis)) {
 					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(app.getResources().getIdentifier(type.getDisplayNameResId(), "string", app.getPackageName()))
+							.setTitleId(type.getDisplayNameResId())
+							.showTopDivider(Gpx3DWallColorType.NONE == previous || UPWARD_GRADIENT == previous)
 							.setOnClickListener(item -> {
 								description.setText(item.getTitle());
 								drawInfo.setTrackWallColorType(type);
 								notifyCardPressed();
 							})
 							.create());
+					previous = type;
 				}
 			}
 			showOptionsMenu(v, items);

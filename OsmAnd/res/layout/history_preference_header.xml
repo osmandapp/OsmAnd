@@ -40,7 +40,7 @@
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
 				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="Some title" />
 
 			<androidx.appcompat.widget.AppCompatCheckBox

@@ -103,6 +103,10 @@ public class PointImageUtils {
 		return getOrCreate(context, new PointImageInfo(type, color, iconId, synced, withShadow));
 	}
 
+	public static void clearCache() {
+		DRAWABLE_CACHE.clear();
+	}
+
 	public static class PointImageInfo {
 
 		@ColorInt

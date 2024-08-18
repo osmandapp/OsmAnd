@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     osmand:textAllCapsCompat="true"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
                     android:textSize="@dimen/default_desc_text_size"
                     tools:textColor="?attr/color_dialog_buttons"
                     android:layout_gravity="center_vertical"

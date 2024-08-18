@@ -1,7 +1,6 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
-
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -14,11 +13,8 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitEvents;
-import net.osmand.plus.AppInitializeListener;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 /**
  * Entry point for the templated app.
@@ -59,62 +55,20 @@ public final class NavigationCarAppService extends CarAppService {
 	@Override
 	@NonNull
 	public Session onCreateSession() {
+		OsmandApplication app = getApp();
+		Notification notification = app.getNotificationHelper().buildCarAppNotification();
+		startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+
 		NavigationSession session = new NavigationSession();
-		getApp().getLocationProvider().addLocationListener(session);
 		session.getLifecycle()
-				.addObserver(
-						new DefaultLifecycleObserver() {
-							@Override
-							public void onCreate(@NonNull LifecycleOwner owner) {
-								getApp().setCarNavigationSession(session);
-								if (!getApp().isAppInForegroundOnRootDevice()) {
-									checkAppInitialization(new RestoreNavigationHelper(getApp(), null));
-								}
-							}
-
-							@Override
-							public void onStart(@NonNull LifecycleOwner owner) {
-								getApp().onCarNavigationSessionStart(session);
-								getApp().getOsmandMap().getMapView().setupRenderingView();
-							}
-
-							@Override
-							public void onStop(@NonNull LifecycleOwner owner) {
-								getApp().getOsmandMap().getMapView().setupRenderingView();
-								getApp().onCarNavigationSessionStop(session);
-							}
-
-							@Override
-							public void onDestroy(@NonNull LifecycleOwner owner) {
-								getApp().setCarNavigationSession(null);
-								getApp().getLocationProvider().removeLocationListener(session);
-							}
-						});
+				.addObserver(new DefaultLifecycleObserver() {
+					@Override
+					public void onDestroy(@NonNull LifecycleOwner owner) {
+						stopForeground(STOP_FOREGROUND_REMOVE);
+					}
+				});
 
 		return session;
-	}
-
-	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
-		OsmandApplication app = getApp();
-		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializeListener() {
-				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-					if (event == AppInitEvents.MAPS_INITIALIZED) {
-						if (app.getAppInitializer().isRoutingConfigInitialized()) {
-							restoreNavigationHelper.checkRestoreRoutingMode();
-						}
-					}
-					if (event == ROUTING_CONFIG_INITIALIZED) {
-						if (app.getResourceManager().isIndexesLoadedOnStart()) {
-							restoreNavigationHelper.checkRestoreRoutingMode();
-						}
-					}
-				}
-			});
-		} else {
-			restoreNavigationHelper.checkRestoreRoutingMode();
-		}
 	}
 
 	@NonNull

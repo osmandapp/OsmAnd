@@ -541,4 +541,8 @@ public abstract class OsmandPlugin {
 	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 
 	}
+
+	public boolean isMapPositionIconNeeded() {
+		return false;
+	}
 }

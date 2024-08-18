@@ -31,7 +31,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:maxLines="1"
 			android:textSize="@dimen/text_button_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:ignore="UnusedAttribute"
 			tools:text="Search results"/>
 

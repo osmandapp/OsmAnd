@@ -1,5 +1,7 @@
 package net.osmand.plus.mapsource;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,7 +26,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.helpers.FontCache;
+
 
 import org.apache.commons.logging.Log;
 
@@ -86,7 +88,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			String mapSource = getString(R.string.map_source);
 			String overlayUnderlay = getString(R.string.pref_overlay);
 			String dialogDesr = getString(dialogDescrRes, mapSource, overlayUnderlay);
-			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), dialogDesr, mapSource, overlayUnderlay));
+			dialogDescrTv.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, dialogDesr, mapSource, overlayUnderlay));
 		} else {
 			dialogDescrTv.setText(getString(dialogDescrRes));
 		}

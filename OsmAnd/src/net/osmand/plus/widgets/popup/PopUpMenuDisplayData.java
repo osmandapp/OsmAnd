@@ -20,6 +20,7 @@ public class PopUpMenuDisplayData {
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;
 	public List<PopUpMenuItem> menuItems;
 	public OnPopUpMenuItemClickListener onItemClickListener;
+	public boolean showBelowAnchorView = false;
 
 	public boolean hasCustomizations() {
 		if (layoutId != DEFAULT_LAYOUT_ID) {

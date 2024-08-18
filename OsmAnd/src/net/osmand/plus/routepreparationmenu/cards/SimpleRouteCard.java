@@ -1,10 +1,10 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static android.graphics.Typeface.DEFAULT;
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
-import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
-import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
 import static net.osmand.plus.settings.enums.TrackApproximationType.MANUAL;
 import static net.osmand.plus.utils.AndroidUtils.spToPx;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
@@ -159,7 +159,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 		builder.append(" (").append(arriveTime).append(")");
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 
@@ -167,7 +167,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		int index = builder.length();
 		builder.append(" • ");
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryIconColor(app, nightMode)), index, builder.length(), 0);
 	}
 
@@ -216,13 +216,13 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupTextSpans(@NonNull SpannableStringBuilder builder, int index) {
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 16)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 
 	private void setupNumberSpans(@NonNull SpannableStringBuilder builder, int index) {
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoMedium(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getPrimaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 }

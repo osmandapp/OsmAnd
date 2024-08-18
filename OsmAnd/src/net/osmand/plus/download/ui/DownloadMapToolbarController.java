@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
-import android.graphics.Typeface;
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.view.ContextThemeWrapper;
@@ -12,12 +13,10 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -88,8 +87,7 @@ public class DownloadMapToolbarController extends TopToolbarController {
 			int endIndex = startIndex + regionName.length();
 			SpannableStringBuilder description = new SpannableStringBuilder(descriptionText);
 			if (startIndex != -1 && endIndex != -1) {
-				Typeface typeface = FontCache.getRobotoMedium(mapActivity);
-				description.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				description.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			tvDescription.setText(description);
 		}

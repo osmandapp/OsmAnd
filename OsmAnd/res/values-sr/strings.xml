@@ -5850,4 +5850,14 @@
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
     <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>
+    <string name="help_article_map_routes_name">Руте</string>
+    <string name="route_roundabout_exit">Идите на %1$d излаз</string>
+    <string name="help_article_map_tracks_name">Путање</string>
+    <string name="add_widget_above">Додај виџет изнад</string>
+    <string name="add_widget_below">Додај виџет испод</string>
+    <string name="add_widget_to_the_right">Додај виџет десно</string>
+    <string name="height_cache">Кеш висине</string>
+    <string name="add_widget_to_the_left">Додај виџет лево</string>
+    <string name="delete_widget">Обисати виџет?</string>
+    <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
 </resources>

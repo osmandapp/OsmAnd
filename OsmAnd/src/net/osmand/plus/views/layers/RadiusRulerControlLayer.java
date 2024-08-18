@@ -1,18 +1,11 @@
 package net.osmand.plus.views.layers;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.Shader;
-import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -47,8 +40,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 public class RadiusRulerControlLayer extends OsmandMapLayer {
 
@@ -152,6 +143,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	@Override
 	protected void updateResources() {
 		super.updateResources();
+		if (view != null) {
+			initCenterIcon(view);
+		}
 		updatePaints();
 	}
 
@@ -197,10 +191,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 
-		if (mapView.isCarView() != isCarViewMap) {
-			isCarViewMap = mapView.isCarView();
-			initCenterIcon(mapView);
-		}
 		if (isRulerWidgetOn() && !animatedThread.isAnimatingMapZoom()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
@@ -209,12 +199,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
 
-			float density = isCarViewMap ? mapView.getCarViewDensity() : tb.getDensity();
-			float circleTextSize = TEXT_SIZE * density;
-			circleAttrs.paint2.setTextSize(circleTextSize);
-			circleAttrs.paint3.setTextSize(circleTextSize);
-			circleAttrsAlt.paint2.setTextSize(circleTextSize);
-			circleAttrsAlt.paint3.setTextSize(circleTextSize);
 			QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
@@ -319,7 +303,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center,
-								boolean nightMode, boolean radiusRulerNightMode) {
+	                            boolean nightMode, boolean radiusRulerNightMode) {
 		if (nightMode || radiusRulerNightMode) {
 			canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2f,
 					center.y - centerIconNight.getHeight() / 2f, bitmapPaint);
@@ -412,7 +396,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
-							RenderingLineAttributes attrs) {
+	                        RenderingLineAttributes attrs) {
 		float circleRadius = radius * circleNumber;
 		List<List<QuadPoint>> arrays = new ArrayList<>();
 		List<QuadPoint> points = new ArrayList<>();
@@ -494,7 +478,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCompassCircle(Canvas canvas, RotatedTileBox tb, int circleNumber,
-								   QuadPoint center, RenderingLineAttributes attrs) {
+	                               QuadPoint center, RenderingLineAttributes attrs) {
 		float radiusLength = radius * circleNumber;
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
 		QuadPoint centerPixels = tb.getCenterPixelPoint();
@@ -509,7 +493,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawCompassCircleText(Canvas canvas, RotatedTileBox tb, int circleNumber, float radiusLength,
-									   QuadPoint center, RenderingLineAttributes attrs) {
+	                                   QuadPoint center, RenderingLineAttributes attrs) {
 		String distance = cacheDistances.get(circleNumber - 1);
 		String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
 
@@ -522,7 +506,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		PointF headingTextPosition = calculateTextPosition(heading, headingTextPositioning, drawingTextRadius, tb, attrs);
 		PointF distanceTextPosition = calculateTextPosition(distance, distanceTextPositioning, drawingTextRadius, tb, attrs);
 
-		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, DEFAULT_BOLD);
 		if (headingTextPosition != null) {
 			drawTextInPosition(canvas, heading, headingTextPosition, attrs);
 		}
@@ -580,8 +564,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth());
 
 		arrowArc.reset();
-		int startArcAngle = (int)angle - 45;
-		int endArcAngle = (int)angle + 45;
+		int startArcAngle = (int) angle - 45;
+		int endArcAngle = (int) angle + 45;
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
@@ -696,7 +680,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		float textMargin = AndroidUtils.dpToPx(app, margin);
 		attrs.paint2.setTextAlign(Paint.Align.CENTER);
 		attrs.paint3.setTextAlign(Paint.Align.CENTER);
-		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, DEFAULT_BOLD);
 
 		for (int i = 0; i < degrees.length; i += 9) {
 			String cardinalDirection = getCardinalDirection(i);
@@ -710,8 +694,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				float h2 = AndroidUtils.getTextHeight(attrs.paint2);
 				float h3 = AndroidUtils.getTextHeight(attrs.paint3);
 				canvas.save();
-				canvas.drawText(cardinalDirection, point.x , point.y + h3/4, attrs.paint3);
-				canvas.drawText(cardinalDirection, point.x, point.y + h2/4, attrs.paint2);
+				canvas.drawText(cardinalDirection, point.x, point.y + h3 / 4, attrs.paint3);
+				canvas.drawText(cardinalDirection, point.x, point.y + h2 / 4, attrs.paint2);
 				canvas.restore();
 			}
 		}

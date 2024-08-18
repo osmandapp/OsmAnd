@@ -3276,7 +3276,7 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="button_rate">Bedøm</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\' filen indeholder ikke ruteberegningsregler. Vælg en anden fil.</string>
-    <string name="not_support_file_type_with_ext">Vælg en understøttet %1$s udvidelsesfil i stedet.</string>
+    <string name="not_support_file_type_with_ext">Vælg en understøttet fil med %1$s-endelse i stedet.</string>
     <string name="import_from_file">Importer fra fil</string>
     <string name="import_routing_file">Importer ruteberegnings-fil</string>
     <string name="import_profile">Importer profil</string>
@@ -5858,4 +5858,14 @@
     <string name="quick_action_routes_summary">En skifter til at vise eller skjule %1$s på kortet.</string>
     <string name="shared_string_automatically">Automatisk</string>
     <string name="compass_click_north_is_up">Klik og hold for at ændre orienteringstilstand</string>
+    <string name="help_article_map_tracks_name">Spor</string>
+    <string name="help_article_map_routes_name">Ruter</string>
+    <string name="route_roundabout_exit">Tag %1$d afkørsel</string>
+    <string name="add_widget_above">Tilføj modul ovenfor</string>
+    <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
+    <string name="height_cache">Højde-cache</string>
+    <string name="add_widget_below">Tilføj modul nedenfor</string>
+    <string name="add_widget_to_the_right">Tilføj modul til højre</string>
+    <string name="delete_widget">Slet modul?</string>
+    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
 </resources>

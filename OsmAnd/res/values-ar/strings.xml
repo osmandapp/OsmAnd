@@ -957,7 +957,7 @@
     <string name="shared_string_unexpected_error">حدث خطأ غير متوقع</string>
     <string name="shared_string_action_template">الإجراء {0}</string>
     <string name="shared_string_close">إغلاق</string>
-    <string name="shared_string_show">عرض</string>
+    <string name="shared_string_show">إظهار</string>
     <string name="shared_string_show_all">عرض الكل</string>
     <string name="shared_string_favorite">مفضلة</string>
     <string name="shared_string_favorites">المفضلة</string>
@@ -3467,7 +3467,7 @@
     <string name="listed_exist">المدرج %1$s, موجودة بالفعل في أوسماند.</string>
     <string name="keep_both">احتفظ بكليهما</string>
     <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع زيادة قبل اسمها</string>
-    <string name="import_duplicates_description">OsmAndيحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها. 
+    <string name="import_duplicates_description">أوسماند يحتوي بالفعل على عناصر تحمل نفس أسماء العناصر المستوردة. 
 \n 
 \nحدد إجراء.</string>
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
@@ -5901,4 +5901,31 @@
     <string name="quick_action_parking_place">مكان وقوف السيارات</string>
     <string name="quick_action_verb_show_hide">إظهار/إخفاء</string>
     <string name="quick_action_verb_pause_resume">توقف/تشغيل</string>
+    <string name="add_widget_above">إضافة ويدجت أعلى</string>
+    <string name="add_widget_to_the_right">إضافة ويدجت إلى اليمين</string>
+    <string name="add_widget_to_the_left">إضافة ويدجت إلى اليسار</string>
+    <string name="height_cache">ذاكرة التخزين مرتفعة</string>
+    <string name="route_roundabout_exit">خذ %1$d للخروج</string>
+    <string name="help_article_map_tracks_name">المسارات</string>
+    <string name="help_article_map_routes_name">المسارات الرياضية</string>
+    <string name="compass_click_north_is_up">لتغيير وضع الاتجاه، انقر مع الاستمرار</string>
+    <string name="hugerock_promo">عروض هوجيروك %1$s أشهر</string>
+    <string name="auto_25_chars_route_tu">قم بالإستدارة</string>
+    <string name="add_widget_below">إضافة ويدجت أدنى</string>
+    <string name="quick_action_routes_summary">مفتاح تبديل لإظهار أو إخفاء %1$s على الخريطة.</string>
+    <string name="shared_string_automatically">آليا</string>
+    <string name="ask_every_time">إسأل كل مرة</string>
+    <string name="detailed_track_guidance">إرشادات تفصيلية للمسار</string>
+    <string name="detailed_track_guidance_description">سيقوم تطبيق أوسماند بمطابقة مسارك مع الطرق القريبة لتحسين التوجيه خطوة بخطوة.</string>
+    <string name="hugerock_promo_description">وصول مجاني إلى الميزات بما في ذلك تنزيلات غير محدودة للخرائط والتضاريس ثلاثية الأبعاد وما إلى ذلك لمدة %1$s شهر</string>
+    <string name="driving_region_india">الهند</string>
+    <string name="auto_25_chars_route_tslr">اتجه قليلا لليمين</string>
+    <string name="auto_25_chars_route_tl">انعطف يسارا</string>
+    <string name="auto_25_chars_route_tshl">اتجه بقوة لليسار</string>
+    <string name="auto_25_chars_route_tsll">اتجه قليلا لليسار</string>
+    <string name="driving_region_uk">المملكة المتحدة وحلفائها</string>
+    <string name="auto_25_chars_route_kl">الزم اليسار</string>
+    <string name="auto_25_chars_route_kr">الزم اليمين</string>
+    <string name="auto_25_chars_route_tr">انعطف يمينا</string>
+    <string name="auto_25_chars_route_tshr">اتجه بقوة لليمين</string>
 </resources>

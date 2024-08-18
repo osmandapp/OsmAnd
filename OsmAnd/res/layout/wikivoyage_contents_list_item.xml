@@ -29,7 +29,7 @@
 			android:drawablePadding="@dimen/bottom_sheet_content_margin"
 			android:gravity="start|center_vertical"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:drawableStart="@drawable/ic_action_list_header"
 			tools:text="@string/shared_string_contents" />
 

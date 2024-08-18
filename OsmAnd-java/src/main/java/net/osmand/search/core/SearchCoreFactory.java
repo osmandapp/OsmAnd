@@ -750,7 +750,7 @@ public class SearchCoreFactory {
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private Map<String, Integer> activePoiFilters = new HashMap<>();
 		private MapPoiTypes types;
-		private Map<BinaryMapIndexReader, Set<String>> poiAdditionalTopIndexCache;
+		private Map<BinaryMapIndexReader, Set<String>> poiAdditionalTopIndexCache = new HashMap<>();
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -1036,32 +1036,29 @@ public class SearchCoreFactory {
 			return SEARCH_AMENITY_TYPE_API_PRIORITY;
 		}
 
-		private void initPoiAdditionalTopIndex(SearchPhrase phrase) throws IOException {
-			if (poiAdditionalTopIndexCache == null) {
-				poiAdditionalTopIndexCache = new HashMap<>();
-				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
-				for (BinaryMapIndexReader r : offlineIndexes) {
-					List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
-					Set<String> names = new HashSet<>();
-					for (PoiSubType subType : poiSubTypes) {
-						if (subType.possibleValues == null) {
-							continue;
-						}
-						names.addAll(subType.possibleValues);
-					}
-					if (names.size() > 0) {
-						poiAdditionalTopIndexCache.put(r, names);
-					}
+		private void initPoiAdditionalTopIndex(BinaryMapIndexReader r) throws IOException {
+			if (poiAdditionalTopIndexCache.containsKey(r)) {
+				return;
+			}
+			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
+			if (poiSubTypes.size() == 0) {
+				return;
+			}
+			Set<String> names = new HashSet<>();
+			for (PoiSubType subType : poiSubTypes) {
+				if (subType.possibleValues == null) {
+					continue;
 				}
-				for (Map.Entry<BinaryMapIndexReader, Set<String>> entry : poiAdditionalTopIndexCache.entrySet()) {
-					Set<String> values = entry.getValue();
-					List<String> translation = new ArrayList<>();
-					for (String v : values) {
-						String translate = getTopIndexTranslation(v);
-						translation.add(translate);
-					}
-					values.addAll(translation);
-				}
+				names.addAll(subType.possibleValues);
+			}
+			List<String> translation = new ArrayList<>();
+			for (String v : names) {
+				String translate = getTopIndexTranslation(v);
+				translation.add(translate);
+			}
+			names.addAll(translation);
+			if (names.size() > 0) {
+				poiAdditionalTopIndexCache.put(r, names);
 			}
 		}
 
@@ -1069,12 +1066,12 @@ public class SearchCoreFactory {
 			if (phrase.isEmpty()) {
 				return;
 			}
-			initPoiAdditionalTopIndex(phrase);
 			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI);
 			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			Map<String, HashSet<String>> matchedValues = new HashMap<>();
 			while (offlineIndexes.hasNext()) {
 				BinaryMapIndexReader r = offlineIndexes.next();
+				initPoiAdditionalTopIndex(r);
 				if (!poiAdditionalTopIndexCache.containsKey(r)) {
 					continue;
 				}
@@ -1104,7 +1101,9 @@ public class SearchCoreFactory {
 				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 				String topIndexValue = null;
 				String translate = null;
-				for (String s : subType.possibleValues) {
+				List<String> possibleValues = new ArrayList<>(subType.possibleValues);
+				Collections.sort(possibleValues);
+				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
 					if (nm.matches(s) || nm.matches(translate)) {
 						topIndexValue = s;

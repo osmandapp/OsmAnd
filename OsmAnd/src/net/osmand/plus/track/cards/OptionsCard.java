@@ -1,9 +1,9 @@
 package net.osmand.plus.track.cards;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 
@@ -18,7 +18,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHei
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -309,11 +308,10 @@ public class OptionsCard extends MapBaseCard {
 
 	private BaseBottomSheetItem createDeleteItem() {
 		String delete = app.getString(R.string.shared_string_delete);
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		return new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
-				.setTitle(UiUtilities.createCustomFontSpannable(typeface, delete, delete))
+				.setTitle(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(DELETE_BUTTON_INDEX))
 				.create();

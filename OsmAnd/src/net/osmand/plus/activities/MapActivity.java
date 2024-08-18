@@ -5,6 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.notifications.GpxNotification.OSMAND_START_GPX_SERVICE_ACTION;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 import android.Manifest;
@@ -51,15 +52,15 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.chooseplan.HugerockPromoFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.HugerockPromoFragment;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -72,8 +73,20 @@ import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.DiscountHelper;
+import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
+import net.osmand.plus.helpers.MapAppInitializeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.helpers.MapPermissionsResultCallback;
+import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
+import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -92,6 +105,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -644,7 +658,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapView.initMapRotationByCompassMode();
 		}
 
-		settings.MAP_ACTIVITY_ENABLED.set(true);
+		settings.MAP_ACTIVITY_ENABLED = true;
+		LOG.info(">>>> MAP_ACTIVITY_ENABLED = true");
+
 		mapView.showAndHideMapPosition();
 
 		readLocationToShow();
@@ -799,7 +815,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentsHelper.isFragmentVisible()) {
 			return false;
 		}
-		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED.get()
+		return AndroidUtils.isActivityNotDestroyed(this) && settings.MAP_ACTIVITY_ENABLED
 				&& !dashboardOnMap.isVisible();
 	}
 
@@ -1050,7 +1066,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
 		settings.setLastKnownMapElevation(mapView.getElevationAngle());
-		settings.MAP_ACTIVITY_ENABLED.set(false);
+		settings.MAP_ACTIVITY_ENABLED = false;
+		LOG.info(">>>> MAP_ACTIVITY_ENABLED = false");
+
 		getMapView().getAnimatedDraggingThread().toggleAnimations();
 		app.getResourceManager().interruptRendering();
 		PluginsHelper.onMapActivityPause(this);

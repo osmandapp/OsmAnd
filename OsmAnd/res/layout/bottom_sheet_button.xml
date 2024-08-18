@@ -26,7 +26,7 @@
 			android:paddingRight="@dimen/content_padding_small"
 			android:gravity="center"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			android:duplicateParentState="true"
 			tools:text="Button"
 			android:paddingStart="@dimen/content_padding_small"

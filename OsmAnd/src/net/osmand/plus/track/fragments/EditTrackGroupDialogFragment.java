@@ -1,11 +1,11 @@
 package net.osmand.plus.track.fragments;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -30,7 +30,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.dialogs.CopyTrackGroupToFavoritesBottomSheet;
 import net.osmand.plus.dialogs.EditTrackGroupBottomSheet.OnGroupNameChangeListener;
 import net.osmand.plus.dialogs.RenameTrackGroupBottomSheet;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.editors.GpxGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -235,11 +234,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	@NonNull
 	private BaseBottomSheetItem createDeleteGroupItem() {
 		String delete = app.getString(R.string.shared_string_delete);
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		return new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
-				.setTitle(UiUtilities.createCustomFontSpannable(typeface, delete, delete))
+				.setTitle(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();

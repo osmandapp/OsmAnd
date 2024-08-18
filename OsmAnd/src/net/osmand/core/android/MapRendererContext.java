@@ -341,7 +341,7 @@ public class MapRendererContext {
 		if (obfsCollection != null) {
 			obfsCollection.removeDirectory(dirPath);
 		}
-		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+		recreateRasterAndSymbolsProvider(this.providerType);
 	}
 
 	public void addDirectory(String dirPath) {
@@ -349,7 +349,7 @@ public class MapRendererContext {
 		if (obfsCollection != null && !obfsCollection.hasDirectory(dirPath)) {
 			obfsCollection.addDirectory(dirPath);
 		}
-		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+		recreateRasterAndSymbolsProvider(this.providerType);
 	}
 
 	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {

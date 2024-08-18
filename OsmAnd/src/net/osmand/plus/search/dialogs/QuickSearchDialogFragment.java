@@ -354,21 +354,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
 						Object object = searchPhrase.isLastWord(POI_TYPE) ? searchPhrase.getLastSelectedWord().getResult().object : null;
-						if (object instanceof TopIndexFilter) {
-							TopIndexFilter topIndexFilter = (TopIndexFilter) object;
+						if (object instanceof TopIndexFilter topIndexFilter) {
 							filter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.MAP);
 							if (filter != null) {
 								filter.setFilterByName(topIndexFilter.getValue());
+								filter.setFilterByKey(topIndexFilter.getTag());
 							} else {
 								return;
 							}
 						} else {
 							filter = SearchUtils.getShowOnMapFilter(app, searchPhrase);
 						}
-
-
-						app.getPoiFilters().clearSelectedPoiFilters();
-						app.getPoiFilters().addSelectedPoiFilter(filter);
+						app.getPoiFilters().replaceSelectedPoiFilters(filter);
 
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
 						contextMenu.close();
@@ -653,6 +650,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				dialog.cancel();
 			}
 		}
+		app.getPoiFilters().restoreSelectedPoiFilters();
 	}
 
 	public void saveCustomFilter() {
@@ -796,7 +794,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		app.getPoiFilters().clearSelectedPoiFilters();
+		app.getPoiFilters().restoreSelectedPoiFilters();
 		dismiss();
 	}
 

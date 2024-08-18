@@ -159,12 +159,6 @@ tasks.register('collectFonts', Copy) {
 	include "*.ttf"
 }
 
-tasks.register('collectUiFonts', Copy) {
-	from "../../resources/fonts"
-	into "assets/ui-fonts"
-	include "*.ttf"
-}
-
 tasks.register('collectHelpContentsStyle', Copy) {
 	from("../../help/website/help/") {
 		include "style.css"
@@ -245,7 +239,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectUiFonts,
 			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
