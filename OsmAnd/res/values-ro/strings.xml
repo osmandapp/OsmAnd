@@ -5858,4 +5858,9 @@
     <string name="route_roundabout_exit">Luați-o pe ieșirea %1$d</string>
     <string name="help_article_map_routes_name">Rute</string>
     <string name="compass_click_north_is_up">Pentru a schimba modul de orientare, faceți clic și țineți apăsat</string>
+    <string name="add_widget_above">Adăugați widget deasupra</string>
+    <string name="add_widget_to_the_right">Adăugați widget în dreapta</string>
+    <string name="add_widget_below">Adăugați widgetul de mai jos</string>
+    <string name="delete_widget">Ștergeți widget-ul?</string>
+    <string name="delete_widget_description">Acest widget va fi șters. Îl puteți restaura ulterior în ecranul de configurare.</string>
 </resources>
