@@ -11,6 +11,7 @@ import net.osmand.data.QuadRect;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -609,6 +610,53 @@ public class MapUtils {
 		return new QuadPointDouble(prx, pry);
 	}
 
+	public static void main2(String[] args) {
+		int startX = Integer.MAX_VALUE / 2;
+		int startY = Integer.MAX_VALUE / 16 * 7;
+		int l = Integer.MAX_VALUE >> 11;
+		for (int it = 0; it < 10; it++) {
+			int y = startY - l;
+			int x = startX;// + l;
+			double ab = squareRootDist31(startX, startY, x, y) / 1000;
+			double am = measuredDist31(startX, startY, x, y) / 1000;
+			System.out.printf("\n ~%.2f vs =%.2f %.2f%% (%.5f, %.5f), (%.5f, %.5f)", 
+					ab, am, ab / am * 100,
+					MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), MapUtils.get31LatitudeY(startY),
+					MapUtils.get31LongitudeX(startX));
+			l *= 2;
+		}
+
+	}
+	
+	public static void main(String[] args) {
+		int baseX = Integer.MAX_VALUE / 2;
+		int baseY = Integer.MAX_VALUE / 4;
+		int random = Integer.MAX_VALUE / 20;
+		Random rm = new Random();
+		//  1114.86 - 1026.35 - 2147.55: (61.85681, 13.64798), (57.27841, 31.29475), (50.83731, 42.59112)
+		for(int it = 0; it < 1000; it++) {
+			int Ax = baseX + rm.nextInt(random);
+			int Ay = baseY + rm.nextInt(random);
+			int Bx = Ax + rm.nextInt(random);
+			int By = Ay + rm.nextInt(random);
+			int Cx = Bx + rm.nextInt(random);
+			int Cy = By + rm.nextInt(random);
+			
+			double ab = squareRootDist31(Ax, Ay, Bx, By) / 1000;
+			double cb = squareRootDist31(Cx, Cy, Bx, By) / 1000;
+			double ac = squareRootDist31(Cx, Cy, Ax, Ay) / 1000;
+			if(ab > cb + ac || ac > ab + cb || cb > ab + ac ) {
+				System.out.printf("\n %.2f - %.2f - %.2f: (%.5f, %.5f), (%.5f, %.5f), (%.5f, %.5f)",
+						ab, cb, ac, MapUtils.get31LatitudeY(Ay), MapUtils.get31LongitudeX(Ax),
+						MapUtils.get31LatitudeY(By), MapUtils.get31LongitudeX(Bx),
+						MapUtils.get31LatitudeY(Cy), MapUtils.get31LongitudeX(Cx));
+				System.out.printf("\n %.2f - %.2f - %.2f",
+						MapUtils.measuredDist31(Bx, By, Ax, Ay) / 1000,
+						MapUtils.measuredDist31(Bx, By, Cx, Cy) / 1000,
+						MapUtils.measuredDist31(Ax, Ay, Cx, Cy) / 1000);
+			}
+		}
+	}
 
 	public static double squareRootDist31(int x1, int y1, int x2, int y2) {
 		return Math.sqrt(squareDist31TileMetric(x1, y1, x2, y2));
@@ -634,7 +682,9 @@ public class MapUtils {
 		
 		double dy = (y1 - y2) * tw;
 		double dx = (x2 - x1) * tw;
-		return dx * dx + dy * dy;
+		double fullD = dx * dx + dy * dy;
+		return fullD;
+//		return fullD * (1 - Math.log(fullD/1000000));
 	}
 
 
