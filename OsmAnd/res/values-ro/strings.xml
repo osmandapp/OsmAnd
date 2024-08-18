@@ -5863,4 +5863,8 @@
     <string name="add_widget_below">Adăugați widgetul de mai jos</string>
     <string name="delete_widget">Ștergeți widget-ul?</string>
     <string name="delete_widget_description">Acest widget va fi șters. Îl puteți restaura ulterior în ecranul de configurare.</string>
+    <string name="height_cache">Cache de înălțime</string>
+    <string name="add_widget_to_the_left">Adăugați widget la stânga</string>
+    <string name="battery_saving_mode">Modul de economisire a bateriei</string>
+    <string name="help_article_map_tracks_name">Trasee</string>
 </resources>
