@@ -37,10 +37,10 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -103,7 +103,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private int pageMarginPx;
 	private int toolbarHeightPx;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
@@ -318,7 +318,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
 			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
-			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+			GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 			for (RouteStatistics statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
@@ -1384,23 +1384,23 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = gpxFile.tracks.get(0).segments.get(0);
+				TrkSegment segment = gpxFile.getTracks().get(0).getSegments().get(0);
 				if (segment != null) {
 					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
+					for (WptPt p : segment.getPoints()) {
+						if (p.getDistance() >= distance) {
 							wpt = p;
 							break;
 						}
 					}
 					if (wpt != null) {
-						location = new LatLon(wpt.lat, wpt.lon);
+						location = new LatLon(wpt.getLat(), wpt.getLon());
 					}
 				}
 			}
 
 			if (location == null) {
-				location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+				location = new LatLon(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon());
 			}
 			if (wpt != null) {
 				gpxItem.locationOnMap = wpt;

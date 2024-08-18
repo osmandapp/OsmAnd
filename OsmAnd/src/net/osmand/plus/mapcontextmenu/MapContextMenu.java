@@ -16,8 +16,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -1156,10 +1156,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			boolean forceAddToCurrentTrack = PluginsHelper.isActive(OsmandMonitoringPlugin.class)
-					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack));
+					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack()));
 
 			if (forceAddToCurrentTrack) {
-				GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
+				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
@@ -1171,7 +1171,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
-	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
+	                     boolean skipDialog, @Nullable GpxFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1184,8 +1184,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
-					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack())) {
+					GpxFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {
 					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
@@ -1207,12 +1207,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
+			CallbackWithObject<GpxFile[]> callbackWithObject = new CallbackWithObject<GpxFile[]>() {
 				@Override
-				public boolean processResult(GPXFile[] result) {
+				public boolean processResult(GpxFile[] result) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GPXFile gpxFile = result != null && result.length > 0
+						GpxFile gpxFile = result != null && result.length > 0
 								? result[0]
 								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1239,7 +1239,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GPXFile gpxFile;
+				GpxFile gpxFile;
 				if (result != null && result.length > 0) {
 					gpxFile = result[0];
 				} else {

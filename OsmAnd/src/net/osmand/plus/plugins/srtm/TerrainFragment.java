@@ -2,6 +2,12 @@ package net.osmand.plus.plugins.srtm;
 
 import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.IndexConstants.TXT_EXT;
+import static net.osmand.plus.plugins.srtm.TerrainMode.ALTITUDE_DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.COLOR_SLOPE_PREFIX;
+import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HEIGHT_PREFIX;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE_SCND_PREFIX;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.SLOPE;
@@ -32,7 +38,6 @@ import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -48,6 +53,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -57,6 +63,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

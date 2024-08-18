@@ -28,8 +28,8 @@ import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -51,12 +51,12 @@ import java.util.List;
 
 public class SimpleRouteCard extends MapBaseCard {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final RoutingHelper routingHelper;
 
 	private LineData lineData;
 
-	public SimpleRouteCard(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile) {
+	public SimpleRouteCard(@NonNull MapActivity mapActivity, @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		routingHelper = mapActivity.getRoutingHelper();
@@ -82,7 +82,7 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void setupSecondRow() {
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 		boolean hasElevationData = analysis.hasElevationData();
 		if (hasElevationData) {
 			TextView uphill = view.findViewById(R.id.uphill);
@@ -111,7 +111,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupChart() {
 		ElevationChart chart = view.findViewById(R.id.chart);
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData()) {
 			ChartUtils.setupElevationChart(chart, 10f, 4f, false);
@@ -202,7 +202,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
 		container.removeAllViews();
 
-		GPXFile gpxFile = routingHelper.getCurrentGPX();
+		GpxFile gpxFile = routingHelper.getCurrentGPX();
 		ApplicationMode appMode = routingHelper.getAppMode();
 		if (gpxFile != null && !gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == MANUAL) {
 			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);

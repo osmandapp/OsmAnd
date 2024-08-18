@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationCallback;

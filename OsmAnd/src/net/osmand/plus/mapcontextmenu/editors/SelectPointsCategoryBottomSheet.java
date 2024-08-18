@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -123,14 +123,14 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		if (isHidden) {
 			button.setImageDrawable(getContentIcon(R.drawable.ic_action_folder_hidden));
 		} else {
-			int categoryColor = pointsGroup.color;
+			int categoryColor = pointsGroup.getColor();
 			if (categoryColor != 0) {
 				button.setImageDrawable(getPaintedIcon(R.drawable.ic_action_folder, categoryColor));
 			} else {
 				button.setImageDrawable(getIcon(R.drawable.ic_action_folder, getDefaultColorId()));
 			}
 		}
-		String categoryName = pointsGroup.name;
+		String categoryName = pointsGroup.getName();
 		RadioButton compoundButton = itemView.findViewById(R.id.compound_button);
 		compoundButton.setChecked(Algorithms.stringsEqual(selectedCategory, categoryName));
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
@@ -140,7 +140,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		TextView description = itemView.findViewById(R.id.description);
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		text.setText(name);
-		description.setText(String.valueOf(pointsGroup.points.size()));
+		description.setText(String.valueOf(pointsGroup.getPoints().size()));
 
 		itemView.setOnClickListener(v -> {
 			PointEditor pointEditor = getPointEditor();

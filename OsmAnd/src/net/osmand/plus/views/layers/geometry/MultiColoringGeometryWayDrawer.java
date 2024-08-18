@@ -3,17 +3,20 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.*;
 import android.util.Pair;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
+//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
+//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -275,7 +278,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		private int getCircleColor(@NonNull GeometrySolidWayStyle<?> style) {
 			if (style instanceof GeometryGradientWayStyle<?>) {
 				GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
-				return ColorPalette.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
+				return ColorPalette.Companion.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
 			}
 			return style.getColor(0);
 		}

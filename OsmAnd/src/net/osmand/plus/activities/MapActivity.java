@@ -50,7 +50,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
@@ -883,11 +883,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapRouteInfoMenu.updateMenu();
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				} else if (toShow instanceof GPXFile) {
+				} else if (toShow instanceof GpxFile) {
 					hideContextAndRouteInfoMenues();
-					GPXFile gpxFile = (GPXFile) toShow;
+					GpxFile gpxFile = (GpxFile) toShow;
 					SelectedGpxFile selectedGpxFile;
-					if (gpxFile.showCurrentTrack) {
+					if (gpxFile.isShowCurrentTrack()) {
 						selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 					} else {
 						GpxSelectionParams params = GpxSelectionParams.newInstance()

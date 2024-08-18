@@ -2,21 +2,20 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.gpx.GPXUtilities.PointsGroup;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -28,6 +27,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -239,13 +239,13 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
-				if (gpxFile.error != null) {
+				GpxFile gpxFile = SharedUtil.loadGpxFile(inputStream);
+				if (gpxFile.getError() != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
-					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
+					SettingsHelper.LOG.error("Failed read gpx file", SharedUtil.jException(gpxFile.getError()));
 				} else {
 					Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
-					List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPoints(), "");
+					List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPointsList(), "");
 					for (FavouritePoint point : favourites) {
 						FavoriteGroup group = flatGroups.get(point.getCategory());
 						if (group == null) {
@@ -259,14 +259,14 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 
 			@NonNull
-			private FavoriteGroup createFavoriteGroup(@NonNull GPXFile gpxFile, @NonNull FavouritePoint point) {
+			private FavoriteGroup createFavoriteGroup(@NonNull GpxFile gpxFile, @NonNull FavouritePoint point) {
 				FavoriteGroup favoriteGroup = new FavoriteGroup(point);
 
 				PointsGroup pointsGroup = gpxFile.getPointsGroups().get(favoriteGroup.getName());
 				if (pointsGroup != null) {
-					favoriteGroup.setColor(pointsGroup.color);
-					favoriteGroup.setIconName(pointsGroup.iconName);
-					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.backgroundType, DEFAULT_BACKGROUND_TYPE));
+					favoriteGroup.setColor(pointsGroup.getColor());
+					favoriteGroup.setIconName(pointsGroup.getIconName());
+					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 				}
 				return favoriteGroup;
 			}
@@ -276,7 +276,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
+		GpxFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
 		return getGpxWriter(gpxFile);
 	}
 }

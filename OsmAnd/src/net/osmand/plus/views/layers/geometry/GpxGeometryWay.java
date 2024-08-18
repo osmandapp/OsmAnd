@@ -6,13 +6,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Track3DStyle;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -48,7 +49,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		boolean track3DStyleChanged = !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
 				|| this.coloringType != coloringType || track3DStyleChanged
-				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
+				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
 
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
 		if (coloringTypeChanged) {
@@ -63,12 +65,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (track3DStyleChanged) {
+		if (getTrack3DStyle() != track3DStyle) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
+		getDrawer().setOutlineColoringType(getOutlineColoringType());
 		getDrawer().setTrack3DStyle(track3DStyle);
 
 		this.customColor = trackColor;
@@ -112,7 +115,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				}
 			} else if (coloringType.isRouteInfoAttribute()) {
 				if (routeSegments != null) {
-					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromWpts(points), routeSegments);
+					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromSharedWpts(points), routeSegments);
 				} else {
 					clearWay();
 				}
@@ -126,8 +129,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);
 			pointHeights.add((float) getPointElevation(wptPt));
-			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, 0);
-			point.primaryColor = getPointGradientColor(coloringType, wptPt);
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), 0);
+			point.setPrimaryColor(getPointGradientColor(coloringType, wptPt));
 			colorizationPoints.add(point);
 		}
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
@@ -137,15 +140,15 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		ColoringType outlineColoringType = getOutlineColoringType();
 		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
 		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
-				? getRouteInfoAttributesColors(RouteProvider.locationsFromWpts(points), segments) : null;
+ 				? getRouteInfoAttributesColors(RouteProvider.locationsFromSharedWpts(points), segments) : null;
 
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);
 			double value = getPointElevation(wptPt);
-			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.lat, wptPt.lon, value);
-			point.primaryColor = getPointColor(coloringType, wptPt, routeColors, i);
+			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), value);
+			point.setPrimaryColor(getPointColor(coloringType, wptPt, routeColors, i));
 			if (outlineColoringType != null) {
-				point.secondaryColor = getPointColor(outlineColoringType, wptPt, routeColors, i);
+				point.setSecondaryColor(getPointColor(outlineColoringType, wptPt, routeColors, i));
 			}
 			colorization.add(point);
 		}

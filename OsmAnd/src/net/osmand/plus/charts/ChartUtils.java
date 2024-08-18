@@ -39,13 +39,9 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 
-import net.osmand.ColorPalette;
-import net.osmand.ColorPalette.ColorValue;
 import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
 import net.osmand.gpx.GPXInterpolator;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.MemoryInfo;
@@ -59,6 +55,10 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
@@ -192,7 +192,7 @@ public class ChartUtils {
 		return 1f;
 	}
 
-	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis,
+	private static List<Entry> calculateElevationArray(GpxTrackAnalysis analysis,
 	                                                   GPXDataSetAxisType axisType,
 	                                                   float divX, float convEle,
 	                                                   boolean useGeneralTrackPoints,
@@ -204,24 +204,24 @@ public class ChartUtils {
 		float prevElevOrig = -80000;
 		float prevElev = 0;
 		int i = -1;
-		int lastIndex = analysis.pointAttributes.size() - 1;
+		int lastIndex = analysis.getPointAttributes().size() - 1;
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
 		float x = 0f;
-		for (PointAttributes attribute : analysis.pointAttributes) {
+		for (PointAttributes attribute : analysis.getPointAttributes()) {
 			i++;
 			if (axisType == TIME || axisType == TIME_OF_DAY) {
-				x = attribute.timeDiff;
+				x = attribute.getTimeDiff();
 			} else {
-				x = attribute.distance;
+				x = attribute.getDistance();
 			}
 			if (x >= 0) {
-				if (!(calcWithoutGaps && attribute.firstPoint && lastEntry != null)) {
+				if (!(calcWithoutGaps && attribute.getFirstPoint() && lastEntry != null)) {
 					nextX += x / divX;
 				}
-				if (!Float.isNaN(attribute.elevation)) {
-					elev = attribute.elevation;
+				if (!Float.isNaN(attribute.getElevation())) {
+					elev = attribute.getElevation();
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
 							//elev -= 1f;
@@ -240,10 +240,10 @@ public class ChartUtils {
 						}
 						hasSameY = false;
 					}
-					if (useGeneralTrackPoints && attribute.firstPoint && lastEntry != null) {
+					if (useGeneralTrackPoints && attribute.getFirstPoint() && lastEntry != null) {
 						values.add(new Entry(nextX, lastEntry.getY()));
 					}
-					prevElevOrig = attribute.elevation;
+					prevElevOrig = attribute.getElevation();
 					prevElev = elev;
 					nextY = elev * convEle;
 					lastEntry = new Entry(nextX, nextY);
@@ -304,7 +304,7 @@ public class ChartUtils {
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart chart,
 	                                              @NonNull RouteStatistics routeStatistics,
-	                                              @NonNull GPXTrackAnalysis analysis,
+	                                              @NonNull GpxTrackAnalysis analysis,
 	                                              boolean useRightAxis,
 	                                              boolean nightMode) {
 
@@ -394,9 +394,9 @@ public class ChartUtils {
 		List<Entry> entries = new ArrayList<>();
 
 		for (int i = 0; i < colorValues.size(); i++) {
-			int clr = colorValues.get(i).clr;
+			int clr = colorValues.get(i).getClr();
 			colors[i] = clr;
-			entries.add(new Entry((float) colorValues.get(i).val, 0));
+			entries.add(new Entry((float) colorValues.get(i).getValue(), 0));
 		}
 
 		LineDataSet barDataSet = new LineDataSet(entries, "");
@@ -446,7 +446,7 @@ public class ChartUtils {
 
 	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication app,
 	                                                           @NonNull LineChart chart,
-	                                                           @NonNull GPXTrackAnalysis analysis,
+	                                                           @NonNull GpxTrackAnalysis analysis,
 	                                                           @NonNull GPXDataSetType graphType,
 	                                                           @NonNull GPXDataSetAxisType axisType,
 	                                                           boolean useRightAxis,
@@ -557,7 +557,7 @@ public class ChartUtils {
 
 	public static OrderedLineDataSet createGPXSpeedDataSet(@NonNull OsmandApplication app,
 	                                                       @NonNull LineChart chart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GpxTrackAnalysis analysis,
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean useRightAxis,
@@ -582,7 +582,7 @@ public class ChartUtils {
 			yAxis.resetAxisMinimum();
 		}
 
-		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
+		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis.getPointAttributes(), axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String mainUnitY = graphType.getMainUnitY(app);
@@ -610,15 +610,15 @@ public class ChartUtils {
 	}
 
 	public static float getDivX(@NonNull OsmandApplication app, @NonNull LineChart lineChart,
-	                            @NonNull GPXTrackAnalysis analysis, @NonNull GPXDataSetAxisType axisType,
+	                            @NonNull GpxTrackAnalysis analysis, @NonNull GPXDataSetAxisType axisType,
 	                            boolean calcWithoutGaps) {
 		XAxis xAxis = lineChart.getXAxis();
 		if (axisType == TIME && analysis.isTimeSpecified()) {
-			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan());
+			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan());
 		} else if (axisType == TIME_OF_DAY && analysis.isTimeSpecified()) {
 			return setupXAxisTimeOfDay(xAxis, analysis.getStartTime());
 		} else {
-			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance());
+			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance());
 		}
 	}
 
@@ -658,10 +658,10 @@ public class ChartUtils {
 		for (int i = 0; i < pointAttributes.size(); i++) {
 			PointAttributes attribute = pointAttributes.get(i);
 
-			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
+			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.getTimeDiff() : attribute.getDistance();
 
 			if (i == 0 || stepX > 0) {
-				if (!(calcWithoutGaps && attribute.firstPoint)) {
+				if (!(calcWithoutGaps && attribute.getFirstPoint())) {
 					currentX += stepX / divX;
 				}
 				if (attribute.hasValidValue(key)) {
@@ -670,11 +670,11 @@ public class ChartUtils {
 					if (currentY < 0 || Float.isInfinite(currentY)) {
 						currentY = 0;
 					}
-					if (attribute.firstPoint && currentY != 0) {
+					if (attribute.getFirstPoint() && currentY != 0) {
 						values.add(new Entry(currentX, 0));
 					}
 					values.add(new Entry(currentX, currentY));
-					if (attribute.lastPoint && currentY != 0) {
+					if (attribute.getLastPoint() && currentY != 0) {
 						values.add(new Entry(currentX, 0));
 					}
 				}
@@ -700,7 +700,7 @@ public class ChartUtils {
 
 	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication app,
 	                                                       @NonNull LineChart chart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GpxTrackAnalysis analysis,
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       @Nullable List<Entry> eleValues,
@@ -712,7 +712,7 @@ public class ChartUtils {
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
-		double totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+		double totalDistance = calcWithoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
@@ -848,7 +848,7 @@ public class ChartUtils {
 
 	public static List<ILineDataSet> getDataSets(LineChart chart,
 	                                             OsmandApplication app,
-	                                             GPXTrackAnalysis analysis,
+	                                             GpxTrackAnalysis analysis,
 	                                             @NonNull GPXDataSetType firstType,
 	                                             @Nullable GPXDataSetType secondType,
 	                                             boolean calcWithoutGaps) {
@@ -893,7 +893,7 @@ public class ChartUtils {
 	@Nullable
 	public static OrderedLineDataSet getDataSet(@NonNull OsmandApplication app,
 	                                            @NonNull LineChart chart,
-	                                            @NonNull GPXTrackAnalysis analysis,
+	                                            @NonNull GpxTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
 	                                            @Nullable GPXDataSetType otherGraphType,
 	                                            boolean calcWithoutGaps,

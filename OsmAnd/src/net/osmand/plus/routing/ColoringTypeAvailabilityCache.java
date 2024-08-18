@@ -5,6 +5,7 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubsc
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.shared.routing.ColoringType;
 
 import java.util.HashMap;
 import java.util.Map;

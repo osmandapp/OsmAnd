@@ -3,7 +3,7 @@ package net.osmand.plus.track.cards;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXUtilities.Metadata;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -26,7 +26,7 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 	public void updateContent() {
 		super.updateContent();
 
-		Map<String, String> extensions = metadata.extensions;
+		Map<String, String> extensions = metadata.getExtensions();
 		updateVisibility(!Algorithms.isEmpty(extensions));
 
 		if (extensions != null) {
