@@ -20,6 +20,7 @@ import net.osmand.util.MapUtils;
 // TODO MAX_DEPTH_ROLLBACK rollback in meters?
 // TEST missing roads
 // TEST performance
+
 public class GpxMultiSegmentsApproximation {
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
 	private static final int MAX_DEPTH_ROLLBACK = 15; 
@@ -138,6 +139,7 @@ public class GpxMultiSegmentsApproximation {
 		long timeToCalculate = System.nanoTime();
 		initGpxPointsXY31(gpxPoints);
 		float minPointApproximation = gctx.ctx.config.minPointApproximation;
+//		minPointApproximation = 50;
 		float initDist = minPointApproximation / 2;
 		GpxPoint currentPoint = findNextRoutablePoint(frontEnd, gctx, initDist, gpxPoints, 0);
 		if (currentPoint == null) {
@@ -215,11 +217,23 @@ public class GpxMultiSegmentsApproximation {
 		List<RouteSegmentResult> res = new ArrayList<>();
 		int startInd = 0;
 		int last = bestRoute.gpxNext();
+		// combining segments doesn't seem to have any effect on tests 
+//		RouteSegmentResult lastRes = null;
 		while (bestRoute != null && bestRoute.segment != null) {
 			startInd = bestRoute.gpxStart;
-			res.add(new RouteSegmentResult(bestRoute.segment.road, bestRoute.segment.getSegmentStart(),
-					bestRoute.segment.getSegmentEnd()));
+			int end = bestRoute.segment.getSegmentEnd();
+//			if (lastRes != null && bestRoute.segment.getRoad().getId() == lastRes.getObject().getId()) {
+//				if (lastRes.getStartPointIndex() == bestRoute.segment.getSegmentEnd()
+//						&& lastRes.isForwardDirection() == bestRoute.segment.isPositive()) {
+//					end = lastRes.getEndPointIndex();
+//					res.remove(res.size() - 1);
+//				}
+//			}
+			RouteSegmentResult routeRes = new RouteSegmentResult(bestRoute.segment.road,
+					bestRoute.segment.getSegmentStart(), end);
+			res.add(routeRes);
 			bestRoute = bestRoute.parent;
+//			lastRes = routeRes;
 		}
 		Collections.reverse(res);
 		gpxPoints.get(startInd).routeToTarget = res;

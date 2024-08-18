@@ -31,6 +31,7 @@ public class ApproximationTest {
 	private static final String RESOURCES_PATH = "/approximation/";
 	private static final String FILES_PATH = "src/test/resources/approximation/";
 
+	
 	boolean isNative() {
 		return false;
 	}
@@ -97,15 +98,19 @@ public class ApproximationTest {
 		RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(MEM_LIMIT, MEM_LIMIT);
 
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
-		if ("routing".equals(type)) router.setUseGeometryBasedApproximation(false);
-		if ("geometry".equals(type)) router.setUseGeometryBasedApproximation(true);
+		if ("routing".equals(type)) {
+			router.setUseGeometryBasedApproximation(false);
+		} else if ("geometry".equals(type)) {
+//			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
+			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_POINTS_MATCH_ALGORITHM;
+			router.setUseGeometryBasedApproximation(true);
+		}
 		router.setUseNativeApproximation(isNative());
 
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 		RoutingConfiguration config = builder.build(profile, memoryLimits, new HashMap<String, String>());
 		config.routeCalculationTime = System.currentTimeMillis(); // ENABLE_TIME_CONDITIONAL_ROUTING
 		if (minPointApproximation > 0) config.minPointApproximation = minPointApproximation;
-
 		RoutingContext ctx = router.buildRoutingContext(config, isNative() ? nativeLibrary : null,
 				binaryMapIndexReaders, RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 		GpxRouteApproximation gctx = new GpxRouteApproximation(ctx);
@@ -124,7 +129,6 @@ public class ApproximationTest {
 			long osmId = segment.getObject().getId() / 64;
 			distance += calcSegmentDistance(segment);
 			waysInResult.add(osmId);
-
 			if (segment.getTurnType() != null && segment.getObject().getId() != -1) {
 				String lanes = getLanesString(segment);
 				String turn = segment.getTurnType().toXmlString();
