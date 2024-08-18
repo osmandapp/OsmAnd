@@ -5854,4 +5854,5 @@
     <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
     <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
     <string name="delete_widget">Supprimer le gadget ?</string>
+    <string name="battery_saving_mode">Mode économie de batterie</string>
 </resources>
