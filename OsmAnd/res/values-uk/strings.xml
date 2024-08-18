@@ -5806,8 +5806,8 @@
     <string name="weather_data_sources_prompt">OsmAnd надає погодні дані з двох джерел:</string>
     <string name="weather_source_GFS_description">Глобальна система прогнозування від національних центрів екологічного прогнозування</string>
     <string name="weather_source_ecmwf_description">Європейський центр середньострокових прогнозів погоди</string>
-    <string name="weather_source_ecmwf_title">ЄЦСПП</string>
-    <string name="weather_source_GFS_title">ГСП</string>
+    <string name="weather_source_ecmwf_title">ЄЦСПП (ECMWF)</string>
+    <string name="weather_source_GFS_title">GFS</string>
     <string name="daynight_mode_night_summary">Завжди відображає мапу в темній темі, що підходить для нічних умов або умов недостатнього освітлення.</string>
     <string name="daynight_mode_day_summary">Завжди відображає мапу у світлій темі, що ідеально підходить для денної видимості.</string>
     <string name="quick_action_map_underlay">Підкладка</string>
