@@ -18,7 +18,7 @@ public class GpxRouteApproximation {
 	
 	public static final int GPX_OSM_POINTS_MATCH_ALGORITHM = 1;
 	public static final int GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM = 2;
-	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_POINTS_MATCH_ALGORITHM;
+	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
 	
 	
 	public List<RoutePlannerFrontEnd.GpxPoint> finalPoints = new ArrayList<>();
@@ -190,8 +190,8 @@ public class GpxRouteApproximation {
 				GpxPointsMatchApproximation app = new GpxPointsMatchApproximation();
 				app.gpxApproximation(router, gctx, gpxPoints);
 			} else if (GPX_SEGMENT_ALGORITHM == GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM) {
-				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation();
-				app.gpxApproximation(router, gctx, gpxPoints);
+				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation(router, gctx, gpxPoints);
+				app.gpxApproximation();
 			}
 			calculateGpxRoute(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
