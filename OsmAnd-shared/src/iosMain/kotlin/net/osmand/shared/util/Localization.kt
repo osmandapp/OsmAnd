@@ -14,6 +14,10 @@ actual object Localization {
 		enBundle = if (path != null) NSBundle(path = path) else null
 	}
 
+	actual fun getStringId(key: String): Int {
+		return 0
+	}
+
 	actual fun getString(key: String): String {
 		return localizedString(key)
 	}

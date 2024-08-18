@@ -42,9 +42,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
-import static net.osmand.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
-import static net.osmand.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
-import static net.osmand.gpx.PointAttributes.DEV_RAW_ZOOM;
+import static net.osmand.shared.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
+import static net.osmand.shared.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
+import static net.osmand.shared.gpx.PointAttributes.DEV_RAW_ZOOM;
 
 public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener {
 

@@ -1,12 +1,13 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX
+import net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX
+
 class PointAttributes(
 	var distance: Float, val timeDiff: Float, val firstPoint: Boolean, val lastPoint: Boolean
 ) {
 
 	companion object {
-		private const val GPXTPX_PREFIX = "GPXTPX_"
-		private const val OSMAND_EXTENSIONS_PREFIX = "OSMAND_"
 
 		const val SENSOR_TAG_HEART_RATE = GPXTPX_PREFIX + "hr"
 		const val SENSOR_TAG_SPEED = OSMAND_EXTENSIONS_PREFIX + "speed_sensor"

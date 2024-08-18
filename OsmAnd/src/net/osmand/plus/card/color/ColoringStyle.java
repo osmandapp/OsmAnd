@@ -7,9 +7,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.util.Localization;
 import net.osmand.util.Algorithms;
 
 import java.util.Objects;
@@ -59,7 +59,7 @@ public class ColoringStyle {
 	public String toHumanString(@NonNull Context context) {
 		return coloringType == ColoringType.ATTRIBUTE
 				? getRouteInfoAttributeName(context)
-				: context.getString(context.getResources().getIdentifier(coloringType.getTitleId(), "string", context.getPackageName()));
+				: Localization.INSTANCE.getString(coloringType.getTitleId());
 	}
 
 	@NonNull
@@ -74,8 +74,7 @@ public class ColoringStyle {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o instanceof ColoringStyle) {
-			ColoringStyle that = (ColoringStyle) o;
+		if (o instanceof ColoringStyle that) {
 			return Objects.equals(getId(), that.getId());
 		}
 		return false;

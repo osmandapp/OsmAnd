@@ -22,6 +22,7 @@ actual object PlatformUtil {
 		this.gpxDir = gpxDir
 
 		sqliteApi = SQLiteAPIImpl(context)
+		Localization.initialize(context)
 	}
 
 	actual fun currentTimeMillis(): Long {

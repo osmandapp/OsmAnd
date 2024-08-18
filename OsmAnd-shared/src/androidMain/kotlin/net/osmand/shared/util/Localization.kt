@@ -16,6 +16,12 @@ actual object Localization {
 		this.context = WeakReference(context)
 	}
 
+	actual fun getStringId(key: String): Int {
+		val ctx = context?.get() ?: return 0
+		notFoundCache[key]?.let { return 0 }
+		return resolveResourceId(ctx, key)
+	}
+
 	actual fun getString(key: String): String {
 		val ctx = context?.get() ?: return toHumanReadable(key)
 

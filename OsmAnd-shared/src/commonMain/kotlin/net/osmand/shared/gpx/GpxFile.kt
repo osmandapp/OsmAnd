@@ -680,8 +680,8 @@ class GpxFile : GpxExtensions {
 		return extensions?.containsKey("show_start_finish") ?: false
 	}
 
-	fun isShowStartFinish(): Boolean? {
-		return extensions?.get("show_start_finish")?.toBoolean()
+	fun isShowStartFinish(): Boolean {
+		return extensions?.get("show_start_finish")?.toBoolean() ?: true
 	}
 
 	fun setShowStartFinish(showStartFinish: Boolean) {
@@ -864,13 +864,11 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getGradientColorPalette(): String? {
-		return if (extensions != null) {
-			extensions!!["color_palette"]
-		} else null
+		return extensions?.get("color_palette")
 	}
 
-	fun setGradientColorPalette(gradientColorPaletteName: String?) {
-		getExtensionsToWrite()["color_palette"] = gradientColorPaletteName!!
+	fun setGradientColorPalette(gradientColorPaletteName: String) {
+		getExtensionsToWrite()["color_palette"] = gradientColorPaletteName
 	}
 
 	fun getRouteByName(name: String?): Route? {

@@ -1,10 +1,10 @@
 package net.osmand.plus.track;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

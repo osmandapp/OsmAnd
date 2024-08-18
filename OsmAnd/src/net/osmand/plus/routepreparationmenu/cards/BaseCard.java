@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.Localization;
 
 public abstract class BaseCard {
 
@@ -228,8 +229,7 @@ public abstract class BaseCard {
 
 	@NonNull
 	public final String getString(String resId) {
-		int resourceId = app.getResources().getIdentifier(resId, "string", app.getPackageName());
-		return app.getString(resourceId);
+		return Localization.INSTANCE.getString(resId);
 	}
 
 	@NonNull
