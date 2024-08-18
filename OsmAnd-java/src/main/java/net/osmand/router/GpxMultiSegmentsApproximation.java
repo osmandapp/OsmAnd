@@ -13,15 +13,21 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
-// TODO fix minor "Points are not connected" (~0.01m) - probably not?
-// TODO makePrecise for start / end segments (just check how correctly they are calculated)
-// TEST missing roads
-// TEST performance
-
+// TEST missing roads, performance, start-end points (precise)
 public class GpxMultiSegmentsApproximation {
-	// ALGORITHM CONSTANTS
-	private static final int MAX_DEPTH_ROLLBACK = 15; // TODO meters
+	// ALGORITHM CONSTANTS //
+	private static final int MAX_DEPTH_ROLLBACK = 500; // 500 m rollback
 	private static final double MIN_BRANCHING_DIST = 10; // 5 m for branching 
+	/////////////////////////
+	
+	private static final int ROUTE_POINTS = 12;
+	private static final int GPX_MAX = 30; // 1M
+	private GpxRouteApproximation gctx;
+	private List<GpxPoint> gpxPoints;
+	private RoutePlannerFrontEnd frontEnd;
+	private float minPointApproximation;
+	private float initDist;
+	private TLongHashSet visited = new TLongHashSet();
 
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
 	private static boolean DEBUG = true;
@@ -58,15 +64,6 @@ public class GpxMultiSegmentsApproximation {
 		}
 	}
 	
-	
-	private static final int ROUTE_POINTS = 12;
-	private static final int GPX_MAX = 30; // 1M
-	private GpxRouteApproximation gctx;
-	private List<GpxPoint> gpxPoints;
-	private RoutePlannerFrontEnd frontEnd;
-	private float minPointApproximation;
-	private float initDist;
-	private TLongHashSet visited = new TLongHashSet();
 
 	private static long calculateRoutePointId(RouteSegmentAppr segm) {
 		boolean positive = segm.segment.isPositive();
@@ -172,7 +169,7 @@ public class GpxMultiSegmentsApproximation {
 				}
 				last = bestNext;
 			} else { // try to revert
-				if (last.parent != null && (bestRoute != null && bestRoute.gpxNext() - last.parent.gpxNext() < MAX_DEPTH_ROLLBACK)) {
+				if (last.parent != null && (bestRoute != null && gpxDist(bestRoute.gpxNext(), last.parent.gpxNext()) < MAX_DEPTH_ROLLBACK)) {
 					if (DEBUG) {
 						System.out.print(" ^ ");
 					}
@@ -208,6 +205,10 @@ public class GpxMultiSegmentsApproximation {
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
 		return gctx;
+	}
+
+	private double gpxDist(int gpxL1, int gpxL2) {
+		return gpxPoints.get(gpxL1).cumDist - gpxPoints.get(gpxL2).cumDist; 
 	}
 
 	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
