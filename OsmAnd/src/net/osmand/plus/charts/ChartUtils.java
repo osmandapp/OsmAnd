@@ -1,6 +1,5 @@
 package net.osmand.plus.charts;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static com.github.mikephil.charting.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
@@ -52,6 +51,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -90,7 +90,8 @@ public class ChartUtils {
 		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
 		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
-		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor, yAxisGridColor, DEFAULT_BOLD, useGesturesAndScale);
+		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor,
+				yAxisGridColor, FontCache.getMediumFont(), useGesturesAndScale);
 	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {

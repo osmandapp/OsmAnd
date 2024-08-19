@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -17,7 +16,7 @@
 		android:background="?attr/list_background_color"
 		android:contentInsetStart="@dimen/toolbar_inset_start_with_navigation"
 		app:titleTextAppearance="@style/ToolbarTitle"
-		osmand:titleTextColor="?android:textColorPrimary"
+		app:titleTextColor="?android:textColorPrimary"
 		tools:navigationIcon="@drawable/ic_action_close"
 		tools:title="@string/favorite_category_add_new_title" />
 
@@ -66,7 +65,7 @@
 							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:maxLines="4"
 							android:selectAllOnFocus="true"
-							osmand:lineHeight="@dimen/default_title_line_height" />
+							app:lineHeight="@dimen/default_title_line_height" />
 
 					</com.google.android.material.textfield.TextInputLayout>
 

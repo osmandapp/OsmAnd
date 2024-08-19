@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -18,7 +17,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_onmap" />
+			app:srcCompat="@drawable/bg_shadow_onmap" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -63,7 +62,7 @@
 							android:text="@string/srtm_color_scheme"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							android:textStyle="bold" />
+							app:typefaceWeight="medium" />
 
 						<LinearLayout
 							android:id="@+id/color_scheme_button"
@@ -91,7 +90,7 @@
 								android:layout_gravity="center_vertical"
 								android:layout_marginStart="@dimen/content_padding"
 								app:tint="?attr/secondary_icon_color"
-								osmand:srcCompat="@drawable/ic_action_arrow_down" />
+								app:srcCompat="@drawable/ic_action_arrow_down" />
 
 						</LinearLayout>
 
@@ -318,7 +317,7 @@
 						android:layout_height="match_parent"
 						android:adjustViewBounds="true"
 						android:scaleType="fitCenter"
-						osmand:srcCompat="@drawable/img_empty_state_terrain" />
+						app:srcCompat="@drawable/img_empty_state_terrain" />
 
 					<LinearLayout
 						android:layout_width="match_parent"

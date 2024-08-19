@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/home_work_card"
 	android:layout_width="match_parent"
@@ -41,7 +41,7 @@
 				android:lineSpacingExtra="5sp"
 				android:text="@string/title_3d_track"
 				android:textSize="16sp"
-				android:textStyle="bold" />
+				app:typefaceWeight="medium" />
 
 			<TextView
 				android:layout_width="272dp"
@@ -57,8 +57,8 @@
 				android:id="@+id/get_btn"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				osmand:dialogButtonTitle="@string/shared_string_get"
-				osmand:dialogButtonType="secondary" />
+				app:dialogButtonTitle="@string/shared_string_get"
+				app:dialogButtonType="secondary" />
 		</LinearLayout>
 
 	</LinearLayout>
@@ -80,7 +80,7 @@
 			android:lineSpacingExtra="5sp"
 			android:text="@string/title_3d_track"
 			android:textSize="16sp"
-			android:textStyle="bold" />
+			app:typefaceWeight="medium" />
 
 		<include
 			android:id="@+id/visualized_by_container"
