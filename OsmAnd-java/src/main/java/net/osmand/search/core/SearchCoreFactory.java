@@ -1365,10 +1365,11 @@ public class SearchCoreFactory {
 					if (!types.isRegisteredType(type)) {
 						type = types.getOtherPoiCategory();
 					}
-					if (!acceptedTypes.containsKey(type)) {
+					PoiCategory currentCategory = types.getPoiCategoryByName(type.getKeyName());
+					if (!acceptedTypes.containsKey(currentCategory)) {
 						return false;
 					}
-					LinkedHashSet<String> set = acceptedTypes.get(type);
+					LinkedHashSet<String> set = acceptedTypes.get(currentCategory);
 					if (set == null) {
 						return true;
 					}
