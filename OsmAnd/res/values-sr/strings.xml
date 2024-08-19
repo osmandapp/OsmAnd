@@ -5860,4 +5860,5 @@
     <string name="add_widget_to_the_left">Додај виџет лево</string>
     <string name="delete_widget">Обисати виџет?</string>
     <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
+    <string name="battery_saving_mode">Режим уштеде батерије</string>
 </resources>
