@@ -29,8 +29,12 @@ import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -42,6 +46,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class FileUtils {
@@ -142,16 +147,37 @@ public class FileUtils {
 	}
 
 	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+		GpxFile gpxFile = null;
 		app.getGpxDbHelper().rename(src, dest);
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.getGpxFile().setPath(dest.getAbsolutePath());
+			gpxFile = selectedGpxFile.getGpxFile();
+			gpxFile.setPath(dest.getAbsolutePath());
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
+			updateTrackNameProperty(gpxFile, dest);
+		}
+
+		if (gpxFile != null) {
+			updateTrackNameProperty(gpxFile, dest);
+		} else {
+			GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
+				updateTrackNameProperty(gpx, dest);
+				return true;
+			});
+		}
+	}
+
+	private static void updateTrackNameProperty(@NonNull GpxFile gpxFile, @NonNull File file) {
+		String name = Algorithms.getFileNameWithoutExtension(file.getName());
+		Metadata metadata = gpxFile.getMetadata();
+		if (!Objects.equals(name, metadata.getName())) {
+			metadata.setName(name);
+			SaveGpxHelper.saveGpx(gpxFile);
 		}
 	}
 
