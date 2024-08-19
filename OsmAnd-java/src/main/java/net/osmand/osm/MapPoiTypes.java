@@ -807,8 +807,8 @@ public class MapPoiTypes {
 		for (AbstractPoiType l : lf) {
 			System.out.println("----------------- " + l.getKeyName());
 //			print("", l);
-			Map<PoiCategory, LinkedHashSet<String>> m =
-					l.putTypes(new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
+			Map<String, LinkedHashSet<String>> m =
+					l.putTypes(new LinkedHashMap<String, LinkedHashSet<String>>());
 //			System.out.println(m);
 		}
 

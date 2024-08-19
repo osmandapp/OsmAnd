@@ -65,11 +65,11 @@ public class PoiFilter extends AbstractPoiType {
 		}
 	}
 
-	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
-		if (!acceptedTypes.containsKey(pc)) {
-			acceptedTypes.put(pc, new LinkedHashSet<String>());
+	public Map<String, LinkedHashSet<String>> putTypes(Map<String, LinkedHashSet<String>> acceptedTypes) {
+		if (!acceptedTypes.containsKey(pc.getKeyName())) {
+			acceptedTypes.put(pc.getKeyName(), new LinkedHashSet<String>());
 		}
-		LinkedHashSet<String> set = acceptedTypes.get(pc);
+		LinkedHashSet<String> set = acceptedTypes.get(pc.getKeyName());
 		for (PoiType pt : poiTypes) {
 			set.add(pt.getKeyName());
 		}
@@ -77,14 +77,14 @@ public class PoiFilter extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
-	protected void addReferenceTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+	protected void addReferenceTypes(Map<String, LinkedHashSet<String>> acceptedTypes) {
 		for (PoiType pt : getPoiTypes()) {
 			if (pt.isReference()) {
 				PoiCategory refCat = pt.getReferenceType().getCategory();
-				if (!acceptedTypes.containsKey(refCat)) {
-					acceptedTypes.put(refCat, new LinkedHashSet<String>());
+				if (!acceptedTypes.containsKey(refCat.getKeyName())) {
+					acceptedTypes.put(refCat.getKeyName(), new LinkedHashSet<String>());
 				}
-				LinkedHashSet<String> ls = acceptedTypes.get(refCat);
+				LinkedHashSet<String> ls = acceptedTypes.get(refCat.getKeyName());
 				if (ls != null) {
 					ls.add(pt.getKeyName());
 				}

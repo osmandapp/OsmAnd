@@ -48,9 +48,9 @@ public class PoiCategory extends PoiFilter {
 		this.defaultTag = defaultTag;
 	}
 	
-	public Map<PoiCategory, LinkedHashSet<String>> putTypes(
-			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
-		acceptedTypes.put(this, null);
+	public Map<String, LinkedHashSet<String>> putTypes(
+			Map<String, LinkedHashSet<String>> acceptedTypes) {
+		acceptedTypes.put(this.getKeyName(), null);
 		addReferenceTypes(acceptedTypes);
 		return acceptedTypes;
 	}

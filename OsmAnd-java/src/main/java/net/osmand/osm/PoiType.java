@@ -170,11 +170,11 @@ public class PoiType extends AbstractPoiType {
 		return filter;
 	}
 
-	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+	public Map<String, LinkedHashSet<String>> putTypes(Map<String, LinkedHashSet<String>> acceptedTypes) {
 		if (isAdditional()) {
 			parentType.putTypes(acceptedTypes);
 			if (filterOnly) {
-				LinkedHashSet<String> set = acceptedTypes.get(category);
+				LinkedHashSet<String> set = acceptedTypes.get(category.getKeyName());
 				for (PoiType pt : category.getPoiTypes()) {
 					List<PoiType> poiAdditionals = pt.getPoiAdditionals();
 					if (poiAdditionals == null) {
@@ -191,10 +191,10 @@ public class PoiType extends AbstractPoiType {
 		}
 		PoiType rt = getReferenceType();
 		PoiType poiType = rt != null ? rt : this;
-		if (!acceptedTypes.containsKey(poiType.category)) {
-			acceptedTypes.put(poiType.category, new LinkedHashSet<String>());
+		if (!acceptedTypes.containsKey(poiType.category.getKeyName())) {
+			acceptedTypes.put(poiType.category.getKeyName(), new LinkedHashSet<String>());
 		}
-		LinkedHashSet<String> set = acceptedTypes.get(poiType.category);
+		LinkedHashSet<String> set = acceptedTypes.get(poiType.category.getKeyName());
 		if(set != null) {
 			set.add(poiType.getKeyName());
 		}

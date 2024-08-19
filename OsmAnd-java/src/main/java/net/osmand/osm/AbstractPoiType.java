@@ -168,7 +168,7 @@ public abstract class AbstractPoiType {
 		Collections.addAll(this.excludedPoiAdditionalCategories, excludedPoiAdditionalCategories);
 	}
 
-	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);
+	public abstract Map<String, LinkedHashSet<String>> putTypes(Map<String, LinkedHashSet<String>> acceptedTypes);
 
 	@Override
 	public String toString() {

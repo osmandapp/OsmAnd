@@ -1343,7 +1343,7 @@ public class SearchCoreFactory {
 		}
 
 		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt, Set<String> poiAdditionals ) {
-			final Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
+			final Map<String, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<String,
 					LinkedHashSet<String>>();
 			pt.putTypes(acceptedTypes);
 			poiAdditionals.clear();
@@ -1365,11 +1365,11 @@ public class SearchCoreFactory {
 					if (!types.isRegisteredType(type)) {
 						type = types.getOtherPoiCategory();
 					}
-					PoiCategory currentCategory = types.getPoiCategoryByName(type.getKeyName());
-					if (!acceptedTypes.containsKey(currentCategory)) {
+//					PoiCategory currentCategory = types.getPoiCategoryByName(type.getKeyName()); // redundant
+					if (!acceptedTypes.containsKey(type.getKeyName())) {
 						return false;
 					}
-					LinkedHashSet<String> set = acceptedTypes.get(currentCategory);
+					LinkedHashSet<String> set = acceptedTypes.get(type.getKeyName());
 					if (set == null) {
 						return true;
 					}
@@ -1624,7 +1624,7 @@ public class SearchCoreFactory {
 			return true;
 		}
 
-		public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+		public Map<String, LinkedHashSet<String>> putTypes(Map<String, LinkedHashSet<String>> acceptedTypes) {
 			for (PoiType p : additionalPoiTypes) {
 				if (p.getParentType() == registry.getOtherMapCategory()) {
 					for (PoiCategory c : registry.getCategories(false)) {
