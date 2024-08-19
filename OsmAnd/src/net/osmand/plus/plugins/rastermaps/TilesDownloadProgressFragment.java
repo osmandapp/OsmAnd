@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesFragment.KEY_DOWNLOAD_LAYER;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesFragment.KEY_DOWNLOAD_TYPE;
 
@@ -33,6 +32,7 @@ import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -207,7 +207,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		}
 
 		Spannable spannable = new SpannableString(fullText);
-		setSpan(spannable, new CustomTypefaceSpan(DEFAULT_BOLD), fullText.indexOf(downloadedSize), downloadedSize.length());
+		setSpan(spannable, new CustomTypefaceSpan(FontCache.getMediumFont()), fullText.indexOf(downloadedSize), downloadedSize.length());
 
 		if (showExpectedSize) {
 			ForegroundColorSpan span = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));

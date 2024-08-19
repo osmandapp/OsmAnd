@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
@@ -25,8 +25,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textStyle="bold"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<include
 			android:id="@+id/track_toggle"
@@ -49,7 +49,7 @@
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:textStyle="normal"
-			osmand:lineHeight="@dimen/default_desc_line_height" />
+			app:lineHeight="@dimen/default_desc_line_height" />
 
 		<LinearLayout
 			android:id="@+id/selected_track_file_container"
@@ -82,7 +82,7 @@
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
 					android:letterSpacing="@dimen/description_letter_spacing"
-					android:textStyle="bold"
+					app:typefaceWeight="medium"
 					tools:background="@drawable/btn_solid_border_light" />
 
 			</FrameLayout>
@@ -96,7 +96,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="top"
 		android:scaleType="fitXY"
-		osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="match_parent"
@@ -104,7 +104,7 @@
 		android:scaleType="fitXY"
 		android:layout_gravity="top"
 		android:layout_marginTop="@dimen/content_padding"
-		osmand:srcCompat="@drawable/bg_shadow_list_top" />
+		app:srcCompat="@drawable/bg_shadow_list_top" />
 
 	<LinearLayout
 		android:orientation="vertical"
@@ -122,8 +122,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textStyle="bold"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<LinearLayout
 			android:orientation="horizontal"
@@ -141,8 +141,8 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				android:textStyle="bold"
-				osmand:lineHeight="@dimen/default_title_line_height" />
+				app:typefaceWeight="medium"
+				app:lineHeight="@dimen/default_title_line_height" />
 
 		</LinearLayout>
 
@@ -206,8 +206,8 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textStyle="bold"
-			osmand:lineHeight="@dimen/default_title_line_height" />
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height" />
 
 		<LinearLayout
 			android:id="@+id/cut_slider_group"
@@ -259,6 +259,6 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="top"
 		android:scaleType="fitXY"
-		osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

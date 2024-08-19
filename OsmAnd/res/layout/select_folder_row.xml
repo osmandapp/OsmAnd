@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/card_row_min_height"
 	android:gravity="center_vertical"
@@ -40,6 +39,6 @@
 		android:textColor="?attr/color_dialog_buttons"
 		app:drawableEndCompat="@drawable/ic_action_markers_list"
 		app:drawableTint="?attr/active_color_basic"
-		android:textStyle="bold" />
+		app:typefaceWeight="medium" />
 
 </LinearLayout>

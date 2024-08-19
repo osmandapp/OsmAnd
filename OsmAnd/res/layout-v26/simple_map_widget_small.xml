@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
@@ -20,7 +20,7 @@
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
 			android:layout_marginEnd="@dimen/content_padding_small"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<net.osmand.plus.widgets.AutoScaleTextView
 			android:id="@+id/widget_text"
@@ -32,8 +32,8 @@
 			android:lines="1"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			osmand:maxTextSize="@dimen/simple_widget_value_small_size"
-			osmand:minTextSize="@dimen/simple_widget_value_minimum_size"
+			app:maxTextSize="@dimen/simple_widget_value_small_size"
+			app:minTextSize="@dimen/simple_widget_value_minimum_size"
 			tools:text="155" />
 
 		<LinearLayout

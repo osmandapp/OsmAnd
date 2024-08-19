@@ -1,6 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.helpers.TrackSelectSegmentAdapter.GpxItem;
 
 import android.content.Context;
@@ -21,8 +20,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -33,9 +30,12 @@ import net.osmand.plus.helpers.TrackSelectSegmentAdapter.RouteItem;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.SegmentItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment {
@@ -76,7 +76,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		int startIndex = selectSegmentDescription.indexOf(titleGpxTrack);
 		int descriptionColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 		int endIndex = startIndex + titleGpxTrack.length();
-		gpxTrackName.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, endIndex, 0);
+		gpxTrackName.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, endIndex, 0);
 		gpxTrackName.setSpan(new ForegroundColorSpan(descriptionColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		TextView description = view.findViewById(R.id.description);

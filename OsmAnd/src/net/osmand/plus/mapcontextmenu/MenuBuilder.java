@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
@@ -71,6 +70,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -672,7 +672,7 @@ public class MenuBuilder {
 			buttonTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 			AndroidUtils.setMargins(buttonTextViewParams, dpToPx(8), 0, dpToPx(8), 0);
 			buttonTextView.setLayoutParams(buttonTextViewParams);
-			buttonTextView.setTypeface(DEFAULT_BOLD);
+			buttonTextView.setTypeface(FontCache.getMediumFont());
 			buttonTextView.setAllCaps(true);
 			buttonTextView.setTextColor(ContextCompat.getColor(view.getContext(), !light ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n));
 			buttonTextView.setText(buttonText);
@@ -941,7 +941,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
 		AndroidUtils.setMargins(llButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
 		button.setLayoutParams(llButtonParams);
-		button.setTypeface(DEFAULT_BOLD);
+		button.setTypeface(FontCache.getMediumFont());
 		button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
 		button.setTextSize(14);
 		int paddingSides = dpToPx(10f);
@@ -1056,7 +1056,7 @@ public class MenuBuilder {
 		transportRect.setLayoutParams(trParams);
 		transportRect.setGravity(Gravity.CENTER);
 		transportRect.setAllCaps(true);
-		transportRect.setTypeface(DEFAULT_BOLD);
+		transportRect.setTypeface(FontCache.getMediumFont());
 		transportRect.setTextColor(Color.WHITE);
 		transportRect.setTextSize(10);
 		transportRect.setMaxLines(1);

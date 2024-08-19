@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_arrow_up"
+				app:srcCompat="@drawable/ic_action_arrow_up"
 				tools:tint="?attr/default_icon_color" />
 
 			<View

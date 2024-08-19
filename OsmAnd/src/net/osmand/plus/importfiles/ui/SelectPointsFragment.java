@@ -1,6 +1,5 @@
 package net.osmand.plus.importfiles.ui;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -24,8 +23,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Location;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -38,10 +35,13 @@ import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -151,7 +151,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		int end = start + trackItem.name.length();
 
 		SpannableString spannable = new SpannableString(text);
-		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), start, end, 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), start, end, 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), start, end, 0);
 		return spannable;
 	}

@@ -187,6 +187,7 @@ public class GpxSelectionHelper {
 	 * @deprecated Use the {@link #getSelectedFileByPath(String filePath)} method.
 	 */
 	@Nullable
+	@Deprecated
 	public SelectedGpxFile getSelectedFileByName(String fileName) {
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			if (selectedGpxFile.getGpxFile().getPath().endsWith("/" + fileName)) {
