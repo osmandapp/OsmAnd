@@ -22,11 +22,12 @@ public class GpxMultiSegmentsApproximation {
 	
 	private static final int ROUTE_POINTS = 12;
 	private static final int GPX_MAX = 30; // 1M
-	private GpxRouteApproximation gctx;
-	private List<GpxPoint> gpxPoints;
-	private RoutePlannerFrontEnd frontEnd;
-	private float minPointApproximation;
-	private float initDist;
+	private final RoutePlannerFrontEnd frontEnd;
+	private final GpxRouteApproximation gctx;
+	private final List<GpxPoint> gpxPoints;
+	private final float minPointApproximation;
+	private final float initDist;
+	/// Evaluation variables
 	private TLongHashSet visited = new TLongHashSet();
 
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
@@ -62,14 +63,6 @@ public class GpxMultiSegmentsApproximation {
 		public String toString() {
 			return String.format("%d -> %d  ( %s ) %.2f", gpxStart, gpxNext(), segment, maxDistToGpx);
 		}
-	}
-	
-
-	private static long calculateRoutePointId(RouteSegmentAppr segm) {
-		boolean positive = segm.segment.isPositive();
-		long segId = (segm.segment.getRoad().getId() << ROUTE_POINTS) + (segm.segment.getSegmentStart() << 1)
-				+ (positive ? 1 : 0);
-		return (segId << GPX_MAX) + (segm.gpxStart + segm.gpxLen);
 	}
 	
 	public GpxMultiSegmentsApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
@@ -147,7 +140,7 @@ public class GpxMultiSegmentsApproximation {
 			loadConnections(last);
  			RouteSegmentAppr bestNext = null;
 			for (RouteSegmentAppr c : last.connected) {
-				if (isVisited( c)) {
+				if (isVisited(c)) {
 					continue;
 				}
 				if (bestNext == null) {
@@ -168,11 +161,9 @@ public class GpxMultiSegmentsApproximation {
 					bestRoute = last;
 				}
 				last = bestNext;
-			} else { // try to revert
+			} else { // try to revert to MAX_DEPTH_ROLLBACK
 				if (last.parent != null && (bestRoute != null && gpxDist(bestRoute.gpxNext(), last.parent.gpxNext()) < MAX_DEPTH_ROLLBACK)) {
-					if (DEBUG) {
-						System.out.print(" ^ ");
-					}
+					debug(" ^ ");
 					last = last.parent;
 					continue;
 				} else if (bestRoute != null) {
@@ -181,14 +172,10 @@ public class GpxMultiSegmentsApproximation {
 				GpxPoint pnt = findNextRoutablePoint(bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
 				visited = new TLongHashSet();
 				if (pnt == null) {
-					if (DEBUG) {
-						System.out.println("------------------");
-					}
+					debugln("------------------");
 					break;
 				} else {
-					if (DEBUG) {
-						System.out.println("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt);
-					}
+					debugln("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt);
 					last = new RouteSegmentAppr(pnt.ind);
 					addStartSegments(last, pnt.pnt);
 					bestRoute = null;
@@ -207,35 +194,20 @@ public class GpxMultiSegmentsApproximation {
 		return gctx;
 	}
 
-	private double gpxDist(int gpxL1, int gpxL2) {
-		return gpxPoints.get(gpxL1).cumDist - gpxPoints.get(gpxL2).cumDist; 
+	private void debugln(String string) {
+		if (DEBUG) {
+			System.out.println(string);
+		}
+	}
+	
+	private void debug(String string) {
+		if (DEBUG) {
+			System.out.print(string);
+		}
 	}
 
-	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
-		List<RouteSegmentResult> res = new ArrayList<>();
-		int startInd = 0;
-		int last = bestRoute.gpxNext();
-		// combining segments doesn't seem to have any effect on tests 
-//		RouteSegmentResult lastRes = null;
-		while (bestRoute != null && bestRoute.segment != null) {
-			startInd = bestRoute.gpxStart;
-			int end = bestRoute.segment.getSegmentEnd();
-//			if (lastRes != null && bestRoute.segment.getRoad().getId() == lastRes.getObject().getId()) {
-//				if (lastRes.getStartPointIndex() == bestRoute.segment.getSegmentEnd()
-//						&& lastRes.isForwardDirection() == bestRoute.segment.isPositive()) {
-//					end = lastRes.getEndPointIndex();
-//					res.remove(res.size() - 1);
-//				}
-//			}
-			RouteSegmentResult routeRes = new RouteSegmentResult(bestRoute.segment.road,
-					bestRoute.segment.getSegmentStart(), end);
-			res.add(routeRes);
-			bestRoute = bestRoute.parent;
-//			lastRes = routeRes;
-		}
-		Collections.reverse(res);
-		gpxPoints.get(startInd).routeToTarget = res;
-		gpxPoints.get(startInd).targetInd = last;
+	private double gpxDist(int gpxL1, int gpxL2) {
+		return gpxPoints.get(gpxL1).cumDist - gpxPoints.get(gpxL2).cumDist; 
 	}
 
 	private boolean approximateSegment(RouteSegmentAppr parent, RouteSegment sg) {
@@ -343,7 +315,6 @@ public class GpxMultiSegmentsApproximation {
 				direct ? rsp.getSegmentEnd() : rsp.getSegmentStart(), rsp.distToProj);
 	}
 
-
 	private void initGpxPointsXY31(List<GpxPoint> gpxPoints) {
 		for (GpxPoint p : gpxPoints) {
 			if (TEST_SHIFT_GPX_POINTS) {
@@ -354,4 +325,39 @@ public class GpxMultiSegmentsApproximation {
 			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
 		}
 	}
+
+	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
+		List<RouteSegmentResult> res = new ArrayList<>();
+		int startInd = 0;
+		int last = bestRoute.gpxNext();
+		// combining segments doesn't seem to have any effect on tests 
+//		RouteSegmentResult lastRes = null;
+		while (bestRoute != null && bestRoute.segment != null) {
+			startInd = bestRoute.gpxStart;
+			int end = bestRoute.segment.getSegmentEnd();
+//			if (lastRes != null && bestRoute.segment.getRoad().getId() == lastRes.getObject().getId()) {
+//				if (lastRes.getStartPointIndex() == bestRoute.segment.getSegmentEnd()
+//						&& lastRes.isForwardDirection() == bestRoute.segment.isPositive()) {
+//					end = lastRes.getEndPointIndex();
+//					res.remove(res.size() - 1);
+//				}
+//			}
+			RouteSegmentResult routeRes = new RouteSegmentResult(bestRoute.segment.road,
+					bestRoute.segment.getSegmentStart(), end);
+			res.add(routeRes);
+			bestRoute = bestRoute.parent;
+//			lastRes = routeRes;
+		}
+		Collections.reverse(res);
+		gpxPoints.get(startInd).routeToTarget = res;
+		gpxPoints.get(startInd).targetInd = last;
+	}
+
+	private static long calculateRoutePointId(RouteSegmentAppr segm) {
+		boolean positive = segm.segment.isPositive();
+		long segId = (segm.segment.getRoad().getId() << ROUTE_POINTS) + (segm.segment.getSegmentStart() << 1)
+				+ (positive ? 1 : 0);
+		return (segId << GPX_MAX) + (segm.gpxStart + segm.gpxLen);
+	}
+	
 }
