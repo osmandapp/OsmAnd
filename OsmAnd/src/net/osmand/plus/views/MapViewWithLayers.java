@@ -129,6 +129,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.setElevationAngle(elevationAngle);
 			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 			mapRendererContext.setMapRendererView(atlasMapRendererView);
+			mapView.applyBatterySavingModeSetting(atlasMapRendererView);
 			mapView.applyDebugSettings(atlasMapRendererView);
 		}
 	}

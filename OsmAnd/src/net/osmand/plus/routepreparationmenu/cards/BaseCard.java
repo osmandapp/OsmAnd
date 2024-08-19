@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.Localization;
 
 public abstract class BaseCard {
 
@@ -224,6 +225,11 @@ public abstract class BaseCard {
 
 	public boolean isVisible() {
 		return view != null && view.getVisibility() == View.VISIBLE;
+	}
+
+	@NonNull
+	public final String getString(String resId) {
+		return Localization.INSTANCE.getString(resId);
 	}
 
 	@NonNull

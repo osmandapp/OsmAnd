@@ -1,13 +1,13 @@
 package net.osmand.plus.settings.backend.backup.items;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.content.Context;
 
@@ -15,8 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
@@ -24,7 +25,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -96,7 +97,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 				boolean readItem = gpxDbHelper.hasGpxDataItem(savedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
-					dataItem = new GpxDataItem(app, savedFile);
+					dataItem = new GpxDataItem(SharedUtil.kFile(savedFile));
 					readItem = !gpxDbHelper.add(dataItem);
 				}
 				if (readItem) {
@@ -159,14 +160,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 				if (selectedGpxFile != null) {
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+					GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 				if (!gpxDbHelper.hasGpxDataItem(file)) {
-					gpxDbHelper.add(new GpxDataItem(app, file));
+					gpxDbHelper.add(new GpxDataItem(SharedUtil.kFile(file)));
 				}
 			}
 		};

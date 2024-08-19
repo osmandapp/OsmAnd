@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.routing.ColoringType;
 
 public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
 

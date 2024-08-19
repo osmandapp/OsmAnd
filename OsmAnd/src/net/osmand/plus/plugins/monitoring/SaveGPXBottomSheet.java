@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -220,7 +220,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
 					MapActivity mapActivity = (MapActivity) activity;
 					OsmandMapTileView mapView = mapActivity.getMapView();
-					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom());
+					mapView.getAnimatedDraggingThread().startMoving(loc.getLat(), loc.getLon(), mapView.getZoom());
 					mapView.refreshMap();
 				}
 			}

@@ -84,7 +84,7 @@
                                 android:paddingRight="@dimen/content_padding_small"
                                 android:text="@string/external_device_forget_sensor"
                                 android:textSize="@dimen/default_desc_text_size"
-                                osmand:typeface="@string/font_roboto_medium"
+                                android:textStyle="bold"
                                 tools:text="Forget sensor" />
 
                         </FrameLayout>
@@ -117,7 +117,7 @@
                                 android:paddingRight="@dimen/content_padding_small"
                                 android:text="@string/shared_string_cancel"
                                 android:textSize="@dimen/default_desc_text_size"
-                                osmand:typeface="@string/font_roboto_medium"
+                                android:textStyle="bold"
                                 tools:text="Cancel" />
 
                         </FrameLayout>

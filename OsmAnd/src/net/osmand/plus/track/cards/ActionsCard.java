@@ -1,5 +1,7 @@
 package net.osmand.plus.track.cards;
 
+import static android.graphics.Typeface.DEFAULT;
+
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class ActionsCard extends BaseCard {
@@ -34,9 +36,8 @@ public class ActionsCard extends BaseCard {
 		TextView title = reset.findViewById(android.R.id.title);
 		View button = reset.findViewById(R.id.selectable_list_item);
 
-		Typeface typeface = FontCache.getRobotoRegular(app);
 		title.setText(R.string.reset_to_original);
-		title.setTypeface(typeface, typeface.getStyle());
+		title.setTypeface(DEFAULT);
 		title.setTextColor(AndroidUtils.getColorFromAttr(view.getContext(), android.R.attr.textColorPrimary));
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_reset));
 

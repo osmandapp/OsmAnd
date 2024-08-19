@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
@@ -12,6 +13,7 @@ import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
+import net.osmand.shared.gpx.GpxParameter;
 
 import java.util.Date;
 
@@ -44,17 +46,17 @@ public class TrackFiltersHelper {
 		if (minValue.getClass() != maxValue.getClass()) {
 			throw new IllegalArgumentException("RangeTrackFilter's 2 default params (minValue, maxValue) must be the same type");
 		}
-		Class<?> parameterClass = trackFilterType.getProperty().getTypeClass();
-		if (parameterClass == Double.class) {
+		GpxParameter parameter = trackFilterType.getProperty();
+		if (SharedUtil.isGpxParameterClass(parameter, Double.class)) {
 			return new RangeTrackFilter<>((Double) minValue, (Double) maxValue, app, trackFilterType, listener);
-		} else if (parameterClass == Float.class) {
+		} else if (SharedUtil.isGpxParameterClass(parameter, Float.class)) {
 			return new RangeTrackFilter<>((Float) minValue, (Float) maxValue, app, trackFilterType, listener);
-		} else if (parameterClass == Integer.class) {
+		} else if (SharedUtil.isGpxParameterClass(parameter, Integer.class)) {
 			return new RangeTrackFilter<>((Integer) minValue, (Integer) maxValue, app, trackFilterType, listener);
-		} else if (parameterClass == Long.class) {
+		} else if (SharedUtil.isGpxParameterClass(parameter, Long.class)) {
 			return new RangeTrackFilter<>((Long) minValue, (Long) maxValue, app, trackFilterType, listener);
 		}
-		throw new IllegalArgumentException("Unsupported gpxParameter type class " + parameterClass);
+		throw new IllegalArgumentException("Unsupported gpxParameter type class " + parameter.getTypeClass());
 	}
 
 	public static BaseTrackFilter createFilter(OsmandApplication app, TrackFilterType trackFilterType, FilterChangedListener filterChangedListener) {

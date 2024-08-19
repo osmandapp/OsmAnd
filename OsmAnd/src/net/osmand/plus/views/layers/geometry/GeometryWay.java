@@ -11,7 +11,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.VectorLineArrowsProvider;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
@@ -286,8 +286,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			return false;
 		} else if (previousVisible >= 0) {
 			double prevLon = provider.getLongitude(previousVisible);
-			boolean primeMeridianPoints = Math.max(prevLon, lon) == GPXUtilities.PRIME_MERIDIAN
-					&& Math.min(prevLon, lon) == -GPXUtilities.PRIME_MERIDIAN;
+			boolean primeMeridianPoints = Math.max(prevLon, lon) == GpxUtilities.PRIME_MERIDIAN
+					&& Math.min(prevLon, lon) == -GpxUtilities.PRIME_MERIDIAN;
 			return !primeMeridianPoints;
 		} else {
 			return true;

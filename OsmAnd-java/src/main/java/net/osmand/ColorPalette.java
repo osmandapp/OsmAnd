@@ -190,6 +190,7 @@ public class ColorPalette {
 		palette.sortPalette();
 		return palette;
 	}
+
 	public static ColorPalette parseColorPalette(Reader reader) throws IOException {
 		return parseColorPalette(reader, true);
 	}

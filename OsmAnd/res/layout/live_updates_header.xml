@@ -42,8 +42,7 @@
                 android:text="@string/osm_live_subscription"
                 android:textColor="@color/card_and_list_background_light"
                 android:textSize="@dimen/default_list_text_size"
-                android:textStyle="bold"
-                app:typeface="@string/font_roboto_regular"
+                android:textStyle="normal"
 	            android:layout_marginStart="10dp" />
         </LinearLayout>
 
@@ -54,7 +53,7 @@
             android:text="@string/osm_live_header"
             android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_desc_text_size"
-            app:typeface="@string/font_roboto_regular"/>
+            android:textStyle="normal"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,7 +118,7 @@
                     android:text="@string/shared_string_status"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="@dimen/default_desc_text_size"
-                    app:typeface="@string/font_roboto_regular"
+                    android:textStyle="normal"
 	                android:layout_marginEnd="16dp"
 	                android:layout_marginStart="16dp" />
 
@@ -134,7 +133,7 @@
                     android:text="@string/osm_live_active"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/default_list_text_size_large"
-                    app:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
 	                android:layout_marginEnd="16dp"
 	                android:layout_marginStart="16dp" />
 
@@ -179,7 +178,7 @@
                 android:text="@string/osm_live_support_region"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                app:typeface="@string/font_roboto_regular"
+                android:textStyle="normal"
 	            android:layout_marginStart="16dp"
 	            android:layout_marginEnd="16dp" />
 
@@ -195,7 +194,7 @@
                 android:text="World"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                app:typeface="@string/font_roboto_medium"
+                android:textStyle="bold"
 	            android:layout_marginEnd="16dp" />
 
         </LinearLayout>
@@ -238,7 +237,7 @@
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_list_text_size"
                     app:textAllCapsCompat="true"
-                    app:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
 	                android:paddingStart="16dp"
 	                android:paddingEnd="16dp" />
 
@@ -266,7 +265,7 @@
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_list_text_size"
                     app:textAllCapsCompat="true"
-                    app:typeface="@string/font_roboto_medium"
+                    android:textStyle="bold"
 	                android:paddingStart="16dp"
 	                android:paddingEnd="16dp" />
 

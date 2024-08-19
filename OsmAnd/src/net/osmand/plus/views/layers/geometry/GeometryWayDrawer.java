@@ -3,26 +3,42 @@ package net.osmand.plus.views.layers.geometry;
 import static net.osmand.plus.track.Gpx3DLinePositionType.BOTTOM;
 import static net.osmand.plus.track.Gpx3DLinePositionType.TOP;
 import static net.osmand.plus.track.Gpx3DLinePositionType.TOP_BOTTOM;
-import static net.osmand.plus.track.Gpx3DWallColorType.NONE;
-import static net.osmand.plus.track.Gpx3DWallColorType.SOLID;
-import static net.osmand.plus.track.Gpx3DWallColorType.UPWARD_GRADIENT;
+import static net.osmand.shared.routing.Gpx3DWallColorType.NONE;
+import static net.osmand.shared.routing.Gpx3DWallColorType.SOLID;
+import static net.osmand.shared.routing.Gpx3DWallColorType.UPWARD_GRADIENT;
 import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_GRADIENT;
 import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.*;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.*;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListFColorARGB;
+import net.osmand.core.jni.QListFloat;
+import net.osmand.core.jni.QListVectorLine;
+import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.VectorDouble;
+import net.osmand.core.jni.VectorLine;
+import net.osmand.core.jni.VectorLineBuilder;
+import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
-import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle.ColorizationType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -218,7 +234,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					line.setFillColor(new FColorARGB(a, r, g, b));
 					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
 
-					if (wallColorType == NONE) {
+					if (wallColorType == Gpx3DWallColorType.NONE) {
 						line.setColorizationScheme(COLORIZATION_GRADIENT);
 						line.setNearOutlineColor(new FColorARGB(0, r, g, b));
 						line.setFarOutlineColor(new FColorARGB(0, r, g, b));

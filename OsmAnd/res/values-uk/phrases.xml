@@ -321,7 +321,7 @@
     <string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
     <string name="poi_node_networks">Вузли пішохідних/велосипедних маршрутів</string>
     <string name="poi_railway_buffer_stop">Залізничний буфер (тупиковий упор)</string>
-    <string name="poi_slipway">Пандус для човнів</string>
+    <string name="poi_slipway">Суднопідіймальний елінг</string>
     <string name="poi_aerialway_pylon">Опора канатної дороги</string>
     <string name="poi_groyne">Хвилеріз</string>
     <string name="poi_recycling_waste_oil">Відпрацьоване масло</string>

@@ -31,8 +31,7 @@
             android:text="@string/osm_live_subscription"
             android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_list_text_size_large"
-            android:textStyle="bold"
-            app:typeface="@string/font_roboto_regular" />
+            android:textStyle="normal" />
 
     </LinearLayout>
 

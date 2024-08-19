@@ -45,7 +45,7 @@
 			android:paddingTop="3dp"
 			android:text="@string/routing_attr_avoid_motorway_name"
 			android:textSize="@dimen/default_sub_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			android:textStyle="bold"
 			tools:ignore="UnusedAttribute"
 			tools:textColor="?attr/wikivoyage_active_color" />
 

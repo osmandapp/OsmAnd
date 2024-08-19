@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static android.graphics.Typeface.DEFAULT_BOLD;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -23,7 +25,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -219,8 +221,7 @@ public class PublicTransportCard extends MapBaseCard {
 		}
 
 		SpannableString firstLineDesc = new SpannableString(firstLine);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		firstLineDesc.setSpan(new CustomTypefaceSpan(typeface), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
+		firstLineDesc.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
 		firstLineDesc.setSpan(new ForegroundColorSpan(getMainFontColor()), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
 
 		return firstLineDesc;
@@ -228,7 +229,7 @@ public class PublicTransportCard extends MapBaseCard {
 
 	private SpannableString getSecondLineDescrSpan(List<TransportRouteResultSegment> segments) {
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = DEFAULT_BOLD;
 		int walkTimeReal = transportRoutingHelper.getWalkingTime(segments);
 		int walkTimePT = (int) routeResult.getWalkTime();
 		int walkTime = walkTimeReal > 0 ? walkTimeReal : walkTimePT;

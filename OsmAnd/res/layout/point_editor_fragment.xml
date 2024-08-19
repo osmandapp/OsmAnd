@@ -194,7 +194,7 @@
 						android:paddingBottom="@dimen/content_padding_half"
 						android:text="@string/add_address"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						android:textStyle="bold"
 						tools:text="@string/add_address" />
 
 					<ImageButton
@@ -276,7 +276,7 @@
 					android:paddingRight="@dimen/content_padding_half"
 					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					android:textStyle="bold"
 					tools:text="@string/add_description" />
 
 				<View
@@ -311,7 +311,7 @@
 							android:text="@string/select_group"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_medium" />
+							android:textStyle="bold" />
 
 						<LinearLayout
 							android:id="@+id/group_list_button"
@@ -332,7 +332,7 @@
 								android:text="@string/shared_string_list"
 								android:textColor="@color/preference_category_title"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								android:textStyle="bold"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -387,7 +387,7 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						android:visibility="gone"
-						osmand:typeface="@string/font_roboto_regular" />
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -425,7 +425,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/color_name"
@@ -441,7 +441,7 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 				</LinearLayout>
 
@@ -474,7 +474,7 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shape_name"
@@ -491,7 +491,7 @@
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						android:textStyle="bold" />
 
 				</LinearLayout>
 
