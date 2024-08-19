@@ -47,7 +47,7 @@ class CustomPreferenceDescriptionsFactory {
 					final SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) preference;
 					return String.join(
 							", ",
-							Lists.getNonEmptyElements(
+							Lists.getPresentElements(
 									Arrays.asList(
 											Optional.ofNullable(switchPreferenceEx.getSummaryOff()),
 											Optional.ofNullable(switchPreferenceEx.getSummaryOn()),
@@ -76,7 +76,7 @@ class CustomPreferenceDescriptionsFactory {
 					final EditTextPreferenceEx textPreferenceEx = (EditTextPreferenceEx) preference;
 					return String.join(
 							", ",
-							Lists.getNonEmptyElements(
+							Lists.getPresentElements(
 									Arrays.asList(
 											Optional.ofNullable(textPreferenceEx.getText()),
 											Optional.ofNullable(textPreferenceEx.getDescription()))));
@@ -87,7 +87,7 @@ class CustomPreferenceDescriptionsFactory {
 											 final Optional<? extends CharSequence>... evenMoreElements) {
 		final List<CharSequence> result = new ArrayList<>();
 		result.addAll(Lists.asList(elements));
-		result.addAll(Lists.getNonEmptyElements(Arrays.asList(evenMoreElements)));
+		result.addAll(Lists.getPresentElements(Arrays.asList(evenMoreElements)));
 		return result;
 	}
 }

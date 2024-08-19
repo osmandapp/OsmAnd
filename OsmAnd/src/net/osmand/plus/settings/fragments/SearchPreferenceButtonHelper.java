@@ -62,7 +62,7 @@ class SearchPreferenceButtonHelper {
 					@Override
 					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
-						// FK-FIXME: use for "speed cameras" then only one result for Moped (Moped > Navigation Settings > {Voice prompts, Screen alerts} > Speed cameras) is displayed instead many results for car, truck, ...
+						// FK-FIXME: use for "speed cameras" then only one result for Moped (Moped > Navigation Settings > {Voice prompts, Screen alerts} > Speed cameras) is displayed instead of many results for car, truck, ...
 						src
 								.map(preferenceWithHost -> preferenceWithHost.preference)
 								.ifPresent(preference -> {
