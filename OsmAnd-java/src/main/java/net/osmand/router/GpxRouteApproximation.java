@@ -191,9 +191,9 @@ public class GpxRouteApproximation {
 			if (GPX_SEGMENT_ALGORITHM == GPX_OSM_POINTS_MATCH_ALGORITHM) {
 				GpxPointsMatchApproximation app = new GpxPointsMatchApproximation();
 				app.gpxApproximation(router, gctx, gpxPoints);
-			} else if (GPX_SEGMENT_ALGORITHM == GPX_OSM_POINTS_MATCH_ALGORITHM) {
-				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation();
-				app.gpxApproximation(router, gctx, gpxPoints);
+			} else if (GPX_SEGMENT_ALGORITHM == GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM) {
+				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation(router, gctx, gpxPoints);
+				app.gpxApproximation();
 			}
 			calculateGpxRoute(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
