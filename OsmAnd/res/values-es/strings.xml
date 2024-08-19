@@ -5864,4 +5864,5 @@
     <string name="delete_widget_description">Este widget se eliminará. Puedes restaurarlo más tarde en la pantalla Configurar.</string>
     <string name="delete_widget">¿Eliminar el widget?</string>
     <string name="height_cache">Caché de la altitud</string>
+    <string name="battery_saving_mode">Modo de ahorro de batería</string>
 </resources>
