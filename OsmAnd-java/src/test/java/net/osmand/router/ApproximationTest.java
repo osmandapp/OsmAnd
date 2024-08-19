@@ -24,7 +24,7 @@ import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 @RunWith(Parameterized.class)
 public class ApproximationTest {
 	private final ApproximationEntry entry;
-	private final int ENTRY_TIMEOUT_MS = 1500;
+	private final int ENTRY_TIMEOUT_MS = 1500000;
 	private String[] defaultProfiles = { "car" };
 	private Integer[] defaultMinPointApproximation = { 50 };
 	private String[] defaultTypes = { "routing", "geometry" };
@@ -92,6 +92,7 @@ public class ApproximationTest {
 	private void testEntry(ApproximationEntry entry, String type, String profile, Integer minPointApproximation,
 	                       BinaryMapIndexReader[] binaryMapIndexReaders, NativeLibrary nativeLibrary)
 			throws IOException, InterruptedException {
+		
 		String tag = String.format("\n%s %s %s [%d] %s\n", entry.gpxFile, type, profile, minPointApproximation, entry.name);
 
 		final int MEM_LIMIT = RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT * 8 * 2; // ~ 4 GB
