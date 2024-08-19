@@ -46,14 +46,36 @@ public class SettingsSearchTest extends AndroidTest {
 	public ActivityScenarioRule<MapActivity> mActivityScenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
 	@Test
-	public void shouldSearchAndFindMultipleProfileAppearances() {
+	public void shouldSearchAndFindProfileAppearanceSettings4EachApplicationMode() {
+		// Given
+		clickSearchButton();
+
+		// When
+		onView(searchView()).perform(replaceText("profile appearance"), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Driving > Profile appearance")));
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Moped > Profile appearance")));
+	}
+
+	@Test
+	public void shouldSearchAndFindSpeedCameraSettings4EachApplicationMode() {
+		// Given
+		clickSearchButton();
+
+		// When
+		onView(searchView()).perform(replaceText("speed cameras"), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Driving > Navigation settings > Screen alerts > Speed cameras")));
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Truck > Navigation settings > Screen alerts > Speed cameras")));
+	}
+
+	private void clickSearchButton() {
 		skipAppStartDialogs(app);
 		onView(mapMenuButton()).perform(click());
 		settingsButton().perform(click());
 		onView(searchButton()).perform(click());
-		onView(searchView()).perform(replaceText("profile appearance"), closeSoftKeyboard());
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Driving > Profile appearance")));
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Moped > Profile appearance")));
 	}
 
 	private static Matcher<View> mapMenuButton() {
