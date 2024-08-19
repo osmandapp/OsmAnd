@@ -159,7 +159,6 @@ public class FileUtils {
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
-			updateTrackNameProperty(gpxFile, dest);
 		}
 
 		if (gpxFile != null) {
