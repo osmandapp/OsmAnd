@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+	<string name="graph_axis">Graph axis</string>
+	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
 	<string name="add_widget_below">Add widget below</string>
 	<string name="add_widget_above">Add widget above</string>
 	<string name="add_widget_to_the_right">Add widget to the right</string>

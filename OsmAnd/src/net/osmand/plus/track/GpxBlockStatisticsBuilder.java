@@ -68,6 +68,7 @@ public class GpxBlockStatisticsBuilder {
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
 	private boolean updateRunning;
+	private boolean showShortStat;
 
 	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile, boolean nightMode) {
 		this.app = app;
@@ -81,6 +82,9 @@ public class GpxBlockStatisticsBuilder {
 
 	public void setBlocksClickable(boolean blocksClickable) {
 		this.blocksClickable = blocksClickable;
+	}
+	public void setShowShortStat(boolean showShortStat) {
+		this.showShortStat = showShortStat;
 	}
 
 	public void setBlocksView(RecyclerView blocksView, boolean isParentExpandable) {
@@ -180,6 +184,22 @@ public class GpxBlockStatisticsBuilder {
 		}
 		items.clear();
 		if (analysis != null) {
+			if (showShortStat) {
+				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+				prepareDataDistance(totalDistance);
+				prepareDataTimeSpan(timeSpan);
+
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
+				prepareDataAscent(asc);
+				prepareDataDescent(desc);
+
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+				prepareDataAverageSpeed(avg);
+				return;
+			}
+
 			if (tabItem == null) {
 				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
 				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);

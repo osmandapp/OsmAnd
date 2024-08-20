@@ -154,7 +154,7 @@ public class SegmentsCard extends MapBaseCard {
 			}
 			AndroidUiHelper.updateVisibility(holder.title, !Algorithms.isBlank(displayItem.trackSegmentName));
 
-			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true);
+			GPXItemPagerAdapter adapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, listener, nightMode, true, mapActivity);
 			holder.pager.setAdapter(adapter);
 			holder.tabLayout.setViewPager(holder.pager);
 
