@@ -5852,4 +5852,7 @@
     <string name="add_widget_to_the_left">Aggiungi il widget a sinistra</string>
     <string name="add_widget_below">Aggiungi il widget qui sotto</string>
     <string name="location_radius">Raggio di posizione</string>
+    <string name="delete_widget">Eliminare il widget?</string>
+    <string name="delete_widget_description">Questo widget verrà eliminato. Puoi ripristinarlo più tardi in Configura schermo.</string>
+    <string name="battery_saving_mode">Modalità di risparmio batteria</string>
 </resources>

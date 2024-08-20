@@ -5865,4 +5865,7 @@
     <string name="add_widget_to_the_right">Добавить виджет справа</string>
     <string name="add_widget_to_the_left">Добавить виджет слева</string>
     <string name="add_widget_below">Добавить виджет ниже</string>
+    <string name="delete_widget">Удалить виджет?</string>
+    <string name="battery_saving_mode">Режим экономии батареи</string>
+    <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
 </resources>
