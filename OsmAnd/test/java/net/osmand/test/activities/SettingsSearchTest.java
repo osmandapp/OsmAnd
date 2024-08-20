@@ -38,6 +38,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.stream.Stream;
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SettingsSearchTest extends AndroidTest {
@@ -54,8 +56,10 @@ public class SettingsSearchTest extends AndroidTest {
 		onView(searchView()).perform(replaceText("profile appearance"), closeSoftKeyboard());
 
 		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Driving > Profile appearance")));
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Moped > Profile appearance")));
+		Stream
+				.of("Driving", "Moped")
+				.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
+				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
 	}
 
 	@Test
@@ -67,8 +71,10 @@ public class SettingsSearchTest extends AndroidTest {
 		onView(searchView()).perform(replaceText("speed cameras"), closeSoftKeyboard());
 
 		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Driving > Navigation settings > Screen alerts > Speed cameras")));
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring("Path: Truck > Navigation settings > Screen alerts > Speed cameras")));
+		Stream
+				.of("Driving", "Truck")
+				.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
+				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
 	}
 
 	private void clickSearchButton() {
