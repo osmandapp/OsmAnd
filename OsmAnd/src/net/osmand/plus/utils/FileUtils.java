@@ -160,23 +160,28 @@ public class FileUtils {
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
 		}
-
-		if (gpxFile != null) {
-			updateTrackNameProperty(gpxFile, dest);
-		} else {
-			GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
-				updateTrackNameProperty(gpx, dest);
-				return true;
-			});
-		}
+		askUpdateNameInMetadata(gpxFile, dest);
 	}
 
-	private static void updateTrackNameProperty(@NonNull GpxFile gpxFile, @NonNull File file) {
-		String name = Algorithms.getFileNameWithoutExtension(file.getName());
-		Metadata metadata = gpxFile.getMetadata();
-		if (!Objects.equals(name, metadata.getName())) {
-			metadata.setName(name);
-			SaveGpxHelper.saveGpx(gpxFile);
+	private static void askUpdateNameInMetadata(@Nullable GpxFile gpxFile, @NonNull File dest) {
+		String newName = Algorithms.getFileNameWithoutExtension(dest.getName());
+		if (gpxFile != null) {
+			updateNameInMetadata(gpxFile, newName);
+			return;
+		}
+		GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
+			updateNameInMetadata(gpx, newName);
+			return true;
+		});
+	}
+
+	private static void updateNameInMetadata(@NonNull GpxFile gpxFile, @NonNull String newName) {
+		if (gpxFile.isOsmAndOrigin()) {
+			Metadata metadata = gpxFile.getMetadata();
+			if (!Objects.equals(newName, metadata.getName())) {
+				metadata.setName(newName);
+				SaveGpxHelper.saveGpx(gpxFile);
+			}
 		}
 	}
 
