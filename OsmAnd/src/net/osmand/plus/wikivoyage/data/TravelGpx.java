@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.WptPt;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.util.Algorithms;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class TravelGpx extends TravelArticle {
 
@@ -57,15 +65,59 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
 		WptPt wptPt = new WptPt();
+		wptPt.name = amenity.getName();
 		wptPt.lat = amenity.getLocation().getLatitude();
 		wptPt.lon = amenity.getLocation().getLongitude();
-		wptPt.name = amenity.getName();
+		for (String obfTag : amenity.getAdditionalInfoKeys()) {
+			String gpxTag = allowedPointObfToGpxTags.get(obfTag);
+			if (gpxTag != null) {
+				String amenityAdditionalInfo = amenity.getAdditionalInfo(obfTag);
+				if (!Algorithms.isEmpty(amenityAdditionalInfo)) {
+					wptPt.getExtensionsToWrite().put(gpxTag, amenityAdditionalInfo);
+				}
+			}
+		}
 		return wptPt;
+	}
+
+	public final static Set<String> allowedTrackGpxTags = new HashSet<>(Arrays.asList(
+			"show_arrows",
+			"show_start_finish",
+			"split_interval",
+			"split_type",
+			"line_3d_visualization_by_type",
+			"line_3d_visualization_wall_color_type",
+			"line_3d_visualization_position_type",
+			"vertical_exaggeration_scale",
+			"elevation_meters",
+			"color_palette",
+			"color",
+			"width",
+			"coloring_type",
+			"gpx_color" // special plain copy of osmand:color
+			// "points_groups" - how to pass as a single tag - by special encode/decode ?
+	));
+
+	public final static Map<String, String> renamedObfToGpxTags = new HashMap<>();
+	private final static Map<String, String> allowedPointObfToGpxTags = new HashMap<>();
+
+	static {
+		renamedObfToGpxTags.put("gpx_color", "color");
+
+		allowedPointObfToGpxTags.put("color", "color");
+		allowedPointObfToGpxTags.put("gpx_icon", "icon");
+		allowedPointObfToGpxTags.put("gpx_bg", "background");
 	}
 
 	@NonNull
 	@Override
 	public String getPointFilterString() {
 		return ROUTE_TRACK_POINT;
+	}
+
+	@NonNull
+	@Override
+	public String getMainFilterString() {
+		return ROUTE_TRACK;
 	}
 }

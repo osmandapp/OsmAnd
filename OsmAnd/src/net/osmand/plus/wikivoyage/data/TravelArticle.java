@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import static net.osmand.gpx.GPXUtilities.WptPt;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -187,6 +188,11 @@ public class TravelArticle {
 	@NonNull
 	public String getPointFilterString(){
 		return ROUTE_ARTICLE_POINT;
+	}
+
+	@NonNull
+	public String getMainFilterString() {
+		return ROUTE_ARTICLE;
 	}
 
 	@NonNull

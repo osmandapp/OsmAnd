@@ -306,7 +306,9 @@ public class TravelObfHelper implements TravelHelper {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				for (String filterSubcategory : filterSubcategory) {
-					return subcategory.equals(filterSubcategory);
+					if (subcategory.equals(filterSubcategory)) {
+						return true;
+					}
 				}
 				return false;
 			}
@@ -1063,6 +1065,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private synchronized GPXFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
+		Map<String, String> gpxFileExtensions = new HashMap<>();
 		List<Amenity> pointList = new ArrayList<>();
 		for (BinaryMapIndexReader reader : readers) {
 			try {
@@ -1098,12 +1101,23 @@ public class TravelObfHelper implements TravelHelper {
 
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(article.getPointFilterString()),
+						getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
 						new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
-									if (article.getPointFilterString().equals(ROUTE_TRACK_POINT)) {
+									if (ROUTE_TRACK.equals(amenity.getSubType())) {
+										for (String key : amenity.getAdditionalInfoKeys()) {
+											if (TravelGpx.allowedTrackGpxTags.contains(key)) {
+												String val = amenity.getAdditionalInfo(key);
+												if (TravelGpx.renamedObfToGpxTags.containsKey(key)) {
+													gpxFileExtensions.put(TravelGpx.renamedObfToGpxTags.get(key), val);
+												} else {
+													gpxFileExtensions.put(key, val);
+												}
+											}
+										}
+									} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
 										pointList.add(amenity);
 									} else {
 										String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
@@ -1171,6 +1185,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(article.ref);
 			gpxFile.hasAltitude = hasAltitude;
+			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions);
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
