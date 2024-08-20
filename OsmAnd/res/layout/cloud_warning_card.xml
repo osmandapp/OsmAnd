@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/warning_card"
 	android:layout_width="match_parent"
@@ -38,7 +38,7 @@
 			android:layout_width="@dimen/toolbar_height"
 			android:layout_height="@dimen/toolbar_height"
 			android:contentDescription="@string/retry"
-			osmand:srcCompat="@drawable/ic_action_reset" />
+			app:srcCompat="@drawable/ic_action_reset" />
 
 	</LinearLayout>
 
@@ -95,8 +95,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			osmand:dialogButtonType="secondaryActive"
-			osmand:dialogButtonBottomMargin="@dimen/content_padding"
+			app:dialogButtonType="secondaryActive"
+			app:dialogButtonBottomMargin="@dimen/content_padding"
 			tools:dialogButtonTitle="@string/sync_now"/>
 
 	</LinearLayout>

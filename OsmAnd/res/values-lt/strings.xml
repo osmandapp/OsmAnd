@@ -3398,4 +3398,19 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="live_monitoring_adress_descr">Nurodykite žiniatinklio adresą naudodami parametrų sintaksę: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_automatically">Automatiškai</string>
     <string name="ask_every_time">Klausti kiekvieną kartą</string>
+    <string name="add_widget_below">Pridėti valdiklį žemiau</string>
+    <string name="add_widget_to_the_left">Pridėti valdiklį į kairę</string>
+    <string name="add_widget_above">Pridėti valdiklį aukščiau</string>
+    <string name="add_widget_to_the_right">Pridėti valdiklį į dešinę</string>
+    <string name="height_cache">Aukščio podėlis</string>
+    <string name="help_article_map_routes_name">Maršrutai</string>
+    <string name="compass_click_north_is_up">Kad pakeistumėte orientacijos režimą, spustelėkite ir palaikykite</string>
+    <string name="route_roundabout_exit">Imkitės %1$d išėjimo</string>
+    <string name="help_article_map_tracks_name">Trasos</string>
+    <string name="detailed_track_guidance">Išsamios trasos gairės</string>
+    <string name="delete_widget">Ištrinti valdiklį?</string>
+    <string name="auto_25_chars_route_kr">Laikykitės dešinės</string>
+    <string name="driving_region_india">Indija</string>
+    <string name="auto_25_chars_route_kl">Laikykitės kairės</string>
+    <string name="delete_widget_description">Šis valdiklis bus ištrintas. Galėsite vėliau jį atkurti Konfigūravimo ekrane.</string>
 </resources>

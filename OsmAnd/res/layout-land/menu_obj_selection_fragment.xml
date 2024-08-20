@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/main_view"
+<LinearLayout android:id="@+id/main_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dashboard_land_width"
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
     tools:background="?attr/left_menu_view_bg"
     android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
@@ -37,7 +37,7 @@
             android:layout_height="@dimen/bottom_sheet_cancel_button_height"
             android:background="?attr/selectableItemBackground">
 
-            <TextView
+            <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/cancel_row_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                app:typefaceWeight="medium"/>
         </FrameLayout>
 
     </LinearLayout>

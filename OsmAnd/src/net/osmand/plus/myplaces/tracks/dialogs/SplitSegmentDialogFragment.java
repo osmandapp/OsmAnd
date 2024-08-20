@@ -27,13 +27,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -46,7 +42,11 @@ import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -87,7 +87,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
-		minMaxSpeedPaint.setTypeface(FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf"));
+		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
 		minMaxSpeedPaint.setStyle(Paint.Style.FILL);
 
 		if (shouldDismiss()) {
@@ -180,7 +180,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	private void updateHeader() {
 		View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
-		if (getGpx() != null && !getGpx().showCurrentTrack && adapter.getCount() > 0) {
+		if (getGpx() != null && !getGpx().isShowCurrentTrack() && adapter.getCount() > 0) {
 			setupSplitIntervalView(splitIntervalView);
 			if (options.size() == 0) {
 				prepareSplitIntervalAdapterData();
@@ -295,7 +295,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Nullable
-	private GPXFile getGpx() {
+	private GpxFile getGpx() {
 		return displayHelper.getGpx();
 	}
 
@@ -368,7 +368,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	private List<GpxDisplayItem> getSplitSegments() {
 		List<GpxDisplayItem> splitSegments = new ArrayList<>();
 		List<GpxDisplayGroup> result = displayHelper.getGpxFile(true);
-		if (result != null && result.size() > 0 && segment.points.size() > 0) {
+		if (result != null && result.size() > 0 && segment.getPoints().size() > 0) {
 			for (GpxDisplayGroup group : result) {
 				TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
 				if (trackGroup != null) {
@@ -386,11 +386,11 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		if ((group.isSplitDistance() || group.isSplitTime()) && (!generalGroup && !generalTrack || generalGroup && generalTrack)) {
 			boolean itemsForSelectedSegment = false;
 			for (GpxDisplayItem item : group.getDisplayItems()) {
-				itemsForSelectedSegment = segment.points.get(0).equals(item.locationStart) || itemsForSelectedSegment;
+				itemsForSelectedSegment = segment.getPoints().get(0).equals(item.locationStart) || itemsForSelectedSegment;
 				if (itemsForSelectedSegment) {
 					splitSegments.add(item);
 				}
-				if (segment.points.get(segment.points.size() - 1).equals(item.locationEnd)) {
+				if (segment.getPoints().get(segment.getPoints().size() - 1).equals(item.locationEnd)) {
 					break;
 				}
 			}
@@ -459,18 +459,18 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 					if (trackGroup != null && trackGroup.isSplitDistance()) {
 						overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, activeColorId));
 						overviewTextView.setText("");
-						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.getTotalDistance();
+						double metricStart = currentGpxDisplayItem.analysis.getMetricEnd() - currentGpxDisplayItem.analysis.getTotalDistance();
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
 						overviewTextView.append(" - ");
-						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
+						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 					} else if (trackGroup != null && trackGroup.isSplitTime()) {
 						overviewImageView.setImageDrawable(getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 						overviewTextView.setText("");
-						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.getTimeSpan() / 1000f);
+						double metricStart = currentGpxDisplayItem.analysis.getMetricEnd() - (currentGpxDisplayItem.analysis.getTimeSpan() / 1000f);
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));
 						overviewTextView.append(" - ");
-						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.metricEnd, app));
+						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.getMetricEnd(), app));
 						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 					}
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.of, position, adapter.getCount() - 1));
@@ -495,14 +495,14 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 					.setImageDrawable(getIcon(R.drawable.ic_action_max_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 
 			if (currentGpxDisplayItem != null) {
-				GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
+				GpxTrackAnalysis analysis = currentGpxDisplayItem.analysis;
 				if (analysis != null) {
 					ImageView distanceOrTimeSpanImageView = convertView.findViewById(R.id.distance_or_timespan_image);
 					TextView distanceOrTimeSpanValue = convertView.findViewById(R.id.distance_or_time_span_value);
 					TextView distanceOrTimeSpanText = convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						float totalDistance = !joinSegments && item.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+						float totalDistance = !joinSegments && item.isGeneralTrack() ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {

@@ -1,5 +1,6 @@
 package net.osmand.plus.utils;
 
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -18,7 +19,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
+
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -77,10 +78,9 @@ public class UpdateLocationUtils {
 		if (hasToLocation) {
 			Integer color = getTextColor(app, cache, info.stale, info.useCenter);
 			if (color != null) {
-				Typeface typeface = FontCache.getRobotoMedium(app);
 				SpannableString spannable = new SpannableString(distance);
 				spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), 0);
-				spannable.setSpan(new CustomTypefaceSpan(typeface), 0, spannable.length(), 0);
+				spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, spannable.length(), 0);
 				return spannable;
 			}
 		}

@@ -5,7 +5,7 @@
     <string name="time_zone_descr">Vali oma asukohateadetes kuvatav ajavöönd.</string>
     <string name="time_zone">Ajavöönd</string>
     <string name="units_and_formats">Ühikud ja formaadid</string>
-    <string name="unit_of_length_descr">Muuda pikkusühikuid.</string>
+    <string name="unit_of_length_descr">Muuda vahemaa mõõtmiseks kasutatud ühikut.</string>
     <string name="unit_of_length">Pikkusühikud</string>
     <string name="unit_of_speed_system_descr">Määra kiiruse ühik.</string>
     <string name="unit_of_speed_system">Kiiruse ühik</string>
@@ -40,7 +40,7 @@
     <string name="proxy">Puhverserver</string>
     <string name="altitude">Kõrgus</string>
     <string name="shared_string_search">Otsi</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Sobib</string>
     <string name="shared_string_update">Uuenda</string>
     <string name="average_altitude">Keskmine kõrgus</string>
     <string name="average_speed">Keskmine kiirus</string>

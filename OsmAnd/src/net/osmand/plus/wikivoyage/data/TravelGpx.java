@@ -1,15 +1,16 @@
 package net.osmand.plus.wikivoyage.data;
 
-import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
-import static net.osmand.gpx.GPXUtilities.WptPt;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
+
+import net.osmand.shared.gpx.primitives.WptPt;
+
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.util.Arrays;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 public class TravelGpx extends TravelArticle {
 
@@ -41,9 +44,9 @@ public class TravelGpx extends TravelArticle {
 
 	@Nullable
 	@Override
-	public GPXTrackAnalysis getAnalysis() {
-		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
-		if (gpxFile.hasAltitude) {
+	public GpxTrackAnalysis getAnalysis() {
+		GpxTrackAnalysis analysis = new GpxTrackAnalysis();
+		if (gpxFile.hasAltitude()) {
 			analysis = gpxFile.getAnalysis(0);
 		} else {
 			analysis.setDiffElevationDown(diffElevationDown);
@@ -51,7 +54,7 @@ public class TravelGpx extends TravelArticle {
 			analysis.setMaxElevation(maxElevation);
 			analysis.setMinElevation(minElevation);
 			analysis.setTotalDistance(totalDistance);
-			analysis.totalDistanceWithoutGaps = totalDistance;
+			analysis.setTotalDistanceWithoutGaps(totalDistance);
 			analysis.setAvgElevation(avgElevation);
 
 			if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
@@ -65,9 +68,9 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
 		WptPt wptPt = new WptPt();
-		wptPt.name = amenity.getName();
-		wptPt.lat = amenity.getLocation().getLatitude();
-		wptPt.lon = amenity.getLocation().getLongitude();
+		wptPt.setLat(amenity.getLocation().getLatitude());
+		wptPt.setLon(amenity.getLocation().getLongitude());
+		wptPt.setName(amenity.getName());
 		for (String obfTag : amenity.getAdditionalInfoKeys()) {
 			String gpxTag = allowedPointObfToGpxTags.get(obfTag);
 			if (gpxTag != null) {

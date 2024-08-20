@@ -5853,4 +5853,12 @@
     <string name="help_article_map_routes_name">Руте</string>
     <string name="route_roundabout_exit">Идите на %1$d излаз</string>
     <string name="help_article_map_tracks_name">Путање</string>
+    <string name="add_widget_above">Додај виџет изнад</string>
+    <string name="add_widget_below">Додај виџет испод</string>
+    <string name="add_widget_to_the_right">Додај виџет десно</string>
+    <string name="height_cache">Кеш висине</string>
+    <string name="add_widget_to_the_left">Додај виџет лево</string>
+    <string name="delete_widget">Обисати виџет?</string>
+    <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
+    <string name="battery_saving_mode">Режим уштеде батерије</string>
 </resources>

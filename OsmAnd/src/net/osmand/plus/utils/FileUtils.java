@@ -148,7 +148,7 @@ public class FileUtils {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+			selectedGpxFile.getGpxFile().setPath(dest.getAbsolutePath());
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);

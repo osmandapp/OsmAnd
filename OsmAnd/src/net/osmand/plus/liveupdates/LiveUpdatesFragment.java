@@ -2,15 +2,7 @@ package net.osmand.plus.liveupdates;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
@@ -19,12 +11,10 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -60,14 +50,10 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -75,6 +61,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
@@ -191,17 +178,13 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		AndroidUtils.setTextSecondaryColor(app, title, nightMode);
 		title.setText(R.string.latest_openstreetmap_update);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			title.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
-		}
+		title.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
 
 		descriptionTime = timeContainer.findViewById(R.id.sub_title);
 		AndroidUtils.setTextPrimaryColor(app, descriptionTime, nightMode);
-		Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
-		descriptionTime.setTypeface(typeface);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
-		}
+		descriptionTime.setTypeface(FontCache.getMediumFont());
+		descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
+
 		return view;
 	}
 
@@ -522,8 +505,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
 						? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode)));
-				Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
-				subTitle.setTypeface(typeface);
+				subTitle.setTypeface(FontCache.getMediumFont());
 			}
 
 			Drawable statusDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_map);
@@ -539,12 +521,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 			if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 				compoundButton.setEnabled(liveUpdateOn);
-				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort);
-					}
-				});
+				compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort));
 			} else {
 				compoundButton.setEnabled(false);
 			}

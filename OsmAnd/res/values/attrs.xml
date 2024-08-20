@@ -219,8 +219,10 @@
     </declare-styleable>
 	
 	<declare-styleable name="TextViewEx">
-		<attr name="typeface" format="string|reference"/>
-		<attr name="textAllCapsCompat" format="reference|boolean" />
+		<attr name="typefaceWeight" format="enum">
+			<enum name="normal" value="400"/>
+			<enum name="medium" value="500"/>
+		</attr>
 	</declare-styleable>
 
     <declare-styleable name="ComplexButton">

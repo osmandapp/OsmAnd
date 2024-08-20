@@ -472,7 +472,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public synchronized void addLayer(@NonNull OsmandMapLayer layer, float zOrderLegacy, float zOrderOpenGL) {
-		int i;
+		int i = 0;
 		for (i = 0; i < layersLegacy.size(); i++) {
 			if (zOrdersLegacy.get(layersLegacy.get(i)) > zOrderLegacy) {
 				break;
@@ -481,6 +481,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		zOrdersLegacy.put(layer, zOrderLegacy);
 		layersLegacy.add(i, layer);
 
+		i = 0;
 		for (i = 0; i < layersOpenGL.size(); i++) {
 			if (zOrdersOpenGL.get(layersOpenGL.get(i)) > zOrderOpenGL) {
 				break;
@@ -488,7 +489,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		zOrdersOpenGL.put(layer, zOrderOpenGL);
 		layersOpenGL.add(i, layer);
-		layer.setView(this);
+		layer.initLayer(this);
 	}
 
 	public synchronized void removeLayer(@NonNull OsmandMapLayer layer) {
@@ -2410,6 +2411,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	@Nullable
 	private MeasurementToolLayer getMeasurementToolLayer() {
 		return application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
+	}
+
+	public void applyBatterySavingModeSetting(MapRendererView mapRenderer) {
+		if (settings.BATTERY_SAVING_MODE.get()) {
+			mapRenderer.enableBatterySavingMode();
+		} else {
+			mapRenderer.disableBatterySavingMode();
+		}
 	}
 
 	public void applyDebugSettings(MapRendererView mapRenderer) {

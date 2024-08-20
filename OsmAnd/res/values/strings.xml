@@ -10,9 +10,19 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="app_mode_suv">SUV</string>
+	<string name="graph_axis">Graph axis</string>
+	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
+	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
+	<string name="delete_widget">Delete widget?</string>
+	<string name="add_widget_below">Add widget below</string>
+	<string name="add_widget_above">Add widget above</string>
+	<string name="add_widget_to_the_right">Add widget to the right</string>
+	<string name="add_widget_to_the_left">Add widget to the left</string>
+	<string name="height_cache">Height cache</string>
 	<string name="route_roundabout_exit">Take %1$d exit</string>
-    <string name="help_article_map_tracks_name">Tracks</string>
-    <string name="help_article_map_routes_name">Routes</string>
+	<string name="help_article_map_tracks_name">Tracks</string>
+	<string name="help_article_map_routes_name">Routes</string>
 	<string name="compass_click_north_is_up">To change orientation mode click and hold</string>
 	<string name="shared_string_automatically">Automatically</string>
 	<string name="ask_every_time">Ask every time</string>
@@ -5092,6 +5102,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="search_offline_clear_search">New Search</string>
     <string name="map_text_size_descr">Text size for names on the map:</string>
     <string name="map_text_size">Map font size</string>
+    <string name="battery_saving_mode">Battery saving mode</string>
     <string name="trace_rendering">Performance debug info</string>
     <string name="trace_rendering_descr">Display the rendering and navigation performance.</string>
     <string name="installing_new_resources">Unpacking new data…</string>

@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
@@ -319,8 +319,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
 				if (result != null && AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
-					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-					GPXFile gpxFile = null;
+					Map<String, GpxFile> gpxFilesByName = result.getGpxFilesByName();
+					GpxFile gpxFile = null;
 					File file = null;
 					if (!Algorithms.isEmpty(gpxFilesByName)) {
 						String gpxFileName = gpxFilesByName.keySet().iterator().next();
@@ -375,8 +375,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording() {
-		app.getSavingTrackHelper().onStopRecording();
+		stopRecording(false);
+	}
+
+	public void stopRecording(boolean clearData) {
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+		app.getSavingTrackHelper().onStopRecording(clearData);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}

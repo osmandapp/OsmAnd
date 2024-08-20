@@ -5,7 +5,7 @@ import static net.osmand.data.Amenity.MAPILLARY;
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKIPEDIA;
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import androidx.annotation.NonNull;

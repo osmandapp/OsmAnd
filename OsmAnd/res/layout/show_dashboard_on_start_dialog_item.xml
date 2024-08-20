@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -38,7 +38,7 @@
         android:text="@string/show_on_start"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textStyle="normal"
 	    android:layout_marginEnd="16dp"
 	    android:layout_toStartOf="@id/checkbox_wraper"
 	    android:layout_marginStart="@dimen/dialog_content_margin" />
@@ -56,7 +56,7 @@
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_sub_text_size"
         android:layout_alignParentLeft="true"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textStyle="normal"
         android:layout_marginBottom="16dp"
 	    android:layout_marginEnd="16dp"
 	    android:layout_marginStart="@dimen/dialog_content_margin"

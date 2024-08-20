@@ -9,7 +9,6 @@ import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -30,7 +29,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
@@ -48,6 +46,7 @@ import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -351,8 +350,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		int startIndex = tracksPathDescr.indexOf(tracksPath);
 		SpannableString titleSpan = new SpannableString(tracksPathDescr);
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
-		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + tracksPath.length(), 0);
+		titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + tracksPath.length(), 0);
 
 		Preference openTracksDescription = findPreference("open_tracks_description");
 		openTracksDescription.setTitle(titleSpan);

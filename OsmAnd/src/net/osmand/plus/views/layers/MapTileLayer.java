@@ -89,8 +89,8 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
 		useSampling = Build.VERSION.SDK_INT < 28;

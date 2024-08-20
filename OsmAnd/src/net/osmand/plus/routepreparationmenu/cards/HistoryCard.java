@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -88,10 +88,10 @@ public class HistoryCard extends MapBaseCard {
 					String filePath = gpxInfo.getFilePath();
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 					if (selectedGpxFile != null) {
-						GPXFile gpxFile = selectedGpxFile.getGpxFile();
+						GpxFile gpxFile = selectedGpxFile.getGpxFile();
 						mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true);
 					} else {
-						CallbackWithObject<GPXFile[]> callback = result -> {
+						CallbackWithObject<GpxFile[]> callback = result -> {
 							MapActivity mapActivity = getMapActivity();
 							if (mapActivity != null) {
 								mapActivity.getMapRouteInfoMenu().selectTrack(result[0], true);

@@ -1,6 +1,6 @@
 package net.osmand.plus.charts;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.LatLon;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class TrackChartPoints {
 	private List<LatLon> xAxisPoints;
 	private LatLon highlightedPoint;
 	private int segmentColor;
-	private GPXFile gpx;
+	private GpxFile gpx;
 
 	public List<LatLon> getXAxisPoints() {
 		return xAxisPoints;
@@ -24,7 +24,7 @@ public class TrackChartPoints {
 		return segmentColor;
 	}
 
-	public GPXFile getGpx() {
+	public GpxFile getGpx() {
 		return gpx;
 	}
 
@@ -40,7 +40,7 @@ public class TrackChartPoints {
 		this.segmentColor = segmentColor;
 	}
 
-	public void setGpx(GPXFile gpx) {
+	public void setGpx(GpxFile gpx) {
 		this.gpx = gpx;
 	}
 }

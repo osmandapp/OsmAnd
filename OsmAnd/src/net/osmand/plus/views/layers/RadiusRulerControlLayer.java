@@ -1,18 +1,10 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
+
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.Shader;
-import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -35,6 +27,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -47,8 +40,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 public class RadiusRulerControlLayer extends OsmandMapLayer {
 
@@ -104,8 +95,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		app = getApplication();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
@@ -515,7 +506,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		PointF headingTextPosition = calculateTextPosition(heading, headingTextPositioning, drawingTextRadius, tb, attrs);
 		PointF distanceTextPosition = calculateTextPosition(distance, distanceTextPositioning, drawingTextRadius, tb, attrs);
 
-		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, FontCache.getMediumFont());
 		if (headingTextPosition != null) {
 			drawTextInPosition(canvas, heading, headingTextPosition, attrs);
 		}
@@ -689,7 +680,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		float textMargin = AndroidUtils.dpToPx(app, margin);
 		attrs.paint2.setTextAlign(Paint.Align.CENTER);
 		attrs.paint3.setTextAlign(Paint.Align.CENTER);
-		setAttrsPaintsTypeface(attrs, Typeface.DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, FontCache.getMediumFont());
 
 		for (int i = 0; i < degrees.length; i += 9) {
 			String cardinalDirection = getCardinalDirection(i);

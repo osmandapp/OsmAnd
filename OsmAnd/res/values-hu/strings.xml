@@ -5854,4 +5854,12 @@
     <string name="route_roundabout_exit">Hajtson ki a %1$d kijáraton</string>
     <string name="help_article_map_tracks_name">Nyomvonalak</string>
     <string name="help_article_map_routes_name">Útvonalak</string>
+    <string name="add_widget_to_the_right">Widget hozzáadása jobb oldalra</string>
+    <string name="add_widget_to_the_left">Widget hozzáadása bal oldalra</string>
+    <string name="height_cache">Magasság gyorsítótár</string>
+    <string name="add_widget_below">Widget hozzáadása alulra</string>
+    <string name="add_widget_above">Widget hozzáadása felülre</string>
+    <string name="delete_widget_description">Ez a widget törölve lesz. Később visszaállíthatja a konfigurációs képernyőn.</string>
+    <string name="delete_widget">Widget törlése?</string>
+    <string name="battery_saving_mode">Energiatakarékos mód</string>
 </resources>

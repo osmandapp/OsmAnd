@@ -11,7 +11,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -55,7 +55,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			menuLayer.createGpxPoint();
 			if (pointDescription.isWpt()) {
 				RotatedTileBox tileBox = mapActivity.getMapView().getRotatedTileBox();
-				GPXFile gpx = newGpxPoint.getGpx();
+				GpxFile gpx = newGpxPoint.getGpx();
 				LatLon latLon = menuLayer.getMovableCenterLatLon(tileBox);
 				WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 				if (editor != null) {
@@ -136,22 +136,22 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			fragment.updateContent();
 			fragment.show();
 		} else {
-			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().path), null);
+			TrackMenuFragment.openTrack(mapActivity, new File(newGpxPoint.getGpx().getPath()), null);
 		}
 	}
 
 	public static class NewGpxPoint {
 		private final PointDescription pointDescription;
-		private final GPXFile gpx;
+		private final GpxFile gpx;
 		private final QuadRect rect;
 
-		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription, QuadRect rect) {
+		public NewGpxPoint(GpxFile gpx, PointDescription pointDescription, QuadRect rect) {
 			this.gpx = gpx;
 			this.pointDescription = pointDescription;
 			this.rect = rect;
 		}
 
-		public GPXFile getGpx() {
+		public GpxFile getGpx() {
 			return gpx;
 		}
 

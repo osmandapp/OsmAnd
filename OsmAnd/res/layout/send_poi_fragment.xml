@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -24,7 +23,7 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:text="@string/upload_poi"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 
 		<com.google.android.material.textfield.TextInputLayout
@@ -57,7 +56,7 @@
 			android:text="@string/close_changeset"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			android:paddingStart="@dimen/content_padding_small"
 			android:paddingEnd="@dimen/content_padding_small" />
 

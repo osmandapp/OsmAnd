@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/bg_color"
@@ -19,21 +19,21 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/actionModeBackground"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMargin="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-			osmand:scrimAnimationDuration="0"
-			osmand:title="@string/external_sensors_plugin_name">
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMargin="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+			app:scrimAnimationDuration="0"
+			app:title="@string/external_sensors_plugin_name">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:fitsSystemWindows="true"
-				osmand:layout_collapseMode="pin"
-				osmand:menu="@menu/ble_sensors_menu">
+				app:layout_collapseMode="pin"
+				app:menu="@menu/ble_sensors_menu">
 
 			</androidx.appcompat.widget.Toolbar>
 
@@ -44,8 +44,8 @@
 	<androidx.core.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-		osmand:layout_scrollFlags="scroll">
+		app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+		app:layout_scrollFlags="scroll">
 
 		<FrameLayout
 			android:layout_width="match_parent"
@@ -76,7 +76,7 @@
 					android:text="@string/ant_plus_pair_bluetooth_prompt"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular" />
+					android:textStyle="normal" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/learn_more_button"
@@ -125,13 +125,13 @@
 							android:text="@string/external_device_connected"
 							android:textColor="@color/preference_category_title"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_medium" />
+							app:typefaceWeight="medium" />
 
 						<androidx.recyclerview.widget.RecyclerView
 							android:id="@+id/connected_devices_list"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+							app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 						<TextView
 							android:id="@+id/disconnected_prompt"
@@ -143,7 +143,7 @@
 							android:text="@string/external_device_disconnected"
 							android:textColor="@color/preference_category_title"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_medium" />
+							app:typefaceWeight="medium" />
 
 						<include
 							android:id="@+id/divider_between_device_groups"
@@ -153,7 +153,7 @@
 							android:id="@+id/disconnected_devices_list"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+							app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 					</LinearLayout>
 

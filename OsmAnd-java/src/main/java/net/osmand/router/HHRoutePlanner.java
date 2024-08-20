@@ -797,6 +797,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (allMatched) {
 			return currentCtx;
 		}
+		if (RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS && groups.size() > 1) {
+			hctx.rctx.mapIndexReaderFilter = new HashSet<>();
+			for (HHRouteRegionPointsCtx<T> reg : regions) {
+				hctx.rctx.mapIndexReaderFilter.add(reg.file);
+			}
+		}
 		return initNewContext(hctx.rctx, regions);
 	}
 

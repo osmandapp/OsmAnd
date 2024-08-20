@@ -29,7 +29,7 @@
 				android:layout_marginTop="@dimen/list_header_settings_top_margin"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
-				app:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="@string/info_button" />
 
 		</LinearLayout>

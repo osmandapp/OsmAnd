@@ -1,7 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
-import static net.osmand.gpx.GpxParameter.SHOW_AS_MARKERS;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_AS_MARKERS;
 import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_DATE_ADDED_DESC;
 
 import android.util.Pair;
@@ -14,15 +14,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapmarkers.MapMarkersComparator.MapMarkersSortByDef;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -260,11 +260,11 @@ public class MapMarkersHelper {
 		ctx.runInUIThread(() -> new SyncGroupTask(ctx, group, syncListeners).executeOnExecutor(executorService));
 	}
 
-	public MapMarkersGroup getMarkersGroup(GPXFile gpx) {
-		if (gpx == null || gpx.path == null) {
+	public MapMarkersGroup getMarkersGroup(GpxFile gpx) {
+		if (gpx == null) {
 			return null;
 		}
-		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.path)), ItineraryType.TRACK);
+		return getMapMarkerGroupById(getMarkerGroupId(new File(gpx.getPath())), ItineraryType.TRACK);
 	}
 
 	public MapMarkersGroup getMarkersGroup(FavoriteGroup favGroup) {
@@ -282,11 +282,11 @@ public class MapMarkersHelper {
 		return gr;
 	}
 
-	public MapMarkersGroup addOrEnableGroup(@NonNull GPXFile file) {
-		updateGpxShowAsMarkers(new File(file.path));
+	public MapMarkersGroup addOrEnableGroup(@NonNull GpxFile file) {
+		updateGpxShowAsMarkers(new File(file.getPath()));
 		MapMarkersGroup gr = getMarkersGroup(file);
 		if (gr == null) {
-			gr = createGPXMarkerGroup(new File(file.path));
+			gr = createGPXMarkerGroup(new File(file.getPath()));
 			addGroupInternally(gr);
 		}
 		enableGroup(gr);
@@ -485,8 +485,8 @@ public class MapMarkersHelper {
 		List<SelectedGpxFile> selectedGpxFiles = ctx.getSelectedGpxHelper().getSelectedGPXFiles();
 		for (SelectedGpxFile selected : selectedGpxFiles) {
 			MapMarkersGroup search = getMarkersGroup(selected.getGpxFile());
-			if (search == null && selected.getGpxFile() != null && !Algorithms.isEmpty(selected.getGpxFile().path)) {
-				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().path));
+			if (search == null && selected.getGpxFile() != null && !Algorithms.isEmpty(selected.getGpxFile().getPath())) {
+				MapMarkersGroup group = createGPXMarkerGroup(new File(selected.getGpxFile().getPath()));
 				group.setDisabled(true);
 				res.add(group);
 			}
@@ -865,14 +865,14 @@ public class MapMarkersHelper {
 	}
 
 	private void syncPassedPoints() {
-		Set<GPXFile> gpxFiles = new HashSet<>();
+		Set<GpxFile> gpxFiles = new HashSet<>();
 		boolean shouldSaveFavourites = syncPassedPoints(mapMarkers, gpxFiles);
 		shouldSaveFavourites |= syncPassedPoints(mapMarkersHistory, gpxFiles);
 
 		if (shouldSaveFavourites) {
 			ctx.getFavoritesHelper().saveCurrentPointsIntoFile(true);
 		}
-		for (GPXFile gpxFile : gpxFiles) {
+		for (GpxFile gpxFile : gpxFiles) {
 			SaveGpxHelper.saveGpx(gpxFile);
 		}
 		if (!gpxFiles.isEmpty()) {
@@ -880,7 +880,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private boolean syncPassedPoints(List<MapMarker> markers, Set<GPXFile> gpxFiles) {
+	private boolean syncPassedPoints(List<MapMarker> markers, Set<GpxFile> gpxFiles) {
 		boolean shouldSaveFavourites = false;
 		for (MapMarker marker : markers) {
 			if (marker.favouritePoint != null) {
@@ -902,7 +902,7 @@ public class MapMarkersHelper {
 		return false;
 	}
 
-	private void syncGpxPassedPoints(MapMarker marker, Set<GPXFile> gpxFiles) {
+	private void syncGpxPassedPoints(MapMarker marker, Set<GpxFile> gpxFiles) {
 		GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
 		File file = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + marker.groupKey);
 		if (file.exists()) {
@@ -910,7 +910,7 @@ public class MapMarkersHelper {
 			if (selectedGpxFile != null) {
 				boolean passedPoint = marker.wptPt.getExtensionsToWrite().containsKey(VISITED_DATE);
 				if (marker.history && !passedPoint) {
-					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(System.currentTimeMillis()));
+					marker.wptPt.getExtensionsToWrite().put(VISITED_DATE, GpxUtilities.INSTANCE.formatTime(System.currentTimeMillis()));
 					gpxFiles.add(selectedGpxFile.getGpxFile());
 				} else if (!marker.history && passedPoint) {
 					marker.wptPt.getExtensionsToWrite().remove(VISITED_DATE);
@@ -1039,7 +1039,7 @@ public class MapMarkersHelper {
 		}
 
 		SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
-		GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
+		GpxFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
 		group.setVisible(gpx != null || group.isVisibleUntilRestart());
 		if (gpx == null || group.isDisabled()) {
 			removeGroupActiveMarkers(group, true);
@@ -1047,10 +1047,10 @@ public class MapMarkersHelper {
 		}
 		int colorIndex = -1;
 		boolean addAll = group.getWptCategories() == null || group.getWptCategories().isEmpty();
-		List<WptPt> gpxPoints = new ArrayList<>(gpx.getPoints());
+		List<WptPt> gpxPoints = new ArrayList<>(gpx.getPointsList());
 		for (WptPt wptPt : gpxPoints) {
-			if (addAll || group.getWptCategories().contains(wptPt.category)
-					|| (wptPt.category == null && group.getWptCategories().contains(""))) {
+			if (addAll || group.getWptCategories().contains(wptPt.getCategory())
+					|| (wptPt.getCategory() == null && group.getWptCategories().contains(""))) {
 				if (colorIndex == -1) {
 					colorIndex = mapMarkers.isEmpty() ? 0 : (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				} else {

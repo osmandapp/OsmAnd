@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/bottom_sheet_selected_item_title_height"
@@ -31,7 +31,7 @@
 			android:maxLines="1"
 			android:text="@string/rendering_category_details"
 			android:textSize="@dimen/text_button_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:ignore="UnusedAttribute"
 			tools:textColor="?attr/wikivoyage_active_color" />
 

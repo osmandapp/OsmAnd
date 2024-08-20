@@ -1,10 +1,9 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
-import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
-import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
 import static net.osmand.plus.settings.enums.TrackApproximationType.MANUAL;
 import static net.osmand.plus.utils.AndroidUtils.spToPx;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
@@ -28,8 +27,6 @@ import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -41,9 +38,12 @@ import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -51,12 +51,12 @@ import java.util.List;
 
 public class SimpleRouteCard extends MapBaseCard {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final RoutingHelper routingHelper;
 
 	private LineData lineData;
 
-	public SimpleRouteCard(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile) {
+	public SimpleRouteCard(@NonNull MapActivity mapActivity, @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		routingHelper = mapActivity.getRoutingHelper();
@@ -82,7 +82,7 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void setupSecondRow() {
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 		boolean hasElevationData = analysis.hasElevationData();
 		if (hasElevationData) {
 			TextView uphill = view.findViewById(R.id.uphill);
@@ -111,7 +111,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupChart() {
 		ElevationChart chart = view.findViewById(R.id.chart);
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData()) {
 			ChartUtils.setupElevationChart(chart, 10f, 4f, false);
@@ -159,7 +159,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 		builder.append(" (").append(arriveTime).append(")");
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 
@@ -167,7 +167,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		int index = builder.length();
 		builder.append(" • ");
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryIconColor(app, nightMode)), index, builder.length(), 0);
 	}
 
@@ -202,7 +202,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
 		container.removeAllViews();
 
-		GPXFile gpxFile = routingHelper.getCurrentGPX();
+		GpxFile gpxFile = routingHelper.getCurrentGPX();
 		ApplicationMode appMode = routingHelper.getAppMode();
 		if (gpxFile != null && !gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == MANUAL) {
 			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);
@@ -216,13 +216,13 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupTextSpans(@NonNull SpannableStringBuilder builder, int index) {
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 16)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoRegular(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(DEFAULT), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 
 	private void setupNumberSpans(@NonNull SpannableStringBuilder builder, int index) {
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(getRobotoMedium(app)), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getPrimaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 }

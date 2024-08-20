@@ -459,7 +459,10 @@ public class BinaryRoutePlanner {
 
 		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
 		// calculate possible obstacle plus time
-		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		double obstacle = 0;
+		if (segment.distanceFromStart >= 0 || !reverseWaySearch) { // ignore last point for reverse
+			obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		}
 		if (obstacle < 0) {
 			return -1;
 		}
@@ -510,20 +513,18 @@ public class BinaryRoutePlanner {
 			currentSegment = nextCurrentSegment;
 			nextCurrentSegment = null;
 
-			// 1. calculate obstacle for passing this segment 
+			// 1. check if segment was already visited in opposite direction
+			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns onto each segment).
+			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments, boundaries);
+			
+			// 2. calculate obstacle for passing this segment (after  visiting cause obstacle is at the end of the segment) 
 			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
-			if (segmentAndObstaclesTime < 0) {
+			if (segmentAndObstaclesTime < 0) { 
 				break;
 			}
 			// calculate new start segment time as we're going to assign to put to visited segments
 			float distFromStartPlusSegmentTime = currentSegment.distanceFromStart + segmentAndObstaclesTime;
 			
-			// 2. check if segment was already visited in opposite direction
-			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
-			// onto each segment).
-			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments,
-					currentSegment, oppositeSegments, boundaries);
- 			
 			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);

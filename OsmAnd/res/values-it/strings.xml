@@ -5847,4 +5847,12 @@
     <string name="help_article_map_routes_name">Percorsi</string>
     <string name="route_roundabout_exit">Prendi l\'uscita %1$d</string>
     <string name="help_article_map_tracks_name">Tracce</string>
+    <string name="add_widget_above">Aggiungi il widget qui sopra</string>
+    <string name="add_widget_to_the_right">Aggiungi il widget a destra</string>
+    <string name="add_widget_to_the_left">Aggiungi il widget a sinistra</string>
+    <string name="add_widget_below">Aggiungi il widget qui sotto</string>
+    <string name="location_radius">Raggio di posizione</string>
+    <string name="delete_widget">Eliminare il widget?</string>
+    <string name="delete_widget_description">Questo widget verrà eliminato. Puoi ripristinarlo più tardi in Configura schermo.</string>
+    <string name="battery_saving_mode">Modalità di risparmio batteria</string>
 </resources>

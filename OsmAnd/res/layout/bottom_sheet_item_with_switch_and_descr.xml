@@ -29,7 +29,7 @@
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="Some Title" />
 
 		<androidx.appcompat.widget.SwitchCompat
@@ -59,7 +59,7 @@
 		android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 		android:ellipsize="end"
 		android:visibility="gone"
-		app:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		tools:text="@string/simplified_track_description" />
 
 </LinearLayout>

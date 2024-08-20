@@ -13,9 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -84,7 +84,7 @@ class ImportTrackViewHolder extends ViewHolder {
 	}
 
 	private void setupStatisticsRow(@NonNull ImportTrackItem item) {
-		GPXTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
+		GpxTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
 		GpxBlockStatisticsBuilder builder = new GpxBlockStatisticsBuilder(app, item.selectedGpxFile, nightMode);
 		builder.setBlocksView(recyclerView, false);
 		builder.initStatBlocks(null, ColorUtilities.getActiveColor(app, nightMode), analysis);
@@ -127,7 +127,7 @@ class ImportTrackViewHolder extends ViewHolder {
 
 	private void drawTrackImage(@NonNull ImportTrackItem item, @Nullable MapBitmapDrawerListener listener) {
 		if (item.bitmapDrawer == null) {
-			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
+			GpxFile gpxFile = item.selectedGpxFile.getGpxFile();
 			item.bitmapDrawer = new TrackBitmapDrawer(app, drawParams, gpxFile, null);
 			item.bitmapDrawer.addListener(listener);
 			item.bitmapDrawer.setDefaultTrackColor(GpxAppearanceAdapter.getTrackColor(app));

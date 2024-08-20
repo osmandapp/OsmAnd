@@ -30,7 +30,7 @@
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"
-			app:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:text="Some Title" />
 
 		<androidx.appcompat.widget.SwitchCompat

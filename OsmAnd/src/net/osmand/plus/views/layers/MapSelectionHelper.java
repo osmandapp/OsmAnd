@@ -50,7 +50,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -71,6 +70,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -440,8 +440,8 @@ public class MapSelectionHelper {
 		TravelGpx travelGpx = app.getTravelHelper().searchGpx(result.pointLatLon, filter, object.getTagValue("ref"));
 		if (travelGpx != null && isUniqueGpx(result.selectedObjects, travelGpx)) {
 			WptPt selectedPoint = new WptPt();
-			selectedPoint.lat = result.pointLatLon.getLatitude();
-			selectedPoint.lon = result.pointLatLon.getLongitude();
+			selectedPoint.setLat(result.pointLatLon.getLatitude());
+			selectedPoint.setLon(result.pointLatLon.getLongitude());
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
 			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 		}
@@ -571,7 +571,7 @@ public class MapSelectionHelper {
 				publicTransportTypes = new ArrayList<>();
 				List<PoiFilter> filters = category.getPoiFilters();
 				for (PoiFilter poiFilter : filters) {
-					if (poiFilter.getKeyName().equals("public_transport")) {
+					if (poiFilter.getKeyName().equals("public_transport") || poiFilter.getKeyName().equals("water_transport")) {
 						for (PoiType poiType : poiFilter.getPoiTypes()) {
 							publicTransportTypes.add(poiType.getKeyName());
 							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {

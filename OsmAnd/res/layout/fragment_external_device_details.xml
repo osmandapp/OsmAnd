@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -29,7 +29,7 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:contentDescription="@string/access_shared_string_navigate_up"
 				android:tint="?attr/default_icon_color"
-				osmand:srcCompat="@drawable/ic_arrow_back" />
+				app:srcCompat="@drawable/ic_arrow_back" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -56,7 +56,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="Wohoo" />
 
 					<LinearLayout
@@ -114,7 +114,7 @@
 						android:paddingEnd="@dimen/content_padding_small"
 						android:paddingRight="@dimen/content_padding_small"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="Pair"
 						tools:visibility="gone" />
 
@@ -126,8 +126,8 @@
 						android:layout_gravity="center"
 						android:indeterminate="true"
 						android:visibility="gone"
-						osmand:mpb_progressStyle="horizontal"
-						osmand:mpb_useIntrinsicPadding="false"
+						app:mpb_progressStyle="horizontal"
+						app:mpb_useIntrinsicPadding="false"
 						tools:visibility="visible" />
 
 				</FrameLayout>
@@ -161,7 +161,7 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/external_device_details_information"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<LinearLayout
 						android:id="@+id/connection_type_container"
@@ -249,13 +249,13 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/external_device_details_received_data"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/received_data"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 						tools:listitem="@layout/device_characteristic_item" />
 
 				</LinearLayout>
@@ -276,7 +276,7 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/shared_string_settings"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<LinearLayout
 						android:id="@+id/name_property_container"
@@ -319,7 +319,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layoutDirection="inherit"
-						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 					<LinearLayout
 						android:id="@+id/forget_device_container"

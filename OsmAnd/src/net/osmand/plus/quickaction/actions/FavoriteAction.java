@@ -172,14 +172,14 @@ public class FavoriteAction extends QuickAction {
 
 		categoryEdit.setOnClickListener(view -> {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color);
+			CategorySelectionListener listener = (pointsGroup) -> fillGroupParams(root, pointsGroup.getName(), pointsGroup.getColor());
 			SelectFavouriteGroupBottomSheet.showInstance(manager, "", listener);
 		});
 
 		SelectPointsCategoryBottomSheet dialogFragment = (SelectPointsCategoryBottomSheet)
 				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectPointsCategoryBottomSheet.TAG);
 		if (dialogFragment != null) {
-			dialogFragment.setListener((pointsGroup) -> fillGroupParams(root, pointsGroup.name, pointsGroup.color));
+			dialogFragment.setListener((pointsGroup) -> fillGroupParams(root, pointsGroup.getName(), pointsGroup.getColor()));
 		}
 	}
 

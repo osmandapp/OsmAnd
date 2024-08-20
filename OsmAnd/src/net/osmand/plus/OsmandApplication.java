@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
@@ -125,6 +126,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -266,6 +268,9 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
 		FileUtils.removeUnnecessaryFiles(this);
+
+		// Initialize shared library
+		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, getAppPath(null), getAppPath(GPX_INDEX_DIR));
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -852,6 +857,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public KFile getAppPathKFile(@Nullable String path) {
+		String child = path != null ? path : "";
+		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
+	}
+
+	@NonNull
 	public File getAppInternalPath(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new File(settings.getInternalAppPath(), child);
@@ -1007,13 +1018,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startNavigationService(@NonNull Context context, int usageIntent) {
-		LOG.info(">>>> APP - startNavigationService");
 		Intent intent = new Intent(context, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
 				if (isAppInForeground()) {
-					LOG.info(">>>> APP --- startForegroundService");
 					context.startForegroundService(intent);
 				}
 			});

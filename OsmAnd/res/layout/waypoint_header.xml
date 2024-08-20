@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -29,7 +29,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         style="@style/DashboardSubHeader"
-        osmand:typeface="@string/font_roboto_medium"
+        app:typefaceWeight="medium"
 	    android:layout_marginStart="@dimen/content_padding" />
 
     <LinearLayout
@@ -54,8 +54,8 @@
         android:paddingRight="@dimen/content_padding"
         android:text="@string/shared_string_options"
         android:visibility="gone"
-        osmand:textAllCapsCompat="true"
-        osmand:typeface="@string/font_roboto_medium"
+        android:textAllCaps="true"
+        app:typefaceWeight="medium"
         tools:textColor="?attr/color_dialog_buttons"
 	    android:paddingStart="@dimen/content_padding"
 	    android:paddingEnd="@dimen/content_padding" />
@@ -66,7 +66,7 @@
         android:layout_width="48dp"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackgroundBorderless"
-        osmand:srcCompat="@drawable/ic_overflow_menu_white"
+        app:srcCompat="@drawable/ic_overflow_menu_white"
         android:visibility="gone"/>
 
     <Button

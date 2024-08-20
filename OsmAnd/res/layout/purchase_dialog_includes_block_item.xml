@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_gravity="center"
             android:background="?attr/selectableItemBackgroundBorderless"
-            osmand:srcCompat="@drawable/ic_action_cloud_upload_colored" />
+            app:srcCompat="@drawable/ic_action_cloud_upload_colored" />
 
     </FrameLayout>
 
@@ -37,7 +37,7 @@
         android:textColor="?android:textColorPrimary"
         android:layout_marginTop="@dimen/content_padding_half"
         android:textSize="@dimen/default_list_text_size"
-        osmand:typeface="@string/font_roboto_medium"
+        app:typefaceWeight="medium"
         tools:text="@string/osmand_cloud" />
 
     <net.osmand.plus.widgets.TextViewEx
@@ -49,7 +49,7 @@
         android:layout_marginTop="@dimen/map_small_button_margin"
         android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
         android:textSize="@dimen/default_list_text_size"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textStyle="normal"
         tools:text="@string/purchases_feature_desc_osmand_cloud" />
 
     <View

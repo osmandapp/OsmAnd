@@ -1,7 +1,7 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import com.google.gson.annotations.Expose
-import net.osmand.gpx.GpxParameter
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import kotlin.math.ceil
@@ -46,25 +46,11 @@ open class RangeTrackFilter<T : Comparable<T>>(
 
 	private fun getValueFromString(value: String): T {
 		val convertedValue: T? = when (getProperty().typeClass) {
-			java.lang.Double::class.java -> {
-				check(value.toDouble() as java.lang.Double)
-			}
-
-			java.lang.Float::class.java -> {
-				check(value.toFloat() as java.lang.Float)
-			}
-
-			java.lang.Integer::class.java -> {
-				check(value.toInt() as java.lang.Integer)
-			}
-
-			java.lang.Long::class.java -> {
-				check(value.toLong() as java.lang.Long)
-			}
-
-			else -> {
-				null
-			}
+			Double::class -> check(value.toDouble())
+			Float::class -> check(value.toFloat())
+			Integer::class -> check(value.toInt())
+			Long::class -> check(value.toLong())
+			else -> null
 		}
 		if (convertedValue != null) {
 			return convertedValue
@@ -209,25 +195,11 @@ open class RangeTrackFilter<T : Comparable<T>>(
 			return getValueFromString(value)
 		} else if (value is Number) {
 			return when (getProperty().typeClass) {
-				java.lang.Integer::class.java -> {
-					check(value.toInt()) as T
-				}
-
-				java.lang.Double::class.java -> {
-					check(value.toDouble()) as T
-				}
-
-				java.lang.Long::class.java -> {
-					check(value.toLong()) as T
-				}
-
-				java.lang.Float::class.java -> {
-					check(value.toFloat()) as T
-				}
-
-				else -> {
-					throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
-				}
+				Integer::class -> check(value.toInt()) as T
+				Double::class -> check(value.toDouble()) as T
+				Long::class -> check(value.toLong()) as T
+				Float::class -> check(value.toFloat()) as T
+				else -> throw IllegalArgumentException("Can not cast $value to " + getProperty().typeClass)
 			}
 		}
 		throw IllegalArgumentException("$value is not a number")

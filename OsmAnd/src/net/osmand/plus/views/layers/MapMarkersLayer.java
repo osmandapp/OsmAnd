@@ -42,8 +42,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -53,7 +51,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -67,6 +65,8 @@ import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -138,7 +138,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 	private int displayedWidgets;
-	private List<GPXUtilities.WptPt> cachedPoints = null;
+	private List<WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
 	private Location savedLoc;
 	private PointI cachedTarget31;
@@ -268,8 +268,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		handler = new Handler();
 		initUI();
@@ -303,7 +303,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			mapActivityInvalidated = false;
 		}
 
-		if (route != null && route.points.size() > 0) {
+		if (route != null && route.getPoints().size() > 0) {
 			planRouteAttrs.updatePaints(app, drawSettings, tileBox);
 			if (mapRenderer != null) {
 				boolean shouldDraw = shouldDrawPoints();
@@ -311,8 +311,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					resetCachedRenderer();
 					int baseOrder = getPointsOrder() - 10;
 					QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
-					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2);
-					route.renderer = renderer;
+					Renderable.RenderableSegment renderer = new Renderable.StandardTrack(new ArrayList<>(route.getPoints()), 17.2);
+					route.setRenderer(renderer);
 					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 					geometryWay.baseOrder = baseOrder;
@@ -320,12 +320,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					cachedRenderer = renderer;
-					cachedPoints = new ArrayList<>(route.points);
+					cachedPoints = new ArrayList<>(route.getPoints());
 					renderer.drawGeometry(canvas, tileBox, correctedQuadRect, planRouteAttrs.paint.getColor(),
 							planRouteAttrs.paint.getStrokeWidth(), getDashPattern(planRouteAttrs.paint));
 				}
 			} else {
-				new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2).
+				new Renderable.StandardTrack(new ArrayList<>(route.getPoints()), 17.2).
 						drawSegment(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 			}
 		} else {
@@ -349,10 +349,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean shouldDrawPoints() {
 		boolean shouldDraw = true;
-		if (cachedPoints != null && cachedPoints.size() == route.points.size()) {
+		if (cachedPoints != null && cachedPoints.size() == route.getPoints().size()) {
 			shouldDraw = false;
 			for (int i = 0; i < cachedPoints.size(); i++) {
-				if (!route.points.get(i).equals(cachedPoints.get(i))) {
+				if (!route.getPoints().get(i).equals(cachedPoints.get(i))) {
 					shouldDraw = true;
 					break;
 				}

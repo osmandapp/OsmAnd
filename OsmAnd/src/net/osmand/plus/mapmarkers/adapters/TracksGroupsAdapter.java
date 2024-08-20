@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.R;
 
 import java.util.Iterator;
@@ -34,8 +34,8 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 			GpxDataItem gpx = getItem(position);
 			MapMarkersGroupViewHolder markersGroupViewHolder = (MapMarkersGroupViewHolder) holder;
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
-			markersGroupViewHolder.name.setText(gpx.getFile().getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " "));
-			GPXTrackAnalysis analysis = gpx.getAnalysis();
+			markersGroupViewHolder.name.setText(gpx.getFile().name().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " "));
+			GpxTrackAnalysis analysis = gpx.getAnalysis();
 			markersGroupViewHolder.numberCount.setText(analysis != null ? String.valueOf(analysis.getWptPoints()) : "");
 			String description = getDescription(gpx);
 			markersGroupViewHolder.description.setVisibility(description == null ? View.GONE : View.VISIBLE);
@@ -50,7 +50,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 
 	@Nullable
 	private String getDescription(GpxDataItem item) {
-		GPXTrackAnalysis analysis = item.getAnalysis();
+		GpxTrackAnalysis analysis = item.getAnalysis();
 		Set<String> categories = analysis != null ? analysis.getWptCategoryNamesSet() : null;
 		if (categories != null && !categories.isEmpty() && !(categories.size() == 1 && categories.contains(""))) {
 			StringBuilder sb = new StringBuilder();

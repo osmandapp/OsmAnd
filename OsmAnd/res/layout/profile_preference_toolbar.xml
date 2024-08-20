@@ -1,15 +1,15 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/toolbar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/toolbar_height"
-	osmand:contentInsetLeft="0dp"
-	osmand:contentInsetStart="0dp"
-	osmand:contentInsetRight="0dp"
-	osmand:contentInsetEnd="0dp"
-	osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+	app:contentInsetLeft="0dp"
+	app:contentInsetStart="0dp"
+	app:contentInsetRight="0dp"
+	app:contentInsetEnd="0dp"
+	app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 			android:layout_width="@dimen/toolbar_height"
 			android:layout_height="@dimen/toolbar_height"
 			android:contentDescription="@string/access_shared_string_navigate_up"
-			osmand:srcCompat="@drawable/ic_arrow_back"
+			app:srcCompat="@drawable/ic_arrow_back"
 			android:tint="?attr/default_icon_color" />
 
 		<LinearLayout
@@ -50,7 +50,7 @@
 				android:maxLines="2"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/dialog_header_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="@string/routing_settings_2" />
 
 			<TextView

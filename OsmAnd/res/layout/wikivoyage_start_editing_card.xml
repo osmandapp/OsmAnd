@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/wikivoyage_explore_card_image_height"
 				android:contentDescription="@string/welcome_to_open_beta"
-				osmand:srcCompat="@drawable/img_help_wikivoyage_contribute" />
+				app:srcCompat="@drawable/img_help_wikivoyage_contribute" />
 
 		</LinearLayout>
 
@@ -78,7 +78,7 @@
 			android:background="?attr/selectableItemBackground"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:text="@string/start_editing" />
 
 	</LinearLayout>

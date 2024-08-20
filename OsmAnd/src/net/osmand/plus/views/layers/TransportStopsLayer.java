@@ -91,8 +91,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		AndroidUtils.getDisplay(getContext()).getMetrics(dm);

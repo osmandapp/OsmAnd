@@ -159,12 +159,6 @@ tasks.register('collectFonts', Copy) {
 	include "*.ttf"
 }
 
-tasks.register('collectUiFonts', Copy) {
-	from "../../resources/fonts"
-	into "assets/ui-fonts"
-	include "*.ttf"
-}
-
 tasks.register('collectHelpContentsStyle', Copy) {
 	from("../../help/website/help/") {
 		include "style.css"
@@ -245,7 +239,6 @@ tasks.register('copy3DModels', Copy) {
 tasks.register('collectExternalResources') {
 	dependsOn collectVoiceAssets,
 			collectFonts,
-			collectUiFonts,
 			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,
@@ -320,6 +313,8 @@ dependencies {
 	implementation project(':OsmAnd-api')
 
 	implementation project(':OsmAnd-shared')
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 	implementation("androidx.sqlite:sqlite-framework:2.3.1")
 
 	implementation 'androidx.multidex:multidex:2.0.1'

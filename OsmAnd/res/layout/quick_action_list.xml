@@ -68,7 +68,7 @@
                     android:text="@string/shared_string_select_all"
                     android:textColor="?attr/active_color_basic"
                     android:textSize="@dimen/default_desc_text_size"
-                    app:typeface="@string/font_roboto_medium" />
+                    app:typefaceWeight="medium" />
 
             </FrameLayout>
 
@@ -98,7 +98,7 @@
                         android:textSize="@dimen/default_desc_text_size"
                         app:drawableLeftCompat="@drawable/ic_action_delete_dark"
                         app:drawableTint="?attr/active_color_basic"
-                        app:typeface="@string/font_roboto_medium" />
+                        app:typefaceWeight="medium" />
 
                 </FrameLayout>
 

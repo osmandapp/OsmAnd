@@ -4506,7 +4506,7 @@
     <string name="rendering_attr_showFunicularRoutes_name">纜車路線</string>
     <string name="rendering_attr_showBusRoutes_name">公車路線</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">無軌電車路線</string>
-    <string name="rendering_attr_showShareTaxiRoutes_name">快速公車路線</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">穿梭公車路線</string>
     <string name="map_markers_bar">地圖標記欄</string>
     <string name="shared_string_visible_widgets">可見的小工具</string>
     <string name="top_widgets_panel">頂部面板</string>
@@ -5846,4 +5846,12 @@
     <string name="help_article_map_tracks_name">軌跡</string>
     <string name="route_roundabout_exit">自第 %1$d 個出口離開</string>
     <string name="help_article_map_routes_name">路線</string>
+    <string name="add_widget_above">在上方新增小工具</string>
+    <string name="add_widget_to_the_right">在右方新增小工具</string>
+    <string name="add_widget_to_the_left">在左方新增小工具</string>
+    <string name="height_cache">高度快取</string>
+    <string name="add_widget_below">在下方新增小工具</string>
+    <string name="battery_saving_mode">省電模式</string>
+    <string name="delete_widget_description">這個小工具將被刪除。您稍後可以在組態畫面中將其還原。</string>
+    <string name="delete_widget">刪除小工具？</string>
 </resources>

@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.ALWAYS;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
 import static net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget.LOW_SPEED_THRESHOLD_MPS;
@@ -12,7 +13,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -48,6 +48,7 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -393,7 +394,7 @@ public class SpeedometerWidget {
 		textPaint.setAntiAlias(true);
 		textPaint.setColor(app.getColor(R.color.widgettext_day));
 		textPaint.setTextSize(textSize * density);
-		textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+		textPaint.setTypeface(FontCache.getMediumFont());
 
 		Rect textBounds = new Rect();
 		textPaint.getTextBounds(cachedSpeedLimitText, 0, cachedSpeedLimitText.length(), textBounds);
@@ -412,12 +413,12 @@ public class SpeedometerWidget {
 	private void drawCurrentSpeed(Canvas canvas, int textSize, Rect speedArea, float density, boolean speedExceed) {
 		TextPaint textPaint = new TextPaint();
 		textPaint.setAntiAlias(true);
-		textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+		textPaint.setTypeface(FontCache.getMediumFont());
 
 		OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 		float unitTextSize = SPEEDOMETER_UNIT_TEXT_SIZE * density;
 		textPaint.setTextSize(unitTextSize);
-		textPaint.setTypeface(Typeface.DEFAULT);
+		textPaint.setTypeface(DEFAULT);
 		Rect speedUnitRect = new Rect();
 		String speedUnitText = formattedSpeed.unit.toUpperCase();
 		textPaint.getTextBounds(speedUnitText, 0, speedUnitText.length(), speedUnitRect);

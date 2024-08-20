@@ -5753,7 +5753,7 @@
     <string name="user_palette">Paleta del usuario</string>
     <string name="contact_support_retry">Inténtalo de nuevo o ponte en contacto con el soporte</string>
     <string name="backup_error_failed_to_transfer_file">La transferencia de el/los archivo(s) a la nube falló.</string>
-    <string name="missing_maps_ignore">Utilizar mapas descargados</string>
+    <string name="missing_maps_ignore">Usar mapas ya descargados</string>
     <string name="map_settings_weather_wind_animation">Animación del viento</string>
     <string name="tomorrow">Mañana</string>
     <string name="daynight_mode_sensor_summary">Utiliza el sensor de iluminación ambiental del dispositivo para alternar entre temas claros y oscuros según los niveles de luz ambiental.</string>
@@ -5773,7 +5773,7 @@
     <string name="data_source">Fuente de datos</string>
     <string name="weather_data_sources_prompt">OsmAnd proporciona datos meteorológicos de dos fuentes:</string>
     <string name="shared_string_modify">Modificar</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Navega con ellos si estás familiarizado con la zona.</string>
+    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes usarlos si conoces la zona.</string>
     <string name="quick_action_map_overlay">Superposición</string>
     <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
     <string name="app_profile">Perfil de la aplicación</string>
@@ -5857,4 +5857,12 @@
     <string name="route_roundabout_exit">Toma la salida %1$d</string>
     <string name="help_article_map_tracks_name">Pistas</string>
     <string name="help_article_map_routes_name">Rutas</string>
+    <string name="add_widget_below">Añadir widget a continuación</string>
+    <string name="add_widget_above">Añadir widget arriba</string>
+    <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
+    <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
+    <string name="delete_widget_description">Este widget se eliminará. Puedes restaurarlo más tarde en la pantalla Configurar.</string>
+    <string name="delete_widget">¿Eliminar el widget?</string>
+    <string name="height_cache">Caché de la altitud</string>
+    <string name="battery_saving_mode">Modo de ahorro de batería</string>
 </resources>

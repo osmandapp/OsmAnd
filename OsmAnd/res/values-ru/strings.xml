@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="height_cache">Высота</string>
     <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
@@ -5860,4 +5861,11 @@
     <string name="help_article_map_tracks_name">Треки</string>
     <string name="help_article_map_routes_name">Маршруты</string>
     <string name="route_roundabout_exit">Сверните на %1$d съезде</string>
+    <string name="add_widget_above">Добавить виджет выше</string>
+    <string name="add_widget_to_the_right">Добавить виджет справа</string>
+    <string name="add_widget_to_the_left">Добавить виджет слева</string>
+    <string name="add_widget_below">Добавить виджет ниже</string>
+    <string name="delete_widget">Удалить виджет?</string>
+    <string name="battery_saving_mode">Режим экономии батареи</string>
+    <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
 </resources>

@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -51,7 +51,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 	private final Handler handler = new Handler();
 	private Runnable updatingTimeTrackSaved;
 
-	private GPXFile getGPXFile() {
+	private GpxFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
 	}
 

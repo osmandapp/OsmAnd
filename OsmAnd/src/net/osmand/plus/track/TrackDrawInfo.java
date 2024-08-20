@@ -1,24 +1,25 @@
 package net.osmand.plus.track;
 
-import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.gpx.GpxParameter.WIDTH;
-import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
+import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.Gpx3DVisualizationType.FIXED_HEIGHT;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
+import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 
 import android.os.Bundle;
 
@@ -27,19 +28,20 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
@@ -130,15 +132,15 @@ public class TrackDrawInfo {
 		additionalExaggeration = settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
 		elevationMeters = settings.CURRENT_TRACK_ELEVATION_METERS.get();
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
-		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
+		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 	}
 
 	public void initDefaultTrackParams(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
 		color = GpxAppearanceAdapter.getTrackColor(app);
 		width = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
-		coloringType = ColoringType.requireValueOf(TRACK);
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+		coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
+		routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 	}
 
 	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
@@ -147,15 +149,15 @@ public class TrackDrawInfo {
 		width = helper.getParameter(item, WIDTH);
 		color = helper.getParameter(item, COLOR);
 		String type = helper.getParameter(item, COLORING_TYPE);
-		coloringType = ColoringType.requireValueOf(TRACK, type);
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
+		coloringType = ColoringType.Companion.requireValueOf(TRACK, type);
+		routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(type);
 		splitType = helper.requireParameter(item, SPLIT_TYPE);
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
 		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
-		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
@@ -335,7 +337,7 @@ public class TrackDrawInfo {
 		return trackVisualizationType == FIXED_HEIGHT;
 	}
 
-	public void resetParams(@NonNull OsmandApplication app, @Nullable GPXFile gpxFile) {
+	public void resetParams(@NonNull OsmandApplication app, @Nullable GpxFile gpxFile) {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (isCurrentRecording()) {
@@ -353,9 +355,10 @@ public class TrackDrawInfo {
 			width = getDefaultWidth(settings, renderer);
 			showArrows = false;
 			showStartFinish = true;
-			coloringType = ColoringType.requireValueOf(TRACK);
+			coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
 			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
-			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
+			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(null);
 			trackVisualizationType = Gpx3DVisualizationType.NONE;
 			trackWallColorType = Gpx3DWallColorType.NONE;
 			trackLinePositionType = Gpx3DLinePositionType.TOP;
@@ -366,11 +369,11 @@ public class TrackDrawInfo {
 			showStartFinish = gpxFile.isShowStartFinish();
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
-			coloringType = ColoringType.requireValueOf(TRACK, gpxFile.getColoringType());
+			coloringType = ColoringType.Companion.requireValueOf(TRACK, gpxFile.getColoringType());
 			gradientColorName = !Algorithms.isEmpty(gpxFile.getGradientColorPalette()) ? gpxFile.getGradientColorPalette() : PaletteGradientColor.DEFAULT_NAME ;
-			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
+			routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(gpxFile.getColoringType());
 			trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
-			trackWallColorType = Gpx3DWallColorType.get3DWallColorType(gpxFile.get3DWallColoringType());
+			trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(gpxFile.get3DWallColoringType());
 			trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(gpxFile.get3DLinePositionType());
 		}
 	}
@@ -378,8 +381,8 @@ public class TrackDrawInfo {
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		coloringType = ColoringType.requireValueOf(TRACK, bundle.getString(TRACK_COLORING_TYPE));
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
+		coloringType = ColoringType.Companion.requireValueOf(TRACK, bundle.getString(TRACK_COLORING_TYPE));
+		routeInfoAttribute = ColoringType.Companion.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.containsKey(TRACK_COLOR) ? bundle.getInt(TRACK_COLOR) : null;
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);
 		splitInterval = bundle.getDouble(TRACK_SPLIT_INTERVAL);
