@@ -668,7 +668,7 @@
     <string name="update_poi_is_not_available_for_zoom">Zumiranje ti omogućuje ažuriranje TOI</string>
     <string name="update_poi_no_offline_poi_index">Nema TOI bez interneta za ovo područje</string>
     <string name="update_poi_error_loading">Učitavanje podataka sa servera je neuspešan.</string>
-    <string name="update_poi_error_local">Nisam uspeo da osvežim lokalnu listu TOI.</string>
+    <string name="update_poi_error_local">Neuspešno ažuriranje lokalne liste za TOI.</string>
     <string name="update_poi_success">Podaci TOI su osveženi ({0} je učitano)</string>
     <string name="hello">OsmAnd navigacija</string>
     <string name="show_transport_over_map">Prikazati stanice transporta</string>
@@ -764,7 +764,7 @@
     <string name="downloading_build">Preuzima se verzija…</string>
     <string name="build_installed">Izdanje {0} instalirano({1}).</string>
     <string name="osmand_net_previously_installed">Prethodno izdanje OsmAnda je već instalirano. Svi postojeći podaci će biti podržani i u novom izdanju. Potrebno je ipak da izvezete favorite iz starijeg programa i uvezete naknadno u novo izdanje.</string>
-    <string name="specified_dir_doesnt_exist">Nisam uspeo da nađem zadati folder.</string>
+    <string name="specified_dir_doesnt_exist">Neuspešno pronalaženje navedene mape.</string>
     <string name="osmand_routing_experimental">OsmAndovo navođenje bez interneta je opitna mogućnost i ne radi za udaljenosti preko 20 km. 
 \n 
 \nNavođenje je privremeno prebačeno na mrežne usluge Klaudmade.</string>
@@ -2159,7 +2159,7 @@
     <string name="make_round_trip_descr">Dodaj kopiju tačke početka kao odredište.</string>
     <string name="context_menu_item_modify_note">izmeni OSM belešku</string>
     <string name="osn_modify_dialog_title">Izmeni belešku</string>
-    <string name="osn_modify_dialog_error">Nisam uspeo da izmenim belešku.</string>
+    <string name="osn_modify_dialog_error">Neuspešna izmena beleške.</string>
     <string name="plan_route_no_markers_toast">Moraš dodati najmanje jedan marker za korišćenje ove mogućnosti.</string>
     <string name="round_trip">Kružno putovanje</string>
     <string name="route_is_calculated">Ruta je sračunata</string>
@@ -2246,7 +2246,7 @@
     <string name="storage_directory_multiuser">Skladište za više korisnika</string>
     <string name="storage_directory_external">Spoljnje skladište</string>
     <string name="copying_osmand_file_failed">Premeštanje fajlova nije uspelo</string>
-    <string name="specified_directiory_not_writeable">Nisam uspeo obrazovati mape u određenoj fascikli</string>
+    <string name="specified_directiory_not_writeable">Neuspešno kreiranje mape u navedenom direktorijumu</string>
     <string name="application_dir_change_warning3">Premestaš OsmAnd fajlove podataka na novo odredište?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Kućne brojeve</string>
     <string name="shared_string_logoff">Odjavi se</string>
@@ -2567,9 +2567,9 @@
     <string name="custom_osmand_plugin">Proizvoljni dodatak OsmAnd-a</string>
     <string name="shared_string_items">Stavke</string>
     <string name="changes_applied_to_profile">Izmene primenjene na ’%1$s’ profil.</string>
-    <string name="settings_item_read_error">Nisam uspeo da čitam iz „%1$s”.</string>
-    <string name="settings_item_write_error">Nisam uspeo da upišem %1$s.</string>
-    <string name="settings_item_import_error">Nisam uspeo da uvezem iz „%1$s”.</string>
+    <string name="settings_item_read_error">Neuspešno čitanje iz „%1$s”.</string>
+    <string name="settings_item_write_error">Neuspešno upisivanje %1$s.</string>
+    <string name="settings_item_import_error">Neuspešan uvoz iz „%1$s”.</string>
     <string name="select_track_file">Izaberi fajl trase</string>
     <string name="shared_string_languages">Glasovi</string>
     <string name="shared_string_language">Glas</string>
@@ -2790,7 +2790,7 @@
     <string name="routing_attr_driving_style_name">Način vožnje</string>
     <string name="shared_string_gpx_tracks">Trase</string>
     <string name="shared_string_move">Pomeri</string>
-    <string name="file_can_not_be_moved">Nisam uspeo da premestim fajl.</string>
+    <string name="file_can_not_be_moved">Neuspešno premeštanje fajla.</string>
     <string name="select_gpx_folder">Odaberi folder sa GPX fajlom</string>
     <string name="shared_string_color">Kolor</string>
     <string name="shared_string_end_time">Vreme dolaska</string>
@@ -2832,7 +2832,7 @@
     <string name="quick_action_switch_profile_descr">Dugme menja između izabranih profila.</string>
     <string name="shared_string_add_profile">Dodaj profil</string>
     <string name="change_application_profile">Promeni profil programa</string>
-    <string name="profiles_for_action_not_found">Nisam uspeo da pronađem takav profil.</string>
+    <string name="profiles_for_action_not_found">Neuspešno pronalaženje takvog profila.</string>
     <string name="index_item_world_basemap_detailed">Osnovna mapa sveta (detaljna)</string>
     <string name="unsupported_type_error">Nepodržana vrsta</string>
     <string name="width_limit_description">Unesi širinu vozila, neka ograničenja puta mogu biti primenjena za široka vozila.</string>
@@ -3246,7 +3246,7 @@
     <string name="increase_search_radius_to">Povećaj radijus pretrage na %1$s</string>
     <string name="search_no_results_feedback">Nema nalaza u pretrazi? 
 \nJavite nam</string>
-    <string name="poi_cannot_be_found">Nisam uspeo da nađem čvor ili put.</string>
+    <string name="poi_cannot_be_found">Neuspešno pronalaženje čvora ili puta.</string>
     <string name="thank_you_for_feedback">Hvala za povratnom odgovoru</string>
     <string name="ask_for_location_permission">Odobri OsmAnd-u pristup lokaciji radi nastavka.</string>
     <string name="more_transport_on_stop_hint">Više prevoza dostupno je na ovom stajalištu.</string>
@@ -3690,7 +3690,7 @@
     <string name="file_import_error">%1$s greška uvoza: %2$s</string>
     <string name="profile_import_descr">Da li želiš dodati profil tako otvaranjem njegovog fajla u OsmAnd-u.</string>
     <string name="profile_import">Uvoz profila</string>
-    <string name="export_profile_failed">Nisam uspeo da izvezem profil.</string>
+    <string name="export_profile_failed">Neuspešan izvoz profila.</string>
     <string name="overwrite_profile_q">’%1$s’ već postoji. Da li snimiti preko?</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="export_profile">Izvezi profil</string>
@@ -3835,7 +3835,7 @@
     <string name="shared_string_search_history">Pretraga istorije</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorni čamac</string>
-    <string name="cannot_upload_image">Nisam uspeo da otpremim sliku, pokušajte ponovo kasnije</string>
+    <string name="cannot_upload_image">Neuspešno otpremanje slike, pokušaj ponovo kasnije</string>
     <string name="select_picture">Izaberi sliku</string>
     <string name="shared_string_resources">Resursi</string>
     <string name="approximate_file_size">Približna veličina fajla</string>
@@ -4008,12 +4008,12 @@
     <string name="specify_color_for_map_mode">Odaberi boju mape %1$s.</string>
     <string name="no_purchases">Nemaš ni jednu kupovinu</string>
     <string name="new_device_account">Novi uređaj / novi profil</string>
-    <string name="contact_support_description">Ako imate ikakvih pitanja, obratite nam se na %1$s.</string>
+    <string name="contact_support_description">Ako imaš ikakvih pitanja, obrati nam se na %1$s.</string>
     <string name="empty_purchases_description">Ako se kupovina ne pojavi ovde, klikni na „%1$s” ili se obrati našoj podršci.</string>
-    <string name="contact_support">Obratite se podršci</string>
+    <string name="contact_support">Obrati se podršci</string>
     <string name="troubleshooting">Rešavanje problema</string>
     <string name="troubleshooting_description">Prati ovaj link ako imaš ikakvih problema sa kupovinom.</string>
-    <string name="osmand_live">OsmAnd uživo</string>
+    <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Godišnja pretplata</string>
     <string name="monthly_subscription">Mesečna pretplata</string>
     <string name="three_months_subscription">Tromesečna članarina</string>
@@ -4732,7 +4732,7 @@
     <string name="delete_folder">Izbriši folder</string>
     <string name="external_device_forget_sensor_description">Prijemnik će biti uklonjen sa spiska. Možeš da upariš ovaj senzor kad god poželiš.</string>
     <string name="learn_more_about_sensors_link">Saznaj više o prijemnicima.</string>
-    <string name="backup_error_failed_to_fetch_remote_items">Nisam uspeo da dobavim listu fajlova sa servera.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Neuspešno dobavljanje liste fajlova sa servera.</string>
     <string name="weather_wind_meters_per_second">Metri/sekunde</string>
     <string name="sound_beep_complex">Bip: složen</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Nagrizajuće materije</string>
@@ -4769,8 +4769,8 @@
     <string name="next_live_update_time">Sledeće ažuriranje u %1$s.</string>
     <string name="shared_string_inches">inči</string>
     <string name="y_axis">Y osa</string>
-    <string name="ant_missing_dependency_descr">Nisam uspeo da pronađem odgovarajuću službu „%1$s“ 
-\nTreba da ugradiš ili osvežiš ANT + službu priključaka 
+    <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe „%1$s“
+\nTreba da ugradiš ili osvežiš ANT + službu priključaka
 \nDa li želiš da pokreneš skladište igara za to?</string>
     <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>

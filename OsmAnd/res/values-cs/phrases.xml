@@ -4656,7 +4656,7 @@
     <string name="poi_healthcare_speciality_travel_clinic">Cestovní klinika</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmakologie</string>
     <string name="poi_healthcare_speciality_cosmetic">Kosmetický</string>
-    <string name="poi_healthcare_speciality_sleep">Spát</string>
+    <string name="poi_healthcare_speciality_sleep">Spánek</string>
     <string name="poi_healthcare_speciality_chronic">Chronický</string>
     <string name="poi_healthcare_speciality_audiology">Audiologie</string>
     <string name="poi_healthcare_speciality_autism">Autismus</string>
@@ -4693,7 +4693,7 @@
     <string name="poi_healthcare_speciality_humanistic">Humanistická psychologie</string>
     <string name="poi_healthcare_speciality_palliative">Paliativní</string>
     <string name="poi_healthcare_speciality_diabetology">Diabetologie</string>
-    <string name="poi_healthcare_speciality_venereology">Venereologie</string>
+    <string name="poi_healthcare_speciality_venereology">Venerologie</string>
     <string name="poi_cycle_network">Cyklistická síť</string>
     <string name="poi_state_inuse">Stav: používá se</string>
     <string name="poi_state_recommended">Stav: doporučeno</string>
@@ -4735,4 +4735,10 @@
     <string name="poi_healthcare_speciality_laboratory">Zdravotní obor: laboratoř</string>
     <string name="poi_emergency_bay">Nouzový záliv</string>
     <string name="poi_dressing_room">Šatna</string>
+    <string name="poi_padus_category_designation">Kategorie: označení</string>
+    <string name="poi_border_zone">Hraniční zóna</string>
+    <string name="poi_hang_gliding">Závěsné létání</string>
+    <string name="poi_padus_category_proclamation">Kategorie: prohlášení</string>
+    <string name="poi_padus_category_fee">Kategorie: poplatek</string>
+    <string name="poi_padus_area">Chráněná oblast PAD-US</string>
 </resources>
