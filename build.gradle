@@ -1,0 +1,51 @@
+buildscript {
+    ext.kotlin_version = '2.0.0'
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+        classpath 'com.google.gms:google-services:4.4.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
+        if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
+            classpath 'com.huawei.agconnect:agcp:1.9.1.303'
+        }
+    }
+}
+
+plugins {
+	id "de.undercouch.download" version "4.1.1"
+}
+
+
+allprojects {
+    group "net.osmand"
+    // Configure all test tasks
+    tasks.withType(Test).configureEach {
+        // Set a system property for all unit tests
+        systemProperty 'isAndroidBuild', 'true'
+    }
+    repositories {
+        ivy {
+            name = "OsmAndBinariesIvy"
+            url = "https://creator.osmand.net"
+            patternLayout {
+                artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+            }
+        }
+        google()
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+}
