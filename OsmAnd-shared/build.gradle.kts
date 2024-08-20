@@ -86,24 +86,3 @@ android {
 		minSdk = 24
 	}
 }
-
-publishing {
-	repositories {
-		ivy {
-			url = uri(System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./")
-		}
-	}
-	publications {
-		create<IvyPublication>("ivyOsmAndSharedAndroid") {
-			organisation = "net.osmand.shared"
-			module = "OsmAnd-shared-android"
-			revision = "master-snapshot"
-			artifact(file(System.getenv("MAVEN_LOCAL_ROOT") + "/net/osmand/shared/OsmAnd-shared/master-snapshot/OsmAnd-shared-master-snapshot.jar")) {
-				type = "jar"
-			}
-			artifact(file(System.getenv("MAVEN_LOCAL_ROOT") + "/net/osmand/shared/OsmAnd-shared-android/master-snapshot/OsmAnd-shared-android-master-snapshot.aar")) {
-				type = "aar"
-			}
-		}
-	}
-}
