@@ -853,18 +853,28 @@ public class ChartUtils {
 	                                             @NonNull GPXDataSetType firstType,
 	                                             @Nullable GPXDataSetType secondType,
 	                                             boolean calcWithoutGaps) {
+		return getDataSets(chart, app, analysis, firstType, secondType, DISTANCE, calcWithoutGaps);
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GpxTrackAnalysis analysis,
+	                                             @NonNull GPXDataSetType firstType,
+	                                             @Nullable GPXDataSetType secondType,
+	                                             GPXDataSetAxisType gpxDataSetAxisType,
+	                                             boolean calcWithoutGaps) {
 		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
 		}
 		List<ILineDataSet> result = new ArrayList<>();
 		if (secondType == null) {
-			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, calcWithoutGaps, false);
+			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, gpxDataSetAxisType, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
 			}
 		} else {
-			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, calcWithoutGaps, false);
-			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, calcWithoutGaps, true);
+			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
+			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -897,29 +907,30 @@ public class ChartUtils {
 	                                            @NonNull GpxTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
 	                                            @Nullable GPXDataSetType otherGraphType,
+	                                            GPXDataSetAxisType gpxDataSetAxisType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
 			case ALTITUDE:
 			case ALTITUDE_EXTRM: {
 				if (analysis.hasElevationData()) {
-					return createGPXElevationDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXElevationDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 			case SLOPE: {
 				if (analysis.hasElevationData()) {
-					return createGPXSlopeDataSet(app, chart, analysis, graphType, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
+					return createGPXSlopeDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, null, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 			case SPEED: {
 				if (analysis.hasSpeedData()) {
 					boolean setYAxisMinimum = otherGraphType != GPXDataSetType.ZOOM_ANIMATED
 							&& otherGraphType != GPXDataSetType.ZOOM_NON_ANIMATED;
-					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
+					return createGPXSpeedDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
 				}
 			}
 			default: {
-				return PluginsHelper.getOrderedLineDataSet(chart, analysis, graphType, DISTANCE, calcWithoutGaps, useRightAxis);
+				return PluginsHelper.getOrderedLineDataSet(chart, analysis, graphType, gpxDataSetAxisType, calcWithoutGaps, useRightAxis);
 			}
 		}
 	}

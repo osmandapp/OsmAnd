@@ -38,6 +38,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartModeBottomSheet;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -47,6 +48,7 @@ import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.charts.GraphModeListener;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -59,6 +61,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -725,8 +728,8 @@ public class TrackDetailsMenu {
 
 		yAxisIcon.setImageDrawable(getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(getGpxDataSetsName(app, gpxItem.chartTypes));
-		if (availableTypes.size() > 0) {
-			yAxis.setOnClickListener(v -> AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager()));
+		if (!availableTypes.isEmpty()) {
+			yAxis.setOnClickListener(v -> ChartModeBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), getGraphModeListener(analysis, gpxItem), true));
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
 			yAxis.setOnClickListener(null);
@@ -749,10 +752,7 @@ public class TrackDetailsMenu {
 			xAxisTitle.setText(app.getString(R.string.distance));
 		}
 		if (analysis.isTimeSpecified()) {
-			xAxis.setOnClickListener(v -> {
-				AnalyzeBottomSheet bottomSheet = new AnalyzeBottomSheet();
-				bottomSheet.show(mapActivity.getSupportFragmentManager(), AnalyzeBottomSheet.TAG);
-			});
+			xAxis.setOnClickListener(v -> ChartModeBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), getGraphModeListener(analysis, gpxItem), false));
 			xAxisArrow.setVisibility(View.VISIBLE);
 		} else {
 			xAxis.setOnClickListener(null);
@@ -763,20 +763,34 @@ public class TrackDetailsMenu {
 		refreshChart(chart, forceFitTrackOnMap, true);
 	}
 
-	public List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
-		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
-
-		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIME_OF_DAY) {
-				if (analysis.isTimeSpecified()) {
-					availableTypes.add(type);
-				}
-			} else {
-				availableTypes.add(type);
+	private GraphModeListener getGraphModeListener(@NonNull GpxTrackAnalysis analysis, @NonNull GpxDisplayItem item){
+		return new GraphModeListener() {
+			@Override
+			public void onGraphModeChanged(@NonNull GPXDataSetAxisType gpxDataSetAxisType, @NonNull List<GPXDataSetType> gpxDataSetTypes) {
+				fitTrackOnMapForbidden = true;
+				item.chartAxisType = gpxDataSetAxisType;
+				item.chartHighlightPos = -1;
+				item.chartMatrix = null;
+				item.chartTypes = gpxDataSetTypes.toArray(new GPXDataSetType[0]);
+				update();
+				fitTrackOnMapForbidden = false;
 			}
-		}
 
-		return availableTypes;
+			@Override
+			public GpxTrackAnalysis getAnalysis() {
+				return analysis;
+			}
+
+			@Override
+			public GPXDataSetAxisType getSelectedAxisType() {
+				return item.chartAxisType;
+			}
+
+			@Override
+			public List<GPXDataSetType> getSelectedDataSetTypes() {
+				return Arrays.asList(item.chartTypes);
+			}
+		};
 	}
 
 	@NonNull
@@ -804,34 +818,6 @@ public class TrackDetailsMenu {
 		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 
 		return availableTypes;
-	}
-
-	public AxisSelectedListener getAxisSelectedListener() {
-		return new AxisSelectedListener() {
-			@Override
-			public void onXAxisSelected(GPXDataSetAxisType type) {
-				fitTrackOnMapForbidden = true;
-				GpxDisplayItem item = getGpxItem();
-				if (item != null) {
-					item.chartAxisType = type;
-					item.chartHighlightPos = -1;
-					item.chartMatrix = null;
-					update();
-				}
-				fitTrackOnMapForbidden = false;
-			}
-
-			@Override
-			public void onYAxisSelected(GPXDataSetType[] type) {
-				fitTrackOnMapForbidden = true;
-				GpxDisplayItem item = getGpxItem();
-				if (item != null) {
-					item.chartTypes = type;
-					update();
-				}
-				fitTrackOnMapForbidden = false;
-			}
-		};
 	}
 
 	private void updateChart(LineChart chart) {

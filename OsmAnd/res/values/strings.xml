@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="graph_axis">Graph axis</string>
+	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
 	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
 	<string name="delete_widget">Delete widget?</string>
 	<string name="add_widget_below">Add widget below</string>
