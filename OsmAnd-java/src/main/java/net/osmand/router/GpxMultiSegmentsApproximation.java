@@ -44,7 +44,7 @@ public class GpxMultiSegmentsApproximation {
 	private TLongHashSet visited = new TLongHashSet();
 
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	private static boolean DEBUG = true;
+	private static boolean DEBUG = false;
 	
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
