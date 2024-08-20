@@ -62,18 +62,18 @@ class SearchPreferenceButtonHelper {
 					@Override
 					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
-						// FK-FIXME: use for "speed cameras" then only one result for Moped (Moped > Navigation Settings > {Voice prompts, Screen alerts} > Speed cameras) is displayed instead of many results for car, truck, ...
 						src
-								.map(preferenceWithHost -> preferenceWithHost.preference)
-								.ifPresent(preference -> {
+								.ifPresent(preferenceWithHost -> {
 									// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
-									if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-										final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
+									if (preferenceWithHost.preference.getParent() != null && APP_PROFILES.equals(preferenceWithHost.preference.getParent().getKey())) {
+										final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preferenceWithHost.preference.getKey(), null);
 										final Bundle args = new Bundle();
 										if (appMode != null) {
 											args.putString(APP_MODE_KEY, appMode.getStringKey());
 										}
 										fragment.setArguments(args);
+									} else if (preferenceWithHost.host instanceof final BaseSettingsFragment baseSettingsFragment) {
+										fragment.setArguments(baseSettingsFragment.buildArguments());
 									}
 								});
 						return fragment;
