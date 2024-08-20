@@ -190,4 +190,31 @@ object KAlgorithms {
 		}
 	}
 
+	fun getFileNameWithoutExtension(f: KFile): String? {
+		return getFileNameWithoutExtension(f.name())
+	}
+
+	fun getFileNameWithoutExtension(name: String?): String? {
+		if (name != null) {
+			val index = name.lastIndexOf('.')
+			if (index != -1) {
+				return name.substring(0, index)
+			}
+		}
+		return name
+	}
+
+	fun getFileNameWithoutExtensionAndRoadSuffix(fileName: String?): String? {
+		val name:String? = getFileNameWithoutExtension(fileName)
+		return if (name!!.endsWith(".road")) name.substring(0, name.lastIndexOf(".road")) else name
+	}
+
+	fun capitalizeFirstLetter(s: String?): String? {
+		return if (s != null && s.length > 0) {
+			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
+		} else {
+			s
+		}
+	}
+
 }

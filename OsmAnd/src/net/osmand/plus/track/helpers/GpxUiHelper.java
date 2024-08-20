@@ -233,18 +233,18 @@ public class GpxUiHelper {
 		return numberOfTracks;
 	}
 
-	@NonNull
-	public static String getGpxTitle(@Nullable String name) {
-		return name != null ? Algorithms.getFileNameWithoutExtension(name) : "";
-	}
-
-	@NonNull
-	public static String getGpxDirTitle(@Nullable String name) {
-		if (Algorithms.isEmpty(name)) {
-			return "";
-		}
-		return Algorithms.capitalizeFirstLetter(Algorithms.getFileNameWithoutExtension(name));
-	}
+//	@NonNull
+//	public static String getGpxTitle(@Nullable String name) {
+//		return name != null ? Algorithms.getFileNameWithoutExtension(name) : "";
+//	}
+//
+//	@NonNull
+//	public static String getGpxDirTitle(@Nullable String name) {
+//		if (Algorithms.isEmpty(name)) {
+//			return "";
+//		}
+//		return Algorithms.capitalizeFirstLetter(Algorithms.getFileNameWithoutExtension(name));
+//	}
 
 	public static void updateGpxInfoView(@NonNull OsmandApplication app,
 	                                     @NonNull View view,

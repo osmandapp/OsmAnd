@@ -11,4 +11,6 @@ expect object PlatformUtil {
 	fun getGpxDir(): KFile
 
 	fun getSQLiteAPI(): SQLiteAPI
+
+	fun getStringResource(stringId: String): String
 }

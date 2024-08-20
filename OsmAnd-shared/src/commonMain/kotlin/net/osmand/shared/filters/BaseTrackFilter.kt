@@ -1,12 +1,12 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
 
 abstract class BaseTrackFilter(
-	@Expose
-	@SerializedName("filterType") val trackFilterType: TrackFilterType,
+	@Serializable
+	@SerialName("filterType") val trackFilterType: TrackFilterType,
 	var filterChangedListener: FilterChangedListener?) {
 
 	abstract fun isEnabled(): Boolean
