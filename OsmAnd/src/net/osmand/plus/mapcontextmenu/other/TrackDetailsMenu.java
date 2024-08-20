@@ -763,7 +763,7 @@ public class TrackDetailsMenu {
 		refreshChart(chart, forceFitTrackOnMap, true);
 	}
 
-	private GraphModeListener getGraphModeListener(@NonNull GPXTrackAnalysis analysis, @NonNull GpxDisplayItem item){
+	private GraphModeListener getGraphModeListener(@NonNull GpxTrackAnalysis analysis, @NonNull GpxDisplayItem item){
 		return new GraphModeListener() {
 			@Override
 			public void onGraphModeChanged(@NonNull GPXDataSetAxisType gpxDataSetAxisType, @NonNull List<GPXDataSetType> gpxDataSetTypes) {
@@ -777,7 +777,7 @@ public class TrackDetailsMenu {
 			}
 
 			@Override
-			public GPXTrackAnalysis getAnalysis() {
+			public GpxTrackAnalysis getAnalysis() {
 				return analysis;
 			}
 

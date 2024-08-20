@@ -26,6 +26,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		container.removeAllViews();
 		itemViews.clear();
-		GPXTrackAnalysis analysis = listener.getAnalysis();
+		GpxTrackAnalysis analysis = listener.getAnalysis();
 		List<GPXDataSetType[]> defaultTypes = getAvailableDefaultYTypes(analysis);
 		for (GPXDataSetType[] types : defaultTypes) {
 			createYAxisItem(types);
@@ -246,7 +247,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		return item;
 	}
 
-	public List<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis) {
+	public List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
 		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
 			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIME_OF_DAY) {
@@ -261,7 +262,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableDefaultYTypes(@NonNull GPXTrackAnalysis analysis) {
+	public List<GPXDataSetType[]> getAvailableDefaultYTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasElevationData = analysis.hasElevationData();
 		boolean hasSpeedData = analysis.hasSpeedData();
@@ -276,7 +277,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GPXTrackAnalysis analysis) {
+	public List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		return availableTypes;

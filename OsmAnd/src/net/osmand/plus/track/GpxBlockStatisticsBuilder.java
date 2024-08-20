@@ -185,8 +185,8 @@ public class GpxBlockStatisticsBuilder {
 		items.clear();
 		if (analysis != null) {
 			if (showShortStat) {
-				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
-				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+				float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+				float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
 				prepareDataDistance(totalDistance);
 				prepareDataTimeSpan(timeSpan);
 

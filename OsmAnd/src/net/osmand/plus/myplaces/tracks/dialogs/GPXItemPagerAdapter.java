@@ -498,7 +498,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 
 			@Override
-			public GPXTrackAnalysis getAnalysis() {
+			public GpxTrackAnalysis getAnalysis() {
 				return analysis;
 			}
 

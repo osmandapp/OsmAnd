@@ -858,7 +858,7 @@ public class ChartUtils {
 
 	public static List<ILineDataSet> getDataSets(LineChart chart,
 	                                             OsmandApplication app,
-	                                             GPXTrackAnalysis analysis,
+	                                             GpxTrackAnalysis analysis,
 	                                             @NonNull GPXDataSetType firstType,
 	                                             @Nullable GPXDataSetType secondType,
 	                                             GPXDataSetAxisType gpxDataSetAxisType,
