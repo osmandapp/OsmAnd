@@ -5759,7 +5759,7 @@
     <string name="weather_data_sources_prompt">OsmAnd fornisce dati meteorologici da due fonti:</string>
     <string name="data_source">Fonte dati</string>
     <string name="weather_source_ecmwf_description">Centro europeo per le previsioni meteorologiche a medio termine (ECMWF)</string>
-    <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
+    <string name="weather_source_GFS_description">Sistema di previsione globale dei Centri nazionali per la previsione ambientale</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Modifica</string>
