@@ -499,28 +499,34 @@ public class PoiFiltersHelper {
 	}
 
 	public void restoreSelectedPoiFilters() {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
 		PoiUIFilter wiki = getTopWikiPoiFilter();
-		if (isPoiFilterSelected(wiki)) {
-			selectedPoiFilters.add(wiki);
-		} else {
-			selectedPoiFilters.remove(wiki);
+		if (wiki != null) {
+			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(this.selectedPoiFilters);
+			if (isPoiFilterSelected(wiki)) {
+				selectedPoiFilters.add(wiki);
+			} else {
+				selectedPoiFilters.remove(wiki);
+			}
+			this.selectedPoiFilters = selectedPoiFilters;
 		}
-		this.selectedPoiFilters = selectedPoiFilters;
 		useOverwrittenFilters = false;
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
-		selectedPoiFilters.add(filter);
-		PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
-		setSelectedPoiFilters(selectedPoiFilters);
+		if (filter != null) {
+			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
+			selectedPoiFilters.add(filter);
+			PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
+			setSelectedPoiFilters(selectedPoiFilters);
+		}
 	}
 
 	public void removeSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
-		selectedPoiFilters.remove(filter);
-		setSelectedPoiFilters(selectedPoiFilters);
+		if (filter != null) {
+			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
+			selectedPoiFilters.remove(filter);
+			setSelectedPoiFilters(selectedPoiFilters);
+		}
 	}
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
@@ -558,8 +564,9 @@ public class PoiFiltersHelper {
 
 	private void clearSelectedPoiFilters(boolean saveWiki) {
 		Set<PoiUIFilter> selectedPoiFilters = new ArraySet<>();
-		if (saveWiki && isPoiFilterSelected(getTopWikiPoiFilterId())) {
-			selectedPoiFilters.add(getTopWikiPoiFilter());
+		PoiUIFilter wiki = getTopWikiPoiFilter();
+		if (saveWiki && isPoiFilterSelected(wiki)) {
+			selectedPoiFilters.add(wiki);
 		}
 		setSelectedPoiFilters(selectedPoiFilters);
 	}
