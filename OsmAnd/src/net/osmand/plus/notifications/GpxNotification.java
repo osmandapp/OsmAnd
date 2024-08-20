@@ -40,6 +40,13 @@ public class GpxNotification extends OsmandNotification {
 	private boolean wasNoDataDismissed;
 	private boolean lastBuiltNoData;
 
+	private State state = State.IDLE;
+
+	private enum State {
+		RECORDING,
+		IDLE
+	}
+
 	public GpxNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);
 	}
@@ -60,28 +67,6 @@ public class GpxNotification extends OsmandNotification {
 			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
 		} else {
 			app.registerReceiver(saveTrackReceiver, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
-		}
-
-		BroadcastReceiver startGpxRecReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				// Add code to start the activity
-				/*
-				Intent activityIntent = new Intent(context, MapActivity.class);
-				activityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Required to start an activity from a non-activity context
-				context.startActivity(activityIntent);
-				*/
-				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-				if (plugin != null) {
-					plugin.startGPXMonitoring(null);
-					plugin.updateWidgets();
-				}
-			}
-		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION), Context.RECEIVER_EXPORTED);
-		} else {
-			app.registerReceiver(startGpxRecReceiver, new IntentFilter(OSMAND_START_GPX_SERVICE_ACTION));
 		}
 
 		BroadcastReceiver stopGpxRecReceiver = new BroadcastReceiver() {
@@ -179,10 +164,12 @@ public class GpxNotification extends OsmandNotification {
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 
+		State prevState = state;
 		Intent saveIntent = new Intent(OSMAND_SAVE_GPX_SERVICE_ACTION);
 		PendingIntent savePendingIntent = PendingIntent.getBroadcast(app, 0, saveIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 		if (isGpxRecording) {
+			state = State.RECORDING;
 			Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 			PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -196,8 +183,10 @@ public class GpxNotification extends OsmandNotification {
 						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 			}
 		} else {
-			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
-			PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
+			state = State.IDLE;
+			Intent contentIntent = getContentIntent();
+			contentIntent.putExtra(OSMAND_START_GPX_SERVICE_ACTION, true);
+			PendingIntent startPendingIntent = PendingIntent.getActivity(app, 1, contentIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_notification_rec_start,
@@ -209,7 +198,7 @@ public class GpxNotification extends OsmandNotification {
 						app.getString(R.string.shared_string_record), startPendingIntent);
 			}
 		}
-
+		stateChanged  = prevState != state;
 		return notificationBuilder;
 	}
 

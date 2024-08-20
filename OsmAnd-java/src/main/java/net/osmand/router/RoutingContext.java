@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -73,6 +74,7 @@ public class RoutingContext {
 	public boolean targetTransportStop;
 	public int dijkstraMode;
 	public boolean publicTransport;
+	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
 	
 	
 	public RouteCalculationProgress calculationProgress;
@@ -218,6 +220,7 @@ public class RoutingContext {
 		}
 		subregionTiles.clear();
 		indexedSubregions.clear();
+		mapIndexReaderFilter = new HashSet<>();
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
@@ -374,6 +377,11 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
+			BinaryMapIndexReader reader = r.getKey();
+			boolean isLiveUpdate = reader.getHHRoutingIndexes().size() == 0;
+			if (!isLiveUpdate && mapIndexReaderFilter.size() > 0 && !mapIndexReaderFilter.contains(r.getKey())) {
+				continue;
+			}
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
 				boolean intersect = false;

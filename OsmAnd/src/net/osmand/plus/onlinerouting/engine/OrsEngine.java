@@ -13,6 +13,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -131,7 +132,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 	}
 
 	@Override
-	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
+	public OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		return null;
 	}
 

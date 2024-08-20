@@ -5,7 +5,6 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
@@ -15,6 +14,7 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

@@ -1,10 +1,5 @@
 package net.osmand.plus.wikivoyage.data;
 
-import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
-import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
-import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
-import static net.osmand.gpx.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.gpx.GPXUtilities.writeGpxFile;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
@@ -22,6 +17,10 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
+import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
+import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
+import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
@@ -33,14 +32,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.SharedUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -59,8 +55,12 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -82,7 +82,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -691,11 +690,11 @@ public class TravelObfHelper implements TravelHelper {
 			}
 
 			@Override
-			public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+			public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 				if (gpxFile != null) {
 					WptPt wptPt = new WptPt();
-					wptPt.lat = latLon.getLatitude();
-					wptPt.lon = latLon.getLongitude();
+					wptPt.setLat(latLon.getLatitude());
+					wptPt.setLon(latLon.getLongitude());
 
 					String name = gpxFileName.endsWith(GPX_FILE_EXT) ? gpxFileName : gpxFileName + GPX_FILE_EXT;
 					File file = new File(FileUtils.getTempDir(app), name);
@@ -1034,10 +1033,10 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public File createGpxFile(@NonNull TravelArticle article) {
-		GPXFile gpx;
+		GpxFile gpx;
 		gpx = article.getGpxFile();
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
-		writeGpxFile(file, gpx);
+		SharedUtil.writeGpxFile(file, gpx);
 		return file;
 	}
 
@@ -1061,7 +1060,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	private synchronized GPXFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
+	private synchronized GpxFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
 		List<Amenity> pointList = new ArrayList<>();
 		for (BinaryMapIndexReader reader : readers) {
@@ -1135,7 +1134,7 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e.getMessage());
 			}
 		}
-		GPXFile gpxFile = null;
+		GpxFile gpxFile = null;
 		String description = article.getDescription();
 		String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
 		if (!segmentList.isEmpty()) {
@@ -1145,38 +1144,38 @@ public class TravelObfHelper implements TravelHelper {
 				TrkSegment trkSegment = new TrkSegment();
 				for (int i = 0; i < segment.getPointsLength(); i++) {
 					WptPt point = new WptPt();
-					point.lat = MapUtils.get31LatitudeY(segment.getPoint31YTile(i));
-					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
-					trkSegment.points.add(point);
+					point.setLat(MapUtils.get31LatitudeY(segment.getPoint31YTile(i)));
+					point.setLon(MapUtils.get31LongitudeX(segment.getPoint31XTile(i)));
+					trkSegment.getPoints().add(point);
 				}
 				String ele_graph = segment.getTagValue("ele_graph");
 				if (!Algorithms.isEmpty(ele_graph)) {
 					hasAltitude = true;
-					TIntArrayList heightRes = MapAlgorithms.decodeIntHeightArrayGraph(ele_graph, 3);
+					List<Integer> heightRes = KMapAlgorithms.INSTANCE.decodeIntHeightArrayGraph(ele_graph, 3);
 					double startEle = 0;
 					try {
 						startEle = Double.parseDouble(segment.getTagValue("start_ele"));
 					} catch (NumberFormatException e) {
 						LOG.debug(e.getMessage(), e);
 					}
-					MapAlgorithms.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
+					KMapAlgorithms.INSTANCE.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
 				}
-				track.segments.add(trkSegment);
+				track.getSegments().add(trkSegment);
 			}
-			gpxFile = new GPXFile(title, article.getLang(), article.getContent());
+			gpxFile = new GpxFile(title, article.getLang(), article.getContent());
 			if (!Algorithms.isEmpty(article.getImageTitle())) {
-				gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
+				gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
 			}
-			gpxFile.tracks = new ArrayList<>();
-			gpxFile.tracks.add(track);
+			gpxFile.setTracks(new ArrayList<>());
+			gpxFile.getTracks().add(track);
 			gpxFile.setRef(article.ref);
-			gpxFile.hasAltitude = hasAltitude;
+			gpxFile.setHasAltitude(hasAltitude);
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
-				gpxFile = new GPXFile(title, article.getLang(), article.getContent());
+				gpxFile = new GpxFile(title, article.getLang(), article.getContent());
 				if (!Algorithms.isEmpty(article.getImageTitle())) {
-					gpxFile.metadata.link = TravelArticle.getImageUrl(article.getImageTitle(), false);
+					gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
 				}
 			}
 			for (Amenity wayPoint : pointList) {
@@ -1193,7 +1192,7 @@ public class TravelObfHelper implements TravelHelper {
 		return capitalizeFirstLetter(getGpxTitle(name));
 	}
 
-	private class GpxFileReader extends AsyncTask<Void, Void, GPXFile> {
+	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {
 
 		private final TravelArticle article;
 		private final GpxReadCallback callback;
@@ -1214,12 +1213,12 @@ public class TravelObfHelper implements TravelHelper {
 		}
 
 		@Override
-		protected GPXFile doInBackground(Void... voids) {
+		protected GpxFile doInBackground(Void... voids) {
 			return buildGpxFile(readers, article);
 		}
 
 		@Override
-		protected void onPostExecute(GPXFile gpxFile) {
+		protected void onPostExecute(GpxFile gpxFile) {
 			article.gpxFileRead = true;
 			article.gpxFile = gpxFile;
 			if (callback != null) {

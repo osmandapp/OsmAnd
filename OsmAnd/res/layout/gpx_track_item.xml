@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            osmand:srcCompat="@drawable/ic_action_polygom_dark"
+            app:srcCompat="@drawable/ic_action_polygom_dark"
             android:layout_marginRight="@dimen/list_content_padding"
             android:visibility="visible"
 	        android:layout_marginEnd="@dimen/list_content_padding" />
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_distance_16" />
+                    app:srcCompat="@drawable/ic_action_distance_16" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_waypoint_16" />
+                    app:srcCompat="@drawable/ic_action_waypoint_16" />
 
                 <TextView
                     android:id="@+id/points_count"
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_time_16" />
+                    app:srcCompat="@drawable/ic_action_time_16" />
 
                 <TextView
                     android:id="@+id/time"
@@ -173,7 +173,7 @@
             android:layout_marginStart="@dimen/favorites_icon_right_margin"
             android:layout_marginLeft="@dimen/favorites_icon_right_margin"
             android:visibility="gone"
-            osmand:srcCompat="@drawable/ic_action_gsave_dark" />
+            app:srcCompat="@drawable/ic_action_gsave_dark" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/stop"
@@ -181,7 +181,7 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:visibility="gone"
-            osmand:srcCompat="@drawable/ic_action_rec_stop" />
+            app:srcCompat="@drawable/ic_action_rec_stop" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/options"
@@ -191,7 +191,7 @@
             android:contentDescription="@string/shared_string_more_actions"
             android:focusable="false"
             android:visibility="gone"
-            osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+            app:srcCompat="@drawable/ic_overflow_menu_white" />
 
         <LinearLayout
             android:id="@+id/check_item"

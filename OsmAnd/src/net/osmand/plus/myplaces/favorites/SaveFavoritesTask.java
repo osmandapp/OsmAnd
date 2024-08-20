@@ -9,9 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.data.FavouritePoint;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,8 +58,8 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Map<String, FavouritePoint> deletedPoints = new LinkedHashMap<>();
 
 			File internalFile = fileHelper.getInternalFile();
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(internalFile);
-			if (gpxFile.error == null) {
+			GpxFile gpxFile = SharedUtil.loadGpxFile(internalFile);
+			if (gpxFile.getError() == null) {
 				fileHelper.collectFavoriteGroups(gpxFile, deletedGroups);
 			}
 			// Get all points from internal file to filter later
@@ -91,8 +92,8 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		File[] files = fileHelper.getFavoritesFiles();
 		if (!Algorithms.isEmpty(files)) {
 			for (File file : files) {
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
-				if (gpxFile.error == null) {
+				GpxFile gpxFile = SharedUtil.loadGpxFile(file);
+				if (gpxFile.getError() == null) {
 					fileHelper.collectFavoriteGroups(gpxFile, favoriteGroups);
 				}
 			}

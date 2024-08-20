@@ -13,10 +13,9 @@ import net.osmand.core.jni.MapRendererState;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttributes;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
@@ -33,6 +32,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView.ManualZoomListener;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.Zoom.ComplexZoom;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -42,9 +42,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
-import static net.osmand.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
-import static net.osmand.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
-import static net.osmand.gpx.PointAttributes.DEV_RAW_ZOOM;
+import static net.osmand.shared.gpx.PointAttributes.DEV_ANIMATED_ZOOM;
+import static net.osmand.shared.gpx.PointAttributes.DEV_INTERPOLATION_OFFSET_N;
+import static net.osmand.shared.gpx.PointAttributes.DEV_RAW_ZOOM;
 
 public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener {
 
@@ -296,17 +296,17 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 			boolean firstPoint = true;
 
 			@Override
-			public void onAnalysePoint(GPXTrackAnalysis analysis, WptPt point, PointAttributes attributes) {
+			public void onAnalysePoint(@NonNull GpxTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attributes) {
 				// First point is skipped is GPS simulation
 				if (firstPoint) {
 					firstPoint = false;
 					return;
 				}
 
-				float bearing = Float.isNaN(point.bearing) ? mapView.getRotate() : -point.bearing;
+				float bearing = Float.isNaN(point.getBearing()) ? mapView.getRotate() : -point.getBearing();
 
 				ComplexZoom rawAutoZoom = autoZoomBySpeedHelper.calculateRawZoomBySpeedForChart(
-						mapRenderer, currentRawZoom, point.lat, point.lon, bearing, attributes.speed);
+						mapRenderer, currentRawZoom, point.getLat(), point.getLon(), bearing, attributes.getSpeed());
 				if (rawAutoZoom != null) {
 					attributes.setAttributeValue(DEV_RAW_ZOOM, rawAutoZoom.fullZoom());
 					currentRawZoom = rawAutoZoom.fullZoom();
@@ -320,7 +320,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 				}
 
 				if (prevAnimatedZoomParams != null) {
-					float timeDiffMillis = attributes.timeDiff * 1000;
+					float timeDiffMillis = attributes.getTimeDiff() * 1000;
 					float animationTime;
 					if (prevAnimatedZoomParams.second < timeDiffMillis) {
 						float offsetN = prevAnimatedZoomParams.second / timeDiffMillis;
@@ -344,7 +344,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 				}
 
 				Pair<ComplexZoom, Float> zoomParams = autoZoomBySpeedHelper.getAnimatedZoomParamsForChart(
-						mapRenderer, currentAnimatedZoom, point.lat, point.lon, bearing, attributes.speed);
+						mapRenderer, currentAnimatedZoom, point.getLat(), point.getLon(), bearing, attributes.getSpeed());
 				if (zoomParams != null) {
 					prevAnimatedZoomParams = zoomParams;
 				}
@@ -353,7 +353,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	}
 
 	public static void addAvailableGPXDataSetTypes(@NonNull OsmandApplication app,
-			@NonNull GPXTrackAnalysis analysis,
+			@NonNull GpxTrackAnalysis analysis,
 			@NonNull List<GPXDataSetType[]> availableTypes) {
 		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
 			return;
@@ -369,7 +369,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	@Nullable
 	public static OrderedLineDataSet getOrderedLineDataSet(@NonNull OsmandApplication app,
 	                                                       @NonNull LineChart chart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GpxTrackAnalysis analysis,
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType chartAxisType,
 	                                                       boolean calcWithoutGaps,
@@ -377,12 +377,12 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		switch (graphType) {
 			case ZOOM_NON_ANIMATED:
 				if (analysis.hasData(DEV_RAW_ZOOM)) {
-					return getZoomDataSet(app, chart, analysis, analysis.pointAttributes, graphType,
+					return getZoomDataSet(app, chart, analysis, analysis.getPointAttributes(), graphType,
 							chartAxisType, calcWithoutGaps, useRightAxis);
 				}
 			case ZOOM_ANIMATED:
 				if (analysis.hasData(DEV_ANIMATED_ZOOM)) {
-					List<PointAttributes> processedAttributes = postProcessAttributes(analysis.pointAttributes);
+					List<PointAttributes> processedAttributes = postProcessAttributes(analysis.getPointAttributes());
 					return getZoomDataSet(app, chart, analysis, processedAttributes, graphType,
 							chartAxisType, calcWithoutGaps, useRightAxis);
 				}
@@ -393,7 +393,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	@NonNull
 	private static OrderedLineDataSet getZoomDataSet(@NonNull OsmandApplication app,
 	                                                 @NonNull LineChart chart,
-	                                                 @NonNull GPXTrackAnalysis analysis,
+	                                                 @NonNull GpxTrackAnalysis analysis,
 	                                                 @NonNull List<PointAttributes> pointAttributes,
 	                                                 @NonNull GPXDataSetType graphType,
 	                                                 @NonNull GPXDataSetAxisType chartAxisType,
@@ -429,21 +429,21 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		List<PointAttributes> result = new ArrayList<>();
 
 		for (PointAttributes original : originalAttributes) {
-			float offsetN = original.interpolationOffsetN;
+			float offsetN = original.getInterpolationOffsetN();
 			if (offsetN > 0) {
 				PointAttributes intermediateAttribute = new PointAttributes(
-						original.distance * offsetN,
-						original.timeDiff * offsetN,
-						original.firstPoint,
+						original.getDistance() * offsetN,
+						original.getTimeDiff() * offsetN,
+						original.getFirstPoint(),
 						false);
-				intermediateAttribute.animatedZoom = original.animatedZoom;
+				intermediateAttribute.setAnimatedZoom(original.getAnimatedZoom());
 
 				PointAttributes modifiedAttribute = new PointAttributes(
-						original.distance * (1.0f - offsetN),
-						original.timeDiff * (1.0f - offsetN),
+						original.getDistance() * (1.0f - offsetN),
+						original.getTimeDiff() * (1.0f - offsetN),
 						false,
-						original.lastPoint);
-				modifiedAttribute.animatedZoom = original.animatedZoom;
+						original.getLastPoint());
+				modifiedAttribute.setAnimatedZoom(original.getAnimatedZoom());
 
 				result.add(intermediateAttribute);
 				result.add(modifiedAttribute);

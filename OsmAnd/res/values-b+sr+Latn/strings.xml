@@ -263,7 +263,7 @@
     <string name="map_widget_top">Status bar</string>
     <string name="map_widget_right">Desni panel</string>
     <string name="map_widget_left">Levi panel</string>
-    <string name="shared_string_show">Prikazati</string>
+    <string name="shared_string_show">Prikaži</string>
     <string name="configure_map">Podešavanje mape</string>
     <string name="anonymous_user_hint">Neimenovani korisnici ne mogu:
 \n- da prave grupe;
@@ -5867,4 +5867,6 @@
     <string name="add_widget_below">Dodaj widžet ispod</string>
     <string name="add_widget_to_the_right">Dodaj widžet desno</string>
     <string name="add_widget_to_the_left">Dodaj widžet levo</string>
+    <string name="delete_widget">Brišeš vidžet?</string>
+    <string name="delete_widget_description">Ovaj widžet će biti izbrisan. Možeš ga vratiti kasnije u podešavanjima ekrana.</string>
 </resources>

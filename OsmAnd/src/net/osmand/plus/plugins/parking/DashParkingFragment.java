@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.parking;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.utils.FontCache;
 
 import java.util.Calendar;
 
@@ -55,7 +55,7 @@ public class DashParkingFragment extends DashLocationFragment {
 				dialog.setOnDismissListener(d -> updateParkingPosition());
 			}
 		});
-		remove.setTypeface(DEFAULT_BOLD);
+		remove.setTypeface(FontCache.getMediumFont());
 
 		view.findViewById(R.id.parking_header).setOnClickListener(v -> {
 			if (plugin == null || plugin.getParkingPosition() == null) {

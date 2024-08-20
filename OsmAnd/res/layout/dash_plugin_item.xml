@@ -2,7 +2,7 @@
 <LinearLayout
 	android:id="@+id/dash_plugin_item"
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:background="?attr/expandable_list_item_background"
@@ -72,8 +72,8 @@
 				android:lines="1"
 				android:maxLines="1"
 				android:ellipsize="end"
-				osmand:textAllCapsCompat="true"
-				android:textStyle="bold"
+				android:textAllCaps="true"
+				app:typefaceWeight="medium"
 				android:paddingEnd="9.5dp"
 				android:paddingStart="9.5dp" />
 
@@ -93,8 +93,8 @@
 				android:lines="1"
 				android:maxLines="1"
 				android:ellipsize="end"
-				osmand:textAllCapsCompat="true"
-				android:textStyle="bold"
+				android:textAllCaps="true"
+				app:typefaceWeight="medium"
 				android:paddingEnd="9.5dp"
 				android:paddingStart="9.5dp" />
 		</FrameLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="@dimen/map_tile_preview_size"
 	android:layout_height="@dimen/map_tile_preview_size">
@@ -9,7 +9,7 @@
 		android:id="@+id/placeholder"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:srcCompat="?attr/image_tile_placeholder" />
+		app:srcCompat="?attr/image_tile_placeholder" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/tile_image"

@@ -4487,7 +4487,7 @@
     <string name="location_source_descr">Som standard bruger OsmAnd, der er installeret fra Google Play, %1$s til at bestemme placeringen.
 \n
 \nHvis du får unøjagtige placeringsoplysninger eller bruger en enhed uden %2$s, kan du prøve at skifte til \"%3$s\"</string>
-    <string name="location_source">Placeringskilde</string>
+    <string name="location_source">Kilde til placering</string>
     <string name="shared_string_shape">Form</string>
     <string name="default_appearance_desc">Standard farve, ikon og form vil gælde for de tilføjede favoritpunkter i gruppen.</string>
     <string name="default_appearance">Standardudseende</string>
@@ -5866,4 +5866,7 @@
     <string name="height_cache">Højde-cache</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
+    <string name="delete_widget">Slet modul?</string>
+    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
+    <string name="battery_saving_mode">Batterisparetilstand</string>
 </resources>

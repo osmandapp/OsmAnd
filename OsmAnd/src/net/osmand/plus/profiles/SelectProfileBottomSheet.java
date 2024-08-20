@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,6 +37,7 @@ import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -132,7 +132,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
 
 		String title = getString(titleId);
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, title, title, title);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), title, title, title);
 		int activeColor = ContextCompat.getColor(app, getActiveColorId());
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(activeColor);
 		spannable.setSpan(colorSpan, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

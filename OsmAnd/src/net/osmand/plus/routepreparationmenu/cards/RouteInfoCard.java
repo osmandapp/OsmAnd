@@ -11,7 +11,7 @@ import com.github.mikephil.charting.data.BarData;
 
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
@@ -20,12 +20,12 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 public class RouteInfoCard extends MapBaseCard {
 	private final RouteStatistics statistics;
-	private final GPXTrackAnalysis analysis;
+	private final GpxTrackAnalysis analysis;
 	private CustomChartAdapter graphAdapter;
 
 	private boolean showLegend;
 
-	public RouteInfoCard(MapActivity mapActivity, RouteStatistics statistics, GPXTrackAnalysis analysis) {
+	public RouteInfoCard(MapActivity mapActivity, RouteStatistics statistics, GpxTrackAnalysis analysis) {
 		super(mapActivity);
 		this.statistics = statistics;
 		this.analysis = analysis;

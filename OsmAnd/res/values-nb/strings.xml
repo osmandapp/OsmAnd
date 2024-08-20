@@ -5631,4 +5631,25 @@
     <string name="shared_string_automatically">Automatisk</string>
     <string name="ask_every_time">Spør hver gang</string>
     <string name="compass_click_north_is_up">For å endre orienteringsmodus trykk og hold</string>
+    <string name="add_widget_below">Legg til miniprogram nedenfor</string>
+    <string name="add_widget_above">Legg til miniprogram ovenfor</string>
+    <string name="add_widget_to_the_right">Legg til miniprogram til høyre</string>
+    <string name="help_article_map_tracks_name">Spor</string>
+    <string name="help_article_map_routes_name">Ruter</string>
+    <string name="key_assignment_add_key">Legg til tast</string>
+    <string name="clear_key_assignment_summary">Alle tastetilknytninger for valgt handling vil bli fjernet.</string>
+    <string name="clear_all_key_shortcuts">Tøm alle tastatursnarveier</string>
+    <string name="remove_key_assignment">Fjern tastetilknytning</string>
+    <string name="delete_widget">Slett miniprogram?</string>
+    <string name="add_widget_to_the_left">Legg til miniprogram til venstre</string>
+    <string name="clear_all_key_shortcuts_summary">Alle tastetilknytninger for valgt type vil bli fjernet.</string>
+    <string name="no_assigned_keys">Ingen tilknyttede taster</string>
+    <string name="assigned_keys">Tilknyttede taster</string>
+    <string name="new_key_assignment">Ny tastetilknytning</string>
+    <string name="quick_action_previous_app_profile">Programprofil til forrige</string>
+    <string name="delete_widget_description">Miniprogrammet vil bli slettet? Du kan gjennopprette det senere fra oppsettskjermen.</string>
+    <string name="daynight_mode_app_theme">Programdrakt</string>
+    <string name="key_event_action_continuous_zoom_in">Kontinuerlig forstørrelse</string>
+    <string name="remove_key_assignment_summary">Tastetilknytning for valgt handling vil bli fjernet.</string>
+    <string name="quick_action_next_app_profile">Programprofil til neste</string>
 </resources>

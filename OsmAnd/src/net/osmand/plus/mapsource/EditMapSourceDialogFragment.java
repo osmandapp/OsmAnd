@@ -1,6 +1,5 @@
 package net.osmand.plus.mapsource;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -53,6 +52,7 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -186,7 +186,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		FrameLayout saveBtnBg = root.findViewById(R.id.save_button_bg);
 		saveBtnBg.setBackgroundColor(ContextCompat.getColor(app, btnBgColorRes));
 		saveBtnTitle = root.findViewById(R.id.save_button_title);
-		saveBtnTitle.setTypeface(DEFAULT_BOLD);
+		saveBtnTitle.setTypeface(FontCache.getMediumFont());
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
 		saveBtn.setOnClickListener(view -> {

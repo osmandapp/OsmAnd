@@ -2,7 +2,7 @@ package net.osmand.plus.track.helpers;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 
 public class GpxNavigationHelper {
 
-	public static void startNavigationForSegment(@NonNull GPXFile gpxFile,
+	public static void startNavigationForSegment(@NonNull GpxFile gpxFile,
 	                                             int selectedSegment,
 	                                             @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -27,7 +27,7 @@ public class GpxNavigationHelper {
 		}
 	}
 
-	public static void startNavigationForRoute(@NonNull GPXFile gpxFile,
+	public static void startNavigationForRoute(@NonNull GpxFile gpxFile,
 	                                           int selectedRoute,
 	                                           @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -41,7 +41,7 @@ public class GpxNavigationHelper {
 		}
 	}
 
-	public static void startNavigationForGpx(@NonNull GPXFile gpxFile, @NonNull MapActivity mapActivity) {
+	public static void startNavigationForGpx(@NonNull GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		MapActivityActions mapActions = mapActivity.getMapActions();
 		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
 			WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
@@ -57,7 +57,7 @@ public class GpxNavigationHelper {
 		}
 	}
 
-	private static void enterRoutePlanningMode(@NonNull GPXFile gpxFile, @NonNull MapActivityActions mapActions) {
+	private static void enterRoutePlanningMode(@NonNull GpxFile gpxFile, @NonNull MapActivityActions mapActions) {
 		mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null,
 				null, true, true, MenuState.HEADER_ONLY);
 	}

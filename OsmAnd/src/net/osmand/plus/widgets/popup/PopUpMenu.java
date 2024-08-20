@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
@@ -145,7 +146,12 @@ public class PopUpMenu {
 				return true;
 			});
 		}
-		popupMenu.show();
+		if (displayData.showBelowAnchorView) {
+			MenuPopupHelper menuPopupHelper = new MenuPopupHelper(displayData.anchorView.getContext(), menuBuilder, view);
+			menuPopupHelper.show(0, view.getMeasuredHeight());
+		} else {
+			popupMenu.show();
+		}
 	}
 
 	public static void show(@NonNull PopUpMenuDisplayData displayData) {

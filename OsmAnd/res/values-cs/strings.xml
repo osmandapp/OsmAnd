@@ -5856,4 +5856,6 @@
     <string name="clear_all_key_shortcuts">Vymazat všechny klávesové zkratky</string>
     <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko \"Přidat\".</string>
     <string name="steps_per_minute_unit">SPM</string>
+    <string name="delete_widget">Smazat widget?</string>
+    <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
 </resources>

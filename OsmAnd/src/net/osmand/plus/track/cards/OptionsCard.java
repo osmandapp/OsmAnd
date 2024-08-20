@@ -1,6 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -27,7 +25,9 @@ import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class OptionsCard extends MapBaseCard {
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final List<BaseBottomSheetItem> items = new ArrayList<>();
 
 	public OptionsCard(@NonNull MapActivity mapActivity, TrackDisplayHelper displayHelper, SelectedGpxFile selectedGpxFile) {
@@ -74,8 +74,8 @@ public class OptionsCard extends MapBaseCard {
 		itemsContainer.removeAllViews();
 		items.clear();
 
-		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
-		if (!FileUtils.isTempFile(app, gpxFile.path)) {
+		boolean fileAvailable = gpxFile.getPath() != null && !gpxFile.isShowCurrentTrack();
+		if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 			items.add(createShowOnMapItem());
 			items.add(createAppearanceItem());
 			if (fileAvailable) {
@@ -103,7 +103,7 @@ public class OptionsCard extends MapBaseCard {
 
 			items.add(createDividerItem());
 
-			if (!FileUtils.isTempFile(app, gpxFile.path)) {
+			if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 				items.add(createEditItem());
 			}
 			items.add(createRenameItem());
@@ -261,7 +261,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createChangeFolderItem() {
-		File file = new File(gpxFile.path).getParentFile();
+		File file = new File(gpxFile.getPath()).getParentFile();
 		String folder = file != null ? file.getName() : null;
 		Drawable changeFolderIcon = getActiveIcon(R.drawable.ic_action_folder_move);
 
@@ -311,7 +311,7 @@ public class OptionsCard extends MapBaseCard {
 		return new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
-				.setTitle(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, delete, delete))
+				.setTitle(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> notifyButtonPressed(DELETE_BUTTON_INDEX))
 				.create();

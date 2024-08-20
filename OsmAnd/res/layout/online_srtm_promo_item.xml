@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginStart="@dimen/content_padding_half"
@@ -26,8 +26,8 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_terrain"
-				osmand:tint="?attr/active_color_basic" />
+				app:srcCompat="@drawable/ic_action_terrain"
+				app:tint="?attr/active_color_basic" />
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -82,10 +82,10 @@
 					android:id="@+id/button_action"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					osmand:dialogButtonTopMargin="@dimen/content_padding_small"
-					osmand:dialogButtonBottomMargin="@dimen/content_padding_small"
-					osmand:dialogButtonType="secondaryActive"
-					osmand:dialogButtonTitle="@string/shared_string_get"/>
+					app:dialogButtonTopMargin="@dimen/content_padding_small"
+					app:dialogButtonBottomMargin="@dimen/content_padding_small"
+					app:dialogButtonType="secondaryActive"
+					app:dialogButtonTitle="@string/shared_string_get"/>
 
 			</LinearLayout>
 

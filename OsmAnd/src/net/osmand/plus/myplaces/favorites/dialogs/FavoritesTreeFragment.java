@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static android.view.Gravity.CENTER;
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -57,6 +56,7 @@ import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavorites
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -802,7 +802,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView label = row.findViewById(R.id.category_name);
 			label.setTextColor(getColor(visible ? enabledColor : disabledColor));
 			if (visible) {
-				label.setTypeface(DEFAULT_BOLD);
+				label.setTypeface(FontCache.getMediumFont());
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}

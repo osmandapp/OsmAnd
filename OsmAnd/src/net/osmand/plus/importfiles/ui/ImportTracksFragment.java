@@ -31,8 +31,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -79,7 +79,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private final List<ImportTrackItem> trackItems = new ArrayList<>();
 	private final Set<ImportTrackItem> selectedTracks = new HashSet<>();
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private String fileName;
 	private String selectedFolder;
 	private long fileSize;
@@ -375,7 +375,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	public void onTrackItemPointsSelected(@NonNull ImportTrackItem item) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints(), this);
+			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPointsList(), this);
 		}
 	}
 
@@ -444,7 +444,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			}
 
 			@Override
-			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
+			public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
 				app.runInUIThread(() -> {
 					if (importListener != null) {
 						importListener.onSaveComplete(error == null, gpxFile);
@@ -498,7 +498,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull GPXFile gpxFile,
+	                                @NonNull GpxFile gpxFile,
 	                                @NonNull String fileName,
 	                                @Nullable String selectedFolder,
 	                                @Nullable GpxImportListener importListener,

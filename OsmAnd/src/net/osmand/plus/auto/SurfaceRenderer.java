@@ -360,6 +360,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							offscreenMapRendererView.addListener(this);
 							mapView.getAnimatedDraggingThread().toggleAnimations();
 						}
+						mapView.applyBatterySavingModeSetting(offscreenMapRendererView);
 					}
 				}
 			}

@@ -8,7 +8,13 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -17,13 +23,14 @@ import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.RouteLayer.ActionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -436,7 +443,7 @@ public class RouteGeometryWay extends
 				} else {
 					int startColor = gradientStyle.currColor;
 					int endColor = gradientStyle.nextColor;
-					return ColorPalette.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+					return ColorPalette.Companion.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
 				}
 			} else {
 				return style.getColor();
