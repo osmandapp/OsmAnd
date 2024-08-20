@@ -5869,4 +5869,5 @@
     <string name="add_widget_to_the_left">Dodaj widžet levo</string>
     <string name="delete_widget">Brišeš vidžet?</string>
     <string name="delete_widget_description">Ovaj widžet će biti izbrisan. Možeš ga vratiti kasnije u podešavanjima ekrana.</string>
+    <string name="battery_saving_mode">Režim uštede baterije</string>
 </resources>
