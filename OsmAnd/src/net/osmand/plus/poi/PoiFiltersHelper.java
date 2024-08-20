@@ -513,16 +513,20 @@ public class PoiFiltersHelper {
 	}
 
 	public void addSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
-		selectedPoiFilters.add(filter);
-		PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
-		setSelectedPoiFilters(selectedPoiFilters);
+		if (filter != null) {
+			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
+			selectedPoiFilters.add(filter);
+			PluginsHelper.onPrepareExtraTopPoiFilters(selectedPoiFilters);
+			setSelectedPoiFilters(selectedPoiFilters);
+		}
 	}
 
 	public void removeSelectedPoiFilter(PoiUIFilter filter) {
-		Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
-		selectedPoiFilters.remove(filter);
-		setSelectedPoiFilters(selectedPoiFilters);
+		if (filter != null) {
+			Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>(getSelectedPoiFilters());
+			selectedPoiFilters.remove(filter);
+			setSelectedPoiFilters(selectedPoiFilters);
+		}
 	}
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
