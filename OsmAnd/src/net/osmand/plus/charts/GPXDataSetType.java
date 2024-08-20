@@ -21,9 +21,9 @@ import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
 
 public enum GPXDataSetType {
 
-	ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
-	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed, GPXUtilities.POINT_SPEED, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
-	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
+	ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
+	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed_outlined, GPXUtilities.POINT_SPEED, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
+	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_slope, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
 	ALTITUDE_EXTRM(R.string.altitude, R.drawable.ic_action_altitude_average, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
 
 	SENSOR_SPEED(R.string.shared_string_speed, R.drawable.ic_action_sensor_speed_outlined, SENSOR_TAG_SPEED, R.color.gpx_chart_yellow_label, R.color.gpx_chart_yellow),
