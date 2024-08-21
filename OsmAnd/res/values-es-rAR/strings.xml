@@ -5324,7 +5324,6 @@
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
     <string name="rendering_value_caiScale_name">CAI</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
     <string name="write_bearing_description">Guarda el rumbo para cada punto de la traza durante la grabación</string>
     <string name="write_bearing">Escribir rumbo</string>
     <string name="write_heading_description">Guarda el encabezado de cada punto de la traza durante la grabación</string>

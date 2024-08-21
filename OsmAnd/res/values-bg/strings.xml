@@ -3860,7 +3860,6 @@
     <string name="date_of_creation">Дата на създаване</string>
     <string name="shared_string_included">Включено</string>
     <string name="routing_engine_vehicle_type_hiking">Пешеходен туризъм</string>
-    <string name="rendering_attr_alpineHiking_name">Класификация на сложност</string>
     <string name="free_settings_backup">Резервно копие на настройките</string>
     <string name="app_mode_personal_transporter">Личен транспортьор</string>
     <string name="slope_legend_description">При склоновете се използва цвят за изобразяване на стръмността на терена. Повече за склоновете в %1$s.</string>

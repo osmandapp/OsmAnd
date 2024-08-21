@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DifficultyClassificationFragment extends BaseOsmAndFragment {
+public class AlpineHikingScaleFragment extends BaseOsmAndFragment {
 
-	public static final String TAG = DifficultyClassificationFragment.class.getSimpleName();
+	public static final String TAG = AlpineHikingScaleFragment.class.getSimpleName();
 
 	private RouteLayersHelper routeLayersHelper;
 	private final List<View> itemsViews = new ArrayList<>();
@@ -195,7 +195,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
-					.replace(R.id.content, new DifficultyClassificationFragment(), TAG)
+					.replace(R.id.content, new AlpineHikingScaleFragment(), TAG)
 					.commitAllowingStateLoss();
 		}
 	}

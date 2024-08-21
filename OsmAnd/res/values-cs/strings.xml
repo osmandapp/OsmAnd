@@ -5303,7 +5303,6 @@
     <string name="rendering_attr_alpineHiking_description">Typy klasifikace tras podle obtížnosti.</string>
     <string name="rendering_value_sacScale_description">Švýcarský alpinistický klub</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (italský alpinistický klub)</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="write_bearing_description">Ukládat azimut každého bodu stopy během záznamu</string>

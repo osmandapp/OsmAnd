@@ -5310,7 +5310,6 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">意大利高山俱乐部</string>
     <string name="rendering_attr_alpineHiking_description">路线的难度分类类型。</string>
-    <string name="rendering_attr_alpineHiking_name">难度分级</string>
     <string name="shared_string_checked">已检查</string>
     <string name="shared_string_not_checked">未检查</string>
     <string name="routing_attr_hazmat_category_usa_1_name">爆炸物</string>
