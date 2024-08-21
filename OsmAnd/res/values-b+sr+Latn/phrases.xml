@@ -4868,4 +4868,9 @@
     <string name="poi_property_management">Upravljanje imovinom</string>
     <string name="poi_engineer">Inženjerska kancelarija</string>
     <string name="poi_mcdonalds">MekDonald</string>
+    <string name="poi_cash_in_yes">Da</string>
+    <string name="poi_cash_in_no">Ne</string>
+    <string name="poi_cash_in_customers">Korisnici</string>
+    <string name="poi_diet_pescetarian_no">Pesketarska dieta: ne</string>
+    <string name="poi_cash_in">Keš depozit</string>
 </resources>

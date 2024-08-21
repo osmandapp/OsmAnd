@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
@@ -47,6 +46,7 @@ import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -350,7 +350,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		int startIndex = tracksPathDescr.indexOf(tracksPath);
 		SpannableString titleSpan = new SpannableString(tracksPathDescr);
-		titleSpan.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, startIndex + tracksPath.length(), 0);
+		titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + tracksPath.length(), 0);
 
 		Preference openTracksDescription = findPreference("open_tracks_description");
 		openTracksDescription.setTitle(titleSpan);

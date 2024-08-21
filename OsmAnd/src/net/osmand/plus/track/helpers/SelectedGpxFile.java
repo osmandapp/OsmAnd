@@ -3,16 +3,18 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMap;
@@ -30,8 +32,8 @@ public class SelectedGpxFile {
 	public boolean notShowNavigationDialog;
 	public boolean selectedByUser = true;
 
-	protected GPXFile gpxFile;
-	protected GPXTrackAnalysis trackAnalysis;
+	protected GpxFile gpxFile;
+	protected GpxTrackAnalysis trackAnalysis;
 
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 	protected List<GpxDisplayGroup> splitGroups;
@@ -52,10 +54,10 @@ public class SelectedGpxFile {
 
 	private FilteredSelectedGpxFile filteredSelectedGpxFile;
 
-	public void setGpxFile(@NonNull GPXFile gpxFile, @NonNull OsmandApplication app) {
+	public void setGpxFile(@NonNull GpxFile gpxFile, @NonNull OsmandApplication app) {
 		this.gpxFile = gpxFile;
-		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			this.color = gpxFile.tracks.get(0).getColor(0);
+		if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+			this.color = gpxFile.getTracks().get(0).getColor(0);
 		}
 		processPoints(app);
 		if (filteredSelectedGpxFile != null) {
@@ -64,23 +66,23 @@ public class SelectedGpxFile {
 	}
 
 	public boolean isLoaded() {
-		return gpxFile.modifiedTime != -1;
+		return gpxFile.getModifiedTime() != -1;
 	}
 
-	public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime) {
+	public GpxTrackAnalysis getTrackAnalysis(OsmandApplication app) {
+		if (modifiedTime != gpxFile.getModifiedTime()) {
 			update(app);
 		}
 		return trackAnalysis;
 	}
 
-	public GPXTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
+	public GpxTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
 		return filteredSelectedGpxFile != null
 				? filteredSelectedGpxFile.getTrackAnalysis(app)
 				: getTrackAnalysis(app);
 	}
 
-	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
+	public void setTrackAnalysis(@NonNull GpxTrackAnalysis trackAnalysis) {
 		this.trackAnalysis = trackAnalysis;
 	}
 
@@ -90,12 +92,12 @@ public class SelectedGpxFile {
 	}
 
 	protected void update(@NonNull OsmandApplication app) {
-		modifiedTime = gpxFile.modifiedTime;
-		pointsModifiedTime = gpxFile.pointsModifiedTime;
+		modifiedTime = gpxFile.getModifiedTime();
+		pointsModifiedTime = gpxFile.getPointsModifiedTime();
 
-		long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
+		long fileTimestamp = Algorithms.isEmpty(gpxFile.getPath())
 				? System.currentTimeMillis()
-				: new File(gpxFile.path).lastModified();
+				: new File(gpxFile.getPath()).lastModified();
 		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
 
 		updateSplit(app);
@@ -120,7 +122,7 @@ public class SelectedGpxFile {
 	public void processPoints(@NonNull OsmandApplication app) {
 		update(app);
 
-		processedPointsToDisplay = gpxFile.proccessPoints();
+		processedPointsToDisplay = gpxFile.processPoints();
 		routePoints = false;
 		if (processedPointsToDisplay.isEmpty()) {
 			processedPointsToDisplay = gpxFile.processRoutePoints();
@@ -145,7 +147,7 @@ public class SelectedGpxFile {
 			return filteredSelectedGpxFile.getPointsToDisplay();
 		} else if (joinSegments) {
 			return gpxFile != null && gpxFile.getGeneralTrack() != null
-					? gpxFile.getGeneralTrack().segments
+					? gpxFile.getGeneralTrack().getSegments()
 					: Collections.emptyList();
 		} else {
 			return processedPointsToDisplay;
@@ -165,12 +167,13 @@ public class SelectedGpxFile {
 			lastSegment = processedPointsToDisplay.get(processedPointsToDisplay.size() - 1);
 		}
 
-		lastSegment.points.add(point);
+		lastSegment.getPoints().add(point);
 
 		boolean hasCalculatedBounds = !bounds.hasInitialState();
 		if (hasCalculatedBounds) {
 			// Update already calculated bounds without iterating all points
-			GPXUtilities.updateBounds(bounds, Collections.singletonList(point), 0);
+			GpxUtilities.INSTANCE.updateBounds(
+					SharedUtil.kQuadRect(bounds), Collections.singletonList(point), 0);
 		} else {
 			updateBounds();
 		}
@@ -180,8 +183,8 @@ public class SelectedGpxFile {
 			if (area == null) {
 				area = new TrackArea();
 			}
-			int x31 = MapUtils.get31TileNumberX(point.lon);
-			int y31 = MapUtils.get31TileNumberY(point.lat);
+			int x31 = MapUtils.get31TileNumberX(point.getLon());
+			int y31 = MapUtils.get31TileNumberY(point.getLat());
 			area.add(new PointI(x31, y31));
 		}
 	}
@@ -212,7 +215,7 @@ public class SelectedGpxFile {
 	}
 
 	protected final void updateBounds() {
-		bounds = GPXUtilities.calculateTrackBounds(processedPointsToDisplay);
+		bounds = SharedUtil.jQuadRect(GpxUtilities.INSTANCE.calculateTrackBounds(processedPointsToDisplay));
 	}
 
 	protected final void updateArea(boolean hasMapRenderer) {
@@ -223,9 +226,9 @@ public class SelectedGpxFile {
 
 		area = new TrackArea();
 		for (TrkSegment segment : processedPointsToDisplay) {
-			for (WptPt point : segment.points) {
-				int x31 = MapUtils.get31TileNumberX(point.lon);
-				int y31 = MapUtils.get31TileNumberY(point.lat);
+			for (WptPt point : segment.getPoints()) {
+				int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+				int y31 = MapUtils.get31TileNumberY(point.getLatitude());
 				area.add(new PointI(x31, y31));
 			}
 		}
@@ -247,15 +250,15 @@ public class SelectedGpxFile {
 	}
 
 	@NonNull
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
-	public GPXFile getGpxFileToDisplay() {
+	public GpxFile getGpxFileToDisplay() {
 		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getGpxFile() : gpxFile;
 	}
 
-	public GPXFile getModifiableGpxFile() {
+	public GpxFile getModifiableGpxFile() {
 		// call process points after
 		return gpxFile;
 	}
@@ -299,7 +302,7 @@ public class SelectedGpxFile {
 	}
 
 	public List<GpxDisplayGroup> getSplitGroups(@NonNull OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime) {
+		if (modifiedTime != gpxFile.getModifiedTime()) {
 			update(app);
 		}
 		if (!splitProcessed) {
@@ -315,7 +318,7 @@ public class SelectedGpxFile {
 			this.splitProcessed = true;
 			this.splitGroups = displayGroups;
 
-			if (modifiedTime != gpxFile.modifiedTime) {
+			if (modifiedTime != gpxFile.getModifiedTime()) {
 				update(app);
 			}
 		}

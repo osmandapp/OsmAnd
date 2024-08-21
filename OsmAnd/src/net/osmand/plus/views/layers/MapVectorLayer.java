@@ -51,8 +51,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);

@@ -40,8 +40,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -103,7 +103,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	private TripRecordingUpdatesHandler handler;
 
-	private GPXFile getGPXFile() {
+	private GpxFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
 	}
 
@@ -162,6 +162,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
+		blockStatisticsBuilder.setShowShortStat(true);
 		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
@@ -320,20 +321,22 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		});
 
 		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
-		GPXFile gpxFile = getGPXFile();
-		File file = new File(gpxFile.path);
+		GpxFile gpxFile = getGPXFile();
+		File file = new File(gpxFile.getPath());
 		displayHelper.setFile(file);
 		displayHelper.setSelectedGpxFile(selectedGpxFile);
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false, getMapActivity());
 		graphsAdapter.setHideStatistics(true);
 		graphsAdapter.setHideJoinGapsBottomButtons(true);
 		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
+		graphsAdapter.setUseSingleMainTab(true);
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
+		tabLayout.setVisibility(View.GONE);
 
 		viewGroup.addView(segmentView);
 	}

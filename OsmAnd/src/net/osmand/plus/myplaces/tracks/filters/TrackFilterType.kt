@@ -1,7 +1,7 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import androidx.annotation.StringRes
-import net.osmand.gpx.GpxParameter
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.filters.OtherTrackParam.VISIBLE_ON_MAP
 import net.osmand.plus.myplaces.tracks.filters.OtherTrackParam.WITH_WAYPOINTS

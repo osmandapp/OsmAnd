@@ -159,7 +159,7 @@
 			android:gravity="center"
 			android:text="@string/shared_string_delete"
 			android:visibility="gone"
-			app:textAllCapsCompat="true"
+			android:textAllCaps="true"
 			tools:visibility="visible" />
 
 		<Space
@@ -173,14 +173,14 @@
 			android:layout_height="@dimen/context_menu_buttons_bottom_height"
 			android:gravity="center"
 			android:text="@string/shared_string_cancel"
-			app:textAllCapsCompat="true" />
+			android:textAllCaps="true" />
 
 		<net.osmand.plus.widgets.ButtonEx
 			android:id="@+id/saveButton"
 			style="@style/DashboardGeneralButton"
 			android:layout_height="@dimen/context_menu_buttons_bottom_height"
 			android:gravity="center"
-			app:textAllCapsCompat="true"
+			android:textAllCaps="true"
 			tools:text="Save" />
 	</LinearLayout>
 </LinearLayout>

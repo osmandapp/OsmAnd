@@ -11,8 +11,9 @@ import net.osmand.CallbackWithObject;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -138,7 +139,7 @@ public class GpxApproximationHelper {
 			GpxRouteApproximation approximation = resultMap.get(locationsHolder);
 			if (approximation != null) {
 				approximations.add(approximation);
-				points.add(locationsHolder.getWptPtList());
+				points.add(SharedUtil.kWptPtList(locationsHolder.getWptPtList()));
 			}
 		}
 		return Pair.create(approximations, points);
@@ -186,16 +187,16 @@ public class GpxApproximationHelper {
 	}
 
 	public static void approximateGpxAsync(@NonNull OsmandApplication app,
-	                                       @NonNull GPXFile gpxFile,
+	                                       @NonNull GpxFile gpxFile,
 	                                       @NonNull GpxApproximationParams params,
-	                                       @NonNull CallbackWithObject<GPXFile> callback) {
+	                                       @NonNull CallbackWithObject<GpxFile> callback) {
 		MeasurementEditingContext context = createEditingContext(app, gpxFile, params);
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		helper.setListener(new GpxApproximationListener() {
 			@Override
 			public void processApproximationResults(@NonNull List<GpxRouteApproximation> approximations,
 			                                        @NonNull List<List<WptPt>> points) {
-				GPXFile approximatedGpx = createApproximatedGpx(app, context, params, approximations, points);
+				GpxFile approximatedGpx = createApproximatedGpx(app, context, params, approximations, points);
 				callback.processResult(approximatedGpx);
 			}
 		});
@@ -208,13 +209,13 @@ public class GpxApproximationHelper {
 	}
 
 	@NonNull
-	public static GPXFile approximateGpxSync(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	public static GpxFile approximateGpxSync(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                                         @NonNull GpxApproximationParams params) {
 		MeasurementEditingContext context = createEditingContext(app, gpxFile, params);
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		if (helper.canApproximate()) {
 			Pair<List<GpxRouteApproximation>, List<List<WptPt>>> pair = helper.calculateGpxApproximationSync();
-			GPXFile approximatedGpx = createApproximatedGpx(app, context, params, pair.first, pair.second);
+			GpxFile approximatedGpx = createApproximatedGpx(app, context, params, pair.first, pair.second);
 			if (approximatedGpx != null && approximatedGpx.isAttachedToRoads()) {
 				return approximatedGpx;
 			}
@@ -250,7 +251,7 @@ public class GpxApproximationHelper {
 	}
 
 	@Nullable
-	public static GPXFile createApproximatedGpx(@NonNull OsmandApplication app,
+	public static GpxFile createApproximatedGpx(@NonNull OsmandApplication app,
 	                                            @NonNull MeasurementEditingContext context,
 	                                            @NonNull GpxApproximationParams params,
 	                                            @NonNull List<GpxRouteApproximation> approximations,
@@ -266,7 +267,7 @@ public class GpxApproximationHelper {
 
 	@NonNull
 	private static MeasurementEditingContext createEditingContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GPXFile gpxFile,
+	                                                              @NonNull GpxFile gpxFile,
 	                                                              @NonNull GpxApproximationParams params) {
 		MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 		ctx.setGpxData(new GpxData(gpxFile));

@@ -41,6 +41,7 @@ public enum ProfileIcons {
 	UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo"),
 	BABY_TRANSPORT(R.drawable.ic_action_baby_transport, R.string.app_mode_baby_transport, "ic_action_baby_transport"),
 	OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad"),
+	SUV(R.drawable.ic_action_suv, R.string.app_mode_suv, "ic_action_suv"),
 	CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan"),
 	CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper"),
 	PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),

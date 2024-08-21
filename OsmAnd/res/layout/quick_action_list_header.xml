@@ -17,7 +17,7 @@
 		android:layout_gravity="center_vertical"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_list_text_size"
-		android:textStyle="bold"
+		app:typefaceWeight="medium"
 		tools:text="Screen 1" />
 
 </FrameLayout>

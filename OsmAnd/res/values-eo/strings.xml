@@ -5301,7 +5301,6 @@
     <string name="rendering_value_caiScale_description">laŭ skalo de Itala Alpisma Klubo</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC/CAS</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
     <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
     <string name="write_heading">Konservi mov-direkton</string>
     <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
@@ -5851,9 +5850,11 @@
     <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
     <string name="help_article_map_routes_name">Kursoj</string>
     <string name="help_article_map_tracks_name">Spuroj</string>
-    <string name="height_cache">Datumoj pri altitudo</string>
     <string name="add_widget_below">Aldoni fenestraĵon malsupren</string>
     <string name="add_widget_above">Aldoni fenestraĵon supren</string>
     <string name="add_widget_to_the_right">Aldoni fenestraĵon dekstren</string>
     <string name="add_widget_to_the_left">Aldoni fenestraĵon maldekstren</string>
+    <string name="delete_widget">Ĉu forigi fenestraĵon?</string>
+    <string name="delete_widget_description">Tiu ĉi fenestraĵo estos forigita. Vi povas restarigi ĝin per la menuo “Agordi ekranon”.</string>
+    <string name="battery_saving_mode">Bateri-ŝparema reĝimo</string>
 </resources>

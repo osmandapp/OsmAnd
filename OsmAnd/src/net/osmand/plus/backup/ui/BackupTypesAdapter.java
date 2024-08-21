@@ -1,6 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.util.Algorithms;
@@ -75,7 +75,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 		String name = app.getString(category.getTitleId());
 		TextView titleTv = view.findViewById(R.id.title);
-		titleTv.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, name, name));
+		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), name, name));
 
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getCategoryDescr(category));

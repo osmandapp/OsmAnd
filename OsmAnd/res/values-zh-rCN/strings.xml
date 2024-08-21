@@ -4175,7 +4175,7 @@
     <string name="apply_to_existing_favorites_descr">将更改应用于组中现有的收藏点，还是仅应用于新收藏点？</string>
     <string name="apply_only_to_new_points">仅应用于新点</string>
     <string name="apply_only_to_new_favorites">仅应用于新收藏夹</string>
-    <string name="rendering_attr_showShareTaxiRoutes_name">班车路线</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">穿梭客车路线</string>
     <string name="map_markers_bar">地图标记栏</string>
     <string name="shared_string_visible_widgets">可见小部件</string>
     <string name="top_widgets_panel">顶部面板</string>
@@ -5310,7 +5310,6 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">意大利高山俱乐部</string>
     <string name="rendering_attr_alpineHiking_description">路线的难度分类类型。</string>
-    <string name="rendering_attr_alpineHiking_name">难度分级</string>
     <string name="shared_string_checked">已检查</string>
     <string name="shared_string_not_checked">未检查</string>
     <string name="routing_attr_hazmat_category_usa_1_name">爆炸物</string>

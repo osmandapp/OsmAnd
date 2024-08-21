@@ -1,6 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
@@ -16,8 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,7 +41,10 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -60,7 +60,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private PointsGroup pointsGroup;
 	private GpxDisplayGroup displayGroup;
 	private boolean groupHidden;
@@ -89,10 +89,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		items.add(new TitleItem(getCategoryName(app, displayGroup.getName())));
 
 		SelectedGpxFile selectedGpxFile;
-		if (gpxFile.showCurrentTrack) {
+		if (gpxFile.isShowCurrentTrack()) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
-			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.getPath());
 		}
 		boolean trackPoints = displayGroup.getType() == TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
@@ -104,7 +104,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new OptionsDividerItem(app));
 
-		if (!gpxFile.showCurrentTrack && trackPoints) {
+		if (!gpxFile.isShowCurrentTrack() && trackPoints) {
 			items.add(createCopyToMarkersItem());
 		}
 		items.add(createCopyToFavoritesItem());
@@ -143,7 +143,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private void updateGroupVisibility() {
 		MapActivity activity = (MapActivity) getActivity();
 		if (activity != null && pointsGroup != null && groupHidden != pointsGroup.isHidden()) {
-			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, pointsGroup);
+			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
@@ -183,7 +183,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void updateGroupWptCategory(boolean synced) {
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.getPath());
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().selectedAutomatically().saveSelection();
@@ -237,7 +237,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		return new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
-				.setTitle(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, delete, delete))
+				.setTitle(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();

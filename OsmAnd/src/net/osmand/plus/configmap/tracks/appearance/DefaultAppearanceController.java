@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 
 import android.os.AsyncTask;
 
@@ -9,7 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GpxParameter;
+import net.osmand.shared.gpx.GpxDirItem;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -27,7 +28,6 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardContr
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDirItem;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -95,7 +95,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	public void saveChanges(@NonNull FragmentActivity activity, boolean updateExisting) {
 		colorCardController.getColorsPaletteController().refreshLastUsedTime();
 
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			dirItem.setParameter(parameter, data.getParameter(parameter));
 		}
 		gpxDbHelper.updateDataItem(dirItem);
@@ -154,7 +154,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	@NonNull
 	private AppearanceData buildAppearanceData(@NonNull GpxDirItem item) {
 		AppearanceData data = new AppearanceData();
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			data.setParameter(parameter, item.getParameter(parameter));
 		}
 		return data;

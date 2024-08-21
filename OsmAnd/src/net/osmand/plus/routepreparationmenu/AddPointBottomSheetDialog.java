@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.Manifest;
 import android.app.Activity;
@@ -40,7 +39,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -55,6 +53,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -337,7 +336,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		int startIndex = titleS.indexOf(start);
 		int destinationIndex = titleS.indexOf(destination);
 		if (startIndex != -1 && destinationIndex != -1) {
-			Typeface typeface = DEFAULT_BOLD;
+			Typeface typeface = FontCache.getMediumFont();
 			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + start.length(), 0);
 			titleSpan.setSpan(new CustomTypefaceSpan(typeface), destinationIndex, destinationIndex + destination.length(), 0);
 		}

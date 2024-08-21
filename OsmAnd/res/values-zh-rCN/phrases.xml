@@ -1143,7 +1143,7 @@
     <string name="poi_pyrotechnics">烟火</string>
     <string name="poi_perfumery">香水店</string>
     <string name="poi_spices">香料店</string>
-    <string name="poi_shop_craft">艺术和手工艺品店</string>
+    <string name="poi_shop_craft">艺术和手工艺用品店</string>
     <string name="poi_religion">宗教用品</string>
     <string name="poi_ford_stepping_stones">脚踏石桥</string>
     <string name="poi_traffic_signals">交通信号灯</string>
@@ -1279,7 +1279,7 @@
     <string name="poi_tunnel_pedestrian">行人隧道</string>
     <string name="poi_tunnel_car">公路隧道</string>
     <string name="poi_tunnel_waterway">水路隧道</string>
-    <string name="poi_craft_basket_maker">篮筐编织</string>
+    <string name="poi_craft_basket_maker">篮筐制造</string>
     <string name="poi_craft_caterer">宴会承办商</string>
     <string name="poi_craft_dressmaker">裁缝</string>
     <string name="poi_craft_glaziery">玻璃装配</string>
@@ -2997,4 +2997,5 @@
     <string name="poi_boat_canoe_rental_yes">独木舟：有</string>
     <string name="poi_canadian_football">加拿大式橄榄球</string>
     <string name="poi_boat_sailboat_rental_yes">帆船：有</string>
+    <string name="poi_cuisine_tapas">西班牙小菜</string>
 </resources>

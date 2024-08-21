@@ -53,8 +53,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 

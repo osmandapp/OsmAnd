@@ -1,8 +1,6 @@
 package net.osmand.plus.importfiles.ui;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
-import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -16,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 class HeaderViewHolder extends ViewHolder {
@@ -41,11 +40,11 @@ class HeaderViewHolder extends ViewHolder {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 
 		SpannableString spannable = new SpannableString(description);
-		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + fileName.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + fileName.length(), 0);
 		spannable.setSpan(new ForegroundColorSpan(activeColor), index, index + fileName.length(), 0);
 
 		index = description.lastIndexOf(size);
-		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + size.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + size.length(), 0);
 		title.setText(spannable);
 
 		importAsOneTrackButton.setOnClickListener(v -> {

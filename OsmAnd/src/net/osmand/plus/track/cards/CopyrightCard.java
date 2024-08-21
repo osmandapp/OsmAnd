@@ -3,8 +3,8 @@ package net.osmand.plus.track.cards;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXUtilities.Copyright;
-import net.osmand.gpx.GPXUtilities.Metadata;
+import net.osmand.shared.gpx.primitives.Copyright;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
@@ -25,20 +25,20 @@ public class CopyrightCard extends BaseMetadataCard {
 	public void updateContent() {
 		super.updateContent();
 
-		Copyright copyright = metadata.copyright;
-		boolean visible = copyright != null && (!Algorithms.isEmpty(copyright.author)
-				|| !Algorithms.isEmpty(copyright.year) || !Algorithms.isEmpty(copyright.license));
+		Copyright copyright = metadata.getCopyright();
+		boolean visible = copyright != null && (!Algorithms.isEmpty(copyright.getAuthor())
+				|| !Algorithms.isEmpty(copyright.getYear()) || !Algorithms.isEmpty(copyright.getLicense()));
 
 		updateVisibility(visible);
 
 		if (visible) {
-			if (!Algorithms.isEmpty(copyright.author)) {
-				createItemRow(getString(R.string.shared_string_author), copyright.author, getContentIcon(R.drawable.ic_action_copyright));
+			if (!Algorithms.isEmpty(copyright.getAuthor())) {
+				createItemRow(getString(R.string.shared_string_author), copyright.getAuthor(), getContentIcon(R.drawable.ic_action_copyright));
 			}
-			if (!Algorithms.isEmpty(copyright.year)) {
-				createItemRow(getString(R.string.year), copyright.year, getContentIcon(R.drawable.ic_action_calendar_month));
+			if (!Algorithms.isEmpty(copyright.getYear())) {
+				createItemRow(getString(R.string.year), copyright.getYear(), getContentIcon(R.drawable.ic_action_calendar_month));
 			}
-			createLinkItemRow(getString(R.string.shared_string_license), copyright.license, R.drawable.ic_action_link);
+			createLinkItemRow(getString(R.string.shared_string_license), copyright.getLicense(), R.drawable.ic_action_link);
 		}
 	}
 }

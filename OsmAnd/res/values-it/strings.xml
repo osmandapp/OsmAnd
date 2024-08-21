@@ -5294,7 +5294,6 @@
     <string name="write_heading">Scrivi l\'intestazione</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_sacScale_description">Club Alpino Svizzero</string>
-    <string name="rendering_attr_alpineHiking_name">Classificazione della difficoltà</string>
     <string name="routing_attr_hazmat_category_usa_7_name">Sostanze Radioattive</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Sostanze Corrosive</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Club Alpino Italiano)</string>
@@ -5759,7 +5758,7 @@
     <string name="weather_data_sources_prompt">OsmAnd fornisce dati meteorologici da due fonti:</string>
     <string name="data_source">Fonte dati</string>
     <string name="weather_source_ecmwf_description">Centro europeo per le previsioni meteorologiche a medio termine (ECMWF)</string>
-    <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
+    <string name="weather_source_GFS_description">Sistema di previsione globale dei Centri nazionali per la previsione ambientale</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_modify">Modifica</string>
@@ -5852,4 +5851,7 @@
     <string name="add_widget_to_the_left">Aggiungi il widget a sinistra</string>
     <string name="add_widget_below">Aggiungi il widget qui sotto</string>
     <string name="location_radius">Raggio di posizione</string>
+    <string name="delete_widget">Eliminare il widget?</string>
+    <string name="delete_widget_description">Questo widget verrà eliminato. Puoi ripristinarlo più tardi in Configura schermo.</string>
+    <string name="battery_saving_mode">Modalità di risparmio batteria</string>
 </resources>

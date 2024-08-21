@@ -5313,7 +5313,6 @@
     <string name="rendering_value_sacScale_description">Schweizer Alpen-Club</string>
     <string name="shared_string_not_checked">Nicht geprüft</string>
     <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
-    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="write_bearing">Peilung schreiben</string>
     <string name="write_heading">Richtung schreiben</string>
@@ -5860,9 +5859,11 @@
     <string name="help_article_map_tracks_name">Strecken</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
-    <string name="height_cache">Höhen-Cache</string>
     <string name="add_widget_below">Widget unten hinzufügen</string>
     <string name="add_widget_above">Widget oben hinzufügen</string>
     <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
     <string name="add_widget_to_the_left">Widget links hinzufügen</string>
+    <string name="delete_widget">Widget löschen?</string>
+    <string name="delete_widget_description">Dieses Widget wird gelöscht. Du kannst es später im Bildschirm Konfigurieren wiederherstellen.</string>
+    <string name="battery_saving_mode">Batteriesparmodus</string>
 </resources>

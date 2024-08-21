@@ -16,8 +16,7 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import net.osmand.data.QuadRect
-import net.osmand.gpx.GPXUtilities
+import net.osmand.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripHelper
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -25,15 +24,19 @@ import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
-import net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
+import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.cFile
+import net.osmand.shared.gpx.GpxDataItem
+import net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME
+import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KMapUtils
 import net.osmand.util.Algorithms
-import net.osmand.util.MapUtils
 
 class TracksScreen(
 	carContext: CarContext,
@@ -108,7 +111,7 @@ class TracksScreen(
                 if (item != null) {
                     track.dataItem = item
                 }
-                val gpxFile = GPXUtilities.loadGPXFile(file)
+                val gpxFile = GpxUtilities.loadGpxFile(file.cFile())
                 val selectedGpxFile = SelectedGpxFile()
                 selectedGpxFile.setGpxFile(gpxFile, app)
                 newMap[track] = selectedGpxFile
@@ -127,7 +130,7 @@ class TracksScreen(
 		val tracksSize = trackTab.trackItems.size
 		val selectedGpxFiles = ArrayList<SelectedGpxFile>()
 		val tracks = trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
-		val mapRect = QuadRect()
+		val mapRect = KQuadRect()
 		if (!Algorithms.isEmpty(tracks)) {
 			initialCompassMode = app.settings.compassMode
 			app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
@@ -136,8 +139,8 @@ class TracksScreen(
 			val gpxFile = loadedGpxFiles[track]
 			gpxFile?.let {
 				selectedGpxFiles.add(it)
-				val gpxRect: QuadRect = it.gpxFile.rect
-				Algorithms.extendRectToContainRect(mapRect, gpxRect)
+				val gpxRect: KQuadRect = it.gpxFile.getRect()
+				KAlgorithms.extendRectToContainRect(mapRect, gpxRect)
 			}
 			val title = track.name
 			val icon = CarIcon.Builder(
@@ -151,10 +154,11 @@ class TracksScreen(
 			var dist = 0f
 			track.dataItem?.let { dataItem ->
 				description = dataItem.getParameter(NEAREST_CITY_NAME) ?: ""
-				dist = if (dataItem.analysis == null || dataItem.analysis?.latLonStart == null) {
+				val latLonStart = dataItem.getAnalysis()?.getLatLonStart()
+				dist = if (latLonStart == null) {
 					0f
 				} else {
-					MapUtils.getDistance(latLon, dataItem.analysis?.latLonStart).toFloat()
+					KMapUtils.getDistance(SharedUtil.kLatLon(latLon), latLonStart).toFloat()
 				}
 			}
 			val address =
@@ -168,7 +172,7 @@ class TracksScreen(
 				.setOnClickListener { onClickTrack(track) }
 				.build())
 		}
-		adjustMapToRect(latLon, mapRect)
+		adjustMapToRect(latLon, SharedUtil.jQuadRect(mapRect))
 		app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(selectedGpxFiles)
 		templateBuilder.setItemList(listBuilder.build())
 	}

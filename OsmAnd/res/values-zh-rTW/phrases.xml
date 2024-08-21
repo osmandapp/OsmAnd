@@ -4868,4 +4868,9 @@
     <string name="poi_property_management">物業管理辦公室</string>
     <string name="poi_engineer">工程師辦公室</string>
     <string name="poi_mcdonalds">麥當勞</string>
+    <string name="poi_cash_in_yes">是</string>
+    <string name="poi_cash_in_no">否</string>
+    <string name="poi_cash_in_customers">顧客</string>
+    <string name="poi_diet_pescetarian_no">魚素飲食：否</string>
+    <string name="poi_cash_in">現金存款</string>
 </resources>

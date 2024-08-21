@@ -233,7 +233,7 @@ public class LocalItemUtils {
 			if (fileName.startsWith("heightmap")) {
 				return context.getString(R.string.relief_3d);
 			} else if (fileName.startsWith("height_cache")) {
-				return context.getString(R.string.height_cache);
+				return context.getString(R.string.altitude);
 			} else if (fileName.startsWith("hillshade")) {
 				return context.getString(R.string.shared_string_hillshade);
 			} else if (fileName.startsWith("slope")) {

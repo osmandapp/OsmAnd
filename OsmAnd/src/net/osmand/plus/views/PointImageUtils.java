@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.TreeMap;
 

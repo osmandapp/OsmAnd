@@ -1,20 +1,20 @@
 package net.osmand.plus.track;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.SensorAttributesUtils;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.CollectionUtils;
 
 public enum Gpx3DVisualizationType {
@@ -64,13 +64,13 @@ public enum Gpx3DVisualizationType {
 	private static final Float TEMPERATURE_TO_HEIGHT_OFFSET = 100.0f;
 
 	public static double getPointElevation(@NonNull WptPt point, @NonNull Track3DStyle style) {
-		double pointElevation = getValidElevation(point.ele);
+		double pointElevation = getValidElevation(point.getEle());
 		Gpx3DVisualizationType type = style.getVisualizationType();
 
 		double elevation = switch (type) {
 			case NONE -> 0;
 			case ALTITUDE -> pointElevation;
-			case SPEED -> point.speed * SPEED_TO_HEIGHT_SCALE;
+			case SPEED -> point.getSpeed() * SPEED_TO_HEIGHT_SCALE;
 			case FIXED_HEIGHT -> style.getElevation();
 			case HEART_RATE, BICYCLE_CADENCE, BICYCLE_POWER, TEMPERATURE, SPEED_SENSOR ->
 					getSensorElevation(point, type);
