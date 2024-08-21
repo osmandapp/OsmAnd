@@ -5855,4 +5855,5 @@
     <string name="delete_widget">Eliminare il widget?</string>
     <string name="delete_widget_description">Questo widget verrà eliminato. Puoi ripristinarlo più tardi in Configura schermo.</string>
     <string name="battery_saving_mode">Modalità di risparmio batteria</string>
+    <string name="app_mode_suv">SUV</string>
 </resources>
