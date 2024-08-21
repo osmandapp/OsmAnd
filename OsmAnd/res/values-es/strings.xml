@@ -5863,7 +5863,6 @@
     <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
     <string name="delete_widget_description">Este widget se eliminará. Puedes restaurarlo más tarde en la pantalla Configurar.</string>
     <string name="delete_widget">¿Eliminar el widget?</string>
-    <string name="height_cache">Caché de la altitud</string>
     <string name="battery_saving_mode">Modo de ahorro de batería</string>
     <string name="graph_axis">Eje del gráfico</string>
     <string name="y_axis_description">Selecciona hasta dos opciones para el eje Y.</string>

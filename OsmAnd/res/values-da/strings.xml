@@ -5863,7 +5863,6 @@
     <string name="route_roundabout_exit">Tag %1$d afkørsel</string>
     <string name="add_widget_above">Tilføj modul ovenfor</string>
     <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
-    <string name="height_cache">Højde-cache</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
     <string name="delete_widget">Slet modul?</string>

@@ -5860,7 +5860,6 @@
     <string name="help_article_map_tracks_name">Strecken</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
-    <string name="height_cache">Höhen-Cache</string>
     <string name="add_widget_below">Widget unten hinzufügen</string>
     <string name="add_widget_above">Widget oben hinzufügen</string>
     <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
