@@ -13,6 +13,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.GPX_EXTENSION_TAG_PREFIX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
@@ -1107,13 +1108,10 @@ public class TravelObfHelper implements TravelHelper {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
 									if (ROUTE_TRACK.equals(amenity.getSubType())) {
 										for (String key : amenity.getAdditionalInfoKeys()) {
-											if (TravelGpx.allowedTrackGpxTags.contains(key)) {
+											if (key.startsWith(GPX_EXTENSION_TAG_PREFIX)) {
+												String tag = key.replaceFirst(GPX_EXTENSION_TAG_PREFIX, "");
 												String val = amenity.getAdditionalInfo(key);
-												if (TravelGpx.renamedObfToGpxTags.containsKey(key)) {
-													gpxFileExtensions.put(TravelGpx.renamedObfToGpxTags.get(key), val);
-												} else {
-													gpxFileExtensions.put(key, val);
-												}
+												gpxFileExtensions.put(tag, val);
 											}
 										}
 									} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {

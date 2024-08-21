@@ -32,6 +32,7 @@ public class TravelGpx extends TravelArticle {
 	public static final String ROUTE_RADIUS = "route_radius";
 	public static final String USER = "user";
 	public static final String ACTIVITY_TYPE = "route_activity_type";
+	public static final String GPX_EXTENSION_TAG_PREFIX = "gpx_"; // enlisted in poi_types.xml name="route_track"
 
 	public String user;
 	public String activityType;
@@ -83,30 +84,9 @@ public class TravelGpx extends TravelArticle {
 		return wptPt;
 	}
 
-	public final static Set<String> allowedTrackGpxTags = new HashSet<>(Arrays.asList(
-			"show_arrows",
-			"show_start_finish",
-			"split_interval",
-			"split_type",
-			"line_3d_visualization_by_type",
-			"line_3d_visualization_wall_color_type",
-			"line_3d_visualization_position_type",
-			"vertical_exaggeration_scale",
-			"elevation_meters",
-			"color_palette",
-			"color",
-			"width",
-			"coloring_type",
-			"gpx_color" // special plain copy of osmand:color
-			// "points_groups" - how to pass as a single tag - by special encode/decode ?
-	));
-
-	public final static Map<String, String> renamedObfToGpxTags = new HashMap<>();
 	private final static Map<String, String> allowedPointObfToGpxTags = new HashMap<>();
 
 	static {
-		renamedObfToGpxTags.put("gpx_color", "color");
-
 		allowedPointObfToGpxTags.put("color", "color");
 		allowedPointObfToGpxTags.put("gpx_icon", "icon");
 		allowedPointObfToGpxTags.put("gpx_bg", "background");
