@@ -5862,7 +5862,6 @@
     <string name="ask_every_time">Запитувати щоразу</string>
     <string name="shared_string_automatically">Автоматично</string>
     <string name="compass_click_north_is_up">Затисніть, щоб змінити режим орієнтації</string>
-    <string name="height_cache">кеш висот</string>
     <string name="help_article_map_routes_name">Маршрути</string>
     <string name="add_widget_to_the_left">Додати віджет зліва</string>
     <string name="add_widget_below">Додати віджет знизу</string>
