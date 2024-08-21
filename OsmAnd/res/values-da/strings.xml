@@ -5869,4 +5869,7 @@
     <string name="delete_widget">Slet modul?</string>
     <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
     <string name="battery_saving_mode">Batterisparetilstand</string>
+    <string name="graph_axis">Graf-akse</string>
+    <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
+    <string name="app_mode_suv">SUV</string>
 </resources>
