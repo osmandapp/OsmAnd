@@ -5218,7 +5218,6 @@
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="shared_string_included">Incluído</string>
-    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Diversos</string>
     <string name="shared_string_class">Classe</string>
     <string name="dangerous_goods">Mercadorias perigosas</string>

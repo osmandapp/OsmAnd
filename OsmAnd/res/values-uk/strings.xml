@@ -5312,7 +5312,6 @@
     <string name="shared_string_not_checked">Не перевірено</string>
     <string name="shared_string_checked">Перевірено</string>
     <string name="rendering_attr_alpineHiking_description">Типи класифікації складності маршрутів.</string>
-    <string name="rendering_attr_alpineHiking_name">Класифікація складності</string>
     <string name="rendering_value_sacScale_description">Швейцарський альпійський клуб</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Італійський альпійський клуб)</string>
     <string name="rendering_value_sacScale_name">SAC</string>

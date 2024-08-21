@@ -5195,7 +5195,6 @@
     <string name="calculate_offline">Израчунај ван мреже</string>
     <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
     <string name="shared_string_included">Обухваћено</string>
-    <string name="rendering_attr_alpineHiking_name">Разврставање по тежини</string>
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>

@@ -5331,7 +5331,6 @@
     <string name="write_bearing">Escribir rumbo</string>
     <string name="write_heading_description">Guarda el encabezado de cada punto de la traza durante la grabación</string>
     <string name="write_heading">Escribir encabezado</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
     <string name="shared_string_included">Incluido</string>
     <string name="feature_available_as_part_of_plan">«%1$s» disponible como parte del plan «%2$s»</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>

@@ -4829,7 +4829,6 @@
     <string name="open_issue_on_github_descr">Postavi pitanje, predloži nove mogućnosti</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Eksplozivi</string>
     <string name="rendering_value_caiScale_name">CAI</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikacija po težini</string>
     <string name="rssi_widget_desc">Prikazuj stepen RSSI tvog spoljnjeg uređaja.</string>
     <string name="ant_plus_pair_bluetooth_prompt">Možeš upariti senzore Bluetooth LE i ANT+ sa OsmAndom.</string>
     <string name="camera_app">Kamera</string>

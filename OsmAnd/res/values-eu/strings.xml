@@ -5322,7 +5322,6 @@
     <string name="write_heading_description">Gorde goiburua arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
     <string name="write_bearing_description">Gorde norabidea arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
     <string name="write_bearing">Idatzi norabidea</string>
-    <string name="rendering_attr_alpineHiking_name">Zailtasunen sailkapena</string>
     <string name="shared_string_included">Barne</string>
     <string name="feature_available_as_part_of_plan">%1$s eskuragarri dago %2$s planaren barruan</string>
     <string name="write_heading">Idatzi goiburua</string>
