@@ -5870,4 +5870,5 @@
     <string name="battery_saving_mode">Batteriesparmodus</string>
     <string name="graph_axis">Grafik-Achse</string>
     <string name="y_axis_description">Wähle bis zu zwei Optionen für die Y-Achse.</string>
+    <string name="app_mode_suv">SUV</string>
 </resources>
