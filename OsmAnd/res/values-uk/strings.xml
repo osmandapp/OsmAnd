@@ -5826,7 +5826,7 @@
     <string name="choose_map_orientation">Виберіть орієнтацію мапи</string>
     <string name="shared_string_all_icons">Усі піктограми</string>
     <string name="profile_icon">Піктограма профілю</string>
-    <string name="navigation_position_icon">Піктограма позиції розташування</string>
+    <string name="navigation_position_icon">Піктограма руху</string>
     <string name="resting_position_icon_summary">Піктограма показується, коли ви не рухаєтеся.</string>
     <string name="resting_position_icon">Піктограма положення спокою</string>
     <string name="rendering_value_pale_name">Блідий</string>
