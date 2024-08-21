@@ -5870,4 +5870,7 @@
     <string name="delete_widget">Brišeš vidžet?</string>
     <string name="delete_widget_description">Ovaj widžet će biti izbrisan. Možeš ga vratiti kasnije u podešavanjima ekrana.</string>
     <string name="battery_saving_mode">Režim uštede baterije</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">Grafička osa</string>
+    <string name="y_axis_description">Izaberite do dve opcije za Y osu.</string>
 </resources>
