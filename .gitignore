@@ -27,6 +27,7 @@ agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+java_pid*.hprof
 .attach_pid*
 hs_err_pid*
 /.idea
