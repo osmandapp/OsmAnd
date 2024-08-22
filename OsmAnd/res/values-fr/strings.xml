@@ -5859,13 +5859,13 @@
     <string name="shared_string_interface">Interface</string>
     <string name="quick_action_previous_screen_desc">Un interrupteur pour retourner à l\'écran précédent.</string>
     <string name="quick_action_previous_screen_title">Écran précédent</string>
-    <string name="quick_action_verb_navigate">Naviguer</string>
-    <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
-    <string name="quick_action_drawer_desc">Un interrupteur pour afficher ou masquer le menu du côté.</string>
-    <string name="quick_action_drawer_title">Menu du côté</string>
+    <string name="quick_action_verb_navigate">Guidage</string>
+    <string name="rendering_attr_alpineHiking_name">Classification des sentiers de randonnée selon leur difficulté</string>
+    <string name="quick_action_drawer_desc">Un interrupteur pour afficher ou masquer le menu latéral.</string>
+    <string name="quick_action_drawer_title">Menu latéral</string>
     <string name="quick_action_search_view_desc">Un interrupteur pour ouvrir ou fermer la vue recherche.</string>
     <string name="quick_action_search_view_title">Vue recherche</string>
     <string name="quick_action_navigation_view_desc">Un interrupteur pour ouvrir ou fermer la vue guidage.</string>
     <string name="quick_action_navigation_view_title">Vue guidage</string>
-    <string name="quick_action_switch_compass_desc">Un interrupteur pour changer l\'orientation de la carte.</string>
+    <string name="quick_action_switch_compass_desc">Un interrupteur pour modifier l\'orientation de la carte.</string>
 </resources>
