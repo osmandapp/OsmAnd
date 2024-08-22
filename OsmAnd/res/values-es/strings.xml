@@ -5866,4 +5866,5 @@
     <string name="graph_axis">Eje del gráfico</string>
     <string name="y_axis_description">Selecciona hasta dos opciones para el eje Y.</string>
     <string name="app_mode_suv">Todoterreno</string>
+    <string name="rendering_attr_alpineHiking_name">Grado de dificultad de las rutas de senderismo</string>
 </resources>
