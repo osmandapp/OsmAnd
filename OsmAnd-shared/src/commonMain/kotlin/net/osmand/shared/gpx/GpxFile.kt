@@ -881,6 +881,6 @@ class GpxFile : GpxExtensions {
 	}
 
 	companion object {
-		const val DEFAULT_WPT_GROUP_NAME = "default"
+		const val DEFAULT_WPT_GROUP_NAME = ""
 	}
 }

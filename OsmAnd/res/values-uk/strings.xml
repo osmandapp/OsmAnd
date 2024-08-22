@@ -4950,7 +4950,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
-    <string name="shared_string_open">Відкритий</string>
+    <string name="shared_string_open">Відчинено</string>
     <string name="shared_string_purchased_on">Придбано</string>
     <string name="shared_string_expires">Спливає</string>
     <string name="choose_what_to_sync">Виберіть, що синхронізувати</string>
