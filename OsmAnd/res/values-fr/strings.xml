@@ -5853,4 +5853,7 @@
     <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
     <string name="delete_widget">Supprimer le gadget ?</string>
     <string name="battery_saving_mode">Mode économie de batterie</string>
+    <string name="graph_axis">Axes du graphique</string>
+    <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
+    <string name="app_mode_suv">SUV</string>
 </resources>
