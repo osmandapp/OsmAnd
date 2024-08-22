@@ -5871,4 +5871,5 @@
     <string name="app_mode_suv">SUV</string>
     <string name="graph_axis">Grafička osa</string>
     <string name="y_axis_description">Izaberi do dve opcije za Y osu.</string>
+    <string name="rendering_attr_alpineHiking_name">Stepen težine pešačkih staza</string>
 </resources>
