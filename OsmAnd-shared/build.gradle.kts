@@ -109,3 +109,7 @@ publishing {
 		}
 	}
 }
+
+tasks.named("publishIvyOsmAndSharedAndroidPublicationToIvyRepository") {
+	dependsOn("bundleDebugAar", "bundleReleaseAar")
+}
