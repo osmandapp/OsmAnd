@@ -5856,4 +5856,8 @@
     <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
     <string name="app_mode_suv">SUV</string>
+    <string name="shared_string_interface">Interface</string>
+    <string name="quick_action_previous_screen_desc">Un interrupteur pour retourner à l\'écran précédent.</string>
+    <string name="quick_action_previous_screen_title">Écran précédent</string>
+    <string name="quick_action_verb_navigate">Naviguer</string>
 </resources>
