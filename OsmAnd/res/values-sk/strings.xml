@@ -5343,7 +5343,6 @@
     <string name="write_heading">Zapisovať relatívne smerovanie</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_attr_alpineHiking_description">Typy klasifikácií obtiažnosti pre trasy.</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikácia obtiažnosti</string>
     <string name="shared_string_checked">Zvolené</string>
     <string name="shared_string_not_checked">Nezvolené</string>
     <string name="dangerous_goods">Nebezpečný náklad</string>

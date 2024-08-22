@@ -5303,7 +5303,6 @@
     <string name="rendering_attr_alpineHiking_description">Typy klasifikace tras podle obtížnosti.</string>
     <string name="rendering_value_sacScale_description">Švýcarský alpinistický klub</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (italský alpinistický klub)</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="write_bearing_description">Ukládat azimut každého bodu stopy během záznamu</string>
@@ -5775,7 +5774,6 @@
     <string name="add_widget_above">Přidat widget nad</string>
     <string name="add_widget_to_the_right">Přidat widget vpravo</string>
     <string name="add_widget_to_the_left">Přidat widget vlevo</string>
-    <string name="height_cache">výšková mezipaměť</string>
     <string name="daynight_mode_sensor_summary">Použije světelný senzor zařízení pro přepínání mezi světlým a tmavým režimem podle úrovně okolního světla.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Automaticky přepíná mezi denním a nočním režimem podle místního času východu a západu slunce.</string>
     <string name="daynight_mode_night_summary">Vždy zobrazí mapu ve tmavém režimu, vhodné v noci a v podmínkách se slabým osvětlením.</string>

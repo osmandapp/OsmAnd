@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="height_cache">Высота</string>
     <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
@@ -5291,7 +5290,6 @@
     <string name="rendering_value_sacScale_description">Швейцарский альпийский клуб (SAC)</string>
     <string name="rendering_value_caiScale_description">Итальянский альпийский клуб (CAI)</string>
     <string name="rendering_attr_alpineHiking_description">Классификация сложности маршрутов.</string>
-    <string name="rendering_attr_alpineHiking_name">Классификация сложности</string>
     <string name="routing_attr_hazmat_category_usa_5_name">Окислители и органические пероксиды</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Токсичные и инфекционные вещества</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Взрывчатые вещества</string>

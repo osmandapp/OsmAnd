@@ -10,6 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_interface">Interface</string>
+    <string name="quick_action_previous_screen_desc">A toggle to navigate to the previous screen.</string>
+    <string name="quick_action_previous_screen_title">Previous screen</string>
+    <string name="quick_action_verb_navigate">Navigate</string>
+    <string name="quick_action_drawer_desc">A toggle to show or hide side menu.</string>
+    <string name="quick_action_drawer_title">Side menu</string>
+    <string name="quick_action_search_view_desc">A toggle to open or close search view.</string>
+    <string name="quick_action_search_view_title">Search view</string>
+    <string name="quick_action_navigation_view_desc">A toggle to open or close navigation view.</string>
+    <string name="quick_action_navigation_view_title">Navigation view</string>
+    <string name="quick_action_switch_compass_desc">A toggle to switch map orientation.</string>
     <string name="app_mode_suv">SUV</string>
 	<string name="graph_axis">Graph axis</string>
 	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
@@ -19,7 +31,6 @@
 	<string name="add_widget_above">Add widget above</string>
 	<string name="add_widget_to_the_right">Add widget to the right</string>
 	<string name="add_widget_to_the_left">Add widget to the left</string>
-	<string name="height_cache">Height cache</string>
 	<string name="route_roundabout_exit">Take %1$d exit</string>
 	<string name="help_article_map_tracks_name">Tracks</string>
 	<string name="help_article_map_routes_name">Routes</string>
@@ -528,7 +539,7 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
     <string name="rendering_attr_alpineHiking_description">Difficulty classification types for the routes.</string>
-    <string name="rendering_attr_alpineHiking_name">Difficulty classification</string>
+    <string name="rendering_attr_alpineHiking_name">Hiking trails difficulty grade</string>
     <string name="shared_string_checked">Checked</string>
     <string name="shared_string_not_checked">Not checked</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>

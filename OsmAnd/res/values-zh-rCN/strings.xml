@@ -1322,7 +1322,7 @@
     <string name="mapillary_widget_descr">可以助你迅速将图片提交到 Mapillary。</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">街景级图像。您也可以自己贡献。要以地图图层的形式查看现有数据，请在 \"配置地图 \"菜单中打开 \"街景图像\"。</string>
-    <string name="quick_action_showhide_osmbugs_descr">轻点动作按钮会在地图上显示或隐藏 OSM 注记。</string>
+    <string name="quick_action_showhide_osmbugs_descr">在地图上显示或隐藏 OSM 注记的按钮。</string>
     <string name="sorted_by_distance">按距离排序</string>
     <string name="search_favorites">在我的收藏中搜索</string>
     <string name="hillshade_menu_download_descr">下载“山体阴影”叠加层地图以显示垂直阴影。</string>
@@ -2148,7 +2148,7 @@
     <string name="show_more_map_detail_descr">在较低的缩放级别上显示一些矢量地图细节（道路等）。</string>
     <string name="shared_string_others">其它</string>
     <string name="vector_data_missing">下载（\"离线\"）数据以便离线使用地图。</string>
-    <string name="shared_string_release">已发布</string>
+    <string name="shared_string_release">已发行</string>
     <string name="local_index_items_backuped">%2$d 项中的 %1$d 项已停用。</string>
     <string name="local_index_items_deleted">%2$d 项中的 %1$d 项已删除。</string>
     <string name="local_index_items_restored">%2$d 项中的 %1$d 项已启动。</string>
@@ -4401,7 +4401,7 @@
 \n
 \n</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车 IMBA 路径</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">显示专用的山地自行车小径。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">显示山地自行车专用路径。</string>
     <string name="connect_with_straight_line">用直线连接</string>
     <string name="attach_roads_warning">只有已录制的轨迹可以附加到道路上。</string>
     <string name="without_profiles_changing">无需更改配置文件</string>
@@ -4975,7 +4975,7 @@
     <string name="shared_string_next_sunset">下次日落</string>
     <string name="weather_wind_kn">节</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="mtb_scale">山地自行车级别</string>
+    <string name="mtb_scale">山地自行车难度分级 / MTB scale</string>
     <string name="download_cloud_version">下载云端版本</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">风速等值线</string>
     <string name="open_weather_action_description">允许您打开包含详细天气信息的屏幕。</string>
@@ -5310,7 +5310,6 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">意大利高山俱乐部</string>
     <string name="rendering_attr_alpineHiking_description">路线的难度分类类型。</string>
-    <string name="rendering_attr_alpineHiking_name">难度分级</string>
     <string name="shared_string_checked">已检查</string>
     <string name="shared_string_not_checked">未检查</string>
     <string name="routing_attr_hazmat_category_usa_1_name">爆炸物</string>
@@ -5696,4 +5695,30 @@
     <string name="assigned_keys">已分配的按键</string>
     <string name="steps_per_minute_unit">步数每分钟</string>
     <string name="wall_height">墙壁高度</string>
+    <string name="weather_precip_in">英寸</string>
+    <string name="quick_action_temperature_layer">在地图上切换展示或隐藏温度图层。</string>
+    <string name="change_key_binding">更改按键绑定</string>
+    <string name="quick_action_air_pressure_layer">在地图上切换展示或隐藏气压图层。</string>
+    <string name="quick_action_cloud_layer">在地图上切换展示或隐藏云层图层。</string>
+    <string name="rendering_attr_showMtbScale_name">显示山地自行车难度分级</string>
+    <string name="quick_action_precipitation_layer">在地图上切换展示或隐藏降水图层。</string>
+    <string name="key_event_action_activity_back_pressed">按下活动返回键</string>
+    <string name="special_routing_cpp">特殊路线规划类型</string>
+    <string name="rendering_attr_showMtbScale_description">根据山地自行车难度分级显示路径。</string>
+    <string name="cloud_changes">云端变更</string>
+    <string name="lang_zh_hant">繁体中文</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">开启 WunderLINQ 数据网格</string>
+    <string name="rendering_value_name_only_name">仅名称</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="mtb_segment_classification">细分分类</string>
+    <string name="lang_zh_hans">简体中文</string>
+    <string name="battery_saving_mode">省电模式</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="weather_precip_mm">毫米</string>
+    <string name="lang_war">瓦瑞语</string>
+    <string name="no_config_smart_folder_description">智能文件夹可按照已应用的过滤器对轨迹进行分组</string>
+    <string name="changes">变更 %1$s</string>
+    <string name="quick_action_wind_layer">在地图上切换展示或隐藏风力图层。</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
 </resources>

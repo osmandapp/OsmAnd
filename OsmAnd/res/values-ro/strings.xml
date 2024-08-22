@@ -1225,7 +1225,7 @@
     <string name="map_widget_top">Bara de stare</string>
     <string name="map_widget_right">Panou dreapta</string>
     <string name="map_widget_left">Panou stânga</string>
-    <string name="shared_string_show">Arată</string>
+    <string name="shared_string_show">Spectacol</string>
     <string name="configure_map">Configurare hartă</string>
     <string name="search_radius_proximity">În</string>
     <string name="anonymous_user">Utilizator anonim</string>
@@ -5294,7 +5294,6 @@
     <string name="free_settings_backup">Backup gratuit al setărilor</string>
     <string name="free_ride">Deplasare liberă</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificare dificultate</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_description">Clubul Alpin Elvețian</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Clubul Alpin Italian)</string>
@@ -5863,7 +5862,6 @@
     <string name="add_widget_below">Adăugă widget dedesubt</string>
     <string name="delete_widget">Ștergeți widget-ul?</string>
     <string name="delete_widget_description">Acest widget va fi șters. Îl puteți restaura ulterior în ecranul de configurare.</string>
-    <string name="height_cache">Cache de înălțime</string>
     <string name="add_widget_to_the_left">Adăugă widget la stânga</string>
     <string name="battery_saving_mode">Mod de economisire a bateriei</string>
     <string name="help_article_map_tracks_name">Trasee</string>

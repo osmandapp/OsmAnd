@@ -4645,7 +4645,6 @@
     <string name="maps_and_resources">Kaardid ja andmed</string>
     <string name="release_4_8">• Koostamisel versiooni 4.8 jaoks</string>
     <string name="delete_history_items">Kas kustutame %1$s ajalookirjet?</string>
-    <string name="rendering_attr_alpineHiking_name">Raskusastme klassifikatsioon</string>
     <string name="delete_history_items_descr">Kas kustutame valitud ajalookirjed?</string>
     <string name="quick_action_toggle_preference">Võimalus eelistust sisse/välja lülitada.</string>
     <string name="rendering_attr_alpineHiking_description">Radade keerukuse klassifikatsioonitüübid.</string>

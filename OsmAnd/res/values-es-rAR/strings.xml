@@ -5324,7 +5324,6 @@
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
     <string name="rendering_value_caiScale_name">CAI</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
     <string name="write_bearing_description">Guarda el rumbo para cada punto de la traza durante la grabación</string>
     <string name="write_bearing">Escribir rumbo</string>
     <string name="write_heading_description">Guarda el encabezado de cada punto de la traza durante la grabación</string>
@@ -5875,9 +5874,12 @@
     <string name="add_widget_above">Añadir widget encima</string>
     <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
     <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
-    <string name="height_cache">Caché de la altitud</string>
+    <string name="height_cache">Altitud</string>
     <string name="add_widget_below">Añadir widget debajo</string>
     <string name="delete_widget">¿Borrar widget?</string>
     <string name="delete_widget_description">Este widget será borrado. Puedes restaurarlo luego en «Configurar pantalla».</string>
     <string name="battery_saving_mode">Modo ahorro de batería</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="y_axis_description">Marca hasta dos opciones para el eje Y.</string>
+    <string name="graph_axis">Eje gráfico</string>
 </resources>

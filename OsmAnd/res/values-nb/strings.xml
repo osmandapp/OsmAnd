@@ -5196,7 +5196,6 @@
     <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive stoffer</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Etsende stoffer</string>
     <string name="dangerous_goods">Farlig gods</string>
-    <string name="rendering_attr_alpineHiking_name">Vanskelighetsklassifisering</string>
     <string name="rendering_attr_alpineHiking_description">Klassifiseringstyper for vanskelighetsgrad på rutene.</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italiensk alpinforening)</string>
     <string name="rendering_value_sacScale_description">Sveitsisk alpinklubb</string>

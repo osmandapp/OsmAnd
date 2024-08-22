@@ -5298,7 +5298,6 @@
     <string name="rendering_value_caiScale_description">義大利人阿爾卑斯山俱樂部</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_description">瑞士阿爾卑斯山俱樂部</string>
-    <string name="rendering_attr_alpineHiking_name">難度分類</string>
     <string name="rendering_attr_alpineHiking_description">路線的難度分類類型。</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="write_bearing">寫入方位資訊</string>
@@ -5849,9 +5848,11 @@
     <string name="add_widget_above">在上方新增小工具</string>
     <string name="add_widget_to_the_right">在右方新增小工具</string>
     <string name="add_widget_to_the_left">在左方新增小工具</string>
-    <string name="height_cache">高度快取</string>
     <string name="add_widget_below">在下方新增小工具</string>
     <string name="battery_saving_mode">省電模式</string>
     <string name="delete_widget_description">這個小工具將被刪除。您稍後可以在組態畫面中將其還原。</string>
     <string name="delete_widget">刪除小工具？</string>
+    <string name="graph_axis">圖表軸</string>
+    <string name="y_axis_description">最多為 Y 軸選取兩個選項。</string>
+    <string name="app_mode_suv">SUV</string>
 </resources>
