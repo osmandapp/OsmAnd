@@ -20,7 +20,8 @@ public class PopUpMenuDisplayData {
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;
 	public List<PopUpMenuItem> menuItems;
 	public OnPopUpMenuItemClickListener onItemClickListener;
-	public boolean showBelowAnchorView = false;
+	public boolean customDropDown = true;
+	public boolean showCompound = true;
 
 	public boolean hasCustomizations() {
 		if (layoutId != DEFAULT_LAYOUT_ID) {
