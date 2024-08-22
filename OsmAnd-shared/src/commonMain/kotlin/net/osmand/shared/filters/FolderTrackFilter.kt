@@ -1,14 +1,12 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.filters.TrackFilterType.FOLDER
+import net.osmand.shared.filters.TrackFilterType.FOLDER
 
 open class FolderTrackFilter(
-	app: OsmandApplication,
 	filterChangedListener: FilterChangedListener?
 ) :
-	ListTrackFilter(app, FOLDER, filterChangedListener) {
+	ListTrackFilter(FOLDER, filterChangedListener) {
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		val trackItemPropertyValue = getTrackPropertyValue(trackItem)

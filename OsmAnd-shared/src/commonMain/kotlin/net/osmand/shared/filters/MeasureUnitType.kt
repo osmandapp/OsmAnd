@@ -1,5 +1,7 @@
 package net.osmand.shared.filters
 
+import net.osmand.shared.util.OsmAndFormatter
+
 //import net.osmand.shared.filters.KMetricsConstants;
 
 enum class MeasureUnitType {
@@ -84,22 +86,19 @@ enum class MeasureUnitType {
 		}
 	}
 
-	fun getBaseValueFromFormatted(mc: KMetricsConstants, value: String): Float {
-		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-		val mode = app.settings.applicationMode
-		val speedConstant = app.settings.SPEED_SYSTEM.getModeValue(mode)
+	fun getBaseValueFromFormatted(value: String): Float {
+//		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
+//		val mode = app.settings.applicationMode
+//		val speedConstant = app.settings.SPEED_SYSTEM.getModeValue(mode)
 		return when (this) {
 			SPEED -> OsmAndFormatter.convertSpeedToMetersPerSecond(
-				value.toFloat(),
-				speedConstant)
+				value.toFloat())
 
 			ALTITUDE -> OsmAndFormatter.getMetersFromFormattedAltitudeValue(
-				value.toFloat(),
-				metricsConstants)
+				value.toFloat())
 
 			DISTANCE -> OsmAndFormatter.convertToMeters(
-				value.toFloat(),
-				metricsConstants)
+				value.toFloat())
 
 			TIME_DURATION -> value.toFloat() * 1000 * 60
 
@@ -108,25 +107,4 @@ enum class MeasureUnitType {
 
 	}
 
-	fun getFormattedValue(mc: KMetricsConstants, value: String): OsmAndFormatter.FormattedValue {
-		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-		return when (this) {
-			SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
-			ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
-				value.toDouble(),
-				app,
-				metricsConstants)
-
-			DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
-				value.toFloat(),
-				app)
-
-			TIME_DURATION -> OsmAndFormatter.FormattedValue(
-				value.toFloat() / 1000 / 60,
-				value,
-				"")
-
-			else -> OsmAndFormatter.FormattedValue(value.toFloat(), value, "")
-		}
-	}
 }

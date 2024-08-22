@@ -1,26 +1,25 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import com.google.gson.annotations.Expose
-import net.osmand.plus.OsmandApplication
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.util.Algorithms
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.PlatformUtil
 
 class OtherTrackFilter(
-	val app: OsmandApplication,
 	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(trackFilterType, filterChangedListener) {
 
-	@Expose
+	@Serializable
 	var selectedParams = ArrayList<OtherTrackParam>()
 
 	val parameters = ArrayList<OtherTrackParam>()
 
 	//for migration purposes only
-	@Expose
+	@Serializable
 	private var isVisibleOnMap: Boolean = false
 
-	@Expose
+	@Serializable
 	private var hasWaypoints: Boolean = false
 
 	init {
@@ -36,7 +35,7 @@ class OtherTrackFilter(
 	}
 
 	override fun isEnabled(): Boolean {
-		return !Algorithms.isEmpty(selectedParams)
+		return !KAlgorithms.isEmpty(selectedParams)
 	}
 
 	fun isParamSelected(param: OtherTrackParam): Boolean {
@@ -59,8 +58,7 @@ class OtherTrackFilter(
 	private fun isTrackParamAccepted(trackItem: TrackItem, param: OtherTrackParam): Boolean {
 		return when (param) {
 			OtherTrackParam.VISIBLE_ON_MAP -> {
-				val selectedGpxHelper = app.selectedGpxHelper
-				selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null
+				PlatformUtil.getOsmAndContext().isGpxFileVisible(trackItem.path)
 			}
 
 			OtherTrackParam.WITH_WAYPOINTS -> {

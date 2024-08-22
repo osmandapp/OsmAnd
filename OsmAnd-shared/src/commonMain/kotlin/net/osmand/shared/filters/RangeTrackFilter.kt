@@ -1,9 +1,8 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import com.google.gson.annotations.Expose
-import net.osmand.shared.gpx.GpxParameter
-import net.osmand.plus.OsmandApplication
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.GpxParameter
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -11,22 +10,21 @@ import kotlin.math.floor
 open class RangeTrackFilter<T : Comparable<T>>(
 	minValue: T,
 	maxValue: T,
-	val app: OsmandApplication,
 	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?)
 	: BaseTrackFilter(trackFilterType, filterChangedListener) {
 
-	@Expose
+	@Serializable
 	var minValue: T
 
-	@Expose
+	@Serializable
 	var maxValue: T
 		private set
 
-	@Expose
+	@Serializable
 	var valueFrom: T
 
-	@Expose
+	@Serializable
 	var valueTo: T
 
 	init {
@@ -48,14 +46,14 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		val convertedValue: T? = when (getProperty().typeClass) {
 			Double::class -> check(value.toDouble())
 			Float::class -> check(value.toFloat())
-			Integer::class -> check(value.toInt())
+			Int::class -> check(value.toInt())
 			Long::class -> check(value.toLong())
 			else -> null
 		}
 		if (convertedValue != null) {
 			return convertedValue
 		} else {
-			throw java.lang.IllegalArgumentException("value can not be cast to ${trackFilterType.property!!.typeClass}")
+			throw IllegalArgumentException("value can not be cast to ${trackFilterType.property!!.typeClass}")
 		}
 
 	}
@@ -63,7 +61,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	fun setValueTo(to: String, updateListeners: Boolean = true) {
 		val baseValue = getComparableValue(
 			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				app,
 				to))
 		setValueTo(baseValue, updateListeners)
 	}
@@ -71,7 +68,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {
 		val baseValue = getComparableValue(
 			trackFilterType.measureUnitType.getBaseValueFromFormatted(
-				app,
 				from)).toString()
 		setValueFrom(getValueFromString(baseValue), updateListeners)
 	}
@@ -133,10 +129,10 @@ open class RangeTrackFilter<T : Comparable<T>>(
 				other.valueTo == valueTo
 	}
 
-	open fun getDisplayMinValue(): Int {
-		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, flor(minValue))
-		return formattedValue.valueSrc.toInt()
-	}
+//	open fun getDisplayMinValue(): Int {
+//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, flor(minValue))
+//		return formattedValue.valueSrc.toInt()
+//	}
 
 	private fun flor(value: T): String {
 		return when (value) {
@@ -170,21 +166,21 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		}
 	}
 
-	open fun getDisplayMaxValue(): Int {
-		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(maxValue))
-		return formattedValue.valueSrc.toInt()
-	}
-
-	open fun getDisplayValueFrom(): Int {
-		val formattedValue =
-			trackFilterType.measureUnitType.getFormattedValue(app, valueFrom.toString())
-		return formattedValue.valueSrc.toInt()
-	}
-
-	open fun getDisplayValueTo(): Int {
-		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(valueTo))
-		return formattedValue.valueSrc.toInt()
-	}
+//	open fun getDisplayMaxValue(): Int {
+//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(maxValue))
+//		return formattedValue.valueSrc.toInt()
+//	}
+//
+//	open fun getDisplayValueFrom(): Int {
+//		val formattedValue =
+//			trackFilterType.measureUnitType.getFormattedValue(app, valueFrom.toString())
+//		return formattedValue.valueSrc.toInt()
+//	}
+//
+//	open fun getDisplayValueTo(): Int {
+//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(valueTo))
+//		return formattedValue.valueSrc.toInt()
+//	}
 
 	private fun getProperty(): GpxParameter {
 		return trackFilterType.property!!
@@ -195,7 +191,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 			return getValueFromString(value)
 		} else if (value is Number) {
 			return when (getProperty().typeClass) {
-				Integer::class -> check(value.toInt()) as T
+				Int::class -> check(value.toInt()) as T
 				Double::class -> check(value.toDouble()) as T
 				Long::class -> check(value.toLong()) as T
 				Float::class -> check(value.toFloat()) as T

@@ -32,6 +32,7 @@ kotlin {
     val okioVersion = "3.9.0"
     val kxml2Version = "2.1.8"
     val sqliterVersion = "1.3.1"
+    val dateTimeVersion = "0.6.1"
 
     sourceSets {
         commonMain.dependencies {
@@ -41,6 +42,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
             implementation("com.squareup.okio:okio:$okioVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
         }
         androidMain.dependencies {
             implementation("androidx.sqlite:sqlite:$sqliteVersion")

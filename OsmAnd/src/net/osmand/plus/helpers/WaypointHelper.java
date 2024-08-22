@@ -31,7 +31,7 @@ import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.data.SpeedConstants;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;

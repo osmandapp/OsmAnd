@@ -31,6 +31,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -270,7 +271,8 @@ public class OsmandApplication extends MultiDexApplication {
 		FileUtils.removeUnnecessaryFiles(this);
 
 		// Initialize shared library
-		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, getAppPath(null), getAppPath(GPX_INDEX_DIR));
+		OsmAndContextImpl.INSTANCE.initialize(this);
+		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, getAppPath(null), getAppPath(GPX_INDEX_DIR), OsmAndContextImpl.INSTANCE);
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();

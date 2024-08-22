@@ -1,28 +1,36 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import com.google.gson.annotations.Expose
-import net.osmand.shared.gpx.GpxParameter
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.format.DateTimeComponents
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import net.osmand.shared.gpx.GpxParameter
+import net.osmand.shared.util.PlatformUtil
+
+//import java.text.SimpleDateFormat
+//import java.util.Locale
+
+private const val DATE_PATTERN = "dd.MM.yyyy"
 
 class DateTrackFilter(
 	trackFilterType: TrackFilterType,
 	dateFrom: Long,
 	filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(trackFilterType, filterChangedListener) {
-	var initialValueFrom = dateFrom
-	var initialValueTo = Date().time
+	var initialValueFrom = Instant.fromEpochMilliseconds(dateFrom)
+	var initialValueTo = Clock.System.now()
 
-	@Expose
+	@Serializable
 	var valueFrom = initialValueFrom
 		set(value) {
 			field = value
 			filterChangedListener?.onFilterChanged()
 		}
 
-	@Expose
+	@Serializable
 	var valueTo = initialValueTo
 		set(value) {
 			field = value
@@ -35,20 +43,20 @@ class DateTrackFilter(
 			valueTo)
 	}
 
-	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
-		val day1String: String = getDateFormat().format(day1)
-		val day2String: String = getDateFormat().format(day2)
+	private fun isDatesEquals(day1: Instant, day2: Instant): Boolean {
+		val day1String: String = PlatformUtil.formatDate(day1, DATE_PATTERN)
+		val day2String: String = PlatformUtil.formatDate(day2, DATE_PATTERN)
 		return day1String == day2String
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		return if (trackItem.dataItem == null)
-			false
-		else {
-			val result =
-				trackItem.dataItem!!.getParameter(GpxParameter.FILE_CREATION_TIME) in valueFrom..valueTo
-			result
+
+		trackItem.dataItem?.let {
+			it.getParameter<Long>(GpxParameter.FILE_CREATION_TIME)?.let{creationTime ->
+				return Instant.fromEpochMilliseconds(creationTime) in valueFrom..valueTo
+			}
 		}
+		return false
 	}
 
 	override fun initWithValue(value: BaseTrackFilter) {
@@ -73,9 +81,5 @@ class DateTrackFilter(
 
 	override fun hashCode(): Int {
 		return valueFrom.hashCode() + valueTo.hashCode()
-	}
-
-	private fun getDateFormat(): SimpleDateFormat {
-		return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 	}
 }

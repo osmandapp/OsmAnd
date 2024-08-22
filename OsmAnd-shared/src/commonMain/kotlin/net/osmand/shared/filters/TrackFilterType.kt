@@ -1,5 +1,6 @@
 package net.osmand.shared.filters
 
+import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.filters.OtherTrackParam.VISIBLE_ON_MAP
 import net.osmand.shared.filters.OtherTrackParam.WITH_WAYPOINTS

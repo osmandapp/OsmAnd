@@ -3,28 +3,38 @@ package net.osmand.shared.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import kotlinx.datetime.Instant
 import net.osmand.shared.KException
+import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.io.KFile
 import java.io.File
 import java.lang.ref.WeakReference
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 actual object PlatformUtil {
 
 	private var context: WeakReference<Context>? = null
 	private var appDir: File? = null
 	private var gpxDir: File? = null
+	private lateinit var osmAndContext: OsmAndContext
 
 	private var sqliteApi: SQLiteAPI? = null
 
-	fun initialize(context: Context, appDir: File, gpxDir: File) {
+	fun initialize(context: Context, appDir: File, gpxDir: File, osmAndContext: OsmAndContext) {
 		this.context = WeakReference(context)
+		this.osmAndContext = osmAndContext
 		this.appDir = appDir
 		this.gpxDir = gpxDir
 
 		sqliteApi = SQLiteAPIImpl(context)
 		Localization.initialize(context)
+	}
+
+	actual fun getOsmAndContext(): OsmAndContext {
+		return osmAndContext
 	}
 
 	actual fun currentTimeMillis(): Long {
@@ -76,5 +86,11 @@ actual object PlatformUtil {
 			}
 		}
 		throw Resources.NotFoundException()
+	}
+
+
+	actual fun formatDate(date:Instant, pattern: String):String {
+		val formatter = SimpleDateFormat(pattern, Locale.getDefault())
+		return formatter.format(date)
 	}
 }

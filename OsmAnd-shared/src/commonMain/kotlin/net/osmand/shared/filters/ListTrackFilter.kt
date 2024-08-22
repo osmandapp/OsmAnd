@@ -1,16 +1,14 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
-import android.graphics.drawable.Drawable
-import android.util.Pair
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import net.osmand.shared.gpx.GpxParameter
-import net.osmand.plus.OsmandApplication
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.util.Algorithms
+import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams
+import net.osmand.shared.gpx.GpxParameter
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.MultiNameSerializer
+import net.osmand.shared.util.SerialNames
 
 open class ListTrackFilter(
-	val app: OsmandApplication,
 	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(trackFilterType, filterChangedListener) {
@@ -34,7 +32,7 @@ open class ListTrackFilter(
 		}
 
 	fun updateFullCollection(items: List<TrackItem>?) {
-		if (Algorithms.isEmpty(items)) {
+		if (KAlgorithms.isEmpty(items)) {
 			allItemsCollection = HashMap()
 		} else {
 			val newCollection = HashMap<String, Int>()
@@ -48,11 +46,12 @@ open class ListTrackFilter(
 	}
 
 	override fun isEnabled(): Boolean {
-		return !Algorithms.isEmpty(selectedItems)
+		return !KAlgorithms.isEmpty(selectedItems)
 	}
 
-	@Expose
-	@SerializedName("selectedItems", alternate=["selectedFolders", "selectedCities", "electedColors", "selectedWidths"])
+//	@SerialName("selectedItems", alternate=["selectedFolders", "selectedCities", "electedColors", "selectedWidths"])
+	@SerialNames("selectedItems", "selectedFolders", "selectedCities", "electedColors", "selectedWidths")
+	@Serializable(with = MultiNameSerializer::class)
 	var selectedItems = ArrayList<String>()
 		protected set
 	var allItems: MutableList<String> = arrayListOf()
@@ -64,7 +63,7 @@ open class ListTrackFilter(
 		allItemsCollection = collection
 	}
 
-	@Expose
+	@Serializable
 	var isSelectAllItemsSelected = false
 		set(value) {
 			field = value
@@ -131,13 +130,13 @@ open class ListTrackFilter(
 		return itemName
 	}
 
-	open fun getItemIcon(itemName: String): Drawable? {
-		return null
-	}
-
-	open fun getSelectAllItemIcon(isChecked: Boolean, nightMode: Boolean): Drawable? {
-		return null
-	}
+//	open fun getItemIcon(itemName: String): Drawable? {
+//		return null
+//	}
+//
+//	open fun getSelectAllItemIcon(isChecked: Boolean, nightMode: Boolean): Drawable? {
+//		return null
+//	}
 
 	fun getTracksCountForItem(itemName: String): Int {
 		return allItemsCollection[itemName] ?: 0
@@ -158,7 +157,7 @@ open class ListTrackFilter(
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		val trackItemPropertyValue = getTrackPropertyValue(trackItem)
 		for (item in selectedItems) {//***
-			if (Algorithms.stringsEqual(trackItemPropertyValue, item)) {
+			if (KAlgorithms.stringsEqual(trackItemPropertyValue, item)) {
 				return true
 			}
 		}
