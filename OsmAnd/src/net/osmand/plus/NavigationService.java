@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationCallback;
@@ -185,7 +184,7 @@ public class NavigationService extends Service {
 		LOG.info(">>>> NavigationService onDestroy");
 		// remove notification
 		stopForeground(STOP_FOREGROUND_REMOVE);
-		app.getNotificationHelper().updateTopNotification();
+		app.getNotificationHelper().resetTopNotification();
 		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
 	}
 

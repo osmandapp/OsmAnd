@@ -89,6 +89,12 @@ public class NotificationHelper {
 		}
 	}
 
+	public void resetTopNotification() {
+		for (OsmandNotification n : all) {
+			n.setTop(false);
+		}
+	}
+
 	public void updateTopNotification() {
 		OsmandNotification notification = acquireTopNotification(null);
 		setTopNotification(notification);
