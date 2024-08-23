@@ -48,7 +48,7 @@ public class QuickActionButtonState extends MapButtonState {
 		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
 		this.iconPref = settings.registerStringPreference(id + "_icon", DEFAULT_ICON_ID).makeGlobal().makeShared();
 		this.sizePref = settings.registerIntPreference(id + "_size", DEFAULT_ACTION_BUTTON_SIZE).makeGlobal().makeShared();
-		this.opacityPref = settings.registerFloatPreference(id + "_opacity", 1f).makeGlobal().makeShared();
+		this.opacityPref = settings.registerFloatPreference(id + "_opacity", 0.5f).makeGlobal().makeShared();
 		this.cornerRadiusPref = settings.registerIntPreference(id + "_corner_radius", 36).makeGlobal().makeShared();
 		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
 		this.fabMarginPref = new FabMarginPreference(settings, id + "_fab_margin");
@@ -219,7 +219,7 @@ public class QuickActionButtonState extends MapButtonState {
 		}
 		if (Algorithms.isEmpty(iconName)) {
 			if (isSingleAction()) {
-				int iconId = getQuickActions().get(0).getIconRes();
+				int iconId = getQuickActions().get(0).getIconRes(app);
 				if (iconId > 0) {
 					iconName = app.getResources().getResourceEntryName(iconId);
 				}
