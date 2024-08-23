@@ -1,11 +1,10 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static android.widget.ImageView.ScaleType.FIT_CENTER;
 import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
@@ -13,7 +12,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.plus.OsmandApplication;
@@ -29,9 +27,9 @@ import net.osmand.util.Algorithms;
 public abstract class MapButton {
 
 	@ColorRes
-	private static final int DEFAULT_DAY_ICON_COLOR_ID = R.color.map_button_icon_color_light;
+	public static final int DEFAULT_DAY_ICON_COLOR_ID = R.color.map_button_icon_color_light;
 	@ColorRes
-	private static final int DEFAULT_NIGHT_ICON_COLOR_ID = R.color.map_button_icon_color_dark;
+	public static final int DEFAULT_NIGHT_ICON_COLOR_ID = R.color.map_button_icon_color_dark;
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
@@ -194,7 +192,7 @@ public abstract class MapButton {
 	}
 
 	protected void setDrawable(@Nullable Drawable drawable) {
-		setMapButtonIcon(view, drawable);
+		setMapButtonIcon(view, drawable, FIT_CENTER);
 	}
 
 	public boolean updateVisibility() {
@@ -218,22 +216,6 @@ public abstract class MapButton {
 
 	protected boolean isShowBottomButtons() {
 		return showBottomButtons;
-	}
-
-	protected void setOnClickListener(@Nullable OnClickListener listener) {
-		view.setOnClickListener(listener);
-	}
-
-	protected void setOnLongClickListener(@Nullable OnLongClickListener listener) {
-		view.setOnLongClickListener(listener);
-	}
-
-	protected void setContentDesc(@StringRes int descId) {
-		setContentDesc(app.getString(descId));
-	}
-
-	protected void setContentDesc(@Nullable String description) {
-		view.setContentDescription(description);
 	}
 
 	public void onDestroyButton() {

@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -30,6 +31,10 @@ public class QuickActionButtonState extends MapButtonState {
 	private final CommonPreference<Boolean> statePref;
 	private final CommonPreference<String> namePref;
 	private final CommonPreference<String> quickActionsPref;
+	private final CommonPreference<String> iconPref;
+	private final CommonPreference<Integer> sizePref;
+	private final CommonPreference<Float> opacityPref;
+	private final CommonPreference<Integer> cornerRadiusPref;
 	private final FabMarginPreference fabMarginPref;
 
 	private List<QuickAction> quickActions = new ArrayList<>();
@@ -38,6 +43,10 @@ public class QuickActionButtonState extends MapButtonState {
 		super(app, id);
 		this.statePref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
 		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
+		this.iconPref = settings.registerStringPreference(id + "_icon", null).makeGlobal().makeShared();
+		this.sizePref = settings.registerIntPreference(id + "_size", 40).makeGlobal().makeShared();
+		this.opacityPref = settings.registerFloatPreference(id + "_opacity", 1f).makeGlobal().makeShared();
+		this.cornerRadiusPref = settings.registerIntPreference(id + "_corner_radius", 36).makeGlobal().makeShared();
 		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
 		this.fabMarginPref = new FabMarginPreference(settings, id + "_fab_margin");
 	}
@@ -109,6 +118,26 @@ public class QuickActionButtonState extends MapButtonState {
 	}
 
 	@NonNull
+	public CommonPreference<String> getIconPref() {
+		return iconPref;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getSizePref() {
+		return sizePref;
+	}
+
+	@NonNull
+	public CommonPreference<Float> getOpacityPref() {
+		return opacityPref;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getCornerRadiusPref() {
+		return cornerRadiusPref;
+	}
+
+	@NonNull
 	public CommonPreference<String> getQuickActionsPref() {
 		return quickActionsPref;
 	}
@@ -127,10 +156,10 @@ public class QuickActionButtonState extends MapButtonState {
 
 	@Nullable
 	@Override
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int colorId) {
+	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int color) {
 		if (isSingleAction()) {
 			QuickAction action = quickActions.get(0);
-			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), colorId);
+			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), color);
 
 			if (mapIcon && action.isActionWithSlash(app)) {
 				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
@@ -138,7 +167,7 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 			return icon;
 		}
-		return super.getIcon(nightMode, mapIcon, colorId);
+		return super.getIcon(nightMode, mapIcon, color);
 	}
 
 	public void resetForMode(@NonNull ApplicationMode appMode) {
@@ -177,6 +206,15 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public boolean isDefaultButton() {
 		return Algorithms.stringsEqual(DEFAULT_BUTTON_ID, getId());
+	}
+
+	@NonNull
+	public ButtonAppearanceParams createAppearanceParams() {
+		return new ButtonAppearanceParams(
+				getIconPref().get(),
+				getSizePref().get(),
+				getOpacityPref().get(),
+				getCornerRadiusPref().get());
 	}
 
 	@NonNull

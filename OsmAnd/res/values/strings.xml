@@ -10,7 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="background_opacity">Background opacity</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="shared_string_dp">dp</string>
     <string name="shared_string_interface">Interface</string>
     <string name="quick_action_previous_screen_desc">A toggle to navigate to the previous screen.</string>
     <string name="quick_action_previous_screen_title">Previous screen</string>

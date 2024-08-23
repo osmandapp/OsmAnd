@@ -186,6 +186,8 @@
 	    <attr name="alert_dialog_theme" format="reference" />
 	    <attr name="active_color_primary" format="reference" />
 	    <attr name="slider_label_text_dark" format="reference" />
+	    <attr name="app_bar_secondary_color" format="reference"/>
+	    <attr name="map_button_icon_color" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

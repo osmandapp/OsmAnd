@@ -15,7 +15,7 @@ public class ConfigureMapButton extends MapButton {
 	public ConfigureMapButton(@NonNull MapActivity mapActivity) {
 		super(mapActivity, mapActivity.findViewById(R.id.map_layers_button), LAYERS_HUD_ID, false);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			MapActivity.clearPrevActivityIntent();
 			mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, AndroidUtils.getCenterViewCoordinates(v));
 		});

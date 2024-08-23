@@ -44,8 +44,8 @@ public class Map3DButtonState extends MapButtonState {
 
 	@Nullable
 	@Override
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int colorId) {
-		return uiUtilities.getPaintedIcon(getVisibility().getIconId(), colorId);
+	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int color) {
+		return uiUtilities.getPaintedIcon(getVisibility().getIconId(), color);
 	}
 
 	public float getElevationAngle() {
