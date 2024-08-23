@@ -5883,4 +5883,7 @@
     <string name="quick_action_navigation_view_desc">Prekidač za otvaranje ili zatvaranje prikaza navigacije.</string>
     <string name="quick_action_navigation_view_title">Prikaz navigacije</string>
     <string name="quick_action_switch_compass_desc">Prekidač za promenu orijentacije mape.</string>
+    <string name="corner_radius">Radijus ugla</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Prozirnost pozadine</string>
 </resources>
