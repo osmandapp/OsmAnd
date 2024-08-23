@@ -13,16 +13,21 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.GPX_EXTENSION_TAG_PREFIX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.POINTS_GROUPS_TAG_PREFIX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_ICONS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_NAMES;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
+import static net.osmand.shared.gpx.primitives.GpxExtensions.OBF_GPX_EXTENSION_TAG_PREFIX;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
@@ -59,6 +64,7 @@ import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.GpxExtensions;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1115,18 +1121,23 @@ public class TravelObfHelper implements TravelHelper {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
 									if (ROUTE_TRACK.equals(amenity.getSubType())) {
 										for (String key : amenity.getAdditionalInfoKeys()) {
-											if (key.startsWith(GPX_EXTENSION_TAG_PREFIX)) {
-												String tag = key.replaceFirst(GPX_EXTENSION_TAG_PREFIX, "");
+											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
+												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
 												String val = amenity.getAdditionalInfo(key);
 												gpxFileExtensions.put(tag, val);
-											} else if (key.startsWith(POINTS_GROUPS_TAG_PREFIX)) {
-												final String DELIMITER = "~~~";
+											} else if (key.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
+												final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
 												String joinedValues = amenity.getAdditionalInfo(key);
-												List<String> values = Arrays.asList(joinedValues.split(DELIMITER));
-												if (key.endsWith("names")) pgNames.addAll(values);
-												else if (key.endsWith("icons")) pgIcons.addAll(values);
-												else if (key.endsWith("colors")) pgColors.addAll(values);
-												else if (key.endsWith("backgrounds")) pgBackgrounds.addAll(values);
+												List<String> values = Arrays.asList(joinedValues.split(delimiter));
+												if (OBF_POINTS_GROUPS_NAMES.equals(key)) {
+													pgNames.addAll(values);
+												} else if (OBF_POINTS_GROUPS_ICONS.equals(key)) {
+													pgIcons.addAll(values);
+												} else if (OBF_POINTS_GROUPS_COLORS.equals(key)) {
+													pgColors.addAll(values);
+												} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(key)) {
+													pgBackgrounds.addAll(values);
+												}
 											}
 										}
 									} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
