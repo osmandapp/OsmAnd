@@ -199,15 +199,15 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void resetAppearance() {
-		appearanceParams.setIconName(buttonState.getIconPref().get());
-		appearanceParams.setSize(buttonState.getSizePref().get());
-		appearanceParams.setOpacity(buttonState.getOpacityPref().get());
-		appearanceParams.setCornerRadius(buttonState.getCornerRadiusPref().get());
+		appearanceParams.setIconName(buttonState.getIconPref().getDefaultValue());
+		appearanceParams.setSize(buttonState.getSizePref().getDefaultValue());
+		appearanceParams.setOpacity(buttonState.getOpacityPref().getDefaultValue());
+		appearanceParams.setCornerRadius(buttonState.getCornerRadiusPref().getDefaultValue());
 		updateContent();
 	}
 
 	@Override
-	public void onCardPressed(@NonNull @NotNull BaseCard card) {
+	public void onCardPressed(@NonNull BaseCard card) {
 		updateButtons();
 	}
 

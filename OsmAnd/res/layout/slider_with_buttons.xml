@@ -4,12 +4,12 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/card_and_list_background_basic"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding_half">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
 		android:paddingHorizontal="@dimen/content_padding"
 		android:paddingTop="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding_small">
@@ -35,9 +35,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
-		android:minHeight="@dimen/bottom_sheet_list_item_height"
-		android:paddingHorizontal="@dimen/content_padding_half">
+		android:paddingHorizontal="@dimen/content_padding_round_medium">
 
 		<ImageButton
 			android:id="@+id/decrease_button"

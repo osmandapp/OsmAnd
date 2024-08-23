@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.DEFAULT_ICON_ID;
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -58,7 +60,7 @@ public class ButtonIconsCard extends MapBaseCard {
 		ViewGroup container = view.findViewById(R.id.content_container);
 		container.removeAllViews();
 
-		paletteController.setIcons(getSelectedCategoryIconKeys());
+		paletteController.setIcons(getIconsNames());
 		String iconName = appearanceParams.getIconName();
 		if (!Algorithms.isEmpty(iconName)) {
 			paletteController.setSelectedIcon(iconName);
@@ -71,13 +73,14 @@ public class ButtonIconsCard extends MapBaseCard {
 		}.build());
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_summary), false);
+		AndroidUtils.setPadding(container, 0, 0, 0, getDimen(R.dimen.content_padding));
 		AndroidUtils.setBackground(view, new ColorDrawable(ColorUtilities.getCardAndListBackgroundColor(app, nightMode)));
 	}
 
 	@NonNull
-	private List<String> getSelectedCategoryIconKeys() {
+	private List<String> getIconsNames() {
 		Set<String> iconNames = new LinkedHashSet<>();
-		iconNames.add("ic_quick_action");
+		iconNames.add(DEFAULT_ICON_ID);
 
 		for (QuickAction action : buttonState.getQuickActions()) {
 			int iconId = action.getIconRes();
