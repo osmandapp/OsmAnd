@@ -412,6 +412,9 @@ public class RoutePlannerFrontEnd {
 	                                            ResultMatcher<GpxRouteApproximation> resultMatcher,
 	                                            boolean useExternalTimestamps)
 			throws IOException, InterruptedException {
+		if (!isUseNativeApproximation()) {
+			gctx.ctx.nativeLib = null; // rare case of C++ routing (setup) -> Online routing -> Java approximation
+		}
 		GpxRouteApproximation result;
 		if (useGeometryBasedApproximation) {
 			result = searchGpxSegments(gctx, gpxPoints, resultMatcher);
