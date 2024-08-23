@@ -13,10 +13,12 @@ public class LocationsHolder {
 	private static final int LOCATION_TYPE_LATLON = 0;
 	private static final int LOCATION_TYPE_LOCATION = 1;
 	private static final int LOCATION_TYPE_WPTPT = 2;
+	private static final int LOCATION_TYPE_WPTPT_KOTLIN = 3;
 
 	private List<LatLon> latLonList;
 	private List<Location> locationList;
 	private List<WptPt> wptPtList;
+	private List<net.osmand.shared.gpx.primitives.WptPt> wptPtListKotlin;
 	private int locationType;
 	private int size;
 
@@ -36,6 +38,10 @@ public class LocationsHolder {
 				wptPtList = new ArrayList<>((List<WptPt>) locations);
 				size = locations.size();
 				break;
+			case LOCATION_TYPE_WPTPT_KOTLIN:
+				wptPtListKotlin = new ArrayList<>((List<net.osmand.shared.gpx.primitives.WptPt>) locations);
+				size = locations.size();
+				break;
 		}
 	}
 
@@ -46,6 +52,8 @@ public class LocationsHolder {
 				return LOCATION_TYPE_LATLON;
 			} else if (locationObj instanceof WptPt) {
 				return LOCATION_TYPE_WPTPT;
+			} else if (locationObj instanceof net.osmand.shared.gpx.primitives.WptPt) {
+				return LOCATION_TYPE_WPTPT_KOTLIN;
 			} else if (locationObj instanceof Location) {
 				return LOCATION_TYPE_LOCATION;
 			} else {
@@ -63,6 +71,8 @@ public class LocationsHolder {
 				return locationList.get(index).getLatitude();
 			case LOCATION_TYPE_WPTPT:
 				return wptPtList.get(index).getLatitude();
+			case LOCATION_TYPE_WPTPT_KOTLIN:
+				return wptPtListKotlin.get(index).getLatitude();
 			default:
 				return 0;
 		}
@@ -76,6 +86,8 @@ public class LocationsHolder {
 				return locationList.get(index).getLongitude();
 			case LOCATION_TYPE_WPTPT:
 				return wptPtList.get(index).getLongitude();
+			case LOCATION_TYPE_WPTPT_KOTLIN:
+				return wptPtListKotlin.get(index).getLongitude();
 			default:
 				return 0;
 		}
@@ -100,6 +112,9 @@ public class LocationsHolder {
 					case LOCATION_TYPE_WPTPT:
 						res.add((T) getWptPt(i));
 						break;
+					case LOCATION_TYPE_WPTPT_KOTLIN:
+						res.add((T) getWptPtKotlin(i));
+						break;
 				}
 			}
 		}
@@ -122,6 +137,14 @@ public class LocationsHolder {
 		}
 	}
 
+	public List<net.osmand.shared.gpx.primitives.WptPt> getWptPtListKotlin() {
+		if (this.locationType == LOCATION_TYPE_WPTPT_KOTLIN) {
+			return wptPtListKotlin;
+		} else {
+			return getList(LOCATION_TYPE_WPTPT_KOTLIN);
+		}
+	}
+
 	public List<Location> getLocationsList() {
 		if (this.locationType == LOCATION_TYPE_LOCATION) {
 			return locationList;
@@ -133,6 +156,8 @@ public class LocationsHolder {
 	public long getTime(int index) {
 		if (this.locationType == LOCATION_TYPE_WPTPT) {
 			return wptPtList.get(index).time;
+		} else if (this.locationType == LOCATION_TYPE_WPTPT_KOTLIN) {
+			return wptPtListKotlin.get(index).getTime();
 		} else {
 			return 0;
 		}
@@ -153,6 +178,17 @@ public class LocationsHolder {
 			WptPt wptPt = new WptPt();
 			wptPt.lat = getLatitude(index);
 			wptPt.lon = getLongitude(index);
+			return wptPt;
+		}
+	}
+
+	public net.osmand.shared.gpx.primitives.WptPt getWptPtKotlin(int index) {
+		if (this.locationType == LOCATION_TYPE_WPTPT_KOTLIN) {
+			return wptPtListKotlin.get(index);
+		} else {
+			net.osmand.shared.gpx.primitives.WptPt wptPt = new net.osmand.shared.gpx.primitives.WptPt();
+			wptPt.setLat(getLatitude(index));
+			wptPt.setLon(getLongitude(index));
 			return wptPt;
 		}
 	}
