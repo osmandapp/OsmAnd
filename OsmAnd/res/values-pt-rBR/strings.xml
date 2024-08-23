@@ -5854,4 +5854,18 @@
     <string name="battery_saving_mode">Modo de economia de bateria</string>
     <string name="graph_axis">Eixo do gráfico</string>
     <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
+    <string name="route_roundabout_exit">Saia em %1$d</string>
+    <string name="rendering_attr_alpineHiking_name">Grau de dificuldade das trilhas de caminhada</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="quick_action_previous_screen_desc">Um botão de alternância para navegar para a tela anterior.</string>
+    <string name="quick_action_previous_screen_title">Tela anterior</string>
+    <string name="quick_action_verb_navigate">Navegar</string>
+    <string name="quick_action_drawer_desc">Uma alternância para mostrar ou ocultar o menu lateral.</string>
+    <string name="quick_action_drawer_title">Menu lateral</string>
+    <string name="quick_action_search_view_desc">Um botão de alternância para abrir ou fechar a exibição de pesquisa.</string>
+    <string name="quick_action_search_view_title">Visualização de pesquisa</string>
+    <string name="quick_action_navigation_view_desc">Um botão de alternância para abrir ou fechar a exibição de navegação.</string>
+    <string name="quick_action_navigation_view_title">Visualização de navegação</string>
+    <string name="quick_action_switch_compass_desc">Um botão de alternância para mudar a orientação do mapa.</string>
+    <string name="shared_string_interface">Interface</string>
 </resources>
