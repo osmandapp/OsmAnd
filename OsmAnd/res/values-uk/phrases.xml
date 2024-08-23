@@ -4871,4 +4871,6 @@
     <string name="poi_cash_in_yes">Так</string>
     <string name="poi_cash_in_no">Ні</string>
     <string name="poi_cash_in_customers">Клієнти</string>
+    <string name="poi_cash_in">Поповнення готівки</string>
+    <string name="poi_diet_pescetarian_no">Пескетаріанська дієта: ні</string>
 </resources>

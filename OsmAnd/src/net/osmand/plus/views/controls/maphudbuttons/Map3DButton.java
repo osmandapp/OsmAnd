@@ -49,8 +49,8 @@ public class Map3DButton extends MapButton {
 		setRoundTransparentBackground();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setMap3DButtonMargin(fabButton);
-		setOnClickListener(getOnCLickListener(mapView));
-		setOnLongClickListener(getLongClickListener(fabButton));
+		view.setOnClickListener(getOnCLickListener(mapView));
+		view.setOnLongClickListener(getLongClickListener(fabButton));
 		setElevationListener(mapView);
 	}
 
@@ -115,7 +115,7 @@ public class Map3DButton extends MapButton {
 
 	private void updateButton(boolean is3DMode) {
 		setIconId(is3DMode ? R.drawable.ic_action_2d : R.drawable.ic_action_3d);
-		setContentDesc(is3DMode ? R.string.map_2d_mode_action : R.string.map_3d_mode_action);
+		view.setContentDescription(app.getString(is3DMode ? R.string.map_2d_mode_action : R.string.map_3d_mode_action));
 	}
 
 	public void moveToSpecialPosition(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params) {

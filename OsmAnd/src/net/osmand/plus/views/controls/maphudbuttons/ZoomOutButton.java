@@ -18,13 +18,13 @@ public class ZoomOutButton extends MapButton {
 		super(mapActivity, view, id, alwaysVisible);
 		setIconId(R.drawable.ic_zoom_out);
 		setRoundTransparentBackground();
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			if (mapActivity.getContextMenu().zoomOutPressed()) {
 				return;
 			}
 			mapActivity.getMapView().zoomOutAndAdjustTiltAngle();
 		});
-		setOnLongClickListener(notUseCouldBeNull -> {
+		view.setOnLongClickListener(notUseCouldBeNull -> {
 			ConfigureMapDialogs.showMapMagnifierDialog(mapActivity.getMapView());
 			return true;
 		});

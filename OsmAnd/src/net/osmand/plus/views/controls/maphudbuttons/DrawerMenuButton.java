@@ -17,7 +17,7 @@ public class DrawerMenuButton extends MapButton {
 		setIconId(dashboard ? R.drawable.ic_dashboard : R.drawable.ic_navigation_drawer);
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_round, R.drawable.btn_round_night);
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			MapActivity.clearPrevActivityIntent();
 			if (dashboard) {
 				mapActivity.getDashboard().setDashboardVisibility(true, DASHBOARD, AndroidUtils.getCenterViewCoordinates(v));
