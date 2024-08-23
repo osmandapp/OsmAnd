@@ -5855,4 +5855,16 @@
     <string name="graph_axis">圖表軸</string>
     <string name="y_axis_description">最多為 Y 軸選取兩個選項。</string>
     <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">健行路線難度分級</string>
+    <string name="shared_string_interface">介面</string>
+    <string name="quick_action_previous_screen_desc">用來回到上一個畫面的開關。</string>
+    <string name="quick_action_previous_screen_title">上一個畫面</string>
+    <string name="quick_action_verb_navigate">導航</string>
+    <string name="quick_action_drawer_desc">顯示或隱藏選單的開關。</string>
+    <string name="quick_action_drawer_title">側邊選單</string>
+    <string name="quick_action_search_view_desc">開啟或關閉搜尋檢視的開關。</string>
+    <string name="quick_action_search_view_title">搜尋檢視</string>
+    <string name="quick_action_navigation_view_desc">開啟或關閉導航檢視的開關。</string>
+    <string name="quick_action_navigation_view_title">導航檢視</string>
+    <string name="quick_action_switch_compass_desc">切換地圖方向的開關。</string>
 </resources>
