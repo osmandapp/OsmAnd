@@ -5881,4 +5881,7 @@
     <string name="quick_action_navigation_view_title">Navigationsansicht</string>
     <string name="quick_action_switch_compass_desc">Ein Schalter, um die Kartenausrichtung zu wechseln.</string>
     <string name="quick_action_drawer_title">Seitenmenü</string>
+    <string name="background_opacity">Hintergrund-Deckkraft</string>
+    <string name="corner_radius">Eckenradius</string>
+    <string name="shared_string_dp">dp</string>
 </resources>
