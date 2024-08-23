@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:clickable="true"
@@ -28,9 +29,9 @@
 					android:id="@+id/button_container"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/map_button_appearance_image_height"
-					android:background="#5cc3e5"
 					android:paddingHorizontal="@dimen/map_alarm_text_top_padding"
-					android:paddingVertical="@dimen/content_padding">
+					android:paddingVertical="@dimen/content_padding"
+					tools:background="#103866">
 
 					<include
 						layout="@layout/map_quick_actions_button"
