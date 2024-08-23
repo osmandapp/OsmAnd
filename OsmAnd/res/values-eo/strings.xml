@@ -5872,4 +5872,7 @@
     <string name="shared_string_interface">Fasado</string>
     <string name="quick_action_search_view_title">Serĉi</string>
     <string name="quick_action_navigation_view_title">Navigi</string>
+    <string name="background_opacity">Travideblo de fono</string>
+    <string name="corner_radius">Radiuso de angulo</string>
+    <string name="shared_string_dp">dp</string>
 </resources>
