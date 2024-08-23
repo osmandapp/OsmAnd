@@ -20,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -27,6 +28,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
@@ -117,9 +120,25 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void setupActionButton(@NonNull View view) {
-		actionButton = view.findViewById(R.id.map_quick_actions_button);
+		ViewGroup container = view.findViewById(R.id.button_container);
+		actionButton = container.findViewById(R.id.map_quick_actions_button);
 		actionButton.setButtonState(buttonState);
 		actionButton.setCustomAppearanceParams(appearanceParams);
+		setupButtonBackground(container);
+	}
+
+	private void setupButtonBackground(@NonNull View view) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			MapRenderRepositories maps = app.getResourceManager().getRenderer();
+			RenderingRuleSearchRequest request = maps.getSearchRequestWithAppliedCustomRules(renderer, nightMode);
+			if (request.searchRenderingAttribute("waterColor")) {
+				int color = request.getIntPropertyValue(renderer.PROPS.R_ATTR_COLOR_VALUE);
+				if (color != -1) {
+					view.setBackgroundColor(color);
+				}
+			}
+		}
 	}
 
 	private void setupCards(@NonNull View view) {
@@ -180,15 +199,15 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void resetAppearance() {
-		appearanceParams.setIconName(buttonState.getIconPref().get());
-		appearanceParams.setSize(buttonState.getSizePref().get());
-		appearanceParams.setOpacity(buttonState.getOpacityPref().get());
-		appearanceParams.setCornerRadius(buttonState.getCornerRadiusPref().get());
+		appearanceParams.setIconName(buttonState.getIconPref().getDefaultValue());
+		appearanceParams.setSize(buttonState.getSizePref().getDefaultValue());
+		appearanceParams.setOpacity(buttonState.getOpacityPref().getDefaultValue());
+		appearanceParams.setCornerRadius(buttonState.getCornerRadiusPref().getDefaultValue());
 		updateContent();
 	}
 
 	@Override
-	public void onCardPressed(@NonNull @NotNull BaseCard card) {
+	public void onCardPressed(@NonNull BaseCard card) {
 		updateButtons();
 	}
 

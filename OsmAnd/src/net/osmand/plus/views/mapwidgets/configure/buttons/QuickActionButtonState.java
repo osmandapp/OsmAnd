@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.DEFAULT_ACTION_BUTTON_SIZE;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.DEFAULT_ICON_ID;
+
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
@@ -43,8 +46,8 @@ public class QuickActionButtonState extends MapButtonState {
 		super(app, id);
 		this.statePref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
 		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
-		this.iconPref = settings.registerStringPreference(id + "_icon", null).makeGlobal().makeShared();
-		this.sizePref = settings.registerIntPreference(id + "_size", 40).makeGlobal().makeShared();
+		this.iconPref = settings.registerStringPreference(id + "_icon", DEFAULT_ICON_ID).makeGlobal().makeShared();
+		this.sizePref = settings.registerIntPreference(id + "_size", DEFAULT_ACTION_BUTTON_SIZE).makeGlobal().makeShared();
 		this.opacityPref = settings.registerFloatPreference(id + "_opacity", 1f).makeGlobal().makeShared();
 		this.cornerRadiusPref = settings.registerIntPreference(id + "_corner_radius", 36).makeGlobal().makeShared();
 		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
@@ -210,11 +213,21 @@ public class QuickActionButtonState extends MapButtonState {
 
 	@NonNull
 	public ButtonAppearanceParams createAppearanceParams() {
-		return new ButtonAppearanceParams(
-				getIconPref().get(),
-				getSizePref().get(),
-				getOpacityPref().get(),
-				getCornerRadiusPref().get());
+		String iconName = null;
+		if (iconPref.isSet()) {
+			iconName = getIconPref().get();
+		}
+		if (Algorithms.isEmpty(iconName)) {
+			if (isSingleAction()) {
+				int iconId = getQuickActions().get(0).getIconRes();
+				if (iconId > 0) {
+					iconName = app.getResources().getResourceEntryName(iconId);
+				}
+			} else {
+				iconName = DEFAULT_ICON_ID;
+			}
+		}
+		return new ButtonAppearanceParams(iconName, getSizePref().get(), getOpacityPref().get(), getCornerRadiusPref().get());
 	}
 
 	@NonNull
