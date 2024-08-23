@@ -85,6 +85,10 @@ public class MapButtonsHelper {
 	public static final QuickActionType TYPE_MY_PLACES = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_my_places).category(QuickActionType.MY_PLACES).iconRes(R.drawable.ic_action_favorite);
 
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_INTERFACE = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_interface).category(QuickActionType.INTERFACE).iconRes(R.drawable.ic_action_ui_customization);
+
 	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
 		List<QuickActionType> annotatedFields = new ArrayList<>();
 		Field[] fields = typeClass.getDeclaredFields();
@@ -343,6 +347,12 @@ public class MapButtonsHelper {
 		allTypes.add(DisplayPositionAction.TYPE);
 		allTypes.add(NextAppProfileAction.TYPE);
 		allTypes.add(PreviousAppProfileAction.TYPE);
+		allTypes.add(ChangeMapOrientationAction.TYPE);
+		// interface
+		allTypes.add(ShowHideNavigationViewAction.TYPE);
+		allTypes.add(ShowHideSearchViewAction.TYPE);
+		allTypes.add(ShowHideDrawerAction.TYPE);
+		allTypes.add(NavigatePreviousScreenAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -409,6 +419,7 @@ public class MapButtonsHelper {
 		filterQuickActions(buttonState, TYPE_SETTINGS, quickActions);
 		filterQuickActions(buttonState, TYPE_MAP_INTERACTIONS, quickActions);
 		filterQuickActions(buttonState, TYPE_MY_PLACES, quickActions);
+		filterQuickActions(buttonState, TYPE_INTERFACE, quickActions);
 
 		return quickActions;
 	}

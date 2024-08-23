@@ -120,9 +120,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
+		Resources res = view.getResources();
 		boolean night = getApplication().getDaynightHelper().isNightMode();
 
 		pointInnerCircle = new Paint();

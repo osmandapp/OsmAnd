@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
         android:scaleType="fitXY"
         android:layout_gravity="top"
         android:layout_marginTop="@dimen/content_padding"
-        osmand:srcCompat="@drawable/bg_shadow_list_top"/>
+        app:srcCompat="@drawable/bg_shadow_list_top"/>
 
     <LinearLayout
         android:id="@+id/title_view"
@@ -79,7 +79,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    osmand:srcCompat="@drawable/ic_action_favorite"/>
+                    app:srcCompat="@drawable/ic_action_favorite"/>
 
             </LinearLayout>
 
@@ -162,7 +162,7 @@
                     android:layout_marginTop="2dp"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    osmand:srcCompat="@drawable/ic_action_folder"/>
+                    app:srcCompat="@drawable/ic_action_folder"/>
 
             </LinearLayout>
 
@@ -195,8 +195,8 @@
                     android:layout_marginTop="@dimen/content_padding_half"
                     android:focusable="false"
                     android:text="@string/shared_string_favorites"
-                    osmand:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
-                    osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
+                    app:drawableRightCompat="@drawable/ic_action_arrow_drop_down"
+                    app:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:editable="false"
 	                android:layout_marginEnd="@dimen/content_padding"
 	                android:layout_marginStart="@dimen/content_padding_half" />
@@ -224,6 +224,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+        app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

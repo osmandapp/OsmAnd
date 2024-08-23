@@ -5177,7 +5177,6 @@
     <string name="free_ride">Vrij rijden</string>
     <string name="write_bearing_description">Koers opslaan voor elk track tijdens het opnemen</string>
     <string name="write_bearing">Koers opschrijven</string>
-    <string name="rendering_attr_alpineHiking_name">Moeilijkheidsgraad</string>
     <string name="shared_string_included">Inclusief</string>
     <string name="feature_available_as_part_of_plan">%1$s beschikbaar als onderdeel van het %2$s abonnement</string>
     <string name="free_settings_backup">Gratis instellingen back-up</string>

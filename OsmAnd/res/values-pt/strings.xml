@@ -5315,7 +5315,6 @@
     <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
     <string name="dangerous_goods_description">Em algumas estradas e túneis, o transporte de materiais perigosos é proibido.</string>
     <string name="write_bearing_description">Guardar a direção em cada ponto do trilho durante a gravação</string>
-    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
@@ -5858,4 +5857,29 @@
     <string name="hugerock_promo_description">Acesso gratuito a funcionalidades, incluindo descarregamentos ilimitados de mapas, relevo 3D, etc. por %1$s /mês</string>
     <string name="driving_region_india">Índia</string>
     <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha premido</string>
+    <string name="add_widget_to_the_left">Adicionar widget à esquerda</string>
+    <string name="add_widget_below">Adicionar widget abaixo</string>
+    <string name="route_roundabout_exit">Saia em %1$d</string>
+    <string name="add_widget_above">Adicionar widget acima</string>
+    <string name="add_widget_to_the_right">Adicionar widget à direita</string>
+    <string name="help_article_map_tracks_name">Trilhos</string>
+    <string name="help_article_map_routes_name">Rotas</string>
+    <string name="rendering_attr_alpineHiking_name">Grau de dificuldade percursos pedestres</string>
+    <string name="delete_widget_description">Este widget será eliminado. Pode restaurá-lo mais tarde no ecrã Configurar.</string>
+    <string name="delete_widget">Eliminar o widget?</string>
+    <string name="app_mode_suv">Todo-terreno (SUV)</string>
+    <string name="graph_axis">Eixo do gráfico</string>
+    <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
+    <string name="quick_action_previous_screen_desc">Um botão alternador para navegar para o ecrã anterior.</string>
+    <string name="quick_action_previous_screen_title">Ecrã anterior</string>
+    <string name="quick_action_verb_navigate">Navegar</string>
+    <string name="quick_action_drawer_desc">Um botão alternador para mostrar ou ocultar o menu lateral.</string>
+    <string name="quick_action_drawer_title">Menu lateral</string>
+    <string name="quick_action_search_view_desc">Um botão alternador para abrir ou mostrar o ecrã de pesquisa.</string>
+    <string name="quick_action_navigation_view_title">Ecrã de navegação</string>
+    <string name="quick_action_switch_compass_desc">Um botão alternador para alterar a orientação do mapa.</string>
+    <string name="quick_action_search_view_title">Ecrã de pesquisa</string>
+    <string name="quick_action_navigation_view_desc">Um botão alternador para abrir ou fechar o ecrã de navegação.</string>
+    <string name="battery_saving_mode">Modo de economia da bateria</string>
+    <string name="shared_string_interface">Interface</string>
 </resources>

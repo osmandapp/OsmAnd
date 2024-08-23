@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -203,7 +203,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 				}
 			}
 		}
-		return GPXUtilities.parseColor(colorName, defaultColor);
+		return GpxUtilities.INSTANCE.parseColor(colorName, defaultColor);
 	}
 
 	public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {

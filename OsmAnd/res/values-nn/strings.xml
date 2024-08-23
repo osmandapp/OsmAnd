@@ -417,7 +417,6 @@
     <string name="layer_map_appearance">Konfigurer skjerm</string>
     <string name="address_search_desc">Adressesøk</string>
     <string name="open_till">Open til</string>
-    <string name="rendering_attr_alpineHiking_name">Vanskegradsklassifisering</string>
     <string name="simulate_your_location">Simuler posisjonen din</string>
     <string name="map_widget_time">Tid att</string>
     <string name="simulation_constant_mode_title">Fastsett fart</string>

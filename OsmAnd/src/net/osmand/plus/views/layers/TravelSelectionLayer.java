@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -33,8 +33,8 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 		app = view.getApplication();
 	}
 
@@ -44,7 +44,7 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
-				return new LatLon(point.lat, point.lon);
+				return new LatLon(point.getLat(), point.getLon());
 			}
 		}
 		return null;
@@ -75,7 +75,7 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 
 					WptPt wptPt = selectedGpxPoint.getSelectedPoint();
 					TravelHelper travelHelper = app.getTravelHelper();
-					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(), new LatLon(wptPt.lat, wptPt.lon));
+					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(), new LatLon(wptPt.getLat(), wptPt.getLon()));
 					return true;
 				}
 			}

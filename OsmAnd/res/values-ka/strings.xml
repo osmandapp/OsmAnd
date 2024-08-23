@@ -2917,7 +2917,6 @@
     <string name="folder">საქაღალდე</string>
     <string name="external_device_connected">მიერთებულია</string>
     <string name="base_profile_descr_boat">გემი, ნავი, ნაოსნობა</string>
-    <string name="rendering_attr_alpineHiking_name">სიძნელის კლასიფიკაცია</string>
     <string name="shared_string_unsynced">დაუსინქრონებელი</string>
     <string name="map_during_navigation">რუკა ნავიგაციისას</string>
     <string name="select_segments">აირჩიეთ სეგმენტები</string>

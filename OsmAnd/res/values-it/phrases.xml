@@ -4099,4 +4099,14 @@
     <string name="poi_office_midwife">Ufficio dell\'ostetrica</string>
     <string name="poi_shop_general">Negozio generale</string>
     <string name="poi_photo_booth">Cabina fotografica</string>
+    <string name="poi_display_sundial_yes">Meridiana</string>
+    <string name="poi_spoil_heap">Cumulo di detriti</string>
+    <string name="poi_government_legislative">Istituzione legislativa</string>
+    <string name="poi_cash_in">Deposito contanti</string>
+    <string name="poi_crossing_supervision_yes">Supervisione attraversamento</string>
+    <string name="poi_crossing_supervision_attendant">Supervisione all\'attraversamento: addetto</string>
+    <string name="poi_crossing_supervision_camera">Supervisione attraversamento: telecamera</string>
+    <string name="poi_crossing_supervision_no">Supervisione attraversamento: no</string>
+    <string name="poi_support_billboard">Supporto: cartellone pubblicitario</string>
+    <string name="poi_military_checkpoint">Posto di blocco militare</string>
 </resources>

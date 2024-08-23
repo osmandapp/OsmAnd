@@ -623,7 +623,7 @@ public class MapUtils {
 		boolean top1 = y1 > EQUATOR;
 		boolean top2 = y2 > EQUATOR;
 		if (top1 != top2 && y1 != EQUATOR && y2 != EQUATOR) {
-			int mx = x1 / 2 + x2 / 2;
+			int mx = x1 + (int) ((x2 - x1) * (double) (EQUATOR - y1) / (y2 - y1));
 			double d1 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x2, y2));
 			double d2 = Math.sqrt(squareDist31TileMetric(mx, EQUATOR, x1, y1));
 			return (d1 + d2) * (d1 + d2);

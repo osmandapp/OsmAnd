@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;

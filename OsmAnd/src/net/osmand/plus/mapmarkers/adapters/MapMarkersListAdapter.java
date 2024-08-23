@@ -11,7 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -221,19 +221,19 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			float dist = 0;
 			if (first != null && marker != null) {
 				WptPt pt1 = new WptPt();
-				pt1.lat = first.getLatitude();
-				pt1.lon = first.getLongitude();
+				pt1.setLat(first.getLatitude());
+				pt1.setLon(first.getLongitude());
 				WptPt pt2 = new WptPt();
-				pt2.lat = marker.getLatitude();
-				pt2.lon = marker.getLongitude();
+				pt2.setLat(marker.getLatitude());
+				pt2.setLon(marker.getLongitude());
 				List<WptPt> points = snappedToRoadPoints.get(new Pair<>(pt1, pt2));
 				if (points != null) {
 					for (int i = 0; i < points.size() - 1; i++) {
-						dist += (float) MapUtils.getDistance(points.get(i).lat, points.get(i).lon,
-								points.get(i + 1).lat, points.get(i + 1).lon);
+						dist += (float) MapUtils.getDistance(points.get(i).getLat(), points.get(i).getLon(),
+								points.get(i + 1).getLat(), points.get(i + 1).getLon());
 					}
 				} else {
-					dist = (float) MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+					dist = (float) MapUtils.getDistance(pt1.getLat(), pt1.getLon(), pt2.getLat(), pt2.getLon());
 				}
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));

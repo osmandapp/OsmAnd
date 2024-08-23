@@ -5299,7 +5299,6 @@
     <string name="rendering_value_sacScale_description">Club Alpin Suisse</string>
     <string name="rendering_value_sacScale_name">CAS</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
-    <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
     <string name="write_bearing">Enregistrer le relèvement</string>
     <string name="write_heading">Enregistrer le cap</string>
     <string name="write_heading_description">Sauvegarder le cap à chaque point de passage lors de l\'enregistrement</string>
@@ -5847,9 +5846,26 @@
     <string name="route_roundabout_exit">Prendre la sortie %1$d</string>
     <string name="help_article_map_routes_name">Itinéraires</string>
     <string name="help_article_map_tracks_name">Traces</string>
-    <string name="height_cache">Cache des altitudes</string>
     <string name="add_widget_to_the_left">Ajouter le gadget à gauche</string>
     <string name="add_widget_above">Ajouter le gadget au dessus</string>
     <string name="add_widget_below">Ajouter le gadget en dessous</string>
     <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
+    <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
+    <string name="delete_widget">Supprimer le gadget ?</string>
+    <string name="battery_saving_mode">Mode économie de batterie</string>
+    <string name="graph_axis">Axes du graphique</string>
+    <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="shared_string_interface">Interface</string>
+    <string name="quick_action_previous_screen_desc">Un interrupteur pour retourner à l\'écran précédent.</string>
+    <string name="quick_action_previous_screen_title">Écran précédent</string>
+    <string name="quick_action_verb_navigate">Naviguer</string>
+    <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
+    <string name="quick_action_drawer_desc">Un interrupteur pour afficher ou masquer le menu du côté.</string>
+    <string name="quick_action_drawer_title">Menu du côté</string>
+    <string name="quick_action_search_view_desc">Un interrupteur pour ouvrir ou fermer la vue recherche.</string>
+    <string name="quick_action_search_view_title">Vue recherche</string>
+    <string name="quick_action_navigation_view_desc">Un interrupteur pour ouvrir ou fermer la vue guidage.</string>
+    <string name="quick_action_navigation_view_title">Vue guidage</string>
+    <string name="quick_action_switch_compass_desc">Un interrupteur pour changer l\'orientation de la carte.</string>
 </resources>

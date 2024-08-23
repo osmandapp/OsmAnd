@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

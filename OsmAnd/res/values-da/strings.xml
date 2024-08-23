@@ -4487,7 +4487,7 @@
     <string name="location_source_descr">Som standard bruger OsmAnd, der er installeret fra Google Play, %1$s til at bestemme placeringen.
 \n
 \nHvis du får unøjagtige placeringsoplysninger eller bruger en enhed uden %2$s, kan du prøve at skifte til \"%3$s\"</string>
-    <string name="location_source">Placeringskilde</string>
+    <string name="location_source">Kilde til placering</string>
     <string name="shared_string_shape">Form</string>
     <string name="default_appearance_desc">Standard farve, ikon og form vil gælde for de tilføjede favoritpunkter i gruppen.</string>
     <string name="default_appearance">Standardudseende</string>
@@ -5314,7 +5314,6 @@
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_attr_alpineHiking_description">Klassificeringstyper for sværhedsgrad af ruterne.</string>
-    <string name="rendering_attr_alpineHiking_name">Sværhedsklassificering</string>
     <string name="write_bearing">Skriv pejling</string>
     <string name="write_heading_description">Gem retning for hvert sporpunkt under optagelse</string>
     <string name="write_heading">Skriv retning</string>
@@ -5863,7 +5862,24 @@
     <string name="route_roundabout_exit">Tag %1$d afkørsel</string>
     <string name="add_widget_above">Tilføj modul ovenfor</string>
     <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
-    <string name="height_cache">Højde-cache</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
+    <string name="delete_widget">Slet modul?</string>
+    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
+    <string name="battery_saving_mode">Batterisparetilstand</string>
+    <string name="graph_axis">Graf-akse</string>
+    <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">Vandrestiers sværhedsgrad</string>
+    <string name="quick_action_previous_screen_desc">En skifter til at navigere til den forrige skærm.</string>
+    <string name="quick_action_previous_screen_title">Forrige skærm</string>
+    <string name="quick_action_verb_navigate">Naviger</string>
+    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenuen.</string>
+    <string name="quick_action_drawer_title">Sidemenu</string>
+    <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
+    <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
+    <string name="shared_string_interface">Brugerflade</string>
+    <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
+    <string name="quick_action_search_view_title">Søgevisning</string>
+    <string name="quick_action_navigation_view_title">Navigationsvisning</string>
 </resources>

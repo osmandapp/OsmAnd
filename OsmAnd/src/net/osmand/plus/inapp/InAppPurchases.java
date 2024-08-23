@@ -1,7 +1,6 @@
 package net.osmand.plus.inapp;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.content.Context;
 import android.text.Spannable;
@@ -22,6 +21,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -678,7 +678,7 @@ public abstract class InAppPurchases {
 			Spannable mainPart = new SpannableStringBuilder(ctx.getString(firstPartRes, periodPriceStr, getDisountPeriodString(ctx, unitStr, totalPeriods)));
 			Spannable thenPart = new SpannableStringBuilder(ctx.getString(R.string.get_discount_second_part, originalPricePeriod));
 			mainPart.setSpan(new ForegroundColorSpan(textColor), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			mainPart.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mainPart.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			int secondaryTextColor = ColorUtilities.getColorWithAlpha(textColor, 0.5f);
 			thenPart.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			thenPart.setSpan(new CustomTypefaceSpan(DEFAULT), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

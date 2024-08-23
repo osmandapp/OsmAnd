@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
@@ -23,10 +23,10 @@ import net.osmand.plus.utils.UiUtilities;
 public class SelectedTrackToFollowCard extends MapBaseCard {
 
 	final FollowTrackFragment target;
-	final GPXFile gpxFile;
+	final GpxFile gpxFile;
 
 	public SelectedTrackToFollowCard(@NonNull MapActivity mapActivity, @NonNull FollowTrackFragment target,
-	                                 @NonNull GPXFile gpxFile) {
+	                                 @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.target = target;
 		this.gpxFile = gpxFile;

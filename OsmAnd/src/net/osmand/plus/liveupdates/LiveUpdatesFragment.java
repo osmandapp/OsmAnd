@@ -1,6 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
@@ -62,6 +61,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
@@ -182,7 +182,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		descriptionTime = timeContainer.findViewById(R.id.sub_title);
 		AndroidUtils.setTextPrimaryColor(app, descriptionTime, nightMode);
-		descriptionTime.setTypeface(DEFAULT_BOLD);
+		descriptionTime.setTypeface(FontCache.getMediumFont());
 		descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
 
 		return view;
@@ -505,7 +505,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
 						? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode)));
-				subTitle.setTypeface(DEFAULT_BOLD);
+				subTitle.setTypeface(FontCache.getMediumFont());
 			}
 
 			Drawable statusDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_map);

@@ -77,8 +77,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		settings = view.getApplication().getSettings();
 		favouritesHelper = view.getApplication().getFavoritesHelper();

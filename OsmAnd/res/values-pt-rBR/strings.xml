@@ -5218,7 +5218,6 @@
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="shared_string_included">Incluído</string>
-    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Diversos</string>
     <string name="shared_string_class">Classe</string>
     <string name="dangerous_goods">Mercadorias perigosas</string>
@@ -5846,9 +5845,13 @@
     <string name="help_article_map_tracks_name">Trilhas</string>
     <string name="help_article_map_routes_name">Rotas</string>
     <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha pressionado</string>
-    <string name="add_widget_below">Adicione um widget abaixo</string>
-    <string name="height_cache">Cache de altitude</string>
+    <string name="add_widget_below">Adicione widget abaixo</string>
     <string name="add_widget_to_the_right">Adicionar widget à direita</string>
     <string name="add_widget_to_the_left">Adicionar widget à esquerda</string>
     <string name="add_widget_above">Adicionar widget acima</string>
+    <string name="delete_widget_description">Esse widget será excluído. Você poderá restaurá-lo posteriormente na tela Configurar.</string>
+    <string name="delete_widget">Excluir widget?</string>
+    <string name="battery_saving_mode">Modo de economia de bateria</string>
+    <string name="graph_axis">Eixo do gráfico</string>
+    <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
 </resources>

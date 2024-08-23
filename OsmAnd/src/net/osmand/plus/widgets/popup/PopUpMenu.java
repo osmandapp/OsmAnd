@@ -62,7 +62,7 @@ public class PopUpMenu {
 		float compoundBtnWidth = contentPadding * 3;
 
 		float additional = iconPartWidth;
-		if (widthMode == PopUpMenuWidthMode.STANDARD) {
+		if (widthMode == PopUpMenuWidthMode.STANDARD && displayData.showCompound) {
 			additional += compoundBtnWidth;
 		}
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
@@ -73,12 +73,14 @@ public class PopUpMenu {
 		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
-		if (shouldShowAsDropDown(ctx)) {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
-			listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
-		} else {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
-			listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+		if (displayData.customDropDown) {
+			if (shouldShowAsDropDown(ctx)) {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+				listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+			} else {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+				listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+			}
 		}
 		if (displayData.bgColor != 0) {
 			listPopupWindow.setBackgroundDrawable(new ColorDrawable(displayData.bgColor));
@@ -146,12 +148,7 @@ public class PopUpMenu {
 				return true;
 			});
 		}
-		if (displayData.showBelowAnchorView) {
-			MenuPopupHelper menuPopupHelper = new MenuPopupHelper(displayData.anchorView.getContext(), menuBuilder, view);
-			menuPopupHelper.show(0, view.getMeasuredHeight());
-		} else {
-			popupMenu.show();
-		}
+		popupMenu.show();
 	}
 
 	public static void show(@NonNull PopUpMenuDisplayData displayData) {

@@ -25,8 +25,8 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -527,14 +527,14 @@ public abstract class OsmandPlugin {
 
 	@Nullable
 	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
-	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GpxTrackAnalysis analysis,
 	                                                @NonNull GPXDataSetType graphType,
 	                                                @NonNull GPXDataSetAxisType chartAxisType,
 	                                                boolean calcWithoutGaps, boolean useRightAxis) {
 		return null;
 	}
 
-	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 
 	}
 
