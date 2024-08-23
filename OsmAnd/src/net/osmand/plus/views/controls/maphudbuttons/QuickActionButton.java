@@ -4,12 +4,17 @@ import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.widget.ImageView.ScaleType.CENTER;
 
 import android.content.Context;
+import android.graphics.Outline;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -58,6 +63,8 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 		this.uiUtilities = app.getUIUtilities();
 		this.layer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 		this.strokeWidth = app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke);
+
+		setupShadow();
 	}
 
 	@NonNull
@@ -146,5 +153,21 @@ public class QuickActionButton extends androidx.appcompat.widget.AppCompatImageB
 		pressed.setStroke(strokeWidth, ColorUtilities.getColor(context, nightMode ? R.color.map_widget_dark_stroke : R.color.map_widget_light_pressed));
 
 		setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
+	}
+
+	private void setupShadow() {
+		setOutlineProvider(new ViewOutlineProvider() {
+			@Override
+			public void getOutline(View view, Outline outline) {
+				Drawable background = view.getBackground();
+				if (background != null) {
+					background.getOutline(outline);
+				} else {
+					outline.setRect(0, 0, view.getWidth(), view.getHeight());
+				}
+				outline.setAlpha(1);
+			}
+		});
+		ViewCompat.setElevation(this, 5.0f);
 	}
 }
