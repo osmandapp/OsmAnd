@@ -5874,4 +5874,7 @@
     <string name="quick_action_navigation_view_title">Приказ навигације</string>
     <string name="quick_action_switch_compass_desc">Прекидач за промену оријентације мапе.</string>
     <string name="shared_string_interface">Интерфејс</string>
+    <string name="corner_radius">Радијус угла</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Прозирност позадине</string>
 </resources>

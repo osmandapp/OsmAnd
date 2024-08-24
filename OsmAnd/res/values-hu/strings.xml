@@ -5863,4 +5863,19 @@
     <string name="y_axis_description">Válasszon legfeljebb két opciót az Y-tengelyhez.</string>
     <string name="graph_axis">Grafikon tengely</string>
     <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">Túraútvonalak nehézségi foka</string>
+    <string name="background_opacity">Háttér átlátszatlansága</string>
+    <string name="corner_radius">Lekerekítési sugár</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="shared_string_interface">Interfész</string>
+    <string name="quick_action_previous_screen_desc">Kapcsoló az előző képernyőre való navigáláshoz.</string>
+    <string name="quick_action_previous_screen_title">Előző képernyő</string>
+    <string name="quick_action_verb_navigate">Navigálás</string>
+    <string name="quick_action_drawer_desc">Kapcsoló az oldalsó menü ki/bekapcsolásához.</string>
+    <string name="quick_action_drawer_title">Oldalsó menü</string>
+    <string name="quick_action_search_view_desc">Kapcsoló a keresési nézet megnyitásához/bezárásához.</string>
+    <string name="quick_action_search_view_title">Keresési nézet</string>
+    <string name="quick_action_navigation_view_desc">Kapcsoló a navigációs nézet megnyitásához/bezárásához.</string>
+    <string name="quick_action_navigation_view_title">Navigációs nézet</string>
+    <string name="quick_action_switch_compass_desc">Kapcsoló a térkép tájolásának váltásához.</string>
 </resources>

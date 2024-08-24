@@ -1591,7 +1591,7 @@
 \n 这些地图中的任何一种都可以作为主（基底）地图显示，也可以作为另一种基础地图（如 OsmAnd 的离线矢量地图）的覆盖层或底层。可通过 \"配置地图 \"菜单隐藏 OsmAnd 矢量地图的某些元素，使任何底层地图更加清晰可见。
 \n
 \n 可直接下载瓦片地图，或利用任意一种第三方地图准备工具，将其作为 SQLite 数据库文件复制到 OsmAnd 的数据文件夹。</string>
-    <string name="record_plugin_name">旅行记录</string>
+    <string name="record_plugin_name">行程录制</string>
     <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
 \n详情可见 %1$s。</string>
@@ -1616,7 +1616,7 @@
     <string name="location_on_map">位置：
 \n 纬度 %1$s
 \n 经度 %2$s</string>
-    <string name="watch">观看</string>
+    <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
     <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
     <string name="free">%1$s 可用</string>
@@ -1685,20 +1685,20 @@
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>
     <string name="distance">距离</string>
-    <string name="plugin_touringview_descr">启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。
+    <string name="plugin_touringview_descr">激活该视图后，OsmAnd 的地图风格将变为 “旅游视图”，这是一种专为旅行者和职业司机设计的高细节视图。
 \n
-\n此预览提供了在任何给与的地图缩放，（特别是公路、轨迹、路径和定位标记）在地图数据中最大量可获得的详细行程。
+\n在任何给定的地图缩放比例下，该视图都能提供地图数据（尤其是道路、车辙道、小路和方位标记）中最多的旅行细节。
 \n
-\n它也清楚地描绘了各类道路明确地色码，例如驾驶大型车辆时，这是非常有用的。
+\n它还通过颜色编码清晰地描绘了所有类型的道路，在驾驶大型车辆时非常有用。
 \n
-\n并提供了特别的旅游选项，比如显示自行车路线或高山的路线。
+\n它还提供特殊的旅游选项，如显示自行车路线或高山路线。
 \n
-\n此预览是从我们的标准地图所创建，不需要下载特殊的地图。
+\n无需下载专门的地图，我们基于标准地图创建的该视图。
 \n
-\n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
-    <string name="plugin_nautical_descr">打开以丰富您的地图，其中包含有关航行路线、导航灯、危险区域、允许或禁止航行或停靠的区域等信息。如要使用，下载航海地图并在配置地图中启用“航海地图”类型。
+\n您可以在此重新激活该视图，或者根据需要更改 “配置地图 ”下的 “地图样式”。</string>
+    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。
 \n
-\n详情可见 %1$s。</string>
+\n了解更多 %1$s。</string>
     <string name="plugin_ski_descr">专为冬季运动场地导航而设计： 查看滑雪道、滑雪缆车和越野滑雪道，并用彩色线条标示难度等级。使用时，请启用此插件，并进入 \"配置地图\"，选择 \"冬季和滑雪 \"地图样式。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -1886,7 +1886,7 @@
 \n * 点击测量小工具以查看更多操作。</string>
     <string name="use_magnetic_sensor_descr">使用磁传感器来确定罗盘值而不是方向传感器。</string>
     <string name="use_magnetic_sensor">使用磁传感器</string>
-    <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕关闭）来打开后台跟踪和导航的设置。</string>
+    <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕仍然关闭）来打开后台追踪和导航的设置。</string>
     <string name="av_use_external_recorder">使用系统录音机</string>
     <string name="recording_playing">从已指定的录音开始播放音频。
 \n%1$s</string>
@@ -5721,4 +5721,8 @@
     <string name="changes">变更 %1$s</string>
     <string name="quick_action_wind_layer">在地图上切换展示或隐藏风力图层。</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="play_weather_forecast">播放天气预报</string>
+    <string name="wall_color">墙壁颜色</string>
+    <string name="weather_data_sources_prompt">OsmAnd 从两个来源提供天气数据：</string>
+    <string name="weather_source_ecmwf_description">欧洲中期天气预报中心</string>
 </resources>

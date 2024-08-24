@@ -267,7 +267,6 @@
 \n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
 \n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak
 \n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
-\n
 \n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
 \n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
 \n- Kotxea, bizikleta eta oinezkoentzat modua:
@@ -5863,4 +5862,32 @@
 \nCPU (lauzak): %2$s
 \nCPU (inaktibo-denbora): %3$s
 \nCPU (GPU zain): %4$s</string>
+    <string name="rendering_attr_alpineHiking_name">Mendi-ibilbideen zailtasun maila</string>
+    <string name="add_widget_above">Gehitu trepeta goian</string>
+    <string name="add_widget_below">Gehitu trepeta behean</string>
+    <string name="add_widget_to_the_right">Gehitu trepeta eskuinean</string>
+    <string name="add_widget_to_the_left">Gehitu trepeta ezkerrean</string>
+    <string name="delete_widget">Trepeta ezabatu?</string>
+    <string name="delete_widget_description">Trepeta hau ezabatu egingo da. Geroago berrezarri dezakezu Konfiguratu pantailan.</string>
+    <string name="help_article_map_tracks_name">Pistak</string>
+    <string name="route_roundabout_exit">Hartu %1$d irteera</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">Grafikoaren ardatza</string>
+    <string name="y_axis_description">Hautatu gehienez bi aukera Y ardatzerako.</string>
+    <string name="help_article_map_routes_name">Ibilbideak</string>
+    <string name="quick_action_drawer_title">Alboko menua</string>
+    <string name="quick_action_search_view_desc">Bilaketa-ikuspegia ireki edo ixteko etengailua.</string>
+    <string name="quick_action_search_view_title">Bilaketa ikuspegia</string>
+    <string name="quick_action_navigation_view_desc">Nabigazio-ikuspegia irekitzeko edo ixteko etengailua.</string>
+    <string name="quick_action_navigation_view_title">Nabigazio ikuspegia</string>
+    <string name="quick_action_switch_compass_desc">Etengailu bat maparen orientazioa aldatzeko.</string>
+    <string name="corner_radius">Biraketa erradioa</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="shared_string_interface">Interfazea</string>
+    <string name="quick_action_previous_screen_desc">Etengailu bat aurreko pantailara nabigatzeko.</string>
+    <string name="quick_action_previous_screen_title">Aurreko pantaila</string>
+    <string name="quick_action_verb_navigate">Nabigatu</string>
+    <string name="quick_action_drawer_desc">Alboko menua erakusteko edo ezkutatzeko etengailua.</string>
+    <string name="battery_saving_mode">Bateria aurrezteko modua</string>
+    <string name="background_opacity">Atzeko planoaren opakutasuna</string>
 </resources>

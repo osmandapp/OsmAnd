@@ -5882,4 +5882,7 @@
     <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
     <string name="quick_action_search_view_title">Søgevisning</string>
     <string name="quick_action_navigation_view_title">Navigationsvisning</string>
+    <string name="background_opacity">Baggrundens gennemsigtighed</string>
+    <string name="corner_radius">Hjørneradius</string>
+    <string name="shared_string_dp">dp</string>
 </resources>
