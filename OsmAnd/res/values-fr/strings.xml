@@ -5868,4 +5868,7 @@
     <string name="quick_action_navigation_view_desc">Un interrupteur pour ouvrir ou fermer la vue guidage.</string>
     <string name="quick_action_navigation_view_title">Vue guidage</string>
     <string name="quick_action_switch_compass_desc">Un interrupteur pour modifier l\'orientation de la carte.</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Opacité de l\'arrière-plan</string>
+    <string name="corner_radius">Rayon d\'angle</string>
 </resources>
