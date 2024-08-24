@@ -5878,4 +5878,7 @@
     <string name="quick_action_navigation_view_desc">Un conmutador para abrir o cerrar la navegación.</string>
     <string name="quick_action_navigation_view_title">Visualizar navegación.</string>
     <string name="quick_action_switch_compass_desc">Un conmutador para cambiar la orientación del mapa.</string>
+    <string name="corner_radius">Radio de giro</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Opacidad del fondo</string>
 </resources>

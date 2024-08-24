@@ -5868,4 +5868,5 @@
     <string name="quick_action_navigation_view_title">Visualização de navegação</string>
     <string name="quick_action_switch_compass_desc">Um botão de alternância para mudar a orientação do mapa.</string>
     <string name="shared_string_interface">Interface</string>
+    <string name="background_opacity">Opacidade de fundo</string>
 </resources>

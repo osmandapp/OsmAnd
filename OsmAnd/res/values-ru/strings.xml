@@ -5866,4 +5866,19 @@
     <string name="delete_widget">Удалить виджет?</string>
     <string name="battery_saving_mode">Режим экономии батареи</string>
     <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
+    <string name="y_axis_description">Выберите не более двух параметров.</string>
+    <string name="graph_axis">Ось графика</string>
+    <string name="quick_action_search_view_desc">Переключатель для открытия или закрытия окна поиска.</string>
+    <string name="shared_string_interface">Интерфейс</string>
+    <string name="quick_action_previous_screen_desc">Переключатель для перехода на предыдущий экран.</string>
+    <string name="quick_action_previous_screen_title">Предыдущий экран</string>
+    <string name="quick_action_verb_navigate">Навигация</string>
+    <string name="quick_action_drawer_title">Главное меню</string>
+    <string name="quick_action_drawer_desc">Переключатель для отображения или скрытия главного меню.</string>
+    <string name="quick_action_navigation_view_desc">Переключатель для открытия или закрытия окна навигации.</string>
+    <string name="quick_action_search_view_title">Окно поиска</string>
+    <string name="background_opacity">Непрозрачность фона</string>
+    <string name="quick_action_navigation_view_title">Окно навигации</string>
+    <string name="quick_action_switch_compass_desc">Переключатель для смены ориентации карты.</string>
+    <string name="rendering_attr_alpineHiking_name">Уровень сложности пешеходных маршрутов</string>
 </resources>
