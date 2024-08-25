@@ -180,9 +180,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		selectedButton = button;
 		currentWidgetState = visible;
 
-		boolean nightMode = app.getDaynightHelper().isNightMode();
 		for (QuickActionButton actionButton : actionButtons) {
-			actionButton.update(nightMode, true);
+			updateButton(actionButton, true);
 		}
 		if (visible) {
 			enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
@@ -319,9 +318,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		if (mapButtonStates != mapButtonsHelper.getButtonsStates()) {
 			app.runInUIThread(this::updateButtons);
 		}
-		boolean nightMode = app.getDaynightHelper().isNightMode();
 		for (QuickActionButton button : actionButtons) {
-			button.update(nightMode, false);
+			updateButton(button, false);
 		}
 	}
 
@@ -396,7 +394,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			button.setOnTouchListener(getMoveFabOnTouchListener(app, getMapActivity(), button, buttonState.getFabMarginPref()));
 			return true;
 		});
-		button.update(nightMode, true);
+		updateButton(button, true);
 		updateButtonMargin(button);
 
 		return button;
@@ -444,6 +442,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 				setFabButtonMargin(activity, button, params, fabMargin, defRightMargin, 0);
 			}
 		}
+	}
+
+	private void updateButton(@NonNull QuickActionButton button, boolean forceUpdate) {
+		boolean nightMode = app.getDaynightHelper().isNightMode();
+		button.update(nightMode, forceUpdate);
+		updateButtonVisibility(button);
 	}
 
 	private void updateButtonVisibility(@NonNull QuickActionButton button) {
