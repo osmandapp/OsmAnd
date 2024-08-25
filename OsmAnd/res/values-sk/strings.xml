@@ -5825,4 +5825,6 @@
     <string name="quick_action_search_view_title">Vyhľadávanie</string>
     <string name="corner_radius">Polomer rohu</string>
     <string name="background_opacity">Priehľadnosť pozadia</string>
+    <string name="graph_axis">Os grafu</string>
+    <string name="y_axis_description">Zvoľte až 2 možnosti pre os Y.</string>
 </resources>
