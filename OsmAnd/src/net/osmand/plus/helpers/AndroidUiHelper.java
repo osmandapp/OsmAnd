@@ -1,10 +1,17 @@
 package net.osmand.plus.helpers;
 
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+import static android.view.Surface.ROTATION_0;
+import static android.view.Surface.ROTATION_180;
+import static android.view.Surface.ROTATION_270;
+import static android.view.Surface.ROTATION_90;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -12,7 +19,6 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Surface;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.WindowInsetsController;
@@ -68,67 +74,40 @@ public class AndroidUiHelper {
 		return rotation;
 	}
 
-    public static int getScreenOrientation(@NonNull Activity activity) {
-	    WindowManager windowManager = activity.getWindowManager();
-        int rotation = windowManager.getDefaultDisplay().getRotation();
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        int orientation;
-        // if the device's natural orientation is portrait:
-        if ((rotation == Surface.ROTATION_0
-                || rotation == Surface.ROTATION_180) && height > width ||
-                (rotation == Surface.ROTATION_90
-                        || rotation == Surface.ROTATION_270) && width > height) {
-            switch(rotation) {
-                case Surface.ROTATION_0:
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-                    break;
-                case Surface.ROTATION_90:
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-                    break;
-                case Surface.ROTATION_180:
-                    orientation =
-                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-                    break;
-                case Surface.ROTATION_270:
-                    orientation =
-                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
-                    break;
-                default:
-                    Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
-                            "portrait.");
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-                    break;
-            }
-        }
-        // if the device's natural orientation is landscape or if the device
-        // is square:
-        else {
-            switch(rotation) {
-                case Surface.ROTATION_0:
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-                    break;
-                case Surface.ROTATION_90:
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-                    break;
-                case Surface.ROTATION_180:
-                    orientation =
-                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
-                    break;
-                case Surface.ROTATION_270:
-                    orientation =
-                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-                    break;
-                default:
-                    Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
-                            "landscape.");
-                    orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-                    break;
-            }
-        }
-
+	public static int getScreenOrientation(@NonNull Activity activity) {
+		WindowManager windowManager = activity.getWindowManager();
+		int rotation = windowManager.getDefaultDisplay().getRotation();
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int width = dm.widthPixels;
+		int height = dm.heightPixels;
+		int orientation;
+		// if the device's natural orientation is portrait:
+		if ((rotation == ROTATION_0 || rotation == ROTATION_180) && height > width ||
+				(rotation == ROTATION_90 || rotation == ROTATION_270) && width > height) {
+			switch (rotation) {
+				case ROTATION_0 -> orientation = SCREEN_ORIENTATION_PORTRAIT;
+				case ROTATION_90 -> orientation = SCREEN_ORIENTATION_LANDSCAPE;
+				case ROTATION_180 -> orientation = SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+				case ROTATION_270 -> orientation = SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+				default -> {
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to portrait.");
+					orientation = SCREEN_ORIENTATION_PORTRAIT;
+				}
+			}
+		} else {
+			// if the device's natural orientation is landscape or if the device is square:
+			switch (rotation) {
+				case ROTATION_0 -> orientation = SCREEN_ORIENTATION_LANDSCAPE;
+				case ROTATION_90 -> orientation = SCREEN_ORIENTATION_PORTRAIT;
+				case ROTATION_180 -> orientation = SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+				case ROTATION_270 -> orientation = SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+				default -> {
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to landscape.");
+					orientation = SCREEN_ORIENTATION_LANDSCAPE;
+				}
+			}
+		}
 		return orientation;
 	}
 
@@ -178,8 +157,7 @@ public class AndroidUiHelper {
 
 	public static boolean isOrientationPortrait(@NonNull Activity ctx) {
 		int orientation = getScreenOrientation(ctx);
-		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		return orientation == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 
 	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
