@@ -5868,4 +5868,9 @@
     <string name="corner_radius">Raza colțului</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacitate fundal</string>
+    <string name="quick_action_previous_screen_title">Ecranul precedent</string>
+    <string name="quick_action_verb_navigate">Navigare</string>
+    <string name="quick_action_drawer_desc">O comutare pentru a afișa sau a ascunde meniul lateral.</string>
+    <string name="quick_action_drawer_title">Meniu lateral</string>
+    <string name="quick_action_search_view_desc">O comutare pentru a deschide sau închide vizualizarea de căutare.</string>
 </resources>
