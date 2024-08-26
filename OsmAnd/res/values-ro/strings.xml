@@ -5865,4 +5865,7 @@
     <string name="add_widget_to_the_left">Adăugă widget la stânga</string>
     <string name="battery_saving_mode">Mod de economisire a bateriei</string>
     <string name="help_article_map_tracks_name">Trasee</string>
+    <string name="corner_radius">Raza colțului</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Opacitate fundal</string>
 </resources>
