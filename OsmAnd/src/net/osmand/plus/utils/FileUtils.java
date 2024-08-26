@@ -1,17 +1,6 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.DOWNLOAD_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TEMP_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
@@ -46,7 +35,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class FileUtils {
@@ -160,26 +148,26 @@ public class FileUtils {
 			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
 			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
 		}
-		askUpdateNameInMetadata(gpxFile, dest);
+		updateGpxMetadata(gpxFile, dest);
 	}
 
-	private static void askUpdateNameInMetadata(@Nullable GpxFile gpxFile, @NonNull File dest) {
-		String newName = Algorithms.getFileNameWithoutExtension(dest.getName());
+	private static void updateGpxMetadata(@Nullable GpxFile gpxFile, @NonNull File dest) {
+		String name = Algorithms.getFileNameWithoutExtension(dest.getName());
 		if (gpxFile != null) {
-			updateNameInMetadata(gpxFile, newName);
-			return;
+			updateGpxMetadata(gpxFile, name);
+		} else {
+			GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
+				updateGpxMetadata(gpx, name);
+				return true;
+			});
 		}
-		GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
-			updateNameInMetadata(gpx, newName);
-			return true;
-		});
 	}
 
-	private static void updateNameInMetadata(@NonNull GpxFile gpxFile, @NonNull String newName) {
+	private static void updateGpxMetadata(@NonNull GpxFile gpxFile, @NonNull String name) {
 		if (gpxFile.isOsmAndOrigin()) {
 			Metadata metadata = gpxFile.getMetadata();
-			if (!Objects.equals(newName, metadata.getName())) {
-				metadata.setName(newName);
+			if (!Algorithms.stringsEqual(name, metadata.getName())) {
+				metadata.setName(name);
 				SaveGpxHelper.saveGpx(gpxFile);
 			}
 		}
