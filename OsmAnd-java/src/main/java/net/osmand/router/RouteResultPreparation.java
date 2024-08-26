@@ -1527,7 +1527,6 @@ public class RouteResultPreparation {
 		// turn lanes don't exist
 		if (rs.keepLeft || rs.keepRight) {
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
-			
 		}
 		return null;
 	}
@@ -1799,12 +1798,19 @@ public class RouteResultPreparation {
 			}
 		} else {
 			lanes = new int[prevLanesCount];
+
+			// set possible allowed lanes + 1 active
 			boolean ltr = rs.leftLanes < rs.rightLanes;
-			// active lanes
 			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
 				int ind = ltr ? i : lanes.length - i - 1;
-				lanes[ind] = (mainLaneType << 1) + 1;
+				lanes[ind] = (mainLaneType << 1); // inactive
+				boolean isLeftTurn = TurnType.isLeftTurn(mainLaneType);
+				boolean isRightTurn = TurnType.isRightTurn(mainLaneType);
+				if (mainLaneType == TurnType.C || (i == 0 && (ltr == isLeftTurn || ltr == isRightTurn))) {
+					lanes[ind]++; // activate the leftmost/rightmost lane (as well as all straight lanes)
+				}
 			}
+
 			// left lanes
 			for(int i = 0; i < Math.min(lanes.length, rs.leftLanes); i++) {
 				int lane = getTurnByAngle(rs.attachedAngles.get(i));
@@ -1817,6 +1823,7 @@ public class RouteResultPreparation {
 					TurnType.setSecondaryTurn(lanes, i, lane);
 				}
 			}
+
 			// right lanes
 			for (int i = 0; i < Math.min(lanes.length, rs.rightLanes); i++) {
 				int ind = lanes.length - i - 1;
@@ -1831,7 +1838,7 @@ public class RouteResultPreparation {
 				}
 			}
 			
-			// Fill All left empty slots with inactive C
+			// Fill all remaining empty slots with inactive C
 			for (int i = 0; i < lanes.length; i++) {
 				if (lanes[i] == 0) {
 					lanes[i] = TurnType.C << 1;
@@ -1843,7 +1850,6 @@ public class RouteResultPreparation {
 		// Set properties for the TurnType object
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
-
 
 		return t;
 	}
