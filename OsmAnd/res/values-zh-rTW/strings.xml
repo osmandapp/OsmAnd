@@ -5867,4 +5867,7 @@
     <string name="quick_action_navigation_view_desc">開啟或關閉導航檢視的開關。</string>
     <string name="quick_action_navigation_view_title">導航檢視</string>
     <string name="quick_action_switch_compass_desc">切換地圖方向的開關。</string>
+    <string name="corner_radius">圓角半徑</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">背景不透明度</string>
 </resources>
