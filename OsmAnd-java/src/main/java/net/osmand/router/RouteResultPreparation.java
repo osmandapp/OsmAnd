@@ -1401,7 +1401,7 @@ public class RouteResultPreparation {
 			int primaryTurn = TurnType.getPrimaryTurn(lanesArray[ind]);
 			final int st = TurnType.getSecondaryTurn(lanesArray[ind]);
 			if (leftTurn) {
-				if (!TurnType.isLeftTurn(primaryTurn)) {
+				if (primaryTurn != mainTurnType) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TL);
 					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
@@ -1410,7 +1410,7 @@ public class RouteResultPreparation {
 					lanesArray[ind] |= 1;
 				}
 			} else {
-				if (!TurnType.isRightTurn(primaryTurn)) {
+				if (primaryTurn != mainTurnType) {
 					// This was just to make sure that there's no bad data.
 					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TR);
 					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
