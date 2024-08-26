@@ -1034,7 +1034,7 @@
     <string name="int_continuosly">Kontinuirano</string>
     <string name="bg_service_sleep_mode_on">Zaustavi 
 \n rad u pozadini</string>
-    <string name="map_widget_transparent">Prozirnost vidžeta</string>
+    <string name="map_widget_transparent">Prozirni vidžeti</string>
     <string name="map_widget_view_direction">Smer gledanja</string>
     <string name="select_navigation_mode">Vrsta prevoza:</string>
     <string name="recalculate_route_to_your_location">Način prevoza:</string>
