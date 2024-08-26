@@ -1,6 +1,5 @@
 package net.osmand.plus.firstusage;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 
 import android.Manifest;
@@ -64,6 +63,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -688,7 +688,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		int endInd = startInd + part.length();
 		int color = ColorUtilities.getColor(app, R.color.active_color_primary_light);
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
-		Typeface typeface = DEFAULT_BOLD;
+		Typeface typeface = FontCache.getMediumFont();
 		CustomTypefaceSpan typefaceSpan = new CustomTypefaceSpan(typeface);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override

@@ -1,6 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 import android.content.Context;
@@ -28,6 +27,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -506,7 +506,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		PointF headingTextPosition = calculateTextPosition(heading, headingTextPositioning, drawingTextRadius, tb, attrs);
 		PointF distanceTextPosition = calculateTextPosition(distance, distanceTextPositioning, drawingTextRadius, tb, attrs);
 
-		setAttrsPaintsTypeface(attrs, DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, FontCache.getMediumFont());
 		if (headingTextPosition != null) {
 			drawTextInPosition(canvas, heading, headingTextPosition, attrs);
 		}
@@ -680,7 +680,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		float textMargin = AndroidUtils.dpToPx(app, margin);
 		attrs.paint2.setTextAlign(Paint.Align.CENTER);
 		attrs.paint3.setTextAlign(Paint.Align.CENTER);
-		setAttrsPaintsTypeface(attrs, DEFAULT_BOLD);
+		setAttrsPaintsTypeface(attrs, FontCache.getMediumFont());
 
 		for (int i = 0; i < degrees.length; i += 9) {
 			String cardinalDirection = getCardinalDirection(i);

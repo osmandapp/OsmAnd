@@ -5372,7 +5372,6 @@
     <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
     <string name="routing_attr_hazmat_category_usa_2_name">غازات</string>
     <string name="dangerous_goods_description">في بعض الطرق والأنفاق يحظر نقل المواد الخطرة.</string>
-    <string name="rendering_attr_alpineHiking_name">تصنيف الصعوبات</string>
     <string name="write_heading">كتابة العنوان</string>
     <string name="rendering_value_caiScale_description">نادي ألبينو الإيطالي (نادي ألبين الإيطالي)</string>
     <string name="rendering_value_sacScale_description">نادي الألب السويسري</string>
@@ -5904,7 +5903,6 @@
     <string name="add_widget_above">إضافة ويدجت أعلى</string>
     <string name="add_widget_to_the_right">إضافة ويدجت إلى اليمين</string>
     <string name="add_widget_to_the_left">إضافة ويدجت إلى اليسار</string>
-    <string name="height_cache">ذاكرة التخزين مرتفعة</string>
     <string name="route_roundabout_exit">خذ %1$d للخروج</string>
     <string name="help_article_map_tracks_name">المسارات</string>
     <string name="help_article_map_routes_name">المسارات الرياضية</string>

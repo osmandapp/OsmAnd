@@ -3204,8 +3204,8 @@
     <string name="poi_visibility_house">Видимість: будинок</string>
     <string name="poi_visibility_street">Видимість: вулиця</string>
     <string name="poi_visibility_area">Видимість: площа</string>
-    <string name="poi_operational_status_open">Відкрито</string>
-    <string name="poi_operational_status_closed">Закрито</string>
+    <string name="poi_operational_status_open">Відчинено</string>
+    <string name="poi_operational_status_closed">Зачинено</string>
     <string name="poi_operational_status_restricted">Обмежено</string>
     <string name="poi_operational_status_broken">Зламано</string>
     <string name="poi_operational_status_needs_maintenance">Потребує обслуговування</string>
@@ -4828,11 +4828,11 @@
     <string name="poi_us_maps_recreation_area_activity_winter_sports">Зимові види спорту</string>
     <string name="poi_us_maps_recreation_area_activity_xc_skiing_snowshoeing">Гірські лижі та снігоступи</string>
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Недосяжно</string>
-    <string name="poi_us_maps_recreation_area_open_status_open_2">Статус доступу до зони відпочинку (2): відкритий</string>
-    <string name="poi_us_maps_recreation_area_open_status_closed_2">Статус доступу до зони відпочинку (2): закритий</string>
+    <string name="poi_us_maps_recreation_area_open_status_open_2">Стан доступу до зони відпочинку (2): відчинено</string>
+    <string name="poi_us_maps_recreation_area_open_status_closed_2">Стан доступу до зони відпочинку (2): зачинено</string>
     <string name="poi_us_maps_recreation_area_fee_description">Опис тарифу</string>
-    <string name="poi_us_maps_recreation_area_open_season_start">Початок відкритого сезону</string>
-    <string name="poi_us_maps_recreation_area_open_season_end">Кінець відкритого сезону</string>
+    <string name="poi_us_maps_recreation_area_open_season_start">Початок сезону</string>
+    <string name="poi_us_maps_recreation_area_open_season_end">Завершення сезону</string>
     <string name="poi_us_maps_recreation_area_operational_hours">Години роботи</string>
     <string name="poi_us_maps_recreation_area_forest_name">Назва лісу</string>
     <string name="poi_us_maps_recreation_area_reservation_info">Інформація про бронювання</string>
@@ -4846,8 +4846,8 @@
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Сміттєзвалище для автофургонів</string>
     <string name="poi_blm_yes">Під управлінням Бюро землеустрою</string>
     <string name="poi_us_maps_recreation_area_activity_visitor_programs">Програми відвідувачів</string>
-    <string name="poi_us_maps_recreation_area_open_status_open">Відкрити</string>
-    <string name="poi_us_maps_recreation_area_open_status_closed">Закрито</string>
+    <string name="poi_us_maps_recreation_area_open_status_open">Відчинено</string>
+    <string name="poi_us_maps_recreation_area_open_status_closed">Зачинено</string>
     <string name="poi_us_maps_recreation_area_activity_poi">Точка зацікавлення</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_overlook">Мальовничий краєвид</string>
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Зона денного використання;Зона денного використання;Зона денного використання;Зона денного використання;Зона денного відпочинку;Зона денного відпочинку</string>
@@ -4861,11 +4861,16 @@
     <string name="poi_us_maps_recreation_area_facility_rapid">Швидкий</string>
     <string name="poi_us_maps_recreation_area_facility_warming_hut">Обігрівальний курінь</string>
     <string name="poi_us_maps_recreation_area_facility_parking">Паркувальна зона</string>
-    <string name="poi_us_maps_recreation_area_open_status_temporarily_closed">Тимчасово закрито</string>
-    <string name="poi_us_maps_recreation_area_open_status_temporarily_closed_2">Статус доступу до зони відпочинку (2): тимчасово закритий</string>
-    <string name="poi_us_maps_recreation_area_open_status_unreachable_2">Статус доступу до зони відпочинку (2): недосяжно</string>
+    <string name="poi_us_maps_recreation_area_open_status_temporarily_closed">Тимчасово зачинено</string>
+    <string name="poi_us_maps_recreation_area_open_status_temporarily_closed_2">Стан доступу до зони відпочинку (2): тимчасово зачинено</string>
+    <string name="poi_us_maps_recreation_area_open_status_unreachable_2">Стан доступу до зони відпочинку (2): недосяжно</string>
     <string name="poi_us_maps_recreation_area_restrictions">Інформація про обмеження</string>
     <string name="poi_property_management">Офіс управління майном</string>
     <string name="poi_mcdonalds">МакДональдз</string>
     <string name="poi_engineer">Інженерний кабінет</string>
+    <string name="poi_cash_in_yes">Так</string>
+    <string name="poi_cash_in_no">Ні</string>
+    <string name="poi_cash_in_customers">Клієнти</string>
+    <string name="poi_cash_in">Поповнення готівки</string>
+    <string name="poi_diet_pescetarian_no">Пескетаріанська дієта: ні</string>
 </resources>

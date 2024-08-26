@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PLUGIN_ID_KEY;
 
 import android.content.Context;
@@ -23,6 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -64,7 +64,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 		items.add(titleItem);
 
 		SpannableString pluginTitleSpan = new SpannableString(plugin.getName());
-		pluginTitleSpan.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, pluginTitleSpan.length(), 0);
+		pluginTitleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, pluginTitleSpan.length(), 0);
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)

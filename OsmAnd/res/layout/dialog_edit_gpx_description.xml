@@ -7,7 +7,7 @@
 	android:clickable="true"
 	android:focusable="true"
 	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -31,7 +31,7 @@
 				android:layout_height="@dimen/favorites_icon_size_small"
 				android:background="?attr/selectableItemBackgroundBorderless"
 				android:tint="?attr/default_icon_color"
-				osmand:srcCompat="@drawable/ic_action_close" />
+				app:srcCompat="@drawable/ic_action_close" />
 		</FrameLayout>
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -44,7 +44,7 @@
 			android:text="@string/context_menu_edit_descr"
 			android:textColor="?attr/searchbar_text"
 			android:textSize="@dimen/dialog_header_text_size"
-			android:textStyle="bold" />
+			app:typefaceWeight="medium" />
 
 		<FrameLayout
 			android:id="@+id/btn_save_container"
@@ -70,7 +70,7 @@
 				android:text="@string/shared_string_save"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_desc_text_size"
-				android:textStyle="bold" />
+				app:typefaceWeight="medium" />
 
 		</FrameLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:layout_marginRight="@dimen/content_padding_half"
                     android:scaleType="centerInside"
                     android:tint="?attr/default_icon_color"
-                    osmand:srcCompat="@drawable/ic_action_flag" />
+                    app:srcCompat="@drawable/ic_action_flag" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -127,7 +127,7 @@
                         android:layout_height="@dimen/standard_icon_size"
                         android:layout_gravity="center"
                         android:tint="?attr/secondary_icon_color"
-                        osmand:srcCompat="@drawable/ic_action_item_move" />
+                        app:srcCompat="@drawable/ic_action_item_move" />
 
                 </FrameLayout>
 

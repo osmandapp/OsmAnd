@@ -9,9 +9,9 @@ import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -407,12 +407,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return (int) textScale * radiusPoi;
 	}
 
-	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon, @NonNull ScaleType scaleType) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setScaleType(scaleType);
 		imageView.setImageDrawable(icon);
 	}
 

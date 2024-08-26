@@ -1,6 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
@@ -29,6 +28,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
@@ -102,7 +102,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 		TextView title = new TextView(app);
 		title.setPadding(padding, paddingHalf, padding, 0);
-		title.setTypeface(DEFAULT_BOLD);
+		title.setTypeface(FontCache.getMediumFont());
 		title.setText(R.string.rendering_category_details);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));

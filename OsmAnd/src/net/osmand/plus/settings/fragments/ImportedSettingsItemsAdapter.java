@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ImportedSettingsItemsAdapter extends
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
 		holder.title.setTextColor(app.getColor(activeColorRes));
-		holder.title.setTypeface(DEFAULT_BOLD);
+		holder.title.setTypeface(FontCache.getMediumFont());
 		holder.divider.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		holder.itemView.setOnClickListener(view -> listener.onItemClick(currentItemType));
 		holder.subTitle.setText(String.format(

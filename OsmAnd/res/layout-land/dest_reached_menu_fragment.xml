@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:id="@+id/share_fragment_layout"
-             xmlns:osmand="http://schemas.android.com/apk/res-auto"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        osmand:srcCompat="@drawable/list_destination"/>
+                        app:srcCompat="@drawable/list_destination"/>
 
                 </LinearLayout>
 
@@ -72,7 +72,7 @@
                             android:layout_height="48dp"
                             android:layout_gravity="top"
                             style="@style/Widget.AppCompat.Button.Borderless"
-                            osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+                            app:srcCompat="@drawable/ic_action_remove_dark"/>
 
                     </LinearLayout>
 
@@ -85,8 +85,8 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-						osmand:drawableLeftCompat="@drawable/ic_action_parking_dark"
-						osmand:drawableStartCompat="@drawable/ic_action_parking_dark"
+						app:drawableLeftCompat="@drawable/ic_action_parking_dark"
+						app:drawableStartCompat="@drawable/ic_action_parking_dark"
                         android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
@@ -109,8 +109,8 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-						osmand:drawableLeftCompat="@drawable/ic_action_gdirections_dark"
-						osmand:drawableStartCompat="@drawable/ic_action_gdirections_dark"
+						app:drawableLeftCompat="@drawable/ic_action_gdirections_dark"
+						app:drawableStartCompat="@drawable/ic_action_gdirections_dark"
 						android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"
@@ -133,8 +133,8 @@
                         android:paddingBottom="12dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-						osmand:drawableLeftCompat="@drawable/ic_action_done"
-						osmand:drawableStartCompat="@drawable/ic_action_done"
+						app:drawableLeftCompat="@drawable/ic_action_done"
+						app:drawableStartCompat="@drawable/ic_action_done"
                         android:drawablePadding="12dp"
                         android:gravity="start|center_vertical"
                         android:textColor="?android:textColorPrimary"

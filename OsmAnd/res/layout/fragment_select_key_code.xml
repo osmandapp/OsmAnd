@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -11,7 +11,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<androidx.core.widget.NestedScrollView
 			android:layout_width="match_parent"
@@ -179,7 +179,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 		<FrameLayout
 			android:layout_width="match_parent"
@@ -204,24 +204,24 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded_large"
 			android:background="?attr/list_background_color"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+			app:collapsedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitlePrimary"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/setting_list_item_large_height"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/change_button"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp">
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:title="@string/change_button"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
 
 			</androidx.appcompat.widget.Toolbar>
 

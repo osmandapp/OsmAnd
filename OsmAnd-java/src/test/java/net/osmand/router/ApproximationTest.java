@@ -102,8 +102,8 @@ public class ApproximationTest {
 		if ("routing".equals(type)) {
 			router.setUseGeometryBasedApproximation(false);
 		} else if ("geometry".equals(type)) {
-//			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
-			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_POINTS_MATCH_ALGORITHM;
+			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
+//			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_POINTS_MATCH_ALGORITHM;
 			router.setUseGeometryBasedApproximation(true);
 		}
 		router.setUseNativeApproximation(isNative());

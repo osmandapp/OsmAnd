@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -65,7 +64,7 @@
 			android:text="@string/contact_support"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_list_text_size"
-			android:textStyle="bold" />
+			app:typefaceWeight="medium" />
 
 	</LinearLayout>
 

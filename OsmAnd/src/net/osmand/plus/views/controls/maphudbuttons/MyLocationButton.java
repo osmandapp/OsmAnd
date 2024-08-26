@@ -80,7 +80,7 @@ public class MyLocationButton extends MapButton {
 		setBackground(R.drawable.btn_circle, R.drawable.btn_circle_night);
 		setIconId(R.drawable.ic_my_location);
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
-		setContentDesc(R.string.unknown_location);
+		view.setContentDescription(app.getString(R.string.unknown_location));
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
@@ -90,7 +90,7 @@ public class MyLocationButton extends MapButton {
 		setIconId(R.drawable.ic_my_location);
 		setIconColorId(R.color.color_myloc_distance);
 		setBackground(R.drawable.btn_circle, R.drawable.btn_circle_night);
-		setContentDesc(R.string.access_map_linked_to_location);
+		view.setContentDescription(app.getString(R.string.access_map_linked_to_location));
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
@@ -100,16 +100,16 @@ public class MyLocationButton extends MapButton {
 		setIconId(R.drawable.ic_my_location);
 		setIconColorId(0);
 		setBackground(R.drawable.btn_circle_blue);
-		setContentDesc(R.string.map_widget_back_to_loc);
+		view.setContentDescription(app.getString(R.string.map_widget_back_to_loc));
 		if (view.isClickable()) {
 			setMyLocationListeners();
 		}
 	}
 
 	private void setMyLocationListeners() {
-		setOnClickListener(backToLocationListener);
+		view.setOnClickListener(backToLocationListener);
 		if (contextMenuAllowed) {
-			setOnLongClickListener(backToLocationWithMenu);
+			view.setOnLongClickListener(backToLocationWithMenu);
 		}
 	}
 

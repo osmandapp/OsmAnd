@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationCallback;
@@ -106,6 +105,7 @@ public class NavigationService extends Service {
 	}
 
 	public void stopIfNeeded(@NonNull Context context, int usageIntent) {
+		LOG.info(">>>> NavigationService stopIfNeeded = " + usageIntent);
 		OsmandApplication app = getApp();
 		if ((usedBy & usageIntent) > 0) {
 			usedBy -= usageIntent;
@@ -121,7 +121,9 @@ public class NavigationService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		LOG.info(">>>> NavigationService onStartCommand");
 		if (isUsed()) {
+			LOG.info(">>>> NavigationService is used by = " + usedBy);
 			addUsageIntent(intent.getIntExtra(USAGE_INTENT, 0));
 			return START_REDELIVER_INTENT;
 		}
@@ -179,14 +181,16 @@ public class NavigationService extends Service {
 		removeLocationUpdates();
 		removeLocationSourceListener();
 
+		LOG.info(">>>> NavigationService onDestroy");
 		// remove notification
 		stopForeground(STOP_FOREGROUND_REMOVE);
-		app.getNotificationHelper().updateTopNotification();
+		app.getNotificationHelper().resetTopNotification();
 		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
 	}
 
 	@Override
 	public void onTaskRemoved(Intent rootIntent) {
+		LOG.info(">>>> NavigationService onTaskRemoved");
 		OsmandApplication app = getApp();
 		app.getNotificationHelper().removeNotifications(false);
 		if (app.getNavigationService() != null && app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {

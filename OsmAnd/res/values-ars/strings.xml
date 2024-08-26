@@ -3558,7 +3558,6 @@
     <string name="remove_from_map_markers">إزالة من \"التوجيه المباشر\"</string>
     <string name="route_line_use_gradient_coloring">خط المسار ملون حسب ارتفاع المنحدر .</string>
     <string name="int_days">أيام</string>
-    <string name="rendering_attr_alpineHiking_name">تصنيف الصعوبات</string>
     <string name="shared_string_actions">إجراءات</string>
     <string name="shared_string_purchased_on">تم الشراء في</string>
     <string name="quick_action_cloud_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرياح على الخريطة.</string>

@@ -633,7 +633,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	public WptPt insertPointData(double lat, double lon, String description, String name,
-	                             String category, int color, String iconName, String backgroundName) {
+	                             String category, int color, @Nullable String iconName, @Nullable String backgroundName) {
 		long time = System.currentTimeMillis();
 		WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.setName(name);

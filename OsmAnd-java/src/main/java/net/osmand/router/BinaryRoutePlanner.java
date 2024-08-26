@@ -459,11 +459,12 @@ public class BinaryRoutePlanner {
 
 		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
 		// calculate possible obstacle plus time
-		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		double obstacle = 0;
+		if (segment.distanceFromStart >= 0 || !reverseWaySearch) { // ignore last point for reverse
+			obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		}
 		if (obstacle < 0) {
-			if (segment.distanceFromStart > 0) { // ignore obstacle on first point for very first segment
-				return -1;
-			}
+			return -1;
 		}
 		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd);
 		if (heightObstacle < 0) {
