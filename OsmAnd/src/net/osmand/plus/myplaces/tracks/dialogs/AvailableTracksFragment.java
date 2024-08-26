@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -520,6 +521,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		};
 	}
 
+	@WorkerThread
 	@Override
 	public void onSmartFolderUpdated(@NonNull SmartFolder smartFolder) {
 		app.runInUIThread(() -> adapter.updateItem(smartFolder));
