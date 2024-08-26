@@ -1767,7 +1767,7 @@
     <string name="av_audio_bitrate_descr">Изберете аудио битрейт.</string>
     <string name="no_address_found">Няма адрес</string>
     <string name="looking_up_address">Търсене на адрес</string>
-    <string name="local_index_description">Докоснете върху елемент за да видите повече информация, натиснете и задръжте за да деактивирате или да изтриете. Данни в устройството (%1$s свободни):</string>
+    <string name="local_index_description">Докоснете елемент, за да видите повече информация, натиснете и задръжте, за да изключите или премахнете. Данни в устройството (%1$s свободни):</string>
     <string name="number_of_rows_in_dash">Брой редове %1$s</string>
     <string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Изборът може да бъде променен по-късно.</string>
     <string name="rendering_attr_horseRoutes_name">Пътеки за конна езда</string>
@@ -1930,7 +1930,7 @@
     <string name="first_usage_greeting">Получете упътвания и открийте нови места без да ползвате връзка към Интернет</string>
     <string name="shared_string_change">Промяна</string>
     <string name="search_my_location">Намери моето местоположение</string>
-    <string name="update_all_maps_now">Обновяване на всички карти сега\?</string>
+    <string name="update_all_maps_now">Обновяване на всички карти?</string>
     <string name="clear_tile_data">Изчистване на всички плочки</string>
     <string name="routing_attr_short_way_name">Икономичен маршрут</string>
     <string name="replace_favorite_confirmation">Заместване на „%1$s“ от Избрани\?</string>
@@ -3981,4 +3981,23 @@
     <string name="sort_country_name_descending">Име на държавата: Я – А</string>
     <string name="delete_map_description">Премахване на картата „%1$s“?</string>
     <string name="wikipedia_and_travel_maps">Уикипедия и пътеводители</string>
+    <string name="auto_25_chars_route_tl">Завийте на ляво</string>
+    <string name="quick_action_new_route">Нов маршрут</string>
+    <string name="select_groups_for_import">Избетете група, която да бъде внесена.</string>
+    <string name="today">Днес</string>
+    <string name="shared_string_more_without_dots">Повече</string>
+    <string name="update_all_maps_added">Всички карти за %1$s ще бъдат обновени.</string>
+    <string name="routing_attr_allow_intermediate_description">По-сложен маршрут със стръмни участъци. Наличие на препятствия, които да бъдат избегнати.</string>
+    <string name="shared_string_groups">Групи</string>
+    <string name="gpx_add_track">Добавяне…</string>
+    <string name="tomorrow">Утре</string>
+    <string name="auto_25_chars_route_kr">Дръжте дясно</string>
+    <string name="quick_action_sh_poi_descr">Добавете една или повече категории интересни точки, които да бъдат показани на картата.</string>
+    <string name="route_roundabout_exit">Излезте от %1$d изход</string>
+    <string name="help_article_map_routes_name">Маршрути</string>
+    <string name="update_all_maps_q">Обновяване на всички (%1$d) карти?</string>
+    <string name="auto_25_chars_route_tr">Завийте на дясно</string>
+    <string name="auto_25_chars_route_kl">Дръжте ляво</string>
+    <string name="auto_25_chars_route_tu">Направете обратен</string>
+    <string name="update_all_maps">Обновяване на всички карти</string>
 </resources>
