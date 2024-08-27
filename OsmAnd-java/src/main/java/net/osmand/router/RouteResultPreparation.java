@@ -1799,15 +1799,31 @@ public class RouteResultPreparation {
 		} else {
 			lanes = new int[prevLanesCount];
 
-			// set possible allowed lanes + 1 active
+			// set and activate adjacent lanes
 			boolean ltr = rs.leftLanes < rs.rightLanes;
-			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
+
+			boolean isUnrestricted = isSpeedyMotorway(currentSegm);
+			boolean isLeftTurn = TurnType.isLeftTurn(mainLaneType);
+			boolean isRightTurn = TurnType.isRightTurn(mainLaneType);
+			boolean isSameRoad = currentSegm.getObject().getId() == prevSegm.getObject().getId();
+
+			for (int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
+				boolean isOutermostLane = false;
 				int ind = ltr ? i : lanes.length - i - 1;
 				lanes[ind] = (mainLaneType << 1); // inactive
-				boolean isLeftTurn = TurnType.isLeftTurn(mainLaneType);
-				boolean isRightTurn = TurnType.isRightTurn(mainLaneType);
-				if (mainLaneType == TurnType.C || (i == 0 && (ltr == isLeftTurn || ltr == isRightTurn))) {
-					lanes[ind]++; // activate the leftmost/rightmost lane (as well as all straight lanes)
+
+				if (isLeftTurn) {
+					isOutermostLane = (ltr && i == 0) || ind == 0;
+				} else if (isRightTurn) {
+					isOutermostLane = (!ltr && i == 0) || ind == lanes.length - 1;
+				}
+
+				if (isSameRoad || isUnrestricted || isOutermostLane || mainLaneType == TurnType.C) {
+					// activate all lanes in case of same road (think about name/ref match)
+					// activate all adjacent lanes on highways and "speedy" trunks
+					// activate corresponding leftmost/rightmost lane (strict)
+					// activate weird case of (rs.keepLeft && rs.keepRight)
+					lanes[ind] |= 1;
 				}
 			}
 
@@ -2150,10 +2166,21 @@ public class RouteResultPreparation {
 		String h = s.getObject().getHighway();
 		return "motorway".equals(h) || "motorway_link".equals(h)  ||
 				"trunk".equals(h) || "trunk_link".equals(h);
-		
 	}
 
-	
+	private boolean isSpeedyMotorway(RouteSegmentResult s) {
+		final String h = s.getObject().getHighway();
+		if ("motorway".equals(h) || "motorway_link".equals(h)) {
+			return true; // motorways are usually well-organized
+		}
+		final float INDICATOR_OF_CITY_TRUNK = 50f / 3600 * 1000; // 50 km/h in m/s
+		final float maxSpeed = s.getObject().getMaximumSpeed(s.isForwardDirection());
+		if ("trunk".equals(h) || "trunk_link".equals(h)) {
+			return maxSpeed > INDICATOR_OF_CITY_TRUNK; // detect out-of-city trunks
+		}
+		return false; // follow strict Traffic Rules (turn from the leftmost/rightmost lane)
+	}
+
 	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
