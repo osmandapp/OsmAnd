@@ -3953,7 +3953,7 @@
     <string name="activity_type_running_name">Joggen</string>
     <string name="activity_type_walking_name">Wandelen</string>
     <string name="activity_type_offroad_name">Off-road</string>
-    <string name="activity_type_motorbike_name">Bromfiets</string>
+    <string name="activity_type_motorbike_name">Motorfiets</string>
     <string name="activity_type_car_name">Auto\'s</string>
     <string name="temporary_conditional_routing_descr">Gebruik de wegen beperkingen die nu actief zijn op de kaart</string>
     <string name="routing_attr_short_way_description">Geoptimaliseerde kortere route (energiebesparing)</string>
@@ -5521,7 +5521,7 @@
     <string name="standard_maps">Standaardkaarten</string>
     <string name="free_versions">Gratis versies</string>
     <string name="key_assignments_already_cleared_message">Alle toetstoewijzingen zijn al gewist</string>
-    <string name="may_be_used_if_there_is_shortcut"></string>
+    <string name="may_be_used_if_there_is_shortcut"/>
     <string name="hillshade_slope">Heuvelschaduw, Helling</string>
     <string name="key_event_category_actions">Acties</string>
     <string name="key_event_action_move_right">Beweeg naar rechts</string>
@@ -5689,4 +5689,14 @@
     <string name="with_waypoints">Met tussenstops</string>
     <string name="delete_smart_folder_dialog_message">Hiermee wordt de slimme map \"%1$s\" verwijderd. (Tracks worden niet verwijderd.)</string>
     <string name="max_sensor_temperature">Temperatuur, maximaal</string>
+    <string name="auto_25_chars_route_tslr">Ga flauw naar rechts</string>
+    <string name="maps_and_resources">Kaarten en hulpmiddelen</string>
+    <string name="auto_25_chars_route_tsll">Ga flauw naar links</string>
+    <string name="app_mode_moped">Bromfiets</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="battery_saving_mode">Batterij-spaarstand</string>
+    <string name="quick_action_previous_screen_title">Vorig scherm</string>
+    <string name="corner_radius">Hoekstraal</string>
+    <string name="quick_action_verb_navigate">Navigeren</string>
+    <string name="background_opacity">Achtergrond-transparantie</string>
 </resources>
