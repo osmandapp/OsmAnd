@@ -19,9 +19,8 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.base.headed.IHeadedCardController;
 import net.osmand.plus.card.base.headed.IHeadedContentCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
-import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
-import net.osmand.plus.card.width.WidthMode;
+import net.osmand.shared.data.KWidthMode;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 
@@ -131,7 +130,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	public WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
 			String selectedWidth = drawInfo.getWidth();
-			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
+			KWidthMode widthMode = KWidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull

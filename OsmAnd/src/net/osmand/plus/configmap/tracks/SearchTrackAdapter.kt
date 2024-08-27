@@ -18,13 +18,13 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache
+import net.osmand.shared.filters.BaseTrackFilter
 import net.osmand.util.Algorithms
 import java.util.Collections
 

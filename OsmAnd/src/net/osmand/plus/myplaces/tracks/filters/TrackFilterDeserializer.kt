@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
+import net.osmand.shared.filters.BaseTrackFilter
+import net.osmand.shared.filters.TrackFilterType
+import net.osmand.shared.filters.TrackFiltersHelper
 import java.lang.reflect.Type
 
 class TrackFilterDeserializer :

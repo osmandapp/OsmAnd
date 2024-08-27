@@ -182,16 +182,16 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	public List<kotlin.Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
 	                                                               boolean includeEmptyValues,
 	                                                               boolean sortByName,
 	                                                               boolean sortDescending) {
-		List<Pair<String, Integer>> res = new ArrayList<>();
+		List<kotlin.Pair<String, Integer>> res = new ArrayList<>();
 		for (StringIntPair item : database.getStringIntItemsCollection(columnName,
 				includeEmptyValues,
 				sortByName,
 				sortDescending)) {
-			res.add(new Pair<>(item.getString(), item.getInteger()));
+			res.add(new kotlin.Pair<>(item.getString(), item.getInteger()));
 		}
 		return res;
 	}

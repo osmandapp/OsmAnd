@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import kotlinx.datetime.Instant
+import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.api.XmlFactoryAPI
@@ -81,6 +82,10 @@ actual object PlatformUtil {
 	}
 
 	actual fun formatDate(date: Instant, pattern: String): String {
+		TODO("Not yet implemented")
+	}
+
+	actual fun getOsmAndContext(): OsmAndContext {
 		TODO("Not yet implemented")
 	}
 }

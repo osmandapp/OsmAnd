@@ -1,20 +1,20 @@
 package net.osmand.shared.filters
 
-import com.google.gson.annotations.Expose
-import net.osmand.CollatorStringMatcher
+import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.search.core.SearchPhrase
-import net.osmand.util.Algorithms
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KStringMatcher
+import net.osmand.shared.util.PlatformUtil
 
 class TextTrackFilter(
 	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?)
 	: BaseTrackFilter(trackFilterType, filterChangedListener) {
 
-	@Expose
+	@Serializable
 	var value = ""
 		set(value) {
-			if (!Algorithms.stringsEqual(field, value)) {
+			if (!KAlgorithms.stringsEqual(field, value)) {
 				field = value
 				updateMatcher()
 			}
@@ -27,10 +27,8 @@ class TextTrackFilter(
 		nameMatcher = createMatcher()
 	}
 
-	private fun createMatcher(): SearchPhrase.NameStringMatcher {
-		return SearchPhrase.NameStringMatcher(
-			value.trim { it <= ' ' },
-			CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+	private fun createMatcher(): KStringMatcher {
+		return PlatformUtil.getOsmAndContext().getNameStringMatcher(value.trim { it <= ' ' })
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
@@ -41,7 +39,7 @@ class TextTrackFilter(
 	}
 
 	override fun isEnabled(): Boolean {
-		return !Algorithms.isEmpty(value)
+		return !KAlgorithms.isEmpty(value)
 	}
 
 	override fun initWithValue(sourseFilter: BaseTrackFilter) {
@@ -55,7 +53,7 @@ class TextTrackFilter(
 	override fun equals(other: Any?): Boolean {
 		return super.equals(other) &&
 				other is TextTrackFilter &&
-				Algorithms.stringsEqual(other.value, value)
+				KAlgorithms.stringsEqual(other.value, value)
 	}
 
 	override fun hashCode(): Int {

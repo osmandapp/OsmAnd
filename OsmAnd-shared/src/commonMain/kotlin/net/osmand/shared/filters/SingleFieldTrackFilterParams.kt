@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.tracks.filters
+package net.osmand.shared.filters
 
 
 open class SingleFieldTrackFilterParams {

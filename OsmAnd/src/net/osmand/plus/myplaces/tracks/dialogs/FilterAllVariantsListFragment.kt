@@ -21,13 +21,13 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
-import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
+import net.osmand.shared.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
-import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.plus.myplaces.tracks.filters.TrackFilterPropertiesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.shared.filters.ListTrackFilter
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpdateListener {
@@ -44,14 +44,13 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 		) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val initialFilter =
-					TrackFiltersHelper.createFilter(app, filter.trackFilterType, null)
+					TrackFiltersHelper.createFilter(filter.trackFilterType, null)
 				if (initialFilter !is ListTrackFilter) {
 					throw IllegalArgumentException("Filter should be subclass from ListTrackFilter")
 				}
 				initialFilter.initWithValue(filter)
 				val currentFilter =
 					TrackFiltersHelper.createFilter(
-						app,
 						filter.trackFilterType,
 						null) as ListTrackFilter
 				currentFilter.initWithValue(filter)

@@ -1,6 +1,5 @@
 package net.osmand.shared.filters
 
-import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 

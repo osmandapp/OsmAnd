@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.shared.data.KWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.util.Objects;
@@ -40,11 +41,11 @@ public enum WidthMode {
 	}
 
 	@NonNull
-	public static WidthMode valueOfKey(@Nullable String key) {
+	public static KWidthMode valueOfKey(@Nullable String key) {
 		if (key != null && Algorithms.isInt(key)) {
 			return CUSTOM;
 		}
-		for (WidthMode widthMode : values()) {
+		for (KWidthMode widthMode : values()) {
 			if (Objects.equals(widthMode.getKey(), key)) {
 				return widthMode;
 			}

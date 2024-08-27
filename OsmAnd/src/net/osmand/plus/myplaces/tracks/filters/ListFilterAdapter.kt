@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -8,13 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.CollatorStringMatcher
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.card.width.WidthMode
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.dialogs.FilterAllVariantsListFragment
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterVariantViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.ShowAllViewHolder
+import net.osmand.plus.track.fragments.TrackAppearanceFragment
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.search.core.SearchPhrase
+import net.osmand.shared.filters.ColorSingleFieldTrackFilterParams
+import net.osmand.shared.filters.FilterChangedListener
+import net.osmand.shared.filters.FolderSingleFieldTrackFilterParams
+import net.osmand.shared.filters.ListTrackFilter
+import net.osmand.shared.filters.SingleFieldTrackFilterParams
+import net.osmand.shared.filters.WidthSingleFieldTrackFilterParams
 import net.osmand.util.Algorithms
 import net.osmand.view.ThreeStateCheckbox
 
@@ -74,11 +85,14 @@ class ListFilterAdapter(
 					false)
 				val topBottomPadding =
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_small)
-				val leftRightPadding = if(items.size > 0 && filter.collectionFilterParams.getItemIcon(app, items[0]) != null) {
-					app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
-				} else {
-					app.resources.getDimensionPixelSize(R.dimen.content_padding)
-				}
+				val leftRightPadding =
+					if (items.size > 0 && getFilterItemIcon(
+							filter.collectionFilterParams,
+							items[0]) != null) {
+						app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
+					} else {
+						app.resources.getDimensionPixelSize(R.dimen.content_padding)
+					}
 				view.setPadding(
 					leftRightPadding,
 					topBottomPadding,
@@ -86,6 +100,70 @@ class ListFilterAdapter(
 					topBottomPadding)
 				ShowAllViewHolder(view)
 			}
+		}
+	}
+
+
+	private fun getFilterAllItemsIcon(
+		filterParams: SingleFieldTrackFilterParams, isChecked: Boolean,
+		nightMode: Boolean): Drawable? {
+		if (filterParams is FolderSingleFieldTrackFilterParams) {
+			return if (isChecked) {
+				app.uiUtilities.getActiveIcon(
+					R.drawable.ic_action_group_select_all,
+					nightMode)
+			} else {
+				app.uiUtilities.getPaintedIcon(
+					R.drawable.ic_action_group_select_all,
+					app.getColor(R.color.icon_color_default_light))
+			}
+		} else {
+			return null
+		}
+
+	}
+
+	private fun getFilterItemIcon(
+		filterParams: SingleFieldTrackFilterParams,
+		itemName: String): Drawable? {
+		if (filterParams is ColorSingleFieldTrackFilterParams) {
+			return if (Algorithms.isEmpty(itemName)) {
+				app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
+			} else {
+				val color = Color.parseColor(itemName)
+				val colorWithoutAlpha = ColorUtilities.removeAlpha(color)
+				val transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f)
+				val transparencyIcon =
+					app.uiUtilities.getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor)
+				val colorIcon = app.uiUtilities.getPaintedIcon(R.drawable.bg_point_circle, color)
+				UiUtilities.getLayeredIcon(transparencyIcon, colorIcon)
+			}
+		} else if (filterParams is FolderSingleFieldTrackFilterParams) {
+			return app.uiUtilities.getPaintedIcon(
+				R.drawable.ic_action_folder,
+				app.getColor(R.color.icon_color_default_light))
+		} else if (filterParams is WidthSingleFieldTrackFilterParams) {
+			return if (Algorithms.isEmpty(itemName)) {
+				app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
+			} else {
+				val iconColor = when (itemName) {
+					WidthMode.THIN.key,
+					WidthMode.MEDIUM.key,
+					WidthMode.BOLD.key -> R.color.track_filter_width_standard
+
+					else -> {
+						R.color.track_filter_width_custom
+					}
+				}
+				TrackAppearanceFragment.getTrackIcon(
+					app,
+					itemName,
+					false,
+					app.getColor(iconColor))
+			}
+
+		} else {
+			return null
 		}
 	}
 
@@ -106,8 +184,8 @@ class ListFilterAdapter(
 
 			is FilterVariantViewHolder -> {
 				val itemName = getItem(position)
-				val icon = filter.collectionFilterParams.getItemIcon(app, itemName)
-				holder.title.text = filter.collectionFilterParams.getItemText(app, itemName)
+				val icon = getFilterItemIcon(filter.collectionFilterParams, itemName)
+				holder.title.text = filter.collectionFilterParams.getItemText(itemName)
 				holder.icon.setImageDrawable(icon)
 				AndroidUiHelper.updateVisibility(holder.icon, icon != null)
 				AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
@@ -134,7 +212,8 @@ class ListFilterAdapter(
 				}
 				isSelectAllItemsBeingSet = false
 				holder.icon.setImageDrawable(
-					filter.collectionFilterParams.getAllItemsIcon(app,
+					getFilterAllItemsIcon(
+						filter.collectionFilterParams,
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
 				holder.switch.setOnCheckedChangeListener { _, isChecked ->

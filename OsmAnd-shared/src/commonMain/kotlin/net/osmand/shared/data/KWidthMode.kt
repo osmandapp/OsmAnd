@@ -1,6 +1,6 @@
-package net.osmand.plus.card.width
+package net.osmand.shared.data
 
-enum class WidthMode(
+enum class KWidthMode(
 	val key: String) {
 	THIN("thin"),
 	MEDIUM("medium"),

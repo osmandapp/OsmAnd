@@ -10,8 +10,8 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
-import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter
 import net.osmand.plus.widgets.TextViewEx
+import net.osmand.shared.filters.ListTrackFilter
 
 class ListFilterViewHolder(var app: OsmandApplication, itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {

@@ -1,17 +1,17 @@
 package net.osmand
 
-import android.content.Context
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.enums.MetricsConstants
+import net.osmand.plus.settings.enums.SpeedConstants.KILOMETERS_PER_HOUR
+import net.osmand.plus.settings.enums.SpeedConstants.METERS_PER_SECOND
+import net.osmand.plus.settings.enums.SpeedConstants.MILES_PER_HOUR
+import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_KILOMETER
+import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_MILE
+import net.osmand.plus.settings.enums.SpeedConstants.NAUTICALMILES_PER_HOUR
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.data.SpeedConstants
-import net.osmand.plus.settings.enums.SpeedConstants.KILOMETERS_PER_HOUR
-import net.osmand.plus.settings.enums.SpeedConstants.MILES_PER_HOUR
-import net.osmand.plus.settings.enums.SpeedConstants.METERS_PER_SECOND
-import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_MILE
-import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_KILOMETER
-import net.osmand.plus.settings.enums.SpeedConstants.NAUTICALMILES_PER_HOUR
 import net.osmand.shared.filters.KMetricsConstants
+import net.osmand.shared.util.KStringMatcher
 import java.lang.ref.WeakReference
 
 object OsmAndContextImpl: OsmAndContext {
@@ -60,5 +60,15 @@ object OsmAndContextImpl: OsmAndContext {
 			}
 		}
 		return null
+	}
+
+	override fun getNameStringMatcher(name: String): KStringMatcher {
+		return object:KStringMatcher{
+			private val sm: CollatorStringMatcher = CollatorStringMatcher(name, CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+
+			override fun matches(name: String): Boolean {
+				return sm.matches(name)
+			}
+		}
 	}
 }

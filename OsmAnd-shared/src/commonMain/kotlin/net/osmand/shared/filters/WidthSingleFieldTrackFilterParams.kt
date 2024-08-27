@@ -1,7 +1,6 @@
 package net.osmand.shared.filters
 
-import net.osmand.plus.card.width.WidthMode
-import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams
+import net.osmand.shared.data.KWidthMode
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 
@@ -33,9 +32,9 @@ class WidthSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 			PlatformUtil.getStringResource("not_specified")
 		} else {
 			when (itemName) {
-				WidthMode.THIN.key -> PlatformUtil.getStringResource("rendering_value_thin_name")
-				WidthMode.MEDIUM.key -> PlatformUtil.getStringResource("rendering_value_medium_name")
-				WidthMode.BOLD.key -> PlatformUtil.getStringResource("rendering_value_bold_name")
+				KWidthMode.THIN.key -> PlatformUtil.getStringResource("rendering_value_thin_name")
+				KWidthMode.MEDIUM.key -> PlatformUtil.getStringResource("rendering_value_medium_name")
+				KWidthMode.BOLD.key -> PlatformUtil.getStringResource("rendering_value_bold_name")
 				else -> {
 					"${PlatformUtil.getStringResource("shared_string_custom")}: $itemName"
 				}

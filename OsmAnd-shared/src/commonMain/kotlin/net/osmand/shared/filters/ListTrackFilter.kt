@@ -2,11 +2,13 @@ package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams
+import net.osmand.shared.custom_types.StringIntegerPair
+import net.osmand.shared.data.KInteger
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.MultiNameSerializer
 import net.osmand.shared.util.SerialNames
+import kotlin.Pair
 
 open class ListTrackFilter(
 	trackFilterType: TrackFilterType,
@@ -70,7 +72,7 @@ open class ListTrackFilter(
 			filterChangedListener?.onFilterChanged()
 		}
 
-	fun setFullItemsCollection(collection: List<Pair<String, Int>>) {
+	fun setFullItemsCollection(collection: List<StringIntegerPair>) {
 		val tmpAllItems = ArrayList<String>()
 		val tmpAllItemsCollection = HashMap<String, Int>()
 		for (pair in collection) {

@@ -10,15 +10,18 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
-import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams;
-import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
+import net.osmand.shared.custom_types.StringIntegerPair;
+import net.osmand.shared.data.KInteger;
+import net.osmand.shared.filters.BaseTrackFilter;
+import net.osmand.shared.filters.DateTrackFilter;
+import net.osmand.shared.filters.FilterChangedListener;
+import net.osmand.shared.filters.ListTrackFilter;
+import net.osmand.shared.filters.RangeTrackFilter;
+import net.osmand.shared.filters.SingleFieldTrackFilterParams;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TextTrackFilter;
+import net.osmand.shared.filters.TrackFilterType;
+import net.osmand.shared.filters.TrackFiltersHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -29,6 +32,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import kotlin.Pair;
 
 public class TracksSearchFilter extends Filter implements FilterChangedListener {
 	public static final Log LOG = PlatformUtil.getLog(TracksSearchFilter.class);
@@ -80,12 +86,18 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 							ListTrackFilter filter = (ListTrackFilter) getFilterByType(trackFilterType);
 							if (filter != null) {
 								SingleFieldTrackFilterParams filterParams = (SingleFieldTrackFilterParams) trackFilterType.getAdditionalData();
-								filter.setFullItemsCollection(app.getGpxDbHelper().getStringIntItemsCollection(
+
+
+								List<Pair<String, Integer>> items = app.getGpxDbHelper().getStringIntItemsCollection(
 										trackFilterType.getProperty().getColumnName(),
 										filterParams.includeEmptyValues(),
 										filterParams.sortByName(),
 										filterParams.sortDescending()
-								));
+								);
+
+								List<StringIntegerPair> itemsK = new ArrayList<>();
+								items.forEach(entry -> itemsK.add(new StringIntegerPair(entry.getFirst(),entry.getSecond())));
+								filter.setFullItemsCollection(itemsK);
 								if (trackFilterType == TrackFilterType.FOLDER) {
 									if (currentFolder != null) {
 										filter.setFirstItem(currentFolder.getRelativePath());
@@ -164,12 +176,15 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(TrackFilterType.FOLDER);
 		if (folderFilter != null) {
 			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
-				folderFilter.setFullItemsCollection(app.getGpxDbHelper().getStringIntItemsCollection(
+				List<Pair<String, Integer>> items = app.getGpxDbHelper().getStringIntItemsCollection(
 						folderFilter.getTrackFilterType().getProperty().getColumnName(),
 						folderFilter.getCollectionFilterParams().includeEmptyValues(),
 						folderFilter.getCollectionFilterParams().sortByName(),
 						folderFilter.getCollectionFilterParams().sortDescending()
-				));
+				);
+				List<StringIntegerPair> itemsK = new ArrayList<>();
+				items.forEach(entry -> itemsK.add(new StringIntegerPair(entry.getFirst(),entry.getSecond())));
+				folderFilter.setFullItemsCollection(itemsK);
 			} else {
 				List<TrackItem> ignoreFoldersItems = filterSpecificSearchResults.get(TrackFilterType.FOLDER);
 				folderFilter.updateFullCollection(ignoreFoldersItems);

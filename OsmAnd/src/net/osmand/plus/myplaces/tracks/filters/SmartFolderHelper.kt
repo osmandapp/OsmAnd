@@ -4,13 +4,13 @@ import android.os.AsyncTask
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import net.osmand.PlatformUtil
 import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
+import net.osmand.shared.filters.TrackFiltersHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
+import net.osmand.shared.filters.BaseTrackFilter
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import java.io.File
@@ -60,7 +60,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()
 						for (filter in it) {
 							val newFilter =
-								TrackFiltersHelper.createFilter(app, filter.trackFilterType, null)
+								TrackFiltersHelper.createFilter(filter.trackFilterType, null)
 							newFilter.initWithValue(filter)
 							newFilters.add(newFilter)
 						}

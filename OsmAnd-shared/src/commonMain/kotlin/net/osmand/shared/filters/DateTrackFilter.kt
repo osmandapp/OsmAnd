@@ -20,8 +20,10 @@ class DateTrackFilter(
 	dateFrom: Long,
 	filterChangedListener: FilterChangedListener?) :
 	BaseTrackFilter(trackFilterType, filterChangedListener) {
-	var initialValueFrom = Instant.fromEpochMilliseconds(dateFrom)
-	var initialValueTo = Clock.System.now()
+	var initialValueFrom = dateFrom
+	var initialValueTo = Clock.System.now().toEpochMilliseconds()
+//	var initialValueFromInstant = Instant.fromEpochMilliseconds(dateFrom)
+//	var initialValueToInstant = Clock.System.now()
 
 	@Serializable
 	var valueFrom = initialValueFrom
@@ -43,9 +45,9 @@ class DateTrackFilter(
 			valueTo)
 	}
 
-	private fun isDatesEquals(day1: Instant, day2: Instant): Boolean {
-		val day1String: String = PlatformUtil.formatDate(day1, DATE_PATTERN)
-		val day2String: String = PlatformUtil.formatDate(day2, DATE_PATTERN)
+	private fun isDatesEquals(day1: Long, day2: Long): Boolean {
+		val day1String: String = PlatformUtil.formatDate(Instant.fromEpochMilliseconds(day1), DATE_PATTERN)
+		val day2String: String = PlatformUtil.formatDate(Instant.fromEpochMilliseconds(day2), DATE_PATTERN)
 		return day1String == day2String
 	}
 
@@ -53,7 +55,7 @@ class DateTrackFilter(
 
 		trackItem.dataItem?.let {
 			it.getParameter<Long>(GpxParameter.FILE_CREATION_TIME)?.let{creationTime ->
-				return Instant.fromEpochMilliseconds(creationTime) in valueFrom..valueTo
+				return creationTime in valueFrom..valueTo
 			}
 		}
 		return false

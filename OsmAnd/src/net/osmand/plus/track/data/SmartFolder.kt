@@ -3,8 +3,8 @@ package net.osmand.plus.track.data
 import android.content.Context
 import com.google.gson.annotations.Expose
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.track.ComparableTracksGroup
+import net.osmand.shared.filters.BaseTrackFilter
 import net.osmand.util.CollectionUtils
 
 class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
