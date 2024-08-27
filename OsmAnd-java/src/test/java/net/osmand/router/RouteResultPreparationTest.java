@@ -164,7 +164,7 @@ public class RouteResultPreparationTest {
                         }
                     }
                     
-                    System.out.println("segmentId: " + segmentId + " description: " + name);
+                    System.out.println("segmentId: " + segmentId + " (" + segment.getStartPointIndex() + ") description: " + name);
                 }
                 prevSegment = i;
                 if (i < routeSegments.size()) {
