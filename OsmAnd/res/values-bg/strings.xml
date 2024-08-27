@@ -1000,7 +1000,7 @@
     <string name="default_buttons_commit">Изпрати</string>
     <string name="shared_string_clear">Изчистване</string>
     <string name="filter_current_poiButton">Филтър</string>
-    <string name="edit_filter_save_as_menu_item">Запиши като</string>
+    <string name="edit_filter_save_as_menu_item">Запазване като</string>
     <string name="edit_filter_delete_dialog_title">Изтриване на избрания филтър?</string>
     <string name="edit_filter_delete_message">Филтърът %1$s беше изтрит</string>
     <string name="edit_filter_create_message">Филтърът %1$s беше създаден</string>
@@ -4000,4 +4000,16 @@
     <string name="auto_25_chars_route_kl">Дръжте ляво</string>
     <string name="auto_25_chars_route_tu">Направете обратен</string>
     <string name="update_all_maps">Обновяване на всички карти</string>
+    <string name="move_all_to_history">Преместване всички в историята</string>
+    <string name="ascendingly">А-Я</string>
+    <string name="order_by">Сортиране по:</string>
+    <string name="coord_input_save_as_track">Запазване като трасе</string>
+    <string name="date_added">Добавено</string>
+    <string name="empty_state_markers_active_desc">Задръжте върху или докоснете „Места“, а след това докоснете бутона за добавяне на маркер.</string>
+    <string name="save_as_line">Запазване като права</string>
+    <string name="marker_save_as_track">Запазване като файл с трасе</string>
+    <string name="save_as_route_point">Запазване като точки от маршрут</string>
+    <string name="save_as_smart_folder">Запазване като интелиг. папка</string>
+    <string name="line">Линия</string>
+    <string name="help_article_plan_route_coordinate_input_name">Въвеждане на координати</string>
 </resources>
