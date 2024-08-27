@@ -488,10 +488,10 @@
 \nJe možné vidieť iba prednačítanú mapu, ale nemôžete sťahovať nové oblasti.</string>
     <string name="unzipping_file">Rozbaľuje sa súbor…</string>
     <string name="route_tr">Odbočte doprava a pokračujte</string>
-    <string name="route_tshr">Odbočte ostro doprava a pokračujte</string>
+    <string name="route_tshr">Odbočte prudko doprava a pokračujte</string>
     <string name="route_tslr">Odbočte mierne doprava a pokračujte</string>
     <string name="route_tl">Odbočte doľava a pokračujte</string>
-    <string name="route_tshl">Odbočte ostro doľava a pokračujte</string>
+    <string name="route_tshl">Odbočte prudko doľava a pokračujte</string>
     <string name="route_tsll">Odbočte mierne doľava a pokračujte</string>
     <string name="route_tu">Otočte sa a pokračujte</string>
     <string name="route_head">Pokračujte rovno</string>
@@ -718,8 +718,8 @@
     <string name="rendering_attr_hmRendered_description">Zvýšiť počet zobrazených detailov na mape.</string>
     <string name="rendering_attr_hmRendered_name">Zobraziť podrobnejšiu mapu</string>
     <string name="route_roundabout">Kruhový objazd: Choďte cez %1$d. výjazd a pokračujte</string>
-    <string name="route_kl">Držte sa vľavo</string>
-    <string name="route_kr">Držte sa vpravo</string>
+    <string name="route_kl">Držte sa vľavo a pokračujte</string>
+    <string name="route_kr">Držte sa vpravo a pokračujte</string>
     <string name="asap">Ihneď</string>
     <string name="gpxup_public">Verejná</string>
     <string name="gpxup_identifiable">Identifikovateľná</string>
@@ -4711,10 +4711,10 @@
     <string name="compass_visible_if_map_rotated">Zobrazený ak je mapa otočená</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobraziť trasy pre horské bicykle</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobraziť trasy určené pre horské bicykle.</string>
-    <string name="auto_25_chars_route_tl_kl">Zahnite doľava a držte sa vľavo</string>
-    <string name="auto_25_chars_route_tl_kr">Zahnite doľava a držte sa vpravo</string>
-    <string name="auto_25_chars_route_tr_kl">Zahnite doprava a držte sa vľavo</string>
-    <string name="auto_25_chars_route_tr_kr">Zahnite doprava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tl_kl">Odbočte doľava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tl_kr">Odbočte doľava a držte sa vpravo</string>
+    <string name="auto_25_chars_route_tr_kl">Odbočte doprava a držte sa vľavo</string>
+    <string name="auto_25_chars_route_tr_kr">Odbočte doprava a držte sa vpravo</string>
     <string name="auto_25_chars_route_tu_kl">Otočte sa naspäť a držte sa vľavo</string>
     <string name="auto_25_chars_route_tu_kr">Otočte sa naspäť a držte sa vpravo</string>
     <string name="auto_25_chars_route_roundabout_kl">Choďte cez %1$d výjazd a držte sa vľavo</string>
@@ -5827,4 +5827,50 @@
     <string name="background_opacity">Priehľadnosť pozadia</string>
     <string name="graph_axis">Os grafu</string>
     <string name="y_axis_description">Zvoľte až 2 možnosti pre os Y.</string>
+    <string name="add_widget_below">Pridať nástroj pod</string>
+    <string name="add_widget_above">Pridať nástroj nad</string>
+    <string name="add_widget_to_the_left">Pridať nástroj vľavo</string>
+    <string name="add_widget_to_the_right">Pridať nástroj vpravo</string>
+    <string name="location_radius_description">Zobrazí kruhovú oblasť znázorňujúcu presnosť aktuálnej polohy</string>
+    <string name="resting_position">Pozícia v pokoji</string>
+    <string name="navigation_position">Pozícia počas navigácie</string>
+    <string name="auto_25_chars_route_tr">Odbočte doprava</string>
+    <string name="hugerock_promo">Promo akcia Hugerock na %1$s mesiacov</string>
+    <string name="hugerock_promo_description">Bezplatný prístup k funkciám vrátane neobmedzeného sťahovania máp, 3D reliéfu atď. na %1$s mesiacov</string>
+    <string name="ask_every_time">Vždy sa spýtať</string>
+    <string name="detailed_track_guidance">Podrobné navádzanie stopou</string>
+    <string name="shared_string_automatically">Automaticky</string>
+    <string name="quick_action_routes_summary">Prepínač na zobrazenie alebo skrytie %1$s na mape.</string>
+    <string name="detailed_track_guidance_description">OsmAnd napasuje vašu stopu na blízke cesty pre lepšie navigačné pokyny.</string>
+    <string name="driving_region_india">India</string>
+    <string name="auto_25_chars_route_tshr">Odbočte prudko doprava</string>
+    <string name="resting_navigation_position">Pozícia v pokoji a počas navigácie</string>
+    <string name="delete_widget_description">Tento nástroj bude odstránený. Môžete ho obnoviť neskôr v Konfigurácii obrazovky.</string>
+    <string name="delete_widget">Odstrániť nástroj?</string>
+    <string name="route_roundabout_exit">Použite %1$d. výjazd</string>
+    <string name="help_article_map_tracks_name">Stopy</string>
+    <string name="help_article_map_routes_name">Trasy</string>
+    <string name="auto_25_chars_route_tsll">Odbočte mierne doľava</string>
+    <string name="auto_25_chars_route_tu">Otočte sa naspäť</string>
+    <string name="rendering_value_pale_name">Bledá</string>
+    <string name="navigation_position_icon">Ikona pozície počas navigácie</string>
+    <string name="battery_saving_mode">Režim úspory batérie</string>
+    <string name="shared_string_all_icons">Všetky ikony</string>
+    <string name="profile_icon">Ikona profilu</string>
+    <string name="navigation_position_icon_summary">Ikona zobrazená počas navigácie alebo pohybu.</string>
+    <string name="resting_position_icon_summary">Ikona zobrazená keď sa nepohybujete.</string>
+    <string name="resting_position_icon">Ikona pozície v pokoji</string>
+    <string name="auto_25_chars_route_kr">Držte sa vpravo</string>
+    <string name="auto_25_chars_route_tslr">Odbočte mierne doprava</string>
+    <string name="compass_click_north_is_up">Stlačte a držte pre zmenu režimu orientácie</string>
+    <string name="auto_25_chars_route_kl">Držte sa vľavo</string>
+    <string name="auto_25_chars_route_tl">Odbočte doľava</string>
+    <string name="auto_25_chars_route_tshl">Odbočte prudko doľava</string>
+    <string name="view_angle">Zorný uhol</string>
+    <string name="view_angle_description">Zobrazí kužeľovitú oblasť kam práve smerujete</string>
+    <string name="location_radius">Polomer polohy</string>
+    <string name="rendering_avg_info_details">FPS za posledných 1000 snímok: %1$s
+\nCPU (dlaždice): %2$s
+\nCPU (čas nečinnosti): %3$s
+\nCPU (čakanie na GPU): %4$s</string>
 </resources>
