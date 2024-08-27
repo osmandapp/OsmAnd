@@ -1356,7 +1356,7 @@ public class RouteResultPreparation {
 		int[] lanesArray;
 		if (turnLanes == null) {
 			if (prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
-					&& prevSegm.getDistance() < 100) {
+					&& prevSegm.getDistance() < 60) { // calculate for short segment junctions with missing turn:lanes
 				int[] lns = prevSegm.getTurnType().getLanes();
 				TIntArrayList lst = new TIntArrayList();
 				for (int i = 0; i < lns.length; i++) {
@@ -1461,12 +1461,17 @@ public class RouteResultPreparation {
 		boolean keepLeft = false;
 		boolean keepRight = false;
 		boolean speak = false;
+		
 		List<int[]> leftLanesInfo = new ArrayList<int[]>();
 		int leftLanes = 0;
+		boolean leftLink = false;
+		int roadsOnLeft = 0;
+		
 		List<int[]> rightLanesInfo = new ArrayList<int[]>();
 		int rightLanes = 0;
-		int roadsOnLeft = 0;
+		boolean rightLink = false;
 		int roadsOnRight = 0;
+		
 		List<Double> attachedAngles;
 
 		public boolean allAreStraight() {
@@ -1713,12 +1718,14 @@ public class RouteResultPreparation {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
+						rs.rightLink |= isSwitchToLink(attached, prevSegm);
 						if (turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
+						rs.leftLink |= isSwitchToLink(attached, prevSegm);
 						if (turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
@@ -1773,6 +1780,12 @@ public class RouteResultPreparation {
 		} else {
 			lanes = new int[prevLanesCount];
 			boolean ltr = rs.leftLanes < rs.rightLanes;
+			boolean link = isSwitchToLink(currentSegm, prevSegm);
+			if (!rs.leftLink && link && currentLanesCount + rs.leftLanes > lanes.length) {
+				currentLanesCount = Math.max(0, lanes.length - rs.leftLanes) + 1; // not overlap lanes > 1
+			} else if (!rs.rightLink && link && currentLanesCount + rs.rightLanes > lanes.length) {
+				currentLanesCount = Math.max(0, lanes.length - rs.rightLanes) + 1; // not overlap lanes > 1
+			}
 			// active lanes
 			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
 				int ind = ltr ? i : lanes.length - i - 1;
@@ -1903,7 +1916,7 @@ public class RouteResultPreparation {
 	protected int countLanesMinOne(RouteSegmentResult attached) {
 		final boolean oneway = attached.getObject().getOneway() != 0;
 		int lns = attached.getObject().getLanes();
-		if(lns == 0) {
+		if (lns == 0) {
 			String tls = getTurnLanesString(attached);
 			if(tls != null) {
 				return Math.max(1, countOccurrences(tls, '|'));
@@ -1918,7 +1931,7 @@ public class RouteResultPreparation {
 			} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
 				return Integer.parseInt(attached.getObject().getValue("lanes:backward"));
 			}
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 		return Math.max(1, (lns + 1) / 2);
@@ -2467,7 +2480,9 @@ public class RouteResultPreparation {
 
 	private boolean isSwitchToLink(RouteSegmentResult curr, RouteSegmentResult prev) {
 		String c = curr.getObject().getHighway();
-		return c != null && c.contains("_link");
+		String p = prev.getObject().getHighway();
+		return c != null && c.contains("_link") && 
+				p != null && !p.contains("_link");
 	}
 
 	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {

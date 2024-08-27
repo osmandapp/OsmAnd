@@ -5,7 +5,6 @@ import net.osmand.util.Algorithms;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
-import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
