@@ -1050,7 +1050,7 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		if(found) {
+		if (found) {
 			for (int it = 0; it < tt.getLanes().length; it++) {
 				int turn = tt.getLanes()[it];
 				if (TurnType.getPrimaryTurn(turn) != type) {
@@ -1065,6 +1065,8 @@ public class RouteResultPreparation {
 					} else {
 						tt.getLanes()[it] = turn & (~1);
 					}
+				} else {
+					tt.getLanes()[it] = turn | 1;
 				}
 			}
 		}
@@ -1208,17 +1210,18 @@ public class RouteResultPreparation {
 			singleTurn = turnSet.iterator().next();
 		} else if((currentTurn.goAhead() || currentTurn.keepLeft() || currentTurn.keepRight())  
 				&& turnSet.contains(nextTurn.getValue())) {
+			int nextTurnLane = nextTurn.getActiveCommonLaneTurn();
 			if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
-			} else if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
-				singleTurn = nextTurn.getActiveCommonLaneTurn();
+			} else if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurnLane)) {
+				singleTurn = nextTurnLane;
 			} else if (currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
-			} else if (currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurn.getActiveCommonLaneTurn())) {
-				singleTurn = nextTurn.getActiveCommonLaneTurn();
+			} else if (currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurnLane)) {
+				singleTurn = nextTurnLane;
 			} else if ((currentTurn.goAhead() || currentTurn.keepLeft() || currentTurn.keepRight())
-					&& TurnType.isKeepDirectionTurn(nextTurn.getActiveCommonLaneTurn())) {
-				singleTurn = nextTurn.getActiveCommonLaneTurn();
+					&& TurnType.isKeepDirectionTurn(nextTurnLane)) {
+				singleTurn = nextTurnLane;
 			}
 		}
 		if (singleTurn == 0) {
@@ -1352,16 +1355,16 @@ public class RouteResultPreparation {
 		String turnLanes = getTurnLanesString(prevSegm);
 		int[] lanesArray;
 		if (turnLanes == null) {
-			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
+			if (prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
 					&& prevSegm.getDistance() < 100) {
 				int[] lns = prevSegm.getTurnType().getLanes();
 				TIntArrayList lst = new TIntArrayList();
-				for(int i = 0; i < lns.length; i++) {
-					if(lns[i] % 2 == 1) {
+				for (int i = 0; i < lns.length; i++) {
+					if (lns[i] % 2 == 1) {
 						lst.add((lns[i] >> 1) << 1);
 					}
 				}
-				if(lst.isEmpty()) {
+				if (lst.isEmpty()) {
 					return null;
 				}
 				lanesArray = lst.toArray();
@@ -1387,39 +1390,9 @@ public class RouteResultPreparation {
 				isSet = true;
 			}
 		}
-
 		if (!isSet) {
 			// Manually set the allowed lanes.
 			isSet = setAllowedLanes(mainTurnType, lanesArray);
-		}
-
-		if(!isSet && lanesArray.length > 0) {
-			// In some cases (at least in the US), the rightmost lane might not have a right turn indicated as per turn:lanes,
-			// but is allowed and being used here. This section adds in that indicator.  The same applies for where leftSide is true.
-			boolean leftTurn = TurnType.isLeftTurn(mainTurnType);
-			int ind = leftTurn? 0 : lanesArray.length - 1;
-			int primaryTurn = TurnType.getPrimaryTurn(lanesArray[ind]);
-			final int st = TurnType.getSecondaryTurn(lanesArray[ind]);
-			if (leftTurn) {
-				if (!TurnType.isLeftTurn(primaryTurn)) {
-					// This was just to make sure that there's no bad data.
-					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TL);
-					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
-					TurnType.setTertiaryTurn(lanesArray, ind, st);
-					primaryTurn = TurnType.TL;
-					lanesArray[ind] |= 1;
-				}
-			} else {
-				if (!TurnType.isRightTurn(primaryTurn)) {
-					// This was just to make sure that there's no bad data.
-					TurnType.setPrimaryTurnAndReset(lanesArray, ind, TurnType.TR);
-					TurnType.setSecondaryTurn(lanesArray, ind, primaryTurn);
-					TurnType.setTertiaryTurn(lanesArray, ind, st);
-					primaryTurn = TurnType.TR;
-					lanesArray[ind] |= 1;
-				}
-			}
-			setAllowedLanes(primaryTurn, lanesArray);
 		}
 		return lanesArray;
 	}
@@ -1794,8 +1767,8 @@ public class RouteResultPreparation {
 			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 			t.setLanes(lanes);
 			int active = t.getActiveCommonLaneTurn();
-			if (!TurnType.isKeepDirectionTurn(active) || !TurnType.isKeepDirectionTurn(t.getValue())) {
-				t = TurnType.valueOf(t.getActiveCommonLaneTurn(), leftSide);
+			if (active > 0 && (!TurnType.isKeepDirectionTurn(active) || !TurnType.isKeepDirectionTurn(t.getValue()))) {
+				t = TurnType.valueOf(active, leftSide);
 			}
 		} else {
 			lanes = new int[prevLanesCount];

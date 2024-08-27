@@ -29,15 +29,15 @@ public class TurnType {
 	}
 	
 	public int getActiveCommonLaneTurn() {
-		if(lanes == null || lanes.length == 0) {
-			return C;
+		if (lanes == null || lanes.length == 0) {
+			return -1;
 		}
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1) {
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1) {
 				return TurnType.getPrimaryTurn(lanes[i]);
 			}
 		}
-		return C;
+		return -1;
 	}
 	
 	public String toXmlString() {
