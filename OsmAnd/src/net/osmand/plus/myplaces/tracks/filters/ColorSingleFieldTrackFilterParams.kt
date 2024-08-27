@@ -15,7 +15,7 @@ class ColorSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 		return if (Algorithms.isEmpty(itemName)) {
 			app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
 		} else {
-			val color = Color.parseColor(itemName)
+			val color = Algorithms.parseColor(itemName)
 			val transparencyIcon = getTransparencyIcon(app, color)
 			val colorIcon = app.uiUtilities.getPaintedIcon(R.drawable.bg_point_circle, color)
 			UiUtilities.getLayeredIcon(transparencyIcon, colorIcon)
