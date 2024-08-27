@@ -93,4 +93,28 @@ actual object PlatformUtil {
 		val formatter = SimpleDateFormat(pattern, Locale.getDefault())
 		return formatter.format(date)
 	}
+
+	actual fun getFileSeparator(): String {
+		return File.separator
+	}
+
+	actual fun getFileLength(file: KFile): Long{
+		val jFile = File(file.absolutePath())
+		return jFile.length()
+	}
+
+	actual fun renameFile(src: String, dest: String): Boolean {
+		val file = File(src)
+		val newFile = File(dest)
+		return file.exists() && file.renameTo(newFile)
+	}
+
+	actual fun createFile(path: String): Boolean {
+		val file = File(path)
+		if(!file.exists()) {
+			return file.createNewFile()
+		}
+		return false
+	}
+
 }

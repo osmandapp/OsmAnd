@@ -1,6 +1,4 @@
-package net.osmand.plus.track
-
-import net.osmand.plus.track.data.TrackFolderAnalysis
+package net.osmand.shared.filters
 
 interface ComparableTracksGroup {
 	fun getFolderAnalysis(): TrackFolderAnalysis

@@ -41,15 +41,25 @@ public enum WidthMode {
 	}
 
 	@NonNull
-	public static KWidthMode valueOfKey(@Nullable String key) {
+	public static WidthMode valueOfKey(@Nullable String key) {
 		if (key != null && Algorithms.isInt(key)) {
 			return CUSTOM;
 		}
-		for (KWidthMode widthMode : values()) {
+		for (WidthMode widthMode : values()) {
 			if (Objects.equals(widthMode.getKey(), key)) {
 				return widthMode;
 			}
 		}
 		return values()[0];
+	}
+
+	@NonNull
+	public static WidthMode valueOf(@NonNull KWidthMode kWidthMode) {
+		return switch (kWidthMode) {
+			case THIN -> THIN;
+			case MEDIUM -> MEDIUM;
+			case BOLD -> BOLD;
+			case CUSTOM -> CUSTOM;
+		};
 	}
 }

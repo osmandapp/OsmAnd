@@ -100,7 +100,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		allTab.perform(click());
 
 		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
-				withText(GpxUiHelper.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
+				withText(KGpxUiHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
 		trackItemView.perform(click());
 
 		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));

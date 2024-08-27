@@ -8,6 +8,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants.GPX_INDEX_DIR
+import net.osmand.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
@@ -55,7 +56,7 @@ class TracksFoldersScreen(
     }
 
     private fun reloadTracks() {
-        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR), null)
+        val folder = TrackFolder(SharedUtil.kFile(FileUtils.getExistingDir(app, GPX_INDEX_DIR)), null)
         asyncLoader = TrackFolderLoaderTask(app, folder, this)
         asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
     }
@@ -125,7 +126,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        trackTabsHelper.updateTrackItems(folder.flattenedTrackItems)
+        trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems())
         invalidate()
     }
 

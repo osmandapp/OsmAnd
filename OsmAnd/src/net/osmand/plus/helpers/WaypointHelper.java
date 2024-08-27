@@ -364,7 +364,7 @@ public class WaypointHelper {
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
-				if (constants.imperial) {
+				if (constants.getImperial()) {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);
 				} else {
 					speed = Math.round(mxspeed * 3.6f);

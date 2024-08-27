@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.OperationLog;
+import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -18,7 +21,7 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.plus.track.data.TrackFolder;
@@ -29,7 +32,10 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,6 +43,8 @@ import java.util.List;
 
 public class TrackFolderOptionsController extends BaseDialogController implements IDisplayDataProvider,
 		IDialogItemClicked, TrackFolderOptionsListener {
+
+	private final static Log LOG = PlatformUtil.getLog(TrackFolderOptionsController.class);
 
 	public static final String PROCESS_ID = "tracks_folder_options";
 
@@ -143,11 +151,16 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 					} else if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(newName).find()) {
 						app.showToastMessage(R.string.file_name_containes_illegal_char);
 					} else {
-						File destFolder = new File(trackFolder.getDirFile().getParentFile(), newName);
-						if (destFolder.exists()) {
-							app.showToastMessage(R.string.file_with_name_already_exist);
+						KFile parent = trackFolder.getDirFile().getParentFile();
+						if(parent != null){
+							KFile destFolder = new KFile(parent, newName);
+							if (destFolder.exists()) {
+								app.showToastMessage(R.string.file_with_name_already_exist);
+							} else {
+								renameFolder(newName);
+							}
 						} else {
-							renameFolder(newName);
+							LOG.debug("Can't get parent " + trackFolder.getDirFile());
 						}
 					}
 				}
@@ -158,17 +171,17 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 	}
 
 	private void renameFolder(@NonNull String newName) {
-		File oldDir = trackFolder.getDirFile();
+		File oldDir = SharedUtil.jFile(trackFolder.getDirFile());
 		File newDir = new File(oldDir.getParentFile(), newName);
 		if (oldDir.renameTo(newDir)) {
-			trackFolder.setDirFile(newDir);
+			trackFolder.setDirFile(SharedUtil.kFile(newDir));
 			trackFolder.resetCashedData();
 
 			List<File> files = new ArrayList<>();
 			for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
-				File file = trackItem.getFile();
+				KFile file = trackItem.getFile();
 				if (file != null) {
-					files.add(file);
+					files.add(SharedUtil.jFile(file));
 				}
 			}
 			FileUtils.updateMovedGpxFiles(app, files, oldDir, newDir);

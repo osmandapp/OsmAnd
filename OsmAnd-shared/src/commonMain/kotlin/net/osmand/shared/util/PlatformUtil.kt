@@ -19,4 +19,12 @@ expect object PlatformUtil {
 	fun formatDate(date: Instant, pattern: String):String
 
 	fun getOsmAndContext(): OsmAndContext
+
+	fun getFileSeparator(): String
+
+	fun getFileLength(file: KFile): Long
+
+	fun renameFile(src: String, dest: String): Boolean
+
+	fun createFile(path: String): Boolean
 }

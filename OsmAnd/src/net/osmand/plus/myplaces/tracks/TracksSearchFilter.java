@@ -9,9 +9,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.custom_types.StringIntegerPair;
-import net.osmand.shared.data.KInteger;
 import net.osmand.shared.filters.BaseTrackFilter;
 import net.osmand.shared.filters.DateTrackFilter;
 import net.osmand.shared.filters.FilterChangedListener;
@@ -32,7 +31,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import kotlin.Pair;
 
@@ -262,8 +260,8 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	void recreateFilters() {
 		List<BaseTrackFilter> newFiltersFilters = new ArrayList<>();
-		for (TrackFilterType trackFilterType : TrackFilterType.values()) {
-			newFiltersFilters.add(TrackFiltersHelper.createFilter(app, trackFilterType, this));
+		for (TrackFilterType trackFilterType : TrackFilterType.getEntries()) {
+			newFiltersFilters.add(TrackFiltersHelper.INSTANCE.createFilter(trackFilterType, this));
 		}
 		currentFilters = newFiltersFilters;
 	}

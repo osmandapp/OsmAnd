@@ -1,6 +1,6 @@
 package net.osmand.shared.filters
 
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.filters.TrackFilterType.FOLDER
 
 open class FolderTrackFilter(

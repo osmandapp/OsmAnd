@@ -1,14 +1,12 @@
 package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.custom_types.StringIntegerPair
-import net.osmand.shared.data.KInteger
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.MultiNameSerializer
 import net.osmand.shared.util.SerialNames
-import kotlin.Pair
 
 open class ListTrackFilter(
 	trackFilterType: TrackFilterType,

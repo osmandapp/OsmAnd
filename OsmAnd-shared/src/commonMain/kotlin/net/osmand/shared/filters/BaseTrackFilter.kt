@@ -2,7 +2,7 @@ package net.osmand.shared.filters
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 
 abstract class BaseTrackFilter(
 	@Serializable

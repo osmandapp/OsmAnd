@@ -43,6 +43,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
+import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -248,7 +249,7 @@ public class LocalItemUtils {
 				return ((Recording) attachedObject).getName(context, true);
 			}
 		} else if (type == TRACKS) {
-			return GpxUiHelper.getGpxTitle(fileName);
+			return KGpxUiHelper.INSTANCE.getGpxTitle(fileName);
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
 			if (CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {

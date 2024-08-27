@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.shared.filters.SmartFolder;
 import net.osmand.plus.track.data.TracksGroup;
 
 public class SmartFolderViewHolder extends TracksGroupViewHolder {

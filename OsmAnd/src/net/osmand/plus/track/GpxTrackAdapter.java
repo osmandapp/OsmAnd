@@ -26,6 +26,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -132,7 +133,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			}
 			GPXInfo info = gpxInfoList.get(listPosition);
 			GpxDataItem dataItem = getDataItem(info);
-			String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
+			String itemTitle = KGpxUiHelper.INSTANCE.getGpxTitle(info.getFileName());
 			if (!showFolderName) {
 				itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
 			}

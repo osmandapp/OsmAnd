@@ -2,7 +2,7 @@ package net.osmand.plus.myplaces.tracks.controller;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.shared.filters.SmartFolder;
 
 public interface SmartFolderOptionsListener {
 	default void showSmartFolderDetails(@NonNull SmartFolder folder) {

@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -55,6 +55,7 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -140,7 +141,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindInfoRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem, boolean shouldShowFolder) {
-		File file = trackItem.getFile();
+		KFile file = trackItem.getFile();
 		GpxDataItem item = trackItem.getDataItem();
 		if (item != null) {
 			bindInfoRow(sortMode, trackItem, item, shouldShowFolder);
@@ -321,9 +322,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	@Nullable
 	private String getFolderName(@NonNull TrackItem trackItem, boolean shouldShowFolder) {
 		String folderName = null;
-		File file = trackItem.getFile();
+		KFile file = trackItem.getFile();
 		if (shouldShowFolder && file != null) {
-			String[] path = file.getAbsolutePath().split(File.separator);
+			String[] path = file.absolutePath().split(File.separator);
 			folderName = path.length > 1 ? path[path.length - 2] : null;
 		}
 		return folderName;

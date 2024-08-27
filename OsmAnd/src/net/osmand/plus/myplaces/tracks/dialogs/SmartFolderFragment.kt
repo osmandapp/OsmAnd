@@ -4,13 +4,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.track.data.SmartFolder
+import net.osmand.shared.filters.SmartFolder
 import net.osmand.plus.track.data.TracksGroup
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.popup.PopUpMenu

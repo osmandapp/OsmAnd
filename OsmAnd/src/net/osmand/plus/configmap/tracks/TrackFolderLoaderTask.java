@@ -8,6 +8,7 @@ import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.track.data.TrackFolder;
@@ -15,6 +16,9 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.KGpxUiHelper;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -87,15 +91,15 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 		while (!folders.isEmpty()) {
 			TrackFolder folder = folders.pop();
-			File dir = folder.getDirFile();
-			File[] files = dir.listFiles();
+			KFile dir = folder.getDirFile();
+			KFile[] files = dir.listFiles();
 			if (Algorithms.isEmpty(files)) {
 				continue;
 			}
 			List<TrackItem> trackItems = new ArrayList<>();
 			List<TrackFolder> subFolders = new ArrayList<>();
 
-			for (File file : files) {
+			for (KFile file : files) {
 				if (isCancelled()) {
 					return;
 				}
@@ -103,9 +107,9 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					TrackFolder subfolder = new TrackFolder(file, folder);
 					subFolders.add(subfolder);
 					folders.push(subfolder); // Add subfolder to the queue for processing
-				} else if (GpxUiHelper.isGpxFile(file)) {
+				} else if (KGpxUiHelper.INSTANCE.isGpxFile(file)) {
 					TrackItem item = new TrackItem(file);
-					item.setDataItem(getDataItem(item, file));
+					item.setDataItem(getDataItem(item, SharedUtil.jFile(file)));
 					trackItems.add(item);
 
 					progress.add(item);

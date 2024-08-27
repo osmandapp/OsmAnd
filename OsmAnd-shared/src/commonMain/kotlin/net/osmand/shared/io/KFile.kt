@@ -1,5 +1,6 @@
 package net.osmand.shared.io
 
+import net.osmand.shared.util.PlatformUtil
 import okio.FileMetadata
 import okio.FileSystem
 import okio.IOException
@@ -79,12 +80,12 @@ class KFile {
 		}
 	}
 
-	fun listFiles():Array<KFile> {
+	fun listFiles(): Array<KFile> {
 		val pathList = FileSystem.SYSTEM.list(path)
-		return pathList.map{KFile(it)}.toTypedArray()
+		return pathList.map { KFile(it) }.toTypedArray()
 	}
 
-	fun delete():Boolean {
+	fun delete(): Boolean {
 		val existed = exists()
 		if (!existed) {
 			return false
@@ -105,5 +106,17 @@ class KFile {
 
 	override fun toString(): String {
 		return path.toString()
+	}
+
+	fun length(): Long {
+		return PlatformUtil.getFileLength(this)
+	}
+
+	fun renameTo(toFile: KFile): Boolean {
+		return renameTo(toFile.absolutePath())
+	}
+
+	fun renameTo(toFilePath: String): Boolean {
+		return PlatformUtil.renameFile(path.toString(), toFilePath)
 	}
 }

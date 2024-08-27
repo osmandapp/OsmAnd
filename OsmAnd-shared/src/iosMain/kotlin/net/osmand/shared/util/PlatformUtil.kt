@@ -88,4 +88,20 @@ actual object PlatformUtil {
 	actual fun getOsmAndContext(): OsmAndContext {
 		TODO("Not yet implemented")
 	}
+
+	actual fun getFileSeparator(): String {
+		TODO("Not yet implemented")
+	}
+
+	actual fun getFileLength(file: KFile): Long {
+		TODO("Not yet implemented")
+	}
+
+	actual fun renameFile(src: String, dest: String): Boolean {
+		TODO("Not yet implemented")
+	}
+
+	actual fun createFile(path: String): Boolean {
+		TODO("Not yet implemented")
+	}
 }

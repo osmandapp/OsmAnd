@@ -210,11 +210,18 @@ object KAlgorithms {
 	}
 
 	fun capitalizeFirstLetter(s: String?): String? {
-		return if (s != null && s.length > 0) {
+		return if (!s.isNullOrEmpty()) {
 			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
 		} else {
 			s
 		}
 	}
 
+	fun objectEquals(a: Any?, b: Any?): Boolean {
+		return if (a == null) {
+			b == null
+		} else {
+			a == b
+		}
+	}
 }

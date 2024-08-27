@@ -1,8 +1,5 @@
-package net.osmand.plus.configmap.tracks
+package net.osmand.shared.gpx
 
-import net.osmand.shared.gpx.GpxDataItem
-import net.osmand.shared.gpx.GpxFile
-import net.osmand.shared.gpx.KGpxUiHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.PlatformUtil
 

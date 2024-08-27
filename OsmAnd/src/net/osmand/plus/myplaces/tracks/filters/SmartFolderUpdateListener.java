@@ -1,6 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters;
 
-import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.shared.filters.SmartFolder;
 
 public interface SmartFolderUpdateListener {
 	default void onSmartFoldersUpdated() {

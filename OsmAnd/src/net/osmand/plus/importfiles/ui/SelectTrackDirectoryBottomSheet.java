@@ -33,6 +33,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -122,7 +123,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		AndroidUtils.setPadding(view, 0, 0, 0, 0);
 
 		TextView text = view.findViewById(R.id.title);
-		text.setText(GpxUiHelper.getGpxDirTitle(folder.getName()));
+		text.setText(KGpxUiHelper.INSTANCE.getGpxDirTitle(folder.getName()));
 
 		int count = getGpxFilesCount(folder);
 		TextView description = view.findViewById(R.id.description);

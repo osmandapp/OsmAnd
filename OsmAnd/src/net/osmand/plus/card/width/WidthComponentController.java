@@ -30,10 +30,10 @@ public class WidthComponentController implements IModedSliderController {
 	private OnNeedScrollListener onNeedScrollListener;
 	@ColorInt
 	private Integer iconsColor;
-	private KWidthMode widthMode;
+	private WidthMode widthMode;
 	private int customValue;
 
-	public WidthComponentController(@NonNull KWidthMode widthMode, int customValue,
+	public WidthComponentController(@NonNull WidthMode widthMode, int customValue,
 	                                @NonNull WidthComponentListener listener) {
 		this.listener = listener;
 		this.widthMode = widthMode;
@@ -57,7 +57,7 @@ public class WidthComponentController implements IModedSliderController {
 
 	@Override
 	public boolean isSliderVisible() {
-		return widthMode == KWidthMode.CUSTOM;
+		return widthMode == WidthMode.CUSTOM;
 	}
 
 	@NonNull
@@ -73,17 +73,18 @@ public class WidthComponentController implements IModedSliderController {
 	@Override
 	public @NonNull List<SliderMode> getSliderModes() {
 		List<SliderMode> sliderModes = new ArrayList<>();
-		for (KWidthMode widthMode : KWidthMode.values()) {
+		for (KWidthMode kWidthMode : KWidthMode.getEntries()) {
+			WidthMode widthMode = WidthMode.valueOf(kWidthMode);
 			sliderModes.add(new SliderMode(widthMode.getIconId(), widthMode));
 		}
 		return sliderModes;
 	}
 
 	public void askSelectWidthMode(@Nullable String width) {
-		askSelectWidthMode(KWidthMode.valueOfKey(width));
+		askSelectWidthMode(WidthMode.valueOfKey(width));
 	}
 
-	private void askSelectWidthMode(@NonNull KWidthMode widthMode) {
+	private void askSelectWidthMode(@NonNull WidthMode widthMode) {
 		askSelectSliderMode(new SliderMode(widthMode.getIconId(), widthMode));
 	}
 
@@ -95,7 +96,7 @@ public class WidthComponentController implements IModedSliderController {
 
 	public void askSelectSliderMode(@NonNull SliderMode sliderMode) {
 		if (!isSelectedSliderMode(sliderMode)) {
-			widthMode = (KWidthMode) sliderMode.getTag();
+			widthMode = (WidthMode) sliderMode.getTag();
 			if (cardInstance != null) {
 				cardInstance.updateSegmentedButtonSelection();
 				cardInstance.updateSliderVisibility();
@@ -112,7 +113,7 @@ public class WidthComponentController implements IModedSliderController {
 
 	@NonNull
 	public String getSummary(@NonNull Context context) {
-		if (widthMode == KWidthMode.CUSTOM) {
+		if (widthMode == WidthMode.CUSTOM) {
 			String custom = context.getString(R.string.shared_string_custom);
 			String value = getSelectedCustomValue();
 			return context.getString(R.string.ltr_or_rtl_combine_via_comma, custom, value);
@@ -122,7 +123,7 @@ public class WidthComponentController implements IModedSliderController {
 
 	@NonNull
 	public String getSelectedWidthValue() {
-		return widthMode == KWidthMode.CUSTOM ? String.valueOf(customValue) : widthMode.getKey();
+		return widthMode == WidthMode.CUSTOM ? String.valueOf(customValue) : widthMode.getKey();
 	}
 
 	private void notifyWidthSelected() {
@@ -131,7 +132,7 @@ public class WidthComponentController implements IModedSliderController {
 	}
 
 	private void requestVerticalScrollIfNeeded() {
-		if (widthMode == KWidthMode.CUSTOM && cardInstance != null) {
+		if (widthMode == WidthMode.CUSTOM && cardInstance != null) {
 			View sliderContainer = cardInstance.getSliderContainer();
 			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, () -> {
 				if (sliderContainer.getVisibility() == View.VISIBLE && onNeedScrollListener != null) {

@@ -31,6 +31,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.KGpxUiHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +68,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return GpxUiHelper.getGpxTitle(file.getName());
+		return KGpxUiHelper.INSTANCE.getGpxTitle(file.getName());
 	}
 
 	@Override

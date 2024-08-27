@@ -40,6 +40,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -314,7 +315,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			} else if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 				fileName = FileNameTranslationHelper.getFileNameWithRegion(app, fileName);
 			} else if (subtype == FileSubtype.GPX) {
-				fileName = GpxUiHelper.getGpxTitle(fileName);
+				fileName = KGpxUiHelper.INSTANCE.getGpxTitle(fileName);
 			}
 
 			String description = getString(R.string.copying_file, fileName);

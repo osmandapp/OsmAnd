@@ -4,13 +4,14 @@ import android.os.AsyncTask
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import net.osmand.SharedUtil
 import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.shared.filters.TrackFiltersHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
-import net.osmand.plus.track.data.SmartFolder
 import net.osmand.shared.filters.BaseTrackFilter
+import net.osmand.shared.filters.SmartFolder
+import net.osmand.shared.filters.TrackFiltersHelper
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import java.io.File
@@ -247,7 +248,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		for (trackItem in newAllTracks) {
 			if (trackItem.path == srcTrackFile.path) {
 				newAllTracks.remove(trackItem)
-				newAllTracks.add(TrackItem(destTrackFile))
+				newAllTracks.add(TrackItem(SharedUtil.kFile(destTrackFile)))
 				allAvailableTrackItems = newAllTracks
 				break
 			}

@@ -2,12 +2,12 @@ package net.osmand
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.enums.MetricsConstants
-import net.osmand.plus.settings.enums.SpeedConstants.KILOMETERS_PER_HOUR
-import net.osmand.plus.settings.enums.SpeedConstants.METERS_PER_SECOND
-import net.osmand.plus.settings.enums.SpeedConstants.MILES_PER_HOUR
-import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_KILOMETER
-import net.osmand.plus.settings.enums.SpeedConstants.MINUTES_PER_MILE
-import net.osmand.plus.settings.enums.SpeedConstants.NAUTICALMILES_PER_HOUR
+import net.osmand.shared.data.SpeedConstants.KILOMETERS_PER_HOUR
+import net.osmand.shared.data.SpeedConstants.METERS_PER_SECOND
+import net.osmand.shared.data.SpeedConstants.MILES_PER_HOUR
+import net.osmand.shared.data.SpeedConstants.MINUTES_PER_KILOMETER
+import net.osmand.shared.data.SpeedConstants.MINUTES_PER_MILE
+import net.osmand.shared.data.SpeedConstants.NAUTICALMILES_PER_HOUR
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.data.SpeedConstants
 import net.osmand.shared.filters.KMetricsConstants

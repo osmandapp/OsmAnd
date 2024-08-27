@@ -106,6 +106,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.data.SpeedConstants;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;

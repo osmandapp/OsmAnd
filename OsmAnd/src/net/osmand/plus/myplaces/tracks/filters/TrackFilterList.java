@@ -7,7 +7,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.shared.filters.SmartFolder;
+import net.osmand.shared.filters.BaseTrackFilter;
 
 import org.apache.commons.logging.Log;
 
@@ -33,6 +34,8 @@ public class TrackFilterList {
 			error.printStackTrace();
 			LOG.error(error.getMessage(), error);
 		}
+
+
 		return savedFilters;
 	}
 }

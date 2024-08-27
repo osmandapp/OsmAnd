@@ -1,7 +1,7 @@
 package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.GpxParameter
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -148,6 +148,18 @@ open class RangeTrackFilter<T : Comparable<T>>(
 				value.toString()
 			}
 		}
+	}
+
+	fun ceilMaxValue(): String {
+		return ceil(maxValue)
+	}
+
+	fun ceilValueTo(): String {
+		return ceil(valueTo)
+	}
+
+	fun ceilMinValue(): String {
+		return ceil(minValue)
 	}
 
 	private fun ceil(value: T): String {

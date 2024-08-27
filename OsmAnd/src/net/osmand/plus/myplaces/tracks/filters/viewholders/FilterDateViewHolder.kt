@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter
+import net.osmand.shared.filters.DateTrackFilter
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText

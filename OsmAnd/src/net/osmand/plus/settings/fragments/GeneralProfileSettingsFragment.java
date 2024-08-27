@@ -200,7 +200,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[speedConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = speedConstants[i].toHumanString(app);
+			entries[i] = speedConstants[i].toHumanString();
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 

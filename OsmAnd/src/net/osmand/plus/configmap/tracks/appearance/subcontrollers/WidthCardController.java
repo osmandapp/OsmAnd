@@ -18,6 +18,7 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.card.width.WidthMode;
 import net.osmand.shared.data.KWidthMode;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
@@ -139,7 +140,7 @@ public class WidthCardController extends BaseMultiStateCardController {
 	private WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
 			String selectedWidth = appearanceData.getParameter(WIDTH);
-			KWidthMode widthMode = KWidthMode.valueOfKey(selectedWidth);
+			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = Algorithms.parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::widthValueSelected) {
 				@NonNull
@@ -163,7 +164,7 @@ public class WidthCardController extends BaseMultiStateCardController {
 
 	@NonNull
 	private CardState findCardStateByWidthValue(@Nullable String width) {
-		return findCardState(width != null ? KWidthMode.valueOfKey(width) : null);
+		return findCardState(width != null ? WidthMode.valueOfKey(width) : null);
 	}
 
 	@Nullable
@@ -191,7 +192,7 @@ public class WidthCardController extends BaseMultiStateCardController {
 		}
 		list.add(new CardState(R.string.shared_string_original));
 
-		for (KWidthMode widthMode : KWidthMode.values()) {
+		for (WidthMode widthMode : WidthMode.values()) {
 			list.add(new CardState(widthMode.getTitleId())
 					.setShowTopDivider(widthMode.ordinal() == 0)
 					.setTag(widthMode));

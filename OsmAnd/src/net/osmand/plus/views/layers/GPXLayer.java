@@ -97,6 +97,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.routing.ColoringType;
@@ -1548,7 +1549,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
 				name = gpxFile.getArticleTitle();
 			} else {
-				name = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+				name = KGpxUiHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		}

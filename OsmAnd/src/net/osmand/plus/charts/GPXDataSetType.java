@@ -98,7 +98,7 @@ public enum GPXDataSetType {
 				yield app.getString(shouldUseFeet ? R.string.foot : R.string.m);
 			}
 			case SLOPE -> "%";
-			case SPEED, SENSOR_SPEED -> settings.SPEED_SYSTEM.get().toShortString(app);
+			case SPEED, SENSOR_SPEED -> settings.SPEED_SYSTEM.get().toShortString();
 			case SENSOR_HEART_RATE -> app.getString(R.string.beats_per_minute_short);
 			case SENSOR_BIKE_POWER -> app.getString(R.string.power_watts_unit);
 			case SENSOR_BIKE_CADENCE -> app.getString(R.string.revolutions_per_minute_unit);

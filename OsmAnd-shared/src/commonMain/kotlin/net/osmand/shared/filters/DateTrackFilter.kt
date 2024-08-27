@@ -2,11 +2,8 @@ package net.osmand.shared.filters
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlinx.datetime.format.DateTimeComponents
-import kotlinx.datetime.format.DateTimeFormat
-import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.serialization.Serializable
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.util.PlatformUtil
 

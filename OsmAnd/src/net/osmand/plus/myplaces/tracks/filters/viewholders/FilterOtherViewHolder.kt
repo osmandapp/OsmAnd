@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
+import net.osmand.shared.filters.FilterChangedListener
 import net.osmand.plus.myplaces.tracks.filters.OtherFilterAdapter
-import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter
+import net.osmand.shared.filters.OtherTrackFilter
 import net.osmand.plus.widgets.TextViewEx
 
 class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :

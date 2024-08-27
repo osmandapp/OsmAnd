@@ -22,6 +22,7 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.card.width.WidthMode;
 import net.osmand.shared.data.KWidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
@@ -155,7 +156,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	private WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
 			String selectedWidth = routeLinePreview.getWidth();
-			KWidthMode widthMode = KWidthMode.valueOfKey(selectedWidth);
+			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
@@ -179,7 +180,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	@NonNull
 	private CardState findCardStateByWidthValue(@Nullable String width) {
-		return findCardState(width != null ? KWidthMode.valueOfKey(width) : null);
+		return findCardState(width != null ? WidthMode.valueOfKey(width) : null);
 	}
 
 	@Nullable
@@ -210,7 +211,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	protected List<CardState> collectSupportedCardStates() {
 		List<CardState> result = new ArrayList<>();
 		result.add(new CardState(R.string.map_widget_renderer));
-		for (KWidthMode widthMode : KWidthMode.values()) {
+		for (WidthMode widthMode : WidthMode.values()) {
 			result.add(new CardState(widthMode.getTitleId())
 					.setShowTopDivider(widthMode.ordinal() == 0)
 					.setTag(widthMode)

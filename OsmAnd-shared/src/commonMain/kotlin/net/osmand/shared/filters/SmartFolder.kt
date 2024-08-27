@@ -1,42 +1,40 @@
-package net.osmand.plus.track.data
+package net.osmand.shared.filters
 
-import android.content.Context
-import com.google.gson.annotations.Expose
-import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.track.ComparableTracksGroup
-import net.osmand.shared.filters.BaseTrackFilter
-import net.osmand.util.CollectionUtils
+import kotlinx.serialization.Serializable
+import net.osmand.shared.gpx.TrackItem
+import net.osmand.plus.track.data.TracksGroup
+import net.osmand.shared.util.KCollectionUtils
 
 class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 
-	private var trackItems: MutableList<TrackItem> = ArrayList()
+	override var trackItems: MutableList<TrackItem> = ArrayList()
 
 	constructor() : this("") {
-		trackItems = ArrayList()
+//		trackItems = ArrayList()
 	}
 
-	@Expose
+	@Serializable
 	var folderName = folderName
 
-	@Expose
+	@Serializable
 	var creationTime = 0L
 
-	@Expose
+	@Serializable
 	var filters: MutableList<BaseTrackFilter>? = null
 
 	private var folderAnalysis: TrackFolderAnalysis? = null
 
-	override fun getName(context: Context): String {
+	override fun getName(): String {
 		return folderName
 	}
 
-	override fun getTrackItems(): List<TrackItem> {
-		return trackItems
-	}
+//	override fun getTrackItems(): MutableList<TrackItem> {
+//		return trackItems
+//	}
 
 	fun addTrackItem(trackItem: TrackItem) {
 		if (!trackItems.contains(trackItem)) {
-			trackItems = CollectionUtils.addToList(trackItems, trackItem)
+			trackItems = KCollectionUtils.addToList(trackItems, trackItem)
 			folderAnalysis = null
 		}
 	}

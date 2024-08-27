@@ -1,7 +1,7 @@
 package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 

@@ -3,7 +3,6 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.shared.gpx.DataItem;
 import net.osmand.shared.gpx.GpxDataItem;
@@ -328,7 +327,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	private void putGpxDataItemToSmartFolder(@NonNull GpxDataItem item) {
-		TrackItem trackItem = new TrackItem(SharedUtil.jFile(item.getFile()));
+		TrackItem trackItem = new TrackItem(item.getFile());
 		trackItem.setDataItem(item);
 		app.getSmartFolderHelper().addTrackItemToSmartFolder(trackItem);
 	}

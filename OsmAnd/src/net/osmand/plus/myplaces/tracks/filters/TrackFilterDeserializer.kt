@@ -24,6 +24,6 @@ class TrackFilterDeserializer :
 		val trackFilterType =
 			gson.fromJson(baseFilterObject.get("filterType"), TrackFilterType::class.java)
 		val realFilterObjectType = TrackFiltersHelper.getFilterClass(trackFilterType)
-		return gson.fromJson(baseFilterObject, realFilterObjectType)
+		return null//gson.fromJson(baseFilterObject, realFilterObjectType)
 	}
 }

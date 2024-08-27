@@ -28,14 +28,23 @@ kotlin {
     val sqliteVersion = "2.3.1"
     val serializationVersion = "1.6.3"
     val coroutinesCoreVersion = "1.8.1"
-    val datetimeVersion = "0.6.0"
+    val datetimeVersion = "0.6.1"
     val okioVersion = "3.9.0"
     val kxml2Version = "2.1.8"
     val sqliterVersion = "1.3.1"
     val dateTimeVersion = "0.6.1"
 
     sourceSets {
+        commonTest.dependencies {
+//            implementation(libs.kotlin.test)
+            implementation(kotlin("test"))
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+        }
         commonMain.dependencies {
+            implementation(kotlin("test"))
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
             implementation("org.jetbrains.kotlin:kotlin-stdlib")
             implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
             implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -52,6 +61,8 @@ kotlin {
         iosMain.dependencies {
             implementation("co.touchlab:sqliter-driver:$sqliterVersion")
         }
+
+
     }
 }
 

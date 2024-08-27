@@ -22,7 +22,6 @@ import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
-import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
@@ -30,13 +29,14 @@ import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.filters.BaseTrackFilter
 import net.osmand.shared.filters.FilterChangedListener
+import net.osmand.shared.filters.SmartFolder
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.util.Algorithms
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
