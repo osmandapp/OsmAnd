@@ -2173,7 +2173,7 @@ public class RouteResultPreparation {
 		if ("motorway".equals(h) || "motorway_link".equals(h)) {
 			return true; // motorways are usually well-organized
 		}
-		final float INDICATOR_OF_CITY_TRUNK = 50f / 3600 * 1000; // 50 km/h in m/s
+		final float INDICATOR_OF_CITY_TRUNK = 50.0f / 3600 * 1000; // 50 km/h in m/s
 		final float maxSpeed = s.getObject().getMaximumSpeed(s.isForwardDirection());
 		if ("trunk".equals(h) || "trunk_link".equals(h)) {
 			return maxSpeed > INDICATOR_OF_CITY_TRUNK; // detect out-of-city trunks
