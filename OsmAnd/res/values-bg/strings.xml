@@ -351,8 +351,8 @@
     <string name="favourites_search_desc">Търсене в избраните</string>
     <string name="offline_navigation_not_available">OsmAnd офлайн навигацията временно не е достъпна.</string>
     <string name="left_side_navigation">Обратно движение</string>
-    <string name="left_side_navigation_descr">За държави с движение в лявата лента</string>
-    <string name="unknown_from_location">Не е зададено начало на навигацията</string>
+    <string name="left_side_navigation_descr">За държави, в които хората шофират от лявата страна на пътя.</string>
+    <string name="unknown_from_location">Отправната точка все още не е определена.</string>
     <string name="unknown_location">Местоположението все още не е определено.</string>
     <string name="modify_transparency">Промяна на прозрачността (0 - прозрачно, 255 - плътно)</string>
     <string name="confirm_interrupt_download">Да се прекъсне ли тегленето?</string>
@@ -375,7 +375,7 @@
     <string name="osmand_accessibility_description">Поддръжка на функциите за достъпност на устройството достъпни в OsmAnd. Това улеснява например регулирането на скоростта на говора при преобразуване на текст в реч, настройката на навигацията с D-pad, използването на топче за управление на мащаба или обратна връзка с текст в реч, например за автоматично съобщаване на местополижението.</string>
     <string name="osmand_development_plugin_description">Осигурява възможност за изпитване и отстраняване на грешки в OsmAnd: симулиране на навигационни маршрути, наблюдение на изчертаването на екрана, проверка на производителността и други. Добавката не е необходима за нормалната работа на приложението.</string>
     <string name="plugins_screen">Добавки</string>
-    <string name="prefs_plugins_descr">Добавките внасят допълнителна функционалност на приложението</string>
+    <string name="prefs_plugins_descr">Добавките внасят допълнителна функционалност на приложението.</string>
     <string name="prefs_plugins">Добавки</string>
     <string name="osm_editing_plugin_description">Дайте своя принос към OpenStreetMap - глобална общност, която поддържа цялостна карта на света и предоставя съвременни данни с отворен код на всеки потребител.
 \n
@@ -393,13 +393,13 @@
     <string name="validate_gpx_upload_name_pwd">Моля, въведете потребителското си име и парола от сайта на OSM за да качвате GPX файлове.</string>
     <string name="default_buttons_support">Поддръжка</string>
     <string name="support_new_features">Поддръжка за нови подобрения</string>
-    <string name="support_new_features_descr">Моля, направете дарение за да има нови неща в приложението</string>
+    <string name="support_new_features_descr">Направете дарение, за да бъдат разработени нови възможности на приложението.</string>
     <string name="show_ruler_level">Покажи линийка</string>
     <string name="info_button">Информация</string>
     <string name="back_to_location">Назад към позицията</string>
     <string name="shared_string_help">Помощ</string>
     <string name="accessibility_mode">режим на достъпност</string>
-    <string name="accessibility_mode_descr">Включване на функции за достъпност и улесняване</string>
+    <string name="accessibility_mode_descr">Включва възможностите за незрителен достъп.</string>
     <string name="shared_string_on">Вкл.</string>
     <string name="shared_string_off">Изкл.</string>
     <string name="accessibility_default">Спрямо системните настройки</string>
@@ -443,7 +443,7 @@
     <string name="auto_announce_on">Старт на гласовите напътствия</string>
     <string name="auto_announce_off">Край на анонсирането</string>
     <string name="i_am_here">Аз съм тук</string>
-    <string name="zoom_by_trackball_descr">Хоризонталното движение на тракбола за мащабира картата</string>
+    <string name="zoom_by_trackball_descr">Хоризонталното движение на тракбола мащабира картата.</string>
     <string name="zoom_by_trackball">Тракбола за мащабиране</string>
     <string name="accessibility_preferences_descr">Настройки за достъпност.</string>
     <string name="shared_string_accessibility">Достъпност</string>
@@ -1488,7 +1488,7 @@
     <string name="lang_es">Испански</string>
     <string name="lang_tr">Турски</string>
     <string name="routing_attr_height_name">Височина</string>
-    <string name="routing_attr_height_description">Въведете височина на МПС (за камиони и извън-габаритни товари)</string>
+    <string name="routing_attr_height_description">Въведете разрешената височина на МПС по пътя.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="do_you_like_osmand">Харесвате ли OsmAnd?</string>
     <string name="rate_this_app">Оценете приложението</string>
@@ -3723,9 +3723,9 @@
     <string name="shared_storage_warning_title">Променени правила за достъп до хранилището</string>
     <string name="purchases_feature_desc_android_auto">Извежда картите и маршрутизацията на OsmAnd на екрана на автомобила и се интегрира с управлението на автомобила.</string>
     <string name="use_external_timestamps">Използване на външни времеви маркери</string>
-    <string name="android_auto_map_placeholder_descr">Изключете устройството от Android Auto, за да видите картата в приложението.</string>
+    <string name="android_auto_map_placeholder_descr">За да видите картата в приложението изключете устройството от Android Auto.</string>
     <string name="search_history_is_disabled_descr">Можете да включите историята на търсенията в настройките.</string>
-    <string name="android_auto_purchase_request_title">Купете OsmAnd Pro или Maps+, за да използвате OsmAnd с Android Auto</string>
+    <string name="android_auto_purchase_request_title">За да използвате OsmAnd с Android Auto купете OsmAnd Pro или Maps+</string>
     <string name="gps_filter_smoothing_desc">Задава праговото разстояние между точките.
 \nТочките на трасето, които не са отдалечени поне на това разстояние от последната видима точка, ще бъдат скрити.
 \nИмайте предвид, че високите прагове могат прекомерно много да опростят геометрията на трасето.</string>
@@ -4180,4 +4180,24 @@
     <string name="shared_string_time_span">Общо време</string>
     <string name="shared_string_color_magenta">Пурпурен</string>
     <string name="shared_string_crash">Срив</string>
+    <string name="rendering_value_managerName_name">По име на отговорника</string>
+    <string name="auto_zoom">Автоматично мащабиране</string>
+    <string name="gpx_approximation">Приближение на GPX</string>
+    <string name="shared_sting_all_colors">Всички цветове</string>
+    <string name="routing_type">Вид маршрутизиране</string>
+    <string name="rendering_attr_padusDisplayMode_name">Режим на показване на обществени земи</string>
+    <string name="rendering_attr_padusDisplayMode_description">По вид на достъпа или име на отговорника</string>
+    <string name="rendering_value_access_name">По вид на достъпа</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Скриване на границите на обществените земни</string>
+    <string name="rendering_attr_alpineHiking_name">Скала на трудност на пешеходни маршрути</string>
+    <string name="auto_zoom_smooth">Плавно</string>
+    <string name="auto_zoom_discrete">Дискретно</string>
+    <string name="live_monitoring_adress_descr">Укажете адрес със следния синтаксис на параметрите: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="upload_local_versions">Качване на местна версия</string>
+    <string name="contact_us">Свържете се с нас</string>
+    <string name="quick_action_map_style">Стил на картата</string>
+    <string name="driving_region_uk">Великобритания и подобни</string>
+    <string name="quick_action_remove_next_destination">Следващо местоназначение</string>
+    <string name="download_cloud_versions">Изтегляне на облачни версии</string>
+    <string name="map_widget_map_scale">Мащаб на картата</string>
 </resources>
