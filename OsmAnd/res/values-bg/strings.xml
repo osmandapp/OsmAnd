@@ -98,7 +98,7 @@
     <string name="dropbox_plugin_name">Приставка Dropbox</string>
     <string name="intermediate_points_change_order">Смяна на реда</string>
     <string name="srtm_paid_version_msg">Можете да купите добавката „Контурни линии“ и така да подкрепите бъдещото ѝ развитие.</string>
-    <string name="srtm_paid_version_title">Добавка за контурни линии</string>
+    <string name="srtm_paid_version_title">Добавка за релефа</string>
     <string name="av_def_action_video">Запиши видео</string>
     <string name="av_def_action_audio">Запиши аудио</string>
     <string name="av_widget_action_descr">Изберете действие по подразбиране:</string>
@@ -140,7 +140,7 @@
 \nДанните, върху които лежи тази функционалност, произхождат от SRTM и ASTER.
 \n
 \nОще информация на %1$s.</string>
-    <string name="srtm_plugin_name">Контурни линии</string>
+    <string name="srtm_plugin_name">Релеф</string>
     <string name="download_select_map_types">Други карти</string>
     <string name="download_roads_only_item">Само пътища</string>
     <string name="download_srtm_maps">Контурни линии</string>
@@ -1693,7 +1693,7 @@
     <string name="confirm_download_roadmaps">Няма нужда да изтегляте пътната карта, защото вече имате стандартната (пълна) карта. Изтегляне въпреки това\?</string>
     <string name="downloads">Изтегляния</string>
     <string name="get_full_version">Пълна версия</string>
-    <string name="activate_srtm_plugin">Включете добавката „Контурни линии“</string>
+    <string name="activate_srtm_plugin">Включете добавката „Релеф“</string>
     <string name="activate_seamarks_plugin">Моля, активирайте добавката за морски карти</string>
     <string name="buy">Купуване</string>
     <string name="downloading_number_of_files">Изтегляне %1$d файла…</string>
@@ -2205,8 +2205,8 @@
     <string name="osm_edit_logout_success">Успешно излязохте</string>
     <string name="file_already_imported">Файлът вече е внесен в OsmAnd</string>
     <string name="use_two_phase_routing">Използване на 2-стъпков A* рутиращ алгоритъм</string>
-    <string name="message_graph_will_be_available_after_recalculation">Изчакайте преизчисляването на маршрута.
-\nГрафиката ще бъде достъпна след преизчисляване.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Изчакайте.
+\nГрафиката ще е достъпна след преизчисляване на маршрута.</string>
     <string name="shared_string_local_maps">Местни карти</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Удобства</string>
@@ -2227,7 +2227,7 @@
     <string name="sort_name_descending">Име: Я - А</string>
     <string name="sort_name_ascending">Име: А - Я</string>
     <string name="start_finish_icons">Пиктограми за начало и край</string>
-    <string name="contour_lines_thanks">Благодарим ви, че поръчахте „Контурни линии“</string>
+    <string name="contour_lines_thanks">Благодарим ви, че поръчахте „Релеф“</string>
     <string name="osm_live_payment_desc_hw">Абонаментът се таксува за избрания период. Можете да го отмените в AppGallery по всяко време.</string>
     <string name="osm_live_payment_subscription_management_hw">Заплащането ще ви бъде приспаднато от вашия акаунт в AppGallery при потвърждаване на покупката.
 \n
@@ -3288,7 +3288,7 @@
     <string name="copying_completed">Копирането е завършено</string>
     <string name="shared_string_do_not_exist">Не съществува</string>
     <string name="quick_action_temperature_layer">Бутон, превключващ слоя с температурата на картата.</string>
-    <string name="quick_action_cloud_layer">Бутон, превключващ слоя с облачнистта на картата.</string>
+    <string name="quick_action_cloud_layer">Бутон, превключващ слоя с облачността на картата.</string>
     <string name="shared_string_contours">Контури</string>
     <string name="precipitation_layer">Слой с валежи</string>
     <string name="wind_widget_desc">Показва скоростта на вятъра в текущия център на картата.</string>
@@ -3479,7 +3479,7 @@
     <string name="current_location_widget">Координати: текущо местоположение</string>
     <string name="default_render_descr">Стил с общо предназначение. Гъсто населените места са показани по-ясно. Отнася се за контурни линии, маршрути, качество на повърхността, ограничения на достъпа, пътни знаци, оцветяване на пътища по скалата на SAC/CAI, елементи на водни спортове.</string>
     <string name="shared_string_reset">Нулиране</string>
-    <string name="hillshade_purchase_header">Инсталирайте добавката „Контурни линии“, за да виждате градуирани вертикални области.</string>
+    <string name="hillshade_purchase_header">Инсталирайте добавката „Релеф“, за да виждате градуирани вертикални области.</string>
     <string name="shared_string_large">Голям</string>
     <string name="attach_roads_descr">Осреднява трасето до разрешените пътища при маршрутизиране между точките и свързва точни инструкции за завоите със свойствата на маршрута.</string>
     <string name="elevation_profile_widget_desc">Показва профила на надморската височина и наклона на текущия маршрут.</string>
@@ -4214,4 +4214,13 @@
     <string name="switch_osm_notes_visibility_desc">Превключване на бележките на OSM на картата.</string>
     <string name="show_something_on_map">Показване на %1$s на картата</string>
     <string name="quick_action_routes_summary">Бутон, превключващ %1$s на картата.</string>
+    <string name="quick_action_coordinates_widget_descr">Бутон, превключващ приспособлението за координати на картата.</string>
+    <string name="marker_show_distance_descr">Изберете как да бъдат изобразени разстоянието и посоката на картата:</string>
+    <string name="add_hidden_group_info">Добавената точка няма да бъде видима на картата, защото избраната група е скрита. Можете да нмерите точката в „%s“.</string>
+    <string name="quick_action_showhide_mapillary_descr">Бутон, превключващ слоя на Mapillary на картата.</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Добавете най-малко две точки</string>
+    <string name="osm_live_payment_contribute_descr">Даренията помагат за финансиране на картографията на OSM.</string>
+    <string name="rendering_attr_showLez_description">Показване на зоните за ниски емисии на картата. Не влияе на маршрутизирането.</string>
+    <string name="quick_action_showhide_favorites_descr">Бутон, превключващ избраните точки на картата.</string>
+    <string name="graph_axis">Оси на графиката</string>
 </resources>
