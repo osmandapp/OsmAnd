@@ -1781,18 +1781,29 @@ public class RouteResultPreparation {
 			lanes = new int[prevLanesCount];
 			boolean ltr = rs.leftLanes < rs.rightLanes;
 			boolean link = isSwitchToLink(currentSegm, prevSegm);
-			if (!rs.leftLink && link && currentLanesCount + rs.leftLanes > lanes.length) {
-				currentLanesCount = Math.max(0, lanes.length - rs.leftLanes) + 1; // not overlap lanes > 1
-			} else if (!rs.rightLink && link && currentLanesCount + rs.rightLanes > lanes.length) {
-				currentLanesCount = Math.max(0, lanes.length - rs.rightLanes) + 1; // not overlap lanes > 1
+			// don't allow to overlap lanes by more 1 than lane i.e. avoid [C;TR|C;TR] -> [C|C;TR]
+			int leftLanes = rs.leftLanes;
+			int rightLanes = rs.rightLanes;
+			if (currentLanesCount + leftLanes > lanes.length + 1) {
+				if (link) {
+					currentLanesCount = Math.max(0, lanes.length - leftLanes) + 1;
+				} else {
+					leftLanes = Math.max(0, lanes.length - currentLanesCount) + 1;
+				}
+			} else if (currentLanesCount + rightLanes > lanes.length + 1) {
+				if (link) {
+					currentLanesCount = Math.max(0, lanes.length - rightLanes) + 1;
+				} else {
+					rightLanes = Math.max(0, lanes.length - currentLanesCount) + 1;
+				}
 			}
 			// active lanes
 			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
 				int ind = ltr ? i : lanes.length - i - 1;
-				lanes[ind] = (mainLaneType << 1) + 1;
-			}
+					lanes[ind] = (mainLaneType << 1) + 1;
+				}
 			// left lanes
-			for(int i = 0; i < Math.min(lanes.length, rs.leftLanes); i++) {
+			for(int i = 0; i < Math.min(lanes.length, leftLanes); i++) {
 				int lane = getTurnByAngle(rs.attachedAngles.get(i));
 				if (lane >= mainLaneType) {
 					lane = TurnType.getPrev(mainLaneType);
@@ -1804,9 +1815,9 @@ public class RouteResultPreparation {
 				}
 			}
 			// right lanes
-			for (int i = 0; i < Math.min(lanes.length, rs.rightLanes); i++) {
+			for (int i = 0; i < Math.min(lanes.length, rightLanes); i++) {
 				int ind = lanes.length - i - 1;
-				int lane = getTurnByAngle(rs.attachedAngles.get(rs.leftLanes + rs.rightLanes - i - 1));
+				int lane = getTurnByAngle(rs.attachedAngles.get(leftLanes + rightLanes - i - 1));
 				if (lane <= mainLaneType) {
 					lane = TurnType.getNext(mainLaneType);
 				}
