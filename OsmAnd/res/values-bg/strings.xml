@@ -548,7 +548,7 @@
     <string name="shared_string_save">Запазване</string>
     <string name="local_index_upload_gpx_description">Качване на GPX файлове в OSM. Те ще бъдат използвани за подобряване на картите.</string>
     <string name="local_index_items_uploaded">%1$d от %2$d са успешно качени.</string>
-    <string name="local_index_mi_upload_gpx">Изпрати към OSM</string>
+    <string name="local_index_mi_upload_gpx">Изпращане към OSM</string>
     <string name="show_more_map_detail">Повече подробности на картата</string>
     <string name="show_more_map_detail_descr">Показват се подробности от картата (пътища, др.) при малки увеличения.</string>
     <string name="favourites_delete_multiple_succesful">Избраните точки са премахнати.</string>
@@ -640,7 +640,7 @@
     <string name="send_location_way_choose_title">Споделяне на мястото чрез</string>
     <string name="send_location_sms_pattern">Позиция: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">За да видите мястото отворете препратката към страница в интернет: %1$s или намерение на Android: %2$s</string>
-    <string name="send_location">Изпрати мястото</string>
+    <string name="send_location">Изпращане местоположение</string>
     <string name="context_menu_item_share_location">Споделяне на местоположението</string>
     <string name="add_waypoint_dialog_added">Отправната точка на GPX „{0}“ е добавена</string>
     <string name="add_waypoint_dialog_title">Добавяне на отправна точка към трасе на GPX</string>
@@ -681,7 +681,7 @@
     <string name="version_index_is_big_for_memory">Индексът \'\'{0}\'\' не се побира в паметта</string>
     <string name="version_index_is_not_supported">Версията на индекса \'\'{0}\'\' не се поддържа</string>
     <string name="osmand_routing_experimental">Офлайн навигацията на OsmAnd е пробна версия и не работи пълноценно на дистанции по-големи от 20км.\n\nУслугата за навигация временно е превключена на онлайн от CloudMade.</string>
-    <string name="specified_dir_doesnt_exist">Посочената папка не може да бъде намерена.</string>
+    <string name="specified_dir_doesnt_exist">Посочената папка не е намерена.</string>
     <string name="application_dir">Папка за данни</string>
     <string name="osmand_net_previously_installed">Инсталирана е предна версия на OsmAnd. Всички записани данни ще бъдат достъпни за новото приложение. Единствено записаните в любими места ще трябва да бъдат ре-импортирани.</string>
     <string name="build_installed">Версия {0} беше успешно инсталирана ({1}).</string>
@@ -931,14 +931,14 @@
     <string name="map_source">Източник на карти</string>
     <string name="use_internet">Ползвай интернет</string>
     <string name="show_location">Показване Вашата позиция</string>
-    <string name="show_gps_coordinates_text">Покажи GPS координатите на картата</string>
+    <string name="show_gps_coordinates_text">Показване на GPS координати на картата</string>
     <string name="use_internet_to_download_tile">Изтегляне на липсващи плочки от картата</string>
     <string name="app_description">Приложение за навигация</string>
     <string name="shared_string_exit">Изход</string>
     <string name="search_button">Търсене</string>
     <string name="search_activity">Търсене</string>
     <string name="searchpoi_activity">Избор на POI</string>
-    <string name="search_POI_level_btn">Търси още</string>
+    <string name="search_POI_level_btn">Търсене на повече</string>
     <string name="incremental_search_street">Търсене на улица по възходящ ред</string>
     <string name="incremental_search_building">Номерата са по възходящ ред</string>
     <string name="choose_available_region">Изберете област от списъка</string>
@@ -997,7 +997,7 @@
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Промяна на POI</string>
     <string name="poi_dialog_other_tags_message">Всички други етикети се запазват</string>
-    <string name="default_buttons_commit">Изпрати</string>
+    <string name="default_buttons_commit">Изпращане</string>
     <string name="shared_string_clear">Изчистване</string>
     <string name="filter_current_poiButton">Филтър</string>
     <string name="edit_filter_save_as_menu_item">Запазване като</string>
@@ -1160,7 +1160,9 @@
     <string name="loading_smth">Зареждане %1$s …</string>
     <string name="map_widget_plain_time">Текущо време</string>
     <string name="shared_string_waypoint">Отправна точка</string>
-    <string name="selected_gpx_info_show">\n\nНатиснете и задръжте за показване на картата</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nЗадръжте за показване в картата"</string>
     <string name="text_size_descr">Въведете размер на текста върху картата.</string>
     <string name="text_size">Размер на текста</string>
     <string name="traffic_warning_speed_limit">Ограничение на скоростта</string>
@@ -1606,7 +1608,7 @@
     <string name="osn_add_dialog_error">Бележката не беше създадена.</string>
     <string name="osn_close_dialog_success">Бележката беше затворена</string>
     <string name="osn_close_dialog_error">Бележката не е затворена.</string>
-    <string name="shared_string_commit">Изпращане на данни до OSM</string>
+    <string name="shared_string_commit">Изпращане</string>
     <string name="context_menu_item_delete_waypoint">Премахване на отправна точка от GPX\?</string>
     <string name="context_menu_item_edit_waypoint">Редактиране на отправна точка от GPX</string>
     <string name="shared_string_location">Местоположение</string>
@@ -1723,7 +1725,7 @@
     <string name="building_number">Номер на сграда</string>
     <string name="tab_title_advanced">Разширени</string>
     <string name="tab_title_basic">Основни</string>
-    <string name="commit_poi">Изпрати POI</string>
+    <string name="commit_poi">Изпращане на POI</string>
     <string name="offline_maps_and_navigation">Офлайн карти\n &amp; навигация</string>
     <string name="shared_string_skip">Пропускане</string>
     <string name="shared_string_undo">Отменяне</string>
@@ -2608,7 +2610,7 @@
     <string name="use_osm_live_routing">Маршрутизация на OsmAnd Live</string>
     <string name="turn_on_public_transport_description">Включете, за да виждате маршрутите на обществения транспорт на картата.</string>
     <string name="change_default_appearance">Промяна на подразбирания външен вид</string>
-    <string name="quick_action_transport_descr">Превключва видимостта на обществения транспорт на картата.</string>
+    <string name="quick_action_transport_descr">Бутон, превключващ обществения транспорт на картата.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="use_native_pt">Развитие на обществения транспорт със собствени средства</string>
     <string name="subscription_osmandlive_item">Абонамент – OsmAnd Live</string>
@@ -3452,9 +3454,9 @@
 \nИзберете %2$s. Всички данни, свързани с камери за скорост: предупреждения, известия, POI, ще бъдат премахнати до преинсталиране на OsmAnd.</string>
     <string name="routing_attr_height_obstacles_description">Прогнозното време за пътуване ще отчита въздействието на възвишенията. Предпочитанията за маршрута могат да помогнат за избягване на стръмни изкачвания:</string>
     <string name="show_map_symbols">Обозначения на картата</string>
-    <string name="ant_missing_dependency_descr">Необходимата услуга \"%1$s\" не е намерена.
+    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.
 \nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.
-\nЖелаети ли да посетите магазина за приложения\?</string>
+\nЖелаети ли да посетите магазина за приложения?</string>
     <string name="clear_all_history_warning">Премахване на всички записи в историята на приложението, включително историята на търсенето, маршрутизацията и маркерите\?</string>
     <string name="altitude_correction">Корекция на надм. височина</string>
     <string name="no_altitude_data_desc">За да получите данни от %1$s, прикрепете трасето към пътищата или го изчислете онлайн.</string>
@@ -4200,4 +4202,15 @@
     <string name="quick_action_remove_next_destination">Следващо местоназначение</string>
     <string name="download_cloud_versions">Изтегляне на облачни версии</string>
     <string name="map_widget_map_scale">Мащаб на картата</string>
+    <string name="show_arrows_on_the_map">Показване на стрелки на картата</string>
+    <string name="quick_action_showhide_poi_descr">Бутон, превключващ POI на картата.</string>
+    <string name="nothing_found_in_radius">Няма нищо в радиус от</string>
+    <string name="search_no_results_feedback">Няма резултати?
+\nДайте обратна връзка</string>
+    <string name="poi_cannot_be_found">Не е намерен възел или път.</string>
+    <string name="help_article_map_point_layers_on_map_name">Точки на картата</string>
+    <string name="public_transport_no_route_title">За съжаление, OsmAnd не може да открие подходящ маршрут.</string>
+    <string name="profiles_for_action_not_found">Не е намерен такъв профил.</string>
+    <string name="switch_osm_notes_visibility_desc">Превключване на бележките на OSM на картата.</string>
+    <string name="show_something_on_map">Показване на %1$s на картата</string>
 </resources>
