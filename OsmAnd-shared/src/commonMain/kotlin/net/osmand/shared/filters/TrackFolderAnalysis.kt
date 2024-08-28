@@ -1,10 +1,7 @@
 package net.osmand.shared.filters
 
-import net.osmand.plus.track.data.TrackFolder
 import net.osmand.shared.gpx.TrackItem
-import net.osmand.plus.track.data.TracksGroup
 import net.osmand.shared.io.KFile
-import okio.FileSystem
 
 class TrackFolderAnalysis(folder: TracksGroup) {
 	var tracksCount = 0
@@ -23,7 +20,7 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 		if (folder is TrackFolder) {
 			items.addAll(folder.getFlattenedTrackItems())
 		} else {
-			items.addAll(folder.trackItems)
+			items.addAll(folder.getTrackItems())
 		}
 		for (trackItem in items) {
 			val dataItem = trackItem.dataItem

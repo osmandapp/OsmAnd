@@ -2,15 +2,14 @@ package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.TrackItem
-import net.osmand.plus.track.data.TracksGroup
 import net.osmand.shared.util.KCollectionUtils
 
 class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 
-	override var trackItems: MutableList<TrackItem> = ArrayList()
+	private var trackItems: MutableList<TrackItem> = ArrayList()
 
 	constructor() : this("") {
-//		trackItems = ArrayList()
+		trackItems = ArrayList()
 	}
 
 	@Serializable
@@ -28,9 +27,9 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 		return folderName
 	}
 
-//	override fun getTrackItems(): MutableList<TrackItem> {
-//		return trackItems
-//	}
+	override fun getTrackItems(): MutableList<TrackItem> {
+		return trackItems
+	}
 
 	fun addTrackItem(trackItem: TrackItem) {
 		if (!trackItems.contains(trackItem)) {

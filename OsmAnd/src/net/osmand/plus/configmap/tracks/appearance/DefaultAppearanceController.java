@@ -26,7 +26,7 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardContr
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.util.Algorithms;
 

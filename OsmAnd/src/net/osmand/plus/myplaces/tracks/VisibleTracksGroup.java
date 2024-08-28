@@ -1,13 +1,11 @@
 package net.osmand.plus.myplaces.tracks;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.filters.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 
@@ -37,13 +35,13 @@ public class VisibleTracksGroup implements TracksGroup {
 
 	@NonNull
 	@Override
-	public String getName(@NonNull Context context) {
-		return context.getString(R.string.shared_string_visible_on_map);
+	public String getName() {
+		return app.getString(R.string.shared_string_visible_on_map);
 	}
 
 	@NonNull
 	@Override
 	public String toString() {
-		return getName(app);
+		return getName();
 	}
 }

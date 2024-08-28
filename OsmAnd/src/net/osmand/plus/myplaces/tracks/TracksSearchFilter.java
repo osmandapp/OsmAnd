@@ -17,7 +17,7 @@ import net.osmand.shared.filters.FilterChangedListener;
 import net.osmand.shared.filters.ListTrackFilter;
 import net.osmand.shared.filters.RangeTrackFilter;
 import net.osmand.shared.filters.SingleFieldTrackFilterParams;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.shared.filters.TextTrackFilter;
 import net.osmand.shared.filters.TrackFilterType;
 import net.osmand.shared.filters.TrackFiltersHelper;

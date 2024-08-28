@@ -27,7 +27,7 @@ import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;

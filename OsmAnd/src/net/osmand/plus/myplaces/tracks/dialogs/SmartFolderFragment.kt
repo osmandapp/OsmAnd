@@ -11,7 +11,7 @@ import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
 import net.osmand.shared.filters.SmartFolder
-import net.osmand.plus.track.data.TracksGroup
+import net.osmand.shared.filters.TracksGroup
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData

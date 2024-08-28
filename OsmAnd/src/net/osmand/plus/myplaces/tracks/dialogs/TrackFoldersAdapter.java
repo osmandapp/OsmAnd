@@ -34,9 +34,9 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.filters.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.shared.filters.TrackFolderAnalysis;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.filters.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;

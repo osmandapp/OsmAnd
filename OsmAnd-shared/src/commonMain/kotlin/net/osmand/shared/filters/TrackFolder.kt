@@ -1,7 +1,5 @@
-package net.osmand.plus.track.data
+package net.osmand.shared.filters
 
-import net.osmand.shared.filters.ComparableTracksGroup
-import net.osmand.shared.filters.TrackFolderAnalysis
 import net.osmand.shared.gpx.KGpxUiHelper
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.io.KFile
@@ -13,7 +11,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	TracksGroup, ComparableTracksGroup {
 	private var dirFile: KFile
 	private val parentFolder: TrackFolder?
-	override var trackItems: MutableList<TrackItem> = ArrayList()
+	private var trackItems: MutableList<TrackItem> = ArrayList()
 	private var subFolders: MutableList<TrackFolder> = ArrayList()
 	private var flattenedTrackItems: MutableList<TrackItem>? = null
 	private var flattenedSubFolders: MutableList<TrackFolder>? = null
@@ -56,17 +54,17 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return subFolders
 	}
 
-//	override fun getTrackItems(): MutableList<TrackItem> {
-//		return trackItems
-//	}
+	override fun getTrackItems(): MutableList<TrackItem> {
+		return trackItems
+	}
 
 	fun setSubFolders(subFolders: MutableList<TrackFolder>) {
 		this.subFolders = subFolders
 	}
 
-//	override fun setTrackItems(trackItems: MutableList<TrackItem>) {
-//		this.trackItems = trackItems
-//	}
+	fun setTrackItems(trackItems: MutableList<TrackItem>) {
+		this.trackItems = trackItems
+	}
 
 	val isEmpty: Boolean
 		get() = KAlgorithms.isEmpty(trackItems) && KAlgorithms.isEmpty(getSubFolders())

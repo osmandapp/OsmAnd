@@ -15,7 +15,7 @@ import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.plus.track.data.TrackFolder
+import net.osmand.shared.filters.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.FileUtils

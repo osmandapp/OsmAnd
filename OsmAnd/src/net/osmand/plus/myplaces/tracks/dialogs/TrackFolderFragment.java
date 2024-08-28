@@ -29,8 +29,8 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.filters.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -179,7 +179,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		MyPlacesActivity activity = getMyActivity();
 		ActionBar actionBar = activity != null ? activity.getSupportActionBar() : null;
 		if (actionBar != null && group != null) {
-			actionBar.setTitle(group.getName(app));
+			actionBar.setTitle(group.getName());
 		}
 	}
 

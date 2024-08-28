@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.plus.R;
@@ -24,7 +23,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -77,7 +76,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		displayData.putExtra(BACKGROUND_COLOR, folderColorAlpha);
 
 		displayData.addDisplayItem(new DisplayItem()
-				.setTitle(trackFolder.getName(app))
+				.setTitle(trackFolder.getName())
 				.setDescription(GpxUiHelper.getFolderDescription(app, trackFolder))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, trackFolder.getColor()))
@@ -226,7 +225,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 						foldersHelper.deleteTrackFolder(trackFolder);
 						onFolderDeleted();
 					});
-			String folderName = trackFolder.getName(ctx);
+			String folderName = trackFolder.getName();
 			String tracksCount = String.valueOf(trackFolder.getTotalTracksCount());
 			String message = ctx.getString(R.string.delete_track_folder_dialog_message, folderName, tracksCount);
 			CustomAlert.showSimpleMessage(dialogData, message);

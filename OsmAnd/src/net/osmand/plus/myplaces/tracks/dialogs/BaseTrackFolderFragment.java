@@ -67,9 +67,9 @@ import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.filters.TrackFolder;
 import net.osmand.shared.filters.TrackFolderAnalysis;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.filters.TracksGroup;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -342,7 +342,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			return selectedFolder.getDirName();
 		}
 		if (smartFolder != null) {
-			return SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getName(app);
+			return SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getName();
 		}
 		return null;
 	}
@@ -370,7 +370,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		sortFolders(selectedFolder, tabsSortModes, sortMode);
 		settings.saveTabsSortModes(tabsSortModes);
 
-		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(app), app.getString(sortMode.getNameId())));
+		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
 	}
 
 	private void sortFolders(TrackFolder trackFolder, Map<String, String> tabsSortModes, TracksSortMode sortMode) {

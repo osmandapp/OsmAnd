@@ -29,7 +29,7 @@ import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.track.data.TrackFolder
+import net.osmand.shared.filters.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton

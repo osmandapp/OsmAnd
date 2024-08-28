@@ -37,7 +37,7 @@ class SmartFolderOptionsController(
 		displayData.addDisplayItem(
 			DisplayItem()
 				.setTitle(smartFolder.getName())
-				.setDescription("${smartFolder.trackItems.size} ${app.getString(R.string.shared_string_tracks)}")
+				.setDescription("${smartFolder.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(
 					iconsCache.getActiveIcon(
