@@ -1,5 +1,7 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -265,8 +267,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	public void handleTilt() {
 		synchronized (this) {
-			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null)
-				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 30.0f, 0.0f);
+			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null) {
+				int adjustedTiltAngle = mapView.getAdjustedTiltAngle(mapView.getBaseZoom(), true);
+				mapView.getAnimatedDraggingThread().startTilting(
+						offscreenMapRendererView.getElevationAngle() < DEFAULT_ELEVATION_ANGLE ? DEFAULT_ELEVATION_ANGLE : adjustedTiltAngle, 0.0f);
+			}
 		}
 	}
 
