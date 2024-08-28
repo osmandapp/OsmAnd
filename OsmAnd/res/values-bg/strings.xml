@@ -2662,7 +2662,7 @@
     <string name="rendering_attr_contourColorScheme_name">Цветова схема на контурните линии</string>
     <string name="import_tracks">Внасяне на трасета</string>
     <string name="srtm_unit_format">Единици за измерване на контурните линии</string>
-    <string name="quick_action_contour_lines_descr">Бутон за превключване на контурните линии на картата.</string>
+    <string name="quick_action_contour_lines_descr">Бутон, превключващ контурните линии на картата.</string>
     <string name="shared_storage_warning_description">Поради новите правила на Android от ноември 2021 г. OsmAnd 4.2 ще загуби достъп до споделеното хранилище.
 \n
 \nПреместете папката с данни от споделеното хранилище в достъпно хранилище, в противен случай приложението ще загуби достъп до вашите данни като карти за ползване извън мрежа, трасета на GPX и др.</string>
@@ -4213,4 +4213,5 @@
     <string name="profiles_for_action_not_found">Не е намерен такъв профил.</string>
     <string name="switch_osm_notes_visibility_desc">Превключване на бележките на OSM на картата.</string>
     <string name="show_something_on_map">Показване на %1$s на картата</string>
+    <string name="quick_action_routes_summary">Бутон, превключващ %1$s на картата.</string>
 </resources>
