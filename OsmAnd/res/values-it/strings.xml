@@ -675,7 +675,7 @@
     <string name="osmand_parking_choose_type">Scegli il tipo di parcheggio</string>
     <string name="osmand_parking_lim_text">A tempo</string>
     <string name="osmand_parking_no_lim_text">Senza limiti di tempo</string>
-    <string name="osmand_parking_add_event">Aggiungi una notifica all\'applicazione Calendar</string>
+    <string name="osmand_parking_add_event">Aggiungi una notifica al Calendario</string>
     <string name="osmand_parking_time_limit">Parcheggio a tempo</string>
     <string name="osmand_parking_time_no_limit">Parcheggio senza limiti di tempo</string>
     <string name="osmand_parking_position_description">La posizione della tua auto parcheggiata. %1$s</string>
@@ -2502,7 +2502,7 @@
 \n</string>
     <string name="what_is_here">Cosa c\'è qui:</string>
     <string name="parked_at">parcheggiato alle</string>
-    <string name="pick_up_till">Pagato sono alle</string>
+    <string name="pick_up_till">Fine sosta alle</string>
     <string name="without_time_limit">Senza limite di tempo</string>
     <string name="context_menu_read_full_article">Leggi l\'articolo completo</string>
     <string name="context_menu_read_article">Leggi l\'articolo</string>
