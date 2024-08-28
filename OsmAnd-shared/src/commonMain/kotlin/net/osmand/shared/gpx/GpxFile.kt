@@ -883,7 +883,7 @@ class GpxFile : GpxExtensions {
 	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false
 
 	companion object {
-    const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
-    const val DEFAULT_WPT_GROUP_NAME = ""
+		const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
+		const val DEFAULT_WPT_GROUP_NAME = ""
 	}
 }
