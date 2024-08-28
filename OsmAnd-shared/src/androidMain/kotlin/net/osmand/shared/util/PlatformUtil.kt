@@ -12,6 +12,7 @@ import net.osmand.shared.io.KFile
 import java.io.File
 import java.lang.ref.WeakReference
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 actual object PlatformUtil {
@@ -91,7 +92,7 @@ actual object PlatformUtil {
 
 	actual fun formatDate(date:Instant, pattern: String):String {
 		val formatter = SimpleDateFormat(pattern, Locale.getDefault())
-		return formatter.format(date)
+		return formatter.format(Date(date.toEpochMilliseconds()))
 	}
 
 	actual fun getFileSeparator(): String {

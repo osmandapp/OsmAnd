@@ -35,12 +35,6 @@ kotlin {
     val dateTimeVersion = "0.6.1"
 
     sourceSets {
-        commonTest.dependencies {
-//            implementation(libs.kotlin.test)
-            implementation(kotlin("test"))
-            implementation(kotlin("test-common"))
-            implementation(kotlin("test-annotations-common"))
-        }
         commonMain.dependencies {
             implementation(kotlin("test"))
             implementation(kotlin("test-common"))
