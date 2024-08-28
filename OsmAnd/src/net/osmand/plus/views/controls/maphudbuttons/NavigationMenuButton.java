@@ -21,7 +21,7 @@ public class NavigationMenuButton extends MapButton {
 		routingHelper = app.getRoutingHelper();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_round, R.drawable.btn_round_night);
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
 			MapActionsHelper controlsHelper = app.getOsmandMap().getMapLayers().getMapActionsHelper();
 			if (controlsHelper != null) {

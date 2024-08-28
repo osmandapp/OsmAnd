@@ -5882,4 +5882,19 @@
     <string name="app_mode_suv">SUV</string>
     <string name="y_axis_description">Marca hasta dos opciones para el eje Y.</string>
     <string name="graph_axis">Eje gráfico</string>
+    <string name="rendering_attr_alpineHiking_name">Dificultad de las rutas de senderismo</string>
+    <string name="shared_string_interface">Interfaz</string>
+    <string name="quick_action_previous_screen_desc">Un interruptor que navega a la pantalla anterior.</string>
+    <string name="quick_action_drawer_title">Menú lateral</string>
+    <string name="quick_action_previous_screen_title">Pantalla anterior</string>
+    <string name="quick_action_verb_navigate">Navegar</string>
+    <string name="quick_action_navigation_view_title">Vista de navegación</string>
+    <string name="corner_radius">Radio de la esquina</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="quick_action_search_view_title">Vista de búsqueda</string>
+    <string name="quick_action_drawer_desc">Un interruptor que muestra u oculta el menú lateral.</string>
+    <string name="quick_action_search_view_desc">Un interruptor que abre o cierra la vista de la búsqueda.</string>
+    <string name="quick_action_navigation_view_desc">Un interruptor que abre o cierra la vista de la navegación.</string>
+    <string name="background_opacity">Opacidad del fondo</string>
+    <string name="quick_action_switch_compass_desc">Un interruptor que alterna las orientaciones del mapa.</string>
 </resources>

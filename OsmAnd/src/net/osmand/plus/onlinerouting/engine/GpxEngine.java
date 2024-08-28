@@ -153,7 +153,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				appMode.setDerivedProfile(getApproximationDerivedProfile());
 			}
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
-			LocationsHolder holder = new LocationsHolder(points);
+			LocationsHolder holder = new LocationsHolder(SharedUtil.jWptPtList(points));
 			if (holder.getSize() > 1) {
 				LatLon start = holder.getLatLon(0);
 				LatLon end = holder.getLatLon(holder.getSize() - 1);

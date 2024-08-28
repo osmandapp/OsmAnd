@@ -15,7 +15,7 @@ public class QuickSearchButton extends MapButton {
 		setIconId(R.drawable.ic_action_search_dark);
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
 			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		});

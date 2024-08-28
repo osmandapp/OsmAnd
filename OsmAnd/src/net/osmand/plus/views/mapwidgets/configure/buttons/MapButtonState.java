@@ -39,7 +39,7 @@ public abstract class MapButtonState {
 	}
 
 	@Nullable
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int colorId) {
-		return uiUtilities.getPaintedIcon(R.drawable.ic_quick_action, colorId);
+	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int color) {
+		return uiUtilities.getPaintedIcon(R.drawable.ic_quick_action, color);
 	}
 }

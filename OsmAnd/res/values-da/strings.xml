@@ -5870,4 +5870,19 @@
     <string name="graph_axis">Graf-akse</string>
     <string name="y_axis_description">Vælg op til to muligheder for Y-aksen.</string>
     <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">Vandrestiers sværhedsgrad</string>
+    <string name="quick_action_previous_screen_desc">En skifter til at navigere til den forrige skærm.</string>
+    <string name="quick_action_previous_screen_title">Forrige skærm</string>
+    <string name="quick_action_verb_navigate">Naviger</string>
+    <string name="quick_action_drawer_desc">En skifter til at vise eller skjule sidemenuen.</string>
+    <string name="quick_action_drawer_title">Sidemenu</string>
+    <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
+    <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
+    <string name="shared_string_interface">Brugerflade</string>
+    <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
+    <string name="quick_action_search_view_title">Søgevisning</string>
+    <string name="quick_action_navigation_view_title">Navigationsvisning</string>
+    <string name="background_opacity">Baggrundens gennemsigtighed</string>
+    <string name="corner_radius">Hjørneradius</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

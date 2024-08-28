@@ -279,6 +279,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getAppBarSecondaryColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getAppBarSecondaryColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getAppBarSecondaryColorId(boolean nightMode) {
+		return nightMode ? R.color.app_bar_secondary_dark : R.color.app_bar_secondary_light;
+	}
+
+	@ColorInt
 	public static int getDividerColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getDividerColorId(nightMode));
 	}

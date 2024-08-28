@@ -3764,12 +3764,12 @@
     <string name="poi_support_ground">Supporto: suolo</string>
     <string name="poi_climbing_quality_solid">Solido</string>
     <string name="poi_climbing_mixed_no">Misto: no</string>
-    <string name="poi_street_cabinet_cable_tv">Tipo cabina: tv cablata</string>
+    <string name="poi_street_cabinet_cable_tv">Tipo di cabina: tv cablata</string>
     <string name="poi_health_service_prevention_yes">Servizio sanitario: prevenzione: sì</string>
     <string name="poi_health_service_examination_no">Servizio sanitario: consulenza: no</string>
     <string name="poi_healthcare_speciality_obstetrics_postnatal">Ostetricia (postnatale)</string>
     <string name="poi_karting">Kart</string>
-    <string name="poi_street_cabinet_gas">Tipo cabina: gas</string>
+    <string name="poi_street_cabinet_gas">Tipo di cabina: gas</string>
     <string name="poi_socket_cee_red_16a_current">Presa: CEE rossa 16A: corrente</string>
     <string name="poi_health_service_test_yes">Servizio sanitario: test: sì</string>
     <string name="poi_direction_southeast">Direzione sudest</string>
@@ -3794,7 +3794,7 @@
     <string name="poi_street_cabinet">Cabina stradale</string>
     <string name="poi_inscription_ne">Inscrizione:NE</string>
     <string name="poi_atm_yes">ATM: sì</string>
-    <string name="poi_street_cabinet_postal_service">Tipo cabina: servizio postale</string>
+    <string name="poi_street_cabinet_postal_service">Tipo di cabina: servizio postale</string>
     <string name="poi_support_pole">Supporto: palo</string>
     <string name="poi_diameter_crown">Diametro della corona</string>
     <string name="poi_curling">Curling</string>
@@ -3846,7 +3846,7 @@
     <string name="poi_health_service_test_no">Servizio sanitario: test: no</string>
     <string name="poi_nuclear_explosion_purpose_industrial_application">Scopo esplosione: applicazione industriale</string>
     <string name="poi_health_service_counselling_yes">Servizio sanitario: consulenza: sì</string>
-    <string name="poi_street_cabinet_power">Tipo cabina: energia</string>
+    <string name="poi_street_cabinet_power">Tipo di cabina: energia</string>
     <string name="poi_government_treasury">Tesoriera</string>
     <string name="poi_socket_cee_red_32a_current">Presa: CEE rossa 32A: corrente</string>
     <string name="poi_socket_cee_red_32a">Presa: CEE rossa 32A</string>
@@ -3896,7 +3896,7 @@
     <string name="poi_socket_type2_combo_voltage">Socket: Tipo 2 combo: tensione</string>
     <string name="poi_glacier_type_icefall">Cascata di ghiaccio</string>
     <string name="poi_socket_type3a_voltage">Socket: Tipo 3a: tensione</string>
-    <string name="poi_street_cabinet_street_lighting">Tipo cabina: illuminazione stradale</string>
+    <string name="poi_street_cabinet_street_lighting">Tipo di cabina: illuminazione stradale</string>
     <string name="poi_socket_cee_blue_current">Socket: CEE blu: corrente</string>
     <string name="poi_healthcare_speciality_dermatovenereology">Derma-venerologia</string>
     <string name="poi_free_flying_site_orientation_sw">Orientamento sito di volo libero: SO</string>
@@ -3956,7 +3956,7 @@
     <string name="poi_healthcare_speciality_laboratory">Specialità sanitaria: laboratorio</string>
     <string name="poi_healthcare_speciality_psychotherapist">Specialità sanitaria: psicoterapeuta</string>
     <string name="poi_healthcare_speciality_clinic">Specialità sanitaria: ambulatorio</string>
-    <string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+    <string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
     <string name="poi_free_flying_site_toplanding">Assembramento</string>
     <string name="poi_firepit">Braciere</string>
     <string name="poi_free_flying_site_towing">Traino</string>
@@ -4109,4 +4109,12 @@
     <string name="poi_crossing_supervision_no">Supervisione attraversamento: no</string>
     <string name="poi_support_billboard">Supporto: cartellone pubblicitario</string>
     <string name="poi_military_checkpoint">Posto di blocco militare</string>
+    <string name="poi_generator_output_vacuum_yes">Uscita: vuoto</string>
+    <string name="poi_toilets_disposal_pitlatrine">Smaltimento dei servizi igienici: latrina</string>
+    <string name="poi_street_cabinet_telecom">Tipo di cabina: telecomunicazioni</string>
+    <string name="poi_toilets_disposal_flush">Smaltimento dei servizi igienici: scarico</string>
+    <string name="poi_toilets_disposal_chemical">Smaltimento dei servizi igienici: chimico</string>
+    <string name="poi_toilets_disposal_bucket">Smaltimento dei servizi igienici: secchio</string>
+    <string name="poi_street_cabinet_water_management">Tipo di cabina: gestione dell\'acqua</string>
+    <string name="poi_street_cabinet_waste">Tipo di cabina: rifiuto</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
@@ -98,12 +99,22 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 	public void onResume() {
 		super.onResume();
 		mapButtonsHelper.addUpdatesListener(this);
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		mapButtonsHelper.removeUpdatesListener(this);
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	@Override

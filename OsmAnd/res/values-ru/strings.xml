@@ -5182,7 +5182,7 @@
     <string name="shared_string_visible_on_map">Видно на карте</string>
     <string name="number_of_tracks">%1$s треков</string>
     <string name="delete_track_folder_dialog_message">Папка «%1$s» будет удалена со всеми треками (%2$s).</string>
-    <string name="rendering_attr_lightDetail_description">По умолчанию: название плавучего знака (Light character.group.period), выберите дополнительную информацию о секторах 1-3 или сектор 1,2,3,4,5 светового знака</string>
+    <string name="rendering_attr_lightDetail_description">По умолчанию: название плавучего знака (light character.group.period), выберите дополнительную информацию о секторах 1-3 или сектор 1,2,3,4,5 светового знака</string>
     <string name="rendering_attr_lightDetail_name">Навигационные огни</string>
     <string name="rendering_value_sectors_name">Сектора</string>
     <string name="rendering_value_sector1_name">Сектор 1</string>
@@ -5351,7 +5351,7 @@
     <string name="help_article_map_point_layers_on_map_name">Точки на карте</string>
     <string name="help_article_map_tracks_on_map_name">Треки и маршруты</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Руководство</string>
+    <string name="help_article_navigation_guidance_name">Руководство по навигации</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Экран карты во время навигации</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Голосовые подсказки/уведомления</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Общественный транспорт</string>
@@ -5489,7 +5489,7 @@
     <string name="external_input_device_title">Внешнее устройство ввода</string>
     <string name="key_bindings">Привязки клавиш</string>
     <string name="key_event_action_move_to_my_location">Моё местоположение</string>
-    <string name="key_event_category_map_interactions">Взаимодействия с картой</string>
+    <string name="key_event_category_map_interactions">Взаимодействие с картой</string>
     <string name="key_event_action_move_down">Сдвиг вниз</string>
     <string name="key_event_category_actions">Действия</string>
     <string name="key_event_action_zoom_in">Приблизить</string>
@@ -5866,4 +5866,22 @@
     <string name="delete_widget">Удалить виджет?</string>
     <string name="battery_saving_mode">Режим экономии батареи</string>
     <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
+    <string name="y_axis_description">Выберите не более двух параметров.</string>
+    <string name="graph_axis">Ось графика</string>
+    <string name="quick_action_search_view_desc">Переключатель для открытия или закрытия окна поиска.</string>
+    <string name="shared_string_interface">Интерфейс</string>
+    <string name="quick_action_previous_screen_desc">Переключатель для перехода на предыдущий экран.</string>
+    <string name="quick_action_previous_screen_title">Предыдущий экран</string>
+    <string name="quick_action_verb_navigate">Навигация</string>
+    <string name="quick_action_drawer_title">Главное меню</string>
+    <string name="quick_action_drawer_desc">Переключатель для отображения или скрытия главного меню.</string>
+    <string name="quick_action_navigation_view_desc">Переключатель для открытия или закрытия окна навигации.</string>
+    <string name="quick_action_search_view_title">Окно поиска</string>
+    <string name="background_opacity">Непрозрачность фона</string>
+    <string name="quick_action_navigation_view_title">Окно навигации</string>
+    <string name="quick_action_switch_compass_desc">Переключатель для смены ориентации карты.</string>
+    <string name="rendering_attr_alpineHiking_name">Уровень сложности пешеходных маршрутов</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="corner_radius">Радиус скругления</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

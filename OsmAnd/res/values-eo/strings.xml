@@ -5860,4 +5860,19 @@
     <string name="graph_axis">Aksoj sur diagramo</string>
     <string name="y_axis_description">Elekti maksimume du celarojn por akso Y.</string>
     <string name="app_mode_suv">Sporta Util-Veturilo</string>
+    <string name="rendering_attr_alpineHiking_name">Malfacileco de turismaj kursoj</string>
+    <string name="quick_action_previous_screen_desc">Butono por iri al antaŭa ekrano.</string>
+    <string name="quick_action_previous_screen_title">Antaŭa ekrano</string>
+    <string name="quick_action_verb_navigate">Navigi</string>
+    <string name="quick_action_drawer_desc">Butono por montri/kaŝi flankan tirmenuon.</string>
+    <string name="quick_action_drawer_title">Tirmenuo</string>
+    <string name="quick_action_search_view_desc">Butono por malfermi/fermi ekranon de serĉo.</string>
+    <string name="quick_action_navigation_view_desc">Butono por malfermi/fermi ekranon de navigo.</string>
+    <string name="quick_action_switch_compass_desc">Butono por ŝanĝi orientiĝon de mapo.</string>
+    <string name="shared_string_interface">Fasado</string>
+    <string name="quick_action_search_view_title">Serĉi</string>
+    <string name="quick_action_navigation_view_title">Navigi</string>
+    <string name="background_opacity">Travideblo de fono</string>
+    <string name="corner_radius">Radiuso de angulo</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

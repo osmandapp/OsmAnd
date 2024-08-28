@@ -5809,4 +5809,22 @@
 \nGrafika 1k: %3$s
 \nNečinné 1k: %4$s</string>
     <string name="choose_map_orientation">Zvoľte orientáciu mapy</string>
+    <string name="rendering_attr_alpineHiking_name">Stupeň náročnosti turistických trás</string>
+    <string name="driving_region_uk">Veľká Británia a podobné krajiny</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="shared_string_interface">Rozhranie</string>
+    <string name="quick_action_previous_screen_desc">Prepínač pre navigáciu na predošlú obrazovku.</string>
+    <string name="quick_action_previous_screen_title">Predošlá obrazovka</string>
+    <string name="quick_action_verb_navigate">Navigovať</string>
+    <string name="quick_action_navigation_view_desc">Prepínač na otvorenie alebo zatvorenie navigácie.</string>
+    <string name="quick_action_navigation_view_title">Navigačný pohľad</string>
+    <string name="quick_action_switch_compass_desc">Prepínač na zmenu smerovania mapy.</string>
+    <string name="quick_action_drawer_desc">Prepínač na zobrazenie alebo skrytie bočného menu.</string>
+    <string name="quick_action_drawer_title">Bočné menu</string>
+    <string name="quick_action_search_view_desc">Prepínač na otvorenie alebo zatvorenie vyhľadávania.</string>
+    <string name="quick_action_search_view_title">Vyhľadávanie</string>
+    <string name="corner_radius">Polomer rohu</string>
+    <string name="background_opacity">Priehľadnosť pozadia</string>
+    <string name="graph_axis">Os grafu</string>
+    <string name="y_axis_description">Zvoľte až 2 možnosti pre os Y.</string>
 </resources>
