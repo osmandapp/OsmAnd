@@ -4117,4 +4117,5 @@
     <string name="poi_toilets_disposal_bucket">Smaltimento dei servizi igienici: secchio</string>
     <string name="poi_street_cabinet_water_management">Tipo di cabina: gestione dell\'acqua</string>
     <string name="poi_street_cabinet_waste">Tipo di cabina: rifiuto</string>
+    <string name="poi_bandy">Bandy</string>
 </resources>
