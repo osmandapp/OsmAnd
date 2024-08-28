@@ -189,18 +189,4 @@ object KAlgorithms {
 			file.delete()
 		}
 	}
-
-	fun getFileNameWithoutExtension(f: KFile): String? {
-		return getFileNameWithoutExtension(f.name())
-	}
-
-	fun getFileNameWithoutExtension(name: String?): String? {
-		if (name != null) {
-			val index = name.lastIndexOf('.')
-			if (index != -1) {
-				return name.substring(0, index)
-			}
-		}
-		return name
-	}
 }
