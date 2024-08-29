@@ -3,9 +3,10 @@ package net.osmand.shared.filters
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.filters.OtherTrackParam.VISIBLE_ON_MAP
 import net.osmand.shared.filters.OtherTrackParam.WITH_WAYPOINTS
+import net.osmand.shared.util.PlatformUtil
 
 enum class TrackFilterType(
-	val nameResId: String,
+	private val nameResId: String,
 	val filterType: FilterType,
 	val property: GpxParameter?,
 	val measureUnitType: MeasureUnitType,
@@ -200,4 +201,8 @@ enum class TrackFilterType(
 		null,
 		false,
 		listOf(VISIBLE_ON_MAP, WITH_WAYPOINTS));
+
+	fun getName(): String {
+		return PlatformUtil.getStringResource(nameResId)
+	}
 }

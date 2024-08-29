@@ -2,6 +2,7 @@ package net.osmand
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.enums.MetricsConstants
+import net.osmand.shared.api.KOsmAndSettings
 import net.osmand.shared.data.SpeedConstants.KILOMETERS_PER_HOUR
 import net.osmand.shared.data.SpeedConstants.METERS_PER_SECOND
 import net.osmand.shared.data.SpeedConstants.MILES_PER_HOUR
@@ -16,9 +17,11 @@ import java.lang.ref.WeakReference
 
 object OsmAndContextImpl: OsmAndContext {
 	private var app: WeakReference<OsmandApplication>? = null
+	private lateinit var settings: KOsmAndSettingsImpl
 
 	fun initialize(application: OsmandApplication) {
 		app = WeakReference(application)
+		settings = KOsmAndSettingsImpl(application)
 	}
 
 	override fun isGpxFileVisible(path: String): Boolean {
@@ -48,8 +51,7 @@ object OsmAndContextImpl: OsmAndContext {
 
 	override fun getMetricSystem(): KMetricsConstants? {
 		app?.get()?.let {
-			val metricsConstants = it.settings.METRIC_SYSTEM.get()
-			return when(metricsConstants) {
+			return when(it.settings.METRIC_SYSTEM.get()) {
 				MetricsConstants.KILOMETERS_AND_METERS -> KMetricsConstants.KILOMETERS_AND_METERS
 				MetricsConstants.MILES_AND_FEET -> KMetricsConstants.MILES_AND_FEET
 				MetricsConstants.MILES_AND_METERS -> KMetricsConstants.MILES_AND_METERS
@@ -70,5 +72,9 @@ object OsmAndContextImpl: OsmAndContext {
 				return sm.matches(name)
 			}
 		}
+	}
+
+	override fun getSettings(): KOsmAndSettings {
+		return settings
 	}
 }

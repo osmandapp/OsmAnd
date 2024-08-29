@@ -33,12 +33,10 @@ kotlin {
     val kxml2Version = "2.1.8"
     val sqliterVersion = "1.3.1"
     val dateTimeVersion = "0.6.1"
+    val coroutinesVersion = "1.8.1"
 
     sourceSets {
         commonMain.dependencies {
-            implementation(kotlin("test"))
-            implementation(kotlin("test-common"))
-            implementation(kotlin("test-annotations-common"))
             implementation("org.jetbrains.kotlin:kotlin-stdlib")
             implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
             implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -46,11 +44,14 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
             implementation("com.squareup.okio:okio:$okioVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
         }
         androidMain.dependencies {
             implementation("androidx.sqlite:sqlite:$sqliteVersion")
             implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
             implementation("net.sf.kxml:kxml2:$kxml2Version")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
         }
         iosMain.dependencies {
             implementation("co.touchlab:sqliter-driver:$sqliterVersion")

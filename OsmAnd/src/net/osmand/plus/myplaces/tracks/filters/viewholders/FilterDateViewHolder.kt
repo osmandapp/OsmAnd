@@ -58,7 +58,7 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 
 	fun bindView(filter: DateTrackFilter, activity: Activity) {
 		this.filter = filter
-		title.setText(filter.trackFilterType.nameResId)
+		title.text = filter.trackFilterType.getName()
 		updateExpandState()
 		updateValues()
 		valueFromInputContainer.setOnClickListener {

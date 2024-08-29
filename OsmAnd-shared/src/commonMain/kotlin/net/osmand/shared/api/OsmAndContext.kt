@@ -9,4 +9,5 @@ interface OsmAndContext {
 	fun getSpeedSystem(): SpeedConstants?
 	fun getMetricSystem(): KMetricsConstants?
 	fun getNameStringMatcher(name: String): KStringMatcher
+	fun getSettings(): KOsmAndSettings
 }

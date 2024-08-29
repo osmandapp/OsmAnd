@@ -169,7 +169,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			setNavigationOnClickListener {
 				closeWithoutApply()
 			}
-			setTitle(currentChangesFilter.trackFilterType.nameResId)
+			setTitle(currentChangesFilter.trackFilterType.getName())
 		}
 	}
 

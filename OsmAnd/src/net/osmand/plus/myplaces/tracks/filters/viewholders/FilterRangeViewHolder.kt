@@ -147,7 +147,7 @@ open class FilterRangeViewHolder(
 	var isBinding = false
 	fun bindView(filter: RangeTrackFilter<*>) {
 		this.filter = filter
-		title.setText(filter.trackFilterType.nameResId)
+		title.text = filter.trackFilterType.getName()
 		valueFromInputContainer.labelText =
 			"${app.getString(R.string.shared_string_from)}, ${
 				getMeasureUnitType().getFilterUnitText(
