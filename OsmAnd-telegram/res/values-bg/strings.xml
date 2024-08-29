@@ -145,4 +145,5 @@
     <string name="shared_string_sort_by">Сортиране</string>
     <string name="shared_string_back">Назад</string>
     <string name="shared_string_sort">Сортиране</string>
+    <string name="shared_string_second_short">с</string>
 </resources>
