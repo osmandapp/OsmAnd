@@ -1799,6 +1799,9 @@ public class RouteResultPreparation {
 			Collections.sort(roads, new Comparator<AttachedRoadInfo>() {
 				@Override
 				public int compare(AttachedRoadInfo o1, AttachedRoadInfo o2) {
+					if (o1.speakPriority == o2.speakPriority) {
+						return -Integer.compare(o1.lanes, o2.lanes);
+					}
 					return -Integer.compare(o1.speakPriority, o2.speakPriority);
 				}
 			});
@@ -1864,8 +1867,6 @@ public class RouteResultPreparation {
 		// Set properties for the TurnType object
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
-
-
 		return t;
 	}
 
