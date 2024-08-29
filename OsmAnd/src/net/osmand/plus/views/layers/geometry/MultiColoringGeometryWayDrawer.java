@@ -1,28 +1,22 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Shader;
+import android.graphics.*;
+import android.util.Pair;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
+//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
+//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -60,25 +54,30 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	@Override
-	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
-	                     @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
+	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
+	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		if (coloringType.isDefault() || coloringType.isCustomColor() || coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			super.drawPath(collection, baseOrder, shouldDrawArrows, pathsData);
 		} else if (coloringType.isGradient()) {
-			GeometryWayStyle<?> prevStyle = null;
-			List<DrawPathData31> dataArr = new ArrayList<>();
-			for (DrawPathData31 data : pathsData) {
-				if (prevStyle != null && data.style == null) {
-					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
-					dataArr.clear();
-				}
-				prevStyle = data.style;
-				dataArr.add(data);
+			drawGradient(collection, baseOrder, shouldDrawArrows, pathsData);
+		}
+	}
+
+	protected void drawGradient(@NonNull VectorLinesCollection collection, int baseOrder,
+	                            boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
+		int lineId = LINE_ID;
+		GeometryWayStyle<?> prevStyle = null;
+		List<DrawPathData31> dataArr = new ArrayList<>();
+		for (DrawPathData31 data : pathsData) {
+			if (prevStyle != null && data.style == null) {
+				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
+				dataArr.clear();
 			}
-			if (!dataArr.isEmpty() && prevStyle != null) {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
-			}
+			prevStyle = data.style;
+			dataArr.add(data);
+		}
+		if (!dataArr.isEmpty() && prevStyle != null) {
+			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 		}
 	}
 
@@ -279,7 +278,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		private int getCircleColor(@NonNull GeometrySolidWayStyle<?> style) {
 			if (style instanceof GeometryGradientWayStyle<?>) {
 				GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
-				return ColorPalette.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
+				return ColorPalette.Companion.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
 			}
 			return style.getColor(0);
 		}

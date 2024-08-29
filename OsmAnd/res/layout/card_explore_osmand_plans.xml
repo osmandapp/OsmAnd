@@ -3,7 +3,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/bg_color"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<LinearLayout
 		android:id="@+id/banner_background"
@@ -21,7 +21,7 @@
 			android:text="@string/explore_osmnad_plans_to_find_suitable"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular" />
+			android:textStyle="normal" />
 
 		<LinearLayout
 			android:id="@+id/button_learn_more"
@@ -48,7 +48,7 @@
 					android:paddingHorizontal="@dimen/content_padding_small"
 					android:text="@string/explore_plans"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:layout_width="@dimen/standard_icon_size"

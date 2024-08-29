@@ -76,6 +76,7 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
 
@@ -205,7 +206,7 @@ public class MapRendererContext {
 		}
 		if (!mapStyles.containsKey(rendName)) {
 			Log.d(TAG, "Style '" + rendName + "' not in cache");
-			if (mapStylesCollection.getStyleByName(rendName) == null) {
+			if (mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) {
 				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
 				loadRenderer(rendName);
 			}
@@ -250,6 +251,7 @@ public class MapRendererContext {
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
+	@Nullable
 	public MapPresentationEnvironment getMapPresentationEnvironment() {
 		return mapPresentationEnvironment;
 	}
@@ -295,7 +297,7 @@ public class MapRendererContext {
 
 	private void loadRenderer(String rendName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getRenderer(rendName);
-		if (mapStylesCollection.getStyleByName(rendName) == null && renderer != null) {
+		if ((mapStylesCollection.getStyleByName(rendName) == null || IGNORE_CORE_PRELOADED_STYLES) && renderer != null) {
 			try {
 				loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
 				if (renderer.getDependsName() != null) {
@@ -340,7 +342,7 @@ public class MapRendererContext {
 		if (obfsCollection != null) {
 			obfsCollection.removeDirectory(dirPath);
 		}
-		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+		recreateRasterAndSymbolsProvider(this.providerType);
 	}
 
 	public void addDirectory(String dirPath) {
@@ -348,7 +350,7 @@ public class MapRendererContext {
 		if (obfsCollection != null && !obfsCollection.hasDirectory(dirPath)) {
 			obfsCollection.addDirectory(dirPath);
 		}
-		recreateRasterAndSymbolsProvider(ProviderType.MAIN);
+		recreateRasterAndSymbolsProvider(this.providerType);
 	}
 
 	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {

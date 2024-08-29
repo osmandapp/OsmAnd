@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:osmand="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -43,7 +42,7 @@
             android:text="@string/option_available_only_in_osmand_pro"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_regular" />
+            android:textStyle="normal" />
 
         <LinearLayout
             android:id="@+id/button_learn_more"
@@ -71,7 +70,7 @@
                     android:paddingBottom="@dimen/content_padding_half"
                     android:text="@string/shared_string_learn_more"
                     android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_medium" />
+                    app:typefaceWeight="medium" />
 
             </FrameLayout>
 

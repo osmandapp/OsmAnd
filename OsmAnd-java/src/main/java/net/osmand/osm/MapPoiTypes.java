@@ -60,7 +60,6 @@ public class MapPoiTypes {
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
 	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
 
-
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
 	}
@@ -947,7 +946,9 @@ public class MapPoiTypes {
 		if (!hasName && pt.isNameOnly()) {
 			return null;
 		}
-		if (relation && !pt.isRelation()) {
+		boolean multy = "multipolygon".equals(otherTags.get("type")) || "site".equals(otherTags.get("type"));
+		// example of site is scottish parliament POI
+		if (!multy && relation && !pt.isRelation()) {
 			return null;
 		}
 

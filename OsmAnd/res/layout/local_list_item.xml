@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 				android:contentDescription="@string/shared_string_more_actions"
 				android:focusable="false"
 				android:tint="?attr/default_icon_color"
-				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+				app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			<androidx.appcompat.widget.AppCompatCheckBox
 				android:id="@+id/compound_button"

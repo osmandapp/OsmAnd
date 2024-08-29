@@ -256,31 +256,34 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void syncSettingsItems(@NonNull String key,
 	                              @Nullable LocalFile localFile,
 	                              @Nullable RemoteFile remoteFile,
-	                              @NonNull RemoteFilesType filesType,
+	                              @NonNull RemoteFilesType type,
 	                              @NonNull SyncOperationType operation,
-	                              boolean shouldReplace,
-	                              boolean restoreDeleted) {
+	                              boolean shouldReplace, boolean restoreDeleted) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			registerSyncBackupTask(key, syncTask);
 			switch (operation) {
-				case SYNC_OPERATION_DELETE:
+				case SYNC_OPERATION_DELETE -> {
 					if (remoteFile != null) {
-						syncTask.deleteItem(remoteFile.item);
+						if (remoteFile.item != null) {
+							syncTask.deleteItem(remoteFile.item);
+						}
 					} else if (localFile != null) {
-						syncTask.deleteLocalItem(localFile.item);
+						if (localFile.item != null) {
+							syncTask.deleteLocalItem(localFile.item);
+						}
 					}
-					break;
-				case SYNC_OPERATION_UPLOAD:
-					if (localFile != null) {
+				}
+				case SYNC_OPERATION_UPLOAD -> {
+					if (localFile != null && localFile.item != null) {
 						syncTask.uploadLocalItem(localFile.item);
 					}
-					break;
-				case SYNC_OPERATION_DOWNLOAD:
-					if (remoteFile != null) {
-						syncTask.downloadItem(remoteFile.item, filesType, shouldReplace, restoreDeleted);
+				}
+				case SYNC_OPERATION_DOWNLOAD -> {
+					if (remoteFile != null && remoteFile.item != null) {
+						syncTask.downloadItem(remoteFile.item, type, shouldReplace, restoreDeleted);
 					}
-					break;
+				}
 			}
 		} else {
 			throw new IllegalStateException("Already syncing " + key);

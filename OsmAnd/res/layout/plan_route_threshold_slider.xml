@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:background="?attr/bg_color"
@@ -21,7 +21,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:text="@string/threshold_distance" />
@@ -31,7 +31,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
 			tools:text="5 m" />

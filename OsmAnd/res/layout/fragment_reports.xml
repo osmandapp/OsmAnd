@@ -1,6 +1,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    osmand:srcCompat="@drawable/ic_action_data"/>
+                    app:srcCompat="@drawable/ic_action_data"/>
 
                 <Spinner
                     android:id="@+id/monthReportsSpinner"
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
+                    app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -78,7 +78,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    osmand:srcCompat="@drawable/ic_world_globe_dark"/>
+                    app:srcCompat="@drawable/ic_world_globe_dark"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
-                    osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
+                    app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                android:layout_marginEnd="16dp" />
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        osmand:srcCompat="@drawable/ic_group"/>
+                        app:srcCompat="@drawable/ic_group"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    osmand:srcCompat="@drawable/ic_map"/>
+                    app:srcCompat="@drawable/ic_map"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -250,7 +250,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:scaleType="center"
-                    osmand:srcCompat="@drawable/ic_action_bitcoin"/>
+                    app:srcCompat="@drawable/ic_action_bitcoin"/>
 
                 <LinearLayout
                     android:id="@+id/donationsLayout"
@@ -306,7 +306,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:scaleType="center"
-                        osmand:srcCompat="@drawable/ic_action_bitcoin"/>
+                        app:srcCompat="@drawable/ic_action_bitcoin"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -358,7 +358,7 @@
                     android:layout_width="56dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    osmand:srcCompat="@drawable/ic_group"/>
+                    app:srcCompat="@drawable/ic_group"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -426,8 +426,8 @@
                     android:clickable="false"
                     android:gravity="start|center_vertical"
                     android:textSize="@dimen/default_desc_text_size"
-                    osmand:textAllCapsCompat="false"
-                    osmand:typeface="@string/font_roboto_medium"
+                    android:textAllCaps="false"
+                    app:typefaceWeight="medium"
                     tools:text="http://osmand.net/osm_live"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

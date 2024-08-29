@@ -16,6 +16,7 @@
 
 package net.osmand.plus.views.controls;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -48,8 +49,8 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 
 import java.util.Locale;
 
@@ -224,7 +225,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.NORMAL);
 		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, HALF_TRANSP);
 		tabTextSelectedAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextSelectedAlpha, OPAQUE);
-		tabTypeface = FontCache.getRobotoMedium(context);
+		tabTypeface = FontCache.getMediumFont();
 		a.recycle();
 
 		setMarginBottomTabContainer();

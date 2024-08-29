@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/map_alarm_warning"
 	android:layout_width="@dimen/map_alarm_size"
@@ -11,7 +11,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		osmand:srcCompat="@drawable/warnings_limit" />
+		app:srcCompat="@drawable/warnings_limit" />
 
 	<TextView
 		android:id="@+id/map_alarm_warning_text"
@@ -20,7 +20,7 @@
 		android:layout_gravity="center"
 		android:textColor="@color/activity_background_color_dark"
 		android:textSize="@dimen/map_alarm_text_size"
-		android:textStyle="bold"
+		app:typefaceWeight="medium"
 		tools:text="60" />
 
 	<TextView
@@ -30,7 +30,7 @@
 		android:layout_gravity="bottom|center_horizontal"
 		android:layout_marginBottom="@dimen/map_alarm_bottom_text_margin"
 		android:textSize="@dimen/map_alarm_bottom_text_size"
-		android:textStyle="bold"
+		app:typefaceWeight="medium"
 		tools:text="1.2 km"
 		tools:textColor="@color/activity_background_color_dark" />
 

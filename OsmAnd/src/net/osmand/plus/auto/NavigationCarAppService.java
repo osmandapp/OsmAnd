@@ -1,5 +1,6 @@
 package net.osmand.plus.auto;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -11,7 +12,9 @@ import androidx.car.app.validation.HostValidator;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 /**
  * Entry point for the templated app.
@@ -21,6 +24,8 @@ import net.osmand.plus.OsmandApplication;
  * Cars Library developer guide</a>.
  */
 public final class NavigationCarAppService extends CarAppService {
+
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -50,32 +55,18 @@ public final class NavigationCarAppService extends CarAppService {
 	@Override
 	@NonNull
 	public Session onCreateSession() {
+		OsmandApplication app = getApp();
+		Notification notification = app.getNotificationHelper().buildCarAppNotification();
+		startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+
 		NavigationSession session = new NavigationSession();
-		getApp().getLocationProvider().addLocationListener(session);
 		session.getLifecycle()
-				.addObserver(
-						new DefaultLifecycleObserver() {
-							@Override
-							public void onCreate(@NonNull LifecycleOwner owner) {
-								getApp().setCarNavigationSession(session);
-							}
-
-							@Override
-							public void onStart(@NonNull LifecycleOwner owner) {
-								getApp().getOsmandMap().getMapView().setupRenderingView();
-							}
-
-							@Override
-							public void onStop(@NonNull LifecycleOwner owner) {
-								getApp().getOsmandMap().getMapView().setupRenderingView();
-							}
-
-							@Override
-							public void onDestroy(@NonNull LifecycleOwner owner) {
-								getApp().setCarNavigationSession(null);
-								getApp().getLocationProvider().removeLocationListener(session);
-							}
-						});
+				.addObserver(new DefaultLifecycleObserver() {
+					@Override
+					public void onDestroy(@NonNull LifecycleOwner owner) {
+						stopForeground(STOP_FOREGROUND_REMOVE);
+					}
+				});
 
 		return session;
 	}

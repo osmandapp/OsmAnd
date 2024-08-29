@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/wikivoyage_bg_color"
     android:orientation="vertical"
@@ -31,7 +31,7 @@
 				android:maxLines="1"
 				android:gravity="center_vertical"
 				android:textSize="@dimen/dialog_header_text_size"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/select_language_text_view"
@@ -46,7 +46,7 @@
 				android:letterSpacing="@dimen/text_button_letter_spacing"
 				android:padding="@dimen/context_menu_padding_margin_tiny"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:background="@drawable/wikipedia_select_lang_bg_dark_n"
 				tools:drawableLeft="@drawable/ic_action_map_language"
 				tools:ignore="UnusedAttribute"
@@ -89,7 +89,7 @@
             android:gravity="center_vertical"
             android:text="@string/read_full_article"
             android:textAllCaps="true"
-            osmand:typeface="@string/font_roboto_medium"
+            app:typefaceWeight="medium"
             tools:background="@drawable/bt_round_long_night"
             tools:textColor="?attr/ctx_menu_controller_text_color" />
 

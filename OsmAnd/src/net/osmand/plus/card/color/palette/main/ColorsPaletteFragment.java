@@ -173,6 +173,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 			// to avoid any possible memory leaks
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(ALL_COLORS_PROCESS_ID);
+			controller.onAllColorsScreenClosed();
 		}
 	}
 

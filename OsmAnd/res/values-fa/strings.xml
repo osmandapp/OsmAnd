@@ -4490,4 +4490,7 @@
     <string name="avg_sensor_temperature">دما، میانگین</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="change_key_binding"/>
+    <string name="shared_string_automatically">خودکار</string>
+    <string name="ask_every_time">همیشه بپرس</string>
+    <string name="quick_action_routes_summary">کلیدی برای نمایش یا پنهان‌سازی %1$s روی نقشه.</string>
 </resources>

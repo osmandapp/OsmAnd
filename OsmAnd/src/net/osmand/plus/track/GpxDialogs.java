@@ -25,8 +25,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -39,7 +39,7 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -58,7 +58,7 @@ public class GpxDialogs {
 
 	public static void selectGPXFile(@NonNull FragmentActivity activity, boolean showCurrentGpx,
 	                                 boolean multipleChoice,
-	                                 CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                 CallbackWithObject<GpxFile[]> callbackWithObject,
 	                                 boolean nightMode) {
 		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -97,7 +97,7 @@ public class GpxDialogs {
 	private static void createDialog(@NonNull FragmentActivity activity,
 	                                 boolean showCurrentGpx,
 	                                 boolean multipleChoice,
-	                                 CallbackWithObject<GPXFile[]> callbackWithObject,
+	                                 CallbackWithObject<GpxFile[]> callbackWithObject,
 	                                 List<GPXInfo> gpxInfoList,
 	                                 ContextMenuAdapter adapter,
 	                                 int themeRes,
@@ -141,7 +141,7 @@ public class GpxDialogs {
 				GPXInfo info = gpxInfoList.get(position);
 				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
 
-				GPXTrackAnalysis analysis = null;
+				GpxTrackAnalysis analysis = null;
 				if (currentlyRecordingTrack) {
 					analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 				} else {
@@ -188,7 +188,7 @@ public class GpxDialogs {
 		if (multipleChoice) {
 			builder.setTitle(R.string.show_gpx);
 			builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-				GPXFile currentGPX = null;
+				GpxFile currentGPX = null;
 				//clear all previously selected files before adding new one
 				if (app.getSelectedGpxHelper() != null) {
 					app.getSelectedGpxHelper().clearAllGpxFilesToShow(false);
@@ -257,7 +257,7 @@ public class GpxDialogs {
 					String filePath = gpxInfo.getFilePath();
 					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 					if (selectedGpxFile != null) {
-						callbackWithObject.processResult(new GPXFile[] {selectedGpxFile.getGpxFile()});
+						callbackWithObject.processResult(new GpxFile[] {selectedGpxFile.getGpxFile()});
 					} else {
 						String fileName = gpxInfo.getFileName();
 						GpxUiHelper.loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
@@ -330,12 +330,12 @@ public class GpxDialogs {
 				ImportHelper importHelper = mapActivity.getImportHelper();
 				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile gpxFile) {
+					public void onSaveComplete(boolean success, GpxFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.getPath());
 						}
 						importHelper.setGpxImportListener(null);
 					}

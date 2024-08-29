@@ -86,6 +86,12 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateBitmaps(true);
+	}
+
+	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		if (tb.getZoom() < 3) {
 			clearMapMarkersCollections();

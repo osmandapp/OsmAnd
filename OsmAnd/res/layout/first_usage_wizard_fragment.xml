@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -32,10 +32,10 @@
 					android:layout_height="48dp"
 					android:layout_marginStart="16dp"
 					android:layout_marginTop="16dp"
-					osmand:layout_constraintStart_toStartOf="parent"
-					osmand:layout_constraintTop_toTopOf="parent"
-					osmand:srcCompat="@drawable/ic_action_osmand_logo"
-					osmand:tint="@color/icon_color_osmand_light" />
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:srcCompat="@drawable/ic_action_osmand_logo"
+					app:tint="@color/icon_color_osmand_light" />
 
 				<ImageButton
 					android:id="@+id/actions_button"
@@ -44,10 +44,10 @@
 					android:layout_height="48dp"
 					android:layout_gravity="center"
 					android:contentDescription="@string/shared_string_other"
-					android:tint="?attr/active_color_basic"
-					osmand:layout_constraintEnd_toEndOf="parent"
-					osmand:layout_constraintTop_toTopOf="parent"
-					osmand:srcCompat="@drawable/ic_overflow_menu_with_background" />
+					app:tint="?attr/active_color_basic"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:srcCompat="@drawable/ic_overflow_menu_with_background" />
 
 				<TextView
 					android:layout_width="wrap_content"
@@ -57,10 +57,9 @@
 					android:text="@string/welcome_header"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="24sp"
-					android:textStyle="bold"
-					osmand:layout_constraintStart_toStartOf="parent"
-					osmand:layout_constraintTop_toBottomOf="@+id/logo"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/logo"
+					app:typefaceWeight="medium" />
 
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,7 +107,7 @@
 						android:layout_height="60dp"
 						android:scaleType="center"
 						android:tint="?attr/default_icon_color"
-						osmand:srcCompat="@drawable/ic_map" />
+						app:srcCompat="@drawable/ic_map" />
 
 					<LinearLayout
 						android:layout_width="0dp"
@@ -145,8 +144,8 @@
 						android:layout_height="48dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/shared_string_location"
-						android:tint="?attr/default_icon_color"
-						osmand:srcCompat="@drawable/ic_action_my_location" />
+						app:tint="?attr/default_icon_color"
+						app:srcCompat="@drawable/ic_action_my_location" />
 
 				</LinearLayout>
 
@@ -156,7 +155,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/content_padding"
 					android:gravity="center"
-					osmand:dialogButtonHeight="@dimen/setting_list_item_small_height"
+					app:dialogButtonHeight="@dimen/setting_list_item_small_height"
 					tools:dialogButtonType="secondary"
 					tools:dialogButtonTitle="@string/shared_string_download"/>
 

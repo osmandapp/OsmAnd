@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static android.graphics.Typeface.DEFAULT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLINE_PHOTOS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
@@ -51,7 +52,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -70,6 +70,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -87,13 +88,7 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MenuBuilder {
 
@@ -617,7 +612,7 @@ public class MenuBuilder {
 			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			AndroidUtils.setMargins(llTextParams, icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
-			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+			textPrefixView.setTypeface(DEFAULT);
 			textPrefixView.setTextSize(12);
 			textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textPrefixView.setMinLines(1);
@@ -632,7 +627,7 @@ public class MenuBuilder {
 		AndroidUtils.setMargins(llTextParams,
 				icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
 		textView.setLayoutParams(llTextParams);
-		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
@@ -663,7 +658,7 @@ public class MenuBuilder {
 			LinearLayout.LayoutParams llTextSecondaryParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			AndroidUtils.setMargins(llTextSecondaryParams, icon != null ? 0 : dpToPx(16f), 0, 0, dpToPx(6f));
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
-			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+			textViewSecondary.setTypeface(DEFAULT);
 			textViewSecondary.setTextSize(14);
 			textViewSecondary.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textViewSecondary.setText(secondaryText);
@@ -677,7 +672,7 @@ public class MenuBuilder {
 			buttonTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 			AndroidUtils.setMargins(buttonTextViewParams, dpToPx(8), 0, dpToPx(8), 0);
 			buttonTextView.setLayoutParams(buttonTextViewParams);
-			buttonTextView.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+			buttonTextView.setTypeface(FontCache.getMediumFont());
 			buttonTextView.setAllCaps(true);
 			buttonTextView.setTextColor(ContextCompat.getColor(view.getContext(), !light ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n));
 			buttonTextView.setText(buttonText);
@@ -802,7 +797,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llTextParams, dpToPx(16f), dpToPx(8f), 0, 0);
 		textPrefixView.setLayoutParams(llTextParams);
-		textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+		textPrefixView.setTypeface(DEFAULT);
 		textPrefixView.setTextSize(12);
 		textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 		textPrefixView.setMinLines(1);
@@ -815,7 +810,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llDescriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llDescriptionParams, dpToPx(16f), dpToPx(2f), 0, dpToPx(8f));
 		textView.setLayoutParams(llDescriptionParams);
-		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(WikiArticleHelper.getPartialContent(description));
@@ -946,7 +941,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
 		AndroidUtils.setMargins(llButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
 		button.setLayoutParams(llButtonParams);
-		button.setTypeface(FontCache.getRobotoMedium(app));
+		button.setTypeface(FontCache.getMediumFont());
 		button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
 		button.setTextSize(14);
 		int paddingSides = dpToPx(10f);
@@ -1061,7 +1056,7 @@ public class MenuBuilder {
 		transportRect.setLayoutParams(trParams);
 		transportRect.setGravity(Gravity.CENTER);
 		transportRect.setAllCaps(true);
-		transportRect.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+		transportRect.setTypeface(FontCache.getMediumFont());
 		transportRect.setTextColor(Color.WHITE);
 		transportRect.setTextSize(10);
 		transportRect.setMaxLines(1);
@@ -1192,7 +1187,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llTextDescParams, dpToPx(64f), 0, dpToPx(40f), dpToPx(13f));
 		textView.setLayoutParams(llTextDescParams);
-		textView.setTypeface(FontCache.getRobotoRegular(context));
+		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
@@ -1255,7 +1250,7 @@ public class MenuBuilder {
 			@Override
 			public void onClick(View v) {
 				PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
-				poiFiltersHelper.clearSelectedPoiFilters();
+				poiFiltersHelper.clearGeneralSelectedPoiFilters();
 				poiFiltersHelper.addSelectedPoiFilter(filter);
 				QuickSearchToolbarController controller = new QuickSearchToolbarController();
 				controller.setTitle(filter.getName());
@@ -1276,7 +1271,7 @@ public class MenuBuilder {
 				controller.setOnCloseButtonClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						poiFiltersHelper.clearSelectedPoiFilters();
+						poiFiltersHelper.clearGeneralSelectedPoiFilters();
 						mapActivity.hideTopToolbar(controller);
 						mapActivity.refreshMap();
 					}
@@ -1311,7 +1306,7 @@ public class MenuBuilder {
 		AndroidUtils.setMargins(llWikiButtonParams, 0, 0, 0, dpToPx(8f));
 		//button.setMinimumHeight(dpToPx(36f));
 		button.setLayoutParams(llWikiButtonParams);
-		button.setTypeface(FontCache.getRobotoRegular(context));
+		button.setTypeface(DEFAULT);
 		int bg;
 		if (selected) {
 			bg = light ? R.drawable.context_menu_controller_bg_light_selected : R.drawable.context_menu_controller_bg_dark_selected;

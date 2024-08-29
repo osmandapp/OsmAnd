@@ -18,13 +18,13 @@ public class ZoomInButton extends MapButton {
 		super(mapActivity, view, id, alwaysVisible);
 		setIconId(R.drawable.ic_zoom_in);
 		setRoundTransparentBackground();
-		setOnClickListener(v -> {
+		view.setOnClickListener(v -> {
 			if (mapActivity.getContextMenu().zoomInPressed()) {
 				return;
 			}
 			mapActivity.getMapView().zoomInAndAdjustTiltAngle();
 		});
-		setOnLongClickListener(notUseCouldBeNull -> {
+		view.setOnLongClickListener(notUseCouldBeNull -> {
 			ConfigureMapDialogs.showMapMagnifierDialog(mapActivity.getMapView());
 			return true;
 		});

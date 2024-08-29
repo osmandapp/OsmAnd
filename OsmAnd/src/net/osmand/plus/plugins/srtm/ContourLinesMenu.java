@@ -8,6 +8,7 @@ import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
@@ -228,7 +229,7 @@ public class ContourLinesMenu {
 					List<IndexItem> srtms = DownloadResources.findIndexItemsAt(
 							app, mapActivity.getMapLocation(), DownloadActivityType.SRTM_COUNTRY_FILE,
 							false, 1, true);
-					SrtmDownloadItem srtmDownloadItem = convertToSrtmDownloadItem(srtms);
+					SrtmDownloadItem srtmDownloadItem = convertToSrtmDownloadItem(app, srtms);
 					if (srtmDownloadItem != null) {
 						contextMenuAdapter.addItem(createDownloadSrtmMapsItem(mapActivity));
 						contextMenuAdapter.addItem(createSrtmDownloadItem(mapActivity, srtmDownloadItem));
@@ -253,14 +254,15 @@ public class ContourLinesMenu {
 	}
 
 	@Nullable
-	private static SrtmDownloadItem convertToSrtmDownloadItem(List<IndexItem> srtms) {
+	private static SrtmDownloadItem convertToSrtmDownloadItem(@NonNull OsmandApplication app, List<IndexItem> srtms) {
 		if (Algorithms.isEmpty(srtms)) {
 			return null;
 		}
 		List<DownloadItem> individualResources = srtms.get(0).getRelatedGroup().getIndividualDownloadItems();
 		for (DownloadItem downloadItem : individualResources) {
-			if (downloadItem instanceof SrtmDownloadItem) {
-				return (SrtmDownloadItem) downloadItem;
+			if (downloadItem instanceof SrtmDownloadItem srtmDownloadItem) {
+				srtmDownloadItem.updateMetric(app);
+				return srtmDownloadItem;
 			}
 		}
 		return null;

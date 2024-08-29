@@ -34,7 +34,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
@@ -52,7 +52,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.Objects;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener, InAppPurchaseHelper.InAppPurchaseListener {
+		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener,
+		InAppPurchaseHelper.InAppPurchaseListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 						android:maxLines="1"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="London" />
 
 					<LinearLayout
@@ -68,7 +68,7 @@
 							android:layout_marginRight="@dimen/content_padding_half"
 							android:layout_marginStart="@dimen/content_padding_half"
 							android:layout_marginLeft="@dimen/content_padding_half"
-							osmand:srcCompat="@drawable/ic_action_distance_16"
+							app:srcCompat="@drawable/ic_action_distance_16"
 							android:contentDescription="@string/distance"/>
 
 						<View
@@ -98,7 +98,7 @@
 							android:layout_marginRight="@dimen/content_padding_half"
 							android:layout_marginStart="@dimen/content_padding_half"
 							android:layout_marginLeft="@dimen/content_padding_half"
-							osmand:srcCompat="@drawable/ic_action_arrow_down_16"
+							app:srcCompat="@drawable/ic_action_arrow_down_16"
 							android:tint="@color/icon_color_default_light"
 							android:contentDescription="@string/distance" />
 
@@ -129,7 +129,7 @@
 							android:layout_marginRight="@dimen/content_padding_half"
 							android:layout_marginStart="@dimen/content_padding_half"
 							android:layout_marginLeft="@dimen/content_padding_half"
-							osmand:srcCompat="@drawable/ic_action_arrow_up_16"
+							app:srcCompat="@drawable/ic_action_arrow_up_16"
 							android:tint="@color/icon_color_default_light"
 							android:contentDescription="@string/distance" />
 
@@ -174,7 +174,7 @@
 								android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/default_desc_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:drawableTint="?attr/wikivoyage_active_color"
 								tools:text="@string/mapillary_menu_title_username"
 								android:paddingStart="@dimen/content_padding_small_half"
@@ -214,7 +214,7 @@
 								android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
 								android:textColor="?attr/active_color_basic"
 								android:textSize="@dimen/default_desc_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:drawableTint="?attr/wikivoyage_active_color"
 								tools:text="@string/shared_string_profiles"
 								android:paddingStart="@dimen/content_padding_small_half"
@@ -260,7 +260,7 @@
 						android:paddingTop="@dimen/content_padding_half"
 						android:textColor="?attr/wikivoyage_active_color"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:drawableLeft="@drawable/ic_action_read_article"
 						tools:drawableTint="?attr/wikivoyage_active_color"
 						tools:ignore="UnusedAttribute"
@@ -299,7 +299,7 @@
 						android:paddingTop="@dimen/content_padding_half"
 						android:textColor="?attr/wikivoyage_active_color"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:drawableRight="@drawable/ic_action_read_later_fill"
 						tools:drawableTint="?attr/wikivoyage_active_color"
 						tools:ignore="UnusedAttribute"

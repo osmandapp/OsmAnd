@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/left_button_container"
 	android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
 		android:paddingHorizontal="@dimen/content_padding_small_half"
 		android:gravity="center"
 		android:textSize="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_medium"
+		app:typefaceWeight="medium"
 		tools:text="@string/shared_string_overview" />
 
 </FrameLayout>

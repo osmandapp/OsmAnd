@@ -55,4 +55,19 @@ public class QuickActionIds {
 	public static final int TERRAIN_COLOR_SCHEME_ACTION = 55;
 	public static final int CONTINUOUS_MAP_ZOOM_IN_ACTION = 56;
 	public static final int CONTINUOUS_MAP_ZOOM_OUT_ACTION = 57;
+	public static final int SHOW_HIDE_CYCLE_ROUTES_ACTION = 58;
+	public static final int SHOW_HIDE_MTB_ROUTES_ACTION = 59;
+	public static final int SHOW_HIDE_HIKING_ROUTES_ACTION = 60;
+	public static final int SHOW_HIDE_DIFFICULTY_CLASSIFICATION_ACTION = 61;
+	public static final int SHOW_HIDE_SKI_SLOPES_ROUTES_ACTION = 62;
+	public static final int SHOW_HIDE_HORSE_ROUTES_ACTION = 63;
+	public static final int SHOW_HIDE_WHITEWATER_SPORTS_ROUTES_ACTION = 64;
+	public static final int SHOW_HIDE_FITNESS_TRAILS_ROUTES_ACTION = 65;
+	public static final int SHOW_HIDE_RUNNING_ROUTES_ACTION = 66;
+	public static final int OPEN_WUNDERLINQ_DATAGRID_ACTION = 67;
+	public static final int CHANGE_MAP_ORIENTATION_ACTION = 68;
+	public static final int SHOW_HIDE_NAVIGATION_VIEW_ACTION = 69;
+	public static final int SHOW_HIDE_SEARCH_VIEW_ACTION = 70;
+	public static final int SHOW_HIDE_DRAWER_ACTION = 71;
+	public static final int NAVIGATE_PREVIOUS_SCREEN_ACTION = 72;
 }

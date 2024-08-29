@@ -35,7 +35,7 @@
 			android:text="@string/redeem_promo_code"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 	</LinearLayout>
 

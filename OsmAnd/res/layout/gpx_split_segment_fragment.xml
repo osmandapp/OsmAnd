@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"
-                osmand:typeface="@string/font_roboto_medium"
+                app:typefaceWeight="medium"
                 android:textSize="@dimen/default_split_segments_overview"
                 tools:text="Overview"/>
 
@@ -99,7 +99,7 @@
                         android:background="@null"
                         tools:text="40 km"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -145,7 +145,7 @@
                         android:background="@null"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_split_segments_data"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         tools:text="15:24:58" />
 
                     <TextView
@@ -189,7 +189,7 @@
                         android:background="@null"
                         tools:text="15:34:58"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -253,7 +253,7 @@
                         android:background="@null"
                         tools:text="25 000 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -298,7 +298,7 @@
                         android:background="@null"
                         tools:text="1/2335 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -308,7 +308,7 @@
                         android:background="@null"
                         tools:text="1 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -318,7 +318,7 @@
                         android:background="@null"
                         tools:text="2335 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -362,7 +362,7 @@
                         android:background="@null"
                         tools:text="6280/6285 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -372,7 +372,7 @@
                         android:background="@null"
                         tools:text="6280 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -382,7 +382,7 @@
                         android:background="@null"
                         tools:text="6285 m"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -445,7 +445,7 @@
                         android:background="@null"
                         tools:text="3:20:12"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -490,7 +490,7 @@
                         android:background="@null"
                         tools:text="11.1 km/h"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView
@@ -533,7 +533,7 @@
                         android:background="@null"
                         tools:text="93/2 kmg/h"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -543,7 +543,7 @@
                         android:background="@null"
                         tools:text="93 kmg/h"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <net.osmand.plus.widgets.TextViewEx
@@ -553,7 +553,7 @@
                         android:background="@null"
                         tools:text="2 kmg/h"
                         android:textColor="?android:attr/textColorPrimary"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         android:textSize="@dimen/default_split_segments_data"/>
 
                     <TextView

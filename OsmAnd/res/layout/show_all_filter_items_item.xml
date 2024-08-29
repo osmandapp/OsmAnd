@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
 		android:text="@string/shared_string_show_all"
 		android:textColor="?attr/color_dialog_buttons"
 		android:textSize="16sp"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		tools:text="Show all" />
 
 </FrameLayout>

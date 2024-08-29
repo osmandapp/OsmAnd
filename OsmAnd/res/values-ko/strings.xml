@@ -2972,7 +2972,6 @@
     <string name="upload_all">모두 업로드하기</string>
     <string name="cloud_recent_changes">변경 사항</string>
     <string name="rendering_attr_whiteWaterSports_name">급류 스포츠</string>
-    <string name="rendering_attr_alpineHiking_name">난이도 등급</string>
     <string name="cloud_conflicts">충돌</string>
     <string name="cloud_all_changes_uploaded">모든 변경사항이 업로드됨</string>
     <string name="sync_now">지금 동기화</string>

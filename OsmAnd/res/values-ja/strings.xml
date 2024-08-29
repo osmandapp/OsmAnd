@@ -5204,7 +5204,6 @@ POIの更新は利用できません</string>
     <string name="key_event_action_toggle_drower">サイドメニューの表示/非表示</string>
     <string name="map_widget_glide_target_desc">目標点に到達するために必要な滑空比を表示します。</string>
     <string name="key_event_action_open_navigation_view">ナビゲーション画面を開く</string>
-    <string name="rendering_attr_alpineHiking_name">難易度の分類</string>
     <string name="rendering_value_sacScale_description">スイス・アルペン・クラブ(スイス山岳会)</string>
     <string name="release_4_5">• BLE/ANT+ センサー:接続を再構築し、受信したデータをGPXに書き込み表示するように
 \n

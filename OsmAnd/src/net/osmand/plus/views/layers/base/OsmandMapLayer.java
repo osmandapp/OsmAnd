@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -60,6 +61,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected OsmandMapTileView view;
 	protected boolean mapActivityInvalidated;
 	protected boolean mapRendererChanged;
+	protected boolean invalidated;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -68,6 +70,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
+	protected float density = 0f;
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
@@ -146,6 +149,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return mapActivity;
 	}
 
+	public void setInvalidated(boolean invalidated) {
+		this.invalidated = invalidated;
+	}
+
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		MapRendererView mapRenderer = getMapRenderer();
@@ -220,6 +227,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
 		}
+		float density = getContext().getResources().getDisplayMetrics().density;
+		if (this.density != density) {
+			this.density = density;
+			updateResources();
+		}
+	}
+
+	protected void updateResources(){
+
 	}
 
 	@Override
@@ -391,12 +407,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return (int) textScale * radiusPoi;
 	}
 
-	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon, @NonNull ScaleType scaleType) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setScaleType(scaleType);
 		imageView.setImageDrawable(icon);
 	}
 
@@ -407,7 +423,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
 		OsmandApplication app = getApplication();
-		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		MapActivity activity = getMapActivity();
+		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);

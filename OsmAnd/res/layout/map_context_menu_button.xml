@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="0dp"
 	android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
 			android:paddingRight="@dimen/content_padding_half"
 			android:textAllCaps="true"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			android:duplicateParentState="true"
 			tools:text="Button"
 			android:paddingStart="@dimen/content_padding_half"

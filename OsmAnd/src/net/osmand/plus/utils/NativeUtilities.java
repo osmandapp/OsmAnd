@@ -477,11 +477,11 @@ public class NativeUtilities {
 		return new PointI(x31, y31);
 	}
 
-	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31, @NonNull LatLon location) {
+	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31, @NonNull LatLon location, boolean readGeotiff) {
 		float height = mapRenderer.getLocationHeightInMeters(location31);
 		if (height > MIN_ALTITUDE_VALUE) {
 			return height;
-		} else {
+		} else if (readGeotiff) {
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 			if (mapRendererContext != null) {
 				List<LatLon> locations = new ArrayList<LatLon>();

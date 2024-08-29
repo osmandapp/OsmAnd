@@ -29,7 +29,7 @@
                 android:paddingLeft="@dimen/content_padding_small"
                 android:text="@string/recalc_angle_dialog_title"
                 android:textColor="?android:textColorPrimary"
-                app:typeface="@string/font_roboto_medium"
+                app:typefaceWeight="medium"
                 android:textSize="@dimen/default_list_text_size_large" />
 
             <TextView

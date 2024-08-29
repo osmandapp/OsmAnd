@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
@@ -61,7 +62,7 @@ public class PopUpMenu {
 		float compoundBtnWidth = contentPadding * 3;
 
 		float additional = iconPartWidth;
-		if (widthMode == PopUpMenuWidthMode.STANDARD) {
+		if (widthMode == PopUpMenuWidthMode.STANDARD && displayData.showCompound) {
 			additional += compoundBtnWidth;
 		}
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
@@ -72,12 +73,14 @@ public class PopUpMenu {
 		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
-		if (shouldShowAsDropDown(ctx)) {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
-			listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
-		} else {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
-			listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+		if (displayData.customDropDown) {
+			if (shouldShowAsDropDown(ctx)) {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+				listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+			} else {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+				listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+			}
 		}
 		if (displayData.bgColor != 0) {
 			listPopupWindow.setBackgroundDrawable(new ColorDrawable(displayData.bgColor));

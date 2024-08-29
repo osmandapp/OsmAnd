@@ -960,7 +960,7 @@
     <string name="srtm_paid_version_title">Topografie-Erweiterung</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung „Topografie“, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
-    <string name="download_srtm_maps">Höhenlinien</string>
+    <string name="download_srtm_maps">Konturlinie</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
     <string name="av_camera_pic_size_descr">Bildgröße der Kamera festlegen</string>
     <string name="av_def_action_video">Video aufzeichnen</string>
@@ -3112,7 +3112,7 @@
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
-    <string name="wake_time">Zeitüberschreitung nach dem Aufwachen</string>
+    <string name="wake_time">Timeout (Abschaltzeit) nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
@@ -3589,7 +3589,7 @@
     <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
     <string name="turn_screen_on_power_button">Einschaltknopf</string>
     <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
-    <string name="turn_screen_on_wake_time_descr">Wählen Sie die Zeitüberschreitung des Bildschirms nach dem Aufwachen. („%1$s“, um keine Zeitüberschreitung anzuwenden.)</string>
+    <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. („%1$s“, um keinen Timeout anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
     <string name="screen_timeout_descr">Wenn „%1$s“ eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
@@ -3608,7 +3608,7 @@
 \nEine Woche hat 10 080 Minuten. 
 \nEin Monat hat 43 829 Minuten.</string>
     <string name="tiles_storage_descr">Wählen Sie, wie heruntergeladene Kacheln gespeichert werden sollen.</string>
-    <string name="default_screen_timeout">Zeitüberschreitung des Standardbildschirms</string>
+    <string name="default_screen_timeout">Timeout (Abschaltzeit) des Standardbildschirms</string>
     <string name="width_limit_description">Geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
@@ -3620,7 +3620,7 @@
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
     <string name="shared_string_night_map">Nachtkarte</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Zeitüberschreitung nach dem Aufwachen“.</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert „Bildschirm eingeschaltet lassen“ unter „Timeout nach dem Aufwachen“.</string>
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
@@ -4934,7 +4934,7 @@
     <string name="temperature_layer">Temperaturebene</string>
     <string name="pressure_layer">Luftdruckebene</string>
     <string name="wind_layer">Windebene</string>
-    <string name="cloud_layer">Bewölkungsebene</string>
+    <string name="cloud_layer">Wolkenebene</string>
     <string name="precipitation_layer">Niederschlagsebene</string>
     <string name="quick_action_temperature_layer">Ein Schalter zum Ein- oder Ausblenden der Temperaturebene auf der Karte.</string>
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
@@ -5313,7 +5313,6 @@
     <string name="rendering_value_sacScale_description">Schweizer Alpen-Club</string>
     <string name="shared_string_not_checked">Nicht geprüft</string>
     <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
-    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="write_bearing">Peilung schreiben</string>
     <string name="write_heading">Richtung schreiben</string>
@@ -5520,7 +5519,7 @@
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
-    <string name="key_event_category_map_interactions">Karteninteraktionen</string>
+    <string name="key_event_category_map_interactions">Karten-Interaktionen</string>
     <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ-Datenraster öffnen</string>
     <string name="key_event_category_actions">Aktionen</string>
     <string name="change_button">Schaltfläche ändern</string>
@@ -5542,7 +5541,7 @@
     <string name="discard_changes_prompt">Änderungen verwerfen?</string>
     <string name="row_number">Zeile %1$s</string>
     <string name="tripltek_promo">Tripltek-Promo für %1$s Monate</string>
-    <string name="tripltek_promo_description">Kostenloser Zugriff für %1$s Monate auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw.</string>
+    <string name="tripltek_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
     <string name="see_all_plans">Alle Pläne anzeigen</string>
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
@@ -5661,8 +5660,8 @@
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
-    <string name="fix_north_up">Festen Norden oben aktivieren</string>
-    <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
+    <string name="fix_north_up">Norden oben fixieren</string>
+    <string name="fix_north_up_descr">In der Kartenausrichtung \"Nord oben\" Karte nicht mit Gesten drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
@@ -5734,7 +5733,7 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers_descr">Alle Kartenebenen oberhalb der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
-    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um das Relief zu visualisieren.</string>
+    <string name="height_legend_description">Höhenfarbkarten werden verwendet, um Relief darzustellen.</string>
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
@@ -5782,10 +5781,10 @@
     <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
-    <string name="quick_action_first_intermediate">Erste Zwischenstufe</string>
+    <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
     <string name="quick_action_directions_from">Startpunkt</string>
     <string name="quick_action_location_by_gpx">Standort nach GPX</string>
-    <string name="quick_action_destination">Ziel</string>
+    <string name="quick_action_destination">Zielort</string>
     <string name="quick_action_to_my_location">Zu meinem Standort</string>
     <string name="quick_action_move_map_left">Karte nach links</string>
     <string name="quick_action_next_app_profile">App-Profil zum nächsten</string>
@@ -5810,7 +5809,7 @@
     <string name="quick_action_remove_next_destination">Nächster Zielpunkt</string>
     <string name="quick_action_terrain">Typ der Einfärbung des Geländes</string>
     <string name="shared_string_set">Einstellen</string>
-    <string name="quick_action_track_waypoint">Track-Wegpunkt</string>
+    <string name="quick_action_track_waypoint">Wegpunkt</string>
     <string name="energy_avg_info_description">Akkustand pro Minute: %1$s
 \nEnergieverbrauch (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
@@ -5848,5 +5847,41 @@
     <string name="auto_25_chars_route_tsll">Leicht links abbiegen</string>
     <string name="auto_25_chars_route_tu">Bitte wenden</string>
     <string name="driving_region_india">Indien</string>
-    <string name="driving_region_uk">UK und ähnlich</string>
+    <string name="driving_region_uk">UK und andere</string>
+    <string name="hugerock_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Relief usw. für %1$s Monat</string>
+    <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
+    <string name="shared_string_automatically">Automatisch</string>
+    <string name="ask_every_time">Jedes Mal fragen</string>
+    <string name="detailed_track_guidance">Detaillierte Streckenführung</string>
+    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Track mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
+    <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
+    <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
+    <string name="help_article_map_tracks_name">Strecken</string>
+    <string name="help_article_map_routes_name">Routen</string>
+    <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
+    <string name="add_widget_below">Widget unten hinzufügen</string>
+    <string name="add_widget_above">Widget oben hinzufügen</string>
+    <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
+    <string name="add_widget_to_the_left">Widget links hinzufügen</string>
+    <string name="delete_widget">Widget löschen?</string>
+    <string name="delete_widget_description">Dieses Widget wird gelöscht. Sie können es später im Bildschirm Konfigurieren wiederherstellen.</string>
+    <string name="battery_saving_mode">Batteriesparmodus</string>
+    <string name="graph_axis">Grafik-Achse</string>
+    <string name="y_axis_description">Wählen Sie bis zu zwei Optionen für die Y-Achse.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad der Wanderwege</string>
+    <string name="shared_string_interface">Benutzeroberfläche</string>
+    <string name="quick_action_previous_screen_desc">Ein Schalter, um zum vorherigen Bildschirm zu navigieren.</string>
+    <string name="quick_action_previous_screen_title">Vorheriger Bildschirm</string>
+    <string name="quick_action_search_view_desc">Ein Schalter, um die Suchansicht zu öffnen oder zu schließen.</string>
+    <string name="quick_action_search_view_title">Suchansicht</string>
+    <string name="quick_action_navigation_view_desc">Ein Schalter, um die Navigationsansicht zu öffnen oder zu schließen.</string>
+    <string name="quick_action_verb_navigate">Navigieren</string>
+    <string name="quick_action_drawer_desc">Ein Schalter, um das Seitenmenü ein- oder auszublenden.</string>
+    <string name="quick_action_navigation_view_title">Navigationsansicht</string>
+    <string name="quick_action_switch_compass_desc">Ein Schalter, um die Kartenausrichtung zu wechseln.</string>
+    <string name="quick_action_drawer_title">Seitenmenü</string>
+    <string name="background_opacity">Hintergrund-Deckkraft</string>
+    <string name="corner_radius">Eckenradius</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

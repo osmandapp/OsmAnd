@@ -20,8 +20,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -33,7 +33,7 @@ import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.track.SelectTrackTabsFragment;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -119,7 +119,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		return super.getActionNameRes();
 	}
 
-	private void startStopSimulation(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
+	private void startStopSimulation(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
@@ -228,7 +228,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	private void setupGpxTrackInfo(@NonNull View trackInfoContainer,
 	                               @NonNull String gpxName,
-	                               @NonNull GPXTrackAnalysis analysis,
+	                               @NonNull GpxTrackAnalysis analysis,
 	                               @NonNull OsmandApplication app) {
 		UiUtilities iconsCache = app.getUIUtilities();
 
@@ -398,7 +398,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
-	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
+	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
@@ -407,7 +407,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			if (selectedGpxFile != null) {
 				onGpxFileAvailable.processResult(selectedGpxFile.getGpxFile());
 			} else {
-				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+				CallbackWithObject<GpxFile[]> onGpxFileLoaded = gpxFiles -> {
 					onGpxFileAvailable.processResult(gpxFiles[0]);
 					return true;
 				};

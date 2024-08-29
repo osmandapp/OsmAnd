@@ -3,7 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.activities.MapActivity;
@@ -19,7 +19,7 @@ public interface TravelHelper {
 	interface GpxReadCallback {
 		void onGpxFileReading();
 
-		void onGpxFileRead(@Nullable GPXFile gpxFile);
+		void onGpxFileRead(@Nullable GpxFile gpxFile);
 	}
 
 
@@ -32,7 +32,7 @@ public interface TravelHelper {
 	boolean isAnyTravelBookPresent();
 
 	@NonNull
-	List<WikivoyageSearchResult> search(@NonNull String searchQuery);
+	List<WikivoyageSearchResult> search(@NonNull String searchQuery, int requestNumber);
 
 	@NonNull
 	List<TravelArticle> getPopularArticles();

@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -296,7 +296,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		super.onCardPressed(card);
-		if (card instanceof ShapesCard || card instanceof IconsCard) {
+		if (card instanceof ShapesCard) {
 			updateNameIcon();
 		}
 	}
@@ -315,7 +315,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	@NonNull
 	public String getSelectedCategory() {
-		return selectedGroup != null ? selectedGroup.name : "";
+		return selectedGroup != null ? selectedGroup.getName() : "";
 	}
 
 	@Override
@@ -349,12 +349,12 @@ public abstract class PointEditorFragment extends EditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		this.selectedGroup = group;
 		if (updateAppearance) {
-			setColor(group.color);
-			setIconName(group.iconName);
-			setBackgroundType(group.backgroundType);
+			setColor(group.getColor());
+			setIconName(group.getIconName());
+			setBackgroundType(group.getBackgroundType());
 			updateContent();
 		}
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.name));
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.getName()));
 	}
 
 	private boolean shouldUpdateAppearance() {
@@ -452,13 +452,13 @@ public abstract class PointEditorFragment extends EditorFragment {
 	protected String getCategoryTextValue() {
 		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
 		if (recyclerView.getAdapter() != null && selectedGroup != null) {
-			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.name)) {
+			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.getName())) {
 				return PERSONAL_CATEGORY;
 			}
-			if (Algorithms.stringsEqual(selectedGroup.name, getDefaultCategoryName())) {
+			if (Algorithms.stringsEqual(selectedGroup.getName(), getDefaultCategoryName())) {
 				return "";
 			}
-			return selectedGroup.name;
+			return selectedGroup.getName();
 		}
 		return "";
 	}
@@ -527,8 +527,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 					notifyItemChanged(previousSelectedPosition);
 				});
 				PointsGroup group = items.get(position);
-				holder.groupName.setText(group.name);
-				holder.pointsCounter.setText(String.valueOf(group.points.size()));
+				holder.groupName.setText(group.getName());
+				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
 				int strokeColor;
 				int strokeWidth;
 				if (Algorithms.objectEquals(selectedGroup, items.get(position))) {
@@ -546,8 +546,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 				}
 				int color;
 				int iconID;
-				if (isCategoryVisible(group.name)) {
-					color = group.color == 0 ? getDefaultColor() : group.color;
+				if (isCategoryVisible(group.getName())) {
+					color = group.getColor() == 0 ? getDefaultColor() : group.getColor();
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);
 				} else {

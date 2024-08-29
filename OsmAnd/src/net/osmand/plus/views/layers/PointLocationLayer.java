@@ -27,15 +27,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AnimatedValue;
-import net.osmand.core.jni.FColorRGB;
-import net.osmand.core.jni.MapMarker;
-import net.osmand.core.jni.MapMarkerBuilder;
-import net.osmand.core.jni.MapMarkersCollection;
-import net.osmand.core.jni.Model3D;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_void;
-import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -83,14 +75,19 @@ public class PointLocationLayer extends OsmandMapLayer
 	private int profileColor;
 
 	private String navigationIconName;
+	@Nullable
 	private Model3D navigationModel;
 	private boolean brokenNavigationModel;
+	@Nullable
 	private LayerDrawable navigationIcon;
 
 	private String locationIconName;
+	@Nullable
 	private Model3D locationModel;
 	private boolean brokenLocationModel;
+	@Nullable
 	private LayerDrawable locationIcon;
+
 	private Bitmap headingIcon;
 	private int headingIconId;
 
@@ -98,7 +95,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandSettings settings;
 	private final Model3dHelper model3dHelper;
-	private boolean nm;
+	private boolean nighMode;
 	private boolean locationOutdated;
 	private Location prevLocation;
 
@@ -284,6 +281,12 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		recreateMarkerCollection();
+	}
+
 	private boolean recreateMarkerCollection() {
 		if (view == null || !hasMapRenderer()) {
 			return false;
@@ -309,7 +312,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		float sectorDirection = 0.0f;
 		float sectorRadius = 0.0f;
 		switch (currentMarkerState) {
-			case MOVE:
+			case MOVE -> {
 				navigationMarker.setVisibility(!showHeading);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(showHeading);
@@ -330,8 +333,8 @@ public class PointLocationLayer extends OsmandMapLayer
 				sectorRadius = (float) (showHeading
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
-				break;
-			case STAY:
+			}
+			case STAY -> {
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(!showHeading);
 				navigationMarkerWithHeading.setVisibility(false);
@@ -352,13 +355,13 @@ public class PointLocationLayer extends OsmandMapLayer
 				sectorRadius = (float) (showHeading
 						? Math.max(headingIcon.getWidth(), headingIcon.getHeight()) / 2
 						: 0);
-				break;
-			case NONE:
-			default:
+			}
+			default -> {
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(false);
 				locationMarkerWithHeading.setVisibility(false);
+			}
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
@@ -380,15 +383,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case MOVE:
-				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
-				break;
-			case STAY:
-				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
-				break;
-			case NONE:
-			default:
+			case MOVE -> locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
+			case STAY -> locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
+			default -> {
 				return null;
+			}
 		}
 		return locMarker;
 	}
@@ -490,15 +489,11 @@ public class PointLocationLayer extends OsmandMapLayer
 		CoreMapMarker locMarker;
 		boolean showHeading = showHeadingCached;
 		switch (currentMarkerState) {
-			case MOVE:
-				locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
-				break;
-			case STAY:
-				locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
-				break;
-			case NONE:
-			default:
+			case MOVE -> locMarker = showHeading ? navigationMarkerWithHeading : navigationMarker;
+			case STAY -> locMarker = showHeading ? locationMarkerWithHeading : locationMarker;
+			default -> {
 				return null;
+			}
 		}
 		return locMarker != null && locMarker.marker != null ? locMarker.marker.getPosition() : null;
 	}
@@ -561,7 +556,6 @@ public class PointLocationLayer extends OsmandMapLayer
 		return location != null ? location : locationProvider.getLastStaleKnownLocation();
 	}
 
-	@Nullable
 	public float getPointBearing() {
 		float result = 0.0f;
 		Location location = null;
@@ -609,8 +603,10 @@ public class PointLocationLayer extends OsmandMapLayer
 			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
 				canvas.rotate(bearing - 90, locationX, locationY);
-				AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
-			} else {
+				if (navigationIcon != null) {
+					AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
+				}
+			} else if (locationIcon != null) {
 				AndroidUtils.drawScaledLayerDrawable(canvas, locationIcon, locationX, locationY, textScale);
 			}
 		}
@@ -754,7 +750,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
 		boolean locationIconChanged = !locationIconName.equals(this.locationIconName);
 		boolean navigationIconChanged = !navigationIconName.equals(this.navigationIconName);
-		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
+		if (appMode != this.appMode || this.nighMode != nighMode || this.locationOutdated != locationOutdated
 				|| this.profileColor != profileColor
 				|| locationIconChanged
 				|| navigationIconChanged
@@ -762,7 +758,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				|| this.carView != carView) {
 			this.appMode = appMode;
 			this.profileColor = profileColor;
-			this.nm = nighMode;
+			this.nighMode = nighMode;
 			this.locationOutdated = locationOutdated;
 			this.locationIconName = locationIconName;
 			this.navigationIconName = navigationIconName;
@@ -881,7 +877,9 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
 				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
-		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
+		return forceUseDefault
+				? getDefaultIcon(locationIconName, LocationIcon.STATIC_DEFAULT.name())
+				: locationIconName;
 	}
 
 	@NonNull
@@ -893,6 +891,19 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		boolean forceUseDefault = LocationIcon.isModel(navigationIconName)
 				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
-		return forceUseDefault ? LocationIcon.MOVEMENT_DEFAULT.name() : navigationIconName;
+		return forceUseDefault
+				? getDefaultIcon(navigationIconName, LocationIcon.MOVEMENT_DEFAULT.name())
+				: navigationIconName;
+	}
+
+	private String getDefaultIcon(@NonNull String iconName, @NonNull String defaultIconName) {
+		String defaultIcon = defaultIconName;
+		if (LocationIcon.isDefaultModel(iconName)) {
+			String iconForDefaultModel = LocationIcon.getIconForDefaultModel(iconName);
+			if (!Algorithms.isEmpty(iconForDefaultModel)) {
+				defaultIcon = iconForDefaultModel;
+			}
+		}
+		return defaultIcon;
 	}
 }

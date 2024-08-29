@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -23,7 +23,7 @@
             android:gravity="center_vertical"
             tools:text="Show passed"
             android:textSize="@dimen/default_sub_text_size"
-            osmand:typeface="@string/font_roboto_medium"
+            app:typefaceWeight="medium"
             android:textColor="@color/active_color_primary_light"/>
 
     </FrameLayout>

@@ -42,7 +42,6 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -57,6 +56,7 @@ import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavorites
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -802,8 +802,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView label = row.findViewById(R.id.category_name);
 			label.setTextColor(getColor(visible ? enabledColor : disabledColor));
 			if (visible) {
-				Typeface typeface = FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf");
-				label.setTypeface(typeface, Typeface.NORMAL);
+				label.setTypeface(FontCache.getMediumFont());
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}

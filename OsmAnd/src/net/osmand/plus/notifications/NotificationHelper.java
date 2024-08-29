@@ -4,22 +4,27 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
+import android.app.Service;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.CarAppNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationHelper {
+
+	public static final Log LOG = PlatformUtil.getLog(NotificationHelper.class);
 
 	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
 	private final OsmandApplication app;
@@ -28,7 +33,6 @@ public class NotificationHelper {
 	private GpxNotification gpxNotification;
 	private CarAppNotification carAppNotification;
 	private DownloadNotification downloadNotification;
-	private ErrorNotification errorNotification;
 	private final List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(@NonNull OsmandApplication app) {
@@ -41,7 +45,6 @@ public class NotificationHelper {
 		gpxNotification = new GpxNotification(app);
 		downloadNotification = new DownloadNotification(app);
 		carAppNotification = new CarAppNotification(app);
-		errorNotification = new ErrorNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
 		all.add(downloadNotification);
@@ -49,12 +52,12 @@ public class NotificationHelper {
 	}
 
 	@Nullable
-	public Notification buildTopNotification() {
-		OsmandNotification notification = acquireTopNotification();
+	public Notification buildTopNotification(@NonNull Service service) {
+		OsmandNotification notification = acquireTopNotification(service);
 		if (notification != null) {
 			removeNotification(notification.getType());
 			setTopNotification(notification);
-			Builder notificationBuilder = notification.buildNotification(false);
+			Builder notificationBuilder = notification.buildNotification(service, false);
 			if (notificationBuilder != null) {
 				return notificationBuilder.build();
 			} else {
@@ -67,31 +70,33 @@ public class NotificationHelper {
 
 	@NonNull
 	public Notification buildDownloadNotification() {
-		return downloadNotification.buildNotification(false).build();
+		return downloadNotification.buildNotification(null, false).build();
 	}
 
 	@NonNull
-	public Notification buildErrorNotification() {
-		removeNotification(errorNotification.getType());
-		setTopNotification(errorNotification);
-		return errorNotification.buildNotification(false).build();
+	public Notification buildCarAppNotification() {
+		return carAppNotification.buildNotification(null, false).build();
 	}
 
 	@Nullable
-	private OsmandNotification acquireTopNotification() {
-		if (navigationNotification.isEnabled()) {
+	private OsmandNotification acquireTopNotification(@Nullable Service service) {
+		if (navigationNotification.isEnabled(service)) {
 			return navigationNotification;
-		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
+		} else if (gpxNotification.isEnabled(service)) {
 			return gpxNotification;
-		} else if (carAppNotification.isEnabled() && carAppNotification.isActive()) {
-			return carAppNotification;
 		} else {
 			return null;
 		}
 	}
 
+	public void resetTopNotification() {
+		for (OsmandNotification n : all) {
+			n.setTop(false);
+		}
+	}
+
 	public void updateTopNotification() {
-		OsmandNotification notification = acquireTopNotification();
+		OsmandNotification notification = acquireTopNotification(null);
 		setTopNotification(notification);
 	}
 
@@ -128,6 +133,15 @@ public class NotificationHelper {
 		}
 	}
 
+	public int getOsmandNotificationId(NotificationType notificationType) {
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				return notification.getOsmandNotificationId();
+			}
+		}
+		return -1;
+	}
+
 	public boolean hasAnyTopNotification() {
 		for (OsmandNotification notification : all) {
 			if (notification.isTop()) {
@@ -162,7 +176,7 @@ public class NotificationHelper {
 
 	public void removeNotifications(boolean inactiveOnly) {
 		for (OsmandNotification notification : all) {
-			if (!inactiveOnly || !notification.isActive()) {
+			if (!inactiveOnly || !notification.isEnabled()) {
 				notification.removeNotification();
 			}
 		}
@@ -175,9 +189,7 @@ public class NotificationHelper {
 					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
 			channel.enableVibration(false);
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
-			NotificationManager mNotificationManager = (NotificationManager) app
-					.getSystemService(Context.NOTIFICATION_SERVICE);
-			mNotificationManager.createNotificationChannel(channel);
+			NotificationManagerCompat.from(app).createNotificationChannel(channel);
 		}
 	}
 }

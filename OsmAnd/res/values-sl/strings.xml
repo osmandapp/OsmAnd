@@ -5293,7 +5293,6 @@
     <string name="shared_string_class">Razred</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Jedke (korozivne) snovi</string>
     <string name="dangerous_goods_description">Na nekaterih cestah in predorih je prevoz nevarnih snovi prepovedan.</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikacije težavnosti</string>
     <string name="write_bearing_description">Med beleženjem k vsaki točki sledi shrani tudi usmeritev</string>
     <string name="write_heading_description">Med beleženjem k vsaki točki sledi shrani tudi smer</string>
     <string name="write_bearing">Pisanje usmeritve</string>

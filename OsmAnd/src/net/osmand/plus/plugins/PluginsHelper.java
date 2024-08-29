@@ -20,8 +20,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -831,6 +831,15 @@ public class PluginsHelper {
 		}
 	}
 
+	public static boolean isMapPositionIconNeeded() {
+		for (OsmandPlugin p : getEnabledPlugins()) {
+			if (p.isMapPositionIconNeeded()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static TrackPointsAnalyser getTrackPointsAnalyser() {
 		List<TrackPointsAnalyser> trackPointsAnalysers = new ArrayList<>();
 		for (OsmandPlugin plugin : getActivePlugins()) {
@@ -854,7 +863,7 @@ public class PluginsHelper {
 
 	@Nullable
 	public static OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GpxTrackAnalysis analysis,
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean calcWithoutGaps, boolean useRightAxis) {
@@ -867,7 +876,7 @@ public class PluginsHelper {
 		return null;
 	}
 
-	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		}

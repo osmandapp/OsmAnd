@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,9 +32,9 @@ import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -213,7 +214,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		View container = view.findViewById(R.id.delete_all_container);
 
 		TextView title = container.findViewById(android.R.id.title);
-		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), getString(R.string.backup_delete_all_data), getString(R.string.backup_delete_all_data)));
+		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), getString(R.string.backup_delete_all_data), getString(R.string.backup_delete_all_data)));
 		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);
@@ -239,7 +240,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 		String deleteAccount = getString(R.string.delete_account);
 		TextView title = container.findViewById(android.R.id.title);
-		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), deleteAccount, deleteAccount));
+		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), deleteAccount, deleteAccount));
 		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);
@@ -262,7 +263,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private void setupRemoveOldData(@NonNull View view) {
 		View container = view.findViewById(R.id.delete_old_container);
 		TextView title = container.findViewById(android.R.id.title);
-		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), getString(R.string.backup_delete_old_data), getString(R.string.backup_delete_old_data)));
+		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), getString(R.string.backup_delete_old_data), getString(R.string.backup_delete_old_data)));
 		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);

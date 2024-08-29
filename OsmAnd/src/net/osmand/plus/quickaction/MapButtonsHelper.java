@@ -14,6 +14,15 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.routes.actions.ShowHideCycleRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideDifficultyClassificationAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideFitnessTrailsAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideHikingRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideHorseRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideMtbRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideRunningRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideSkiSlopesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideWhitewaterSportsAction;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.*;
@@ -75,6 +84,10 @@ public class MapButtonsHelper {
 	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MY_PLACES = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_my_places).category(QuickActionType.MY_PLACES).iconRes(R.drawable.ic_action_favorite);
+
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_INTERFACE = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_interface).category(QuickActionType.INTERFACE).iconRes(R.drawable.ic_action_ui_customization);
 
 	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
 		List<QuickActionType> annotatedFields = new ArrayList<>();
@@ -310,6 +323,15 @@ public class MapButtonsHelper {
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
+		allTypes.add(ShowHideCycleRoutesAction.TYPE);
+		allTypes.add(ShowHideMtbRoutesAction.TYPE);
+		allTypes.add(ShowHideHikingRoutesAction.TYPE);
+		allTypes.add(ShowHideDifficultyClassificationAction.TYPE);
+		allTypes.add(ShowHideSkiSlopesAction.TYPE);
+		allTypes.add(ShowHideHorseRoutesAction.TYPE);
+		allTypes.add(ShowHideWhitewaterSportsAction.TYPE);
+		allTypes.add(ShowHideFitnessTrailsAction.TYPE);
+		allTypes.add(ShowHideRunningRoutesAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);
@@ -325,6 +347,12 @@ public class MapButtonsHelper {
 		allTypes.add(DisplayPositionAction.TYPE);
 		allTypes.add(NextAppProfileAction.TYPE);
 		allTypes.add(PreviousAppProfileAction.TYPE);
+		allTypes.add(ChangeMapOrientationAction.TYPE);
+		// interface
+		allTypes.add(ShowHideNavigationViewAction.TYPE);
+		allTypes.add(ShowHideSearchViewAction.TYPE);
+		allTypes.add(ShowHideDrawerAction.TYPE);
+		allTypes.add(NavigatePreviousScreenAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -391,6 +419,7 @@ public class MapButtonsHelper {
 		filterQuickActions(buttonState, TYPE_SETTINGS, quickActions);
 		filterQuickActions(buttonState, TYPE_MAP_INTERACTIONS, quickActions);
 		filterQuickActions(buttonState, TYPE_MY_PLACES, quickActions);
+		filterQuickActions(buttonState, TYPE_INTERFACE, quickActions);
 
 		return quickActions;
 	}

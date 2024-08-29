@@ -40,7 +40,9 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
@@ -69,6 +71,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	private TravelEstimate destinationTravelEstimate;
 	private boolean shouldShowNextStep;
 	private boolean shouldShowLanes;
+	private boolean use3DButton = true;
 
 	@Nullable
 	CarIcon junctionImage;
@@ -91,7 +94,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, null, null);
-
+		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
 
@@ -110,7 +113,35 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(this);
 			}
 		}
+		OsmandMapTileView mapView = getMapView();
+		if (mapView != null) {
+			mapView.addElevationListener(elevationListener);
+		}
 	}
+
+	@Nullable
+	OsmandMapTileView getMapView() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+			return surfaceRenderer.getMapView();
+		}
+		return null;
+	}
+
+	OsmandMapTileView.ElevationListener elevationListener = new OsmandMapTileView.ElevationListener() {
+		@Override
+		public void onElevationChanging(float angle) {
+			boolean currentUse3DButton = use3DButton;
+			updateUse3DButton();
+			if (currentUse3DButton != use3DButton) {
+				invalidate();
+			}
+		}
+
+		@Override
+		public void onStopChangingElevation(float angle) {
+		}
+	};
 
 	@Override
 	public void onPause(@NonNull LifecycleOwner owner) {
@@ -121,6 +152,10 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			if(surfaceRenderer != null) {
 				surfaceRenderer.setCallback(null);
 			}
+		}
+		OsmandMapTileView mapView = getMapView();
+		if (mapView != null) {
+			mapView.removeElevationListener(elevationListener);
 		}
 	}
 
@@ -239,13 +274,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 						.setOnClickListener(this::compassClick)
 						.build());
 		if (getApp().useOpenGlRenderer()) {
+			int dButtonResource = use3DButton ? R.drawable.ic_action_3d : R.drawable.ic_action_2d;
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_3d)).build())
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), dButtonResource)).build())
 							.setOnClickListener(() -> {
 								if (surfaceRenderer != null) {
 									surfaceRenderer.handleTilt();
 								}
+								invalidate();
 							})
 							.build());
 		}
@@ -389,6 +426,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		boolean nightMode = getCarContext().isDarkMode();
 		CompassMode compassMode = settings.getCompassMode();
 		compassResId = compassMode.getIconId(nightMode);
+	}
+
+	private void updateUse3DButton() {
+		if (getApp().useOpenGlRenderer()) {
+			OsmandMapTileView mapView = getMapView();
+			use3DButton = mapView != null && mapView.getElevationAngle() == OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+		} else {
+			use3DButton = false;
+		}
 	}
 
 	private boolean isRerouting() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 				android:layout_marginBottom="@dimen/bottom_sheet_title_padding_top"
 				android:textColor="?attr/wikivoyage_primary_text_color"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="Point title" />
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -58,7 +58,7 @@
 				android:layout_width="@dimen/acceptable_touch_radius"
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:scaleType="center"
-				osmand:srcCompat="@drawable/ic_action_arrow_up"
+				app:srcCompat="@drawable/ic_action_arrow_up"
 				tools:visibility="visible" />
 
 			<View
@@ -77,7 +77,7 @@
 				android:background="?attr/dashboard_button"
 				android:contentDescription="@string/shared_string_more"
 				android:visibility="visible"
-				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+				app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 		</LinearLayout>
 

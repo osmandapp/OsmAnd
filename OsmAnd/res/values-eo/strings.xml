@@ -342,7 +342,7 @@
     <string name="shared_string_disable">Malaktivigi</string>
     <string name="shared_string_enabled">Aktiva</string>
     <string name="shared_string_disabled">Malaktiva</string>
-    <string name="shared_string_selected">Elektitaj</string>
+    <string name="shared_string_selected">Elektita(j)</string>
     <string name="shared_string_never">Neniam</string>
     <string name="shared_string_help">Helpo</string>
     <string name="shared_string_settings">Agordoj</string>
@@ -427,7 +427,7 @@
     <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
-    <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
+    <string name="delay_to_start_navigation">Ekigi gvidadon turno-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difini tempon de montrado de la kurs-plana ekrano.</string>
     <string name="osmand_parking_overdue">posttempa</string>
@@ -714,7 +714,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>
-    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi gvidadon turno-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
     <string name="gpx_info_subtracks">Subspuroj: %1$s</string>
@@ -5301,7 +5301,6 @@
     <string name="rendering_value_caiScale_description">laŭ skalo de Itala Alpisma Klubo</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC/CAS</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
     <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
     <string name="write_heading">Konservi mov-direkton</string>
     <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
@@ -5838,4 +5837,42 @@
 \nĈefprocesoro (senokupa): %3$s
 \nĈefprocesoro (atendas GPU): %4$s</string>
     <string name="auto_25_chars_route_kl">Veturu je maldekstre</string>
+    <string name="driving_region_uk">Britujo kaj similaj</string>
+    <string name="shared_string_automatically">Aŭtomate</string>
+    <string name="detailed_track_guidance">Detala gvidado laŭ spuro</string>
+    <string name="detailed_track_guidance_description">OsmAnd alproksimigos vian spuron al proksimaj vojoj por liveri avertojn pri ĉiu turno.</string>
+    <string name="quick_action_routes_summary">Butono por montri/kaŝi “%1$s” sur la mapo.</string>
+    <string name="hugerock_promo">Promocio Hugerock por %1$s monatoj</string>
+    <string name="hugerock_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
+    <string name="driving_region_india">Hindujo</string>
+    <string name="ask_every_time">Ĉiam demandi</string>
+    <string name="compass_click_north_is_up">Por ŝanĝi orientiĝon frapetadu tiun ĉi butonon</string>
+    <string name="route_roundabout_exit">Elektu %1$d-an elveturejon</string>
+    <string name="help_article_map_routes_name">Kursoj</string>
+    <string name="help_article_map_tracks_name">Spuroj</string>
+    <string name="add_widget_below">Aldoni fenestraĵon malsupren</string>
+    <string name="add_widget_above">Aldoni fenestraĵon supren</string>
+    <string name="add_widget_to_the_right">Aldoni fenestraĵon dekstren</string>
+    <string name="add_widget_to_the_left">Aldoni fenestraĵon maldekstren</string>
+    <string name="delete_widget">Ĉu forigi fenestraĵon?</string>
+    <string name="delete_widget_description">Tiu ĉi fenestraĵo estos forigita. Vi povas restarigi ĝin per la menuo “Agordi ekranon”.</string>
+    <string name="battery_saving_mode">Bateri-ŝparema reĝimo</string>
+    <string name="graph_axis">Aksoj sur diagramo</string>
+    <string name="y_axis_description">Elekti maksimume du celarojn por akso Y.</string>
+    <string name="app_mode_suv">Sporta Util-Veturilo</string>
+    <string name="rendering_attr_alpineHiking_name">Malfacileco de turismaj kursoj</string>
+    <string name="quick_action_previous_screen_desc">Butono por iri al antaŭa ekrano.</string>
+    <string name="quick_action_previous_screen_title">Antaŭa ekrano</string>
+    <string name="quick_action_verb_navigate">Navigi</string>
+    <string name="quick_action_drawer_desc">Butono por montri/kaŝi flankan tirmenuon.</string>
+    <string name="quick_action_drawer_title">Tirmenuo</string>
+    <string name="quick_action_search_view_desc">Butono por malfermi/fermi ekranon de serĉo.</string>
+    <string name="quick_action_navigation_view_desc">Butono por malfermi/fermi ekranon de navigo.</string>
+    <string name="quick_action_switch_compass_desc">Butono por ŝanĝi orientiĝon de mapo.</string>
+    <string name="shared_string_interface">Fasado</string>
+    <string name="quick_action_search_view_title">Serĉi</string>
+    <string name="quick_action_navigation_view_title">Navigi</string>
+    <string name="background_opacity">Travideblo de fono</string>
+    <string name="corner_radius">Radiuso de angulo</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

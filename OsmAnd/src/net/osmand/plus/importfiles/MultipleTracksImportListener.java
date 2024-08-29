@@ -1,6 +1,6 @@
 package net.osmand.plus.importfiles;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 
 public abstract class MultipleTracksImportListener implements GpxImportListener {
 
@@ -20,7 +20,7 @@ public abstract class MultipleTracksImportListener implements GpxImportListener 
 	}
 
 	@Override
-	public void onSaveComplete(boolean success, GPXFile gpxFile) {
+	public void onSaveComplete(boolean success, GpxFile gpxFile) {
 		importCounter++;
 		checkImportFinished();
 	}

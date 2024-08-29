@@ -1,23 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
-import static net.osmand.plus.routing.AlarmInfoType.BORDER_CONTROL;
-import static net.osmand.plus.routing.AlarmInfoType.HAZARD;
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
-import static net.osmand.plus.routing.AlarmInfoType.STOP;
-import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
-import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
-import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
+import static net.osmand.plus.routing.AlarmInfoType.*;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.view.View;
@@ -42,6 +32,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
@@ -227,7 +218,7 @@ public class AlarmWidget {
 			textPaint.setColor(Color.BLACK);
 			textPaint.setTextSize(WIDGET_BITMAP_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
-			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+			textPaint.setTypeface(FontCache.getMediumFont());
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() / 2f - ((textPaint.descent() + textPaint.ascent()) / 2);
@@ -244,7 +235,7 @@ public class AlarmWidget {
 			textPaint.setColor(ContextCompat.getColor(app, info.americanType ? R.color.activity_background_color_dark : R.color.card_and_list_background_light));
 			textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
-			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+			textPaint.setTypeface(FontCache.getMediumFont());
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() - (textPaint.descent() - textPaint.ascent());

@@ -27,7 +27,9 @@ agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+java_pid*.hprof
 .attach_pid*
+hs_err_pid*
 /.idea
 *.iml
 
@@ -46,3 +48,6 @@ build
 
 #Rendering test files
 OsmAnd-java/src/test/resources/rendering/*
+
+# ApproximationTest resources
+OsmAnd-java/src/test/resources/approximation/*

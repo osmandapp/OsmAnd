@@ -3,7 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -48,7 +48,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|start"
 				android:text="@string/configure_profile"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_list_text_size" />
 		</FrameLayout>

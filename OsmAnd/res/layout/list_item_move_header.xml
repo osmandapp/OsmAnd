@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
 			android:visibility="gone"
 			tools:visibility="visible"
-			osmand:srcCompat="@drawable/ic_action_item_move"
+			app:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color" />
 
 		<LinearLayout
@@ -55,7 +55,7 @@
 				android:singleLine="true"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="@string/plugin_settings" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -67,7 +67,7 @@
 				android:lineSpacingExtra="@dimen/line_spacing_extra_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="@string/list_of_installed_plugins" />
 
 		</LinearLayout>
@@ -85,7 +85,7 @@
 			tools:visibility="visible"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/bottom_sheet_icon_margin"
-			osmand:srcCompat="@drawable/ic_action_item_move"
+			app:srcCompat="@drawable/ic_action_item_move"
 			android:tint="?attr/secondary_icon_color" />
 
 	</LinearLayout>

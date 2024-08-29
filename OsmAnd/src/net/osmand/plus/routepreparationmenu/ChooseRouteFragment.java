@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -483,11 +483,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 				String fileName = null;
 				if (paramsBuilder != null && paramsBuilder.getFile() != null) {
-					GPXFile gpxFile = paramsBuilder.getFile();
-					if (!Algorithms.isEmpty(gpxFile.path)) {
-						fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
-					} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-						fileName = gpxFile.tracks.get(0).name;
+					GpxFile gpxFile = paramsBuilder.getFile();
+					if (!Algorithms.isEmpty(gpxFile.getPath())) {
+						fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.getPath()).getName());
+					} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+						fileName = gpxFile.getTracks().get(0).getName();
 					}
 				}
 				if (Algorithms.isEmpty(fileName)) {
@@ -559,8 +559,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (activity != null) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-			GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+			GpxFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.getPath()));
 			File dir = new File(app.getCacheDir(), "share");
 			if (!dir.exists()) {
 				dir.mkdir();

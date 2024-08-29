@@ -6,9 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.ColoringPurpose;
-import net.osmand.plus.track.Gpx3DWallColorType;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.routing.Gpx3DWallColorType;
+import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;

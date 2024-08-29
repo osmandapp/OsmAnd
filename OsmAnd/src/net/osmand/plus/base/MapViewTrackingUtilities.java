@@ -1,6 +1,8 @@
 package net.osmand.plus.base;
 
 import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
+import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
+import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 
 import android.os.AsyncTask;
@@ -159,7 +161,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		this.lastResetRotationToNorth = lastResetRotationToNorth;
 	}
 
-	public boolean allowRotationAfterReset(){
+	public boolean allowRotationAfterReset() {
+		CompassMode currentMode = settings.getCompassMode();
+		if (currentMode == MANUALLY_ROTATED) {
+			return true;
+		} else if (currentMode == NORTH_IS_UP) {
+			return false;
+		}
 		return System.currentTimeMillis() - lastResetRotationToNorth > DELAY_TO_ROTATE_AFTER_RESET_ROTATION;
 	}
 
@@ -172,11 +180,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > COMPASS_HEADING_THRESHOLD;
 		}
 		if (mapView != null) {
-			boolean preventCompassRotation = !allowRotationAfterReset();
+			boolean preventCompassRotation = false;
 			if (routePlanningMode) {
 				preventCompassRotation = MapRouteInfoMenu.isRelatedFragmentVisible(mapView);
 			}
-			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation) {
+			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation && allowRotationAfterReset()) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
@@ -567,10 +575,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void checkAndUpdateManualRotationMode() {
-		if (settings.isCompassMode(CompassMode.NORTH_IS_UP)) {
-			settings.setCompassMode(CompassMode.MANUALLY_ROTATED);
-			showCompassModeToast();
-		}
 		if (settings.isCompassMode(CompassMode.MANUALLY_ROTATED)) {
 			Float mapRotate = getMapRotate();
 			if (mapRotate != null) {

@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <LinearLayout
@@ -57,7 +57,7 @@
             android:layout_weight="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            osmand:typeface="@string/font_roboto_medium"
+            app:typefaceWeight="medium"
             tools:text="Category name"
             android:layout_marginStart="@dimen/list_content_padding_large" />
 
@@ -71,7 +71,7 @@
             android:background="?attr/dashboard_button"
             android:focusable="false"
             android:scaleType="center"
-            osmand:srcCompat="@drawable/ic_overflow_menu_white"
+            app:srcCompat="@drawable/ic_overflow_menu_white"
             android:visibility="gone"
             tools:visiblity="visible"
             android:layout_marginEnd="4dp" />

@@ -113,13 +113,14 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		app.smartFolderHelper.removeUpdateListener(this)
 	}
 
-	override fun getCurrentTrackGroup(): TracksGroup {
-		return smartFolder!!
+	override fun getCurrentTrackGroup(): TracksGroup? {
+		return smartFolder
 	}
 
+	@androidx.annotation.WorkerThread
 	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
 		if (this.smartFolder == smartFolder) {
-			updateContent()
+			app.runInUIThread { updateContent() }
 		}
 	}
 

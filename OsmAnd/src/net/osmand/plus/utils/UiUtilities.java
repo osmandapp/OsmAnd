@@ -149,6 +149,10 @@ public class UiUtilities {
 		return getLayeredIcon(background, foreground);
 	}
 
+	public void clearCache() {
+		drawableCache.clear();
+	}
+
 	public static Drawable getLayeredIcon(Drawable... icons) {
 		return new LayerDrawable(icons);
 	}

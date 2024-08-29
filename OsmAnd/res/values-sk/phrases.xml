@@ -1966,7 +1966,7 @@
     <string name="poi_wheelchair_accessibility">Prístupnosť invalidným vozíkom</string>
     <string name="poi_observatory_designation">Použitie</string>
     <string name="poi_events_venue">Dejisko podujatí</string>
-    <string name="poi_diet_pescetarian_yes">Pescetariánske jedlá (rybacie)</string>
+    <string name="poi_diet_pescetarian_yes">Pescetariánske jedlá (z mäsa len ryby)</string>
     <string name="poi_chimney">Komín</string>
     <string name="poi_bench_yes">Áno;Lavička</string>
     <string name="poi_maxwidth">Maximálna šírka</string>
@@ -2874,7 +2874,7 @@
     <string name="poi_animal_shelter_horse">Kone</string>
     <string name="poi_animal_shelter_mammal">Cicavce</string>
     <string name="poi_animal_shelter_fish">Ryby</string>
-    <string name="poi_information_route_marker">Turistická/trasová značka</string>
+    <string name="poi_information_route_marker">Turistická/trasová značka zobrazujúca smer</string>
     <string name="poi_bridge_movable_swing">Typ pohyblivého mostu: otočný</string>
     <string name="poi_bridge_movable_lift">Typ pohyblivého mostu: zdvíhací</string>
     <string name="poi_bridge_movable_drawbridge">Typ pohyblivého mostu: padací</string>
@@ -4504,4 +4504,9 @@
     <string name="poi_mcdonalds">McDonald\'s</string>
     <string name="poi_engineer">Kancelária inžiniera/konštruktéra</string>
     <string name="poi_via">Cez</string>
+    <string name="poi_cash_in">Vklad hotovosti</string>
+    <string name="poi_cash_in_customers">Zákazníci</string>
+    <string name="poi_cash_in_yes">Áno</string>
+    <string name="poi_cash_in_no">Nie</string>
+    <string name="poi_diet_pescetarian_no">Pescetariánska diéta (z mäsa len ryby): nie</string>
 </resources>

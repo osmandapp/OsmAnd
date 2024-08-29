@@ -9,7 +9,7 @@
         <item name="android:paddingBottom">@dimen/subHeaderPadding</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/default_desc_text_size</item>
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
         <item name="android:layout_marginStart">@dimen/subHeaderMarginLeft</item>
@@ -21,7 +21,7 @@
         <item name="android:layout_height">@dimen/showAllButtonHeight</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">@dimen/default_sub_text_size</item>
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
         <item name="android:textColor">?attr/dashboard_general_button_text_color</item>
         <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
         <item name="android:layout_marginEnd">@dimen/showAllButtonMarginRight</item>
@@ -275,7 +275,7 @@
 
     <style name="TextAppearance.ListItemCategoryTitle" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
         <item name="android:textSize">@dimen/default_list_text_size</item>
     </style>
 
@@ -372,11 +372,11 @@
         <item name="android:textSize">@dimen/default_list_text_size</item>
         <item name="lineHeight">@dimen/default_title_line_height</item>
         <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
-        <item name="typeface">@string/font_roboto_regular</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TitleStyle.Medium">
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
     </style>
 
     <!-- Description -->
@@ -384,11 +384,11 @@
         <item name="android:textSize">@dimen/default_desc_text_size</item>
         <item name="lineHeight">@dimen/default_desc_line_height</item>
         <item name="android:letterSpacing">@dimen/description_letter_spacing</item>
-        <item name="typeface">@string/font_roboto_regular</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="DescStyle.Medium">
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
     </style>
 
     <!-- Small Description -->
@@ -396,11 +396,11 @@
         <item name="android:textSize">@dimen/default_sub_text_size</item>
         <item name="lineHeight">@dimen/small_desc_line_height</item>
         <item name="android:letterSpacing">@dimen/text_button_letter_spacing</item>
-        <item name="typeface">@string/font_roboto_regular</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="SmallDescStyle.Medium">
-        <item name="typeface">@string/font_roboto_medium</item>
+        <item name="typefaceWeight">medium</item>
     </style>
 
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">

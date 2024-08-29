@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -15,19 +15,19 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="0dp"
 		android:background="?attr/list_background_color"
-		osmand:elevation="0dp">
+		app:elevation="0dp">
 
 		<com.google.android.material.appbar.CollapsingToolbarLayout
 			android:id="@+id/toolbar_layout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|enterAlways">
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|enterAlways">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
@@ -35,9 +35,9 @@
 				android:layout_height="@dimen/toolbar_height"
 				android:layout_marginTop="0dp"
 				android:minHeight="@dimen/toolbar_height"
-				osmand:layout_collapseMode="pin"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp">
+				app:layout_collapseMode="pin"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
 
 				<LinearLayout
 					android:id="@+id/toolbar_container"
@@ -53,8 +53,8 @@
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
 						android:contentDescription="@string/shared_string_back"
-						osmand:srcCompat="@drawable/ic_arrow_back"
-						osmand:tint="@color/icon_color_default_light" />
+						app:srcCompat="@drawable/ic_arrow_back"
+						app:tint="@color/icon_color_default_light" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/toolbar_title"
@@ -65,7 +65,7 @@
 						android:layout_weight="1"
 						android:text="@string/map_widget_config"
 						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/info_button"
@@ -73,7 +73,7 @@
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
 						android:tint="?attr/default_icon_color"
-						osmand:srcCompat="@drawable/ic_action_help_online" />
+						app:srcCompat="@drawable/ic_action_help_online" />
 
 					<androidx.appcompat.widget.AppCompatImageButton
 						android:id="@+id/actions_button"
@@ -82,7 +82,7 @@
 						android:layout_height="@dimen/toolbar_height"
 						android:contentDescription="@string/shared_string_menu"
 						android:tint="?default_icon_color"
-						osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+						app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 				</LinearLayout>
 
@@ -104,7 +104,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -135,7 +135,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</FrameLayout>
 

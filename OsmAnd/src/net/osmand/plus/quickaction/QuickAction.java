@@ -90,13 +90,17 @@ public class QuickAction {
 		return true;
 	}
 
+	public String getExtendedName(@NonNull Context context) {
+		return getExtendedName(context, true);
+	}
+
 	public String getExtendedName(@NonNull Context context, boolean useDash) {
 		return getExtendedName(context, useDash ? R.string.ltr_or_rtl_combine_via_dash : R.string.ltr_or_rtl_combine_via_space);
 	}
 
 	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
 		String name = getName(context);
-		if (name.equals(getRawName())) {
+		if (name.equals(getRawName()) || !shouldUseExtendedName()) {
 			return name;
 		}
 		int actionNameRes = getActionNameRes();
@@ -117,6 +121,10 @@ public class QuickAction {
 
 	public String getRawName() {
 		return name;
+	}
+
+	protected boolean shouldUseExtendedName() {
+		return actionType != null && actionType.shouldUseExtendedName();
 	}
 
 	@NonNull

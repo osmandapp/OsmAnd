@@ -18,10 +18,12 @@ public class QuickActionType {
 	public static final int SETTINGS = 4;
 	public static final int MAP_INTERACTIONS = 5;
 	public static final int MY_PLACES = 6;
+	public static final int INTERFACE = 7;
 
 	private final int id;
 	private final String stringId;
 	private boolean actionEditable;
+	private boolean forceUseExtendedName;
 	@StringRes
 	private int nameRes;
 	@StringRes
@@ -68,6 +70,11 @@ public class QuickActionType {
 		return this;
 	}
 
+	public QuickActionType forceUseExtendedName() {
+		forceUseExtendedName = true;
+		return this;
+	}
+
 	@NonNull
 	public QuickAction createNew() {
 		if(cl != null) {
@@ -104,6 +111,10 @@ public class QuickActionType {
 
 	public boolean isActionEditable() {
 		return actionEditable;
+	}
+
+	public boolean shouldUseExtendedName() {
+		return !actionEditable || forceUseExtendedName;
 	}
 
 	public int getNameRes() {

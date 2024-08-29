@@ -28,7 +28,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
@@ -304,7 +304,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		tvTitle.setText(getString(R.string.shared_string_sound));
 		tvDescription.setText(getString(R.string.voice_announcements));
-		icon.setImageDrawable(getContentIcon(active ?
+		icon.setImageDrawable(getPaintedContentIcon(active ?
 				optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 		cb.setChecked(active);
 		cb.setFocusable(false);
@@ -322,7 +322,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
 				} else {
 					cb.setChecked(!active);
-					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
+					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 				}
 				updateMenu();
 			}
@@ -451,7 +451,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
-
 		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		ImageView icon = itemView.findViewById(R.id.icon);
@@ -546,11 +545,11 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
 			descriptionColorId = ColorUtilities.getActiveColorId(nightMode);
-			GPXFile gpxFile = routeParamsBuilder.getFile();
-			if (!Algorithms.isEmpty(gpxFile.path)) {
-				description = new File(gpxFile.path).getName();
-			} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-				description = gpxFile.tracks.get(0).name;
+			GpxFile gpxFile = routeParamsBuilder.getFile();
+			if (!Algorithms.isEmpty(gpxFile.getPath())) {
+				description = new File(gpxFile.getPath()).getName();
+			} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+				description = gpxFile.getTracks().get(0).getName();
 			}
 		}
 
@@ -664,7 +663,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				});
 			}
 			if (iconId != -1) {
-				builder.setIcon(getContentIcon(iconId));
+				builder.setIcon(getPaintedContentIcon(iconId));
 			}
 			item[0] = builder.create();
 			items.add(item[0]);
@@ -686,14 +685,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	@Override
 	public void attachToRoadsSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 		openPlanRoute(gpxFile, segmentIndex, ATTACH_ROADS_MODE | FOLLOW_TRACK_MODE);
 	}
 
 	@Override
 	public void calculateOnlineSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		gpxFile.setPath(FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT);
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_SRTM_MODE | FOLLOW_TRACK_MODE);
@@ -703,8 +702,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	@Override
 	public void calculateOfflineSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		gpxFile.setPath(FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT);
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_HEIGHTMAP_MODE | FOLLOW_TRACK_MODE);
@@ -712,7 +711,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		});
 	}
 
-	public void openPlanRoute(@NonNull GPXFile gpxFile, int segmentIndex, int mode) {
+	public void openPlanRoute(@NonNull GpxFile gpxFile, int segmentIndex, int mode) {
 		if (mapActivity != null) {
 			MeasurementToolFragment.showInstance(mapActivity, gpxFile, segmentIndex, mode);
 			mapActivity.getMapRouteInfoMenu().hide();
@@ -746,7 +745,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		bottomSheetItem.setChecked(selected);
 		int iconId = selected ? parameter.getActiveIconId() : parameter.getDisabledIconId();
 		if (iconId != -1) {
-			bottomSheetItem.setIcon(getContentIcon(iconId));
+			bottomSheetItem.setIcon(getPaintedContentIcon(iconId));
 		}
 		updateMenu();
 	}

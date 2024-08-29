@@ -21,11 +21,12 @@
 		app:contentInsetRight="0dp"
 		app:contentInsetStart="@dimen/divider_color_light_margin_start" />
 
-	<androidx.core.widget.NestedScrollView
-		android:id="@+id/nested_scroll"
+	<ScrollView
+		android:id="@+id/scroll_view"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1">
+		android:layout_weight="1"
+		android:fillViewport="true">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -136,7 +137,7 @@
 				android:layout_height="wrap_content" />
 		</LinearLayout>
 
-	</androidx.core.widget.NestedScrollView>
+	</ScrollView>
 
 	<View
 		android:id="@+id/buttonDivider"
@@ -158,7 +159,7 @@
 			android:gravity="center"
 			android:text="@string/shared_string_delete"
 			android:visibility="gone"
-			app:textAllCapsCompat="true"
+			android:textAllCaps="true"
 			tools:visibility="visible" />
 
 		<Space
@@ -172,14 +173,14 @@
 			android:layout_height="@dimen/context_menu_buttons_bottom_height"
 			android:gravity="center"
 			android:text="@string/shared_string_cancel"
-			app:textAllCapsCompat="true" />
+			android:textAllCaps="true" />
 
 		<net.osmand.plus.widgets.ButtonEx
 			android:id="@+id/saveButton"
 			style="@style/DashboardGeneralButton"
 			android:layout_height="@dimen/context_menu_buttons_bottom_height"
 			android:gravity="center"
-			app:textAllCapsCompat="true"
+			android:textAllCaps="true"
 			tools:text="Save" />
 	</LinearLayout>
 </LinearLayout>

@@ -14,5 +14,5 @@
     android:paddingStart="@dimen/content_padding"
     android:paddingBottom="@dimen/content_padding_small"
     android:textAppearance="@style/TextAppearance.ListItemTitle"
-    app:typeface="@string/font_roboto_regular"
+    android:textStyle="normal"
     tools:text="@string/auto_zoom_map_descr" />
