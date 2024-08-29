@@ -1464,12 +1464,12 @@ public class RouteResultPreparation {
 		
 		List<int[]> leftLanesInfo = new ArrayList<int[]>();
 		int leftLanes = 0;
-		boolean leftLink = false;
+		int leftMaxPrio = 0;
 		int roadsOnLeft = 0;
 		
 		List<int[]> rightLanesInfo = new ArrayList<int[]>();
 		int rightLanes = 0;
-		boolean rightLink = false;
+		int rightMaxPrio = 0;
 		int roadsOnRight = 0;
 		
 		List<Double> attachedAngles;
@@ -1718,14 +1718,14 @@ public class RouteResultPreparation {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						rs.rightLink |= isSwitchToLink(attached, prevSegm);
+						rs.rightMaxPrio = Math.max(rs.rightMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()));
 						if (turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						rs.leftLink |= isSwitchToLink(attached, prevSegm);
+						rs.leftMaxPrio = Math.max(rs.leftMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()));
 						if (turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
@@ -1780,21 +1780,27 @@ public class RouteResultPreparation {
 		} else {
 			lanes = new int[prevLanesCount];
 			boolean ltr = rs.leftLanes < rs.rightLanes;
-			boolean link = isSwitchToLink(currentSegm, prevSegm);
-			// don't allow to overlap lanes by more 1 than lane i.e. avoid [C;TR|C;TR] -> [C|C;TR]
+			// don't allow to overlap lanes (always keep 1 lane per direction)
+			int overlapMax = 1; // 1 - [C;TR|C;TR] -> [C|C;TR], 0 - [C;TR|C;TR] -> [C|TR]
 			int leftLanes = rs.leftLanes;
 			int rightLanes = rs.rightLanes;
-			if (currentLanesCount + leftLanes > lanes.length + 1) {
-				if (link) {
-					currentLanesCount = Math.max(0, lanes.length - leftLanes) + 1;
-				} else {
-					leftLanes = Math.max(0, lanes.length - currentLanesCount) + 1;
-				}
-			} else if (currentLanesCount + rightLanes > lanes.length + 1) {
-				if (link) {
-					currentLanesCount = Math.max(0, lanes.length - rightLanes) + 1;
-				} else {
-					rightLanes = Math.max(0, lanes.length - currentLanesCount) + 1;
+			if (rightLanes + currentLanesCount + leftLanes > lanes.length + overlapMax) {
+				int currentPriority = highwaySpeakPriority(currentSegm.getObject().getHighway());
+				int[] sortPriorities = new int[] { rs.leftMaxPrio, currentPriority, rs.rightMaxPrio };
+				Arrays.sort(sortPriorities);
+				for (int ind = 0; ind < 3; ind++) {
+					if (rs.leftMaxPrio == sortPriorities[2 - ind] && leftLanes > rs.roadsOnLeft) {
+						leftLanes = Math.max(rs.roadsOnLeft, lanes.length - currentLanesCount - rightLanes);
+					}
+					if (rs.rightMaxPrio == sortPriorities[2 - ind] && rightLanes > rs.roadsOnRight) {
+						rightLanes = Math.max(rs.roadsOnRight, lanes.length - currentLanesCount - leftLanes);
+					}
+					if (currentPriority == sortPriorities[2 - ind] && currentLanesCount > 1 + overlapMax) {
+						currentLanesCount = Math.max(1, lanes.length - leftLanes - rightLanes + overlapMax);
+					}
+					if (rightLanes + currentLanesCount + leftLanes <= lanes.length + overlapMax) {
+						break;
+					}
 				}
 			}
 			// active lanes
