@@ -1792,37 +1792,9 @@ public class RouteResultPreparation {
 			mainType.speakPriority = highwaySpeakPriority(currentSegm.getObject().getHighway());
 			mainType.turnType = mainLaneType;
 			roads.add(mainType);
-			Comparator<AttachedRoadInfo> comparatorByAngle = new Comparator<AttachedRoadInfo>() {
-				@Override
-				public int compare(AttachedRoadInfo o1, AttachedRoadInfo o2) {
-					return Double.compare(o1.attachedAngle, o2.attachedAngle);
-				}
-			};
-			Collections.sort(rs.leftLanesInfo, comparatorByAngle);
-			Collections.sort(rs.rightLanesInfo, comparatorByAngle);
-			// assign turn types
-			int type = mainLaneType;
-			for (AttachedRoadInfo i : rs.leftLanesInfo) {
-				int turnByAngle = getTurnByAngle(i.attachedAngle);
-				if (turnByAngle >= type) {
-					type = TurnType.getPrev(type);
-				} else {
-					type = turnByAngle;
-				}
-				i.turnType = type;
-				roads.add(i);
-			}
-			type = mainLaneType;
-			for (AttachedRoadInfo i : rs.rightLanesInfo) {
-				int turnByAngle = getTurnByAngle(i.attachedAngle);
-				if (turnByAngle <= type) {
-					type = TurnType.getNext(type);
-				} else {
-					type = turnByAngle;
-				}
-				i.turnType = type;
-				roads.add(i);
-			}
+			
+			synteticAssignTurnTypes(rs, mainLaneType, roads, true);
+			synteticAssignTurnTypes(rs, mainLaneType, roads, false);
 			// sort important last
 			Collections.sort(roads, new Comparator<AttachedRoadInfo>() {
 				@Override
@@ -1895,6 +1867,31 @@ public class RouteResultPreparation {
 
 
 		return t;
+	}
+
+	private void synteticAssignTurnTypes(RoadSplitStructure rs, int mainLaneType, List<AttachedRoadInfo> roads, boolean left) {
+		Comparator<AttachedRoadInfo> comparatorByAngle = new Comparator<AttachedRoadInfo>() {
+			@Override
+			public int compare(AttachedRoadInfo o1, AttachedRoadInfo o2) {
+				return (left? 1 : -1) * Double.compare(o1.attachedAngle, o2.attachedAngle);
+			}
+		};
+		List<AttachedRoadInfo> col = left ? rs.leftLanesInfo : rs.rightLanesInfo;
+		Collections.sort(col, comparatorByAngle);
+		int type = mainLaneType;
+		for (int i = col.size() - 1; i >= 0; i--) {
+			AttachedRoadInfo info = col.get(i);
+			int turnByAngle = getTurnByAngle(info.attachedAngle);
+			if (left && turnByAngle >= type) {
+				type = TurnType.getPrev(type);
+			} else if (!left && turnByAngle <= type) {
+				type = TurnType.getNext(type);
+			} else {
+				type = turnByAngle;
+			}
+			info.turnType = type;
+			roads.add(info);
+		}
 	}
 
 
