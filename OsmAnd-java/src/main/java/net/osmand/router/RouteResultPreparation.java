@@ -1864,7 +1864,7 @@ public class RouteResultPreparation {
 					}
 				}
 			}
-			ind = endActive - 1;
+			ind = lanes.length - 1;
 			for (AttachedRoadInfo i : rs.rightLanesInfo) {
 				for (int k = 0; k < i.lanes; k++) {
 					if (lanes[ind] == 0) {
@@ -1874,8 +1874,8 @@ public class RouteResultPreparation {
 					} else {
 						TurnType.setTertiaryTurn(lanes, ind, i.turnType);
 					}
-					ind++;
-					if (ind > lanes.length - 1) {
+					ind--;
+					if (ind < endActive) {
 						break;
 					}
 				}
