@@ -4,6 +4,7 @@ import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import net.osmand.Location;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -80,6 +81,7 @@ public class Amenity extends MapObject {
 	private TIntArrayList x;
 	private String mapIconName;
 	private int order;
+	private Map<Integer, List<TagValuePair>> tagGroups;
 
 	public int getOrder() {
 		return order;
@@ -87,6 +89,20 @@ public class Amenity extends MapObject {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public Map<Integer, List<TagValuePair>> getTagGroups() {
+		return tagGroups;
+	}
+
+	public void addTagGroup(int id, List<TagValuePair> tagValues) {
+		if (tagGroups == null) {
+			tagGroups = new HashMap<Integer, List<TagValuePair>>();
+		}
+		tagGroups.put(id, tagValues);
+	}
+	public void setTagGroups(Map<Integer, List<TagValuePair>> tagGroups) {
+		this.tagGroups = tagGroups;
 	}
 
 	public static class AmenityRoutePoint {

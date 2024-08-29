@@ -1,20 +1,8 @@
 package net.osmand.binary;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
-
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
@@ -24,6 +12,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
@@ -32,6 +21,10 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.util.*;
 
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
@@ -60,6 +53,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<List<String>> subcategories = new ArrayList<List<String>>();
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
+		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
 
 		int left31;
 		int right31;
@@ -127,6 +121,10 @@ public class BinaryMapPoiReaderAdapter {
 				}
 			}
 			return null;
+		}
+
+		public List<TagValuePair> getTagValues(int id) {
+			return tagGroups.getOrDefault(id, new ArrayList<>());
 		}
 
 	}
@@ -889,6 +887,18 @@ public class BinaryMapPoiReaderAdapter {
 					precisionXY = codedIS.readInt32();
 				}
 				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.TAGGROUPS_FIELD_NUMBER:
+				long sz = codedIS.readRawVarint32();
+				long old = codedIS.pushLimitLong((long) sz);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					int tagGroupId = codedIS.readUInt32();
+					List<TagValuePair> list = region.getTagValues(tagGroupId);
+					if (list.size() > 0) {
+						am.addTagGroup(tagGroupId, list);
+					}
+				}
+				codedIS.popLimit(old);
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -984,6 +994,12 @@ public class BinaryMapPoiReaderAdapter {
 					existsCategories = true;
 				}
 				break;
+			case OsmandOdb.OsmAndPoiBox.TAGGROUPS_FIELD_NUMBER:
+				int tagGroupLength = codedIS.readRawVarint32();
+				long old = codedIS.pushLimitLong((long) tagGroupLength);
+				readTagGroups(region.tagGroups, req);
+				codedIS.popLimit(old);
+				break;
 			case OsmandOdb.OsmAndPoiBox.SUBBOXES_FIELD_NUMBER: {
 				int x = dx + (px << (zoom - pzoom));
 				int y = dy + (py << (zoom - pzoom));
@@ -1048,4 +1064,58 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
+	private void readTagGroups(Map<Integer, List<TagValuePair>> tagGroups, SearchRequest<Amenity> req) throws IOException {
+		while (true) {
+			if (req.isCancelled()) {
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+				case 0:
+					return;
+				case OsmandOdb.OsmAndPoiTagGroups.GROUPS_FIELD_NUMBER:
+					int length = codedIS.readRawVarint32();
+					long oldLimit = codedIS.pushLimitLong((long) length);
+					readTagGroup(tagGroups, req);
+					codedIS.popLimit(oldLimit);
+					break;
+				default:
+					skipUnknownField(t);
+					break;
+			}
+		}
+	}
+
+	private void readTagGroup(Map<Integer, List<TagValuePair>> tagGroups, SearchRequest<Amenity> req) throws IOException {
+		List<String> tagValues = new ArrayList<>();
+		int id = -1;
+		while (true) {
+			if (req.isCancelled()) {
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+				case 0:
+					if (id > 0 && tagValues.size() > 1 && tagValues.size() % 2 == 0) {
+						List<TagValuePair> tagValuePairs = new ArrayList<>();
+						for (int i = 0; i < tagValues.size(); i = i + 2) {
+							tagValuePairs.add(new TagValuePair(tagValues.get(i), tagValues.get(i + 1), -1));
+						}
+						tagGroups.put(id, tagValuePairs);
+					}
+					return;
+				case OsmandOdb.OsmAndPoiTagGroup.ID_FIELD_NUMBER:
+					id = codedIS.readUInt32();
+					break;
+				case OsmandOdb.OsmAndPoiTagGroup.TAGVALUES_FIELD_NUMBER:
+					tagValues.add(codedIS.readString().intern());
+					break;
+				default:
+					skipUnknownField(t);
+					break;
+			}
+		}
+	}
 }
