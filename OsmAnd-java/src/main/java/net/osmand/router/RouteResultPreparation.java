@@ -1457,26 +1457,37 @@ public class RouteResultPreparation {
 		return t;
 	}
 	
+	private static class AttachedRoadInfo {
+		int[] parsedLanes;
+		double attachedAngle;
+		int lanes;
+		int speakPriority;
+		public boolean attachedOnTheRight;
+		public int turnType;
+	}
 	private class RoadSplitStructure {
 		boolean keepLeft = false;
 		boolean keepRight = false;
 		boolean speak = false;
 		
-		List<int[]> leftLanesInfo = new ArrayList<int[]>();
+		List<AttachedRoadInfo> leftLanesInfo = new ArrayList<>();
 		int leftLanes = 0;
 		int leftMaxPrio = 0;
 		int roadsOnLeft = 0;
 		
-		List<int[]> rightLanesInfo = new ArrayList<int[]>();
+		List<AttachedRoadInfo> rightLanesInfo = new ArrayList<>();
 		int rightLanes = 0;
 		int rightMaxPrio = 0;
 		int roadsOnRight = 0;
 		
-		List<Double> attachedAngles;
-
 		public boolean allAreStraight() {
-			for (double angle : attachedAngles) {
-				if (Math.abs(angle) > TURN_SLIGHT_DEGREE) {
+			for (AttachedRoadInfo angle : leftLanesInfo) {
+				if (Math.abs(angle.attachedAngle) > TURN_SLIGHT_DEGREE) {
+					return false;
+				}
+			}
+			for (AttachedRoadInfo angle : rightLanesInfo) {
+				if (Math.abs(angle.attachedAngle) > TURN_SLIGHT_DEGREE) {
 					return false;
 				}
 			}
@@ -1605,12 +1616,12 @@ public class RouteResultPreparation {
 		
 	}
 
-	private TurnType getTurnByCurrentTurns(List<int[]> otherSideLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
+	private TurnType getTurnByCurrentTurns(List<AttachedRoadInfo> otherSideLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
 		LinkedHashSet<Integer> otherSideTurns = new LinkedHashSet<>();
 		if (otherSideLanesInfo != null) {
-			for (int[] li : otherSideLanesInfo) {
-				if (li != null) {
-					for (int i : li) {
+			for (AttachedRoadInfo li : otherSideLanesInfo) {
+				if (li.parsedLanes != null) {
+					for (int i : li.parsedLanes) {
 						TurnType.collectTurnTypes(i, otherSideTurns);
 					}
 				}
@@ -1659,7 +1670,6 @@ public class RouteResultPreparation {
 		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
 		boolean hasSharpOrReverseLane = hasSharpOrReverseTurnLane(turnLanesPrevSegm);
 		boolean hasSameTurnLanes = hasSameTurnLanes(prevSegm, currentSegm);
-		rs.attachedAngles = new ArrayList<>();
 		for (RouteSegmentResult attached : attachedRoutes) {
 			boolean restricted = false;
 			for (int k = 0; k < prevSegm.getObject().getRestrictionLength(); k++) {
@@ -1675,13 +1685,16 @@ public class RouteResultPreparation {
 			double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
 			double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin());
 			double mpi = Math.abs(deviation);
-			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
 			int lanes = countLanesMinOne(attached);
-			int[] turnLanesAttachedRoad = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
-			boolean attachedOnTheRight = ex >= 0;
 			boolean verySharpTurn = Math.abs(ex) > 150;
+			AttachedRoadInfo ai = new AttachedRoadInfo();
+			ai.speakPriority = highwaySpeakPriority(attached.getObject().getHighway()); 
+			ai.attachedOnTheRight = ex >= 0;
+			ai.attachedAngle = deviation;
+			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);;
+			ai.lanes = lanes;
 
 			if (!verySharpTurn || hasSharpOrReverseLane) {
 				double attachedAngle = MapUtils.normalizeDegrees360(attached.getBearingBegin());
@@ -1713,27 +1726,20 @@ public class RouteResultPreparation {
 				}
 			}
 
-			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
+			if (turnLanesPrevSegm != null || ai.speakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
-					if (attachedOnTheRight) {
+					if (ai.attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
 						rs.rightMaxPrio = Math.max(rs.rightMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()));
-						if (turnLanesAttachedRoad != null) {
-							rs.rightLanesInfo.add(turnLanesAttachedRoad);
-						}
+						rs.rightLanesInfo.add(ai);
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
 						rs.leftMaxPrio = Math.max(rs.leftMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()));
-						if (turnLanesAttachedRoad != null) {
-							rs.leftLanesInfo.add(turnLanesAttachedRoad);
-						}
+						rs.leftLanesInfo.add(ai);
 					}
-					for (int i = 0; i < lanes; i++) {
-						rs.attachedAngles.add(deviation);
-					}
-					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
+					rs.speak = rs.speak || ai.speakPriority <= speakPriority;
 				}
 			}
 			
@@ -1780,60 +1786,100 @@ public class RouteResultPreparation {
 		} else {
 			lanes = new int[prevLanesCount];
 			boolean ltr = rs.leftLanes < rs.rightLanes;
-			// don't allow to overlap lanes (always keep 1 lane per direction)
-			int overlapMax = 1; // 1 - [C;TR|C;TR] -> [C|C;TR], 0 - [C;TR|C;TR] -> [C|TR]
-			int leftLanes = rs.leftLanes;
-			int rightLanes = rs.rightLanes;
-			if (rightLanes + currentLanesCount + leftLanes > lanes.length + overlapMax) {
-				int currentPriority = highwaySpeakPriority(currentSegm.getObject().getHighway());
-				int[] sortPriorities = new int[] { rs.leftMaxPrio, currentPriority, rs.rightMaxPrio };
-				Arrays.sort(sortPriorities);
-				for (int ind = 0; ind < 3; ind++) {
-					if (rs.leftMaxPrio == sortPriorities[2 - ind] && leftLanes > rs.roadsOnLeft) {
-						leftLanes = Math.max(rs.roadsOnLeft, lanes.length - currentLanesCount - rightLanes);
+			List<AttachedRoadInfo> roads = new ArrayList<>();
+			AttachedRoadInfo mainType = new AttachedRoadInfo();
+			mainType.lanes = currentLanesCount;
+			mainType.speakPriority = highwaySpeakPriority(currentSegm.getObject().getHighway());
+			mainType.turnType = mainLaneType;
+			roads.add(mainType);
+			Comparator<AttachedRoadInfo> comparatorByAngle = new Comparator<AttachedRoadInfo>() {
+				@Override
+				public int compare(AttachedRoadInfo o1, AttachedRoadInfo o2) {
+					return Double.compare(o1.attachedAngle, o2.attachedAngle);
+				}
+			};
+			Collections.sort(rs.leftLanesInfo, comparatorByAngle);
+			Collections.sort(rs.rightLanesInfo, comparatorByAngle);
+			// assign turn types
+			int type = mainLaneType;
+			for (AttachedRoadInfo i : rs.leftLanesInfo) {
+				int turnByAngle = getTurnByAngle(i.attachedAngle);
+				if (turnByAngle >= type) {
+					type = TurnType.getPrev(type);
+				} else {
+					type = turnByAngle;
+				}
+				i.turnType = type;
+				roads.add(i);
+			}
+			type = mainLaneType;
+			for (AttachedRoadInfo i : rs.rightLanesInfo) {
+				int turnByAngle = getTurnByAngle(i.attachedAngle);
+				if (turnByAngle <= type) {
+					type = TurnType.getNext(type);
+				} else {
+					type = turnByAngle;
+				}
+				i.turnType = type;
+				roads.add(i);
+			}
+			// sort important last
+			Collections.sort(roads, new Comparator<AttachedRoadInfo>() {
+				@Override
+				public int compare(AttachedRoadInfo o1, AttachedRoadInfo o2) {
+					return -Integer.compare(o1.speakPriority, o2.speakPriority);
+				}
+			});
+			for (AttachedRoadInfo i : roads) {
+				int sumLanes = 0;
+				for (AttachedRoadInfo l : roads) {
+					sumLanes += l.lanes;
+				}
+				if (sumLanes < 2 * lanes.length) {
+					// max 2 attached per lane is enough
+					break;
+				}
+				i.lanes = 1; // if not enough reset to 1 lane
+			}
+								
+			// active lanes
+			int startActive = Math.max(0, ltr ? 0 : lanes.length - mainType.lanes);
+			int endActive = Math.min(lanes.length, startActive + mainType.lanes);
+			for (int i = startActive; i < endActive; i++) {
+				lanes[i] = (mainType.turnType << 1) + 1;
+			}
+			int ind = 0;
+			for (AttachedRoadInfo i : rs.leftLanesInfo) {
+				for (int k = 0; k < i.lanes; k++) {
+					if (lanes[ind] == 0) {
+						lanes[ind] = i.turnType << 1;
+					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
+						TurnType.setSecondaryTurn(lanes, ind, i.turnType);
+					} else {
+						TurnType.setTertiaryTurn(lanes, ind, i.turnType);
 					}
-					if (rs.rightMaxPrio == sortPriorities[2 - ind] && rightLanes > rs.roadsOnRight) {
-						rightLanes = Math.max(rs.roadsOnRight, lanes.length - currentLanesCount - leftLanes);
-					}
-					if (currentPriority == sortPriorities[2 - ind] && currentLanesCount > 1 + overlapMax) {
-						currentLanesCount = Math.max(1, lanes.length - leftLanes - rightLanes + overlapMax);
-					}
-					if (rightLanes + currentLanesCount + leftLanes <= lanes.length + overlapMax) {
+					ind++;
+					if (ind > startActive) {
 						break;
 					}
 				}
 			}
-			// active lanes
-			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
-				int ind = ltr ? i : lanes.length - i - 1;
-					lanes[ind] = (mainLaneType << 1) + 1;
-				}
-			// left lanes
-			for(int i = 0; i < Math.min(lanes.length, leftLanes); i++) {
-				int lane = getTurnByAngle(rs.attachedAngles.get(i));
-				if (lane >= mainLaneType) {
-					lane = TurnType.getPrev(mainLaneType);
-				}
-				if (lanes[i] == 0) {
-					lanes[i] = lane << 1;
-				} else {
-					TurnType.setSecondaryTurn(lanes, i, lane);
-				}
-			}
-			// right lanes
-			for (int i = 0; i < Math.min(lanes.length, rightLanes); i++) {
-				int ind = lanes.length - i - 1;
-				int lane = getTurnByAngle(rs.attachedAngles.get(leftLanes + rightLanes - i - 1));
-				if (lane <= mainLaneType) {
-					lane = TurnType.getNext(mainLaneType);
-				}
-				if (lanes[ind] == 0) {
-					lanes[ind] = lane << 1;
-				} else {
-					TurnType.setSecondaryTurn(lanes, ind, lane);
+			ind = endActive - 1;
+			for (AttachedRoadInfo i : rs.rightLanesInfo) {
+				for (int k = 0; k < i.lanes; k++) {
+					if (lanes[ind] == 0) {
+						lanes[ind] = i.turnType << 1;
+					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
+						TurnType.setSecondaryTurn(lanes, ind, i.turnType);
+					} else {
+						TurnType.setTertiaryTurn(lanes, ind, i.turnType);
+					}
+					ind++;
+					if (ind > lanes.length - 1) {
+						break;
+					}
 				}
 			}
-			
 			// Fill All left empty slots with inactive C
 			for (int i = 0; i < lanes.length; i++) {
 				if (lanes[i] == 0) {
@@ -1853,15 +1899,22 @@ public class RouteResultPreparation {
 
 
 	private int[] createCombinedTurnTypeForSingleLane(RoadSplitStructure rs, double currentDeviation) {
-		rs.attachedAngles.add(currentDeviation);
-		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
+		List<Double> attachedAngles = new ArrayList<>();
+		attachedAngles.add(currentDeviation);
+		for (AttachedRoadInfo l : rs.leftLanesInfo) {
+			attachedAngles.add(l.attachedAngle);
+		}
+		for (AttachedRoadInfo l : rs.rightLanesInfo) {
+			attachedAngles.add(l.attachedAngle);
+		}
+		Collections.sort(attachedAngles, new Comparator<Double>() {
 			@Override
 			public int compare(Double c1, Double c2) {
 				return Double.compare(c2, c1);
 			}
 		});
 
-		int size = rs.attachedAngles.size();
+		int size = attachedAngles.size();
 		boolean allStraight = rs.allAreStraight();
 		int[] lanes = new int[1];
 		int extraLanes = 0;
@@ -1869,7 +1922,7 @@ public class RouteResultPreparation {
 		// iterate from left to right turns
 		int prevTurn = 0;
 		for (int i = 0; i < size; i++) {
-			double angle = rs.attachedAngles.get(i);
+			double angle = attachedAngles.get(i);
 			if (!Double.isNaN(prevAngle) && angle == prevAngle) {
 				continue;
 			}
