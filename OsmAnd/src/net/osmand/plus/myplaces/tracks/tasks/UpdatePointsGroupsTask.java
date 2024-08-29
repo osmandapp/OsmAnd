@@ -66,7 +66,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 	}
 
 	private void updatePoint(@NonNull PointsGroup pointsGroup, @NonNull WptPt wpt) {
-		String category = pointsGroup.getIconName();
+		String category = pointsGroup.getName();
 		String iconName = updatePointsAppearance ? pointsGroup.getIconName() : wpt.getIconName();
 		String backgroundType = updatePointsAppearance ? pointsGroup.getBackgroundType() : wpt.getBackgroundType();
 		int color = updatePointsAppearance ? pointsGroup.getColor() : wpt.getColor();
