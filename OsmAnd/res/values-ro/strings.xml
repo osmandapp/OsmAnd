@@ -5882,5 +5882,5 @@
     <string name="quick_action_navigation_view_desc">O comutare pentru a deschide sau închide vizualizarea de navigare.</string>
     <string name="quick_action_navigation_view_title">Vizualizare navigare</string>
     <string name="quick_action_switch_compass_desc">Un comutator pentru a schimba orientarea hărții.</string>
-    <string name="rendering_attr_alpineHiking_name">Grad de dificultate a traseelor de drumeție</string>
+    <string name="rendering_attr_alpineHiking_name">Grad de dificultate al traseelor de drumeție</string>
 </resources>
