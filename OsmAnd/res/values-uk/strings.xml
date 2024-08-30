@@ -5886,4 +5886,7 @@
     <string name="quick_action_switch_compass_desc">Перемикач орієнтації мапи.</string>
     <string name="shared_string_interface">Інтерфейс</string>
     <string name="quick_action_navigation_view_desc">Перемикач для відкриття або закриття навігації.</string>
+    <string name="corner_radius">Радіус кутів</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Непрозорість тла</string>
 </resources>
