@@ -3254,4 +3254,19 @@
     <string name="routing_attr_allow_private_name">პირადი წვდომის დაშვება</string>
     <string name="routing_attr_avoid_shuttle_train_name">შატლის გარეშე</string>
     <string name="routing_attr_prefer_unpaved_name">უპირატესობის მინიჭება დაუგებელი გზებისთვის</string>
+    <string name="save_as_new_track">შენახვა ახალ ტრეკად</string>
+    <string name="routing_attr_no_new_routing_name">არ გამოიყენო v1.9 გზის წესებ</string>
+    <string name="rendering_attr_coloredBuildings_name">შენობების გაფერადება ტიპის მიხედვით</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">შეღებვა ქსელთან ურთიერთობის მიხედვით.</string>
+    <string name="rendering_attr_contourColorScheme_description">კონტურის ხაზების ფერის სქემა</string>
+    <string name="routing_attr_avoid_shuttle_train_description">საგარეუბნო მატარებლების არიდება</string>
+    <string name="routing_attr_avoid_borders_description">ნაციონალური საზღვრების გადაკვეთის აცილება</string>
+    <string name="routing_attr_allow_skating_only_name">მხოლოდ საციგურაო გზების დაშვება</string>
+    <string name="public_transport_try_change_settings">სცადეთ, პარამეტრები შეცვალოთ.</string>
+    <string name="routing_attr_short_way_description">ოპტიმიზებულია უფრო მოკლე გზისთვის (ენერგიის დაზოგვა)</string>
+    <string name="rendering_attr_showLez_name">დაბალი გამონაბოლქვის ზონების ჩვენება</string>
+    <string name="mapillary_menu_title_pano">მხოლოდ 360° გამოსახულებების ჩვენება</string>
+    <string name="quick_action_interim_dialog">შუალედური დიალოგის ჩვენება</string>
+    <string name="rendering_attr_buildings15zoom_name">შენობები გადიდებაზე 15</string>
+    <string name="auto_split_recording_title">ჩანაწერების ავტოგაწყვეტა პაუზის შემდეგ</string>
 </resources>
