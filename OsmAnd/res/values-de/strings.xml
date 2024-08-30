@@ -5313,7 +5313,6 @@
     <string name="rendering_value_sacScale_description">Schweizer Alpen-Club</string>
     <string name="shared_string_not_checked">Nicht geprüft</string>
     <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
-    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="write_bearing">Peilung schreiben</string>
     <string name="write_heading">Richtung schreiben</string>
@@ -5860,4 +5859,29 @@
     <string name="help_article_map_tracks_name">Strecken</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
+    <string name="add_widget_below">Widget unten hinzufügen</string>
+    <string name="add_widget_above">Widget oben hinzufügen</string>
+    <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
+    <string name="add_widget_to_the_left">Widget links hinzufügen</string>
+    <string name="delete_widget">Widget löschen?</string>
+    <string name="delete_widget_description">Dieses Widget wird gelöscht. Sie können es später im Bildschirm Konfigurieren wiederherstellen.</string>
+    <string name="battery_saving_mode">Batteriesparmodus</string>
+    <string name="graph_axis">Grafik-Achse</string>
+    <string name="y_axis_description">Wählen Sie bis zu zwei Optionen für die Y-Achse.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad der Wanderwege</string>
+    <string name="shared_string_interface">Benutzeroberfläche</string>
+    <string name="quick_action_previous_screen_desc">Ein Schalter, um zum vorherigen Bildschirm zu navigieren.</string>
+    <string name="quick_action_previous_screen_title">Vorheriger Bildschirm</string>
+    <string name="quick_action_search_view_desc">Ein Schalter, um die Suchansicht zu öffnen oder zu schließen.</string>
+    <string name="quick_action_search_view_title">Suchansicht</string>
+    <string name="quick_action_navigation_view_desc">Ein Schalter, um die Navigationsansicht zu öffnen oder zu schließen.</string>
+    <string name="quick_action_verb_navigate">Navigieren</string>
+    <string name="quick_action_drawer_desc">Ein Schalter, um das Seitenmenü ein- oder auszublenden.</string>
+    <string name="quick_action_navigation_view_title">Navigationsansicht</string>
+    <string name="quick_action_switch_compass_desc">Ein Schalter, um die Kartenausrichtung zu wechseln.</string>
+    <string name="quick_action_drawer_title">Seitenmenü</string>
+    <string name="background_opacity">Hintergrund-Deckkraft</string>
+    <string name="corner_radius">Eckenradius</string>
+    <string name="shared_string_dp">dp</string>
 </resources>

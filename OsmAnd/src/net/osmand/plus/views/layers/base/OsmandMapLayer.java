@@ -9,9 +9,9 @@ import android.graphics.Paint.Style;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -65,7 +65,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
-	protected boolean isInitialized;
 
 	//OpenGL
 	protected MapMarkersCollection mapMarkersCollection;
@@ -171,7 +170,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public void onMapRendererChange(@Nullable MapRendererView currentMapRenderer,
 	                                @Nullable MapRendererView newMapRenderer) {
-		checkLayerInitialized();
 		if (newMapRenderer == null) {
 			cleanupResources();
 		} else {
@@ -218,18 +216,13 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return false;
 	}
 
-	public void setView(@NonNull OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
-	}
-
-	public void initLayer() {
-		isInitialized = true;
 	}
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		checkLayerInitialized();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
@@ -238,15 +231,6 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (this.density != density) {
 			this.density = density;
 			updateResources();
-		}
-	}
-
-	protected void checkLayerInitialized() {
-		if (!isInitialized) {
-			if (view == null) {
-				throw new IllegalStateException("Layer's view should be set prior to calling init");
-			}
-			initLayer();
 		}
 	}
 
@@ -423,12 +407,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return (int) textScale * radiusPoi;
 	}
 
-	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon, @NonNull ScaleType scaleType) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setScaleType(scaleType);
 		imageView.setImageDrawable(icon);
 	}
 

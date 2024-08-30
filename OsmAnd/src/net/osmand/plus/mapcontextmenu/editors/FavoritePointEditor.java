@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -58,7 +58,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		double altitude = Double.NaN;
 		if (object instanceof WptPt) {
-			altitude = ((WptPt) object).ele;
+			altitude = ((WptPt) object).getEle();
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, 0);
 		favorite.setDescription("");

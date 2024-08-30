@@ -13,7 +13,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -23,11 +22,13 @@ import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -70,10 +71,10 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		try {
 			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), new SaveImportedGpxListener() {
 				@Override
-				public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
+				public void onGpxSaved(@Nullable String error, @NotNull GpxFile gpxFile) {
 					if (Algorithms.isEmpty(error)) {
 						file = new File(ImportHelper.getGpxDestinationDir(app, true), SELECTED_GPX_NAME);
-						gpxFile.path = file.getAbsolutePath();
+						gpxFile.setPath(file.getAbsolutePath());
 						selectionHelper.selectGpxFile(gpxFile, GpxSelectionParams.getDefaultSelectionParams());
 					}
 				}

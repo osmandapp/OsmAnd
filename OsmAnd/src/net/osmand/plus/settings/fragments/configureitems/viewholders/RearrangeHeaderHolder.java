@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.util.TypedValue;
 import android.view.View;
@@ -12,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-
 import net.osmand.plus.settings.fragments.configureitems.RearrangeHeaderItem;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 
 public class RearrangeHeaderHolder extends ViewHolder implements UnmovableItem {
@@ -36,7 +35,7 @@ public class RearrangeHeaderHolder extends ViewHolder implements UnmovableItem {
 
 
 	public void bindView(@NonNull RearrangeHeaderItem item) {
-		title.setTypeface(DEFAULT_BOLD);
+		title.setTypeface(FontCache.getMediumFont());
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
 		title.setText(item.titleId);
 		description.setText(item.description);

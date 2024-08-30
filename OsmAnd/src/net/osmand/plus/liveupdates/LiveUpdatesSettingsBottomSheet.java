@@ -1,7 +1,6 @@
 package net.osmand.plus.liveupdates;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
@@ -10,7 +9,6 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -49,6 +47,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -460,7 +459,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		String lastOsmChangesTime = getString(R.string.includes_osm_changes_until, formattedOsmUpdateTime);
 		String updateInfo = getString(R.string.ltr_or_rtl_combine_via_space, lastUpdateTime, lastOsmChangesTime);
 		SpannableString spannable = new SpannableString(updateInfo);
-		CustomTypefaceSpan span = new CustomTypefaceSpan(DEFAULT_BOLD);
+		CustomTypefaceSpan span = new CustomTypefaceSpan(FontCache.getMediumFont());
 		int start = updateInfo.indexOf(formattedOsmUpdateTime);
 		int end = start + formattedOsmUpdateTime.length();
 		spannable.setSpan(span, start, end, 0);

@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -20,6 +19,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
 
 import org.apache.commons.logging.Log;
 
@@ -68,19 +68,19 @@ public class RestoreNavigationHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void restoreRoutingModeInner(@Nullable TargetPoint pointToNavigate, @Nullable String gpxPath) {
-		AsyncTask<String, Void, GPXFile> task = new AsyncTask<>() {
+		AsyncTask<String, Void, GpxFile> task = new AsyncTask<String, Void, GpxFile>() {
 			@Override
-			protected GPXFile doInBackground(String... params) {
+			protected GpxFile doInBackground(String... params) {
 				if (gpxPath != null) {
 					// Reverse also should be stored ?
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(gpxPath));
-					return gpxFile.error == null ? gpxFile : null;
+					GpxFile gpxFile = SharedUtil.loadGpxFile(new File(gpxPath));
+					return gpxFile.getError() == null ? gpxFile : null;
 				}
 				return null;
 			}
 
 			@Override
-			protected void onPostExecute(@Nullable GPXFile gpxFile) {
+			protected void onPostExecute(@Nullable GpxFile gpxFile) {
 				if (pointToNavigate == null) {
 					notRestoreRoutingMode();
 				} else {
@@ -89,7 +89,7 @@ public class RestoreNavigationHelper {
 			}
 
 			@Nullable
-			private GPXRouteParamsBuilder createGpxRouteParams(@Nullable GPXFile gpxFile) {
+			private GPXRouteParamsBuilder createGpxRouteParams(@Nullable GpxFile gpxFile) {
 				GPXRouteParamsBuilder builder = null;
 				if (gpxFile != null) {
 					builder = new GPXRouteParamsBuilder(gpxFile, settings);
@@ -125,10 +125,9 @@ public class RestoreNavigationHelper {
 
 	public void enterRoutingMode(@Nullable GPXRouteParamsBuilder gpxRoute) {
 		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
-		LOG.info(">>>> RESTORE ROUTE - enterRoutingMode");
 
 		app.getMapViewTrackingUtilities().backToLocationImpl();
-		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);
+		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().getPath() : null);
 
 		routingHelper.setGpxParams(gpxRoute);
 		if (targetPointsHelper.getPointToStart() == null) {

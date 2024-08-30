@@ -4,19 +4,13 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/icons_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="top"
-		android:layout_marginBottom="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingEnd="0dp" />
+	<include layout="@layout/icons_list"/>
 
 	<include
+		android:id="@+id/divider"
 		layout="@layout/simple_divider_item"
 		android:layout_width="match_parent"
-		android:layout_height="1dp"/>
+		android:layout_height="1dp" />
 
 	<FrameLayout
 		android:id="@+id/button_all_icons"

@@ -10,9 +10,9 @@ import net.osmand.plus.R;
 
 public enum GPXDataSetAxisType {
 
-	DISTANCE(R.string.distance, R.drawable.ic_action_marker_dark),
-	TIME(R.string.shared_string_time, R.drawable.ic_action_time),
-	TIME_OF_DAY(R.string.time_of_day, R.drawable.ic_action_time_span);
+	DISTANCE(R.string.distance, R.drawable.ic_action_distance),
+	TIME(R.string.shared_string_time, R.drawable.ic_action_time_span),
+	TIME_OF_DAY(R.string.time_of_day, R.drawable.ic_action_time_of_day);
 
 	@StringRes
 	private final int titleId;

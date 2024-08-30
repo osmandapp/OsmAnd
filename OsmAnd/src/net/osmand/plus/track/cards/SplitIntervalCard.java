@@ -1,6 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -16,6 +15,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -45,7 +45,7 @@ public class SplitIntervalCard extends BaseCard {
 		String splitInterval = getSplitInterval();
 		SpannableStringBuilder spannableSplitInterval = new SpannableStringBuilder(splitInterval);
 		spannableSplitInterval.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, spannableSplitInterval.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannableSplitInterval.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, spannableSplitInterval.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannableSplitInterval.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, spannableSplitInterval.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		TextView descriptionView = view.findViewById(R.id.description);
 		descriptionView.setText(spannableSplitInterval);

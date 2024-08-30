@@ -71,6 +71,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
+		setupBatterySavingModePref();
 		setupDebugRenderingInfoPref();
 		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
@@ -121,6 +122,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setIconSpaceReserved(false);
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
+	}
+
+	private void setupBatterySavingModePref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
+		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
+		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupDebugRenderingInfoPref() {

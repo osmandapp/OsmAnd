@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.controller.RouteActivityController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
 
 public class InfoCard extends BaseMetadataCard {
@@ -22,7 +23,7 @@ public class InfoCard extends BaseMetadataCard {
 	private final RouteKey routeKey;
 	private final OnCompleteCallback onActivitySelectionComplete;
 
-	public InfoCard(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.Metadata metadata,
+	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
 	                @Nullable RouteKey routeKey, @NonNull OnCompleteCallback onActivitySelectionComplete) {
 		super(mapActivity, metadata);
 		this.routeKey = routeKey;
@@ -40,8 +41,8 @@ public class InfoCard extends BaseMetadataCard {
 		super.updateContent();
 
 		OsmRouteType activityType = GPXActivityUtils.fetchActivityType(metadata, routeKey);
-		String keywords = metadata != null ? metadata.keywords : null;
-		String link = metadata != null ? metadata.link : null;
+		String keywords = metadata != null ? metadata.getKeywords() : null;
+		String link = metadata != null ? metadata.getLink() : null;
 		boolean keywordsAvailable = !Algorithms.isEmpty(keywords);
 		boolean linkAvailable = !Algorithms.isEmpty(link);
 
@@ -59,7 +60,7 @@ public class InfoCard extends BaseMetadataCard {
 			}
 		});
 		if (keywordsAvailable) {
-			createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));
+			createItemRow(getString(R.string.shared_string_keywords), metadata.getKeywords(), getContentIcon(R.drawable.ic_action_label));
 		}
 		if (linkAvailable) {
 			createLinkItemRow(getString(R.string.shared_string_link), metadata.link, R.drawable.ic_action_link);

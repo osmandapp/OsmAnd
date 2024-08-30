@@ -58,10 +58,12 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 		}
 	}
 
-	private void setupAllIconsButton() {
+	public void setupAllIconsButton() {
 		View buttonAllIcons = view.findViewById(R.id.button_all_icons);
-		buttonAllIcons.setOnClickListener(v -> controller.onAllIconsButtonClicked(activity));
-		updateAllIconsButton();
+		if (buttonAllIcons != null) {
+			buttonAllIcons.setOnClickListener(v -> controller.onAllIconsButtonClicked(activity));
+			updateAllIconsButton(buttonAllIcons);
+		}
 	}
 
 	@Override
@@ -77,8 +79,7 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 		askScrollToTargetIconPosition(newIcon, true);
 	}
 
-	private void updateAllIconsButton() {
-		View buttonAllIcons = view.findViewById(R.id.button_all_icons);
+	private void updateAllIconsButton(@NonNull View buttonAllIcons) {
 		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
 		UiUtilities.setupListItemBackground(activity, buttonAllIcons, controlsAccentColor);
 	}

@@ -467,7 +467,7 @@
     <string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
     <string name="poi_diet_lactose_free_only">Bare laktosefri</string>
     <string name="poi_diet_lactose_free_yes">Laktosefri</string>
-    <string name="poi_diet_lactose_free_no">Laktosefri: Nei</string>
+    <string name="poi_diet_lactose_free_no">Laktosefri: nei</string>
     <string name="poi_diet_pescetarian_yes">Pesco-vegetarisk</string>
     <string name="poi_drive_in_yes">Ja;Drive-in</string>
     <string name="poi_drive_through_yes">Ja;Drive through</string>
@@ -1078,7 +1078,7 @@
     <string name="poi_animal_shelter_dog">Hunder</string>
     <string name="poi_animal_shelter_cat">Katter</string>
     <string name="poi_animal_shelter_dog_cat">Hunder, katter</string>
-    <string name="poi_animal_shelter_bird">Fulger</string>
+    <string name="poi_animal_shelter_bird">Fugler</string>
     <string name="poi_animal_shelter_wildlife">Dyreliv</string>
     <string name="poi_animal_shelter_horse">Hester</string>
     <string name="poi_animal_shelter_mammal">Pattedyr</string>
@@ -1927,7 +1927,7 @@
     <string name="poi_vehicle_designated">Beregnet for kjøretøy</string>
     <string name="poi_horse_designated">Beregnet for hester</string>
     <string name="poi_foot_designated">Beregnet for fotgjengere</string>
-    <string name="poi_not_pt_shelter_yes">Alle unntatt kollektivtransportskur</string>
+    <string name="poi_not_pt_shelter_yes">Leskur (ikke for offentlig transport)</string>
     <string name="poi_stream">Bekk</string>
     <string name="poi_impromptu_yes">Ja</string>
     <string name="poi_descent">Nedstigning</string>
@@ -1944,4 +1944,12 @@
     <string name="poi_level">Nivå</string>
     <string name="poi_internet_access_fee_customers">Internettilgang: kunder</string>
     <string name="poi_access_yes">Adgang tillatt</string>
+    <string name="poi_shelter_type_picnic_shelter">Piknik</string>
+    <string name="poi_diet_vegan_limited">Vegansk: begrenset</string>
+    <string name="poi_cash_in_yes">Ja</string>
+    <string name="poi_cash_in_no">Nei</string>
+    <string name="poi_shelter_type_weather_shelter">Vær</string>
+    <string name="poi_cash_in_customers">Kunder</string>
+    <string name="poi_diet_pescetarian_no">Pesco-vegetarisk: nei</string>
+    <string name="poi_waste_accepted">Akseptert avfall</string>
 </resources>

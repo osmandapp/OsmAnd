@@ -5,8 +5,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.SharedUtil;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,6 +32,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import okio.Okio;
 
 public abstract class SettingsItem {
 
@@ -270,12 +273,11 @@ public abstract class SettingsItem {
 	}
 
 	@NonNull
-	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull GPXFile gpxFile) {
+	protected SettingsItemWriter<? extends SettingsItem> getGpxWriter(@NonNull GpxFile gpxFile) {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
-				Writer writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-				Exception error = GPXUtilities.writeGpx(writer, gpxFile, progress);
+				Exception error = SharedUtil.writeGpx(outputStream, gpxFile, SharedUtil.kIProgress(progress));
 				if (error != null) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed write to gpx file", error);

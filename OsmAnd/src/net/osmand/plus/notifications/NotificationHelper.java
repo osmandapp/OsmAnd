@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -87,6 +86,12 @@ public class NotificationHelper {
 			return gpxNotification;
 		} else {
 			return null;
+		}
+	}
+
+	public void resetTopNotification() {
+		for (OsmandNotification n : all) {
+			n.setTop(false);
 		}
 	}
 
@@ -184,9 +189,7 @@ public class NotificationHelper {
 					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
 			channel.enableVibration(false);
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
-			NotificationManager mNotificationManager = (NotificationManager) app
-					.getSystemService(Context.NOTIFICATION_SERVICE);
-			mNotificationManager.createNotificationChannel(channel);
+			NotificationManagerCompat.from(app).createNotificationChannel(channel);
 		}
 	}
 }

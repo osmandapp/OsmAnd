@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
 import android.graphics.drawable.Drawable;
@@ -22,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.configureitems.MenuItemsAdapterListener;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -70,7 +70,7 @@ public class RearrangeItemHolder extends ViewHolder implements UnmovableItem {
 
 		title.setText(getTitle(item));
 		title.setTextColor(isDivider ? activeColor : textColor);
-		title.setTypeface(isDivider ? DEFAULT_BOLD : DEFAULT);
+		title.setTypeface(isDivider ? FontCache.getMediumFont() : DEFAULT);
 
 		description.setText(getDescription(id));
 

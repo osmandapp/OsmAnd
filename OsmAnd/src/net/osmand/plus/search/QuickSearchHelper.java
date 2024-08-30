@@ -16,7 +16,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -213,9 +213,9 @@ public class QuickSearchHelper implements ResourceListener {
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (SelectedGpxFile selectedGpx : list) {
-				for (WptPt point : selectedGpx.getGpxFile().getPoints()) {
+				for (WptPt point : selectedGpx.getGpxFile().getPointsList()) {
 					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.name;
+					sr.localeName = point.getName();
 					sr.object = point;
 					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
 					sr.objectType = ObjectType.WPT;

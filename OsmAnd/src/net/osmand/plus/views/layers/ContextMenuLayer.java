@@ -145,8 +145,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer() {
-		super.initLayer();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
 		Context context = AndroidUtils.createDisplayContext(getContext());
 		contextMarker = new ImageView(AndroidUtils.createDisplayContext(context));

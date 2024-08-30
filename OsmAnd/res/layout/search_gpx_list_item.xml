@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            osmand:srcCompat="@drawable/ic_action_polygom_dark"
+            app:srcCompat="@drawable/ic_action_polygom_dark"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/list_content_padding"
             android:visibility="visible"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_distance_16" />
+                    app:srcCompat="@drawable/ic_action_distance_16" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_waypoint_16" />
+                    app:srcCompat="@drawable/ic_action_waypoint_16" />
 
                 <TextView
                     android:id="@+id/points_count"
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/gpx_small_icon_margin"
                     android:layout_marginEnd="@dimen/gpx_small_icon_margin"
-                    osmand:srcCompat="@drawable/ic_action_time_16" />
+                    app:srcCompat="@drawable/ic_action_time_16" />
 
                 <TextView
                     android:id="@+id/time"

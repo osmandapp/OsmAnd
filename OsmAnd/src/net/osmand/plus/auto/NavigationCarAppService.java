@@ -41,8 +41,6 @@ public final class NavigationCarAppService extends CarAppService {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		LOG.info(">>>> NavigationCarAppService - onStartCommand");
-
 		int result = super.onStartCommand(intent, flags, startId);
 		getApp().setNavigationCarAppService(this);
 		return result;
@@ -50,8 +48,6 @@ public final class NavigationCarAppService extends CarAppService {
 
 	@Override
 	public void onDestroy() {
-		LOG.info(">>>> NavigationCarAppService - onDestroy");
-
 		super.onDestroy();
 		getApp().setNavigationCarAppService(null);
 	}
@@ -59,11 +55,8 @@ public final class NavigationCarAppService extends CarAppService {
 	@Override
 	@NonNull
 	public Session onCreateSession() {
-		LOG.info(">>>> NavigationCarAppService - onCreateSession");
-
 		OsmandApplication app = getApp();
 		Notification notification = app.getNotificationHelper().buildCarAppNotification();
-		LOG.info(">>>> NavigationCarAppService - startForeground");
 		startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
 
 		NavigationSession session = new NavigationSession();
@@ -71,8 +64,6 @@ public final class NavigationCarAppService extends CarAppService {
 				.addObserver(new DefaultLifecycleObserver() {
 					@Override
 					public void onDestroy(@NonNull LifecycleOwner owner) {
-						LOG.info(">>>> NavigationCarAppService - stopForeground");
-
 						stopForeground(STOP_FOREGROUND_REMOVE);
 					}
 				});

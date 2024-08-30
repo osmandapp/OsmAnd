@@ -5195,7 +5195,6 @@
     <string name="calculate_offline">Израчунај ван мреже</string>
     <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
     <string name="shared_string_included">Обухваћено</string>
-    <string name="rendering_attr_alpineHiking_name">Разврставање по тежини</string>
     <string name="rendering_attr_alpineHiking_description">Разврставање по тежини врста путања.</string>
     <string name="rendering_value_sacScale_name">САК</string>
     <string name="rendering_value_caiScale_name">КАИ</string>
@@ -5853,4 +5852,29 @@
     <string name="help_article_map_routes_name">Руте</string>
     <string name="route_roundabout_exit">Идите на %1$d излаз</string>
     <string name="help_article_map_tracks_name">Путање</string>
+    <string name="add_widget_above">Додај виџет изнад</string>
+    <string name="add_widget_below">Додај виџет испод</string>
+    <string name="add_widget_to_the_right">Додај виџет десно</string>
+    <string name="add_widget_to_the_left">Додај виџет лево</string>
+    <string name="delete_widget">Обисати виџет?</string>
+    <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
+    <string name="battery_saving_mode">Режим уштеде батерије</string>
+    <string name="graph_axis">Графичка оса</string>
+    <string name="app_mode_suv">СУВ</string>
+    <string name="y_axis_description">Изаберите до две опције за Y осу.</string>
+    <string name="rendering_attr_alpineHiking_name">Степен тежине пешачких стаза</string>
+    <string name="quick_action_previous_screen_desc">Прекидач за навигацију на претходни екран.</string>
+    <string name="quick_action_previous_screen_title">Претходни екран</string>
+    <string name="quick_action_verb_navigate">Навигација</string>
+    <string name="quick_action_drawer_desc">Прекидач за приказ или сакривање бочног менија.</string>
+    <string name="quick_action_drawer_title">Бочни мени</string>
+    <string name="quick_action_search_view_desc">Прекидач за отварање или затварање приказа претраге.</string>
+    <string name="quick_action_search_view_title">Приказ претраге</string>
+    <string name="quick_action_navigation_view_desc">Прекидач за отварање или затварање приказа навигације.</string>
+    <string name="quick_action_navigation_view_title">Приказ навигације</string>
+    <string name="quick_action_switch_compass_desc">Прекидач за промену оријентације мапе.</string>
+    <string name="shared_string_interface">Интерфејс</string>
+    <string name="corner_radius">Радијус угла</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Прозирност позадине</string>
 </resources>

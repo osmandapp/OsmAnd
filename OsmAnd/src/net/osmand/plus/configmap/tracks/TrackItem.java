@@ -3,10 +3,10 @@ package net.osmand.plus.configmap.tracks;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
@@ -29,14 +29,14 @@ public class TrackItem {
 		lastModified = file.lastModified();
 	}
 
-	public TrackItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		if (gpxFile.showCurrentTrack) {
+	public TrackItem(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
+		if (gpxFile.getShowCurrentTrack()) {
 			file = null;
-			path = gpxFile.path;
+			path = gpxFile.getPath();
 			name = app.getString(R.string.shared_string_currently_recording_track);
-			lastModified = gpxFile.modifiedTime;
+			lastModified = gpxFile.getModifiedTime();
 		} else {
-			file = new File(gpxFile.path);
+			file = new File(gpxFile.getPath());
 			path = file.getAbsolutePath();
 			name = GpxUiHelper.getGpxTitle(file.getName());
 			lastModified = file.lastModified();

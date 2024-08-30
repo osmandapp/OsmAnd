@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -51,9 +51,8 @@ public class RouteDirectionsCard extends MapBaseCard {
 	private void setupAttachToRoadsBanner() {
 		FrameLayout container = view.findViewById(R.id.attach_to_roads_banner_container);
 		container.removeAllViews();
-
 		ApplicationMode appMode = routingHelper.getAppMode();
-		GPXFile gpxFile = routingHelper.getCurrentGPX();
+		GpxFile gpxFile = routingHelper.getCurrentGPX();
 		if (gpxFile != null && !gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == MANUAL) {
 			AttachTrackToRoadsBannerCard card = new AttachTrackToRoadsBannerCard(mapActivity);
 			card.setListener(getListener());

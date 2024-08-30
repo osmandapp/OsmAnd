@@ -42,6 +42,7 @@ import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -228,6 +229,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 							WidgetSettingsBaseFragment.showFragment(manager, args, null, fragment);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
+						.showTopDivider(true)
 						.create());
 			}
 
@@ -235,21 +237,26 @@ public abstract class SimpleWidget extends TextInfoWidget {
 					.setTitleId(R.string.shared_string_delete)
 					.setOnClickListener(item -> {
 						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
-						builder.setTitle(getString(R.string.delete_confirmation_msg, getString(widgetType.titleId)));
-						builder.setMessage(R.string.are_you_sure);
+						builder.setTitle(getString(R.string.delete_widget));
+						builder.setMessage(R.string.delete_widget_description);
 						builder.setNegativeButton(R.string.shared_string_cancel, null)
-								.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+								.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
 								});
 						builder.show();
 					})
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
+					.showTopDivider(true)
 					.create());
 
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 			displayData.anchorView = view;
 			displayData.menuItems = items;
 			displayData.nightMode = nightMode;
+			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+			displayData.showCompound = false;
+			displayData.customDropDown = false;
+			displayData.layoutId = R.layout.popup_menu_item_full_divider;
 			PopUpMenu.show(displayData);
 		}
 	}

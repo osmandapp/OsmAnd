@@ -19,6 +19,7 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.SharedUtil
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripHelper
@@ -27,11 +28,11 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.shared.gpx.GpxDataItem
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 
@@ -112,8 +113,12 @@ class HistoryScreen(
 						}
 					}
 				} else {
-					val analysis = gpxFile.getAnalysis(0)
-					listItem.searchResult.location = analysis?.latLonStart
+					val latLonStart = gpxFile.getAnalysis(0).getLatLonStart()
+					listItem.searchResult.location = if (latLonStart != null) {
+						SharedUtil.jLatLon(latLonStart)
+					} else {
+						null
+					}
 				}
 			}
 			searchItems.add(listItem)
@@ -121,7 +126,12 @@ class HistoryScreen(
 	}
 
 	private fun updateSearchResult(searchResult: SearchResult, dataItem: GpxDataItem) {
-		searchResult.location = dataItem.analysis?.latLonStart
+		val latLonStart = dataItem.getAnalysis()?.getLatLonStart()
+		searchResult.location = if (latLonStart != null) {
+			SharedUtil.jLatLon(latLonStart)
+		} else {
+			null
+		}
 	}
 
 	private fun prepareList(templateBuilder: ListTemplate.Builder) {

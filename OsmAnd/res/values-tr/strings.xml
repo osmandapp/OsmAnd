@@ -5069,7 +5069,6 @@
     <string name="max_altitude">En yüksek rakım</string>
     <string name="shared_string_not_checked">İşaretli değil</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="rendering_attr_alpineHiking_name">Zorluk sınıflandırması</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Patlayıcılar</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gazlar</string>
     <string name="routing_attr_hazmat_category_usa_4_name">Yanıcı Katılar</string>

@@ -20,9 +20,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -244,15 +243,15 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				StringBuilder sb = new StringBuilder();
-				GPXFile gpx = (GPXFile) searchResult.relatedObject;
+				GpxFile gpx = (GpxFile) searchResult.relatedObject;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					sb.append(searchResult.localeRelatedObjectName);
 				}
-				if (gpx != null && !Algorithms.isEmpty(gpx.path)) {
+				if (gpx != null && !Algorithms.isEmpty(gpx.getPath())) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(new File(gpx.path).getName());
+					sb.append(new File(gpx.getPath()).getName());
 				}
 				return sb.toString();
 			case MAP_MARKER:
@@ -515,7 +514,7 @@ public class QuickSearchListItem {
 				pointDescription.setIconName("ic_action_intersection");
 				break;
 			case WPT:
-				GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
+				WptPt wpt = (WptPt) object;
 				pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
 				break;
 		}
