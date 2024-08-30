@@ -4741,4 +4741,8 @@
     <string name="poi_padus_category_proclamation">Kategorie: prohlášení</string>
     <string name="poi_padus_category_fee">Kategorie: poplatek</string>
     <string name="poi_padus_area">Chráněná oblast PAD-US</string>
+    <string name="poi_padus_category_easement">Kategorie: věcné břemeno</string>
+    <string name="poi_padus_local_designation">Místní označení</string>
+    <string name="poi_padus_local_manager">Místní manažer</string>
+    <string name="poi_padus_owner_fullname">Majitel</string>
 </resources>

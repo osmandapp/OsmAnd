@@ -36,6 +36,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -85,7 +86,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private final double[] degrees = new double[72];
 	private final String[] cardinalDirections = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
-	private final int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
+	private final int[] arcColors = {
+			Algorithms.parseColor("#00237BFF"),
+			Algorithms.parseColor("#237BFF"),
+			Algorithms.parseColor("#00237BFF")
+	};
 
 	private float cachedHeading;
 	private boolean isCarViewMap = false;

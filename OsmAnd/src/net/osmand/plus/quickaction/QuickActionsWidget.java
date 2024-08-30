@@ -295,7 +295,7 @@ public class QuickActionsWidget extends LinearLayout {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 
-		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton.getView());
+		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton);
 
 		int centerX = getWidth() / 2;
 		int centerY = getHeight() / 2;

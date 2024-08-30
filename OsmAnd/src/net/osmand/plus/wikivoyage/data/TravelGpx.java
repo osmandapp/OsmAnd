@@ -1,14 +1,22 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
 
 import net.osmand.shared.gpx.primitives.WptPt;
+
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_CATEGORY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
+import net.osmand.util.Algorithms;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 public class TravelGpx extends TravelArticle {
@@ -61,12 +69,38 @@ public class TravelGpx extends TravelArticle {
 		wptPt.setLat(amenity.getLocation().getLatitude());
 		wptPt.setLon(amenity.getLocation().getLongitude());
 		wptPt.setName(amenity.getName());
+		for (String obfTag : amenity.getAdditionalInfoKeys()) {
+			String value = amenity.getAdditionalInfo(obfTag);
+			if (!Algorithms.isEmpty(value)) {
+				String gpxTag = allowedPointObfToGpxTags.get(obfTag);
+				if (gpxTag != null) {
+					wptPt.getExtensionsToWrite().put(gpxTag, value);
+				}
+				if (OBF_POINTS_GROUPS_CATEGORY.equals(obfTag)) {
+					wptPt.setCategory(value);
+				}
+			}
+		}
 		return wptPt;
+	}
+
+	private final static Map<String, String> allowedPointObfToGpxTags = new HashMap<>();
+
+	static {
+		allowedPointObfToGpxTags.put("color", "color");
+		allowedPointObfToGpxTags.put("gpx_icon", "icon");
+		allowedPointObfToGpxTags.put("gpx_bg", "background");
 	}
 
 	@NonNull
 	@Override
 	public String getPointFilterString() {
 		return ROUTE_TRACK_POINT;
+	}
+
+	@NonNull
+	@Override
+	public String getMainFilterString() {
+		return ROUTE_TRACK;
 	}
 }

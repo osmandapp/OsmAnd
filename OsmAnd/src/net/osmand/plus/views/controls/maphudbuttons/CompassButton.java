@@ -1,5 +1,6 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static android.widget.ImageView.ScaleType.FIT_CENTER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
 import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
 import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
@@ -160,7 +161,7 @@ public class CompassButton extends MapButton {
 		}
 		CompassMode compassMode = settings.getCompassMode();
 		setIconId(compassMode.getIconId());
-		setContentDesc(compassMode.getTitleId());
+		view.setContentDescription(app.getString(compassMode.getTitleId()));
 	}
 
 	@Override
@@ -245,8 +246,8 @@ public class CompassButton extends MapButton {
 	}
 
 	@Override
-	protected void setDrawable(@NonNull Drawable drawable) {
-		setMapButtonIcon(view, new CompassDrawable(drawable));
+	protected void setDrawable(@Nullable Drawable drawable) {
+		setMapButtonIcon(view, drawable != null ? new CompassDrawable(drawable) : null, FIT_CENTER);
 	}
 
 	private class CompassDrawable extends Drawable {

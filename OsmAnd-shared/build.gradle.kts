@@ -10,7 +10,6 @@ plugins {
 }
 
 group = "net.osmand.shared"
-version = "master-snapshot"
 
 kotlin {
 	jvm {
@@ -85,4 +84,32 @@ android {
 	defaultConfig {
 		minSdk = 24
 	}
+}
+
+version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "master-snapshot"
+publishing {
+	repositories {
+		ivy {
+			url = uri(System.getenv("OSMAND_BINARIES_IVY_ROOT") ?: "./")
+		}
+	}
+	publications {
+		create<IvyPublication>("ivyOsmAndSharedAndroid") {
+			organisation = "net.osmand.shared"
+			module = "OsmAnd-shared-android"
+			revision = "$version"
+			artifact(file("build/outputs/aar/OsmAnd-shared-debug.aar")) {
+				type = "aar"
+				classifier = "debug"
+			}
+			artifact(file("build/outputs/aar/OsmAnd-shared-release.aar")) {
+				type = "aar"
+				classifier = "release"
+			}
+		}
+	}
+}
+
+tasks.named("publishIvyOsmAndSharedAndroidPublicationToIvyRepository") {
+	dependsOn("bundleDebugAar", "bundleReleaseAar")
 }

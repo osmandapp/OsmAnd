@@ -434,7 +434,7 @@
     <string name="av_settings">音频/视频设置 </string>
     <string name="recording_error">录制失败</string>
     <string name="recording_camera_not_available">摄像头不可用</string>
-    <string name="recording_is_recorded">录制音频/视频中，点击 AV 小工具以停止。</string>
+    <string name="recording_is_recorded">在录制音频 / 视频时，点击 AV 小工具以停止。</string>
     <string name="recording_open_external_player">打开外部播放器</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 插件可用于离线地形特征，如等高线、山体阴影、坡度等</string>
     <string name="map_widget_distancemeasurement">距离测量</string>
@@ -1322,7 +1322,7 @@
     <string name="mapillary_widget_descr">可以助你迅速将图片提交到 Mapillary。</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">街景级图像。您也可以自己贡献。要以地图图层的形式查看现有数据，请在 \"配置地图 \"菜单中打开 \"街景图像\"。</string>
-    <string name="quick_action_showhide_osmbugs_descr">轻点动作按钮会在地图上显示或隐藏 OSM 注记。</string>
+    <string name="quick_action_showhide_osmbugs_descr">在地图上显示或隐藏 OSM 注记的按钮。</string>
     <string name="sorted_by_distance">按距离排序</string>
     <string name="search_favorites">在我的收藏中搜索</string>
     <string name="hillshade_menu_download_descr">下载“山体阴影”叠加层地图以显示垂直阴影。</string>
@@ -1591,7 +1591,7 @@
 \n 这些地图中的任何一种都可以作为主（基底）地图显示，也可以作为另一种基础地图（如 OsmAnd 的离线矢量地图）的覆盖层或底层。可通过 \"配置地图 \"菜单隐藏 OsmAnd 矢量地图的某些元素，使任何底层地图更加清晰可见。
 \n
 \n 可直接下载瓦片地图，或利用任意一种第三方地图准备工具，将其作为 SQLite 数据库文件复制到 OsmAnd 的数据文件夹。</string>
-    <string name="record_plugin_name">旅行记录</string>
+    <string name="record_plugin_name">行程录制</string>
     <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
 \n详情可见 %1$s。</string>
@@ -1616,7 +1616,7 @@
     <string name="location_on_map">位置：
 \n 纬度 %1$s
 \n 经度 %2$s</string>
-    <string name="watch">观看</string>
+    <string name="watch">查看</string>
     <string name="notes">音视频注记</string>
     <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
     <string name="free">%1$s 可用</string>
@@ -1666,7 +1666,7 @@
     <string name="traffic_warning_speed_limit">速度限制</string>
     <string name="traffic_warning_border_control">边境管制</string>
     <string name="traffic_warning_payment">收费站</string>
-    <string name="traffic_warning_stop">停止标志</string>
+    <string name="traffic_warning_stop">停车标志</string>
     <string name="traffic_warning_calming">交通稳静化</string>
     <string name="traffic_warning_speed_camera">测速摄像机</string>
     <string name="traffic_warning">交通警告</string>
@@ -1685,20 +1685,20 @@
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>
     <string name="distance">距离</string>
-    <string name="plugin_touringview_descr">启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。
+    <string name="plugin_touringview_descr">激活该视图后，OsmAnd 的地图风格将变为 “旅游视图”，这是一种专为旅行者和职业司机设计的高细节视图。
 \n
-\n此预览提供了在任何给与的地图缩放，（特别是公路、轨迹、路径和定位标记）在地图数据中最大量可获得的详细行程。
+\n在任何给定的地图缩放比例下，该视图都能提供地图数据（尤其是道路、车辙道、小路和方位标记）中最多的旅行细节。
 \n
-\n它也清楚地描绘了各类道路明确地色码，例如驾驶大型车辆时，这是非常有用的。
+\n它还通过颜色编码清晰地描绘了所有类型的道路，在驾驶大型车辆时非常有用。
 \n
-\n并提供了特别的旅游选项，比如显示自行车路线或高山的路线。
+\n它还提供特殊的旅游选项，如显示自行车路线或高山路线。
 \n
-\n此预览是从我们的标准地图所创建，不需要下载特殊的地图。
+\n无需下载专门的地图，我们基于标准地图创建的该视图。
 \n
-\n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
-    <string name="plugin_nautical_descr">打开以丰富您的地图，其中包含有关航行路线、导航灯、危险区域、允许或禁止航行或停靠的区域等信息。如要使用，下载航海地图并在配置地图中启用“航海地图”类型。
+\n您可以在此重新激活该视图，或者根据需要更改 “配置地图 ”下的 “地图样式”。</string>
+    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。
 \n
-\n详情可见 %1$s。</string>
+\n了解更多 %1$s。</string>
     <string name="plugin_ski_descr">专为冬季运动场地导航而设计： 查看滑雪道、滑雪缆车和越野滑雪道，并用彩色线条标示难度等级。使用时，请启用此插件，并进入 \"配置地图\"，选择 \"冬季和滑雪 \"地图样式。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -1886,7 +1886,7 @@
 \n * 点击测量小工具以查看更多操作。</string>
     <string name="use_magnetic_sensor_descr">使用磁传感器来确定罗盘值而不是方向传感器。</string>
     <string name="use_magnetic_sensor">使用磁传感器</string>
-    <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕关闭）来打开后台跟踪和导航的设置。</string>
+    <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕仍然关闭）来打开后台追踪和导航的设置。</string>
     <string name="av_use_external_recorder">使用系统录音机</string>
     <string name="recording_playing">从已指定的录音开始播放音频。
 \n%1$s</string>
@@ -2148,7 +2148,7 @@
     <string name="show_more_map_detail_descr">在较低的缩放级别上显示一些矢量地图细节（道路等）。</string>
     <string name="shared_string_others">其它</string>
     <string name="vector_data_missing">下载（\"离线\"）数据以便离线使用地图。</string>
-    <string name="shared_string_release">已发布</string>
+    <string name="shared_string_release">已发行</string>
     <string name="local_index_items_backuped">%2$d 项中的 %1$d 项已停用。</string>
     <string name="local_index_items_deleted">%2$d 项中的 %1$d 项已删除。</string>
     <string name="local_index_items_restored">%2$d 项中的 %1$d 项已启动。</string>
@@ -2235,7 +2235,7 @@
     <string name="choose_intersected_street">选择交叉路口</string>
     <string name="Closest_Amenities">最近的设施</string>
     <string name="poi_action_delete">删除</string>
-    <string name="poi_dialog_reopen">重新开放</string>
+    <string name="poi_dialog_reopen">重新打开</string>
     <string name="av_camera_focus">相机对焦类型</string>
     <string name="av_camera_focus_descr">相机对焦模式：</string>
     <string name="av_camera_focus_hiperfocal">超焦距对焦</string>
@@ -3722,7 +3722,7 @@
     <string name="no_items_of_type_message">你没有此类型的项目</string>
     <string name="routeInfo_tracktype_description">根据表面成分给路线或轨迹线上色。通常适用于道路网络大部分未铺设的情况。</string>
     <string name="routeInfo_winter_ice_road_description">按冬季道路分类为路线或轨迹线着色。</string>
-    <string name="routeInfo_smoothness_description">轮式车辆的道路/人行道机动性分类，特别是关于路面规则性/平整度的分类。</string>
+    <string name="routeInfo_smoothness_description">轮式车辆的道路 / 人行道机动性分级，特别是关于路面一致性 / 平整度的分级。</string>
     <string name="routeInfo_surface_description">提供道路/人行道物理表面信息。</string>
     <string name="routeInfo_roadClass_description">按道路分类给路线或轨迹线上色。</string>
     <string name="add_group_to_markers">添加组别到标记列表</string>
@@ -4242,7 +4242,7 @@
     <string name="compass_on_circles">圆圈上的指南针</string>
     <string name="distance_circles">距离-圆圈</string>
     <string name="elevation_profile_widget_desc">显示当前路线的海拔和坡度剖面。</string>
-    <string name="average_speed_skip_stops">考虑到停止</string>
+    <string name="average_speed_skip_stops">考虑停留时间</string>
     <string name="average_speed_time_interval_desc">指定速度平均的时间间隔。</string>
     <string name="average_speed_widget_desc">显示当前行程的平均速度。</string>
     <string name="map_widget_time_to_intermediate">到达中继点的时间</string>
@@ -4296,7 +4296,7 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s：%2$s</string>
     <string name="routing_attr_motor_type_petrol_name">汽油</string>
     <string name="routing_attr_motor_type_hybrid_name">混动</string>
-    <string name="suggested_maps_descr">插件需要这些地图。</string>
+    <string name="suggested_maps_descr">这些地图是该插件所必需的。</string>
     <string name="routing_attr_motor_type_lpg_name">液化石油气</string>
     <string name="routing_attr_motor_type_electric_name">电动</string>
     <string name="routing_attr_motor_type_gas_name">压缩天然气</string>
@@ -4401,7 +4401,7 @@
 \n
 \n</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">显示山地自行车 IMBA 路径</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">显示专用的山地自行车小径。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">显示山地自行车专用路径。</string>
     <string name="connect_with_straight_line">用直线连接</string>
     <string name="attach_roads_warning">只有已录制的轨迹可以附加到道路上。</string>
     <string name="without_profiles_changing">无需更改配置文件</string>
@@ -4975,7 +4975,7 @@
     <string name="shared_string_next_sunset">下次日落</string>
     <string name="weather_wind_kn">节</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="mtb_scale">山地自行车级别</string>
+    <string name="mtb_scale">山地自行车难度分级 / MTB scale</string>
     <string name="download_cloud_version">下载云端版本</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">风速等值线</string>
     <string name="open_weather_action_description">允许您打开包含详细天气信息的屏幕。</string>
@@ -5309,8 +5309,7 @@
     <string name="write_heading">写入航向</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">意大利高山俱乐部</string>
-    <string name="rendering_attr_alpineHiking_description">路线的难度分类类型。</string>
-    <string name="rendering_attr_alpineHiking_name">难度分级</string>
+    <string name="rendering_attr_alpineHiking_description">路线的难度分级类别。</string>
     <string name="shared_string_checked">已检查</string>
     <string name="shared_string_not_checked">未检查</string>
     <string name="routing_attr_hazmat_category_usa_1_name">爆炸物</string>
@@ -5696,4 +5695,34 @@
     <string name="assigned_keys">已分配的按键</string>
     <string name="steps_per_minute_unit">步数每分钟</string>
     <string name="wall_height">墙壁高度</string>
+    <string name="weather_precip_in">英寸</string>
+    <string name="quick_action_temperature_layer">在地图上切换展示或隐藏温度图层。</string>
+    <string name="change_key_binding">更改按键绑定</string>
+    <string name="quick_action_air_pressure_layer">在地图上切换展示或隐藏气压图层。</string>
+    <string name="quick_action_cloud_layer">在地图上切换展示或隐藏云层图层。</string>
+    <string name="rendering_attr_showMtbScale_name">显示山地自行车难度分级</string>
+    <string name="quick_action_precipitation_layer">在地图上切换展示或隐藏降水图层。</string>
+    <string name="key_event_action_activity_back_pressed">按下活动返回键</string>
+    <string name="special_routing_cpp">特殊路线规划类型</string>
+    <string name="rendering_attr_showMtbScale_description">根据山地自行车难度分级显示路径。</string>
+    <string name="cloud_changes">云端变更</string>
+    <string name="lang_zh_hant">繁体中文</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">开启 WunderLINQ 数据网格</string>
+    <string name="rendering_value_name_only_name">仅名称</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="mtb_segment_classification">细分分类</string>
+    <string name="lang_zh_hans">简体中文</string>
+    <string name="battery_saving_mode">省电模式</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="weather_precip_mm">毫米</string>
+    <string name="lang_war">瓦瑞语</string>
+    <string name="no_config_smart_folder_description">智能文件夹可按照已应用的过滤器对轨迹进行分组</string>
+    <string name="changes">变更 %1$s</string>
+    <string name="quick_action_wind_layer">在地图上切换展示或隐藏风力图层。</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="play_weather_forecast">播放天气预报</string>
+    <string name="wall_color">墙壁颜色</string>
+    <string name="weather_data_sources_prompt">OsmAnd 从两个来源提供天气数据：</string>
+    <string name="weather_source_ecmwf_description">欧洲中期天气预报中心</string>
 </resources>

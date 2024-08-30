@@ -32,14 +32,14 @@ import static net.osmand.osm.OsmRouteType.RUNNING;
 import static net.osmand.osm.OsmRouteType.SKI;
 import static net.osmand.osm.OsmRouteType.WATER;
 import static net.osmand.plus.configmap.ConfigureMapUtils.getPropertyForAttr;
-import static net.osmand.plus.configmap.DifficultyClassificationFragment.getDifficultyClassificationDescription;
+import static net.osmand.plus.configmap.AlpineHikingScaleFragment.getDifficultyClassificationDescription;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE_IMBA_TRAILS;
 import static net.osmand.plus.configmap.routes.RouteUtils.SHOW_MTB_SCALE_UPHILL;
 import static net.osmand.plus.configmap.routes.RouteUtils.getRoutesAttrsNames;
 import static net.osmand.plus.configmap.routes.RouteUtils.showRendererSnackbarForAttr;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ALPINE_HIKING;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
@@ -55,7 +55,6 @@ import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 import android.view.View;
 
@@ -64,9 +63,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import net.osmand.CallbackWithObject;
 import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -78,7 +74,6 @@ import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -87,14 +82,12 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
 
@@ -103,14 +96,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 public class ConfigureMapMenu {
 
@@ -308,7 +296,7 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
 					                              @NonNull View view, @NonNull ContextMenuItem item) {
-						activity.getDashboard().setDashboardVisibility(true, DIFFICULTY_CLASSIFICATION, AndroidUtils.getCenterViewCoordinates(view));
+						activity.getDashboard().setDashboardVisibility(true, ALPINE_HIKING, AndroidUtils.getCenterViewCoordinates(view));
 						return false;
 					}
 

@@ -5294,7 +5294,6 @@
     <string name="free_settings_backup">Backup gratuit al setărilor</string>
     <string name="free_ride">Deplasare liberă</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificare dificultate</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_description">Clubul Alpin Elvețian</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Clubul Alpin Italian)</string>
@@ -5863,8 +5862,25 @@
     <string name="add_widget_below">Adăugă widget dedesubt</string>
     <string name="delete_widget">Ștergeți widget-ul?</string>
     <string name="delete_widget_description">Acest widget va fi șters. Îl puteți restaura ulterior în ecranul de configurare.</string>
-    <string name="height_cache">Cache de înălțime</string>
     <string name="add_widget_to_the_left">Adăugă widget la stânga</string>
     <string name="battery_saving_mode">Mod de economisire a bateriei</string>
     <string name="help_article_map_tracks_name">Trasee</string>
+    <string name="corner_radius">Raza colțului</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Opacitate fundal</string>
+    <string name="quick_action_previous_screen_title">Ecranul precedent</string>
+    <string name="quick_action_verb_navigate">Navighează</string>
+    <string name="quick_action_drawer_desc">O comutare pentru a afișa sau a ascunde meniul lateral.</string>
+    <string name="quick_action_drawer_title">Meniu lateral</string>
+    <string name="quick_action_search_view_desc">O comutare pentru a deschide sau închide vizualizarea de căutare.</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">Axa graficului</string>
+    <string name="y_axis_description">Selectați până la două opțiuni pentru axa Y.</string>
+    <string name="shared_string_interface">Interfață</string>
+    <string name="quick_action_previous_screen_desc">O comutare pentru a naviga la ecranul anterior.</string>
+    <string name="quick_action_search_view_title">Vizualizare căutare</string>
+    <string name="quick_action_navigation_view_desc">O comutare pentru a deschide sau închide vizualizarea de navigare.</string>
+    <string name="quick_action_navigation_view_title">Vizualizare navigare</string>
+    <string name="quick_action_switch_compass_desc">Un comutator pentru a schimba orientarea hărții.</string>
+    <string name="rendering_attr_alpineHiking_name">Grad de dificultate a traseelor de drumeție</string>
 </resources>

@@ -4361,7 +4361,6 @@
     <string name="walking_route_osmc_description">Χρωματίζονται οι διαδρομές ανάλογα με το δικό του τοπικό χρώμα (αν υπάρχει στο OpenStreetMap) και τον τύπο (διεθνές, περιφερειακό, τοπικό).</string>
     <string name="rendering_attr_showRunningRoutes_name">Διαδρομές τρεξίματος</string>
     <string name="routeInfo_horse_scale_name">Δυσκολία των μονοπάτιών για άλογο</string>
-    <string name="rendering_attr_alpineHiking_name">Κατηγοριοποίηση δυσκολίας</string>
     <string name="rendering_attr_natureReserves_name">Φυσικό καταφύγιο</string>
     <string name="quick_action_parking_place">Θέση στάθμευσης</string>
     <string name="quick_action_video_note">Σημείωση βίντεο</string>

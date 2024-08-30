@@ -99,9 +99,9 @@ class WptPt : GpxExtensions {
 	constructor(
 		lat: Double,
 		lon: Double,
-		desc: String,
-		name: String,
-		category: String,
+		desc: String?,
+		name: String?,
+		category: String?,
 		color: String,
 		icon: String,
 		background: String
@@ -132,8 +132,13 @@ class WptPt : GpxExtensions {
 		return iconName
 	}
 
-	fun setIconName(iconName: String) {
-		getExtensionsToWrite()[GpxUtilities.ICON_NAME_EXTENSION] = iconName
+	fun setIconName(iconName: String?) {
+		val extensionsToWrite = getExtensionsToWrite()
+		if (iconName == null) {
+			extensionsToWrite.remove(GpxUtilities.ICON_NAME_EXTENSION)
+		} else {
+			extensionsToWrite[GpxUtilities.ICON_NAME_EXTENSION] = iconName
+		}
 	}
 
 	fun getAmenityOriginName(): String? {
@@ -171,8 +176,13 @@ class WptPt : GpxExtensions {
 		return getExtensionsToRead()[GpxUtilities.BACKGROUND_TYPE_EXTENSION]
 	}
 
-	fun setBackgroundType(backType: String) {
-		getExtensionsToWrite()[GpxUtilities.BACKGROUND_TYPE_EXTENSION] = backType
+	fun setBackgroundType(backType: String?) {
+		val extensionsToWrite = getExtensionsToWrite()
+		if (backType == null) {
+			extensionsToWrite.remove(GpxUtilities.BACKGROUND_TYPE_EXTENSION)
+		} else {
+			extensionsToWrite[GpxUtilities.BACKGROUND_TYPE_EXTENSION] = backType
+		}
 	}
 
 	fun getProfileType(): String? {
@@ -250,9 +260,9 @@ class WptPt : GpxExtensions {
 		fun createAdjustedPoint(
 			lat: Double,
 			lon: Double,
-			description: String,
-			name: String,
-			category: String,
+			description: String?,
+			name: String?,
+			category: String?,
 			color: Int,
 			iconName: String?,
 			backgroundType: String?,

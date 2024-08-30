@@ -129,6 +129,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private CanvasColors canvasColors;
 	private Boolean nightMode;
 
+	private float minAllowedElevationAngle = MIN_ALLOWED_ELEVATION_ANGLE;
+
+
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
 		int colorNight = MAP_DEFAULT_COLOR;
@@ -614,6 +617,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return elevationAngle != DEFAULT_ELEVATION_ANGLE;
 	}
 
+	public void adjustTiltAngle() {
+		int baseZoom = getZoom();
+		int angle = getAdjustedTiltAngle(baseZoom, true);
+		setElevationAngle(angle);
+	}
+
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
 		int baseZoom = zoom.getBaseZoom();
 		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
@@ -627,7 +636,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			baseZoom = Math.max(MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT, Math.min(baseZoom, MAX_ZOOM_LIMIT));
 		}
 		int angle = 90 - (baseZoom - 2) * 5;
-		return (int) Math.max(MIN_ALLOWED_ELEVATION_ANGLE, Math.min(angle, DEFAULT_ELEVATION_ANGLE));
+		return (int) Math.max(minAllowedElevationAngle, Math.min(angle, DEFAULT_ELEVATION_ANGLE));
+	}
+
+	public float getMinAllowedElevationAngle() {
+		return minAllowedElevationAngle;
+	}
+
+	public void setMinAllowedElevationAngle(float minAllowedElevationAngle) {
+		this.minAllowedElevationAngle = minAllowedElevationAngle;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1491,7 +1508,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
-		return elevationAngle > 90 ? 90f : Math.max(MIN_ALLOWED_ELEVATION_ANGLE, elevationAngle);
+		return elevationAngle > 90 ? 90f : Math.max(minAllowedElevationAngle, elevationAngle);
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
@@ -2266,6 +2283,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mapRenderer != null) {
 			mapRenderer.setElevationAngle(angle);
 		}
+		settings.setLastKnownMapElevation(angle);
 		notifyOnElevationChanging(angle);
 	}
 

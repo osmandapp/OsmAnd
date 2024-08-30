@@ -42,6 +42,7 @@ import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -252,7 +253,10 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			displayData.anchorView = view;
 			displayData.menuItems = items;
 			displayData.nightMode = nightMode;
-			displayData.showBelowAnchorView = true;
+			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+			displayData.showCompound = false;
+			displayData.customDropDown = false;
+			displayData.layoutId = R.layout.popup_menu_item_full_divider;
 			PopUpMenu.show(displayData);
 		}
 	}
