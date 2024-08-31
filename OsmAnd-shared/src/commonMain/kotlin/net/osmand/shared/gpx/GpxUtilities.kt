@@ -1436,14 +1436,20 @@ object GpxUtilities {
 			val color = point.getColor()
 			if (pointsGroup.color == 0 && color != 0) {
 				pointsGroup.color = color
+			} else if (pointsGroup.color != 0 && color == 0) {
+				point.setColor(pointsGroup.color)
 			}
 			val iconName = point.getIconName()
 			if (KAlgorithms.isEmpty(pointsGroup.iconName) && !KAlgorithms.isEmpty(iconName)) {
 				pointsGroup.iconName = iconName
+			} else if (!KAlgorithms.isEmpty(pointsGroup.iconName) && KAlgorithms.isEmpty(iconName)) {
+				point.setIconName(pointsGroup.iconName)
 			}
 			val backgroundType = point.getBackgroundType()
 			if (KAlgorithms.isEmpty(pointsGroup.backgroundType) && !KAlgorithms.isEmpty(backgroundType)) {
 				pointsGroup.backgroundType = backgroundType
+			} else if (!KAlgorithms.isEmpty(pointsGroup.backgroundType) && KAlgorithms.isEmpty(backgroundType)) {
+				point.setBackgroundType(pointsGroup.backgroundType)
 			}
 			pointsGroup.points.add(point)
 		}
