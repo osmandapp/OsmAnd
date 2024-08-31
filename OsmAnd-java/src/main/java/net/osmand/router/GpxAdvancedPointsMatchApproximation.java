@@ -12,7 +12,7 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
 
 public class GpxAdvancedPointsMatchApproximation {
-	private final int LOOKUP_AHEAD = 10; // the number of gpx points and road segment points to discover (10)
+	private final int LOOKUP_AHEAD = 15; // the number of gpx points and road segment points to discover (15)
 	private final boolean USE_PROJECTION_TO_SEGMENT = false; // prefer projection-to-seg instead of pnt-pnt-dist
 	private final boolean USE_SINGLE_SEGMENT_GPX_ANGLE = false; // check every single segment instead of full road
 	private final double CRUSH_NON_PROJECTION_SEGMENTS_M = 25; // crush road segments for non-projection measure (25)
@@ -30,7 +30,8 @@ public class GpxAdvancedPointsMatchApproximation {
 		private RouteSegmentResult segment;
 	}
 
-	public GpxAdvancedPointsMatchApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+	public GpxAdvancedPointsMatchApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
+	                                           List<GpxPoint> gpxPoints) {
 		this.gctx = gctx;
 		this.frontEnd = frontEnd;
 		this.gpxPoints = gpxPoints;
@@ -49,22 +50,30 @@ public class GpxAdvancedPointsMatchApproximation {
 			MinDistResult bestSegment = null;
 
 			int start = currentPoint.ind + 1;
-			int amplifier = Math.max(1, currentPoint.pnt.others.size()); // lookup ahead is amplified on junctions
-			int lookupAhead = currentPoint.ind > 0 ? LOOKUP_AHEAD * amplifier : amplifier; // limit first point
+			int amplifier = Math.max(1, currentPoint.pnt.others.size()); // lookup-ahead is amplified on junctions
+			int lookupAhead = currentPoint.ind > 0 ? LOOKUP_AHEAD * amplifier : 1; // first point should be limited
 			int end = Math.min(start + lookupAhead, gpxPoints.size());
 			List<MinDistResult> lookAheadSegments = new ArrayList<>();
 			Map<Long, Integer> segmentPopularity = new HashMap<>();
 
 			for (int j = start; j < end; j++) {
-				MinDistResult currentSegment = findMinDistInLoadedPoints(currentPoint, gpxPoints.get(j));
+				GpxPoint nextPoint = gpxPoints.get(j);
+
+				if (currentPoint.x31 == nextPoint.x31 && currentPoint.y31 == nextPoint.y31) {
+					end = Math.min(end + 1, gpxPoints.size());
+					continue; // skip duplicate point(s)
+				}
+
+				if (!lookAheadSegments.isEmpty() && MapUtils.squareRootDist31(currentPoint.x31, currentPoint.y31,
+						nextPoint.x31, nextPoint.y31) > minPointApproximation * 2) {
+					break; // avoid shortcutting of loops
+				}
+
+				MinDistResult currentSegment = findMinDistInLoadedPoints(currentPoint, nextPoint);
 
 				lookAheadSegments.add(currentSegment);
 				long segmentId = calcSegmentId(currentSegment.segment);
 				segmentPopularity.put(segmentId, segmentPopularity.getOrDefault(segmentId, 0) + 1);
-
-				if (currentSegment.minDist > minPointApproximation) {
-					break; // avoid shortcutting of loops
-				}
 			}
 
 			for (MinDistResult currentSegment : lookAheadSegments) {
@@ -269,33 +278,26 @@ public class GpxAdvancedPointsMatchApproximation {
 	private double calcGpxAnglePenalty(RouteSegmentPoint pnt, int start, int end, double gpxAngle) {
 		if (Double.isNaN(gpxAngle)) return 0;
 		if (start == end) return 0;
-		if (start > end) {
-			int swap = start;
-			start = end;
-			end = swap;
-		}
 		int counter = 0;
 		double roadAngle = 0;
-		for (int i = start; i < end; i++) {
+		int increment = end > start ? +1 : -1;
+		for (int i = start; i != end; i += increment) {
 			int sx = pnt.getRoad().getPoint31XTile(i);
 			int sy = pnt.getRoad().getPoint31YTile(i);
-			int ex = pnt.getRoad().getPoint31XTile(i + 1);
-			int ey = pnt.getRoad().getPoint31YTile(i + 1);
+			int ex = pnt.getRoad().getPoint31XTile(i + increment);
+			int ey = pnt.getRoad().getPoint31YTile(i + increment);
 			double segmentAngle = Math.atan2(ey - sy, ex - sx);
 			roadAngle += segmentAngle;
 			counter++;
 		}
 		roadAngle /= counter;
 
-		// Unidirectional method (works good)
-		if (gpxAngle < 0) gpxAngle += Math.PI;
-		if (roadAngle < 0) roadAngle += Math.PI;
-		double penalty = Math.abs(gpxAngle - roadAngle) / Math.PI;
+		// Unidirectional method (deprecated)
+//		if (gpxAngle < 0) gpxAngle += Math.PI;
+//		if (roadAngle < 0) roadAngle += Math.PI;
+//		return Math.abs(gpxAngle - roadAngle) / Math.PI;
 
-		// This method needs to be fine-tuned (perhaps the difference should be more linear)
-		// double penalty = (1 - Math.cos(MapUtils.alignAngleDifference(gpxAngle - roadAngle))); // [0 - 2]
-
-		return penalty;
+		return Math.abs(MapUtils.alignAngleDifference(gpxAngle - roadAngle)) / Math.PI;
 	}
 
 	private GpxPoint findNextRoutablePoint(int searchStart) throws IOException {

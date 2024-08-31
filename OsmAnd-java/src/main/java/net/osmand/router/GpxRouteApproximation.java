@@ -19,9 +19,10 @@ public class GpxRouteApproximation {
 	public static final int GPX_OSM_POINTS_MATCH_ALGORITHM = 1;
 	public static final int GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM = 2;
 	public static final int GPX_OSM_ADVANCED_POINTS_MATCH_ALGORITHM = 3;
-	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_POINTS_MATCH_ALGORITHM;
+
+//	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_POINTS_MATCH_ALGORITHM;
 //	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
-//	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_ADVANCED_POINTS_MATCH_ALGORITHM;
+	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_ADVANCED_POINTS_MATCH_ALGORITHM;
 
 	
 	public List<RoutePlannerFrontEnd.GpxPoint> finalPoints = new ArrayList<>();
