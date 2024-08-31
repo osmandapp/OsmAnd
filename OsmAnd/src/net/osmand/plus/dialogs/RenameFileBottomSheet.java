@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -131,7 +132,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		File dest = renameFile();
 		if (dest != null) {
-			app.getSmartFolderHelper().onTrackRenamed(srcFile, dest);
+			app.getSmartFolderHelper().onTrackRenamed(SharedUtil.kFile(srcFile), SharedUtil.kFile(dest));
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof RenameCallback) {
 				((RenameCallback) fragment).fileRenamed(srcFile, dest);

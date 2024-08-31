@@ -6,13 +6,24 @@ import net.osmand.shared.gpx.GpxParameter
 import kotlin.math.ceil
 import kotlin.math.floor
 
+@Serializable
+open class RangeTrackFilter<T : Comparable<T>>
+	: BaseTrackFilter {
 
-open class RangeTrackFilter<T : Comparable<T>>(
-	minValue: T,
-	maxValue: T,
-	trackFilterType: TrackFilterType,
-	filterChangedListener: FilterChangedListener?)
-	: BaseTrackFilter(trackFilterType, filterChangedListener) {
+	constructor(
+		minValue: T,
+		maxValue: T,
+		trackFilterType: TrackFilterType,
+		filterChangedListener: FilterChangedListener?) : super(
+		trackFilterType,
+		filterChangedListener) {
+		this.minValue = minValue
+		this.maxValue = maxValue
+		this.valueFrom = minValue
+		this.valueTo = maxValue
+
+	}
+
 
 	@Serializable
 	var minValue: T
@@ -26,13 +37,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 
 	@Serializable
 	var valueTo: T
-
-	init {
-		this.minValue = minValue
-		this.maxValue = maxValue
-		this.valueFrom = minValue
-		this.valueTo = maxValue
-	}
 
 	open fun setValueFrom(from: T, updateListeners: Boolean = true) {
 		valueFrom = maxOf(minValue, from)

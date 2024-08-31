@@ -63,7 +63,7 @@ import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.filters.SmartFolderHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;

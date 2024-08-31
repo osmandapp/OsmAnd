@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.TrackItem
 
+@Serializable
 abstract class BaseTrackFilter(
 	@Serializable
 	@SerialName("filterType") val trackFilterType: TrackFilterType,

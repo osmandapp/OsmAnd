@@ -9,7 +9,7 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
+import net.osmand.shared.filters.SmartFolderUpdateListener
 import net.osmand.shared.filters.SmartFolder
 import net.osmand.shared.filters.TracksGroup
 import net.osmand.plus.utils.AndroidUtils
@@ -123,8 +123,16 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		}
 	}
 
+	override fun onSmartFolderRenamed(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
+	}
+
 	override fun onSmartFoldersUpdated() {
-		super.onSmartFoldersUpdated()
 		val actualFolder = smartFolderHelper.getSmartFolder(smartFolder.folderName)
 		if (actualFolder != null && actualFolder != smartFolder) {
 			smartFolder = actualFolder

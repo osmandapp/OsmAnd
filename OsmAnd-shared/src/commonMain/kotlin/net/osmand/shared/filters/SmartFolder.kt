@@ -1,19 +1,21 @@
 package net.osmand.shared.filters
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KCollectionUtils
 
-class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
+@Serializable
+class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
 
-	private var trackItems: MutableList<TrackItem> = ArrayList()
+	@Transient
+	private var trackItems: MutableList<TrackItem>? = null
 
 	constructor() : this("") {
-		trackItems = ArrayList()
 	}
 
-	@Serializable
-	var folderName = folderName
+//	@Serializable
+//	var folderName = folderName
 
 	@Serializable
 	var creationTime = 0L
@@ -21,6 +23,7 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	@Serializable
 	var filters: MutableList<BaseTrackFilter>? = null
 
+	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
 
 	override fun getName(): String {
@@ -28,12 +31,17 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 	}
 
 	override fun getTrackItems(): MutableList<TrackItem> {
+		var trackItems:MutableList<TrackItem>? = this.trackItems
+		if(trackItems == null) {
+			trackItems = ArrayList()
+			this.trackItems = trackItems
+		}
 		return trackItems
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
-		if (!trackItems.contains(trackItem)) {
-			trackItems = KCollectionUtils.addToList(trackItems, trackItem)
+		if (!getTrackItems().contains(trackItem)) {
+			trackItems = KCollectionUtils.addToList(getTrackItems(), trackItem)
 			folderAnalysis = null
 		}
 	}

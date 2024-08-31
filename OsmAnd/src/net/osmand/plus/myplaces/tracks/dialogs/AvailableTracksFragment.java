@@ -33,7 +33,7 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
+import net.osmand.shared.filters.SmartFolderUpdateListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.shared.filters.SmartFolder;

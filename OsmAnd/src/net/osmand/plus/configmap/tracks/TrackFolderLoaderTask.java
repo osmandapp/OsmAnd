@@ -10,7 +10,7 @@ import androidx.annotation.WorkerThread;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.filters.SmartFolderHelper;
 import net.osmand.shared.filters.TrackFolder;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;

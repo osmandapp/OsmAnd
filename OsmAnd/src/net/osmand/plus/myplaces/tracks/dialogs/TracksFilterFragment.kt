@@ -27,8 +27,8 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
+import net.osmand.shared.filters.SmartFolderHelper
+import net.osmand.shared.filters.SmartFolderUpdateListener
 import net.osmand.shared.filters.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
@@ -345,12 +345,20 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 		dialogClosedListener?.onDialogClosed()
 	}
 
-	override fun onSmartFolderSaved(smartFolder: SmartFolder?) {
-		super.onSmartFolderSaved(smartFolder)
+	override fun onSmartFoldersUpdated() {
+	}
+
+	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderRenamed(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder) {
 		dismiss()
 	}
 
-	override fun onSmartFolderCreated(smartFolder: SmartFolder?) {
+	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 		dismiss()
 	}
 }

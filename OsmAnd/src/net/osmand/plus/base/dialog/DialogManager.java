@@ -20,7 +20,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.filters.SmartFolderHelper;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;

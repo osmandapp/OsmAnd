@@ -79,7 +79,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -127,6 +127,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.filters.SmartFolderHelper;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 

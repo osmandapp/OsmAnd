@@ -1,8 +1,7 @@
 package net.osmand.shared.filters
 
 import net.osmand.shared.util.OsmAndFormatter
-
-//import net.osmand.shared.filters.KMetricsConstants;
+import net.osmand.shared.util.PlatformUtil
 
 enum class MeasureUnitType {
 	TIME_DURATION,
@@ -18,7 +17,7 @@ enum class MeasureUnitType {
 
 	fun getFilterUnitText(mc: KMetricsConstants): String {
 		val unitResId = when (this) {
-			TIME_DURATION -> "shared_string_minute_lowercase"
+			TIME_DURATION -> PlatformUtil.getStringResource("shared_string_minute_lowercase")
 			DISTANCE -> getDistanceUnits(mc)
 			ALTITUDE -> getAltitudeUnits(mc)
 			SPEED -> getSpeedUnits(mc)
@@ -33,46 +32,44 @@ enum class MeasureUnitType {
 	}
 
 	private fun getDistanceUnits(mc: KMetricsConstants): String {
-//		val settings = app.settings
-//		val mc = settings.METRIC_SYSTEM.get()
 		return when (mc) {
 			KMetricsConstants.MILES_AND_METERS,
 			KMetricsConstants.MILES_AND_FEET,
-			KMetricsConstants.MILES_AND_YARDS -> "mile"
+			KMetricsConstants.MILES_AND_YARDS -> PlatformUtil.getStringResource("mile")
 
 			KMetricsConstants.NAUTICAL_MILES_AND_FEET,
-			KMetricsConstants.NAUTICAL_MILES_AND_METERS -> "nm"
+			KMetricsConstants.NAUTICAL_MILES_AND_METERS -> PlatformUtil.getStringResource("nm")
 
-			KMetricsConstants.KILOMETERS_AND_METERS -> "km"
+			KMetricsConstants.KILOMETERS_AND_METERS -> PlatformUtil.getStringResource("km")
 		}
 	}
 
 	private fun getPowerUnits(): String {
-		return "power_watts_unit"
+		return PlatformUtil.getStringResource("power_watts_unit")
 	}
 
 	private fun getTemperatureUnits(): String {
-		return "degree_celsius"
+		return PlatformUtil.getStringResource("degree_celsius")
 	}
 
 	private fun getBPMUnits(): String {
-		return "beats_per_minute_short"
+		return PlatformUtil.getStringResource("beats_per_minute_short")
 	}
 
 	private fun getRotationUnits(): String {
-		return "revolutions_per_minute_unit"
+		return PlatformUtil.getStringResource("revolutions_per_minute_unit")
 	}
 
 	private fun getSpeedUnits(mc: KMetricsConstants): String {
 		return when (mc) {
 			KMetricsConstants.MILES_AND_METERS,
 			KMetricsConstants.MILES_AND_FEET,
-			KMetricsConstants.MILES_AND_YARDS -> "mile_per_hour"
+			KMetricsConstants.MILES_AND_YARDS -> PlatformUtil.getStringResource("mile_per_hour")
 
 			KMetricsConstants.NAUTICAL_MILES_AND_FEET,
-			KMetricsConstants.NAUTICAL_MILES_AND_METERS -> "nm_h"
+			KMetricsConstants.NAUTICAL_MILES_AND_METERS -> PlatformUtil.getStringResource("nm_h")
 
-			KMetricsConstants.KILOMETERS_AND_METERS -> "km_h"
+			KMetricsConstants.KILOMETERS_AND_METERS -> PlatformUtil.getStringResource("km_h")
 		}
 	}
 
@@ -80,16 +77,13 @@ enum class MeasureUnitType {
 		val useFeet =
 			mc == KMetricsConstants.MILES_AND_FEET || mc == KMetricsConstants.MILES_AND_YARDS || mc == KMetricsConstants.NAUTICAL_MILES_AND_FEET
 		return if (useFeet) {
-			"foot"
+			PlatformUtil.getStringResource("foot")
 		} else {
-			"m"
+			PlatformUtil.getStringResource("m")
 		}
 	}
 
 	fun getBaseValueFromFormatted(value: String): Float {
-//		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-//		val mode = app.settings.applicationMode
-//		val speedConstant = app.settings.SPEED_SYSTEM.getModeValue(mode)
 		return when (this) {
 			SPEED -> OsmAndFormatter.convertSpeedToMetersPerSecond(
 				value.toFloat())
@@ -104,7 +98,5 @@ enum class MeasureUnitType {
 
 			else -> value.toFloat()
 		}
-
 	}
-
 }

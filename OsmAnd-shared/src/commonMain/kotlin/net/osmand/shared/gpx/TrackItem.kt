@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import kotlinx.serialization.Serializable
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.PlatformUtil
 

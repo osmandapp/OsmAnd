@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.filters
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -130,6 +131,11 @@ class ListFilterAdapter(
 			return if (Algorithms.isEmpty(itemName)) {
 				app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
 			} else {
+				try {
+					Color.parseColor(itemName)
+				} catch (ex: Throwable){
+					Log.e("Corwin", "getFilterItemIcon: $itemName")
+				}
 				val color = Color.parseColor(itemName)
 				val colorWithoutAlpha = ColorUtilities.removeAlpha(color)
 				val transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f)

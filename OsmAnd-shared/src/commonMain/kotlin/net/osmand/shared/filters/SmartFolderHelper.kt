@@ -1,29 +1,16 @@
 package net.osmand.shared.filters
 
-import android.os.AsyncTask
-import androidx.annotation.WorkerThread
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import net.osmand.SharedUtil
-import net.osmand.StateChangedListener
-import net.osmand.plus.OsmandApplication
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.settings.backend.preferences.CommonPreference
+import kotlinx.datetime.Clock
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.Json
 import net.osmand.shared.api.KOsmAndSettings
 import net.osmand.shared.api.KStateChangedListener
-import net.osmand.shared.api.OsmAndContext
-import net.osmand.shared.filters.BaseTrackFilter
-import net.osmand.shared.filters.SmartFolder
-import net.osmand.shared.filters.TrackFiltersHelper
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KBackgroundTask
+import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
-import net.osmand.util.Algorithms
-import net.osmand.util.CollectionUtils
-import java.io.File
-import java.util.Date
 
 class SmartFolderHelper() {
 
@@ -39,7 +26,7 @@ class SmartFolderHelper() {
 	private var allAvailableTrackItems = HashSet<TrackItem>()
 	private var updateListeners: MutableList<SmartFolderUpdateListener> = mutableListOf()
 	private var isWritingSettings = false
-	private val osmAndContext: KOsmAndSettings
+	private val osmAndSettings: KOsmAndSettings = PlatformUtil.getOsmAndContext().getSettings()
 	private val settingsChangedListener = object : KStateChangedListener<String> {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
@@ -52,23 +39,20 @@ class SmartFolderHelper() {
 	}
 
 	init {
-		osmAndContext = PlatformUtil.getOsmAndContext().getSettings()
-		osmAndContext.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "")
-		osmAndContext.addPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "")
+		osmAndSettings.addPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
 		readSettings()
 	}
 
 	private fun onSettingsChanged() {
 		if (!isWritingSettings) {
-			withContext(Dispatchers.Default) {
-				updateSmartFolderSettings()
-			}
+			updateSmartFolderSettings()
 		}
 	}
 
 	private fun readSettings() {
 		val newCollection = ArrayList<SmartFolder>()
-		val settingsJson = osmAndContext.getStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
+		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
 		if (!KAlgorithms.isEmpty(settingsJson)) {
 			TrackFilterList.parseFilters(settingsJson)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
@@ -89,9 +73,8 @@ class SmartFolderHelper() {
 		smartFolderCollection = newCollection
 	}
 
-	private suspend fun updateSmartFolderSettings() {
-
-		SmartFoldersUpdateTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+	private fun updateSmartFolderSettings() {
+		SmartFoldersUpdateTask().execute()
 	}
 
 	fun resetSmartFoldersItems() {
@@ -124,7 +107,7 @@ class SmartFolderHelper() {
 	fun saveNewSmartFolder(name: String, filters: MutableList<BaseTrackFilter>?) {
 		val enabledFilters = getEnabledFilters(filters)
 		val newFolder = SmartFolder(name)
-		newFolder.creationTime = Date().time
+		newFolder.creationTime = Clock.System.now().toEpochMilliseconds()
 		newFolder.filters = enabledFilters
 		smartFolderCollection.add(newFolder)
 		updateSmartFolderItems(newFolder)
@@ -164,20 +147,20 @@ class SmartFolderHelper() {
 
 	fun addUpdateListener(listener: SmartFolderUpdateListener) {
 		if (!updateListeners.contains(listener)) {
-			updateListeners = CollectionUtils.addToList(updateListeners, listener)
+			updateListeners = KCollectionUtils.addToList(updateListeners, listener)
 		}
 	}
 
 	fun removeUpdateListener(listener: SmartFolderUpdateListener) {
 		if (updateListeners.contains(listener)) {
-			updateListeners = CollectionUtils.removeFromList(updateListeners, listener)
+			updateListeners = KCollectionUtils.removeFromList(updateListeners, listener)
 		}
 	}
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = gson.toJson(smartFolderCollection)
-		preference.set(json)
+		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}
 
@@ -187,7 +170,7 @@ class SmartFolderHelper() {
 
 	private fun getSmartFolderByName(name: String): SmartFolder? {
 		for (folder in smartFolderCollection) {
-			if (Algorithms.stringsEqual(folder.folderName, name)) {
+			if (KAlgorithms.stringsEqual(folder.folderName, name)) {
 				return folder
 			}
 		}
@@ -205,7 +188,7 @@ class SmartFolderHelper() {
 	}
 
 	fun deleteSmartFolder(smartFolder: SmartFolder) {
-		smartFolderCollection = CollectionUtils.removeFromList(smartFolderCollection, smartFolder)
+		smartFolderCollection = KCollectionUtils.removeFromList(smartFolderCollection, smartFolder)
 		writeSettings()
 		notifyUpdateListeners()
 	}
@@ -247,10 +230,10 @@ class SmartFolderHelper() {
 		}
 	}
 
-	fun onGpxFileDeleted(gpxFile: File) {
+	fun onGpxFileDeleted(gpxFile: KFile) {
 		val newAllTracks = HashSet<TrackItem>(allAvailableTrackItems)
 		for (trackItem in newAllTracks) {
-			if (trackItem.path == gpxFile.path) {
+			if (trackItem.path == gpxFile.absolutePath()) {
 				newAllTracks.remove(trackItem)
 				allAvailableTrackItems = newAllTracks
 				break
@@ -259,12 +242,12 @@ class SmartFolderHelper() {
 		updateAllSmartFoldersItems()
 	}
 
-	fun onTrackRenamed(srcTrackFile: File, destTrackFile: File) {
+	fun onTrackRenamed(srcTrackFile: KFile, destTrackFile: KFile) {
 		val newAllTracks = HashSet<TrackItem>(allAvailableTrackItems)
 		for (trackItem in newAllTracks) {
-			if (trackItem.path == srcTrackFile.path) {
+			if (trackItem.path == srcTrackFile.absolutePath()) {
 				newAllTracks.remove(trackItem)
-				newAllTracks.add(TrackItem(SharedUtil.kFile(destTrackFile)))
+				newAllTracks.add(TrackItem(destTrackFile))
 				allAvailableTrackItems = newAllTracks
 				break
 			}
@@ -273,8 +256,7 @@ class SmartFolderHelper() {
 		notifyUpdateListeners()
 	}
 
-	@WorkerThread
-	fun updateSmartFolderItems(smartFolder: SmartFolder) {
+	private fun updateSmartFolderItems(smartFolder: SmartFolder) {
 //		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
 		smartFolder.resetItems()
 		addTracksToSmartFolders(ArrayList(allAvailableTrackItems), arrayListOf(smartFolder))
@@ -283,7 +265,7 @@ class SmartFolderHelper() {
 
 	fun getSmartFolder(name: String): SmartFolder? {
 		for (folder in smartFolderCollection) {
-			if (Algorithms.stringsEqual(folder.folderName, name)) {
+			if (KAlgorithms.stringsEqual(folder.folderName, name)) {
 				return folder
 			}
 		}
@@ -300,17 +282,14 @@ class SmartFolderHelper() {
 
 
 	private inner class SmartFoldersUpdateTask(
-	) : AsyncTask<Void, Void, Void?>() {
+	) : KBackgroundTask<Unit>() {
 
-		@Deprecated("Deprecated in Java")
-		override fun doInBackground(vararg params: Void): Void? {
+		override fun doInBackground() {
 			readSettings()
 			updateAllSmartFoldersItems()
-			return null
 		}
 
-		@Deprecated("Deprecated in Java")
-		override fun onPostExecute(result: Void?) {
+		override fun onPostExecute(result: Unit) {
 			notifyUpdateListeners()
 		}
 	}
