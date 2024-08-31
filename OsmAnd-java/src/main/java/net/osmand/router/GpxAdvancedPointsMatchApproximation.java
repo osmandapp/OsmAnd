@@ -3,9 +3,7 @@ package net.osmand.router;
 import java.io.IOException;
 import java.util.*;
 
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
@@ -13,9 +11,7 @@ import net.osmand.util.MapUtils;
 
 public class GpxAdvancedPointsMatchApproximation {
 	private final int LOOKUP_AHEAD = 15; // the number of gpx points and road segment points to discover (15)
-	private final boolean USE_PROJECTION_TO_SEGMENT = false; // prefer projection-to-seg instead of pnt-pnt-dist
-	private final boolean USE_SINGLE_SEGMENT_GPX_ANGLE = false; // check every single segment instead of full road
-	private final double CRUSH_NON_PROJECTION_SEGMENTS_M = 25; // crush road segments for non-projection measure (25)
+	private final double CRUSH_OSM_ROAD_SEGMENTS_M = 25; // crush road segments for non-projection measure (25)
 	private final double MAX_PENALTY_BY_GPX_ANGLE_M = 25; // max penalty by the angle between gpx and road (25)
 	private final boolean TEST_SHIFT_GPX_POINTS = false; // shift gpx by ~15 meters before approximation
 
@@ -30,8 +26,7 @@ public class GpxAdvancedPointsMatchApproximation {
 		private RouteSegmentResult segment;
 	}
 
-	public GpxAdvancedPointsMatchApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
-	                                           List<GpxPoint> gpxPoints) {
+	public GpxAdvancedPointsMatchApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
 		this.gctx = gctx;
 		this.frontEnd = frontEnd;
 		this.gpxPoints = gpxPoints;
@@ -208,29 +203,12 @@ public class GpxAdvancedPointsMatchApproximation {
 
 		while (nextIndex < pnt.getRoad().getPointsLength() && nextIndex >= 0
 				&& Math.abs(pointIndex - nextIndex) < LOOKUP_AHEAD) {
-			double currentDist = 0;
-
-			if (USE_PROJECTION_TO_SEGMENT) {
-				RouteDataObject r = pnt.getRoad();
-				QuadPointDouble pp = MapUtils.getProjectionPoint31(loc.x31, loc.y31, r.getPoint31XTile(pointIndex),
-						r.getPoint31YTile(pointIndex), r.getPoint31XTile(nextIndex), r.getPoint31YTile(nextIndex));
-				currentDist = MapUtils.squareRootDist31((int) pp.x, (int) pp.y, loc.x31, loc.y31);
-			} else {
-				currentDist = findMinDistInCrushedSegments(loc, pnt, pointIndex, nextIndex);
-			}
+			double currentDist = findMinDistInCrushedSegments(loc, pnt, pointIndex, nextIndex);
 
 			if (MAX_PENALTY_BY_GPX_ANGLE_M > 0 && (res == null || currentDist < res.minDist)) {
 				// apply penalty by the difference between gpx-angle and road-angle (select best road)
-				if (USE_SINGLE_SEGMENT_GPX_ANGLE) {
-					double segmentAngle = Math.atan2(
-							pnt.getRoad().getPoint31YTile(nextIndex) - pnt.getRoad().getPoint31YTile(pointIndex),
-							pnt.getRoad().getPoint31XTile(nextIndex) - pnt.getRoad().getPoint31XTile(pointIndex));
-					double penalty = (1 - Math.cos(MapUtils.alignAngleDifference(gpxAngle - segmentAngle))); // [0 - 2]
-					currentDist += penalty * (MAX_PENALTY_BY_GPX_ANGLE_M * 2) / 3; // maximum penalty 2/3
-				} else {
-					double penalty = calcGpxAnglePenalty(pnt, pnt.getSegmentStart(), nextIndex, gpxAngle); // [0 - 1]
-					currentDist += penalty * MAX_PENALTY_BY_GPX_ANGLE_M; // should be fixed const
-				}
+				double penalty = calcGpxAnglePenalty(pnt, pnt.getSegmentStart(), nextIndex, gpxAngle); // [0 - 1]
+				currentDist += penalty * MAX_PENALTY_BY_GPX_ANGLE_M; // should be fixed const
 			}
 
 			if (res == null || currentDist < res.minDist) {
@@ -254,8 +232,8 @@ public class GpxAdvancedPointsMatchApproximation {
 		int ey = pnt.getRoad().getPoint31YTile(Math.max(startIndex, endIndex));
 		double segmentDistanceMeters = MapUtils.squareRootDist31(sx, sy, ex, ey);
 
-		int nVirtualSegments = CRUSH_NON_PROJECTION_SEGMENTS_M > 0
-				? (int) (segmentDistanceMeters / CRUSH_NON_PROJECTION_SEGMENTS_M) : 0;
+		int nVirtualSegments = CRUSH_OSM_ROAD_SEGMENTS_M > 0
+				? (int) (segmentDistanceMeters / CRUSH_OSM_ROAD_SEGMENTS_M) : 0;
 
 		double minDist = Double.POSITIVE_INFINITY;
 
@@ -290,14 +268,7 @@ public class GpxAdvancedPointsMatchApproximation {
 			roadAngle += segmentAngle;
 			counter++;
 		}
-		roadAngle /= counter;
-
-		// Unidirectional method (deprecated)
-//		if (gpxAngle < 0) gpxAngle += Math.PI;
-//		if (roadAngle < 0) roadAngle += Math.PI;
-//		return Math.abs(gpxAngle - roadAngle) / Math.PI;
-
-		return Math.abs(MapUtils.alignAngleDifference(gpxAngle - roadAngle)) / Math.PI;
+		return Math.abs(MapUtils.alignAngleDifference(gpxAngle - roadAngle / counter)) / Math.PI;
 	}
 
 	private GpxPoint findNextRoutablePoint(int searchStart) throws IOException {
