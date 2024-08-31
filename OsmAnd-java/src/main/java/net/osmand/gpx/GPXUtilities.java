@@ -1984,14 +1984,20 @@ public class GPXUtilities {
 			int color = point.getColor();
 			if (pointsGroup.color == 0 && color != 0) {
 				pointsGroup.color = color;
+			} else if (pointsGroup.color != 0 && color == 0) {
+				point.setColor(pointsGroup.color);
 			}
 			String iconName = point.getIconName();
 			if (Algorithms.isEmpty(pointsGroup.iconName) && !Algorithms.isEmpty(iconName)) {
 				pointsGroup.iconName = iconName;
+			} else if (!Algorithms.isEmpty(pointsGroup.iconName) && Algorithms.isEmpty(iconName)) {
+				point.setIconName(pointsGroup.iconName);
 			}
 			String backgroundType = point.getBackgroundType();
 			if (Algorithms.isEmpty(pointsGroup.backgroundType) && !Algorithms.isEmpty(backgroundType)) {
 				pointsGroup.backgroundType = backgroundType;
+			} else if (!Algorithms.isEmpty(pointsGroup.backgroundType) && Algorithms.isEmpty(backgroundType)) {
+				 point.setBackgroundType(pointsGroup.backgroundType);
 			}
 			pointsGroup.points.add(point);
 		}
