@@ -9,10 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.OnCompleteCallback;
-import net.osmand.gpx.GPXActivityUtils;
-import net.osmand.gpx.GPXUtilities.Metadata;
-import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
@@ -22,31 +18,28 @@ import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.fragments.customizable.CustomizableSingleSelectionDialogFragment;
+import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.shared.gpx.primitives.RouteActivityGroup;
+
+import java.util.Objects;
 
 public class RouteActivityController extends BaseDialogController
 		implements IDisplayDataProvider, IDialogItemSelected {
 
 	private static final String PROCESS_ID = "select_route_activity";
 
-	private final Metadata metadata;
-	private final RouteKey routeKey;
-	private OnCompleteCallback onSelectionCompleted;
+	private static final String NONE_ACTIVITY_KEY = "none";
+
+	private final RouteActivityHelper routeActivityHelper;
 
 	public RouteActivityController(@NonNull OsmandApplication app,
-	                               @NonNull Metadata metadata, @Nullable RouteKey routeKey,
-	                               @NonNull OnCompleteCallback onSelectionCompleted) {
+	                               @NonNull RouteActivityHelper routeActivityHelper) {
 		super(app);
-		this.metadata = metadata;
-		this.routeKey = routeKey;
-		setOnSelectionCompletedCallback(onSelectionCompleted);
-	}
-
-	public void setOnSelectionCompletedCallback(@NonNull OnCompleteCallback onSelectionCompleted) {
-		this.onSelectionCompleted = onSelectionCompleted;
+		this.routeActivityHelper = routeActivityHelper;
 	}
 
 	@Nullable
@@ -55,37 +48,72 @@ public class RouteActivityController extends BaseDialogController
 		boolean nightMode = isNightMode();
 		UiUtilities iconsCache = app.getUIUtilities();
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int defLayoutId = R.layout.bottom_sheet_item_with_radio_btn;
 
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(TITLE, getString(R.string.shared_string_activity));
 
-		int index = 0;
-		int selectedIndex = -1;
-		OsmRouteType selectedType = GPXActivityUtils.fetchActivityType(metadata, routeKey);
 
-		for (OsmRouteType routeType : OsmRouteType.allPossibleValues()) {
+		// None activity
+		displayData.addDisplayItem(new DisplayItem()
+				.setLayoutId(defLayoutId)
+				.setTitle(getString(R.string.shared_string_none))
+				.setTag(NONE_ACTIVITY_KEY)
+		);
+		// Divider
+		displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
+
+		// Categorized activities
+		for (RouteActivityGroup group : routeActivityHelper.getActivityGroups()) {
+			// Header
 			displayData.addDisplayItem(new DisplayItem()
-					.setTitle(AndroidUtils.getActivityTypeTitle(app, routeType))
-					.setNormalIcon(iconsCache.getThemedIcon(AndroidUtils.getActivityTypeIcon(app, routeType)))
-					.setControlsColor(activeColor)
-					.setTag(routeType)
+					.setLayoutId(R.layout.list_item_header_48dp)
+					.setTitle(group.getLabel())
 			);
-			if (selectedType != null && selectedType == routeType) {
-				selectedIndex = index;
+			// Activities of the category
+			for (RouteActivity routeActivity : group.getActivities()) {
+				displayData.addDisplayItem(new DisplayItem()
+						.setLayoutId(defLayoutId)
+						.setTitle(routeActivity.getLabel())
+						.setNormalIcon(iconsCache.getThemedIcon(AndroidUtils.getIconId(app, routeActivity.getIconName())))
+						.setControlsColor(activeColor)
+						.setTag(routeActivity)
+				);
 			}
-			index++;
+			// Divider
+			displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
 		}
 		displayData.putExtra(BACKGROUND_COLOR, activeColor);
+
+		int selectedIndex = 0;
+		RouteActivity selectedActivity = routeActivityHelper.getSelectedRouteActivity();
+		if (selectedActivity != null) {
+			for (int i = 0; i < displayData.getItemsSize(); i++) {
+				DisplayItem item = displayData.getItemAt(i);
+				if (item.getTag() instanceof RouteActivity activity) {
+					if (Objects.equals(selectedActivity.getId(), activity.getId())) {
+						selectedIndex = i;
+					}
+				}
+			}
+		}
 		displayData.putExtra(SELECTED_INDEX, selectedIndex);
 		return displayData;
 	}
 
 	@Override
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
-		OsmRouteType selectedType = (OsmRouteType) selected.getTag();
-		metadata.setActivity(selectedType.getName());
+		if (selected.getTag() instanceof RouteActivity activity) {
+			routeActivityHelper.setRouteActivity(activity);
+		} else if (Objects.equals(NONE_ACTIVITY_KEY, selected.getTag())) {
+			routeActivityHelper.setRouteActivity(null);
+		}
 		dialogManager.askDismissDialog(processId);
-		onSelectionCompleted.onComplete();
+	}
+
+	@Nullable
+	public RouteActivityHelper getRouteActivityHelper() {
+		return routeActivityHelper;
 	}
 
 	@NonNull
@@ -94,11 +122,11 @@ public class RouteActivityController extends BaseDialogController
 		return PROCESS_ID;
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity, @NonNull Metadata metadata,
-	                              @Nullable RouteKey routeKey, @NonNull OnCompleteCallback onSelectionCompleted) {
+	public static void showDialog(@NonNull FragmentActivity activity,
+	                              @NonNull RouteActivityHelper routeActivityHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new RouteActivityController(app, metadata, routeKey, onSelectionCompleted));
+		dialogManager.register(PROCESS_ID, new RouteActivityController(app, routeActivityHelper));
 
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		CustomizableSingleSelectionDialogFragment.showInstance(fragmentManager, PROCESS_ID);

@@ -676,34 +676,6 @@ public class GPXUtilities {
 			copyExtensions(source);
 		}
 
-		public String getActivity() {
-			if (this.keywords != null) {
-				String[] keywords = this.keywords.split(",");
-				if (keywords.length > 0 && OsmRouteType.containsValue(keywords[0])) {
-					return keywords[0];
-				}
-			}
-			return null;
-		}
-
-		public void setActivity(String activity) {
-			if (!Algorithms.isEmpty(this.keywords)) {
-				String[] keywords = this.keywords.split(",");
-				String firstKeyword = keywords[0];
-				int startIndex = OsmRouteType.containsValue(firstKeyword) ? 1 : 0;
-				StringBuilder keywordsBuilder = new StringBuilder(activity != null ? activity : "");
-				for (int i = startIndex; i < keywords.length; i++) {
-					if (!keywordsBuilder.isEmpty()) {
-						keywordsBuilder.append(",");
-					}
-					keywordsBuilder.append(keywords[i]);
-				}
-				this.keywords = keywordsBuilder.toString();
-			} else {
-				this.keywords = activity;
-			}
-		}
-
 		public String getArticleTitle() {
 			return getExtensionsToRead().get("article_title");
 		}

@@ -25,9 +25,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXActivityUtils;
-import net.osmand.gpx.GPXUtilities.Metadata;
-import net.osmand.osm.OsmRouteType;
+import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
@@ -42,7 +40,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 public class OverviewCard extends MapBaseCard {
@@ -56,7 +54,7 @@ public class OverviewCard extends MapBaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private final GpxTrackAnalysis analysis;
-	private final RouteKey routeKey;
+	private final RouteActivityHelper routeActivityHelper;
 	private final GpxDataItem dataItem;
 	private final Fragment targetFragment;
 
@@ -66,14 +64,14 @@ public class OverviewCard extends MapBaseCard {
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
 	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GpxTrackAnalysis analysis,
-	                    @Nullable GpxDataItem dataItem, @Nullable RouteKey routeKey,
+	                    @Nullable GpxDataItem dataItem, @NonNull RouteActivityHelper routeActivityHelper,
 	                    @NonNull Fragment targetFragment) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
 		this.analysis = analysis;
 		this.dataItem = dataItem;
-		this.routeKey = routeKey;
+		this.routeActivityHelper = routeActivityHelper;
 		this.targetFragment = targetFragment;
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 	}
@@ -122,13 +120,12 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	public void setupActivity() {
-		Metadata metadata = selectedGpxFile.getGpxFile().metadata;
-		OsmRouteType activityType = GPXActivityUtils.fetchActivityType(metadata, routeKey);
-		if (activityType != null) {
+		RouteActivity routeActivity = routeActivityHelper.getSelectedRouteActivity();
+		if (routeActivity != null) {
 			ImageView activityIcon = view.findViewById(R.id.activity_icon);
 			TextView activityTitle = view.findViewById(R.id.activity_title);
-			activityIcon.setImageResource(AndroidUtils.getActivityTypeIcon(app, activityType));
-			activityTitle.setText(AndroidUtils.getActivityTypeTitle(app, activityType));
+			activityIcon.setImageResource(AndroidUtils.getIconId(app, routeActivity.getIconName()));
+			activityTitle.setText(routeActivity.getLabel());
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.activity_container), true);
 		} else {
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.activity_container), false);

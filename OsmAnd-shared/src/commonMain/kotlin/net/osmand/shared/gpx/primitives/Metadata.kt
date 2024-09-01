@@ -57,4 +57,13 @@ class Metadata : GpxExtensions {
 			}
 		}
 	}
+
+	fun getKeywordAt(index: Int): String? {
+		val keywords = getIndividualKeywords()
+		return if (keywords.isNotEmpty() && keywords.size > index) keywords[index] else null
+	}
+
+	fun getIndividualKeywords(): List<String> {
+		return if (keywords != null) keywords!!.split(",") else emptyList()
+	}
 }

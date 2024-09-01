@@ -23,9 +23,11 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.customizable.SingleSelectionAdapter.ItemViewHolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
@@ -51,7 +53,7 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 	@SuppressLint("NotifyDataSetChanged")
 	private void updateDisplayData(boolean refresh) {
 		if (controller instanceof IDisplayDataProvider displayDataProvider) {
-			this.displayData = displayDataProvider.getDisplayData(controller.getProcessId());
+			displayData = displayDataProvider.getDisplayData(controller.getProcessId());
 			if (refresh) {
 				notifyDataSetChanged();
 			}
@@ -61,29 +63,50 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 	@NonNull
 	@Override
 	public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		int layoutId = R.layout.bottom_sheet_item_with_radio_btn;
-		View itemView = themedInflater.inflate(layoutId, parent, false);
-		return new ItemViewHolder(itemView);
+		return new ItemViewHolder(themedInflater.inflate(viewType, parent, false));
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		DisplayItem displayItem = displayData.getDisplayItems().get(position);
-		holder.title.setText(displayItem.getTitle());
-		holder.icon.setImageDrawable(displayItem.getNormalIcon());
+		DisplayItem displayItem = displayData.getItemAt(position);
 
-		int controlsColor = displayData.getControlsColor(app, displayItem, nightMode);
-		UiUtilities.setupCompoundButton(nightMode, controlsColor, holder.compoundButton);
-		Integer selectedIndex = (Integer) displayData.getExtra(SELECTED_INDEX);
-		boolean isChecked = selectedIndex != null && selectedIndex == position;
-		holder.compoundButton.setChecked(isChecked);
-
-		holder.itemView.setOnClickListener(v -> {
-			if (controller instanceof IDialogItemSelected l) {
-				l.onDialogItemSelected(controller.getProcessId(), displayItem);
+		if (holder.tvTitle != null) {
+			String title = displayItem.getTitle();
+			if (!Algorithms.isEmpty(title)) {
+				holder.tvTitle.setText(title);
 			}
-		});
-		setupSelectableBackground(holder.itemView, displayItem);
+			AndroidUiHelper.updateVisibility(holder.tvTitle, !Algorithms.isEmpty(title));
+		}
+
+		if (holder.ivIcon != null) {
+			Drawable icon = displayItem.getNormalIcon();
+			if (icon != null) {
+				holder.ivIcon.setImageDrawable(icon);
+			}
+			AndroidUiHelper.updateVisibility(holder.ivIcon, icon != null);
+		}
+
+		if (holder.cbCompoundButton != null) {
+			int controlsColor = displayData.getControlsColor(app, displayItem, nightMode);
+			UiUtilities.setupCompoundButton(nightMode, controlsColor, holder.cbCompoundButton);
+			Integer selectedIndex = (Integer) displayData.getExtra(SELECTED_INDEX);
+			boolean isChecked = selectedIndex != null && selectedIndex == position;
+			holder.cbCompoundButton.setChecked(isChecked);
+		}
+
+		if (displayItem.getTag() != null) {
+			holder.itemView.setOnClickListener(v -> {
+				if (controller instanceof IDialogItemSelected l) {
+					l.onDialogItemSelected(controller.getProcessId(), displayItem);
+				}
+			});
+			setupSelectableBackground(holder.itemView, displayItem);
+		}
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		return displayData.getItemAt(position).getLayoutId();
 	}
 
 	public void setupSelectableBackground(@NonNull View view, @NonNull DisplayItem displayItem) {
@@ -100,15 +123,15 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 
 	public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-		public final TextView title;
-		public final ImageView icon;
-		public final CompoundButton compoundButton;
+		public final TextView tvTitle;
+		public final ImageView ivIcon;
+		public final CompoundButton cbCompoundButton;
 
 		public ItemViewHolder(@NonNull View itemView) {
 			super(itemView);
-			icon = itemView.findViewById(R.id.icon);
-			title = itemView.findViewById(R.id.title);
-			compoundButton = itemView.findViewById(R.id.compound_button);
+			ivIcon = itemView.findViewById(R.id.icon);
+			tvTitle = itemView.findViewById(R.id.title);
+			cbCompoundButton = itemView.findViewById(R.id.compound_button);
 		}
 	}
 }

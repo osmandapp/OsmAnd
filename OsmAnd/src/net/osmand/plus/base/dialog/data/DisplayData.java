@@ -22,6 +22,15 @@ public class DisplayData {
 	private final Map<DialogExtra, Object> extras = new HashMap<>();
 
 	@NonNull
+	public DisplayItem getItemAt(int position) {
+		return items.get(position);
+	}
+
+	public int getItemsSize() {
+		return items.size();
+	}
+
+	@NonNull
 	public List<DisplayItem> getDisplayItems() {
 		return items;
 	}

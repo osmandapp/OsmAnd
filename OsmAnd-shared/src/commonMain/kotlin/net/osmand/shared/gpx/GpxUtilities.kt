@@ -16,6 +16,7 @@ import net.osmand.shared.gpx.primitives.Copyright
 import net.osmand.shared.gpx.primitives.GpxExtensions
 import net.osmand.shared.gpx.primitives.Metadata
 import net.osmand.shared.gpx.primitives.Route
+import net.osmand.shared.gpx.primitives.RouteActivity
 import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
@@ -1631,4 +1632,58 @@ object GpxUtilities {
 		}
 	}
 
+	fun getRouteActivity(metadata: Metadata, activities: List<RouteActivity>): RouteActivity? {
+		val firstKeyword = metadata.getKeywordAt(0)
+		return getRouteActivity(firstKeyword, activities)
+	}
+
+	fun getRouteActivity(id: String?, activities: List<RouteActivity>): RouteActivity? {
+		if (id != null) {
+			for (activity in activities) {
+				if (id == activity.id) {
+					return activity
+				}
+			}
+		}
+		return null
+	}
+
+	fun setRouteActivity(
+		metadata: Metadata,
+		activity: RouteActivity?,
+		activities: List<RouteActivity>
+	) {
+		if (metadata.keywords != null) {
+			val keywords = metadata.keywords!!.split(",")
+			val previousActivity = getRouteActivity(keywords[0], activities)
+			val startIndex = if (previousActivity != null) 1 else 0
+			val keywordsBuilder = StringBuilder(activity?.id ?: "")
+			for (i in startIndex until keywords.size) {
+				if (keywordsBuilder.isNotEmpty()) {
+					keywordsBuilder.append(",")
+				}
+				keywordsBuilder.append(keywords[i])
+			}
+			metadata.keywords = keywordsBuilder.toString()
+		} else {
+			metadata.keywords = activity?.id
+		}
+	}
+
+	fun getFilteredKeywords(metadata: Metadata, activities: List<RouteActivity>): String? {
+		val keywords = metadata.getIndividualKeywords()
+		if (keywords.isNotEmpty()) {
+			val activity = getRouteActivity(keywords[0], activities)
+			val startIndex = if (activity != null) 1 else 0
+			val keywordsBuilder = StringBuilder()
+			for (i in startIndex until keywords.size) {
+				if (keywordsBuilder.isNotEmpty()) {
+					keywordsBuilder.append(",")
+				}
+				keywordsBuilder.append(keywords[i])
+			}
+			return keywordsBuilder.toString()
+		}
+		return null
+	}
 }
