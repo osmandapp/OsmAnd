@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OnResultCallback;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.RouteActivityGroup;
 
@@ -17,40 +14,37 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteActivityHelper {
+public class RouteActivitySelectionHelper {
 
 	private static final String SOURCE_FILE_NAME = "activities.json";
 
-	private final Metadata metadata;
-	private final RouteKey routeKey;
 	private final List<RouteActivityGroup> cachedGroups = new ArrayList<>();
 	private List<RouteActivity> cachedActivities;
-	private OnResultCallback<RouteActivity> activityChangeListener;
+	private OnResultCallback<RouteActivity> activitySelectionListener;
+	private RouteActivity selectedRouteActivity;
 
-	public RouteActivityHelper(@NonNull Metadata metadata, @Nullable RouteKey routeKey) {
-		this.metadata = metadata;
-		this.routeKey = routeKey;
+	public RouteActivitySelectionHelper() {
 		readAvailableRouteActivities();
 	}
 
-	public void setActivityChangeListener(@NonNull OnResultCallback<RouteActivity> listener) {
-		this.activityChangeListener = listener;
+	public void setActivitySelectionListener(@NonNull OnResultCallback<RouteActivity> listener) {
+		this.activitySelectionListener = listener;
 	}
 
-	public void setRouteActivity(@Nullable RouteActivity activity) {
-		GpxUtilities.INSTANCE.setRouteActivity(metadata, activity, getActivities());
-		if (activityChangeListener != null) {
-			activityChangeListener.onResult(activity);
+	public void setSelectedRouteActivity(@Nullable RouteActivity routeActivity) {
+		this.selectedRouteActivity = routeActivity;
+	}
+
+	public void onSelectRouteActivity(@Nullable RouteActivity activity) {
+		setSelectedRouteActivity(activity);
+		if (activitySelectionListener != null) {
+			activitySelectionListener.onResult(activity);
 		}
 	}
 
 	@Nullable
 	public RouteActivity getSelectedRouteActivity() {
-		RouteActivity activity = GpxUtilities.INSTANCE.getRouteActivity(metadata, getActivities());
-		if (activity == null && routeKey != null) {
-			activity = GpxUtilities.INSTANCE.getRouteActivity(routeKey.type.getName(), getActivities());
-		}
-		return activity;
+		return selectedRouteActivity;
 	}
 
 	@NonNull

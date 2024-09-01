@@ -20,6 +20,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.SharedUtil;
+import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -62,6 +66,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -298,6 +304,29 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.showTopDivider(true)
 				.create()
 		);
+
+		String changeActivity = app.getString(R.string.change_activity);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitle(changeActivity)
+				.setIcon(getContentIcon(R.drawable.ic_action_activity))
+				.setOnClickListener(v -> {
+					RouteActivitySelectionHelper helper = new RouteActivitySelectionHelper();
+					helper.setActivitySelectionListener(result -> {
+						for (TrackItem item : items) {
+							GpxFile gpxFile = getGpxFile(item);
+							if (gpxFile != null) {
+								Metadata metadata = gpxFile.getMetadata();
+								GpxUtilities.INSTANCE.setRouteActivity(metadata, result, helper.getActivities());
+								SaveGpxHelper.saveGpx(gpxFile);
+							}
+						}
+						dismissFragment(fragment, false);
+					});
+					RouteActivityController.showDialog(activity, helper);
+				})
+				.create()
+		);
+
 		String changeAppearance = app.getString(R.string.change_appearance);
 		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitle(changeAppearance)
@@ -550,5 +579,19 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(SELECTED_TYPES, selectedTypes);
 		MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState(), null, bundle);
+	}
+
+	@Nullable
+	private GpxFile getGpxFile(TrackItem trackItem) {
+		GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+		File file = trackItem.getFile();
+		if (file != null) {
+			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.getAbsolutePath());
+			GpxFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : SharedUtil.loadGpxFile(file);
+			if (gpxFile.getError() == null) {
+				return gpxFile;
+			}
+		}
+		return null;
 	}
 }

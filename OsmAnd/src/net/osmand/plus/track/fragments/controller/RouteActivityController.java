@@ -18,7 +18,7 @@ import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.fragments.customizable.CustomizableSingleSelectionDialogFragment;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -34,10 +34,10 @@ public class RouteActivityController extends BaseDialogController
 
 	private static final String NONE_ACTIVITY_KEY = "none";
 
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivityHelper;
 
 	public RouteActivityController(@NonNull OsmandApplication app,
-	                               @NonNull RouteActivityHelper routeActivityHelper) {
+	                               @NonNull RouteActivitySelectionHelper routeActivityHelper) {
 		super(app);
 		this.routeActivityHelper = routeActivityHelper;
 	}
@@ -104,15 +104,15 @@ public class RouteActivityController extends BaseDialogController
 	@Override
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
 		if (selected.getTag() instanceof RouteActivity activity) {
-			routeActivityHelper.setRouteActivity(activity);
+			routeActivityHelper.onSelectRouteActivity(activity);
 		} else if (Objects.equals(NONE_ACTIVITY_KEY, selected.getTag())) {
-			routeActivityHelper.setRouteActivity(null);
+			routeActivityHelper.onSelectRouteActivity(null);
 		}
 		dialogManager.askDismissDialog(processId);
 	}
 
 	@Nullable
-	public RouteActivityHelper getRouteActivityHelper() {
+	public RouteActivitySelectionHelper getRouteActivityHelper() {
 		return routeActivityHelper;
 	}
 
@@ -123,7 +123,7 @@ public class RouteActivityController extends BaseDialogController
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull RouteActivityHelper routeActivityHelper) {
+	                              @NonNull RouteActivitySelectionHelper routeActivityHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, new RouteActivityController(app, routeActivityHelper));

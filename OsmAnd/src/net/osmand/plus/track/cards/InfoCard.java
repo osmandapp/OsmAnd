@@ -8,7 +8,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.controller.RouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Metadata;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class InfoCard extends BaseMetadataCard {
 
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivityHelper;
 
 	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
-	                @NonNull RouteActivityHelper routeActivityHelper) {
+	                @NonNull RouteActivitySelectionHelper routeActivityHelper) {
 		super(mapActivity, metadata);
 		this.routeActivityHelper = routeActivityHelper;
 	}

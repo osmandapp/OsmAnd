@@ -25,7 +25,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
@@ -54,7 +54,7 @@ public class OverviewCard extends MapBaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private final GpxTrackAnalysis analysis;
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivityHelper;
 	private final GpxDataItem dataItem;
 	private final Fragment targetFragment;
 
@@ -64,7 +64,7 @@ public class OverviewCard extends MapBaseCard {
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
 	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GpxTrackAnalysis analysis,
-	                    @Nullable GpxDataItem dataItem, @NonNull RouteActivityHelper routeActivityHelper,
+	                    @Nullable GpxDataItem dataItem, @NonNull RouteActivitySelectionHelper routeActivityHelper,
 	                    @NonNull Fragment targetFragment) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;

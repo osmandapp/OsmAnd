@@ -63,7 +63,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.OnCompleteCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -131,6 +130,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -201,7 +201,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private RouteActivityHelper cachedRouteActivityHelper;
+	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private RouteKey routeKey;
 	private boolean temporarySelected;
 
@@ -217,8 +217,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
-
-	private final OnCompleteCallback onActivitySelectionComplete = this::onRouteActivityChanged;
 
 	public enum TrackMenuTab {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -746,7 +744,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			reattachCard(cardsContainer, overviewCard);
 		} else {
 			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile,
-					analysis, displayHelper.getGpxDataItem(), getRouteActivityHelper(metadata), this);
+					analysis, displayHelper.getGpxDataItem(), getRouteActivitySelectionHelper(metadata), this);
 			overviewCard.setListener(this);
 			cardsContainer.addView(overviewCard.build(mapActivity));
 			if (isCurrentRecordingTrack()) {
@@ -780,7 +778,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (shouldReattachCards && infoCard != null && infoCard.getView() != null) {
 			reattachCard(cardsContainer, infoCard);
 		} else {
-			infoCard = new InfoCard(mapActivity, metadata, getRouteActivityHelper(metadata));
+			infoCard = new InfoCard(mapActivity, metadata, getRouteActivitySelectionHelper(metadata));
 			cardsContainer.addView(infoCard.build(mapActivity));
 		}
 
@@ -815,21 +813,34 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@NonNull
-	private RouteActivityHelper getRouteActivityHelper(@NonNull Metadata metadata) {
-		if (cachedRouteActivityHelper == null) {
+	private RouteActivitySelectionHelper getRouteActivitySelectionHelper(@NonNull Metadata metadata) {
+		if (routeActivitySelectionHelper == null) {
 			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
 			if (controller != null) {
-				cachedRouteActivityHelper = controller.getRouteActivityHelper();
+				routeActivitySelectionHelper = controller.getRouteActivityHelper();
 			}
-			if (cachedRouteActivityHelper == null) {
-				cachedRouteActivityHelper = new RouteActivityHelper(metadata, routeKey);
+			if (routeActivitySelectionHelper == null) {
+				GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
+				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
+				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
+
+				RouteActivity selected = gpxUtilities.getRouteActivity(metadata, availableActivities);
+				if (selected == null && routeKey != null) {
+					selected = gpxUtilities.getRouteActivity(routeKey.type.getName(), availableActivities);
+				}
+				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
 			}
-			cachedRouteActivityHelper.setActivityChangeListener(result -> onRouteActivityChanged());
 		}
-		return cachedRouteActivityHelper;
+		routeActivitySelectionHelper.setActivitySelectionListener(result ->
+				onRouteActivitySelected(metadata, result, routeActivitySelectionHelper.getActivities())
+		);
+		return routeActivitySelectionHelper;
 	}
 
-	private void onRouteActivityChanged() {
+	private void onRouteActivitySelected(@NonNull Metadata metadata,
+	                                     @Nullable RouteActivity routeActivity,
+	                                     @NonNull List<RouteActivity> routeActivities) {
+		GpxUtilities.INSTANCE.setRouteActivity(metadata, routeActivity, routeActivities);
 		if (overviewCard != null) {
 			overviewCard.setupActivity();
 		}
