@@ -1,10 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+import static net.osmand.plus.settings.fragments.GraphMinimizer.minimizeGraph;
 import static net.osmand.plus.settings.fragments.MainSettingsFragment.APP_PROFILES;
+import static net.osmand.plus.settings.fragments.PreferenceScreenGraph2DOTConverter.graph2DOT;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,9 +23,13 @@ import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 
+import org.jgrapht.Graph;
+
 import java.util.Optional;
 
+import de.KnollFrank.lib.settingssearch.PreferenceEdge;
 import de.KnollFrank.lib.settingssearch.PreferencePath;
+import de.KnollFrank.lib.settingssearch.PreferenceScreenWithHost;
 import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
@@ -31,6 +38,7 @@ import de.KnollFrank.lib.settingssearch.fragment.FragmentFactory;
 import de.KnollFrank.lib.settingssearch.provider.IsPreferenceSearchable;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoProvider;
+import de.KnollFrank.lib.settingssearch.provider.PreferenceScreenGraphAvailableListener;
 import de.KnollFrank.lib.settingssearch.provider.ShowPreferencePath;
 
 class SearchPreferenceButtonHelper {
@@ -116,6 +124,15 @@ class SearchPreferenceButtonHelper {
 					@Override
 					public boolean isPreferenceOfHostSearchable(final Preference preference, final PreferenceFragmentCompat host) {
 						return true;
+					}
+				},
+				new PreferenceScreenGraphAvailableListener() {
+
+					@Override
+					public void onPreferenceScreenGraphWithoutInvisibleAndNonSearchablePreferencesAvailable(final Graph<PreferenceScreenWithHost, PreferenceEdge> preferenceScreenGraph) {
+						Log.i(
+								this.getClass().getSimpleName(),
+								graph2DOT(minimizeGraph(preferenceScreenGraph)));
 					}
 				},
 				new ShowPreferencePath() {
