@@ -3638,7 +3638,7 @@
     <string name="select_distance_route_will_recalc">Επιλέξτε την απόσταση μετά την οποία η διαδρομή θα επανυπολογιστεί.</string>
     <string name="recalculate_route_distance_promo">Η διαδρομή θα επανυπολογιστεί εάν η απόσταση από τη διαδρομή στην τρέχουσα θέση είναι μεγαλύτερη από την επιλεγμένη τιμή.</string>
     <string name="n_items_of_z">%1$s από %2$s</string>
-    <string name="download_slope_maps">Πλαγιές</string>
+    <string name="download_slope_maps">Κλίση</string>
     <string name="quick_action_terrain_descr">Ένα πλήκτρο εμφάνισης ή απόκρυψης της στρώσης εδάφους στον χάρτη.</string>
     <string name="delete_description">Διαγραφή περιγραφής</string>
     <string name="add_description">Προσθήκη περιγραφής</string>
