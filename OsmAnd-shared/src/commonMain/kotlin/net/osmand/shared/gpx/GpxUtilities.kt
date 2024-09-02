@@ -547,7 +547,7 @@ object GpxUtilities {
 	private fun writePoints(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		for (l in file.getPointsList()) {
 			serializer.startTag(null, "wpt")
-			writeWpt(serializer, l, progress)
+			writeWpt(serializer, l, progress, file)
 			serializer.endTag(null, "wpt")
 		}
 	}
@@ -559,7 +559,7 @@ object GpxUtilities {
 			writeNotNullText(serializer, "desc", route.desc)
 			for (p in route.points) {
 				serializer.startTag(null, "rtept")
-				writeWpt(serializer, p, progress)
+				writeWpt(serializer, p, progress, file)
 				serializer.endTag(null, "rtept")
 			}
 			writeExtensions(serializer, route, null)
@@ -578,7 +578,7 @@ object GpxUtilities {
 					writeNotNullText(serializer, "name", segment.name)
 					for (p in segment.points) {
 						serializer.startTag(null, "trkpt")
-						writeWpt(serializer, p, progress)
+						writeWpt(serializer, p, progress, file)
 						serializer.endTag(null, "trkpt")
 					}
 					assignRouteExtensionWriter(segment)
@@ -679,7 +679,7 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeWpt(serializer: XmlSerializer, p: WptPt, progress: IProgress?) {
+	private fun writeWpt(serializer: XmlSerializer, p: WptPt, progress: IProgress?, file: GpxFile) {
 		serializer.attribute(null, "lat", formatLatLon(p.lat))
 		serializer.attribute(null, "lon", formatLatLon(p.lon))
 		if (!p.ele.isNaN()) {
@@ -710,6 +710,18 @@ object GpxUtilities {
 			val profile = extensions[PROFILE_TYPE_EXTENSION]
 			if (GAP_PROFILE_TYPE == profile) {
 				extensions.remove(PROFILE_TYPE_EXTENSION)
+			}
+		}
+		if (p.category != null && file.pointsGroups[p.category] != null) {
+			val pointsGroup = file.pointsGroups[p.category]!!
+			if (p.getColor() == pointsGroup.color) {
+				extensions.remove(COLOR_NAME_EXTENSION)
+			}
+			if (p.getIconName() == pointsGroup.iconName) {
+				extensions.remove(ICON_NAME_EXTENSION)
+			}
+			if (p.getBackgroundType() == pointsGroup.backgroundType) {
+				extensions.remove(BACKGROUND_TYPE_EXTENSION)
 			}
 		}
 		assignExtensionWriter(p, extensions)
