@@ -4751,12 +4751,12 @@
     <string name="poi_padus_public_access_unknown">Доступ: невідомо</string>
     <string name="poi_padus_public_access_closed">Доступ: закрито</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Прочісування пляжу</string>
-    <string name="poi_us_maps_recreation_area_activity_bicycling">Велосипедна прогулянка</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">Велопрогулянка</string>
     <string name="poi_us_maps_recreation_area_activity_big_game_hunting">Полювання на велику дичину</string>
-    <string name="poi_us_maps_recreation_area_activity_boating_motorized">Моторне катання на човнах</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_motorized">Катання на моторизованих човнах</string>
     <string name="poi_us_maps_recreation_area_facility_cabin_rentals">Оренда кабіни</string>
     <string name="poi_live_music_yes">Так</string>
-    <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Безмоторне катання на човнах</string>
+    <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Катання на немоторизованих човнах</string>
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Кемпінг в наметовому містечку</string>
     <string name="poi_via">Через</string>
     <string name="poi_us_maps_recreation_area_activity_interpretive_areas">Зони інтерпретації</string>
