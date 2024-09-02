@@ -137,6 +137,10 @@ public class BinaryRoutePlanner {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
 					((MultiFinalRouteSegment) finalSegment).all.add((FinalRouteSegment) segment);
+					TLongObjectHashMap<RouteSegment> visitedSegments = (forwardSearch ? visitedDirectSegments : visitedOppositeSegments);
+					if (!visitedSegments.containsKey(calculateRoutePointId(segment))) {
+						visitedSegments.put(calculateRoutePointId(segment), segment);
+					}
 					skipSegment = true;
 				} else {
 					finalSegment = (FinalRouteSegment) segment;
