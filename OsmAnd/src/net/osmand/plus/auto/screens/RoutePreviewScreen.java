@@ -106,11 +106,40 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		invalidate();
 	}
 
+	private void updateRoute(boolean newRoute) {
+		OsmandApplication app = getApp();
+		RoutingHelper rh = app.getRoutingHelper();
+		Distance distance = null;
+		int leftTimeSec = 0;
+		if (newRoute && rh.isRoutePlanningMode()) {
+			distance = TripHelper.getDistance(app, rh.getLeftDistance());
+			leftTimeSec = rh.getLeftTime();
+		}
+		if (distance != null && leftTimeSec > 0) {
+			List<Row> routeRows = new ArrayList<>();
+			SpannableString description = new SpannableString("  •  ");
+			description.setSpan(DistanceSpan.create(distance), 0, 1, 0);
+			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
+
+			String name = QuickSearchListItem.getName(app, searchResult);
+			String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+			String title = Algorithms.isEmpty(name) ? typeName : name;
+			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
+			this.routeRows = routeRows;
+			calculating = false;
+			invalidate();
+		}
+	}
+
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		getApp().getTargetPointsHelper().addListener(stateChangedListener);
-		prepareRoute();
+		if (getApp().getRoutingHelper().isRouteCalculated()) {
+			updateRoute(true);
+		} else {
+			prepareRoute();
+		}
 	}
 
 	@Override
@@ -174,32 +203,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		OsmandApplication app = getApp();
-		RoutingHelper rh = app.getRoutingHelper();
-		Distance distance = null;
-		int leftTimeSec = 0;
-		if (newRoute && rh.isRoutePlanningMode()) {
-			distance = TripHelper.getDistance(app, rh.getLeftDistance());
-			leftTimeSec = rh.getLeftTime();
-		}
-		if (distance != null && leftTimeSec > 0) {
-			List<Row> routeRows = new ArrayList<>();
-			SpannableString description = new SpannableString("  •  ");
-			description.setSpan(DistanceSpan.create(distance), 0, 1, 0);
-			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
-
-			String name = QuickSearchListItem.getName(app, searchResult);
-			String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-			String title = Algorithms.isEmpty(name) ? typeName : name;
-			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
-			this.routeRows = routeRows;
-			calculating = false;
-			invalidate();
-		}
+		updateRoute(newRoute);
 	}
 
 	@Override
 	public void routeWasCancelled() {
+		if (!getApp().getRoutingHelper().isRoutePlanningMode()) {
+			finish();
+		}
 	}
 
 	@Override
