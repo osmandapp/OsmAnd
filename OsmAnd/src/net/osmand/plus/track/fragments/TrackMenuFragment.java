@@ -825,8 +825,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
 
 				RouteActivity selected = gpxUtilities.getRouteActivity(metadata, availableActivities);
-				if (selected == null && routeKey != null) {
-					selected = gpxUtilities.getRouteActivity(routeKey.type.getName(), availableActivities);
+				if (selected == null) {
+					if (isCurrentRecordingTrack()) {
+						String activityId = settings.CURRENT_TRACK_EDITED_ROUTE_ACTIVITY.get();
+						if (activityId == null) {
+							activityId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+						}
+						selected = gpxUtilities.findRouteActivity(activityId, availableActivities);
+					} else if (routeKey != null) {
+						selected = gpxUtilities.findRouteActivity(routeKey.type.getName(), availableActivities);
+					}
 				}
 				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
 			}
@@ -838,18 +846,23 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void onRouteActivitySelected(@NonNull Metadata metadata,
-	                                     @Nullable RouteActivity routeActivity,
-	                                     @NonNull List<RouteActivity> routeActivities) {
-		GpxUtilities.INSTANCE.setRouteActivity(metadata, routeActivity, routeActivities);
+	                                     @Nullable RouteActivity activity,
+	                                     @NonNull List<RouteActivity> activities) {
+		if (isCurrentRecordingTrack()) {
+			String activityId = activity != null ? activity.getId() : "";
+			settings.CURRENT_TRACK_EDITED_ROUTE_ACTIVITY.set(activityId);
+		} else {
+			GpxUtilities.INSTANCE.setRouteActivity(metadata, activity, activities);
+			GpxFile gpxFile = displayHelper.getGpx();
+			if (gpxFile != null) {
+				saveGpx(gpxFile, null);
+			}
+		}
 		if (overviewCard != null) {
-			overviewCard.setupActivity();
+			overviewCard.setupRouteActivity();
 		}
 		if (infoCard != null) {
 			infoCard.updateContent();
-		}
-		GpxFile gpxFile = displayHelper.getGpx();
-		if (gpxFile != null) {
-			saveGpx(gpxFile, null);
 		}
 	}
 

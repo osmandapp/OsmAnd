@@ -67,7 +67,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String EXTERNAL_SENSORS = "open_sensor_settings";
-	private static final String PRESELECTED_ROUTE_ACTIVITY = "preselected_route_activity";
+	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_preselected_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;
@@ -306,9 +306,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		Preference preselectedRouteActivity = findPreference(PRESELECTED_ROUTE_ACTIVITY);
 		if (preselectedRouteActivity != null) {
 			GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
-			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+			ApplicationMode selectedAppMode = getSelectedAppMode();
+			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 			RouteActivitySelectionHelper helper = getRouteActivitySelectionHelper();
-			RouteActivity activity = gpxUtilities.getRouteActivity(selectedId, helper.getActivities());
+			RouteActivity activity = gpxUtilities.findRouteActivity(selectedId, helper.getActivities());
 			if (activity != null) {
 				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
 				preselectedRouteActivity.setIcon(getContentIcon(iconId));
@@ -468,16 +469,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (routeActivitySelectionHelper == null) {
 				GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
 				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
-				String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+				ApplicationMode selectedAppMode = getSelectedAppMode();
+				String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
-				RouteActivity selected = gpxUtilities.getRouteActivity(selectedId, availableActivities);
+				RouteActivity selected = gpxUtilities.findRouteActivity(selectedId, availableActivities);
 				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
 			}
 		}
 		routeActivitySelectionHelper.setActivitySelectionListener(newRouteActivity -> {
 			String id = newRouteActivity != null ? newRouteActivity.getId() : "";
-			settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.set(id);
-			setupPreselectedRouteActivityPref();
+			onPreferenceChange(requirePreference(PRESELECTED_ROUTE_ACTIVITY), id);
 		});
 		return routeActivitySelectionHelper;
 	}

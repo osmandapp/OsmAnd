@@ -1634,10 +1634,10 @@ object GpxUtilities {
 
 	fun getRouteActivity(metadata: Metadata, activities: List<RouteActivity>): RouteActivity? {
 		val firstKeyword = metadata.getKeywordAt(0)
-		return getRouteActivity(firstKeyword, activities)
+		return findRouteActivity(firstKeyword, activities)
 	}
 
-	fun getRouteActivity(id: String?, activities: List<RouteActivity>): RouteActivity? {
+	fun findRouteActivity(id: String?, activities: List<RouteActivity>): RouteActivity? {
 		if (id != null) {
 			for (activity in activities) {
 				if (id == activity.id) {
@@ -1655,7 +1655,7 @@ object GpxUtilities {
 	) {
 		if (metadata.keywords != null) {
 			val keywords = metadata.keywords!!.split(",")
-			val previousActivity = getRouteActivity(keywords[0], activities)
+			val previousActivity = findRouteActivity(keywords[0], activities)
 			val startIndex = if (previousActivity != null) 1 else 0
 			val keywordsBuilder = StringBuilder(activity?.id ?: "")
 			for (i in startIndex until keywords.size) {
@@ -1673,7 +1673,7 @@ object GpxUtilities {
 	fun getFilteredKeywords(metadata: Metadata, activities: List<RouteActivity>): String? {
 		val keywords = metadata.getIndividualKeywords()
 		if (keywords.isNotEmpty()) {
-			val activity = getRouteActivity(keywords[0], activities)
+			val activity = findRouteActivity(keywords[0], activities)
 			val startIndex = if (activity != null) 1 else 0
 			val keywordsBuilder = StringBuilder()
 			for (i in startIndex until keywords.size) {

@@ -115,11 +115,11 @@ public class OverviewCard extends MapBaseCard {
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
 			AndroidUtils.setPadding(description, 0, 0, 0, dpToPx(app, 12));
 		}
-		setupActivity();
+		setupRouteActivity();
 		setupRegion();
 	}
 
-	public void setupActivity() {
+	public void setupRouteActivity() {
 		RouteActivity routeActivity = routeActivityHelper.getSelectedRouteActivity();
 		if (routeActivity != null) {
 			ImageView activityIcon = view.findViewById(R.id.activity_icon);
