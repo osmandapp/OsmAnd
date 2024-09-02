@@ -108,10 +108,12 @@ class KFile {
 	}
 
 	fun getFileNameWithoutExtension(): String? {
-		return getFileNameWithoutExtension(this.name())
+		return Companion.getFileNameWithoutExtension(this.name())
 	}
 
-	fun getFileNameWithoutExtension(name: String?): String? {
-		return name?.substringBeforeLast(".");
+	companion object {
+		fun getFileNameWithoutExtension(name: String?): String? {
+			return name?.substringBeforeLast(".");
+		}
 	}
 }
