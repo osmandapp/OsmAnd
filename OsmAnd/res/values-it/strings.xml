@@ -5868,7 +5868,7 @@
     <string name="quick_action_previous_screen_desc">Un pulsante per tornare alla schermata precedente.</string>
     <string name="quick_action_previous_screen_title">Schermata precedente</string>
     <string name="quick_action_drawer_desc">Un pulsante per mostrare o nascondere il menu laterale.</string>
-    <string name="background_opacity">Opacità sfondo</string>
+    <string name="background_opacity">Opacità dello sfondo</string>
     <string name="corner_radius">Raggio dell\'angolo</string>
     <string name="quick_action_verb_navigate">Naviga</string>
 </resources>
