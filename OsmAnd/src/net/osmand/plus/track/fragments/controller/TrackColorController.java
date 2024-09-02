@@ -44,7 +44,6 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
-//import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
