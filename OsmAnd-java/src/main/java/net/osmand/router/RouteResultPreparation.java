@@ -1819,39 +1819,31 @@ public class RouteResultPreparation {
 								
 			// active lanes
 			int startActive = Math.max(0, ltr ? 0 : lanes.length - mainType.lanes);
-			int endActive = Math.min(lanes.length, startActive + mainType.lanes);
-			for (int i = startActive; i < endActive; i++) {
+			int endActive = Math.min(lanes.length, startActive + mainType.lanes) - 1;
+			for (int i = startActive; i <= endActive; i++) {
 				lanes[i] = (mainType.turnType << 1) + 1;
 			}
 			int ind = 0;
 			for (AttachedRoadInfo i : rs.leftLanesInfo) {
-				for (int k = 0; k < i.lanes; k++) {
+				for (int k = 0; k < i.lanes && ind <= startActive; k++, ind++) {
 					if (lanes[ind] == 0) {
 						lanes[ind] = i.turnType << 1;
 					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
 						TurnType.setSecondaryTurn(lanes, ind, i.turnType);
 					} else {
 						TurnType.setTertiaryTurn(lanes, ind, i.turnType);
-					}
-					ind++;
-					if (ind > startActive) {
-						break;
 					}
 				}
 			}
 			ind = lanes.length - 1;
 			for (AttachedRoadInfo i : rs.rightLanesInfo) {
-				for (int k = 0; k < i.lanes; k++) {
+				for (int k = 0; k < i.lanes && ind >= endActive; k++, ind--) {
 					if (lanes[ind] == 0) {
 						lanes[ind] = i.turnType << 1;
 					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
 						TurnType.setSecondaryTurn(lanes, ind, i.turnType);
 					} else {
 						TurnType.setTertiaryTurn(lanes, ind, i.turnType);
-					}
-					ind--;
-					if (ind < endActive) {
-						break;
 					}
 				}
 			}
