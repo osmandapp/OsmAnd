@@ -130,7 +130,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	public WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
 			String selectedWidth = drawInfo.getWidth();
-			WidthMode widthMode = WidthMode.valueOf(selectedWidth);
+			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
