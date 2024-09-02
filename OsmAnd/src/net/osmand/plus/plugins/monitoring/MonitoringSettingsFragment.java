@@ -46,8 +46,13 @@ import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -62,8 +67,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String EXTERNAL_SENSORS = "open_sensor_settings";
+	private static final String PRESELECTED_ROUTE_ACTIVITY = "preselected_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
+	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	boolean showSwitchProfile;
 
 	@Override
@@ -110,6 +117,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		setupTrackStorageDirectoryPref();
 		setupExternalSensorsPref();
+		setupPreselectedRouteActivityPref();
 		setupShowTripRecNotificationPref();
 		setupLiveMonitoringPref();
 
@@ -274,8 +282,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		if (openExternalSensors != null) {
 			if (PluginsHelper.isEnabled(ExternalSensorsPlugin.class)) {
 				openExternalSensors.setVisible(true);
-				setPreferenceVisible("logging_data", true);
-				setPreferenceVisible("logging_data_divider", true);
 				List<String> linkedSensorNames = getLinkedSensorNames();
 				if (linkedSensorNames.isEmpty()) {
 					@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
@@ -292,6 +298,24 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 					}
 					openExternalSensors.setSummary(summary);
 				}
+			}
+		}
+	}
+
+	private void setupPreselectedRouteActivityPref() {
+		Preference preselectedRouteActivity = findPreference(PRESELECTED_ROUTE_ACTIVITY);
+		if (preselectedRouteActivity != null) {
+			GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
+			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+			RouteActivitySelectionHelper helper = getRouteActivitySelectionHelper();
+			RouteActivity activity = gpxUtilities.getRouteActivity(selectedId, helper.getActivities());
+			if (activity != null) {
+				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
+				preselectedRouteActivity.setIcon(getContentIcon(iconId));
+				preselectedRouteActivity.setSummary(activity.getLabel());
+			} else {
+				preselectedRouteActivity.setIcon(getContentIcon(R.drawable.ic_action_activity));
+				preselectedRouteActivity.setSummary(getString(R.string.shared_string_none));
 			}
 		}
 	}
@@ -425,8 +449,37 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (mapActivity != null) {
 				BatteryOptimizationController.showDialog(mapActivity, false, null);
 			}
+		} else if (PRESELECTED_ROUTE_ACTIVITY.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				RouteActivityController.showDialog(mapActivity, getRouteActivitySelectionHelper());
+			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@NonNull
+	private RouteActivitySelectionHelper getRouteActivitySelectionHelper() {
+		if (routeActivitySelectionHelper == null) {
+			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
+			if (controller != null) {
+				routeActivitySelectionHelper = controller.getRouteActivityHelper();
+			}
+			if (routeActivitySelectionHelper == null) {
+				GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
+				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
+				String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
+				RouteActivity selected = gpxUtilities.getRouteActivity(selectedId, availableActivities);
+				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
+			}
+		}
+		routeActivitySelectionHelper.setActivitySelectionListener(newRouteActivity -> {
+			String id = newRouteActivity != null ? newRouteActivity.getId() : "";
+			settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.set(id);
+			setupPreselectedRouteActivityPref();
+		});
+		return routeActivitySelectionHelper;
 	}
 
 	@Override
