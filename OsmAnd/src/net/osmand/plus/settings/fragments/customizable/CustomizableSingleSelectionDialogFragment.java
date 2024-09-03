@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -31,7 +32,7 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_customizable_single_selection, container, false);
+		View view = inflate(getLayoutId(), container);
 		if (displayData != null) {
 			adapter = new SingleSelectionAdapter(app, requireContext(), getController());
 			setupToolbar(view);
@@ -42,7 +43,7 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 		return view;
 	}
 
-	private void setupToolbar(@NonNull View view) {
+	protected void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
@@ -63,9 +64,21 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 		recyclerView.setAdapter(adapter);
 	}
 
+	public void askUpdateContent() {
+		View view = getView();
+		if (view != null) {
+			updateContent(view);
+		}
+	}
+
 	@Override
 	protected void updateContent(@NonNull View view) {
 		adapter.updateDisplayData();
+	}
+
+	@LayoutRes
+	protected int getLayoutId() {
+		return R.layout.fragment_customizable_single_selection;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,

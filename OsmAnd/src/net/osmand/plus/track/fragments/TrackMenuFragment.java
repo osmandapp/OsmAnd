@@ -109,7 +109,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
-import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -815,7 +815,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@NonNull
 	private RouteActivityHelper getRouteActivitySelectionHelper(@NonNull Metadata metadata) {
 		if (routeActivitySelectionHelper == null) {
-			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
+			SelectRouteActivityController controller = SelectRouteActivityController.getExistedInstance(app);
 			if (controller != null) {
 				routeActivitySelectionHelper = controller.getRouteActivityHelper();
 			}

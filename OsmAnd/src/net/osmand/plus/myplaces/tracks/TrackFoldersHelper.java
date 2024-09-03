@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.SharedUtil;
-import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
@@ -323,7 +323,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 						}
 						dismissFragment(fragment, false);
 					});
-					RouteActivityController.showDialog(activity, routeActivityHelper);
+					SelectRouteActivityController.showDialog(activity, routeActivityHelper);
 				})
 				.create()
 		);

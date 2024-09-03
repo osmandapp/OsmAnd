@@ -7,7 +7,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -51,7 +51,7 @@ public class InfoCard extends BaseMetadataCard {
 				: R.drawable.ic_action_activity);
 
 		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
-				v -> RouteActivityController.showDialog(activity, routeActivityHelper)
+				v -> SelectRouteActivityController.showDialog(activity, routeActivityHelper)
 		);
 		if (!Algorithms.isEmpty(keywords)) {
 			createItemRow(getString(R.string.shared_string_keywords), keywords, getContentIcon(R.drawable.ic_action_label));

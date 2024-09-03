@@ -46,7 +46,7 @@ import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.track.fragments.controller.RouteActivityController;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
@@ -453,7 +453,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (PRESELECTED_ROUTE_ACTIVITY.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				RouteActivityController.showDialog(mapActivity, getRouteActivitySelectionHelper());
+				SelectRouteActivityController.showDialog(mapActivity, getRouteActivitySelectionHelper());
 			}
 		}
 		return super.onPreferenceClick(preference);
@@ -462,7 +462,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	@NonNull
 	private RouteActivityHelper getRouteActivitySelectionHelper() {
 		if (routeActivitySelectionHelper == null) {
-			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
+			SelectRouteActivityController controller = SelectRouteActivityController.getExistedInstance(app);
 			if (controller != null) {
 				routeActivitySelectionHelper = controller.getRouteActivityHelper();
 			}

@@ -78,6 +78,14 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 			AndroidUiHelper.updateVisibility(holder.tvTitle, !Algorithms.isEmpty(title));
 		}
 
+		if (holder.tvDesc != null) {
+			String desc = displayItem.getDescription();
+			if (!Algorithms.isEmpty(desc)) {
+				holder.tvDesc.setText(desc);
+			}
+			AndroidUiHelper.updateVisibility(holder.tvDesc, !Algorithms.isEmpty(desc));
+		}
+
 		if (holder.ivIcon != null) {
 			Drawable icon = displayItem.getNormalIcon();
 			if (icon != null) {
@@ -124,6 +132,7 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 	public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
 		public final TextView tvTitle;
+		public final TextView tvDesc;
 		public final ImageView ivIcon;
 		public final CompoundButton cbCompoundButton;
 
@@ -131,6 +140,7 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 			super(itemView);
 			ivIcon = itemView.findViewById(R.id.icon);
 			tvTitle = itemView.findViewById(R.id.title);
+			tvDesc = itemView.findViewById(R.id.description);
 			cbCompoundButton = itemView.findViewById(R.id.compound_button);
 		}
 	}
