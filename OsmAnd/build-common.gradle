@@ -367,7 +367,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:3826d9e7d0'
+	implementation 'com.github.KnollFrank:SettingsSearch:c0c604fce5'
 	// https://mvnrepository.com/artifact/org.jgrapht/jgrapht-io
 	implementation 'org.jgrapht:jgrapht-io:1.5.2'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
