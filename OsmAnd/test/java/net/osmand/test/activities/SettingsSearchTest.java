@@ -77,6 +77,19 @@ public class SettingsSearchTest extends AndroidTest {
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
 	}
 
+	@Test
+	public void shouldSearchAndFindRecalculateRoutePreference() {
+		// Given
+		final String searchQuery = "Recalculate route";
+		clickSearchButton();
+
+		// When
+		onView(searchView()).perform(replaceText(searchQuery), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchQuery)));
+	}
+
 	private void clickSearchButton() {
 		skipAppStartDialogs(app);
 		onView(mapMenuButton()).perform(click());

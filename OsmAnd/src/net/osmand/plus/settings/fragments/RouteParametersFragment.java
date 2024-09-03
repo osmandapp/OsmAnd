@@ -402,6 +402,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		PreferenceCategory routingCategory = new PreferenceCategory(requireContext());
 		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		routingCategory.setTitle(R.string.recalculate_route);
+		routingCategory.setKey("RouteParametersFragment.recalculate_route.key");
 		screen.addPreference(routingCategory);
 	}
 

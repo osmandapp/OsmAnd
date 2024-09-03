@@ -15,7 +15,6 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
 
 import net.osmand.plus.R;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
@@ -139,10 +138,7 @@ class SearchPreferenceButtonHelper {
 
 					@Override
 					public boolean show(final PreferencePath preferencePath) {
-						return preferencePath
-								.getPreference()
-								.map(preference -> !(preference instanceof PreferenceGroup))
-								.orElse(false);
+						return preferencePath.getPreference().isPresent();
 					}
 				},
 				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
