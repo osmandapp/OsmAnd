@@ -4,47 +4,55 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OnResultCallback;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.RouteActivityGroup;
+import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteActivitySelectionHelper {
+public class RouteActivityHelper {
 
-	private static final String SOURCE_FILE_NAME = "activities.json";
+	private static final Log LOG = PlatformUtil.getLog(RouteActivityHelper.class);
+
+	private static final String ROUTE_ACTIVITIES_FILE = "activities.json";
 
 	private final List<RouteActivityGroup> cachedGroups = new ArrayList<>();
-	private List<RouteActivity> cachedActivities;
+	private final List<RouteActivity> cachedActivities = new ArrayList<>();
 	private OnResultCallback<RouteActivity> activitySelectionListener;
-	private RouteActivity selectedRouteActivity;
+	private RouteActivity selectedActivity;
 
-	public RouteActivitySelectionHelper() {
-		readAvailableRouteActivities();
+	public RouteActivityHelper(@NonNull OsmandApplication app) {
+		collectRouteActivities(app);
 	}
 
 	public void setActivitySelectionListener(@NonNull OnResultCallback<RouteActivity> listener) {
 		this.activitySelectionListener = listener;
 	}
 
-	public void setSelectedRouteActivity(@Nullable RouteActivity routeActivity) {
-		this.selectedRouteActivity = routeActivity;
+	public void setSelectedActivity(@Nullable RouteActivity routeActivity) {
+		this.selectedActivity = routeActivity;
 	}
 
 	public void onSelectRouteActivity(@Nullable RouteActivity activity) {
-		setSelectedRouteActivity(activity);
+		setSelectedActivity(activity);
 		if (activitySelectionListener != null) {
 			activitySelectionListener.onResult(activity);
 		}
 	}
 
 	@Nullable
-	public RouteActivity getSelectedRouteActivity() {
-		return selectedRouteActivity;
+	public RouteActivity getSelectedActivity() {
+		return selectedActivity;
 	}
 
 	@NonNull
@@ -54,25 +62,28 @@ public class RouteActivitySelectionHelper {
 
 	@NonNull
 	public List<RouteActivity> getActivities() {
-		if (cachedActivities == null) {
-			cachedActivities = new ArrayList<>();
-			for (RouteActivityGroup group : cachedGroups) {
-				cachedActivities.addAll(group.getActivities());
-			}
-		}
 		return cachedActivities;
 	}
 
-	private void readAvailableRouteActivities() {
+	private void collectRouteActivities(@NonNull OsmandApplication app) {
 		try {
-			readFromJson();
+			readActivitiesFromJson(app);
 		} catch (JSONException e) {
-			throw new RuntimeException(e);
+			LOG.error("Failed to read activities from JSON", e);
 		}
 	}
 
-	private void readFromJson() throws JSONException {
-		JSONObject json = new JSONObject(AvailableRouteActivities.SOURCE_FILE_CONTENT);
+	private void readActivitiesFromJson(@NonNull OsmandApplication app) throws JSONException {
+		String activitiesJsonStr = null;
+		try {
+			InputStream is = app.getAssets().open(ROUTE_ACTIVITIES_FILE);
+			activitiesJsonStr = Algorithms.readFromInputStream(is).toString();
+		} catch (IOException e) {
+			LOG.error("Failed to read activities source file", e);
+		}
+		if (Algorithms.isEmpty(activitiesJsonStr)) return;
+
+		JSONObject json = new JSONObject(activitiesJsonStr);
 		JSONArray groupsArray = json.getJSONArray("groups");
 		for (int i = 0; i < groupsArray.length(); i++) {
 			JSONObject groupJson = groupsArray.getJSONObject(i);
@@ -86,7 +97,9 @@ public class RouteActivitySelectionHelper {
 				String activityId = activityJson.getString("id");
 				String activityLabel = activityJson.getString("label");
 				String iconName = activityJson.getString("icon_name");
-				activities.add(new RouteActivity(activityId, activityLabel, iconName));
+				RouteActivity activity = new RouteActivity(activityId, activityLabel, iconName);
+				cachedActivities.add(activity);
+				activities.add(activity);
 			}
 			cachedGroups.add(new RouteActivityGroup(id, label, activities));
 		}

@@ -8,7 +8,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.controller.RouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
+import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Metadata;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class InfoCard extends BaseMetadataCard {
 
-	private final RouteActivitySelectionHelper routeActivityHelper;
+	private final RouteActivityHelper routeActivityHelper;
 
 	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
-	                @NonNull RouteActivitySelectionHelper routeActivityHelper) {
+	                @NonNull RouteActivityHelper routeActivityHelper) {
 		super(mapActivity, metadata);
 		this.routeActivityHelper = routeActivityHelper;
 	}
@@ -38,7 +38,7 @@ public class InfoCard extends BaseMetadataCard {
 		super.updateContent();
 
 		List<RouteActivity> activities = routeActivityHelper.getActivities();
-		RouteActivity routeActivity = routeActivityHelper.getSelectedRouteActivity();
+		RouteActivity routeActivity = routeActivityHelper.getSelectedActivity();
 		String keywords = metadata != null ? GpxUtilities.INSTANCE.getFilteredKeywords(metadata, activities) : null;
 		String link = metadata != null ? metadata.getLink() : null;
 

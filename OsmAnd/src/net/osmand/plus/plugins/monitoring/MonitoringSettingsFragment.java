@@ -47,7 +47,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.track.fragments.controller.RouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
+import net.osmand.plus.track.helpers.RouteActivityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -70,7 +70,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_preselected_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
-	private RouteActivitySelectionHelper routeActivitySelectionHelper;
+	private RouteActivityHelper routeActivitySelectionHelper;
 	boolean showSwitchProfile;
 
 	@Override
@@ -308,7 +308,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
 			ApplicationMode selectedAppMode = getSelectedAppMode();
 			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
-			RouteActivitySelectionHelper helper = getRouteActivitySelectionHelper();
+			RouteActivityHelper helper = getRouteActivitySelectionHelper();
 			RouteActivity activity = gpxUtilities.findRouteActivity(selectedId, helper.getActivities());
 			if (activity != null) {
 				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
@@ -460,7 +460,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	@NonNull
-	private RouteActivitySelectionHelper getRouteActivitySelectionHelper() {
+	private RouteActivityHelper getRouteActivitySelectionHelper() {
 		if (routeActivitySelectionHelper == null) {
 			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
 			if (controller != null) {
@@ -468,12 +468,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			}
 			if (routeActivitySelectionHelper == null) {
 				GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
-				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
+				routeActivitySelectionHelper = new RouteActivityHelper(app);
 				ApplicationMode selectedAppMode = getSelectedAppMode();
 				String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
 				RouteActivity selected = gpxUtilities.findRouteActivity(selectedId, availableActivities);
-				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
+				routeActivitySelectionHelper.setSelectedActivity(selected);
 			}
 		}
 		routeActivitySelectionHelper.setActivitySelectionListener(newRouteActivity -> {

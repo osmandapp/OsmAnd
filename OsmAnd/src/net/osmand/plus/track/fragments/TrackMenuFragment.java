@@ -201,7 +201,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GPXTabItemType chartTabToOpen;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private RouteActivitySelectionHelper routeActivitySelectionHelper;
+	private RouteActivityHelper routeActivitySelectionHelper;
 	private RouteKey routeKey;
 	private boolean temporarySelected;
 
@@ -813,7 +813,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@NonNull
-	private RouteActivitySelectionHelper getRouteActivitySelectionHelper(@NonNull Metadata metadata) {
+	private RouteActivityHelper getRouteActivitySelectionHelper(@NonNull Metadata metadata) {
 		if (routeActivitySelectionHelper == null) {
 			RouteActivityController controller = RouteActivityController.getExistedInstance(app);
 			if (controller != null) {
@@ -821,7 +821,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 			if (routeActivitySelectionHelper == null) {
 				GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
-				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
+				routeActivitySelectionHelper = new RouteActivityHelper(app);
 				List<RouteActivity> availableActivities = routeActivitySelectionHelper.getActivities();
 
 				RouteActivity selected = gpxUtilities.getRouteActivity(metadata, availableActivities);
@@ -836,7 +836,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 						selected = gpxUtilities.findRouteActivity(routeKey.type.getName(), availableActivities);
 					}
 				}
-				routeActivitySelectionHelper.setSelectedRouteActivity(selected);
+				routeActivitySelectionHelper.setSelectedActivity(selected);
 			}
 		}
 		routeActivitySelectionHelper.setActivitySelectionListener(result ->

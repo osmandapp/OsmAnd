@@ -3,22 +3,17 @@ package net.osmand.plus.myplaces.tracks.filters
 import android.graphics.drawable.Drawable
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.track.helpers.RouteActivitySelectionHelper
+import net.osmand.plus.track.helpers.RouteActivityHelper
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.gpx.GpxUtilities
 
 class ActivitySingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 
-	private var routeActivitySelectionHelper: RouteActivitySelectionHelper? = null
+	private var routeActivitySelectionHelper: RouteActivityHelper? = null
 
-	override fun getItemIcon(
-		app: OsmandApplication,
-		itemName: String,
-		selected: Boolean,
-		nightMode: Boolean
-	): Drawable? {
-		val helper = getActivityHelper()
+	override fun getItemIcon(app: OsmandApplication, itemName: String, selected: Boolean, nightMode: Boolean): Drawable? {
+		val helper = getActivityHelper(app)
 		val routeActivity = GpxUtilities.findRouteActivity(itemName, helper.activities)
 
 		val iconColor = if (selected) {
@@ -36,12 +31,8 @@ class ActivitySingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 		return app.uiUtilities.getPaintedIcon(iconId, iconColor)
 	}
 
-	override fun getItemText(
-		app: OsmandApplication,
-		itemName: String,
-		selected: Boolean
-	): String {
-		val helper = getActivityHelper()
+	override fun getItemText(app: OsmandApplication, itemName: String, selected: Boolean): String {
+		val helper = getActivityHelper(app)
 		val routeActivity = GpxUtilities.findRouteActivity(itemName, helper.activities)
 		return routeActivity?.label ?: app.getString(R.string.shared_string_none)
 	}
@@ -50,9 +41,9 @@ class ActivitySingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 		return true
 	}
 
-	private fun getActivityHelper(): RouteActivitySelectionHelper {
+	private fun getActivityHelper(app: OsmandApplication): RouteActivityHelper {
 		if (routeActivitySelectionHelper == null) {
-			routeActivitySelectionHelper = RouteActivitySelectionHelper()
+			routeActivitySelectionHelper = RouteActivityHelper(app)
 		}
 		return routeActivitySelectionHelper!!
 	}
