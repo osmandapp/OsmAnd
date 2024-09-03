@@ -44,6 +44,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	List<GeometryWayPoint> points = new ArrayList<>();
 	//OpenGL
 	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
+	protected int startLocationIndexCached = -1;
 	public int baseOrder = -1;
 	public long linesPriority = Long.MIN_VALUE;
 	public VectorLinesCollection vectorLinesCollection;
@@ -135,6 +136,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	private void clearPathCache() {
 		pathsData31Cache.clear();
+		startLocationIndexCached = -1;
 	}
 
 	public void resetSymbolProviders() {
@@ -233,6 +235,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (shouldAddLocation(simplification, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
 					locationProvider, previousVisibleIdx, i)) {
 				double dist = previous == -1 || odistances == null ? 0 : odistances.get(i);
+				if (hasMapRenderer && previous != -1) {
+					double prevLat = locationProvider.getLatitude(previous);
+					double prevLon = locationProvider.getLongitude(previous);
+					double lat = locationProvider.getLatitude(i);
+					double lon = locationProvider.getLongitude(i);
+					dist = MapUtils.getDistance(prevLat, prevLon, lat, lon);
+				}
 				if (!previousVisible && !ignorePrevious) {
 					if (previous != -1 && !isPreviousPointFarAway(locationProvider, previous, i)) {
 						addLocation(tb, previous, dist, style, points);
@@ -321,6 +330,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			pnt.ty31 = MapUtils.get31TileNumberY(latitude);
 			pnt.height = locationProvider.getHeight(locationIdx);
 			pnt.style = style;
+			pnt.distance = dist;
 			points.add(pnt);
 			return;
 		}
@@ -384,31 +394,61 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					List<Integer> ty = new ArrayList<>();
 					List<Float> heights = new ArrayList<>();
 					List<Integer> indexes = pathData.indexes;
+					float passedDist = 0;
+					int firstX31 = -1;
+					int firstY31 = -1;
 					for (int i = 0; i < indexes.size(); i++) {
 						Integer index = indexes.get(i);
 						if (previousVisible && index >= INITIAL_POINT_INDEX_SHIFT) {
 							continue;
 						}
-						if (index >= startLocationIndex) {
+						if (index >= startLocationIndex - 1) {
 							ind.add(index);
 							tx.add(pathData.tx.get(i));
 							ty.add(pathData.ty.get(i));
 							if (pathData.heights != null) {
 								heights.add(pathData.heights.get(i));
 							}
+							if (firstX31 == -1) {
+								passedDist += pathData.distances.get(i);
+								firstX31 = pathData.tx.get(i);
+								firstY31 = pathData.ty.get(i);
+							}
+						} else if (pathData.distances.get(i) == 0 && i > 0) {
+							passedDist += (float) MapUtils.measuredDist31(
+									pathData.tx.get(i - 1), pathData.ty.get(i - 1), pathData.tx.get(i), pathData.ty.get(i));
+						} else {
+							passedDist += pathData.distances.get(i);
 						}
 					}
+					if (previousVisible) {
+						if (startLocationIndexCached != -1 && !this.points.isEmpty() && firstX31 != -1) {
+							GeometryWayPoint firstPnt = this.points.get(0);
+							double distDiff = MapUtils.measuredDist31(firstX31, firstY31, firstPnt.tx31, firstPnt.ty31);
+							updatePathLine(passedDist + (float) (distDiff));
+							return null;
+						}
+						startLocationIndexCached = startLocationIndex;
+					}
+					/*
 					if (previousVisible) {
 						if (!this.points.isEmpty()) {
 							GeometryWayPoint firstPnt = this.points.get(0);
 							ind.add(0, firstPnt.index);
 							tx.add(0, firstPnt.tx31);
 							ty.add(0, firstPnt.ty31);
+							if (pathData.heights != null) {
+								heights.add(firstPnt.height);
+							}
 						}
 					}
+
+					 */
 					if (tx.size() > 1) {
 						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style);
-						newPathData.heights = pathData.heights;
+						if (!heights.isEmpty()) {
+							newPathData.heights = heights;
+						}
 						newPathsDataList.add(newPathData);
 					}
 					drawNext = true;
@@ -554,6 +594,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
 			mapRenderer.addSymbolsProvider(collection);
 			this.vectorLinesCollection = collection;
+		}
+	}
+
+	private void updatePathLine(float startingDistance) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
+			if (vectorLinesCollection != null) {
+				drawer.updatePath(vectorLinesCollection, startingDistance);
+			}
 		}
 	}
 }
