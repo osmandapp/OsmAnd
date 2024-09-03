@@ -150,30 +150,36 @@ public class GeometryWayPathAlgorithms {
 		List<Integer> tx = new ArrayList<>();
 		List<Integer> ty = new ArrayList<>();
 		List<Float> heights = new ArrayList<>();
+		List<Float> distances = new ArrayList<>();
 		ind.add(firstPoint.index);
 		tx.add(firstPoint.tx31);
 		ty.add(firstPoint.ty31);
 		heights.add(firstPoint.height);
+		distances.add(0f);
 		for (int i = 1; i < points.size(); i++) {
 			GeometryWayPoint pnt = points.get(i);
 			ind.add(pnt.index);
 			tx.add(pnt.tx31);
 			ty.add(pnt.ty31);
 			heights.add(pnt.height);
+			distances.add((float) pnt.distance);
 			if (style != null) {
 				GeometryWayStyle<?> newStyle = pnt.style;
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
 					GeometryWayDrawer.DrawPathData31 newPathData = new GeometryWayDrawer.DrawPathData31(ind, tx, ty, style);
 					newPathData.heights = heights;
+					newPathData.distances = distances;
 					pathsData.add(newPathData);
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
 					heights = new ArrayList<>();
+					distances = new ArrayList<>();
 					ind.add(pnt.index);
 					tx.add(pnt.tx31);
 					ty.add(pnt.ty31);
 					heights.add(pnt.height);
+					distances.add(0f);
 					style = newStyle;
 				}
 			}
@@ -182,6 +188,7 @@ public class GeometryWayPathAlgorithms {
 			GeometryWayDrawer.DrawPathData31 newPathData = new GeometryWayDrawer.DrawPathData31(ind, tx, ty, style);
 			pathsData.add(newPathData);
 			newPathData.heights = heights;
+			newPathData.distances = distances;
 		}
 		return pathsData;
 	}
