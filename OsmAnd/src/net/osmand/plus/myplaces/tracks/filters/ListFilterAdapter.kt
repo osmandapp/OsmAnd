@@ -74,7 +74,7 @@ class ListFilterAdapter(
 					false)
 				val topBottomPadding =
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_small)
-				val leftRightPadding = if(items.size > 0 && filter.collectionFilterParams.getItemIcon(app, items[0]) != null) {
+				val leftRightPadding = if(items.size > 0 && filter.collectionFilterParams.getItemIcon(app, items[0], false, nightMode) != null) {
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
 				} else {
 					app.resources.getDimensionPixelSize(R.dimen.content_padding)
@@ -106,8 +106,9 @@ class ListFilterAdapter(
 
 			is FilterVariantViewHolder -> {
 				val itemName = getItem(position)
-				val icon = filter.collectionFilterParams.getItemIcon(app, itemName)
-				holder.title.text = filter.collectionFilterParams.getItemText(app, itemName)
+				val selected = filter.isItemSelected(itemName)
+				val icon = filter.collectionFilterParams.getItemIcon(app, itemName, selected, nightMode)
+				holder.title.text = filter.collectionFilterParams.getItemText(app, itemName, selected)
 				holder.icon.setImageDrawable(icon)
 				AndroidUiHelper.updateVisibility(holder.icon, icon != null)
 				AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
@@ -116,7 +117,7 @@ class ListFilterAdapter(
 					this.notifyItemChanged(position)
 				}
 				holder.count.text = filter.getTracksCountForItem(itemName).toString()
-				holder.checkBox.isChecked = filter.isItemSelected(itemName)
+				holder.checkBox.isChecked = selected
 			}
 
 			is SelectAllViewHolder -> {

@@ -12,12 +12,12 @@ public class SingleFieldTrackFilterParams {
 		return false;
 	}
 
-	String getItemText(OsmandApplication app, String itemName) {
+	String getItemText(OsmandApplication app, String itemName, boolean selected) {
 		return itemName;
 	}
 
 	@Nullable
-	Drawable getItemIcon(OsmandApplication app, String itemName) {
+	Drawable getItemIcon(OsmandApplication app, String itemName, boolean selected, boolean nightMode) {
 		return null;
 	}
 

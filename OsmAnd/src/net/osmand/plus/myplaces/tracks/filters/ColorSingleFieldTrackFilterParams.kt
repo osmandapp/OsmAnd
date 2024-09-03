@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 import net.osmand.plus.OsmandApplication
@@ -11,7 +10,7 @@ import net.osmand.util.Algorithms
 
 class ColorSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 
-	override fun getItemIcon(app: OsmandApplication, itemName: String): Drawable? {
+	override fun getItemIcon(app: OsmandApplication, itemName: String, selected: Boolean, nightMode: Boolean): Drawable? {
 		return if (Algorithms.isEmpty(itemName)) {
 			app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
 		} else {
@@ -28,7 +27,11 @@ class ColorSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 		return app.uiUtilities.getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor)
 	}
 
-	override fun getItemText(app: OsmandApplication, itemName: String): String {
+	override fun getItemText(
+		app: OsmandApplication,
+		itemName: String,
+		selected: Boolean
+	): String {
 		return if (Algorithms.isEmpty(itemName)) {
 			app.getString(R.string.not_specified)
 		} else {
