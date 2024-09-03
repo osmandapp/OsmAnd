@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,10 @@ public class DisplayData {
 
 	public void addDisplayItem(@NonNull DisplayItem displayItem) {
 		items.add(displayItem);
+	}
+
+	public void addAllDisplayItems(@NonNull Collection<DisplayItem> displayItems) {
+		items.addAll(displayItems);
 	}
 
 	@Nullable

@@ -102,6 +102,10 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 			holder.cbCompoundButton.setChecked(isChecked);
 		}
 
+		if (holder.bottomDivider != null) {
+			holder.bottomDivider.setVisibility(displayItem.shouldShowBottomDivider() ? View.VISIBLE : View.GONE);
+		}
+
 		if (displayItem.getTag() != null) {
 			holder.itemView.setOnClickListener(v -> {
 				if (controller instanceof IDialogItemSelected l) {
@@ -135,6 +139,7 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 		public final TextView tvDesc;
 		public final ImageView ivIcon;
 		public final CompoundButton cbCompoundButton;
+		public final View bottomDivider;
 
 		public ItemViewHolder(@NonNull View itemView) {
 			super(itemView);
@@ -142,6 +147,7 @@ public class SingleSelectionAdapter extends RecyclerView.Adapter<ItemViewHolder>
 			tvTitle = itemView.findViewById(R.id.title);
 			tvDesc = itemView.findViewById(R.id.description);
 			cbCompoundButton = itemView.findViewById(R.id.compound_button);
+			bottomDivider = itemView.findViewById(R.id.divider_bottom);
 		}
 	}
 }

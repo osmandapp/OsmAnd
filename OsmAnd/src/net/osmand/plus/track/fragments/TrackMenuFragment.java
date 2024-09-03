@@ -802,6 +802,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			metadataExtensionsCard = new MetadataExtensionsCard(mapActivity, metadata);
 			cardsContainer.addView(metadataExtensionsCard.build(mapActivity));
 		}
+
+		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
+		cardBottomSpace.findViewById(R.id.topShadowView).setVisibility(View.INVISIBLE);
 	}
 
 	private void reattachCard(@NonNull ViewGroup cardsContainer, @NonNull BaseCard card) {

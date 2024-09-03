@@ -40,7 +40,7 @@ public class SelectRouteActivityController extends BaseDialogController
 	private static final String NONE_ACTIVITY_KEY = "none";
 
 	private final RouteActivityHelper routeActivityHelper;
-	private final List<SearchResult> lastSearchResults = new ArrayList<>();
+	private final List<DisplayItem> lastSearchResults = new ArrayList<>();
 	private boolean inSearchMode;
 
 	public SelectRouteActivityController(@NonNull OsmandApplication app,
@@ -59,20 +59,9 @@ public class SelectRouteActivityController extends BaseDialogController
 
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(TITLE, getString(R.string.shared_string_activity));
+		displayData.putExtra(BACKGROUND_COLOR, activeColor);
 
-		if (isInSearchMode()) {
-			for (SearchResult searchResult : lastSearchResults) {
-				int iconId = AndroidUtils.getIconId(app, searchResult.activity.getIconName());
-				displayData.addDisplayItem(new DisplayItem()
-						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
-						.setTitle(searchResult.activity.getLabel())
-						.setDescription(searchResult.group.getLabel())
-						.setNormalIcon(iconsCache.getThemedIcon(iconId))
-						.setControlsColor(activeColor)
-						.setTag(searchResult.activity)
-				);
-			}
-		} else {
+		if (!isInSearchMode()) {
 			// None activity
 			displayData.addDisplayItem(new DisplayItem()
 					.setLayoutId(defLayoutId)
@@ -102,22 +91,27 @@ public class SelectRouteActivityController extends BaseDialogController
 				// Divider
 				displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
 			}
-			displayData.putExtra(BACKGROUND_COLOR, activeColor);
+		} else {
+			int size = lastSearchResults.size();
+			if (size > 0) {
+				lastSearchResults.get(size - 1).hideBottomDivider();
+			}
+			displayData.addAllDisplayItems(lastSearchResults);
+		}
 
-			int selectedIndex = 0;
-			RouteActivity selectedActivity = routeActivityHelper.getSelectedActivity();
-			if (selectedActivity != null) {
-				for (int i = 0; i < displayData.getItemsSize(); i++) {
-					DisplayItem item = displayData.getItemAt(i);
-					if (item.getTag() instanceof RouteActivity activity) {
-						if (Objects.equals(selectedActivity.getId(), activity.getId())) {
-							selectedIndex = i;
-						}
+		int selectedIndex = -1;
+		RouteActivity selectedActivity = routeActivityHelper.getSelectedActivity();
+		if (selectedActivity != null) {
+			for (int i = 0; i < displayData.getItemsSize(); i++) {
+				DisplayItem item = displayData.getItemAt(i);
+				if (item.getTag() instanceof RouteActivity activity) {
+					if (Objects.equals(selectedActivity.getId(), activity.getId())) {
+						selectedIndex = i;
 					}
 				}
 			}
-			displayData.putExtra(SELECTED_INDEX, selectedIndex);
 		}
+		displayData.putExtra(SELECTED_INDEX, selectedIndex);
 		return displayData;
 	}
 
@@ -161,16 +155,26 @@ public class SelectRouteActivityController extends BaseDialogController
 			}
 			return;
 		}
+
 		String textLc = text.toLowerCase();
+		boolean nightMode = isNightMode();
+		UiUtilities iconsCache = app.getUIUtilities();
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		runAsync(() -> {
 			for (RouteActivityGroup group : routeActivityHelper.getActivityGroups()) {
 				for (RouteActivity activity : group.getActivities()) {
 					String label = activity.getLabel().toLowerCase();
 					if (label.contains(textLc)) {
-						SearchResult searchResult = new SearchResult();
-						searchResult.group = group;
-						searchResult.activity = activity;
-						lastSearchResults.add(searchResult);
+						int iconId = AndroidUtils.getIconId(app, activity.getIconName());
+						lastSearchResults.add(new DisplayItem()
+								.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
+								.setTitle(activity.getLabel())
+								.setDescription(group.getLabel())
+								.setNormalIcon(iconsCache.getThemedIcon(iconId))
+								.setControlsColor(activeColor)
+								.setShowBottomDivider(true, 0)
+								.setTag(activity)
+						);
 					}
 				}
 				app.runInUIThread(() -> {
@@ -227,10 +231,5 @@ public class SelectRouteActivityController extends BaseDialogController
 	public static SelectRouteActivityController getExistedInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
 		return (SelectRouteActivityController) dialogManager.findController(PROCESS_ID);
-	}
-
-	private static final class SearchResult {
-		RouteActivityGroup group;
-		RouteActivity activity;
 	}
 }
