@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments.customizable;
 
-import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import android.os.Bundle;
@@ -62,11 +61,6 @@ public class CustomizableSingleSelectionDialogFragment extends CustomizableDialo
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
-
-		Integer index = displayData != null ? (Integer) displayData.getExtra(SELECTED_INDEX) : null;
-		if (index != null) {
-			recyclerView.scrollToPosition(index);
-		}
 	}
 
 	@Override
