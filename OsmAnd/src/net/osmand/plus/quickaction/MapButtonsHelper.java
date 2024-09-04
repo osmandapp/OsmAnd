@@ -349,8 +349,8 @@ public class MapButtonsHelper {
 		allTypes.add(PreviousAppProfileAction.TYPE);
 		allTypes.add(ChangeMapOrientationAction.TYPE);
 		// interface
-		allTypes.add(ShowHideNavigationViewAction.TYPE);
-		allTypes.add(ShowHideSearchViewAction.TYPE);
+		allTypes.add(OpenNavigationViewAction.TYPE);
+		allTypes.add(OpenSearchViewAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
 
