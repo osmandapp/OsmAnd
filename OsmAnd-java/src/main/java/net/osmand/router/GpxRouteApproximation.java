@@ -362,6 +362,7 @@ public class GpxRouteApproximation {
 		RoutePlannerFrontEnd.GpxPoint straightPointStart = null;
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
+			boolean breakSegment = false;
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
@@ -381,6 +382,10 @@ public class GpxRouteApproximation {
 				i = pnt.targetInd;
 			} else {
 				// add straight line from i -> i+1
+				breakSegment = true;
+				i++;
+			}
+			if (breakSegment || pnt.breakSegment) {
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
@@ -390,38 +395,38 @@ public class GpxRouteApproximation {
 					}
 					straightPointStart = pnt;
 				}
-				lastStraightLine.add(pnt.loc);
-				i++;
+				if (!pnt.breakSegment) {
+					lastStraightLine.add(pnt.loc);
+				}
 			}
 		}
 		if (lastStraightLine != null) {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-
 		if (router.isUseGeometryBasedApproximation()) {
 			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // not required by classic method
 		}
-
 		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
 	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
 		// cleanup double joints
-		int LOOK_AHEAD = 4;
-		for (int i = 0; i < gctx.fullRoute.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
-			RouteSegmentResult s = gctx.fullRoute.get(i);
-			for (int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.fullRoute.size(); j++) {
-				RouteSegmentResult e = gctx.fullRoute.get(j);
-				if (e.getStartPoint().equals(s.getEndPoint())) {
-					while ((--j) != i) {
-						gctx.fullRoute.remove(j);
-					}
-					break;
-				}
-			}
-		}
+		// FIXME
+//		int LOOK_AHEAD = 4;
+//		for (int i = 0; i < gctx.fullRoute.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
+//			RouteSegmentResult s = gctx.fullRoute.get(i);
+//			for (int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.fullRoute.size(); j++) {
+//				RouteSegmentResult e = gctx.fullRoute.get(j);
+//				if (e.getStartPoint().equals(s.getEndPoint())) {
+//					while ((--j) != i) {
+//						gctx.fullRoute.remove(j);
+//					}
+//					break;
+//				}
+//			}
+//		}
 
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		preparation.validateAllPointsConnected(gctx.fullRoute);
