@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:osmand="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
@@ -133,7 +132,7 @@
                     android:text="@string/osm_live_active"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/default_list_text_size_large"
-                    android:textStyle="bold"
+                    app:typefaceWeight="medium"
 	                android:layout_marginEnd="16dp"
 	                android:layout_marginStart="16dp" />
 
@@ -194,7 +193,7 @@
                 android:text="World"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
-                android:textStyle="bold"
+                app:typefaceWeight="medium"
 	            android:layout_marginEnd="16dp" />
 
         </LinearLayout>
@@ -236,8 +235,8 @@
                     android:text="@string/osm_live_subscriptions"
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_list_text_size"
-                    app:textAllCapsCompat="true"
-                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:typefaceWeight="medium"
 	                android:paddingStart="16dp"
 	                android:paddingEnd="16dp" />
 
@@ -264,8 +263,8 @@
                     android:text="@string/shared_string_settings"
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_list_text_size"
-                    app:textAllCapsCompat="true"
-                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    app:typefaceWeight="medium"
 	                android:paddingStart="16dp"
 	                android:paddingEnd="16dp" />
 

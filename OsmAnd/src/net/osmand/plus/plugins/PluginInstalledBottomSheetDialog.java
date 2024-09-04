@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 import static net.osmand.plus.download.SrtmDownloadItem.getAbbreviationInScopes;
 
@@ -38,6 +37,7 @@ import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -91,7 +91,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		items.add(titleItem);
 
 		SpannableString pluginTitleSpan = new SpannableString(plugin.getName());
-		pluginTitleSpan.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, pluginTitleSpan.length(), 0);
+		pluginTitleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, pluginTitleSpan.length(), 0);
 		Drawable pluginIcon = plugin.getLogoResource();
 		if (pluginIcon.getConstantState() != null) {
 			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();

@@ -1,16 +1,6 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
-import static net.osmand.plus.settings.enums.TracksSortMode.DATE_ASCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_DESCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.DURATION_ASCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.DURATION_DESCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
-import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
-import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
+import static net.osmand.plus.settings.enums.TracksSortMode.*;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
@@ -36,7 +26,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -46,6 +35,7 @@ import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
@@ -333,7 +323,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void setupTextSpan(@NonNull SpannableStringBuilder builder) {
 		int length = builder.length();
 		builder.setSpan(new ForegroundColorSpan(getSecondaryTextColor(app, nightMode)), 0, length, 0);
-		builder.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, length, 0);
+		builder.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, length, 0);
 	}
 
 	public interface TrackSelectionListener {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/plan_route_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dashboard_land_width"
@@ -30,7 +30,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="top"
                 android:contentDescription="@string/back_to_search"
-                osmand:srcCompat="@drawable/ic_arrow_back"/>
+                app:srcCompat="@drawable/ic_arrow_back"/>
 
             <LinearLayout
                 android:id="@+id/top_bar_title_layout"
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
                 android:contentDescription="@string/shared_string_close"
-                osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+                app:srcCompat="@drawable/ic_action_remove_dark"/>
 
         </LinearLayout>
 
@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            osmand:srcCompat="@drawable/ic_action_altitude_average"
+                            app:srcCompat="@drawable/ic_action_altitude_average"
 	                        android:layout_marginStart="@dimen/list_content_padding"
 	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
@@ -134,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
+                            app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
                             android:layout_marginRight="@dimen/list_content_padding"
-                            osmand:srcCompat="@drawable/ic_action_speed"
+                            app:srcCompat="@drawable/ic_action_speed"
 	                        android:layout_marginStart="@dimen/list_content_padding"
 	                        android:layout_marginEnd="@dimen/list_content_padding" />
 
@@ -182,7 +182,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
+                            app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                        android:layout_marginEnd="8dp" />
 
                     </LinearLayout>

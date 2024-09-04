@@ -1,13 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,7 +34,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
@@ -55,6 +52,7 @@ import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFra
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -103,7 +101,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		super.createToolbar(inflater, view);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
-		toolbarTitle.setTypeface(DEFAULT_BOLD);
+		toolbarTitle.setTypeface(FontCache.getMediumFont());
 		toolbarTitle.setText(getSelectedAppMode().toHumanString());
 		float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
 		toolbarTitle.setLetterSpacing(letterSpacing);

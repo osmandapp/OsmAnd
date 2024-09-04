@@ -162,6 +162,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
+		blockStatisticsBuilder.setShowShortStat(true);
 		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
@@ -327,13 +328,15 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false, getMapActivity());
 		graphsAdapter.setHideStatistics(true);
 		graphsAdapter.setHideJoinGapsBottomButtons(true);
 		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
+		graphsAdapter.setUseSingleMainTab(true);
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
+		tabLayout.setVisibility(View.GONE);
 
 		viewGroup.addView(segmentView);
 	}

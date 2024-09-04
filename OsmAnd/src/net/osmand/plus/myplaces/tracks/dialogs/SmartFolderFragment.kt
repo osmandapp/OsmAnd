@@ -117,9 +117,10 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		return smartFolder
 	}
 
+	@androidx.annotation.WorkerThread
 	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
 		if (this.smartFolder == smartFolder) {
-			updateContent()
+			app.runInUIThread { updateContent() }
 		}
 	}
 

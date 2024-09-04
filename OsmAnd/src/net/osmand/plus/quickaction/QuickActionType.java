@@ -18,6 +18,7 @@ public class QuickActionType {
 	public static final int SETTINGS = 4;
 	public static final int MAP_INTERACTIONS = 5;
 	public static final int MY_PLACES = 6;
+	public static final int INTERFACE = 7;
 
 	private final int id;
 	private final String stringId;

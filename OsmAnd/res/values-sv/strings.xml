@@ -4598,7 +4598,6 @@
     <string name="routing_attr_hazmat_category_usa_9_name">Övriga farliga ämnen och föremål</string>
     <string name="rendering_value_omit_name">Utelämna</string>
     <string name="shared_string_used">Använd</string>
-    <string name="rendering_attr_alpineHiking_name">Svårighetsgrad</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Knapp för att visa eller dölja valda spår på kartan.</string>
     <string name="map_widget_rssi">RSSI</string>

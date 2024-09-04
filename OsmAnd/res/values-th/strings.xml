@@ -491,4 +491,12 @@
     <string name="add_new_folder">เพิ่มโฟลเดอร์ใหม่</string>
     <string name="shared_string_end_time">เวลาสิ้นสุด</string>
     <string name="shared_string_save">บันทึก</string>
+    <string name="plugins_screen">ปลั้กอิน</string>
+    <string name="prefs_plugins">ปลั้กอิน</string>
+    <string name="plugin_settings">ปลั้กอิน</string>
+    <string name="plugins_settings">การตั้งค่าปลั้กอิน</string>
+    <string name="list_of_installed_plugins">ปลั้กอินที่ติดตั้งแล้ว</string>
+    <string name="user_guide">คู่มือผู้ใช้</string>
+    <string name="most_viewed">ที่ดูมากที่สุด</string>
+    <string name="plugins_menu_group">ปลั้กอิน</string>
 </resources>

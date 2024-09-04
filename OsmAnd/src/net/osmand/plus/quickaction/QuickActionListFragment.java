@@ -328,6 +328,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Context context = view.getContext();
 
 		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_appearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> showAppearanceDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
 				.setTitleId(R.string.shared_string_rename)
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
 				.setOnClickListener(v -> showRenameDialog()).create());
@@ -342,8 +347,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
 		PopUpMenu.show(displayData);
+	}
+
+	private void showAppearanceDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			MapButtonAppearanceFragment.showInstance(manager, buttonState);
+		}
 	}
 
 	private void showRenameDialog() {

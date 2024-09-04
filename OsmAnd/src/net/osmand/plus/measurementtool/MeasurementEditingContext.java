@@ -1142,8 +1142,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				if (pts.size() >= 2 && insertIntermediates) {
 					pts = insertIntermediatePoints(pts);
 				}
+				List<LatLon> latLonList = new ArrayList<>(pts.size());
+				for (WptPt pt : pts) {
+					latLonList.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
+				}
 				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
-						DEFAULT_APP_MODE.getDefaultSpeed(), new LocationsHolder(pts).getLatLonList()));
+						DEFAULT_APP_MODE.getDefaultSpeed(), latLonList));
 			}
 			roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
 			application.runInUIThread(() -> {

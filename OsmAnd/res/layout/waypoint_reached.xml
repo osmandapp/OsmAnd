@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/package_delivered_layout"
@@ -23,7 +23,7 @@
         android:paddingLeft="12dp"
         android:paddingStart="12dp"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_flat_list_dark"
+        app:srcCompat="@drawable/ic_flat_list_dark"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -32,7 +32,7 @@
         android:layout_width="56dp"
         android:layout_height="25dp"
         android:layout_gravity="center_vertical"
-        osmand:srcCompat="@drawable/ic_action_favorite"/>
+        app:srcCompat="@drawable/ic_action_favorite"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -108,7 +108,7 @@
         android:contentDescription="@string/shared_string_more"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_actions_menu"
+        app:srcCompat="@drawable/ic_actions_menu"
         android:visibility="gone"
         tools:visibility="visible"/>
 
@@ -123,6 +123,6 @@
         android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+        app:srcCompat="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

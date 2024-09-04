@@ -66,7 +66,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 	}
 
 	private void updatePoint(@NonNull PointsGroup pointsGroup, @NonNull WptPt wpt) {
-		String category = pointsGroup.getIconName();
+		String category = pointsGroup.getName();
 		String iconName = updatePointsAppearance ? pointsGroup.getIconName() : wpt.getIconName();
 		String backgroundType = updatePointsAppearance ? pointsGroup.getBackgroundType() : wpt.getBackgroundType();
 		int color = updatePointsAppearance ? pointsGroup.getColor() : wpt.getColor();
@@ -77,7 +77,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 		} else {
 			WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), wpt.getDesc(), wpt.getName(), category,
 					Algorithms.colorToString(color), iconName, backgroundType);
-			gpxFile.updateWptPt(wpt, wptInfo, true);
+			gpxFile.updateWptPt(wpt, wptInfo, false);
 		}
 	}
 

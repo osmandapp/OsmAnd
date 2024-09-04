@@ -136,7 +136,7 @@ class ListFilterAdapter(
 				} catch (ex: Throwable){
 					Log.e("Corwin", "getFilterItemIcon: $itemName")
 				}
-				val color = Color.parseColor(itemName)
+				val color = Algorithms.parseColor(itemName)
 				val colorWithoutAlpha = ColorUtilities.removeAlpha(color)
 				val transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f)
 				val transparencyIcon =

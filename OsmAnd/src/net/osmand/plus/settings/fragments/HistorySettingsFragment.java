@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
-
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -27,6 +25,7 @@ import net.osmand.plus.settings.bottomsheets.ClearAllHistoryBottomSheet;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.search.core.SearchResult;
 
 import org.apache.commons.logging.Log;
@@ -138,7 +137,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 			title.setTextColor(ContextCompat.getColor(app, R.color.color_osm_edit_delete));
 		} else if (ACTIONS.equals(prefId)) {
 			TextView title = holder.itemView.findViewById(android.R.id.title);
-			title.setTypeface(DEFAULT_BOLD);
+			title.setTypeface(FontCache.getMediumFont());
 		}
 		super.onBindPreferenceViewHolder(preference, holder);
 	}

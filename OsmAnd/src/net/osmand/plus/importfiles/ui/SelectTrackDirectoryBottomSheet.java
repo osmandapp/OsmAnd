@@ -1,6 +1,5 @@
 package net.osmand.plus.importfiles.ui;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
@@ -26,12 +25,12 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
-
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.KGpxUiHelper;
 import net.osmand.util.Algorithms;
@@ -83,7 +82,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 	private void createAddFolderItem(@NonNull LayoutInflater inflater) {
 		View view = inflater.inflate(R.layout.bottom_sheet_item_simple_pad_32dp, null);
 		TextView title = view.findViewById(R.id.title);
-		title.setTypeface(DEFAULT_BOLD);
+		title.setTypeface(FontCache.getMediumFont());
 
 		BaseBottomSheetItem item = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.favorite_category_add_new))

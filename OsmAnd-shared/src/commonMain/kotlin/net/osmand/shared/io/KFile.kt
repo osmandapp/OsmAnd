@@ -119,4 +119,14 @@ class KFile {
 	fun renameTo(toFilePath: String): Boolean {
 		return PlatformUtil.renameFile(path.toString(), toFilePath)
 	}
+
+	fun getFileNameWithoutExtension(): String? {
+		return Companion.getFileNameWithoutExtension(this.name())
+	}
+
+	companion object {
+		fun getFileNameWithoutExtension(name: String?): String? {
+			return name?.substringBeforeLast(".");
+		}
+	}
 }

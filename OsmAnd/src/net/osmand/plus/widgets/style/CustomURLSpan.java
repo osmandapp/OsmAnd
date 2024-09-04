@@ -1,11 +1,12 @@
 package net.osmand.plus.widgets.style;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.text.TextPaint;
 import android.text.style.URLSpan;
 
 import androidx.annotation.NonNull;
+
+import net.osmand.plus.utils.FontCache;
 
 public class CustomURLSpan extends URLSpan {
 
@@ -25,7 +26,7 @@ public class CustomURLSpan extends URLSpan {
 		ds.setUnderlineText(false);
 
 		if (useBoldTypeface) {
-			ds.setTypeface(DEFAULT_BOLD);
+			ds.setTypeface(FontCache.getMediumFont());
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.ALWAYS;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
 import static net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget.LOW_SPEED_THRESHOLD_MPS;
@@ -49,6 +48,7 @@ import net.osmand.shared.data.SpeedConstants;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -394,7 +394,7 @@ public class SpeedometerWidget {
 		textPaint.setAntiAlias(true);
 		textPaint.setColor(app.getColor(R.color.widgettext_day));
 		textPaint.setTextSize(textSize * density);
-		textPaint.setTypeface(DEFAULT_BOLD);
+		textPaint.setTypeface(FontCache.getMediumFont());
 
 		Rect textBounds = new Rect();
 		textPaint.getTextBounds(cachedSpeedLimitText, 0, cachedSpeedLimitText.length(), textBounds);
@@ -413,7 +413,7 @@ public class SpeedometerWidget {
 	private void drawCurrentSpeed(Canvas canvas, int textSize, Rect speedArea, float density, boolean speedExceed) {
 		TextPaint textPaint = new TextPaint();
 		textPaint.setAntiAlias(true);
-		textPaint.setTypeface(DEFAULT_BOLD);
+		textPaint.setTypeface(FontCache.getMediumFont());
 
 		OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 		float unitTextSize = SPEEDOMETER_UNIT_TEXT_SIZE * density;

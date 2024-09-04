@@ -171,7 +171,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	protected void updateWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
+	protected void updateWpt(GpxFile gpx, @Nullable String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);

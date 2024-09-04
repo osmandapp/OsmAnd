@@ -24,12 +24,12 @@ import net.osmand.util.MapUtils;
 import java.util.Collections;
 import java.util.Set;
 
-public class RadiusRulerWidget extends TextInfoWidget {
+public class RadiusRulerWidget extends SimpleWidget {
 
 	private RadiusRulerMode cachedRadiusRulerMode;
 
-	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, RADIUS_RULER);
+	public RadiusRulerWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		super(mapActivity, RADIUS_RULER, customId, widgetsPanel);
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
 		updateIcons();
@@ -46,7 +46,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 		Location currentLocation = locationProvider.getLastKnownLocation();
 		LatLon centerLocation = mapActivity.getMapLocation();
 
