@@ -136,6 +136,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_ACCESSIBILITY = "osmand.accessibility";
 	String PLUGIN_WIKIPEDIA = "osmand.wikipedia";
 	String PLUGIN_ANT_PLUS = "osmand.antplus";
+	String PLUGIN_OBD = "osmand.obd";
 	String PLUGIN_WEATHER = "osmand.weather";
 
 	//Settings:
