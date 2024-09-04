@@ -689,4 +689,27 @@ public class Amenity extends MapObject {
 		}
 		return alternateName;
 	}
+
+	public String getCityFromTagGroups(String lang) {
+		if (tagGroups == null) {
+			return null;
+		}
+		String result = null;
+		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			for (TagValuePair tagValue : entry.getValue()) {
+				if (tagValue.tag.endsWith("city:" + lang)) {
+					if (result == null) {
+						result = tagValue.value;
+					} else {
+						result += ", " + tagValue.value;
+					}
+					break;
+				}
+				if (tagValue.tag.endsWith("city")) {
+					result = tagValue.value;
+				}
+			}
+		}
+		return result;
+	}
 }

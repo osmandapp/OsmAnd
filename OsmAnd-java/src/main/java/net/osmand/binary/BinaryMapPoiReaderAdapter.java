@@ -301,6 +301,18 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
+	public void initTagGroups(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
+		if (region.tagGroups.isEmpty()) {
+			codedIS.seek(region.filePointer);
+			long oldLimit = codedIS.pushLimitLong((long) region.length);
+			BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
+			req.poiTypeFilter = null;//init for all
+			indexTagGroupsInPoiBox(req.left, req.right, req.top, req.bottom, req, region);
+			req.poiTypeFilter = filter;
+			codedIS.popLimit(oldLimit);
+		}
+	}
+
 	private String normalizeSearchPoiByNameQuery(String query) {
 		return query.replace("\"", "").toLowerCase();
 	}
@@ -571,6 +583,40 @@ public class BinaryMapPoiReaderAdapter {
 			default:
 				skipUnknownField(t);
 				break;
+			}
+		}
+	}
+
+	protected void indexTagGroupsInPoiBox(int left31, int right31, int top31, int bottom31,
+	                              SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+		TLongHashSet skipTiles = null;
+		if (req.zoom >= 0 && req.zoom < 16) {
+			skipTiles = new TLongHashSet();
+		}
+		long length;
+		long oldLimit;
+		TIntLongHashMap offsetsMap = new TIntLongHashMap();
+		while (true) {
+			if (req.isCancelled()) {
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+				case 0:
+					return;
+				case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
+					length = readInt();
+					oldLimit = codedIS.pushLimitLong((long) length);
+					readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap, skipTiles, req, region);
+					codedIS.popLimit(oldLimit);
+					break;
+				case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return;
+				default:
+					skipUnknownField(t);
+					break;
 			}
 		}
 	}

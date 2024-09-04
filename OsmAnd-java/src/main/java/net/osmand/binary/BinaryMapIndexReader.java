@@ -1413,6 +1413,7 @@ public class BinaryMapIndexReader {
 		}
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
+			poiAdapter.initTagGroups(poiIndex, req);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
