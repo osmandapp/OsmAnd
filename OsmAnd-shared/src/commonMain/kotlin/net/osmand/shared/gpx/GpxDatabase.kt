@@ -241,7 +241,11 @@ class GpxDatabase {
 					if (query != null && query.moveToFirst()) {
 						maxValue = query.getString(0)
 					}
-				} finally {
+				}
+				catch (error: Throwable){
+					//Cursor.getString may produce exception when the column value is null or the column type is not a string type
+				}
+				finally {
 					query?.close()
 				}
 			}
