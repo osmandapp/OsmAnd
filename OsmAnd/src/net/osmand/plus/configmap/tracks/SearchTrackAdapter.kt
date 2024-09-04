@@ -35,7 +35,7 @@ class SearchTracksAdapter(
 	private var selectionMode: Boolean,
 	private var filter: TracksSearchFilter
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
+	RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private val app: OsmandApplication
     private val locationViewCache: UpdateLocationViewCache

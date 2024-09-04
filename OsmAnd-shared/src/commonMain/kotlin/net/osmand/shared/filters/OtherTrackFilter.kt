@@ -15,7 +15,6 @@ class OtherTrackFilter(
 
 	val parameters = ArrayList<OtherTrackParam>()
 
-	//for migration purposes only
 	@Serializable
 	private var isVisibleOnMap: Boolean = false
 

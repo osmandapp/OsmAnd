@@ -35,8 +35,6 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		this.dirFile = dirFile
 	}
 
-//	val dirName: String
-//		get() = dirFile.name() //
 	val relativePath: String
 		get() {
 			val dirName = getDirName()

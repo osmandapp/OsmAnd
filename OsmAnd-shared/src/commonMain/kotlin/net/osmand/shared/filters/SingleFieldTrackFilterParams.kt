@@ -10,21 +10,6 @@ open class SingleFieldTrackFilterParams {
 		return itemName
 	}
 
-//	@Nullable
-//	fun getItemIcon(
-//		app: OsmandApplication?,
-//		itemName: String?): android.graphics.drawable.Drawable? {
-//		return null
-//	}
-//
-//	@Nullable
-//	fun getAllItemsIcon(
-//		app: OsmandApplication?,
-//		isChecked: Boolean,
-//		nightMode: Boolean): android.graphics.drawable.Drawable? {
-//		return null
-//	}
-
 	open fun trackParamToString(trackParam: Any): String {
 		return trackParam.toString()
 	}

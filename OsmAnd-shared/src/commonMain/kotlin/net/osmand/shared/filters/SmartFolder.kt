@@ -14,9 +14,6 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	constructor() : this("") {
 	}
 
-//	@Serializable
-//	var folderName = folderName
-
 	@Serializable
 	var creationTime = 0L
 

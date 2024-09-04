@@ -133,11 +133,6 @@ open class RangeTrackFilter<T : Comparable<T>>
 				other.valueTo == valueTo
 	}
 
-//	open fun getDisplayMinValue(): Int {
-//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, flor(minValue))
-//		return formattedValue.valueSrc.toInt()
-//	}
-
 	private fun flor(value: T): String {
 		return when (value) {
 			is Float -> {
@@ -181,22 +176,6 @@ open class RangeTrackFilter<T : Comparable<T>>
 			}
 		}
 	}
-
-//	open fun getDisplayMaxValue(): Int {
-//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(maxValue))
-//		return formattedValue.valueSrc.toInt()
-//	}
-//
-//	open fun getDisplayValueFrom(): Int {
-//		val formattedValue =
-//			trackFilterType.measureUnitType.getFormattedValue(app, valueFrom.toString())
-//		return formattedValue.valueSrc.toInt()
-//	}
-//
-//	open fun getDisplayValueTo(): Int {
-//		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(valueTo))
-//		return formattedValue.valueSrc.toInt()
-//	}
 
 	private fun getProperty(): GpxParameter {
 		return trackFilterType.property!!

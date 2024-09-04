@@ -426,9 +426,4 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
 	}
-
-//	@Override
-//	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
-//		SmartFolderUpdateListener.super.onSmartFolderRenamed(smartFolder);
-//	}
 }

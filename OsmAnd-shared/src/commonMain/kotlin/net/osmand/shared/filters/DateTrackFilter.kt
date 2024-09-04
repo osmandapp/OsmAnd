@@ -3,12 +3,9 @@ package net.osmand.shared.filters
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
-import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.GpxParameter
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.PlatformUtil
-
-//import java.text.SimpleDateFormat
-//import java.util.Locale
 
 private const val DATE_PATTERN = "dd.MM.yyyy"
 
@@ -19,8 +16,6 @@ class DateTrackFilter(
 	BaseTrackFilter(trackFilterType, filterChangedListener) {
 	var initialValueFrom = dateFrom
 	var initialValueTo = Clock.System.now().toEpochMilliseconds()
-//	var initialValueFromInstant = Instant.fromEpochMilliseconds(dateFrom)
-//	var initialValueToInstant = Clock.System.now()
 
 	@Serializable
 	var valueFrom = initialValueFrom

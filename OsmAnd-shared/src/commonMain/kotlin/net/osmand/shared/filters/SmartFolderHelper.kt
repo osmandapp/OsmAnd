@@ -12,15 +12,7 @@ import net.osmand.shared.util.KBackgroundTask
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
 
-class SmartFolderHelper() {
-
-//	private val preference: CommonPreference<String> =
-//		app.settings.registerStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
-//			.makeGlobal()
-//			.makeShared()
-//	private val gson: Gson = GsonBuilder()
-//		.excludeFieldsWithoutExposeAnnotation()
-//		.create()
+class SmartFolderHelper {
 
 	private var smartFolderCollection: MutableList<SmartFolder> = ArrayList()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
@@ -34,7 +26,6 @@ class SmartFolderHelper() {
 	}
 
 	companion object {
-		//		private val LOG = PlatformUtil.getLog(SmartFolderHelper::class.java)
 		private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
 	}
 
@@ -159,7 +150,8 @@ class SmartFolderHelper() {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		val json =
+			Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
 		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}
@@ -194,7 +186,6 @@ class SmartFolderHelper() {
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {
-//		LOG.debug("addTrackItemToSmartFolder " + item.name)
 		val newSet = allAvailableTrackItems
 		newSet.add(item)
 		allAvailableTrackItems = newSet
@@ -257,7 +248,6 @@ class SmartFolderHelper() {
 	}
 
 	private fun updateSmartFolderItems(smartFolder: SmartFolder) {
-//		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
 		smartFolder.resetItems()
 		addTracksToSmartFolders(ArrayList(allAvailableTrackItems), arrayListOf(smartFolder))
 		notifyFolderUpdatedListeners(smartFolder)
@@ -281,8 +271,7 @@ class SmartFolderHelper() {
 	}
 
 
-	private inner class SmartFoldersUpdateTask(
-	) : KBackgroundTask<Unit>() {
+	private inner class SmartFoldersUpdateTask : KBackgroundTask<Unit>() {
 
 		override fun doInBackground() {
 			readSettings()

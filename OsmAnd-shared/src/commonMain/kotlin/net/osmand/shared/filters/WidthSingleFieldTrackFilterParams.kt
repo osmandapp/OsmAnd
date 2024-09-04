@@ -5,28 +5,6 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 
 class WidthSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
-
-//	override fun getItemIcon(app: OsmandApplication, itemName: String): Drawable? {
-//		return if (Algorithms.isEmpty(itemName)) {
-//			app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
-//		} else {
-//			val iconColor = when (itemName) {
-//				WidthMode.THIN.key,
-//				WidthMode.MEDIUM.key,
-//				WidthMode.BOLD.key -> R.color.track_filter_width_standard
-//
-//				else -> {
-//					R.color.track_filter_width_custom
-//				}
-//			}
-//			TrackAppearanceFragment.getTrackIcon(
-//				app,
-//				itemName,
-//				false,
-//				app.getColor(iconColor))
-//		}
-//	}
-
 	override fun getItemText(itemName: String): String {
 		return if (KAlgorithms.isEmpty(itemName)) {
 			PlatformUtil.getStringResource("not_specified")

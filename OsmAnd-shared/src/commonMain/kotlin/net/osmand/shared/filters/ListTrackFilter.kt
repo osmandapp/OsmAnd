@@ -49,7 +49,6 @@ open class ListTrackFilter(
 		return !KAlgorithms.isEmpty(selectedItems)
 	}
 
-//	@SerialName("selectedItems", alternate=["selectedFolders", "selectedCities", "electedColors", "selectedWidths"])
 	@SerialNames("selectedItems", "selectedFolders", "selectedCities", "electedColors", "selectedWidths")
 	@Serializable(with = MultiNameSerializer::class)
 	var selectedItems = ArrayList<String>()
@@ -129,14 +128,6 @@ open class ListTrackFilter(
 	open fun getItemText(itemName: String): String {
 		return itemName
 	}
-
-//	open fun getItemIcon(itemName: String): Drawable? {
-//		return null
-//	}
-//
-//	open fun getSelectAllItemIcon(isChecked: Boolean, nightMode: Boolean): Drawable? {
-//		return null
-//	}
 
 	fun getTracksCountForItem(itemName: String): Int {
 		return allItemsCollection[itemName] ?: 0
