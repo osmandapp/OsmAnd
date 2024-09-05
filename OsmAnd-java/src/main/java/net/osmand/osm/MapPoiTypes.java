@@ -207,6 +207,10 @@ public class MapPoiTypes {
 	}
 
 	public AbstractPoiType getAnyPoiTypeByKey(String name) {
+		return getAnyPoiTypeByKey(name, true);
+	}
+
+	public AbstractPoiType getAnyPoiTypeByKey(String name, boolean skipAdditional) {
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
 			if (pc.getKeyName().equals(name)) {
@@ -216,10 +220,35 @@ public class MapPoiTypes {
 				if (pf.getKeyName().equals(name)) {
 					return pf;
 				}
+				// search in poi additional
+				if (!skipAdditional) {
+					for (PoiType type : pf.getPoiTypes()) {
+						if (type.getKeyName().equals(name)) {
+							return type;
+						}
+						AbstractPoiType foundType = findInAdds(type.getPoiAdditionals(), name);
+						if (foundType != null) {
+							return foundType;
+						}
+					}
+				}
 			}
 			PoiType pt = pc.getPoiTypeByKeyName(name);
 			if (pt != null && !pt.isReference()) {
 				return pt;
+			}
+		}
+		return null;
+	}
+	
+	private AbstractPoiType findInAdds(List<PoiType> adds, String name) {
+		for (PoiType additional : adds) {
+			if (additional.getKeyName().equals(name)) {
+				return additional;
+			}
+			AbstractPoiType foundType = findInAdds(additional.getPoiAdditionals(), name);
+			if (foundType != null) {
+				return foundType;
 			}
 		}
 		return null;
