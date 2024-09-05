@@ -1,9 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
 import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
-import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -33,7 +30,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
@@ -49,7 +45,6 @@ import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.maphudbuttons.CustomMapButton;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
@@ -58,29 +53,15 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
 import org.apache.commons.logging.Log;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment implements WeatherWebClientListener {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
-	public static final String CHOOSE_LAYER_BTN = "CHOOSE_LAYER";
-	public static final String CHOOSE_CONTOURS_BTN = "CHOOSE_CONTOURS";
 	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
@@ -114,9 +95,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	private int animationStartStep;
 	private int animateStepCount;
 	private int animationStartStepCount;
-
-	private ImageView chooseLayersBtn;
-	private ImageView chooseContoursBtn;
 
 	private enum AnimationState {
 		IDLE,
@@ -367,19 +345,18 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		ImageView zoomInBtn = view.findViewById(R.id.map_zoom_in_button);
+		ZoomInButton zoomInBtn = view.findViewById(R.id.map_zoom_in_button);
 		if (zoomInBtn != null) {
-			layer.addMapButton(new ZoomInButton(activity, zoomInBtn, ZOOM_IN_BUTTON_ID));
+			layer.addCustomMapButton(zoomInBtn);
 		}
-		ImageView zoomOutBtn = view.findViewById(R.id.map_zoom_out_button);
-		if (zoomInBtn != null) {
-			layer.addMapButton(new ZoomOutButton(activity, zoomOutBtn, ZOOM_OUT_BUTTON_ID));
+		ZoomOutButton zoomOutBtn = view.findViewById(R.id.map_zoom_out_button);
+		if (zoomOutBtn != null) {
+			layer.addCustomMapButton(zoomOutBtn);
 		}
-		ImageView myLocationBtn = view.findViewById(R.id.map_my_location_button);
-		if (zoomInBtn != null) {
-			layer.addMapButton(new MyLocationButton(activity, myLocationBtn, BACK_TO_LOC_BUTTON_ID, false));
+		MyLocationButton myLocationBtn = view.findViewById(R.id.map_my_location_button);
+		if (myLocationBtn != null) {
+			layer.addCustomMapButton(myLocationBtn);
 		}
-
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -410,18 +387,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		List<ChipItem> chipItems = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("E", Locale.getDefault());
 		for (int i = 0; i <= MAX_FORECAST_DAYS; i++) {
-			String title;
-			switch (i) {
-				case 0:
-					title = app.getString(R.string.today);
-					break;
-				case 1:
-					title = app.getString(R.string.tomorrow);
-					break;
-				default:
-					title = formatter.format(calendar.getTime());
-					break;
-			}
+			String title = switch (i) {
+				case 0 -> app.getString(R.string.today);
+				case 1 -> app.getString(R.string.tomorrow);
+				default -> formatter.format(calendar.getTime());
+			};
 			ChipItem chip = new ChipItem(title);
 			chip.title = title;
 			chip.contentDescription = title;
@@ -457,12 +427,12 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 	}
 
 	private void setupWeatherButtons(@NonNull View view) {
-		chooseLayersBtn = view.findViewById(R.id.raster_layers_btn);
-		chooseLayersBtn.setOnClickListener(this::chooseLayers);
-		chooseContoursBtn = view.findViewById(R.id.contour_layers_btn);
-		chooseContoursBtn.setOnClickListener(this::chooseContour);
-		updateChooseLayersButton();
-		updateChooseContoursButton();
+		MapActivity activity = requireMapActivity();
+		MapLayers mapLayers = activity.getMapLayers();
+		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
+
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.raster_layers_btn));
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.contour_layers_btn));
 	}
 
 	public void updateSelectedDate(@Nullable Date date, boolean forAnimation, boolean resetPeriod) {
@@ -546,7 +516,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
-			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID, CHOOSE_CONTOURS_BTN, CHOOSE_LAYER_BTN));
+			layer.clearCustomMapButtons();
 			layer.restoreCompassButton();
 
 			if (rulerWidget != null) {
@@ -570,105 +540,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 			plugin.setSelectedContoursType(previousWeatherContour);
 		}
 		super.onDestroy();
-	}
-
-	private void chooseContour(@NonNull View view) {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		List<PopUpMenuItem> items = new ArrayList<>();
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_none)
-				.setIcon(getContentIcon(R.drawable.ic_action_thermometer))
-				.showCompoundBtn(activeColor)
-				.setOnClickListener(v -> {
-					plugin.setSelectedForecastContoursType(null);
-					updateChooseContoursButton();
-					requireMapActivity().refreshMap();
-				})
-				.setSelected(plugin.getSelectedForecastContoursType() == null)
-				.create()
-		);
-
-		for (WeatherContour weatherContour : WeatherContour.values()) {
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(weatherContour.getTitleId())
-					.setIcon(getContentIcon(weatherContour.getIconId()))
-					.showCompoundBtn(activeColor)
-					.setOnClickListener(v -> {
-						plugin.setSelectedForecastContoursType(weatherContour);
-						updateChooseContoursButton();
-						requireMapActivity().refreshMap();
-					})
-					.setSelected(weatherContour == plugin.getSelectedForecastContoursType())
-					.create()
-			);
-		}
-
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = view;
-		displayData.menuItems = items;
-		displayData.nightMode = nightMode;
-		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
-		PopUpMenu.show(displayData);
-	}
-
-	private void chooseLayers(@NonNull View view) {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (WeatherBand band : weatherHelper.getWeatherBands()) {
-			boolean selected = band.isForecastBandVisible();
-			Drawable icon = selected ? getIcon(band.getIconId(), ColorUtilities.getActiveColorId(nightMode)) : getContentIcon(band.getIconId());
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(band.getMeasurementName())
-					.setIcon(icon)
-					.showCompoundBtn(activeColor)
-					.setOnClickListener(v -> {
-						boolean visible = !band.isForecastBandVisible();
-						band.setForecastBandVisible(visible);
-						requireMapActivity().refreshMap();
-						updateChooseLayersButton();
-					})
-					.showTopDivider(band.getBandIndex() == WeatherBand.WEATHER_BAND_WIND_ANIMATION)
-					.setSelected(selected)
-					.create()
-			);
-		}
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = view;
-		displayData.menuItems = menuItems;
-		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.popup_menu_item_full_divider_check_box;
-		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
-		PopUpMenu.show(displayData);
-	}
-
-	private void updateChooseLayersButton() {
-		MapActivity activity = requireMapActivity();
-		MapLayers mapLayers = activity.getMapLayers();
-		MapControlsLayer layer = mapLayers.getMapControlsLayer();
-
-		boolean anyBandSelected = weatherHelper.getVisibleForecastBands().size() > 0;
-		layer.removeMapButtons(Collections.singletonList(CHOOSE_LAYER_BTN));
-		layer.addMapButton(new CustomMapButton(requireMapActivity(),
-				chooseLayersBtn,
-				CHOOSE_LAYER_BTN,
-				R.drawable.ic_layer_top, R.drawable.ic_layer_top,
-				anyBandSelected ? R.color.icon_color_active_dark : R.color.icon_color_default_dark,
-				anyBandSelected ? R.color.icon_color_active_light : R.color.icon_color_default_light));
-	}
-
-	private void updateChooseContoursButton() {
-		MapActivity activity = requireMapActivity();
-		MapLayers mapLayers = activity.getMapLayers();
-		MapControlsLayer layer = mapLayers.getMapControlsLayer();
-		boolean contourSelected = plugin.getSelectedForecastContoursType() != null;
-		int iconResId = contourSelected ? R.drawable.ic_plugin_srtm : R.drawable.ic_action_contour_lines_disable;
-		layer.removeMapButtons(Collections.singletonList(CHOOSE_CONTOURS_BTN));
-		layer.addMapButton(new CustomMapButton(requireMapActivity(),
-				chooseContoursBtn,
-				CHOOSE_CONTOURS_BTN,
-				iconResId, iconResId,
-				contourSelected ? R.color.icon_color_active_dark : R.color.icon_color_default_dark,
-				contourSelected ? R.color.icon_color_active_light : R.color.icon_color_default_light));
 	}
 
 	@Nullable

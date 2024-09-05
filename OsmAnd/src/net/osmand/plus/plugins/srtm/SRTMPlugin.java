@@ -386,7 +386,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(@NonNull @NotNull OnDataChangeUiAdapter uiAdapter, @NonNull @NotNull View view, @NonNull @NotNull ContextMenuItem item) {
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
 				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				int itemId = item.getTitleId();
 				if (itemId == R.string.download_srtm_maps) {

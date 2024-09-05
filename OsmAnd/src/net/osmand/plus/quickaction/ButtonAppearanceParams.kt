@@ -29,9 +29,13 @@ data class ButtonAppearanceParams(
 		internal const val OPACITY_KEY = "opacity"
 		internal const val CORNER_RADIUS_KEY = "corner_radius"
 
-		internal const val DEFAULT_ICON_ID = "ic_quick_action"
-		internal const val DEFAULT_TOP_BUTTON_SIZE = 40
-		internal const val DEFAULT_ACTION_BUTTON_SIZE = 48
-		internal const val DEFAULT_BOTTOM_BUTTON_SIZE = 48
+		internal const val OPAQUE_ALPHA = 1f
+		internal const val TRANSPARENT_ALPHA = 0.5f
+
+		internal const val BIG_SIZE_DP = 48
+		internal const val SMALL_SIZE_DP = 40
+
+		internal const val ROUND_RADIUS_DP = 36
+		internal const val RECTANGULAR_RADIUS_DP = 2
 	}
 }

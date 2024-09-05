@@ -1,9 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -14,7 +10,6 @@ import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,21 +27,13 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.CompassButton;
-import net.osmand.plus.views.controls.maphudbuttons.ConfigureMapButton;
-import net.osmand.plus.views.controls.maphudbuttons.DrawerMenuButton;
 import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
-import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
-import net.osmand.plus.views.controls.maphudbuttons.NavigationMenuButton;
-import net.osmand.plus.views.controls.maphudbuttons.QuickSearchButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -61,7 +48,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final MapTransparencyHelper mapTransparencyHelper;
 
 	private List<MapButton> mapButtons = new ArrayList<>();
-	private Map3DButton map3DButton;
+	private List<MapButton> customMapButtons = new ArrayList<>();
 	private CompassButton compassButton;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
@@ -103,18 +90,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 			initTopControls();
 			initFabButtons(mapActivity);
 			mapTransparencyHelper.initTransparencyBar();
-			initZooms();
-			initDashboardRelatedControls();
+			initMapButtons();
 			updateControls(mapView.getCurrentRotatedTileBox(), null);
 		} else {
 			mapButtons = new ArrayList<>();
+			customMapButtons = new ArrayList<>();
 			mapTransparencyHelper.destroyTransparencyBar();
 			mapRouteInfoMenu = null;
 			compassButton = null;
-			if (map3DButton != null) {
-				map3DButton.onDestroyButton();
-			}
-			map3DButton = null;
 		}
 	}
 
@@ -122,54 +105,29 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return compassButton.moveToSpecialPosition(destLayout, params);
 	}
 
-	public void moveMap3DButton(@NonNull ViewGroup destLayout, @NonNull ViewGroup.LayoutParams params) {
-		if (map3DButton != null) {
-			map3DButton.moveToSpecialPosition(destLayout, params);
-		}
-	}
-
 	public void restoreCompassButton() {
 		compassButton.moveToDefaultPosition();
 	}
 
-	public void restoreMap3DButton() {
-		if (map3DButton != null) {
-			map3DButton.restoreSavedPosition();
-		}
-	}
-
 	private void initTopControls() {
-		MapActivity mapActivity = requireMapActivity();
+		MapActivity activity = requireMapActivity();
+		compassButton = activity.findViewById(R.id.map_compass_button);
 
-		mapButtons.add(new ConfigureMapButton(mapActivity));
-		mapButtons.add(new QuickSearchButton(mapActivity));
-
-		compassButton = new CompassButton(mapActivity);
-		mapButtons.add(compassButton);
+		addMapButton(activity.findViewById(R.id.map_layers_button));
+		addMapButton(activity.findViewById(R.id.map_search_button));
+		addMapButton(compassButton);
 	}
 
 	private void initFabButtons(@NonNull MapActivity mapActivity) {
-		ImageView buttonView = mapActivity.findViewById(R.id.map_3d_button);
-		if (map3DButton != null) {
-			map3DButton.onDestroyButton();
-		}
-		map3DButton = new Map3DButton(mapActivity, buttonView);
-		mapButtons.add(map3DButton);
+		Map3DButton map3DButton = mapActivity.findViewById(R.id.map_3d_button);
+		map3DButton.setUseCustomPosition(true);
+		addMapButton(map3DButton);
 	}
 
 	public void setControlsClickable(boolean clickable) {
-		for (MapButton mapButton : mapButtons) {
-			mapButton.getView().setClickable(clickable);
+		for (MapButton mapButton : getAllMapButtons()) {
+			mapButton.setClickable(clickable);
 		}
-	}
-
-	public void initDashboardRelatedControls() {
-		MapActivity mapActivity = requireMapActivity();
-		ImageView backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-
-		mapButtons.add(new DrawerMenuButton(mapActivity));
-		mapButtons.add(new NavigationMenuButton(mapActivity));
-		mapButtons.add(new MyLocationButton(mapActivity, backToLocation, BACK_TO_LOC_HUD_ID, true));
 	}
 
 	protected void resetTouchEvent() {
@@ -187,29 +145,38 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void initZooms() {
-		MapActivity mapActivity = requireMapActivity();
-
-		ImageView zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		ImageView zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-
-		addMapButton(new ZoomInButton(mapActivity, zoomInButton, ZOOM_IN_HUD_ID));
-		addMapButton(new ZoomOutButton(mapActivity, zoomOutButton, ZOOM_OUT_HUD_ID));
+	public void initMapButtons() {
+		MapActivity activity = requireMapActivity();
+		addMapButton(activity.findViewById(R.id.map_menu_button));
+		addMapButton(activity.findViewById(R.id.map_zoom_in_button));
+		addMapButton(activity.findViewById(R.id.map_zoom_out_button));
+		addMapButton(activity.findViewById(R.id.map_route_info_button));
+		addMapButton(activity.findViewById(R.id.map_my_location_button));
 	}
 
-	public void addMapButton(@NonNull MapButton mapButton) {
+	private void addMapButton(@NonNull MapButton mapButton) {
 		mapButtons.add(mapButton);
+		mapButton.setMapActivity(requireMapActivity());
 	}
 
-	public void removeMapButtons(@NonNull List<String> buttonIds) {
-		List<MapButton> mapButtons = new ArrayList<>(this.mapButtons);
-		for (Iterator<MapButton> iterator = mapButtons.iterator(); iterator.hasNext(); ) {
-			MapButton mapButton = iterator.next();
-			if (buttonIds.contains(mapButton.getId())) {
-				iterator.remove();
-			}
-		}
-		this.mapButtons = mapButtons;
+	public void addCustomMapButton(@NonNull MapButton mapButton) {
+		customMapButtons.add(mapButton);
+		mapButton.setAlwaysVisible(true);
+		mapButton.setLongClickable(false);
+		mapButton.setUseCustomPosition(false);
+		mapButton.setUseDefaultAppearance(true);
+		mapButton.setMapActivity(requireMapActivity());
+	}
+
+	@NonNull
+	private List<MapButton> getAllMapButtons() {
+		List<MapButton> buttons = new ArrayList<>(mapButtons);
+		buttons.addAll(customMapButtons);
+		return buttons;
+	}
+
+	public void clearCustomMapButtons() {
+		customMapButtons = new ArrayList<>();
 	}
 
 	public void showMapControlsIfHidden() {
@@ -313,15 +280,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void destroyButtons() {
-		for (MapButton button : mapButtons) {
-			button.onDestroyButton();
-		}
 		mapButtons.clear();
+		customMapButtons.clear();
 	}
 
 	public void refreshButtons() {
-		for (MapButton button : mapButtons) {
-			button.refresh();
+		for (MapButton button : getAllMapButtons()) {
+			button.update();
 		}
 	}
 
@@ -352,8 +317,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapRouteInfoMenu.setVisible(shouldShowRouteCalculationControls);
 
-		for (MapButton mapButton : mapButtons) {
-			mapButton.update(nightMode, isRouteDialogOpened, showBottomMenuButtons);
+		for (MapButton mapButton : getAllMapButtons()) {
+			mapButton.setNightMode(nightMode);
+			mapButton.setRouteDialogOpened(isRouteDialogOpened);
+			mapButton.setShowBottomButtons(showBottomMenuButtons);
+			mapButton.update();
 		}
 	}
 

@@ -57,13 +57,12 @@
 				android:layout_marginStart="@dimen/map_button_spacing"
 				android:orientation="vertical">
 
-				<ImageButton
+				<net.osmand.plus.plugins.weather.dialogs.ChooseLayersButton
 					android:id="@+id/raster_layers_btn"
 					android:layout_width="@dimen/map_button_size"
 					android:layout_height="@dimen/map_button_size"
-					android:background="@drawable/btn_circle"
-					android:contentDescription="@string/zoomIn"
-					android:src="@drawable/ic_layer_top"
+					android:contentDescription="@string/raster_layers_action_descr"
+					tools:background="@drawable/btn_circle"
 					tools:src="@drawable/ic_layer_top" />
 
 				<LinearLayout
@@ -71,14 +70,13 @@
 					android:layout_height="wrap_content"
 					android:orientation="horizontal">
 
-					<ImageButton
+					<net.osmand.plus.plugins.weather.dialogs.ChooseContoursButton
 						android:id="@+id/contour_layers_btn"
 						android:layout_width="@dimen/map_button_size"
 						android:layout_height="@dimen/map_button_size"
 						android:layout_marginTop="@dimen/map_button_spacing"
-						android:background="@drawable/btn_circle"
-						android:contentDescription="@string/zoomOut"
-						android:src="@drawable/ic_plugin_srtm"
+						android:contentDescription="@string/contour_layers_action_descr"
+						tools:background="@drawable/btn_circle"
 						tools:src="@drawable/ic_plugin_srtm" />
 
 					<include

@@ -76,7 +76,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 
 	@Override
 	public boolean exists() {
-		return mapButtonsHelper.getButtonStateById(buttonState.getId()) != null;
+		return mapButtonsHelper.getActionButtonStateById(buttonState.getId()) != null;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	public void apply() {
 		if (exists()) {
 			if (shouldReplace) {
-				QuickActionButtonState state = mapButtonsHelper.getButtonStateById(buttonState.getId());
+				QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(buttonState.getId());
 				if (state != null) {
 					mapButtonsHelper.removeQuickActionButtonState(state);
 				}
