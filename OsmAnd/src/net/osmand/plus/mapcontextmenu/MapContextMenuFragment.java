@@ -26,8 +26,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.*;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -40,7 +38,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -72,6 +69,8 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -79,6 +78,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -493,14 +494,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
 		if (menu.zoomButtonsVisible()) {
-			ImageButton zoomInButtonView = view.findViewById(R.id.context_menu_zoom_in_button);
-			ImageButton zoomOutButtonView = view.findViewById(R.id.context_menu_zoom_out_button);
-			int bgId = nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans;
-			int iconColorId = ColorUtilities.getMapButtonIconColorId(nightMode);
-			updateImageButton(app, zoomInButtonView, R.drawable.ic_zoom_in, iconColorId, bgId);
-			updateImageButton(app, zoomOutButtonView, R.drawable.ic_zoom_out, iconColorId, bgId);
-			zoomInButtonView.setOnClickListener(v -> menu.zoomInPressed());
-			zoomOutButtonView.setOnClickListener(v -> menu.zoomOutPressed());
+			ZoomInButton zoomInButton = view.findViewById(R.id.context_menu_zoom_in_button);
+			ZoomOutButton zoomOutButton = view.findViewById(R.id.context_menu_zoom_out_button);
+
+			zoomInButton.setLongClickable(false);
+			zoomOutButton.setLongClickable(false);
+			zoomInButton.setMapActivity(mapActivity);
+			zoomOutButton.setMapActivity(mapActivity);
+
 			zoomButtonsView.setVisibility(View.VISIBLE);
 		} else {
 			zoomButtonsView.setVisibility(View.GONE);
@@ -651,18 +652,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return view;
 	}
 
-	private void updateImageButton(@NonNull OsmandApplication ctx, @NonNull ImageButton button,
-	                               @DrawableRes int iconId, @ColorRes int iconColorId, @DrawableRes int bgId) {
-		int btnSizePx = button.getLayoutParams().height;
-		int iconSizePx = ctx.getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
-		int iconPadding = (btnSizePx - iconSizePx) / 2;
-		button.setBackground(ContextCompat.getDrawable(ctx, bgId));
-		button.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		button.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		button.setImageDrawable(ctx.getUIUtilities().getIcon(iconId, iconColorId));
-	}
-
-	@Nullable
+	@NotNull
 	private TransportStopRouteAdapter createTransportStopRouteAdapter(List<TransportStopRoute> routes, boolean needMoreItem) {
 		List<Object> items = new ArrayList<Object>(routes);
 		if (needMoreItem) {
