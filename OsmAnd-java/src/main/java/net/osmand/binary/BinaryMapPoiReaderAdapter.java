@@ -307,7 +307,7 @@ public class BinaryMapPoiReaderAdapter {
 			long oldLimit = codedIS.pushLimitLong((long) region.length);
 			BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
 			req.poiTypeFilter = null;//init for all
-			indexTagGroupsInPoiBox(req.left, req.right, req.top, req.bottom, req, region);
+			indexTagGroupsInPoiBox(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, req, region);
 			req.poiTypeFilter = filter;
 			codedIS.popLimit(oldLimit);
 		}
