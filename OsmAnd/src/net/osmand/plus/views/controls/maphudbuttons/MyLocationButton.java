@@ -1,7 +1,10 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static android.graphics.drawable.GradientDrawable.RECTANGLE;
+
 import android.Manifest;
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -11,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -19,8 +23,6 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.MyLocationButtonState;
 public class MyLocationButton extends MapButton {
 
 	private final MyLocationButtonState buttonState;
-
-	private boolean contextMenuAllowed;
 
 	public MyLocationButton(@NonNull Context context) {
 		this(context, null);
@@ -35,9 +37,7 @@ public class MyLocationButton extends MapButton {
 		buttonState = app.getMapButtonsHelper().getMyLocationButtonState();
 
 		setOnClickListener(v -> moveBackToLocation(false));
-		if (contextMenuAllowed) {
-			setOnLongClickListener(v -> moveBackToLocation(true));
-		}
+		setOnLongClickListener(v -> moveBackToLocation(true));
 	}
 
 	@Nullable
@@ -107,5 +107,25 @@ public class MyLocationButton extends MapButton {
 	@Override
 	protected boolean shouldShow() {
 		return !routeDialogOpened && visibilityHelper.shouldShowBackToLocationButton();
+	}
+
+	protected void updateBackground() {
+		Context context = getContext();
+		int size = AndroidUtils.dpToPx(context, appearanceParams.getSize());
+		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
+
+		GradientDrawable normal = new GradientDrawable();
+		normal.setSize(size, size);
+		normal.setShape(RECTANGLE);
+		normal.setColor(ColorUtilities.getColorWithAlpha(backgroundColor, appearanceParams.getOpacity()));
+		normal.setCornerRadius(cornerRadius);
+
+		GradientDrawable pressed = new GradientDrawable();
+		pressed.setSize(size, size);
+		pressed.setShape(RECTANGLE);
+		pressed.setColor(backgroundPressedColor);
+		pressed.setCornerRadius(cornerRadius);
+
+		setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
 	}
 }
