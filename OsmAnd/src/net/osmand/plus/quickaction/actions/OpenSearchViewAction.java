@@ -19,7 +19,7 @@ public class OpenSearchViewAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(OPEN_SEARCH_VIEW_ACTION,
 			"search.view.showhide", OpenSearchViewAction.class)
-			.nameActionRes(R.string.quick_action_verb_open)
+			.nameActionRes(R.string.shared_string_open)
 			.nameRes(R.string.quick_action_search_view_title)
 			.iconRes(R.drawable.ic_action_search_dark)
 			.category(QuickActionType.INTERFACE)

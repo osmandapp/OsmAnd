@@ -19,7 +19,7 @@ public class OpenNavigationViewAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(OPEN_NAVIGATION_VIEW_ACTION,
 			"navigation.view.showhide", OpenNavigationViewAction.class)
-			.nameActionRes(R.string.quick_action_verb_open)
+			.nameActionRes(R.string.shared_string_open)
 			.nameRes(R.string.quick_action_navigation_view_title)
 			.iconRes(R.drawable.ic_action_gdirections_dark)
 			.category(QuickActionType.INTERFACE)
