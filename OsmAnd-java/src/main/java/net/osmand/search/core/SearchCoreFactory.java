@@ -1609,9 +1609,9 @@ public class SearchCoreFactory {
 		}
 	}
 
-	protected static class PoiAdditionalCustomFilter extends AbstractPoiType {
+	public static class PoiAdditionalCustomFilter extends AbstractPoiType {
 
-		protected List<PoiType> additionalPoiTypes = new ArrayList<PoiType>();
+		public List<PoiType> additionalPoiTypes = new ArrayList<>();
 
 		public PoiAdditionalCustomFilter(MapPoiTypes registry, PoiType pt) {
 			super(pt.getKeyName(), registry);
