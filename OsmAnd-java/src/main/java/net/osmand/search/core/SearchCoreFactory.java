@@ -945,6 +945,7 @@ public class SearchCoreFactory {
 				NameStringMatcher nmAdditional = includeAdditional ?
 						new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE) : null;
 				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional);
+				poiTypes = filterTypes(poiTypes);
 				PoiTypeResult wikiCategory = poiTypes.get(OSM_WIKI_CATEGORY);
 				PoiTypeResult wikiType = poiTypes.get(WIKI_PLACE);
 				if (wikiCategory != null && wikiType != null) {
@@ -985,6 +986,27 @@ public class SearchCoreFactory {
 			}
 			searchTopIndexPoiAdditional(phrase, resultMatcher);
 			return true;
+		}
+		
+		// filter out types that are not in the category
+		private Map<String, PoiTypeResult> filterTypes(Map<String, PoiTypeResult> poiTypes) {
+			Map<String, PoiTypeResult> filtered = new LinkedHashMap<>();
+			for (PoiTypeResult ptr : poiTypes.values()) {
+				if (ptr.pt instanceof PoiAdditionalCustomFilter pt) {
+					if (pt.getPoiAdditionalCategory() != null) {
+						filtered.put(ptr.pt.getKeyName(), ptr);
+					} else {
+						pt.additionalPoiTypes.forEach(t -> {
+							if (t.getPoiAdditionalCategory() != null) {
+								filtered.put(ptr.pt.getKeyName(), ptr);
+							}
+						});
+					}
+				} else {
+					filtered.put(ptr.pt.getKeyName(), ptr);
+				}
+			}
+			return filtered;
 		}
 
 		private void addPoiTypeResult(SearchPhrase phrase, SearchResultMatcher resultMatcher, boolean showTopFiltersOnly,
