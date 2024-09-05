@@ -21,8 +21,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.SharedUtil;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -66,7 +67,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
 
@@ -89,7 +89,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private final UiUtilities uiUtilities;
 	private final ImportHelper importHelper;
 	private final GpxSelectionHelper gpxSelectionHelper;
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final MyPlacesActivity activity;
 	private final TrackFolder rootFolder;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -108,7 +108,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
-		this.routeActivityHelper = new RouteActivityHelper(app);
+		this.routeActivitySelectionHelper = new RouteActivitySelectionHelper();
 	}
 
 	@NonNull
@@ -312,18 +312,12 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitle(changeActivity)
 				.setIcon(getContentIcon(R.drawable.ic_action_activity))
 				.setOnClickListener(v -> {
-					routeActivityHelper.setActivitySelectionListener(result -> {
-						for (TrackItem item : items) {
-							GpxFile gpxFile = getGpxFile(item);
-							if (gpxFile != null) {
-								Metadata metadata = gpxFile.getMetadata();
-								GpxUtilities.INSTANCE.setRouteActivity(metadata, result, routeActivityHelper.getActivities());
-								SaveGpxHelper.saveGpx(gpxFile);
-							}
-						}
+					routeActivitySelectionHelper.setActivitySelectionListener(routeActivity -> {
+						RouteActivityHelper helper = app.getRouteActivityHelper();
+						helper.saveRouteActivity(items, routeActivity);
 						dismissFragment(fragment, false);
 					});
-					SelectRouteActivityController.showDialog(activity, routeActivityHelper);
+					SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper);
 				})
 				.create()
 		);

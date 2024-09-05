@@ -3,18 +3,13 @@ package net.osmand.plus.myplaces.tracks.filters
 import android.graphics.drawable.Drawable
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.track.helpers.RouteActivityHelper
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.shared.gpx.GpxUtilities
 
 class ActivitySingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 
-	private var routeActivitySelectionHelper: RouteActivityHelper? = null
-
 	override fun getItemIcon(app: OsmandApplication, itemName: String, selected: Boolean, nightMode: Boolean): Drawable? {
-		val helper = getActivityHelper(app)
-		val routeActivity = GpxUtilities.findRouteActivity(itemName, helper.activities)
+		val routeActivity = app.routeActivityHelper.findRouteActivity(itemName)
 
 		val iconColor = if (selected) {
 			ColorUtilities.getActiveColor(app, nightMode)
@@ -32,20 +27,12 @@ class ActivitySingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 	}
 
 	override fun getItemText(app: OsmandApplication, itemName: String, selected: Boolean): String {
-		val helper = getActivityHelper(app)
-		val routeActivity = GpxUtilities.findRouteActivity(itemName, helper.activities)
+		val routeActivity = app.routeActivityHelper.findRouteActivity(itemName)
 		return routeActivity?.label ?: app.getString(R.string.shared_string_none)
 	}
 
 	override fun includeEmptyValues(): Boolean {
 		return true
-	}
-
-	private fun getActivityHelper(app: OsmandApplication): RouteActivityHelper {
-		if (routeActivitySelectionHelper == null) {
-			routeActivitySelectionHelper = RouteActivityHelper(app)
-		}
-		return routeActivitySelectionHelper!!
 	}
 
 }

@@ -7,10 +7,10 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
@@ -19,12 +19,12 @@ import java.util.List;
 
 public class InfoCard extends BaseMetadataCard {
 
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 
 	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
-	                @NonNull RouteActivityHelper routeActivityHelper) {
+	                @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper) {
 		super(mapActivity, metadata);
-		this.routeActivityHelper = routeActivityHelper;
+		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
 	}
 
 	@Override
@@ -36,10 +36,9 @@ public class InfoCard extends BaseMetadataCard {
 	@Override
 	public void updateContent() {
 		super.updateContent();
-
-		List<RouteActivity> activities = routeActivityHelper.getActivities();
-		RouteActivity routeActivity = routeActivityHelper.getSelectedActivity();
-		String keywords = metadata != null ? GpxUtilities.INSTANCE.getFilteredKeywords(metadata, activities) : null;
+		RouteActivityHelper helper = app.getRouteActivityHelper();
+		RouteActivity routeActivity = routeActivitySelectionHelper.getSelectedActivity();
+		String keywords = metadata != null ? metadata.getFilteredKeywords(helper.getActivities()) : null;
 		String link = metadata != null ? metadata.getLink() : null;
 
 		String label = routeActivity != null
@@ -51,7 +50,7 @@ public class InfoCard extends BaseMetadataCard {
 				: R.drawable.ic_action_activity);
 
 		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
-				v -> SelectRouteActivityController.showDialog(activity, routeActivityHelper)
+				v -> SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper)
 		);
 		if (!Algorithms.isEmpty(keywords)) {
 			createItemRow(getString(R.string.shared_string_keywords), keywords, getContentIcon(R.drawable.ic_action_label));

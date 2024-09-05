@@ -19,8 +19,9 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.SelectRouteActivityFragment;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -39,14 +40,16 @@ public class SelectRouteActivityController extends BaseDialogController
 
 	private static final String NONE_ACTIVITY_KEY = "none";
 
-	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final List<DisplayItem> lastSearchResults = new ArrayList<>();
+	private final RouteActivityHelper routeActivityHelper;
 	private boolean inSearchMode;
 
 	public SelectRouteActivityController(@NonNull OsmandApplication app,
-	                                     @NonNull RouteActivityHelper routeActivityHelper) {
+	                                     @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper) {
 		super(app);
-		this.routeActivityHelper = routeActivityHelper;
+		this.routeActivityHelper = app.getRouteActivityHelper();
+		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
 	}
 
 	@Nullable
@@ -100,7 +103,7 @@ public class SelectRouteActivityController extends BaseDialogController
 		}
 
 		int selectedIndex = -1;
-		RouteActivity selectedActivity = routeActivityHelper.getSelectedActivity();
+		RouteActivity selectedActivity = routeActivitySelectionHelper.getSelectedActivity();
 		if (selectedActivity != null) {
 			for (int i = 0; i < displayData.getItemsSize(); i++) {
 				DisplayItem item = displayData.getItemAt(i);
@@ -118,9 +121,9 @@ public class SelectRouteActivityController extends BaseDialogController
 	@Override
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
 		if (selected.getTag() instanceof RouteActivity activity) {
-			routeActivityHelper.onSelectRouteActivity(activity);
+			routeActivitySelectionHelper.onSelectRouteActivity(activity);
 		} else if (Objects.equals(NONE_ACTIVITY_KEY, selected.getTag())) {
-			routeActivityHelper.onSelectRouteActivity(null);
+			routeActivitySelectionHelper.onSelectRouteActivity(null);
 		}
 		dialogManager.askDismissDialog(processId);
 	}
@@ -197,8 +200,8 @@ public class SelectRouteActivityController extends BaseDialogController
 	}
 
 	@Nullable
-	public RouteActivityHelper getRouteActivityHelper() {
-		return routeActivityHelper;
+	public RouteActivitySelectionHelper getRouteActivityHelper() {
+		return routeActivitySelectionHelper;
 	}
 
 	@NonNull
@@ -218,10 +221,10 @@ public class SelectRouteActivityController extends BaseDialogController
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull RouteActivityHelper routeActivityHelper) {
+	                              @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new SelectRouteActivityController(app, routeActivityHelper));
+		dialogManager.register(PROCESS_ID, new SelectRouteActivityController(app, routeActivitySelectionHelper));
 
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		SelectRouteActivityFragment.showInstance(fragmentManager, PROCESS_ID);

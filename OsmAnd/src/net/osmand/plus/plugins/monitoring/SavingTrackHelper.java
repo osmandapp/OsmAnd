@@ -23,7 +23,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.track.helpers.RouteActivityHelper;
+import net.osmand.plus.helpers.RouteActivityHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -297,19 +298,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	}
 
 	private void savePreselectedRouteActivity(@NonNull GpxFile gpxFile) {
-		GpxUtilities gpxUtilities = GpxUtilities.INSTANCE;
-		RouteActivityHelper helper = new RouteActivityHelper(app);
-
+		RouteActivityHelper helper = app.getRouteActivityHelper();
 		Metadata metadata = gpxFile.getMetadata();
-		RouteActivity activity = gpxUtilities.getRouteActivity(metadata, helper.getActivities());
+
+		RouteActivity activity = metadata.getRouteActivity(helper.getActivities());
 		if (activity == null) {
-			String selectedId = settings.CURRENT_TRACK_EDITED_ROUTE_ACTIVITY.get();
-			if (selectedId == null) {
-				selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
-			}
-			activity = gpxUtilities.findRouteActivity(selectedId, helper.getActivities());
-			gpxUtilities.setRouteActivity(gpxFile.getMetadata(), activity, helper.getActivities());
-			settings.CURRENT_TRACK_EDITED_ROUTE_ACTIVITY.set(null);
+			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+			activity = helper.findRouteActivity(selectedId);
+			metadata.setRouteActivity(activity, helper.getActivities());
 		}
 	}
 

@@ -68,6 +68,7 @@ import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.Model3dHelper;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -218,6 +219,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
 	RouteLayersHelper routeLayersHelper;
+	RouteActivityHelper routeActivityHelper;
 
 	Model3dHelper model3dHelper;
 
@@ -643,6 +645,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public RouteLayersHelper getRouteLayersHelper() {
 		return routeLayersHelper;
+	}
+
+	@NonNull
+	public RouteActivityHelper getRouteActivityHelper() {
+		return routeActivityHelper;
 	}
 
 	@NonNull
