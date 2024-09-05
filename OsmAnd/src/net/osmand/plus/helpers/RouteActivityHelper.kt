@@ -24,6 +24,7 @@ import java.io.File
 import java.io.IOException
 
 private const val ROUTE_ACTIVITIES_FILE = "activities.json"
+
 class RouteActivityHelper(
 	val app: OsmandApplication
 ) {

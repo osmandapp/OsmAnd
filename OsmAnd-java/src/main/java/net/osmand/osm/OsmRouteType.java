@@ -301,10 +301,6 @@ public class OsmRouteType {
 		return null;
 	}
 
-	public static boolean containsValue(String tag) {
-		return getByTag(tag) != null;
-	}
-
 	public static OsmRouteType getByTag(String tag) {
 		for (OsmRouteType routeType : values) {
 			if (routeType.name.equals(tag)) {
@@ -321,10 +317,6 @@ public class OsmRouteType {
 			}
 		}
 		return null;
-	}
-
-	public static List<OsmRouteType> allPossibleValues() {
-		return new ArrayList<>(values);
 	}
 
 	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(RouteDataObject obj) {

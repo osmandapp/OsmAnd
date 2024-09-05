@@ -20,11 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.SharedUtil;
 import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -67,7 +65,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -574,19 +571,5 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(SELECTED_TYPES, selectedTypes);
 		MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState(), null, bundle);
-	}
-
-	@Nullable
-	private GpxFile getGpxFile(TrackItem trackItem) {
-		GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-		File file = trackItem.getFile();
-		if (file != null) {
-			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.getAbsolutePath());
-			GpxFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : SharedUtil.loadGpxFile(file);
-			if (gpxFile.getError() == null) {
-				return gpxFile;
-			}
-		}
-		return null;
 	}
 }

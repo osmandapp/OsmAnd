@@ -304,19 +304,19 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupPreselectedRouteActivityPref() {
-		Preference preselectedRouteActivity = findPreference(PRESELECTED_ROUTE_ACTIVITY);
-		if (preselectedRouteActivity != null) {
+		Preference preference = findPreference(PRESELECTED_ROUTE_ACTIVITY);
+		if (preference != null) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
 			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 			RouteActivityHelper helper = app.getRouteActivityHelper();
 			RouteActivity activity = helper.findRouteActivity(selectedId);
 			if (activity != null) {
 				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
-				preselectedRouteActivity.setIcon(getContentIcon(iconId));
-				preselectedRouteActivity.setSummary(activity.getLabel());
+				preference.setIcon(getContentIcon(iconId));
+				preference.setSummary(activity.getLabel());
 			} else {
-				preselectedRouteActivity.setIcon(getContentIcon(R.drawable.ic_action_activity));
-				preselectedRouteActivity.setSummary(getString(R.string.shared_string_none));
+				preference.setIcon(getContentIcon(R.drawable.ic_action_activity));
+				preference.setSummary(getString(R.string.shared_string_none));
 			}
 		}
 	}

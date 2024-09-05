@@ -1631,5 +1631,4 @@ object GpxUtilities {
 		}
 	}
 
-
 }

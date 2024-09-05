@@ -16,7 +16,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.SplitMetric.DistanceSplitMetric;
 import net.osmand.gpx.SplitMetric.TimeSplitMetric;
-import net.osmand.osm.OsmRouteType;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
