@@ -1117,21 +1117,27 @@ public class SearchCoreFactory {
 		}
 
 		private TopIndexMatch matchTopIndex(BinaryMapIndexReader r, SearchPhrase phrase) throws IOException {
-			String search = phrase.getText(true);
+			String search = phrase.getUnknownSearchPhrase();
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			String lang = phrase.getSettings().getLang();
 			List<TopIndexMatch> matches = new ArrayList<>();
 			for (PoiSubType subType : poiSubTypes) {
-				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 				String topIndexValue = null;
 				String translate = null;
 				List<String> possibleValues = new ArrayList<>(subType.possibleValues);
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
-					if (nm.matches(s) || nm.matches(translate)) {
+					CollatorStringMatcher csm = new CollatorStringMatcher(s, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+					if (csm.matches(search)) {
 						topIndexValue = s;
 						break;
+					} else {
+						csm = new CollatorStringMatcher(translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+						if (csm.matches(search)) {
+							topIndexValue = s;
+							break;
+						}
 					}
 				}
 				if (topIndexValue != null) {
