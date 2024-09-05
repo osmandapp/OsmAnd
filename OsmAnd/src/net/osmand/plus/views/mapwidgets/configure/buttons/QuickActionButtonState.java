@@ -1,14 +1,18 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.DEFAULT_ACTION_BUTTON_SIZE;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.DEFAULT_ICON_ID;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +24,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -31,36 +36,36 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public static final String DEFAULT_BUTTON_ID = "quick_actions";
 
-	private final CommonPreference<Boolean> statePref;
+	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
 	private final CommonPreference<String> quickActionsPref;
-	private final CommonPreference<String> iconPref;
-	private final CommonPreference<Integer> sizePref;
-	private final CommonPreference<Float> opacityPref;
-	private final CommonPreference<Integer> cornerRadiusPref;
+
 	private final FabMarginPreference fabMarginPref;
+	private final MapQuickActionLayer quickActionLayer;
 
 	private List<QuickAction> quickActions = new ArrayList<>();
 
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
-		this.statePref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
+		this.visibilityPref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
 		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
-		this.iconPref = settings.registerStringPreference(id + "_icon", DEFAULT_ICON_ID).makeGlobal().makeShared();
-		this.sizePref = settings.registerIntPreference(id + "_size", DEFAULT_ACTION_BUTTON_SIZE).makeGlobal().makeShared();
-		this.opacityPref = settings.registerFloatPreference(id + "_opacity", 0.5f).makeGlobal().makeShared();
-		this.cornerRadiusPref = settings.registerIntPreference(id + "_corner_radius", 36).makeGlobal().makeShared();
 		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
-		this.fabMarginPref = new FabMarginPreference(settings, id + "_fab_margin");
+		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+
+		int portraitMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
+		int landscapeMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
+		fabMarginPref = new FabMarginPreference(app, id + "_fab_margin");
+		fabMarginPref.setDefaultPortraitMargins(Pair.create(0, portraitMargin));
+		fabMarginPref.setDefaultLandscapeMargins(Pair.create(landscapeMargin, 0));
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return statePref.get();
+		return visibilityPref.get();
 	}
 
 	public void setEnabled(boolean enabled) {
-		statePref.set(enabled);
+		visibilityPref.set(enabled);
 	}
 
 	@NonNull
@@ -68,6 +73,17 @@ public class QuickActionButtonState extends MapButtonState {
 	public String getName() {
 		String name = namePref.get();
 		return Algorithms.isEmpty(name) ? app.getString(R.string.configure_screen_quick_action) : name;
+	}
+
+	@NonNull
+	@Override
+	public String getDescription() {
+		return app.getString(R.string.configure_screen_quick_action);
+	}
+
+	@Override
+	public int getDefaultLayoutId() {
+		return R.layout.map_quick_actions_button;
 	}
 
 	public boolean hasCustomName() {
@@ -106,13 +122,15 @@ public class QuickActionButtonState extends MapButtonState {
 	}
 
 	@NonNull
+	@Override
 	public FabMarginPreference getFabMarginPref() {
 		return fabMarginPref;
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getStatePref() {
-		return statePref;
+	@Override
+	public CommonPreference<Boolean> getVisibilityPref() {
+		return visibilityPref;
 	}
 
 	@NonNull
@@ -120,25 +138,6 @@ public class QuickActionButtonState extends MapButtonState {
 		return namePref;
 	}
 
-	@NonNull
-	public CommonPreference<String> getIconPref() {
-		return iconPref;
-	}
-
-	@NonNull
-	public CommonPreference<Integer> getSizePref() {
-		return sizePref;
-	}
-
-	@NonNull
-	public CommonPreference<Float> getOpacityPref() {
-		return opacityPref;
-	}
-
-	@NonNull
-	public CommonPreference<Integer> getCornerRadiusPref() {
-		return cornerRadiusPref;
-	}
 
 	@NonNull
 	public CommonPreference<String> getQuickActionsPref() {
@@ -157,29 +156,13 @@ public class QuickActionButtonState extends MapButtonState {
 		return quickActions.size() == 1;
 	}
 
-	@Nullable
-	@Override
-	public Drawable getIcon(boolean nightMode, boolean mapIcon, @ColorInt int color) {
-		if (isSingleAction()) {
-			QuickAction action = quickActions.get(0);
-			Drawable icon = uiUtilities.getPaintedIcon(action.getIconRes(app), color);
-
-			if (mapIcon && action.isActionWithSlash(app)) {
-				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
-				return new LayerDrawable(new Drawable[] {icon, slashIcon});
-			}
-			return icon;
-		}
-		return super.getIcon(nightMode, mapIcon, color);
-	}
-
 	public void resetForMode(@NonNull ApplicationMode appMode) {
-		statePref.resetModeToDefault(appMode);
+		visibilityPref.resetModeToDefault(appMode);
 		fabMarginPref.resetModeToDefault(appMode);
 	}
 
 	public void copyForMode(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode) {
-		statePref.setModeValue(toAppMode, statePref.getModeValue(fromAppMode));
+		visibilityPref.setModeValue(toAppMode, visibilityPref.getModeValue(fromAppMode));
 		fabMarginPref.copyForMode(fromAppMode, toAppMode);
 	}
 
@@ -212,27 +195,40 @@ public class QuickActionButtonState extends MapButtonState {
 	}
 
 	@NonNull
+	@Override
 	public ButtonAppearanceParams createAppearanceParams() {
-		String iconName = null;
-		if (iconPref.isSet()) {
-			iconName = getIconPref().get();
-		}
-		if (Algorithms.isEmpty(iconName)) {
+		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
+		if (!iconPref.isSet()) {
 			if (isSingleAction()) {
 				int iconId = getQuickActions().get(0).getIconRes(app);
 				if (iconId > 0) {
-					iconName = app.getResources().getResourceEntryName(iconId);
+					appearanceParams.setIconName(app.getResources().getResourceEntryName(iconId));
 				}
 			} else {
-				iconName = DEFAULT_ICON_ID;
+				appearanceParams.setIconName("ic_quick_action");
 			}
 		}
-		return new ButtonAppearanceParams(iconName, getSizePref().get(), getOpacityPref().get(), getCornerRadiusPref().get());
+		return appearanceParams;
 	}
 
 	@NonNull
 	@Override
-	public String toString() {
-		return getId();
+	public ButtonAppearanceParams createDefaultAppearanceParams() {
+		return new ButtonAppearanceParams("ic_quick_action", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@Nullable
+	@Override
+	public Drawable getIcon(@DrawableRes int iconId, @ColorInt int color, boolean nightMode, boolean mapIcon) {
+		if (mapIcon && quickActionLayer.isWidgetVisibleForButton(getId())) {
+			return super.getIcon(R.drawable.ic_action_close, color, nightMode, true);
+		} else {
+			Drawable drawable = super.getIcon(iconId, color, nightMode, mapIcon);
+			if (isSingleAction() && !iconPref.isSet() && quickActions.get(0).isActionWithSlash(app)) {
+				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
+				return new LayerDrawable(new Drawable[] {drawable, slashIcon});
+			}
+			return drawable;
+		}
 	}
 }
