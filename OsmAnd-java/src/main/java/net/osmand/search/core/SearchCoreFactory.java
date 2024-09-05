@@ -825,7 +825,9 @@ public class SearchCoreFactory {
 						} else {
 							f = new PoiAdditionalCustomFilter(types, (PoiType) existingResult.pt);
 						}
-						f.additionalPoiTypes.add(a);
+						if (!f.additionalPoiTypes.contains(a)) {
+							f.additionalPoiTypes.add(a);
+						}
 						existingResult.pt = f;
 					} else {
 						String enTranslation = a.getEnTranslation().toLowerCase();
