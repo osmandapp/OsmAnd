@@ -10,8 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="rendering_attr_showDirtbikeTrails_name">Show dirtbike trails</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Show dirtbike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>
     <string name="shared_string_dp">dp</string>
