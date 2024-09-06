@@ -34,6 +34,7 @@
 			android:autoSizeTextType="uniform"
 			android:ellipsize="none"
 			android:textColor="@color/widgettext_day"
+			android:lineHeight="80dp"
 			android:textSize="36sp"
 			android:includeFontPadding="false"
 			tools:text="85" />

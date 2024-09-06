@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -40,7 +43,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private GpxDataItemCallback callback;
 
 	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
-		this.folder = folder;
+		this.folder = new TrackFolder(folder.getDirFile(), null);
 		this.listener = listener;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.smartFolderHelper = app.getSmartFolderHelper();
@@ -68,9 +71,16 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		folder.clearData();
 		loadingTime = System.currentTimeMillis();
 
+//		Set<File> tracksFiles = gpxDbHelper.getCachedFiles();
+//		long startParseDb = System.currentTimeMillis();
+//		for(File trackFile: tracksFiles) {
+//			String dirName = trackFile.getPath();
+//			putTrackItemToFolder(folder, gpxDbHelper.getCachedItem(trackFile), dirName);
+//		}
+//		android.util.Log.d("Corwin", "parse folders from db took " + (System.currentTimeMillis() - startParseDb));
+//
 		List<TrackItem> progress = new ArrayList<>();
 		loadGPXFolder(folder, progress);
-
 		if (!progress.isEmpty()) {
 			publishProgress(progress.toArray(new TrackItem[0]));
 		}
@@ -80,6 +90,17 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		LOG.info("Finished loading tracks. Took " + (System.currentTimeMillis() - start) + "ms");
 		return null;
 	}
+
+//	private void addTrackItemToFolder(@NonNull TrackFolder folder, @NonNull GpxDataItem dbDataItem, @NonNull List<String> trackItemFolders) {
+//		if(Algorithms.isEmpty(trackItemFolders)) {
+//			TrackItem trackItem = new TrackItem(dbDataItem.getFile());
+//			List<TrackItem> newTrackItems = CollectionUtils.addToList(folder.getTrackItems(), trackItem);
+//			folder.setTrackItems(newTrackItems);
+//		} else {
+//
+//		}
+//
+//	}
 
 	private void loadGPXFolder(@NonNull TrackFolder rootFolder, @NonNull List<TrackItem> progress) {
 		Deque<TrackFolder> folders = new ArrayDeque<>();
@@ -134,6 +155,12 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	@Nullable
 	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
 		if (file != null) {
+//			for (GpxDataItem item: alltracks) {
+//				if (Algorithms.stringsEqual(item.getFile().getPath(), file.getPath())) {
+//					return item;
+//				}
+//			}
+
 			if (callback == null) {
 				callback = new GpxDataItemCallback() {
 					@Override

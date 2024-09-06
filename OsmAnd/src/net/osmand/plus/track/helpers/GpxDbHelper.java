@@ -27,8 +27,10 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
@@ -115,6 +117,24 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			dirItems.remove(file);
 		}
 	}
+
+	public Set<File> getCachedFiles(){
+		return dataItems.keySet();
+	}
+
+	public Set<File> getCachedDirs(){
+		return dirItems.keySet();
+	}
+
+	public GpxDirItem getCachedDirItem(File dirFile) {
+		return dirItems.get(dirFile);
+	}
+
+	public Collection<GpxDataItem> getCachedItems(){
+		return dataItems.values();
+	}
+
+
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		return rename(SharedUtil.kFile(currentFile), SharedUtil.kFile(newFile));
@@ -243,6 +263,14 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			readGpxItem(file, item, callback);
 		}
 		return item;
+	}
+
+	@Nullable
+	public GpxDataItem getCachedItem(@NonNull File file) {
+		if (file.getPath().isEmpty()) {
+			return null;
+		}
+		return dataItems.get(file);
 	}
 
 	public boolean hasGpxDataItem(@NonNull File file) {
