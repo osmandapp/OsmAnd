@@ -17,7 +17,7 @@ public class ButtonIconsCard extends MultiStateCard {
 	}
 
 	public ButtonIconsCard(@NonNull MapActivity activity, @NonNull MapButtonIconController controller) {
-		super(activity, controller.getCardController());
+		super(activity, controller.getCardController(), false);
 	}
 
 	@Override

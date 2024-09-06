@@ -28,7 +28,7 @@ public class MapButtonVisibilityCard extends MapBaseCard {
 	private final MapButtonState buttonState;
 
 	public MapButtonVisibilityCard(@NonNull MapActivity activity, @NonNull MapButtonState buttonState, @NonNull Fragment fragment) {
-		super(activity);
+		super(activity, false);
 		this.fragment = fragment;
 		this.buttonState = buttonState;
 		this.appMode = settings.getApplicationMode();
