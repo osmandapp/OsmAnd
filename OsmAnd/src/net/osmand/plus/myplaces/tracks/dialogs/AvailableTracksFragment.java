@@ -8,6 +8,7 @@ import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -51,6 +54,8 @@ import java.util.List;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SmartFolderUpdateListener {
 
+	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(MapRenderingTypes.class);
+
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
 	public static final int RECORDING_TRACK_UPDATE_INTERVAL_MILLIS = 2000;
@@ -62,6 +67,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	private VisibleTracksGroup visibleTracksGroup;
 
 	private boolean updateEnable;
+	private boolean isUserInitiatedRefresh;
 
 
 	@Override
@@ -113,6 +119,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
 		swipeRefresh.setOnRefreshListener(() -> {
+			isUserInitiatedRefresh = true;
 			reloadTracks();
 			swipeRefresh.setRefreshing(false);
 		});
@@ -133,18 +140,20 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	public void onResume() {
 		super.onResume();
 		smartFolderHelper.addUpdateListener(this);
+		trackFoldersHelper.getCachedTracks(this::updateContent);
 		if (!trackFoldersHelper.isImporting()) {
 			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
 				reloadTracks();
-			} else {
-				updateContent();
+//			} else {
+//				updateContent();
 			}
 		}
+
 		updateRecordingTrack();
 
 		updateEnable = true;
 		startHandler();
-		updateProgressVisibility();
+//		updateProgressVisibility();
 	}
 
 	private void startHandler() {
@@ -457,25 +466,39 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 			@Override
 			public void loadTracksStarted() {
-				updateProgressVisibility(true);
+				log.debug("loadTracksStarted start");
+				if (isUserInitiatedRefresh) {
+					updateProgressVisibility(true);
+				}
+				log.debug("loadTracksStarted finish");
 			}
 
 			@Override
 			public void loadTracksProgress(@NonNull TrackItem[] items) {
-				updateContent();
-				updateFragmentsFolders(false);
+				log.debug("loadTracksProgress start");
+//				updateContent();
+//				updateFragmentsFolders(false);
+				log.debug("loadTracksProgress finish");
 			}
 
 			@Override
 			public void loadTracksFinished(@NonNull TrackFolder folder) {
-				setRootFolder(folder);
-				setSelectedFolder(folder);
+				log.debug("loadTracksFinished start");
 
-				updateContent();
-				updateFragmentsFolders(true);
-				updateProgressVisibility(false);
+				trackFoldersHelper.getCachedTracks(() -> {
+					setRootFolder(folder);
+					setSelectedFolder(folder);
 
-				restoreState(getArguments());
+					if(isUserInitiatedRefresh) {
+						updateContent();
+						updateFragmentsFolders(true);
+//						updateProgressVisibility(false);
+						restoreState(getArguments());
+					}
+					updateProgressVisibility(false);
+					isUserInitiatedRefresh = false;
+					log.debug("loadTracksFinished finish");
+				});
 			}
 
 			public void updateFragmentsFolders(boolean loadTracksFinished) {

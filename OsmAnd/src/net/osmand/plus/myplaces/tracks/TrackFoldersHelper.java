@@ -4,6 +4,7 @@ import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -53,6 +55,10 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.plus.track.helpers.DataItem;
+import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDirItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -63,6 +69,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -86,6 +93,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private final MyPlacesActivity activity;
 	private final TrackFolder rootFolder;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private final GpxDbHelper gpxDbHelper;
 
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -101,6 +109,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
+		this.gpxDbHelper = app.getGpxDbHelper();
 	}
 
 	@NonNull
@@ -127,6 +136,91 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		}
 		asyncLoader = new TrackFolderLoaderTask(app, rootFolder, loadTracksListener);
 		asyncLoader.executeOnExecutor(singleThreadExecutor);
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	public void getCachedTracks(Runnable resultHandler) {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... voids) {
+				TrackFolder tmpFolder = new TrackFolder(rootFolder.getDirFile(), null);
+				long startParseDb = System.currentTimeMillis();
+				Set<File> tracksFiles = gpxDbHelper.getCachedFiles();
+				for (File trackFile : tracksFiles) {
+					GpxDataItem gpxDataItem = gpxDbHelper.getCachedItem(trackFile);
+					if (gpxDataItem == null) {
+						continue;
+					}
+					String dirName = gpxDataItem.getParameter(GpxParameter.FILE_DIR);
+					if (dirName == null) {
+						dirName = "";
+					}
+					putTrackItemToFolder(tmpFolder, gpxDataItem, dirName);
+				}
+
+				Set<File> dirFiles = gpxDbHelper.getCachedDirs();
+				for (File dirFile : dirFiles) {
+					GpxDirItem gpxDataItem = gpxDbHelper.getCachedDirItem(dirFile);
+					if (gpxDataItem == null) {
+						continue;
+					}
+					String dirName = gpxDataItem.getParameter(GpxParameter.FILE_DIR);
+					if (dirName == null) {
+						dirName = "";
+					}
+					putTrackItemToFolder(tmpFolder, gpxDataItem, dirName);
+				}
+
+
+				for (TrackFolder folder : tmpFolder.getFlattenedSubFolders()) {
+					folder.resetCashedData();
+				}
+				rootFolder.clearData();
+				rootFolder.resetCashedData();
+				rootFolder.setSubFolders(tmpFolder.getSubFolders());
+				rootFolder.setTrackItems(tmpFolder.getTrackItems());
+				android.util.Log.d("Corwin", "parse folders from db took " + (System.currentTimeMillis() - startParseDb));
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void unused) {
+				super.onPostExecute(unused);
+				resultHandler.run();
+			}
+		}.executeOnExecutor(singleThreadExecutor);
+	}
+
+	private void putTrackItemToFolder(@NonNull TrackFolder currentFolder, DataItem item, String dirName) {
+		if (dirName.startsWith("/")) {
+			dirName = dirName.substring(1);
+		}
+		if (Algorithms.isEmpty(dirName)) {
+			if (item instanceof GpxDataItem) {
+				TrackItem trackItem = new TrackItem(item.getFile());
+				trackItem.setDataItem((GpxDataItem)item);
+				List<TrackItem> newTrackItems = CollectionUtils.addToList(currentFolder.getTrackItems(), trackItem);
+				currentFolder.setTrackItems(newTrackItems);
+			}
+		} else {
+			int dividerIndex = (dirName.contains("/")) ? dirName.indexOf("/") : dirName.length();
+			String folderName = dirName.substring(0, dividerIndex);
+			TrackFolder subfolder = null;
+			List<TrackFolder> subFolders = currentFolder.getSubFolders();
+			for (TrackFolder folder1 : subFolders) {
+				if (folder1.getDirName().equals(folderName)) {
+					subfolder = folder1;
+					break;
+				}
+			}
+			if (subfolder == null) {
+				String newFolderPath = String.format("%s/%s", currentFolder.getDirFile().getPath(), folderName);
+				subfolder = new TrackFolder(new File(newFolderPath), currentFolder);
+				currentFolder.setSubFolders(CollectionUtils.addToList(currentFolder.getSubFolders(), subfolder));
+			}
+			String nextSubfolder = dirName.contains("/") ? dirName.substring(dividerIndex + 1) : "";
+			putTrackItemToFolder(subfolder, item, nextSubfolder);
+		}
 	}
 
 	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
