@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.weather.dialogs;
+package net.osmand.plus.plugins.weather.widgets;
 
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
@@ -27,19 +27,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseLayersButton extends MapButton {
+public class WeatherLayersButton extends MapButton {
 
 	private final WeatherHelper weatherHelper;
 
-	public ChooseLayersButton(@NonNull Context context) {
+	public WeatherLayersButton(@NonNull Context context) {
 		this(context, null);
 	}
 
-	public ChooseLayersButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public WeatherLayersButton(@NonNull Context context, @Nullable AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public ChooseLayersButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	public WeatherLayersButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.weatherHelper = app.getWeatherHelper();
 

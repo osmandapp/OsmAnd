@@ -431,8 +431,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer controlsLayer = mapLayers.getMapControlsLayer();
 
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.raster_layers_btn));
-		controlsLayer.addCustomMapButton(view.findViewById(R.id.contour_layers_btn));
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.weather_layers_button));
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.weather_contours_button));
 	}
 
 	public void updateSelectedDate(@Nullable Date date, boolean forAnimation, boolean resetPeriod) {
