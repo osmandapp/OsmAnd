@@ -220,15 +220,15 @@ public class QuickActionButtonState extends MapButtonState {
 	@Nullable
 	@Override
 	public Drawable getIcon(@DrawableRes int iconId, @ColorInt int color, boolean nightMode, boolean mapIcon) {
-		if (mapIcon && quickActionLayer.isWidgetVisibleForButton(getId())) {
-			return super.getIcon(R.drawable.ic_action_close, color, nightMode, true);
-		} else {
-			Drawable drawable = super.getIcon(iconId, color, nightMode, mapIcon);
-			if (isSingleAction() && !iconPref.isSet() && quickActions.get(0).isActionWithSlash(app)) {
+		if (mapIcon) {
+			if (quickActionLayer.isWidgetVisibleForButton(getId())) {
+				return super.getIcon(R.drawable.ic_action_close, color, nightMode, true);
+			} else if (isSingleAction() && quickActions.get(0).isActionWithSlash(app)) {
+				Drawable drawable = super.getIcon(iconId, color, nightMode, true);
 				Drawable slashIcon = uiUtilities.getIcon(nightMode ? R.drawable.ic_action_icon_hide_dark : R.drawable.ic_action_icon_hide_white);
 				return new LayerDrawable(new Drawable[] {drawable, slashIcon});
 			}
-			return drawable;
 		}
+		return super.getIcon(iconId, color, nightMode, mapIcon);
 	}
 }
