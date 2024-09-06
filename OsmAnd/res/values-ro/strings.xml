@@ -4081,7 +4081,7 @@
     <string name="recalc_angle_dialog_title">Unghiul minim dintre locație și rută</string>
     <string name="recalc_angle_dialog_descr">Se va afișa un segment drept între locație și ruta calculată până la recalcularea rutei</string>
     <string name="enter_the_file_name">Introduceți numele fișierului.</string>
-    <string name="transport_nearby_routes">În raza de</string>
+    <string name="transport_nearby_routes">În raza a</string>
     <string name="transport_nearby_routes_within">Rutele apropiate din cadrul</string>
     <string name="optional_point_name">Denumirea opțională a punctului</string>
     <string name="distance_nearest">Prima cea mai apropiată</string>
@@ -5826,16 +5826,16 @@
     <string name="profile_icon">Pictogramă profil</string>
     <string name="resting_position_icon_summary">Pictogramă afișată atunci când nu vă deplasați.</string>
     <string name="resting_position">Poziție de repaus</string>
-    <string name="resting_navigation_position">Poziția de odihnă și navigație</string>
+    <string name="resting_navigation_position">În pozițiile de repaus și navigație</string>
     <string name="auto_25_chars_route_kr">Țineți dreapta</string>
     <string name="auto_25_chars_route_kl">Țineți stânga</string>
     <string name="auto_25_chars_route_tr">Virați la dreapta</string>
     <string name="auto_25_chars_route_tshr">Virați strâns la dreapta</string>
     <string name="auto_25_chars_route_tslr">Virați ușor la dreapta</string>
-    <string name="navigation_position">Poziția de navigare</string>
-    <string name="view_angle_description">Afișează zona în formă de con spre care priviți</string>
+    <string name="navigation_position">În poziția de navigație</string>
+    <string name="view_angle_description">Afișează zona spre care priviți printr-un con</string>
     <string name="view_angle">Unghi de vizualizare</string>
-    <string name="location_radius_description">Afișează zona circulară care reprezintă precizia locației dumneavoastră curente</string>
+    <string name="location_radius_description">Arată zona circulară care reprezintă acuratețea localizării curente</string>
     <string name="location_radius">Raza de localizare</string>
     <string name="auto_25_chars_route_tl">Virați la stânga</string>
     <string name="auto_25_chars_route_tshl">Virați strâns la stânga</string>
@@ -5847,7 +5847,7 @@
 \nCPU (așteaptă GPU): %4$s</string>
     <string name="ask_every_time">Întreabă de fiecare dată</string>
     <string name="shared_string_automatically">Automat</string>
-    <string name="detailed_track_guidance">Ghid detaliat pentru traseu</string>
+    <string name="detailed_track_guidance">Ghidare detaliată pentru traseu</string>
     <string name="driving_region_india">India</string>
     <string name="hugerock_promo_description">Acces gratuit la funcții, inclusiv descărcări nelimitate de hărți, relief 3D etc. pentru %1$s luni</string>
     <string name="driving_region_uk">Regatul Unit și similare</string>
