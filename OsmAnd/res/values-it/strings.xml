@@ -5641,7 +5641,7 @@
     <string name="precise">Preciso</string>
     <string name="download_cloud_versions">Scarica le versioni dal cloud</string>
     <string name="upload_local_versions">Carica le versioni locali</string>
-    <string name="round_up">Arrotondare</string>
+    <string name="round_up">Arrotondato</string>
     <string name="map_widget_map_scale">Scala della mappa</string>
     <string name="unchanged_parameter_summary">Ogni traccia manterrà i propri parametri.</string>
     <string name="shared_string_unchanged">Invariata</string>
