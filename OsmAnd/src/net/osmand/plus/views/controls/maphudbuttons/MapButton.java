@@ -87,7 +87,7 @@ public abstract class MapButton extends AppCompatImageButton implements OnAttach
 		this.uiUtilities = app.getUIUtilities();
 		this.strokeWidth = app.getResources().getDimensionPixelSize(R.dimen.map_button_stroke);
 
-		setupShadow();
+		ViewCompat.setElevation(this, 5.0f);
 		addOnAttachStateChangeListener(this);
 		setNightMode(app.getDaynightHelper().isNightModeForMapControls());
 	}
@@ -176,6 +176,7 @@ public abstract class MapButton extends AppCompatImageButton implements OnAttach
 			updateIcon();
 			updateSize();
 			updateBackground();
+			updateShadow();
 		}
 	}
 
@@ -248,20 +249,23 @@ public abstract class MapButton extends AppCompatImageButton implements OnAttach
 		setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
 	}
 
-	private void setupShadow() {
-		setOutlineProvider(new ViewOutlineProvider() {
-			@Override
-			public void getOutline(View view, Outline outline) {
-				Drawable background = view.getBackground();
-				if (background != null) {
-					background.getOutline(outline);
-				} else {
-					outline.setRect(0, 0, view.getWidth(), view.getHeight());
+	private void updateShadow() {
+		if (appearanceParams.getOpacity() <= TRANSPARENT_ALPHA) {
+			setOutlineProvider(null);
+		} else {
+			setOutlineProvider(new ViewOutlineProvider() {
+				@Override
+				public void getOutline(View view, Outline outline) {
+					Drawable background = view.getBackground();
+					if (background != null) {
+						background.getOutline(outline);
+					} else {
+						outline.setRect(0, 0, view.getWidth(), view.getHeight());
+					}
+					outline.setAlpha(1);
 				}
-				outline.setAlpha(1);
-			}
-		});
-		ViewCompat.setElevation(this, 5.0f);
+			});
+		}
 	}
 
 	@Override
