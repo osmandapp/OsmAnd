@@ -18,8 +18,8 @@ import net.osmand.plus.quickaction.actions.MoveToMyLocationAction;
 import net.osmand.plus.quickaction.actions.NavigatePreviousScreenAction;
 import net.osmand.plus.quickaction.actions.NextAppProfileAction;
 import net.osmand.plus.quickaction.actions.ShowHideDrawerAction;
-import net.osmand.plus.quickaction.actions.ShowHideNavigationViewAction;
-import net.osmand.plus.quickaction.actions.ShowHideSearchViewAction;
+import net.osmand.plus.quickaction.actions.OpenNavigationViewAction;
+import net.osmand.plus.quickaction.actions.OpenSearchViewAction;
 import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.quickaction.actions.PreviousAppProfileAction;
 
@@ -33,8 +33,8 @@ public class CommandToActionConverter {
 	static {
 		map.put("back_to_location", MoveToMyLocationAction.TYPE);
 		map.put("switch_compass_forward", ChangeMapOrientationAction.TYPE);
-		map.put("open_navigation_dialog", ShowHideNavigationViewAction.TYPE);
-		map.put("open_quick_search_dialog", ShowHideSearchViewAction.TYPE);
+		map.put("open_navigation_dialog", OpenNavigationViewAction.TYPE);
+		map.put("open_quick_search_dialog", OpenSearchViewAction.TYPE);
 		map.put("switch_app_mode_forward", NextAppProfileAction.TYPE);
 		map.put("switch_app_mode_backward", PreviousAppProfileAction.TYPE);
 

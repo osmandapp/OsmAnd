@@ -13,10 +13,10 @@
 	<color name="widget_secondary_background_color_dark">#F2F2F2</color>
 
 	<!-- Text -->
-	<color name="text_color_primary_light">#212121</color>
-	<color name="text_color_primary_dark">#cccccc</color>
-	<color name="text_color_secondary_light">#727272</color>
-	<color name="text_color_secondary_dark">#727272</color>
+	<color name="text_color_primary_light">#1A1A1A</color>
+	<color name="text_color_primary_dark">#E6E6E6</color>
+	<color name="text_color_secondary_light">#666666</color>
+	<color name="text_color_secondary_dark">#8C8C8C</color>
 	<color name="text_color_tertiary_light">#bfbfbf</color>
 	<color name="text_color_tertiary_dark">#404040</color>
 	<color name="text_color_tab_active_light">#ffffff</color>

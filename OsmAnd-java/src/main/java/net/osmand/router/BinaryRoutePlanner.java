@@ -137,6 +137,10 @@ public class BinaryRoutePlanner {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
 					((MultiFinalRouteSegment) finalSegment).all.add((FinalRouteSegment) segment);
+					TLongObjectHashMap<RouteSegment> visitedSegments = (forwardSearch ? visitedDirectSegments : visitedOppositeSegments);
+					if (!visitedSegments.containsKey(calculateRoutePointId(segment))) {
+						visitedSegments.put(calculateRoutePointId(segment), segment);
+					}
 					skipSegment = true;
 				} else {
 					finalSegment = (FinalRouteSegment) segment;
@@ -164,9 +168,8 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost + 2.0 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
-				// squareRootDist is inaccurate by 0.0015%-0.0036% according to tests
-				// think about multiplier * 1.00004f instead of the const (2.0)
+			} else if (cst.cost + 5.0 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+				// squareRootDist doesn't follow Triangle-inequality and it breaks A* algorithm. Maximum error on the optimal route could be constant (5.0)
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}

@@ -10,27 +10,10 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_CLASSIC;
-import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
-import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
-import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.BEARING_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_ARRIVAL_TIME_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_TO_GO_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.NAVIGATION_TIME_WIDGET_LEGACY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
-import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.*;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
@@ -69,17 +52,9 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.backend.preferences.BooleanPreference;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
-import net.osmand.plus.settings.backend.preferences.IntPreference;
-import net.osmand.plus.settings.backend.preferences.ListStringPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.LocalSortMode;
-import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -88,15 +63,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class AppVersionUpgradeOnInit {
 
@@ -897,10 +864,10 @@ public class AppVersionUpgradeOnInit {
 			}
 		}
 
-		FabMarginPreference oldFabMarginPref = new FabMarginPreference(settings, "quick_fab_margin");
-		FabMarginPreference fabMarginPref = new FabMarginPreference(settings, DEFAULT_BUTTON_ID + "_fab_margin");
+		FabMarginPreference oldFabMarginPref = new FabMarginPreference(app, "quick_fab_margin");
+		FabMarginPreference fabMarginPref = new FabMarginPreference(app, DEFAULT_BUTTON_ID + "_fab_margin");
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			Pair<Integer, Integer> portrait = oldFabMarginPref.getPortraitFabMargin(appMode);
+			Pair<Integer, Integer> portrait = oldFabMarginPref.getPortraitFabMargins(appMode);
 			Pair<Integer, Integer> landscape = oldFabMarginPref.getLandscapeFabMargin(appMode);
 
 			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
@@ -929,7 +896,7 @@ public class AppVersionUpgradeOnInit {
 
 							newState.getNamePref().set(name);
 							newState.getQuickActionsPref().set(preferences.getString(key + "_list", null));
-							copyPreferenceForAllModes(oldState.getStatePref(), newState.getStatePref());
+							copyPreferenceForAllModes(oldState.getVisibilityPref(), newState.getVisibilityPref());
 							copyFabMarginPreferenceForAllModes(oldState.getFabMarginPref(), newState.getFabMarginPref());
 
 							globalButtons.put(name, newState);
@@ -939,7 +906,7 @@ public class AppVersionUpgradeOnInit {
 			}
 		}
 		if (!globalButtons.isEmpty()) {
-			buttonsHelper.setQuickActionButtonStates(globalButtons.values());
+			buttonsHelper.setQuickActionStates(globalButtons.values());
 		}
 	}
 

@@ -10,6 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="raster_layers_action_descr">Change raster layers</string>
+    <string name="contour_layers_action_descr">Change contour layers</string>
+    <string name="change_zoom_action_descr">Change map zoom.</string>
+    <string name="search_action_descr">Opens Search.</string>
+    <string name="navigation_action_descr">Opens Navigation.</string>
+    <string name="my_location_action_descr">Centers map on your current location.</string>
+    <string name="map_3d_mode_action_descr">Change map tilt.</string>
+    <string name="drawer_button_description">Opens the main menu.</string>
+    <string name="configure_map_description">Change map style, layers, or other settings.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>
     <string name="shared_string_dp">dp</string>

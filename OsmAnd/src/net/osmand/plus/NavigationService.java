@@ -23,6 +23,7 @@ import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
@@ -137,7 +138,8 @@ public class NavigationService extends Service {
 		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
-		Notification notification = app.getNotificationHelper().buildTopNotification(this);
+		Notification notification = app.getNotificationHelper().buildTopNotification(this,
+				isUsedBy(USED_BY_NAVIGATION) ? NotificationType.NAVIGATION : NotificationType.GPX);
 		boolean hasNotification = notification != null;
 		if (hasNotification) {
 			try {

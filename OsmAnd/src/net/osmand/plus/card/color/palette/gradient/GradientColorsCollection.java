@@ -13,8 +13,8 @@ import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

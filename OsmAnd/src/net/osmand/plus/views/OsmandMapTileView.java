@@ -2161,7 +2161,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				startZooming = true;
 			}
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION) && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
 				startRotating = true;
 			} else {
 				relAngle = 0;
@@ -2169,16 +2169,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				changeZoomPosition((float) deltaZoom, relAngle);
-			}
-		}
-
-		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
-			if (startRotating) {
-				return true;
-			} else if (!startZooming) {
-				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
-			} else {
-				return false;
 			}
 		}
 

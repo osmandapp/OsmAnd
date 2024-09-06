@@ -4602,7 +4602,7 @@
     <string name="coordinates_widget_desc">Приказује земљописне координате тренутног земаљског положаја.</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Напредно</string>
     <string name="on_with_params">%1$s на %2$s</string>
-    <string name="no_widgets_descr">Додајте један или више виџета са листе доступних виџета.</string>
+    <string name="no_widgets_descr">Додајте једну или више справица са списка доступних справица.</string>
     <string name="lang_sat">Санталски</string>
     <string name="route_maneuvers_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ТОИ, тачке пута.</string>
     <string name="audio_video_notes_desc">Омогућава брзи приступ за почетак/заустављање снимања звука, видеа или сликовне белешке.</string>
@@ -4624,7 +4624,7 @@
     <string name="get_altitude_information">Добави податке о надморској висини</string>
     <string name="route_maneuvers">Маневри руте</string>
     <string name="calculating_altitude">Израчунавам надморску висину</string>
-    <string name="no_widgets_here_yet">Овде још нема виџета</string>
+    <string name="no_widgets_here_yet">Овде још нема справица</string>
     <string name="available_widgets">Доступне справице</string>
     <string name="snackbar_page_removed">„Страница %1$s“ је уклоњена.</string>
     <string name="release_4_2">• Преобликовање справице: нови изглед и осећај, груписање по страницама, промените редослед и ускладите како желите.
@@ -4636,7 +4636,7 @@
 \n • Исправке: самостално освежавање плочица карата на мрежи
 \n
 \n</string>
-    <string name="shared_string_symbol">Симбол</string>
+    <string name="shared_string_symbol">Знак</string>
     <string name="routing_attr_difficulty_preference_expert_name">Стручњак</string>
     <string name="average_speed_skip_stops">Узми у обзир заустављања</string>
     <string name="average_speed_time_interval_desc">Наведите временско раздобље за просечну брзину.</string>
@@ -4679,7 +4679,7 @@
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>
     <string name="coordinates_widget_current_location">Координате: тренутни положај</string>
-    <string name="click_on_widget">Кликни на виџет</string>
+    <string name="click_on_widget">Кликните на справицу</string>
     <string name="shared_string_normal">Обично</string>
     <string name="how_to_use">Како да користите:</string>
     <string name="auto_25_chars_route_tu_kr">Направите полукружно и држите десно</string>
@@ -5251,27 +5251,27 @@
     <string name="github_discussion">Разговор на Гитхубу</string>
     <string name="free_favorites_backup">Бесплатно складиште омиљених</string>
     <string name="shared_string_close_the_dialog">Затвори прозорче</string>
-    <string name="release_4_6">• Андроид ауто: Додат 3Д мод
+    <string name="release_4_6">• Андроид ауто: Додат просторни преглед
 \n
-\n • Путање: Уведени филтери и паметни фолдери, оптимизована меморија за веће фајлове
+\n • Путање: Уведени су услови и паметне фасцикле, подешена памет за веће датотеке
 \n
-\n • Побољшани горњи и доњи панел за виџете ради акомодације свих виџета
+\n • Побољшана је горња и доња полица ради прихвата свих справица
 \n
-\n • Побољшан менаџмент локалних ресурса
+\n • Побољшано је управљање местном имовином
 \n
-\n • Прилагодљиво мапирање дугмади за спољне контролере
+\n • Прилагодљиво додељивање дугмади за спољне управљаче
 \n
-\n • Нови виџети: \"Глајд коефицијент\" и \"Положај Сунца\"
+\n • Нове справице: „чинилац клизања“ и „Положај Сунца“
 \n
-\n • ОсмАнд Облак: Приступ обрисаним фајловима
+\n • ОсмАндов Облак: Приступ обрисаним датотекама
 \n
-\n • Побољшано бојење путања у Нагиб моду са новим симетричним градијентом
+\n • Побољшано бојење путања у приказу нагиба са новим суметричним прелазом
 \n
-\n • Решени проблеми са транспарентном статусном траком
+\n • Решени проблеми са прозирном траком стања
 \n
-\n • Додата подршка за АНТ+ температурни виџет
+\n • Додата подршка за АНТ+ топлотна справица
 \n
-\n • Уведен виџет \"Доступан РАМ\"
+\n • Уведена је справица „Доступни РАМ“
 \n
 \n</string>
     <string name="deleting_complete">Брисање је завршено</string>
@@ -5372,8 +5372,8 @@
     <string name="use_raster_sqlitedb_for_slope_hillshade">Користи растер скулитедб сенчења брда / падина</string>
     <string name="help_article_navigation_routing_osmand_routing_name">О путањи ОсмАнда</string>
     <string name="shared_string_setup">Подешавања</string>
-    <string name="complex_widget_alert">%1$s виџет може бити само у свом сопственом реду постављен.</string>
-    <string name="previous_row_has_complex_widget">Претходни ред има комплексан виџет</string>
+    <string name="complex_widget_alert">Справица %1$s може бити постављена само у свом сопственом реду.</string>
+    <string name="previous_row_has_complex_widget">Претходни ред има сложену справицу</string>
     <string name="map_widget_sun_position_desc">Показује време до изласка или заласка.</string>
     <string name="add_new_button">Додај ново дугме</string>
     <string name="rendering_attr_showToll_name">Прикажи ограничења путарине</string>
@@ -5435,7 +5435,7 @@
     <string name="shared_string_copyright">Ауторска права</string>
     <string name="shared_string_author">Аутор</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
-    <string name="remove_widget_first">Молим уклоните виџет прво</string>
+    <string name="remove_widget_first">Молим, прво уклоните справицу</string>
     <string name="discard_changes_prompt">Одбаци промене?</string>
     <string name="shared_string_button">Дугме</string>
     <string name="shared_string_action">Акција</string>
@@ -5620,23 +5620,23 @@
     <string name="java_safe">Јава (Сигурно)</string>
     <string name="shared_sting_all_colors">Све боје</string>
     <string name="lang_ta_in">Тамилски (Индија)</string>
-    <string name="release_4_7">• Нови виџет „Спидометар“ компатибилан са Андроид Ауто
+    <string name="release_4_7">• Нови справица „Брзиномер“ ускађена са Андроидом Аутом
 \n
-\n • Конфигуришите екран мапе додавањем више дугмади „Брза радња“.
+\n • Подесите приказ карте додавањем више дугмади „Брза радња“.
 \n
 \n • Побољшана читљивост података у графиконима
 \n
-\n • Додати филтери према подацима сензора за стазе
+\n • Додати услови према подацима пријемника за стазе
 \n
-\n • Побољшано прилагођавање изгледа за групу путања
+\n • Побољшано прилагођавање изгледа за скуп путања
 \n
-\n • Додата подршка за додатне ГПКС ознаке
+\n • Додата подршка за додатне ГПКС-а ознаке
 \n
-\n • Прилагодите „Удаљеност током навигације“: бирајте између прецизних или заокружите бројеве
+\n • Прилагодите „Удаљеност током навођења“: бирајте између тачних или заокружених бројева
 \n
-\n • Јединствени кориснички интерфејс за избор путање
+\n • Јединствено корисничко сучеље за избор трага
 \n
-\n • ОпенСтритМап пријављивање је пребачено на ОАут 2.0
+\n • Пријава у ОпенСтритМап је пребачена на ОАут 2.0
 \n
 \n</string>
     <string name="distance_during_navigation">Растојање током навођења</string>
@@ -5852,12 +5852,12 @@
     <string name="help_article_map_routes_name">Руте</string>
     <string name="route_roundabout_exit">Идите на %1$d излаз</string>
     <string name="help_article_map_tracks_name">Путање</string>
-    <string name="add_widget_above">Додај виџет изнад</string>
-    <string name="add_widget_below">Додај виџет испод</string>
-    <string name="add_widget_to_the_right">Додај виџет десно</string>
-    <string name="add_widget_to_the_left">Додај виџет лево</string>
-    <string name="delete_widget">Обисати виџет?</string>
-    <string name="delete_widget_description">Овај виџет биће обрисан. Можете га повратити касније из Конфигурационог екрана.</string>
+    <string name="add_widget_above">Додај справицу изнад</string>
+    <string name="add_widget_below">Додај справицу испод</string>
+    <string name="add_widget_to_the_right">Додај справицу десно</string>
+    <string name="add_widget_to_the_left">Додај справицу лево</string>
+    <string name="delete_widget">Обрисати справицу?</string>
+    <string name="delete_widget_description">Ова ће справица бити обрисана. Можете је повратити касније у поставкама приказа.</string>
     <string name="battery_saving_mode">Режим уштеде батерије</string>
     <string name="graph_axis">Графичка оса</string>
     <string name="app_mode_suv">СУВ</string>
