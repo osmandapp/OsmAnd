@@ -38,6 +38,7 @@ import de.KnollFrank.lib.settingssearch.provider.IsPreferenceSearchable;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoProvider;
 import de.KnollFrank.lib.settingssearch.provider.PreferenceScreenGraphAvailableListener;
+import de.KnollFrank.lib.settingssearch.provider.PrepareShow;
 import de.KnollFrank.lib.settingssearch.provider.ShowPreferencePath;
 
 class SearchPreferenceButtonHelper {
@@ -83,6 +84,7 @@ class SearchPreferenceButtonHelper {
 										fragment.setArguments(baseSettingsFragment.buildArguments());
 									}
 								});
+						setConfigureSettingsSearch(fragment, true);
 						return fragment;
 					}
 				},
@@ -141,7 +143,26 @@ class SearchPreferenceButtonHelper {
 						return preferencePath.getPreference().isPresent();
 					}
 				},
-				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
+				rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
+				new PrepareShow() {
+
+					@Override
+					public void prepareShow(final PreferenceFragmentCompat preferenceFragment) {
+						setConfigureSettingsSearch(preferenceFragment, false);
+					}
+				});
+	}
+
+	private static void setConfigureSettingsSearch(final Fragment fragment, final boolean configureSettingsSearch) {
+		final Bundle arguments = getBundle(fragment);
+		arguments.putBoolean(BaseSettingsFragment.CONFIGURE_SETTINGS_SEARCH, configureSettingsSearch);
+		fragment.setArguments(arguments);
+	}
+
+	private static Bundle getBundle(final Fragment fragment) {
+		return fragment.getArguments() != null ?
+				fragment.getArguments() :
+				new Bundle();
 	}
 
 	private SearchConfiguration createSearchConfiguration() {
