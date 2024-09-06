@@ -5877,4 +5877,15 @@
     <string name="corner_radius">Радијус угла</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Прозирност позадине</string>
+    <string name="contour_layers_action_descr">Промените слојеве контуре</string>
+    <string name="change_zoom_action_descr">Промените увећање мапе.</string>
+    <string name="search_action_descr">Отварање Претраге.</string>
+    <string name="navigation_action_descr">Отварање Навигације.</string>
+    <string name="my_location_action_descr">Центрира мапу на вашој тренутној локацији.</string>
+    <string name="map_3d_mode_action_descr">Промените нагиб мапе.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Прикажи стазе за макадамске бицикле</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Прикажите стазе за макадамске бицикле</string>
+    <string name="raster_layers_action_descr">Промените растерске слојеве</string>
+    <string name="drawer_button_description">Отварање главног менија.</string>
+    <string name="configure_map_description">Промените стил мапе, слојеве или друга подешавања.</string>
 </resources>
