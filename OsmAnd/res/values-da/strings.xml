@@ -5885,4 +5885,15 @@
     <string name="background_opacity">Baggrundens gennemsigtighed</string>
     <string name="corner_radius">Hjørneradius</string>
     <string name="shared_string_dp">dp</string>
+    <string name="contour_layers_action_descr">Skift konturlag</string>
+    <string name="change_zoom_action_descr">Skift kortzoom.</string>
+    <string name="search_action_descr">Åbner søgning.</string>
+    <string name="navigation_action_descr">Åbner navigation.</string>
+    <string name="my_location_action_descr">Centrerer kortet på din aktuelle placering.</string>
+    <string name="map_3d_mode_action_descr">Skift kortets hældning.</string>
+    <string name="drawer_button_description">Åbner hovedmenuen.</string>
+    <string name="configure_map_description">Skift kortstil, lag eller andre indstillinger.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Vis motocross-stier</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Vis motocross-stier</string>
+    <string name="raster_layers_action_descr">Skift raster-lag</string>
 </resources>
