@@ -4,7 +4,8 @@
 	android:id="@+id/map_compass_button"
 	android:layout_width="@dimen/map_small_button_size"
 	android:layout_height="@dimen/map_small_button_size"
-	android:layout_marginTop="@dimen/map_small_button_margin"
-	android:contentDescription="@string/map_widget_compass"
+	android:clickable="true"
+	android:focusable="true"
 	tools:background="@drawable/btn_inset_circle_night"
+	tools:contentDescription="@string/map_widget_compass"
 	tools:src="@drawable/ic_compass_manual" />

@@ -494,8 +494,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
 		if (menu.zoomButtonsVisible()) {
-			ZoomInButton zoomInButton = view.findViewById(R.id.context_menu_zoom_in_button);
-			ZoomOutButton zoomOutButton = view.findViewById(R.id.context_menu_zoom_out_button);
+			ZoomInButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+			ZoomOutButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
 
 			zoomInButton.setLongClickable(false);
 			zoomOutButton.setLongClickable(false);

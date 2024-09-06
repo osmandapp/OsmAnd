@@ -4,6 +4,8 @@
 	android:id="@+id/map_zoom_out_button"
 	android:layout_width="@dimen/map_button_size"
 	android:layout_height="@dimen/map_button_size"
-	android:background="@drawable/btn_circle"
+	android:clickable="true"
 	android:contentDescription="@string/zoomOut"
+	android:focusable="true"
+	tools:background="@drawable/btn_circle"
 	tools:src="@drawable/ic_action_remove_dark" />

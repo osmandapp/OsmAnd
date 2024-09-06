@@ -4,6 +4,8 @@
 	android:id="@+id/map_3d_button"
 	android:layout_width="@dimen/map_button_size"
 	android:layout_height="@dimen/map_button_size"
+	android:clickable="true"
+	android:focusable="true"
 	tools:background="@drawable/btn_circle_night"
 	tools:contentDescription="@string/map_3d_mode_action"
 	tools:src="@drawable/ic_action_3d" />

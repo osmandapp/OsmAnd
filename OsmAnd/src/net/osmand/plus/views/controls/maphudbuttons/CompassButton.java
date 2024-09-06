@@ -61,15 +61,19 @@ public class CompassButton extends MapButton {
 	public CompassButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		buttonState = app.getMapButtonsHelper().getCompassButtonState();
-
-		setupTouchListener(mapActivity);
-		setupAccessibilityActions();
 	}
 
 	@Nullable
 	@Override
 	public MapButtonState getButtonState() {
 		return buttonState;
+	}
+
+	@Override
+	public void setMapActivity(@NonNull @NotNull MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		setupTouchListener();
+		setupAccessibilityActions();
 	}
 
 	@Override
@@ -109,8 +113,8 @@ public class CompassButton extends MapButton {
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
-	private void setupTouchListener(@NonNull MapActivity mapActivity) {
-		setOnTouchListener(new OnTouchListener() {
+	private void setupTouchListener() {
+		setOnTouchListener(new View.OnTouchListener() {
 
 			private final GestureDetector gestureDetector = new GestureDetector(getContext(), new SimpleOnGestureListener() {
 				@Override
