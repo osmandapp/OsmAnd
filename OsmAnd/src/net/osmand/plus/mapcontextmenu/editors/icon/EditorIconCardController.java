@@ -13,7 +13,6 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteController;
 import net.osmand.plus.card.icon.IconsPaletteElements;
-import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 
 import java.util.ArrayList;
@@ -75,11 +74,12 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
 		paletteController.setIcons(getSelectedCategoryIconKeys());
 		paletteController.setSelectedIcon(getSelectedIconKey());
-		container.addView(new IconsPaletteCard<>(activity, paletteController).build());
+		container.addView(new IconsPaletteCard<>(activity, paletteController, usedOnMap).build());
 	}
 
 	@NonNull

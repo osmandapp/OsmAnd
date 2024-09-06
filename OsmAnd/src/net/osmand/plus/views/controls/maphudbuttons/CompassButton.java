@@ -1,5 +1,7 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK;
+import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_LONG_CLICK;
 import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
 import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
@@ -22,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListener;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
@@ -106,7 +107,7 @@ public class CompassButton extends MapButton {
 		if (iconId == 0) {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
 		}
-		boolean customIcon = settings.getCompassMode().getIconId(nightMode) != iconId;
+		boolean customIcon = !CompassMode.isCompassIconId(iconId);
 		setIconColor(customIcon ? ColorUtilities.getMapButtonIconColor(getContext(), nightMode) : 0);
 
 		super.updateIcon();
@@ -152,12 +153,12 @@ public class CompassButton extends MapButton {
 	}
 
 	private void setupAccessibilityActions() {
-		ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
+		ViewCompat.replaceAccessibilityAction(this, ACTION_CLICK,
 				app.getString(NORTH_IS_UP.getTitleId()), (view, arguments) -> {
 					rotateMapToNorth();
 					return true;
 				});
-		ViewCompat.replaceAccessibilityAction(this, AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_LONG_CLICK,
+		ViewCompat.replaceAccessibilityAction(this, ACTION_LONG_CLICK,
 				app.getString(R.string.choose_map_orientation), (view, arguments) -> {
 					showCompassModeWidgetDialog();
 					return true;
