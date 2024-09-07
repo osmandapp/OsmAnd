@@ -5878,4 +5878,15 @@
     <string name="quick_action_navigation_view_desc">Kapcsoló a navigációs nézet megnyitásához/bezárásához.</string>
     <string name="quick_action_navigation_view_title">Navigációs nézet</string>
     <string name="quick_action_switch_compass_desc">Kapcsoló a térkép tájolásának váltásához.</string>
+    <string name="contour_layers_action_descr">Szintvonal rétegek módosítása</string>
+    <string name="change_zoom_action_descr">Térképnagyítás módosítása.</string>
+    <string name="search_action_descr">Megnyitja a Keresést.</string>
+    <string name="navigation_action_descr">Megnyitja a Navigálást.</string>
+    <string name="my_location_action_descr">A tartózkodási helyét teszi a térkép közepére.</string>
+    <string name="map_3d_mode_action_descr">Térképdőlés módosítása.</string>
+    <string name="drawer_button_description">Megnyitja a főmenüt.</string>
+    <string name="configure_map_description">Térkép stílusának, rétegeinek, egyéb beállításainak módosítása.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Crossmotor utak mutatása</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Crossmotor utak mutatása</string>
+    <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
 </resources>
