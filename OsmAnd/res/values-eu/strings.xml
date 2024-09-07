@@ -5890,4 +5890,13 @@
     <string name="quick_action_drawer_desc">Alboko menua erakusteko edo ezkutatzeko etengailua.</string>
     <string name="battery_saving_mode">Bateria aurrezteko modua</string>
     <string name="background_opacity">Atzeko planoaren opakutasuna</string>
+    <string name="navigation_action_descr">Nabigazioa irekitzen du.</string>
+    <string name="map_3d_mode_action_descr">Aldatu maparen inklinazioa.</string>
+    <string name="search_action_descr">Bilaketa irekitzen du.</string>
+    <string name="raster_layers_action_descr">Aldatu raster geruzak</string>
+    <string name="contour_layers_action_descr">Aldatu sestra-geruzak</string>
+    <string name="change_zoom_action_descr">Aldatu maparen zooma.</string>
+    <string name="drawer_button_description">Menu nagusia irekitzen du.</string>
+    <string name="configure_map_description">Aldatu maparen estiloa, geruzak edo bestelako ezarpenak.</string>
+    <string name="my_location_action_descr">Zentratzen du mapa zure uneko kokapenean.</string>
 </resources>
