@@ -125,9 +125,11 @@ public class GpxMultiSegmentsApproximation {
 		if (sg == null) {
 			return;
 		}
-		if (sg.getRoad().getId() != last.segment.road.getId() || 
-				Math.min(sg.getSegmentStart(), sg.getSegmentEnd()) != 
-				Math.min(last.segment.getSegmentStart(), last.segment.getSegmentEnd())) {
+		if (sg.getRoad().getId() != last.segment.road.getId() ||
+				sg.getSegmentStart() != last.segment.getSegmentStart() // 1. allow loops for rec tracks
+//				Math.min(sg.getSegmentStart(), sg.getSegmentEnd()) != 
+//				Math.min(last.segment.getSegmentStart(), last.segment.getSegmentEnd()) // 2. don't allow loops
+				) {
 			addSegmentInternal(last, sg, connected);
 		}
 	}
@@ -178,7 +180,7 @@ public class GpxMultiSegmentsApproximation {
 				last = bestNext;
 			} else { 
 				if (bestRoute != null) {
-					wrapupRoute(gpxPoints, bestRoute);
+					wrapupRoute(gpxPoints, bestRoute, true);
 				}
 				GpxPoint pnt = findNextRoutablePoint(bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
 				visited = new TLongHashSet();
@@ -196,8 +198,11 @@ public class GpxMultiSegmentsApproximation {
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
+		if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
+			bestRoute = last;
+		}
 		if (bestRoute != null) {
-			wrapupRoute(gpxPoints, bestRoute);
+			wrapupRoute(gpxPoints, bestRoute, false);
 		}
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
@@ -342,7 +347,7 @@ public class GpxMultiSegmentsApproximation {
 		}
 	}
 
-	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
+	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute, boolean breakSegment) {
 		if (bestRoute.parent == null) {
 			return;
 		}
@@ -376,7 +381,7 @@ public class GpxMultiSegmentsApproximation {
 		}
 		gpxPoints.get(startInd).routeToTarget = res;
 		gpxPoints.get(startInd).targetInd = last; // keep straight line
-		gpxPoints.get(startInd).breakSegment = true;
+		gpxPoints.get(startInd).breakSegment = breakSegment;
 	}
 
 	private static long calculateRoutePointId(RouteSegmentAppr segm) {
