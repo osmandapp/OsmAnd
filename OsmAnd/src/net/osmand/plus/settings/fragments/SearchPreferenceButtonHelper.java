@@ -62,22 +62,23 @@ class SearchPreferenceButtonHelper {
 					@Override
 					public Fragment instantiate(final String fragmentClassName, final Optional<PreferenceWithHost> src, final Context context) {
 						final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
-						src
-								.ifPresent(preferenceWithHost -> {
-									// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
-									if (preferenceWithHost.preference.getParent() != null && APP_PROFILES.equals(preferenceWithHost.preference.getParent().getKey())) {
-										final ApplicationMode appMode = ApplicationMode.valueOfStringKey(preferenceWithHost.preference.getKey(), null);
-										final Bundle args = new Bundle();
-										if (appMode != null) {
-											args.putString(APP_MODE_KEY, appMode.getStringKey());
-										}
-										fragment.setArguments(args);
-									} else if (preferenceWithHost.host instanceof final BaseSettingsFragment baseSettingsFragment) {
-										fragment.setArguments(baseSettingsFragment.buildArguments());
-									}
-								});
+						src.ifPresent(_src -> configureFragment(fragment, _src));
 						setConfigureSettingsSearch(fragment, true);
 						return fragment;
+					}
+
+					private static void configureFragment(final Fragment fragment, final PreferenceWithHost src) {
+						// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
+						if (src.preference.getParent() != null && APP_PROFILES.equals(src.preference.getParent().getKey())) {
+							final ApplicationMode appMode = ApplicationMode.valueOfStringKey(src.preference.getKey(), null);
+							final Bundle args = new Bundle();
+							if (appMode != null) {
+								args.putString(APP_MODE_KEY, appMode.getStringKey());
+							}
+							fragment.setArguments(args);
+						} else if (src.host instanceof final BaseSettingsFragment baseSettingsFragment) {
+							fragment.setArguments(baseSettingsFragment.buildArguments());
+						}
 					}
 				},
 				CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions(),
