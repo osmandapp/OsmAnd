@@ -45,7 +45,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private static final String HISTORY_PREF_ID = "history";
 	private static final String MAP_RENDERING_ENGINE_ID = "map_rendering_engine";
-	static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
+	public static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
 	private static final String ENABLE_PROXY_PREF_ID = "enable_proxy";

@@ -790,7 +790,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return app.getSettings();
 	}
 
-	protected Drawable getIcon(@DrawableRes int id) {
+	public Drawable getIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id) : null;
 	}

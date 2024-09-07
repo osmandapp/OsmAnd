@@ -31,6 +31,7 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -48,7 +49,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	private static final String BACKUP_AND_RESTORE = "backup_and_restore";
 	private static final String CONFIGURE_PROFILE = "configure_profile";
-	static final String APP_PROFILES = "app_profiles";
+	public static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
@@ -268,7 +269,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
 		super.createToolbar(inflater, view);
-		new SearchPreferenceButtonHelper(this, R.id.fragmentContainer)
+		new SettingsSearchButtonHelper(this, R.id.fragmentContainer)
 				.configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
 }
