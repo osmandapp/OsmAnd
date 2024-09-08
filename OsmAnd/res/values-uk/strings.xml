@@ -5889,4 +5889,11 @@
     <string name="corner_radius">Радіус кутів</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Непрозорість тла</string>
+    <string name="change_zoom_action_descr">Змінює масштаб мапи.</string>
+    <string name="map_3d_mode_action_descr">Змінити нахил мапи.</string>
+    <string name="configure_map_description">Зміна стилю мапи, шарів та інших налаштувань.</string>
+    <string name="search_action_descr">Відкриває пошук.</string>
+    <string name="drawer_button_description">Відкриває головне меню.</string>
+    <string name="navigation_action_descr">Відкриває навігацію.</string>
+    <string name="my_location_action_descr">Центрує мапу у вашому поточному місцезнаходженні.</string>
 </resources>
