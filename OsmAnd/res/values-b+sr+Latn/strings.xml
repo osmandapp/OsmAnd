@@ -5803,7 +5803,7 @@
     <string name="quick_action_audio_note">Audio beleška</string>
     <string name="quick_action_video_note">Video beleška</string>
     <string name="quick_action_photo_note">Foto beleška</string>
-    <string name="quick_action_track_waypoint">Putna tačka</string>
+    <string name="quick_action_track_waypoint">Međuodredište putanje</string>
     <string name="quick_action_parking_place">Parking mesto</string>
     <string name="quick_action_verb_show_hide">Prikazati / Sakriti</string>
     <string name="quick_action_verb_pause_resume">Pauziranje / Nastavak</string>
@@ -5886,15 +5886,15 @@
     <string name="corner_radius">Radijus ugla</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Prozirnost pozadine</string>
-    <string name="contour_layers_action_descr">Promenite slojeve konture</string>
-    <string name="change_zoom_action_descr">Promenite zum mape.</string>
+    <string name="contour_layers_action_descr">Promeni slojeve konture</string>
+    <string name="change_zoom_action_descr">Promeni zum mape.</string>
     <string name="search_action_descr">Otvaranje Pretrage.</string>
-    <string name="navigation_action_descr">Otvaranje Navigacije.</string>
-    <string name="my_location_action_descr">Centrira mapu na vašoj trenutnoj lokaciji.</string>
-    <string name="configure_map_description">Promenite stil mape, slojeve ili druga podešavanja.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze za makadamske bicikle</string>
-    <string name="raster_layers_action_descr">Promenite rasterske slojeve</string>
+    <string name="navigation_action_descr">Otvaranje navigacije.</string>
+    <string name="my_location_action_descr">Centrira mapu na tvojoj trenutnoj lokaciji.</string>
+    <string name="configure_map_description">Promeni stil mape, slojeve ili druga podešavanja.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Prikazati staze za bicikle</string>
+    <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
-    <string name="map_3d_mode_action_descr">Promenite nagib karte.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Prikažite staze za makadamske bicikle</string>
+    <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Prikazati staze za bicikle</string>
 </resources>
