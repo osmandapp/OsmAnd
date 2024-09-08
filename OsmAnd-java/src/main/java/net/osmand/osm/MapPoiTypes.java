@@ -569,7 +569,11 @@ public class MapPoiTypes {
                             lastCategory = null;
                         }
                         case "poi_additional_category" -> lastPoiAdditionalCategory = null;
-	                    default -> log.warn("Unknown end tag encountered: " + name);
+	                    default -> {
+		                    if (!name.equals("poi_additional")) {
+			                    log.warn("Unknown end tag encountered: " + name);
+		                    }
+	                    }
                     }
 				}
 			}
