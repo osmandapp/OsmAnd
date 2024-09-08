@@ -1,9 +1,9 @@
 package net.osmand.shared.util
 
-import net.osmand.shared.data.SpeedConstants.KILOMETERS_PER_HOUR
-import net.osmand.shared.data.SpeedConstants.MILES_PER_HOUR
-import net.osmand.shared.data.SpeedConstants.NAUTICALMILES_PER_HOUR
-import net.osmand.shared.filters.KMetricsConstants
+import net.osmand.shared.settings.enums.MetricsConstants
+import net.osmand.shared.settings.enums.SpeedConstants.KILOMETERS_PER_HOUR
+import net.osmand.shared.settings.enums.SpeedConstants.MILES_PER_HOUR
+import net.osmand.shared.settings.enums.SpeedConstants.NAUTICALMILES_PER_HOUR
 
 object OsmAndFormatter {
 	const val METERS_IN_KILOMETER = 1000f
@@ -34,7 +34,7 @@ object OsmAndFormatter {
 	fun getMetersFromFormattedAltitudeValue(altitude: Float): Float {
 		val mc = PlatformUtil.getOsmAndContext().getMetricSystem()
 		val useFeet =
-			mc == KMetricsConstants.MILES_AND_FEET || mc == KMetricsConstants.MILES_AND_YARDS || mc == KMetricsConstants.NAUTICAL_MILES_AND_FEET
+			mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET
 		return if (useFeet) {
 			altitude / FEET_IN_ONE_METER
 		} else {
@@ -47,8 +47,8 @@ object OsmAndFormatter {
 		val mc = PlatformUtil.getOsmAndContext().getMetricSystem()
 		mainUnitInMeters =
 			when (mc) {
-				KMetricsConstants.MILES_AND_FEET, KMetricsConstants.MILES_AND_METERS -> METERS_IN_ONE_MILE
-				KMetricsConstants.NAUTICAL_MILES_AND_METERS, KMetricsConstants.NAUTICAL_MILES_AND_FEET -> METERS_IN_ONE_NAUTICALMILE
+				MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> METERS_IN_ONE_MILE
+				MetricsConstants.NAUTICAL_MILES_AND_METERS, MetricsConstants.NAUTICAL_MILES_AND_FEET -> METERS_IN_ONE_NAUTICALMILE
 				else -> METERS_IN_KILOMETER
 			}
 		return distance * mainUnitInMeters

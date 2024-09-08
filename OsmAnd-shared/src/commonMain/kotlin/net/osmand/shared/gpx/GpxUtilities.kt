@@ -10,6 +10,7 @@ import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -25,7 +26,6 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KAlgorithms.hash
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import net.osmand.shared.util.StringBundle
 import net.osmand.shared.util.StringBundleWriter
 import net.osmand.shared.util.StringBundleXmlReader

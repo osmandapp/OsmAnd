@@ -19,7 +19,7 @@ import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
-import net.osmand.shared.data.KWidthMode;
+import net.osmand.shared.gpx.data.KWidthMode;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;

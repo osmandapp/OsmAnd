@@ -27,15 +27,15 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
-import net.osmand.shared.filters.SmartFolderHelper
-import net.osmand.shared.filters.SmartFolderUpdateListener
-import net.osmand.shared.filters.TrackFolder
+import net.osmand.shared.gpx.SmartFolderHelper
+import net.osmand.shared.gpx.SmartFolderUpdateListener
+import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
-import net.osmand.shared.filters.BaseTrackFilter
-import net.osmand.shared.filters.FilterChangedListener
-import net.osmand.shared.filters.SmartFolder
+import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.util.Algorithms
 

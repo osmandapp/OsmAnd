@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.shared.data.KWidthMode;
+import net.osmand.shared.gpx.data.KWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.util.Objects;

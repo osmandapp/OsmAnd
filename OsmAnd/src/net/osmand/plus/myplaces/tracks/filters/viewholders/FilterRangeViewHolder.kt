@@ -11,14 +11,14 @@ import net.osmand.SharedUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.settings.enums.MetricsConstants
+import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
-import net.osmand.shared.filters.MeasureUnitType
-import net.osmand.shared.filters.RangeTrackFilter
+import net.osmand.shared.gpx.filters.MeasureUnitType
+import net.osmand.shared.gpx.filters.RangeTrackFilter
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
@@ -150,13 +150,11 @@ open class FilterRangeViewHolder(
 		title.text = filter.trackFilterType.getName()
 		valueFromInputContainer.labelText =
 			"${app.getString(R.string.shared_string_from)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					SharedUtil.kMetricConstants(app.settings.METRIC_SYSTEM.get()))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					SharedUtil.kMetricConstants(app.settings.METRIC_SYSTEM.get()))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		updateExpandState()
 		updateValues()
@@ -191,13 +189,11 @@ open class FilterRangeViewHolder(
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
 			"${decimalFormat.format(minValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					SharedUtil.kMetricConstants(app.settings.METRIC_SYSTEM.get()))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		val maxValuePrompt =
 			"${decimalFormat.format(maxValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					SharedUtil.kMetricConstants(app.settings.METRIC_SYSTEM.get()))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
@@ -270,7 +266,7 @@ open class FilterRangeViewHolder(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
 				toTxt,
-				getMeasureUnitType().getFilterUnitText(SharedUtil.kMetricConstants(app.settings.METRIC_SYSTEM.get())))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get()))
 		}
 	}
 

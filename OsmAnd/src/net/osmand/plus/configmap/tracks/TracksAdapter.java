@@ -21,7 +21,7 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;

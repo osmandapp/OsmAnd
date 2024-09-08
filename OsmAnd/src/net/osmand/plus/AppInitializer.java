@@ -28,7 +28,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.shared.filters.SmartFolderHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;

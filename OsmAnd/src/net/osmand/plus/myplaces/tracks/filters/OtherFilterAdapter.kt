@@ -9,9 +9,9 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.TextViewEx
-import net.osmand.shared.filters.FilterChangedListener
-import net.osmand.shared.filters.OtherTrackFilter
-import net.osmand.shared.filters.OtherTrackParam
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.OtherTrackFilter
+import net.osmand.shared.gpx.filters.OtherTrackParam
 
 class OtherFilterAdapter(
 	val app: OsmandApplication,

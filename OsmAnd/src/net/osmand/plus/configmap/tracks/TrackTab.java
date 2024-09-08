@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.filters.SmartFolder;
-import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.shared.gpx.TrackItem;
 

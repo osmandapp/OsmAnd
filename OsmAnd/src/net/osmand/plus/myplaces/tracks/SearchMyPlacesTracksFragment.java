@@ -31,15 +31,15 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvi
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
-import net.osmand.shared.filters.SmartFolderUpdateListener;
+import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
-import net.osmand.shared.filters.BaseTrackFilter;
-import net.osmand.shared.filters.FilterChangedListener;
-import net.osmand.shared.filters.SmartFolder;
-import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
+import net.osmand.shared.gpx.filters.FilterChangedListener;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.io.KFile;
 

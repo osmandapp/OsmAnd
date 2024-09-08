@@ -1,80 +1,47 @@
 package net.osmand
 
+import net.osmand.IndexConstants.GPX_IMPORT_DIR
+import net.osmand.IndexConstants.GPX_INDEX_DIR
+import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.settings.enums.MetricsConstants
-import net.osmand.shared.api.KOsmAndSettings
-import net.osmand.shared.data.SpeedConstants.KILOMETERS_PER_HOUR
-import net.osmand.shared.data.SpeedConstants.METERS_PER_SECOND
-import net.osmand.shared.data.SpeedConstants.MILES_PER_HOUR
-import net.osmand.shared.data.SpeedConstants.MINUTES_PER_KILOMETER
-import net.osmand.shared.data.SpeedConstants.MINUTES_PER_MILE
-import net.osmand.shared.data.SpeedConstants.NAUTICALMILES_PER_HOUR
 import net.osmand.shared.api.OsmAndContext
-import net.osmand.shared.data.SpeedConstants
-import net.osmand.shared.filters.KMetricsConstants
+import net.osmand.shared.api.SettingsAPI
+import net.osmand.shared.io.KFile
+import net.osmand.shared.settings.enums.MetricsConstants
+import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.util.KStringMatcher
-import java.lang.ref.WeakReference
 
-object OsmAndContextImpl: OsmAndContext {
-	private var app: WeakReference<OsmandApplication>? = null
-	private lateinit var settings: KOsmAndSettingsImpl
+class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
+	private val settings: SettingsAPIImpl = SettingsAPIImpl(app)
 
-	fun initialize(application: OsmandApplication) {
-		app = WeakReference(application)
-		settings = KOsmAndSettingsImpl(application)
-	}
+	override fun getAppDir(): KFile = app.getAppPathKt(null)
+
+	override fun getGpxDir(): KFile = app.getAppPathKt(GPX_INDEX_DIR)
+
+	override fun getGpxImportDir(): KFile = app.getAppPathKt(GPX_IMPORT_DIR)
+
+	override fun getGpxRecordedDir(): KFile = app.getAppPathKt(GPX_RECORDED_INDEX_DIR)
+
+	override fun getSettings(): SettingsAPI = settings
+
+	override fun getSpeedSystem(): SpeedConstants? = app.settings.SPEED_SYSTEM.get()
+
+	override fun getMetricSystem(): MetricsConstants? = app.settings.METRIC_SYSTEM.get()
 
 	override fun isGpxFileVisible(path: String): Boolean {
-		app?.get()?.let {
-			val helper = it.selectedGpxHelper
-			helper.getSelectedFileByPath(path) != null
-		}
+		val helper = app.selectedGpxHelper
+		helper.getSelectedFileByPath(path) != null
 		return false
 	}
 
-	override fun getSpeedSystem(): SpeedConstants? {
-		app?.get()?.let {
-			val settings = it.settings
-			val mode = settings.applicationMode
-			return when(settings.SPEED_SYSTEM.getModeValue(mode)) {
-				KILOMETERS_PER_HOUR -> SpeedConstants.KILOMETERS_PER_HOUR
-				MILES_PER_HOUR -> SpeedConstants.MILES_PER_HOUR
-				METERS_PER_SECOND -> SpeedConstants.METERS_PER_SECOND
-				MINUTES_PER_MILE -> SpeedConstants.MINUTES_PER_MILE
-				MINUTES_PER_KILOMETER -> SpeedConstants.MINUTES_PER_KILOMETER
-				NAUTICALMILES_PER_HOUR -> SpeedConstants.NAUTICALMILES_PER_HOUR
-				else -> null
-			}
-		}
-		return null
-	}
-
-	override fun getMetricSystem(): KMetricsConstants? {
-		app?.get()?.let {
-			return when(it.settings.METRIC_SYSTEM.get()) {
-				MetricsConstants.KILOMETERS_AND_METERS -> KMetricsConstants.KILOMETERS_AND_METERS
-				MetricsConstants.MILES_AND_FEET -> KMetricsConstants.MILES_AND_FEET
-				MetricsConstants.MILES_AND_METERS -> KMetricsConstants.MILES_AND_METERS
-				MetricsConstants.MILES_AND_YARDS -> KMetricsConstants.MILES_AND_YARDS
-				MetricsConstants.NAUTICAL_MILES_AND_METERS -> KMetricsConstants.NAUTICAL_MILES_AND_METERS
-				MetricsConstants.NAUTICAL_MILES_AND_FEET -> KMetricsConstants.NAUTICAL_MILES_AND_FEET
-				else -> null
-			}
-		}
-		return null
-	}
-
 	override fun getNameStringMatcher(name: String): KStringMatcher {
-		return object:KStringMatcher{
-			private val sm: CollatorStringMatcher = CollatorStringMatcher(name, CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+		return object : KStringMatcher {
+			private val sm: CollatorStringMatcher =
+				CollatorStringMatcher(name, CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
 
 			override fun matches(name: String): Boolean {
 				return sm.matches(name)
 			}
 		}
-	}
-
-	override fun getSettings(): KOsmAndSettings {
-		return settings
 	}
 }

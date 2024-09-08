@@ -47,39 +47,34 @@ kotlin {
 	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
-    val dateTimeVersion = "0.6.1"
-    val coroutinesVersion = "1.8.1"
+	val coroutinesVersion = "1.8.1"
 
-    sourceSets {
-        commonMain.dependencies {
-            implementation("org.jetbrains.kotlin:kotlin-stdlib")
-            implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-            implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
-            implementation("com.squareup.okio:okio:$okioVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-        }
-        jvmMain.dependencies {
+	sourceSets {
+		commonMain.dependencies {
+			implementation("org.jetbrains.kotlin:kotlin-stdlib")
+			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
+			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
+			implementation("com.squareup.okio:okio:$okioVersion")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+		}
+		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("org.xerial:sqlite-jdbc:$sqliteJDBCVersion")
 			implementation("commons-logging:commons-logging:$commonLoggingVersion")
 		}
-	    androidMain.dependencies {
-            implementation("androidx.sqlite:sqlite:$sqliteVersion")
-            implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
-            implementation("net.sf.kxml:kxml2:$kxml2Version")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-
-        }
-        iosMain.dependencies {
-            implementation("co.touchlab:sqliter-driver:$sqliterVersion")
-        }
-
-
-    }
+		androidMain.dependencies {
+			implementation("androidx.sqlite:sqlite:$sqliteVersion")
+			implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
+			implementation("net.sf.kxml:kxml2:$kxml2Version")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+		}
+		iosMain.dependencies {
+			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
+		}
+	}
 }
 
 android {

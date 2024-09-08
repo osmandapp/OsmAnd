@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
@@ -10,8 +11,6 @@ import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 
 class GpxDatabase {
-
-	class StringIntPair(val string: String?, val integer: Int?);
 
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
@@ -158,8 +157,8 @@ class GpxDatabase {
 		var fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
 		val fileName = query.getString(query.getColumnIndex(FILE_NAME.columnName))
 
-		val appDir = PlatformUtil.getAppDir()
-		val gpxDir = PlatformUtil.getGpxDir()
+		val appDir = PlatformUtil.getOsmAndContext().getAppDir()
+		val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
 		if (fileName == gpxDir.name()) {
 			return gpxDir
 		}

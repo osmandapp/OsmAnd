@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.shared.filters.TrackFolder;
-import net.osmand.shared.filters.TracksGroup;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 public class TrackFolderViewHolder extends TracksGroupViewHolder {

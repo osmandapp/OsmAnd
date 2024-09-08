@@ -21,12 +21,12 @@ import net.osmand.plus.track.fragments.TrackAppearanceFragment
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.search.core.SearchPhrase
-import net.osmand.shared.filters.ColorSingleFieldTrackFilterParams
-import net.osmand.shared.filters.FilterChangedListener
-import net.osmand.shared.filters.FolderSingleFieldTrackFilterParams
-import net.osmand.shared.filters.ListTrackFilter
-import net.osmand.shared.filters.SingleFieldTrackFilterParams
-import net.osmand.shared.filters.WidthSingleFieldTrackFilterParams
+import net.osmand.shared.gpx.filters.ColorSingleFieldTrackFilterParams
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.FolderSingleFieldTrackFilterParams
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.filters.SingleFieldTrackFilterParams
+import net.osmand.shared.gpx.filters.WidthSingleFieldTrackFilterParams
 import net.osmand.util.Algorithms
 import net.osmand.view.ThreeStateCheckbox
 

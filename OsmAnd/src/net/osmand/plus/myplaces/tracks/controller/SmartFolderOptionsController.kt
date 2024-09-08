@@ -14,7 +14,7 @@ import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.AlertDialogExtra
 import net.osmand.plus.widgets.alert.CustomAlert
-import net.osmand.shared.filters.SmartFolder
+import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.util.Algorithms
 
 class SmartFolderOptionsController(

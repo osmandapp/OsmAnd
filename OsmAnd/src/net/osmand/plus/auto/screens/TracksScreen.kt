@@ -19,7 +19,6 @@ import androidx.lifecycle.LifecycleOwner
 import net.osmand.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripHelper
-import net.osmand.shared.gpx.TrackItem
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
@@ -30,11 +29,10 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.extensions.cFile
 import net.osmand.shared.gpx.GpxDataItem
 import net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.io.KFile
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import net.osmand.util.Algorithms
@@ -112,7 +110,7 @@ class TracksScreen(
                 if (item != null) {
                     track.dataItem = item
                 }
-                val gpxFile = GpxUtilities.loadGpxFile(file.cFile())
+                val gpxFile = GpxUtilities.loadGpxFile(file)
                 val selectedGpxFile = SelectedGpxFile()
                 selectedGpxFile.setGpxFile(gpxFile, app)
                 newMap[track] = selectedGpxFile

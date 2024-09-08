@@ -21,14 +21,14 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
-import net.osmand.shared.filters.TrackFiltersHelper
+import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
-import net.osmand.shared.filters.SmartFolderUpdateListener
+import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.plus.myplaces.tracks.filters.TrackFilterPropertiesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
-import net.osmand.shared.filters.ListTrackFilter
-import net.osmand.shared.filters.SmartFolder
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.data.SmartFolder
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpdateListener {

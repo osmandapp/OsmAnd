@@ -29,8 +29,8 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.shared.filters.TrackFolder;
-import net.osmand.shared.filters.TracksGroup;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 

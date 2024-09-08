@@ -16,7 +16,7 @@ import net.osmand.plus.card.base.slider.moded.IModedSliderController;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.data.KWidthMode;
+import net.osmand.shared.gpx.data.KWidthMode;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -57,7 +57,7 @@ import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
-import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.io.KFile;

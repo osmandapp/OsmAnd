@@ -9,9 +9,9 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
-import net.osmand.shared.filters.SmartFolderUpdateListener
-import net.osmand.shared.filters.SmartFolder
-import net.osmand.shared.filters.TracksGroup
+import net.osmand.shared.gpx.SmartFolderUpdateListener
+import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData

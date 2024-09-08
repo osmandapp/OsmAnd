@@ -33,14 +33,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.IndexConstants;
 import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.shared.IndexConstants;
-import net.osmand.shared.filters.SmartFolder;
+import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
@@ -63,13 +63,13 @@ import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
-import net.osmand.shared.filters.SmartFolderHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.filters.TrackFolder;
-import net.osmand.shared.filters.TrackFolderAnalysis;
-import net.osmand.shared.filters.TracksGroup;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -380,7 +380,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void removeSurplusTabsSortModes() {
-		if (!rootFolder.getDirFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+		if (!rootFolder.getDirFile().equals(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR))) {
 			// Execute only from tracks root folder to not lose valid entries
 			return;
 		}

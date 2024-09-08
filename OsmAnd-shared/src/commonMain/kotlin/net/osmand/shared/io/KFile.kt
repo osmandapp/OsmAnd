@@ -1,6 +1,6 @@
 package net.osmand.shared.io
 
-import net.osmand.shared.util.PlatformUtil
+import net.osmand.shared.util.KAlgorithms.isEmpty
 import okio.FileMetadata
 import okio.FileSystem
 import okio.IOException
@@ -80,14 +80,17 @@ class KFile {
 		}
 	}
 
-	fun listFiles(): Array<KFile> {
-		val pathList = FileSystem.SYSTEM.list(path)
-		return pathList.map { KFile(it) }.toTypedArray()
+	fun listFiles(): Array<KFile>? {
+		try {
+			val pathList = FileSystem.SYSTEM.list(path)
+			return pathList.map { KFile(it) }.toTypedArray()
+		} catch (e: IOException) {
+			return null
+		}
 	}
 
 	fun delete(): Boolean {
-		val existed = exists()
-		if (!existed) {
+		if (!exists()) {
 			return false
 		}
 		FileSystem.SYSTEM.delete(path, false)
@@ -109,15 +112,24 @@ class KFile {
 	}
 
 	fun length(): Long {
-		return PlatformUtil.getFileLength(this)
+		return try {
+			val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(path)
+			metadata?.size ?: 0
+		} catch (e: IOException) {
+			0
+		}
 	}
 
 	fun renameTo(toFile: KFile): Boolean {
-		return renameTo(toFile.absolutePath())
+		if (!exists()) {
+			return false
+		}
+		FileSystem.SYSTEM.atomicMove(path, toFile.path)
+		return toFile.exists()
 	}
 
 	fun renameTo(toFilePath: String): Boolean {
-		return PlatformUtil.renameFile(path.toString(), toFilePath)
+		return renameTo(KFile(toFilePath))
 	}
 
 	fun getFileNameWithoutExtension(): String? {
@@ -127,6 +139,20 @@ class KFile {
 	companion object {
 		fun getFileNameWithoutExtension(name: String?): String? {
 			return name?.substringBeforeLast(".");
+		}
+
+		fun removeAllFiles(file: KFile): Boolean {
+			return if (file.isDirectory()) {
+				val files = file.listFiles()
+				if (!isEmpty(files)) {
+					for (f in files!!) {
+						removeAllFiles(f)
+					}
+				}
+				file.delete()
+			} else {
+				file.delete()
+			}
 		}
 	}
 }

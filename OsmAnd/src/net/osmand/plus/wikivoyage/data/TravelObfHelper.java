@@ -62,9 +62,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.KGpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.primitives.GpxExtensions;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1244,7 +1243,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	public String createTitle(@NonNull String name) {
-		return capitalizeFirstLetter(KGpxUiHelper.INSTANCE.getGpxTitle(name));
+		return capitalizeFirstLetter(GpxHelper.INSTANCE.getGpxTitle(name));
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {

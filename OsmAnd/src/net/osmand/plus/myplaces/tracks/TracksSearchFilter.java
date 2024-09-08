@@ -9,18 +9,18 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.shared.data.StringIntPair;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.custom_types.StringIntegerPair;
-import net.osmand.shared.filters.BaseTrackFilter;
-import net.osmand.shared.filters.DateTrackFilter;
-import net.osmand.shared.filters.FilterChangedListener;
-import net.osmand.shared.filters.ListTrackFilter;
-import net.osmand.shared.filters.RangeTrackFilter;
-import net.osmand.shared.filters.SingleFieldTrackFilterParams;
-import net.osmand.shared.filters.TrackFolder;
-import net.osmand.shared.filters.TextTrackFilter;
-import net.osmand.shared.filters.TrackFilterType;
-import net.osmand.shared.filters.TrackFiltersHelper;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
+import net.osmand.shared.gpx.filters.DateTrackFilter;
+import net.osmand.shared.gpx.filters.FilterChangedListener;
+import net.osmand.shared.gpx.filters.ListTrackFilter;
+import net.osmand.shared.gpx.filters.RangeTrackFilter;
+import net.osmand.shared.gpx.filters.SingleFieldTrackFilterParams;
+import net.osmand.shared.gpx.filters.TextTrackFilter;
+import net.osmand.shared.gpx.filters.TrackFilterType;
+import net.osmand.shared.gpx.filters.TrackFiltersHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -31,8 +31,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import kotlin.Pair;
 
 public class TracksSearchFilter extends Filter implements FilterChangedListener {
 	public static final Log LOG = PlatformUtil.getLog(TracksSearchFilter.class);
@@ -84,18 +82,13 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 							ListTrackFilter filter = (ListTrackFilter) getFilterByType(trackFilterType);
 							if (filter != null) {
 								SingleFieldTrackFilterParams filterParams = (SingleFieldTrackFilterParams) trackFilterType.getAdditionalData();
-
-
-								List<Pair<String, Integer>> items = app.getGpxDbHelper().getStringIntItemsCollection(
+								List<StringIntPair> items = app.getGpxDbHelper().getStringIntItemsCollection(
 										trackFilterType.getProperty().getColumnName(),
 										filterParams.includeEmptyValues(),
 										filterParams.sortByName(),
 										filterParams.sortDescending()
 								);
-
-								List<StringIntegerPair> itemsK = new ArrayList<>();
-								items.forEach(entry -> itemsK.add(new StringIntegerPair(entry.getFirst(),entry.getSecond())));
-								filter.setFullItemsCollection(itemsK);
+								filter.setFullItemsCollection(items);
 								if (trackFilterType == TrackFilterType.FOLDER) {
 									if (currentFolder != null) {
 										filter.setFirstItem(currentFolder.getRelativePath());
@@ -174,15 +167,13 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(TrackFilterType.FOLDER);
 		if (folderFilter != null) {
 			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
-				List<Pair<String, Integer>> items = app.getGpxDbHelper().getStringIntItemsCollection(
+				List<StringIntPair> items = app.getGpxDbHelper().getStringIntItemsCollection(
 						folderFilter.getTrackFilterType().getProperty().getColumnName(),
 						folderFilter.getCollectionFilterParams().includeEmptyValues(),
 						folderFilter.getCollectionFilterParams().sortByName(),
 						folderFilter.getCollectionFilterParams().sortDescending()
 				);
-				List<StringIntegerPair> itemsK = new ArrayList<>();
-				items.forEach(entry -> itemsK.add(new StringIntegerPair(entry.getFirst(),entry.getSecond())));
-				folderFilter.setFullItemsCollection(itemsK);
+				folderFilter.setFullItemsCollection(items);
 			} else {
 				List<TrackItem> ignoreFoldersItems = filterSpecificSearchResults.get(TrackFilterType.FOLDER);
 				folderFilter.updateFullCollection(ignoreFoldersItems);

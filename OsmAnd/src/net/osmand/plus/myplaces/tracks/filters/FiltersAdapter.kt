@@ -16,12 +16,12 @@ import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterRangeViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.ListFilterViewHolder
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.shared.filters.DateTrackFilter
-import net.osmand.shared.filters.FilterType
-import net.osmand.shared.filters.ListTrackFilter
-import net.osmand.shared.filters.OtherTrackFilter
-import net.osmand.shared.filters.RangeTrackFilter
-import net.osmand.shared.filters.TextTrackFilter
+import net.osmand.shared.gpx.filters.DateTrackFilter
+import net.osmand.shared.gpx.filters.FilterType
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.filters.OtherTrackFilter
+import net.osmand.shared.gpx.filters.RangeTrackFilter
+import net.osmand.shared.gpx.filters.TextTrackFilter
 
 class FiltersAdapter(
 	private val app: OsmandApplication,

@@ -173,55 +173,11 @@ object KAlgorithms {
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 
-	fun removeAllFiles(file: KFile?): Boolean {
-		if (file == null) {
-			return false
-		}
-		return if (file.isDirectory()) {
-			val files: Array<KFile> = file.listFiles()
-			if (!isEmpty<KFile>(files)) {
-				for (f in files) {
-					removeAllFiles(f)
-				}
-			}
-			file.delete()
-		} else {
-			file.delete()
-		}
-	}
-
-	fun getFileNameWithoutExtension(f: KFile): String? {
-		return getFileNameWithoutExtension(f.name())
-	}
-
-	fun getFileNameWithoutExtension(name: String?): String? {
-		if (name != null) {
-			val index = name.lastIndexOf('.')
-			if (index != -1) {
-				return name.substring(0, index)
-			}
-		}
-		return name
-	}
-
-	fun getFileNameWithoutExtensionAndRoadSuffix(fileName: String?): String? {
-		val name:String? = getFileNameWithoutExtension(fileName)
-		return if (name!!.endsWith(".road")) name.substring(0, name.lastIndexOf(".road")) else name
-	}
-
 	fun capitalizeFirstLetter(s: String?): String? {
 		return if (!s.isNullOrEmpty()) {
 			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
 		} else {
 			s
-		}
-	}
-
-	fun objectEquals(a: Any?, b: Any?): Boolean {
-		return if (a == null) {
-			b == null
-		} else {
-			a == b
 		}
 	}
 }

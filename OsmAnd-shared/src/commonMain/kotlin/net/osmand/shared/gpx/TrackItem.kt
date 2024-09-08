@@ -1,8 +1,7 @@
 package net.osmand.shared.gpx
 
-import kotlinx.serialization.Serializable
 import net.osmand.shared.io.KFile
-import net.osmand.shared.util.PlatformUtil
+import net.osmand.shared.util.Localization
 
 class TrackItem {
 	val name: String
@@ -17,7 +16,7 @@ class TrackItem {
 	constructor(file: KFile) {
 		this.file = file
 		path = file.absolutePath()
-		name = KGpxUiHelper.getGpxTitle(file.name())
+		name = GpxHelper.getGpxTitle(file.name())
 		lastModified = file.lastModified()
 	}
 
@@ -25,12 +24,12 @@ class TrackItem {
 		if (gpxFile.showCurrentTrack) {
 			file = null
 			path = gpxFile.path
-			name = PlatformUtil.getStringResource("shared_string_currently_recording_track")
+			name = Localization.getString("shared_string_currently_recording_track")
 			lastModified = gpxFile.modifiedTime
 		} else {
 			file = KFile(gpxFile.path)
 			path = file.absolutePath()
-			name = KGpxUiHelper.getGpxTitle(file.name())
+			name = GpxHelper.getGpxTitle(file.name())
 			lastModified = file.lastModified()
 		}
 	}

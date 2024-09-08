@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
@@ -28,10 +27,9 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.shared.gpx.KGpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,7 +66,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return KGpxUiHelper.INSTANCE.getGpxTitle(file.getName());
+		return GpxHelper.INSTANCE.getGpxTitle(file.getName());
 	}
 
 	@Override

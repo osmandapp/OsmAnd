@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.filters.TracksGroup;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 

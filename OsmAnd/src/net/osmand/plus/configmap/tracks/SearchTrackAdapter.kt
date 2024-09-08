@@ -23,7 +23,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache
-import net.osmand.shared.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.util.Algorithms
 import java.util.Collections

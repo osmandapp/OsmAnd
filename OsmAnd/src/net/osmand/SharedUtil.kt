@@ -4,11 +4,10 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.gpx.GPXFile
 import net.osmand.gpx.GPXUtilities
-import net.osmand.plus.settings.enums.MetricsConstants
+import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.KException
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.filters.KMetricsConstants
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxUtilities
@@ -608,18 +607,6 @@ object SharedUtil {
 		val extensionsToRead = source.extensionsToRead
 		if (extensionsToRead.isNotEmpty()) {
 			destination.getExtensionsToWrite().putAll(extensionsToRead)
-		}
-	}
-
-	@JvmStatic
-	fun kMetricConstants(mc: MetricsConstants): KMetricsConstants {
-		return when(mc) {
-			MetricsConstants.KILOMETERS_AND_METERS -> KMetricsConstants.KILOMETERS_AND_METERS
-			MetricsConstants.MILES_AND_FEET -> KMetricsConstants.MILES_AND_FEET
-			MetricsConstants.MILES_AND_METERS -> KMetricsConstants.MILES_AND_METERS
-			MetricsConstants.MILES_AND_YARDS -> KMetricsConstants.MILES_AND_YARDS
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> KMetricsConstants.NAUTICAL_MILES_AND_METERS
-			MetricsConstants.NAUTICAL_MILES_AND_FEET -> KMetricsConstants.NAUTICAL_MILES_AND_FEET
 		}
 	}
 }

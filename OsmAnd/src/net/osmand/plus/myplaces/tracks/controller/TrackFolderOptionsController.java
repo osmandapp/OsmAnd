@@ -23,7 +23,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
-import net.osmand.shared.filters.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;

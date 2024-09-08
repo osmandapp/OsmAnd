@@ -61,7 +61,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
-import net.osmand.shared.gpx.KGpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
@@ -515,7 +515,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void bindGpxTrack(@NonNull View view, @NonNull QuickSearchListItem listItem, @Nullable GPXInfo gpxInfo) {
 		SearchResult searchResult = listItem.getSearchResult();
-		String gpxTitle = KGpxUiHelper.INSTANCE.getGpxTitle(searchResult.localeName);
+		String gpxTitle = GpxHelper.INSTANCE.getGpxTitle(searchResult.localeName);
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		GpxUiHelper.updateGpxInfoView(app, view, gpxTitle, listItem.getIcon(), gpxInfo);
 	}

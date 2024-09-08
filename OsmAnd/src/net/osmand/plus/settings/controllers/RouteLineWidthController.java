@@ -23,7 +23,7 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
-import net.osmand.shared.data.KWidthMode;
+import net.osmand.shared.gpx.data.KWidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.UiUtilities;

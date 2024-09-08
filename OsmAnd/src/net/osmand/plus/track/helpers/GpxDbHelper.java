@@ -10,15 +10,15 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.shared.gpx.DataItem;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDatabase;
-import net.osmand.shared.gpx.GpxDatabase.StringIntPair;
+import net.osmand.shared.data.StringIntPair;
 import net.osmand.shared.gpx.GpxDbUtils;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -181,18 +181,14 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	public List<kotlin.Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	public List<StringIntPair> getStringIntItemsCollection(@NonNull String columnName,
 	                                                               boolean includeEmptyValues,
 	                                                               boolean sortByName,
 	                                                               boolean sortDescending) {
-		List<kotlin.Pair<String, Integer>> res = new ArrayList<>();
-		for (StringIntPair item : database.getStringIntItemsCollection(columnName,
+		return database.getStringIntItemsCollection(columnName,
 				includeEmptyValues,
 				sortByName,
-				sortDescending)) {
-			res.add(new kotlin.Pair<>(item.getString(), item.getInteger()));
-		}
-		return res;
+				sortDescending);
 	}
 
 	public long getTracksMinCreateDate() {

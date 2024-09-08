@@ -1,6 +1,5 @@
 package net.osmand.shared.util
 
-import kotlinx.datetime.Instant
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
@@ -26,10 +25,6 @@ actual object PlatformUtil {
 
 		this.sqliteApi = SQLiteAPIImpl()
 		this.xmlFactoryApi = xmlFactoryApi
-	}
-
-	actual fun currentTimeMillis(): Long {
-		return (NSDate().timeIntervalSince1970 * 1000).toLong()
 	}
 
 	actual fun getAppDir(): KFile {
@@ -77,31 +72,7 @@ actual object PlatformUtil {
 		}
 	}
 
-	actual fun getStringResource(stringId: String): String {
-		TODO("Not yet implemented")
-	}
-
-	actual fun formatDate(date: Instant, pattern: String): String {
-		TODO("Not yet implemented")
-	}
-
 	actual fun getOsmAndContext(): OsmAndContext {
-		TODO("Not yet implemented")
-	}
-
-	actual fun getFileSeparator(): String {
-		TODO("Not yet implemented")
-	}
-
-	actual fun getFileLength(file: KFile): Long {
-		TODO("Not yet implemented")
-	}
-
-	actual fun renameFile(src: String, dest: String): Boolean {
-		TODO("Not yet implemented")
-	}
-
-	actual fun createFile(path: String): Boolean {
 		TODO("Not yet implemented")
 	}
 }
