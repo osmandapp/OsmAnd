@@ -36,14 +36,14 @@ class FragmentFactoryAndPrepareShow implements FragmentFactory, PrepareShow {
 
 	private static void configureFragment(final Fragment fragment, final PreferenceWithHost src) {
 		// FK-TODO: DRY: copied from MainSettingsFragment.onPreferenceClick():
-		if (src.preference.getParent() != null && APP_PROFILES.equals(src.preference.getParent().getKey())) {
-			final ApplicationMode appMode = ApplicationMode.valueOfStringKey(src.preference.getKey(), null);
+		if (src.preference().getParent() != null && APP_PROFILES.equals(src.preference().getParent().getKey())) {
+			final ApplicationMode appMode = ApplicationMode.valueOfStringKey(src.preference().getKey(), null);
 			final Bundle args = new Bundle();
 			if (appMode != null) {
 				args.putString(APP_MODE_KEY, appMode.getStringKey());
 			}
 			fragment.setArguments(args);
-		} else if (src.host instanceof final BaseSettingsFragment baseSettingsFragment) {
+		} else if (src.host() instanceof final BaseSettingsFragment baseSettingsFragment) {
 			fragment.setArguments(baseSettingsFragment.buildArguments());
 		}
 	}
