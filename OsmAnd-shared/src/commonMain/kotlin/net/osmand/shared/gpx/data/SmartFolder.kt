@@ -11,7 +11,7 @@ import net.osmand.shared.util.KCollectionUtils
 class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
 
 	@Transient
-	private var trackItems: MutableList<TrackItem>? = null
+	private var trackItems: List<TrackItem>? = null
 
 	constructor() : this("") {
 	}
@@ -29,9 +29,9 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return folderName
 	}
 
-	override fun getTrackItems(): MutableList<TrackItem> {
-		var trackItems:MutableList<TrackItem>? = this.trackItems
-		if(trackItems == null) {
+	override fun getTrackItems(): List<TrackItem> {
+		var trackItems = this.trackItems
+		if (trackItems == null) {
 			trackItems = ArrayList()
 			this.trackItems = trackItems
 		}

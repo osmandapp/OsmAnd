@@ -16,5 +16,6 @@ interface OsmAndContext {
 	fun getMetricSystem(): MetricsConstants?
 
 	fun isGpxFileVisible(path: String): Boolean
-	fun getNameStringMatcher(name: String): KStringMatcher
+
+	fun getNameStringMatcher(name: String, mode: KStringMatcherMode): KStringMatcher
 }

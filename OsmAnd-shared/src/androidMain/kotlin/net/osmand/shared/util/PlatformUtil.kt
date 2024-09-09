@@ -5,8 +5,6 @@ import net.osmand.shared.KException
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
-import net.osmand.shared.io.KFile
-import java.io.File
 import java.lang.ref.WeakReference
 
 actual object PlatformUtil {

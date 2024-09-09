@@ -41,6 +41,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 			val parentFolder = getParentFolder()
 			return if (parentFolder != null && !parentFolder.isRootFolder) parentFolder.relativePath + "/" + dirName else dirName
 		}
+
 	val isRootFolder: Boolean
 		get() = getParentFolder() == null
 
@@ -89,19 +90,21 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun getFlattenedSubFolders(): List<TrackFolder> {
+		var flattenedSubFolders = this.flattenedSubFolders
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = ArrayList<TrackFolder>()
+			flattenedSubFolders = ArrayList()
 			val stack = ArrayDeque<TrackFolder>()
 			stack.addLast(this)
 			while (!stack.isEmpty()) {
 				val current: TrackFolder = stack.removeLast()
-				flattenedSubFolders!!.addAll(current.getSubFolders())
+				flattenedSubFolders.addAll(current.getSubFolders())
 				for (folder in current.getSubFolders()) {
 					stack.addLast(folder)
 				}
 			}
+			this.flattenedSubFolders = flattenedSubFolders
 		}
-		return flattenedSubFolders!!
+		return flattenedSubFolders
 	}
 
 	override fun getFolderAnalysis(): TrackFolderAnalysis {

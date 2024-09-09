@@ -1,21 +1,19 @@
 package net.osmand.shared.gpx.filters
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 
-class DateTrackFilter(
-	trackFilterType: TrackFilterType,
-	dateFrom: Long,
-	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(trackFilterType, filterChangedListener) {
+class DateTrackFilter(trackFilterType: TrackFilterType, dateFrom: Long,
+	filterChangedListener: FilterChangedListener?) : BaseTrackFilter(trackFilterType, filterChangedListener) {
+
 	var initialValueFrom = dateFrom
-	var initialValueTo = Clock.System.now().toEpochMilliseconds()
+	var initialValueTo = currentTimeMillis()
 
 	private var initialValueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom).toLocalDateTime(TimeZone.currentSystemDefault())
 	private var initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo).toLocalDateTime(TimeZone.currentSystemDefault())

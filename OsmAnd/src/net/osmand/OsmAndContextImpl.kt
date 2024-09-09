@@ -4,6 +4,7 @@ import net.osmand.IndexConstants.GPX_IMPORT_DIR
 import net.osmand.IndexConstants.GPX_INDEX_DIR
 import net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR
 import net.osmand.plus.OsmandApplication
+import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.io.KFile
@@ -34,14 +35,21 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		return false
 	}
 
-	override fun getNameStringMatcher(name: String): KStringMatcher {
+	override fun getNameStringMatcher(name: String, mode: KStringMatcherMode): KStringMatcher {
 		return object : KStringMatcher {
-			private val sm: CollatorStringMatcher =
-				CollatorStringMatcher(name, CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+			private val sm: CollatorStringMatcher = CollatorStringMatcher(name, getStringMatcherMode(mode))
 
-			override fun matches(name: String): Boolean {
-				return sm.matches(name)
-			}
+			private fun getStringMatcherMode(mode: KStringMatcherMode): CollatorStringMatcher.StringMatcherMode =
+				when (mode) {
+					KStringMatcherMode.CHECK_ONLY_STARTS_WITH -> CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH
+					KStringMatcherMode.CHECK_STARTS_FROM_SPACE -> CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE
+					KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING -> CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING
+					KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+					KStringMatcherMode.CHECK_CONTAINS -> CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS
+					KStringMatcherMode.CHECK_EQUALS -> CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS
+				}
+
+			override fun matches(name: String): Boolean = sm.matches(name)
 		}
 	}
 }

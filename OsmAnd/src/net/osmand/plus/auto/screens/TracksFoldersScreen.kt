@@ -19,6 +19,7 @@ import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.FileUtils
+import net.osmand.shared.extensions.kFile
 
 class TracksFoldersScreen(
     carContext: CarContext,
@@ -56,7 +57,7 @@ class TracksFoldersScreen(
     }
 
     private fun reloadTracks() {
-        val folder = TrackFolder(SharedUtil.kFile(FileUtils.getExistingDir(app, GPX_INDEX_DIR)), null)
+        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR).kFile(), null)
         asyncLoader = TrackFolderLoaderTask(app, folder, this)
         asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
     }

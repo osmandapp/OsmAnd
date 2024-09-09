@@ -5,6 +5,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.api.KStateChangedListener
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
@@ -17,9 +18,9 @@ import net.osmand.shared.util.PlatformUtil
 
 class SmartFolderHelper {
 
-	private var smartFolderCollection: MutableList<SmartFolder> = ArrayList()
+	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
-	private var updateListeners: MutableList<SmartFolderUpdateListener> = mutableListOf()
+	private var updateListeners: List<SmartFolderUpdateListener> = listOf()
 	private var isWritingSettings = false
 	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
 	private val settingsChangedListener = object : KStateChangedListener<String> {
@@ -101,9 +102,9 @@ class SmartFolderHelper {
 	fun saveNewSmartFolder(name: String, filters: MutableList<BaseTrackFilter>?) {
 		val enabledFilters = getEnabledFilters(filters)
 		val newFolder = SmartFolder(name)
-		newFolder.creationTime = Clock.System.now().toEpochMilliseconds()
+		newFolder.creationTime = currentTimeMillis()
 		newFolder.filters = enabledFilters
-		smartFolderCollection.add(newFolder)
+		KCollectionUtils.addToList(smartFolderCollection, newFolder)
 		updateSmartFolderItems(newFolder)
 		writeSettings()
 		notifyFolderCreatedListeners(newFolder)
@@ -153,8 +154,7 @@ class SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json =
-			Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
 		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}

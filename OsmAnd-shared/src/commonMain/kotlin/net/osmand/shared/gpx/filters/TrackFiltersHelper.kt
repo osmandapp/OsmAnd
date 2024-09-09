@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.datetime.Clock
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.filters.FilterType.TEXT
 import net.osmand.shared.gpx.filters.FilterType.RANGE
@@ -100,7 +101,7 @@ object TrackFiltersHelper {
 			DATE_RANGE -> {
 				createDateFilter(
 					trackFilterType,
-					Clock.System.now().toEpochMilliseconds(),
+					currentTimeMillis(),
 					filterChangedListener)
 			}
 
@@ -122,7 +123,7 @@ object TrackFiltersHelper {
 	}
 
 	fun getFilterClass(trackFilterType: TrackFilterType): KClass<out BaseTrackFilter> {
-		var filterClass = when (trackFilterType.filterType) {
+		val filterClass = when (trackFilterType.filterType) {
 			TEXT -> {
 				TextTrackFilter::class
 			}

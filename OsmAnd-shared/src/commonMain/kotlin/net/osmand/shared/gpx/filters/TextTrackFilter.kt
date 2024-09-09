@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
+import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KStringMatcher
@@ -28,25 +29,19 @@ class TextTrackFilter(
 	}
 
 	private fun createMatcher(): KStringMatcher {
-		return PlatformUtil.getOsmAndContext().getNameStringMatcher(value.trim { it <= ' ' })
+		return PlatformUtil.getOsmAndContext().getNameStringMatcher(value.trim { it <= ' ' },
+			KStringMatcherMode.CHECK_CONTAINS)
 	}
 
-	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		if (nameMatcher == null) {
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean = nameMatcher.matches(trackItem.name)
+
+	override fun isEnabled(): Boolean = !KAlgorithms.isEmpty(value)
+
+	override fun initWithValue(value: BaseTrackFilter) {
+		if (value is TextTrackFilter) {
+			this.value = value.value
 			updateMatcher()
-		}
-		return nameMatcher.matches(trackItem.name)
-	}
-
-	override fun isEnabled(): Boolean {
-		return !KAlgorithms.isEmpty(value)
-	}
-
-	override fun initWithValue(sourseFilter: BaseTrackFilter) {
-		if (sourseFilter is TextTrackFilter) {
-			this.value = sourseFilter.value
-			updateMatcher()
-			super.initWithValue(sourseFilter)
+			super.initWithValue(value)
 		}
 	}
 
@@ -56,7 +51,5 @@ class TextTrackFilter(
 				KAlgorithms.stringsEqual(other.value, value)
 	}
 
-	override fun hashCode(): Int {
-		return value.hashCode()
-	}
+	override fun hashCode(): Int = value.hashCode()
 }

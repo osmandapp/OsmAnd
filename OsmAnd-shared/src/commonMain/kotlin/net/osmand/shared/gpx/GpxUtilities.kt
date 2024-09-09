@@ -965,9 +965,6 @@ object GpxUtilities {
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
 			if (gpxFile.error != null) {
-				if(gpxFile.error!!.message?.contains("/hr read: body") == true){
-					KFile(gpxFile.path).delete()
-				}
 				log.info("Error reading gpx ${gpxFile.path}")
 			}
 			gpxFile

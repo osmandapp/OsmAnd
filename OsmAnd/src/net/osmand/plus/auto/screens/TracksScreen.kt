@@ -29,6 +29,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.jFile
 import net.osmand.shared.gpx.GpxDataItem
 import net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.shared.gpx.GpxUtilities
@@ -181,7 +182,7 @@ class TracksScreen(
         result.objectType = ObjectType.GPX_TRACK
         result.`object` = trackItem
 	    val file = trackItem.getFile()
-        result.relatedObject = GPXInfo(trackItem.name, if(file != null) SharedUtil.jFile(file) else null)
+	    result.relatedObject = GPXInfo(trackItem.name, file?.jFile())
         openRoutePreview(settingsAction, result)
     }
 }
