@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -20,6 +21,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+
+import java.io.IOException;
 
 public class MapAppInitializeListener implements AppInitializeListener {
 
@@ -61,8 +64,15 @@ public class MapAppInitializeListener implements AppInitializeListener {
 				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
 			}
 		}
-		if (event == ROUTING_CONFIG_INITIALIZED && app.getRegions() != null) {
-			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+		if (event == ROUTING_CONFIG_INITIALIZED) {
+			boolean hasRegions = false;
+			try {
+				hasRegions = PlatformUtil.getOsmandRegions() != null;
+			} catch (IOException ignore) {
+			}
+			if (hasRegions) {
+				activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+			}
 		}
 		if (event == BROUTER_INITIALIZED) {
 			activity.getMapActions().updateDrawerMenu();

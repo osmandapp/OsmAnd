@@ -1329,7 +1329,7 @@
     <string name="map_widget_top">Рядок стану</string>
     <string name="map_widget_right">Панель праворуч</string>
     <string name="map_widget_left">Панель ліворуч</string>
-    <string name="shared_string_show">Показати</string>
+    <string name="shared_string_show">Показ</string>
     <string name="configure_map">Налаштувати мапу</string>
     <string name="search_radius_proximity">В межах</string>
     <string name="anonymous_user_hint">Анонімний користувач не в змозі:
@@ -4950,7 +4950,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
-    <string name="shared_string_open">Відкритий</string>
+    <string name="shared_string_open">Відчинено</string>
     <string name="shared_string_purchased_on">Придбано</string>
     <string name="shared_string_expires">Спливає</string>
     <string name="choose_what_to_sync">Виберіть, що синхронізувати</string>
@@ -5871,4 +5871,22 @@
     <string name="battery_saving_mode">Режим енергоощадження</string>
     <string name="delete_widget_description">Цей віджет буде видалено. Ви можете відновити його пізніше у Налаштуваннях екрана.</string>
     <string name="route_roundabout_exit">Поверніть на %1$d з\'їзд</string>
+    <string name="rendering_attr_alpineHiking_name">Рівень складності пішохідних маршрутів</string>
+    <string name="app_mode_suv">Бездоріжжя</string>
+    <string name="graph_axis">Вісь графіка</string>
+    <string name="y_axis_description">Виберіть до двох варіантів для осі Y.</string>
+    <string name="quick_action_previous_screen_desc">Перемикач для переходу на попередній екран.</string>
+    <string name="quick_action_previous_screen_title">Попередній екран</string>
+    <string name="quick_action_verb_navigate">Навігація</string>
+    <string name="quick_action_drawer_desc">Перемикач для показу або приховування бічного меню.</string>
+    <string name="quick_action_drawer_title">Бічне меню</string>
+    <string name="quick_action_search_view_desc">Перемикач для відкриття або закриття перегляду пошуку.</string>
+    <string name="quick_action_search_view_title">Показ пошуку</string>
+    <string name="quick_action_navigation_view_title">Показ навігації</string>
+    <string name="quick_action_switch_compass_desc">Перемикач орієнтації мапи.</string>
+    <string name="shared_string_interface">Інтерфейс</string>
+    <string name="quick_action_navigation_view_desc">Перемикач для відкриття або закриття навігації.</string>
+    <string name="corner_radius">Радіус кутів</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="background_opacity">Непрозорість тла</string>
 </resources>

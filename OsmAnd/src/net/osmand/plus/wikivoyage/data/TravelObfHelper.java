@@ -17,10 +17,17 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_ICONS;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_NAMES;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
+import static net.osmand.shared.gpx.primitives.GpxExtensions.OBF_GPX_EXTENSION_TAG_PREFIX;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
@@ -56,9 +63,12 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.GpxExtensions;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.util.KAlgorithms;
 import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -305,7 +315,9 @@ public class TravelObfHelper implements TravelHelper {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				for (String filterSubcategory : filterSubcategory) {
-					return subcategory.equals(filterSubcategory);
+					if (subcategory.equals(filterSubcategory)) {
+						return true;
+					}
 				}
 				return false;
 			}
@@ -1062,7 +1074,12 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private synchronized GpxFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
+		Map<String, String> gpxFileExtensions = new HashMap<>();
 		List<Amenity> pointList = new ArrayList<>();
+		List<String> pgNames = new ArrayList<>();
+		List<String> pgIcons = new ArrayList<>();
+		List<String> pgColors = new ArrayList<>();
+		List<String> pgBackgrounds = new ArrayList<>();
 		for (BinaryMapIndexReader reader : readers) {
 			try {
 				if (article.file != null && !article.file.equals(reader.getFile())) {
@@ -1097,12 +1114,33 @@ public class TravelObfHelper implements TravelHelper {
 
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-						getSearchFilter(article.getPointFilterString()),
+						getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
 						new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
-									if (article.getPointFilterString().equals(ROUTE_TRACK_POINT)) {
+									if (ROUTE_TRACK.equals(amenity.getSubType())) {
+										for (String key : amenity.getAdditionalInfoKeys()) {
+											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
+												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
+												String val = amenity.getAdditionalInfo(key);
+												gpxFileExtensions.put(tag, val);
+											} else if (key.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
+												final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
+												String joinedValues = amenity.getAdditionalInfo(key);
+												List<String> values = Arrays.asList(joinedValues.split(delimiter));
+												if (OBF_POINTS_GROUPS_NAMES.equals(key)) {
+													pgNames.addAll(values);
+												} else if (OBF_POINTS_GROUPS_ICONS.equals(key)) {
+													pgIcons.addAll(values);
+												} else if (OBF_POINTS_GROUPS_COLORS.equals(key)) {
+													pgColors.addAll(values);
+												} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(key)) {
+													pgBackgrounds.addAll(values);
+												}
+											}
+										}
+									} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
 										pointList.add(amenity);
 									} else {
 										String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
@@ -1170,7 +1208,9 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.getTracks().add(track);
 			gpxFile.setRef(article.ref);
 			gpxFile.setHasAltitude(hasAltitude);
+			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions);
 		}
+		reconstructPointsGroups(gpxFile, pgNames, pgIcons, pgColors, pgBackgrounds); // create groups before points
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {
 				gpxFile = new GpxFile(title, article.getLang(), article.getContent());
@@ -1186,6 +1226,21 @@ public class TravelObfHelper implements TravelHelper {
 		return gpxFile;
 	}
 
+	private void reconstructPointsGroups(GpxFile gpxFile, List<String> pgNames, List<String> pgIcons,
+										 List<String> pgColors, List<String> pgBackgrounds) {
+		if (pgNames.size() == pgIcons.size() &&
+				pgIcons.size() == pgColors.size() && pgColors.size() == pgBackgrounds.size()) {
+			for (int i = 0; i < pgNames.size(); i++) {
+				String name = pgNames.get(i);
+				String icon = pgIcons.get(i);
+				String background = pgBackgrounds.get(i);
+				int color = KAlgorithms.INSTANCE.parseColor(pgColors.get(i));
+				if (name.isEmpty()) name = GpxFile.DEFAULT_WPT_GROUP_NAME; // follow current default
+				GpxUtilities.PointsGroup pg = new GpxUtilities.PointsGroup(name, icon, background, color);
+				gpxFile.addPointsGroup(pg);
+			}
+		}
+	}
 
 	@NonNull
 	public String createTitle(@NonNull String name) {

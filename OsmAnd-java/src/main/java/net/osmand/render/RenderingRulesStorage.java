@@ -461,7 +461,7 @@ public class RenderingRulesStorage {
 					if (!renderingConstants.containsKey(cv) && !renderingAttributes.containsKey(cv) && !renderingAssociations.containsKey(cv)) {
 						throw new IllegalStateException("Rendering constant or attribute '" + cv + "' was not specified.");
 					}
-					if(renderingConstants.containsKey(cv)){
+					if (renderingConstants.containsKey(cv)) {
 						vl = renderingConstants.get(cv);
 					}
 				}
@@ -587,10 +587,12 @@ public class RenderingRulesStorage {
 	}
 
 	public void printDebug(int state, PrintStream out){
-		for(int key : tagValueGlobalRules[state].keys()) {
-			RenderingRule rr = tagValueGlobalRules[state].get(key);
-			out.print("\n\n"+getTagString(key) + " : " + getValueString(key) + "\n ");
-			printRenderingRule(" ", rr, out);
+		if (tagValueGlobalRules[state] != null) {
+			for (int key : tagValueGlobalRules[state].keys()) {
+				RenderingRule rr = tagValueGlobalRules[state].get(key);
+				out.print("\n\n" + getTagString(key) + " : " + getValueString(key) + "\n ");
+				printRenderingRule(" ", rr, out);
+			}
 		}
 	}
 	
@@ -611,7 +613,7 @@ public class RenderingRulesStorage {
 			File stylesDir = new File(System.getProperty("repo.dir") + "/resources/rendering_styles/");
 			defaultIS = new FileInputStream(new File(stylesDir, "default.render.xml"));
 //			styleName = "default";
-			styleName = "topo";
+			styleName = "test";
 			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
 		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
@@ -664,7 +666,7 @@ public class RenderingRulesStorage {
 //			System.out.println(p.getCategory() + " " + p.getName() + " " + p.getAttrName());
 //		}
 		printAllRules(storage);
-//		testSearch(storage);
+		testSearch(storage);
 	}
 
 	protected static void testSearch(RenderingRulesStorage storage) {
@@ -672,15 +674,15 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "contour");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "elevation");
-					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "contourtype=10m");
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "primary");
+//					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "contourtype=10m");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
 					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
 					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
 //						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
-					searchRequest.setStringFilter(storage.PROPS.get("contourColorScheme"), "yellow");
-					searchRequest.setStringFilter(storage.PROPS.get("contourLines"), "15");
+//					searchRequest.setStringFilter(storage.PROPS.get("contourColorScheme"), "yellow");
+//					searchRequest.setStringFilter(storage.PROPS.get("contourLines"), "15");
 					
 //					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 //						if (customProp.isBoolean()) {

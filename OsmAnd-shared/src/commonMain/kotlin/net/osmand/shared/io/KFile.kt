@@ -106,4 +106,14 @@ class KFile {
 	override fun toString(): String {
 		return path.toString()
 	}
+
+	fun getFileNameWithoutExtension(): String? {
+		return Companion.getFileNameWithoutExtension(this.name())
+	}
+
+	companion object {
+		fun getFileNameWithoutExtension(name: String?): String? {
+			return name?.substringBeforeLast(".");
+		}
+	}
 }

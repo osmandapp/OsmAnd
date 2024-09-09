@@ -42,7 +42,8 @@ public class ArrowsCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.setVisibility(View.GONE);
 	}
 

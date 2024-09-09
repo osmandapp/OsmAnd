@@ -74,6 +74,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<Integer> tx;
 		List<Integer> ty;
 		List<Float> heights;
+		List<Float> distances;
 		GeometryWayStyle<?> style;
 
 		public DrawPathData31(@NonNull List<Integer> indexes,
@@ -327,6 +328,18 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		builder.buildAndAddToCollection(collection);
 	}
 
+	protected void updateVectorLine(@NonNull VectorLinesCollection collection,
+									int lineId, float startingDistance) {
+		QListVectorLine lines = collection.getLines();
+		for (int i = 0; i < lines.size(); i++) {
+			VectorLine line = lines.get(i);
+			if (line.getLineId() == lineId) {
+				line.setStartingDistance(startingDistance);
+				return;
+			}
+		}
+	}
+
 	private void setupColorization(@NonNull VectorLine line, int colorizationScheme, QListFColorARGB colorizationMapping, QListFColorARGB outlineColorizationMapping, boolean hasColorizationMapping, boolean hasOutlineColorizationMapping, int color, int outlineColor) {
 		line.setColorizationScheme(colorizationScheme);
 		if (hasColorizationMapping) {
@@ -383,6 +396,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		if (!dataArr.isEmpty() && prevStyle != null) {
 			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 		}
+	}
+
+	public void updatePath(@NonNull VectorLinesCollection collection, float startingDistance) {
+		updateVectorLine(collection, LINE_ID, startingDistance);
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,

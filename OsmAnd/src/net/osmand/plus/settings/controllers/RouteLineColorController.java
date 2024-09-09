@@ -153,7 +153,8 @@ public class RouteLineColorController extends ColoringStyleCardController
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
 		BaseCard card = getContentCardForSelectedState(activity);
 		View cardView = card.getView() != null ? card.getView() : card.build(activity);

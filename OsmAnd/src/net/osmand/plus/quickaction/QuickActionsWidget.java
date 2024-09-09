@@ -89,7 +89,9 @@ public class QuickActionsWidget extends LinearLayout {
 
 	public void updateActions() {
 		QuickActionButtonState buttonState = selectedButton.getButtonState();
-		setActions(new ArrayList<>(buttonState.getQuickActions()));
+		if (buttonState != null) {
+			setActions(new ArrayList<>(buttonState.getQuickActions()));
+		}
 	}
 
 	public void setActions(@NonNull List<QuickAction> actions) {
@@ -295,7 +297,7 @@ public class QuickActionsWidget extends LinearLayout {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 
-		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton.getView());
+		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton);
 
 		int centerX = getWidth() / 2;
 		int centerY = getHeight() / 2;

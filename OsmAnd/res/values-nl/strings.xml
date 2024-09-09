@@ -3953,7 +3953,7 @@
     <string name="activity_type_running_name">Joggen</string>
     <string name="activity_type_walking_name">Wandelen</string>
     <string name="activity_type_offroad_name">Off-road</string>
-    <string name="activity_type_motorbike_name">Bromfiets</string>
+    <string name="activity_type_motorbike_name">Motorfiets</string>
     <string name="activity_type_car_name">Auto\'s</string>
     <string name="temporary_conditional_routing_descr">Gebruik de wegen beperkingen die nu actief zijn op de kaart</string>
     <string name="routing_attr_short_way_description">Geoptimaliseerde kortere route (energiebesparing)</string>
@@ -5521,7 +5521,7 @@
     <string name="standard_maps">Standaardkaarten</string>
     <string name="free_versions">Gratis versies</string>
     <string name="key_assignments_already_cleared_message">Alle toetstoewijzingen zijn al gewist</string>
-    <string name="may_be_used_if_there_is_shortcut"></string>
+    <string name="may_be_used_if_there_is_shortcut">Kan gebruikt worden bij route-afsnijding</string>
     <string name="hillshade_slope">Heuvelschaduw, Helling</string>
     <string name="key_event_category_actions">Acties</string>
     <string name="key_event_action_move_right">Beweeg naar rechts</string>
@@ -5689,4 +5689,92 @@
     <string name="with_waypoints">Met tussenstops</string>
     <string name="delete_smart_folder_dialog_message">Hiermee wordt de slimme map \"%1$s\" verwijderd. (Tracks worden niet verwijderd.)</string>
     <string name="max_sensor_temperature">Temperatuur, maximaal</string>
+    <string name="auto_25_chars_route_tslr">Ga flauw naar rechts</string>
+    <string name="maps_and_resources">Kaarten en hulpmiddelen</string>
+    <string name="auto_25_chars_route_tsll">Ga flauw naar links</string>
+    <string name="app_mode_moped">Bromfiets</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="battery_saving_mode">Batterij-spaarstand</string>
+    <string name="quick_action_previous_screen_title">Vorig scherm</string>
+    <string name="corner_radius">Hoekstraal</string>
+    <string name="quick_action_verb_navigate">Navigeren</string>
+    <string name="background_opacity">Achtergrond-transparantie</string>
+    <string name="shared_string_setup">Instelling</string>
+    <string name="rendering_attr_padusDisplayMode_name">Openbaar gebied weergavemodus</string>
+    <string name="glide_ratio_to_target">Zweefhoek tot bestemming</string>
+    <string name="help_article_setup_a_route_name">Route opzetten</string>
+    <string name="telegram_chats">Telegram-groepen</string>
+    <string name="help_article_widgets_map_buttons_name">Kaart-knoppen</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italiaanse Alpenvereniging)</string>
+    <string name="rendering_attr_alpineHiking_name">Moeilijkheidsgraad wandelpad</string>
+    <string name="any_connected_with_device">Alle verbonden: %s</string>
+    <string name="rendering_value_sacScale_description">Zwitserse Alpenclub</string>
+    <string name="help_article_widgets_radius_ruler_name">Straal-meetlat en meetlat</string>
+    <string name="send_crash_log_descr">Bevat uitsluitend informatie over vastlopers</string>
+    <string name="average_glide_ratio">Gemiddelde zweefhoek</string>
+    <string name="routing_attr_allow_via_ferrata_name">Klettersteig / Via Ferrata</string>
+    <string name="key_event_action_emit_navigation_hint">Geef navigatie-hint</string>
+    <string name="date_of_creation">Aanmaakdatum</string>
+    <string name="map_widget_glide_average_desc">Laat de gemiddelde zweefhoek zien voor het ingestelde interval.</string>
+    <string name="map_widget_glide_target_desc">Laat de benodigde zweefhoek zien om het doel te bereiken.</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navigeer met markeringen</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigeer met een spoor</string>
+    <string name="help_article_search_search_poi_name">Zoek interessepunt (POI)</string>
+    <string name="free_versions_descr">Download en installeer gratis OsmAnd-versie</string>
+    <string name="telegram_chats_descr">Doe mee aan een van onze lokale Telegram-groepen.</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Vastloper-logs</string>
+    <string name="help_article_purchases_giveaway_name">Weggevertje</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="cloud_item_restored">%1$s is teruggezet in Cloud.</string>
+    <string name="send_logcat_log_descr">Gedetailleerd logbestand</string>
+    <string name="discard_changes_prompt">Wijzigingen annuleren?</string>
+    <string name="release_4_7">• Nieuwe \"Snelheidsmeter\" widget compatibel met Android Auto
+\n
+\n • Configureer het kaartscherm met meerdere \"Snelle Actie\"-knoppen
+\n
+\n • Verbeterde leesbaarheid van data in grafieken
+\n
+\n • Filters bij sensordata voor sporen toegevoegd
+\n
+\n • Verbeterde aanpassing van het uiterlijk van een set sporen
+\n
+\n • Ondersteuning voor extra GPX tags toegevoegd
+\n
+\n • Aanpassen \"Afstand tijdens navigatie\": kies tussen precieze of afgeronde getallen
+\n
+\n • Generieke UI voor spoorselectie
+\n
+\n • OpenStreetMap login omgezet naar OAuth 2.0
+\n
+\n</string>
+    <string name="average_glide_time_interval_desc">Geef het tijdsinterval voor de gemiddelde zweefhoek op.</string>
+    <string name="map_widget_group_glide_ratio">Zweefhoek</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="map_widget_group_glide_desc">Widgets laten de zweefhoek tot het doel of de gemiddelde zweefhoek voor de huidige tocht.</string>
+    <string name="root_folder">Hoofdmap</string>
+    <string name="release_4_6">• Android Auto: 3D-mode toegevoegd
+\n
+\n • Sporen: Filters en slimme mappen geïntroduceerd, geheugen voor grote bestanden geoptimaliseerd
+\n
+\n • Verbeterde panelen boven en onder, aangepast aan alle widgets
+\n
+\n • Verbeterd beheer van lokale hulpbronnen
+\n
+\n • Aanpasbare toewijzing knoppen voor externe bedieningselementen
+\n
+\n • Nieuwe widgets: \"Zweefhoek\" en \"Positie Zon\"
+\n
+\n • OsmAnd Cloud: Toegang tot verwijderde bestanden
+\n
+\n • Verbeterde spoorkleur in Hellings-modus met nieuwe symmetrische gradient
+\n
+\n • Problemen met transparante statusbalk opgelost
+\n
+\n • Ondersteuning voor ANT+ temperatuur-widget toegevoegd
+\n
+\n • \"Beschikbaar geheugen\" widget geïntroduceerd
+\n
+\n</string>
+    <string name="app_mode_hang_gliding">Deltavliegen</string>
 </resources>

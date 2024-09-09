@@ -5527,7 +5527,7 @@
     <string name="battery_optimization_banner_content">Bestun rafhlöðu í Android getur valdið ónákvæmni og bilum í skráðum ferlum.</string>
     <string name="battery_optimization_desc">Bestun rafhlöðu í Android getur valdið ónákvæmni og bilum í skráðum ferlum.
 \n
-\nEf þú sérð slíkt gerast, gætirðu reynt að stilla notkun rafhlöðunnar á \'Ótakmarkað\'.</string>
+\nEf þú sérð slíkt gerast, gætirðu reynt að stilla notkun rafhlöðunnar á \'Ótakmarkað.\'</string>
     <string name="osmand_cloud_deletion_all_data_warning">Öllum gögnum af OsmAnd-tölvuskýinu verður %1$s. Ekki verður átt við gögn á tækinu.</string>
     <string name="recently_visible">Nýlega sýnilegt %1$s</string>
     <string name="shared_string_limit">Takmörk</string>
@@ -5706,4 +5706,5 @@
     <string name="apply_only_to_new">Beita aðeins á nýtt</string>
     <string name="unchanged_parameter_summary">Hver ferill mun halda sínum færibreytum.</string>
     <string name="location_radius">Radíus staðsetningar</string>
+    <string name="rendering_attr_alpineHiking_name">Flokkun stíga í erfiðleikastig</string>
 </resources>

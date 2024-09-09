@@ -36,6 +36,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -52,6 +53,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private MapWidgetRegistry widgetRegistry;
 	private View rightWidgetsPanel;
 	private View leftWidgetsPanel;
+	private View topWidgetsPanel;
+	private View bottomWidgetsPanel;
 
 	private TextAlignment textAlignment;
 	private int maxRadiusInDp;
@@ -85,7 +88,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private final double[] degrees = new double[72];
 	private final String[] cardinalDirections = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
-	private final int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
+	private final int[] arcColors = {
+			Algorithms.parseColor("#00237BFF"),
+			Algorithms.parseColor("#237BFF"),
+			Algorithms.parseColor("#00237BFF")
+	};
 
 	private float cachedHeading;
 	private boolean isCarViewMap = false;
@@ -172,9 +179,13 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		if (mapActivity != null) {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
+			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
+			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
 		} else {
 			rightWidgetsPanel = null;
 			leftWidgetsPanel = null;
+			topWidgetsPanel = null;
+			bottomWidgetsPanel = null;
 		}
 	}
 
@@ -234,11 +245,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		boolean isWidgetVisible = false;
 		List<MapWidgetInfo> widgets = widgetRegistry.getWidgetInfoForType(RADIUS_RULER);
 		for (MapWidgetInfo widget : widgets) {
-			if (WidgetsPanel.RIGHT == widget.getWidgetPanel()) {
-				isWidgetVisible = isWidgetVisible(widget) && isRightPanelVisible();
-			} else {
-				isWidgetVisible = isWidgetVisible(widget) && isLeftPanelVisible();
-			}
+			isWidgetVisible = isWidgetVisible(widget) && isPanelVisible(widget.getWidgetPanel());
 			if (isWidgetVisible) break;
 		}
 		return isWidgetVisible;
@@ -248,12 +255,15 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		return widgetRegistry.isWidgetVisible(widgetInfo);
 	}
 
-	private boolean isLeftPanelVisible() {
-		return leftWidgetsPanel == null || leftWidgetsPanel.getVisibility() == View.VISIBLE;
-	}
-
-	private boolean isRightPanelVisible() {
-		return rightWidgetsPanel == null || rightWidgetsPanel.getVisibility() == View.VISIBLE;
+	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {
+		View panel = null;
+		switch (widgetsPanel) {
+			case TOP -> panel = topWidgetsPanel;
+			case BOTTOM -> panel = bottomWidgetsPanel;
+			case LEFT -> panel = leftWidgetsPanel;
+			case RIGHT -> panel = rightWidgetsPanel;
+		}
+		return panel == null || panel.getVisibility() == View.VISIBLE;
 	}
 
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {

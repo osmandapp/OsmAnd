@@ -31,13 +31,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class EditorIconController extends BaseDialogController {
 
@@ -52,44 +46,55 @@ public class EditorIconController extends BaseDialogController {
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
 
-	private final List<IconsCategory> categories = new ArrayList<>();
+	protected final List<IconsCategory> categories = new ArrayList<>();
 	private IconsCategory selectedCategory;
-	private List<String> lastUsedIcons;
+	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
 
-	private final EditorIconCardController cardController;
-	private final EditorIconScreenController screenController;
+	private EditorIconCardController cardController;
+	private EditorIconScreenController screenController;
 	private IconsPaletteElements<String> paletteElements;
 	private Fragment targetFragment;
 	private int controlsAccentColor;
 
-	public EditorIconController(@NonNull OsmandApplication app, @Nullable String selectedIconKey) {
+	public EditorIconController(@NonNull OsmandApplication app) {
 		super(app);
+	}
+
+	protected void init() {
 		initIconCategories();
-		this.selectedIconKey = selectedIconKey;
-		this.selectedCategory = findIconCategory(selectedIconKey);
+		this.selectedCategory = findIconCategory(getSelectedIconKey());
 		this.cardController = new EditorIconCardController(app, this);
 		this.screenController = new EditorIconScreenController(app, this);
 	}
 
-	private void initIconCategories() {
-		// Add "Last used" category
+	protected void initIconCategories() {
+		initLastUsedCategory();
+		initAssetsCategories();
+		initPoiPoiCategories();
+		sortCategories();
+	}
+
+	protected void initLastUsedCategory() {
 		lastUsedIcons = readLastUsedIcons();
 		if (!Algorithms.isEmpty(lastUsedIcons)) {
 			categories.add(new IconsCategory(LAST_USED_KEY, app.getString(R.string.shared_string_last_used), lastUsedIcons, true));
 		}
+	}
 
-		// Collect categories from assets
+	protected void initAssetsCategories() {
 		try {
 			categories.addAll(readCategoriesFromAssets(Arrays.asList(SPECIAL_KEY, SYMBOLS_KEY)));
 		} catch (JSONException e) {
 			LOG.error(e.getMessage());
 		}
+	}
 
-		// Collect POI type categories
+	protected void initPoiPoiCategories() {
 		categories.addAll(readOriginalPoiCategories());
+	}
 
-		// Apply appropriate order
+	protected void sortCategories() {
 		categories.sort((c1, c2) -> {
 			if (c1.isTopCategory()) {
 				return c2.isTopCategory() ? 0 : -1;
@@ -101,9 +106,9 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	private List<String> readLastUsedIcons() {
+	protected List<String> readLastUsedIcons() {
 		List<String> lastUsedIcons = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
-		if (lastUsedIcons != null)  {
+		if (lastUsedIcons != null) {
 			if (lastUsedIcons.size() > LAST_USED_ICONS_LIMIT) {
 				lastUsedIcons = lastUsedIcons.subList(0, LAST_USED_ICONS_LIMIT);
 			}
@@ -212,6 +217,10 @@ public class EditorIconController extends BaseDialogController {
 		return selectedIconKey;
 	}
 
+	public void setSelectedIconKey(@Nullable String selectedIconKey) {
+		this.selectedIconKey = selectedIconKey;
+	}
+
 	@ColorInt
 	public int getControlsAccentColor() {
 		return controlsAccentColor;
@@ -233,11 +242,14 @@ public class EditorIconController extends BaseDialogController {
 			paletteElements = new CircleIconPaletteElements<>(context, nightMode) {
 				@Override
 				protected Drawable getIconDrawable(@NonNull String iconName, boolean isSelected) {
-					int iconId = RenderingIcons.getBigIconResourceId(iconName);
+					int iconId = AndroidUtils.getDrawableId(app, iconName);
+					if (iconId <= 0) {
+						iconId = RenderingIcons.getBigIconResourceId(iconName);
+					}
 					if (iconId <= 0) {
 						iconId = R.drawable.ic_action_search_dark;
 					}
-					return getIcon(iconId, R.color.icon_color_default_light);
+					return getContentIcon(iconId);
 				}
 			};
 		}
@@ -245,11 +257,11 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	public boolean isSelectedIcon(@NonNull String iconKey) {
-		return Objects.equals(iconKey, selectedIconKey);
+		return Objects.equals(iconKey, getSelectedIconKey());
 	}
 
 	public void onIconSelectedFromPalette(@NonNull String iconKey, @Nullable String categoryKey) {
-		this.selectedIconKey = iconKey;
+		setSelectedIconKey(iconKey);
 		if (categoryKey != null) {
 			setSelectedCategory(findCategoryByKey(categoryKey));
 			cardController.updateIconsSelection();
@@ -260,7 +272,7 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	private IconsCategory findIconCategory(@Nullable String iconKey) {
+	protected IconsCategory findIconCategory(@Nullable String iconKey) {
 		if (iconKey != null) {
 			for (IconsCategory category : categories) {
 				if (category.containsIcon(iconKey)) {
@@ -295,13 +307,13 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
-	public static EditorIconController getInstance(@NonNull OsmandApplication app,
-	                                               @NonNull Fragment targetFragment,
-	                                               @Nullable String preselectedIconKey) {
+	public static EditorIconController getInstance(@NonNull OsmandApplication app, @NonNull Fragment targetFragment, @Nullable String preselectedIconKey) {
 		DialogManager dialogManager = app.getDialogManager();
 		EditorIconController controller = (EditorIconController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			controller = new EditorIconController(app, preselectedIconKey);
+			controller = new EditorIconController(app);
+			controller.setSelectedIconKey(preselectedIconKey);
+			controller.init();
 			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setTargetFragment(targetFragment);

@@ -195,12 +195,11 @@ public class DayNightHelper implements SensorEventListener {
 		if (location == null) {
 			return null;
 		}
-		return getSunriseSunset(location.getLatitude(), location.getLongitude());
+		return getSunriseSunset(location.getLatitude(), location.getLongitude(), new Date());
 	}
 
 	@NonNull
-	public SunriseSunset getSunriseSunset(double lat, double lon) {
-		Date actualTime = new Date();
+	public SunriseSunset getSunriseSunset(double lat, double lon, Date actualTime) {
 		if (lon < 0) {
 			lon = 360 + lon;
 		}

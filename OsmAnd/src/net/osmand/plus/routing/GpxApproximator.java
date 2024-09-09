@@ -86,11 +86,11 @@ public class GpxApproximator {
 		if (points == null) {
 			points = routingHelper.generateGpxPoints(env, getNewGpxApproximationContext(), locationsHolder);
 		}
-		List<GpxPoint> points = new ArrayList<>(this.points.size());
+		List<GpxPoint> pointsCopy = new ArrayList<>(this.points.size());
 		for (GpxPoint p : this.points) {
-			points.add(new GpxPoint(p));
+			pointsCopy.add(new GpxPoint(p));
 		}
-		return points;
+		return pointsCopy;
 	}
 
 	public ApplicationMode getMode() {

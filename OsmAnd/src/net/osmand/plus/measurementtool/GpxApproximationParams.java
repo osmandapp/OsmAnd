@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.LocationsHolder;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
@@ -22,7 +23,7 @@ public class GpxApproximationParams {
 	public void setTrackPoints(@NonNull List<List<WptPt>> points) {
 		List<LocationsHolder> locationHolders = new ArrayList<>();
 		for (List<WptPt> segment : points) {
-			locationHolders.add(new LocationsHolder(segment));
+			locationHolders.add(new LocationsHolder(SharedUtil.jWptPtList(segment)));
 		}
 		this.locationsHolders = locationHolders;
 	}

@@ -549,7 +549,7 @@ public class SearchPhrase {
 	}
 	
 
-	private void addResult(SearchResult res, SearchPhrase sp) {
+	public void addResult(SearchResult res, SearchPhrase sp) {
 		SearchWord sw = new SearchWord(res.wordsSpan != null ? res.wordsSpan : res.localeName.trim(), res);
 		sp.words.add(0, sw);
 	}

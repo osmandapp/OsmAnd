@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.auto.SurfaceRenderer.MIN_ALLOWED_ELEVATION_ANGLE_AA;
+import static net.osmand.plus.views.OsmandMapTileView.MIN_ALLOWED_ELEVATION_ANGLE;
+
 import android.graphics.Point;
 import android.view.Display;
 
@@ -126,11 +129,15 @@ public class OsmandMap {
 			if (navigationSession.hasStarted()) {
 				navigationSession.setMapView(mapView);
 				app.getMapViewTrackingUtilities().setMapView(mapView);
+				mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
+				mapView.adjustTiltAngle();
 			} else {
 				navigationSession.setMapView(null);
 				if (mapView.getMapActivity() == null) {
 					app.getMapViewTrackingUtilities().setMapView(null);
 				}
+				mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE);
+				mapView.adjustTiltAngle();
 			}
 		} else if (mapView.getMapActivity() == null) {
 			app.getMapViewTrackingUtilities().setMapView(null);

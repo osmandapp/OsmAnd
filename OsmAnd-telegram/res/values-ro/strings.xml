@@ -227,7 +227,7 @@
     <string name="stop_sharing_all">Partajarea este activată (dezactivați)</string>
     <string name="expire_at">Expiră</string>
     <string name="sharing_time">Timp de partajare</string>
-    <string name="gps_and_location">Poziția</string>
+    <string name="gps_and_location">Poziție</string>
     <string name="send_my_location">Trimite locația mea</string>
     <string name="send_my_location_desc">Setați intervalul minim pentru partajarea locației.</string>
     <string name="stale_location">Nu se mișcă</string>
