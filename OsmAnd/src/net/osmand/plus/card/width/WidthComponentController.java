@@ -3,7 +3,6 @@ package net.osmand.plus.card.width;
 import android.content.Context;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,7 +15,6 @@ import net.osmand.plus.card.base.slider.moded.IModedSliderController;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.data.KWidthMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +26,6 @@ public class WidthComponentController implements IModedSliderController {
 
 	private IModedSliderComponent cardInstance;
 	private OnNeedScrollListener onNeedScrollListener;
-	@ColorInt
-	private Integer iconsColor;
 	private WidthMode widthMode;
 	private int customValue;
 
@@ -73,8 +69,7 @@ public class WidthComponentController implements IModedSliderController {
 	@Override
 	public @NonNull List<SliderMode> getSliderModes() {
 		List<SliderMode> sliderModes = new ArrayList<>();
-		for (KWidthMode kWidthMode : KWidthMode.getEntries()) {
-			WidthMode widthMode = WidthMode.valueOf(kWidthMode);
+		for (WidthMode widthMode : WidthMode.values()) {
 			sliderModes.add(new SliderMode(widthMode.getIconId(), widthMode));
 		}
 		return sliderModes;

@@ -23,7 +23,6 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
-import net.osmand.shared.gpx.data.KWidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.UiUtilities;
@@ -189,14 +188,14 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 			WidthComponentController controller = getWidthComponentController();
 			return controller.getSelectedCustomValue();
 		}
-		if (cardState.getTag() instanceof KWidthMode) {
-			return ((KWidthMode) cardState.getTag()).getKey();
+		if (cardState.getTag() instanceof WidthMode) {
+			return ((WidthMode) cardState.getTag()).getKey();
 		}
 		return null;
 	}
 
 	private boolean isCustomValue(@NonNull CardState cardState) {
-		return cardState.getTag() == KWidthMode.CUSTOM;
+		return cardState.getTag() == WidthMode.CUSTOM;
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {

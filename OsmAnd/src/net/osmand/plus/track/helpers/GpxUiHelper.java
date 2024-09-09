@@ -75,6 +75,7 @@ import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -749,11 +750,8 @@ public class GpxUiHelper {
 			String date = "";
 			String size = "";
 
-			long fileSize = 0;
-			if(trackItem.getFile() != null) {
-				File file = SharedUtil.jFile(trackItem.getFile());
-				fileSize = file.length();
-			}
+			KFile file = trackItem.getFile();
+			long fileSize = file != null ? file.length() : 0;
 			if (fileSize > 0) {
 				size = AndroidUtils.formatSize(view.getContext(), fileSize + 512);
 			}

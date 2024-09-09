@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.shared.gpx.data.KWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.util.Objects;
@@ -51,15 +50,5 @@ public enum WidthMode {
 			}
 		}
 		return values()[0];
-	}
-
-	@NonNull
-	public static WidthMode valueOf(@NonNull KWidthMode kWidthMode) {
-		return switch (kWidthMode) {
-			case THIN -> THIN;
-			case MEDIUM -> MEDIUM;
-			case BOLD -> BOLD;
-			case CUSTOM -> CUSTOM;
-		};
 	}
 }

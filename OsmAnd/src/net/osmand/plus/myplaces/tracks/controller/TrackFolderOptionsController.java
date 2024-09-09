@@ -151,7 +151,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 						app.showToastMessage(R.string.file_name_containes_illegal_char);
 					} else {
 						KFile parent = trackFolder.getDirFile().getParentFile();
-						if(parent != null){
+						if (parent != null) {
 							KFile destFolder = new KFile(parent, newName);
 							if (destFolder.exists()) {
 								app.showToastMessage(R.string.file_with_name_already_exist);
