@@ -199,7 +199,7 @@ public class GpxMultiSegmentsApproximation {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
-			bestRoute = last;
+			bestRoute = last; // prefer the better end-of-the-route
 		}
 		if (bestRoute != null) {
 			wrapupRoute(gpxPoints, bestRoute, false);
@@ -353,8 +353,8 @@ public class GpxMultiSegmentsApproximation {
 		}
 		List<RouteSegmentResult> res = new ArrayList<>();
 		int startInd = 0;
-		int last = bestRoute.gpxNext();
-		// combining segments doesn't seem to have any effect on tests 
+		int last = Math.min(bestRoute.gpxNext(), gpxPoints.size() - 1);
+		// combining segments doesn't seem to have any effect on tests
 		RouteSegmentResult lastRes = null;
 		while (bestRoute != null && bestRoute.parent != null) {
 			startInd = bestRoute.gpxStart;
