@@ -74,6 +74,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
@@ -218,8 +219,8 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
 	RouteLayersHelper routeLayersHelper;
-
 	Model3dHelper model3dHelper;
+	GalleryContextHelper galleryContextHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -653,6 +654,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public Model3dHelper getModel3dHelper() {
 		return model3dHelper;
+	}
+
+	@NonNull
+	public GalleryContextHelper getGalleryContextHelper() {
+		return galleryContextHelper;
 	}
 
 	public CommandPlayer getPlayer() {

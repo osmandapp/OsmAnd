@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.MAPILLARY;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.MAPILLARY_AMENITY;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.WIKIMEDIA;
 import static net.osmand.plus.plugins.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -402,20 +404,21 @@ public abstract class ImageCard extends AbstractCard {
 		}
 	}
 
-	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
+	public static class GetImageCardsTask extends AsyncTask<Void, Void, Pair<List<ImageCard>, List<ImageCard>>> {
 
 		private final MapActivity mapActivity;
 		private final OsmandApplication app;
 		private final LatLon latLon;
 		private final Map<String, String> params;
 		private final GetImageCardsListener listener;
-		private List<ImageCard> result;
+		private Pair<List<ImageCard>, List<ImageCard>> result;
 		private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
 		public interface GetImageCardsListener {
-			void onPostProcess(List<ImageCard> cardList);
 
+			void onTaskStarted();
 			void onFinish(List<ImageCard> cardList);
+			void onMapillaryFinishFinish(List<ImageCard> cardList);
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
@@ -428,7 +431,12 @@ public abstract class ImageCard extends AbstractCard {
 		}
 
 		@Override
-		protected List<ImageCard> doInBackground(Void... voids) {
+		protected void onPreExecute() {
+			listener.onTaskStarted();
+		}
+
+		@Override
+		protected Pair<List<ImageCard>, List<ImageCard>> doInBackground(Void... voids) {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
 			ImageCardsHolder holder = new ImageCardsHolder();
 			try {
@@ -460,7 +468,7 @@ public abstract class ImageCard extends AbstractCard {
 				}
 				PluginsHelper.populateContextMenuImageCards(holder, httpPms, params, listener);
 				String response = "";
-				if (wikimediaImageList.size() < 3) {
+				if (true) {
 					response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", httpPms,
 							"Requesting location images...", false, false);
 				}
@@ -488,19 +496,18 @@ public abstract class ImageCard extends AbstractCard {
 			} catch (Exception e) {
 				LOG.error(e);
 			}
+			List<ImageCard> resultOnline = holder.getOrderedList();
+			List<ImageCard> resultMapillary = holder.getMapillaryList();
 
-			List<ImageCard> result = holder.getOrderedList();
-			if (listener != null) {
-				listener.onPostProcess(result);
-			}
-			return result;
+			return new Pair<>(resultOnline, resultMapillary);
 		}
 
 		@Override
-		protected void onPostExecute(List<ImageCard> cardList) {
+		protected void onPostExecute(Pair<List<ImageCard>, List<ImageCard>> cardList) {
 			result = cardList;
 			if (listener != null) {
-				listener.onFinish(result);
+				listener.onFinish(result.first);
+				listener.onMapillaryFinishFinish(result.second);
 			}
 		}
 	}
@@ -562,9 +569,26 @@ public abstract class ImageCard extends AbstractCard {
 		public List<ImageCard> getOrderedList() {
 			List<ImageCard> result = new ArrayList<>();
 			for (ImageCardType type : ImageCardType.values()) {
+				if (type == MAPILLARY) {
+					continue;
+				}
 				List<ImageCard> cards = cardsByType.get(type);
 				if (!Algorithms.isEmpty(cards)) {
 					result.addAll(cards);
+				}
+			}
+			return result;
+		}
+
+		@NonNull
+		public List<ImageCard> getMapillaryList() {
+			List<ImageCard> result = new ArrayList<>();
+			for (ImageCardType type : ImageCardType.values()) {
+				if (type == MAPILLARY) {
+					List<ImageCard> cards = cardsByType.get(type);
+					if (!Algorithms.isEmpty(cards)) {
+						result.addAll(cards);
+					}
 				}
 			}
 			return result;

@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_no_internet_connection">No internet connection</string>
+    <string name="no_internet_descr">Please check your connection and try again.</string>
+    <string name="no_photos_available_descr">No user photos have been added to this location yet</string>
+    <string name="no_photos_available">No photos available</string>
     <string name="app_mode_suv">SUV</string>
 	<string name="graph_axis">Graph axis</string>
 	<string name="y_axis_description">Select up to two options for Y-Axis.</string>

@@ -62,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -128,7 +129,10 @@ public class MenuBuilder {
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
+	@Nullable
+	private CardsRowBuilder mapillaryCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
+	private List<AbstractCard> mapillaryCards;
 
 	private CollapseExpandListener collapseExpandListener;
 
@@ -137,24 +141,51 @@ public class MenuBuilder {
 	private final boolean transliterateNames;
 	private final GetImageCardsListener imageCardListener = new GetImageCardsListener() {
 		@Override
-		public void onPostProcess(List<ImageCard> cardList) {
-			processOnlinePhotosCards(cardList);
+		public void onTaskStarted() {
+			if (!isHidden()) {
+				onLoadingImages(true);
+			}
 		}
 
 		@Override
 		public void onFinish(List<ImageCard> cardList) {
 			if (!isHidden()) {
+				onLoadingImages(false);
 				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
-				if (cardList.size() == 0) {
+				if (cardList.isEmpty()) {
 					cards.add(new NoImagesCard(mapActivity));
 				}
 				if (onlinePhotoCardsRow != null) {
 					onlinePhotoCardsRow.setCards(cards);
 				}
+				app.getGalleryContextHelper().setOnlinePhotoCards(cardList);
 				onlinePhotoCards = cards;
 			}
 		}
+
+		@Override
+		public void onMapillaryFinishFinish(List<ImageCard> cardList) {
+			if (!isHidden()) {
+				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
+				if (cardList.isEmpty()) {
+					cards.add(new NoImagesCard(mapActivity));
+				}
+				if (mapillaryCardsRow != null) {
+					mapillaryCardsRow.setCards(cards);
+				}
+				mapillaryCards = cards;
+			}
+		}
 	};
+
+	private void onLoadingImages(boolean loading){
+		if (onlinePhotoCardsRow != null) {
+			onlinePhotoCardsRow.onLoadingImage(loading);
+		}
+		if (mapillaryCardsRow != null) {
+			mapillaryCardsRow.onLoadingImage(loading);
+		}
+	}
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -287,6 +318,11 @@ public class MenuBuilder {
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
+
+		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
+		if (plugin != null) {
+			buildMapillaryRow(view);
+		}
 	}
 
 	private boolean showTransportRoutes() {
@@ -310,6 +346,8 @@ public class MenuBuilder {
 	void onClose() {
 		onlinePhotoCardsRow = null;
 		onlinePhotoCards = null;
+		mapillaryCardsRow = null;
+		mapillaryCards = null;
 		clearPluginRows();
 	}
 
@@ -434,33 +472,57 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestPhotosRow(View view) {
-		if (!app.getSettings().isInternetConnectionAvailable()) {
-			return;
-		}
-
 		boolean needUpdateOnly = onlinePhotoCardsRow != null && onlinePhotoCardsRow.getMenuBuilder() == this;
-		onlinePhotoCardsRow = new CardsRowBuilder(this, view, false);
-		onlinePhotoCardsRow.build();
+		onlinePhotoCardsRow = new CardsRowBuilder(this);
+		onlinePhotoCardsRow.build(true, app.getGalleryContextHelper(),
+				getApplication().getDaynightHelper().isNightModeForMapControls());
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(
 				new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 						LinearLayout.LayoutParams.WRAP_CONTENT));
 		parent.setOrientation(LinearLayout.VERTICAL);
-		parent.addView(onlinePhotoCardsRow.getContentView());
-		CollapsableView collapsableView = new CollapsableView(parent, this, app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
+		parent.addView(onlinePhotoCardsRow.getGalleryView());
+		CollapsableView collapsableView = new CollapsableView(parent, this, false);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && onlinePhotoCards == null) {
 				startLoadingImages();
 			}
 		});
-		buildRow(view, R.drawable.ic_action_photo_dark, null, app.getString(R.string.online_photos), 0, true,
+		buildRow(view, R.drawable.ic_action_photo, null, app.getString(R.string.online_photos), 0, true,
 				collapsableView, false, 1, false, null, false);
+		collapsableView.setCollapsed(false);
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		} else if (!collapsableView.isCollapsed()) {
 			startLoadingImages();
 		}
+	}
+
+	protected void buildMapillaryRow(View view) {
+		boolean needUpdateOnly = mapillaryCardsRow != null && mapillaryCardsRow.getMenuBuilder() == this;
+		mapillaryCardsRow = new CardsRowBuilder(this);
+		mapillaryCardsRow.build(false, app.getGalleryContextHelper(),
+				getApplication().getDaynightHelper().isNightModeForMapControls());
+		LinearLayout parent = new LinearLayout(view.getContext());
+		parent.setLayoutParams( new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+		parent.setOrientation(LinearLayout.VERTICAL);
+		parent.addView(mapillaryCardsRow.getGalleryView());
+		CollapsableView collapsableView = new CollapsableView(parent, this, false);
+		collapsableView.setCollapseExpandListener(collapsed -> {
+			if (!collapsed && mapillaryCards == null) {
+				startLoadingImages();
+			}
+		});
+		buildRow(view, R.drawable.ic_action_photo_dark, null, app.getString(R.string.street_level_imagery), 0, true,
+				collapsableView, false, 1, false, null, false);
+
+		if (needUpdateOnly && mapillaryCards != null) {
+			mapillaryCardsRow.setCards(mapillaryCards);
+		} else if (!collapsableView.isCollapsed()) {
+			startLoadingImages();
+		}
+		startLoadingImages();
 	}
 
 	private void buildCoordinatesRow(View view) {
@@ -472,24 +534,21 @@ public class MenuBuilder {
 				false, null, false);
 	}
 
-	private void startLoadingImages() {
-		if (onlinePhotoCardsRow == null) {
-			return;
-		}
+	public void startLoadingImages() {
 		startLoadingImagesTask();
 	}
 
 	private void startLoadingImagesTask() {
+		if (!app.getSettings().isInternetConnectionAvailable()) {
+			return;
+		}
 		onlinePhotoCards = new ArrayList<>();
-		onlinePhotoCardsRow.setProgressCard();
+		mapillaryCards = new ArrayList<>();
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
 		return null;
-	}
-
-	protected void processOnlinePhotosCards(List<ImageCard> cardList) {
 	}
 
 	protected void buildInternal(View view) {
