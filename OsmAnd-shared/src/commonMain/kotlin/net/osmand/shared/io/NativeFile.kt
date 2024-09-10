@@ -9,4 +9,8 @@ expect class NativeFile(file: KFile) {
 	fun lastModified(): Long
 
 	fun listFiles(): List<KFile>?
+
+	fun renameTo(toFile: KFile): Boolean
+
+	fun renameTo(toFilePath: String): Boolean
 }

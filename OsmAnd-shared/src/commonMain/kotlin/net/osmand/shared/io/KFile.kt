@@ -87,9 +87,7 @@ class KFile {
 		return !exists()
 	}
 
-	override fun hashCode(): Int {
-		return path.hashCode()
-	}
+	override fun hashCode(): Int = path.hashCode()
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
@@ -97,23 +95,13 @@ class KFile {
 		return path == other.path
 	}
 
-	override fun toString(): String {
-		return path.toString()
-	}
+	override fun toString(): String = path.toString()
 
 	fun length(): Long = nativeFile.length()
 
-	fun renameTo(toFile: KFile): Boolean {
-		if (!exists()) {
-			return false
-		}
-		FileSystem.SYSTEM.atomicMove(path, toFile.path)
-		return toFile.exists()
-	}
+	fun renameTo(toFile: KFile): Boolean = nativeFile.renameTo(toFile)
 
-	fun renameTo(toFilePath: String): Boolean {
-		return renameTo(KFile(toFilePath))
-	}
+	fun renameTo(toFilePath: String): Boolean = nativeFile.renameTo(toFilePath)
 
 	fun getFileNameWithoutExtension(): String? {
 		return Companion.getFileNameWithoutExtension(this.name())
