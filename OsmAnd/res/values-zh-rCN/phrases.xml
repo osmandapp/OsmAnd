@@ -3149,4 +3149,8 @@
     <string name="poi_shoes_men">男鞋</string>
     <string name="poi_date_yes">日期显示</string>
     <string name="poi_tents_yes">允许搭帐篷</string>
+    <string name="poi_lock_name">船闸名称</string>
+    <string name="poi_lock_ref">船闸编号</string>
+    <string name="poi_lock_height">船闸高度</string>
+    <string name="poi_pump_status_locked">水泵状态：上锁</string>
 </resources>
