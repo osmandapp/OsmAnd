@@ -22,6 +22,8 @@
     <string name="configure_map_description">Change map style, layers, or other settings.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
+    <string name="type_of_activity">Type of activity</string>
+    <string name="change_activity">Change activity</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>
     <string name="shared_string_dp">dp</string>

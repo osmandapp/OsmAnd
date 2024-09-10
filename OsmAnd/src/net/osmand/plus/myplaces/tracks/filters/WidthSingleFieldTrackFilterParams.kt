@@ -9,7 +9,7 @@ import net.osmand.util.Algorithms
 
 class WidthSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 
-	override fun getItemIcon(app: OsmandApplication, itemName: String): Drawable? {
+	override fun getItemIcon(app: OsmandApplication, itemName: String, selected: Boolean, nightMode: Boolean): Drawable? {
 		return if (Algorithms.isEmpty(itemName)) {
 			app.uiUtilities.getThemedIcon(R.drawable.ic_action_appearance_disabled)
 		} else {
@@ -30,7 +30,7 @@ class WidthSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 		}
 	}
 
-	override fun getItemText(app: OsmandApplication, itemName: String): String {
+	override fun getItemText(app: OsmandApplication, itemName: String, selected: Boolean): String {
 		return if (Algorithms.isEmpty(itemName)) {
 			app.getString(R.string.not_specified)
 		} else {

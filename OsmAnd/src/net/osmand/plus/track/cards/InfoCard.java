@@ -1,23 +1,30 @@
 package net.osmand.plus.track.cards;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.RouteActivityHelper;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
-public class InfoCard extends BaseMetadataCard {
-	private final RouteKey routeKey;
+import java.util.List;
 
-	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata, @Nullable RouteKey routeKey) {
+public class InfoCard extends BaseMetadataCard {
+
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
+
+	public InfoCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
+	                @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper) {
 		super(mapActivity, metadata);
-		this.routeKey = routeKey;
+		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
 	}
 
 	@Override
@@ -29,23 +36,27 @@ public class InfoCard extends BaseMetadataCard {
 	@Override
 	public void updateContent() {
 		super.updateContent();
+		RouteActivityHelper helper = app.getRouteActivityHelper();
+		RouteActivity routeActivity = routeActivitySelectionHelper.getSelectedActivity();
+		String keywords = metadata != null ? metadata.getFilteredKeywords(helper.getActivities()) : null;
+		String link = metadata != null ? metadata.getLink() : null;
 
-		boolean visible = metadata != null && (!Algorithms.isEmpty(metadata.getKeywords())
-				|| !Algorithms.isEmpty(metadata.getLink()) || routeKey != null);
+		String label = routeActivity != null
+				? routeActivity.getLabel()
+				: app.getString(R.string.shared_string_none);
 
-		updateVisibility(visible);
+		Drawable icon = getContentIcon(routeActivity != null
+				? AndroidUtils.getIconId(app, routeActivity.getIconName())
+				: R.drawable.ic_action_activity);
 
-		if (visible) {
-			if (routeKey != null) {
-				OsmRouteType activityType = routeKey.type;
-				String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, activityType);
-				createItemRow(getString(R.string.shared_string_activity), routeTypeToDisplay, 
-						getContentIcon(AndroidUtils.getActivityTypeIcon(app, activityType)));
-			}
-			if (!Algorithms.isEmpty(metadata.getKeywords())) {
-				createItemRow(getString(R.string.shared_string_keywords), metadata.getKeywords(), getContentIcon(R.drawable.ic_action_label));
-			}
-			createLinkItemRow(getString(R.string.shared_string_link), metadata.getLink(), R.drawable.ic_action_link);
+		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
+				v -> SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper)
+		);
+		if (!Algorithms.isEmpty(keywords)) {
+			createItemRow(getString(R.string.shared_string_keywords), keywords, getContentIcon(R.drawable.ic_action_label));
+		}
+		if (!Algorithms.isEmpty(link)) {
+			createLinkItemRow(getString(R.string.shared_string_link), link, R.drawable.ic_action_link);
 		}
 	}
 }

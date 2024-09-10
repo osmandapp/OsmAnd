@@ -141,6 +141,15 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
+	public boolean updateDataItemParameter(@NonNull DataItem item,
+	                                       @NonNull GpxParameter parameter,
+	                                       @Nullable Object value) {
+		item.setParameter(parameter, value);
+		boolean res = database.updateDataItemParameter(item, parameter, value);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean remove(@NonNull File file) {
 		return remove(SharedUtil.kFile(file));
 	}

@@ -63,9 +63,16 @@ class GpxDatabase {
 	}
 
 	fun updateDataItem(item: DataItem): Boolean {
+		return updateGpxParameters(item, GpxDbUtils.getItemParameters(item))
+	}
+
+	fun updateDataItemParameter(item: DataItem, gpxParameter: GpxParameter, value: Any?): Boolean {
+		return updateGpxParameters(item, linkedMapOf(gpxParameter to value))
+	}
+
+	private fun updateGpxParameters(item: DataItem, map: Map<GpxParameter, Any?>): Boolean {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
-		val map = GpxDbUtils.getItemParameters(item)
 		return updateGpxParameters(map, tableName, GpxDbUtils.getItemRowsToSearch(file))
 	}
 
