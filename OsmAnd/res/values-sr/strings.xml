@@ -4463,7 +4463,7 @@
     <string name="rendering_value_omit_name">Изоставити</string>
     <string name="rendering_attr_seabedDetail_name">Појединост морског дна</string>
     <string name="save_track_to_gpx_descrp">Самостално покрени снимање трага током навођења и самостално сачувај након тога.</string>
-    <string name="gpx_no_routes_title">Нема путања</string>
+    <string name="gpx_no_routes_title">Нема рута</string>
     <string name="gpx_no_routes_descr">Можете користити алатку %1$s ради додавања путање у датотеку.</string>
     <string name="quick_action_add_route_descr">Дугме за покретање путање од средине заслона.</string>
     <string name="please_provide_group_name_message">Молим, именујте групу.</string>
