@@ -116,7 +116,7 @@
 		app:isPreferenceVisible="false" />
 
 	<Preference
-		android:key="current_track_preselected_route_activity"
+		android:key="current_track_route_activity"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/shared_string_activity"
 		tools:icon="@drawable/ic_action_activity" />
