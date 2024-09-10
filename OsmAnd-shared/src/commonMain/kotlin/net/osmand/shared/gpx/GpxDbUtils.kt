@@ -203,12 +203,12 @@ object GpxDbUtils {
 		file.parent()?.let {
 			val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
 			if (file == gpxDir) {
-				return@let ""
+				return ""
 			}
 			val relativePath = KFile(file.path().replace("${gpxDir.path}/", ""))
 			val fileDir = if (file.isDirectory()) relativePath.path else relativePath.parent()
 			val res = fileDir.toString()
-			return@let if (res == ".") "" else res
+			return if (res == ".") "" else res
 		}
 		return ""
 	}
