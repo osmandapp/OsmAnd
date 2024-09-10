@@ -5895,4 +5895,6 @@
     <string name="contour_layers_action_descr">Изменить контурные слои</string>
     <string name="change_zoom_action_descr">Изменить масштаб карты.</string>
     <string name="search_action_descr">Открыть поиск.</string>
+    <string name="type_of_activity">Вид активности</string>
+    <string name="change_activity">Изменить активность</string>
 </resources>
