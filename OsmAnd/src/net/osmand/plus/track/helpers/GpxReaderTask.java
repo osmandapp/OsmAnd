@@ -5,7 +5,7 @@ import static net.osmand.shared.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME;
-import static net.osmand.shared.gpx.GpxParameter.TYPE_OF_ACTIVITY;
+import static net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE;
 import static net.osmand.shared.gpx.GpxTrackAnalysis.ANALYSIS_VERSION;
 
 import android.os.AsyncTask;
@@ -139,7 +139,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
 			RouteActivity routeActivity = metadata.getRouteActivity(routeActivityHelper.getActivities());
 			String routeActivityId = routeActivity != null ? routeActivity.getId() : "";
-			item.setParameter(TYPE_OF_ACTIVITY, routeActivityId);
+			item.setParameter(ACTIVITY_TYPE, routeActivityId);
 
 			setupNearestCityName(item);
 			double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);

@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
-class RouteActivity(
+data class RouteActivity(
 	val id: String,
 	val label: String,
 	val iconName: String

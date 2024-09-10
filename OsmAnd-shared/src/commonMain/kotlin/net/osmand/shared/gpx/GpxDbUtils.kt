@@ -130,7 +130,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, START_LAT);
 			addIfMissingGpxTableColumn(columnNames, db, START_LON);
 			addIfMissingGpxTableColumn(columnNames, db, NEAREST_CITY_NAME);
-			addIfMissingGpxTableColumn(columnNames, db, TYPE_OF_ACTIVITY)
+			addIfMissingGpxTableColumn(columnNames, db, ACTIVITY_TYPE)
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_TEMPERATURE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_TEMPERATURE);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_SPEED);

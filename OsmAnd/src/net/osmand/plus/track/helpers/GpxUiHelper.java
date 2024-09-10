@@ -18,7 +18,7 @@ import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TYPE_OF_ACTIVITY;
+import static net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import static net.osmand.util.Algorithms.formatDuration;
 
@@ -657,7 +657,7 @@ public class GpxUiHelper {
 	}
 
 	private static void addDbParametersToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
-		String activityId = item.getParameter(TYPE_OF_ACTIVITY);
+		String activityId = item.getParameter(ACTIVITY_TYPE);
 		if (!Algorithms.isEmpty(activityId)) {
 			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
 			RouteActivity routeActivity = routeActivityHelper.findRouteActivity(activityId);

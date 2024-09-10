@@ -52,7 +52,6 @@ import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
@@ -307,7 +306,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		Preference preference = findPreference(PRESELECTED_ROUTE_ACTIVITY);
 		if (preference != null) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
-			String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
+			String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 			RouteActivityHelper helper = app.getRouteActivityHelper();
 			RouteActivity activity = helper.findRouteActivity(selectedId);
 			if (activity != null) {
@@ -470,7 +469,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 				RouteActivityHelper helper = app.getRouteActivityHelper();
 				routeActivitySelectionHelper = new RouteActivitySelectionHelper();
 				ApplicationMode selectedAppMode = getSelectedAppMode();
-				String selectedId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
+				String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.getModeValue(selectedAppMode);
 				RouteActivity selected = helper.findRouteActivity(selectedId);
 				routeActivitySelectionHelper.setSelectedActivity(selected);
 			}

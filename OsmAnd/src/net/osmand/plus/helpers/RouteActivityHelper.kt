@@ -14,7 +14,7 @@ import net.osmand.plus.track.helpers.RouteActivitySelectionHelper
 import net.osmand.plus.track.helpers.save.SaveGpxHelper
 import net.osmand.shared.gpx.GpxDataItem
 import net.osmand.shared.gpx.GpxFile
-import net.osmand.shared.gpx.GpxParameter.TYPE_OF_ACTIVITY
+import net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE
 import net.osmand.shared.gpx.primitives.RouteActivity
 import net.osmand.shared.gpx.primitives.RouteActivityGroup
 import net.osmand.util.Algorithms
@@ -82,7 +82,7 @@ class RouteActivityHelper(
 		SaveGpxHelper.saveGpx(gpxFile) {
 			val updateRouteActivity: (dataItem: GpxDataItem) -> Unit = { dataItem ->
 				val activityId = routeActivity?.id.orEmpty()
-				app.gpxDbHelper.updateDataItemParameter(dataItem, TYPE_OF_ACTIVITY, activityId)
+				app.gpxDbHelper.updateDataItemParameter(dataItem, ACTIVITY_TYPE, activityId)
 				callback?.onComplete()
 			}
 			val dataItem = app.gpxDbHelper.getItem(File(gpxFile.path)) {

@@ -832,7 +832,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				RouteActivity selected = metadata.getRouteActivity(activities);
 				if (selected == null) {
 					if (isCurrentRecordingTrack()) {
-						String activityId = settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.get();
+						String activityId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.get();
 						selected = helper.findRouteActivity(activityId);
 					} else if (routeKey != null) {
 						selected = helper.findRouteActivity(routeKey.type.getName());
@@ -848,7 +848,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void onRouteActivitySelected(@Nullable RouteActivity activity) {
 		if (isCurrentRecordingTrack()) {
 			String activityId = activity != null ? activity.getId() : "";
-			settings.CURRENT_TRACK_PRESELECTED_ROUTE_ACTIVITY.set(activityId);
+			settings.CURRENT_TRACK_ROUTE_ACTIVITY.set(activityId);
 		} else {
 			RouteActivityHelper helper = app.getRouteActivityHelper();
 			GpxFile gpxFile = displayHelper.getGpx();

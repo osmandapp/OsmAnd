@@ -41,8 +41,8 @@ public class SelectRouteActivityController extends BaseDialogController
 	private static final String NONE_ACTIVITY_KEY = "none";
 
 	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
-	private final List<DisplayItem> lastSearchResults = new ArrayList<>();
 	private final RouteActivityHelper routeActivityHelper;
+	private List<DisplayItem> lastSearchResults = new ArrayList<>();
 	private boolean inSearchMode;
 
 	public SelectRouteActivityController(@NonNull OsmandApplication app,
@@ -65,18 +65,15 @@ public class SelectRouteActivityController extends BaseDialogController
 		displayData.putExtra(BACKGROUND_COLOR, activeColor);
 
 		if (!isInSearchMode()) {
-			// None activity
 			displayData.addDisplayItem(new DisplayItem()
 					.setLayoutId(defLayoutId)
 					.setTitle(getString(R.string.shared_string_none))
 					.setTag(NONE_ACTIVITY_KEY)
 			);
-			// Divider
 			displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
 
 			// Categorized activities
 			for (RouteActivityGroup group : routeActivityHelper.getActivityGroups()) {
-				// Header
 				displayData.addDisplayItem(new DisplayItem()
 						.setLayoutId(R.layout.list_item_header_48dp)
 						.setTitle(group.getLabel())
@@ -91,10 +88,10 @@ public class SelectRouteActivityController extends BaseDialogController
 							.setTag(routeActivity)
 					);
 				}
-				// Divider
 				displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
 			}
 		} else {
+			List<DisplayItem> lastSearchResults = new ArrayList<>(this.lastSearchResults);
 			int size = lastSearchResults.size();
 			if (size > 0) {
 				lastSearchResults.get(size - 1).hideBottomDivider();
@@ -138,7 +135,7 @@ public class SelectRouteActivityController extends BaseDialogController
 
 	public void exitSearchMode() {
 		inSearchMode = false;
-		lastSearchResults.clear();
+		clearLastSearchResults();
 		SelectRouteActivityFragment screen = getRouteActivityScreen();
 		if (screen != null) {
 			screen.onScreenModeChanged();
@@ -146,11 +143,11 @@ public class SelectRouteActivityController extends BaseDialogController
 	}
 
 	public void clearSearchQuery() {
-		lastSearchResults.clear();
+		clearLastSearchResults();
 	}
 
 	public void searchActivities(String text) {
-		lastSearchResults.clear();
+		clearLastSearchResults();
 		if (Algorithms.isEmpty(text)) {
 			SelectRouteActivityFragment screen = getRouteActivityScreen();
 			if (screen != null) {
@@ -164,6 +161,7 @@ public class SelectRouteActivityController extends BaseDialogController
 		UiUtilities iconsCache = app.getUIUtilities();
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		runAsync(() -> {
+			List<DisplayItem> lastSearchResults = new ArrayList<>();
 			for (RouteActivityGroup group : routeActivityHelper.getActivityGroups()) {
 				for (RouteActivity activity : group.getActivities()) {
 					String label = activity.getLabel().toLowerCase();
@@ -180,6 +178,7 @@ public class SelectRouteActivityController extends BaseDialogController
 						);
 					}
 				}
+				this.lastSearchResults = lastSearchResults;
 				app.runInUIThread(() -> {
 					SelectRouteActivityFragment screen = getRouteActivityScreen();
 					if (screen != null) {
@@ -188,6 +187,10 @@ public class SelectRouteActivityController extends BaseDialogController
 				});
 			}
 		});
+	}
+
+	private void clearLastSearchResults() {
+		lastSearchResults = new ArrayList<>();
 	}
 
 	public boolean isInSearchMode() {

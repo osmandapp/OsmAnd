@@ -181,7 +181,7 @@ enum class TrackFilterType(
 	ACTIVITY(
 		R.string.type_of_activity,
 		FilterType.SINGLE_FIELD_LIST,
-		GpxParameter.TYPE_OF_ACTIVITY,
+		GpxParameter.ACTIVITY_TYPE,
 		MeasureUnitType.NONE,
 		null,
 		false,
