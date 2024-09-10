@@ -4,8 +4,6 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -21,13 +19,13 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.SelectRouteActivityFragment;
+import net.osmand.plus.track.helpers.RouteActivitySearchFilter;
 import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.RouteActivityGroup;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +40,7 @@ public class SelectRouteActivityController extends BaseDialogController
 
 	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final RouteActivityHelper routeActivityHelper;
+	private final RouteActivitySearchFilter searchFilter;
 	private List<DisplayItem> lastSearchResults = new ArrayList<>();
 	private boolean inSearchMode;
 
@@ -50,6 +49,7 @@ public class SelectRouteActivityController extends BaseDialogController
 		super(app);
 		this.routeActivityHelper = app.getRouteActivityHelper();
 		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
+		this.searchFilter = createSearchFilter();
 	}
 
 	@Nullable
@@ -91,7 +91,6 @@ public class SelectRouteActivityController extends BaseDialogController
 				displayData.addDisplayItem(new DisplayItem().setLayoutId(R.layout.list_item_divider_basic));
 			}
 		} else {
-			List<DisplayItem> lastSearchResults = new ArrayList<>(this.lastSearchResults);
 			int size = lastSearchResults.size();
 			if (size > 0) {
 				lastSearchResults.get(size - 1).hideBottomDivider();
@@ -125,6 +124,36 @@ public class SelectRouteActivityController extends BaseDialogController
 		dialogManager.askDismissDialog(processId);
 	}
 
+	@NonNull
+	private RouteActivitySearchFilter createSearchFilter() {
+		RouteActivitySearchFilter filter = new RouteActivitySearchFilter(filteredActivities -> {
+			boolean nightMode = isNightMode();
+			UiUtilities iconsCache = app.getUIUtilities();
+			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+
+			List<DisplayItem> searchResults = new ArrayList<>();
+			for (RouteActivity activity : filteredActivities) {
+				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
+				searchResults.add(new DisplayItem()
+						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
+						.setTitle(activity.getLabel())
+						.setDescription(activity.getGroup().getLabel())
+						.setNormalIcon(iconsCache.getThemedIcon(iconId))
+						.setControlsColor(activeColor)
+						.setShowBottomDivider(true, 0)
+						.setTag(activity)
+				);
+			}
+			this.lastSearchResults = searchResults;
+			SelectRouteActivityFragment screen = getRouteActivityScreen();
+			if (screen != null) {
+				screen.askUpdateContent();
+			}
+		});
+		filter.setItems(routeActivityHelper.getActivities());
+		return filter;
+	}
+
 	public void enterSearchMode() {
 		inSearchMode = true;
 		SelectRouteActivityFragment screen = getRouteActivityScreen();
@@ -135,7 +164,7 @@ public class SelectRouteActivityController extends BaseDialogController
 
 	public void exitSearchMode() {
 		inSearchMode = false;
-		clearLastSearchResults();
+		resetSearchResults();
 		SelectRouteActivityFragment screen = getRouteActivityScreen();
 		if (screen != null) {
 			screen.onScreenModeChanged();
@@ -143,53 +172,14 @@ public class SelectRouteActivityController extends BaseDialogController
 	}
 
 	public void clearSearchQuery() {
-		clearLastSearchResults();
+		resetSearchResults();
 	}
 
 	public void searchActivities(String text) {
-		clearLastSearchResults();
-		if (Algorithms.isEmpty(text)) {
-			SelectRouteActivityFragment screen = getRouteActivityScreen();
-			if (screen != null) {
-				screen.askUpdateContent();
-			}
-			return;
-		}
-
-		String textLc = text.toLowerCase();
-		boolean nightMode = isNightMode();
-		UiUtilities iconsCache = app.getUIUtilities();
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		runAsync(() -> {
-			List<DisplayItem> lastSearchResults = new ArrayList<>();
-			for (RouteActivityGroup group : routeActivityHelper.getActivityGroups()) {
-				for (RouteActivity activity : group.getActivities()) {
-					String label = activity.getLabel().toLowerCase();
-					if (label.contains(textLc)) {
-						int iconId = AndroidUtils.getIconId(app, activity.getIconName());
-						lastSearchResults.add(new DisplayItem()
-								.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
-								.setTitle(activity.getLabel())
-								.setDescription(group.getLabel())
-								.setNormalIcon(iconsCache.getThemedIcon(iconId))
-								.setControlsColor(activeColor)
-								.setShowBottomDivider(true, 0)
-								.setTag(activity)
-						);
-					}
-				}
-				this.lastSearchResults = lastSearchResults;
-				app.runInUIThread(() -> {
-					SelectRouteActivityFragment screen = getRouteActivityScreen();
-					if (screen != null) {
-						screen.askUpdateContent();
-					}
-				});
-			}
-		});
+		searchFilter.filter(text);
 	}
 
-	private void clearLastSearchResults() {
+	private void resetSearchResults() {
 		lastSearchResults = new ArrayList<>();
 	}
 
@@ -211,16 +201,6 @@ public class SelectRouteActivityController extends BaseDialogController
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
-	}
-
-	private void runAsync(@NonNull Runnable runnable) {
-		new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				runnable.run();
-				return null;
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,

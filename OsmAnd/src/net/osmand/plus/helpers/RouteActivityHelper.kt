@@ -121,16 +121,17 @@ class RouteActivityHelper(
 			val label = groupJson.getString("label")
 			val activitiesJson = groupJson.getJSONArray("activities")
 			val activities: MutableList<RouteActivity> = ArrayList()
+			val activitiesGroup = RouteActivityGroup(id, label, activities)
 			for (j in 0 until activitiesJson.length()) {
 				val activityJson = activitiesJson.getJSONObject(j)
 				val activityId = activityJson.getString("id")
 				val activityLabel = activityJson.getString("label")
 				val iconName = activityJson.getString("icon_name")
-				val activity = RouteActivity(activityId, activityLabel, iconName)
+				val activity = RouteActivity(activityId, activityLabel, iconName, activitiesGroup)
 				cachedActivities.add(activity)
 				activities.add(activity)
 			}
-			cachedGroups.add(RouteActivityGroup(id, label, activities))
+			cachedGroups.add(activitiesGroup)
 		}
 	}
 

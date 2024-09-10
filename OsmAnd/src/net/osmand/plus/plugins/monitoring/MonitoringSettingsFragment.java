@@ -67,7 +67,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
 	private static final String EXTERNAL_SENSORS = "open_sensor_settings";
-	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_preselected_route_activity";
+	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;

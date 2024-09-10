@@ -4,21 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OnResultCallback;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.primitives.RouteActivity;
-import net.osmand.shared.gpx.primitives.RouteActivityGroup;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RouteActivitySelectionHelper {
 
