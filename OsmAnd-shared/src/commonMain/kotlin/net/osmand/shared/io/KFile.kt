@@ -1,7 +1,6 @@
 package net.osmand.shared.io
 
 import net.osmand.shared.util.KAlgorithms.isEmpty
-import okio.FileMetadata
 import okio.FileSystem
 import okio.IOException
 import okio.Path
@@ -15,16 +14,21 @@ import okio.use
 class KFile {
 	val path: Path
 
+	private var nativeFile: NativeFile
+
 	constructor(filePath: String) {
 		this.path = filePath.toPath()
+		nativeFile = NativeFile(this)
 	}
 
 	constructor(path: Path) {
 		this.path = path
+		nativeFile = NativeFile(this)
 	}
 
 	constructor(file: KFile, fileName: String) {
 		this.path = file.path.resolve(fileName)
+		nativeFile = NativeFile(this)
 	}
 
 	fun name(): String = path.name
@@ -43,14 +47,7 @@ class KFile {
 	fun isDirectory(): Boolean =
 		FileSystem.SYSTEM.metadataOrNull(path)?.isDirectory == true
 
-	fun lastModified(): Long {
-		return try {
-			val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(path)
-			metadata?.lastModifiedAtMillis ?: 0
-		} catch (e: IOException) {
-			0
-		}
-	}
+	fun lastModified(): Long = nativeFile.lastModified()
 
 	fun path(): String = path.toString()
 
@@ -80,14 +77,7 @@ class KFile {
 		}
 	}
 
-	fun listFiles(): Array<KFile>? {
-		try {
-			val pathList = FileSystem.SYSTEM.list(path)
-			return pathList.map { KFile(it) }.toTypedArray()
-		} catch (e: IOException) {
-			return null
-		}
-	}
+	fun listFiles(): List<KFile>? = nativeFile.listFiles()
 
 	fun delete(): Boolean {
 		if (!exists()) {
@@ -111,14 +101,7 @@ class KFile {
 		return path.toString()
 	}
 
-	fun length(): Long {
-		return try {
-			val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(path)
-			metadata?.size ?: 0
-		} catch (e: IOException) {
-			0
-		}
-	}
+	fun length(): Long = nativeFile.length()
 
 	fun renameTo(toFile: KFile): Boolean {
 		if (!exists()) {

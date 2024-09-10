@@ -21,10 +21,9 @@ import net.osmand.shared.ColorPalette;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.RouteColorize;
 import net.osmand.shared.routing.RouteColorize.ColorizationType;
-import net.osmand.shared.util.KAlgorithms;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -56,7 +55,7 @@ public class ColorPaletteHelper {
 		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 
 		KFile colorPalletsDir = getColorPaletteDir();
-		KFile[] colorFiles = colorPalletsDir.listFiles();
+		List<KFile> colorFiles = colorPalletsDir.listFiles();
 		if (colorFiles != null) {
 			for (KFile file : colorFiles) {
 				String fileName = file.name();
