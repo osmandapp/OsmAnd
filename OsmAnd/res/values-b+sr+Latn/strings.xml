@@ -5897,4 +5897,6 @@
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
     <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Prikazati staze za bicikle</string>
+    <string name="type_of_activity">Tip aktivnosti</string>
+    <string name="change_activity">Promeni aktivnost</string>
 </resources>
