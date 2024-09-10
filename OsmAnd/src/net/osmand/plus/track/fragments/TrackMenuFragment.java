@@ -130,6 +130,7 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -376,7 +377,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (!Algorithms.isBlank(gpxFile.getArticleTitle())) {
 			gpxTitle = gpxFile.getArticleTitle();
 		} else {
-			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+			gpxTitle = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
 		}
 	}
 

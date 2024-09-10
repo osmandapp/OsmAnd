@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.KAlgorithms
@@ -274,7 +275,7 @@ class WptPt : GpxExtensions {
 			val point = WptPt(
 				latAdjusted,
 				lonAdjusted,
-				PlatformUtil.currentTimeMillis(),
+				currentTimeMillis(),
 				Double.NaN,
 				0.0,
 				Double.NaN
@@ -305,7 +306,7 @@ class WptPt : GpxExtensions {
 	fun updatePoint(pt: WptPt) {
 		lat = GpxUtilities.formatLatLon(pt.lat).toDouble()
 		lon = GpxUtilities.formatLatLon(pt.lon).toDouble()
-		time = PlatformUtil.currentTimeMillis()
+		time = currentTimeMillis()
 		desc = pt.desc
 		name = pt.name
 		category = pt.category

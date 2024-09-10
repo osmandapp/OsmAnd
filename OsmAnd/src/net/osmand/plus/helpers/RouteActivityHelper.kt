@@ -9,12 +9,12 @@ import net.osmand.OnCompleteCallback
 import net.osmand.PlatformUtil
 import net.osmand.SharedUtil.loadGpxFile
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.track.helpers.RouteActivitySelectionHelper
 import net.osmand.plus.track.helpers.save.SaveGpxHelper
 import net.osmand.shared.gpx.GpxDataItem
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.primitives.RouteActivity
 import net.osmand.shared.gpx.primitives.RouteActivityGroup
 import net.osmand.util.Algorithms
@@ -52,8 +52,8 @@ class RouteActivityHelper(
 	fun saveRouteActivity(trackItems: Collection<TrackItem>, routeActivity: RouteActivity?) {
 		runAsync {
 			trackItems.forEach { trackItem ->
-				trackItem.file?.let { file ->
-					val selectedGpxFile = app.selectedGpxHelper.getSelectedFileByPath(file.absolutePath)
+				trackItem.getFile()?.let { file ->
+					val selectedGpxFile = app.selectedGpxHelper.getSelectedFileByPath(file.absolutePath())
 					val gpxFile = selectedGpxFile?.gpxFile ?: loadGpxFile(file)
 					if (gpxFile.error == null) {
 						saveRouteActivityAsync(gpxFile, routeActivity)

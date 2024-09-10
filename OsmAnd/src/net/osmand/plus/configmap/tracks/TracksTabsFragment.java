@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,7 +47,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -59,6 +60,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -339,7 +342,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setOnClickListener(v -> showTrackOnMap(trackItem))
 				.create());
 
-		File file = trackItem.getFile();
+		File file = getTrackItemFile(trackItem);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.analyze_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
@@ -403,7 +406,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		boolean temporary = app.getSelectedGpxHelper().getSelectedFileByPath(trackItem.getPath()) == null;
-		TrackMenuFragment.openTrack(mapActivity, trackItem.getFile(), null, null, OVERVIEW, temporary);
+		KFile kFile = trackItem.getFile();
+		File jFile = kFile == null ? null : SharedUtil.jFile(kFile);
+		TrackMenuFragment.openTrack(mapActivity, jFile, null, null, OVERVIEW, temporary);
 
 		dismiss();
 		mapActivity.getDashboard().hideDashboard();
@@ -421,8 +426,14 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				}
 			});
 		} else {
-			plugin.sendGPXFiles(activity, this, trackItem.getFile());
+			plugin.sendGPXFiles(activity, this, getTrackItemFile(trackItem));
 		}
+	}
+
+	@Nullable
+	private File getTrackItemFile(@NonNull TrackItem trackItem) {
+		KFile kFile = trackItem.getFile();
+		return kFile == null ? null : SharedUtil.jFile(kFile);
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems) {

@@ -3,6 +3,7 @@ package net.osmand.plus.settings.enums;
 import android.content.Context;
 
 import net.osmand.plus.R;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.Locale;
 
@@ -39,7 +40,7 @@ public enum DrivingRegion {
 	public String getDescription(Context ctx) {
 		return ctx.getString(leftHandDriving ? R.string.left_side_navigation : R.string.right_side_navigation) +
 				", " +
-				defMetrics.toHumanString(ctx).toLowerCase();
+				defMetrics.toHumanString().toLowerCase();
 	}
 
 	public static DrivingRegion getDrivingRegionByLocale() {

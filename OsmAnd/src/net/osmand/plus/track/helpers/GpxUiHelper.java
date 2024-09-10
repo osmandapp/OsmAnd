@@ -49,7 +49,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
@@ -62,7 +62,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -79,6 +79,7 @@ import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -764,7 +765,7 @@ public class GpxUiHelper {
 			String date = "";
 			String size = "";
 
-			File file = trackItem.getFile();
+			KFile file = trackItem.getFile();
 			long fileSize = file != null ? file.length() : 0;
 			if (fileSize > 0) {
 				size = AndroidUtils.formatSize(view.getContext(), fileSize + 512);

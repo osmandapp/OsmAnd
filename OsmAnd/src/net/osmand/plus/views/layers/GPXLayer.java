@@ -47,7 +47,6 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.CachedTrackParams;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -62,7 +61,6 @@ import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.ParseGpxRouteTask;
 import net.osmand.plus.track.helpers.ParseGpxRouteTask.ParseGpxRouteListener;
@@ -97,6 +95,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.routing.ColoringType;
@@ -1548,7 +1547,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			} else if (!Algorithms.isEmpty(gpxFile.getArticleTitle())) {
 				name = gpxFile.getArticleTitle();
 			} else {
-				name = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+				name = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		}

@@ -47,6 +47,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.shared.gpx.GpxHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class GpxDialogs {
 	                                              boolean needSelectItems) {
 		for (GPXInfo gpxInfo : allGpxFiles) {
 			adapter.addItem(new ContextMenuItem(null)
-					.setTitle(GpxUiHelper.getGpxTitle(gpxInfo.getFileName()))
+					.setTitle(GpxHelper.INSTANCE.getGpxTitle(gpxInfo.getFileName()))
 					.setSelected(needSelectItems && gpxInfo.isSelected())
 					.setIcon(R.drawable.ic_action_polygom_dark));
 		}

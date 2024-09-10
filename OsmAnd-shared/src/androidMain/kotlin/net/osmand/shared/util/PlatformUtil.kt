@@ -2,65 +2,30 @@ package net.osmand.shared.util
 
 import android.content.Context
 import net.osmand.shared.KException
+import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
-import net.osmand.shared.io.KFile
-import java.io.File
 import java.lang.ref.WeakReference
 
 actual object PlatformUtil {
 
-	private var context: WeakReference<Context>? = null
-	private var appDir: File? = null
-	private var gpxDir: File? = null
+	private lateinit var context: WeakReference<Context>
+	private lateinit var osmAndContext: OsmAndContext
+	private lateinit var sqliteApi: SQLiteAPI
 
-	private var sqliteApi: SQLiteAPI? = null
-
-	fun initialize(context: Context, appDir: File, gpxDir: File) {
+	fun initialize(context: Context, osmAndContext: OsmAndContext) {
 		this.context = WeakReference(context)
-		this.appDir = appDir
-		this.gpxDir = gpxDir
+		this.osmAndContext = osmAndContext
 
 		sqliteApi = SQLiteAPIImpl(context)
 		Localization.initialize(context)
 	}
 
-	actual fun currentTimeMillis(): Long {
-		return System.currentTimeMillis()
-	}
+	actual fun getOsmAndContext(): OsmAndContext = osmAndContext
 
-	actual fun getAppDir(): KFile {
-		val dir = appDir
-		if (dir == null) {
-			throw IllegalStateException("App dir not initialized")
-		} else {
-			return KFile(dir.absolutePath)
-		}
-	}
+	actual fun getSQLiteAPI(): SQLiteAPI = sqliteApi
 
-	actual fun getGpxDir(): KFile {
-		val dir = gpxDir
-		if (dir == null) {
-			throw IllegalStateException("Gpx dir not initialized")
-		} else {
-			return KFile(dir.absolutePath)
-		}
-	}
+	fun getKotlinException(e: java.lang.Exception): KException = KException(e.message, e)
 
-	actual fun getSQLiteAPI(): SQLiteAPI {
-		val sqliteApi = sqliteApi
-		if (sqliteApi == null) {
-			throw IllegalStateException("SQLiteAPI not initialized")
-		} else {
-			return sqliteApi
-		}
-	}
-
-	fun getKotlinException(e: java.lang.Exception): KException {
-		return KException(e.message, e)
-	}
-
-	fun getJavaException(e: KException): java.lang.Exception {
-		return Exception(e.message, e)
-	}
+	fun getJavaException(e: KException): java.lang.Exception = Exception(e.message, e)
 }

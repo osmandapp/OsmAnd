@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
@@ -197,7 +198,7 @@ public class FileUtils {
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
 			app.getGpxDbHelper().remove(file);
-			app.getSmartFolderHelper().onGpxFileDeleted(file);
+			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
 			return true;
 		}
 		return false;

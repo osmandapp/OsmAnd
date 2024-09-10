@@ -202,7 +202,7 @@ object GpxDbUtils {
 
 	fun getGpxFileDir(file: KFile): String {
 		file.parent()?.let {
-			val gpxDir = PlatformUtil.getGpxDir()
+			val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
 			if (file == gpxDir) {
 				return ""
 			}
