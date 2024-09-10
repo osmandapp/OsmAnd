@@ -30,7 +30,7 @@ public abstract class SliderButtonsCard extends MapBaseCard {
 	}
 
 	public SliderButtonsCard(@NonNull MapActivity activity) {
-		super(activity);
+		super(activity, false);
 	}
 
 	@Override

@@ -178,6 +178,14 @@ enum class TrackFilterType(
 		null,
 		false,
 		SingleFieldTrackFilterParams()),
+	ACTIVITY(
+		"type_of_activity",
+		FilterType.SINGLE_FIELD_LIST,
+		GpxParameter.ACTIVITY_TYPE,
+		MeasureUnitType.NONE,
+		null,
+		false,
+		ActivitySingleFieldTrackFilterParams()),
 	COLOR(
 		"shared_string_color",
 		FilterType.SINGLE_FIELD_LIST,

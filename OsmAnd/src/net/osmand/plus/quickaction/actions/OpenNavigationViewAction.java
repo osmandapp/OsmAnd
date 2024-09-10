@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
-import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_NAVIGATION_VIEW_ACTION;
+import static net.osmand.plus.quickaction.QuickActionIds.OPEN_NAVIGATION_VIEW_ACTION;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +15,21 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.layers.MapActionsHelper;
 
-public class ShowHideNavigationViewAction extends QuickAction {
+public class OpenNavigationViewAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_NAVIGATION_VIEW_ACTION,
-			"navigation.view.showhide", ShowHideNavigationViewAction.class)
-			.nameActionRes(R.string.quick_action_verb_show_hide)
+	public static final QuickActionType TYPE = new QuickActionType(OPEN_NAVIGATION_VIEW_ACTION,
+			"navigation.view.showhide", OpenNavigationViewAction.class)
+			.nameActionRes(R.string.shared_string_open)
 			.nameRes(R.string.quick_action_navigation_view_title)
 			.iconRes(R.drawable.ic_action_gdirections_dark)
 			.category(QuickActionType.INTERFACE)
 			.nonEditable();
 
-	public ShowHideNavigationViewAction() {
+	public OpenNavigationViewAction() {
 		super(TYPE);
 	}
 
-	public ShowHideNavigationViewAction(QuickAction quickAction) {
+	public OpenNavigationViewAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 

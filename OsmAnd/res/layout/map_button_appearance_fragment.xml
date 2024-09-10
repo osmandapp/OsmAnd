@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:clickable="true"
@@ -25,26 +24,11 @@
 				android:orientation="vertical"
 				android:paddingBottom="@dimen/dialog_button_ex_height">
 
-				<FrameLayout
-					android:id="@+id/button_container"
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/map_button_appearance_image_height"
-					android:paddingHorizontal="@dimen/map_alarm_text_top_padding"
-					android:paddingVertical="@dimen/content_padding"
-					tools:background="#103866">
-
-					<include
-						layout="@layout/map_quick_actions_button"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center" />
-
-				</FrameLayout>
-
 				<LinearLayout
 					android:id="@+id/cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:background="?attr/card_and_list_background_basic"
 					android:orientation="vertical" />
 
 				<include layout="@layout/card_bottom_divider" />

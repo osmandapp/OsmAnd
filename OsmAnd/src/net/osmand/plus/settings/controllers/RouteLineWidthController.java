@@ -85,7 +85,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity,
-	                              @NonNull ViewGroup container, boolean nightMode) {
+	                              @NonNull ViewGroup container, boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {

@@ -5,8 +5,10 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.card.width.WidthMode
 import net.osmand.plus.track.fragments.TrackAppearanceFragment
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.shared.gpx.filters.ActivitySingleFieldTrackFilterParams
 import net.osmand.shared.gpx.filters.ColorSingleFieldTrackFilterParams
 import net.osmand.shared.gpx.filters.FolderSingleFieldTrackFilterParams
 import net.osmand.shared.gpx.filters.SingleFieldTrackFilterParams
@@ -19,7 +21,9 @@ class FilterParamsAdapter(
 ) {
 
 	fun getFilterItemIcon(
-		itemName: String
+		itemName: String,
+		selected: Boolean,
+		nightMode: Boolean
 	): Drawable? {
 		when (filterParams) {
 			is ColorSingleFieldTrackFilterParams -> {
@@ -72,7 +76,21 @@ class FilterParamsAdapter(
 						app.getColor(iconColor)
 					)
 				}
+			}
 
+			is ActivitySingleFieldTrackFilterParams -> {
+				val routeActivity = app.routeActivityHelper.findRouteActivity(itemName)
+				val iconColor = if (selected) {
+					ColorUtilities.getActiveColor(app, nightMode)
+				} else {
+					ColorUtilities.getDefaultIconColor(app, nightMode)
+				}
+				val iconId = if (routeActivity != null) {
+					AndroidUtils.getIconId(app, routeActivity.iconName)
+				} else {
+					R.drawable.ic_action_activity
+				}
+				return app.uiUtilities.getPaintedIcon(iconId, iconColor)
 			}
 
 			else -> {
@@ -106,6 +124,10 @@ class FilterParamsAdapter(
 						}
 					}
 				}
+			}
+			is ActivitySingleFieldTrackFilterParams -> {
+				val routeActivity = app.routeActivityHelper.findRouteActivity(itemName)
+				return routeActivity?.label ?: app.getString(R.string.shared_string_none)
 			}
 
 			else -> {

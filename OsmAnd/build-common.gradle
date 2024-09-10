@@ -186,6 +186,13 @@ tasks.register('copyPoiCategories', Copy) {
 	into "assets"
 }
 
+tasks.register('copyRouteActivities', Copy) {
+	from("../../resources/poi") {
+		include "activities.json"
+	}
+	into "assets"
+}
+
 tasks.register('copyMapShaderIcons', Sync) {
 	// from "../../resources/rendering_styles/style-icons/map-shaders-png"
 	// into "res/"
@@ -247,6 +254,7 @@ tasks.register('collectExternalResources') {
 			copyProjDb,
 			copyColorPalettes,
 			copyPoiCategories,
+			copyRouteActivities,
 			downloadWorldMiniBasemap,
 			collectTestResources,
 			copy3DModels

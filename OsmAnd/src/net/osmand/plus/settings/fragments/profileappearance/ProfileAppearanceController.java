@@ -136,12 +136,12 @@ public class ProfileAppearanceController extends BaseDialogController {
 	}
 
 	@NonNull
-	public MarkerDisplayOption getViewAngleVisibility(){
+	public MarkerDisplayOption getViewAngleVisibility() {
 		return changedProfile.viewAngleVisibility;
 	}
 
 	@NonNull
-	public MarkerDisplayOption getLocationRadiusVisibility(){
+	public MarkerDisplayOption getLocationRadiusVisibility() {
 		return changedProfile.locationRadiusVisibility;
 	}
 
@@ -389,7 +389,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 					return new CircleIconPaletteElements<>(context, nightMode) {
 						@Override
 						protected Drawable getIconDrawable(@NonNull Integer iconId, boolean isSelected) {
-							return getIcon(iconId, R.color.icon_color_default_light);
+							return getContentIcon(iconId);
 						}
 					};
 				}
@@ -532,7 +532,8 @@ public class ProfileAppearanceController extends BaseDialogController {
 		return locationIcons;
 	}
 
-	@NonNull List<String> listNavigationIcons() {
+	@NonNull
+	List<String> listNavigationIcons() {
 		List<String> navigationIcons = new ArrayList<>();
 		navigationIcons.add(LocationIcon.MOVEMENT_DEFAULT.name());
 		navigationIcons.add(LocationIcon.MOVEMENT_NAUTICAL.name());

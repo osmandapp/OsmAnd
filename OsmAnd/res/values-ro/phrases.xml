@@ -687,7 +687,7 @@
     <string name="poi_fort">Fortul</string>
     <string name="poi_city_gate">Poarta orașului</string>
     <string name="poi_castle">Castel</string>
-    <string name="poi_historic_tank">Tancul istoric</string>
+    <string name="poi_historic_tank">Tanc istoric</string>
     <string name="poi_historic_cannon">Tun istoric</string>
     <string name="poi_historic_aircraft">Aeronave istorice</string>
     <string name="poi_boundary_stone">Piatră de hotar</string>
@@ -1878,7 +1878,7 @@
     <string name="poi_artist_name">Artistul</string>
     <string name="poi_square">Piață</string>
     <string name="poi_historic_railway">Cale ferată istorică</string>
-    <string name="poi_historic_gallows">Spânzurătoarea istorică</string>
+    <string name="poi_historic_gallows">Spânzurătoare istorică</string>
     <string name="poi_historic_threshing_floor">Etaj istoric de treierat</string>
     <string name="poi_historic_railway_station">Gară istorică</string>
     <string name="poi_historic_farm">Fermă istorică</string>

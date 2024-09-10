@@ -99,12 +99,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 
 	@NonNull
 	public List<MapButtonState> getDefaultButtonsStates() {
-		List<MapButtonState> list = new ArrayList<>();
-
-		list.add(mapButtonsHelper.getMap3DButtonState());
-		list.add(mapButtonsHelper.getCompassButtonState());
-
-		return list;
+		return new ArrayList<>(mapButtonsHelper.getDefaultButtonsStates());
 	}
 
 	public static void setupButton(@NonNull View view, @NonNull String title, @Nullable String description,

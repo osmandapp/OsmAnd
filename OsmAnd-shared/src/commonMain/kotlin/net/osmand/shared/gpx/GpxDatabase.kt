@@ -15,7 +15,7 @@ class GpxDatabase {
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
 
-		const val DB_VERSION = 27
+		const val DB_VERSION = 28
 		const val DB_NAME = "gpx_database"
 		const val GPX_TABLE_NAME = "gpxTable"
 		const val GPX_DIR_TABLE_NAME = "gpxDirTable"
@@ -62,9 +62,16 @@ class GpxDatabase {
 	}
 
 	fun updateDataItem(item: DataItem): Boolean {
+		return updateGpxParameters(item, GpxDbUtils.getItemParameters(item))
+	}
+
+	fun updateDataItemParameter(item: DataItem, gpxParameter: GpxParameter, value: Any?): Boolean {
+		return updateGpxParameters(item, linkedMapOf(gpxParameter to value))
+	}
+
+	private fun updateGpxParameters(item: DataItem, map: Map<GpxParameter, Any?>): Boolean {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
-		val map = GpxDbUtils.getItemParameters(item)
 		return updateGpxParameters(map, tableName, GpxDbUtils.getItemRowsToSearch(file))
 	}
 
@@ -240,7 +247,11 @@ class GpxDatabase {
 					if (query != null && query.moveToFirst()) {
 						maxValue = query.getString(0)
 					}
-				} finally {
+				}
+				catch (error: Throwable){
+					//Cursor.getString may produce exception when the column value is null or the column type is not a string type
+				}
+				finally {
 					query?.close()
 				}
 			}

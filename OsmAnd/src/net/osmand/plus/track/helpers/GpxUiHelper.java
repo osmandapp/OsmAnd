@@ -18,6 +18,7 @@ import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import static net.osmand.util.Algorithms.formatDuration;
 
@@ -50,6 +51,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
@@ -72,6 +74,8 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -623,7 +627,7 @@ public class GpxUiHelper {
 
 	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		if (item.hasAppearanceData()) {
-			addAppearanceToGpx(app, gpxFile, item);
+			addDbParametersToGpx(app, gpxFile, item);
 			saveAndShareGpx(app, gpxFile);
 		} else {
 			shareGpx(app, new File(gpxFile.getPath()));
@@ -651,6 +655,17 @@ public class GpxUiHelper {
 				LOG.error(errorMessage);
 			}
 		});
+	}
+
+	private static void addDbParametersToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
+		String activityId = item.getParameter(ACTIVITY_TYPE);
+		if (!Algorithms.isEmpty(activityId)) {
+			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
+			RouteActivity routeActivity = routeActivityHelper.findRouteActivity(activityId);
+			Metadata metadata = gpxFile.getMetadata();
+			metadata.setRouteActivity(routeActivity, routeActivityHelper.getActivities());
+		}
+		addAppearanceToGpx(app, gpxFile, item);
 	}
 
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {

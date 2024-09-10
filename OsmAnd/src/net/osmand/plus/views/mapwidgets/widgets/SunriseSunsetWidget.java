@@ -36,6 +36,9 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
 	private static final float LOCATION_CHANGE_ACCURACY = 0.0001f; // approximately 10 meters
 
+	// maximum count of days to calculate sunrise/sunset if it can't be calculated for today
+	private static final int CALCULATIONS_DAYS_LIMIT = 7;
+
 	private final OsmandMapTileView mapView;
 	private final DayNightHelper dayNightHelper;
 	private final SunriseSunsetWidgetState widgetState;
@@ -173,10 +176,21 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	}
 
 	public long getNextTime() {
+		for (int day = 0; day < CALCULATIONS_DAYS_LIMIT; day++) {
+			long nextTime = getNextTime(day);
+			if (nextTime > 0) {
+				return nextTime;
+			}
+		}
+		return -1;
+	}
+
+	private long getNextTime(int daysShift) {
 		if (cachedCenterLatLon != null) {
 			double lat = cachedCenterLatLon.getLatitude();
 			double lon = cachedCenterLatLon.getLongitude();
-			SunriseSunset sunriseSunset = dayNightHelper.getSunriseSunset(lat, lon);
+			Date actualDate = getActualDate(daysShift);
+			SunriseSunset sunriseSunset = dayNightHelper.getSunriseSunset(lat, lon, actualDate);
 			Date sunrise = sunriseSunset.getSunrise();
 			Date sunset = sunriseSunset.getSunset();
 			Date nextTimeDate;
@@ -205,6 +219,13 @@ public class SunriseSunsetWidget extends SimpleWidget {
 			}
 		}
 		return -1;
+	}
+
+	@NonNull
+	private Date getActualDate(int daysShift) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, daysShift);
+		return calendar.getTime();
 	}
 
 	@Nullable

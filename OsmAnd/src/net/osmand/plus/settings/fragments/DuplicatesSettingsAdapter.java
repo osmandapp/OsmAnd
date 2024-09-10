@@ -133,7 +133,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof QuickActionButtonState) {
 				QuickActionButtonState buttonState = (QuickActionButtonState) currentItem;
 				itemHolder.title.setText(buttonState.getName());
-				itemHolder.icon.setImageDrawable(buttonState.getIcon(nightMode, false, ColorUtilities.getColor(app, activeColorRes)));
+				itemHolder.icon.setImageDrawable(buttonState.getIcon(ColorUtilities.getColor(app, activeColorRes), nightMode, false));
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());

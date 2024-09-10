@@ -21,6 +21,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.SharedUtil;
+import net.osmand.plus.helpers.RouteActivityHelper;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -85,6 +88,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private final UiUtilities uiUtilities;
 	private final ImportHelper importHelper;
 	private final GpxSelectionHelper gpxSelectionHelper;
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final MyPlacesActivity activity;
 	private final TrackFolder rootFolder;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -103,6 +107,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.importHelper = app.getImportHelper();
 		this.uiUtilities = app.getUIUtilities();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
+		this.routeActivitySelectionHelper = new RouteActivitySelectionHelper();
 	}
 
 	@NonNull
@@ -301,6 +306,22 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.showTopDivider(true)
 				.create()
 		);
+
+		String changeActivity = app.getString(R.string.change_activity);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitle(changeActivity)
+				.setIcon(getContentIcon(R.drawable.ic_action_activity))
+				.setOnClickListener(v -> {
+					routeActivitySelectionHelper.setActivitySelectionListener(routeActivity -> {
+						RouteActivityHelper helper = app.getRouteActivityHelper();
+						helper.saveRouteActivity(items, routeActivity);
+						dismissFragment(fragment, false);
+					});
+					SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper);
+				})
+				.create()
+		);
+
 		String changeAppearance = app.getString(R.string.change_appearance);
 		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitle(changeAppearance)

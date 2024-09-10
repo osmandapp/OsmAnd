@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
-import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_SEARCH_VIEW_ACTION;
+import static net.osmand.plus.quickaction.QuickActionIds.OPEN_SEARCH_VIEW_ACTION;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +15,21 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.ShowQuickSearchMode;
 
-public class ShowHideSearchViewAction extends QuickAction {
+public class OpenSearchViewAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_SEARCH_VIEW_ACTION,
-			"search.view.showhide", ShowHideSearchViewAction.class)
-			.nameActionRes(R.string.quick_action_verb_show_hide)
+	public static final QuickActionType TYPE = new QuickActionType(OPEN_SEARCH_VIEW_ACTION,
+			"search.view.showhide", OpenSearchViewAction.class)
+			.nameActionRes(R.string.shared_string_open)
 			.nameRes(R.string.quick_action_search_view_title)
 			.iconRes(R.drawable.ic_action_search_dark)
 			.category(QuickActionType.INTERFACE)
 			.nonEditable();
 
-	public ShowHideSearchViewAction() {
+	public OpenSearchViewAction() {
 		super(TYPE);
 	}
 
-	public ShowHideSearchViewAction(QuickAction quickAction) {
+	public OpenSearchViewAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 
