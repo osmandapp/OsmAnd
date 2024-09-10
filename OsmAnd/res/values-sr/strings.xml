@@ -5889,4 +5889,6 @@
     <string name="raster_layers_action_descr">Промени сликовне слојеве</string>
     <string name="drawer_button_description">Отвара главног изборника.</string>
     <string name="configure_map_description">Промени начин приказа карте, слојеве или друге поставке.</string>
+    <string name="type_of_activity">Тип активности</string>
+    <string name="change_activity">Промени активност</string>
 </resources>
