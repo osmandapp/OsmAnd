@@ -108,7 +108,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		Bundle args = getArguments();
 		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
 		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
+			buttonState = mapButtonsHelper.getActionButtonStateById(key);
 		}
 		if (savedInstanceState != null) {
 			long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);

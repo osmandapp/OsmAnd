@@ -5884,4 +5884,15 @@
     <string name="background_opacity">Hintergrund-Deckkraft</string>
     <string name="corner_radius">Eckenradius</string>
     <string name="shared_string_dp">dp</string>
+    <string name="raster_layers_action_descr">Raster-Ebenen ändern</string>
+    <string name="contour_layers_action_descr">Kontur-Ebenen ändern</string>
+    <string name="change_zoom_action_descr">Kartenzoom ändern.</string>
+    <string name="search_action_descr">Öffnet die Suche.</string>
+    <string name="navigation_action_descr">Öffnet die Navigation.</string>
+    <string name="my_location_action_descr">Zentriert die Karte auf den aktuellen Standort.</string>
+    <string name="map_3d_mode_action_descr">Kartenneigung ändern.</string>
+    <string name="drawer_button_description">Öffnet das Hauptmenü.</string>
+    <string name="configure_map_description">Ändert den Kartenstil, Ebenen oder andere Einstellungen.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Trails anzeigen</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Dirtbike-Trails anzeigen</string>
 </resources>

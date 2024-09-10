@@ -25,7 +25,7 @@ public class OpacitySliderCard extends MapBaseCard {
 	}
 
 	public OpacitySliderCard(@NonNull MapActivity activity, @NonNull ButtonAppearanceParams appearanceParams) {
-		super(activity);
+		super(activity, false);
 		this.appearanceParams = appearanceParams;
 	}
 

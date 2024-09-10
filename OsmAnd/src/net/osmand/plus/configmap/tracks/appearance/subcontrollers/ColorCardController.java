@@ -84,7 +84,8 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.removeAllViews();
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;

@@ -3,7 +3,6 @@ package net.osmand.plus.card.color.palette.gradient;
 import static android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT;
 import static android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
-
 import static net.osmand.gpx.GpxParameter.MAX_ELEVATION;
 import static net.osmand.gpx.GpxParameter.MIN_ELEVATION;
 import static net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard.MAX_ALTITUDE_ADDITION;
@@ -25,8 +24,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import net.osmand.shared.ColorPalette.ColorValue;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
@@ -36,7 +33,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 import java.text.DecimalFormat;
 import java.util.List;

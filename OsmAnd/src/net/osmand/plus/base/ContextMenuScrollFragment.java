@@ -18,14 +18,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public abstract class ContextMenuScrollFragment extends ContextMenuFragment implements ContextMenuFragmentListener {
@@ -102,7 +98,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.removeMapButtons(Arrays.asList(getButtonId(ZOOM_IN_BUTTON_ID), getButtonId(ZOOM_OUT_BUTTON_ID), getButtonId(BACK_TO_LOC_BUTTON_ID)));
+			mapControlsLayer.clearCustomMapButtons();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -121,9 +117,9 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), getButtonId(ZOOM_IN_BUTTON_ID), alwaysShowButtons()));
-		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), getButtonId(ZOOM_OUT_BUTTON_ID), alwaysShowButtons()));
-		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), getButtonId(BACK_TO_LOC_BUTTON_ID), false, alwaysShowButtons()));
+		layer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
+		layer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
+		layer.addCustomMapButton(view.findViewById(R.id.map_my_location_button));
 
 		setupMapRulerWidget(view, mapLayers);
 	}

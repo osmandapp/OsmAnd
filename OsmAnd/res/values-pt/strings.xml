@@ -5882,4 +5882,6 @@
     <string name="quick_action_navigation_view_desc">Um botão alternador para abrir ou fechar o ecrã de navegação.</string>
     <string name="battery_saving_mode">Modo de economia da bateria</string>
     <string name="shared_string_interface">Interface</string>
+    <string name="background_opacity">Opacidade do fundo</string>
+    <string name="corner_radius">Raio do canto</string>
 </resources>

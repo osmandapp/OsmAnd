@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.views.controls.maphudbuttons.MyLocationButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_my_location_button"
+	android:layout_width="@dimen/map_button_size"
+	android:layout_height="@dimen/map_button_size"
+	android:clickable="true"
+	android:focusable="true"
+	tools:background="@drawable/btn_circle_night"
+	tools:contentDescription="@string/shared_string_my_location"
+	tools:src="@drawable/ic_my_location" />

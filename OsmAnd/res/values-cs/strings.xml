@@ -5857,4 +5857,5 @@
     <string name="delete_widget">Smazat widget?</string>
     <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
     <string name="battery_saving_mode">Režim úspory baterie</string>
+    <string name="rendering_attr_alpineHiking_name">Stupeň obtížnosti turistických tras</string>
 </resources>

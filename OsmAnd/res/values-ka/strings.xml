@@ -3269,4 +3269,22 @@
     <string name="quick_action_interim_dialog">შუალედური დიალოგის ჩვენება</string>
     <string name="rendering_attr_buildings15zoom_name">შენობები გადიდებაზე 15</string>
     <string name="auto_split_recording_title">ჩანაწერების ავტოგაწყვეტა პაუზის შემდეგ</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">ყინულის გზების გარეშე</string>
+    <string name="reset_plugin_to_default">დამატების პარამეტრების ნაგულისხმევზე ჩამოყრა</string>
+    <string name="improve_coverage_mapillary">გააუმჯობესეთ სურათების დაფარვა Mapillary-სთან ერთად</string>
+    <string name="routing_attr_max_num_changes_description">მიუთითეთ ცვლილებების ზედა ზღვარი</string>
+    <string name="move_map_to_select_area">გადაიტანეთ რუკა საჭირო ალაგის მოსანიშნად.</string>
+    <string name="select_map_icon">ხატულა დასვენებისას</string>
+    <string name="select_navigation_icon">ხატულა მოძრაობისას</string>
+    <string name="context_menu_points_of_group">ჯგუფის ყველა წერტილი</string>
+    <string name="routing_attr_allow_private_description">წვდომის დაშვება პირად ალაგებზე.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">ბილიკების რენდერი OSMC ტრეისებზე დაყრდნობით.</string>
+    <string name="routing_attr_avoid_subway_description">მიწისქვეშა და მსუბუქი მატარებლების თავიდან აცილება</string>
+    <string name="edit_profile_screen_options_subtitle">აირჩიეთ ეკრანის პარამეტრები ამ პროფილისთვის</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">ველოსიპედის გზების ქსელის კვანძების ჩვენება</string>
+    <string name="ui_customization_short_descr">მთავარი და კონტექსტური მენიუს პუნქტები</string>
+    <string name="select_data_to_import">აირჩიეთ შემოსატანი მონაცემები</string>
+    <string name="none_point_error">დაამატეთ ერთი წერტილი მაინც.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">ყინულიანი გზების თავიდან არიდება.</string>
+    <string name="one_image_per_tile">ერთი გამოსახულების ფაილი ერთი ფილისთვის.</string>
 </resources>
