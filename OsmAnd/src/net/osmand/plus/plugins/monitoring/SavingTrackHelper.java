@@ -23,9 +23,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -273,6 +276,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
 					}
 				}
+				savePreselectedRouteActivity(gpx);
 
 				KFile fKout = SharedUtil.kFile(fout);
 				Exception warn = SharedUtil.writeGpxFile(fKout, gpx);
@@ -290,6 +294,18 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			clearRecordedData(warnings.isEmpty());
 		}
 		return new SaveGpxResult(warnings, gpxFilesByName);
+	}
+
+	private void savePreselectedRouteActivity(@NonNull GpxFile gpxFile) {
+		RouteActivityHelper helper = app.getRouteActivityHelper();
+		Metadata metadata = gpxFile.getMetadata();
+
+		RouteActivity activity = metadata.getRouteActivity(helper.getActivities());
+		if (activity == null) {
+			String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.get();
+			activity = helper.findRouteActivity(selectedId);
+			metadata.setRouteActivity(activity, helper.getActivities());
+		}
 	}
 
 	private void saveTrackAppearance(@NonNull GpxDataItem item) {

@@ -52,20 +52,36 @@ public class NotificationHelper {
 	}
 
 	@Nullable
-	public Notification buildTopNotification(@NonNull Service service) {
-		OsmandNotification notification = acquireTopNotification(service);
-		if (notification != null) {
-			removeNotification(notification.getType());
-			setTopNotification(notification);
-			Builder notificationBuilder = notification.buildNotification(service, false);
-			if (notificationBuilder != null) {
-				return notificationBuilder.build();
-			} else {
-				return null;
+	public Notification buildTopNotification(@NonNull Service service, @NonNull NotificationType type) {
+		List<OsmandNotification> notifications = acquireTopNotifications(service);
+		for (OsmandNotification notification : notifications) {
+			if (notification.getType() == type) {
+				Notification topNotification = buildTopNotification(service, notification);
+				if (topNotification != null) {
+					return topNotification;
+				}
 			}
-		} else {
-			return null;
 		}
+		for (OsmandNotification notification : notifications) {
+			if (notification.getType() != type) {
+				Notification topNotification = buildTopNotification(service, notification);
+				if (topNotification != null) {
+					return topNotification;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private Notification buildTopNotification(@NonNull Service service, @NonNull OsmandNotification notification) {
+		removeNotification(notification.getType());
+		setTopNotification(notification);
+		Builder notificationBuilder = notification.buildNotification(service, false);
+		if (notificationBuilder != null) {
+			return notificationBuilder.build();
+		}
+		return null;
 	}
 
 	@NonNull
@@ -78,15 +94,16 @@ public class NotificationHelper {
 		return carAppNotification.buildNotification(null, false).build();
 	}
 
-	@Nullable
-	private OsmandNotification acquireTopNotification(@Nullable Service service) {
+	@NonNull
+	private List<OsmandNotification> acquireTopNotifications(@Nullable Service service) {
+		List<OsmandNotification> res = new ArrayList<>();
 		if (navigationNotification.isEnabled(service)) {
-			return navigationNotification;
-		} else if (gpxNotification.isEnabled(service)) {
-			return gpxNotification;
-		} else {
-			return null;
+			res.add(navigationNotification);
 		}
+		if (gpxNotification.isEnabled(service)) {
+			res.add(gpxNotification);
+		}
+		return res;
 	}
 
 	public void resetTopNotification() {
@@ -96,8 +113,10 @@ public class NotificationHelper {
 	}
 
 	public void updateTopNotification() {
-		OsmandNotification notification = acquireTopNotification(null);
-		setTopNotification(notification);
+		List<OsmandNotification> notifications = acquireTopNotifications(null);
+		if (!notifications.isEmpty()) {
+			setTopNotification(notifications.get(0));
+		}
 	}
 
 	private void setTopNotification(OsmandNotification notification) {

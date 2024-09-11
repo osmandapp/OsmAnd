@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
@@ -33,10 +33,10 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;

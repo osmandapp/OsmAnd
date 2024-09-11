@@ -4,7 +4,8 @@
 	android:id="@+id/map_quick_actions_button"
 	android:layout_width="@dimen/map_button_size"
 	android:layout_height="@dimen/map_button_size"
-	android:clipToPadding="false"
+	android:clickable="true"
 	android:contentDescription="@string/configure_screen_quick_action"
+	android:focusable="true"
 	tools:src="@drawable/ic_quick_action"
 	tools:tint="?attr/map_button_icon_color" />

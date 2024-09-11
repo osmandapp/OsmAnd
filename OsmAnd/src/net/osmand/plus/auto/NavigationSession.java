@@ -59,20 +59,28 @@ import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -201,6 +209,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (!app.isAppInForegroundOnRootDevice()) {
 			checkAppInitialization(new RestoreNavigationHelper(app, null));
 		}
+	}
+
+	@Override
+	public void onResume(@NonNull LifecycleOwner owner) {
+		showRoutePreview();
 	}
 
 	@Override
@@ -355,9 +368,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					result.localeName = label;
 				}
 				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
-					getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
-					if (hasStarted()) {
-						startNavigation();
+					if (obj != null) {
+						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+						if (hasStarted()) {
+							startNavigation();
+						}
 					}
 				});
 			} else {
@@ -434,6 +449,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		showRoutePreview();
 	}
 
 	@Override
@@ -444,6 +460,49 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void routeWasFinished() {
 		getApp().stopNavigation();
+	}
+
+	private void showRoutePreview() {
+		OsmandApplication app = getApp();
+		CarContext context = getCarContext();
+		ScreenManager screenManager = context.getCarService(ScreenManager.class);
+		Screen top = screenManager.getTop();
+		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
+		if (app.getRoutingHelper().isRouteCalculated() && !settings.FOLLOW_THE_ROUTE.get()
+				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {
+			SearchResult result = new SearchResult();
+			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
+			GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();
+			if (gpxFile != null) {
+				String fileName = "";
+				if (!Algorithms.isEmpty(gpxFile.getPath())) {
+					fileName = new File(gpxFile.getPath()).getName();
+				} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+					fileName = gpxFile.getTracks().get(0).getName();
+				}
+				if (Algorithms.isEmpty(fileName)) {
+					fileName = app.getString(R.string.shared_string_gpx_track);
+				}
+				result.localeName = GpxUiHelper.getGpxTitle(fileName);
+				result.object = gpxFile;
+				result.objectType = ObjectType.GPX_TRACK;
+			} else {
+				result.localeName = pointToNavigate.getPointDescription(context).getSimpleName(app, false);
+				result.object = new HistoryEntry(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
+						pointToNavigate.getPointDescription(context), HistorySource.NAVIGATION);
+				result.objectType = ObjectType.RECENT_OBJ;
+			}
+
+			screenManager.popToRoot();
+			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+				if (obj != null) {
+					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+					if (hasStarted()) {
+						startNavigation();
+					}
+				}
+			});
+		}
 	}
 
 	private void addLocationSourceListener() {

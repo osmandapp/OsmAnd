@@ -112,7 +112,7 @@ public class MapWidgetsFactory {
 			case BATTERY:
 				return new BatteryWidget(mapActivity, customId, panel);
 			case RADIUS_RULER:
-				return new RadiusRulerWidget(mapActivity);
+				return new RadiusRulerWidget(mapActivity, customId, panel);
 			case SUNRISE:
 				SunriseSunsetWidgetState sunriseState = new SunriseSunsetWidgetState(app, customId, WidgetType.SUNRISE);
 				return new SunriseSunsetWidget(mapActivity, sunriseState, customId, panel);

@@ -27,11 +27,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -121,7 +121,7 @@ public class SelectTrackDirectoryBottomSheet extends MenuBottomSheetDialogFragme
 		AndroidUtils.setPadding(view, 0, 0, 0, 0);
 
 		TextView text = view.findViewById(R.id.title);
-		text.setText(GpxUiHelper.getGpxDirTitle(folder.getName()));
+		text.setText(GpxHelper.INSTANCE.getGpxDirTitle(folder.getName()));
 
 		int count = getGpxFilesCount(folder);
 		TextView description = view.findViewById(R.id.description);

@@ -61,7 +61,7 @@ public class ApproximationTest {
 
 	@Test(timeout = ENTRY_TIMEOUT_MS)
 	public void testApproximation() throws Exception {
-		boolean useNative = isNative() && getNativeLibPath() != null;
+		boolean useNative = isNative() && getNativeLibPath() != null && !entry.ignoreNative;
 		NativeLibrary nativeLibrary = null;
 		if (useNative) {
 			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
@@ -188,6 +188,7 @@ public class ApproximationTest {
 		private String gpxFile;
 		private String obfFile;
 		private boolean ignore;
+		private boolean ignoreNative;
 		private List<String> types;
 		private List<String> profiles;
 		private List<Integer> minPointApproximation;

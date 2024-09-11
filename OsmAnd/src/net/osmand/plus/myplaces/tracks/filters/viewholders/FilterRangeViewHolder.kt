@@ -1,21 +1,24 @@
 package net.osmand.plus.myplaces.tracks.filters.viewholders
 
+//import net.osmand.plus.myplaces.tracks.filters.MeasureUnitType
 import android.text.Editable
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
+import net.osmand.SharedUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.MeasureUnitType
-import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter
+import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
+import net.osmand.shared.gpx.filters.MeasureUnitType
+import net.osmand.shared.gpx.filters.RangeTrackFilter
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
@@ -109,7 +112,7 @@ open class FilterRangeViewHolder(
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
-					if (filter.getDisplayValueFrom() != newValue
+					if (getDisplayValueFrom(filter) != newValue
 						&& filter.valueTo is Number
 						&& newValue < (filter.valueTo as Number).toInt()
 						&& !isSliderDragging
@@ -126,7 +129,7 @@ open class FilterRangeViewHolder(
 				super.afterTextChanged(newText)
 				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
-					if (filter.getDisplayValueTo() != newValue
+					if (getDisplayValueTo(filter) != newValue
 						&& filter.valueFrom is Number
 						&& newValue > (filter.valueFrom as Number).toInt()
 						&& !isSliderDragging
@@ -144,16 +147,14 @@ open class FilterRangeViewHolder(
 	var isBinding = false
 	fun bindView(filter: RangeTrackFilter<*>) {
 		this.filter = filter
-		title.setText(filter.trackFilterType.nameResId)
+		title.text = filter.trackFilterType.getName()
 		valueFromInputContainer.labelText =
 			"${app.getString(R.string.shared_string_from)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					app)
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		valueToInputContainer.labelText =
 			"${app.getString(R.string.shared_string_to)}, ${
-				getMeasureUnitType().getFilterUnitText(
-					app)
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		updateExpandState()
 		updateValues()
@@ -170,10 +171,10 @@ open class FilterRangeViewHolder(
 
 	private fun updateValues() {
 		isBinding = true
-		val valueFrom = filter.getDisplayValueFrom()
-		val valueTo = filter.getDisplayValueTo()
-		val minValue = filter.getDisplayMinValue()
-		val maxValue = filter.getDisplayMaxValue()
+		val valueFrom = getDisplayValueFrom(filter)
+		val valueTo = getDisplayValueTo(filter)
+		val minValue = getDisplayMinValue(filter)
+		val maxValue = getDisplayMaxValue(filter)
 		if (maxValue > minValue) {
 			slider.valueTo = maxValue.toFloat()
 			slider.valueFrom = minValue.toFloat()
@@ -188,13 +189,11 @@ open class FilterRangeViewHolder(
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
 			"${decimalFormat.format(minValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					app)
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		val maxValuePrompt =
 			"${decimalFormat.format(maxValue.toFloat())} ${
-				getMeasureUnitType().getFilterUnitText(
-					app)
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get())
 			}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
@@ -202,6 +201,54 @@ open class FilterRangeViewHolder(
 		updateSelectedValue(valueFrom.toString(), valueTo.toString())
 		isBinding = false
 	}
+
+	open fun getDisplayMaxValue(filter: RangeTrackFilter<*>): Int {
+		val formattedValue =
+			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMaxValue())
+		return formattedValue.valueSrc.toInt()
+	}
+
+	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {
+		val formattedValue =
+			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMinValue())
+		return formattedValue.valueSrc.toInt()
+	}
+
+	open fun getDisplayValueFrom(filter: RangeTrackFilter<*>): Int {
+		val formattedValue =
+			getFormattedValue(filter.trackFilterType.measureUnitType, filter.valueFrom.toString())
+		return formattedValue.valueSrc.toInt()
+	}
+
+	open fun getDisplayValueTo(filter: RangeTrackFilter<*>): Int {
+		val formattedValue = getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilValueTo())
+		return formattedValue.valueSrc.toInt()
+	}
+
+	fun getFormattedValue(
+		measureUnitType: MeasureUnitType,
+		value: String): OsmAndFormatter.FormattedValue {
+		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
+		return when (measureUnitType) {
+			MeasureUnitType.SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
+			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
+				value.toDouble(),
+				app,
+				metricsConstants)
+
+			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
+				value.toFloat(),
+				app)
+
+			MeasureUnitType.TIME_DURATION -> OsmAndFormatter.FormattedValue(
+				value.toFloat() / 1000 / 60,
+				value,
+				"")
+
+			else -> OsmAndFormatter.FormattedValue(value.toFloat(), value, "")
+		}
+	}
+
 
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
 		if (filter.trackFilterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
@@ -219,7 +266,7 @@ open class FilterRangeViewHolder(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
 				toTxt,
-				getMeasureUnitType().getFilterUnitText(app))
+				getMeasureUnitType().getFilterUnitText(app.settings.METRIC_SYSTEM.get()))
 		}
 	}
 

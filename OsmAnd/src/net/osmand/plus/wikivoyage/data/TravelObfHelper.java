@@ -6,7 +6,6 @@ import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
-import static net.osmand.plus.track.helpers.GpxUiHelper.getGpxTitle;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
@@ -63,8 +62,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.primitives.GpxExtensions;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1244,7 +1243,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	public String createTitle(@NonNull String name) {
-		return capitalizeFirstLetter(getGpxTitle(name));
+		return capitalizeFirstLetter(GpxHelper.INSTANCE.getGpxTitle(name));
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {

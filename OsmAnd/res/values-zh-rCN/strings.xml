@@ -454,7 +454,7 @@
     <string name="map_widget_monitoring_services">日志服务</string>
     <string name="replace_destination_point">替换目的地</string>
     <string name="new_destination_point_dialog">您已经设置了一个目的地：</string>
-    <string name="ending_point_too_far">结束点距离最近的道路太远。</string>
+    <string name="ending_point_too_far">终点距离最近的道路过远。</string>
     <string name="add_tag">添加标签</string>
     <string name="btn_advanced_mode">高级模式…</string>
     <string name="show_warnings_title">显示警报…</string>
@@ -622,7 +622,7 @@
     <string name="indexing_poi">POI索引中…</string>
     <string name="indexing_transport">交通设施索引中…</string>
     <string name="old_map_index_is_not_supported">已废弃的地图数据格式 \'\'{0}\'\' ，已不再支持</string>
-    <string name="poi_filter_closest_poi">最近的兴趣点</string>
+    <string name="poi_filter_closest_poi">距离最近的兴趣点</string>
     <string name="poi_filter_custom_filter">自定义过滤器</string>
     <string name="reading_cached_tiles">正在读取缓存地图瓦片…</string>
     <string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 太大而无法载入内存</string>
@@ -825,7 +825,7 @@
     <string name="osm_live_subscribe_btn">订阅</string>
     <string name="osm_live_subscription">OsmAnd 实时订阅</string>
     <string name="osm_live_user_public_name">公开名称</string>
-    <string name="osm_live_email_desc">需要向你更新你的贡献。</string>
+    <string name="osm_live_email_desc">需要向您通报您的捐赠情况。</string>
     <string name="osm_live_hide_user_name">不在报告中显示我的名称</string>
     <string name="osm_live_support_region">支持地区</string>
     <string name="osm_live_month_cost">每月费用</string>
@@ -1101,7 +1101,7 @@
     <string name="type_address">输入地址</string>
     <string name="type_city_town">输入城市/乡镇/地区</string>
     <string name="type_postcode">输入邮政编码</string>
-    <string name="nearest_cities">最近的城市</string>
+    <string name="nearest_cities">距离最近的城市</string>
     <string name="select_city">选择城市</string>
     <string name="select_postcode">邮政编码搜索</string>
     <string name="quick_action_auto_zoom">自动缩放地图</string>
@@ -1214,7 +1214,7 @@
     <string name="roads_only">仅道路</string>
     <string name="device_memory">设备内存</string>
     <string name="first_usage_item">初次使用</string>
-    <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容。</string>
+    <string name="tips_and_tricks_descr">常见问题、近期改动和其它内容。</string>
     <string name="faq_item_description">常见问题。</string>
     <string name="features_menu_group">功能</string>
     <string name="osmand_parking_plugin_name">停车位置</string>
@@ -1285,7 +1285,7 @@
     <string name="routing_attr_avoid_borders_description">避免跨越国界</string>
     <string name="routing_attr_weight_description">指定路线上允许的车辆重量。</string>
     <string name="routing_attr_height_name">高度</string>
-    <string name="routing_attr_height_description">指定路线上允许的车辆高度。</string>
+    <string name="routing_attr_height_description">规定路线上允许的车辆高度。</string>
     <string name="android_19_location_disabled">在 Android 4.4 (KitKat) 以后，旧的存储文件夹（%s）已被废弃。复制所有 OsmAnd 文件到新的存储位置？
 \n 注 1：你的旧文件将保持不变（但可以手动删除）。
 \n 注 2：在新的存储位置，OsmAnd 和 OsmAnd+ 之间将无法共享文件。</string>
@@ -1908,7 +1908,7 @@
     <string name="context_menu_item_first_intermediate_point">添加为第一个中转点</string>
     <string name="add_as_last_destination_point">添加为最后的中转点</string>
     <string name="add_as_first_destination_point">添加为第一个中转点</string>
-    <string name="intermediate_point_too_far">中转点 %1$s 离最近的路太远。</string>
+    <string name="intermediate_point_too_far">途经点 %1$s 距离最近的道路过远。</string>
     <string name="arrived_at_intermediate_point">到达中间目的地</string>
     <string name="context_menu_item_intermediate_point">添加为中转点</string>
     <string name="show_warnings_descr">设置交通警告（限速、强制停车、减速带、隧道）、测速摄像头警告和车道信息。</string>
@@ -2233,7 +2233,7 @@
     <string name="incremental_search_street">渐进式查询街道</string>
     <string name="incremental_search_building">渐进式查询建筑物</string>
     <string name="choose_intersected_street">选择交叉路口</string>
-    <string name="Closest_Amenities">最近的设施</string>
+    <string name="Closest_Amenities">距离最近的设施</string>
     <string name="poi_action_delete">删除</string>
     <string name="poi_dialog_reopen">重新打开</string>
     <string name="av_camera_focus">相机对焦类型</string>
@@ -2280,7 +2280,7 @@
     <string name="number_of_rows_in_dash">破折号 %1$s 中的行数</string>
     <string name="please_specify_poi_type">请指定兴趣点的类型。</string>
     <string name="working_days">工作日</string>
-    <string name="recent_places">最近的地点</string>
+    <string name="recent_places">近期地点</string>
     <string name="favourites">收藏夹</string>
     <string name="saved_at_time">现已保存在: %1$s</string>
     <string name="poi_deleted_localy">一旦您上传您的更改，兴趣点将会被删除</string>
@@ -2312,7 +2312,7 @@
     <string name="live_update">实时更新</string>
     <string name="update_now">立即更新</string>
     <string name="missing_write_external_storage_permission">OsmAnd 没有权限使用存储卡</string>
-    <string name="last_update">最近的更新： %s</string>
+    <string name="last_update">上次更新于： %s</string>
     <string name="update_time">更新时间</string>
     <string name="updates_size">更新大小</string>
     <string name="last_map_change">上次的地图更改： %s</string>
@@ -2387,13 +2387,13 @@
     <string name="mapillary_menu_edit_text_hint">输入用户名</string>
     <string name="mapillary_menu_title_dates">日期</string>
     <string name="mapillary_menu_descr_username">仅查看特定用户添加的图像</string>
-    <string name="mapillary_menu_descr_dates">只查看添加的图片</string>
+    <string name="mapillary_menu_descr_dates">只查看新增加的图片</string>
     <string name="mapillary_menu_filter_description">按提交者、日期或类型筛选图像。仅在特写缩放中有效。</string>
     <string name="shared_string_reload">重新载入</string>
     <string name="shared_string_reset">重置</string>
     <string name="store_tracks_in_monthly_directories">按月将记录的轨迹存放在文件夹中</string>
     <string name="store_tracks_in_monthly_directories_descrp">按照月份将记录的轨迹存储在子文件夹中（例如 2018-01）。</string>
-    <string name="mapillary_menu_descr_tile_cache">重新加载区片以查看最新的数据。</string>
+    <string name="mapillary_menu_descr_tile_cache">重新加载地图瓦片以查看最新的数据。</string>
     <string name="mapillary_menu_title_tile_cache">区片缓存</string>
     <string name="average">平均</string>
     <string name="ascent_descent">升序/降序</string>
@@ -2549,7 +2549,7 @@
     <string name="popular_destinations">热门目的地</string>
     <string name="paid_app">付费应用</string>
     <string name="paid_plugin">付费插件</string>
-    <string name="travel_card_update_descr">新的 Wikivoyage 数据可用，请更新以继续享用。</string>
+    <string name="travel_card_update_descr">有新的维基导游数据可用，更新以继续享用。</string>
     <string name="get_unlimited_access">获取无限访问权限</string>
     <string name="shared_string_options">选项</string>
     <string name="coord_input_save_as_track">保存为轨迹</string>
@@ -3426,7 +3426,7 @@
     <string name="map_widget_monitoring">行程录制</string>
     <string name="follow_track_descr">选择要跟随的轨迹文件</string>
     <string name="select_another_track">选择另一轨迹</string>
-    <string name="nearest_point">最近的点</string>
+    <string name="nearest_point">距离最近的点</string>
     <string name="attach_to_the_roads">依附于道路</string>
     <string name="simplified_track">简化轨迹</string>
     <string name="system_default_theme">系统默认值</string>
@@ -3941,7 +3941,7 @@
     <string name="backup_delete_old_data_warning">您将删除先前加载的数据的更改历史。
 \n
 \n当前版本的数据将保存在服务器上，但您将无法恢复到以前所做的更改。</string>
-    <string name="shared_string_min_height">最低高度</string>
+    <string name="shared_string_min_height">最小高度</string>
     <string name="restore_from_file">从文件恢复</string>
     <string name="local_backup">本地备份</string>
     <string name="osmand_cloud_authorize_descr">永不丢失你的数据。轻易备份和恢复所有信息。</string>
@@ -4335,7 +4335,7 @@
     <string name="trip_recording_downhill_widget_desc">显示当前记录的行程中所有下降高度的总和。</string>
     <string name="compass_desc">显示向北的方向。</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">显示节点网络自行车路线</string>
-    <string name="live_update_frequency_week_variant">地图更新每周检查一次。</string>
+    <string name="live_update_frequency_week_variant">每周检查一次地图更新。</string>
     <string name="download_tiles">下载瓦片</string>
     <string name="auto_25_chars_route_tr_kr">向右转并靠右</string>
     <string name="auto_25_chars_route_tu_kl">掉头并靠左</string>
@@ -4360,7 +4360,7 @@
     <string name="download_complete">下载完成</string>
     <string name="marker_1st">第一个标记</string>
     <string name="goods_delivery_desc_3">仅适用于不超过 3.5 吨的送货卡车。</string>
-    <string name="live_update_frequency_day_variant">每天都会检查地图更新。</string>
+    <string name="live_update_frequency_day_variant">每天检查一次地图更新。</string>
     <string name="average_speed_skip_stops_desc">低于 %1$s 的速度将被计算并影响平均速度。</string>
     <string name="transport_hazmat_yes_desc">选择适用的类别。</string>
     <string name="transport_hazmat_no_desc">道路和隧道可能会限制危险材料的运输。</string>
@@ -4904,7 +4904,7 @@
     <string name="sort_distance_ascending">最短距离优先</string>
     <string name="app_mode_moped">轻型摩托车</string>
     <string name="sort_distance_descending">最长距离优先</string>
-    <string name="shared_string_nearest">最近</string>
+    <string name="shared_string_nearest">距离最近</string>
     <string name="shared_string_add_manually">手动添加…</string>
     <string name="cloud_version_confirm_delete">从OsmAnd Cloud中删除 \"%1$s\"？</string>
     <string name="shared_string_delete_file">删除文件</string>
@@ -5725,4 +5725,10 @@
     <string name="wall_color">墙壁颜色</string>
     <string name="weather_data_sources_prompt">OsmAnd 从两个来源提供天气数据：</string>
     <string name="weather_source_ecmwf_description">欧洲中期天气预报中心</string>
+    <string name="height_legend_description">海拔彩色地图用于直观显示地形。</string>
+    <string name="track_vertical_exaggeration_description">通过更改比例值，可以改变 3D 轨迹的高度。</string>
+    <string name="missing_maps_description">本路线所需的部分离线地图丢失或未更新。请下载或更新这些地图。</string>
+    <string name="fixed_height">固定高度</string>
+    <string name="explore_3d_track_description">在交互式 3D 中探索轨迹！在地图上直接显示高度、速度等信息。</string>
+    <string name="missing_maps_header">地图缺失或过时</string>
 </resources>

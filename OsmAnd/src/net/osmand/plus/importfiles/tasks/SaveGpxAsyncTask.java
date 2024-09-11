@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
@@ -124,7 +124,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		GpxDataItem item = new GpxDataItem(SharedUtil.kFile(file));
 		item.readGpxParams(gpxFile);
 		app.getGpxDbHelper().add(item);
-		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(file));
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(SharedUtil.kFile(file)));
 	}
 
 	@NonNull

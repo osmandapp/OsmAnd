@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 
 import java.io.File;
 
@@ -22,7 +22,7 @@ public class GPXInfo {
 	public GPXInfo(@NonNull String fileName, @Nullable File file) {
 		this.file = file;
 		this.fileName = fileName;
-		this.name = GpxUiHelper.getGpxTitle(fileName);
+		this.name = GpxHelper.INSTANCE.getGpxTitle(fileName);
 		this.fileSize = file != null ? file.length() : 0;
 		this.lastModified = file != null ? file.lastModified() : 0;
 	}

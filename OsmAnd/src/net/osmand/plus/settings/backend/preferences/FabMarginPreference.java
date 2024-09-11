@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -19,14 +20,18 @@ public class FabMarginPreference {
 	private static final String X_LANDSCAPE_MARGIN = "_x_landscape_margin";
 	private static final String Y_LANDSCAPE_MARGIN = "_y_landscape_margin";
 
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final CommonPreference<Integer> fabMarginXPortrait;
 	private final CommonPreference<Integer> fabMarginYPortrait;
 	private final CommonPreference<Integer> fabMarginXLandscape;
 	private final CommonPreference<Integer> fabMarginYLandscape;
+	private Pair<Integer, Integer> defaultPortraitMargins;
+	private Pair<Integer, Integer> defaultLandscapeMargins;
 
-	public FabMarginPreference(@NonNull OsmandSettings settings, @NonNull String prefix) {
-		this.settings = settings;
+	public FabMarginPreference(@NonNull OsmandApplication app, @NonNull String prefix) {
+		this.app = app;
+		this.settings = app.getSettings();
 		fabMarginXPortrait = settings.registerIntPreference(prefix + X_PORTRAIT_MARGIN, 0).makeProfile();
 		fabMarginYPortrait = settings.registerIntPreference(prefix + Y_PORTRAIT_MARGIN, 0).makeProfile();
 		fabMarginXLandscape = settings.registerIntPreference(prefix + X_LANDSCAPE_MARGIN, 0).makeProfile();
@@ -54,8 +59,8 @@ public class FabMarginPreference {
 	}
 
 	@NonNull
-	public Pair<Integer, Integer> getPortraitFabMargin() {
-		return getPortraitFabMargin(settings.getApplicationMode());
+	public Pair<Integer, Integer> getPortraitFabMargins() {
+		return getPortraitFabMargins(settings.getApplicationMode());
 	}
 
 	@NonNull
@@ -64,7 +69,7 @@ public class FabMarginPreference {
 	}
 
 	@NonNull
-	public Pair<Integer, Integer> getPortraitFabMargin(@NonNull ApplicationMode mode) {
+	public Pair<Integer, Integer> getPortraitFabMargins(@NonNull ApplicationMode mode) {
 		return new Pair<>(fabMarginXPortrait.getModeValue(mode), fabMarginYPortrait.getModeValue(mode));
 	}
 
@@ -103,7 +108,8 @@ public class FabMarginPreference {
 		return fabMarginYLandscape;
 	}
 
-	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton, FrameLayout.LayoutParams params,
+	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton,
+	                                      FrameLayout.LayoutParams params,
 	                                      @Nullable Pair<Integer, Integer> fabMargin,
 	                                      int defRightMargin, int defBottomMargin) {
 		if (mapActivity == null) {
@@ -133,5 +139,23 @@ public class FabMarginPreference {
 		params.rightMargin = rightMargin;
 		params.bottomMargin = bottomMargin;
 		fabButton.setLayoutParams(params);
+	}
+
+	@NonNull
+	public Pair<Integer, Integer> getDefaultPortraitMargins() {
+		return defaultPortraitMargins;
+	}
+
+	@NonNull
+	public Pair<Integer, Integer> getDefaultLandscapeMargins() {
+		return defaultLandscapeMargins;
+	}
+
+	public void setDefaultPortraitMargins(@NonNull Pair<Integer, Integer> margins) {
+		this.defaultPortraitMargins = margins;
+	}
+
+	public void setDefaultLandscapeMargins(@NonNull Pair<Integer, Integer> margins) {
+		this.defaultLandscapeMargins = margins;
 	}
 }

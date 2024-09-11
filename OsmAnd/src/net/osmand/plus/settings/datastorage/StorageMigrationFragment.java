@@ -31,7 +31,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
@@ -39,6 +38,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -313,7 +313,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			} else if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 				fileName = FileNameTranslationHelper.getFileNameWithRegion(app, fileName);
 			} else if (subtype == FileSubtype.GPX) {
-				fileName = GpxUiHelper.getGpxTitle(fileName);
+				fileName = GpxHelper.INSTANCE.getGpxTitle(fileName);
 			}
 
 			String description = getString(R.string.copying_file, fileName);

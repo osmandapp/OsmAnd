@@ -2,6 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.CHANGE_MAP_ORIENTATION_ACTION;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 
 public class ChangeMapOrientationAction extends QuickAction {
 
@@ -35,6 +39,14 @@ public class ChangeMapOrientationAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		mapActivity.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+	}
+
+	@Override
+	public int getIconRes(Context context) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+		CompassMode compassMode = settings.getCompassMode();
+		return compassMode.getIconId(!settings.isLightContent());
 	}
 
 	@Override

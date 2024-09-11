@@ -1240,8 +1240,8 @@
     <string name="shared_string_target_points">Odredišta</string>
     <string name="new_destination_point_dialog">Već ste postavili odredišnu tačku:</string>
     <string name="replace_destination_point">Zameni odredište</string>
-    <string name="add_as_first_destination_point">Dodaj kao početno prolazno odredište</string>
-    <string name="add_as_last_destination_point">Dodaj kao završno prolazno odredište</string>
+    <string name="add_as_first_destination_point">Dodaj kao međuodredište</string>
+    <string name="add_as_last_destination_point">Dodaj kao zadnje međuodredište</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj kao prvo međuodredište</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj kao poslednje međuodredište</string>
     <string name="intermediate_point">Međuodredište %1$s</string>
@@ -3121,11 +3121,11 @@
     <string name="gpx_file_desc">GPX - pogodno za izvoz u JOSM i druge uređivače OSM-a.</string>
     <string name="switch_osm_notes_visibility_desc">Prikazati ili sakriti beleške OSM-a na mapi.</string>
     <string name="show_closed_notes">Prikazati zatvorene beleške</string>
-    <string name="subsequent_dest_description">Pomeri odredište naviše i napravi ga</string>
+    <string name="subsequent_dest_description">Dodaj kao krajnje odredište</string>
     <string name="first_intermediate_dest_description">Dodaj prvo stajanje</string>
     <string name="last_intermediate_dest_description">Dodaje prolazno stajanje</string>
     <string name="shared_string_current">Trenutno</string>
-    <string name="make_as_start_point">Označi kao tačku polaska</string>
+    <string name="make_as_start_point">Zameni početnu tačku</string>
     <string name="map_imported_successfully">Mapa je uvezena</string>
     <string name="map_import_error">Greška pri uvoženju mape</string>
     <string name="enter_the_file_name">Unesi ime fajla.</string>
@@ -5803,7 +5803,7 @@
     <string name="quick_action_audio_note">Audio beleška</string>
     <string name="quick_action_video_note">Video beleška</string>
     <string name="quick_action_photo_note">Foto beleška</string>
-    <string name="quick_action_track_waypoint">Putna tačka</string>
+    <string name="quick_action_track_waypoint">Međuodredište putanje</string>
     <string name="quick_action_parking_place">Parking mesto</string>
     <string name="quick_action_verb_show_hide">Prikazati / Sakriti</string>
     <string name="quick_action_verb_pause_resume">Pauziranje / Nastavak</string>
@@ -5886,4 +5886,17 @@
     <string name="corner_radius">Radijus ugla</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Prozirnost pozadine</string>
+    <string name="contour_layers_action_descr">Promeni slojeve konture</string>
+    <string name="change_zoom_action_descr">Promeni zum mape.</string>
+    <string name="search_action_descr">Otvaranje pretrage.</string>
+    <string name="navigation_action_descr">Otvaranje navigacije.</string>
+    <string name="my_location_action_descr">Centrira mapu na tvojoj trenutnoj lokaciji.</string>
+    <string name="configure_map_description">Promeni stil mape, slojeve ili druga podešavanja.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Prikazati staze za bicikle</string>
+    <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
+    <string name="drawer_button_description">Otvaranje glavnog menija.</string>
+    <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Prikazati staze za bicikle</string>
+    <string name="type_of_activity">Tip aktivnosti</string>
+    <string name="change_activity">Promeni aktivnost</string>
 </resources>

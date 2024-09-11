@@ -33,8 +33,7 @@ abstract class ElevationApproximator {
 
 		val survived = BooleanArray(pointsCount)
 		var lastSurvived = 0
-		survived[0] = true
-		var survivedCount = 1
+		var survivedCount = 0
 		for (i in 1 until pointsCount - 1) {
 			val prevEle = getPointElevation(lastSurvived)
 			val ele = getPointElevation(i)
@@ -47,13 +46,13 @@ abstract class ElevationApproximator {
 		}
 		survived[pointsCount - 1] = true
 		survivedCount++
-		if (survivedCount < 4) {
+		if (survivedCount < 2) {
 			return false
 		}
 
 		lastSurvived = 0
-		survivedCount = 1
-		for (i in 1 until pointsCount) {
+		survivedCount = 0
+		for (i in 1 until pointsCount - 1) {
 			if (!survived[i]) {
 				continue
 			}
@@ -71,19 +70,21 @@ abstract class ElevationApproximator {
 			lastSurvived = i
 			survivedCount++
 		}
-		if (survivedCount < 4) {
+		if (survivedCount < 2) {
 			return false
 		}
 
-		val distances = DoubleArray(survivedCount)
-		val elevations = DoubleArray(survivedCount)
+		survived[0] = true
+		survived[pointsCount - 1] = true
+		val distances = DoubleArray(survivedCount + 2)
+		val elevations = DoubleArray(survivedCount + 2)
 		var k = 0
 		lastSurvived = 0
 		for (i in 0 until pointsCount) {
-			if (!survived[i] || k == survivedCount) {
+			if (!survived[i]) {
 				continue
 			}
-			distances[k] = if (lastSurvived == i) 0.0 else KMapUtils.getDistance(
+			distances[k] = if (lastSurvived == 0) 0.0 else KMapUtils.getDistance(
 				getPointLatitude(i), getPointLongitude(i),
 				getPointLatitude(lastSurvived), getPointLongitude(lastSurvived)
 			)

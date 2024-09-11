@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -18,17 +19,17 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -73,7 +74,7 @@ public class TrackTabsHelper {
 		List<TrackItem> allTrackItems = new ArrayList<>(trackItems);
 		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			TrackItem trackItem = new TrackItem(selectedGpxFile.getGpxFile());
 			allTrackItems.add(trackItem);
 		}
 		itemsSelectionHelper.setAllItems(allTrackItems);
@@ -88,7 +89,7 @@ public class TrackTabsHelper {
 		List<TrackItem> allTrackItems = new ArrayList<>(folder.getFlattenedTrackItems());
 		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			TrackItem trackItem = new TrackItem(selectedGpxFile.getGpxFile());
 			allTrackItems.add(trackItem);
 		}
 		itemsSelectionHelper.setAllItems(allTrackItems);
@@ -231,7 +232,7 @@ public class TrackTabsHelper {
 		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
 			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 			if (selectedGpxFile == null && (!gpxFile.isShowCurrentTrack() || monitoringActive)) {
-				recentlyVisibleTrackItem.add(new TrackItem(app, gpxFile));
+				recentlyVisibleTrackItem.add(new TrackItem(gpxFile));
 			}
 		}
 	}
@@ -264,17 +265,19 @@ public class TrackTabsHelper {
 
 	@Nullable
 	private TrackTab addTrackItem(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
-		File file = item.getFile();
+		KFile file = item.getFile();
 		if (file != null && file.getParentFile() != null) {
-			File dir = file.getParentFile();
-			TrackTab trackTab = trackTabs.get(dir.getName());
-			if (trackTab == null) {
-				trackTab = new TrackTab(dir);
-				trackTab.items.add(TYPE_SORT_TRACKS);
-				trackTabs.put(trackTab.getTypeName(), trackTab);
+			KFile dir = file.getParentFile();
+			if(dir != null) {
+				TrackTab trackTab = trackTabs.get(dir.name());
+				if (trackTab == null) {
+					trackTab = new TrackTab(SharedUtil.jFile(dir));
+					trackTab.items.add(TYPE_SORT_TRACKS);
+					trackTabs.put(trackTab.getTypeName(), trackTab);
+				}
+				trackTab.items.add(item);
+				return trackTab;
 			}
-			trackTab.items.add(item);
-			return trackTab;
 		}
 		return null;
 	}

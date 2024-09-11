@@ -30,7 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackTabType;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
@@ -100,7 +100,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		allTab.perform(click());
 
 		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
-				withText(GpxUiHelper.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
+				withText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
 		trackItemView.perform(click());
 
 		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
