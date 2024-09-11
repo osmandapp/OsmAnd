@@ -48,6 +48,7 @@ android {
 			osmandTask.dependsOn(copyProjDb)
 			osmandTask.dependsOn(collectFonts)
 			osmandTask.dependsOn(copyPoiCategories)
+			osmandTask.dependsOn(copyRouteActivities)
 			osmandTask.dependsOn(collectHelpContentsStyle)
 			osmandTask.dependsOn(copyColorPalettes)
 			osmandTask.dependsOn(copy3DModels)
