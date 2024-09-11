@@ -40,24 +40,21 @@ public class GalleryContextHelper {
 	public Bitmap getBitmap(@NonNull String imageUrl, @NonNull ImageCardListener listener) {
 		Bitmap bitmap = cachedImages.get(imageUrl);
 		if (bitmap == null) {
-			MenuBuilder.execute(new DownloadImageTask(app, imageUrl, new DownloadImageListener() {
-				@Override
-				public void onDownloadStarted(String url) {
-
+			MenuBuilder.execute(new DownloadImageTask(app, imageUrl, result -> {
+				String resultImageUrl = result.first;
+				Bitmap resultBitmap = result.second;
+				if (!Algorithms.isEmpty(resultImageUrl) && resultBitmap != null) {
+					cachedImages.put(resultImageUrl, resultBitmap);
 				}
-
-				@Override
-				public void onDownloadFinished(Pair<String, Bitmap> result) {
-					String imageUrl = result.first;
-					Bitmap bitmap = result.second;
-					if (!Algorithms.isEmpty(imageUrl) && bitmap != null) {
-						cachedImages.put(imageUrl, bitmap);
-					}
-					listener.onImageDownloaded(imageUrl, bitmap);
-				}
+				listener.onImageDownloaded(resultImageUrl, resultBitmap);
 			}));
 
 		}
+		return cachedImages.get(imageUrl);
+	}
+
+	@Nullable
+	public Bitmap getBitmap(@NonNull String imageUrl) {
 		return cachedImages.get(imageUrl);
 	}
 
@@ -96,11 +93,6 @@ public class GalleryContextHelper {
 		}
 
 		@Override
-		protected void onPreExecute() {
-			downloadListener.onDownloadStarted(imageUrl);
-		}
-
-		@Override
 		protected Pair<String, Bitmap> doInBackground(Void... params) {
 			Bitmap bitmap = AndroidNetworkUtils.downloadImage(app, imageUrl);
 			return new Pair<>(imageUrl, bitmap);
@@ -113,8 +105,6 @@ public class GalleryContextHelper {
 	}
 
 	private interface DownloadImageListener {
-		void onDownloadStarted(String url);
-
 		void onDownloadFinished(Pair<String, Bitmap> result);
 	}
 }

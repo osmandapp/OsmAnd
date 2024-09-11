@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.gallery;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGES_COUNT_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
+import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.UPDATE_IMAGE_VIEW_TYPE;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -103,6 +105,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 		toolbar = view.findViewById(R.id.toolbar);
 		setupToolbar();
+		setupOnBackPressedCallback();
 
 		return view;
 	}
@@ -123,7 +126,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 						String cardImageUrl = imageCard.getImageUrl();
 						if (cardImageUrl != null && cardImageUrl.equals(imageUrl)) {
 							imageCard.setBitmap(bitmap);
-							galleryGridAdapter.notifyItemChanged(i);
+							galleryGridAdapter.notifyItemChanged(i, UPDATE_IMAGE_VIEW_TYPE);
 						}
 					}
 				}
@@ -189,14 +192,28 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 		ImageView navigationIcon = toolbar.findViewById(R.id.back_button);
 		navigationIcon.setOnClickListener(view -> {
-			FragmentManager manager = getMapActivity().getSupportFragmentManager();
-			manager.popBackStack();
+			onBackPressed();
 		});
 		navigationIcon.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
 
 		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
 	}
 
+	private void setupOnBackPressedCallback() {
+		OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				onBackPressed();
+			}
+		};
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+	}
+
+
+	private void onBackPressed() {
+		FragmentManager manager = getMapActivity().getSupportFragmentManager();
+		manager.popBackStack();
+	}
 
 	@Override
 	public int getStatusBarColorId() {

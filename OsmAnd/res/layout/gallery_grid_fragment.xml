@@ -43,7 +43,6 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
-					android:layout_marginHorizontal="@dimen/content_padding"
 					android:layout_marginVertical="@dimen/content_padding_half"
 					android:layout_weight="1"
 					android:textSize="@dimen/dialog_header_text_size"

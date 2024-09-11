@@ -58,10 +58,21 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 		imageView.setOnClickListener(v -> listener.onImageClicked(imageCard));
 
 		if (type == MAIN) {
-			Drawable icon = app.getUIUtilities().getIcon(imageCard.getTopIconId());
-			setSourceTypeIcon(icon);
+			int topIconId = imageCard.getTopIconId();
+			if (topIconId != 0) {
+				Drawable icon = app.getUIUtilities().getIcon(imageCard.getTopIconId());
+				setSourceTypeIcon(icon);
+			} else {
+				setSourceTypeIcon(null);
+			}
 		} else {
 			setSourceTypeIcon(null);
+		}
+	}
+
+	public void updateImage(@Nullable Bitmap bitmap) {
+		if (bitmap != null) {
+			setImage(bitmap);
 		}
 	}
 

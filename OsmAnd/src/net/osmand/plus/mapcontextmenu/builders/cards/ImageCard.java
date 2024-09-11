@@ -418,7 +418,7 @@ public abstract class ImageCard extends AbstractCard {
 
 			void onTaskStarted();
 			void onFinish(List<ImageCard> cardList);
-			void onMapillaryFinishFinish(List<ImageCard> cardList);
+			void onMapillaryFinish(List<ImageCard> cardList);
 		}
 
 		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
@@ -507,7 +507,7 @@ public abstract class ImageCard extends AbstractCard {
 			result = cardList;
 			if (listener != null) {
 				listener.onFinish(result.first);
-				listener.onMapillaryFinishFinish(result.second);
+				listener.onMapillaryFinish(result.second);
 			}
 		}
 	}

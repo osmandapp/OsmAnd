@@ -151,7 +151,7 @@ public class MenuBuilder {
 		public void onFinish(List<ImageCard> cardList) {
 			if (!isHidden()) {
 				onLoadingImages(false);
-				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
+				List<AbstractCard> cards = new ArrayList<>(cardList);
 				if (cardList.isEmpty()) {
 					cards.add(new NoImagesCard(mapActivity));
 				}
@@ -164,9 +164,9 @@ public class MenuBuilder {
 		}
 
 		@Override
-		public void onMapillaryFinishFinish(List<ImageCard> cardList) {
+		public void onMapillaryFinish(List<ImageCard> cardList) {
 			if (!isHidden()) {
-				List<AbstractCard> cards = new ArrayList<AbstractCard>(cardList);
+				List<AbstractCard> cards = new ArrayList<>(cardList);
 				if (cardList.isEmpty()) {
 					cards.add(new NoImagesCard(mapActivity));
 				}
@@ -323,6 +323,7 @@ public class MenuBuilder {
 		if (plugin != null) {
 			buildMapillaryRow(view);
 		}
+		startLoadingImages();
 	}
 
 	private boolean showTransportRoutes() {
@@ -483,6 +484,7 @@ public class MenuBuilder {
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.addView(onlinePhotoCardsRow.getGalleryView());
 		CollapsableView collapsableView = new CollapsableView(parent, this, false);
+		collapsableView.setCollapsed(false);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && onlinePhotoCards == null) {
 				startLoadingImages();
@@ -490,12 +492,9 @@ public class MenuBuilder {
 		});
 		buildRow(view, R.drawable.ic_action_photo, null, app.getString(R.string.online_photos), 0, true,
 				collapsableView, false, 1, false, null, false);
-		collapsableView.setCollapsed(false);
 
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
-		} else if (!collapsableView.isCollapsed()) {
-			startLoadingImages();
 		}
 	}
 
@@ -509,6 +508,7 @@ public class MenuBuilder {
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.addView(mapillaryCardsRow.getGalleryView());
 		CollapsableView collapsableView = new CollapsableView(parent, this, false);
+		collapsableView.setCollapsed(true);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && mapillaryCards == null) {
 				startLoadingImages();
@@ -519,10 +519,7 @@ public class MenuBuilder {
 
 		if (needUpdateOnly && mapillaryCards != null) {
 			mapillaryCardsRow.setCards(mapillaryCards);
-		} else if (!collapsableView.isCollapsed()) {
-			startLoadingImages();
 		}
-		startLoadingImages();
 	}
 
 	private void buildCoordinatesRow(View view) {

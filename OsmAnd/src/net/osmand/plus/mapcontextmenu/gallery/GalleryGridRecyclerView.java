@@ -30,26 +30,36 @@ public class GalleryGridRecyclerView extends RecyclerView {
 	}
 
 	@Override
-	public boolean onInterceptTouchEvent(MotionEvent e) {
-		return super.onInterceptTouchEvent(e);
+	public boolean onTouchEvent(MotionEvent e) {
+		scaleDetector.onTouchEvent(e);
+		if (e.getAction() == MotionEvent.ACTION_UP) {
+			isScaling = false;
+		} else if (e.getAction() == MotionEvent.ACTION_MOVE && isScaling) {
+			return true;
+		}
+		return super.onTouchEvent(e);
 	}
 
 	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if (scaleDetector != null) {
-			scaleDetector.onTouchEvent(ev);
-		}
-		if (ev.getPointerCount() > 1) {
-			isScaling = true;
-			stopScroll();
-		}
-		if (ev.getAction() == MotionEvent.ACTION_UP) {
+	public boolean onInterceptTouchEvent(MotionEvent e) {
+		scaleDetector.onTouchEvent(e);
+		if (e.getAction() == MotionEvent.ACTION_UP) {
 			isScaling = false;
 		}
 		if (isScaling) {
+			stopScroll();
 			return true;
 		} else {
-			return super.dispatchTouchEvent(ev);
+			return super.onInterceptTouchEvent(e);
 		}
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent e) {
+		if (e.getPointerCount() > 1) {
+			isScaling = true;
+			stopScroll();
+		}
+		return super.dispatchTouchEvent(e);
 	}
 }

@@ -9,11 +9,12 @@ import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
+	public WikiImage wikiImage;
 
 	public WikiImageCard(MapActivity mapActivity,
 	                     WikiImage wikiImage) {
 		super(mapActivity, null);
-
+		this.wikiImage = wikiImage;
 		if (topIconId == 0) {
 			topIconId = R.drawable.ic_logo_wikimedia;
 		}
@@ -21,6 +22,7 @@ public class WikiImageCard extends ImageCard {
 		this.imageUrl = wikiImage.getImageStubUrl();
 		this.title = wikiImage.getImageName();
 		this.url = this.imageUrl;
+		this.imageHiresUrl = wikiImage.getImageHiResUrl();
 
 		View.OnClickListener onClickListener = v -> openUrl(getMapActivity(), getMyApplication(),
 				getTitle(), wikiImage.getUrlWithCommonAttributions(), false, false);

@@ -27,6 +27,7 @@ import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder;
 import net.osmand.plus.plugins.mapillary.MapillaryContributeCard;
+import net.osmand.plus.plugins.mapillary.MapillaryImageCard;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -44,6 +45,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	protected static final int IMAGES_COUNT_TYPE = 6;
 
 	protected static final int UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1;
+	public static final int UPDATE_IMAGE_VIEW_TYPE = 2;
 
 	private final List<Object> items = new ArrayList<>();
 
@@ -73,7 +75,23 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 	public void setItems(@NonNull List<Object> items) {
 		this.items.clear();
-		this.items.addAll(items);
+		if (isOnlinePhotos) {
+			this.items.addAll(items);
+		} else {
+			List<Object> limitedItems = new ArrayList<>();
+			int addedMapillaryCards = 0;
+			for (Object object : items) {
+				if (object instanceof MapillaryImageCard mapillaryImageCard) {
+					if (addedMapillaryCards < 5) {
+						limitedItems.add(mapillaryImageCard);
+						addedMapillaryCards++;
+					}
+				} else {
+					limitedItems.add(object);
+				}
+			}
+			this.items.addAll(limitedItems);
+		}
 
 		notifyDataSetChanged();
 	}
@@ -135,6 +153,12 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		if (!Algorithms.isEmpty(payloads) && payloads.get(0) instanceof Integer payLoadInteger) {
 			if (holder instanceof NoInternetHolder noInternetHolder && payLoadInteger == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE) {
 				noInternetHolder.updateProgressBar(loadingImages);
+			} else if (holder instanceof GalleryImageHolder galleryImageHolder && payLoadInteger == UPDATE_IMAGE_VIEW_TYPE) {
+				Object object = items.get(position);
+				if (object instanceof ImageCard imageCard) {
+					Bitmap bitmap = galleryContextHelper.getBitmap(imageCard.getImageUrl());
+					galleryImageHolder.updateImage(bitmap);
+				}
 			}
 		} else {
 			super.onBindViewHolder(holder, position, payloads);

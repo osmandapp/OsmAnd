@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.NO_INTERNET_TYPE;
+import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.UPDATE_IMAGE_VIEW_TYPE;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -122,7 +124,8 @@ public class CardsRowBuilder {
 	}
 
 	private void setupViewALlButton(boolean onlinePhotos) {
-		View viewAllButton = galleryView.findViewById(R.id.view_all);
+		DialogButton viewAllButton = galleryView.findViewById(R.id.view_all);
+		viewAllButton.setTitleId(onlinePhotos ? R.string.shared_string_show_all : R.string.shared_string_explore);
 		viewAllButton.setOnClickListener(v -> showAll(onlinePhotos));
 		updateShowAll();
 	}
@@ -155,10 +158,10 @@ public class CardsRowBuilder {
 				for (int i = 0; i < items.size(); i++) {
 					Object object = items.get(i);
 					if (object instanceof ImageCard imageCard) {
-						String cardImageUrl = imageCard.imageUrl;
+						String cardImageUrl = imageCard.getImageUrl();
 						if (cardImageUrl != null && cardImageUrl.equals(imageUrl)) {
 							imageCard.setBitmap(bitmap);
-							galleryGridAdapter.notifyItemChanged(i);
+							galleryGridAdapter.notifyItemChanged(i, UPDATE_IMAGE_VIEW_TYPE);
 						}
 					}
 				}

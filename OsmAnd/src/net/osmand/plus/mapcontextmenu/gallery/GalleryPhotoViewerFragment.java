@@ -17,7 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
