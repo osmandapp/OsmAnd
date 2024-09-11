@@ -25,12 +25,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabsHelper;
@@ -48,7 +49,7 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -58,6 +59,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -227,7 +229,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	protected void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		TrackFolder folder = new TrackFolder(gpxDir, null);
+		TrackFolder folder = new TrackFolder(SharedUtil.kFile(gpxDir), null);
 		asyncLoader = new TrackFolderLoaderTask(app, folder, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -345,7 +347,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			@Override
 			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.getPath())));
+					addTrackItem(new TrackItem(new KFile(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}

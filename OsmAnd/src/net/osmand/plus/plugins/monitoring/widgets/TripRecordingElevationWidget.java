@@ -13,7 +13,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;

@@ -4,6 +4,7 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.gpx.GPXFile
 import net.osmand.gpx.GPXUtilities
+import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.KException
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.KQuadRect

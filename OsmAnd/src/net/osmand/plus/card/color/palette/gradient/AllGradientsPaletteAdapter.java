@@ -134,8 +134,7 @@ public class AllGradientsPaletteAdapter extends RecyclerView.Adapter<GradientVie
 		public void onBindViewHolder(@NonNull PaletteColor paletteColor, boolean isSelected, boolean nightMode) {
 			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), radioButton);
 			radioButton.setChecked(isSelected);
-			if (paletteColor instanceof PaletteGradientColor) {
-				PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
+			if (paletteColor instanceof PaletteGradientColor gradientColor) {
 				List<ColorValue> colorsList = gradientColor.getColorPalette().getColors();
 				int[] colors = new int[colorsList.size()];
 				for (int i = 0; i < colorsList.size(); i++) {

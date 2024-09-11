@@ -5884,4 +5884,8 @@
     <string name="shared_string_interface">Interface</string>
     <string name="background_opacity">Opacidade do fundo</string>
     <string name="corner_radius">Raio do canto</string>
+    <string name="search_action_descr">Abre a pesquisa.</string>
+    <string name="navigation_action_descr">Abre a navegação.</string>
+    <string name="my_location_action_descr">Centraliza o mapa na sua posição atual.</string>
+    <string name="drawer_button_description">Abre o menu principal.</string>
 </resources>

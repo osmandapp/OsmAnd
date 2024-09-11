@@ -105,6 +105,19 @@ public class DisplayItem {
 		return showBottomDivider;
 	}
 
+	public DisplayItem hideBottomDivider() {
+		return setShowBottomDivider(false);
+	}
+
+	public DisplayItem showBottomDivider() {
+		return setShowBottomDivider(true);
+	}
+
+	public DisplayItem setShowBottomDivider(boolean showBottomDivider) {
+		setShowBottomDivider(showBottomDivider, 0);
+		return this;
+	}
+
 	public DisplayItem setShowBottomDivider(boolean showBottomDivider, int dividerStartPadding) {
 		this.showBottomDivider = showBottomDivider;
 		this.dividerStartPadding = dividerStartPadding;

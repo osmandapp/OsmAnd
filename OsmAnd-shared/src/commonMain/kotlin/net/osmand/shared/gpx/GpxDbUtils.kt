@@ -130,6 +130,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, START_LAT);
 			addIfMissingGpxTableColumn(columnNames, db, START_LON);
 			addIfMissingGpxTableColumn(columnNames, db, NEAREST_CITY_NAME);
+			addIfMissingGpxTableColumn(columnNames, db, ACTIVITY_TYPE)
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_TEMPERATURE);
 			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_TEMPERATURE);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_SPEED);
@@ -201,14 +202,14 @@ object GpxDbUtils {
 
 	fun getGpxFileDir(file: KFile): String {
 		file.parent()?.let {
-			val gpxDir = PlatformUtil.getGpxDir()
+			val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
 			if (file == gpxDir) {
-				return@let ""
+				return ""
 			}
 			val relativePath = KFile(file.path().replace("${gpxDir.path}/", ""))
 			val fileDir = if (file.isDirectory()) relativePath.path else relativePath.parent()
 			val res = fileDir.toString()
-			return@let if (res == ".") "" else res
+			return if (res == ".") "" else res
 		}
 		return ""
 	}

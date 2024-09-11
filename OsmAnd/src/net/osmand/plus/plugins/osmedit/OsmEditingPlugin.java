@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
@@ -43,7 +44,7 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.configmap.ConfigureMapMenu;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -88,6 +89,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -512,7 +514,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		long[] size = new long[1];
 		List<SelectableItem<TrackItem>> items = new ArrayList<>();
 		for (TrackItem gpxInfo : trackItems) {
-			File file = gpxInfo.getFile();
+			KFile file = gpxInfo.getFile();
 			if (file != null) {
 				SelectableItem<TrackItem> item = new SelectableItem<>();
 				item.setObject(gpxInfo);
@@ -539,7 +541,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			dialog.setOnApplySelectionListener(selectedItems -> {
 				List<File> files = new ArrayList<>();
 				for (SelectableItem<TrackItem> item : selectedItems) {
-					files.add(item.getObject().getFile());
+					KFile file = item.getObject().getFile();
+					if (file != null) {
+						files.add(SharedUtil.jFile(file));
+					}
 				}
 				sendGPXFiles(activity, fragment, files.toArray(new File[0]));
 			});

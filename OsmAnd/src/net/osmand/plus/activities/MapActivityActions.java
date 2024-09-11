@@ -66,7 +66,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
@@ -209,7 +209,7 @@ public class MapActivityActions extends MapActions {
 				GpxFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
 				Exception exception = SharedUtil.writeGpxFile(file, gpx);
 				gpx.setError(exception != null ? SharedUtil.kException(exception) : null);
-				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
 				return gpx;
 			}
 			return null;

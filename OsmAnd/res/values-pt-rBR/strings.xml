@@ -5879,4 +5879,6 @@
     <string name="navigation_action_descr">Abre a navegação.</string>
     <string name="drawer_button_description">Abre o menu principal.</string>
     <string name="corner_radius">Raio do canto</string>
+    <string name="contour_layers_action_descr">Alterar camadas de contorno</string>
+    <string name="type_of_activity">Tipo de atividade</string>
 </resources>

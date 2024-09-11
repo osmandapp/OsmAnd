@@ -32,8 +32,8 @@ import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -559,7 +559,7 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants mc) {
-		String unit = mc.toShortString(app);
+		String unit = mc.toShortString();
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
@@ -608,7 +608,7 @@ public class OsmAndFormatter {
 				return getFormattedLowSpeed(mph10 / 10f, unit, app);
 			}
 		} else {
-			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString(app);
+			String metersPerSecond = SpeedConstants.METERS_PER_SECOND.toShortString();
 			if (metersPerSeconds >= 10) {
 				return getFormattedSpeed(Math.round(metersPerSeconds), metersPerSecond, app);
 			}

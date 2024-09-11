@@ -145,6 +145,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 			AndroidUtils.hideSoftKeyboard(activity, searchEditText);
 		}
 		if (controller.isInSearchMode()) {
+			searchEditText.setText("");
 			controller.exitSearchMode();
 		} else {
 			dismiss();

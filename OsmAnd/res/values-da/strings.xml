@@ -5896,4 +5896,6 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Vis motocross-stier</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Vis motocross-stier</string>
     <string name="raster_layers_action_descr">Skift raster-lag</string>
+    <string name="type_of_activity">Aktivitetstype</string>
+    <string name="change_activity">Skift aktivitet</string>
 </resources>

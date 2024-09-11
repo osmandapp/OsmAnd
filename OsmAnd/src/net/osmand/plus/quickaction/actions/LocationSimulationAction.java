@@ -43,6 +43,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -208,7 +209,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 		boolean currentTrack = gpxFilePath.isEmpty();
 		File file = new File(gpxFilePath);
-		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxUiHelper.getGpxTitle(file.getName());
+		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxHelper.INSTANCE.getGpxTitle(file.getName());
 		SelectedGpxFile selectedGpxFile = currentTrack
 				? app.getSavingTrackHelper().getCurrentTrack()
 				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);

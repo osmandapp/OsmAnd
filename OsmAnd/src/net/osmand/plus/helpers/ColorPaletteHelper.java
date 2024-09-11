@@ -20,16 +20,12 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.RouteColorize;
-import net.osmand.shared.util.KAlgorithms;
-import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 public class ColorPaletteHelper {
 
@@ -59,7 +55,7 @@ public class ColorPaletteHelper {
 		String colorTypePrefix = ROUTE_PREFIX + type.name().toLowerCase() + GRADIENT_ID_SPLITTER;
 
 		KFile colorPalletsDir = getColorPaletteDir();
-		KFile[] colorFiles = colorPalletsDir.listFiles();
+		List<KFile> colorFiles = colorPalletsDir.listFiles();
 		if (colorFiles != null) {
 			for (KFile file : colorFiles) {
 				String fileName = file.name();
@@ -93,7 +89,7 @@ public class ColorPaletteHelper {
 	}
 
 	private KFile getColorPaletteDir() {
-		return app.getAppPathKFile(IndexConstants.CLR_PALETTE_DIR);
+		return app.getAppPathKt(IndexConstants.CLR_PALETTE_DIR);
 	}
 
 	@NonNull
@@ -124,7 +120,7 @@ public class ColorPaletteHelper {
 					colorPalette = ColorPalette.Companion.parseColorPalette(colorPaletteFile);
 					cachedColorPalette.put(colorPaletteFileName, colorPalette);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				PlatformUtil.getLog(ColorPaletteHelper.class).error("Error reading color file ", e);
 			}
 		}
@@ -173,7 +169,7 @@ public class ColorPaletteHelper {
 
 	public void deleteGradient(@NonNull String colorPaletteFileName, @NonNull DeleteGradientListener deleteGradientListener) {
 		KFile gradientToDelete = new KFile(getColorPaletteDir(), colorPaletteFileName);
-		boolean deleted = KAlgorithms.INSTANCE.removeAllFiles(gradientToDelete);
+		boolean deleted = KFile.Companion.removeAllFiles(gradientToDelete);
 		if (deleted) {
 			cachedColorPalette.remove(colorPaletteFileName);
 		}

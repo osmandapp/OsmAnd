@@ -230,6 +230,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	//private boolean afterTwoFingersTap = false;
 	private boolean afterDoubleTap;
 	private boolean wasMapLinkedBeforeGesture;
+	private boolean blockTwoFingersTap;
 
 	private LatLon firstTouchPointLatLon;
 	private LatLon secondTouchPointLatLon;
@@ -336,9 +337,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		doubleTapScaleDetector = new DoubleTapScaleDetector(this, ctx, new MapTileViewMultiTouchZoomListener());
 		twoFingersTapDetector = new TwoFingerTapDetector() {
 			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				int action = event.getAction();
+				int actionCode = action & MotionEvent.ACTION_MASK;
+				switch (actionCode) {
+					case MotionEvent.ACTION_DOWN:
+						blockTwoFingersTap = false;
+				}
+				return super.onTouchEvent(event);
+			}
+			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
-				if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+				if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ZOOM_OUT) || blockTwoFingersTap) {
 					return;
 				}
 
@@ -1994,7 +2005,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private boolean startRotating;
 		private boolean startZooming;
 		private float initialElevation;
-		private float prevAngle;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -2237,9 +2247,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapRenderer != null) {
 				MeasurementToolLayer layer = getMeasurementToolLayer();
 				if ((layer == null || !layer.isInMeasurementMode()) &&
-						(doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode()))
+						(doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode())) {
+					if (startZooming) {
+						blockTwoFingersTap = true;
+					}
 					zoomAndRotateToAnimate(startZooming, startRotating);
-				else {
+				} else {
 					zoomToAnimate(initialViewport, deltaZoom, multiTouchCenterX, multiTouchCenterY);
 					rotateToAnimate(calcRotate, multiTouchCenterX, multiTouchCenterY);
 				}
@@ -2249,7 +2262,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				zoomToAnimate(initialViewport, deltaZoom, multiTouchCenterX, multiTouchCenterY);
 				rotateToAnimate(calcRotate);
 			}
-			prevAngle = angle;
 		}
 
 		public void finishZoomAndRotationGesture() {
