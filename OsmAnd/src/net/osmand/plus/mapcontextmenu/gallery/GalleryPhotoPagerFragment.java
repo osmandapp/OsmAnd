@@ -363,13 +363,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), true);
+		AndroidUiHelper.setStatusBarContentColor(getView(), false);
 		return R.color.color_transparent;
-	}
-
-	@Override
-	public boolean getContentStatusBarNightMode() {
-		return !nightMode;
 	}
 
 	@Override
