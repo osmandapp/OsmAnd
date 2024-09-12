@@ -29,7 +29,7 @@ public class MapButtonCard extends MapBaseCard {
 
 	public MapButtonCard(@NonNull MapActivity mapActivity, @NonNull MapButtonState buttonState,
 	                     @Nullable ButtonAppearanceParams customAppearanceParams) {
-		super(mapActivity);
+		super(mapActivity, false);
 		this.buttonState = buttonState;
 		this.customAppearanceParams = customAppearanceParams;
 	}
@@ -50,11 +50,12 @@ public class MapButtonCard extends MapBaseCard {
 
 	public void setupButton(@NonNull ViewGroup container) {
 		mapButton = (MapButton) themedInflater.inflate(buttonState.getDefaultLayoutId(), container, false);
-		mapButton.setClickable(false);
-		mapButton.setLongClickable(false);
 		mapButton.setAlwaysVisible(true);
 		mapButton.setNightMode(nightMode);
 		mapButton.setMapActivity(mapActivity);
+		mapButton.setOnTouchListener(null);
+		mapButton.setOnClickListener(null);
+		mapButton.setOnLongClickListener(null);
 		mapButton.setCustomAppearanceParams(customAppearanceParams);
 		if (mapButton instanceof QuickActionButton actionButton) {
 			actionButton.setButtonState((QuickActionButtonState) buttonState);

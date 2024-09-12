@@ -20,7 +20,7 @@ public class MapButtonAppearanceCard extends MapBaseCard {
 	private final MapButtonState buttonState;
 
 	public MapButtonAppearanceCard(@NonNull MapActivity mapActivity, @NonNull MapButtonState buttonState) {
-		super(mapActivity);
+		super(mapActivity, false);
 		this.buttonState = buttonState;
 	}
 

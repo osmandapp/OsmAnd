@@ -263,7 +263,7 @@ public class AlarmWidget {
 		if (alarm.getType() == SPEED_LIMIT) {
 			if (isCanadianRegion) {
 				locImgId = R.drawable.warnings_speed_limit_ca;
-				bottomText = settings.SPEED_SYSTEM.get().toShortString(settings.getContext());
+				bottomText = settings.SPEED_SYSTEM.get().toShortString();
 			} else if (americanType) {
 				locImgId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring

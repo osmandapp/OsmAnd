@@ -9,7 +9,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.base.containers.Limits;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -103,7 +103,7 @@ public class CompassButtonState extends MapButtonState {
 	@Override
 	public Drawable getIcon(@DrawableRes int iconId, @ColorInt int color, boolean nightMode, boolean mapIcon) {
 		Drawable drawable = super.getIcon(iconId, color, nightMode, mapIcon);
-		if (mapIcon && drawable != null && settings.getCompassMode().getIconId(nightMode) == iconId) {
+		if (mapIcon && drawable != null) {
 			return new CompassDrawable(drawable);
 		}
 		return drawable;

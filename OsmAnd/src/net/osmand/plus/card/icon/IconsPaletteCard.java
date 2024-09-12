@@ -21,8 +21,8 @@ public class IconsPaletteCard<IconData> extends BaseCard implements IIconsPalett
 	private RecyclerView rvIcons;
 
 	public IconsPaletteCard(@NonNull FragmentActivity activity,
-	                        @NonNull IIconsPaletteController<IconData> controller) {
-		super(activity);
+	                        @NonNull IIconsPaletteController<IconData> controller, boolean usedOnMap) {
+		super(activity, usedOnMap);
 		this.controller = controller;
 		controller.bindPalette(this);
 		paletteAdapter = new IconsPaletteAdapter<>(activity, controller, nightMode);

@@ -147,7 +147,7 @@ public class GradientUiHelper {
 			switch (colorizationType) {
 				case SPEED:
 					if (analysis != null && analysis.getMaxSpeed() != 0) {
-						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString(app);
+						type = app.getSettings().SPEED_SYSTEM.getModeValue(app.getSettings().getApplicationMode()).toShortString();
 						stringValue = formatValue(value, analysis.getMaxSpeed());
 					}
 					break;

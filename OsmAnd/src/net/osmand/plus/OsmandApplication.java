@@ -1,11 +1,10 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
-import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
-import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_METERS;
+import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -68,6 +68,7 @@ import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.Model3dHelper;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -78,7 +79,6 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -105,7 +105,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -126,7 +125,9 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -218,6 +219,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
 	RouteLayersHelper routeLayersHelper;
+	RouteActivityHelper routeActivityHelper;
 
 	Model3dHelper model3dHelper;
 
@@ -270,7 +272,7 @@ public class OsmandApplication extends MultiDexApplication {
 		FileUtils.removeUnnecessaryFiles(this);
 
 		// Initialize shared library
-		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, getAppPath(null), getAppPath(GPX_INDEX_DIR));
+		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, new OsmAndContextImpl(this));
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
@@ -646,6 +648,11 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
+	public RouteActivityHelper getRouteActivityHelper() {
+		return routeActivityHelper;
+	}
+
+	@NonNull
 	public OfflineForecastHelper getOfflineForecastHelper() {
 		return weatherHelper.getOfflineForecastHelper();
 	}
@@ -857,7 +864,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
-	public KFile getAppPathKFile(@Nullable String path) {
+	public KFile getAppPathKt(@Nullable String path) {
 		String child = path != null ? path : "";
 		return new KFile(new KFile(externalStorageDirectory.getPath()), child);
 	}

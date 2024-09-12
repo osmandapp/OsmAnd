@@ -25,6 +25,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
@@ -39,6 +40,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 public class OverviewCard extends MapBaseCard {
@@ -52,6 +54,7 @@ public class OverviewCard extends MapBaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private final GpxTrackAnalysis analysis;
+	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final GpxDataItem dataItem;
 	private final Fragment targetFragment;
 
@@ -61,12 +64,14 @@ public class OverviewCard extends MapBaseCard {
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
 	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GpxTrackAnalysis analysis,
-	                    @Nullable GpxDataItem dataItem, @NonNull Fragment targetFragment) {
+	                    @Nullable GpxDataItem dataItem, @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper,
+	                    @NonNull Fragment targetFragment) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
 		this.analysis = analysis;
 		this.dataItem = dataItem;
+		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
 		this.targetFragment = targetFragment;
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 	}
@@ -110,7 +115,21 @@ public class OverviewCard extends MapBaseCard {
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
 			AndroidUtils.setPadding(description, 0, 0, 0, dpToPx(app, 12));
 		}
+		setupRouteActivity();
 		setupRegion();
+	}
+
+	public void setupRouteActivity() {
+		RouteActivity routeActivity = routeActivitySelectionHelper.getSelectedActivity();
+		if (routeActivity != null) {
+			ImageView activityIcon = view.findViewById(R.id.activity_icon);
+			TextView activityTitle = view.findViewById(R.id.activity_title);
+			activityIcon.setImageResource(AndroidUtils.getIconId(app, routeActivity.getIconName()));
+			activityTitle.setText(routeActivity.getLabel());
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.activity_container), true);
+		} else {
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.activity_container), false);
+		}
 	}
 
 	private void setupRegion() {

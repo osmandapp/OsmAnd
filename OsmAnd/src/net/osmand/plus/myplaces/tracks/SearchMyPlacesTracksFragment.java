@@ -21,9 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
@@ -31,15 +31,17 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvi
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
+import net.osmand.shared.gpx.filters.FilterChangedListener;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -139,8 +141,9 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (foldersHelper != null) {
 			Set<TrackItem> trackItemsToMove = new HashSet<>();
 			for (TrackItem trackItem : selectionHelper.getSelectedItems()) {
-				File itemFile = trackItem.getFile();
-				if (itemFile != null) {
+				KFile trackItemFile = trackItem.getFile();
+				if(trackItemFile != null) {
+					File itemFile = SharedUtil.jFile(trackItemFile);
 					File destFile = new File(dest, itemFile.getName());
 					if (destFile.exists() && itemFile.length() == destFile.length()
 							&& destFile.getAbsolutePath().equals(itemFile.getAbsolutePath()) && destFile.equals(itemFile)) {
@@ -288,7 +291,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				if (activity != null) {
 					String screenName = getString(R.string.shared_string_tracks);
 					boolean temporary = app.getSelectedGpxHelper().getSelectedFileByPath(trackItem.getPath()) == null;
-					TrackMenuFragment.openTrack(activity, trackItem.getFile(), null, screenName, OVERVIEW, temporary);
+					TrackMenuFragment.openTrack(activity, trackItem.getFile() != null ? SharedUtil.jFile(trackItem.getFile()) : null, null, screenName, OVERVIEW, temporary);
 				}
 			}
 		};
@@ -418,7 +421,11 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	public void onSmartFolderCreated(SmartFolder smartFolder) {
+	public void onSmartFolderCreated(@NonNull SmartFolder smartFolder) {
 		dismiss();
+	}
+
+	@Override
+	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
 	}
 }

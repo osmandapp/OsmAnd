@@ -103,11 +103,11 @@ public abstract class MapButtonState {
 			size = defaultParams.getSize();
 		}
 		float opacity = opacityPref.get();
-		if (opacity <= 0) {
+		if (opacity < 0) {
 			opacity = defaultParams.getOpacity();
 		}
 		int cornerRadius = cornerRadiusPref.get();
-		if (cornerRadius <= 0) {
+		if (cornerRadius < 0) {
 			cornerRadius = defaultParams.getCornerRadius();
 		}
 		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);

@@ -6,9 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.TrackItem;
 
 import java.io.File;
 import java.util.ArrayList;

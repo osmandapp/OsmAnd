@@ -3,7 +3,6 @@ package net.osmand.plus.card.width;
 import android.content.Context;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -27,8 +26,6 @@ public class WidthComponentController implements IModedSliderController {
 
 	private IModedSliderComponent cardInstance;
 	private OnNeedScrollListener onNeedScrollListener;
-	@ColorInt
-	private Integer iconsColor;
 	private WidthMode widthMode;
 	private int customValue;
 

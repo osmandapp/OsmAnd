@@ -29,6 +29,7 @@ import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -242,7 +243,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 		boolean currentTrack = gpxFilePath.isEmpty();
 		File file = new File(gpxFilePath);
-		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxUiHelper.getGpxTitle(file.getName());
+		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxHelper.INSTANCE.getGpxTitle(file.getName());
 		SelectedGpxFile selectedGpxFile = currentTrack
 				? app.getSavingTrackHelper().getCurrentTrack()
 				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);

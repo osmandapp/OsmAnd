@@ -12,11 +12,12 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.List;
@@ -57,7 +58,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 	private void updateSizeDescription() {
 		long size = 0;
 		for (SelectableItem<TrackItem> item : selectedItems) {
-			File file = item.getObject().getFile();
+			KFile file = item.getObject().getFile();
 			if (file != null) {
 				size += file.length();
 			}

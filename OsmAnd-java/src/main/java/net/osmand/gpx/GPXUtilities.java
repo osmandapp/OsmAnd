@@ -1290,10 +1290,10 @@ public class GPXUtilities {
 			if (p.getColor() == pointsGroup.color) {
 				extensions.remove(COLOR_NAME_EXTENSION);
 			}
-			if (p.getIconName().equals(pointsGroup.iconName)) {
+			if (Algorithms.stringsEqual(p.getIconName(), pointsGroup.iconName)) {
 				extensions.remove(ICON_NAME_EXTENSION);
 			}
-			if (p.getBackgroundType().equals(pointsGroup.backgroundType)) {
+			if (Algorithms.stringsEqual(p.getBackgroundType(), pointsGroup.backgroundType)) {
 				extensions.remove(BACKGROUND_TYPE_EXTENSION);
 			}
 		}

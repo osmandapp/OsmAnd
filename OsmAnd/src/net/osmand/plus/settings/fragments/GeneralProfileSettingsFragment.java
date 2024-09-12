@@ -34,8 +34,8 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
@@ -154,7 +154,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[metricsConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = metricsConstants[i].toHumanString(app);
+			entries[i] = metricsConstants[i].toHumanString();
 			entryValues[i] = metricsConstants[i].ordinal();
 		}
 
@@ -200,7 +200,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[speedConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = speedConstants[i].toHumanString(app);
+			entries[i] = speedConstants[i].toHumanString();
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 

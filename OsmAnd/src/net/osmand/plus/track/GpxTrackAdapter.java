@@ -19,13 +19,13 @@ import net.osmand.plus.R;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -132,7 +132,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			}
 			GPXInfo info = gpxInfoList.get(listPosition);
 			GpxDataItem dataItem = getDataItem(info);
-			String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
+			String itemTitle = GpxHelper.INSTANCE.getGpxTitle(info.getFileName());
 			if (!showFolderName) {
 				itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
 			}

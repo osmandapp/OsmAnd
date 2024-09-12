@@ -17,12 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -163,7 +164,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 			File file = new File(filename);
-			TrackItem trackItem = new TrackItem(file);
+			TrackItem trackItem = new TrackItem(SharedUtil.kFile(file));
 			GpxUiHelper.updateGpxInfoView(itemView, trackItem, app, true, null);
 
 			itemView.setOnClickListener(v -> openGpxContextMenu(file));
@@ -247,7 +248,7 @@ public class DashTrackFragment extends DashBaseFragment {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
-				TrackItem trackItem = new TrackItem(file);
+				TrackItem trackItem = new TrackItem(SharedUtil.kFile(file));
 				GpxUiHelper.updateGpxInfoView(pView, trackItem, app, true, null);
 				updateShowOnMap(app, file, v, showOnMap);
 			});

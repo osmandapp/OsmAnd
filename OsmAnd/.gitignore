@@ -57,6 +57,7 @@ assets/voice/*
 assets/fonts/*
 assets/feature_articles/*
 assets/*.obf
+assets/activities.json
 assets/poi_categories.json
 assets/OsmAndCore_ResourcesBundle.index
 assets/OsmAndCore_ResourcesBundle/

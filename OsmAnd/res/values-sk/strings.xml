@@ -1986,7 +1986,7 @@
     <string name="give_permission">Udeliť povolenie</string>
     <string name="allow_access_location">Povoliť prístup k polohe</string>
     <string name="first_usage_greeting">Získajte pokyny a objavte nové miesta bez pripojenia na Internet</string>
-    <string name="search_my_location">Hľadať moju polohu</string>
+    <string name="search_my_location">Nájsť moju polohu</string>
     <string name="update_all_maps_now">Aktualizovať všetky mapy teraz?</string>
     <string name="clear_tile_data">Vymazať všetky dlaždice</string>
     <string name="get_it">Získať</string>
@@ -2144,7 +2144,7 @@
     <string name="shared_string_gpx_tracks">Stopy</string>
     <string name="shared_string_time_moving">Čas v pohybe</string>
     <string name="shared_string_time_span">Časový rozsah</string>
-    <string name="shared_string_max">Maximum</string>
+    <string name="shared_string_max">Max</string>
     <string name="shared_string_start_time">Čas začiatku</string>
     <string name="shared_string_end_time">Čas konca</string>
     <string name="shared_string_color">Farba</string>
@@ -5873,4 +5873,17 @@
 \nCPU (dlaždice): %2$s
 \nCPU (čas nečinnosti): %3$s
 \nCPU (čakanie na GPU): %4$s</string>
+    <string name="change_zoom_action_descr">Zmeniť priblíženie mapy.</string>
+    <string name="search_action_descr">Otvorí vyhľadávanie.</string>
+    <string name="navigation_action_descr">Otvorí navigáciu.</string>
+    <string name="my_location_action_descr">Vycentruje mapu na vašu aktuálnu polohu.</string>
+    <string name="map_3d_mode_action_descr">Zmeniť sklon mapy.</string>
+    <string name="drawer_button_description">Otvorí hlavné menu.</string>
+    <string name="configure_map_description">Zmeniť štýl mapy, vrstvy a iné nastavenia.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Zobraziť blatisté cyklocesty</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Zobraziť blatisté cyklocesty</string>
+    <string name="raster_layers_action_descr">Zmeniť rastrové vrstvy</string>
+    <string name="contour_layers_action_descr">Zmeniť vrstvy vrstevníc</string>
+    <string name="type_of_activity">Druh aktivity</string>
+    <string name="change_activity">Zmeniť aktivitu</string>
 </resources>

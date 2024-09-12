@@ -129,7 +129,7 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf((int) value), "%");
 		}
 		String speed = OsmAndFormatter.getFormattedSpeed((float) value, app);
-		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
+		String speedUnit = app.getSettings().SPEED_SYSTEM.get().toShortString();
 		Spannable formattedSpeed = new SpannableString(speed);
 		formattedSpeed.setSpan(
 				new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, android.R.attr.textColorSecondary)),

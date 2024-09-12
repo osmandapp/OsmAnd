@@ -57,6 +57,7 @@ enum class GpxParameter(
 	START_LAT("startLat", "double", Double::class, null, true),
 	START_LON("startLon", "double", Double::class, null, true),
 	NEAREST_CITY_NAME("nearestCityName", "TEXT", String::class, null, false),
+	ACTIVITY_TYPE("activityType", "TEXT", String::class, null, false),
 	MAX_SENSOR_TEMPERATURE("maxSensorTemperature", "int", Int::class, 0, true),
 	AVG_SENSOR_TEMPERATURE("avgSensorTemperature", "double", Double::class, 0.0, true),
 	MAX_SENSOR_SPEED("maxSensorSpeed", "double", Double::class, 0.0, true),
