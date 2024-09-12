@@ -827,7 +827,7 @@
     <string name="poi_breakwater">Rompeolas</string>
     <string name="poi_basin">Cuenca</string>
     <string name="poi_crane">Grúa</string>
-    <string name="poi_tree">Árbol</string>
+    <string name="poi_tree">Árbol;Arbol</string>
     <string name="poi_abandoned">Abandonado</string>
     <string name="poi_disused">En desuso</string>
     <string name="poi_groyne">Espigón</string>
@@ -2817,7 +2817,7 @@
     <string name="poi_xmas_pyramid">Pirámide navideña</string>
     <string name="poi_xmas_shop">Tienda navideña</string>
     <string name="poi_xmas_shop_christmas_tree">Venta de árboles</string>
-    <string name="poi_xmas_tree">Árbol navideño</string>
+    <string name="poi_xmas_tree">Árbol navideño;Árbol de navidad;Arbol navideño</string>
     <string name="poi_xmas_day_date">Período de fecha para evento navideño</string>
     <string name="poi_xmas_note">Navidad: nota</string>
     <string name="poi_xmas_opening_hours">Navidad: horario de atención;horario de apertura</string>
@@ -4215,7 +4215,7 @@
     <string name="poi_computer_sales_yes">Sí;Venta de computadoras;Venta de ordenadores</string>
     <string name="poi_computer_repair_yes">Sí;Reparación de computadoras;Taller de computadoras;Reparación de ordenadores;Taller de ordenadores</string>
     <string name="poi_computer_sales">Venta de computadoras</string>
-    <string name="poi_computer_repair">Reparación de computadoras</string>
+    <string name="poi_computer_repair">Reparación de computadoras;Reparación de ordenadores</string>
     <string name="poi_computer_parts">Partes para computadoras</string>
     <string name="poi_museum_art">Arte</string>
     <string name="poi_museum_gallery">Galería</string>
@@ -4963,4 +4963,9 @@
     <string name="poi_mcdonalds">McDonald\'s</string>
     <string name="poi_engineer">Oficina del ingeniero</string>
     <string name="poi_property_management">Oficina del gestor inmobiliario</string>
+    <string name="poi_cash_in">Depositar efectivo</string>
+    <string name="poi_cash_in_yes">Si</string>
+    <string name="poi_cash_in_no">No</string>
+    <string name="poi_cash_in_customers">Solo clientes</string>
+    <string name="poi_diet_pescetarian_no">Dieta pescetariana: No</string>
 </resources>
