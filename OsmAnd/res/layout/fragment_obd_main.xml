@@ -44,16 +44,15 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="vertical"
-		android:layout_margin="@dimen/content_padding">
+		android:layout_margin="@dimen/content_padding"
+		android:orientation="vertical">
 
 		<EditText
 			android:id="@+id/responses"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_weight="1"
-			android:background="#111"
-			/>
+			android:background="#111" />
 
 		<EditText
 			android:id="@+id/device_name"
@@ -62,8 +61,7 @@
 			android:layout_marginTop="@dimen/content_padding_half"
 			android:layout_marginBottom="@dimen/content_padding_half"
 			android:background="#111"
-			android:hint="device name"
-			/>
+			android:hint="device name" />
 
 
 		<Button
@@ -72,7 +70,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/content_padding_half"
 			android:layout_marginBottom="@dimen/content_padding_half"
-			android:text="Connect"/>
+			android:text="Connect" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -80,46 +78,176 @@
 			android:layout_marginTop="@dimen/content_padding"
 			android:orientation="vertical">
 
-			<Button
-				android:id="@+id/btn1"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn2"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn3"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn4"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn5"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn6"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn7"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn8"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn9"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
-			<Button
-				android:id="@+id/btn10"
-				android:layout_width="300dp"
-				android:layout_height="40dp"/>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn1"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp1"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn2"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp2"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn3"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp3"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn4"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp4"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn5"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp5"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn6"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp6"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn7"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp7"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn8"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp8"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn9"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp9"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn10"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp10"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
 		</LinearLayout>
 	</LinearLayout>
 

@@ -56,6 +56,7 @@ kotlin {
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
+			implementation("co.touchlab:stately-concurrent-collections:2.0.0")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
