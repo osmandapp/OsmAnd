@@ -1,6 +1,8 @@
 package net.osmand.plus.quickaction;
 
 
+import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -29,12 +31,14 @@ public class CornerRadiusCard extends SliderButtonsCard {
 
 	protected void setupSlider(@NonNull View view) {
 		super.setupSlider(view);
+		UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 
 		slider.setValueTo(CORNER_RADIUS_VALUES.length - 1);
 		slider.setValueFrom(0);
 		slider.setStepSize(1);
 		slider.setValue(getSelectedIndex());
-		UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
+		slider.setLabelBehavior(LABEL_FLOATING);
+		slider.setLabelFormatter(value -> CornerRadiusCard.this.getFormattedValue(CORNER_RADIUS_VALUES[(int) value]));
 	}
 
 	protected void onValueSelected(float value) {

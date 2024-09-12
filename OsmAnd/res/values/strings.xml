@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_decrease">Decrease</string>
+    <string name="shared_string_increase">Increase</string>
     <string name="raster_layers_action_descr">Change raster layers</string>
     <string name="contour_layers_action_descr">Change contour layers</string>
     <string name="change_zoom_action_descr">Change map zoom.</string>
