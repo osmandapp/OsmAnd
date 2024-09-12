@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -108,7 +108,7 @@ public class FabMarginPreference {
 		return fabMarginYLandscape;
 	}
 
-	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton,
+	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull View fabButton,
 	                                      FrameLayout.LayoutParams params,
 	                                      @Nullable Pair<Integer, Integer> fabMargin,
 	                                      int defRightMargin, int defBottomMargin) {

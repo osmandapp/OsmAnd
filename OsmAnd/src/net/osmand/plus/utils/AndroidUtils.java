@@ -1355,7 +1355,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
+	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull View fabButton, @NonNull FabMarginPreference preference) {
 		return new View.OnTouchListener() {
 			private int initialMarginX = 0;
 			private int initialMarginY = 0;
