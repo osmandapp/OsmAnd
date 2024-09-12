@@ -91,6 +91,8 @@ public class MultiTouchSupport {
 	private PointF centerPoint = new PointF();
 	private PointF firstPoint = new PointF();
 	private PointF secondPoint = new PointF();
+	private PointF firstPointPrevious = new PointF();
+	private PointF secondPointPrevious = new PointF();
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
@@ -143,6 +145,8 @@ public class MultiTouchSupport {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 				firstPoint = new PointF(x1, y1);
 				secondPoint = new PointF(x2, y2);
+				firstPointPrevious = new PointF(x1, y1);
+				secondPointPrevious = new PointF(x2, y2);
 				firstFingerStart = new PointF(x1, y1);
 				secondFingerStart = new PointF(x2, y2);
 				listener.onGestureInit(x1, y1, x2, y2);
@@ -160,8 +164,12 @@ public class MultiTouchSupport {
 				}
 				return true;
 			} else if (actionCode == MotionEvent.ACTION_MOVE) {
-				firstPoint = new PointF(x1, y1);
-				secondPoint = new PointF(x2, y2);
+				PointF firstPointNew = new PointF(x1, y1);
+				PointF secondPointNew = new PointF(x2, y2);
+				firstPoint = new PointF((firstPointPrevious.x + firstPointNew.x) / 2.0f, (firstPointPrevious.y + firstPointNew.y) / 2.0f);
+				secondPoint = new PointF((secondPointPrevious.x + secondPointNew.x) / 2.0f, (secondPointPrevious.y + secondPointNew.y) / 2.0f);
+				firstPointPrevious = firstPointNew;
+				secondPointPrevious = secondPointNew;
 				if (inZoomAndRotationMode) {
 
 					// Keep zoom center fixed or flexible
