@@ -350,15 +350,14 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		MapButtonState buttonState = getButtonState();
 		FabMarginPreference preference = buttonState != null ? buttonState.getFabMarginPref() : null;
 		if (mapActivity != null && useCustomPosition && preference != null) {
-			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
 			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 				Pair<Integer, Integer> margins = preference.getPortraitFabMargins();
 				Pair<Integer, Integer> defMargins = preference.getDefaultPortraitMargins();
-				setFabButtonMargin(mapActivity, this, params, margins, defMargins.first, defMargins.second);
+				setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
 			} else {
 				Pair<Integer, Integer> margins = preference.getLandscapeFabMargin();
 				Pair<Integer, Integer> defMargins = preference.getDefaultLandscapeMargins();
-				setFabButtonMargin(mapActivity, this, params, margins, defMargins.first, defMargins.second);
+				setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
 			}
 		}
 	}
