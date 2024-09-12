@@ -317,6 +317,7 @@ public class BinaryMapPoiReaderAdapter {
 		long indexOffset = codedIS.getTotalBytesRead();
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		List<Integer> nameIndexCoordinates = new ArrayList<>();
+		QuadTree<Object> nameIndexTree = null;
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -336,8 +337,7 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
 				oldLimit = codedIS.pushLimitLong((long) length);
-				QuadTree<Object> nameIndexTree = null;
-				if (nameIndexCoordinates.size() > 0) {
+				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
 					nameIndexTree = new QuadTree<Object>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 							8, 0.55f);
 					for (int i = 0; i < nameIndexCoordinates.size(); i = i + 2) {
@@ -602,40 +602,6 @@ public class BinaryMapPoiReaderAdapter {
 			default:
 				skipUnknownField(t);
 				break;
-			}
-		}
-	}
-
-	protected void indexTagGroupsInPoiBox(int left31, int right31, int top31, int bottom31,
-	                              SearchRequest<Amenity> req, PoiRegion region) throws IOException {
-		TLongHashSet skipTiles = null;
-		if (req.zoom >= 0 && req.zoom < 16) {
-			skipTiles = new TLongHashSet();
-		}
-		long length;
-		long oldLimit;
-		TIntLongHashMap offsetsMap = new TIntLongHashMap();
-		while (true) {
-			if (req.isCancelled()) {
-				return;
-			}
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-				case 0:
-					return;
-				case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
-					length = readInt();
-					oldLimit = codedIS.pushLimitLong((long) length);
-					readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap, skipTiles, req, region, null);
-					codedIS.popLimit(oldLimit);
-					break;
-				case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					return;
-				default:
-					skipUnknownField(t);
-					break;
 			}
 		}
 	}
