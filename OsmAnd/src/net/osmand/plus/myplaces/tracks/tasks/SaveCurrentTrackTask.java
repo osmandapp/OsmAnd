@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import net.osmand.IndexConstants;
 import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxListener;
 import net.osmand.shared.gpx.GpxFile;
@@ -55,7 +55,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 			Exception exception = SharedUtil.writeGpxFile(fout, gpx);
 			if (exception == null) {
 				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
-				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
 			}
 		}
 		return shouldClearPath;

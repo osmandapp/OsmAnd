@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,6 +16,10 @@ import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterVariantViewHold
 import net.osmand.plus.myplaces.tracks.filters.viewholders.ShowAllViewHolder
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.search.core.SearchPhrase
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.FolderSingleFieldTrackFilterParams
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.filters.SingleFieldTrackFilterParams
 import net.osmand.util.Algorithms
 import net.osmand.view.ThreeStateCheckbox
 
@@ -36,7 +41,14 @@ class ListFilterAdapter(
 	var showAllItems = false
 	private var additionalItems = ArrayList<String>()
 	lateinit var fragmentManager: FragmentManager
-	lateinit var filter: ListTrackFilter
+	private lateinit var _filter: ListTrackFilter
+	var filter: ListTrackFilter
+		get() = _filter
+		set(value) {
+			_filter = value
+			filterParamsAdapter = FilterParamsAdapter(app, value.collectionFilterParams)
+		}
+	private lateinit var filterParamsAdapter: FilterParamsAdapter
 	private var isSelectAllItemsBeingSet = false
 
 	private val newSelectedItemsListener =
@@ -72,13 +84,16 @@ class ListFilterAdapter(
 					R.layout.show_all_filter_items_item,
 					parent,
 					false)
+				val itemName = items[0]
+				val selected = filter.isItemSelected(itemName)
 				val topBottomPadding =
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_small)
-				val leftRightPadding = if(items.size > 0 && filter.collectionFilterParams.getItemIcon(app, items[0]) != null) {
-					app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
-				} else {
-					app.resources.getDimensionPixelSize(R.dimen.content_padding)
-				}
+				val leftRightPadding =
+					if (items.size > 0 && filterParamsAdapter.getFilterItemIcon(itemName, selected, nightMode) != null) {
+						app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
+					} else {
+						app.resources.getDimensionPixelSize(R.dimen.content_padding)
+					}
 				view.setPadding(
 					leftRightPadding,
 					topBottomPadding,
@@ -87,6 +102,26 @@ class ListFilterAdapter(
 				ShowAllViewHolder(view)
 			}
 		}
+	}
+
+
+	private fun getFilterAllItemsIcon(
+		filterParams: SingleFieldTrackFilterParams, isChecked: Boolean,
+		nightMode: Boolean): Drawable? {
+		if (filterParams is FolderSingleFieldTrackFilterParams) {
+			return if (isChecked) {
+				app.uiUtilities.getActiveIcon(
+					R.drawable.ic_action_group_select_all,
+					nightMode)
+			} else {
+				app.uiUtilities.getPaintedIcon(
+					R.drawable.ic_action_group_select_all,
+					app.getColor(R.color.icon_color_default_light))
+			}
+		} else {
+			return null
+		}
+
 	}
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -106,8 +141,9 @@ class ListFilterAdapter(
 
 			is FilterVariantViewHolder -> {
 				val itemName = getItem(position)
-				val icon = filter.collectionFilterParams.getItemIcon(app, itemName)
-				holder.title.text = filter.collectionFilterParams.getItemText(app, itemName)
+				val selected = filter.isItemSelected(itemName)
+				val icon = filterParamsAdapter.getFilterItemIcon(itemName, selected, nightMode)
+				holder.title.text = filterParamsAdapter.getItemText(itemName)
 				holder.icon.setImageDrawable(icon)
 				AndroidUiHelper.updateVisibility(holder.icon, icon != null)
 				AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
@@ -116,7 +152,7 @@ class ListFilterAdapter(
 					this.notifyItemChanged(position)
 				}
 				holder.count.text = filter.getTracksCountForItem(itemName).toString()
-				holder.checkBox.isChecked = filter.isItemSelected(itemName)
+				holder.checkBox.isChecked = selected
 			}
 
 			is SelectAllViewHolder -> {
@@ -134,7 +170,8 @@ class ListFilterAdapter(
 				}
 				isSelectAllItemsBeingSet = false
 				holder.icon.setImageDrawable(
-					filter.collectionFilterParams.getAllItemsIcon(app,
+					getFilterAllItemsIcon(
+						filter.collectionFilterParams,
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
 				holder.switch.setOnCheckedChangeListener { _, isChecked ->

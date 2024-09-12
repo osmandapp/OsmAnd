@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:layout_width="@dimen/context_menu_transport_icon_size"
                 android:layout_height="@dimen/context_menu_transport_icon_size"
                 android:layout_gravity="center_vertical|end"
-                osmand:tint="?attr/default_icon_color"
+                app:tint="?attr/default_icon_color"
                 tools:src="@drawable/ic_action_track_16" />
 
         </FrameLayout>

@@ -2,6 +2,7 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
@@ -13,7 +14,6 @@ import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.util.KMapUtils
-import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import kotlin.collections.set
 
 class GpxFile : GpxExtensions {
@@ -880,7 +880,10 @@ class GpxFile : GpxExtensions {
 		return null
 	}
 
+	fun isOsmAndOrigin() = author?.startsWith(OSMAND_AUTHOR_PREFIX, ignoreCase = true) ?: false
+
 	companion object {
-		const val DEFAULT_WPT_GROUP_NAME = "default"
+		const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
+		const val DEFAULT_WPT_GROUP_NAME = ""
 	}
 }

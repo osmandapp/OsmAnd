@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="center">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
                 android:maxLines="1"
                 android:textColor="@color/gpx_chart_blue"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"
+                app:typefaceWeight="medium"
                 tools:text="100 " />
 
             <TextView
@@ -105,7 +106,7 @@
                     android:maxLines="1"
                     android:textColor="@color/gpx_chart_orange"
                     android:textSize="@dimen/default_desc_text_size"
-                    android:textStyle="bold"
+                    app:typefaceWeight="medium"
                     tools:text="100 " />
 
                 <TextView
@@ -154,7 +155,7 @@
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/default_desc_text_size"
-                    android:textStyle="bold"
+                    app:typefaceWeight="medium"
                     tools:text="100 " />
 
                 <TextView

@@ -5222,7 +5222,6 @@
     <string name="routing_attr_hazmat_category_usa_7_name">Substancje radioaktywne</string>
     <string name="rendering_attr_alpineHiking_description">Typy klasyfikacji trudności tras.</string>
     <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="shared_string_class">Klasa</string>
     <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
@@ -5689,4 +5688,18 @@
     <string name="use_nearby_roads_summary">Korzysta z mapy offline, aby znaleźć pobliskie drogi i dane wysokościowe. Może dostosować geometrię toru.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd może pobierać dane o wysokości z pobliskich dróg lub map terenu.</string>
     <string name="relief_3d_download_description">Do wyświetlania terenu na mapie wymagane są dodatkowe mapy.</string>
+    <string name="compass_click_north_is_up">Aby zmienić tryb orientacji, kliknij i przytrzymaj</string>
+    <string name="detailed_track_guidance_description">OsmAnd dopasuje trasę do pobliskich dróg, zapewniając lepsze prowadzenie zakręt po zakręcie.</string>
+    <string name="shared_string_automatically">Automatycznie</string>
+    <string name="ask_every_time">Pytaj za każdym razem</string>
+    <string name="delete_widget">Usunąć widżet?</string>
+    <string name="delete_widget_description">Ten widżet zostanie usunięty. Można go później przywrócić na ekranie konfiguracji.</string>
+    <string name="graph_axis">Oś wykresu</string>
+    <string name="y_axis_description">Wybierz maksymalnie dwie opcje dla osi Y.</string>
+    <string name="quick_action_previous_screen_desc">Przełącznik umożliwiający przejście do poprzedniego ekranu.</string>
+    <string name="quick_action_previous_screen_title">Poprzedni ekran</string>
+    <string name="quick_action_verb_navigate">Nawigacja</string>
+    <string name="quick_action_drawer_desc">Przełącznik do pokazywania lub ukrywania menu bocznego.</string>
+    <string name="quick_action_drawer_title">Menu boczne</string>
+    <string name="shared_string_interface">Interfejs</string>
 </resources>

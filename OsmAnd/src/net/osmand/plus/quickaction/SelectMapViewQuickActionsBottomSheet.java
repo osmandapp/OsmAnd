@@ -69,7 +69,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 		String key = args.getString(QUICK_ACTION_BUTTON_KEY);
 		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
+			buttonState = mapButtonsHelper.getActionButtonStateById(key);
 		}
 		long actionId = args.getLong(KEY_ID);
 		action = MapButtonsHelper.produceAction(buttonState.getQuickAction(actionId));

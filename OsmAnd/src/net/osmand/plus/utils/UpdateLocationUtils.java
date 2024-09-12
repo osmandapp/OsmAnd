@@ -1,6 +1,5 @@
 package net.osmand.plus.utils;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -81,7 +80,7 @@ public class UpdateLocationUtils {
 			if (color != null) {
 				SpannableString spannable = new SpannableString(distance);
 				spannable.setSpan(new ForegroundColorSpan(color), 0, spannable.length(), 0);
-				spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), 0, spannable.length(), 0);
+				spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, spannable.length(), 0);
 				return spannable;
 			}
 		}

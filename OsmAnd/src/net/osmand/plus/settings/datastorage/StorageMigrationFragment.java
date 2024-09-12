@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.datastorage;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -30,16 +29,16 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -241,7 +240,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableStringBuilder spannable = new SpannableStringBuilder(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -274,7 +273,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 		String description = getString(R.string.from_to_with_params, currentStorageName, selectedStorageName);
 
 		TextView summary = copyFilesDescr.findViewById(android.R.id.summary);
-		summary.setText(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, description, currentStorageName, selectedStorageName));
+		summary.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), description, currentStorageName, selectedStorageName));
 	}
 
 	private void setupRestartDescr() {
@@ -294,7 +293,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 		SpannableString spannable = new SpannableString(warning);
 		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + amount.length(), 0);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + amount.length(), 0);
 		index = warning.indexOf(formattedSize);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
 
@@ -314,13 +313,13 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			} else if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 				fileName = FileNameTranslationHelper.getFileNameWithRegion(app, fileName);
 			} else if (subtype == FileSubtype.GPX) {
-				fileName = GpxUiHelper.getGpxTitle(fileName);
+				fileName = GpxHelper.INSTANCE.getGpxTitle(fileName);
 			}
 
 			String description = getString(R.string.copying_file, fileName);
 			SpannableString spannable = new SpannableString(description);
 			int index = description.indexOf(fileName);
-			spannable.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, index + fileName.length(), 0);
+			spannable.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, index + fileName.length(), 0);
 			spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), index, index + fileName.length(), 0);
 
 			TextView summary = remainingFiles.findViewById(android.R.id.summary);

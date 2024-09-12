@@ -87,7 +87,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 		slidingTabs = view.findViewById(R.id.sliding_tabs);
 		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
 
-		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, getSegmentActionsListener(), nightMode, false);
+		GPXItemPagerAdapter pagerAdapter = new GPXItemPagerAdapter(app, displayItem, displayHelper, getSegmentActionsListener(), nightMode, false, mapActivity);
 		pagerAdapter.setHideJoinGapsBottomButtons(true);
 		pagerAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 		pager.setAdapter(pagerAdapter);

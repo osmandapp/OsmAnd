@@ -408,7 +408,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
 			String time = extensions.get(VISITED_DATE);
-			point.setVisitedDate(GpxUtilities.INSTANCE.parseTime(time));
+			if (!Algorithms.isEmpty(time)) {
+				point.setVisitedDate(GpxUtilities.INSTANCE.parseTime(time));
+			}
 		}
 		String time = extensions.get(PICKUP_DATE);
 		if (time == null) {

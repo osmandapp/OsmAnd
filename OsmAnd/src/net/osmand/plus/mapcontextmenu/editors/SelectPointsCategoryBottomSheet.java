@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -25,7 +23,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashMap;
@@ -93,7 +93,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		container.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 
 		TextView title = container.findViewById(R.id.title);
-		title.setTypeface(DEFAULT_BOLD);
+		title.setTypeface(FontCache.getMediumFont());
 
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);
 

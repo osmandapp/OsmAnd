@@ -179,7 +179,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						net.osmand.Location location = null;
-						LOG.info(">>>> setGPSLocation");
 						if (!locations.isEmpty()) {
 							location = locations.get(locations.size() - 1);
 							lastTimeGPSLocationFixed = System.currentTimeMillis();
@@ -200,8 +199,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
-							LOG.info(">>>> setNetworkLocation");
-							setLocation(locations.get(locations.size() - 1));
+ 							setLocation(locations.get(locations.size() - 1));
 						}
 					}
 				});

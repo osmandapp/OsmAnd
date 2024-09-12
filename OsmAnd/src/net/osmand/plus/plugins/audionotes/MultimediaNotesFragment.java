@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
@@ -43,6 +42,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -432,7 +432,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
 		if (startIndex != -1) {
 			SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
-			titleSpan.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, startIndex + multimediaNotesPath.length(), 0);
+			titleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, startIndex + multimediaNotesPath.length(), 0);
 			osmEditsDescription.setTitle(titleSpan);
 		} else {
 			osmEditsDescription.setTitle(multimediaNotesPathDescr);

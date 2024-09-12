@@ -59,9 +59,7 @@ public class IconsCategory {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof IconsCategory)) return false;
-
-		IconsCategory category = (IconsCategory) o;
+		if (!(o instanceof IconsCategory category)) return false;
 
 		return getKey().equals(category.getKey());
 	}
@@ -69,5 +67,11 @@ public class IconsCategory {
 	@Override
 	public int hashCode() {
 		return getKey().hashCode();
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return key;
 	}
 }

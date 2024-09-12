@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
 	android:layout_marginEnd="5dip">
 
     <ImageButton
-        osmand:srcCompat="@drawable/ic_action_down_dark"
+        app:srcCompat="@drawable/ic_action_down_dark"
         android:id="@+id/down"
         android:contentDescription="@string/shared_string_move_down"
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
         android:layout_weight="1" />
 
     <ImageButton
-        osmand:srcCompat="@drawable/ic_action_up_dark"
+        app:srcCompat="@drawable/ic_action_up_dark"
         android:id="@+id/up"
         android:contentDescription="@string/shared_string_move_up"
         android:layout_width="wrap_content"

@@ -4386,5 +4386,7 @@
     <string name="poi_healthcare_speciality_psychotherapist">Специализация здравоохранения: психотерапевт</string>
     <string name="poi_healthcare_speciality_clinic">Специализация здравоохранения: клиника</string>
     <string name="poi_dressing_room">Раздевалка</string>
-
+    <string name="poi_diet_pescetarian_no">Пескетарианская диета: нет</string>
+    <string name="poi_cash_in_customers">Клиенты</string>
+    <string name="poi_engineer">Инженерный офис</string>
 </resources>

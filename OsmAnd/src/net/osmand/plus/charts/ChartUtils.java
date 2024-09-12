@@ -1,6 +1,5 @@
 package net.osmand.plus.charts;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static com.github.mikephil.charting.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
@@ -48,15 +47,16 @@ import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.util.Algorithms;
@@ -90,7 +90,8 @@ public class ChartUtils {
 		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
 		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
-		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor, yAxisGridColor, DEFAULT_BOLD, useGesturesAndScale);
+		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor,
+				yAxisGridColor, FontCache.getMediumFont(), useGesturesAndScale);
 	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
@@ -852,18 +853,28 @@ public class ChartUtils {
 	                                             @NonNull GPXDataSetType firstType,
 	                                             @Nullable GPXDataSetType secondType,
 	                                             boolean calcWithoutGaps) {
+		return getDataSets(chart, app, analysis, firstType, secondType, DISTANCE, calcWithoutGaps);
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GpxTrackAnalysis analysis,
+	                                             @NonNull GPXDataSetType firstType,
+	                                             @Nullable GPXDataSetType secondType,
+	                                             GPXDataSetAxisType gpxDataSetAxisType,
+	                                             boolean calcWithoutGaps) {
 		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
 		}
 		List<ILineDataSet> result = new ArrayList<>();
 		if (secondType == null) {
-			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, calcWithoutGaps, false);
+			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, gpxDataSetAxisType, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
 			}
 		} else {
-			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, calcWithoutGaps, false);
-			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, calcWithoutGaps, true);
+			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
+			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -896,29 +907,30 @@ public class ChartUtils {
 	                                            @NonNull GpxTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
 	                                            @Nullable GPXDataSetType otherGraphType,
+	                                            GPXDataSetAxisType gpxDataSetAxisType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
 			case ALTITUDE:
 			case ALTITUDE_EXTRM: {
 				if (analysis.hasElevationData()) {
-					return createGPXElevationDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXElevationDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 			case SLOPE: {
 				if (analysis.hasElevationData()) {
-					return createGPXSlopeDataSet(app, chart, analysis, graphType, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
+					return createGPXSlopeDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, null, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 			case SPEED: {
 				if (analysis.hasSpeedData()) {
 					boolean setYAxisMinimum = otherGraphType != GPXDataSetType.ZOOM_ANIMATED
 							&& otherGraphType != GPXDataSetType.ZOOM_NON_ANIMATED;
-					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
+					return createGPXSpeedDataSet(app, chart, analysis, graphType, gpxDataSetAxisType, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
 				}
 			}
 			default: {
-				return PluginsHelper.getOrderedLineDataSet(chart, analysis, graphType, DISTANCE, calcWithoutGaps, useRightAxis);
+				return PluginsHelper.getOrderedLineDataSet(chart, analysis, graphType, gpxDataSetAxisType, calcWithoutGaps, useRightAxis);
 			}
 		}
 	}

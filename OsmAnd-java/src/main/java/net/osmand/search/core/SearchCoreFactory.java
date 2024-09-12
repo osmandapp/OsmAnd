@@ -10,8 +10,10 @@ import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -825,7 +827,9 @@ public class SearchCoreFactory {
 						} else {
 							f = new PoiAdditionalCustomFilter(types, (PoiType) existingResult.pt);
 						}
-						f.additionalPoiTypes.add(a);
+						if (!f.additionalPoiTypes.contains(a)) {
+							f.additionalPoiTypes.add(a);
+						}
 						existingResult.pt = f;
 					} else {
 						String enTranslation = a.getEnTranslation().toLowerCase();
@@ -943,6 +947,7 @@ public class SearchCoreFactory {
 				NameStringMatcher nmAdditional = includeAdditional ?
 						new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE) : null;
 				Map<String, PoiTypeResult> poiTypes = getPoiTypeResults(nm, nmAdditional);
+				poiTypes = filterTypes(poiTypes);
 				PoiTypeResult wikiCategory = poiTypes.get(OSM_WIKI_CATEGORY);
 				PoiTypeResult wikiType = poiTypes.get(WIKI_PLACE);
 				if (wikiCategory != null && wikiType != null) {
@@ -983,6 +988,27 @@ public class SearchCoreFactory {
 			}
 			searchTopIndexPoiAdditional(phrase, resultMatcher);
 			return true;
+		}
+		
+		// filter out types that are not in the category
+		private Map<String, PoiTypeResult> filterTypes(Map<String, PoiTypeResult> poiTypes) {
+			Map<String, PoiTypeResult> filtered = new LinkedHashMap<>();
+			for (PoiTypeResult ptr : poiTypes.values()) {
+				if (ptr.pt instanceof PoiAdditionalCustomFilter pt) {
+					if (pt.getPoiAdditionalCategory() != null) {
+						filtered.put(ptr.pt.getKeyName(), ptr);
+					} else {
+						pt.additionalPoiTypes.forEach(t -> {
+							if (t.getPoiAdditionalCategory() != null) {
+								filtered.put(ptr.pt.getKeyName(), ptr);
+							}
+						});
+					}
+				} else {
+					filtered.put(ptr.pt.getKeyName(), ptr);
+				}
+			}
+			return filtered;
 		}
 
 		private void addPoiTypeResult(SearchPhrase phrase, SearchResultMatcher resultMatcher, boolean showTopFiltersOnly,
@@ -1093,19 +1119,31 @@ public class SearchCoreFactory {
 		}
 
 		private TopIndexMatch matchTopIndex(BinaryMapIndexReader r, SearchPhrase phrase) throws IOException {
-			String search = phrase.getText(true);
+			String search = phrase.getUnknownSearchPhrase();
+			boolean complete = phrase.isFirstUnknownSearchWordComplete();
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			String lang = phrase.getSettings().getLang();
 			List<TopIndexMatch> matches = new ArrayList<>();
+			Collator collator = OsmAndCollator.primaryCollator();
+			NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 			for (PoiSubType subType : poiSubTypes) {
-				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 				String topIndexValue = null;
 				String translate = null;
 				List<String> possibleValues = new ArrayList<>(subType.possibleValues);
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
-					if (nm.matches(s) || nm.matches(translate)) {
+					if (complete) {
+						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+							topIndexValue = s;
+							break;
+						} else {
+							if (CollatorStringMatcher.cmatches(collator, search, translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+								topIndexValue = s;
+								break;
+							}
+						}
+					} else if (nm.matches(s) || nm.matches(translate)) {
 						topIndexValue = s;
 						break;
 					}
@@ -1609,9 +1647,9 @@ public class SearchCoreFactory {
 		}
 	}
 
-	protected static class PoiAdditionalCustomFilter extends AbstractPoiType {
+	public static class PoiAdditionalCustomFilter extends AbstractPoiType {
 
-		protected List<PoiType> additionalPoiTypes = new ArrayList<PoiType>();
+		public List<PoiType> additionalPoiTypes = new ArrayList<>();
 
 		public PoiAdditionalCustomFilter(MapPoiTypes registry, PoiType pt) {
 			super(pt.getKeyName(), registry);

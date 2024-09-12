@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.createItem;
@@ -37,6 +36,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 
 public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
@@ -144,7 +144,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 			}
 		}
 		String textAll = getString(R.string.ltr_or_rtl_combine_via_colon, text, textValue);
-		SpannableString spannableString = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, textAll, textValue);
+		SpannableString spannableString = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(intervalValueView.getTypeface()), textAll, textValue);
 		intervalValueView.setText(spannableString);
 	}
 

@@ -54,7 +54,7 @@ public class ContextMenuListAdapter extends ArrayAdapter<ContextMenuItem> implem
 	}
 
 	@Override
-	public void onRefreshItem(@NonNull @NotNull String itemId) {
+	public void onRefreshItem(@NonNull String itemId) {
 		ContextMenuItem item = getItemById(itemId);
 		if (item != null) {
 			item.refreshWithActualData();

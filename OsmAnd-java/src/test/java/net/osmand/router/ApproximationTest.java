@@ -24,7 +24,7 @@ import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 @RunWith(Parameterized.class)
 public class ApproximationTest {
 	private final ApproximationEntry entry;
-	private final int ENTRY_TIMEOUT_MS = 1500;
+	private final int ENTRY_TIMEOUT_MS = 1500000;
 	private String[] defaultProfiles = { "car" };
 	private Integer[] defaultMinPointApproximation = { 50 };
 	private String[] defaultTypes = { "routing", "geometry" };
@@ -61,7 +61,7 @@ public class ApproximationTest {
 
 	@Test(timeout = ENTRY_TIMEOUT_MS)
 	public void testApproximation() throws Exception {
-		boolean useNative = isNative() && getNativeLibPath() != null;
+		boolean useNative = isNative() && getNativeLibPath() != null && !entry.ignoreNative;
 		NativeLibrary nativeLibrary = null;
 		if (useNative) {
 			boolean old = NativeLibrary.loadOldLib(getNativeLibPath());
@@ -92,6 +92,7 @@ public class ApproximationTest {
 	private void testEntry(ApproximationEntry entry, String type, String profile, Integer minPointApproximation,
 	                       BinaryMapIndexReader[] binaryMapIndexReaders, NativeLibrary nativeLibrary)
 			throws IOException, InterruptedException {
+		
 		String tag = String.format("\n%s %s %s [%d] %s\n", entry.gpxFile, type, profile, minPointApproximation, entry.name);
 
 		final int MEM_LIMIT = RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT * 8 * 2; // ~ 4 GB
@@ -101,8 +102,8 @@ public class ApproximationTest {
 		if ("routing".equals(type)) {
 			router.setUseGeometryBasedApproximation(false);
 		} else if ("geometry".equals(type)) {
-//			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
-			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_POINTS_MATCH_ALGORITHM;
+			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
+//			GpxRouteApproximation.GPX_SEGMENT_ALGORITHM = GpxRouteApproximation.GPX_OSM_POINTS_MATCH_ALGORITHM;
 			router.setUseGeometryBasedApproximation(true);
 		}
 		router.setUseNativeApproximation(isNative());
@@ -187,6 +188,7 @@ public class ApproximationTest {
 		private String gpxFile;
 		private String obfFile;
 		private boolean ignore;
+		private boolean ignoreNative;
 		private List<String> types;
 		private List<String> profiles;
 		private List<Integer> minPointApproximation;

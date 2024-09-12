@@ -5,6 +5,7 @@ import static net.osmand.shared.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE;
 import static net.osmand.shared.gpx.GpxTrackAnalysis.ANALYSIS_VERSION;
 
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
@@ -34,6 +36,8 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -130,6 +134,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				item.setParameter(FILE_CREATION_TIME, GpxUtilities.INSTANCE.getCreationTime(gpxFile));
 			}
 			item.setParameter(FILE_LAST_MODIFIED_TIME, file.lastModified());
+
+			Metadata metadata = gpxFile.getMetadata();
+			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
+			RouteActivity routeActivity = metadata.getRouteActivity(routeActivityHelper.getActivities());
+			String routeActivityId = routeActivity != null ? routeActivity.getId() : "";
+			item.setParameter(ACTIVITY_TYPE, routeActivityId);
 
 			setupNearestCityName(item);
 			double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);

@@ -51,16 +51,37 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				GpxFile trackFile = new GpxFile(Version.getFullVersion(app));
 				trackFile.getTracks().add(track);
 				trackFile.setColor(track.getColor(gpxFile.getColor(0)));
-				trackFile.setWidth(gpxFile.getWidth(null));
+				String width = gpxFile.getWidth(null);
+				if (width != null) {
+					trackFile.setWidth(width);
+				}
 				trackFile.setShowArrows(gpxFile.isShowArrows());
 				trackFile.setShowStartFinish(gpxFile.isShowStartFinish());
 				trackFile.setSplitInterval(gpxFile.getSplitInterval());
-				trackFile.setSplitType(gpxFile.getSplitType());
-				trackFile.setColoringType(gpxFile.getColoringType());
-				trackFile.setGradientColorPalette(gpxFile.getGradientColorPalette());
-				trackFile.set3DVisualizationType(gpxFile.get3DVisualizationType());
-				trackFile.set3DWallColoringType(gpxFile.get3DWallColoringType());
-				trackFile.set3DLinePositionType(gpxFile.get3DLinePositionType());
+				String splitType = gpxFile.getSplitType();
+				if (splitType != null) {
+					trackFile.setSplitType(splitType);
+				}
+				String coloringType = gpxFile.getColoringType();
+				if (coloringType != null) {
+					trackFile.setColoringType(coloringType);
+				}
+				String gradientColorPalette = gpxFile.getGradientColorPalette();
+				if (gradientColorPalette != null) {
+					trackFile.setGradientColorPalette(gradientColorPalette);
+				}
+				String gpxFile3DVisualizationType = gpxFile.get3DVisualizationType();
+				if (gpxFile3DVisualizationType != null) {
+					trackFile.set3DVisualizationType(gpxFile3DVisualizationType);
+				}
+				String gpxFile3DWallColoringType = gpxFile.get3DWallColoringType();
+				if (gpxFile3DWallColoringType != null) {
+					trackFile.set3DWallColoringType(gpxFile3DWallColoringType);
+				}
+				String gpxFile3DLinePositionType = gpxFile.get3DLinePositionType();
+				if (gpxFile3DLinePositionType != null) {
+					trackFile.set3DLinePositionType(gpxFile3DLinePositionType);
+				}
 				trackFile.setAdditionalExaggeration(gpxFile.getAdditionalExaggeration());
 				trackFile.setElevationMeters(gpxFile.getElevationMeters());
 

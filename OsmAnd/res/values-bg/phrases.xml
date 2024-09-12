@@ -85,7 +85,7 @@
     <string name="poi_furniture">Магазин за мебели;Мебелен магазин;Мебели</string>
     <string name="poi_garden_centre">Градински център</string>
     <string name="poi_gas">Магазин за втечнен газ</string>
-    <string name="poi_shop_yes">Смесен магазин</string>
+    <string name="poi_shop_yes">Магазин</string>
     <string name="poi_gift">Магазин за подаръци</string>
     <string name="poi_hardware">Железария</string>
     <string name="poi_hearing_aids">Слухови апарати</string>
@@ -375,7 +375,7 @@
     <string name="poi_fitness_centre">Фитнес център</string>
     <string name="poi_fitness">Фитнес</string>
     <string name="poi_aerialway_length">Дължина</string>
-    <string name="poi_ref">Номер</string>
+    <string name="poi_ref">Референтен номер</string>
     <string name="poi_sculptor">Скулптор</string>
     <string name="poi_square">Площад</string>
     <string name="poi_townhall">Община</string>
@@ -665,4 +665,5 @@
     <string name="poi_faculty_filter">Факултет</string>
     <string name="poi_windmill">Вятърна мелница</string>
     <string name="poi_clock_option">Допълнителни</string>
+    <string name="poi_aeroway_gate">Изход на летище</string>
 </resources>

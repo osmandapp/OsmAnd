@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
@@ -31,6 +30,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -182,7 +182,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 				.setTitleColorId(R.color.color_osm_edit_delete)
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
-				.setTitle(UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, delete, delete))
+				.setTitle(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
 					Activity activity = getActivity();

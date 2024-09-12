@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/street_name_widget"
 	android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginHorizontal="@dimen/map_button_margin"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<LinearLayout
 			android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
 				android:maxLines="2"
 				android:textColor="@color/osmand_orange"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold" />
+				app:typefaceWeight="medium" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/waypoint_deviation"
@@ -118,7 +118,7 @@
 				android:maxLines="1"
 				android:textColor="@color/osmand_orange"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold"
+				app:typefaceWeight="medium"
 				android:visibility="gone" />
 
 		</LinearLayout>
@@ -161,7 +161,7 @@
 			android:layout_gravity="center_vertical"
 			android:background="@drawable/btn_circle_transparent"
 			android:contentDescription="@string/shared_string_more"
-			osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+			app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 		<ImageButton
 			android:id="@+id/waypoint_close"
@@ -170,7 +170,7 @@
 			android:layout_gravity="center_vertical"
 			android:background="@drawable/btn_circle_transparent"
 			android:contentDescription="@string/shared_string_close"
-			osmand:srcCompat="@drawable/ic_action_remove_dark" />
+			app:srcCompat="@drawable/ic_action_remove_dark" />
 
 	</LinearLayout>
 

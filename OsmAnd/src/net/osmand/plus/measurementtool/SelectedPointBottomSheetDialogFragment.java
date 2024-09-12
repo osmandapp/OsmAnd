@@ -1,6 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,10 +26,11 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -57,7 +56,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		View titleView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
 		TextView title = titleView.findViewById(R.id.title);
-		title.setTypeface(DEFAULT_BOLD);
+		title.setTypeface(FontCache.getMediumFont());
 
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))

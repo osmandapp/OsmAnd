@@ -445,7 +445,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			Drawable icon = groupHidden
 					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
-					: getContentIcon(R.drawable.ic_action_folder);
+					: getPaintedIcon(R.drawable.ic_action_folder, group.getColor());
 			ImageView groupImage = row.findViewById(R.id.icon);
 			groupImage.setImageDrawable(icon);
 

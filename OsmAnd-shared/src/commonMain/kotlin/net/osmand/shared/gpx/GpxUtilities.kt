@@ -10,6 +10,7 @@ import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -25,7 +26,6 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KAlgorithms.hash
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import net.osmand.shared.util.StringBundle
 import net.osmand.shared.util.StringBundleWriter
 import net.osmand.shared.util.StringBundleXmlReader
@@ -317,6 +317,14 @@ object GpxUtilities {
 		}
 
 		companion object {
+			const val OBF_POINTS_GROUPS_DELIMITER = "~~~"
+			const val OBF_POINTS_GROUPS_PREFIX = "points_groups_"
+			const val OBF_POINTS_GROUPS_NAMES = "points_groups_names"
+			const val OBF_POINTS_GROUPS_ICONS = "points_groups_icons"
+			const val OBF_POINTS_GROUPS_COLORS = "points_groups_colors"
+			const val OBF_POINTS_GROUPS_BACKGROUNDS = "points_groups_backgrounds"
+			const val OBF_POINTS_GROUPS_CATEGORY = "points_groups_category" // optional category of OBF-GPX point
+
 			fun parsePointsGroupAttributes(parser: XmlPullParser): PointsGroup {
 				val name = parser.getAttributeValue("", "name")
 				val category = PointsGroup(name ?: "")
@@ -539,7 +547,7 @@ object GpxUtilities {
 	private fun writePoints(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		for (l in file.getPointsList()) {
 			serializer.startTag(null, "wpt")
-			writeWpt(serializer, l, progress)
+			writeWpt(serializer, l, progress, file)
 			serializer.endTag(null, "wpt")
 		}
 	}
@@ -551,7 +559,7 @@ object GpxUtilities {
 			writeNotNullText(serializer, "desc", route.desc)
 			for (p in route.points) {
 				serializer.startTag(null, "rtept")
-				writeWpt(serializer, p, progress)
+				writeWpt(serializer, p, progress, file)
 				serializer.endTag(null, "rtept")
 			}
 			writeExtensions(serializer, route, null)
@@ -570,7 +578,7 @@ object GpxUtilities {
 					writeNotNullText(serializer, "name", segment.name)
 					for (p in segment.points) {
 						serializer.startTag(null, "trkpt")
-						writeWpt(serializer, p, progress)
+						writeWpt(serializer, p, progress, file)
 						serializer.endTag(null, "trkpt")
 					}
 					assignRouteExtensionWriter(segment)
@@ -671,7 +679,7 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeWpt(serializer: XmlSerializer, p: WptPt, progress: IProgress?) {
+	private fun writeWpt(serializer: XmlSerializer, p: WptPt, progress: IProgress?, file: GpxFile) {
 		serializer.attribute(null, "lat", formatLatLon(p.lat))
 		serializer.attribute(null, "lon", formatLatLon(p.lon))
 		if (!p.ele.isNaN()) {
@@ -702,6 +710,18 @@ object GpxUtilities {
 			val profile = extensions[PROFILE_TYPE_EXTENSION]
 			if (GAP_PROFILE_TYPE == profile) {
 				extensions.remove(PROFILE_TYPE_EXTENSION)
+			}
+		}
+		if (p.category != null && file.pointsGroups[p.category] != null) {
+			val pointsGroup = file.pointsGroups[p.category]!!
+			if (p.getColor() == pointsGroup.color) {
+				extensions.remove(COLOR_NAME_EXTENSION)
+			}
+			if (p.getIconName() == pointsGroup.iconName) {
+				extensions.remove(ICON_NAME_EXTENSION)
+			}
+			if (p.getBackgroundType() == pointsGroup.backgroundType) {
+				extensions.remove(BACKGROUND_TYPE_EXTENSION)
 			}
 		}
 		assignExtensionWriter(p, extensions)
@@ -1428,14 +1448,20 @@ object GpxUtilities {
 			val color = point.getColor()
 			if (pointsGroup.color == 0 && color != 0) {
 				pointsGroup.color = color
+			} else if (pointsGroup.color != 0 && color == 0) {
+				point.setColor(pointsGroup.color)
 			}
 			val iconName = point.getIconName()
 			if (KAlgorithms.isEmpty(pointsGroup.iconName) && !KAlgorithms.isEmpty(iconName)) {
 				pointsGroup.iconName = iconName
+			} else if (!KAlgorithms.isEmpty(pointsGroup.iconName) && KAlgorithms.isEmpty(iconName)) {
+				point.setIconName(pointsGroup.iconName)
 			}
 			val backgroundType = point.getBackgroundType()
 			if (KAlgorithms.isEmpty(pointsGroup.backgroundType) && !KAlgorithms.isEmpty(backgroundType)) {
 				pointsGroup.backgroundType = backgroundType
+			} else if (!KAlgorithms.isEmpty(pointsGroup.backgroundType) && KAlgorithms.isEmpty(backgroundType)) {
+				point.setBackgroundType(pointsGroup.backgroundType)
 			}
 			pointsGroup.points.add(point)
 		}

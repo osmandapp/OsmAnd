@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT;
 
@@ -28,10 +27,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -47,7 +42,11 @@ import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -88,7 +87,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
-		minMaxSpeedPaint.setTypeface(DEFAULT_BOLD);
+		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
 		minMaxSpeedPaint.setStyle(Paint.Style.FILL);
 
 		if (shouldDismiss()) {

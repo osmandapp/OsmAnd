@@ -1,6 +1,5 @@
 package net.osmand.plus.profiles.data;
 
-import static android.graphics.Typeface.DEFAULT_BOLD;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 
@@ -41,7 +41,7 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 		String fullDescription = ctx.getString(R.string.provided_by, description);
 		int color = ColorUtilities.getActiveColor(ctx, nightMode);
 		String url = description.toString();
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(DEFAULT_BOLD, fullDescription, url);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), fullDescription, url);
 		int startInd = fullDescription.indexOf(url);
 		spannable.setSpan(new ForegroundColorSpan(color), startInd, startInd + url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

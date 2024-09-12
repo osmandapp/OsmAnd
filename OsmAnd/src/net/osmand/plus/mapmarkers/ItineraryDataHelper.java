@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 import static net.osmand.util.MapUtils.createShortLinkString;
 
 import android.util.Pair;
@@ -29,14 +30,8 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 
 public class ItineraryDataHelper {
 
@@ -273,7 +268,7 @@ public class ItineraryDataHelper {
 	public static MapMarker fromFavourite(@NonNull OsmandApplication app, @NonNull FavouritePoint point, @Nullable MapMarkersGroup group) {
 		int colorIndex = MapMarker.getColorIndex(app, point.getColor());
 		LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, point.getName());
+		PointDescription name = new PointDescription(POINT_TYPE_MAP_MARKER, point.getName());
 		MapMarker marker = new MapMarker(latLon, name, colorIndex);
 
 		marker.id = getMarkerId(app, marker, group);
@@ -291,14 +286,22 @@ public class ItineraryDataHelper {
 	}
 
 	public static MapMarker fromWpt(@NonNull OsmandApplication app, @NonNull WptPt point, @Nullable MapMarkersGroup group) {
+		Map<String, String> extensions = point.getExtensionsToRead();
+		String creationDate = extensions.get(CREATION_DATE);
+		String visitedDate = extensions.get(VISITED_DATE);
+
 		int colorIndex = MapMarker.getColorIndex(app, point.getColor());
-		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, point.getName());
+		PointDescription name = new PointDescription(POINT_TYPE_MAP_MARKER, point.getName());
 		MapMarker marker = new MapMarker(new LatLon(point.getLat(), point.getLon()), name, colorIndex);
 
 		marker.id = getMarkerId(app, marker, group);
 		marker.wptPt = point;
-		marker.creationDate = GpxUtilities.INSTANCE.parseTime(point.getExtensionsToRead().get(CREATION_DATE));
-		marker.visitedDate = GpxUtilities.INSTANCE.parseTime(point.getExtensionsToRead().get(VISITED_DATE));
+		if (!Algorithms.isEmpty(creationDate)) {
+			marker.creationDate = GpxUtilities.INSTANCE.parseTime(creationDate);
+		}
+		if (!Algorithms.isEmpty(visitedDate)) {
+			marker.visitedDate = GpxUtilities.INSTANCE.parseTime(visitedDate);
+		}
 		marker.history = marker.visitedDate != 0;
 
 		if (group != null) {

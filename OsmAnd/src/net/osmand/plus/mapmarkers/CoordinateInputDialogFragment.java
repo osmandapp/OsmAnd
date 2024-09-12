@@ -62,7 +62,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -171,7 +171,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	protected void updateWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
+	protected void updateWpt(GpxFile gpx, @Nullable String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
@@ -1425,7 +1425,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			} else {
 				SharedUtil.writeGpxFile(new File(gpx.getPath()), gpx);
 			}
-			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
+			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
 			return null;
 		}
 

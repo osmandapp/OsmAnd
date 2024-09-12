@@ -473,5 +473,6 @@
 
 	<dimen name="bottom_space_height">160dp</dimen>
 	<dimen name="external_devices_empty_content_centre_margin">126dp</dimen>
+	<dimen name="map_button_appearance_image_height">130dp</dimen>
 
 </resources>

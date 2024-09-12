@@ -24,7 +24,7 @@ import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -187,6 +187,7 @@ public class GpxSelectionHelper {
 	 * @deprecated Use the {@link #getSelectedFileByPath(String filePath)} method.
 	 */
 	@Nullable
+	@Deprecated
 	public SelectedGpxFile getSelectedFileByName(String fileName) {
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			if (selectedGpxFile.getGpxFile().getPath().endsWith("/" + fileName)) {

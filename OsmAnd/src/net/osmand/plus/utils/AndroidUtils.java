@@ -1213,6 +1213,12 @@ public class AndroidUtils {
 		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
 	}
 
+	@DrawableRes
+	public static int getIconId(@NonNull Context ctx, @NonNull String resourceName) {
+		int iconId = ctx.getResources().getIdentifier(resourceName, "drawable", ctx.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.ic_action_info_dark;
+	}
+
 	@NonNull
 	public static String getActivityTypeTitle(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
 		return getActivityTypeStringPropertyName(ctx, activityType.getName(),
@@ -1349,7 +1355,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
+	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull View fabButton, @NonNull FabMarginPreference preference) {
 		return new View.OnTouchListener() {
 			private int initialMarginX = 0;
 			private int initialMarginY = 0;

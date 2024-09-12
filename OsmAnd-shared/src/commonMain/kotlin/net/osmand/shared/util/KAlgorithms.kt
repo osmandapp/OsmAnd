@@ -173,21 +173,11 @@ object KAlgorithms {
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 
-	fun removeAllFiles(file: KFile?): Boolean {
-		if (file == null) {
-			return false
-		}
-		return if (file.isDirectory()) {
-			val files: Array<KFile> = file.listFiles()
-			if (!isEmpty<KFile>(files)) {
-				for (f in files) {
-					removeAllFiles(f)
-				}
-			}
-			file.delete()
+	fun capitalizeFirstLetter(s: String?): String? {
+		return if (!s.isNullOrEmpty()) {
+			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
 		} else {
-			file.delete()
+			s
 		}
 	}
-
 }

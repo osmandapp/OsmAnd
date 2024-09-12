@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 
 import android.annotation.SuppressLint;
@@ -37,10 +36,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -76,6 +71,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -86,6 +82,10 @@ import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -426,7 +426,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 
-		Typeface typeface = DEFAULT_BOLD;
+		Typeface typeface = FontCache.getMediumFont();
 		startTime[0] += (int) boardingTime;
 		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
 
@@ -629,7 +629,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int startIndex = title.length();
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
-		title.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		title.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
 		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -699,7 +699,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private void buildDestinationItem(@NonNull View view, TargetPoint destination, int[] startTime,
 									  TransportRouteResultSegment segment, double walkSpeed) {
-		Typeface typeface = DEFAULT_BOLD;
+		Typeface typeface = FontCache.getMediumFont();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer(view.getContext());

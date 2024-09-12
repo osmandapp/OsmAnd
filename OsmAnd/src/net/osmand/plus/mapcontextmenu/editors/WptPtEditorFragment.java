@@ -254,7 +254,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void doUpdateWpt(String name, String category, String description) {
+	private void doUpdateWpt(String name, String category, @Nullable String description) {
 		WptPt wpt = getWpt();
 		WptPtEditor editor = getWptPtEditor();
 		if (wpt != null && editor != null) {

@@ -17,8 +17,9 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -58,7 +59,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	protected Void doInBackground(Void... params) {
 		boolean resetAnything = data.shouldResetAnything();
 		for (TrackItem item : items) {
-			File file = item.getFile();
+			KFile file = item.getFile();
 			if (file != null) {
 				GpxFile gpxFile = resetAnything ? getGpxFile(file) : null;
 				updateTrackAppearance(file, gpxFile);
@@ -69,7 +70,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		return null;
 	}
 
-	private void updateTrackAppearance(@NonNull File file, @Nullable GpxFile gpxFile) {
+	private void updateTrackAppearance(@NonNull KFile file, @Nullable GpxFile gpxFile) {
 		GpxDataItemCallback callback = getGpxDataItemCallback(gpxFile);
 		GpxDataItem item = gpxDbHelper.getItem(file, callback);
 		if (item != null) {
@@ -78,8 +79,8 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	}
 
 	@Nullable
-	private GpxFile getGpxFile(@NonNull File file) {
-		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.getAbsolutePath());
+	private GpxFile getGpxFile(@NonNull KFile file) {
+		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.absolutePath());
 		GpxFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : SharedUtil.loadGpxFile(file);
 		if (gpxFile.getError() != null) {
 			LOG.error("Failed read gpx file", SharedUtil.jException(gpxFile.getError()));

@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import static android.graphics.Typeface.DEFAULT;
-import static android.graphics.Typeface.DEFAULT_BOLD;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
@@ -28,8 +27,6 @@ import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -41,9 +38,12 @@ import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -222,7 +222,7 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupNumberSpans(@NonNull SpannableStringBuilder builder, int index) {
 		builder.setSpan(new AbsoluteSizeSpan(spToPx(app, 20)), index, builder.length(), 0);
-		builder.setSpan(new CustomTypefaceSpan(DEFAULT_BOLD), index, builder.length(), 0);
+		builder.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), index, builder.length(), 0);
 		builder.setSpan(new ForegroundColorSpan(getPrimaryTextColor(app, nightMode)), index, builder.length(), 0);
 	}
 }

@@ -40,6 +40,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.charts.ChartModeBottomSheet;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.NavigationService;
@@ -73,6 +75,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -136,7 +139,18 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		selectedGpxFile = helper.getCurrentTrack();
 		handler = new TripRecordingUpdatesHandler(app, this::updateStatus, () -> {
 			graphsAdapter.updateGraph(graphTabPosition);
-			AndroidUiHelper.updateVisibility(segmentsTabs, graphsAdapter.isTabsVisible());
+			boolean showSegmentsTab = false;
+			if (graphsAdapter.isUseSingleMainTab()) {
+				List<GPXDataSetType[]> availableYAxis = new ArrayList<>();
+				availableYAxis.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(selectedGpxFile.getTrackAnalysis(app)));
+				availableYAxis.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(selectedGpxFile.getTrackAnalysis(app)));
+				if (!Algorithms.isEmpty(availableYAxis)) {
+					showSegmentsTab = !Algorithms.isEmpty(availableYAxis) || graphsAdapter.isTabsVisible();
+				}
+			} else {
+				showSegmentsTab = graphsAdapter.isTabsVisible();
+			}
+			AndroidUiHelper.updateVisibility(segmentsTabs, showSegmentsTab);
 		});
 	}
 
@@ -162,6 +176,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
+		blockStatisticsBuilder.setShowShortStat(true);
 		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
@@ -327,13 +342,15 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 
-		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false);
+		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false, getMapActivity());
 		graphsAdapter.setHideStatistics(true);
 		graphsAdapter.setHideJoinGapsBottomButtons(true);
-		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
+		graphsAdapter.setUseSingleMainTab(true);
+		graphsAdapter.setAxisPreferences(settings.TRIP_RECORDING_X_AXIS, settings.TRIP_RECORDING_Y_AXIS);
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
+		tabLayout.setVisibility(View.GONE);
 
 		viewGroup.addView(segmentView);
 	}
