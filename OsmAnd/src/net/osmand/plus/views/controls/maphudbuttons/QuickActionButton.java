@@ -1,6 +1,5 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
@@ -56,7 +55,7 @@ public class QuickActionButton extends MapButton {
 			setScaleX(1.5f);
 			setScaleY(1.5f);
 			setAlpha(0.95f);
-			setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, this, buttonState.getFabMarginPref()));
+			setOnTouchListener(new MapButtonTouchListener(mapActivity, buttonState.getFabMarginPref()));
 			return true;
 		});
 	}
