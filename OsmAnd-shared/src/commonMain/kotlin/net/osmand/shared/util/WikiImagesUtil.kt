@@ -1,4 +1,4 @@
-package net.osmand.shared.gpx
+package net.osmand.shared.util
 
 object WikiImagesUtil {
     /**
