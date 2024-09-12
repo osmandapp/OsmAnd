@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_HIDDEN;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
@@ -96,7 +96,7 @@ public class CompassButtonState extends MapButtonState {
 		CompassMode compassMode = settings.getCompassMode();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		String iconName = app.getResources().getResourceEntryName(compassMode.getIconId().getIconId(nightMode));
-		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams(iconName, SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
 	@Nullable
