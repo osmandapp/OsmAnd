@@ -10,8 +10,10 @@ import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -1122,6 +1124,8 @@ public class SearchCoreFactory {
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			String lang = phrase.getSettings().getLang();
 			List<TopIndexMatch> matches = new ArrayList<>();
+			Collator collator = OsmAndCollator.primaryCollator();
+			NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 			for (PoiSubType subType : poiSubTypes) {
 				String topIndexValue = null;
 				String translate = null;
@@ -1130,23 +1134,18 @@ public class SearchCoreFactory {
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
 					if (complete) {
-						CollatorStringMatcher csm = new CollatorStringMatcher(s, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-						if (csm.matches(search)) {
+						if (CollatorStringMatcher.cmatches(collator, s, search, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
-							csm = new CollatorStringMatcher(translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-							if (csm.matches(search)) {
+							if (CollatorStringMatcher.cmatches(collator, translate, search, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 								topIndexValue = s;
 								break;
 							}
 						}
-					} else {
-						NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
-						if (nm.matches(s) || nm.matches(translate)) {
-							topIndexValue = s;
-							break;
-						}
+					} else if (nm.matches(s) || nm.matches(translate)) {
+						topIndexValue = s;
+						break;
 					}
 				}
 				if (topIndexValue != null) {
