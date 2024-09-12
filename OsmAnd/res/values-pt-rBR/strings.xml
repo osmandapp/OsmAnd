@@ -5874,7 +5874,7 @@
     <string name="my_location_action_descr">Centraliza o mapa em sua localização atual.</string>
     <string name="map_3d_mode_action_descr">Alterar a inclinação do mapa.</string>
     <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
-    <string name="raster_layers_action_descr">Alterar camadas de rasterização</string>
+    <string name="raster_layers_action_descr">Alterar camadas raster</string>
     <string name="search_action_descr">Abre a pesquisa.</string>
     <string name="navigation_action_descr">Abre a navegação.</string>
     <string name="drawer_button_description">Abre o menu principal.</string>

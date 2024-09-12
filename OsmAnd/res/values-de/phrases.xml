@@ -1348,7 +1348,7 @@
     <string name="poi_capacity">Kapazität</string>
     <string name="poi_capacity_disabled_yes">Ja;Behindertenplätze</string>
     <string name="poi_capacity_disabled_no">Keine Behindertenplätze</string>
-    <string name="poi_capacity_disabled">Behindertenplätze</string>
+    <string name="poi_capacity_disabled">Ausgewiesene Behindertenplätze</string>
     <string name="poi_capacity_women_yes">Frauenplätze</string>
     <string name="poi_capacity_women_no">Keine Frauenplätze</string>
     <string name="poi_capacity_women">Frauenplätze</string>
@@ -3288,7 +3288,7 @@
     <string name="poi_scooter_no">Roller: nein</string>
     <string name="poi_truck_no">Lkw: nein</string>
     <string name="poi_parking_fee_yes">ja</string>
-    <string name="poi_parking_fee_no">Nein</string>
+    <string name="poi_parking_fee_no">nein</string>
     <string name="poi_parking_fee">Parkgebühr</string>
     <string name="poi_amperage">Stromstärke</string>
     <string name="poi_location_overhead">Lage: oben</string>

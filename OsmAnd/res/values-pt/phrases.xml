@@ -983,7 +983,7 @@
     <string name="poi_crematorium">Crematório</string>
     <string name="poi_internet_cafe">Cibercafé</string>
     <string name="poi_bank">Agência bancária</string>
-    <string name="poi_atm">Caixa automática</string>
+    <string name="poi_atm">Caixa automática / multibanco</string>
     <string name="poi_payment_terminal">Terminal de pagamento</string>
     <string name="poi_money_lender">Credor de dinheiro</string>
     <string name="poi_pawnbroker">Casa de penhores</string>
