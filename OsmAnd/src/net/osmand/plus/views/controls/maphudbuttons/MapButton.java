@@ -321,9 +321,11 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	@Override
 	public void onViewAttachedToWindow(@NonNull View v) {
-		updateMargins();
-		setInvalidated(true);
-		update();
+		if (mapActivity != null) {
+			updateMargins();
+			setInvalidated(true);
+			update();
+		}
 	}
 
 	@Override
