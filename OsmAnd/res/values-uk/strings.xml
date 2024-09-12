@@ -5900,4 +5900,6 @@
     <string name="raster_layers_action_descr">Змінити растрові шари</string>
     <string name="type_of_activity">Тип активності</string>
     <string name="change_activity">Змінити активність</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Показати стежки для ґрунтового велосипеда</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
 </resources>
