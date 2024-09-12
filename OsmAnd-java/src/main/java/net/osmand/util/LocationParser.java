@@ -104,6 +104,7 @@ public class LocationParser {
 		if (!valid) {
 			return null;
 		}
+		locPhrase = prepareLatLonWithDecimalCommas(locPhrase);
 		List<Double> d = new ArrayList<>();
 		List<Object> all = new ArrayList<>();
 		List<String> strings = new ArrayList<>();
@@ -255,6 +256,33 @@ public class LocationParser {
 			}
 		}
 		return null;
+	}
+
+	private static String prepareLatLonWithDecimalCommas(String ll) {
+		final int DIGITS_BEFORE_COMMA = 1, DIGITS_AFTER_COMMA = 3; // see testCommaLatLonSearch
+		for (int i = DIGITS_BEFORE_COMMA, first = -1; i < ll.length() - DIGITS_AFTER_COMMA; i++) {
+			if (ll.charAt(i) == ',') {
+				int before = 0, after = 0;
+				for (int j = i - 1; j >= i - DIGITS_BEFORE_COMMA; j--) {
+					if (Character.isDigit(ll.charAt(j))) {
+						before++;
+					}
+				}
+				for (int j = i + 1; j <= i + DIGITS_AFTER_COMMA && before >= DIGITS_BEFORE_COMMA; j++) {
+					if (Character.isDigit(ll.charAt(j))) {
+						after++;
+					}
+				}
+				if (before >= DIGITS_BEFORE_COMMA && after >= DIGITS_AFTER_COMMA) {
+					if (first != -1) {
+						return ll.substring(0, first) + "." + ll.substring(first + 1, i) + "." + ll.substring(i + 1);
+					} else {
+						first = i; // first suitable comma found
+					}
+				}
+			}
+		}
+		return ll;
 	}
 
 	private static LatLon validateAndCreateLatLon(double lat, double lon) {
