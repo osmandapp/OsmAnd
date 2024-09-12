@@ -1134,11 +1134,11 @@ public class SearchCoreFactory {
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
 					if (complete) {
-						if (CollatorStringMatcher.cmatches(collator, s, search, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
-							if (CollatorStringMatcher.cmatches(collator, translate, search, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+							if (CollatorStringMatcher.cmatches(collator, search, translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 								topIndexValue = s;
 								break;
 							}
