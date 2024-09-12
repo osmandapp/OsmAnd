@@ -62,6 +62,8 @@ import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
@@ -1649,6 +1651,10 @@ public class OsmandSettings {
 //		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0.f);
 	//}
 	public final CommonPreference<Boolean> AUTO_SPLIT_RECORDING = new BooleanPreference(this, "auto_split_recording", true).makeProfile();
+
+	public final ListStringPreference TRIP_RECORDING_X_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_x_axis", GPXDataSetType.ALTITUDE.name(), ";").makeShared().makeGlobal();
+
+	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_Y_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", true).makeProfile();
 
