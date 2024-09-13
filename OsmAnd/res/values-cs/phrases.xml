@@ -4745,4 +4745,8 @@
     <string name="poi_padus_local_designation">Místní označení</string>
     <string name="poi_padus_local_manager">Místní manažer</string>
     <string name="poi_padus_owner_fullname">Majitel</string>
+    <string name="poi_padus_public_access_open">Přístup: otevřený</string>
+    <string name="poi_padus_public_access_unknown">Přístup: neznámý</string>
+    <string name="poi_padus_designation_type_fullname">Typ označení</string>
+    <string name="poi_padus_public_access_restricted">Přístup: omezený</string>
 </resources>
