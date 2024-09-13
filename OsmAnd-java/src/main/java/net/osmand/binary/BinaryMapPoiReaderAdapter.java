@@ -56,7 +56,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
 		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
-		QuadTree<Object> bboxIndexCache = new QuadTree<Object>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 
 		int left31;
@@ -317,7 +317,7 @@ public class BinaryMapPoiReaderAdapter {
 		long indexOffset = codedIS.getTotalBytesRead();
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		List<Integer> nameIndexCoordinates = new ArrayList<>();
-		QuadTree<Object> nameIndexTree = null;
+		QuadTree<Void> nameIndexTree = null;
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -338,7 +338,7 @@ public class BinaryMapPoiReaderAdapter {
 				length = readInt();
 				oldLimit = codedIS.pushLimitLong((long) length);
 				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
-					nameIndexTree = new QuadTree<Object>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+					nameIndexTree = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 							8, 0.55f);
 					for (int i = 0; i < nameIndexCoordinates.size(); i = i + 2) {
 						int x = nameIndexCoordinates.get(i);
@@ -524,7 +524,7 @@ public class BinaryMapPoiReaderAdapter {
 					offsets.put(shift, d);
 				}
 
-				List<Object> bboxResult = new ArrayList<>();
+				List<Void> bboxResult = new ArrayList<>();
 				region.bboxIndexCache.queryInBox(new QuadRect(x31, y31, x31, y31), bboxResult);
 				if (bboxResult.size() == 0) {
 					nameIndexCoordinates.add(x31);
@@ -984,7 +984,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	private boolean readBoxField(int left31, int right31, int top31, int bottom31,
 			int px, int py, int pzoom, TIntLongHashMap offsetsMap, TLongHashSet skipTiles,
-			SearchRequest<Amenity> req, PoiRegion region, QuadTree<Object> nameIndexTree) throws IOException {
+			SearchRequest<Amenity> req, PoiRegion region, QuadTree<Void> nameIndexTree) throws IOException {
 		req.numberOfReadSubtrees++;
 		int zoomToSkip = req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER_READ;
 		boolean checkBox = true;
@@ -1043,7 +1043,7 @@ public class BinaryMapPoiReaderAdapter {
 					boolean intersectWithNameIndex = false;
 					QuadRect rect = new QuadRect(xL, yT, xR, yB);
 					if (nameIndexTree != null) {
-						List<Object> res = new ArrayList<>();
+						List<Void> res = new ArrayList<>();
 						nameIndexTree.queryInBox(rect, res);
 						intersectWithNameIndex = res.size() > 0;
 					}
