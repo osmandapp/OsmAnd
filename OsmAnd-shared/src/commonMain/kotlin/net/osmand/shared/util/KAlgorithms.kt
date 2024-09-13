@@ -94,18 +94,10 @@ object KAlgorithms {
 
 	fun colorToString(color: Int): String {
 		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
-			"#" + format(6, (color and 0x00FFFFFF).toString(16))
+			"#" + String.format("%06X", color and 0x00FFFFFF)
 		} else {
-			"#" + format(8, color.toString(16))
+			"#" + String.format("%08X", color)
 		}
-	}
-
-	private fun format(i: Int, hexString: String): String {
-		var formattedString = hexString
-		while (formattedString.length < i) {
-			formattedString = "0$formattedString"
-		}
-		return formattedString
 	}
 
 	/**
