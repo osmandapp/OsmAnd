@@ -1046,9 +1046,13 @@ public class BinaryMapPoiReaderAdapter {
 					boolean intersectWithNameIndex = false;
 					QuadRect rect = new QuadRect(xL, yT, xR, yB);
 					if (PoiRegion.MAP_HAS_TAG_GROUPS && nameIndexTree != null) {
-						List<Void> res = new ArrayList<>();
-						nameIndexTree.queryInBox(rect, res);
-						intersectWithNameIndex = res.size() > 0;
+						List<Void> resCache = new ArrayList<>();
+						region.bboxIndexCache.queryInBox(rect, resCache);
+						if (resCache.size() == 0) {
+							List<Void> res = new ArrayList<>();
+							nameIndexTree.queryInBox(rect, res);
+							intersectWithNameIndex = res.size() > 0;
+						}
 					}
 					// check intersection
 					if ((left31 > xR || xL > right31 || bottom31 < yT || yB < top31) && !intersectWithNameIndex) {
