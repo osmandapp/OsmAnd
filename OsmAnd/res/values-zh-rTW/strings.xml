@@ -5883,4 +5883,6 @@
     <string name="map_3d_mode_action_descr">變更地圖傾斜角度。</string>
     <string name="configure_map_description">變更地圖樣式、圖層或其他設定。</string>
     <string name="drawer_button_description">開啟主選單。</string>
+    <string name="shared_string_decrease">減少</string>
+    <string name="shared_string_increase">增加</string>
 </resources>
