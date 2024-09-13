@@ -118,7 +118,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		addOnAttachStateChangeListener(this);
 		setBackgroundColor(Color.TRANSPARENT);
 		setPadding(shadowPadding, shadowPadding, shadowPadding, shadowPadding);
-		setNightMode(app.getDaynightHelper().isNightModeForMapControls());
+		setNightMode(app.getDaynightHelper().isNightMode());
 	}
 
 	@NonNull
