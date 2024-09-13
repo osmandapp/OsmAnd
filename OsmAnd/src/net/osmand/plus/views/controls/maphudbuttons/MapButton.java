@@ -154,7 +154,9 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	public void setInvalidated(boolean invalidated) {
-		this.invalidated = invalidated;
+		if (!this.invalidated) {
+			this.invalidated = invalidated;
+		}
 	}
 
 	public void setAlwaysVisible(boolean alwaysVisible) {
