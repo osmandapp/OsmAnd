@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
-import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
@@ -44,6 +43,7 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.RasterMapSymbol;
 import net.osmand.core.jni.Utilities;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
@@ -283,7 +283,9 @@ public class MapSelectionHelper {
 		if (rendererView != null) {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
-				List<NativeLibrary.RenderedObject> res = mapContext.getPolygons(NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y), rendererView.getZoomLevel(), false);
+				ZoomLevel zoom = rendererView.getZoomLevel();
+				PointI pointI = NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y);
+				List<RenderedObject> res = mapContext.collectPolygonsAroundPoint(pointI, zoom, false);
 				for (RenderedObject polygon : res) {
 					System.out.println(polygon);
 					System.out.println("------------------------");

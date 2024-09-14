@@ -549,10 +549,11 @@ public class NativeLibrary {
 	}
 
 	public static class RenderedObject extends MapObject {
-		private Map<String, String> tags = new LinkedHashMap<>();
+		private final Map<String, String> tags = new LinkedHashMap<>();
+		private final Map<String, Object> extensions = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
-		private TIntArrayList x = new TIntArrayList();
-		private TIntArrayList y = new TIntArrayList();
+		private final TIntArrayList x = new TIntArrayList();
+		private final TIntArrayList y = new TIntArrayList();
 		private String iconRes;
 		private int order;
 		private boolean visible;
@@ -640,6 +641,14 @@ public class NativeLibrary {
 
 		public void putTag(String t, String v) {
 			tags.put(t, v);
+		}
+
+		public void putExtension(String key, Object val) {
+			extensions.put(key, val);
+		}
+
+		public Object getExtension(String key) {
+			return extensions.get(key);
 		}
 
 		public int getLabelX() {

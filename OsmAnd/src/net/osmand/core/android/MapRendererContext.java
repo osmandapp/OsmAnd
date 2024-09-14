@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.core.jni.ElevationConfiguration;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
@@ -47,7 +47,9 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -84,6 +86,8 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
+	public static final String RELATED_CATEGORY = "related_category";
+	public static final String RELATED_TYPE = "related_type";
 	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
@@ -670,46 +674,45 @@ public class MapRendererContext {
 		}
 	}
 
-	public List<NativeLibrary.RenderedObject> getPolygons(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
+	public List<RenderedObject> collectPolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
 		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
-		List<NativeLibrary.RenderedObject> res = new ArrayList<>();
+		List<RenderedObject> res = new ArrayList<>();
 		if (polygons.size() > 0) {
 			for (int i = 0; i < polygons.size(); i++) {
 				MapObject polygon = polygons.get(i);
-				NativeLibrary.RenderedObject renderedObject = convert(polygon, i);
+				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
 				res.add(renderedObject);
 			}
 		}
 		return res;
 	}
 
-	private NativeLibrary.RenderedObject convert(MapObject mapObject, int order) {
-		NativeLibrary.RenderedObject res = new NativeLibrary.RenderedObject();
+	private RenderedObject createRenderedObjectForPolygon(MapObject mapObject, int order) {
+		RenderedObject object = new RenderedObject();
 		QStringStringHash tags = mapObject.getResolvedAttributes();
 		QStringList tagsKeys = tags.keys();
 		for (int i = 0; i < tagsKeys.size(); i++) {
 			String key = tagsKeys.get(i);
 			String value = tags.get(key);
-			res.putTag(key, value);
+			object.putTag(key, value);
 		}
-		String name = mapObject.getCaptionInNativeLanguage();
-		res.setName(name);
+
 		QStringStringHash names = mapObject.getCaptionsInAllLanguages();
 		QStringList namesKeys = names.keys();
 		for (int i = 0; i < namesKeys.size(); i++) {
 			String key = namesKeys.get(i);
 			String value = names.get(key);
-			res.setName(key, value);
+			object.setName(key, value);
 		}
 
 		QVectorPointI points31 = mapObject.getPoints31();
 		QuadRect rect = new QuadRect();
 		for (int i = 0; i < points31.size(); i++) {
 			PointI p = points31.get(i);
-			res.addLocation(p.getX(), p.getY());
+			object.addLocation(p.getX(), p.getY());
 			rect.expand(p.getX(), p.getY(), p.getX(), p.getY());
 		}
-		res.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
+		object.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
 		ObfMapObject obfMapObject;
 		try {
 			obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
@@ -717,23 +720,48 @@ public class MapRendererContext {
 			obfMapObject = null;
 		}
 		if (obfMapObject != null) {
-			res.setId(obfMapObject.getId().getOsmId());
+			object.setId(obfMapObject.getId().getOsmId());
 		}
+		object.setOrder(order);
 
-		res.setOrder(order);
-
-		/*For test only*/
-		if (res.getName().isEmpty()) {
-			MapPoiTypes mapPoiTypes = app.getPoiTypes();
-			for (Map.Entry<String, String> entry : res.getTags().entrySet()) {
-				String n = mapPoiTypes.getPoiTranslation(entry.getValue());
-				if (!Algorithms.isEmpty(n) && !n.toLowerCase().equals(entry.getValue())) {
-					name += n + ", ";
-				}
+		PoiCategory foundCategory = null;
+		AbstractPoiType foundPoiType = null;
+		MapPoiTypes mapPoiTypes = app.getPoiTypes();
+		for (Map.Entry<String, String> entry : object.getTags().entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			PoiCategory category = mapPoiTypes.getPoiCategoryByName(key);
+			if (foundCategory == null || foundCategory.equals(mapPoiTypes.getOtherPoiCategory())) {
+				foundCategory = category;
+			}
+			AbstractPoiType poiType = category.getPoiTypeByKeyName(value);
+			if (poiType == null) {
+				poiType = mapPoiTypes.getAnyPoiTypeByKey(key + "_" + value);
+			}
+			if (poiType != null) {
+				foundCategory = category;
+				foundPoiType = poiType;
+				break;
 			}
 		}
-		res.setName(name + " " + res.getLink() + " " + res.getPrintTags());
-		/*---*/
-		return res;
+
+		String iconRes = foundPoiType != null
+				? foundPoiType.getIconKeyName()
+				: foundCategory != null ? foundCategory.getIconKeyName() : null;
+		if (iconRes != null) {
+			object.setIconRes(iconRes);
+		}
+		object.putExtension(RELATED_CATEGORY, foundCategory);
+		object.putExtension(RELATED_TYPE, foundPoiType);
+
+		if (Algorithms.isEmpty(object.getNamesMap(true))) {
+			String captionInNativeLanguage = mapObject.getCaptionInNativeLanguage();
+			if (!Algorithms.isEmpty(captionInNativeLanguage)) {
+				object.setName(captionInNativeLanguage);
+			} else {
+				object.setName(object.getLink());
+			}
+		}
+		return object;
 	}
 }
