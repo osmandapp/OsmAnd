@@ -58,6 +58,7 @@ public class BinaryMapPoiReaderAdapter {
 		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
 		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
+		static boolean MAP_HAS_TAG_GROUPS = false;
 
 		int left31;
 		int right31;
@@ -919,6 +920,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.TAGGROUPS_FIELD_NUMBER:
+				PoiRegion.MAP_HAS_TAG_GROUPS = true;
 				long sz = codedIS.readRawVarint32();
 				long old = codedIS.pushLimitLong((long) sz);
 				while (codedIS.getBytesUntilLimit() > 0) {
@@ -1026,6 +1028,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				break;
 			case OsmandOdb.OsmAndPoiBox.TAGGROUPS_FIELD_NUMBER:
+				PoiRegion.MAP_HAS_TAG_GROUPS = true;
 				int tagGroupLength = codedIS.readRawVarint32();
 				long old = codedIS.pushLimitLong((long) tagGroupLength);
 				readTagGroups(region.tagGroups, req);
@@ -1042,10 +1045,14 @@ public class BinaryMapPoiReaderAdapter {
 
 					boolean intersectWithNameIndex = false;
 					QuadRect rect = new QuadRect(xL, yT, xR, yB);
-					if (nameIndexTree != null) {
-						List<Void> res = new ArrayList<>();
-						nameIndexTree.queryInBox(rect, res);
-						intersectWithNameIndex = res.size() > 0;
+					if (PoiRegion.MAP_HAS_TAG_GROUPS && nameIndexTree != null) {
+						List<Void> resCache = new ArrayList<>();
+						region.bboxIndexCache.queryInBox(rect, resCache);
+						if (resCache.size() == 0) {
+							List<Void> res = new ArrayList<>();
+							nameIndexTree.queryInBox(rect, res);
+							intersectWithNameIndex = res.size() > 0;
+						}
 					}
 					// check intersection
 					if ((left31 > xR || xL > right31 || bottom31 < yT || yB < top31) && !intersectWithNameIndex) {
