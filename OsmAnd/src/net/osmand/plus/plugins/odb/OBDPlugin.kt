@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.odb
 
-//import net.osmand.Location
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
@@ -8,6 +7,9 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.graphics.drawable.Drawable
 import android.view.View
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
@@ -15,25 +17,35 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment
+import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
+import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
+import net.osmand.plus.views.mapwidgets.WidgetType
+import net.osmand.plus.views.mapwidgets.WidgetsPanel
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
+import net.osmand.shared.obd.OBDAirIntakeTempDataField
 import net.osmand.shared.obd.OBDCommand
+import net.osmand.shared.obd.OBDDataField
 import net.osmand.shared.obd.OBDDispatcher
+import net.osmand.shared.obd.OBDEngineCoolantDataField
+import net.osmand.shared.obd.OBDFuelLvlDataField
+import net.osmand.shared.obd.OBDFuelTypeDataField
 import net.osmand.shared.obd.OBDResponseListener
-import net.osmand.util.Algorithms
-import okio.IOException
+import net.osmand.shared.obd.OBDRpmDataField
+import net.osmand.shared.obd.OBDSpeedDataField
 import okio.sink
 import okio.source
-import java.io.InputStream
-import java.io.OutputStream
 import java.util.UUID
 
-class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app) {
+class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener {
 	private val settings: OsmandSettings = app.settings
 
 	val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
@@ -41,6 +53,70 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDevice: BluetoothDevice? = null
 	var socket: BluetoothSocket? = null
+	val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
+
+
+	init {
+		val noAppMode = arrayOf<ApplicationMode>()
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_SPEED, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_RPM, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_AIR_INTAKE_TEMP, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(
+			WidgetType.OBD_ENGINE_COOLANT_TEMP,
+			*noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_TYPE, *noAppMode)
+		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_LEVEL, *noAppMode)
+		OBDDispatcher.addResponseListener(this)
+	}
+
+	override fun createWidgets(
+		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
+		appMode: ApplicationMode) {
+		val creator = WidgetInfoCreator(app, appMode)
+		val fuelTypeWidget: MapWidget =
+			OBDTextWidget(mapActivity, OBDWidgetDataFieldType.FUEL_TYPE)
+		widgetsInfos.add(creator.createWidgetInfo(fuelTypeWidget))
+	}
+
+	override fun createMapWidgetForParams(
+		mapActivity: MapActivity,
+		widgetType: WidgetType,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?): OBDTextWidget? {
+		return when (widgetType) {
+			WidgetType.OBD_SPEED -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.SPEED)
+
+			WidgetType.OBD_RPM -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.RPM)
+
+			WidgetType.OBD_AIR_INTAKE_TEMP -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.AIR_INTAKE_TEMP)
+
+			WidgetType.OBD_FUEL_LEVEL -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_LVL)
+
+			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_TYPE)
+
+			WidgetType.OBD_ENGINE_COOLANT_TEMP -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.COOLANT_TEMP)
+
+			else -> null
+		}
+	}
+
+	override fun createMapWidgetForParams(
+		mapActivity: MapActivity,
+		widgetType: WidgetType): OBDTextWidget? {
+		return createMapWidgetForParams(mapActivity, widgetType, null, null)
+	}
 
 	override fun getId(): String {
 		return OsmAndCustomizationConstants.PLUGIN_OBD
@@ -165,13 +241,28 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 		OBDDispatcher.removeResponseListener(responseListener)
 	}
 
-	private fun onCommandResponse(command: OBDCommand, rawResponse: String, result: String) {
-		LOG.debug("OBD-II Response: $rawResponse")
+	override fun onCommandResponse(command: OBDCommand, result: String) {
 		LOG.debug("OBD-II command ${command.name} result : $result")
+		sensorDataCache[command] = when (command) {
+			OBDCommand.OBD_RPM_COMMAND -> OBDRpmDataField(result)
+			OBDCommand.OBD_SPEED_COMMAND -> OBDSpeedDataField(result)
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDAirIntakeTempDataField(result)
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDEngineCoolantDataField(result)
+			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDFuelTypeDataField(result)
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDFuelLvlDataField(result)
+			else -> null
+		}
 	}
 
 	fun isCommandListening(command: OBDCommand): Boolean {
 		return OBDDispatcher.getCommandQueue().contains(command)
+	}
+
+	fun getSensorData(dataField: OBDWidgetDataFieldType): OBDDataField? {
+		if (!isCommandListening(dataField.command)) {
+			OBDDispatcher.addCommand(dataField.command)
+		}
+		return sensorDataCache[dataField.command]
 	}
 
 	companion object {

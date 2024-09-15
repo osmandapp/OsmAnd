@@ -113,7 +113,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn3?.text = OBDCommand.OBD_SUPPORTED_LIST3_COMMAND.name
 		commandBtn4?.text = OBDCommand.OBD_RPM_COMMAND.name
 		commandBtn5?.text = OBDCommand.OBD_SPEED_COMMAND.name
-		commandBtn6?.text = OBDCommand.OBD_INTAKE_AIR_TEMP_COMMAND.name
+		commandBtn6?.text = OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.name
 		commandBtn7?.text = OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.name
 		commandBtn8?.text = OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.name
 		commandBtn9?.text = OBDCommand.OBD_FUEL_TYPE_COMMAND.name
@@ -124,7 +124,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn3?.setOnClickListener { sendCommand(OBDCommand.OBD_SUPPORTED_LIST3_COMMAND) }
 		commandBtn4?.setOnClickListener { sendCommand(OBDCommand.OBD_RPM_COMMAND) }
 		commandBtn5?.setOnClickListener { sendCommand(OBDCommand.OBD_SPEED_COMMAND) }
-		commandBtn6?.setOnClickListener { sendCommand(OBDCommand.OBD_INTAKE_AIR_TEMP_COMMAND) }
+		commandBtn6?.setOnClickListener { sendCommand(OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND) }
 		commandBtn7?.setOnClickListener { sendCommand(OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND) }
 		commandBtn8?.setOnClickListener { sendCommand(OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND) }
 		commandBtn9?.setOnClickListener { sendCommand(OBDCommand.OBD_FUEL_TYPE_COMMAND) }
@@ -143,7 +143,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		(commandBtn5 as ToggleButton).isSelected =
 			plugin?.isCommandListening(OBDCommand.OBD_SPEED_COMMAND) == true
 		(commandBtn6 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBDCommand.OBD_INTAKE_AIR_TEMP_COMMAND) == true
+			plugin?.isCommandListening(OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND) == true
 		(commandBtn7 as ToggleButton).isSelected =
 			plugin?.isCommandListening(OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND) == true
 		(commandBtn8 as ToggleButton).isSelected =
@@ -204,7 +204,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 				OBDCommand.OBD_SUPPORTED_LIST3_COMMAND -> updateCommandResponse(resp3, result)
 				OBDCommand.OBD_RPM_COMMAND -> updateCommandResponse(resp4, result)
 				OBDCommand.OBD_SPEED_COMMAND -> updateCommandResponse(resp5, result)
-				OBDCommand.OBD_INTAKE_AIR_TEMP_COMMAND -> updateCommandResponse(resp6, result)
+				OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> updateCommandResponse(resp6, result)
 				OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> updateCommandResponse(resp7, result)
 				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> updateCommandResponse(resp8, result)
 				OBDCommand.OBD_FUEL_TYPE_COMMAND -> updateCommandResponse(resp9, result)

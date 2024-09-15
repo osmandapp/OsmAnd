@@ -34,9 +34,9 @@ object OBDDispatcher {
 		job = Job()
 		scope = CoroutineScope(Dispatchers.IO + job!!)
 		scope!!.launch {
-			var inStream = inputStream
-			var outStream = outputStream
-			while (inStream != null && outStream != null) {
+			while (inputStream != null && outputStream != null) {
+				val inStream = inputStream!!
+				val outStream = outputStream!!
 				try {
 					val commands = ArrayList(commandQueue)
 					for (command in commands) {
@@ -107,8 +107,6 @@ object OBDDispatcher {
 				} catch (error: Throwable) {
 					log.error("Run OBD looper error. $error")
 				}
-				inStream = inputStream
-				outStream = outputStream
 			}
 		}
 	}

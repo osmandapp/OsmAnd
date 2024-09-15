@@ -10,6 +10,50 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="obd_fuel_type_not_provided">No fuel type provided</string>
+    <string name="obd_fuel_type_gasoline">Gasoline</string>
+    <string name="obd_fuel_type_methanol">Methanol</string>
+    <string name="obd_fuel_type_ethanol">Ethanol</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">Propane</string>
+    <string name="obd_fuel_type_electric">Electric</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Bifuel running Gasoline</string>
+    <string name="obd_fuel_type_bifuel_methanol">Bifuel running Methanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Bifuel running Ethanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Bifuel running LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Bifuel running CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">Bifuel running Propane</string>
+    <string name="obd_fuel_type_bifuel_electricity">Bifuel running Electricity</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel running Electric and Combustion Engine</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybrid Gasoline</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybrid Ethanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybrid Diesel</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybrid Electric</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid Electric and Combustion Engine</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid Regenerative</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Bifuel running Hydrogen</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Hydrogen</string>
+    <string name="obd_fuel_type_hydrogen">Hydrogen</string>
+    <string name="obd_fuel_type_unknown">Unknown Fuel Type</string>
+
+    <string name="shared_string_obd">OBD</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="obd_speed_desc">Shows vehicle speed over OBD sensor</string>
+    <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
+    <string name="obd_air_intake_temp_desc">Shows vehicle intake air temperature over OBD sensor</string>
+    <string name="obd_engine_coolant_temp_desc">Shows engine coolant temperature over OBD sensor</string>
+    <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
+    <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
+    <string name="obd_air_intake_temp">Intake air temperature</string>
+    <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
+    <string name="obd_fuel_level">Fuel level</string>
+    <string name="obd_fuel_type">Fuel type</string>
+
+
     <string name="obd_plugin_name">OBD</string>
     <string name="obd_plugin_description">Accesses you vehicle information over OBD protocol</string>
     <string name="obd_support">OBD support</string>

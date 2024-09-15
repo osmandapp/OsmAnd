@@ -1,5 +1,7 @@
 package net.osmand.shared.obd
 
+import kotlin.math.roundToInt
+
 object OBDUtils {
 	const val INVALID_RESPONSE_CODE = "-1"
 
@@ -42,7 +44,7 @@ object OBDUtils {
 
 	fun parseIntakeAirTempResponse(response: String): String {
 		val hexValues = response.trim().split(" ")
-		if (hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_INTAKE_AIR_TEMP_COMMAND.command.lowercase()) {
+		if (hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND.command.lowercase()) {
 			val intakeAirTemp = hexValues[2].toInt(16)
 			return (intakeAirTemp - 40).toString()
 		}
@@ -60,7 +62,7 @@ object OBDUtils {
 	fun parseFuelLevelResponse(response: String): String {
 		val hexValues = response.trim().split(" ")
 		if (hexValues.size >= 3 && hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_FUEL_LEVEL_COMMAND.command.lowercase()) {
-			return (hexValues[2].toInt(16) / 255 * 100).toString()
+			return ((((hexValues[2].toInt(16).toFloat() / 255 * 100) * 10).roundToInt())/10.0).toString()
 		}
 		return INVALID_RESPONSE_CODE
 	}
@@ -69,25 +71,7 @@ object OBDUtils {
 		val responseParts = response.split(" ")
 
 		if (responseParts[0] == "41" && responseParts[1] == OBDCommand.OBD_FUEL_TYPE_COMMAND.command.lowercase()) {
-			val fuelTypeCode = responseParts[2].toInt(16)
-			return when (fuelTypeCode) {
-				0x01 -> "Бензин"
-				0x02 -> "Метанол"
-				0x03 -> "Этанол"
-				0x04 -> "Дизель"
-				0x05 -> "Пропан"
-				0x06 -> "Природный газ (сжатый)"
-				0x07 -> "Природный газ (сжиженный)"
-				0x08 -> "Сжиженный нефтяной газ (LPG)"
-				0x09 -> "Электричество"
-				0x0A -> "Гибрид (бензин/электричество)"
-				0x0B -> "Гибрид (дизель/электричество)"
-				0x0C -> "Гибрид (сжатый природный газ)"
-				0x0D -> "Гибрид (сжиженный природный газ)"
-				0x0E -> "Гибрид (сжиженный нефтяной газ)"
-				0x0F -> "Гибрид (аккумулятор)"
-				else -> "Неизвестный тип топлива"
-			}
+			return responseParts[2]
 		}
 		return INVALID_RESPONSE_CODE
 	}
