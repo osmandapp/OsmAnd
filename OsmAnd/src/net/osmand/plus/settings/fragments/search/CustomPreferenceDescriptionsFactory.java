@@ -34,9 +34,9 @@ class CustomPreferenceDescriptionsFactory {
 					return String.join(
 							", ",
 							concat(
-									Optional.ofNullable(listPreferenceEx.getEntries()),
+									Optional.ofNullable(listPreferenceEx.getDialogTitle()),
 									Optional.ofNullable(listPreferenceEx.getDescription()),
-									Optional.ofNullable(listPreferenceEx.getDialogTitle())));
+									Optional.ofNullable(listPreferenceEx.getEntries())));
 				});
 	}
 
@@ -63,9 +63,9 @@ class CustomPreferenceDescriptionsFactory {
 					return String.join(
 							", ",
 							concat(
-									Optional.ofNullable(multiSelectBooleanPreference.getEntries()),
+									Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle()),
 									Optional.ofNullable(multiSelectBooleanPreference.getDescription()),
-									Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle())));
+									Optional.ofNullable(multiSelectBooleanPreference.getEntries())));
 				});
 	}
 
@@ -83,11 +83,13 @@ class CustomPreferenceDescriptionsFactory {
 				});
 	}
 
-	private static List<CharSequence> concat(final Optional<CharSequence[]> elements,
-											 final Optional<? extends CharSequence>... evenMoreElements) {
+	private static List<CharSequence> concat(final Optional<? extends CharSequence> dialogTitle,
+											 final Optional<? extends CharSequence> description,
+											 final Optional<CharSequence[]> entries) {
 		final List<CharSequence> result = new ArrayList<>();
-		result.addAll(Lists.asList(elements));
-		result.addAll(Lists.getPresentElements(Arrays.asList(evenMoreElements)));
+		dialogTitle.ifPresent(result::add);
+		description.ifPresent(result::add);
+		result.addAll(Lists.asList(entries));
 		return result;
 	}
 }
