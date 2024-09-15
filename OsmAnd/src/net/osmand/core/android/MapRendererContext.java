@@ -674,7 +674,7 @@ public class MapRendererContext {
 		}
 	}
 
-	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, Object mapObject, ZoomLevel zoomLevel) {
+	public List<RenderedObject> retrievePolygonsAroundMapObject(PointI point, Object mapObject, ZoomLevel zoomLevel) {
 		// todo we should check and remove all polygons
 		//  those are smaller than polygon of the passed map object,
 		//  because those polygons don't contain that object

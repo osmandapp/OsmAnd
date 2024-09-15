@@ -374,7 +374,7 @@ public class MenuBuilder {
 			if (rendererView != null) {
 				ZoomLevel zoom = rendererView.getZoomLevel();
 				PointI pointI = NativeUtilities.getPoint31FromLatLon(getLatLon());
-				List<RenderedObject> polygons = mapContext.retrievePolygonsAroundPoint(pointI, mapContextMenu.getObject(), zoom);
+				List<RenderedObject> polygons = mapContext.retrievePolygonsAroundMapObject(pointI, mapContextMenu.getObject(), zoom);
 				if (!Algorithms.isEmpty(polygons)) {
 					List<MenuObject> menuObjects = MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, getLatLon());
 					Context context = viewGroup.getContext();
