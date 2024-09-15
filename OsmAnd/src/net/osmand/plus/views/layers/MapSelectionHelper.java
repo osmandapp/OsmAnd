@@ -284,12 +284,11 @@ public class MapSelectionHelper {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
 				ZoomLevel zoom = rendererView.getZoomLevel();
+				IContextMenuProvider provider = mapLayers.getPoiMapLayer();
 				PointI pointI = NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y);
-				List<RenderedObject> res = mapContext.collectPolygonsAroundPoint(pointI, zoom, false);
+				List<RenderedObject> res = mapContext.retrievePolygonsAroundPoint(pointI, zoom, false);
 				for (RenderedObject polygon : res) {
-					System.out.println(polygon);
-					System.out.println("------------------------");
-					result.selectedObjects.put(polygon, mapLayers.getPoiMapLayer());
+					result.selectedObjects.put(polygon, provider);
 				}
 			}
 			int delta = 20;

@@ -674,7 +674,18 @@ public class MapRendererContext {
 		}
 	}
 
-	public List<RenderedObject> collectPolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
+	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, Object mapObject, ZoomLevel zoomLevel) {
+		// todo we should check and remove all polygons
+		//  those are smaller than polygon of the passed map object,
+		//  because those polygons don't contain that object
+		List<RenderedObject> res = retrievePolygonsAroundPoint(point, zoomLevel, false);
+		if (mapObject instanceof RenderedObject renderedObject) {
+			res.remove(renderedObject);
+		}
+		return res;
+	}
+
+	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
 		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
 		List<RenderedObject> res = new ArrayList<>();
 		if (polygons.size() > 0) {
