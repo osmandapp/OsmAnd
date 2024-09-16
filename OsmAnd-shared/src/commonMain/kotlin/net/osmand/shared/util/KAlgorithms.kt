@@ -93,13 +93,11 @@ object KAlgorithms {
 	}
 
 	fun colorToString(color: Int): String {
-		var pattern = "#%08X"
-		var col = color
-		if((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
-			pattern = "#%06X"
-			col = color and 0x00FFFFFF
+		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
+			"#%06X".format(color and 0x00FFFFFF)
+		} else {
+			"#%08X".format(color)
 		}
-		return pattern.format(col)
 	}
 
 	/**
