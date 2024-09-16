@@ -63,6 +63,7 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -770,7 +771,7 @@ public class MapRendererContext {
 			if (!Algorithms.isEmpty(captionInNativeLanguage)) {
 				object.setName(captionInNativeLanguage);
 			} else {
-				object.setName(object.getLink());
+				object.setName(OsmUtils.getOsmUrlForId(object));
 			}
 		}
 		return object;

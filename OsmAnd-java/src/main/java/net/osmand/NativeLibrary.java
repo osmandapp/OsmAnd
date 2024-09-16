@@ -37,6 +37,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 public class NativeLibrary {
 
@@ -703,29 +704,10 @@ public class NativeLibrary {
 		@Override
 		public String toString() {
 			String s = getClass().getSimpleName() + " " + name;
-			String link = getLink();
-			String tags = getPrintTags();
+			String link = OsmUtils.getOsmUrlForId(this);
+			String tags = OsmUtils.getPrintTags(this);
 			s += s.contains(link) ? "" : link;
 			s += s.contains(tags) ? "" : tags;
-			return s;
-		}
-		public String getLink() {
-			String s = "";
-			if (id != null && id > 0) {
-				if (x.size() > 1 && String.valueOf(id / 2).length() > 10) {
-					s +=  "OSM relation";
-				} else {
-					s += "https://osm.org/" + (x.size() > 1 ? "way/" : "node/") + (id / 2);
-				}
-			}
-			return s;
-		}
-
-		public String getPrintTags() {
-			String s = "";
-			for (Map.Entry<String, String> entry : tags.entrySet()) {
-				s += " " + entry.getKey() + ":" + entry.getValue();
-			}
 			return s;
 		}
 	}
