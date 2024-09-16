@@ -44,8 +44,7 @@ public class GpxMultiSegmentsApproximation {
 	private final float initDist;
 	java.util.PriorityQueue<RouteSegmentAppr> queue = new java.util.PriorityQueue<>(METRICS_COMPARATOR); 
 	TLongHashSet visited = new TLongHashSet();
-	
-	
+
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
 		private final RouteSegmentAppr parent;
@@ -71,10 +70,8 @@ public class GpxMultiSegmentsApproximation {
 		}
 		
 		private double metric() {
-			return maxDistToGpx / Math.sqrt(gpxLen + 1);  // heuristics for eager algorithm
-//			return maxDistToGpx;
+			return maxDistToGpx / Math.sqrt(gpxLen + 1); // heuristics for eager algorithm
 		}
-		
 
 		@Override
 		public String toString() {
@@ -87,7 +84,6 @@ public class GpxMultiSegmentsApproximation {
 		this.gctx = gctx;
 		this.gpxPoints = gpxPoints;
 		minPointApproximation = gctx.ctx.config.minPointApproximation;
-//		minPointApproximation = 10;
 		initDist = minPointApproximation / 2;
 		
 	}
@@ -119,8 +115,7 @@ public class GpxMultiSegmentsApproximation {
 			System.out.println("** " + sg + " - not accepted");
 		}
 	}
-	
-	
+
 	private void addSegment(RouteSegmentAppr last, RouteSegment sg, List<RouteSegmentAppr> connected) {
 		if (sg == null) {
 			return;
@@ -159,7 +154,6 @@ public class GpxMultiSegmentsApproximation {
 		return visited.contains(calculateRoutePointId(r));
 	}
 
-	
 	public GpxRouteApproximation gpxApproximation() throws IOException {
 		long timeToCalculate = System.nanoTime();
 		initGpxPointsXY31(gpxPoints);
@@ -241,7 +235,6 @@ public class GpxMultiSegmentsApproximation {
 			System.out.println(string);
 		}
 	}
-	
 
 	private double gpxDist(int gpxL1, int gpxL2) {
 		return gpxPoints.get(Math.min(gpxL1, gpxPoints.size() - 1)).cumDist - 
@@ -283,7 +276,6 @@ public class GpxMultiSegmentsApproximation {
 		added |= addConnected(parent, c, connected);
 		return added;
 	}
-
 
 	private boolean addConnected(RouteSegmentAppr parent, RouteSegmentAppr c, List<RouteSegmentAppr> connected) {
 		if (isVisited(c)) {
