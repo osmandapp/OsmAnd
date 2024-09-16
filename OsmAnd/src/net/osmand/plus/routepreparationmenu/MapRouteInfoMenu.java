@@ -47,6 +47,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -1641,7 +1642,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					fileName = app.getString(R.string.shared_string_gpx_track);
 				}
 				fileName = TrackEditCard.getGpxTitleWithSelectedItem(app, paramsBuilder, fileName);
-				title.setText(GpxUiHelper.getGpxTitle(fileName));
+				title.setText(GpxHelper.INSTANCE.getGpxTitle(fileName));
 				description.setText(R.string.follow_track);
 				buttonDescription.setText(R.string.shared_string_add);
 			} else {

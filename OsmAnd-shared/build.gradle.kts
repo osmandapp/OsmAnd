@@ -41,12 +41,13 @@ kotlin {
 	val sqliteVersion = "2.3.1"
 	val serializationVersion = "1.6.3"
 	val coroutinesCoreVersion = "1.8.1"
-	val datetimeVersion = "0.6.0"
+	val datetimeVersion = "0.6.1"
 	val okioVersion = "3.9.0"
 	val kxml2Version = "2.3.0"
 	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
+	val coroutinesVersion = "1.8.1"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -56,7 +57,8 @@ kotlin {
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
-			implementation("co.touchlab:stately-concurrent-collections:2.0.0")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+//			implementation("co.touchlab:stately-concurrent-collections:2.0.0")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))

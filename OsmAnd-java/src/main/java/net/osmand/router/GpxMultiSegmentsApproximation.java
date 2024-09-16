@@ -374,6 +374,9 @@ public class GpxMultiSegmentsApproximation {
 				System.out.println(" " + r);
 			}
 		}
+		for (RouteSegmentResult r : res) {
+			r.setGpxPointIndex(startInd); // required for reconstructFinalPointsFromFullRoute()
+		}
 		gpxPoints.get(startInd).routeToTarget = res;
 		gpxPoints.get(startInd).targetInd = last;
 	}

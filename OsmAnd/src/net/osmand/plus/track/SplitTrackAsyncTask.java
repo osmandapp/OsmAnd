@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;

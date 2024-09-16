@@ -79,4 +79,14 @@ public enum CompassMode {
 		}
 		return NORTH_IS_UP;
 	}
+
+	public static boolean isCompassIconId(@DrawableRes int iconId) {
+		for (CompassMode compassMode : CompassMode.values()) {
+			ThemedIconId icon = compassMode.getIconId();
+			if (icon.getIconId(true) == iconId || icon.getIconId(false) == iconId) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

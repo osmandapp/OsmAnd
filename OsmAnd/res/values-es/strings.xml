@@ -5881,4 +5881,19 @@
     <string name="corner_radius">Radio de giro</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacidad del fondo</string>
+    <string name="my_location_action_descr">Centra el mapa en tu ubicación actual.</string>
+    <string name="map_3d_mode_action_descr">Cambiar la inclinación del mapa.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar senderos para motos de cross</string>
+    <string name="raster_layers_action_descr">Cambiar capas rasterizadas</string>
+    <string name="contour_layers_action_descr">Cambiar capas del contorno</string>
+    <string name="change_zoom_action_descr">Cambiar el zoom del mapa.</string>
+    <string name="search_action_descr">Abre la búsqueda.</string>
+    <string name="drawer_button_description">Abre el menú principal.</string>
+    <string name="navigation_action_descr">Abre la navegación.</string>
+    <string name="configure_map_description">Cambiar el estilo del mapa, las capas u otras configuraciones.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar senderos para motos de cross</string>
+    <string name="type_of_activity">Tipo de actividad</string>
+    <string name="change_activity">Cambiar actividad</string>
+    <string name="shared_string_increase">Aumentar</string>
+    <string name="shared_string_decrease">Disminuir</string>
 </resources>

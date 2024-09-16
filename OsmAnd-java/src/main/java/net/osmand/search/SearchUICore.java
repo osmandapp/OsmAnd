@@ -490,6 +490,12 @@ public class SearchUICore {
 		return this.phrase;
 	}
 	
+	public SearchPhrase resetPhrase(SearchResult result) {
+		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
+		this.phrase.addResult(result, this.phrase);
+		return this.phrase;
+	}
+	
 	public SearchResultCollection immediateSearch(final String text, final LatLon loc) {
 		if (loc != null) {
 			searchSettings = searchSettings.setOriginalLocation(loc);

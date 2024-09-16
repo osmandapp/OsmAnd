@@ -15,11 +15,13 @@ import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.ComparableTracksGroup;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
+import net.osmand.shared.gpx.data.ComparableTracksGroup;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.CollectionUtils;
 
@@ -94,26 +96,26 @@ public class TracksComparator implements Comparator<Object> {
 			case DISTANCE_DESCENDING:
 				folderAnalysis1 = folder1.getFolderAnalysis();
 				folderAnalysis2 = folder2.getFolderAnalysis();
-				if (Math.abs(folderAnalysis1.totalDistance - folderAnalysis2.totalDistance) >= EQUIVALENT_TOLERANCE) {
-					return -Float.compare(folderAnalysis1.totalDistance, folderAnalysis2.totalDistance);
+				if (Math.abs(folderAnalysis1.getTotalDistance() - folderAnalysis2.getTotalDistance()) >= EQUIVALENT_TOLERANCE) {
+					return -Float.compare(folderAnalysis1.getTotalDistance(), folderAnalysis2.getTotalDistance());
 				}
 			case DISTANCE_ASCENDING:
 				folderAnalysis1 = folder1.getFolderAnalysis();
 				folderAnalysis2 = folder2.getFolderAnalysis();
-				if (Math.abs(folderAnalysis1.totalDistance - folderAnalysis2.totalDistance) >= EQUIVALENT_TOLERANCE) {
-					return Float.compare(folderAnalysis1.totalDistance, folderAnalysis2.totalDistance);
+				if (Math.abs(folderAnalysis1.getTotalDistance() - folderAnalysis2.getTotalDistance()) >= EQUIVALENT_TOLERANCE) {
+					return Float.compare(folderAnalysis1.getTotalDistance(), folderAnalysis2.getTotalDistance());
 				}
 			case DURATION_DESCENDING:
 				folderAnalysis1 = folder1.getFolderAnalysis();
 				folderAnalysis2 = folder2.getFolderAnalysis();
-				if (folderAnalysis1.timeSpan != folderAnalysis2.timeSpan) {
-					return -Long.compare(folderAnalysis1.timeSpan, folderAnalysis2.timeSpan);
+				if (folderAnalysis1.getTimeSpan() != folderAnalysis2.getTimeSpan()) {
+					return -Long.compare(folderAnalysis1.getTimeSpan(), folderAnalysis2.getTimeSpan());
 				}
 			case DURATION_ASCENDING:
 				folderAnalysis1 = folder1.getFolderAnalysis();
 				folderAnalysis2 = folder2.getFolderAnalysis();
-				if (folderAnalysis1.timeSpan != folderAnalysis2.timeSpan) {
-					return Long.compare(folderAnalysis1.timeSpan, folderAnalysis2.timeSpan);
+				if (folderAnalysis1.getTimeSpan() != folderAnalysis2.getTimeSpan()) {
+					return Long.compare(folderAnalysis1.getTimeSpan(), folderAnalysis2.getTimeSpan());
 				}
 		}
 		return compareTrackFolderNames(folder1, folder2);
@@ -258,8 +260,8 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareItemFilesByLastModified(@NonNull TrackItem item1, @NonNull TrackItem item2) {
-		File file1 = item1.getFile();
-		File file2 = item2.getFile();
+		KFile file1 = item1.getFile();
+		KFile file2 = item2.getFile();
 
 		if (file1 == null) {
 			return file2 == null ? compareTrackItemNames(item1, item2) : 1;

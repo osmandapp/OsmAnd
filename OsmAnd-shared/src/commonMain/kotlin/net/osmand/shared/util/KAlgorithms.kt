@@ -94,18 +94,10 @@ object KAlgorithms {
 
 	fun colorToString(color: Int): String {
 		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
-			"#" + format(6, (color and 0x00FFFFFF).toString(16))
+			"#" + String.format("%06X", color and 0x00FFFFFF)
 		} else {
-			"#" + format(8, color.toString(16))
+			"#" + String.format("%08X", color)
 		}
-	}
-
-	private fun format(i: Int, hexString: String): String {
-		var formattedString = hexString
-		while (formattedString.length < i) {
-			formattedString = "0$formattedString"
-		}
-		return formattedString
 	}
 
 	/**
@@ -173,20 +165,11 @@ object KAlgorithms {
 		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 
-	fun removeAllFiles(file: KFile?): Boolean {
-		if (file == null) {
-			return false
-		}
-		return if (file.isDirectory()) {
-			val files: Array<KFile> = file.listFiles()
-			if (!isEmpty<KFile>(files)) {
-				for (f in files) {
-					removeAllFiles(f)
-				}
-			}
-			file.delete()
+	fun capitalizeFirstLetter(s: String?): String? {
+		return if (!s.isNullOrEmpty()) {
+			s[0].uppercaseChar().toString() + if (s.length > 1) s.substring(1) else ""
 		} else {
-			file.delete()
+			s
 		}
 	}
 }

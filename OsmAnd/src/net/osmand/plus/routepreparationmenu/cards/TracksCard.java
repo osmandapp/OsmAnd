@@ -18,6 +18,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxHelper;
 
 import java.io.File;
 import java.text.Collator;
@@ -50,7 +51,7 @@ public class TracksCard extends MapBaseCard {
 		for (GpxFile gpx : gpxFiles) {
 			File file = new File(gpx.getPath());
 			String fileName = gpx.getPath().startsWith(gpxDir) ? gpx.getPath().substring(gpxDir.length() + 1) : file.getName();
-			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(file.getName()), gpx, new GPXInfo(fileName, file)));
+			gpxItems.add(new GpxItem(GpxHelper.INSTANCE.getGpxTitle(file.getName()), gpx, new GPXInfo(fileName, file)));
 		}
 		Collator collator = Collator.getInstance();
 		Collections.sort(gpxItems, new Comparator<GpxItem>() {

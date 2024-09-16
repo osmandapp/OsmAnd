@@ -25,7 +25,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;

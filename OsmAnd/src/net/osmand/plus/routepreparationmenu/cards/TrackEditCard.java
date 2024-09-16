@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -74,7 +75,7 @@ public class TrackEditCard extends MapBaseCard {
 		} else {
 			analysis = gpxFile.getAnalysis(0);
 		}
-		String title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
+		String title = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(fileName));
 		GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
 
 		if (routeParams != null) {

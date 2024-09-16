@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -74,7 +74,7 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 
 		SpeedConstants speedSystem = settings.SPEED_SYSTEM.getModeValue(appMode);
 		String speedToSkip = String.valueOf(AverageSpeedComputer.getConvertedSpeedToSkip(speedSystem));
-		String speedUnit = speedSystem.toShortString(app);
+		String speedUnit = speedSystem.toShortString();
 		String formattedSpeedToSkip = getString(R.string.ltr_or_rtl_combine_via_space, speedToSkip, speedUnit);
 		skipStopsDesc.setText(getString(R.string.average_speed_skip_stops_desc, formattedSpeedToSkip));
 

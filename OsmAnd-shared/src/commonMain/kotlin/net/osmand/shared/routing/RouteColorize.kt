@@ -1,6 +1,7 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.ColorPalette
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.util.KAlgorithms
@@ -83,7 +84,7 @@ class RouteColorize {
 		var wptIdx = 0
 		if (analysis == null) {
 			val time: Long =
-				if (KAlgorithms.isEmpty(gpxFile.path)) PlatformUtil.currentTimeMillis() else gpxFile.modifiedTime
+				if (KAlgorithms.isEmpty(gpxFile.path)) currentTimeMillis() else gpxFile.modifiedTime
 			analysis = gpxFile.getAnalysis(time)
 		}
 		for (t in gpxFile.tracks) {

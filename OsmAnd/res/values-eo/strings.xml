@@ -982,7 +982,7 @@
     <string name="audionotes_plugin_description">Fari bildajn/sonajn/videajn notojn dum ekskurso, aŭ per butono sur la map‑ekrano, aŭ per la kunteksta menuo de loko.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
-    <string name="audionotes_location_not_defined">Frepetu “uzi pozicion…” por aldoni noton al la loko.</string>
+    <string name="audionotes_location_not_defined">Frapetu “Uzi pozicion…” por aldoni noton al la loko.</string>
     <string name="download_select_map_types">Aliaj mapoj</string>
     <string name="download_roads_only_item">Nur vojoj</string>
     <string name="download_srtm_maps">Nivelkurboj</string>
@@ -5875,4 +5875,19 @@
     <string name="background_opacity">Travideblo de fono</string>
     <string name="corner_radius">Radiuso de angulo</string>
     <string name="shared_string_dp">dp</string>
+    <string name="contour_layers_action_descr">Ŝanĝi konturajn tavolojn</string>
+    <string name="search_action_descr">Malfermi serĉon.</string>
+    <string name="navigation_action_descr">Malfermi navigon.</string>
+    <string name="map_3d_mode_action_descr">Ŝanĝi klinecon de mapo.</string>
+    <string name="drawer_button_description">Malfermi la ĉefmenuon.</string>
+    <string name="configure_map_description">Ŝanĝi map-stilon, tavolojn kaj aliajn agordojn.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Kursoj por terenaj motorcikloj</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Montri kursojn por ekstervojaj motorcikloj</string>
+    <string name="raster_layers_action_descr">Ŝanĝi rastrumajn tavolojn</string>
+    <string name="change_zoom_action_descr">Alĝustigi map-pligrandigon.</string>
+    <string name="my_location_action_descr">Centrigi mapon al via nuna pozicio.</string>
+    <string name="type_of_activity">Speco de aktiveco</string>
+    <string name="change_activity">Ŝanĝi aktivecon</string>
+    <string name="shared_string_increase">Pliigi</string>
+    <string name="shared_string_decrease">Malpliigi</string>
 </resources>

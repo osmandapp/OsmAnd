@@ -8,16 +8,18 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants.GPX_INDEX_DIR
+import net.osmand.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.plus.track.data.TrackFolder
+import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.FileUtils
+import net.osmand.shared.extensions.kFile
 
 class TracksFoldersScreen(
     carContext: CarContext,
@@ -55,7 +57,7 @@ class TracksFoldersScreen(
     }
 
     private fun reloadTracks() {
-        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR), null)
+        val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR).kFile(), null)
         asyncLoader = TrackFolderLoaderTask(app, folder, this)
         asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
     }
@@ -125,7 +127,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        trackTabsHelper.updateTrackItems(folder.flattenedTrackItems)
+        trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems())
         invalidate()
     }
 

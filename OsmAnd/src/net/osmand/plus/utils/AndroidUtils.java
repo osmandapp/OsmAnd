@@ -12,7 +12,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
@@ -30,13 +29,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.graphics.drawable.VectorDrawable;
+import android.graphics.drawable.*;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Build;
@@ -55,29 +48,13 @@ import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Display;
-import android.view.DisplayCutout;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.AttrRes;
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.annotation.*;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.ActivityCompat;
@@ -95,8 +72,6 @@ import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 
@@ -107,16 +82,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1213,6 +1179,12 @@ public class AndroidUtils {
 		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
 	}
 
+	@DrawableRes
+	public static int getIconId(@NonNull Context ctx, @NonNull String resourceName) {
+		int iconId = ctx.getResources().getIdentifier(resourceName, "drawable", ctx.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.ic_action_info_dark;
+	}
+
 	@NonNull
 	public static String getActivityTypeTitle(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
 		return getActivityTypeStringPropertyName(ctx, activityType.getName(),
@@ -1330,6 +1302,7 @@ public class AndroidUtils {
 			return true;
 		}
 	}
+
 	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.POST_NOTIFICATIONS)) {
@@ -1349,91 +1322,10 @@ public class AndroidUtils {
 		}
 	}
 
-	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
-		return new View.OnTouchListener() {
-			private int initialMarginX = 0;
-			private int initialMarginY = 0;
-			private float initialTouchX = 0;
-			private float initialTouchY = 0;
-
-			@SuppressLint("ClickableViewAccessibility")
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (mapActivity == null) {
-					return false;
-				}
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-						setUpInitialValues(v, event);
-						return true;
-					case MotionEvent.ACTION_UP:
-						fabButton.setOnTouchListener(null);
-						fabButton.setPressed(false);
-						fabButton.setScaleX(1);
-						fabButton.setScaleY(1);
-						fabButton.setAlpha(1f);
-						FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-						if (AndroidUiHelper.isOrientationPortrait(mapActivity))
-							preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-						else
-							preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-						return true;
-					case MotionEvent.ACTION_MOVE:
-						if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
-							setUpInitialValues(v, event);
-
-						int padding = calculateTotalSizePx(app, R.dimen.map_button_margin);
-						FrameLayout parent = (FrameLayout) v.getParent();
-						FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-						int deltaX = (int) (initialTouchX - event.getRawX());
-						int deltaY = (int) (initialTouchY - event.getRawY());
-
-						int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
-						int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
-
-						if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
-							param.bottomMargin = newMarginY;
-
-						if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
-							param.rightMargin = newMarginX;
-						}
-
-						v.setLayoutParams(param);
-
-						return true;
-				}
-				return false;
-			}
-
-			private int interpolate(int value, int divider, int boundsSize) {
-				if (value <= divider && value > 0)
-					return value * value / divider;
-				else {
-					int leftMargin = boundsSize - value - divider;
-					if (leftMargin <= divider && value < boundsSize - divider)
-						return leftMargin - (leftMargin * leftMargin / divider) + value;
-					else
-						return value;
-				}
-			}
-
-			private void setUpInitialValues(View v, MotionEvent event) {
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-				initialMarginX = params.rightMargin;
-				initialMarginY = params.bottomMargin;
-
-				initialTouchX = event.getRawX();
-				initialTouchY = event.getRawY();
-			}
-		};
-	}
-
-	public static int calculateTotalSizePx(OsmandApplication app, @DimenRes int... dimensId) {
+	public static int calculateTotalSizePx(@NonNull Context context, @DimenRes int... dimensId) {
 		int result = 0;
 		for (int id : dimensId) {
-			result += app.getResources().getDimensionPixelSize(id);
+			result += context.getResources().getDimensionPixelSize(id);
 		}
 		return result;
 	}

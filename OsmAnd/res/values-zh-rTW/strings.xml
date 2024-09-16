@@ -5870,4 +5870,19 @@
     <string name="corner_radius">圓角半徑</string>
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">背景不透明度</string>
+    <string name="raster_layers_action_descr">變更點陣圖層</string>
+    <string name="contour_layers_action_descr">變更等高線圖層</string>
+    <string name="change_zoom_action_descr">變更地圖縮放。</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">顯示越野車路線</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">顯示越野車路線</string>
+    <string name="type_of_activity">活動類型</string>
+    <string name="change_activity">變更活動</string>
+    <string name="search_action_descr">開啟搜尋。</string>
+    <string name="navigation_action_descr">開啟導航。</string>
+    <string name="my_location_action_descr">將地圖中心置於您目前的位置。</string>
+    <string name="map_3d_mode_action_descr">變更地圖傾斜角度。</string>
+    <string name="configure_map_description">變更地圖樣式、圖層或其他設定。</string>
+    <string name="drawer_button_description">開啟主選單。</string>
+    <string name="shared_string_decrease">減少</string>
+    <string name="shared_string_increase">增加</string>
 </resources>

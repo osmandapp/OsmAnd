@@ -5870,4 +5870,20 @@
     <string name="shared_string_interface">Interface</string>
     <string name="background_opacity">Opacidade de fundo</string>
     <string name="shared_string_dp">dp</string>
+    <string name="change_zoom_action_descr">Alterar o zoom do mapa.</string>
+    <string name="my_location_action_descr">Centraliza o mapa em sua localização atual.</string>
+    <string name="map_3d_mode_action_descr">Alterar a inclinação do mapa.</string>
+    <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
+    <string name="raster_layers_action_descr">Alterar camadas raster</string>
+    <string name="search_action_descr">Abre a pesquisa.</string>
+    <string name="navigation_action_descr">Abre a navegação.</string>
+    <string name="drawer_button_description">Abre o menu principal.</string>
+    <string name="corner_radius">Raio do canto</string>
+    <string name="contour_layers_action_descr">Alterar camadas de contorno</string>
+    <string name="type_of_activity">Tipo de atividade</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar trilhas de terra para bicicletas</string>
+    <string name="change_activity">Alterar atividade</string>
+    <string name="shared_string_increase">Aumentar</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>
+    <string name="shared_string_decrease">Diminuir</string>
 </resources>

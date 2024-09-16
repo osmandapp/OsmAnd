@@ -10,7 +10,7 @@ import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
@@ -72,20 +72,15 @@ public class AverageSpeedComputer extends AverageValueComputer {
 
 	private float getSpeedToSkipInMetersPerSecond() {
 		SpeedConstants speedConstant = settings.SPEED_SYSTEM.get();
-		switch (speedConstant) {
-			case METERS_PER_SECOND:
-				return 1;
-			case KILOMETERS_PER_HOUR:
-			case MINUTES_PER_KILOMETER:
-				return 1 / 3.6f;
-			case MILES_PER_HOUR:
-			case MINUTES_PER_MILE:
-				return METERS_IN_ONE_MILE / (3.6f * METERS_IN_KILOMETER);
-			case NAUTICALMILES_PER_HOUR:
-				return METERS_IN_ONE_NAUTICALMILE / (3.6f * METERS_IN_KILOMETER);
-			default:
-				throw new IllegalStateException("Unsupported speed system");
-		}
+		return switch (speedConstant) {
+			case METERS_PER_SECOND -> 1;
+			case KILOMETERS_PER_HOUR, MINUTES_PER_KILOMETER -> 1 / 3.6f;
+			case MILES_PER_HOUR, MINUTES_PER_MILE ->
+					METERS_IN_ONE_MILE / (3.6f * METERS_IN_KILOMETER);
+			case NAUTICALMILES_PER_HOUR ->
+					METERS_IN_ONE_NAUTICALMILE / (3.6f * METERS_IN_KILOMETER);
+			default -> throw new IllegalStateException("Unsupported speed system");
+		};
 	}
 
 	/**

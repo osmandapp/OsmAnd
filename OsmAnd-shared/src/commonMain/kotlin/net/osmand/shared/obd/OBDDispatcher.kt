@@ -1,7 +1,7 @@
 package net.osmand.shared.obd
 
-import co.touchlab.stately.collections.ConcurrentMutableList
-import co.touchlab.stately.collections.ConcurrentMutableMap
+//import co.touchlab.stately.collections.ConcurrentMutableList
+//import co.touchlab.stately.collections.ConcurrentMutableMap
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -9,6 +9,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 import okio.Buffer
@@ -20,7 +21,7 @@ import okio.Source
 object OBDDispatcher {
 
 	private val commandQueue = ArrayList<OBDCommand>()
-	private val staleCommandsCache = ConcurrentMutableMap<OBDCommand, String>()
+	private val staleCommandsCache = HashMap<OBDCommand, String>()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
@@ -64,9 +65,9 @@ object OBDDispatcher {
 							var resultRaw = StringBuilder()
 							var readResponseFailed = false
 							try {
-								val startReadTime = PlatformUtil.currentTimeMillis()
+								val startReadTime = Clock.System.now().toEpochMilliseconds()
 								while (true) {
-									if (PlatformUtil.currentTimeMillis() - startReadTime > 3000) {
+									if (Clock.System.now().toEpochMilliseconds() - startReadTime > 3000) {
 										readResponseFailed = true
 										log.error("Read command ${command.name} timeout")
 										break

@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.ui.ImportTrackItem;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 				if (error != null) {
 					warnings.add(error);
 				} else {
-					app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(new File(gpxFile.getPath())));
+					app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(new KFile(gpxFile.getPath())));
 				}
 				if (listener != null) {
 					listener.onGpxSaved(error, gpxFile);

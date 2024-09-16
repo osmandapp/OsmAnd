@@ -4336,7 +4336,7 @@
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
     <string name="delete_history_items_descr">Supprimer les éléments d’historique sélectionnés \?</string>
     <string name="delete_history_items">Supprimer %1$s éléments d’historique \?</string>
-    <string name="quick_action_toggle_preference">Un bouton à bascule pour modifier le choix.</string>
+    <string name="quick_action_toggle_preference">Un interrupteur pour changer le paramètre.</string>
     <string name="release_4_1">- Première prise en charge d\'Android Auto
 \n
 \n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM
@@ -5852,7 +5852,7 @@
     <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
     <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
     <string name="delete_widget">Supprimer le gadget ?</string>
-    <string name="battery_saving_mode">Mode économie de batterie</string>
+    <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
     <string name="app_mode_suv">SUV</string>
@@ -5871,4 +5871,19 @@
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacité de l\'arrière-plan</string>
     <string name="corner_radius">Rayon d\'angle</string>
+    <string name="raster_layers_action_descr">Changer les couches matricielles</string>
+    <string name="contour_layers_action_descr">Changer les couches de lignes de niveau</string>
+    <string name="configure_map_description">Changer le style de la carte, les couches, ou d\'autres paramètres.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Afficher les sentiers de terre pour vélos</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Afficher les sentiers de terre pour vélos</string>
+    <string name="change_zoom_action_descr">Changer le grossissement de la carte.</string>
+    <string name="search_action_descr">Ouvre la recherche.</string>
+    <string name="navigation_action_descr">Ouvre le guidage.</string>
+    <string name="my_location_action_descr">Centre la carte sur votre position actuelle.</string>
+    <string name="map_3d_mode_action_descr">Changer l\'inclinaison de la carte.</string>
+    <string name="drawer_button_description">Ouvre le menu principal.</string>
+    <string name="shared_string_increase">Augmenter</string>
+    <string name="type_of_activity">Type d\'activité</string>
+    <string name="change_activity">Changer d\'activité</string>
+    <string name="shared_string_decrease">Réduire</string>
 </resources>

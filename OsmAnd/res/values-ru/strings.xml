@@ -951,7 +951,7 @@
     <string name="shared_string_on">Вкл.</string>
     <string name="shared_string_off">Выкл.</string>
     <string name="accessibility_default">Использовать системную настройку</string>
-    <string name="backToMenu">Назад к меню</string>
+    <string name="backToMenu">Главное меню</string>
     <string name="zoomOut">Отдалить</string>
     <string name="zoomIn">Приблизить</string>
     <string name="zoomIs">Масштаб</string>
@@ -4752,8 +4752,8 @@
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
     <string name="compass_visible_if_map_rotated_desc">Скрывать, когда север сверху</string>
     <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
-    <string name="compass_always_hidden">Всегда скрыт</string>
-    <string name="compass_always_visible">Всегда виден</string>
+    <string name="compass_always_hidden">Скрыт</string>
+    <string name="compass_always_visible">Виден</string>
     <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
@@ -5882,7 +5882,7 @@
     <string name="shared_string_automatically">Автоматически</string>
     <string name="detailed_track_guidance_description">OsmAnd сопоставит ваш трек с близлежащими дорогами для улучшенного пошагового руководства.</string>
     <string name="quick_action_routes_summary">Переключатель для отображения или скрытия %1$s на карте.</string>
-    <string name="compass_click_north_is_up">Чтобы изменить режим ориентации, нажмите и удерживайте</string>
+    <string name="compass_click_north_is_up">Нажмите и удерживайте для смены ориентации</string>
     <string name="help_article_map_tracks_name">Треки</string>
     <string name="help_article_map_routes_name">Маршруты</string>
     <string name="route_roundabout_exit">Сверните на %1$d съезде</string>
@@ -5911,4 +5911,17 @@
     <string name="app_mode_suv">SUV</string>
     <string name="corner_radius">Радиус скругления</string>
     <string name="shared_string_dp">dp</string>
+    <string name="drawer_button_description">Открыть главное меню.</string>
+    <string name="configure_map_description">Изменить стиль карты, слои и другие параметры.</string>
+    <string name="navigation_action_descr">Открыть навигацию.</string>
+    <string name="map_3d_mode_action_descr">Изменить наклон карты.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Трассы для мотокросса</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Показывает трассы для мотокросса</string>
+    <string name="my_location_action_descr">Центрировать карту в соответствии с вашим текущим местоположением.</string>
+    <string name="raster_layers_action_descr">Изменить растровые слои</string>
+    <string name="contour_layers_action_descr">Изменить контурные слои</string>
+    <string name="change_zoom_action_descr">Изменить масштаб карты.</string>
+    <string name="search_action_descr">Открыть поиск.</string>
+    <string name="type_of_activity">Вид активности</string>
+    <string name="change_activity">Изменить активность</string>
 </resources>

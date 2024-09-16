@@ -89,7 +89,9 @@ public class QuickActionsWidget extends LinearLayout {
 
 	public void updateActions() {
 		QuickActionButtonState buttonState = selectedButton.getButtonState();
-		setActions(new ArrayList<>(buttonState.getQuickActions()));
+		if (buttonState != null) {
+			setActions(new ArrayList<>(buttonState.getQuickActions()));
+		}
 	}
 
 	public void setActions(@NonNull List<QuickAction> actions) {

@@ -4367,7 +4367,7 @@
     <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
     <string name="delete_history_items_descr">Eliminar os itens selecionados do histórico\?</string>
     <string name="delete_history_items">Eliminar %1$s itens do histórico\?</string>
-    <string name="quick_action_toggle_preference">Um alternador para alterar a preferência.</string>
+    <string name="quick_action_toggle_preference">Um selector para alterar a preferência.</string>
     <string name="copying_file">A copiar o ficheiro %1$s…</string>
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
@@ -4501,7 +4501,7 @@
     <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
     <string name="rendering_attr_showFitnessTrails_name">Trilhos de fitness</string>
-    <string name="routeInfo_horse_scale_name">Dificuldade dos percursos equestres</string>
+    <string name="routeInfo_horse_scale_name">Dificuldade dos trilhos equestres</string>
     <string name="routing_attr_carriage_restrictions_name">Restrições de carruagem</string>
     <string name="rendering_attr_showTrainRoutes_name">Rotas de comboio</string>
     <string name="simulation_real_mode_desc">Em trechos de estradas retas, a velocidade será próxima da velocidade máxima permitida.
@@ -4516,7 +4516,7 @@
     <string name="simulation_preview_mode_desc">A velocidade da simulação será a máxima em retas e diminuirá apenas nos cruzamentos.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
-    <string name="routeInfo_horse_scale_description">Mostrar percursos equestres de acordo com a sua dificuldade</string>
+    <string name="routeInfo_horse_scale_description">Mostrar trilhos equestres de acordo com a sua dificuldade</string>
     <string name="rendering_attr_horse_scale_common_name">Comum</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
@@ -5864,7 +5864,7 @@
     <string name="add_widget_to_the_right">Adicionar widget à direita</string>
     <string name="help_article_map_tracks_name">Trilhos</string>
     <string name="help_article_map_routes_name">Rotas</string>
-    <string name="rendering_attr_alpineHiking_name">Grau de dificuldade percursos pedestres</string>
+    <string name="rendering_attr_alpineHiking_name">Grau de dificuldade de trilhos pedestres</string>
     <string name="delete_widget_description">Este widget será eliminado. Pode restaurá-lo mais tarde no ecrã Configurar.</string>
     <string name="delete_widget">Eliminar o widget?</string>
     <string name="app_mode_suv">Todo-terreno (SUV)</string>
@@ -5880,8 +5880,24 @@
     <string name="quick_action_switch_compass_desc">Um botão alternador para alterar a orientação do mapa.</string>
     <string name="quick_action_search_view_title">Ecrã de pesquisa</string>
     <string name="quick_action_navigation_view_desc">Um botão alternador para abrir ou fechar o ecrã de navegação.</string>
-    <string name="battery_saving_mode">Modo de economia da bateria</string>
+    <string name="battery_saving_mode">Modo de economia de bateria</string>
     <string name="shared_string_interface">Interface</string>
     <string name="background_opacity">Opacidade do fundo</string>
     <string name="corner_radius">Raio do canto</string>
+    <string name="search_action_descr">Abre a pesquisa.</string>
+    <string name="navigation_action_descr">Abre a navegação.</string>
+    <string name="my_location_action_descr">Centraliza o mapa na sua posição atual.</string>
+    <string name="drawer_button_description">Abre o menu principal.</string>
+    <string name="raster_layers_action_descr">Alterar camadas raster</string>
+    <string name="contour_layers_action_descr">Alterar camadas de contornos</string>
+    <string name="change_zoom_action_descr">Alterar ampliação do mapa.</string>
+    <string name="map_3d_mode_action_descr">Alterar inclinação do mapa.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhos de terra para bicicletas</string>
+    <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar trilhos de terra para bicicletas</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="type_of_activity">Tipo de atividade</string>
+    <string name="change_activity">Alterar atividade</string>
+    <string name="shared_string_decrease">Diminuir</string>
+    <string name="shared_string_increase">Aumentar</string>
 </resources>

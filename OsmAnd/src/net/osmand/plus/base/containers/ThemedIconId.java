@@ -20,8 +20,7 @@ public class ThemedIconId {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o instanceof ThemedIconId) {
-			ThemedIconId that = (ThemedIconId) o;
+		if (o instanceof ThemedIconId that) {
 			return iconDayId == that.iconDayId
 					&& iconNightId == that.iconNightId;
 		}
