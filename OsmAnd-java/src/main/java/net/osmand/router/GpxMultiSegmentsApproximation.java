@@ -184,7 +184,7 @@ public class GpxMultiSegmentsApproximation {
 				last = bestNext;
 			} else { 
 				if (bestRoute != null) {
-					wrapupRoute(gpxPoints, bestRoute, true);
+					wrapupRoute(gpxPoints, bestRoute);
 				}
 				GpxPoint pnt = findNextRoutablePoint(bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
 				visited = new TLongHashSet();
@@ -206,7 +206,7 @@ public class GpxMultiSegmentsApproximation {
 			bestRoute = last;
 		}
 		if (bestRoute != null) {
-			wrapupRoute(gpxPoints, bestRoute, false);
+			wrapupRoute(gpxPoints, bestRoute);
 		}
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
@@ -351,7 +351,7 @@ public class GpxMultiSegmentsApproximation {
 		}
 	}
 
-	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute, boolean breakSegment) {
+	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
 		if (bestRoute.parent == null) {
 			return;
 		}
@@ -388,7 +388,6 @@ public class GpxMultiSegmentsApproximation {
 		}
 		gpxPoints.get(startInd).routeToTarget = res;
 		gpxPoints.get(startInd).targetInd = last; // keep straight line
-		gpxPoints.get(startInd).breakSegment = breakSegment;
 	}
 
 	private static long calculateRoutePointId(RouteSegmentAppr segm) {

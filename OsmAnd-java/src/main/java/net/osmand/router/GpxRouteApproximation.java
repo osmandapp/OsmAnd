@@ -353,9 +353,9 @@ public class GpxRouteApproximation {
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		RoutePlannerFrontEnd.GpxPoint straightPointStart = null;
+
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
-			boolean breakSegment = false;
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
@@ -375,10 +375,6 @@ public class GpxRouteApproximation {
 				i = pnt.targetInd;
 			} else {
 				// add straight line from i -> i+1
-				breakSegment = true;
-				i++;
-			}
-			if (breakSegment || pnt.breakSegment) {
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
@@ -388,11 +384,11 @@ public class GpxRouteApproximation {
 					}
 					straightPointStart = pnt;
 				}
-				if (!pnt.breakSegment) {
-					lastStraightLine.add(pnt.loc);
-				}
+				lastStraightLine.add(pnt.loc);
+				i++;
 			}
 		}
+
 		if (lastStraightLine != null) {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
