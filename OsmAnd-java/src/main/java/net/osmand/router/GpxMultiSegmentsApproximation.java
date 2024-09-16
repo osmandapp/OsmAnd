@@ -119,12 +119,7 @@ public class GpxMultiSegmentsApproximation {
 			return;
 		}
 
-		int prev = last.gpxStart;
-		int next = Math.min(last.gpxNext(), gpxPoints.size() - 1);
-		double prevDir = gpxPoints.get(0).object.directionRoute(prev, true);
-		double nextDir = gpxPoints.get(0).object.directionRoute(next, true);
-		double diff = Math.abs(MapUtils.alignAngleDifference(nextDir - prevDir));
-		boolean allowLoops = diff > Math.PI / 6 * 5; // short loops for >150 degrees (between gpx segments)
+		boolean allowLoops = shouldAllowGpxLoops(last);
 
 		if (sg.getRoad().getId() != last.segment.road.getId()
 				|| (allowLoops && sg.getSegmentStart() != last.segment.getSegmentStart())
@@ -133,6 +128,15 @@ public class GpxMultiSegmentsApproximation {
 		) {
 			addSegmentInternal(last, sg, connected);
 		}
+	}
+
+	private boolean shouldAllowGpxLoops(RouteSegmentAppr last) {
+		int prevPoint = last.gpxStart;
+		int nextPoint = Math.min(last.gpxNext(), gpxPoints.size() - 1);
+		double prevDir = gpxPoints.get(0).object.directionRoute(prevPoint, true);
+		double nextDir = gpxPoints.get(0).object.directionRoute(nextPoint, true);
+		double diff = Math.abs(MapUtils.alignAngleDifference(nextDir - prevDir));
+		return diff > Math.PI / 6 * 5; // short loops for >150 degrees (between gpx segments)
 	}
 
 	public void visit(RouteSegmentAppr r) {
