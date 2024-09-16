@@ -368,23 +368,20 @@ public class MenuBuilder {
 
 	protected void buildWithinRow(ViewGroup viewGroup) {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-		if (mapContext != null) {
-			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-			MapRendererView rendererView = mapView.getMapRenderer();
-			if (rendererView != null) {
-				ZoomLevel zoom = rendererView.getZoomLevel();
-				PointI pointI = NativeUtilities.getPoint31FromLatLon(getLatLon());
-				List<RenderedObject> polygons = mapContext.retrievePolygonsAroundMapObject(pointI, mapContextMenu.getObject(), zoom);
-				if (!Algorithms.isEmpty(polygons)) {
-					List<MenuObject> menuObjects = MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, getLatLon());
-					Context context = viewGroup.getContext();
-					View rowContainer = createRowContainer(context, WITHIN_POLYGONS_ROW_KEY);
-					buildWithinRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
-							app.getString(R.string.transport_nearby_routes),
-							MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
-							getWithinCollapsableView(menuObjects), null, true);
-					viewGroup.addView(rowContainer);
-				}
+		MapRendererView rendererView = app.getOsmandMap().getMapView().getMapRenderer();
+		if (mapContext != null && rendererView != null) {
+			ZoomLevel zoom = rendererView.getZoomLevel();
+			PointI pointI = NativeUtilities.getPoint31FromLatLon(getLatLon());
+			List<RenderedObject> polygons = mapContext.retrievePolygonsAroundMapObject(pointI, mapContextMenu.getObject(), zoom);
+			if (!Algorithms.isEmpty(polygons)) {
+				List<MenuObject> menuObjects = MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, getLatLon());
+				Context context = viewGroup.getContext();
+				View rowContainer = createRowContainer(context, WITHIN_POLYGONS_ROW_KEY);
+				buildWithinRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
+						app.getString(R.string.transport_nearby_routes),
+						MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
+						getWithinCollapsableView(menuObjects), null, true);
+				viewGroup.addView(rowContainer);
 			}
 		}
 	}
