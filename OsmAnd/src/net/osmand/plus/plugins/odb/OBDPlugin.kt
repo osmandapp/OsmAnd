@@ -7,9 +7,13 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.graphics.drawable.Drawable
 import android.view.View
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
@@ -41,11 +45,13 @@ import net.osmand.shared.obd.OBDFuelTypeDataField
 import net.osmand.shared.obd.OBDResponseListener
 import net.osmand.shared.obd.OBDRpmDataField
 import net.osmand.shared.obd.OBDSpeedDataField
+import okio.IOException
 import okio.sink
 import okio.source
 import java.util.UUID
 
-class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener {
+class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener,
+	OBDDispatcher.OBDReadStatusListener {
 	private val settings: OsmandSettings = app.settings
 
 	val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
@@ -67,6 +73,31 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_TYPE, *noAppMode)
 		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_LEVEL, *noAppMode)
 		OBDDispatcher.addResponseListener(this)
+		OBDDispatcher.setReadStatusListener(this)
+
+
+		val scope = CoroutineScope(Dispatchers.IO + Job())
+		scope.launch {
+			try {
+				while (true) {
+					LOG.debug("scope ${System.currentTimeMillis()/1000}")
+					delay(1000)
+				}
+			} catch (er: CancellationException) {
+				LOG.debug("scope canceled")
+			}
+		}
+
+		val scope2 = CoroutineScope(Dispatchers.IO + Job())
+		scope2.launch {
+			for (i in 0..4) {
+				LOG.debug("**scope2 ${System.currentTimeMillis()/1000}")
+				delay(2000)
+			}
+			scope.cancel()
+		}
+
+
 	}
 
 	override fun createWidgets(
@@ -193,19 +224,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 						val obdDevice: BluetoothDevice? =
 							pairedDevices.find { it.name == name }
 						connectedDevice = obdDevice
-						try {
-							socket = connectedDevice?.createRfcommSocketToServiceRecord(uuid)
-							socket?.apply {
-								connect()
-								if (isConnected) {
-									val input = inputStream.source()
-									val output = outputStream.sink()
-									OBDDispatcher.setReadWriteStreams(input, output)
-								}
-							}
-						} catch (error: Throwable) {
-							LOG.error("Can't connect to device. $error")
-						}
+						connectToDevice()
 					}
 				} else {
 					AndroidUtils.requestBLEPermissions(activity)
@@ -219,6 +238,22 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 		return socket != null && socket?.isConnected == true
 	}
 
+	@SuppressLint("MissingPermission")
+	private fun connectToDevice() {
+		try {
+			socket = connectedDevice?.createRfcommSocketToServiceRecord(uuid)
+			socket?.apply {
+				connect()
+				if (isConnected) {
+					val input = inputStream.source()
+					val output = outputStream.sink()
+					OBDDispatcher.setReadWriteStreams(input, output)
+				}
+			}
+		} catch (error: IOException) {
+			LOG.error("Can't connect to device. $error")
+		}
+	}
 	@SuppressLint("MissingPermission")
 	fun sendCommand(command: OBDCommand) {
 		if (isCommandListening(command)) {
@@ -267,5 +302,15 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 
 	companion object {
 		private val LOG = PlatformUtil.getLog(OBDPlugin::class.java)
+	}
+
+	override fun onIOError() {
+//		socket?.apply {
+//			if(!isConnected) {
+//				connectedDevice?.let { device ->
+//					connectToDevice()
+//				}
+//			}
+//		}
 	}
 }
