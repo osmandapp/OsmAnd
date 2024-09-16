@@ -125,11 +125,15 @@ public class GpxMultiSegmentsApproximation {
 		if (sg == null) {
 			return;
 		}
-		if (sg.getRoad().getId() != last.segment.road.getId() ||
-				sg.getSegmentStart() != last.segment.getSegmentStart() // 1. allow loops for rec tracks
-//				Math.min(sg.getSegmentStart(), sg.getSegmentEnd()) != 
-//				Math.min(last.segment.getSegmentStart(), last.segment.getSegmentEnd()) // 2. don't allow loops
-				) {
+		int oneway = gctx.ctx.getRouter().isOneWay(sg.getRoad());
+		if ((sg.isPositive() && oneway < 0) || (!sg.isPositive() && oneway > 0)) {
+			// don't allow passing wrong way
+			return;
+		}
+		// Disable loops:
+		// min(sg.getSegmentStart(), sg.getSegmentEnd()) != min(last.segment.getSegmentStart(), last.segment.getSegmentEnd())
+		if (sg.getRoad().getId() != last.segment.road.getId()
+				|| sg.getSegmentStart() != last.segment.getSegmentStart()) {
 			addSegmentInternal(last, sg, connected);
 		}
 	}
