@@ -119,16 +119,16 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn9?.text = OBDCommand.OBD_FUEL_TYPE_COMMAND.name
 		commandBtn10?.text = OBDCommand.OBD_FUEL_LEVEL_COMMAND.name
 
-		commandBtn1?.setOnClickListener { sendCommand(OBDCommand.OBD_SUPPORTED_LIST1_COMMAND) }
-		commandBtn2?.setOnClickListener { sendCommand(OBDCommand.OBD_SUPPORTED_LIST2_COMMAND) }
-		commandBtn3?.setOnClickListener { sendCommand(OBDCommand.OBD_SUPPORTED_LIST3_COMMAND) }
-		commandBtn4?.setOnClickListener { sendCommand(OBDCommand.OBD_RPM_COMMAND) }
-		commandBtn5?.setOnClickListener { sendCommand(OBDCommand.OBD_SPEED_COMMAND) }
-		commandBtn6?.setOnClickListener { sendCommand(OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND) }
-		commandBtn7?.setOnClickListener { sendCommand(OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND) }
-		commandBtn8?.setOnClickListener { sendCommand(OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND) }
-		commandBtn9?.setOnClickListener { sendCommand(OBDCommand.OBD_FUEL_TYPE_COMMAND) }
-		commandBtn10?.setOnClickListener { sendCommand(OBDCommand.OBD_FUEL_LEVEL_COMMAND) }
+		commandBtn1?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SUPPORTED_LIST1_COMMAND) }
+		commandBtn2?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SUPPORTED_LIST2_COMMAND) }
+		commandBtn3?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SUPPORTED_LIST3_COMMAND) }
+		commandBtn4?.setOnClickListener { addCommandToRead(OBDCommand.OBD_RPM_COMMAND) }
+		commandBtn5?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SPEED_COMMAND) }
+		commandBtn6?.setOnClickListener { addCommandToRead(OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND) }
+		commandBtn7?.setOnClickListener { addCommandToRead(OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND) }
+		commandBtn8?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND) }
+		commandBtn9?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_TYPE_COMMAND) }
+		commandBtn10?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_LEVEL_COMMAND) }
 	}
 
 	private fun updateUI() {
@@ -154,8 +154,8 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 			plugin?.isCommandListening(OBDCommand.OBD_FUEL_LEVEL_COMMAND) == true
 	}
 
-	private fun sendCommand(command: OBDCommand) {
-		plugin?.sendCommand(command)
+	private fun addCommandToRead(command: OBDCommand) {
+		plugin?.addCommandToRead(command)
 		updateUI()
 	}
 

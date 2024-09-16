@@ -1,7 +1,5 @@
 package net.osmand.shared.obd
 
-//import co.touchlab.stately.collections.ConcurrentMutableList
-//import co.touchlab.stately.collections.ConcurrentMutableMap
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,8 +8,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil
 import okio.Buffer
 import okio.IOException
 import okio.Sink
@@ -125,20 +123,20 @@ object OBDDispatcher {
 
 	fun addCommand(commandToRead: OBDCommand) {
 		if (commandQueue.indexOf(commandToRead) == -1) {
-			commandQueue.add(commandToRead)
+			KCollectionUtils.addToList(commandQueue, commandToRead)
 		}
 	}
 
 	fun removeCommand(commandToStopReading: OBDCommand) {
-		commandQueue.remove(commandToStopReading)
+		KCollectionUtils.removeFromList(commandQueue, commandToStopReading)
 	}
 
 	fun addResponseListener(responseListener: OBDResponseListener) {
-		responseListeners.add(responseListener)
+		KCollectionUtils.addToList(responseListeners, responseListener)
 	}
 
 	fun removeResponseListener(responseListener: OBDResponseListener) {
-		responseListeners.remove(responseListener)
+		KCollectionUtils.removeFromList(responseListeners, responseListener)
 	}
 
 	fun setReadStatusListener(listener: OBDReadStatusListener?) {

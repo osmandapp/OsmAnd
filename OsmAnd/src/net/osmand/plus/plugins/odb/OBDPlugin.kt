@@ -254,11 +254,9 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 			LOG.error("Can't connect to device. $error")
 		}
 	}
-	@SuppressLint("MissingPermission")
-	fun sendCommand(command: OBDCommand) {
+
+	fun addCommandToRead(command: OBDCommand) {
 		if (isCommandListening(command)) {
-			OBDDispatcher.removeCommand(command)
-		} else {
 			OBDDispatcher.addCommand(command)
 		}
 	}
