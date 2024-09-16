@@ -5902,4 +5902,6 @@
     <string name="change_activity">Змінити активність</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Показати стежки для ґрунтового велосипеда</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
+    <string name="shared_string_decrease">Зменшення</string>
+    <string name="shared_string_increase">Збільшення</string>
 </resources>
