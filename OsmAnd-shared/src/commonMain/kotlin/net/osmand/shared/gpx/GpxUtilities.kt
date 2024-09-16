@@ -459,7 +459,10 @@ object GpxUtilities {
 
 			serializer.endTag(null, "gpx")
 			serializer.endDocument()
-			serializer.close()
+			serializer.flush()
+			if (file != null) {
+				serializer.close()
+			}
 			null
 		} catch (e: Exception) {
 			log.error("Failed to write gpx", e)
