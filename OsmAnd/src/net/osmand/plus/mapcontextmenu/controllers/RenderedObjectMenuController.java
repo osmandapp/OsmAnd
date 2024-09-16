@@ -66,7 +66,7 @@ public class RenderedObjectMenuController extends MenuController {
 			String key = entry.getKey();
 			String value = entry.getValue();
 			PoiCategory foundCategory = mapPoiTypes.getPoiCategoryByName(key);
-			if (poiCategory == null || !mapPoiTypes.isOtherCategory(foundCategory)) {
+			if (!mapPoiTypes.isOtherCategory(foundCategory)) {
 				poiCategory = foundCategory;
 			}
 			AbstractPoiType foundType = foundCategory.getPoiTypeByKeyName(value);
