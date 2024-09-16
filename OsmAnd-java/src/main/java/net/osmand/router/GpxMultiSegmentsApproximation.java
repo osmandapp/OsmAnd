@@ -125,17 +125,30 @@ public class GpxMultiSegmentsApproximation {
 		if (sg == null) {
 			return;
 		}
+
 		int oneway = gctx.ctx.getRouter().isOneWay(sg.getRoad());
 		if ((sg.isPositive() && oneway < 0) || (!sg.isPositive() && oneway > 0)) {
 			// don't allow passing wrong way
 			return;
 		}
-		// Disable loops:
-		// min(sg.getSegmentStart(), sg.getSegmentEnd()) != min(last.segment.getSegmentStart(), last.segment.getSegmentEnd())
+
+		// 1. different roads; 2. different segments; 3. auto-detected GPX loops
 		if (sg.getRoad().getId() != last.segment.road.getId()
-				|| sg.getSegmentStart() != last.segment.getSegmentStart()) {
+				|| Math.min(sg.getSegmentStart(), sg.getSegmentEnd()) != Math.min(
+						last.segment.getSegmentStart(), last.segment.getSegmentEnd())
+				|| (sg.getSegmentStart() != last.segment.getSegmentStart() && shouldAllowGpxLoops(last))
+		) {
 			addSegmentInternal(last, sg, connected);
 		}
+	}
+
+	private boolean shouldAllowGpxLoops(RouteSegmentAppr last) {
+		int prevPoint = last.gpxStart;
+		int nextPoint = Math.min(last.gpxNext(), gpxPoints.size() - 1);
+		double prevDir = gpxPoints.get(0).object.directionRoute(prevPoint, true);
+		double nextDir = gpxPoints.get(0).object.directionRoute(nextPoint, true);
+		double diff = Math.abs(MapUtils.alignAngleDifference(nextDir - prevDir));
+		return diff > Math.PI / 6 * 5; // short loops for >150 degrees (between gpx segments)
 	}
 
 	public void visit(RouteSegmentAppr r) {
@@ -399,5 +412,4 @@ public class GpxMultiSegmentsApproximation {
 
 		return (segId << GPX_MAX) + (segm.gpxStart + segm.gpxLen);
 	}
-	
 }
