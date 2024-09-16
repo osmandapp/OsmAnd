@@ -24,7 +24,6 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -43,7 +42,6 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.RasterMapSymbol;
 import net.osmand.core.jni.Utilities;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
@@ -67,7 +65,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -281,16 +278,6 @@ public class MapSelectionHelper {
 	                                     @NonNull PointF point) {
 		MapRendererView rendererView = view.getMapRenderer();
 		if (rendererView != null) {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				ZoomLevel zoom = rendererView.getZoomLevel();
-				IContextMenuProvider provider = mapLayers.getPoiMapLayer();
-				PointI pointI = NativeUtilities.get31FromElevatedPixel(rendererView, point.x, point.y);
-				List<RenderedObject> res = mapContext.retrievePolygonsAroundPoint(pointI, zoom, false);
-				for (RenderedObject polygon : res) {
-					result.selectedObjects.put(polygon, provider);
-				}
-			}
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
