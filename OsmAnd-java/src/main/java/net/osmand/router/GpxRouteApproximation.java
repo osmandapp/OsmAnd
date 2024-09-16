@@ -394,9 +394,8 @@ public class GpxRouteApproximation {
 			lastStraightLine = null;
 		}
 		if (router.isUseGeometryBasedApproximation()) {
-			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // not required by classic method
-		}
-		if (GPX_SEGMENT_ALGORITHM != GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // routing-based already did it
+		} else {
 			cleanDoubleJoints(gctx);
 		}
 		// clean turns to recalculate them
