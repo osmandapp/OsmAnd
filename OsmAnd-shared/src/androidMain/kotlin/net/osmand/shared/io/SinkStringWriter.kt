@@ -29,9 +29,4 @@ class SinkStringWriter(sink: Sink) : StringWriter() {
 	override fun flush() {
 		bufferedSink.flush()
 	}
-
-	@Throws(IOException::class)
-	override fun close() {
-		bufferedSink.close()
-	}
 }

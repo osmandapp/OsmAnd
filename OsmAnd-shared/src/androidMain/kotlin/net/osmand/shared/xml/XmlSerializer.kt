@@ -118,7 +118,7 @@ actual class XmlSerializer actual constructor() {
 	@Throws(IOException::class)
 	actual fun close() {
 		flush()
-		outputStream?.close() // KFile-based stream
-		// stringWriter?.close() // parent-based, do not close
+		outputStream?.close()
+		stringWriter?.close()
 	}
 }
