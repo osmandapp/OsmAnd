@@ -47,7 +47,6 @@ public class GpxMultiSegmentsApproximation {
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
 		private final RouteSegmentAppr parent;
-		private final double onewayPenalty;
 		private final int gpxStart;
 
 		private int gpxLen = 0;
@@ -57,29 +56,20 @@ public class GpxMultiSegmentsApproximation {
 			return gpxStart + gpxLen + 1;
 		}
 		
-		private RouteSegmentAppr(int start, RouteSegmentPoint pnt, float minPointApproximation) {
+		private RouteSegmentAppr(int start, RouteSegmentPoint pnt) {
 			this.parent = null;
 			this.segment = pnt;
 			this.gpxStart = start;
-			this.onewayPenalty = calcOnewayPenalty(minPointApproximation);
 		}
 
-		private RouteSegmentAppr(RouteSegmentAppr parent, RouteSegment segment, float minPointApproximation) {
+		private RouteSegmentAppr(RouteSegmentAppr parent, RouteSegment segment) {
 			this.parent = parent;
 			this.segment = segment;
 			this.gpxStart = parent.gpxStart + parent.gpxLen;
-			this.onewayPenalty = calcOnewayPenalty(minPointApproximation);
-		}
-
-		private double calcOnewayPenalty(float minPointApproximation) {
-			if (!segment.isPositive() && segment.getRoad().getOneway() > 0) {
-				return minPointApproximation;
-			}
-			return 0;
 		}
 
 		private double metric() {
-			return (maxDistToGpx + onewayPenalty) / Math.sqrt(gpxLen + 1); // heuristics for eager algorithm
+			return maxDistToGpx / Math.sqrt(gpxLen + 1); // heuristics for eager algorithm
 		}
 
 		@Override
@@ -161,7 +151,7 @@ public class GpxMultiSegmentsApproximation {
 		if (currentPoint == null) {
 			return gctx;
 		}
-		RouteSegmentAppr last = new RouteSegmentAppr(0, currentPoint.pnt, minPointApproximation);
+		RouteSegmentAppr last = new RouteSegmentAppr(0, currentPoint.pnt);
 		List<RouteSegmentAppr> connected = new ArrayList<>();
 		RouteSegmentAppr bestRoute = null;
 		while (last.gpxNext() < gpxPoints.size()) { 
@@ -199,7 +189,7 @@ public class GpxMultiSegmentsApproximation {
 					break;
 				} else {
 					debugln("\n!!! " + pnt.ind + " " + pnt.loc + " " + pnt.pnt);
-					last = new RouteSegmentAppr(pnt.ind, pnt.pnt, minPointApproximation);
+					last = new RouteSegmentAppr(pnt.ind, pnt.pnt);
 					bestRoute = null;
 				}
 			}
@@ -234,7 +224,6 @@ public class GpxMultiSegmentsApproximation {
 			System.out.println(string);
 		}
 	}
-	
 
 	private double gpxDist(int gpxL1, int gpxL2) {
 		return gpxPoints.get(Math.min(gpxL1, gpxPoints.size() - 1)).cumDist - 
@@ -242,7 +231,7 @@ public class GpxMultiSegmentsApproximation {
 	}
 
 	private boolean approximateSegment(RouteSegmentAppr parent, RouteSegment sg, List<RouteSegmentAppr> connected) {
-		RouteSegmentAppr c = new RouteSegmentAppr(parent, sg, minPointApproximation);
+		RouteSegmentAppr c = new RouteSegmentAppr(parent, sg);
 		boolean added = false;
 		for (int pointInd = c.gpxStart + 1; pointInd < gpxPoints.size(); pointInd++) {
 			GpxPoint p = gpxPoints.get(pointInd);
@@ -270,7 +259,7 @@ public class GpxMultiSegmentsApproximation {
 				return added;
 			}
 			if (dist > MIN_BRANCHING_DIST && dist > c.maxDistToGpx && c.gpxLen > 0) {
-				RouteSegmentAppr altShortBranch = new RouteSegmentAppr(parent, sg, minPointApproximation);
+				RouteSegmentAppr altShortBranch = new RouteSegmentAppr(parent, sg);
 				altShortBranch.maxDistToGpx = c.maxDistToGpx;
 				altShortBranch.gpxLen = c.gpxLen;
 				added |= addConnected(parent, altShortBranch, connected);
@@ -303,11 +292,20 @@ public class GpxMultiSegmentsApproximation {
 				return false;
 			}
 		}
+		c.maxDistToGpx += calcOnewayPenalty(c.segment); // do penalize but don't ignore/forbid
 		connected.add(c);
 		if (DEBUG) {
 			System.out.println("** " + c + " - accept");
 		}
 		return true;
+	}
+
+	private double calcOnewayPenalty(RouteSegment sg) {
+		int oneway = gctx.ctx.getRouter().isOneWay(sg.getRoad());
+		if ((sg.isPositive() && oneway < 0) || (!sg.isPositive() && oneway > 0)) {
+			return minPointApproximation;
+		}
+		return 0;
 	}
 
 	public GpxPoint findNextRoutablePoint(int searchStart) throws IOException {
