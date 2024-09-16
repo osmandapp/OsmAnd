@@ -3,9 +3,9 @@ package net.osmand.plus.settings.fragments.search;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
+import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -15,15 +15,13 @@ import de.KnollFrank.lib.settingssearch.search.provider.PreferenceDescription;
 
 class CustomPreferenceDescriptionsFactory {
 
-	/* FK-TODO: make custom Preferences searchable:
-	   - SizePreference
-   */
 	public static List<PreferenceDescription> createCustomPreferenceDescriptions() {
 		return Arrays.asList(
 				getListPreferenceExDescription(),
 				getSwitchPreferenceExDescription(),
 				getMultiSelectBooleanPreferenceDescription(),
-				getEditTextPreferenceExDescription());
+				getEditTextPreferenceExDescription(),
+				getSizePreferenceDescription());
 	}
 
 	private static PreferenceDescription<ListPreferenceEx> getListPreferenceExDescription() {
@@ -83,12 +81,24 @@ class CustomPreferenceDescriptionsFactory {
 				});
 	}
 
-	private static List<CharSequence> concat(final Optional<? extends CharSequence> dialogTitle,
-											 final Optional<? extends CharSequence> description,
+	private static PreferenceDescription<SizePreference> getSizePreferenceDescription() {
+		return new PreferenceDescription<>(
+				SizePreference.class,
+				preference -> {
+					final SizePreference sizePreference = (SizePreference) preference;
+					return String.join(
+							", ",
+							Lists.getPresentElements(
+									Arrays.asList(
+											Optional.ofNullable(sizePreference.getDialogTitle()),
+											Optional.ofNullable(sizePreference.getSummary()))));
+				});
+	}
+
+	private static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
+											 final Optional<CharSequence> description,
 											 final Optional<CharSequence[]> entries) {
-		final List<CharSequence> result = new ArrayList<>();
-		dialogTitle.ifPresent(result::add);
-		description.ifPresent(result::add);
+		final List<CharSequence> result = Lists.getPresentElements(Arrays.asList(dialogTitle, description));
 		result.addAll(Lists.asList(entries));
 		return result;
 	}
