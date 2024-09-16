@@ -551,7 +551,6 @@ public class NativeLibrary {
 
 	public static class RenderedObject extends MapObject {
 		private final Map<String, String> tags = new LinkedHashMap<>();
-		private final Map<String, Object> extensions = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
 		private final TIntArrayList x = new TIntArrayList();
 		private final TIntArrayList y = new TIntArrayList();
@@ -562,6 +561,7 @@ public class NativeLibrary {
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
+		private boolean isPolygon;
 
 		public Map<String, String> getTags() {
 			return tags;
@@ -644,14 +644,6 @@ public class NativeLibrary {
 			tags.put(t, v);
 		}
 
-		public void putExtension(String key, Object val) {
-			extensions.put(key, val);
-		}
-
-		public Object getExtension(String key) {
-			return extensions.get(key);
-		}
-
 		public int getLabelX() {
 			return labelX;
 		}
@@ -666,6 +658,14 @@ public class NativeLibrary {
 
 		public void setLabelY(int labelY) {
 			this.labelY = labelY;
+		}
+
+		public void setIsPolygon(boolean isPolygon) {
+			this.isPolygon = isPolygon;
+		}
+
+		public boolean isPolygon() {
+			return isPolygon;
 		}
 
 		public List<String> getOriginalNames() {

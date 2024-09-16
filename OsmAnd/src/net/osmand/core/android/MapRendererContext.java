@@ -87,8 +87,6 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
-	public static final String RELATED_CATEGORY = "related_category";
-	public static final String RELATED_TYPE = "related_type";
 	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
@@ -734,37 +732,8 @@ public class MapRendererContext {
 		if (obfMapObject != null) {
 			object.setId(obfMapObject.getId().getOsmId());
 		}
+		object.setIsPolygon(true);
 		object.setOrder(order);
-
-		PoiCategory foundCategory = null;
-		AbstractPoiType foundPoiType = null;
-		MapPoiTypes mapPoiTypes = app.getPoiTypes();
-		for (Map.Entry<String, String> entry : object.getTags().entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			PoiCategory category = mapPoiTypes.getPoiCategoryByName(key);
-			if (foundCategory == null || foundCategory.equals(mapPoiTypes.getOtherPoiCategory())) {
-				foundCategory = category;
-			}
-			AbstractPoiType poiType = category.getPoiTypeByKeyName(value);
-			if (poiType == null) {
-				poiType = mapPoiTypes.getAnyPoiTypeByKey(key + "_" + value);
-			}
-			if (poiType != null) {
-				foundCategory = category;
-				foundPoiType = poiType;
-				break;
-			}
-		}
-
-		String iconRes = foundPoiType != null
-				? foundPoiType.getIconKeyName()
-				: foundCategory != null ? foundCategory.getIconKeyName() : null;
-		if (iconRes != null) {
-			object.setIconRes(iconRes);
-		}
-		object.putExtension(RELATED_CATEGORY, foundCategory);
-		object.putExtension(RELATED_TYPE, foundPoiType);
 
 		if (Algorithms.isEmpty(object.getNamesMap(true))) {
 			String captionInNativeLanguage = mapObject.getCaptionInNativeLanguage();

@@ -406,7 +406,15 @@ public class MenuBuilder {
 	                            @NonNull String textPrefix, @Nullable CollapsableView collapsableView,
 	                            @Nullable MenuObject menuObject, boolean parentRow) {
 		if (!isFirstRow() && !parentRow) {
-			buildRowDivider(view);
+			View horizontalLine = new View(view.getContext());
+			horizontalLine.setTag(DIVIDER_ROW_KEY);
+			LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+			llHorLineParams.gravity = Gravity.BOTTOM;
+			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
+
+			horizontalLine.setLayoutParams(llHorLineParams);
+			horizontalLine.setBackgroundColor(getColor(light ? R.color.divider_color_light : R.color.divider_color_dark));
+			((LinearLayout) view).addView(horizontalLine);
 		}
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
