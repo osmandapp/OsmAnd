@@ -13,13 +13,11 @@ public class TextViewExProgress extends TextViewEx {
 	public float percent;
 
 	public TextViewExProgress(Context context) {
-		super(context);
-		initPaint();
+		this(context, null);
 	}
 
 	public TextViewExProgress(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initPaint();
+		this(context, attrs, 0);
 	}
 
 	public TextViewExProgress(Context context, AttributeSet attrs, int defStyleAttr) {

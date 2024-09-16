@@ -18,6 +18,8 @@
 	<string name="no_internet_descr">Please check your connection and try again.</string>
 	<string name="no_photos_available_descr">No user photos have been added to this location yet</string>
 	<string name="no_photos_available">No photos available</string>
+    <string name="shared_string_decrease">Decrease</string>
+    <string name="shared_string_increase">Increase</string>
     <string name="raster_layers_action_descr">Change raster layers</string>
     <string name="contour_layers_action_descr">Change contour layers</string>
     <string name="change_zoom_action_descr">Change map zoom.</string>

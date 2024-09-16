@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.backend.preferences;
 
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.view.View;
+import android.view.ViewGroup.MarginLayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -108,22 +108,18 @@ public class FabMarginPreference {
 		return fabMarginYLandscape;
 	}
 
-	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton,
-	                                      FrameLayout.LayoutParams params,
-	                                      @Nullable Pair<Integer, Integer> fabMargin,
+	public static void setFabButtonMargin(@NonNull MapActivity activity, @NonNull View view,
+	                                      @Nullable Pair<Integer, Integer> margins,
 	                                      int defRightMargin, int defBottomMargin) {
-		if (mapActivity == null) {
-			return;
-		}
-		int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
-		int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
-		int btnHeight = fabButton.getHeight();
-		int btnWidth = fabButton.getWidth();
+		int screenHeight = AndroidUtils.getScreenHeight(activity);
+		int screenWidth = AndroidUtils.getScreenWidth(activity);
+		int btnHeight = view.getHeight();
+		int btnWidth = view.getWidth();
 		int maxRightMargin = screenWidth - btnWidth;
 		int maxBottomMargin = screenHeight - btnHeight;
 
-		int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
-		int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
+		int rightMargin = margins != null ? margins.first : defRightMargin;
+		int bottomMargin = margins != null ? margins.second : defBottomMargin;
 		// check limits
 		if (rightMargin <= 0) {
 			rightMargin = defRightMargin;
@@ -136,9 +132,10 @@ public class FabMarginPreference {
 			bottomMargin = maxBottomMargin;
 		}
 
+		MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();
 		params.rightMargin = rightMargin;
 		params.bottomMargin = bottomMargin;
-		fabButton.setLayoutParams(params);
+		view.setLayoutParams(params);
 	}
 
 	@NonNull

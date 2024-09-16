@@ -38,6 +38,8 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.Track;
@@ -113,12 +115,22 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean useSingleMainTab;
 	private int chartHMargin;
 
+	private ListStringPreference xAxisPreference;
+	private CommonPreference<GPXDataSetAxisType> yAxisPreference;
 	private GPXDataSetAxisType selectedMainAxisType = GPXDataSetAxisType.DISTANCE;
-	;
 	private List<GPXDataSetType> selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
 
 	public void setUseSingleMainTab(boolean useSingleMainTab) {
 		this.useSingleMainTab = useSingleMainTab;
+	}
+
+	public boolean isUseSingleMainTab() {
+		return useSingleMainTab;
+	}
+
+	public void setAxisPreferences(@NonNull ListStringPreference xAxisPreference, @NonNull CommonPreference<GPXDataSetAxisType> yAxisPreference){
+		this.xAxisPreference = xAxisPreference;
+		this.yAxisPreference = yAxisPreference;
 	}
 
 	public void setChartHMargin(int chartHMargin) {
@@ -433,8 +445,20 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 
 			if (analysis.hasElevationData() || analysis.hasSpeedData()) {
+				GPXDataSetType firstType = ALTITUDE;
+				GPXDataSetType secondType = null;
+				if (useSingleMainTab) {
+					if (!Algorithms.isEmpty(selectedMainSetTypes)) {
+						firstType = selectedMainSetTypes.get(0);
+					}
+					if (selectedMainSetTypes.size() > 1) {
+						secondType = selectedMainSetTypes.get(1);
+					}
+				} else {
+					secondType = SPEED;
+				}
 				ChartUtils.setupElevationChart(chart);
-				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
+				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, firstType, secondType)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
 			} else {
@@ -482,7 +506,49 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		graphModeDescription.setText(description);
 	}
 
+	public void setupSelectedAxisTypes() {
+		if (xAxisPreference != null && yAxisPreference != null) {
+			getSavedSetTypes();
+			getSavedSetAxisType();
+		}
+	}
+
+	private void getSavedSetTypes() {
+		selectedMainSetTypes.clear();
+		List<String> setTypes = xAxisPreference.getStringsList();
+		if (!Algorithms.isEmpty(setTypes)) {
+			List<GPXDataSetType[]> availableSetType = new ArrayList<>();
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableDefaultYTypes(analysis));
+			availableSetType.addAll(ChartModeBottomSheet.getAvailableSensorYTypes(analysis));
+			for (String type : setTypes) {
+				for (GPXDataSetType[] dataSetTypes : availableSetType) {
+					if (type.equals(dataSetTypes[0].name())) {
+						selectedMainSetTypes.add(GPXDataSetType.valueOf(type));
+					}
+				}
+			}
+		}
+		if (Algorithms.isEmpty(selectedMainSetTypes)) {
+			selectedMainSetTypes = new ArrayList<>(Collections.singleton(GPXDataSetType.ALTITUDE));
+		}
+	}
+
+	private void getSavedSetAxisType() {
+		GPXDataSetAxisType type = yAxisPreference.get();
+		List<GPXDataSetAxisType> availableAxisType = ChartModeBottomSheet.getAvailableXTypes(analysis);
+		for (GPXDataSetAxisType availableType : availableAxisType) {
+			if (type == availableType) {
+				selectedMainAxisType = type;
+				break;
+			}
+		}
+		if (Algorithms.isEmpty(selectedMainSetTypes)) {
+			selectedMainAxisType = GPXDataSetAxisType.DISTANCE;
+		}
+	}
+
 	private void setupGraphModeItem(@NonNull View view) {
+		setupSelectedAxisTypes();
 		View graphMode = view.findViewById(R.id.graph_mode);
 		graphMode.setVisibility(View.VISIBLE);
 		View graphModeButton = graphMode.findViewById(R.id.graph_mode_button);
@@ -492,6 +558,15 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			public void onGraphModeChanged(@NonNull GPXDataSetAxisType gpxDataSetAxisType, @NonNull List<GPXDataSetType> gpxDataSetTypes) {
 				selectedMainAxisType = gpxDataSetAxisType;
 				selectedMainSetTypes = gpxDataSetTypes;
+				if (xAxisPreference != null) {
+					xAxisPreference.clearAll();
+					for (GPXDataSetType type : gpxDataSetTypes) {
+						xAxisPreference.addValue(type.name());
+					}
+				}
+				if (yAxisPreference != null) {
+					yAxisPreference.set(gpxDataSetAxisType);
+				}
 				gpxItem.chartAxisType = gpxDataSetAxisType;
 				updateGraphModeDescription(view);
 				updateGraph(0);

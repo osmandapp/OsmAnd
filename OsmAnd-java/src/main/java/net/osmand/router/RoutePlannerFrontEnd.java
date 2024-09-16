@@ -77,6 +77,7 @@ public class RoutePlannerFrontEnd {
 		public long time = 0;
 		public double cumDist;
 		public RouteSegmentPoint pnt;
+		public boolean breakSegment = false;
 		public List<RouteSegmentResult> routeToTarget;
 		public List<RouteSegmentResult> stepBackRoute;
 		public int targetInd = -1;

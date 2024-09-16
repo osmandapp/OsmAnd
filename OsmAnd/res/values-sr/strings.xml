@@ -1971,7 +1971,7 @@
     <string name="poi_action_add">додај</string>
     <string name="poi_action_change">измени</string>
     <string name="poi_action_delete">обриши</string>
-    <string name="poi_dialog_comment">Коментар</string>
+    <string name="poi_dialog_comment">Напомена</string>
     <string name="poi_dialog_reopen">Поново отвори</string>
     <string name="filter_current_poiButton">Пропусник</string>
     <string name="edit_filter_save_as_menu_item">Сачувај као</string>
@@ -4313,7 +4313,7 @@
     <string name="icon_group_industrial">Индустрија</string>
     <string name="delete_history_items_descr">Обрисати одабране ставке из историјата\?</string>
     <string name="delete_history_items">Обрисати %1$s ставки из историјата\?</string>
-    <string name="quick_action_toggle_preference">Прекидач промене стања подешавања.</string>
+    <string name="quick_action_toggle_preference">Прекидач промене подешавања.</string>
     <string name="display_route_tracks_as_poi">Приказуј трагове као тачке занимања</string>
     <string name="shared_string_travelbooks">Дневници путовања</string>
     <string name="use_external_timestamps">Користи спољне временске ознаке</string>
@@ -5891,4 +5891,6 @@
     <string name="configure_map_description">Промени начин приказа карте, слојеве или друге поставке.</string>
     <string name="type_of_activity">Тип активности</string>
     <string name="change_activity">Промени активност</string>
+    <string name="shared_string_increase">Повећање</string>
+    <string name="shared_string_decrease">Смањење</string>
 </resources>

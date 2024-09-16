@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherContour;
-import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.utils.ColorUtilities;
@@ -31,7 +30,6 @@ import java.util.List;
 public class WeatherContoursButton extends MapButton {
 
 	private final WeatherPlugin plugin;
-	private final WeatherHelper weatherHelper;
 
 	public WeatherContoursButton(@NonNull Context context) {
 		this(context, null);
@@ -44,7 +42,6 @@ public class WeatherContoursButton extends MapButton {
 	public WeatherContoursButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		this.weatherHelper = app.getWeatherHelper();
 
 		setOnClickListener(v -> chooseContours());
 	}

@@ -5889,4 +5889,8 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Crossmotor utak mutatása</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Crossmotor utak mutatása</string>
     <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
+    <string name="change_activity">Tevékenység módosítása</string>
+    <string name="type_of_activity">Tevékenység típusa</string>
+    <string name="shared_string_decrease">Csökkentés</string>
+    <string name="shared_string_increase">Növelés</string>
 </resources>

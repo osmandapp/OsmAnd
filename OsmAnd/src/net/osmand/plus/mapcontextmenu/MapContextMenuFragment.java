@@ -66,11 +66,11 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
+import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -491,21 +491,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		AndroidUtils.setTextSecondaryColor(mapActivity,
 				view.findViewById(R.id.progressTitle), nightMode);
 
-		// Zoom buttons
 		zoomButtonsView = view.findViewById(R.id.context_menu_zoom_buttons);
-		if (menu.zoomButtonsVisible()) {
-			ZoomInButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-			ZoomOutButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+		boolean zoomButtonsVisible = menu.zoomButtonsVisible();
+		if (zoomButtonsVisible) {
+			MapLayers mapLayers = mapActivity.getMapLayers();
+			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-			zoomInButton.setLongClickable(false);
-			zoomOutButton.setLongClickable(false);
-			zoomInButton.setMapActivity(mapActivity);
-			zoomOutButton.setMapActivity(mapActivity);
-
-			zoomButtonsView.setVisibility(View.VISIBLE);
-		} else {
-			zoomButtonsView.setVisibility(View.GONE);
+			layer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
+			layer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
 		}
+		AndroidUiHelper.updateVisibility(zoomButtonsView, zoomButtonsVisible);
 
 		localTransportStopRoutesGrid = view.findViewById(R.id.transport_stop_routes_grid);
 		nearbyTransportStopRoutesGrid = view.findViewById(R.id.transport_stop_nearby_routes_grid);
@@ -562,8 +557,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
 		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(getColor(
 				nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light));
-
-		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
 		containerLayoutListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
 			if (!transportBadgesCreated) {
@@ -1333,6 +1326,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		destroyed = true;
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
+
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			MapLayers mapLayers = activity.getMapLayers();
+			mapLayers.getMapControlsLayer().clearCustomMapButtons();
+		}
 	}
 
 	public void rebuildMenu(boolean centered) {
