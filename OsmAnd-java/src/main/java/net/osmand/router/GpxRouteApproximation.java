@@ -20,7 +20,6 @@ public class GpxRouteApproximation {
 	public static final int GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM = 2;
 	public static int GPX_SEGMENT_ALGORITHM = GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM;
 	
-	
 	public List<RoutePlannerFrontEnd.GpxPoint> finalPoints = new ArrayList<>();
 	public List<RouteSegmentResult> fullRoute = new ArrayList<>();
 
@@ -37,12 +36,6 @@ public class GpxRouteApproximation {
 	public GpxRouteApproximation(RoutingContext ctx) {
 		this.ctx = ctx;
 	}
-
-	// never used - remove
-	// public GpxRouteApproximation(GpxRouteApproximation gctx) {
-	//	this.ctx = gctx.ctx;
-	//	this.routeDistance = gctx.routeDistance;
-	//}
 
 	@Override
 	public String toString() {
@@ -193,7 +186,7 @@ public class GpxRouteApproximation {
 				GpxMultiSegmentsApproximation app = new GpxMultiSegmentsApproximation(router, gctx, gpxPoints);
 				app.gpxApproximation();
 			}
-			calculateGpxRoute(gctx, gpxPoints);
+			calculateGpxRouteResult(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
 						gpxPoints.get(gpxPoints.size() - 1).loc, gctx.fullRoute);
@@ -290,7 +283,7 @@ public class GpxRouteApproximation {
 				gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 			}
 			gctx.ctx.deleteNativeRoutingContext();
-			calculateGpxRoute(gctx, gpxPoints);
+			calculateGpxRouteResult(gctx, gpxPoints);
 			if (!gctx.fullRoute.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc,
 						gpxPoints.get(gpxPoints.size() - 1).loc, gctx.fullRoute);
@@ -355,13 +348,14 @@ public class GpxRouteApproximation {
 		return true;
 	}
 
-	private void calculateGpxRoute(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException {
+	private void calculateGpxRouteResult(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException {
 		BinaryMapRouteReaderAdapter.RouteRegion reg = new BinaryMapRouteReaderAdapter.RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		RoutePlannerFrontEnd.GpxPoint straightPointStart = null;
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
+			boolean breakSegment = false;
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
@@ -381,6 +375,10 @@ public class GpxRouteApproximation {
 				i = pnt.targetInd;
 			} else {
 				// add straight line from i -> i+1
+				breakSegment = true;
+				i++;
+			}
+			if (breakSegment || pnt.breakSegment) {
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
@@ -390,39 +388,26 @@ public class GpxRouteApproximation {
 					}
 					straightPointStart = pnt;
 				}
-				lastStraightLine.add(pnt.loc);
-				i++;
+				if (!pnt.breakSegment) {
+					lastStraightLine.add(pnt.loc);
+				}
 			}
 		}
 		if (lastStraightLine != null) {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-
 		if (router.isUseGeometryBasedApproximation()) {
 			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // not required by classic method
 		}
-
+		if (GPX_SEGMENT_ALGORITHM != GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM) {
+			cleanDoubleJoints(gctx);
+		}
 		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
 	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
-		// cleanup double joints
-		int LOOK_AHEAD = 4;
-		for (int i = 0; i < gctx.fullRoute.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
-			RouteSegmentResult s = gctx.fullRoute.get(i);
-			for (int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.fullRoute.size(); j++) {
-				RouteSegmentResult e = gctx.fullRoute.get(j);
-				if (e.getStartPoint().equals(s.getEndPoint())) {
-					while ((--j) != i) {
-						gctx.fullRoute.remove(j);
-					}
-					break;
-				}
-			}
-		}
-
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		preparation.validateAllPointsConnected(gctx.fullRoute);
 		for (RouteSegmentResult r : gctx.fullRoute) {
@@ -435,6 +420,22 @@ public class GpxRouteApproximation {
 		for (RouteSegmentResult r : gctx.fullRoute) {
 			r.clearAttachedRoutes();
 			r.clearPreattachedRoutes();
+		}
+	}
+
+	private void cleanDoubleJoints(GpxRouteApproximation gctx) {
+		int LOOK_AHEAD = 4;
+		for (int i = 0; i < gctx.fullRoute.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
+			RouteSegmentResult s = gctx.fullRoute.get(i);
+			for (int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.fullRoute.size(); j++) {
+				RouteSegmentResult e = gctx.fullRoute.get(j);
+				if (e.getStartPoint().equals(s.getEndPoint())) {
+					while ((--j) != i) {
+						gctx.fullRoute.remove(j);
+					}
+					break;
+				}
+			}
 		}
 	}
 
