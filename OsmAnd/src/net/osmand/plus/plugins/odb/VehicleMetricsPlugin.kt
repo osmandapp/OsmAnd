@@ -30,6 +30,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 import net.osmand.shared.obd.OBDAirIntakeTempDataField
 import net.osmand.shared.obd.OBDAmbientAirTempDataField
+import net.osmand.shared.obd.OBDBatteryVoltageDataField
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataField
 import net.osmand.shared.obd.OBDDispatcher
@@ -100,6 +101,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 			WidgetType.OBD_AMBIENT_AIR_TEMP -> return OBDTextWidget(
 				mapActivity,
 				OBDWidgetDataFieldType.AMBIENT_AIR_TEMP)
+
+			WidgetType.OBD_BATTERY_VOLTAGE -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.BATTERY_VOLTAGE)
 
 			WidgetType.OBD_FUEL_LEVEL -> return OBDTextWidget(
 				mapActivity,
@@ -259,6 +264,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDFuelTypeDataField(result)
 			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDFuelLvlDataField(result)
 			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDAmbientAirTempDataField(result)
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDBatteryVoltageDataField(result)
 			else -> null
 		}
 	}

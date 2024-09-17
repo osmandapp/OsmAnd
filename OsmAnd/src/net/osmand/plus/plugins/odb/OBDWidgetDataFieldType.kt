@@ -11,6 +11,7 @@ enum class OBDWidgetDataFieldType(
 	SPEED(WidgetType.OBD_SPEED, R.drawable.ic_action_sensor_heart_rate_outlined, OBDCommand.OBD_SPEED_COMMAND),
 	FUEL_LVL(WidgetType.OBD_FUEL_LEVEL, R.drawable.widget_battery_day, OBDCommand.OBD_FUEL_LEVEL_COMMAND),
 	AMBIENT_AIR_TEMP(WidgetType.OBD_AMBIENT_AIR_TEMP, R.drawable.ic_action_thermometer, OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
+	BATTERY_VOLTAGE(WidgetType.OBD_BATTERY_VOLTAGE, R.drawable.ic_action_thermometer, OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND),
 	AIR_INTAKE_TEMP(WidgetType.OBD_AIR_INTAKE_TEMP, R.drawable.ic_action_signal, OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND),
 	COOLANT_TEMP(WidgetType.OBD_ENGINE_COOLANT_TEMP, R.drawable.ic_action_sensor_bicycle_power_outlined, OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND),
 	FUEL_TYPE(WidgetType.OBD_FUEL_TYPE, R.drawable.ic_action_speed_outlined, OBDCommand.OBD_FUEL_TYPE_COMMAND)

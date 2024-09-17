@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="unit_volt">V</string>
     <string name="shared_string_decrease">Decrease</string>
     <string name="shared_string_increase">Increase</string>
     <string name="raster_layers_action_descr">Change raster layers</string>
@@ -64,10 +65,12 @@
     <string name="obd_air_intake_temp_desc">Shows vehicle intake air temperature over OBD sensor</string>
     <string name="obd_ambient_air_temp_desc">Shows ambient air temperature over OBD sensor</string>
     <string name="obd_engine_coolant_temp_desc">Shows engine coolant temperature over OBD sensor</string>
+    <string name="obd_battery_voltage_desc">Shows battery voltage over OBD sensor</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
     <string name="obd_air_intake_temp">Intake air temperature</string>
     <string name="obd_ambient_air_temp">Ambient air temperature</string>
+    <string name="obd_battery_voltage">Battery voltage</string>
     <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
     <string name="obd_fuel_level">Fuel level</string>
     <string name="obd_fuel_type">Fuel type</string>

@@ -71,7 +71,18 @@ object OBDUtils {
 	fun parseFuelLevelResponse(response: String): String {
 		val hexValues = response.trim().split(" ")
 		if (hexValues.size >= 3 && hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_FUEL_LEVEL_COMMAND.command.lowercase()) {
-			return ((((hexValues[2].toInt(16).toFloat() / 255 * 100) * 10).roundToInt())/10.0).toString()
+			return ((((hexValues[2].toInt(16)
+				.toFloat() / 255 * 100) * 10).roundToInt()) / 10.0).toString()
+		}
+		return INVALID_RESPONSE_CODE
+	}
+
+	fun parseBatteryVoltageResponse(response: String): String {
+		val hexValues = response.trim().split(" ")
+		if (hexValues.size >= 4 && hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND.command.lowercase()) {
+			val a = hexValues[2].toInt(16).toFloat()
+			val b = hexValues[3].toInt(16).toFloat()
+			return (((a * 256) + b) / 1000).toString()
 		}
 		return INVALID_RESPONSE_CODE
 	}
