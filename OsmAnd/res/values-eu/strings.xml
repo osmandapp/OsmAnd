@@ -2249,7 +2249,7 @@
     <string name="shared_string_to">Nora</string>
     <string name="mapillary_menu_date_from">Nondik</string>
     <string name="mapillary_menu_descr_dates">Ikusi gehitutako argazkiak soilik</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Idatzi erabiltzaile-izena</string>
     <string name="mapillary_menu_descr_username">Ikusi erabiltzaile honek gehitutako argazkiak:</string>
     <string name="mapillary_menu_title_username">Erabiltzaile-izena</string>

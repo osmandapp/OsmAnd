@@ -2296,7 +2296,7 @@
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Da</string>
     <string name="mapillary_menu_descr_dates">Visualizza solo le immagini aggiunte</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Scrivi il nome utente</string>
     <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da</string>
     <string name="mapillary_menu_title_username">Nome utente</string>

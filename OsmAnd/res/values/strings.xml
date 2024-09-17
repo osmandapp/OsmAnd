@@ -10,7 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="wikimedia">Wikimedia</string>
+	<string name="open_in_browser">Open in browser</string>
+	<string name="shared_string_source">Source</string>
+	<string name="shared_string_no_internet_connection">No internet connection</string>
+	<string name="no_internet_descr">Please check your connection and try again.</string>
+	<string name="no_photos_available_descr">No user photos have been added to this location yet</string>
+	<string name="no_photos_available">No photos available</string>
     <string name="shared_string_decrease">Decrease</string>
     <string name="shared_string_increase">Increase</string>
     <string name="raster_layers_action_descr">Change raster layers</string>
@@ -3200,7 +3206,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
     <string name="mapillary_menu_descr_dates">Only view added images</string>
-    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="shared_string_date">Date</string>
     <string name="mapillary_menu_edit_text_hint">Type username</string>
     <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>

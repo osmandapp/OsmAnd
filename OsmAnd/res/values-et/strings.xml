@@ -156,7 +156,7 @@
     <string name="shared_string_reset">Lähtesta</string>
     <string name="shared_string_reload">Laadi uuesti</string>
     <string name="wrong_user_name">Vale kasutajanimi</string>
-    <string name="mapillary_menu_title_dates">Kuupäev</string>
+    <string name="shared_string_date">Kuupäev</string>
     <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
     <string name="mapillary_menu_title_username">Kasutajatunnus</string>
     <string name="improve_coverage_install_mapillary_desc">Paigalda Mapillary piltide lisamiseks sellesse asukohta kaardil.</string>

@@ -20,6 +20,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
@@ -38,8 +41,6 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin.PluginInstallListener;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -613,6 +614,24 @@ public class PluginsHelper {
 	public static void createMapWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.createWidgets(mapActivity, widgetInfos, appMode);
+		}
+	}
+
+	public static void onGetImageCardsStart() {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			GetImageCardsListener listener = plugin.getImageCardsListener();
+			if (listener != null) {
+				listener.onTaskStarted();
+			}
+		}
+	}
+
+	public static void onGetImageCardsFinished(@NonNull ImageCardsHolder cardsHolder) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			GetImageCardsListener listener = plugin.getImageCardsListener();
+			if (listener != null) {
+				listener.onFinish(cardsHolder);
+			}
 		}
 	}
 

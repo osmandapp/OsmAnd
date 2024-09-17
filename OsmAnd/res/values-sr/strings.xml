@@ -1483,7 +1483,7 @@
     <string name="shared_string_to">Ка</string>
     <string name="mapillary_menu_date_from">Од</string>
     <string name="mapillary_menu_descr_dates">Прегледај само додате слике</string>
-    <string name="mapillary_menu_title_dates">Дан</string>
+    <string name="shared_string_date">Дан</string>
     <string name="mapillary_menu_edit_text_hint">Унесите корисничко име</string>
     <string name="mapillary_menu_descr_username">Прегледај само слике које је додао</string>
     <string name="mapillary_menu_title_username">Корисничко име</string>

@@ -2084,7 +2084,7 @@
     <string name="quick_action_show_navigation_finish_dialog">Prikaži go dijalogot „Navigacijata e završena“</string>
     <string name="quick_action_start_stop_navigation_descr">Kopče za započnuvanje ili završuvanje na navigacijata.</string>
     <string name="store_tracks_in_monthly_directories">Čuvajte gi snimenite zapisi vo mesečni papki</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="mapillary_menu_edit_text_hint">Napisete korisničko ime</string>
     <string name="mapillary_menu_filter_description">Filtrirajte gi slikite po podnositel, po datum ili po tip. Aktivni samo pri zumiranje odblisku.</string>
     <string name="mapillary_menu_title_pano">Prikažuvajte samo sliki od 360°</string>

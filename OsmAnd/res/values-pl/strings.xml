@@ -2284,7 +2284,7 @@
     <string name="map_widget_ruler_control">Cyrkiel</string>
     <string name="shared_string_reload">Załaduj ponownie</string>
     <string name="mapillary_menu_title_username">Nazwa użytkownika</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="wrong_user_name">Nieprawidłowa nazwa użytkownika</string>

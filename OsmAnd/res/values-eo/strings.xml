@@ -2377,7 +2377,7 @@
     <string name="shared_string_to">al</string>
     <string name="mapillary_menu_date_from">de</string>
     <string name="mapillary_menu_descr_dates">Montri bildojn aldonitajn nur</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Enigu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
