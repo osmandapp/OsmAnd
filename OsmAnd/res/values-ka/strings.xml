@@ -1478,7 +1478,7 @@
     <string name="ascent_descent">აღმავალი/დაღმავალი</string>
     <string name="average">საშუალო</string>
     <string name="mapillary_menu_title_username">მომხმარებელი</string>
-    <string name="mapillary_menu_title_dates">თარიღი</string>
+    <string name="shared_string_date">თარიღი</string>
     <string name="mapillary_menu_date_from">-დან</string>
     <string name="shared_string_to">-მდე</string>
     <string name="shared_string_permissions">უფლებები</string>
@@ -3283,8 +3283,9 @@
     <string name="edit_profile_screen_options_subtitle">აირჩიეთ ეკრანის პარამეტრები ამ პროფილისთვის</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">ველოსიპედის გზების ქსელის კვანძების ჩვენება</string>
     <string name="ui_customization_short_descr">მთავარი და კონტექსტური მენიუს პუნქტები</string>
-    <string name="select_data_to_import">აირჩიეთ შემოსატანი მონაცემები</string>
+    <string name="select_data_to_import">აირჩიეთ შემოსატანი მონაცემები.</string>
     <string name="none_point_error">დაამატეთ ერთი წერტილი მაინც.</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">ყინულიანი გზების თავიდან არიდება.</string>
     <string name="one_image_per_tile">ერთი გამოსახულების ფაილი ერთი ფილისთვის.</string>
+    <string name="keep_both_desc">შემოტანილი ელემენტები პრეფიქსით დაემატება</string>
 </resources>

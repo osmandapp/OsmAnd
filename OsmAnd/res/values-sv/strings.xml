@@ -2183,7 +2183,7 @@
     <string name="wrong_user_name">Fel användarnamn</string>
     <string name="shared_string_to">Till</string>
     <string name="mapillary_menu_date_from">Från</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="mapillary_menu_edit_text_hint">Ange användarnamn</string>
     <string name="mapillary_menu_title_username">Användarnamn</string>
     <string name="animate_my_location">Animera din egen position</string>

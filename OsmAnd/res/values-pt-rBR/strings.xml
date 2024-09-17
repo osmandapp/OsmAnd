@@ -2005,7 +2005,7 @@
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver somente imagens adicionadas</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Digite o nome de usuário</string>
     <string name="mapillary_menu_descr_username">Ver somente imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>
@@ -5874,11 +5874,16 @@
     <string name="my_location_action_descr">Centraliza o mapa em sua localização atual.</string>
     <string name="map_3d_mode_action_descr">Alterar a inclinação do mapa.</string>
     <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
-    <string name="raster_layers_action_descr">Alterar camadas de rasterização</string>
+    <string name="raster_layers_action_descr">Alterar camadas raster</string>
     <string name="search_action_descr">Abre a pesquisa.</string>
     <string name="navigation_action_descr">Abre a navegação.</string>
     <string name="drawer_button_description">Abre o menu principal.</string>
     <string name="corner_radius">Raio do canto</string>
     <string name="contour_layers_action_descr">Alterar camadas de contorno</string>
     <string name="type_of_activity">Tipo de atividade</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar trilhas de terra para bicicletas</string>
+    <string name="change_activity">Alterar atividade</string>
+    <string name="shared_string_increase">Aumentar</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>
+    <string name="shared_string_decrease">Diminuir</string>
 </resources>

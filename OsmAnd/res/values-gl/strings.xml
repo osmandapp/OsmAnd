@@ -1966,8 +1966,8 @@
     <string name="access_disable_offroute_recalc_descr">Non recalcula a rota, ó afastarss da mesma.</string>
     <string name="access_disable_wrong_direction_recalc">Non recalculares a rota cando se estea na dirección contraria</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evitar calcular de xeito automático a rota de novo cando se estea a mover na dirección errada.</string>
-    <string name="map_widget_magnetic_bearing">Traxectoria magnética</string>
-    <string name="map_widget_bearing">Traxectoria relativa</string>
+    <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
+    <string name="map_widget_bearing">Rumbo relativo</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superficie da estrada</string>
     <string name="osm_live_banner_desc">Obtén descargas ilimitadas de mapas, engadindo actualizacións semanais, diarias ou cada hora.</string>
     <string name="no_inet_connection_desc_map">Obrigatorio para baixar mapas.</string>
@@ -2176,7 +2176,7 @@
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Dende</string>
     <string name="mapillary_menu_descr_dates">Ollar só imaxes engadidas</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Insire o nome do usuario</string>
     <string name="mapillary_menu_descr_username">Ollar só imaxes engadidas por</string>
     <string name="mapillary_menu_title_username">Nome de usuario</string>
@@ -3634,7 +3634,7 @@
     <string name="shared_string_uninstall">Desinstalar</string>
     <string name="speed_cameras_restart_descr">Reiniciar para eliminar todos os datos do radar de velocidade.</string>
     <string name="speed_cameras_alert">As alertas de radares de velocidade nalgúns países están prohibidas por lei.</string>
-    <string name="shared_string_bearing">Levando</string>
+    <string name="shared_string_bearing">Rumbo</string>
     <string name="item_deleted">%1$s eliminado</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
     <string name="routing_attr_length_description">Especifica a lonxitude do vehículo para ser permitido nas rutas.</string>

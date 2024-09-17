@@ -2266,7 +2266,7 @@
     <string name="mapillary_menu_title_tile_cache">Кеш тайлов</string>
     <string name="wrong_user_name">Неверное имя пользователя</string>
     <string name="mapillary_menu_descr_dates">Показывать только добавленные изображения</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_descr_username">Просмотр фотографий пользователя</string>
     <string name="mapillary_menu_title_username">Имя пользователя</string>
     <string name="map_widget_ruler_control">Радиус-линейка</string>

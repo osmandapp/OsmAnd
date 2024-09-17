@@ -48,6 +48,7 @@ public class QuickActionButton extends MapButton {
 				boolean visible = layer.isWidgetVisibleForButton(this);
 				layer.setSelectedButton(visible ? null : this);
 			}
+			setInvalidated(true);
 		});
 		setOnLongClickListener(v -> {
 			Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);

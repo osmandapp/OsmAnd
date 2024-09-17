@@ -2494,7 +2494,7 @@
 
 	<string name="poi_cairn">Cairn</string>
 
-	<string name="poi_defibrillator">Defibrillator</string>
+	<string name="poi_defibrillator">Defibrillator;AED</string>
 	<string name="poi_defibrillator_yes">Defibrillator: yes</string>
 
 	<string name="poi_tomb_war_grave">Type: war grave</string>

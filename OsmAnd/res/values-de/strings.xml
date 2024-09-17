@@ -2390,7 +2390,7 @@
     <string name="shared_string_to">Bis</string>
     <string name="mapillary_menu_date_from">Von</string>
     <string name="mapillary_menu_descr_dates">Nur hinzugefügte Bilder betrachten</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="average">Durchschnitt</string>
     <string name="max_min">max/min</string>
     <string name="shared_string_reset">Zurücksetzen</string>
@@ -4371,7 +4371,7 @@
     <string name="shared_string_travelbooks">Reiseführer</string>
     <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
-    <string name="quick_action_toggle_preference">Ein Umschalter zum Ändern der Präferenz.</string>
+    <string name="quick_action_toggle_preference">Ein Schalter zum Ändern der Voreinstellung.</string>
     <string name="delete_history_items_descr">Ausgewählte Verlaufseinträge löschen\?</string>
     <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
@@ -5897,4 +5897,6 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Dirtbike-Trails anzeigen</string>
     <string name="type_of_activity">Art der Aktivität</string>
     <string name="change_activity">Aktivität ändern</string>
+    <string name="shared_string_increase">Erhöhen</string>
+    <string name="shared_string_decrease">Verringern</string>
 </resources>

@@ -86,7 +86,7 @@ public class CompassButton extends MapButton {
 			if (imageView.getDrawable() instanceof CompassDrawable drawable) {
 				drawable.setMapRotation(mapRotation);
 			}
-			invalidate();
+			imageView.invalidate();
 		}
 		CompassMode compassMode = settings.getCompassMode();
 		setContentDescription(app.getString(compassMode.getTitleId()));

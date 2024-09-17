@@ -667,6 +667,7 @@ public class SearchCoreFactory {
 						sr.priorityDistance = 1;
 					}
 					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
+					sr.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					phrase.countUnknownWordsMatchMainResult(sr);
 					sr.objectType = ObjectType.POI;
 					resultMatcher.publish(sr);
@@ -1363,6 +1364,7 @@ public class SearchCoreFactory {
 					}
 
 					res.object = object;
+					res.alternateName = object.getCityFromTagGroups(phrase.getSettings().getLang());
 					res.preferredZoom = PREFERRED_POI_ZOOM;
 					res.file = selected;
 					res.location = object.getLocation();

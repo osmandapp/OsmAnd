@@ -2384,7 +2384,7 @@
     <string name="wrong_user_name">Forkert brugernavn</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
@@ -4368,7 +4368,7 @@
 \nDu bedes ændre lageret fra Delt lager til tilgængeligt lager. Hvis dette ikke gøres, vil appen miste adgangen til dine data: herunder offline-kort, GPX-spor, etc.</string>
     <string name="delete_history_items_descr">Slet valgte historikelementer\?</string>
     <string name="delete_history_items">Slet %1$s historikelementer\?</string>
-    <string name="quick_action_toggle_preference">En skifter til at ændre præference.</string>
+    <string name="quick_action_toggle_preference">Et skifter til at ændre præference.</string>
     <string name="copying_file">Kopierer fil %1$s…</string>
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
     <string name="progress_complete">%1$s fuldført</string>
@@ -5898,4 +5898,6 @@
     <string name="raster_layers_action_descr">Skift raster-lag</string>
     <string name="type_of_activity">Aktivitetstype</string>
     <string name="change_activity">Skift aktivitet</string>
+    <string name="shared_string_increase">Øg</string>
+    <string name="shared_string_decrease">Mindsk</string>
 </resources>

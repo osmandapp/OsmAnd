@@ -2390,7 +2390,7 @@
     <string name="shared_string_to">Да</string>
     <string name="mapillary_menu_date_from">Ад</string>
     <string name="mapillary_menu_descr_dates">Паказваць толькі дададзеныя выявы</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
     <string name="mapillary_menu_descr_username">Паглядзець толькі выявы, дададзеныя</string>
     <string name="mapillary_menu_title_username">Імя карыстальніка</string>

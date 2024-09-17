@@ -1958,7 +1958,7 @@
     <string name="shared_string_reset">Resetoi</string>
     <string name="shared_string_reload">Lataa uudelleen</string>
     <string name="wrong_user_name">Väärä käyttäjänimi</string>
-    <string name="mapillary_menu_title_dates">Päiväys</string>
+    <string name="shared_string_date">Päiväys</string>
     <string name="mapillary_menu_edit_text_hint">Kirjoita käyttäjänimi</string>
     <string name="mapillary_menu_title_username">Käyttäjänimi</string>
     <string name="shared_string_permissions">Käyttöoikeudet</string>

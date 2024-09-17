@@ -2377,7 +2377,7 @@
     <string name="shared_string_to">al</string>
     <string name="mapillary_menu_date_from">de</string>
     <string name="mapillary_menu_descr_dates">Montri bildojn aldonitajn nur</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Enigu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
@@ -5886,4 +5886,8 @@
     <string name="raster_layers_action_descr">Ŝanĝi rastrumajn tavolojn</string>
     <string name="change_zoom_action_descr">Alĝustigi map-pligrandigon.</string>
     <string name="my_location_action_descr">Centrigi mapon al via nuna pozicio.</string>
+    <string name="type_of_activity">Speco de aktiveco</string>
+    <string name="change_activity">Ŝanĝi aktivecon</string>
+    <string name="shared_string_increase">Pliigi</string>
+    <string name="shared_string_decrease">Malpliigi</string>
 </resources>

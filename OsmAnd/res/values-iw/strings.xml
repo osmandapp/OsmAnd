@@ -1080,7 +1080,7 @@
     <string name="shared_string_to">עד</string>
     <string name="mapillary_menu_date_from">מ־</string>
     <string name="mapillary_menu_descr_dates">להציג תמונות שנוספו בלבד</string>
-    <string name="mapillary_menu_title_dates">תאריך</string>
+    <string name="shared_string_date">תאריך</string>
     <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
     <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו רק על ידי</string>
     <string name="mapillary_menu_title_username">שם משתמש</string>

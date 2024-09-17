@@ -2385,7 +2385,7 @@
     <string name="shared_string_to">إلى</string>
     <string name="mapillary_menu_date_from">مِن</string>
     <string name="mapillary_menu_descr_dates">عرض الصور المضافة في فترة زمنية معينة</string>
-    <string name="mapillary_menu_title_dates">التاريخ</string>
+    <string name="shared_string_date">التاريخ</string>
     <string name="mapillary_menu_edit_text_hint">اسم المستخدم</string>
     <string name="mapillary_menu_descr_username">عرض صور أضافها مستخدم معين</string>
     <string name="mapillary_menu_title_username">اسم المستخدم</string>

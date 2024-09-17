@@ -2382,7 +2382,7 @@
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Dae</string>
     <string name="mapillary_menu_descr_dates">Pompia sas immàgines annànghidas ebbia</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Iscrie su nùmene de s\'impreadore</string>
     <string name="mapillary_menu_descr_username">Ammustra petzi sas immàgines annantas dae su</string>
     <string name="mapillary_menu_title_username">Nùmene impreadore</string>
