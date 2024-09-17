@@ -303,7 +303,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected void onDraw(@NotNull Canvas canvas) {
 		super.onDraw(canvas);
 
-		if (!nightMode) {
+		if (!nightMode && appearanceParams != null) {
 			drawShadow(canvas);
 		}
 	}
