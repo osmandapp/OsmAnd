@@ -142,13 +142,7 @@ public class MenuBuilder {
 		public void onTaskStarted() {
 			if (!isHidden()) {
 				onLoadingImages(true);
-
-				for (OsmandPlugin plugin : menuPlugins) {
-					GetImageCardsListener listener = plugin.getImageCardsListener();
-					if (listener != null) {
-						listener.onTaskStarted();
-					}
-				}
+				PluginsHelper.onGetImageCardsStart();
 			}
 		}
 
@@ -157,13 +151,7 @@ public class MenuBuilder {
 			if (!isHidden()) {
 				onLoadingImages(false);
 				setOnlinePhotosCards(cardsHolder.getOrderedList());
-
-				for (OsmandPlugin plugin : menuPlugins) {
-					GetImageCardsListener listener = plugin.getImageCardsListener();
-					if (listener != null) {
-						listener.onFinish(cardsHolder);
-					}
-				}
+				PluginsHelper.onGetImageCardsFinished(cardsHolder);
 			}
 		}
 	};

@@ -48,7 +48,6 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 	private final LatLon latLon;
 	private final Map<String, String> params;
 	private final GetImageCardsListener listener;
-	private Pair<List<ImageCard>, List<ImageCard>> result;
 	private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
 	public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
@@ -117,7 +116,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 								}
 							}
 						} catch (JSONException e) {
-							e.printStackTrace();
+							LOG.error(e);
 						}
 					}
 				}
@@ -145,7 +144,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 				}
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return imageCard;
 	}

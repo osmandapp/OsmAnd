@@ -617,6 +617,24 @@ public class PluginsHelper {
 		}
 	}
 
+	public static void onGetImageCardsStart() {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			GetImageCardsListener listener = plugin.getImageCardsListener();
+			if (listener != null) {
+				listener.onTaskStarted();
+			}
+		}
+	}
+
+	public static void onGetImageCardsFinished(@NonNull ImageCardsHolder cardsHolder) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			GetImageCardsListener listener = plugin.getImageCardsListener();
+			if (listener != null) {
+				listener.onFinish(cardsHolder);
+			}
+		}
+	}
+
 	@Nullable
 	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
