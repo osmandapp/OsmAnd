@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import androidx.preference.Preference;
+
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -15,7 +17,7 @@ import de.KnollFrank.lib.settingssearch.search.provider.PreferenceDescription;
 
 class CustomPreferenceDescriptionsFactory {
 
-	public static List<PreferenceDescription> createCustomPreferenceDescriptions() {
+	public static List<PreferenceDescription<? extends Preference>> createCustomPreferenceDescriptions() {
 		return Arrays.asList(
 				getListPreferenceExDescription(),
 				getSwitchPreferenceExDescription(),
