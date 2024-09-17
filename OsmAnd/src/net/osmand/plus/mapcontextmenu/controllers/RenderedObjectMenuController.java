@@ -17,6 +17,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OsmUtils;
 
 import java.util.Map;
 
@@ -103,25 +104,23 @@ public class RenderedObjectMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		String lang = getPreferredMapLang().toLowerCase();
-		String nameTranslation = renderedObject.getName(lang);
+		String lang = getPreferredMapLangLC();
+		boolean transliterate = isTransliterateNames();
+		String name = renderedObject.getName(lang, transliterate);
 
-		if (!Algorithms.isEmpty(nameTranslation) && !isStartingWithRTLChar(nameTranslation)) {
-			return nameTranslation;
+		if (!Algorithms.isEmpty(name) && !isStartingWithRTLChar(name)) {
+			return name;
 		} else if (renderedObject.getTags().size() > 0) {
-			nameTranslation = "";
+			name = "";
 			if (!Algorithms.isEmpty(lang)) {
-				nameTranslation = renderedObject.getTagValue("name:" + lang);
+				name = renderedObject.getTagValue("name:" + lang);
 			}
-			if (Algorithms.isEmpty(nameTranslation)) {
-				nameTranslation = renderedObject.getTagValue("name");
+			if (Algorithms.isEmpty(name)) {
+				name = renderedObject.getTagValue("name");
 			}
 		}
-		if (!Algorithms.isEmpty(nameTranslation)) {
-			return nameTranslation;
-		}
-		if (renderedObject.isPolygon()) {
-			return getString(R.string.shared_string_undefined);
+		if (!Algorithms.isEmpty(name)) {
+			return name;
 		}
 		return searchObjectNameById();
 	}
@@ -132,7 +131,7 @@ public class RenderedObjectMenuController extends MenuController {
 		if (renderedObject.isPolygon()) {
 			return poiType != null ? poiType.getTranslation()
 					: poiCategory != null ? poiCategory.getTranslation()
-					: getString(R.string.shared_string_undefined);
+					: OsmUtils.getPrintTags(renderedObject);
 		}
 		return super.getTypeStr();
 	}

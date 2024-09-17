@@ -729,15 +729,23 @@ public class MapRendererContext {
 		if (obfMapObject != null) {
 			object.setId(obfMapObject.getId().getOsmId());
 		}
-		object.setIsPolygon(true);
+		object.markAsPolygon(true);
 		object.setOrder(order);
 
-		if (Algorithms.isEmpty(object.getNamesMap(true))) {
+		if (Algorithms.isEmpty(object.getName())) {
 			String captionInNativeLanguage = mapObject.getCaptionInNativeLanguage();
 			if (!Algorithms.isEmpty(captionInNativeLanguage)) {
 				object.setName(captionInNativeLanguage);
 			} else {
-				object.setName(OsmUtils.getOsmUrlForId(object));
+				Map<String, String> namesMap = object.getNamesMap(true);
+				if (!Algorithms.isEmpty(namesMap)) {
+					for (Entry<String, String> entry : namesMap.entrySet()) {
+						object.setName(entry.getValue());
+						break;
+					}
+				} else {
+					object.setName(OsmUtils.getOsmUrlForId(object));
+				}
 			}
 		}
 		return object;
