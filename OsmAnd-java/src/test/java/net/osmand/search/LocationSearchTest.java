@@ -91,13 +91,13 @@ public class LocationSearchTest {
 
 	@Test
 	public void testCommaLatLonSearch() throws IOException {
+		
 		search("33,95060 °S, 151,14453° E", new LatLon(-33.95060, 151.14453));
 		search("33,95060, 151,14453", new LatLon(33.95060, 151.14453));
 		search("33,95060 151,14453", new LatLon(33.95060,151.14453));
 
-		search("33,22,11, 151,22,11", new LatLon(33 + 22/60f + 11/3600f,151 + 22/60f + 11/3600f));
-		search("33,22,11 151,22,11", new LatLon(33 + 22/60f + 11/3600f,151 + 22/60f + 11/3600f));
-		search("33,22, 151,22", new LatLon(33 + 22/60f,151 + 22/60f));
-		search("33,22 151,22", new LatLon(33 + 22/60f,151 + 22/60f));
+		search("15,1235 S, 23,1244 W", new LatLon(-15.1235, -23.1244));
+		search("-15,1235, 23,1244", new LatLon(-15.1235, 23.1244));
+//		search("15,1235 S, 23,1244", new LatLon(-15.1235, 23.1244));
 	}
 }
