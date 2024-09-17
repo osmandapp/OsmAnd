@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -105,5 +106,10 @@ public abstract class BaseMenuController {
 		} else {
 			return null;
 		}
+	}
+
+	@NonNull
+	protected String getString(@StringRes int resId, Object... formatArgs) {
+		return mapActivity != null ? mapActivity.getString(resId, formatArgs) : "";
 	}
 }

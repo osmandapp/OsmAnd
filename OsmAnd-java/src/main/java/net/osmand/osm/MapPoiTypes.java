@@ -24,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -101,6 +102,10 @@ public class MapPoiTypes {
 
 	public boolean isInit() {
 		return init;
+	}
+
+	public boolean isOtherCategory(PoiCategory poiCategory) {
+		return Objects.equals(otherCategory, poiCategory);
 	}
 
 	public PoiCategory getOtherPoiCategory() {
