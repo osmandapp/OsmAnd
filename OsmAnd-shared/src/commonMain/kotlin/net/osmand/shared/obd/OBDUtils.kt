@@ -51,6 +51,15 @@ object OBDUtils {
 		return INVALID_RESPONSE_CODE
 	}
 
+	fun parseAmbientTempResponse(response: String): String {
+		val hexValues = response.trim().split(" ")
+		if (hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.command.lowercase()) {
+			val intakeAirTemp = hexValues[2].toInt(16)
+			return (intakeAirTemp - 40).toString()
+		}
+		return INVALID_RESPONSE_CODE
+	}
+
 	fun parseEngineCoolantTempResponse(response: String): String {
 		val hexValues = response.trim().split(" ")
 		if (hexValues.size >= 3 && hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND.command.lowercase()) {

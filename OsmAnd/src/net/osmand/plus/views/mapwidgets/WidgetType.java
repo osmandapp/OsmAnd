@@ -4,7 +4,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.OBD;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
@@ -110,12 +110,13 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	OBD_SPEED("obd_speed", R.string.shared_string_speed, R.string.obd_speed_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, 0, OBD, RIGHT),
-	OBD_RPM("obd_rpm", R.string.obd_rpm, R.string.obd_rpm_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, OBD, RIGHT),
-	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, OBD, RIGHT),
-	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, OBD, RIGHT),
-	OBD_FUEL_LEVEL("obd_fuel_level", R.string.obd_fuel_level, R.string.obd_fuel_level_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, OBD, RIGHT),
-	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, OBD, RIGHT),
+	OBD_SPEED("obd_speed", R.string.shared_string_speed, R.string.obd_speed_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_RPM("obd_rpm", R.string.obd_rpm, R.string.obd_rpm_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_LEVEL("obd_fuel_level", R.string.obd_fuel_level, R.string.obd_fuel_level_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
 	TEMPERATURE("temperature_sensor", R.string.shared_string_temperature, R.string.sensor_temperature_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, ANT_PLUS, RIGHT),
 	HEART_RATE("ant_heart_rate", R.string.map_widget_ant_heart_rate, R.string.map_widget_ant_heart_rate_desc, R.drawable.widget_sensor_heart_rate_day, R.drawable.widget_sensor_heart_rate_night, 0, ANT_PLUS, RIGHT),

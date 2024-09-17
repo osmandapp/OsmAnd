@@ -18,15 +18,15 @@ import okio.Source
 
 object OBDDispatcher {
 
-	private val commandQueue = ArrayList<OBDCommand>()
-	private val staleCommandsCache = HashMap<OBDCommand, String>()
+	private var commandQueue: List<OBDCommand> = ArrayList()
+	private val staleCommandsCache: MutableMap<OBDCommand, String> = HashMap()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
 	private const val TERMINATE_SYMBOL = "\r\r>"
 	private const val RESPONSE_LINE_TERMINATOR = "\r"
 	private const val READ_DATA_COMMAND_CODE = "01"
-	private val responseListeners = ArrayList<OBDResponseListener>()
+	private var responseListeners: List<OBDResponseListener> = ArrayList()
 	private var job: Job? = null
 	private var scope: CoroutineScope? = null
 	private var readStatusListener: OBDReadStatusListener? = null
@@ -65,7 +65,8 @@ object OBDDispatcher {
 							try {
 								val startReadTime = Clock.System.now().toEpochMilliseconds()
 								while (true) {
-									if (Clock.System.now().toEpochMilliseconds() - startReadTime > 3000) {
+									if (Clock.System.now()
+											.toEpochMilliseconds() - startReadTime > 3000) {
 										readResponseFailed = true
 										log.error("Read command ${command.name} timeout")
 										break
@@ -123,20 +124,20 @@ object OBDDispatcher {
 
 	fun addCommand(commandToRead: OBDCommand) {
 		if (commandQueue.indexOf(commandToRead) == -1) {
-			KCollectionUtils.addToList(commandQueue, commandToRead)
+			commandQueue = KCollectionUtils.addToList(commandQueue, commandToRead)
 		}
 	}
 
 	fun removeCommand(commandToStopReading: OBDCommand) {
-		KCollectionUtils.removeFromList(commandQueue, commandToStopReading)
+		commandQueue = KCollectionUtils.removeFromList(commandQueue, commandToStopReading)
 	}
 
 	fun addResponseListener(responseListener: OBDResponseListener) {
-		KCollectionUtils.addToList(responseListeners, responseListener)
+		responseListeners = KCollectionUtils.addToList(responseListeners, responseListener)
 	}
 
 	fun removeResponseListener(responseListener: OBDResponseListener) {
-		KCollectionUtils.removeFromList(responseListeners, responseListener)
+		responseListeners = KCollectionUtils.removeFromList(responseListeners, responseListener)
 	}
 
 	fun setReadStatusListener(listener: OBDReadStatusListener?) {

@@ -7,13 +7,6 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.graphics.drawable.Drawable
 import android.view.View
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
@@ -36,6 +29,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 import net.osmand.shared.obd.OBDAirIntakeTempDataField
+import net.osmand.shared.obd.OBDAmbientAirTempDataField
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataField
 import net.osmand.shared.obd.OBDDispatcher
@@ -50,7 +44,7 @@ import okio.sink
 import okio.source
 import java.util.UUID
 
-class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener,
+class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener,
 	OBDDispatcher.OBDReadStatusListener {
 	private val settings: OsmandSettings = app.settings
 
@@ -59,7 +53,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDevice: BluetoothDevice? = null
 	var socket: BluetoothSocket? = null
-	val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
+	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
 
 
 	init {
@@ -74,30 +68,6 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_LEVEL, *noAppMode)
 		OBDDispatcher.addResponseListener(this)
 		OBDDispatcher.setReadStatusListener(this)
-
-
-		val scope = CoroutineScope(Dispatchers.IO + Job())
-		scope.launch {
-			try {
-				while (true) {
-					LOG.debug("scope ${System.currentTimeMillis()/1000}")
-					delay(1000)
-				}
-			} catch (er: CancellationException) {
-				LOG.debug("scope canceled")
-			}
-		}
-
-		val scope2 = CoroutineScope(Dispatchers.IO + Job())
-		scope2.launch {
-			for (i in 0..4) {
-				LOG.debug("**scope2 ${System.currentTimeMillis()/1000}")
-				delay(2000)
-			}
-			scope.cancel()
-		}
-
-
 	}
 
 	override fun createWidgets(
@@ -127,6 +97,10 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 				mapActivity,
 				OBDWidgetDataFieldType.AIR_INTAKE_TEMP)
 
+			WidgetType.OBD_AMBIENT_AIR_TEMP -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.AMBIENT_AIR_TEMP)
+
 			WidgetType.OBD_FUEL_LEVEL -> return OBDTextWidget(
 				mapActivity,
 				OBDWidgetDataFieldType.FUEL_LVL)
@@ -150,7 +124,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 	}
 
 	override fun getId(): String {
-		return OsmAndCustomizationConstants.PLUGIN_OBD
+		return OsmAndCustomizationConstants.PLUGIN_VEHICLE_METRICS
 	}
 
 	override fun getName(): String {
@@ -163,6 +137,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 
 	override fun getLogoResourceId(): Int {
 		return R.drawable.ic_action_external_sensor
+//		return R.drawable.ic_action_car_info
 	}
 
 	override fun getAssetResourceImage(): Drawable? {
@@ -283,6 +258,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDEngineCoolantDataField(result)
 			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDFuelTypeDataField(result)
 			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDFuelLvlDataField(result)
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDAmbientAirTempDataField(result)
 			else -> null
 		}
 	}
@@ -299,7 +275,7 @@ class OBDPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener
 	}
 
 	companion object {
-		private val LOG = PlatformUtil.getLog(OBDPlugin::class.java)
+		private val LOG = PlatformUtil.getLog(VehicleMetricsPlugin::class.java)
 	}
 
 	override fun onIOError() {

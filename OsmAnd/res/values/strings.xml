@@ -55,22 +55,25 @@
     <string name="obd_fuel_type_unknown">Unknown Fuel Type</string>
 
     <string name="shared_string_obd">OBD</string>
+    <string name="obd_widget_group">Vehicle Metrics</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_speed_desc">Shows vehicle speed over OBD sensor</string>
     <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
     <string name="obd_air_intake_temp_desc">Shows vehicle intake air temperature over OBD sensor</string>
+    <string name="obd_ambient_air_temp_desc">Shows ambient air temperature over OBD sensor</string>
     <string name="obd_engine_coolant_temp_desc">Shows engine coolant temperature over OBD sensor</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
     <string name="obd_air_intake_temp">Intake air temperature</string>
+    <string name="obd_ambient_air_temp">Ambient air temperature</string>
     <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
     <string name="obd_fuel_level">Fuel level</string>
     <string name="obd_fuel_type">Fuel type</string>
 
 
-    <string name="obd_plugin_name">OBD</string>
+    <string name="obd_plugin_name">Vehicle Metrics</string>
     <string name="obd_plugin_description">Accesses you vehicle information over OBD protocol</string>
     <string name="obd_support">OBD support</string>
     <string name="background_opacity">Background opacity</string>

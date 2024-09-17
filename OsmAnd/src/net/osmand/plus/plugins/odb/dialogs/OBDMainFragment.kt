@@ -12,7 +12,7 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.odb.OBDPlugin
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDResponseListener
@@ -32,6 +32,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 	private var commandBtn8: Button? = null
 	private var commandBtn9: Button? = null
 	private var commandBtn10: Button? = null
+	private var commandBtn11: Button? = null
 	private var resp1: EditText? = null
 	private var resp2: EditText? = null
 	private var resp3: EditText? = null
@@ -42,8 +43,9 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 	private var resp8: EditText? = null
 	private var resp9: EditText? = null
 	private var resp10: EditText? = null
+	private var resp11: EditText? = null
 
-	protected var plugin: OBDPlugin? = null
+	protected var plugin: VehicleMetricsPlugin? = null
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -84,6 +86,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		resp8 = view.findViewById(R.id.resp8)
 		resp9 = view.findViewById(R.id.resp9)
 		resp10 = view.findViewById(R.id.resp10)
+		resp11 = view.findViewById(R.id.resp11)
 		deviceName = view.findViewById(R.id.device_name)
 		connectBtn = view.findViewById(R.id.connect)
 		connectBtn?.setOnClickListener {
@@ -108,6 +111,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn8 = view.findViewById(R.id.btn8)
 		commandBtn9 = view.findViewById(R.id.btn9)
 		commandBtn10 = view.findViewById(R.id.btn10)
+		commandBtn11 = view.findViewById(R.id.btn11)
 		commandBtn1?.text = OBDCommand.OBD_SUPPORTED_LIST1_COMMAND.name
 		commandBtn2?.text = OBDCommand.OBD_SUPPORTED_LIST2_COMMAND.name
 		commandBtn3?.text = OBDCommand.OBD_SUPPORTED_LIST3_COMMAND.name
@@ -118,6 +122,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn8?.text = OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.name
 		commandBtn9?.text = OBDCommand.OBD_FUEL_TYPE_COMMAND.name
 		commandBtn10?.text = OBDCommand.OBD_FUEL_LEVEL_COMMAND.name
+		commandBtn11?.text = OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.name
 
 		commandBtn1?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SUPPORTED_LIST1_COMMAND) }
 		commandBtn2?.setOnClickListener { addCommandToRead(OBDCommand.OBD_SUPPORTED_LIST2_COMMAND) }
@@ -129,6 +134,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		commandBtn8?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND) }
 		commandBtn9?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_TYPE_COMMAND) }
 		commandBtn10?.setOnClickListener { addCommandToRead(OBDCommand.OBD_FUEL_LEVEL_COMMAND) }
+		commandBtn11?.setOnClickListener { addCommandToRead(OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND) }
 	}
 
 	private fun updateUI() {
@@ -152,6 +158,8 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 			plugin?.isCommandListening(OBDCommand.OBD_FUEL_TYPE_COMMAND) == true
 		(commandBtn10 as ToggleButton).isSelected =
 			plugin?.isCommandListening(OBDCommand.OBD_FUEL_LEVEL_COMMAND) == true
+		(commandBtn11 as ToggleButton).isSelected =
+			plugin?.isCommandListening(OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND) == true
 	}
 
 	private fun addCommandToRead(command: OBDCommand) {
@@ -163,7 +171,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		super.onCreate(savedInstanceState)
 
 		plugin = PluginsHelper.getPlugin(
-			OBDPlugin::class.java)
+			VehicleMetricsPlugin::class.java)
 
 
 	}
@@ -209,6 +217,7 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> updateCommandResponse(resp8, result)
 				OBDCommand.OBD_FUEL_TYPE_COMMAND -> updateCommandResponse(resp9, result)
 				OBDCommand.OBD_FUEL_LEVEL_COMMAND -> updateCommandResponse(resp10, result)
+				OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> updateCommandResponse(resp11, result)
 			}
 			updateUI()
 		}

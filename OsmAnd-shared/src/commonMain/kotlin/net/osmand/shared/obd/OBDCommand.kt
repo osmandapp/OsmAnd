@@ -7,6 +7,7 @@ enum class OBDCommand(
 	OBD_SUPPORTED_LIST1_COMMAND("00", OBDUtils::parseSupportedCommandsResponse, true),
 	OBD_SUPPORTED_LIST2_COMMAND("20", OBDUtils::parseSupportedCommandsResponse, true),
 	OBD_SUPPORTED_LIST3_COMMAND("40", OBDUtils::parseSupportedCommandsResponse, true),
+	OBD_AMBIENT_AIR_TEMPERATURE_COMMAND("46", OBDUtils::parseAmbientTempResponse),
 	OBD_RPM_COMMAND("0C", OBDUtils::parseRpmResponse),
 	OBD_SPEED_COMMAND("0D", OBDUtils::parseSpeedResponse),
 	OBD_AIR_INTAKE_TEMP_COMMAND("0F", OBDUtils::parseIntakeAirTempResponse),
