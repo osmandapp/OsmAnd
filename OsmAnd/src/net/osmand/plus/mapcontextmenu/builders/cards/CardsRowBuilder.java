@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.NO_INTERNET_TYPE;
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.UPDATE_IMAGE_VIEW_TYPE;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -62,15 +61,13 @@ public class CardsRowBuilder {
 		setCards(Arrays.asList(cards));
 	}
 
-	public void setCards(Collection<? extends AbstractCard> cards) {
+	public void setCards(@NonNull Collection<? extends AbstractCard> cards) {
 		this.cards.clear();
-		if (cards != null) {
-			this.cards.addAll(cards);
-		}
+		this.cards.addAll(cards);
+
 		if (!menuBuilder.isHidden()) {
 			List<Object> list = new ArrayList<>(cards);
 			galleryGridAdapter.setItems(list);
-			galleryGridAdapter.notifyDataSetChanged();
 
 			MapContextMenu mapContextMenu = menuBuilder.getMapContextMenu();
 			if (itemsCount() > 0 && mapContextMenu != null) {
@@ -135,7 +132,7 @@ public class CardsRowBuilder {
 			@Override
 			public void onImageClicked(@NonNull ImageCard imageCard) {
 				if (onlinePhotos) {
-					GalleryPhotoPagerFragment.showInstance(mapActivity, galleryContextHelper.getOnlinePhotoCards().indexOf(imageCard));
+					GalleryPhotoPagerFragment.showInstance(mapActivity, galleryContextHelper.getImageCardFromUrl(imageCard.imageUrl));
 				} else {
 					mapActivity.getContextMenu().close();
 					MapillaryImageDialog.show(mapActivity, imageCard.getKey(), imageCard.getImageHiresUrl(), imageCard.getUrl(), imageCard.getLocation(),
@@ -149,21 +146,6 @@ public class CardsRowBuilder {
 					app.showShortToastMessage(R.string.shared_string_no_internet_connection);
 				} else {
 					menuBuilder.startLoadingImages();
-				}
-			}
-
-			@Override
-			public void onImageDownloaded(String imageUrl, Bitmap bitmap) {
-				List<Object> items = galleryGridAdapter.getItems();
-				for (int i = 0; i < items.size(); i++) {
-					Object object = items.get(i);
-					if (object instanceof ImageCard imageCard) {
-						String cardImageUrl = imageCard.getImageUrl();
-						if (cardImageUrl != null && cardImageUrl.equals(imageUrl)) {
-							imageCard.setBitmap(bitmap);
-							galleryGridAdapter.notifyItemChanged(i, UPDATE_IMAGE_VIEW_TYPE);
-						}
-					}
 				}
 			}
 		};

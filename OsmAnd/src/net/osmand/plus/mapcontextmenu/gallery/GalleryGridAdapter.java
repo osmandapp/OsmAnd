@@ -59,7 +59,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private final boolean isOnlinePhotos;
 	private boolean resizeBySpanCount = false;
 	private boolean loadingImages = false;
-	private Integer viewWidth;
+	private final Integer viewWidth;
 
 	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull GalleryContextHelper galleryContextHelper,
 	                          @NonNull ImageCardListener listener, @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
@@ -107,7 +107,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		return switch (viewType) {
 			case MAIN_IMAGE_TYPE, IMAGE_TYPE -> {
 				itemView = themedInflater.inflate(R.layout.gallery_card_item, parent, false);
-				yield new GalleryImageHolder(itemView, galleryContextHelper);
+				yield new GalleryImageHolder(app, itemView);
 			}
 			case MAPILLARY_CONTRIBUTE_TYPE -> {
 				itemView = themedInflater.inflate(R.layout.context_menu_card_add_mapillary_images, parent, false);
@@ -153,12 +153,6 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		if (!Algorithms.isEmpty(payloads) && payloads.get(0) instanceof Integer payLoadInteger) {
 			if (holder instanceof NoInternetHolder noInternetHolder && payLoadInteger == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE) {
 				noInternetHolder.updateProgressBar(loadingImages);
-			} else if (holder instanceof GalleryImageHolder galleryImageHolder && payLoadInteger == UPDATE_IMAGE_VIEW_TYPE) {
-				Object object = items.get(position);
-				if (object instanceof ImageCard imageCard) {
-					Bitmap bitmap = galleryContextHelper.getBitmap(imageCard.getImageUrl());
-					galleryImageHolder.updateImage(bitmap);
-				}
 			}
 		} else {
 			super.onBindViewHolder(holder, position, payloads);
@@ -222,7 +216,5 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 		default void onReloadImages() {
 		}
-
-		void onImageDownloaded(String imageUrl, Bitmap bitmap);
 	}
 }

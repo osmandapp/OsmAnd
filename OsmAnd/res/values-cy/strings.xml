@@ -289,7 +289,7 @@
     <string name="shared_string_add_photos">Ychwanegu lluniau</string>
     <string name="mapillary_menu_title_username">Enw defnyddiwr</string>
     <string name="mapillary_menu_edit_text_hint">Rhowch enw defnyddiwr</string>
-    <string name="mapillary_menu_title_dates">Dyddiad</string>
+    <string name="shared_string_date">Dyddiad</string>
     <string name="wrong_user_name">Enw defnyddiwr anghywir</string>
     <string name="shared_string_reload">Ail-lwytho</string>
     <string name="shared_string_reset">Ailosod</string>

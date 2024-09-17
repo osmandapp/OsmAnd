@@ -2084,7 +2084,7 @@
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Frá</string>
     <string name="mapillary_menu_descr_dates">Einungis skoða myndir sem bætt hefur verið inn</string>
-    <string name="mapillary_menu_title_dates">Dagsetning</string>
+    <string name="shared_string_date">Dagsetning</string>
     <string name="mapillary_menu_edit_text_hint">Ritaðu notandanafn</string>
     <string name="mapillary_menu_descr_username">Skoða myndir sem bætt hefur verið við af</string>
     <string name="mapillary_menu_title_username">Notandanafn</string>

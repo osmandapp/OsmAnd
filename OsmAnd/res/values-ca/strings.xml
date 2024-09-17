@@ -2376,7 +2376,7 @@
     <string name="shared_string_to">Fins</string>
     <string name="mapillary_menu_date_from">Des de</string>
     <string name="mapillary_menu_descr_dates">Mostra només les imatges afegides</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Indiqueu el nom d\'usuari</string>
     <string name="mapillary_menu_descr_username">Mostra només les imatges afegides per</string>
     <string name="mapillary_menu_title_username">Nom d\'usuari</string>

@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.gallery;
+package net.osmand.plus.mapcontextmenu.gallery.imageview;
 
 import static android.view.GestureDetector.*;
 
@@ -28,6 +28,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 public class GalleryImageView extends AppCompatImageView {
 	private static final float FINAL_SCALE_MIN_MULTIPLIER = .50f;
 	private static final float FINAL_SCALE_MAX_MULTIPLIER = 1.5f;
+	private static final float MAX_USER_SCALE = 3f;
+	private static final float MIN_USER_SCALE = 1f;
 	private static final float ZOOM_TIME = 400;
 
 	private Context ctx;
@@ -57,13 +59,11 @@ public class GalleryImageView extends AppCompatImageView {
 	private boolean onDrawReady;
 
 	public GalleryImageView(@NonNull Context context) {
-		super(context);
-		initView(context);
+		this(context, null);
 	}
 
 	public GalleryImageView(@NonNull Context context, @Nullable AttributeSet attrs) {
-		super(context, attrs);
-		initView(context);
+		this(context, attrs, 0);
 	}
 
 	public GalleryImageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
@@ -73,7 +73,7 @@ public class GalleryImageView extends AppCompatImageView {
 
 	@SuppressLint("ClickableViewAccessibility")
 	private void initView(@NonNull Context ctx) {
-		super.setClickable(true);
+		setClickable(true);
 		this.ctx = ctx;
 
 		scaleDetector = new ScaleGestureDetector(ctx, new ScaleListener());
@@ -85,8 +85,8 @@ public class GalleryImageView extends AppCompatImageView {
 		normalizedScale = 1;
 
 		scaleType = ScaleType.FIT_CENTER;
-		minScale = 1;
-		maxScale = 3;
+		minScale = MIN_USER_SCALE;
+		maxScale = MAX_USER_SCALE;
 
 		setImageMatrix(currentMatrix);
 		setScaleType(ScaleType.MATRIX);
@@ -736,20 +736,6 @@ public class GalleryImageView extends AppCompatImageView {
 
 	private void compatPostOnAnimation(Runnable runnable) {
 		postOnAnimation(runnable);
-	}
-
-	private static class ZoomParams {
-		public float scale;
-		public float focusX;
-		public float focusY;
-		public ScaleType scaleType;
-
-		public ZoomParams(float scale, float focusX, float focusY, @NonNull ScaleType scaleType) {
-			this.scale = scale;
-			this.focusX = focusX;
-			this.focusY = focusY;
-			this.scaleType = scaleType;
-		}
 	}
 
 	private enum State {NONE, DRAG, ZOOM, FLING, ANIMATE_ZOOM}

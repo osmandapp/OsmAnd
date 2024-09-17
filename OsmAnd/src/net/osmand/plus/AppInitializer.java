@@ -353,7 +353,7 @@ public class AppInitializer implements IProgress {
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.routeActivityHelper = startupInit(new RouteActivityHelper(app), RouteActivityHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
-		app.galleryContextHelper = startupInit(new GalleryContextHelper(app), GalleryContextHelper.class);
+		app.galleryContextHelper = startupInit(new GalleryContextHelper(), GalleryContextHelper.class);
 
 		initOpeningHoursParser();
 	}

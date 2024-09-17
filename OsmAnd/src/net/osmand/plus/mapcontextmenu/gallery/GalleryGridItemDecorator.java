@@ -17,9 +17,11 @@ public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
 	public static final int GRID_SCREEN_ITEM_SPACE_DP = 3;
 
 	private final OsmandApplication app;
+	private final int standardItemOffsetInPx;
 
 	public GalleryGridItemDecorator(@NonNull OsmandApplication app) {
 		this.app = app;
+		standardItemOffsetInPx = AndroidUtils.dpToPx(app, 6);
 	}
 
 	@Override
@@ -38,16 +40,16 @@ public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
 					outRect.top = gridSpace;
 				}
 				case MAIN -> {
-					outRect.right = AndroidUtils.dpToPx(app, 6);
+					outRect.right = standardItemOffsetInPx;
 				}
 				case STANDARD -> {
-					outRect.right = AndroidUtils.dpToPx(app, 6);
-					outRect.left = AndroidUtils.dpToPx(app, 6);
+					outRect.right = standardItemOffsetInPx;
+					outRect.left = standardItemOffsetInPx;
 					if (position % 2 == 0) {
-						outRect.top = AndroidUtils.dpToPx(app, 6);
+						outRect.top = standardItemOffsetInPx;
 						outRect.bottom = 0;
 					} else {
-						outRect.bottom = AndroidUtils.dpToPx(app, 6);
+						outRect.bottom = standardItemOffsetInPx;
 						outRect.top = 0;
 					}
 				}

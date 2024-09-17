@@ -2393,7 +2393,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_to">この日付以前</string>
     <string name="mapillary_menu_date_from">この日付以降</string>
     <string name="mapillary_menu_descr_dates">指定の期間に追加された画像だけを表示します</string>
-    <string name="mapillary_menu_title_dates">日付</string>
+    <string name="shared_string_date">日付</string>
     <string name="mapillary_menu_edit_text_hint">ユーザー名を入力</string>
     <string name="mapillary_menu_descr_username">指定のユーザーに追加された画像だけを表示します</string>
     <string name="mapillary_menu_title_username">ユーザー名</string>

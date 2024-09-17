@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.gallery;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGES_COUNT_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.UPDATE_IMAGE_VIEW_TYPE;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -114,22 +113,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 		return new ImageCardListener() {
 			@Override
 			public void onImageClicked(@NonNull ImageCard imageCard) {
-				GalleryPhotoPagerFragment.showInstance(getMapActivity(), galleryContextHelper.getOnlinePhotoCards().indexOf(imageCard));
-			}
-
-			@Override
-			public void onImageDownloaded(String imageUrl, Bitmap bitmap) {
-				List<Object> items = galleryGridAdapter.getItems();
-				for (int i = 0; i < items.size(); i++) {
-					Object object = items.get(i);
-					if (object instanceof ImageCard imageCard) {
-						String cardImageUrl = imageCard.getImageUrl();
-						if (cardImageUrl != null && cardImageUrl.equals(imageUrl)) {
-							imageCard.setBitmap(bitmap);
-							galleryGridAdapter.notifyItemChanged(i, UPDATE_IMAGE_VIEW_TYPE);
-						}
-					}
-				}
+				GalleryPhotoPagerFragment.showInstance(getMapActivity(), galleryContextHelper.getImageCardFromUrl(imageCard.getImageUrl()));
 			}
 		};
 	}

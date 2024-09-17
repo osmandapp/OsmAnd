@@ -872,7 +872,7 @@
     <string name="shared_string_reload">wobnowić</string>
     <string name="wrong_user_name">Wopačne wužiwarske mjeno</string>
     <string name="mapillary_menu_date_from">Wot</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="mapillary_menu_edit_text_hint">Wužiwarske mjeno zapodać</string>
     <string name="shared_string_permissions">Prawa</string>
     <string name="shared_string_install">Instalować</string>

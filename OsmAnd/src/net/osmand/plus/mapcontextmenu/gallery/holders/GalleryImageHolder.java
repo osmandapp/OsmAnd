@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,22 +28,22 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
 public class GalleryImageHolder extends RecyclerView.ViewHolder {
-	private static final int MAIN_PHOTO_SIZE_DP = 156;
+	private final int MAIN_PHOTO_SIZE_DP;
 
-	private static final int STANDARD_PHOTO_SIZE_DP = 72;
+	private final int STANDARD_PHOTO_SIZE_DP;
 
 	private final ImageView imageView;
 	private final ImageView sourceTypeView;
 	private final View itemView;
-	private final GalleryContextHelper galleryContextHelper;
 	private ImageHolderType type;
 
-	public GalleryImageHolder(@NonNull View itemView, @NonNull GalleryContextHelper galleryContextHelper) {
+	public GalleryImageHolder(OsmandApplication app, @NonNull View itemView) {
 		super(itemView);
 		this.itemView = itemView;
-		this.galleryContextHelper = galleryContextHelper;
 		imageView = itemView.findViewById(R.id.image);
 		sourceTypeView = itemView.findViewById(R.id.source_type);
+		MAIN_PHOTO_SIZE_DP = app.getResources().getDimensionPixelSize(R.dimen.gallery_big_icon_size);
+		STANDARD_PHOTO_SIZE_DP = app.getResources().getDimensionPixelSize(R.dimen.gallery_standard_icon_size);
 	}
 
 	public void bindView(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener, @NonNull ImageCard imageCard,
@@ -49,12 +52,20 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = mapActivity.getMyApplication();
 		setupView(mapActivity, viewWidth, nightMode);
 
-		Bitmap bitmap = galleryContextHelper.getBitmap(imageCard.getImageUrl(), listener);
-		if (bitmap != null) {
-			setImage(bitmap);
-		} else {
-			setEmptyImage(app, nightMode);
-		}
+		Picasso.get().load(imageCard.getImageUrl()).into(imageView, new Callback() {
+			@Override
+			public void onSuccess() {
+				FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+				layoutParams.gravity = Gravity.CENTER;
+				imageView.setLayoutParams(layoutParams);
+				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			}
+
+			@Override
+			public void onError(Exception e) {
+
+			}
+		});
 		imageView.setOnClickListener(v -> listener.onImageClicked(imageCard));
 
 		if (type == MAIN) {
@@ -67,12 +78,6 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 			}
 		} else {
 			setSourceTypeIcon(null);
-		}
-	}
-
-	public void updateImage(@Nullable Bitmap bitmap) {
-		if (bitmap != null) {
-			setImage(bitmap);
 		}
 	}
 
@@ -96,8 +101,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 			}
 			sizeInPx = calculateItemSize(spanCount, recyclerViewPadding, itemSpace, screenWidth);
 		} else {
-			int imageSize = type == MAIN ? MAIN_PHOTO_SIZE_DP : STANDARD_PHOTO_SIZE_DP;
-			sizeInPx = AndroidUtils.dpToPx(app, imageSize);
+			sizeInPx = type == MAIN ? MAIN_PHOTO_SIZE_DP : STANDARD_PHOTO_SIZE_DP;
 		}
 		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(sizeInPx, sizeInPx);
 		itemView.setLayoutParams(layoutParams);
@@ -107,25 +111,6 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 	private int calculateItemSize(int spanCount, int recyclerViewPadding, int itemSpace, int screenWidth) {
 		int spaceForItems = screenWidth - ((recyclerViewPadding * 2) + (spanCount * itemSpace));
 		return spaceForItems / spanCount;
-	}
-
-	private void setImage(Bitmap bitmap) {
-		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-		layoutParams.gravity = Gravity.CENTER;
-		imageView.setLayoutParams(layoutParams);
-		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		imageView.setImageBitmap(bitmap);
-	}
-
-	private void setEmptyImage(@NonNull OsmandApplication app, boolean nightMode) {
-		int sizeInDp = AndroidUtils.dpToPx(app, 24);
-		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(sizeInDp, sizeInDp);
-		layoutParams.gravity = Gravity.CENTER;
-		imageView.setLayoutParams(layoutParams);
-		imageView.setImageBitmap(null);
-		Drawable emptyIcon = app.getUIUtilities().getPaintedIcon(R.drawable.mm_tourism_museum, ColorUtilities.getDefaultIconColor(app, nightMode));
-		imageView.setImageDrawable(emptyIcon);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	}
 
 	public ImageHolderType getHolderType() {

@@ -34,6 +34,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
+	private GalleryContextHelper galleryContextHelper;
 	private Toolbar toolbar;
 	private ImageView navigationIcon;
 	private int selectedPosition = 0;
@@ -41,6 +42,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.galleryContextHelper = app.getGalleryContextHelper();
 	}
 
 	@Nullable
@@ -76,7 +78,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 	}
 
 	private void fillContent(LinearLayout mainContainer) {
-		ImageCard card = app.getGalleryContextHelper().getOnlinePhotoCards().get(selectedPosition);
+		ImageCard card = galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
 
 		String author = getAuthor();
 		if (!Algorithms.isEmpty(author)) {

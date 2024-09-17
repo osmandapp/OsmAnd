@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.gallery;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment.SELECTED_POSITION_KEY;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,11 +14,12 @@ import androidx.annotation.Nullable;
 
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
 
 public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
@@ -47,20 +47,10 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
 
+		imageView = view.findViewById(R.id.image);
 		GalleryContextHelper galleryContextHelper = app.getGalleryContextHelper();
 		ImageCard selectedImageCard = galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
-		imageView = view.findViewById(R.id.image);
-		imageView.setImageBitmap(galleryContextHelper.getBitmap(selectedImageCard.getImageUrl(), new GalleryGridAdapter.ImageCardListener() {
-			@Override
-			public void onImageClicked(@NonNull ImageCard imageCard) {
-
-			}
-
-			@Override
-			public void onImageDownloaded(String imageUrl, Bitmap bitmap) {
-				imageView.setImageBitmap(bitmap);
-			}
-		}));
+		Picasso.get().load(selectedImageCard.getImageUrl()).into(imageView);
 
 		imageView.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
 			@Override
@@ -99,6 +89,7 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 	}
 
+	@NonNull
 	public static Fragment newInstance(int selectedPosition, Fragment targetFragment) {
 		Bundle bundle = new Bundle();
 		bundle.putInt(SELECTED_POSITION_KEY, selectedPosition);

@@ -2219,7 +2219,7 @@
     <string name="shared_string_to">تا</string>
     <string name="mapillary_menu_date_from">از</string>
     <string name="mapillary_menu_descr_dates">فقط تصاویری که در بازهٔ زمانی زیر اضافه شده است</string>
-    <string name="mapillary_menu_title_dates">تاریخ</string>
+    <string name="shared_string_date">تاریخ</string>
     <string name="mapillary_menu_edit_text_hint">نام کاربری را بنویسید</string>
     <string name="mapillary_menu_descr_username">فقط تصاویری که کاربر زیر اضافه کرده است</string>
     <string name="mapillary_menu_title_username">نام کاربری</string>

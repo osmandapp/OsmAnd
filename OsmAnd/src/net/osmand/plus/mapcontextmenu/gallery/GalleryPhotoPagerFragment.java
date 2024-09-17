@@ -392,8 +392,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(null)
-					.setReorderingAllowed(true)
+					.addToBackStack(TAG)
 					.commit();
 		}
 	}
