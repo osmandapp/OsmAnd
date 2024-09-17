@@ -27,72 +27,62 @@ class CustomPreferenceDescriptionsFactory {
 	private static PreferenceDescription<ListPreferenceEx> getListPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				ListPreferenceEx.class,
-				preference -> {
-					final ListPreferenceEx listPreferenceEx = (ListPreferenceEx) preference;
-					return String.join(
-							", ",
-							concat(
-									Optional.ofNullable(listPreferenceEx.getDialogTitle()),
-									Optional.ofNullable(listPreferenceEx.getDescription()),
-									Optional.ofNullable(listPreferenceEx.getEntries())));
-				});
+				listPreferenceEx ->
+						String.join(
+								", ",
+								concat(
+										Optional.ofNullable(listPreferenceEx.getDialogTitle()),
+										Optional.ofNullable(listPreferenceEx.getDescription()),
+										Optional.ofNullable(listPreferenceEx.getEntries()))));
 	}
 
 	private static PreferenceDescription<SwitchPreferenceEx> getSwitchPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				SwitchPreferenceEx.class,
-				preference -> {
-					final SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) preference;
-					return String.join(
-							", ",
-							Lists.getPresentElements(
-									Arrays.asList(
-											Optional.ofNullable(switchPreferenceEx.getSummaryOff()),
-											Optional.ofNullable(switchPreferenceEx.getSummaryOn()),
-											Optional.ofNullable(switchPreferenceEx.getDescription()))));
-				});
+				switchPreferenceEx ->
+						String.join(
+								", ",
+								Lists.getPresentElements(
+										Arrays.asList(
+												Optional.ofNullable(switchPreferenceEx.getSummaryOff()),
+												Optional.ofNullable(switchPreferenceEx.getSummaryOn()),
+												Optional.ofNullable(switchPreferenceEx.getDescription())))));
 	}
 
 	private static PreferenceDescription<MultiSelectBooleanPreference> getMultiSelectBooleanPreferenceDescription() {
 		return new PreferenceDescription<>(
 				MultiSelectBooleanPreference.class,
-				preference -> {
-					final MultiSelectBooleanPreference multiSelectBooleanPreference = (MultiSelectBooleanPreference) preference;
-					return String.join(
-							", ",
-							concat(
-									Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle()),
-									Optional.ofNullable(multiSelectBooleanPreference.getDescription()),
-									Optional.ofNullable(multiSelectBooleanPreference.getEntries())));
-				});
+				multiSelectBooleanPreference ->
+						String.join(
+								", ",
+								concat(
+										Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle()),
+										Optional.ofNullable(multiSelectBooleanPreference.getDescription()),
+										Optional.ofNullable(multiSelectBooleanPreference.getEntries()))));
 	}
 
 	private static PreferenceDescription<EditTextPreferenceEx> getEditTextPreferenceExDescription() {
 		return new PreferenceDescription<>(
 				EditTextPreferenceEx.class,
-				preference -> {
-					final EditTextPreferenceEx textPreferenceEx = (EditTextPreferenceEx) preference;
-					return String.join(
-							", ",
-							Lists.getPresentElements(
-									Arrays.asList(
-											Optional.ofNullable(textPreferenceEx.getText()),
-											Optional.ofNullable(textPreferenceEx.getDescription()))));
-				});
+				editTextPreferenceEx ->
+						String.join(
+								", ",
+								Lists.getPresentElements(
+										Arrays.asList(
+												Optional.ofNullable(editTextPreferenceEx.getText()),
+												Optional.ofNullable(editTextPreferenceEx.getDescription())))));
 	}
 
 	private static PreferenceDescription<SizePreference> getSizePreferenceDescription() {
 		return new PreferenceDescription<>(
 				SizePreference.class,
-				preference -> {
-					final SizePreference sizePreference = (SizePreference) preference;
-					return String.join(
-							", ",
-							Lists.getPresentElements(
-									Arrays.asList(
-											Optional.ofNullable(sizePreference.getDialogTitle()),
-											Optional.ofNullable(sizePreference.getSummary()))));
-				});
+				sizePreference ->
+						String.join(
+								", ",
+								Lists.getPresentElements(
+										Arrays.asList(
+												Optional.ofNullable(sizePreference.getDialogTitle()),
+												Optional.ofNullable(sizePreference.getSummary())))));
 	}
 
 	private static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
