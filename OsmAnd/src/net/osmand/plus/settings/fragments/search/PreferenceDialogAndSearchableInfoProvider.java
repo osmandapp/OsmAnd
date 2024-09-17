@@ -19,18 +19,18 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 		// FK-TODO: handle more preference dialogs, which shall be searchable
 		if (isSendAnonymousData(preference)) {
 			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 							new SendAnalyticsBottomSheetDialogFragment(),
-							customDialogFragment -> ((SendAnalyticsBottomSheetDialogFragment) customDialogFragment).getSearchableInfo()));
+							SendAnalyticsBottomSheetDialogFragment::getSearchableInfo));
 		}
 		if (isSimulateYourLocation(preference)) {
-			final SimulateLocationFragment preferenceDialog = new SimulateLocationFragment();
-			preferenceDialog.setGpxFile(null);
+			final SimulateLocationFragment simulateLocationFragment = new SimulateLocationFragment();
+			simulateLocationFragment.setGpxFile(null);
 			// fragment.usedOnMap = false;
 			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
-							preferenceDialog,
-							customDialogFragment -> ((SimulateLocationFragment) customDialogFragment).getSearchableInfo()));
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+							simulateLocationFragment,
+							SimulateLocationFragment::getSearchableInfo));
 		}
 		return Optional.empty();
 	}
