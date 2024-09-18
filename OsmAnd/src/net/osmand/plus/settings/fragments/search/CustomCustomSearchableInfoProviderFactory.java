@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import androidx.preference.Preference;
-
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -19,20 +17,20 @@ class CustomCustomSearchableInfoProviderFactory {
 
 	public static SearchableInfoProvider createCustomSearchableInfoProvider() {
 		return preference -> {
-			if (hasClass(preference, ListPreferenceEx.class)) {
-				return Optional.of(getListPreferenceExSearchableInfo((ListPreferenceEx) preference));
+			if (preference instanceof final ListPreferenceEx listPreferenceEx) {
+				return Optional.of(getListPreferenceExSearchableInfo(listPreferenceEx));
 			}
-			if (hasClass(preference, SwitchPreferenceEx.class)) {
-				return Optional.of(getSwitchPreferenceExSearchableInfo((SwitchPreferenceEx) preference));
+			if (preference instanceof final SwitchPreferenceEx switchPreferenceEx) {
+				return Optional.of(getSwitchPreferenceExSearchableInfo(switchPreferenceEx));
 			}
-			if (hasClass(preference, MultiSelectBooleanPreference.class)) {
-				return Optional.of(getMultiSelectBooleanPreferenceSearchableInfo((MultiSelectBooleanPreference) preference));
+			if (preference instanceof final MultiSelectBooleanPreference multiSelectBooleanPreference) {
+				return Optional.of(getMultiSelectBooleanPreferenceSearchableInfo(multiSelectBooleanPreference));
 			}
-			if (hasClass(preference, EditTextPreferenceEx.class)) {
-				return Optional.of(getEditTextPreferenceExSearchableInfo((EditTextPreferenceEx) preference));
+			if (preference instanceof final EditTextPreferenceEx editTextPreferenceEx) {
+				return Optional.of(getEditTextPreferenceExSearchableInfo(editTextPreferenceEx));
 			}
-			if (hasClass(preference, SizePreference.class)) {
-				return Optional.of(getSizePreferenceSearchableInfo((SizePreference) preference));
+			if (preference instanceof final SizePreference sizePreference) {
+				return Optional.of(getSizePreferenceSearchableInfo(sizePreference));
 			}
 			return Optional.empty();
 		};
@@ -82,10 +80,6 @@ class CustomCustomSearchableInfoProviderFactory {
 						Arrays.asList(
 								Optional.ofNullable(sizePreference.getDialogTitle()),
 								Optional.ofNullable(sizePreference.getSummary()))));
-	}
-
-	private static boolean hasClass(final Preference preference, final Class<? extends Preference> preferenceClass) {
-		return preference.getClass().equals(preferenceClass);
 	}
 
 	private static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
