@@ -379,7 +379,7 @@ public class GpxRouteApproximation {
 					lastStraightLine = new ArrayList<LatLon>();
 					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
 						RoutePlannerFrontEnd.GpxPoint prev = gctx.finalPoints.get(gctx.finalPoints.size() - 1);
-						router.makeSegmentPointPrecise(gctx.ctx, prev.getLastRouteRes(), prev.loc, false);
+						router.makeSegmentPointPrecise(gctx.ctx, prev.getLastRouteRes(), pnt.loc, false);
 						lastStraightLine.add(gctx.getLastPoint());
 					}
 					straightPointStart = pnt;
