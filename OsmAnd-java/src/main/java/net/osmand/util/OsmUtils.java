@@ -62,9 +62,26 @@ public class OsmUtils {
 	public static String getPrintTags(RenderedObject renderedObject) {
 		StringBuilder s = new StringBuilder();
 		for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-			s.append(" ").append(entry.getKey()).append(":").append(entry.getValue());
+			String key = entry.getKey();
+			String value = entry.getValue();
+			boolean keyEmpty = Algorithms.isEmpty(key);
+			boolean valueEmpty = Algorithms.isEmpty(value);
+			boolean bothPresent = !keyEmpty && !valueEmpty;
+			boolean anyPresent = !keyEmpty || !valueEmpty;
+			if (!keyEmpty) {
+				s.append(key);
+			}
+			if (bothPresent) {
+				s.append(":");
+			}
+			if (!valueEmpty) {
+				s.append(value);
+			}
+			if (anyPresent) {
+				s.append(" ");
+			}
 		}
-		return s.toString();
+		return s.toString().trim();
 	}
 
 	public static boolean isOsmUrlAvailable(MapObject object) {
