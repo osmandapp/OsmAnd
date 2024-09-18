@@ -5904,4 +5904,6 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
     <string name="shared_string_decrease">Зменшення</string>
     <string name="shared_string_increase">Збільшення</string>
+    <string name="no_photos_available_descr">До цієї локації ще не додано жодної фотографії користувача</string>
+    <string name="no_photos_available">Фото відсутні</string>
 </resources>
