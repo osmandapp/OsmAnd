@@ -303,7 +303,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 				}
 				List<AbstractCard> cards = new ArrayList<>(cardsHolder.getMapillaryList());
 				if (cardsHolder.getMapillaryList().isEmpty()) {
-					cards.add(new NoImagesCard(mapActivity));
+					if (mapActivity != null) {
+						cards.add(new NoImagesCard(mapActivity));
+					}
 				}
 				if (mapillaryCardsRow != null) {
 					mapillaryCardsRow.setCards(cards);

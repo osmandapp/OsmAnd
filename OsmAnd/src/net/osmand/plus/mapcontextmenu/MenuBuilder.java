@@ -62,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
@@ -163,6 +164,7 @@ public class MenuBuilder {
 		public void onFinish(ImageCardsHolder cardsHolder) {
 			if (!isHidden()) {
 				onLoadingImages(false);
+				app.getGalleryContextHelper().setCurrentCardsHolder(cardsHolder);
 				setOnlinePhotosCards(cardsHolder.getOrderedList());
 				PluginsHelper.onGetImageCardsFinished(cardsHolder);
 			}
@@ -172,12 +174,13 @@ public class MenuBuilder {
 	private void setOnlinePhotosCards(List<ImageCard> onlinePhotosCards) {
 		List<AbstractCard> cards = new ArrayList<>(onlinePhotosCards);
 		if (onlinePhotosCards.isEmpty()) {
-			cards.add(new NoImagesCard(mapActivity));
+			if(mapActivity != null){
+				cards.add(new NoImagesCard(mapActivity));
+			}
 		}
 		if (onlinePhotoCardsRow != null) {
 			onlinePhotoCardsRow.setCards(cards);
 		}
-		app.getGalleryContextHelper().setOnlinePhotoCards(onlinePhotosCards);
 		onlinePhotoCards = cards;
 	}
 
@@ -347,6 +350,7 @@ public class MenuBuilder {
 	void onClose() {
 		onlinePhotoCardsRow = null;
 		onlinePhotoCards = null;
+		app.getGalleryContextHelper().clearHolder();
 		clearPluginRows();
 	}
 
@@ -687,6 +691,12 @@ public class MenuBuilder {
 			return;
 		}
 		onlinePhotoCards = new ArrayList<>();
+		GalleryContextHelper galleryContextHelper = app.getGalleryContextHelper();
+		LatLon latLon = getLatLon();
+		Map<String, String> params = getAdditionalCardParams();
+		if (galleryContextHelper.isCurrentHolderEquals(latLon, params)) {
+			imageCardListener.onFinish(galleryContextHelper.getCurrentCardsHolder());
+		}
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}
 

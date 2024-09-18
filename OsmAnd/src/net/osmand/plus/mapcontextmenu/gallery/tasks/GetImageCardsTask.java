@@ -69,7 +69,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 	@Override
 	protected ImageCardsHolder doInBackground(Void... voids) {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
-		ImageCardsHolder holder = new ImageCardsHolder();
+		ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
 		try {
 			Map<String, String> httpPms = new LinkedHashMap<>();
 			httpPms.put("lat", "" + (float) latLon.getLatitude());
@@ -86,7 +86,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 			if (!Algorithms.isEmpty(preferredLang)) {
 				httpPms.put("lang", preferredLang);
 			}
-			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params);
+			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params, true);
 			for (WikiImage wikiImage : wikimediaImageList) {
 				holder.add(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}
@@ -129,9 +129,9 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 	}
 
 	@Override
-	protected void onPostExecute(ImageCardsHolder cardList) {
+	protected void onPostExecute(ImageCardsHolder cardsHolder) {
 		if (listener != null) {
-			listener.onFinish(cardList);
+			listener.onFinish(cardsHolder);
 		}
 	}
 	private static ImageCard createCard(MapActivity mapActivity, JSONObject imageObject) {

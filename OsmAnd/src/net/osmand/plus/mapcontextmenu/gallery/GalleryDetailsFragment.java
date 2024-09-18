@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper.DownloadMetaDataListener;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -38,11 +39,14 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 	private Toolbar toolbar;
 	private ImageView navigationIcon;
 	private int selectedPosition = 0;
-
+	private LinearLayout mainContainer;
+	private DownloadMetaDataListener metaDataListener;
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.galleryContextHelper = app.getGalleryContextHelper();
+		metaDataListener = getMetaDataListener();
+		galleryContextHelper.addMetaDataListener(metaDataListener);
 	}
 
 	@Nullable
@@ -62,7 +66,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 
 		toolbar = view.findViewById(R.id.toolbar);
 		navigationIcon = toolbar.findViewById(R.id.close_button);
-		LinearLayout mainContainer = view.findViewById(R.id.container);
+		mainContainer = view.findViewById(R.id.container);
 
 		fillContent(mainContainer);
 
@@ -77,21 +81,42 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	private void fillContent(LinearLayout mainContainer) {
-		ImageCard card = galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		galleryContextHelper.removeMetaDataListener(metaDataListener);
+	}
 
-		String author = getAuthor();
+	private ImageCard getSelectedCard(){
+		return galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
+	}
+
+	private void fillContent(LinearLayout mainContainer) {
+		mainContainer.removeAllViews();
+		ImageCard card = getSelectedCard();
+		String author = null;
+		String date = null;
+		String license = null;
+		if (card instanceof WikiImageCard wikiImageCard) {
+			author = wikiImageCard.author;
+			date = wikiImageCard.date;
+			license = wikiImageCard.license;
+		}
+
 		if (!Algorithms.isEmpty(author)) {
 			buildItem(mainContainer, app.getString(R.string.shared_string_author), author, R.drawable.ic_action_user, true, false);
 		}
 
-		String date = getDate();
 		if (!Algorithms.isEmpty(date)) {
 			buildItem(mainContainer, app.getString(R.string.shared_string_added), date, R.drawable.ic_action_sort_by_date, true, false);
 		}
 
 		int iconId = card.getTopIconId();
 		buildItem(mainContainer, app.getString(R.string.shared_string_source), getSourceTypeName(card), iconId, false, false);
+
+		if (!Algorithms.isEmpty(license)) {
+			buildItem(mainContainer, app.getString(R.string.shared_string_license), license, R.drawable.ic_action_copyright, true, false);
+		}
 
 		String link = !Algorithms.isEmpty(card.getImageHiresUrl()) ? card.getImageHiresUrl() : card.getImageUrl();
 		buildItem(mainContainer, app.getString(R.string.shared_string_link), link, R.drawable.ic_action_link, true, true);
@@ -103,16 +128,6 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 			typeName = app.getString(R.string.wikimedia);
 		}
 		return typeName;
-	}
-
-	@Nullable
-	private String getDate() {
-		return null;
-	}
-
-	@Nullable
-	private String getAuthor() {
-		return null;
 	}
 
 	private void buildItem(@NonNull ViewGroup container, @NonNull String title, @NonNull String description,
@@ -158,6 +173,14 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 			FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
 			fragmentManager.popBackStack();
 		});
+	}
+
+	private DownloadMetaDataListener getMetaDataListener(){
+		return wikiImageCard -> {
+			if(wikiImageCard.getImageUrl().equals(getSelectedCard().getImageUrl())){
+				fillContent(mainContainer);
+			}
+		};
 	}
 
 	@Override

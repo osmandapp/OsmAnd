@@ -84,11 +84,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		toolbar.setLayoutParams(params);
 
 		sourceView = view.findViewById(R.id.source_icon);
-		dateView = view.findViewById(R.id.date);
-		dateView.setTextColor(ColorUtilities.getTertiaryTextColor(app, nightMode));
-
-		authorView = view.findViewById(R.id.author);
-		authorView.setTextColor(ColorUtilities.getTertiaryTextColor(app, nightMode));
+		setupMetadataRow(view);
 
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
@@ -112,7 +108,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			@Override
 			public void onPageSelected(int position) {
 				selectedPosition = position;
-				updateImageDescription(getSelectedImageCard());
+				updateImageDescriptionRow(getSelectedImageCard());
 			}
 
 			@Override
@@ -124,8 +120,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 		setupToolbar(view);
 		setupOnBackPressedCallback();
-		updateImageDescription(getSelectedImageCard());
-
+		updateImageDescriptionRow(getSelectedImageCard());
 		return view;
 	}
 
@@ -135,37 +130,49 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	public void updateImageDescription() {
-		updateImageDescription(getSelectedImageCard());
-	}
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
+		if (imageCard instanceof WikiImageCard wikiImageCard) {
+			dateView.setVisibility(View.VISIBLE);
+			authorView.setVisibility(View.VISIBLE);
+			String date = wikiImageCard.date;
+			String author = wikiImageCard.author;
+			String license = wikiImageCard.license;
+			if (!wikiImageCard.isWikiMediaMataDataDownloaded() &&
+					(Algorithms.isEmpty(date) || Algorithms.isEmpty(author) || Algorithms.isEmpty(license))) {
+				galleryContextHelper.downloadWikiMetaData(wikiImageCard, updatedWikiImageCard -> setMetaData(updatedWikiImageCard.author, updatedWikiImageCard.date));
+			} else {
+				setMetaData(author, date);
+			}
+		} else {
+			dateView.setVisibility(View.INVISIBLE);
+			authorView.setVisibility(View.INVISIBLE);
+		}
 
-	private void updateImageDescription(@NonNull ImageCard imageCard) {
 		Drawable icon = app.getUIUtilities().getIcon(imageCard.getTopIconId());
 		if (icon != null) {
 			sourceView.setImageDrawable(icon);
 		} else {
 			sourceView.setVisibility(View.GONE);
 		}
+	}
 
-		String date = getDate();
+	private void setMetaData(@Nullable String author, @Nullable String date) {
 		String fullDate = app.getString(R.string.ltr_or_rtl_combine_via_colon,
 				app.getString(R.string.shared_string_date), date != null ? date : "");
 		dateView.setText(fullDate);
 
-		String author = getAuthor();
 		String fullAuthorString = app.getString(R.string.ltr_or_rtl_combine_via_colon,
 				app.getString(R.string.shared_string_author), author != null ? author : "");
 		authorView.setText(fullAuthorString);
 	}
 
-	@Nullable
-	private String getDate() {
-		return null;
-	}
+	private void setupMetadataRow(ViewGroup view) {
+		dateView = view.findViewById(R.id.date);
+		dateView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
 
-	@Nullable
-	private String getAuthor() {
-		return null;
+		authorView = view.findViewById(R.id.author);
+		authorView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
+		setMetaData("", "");
 	}
 
 	public void toggleUi() {

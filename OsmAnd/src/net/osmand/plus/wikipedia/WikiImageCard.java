@@ -13,6 +13,12 @@ import net.osmand.wiki.WikiImage;
 public class WikiImageCard extends ImageCard {
 	public WikiImage wikiImage;
 
+	public String date;
+	public String author;
+	public String license;
+
+	private boolean wikiMediaMataDataDownloaded;
+
 	public WikiImageCard(@NonNull MapActivity mapActivity, @NonNull WikiImage wikiImage) {
 		super(mapActivity, null);
 		this.wikiImage = wikiImage;
@@ -24,6 +30,9 @@ public class WikiImageCard extends ImageCard {
 		this.title = wikiImage.getImageName();
 		this.url = this.imageUrl;
 		this.imageHiresUrl = wikiImage.getImageHiResUrl();
+		this.date = wikiImage.getDate();
+		this.author = wikiImage.getAuthor();
+		this.license = wikiImage.getLicense();
 
 		View.OnClickListener onClickListener = v -> openUrl(getMapActivity(), getMyApplication(),
 				getTitle(), wikiImage.getUrlWithCommonAttributions(), false, false);
@@ -33,5 +42,13 @@ public class WikiImageCard extends ImageCard {
 		} else {
 			this.onClickListener = onClickListener;
 		}
+	}
+
+	public boolean isWikiMediaMataDataDownloaded() {
+		return wikiMediaMataDataDownloaded;
+	}
+
+	public void setWikiMediaMataDataDownloaded(boolean wikiMediaMataDataDownloaded) {
+		this.wikiMediaMataDataDownloaded = wikiMediaMataDataDownloaded;
 	}
 }

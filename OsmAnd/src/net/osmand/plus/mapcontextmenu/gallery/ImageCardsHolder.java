@@ -10,6 +10,7 @@ import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardT
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
 
@@ -19,8 +20,22 @@ import java.util.List;
 import java.util.Map;
 
 public class ImageCardsHolder {
-
+	private final LatLon latLon;
+	private final Map<String, String> params;
 	private final Map<ImageCard.ImageCardType, List<ImageCard>> cardsByType = new HashMap<>();
+
+	public ImageCardsHolder(LatLon latLon, Map<String, String> params) {
+		this.latLon = latLon;
+		this.params = params;
+	}
+
+	public LatLon getLatLon() {
+		return latLon;
+	}
+
+	public Map<String, String> getParams() {
+		return params;
+	}
 
 	public boolean add(@NonNull ImageCard.ImageCardType type, @Nullable ImageCard image) {
 		if (image != null) {

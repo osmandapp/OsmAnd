@@ -10,6 +10,10 @@ public class WikiImage {
 	private final String imageStubUrl;
 	private final String imageHiResUrl;
 
+	private String date;
+	private String author;
+	private String license;
+
 	public WikiImage(String wikiMediaTag, String imageName, String imageStubUrl, String imageHiResUrl) {
 		this.wikiMediaTag = wikiMediaTag;
 		this.imageName = imageName;
@@ -31,5 +35,33 @@ public class WikiImage {
 
 	public String getImageHiResUrl() {
 		return imageHiResUrl;
+	}
+
+	public String getWikiMediaTag() {
+		return wikiMediaTag;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public void setLicense(String license) {
+		this.license = license;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getLicense() {
+		return license;
 	}
 }
