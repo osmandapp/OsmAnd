@@ -5900,4 +5900,11 @@
     <string name="change_activity">Skift aktivitet</string>
     <string name="shared_string_increase">Øg</string>
     <string name="shared_string_decrease">Mindsk</string>
+    <string name="open_in_browser">Åbn i browser</string>
+    <string name="shared_string_source">Kilde</string>
+    <string name="shared_string_no_internet_connection">Ingen internetforbindelse</string>
+    <string name="no_internet_descr">Tjek din forbindelse og prøv igen.</string>
+    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photos_available">Ingen fotos tilgængelige</string>
+    <string name="wikimedia">Wikimedia</string>
 </resources>
