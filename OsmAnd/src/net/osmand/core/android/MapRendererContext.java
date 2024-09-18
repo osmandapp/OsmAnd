@@ -743,9 +743,9 @@ public class MapRendererContext {
 						object.setName(entry.getValue());
 						break;
 					}
-				} else {
-					object.setName(OsmUtils.getOsmUrlForId(object));
-				}
+				}/* else {
+					object.setName(OsmUtils.getOsmUrlForId(object));// way x > 1
+				}*/
 			}
 		}
 		return object;
