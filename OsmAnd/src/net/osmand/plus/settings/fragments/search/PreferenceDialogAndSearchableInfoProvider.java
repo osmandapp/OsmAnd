@@ -30,27 +30,16 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 							SendAnalyticsBottomSheetDialogFragment::getSearchableInfo));
 		}
 		if (isSimulateYourLocation(preference)) {
-			final SimulateLocationFragment simulateLocationFragment = new SimulateLocationFragment();
-			simulateLocationFragment.setGpxFile(null);
-			// fragment.usedOnMap = false;
+			// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
 			return Optional.of(
 					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							simulateLocationFragment,
+							createSimulateLocationFragment(),
 							SimulateLocationFragment::getSearchableInfo));
 		}
 		if (preference instanceof SizePreference && hostOfPreference instanceof final VehicleParametersFragment vehicleParametersFragment) {
-			// adapted from VehicleParametersBottomSheet.showInstance()
-			final Bundle args = new Bundle();
-			args.putString(BasePreferenceBottomSheet.PREFERENCE_ID, preference.getKey());
-			final VehicleParametersBottomSheet vehicleParametersBottomSheet = new VehicleParametersBottomSheet();
-			vehicleParametersBottomSheet.setArguments(args);
-			vehicleParametersBottomSheet.setUsedOnMap(false);
-			vehicleParametersBottomSheet.setAppMode(vehicleParametersFragment.getSelectedAppMode());
-			vehicleParametersBottomSheet.setPreference(preference);
-			vehicleParametersBottomSheet.setConfigureSettingsSearch(true);
 			return Optional.of(
 					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							vehicleParametersBottomSheet,
+							createVehicleParametersBottomSheet(preference, vehicleParametersFragment),
 							VehicleParametersBottomSheet::getSearchableInfo));
 		}
 		return Optional.empty();
@@ -62,5 +51,24 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 
 	private boolean isSimulateYourLocation(final Preference preference) {
 		return DevelopmentSettingsFragment.SIMULATE_YOUR_LOCATION.equals(preference.getKey());
+	}
+
+	private static SimulateLocationFragment createSimulateLocationFragment() {
+		final SimulateLocationFragment simulateLocationFragment = new SimulateLocationFragment();
+		simulateLocationFragment.setGpxFile(null);
+		return simulateLocationFragment;
+	}
+
+	private static VehicleParametersBottomSheet createVehicleParametersBottomSheet(final Preference preference, final VehicleParametersFragment vehicleParametersFragment) {
+		// adapted from VehicleParametersBottomSheet.showInstance()
+		final Bundle args = new Bundle();
+		args.putString(BasePreferenceBottomSheet.PREFERENCE_ID, preference.getKey());
+		final VehicleParametersBottomSheet vehicleParametersBottomSheet = new VehicleParametersBottomSheet();
+		vehicleParametersBottomSheet.setArguments(args);
+		vehicleParametersBottomSheet.setUsedOnMap(false);
+		vehicleParametersBottomSheet.setAppMode(vehicleParametersFragment.getSelectedAppMode());
+		vehicleParametersBottomSheet.setPreference(preference);
+		vehicleParametersBottomSheet.setConfigureSettingsSearch(true);
+		return vehicleParametersBottomSheet;
 	}
 }
