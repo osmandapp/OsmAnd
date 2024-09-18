@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.CustomPreferenceDescriptionsFactory.createCustomPreferenceDescriptions;
+import static net.osmand.plus.settings.fragments.search.CustomCustomSearchableInfoProviderFactory.createCustomSearchableInfoProvider;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -44,7 +44,7 @@ public class SettingsSearchButtonHelper {
 						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager())
 				.withFragmentFactory(fragmentFactoryAndPrepareShow)
 				.withPrepareShow(fragmentFactoryAndPrepareShow)
-				.withPreferenceDescriptions(createCustomPreferenceDescriptions())
+				.withSearchableInfoProvider(createCustomSearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.build();
 	}

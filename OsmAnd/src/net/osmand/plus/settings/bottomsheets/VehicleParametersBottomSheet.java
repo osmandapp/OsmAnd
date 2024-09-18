@@ -26,17 +26,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.vehiclesize.SizeData;
-import net.osmand.plus.settings.vehiclesize.SizeType;
-import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.SizeData;
+import net.osmand.plus.settings.vehiclesize.SizeType;
+import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -68,7 +68,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
 		if (view != null) {
-			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+			// FK-FIXME: reactivate: view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
 		return view;
 	}
@@ -245,5 +245,12 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public String getSearchableInfo() {
+		final View mainView = items.get(0).getView();
+		final CharSequence title = mainView.<TextView>findViewById(R.id.title).getText();
+		final CharSequence description = mainView.<TextView>findViewById(R.id.description).getText();
+		return String.join(", ", title, description);
 	}
 }
