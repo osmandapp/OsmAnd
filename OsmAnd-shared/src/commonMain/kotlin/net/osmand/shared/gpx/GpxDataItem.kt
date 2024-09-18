@@ -150,4 +150,40 @@ class GpxDataItem(
 			else -> {}
 		}
 	}
+
+	inline fun <reified T: Any> getAppearanceParameter(parameter: GpxParameter): T? {
+		var value: Any? = getAppearanceParameter<Any>(this, parameter)
+		if (value == null) {
+			value = parameter.defaultValue
+		}
+		return castGpxParameter<T>(parameter, value)
+	}
+
+	inline fun <reified T: Any> getAppearanceParameter(file: KFile, parameter: GpxParameter): T? {
+		val item = GpxDbHelper.getItem(file)
+		if (item != null) {
+			return getAppearanceParameter<T>(item, parameter)
+		}
+		return null
+	}
+
+	inline fun <reified T: Any> getAppearanceParameter(item: GpxDataItem, parameter: GpxParameter): T? {
+		var value: T? = item.getParameter(parameter)
+		if (value != null) {
+			return castGpxParameter<T>(parameter, value)
+		}
+		val dir = item.file.getParentFile()
+		if (dir != null) {
+			val dirItem = GpxDbHelper.getGpxDirItem(dir)
+			value = dirItem.getParameter(parameter)
+			if (value != null) {
+				return castGpxParameter<T>(parameter, value)
+			}
+		}
+		return null
+	}
+
+	inline fun <reified T : Any> castGpxParameter(parameter: GpxParameter, value: Any?): T? {
+		return if (parameter.typeClass.isInstance(value)) value as? T else null
+	}
 }

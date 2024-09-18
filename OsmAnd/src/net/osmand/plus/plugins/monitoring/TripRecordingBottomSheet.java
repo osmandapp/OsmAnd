@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.charts.ChartModeBottomSheet;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -339,7 +340,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		File file = new File(gpxFile.getPath());
 		displayHelper.setFile(file);
 		displayHelper.setSelectedGpxFile(selectedGpxFile);
-		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
+		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(SharedUtil.kFile(file)));
 		displayHelper.setGpx(gpxFile);
 
 		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, this, nightMode, false, getMapActivity());

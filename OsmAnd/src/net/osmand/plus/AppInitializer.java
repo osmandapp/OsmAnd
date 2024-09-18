@@ -1,7 +1,24 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.SETTINGS_DIR;
-import static net.osmand.plus.AppInitEvents.*;
+import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.GPX_DB_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.INDEXES_RELOADED;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
+import static net.osmand.plus.AppInitEvents.INIT_RENDERERS;
+import static net.osmand.plus.AppInitEvents.LIVE_UPDATES_ALERTS_CHECKED;
+import static net.osmand.plus.AppInitEvents.LOAD_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.MARKERS_GROUPS_SYNCED;
+import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_FILTERS_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.SAVE_GPX_TRACKS;
+import static net.osmand.plus.AppInitEvents.SEARCH_UI_CORE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.TASK_CHANGED;
+import static net.osmand.plus.AppInitEvents.TRAVEL_INITIALIZED;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
@@ -19,7 +36,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,9 +44,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.shared.gpx.SmartFolderHelper;
-import net.osmand.plus.helpers.RouteActivityHelper;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -84,7 +97,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -312,7 +324,6 @@ public class AppInitializer implements IProgress {
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app), GpxSelectionHelper.class);
-		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
@@ -348,9 +359,7 @@ public class AppInitializer implements IProgress {
 		app.averageGlideComputer = startupInit(new AverageGlideComputer(app), AverageGlideComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
-		app.smartFolderHelper = startupInit(new SmartFolderHelper(), SmartFolderHelper.class);
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
-		app.routeActivityHelper = startupInit(new RouteActivityHelper(app), RouteActivityHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 
 		initOpeningHoursParser();
@@ -525,7 +534,7 @@ public class AppInitializer implements IProgress {
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
 			notifyEvent(FAVORITES_INITIALIZED);
-			app.gpxDbHelper.loadItems();
+			app.getGpxDbHelper().loadItemsBlocking();
 			notifyEvent(GPX_DB_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();

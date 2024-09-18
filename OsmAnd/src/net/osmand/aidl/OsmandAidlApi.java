@@ -50,7 +50,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -1290,7 +1290,7 @@ public class OsmandAidlApi {
 			item.setParameter(API_IMPORTED, true);
 			app.getGpxDbHelper().add(item);
 		} else {
-			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
+			GpxDataItem item = app.getGpxDbHelper().getItem(SharedUtil.kFile(destination));
 			if (item != null) {
 				item.setParameter(COLOR, col);
 				item.setParameter(API_IMPORTED, true);
@@ -1527,7 +1527,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItemsBlocking();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
@@ -1556,7 +1556,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getImportedGpx(List<AGpxFile> files) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItemsBlocking();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
@@ -1576,7 +1576,7 @@ public class OsmandAidlApi {
 	}
 
 	String getGpxColor(String gpxFileName) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItemsBlocking();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = SharedUtil.jFile(dataItem.getFile());
 			if (file.exists()) {
@@ -1600,7 +1600,7 @@ public class OsmandAidlApi {
 		}
 
 		if (file != null && file.exists()) {
-			GpxDataItem item = app.getGpxDbHelper().getItem(file);
+			GpxDataItem item = app.getGpxDbHelper().getItem(SharedUtil.kFile(file));
 			boolean apiImported = item != null ? item.getParameter(API_IMPORTED) : false;
 			if (apiImported) {
 				return FileUtils.removeGpxFile(app, file);

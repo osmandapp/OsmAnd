@@ -193,9 +193,9 @@ object GpxDbUtils {
 			return !item.hasData() || item.getAnalysis() == null
 					|| item.getAnalysis()!!.wptCategoryNames == null
 					|| (item.getAnalysis()!!.getLatLonStart() == null && item.getAnalysis()!!.points > 0)
-					|| item.requireParameter(GpxParameter.FILE_LAST_MODIFIED_TIME) as Long != item.file.lastModified()
-					|| item.requireParameter(GpxParameter.FILE_CREATION_TIME) as Long <= 0
-					|| createDataVersion(ANALYSIS_VERSION) > item.requireParameter(GpxParameter.DATA_VERSION) as Int
+					|| item.requireParameter(FILE_LAST_MODIFIED_TIME) as Long != item.file.lastModified()
+					|| item.requireParameter(FILE_CREATION_TIME) as Long <= 0
+					|| createDataVersion(ANALYSIS_VERSION) > item.requireParameter(DATA_VERSION) as Int
 		}
 		return true
 	}

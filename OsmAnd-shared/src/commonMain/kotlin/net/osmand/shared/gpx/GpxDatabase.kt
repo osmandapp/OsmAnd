@@ -1,7 +1,15 @@
 package net.osmand.shared.gpx
 
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.data.StringIntPair
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
@@ -32,6 +40,8 @@ class GpxDatabase {
 		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s NOT NULL AND %1\$s <> '' "
 		val GET_ITEM_COUNT_COLLECTION_BASE =
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
+
+		val BATCH_SIZE = 100
 	}
 
 	init {
@@ -307,7 +317,7 @@ class GpxDatabase {
 		return folderCollection
 	}
 
-	fun getGpxDataItems(): List<GpxDataItem> {
+	fun getGpxDataItemsSync(): List<GpxDataItem> {
 		val items = mutableSetOf<GpxDataItem>()
 		var db: SQLiteConnection? = null
 		try {
@@ -329,6 +339,79 @@ class GpxDatabase {
 			db?.close()
 		}
 		return items.toList()
+	}
+
+	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
+
+	suspend fun getGpxDataItems(): List<GpxDataItem> = coroutineScope {
+		val items = mutableListOf<GpxDataItem>()
+		val deferredResults = mutableListOf<Deferred<List<GpxDataItem>>>()
+		var offset = 0
+		val itemsCount = getGpxDirItemsCount()
+		while (offset < itemsCount) {
+			val currentOffset = offset
+			val deferredBatch = async(Dispatchers.IO) {
+				var db: SQLiteConnection? = null
+				try {
+					db = openConnection(true)
+					if (db != null) {
+						fetchBatchData(db, currentOffset, BATCH_SIZE)
+					} else {
+						emptyList()
+					}
+				} finally {
+					db?.close()
+				}
+			}
+			deferredResults.add(deferredBatch)
+			offset += BATCH_SIZE
+		}
+
+		deferredResults.awaitAll().forEach { batchItems ->
+			items.addAll(batchItems)
+		}
+		return@coroutineScope items.toList()
+	}
+
+	private fun getGpxDirItemsCount(): Int {
+		var res = 0
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(true)
+			db?.let {
+				var query: SQLiteCursor? = null
+				try {
+					query = db.rawQuery("SELECT COUNT(*) FROM $GPX_TABLE_NAME", null)
+					if (query != null && query.moveToFirst()) {
+						res = query.getInt(0)
+					}
+				} finally {
+					query?.close()
+				}
+			}
+		} finally {
+			db?.close()
+		}
+		return res
+	}
+
+	private fun fetchBatchData(db: SQLiteConnection, offset: Int, batchSize: Int): List<GpxDataItem> {
+		val time = currentTimeMillis()
+		val batchItems = mutableListOf<GpxDataItem>()
+		var query: SQLiteCursor? = null
+		try {
+			val paginatedQuery = "${GpxDbUtils.getSelectGpxQuery()} ORDER BY ${FILE_NAME.columnName} LIMIT $batchSize OFFSET $offset"
+			query = db.rawQuery(paginatedQuery, null)
+			if (query != null && query.moveToFirst()) {
+				do {
+					batchItems.add(readGpxDataItem(query))
+				} while (query.moveToNext())
+			}
+		} finally {
+			query?.close()
+		}
+		log.info("loadGpxItems fetchBatchData offset=$offset batchItems=${batchItems.size} in ${currentTimeMillis() - time} ms")
+		return batchItems
 	}
 
 	fun getGpxDirItems(): List<GpxDirItem> {
