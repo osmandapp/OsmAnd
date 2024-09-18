@@ -51,16 +51,14 @@ class SendAnalyticsSearchableInfoProvider {
 	private String getLongDescriptions() {
 		return this
 				._getLongDescriptions()
-				.stream()
 				.map(BottomSheetItemWithDescription::getDescription)
 				.collect(Collectors.joining(", "));
 	}
 
-	private List<LongDescriptionItem> _getLongDescriptions() {
+	private Stream<LongDescriptionItem> _getLongDescriptions() {
 		return items
 				.stream()
 				.filter(LongDescriptionItem.class::isInstance)
-				.map(LongDescriptionItem.class::cast)
-				.collect(Collectors.toList());
+				.map(LongDescriptionItem.class::cast);
 	}
 }
