@@ -27,9 +27,9 @@ class SendAnalyticsSearchableInfoProvider {
 
 	private String getTitle() {
 		final View titleView = items.get(0).getView();
-		final String titleTop = titleView.<TextViewEx>findViewById(R.id.titleTop).getText().toString();
-		final String titleMiddle = titleView.<TextView>findViewById(R.id.titleMiddle).getText().toString();
-		final String titleBottom = titleView.<TextViewEx>findViewById(R.id.titleBottom).getText().toString();
+		final CharSequence titleTop = titleView.<TextViewEx>findViewById(R.id.titleTop).getText();
+		final CharSequence titleMiddle = titleView.<TextView>findViewById(R.id.titleMiddle).getText();
+		final CharSequence titleBottom = titleView.<TextViewEx>findViewById(R.id.titleBottom).getText();
 		return String.join(", ", titleTop, titleMiddle, titleBottom);
 	}
 
@@ -37,7 +37,7 @@ class SendAnalyticsSearchableInfoProvider {
 		return this
 				.getButtons()
 				.stream()
-				.map(baseBottomSheetItem -> baseBottomSheetItem.getView().<TextViewEx>findViewById(R.id.title).getText().toString())
+				.map(baseBottomSheetItem -> baseBottomSheetItem.getView().<TextViewEx>findViewById(R.id.title).getText())
 				.collect(Collectors.joining(", "));
 	}
 
