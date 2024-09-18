@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -253,9 +254,11 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public String getSearchableInfo() {
+		return String.join(", ", _getText(R.id.title), _getText(R.id.description));
+	}
+
+	private CharSequence _getText(final @IdRes int id) {
 		final View mainView = items.get(0).getView();
-		final CharSequence title = mainView.<TextView>findViewById(R.id.title).getText();
-		final CharSequence description = mainView.<TextView>findViewById(R.id.description).getText();
-		return String.join(", ", title, description);
+		return mainView.<TextView>findViewById(id).getText();
 	}
 }
