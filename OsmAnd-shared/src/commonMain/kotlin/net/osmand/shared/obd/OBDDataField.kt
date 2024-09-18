@@ -1,17 +1,14 @@
 package net.osmand.shared.obd
 
-import net.osmand.shared.util.Localization
-
 open class OBDDataField(
-	private val nameId: String,
-	private val unitNameId: String,
-	protected val stringValue: String) {
+	val type: OBDDataFieldType,
+	private val stringValue: String) {
 	fun getDisplayName(): String {
-		return Localization.getString(nameId)
+		return type.getDisplayName()
 	}
 
 	fun getDisplayUnit(): String {
-		return Localization.getString(unitNameId)
+		return type.getDisplayUnit()
 	}
 
 	open fun getValue(): String {

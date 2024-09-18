@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.graphics.drawable.Drawable
 import android.view.View
+import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.plus.OsmandApplication
@@ -28,18 +29,13 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
-import net.osmand.shared.obd.OBDAirIntakeTempDataField
-import net.osmand.shared.obd.OBDAmbientAirTempDataField
-import net.osmand.shared.obd.OBDBatteryVoltageDataField
+import net.osmand.shared.data.KLatLon
 import net.osmand.shared.obd.OBDCommand
+import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataField
+import net.osmand.shared.obd.OBDDataFieldType.*
 import net.osmand.shared.obd.OBDDispatcher
-import net.osmand.shared.obd.OBDEngineCoolantDataField
-import net.osmand.shared.obd.OBDFuelLvlDataField
-import net.osmand.shared.obd.OBDFuelTypeDataField
 import net.osmand.shared.obd.OBDResponseListener
-import net.osmand.shared.obd.OBDRpmDataField
-import net.osmand.shared.obd.OBDSpeedDataField
 import okio.IOException
 import okio.sink
 import okio.source
@@ -55,7 +51,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 	private var connectedDevice: BluetoothDevice? = null
 	var socket: BluetoothSocket? = null
 	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
-
 
 	init {
 		val noAppMode = arrayOf<ApplicationMode>()
@@ -75,8 +70,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
 		appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
-		val fuelTypeWidget: MapWidget =
-			OBDTextWidget(mapActivity, OBDWidgetDataFieldType.FUEL_TYPE)
+		val fuelTypeWidget: MapWidget = OBDTextWidget(mapActivity, OBDWidgetDataFieldType.FUEL_TYPE)
 		widgetsInfos.add(creator.createWidgetInfo(fuelTypeWidget))
 	}
 
@@ -257,14 +251,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 	override fun onCommandResponse(command: OBDCommand, result: String) {
 		LOG.debug("OBD-II command ${command.name} result : $result")
 		sensorDataCache[command] = when (command) {
-			OBDCommand.OBD_RPM_COMMAND -> OBDRpmDataField(result)
-			OBDCommand.OBD_SPEED_COMMAND -> OBDSpeedDataField(result)
-			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDAirIntakeTempDataField(result)
-			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDEngineCoolantDataField(result)
-			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDFuelTypeDataField(result)
-			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDFuelLvlDataField(result)
-			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDAmbientAirTempDataField(result)
-			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDBatteryVoltageDataField(result)
+			OBDCommand.OBD_RPM_COMMAND -> OBDDataField(RPM,  result)
+			OBDCommand.OBD_SPEED_COMMAND -> OBDDataField(SPEED, result)
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDDataField(AIR_INTAKE_TEMP, result)
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDDataField(COOLANT_TEMP, result)
+			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDDataField(FUEL_TYPE, result)
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDDataField(FUEL_LVL, result)
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDDataField(AMBIENT_AIR_TEMP, result)
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDDataField(BATTERY_VOLTAGE, result)
 			else -> null
 		}
 	}
@@ -292,5 +286,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 //				}
 //			}
 //		}
+	}
+
+	override fun updateLocation(location: Location) {
+		OBDDataComputer.registerLocation(OBDDataComputer.OBDLocation(location.time, KLatLon(location.latitude, location.longitude)))
+	}
+
+	override fun onBatchReadCompleted() {
+		OBDDataComputer.acceptValue(sensorDataCache)
 	}
 }

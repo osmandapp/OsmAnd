@@ -33,6 +33,7 @@ object OBDDispatcher {
 
 	interface OBDReadStatusListener {
 		fun onIOError()
+		fun onBatchReadCompleted()
 	}
 
 	private fun startReadObdLooper() {
@@ -115,6 +116,7 @@ object OBDDispatcher {
 						log.error("Run OBD looper error. $error")
 						readStatusListener?.onIOError()
 					}
+					readStatusListener?.onBatchReadCompleted()
 				}
 			} catch (cancelError: CancellationException) {
 				log.debug("OBD reading canceled")
