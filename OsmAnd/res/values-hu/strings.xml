@@ -5895,9 +5895,9 @@
     <string name="shared_string_increase">Növelés</string>
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="shared_string_source">Forrás</string>
-    <string name="shared_string_no_internet_connection">Nincs internet kapcsolat</string>
+    <string name="shared_string_no_internet_connection">Nincs internetkapcsolat</string>
     <string name="no_internet_descr">Kérjük, ellenőrizze a kapcsolatát és próbálja újra.</string>
-    <string name="no_photos_available">Nincsenek elérhető fényképek</string>
+    <string name="no_photos_available">Nincs elérhető fénykép</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="no_photos_available_descr">Ehhez a helyhez még nem adtak hozzá felhasználói fotókat</string>
 </resources>
