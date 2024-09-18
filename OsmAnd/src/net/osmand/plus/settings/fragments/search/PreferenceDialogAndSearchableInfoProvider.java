@@ -47,8 +47,7 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 			vehicleParametersBottomSheet.setUsedOnMap(false);
 			vehicleParametersBottomSheet.setAppMode(vehicleParametersFragment.getSelectedAppMode());
 			vehicleParametersBottomSheet.setPreference(preference);
-			// FK-TODO: reactivate:
-			// vehicleParametersBottomSheet.setTargetFragment(vehicleParametersFragment, 0);
+			vehicleParametersBottomSheet.setConfigureSettingsSearch(true);
 			return Optional.of(
 					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 							vehicleParametersBottomSheet,

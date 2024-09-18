@@ -77,7 +77,6 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		return prefId;
 	}
 
-	// FK-TODO: remove
 	public void setPreference(final Preference preference) {
 		this.preference = preference;
 	}

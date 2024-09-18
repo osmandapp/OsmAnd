@@ -62,13 +62,18 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	private SizePreference sizePreference;
 	private HorizontalChipsView chipsView;
 	private List<ChipItem> chips;
+	private boolean configureSettingsSearch = false;
+
+	public void setConfigureSettingsSearch(final boolean configureSettingsSearch) {
+		this.configureSettingsSearch = configureSettingsSearch;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null) {
-			// FK-FIXME: reactivate: view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
+		if (view != null && !configureSettingsSearch) {
+			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
 		return view;
 	}
@@ -230,7 +235,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			if (!fm.isStateSaved()) {
 				Bundle args = new Bundle();
