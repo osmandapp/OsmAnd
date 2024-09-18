@@ -18,16 +18,16 @@ class CustomCustomSearchableInfoProviderFactory {
 	public static SearchableInfoProvider createCustomSearchableInfoProvider() {
 		return preference -> {
 			if (preference instanceof final ListPreferenceEx listPreferenceEx) {
-				return Optional.of(getListPreferenceExSearchableInfo(listPreferenceEx));
+				return Optional.of(getSearchableInfo(listPreferenceEx));
 			}
 			if (preference instanceof final SwitchPreferenceEx switchPreferenceEx) {
-				return Optional.of(getSwitchPreferenceExSearchableInfo(switchPreferenceEx));
+				return Optional.of(getSearchableInfo(switchPreferenceEx));
 			}
 			if (preference instanceof final MultiSelectBooleanPreference multiSelectBooleanPreference) {
-				return Optional.of(getMultiSelectBooleanPreferenceSearchableInfo(multiSelectBooleanPreference));
+				return Optional.of(getSearchableInfo(multiSelectBooleanPreference));
 			}
 			if (preference instanceof final EditTextPreferenceEx editTextPreferenceEx) {
-				return Optional.of(getEditTextPreferenceExSearchableInfo(editTextPreferenceEx));
+				return Optional.of(getSearchableInfo(editTextPreferenceEx));
 			}
 			if (preference instanceof final SizePreference sizePreference) {
 				return Optional.of(getSizePreferenceSearchableInfo(sizePreference));
@@ -36,50 +36,50 @@ class CustomCustomSearchableInfoProviderFactory {
 		};
 	}
 
-	private static String getListPreferenceExSearchableInfo(final ListPreferenceEx listPreferenceEx) {
+	private static String getSearchableInfo(final ListPreferenceEx preference) {
 		return String.join(
 				", ",
 				concat(
-						Optional.ofNullable(listPreferenceEx.getDialogTitle()),
-						Optional.ofNullable(listPreferenceEx.getDescription()),
-						Optional.ofNullable(listPreferenceEx.getEntries())));
+						Optional.ofNullable(preference.getDialogTitle()),
+						Optional.ofNullable(preference.getDescription()),
+						Optional.ofNullable(preference.getEntries())));
 	}
 
-	private static String getSwitchPreferenceExSearchableInfo(final SwitchPreferenceEx switchPreferenceEx) {
+	private static String getSearchableInfo(final SwitchPreferenceEx preference) {
 		return String.join(
 				", ",
 				Lists.getPresentElements(
 						Arrays.asList(
-								Optional.ofNullable(switchPreferenceEx.getSummaryOff()),
-								Optional.ofNullable(switchPreferenceEx.getSummaryOn()),
-								Optional.ofNullable(switchPreferenceEx.getDescription()))));
+								Optional.ofNullable(preference.getSummaryOff()),
+								Optional.ofNullable(preference.getSummaryOn()),
+								Optional.ofNullable(preference.getDescription()))));
 	}
 
-	private static String getMultiSelectBooleanPreferenceSearchableInfo(final MultiSelectBooleanPreference multiSelectBooleanPreference) {
+	private static String getSearchableInfo(final MultiSelectBooleanPreference preference) {
 		return String.join(
 				", ",
 				concat(
-						Optional.ofNullable(multiSelectBooleanPreference.getDialogTitle()),
-						Optional.ofNullable(multiSelectBooleanPreference.getDescription()),
-						Optional.ofNullable(multiSelectBooleanPreference.getEntries())));
+						Optional.ofNullable(preference.getDialogTitle()),
+						Optional.ofNullable(preference.getDescription()),
+						Optional.ofNullable(preference.getEntries())));
 	}
 
-	private static String getEditTextPreferenceExSearchableInfo(final EditTextPreferenceEx editTextPreferenceEx) {
+	private static String getSearchableInfo(final EditTextPreferenceEx preference) {
 		return String.join(
 				", ",
 				Lists.getPresentElements(
 						Arrays.asList(
-								Optional.ofNullable(editTextPreferenceEx.getText()),
-								Optional.ofNullable(editTextPreferenceEx.getDescription()))));
+								Optional.ofNullable(preference.getText()),
+								Optional.ofNullable(preference.getDescription()))));
 	}
 
-	private static String getSizePreferenceSearchableInfo(final SizePreference sizePreference) {
+	private static String getSizePreferenceSearchableInfo(final SizePreference preference) {
 		return String.join(
 				", ",
 				Lists.getPresentElements(
 						Arrays.asList(
-								Optional.ofNullable(sizePreference.getDialogTitle()),
-								Optional.ofNullable(sizePreference.getSummary()))));
+								Optional.ofNullable(preference.getDialogTitle()),
+								Optional.ofNullable(preference.getSummary()))));
 	}
 
 	private static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
