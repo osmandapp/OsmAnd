@@ -5887,8 +5887,8 @@
     <string name="change_activity">Changer d\'activité</string>
     <string name="shared_string_decrease">Réduire</string>
     <string name="shared_string_source">Source</string>
-    <string name="shared_string_no_internet_connection">Pas de connexion à Internet</string>
-    <string name="no_photos_available_descr">Aucune image d\'utilisateurs n\'a été ajoutée pour ce lieu pour l\'instant</string>
+    <string name="shared_string_no_internet_connection">Aucune connexion Internet</string>
+    <string name="no_photos_available_descr">Aucune image d\'utilisateur n\'a été ajoutée pour ce lieu</string>
     <string name="no_photos_available">Aucune image disponible</string>
     <string name="no_internet_descr">Veuillez vérifier votre connexion et réessayez.</string>
     <string name="wikimedia">Wikimédia</string>
