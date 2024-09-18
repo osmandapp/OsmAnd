@@ -104,12 +104,12 @@ public class RenderedObjectMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		if (renderedObject.isPolygon()) {
-			return getAllTranslatedTypes(renderedObject);
+			return getTranslatedType(renderedObject);
 		}
 		return super.getTypeStr();
 	}
 
-	private String getAllTranslatedTypes(RenderedObject renderedObject) {
+	private String getTranslatedType(RenderedObject renderedObject) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return "";
