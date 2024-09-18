@@ -12,6 +12,7 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class SendAnalyticsSearchableInfoProvider {
 
@@ -36,17 +37,15 @@ class SendAnalyticsSearchableInfoProvider {
 	private String getButtonTitles() {
 		return this
 				.getButtons()
-				.stream()
 				.map(baseBottomSheetItem -> baseBottomSheetItem.getView().<TextViewEx>findViewById(R.id.title).getText())
 				.collect(Collectors.joining(", "));
 	}
 
-	private List<BottomSheetItemWithCompoundButton> getButtons() {
+	private Stream<BottomSheetItemWithCompoundButton> getButtons() {
 		return items
 				.stream()
 				.filter(BottomSheetItemWithCompoundButton.class::isInstance)
-				.map(BottomSheetItemWithCompoundButton.class::cast)
-				.collect(Collectors.toList());
+				.map(BottomSheetItemWithCompoundButton.class::cast);
 	}
 
 	private String getLongDescriptions() {
