@@ -80,15 +80,18 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 	}
 
 	public void showDialog(@NonNull MapActivity mapActivity, @NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
+		prepareShowDialog(title, description, preference);
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+	}
+
+	public void prepareShowDialog(final @NonNull String title, final @NonNull String description, final @NonNull CommonPreference<MarkerDisplayOption> preference) {
 		this.title = title;
 		this.description = description;
 		this.preference = preference;
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, this);
-
-		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
 	}
 }
 

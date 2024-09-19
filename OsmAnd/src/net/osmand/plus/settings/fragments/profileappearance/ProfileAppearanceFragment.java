@@ -81,6 +81,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 
 	private boolean hasNameError;
 
+	public ProfileAppearanceController getScreenController() {
+		return screenController;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

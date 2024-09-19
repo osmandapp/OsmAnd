@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
@@ -19,11 +20,14 @@ public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
+	private final OsmandApplication osmandApplication;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
-									  final @IdRes int fragmentContainerViewId) {
+									  final @IdRes int fragmentContainerViewId,
+									  final OsmandApplication osmandApplication) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
+		this.osmandApplication = osmandApplication;
 	}
 
 	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
@@ -45,7 +49,7 @@ public class SettingsSearchButtonHelper {
 				.withFragmentFactory(fragmentFactoryAndPrepareShow)
 				.withPrepareShow(fragmentFactoryAndPrepareShow)
 				.withSearchableInfoProvider(createCustomSearchableInfoProvider())
-				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
+				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider(osmandApplication))
 				.build();
 	}
 
