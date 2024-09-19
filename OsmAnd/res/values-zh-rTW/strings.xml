@@ -2371,7 +2371,7 @@
     <string name="shared_string_to">至</string>
     <string name="mapillary_menu_date_from">從</string>
     <string name="mapillary_menu_descr_dates">僅檢視新增的圖片</string>
-    <string name="mapillary_menu_title_dates">日期</string>
+    <string name="shared_string_date">日期</string>
     <string name="mapillary_menu_edit_text_hint">輸入使用者名稱</string>
     <string name="mapillary_menu_descr_username">僅檢視增加的圖片由</string>
     <string name="mapillary_menu_title_username">使用者名稱</string>
@@ -5885,4 +5885,11 @@
     <string name="drawer_button_description">開啟主選單。</string>
     <string name="shared_string_decrease">減少</string>
     <string name="shared_string_increase">增加</string>
+    <string name="wikimedia">維基媒體</string>
+    <string name="open_in_browser">在瀏覽器中開啟</string>
+    <string name="shared_string_source">來源</string>
+    <string name="shared_string_no_internet_connection">無網際網路連線</string>
+    <string name="no_internet_descr">請檢查您的連線並再試一次。</string>
+    <string name="no_photos_available_descr">尚未將使用者照片新增至此處</string>
+    <string name="no_photos_available">沒有可用的照片</string>
 </resources>

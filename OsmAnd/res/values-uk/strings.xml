@@ -2389,7 +2389,7 @@
     <string name="shared_string_to">до</string>
     <string name="mapillary_menu_date_from">від</string>
     <string name="mapillary_menu_descr_dates">Показувати лише додані зображення</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_edit_text_hint">Введіть імʼя користувача</string>
     <string name="mapillary_menu_descr_username">Переглянути лише зображення додані</string>
     <string name="mapillary_menu_title_username">Імʼя користувача</string>
@@ -5902,4 +5902,9 @@
     <string name="change_activity">Змінити активність</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Показати стежки для ґрунтового велосипеда</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
+    <string name="shared_string_decrease">Зменшити</string>
+    <string name="shared_string_increase">Збільшити</string>
+    <string name="no_photos_available_descr">До цієї локації ще не додано жодної фотографії користувача</string>
+    <string name="no_photos_available">Фото відсутні</string>
+    <string name="open_in_browser">Відкрити в браузері</string>
 </resources>

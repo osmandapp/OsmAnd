@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary;
 import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -29,6 +30,9 @@ public class MenuObject extends MenuTitleController {
 		this.pointDescription = pointDescription;
 		this.object = object;
 		this.mapActivity = mapActivity;
+		if (object instanceof NativeLibrary.RenderedObject) {
+			this.order = ((NativeLibrary.RenderedObject) object).getOrder();
+		}
 		init();
 	}
 

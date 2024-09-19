@@ -2277,7 +2277,7 @@
     <string name="shared_string_to">Ide:</string>
     <string name="mapillary_menu_date_from">Innen:</string>
     <string name="mapillary_menu_descr_dates">Csak a hozzáadott képek megjelenítése</string>
-    <string name="mapillary_menu_title_dates">Dátum</string>
+    <string name="shared_string_date">Dátum</string>
     <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
     <string name="mapillary_menu_descr_username">Csak az általa hozzáadott képek megjelenítése:</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
@@ -5893,4 +5893,11 @@
     <string name="type_of_activity">Tevékenység típusa</string>
     <string name="shared_string_decrease">Csökkentés</string>
     <string name="shared_string_increase">Növelés</string>
+    <string name="open_in_browser">Megnyitás böngészőben</string>
+    <string name="shared_string_source">Forrás</string>
+    <string name="shared_string_no_internet_connection">Nincs internetkapcsolat</string>
+    <string name="no_internet_descr">Kérjük, ellenőrizze a kapcsolatát és próbálja újra.</string>
+    <string name="no_photos_available">Nincs elérhető fénykép</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="no_photos_available_descr">Ehhez a helyhez még nem adtak hozzá felhasználói fotókat</string>
 </resources>

@@ -44,6 +44,9 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.shared.gpx.SmartFolderHelper;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -361,6 +364,7 @@ public class AppInitializer implements IProgress {
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
+		app.galleryContextHelper = startupInit(new GalleryContextHelper(), GalleryContextHelper.class);
 
 		initOpeningHoursParser();
 	}

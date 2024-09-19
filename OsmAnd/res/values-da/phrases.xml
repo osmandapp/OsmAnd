@@ -4050,4 +4050,5 @@
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Spredt camping</string>
     <string name="poi_us_maps_recreation_area_activity_group_camping">Gruppecamping</string>
     <string name="poi_indoor_seating_bar_table">Indendørs siddepladser: barbord</string>
+    <string name="poi_direction">Retning</string>
 </resources>

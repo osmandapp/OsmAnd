@@ -93,10 +93,11 @@ object KAlgorithms {
 	}
 
 	fun colorToString(color: Int): String {
-		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
-			"#" + String.format("%06X", color and 0x00FFFFFF)
+		val unsigned = color.toUInt()
+		return if ((0xFF000000.toUInt() and unsigned) == 0xFF000000.toUInt()) {
+			"#" + (unsigned and 0x00FFFFFF.toUInt()).toString(16).padStart(6, '0').uppercase()
 		} else {
-			"#" + String.format("%08X", color)
+			"#" + unsigned.toString(16).padStart(8, '0').uppercase()
 		}
 	}
 

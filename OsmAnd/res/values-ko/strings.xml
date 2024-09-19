@@ -4322,7 +4322,7 @@
     <string name="routing_attr_freeride_policy_name">오프-피스트</string>
     <string name="map_settings_weather_temp">온도</string>
     <string name="trip_recording_duration_widget_desc">현재 기록된 이동 시간을 표시합니다.</string>
-    <string name="mapillary_menu_title_dates">일자</string>
+    <string name="shared_string_date">일자</string>
     <string name="map_settings_weather_air_pressure">공기의 압력</string>
     <string name="map_settings_weather_precip">제출하기</string>
     <string name="routing_attr_allow_expert_name">전문 경로 허용</string>

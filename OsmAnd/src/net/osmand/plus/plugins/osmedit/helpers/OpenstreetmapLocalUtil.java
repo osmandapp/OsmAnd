@@ -25,6 +25,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -86,12 +87,12 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(@NonNull MapObject mapObject) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(mapObject);
+		EntityType type = OsmUtils.getOsmEntityType(mapObject);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmEditingPlugin.getOsmObjectId(mapObject);
+		long entityId = OsmUtils.getOsmObjectId(mapObject);
 
 		Amenity amenity = null;
 		if (mapObject instanceof Amenity) {

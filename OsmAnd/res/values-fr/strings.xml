@@ -2330,7 +2330,7 @@
     <string name="wrong_user_name">Nom d\'utilisateur incorrect</string>
     <string name="shared_string_to">Vers</string>
     <string name="mapillary_menu_date_from">De</string>
-    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="shared_string_date">Date</string>
     <string name="mapillary_menu_edit_text_hint">Saisissez le nom d\'utilisateur</string>
     <string name="mapillary_menu_title_username">Nom d\'utilisateur</string>
     <string name="shared_string_reload">Actualiser</string>
@@ -4336,7 +4336,7 @@
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
     <string name="delete_history_items_descr">Supprimer les éléments d’historique sélectionnés \?</string>
     <string name="delete_history_items">Supprimer %1$s éléments d’historique \?</string>
-    <string name="quick_action_toggle_preference">Un bouton à bascule pour modifier le choix.</string>
+    <string name="quick_action_toggle_preference">Un interrupteur pour changer le paramètre.</string>
     <string name="release_4_1">- Première prise en charge d\'Android Auto
 \n
 \n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM
@@ -5852,7 +5852,7 @@
     <string name="add_widget_to_the_right">Ajouter le gadget à droite</string>
     <string name="delete_widget_description">Ce gadget va être supprimé. Plus tard, vous pourrez le restaurer depuis \"Configurer l\'écran\".</string>
     <string name="delete_widget">Supprimer le gadget ?</string>
-    <string name="battery_saving_mode">Mode économie de batterie</string>
+    <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options pour l\'axe Y.</string>
     <string name="app_mode_suv">SUV</string>
@@ -5871,4 +5871,26 @@
     <string name="shared_string_dp">dp</string>
     <string name="background_opacity">Opacité de l\'arrière-plan</string>
     <string name="corner_radius">Rayon d\'angle</string>
+    <string name="raster_layers_action_descr">Modifier les couches matricielles</string>
+    <string name="contour_layers_action_descr">Modifier les couches de lignes de niveau</string>
+    <string name="configure_map_description">Modifier le style de carte, les couches ou d\'autres paramètres.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Afficher les sentiers de terre pour vélos</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Afficher les sentiers de terre pour vélos</string>
+    <string name="change_zoom_action_descr">Modifier le zoom de la carte.</string>
+    <string name="search_action_descr">Ouvre la recherche.</string>
+    <string name="navigation_action_descr">Ouvre le guidage.</string>
+    <string name="my_location_action_descr">Centre la carte sur votre position actuelle.</string>
+    <string name="map_3d_mode_action_descr">Modifier l\'inclinaison de la carte.</string>
+    <string name="drawer_button_description">Ouvre le menu principal.</string>
+    <string name="shared_string_increase">Augmenter</string>
+    <string name="type_of_activity">Type d\'activité</string>
+    <string name="change_activity">Changer d\'activité</string>
+    <string name="shared_string_decrease">Réduire</string>
+    <string name="shared_string_source">Source</string>
+    <string name="shared_string_no_internet_connection">Aucune connexion Internet</string>
+    <string name="no_photos_available_descr">Aucune image d\'utilisateur n\'a été ajoutée pour ce lieu</string>
+    <string name="no_photos_available">Aucune image disponible</string>
+    <string name="no_internet_descr">Veuillez vérifier votre connexion et réessayez.</string>
+    <string name="wikimedia">Wikimédia</string>
+    <string name="open_in_browser">Ouvrir dans le navigateur</string>
 </resources>

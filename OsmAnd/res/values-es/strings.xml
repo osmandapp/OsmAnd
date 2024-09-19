@@ -2384,7 +2384,7 @@
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>
     <string name="mapillary_menu_descr_dates">Ver sólo imágenes añadidas</string>
-    <string name="mapillary_menu_title_dates">Fecha</string>
+    <string name="shared_string_date">Fecha</string>
     <string name="mapillary_menu_edit_text_hint">Escribir nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver sólo imágenes añadidas por</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
@@ -5896,4 +5896,11 @@
     <string name="change_activity">Cambiar actividad</string>
     <string name="shared_string_increase">Aumentar</string>
     <string name="shared_string_decrease">Disminuir</string>
+    <string name="open_in_browser">Abrir en el navegador</string>
+    <string name="shared_string_source">Fuente</string>
+    <string name="shared_string_no_internet_connection">Sin conexión a Internet</string>
+    <string name="no_internet_descr">Por favor, compruebe su conexión e inténtelo de nuevo.</string>
+    <string name="no_photos_available_descr">Aún no se han añadido fotos de usuarios a esta ubicación</string>
+    <string name="no_photos_available">No hay fotos</string>
+    <string name="wikimedia">Wikimedia</string>
 </resources>

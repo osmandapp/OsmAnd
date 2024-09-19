@@ -2384,7 +2384,7 @@
     <string name="wrong_user_name">Forkert brugernavn</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
@@ -3913,7 +3913,7 @@
     <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede kortopdateringer hver måned og time.</string>
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
-    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag til, at du nu kan nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
@@ -5900,4 +5900,11 @@
     <string name="change_activity">Skift aktivitet</string>
     <string name="shared_string_increase">Øg</string>
     <string name="shared_string_decrease">Mindsk</string>
+    <string name="open_in_browser">Åbn i browser</string>
+    <string name="shared_string_source">Kilde</string>
+    <string name="shared_string_no_internet_connection">Ingen internetforbindelse</string>
+    <string name="no_internet_descr">Tjek din forbindelse og prøv igen.</string>
+    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photos_available">Ingen fotos tilgængelige</string>
+    <string name="wikimedia">Wikimedia</string>
 </resources>

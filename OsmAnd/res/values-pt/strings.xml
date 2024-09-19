@@ -1872,7 +1872,7 @@
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver apenas imagens adicionadas</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Introduza o nome de utilizador</string>
     <string name="mapillary_menu_descr_username">Ver imagens adicionadas apenas por</string>
     <string name="mapillary_menu_title_username">Nome de utilizador</string>
@@ -4367,7 +4367,7 @@
     <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
     <string name="delete_history_items_descr">Eliminar os itens selecionados do histórico\?</string>
     <string name="delete_history_items">Eliminar %1$s itens do histórico\?</string>
-    <string name="quick_action_toggle_preference">Um alternador para alterar a preferência.</string>
+    <string name="quick_action_toggle_preference">Um selector para alterar a preferência.</string>
     <string name="copying_file">A copiar o ficheiro %1$s…</string>
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
@@ -5898,4 +5898,6 @@
     <string name="shared_string_dp">dp</string>
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
+    <string name="shared_string_decrease">Diminuir</string>
+    <string name="shared_string_increase">Aumentar</string>
 </resources>

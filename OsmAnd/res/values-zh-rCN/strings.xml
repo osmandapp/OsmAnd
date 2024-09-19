@@ -2385,7 +2385,7 @@
     <string name="mapillary_menu_date_from">从</string>
     <string name="mapillary_menu_title_username">用户名</string>
     <string name="mapillary_menu_edit_text_hint">输入用户名</string>
-    <string name="mapillary_menu_title_dates">日期</string>
+    <string name="shared_string_date">日期</string>
     <string name="mapillary_menu_descr_username">仅查看特定用户添加的图像</string>
     <string name="mapillary_menu_descr_dates">只查看新增加的图片</string>
     <string name="mapillary_menu_filter_description">按提交者、日期或类型筛选图像。仅在特写缩放中有效。</string>

@@ -2001,7 +2001,7 @@
     <string name="wrong_user_name">Yanlış kullanıcı adı</string>
     <string name="shared_string_to">Buraya</string>
     <string name="mapillary_menu_descr_dates">Yalnızca eklenen resimleri görüntüle</string>
-    <string name="mapillary_menu_title_dates">Tarih</string>
+    <string name="shared_string_date">Tarih</string>
     <string name="mapillary_menu_edit_text_hint">Kullanıcı-adını yazın</string>
     <string name="mapillary_menu_descr_username">Yalnızca şu kişi tarafından eklenen görüntüler görüntülensin</string>
     <string name="route_point">Rota noktası</string>

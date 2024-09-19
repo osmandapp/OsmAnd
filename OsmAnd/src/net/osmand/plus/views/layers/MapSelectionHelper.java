@@ -7,7 +7,6 @@ import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
@@ -73,6 +72,7 @@ import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -92,11 +92,6 @@ public class MapSelectionHelper {
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
 	private static final int TILE_SIZE = 256;
-	public static final int SHIFT_MULTIPOLYGON_IDS = 43;
-	public static final int SHIFT_NON_SPLIT_EXISTING_IDS = 41;
-	public static final long RELATION_BIT = 1L << SHIFT_MULTIPOLYGON_IDS - 1; //According IndexPoiCreator SHIFT_MULTIPOLYGON_IDS
-	public static final long SPLIT_BIT = 1L << SHIFT_NON_SPLIT_EXISTING_IDS - 1; //According IndexVectorMapCreator
-	public static final int DUPLICATE_SPLIT = 5; //According IndexPoiCreator DUPLICATE_SPLIT
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
@@ -637,7 +632,7 @@ public class MapSelectionHelper {
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id) {
-		int searchRadius = isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
+		int searchRadius = OsmUtils.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
 				? AMENITY_SEARCH_RADIUS_FOR_RELATION
 				: AMENITY_SEARCH_RADIUS;
 		return findAmenity(app, latLon, names, id, searchRadius);
@@ -646,7 +641,7 @@ public class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id, int radius) {
-		id = getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+		id = OsmUtils.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
@@ -671,8 +666,8 @@ public class MapSelectionHelper {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
 				long amenityId;
-				if (isShiftedID(initAmenityId)) {
-					amenityId = getOsmId(initAmenityId);
+				if (OsmUtils.isShiftedID(initAmenityId)) {
+					amenityId = OsmUtils.getOsmId(initAmenityId);
 				} else {
 					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
 				}
@@ -696,25 +691,6 @@ public class MapSelectionHelper {
 			}
 		}
 		return null;
-	}
-
-	public static boolean isIdFromRelation(long id) {
-		return id > 0 && (id & RELATION_BIT) == RELATION_BIT;
-	}
-
-	public static boolean isIdFromSplit(long id) {
-		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
-	}
-
-	public static long getOsmId(long id) {
-		//According methods assignIdForMultipolygon and genId in IndexPoiCreator
-		long clearBits = RELATION_BIT | SPLIT_BIT;
-		id = isShiftedID(id) ? (id & ~clearBits) >> DUPLICATE_SPLIT : id;
-		return id >> SHIFT_ID;
-	}
-
-	public static boolean isShiftedID(long id) {
-		return isIdFromRelation(id) || isIdFromSplit(id);
 	}
 
 	static class MapSelectionResult {

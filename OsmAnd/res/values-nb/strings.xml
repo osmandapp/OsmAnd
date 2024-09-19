@@ -1997,7 +1997,7 @@
     <string name="wrong_user_name">Feil brukernavn</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Skriv inn brukernavn</string>
     <string name="mapillary_menu_title_username">Brukernavn</string>
     <string name="shared_string_reset">Tilbakestill</string>

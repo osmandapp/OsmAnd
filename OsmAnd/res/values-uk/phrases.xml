@@ -1936,7 +1936,7 @@
     <string name="poi_depth">Глибина</string>
     <string name="poi_payment_dogecoin_yes">Dogecoin</string>
     <string name="poi_artwork_type_installation">Вид: інсталяція</string>
-    <string name="poi_defibrillator">Дефібрилятор</string>
+    <string name="poi_defibrillator">Дефібрилятор;АЗД</string>
     <string name="poi_salt_yes">Сіль</string>
     <string name="poi_artwork_type_mosaic">Вид: мозаїка</string>
     <string name="poi_defibrillator_yes">Дефібрилятор: є</string>

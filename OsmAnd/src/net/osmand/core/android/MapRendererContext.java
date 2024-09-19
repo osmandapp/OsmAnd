@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.core.jni.ElevationConfiguration;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
@@ -21,6 +22,8 @@ import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
+import net.osmand.core.jni.MapObject;
+import net.osmand.core.jni.MapObjectList;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -29,6 +32,7 @@ import net.osmand.core.jni.MapPrimitivesProvider.Mode;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
+import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
@@ -36,11 +40,17 @@ import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.QStringList;
 import net.osmand.core.jni.QStringStringHash;
+import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -54,11 +64,13 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -660,5 +672,95 @@ public class MapRendererContext {
 		public static ProviderType getProviderType(boolean vectorLayerEnabled) {
 			return vectorLayerEnabled ? MAIN : CONTOUR_LINES;
 		}
+	}
+
+	public List<RenderedObject> retrievePolygonsAroundMapObject(PointI point, Object mapObject, ZoomLevel zoomLevel) {
+		List<RenderedObject> rendPolygons = retrievePolygonsAroundPoint(point, zoomLevel, false);
+		List<LatLon> objectPolygon = null;
+		if (mapObject instanceof Amenity am) {
+			objectPolygon = am.getPolygon();
+		}
+		if (mapObject instanceof RenderedObject ro) {
+			objectPolygon = ro.getPolygon();
+		}
+		List<RenderedObject> res = new ArrayList<>();
+		if (objectPolygon != null) {
+			for (RenderedObject r : rendPolygons) {
+				if (Algorithms.isFirstPolygonInsideSecond(objectPolygon, r.getPolygon())) {
+					res.add(r);
+				}
+			}
+		} else {
+			res = rendPolygons;
+		}
+		return res;
+	}
+
+	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
+		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+		List<RenderedObject> res = new ArrayList<>();
+		if (polygons.size() > 0) {
+			for (int i = 0; i < polygons.size(); i++) {
+				MapObject polygon = polygons.get(i);
+				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
+				res.add(renderedObject);
+			}
+		}
+		return res;
+	}
+
+	private RenderedObject createRenderedObjectForPolygon(MapObject mapObject, int order) {
+		RenderedObject object = new RenderedObject();
+		QStringStringHash tags = mapObject.getResolvedAttributes();
+		QStringList tagsKeys = tags.keys();
+		for (int i = 0; i < tagsKeys.size(); i++) {
+			String key = tagsKeys.get(i);
+			String value = tags.get(key);
+			object.putTag(key, value);
+		}
+
+		QStringStringHash names = mapObject.getCaptionsInAllLanguages();
+		QStringList namesKeys = names.keys();
+		for (int i = 0; i < namesKeys.size(); i++) {
+			String key = namesKeys.get(i);
+			String value = names.get(key);
+			object.setName(key, value);
+		}
+
+		QVectorPointI points31 = mapObject.getPoints31();
+		QuadRect rect = new QuadRect();
+		for (int i = 0; i < points31.size(); i++) {
+			PointI p = points31.get(i);
+			object.addLocation(p.getX(), p.getY());
+			rect.expand(p.getX(), p.getY(), p.getX(), p.getY());
+		}
+		object.setBbox((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom);
+		ObfMapObject obfMapObject;
+		try {
+			obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
+		} catch (Exception eObfMapObject) {
+			obfMapObject = null;
+		}
+		if (obfMapObject != null) {
+			object.setId(obfMapObject.getId().getId().longValue());
+		}
+		object.markAsPolygon(true);
+		object.setOrder(order);
+
+		if (Algorithms.isEmpty(object.getName())) {
+			String captionInNativeLanguage = mapObject.getCaptionInNativeLanguage();
+			if (!Algorithms.isEmpty(captionInNativeLanguage)) {
+				object.setName(captionInNativeLanguage);
+			} else {
+				Map<String, String> namesMap = object.getNamesMap(true);
+				if (!Algorithms.isEmpty(namesMap)) {
+					for (Entry<String, String> entry : namesMap.entrySet()) {
+						object.setName(entry.getValue());
+						break;
+					}
+				}
+			}
+		}
+		return object;
 	}
 }
