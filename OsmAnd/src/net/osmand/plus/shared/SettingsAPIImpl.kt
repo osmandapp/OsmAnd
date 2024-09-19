@@ -1,4 +1,4 @@
-package net.osmand
+package net.osmand.plus.shared
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.backend.preferences.CommonPreference

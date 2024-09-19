@@ -25,11 +25,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
@@ -47,7 +45,6 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.BaseTracksTabsFragment;
-import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -60,7 +57,10 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -250,6 +250,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				}
 			}
 		};
+	}
+
+	@Override
+	public void loadTracksProgress(@NonNull TrackItem... items) {
 	}
 
 	@Override
@@ -450,7 +454,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, null, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
-				reloadTracks();
+				reloadTracks(true);
 			}
 		});
 		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -461,7 +465,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
 		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
-			reloadTracks();
+			reloadTracks(true);
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
@@ -469,7 +473,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void fileRenamed(@NonNull File src, @NonNull File dest) {
-		reloadTracks();
+		reloadTracks(true);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -1,6 +1,10 @@
 package net.osmand.shared.io
 
+import kotlinx.cinterop.BooleanVar
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.alloc
+import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.ptr
 import platform.Foundation.NSDate
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSFileModificationDate
@@ -12,6 +16,21 @@ import platform.Foundation.timeIntervalSince1970
 actual class NativeFile actual constructor(actual val file: KFile) {
 
 	private val filePath = file.path()
+
+	actual fun absolutePath(): String {
+		TODO("Not yet implemented")
+	}
+
+	actual fun isDirectory(): Boolean {
+		return memScoped {
+			val isDirectory = alloc<BooleanVar>()
+			NSFileManager.defaultManager.fileExistsAtPath(filePath, isDirectory.ptr)
+		}
+	}
+
+	actual fun exists(): Boolean {
+		return NSFileManager.defaultManager.fileExistsAtPath(filePath)
+	}
 
 	actual fun length(): Long {
 		val attr: Map<Any?, *>? = NSFileManager.defaultManager.attributesOfItemAtPath(filePath, null)

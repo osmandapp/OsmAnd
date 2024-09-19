@@ -16,14 +16,14 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import net.osmand.SharedUtil
+import net.osmand.plus.shared.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripHelper
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GpxDbHelper
+import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType

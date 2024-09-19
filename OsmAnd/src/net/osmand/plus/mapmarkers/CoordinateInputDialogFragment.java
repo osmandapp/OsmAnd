@@ -56,7 +56,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;

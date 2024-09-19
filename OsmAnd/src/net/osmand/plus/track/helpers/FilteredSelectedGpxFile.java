@@ -10,17 +10,18 @@ import static net.osmand.shared.gpx.GpxParameter.SMOOTHING_THRESHOLD;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.io.KFile;
 
-import java.io.File;
 import java.util.List;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
@@ -115,7 +116,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		hdopFilter.reset();
 
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxDataItem item = gpxDbHelper.getItem(new File(gpxFile.getPath()));
+		GpxDataItem item = gpxDbHelper.getItem(new KFile(gpxFile.getPath()));
 		if (item != null) {
 			item.setParameter(SMOOTHING_THRESHOLD, Double.NaN);
 			item.setParameter(MIN_FILTER_SPEED, Double.NaN);
