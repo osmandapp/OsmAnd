@@ -58,7 +58,7 @@ public abstract class AbstractCard {
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@SuppressWarnings("deprecation")
-	protected static void openUrl(@NonNull Activity ctx,
+	public static void openUrl(@NonNull Activity ctx,
 								  @NonNull OsmandApplication app,
 								  @Nullable String title,
 								  @NonNull String url,

@@ -258,7 +258,7 @@
     <string name="enter_gpx_name">GPX ಕಡತದ ಹೆಸರು:</string>
     <string name="shared_string_to">ಗೆ</string>
     <string name="mapillary_menu_date_from">ಇಂದ</string>
-    <string name="mapillary_menu_title_dates">ದಿನಾಂಕಗಳು</string>
+    <string name="shared_string_date">ದಿನಾಂಕಗಳು</string>
     <string name="mapillary_menu_edit_text_hint">ಬಳಕೆದಾರರ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ</string>
     <string name="mapillary_menu_title_username">ಬಳಕೆದಾರರ ಹೆಸರು</string>
     <string name="mapillary_image">Mapillary ಚಿತ್ರ</string>

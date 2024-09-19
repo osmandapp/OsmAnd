@@ -2005,7 +2005,7 @@
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver somente imagens adicionadas</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Digite o nome de usuário</string>
     <string name="mapillary_menu_descr_username">Ver somente imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>

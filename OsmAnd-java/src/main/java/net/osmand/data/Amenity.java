@@ -10,6 +10,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONObject;
 
@@ -711,5 +712,19 @@ public class Amenity extends MapObject {
 			}
 		}
 		return result;
+	}
+
+	public List<LatLon> getPolygon() {
+		List<LatLon> res = new ArrayList<>();
+		if (x == null) {
+			return res;
+		}
+		for (int i = 0; i < getX().size(); i++) {
+			int x = getX().get(i);
+			int y = getY().get(i);
+			LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			res.add(l);
+		}
+		return res;
 	}
 }

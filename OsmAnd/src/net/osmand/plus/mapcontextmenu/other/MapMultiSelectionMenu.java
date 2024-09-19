@@ -58,21 +58,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			Object selectedObj = e.getKey();
 			IContextMenuProvider contextObject = e.getValue();
-			LatLon ll = null;
-			PointDescription pointDescription = null;
 
-			if (contextObject != null) {
-				ll = contextObject.getObjectLocation(selectedObj);
-				pointDescription = contextObject.getObjectName(selectedObj);
-			}
-			if (ll == null) {
-				ll = latLon;
-			}
-			if (pointDescription == null) {
-				pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
-			}
-
-			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
+			MenuObject menuObject = MenuObjectUtils.createMenuObject(selectedObj, contextObject, latLon, getMapActivity());
 			if (menuObject.needStreetName()) {
 				menuObject.setOnSearchAddressDoneCallback(onSearchAddressDone);
 			}

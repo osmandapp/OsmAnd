@@ -44,15 +44,14 @@ public class GpxMultiSegmentsApproximation {
 	private final float initDist;
 	java.util.PriorityQueue<RouteSegmentAppr> queue = new java.util.PriorityQueue<>(METRICS_COMPARATOR); 
 	TLongHashSet visited = new TLongHashSet();
-	
-	
+
 	private static class RouteSegmentAppr {
 		private final RouteSegment segment;
 		private final RouteSegmentAppr parent;
 
-		private int gpxStart;
+		private final int gpxStart;
 		private int gpxLen = 0;
-		private double maxDistToGpx;
+		private double maxDistToGpx = 0;
 		
 		private int gpxNext() {
 			return gpxStart + gpxLen + 1;
@@ -71,10 +70,8 @@ public class GpxMultiSegmentsApproximation {
 		}
 		
 		private double metric() {
-			return maxDistToGpx / Math.sqrt(gpxLen + 1);  // heuristics for eager algorithm
-//			return maxDistToGpx;
+			return maxDistToGpx / Math.sqrt(gpxLen + 1); // heuristics for eager algorithm
 		}
-		
 
 		@Override
 		public String toString() {
@@ -87,14 +84,13 @@ public class GpxMultiSegmentsApproximation {
 		this.gctx = gctx;
 		this.gpxPoints = gpxPoints;
 		minPointApproximation = gctx.ctx.config.minPointApproximation;
-//		minPointApproximation = 10;
 		initDist = minPointApproximation / 2;
 		
 	}
 	
 	public void loadConnections(RouteSegmentAppr last, List<RouteSegmentAppr> connected) {
 		connected.clear();
-		if(last.parent == null ) {
+		if (last.parent == null) {
 			RouteSegmentPoint pnt = ((RouteSegmentPoint)last.segment);
 			addSegmentInternal(last, pnt, connected);
 			if (pnt.others != null) {
@@ -119,8 +115,7 @@ public class GpxMultiSegmentsApproximation {
 			System.out.println("** " + sg + " - not accepted");
 		}
 	}
-	
-	
+
 	private void addSegment(RouteSegmentAppr last, RouteSegment sg, List<RouteSegmentAppr> connected) {
 		if (sg == null) {
 			return;
@@ -146,7 +141,6 @@ public class GpxMultiSegmentsApproximation {
 		return visited.contains(calculateRoutePointId(r));
 	}
 
-	
 	public GpxRouteApproximation gpxApproximation() throws IOException {
 		long timeToCalculate = System.nanoTime();
 		initGpxPointsXY31(gpxPoints);
@@ -168,7 +162,7 @@ public class GpxMultiSegmentsApproximation {
 						Collections.sort(connected, METRICS_COMPARATOR);
 						bestNext = connected.get(0);
 						queue.addAll(connected.subList(1, connected.size()));
-					} else if(PRIORITY_ALGORITHM) {
+					} else if (PRIORITY_ALGORITHM) {
 						queue.addAll(connected);
 					}
 				}
@@ -184,7 +178,7 @@ public class GpxMultiSegmentsApproximation {
 				last = bestNext;
 			} else { 
 				if (bestRoute != null) {
-					wrapupRoute(gpxPoints, bestRoute, true);
+					wrapupRoute(gpxPoints, bestRoute);
 				}
 				GpxPoint pnt = findNextRoutablePoint(bestRoute != null ? bestRoute.gpxNext() : last.gpxNext());
 				visited = new TLongHashSet();
@@ -203,10 +197,10 @@ public class GpxMultiSegmentsApproximation {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
 		}
 		if (bestRoute == null || bestRoute.gpxNext() < last.gpxNext()) {
-			bestRoute = last;
+			bestRoute = last; // prefer the farthest end-of-the-route
 		}
 		if (bestRoute != null) {
-			wrapupRoute(gpxPoints, bestRoute, false);
+			wrapupRoute(gpxPoints, bestRoute);
 		}
 		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
 				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
@@ -228,7 +222,6 @@ public class GpxMultiSegmentsApproximation {
 			System.out.println(string);
 		}
 	}
-	
 
 	private double gpxDist(int gpxL1, int gpxL2) {
 		return gpxPoints.get(Math.min(gpxL1, gpxPoints.size() - 1)).cumDist - 
@@ -237,9 +230,8 @@ public class GpxMultiSegmentsApproximation {
 
 	private boolean approximateSegment(RouteSegmentAppr parent, RouteSegment sg, List<RouteSegmentAppr> connected) {
 		RouteSegmentAppr c = new RouteSegmentAppr(parent, sg);
-		int pointInd = c.gpxStart + 1;
 		boolean added = false;
-		for (; pointInd < gpxPoints.size(); pointInd++) {
+		for (int pointInd = c.gpxStart + 1; pointInd < gpxPoints.size(); pointInd++) {
 			GpxPoint p = gpxPoints.get(pointInd);
 			if (p.x31 == c.segment.getEndPointX() && p.y31 == c.segment.getEndPointY()) {
 				c.gpxLen++;
@@ -271,7 +263,6 @@ public class GpxMultiSegmentsApproximation {
 		added |= addConnected(parent, c, connected);
 		return added;
 	}
-
 
 	private boolean addConnected(RouteSegmentAppr parent, RouteSegmentAppr c, List<RouteSegmentAppr> connected) {
 		if (isVisited(c)) {
@@ -351,14 +342,14 @@ public class GpxMultiSegmentsApproximation {
 		}
 	}
 
-	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute, boolean breakSegment) {
+	private void wrapupRoute(List<GpxPoint> gpxPoints, RouteSegmentAppr bestRoute) {
 		if (bestRoute.parent == null) {
 			return;
 		}
 		List<RouteSegmentResult> res = new ArrayList<>();
 		int startInd = 0;
-		int last = bestRoute.gpxNext();
-		// combining segments doesn't seem to have any effect on tests 
+		int last = Math.min(bestRoute.gpxNext(), gpxPoints.size() - 1);
+		// combining segments doesn't seem to have any effect on tests
 		RouteSegmentResult lastRes = null;
 		while (bestRoute != null && bestRoute.parent != null) {
 			startInd = bestRoute.gpxStart;
@@ -388,7 +379,6 @@ public class GpxMultiSegmentsApproximation {
 		}
 		gpxPoints.get(startInd).routeToTarget = res;
 		gpxPoints.get(startInd).targetInd = last; // keep straight line
-		gpxPoints.get(startInd).breakSegment = breakSegment;
 	}
 
 	private static long calculateRoutePointId(RouteSegmentAppr segm) {

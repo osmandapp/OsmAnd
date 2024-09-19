@@ -1478,7 +1478,7 @@
     <string name="ascent_descent">აღმავალი/დაღმავალი</string>
     <string name="average">საშუალო</string>
     <string name="mapillary_menu_title_username">მომხმარებელი</string>
-    <string name="mapillary_menu_title_dates">თარიღი</string>
+    <string name="shared_string_date">თარიღი</string>
     <string name="mapillary_menu_date_from">-დან</string>
     <string name="shared_string_to">-მდე</string>
     <string name="shared_string_permissions">უფლებები</string>

@@ -1730,7 +1730,7 @@
     <string name="mapillary_menu_title_tile_cache">Κρυφή μνήμη πλακιδίου</string>
     <string name="wrong_user_name">Εσφαλμένο όνομα χρήστη</string>
     <string name="mapillary_menu_descr_dates">Προβολή μόνο των προσθετημένων εικόνων</string>
-    <string name="mapillary_menu_title_dates">Ημερομηνία</string>
+    <string name="shared_string_date">Ημερομηνία</string>
     <string name="mapillary_menu_edit_text_hint">Πληκτρολογήστε όνομα χρήστη</string>
     <string name="mapillary_menu_descr_username">Προβολή μόνο των εικόνων που προστέθηκαν από</string>
     <string name="mapillary_menu_filter_description">Φιλτράρετε εικόνες κατά υποβάλλοντα, κατά ημερομηνία ή κατά τύπο. Μόνο ενεργό σε κοντινή εστίαση.</string>

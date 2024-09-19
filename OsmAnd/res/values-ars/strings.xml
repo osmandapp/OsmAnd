@@ -180,7 +180,7 @@
     <string name="shared_string_allow">سماح</string>
     <string name="install_selected_build">هل تريد تثبيت أوسماند - {0} من {1} {2} مب ؟</string>
     <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
-    <string name="mapillary_menu_title_dates">التاريخ</string>
+    <string name="shared_string_date">التاريخ</string>
     <string name="purchase_cancelled_dialog_descr">جدد الاشتراك للاستمرار في استخدام جميع الميزات:</string>
     <string name="go_back_to_osmand">عُد إلى خريطة أوسماند</string>
     <string name="share_geo">فتح بتطبيق آخر:</string>

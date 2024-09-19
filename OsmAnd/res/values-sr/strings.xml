@@ -1483,7 +1483,7 @@
     <string name="shared_string_to">Ка</string>
     <string name="mapillary_menu_date_from">Од</string>
     <string name="mapillary_menu_descr_dates">Прегледај само додате слике</string>
-    <string name="mapillary_menu_title_dates">Дан</string>
+    <string name="shared_string_date">Дан</string>
     <string name="mapillary_menu_edit_text_hint">Унесите корисничко име</string>
     <string name="mapillary_menu_descr_username">Прегледај само слике које је додао</string>
     <string name="mapillary_menu_title_username">Корисничко име</string>
@@ -5893,4 +5893,11 @@
     <string name="change_activity">Промени активност</string>
     <string name="shared_string_increase">Повећање</string>
     <string name="shared_string_decrease">Смањење</string>
+    <string name="open_in_browser">Отвори у прегледачу</string>
+    <string name="shared_string_source">Извор</string>
+    <string name="shared_string_no_internet_connection">Нема интернет везе</string>
+    <string name="no_internet_descr">Проверите своју везу и покушајте поново.</string>
+    <string name="no_photos_available_descr">Још увек није додата ниједна корисничка фотографија на ову локацију</string>
+    <string name="no_photos_available">Нема доступних фотографија</string>
+    <string name="wikimedia">Викимедиа</string>
 </resources>

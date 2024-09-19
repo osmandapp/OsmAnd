@@ -353,9 +353,9 @@ public class GpxRouteApproximation {
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		RoutePlannerFrontEnd.GpxPoint straightPointStart = null;
+
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
-			boolean breakSegment = false;
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
@@ -375,32 +375,27 @@ public class GpxRouteApproximation {
 				i = pnt.targetInd;
 			} else {
 				// add straight line from i -> i+1
-				breakSegment = true;
-				i++;
-			}
-			if (breakSegment || pnt.breakSegment) {
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
 					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
 						RoutePlannerFrontEnd.GpxPoint prev = gctx.finalPoints.get(gctx.finalPoints.size() - 1);
-						router.makeSegmentPointPrecise(gctx.ctx, prev.getLastRouteRes(), prev.loc, false);
+						router.makeSegmentPointPrecise(gctx.ctx, prev.getLastRouteRes(), pnt.loc, false);
 						lastStraightLine.add(gctx.getLastPoint());
 					}
 					straightPointStart = pnt;
 				}
-				if (!pnt.breakSegment) {
-					lastStraightLine.add(pnt.loc);
-				}
+				lastStraightLine.add(pnt.loc);
+				i++;
 			}
 		}
+
 		if (lastStraightLine != null) {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
 		if (router.isUseGeometryBasedApproximation()) {
-			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // not required by classic method
-		}
-		if (GPX_SEGMENT_ALGORITHM != GPX_OSM_MULTISEGMENT_SCAN_ALGORITHM) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.fullRoute); // routing-based already did it
+		} else {
 			cleanDoubleJoints(gctx);
 		}
 		// clean turns to recalculate them

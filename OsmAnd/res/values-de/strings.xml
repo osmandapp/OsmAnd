@@ -2390,7 +2390,7 @@
     <string name="shared_string_to">Bis</string>
     <string name="mapillary_menu_date_from">Von</string>
     <string name="mapillary_menu_descr_dates">Nur hinzugefügte Bilder betrachten</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="average">Durchschnitt</string>
     <string name="max_min">max/min</string>
     <string name="shared_string_reset">Zurücksetzen</string>
@@ -5899,4 +5899,11 @@
     <string name="change_activity">Aktivität ändern</string>
     <string name="shared_string_increase">Erhöhen</string>
     <string name="shared_string_decrease">Verringern</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Im Browser öffnen</string>
+    <string name="shared_string_source">Quelle</string>
+    <string name="shared_string_no_internet_connection">Keine Internetverbindung</string>
+    <string name="no_internet_descr">Bitte Internetverbindung und erneut versuchen.</string>
+    <string name="no_photos_available_descr">Noch keine Benutzerfotos zu diesem Standort hinzugefügt</string>
+    <string name="no_photos_available">Keine Fotos verfügbar</string>
 </resources>

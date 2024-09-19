@@ -2380,7 +2380,7 @@
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="mapillary_menu_descr_dates">Zobraziť iba pridané obrázky</string>
-    <string name="mapillary_menu_title_dates">Dátum</string>
+    <string name="shared_string_date">Dátum</string>
     <string name="mapillary_menu_edit_text_hint">Zadajte meno používateľa</string>
     <string name="mapillary_menu_descr_username">Zobraziť iba obrázky pridané</string>
     <string name="mapillary_menu_title_username">Meno používateľa</string>

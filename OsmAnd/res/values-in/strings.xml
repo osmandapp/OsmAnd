@@ -202,7 +202,7 @@
     <string name="shared_string_to">Ke</string>
     <string name="mapillary_menu_date_from">Dari</string>
     <string name="mapillary_menu_descr_dates">Tampilkan hanya gambar yang ditambahkan</string>
-    <string name="mapillary_menu_title_dates">Tanggal</string>
+    <string name="shared_string_date">Tanggal</string>
     <string name="mapillary_menu_edit_text_hint">Ketik nama pengguna</string>
     <string name="mapillary_menu_descr_username">Tampilkan hanya gambar yang ditambahkan oleh</string>
     <string name="mapillary_menu_title_username">Nama pengguna</string>
