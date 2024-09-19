@@ -1,7 +1,7 @@
 package net.osmand.shared.util
 
 import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.io.KFile
+import net.osmand.shared.extensions.format
 import kotlin.math.max
 import kotlin.math.min
 
@@ -93,11 +93,10 @@ object KAlgorithms {
 	}
 
 	fun colorToString(color: Int): String {
-		val unsigned = color.toUInt()
-		return if ((0xFF000000.toUInt() and unsigned) == 0xFF000000.toUInt()) {
-			"#" + (unsigned and 0x00FFFFFF.toUInt()).toString(16).padStart(6, '0').uppercase()
+		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
+			"#%06X".format(color and 0x00FFFFFF)
 		} else {
-			"#" + unsigned.toString(16).padStart(8, '0').uppercase()
+			"#%08X".format(color)
 		}
 	}
 

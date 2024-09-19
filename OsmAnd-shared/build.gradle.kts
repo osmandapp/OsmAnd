@@ -77,6 +77,10 @@ kotlin {
 		iosMain.dependencies {
 			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
 		}
+
+		commonTest.dependencies {
+			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
+		}
 	}
 }
 
