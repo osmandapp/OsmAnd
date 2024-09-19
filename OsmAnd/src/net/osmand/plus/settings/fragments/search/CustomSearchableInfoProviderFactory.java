@@ -13,7 +13,7 @@ import java.util.Optional;
 import de.KnollFrank.lib.settingssearch.common.Lists;
 import de.KnollFrank.lib.settingssearch.search.provider.SearchableInfoProvider;
 
-class CustomCustomSearchableInfoProviderFactory {
+class CustomSearchableInfoProviderFactory {
 
 	public static SearchableInfoProvider createCustomSearchableInfoProvider() {
 		return preference -> {

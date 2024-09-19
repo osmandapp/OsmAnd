@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.CustomCustomSearchableInfoProviderFactory.createCustomSearchableInfoProvider;
+import static net.osmand.plus.settings.fragments.search.CustomSearchableInfoProviderFactory.createCustomSearchableInfoProvider;
 
 import android.view.View;
 import android.widget.ImageView;
