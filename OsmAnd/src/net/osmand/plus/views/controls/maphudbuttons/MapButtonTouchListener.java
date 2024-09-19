@@ -44,24 +44,26 @@ public class MapButtonTouchListener implements OnTouchListener {
 				view.setScaleX(1);
 				view.setScaleY(1);
 				view.setAlpha(1f);
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-				if (AndroidUiHelper.isOrientationPortrait(activity))
-					preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-				else preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+
+				updatePreference(view);
+
 				return true;
 			}
 			case MotionEvent.ACTION_MOVE -> {
-				if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
+				if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0) {
 					setUpInitialValues(view, event);
-				int padding = AndroidUtils.calculateTotalSizePx(activity, R.dimen.map_button_margin);
+				}
+				int padding = AndroidUtils.calculateTotalSizePx(view.getContext(), R.dimen.map_button_margin);
 				FrameLayout parent = (FrameLayout) view.getParent();
 				FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
 				int deltaX = (int) (initialTouchX - event.getRawX());
 				int deltaY = (int) (initialTouchY - event.getRawY());
 				int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding * 2);
 				int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding * 2);
-				if (view.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
+
+				if (view.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0) {
 					param.bottomMargin = newMarginY;
+				}
 				if (view.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
 					param.rightMargin = newMarginX;
 				}
@@ -72,14 +74,24 @@ public class MapButtonTouchListener implements OnTouchListener {
 		return false;
 	}
 
-	private int interpolate(int value, int divider, int boundsSize) {
-		if (value <= divider && value > 0) return value * value / divider;
-		else {
-			int leftMargin = boundsSize - value - divider;
-			if (leftMargin <= divider && value < boundsSize - divider)
-				return leftMargin - (leftMargin * leftMargin / divider) + value;
-			else return value;
+	private void updatePreference(@NonNull View view) {
+		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+		} else {
+			preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
 		}
+	}
+
+	private int interpolate(int value, int divider, int boundsSize) {
+		if (value <= divider && value > 0) {
+			return value * value / divider;
+		}
+		int leftMargin = boundsSize - value - divider;
+		if (leftMargin <= divider && value < boundsSize - divider) {
+			return leftMargin - (leftMargin * leftMargin / divider) + value;
+		}
+		return value;
 	}
 
 	private void setUpInitialValues(@NonNull View view, @NonNull MotionEvent event) {

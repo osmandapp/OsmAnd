@@ -8,6 +8,7 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
+import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -19,11 +20,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -165,6 +168,20 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	public void setUseCustomPosition(boolean useCustomPosition) {
 		this.useCustomPosition = useCustomPosition;
+
+		MapButtonState buttonState = getButtonState();
+		FabMarginPreference marginPreference = buttonState != null ? buttonState.getFabMarginPref() : null;
+		if (useCustomPosition && marginPreference != null) {
+			setOnLongClickListener(v -> {
+				Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
+				vibrator.vibrate(VIBRATE_SHORT);
+				setScaleX(1.5f);
+				setScaleY(1.5f);
+				setAlpha(0.95f);
+				setOnTouchListener(new MapButtonTouchListener(mapActivity, marginPreference));
+				return true;
+			});
+		}
 	}
 
 	public void setUseDefaultAppearance(boolean useDefaultAppearance) {
@@ -351,9 +368,12 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	public void updateMargins() {
+		if (mapActivity == null) {
+			return;
+		}
 		MapButtonState buttonState = getButtonState();
 		FabMarginPreference preference = buttonState != null ? buttonState.getFabMarginPref() : null;
-		if (mapActivity != null && useCustomPosition && preference != null) {
+		if (preference != null && useCustomPosition) {
 			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 				Pair<Integer, Integer> margins = preference.getPortraitFabMargins();
 				Pair<Integer, Integer> defMargins = preference.getDefaultPortraitMargins();

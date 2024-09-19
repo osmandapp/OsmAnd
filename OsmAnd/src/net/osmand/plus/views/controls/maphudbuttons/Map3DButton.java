@@ -2,10 +2,8 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 import static net.osmand.plus.views.OsmandMapTileView.ElevationListener;
-import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
-import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -41,7 +39,6 @@ public class Map3DButton extends MapButton {
 		animateDraggingMapThread = getMapView().getAnimatedDraggingThread();
 
 		setOnClickListener(getOnCLickListener());
-		setOnLongClickListener(getLongClickListener());
 	}
 
 	@Nullable
@@ -90,19 +87,6 @@ public class Map3DButton extends MapButton {
 			public void onStopChangingElevation(float angle) {
 				buttonState.setElevationAngle(angle);
 			}
-		};
-	}
-
-	@NonNull
-	private View.OnLongClickListener getLongClickListener() {
-		return view -> {
-			Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
-			vibrator.vibrate(VIBRATE_SHORT);
-			setScaleX(1.5f);
-			setScaleY(1.5f);
-			setAlpha(0.95f);
-			setOnTouchListener(new MapButtonTouchListener(mapActivity, buttonState.getFabMarginPref()));
-			return true;
 		};
 	}
 
