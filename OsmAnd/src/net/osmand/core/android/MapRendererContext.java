@@ -45,6 +45,7 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
@@ -674,9 +675,23 @@ public class MapRendererContext {
 	}
 
 	public List<RenderedObject> retrievePolygonsAroundMapObject(PointI point, Object mapObject, ZoomLevel zoomLevel) {
-		List<RenderedObject> res = retrievePolygonsAroundPoint(point, zoomLevel, false);
-		if (mapObject instanceof RenderedObject renderedObject) {
-			res.remove(renderedObject);
+		List<RenderedObject> rendPolygons = retrievePolygonsAroundPoint(point, zoomLevel, false);
+		List<LatLon> objectPolygon = null;
+		if (mapObject instanceof Amenity am) {
+			objectPolygon = am.getPolygon();
+		}
+		if (mapObject instanceof RenderedObject ro) {
+			objectPolygon = ro.getPolygon();
+		}
+		List<RenderedObject> res = new ArrayList<>();
+		if (objectPolygon != null) {
+			for (RenderedObject r : rendPolygons) {
+				if (Algorithms.isFirstPolygonInsideSecond(objectPolygon, r.getPolygon())) {
+					res.add(r);
+				}
+			}
+		} else {
+			res = rendPolygons;
 		}
 		return res;
 	}
@@ -727,7 +742,7 @@ public class MapRendererContext {
 			obfMapObject = null;
 		}
 		if (obfMapObject != null) {
-			object.setId(obfMapObject.getId().getOsmId());
+			object.setId(obfMapObject.getId().getId().longValue());
 		}
 		object.markAsPolygon(true);
 		object.setOrder(order);
@@ -743,9 +758,7 @@ public class MapRendererContext {
 						object.setName(entry.getValue());
 						break;
 					}
-				}/* else {
-					object.setName(OsmUtils.getOsmUrlForId(object));// way x > 1
-				}*/
+				}
 			}
 		}
 		return object;
