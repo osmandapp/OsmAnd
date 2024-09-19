@@ -454,7 +454,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, null, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
-				reloadTracks();
+				reloadTracks(true);
 			}
 		});
 		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -465,7 +465,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
 		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
-			reloadTracks();
+			reloadTracks(true);
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
@@ -473,7 +473,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void fileRenamed(@NonNull File src, @NonNull File dest) {
-		reloadTracks();
+		reloadTracks(true);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

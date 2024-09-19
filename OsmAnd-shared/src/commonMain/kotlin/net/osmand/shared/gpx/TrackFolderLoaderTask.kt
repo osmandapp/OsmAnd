@@ -16,14 +16,17 @@ import net.osmand.shared.util.LoggerFactory
 
 class TrackFolderLoaderTask(
 	private val folder: TrackFolder,
-	private val listener: LoadTracksListener
-) : KAsyncTask<Unit, TrackItem, Unit>(true) {
+	private val listener: LoadTracksListener,
+	private val forceLoad: Boolean = false
+) : KAsyncTask<Unit, TrackItem, TrackFolder>(true) {
 
 	companion object {
 		private val log = LoggerFactory.getLogger("TrackFolderLoaderTask")
 
 		private const val LOG_BATCH_SIZE = 100
 		private const val PROGRESS_BATCH_SIZE = 70
+
+		private var cachedRootFolder: TrackFolder? = null
 	}
 
 	private var loadingTime = 0L
@@ -32,15 +35,21 @@ class TrackFolderLoaderTask(
 	private var taskSync = Synchronizable()
 	private var progressSync = Synchronizable()
 
+	private fun shouldLoadFolder(cachedRootFolder: TrackFolder?) =
+		forceLoad || cachedRootFolder == null || !folder.isRootFolder
+
 	override fun onPreExecute() {
-		listener.loadTracksStarted()
+		if (shouldLoadFolder(cachedRootFolder)) listener.loadTracksStarted()
 	}
 
 	override fun onProgressUpdate(vararg values: TrackItem) {
-		listener.loadTracksProgress(*values)
+		if (shouldLoadFolder(cachedRootFolder)) listener.loadTracksProgress(*values)
 	}
 
-	override suspend fun doInBackground(vararg params: Unit) {
+	override suspend fun doInBackground(vararg params: Unit): TrackFolder {
+		val cachedRootFolder = cachedRootFolder
+		if (!shouldLoadFolder(cachedRootFolder)) return cachedRootFolder!!
+
 		val start = currentTimeMillis()
 		log.info("Start loading tracks in ${folder.getDirName()}")
 
@@ -49,6 +58,9 @@ class TrackFolderLoaderTask(
 
 		val progress = mutableListOf<TrackItem>()
 		loadGPXFolder(folder, progress)
+		if (folder.isRootFolder) {
+			Companion.cachedRootFolder = TrackFolder(folder)
+		}
 
 		if (progress.isNotEmpty()) {
 			publishProgress(*progress.toTypedArray())
@@ -56,9 +68,13 @@ class TrackFolderLoaderTask(
 
 		listener.tracksLoaded(folder)
 		log.info("Finished loading tracks. Took ${currentTimeMillis() - start}ms")
+
+		return folder
 	}
 
-	override fun onPostExecute(result: Unit) {
+	override fun onPostExecute(result: TrackFolder) {
+		val cachedRootFolder = cachedRootFolder
+		if (result === cachedRootFolder) folder.update(cachedRootFolder)
 		listener.loadTracksFinished(folder)
 		SmartFolderHelper.notifyUpdateListeners()
 	}

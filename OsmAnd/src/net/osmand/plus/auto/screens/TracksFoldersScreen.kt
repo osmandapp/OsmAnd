@@ -63,7 +63,7 @@ class TracksFoldersScreen(
 
     private fun reloadTracks() {
         val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR).kFile(), null)
-        asyncLoader = TrackFolderLoaderTask(folder, this)
+        asyncLoader = TrackFolderLoaderTask(folder, this, true)
         asyncLoader!!.execute()
     }
 

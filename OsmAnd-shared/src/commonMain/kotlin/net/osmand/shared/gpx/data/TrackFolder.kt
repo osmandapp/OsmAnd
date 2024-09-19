@@ -24,6 +24,19 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		this.parentFolder = parentFolder
 	}
 
+	constructor(trackFolder: TrackFolder) : this(trackFolder.dirFile, trackFolder.parentFolder) {
+		update(trackFolder)
+	}
+
+	fun update(folder: TrackFolder) {
+		trackItems = folder.trackItems.toList()
+		subFolders = folder.subFolders.toList()
+		flattenedTrackItems = folder.flattenedTrackItems?.toList()
+		flattenedSubFolders = folder.flattenedSubFolders?.toList()
+		folderAnalysis = folder.folderAnalysis
+		lastModified = folder.lastModified
+	}
+
 	override fun getName(): String {
 		return GpxHelper.getFolderName(dirFile, false)
 	}

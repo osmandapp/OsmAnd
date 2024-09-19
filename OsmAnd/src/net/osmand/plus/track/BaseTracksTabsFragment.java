@@ -214,7 +214,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			setTabs(tabs);
 		}
 		if (asyncLoader == null) {
-			reloadTracks();
+			reloadTracks(false);
 		}
 		gpxSelectionHelper.addListener(this);
 	}
@@ -225,10 +225,10 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 		gpxSelectionHelper.removeListener(this);
 	}
 
-	protected void reloadTracks() {
+	protected void reloadTracks(boolean forceLoad) {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
 		TrackFolder folder = new TrackFolder(SharedUtil.kFile(gpxDir), null);
-		asyncLoader = new TrackFolderLoaderTask(folder, this);
+		asyncLoader = new TrackFolderLoaderTask(folder, this, forceLoad);
 		asyncLoader.execute();
 	}
 

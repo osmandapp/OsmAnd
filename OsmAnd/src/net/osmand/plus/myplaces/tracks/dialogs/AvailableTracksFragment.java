@@ -136,7 +136,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		smartFolderHelper.addUpdateListener(this);
 		if (!trackFoldersHelper.isImporting()) {
 			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
-				reloadTracks();
+				reloadTracks(false);
 			} else {
 				updateContent();
 			}

@@ -479,9 +479,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void reloadTracks() {
+		reloadTracks(true);
+	}
+
+	protected void reloadTracks(boolean forceLoad) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			foldersHelper.reloadTracks();
+			foldersHelper.reloadTracks(forceLoad);
 		}
 	}
 
