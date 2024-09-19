@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,18 +19,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.SharedUtil;
-import net.osmand.plus.helpers.RouteActivityHelper;
-import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
-import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
-import net.osmand.shared.gpx.GpxFile;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
@@ -55,10 +47,10 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.shared.gpx.data.TracksGroup;
+import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -66,6 +58,13 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.TrackFolderLoaderTask;
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -77,8 +76,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
@@ -91,7 +89,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final MyPlacesActivity activity;
 	private final TrackFolder rootFolder;
-	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private TrackFolderLoaderTask asyncLoader;
 
@@ -128,12 +125,12 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.gpxImportListener = gpxImportListener;
 	}
 
-	public void reloadTracks() {
-		if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
-			asyncLoader.cancel(false);
+	public void reloadTracks(boolean forceLoad) {
+		if (asyncLoader != null) {
+			asyncLoader.cancel();
 		}
-		asyncLoader = new TrackFolderLoaderTask(app, rootFolder, loadTracksListener);
-		asyncLoader.executeOnExecutor(singleThreadExecutor);
+		asyncLoader = new TrackFolderLoaderTask(rootFolder, loadTracksListener, forceLoad);
+		asyncLoader.execute();
 	}
 
 	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
@@ -441,7 +438,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, tracksGroups, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
-				reloadTracks();
+				reloadTracks(true);
 			}
 		});
 		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -477,7 +474,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 						if (gpxImportListener != null) {
 							gpxImportListener.onImportFinished();
 						}
-						reloadTracks();
+						reloadTracks(true);
 					}
 				});
 				boolean singleTrack = filesUri.size() == 1;
@@ -496,7 +493,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public boolean isLoadingTracks() {
-		return asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
+		return asyncLoader != null && asyncLoader.isRunning();
 	}
 
 	@Override
@@ -506,7 +503,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			SaveExistingFileListener listener = getSaveFileListener(src, dest);
 			FileExistBottomSheet.showInstance(manager, dest.getName(), listener);
 		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
-			reloadTracks();
+			reloadTracks(true);
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
@@ -518,7 +515,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			@Override
 			public void saveExistingFile(boolean overwrite) {
 				if (moveFile(overwrite)) {
-					reloadTracks();
+					reloadTracks(true);
 				} else {
 					app.showToastMessage(R.string.file_can_not_be_moved);
 				}

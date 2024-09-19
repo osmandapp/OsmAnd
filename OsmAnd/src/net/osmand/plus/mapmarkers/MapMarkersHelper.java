@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -23,7 +24,7 @@ import net.osmand.plus.mapmarkers.MapMarkersComparator.MapMarkersSortByDef;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -322,7 +323,7 @@ public class MapMarkersHelper {
 
 	private void updateGpxShowAsMarkers(@NonNull File file) {
 		GpxDbHelper gpxDbHelper = ctx.getGpxDbHelper();
-		GpxDataItem dataItem = gpxDbHelper.getItem(file);
+		GpxDataItem dataItem = gpxDbHelper.getItem(SharedUtil.kFile(file));
 		if (dataItem != null) {
 			dataItem.setParameter(SHOW_AS_MARKERS, true);
 			gpxDbHelper.updateDataItem(dataItem);

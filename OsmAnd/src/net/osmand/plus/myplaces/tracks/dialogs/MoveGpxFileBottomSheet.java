@@ -69,7 +69,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.create();
 		items.add(titleItem);
 
-		View addNewFolderView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
+		View addNewFolderView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
 		addNewFolderView.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 		AndroidUiHelper.updateVisibility(addNewFolderView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
@@ -87,7 +87,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.create();
 		items.add(addNewFolderItem);
 
-		DividerItem dividerItem = new DividerItem(app);
+		DividerItem dividerItem = new DividerItem(getContext());
 		dividerItem.setMargins(0, 0, 0, 0);
 		items.add(dividerItem);
 

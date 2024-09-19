@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
@@ -137,7 +137,7 @@ public class FileUtils {
 
 	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
 		GpxFile gpxFile = null;
-		app.getGpxDbHelper().rename(src, dest);
+		app.getGpxDbHelper().rename(SharedUtil.kFile(src), SharedUtil.kFile(dest));
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
@@ -197,7 +197,7 @@ public class FileUtils {
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
-			app.getGpxDbHelper().remove(file);
+			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
 			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
 			return true;
 		}

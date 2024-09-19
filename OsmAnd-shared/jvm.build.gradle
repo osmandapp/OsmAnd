@@ -9,6 +9,7 @@ kotlin {
         // Experimental Kotlin Gradle Plugin API opt-in
         compilerOptions {
             jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+            freeCompilerArgs.add("-Xjvm-default=all")
         }
     }
 
