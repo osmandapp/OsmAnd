@@ -5917,4 +5917,5 @@
     <string name="shared_string_no_internet_connection">Sin conexión a Internet</string>
     <string name="no_internet_descr">Comprueba tu conexión e intenta de nuevo.</string>
     <string name="wikimedia">Wikimedia</string>
+    <string name="no_photos_available_descr">Aún no se añadieron fotos de usuarios a esta ubicación</string>
 </resources>
