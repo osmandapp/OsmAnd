@@ -17,7 +17,6 @@ import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
-import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
@@ -53,15 +52,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
 
 	init {
-		val noAppMode = arrayOf<ApplicationMode>()
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_SPEED, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_RPM, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_AIR_INTAKE_TEMP, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(
-			WidgetType.OBD_ENGINE_COOLANT_TEMP,
-			*noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_TYPE, *noAppMode)
-		WidgetsAvailabilityHelper.regWidgetVisibility(WidgetType.OBD_FUEL_LEVEL, *noAppMode)
 		OBDDispatcher.addResponseListener(this)
 		OBDDispatcher.setReadStatusListener(this)
 	}
@@ -70,8 +60,26 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
 		appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
-		val fuelTypeWidget: MapWidget = OBDTextWidget(mapActivity, OBDWidgetDataFieldType.FUEL_TYPE)
+		val speedWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_SPEED)
+		widgetsInfos.add(creator.createWidgetInfo(speedWidget))
+		val rpmWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_RPM)
+		widgetsInfos.add(creator.createWidgetInfo(rpmWidget))
+		val airIntakeTempWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_AIR_INTAKE_TEMP)
+		widgetsInfos.add(creator.createWidgetInfo(airIntakeTempWidget))
+		val ambientAirTempWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_AMBIENT_AIR_TEMP)
+		widgetsInfos.add(creator.createWidgetInfo(ambientAirTempWidget))
+		val batteryVoltageWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
+		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
+		val fuelLevelWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEVEL)
+		widgetsInfos.add(creator.createWidgetInfo(fuelLevelWidget))
+		val fuelLeftDistanceWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_DISTANCE)
+		widgetsInfos.add(creator.createWidgetInfo(fuelLeftDistanceWidget))
+		val fuelConsumptionRateWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateWidget))
+		val fuelTypeWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_TYPE)
 		widgetsInfos.add(creator.createWidgetInfo(fuelTypeWidget))
+		val engineCoolantTempWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
+		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
 	}
 
 	override fun createMapWidgetForParams(
@@ -104,6 +112,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 				mapActivity,
 				OBDWidgetDataFieldType.FUEL_LVL)
 
+			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_LEFT_DISTANCE)
+
+			WidgetType.OBD_FUEL_CONSUMPTION_RATE -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_CONSUMPTION_RATE)
+
 			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
 				mapActivity,
 				OBDWidgetDataFieldType.FUEL_TYPE)
@@ -114,12 +130,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 
 			else -> null
 		}
-	}
-
-	override fun createMapWidgetForParams(
-		mapActivity: MapActivity,
-		widgetType: WidgetType): OBDTextWidget? {
-		return createMapWidgetForParams(mapActivity, widgetType, null, null)
 	}
 
 	override fun getId(): String {

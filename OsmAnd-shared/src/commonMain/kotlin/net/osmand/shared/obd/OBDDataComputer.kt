@@ -123,12 +123,18 @@ object OBDDataComputer {
 		return null
 	}
 
-	open class OBDComputerWidgetFormatter {
+	open class OBDComputerWidgetFormatter(val pattern: String = "%s") {
 		open fun format(v: Any?): String {
 			return if (v == null) {
 				"-"
 			} else {
-				"%s".format(v)
+				var ret = ""
+				try {
+					ret = pattern.format(v)
+				} catch (error: Throwable) {
+					log.error(error.message)
+				}
+				ret
 			}
 		}
 	}
@@ -152,6 +158,7 @@ object OBDDataComputer {
 		}
 
 		private fun compute(): Any? {
+			val locValues = ArrayList(values)
 			return when (type) {
 				TEMPERATURE_AMBIENT,
 				TEMPERATURE_COOLANT,
@@ -159,17 +166,17 @@ object OBDDataComputer {
 				SPEED,
 				BATTERY_VOLTAGE,
 				RPM -> {
-					if (averageSeconds == 0 && values.size > 0) {
-						values[values.size - 1].doubleValue
+					if (averageSeconds == 0 && locValues.size > 0) {
+						locValues[locValues.size - 1].doubleValue
 					} else {
-						averageDouble(values)
+						averageDouble(locValues)
 					}
 				}
 
 				FUEL_CONSUMPTION_RATE -> {
-					if (values.size >= 2) {
-						val first = values[0]
-						val last = values[values.size - 1]
+					if (locValues.size >= 2) {
+						val first = locValues[0]
+						val last = locValues[locValues.size - 1]
 						val diffPerc = last.doubleValue - first.doubleValue
 						val diffTime = last.timestamp - first.timestamp
 						diffPerc / diffTime / 1000
@@ -179,9 +186,9 @@ object OBDDataComputer {
 
 				FUEL_LEFT_DISTANCE -> {
 					// works for window > 15 min
-					if (values.size >= 2) {
-						val first = values[0]
-						val last = values[values.size - 1]
+					if (locValues.size >= 2) {
+						val first = locValues[0]
+						val last = locValues[locValues.size - 1]
 						val diffPerc = last.doubleValue - first.doubleValue
 						if (diffPerc > 0) {
 							var start = 0
@@ -217,16 +224,16 @@ object OBDDataComputer {
 
 				FUEL_LEFT_LITERS,
 				FUEL_LEFT_PERCENT -> {
-					if (values.size > 0) {
-						values[values.size - 1].doubleValue
+					if (locValues.size > 0) {
+						locValues[locValues.size - 1].doubleValue
 					} else {
 						null
 					}
 				}
 
 				FUEL_TYPE -> {
-					if (values.size > 0) {
-						values[values.size - 1].doubleValue
+					if (locValues.size > 0) {
+						locValues[locValues.size - 1].doubleValue
 					} else {
 						null
 					}

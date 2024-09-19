@@ -117,6 +117,8 @@ public enum WidgetType {
 	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_FUEL_LEVEL("obd_fuel_level", R.string.obd_fuel_level, R.string.obd_fuel_level_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_LEFT_DISTANCE("obd_fuel_left_distance", R.string.obd_fuel_left_distance, R.string.obd_fuel_left_distance_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_CONSUMPTION_RATE("obd_fuel_consumption_rate", R.string.obd_fuel_consumption_rate, R.string.obd_fuel_consumption_rate_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
 	TEMPERATURE("temperature_sensor", R.string.shared_string_temperature, R.string.sensor_temperature_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, ANT_PLUS, RIGHT),

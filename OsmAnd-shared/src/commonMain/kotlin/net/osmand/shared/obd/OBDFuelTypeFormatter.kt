@@ -2,7 +2,7 @@ package net.osmand.shared.obd
 
 import net.osmand.shared.util.Localization
 
-class OBDFuelTypeFormatter : OBDDataComputer.OBDComputerWidgetFormatter() {
+class OBDFuelTypeFormatter : OBDDataComputer.OBDComputerWidgetFormatter("%02.0f") {
 	override fun format(v: Any?): String {
 		return if (v == null) {
 			"-"

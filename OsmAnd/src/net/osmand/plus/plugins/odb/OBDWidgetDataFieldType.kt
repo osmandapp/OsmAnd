@@ -11,6 +11,8 @@ enum class OBDWidgetDataFieldType(
 	RPM(WidgetType.OBD_RPM, R.drawable.ic_action_thermometer, OBDCommand.OBD_RPM_COMMAND, OBDDataFieldType.RPM),
 	SPEED(WidgetType.OBD_SPEED, R.drawable.ic_action_sensor_heart_rate_outlined, OBDCommand.OBD_SPEED_COMMAND, OBDDataFieldType.SPEED),
 	FUEL_LVL(WidgetType.OBD_FUEL_LEVEL, R.drawable.widget_battery_day, OBDCommand.OBD_FUEL_LEVEL_COMMAND, OBDDataFieldType.FUEL_LVL),
+	FUEL_LEFT_DISTANCE(WidgetType.OBD_FUEL_LEFT_DISTANCE, R.drawable.widget_battery_day, OBDCommand.OBD_FUEL_LEVEL_COMMAND, OBDDataFieldType.FUEL_LVL),
+	FUEL_CONSUMPTION_RATE(WidgetType.OBD_FUEL_CONSUMPTION_RATE, R.drawable.widget_battery_day, OBDCommand.OBD_FUEL_LEVEL_COMMAND, OBDDataFieldType.FUEL_LVL),
 	AMBIENT_AIR_TEMP(WidgetType.OBD_AMBIENT_AIR_TEMP, R.drawable.ic_action_thermometer, OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, OBDDataFieldType.AMBIENT_AIR_TEMP),
 	BATTERY_VOLTAGE(WidgetType.OBD_BATTERY_VOLTAGE, R.drawable.ic_action_thermometer, OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND, OBDDataFieldType.BATTERY_VOLTAGE),
 	AIR_INTAKE_TEMP(WidgetType.OBD_AIR_INTAKE_TEMP, R.drawable.ic_action_signal, OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND, OBDDataFieldType.AIR_INTAKE_TEMP),
