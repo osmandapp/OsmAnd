@@ -58,22 +58,22 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 		}
 		if (hostOfPreference instanceof final ProfileAppearanceFragment profileAppearanceFragment) {
 			// adapted from ProfileAppearanceFragment.onPreferenceClick()
-			final ProfileOptionsDialogController profileOptionController = profileAppearanceFragment.getScreenController().getProfileOptionController();
 			final OsmandSettings settings = osmandApplication.getSettings();
 			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 				return Optional.of(
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 								createCustomizableSingleSelectionBottomSheet(
-										profileOptionController,
+										profileAppearanceFragment.getScreenController().getProfileOptionController(),
 										osmandApplication.getString(R.string.view_angle),
 										osmandApplication.getString(R.string.view_angle_description),
 										settings.VIEW_ANGLE_VISIBILITY),
 								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
-			} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
+			}
+			if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
 				return Optional.of(
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 								createCustomizableSingleSelectionBottomSheet(
-										profileOptionController,
+										profileAppearanceFragment.getScreenController().getProfileOptionController(),
 										osmandApplication.getString(R.string.location_radius),
 										osmandApplication.getString(R.string.location_radius_description),
 										settings.LOCATION_RADIUS_VISIBILITY),
