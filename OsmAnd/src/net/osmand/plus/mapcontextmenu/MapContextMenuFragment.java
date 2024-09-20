@@ -42,6 +42,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
@@ -53,6 +54,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
@@ -166,6 +168,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
+		DialogManager dialogManager = app.getDialogManager();
+		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
+		if (controller == null) {
+			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
+		}
 
 		map = mapActivity.getMapView();
 		displayPositionManager = mapActivity.getMapPositionManager();
@@ -1318,6 +1325,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		}
 		super.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		MapActivity mapActivity = requireMapActivity();
+		if (!mapActivity.isChangingConfigurations()) {
+			app.getDialogManager().unregister(GalleryController.PROCESS_ID);
+		}
 	}
 
 	@Override

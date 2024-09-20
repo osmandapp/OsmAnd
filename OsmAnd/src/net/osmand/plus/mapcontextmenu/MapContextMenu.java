@@ -435,7 +435,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null && init(latLon, pointDescription, object)) {
 			mapActivity.getMyApplication().logEvent("open_context_menu");
 			showInternal();
-			mapActivity.getMyApplication().getDialogManager().register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
 		}
 	}
 
@@ -526,10 +525,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				mapActivity.refreshMap();
 			}
-		}
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			app.getDialogManager().unregister(GalleryController.PROCESS_ID);
 		}
 		return result;
 	}
