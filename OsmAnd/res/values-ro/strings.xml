@@ -5892,4 +5892,5 @@
     <string name="shared_string_no_internet_connection">Lipsă conexiune la internet</string>
     <string name="no_internet_descr">Verificați conexiunea și reîncercați.</string>
     <string name="no_photos_available_descr">Nu au fost încă adăugate acestei locații fotografii de la utilizatori</string>
+    <string name="no_photos_available">Nicio fotografie disponibilă</string>
 </resources>
