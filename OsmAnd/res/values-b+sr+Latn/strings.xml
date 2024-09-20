@@ -5901,7 +5901,7 @@
     <string name="change_activity">Promeni aktivnost</string>
     <string name="shared_string_increase">Povećanje</string>
     <string name="shared_string_decrease">Smanjenje</string>
-    <string name="open_in_browser">Otvori u pregledaču</string>
+    <string name="open_in_browser">Otvori u pretraživaču</string>
     <string name="shared_string_source">Izvor</string>
     <string name="shared_string_no_internet_connection">Nema interneta</string>
     <string name="no_internet_descr">Proveri svoju vezu i pokušaj ponovo.</string>
