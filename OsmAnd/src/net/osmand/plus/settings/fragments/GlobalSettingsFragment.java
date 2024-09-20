@@ -32,20 +32,24 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.Map;
+import java.util.Optional;
+
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback {
+		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback, SearchablePreferenceDialogProvider {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String HISTORY_PREF_ID = "history";
 	private static final String MAP_RENDERING_ENGINE_ID = "map_rendering_engine";
-	public static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
+	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
 	private static final String ENABLE_PROXY_PREF_ID = "enable_proxy";
@@ -69,20 +73,41 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		String prefId = preference.getKey();
-
-		if (prefId.equals(SEND_ANONYMOUS_DATA_PREF_ID)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, this);
-			}
+		final Optional<SendAnalyticsBottomSheetDialogFragment> dialog = getDialog(preference, this);
+		if (dialog.isPresent()) {
+			show(dialog.get());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
+	private void show(final SendAnalyticsBottomSheetDialogFragment dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(app, fragmentManager);
+		}
+	}
+
+	private Optional<SendAnalyticsBottomSheetDialogFragment> getDialog(final Preference preference,
+																	   final GlobalSettingsFragment target) {
+		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
+				Optional.of(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) :
+				Optional.empty();
+	}
+
 	@Override
-	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.getDialog(preference, null)
+				.map(dialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								dialog,
+								SendAnalyticsBottomSheetDialogFragment::getSearchableInfo));
+	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(@NonNull Preference
+													  preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String prefId = preference.getKey();

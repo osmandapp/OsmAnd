@@ -190,10 +190,19 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
+		createInstance(target).show(app, fm);
+	}
+
+	public static @NonNull SendAnalyticsBottomSheetDialogFragment createInstance(final @Nullable Fragment target) {
+		final SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
+
+	public void show(final @NonNull OsmandApplication app, final @NonNull FragmentManager fm) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
-				SendAnalyticsBottomSheetDialogFragment fragment = createInstance(target);
-				fragment.show(fm, TAG);
+				show(fm, TAG);
 
 				OsmandSettings settings = app.getSettings();
 				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
@@ -207,12 +216,6 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
-	}
-
-	public static @NonNull SendAnalyticsBottomSheetDialogFragment createInstance(final @Nullable Fragment target) {
-		final SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
-		fragment.setTargetFragment(target, 0);
-		return fragment;
 	}
 
 	public String getSearchableInfo() {

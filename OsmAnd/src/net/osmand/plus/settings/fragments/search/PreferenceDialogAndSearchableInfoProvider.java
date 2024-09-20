@@ -3,10 +3,8 @@ package net.osmand.plus.settings.fragments.search;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
-import net.osmand.plus.settings.fragments.GlobalSettingsFragment;
 import net.osmand.plus.settings.fragments.VehicleParametersFragment;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -24,12 +22,6 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 		// FK-TODO: handle more preference dialogs, which shall be searchable
 		if (hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider) {
 			return searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
-		}
-		if (isSendAnonymousData(preference)) {
-			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							SendAnalyticsBottomSheetDialogFragment.createInstance(null),
-							SendAnalyticsBottomSheetDialogFragment::getSearchableInfo));
 		}
 		if (isSimulateYourLocation(preference)) {
 			// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
@@ -51,10 +43,6 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 							VehicleParametersBottomSheet::getSearchableInfo));
 		}
 		return Optional.empty();
-	}
-
-	private boolean isSendAnonymousData(final Preference preference) {
-		return GlobalSettingsFragment.SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey());
 	}
 
 	private boolean isSimulateYourLocation(final Preference preference) {
