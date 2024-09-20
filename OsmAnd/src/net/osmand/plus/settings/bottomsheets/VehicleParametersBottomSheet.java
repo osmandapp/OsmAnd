@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -47,6 +48,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
@@ -239,18 +241,32 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 									boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+				VehicleParametersBottomSheet
+						.createInstance(key, target, usedOnMap, appMode, false, Optional.empty())
+						.show(fm, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public static @NonNull VehicleParametersBottomSheet createInstance(final String key,
+																	   final Fragment target,
+																	   final boolean usedOnMap,
+																	   final @Nullable ApplicationMode appMode,
+																	   final boolean configureSettingsSearch,
+																	   final Optional<Preference> preference) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, key);
+
+		final VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
+		fragment.setTargetFragment(target, 0);
+		preference.ifPresent(fragment::setPreference);
+		fragment.setConfigureSettingsSearch(configureSettingsSearch);
+		return fragment;
 	}
 
 	public String getSearchableInfo() {
