@@ -37,35 +37,7 @@ enum class FuelType(val code: String, val screenNamId: String) {
 
 	companion object {
 		fun fromCode(code: String): FuelType {
-			return when (code.uppercase()) {
-				"00" -> NO_PROVIDED
-				"01" -> GASOLINE
-				"02" -> METHANOL
-				"03" -> ETHANOL
-				"04" -> DIESEL
-				"05" -> LPG
-				"06" -> CNG
-				"07" -> PROPANE
-				"08" -> ELECTRIC
-				"09" -> BIFUEL_RUNNING_GASOLINE
-				"0A" -> BIFUEL_RUNNING_METHANOL
-				"0B" -> BIFUEL_RUNNING_ETHANOL
-				"0C" -> BIFUEL_RUNNING_LPG
-				"0D" -> BIFUEL_RUNNING_CNG
-				"0E" -> BIFUEL_RUNNING_PROPANE
-				"0F" -> BIFUEL_RUNNING_ELECTRICITY
-				"10" -> BIFUEL_RUNNING_ELECTRIC_COMBUSTION_ENGINE
-				"11" -> HYBRID_GASOLINE
-				"12" -> HYBRID_ETHANOL
-				"13" -> HYBRID_DIESEL
-				"14" -> HYBRID_ELECTRIC
-				"15" -> HYBRID_ELECTRIC_COMBUSTION_ENGINE
-				"16" -> HYBRID_REGENERATIVE
-				"17" -> BIFUEL_RUNNING_HYDROGEN
-				"18" -> HYBRID_HYDROGEN
-				"19" -> HYDROGEN
-				else -> UNKNOWN
-			}
+			return FuelType.entries.find { it.code == code.uppercase()} ?: UNKNOWN
 		}
 	}
 }

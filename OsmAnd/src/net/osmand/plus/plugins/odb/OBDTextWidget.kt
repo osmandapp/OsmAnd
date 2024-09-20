@@ -11,6 +11,7 @@ import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidgetFormatter
 import net.osmand.shared.obd.OBDFuelTypeFormatter
+import net.osmand.util.Algorithms
 
 class OBDTextWidget @JvmOverloads constructor(
 	mapActivity: MapActivity,
@@ -19,6 +20,7 @@ class OBDTextWidget @JvmOverloads constructor(
 	SimpleWidget(mapActivity, fieldType.widgetType, customId, widgetsPanel) {
 	private val plugin: VehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 	private val widgetComputer: OBDComputerWidget
+	private var cacheTextData: String? = null
 
 	init {
 		val obdDataWidgetType: OBDTypeWidget
@@ -65,16 +67,24 @@ class OBDTextWidget @JvmOverloads constructor(
 				formatter = OBDFuelTypeFormatter()
 			}
 		}
+		//todo implement setting correct time for widget (0 for instant)
 		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, 15, formatter)
 	}
 	
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
-		val sensorData = plugin.getSensorData(fieldType)
 		val data = widgetComputer.computeValue()
+		val textData: String
+		val subtext: String?
 		if (data == null) {
-			setText(NO_VALUE, null)
+			textData = NO_VALUE
+			subtext = null
 		} else {
-			setText(data.toString(), fieldType.dataType.getDisplayUnit())
+			textData = data.toString()
+			subtext = fieldType.dataType.getDisplayUnit()
+		}
+		if(!Algorithms.objectEquals(textData, cacheTextData)) {
+			setText(textData, subtext)
+			cacheTextData = textData
 		}
 	}
 

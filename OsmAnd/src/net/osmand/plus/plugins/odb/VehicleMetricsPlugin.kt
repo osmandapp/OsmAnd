@@ -40,7 +40,7 @@ import okio.sink
 import okio.source
 import java.util.UUID
 
-class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDResponseListener,
+class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	OBDDispatcher.OBDReadStatusListener {
 	private val settings: OsmandSettings = app.settings
 
@@ -49,10 +49,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDevice: BluetoothDevice? = null
 	var socket: BluetoothSocket? = null
-	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
 
 	init {
-		OBDDispatcher.addResponseListener(this)
 		OBDDispatcher.setReadStatusListener(this)
 	}
 
@@ -239,49 +237,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 		}
 	}
 
-	fun addCommandToRead(command: OBDCommand) {
-		if (isCommandListening(command)) {
-			OBDDispatcher.addCommand(command)
-		}
-	}
-
 	@SuppressLint("MissingPermission")
 	fun getConnectedDeviceName(): String? {
 		return connectedDevice?.name
-	}
-
-	fun addResponseListener(responseListener: OBDResponseListener) {
-		OBDDispatcher.addResponseListener(responseListener)
-	}
-
-	fun removeResponseListener(responseListener: OBDResponseListener) {
-		OBDDispatcher.removeResponseListener(responseListener)
-	}
-
-	override fun onCommandResponse(command: OBDCommand, result: String) {
-		LOG.debug("OBD-II command ${command.name} result : $result")
-		sensorDataCache[command] = when (command) {
-			OBDCommand.OBD_RPM_COMMAND -> OBDDataField(RPM,  result)
-			OBDCommand.OBD_SPEED_COMMAND -> OBDDataField(SPEED, result)
-			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDDataField(AIR_INTAKE_TEMP, result)
-			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDDataField(COOLANT_TEMP, result)
-			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDDataField(FUEL_TYPE, result)
-			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDDataField(FUEL_LVL, result)
-			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDDataField(AMBIENT_AIR_TEMP, result)
-			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDDataField(BATTERY_VOLTAGE, result)
-			else -> null
-		}
-	}
-
-	fun isCommandListening(command: OBDCommand): Boolean {
-		return OBDDispatcher.getCommandQueue().contains(command)
-	}
-
-	fun getSensorData(dataField: OBDWidgetDataFieldType): OBDDataField? {
-		if (!isCommandListening(dataField.command)) {
-			OBDDispatcher.addCommand(dataField.command)
-		}
-		return sensorDataCache[dataField.command]
 	}
 
 	companion object {
@@ -300,9 +258,5 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDRespo
 
 	override fun updateLocation(location: Location) {
 		OBDDataComputer.registerLocation(OBDDataComputer.OBDLocation(location.time, KLatLon(location.latitude, location.longitude)))
-	}
-
-	override fun onBatchReadCompleted() {
-		OBDDataComputer.acceptValue(sensorDataCache)
 	}
 }

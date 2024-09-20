@@ -8,6 +8,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
 import okio.Buffer
@@ -18,7 +19,7 @@ import okio.Source
 
 object OBDDispatcher {
 
-	private var commandQueue: List<OBDCommand> = ArrayList()
+	private var commandQueue = listOf<OBDCommand>()
 	private val staleCommandsCache: MutableMap<OBDCommand, String> = HashMap()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
@@ -26,14 +27,13 @@ object OBDDispatcher {
 	private const val TERMINATE_SYMBOL = "\r\r>"
 	private const val RESPONSE_LINE_TERMINATOR = "\r"
 	private const val READ_DATA_COMMAND_CODE = "01"
-	private var responseListeners: List<OBDResponseListener> = ArrayList()
 	private var job: Job? = null
 	private var scope: CoroutineScope? = null
 	private var readStatusListener: OBDReadStatusListener? = null
+	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
 
 	interface OBDReadStatusListener {
 		fun onIOError()
-		fun onBatchReadCompleted()
 	}
 
 	private fun startReadObdLooper() {
@@ -50,7 +50,7 @@ object OBDDispatcher {
 							if (command.isStale) {
 								val cachedCommandResponse = staleCommandsCache[command]
 								if (cachedCommandResponse != null) {
-									dispatchResult(command, cachedCommandResponse)
+									consumeResponse(command, cachedCommandResponse)
 									continue
 								}
 							}
@@ -64,7 +64,7 @@ object OBDDispatcher {
 							var resultRaw = StringBuilder()
 							var readResponseFailed = false
 							try {
-								val startReadTime = Clock.System.now().toEpochMilliseconds()
+								val startReadTime = currentTimeMillis()
 								while (true) {
 									if (Clock.System.now()
 											.toEpochMilliseconds() - startReadTime > 3000) {
@@ -104,7 +104,7 @@ object OBDDispatcher {
 							for (responseIndex in 1 until listResponses.size) {
 								val result = command.parseResponse(listResponses[responseIndex])
 								log.debug("raw_response_$responseIndex: $result")
-								dispatchResult(command, result)
+								consumeResponse(command, result)
 								if (command.isStale) {
 									staleCommandsCache[command] = result
 									break
@@ -116,7 +116,7 @@ object OBDDispatcher {
 						log.error("Run OBD looper error. $error")
 						readStatusListener?.onIOError()
 					}
-					readStatusListener?.onBatchReadCompleted()
+					OBDDataComputer.acceptValue(sensorDataCache)
 				}
 			} catch (cancelError: CancellationException) {
 				log.debug("OBD reading canceled")
@@ -130,16 +130,12 @@ object OBDDispatcher {
 		}
 	}
 
+	fun clearCommands() {
+		commandQueue = listOf()
+	}
+
 	fun removeCommand(commandToStopReading: OBDCommand) {
 		commandQueue = KCollectionUtils.removeFromList(commandQueue, commandToStopReading)
-	}
-
-	fun addResponseListener(responseListener: OBDResponseListener) {
-		responseListeners = KCollectionUtils.addToList(responseListeners, responseListener)
-	}
-
-	fun removeResponseListener(responseListener: OBDResponseListener) {
-		responseListeners = KCollectionUtils.removeFromList(responseListeners, responseListener)
 	}
 
 	fun setReadStatusListener(listener: OBDReadStatusListener?) {
@@ -153,13 +149,17 @@ object OBDDispatcher {
 		startReadObdLooper()
 	}
 
-	fun getCommandQueue(): List<OBDCommand> {
-		return ArrayList(commandQueue)
-	}
-
-	private fun dispatchResult(command: OBDCommand, result: String) {
-		for (listener in responseListeners) {
-			listener.onCommandResponse(command, result)
+	private fun consumeResponse(command: OBDCommand, result: String) {
+		sensorDataCache[command] = when (command) {
+			OBDCommand.OBD_RPM_COMMAND -> OBDDataField(OBDDataFieldType.RPM,  result)
+			OBDCommand.OBD_SPEED_COMMAND -> OBDDataField(OBDDataFieldType.SPEED, result)
+			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.AIR_INTAKE_TEMP, result)
+			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.COOLANT_TEMP, result)
+			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_TYPE, result)
+			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_LVL, result)
+			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDDataField(OBDDataFieldType.AMBIENT_AIR_TEMP, result)
+			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDDataField(OBDDataFieldType.BATTERY_VOLTAGE, result)
+			else -> null
 		}
 	}
 }

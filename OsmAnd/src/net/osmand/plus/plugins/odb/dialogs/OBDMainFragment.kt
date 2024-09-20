@@ -1,12 +1,13 @@
 package net.osmand.plus.plugins.odb.dialogs
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ToggleButton
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
@@ -14,51 +15,50 @@ import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.shared.obd.OBDCommand
-import net.osmand.shared.obd.OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_FUEL_LEVEL_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_FUEL_TYPE_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_RPM_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_SPEED_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_SUPPORTED_LIST1_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_SUPPORTED_LIST2_COMMAND
-import net.osmand.shared.obd.OBDCommand.OBD_SUPPORTED_LIST3_COMMAND
-import net.osmand.shared.obd.OBDResponseListener
+import net.osmand.shared.obd.OBDDataComputer
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_DISTANCE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITERS
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_TYPE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.RPM
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.SPEED
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE
 
-class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
+class OBDMainFragment : BaseOsmAndFragment() {
 	private var appBar: AppBarLayout? = null
 	private var responsesView: EditText? = null
 	private var deviceName: EditText? = null
 	private var connectBtn: Button? = null
-	private var commandBtn1: Button? = null
-	private var commandBtn2: Button? = null
-	private var commandBtn3: Button? = null
-	private var commandBtn4: Button? = null
-	private var commandBtn5: Button? = null
-	private var commandBtn6: Button? = null
-	private var commandBtn7: Button? = null
-	private var commandBtn8: Button? = null
-	private var commandBtn9: Button? = null
-	private var commandBtn10: Button? = null
-	private var commandBtn11: Button? = null
-	private var resp1: EditText? = null
-	private var resp2: EditText? = null
-	private var resp3: EditText? = null
-	private var resp4: EditText? = null
-	private var resp5: EditText? = null
-	private var resp6: EditText? = null
-	private var resp7: EditText? = null
+	private var fuelLeftDistBtn: Button? = null
+	private var fuelLeftLitersBtn: Button? = null
+	private var fuelConsumptionBtn: Button? = null
+	private var rpmBtn: Button? = null
+	private var speedBtn: Button? = null
+	private var tempIntakeBtn: Button? = null
+	private var tempCoolantBtn: Button? = null
+	private var batteryVoltageBtn: Button? = null
+	private var fuelTypeBtn: Button? = null
+	private var fuelLeftPersBtn: Button? = null
+	private var tempAmbientBtn: Button? = null
+	private var fuelLeftDistResp: EditText? = null
+	private var fuelLeftLitersResp: EditText? = null
+	private var fuelConsumptionResp: EditText? = null
+	private var rpmResp: EditText? = null
+	private var speedResp: EditText? = null
+	private var tempIntakeResp: EditText? = null
+	private var tempCoolantResp: EditText? = null
 	private var resp8: EditText? = null
-	private var resp9: EditText? = null
-	private var resp10: EditText? = null
-	private var resp11: EditText? = null
-	private var resp12: EditText? = null
+	private var fuelTypeResp: EditText? = null
+	private var fuelLeftPersResp: EditText? = null
+	private var tempAmbientResp: EditText? = null
+	private var batteryVoltageResp: EditText? = null
 
 	protected var plugin: VehicleMetricsPlugin? = null
+	private val handler = Handler(Looper.getMainLooper())
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -75,32 +75,21 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		return R.layout.fragment_obd_main
 	}
 
-	override fun onStart() {
-		super.onStart()
-		plugin?.addResponseListener(this)
-		updateUI()
-	}
-
-	override fun onStop() {
-		super.onStop()
-		plugin?.removeResponseListener(this)
-	}
-
 	private fun setupUI(view: View) {
 		appBar = view.findViewById(R.id.appbar)
 		responsesView = view.findViewById(R.id.responses)
-		resp1 = view.findViewById(R.id.resp1)
-		resp2 = view.findViewById(R.id.resp2)
-		resp3 = view.findViewById(R.id.resp3)
-		resp4 = view.findViewById(R.id.resp4)
-		resp5 = view.findViewById(R.id.resp5)
-		resp6 = view.findViewById(R.id.resp6)
-		resp7 = view.findViewById(R.id.resp7)
+		fuelLeftDistResp = view.findViewById(R.id.resp1)
+		fuelLeftLitersResp = view.findViewById(R.id.resp2)
+		fuelConsumptionResp = view.findViewById(R.id.resp3)
+		rpmResp = view.findViewById(R.id.resp4)
+		speedResp = view.findViewById(R.id.resp5)
+		tempIntakeResp = view.findViewById(R.id.resp6)
+		tempCoolantResp = view.findViewById(R.id.resp7)
 		resp8 = view.findViewById(R.id.resp8)
-		resp9 = view.findViewById(R.id.resp9)
-		resp10 = view.findViewById(R.id.resp10)
-		resp11 = view.findViewById(R.id.resp11)
-		resp12 = view.findViewById(R.id.resp12)
+		fuelTypeResp = view.findViewById(R.id.resp9)
+		fuelLeftPersResp = view.findViewById(R.id.resp10)
+		tempAmbientResp = view.findViewById(R.id.resp11)
+		batteryVoltageResp = view.findViewById(R.id.resp12)
 		deviceName = view.findViewById(R.id.device_name)
 		connectBtn = view.findViewById(R.id.connect)
 		connectBtn?.setOnClickListener {
@@ -112,73 +101,30 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 				} else {
 					addToResponses("Can't connect to $devName")
 				}
-				updateUI()
 			}.start()
 		}
-		commandBtn1 = view.findViewById(R.id.btn1)
-		commandBtn2 = view.findViewById(R.id.btn2)
-		commandBtn3 = view.findViewById(R.id.btn3)
-		commandBtn4 = view.findViewById(R.id.btn4)
-		commandBtn5 = view.findViewById(R.id.btn5)
-		commandBtn6 = view.findViewById(R.id.btn6)
-		commandBtn7 = view.findViewById(R.id.btn7)
-		commandBtn8 = view.findViewById(R.id.btn8)
-		commandBtn9 = view.findViewById(R.id.btn9)
-		commandBtn10 = view.findViewById(R.id.btn10)
-		commandBtn11 = view.findViewById(R.id.btn11)
-		commandBtn1?.text = OBD_SUPPORTED_LIST1_COMMAND.name
-		commandBtn2?.text = OBD_SUPPORTED_LIST2_COMMAND.name
-		commandBtn3?.text = OBD_SUPPORTED_LIST3_COMMAND.name
-		commandBtn4?.text = OBD_RPM_COMMAND.name
-		commandBtn5?.text = OBD_SPEED_COMMAND.name
-		commandBtn6?.text = OBD_AIR_INTAKE_TEMP_COMMAND.name
-		commandBtn7?.text = OBD_ENGINE_COOLANT_TEMP_COMMAND.name
-		commandBtn8?.text = OBD_FUEL_CONSUMPTION_RATE_COMMAND.name
-		commandBtn9?.text = OBD_FUEL_TYPE_COMMAND.name
-		commandBtn10?.text = OBD_FUEL_LEVEL_COMMAND.name
-		commandBtn11?.text = OBD_AMBIENT_AIR_TEMPERATURE_COMMAND.name
-
-		commandBtn1?.setOnClickListener { addCommandToRead(OBD_SUPPORTED_LIST1_COMMAND) }
-		commandBtn2?.setOnClickListener { addCommandToRead(OBD_SUPPORTED_LIST2_COMMAND) }
-		commandBtn3?.setOnClickListener { addCommandToRead(OBD_SUPPORTED_LIST3_COMMAND) }
-		commandBtn4?.setOnClickListener { addCommandToRead(OBD_RPM_COMMAND) }
-		commandBtn5?.setOnClickListener { addCommandToRead(OBD_SPEED_COMMAND) }
-		commandBtn6?.setOnClickListener { addCommandToRead(OBD_AIR_INTAKE_TEMP_COMMAND) }
-		commandBtn7?.setOnClickListener { addCommandToRead(OBD_ENGINE_COOLANT_TEMP_COMMAND) }
-		commandBtn8?.setOnClickListener { addCommandToRead(OBD_FUEL_CONSUMPTION_RATE_COMMAND) }
-		commandBtn9?.setOnClickListener { addCommandToRead(OBD_FUEL_TYPE_COMMAND) }
-		commandBtn10?.setOnClickListener { addCommandToRead(OBD_FUEL_LEVEL_COMMAND) }
-		commandBtn11?.setOnClickListener { addCommandToRead(OBD_AMBIENT_AIR_TEMPERATURE_COMMAND) }
-	}
-
-	private fun updateUI() {
-		(commandBtn1 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_SUPPORTED_LIST1_COMMAND) == true
-		(commandBtn2 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_SUPPORTED_LIST2_COMMAND) == true
-		(commandBtn3 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_SUPPORTED_LIST3_COMMAND) == true
-		(commandBtn4 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_RPM_COMMAND) == true
-		(commandBtn5 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_SPEED_COMMAND) == true
-		(commandBtn6 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_AIR_INTAKE_TEMP_COMMAND) == true
-		(commandBtn7 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_ENGINE_COOLANT_TEMP_COMMAND) == true
-		(commandBtn8 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_FUEL_CONSUMPTION_RATE_COMMAND) == true
-		(commandBtn9 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_FUEL_TYPE_COMMAND) == true
-		(commandBtn10 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_FUEL_LEVEL_COMMAND) == true
-		(commandBtn11 as ToggleButton).isSelected =
-			plugin?.isCommandListening(OBD_AMBIENT_AIR_TEMPERATURE_COMMAND) == true
-	}
-
-	private fun addCommandToRead(command: OBDCommand) {
-		plugin?.addCommandToRead(command)
-		updateUI()
+		fuelLeftDistBtn = view.findViewById(R.id.btn1)
+		fuelLeftLitersBtn = view.findViewById(R.id.btn2)
+		fuelConsumptionBtn = view.findViewById(R.id.btn3)
+		rpmBtn = view.findViewById(R.id.btn4)
+		speedBtn = view.findViewById(R.id.btn5)
+		tempIntakeBtn = view.findViewById(R.id.btn6)
+		tempCoolantBtn = view.findViewById(R.id.btn7)
+		batteryVoltageBtn = view.findViewById(R.id.btn8)
+		fuelTypeBtn = view.findViewById(R.id.btn9)
+		fuelLeftPersBtn = view.findViewById(R.id.btn10)
+		tempAmbientBtn = view.findViewById(R.id.btn11)
+		fuelLeftDistBtn?.text = "fuel left distance"
+		fuelLeftLitersBtn?.text = "fuel left liters"
+		fuelConsumptionBtn?.text = "fuel consumption"
+		rpmBtn?.text = "rpm"
+		speedBtn?.text = "speed"
+		tempIntakeBtn?.text = "intake air temp"
+		tempCoolantBtn?.text = "engine coolant temp"
+		batteryVoltageBtn?.text = "battery voltage"
+		fuelTypeBtn?.text = "fuel type"
+		fuelLeftPersBtn?.text = "fuel left percent"
+		tempAmbientBtn?.text = "ambient air temperature"
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -215,31 +161,50 @@ class OBDMainFragment : BaseOsmAndFragment(), OBDResponseListener {
 		app.runInUIThread {
 			responsesView?.setText("${responsesView?.text}\n***$msg")
 		}
-
 	}
 
-	override fun onCommandResponse(command: OBDCommand, result: String) {
+	private val widgets = mutableListOf<OBDDataComputer.OBDComputerWidget>()
+
+	override fun onStart() {
+		super.onStart()
+		OBDDataComputer.OBDTypeWidget.entries.forEach {
+			widgets.add(OBDDataComputer.registerWidget(it, 0) )
+		}
+		updateWidgets()
+	}
+
+	private fun updateWidgets(){
+		widgets.forEach {
+			updateWidgetsData(it.type, it.computeValue() as String)
+		}
+		handler.postDelayed({updateWidgets()}, 100)
+	}
+
+	override fun onStop() {
+		super.onStop()
+		widgets.forEach { OBDDataComputer.removeWidget(it) }
+	}
+
+	private fun updateWidgetsData(widgetType: OBDDataComputer.OBDTypeWidget, result: String) {
 		app.runInUIThread {
-			when (command) {
-				OBD_SUPPORTED_LIST1_COMMAND -> updateCommandResponse(resp1, result)
-				OBD_SUPPORTED_LIST2_COMMAND -> updateCommandResponse(resp2, result)
-				OBD_SUPPORTED_LIST3_COMMAND -> updateCommandResponse(resp3, result)
-				OBD_RPM_COMMAND -> updateCommandResponse(resp4, result)
-				OBD_SPEED_COMMAND -> updateCommandResponse(resp5, result)
-				OBD_AIR_INTAKE_TEMP_COMMAND -> updateCommandResponse(resp6, result)
-				OBD_ENGINE_COOLANT_TEMP_COMMAND -> updateCommandResponse(resp7, result)
-				OBD_FUEL_CONSUMPTION_RATE_COMMAND -> updateCommandResponse(resp8, result)
-				OBD_FUEL_TYPE_COMMAND -> updateCommandResponse(resp9, result)
-				OBD_FUEL_LEVEL_COMMAND -> updateCommandResponse(resp10, result)
-				OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> updateCommandResponse(resp11, result)
-				OBD_BATTERY_VOLTAGE_COMMAND -> updateCommandResponse(resp12, result)
+			when (widgetType) {
+				SPEED -> updateWidgetData(speedResp, result)
+				RPM -> updateWidgetData(rpmResp, result)
+				FUEL_LEFT_DISTANCE -> updateWidgetData(fuelLeftDistResp, result)
+				FUEL_LEFT_LITERS -> updateWidgetData(fuelLeftLitersResp, result)
+				FUEL_LEFT_PERCENT -> updateWidgetData(fuelLeftPersResp, result)
+				FUEL_CONSUMPTION_RATE -> updateWidgetData(fuelConsumptionResp, result)
+				TEMPERATURE_INTAKE -> updateWidgetData(tempIntakeResp, result)
+				TEMPERATURE_AMBIENT -> updateWidgetData(tempAmbientResp, result)
+				BATTERY_VOLTAGE -> updateWidgetData(batteryVoltageResp, result)
+				FUEL_TYPE -> updateWidgetData(fuelTypeResp, result)
+				TEMPERATURE_COOLANT -> updateWidgetData(tempCoolantResp, result)
 			}
-			updateUI()
 		}
 
 	}
 
-	private fun updateCommandResponse(field: EditText?, result: String) {
+	private fun updateWidgetData(field: EditText?, result: String) {
 		if (field?.text.toString() != result) {
 			field?.setText(result)
 		}
