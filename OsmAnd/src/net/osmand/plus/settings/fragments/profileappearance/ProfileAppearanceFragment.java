@@ -40,7 +40,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -85,10 +84,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	private DialogButton applyButton;
 
 	private boolean hasNameError;
-
-	public ProfileAppearanceController getScreenController() {
-		return screenController;
-	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -233,46 +228,44 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 	}
 
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.getSearchableDialog(preference)
-				.map(searchableDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								searchableDialog,
-								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
-	}
-
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
-			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.view_angle),
-						app.getString(R.string.view_angle_description), settings.VIEW_ANGLE_VISIBILITY);
-			} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.location_radius),
-						app.getString(R.string.location_radius_description), settings.LOCATION_RADIUS_VISIBILITY);
-			}
+			this
+					.geDialog(preference)
+					.ifPresent(dialog -> dialog.show(mapActivity.getSupportFragmentManager()));
 		}
 		return super.onPreferenceClick(preference);
 	}
 
-	private Optional<CustomizableSingleSelectionBottomSheet> getSearchableDialog(final Preference preference) {
-		final ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.geDialog(preference)
+				.map(dialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								dialog,
+								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
+	}
+
+	private Optional<CustomizableSingleSelectionBottomSheet> geDialog(final Preference preference) {
 		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					optionsDialogController.createDialog(
-							app.getString(R.string.view_angle),
-							app.getString(R.string.view_angle_description),
-							settings.VIEW_ANGLE_VISIBILITY));
+					screenController
+							.getProfileOptionController()
+							.createDialog(
+									app.getString(R.string.view_angle),
+									app.getString(R.string.view_angle_description),
+									settings.VIEW_ANGLE_VISIBILITY));
 		}
 		if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					optionsDialogController.createDialog(
-							app.getString(R.string.location_radius),
-							app.getString(R.string.location_radius_description),
-							settings.LOCATION_RADIUS_VISIBILITY));
+					screenController
+							.getProfileOptionController()
+							.createDialog(
+									app.getString(R.string.location_radius),
+									app.getString(R.string.location_radius_description),
+									settings.LOCATION_RADIUS_VISIBILITY));
 		}
 		return Optional.empty();
 	}

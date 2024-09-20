@@ -90,14 +90,7 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 									   @NonNull String processId, boolean usedOnMap) {
-		try {
-			CustomizableSingleSelectionBottomSheet
-					.createInstance(processId, usedOnMap)
-					.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
+		return createInstance(processId, usedOnMap).show(fragmentManager);
 	}
 
 	public static @NonNull CustomizableSingleSelectionBottomSheet createInstance(final @NonNull String processId, final boolean usedOnMap) {
@@ -105,6 +98,15 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		fragment.setProcessId(processId);
 		fragment.setUsedOnMap(usedOnMap);
 		return fragment;
+	}
+
+	public boolean show(@NonNull final FragmentManager fragmentManager) {
+		try {
+			show(fragmentManager, TAG);
+			return true;
+		} catch (final RuntimeException e) {
+			return false;
+		}
 	}
 
 	private String getTitle() {
