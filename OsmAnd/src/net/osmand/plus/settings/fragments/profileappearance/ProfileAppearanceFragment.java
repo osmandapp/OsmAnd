@@ -41,6 +41,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,7 +56,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen, SearchablePreferenceDialogProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -239,6 +240,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		return super.onPreferenceClick(preference);
 	}
 
+	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.geDialog(preference)

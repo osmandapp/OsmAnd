@@ -272,8 +272,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		final SettingsSearchButtonHelper settingsSearchButtonHelper =
 				new SettingsSearchButtonHelper(
 						this,
-						R.id.fragmentContainer,
-						getMyApplication());
+						R.id.fragmentContainer);
 		settingsSearchButtonHelper.configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
 }

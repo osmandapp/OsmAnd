@@ -3,13 +3,11 @@ package net.osmand.plus.settings.fragments.search;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.fragments.GlobalSettingsFragment;
 import net.osmand.plus.settings.fragments.VehicleParametersFragment;
-import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 
@@ -19,17 +17,14 @@ import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableIn
 
 class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoProvider {
 
-	private final OsmandApplication osmandApplication;
-
-	public PreferenceDialogAndSearchableInfoProvider(final OsmandApplication osmandApplication) {
-		this.osmandApplication = osmandApplication;
-	}
-
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
 			final PreferenceFragmentCompat hostOfPreference,
 			final Preference preference) {
 		// FK-TODO: handle more preference dialogs, which shall be searchable
+		if (hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider) {
+			return searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
+		}
 		if (isSendAnonymousData(preference)) {
 			return Optional.of(
 					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
@@ -54,9 +49,6 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 									true,
 									Optional.of(preference)),
 							VehicleParametersBottomSheet::getSearchableInfo));
-		}
-		if (hostOfPreference instanceof final ProfileAppearanceFragment profileAppearanceFragment) {
-			return profileAppearanceFragment.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
 		}
 		return Optional.empty();
 	}
