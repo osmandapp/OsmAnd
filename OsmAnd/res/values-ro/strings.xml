@@ -5887,7 +5887,7 @@
     <string name="shared_string_increase">Creștere</string>
     <string name="shared_string_decrease">Descreștere</string>
     <string name="wikimedia">Wikimedia</string>
-    <string name="open_in_browser">Deschideți în browser</string>
+    <string name="open_in_browser">Deschide în browser</string>
     <string name="shared_string_source">Sursă</string>
     <string name="shared_string_no_internet_connection">Fără conexiune la internet</string>
 </resources>
