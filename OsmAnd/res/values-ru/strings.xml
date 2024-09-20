@@ -5897,4 +5897,13 @@
     <string name="search_action_descr">Открыть поиск.</string>
     <string name="type_of_activity">Вид активности</string>
     <string name="change_activity">Изменить активность</string>
+    <string name="shared_string_decrease">Уменьшить</string>
+    <string name="shared_string_increase">Увеличить</string>
+    <string name="open_in_browser">Открыть в браузере</string>
+    <string name="shared_string_source">Источник</string>
+    <string name="shared_string_no_internet_connection">Нет подключения к интернету</string>
+    <string name="no_internet_descr">Проверьте подключение и повторите попытку.</string>
+    <string name="no_photos_available_descr">В это местоположение еще не было добавлено ни одной пользовательской фотографии</string>
+    <string name="no_photos_available">Нет доступных фотографий</string>
+    <string name="wikimedia">Викимедиа</string>
 </resources>

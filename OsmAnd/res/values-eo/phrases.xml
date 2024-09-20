@@ -1967,7 +1967,7 @@
     <string name="poi_deaf_description">Informo por surduloj</string>
     <string name="poi_step_count">Nombro de ŝtupoj</string>
     <string name="poi_cairn">Ŝtonstaka marko</string>
-    <string name="poi_defibrillator">Defibrililo</string>
+    <string name="poi_defibrillator">Defibrililo;defibrilatoro;AED</string>
     <string name="poi_animal_training">Dresejo</string>
     <string name="poi_historic_stone">Ŝtonego historia</string>
     <string name="poi_historic_farm">Farmejo historia</string>
