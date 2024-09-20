@@ -92,7 +92,6 @@ object OBDDispatcher {
 									}
 								}
 							} catch (e: IOException) {
-								e.printStackTrace()
 								log.error("Error reading data: ${e.message}")
 							}
 							if (readResponseFailed) {
