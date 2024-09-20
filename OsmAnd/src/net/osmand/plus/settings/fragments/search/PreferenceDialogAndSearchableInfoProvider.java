@@ -8,12 +8,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
-import net.osmand.plus.settings.enums.MarkerDisplayOption;
 import net.osmand.plus.settings.fragments.GlobalSettingsFragment;
-import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.VehicleParametersFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.preferences.SizePreference;
@@ -32,7 +29,9 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final PreferenceFragmentCompat hostOfPreference, final Preference preference) {
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
+			final PreferenceFragmentCompat hostOfPreference,
+			final Preference preference) {
 		// FK-TODO: handle more preference dialogs, which shall be searchable
 		if (isSendAnonymousData(preference)) {
 			return Optional.of(
@@ -65,21 +64,25 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 				return Optional.of(
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								createCustomizableSingleSelectionBottomSheet(
-										profileAppearanceFragment.getScreenController().getProfileOptionController(),
-										osmandApplication.getString(R.string.view_angle),
-										osmandApplication.getString(R.string.view_angle_description),
-										settings.VIEW_ANGLE_VISIBILITY),
+								profileAppearanceFragment
+										.getScreenController()
+										.getProfileOptionController()
+										.createDialog(
+												osmandApplication.getString(R.string.view_angle),
+												osmandApplication.getString(R.string.view_angle_description),
+												settings.VIEW_ANGLE_VISIBILITY),
 								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
 			}
 			if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
 				return Optional.of(
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								createCustomizableSingleSelectionBottomSheet(
-										profileAppearanceFragment.getScreenController().getProfileOptionController(),
-										osmandApplication.getString(R.string.location_radius),
-										osmandApplication.getString(R.string.location_radius_description),
-										settings.LOCATION_RADIUS_VISIBILITY),
+								profileAppearanceFragment
+										.getScreenController()
+										.getProfileOptionController()
+										.createDialog(
+												osmandApplication.getString(R.string.location_radius),
+												osmandApplication.getString(R.string.location_radius_description),
+												settings.LOCATION_RADIUS_VISIBILITY),
 								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
 			}
 		}
@@ -92,17 +95,5 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 
 	private boolean isSimulateYourLocation(final Preference preference) {
 		return DevelopmentSettingsFragment.SIMULATE_YOUR_LOCATION.equals(preference.getKey());
-	}
-
-	private CustomizableSingleSelectionBottomSheet createCustomizableSingleSelectionBottomSheet(
-			final ProfileOptionsDialogController optionsDialogController,
-			final String title,
-			final String description,
-			final CommonPreference<MarkerDisplayOption> preference) {
-		optionsDialogController.prepareShowDialog(title, description, preference);
-		final CustomizableSingleSelectionBottomSheet bottomSheet = new CustomizableSingleSelectionBottomSheet();
-		bottomSheet.setProcessId(optionsDialogController.getProcessId());
-		bottomSheet.setUsedOnMap(true);
-		return bottomSheet;
 	}
 }

@@ -85,6 +85,11 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
 	}
 
+	public CustomizableSingleSelectionBottomSheet createDialog(@NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
+		prepareShowDialog(title, description, preference);
+		return CustomizableSingleSelectionBottomSheet.createInstance(PROCESS_ID, true);
+	}
+
 	public void prepareShowDialog(final @NonNull String title, final @NonNull String description, final @NonNull CommonPreference<MarkerDisplayOption> preference) {
 		this.title = title;
 		this.description = description;

@@ -91,14 +91,20 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 									   @NonNull String processId, boolean usedOnMap) {
 		try {
-			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
-			fragment.setProcessId(processId);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.show(fragmentManager, TAG);
+			CustomizableSingleSelectionBottomSheet
+					.createInstance(processId, usedOnMap)
+					.show(fragmentManager, TAG);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
 		}
+	}
+
+	public static @NonNull CustomizableSingleSelectionBottomSheet createInstance(final @NonNull String processId, final boolean usedOnMap) {
+		final CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
+		fragment.setProcessId(processId);
+		fragment.setUsedOnMap(usedOnMap);
+		return fragment;
 	}
 
 	private String getTitle() {
