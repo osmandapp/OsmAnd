@@ -350,7 +350,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 																				final DevelopmentSettingsFragment target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
 			return Optional.of(
-					new ShowableSearchablePreferenceDialog(SimulateLocationFragment.createInstance(null, false)) {
+					new ShowableSearchablePreferenceDialog(
+							SimulateLocationFragment.createInstance(
+									null,
+									false)) {
 
 						@Override
 						public void show() {
