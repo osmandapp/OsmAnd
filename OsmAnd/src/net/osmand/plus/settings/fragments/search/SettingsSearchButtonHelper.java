@@ -45,7 +45,13 @@ public class SettingsSearchButtonHelper {
 				.withFragmentFactory(fragmentFactoryAndPrepareShow)
 				.withPrepareShow(fragmentFactoryAndPrepareShow)
 				.withSearchableInfoProvider(createCustomSearchableInfoProvider())
-				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
+				.withPreferenceDialogAndSearchableInfoProvider(
+						(hostOfPreference, preference) ->
+								// FK-TODO: handle more preference dialogs, which shall be searchable
+								// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
+								hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider ?
+										searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference) :
+										Optional.empty())
 				.build();
 	}
 

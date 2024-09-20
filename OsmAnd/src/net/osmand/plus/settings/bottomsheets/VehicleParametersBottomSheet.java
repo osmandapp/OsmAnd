@@ -239,15 +239,9 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
 									boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				VehicleParametersBottomSheet
-						.createInstance(key, target, usedOnMap, appMode, false, Optional.empty())
-						.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
-		}
+		VehicleParametersBottomSheet
+				.createInstance(key, target, usedOnMap, appMode, false, Optional.empty())
+				.show(fm);
 	}
 
 	public static @NonNull VehicleParametersBottomSheet createInstance(final String key,
@@ -267,6 +261,16 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		preference.ifPresent(fragment::setPreference);
 		fragment.setConfigureSettingsSearch(configureSettingsSearch);
 		return fragment;
+	}
+
+	public void show(final @NonNull FragmentManager fm) {
+		try {
+			if (!fm.isStateSaved()) {
+				show(fm, TAG);
+			}
+		} catch (RuntimeException e) {
+			LOG.error("showInstance", e);
+		}
 	}
 
 	public String getSearchableInfo() {
