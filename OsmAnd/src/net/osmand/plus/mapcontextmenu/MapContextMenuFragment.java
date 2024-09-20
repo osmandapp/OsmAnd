@@ -2283,6 +2283,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				return false;
 			}
 			QuadRect r = ro.getRectLatLon();
+			if (r == null) {
+				return false;
+			}
 			getMapActivity().getMapView();
 			RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
