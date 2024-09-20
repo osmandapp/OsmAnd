@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Debug;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -23,6 +24,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -301,9 +303,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		final Optional<SimulateLocationFragment> dialog = createDialog(preference);
-		if (dialog.isPresent()) {
-			show(dialog.get());
+		final Optional<SearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -324,11 +326,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
-		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
-			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -338,28 +335,43 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		return super.onPreferenceClick(preference);
 	}
 
-	private void show(final SimulateLocationFragment dialog) {
-		final FragmentActivity activity = getActivity();
-		if (activity != null) {
-			dialog.show(activity.getSupportFragmentManager());
-		}
-	}
-
-	private Optional<SimulateLocationFragment> createDialog(final Preference preference) {
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
+																		final DevelopmentSettingsFragment target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
 			return Optional.of(SimulateLocationFragment.createInstance(null, false));
 		}
+		if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(preference.getKey())) {
+			return Optional.of(
+					AllocatedRoutingMemoryBottomSheet.createInstance(
+							preference.getKey(),
+							target,
+							getSelectedAppMode()));
+		}
 		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+		if (searchablePreferenceDialog instanceof final SimulateLocationFragment simulateLocationFragment) {
+			final FragmentActivity activity = getActivity();
+			if (activity != null) {
+				simulateLocationFragment.show(app, activity.getSupportFragmentManager());
+			}
+		} else if (searchablePreferenceDialog instanceof final AllocatedRoutingMemoryBottomSheet allocatedRoutingMemoryBottomSheet) {
+			final FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				allocatedRoutingMemoryBottomSheet.show(app, fragmentManager);
+			}
+		}
 	}
 
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
-				.createDialog(preference)
-				.map(dialog ->
+				.createPreferenceDialog(preference, null)
+				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								dialog,
-								SimulateLocationFragment::getSearchableInfo));
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override

@@ -18,10 +18,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -32,7 +34,7 @@ import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.shared.gpx.GpxFile;
 
-public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
+public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener, SearchablePreferenceDialog {
 
 	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 
@@ -269,7 +271,8 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
-		createInstance(gpxFile, usedOnMap).show(manager);
+		final SimulateLocationFragment instance = createInstance(gpxFile, usedOnMap);
+		instance.show(instance.app, manager);
 	}
 
 	public static SimulateLocationFragment createInstance(final @Nullable GpxFile gpxFile, final boolean usedOnMap) {
@@ -279,9 +282,16 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		return fragment;
 	}
 
-	public void show(final @NonNull FragmentManager manager) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			manager.beginTransaction()
+	@Override
+	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
+		this.gpxFile = gpxFile;
+		updateCard();
+	}
+
+	@Override
+	public void show(final OsmandApplication app, final FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, this, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
@@ -289,11 +299,6 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	@Override
-	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
-		this.gpxFile = gpxFile;
-		updateCard();
-	}
-
 	public String getSearchableInfo() {
 		return String.join(
 				", ",

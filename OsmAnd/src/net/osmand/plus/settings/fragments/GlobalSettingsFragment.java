@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -32,6 +33,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -73,23 +75,23 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		final Optional<SendAnalyticsBottomSheetDialogFragment> dialog = getDialog(preference, this);
-		if (dialog.isPresent()) {
-			show(dialog.get());
+		final Optional<SearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
-	private void show(final SendAnalyticsBottomSheetDialogFragment dialog) {
+	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
 			dialog.show(app, fragmentManager);
 		}
 	}
 
-	private Optional<SendAnalyticsBottomSheetDialogFragment> getDialog(final Preference preference,
-																	   final GlobalSettingsFragment target) {
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
+																		final GlobalSettingsFragment target) {
 		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
 				Optional.of(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) :
 				Optional.empty();
@@ -98,16 +100,16 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
-				.getDialog(preference, null)
-				.map(dialog ->
+				.createPreferenceDialog(preference, null)
+				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								dialog,
-								SendAnalyticsBottomSheetDialogFragment::getSearchableInfo));
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(@NonNull Preference
-													  preference, @NonNull PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference,
+											  @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String prefId = preference.getKey();

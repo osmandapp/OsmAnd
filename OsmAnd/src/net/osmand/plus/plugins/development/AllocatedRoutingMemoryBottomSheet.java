@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.development;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
@@ -17,11 +19,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -29,13 +28,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.ACTIVITY_SERVICE;
-
-public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet {
+public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = AllocatedRoutingMemoryBottomSheet.class.getSimpleName();
 
@@ -205,20 +206,31 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		return initialValue != currentValue;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull String key,
-	                                @NonNull Fragment target,
-	                                @Nullable ApplicationMode appMode) {
+	public static @NonNull AllocatedRoutingMemoryBottomSheet createInstance(
+			final @NonNull String key,
+			final @NonNull Fragment target,
+			final @Nullable ApplicationMode appMode) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, key);
+
+		final AllocatedRoutingMemoryBottomSheet fragment = new AllocatedRoutingMemoryBottomSheet();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(false);
+		fragment.setAppMode(appMode);
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
+
+	@Override
+	public void show(final OsmandApplication app, final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			AllocatedRoutingMemoryBottomSheet fragment = new AllocatedRoutingMemoryBottomSheet();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(false);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
+			show(fragmentManager, TAG);
 		}
 	}
 
+	@Override
+	public String getSearchableInfo() {
+		// FK-TODO: not yet implemented
+		return "dummy";
+	}
 }

@@ -30,10 +30,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
 import org.apache.commons.logging.Log;
 
-public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements SearchablePreferenceDialog {
 
 	public static final String TAG = "SendAnalyticsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
