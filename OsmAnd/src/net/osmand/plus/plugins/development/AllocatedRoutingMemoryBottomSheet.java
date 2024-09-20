@@ -80,11 +80,8 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	public void createMenuItems(Bundle savedInstanceState) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 
-		String title = getString(R.string.memory_allocated_for_routing);
-		items.add(new TitleItem(title));
-
-		String description = getString(R.string.memory_allocated_for_routing_ds);
-		items.add(new LongDescriptionItem(description));
+		items.add(new TitleItem(getTitle()));
+		items.add(new LongDescriptionItem(getDescription()));
 
 		View view = inflater.inflate(R.layout.bottom_sheet_allocated_routing_memory, null);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
@@ -94,6 +91,14 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 		View buttonView = view.findViewById(R.id.button_container);
 		setupResetButton(buttonView);
+	}
+
+	private @NonNull String getTitle() {
+		return getString(R.string.memory_allocated_for_routing);
+	}
+
+	private @NonNull String getDescription() {
+		return getString(R.string.memory_allocated_for_routing_ds);
 	}
 
 	private void setupSliderView(View container) {
@@ -230,7 +235,6 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	@Override
 	public String getSearchableInfo() {
-		// FK-TODO: not yet implemented
-		return "dummy";
+		return String.join(", ", getTitle(), getDescription());
 	}
 }
