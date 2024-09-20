@@ -15,6 +15,8 @@ class KFile {
 	val path: Path
 
 	private var nativeFile: NativeFile
+	private var directory: Boolean? = null
+	private var absolutePath: String? = null
 
 	constructor(filePath: String) {
 		this.path = filePath.toPath()
@@ -40,19 +42,31 @@ class KFile {
 		return if (parent != null) KFile(parent) else null
 	}
 
-	fun exists(): Boolean = FileSystem.SYSTEM.exists(path)
+	fun exists(): Boolean = nativeFile.exists()
 
 	fun isAbsolute(): Boolean = path.isAbsolute
 
-	fun isDirectory(): Boolean =
-		FileSystem.SYSTEM.metadataOrNull(path)?.isDirectory == true
+	fun isDirectory(): Boolean {
+		var directory = this.directory
+		if (directory == null) {
+			directory = nativeFile.isDirectory()
+			this.directory = directory
+		}
+		return directory
+	}
 
 	fun lastModified(): Long = nativeFile.lastModified()
 
 	fun path(): String = path.toString()
 
-	fun absolutePath(): String =
-		if (exists()) FileSystem.SYSTEM.canonicalize(path).toString() else path.toString()
+	fun absolutePath(): String {
+		var absolutePath = this.absolutePath
+		if (absolutePath == null) {
+			absolutePath = nativeFile.absolutePath()
+			this.absolutePath = absolutePath
+		}
+		return absolutePath
+	}
 
 	@Throws(IOException::class)
 	fun source(): Source = FileSystem.SYSTEM.source(path)

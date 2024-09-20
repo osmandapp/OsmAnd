@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -24,7 +24,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.RouteActivityHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
@@ -142,6 +143,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			item.setParameter(ACTIVITY_TYPE, routeActivityId);
 
 			setupNearestCityName(item);
+
 			double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
 			if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
 					|| additionalExaggeration > SRTMPlugin.MAX_VERTICAL_EXAGGERATION) {

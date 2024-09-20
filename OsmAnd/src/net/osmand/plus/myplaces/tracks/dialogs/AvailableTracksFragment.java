@@ -23,10 +23,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -34,14 +32,16 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
-import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.SmartFolderUpdateListener;
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -136,7 +136,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		smartFolderHelper.addUpdateListener(this);
 		if (!trackFoldersHelper.isImporting()) {
 			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
-				reloadTracks();
+				reloadTracks(false);
 			} else {
 				updateContent();
 			}
@@ -455,6 +455,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@NonNull
 	private LoadTracksListener getLoadTracksListener() {
 		return new LoadTracksListener() {
+			@Override
+			public void tracksLoaded(@NonNull TrackFolder folder) {
+			}
 
 			@Override
 			public void loadTracksStarted() {

@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.IndexConstants;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;

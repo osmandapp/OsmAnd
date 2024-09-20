@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;

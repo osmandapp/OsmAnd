@@ -8,25 +8,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxHelper;
-import net.osmand.shared.gpx.primitives.Route;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.Route;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class TrackEditCard extends MapBaseCard {
 
 	private GpxDataItem getDataItem(GPXInfo info) {
 		GpxDataItemCallback itemCallback = item -> updateContent();
-		return app.getGpxDbHelper().getItem(new File(info.getFileName()), itemCallback);
+		return app.getGpxDbHelper().getItem(new KFile(info.getFileName()), itemCallback);
 	}
 
 	@Override

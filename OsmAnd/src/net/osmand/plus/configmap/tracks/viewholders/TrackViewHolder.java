@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.shared.gpx.TrackItem;
@@ -31,7 +31,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

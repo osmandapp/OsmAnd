@@ -8,7 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -18,6 +18,8 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
@@ -25,8 +27,10 @@ public class RenderedObjectMenuController extends MenuController {
 	private static final String POI_PREFIX = "poi";
 
 	private RenderedObject renderedObject;
-	private PoiCategory poiCategory;
-	private AbstractPoiType poiType;
+	private final List<String> DEFAULT_TAGS = new ArrayList<>() {{
+		add("amenity");
+		add("landuse");
+	}};
 
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
 	                                    @NonNull PointDescription pointDescription,
@@ -50,34 +54,6 @@ public class RenderedObjectMenuController extends MenuController {
 
 	private void setRenderedObject(@NonNull RenderedObject renderedObject) {
 		this.renderedObject = renderedObject;
-		initTypeAndCategoryIfNeeded();
-	}
-
-	private void initTypeAndCategoryIfNeeded() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null || !renderedObject.isPolygon()) {
-			poiCategory = null;
-			poiType = null;
-			return;
-		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		MapPoiTypes mapPoiTypes = app.getPoiTypes();
-		for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			PoiCategory foundCategory = mapPoiTypes.getPoiCategoryByName(key);
-			if (!mapPoiTypes.isOtherCategory(foundCategory)) {
-				poiCategory = foundCategory;
-			}
-			AbstractPoiType foundType = foundCategory.getPoiTypeByKeyName(value);
-			if (foundType == null) {
-				foundType = mapPoiTypes.getAnyPoiTypeByKey(key + "_" + value);
-			}
-			if (foundType != null) {
-				poiType = foundType;
-				break;
-			}
-		}
 	}
 
 	@Override
@@ -103,25 +79,23 @@ public class RenderedObjectMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		String lang = getPreferredMapLang().toLowerCase();
-		String nameTranslation = renderedObject.getName(lang);
+		String lang = getPreferredMapLangLC();
+		boolean transliterate = isTransliterateNames();
+		String name = renderedObject.getName(lang, transliterate);
 
-		if (!Algorithms.isEmpty(nameTranslation) && !isStartingWithRTLChar(nameTranslation)) {
-			return nameTranslation;
+		if (!Algorithms.isEmpty(name) && !isStartingWithRTLChar(name)) {
+			return name;
 		} else if (renderedObject.getTags().size() > 0) {
-			nameTranslation = "";
+			name = "";
 			if (!Algorithms.isEmpty(lang)) {
-				nameTranslation = renderedObject.getTagValue("name:" + lang);
+				name = renderedObject.getTagValue("name:" + lang);
 			}
-			if (Algorithms.isEmpty(nameTranslation)) {
-				nameTranslation = renderedObject.getTagValue("name");
+			if (Algorithms.isEmpty(name)) {
+				name = renderedObject.getTagValue("name");
 			}
 		}
-		if (!Algorithms.isEmpty(nameTranslation)) {
-			return nameTranslation;
-		}
-		if (renderedObject.isPolygon()) {
-			return getString(R.string.shared_string_undefined);
+		if (!Algorithms.isEmpty(name)) {
+			return name;
 		}
 		return searchObjectNameById();
 	}
@@ -130,11 +104,71 @@ public class RenderedObjectMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		if (renderedObject.isPolygon()) {
-			return poiType != null ? poiType.getTranslation()
-					: poiCategory != null ? poiCategory.getTranslation()
-					: getString(R.string.shared_string_undefined);
+			return getTranslatedType(renderedObject);
 		}
 		return super.getTypeStr();
+	}
+
+	private String getTranslatedType(RenderedObject renderedObject) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return "";
+		}
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapPoiTypes mapPoiTypes = app.getPoiTypes();
+		MapPoiTypes.PoiTranslator poiTranslator = mapPoiTypes.getPoiTranslator();
+		PoiType pt = null;
+		PoiType otherPt = null;
+		String translated = null;
+		String firstTag = "";
+		String separate = null;
+		String single = null;
+		for (Map.Entry<String, String> e : renderedObject.getTags().entrySet()) {
+			if (e.getKey().startsWith("name")) {
+				continue;
+			}
+			if (Algorithms.isEmpty(e.getValue()) && otherPt == null) {
+				otherPt = mapPoiTypes.getPoiTypeByKey(e.getKey());
+			}
+			pt = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+			if (pt != null) {
+				break;
+			}
+			firstTag = firstTag.isEmpty() ? e.getKey() + ": " + e.getValue() : firstTag;
+			if (poiTranslator != null && !Algorithms.isEmpty(e.getValue())) {
+				String t = poiTranslator.getTranslation(e.getKey() + "_" + e.getValue());
+				if (translated == null && !Algorithms.isEmpty(t)) {
+					translated = t;
+				}
+				String t1 = poiTranslator.getTranslation(e.getKey());
+				String t2 = poiTranslator.getTranslation(e.getValue());
+				if (separate == null && t1 != null && t2 != null) {
+					separate = t1 + ": " + t2.toLowerCase();
+				}
+				if (single == null && t2 != null && !e.getValue().equals("yes") && !e.getValue().equals("no")) {
+					single = t2;
+				}
+				if (e.getKey().equals("amenity")) {
+					translated = t2;
+				}
+			}
+		}
+		if (pt != null) {
+			return pt.getTranslation();
+		}
+		if (translated != null) {
+			return translated;
+		}
+		if (otherPt != null) {
+			return otherPt.getTranslation();
+		}
+		if (separate != null) {
+			return separate;
+		}
+		if (single != null) {
+			return single;
+		}
+		return firstTag;
 	}
 
 	@NonNull
@@ -202,14 +236,18 @@ public class RenderedObjectMenuController extends MenuController {
 		return "";
 	}
 
-	private boolean hasRelatedPoiTypeOrCategory() {
-		return poiCategory != null || poiType != null;
-	}
-
 	@Nullable
 	private String getIconRes() {
-		if (hasRelatedPoiTypeOrCategory()) {
-			return poiType != null ? poiType.getIconKeyName() : poiCategory.getIconKeyName();
+		if (getMapActivity() != null && renderedObject.isPolygon()) {
+			OsmandApplication app = getMapActivity().getMyApplication();
+			MapPoiTypes mapPoiTypes = app.getPoiTypes();
+			Map<String, String> t  = renderedObject.getTags();
+			for (Map.Entry<String, String> e : t.entrySet()) {
+				PoiType pt = mapPoiTypes.getPoiTypeByKey(e.getValue());
+				if (pt != null) {
+					return pt.getIconKeyName();
+				}
+			}
 		}
 		return getActualContent();
 	}

@@ -8,7 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;

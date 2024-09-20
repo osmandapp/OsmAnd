@@ -34,14 +34,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.IndexConstants;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.shared.gpx.data.SmartFolder;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
@@ -63,13 +61,9 @@ import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
-import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
-import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
@@ -77,6 +71,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.SmartFolderHelper;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.data.TracksGroup;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.shared.util.KAlgorithms;
 
 import java.io.File;
@@ -291,7 +292,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			Bundle bundle = storeState();
 			String screenName = app.getString(R.string.shared_string_tracks);
 			boolean temporary = gpxSelectionHelper.getSelectedFileByPath(trackItem.getPath()) == null;
-			TrackMenuFragment.openTrack(activity, SharedUtil.jFile(trackItem.getFile()), bundle, screenName, OVERVIEW, temporary);
+			KFile file = trackItem.getFile();
+
+			TrackMenuFragment.openTrack(activity, file != null ? SharedUtil.jFile(file) : null,
+					bundle, screenName, OVERVIEW, temporary);
 		}
 	}
 
@@ -479,9 +483,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void reloadTracks() {
+		reloadTracks(true);
+	}
+
+	protected void reloadTracks(boolean forceLoad) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			foldersHelper.reloadTracks();
+			foldersHelper.reloadTracks(forceLoad);
 		}
 	}
 

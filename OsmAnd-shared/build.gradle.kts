@@ -16,6 +16,7 @@ kotlin {
 		@OptIn(ExperimentalKotlinGradlePluginApi::class)
 		compilerOptions {
 			jvmTarget.set(JvmTarget.JVM_17)
+			freeCompilerArgs.add("-Xjvm-default=all")
 		}
 	}
 
@@ -23,6 +24,7 @@ kotlin {
 		@OptIn(ExperimentalKotlinGradlePluginApi::class)
 		compilerOptions {
 			jvmTarget.set(JvmTarget.JVM_17)
+			freeCompilerArgs.add("-Xjvm-default=all")
 		}
 		publishLibraryVariants("release", "debug")
 	}
@@ -48,6 +50,7 @@ kotlin {
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
 	val coroutinesVersion = "1.8.1"
+	val statelyVersion = "2.1.0"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -58,6 +61,7 @@ kotlin {
 			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
@@ -73,6 +77,10 @@ kotlin {
 		}
 		iosMain.dependencies {
 			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
+		}
+
+		commonTest.dependencies {
+			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
 		}
 	}
 }

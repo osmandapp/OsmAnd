@@ -29,10 +29,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	@Nullable
 	private GpxDataItem fetchGpxDataItem() {
-		File file = new File(filteredSelectedGpxFile.getGpxFile().getPath());
+		KFile file = new KFile(filteredSelectedGpxFile.getGpxFile().getPath());
 		GpxDataItemCallback callback = item -> gpxDataItem = item;
 		return gpxDbHelper.getItem(file, callback);
 	}

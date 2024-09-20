@@ -5912,4 +5912,11 @@
     <string name="change_activity">Cambiar actividad</string>
     <string name="shared_string_increase">Aumentar</string>
     <string name="shared_string_decrease">Disminuir</string>
+    <string name="open_in_browser">Abrir en el navegador</string>
+    <string name="shared_string_source">Proveedor</string>
+    <string name="shared_string_no_internet_connection">Sin conexión a Internet</string>
+    <string name="no_internet_descr">Comprueba tu conexión e intenta de nuevo.</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="no_photos_available_descr">Aún no se añadieron fotos de usuarios a esta ubicación</string>
+    <string name="no_photos_available">Sin fotos disponibles</string>
 </resources>

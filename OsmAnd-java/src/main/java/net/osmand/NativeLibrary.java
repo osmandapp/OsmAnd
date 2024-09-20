@@ -660,7 +660,7 @@ public class NativeLibrary {
 			this.labelY = labelY;
 		}
 
-		public void setIsPolygon(boolean isPolygon) {
+		public void markAsPolygon(boolean isPolygon) {
 			this.isPolygon = isPolygon;
 		}
 
@@ -706,9 +706,20 @@ public class NativeLibrary {
 			String s = getClass().getSimpleName() + " " + name;
 			String link = OsmUtils.getOsmUrlForId(this);
 			String tags = OsmUtils.getPrintTags(this);
-			s += s.contains(link) ? "" : link;
-			s += s.contains(tags) ? "" : tags;
+			s += s.contains(link) ? "" : " " + link;
+			s += s.contains(tags) ? "" : " " + tags;
 			return s;
+		}
+
+		public List<LatLon> getPolygon() {
+			List<LatLon> res = new ArrayList<>();
+			for (int i = 0; i < this.x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				res.add(l);
+			}
+			return res;
 		}
 	}
 }

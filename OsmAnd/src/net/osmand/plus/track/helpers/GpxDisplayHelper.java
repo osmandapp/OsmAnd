@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -217,7 +218,7 @@ public class GpxDisplayHelper {
 
 	private void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
 		GpxFile gpxFile = selectedGpxFile.getGpxFile();
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.getPath()));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath()));
 		if (!isSplittingTrack(selectedGpxFile) && dataItem != null) {
 			GpxSplitParams params = new GpxSplitParams(app, dataItem);
 			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile, false);

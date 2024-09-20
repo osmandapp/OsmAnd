@@ -2236,7 +2236,7 @@
     <string name="poi_step_condition_uneven">Стање степеника: различито</string>
     <string name="poi_step_condition_rough">Стање степеника: грубо</string>
     <string name="poi_cairn">Гомила камења</string>
-    <string name="poi_defibrillator">Дефибрилатор</string>
+    <string name="poi_defibrillator">Дефибрилатор;АЕД</string>
     <string name="poi_defibrillator_yes">Дефибрилатор: да</string>
     <string name="poi_tomb_war_grave">Тип: ратно гробље</string>
     <string name="poi_tomb_tumulus">Тип: хумка</string>

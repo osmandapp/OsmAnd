@@ -575,7 +575,7 @@ public class MapPoiTypes {
                         }
                         case "poi_additional_category" -> lastPoiAdditionalCategory = null;
 	                    default -> {
-		                    if (!name.equals("poi_additional") && !name.equals("poi_reference")) {
+		                    if (!name.equals("poi_additional") && !name.equals("poi_reference") && !name.equals("poi_types")) {
 			                    log.warn("Unknown end tag encountered: " + name);
 		                    }
 	                    }
