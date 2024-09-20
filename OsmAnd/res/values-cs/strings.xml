@@ -5890,4 +5890,11 @@
     <string name="quick_action_search_view_title">Zobrazení hledání</string>
     <string name="quick_action_navigation_view_desc">Přepínač pro otevření nebo zavření navigačního zobrazení.</string>
     <string name="quick_action_switch_compass_desc">Přepínač pro přepínání orientace mapy.</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Otevřít v prohlížeči</string>
+    <string name="shared_string_source">Zdroj</string>
+    <string name="shared_string_no_internet_connection">Není připojení k internetu</string>
+    <string name="no_internet_descr">Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="no_photos_available_descr">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
+    <string name="no_photos_available">Nejsou dostupné žádné fotografie</string>
 </resources>
