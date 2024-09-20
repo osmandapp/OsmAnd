@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
@@ -76,12 +75,6 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
-	}
-
-	public void showDialog(@NonNull MapActivity mapActivity, @NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
-		this
-				.createDialog(title, description, preference)
-				.show(mapActivity.getSupportFragmentManager());
 	}
 
 	public CustomizableSingleSelectionBottomSheet createDialog(@NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
