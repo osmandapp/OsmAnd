@@ -10,6 +10,8 @@ public class WikiImage {
 	private final String imageStubUrl;
 	private final String imageHiResUrl;
 
+	private final Metadata metadata = new Metadata();
+
 	public WikiImage(String wikiMediaTag, String imageName, String imageStubUrl, String imageHiResUrl) {
 		this.wikiMediaTag = wikiMediaTag;
 		this.imageName = imageName;
@@ -31,5 +33,13 @@ public class WikiImage {
 
 	public String getImageHiResUrl() {
 		return imageHiResUrl;
+	}
+
+	public String getWikiMediaTag() {
+		return wikiMediaTag;
+	}
+
+	public Metadata getMetadata() {
+		return metadata;
 	}
 }

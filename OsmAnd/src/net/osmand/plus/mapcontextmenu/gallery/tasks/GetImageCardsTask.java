@@ -1,13 +1,13 @@
 package net.osmand.plus.mapcontextmenu.gallery.tasks;
 
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.MAPILLARY_AMENITY;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.WIKIMEDIA;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY_AMENITY;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.OTHER;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.WIKIMEDIA;
 import static net.osmand.plus.plugins.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
 import static net.osmand.plus.plugins.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
 
 import android.net.TrafficStats;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,17 +43,19 @@ import java.util.Map;
 public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 	private static final Log LOG = PlatformUtil.getLog(GetImageCardsTask.class);
 
-	private final MapActivity mapActivity;
+	private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
+
 	private final OsmandApplication app;
+	private final MapActivity mapActivity;
+
 	private final LatLon latLon;
 	private final Map<String, String> params;
 	private final GetImageCardsListener listener;
-	private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
 
-	public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon,
+	public GetImageCardsTask(@NonNull MapActivity mapActivity, @NonNull LatLon latLon,
 	                         @Nullable Map<String, String> params, @Nullable GetImageCardsListener listener) {
-		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
+		this.mapActivity = mapActivity;
 		this.latLon = latLon;
 		this.params = params;
 		this.listener = listener;
@@ -69,14 +71,14 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 	@Override
 	protected ImageCardsHolder doInBackground(Void... voids) {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
-		ImageCardsHolder holder = new ImageCardsHolder();
+		ImageCardsHolder holder = new ImageCardsHolder(latLon, params);
 		try {
 			Map<String, String> httpPms = new LinkedHashMap<>();
-			httpPms.put("lat", "" + (float) latLon.getLatitude());
-			httpPms.put("lon", "" + (float) latLon.getLongitude());
+			httpPms.put("lat", String.valueOf((float) latLon.getLatitude()));
+			httpPms.put("lon", String.valueOf((float) latLon.getLongitude()));
 			Location myLocation = app.getLocationProvider().getLastKnownLocation();
 			if (myLocation != null) {
-				httpPms.put("mloc", "" + (float) myLocation.getLatitude() + "," + (float) myLocation.getLongitude());
+				httpPms.put("mloc", (float) myLocation.getLatitude() + "," + (float) myLocation.getLongitude());
 			}
 			httpPms.put("app", Version.isPaidVersion(app) ? "paid" : "free");
 			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
@@ -88,13 +90,13 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 			}
 			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params);
 			for (WikiImage wikiImage : wikimediaImageList) {
-				holder.add(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
+				holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}
 
 			if (!Algorithms.isEmpty(params.get(Amenity.MAPILLARY))) {
 				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(params.get(Amenity.MAPILLARY));
 				if (imageObject != null) {
-					holder.add(MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
+					holder.addCard(MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
 				}
 			}
 			PluginsHelper.populateContextMenuImageCards(holder, httpPms, params, listener);
@@ -109,9 +111,9 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 							JSONObject imageObject = (JSONObject) images.get(i);
 							if (imageObject != JSONObject.NULL) {
 								if (!PluginsHelper.createImageCardForJson(holder, imageObject)) {
-									ImageCard imageCard = createCard(mapActivity, imageObject);
+									ImageCard imageCard = createImageCard(imageObject);
 									if (imageCard != null) {
-										holder.add(ImageCard.ImageCardType.OTHER, imageCard);
+										holder.addCard(OTHER, imageCard);
 									}
 								}
 							}
@@ -128,29 +130,25 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 		return holder;
 	}
 
-	@Override
-	protected void onPostExecute(ImageCardsHolder cardList) {
-		if (listener != null) {
-			listener.onFinish(cardList);
+	@Nullable
+	private ImageCard createImageCard(@NonNull JSONObject json) {
+		String type = json.optString("type");
+		if (!TYPE_MAPILLARY_CONTRIBUTE.equals(type) && !TYPE_MAPILLARY_PHOTO.equals(type)) {
+			return new UrlImageCard(mapActivity, json);
 		}
+		return null;
 	}
-	private static ImageCard createCard(MapActivity mapActivity, JSONObject imageObject) {
-		ImageCard imageCard = null;
-		try {
-			if (imageObject.has("type")) {
-				String type = imageObject.getString("type");
-				if (!TYPE_MAPILLARY_CONTRIBUTE.equals(type) && !TYPE_MAPILLARY_PHOTO.equals(type)) {
-					imageCard = new UrlImageCard(mapActivity, imageObject);
-				}
-			}
-		} catch (JSONException e) {
-			LOG.error(e);
+
+	@Override
+	protected void onPostExecute(ImageCardsHolder holder) {
+		if (listener != null) {
+			listener.onFinish(holder);
 		}
-		return imageCard;
 	}
 
 	public interface GetImageCardsListener {
 		void onTaskStarted();
+
 		void onFinish(ImageCardsHolder cardsHolder);
 	}
 }

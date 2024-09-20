@@ -4,7 +4,6 @@ import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.
 import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.SPAN_RESIZABLE;
 import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.STANDARD;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,20 +53,18 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	private final boolean nightMode;
 	private final MapActivity mapActivity;
 	private final OsmandApplication app;
-	private final GalleryContextHelper galleryContextHelper;
 
 	private final boolean isOnlinePhotos;
 	private boolean resizeBySpanCount = false;
 	private boolean loadingImages = false;
 	private final Integer viewWidth;
 
-	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull GalleryContextHelper galleryContextHelper,
-	                          @NonNull ImageCardListener listener, @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
+	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull ImageCardListener listener,
+	                          @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
 		this.listener = listener;
 		this.nightMode = nightMode;
 		this.isOnlinePhotos = isOnlinePhotos;
 		this.mapActivity = mapActivity;
-		this.galleryContextHelper = galleryContextHelper;
 		this.app = mapActivity.getMyApplication();
 		this.viewWidth = viewWidth;
 		themedInflater = UiUtilities.getInflater(app, nightMode);

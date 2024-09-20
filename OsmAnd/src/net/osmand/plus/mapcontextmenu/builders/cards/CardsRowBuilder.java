@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.NO_INTERNET_TYPE;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -11,19 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryImageDialog;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -86,20 +85,21 @@ public class CardsRowBuilder {
 		galleryGridAdapter.onLoadingImages(loading);
 	}
 
-	public void build(boolean onlinePhotos, @NonNull GalleryContextHelper galleryContextHelper, boolean nightMode) {
+	public void build(@NonNull GalleryController controller, boolean onlinePhotos, boolean nightMode) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
 		galleryView = themedInflater.inflate(R.layout.gallery_card, null);
 		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
 
-		List<Object> list = new ArrayList<>();
-		galleryGridAdapter = new GalleryGridAdapter(mapActivity, galleryContextHelper,
-				getImageCardListener(galleryContextHelper, onlinePhotos), null, onlinePhotos, nightMode);
+		List<Object> items = new ArrayList<>();
+		ImageCardListener listener = getImageCardListener(controller, onlinePhotos);
+		galleryGridAdapter = new GalleryGridAdapter(mapActivity, listener, null, onlinePhotos, nightMode);
+
 		if (!app.getSettings().isInternetConnectionAvailable()) {
-			list.add(NO_INTERNET_TYPE);
+			items.add(NO_INTERNET_TYPE);
 		} else {
-			list.addAll(cards);
+			items.addAll(cards);
 		}
-		galleryGridAdapter.setItems(list);
+		galleryGridAdapter.setItems(items);
 
 		recyclerView.setLayoutManager(getGridLayoutManager());
 		GalleryGridItemDecorator galleryGridItemDecorator = new GalleryGridItemDecorator(app);
@@ -127,12 +127,13 @@ public class CardsRowBuilder {
 		updateShowAll();
 	}
 
-	private ImageCardListener getImageCardListener(@NonNull GalleryContextHelper galleryContextHelper, boolean onlinePhotos) {
+	@NonNull
+	private ImageCardListener getImageCardListener(@NonNull GalleryController controller, boolean onlinePhotos) {
 		return new ImageCardListener() {
 			@Override
 			public void onImageClicked(@NonNull ImageCard imageCard) {
 				if (onlinePhotos) {
-					GalleryPhotoPagerFragment.showInstance(mapActivity, galleryContextHelper.getImageCardFromUrl(imageCard.imageUrl));
+					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getImageCardFromUrl(imageCard.imageUrl));
 				} else {
 					mapActivity.getContextMenu().close();
 					MapillaryImageDialog.show(mapActivity, imageCard.getKey(), imageCard.getImageHiresUrl(), imageCard.getUrl(), imageCard.getLocation(),
