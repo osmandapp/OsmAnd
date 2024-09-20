@@ -4,11 +4,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.fragments.GlobalSettingsFragment;
 import net.osmand.plus.settings.fragments.VehicleParametersFragment;
@@ -59,31 +56,10 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 							VehicleParametersBottomSheet::getSearchableInfo));
 		}
 		if (hostOfPreference instanceof final ProfileAppearanceFragment profileAppearanceFragment) {
-			// adapted from ProfileAppearanceFragment.onPreferenceClick()
-			final OsmandSettings settings = osmandApplication.getSettings();
-			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
-				return Optional.of(
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								profileAppearanceFragment
-										.getScreenController()
-										.getProfileOptionController()
-										.createDialog(
-												osmandApplication.getString(R.string.view_angle),
-												osmandApplication.getString(R.string.view_angle_description),
-												settings.VIEW_ANGLE_VISIBILITY),
-								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
-			}
-			if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
-				return Optional.of(
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								profileAppearanceFragment
-										.getScreenController()
-										.getProfileOptionController()
-										.createDialog(
-												osmandApplication.getString(R.string.location_radius),
-												osmandApplication.getString(R.string.location_radius_description),
-												settings.LOCATION_RADIUS_VISIBILITY),
-								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
+			final Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> result =
+					profileAppearanceFragment.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
+			if (result.isPresent()) {
+				return result;
 			}
 		}
 		return Optional.empty();

@@ -38,6 +38,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -50,6 +51,10 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import org.apache.commons.logging.Log;
+
+import java.util.Optional;
+
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
 
@@ -228,6 +233,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		}
 	}
 
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.getSearchableDialog(preference)
+				.map(searchableDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								searchableDialog,
+								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		MapActivity mapActivity = getMapActivity();
@@ -242,6 +256,25 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private Optional<CustomizableSingleSelectionBottomSheet> getSearchableDialog(final Preference preference) {
+		final ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
+		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
+			return Optional.of(
+					optionsDialogController.createDialog(
+							app.getString(R.string.view_angle),
+							app.getString(R.string.view_angle_description),
+							settings.VIEW_ANGLE_VISIBILITY));
+		}
+		if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
+			return Optional.of(
+					optionsDialogController.createDialog(
+							app.getString(R.string.location_radius),
+							app.getString(R.string.location_radius_description),
+							settings.LOCATION_RADIUS_VISIBILITY));
+		}
+		return Optional.empty();
 	}
 
 	private void bindCard(@NonNull PreferenceViewHolder holder, @NonNull BaseCard card) {
@@ -382,7 +415,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-	                                   @Nullable String appModeKey, boolean imported) {
+									   @Nullable String appModeKey, boolean imported) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Fragment fragment = Fragment.instantiate(activity, TAG);
