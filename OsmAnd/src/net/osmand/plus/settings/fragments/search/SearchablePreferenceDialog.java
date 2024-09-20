@@ -6,7 +6,7 @@ import net.osmand.plus.OsmandApplication;
 
 public interface SearchablePreferenceDialog {
 
-	void show(OsmandApplication app, FragmentManager fragmentManager);
+	void show(FragmentManager fragmentManager, OsmandApplication app);
 
 	String getSearchableInfo();
 }

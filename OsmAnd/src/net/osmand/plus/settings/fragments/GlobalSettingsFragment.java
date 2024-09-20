@@ -86,7 +86,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			dialog.show(app, fragmentManager);
+			dialog.show(fragmentManager, app);
 		}
 	}
 

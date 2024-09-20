@@ -191,7 +191,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
-		createInstance(target).show(app, fm);
+		createInstance(target).show(fm, app);
 	}
 
 	public static @NonNull SendAnalyticsBottomSheetDialogFragment createInstance(final @Nullable Fragment target) {
@@ -200,7 +200,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return fragment;
 	}
 
-	public void show(final @NonNull OsmandApplication app, final @NonNull FragmentManager fm) {
+	public void show(final @NonNull FragmentManager fm, final @NonNull OsmandApplication app) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
 				show(fm, TAG);

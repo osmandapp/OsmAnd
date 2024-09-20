@@ -356,7 +356,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 						public void show() {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
-								searchablePreferenceDialog.show(app, activity.getSupportFragmentManager());
+								searchablePreferenceDialog.show(activity.getSupportFragmentManager(), app);
 							}
 						}
 					});
@@ -373,7 +373,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 						public void show() {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
-								searchablePreferenceDialog.show(app, fragmentManager);
+								searchablePreferenceDialog.show(fragmentManager, app);
 							}
 						}
 					}

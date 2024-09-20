@@ -272,7 +272,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
 		final SimulateLocationFragment instance = createInstance(gpxFile, usedOnMap);
-		instance.show(instance.app, manager);
+		instance.show(manager, instance.app);
 	}
 
 	public static SimulateLocationFragment createInstance(final @Nullable GpxFile gpxFile, final boolean usedOnMap) {
@@ -289,7 +289,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	@Override
-	public void show(final OsmandApplication app, final FragmentManager fragmentManager) {
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager
 					.beginTransaction()
