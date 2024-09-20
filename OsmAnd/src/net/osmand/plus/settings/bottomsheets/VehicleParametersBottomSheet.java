@@ -30,6 +30,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeData;
 import net.osmand.plus.settings.vehiclesize.SizeType;
@@ -50,7 +51,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
+public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
@@ -237,13 +238,6 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		return formatter.format(input);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-									boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		VehicleParametersBottomSheet
-				.createInstance(key, target, usedOnMap, appMode, false, Optional.empty())
-				.show(fm);
-	}
-
 	public static @NonNull VehicleParametersBottomSheet createInstance(final String key,
 																	   final Fragment target,
 																	   final boolean usedOnMap,
@@ -263,16 +257,18 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		return fragment;
 	}
 
-	public void show(final @NonNull FragmentManager fm) {
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
 		try {
-			if (!fm.isStateSaved()) {
-				show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
 	}
 
+	@Override
 	public String getSearchableInfo() {
 		return String.join(", ", _getText(R.id.title), _getText(R.id.description));
 	}

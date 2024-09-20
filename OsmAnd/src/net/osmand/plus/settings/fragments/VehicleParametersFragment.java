@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -33,6 +34,7 @@ import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
@@ -193,40 +195,32 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		final Optional<VehicleParametersBottomSheet> dialog =
+		final Optional<SearchablePreferenceDialog> preferenceDialog =
 				createPreferenceDialog(
 						preference,
 						this,
 						false,
 						Optional.empty());
-		if (dialog.isPresent()) {
-			show(dialog.get());
-		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				ListPreferenceEx pref = (ListPreferenceEx) preference;
-				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
-						pref.getTitle().toString(), pref.getDescription(),
-						getSelectedAppMode(), false, pref.getEntries(),
-						pref.getEntryValues(), pref.getValueIndex());
-			}
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
-	private void show(final VehicleParametersBottomSheet dialog) {
+	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			dialog.show(fragmentManager);
+			dialog.show(fragmentManager, app);
 		}
 	}
 
-	public Optional<VehicleParametersBottomSheet> createPreferenceDialog(
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(
 			final Preference preference,
 			final VehicleParametersFragment target,
 			final boolean configureSettingsSearch,
 			final Optional<Preference> preferenceParam) {
+		// FK-TODO: behandle DEFAULT_SPEED aus onPreferenceClick() hier
 		if (preference instanceof SizePreference) {
 			return Optional.of(
 					VehicleParametersBottomSheet
@@ -238,6 +232,21 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 									configureSettingsSearch,
 									preferenceParam));
 		}
+		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
+			final ListPreferenceEx pref = (ListPreferenceEx) preference;
+			return Optional.of(
+					SimpleSingleSelectionBottomSheet
+							.createInstance(
+									target,
+									preference.getKey(),
+									pref.getTitle().toString(),
+									pref.getDescription(),
+									getSelectedAppMode(),
+									false,
+									pref.getEntries(),
+									pref.getEntryValues(),
+									pref.getValueIndex()));
+		}
 		return Optional.empty();
 	}
 
@@ -245,11 +254,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null, true, Optional.of(preference))
-				.map(
-						preferenceDialog ->
-								new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-										preferenceDialog,
-										VehicleParametersBottomSheet::getSearchableInfo));
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
