@@ -4,6 +4,7 @@ import kotlinx.datetime.Clock
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.extensions.format
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.*
+import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import kotlin.math.max
@@ -12,8 +13,8 @@ object OBDDataComputer {
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
-	var locations: MutableList<OBDLocation> = ArrayList()
-	var widgets: MutableList<OBDComputerWidget> = ArrayList()
+	var locations: List<OBDLocation> = ArrayList()
+	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
 
@@ -27,9 +28,9 @@ object OBDDataComputer {
 	}
 
 	fun registerLocation(l: OBDLocation) {
-		if (widgets.size > 0) {
+		if (widgets.isNotEmpty()) {
 			// concurrency - change collection in one thread. Other places only read
-			locations.add(l)
+			locations = KCollectionUtils.addToList(locations, l)
 			cleanupLocations()
 		}
 	}
@@ -69,12 +70,12 @@ object OBDDataComputer {
 		formatter: OBDComputerWidgetFormatter = OBDComputerWidgetFormatter()
 	): OBDComputerWidget {
 		val widget = OBDComputerWidget(formatter, type, averageSeconds)
-		widgets.add(widget)
+		widgets = KCollectionUtils.addToList(widgets, widget)
 		return widget
 	}
 
 	fun removeWidget(w: OBDComputerWidget) {
-		widgets.remove(w)
+		widgets = KCollectionUtils.removeFromList(widgets, w)
 	}
 
 	enum class OBDTypeWidget(
@@ -177,11 +178,13 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[0]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = last.doubleValue - first.doubleValue
+						val diffPerc = first.doubleValue - last.doubleValue
 						val diffTime = last.timestamp - first.timestamp
-						diffPerc / diffTime / 1000
+						println("diftime $diffTime; diffPerc $diffPerc")
+						diffPerc / diffTime * 1000 * 3600
+					} else {
+						null
 					}
-					null
 				}
 
 				FUEL_LEFT_DISTANCE -> {
@@ -258,7 +261,7 @@ object OBDDataComputer {
 				}
 				inWindow++
 			}
-			if (inWindow > 0) {
+			if (inWindow > 0 && inWindow < values.size - 1) {
 				values = values.subList(inWindow, values.size)
 			}
 		}
