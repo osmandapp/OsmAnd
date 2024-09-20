@@ -56,11 +56,7 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 							VehicleParametersBottomSheet::getSearchableInfo));
 		}
 		if (hostOfPreference instanceof final ProfileAppearanceFragment profileAppearanceFragment) {
-			final Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> result =
-					profileAppearanceFragment.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
-			if (result.isPresent()) {
-				return result;
-			}
+			return profileAppearanceFragment.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
 		}
 		return Optional.empty();
 	}
