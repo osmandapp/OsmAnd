@@ -91,7 +91,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		toolbar.findViewById(R.id.close_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				activity.onBackPressed();
+				activity.getSupportFragmentManager().popBackStack();
 			}
 		});
 		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
