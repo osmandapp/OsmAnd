@@ -86,7 +86,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 			if (!Algorithms.isEmpty(preferredLang)) {
 				httpPms.put("lang", preferredLang);
 			}
-			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params, true);
+			List<WikiImage> wikimediaImageList = WikiCoreHelper.getWikiImageList(params);
 			for (WikiImage wikiImage : wikimediaImageList) {
 				holder.add(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}

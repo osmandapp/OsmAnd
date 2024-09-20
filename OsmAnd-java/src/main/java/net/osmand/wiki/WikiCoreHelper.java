@@ -181,18 +181,7 @@ public class WikiCoreHelper {
 		if (!Algorithms.isEmpty(image)) {
 			WikiImage wikiImage = parseImageDataFromFile(imageUrl);
 			if (wikiImage != null) {
-				String date = (String) image.get("date");
-				if (date != null) {
-					wikiImage.getMetadata().setDate(date);
-				}
-				String author = (String) image.get("author");
-				if (date != null) {
-					wikiImage.getMetadata().setAuthor(author);
-				}
-				String license = (String) image.get("license");
-				if (date != null) {
-					wikiImage.getMetadata().setLicense(license);
-				}
+				wikiImage.getMetadata().parse(image);
 				return wikiImage;
 			}
 		}
