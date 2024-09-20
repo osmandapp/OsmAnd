@@ -8,17 +8,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.Metadata;
 import net.osmand.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
-	public WikiImage wikiImage;
 
-	public String date;
-	public String author;
-	public String license;
+	private final WikiImage wikiImage;
 
-	private boolean metaDataDownloaded;
+	private boolean metadataDownloaded;
 
 	public WikiImageCard(@NonNull MapActivity mapActivity, @NonNull WikiImage wikiImage) {
 		super(mapActivity, null);
@@ -32,25 +28,26 @@ public class WikiImageCard extends ImageCard {
 		this.url = this.imageUrl;
 		this.imageHiresUrl = wikiImage.getImageHiResUrl();
 
-		View.OnClickListener onClickListener = v -> openUrl(getMapActivity(), getMyApplication(),
-				getTitle(), wikiImage.getUrlWithCommonAttributions(), false, false);
+		View.OnClickListener listener = v -> openUrl(mapActivity, app, getTitle(),
+				wikiImage.getUrlWithCommonAttributions(), false, false);
 
 		if (!Algorithms.isEmpty(buttonText)) {
-			this.onButtonClickListener = onClickListener;
+			this.onButtonClickListener = listener;
 		} else {
-			this.onClickListener = onClickListener;
+			this.onClickListener = listener;
 		}
 	}
 
+	@NonNull
+	public WikiImage getWikiImage() {
+		return wikiImage;
+	}
+
 	public boolean isMetaDataDownloaded() {
-		return metaDataDownloaded;
+		return metadataDownloaded;
 	}
 
-	public void setMetaDataDownloaded(boolean metaDataDownloaded) {
-		this.metaDataDownloaded = metaDataDownloaded;
-	}
-
-	public Metadata getMetadata(){
-		return wikiImage.getMetadata();
+	public void setMetaDataDownloaded(boolean metadataDownloaded) {
+		this.metadataDownloaded = metadataDownloaded;
 	}
 }

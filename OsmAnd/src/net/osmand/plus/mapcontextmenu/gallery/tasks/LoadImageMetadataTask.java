@@ -17,53 +17,52 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GetImageWikiMetaDataTask extends AsyncTask<Void, Void, Void> {
-	private static final Log LOG = PlatformUtil.getLog(GetImageWikiMetaDataTask.class);
-	private static final String WIKI_MEDIA_BASE_URL = "https://commons.wikimedia.org/wiki/File:";
+public class LoadImageMetadataTask extends AsyncTask<Void, Void, Void> {
+
+	private static final Log LOG = PlatformUtil.getLog(LoadImageMetadataTask.class);
+
 	private static final String WIKI_MEDIA_ACTION_RAW = "?action=raw";
+	private static final String WIKI_MEDIA_BASE_URL = "https://commons.wikimedia.org/wiki/File:";
 	private static final String OSMAND_PARSE_URL = "https://osmand.net/routing/search/parse-image-info";
 
 	private final OsmandApplication app;
-	private final WikiImageCard wikiImageCard;
+	private final WikiImageCard imageCard;
 	private final GetImageWikiMetaDataListener listener;
 
-	public GetImageWikiMetaDataTask(@NonNull OsmandApplication app, @NonNull WikiImageCard wikiImageCard, @Nullable GetImageWikiMetaDataListener listener) {
-		this.wikiImageCard = wikiImageCard;
+	public LoadImageMetadataTask(@NonNull OsmandApplication app, @NonNull WikiImageCard imageCard,
+	                             @Nullable GetImageWikiMetaDataListener listener) {
+		this.imageCard = imageCard;
 		this.listener = listener;
 		this.app = app;
 	}
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		String wikiMediaUrl = WIKI_MEDIA_BASE_URL + wikiImageCard.wikiImage.getWikiMediaTag() + WIKI_MEDIA_ACTION_RAW;
+		String wikiMediaUrl = WIKI_MEDIA_BASE_URL + imageCard.getWikiImage().getWikiMediaTag() + WIKI_MEDIA_ACTION_RAW;
 
-		StringBuilder rawResponse = new StringBuilder();
-		String errorMessage = NetworkUtils.sendGetRequest(wikiMediaUrl, null, rawResponse);
-		if (!Algorithms.isEmpty(errorMessage)) {
-			LOG.error(errorMessage);
-		}
-		String data = rawResponse.toString();
-		if (!Algorithms.isEmpty(data)) {
-			requestWikiDataParsing(data);
+		StringBuilder builder = new StringBuilder();
+		String error = NetworkUtils.sendGetRequest(wikiMediaUrl, null, builder);
+		if (Algorithms.isEmpty(error)) {
+			String data = builder.toString();
+			if (!Algorithms.isEmpty(data)) {
+				requestWikiDataParsing(data);
+			}
+		} else {
+			LOG.error(error);
 		}
 
 		return null;
 	}
 
-	@Override
-	protected void onPostExecute(Void unused) {
-		if (listener != null) {
-			listener.onFinish(wikiImageCard);
-		}
-	}
-
 	private void requestWikiDataParsing(@NonNull String data) {
-		try {
-			AndroidNetworkUtils.sendRequest(app, OSMAND_PARSE_URL, data, null,
-					"application/json", false, true, (result, error, resultCode) -> {
+		AndroidNetworkUtils.sendRequest(app, OSMAND_PARSE_URL, data, null,
+				"application/json", false, true, (result, error, resultCode) -> {
+					if (!Algorithms.isEmpty(error)) {
+						LOG.error(error);
+					} else if (!Algorithms.isEmpty(result)) {
 						try {
 							JSONObject object = new JSONObject(result);
-							Metadata metadata = wikiImageCard.getMetadata();
+							Metadata metadata = imageCard.getWikiImage().getMetadata();
 							if (Algorithms.isEmpty(metadata.getAuthor())) {
 								metadata.setAuthor(object.getString("author"));
 							}
@@ -73,13 +72,20 @@ public class GetImageWikiMetaDataTask extends AsyncTask<Void, Void, Void> {
 							if (Algorithms.isEmpty(metadata.getLicense())) {
 								metadata.setLicense(object.getString("license"));
 							}
-							wikiImageCard.setMetaDataDownloaded(true);
+							imageCard.setMetaDataDownloaded(true);
 						} catch (JSONException e) {
 							LOG.error(e);
 						}
-					});
-		} catch (Throwable t) {
-			LOG.error(t);
+					} else {
+						LOG.error("Empty metadata response");
+					}
+				});
+	}
+
+	@Override
+	protected void onPostExecute(Void unused) {
+		if (listener != null) {
+			listener.onFinish(imageCard);
 		}
 	}
 

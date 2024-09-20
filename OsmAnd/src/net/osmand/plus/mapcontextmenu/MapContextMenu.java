@@ -8,6 +8,10 @@ import android.util.Pair;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.OnResultCallback;
@@ -16,9 +20,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,6 +36,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -53,15 +55,13 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
 		MapMarkerChangedListener, TargetPointChangedListener {
@@ -435,7 +435,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null && init(latLon, pointDescription, object)) {
 			mapActivity.getMyApplication().logEvent("open_context_menu");
 			showInternal();
-			mapActivity.getMyApplication().getDialogManager().register(GalleryContextController.PROCESS_ID, new GalleryContextController());
+			mapActivity.getMyApplication().getDialogManager().register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
 		}
 	}
 
@@ -529,7 +529,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getDialogManager().unregister(GalleryContextController.PROCESS_ID);
+			app.getDialogManager().unregister(GalleryController.PROCESS_ID);
 		}
 		return result;
 	}

@@ -36,15 +36,15 @@ public class WikiCoreHelper {
 	private static final int THUMB_SIZE = 480;
 	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
 	private static final int DEPT_CAT_LIMIT = 1;
-	
-	
+
+
 	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
 		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
 		String wikidataId = tags.getOrDefault(Amenity.WIKIDATA, "");
 		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
 		String wikiTitle = tags.get(Amenity.WIKIPEDIA);
 		String wikiCategory = "";
-		int urlInd = wikiTitle == null? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
+		int urlInd = wikiTitle == null ? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
 		if (urlInd > 0) {
 			String prefix = wikiTitle.substring(0, urlInd);
 			String lang = prefix.substring(prefix.lastIndexOf("/") + 1, prefix.length());
@@ -78,7 +78,7 @@ public class WikiCoreHelper {
 				if (!Algorithms.isEmpty(wikiTitle)) {
 					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
-				if (!Algorithms.isEmpty(wikiTitle)) {
+				if (!Algorithms.isEmpty(wikidataId)) {
 					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
 				}
 			} catch (UnsupportedEncodingException e) {
@@ -129,7 +129,7 @@ public class WikiCoreHelper {
 		}
 		return wikiImages;
 	}
-	
+
 
 	protected static List<WikiImage> getWikidataImageWikidata(String wikidataId, List<WikiImage> wikiImages) {
 		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
@@ -181,7 +181,20 @@ public class WikiCoreHelper {
 		if (!Algorithms.isEmpty(image)) {
 			WikiImage wikiImage = parseImageDataFromFile(imageUrl);
 			if (wikiImage != null) {
-				wikiImage.getMetadata().parse(image);
+				Metadata metadata = wikiImage.getMetadata();
+
+				String date = (String) image.get("date");
+				if (date != null) {
+					metadata.setDate(date);
+				}
+				String author = (String) image.get("author");
+				if (date != null) {
+					metadata.setAuthor(author);
+				}
+				String license = (String) image.get("license");
+				if (date != null) {
+					metadata.setLicense(license);
+				}
 				return wikiImage;
 			}
 		}

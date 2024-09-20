@@ -3,7 +3,7 @@ package net.osmand.plus.mapcontextmenu.gallery;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment.SELECTED_POSITION_KEY;
 
 import android.os.Bundle;
-import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
@@ -25,12 +24,22 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
 
+	private GalleryController controller;
+
 	private GalleryImageView imageView;
 	private int selectedPosition = 0;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+
+		Bundle args = getArguments();
+		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
+			selectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
+		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
+			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
+		}
 	}
 
 	@Nullable
@@ -40,13 +49,6 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_item, container, false);
 
-		Bundle args = getArguments();
-		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
-		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
-		}
-
 		setupImageView(view);
 
 		return view;
@@ -54,34 +56,21 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 
 	private void setupImageView(@NonNull ViewGroup view) {
 		imageView = view.findViewById(R.id.image);
-		GalleryContextController galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
-		if (galleryContextController != null) {
-			ImageCard selectedImageCard = galleryContextController.getOnlinePhotoCards().get(selectedPosition);
-			Picasso.get().load(selectedImageCard.getImageUrl()).into(imageView);
 
-			imageView.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
-				@Override
-				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-					Fragment target = getTargetFragment();
-					if (target instanceof GalleryPhotoPagerFragment galleryPhotoPagerFragment) {
-						galleryPhotoPagerFragment.toggleUi();
-						return true;
-					}
-					return false;
+		ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
+		Picasso.get().load(imageCard.getImageUrl()).into(imageView);
+
+		imageView.setOnDoubleTapListener(new SimpleOnGestureListener() {
+			@Override
+			public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+				Fragment target = getTargetFragment();
+				if (target instanceof GalleryPhotoPagerFragment fragment) {
+					fragment.toggleUi();
+					return true;
 				}
-
-				@Override
-				public boolean onDoubleTap(@NonNull MotionEvent e) {
-					return false;
-				}
-
-				@Override
-				public boolean onDoubleTapEvent(@NonNull MotionEvent e) {
-					return false;
-				}
-			});
-
-		}
+				return false;
+			}
+		});
 	}
 
 	@Override
@@ -97,12 +86,13 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	}
 
 	@NonNull
-	public static Fragment newInstance(int selectedPosition, Fragment targetFragment) {
+	public static Fragment newInstance(int selectedPosition, Fragment target) {
 		Bundle bundle = new Bundle();
 		bundle.putInt(SELECTED_POSITION_KEY, selectedPosition);
+
 		GalleryPhotoViewerFragment fragment = new GalleryPhotoViewerFragment();
 		fragment.setArguments(bundle);
-		fragment.setTargetFragment(targetFragment, 0);
+		fragment.setTargetFragment(target, 0);
 		return fragment;
 	}
 }
