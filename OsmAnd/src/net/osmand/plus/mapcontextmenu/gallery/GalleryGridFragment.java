@@ -4,7 +4,6 @@ import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGES_C
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ScaleGestureDetector;
@@ -44,7 +43,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 	private GalleryGridRecyclerView recyclerView;
 
-	private GalleryContextHelper galleryContextHelper;
+	private GalleryContextController galleryContextController;
 	private GalleryGridAdapter galleryGridAdapter;
 	private ScaleGestureDetector scaleDetector;
 	private GridLayoutManager gridLayoutManager;
@@ -59,7 +58,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		galleryContextHelper = app.getGalleryContextHelper();
+		galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -77,19 +76,19 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 			@Override
 			public void onGlobalLayout() {
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				galleryGridAdapter = new GalleryGridAdapter(getMapActivity(), galleryContextHelper,
+				galleryGridAdapter = new GalleryGridAdapter(getMapActivity(),
 						getImageCardListener(), recyclerView.getMeasuredWidth(), true, nightMode);
 				galleryGridAdapter.setResizeBySpanCount(true);
 
 				List<Object> items = new ArrayList<>();
 				items.add(IMAGES_COUNT_TYPE);
-				items.addAll(galleryContextHelper.getOnlinePhotoCards());
+				items.addAll(galleryContextController.getOnlinePhotoCards());
 				galleryGridAdapter.setItems(items);
 
 				recyclerView.setAdapter(galleryGridAdapter);
 				recyclerView.setScaleDetector(scaleDetector);
 
-				gridLayoutManager = new GridLayoutManager(app, GalleryContextHelper.getSettingsSpanCount(getMapActivity()));
+				gridLayoutManager = new GridLayoutManager(app, GalleryContextController.getSettingsSpanCount(getMapActivity()));
 				gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 					@Override
 					public int getSpanSize(int position) {
@@ -110,12 +109,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	}
 
 	private ImageCardListener getImageCardListener() {
-		return new ImageCardListener() {
-			@Override
-			public void onImageClicked(@NonNull ImageCard imageCard) {
-				GalleryPhotoPagerFragment.showInstance(getMapActivity(), galleryContextHelper.getImageCardFromUrl(imageCard.getImageUrl()));
-			}
-		};
+		return imageCard -> GalleryPhotoPagerFragment.showInstance(getMapActivity(), galleryContextController.getImageCardFromUrl(imageCard.getImageUrl()));
 	}
 
 	private void setupScaleDetector() {
@@ -132,13 +126,13 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 					float a = (1 - detector.getScaleFactor()) * SCALE_MULTIPLIER;
 					newScaleFactor = newScaleFactor + a;
 				}
-				int previousCount = GalleryContextHelper.getSettingsSpanCount(getMapActivity());
+				int previousCount = GalleryContextController.getSettingsSpanCount(getMapActivity());
 				int newCount = (int) newScaleFactor + previousCount;
 
 				if (newCount != previousCount) {
 					newScaleFactor = 0;
 					if (newCount <= MAX_GALLERY_GRID_SPAN_COUNT && newCount >= MIN_GALLERY_GRID_SPAN_COUNT) {
-						GalleryContextHelper.setSpanSettings(getMapActivity(), newCount);
+						GalleryContextController.setSpanSettings(getMapActivity(), newCount);
 						updateSpan();
 						zoomedForPinch = true;
 					}
@@ -161,7 +155,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateSpan() {
-		gridLayoutManager.setSpanCount(GalleryContextHelper.getSettingsSpanCount(getMapActivity()));
+		gridLayoutManager.setSpanCount(GalleryContextController.getSettingsSpanCount(getMapActivity()));
 		for (int i = 0; i < galleryGridAdapter.getItemCount(); i++) {
 			Object object = galleryGridAdapter.getItems().get(i);
 			if (object instanceof ImageCard) {

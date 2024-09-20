@@ -62,7 +62,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
@@ -72,7 +72,6 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
@@ -142,6 +141,8 @@ public class MenuBuilder {
 	private boolean showOnlinePhotos = true;
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
+
+	private GalleryContextController galleryContextController;
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
@@ -164,7 +165,9 @@ public class MenuBuilder {
 		public void onFinish(ImageCardsHolder cardsHolder) {
 			if (!isHidden()) {
 				onLoadingImages(false);
-				app.getGalleryContextHelper().setCurrentCardsHolder(cardsHolder);
+				if (galleryContextController != null) {
+					galleryContextController.setCurrentCardsHolder(cardsHolder);
+				}
 				setOnlinePhotosCards(cardsHolder.getOrderedList());
 				PluginsHelper.onGetImageCardsFinished(cardsHolder);
 			}
@@ -199,6 +202,7 @@ public class MenuBuilder {
 		this.app = mapActivity.getMyApplication();
 		this.customization = app.getAppCustomization();
 		this.plainMenuItems = new LinkedList<>();
+		this.galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
 
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		preferredMapAppLang = preferredMapLang;
@@ -321,11 +325,12 @@ public class MenuBuilder {
 		if (needBuildCoordinatesRow()) {
 			buildCoordinatesRow(view);
 		}
-		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
+		galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
+		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos && galleryContextController != null) {
 			buildNearestPhotosRow(view);
+			buildPluginGalleryRows(view, object);
 		}
 
-		buildPluginGalleryRows(view, object);
 		startLoadingImages();
 	}
 
@@ -350,7 +355,9 @@ public class MenuBuilder {
 	void onClose() {
 		onlinePhotoCardsRow = null;
 		onlinePhotoCards = null;
-		app.getGalleryContextHelper().clearHolder();
+		if (galleryContextController != null) {
+			galleryContextController.clearHolder();
+		}
 		clearPluginRows();
 	}
 
@@ -649,7 +656,7 @@ public class MenuBuilder {
 	protected void buildNearestPhotosRow(View view) {
 		boolean needUpdateOnly = onlinePhotoCardsRow != null && onlinePhotoCardsRow.getMenuBuilder() == this;
 		onlinePhotoCardsRow = new CardsRowBuilder(this);
-		onlinePhotoCardsRow.build(true, app.getGalleryContextHelper(),
+		onlinePhotoCardsRow.build(true, galleryContextController,
 				getApplication().getDaynightHelper().isNightModeForMapControls());
 
 		LinearLayout parent = new LinearLayout(view.getContext());
@@ -687,15 +694,14 @@ public class MenuBuilder {
 	}
 
 	private void startLoadingImagesTask() {
-		if (!app.getSettings().isInternetConnectionAvailable()) {
+		if (!app.getSettings().isInternetConnectionAvailable() || galleryContextController == null) {
 			return;
 		}
 		onlinePhotoCards = new ArrayList<>();
-		GalleryContextHelper galleryContextHelper = app.getGalleryContextHelper();
 		LatLon latLon = getLatLon();
 		Map<String, String> params = getAdditionalCardParams();
-		if (galleryContextHelper.isCurrentHolderEquals(latLon, params)) {
-			imageCardListener.onFinish(galleryContextHelper.getCurrentCardsHolder());
+		if (galleryContextController.isCurrentHolderEquals(latLon, params)) {
+			imageCardListener.onFinish(galleryContextController.getCurrentCardsHolder());
 		}
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
 	}

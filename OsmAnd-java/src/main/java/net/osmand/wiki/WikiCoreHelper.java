@@ -86,7 +86,7 @@ public class WikiCoreHelper {
 			}
 			if (url.length() > 0) {
 				if (addMetaData) {
-					getImagesOsmAndAPIRequest2(url, wikiImages);
+					getImagesOsmAndAPIRequestV2(url, wikiImages);
 				} else {
 					getImagesOsmAndAPIRequest(url, wikiImages);
 				}
@@ -152,8 +152,8 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	private static List<WikiImage> getImagesOsmAndAPIRequest2(String url, List<WikiImage> wikiImages) {
-		OsmandAPIResponse2 response = sendWikipediaApiRequest(url, OsmandAPIResponse2.class);
+	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages) {
+		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class);
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (Map<String, Object> image : response.images) {
 				WikiImage wikiImage = parseImageDataWithMetaData(image);
@@ -187,15 +187,15 @@ public class WikiCoreHelper {
 			if (wikiImage != null) {
 				String date = (String) image.get("date");
 				if (date != null) {
-					wikiImage.setDate(date);
+					wikiImage.getMetadata().setDate(date);
 				}
 				String author = (String) image.get("author");
 				if (date != null) {
-					wikiImage.setAuthor(author);
+					wikiImage.getMetadata().setAuthor(author);
 				}
 				String license = (String) image.get("license");
 				if (date != null) {
-					wikiImage.setLicense(license);
+					wikiImage.getMetadata().setLicense(license);
 				}
 				return wikiImage;
 			}
@@ -246,7 +246,7 @@ public class WikiCoreHelper {
 		return null;
 	}
 
-	public static class OsmandAPIResponse2 {
+	public static class OsmandAPIResponseV2 {
 		@SerializedName("features-v2")
 		@Expose
 		private final Set<Map<String, Object>> images = null;

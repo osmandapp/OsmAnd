@@ -35,6 +35,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController.DownloadMetaDataListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -44,6 +45,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +65,18 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
-	private GalleryContextHelper galleryContextHelper;
+	private GalleryContextController galleryContextController;
+	private DownloadMetaDataListener metaDataListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		galleryContextHelper = app.getGalleryContextHelper();
+		galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
+		metaDataListener = updatedWikiImageCard -> {
+			if (updatedWikiImageCard.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
+				setMetaData(updatedWikiImageCard.getMetadata().getAuthor(), updatedWikiImageCard.getMetadata().getDate());
+			}
+		};
 	}
 
 	@Nullable
@@ -97,7 +105,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		}
 
 		ViewPager photoPager = view.findViewById(R.id.photo_pager);
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), galleryContextHelper.getOnlinePhotoCards(), this);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), galleryContextController.getOnlinePhotoCards(), this);
 		photoPager.setAdapter(adapter);
 		photoPager.setCurrentItem(selectedPosition);
 		photoPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -134,12 +142,14 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
-			String date = wikiImageCard.date;
-			String author = wikiImageCard.author;
-			String license = wikiImageCard.license;
-			if (!wikiImageCard.isWikiMediaMataDataDownloaded() &&
+			Metadata metadata = wikiImageCard.getMetadata();
+			String date = metadata.getDate();
+			String author = metadata.getAuthor();
+			String license = metadata.getLicense();
+			if (!wikiImageCard.isMetaDataDownloaded() &&
 					(Algorithms.isEmpty(date) || Algorithms.isEmpty(author) || Algorithms.isEmpty(license))) {
-				galleryContextHelper.downloadWikiMetaData(wikiImageCard, updatedWikiImageCard -> setMetaData(updatedWikiImageCard.author, updatedWikiImageCard.date));
+				galleryContextController.addMetaDataListener(metaDataListener);
+				galleryContextController.downloadWikiMetaData(wikiImageCard);
 			} else {
 				setMetaData(author, date);
 			}
@@ -343,7 +353,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	}
 
 	private ImageCard getSelectedImageCard() {
-		return galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
+		return galleryContextController.getOnlinePhotoCards().get(selectedPosition);
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -384,6 +394,12 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		galleryContextController.removeMetaDataListener(metaDataListener);
 	}
 
 	private MapActivity getMapActivity() {

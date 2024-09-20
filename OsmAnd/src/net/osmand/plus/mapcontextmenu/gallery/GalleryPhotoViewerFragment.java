@@ -47,34 +47,41 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
 
-		imageView = view.findViewById(R.id.image);
-		GalleryContextHelper galleryContextHelper = app.getGalleryContextHelper();
-		ImageCard selectedImageCard = galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
-		Picasso.get().load(selectedImageCard.getImageUrl()).into(imageView);
-
-		imageView.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
-			@Override
-			public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-				Fragment target = getTargetFragment();
-				if (target instanceof GalleryPhotoPagerFragment galleryPhotoPagerFragment) {
-					galleryPhotoPagerFragment.toggleUi();
-					return true;
-				}
-				return false;
-			}
-
-			@Override
-			public boolean onDoubleTap(@NonNull MotionEvent e) {
-				return false;
-			}
-
-			@Override
-			public boolean onDoubleTapEvent(@NonNull MotionEvent e) {
-				return false;
-			}
-		});
+		setupImageView(view);
 
 		return view;
+	}
+
+	private void setupImageView(@NonNull ViewGroup view) {
+		imageView = view.findViewById(R.id.image);
+		GalleryContextController galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
+		if (galleryContextController != null) {
+			ImageCard selectedImageCard = galleryContextController.getOnlinePhotoCards().get(selectedPosition);
+			Picasso.get().load(selectedImageCard.getImageUrl()).into(imageView);
+
+			imageView.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
+				@Override
+				public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+					Fragment target = getTargetFragment();
+					if (target instanceof GalleryPhotoPagerFragment galleryPhotoPagerFragment) {
+						galleryPhotoPagerFragment.toggleUi();
+						return true;
+					}
+					return false;
+				}
+
+				@Override
+				public boolean onDoubleTap(@NonNull MotionEvent e) {
+					return false;
+				}
+
+				@Override
+				public boolean onDoubleTapEvent(@NonNull MotionEvent e) {
+					return false;
+				}
+			});
+
+		}
 	}
 
 	@Override

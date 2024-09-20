@@ -10,9 +10,7 @@ public class WikiImage {
 	private final String imageStubUrl;
 	private final String imageHiResUrl;
 
-	private String date;
-	private String author;
-	private String license;
+	private final Metadata metadata = new Metadata();
 
 	public WikiImage(String wikiMediaTag, String imageName, String imageStubUrl, String imageHiResUrl) {
 		this.wikiMediaTag = wikiMediaTag;
@@ -41,27 +39,7 @@ public class WikiImage {
 		return wikiMediaTag;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public void setLicense(String license) {
-		this.license = license;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public String getLicense() {
-		return license;
+	public Metadata getMetadata() {
+		return metadata;
 	}
 }

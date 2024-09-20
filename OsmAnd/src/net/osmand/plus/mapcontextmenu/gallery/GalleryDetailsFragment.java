@@ -23,19 +23,20 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper.DownloadMetaDataListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController.DownloadMetaDataListener;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.Metadata;
 
 public class GalleryDetailsFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
-	private GalleryContextHelper galleryContextHelper;
+	private GalleryContextController galleryContextController;
 	private Toolbar toolbar;
 	private ImageView navigationIcon;
 	private int selectedPosition = 0;
@@ -44,9 +45,9 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.galleryContextHelper = app.getGalleryContextHelper();
+		this.galleryContextController = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
 		metaDataListener = getMetaDataListener();
-		galleryContextHelper.addMetaDataListener(metaDataListener);
+		galleryContextController.addMetaDataListener(metaDataListener);
 	}
 
 	@Nullable
@@ -84,23 +85,24 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		galleryContextHelper.removeMetaDataListener(metaDataListener);
+		galleryContextController.removeMetaDataListener(metaDataListener);
 	}
 
 	private ImageCard getSelectedCard(){
-		return galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
+		return galleryContextController.getOnlinePhotoCards().get(selectedPosition);
 	}
 
-	private void fillContent(LinearLayout mainContainer) {
+	private void fillContent(@NonNull LinearLayout mainContainer) {
 		mainContainer.removeAllViews();
 		ImageCard card = getSelectedCard();
 		String author = null;
 		String date = null;
 		String license = null;
 		if (card instanceof WikiImageCard wikiImageCard) {
-			author = wikiImageCard.author;
-			date = wikiImageCard.date;
-			license = wikiImageCard.license;
+			Metadata metadata = wikiImageCard.getMetadata();
+			author = metadata.getAuthor();
+			date = metadata.getDate();
+			license = metadata.getLicense();
 		}
 
 		if (!Algorithms.isEmpty(author)) {

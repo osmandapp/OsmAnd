@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageWikiMetaDataTask;
@@ -16,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class GalleryContextHelper {
+public class GalleryContextController implements IDialogController {
+
+	public static final String PROCESS_ID = "gallery_context_controller";
+
 	private ImageCardsHolder currentCardsHolder;
 	private final List<DownloadMetaDataListener> metaDataListeners = new ArrayList<>();
 
@@ -32,19 +36,18 @@ public class GalleryContextHelper {
 		return currentCardsHolder;
 	}
 
-	public void addMetaDataListener(DownloadMetaDataListener listener){
-		metaDataListeners.add(listener);
+	public void addMetaDataListener(DownloadMetaDataListener listener) {
+		if (!metaDataListeners.contains(listener)) {
+			metaDataListeners.add(listener);
+		}
 	}
 
 	public void removeMetaDataListener(DownloadMetaDataListener listener){
 		metaDataListeners.remove(listener);
 	}
 
-	public void downloadWikiMetaData(@NonNull WikiImageCard wikiImageCard, DownloadMetaDataListener listener) {
-		GetImageWikiMetaDataTask getMetadata = new GetImageWikiMetaDataTask(wikiImageCard.getMyApplication(), wikiImageCard, wikiImageCard1 -> {
-			listener.onMetaDataDownloaded(wikiImageCard1);
-			notifyMetaDataDownloaded(wikiImageCard1);
-		});
+	public void downloadWikiMetaData(@NonNull WikiImageCard wikiImageCard) {
+		GetImageWikiMetaDataTask getMetadata = new GetImageWikiMetaDataTask(wikiImageCard.getMyApplication(), wikiImageCard, this::notifyMetaDataDownloaded);
 		getMetadata.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

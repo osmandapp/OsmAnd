@@ -16,6 +16,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -434,6 +435,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null && init(latLon, pointDescription, object)) {
 			mapActivity.getMyApplication().logEvent("open_context_menu");
 			showInternal();
+			mapActivity.getMyApplication().getDialogManager().register(GalleryContextController.PROCESS_ID, new GalleryContextController());
 		}
 	}
 
@@ -524,6 +526,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				mapActivity.refreshMap();
 			}
+		}
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getDialogManager().unregister(GalleryContextController.PROCESS_ID);
 		}
 		return result;
 	}

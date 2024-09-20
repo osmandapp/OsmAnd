@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.Metadata;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -42,31 +43,10 @@ public class GetImageWikiMetaDataTask extends AsyncTask<Void, Void, Void> {
 			LOG.error(errorMessage);
 		}
 		String data = rawResponse.toString();
-
 		if (!Algorithms.isEmpty(data)) {
-			try {
-				AndroidNetworkUtils.sendRequest(app, OSMAND_PARSE_URL, data, null,
-						"application/json", false, true, (result, error, resultCode) -> {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (Algorithms.isEmpty(wikiImageCard.author)) {
-							wikiImageCard.author = object.getString("author");
-						}
-						if (Algorithms.isEmpty(wikiImageCard.date)) {
-							wikiImageCard.date = object.getString("date");
-						}
-						if (Algorithms.isEmpty(wikiImageCard.license)) {
-							wikiImageCard.license = object.getString("license");
-						}
-						wikiImageCard.setWikiMediaMataDataDownloaded(true);
-					} catch (JSONException e) {
-						throw new RuntimeException(e);
-					}
-				});
-			} catch (Throwable t) {
-				LOG.error(t);
-			}
+			requestWikiDataParsing(data);
 		}
+
 		return null;
 	}
 
@@ -74,6 +54,32 @@ public class GetImageWikiMetaDataTask extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void unused) {
 		if (listener != null) {
 			listener.onFinish(wikiImageCard);
+		}
+	}
+
+	private void requestWikiDataParsing(@NonNull String data) {
+		try {
+			AndroidNetworkUtils.sendRequest(app, OSMAND_PARSE_URL, data, null,
+					"application/json", false, true, (result, error, resultCode) -> {
+						try {
+							JSONObject object = new JSONObject(result);
+							Metadata metadata = wikiImageCard.getMetadata();
+							if (Algorithms.isEmpty(metadata.getAuthor())) {
+								metadata.setAuthor(object.getString("author"));
+							}
+							if (Algorithms.isEmpty(metadata.getDate())) {
+								metadata.setDate(object.getString("date"));
+							}
+							if (Algorithms.isEmpty(metadata.getLicense())) {
+								metadata.setLicense(object.getString("license"));
+							}
+							wikiImageCard.setMetaDataDownloaded(true);
+						} catch (JSONException e) {
+							LOG.error(e);
+						}
+					});
+		} catch (Throwable t) {
+			LOG.error(t);
 		}
 	}
 

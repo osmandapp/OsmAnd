@@ -35,6 +35,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryContextController;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
@@ -256,9 +257,13 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+		GalleryContextController controller = (GalleryContextController) app.getDialogManager().findController(GalleryContextController.PROCESS_ID);
+		if (controller == null) {
+			return;
+		}
 		boolean needUpdateOnly = mapillaryCardsRow != null && mapillaryCardsRow.getMenuBuilder() == menuBuilder;
 		mapillaryCardsRow = new CardsRowBuilder(menuBuilder);
-		mapillaryCardsRow.build(false, app.getGalleryContextHelper(),
+		mapillaryCardsRow.build(false, controller,
 				app.getDaynightHelper().isNightModeForMapControls());
 
 		LinearLayout parent = new LinearLayout(view.getContext());
