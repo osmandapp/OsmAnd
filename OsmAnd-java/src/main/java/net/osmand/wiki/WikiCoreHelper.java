@@ -38,7 +38,7 @@ public class WikiCoreHelper {
 	private static final int DEPT_CAT_LIMIT = 1;
 	
 	
-	public static List<WikiImage> getWikiImageList(Map<String, String> tags, boolean addMetaData) {
+	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
 		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
 		String wikidataId = tags.getOrDefault(Amenity.WIKIDATA, "");
 		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
@@ -78,18 +78,14 @@ public class WikiCoreHelper {
 				if (!Algorithms.isEmpty(wikiTitle)) {
 					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
-				if (!Algorithms.isEmpty(wikiTitle) && addMetaData) {
+				if (!Algorithms.isEmpty(wikiTitle)) {
 					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
 				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
 			}
 			if (url.length() > 0) {
-				if (addMetaData) {
-					getImagesOsmAndAPIRequestV2(url, wikiImages);
-				} else {
-					getImagesOsmAndAPIRequest(url, wikiImages);
-				}
+				getImagesOsmAndAPIRequestV2(url, wikiImages);
 			}
 		} else {
 			if (!Algorithms.isEmpty(wikidataId)) {
