@@ -3,11 +3,9 @@ package net.osmand.plus.settings.fragments.search;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.fragments.VehicleParametersFragment;
 import net.osmand.plus.settings.preferences.SizePreference;
-import net.osmand.plus.simulation.SimulateLocationFragment;
 
 import java.util.Optional;
 
@@ -20,15 +18,9 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 			final PreferenceFragmentCompat hostOfPreference,
 			final Preference preference) {
 		// FK-TODO: handle more preference dialogs, which shall be searchable
+		// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
 		if (hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider) {
 			return searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference);
-		}
-		if (isSimulateYourLocation(preference)) {
-			// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
-			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							SimulateLocationFragment.createInstance(null, false),
-							SimulateLocationFragment::getSearchableInfo));
 		}
 		if (preference instanceof SizePreference && hostOfPreference instanceof final VehicleParametersFragment vehicleParametersFragment) {
 			return Optional.of(
@@ -43,9 +35,5 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 							VehicleParametersBottomSheet::getSearchableInfo));
 		}
 		return Optional.empty();
-	}
-
-	private boolean isSimulateYourLocation(final Preference preference) {
-		return DevelopmentSettingsFragment.SIMULATE_YOUR_LOCATION.equals(preference.getKey());
 	}
 }

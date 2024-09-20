@@ -23,6 +23,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -30,11 +31,14 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, SearchablePreferenceDialogProvider {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
-	public static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
+	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
@@ -297,11 +301,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
-			}
+		final Optional<SimulateLocationFragment> dialog = createDialog(preference);
+		if (dialog.isPresent()) {
+			show(dialog.get());
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -334,6 +336,30 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private void show(final SimulateLocationFragment dialog) {
+		final FragmentActivity activity = getActivity();
+		if (activity != null) {
+			dialog.show(activity.getSupportFragmentManager());
+		}
+	}
+
+	private Optional<SimulateLocationFragment> createDialog(final Preference preference) {
+		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
+			return Optional.of(SimulateLocationFragment.createInstance(null, false));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createDialog(preference)
+				.map(dialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								dialog,
+								SimulateLocationFragment::getSearchableInfo));
 	}
 
 	@Override
