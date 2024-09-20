@@ -291,7 +291,8 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	@Override
 	public void show(final OsmandApplication app, final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
+			fragmentManager
+					.beginTransaction()
 					.replace(R.id.fragmentContainer, this, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
