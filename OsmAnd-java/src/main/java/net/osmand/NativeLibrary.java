@@ -721,5 +721,24 @@ public class NativeLibrary {
 			}
 			return res;
 		}
+
+		public QuadRect getRectLatLon() {
+			if (x.size() == 0) {
+				return null;
+			}
+			int left = x.get(0);
+			int right = left;
+			int top = y.get(0);
+			int bottom = top;
+			for (int i = 0; i < x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				left = Math.min(left, x);
+				right = Math.max(right, x);
+				top = Math.min(top, y);
+				bottom = Math.max(top, y);
+			}
+			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
+		}
 	}
 }

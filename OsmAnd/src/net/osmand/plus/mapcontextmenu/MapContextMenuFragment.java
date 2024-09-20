@@ -33,9 +33,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.NativeLibrary;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
@@ -576,6 +578,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		};
 
+		fitPolygon();
 		created = true;
 		return view;
 	}
@@ -2011,13 +2014,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			return;
 		}
 
-		if (animated) {
-			showOnMap(latlon, false, true, zoom);
-		} else {
-			if (dZoom != 0) {
-				map.setIntZoom(zoom);
+		if (!fitPolygon()) {
+			if (animated) {
+				showOnMap(latlon, false, true, zoom);
+			} else {
+				if (dZoom != 0) {
+					map.setIntZoom(zoom);
+				}
+				map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 			}
-			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
 	}
 
@@ -2269,5 +2274,32 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public List<Rect> getCoveredScreenRects() {
 		Rect rect = portrait ? null : AndroidUtils.getViewBoundOnScreen(mainView);
 		return rect == null ? Collections.emptyList() : Collections.singletonList(rect);
+	}
+
+	private boolean fitPolygon() {
+		Object obj = menu.getObject();
+		if (obj instanceof NativeLibrary.RenderedObject ro) {
+			if (!ro.isPolygon()) {
+				return false;
+			}
+			QuadRect r = ro.getRectLatLon();
+			getMapActivity().getMapView();
+			RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+			int marginStartPx = 0;
+			int y = menu.getCurrentMenuState() == MenuState.FULL_SCREEN ? getMenuStatePosY(MenuState.HALF_SCREEN) : getPosY();
+
+			if (!portrait) {
+				tileBoxWidthPx = tb.getPixWidth() - view.getWidth();
+				marginStartPx = view.getWidth();
+			} else {
+				int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(getMapActivity());
+				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+			}
+			getMapActivity().getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+			return true;
+		}
+		return false;
 	}
 }
