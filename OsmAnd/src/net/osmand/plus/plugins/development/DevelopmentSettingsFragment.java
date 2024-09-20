@@ -300,12 +300,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
 	}
 
+	private static abstract class ShowableSearchablePreferenceDialog {
+
+		public final SearchablePreferenceDialog searchablePreferenceDialog;
+
+		public ShowableSearchablePreferenceDialog(final SearchablePreferenceDialog searchablePreferenceDialog) {
+			this.searchablePreferenceDialog = searchablePreferenceDialog;
+		}
+
+		public abstract void show();
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		final Optional<SearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
+		final Optional<ShowableSearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
 		if (preferenceDialog.isPresent()) {
-			show(preferenceDialog.get());
+			preferenceDialog.get().show();
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -335,43 +346,51 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		return super.onPreferenceClick(preference);
 	}
 
-	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
-																		final DevelopmentSettingsFragment target) {
+	private Optional<ShowableSearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
+																				final DevelopmentSettingsFragment target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
-			return Optional.of(SimulateLocationFragment.createInstance(null, false));
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog(SimulateLocationFragment.createInstance(null, false)) {
+
+						@Override
+						public void show() {
+							final FragmentActivity activity = getActivity();
+							if (activity != null) {
+								searchablePreferenceDialog.show(app, activity.getSupportFragmentManager());
+							}
+						}
+					});
 		}
 		if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(preference.getKey())) {
 			return Optional.of(
-					AllocatedRoutingMemoryBottomSheet.createInstance(
-							preference.getKey(),
-							target,
-							getSelectedAppMode()));
+					new ShowableSearchablePreferenceDialog(
+							AllocatedRoutingMemoryBottomSheet.createInstance(
+									preference.getKey(),
+									target,
+									getSelectedAppMode())) {
+
+						@Override
+						public void show() {
+							final FragmentManager fragmentManager = getFragmentManager();
+							if (fragmentManager != null) {
+								searchablePreferenceDialog.show(app, fragmentManager);
+							}
+						}
+					}
+			);
 		}
 		return Optional.empty();
-	}
-
-	private void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-		if (searchablePreferenceDialog instanceof final SimulateLocationFragment simulateLocationFragment) {
-			final FragmentActivity activity = getActivity();
-			if (activity != null) {
-				simulateLocationFragment.show(app, activity.getSupportFragmentManager());
-			}
-		} else if (searchablePreferenceDialog instanceof final AllocatedRoutingMemoryBottomSheet allocatedRoutingMemoryBottomSheet) {
-			final FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				allocatedRoutingMemoryBottomSheet.show(app, fragmentManager);
-			}
-		}
 	}
 
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
-				.map(preferenceDialog ->
+				.map(showableSearchablePreferenceDialog -> showableSearchablePreferenceDialog.searchablePreferenceDialog)
+				.map(searchablePreferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
+								(Fragment) searchablePreferenceDialog,
+								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
