@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -157,11 +158,15 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 	}
 
 	private static CharSequence getTitle(final View view) {
-		return view.<TextView>findViewById(R.id.title).getText();
+		return getText(view, R.id.title);
 	}
 
 	private static CharSequence getDescription(final View view) {
-		return view.<TextView>findViewById(R.id.description).getText();
+		return getText(view, R.id.description);
+	}
+
+	private static CharSequence getText(final View view, final @IdRes int id) {
+		return view.<TextView>findViewById(id).getText();
 	}
 
 	public enum DistanceDuringNavigationMode {
