@@ -5888,4 +5888,11 @@
     <string name="shared_string_decrease">Riduce</string>
     <string name="shared_string_dp">dp</string>
     <string name="rendering_value_pale_name">Chiaro</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Apri nel browser</string>
+    <string name="shared_string_source">Sorgente</string>
+    <string name="no_internet_descr">Controlla la tua connessione e riprova.</string>
+    <string name="no_photos_available_descr">Nessuna foto è stata caricata in questa località</string>
+    <string name="no_photos_available">Nessuna foto disponibile</string>
+    <string name="shared_string_no_internet_connection">Nessuna connessione</string>
 </resources>
