@@ -26,6 +26,8 @@ abstract class DataItem(val file: KFile) {
 		return hasData() && GpxParameter.getAppearanceParameters().any { key -> map[key] != null }
 	}
 
+	abstract fun getParameters(): Map<GpxParameter, Any?>
+
 	fun <T> requireParameter(parameter: GpxParameter): T {
 		val res = getParameter(parameter) as? T
 		return res ?: throw IllegalStateException("Requested parameter '$parameter' is null.")

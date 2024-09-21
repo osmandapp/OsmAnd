@@ -186,4 +186,10 @@ class GpxDataItem(
 	inline fun <reified T : Any> castGpxParameter(parameter: GpxParameter, value: Any?): T? {
 		return if (parameter.typeClass.isInstance(value)) value as? T else null
 	}
+
+	override fun getParameters(): Map<GpxParameter, Any?> =
+		GpxParameter.entries.associateWith { parameter ->
+			if (parameter.analysisParameter) analysis?.getGpxParameter(parameter)
+			else getParameter(parameter)
+		}
 }

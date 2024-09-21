@@ -55,7 +55,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		@Override
 		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			populateList(item);
-			if (dbHelper.isRead()) {
+			if (dbHelper.isReading()) {
 				onListPopulated();
 			}
 		}
@@ -203,7 +203,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
-			if (dbHelper.isRead()) {
+			if (dbHelper.isReading()) {
 				onListPopulated();
 			}
 		}

@@ -271,6 +271,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		preselectedTabParams = null;
 	}
 
+	@Override
+	public void deferredLoadTracksFinished(@NonNull TrackFolder folder) {
+	}
+
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
 			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());

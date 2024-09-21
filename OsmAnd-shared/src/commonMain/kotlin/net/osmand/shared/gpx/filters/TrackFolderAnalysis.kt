@@ -1,9 +1,11 @@
 package net.osmand.shared.gpx.filters
 
+import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.LoggerFactory
 
 class TrackFolderAnalysis(folder: TracksGroup) {
 	var tracksCount = 0
@@ -12,6 +14,10 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 	var fileSize: Long = 0
 	var diffElevationUp = 0.0
 	var diffElevationDown = 0.0
+
+	companion object {
+		private val log = LoggerFactory.getLogger("TrackFolderAnalysis")
+	}
 
 	init {
 		prepareInformation(folder)
@@ -24,11 +30,12 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 		} else {
 			items.addAll(folder.getTrackItems())
 		}
-		for (trackItem in items) {
+		var totalDistanceSum = 0.0
+		for (trackItem in items.sortedBy { it.name }) {
 			val dataItem = trackItem.dataItem
 			val analysis = dataItem?.getAnalysis()
 			if (analysis != null) {
-				totalDistance += analysis.totalDistance
+				totalDistanceSum += analysis.totalDistance
 				diffElevationUp += analysis.diffElevationUp
 				diffElevationDown += analysis.diffElevationDown
 				val file: KFile? = trackItem.getFile()
@@ -36,10 +43,14 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 					fileSize += file.length()
 				}
 				if (analysis.isTimeSpecified()) {
-					timeSpan = (timeSpan + analysis.getDurationInMs() / 1000.0f).toInt()
+					timeSpan = (timeSpan + analysis.getDurationInMs() / 1000.0).toInt()
 				}
 			}
 		}
+		totalDistance = totalDistanceSum.toFloat()
 		tracksCount = items.size
+
+		log.info(">>>> ${folder.getName()} = (tracks: $tracksCount, totalDistance: ${"%.2f".format(totalDistance)}, " +
+				"timeSpan: $timeSpan, fileSize: $fileSize, diffElevationUp: ${"%.2f".format(diffElevationUp)}, diffElevationDown: ${"%.2f".format(diffElevationDown)}")
 	}
 }

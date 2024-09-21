@@ -36,6 +36,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.shared.gpx.TrackItem;
@@ -472,6 +473,18 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 			@Override
 			public void loadTracksFinished(@NonNull TrackFolder folder) {
+				if (GpxDbHelper.INSTANCE.isReading()) {
+					return;
+				}
+				onLoadFinished(folder);
+			}
+
+			@Override
+			public void deferredLoadTracksFinished(@NonNull TrackFolder folder) {
+				onLoadFinished(folder);
+			}
+
+			private void onLoadFinished(@NonNull TrackFolder folder) {
 				setRootFolder(folder);
 				setSelectedFolder(folder);
 

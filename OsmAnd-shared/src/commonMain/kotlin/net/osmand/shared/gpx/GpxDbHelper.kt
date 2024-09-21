@@ -2,12 +2,16 @@ package net.osmand.shared.gpx
 
 import co.touchlab.stately.collections.ConcurrentMutableList
 import co.touchlab.stately.collections.ConcurrentMutableMap
+import co.touchlab.stately.concurrency.Synchronizable
+import co.touchlab.stately.concurrency.synchronize
 import kotlinx.coroutines.runBlocking
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxReader.GpxDbReaderCallback
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
+import kotlin.random.Random
 
 object GpxDbHelper : GpxDbReaderCallback {
 	val log = LoggerFactory.getLogger("GpxDbHelper")
@@ -19,9 +23,11 @@ object GpxDbHelper : GpxDbReaderCallback {
 
 	private val readingItems = ConcurrentMutableList<KFile>()
 	private val readingItemsMap = ConcurrentMutableMap<KFile, GpxDataItem>()
-	private val readingItemsCallbacks = ConcurrentMutableMap<KFile, GpxDataItemCallback>()
+	private val readingItemsCallbacks = mutableMapOf<KFile, MutableList<GpxDataItemCallback>?>()
 
-	private var readerTask: GpxReader? = null
+	private const val READER_TASKS_LIMIT = 4
+	private var readers = mutableListOf<GpxReader>()
+	private var readerSync = Synchronizable()
 	var readTrackItemCount: Long = 0
 
 	private var initialized: Boolean = false
@@ -29,6 +35,10 @@ object GpxDbHelper : GpxDbReaderCallback {
 	fun interface GpxDataItemCallback {
 		fun isCancelled(): Boolean = false
 		fun onGpxDataItemReady(item: GpxDataItem)
+	}
+
+	interface GpxDataItemCallbackEx : GpxDataItemCallback {
+		fun onGpxDataItemReady(item: GpxDataItem, lastItem: Boolean)
 	}
 
 	fun loadItemsBlocking() = runBlocking { loadItems() }
@@ -105,6 +115,11 @@ object GpxDbHelper : GpxDbReaderCallback {
 		val res = database.updateDataItem(item)
 		putToCache(item)
 		return res
+	}
+
+	fun insertDataItem(item: DataItem, conn: SQLiteConnection) {
+		database.insertItem(item, conn)
+		putToCache(item)
 	}
 
 	fun updateDataItemParameter(
@@ -190,7 +205,7 @@ object GpxDbHelper : GpxDbReaderCallback {
 			return null
 		}
 		val item = dataItems[file]
-		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
+		if (GpxDbUtils.isAnalyseNeeded(item)) {
 			readTrackItemCount++
 			readGpxItem(file, item, callback)
 		}
@@ -228,39 +243,44 @@ object GpxDbHelper : GpxDbReaderCallback {
 		}
 	}
 
-	fun isRead(): Boolean {
-		return readerTask == null || !readerTask!!.isReading()
-	}
+	fun isReading(): Boolean = readerSync.synchronize { readers.isNotEmpty() }
 
-	private fun isGpxReading(file: KFile): Boolean {
-		val analyser = readerTask
-		return readingItems.contains(file) || (analyser != null && file == analyser.file)
-	}
+	private fun isReading(file: KFile): Boolean =
+		readerSync.synchronize { readingItems.contains(file) || readers.any { it.file == file } }
 
 	private fun readGpxItem(file: KFile, item: GpxDataItem?, callback: GpxDataItemCallback?) {
-		readingItemsMap[file] = item ?: GpxDataItem(file)
-		if (callback != null) {
-			readingItemsCallbacks[file] = callback
-		}
-		readingItems.add(file)
-		if (readerTask == null) {
-			startReading()
+		readerSync.synchronize {
+			if (callback != null) {
+				readingItemsCallbacks.getOrPut(file) { mutableListOf() }?.apply { add(callback) }
+			}
+			if (!isReading(file)) {
+				readingItemsMap[file] = item ?: GpxDataItem(file)
+				readingItems.add(file)
+				if (readers.size < READER_TASKS_LIMIT) {
+					startReading()
+				}
+			}
 		}
 	}
 
 	private fun startReading() {
-		readerTask = GpxReader(readingItems, readingItemsMap, this).apply { execute() }
+		readerSync.synchronize {
+			readers.add(GpxReader(readingItems, readingItemsMap, this).apply { execute() })
+			log.info(">>>> GpxReader created = ${readers.size}")
+		}
 	}
 
 	private fun stopReading() {
-		readerTask?.cancel()
-		readerTask = null
+		readerSync.synchronize {
+			readers.forEach { it.cancel() }
+			readers.clear()
+			log.info(">>>> GpxReaders stopped")
+		}
 	}
 
 	fun getGPXDatabase(): GpxDatabase = database
 
 	override fun onGpxDataItemRead(item: GpxDataItem) {
-		putToCache(item)
 		putGpxDataItemToSmartFolder(item)
 	}
 
@@ -270,29 +290,38 @@ object GpxDbHelper : GpxDbReaderCallback {
 	}
 
 	override fun onProgressUpdate(vararg dataItems: GpxDataItem) {
-		dataItems.forEach { item ->
-			val callback = readingItemsCallbacks.remove(item.file)
-			if (callback != null) {
-				if (callback.isCancelled()) {
-					stopReading()
-				} else {
-					callback.onGpxDataItemReady(item)
+		readerSync.synchronize {
+			dataItems.forEach { item ->
+				val callbacks = readingItemsCallbacks.remove(item.file)
+				callbacks?.forEach { callback ->
+					if (callback.isCancelled()) {
+						stopReading()
+					} else {
+						callback.onGpxDataItemReady(item)
+						if (callback is GpxDataItemCallbackEx)
+							callback.onGpxDataItemReady(item, readingItemsCallbacks.isEmpty())
+					}
 				}
 			}
 		}
 	}
 
 	override fun onReadingCancelled() {
-		readingItems.clear()
-		readingItemsMap.clear()
-		readingItemsCallbacks.clear()
+		readerSync.synchronize {
+			readingItems.clear()
+			readingItemsMap.clear()
+			readingItemsCallbacks.clear()
+		}
 	}
 
-	override fun onReadingFinished(cancelled: Boolean) {
-		if (readingItems.isNotEmpty() && !cancelled) {
-			startReading()
-		} else {
-			readerTask = null
+	override fun onReadingFinished(reader: GpxReader, cancelled: Boolean) {
+		readerSync.synchronize {
+			if (readingItems.isNotEmpty() && readers.size < READER_TASKS_LIMIT && !cancelled) {
+				startReading()
+			} else {
+				readers.remove(reader)
+			}
+			log.info(">>>> GpxReader onReadingFinished readers=${readers.size}")
 		}
 	}
 }

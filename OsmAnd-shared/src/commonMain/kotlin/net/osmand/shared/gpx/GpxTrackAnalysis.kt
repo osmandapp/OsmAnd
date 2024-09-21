@@ -290,6 +290,8 @@ class GpxTrackAnalysis {
 		var sensorCadenceCount = 0
 		var totalSensorCadenceSum = 0.0
 
+		var _totalDistance = 0.0f
+
 		points = 0
 
 		pointAttributes = mutableListOf()
@@ -304,7 +306,7 @@ class GpxTrackAnalysis {
 			expectedRouteDuration += getExpectedRouteSegmentDuration(s)
 
 			for (j in 0 until numberOfPoints) {
-				val point = s.get(j)
+				val point = s[j]
 				if (j == 0 && locationStart == null) {
 					locationStart = point
 					setLatLonStart(point.lat, point.lon)
@@ -350,7 +352,7 @@ class GpxTrackAnalysis {
 					//net.osmand.Location.distanceBetween(
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
-					totalDistance += calculations[0]
+					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
 
@@ -441,6 +443,9 @@ class GpxTrackAnalysis {
 			}
 			processElevationDiff(s)
 		}
+
+		totalDistance = _totalDistance
+
 		checkUnspecifiedValues(fileTimeStamp)
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount)
 

@@ -37,7 +37,6 @@ abstract class KAsyncTask<Params, Progress, Result>(
 		}
 	}
 
-	@OptIn(ExperimentalCoroutinesApi::class)
 	fun execute(vararg params: Params) {
 		start()
 		mainScope.launch {

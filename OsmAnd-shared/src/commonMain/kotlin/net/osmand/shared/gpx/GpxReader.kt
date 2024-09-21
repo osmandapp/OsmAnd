@@ -37,6 +37,8 @@ class GpxReader(
 	}
 
 	private fun doReading() {
+		log.info(">>>> start GpxReader ===== ")
+		var filesCount = 0
 		val conn = database.openConnection(false)
 		if (conn != null) {
 			try {
@@ -51,11 +53,13 @@ class GpxReader(
 						publishProgress(item)
 					}
 					file = readingItems.removeFirstOrNull()
+					filesCount++
 				}
 			} catch (e: Exception) {
 				log.error(e.message)
 			} finally {
 				conn.close()
+				log.info(">>>> done GpxReader ===== filesCount=$filesCount")
 			}
 		} else {
 			cancel()
@@ -71,11 +75,11 @@ class GpxReader(
 	}
 
 	override fun onPostExecute(result: Unit) {
-		listener?.onReadingFinished(isCancelled())
+		listener?.onReadingFinished(this, isCancelled())
 	}
 
 	private fun updateGpxDataItem(conn: SQLiteConnection, item: GpxDataItem?, file: KFile): GpxDataItem {
-		val gpxFile = GpxUtilities.loadGpxFile(file)
+		val gpxFile = GpxUtilities.loadGpxFile(file, null, false)
 		val updatedItem = item ?: GpxDataItem(file)
 		if (gpxFile.error == null) {
 			val analyser = PlatformUtil.getOsmAndContext().getTrackPointsAnalyser()
@@ -105,10 +109,10 @@ class GpxReader(
 				GpxDbUtils.createDataVersion(ANALYSIS_VERSION)
 			)
 
-			if (database.getDataItem(file, conn) != null) {
+			if (database.isDataItemExists(file, conn)) {
 				GpxDbHelper.updateDataItem(updatedItem)
 			} else {
-				database.insertItem(updatedItem, conn)
+				GpxDbHelper.insertDataItem(updatedItem, conn)
 			}
 		}
 		return updatedItem
@@ -122,8 +126,7 @@ class GpxReader(
 		} else {
 			PlatformUtil.getOsmAndContext().searchNearestCityName(latLon) { cityName ->
 				if (cityName.isNotEmpty()) {
-					item.setParameter(GpxParameter.NEAREST_CITY_NAME, cityName)
-					GpxDbHelper.updateDataItem(item)
+					GpxDbHelper.updateDataItemParameter(item, GpxParameter.NEAREST_CITY_NAME, cityName)
 				} else {
 					item.setParameter(GpxParameter.NEAREST_CITY_NAME, "")
 				}
@@ -137,6 +140,6 @@ class GpxReader(
 		fun onGpxDataItemRead(item: GpxDataItem)
 		fun onProgressUpdate(vararg dataItems: GpxDataItem)
 		fun onReadingCancelled()
-		fun onReadingFinished(cancelled: Boolean)
+		fun onReadingFinished(reader: GpxReader, cancelled: Boolean)
 	}
 }

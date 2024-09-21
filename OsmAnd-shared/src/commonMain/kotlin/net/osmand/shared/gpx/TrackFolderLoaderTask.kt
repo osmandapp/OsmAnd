@@ -9,10 +9,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallbackEx
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 
 class TrackFolderLoaderTask(
 	private val folder: TrackFolder,
@@ -31,7 +34,6 @@ class TrackFolderLoaderTask(
 
 	private var loadingTime = 0L
 	private var tracksCounter = 0
-	private var callback: GpxDataItemCallback? = null
 	private var taskSync = Synchronizable()
 	private var progressSync = Synchronizable()
 
@@ -89,9 +91,11 @@ class TrackFolderLoaderTask(
 		}
 		SmartFolderHelper.addTrackItemsToSmartFolder(trackItems)
 
-		for (subFolder in rootFolder.getFlattenedSubFolders()) {
-			subFolder.resetCachedData()
-		}
+		resetCachedData(rootFolder)
+	}
+
+	private fun resetCachedData(rootFolder: TrackFolder) {
+		for (subFolder in rootFolder.getFlattenedSubFolders()) subFolder.resetCachedData()
 		rootFolder.resetCachedData()
 	}
 
@@ -148,24 +152,29 @@ class TrackFolderLoaderTask(
 	}
 
 	private fun getDataItem(trackItem: TrackItem, file: KFile): GpxDataItem? {
-		var callback = this.callback
-		if (callback == null) {
-			callback = object : GpxDataItemCallback {
-				override fun isCancelled(): Boolean = this@TrackFolderLoaderTask.isCancelled()
+		val callback = object : GpxDataItemCallbackEx {
+			override fun isCancelled(): Boolean = this@TrackFolderLoaderTask.isCancelled()
 
-				override fun onGpxDataItemReady(item: GpxDataItem) {
+			override fun onGpxDataItemReady(item: GpxDataItem) {}
+
+			override fun onGpxDataItemReady(item: GpxDataItem, lastItem: Boolean) {
+				if (file == item.file) {
 					trackItem.dataItem = item
 				}
+				if (lastItem) {
+					resetCachedData(folder)
+					listener.deferredLoadTracksFinished(folder)
+				}
 			}
-			this.callback = callback
 		}
 		return GpxDbHelper.getItem(file, callback)
 	}
 
-	interface LoadTracksListener {
+	fun interface LoadTracksListener {
 		fun loadTracksStarted() {}
 		fun loadTracksProgress(vararg items: TrackItem) {}
 		fun tracksLoaded(folder: TrackFolder) {}
 		fun loadTracksFinished(folder: TrackFolder)
+		fun deferredLoadTracksFinished(folder: TrackFolder) {}
 	}
 }

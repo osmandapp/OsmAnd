@@ -474,5 +474,23 @@ class GpxDatabase {
 		}
 		return null
 	}
+
+	fun isDataItemExists(file: KFile, db: SQLiteConnection): Boolean {
+		val name = file.name()
+		val dir = GpxDbUtils.getGpxFileDir(file)
+		val gpxFile = GpxDbUtils.isGpxFile(file)
+		val selectQuery =
+			if (gpxFile) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
+		var query: SQLiteCursor? = null
+		try {
+			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			if (query != null && query.moveToFirst()) {
+				return true
+			}
+		} finally {
+			query?.close()
+		}
+		return false
+	}
 }
 

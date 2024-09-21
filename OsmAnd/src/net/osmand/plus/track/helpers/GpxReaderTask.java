@@ -52,6 +52,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+@Deprecated
 class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 	private static final Log LOG = PlatformUtil.getLog(GpxReaderTask.class);

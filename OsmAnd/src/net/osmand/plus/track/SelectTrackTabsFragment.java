@@ -111,6 +111,10 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	}
 
 	@Override
+	public void deferredLoadTracksFinished(@NonNull TrackFolder folder) {
+	}
+
+	@Override
 	public void onTrackFolderSelected(@NonNull TrackFolder trackFolder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null && trackFolder.getParentFolder() != null) {
