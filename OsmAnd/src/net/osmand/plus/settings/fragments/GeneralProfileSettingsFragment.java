@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.*;
+import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.DistanceDuringNavigationMode;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
 
 import android.content.Context;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
@@ -32,19 +33,24 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.shared.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -120,8 +126,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupMapScreenOrientationPref() {
 		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+		mapScreenOrientation.setEntries(new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
+		mapScreenOrientation.setEntryValues(new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
 	}
 
@@ -375,26 +381,65 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
+		final Optional<SearchablePreferenceDialog> preferenceDialog =
+				createPreferenceDialog(
+						preference,
+						this,
+						Optional.empty());
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
+			return true;
+		}
 		String key = preference.getKey();
 		ApplicationMode appMode = getSelectedAppMode();
-		if (key.equals(settings.DRIVING_REGION.getId())) {
+		if (settings.DRIVING_REGION.getId().equals(key)) {
 			showDrivingRegionDialog();
 			return true;
-		} else if (key.equals(settings.ROTATE_MAP.getId())) {
+		}
+		if (settings.ROTATE_MAP.getId().equals(key)) {
 			CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
 			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
 			controller.setCallback(this);
 			return true;
-		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
+		}
+		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(key)) {
 			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
 			return true;
-		} else if (key.equals(settings.PRECISE_DISTANCE_NUMBERS.getId())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				DistanceDuringNavigationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
-			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
+																		final GeneralProfileSettingsFragment target,
+																		final Optional<Preference> preferenceParam) {
+		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
+			return Optional.of(
+					DistanceDuringNavigationBottomSheet
+							.createInstance(
+									preference.getKey(),
+									target,
+									getSelectedAppMode(),
+									false,
+									preferenceParam));
+		}
+		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
+		}
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createPreferenceDialog(preference, null, Optional.of(preference))
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	private void updateDialogControllerCallbacks() {

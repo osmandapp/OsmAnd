@@ -234,7 +234,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			this
-					.createDialog(preference)
+					.createPreferenceDialog(preference)
 					.ifPresent(dialog -> dialog.show(mapActivity.getSupportFragmentManager()));
 		}
 		return super.onPreferenceClick(preference);
@@ -243,14 +243,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
-				.createDialog(preference)
-				.map(dialog ->
+				.createPreferenceDialog(preference)
+				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								dialog,
+								preferenceDialog,
 								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
 	}
 
-	private Optional<CustomizableSingleSelectionBottomSheet> createDialog(final Preference preference) {
+	private Optional<CustomizableSingleSelectionBottomSheet> createPreferenceDialog(final Preference preference) {
 		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
 					screenController
