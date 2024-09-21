@@ -5919,4 +5919,14 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="no_photos_available_descr">Aún no se añadieron fotos de usuarios a esta ubicación</string>
     <string name="no_photos_available">Sin fotos disponibles</string>
+    <string name="obd_fuel_type_not_provided">No se indica el tipo de combustible</string>
+    <string name="obd_fuel_type_gasoline">Gasolina, Nafta, Bencina</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_diesel">Diésel</string>
+    <string name="obd_fuel_type_electric">Eléctrico</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_lpg">Gas licuado de petróleo (GLP)</string>
+    <string name="obd_fuel_type_cng">GNC</string>
+    <string name="obd_fuel_type_propane">Propano</string>
 </resources>
