@@ -5906,7 +5906,7 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hybride Hydrogène</string>
     <string name="obd_fuel_type_unknown">Carburant inconnu</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_widget_group">Métriques du véhicule</string>
+    <string name="obd_widget_group">Mesures du véhicule</string>
     <string name="obd_fuel_left_distance_desc">Affiche la distance que le véhicule peut parcourir avec le niveau de carburant restant via le capteur OBD</string>
     <string name="obd_air_intake_temp">Température de l\'air d\'admission</string>
     <string name="obd_ambient_air_temp">Température de l\'air ambiant</string>
@@ -5932,9 +5932,9 @@
     <string name="rpm_unit">tr/min</string>
     <string name="obd_rpm">Tours/minute</string>
     <string name="obd_speed_desc">Affiche la vitesse du véhicule via le capteur OBD</string>
-    <string name="obd_rpm_desc">Affiche le régime du tachymètre du véhicule via le capteur OBD</string>
+    <string name="obd_rpm_desc">Affiche le régime du véhicule via le capteur OBD</string>
     <string name="obd_battery_voltage_desc">Affiche la tension de la batterie via le capteur OBD</string>
-    <string name="obd_plugin_name">Métriques du véhicule</string>
+    <string name="obd_plugin_name">Mesures du véhicule</string>
     <string name="obd_air_intake_temp_desc">Affiche la température de l\'air d\'admission du véhicule via le capteur OBD</string>
     <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air ambiant via le capteur OBD</string>
     <string name="obd_fuel_consumption_rate">Taux de consommation de carburant</string>
