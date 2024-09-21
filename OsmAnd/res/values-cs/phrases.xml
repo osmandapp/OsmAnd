@@ -1178,7 +1178,7 @@
     <string name="poi_animal_shelter">Útulek pro zvířata</string>
     <string name="poi_animal_boarding">Zvířecí hotel</string>
     <string name="poi_internet_access_yes">Internetové připojení: ano</string>
-    <string name="poi_defibrillator">Defibrilátor</string>
+    <string name="poi_defibrillator">Defibrilátor;AED</string>
     <string name="poi_defibrillator_yes">Defibrilátor: ano</string>
     <string name="poi_office_camping">Kancelář kempu</string>
     <string name="poi_traffic_calming_island">Dopravní ostrůvek</string>

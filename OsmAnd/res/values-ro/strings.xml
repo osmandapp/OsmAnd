@@ -4365,7 +4365,7 @@
     <string name="display_route_tracks_as_poi">Afișează trasee ca punct de interes</string>
     <string name="delete_history_items_descr">Ștergeți elementele selectate din istoric\?</string>
     <string name="delete_history_items">Ștergeți %1$s elemente din istoric\?</string>
-    <string name="quick_action_toggle_preference">Un comutator pentru a schimba preferințele.</string>
+    <string name="quick_action_toggle_preference">Un comutator pentru a schimba preferința.</string>
     <string name="not_enough_contributions_descr">Un minim de %1$s modificări în ultimele două luni %2$s este necesar pentru a avea acces la actualizări nelimitate ale hărților din oră în oră.</string>
     <string name="copying_file">Se copiază fișierul %1$s…</string>
     <string name="shared_storage_second_step">Faceți clic pe \"Folosește acest folder\".</string>
@@ -5893,4 +5893,16 @@
     <string name="no_internet_descr">Verificați conexiunea și reîncercați.</string>
     <string name="no_photos_available_descr">Nu au fost încă adăugate acestei locații fotografii de la utilizatori</string>
     <string name="no_photos_available">Nicio fotografie disponibilă</string>
+    <string name="contour_layers_action_descr">Modificarea straturilor de contur</string>
+    <string name="change_zoom_action_descr">Modificați zoom-ul hărții.</string>
+    <string name="search_action_descr">Deschide căutarea.</string>
+    <string name="navigation_action_descr">Deschide navigarea.</string>
+    <string name="my_location_action_descr">Centrează harta pe locația ta curentă.</string>
+    <string name="map_3d_mode_action_descr">Modificați înclinarea hărții.</string>
+    <string name="type_of_activity">Tipul de activitate</string>
+    <string name="change_activity">Activitatea de schimbare</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Arată trasee de biciclete de teren</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Arată trasee de biciclete de teren</string>
+    <string name="drawer_button_description">Deschide meniul principal.</string>
+    <string name="configure_map_description">Modificați stilul hărții, straturile sau alte setări.</string>
 </resources>
