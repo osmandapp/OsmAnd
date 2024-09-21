@@ -20,6 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
@@ -126,6 +127,7 @@ public class PluginsHelper {
 		// allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
+		allPlugins.add(new VehicleMetricsPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 

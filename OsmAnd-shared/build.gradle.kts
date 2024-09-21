@@ -73,7 +73,6 @@ kotlin {
 			implementation("androidx.sqlite:sqlite:$sqliteVersion")
 			implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
-			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 		}
 		iosMain.dependencies {
 			implementation("co.touchlab:sqliter-driver:$sqliterVersion")

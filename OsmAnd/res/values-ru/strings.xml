@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="obd_fuel_type_not_provided">Тип топлива не предоставлен</string>
+    <string name="obd_fuel_type_gasoline">Бензин</string>
+    <string name="obd_fuel_type_methanol">Метанол</string>
+    <string name="obd_fuel_type_ethanol">Этанол</string>
+    <string name="obd_fuel_type_diesel">Дизель</string>
+    <string name="obd_fuel_type_lpg">Сжиженный нефтяной газ (LPG)</string>
+    <string name="obd_fuel_type_cng">Сжатый природный газ (CNG)</string>
+    <string name="obd_fuel_type_propane">Пропан</string>
+    <string name="obd_fuel_type_electric">Электричество</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Двухтопливный: бензин</string>
+    <string name="obd_fuel_type_bifuel_methanol">Двухтопливный: метанол</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Двухтопливный: этанол</string>
+    <string name="obd_fuel_type_bifuel_lpg">Двухтопливный: LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Двухтопливный: CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">Двухтопливный: пропан</string>
+    <string name="obd_fuel_type_bifuel_electricity">Двухтопливный: электричество</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Двухтопливный: электричество и двигатель внутреннего сгорания</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Гибрид: бензин</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Гибрид: этанол</string>
+    <string name="obd_fuel_type_hybrid_diesel">Гибрид: дизель</string>
+    <string name="obd_fuel_type_hybrid_electric">Гибрид: электричество</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Гибрид: электричество и двигатель внутреннего сгорания</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Гибрид: регенеративный</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Двухтопливный: водород</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Гибрид: водород</string>
+    <string name="obd_fuel_type_hydrogen">Водород</string>
+    <string name="obd_fuel_type_unknown">Неизвестный тип топлива</string>
     <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
