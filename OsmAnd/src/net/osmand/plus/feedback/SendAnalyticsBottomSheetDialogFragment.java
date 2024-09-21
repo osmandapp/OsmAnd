@@ -200,6 +200,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return fragment;
 	}
 
+	@Override
 	public void show(final @NonNull FragmentManager fm, final @NonNull OsmandApplication app) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
