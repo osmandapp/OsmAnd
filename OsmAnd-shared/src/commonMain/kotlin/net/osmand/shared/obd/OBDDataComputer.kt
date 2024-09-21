@@ -96,7 +96,7 @@ object OBDDataComputer {
 			listOf(OBD_SPEED_COMMAND),
 			{ data -> OBDIntValue(OBD_SPEED_COMMAND, data) }),
 		RPM(false,
-			listOf(OBD_SPEED_COMMAND),
+			listOf(OBD_RPM_COMMAND),
 			{ data -> OBDIntValue(OBD_RPM_COMMAND, data) }),
 		FUEL_LEFT_DISTANCE(true,
 			listOf(OBD_FUEL_LEVEL_COMMAND),

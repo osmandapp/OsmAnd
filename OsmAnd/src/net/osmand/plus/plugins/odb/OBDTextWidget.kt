@@ -25,6 +25,7 @@ class OBDTextWidget @JvmOverloads constructor(
 	init {
 		val obdDataWidgetType: OBDTypeWidget
 		var formatter = OBDComputerWidgetFormatter()
+		var averageTimeSeconds = 15
 		when(fieldType) {
 			RPM -> {
 				obdDataWidgetType = OBDTypeWidget.RPM
@@ -33,6 +34,7 @@ class OBDTextWidget @JvmOverloads constructor(
 			FUEL_CONSUMPTION_RATE -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE
 				formatter = OBDComputerWidgetFormatter("%.0f")
+				averageTimeSeconds = 5 * 60
 			}
 			FUEL_LEFT_DISTANCE -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_DISTANCE
@@ -68,7 +70,7 @@ class OBDTextWidget @JvmOverloads constructor(
 			}
 		}
 		//todo implement setting correct time for widget (0 for instant)
-		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, 15, formatter)
+		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, averageTimeSeconds, formatter)
 	}
 	
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {

@@ -85,11 +85,10 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		speedResp = view.findViewById(R.id.resp5)
 		tempIntakeResp = view.findViewById(R.id.resp6)
 		tempCoolantResp = view.findViewById(R.id.resp7)
-		resp8 = view.findViewById(R.id.resp8)
+		batteryVoltageResp = view.findViewById(R.id.resp8)
 		fuelTypeResp = view.findViewById(R.id.resp9)
 		fuelLeftPersResp = view.findViewById(R.id.resp10)
 		tempAmbientResp = view.findViewById(R.id.resp11)
-		batteryVoltageResp = view.findViewById(R.id.resp12)
 		deviceName = view.findViewById(R.id.device_name)
 		connectBtn = view.findViewById(R.id.connect)
 		connectBtn?.setOnClickListener {
@@ -175,7 +174,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 
 	private fun updateWidgets(){
 		widgets.forEach {
-			updateWidgetsData(it.type, it.computeValue() as String)
+			updateWidgetsData(it.type, if(it.computeValue() == null) " - " else it.computeValue().toString())
 		}
 		handler.postDelayed({updateWidgets()}, 100)
 	}
