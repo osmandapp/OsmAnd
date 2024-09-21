@@ -181,7 +181,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(DEFAULT_SPEED)) {
+		if (DEFAULT_SPEED.equals(preference.getKey())) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				ApplicationMode mode = getSelectedAppMode();
@@ -220,7 +220,6 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 			final VehicleParametersFragment target,
 			final boolean configureSettingsSearch,
 			final Optional<Preference> preferenceParam) {
-		// FK-TODO: behandle DEFAULT_SPEED aus onPreferenceClick() hier
 		if (preference instanceof SizePreference) {
 			return Optional.of(
 					VehicleParametersBottomSheet
@@ -252,6 +251,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		if (DEFAULT_SPEED.equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+							new Fragment(),
+							_preferenceDialog -> new VehicleSpeedHelper(app, getSelectedAppMode()).getSearchableInfo()));
+		}
 		return this
 				.createPreferenceDialog(preference, null, true, Optional.of(preference))
 				.map(preferenceDialog ->
