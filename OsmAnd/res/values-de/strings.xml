@@ -5903,7 +5903,7 @@
     <string name="open_in_browser">Im Browser öffnen</string>
     <string name="shared_string_source">Quelle</string>
     <string name="shared_string_no_internet_connection">Keine Internetverbindung</string>
-    <string name="no_internet_descr">Bitte Internetverbindung und erneut versuchen.</string>
+    <string name="no_internet_descr">Bitte Internetverbindung überprüfen und erneut versuchen.</string>
     <string name="no_photos_available_descr">Noch keine Benutzerfotos zu diesem Standort hinzugefügt</string>
     <string name="no_photos_available">Keine Fotos verfügbar</string>
     <string name="obd_fuel_type_not_provided">Keine Kraftstoffart angegeben</string>
