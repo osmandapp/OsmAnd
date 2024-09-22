@@ -5907,7 +5907,7 @@
     <string name="obd_fuel_type_gasoline">Gasolina</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
-    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="obd_fuel_type_diesel">Diésel</string>
     <string name="obd_fuel_type_lpg">GLP</string>
     <string name="obd_fuel_type_cng">GNC</string>
     <string name="obd_fuel_type_propane">Propano</string>
@@ -5921,7 +5921,7 @@
     <string name="obd_fuel_type_bifuel_electricity">Combustible dual con electricidad</string>
     <string name="obd_fuel_type_hybrid_gasoline">Híbrido gasolina</string>
     <string name="obd_fuel_type_hybrid_ethanol">Híbrido etanol</string>
-    <string name="obd_fuel_type_hybrid_diesel">Híbrido diesel</string>
+    <string name="obd_fuel_type_hybrid_diesel">Híbrido diésel</string>
     <string name="obd_fuel_type_hybrid_electric">Híbrido eléctrico</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Motor híbrido eléctrico y de combustión</string>
     <string name="obd_fuel_type_hybrid_regenerative">Híbrido regenerativo</string>
@@ -5953,4 +5953,8 @@
     <string name="obd_fuel_level_desc">Muestra el nivel de combustible del vehículo a través del sensor OBD</string>
     <string name="obd_engine_coolant_temp">Temperatura del refrigerante del motor</string>
     <string name="obd_fuel_type">Tipo de combustible</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Motor eléctrico y de gasolina o diésel</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Híbrido con hidrógeno</string>
+    <string name="obd_widget_group">Métricas del panel de control</string>
+    <string name="obd_plugin_name">Métricas del panel de control</string>
 </resources>
