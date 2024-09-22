@@ -5908,4 +5908,5 @@
     <string name="no_photos_available_descr">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
     <string name="no_photos_available">Nema dostupnih fotografija</string>
     <string name="wikimedia">Vikimedia</string>
+    <string name="unit_volt">V</string>
 </resources>
