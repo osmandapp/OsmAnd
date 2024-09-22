@@ -5897,4 +5897,16 @@
     <string name="no_internet_descr">Kontrolu vian retkonekton kaj reprovu.</string>
     <string name="no_photos_available_descr">Neniu foto de uzanto aldonita al tiu ĉi loko</string>
     <string name="no_photos_available">Neniu disponebla foto</string>
+    <string name="obd_fuel_type_gasoline">benzino</string>
+    <string name="obd_fuel_type_methanol">metanolo</string>
+    <string name="obd_fuel_type_ethanol">etanolo</string>
+    <string name="obd_fuel_type_not_provided">neraportata speco de brulaĵo</string>
+    <string name="obd_fuel_type_diesel">dizeloleo</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">propano</string>
+    <string name="obd_fuel_type_electric">elektro</string>
+    <string name="obd_fuel_type_bifuel_gasoline">plurbrulaĵa, nun benzino</string>
+    <string name="obd_fuel_type_bifuel_methanol">plurbrulaĵa, nun metanolo</string>
+    <string name="unit_volt">V</string>
 </resources>
