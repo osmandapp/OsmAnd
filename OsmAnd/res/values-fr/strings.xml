@@ -5946,4 +5946,5 @@
     <string name="obd_fuel_type">Type de carburant</string>
     <string name="obd_plugin_description">Accède aux informations de votre véhicule via le protocole OBD</string>
     <string name="obd_support">Prise en charge de l\'OBD</string>
+    <string name="obd_fuel_consumption_rate_desc">Affiche la consommation de carburant du véhicule selon l\'OBD et la localisation</string>
 </resources>
