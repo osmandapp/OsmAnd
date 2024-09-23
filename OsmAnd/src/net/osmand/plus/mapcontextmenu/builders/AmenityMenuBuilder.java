@@ -30,9 +30,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityMenuBuilder.class);
 
-	private final Amenity amenity;
+	protected Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
-	private final Map<String, String> additionalInfo;
+	protected Map<String, String> additionalInfo;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);

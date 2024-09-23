@@ -1608,7 +1608,7 @@ public class MenuBuilder {
 		return null;
 	}
 
-	private PoiUIFilter getPoiFilterForAmenity(Amenity amenity) {
+	protected PoiUIFilter getPoiFilterForAmenity(Amenity amenity) {
 		if (amenity != null) {
 			PoiCategory category = amenity.getType();
 			PoiType poiType = category.getPoiTypeByKeyName(amenity.getSubType());

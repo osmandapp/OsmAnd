@@ -736,7 +736,7 @@ public class NativeLibrary {
 				left = Math.min(left, x);
 				right = Math.max(right, x);
 				top = Math.min(top, y);
-				bottom = Math.max(top, y);
+				bottom = Math.max(bottom, y);
 			}
 			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
 		}
