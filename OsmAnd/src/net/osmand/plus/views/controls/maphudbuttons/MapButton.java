@@ -47,6 +47,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapButtonsLayout;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -178,7 +179,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 				setScaleX(1.5f);
 				setScaleY(1.5f);
 				setAlpha(0.95f);
-				setOnTouchListener(new MapButtonTouchListener(mapActivity, marginPreference));
+				setOnTouchListener(new MapButtonTouchListener());
 				return true;
 			});
 		}
@@ -271,7 +272,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void updateSize() {
-		int size = AndroidUtils.dpToPx(getContext(), appearanceParams.getSize()) + shadowPadding;
+		int size = getSize() + shadowPadding;
 		ViewGroup.LayoutParams params = getLayoutParams();
 		params.height = size;
 		params.width = size;
@@ -280,8 +281,8 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	protected void updateBackground() {
 		Context context = getContext();
+		int size = getSize();
 		float opacity = appearanceParams.getOpacity();
-		int size = AndroidUtils.dpToPx(context, appearanceParams.getSize());
 		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
 
 		GradientDrawable normal = new GradientDrawable();
@@ -384,6 +385,28 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 				setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
 			}
 		}
+		ViewParent parent = getParent();
+		if (parent instanceof MapButtonsLayout layout) {
+			layout.updateButton(this);
+		}
+	}
+
+	public void saveMargins() {
+		MapButtonState buttonState = getButtonState();
+		FabMarginPreference preference = buttonState != null ? buttonState.getFabMarginPref() : null;
+		if (mapActivity != null && useCustomPosition && preference != null) {
+			MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
+			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+				preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+			} else {
+				preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+			}
+		}
+	}
+
+	public int getSize() {
+		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
+		return AndroidUtils.dpToPx(getContext(), params.getSize());
 	}
 
 	@NonNull

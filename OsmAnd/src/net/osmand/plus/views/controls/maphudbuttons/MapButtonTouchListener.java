@@ -5,30 +5,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.MapButtonsLayout;
 
 public class MapButtonTouchListener implements OnTouchListener {
-
-	private final MapActivity activity;
-	private final FabMarginPreference preference;
 
 	private int initialMarginX = 0;
 	private int initialMarginY = 0;
 	private float initialTouchX = 0;
 	private float initialTouchY = 0;
-
-	public MapButtonTouchListener(@NonNull MapActivity activity, @NonNull FabMarginPreference preference) {
-		this.activity = activity;
-		this.preference = preference;
-	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
@@ -45,8 +36,10 @@ public class MapButtonTouchListener implements OnTouchListener {
 				view.setScaleY(1);
 				view.setAlpha(1f);
 
-				updatePreference(view);
-
+				ViewParent parent = view.getParent();
+				if (parent instanceof MapButtonsLayout layout) {
+					layout.updateButton((MapButton) view);
+				}
 				return true;
 			}
 			case MotionEvent.ACTION_MOVE -> {
@@ -72,15 +65,6 @@ public class MapButtonTouchListener implements OnTouchListener {
 			}
 		}
 		return false;
-	}
-
-	private void updatePreference(@NonNull View view) {
-		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-		if (AndroidUiHelper.isOrientationPortrait(activity)) {
-			preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-		} else {
-			preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-		}
 	}
 
 	private int interpolate(int value, int divider, int boundsSize) {
