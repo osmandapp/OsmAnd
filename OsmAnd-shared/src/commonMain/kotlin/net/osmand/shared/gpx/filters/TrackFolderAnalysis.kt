@@ -31,7 +31,7 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 			items.addAll(folder.getTrackItems())
 		}
 		var totalDistanceSum = 0.0
-		for (trackItem in items.sortedBy { it.name }) {
+		for (trackItem in items) {
 			val dataItem = trackItem.dataItem
 			val analysis = dataItem?.getAnalysis()
 			if (analysis != null) {

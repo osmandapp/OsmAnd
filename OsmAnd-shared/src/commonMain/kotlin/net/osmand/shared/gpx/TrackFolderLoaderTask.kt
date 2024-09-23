@@ -64,10 +64,6 @@ class TrackFolderLoaderTask(
 			Companion.cachedRootFolder = TrackFolder(folder)
 		}
 
-		if (progress.isNotEmpty()) {
-			publishProgress(*progress.toTypedArray())
-		}
-
 		listener.tracksLoaded(folder)
 		log.info("Finished loading tracks. Took ${currentTimeMillis() - start}ms")
 
