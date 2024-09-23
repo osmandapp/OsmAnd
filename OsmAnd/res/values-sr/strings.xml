@@ -5901,4 +5901,20 @@
     <string name="no_photos_available">Нема доступних фотографија</string>
     <string name="wikimedia">Викимедиа</string>
     <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_not_provided">Није наведена врста горива</string>
+    <string name="obd_fuel_type_gasoline">Бензин</string>
+    <string name="obd_fuel_type_methanol">Метанол</string>
+    <string name="obd_fuel_type_cng">КПГ</string>
+    <string name="obd_fuel_type_propane">Пропан</string>
+    <string name="obd_fuel_type_electric">Електричан</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Двогоривни радни Бензин</string>
+    <string name="obd_fuel_type_bifuel_methanol">Двогоривни радни Метанол</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Двогоривни радни Етанол</string>
+    <string name="obd_fuel_type_bifuel_lpg">Двогоривни радни ТНГ</string>
+    <string name="obd_fuel_type_bifuel_cng">Двогоривни радни КПГ</string>
+    <string name="obd_fuel_type_bifuel_electricity">Двогоривни радни Електрична</string>
+    <string name="obd_fuel_type_ethanol">Етанол</string>
+    <string name="obd_fuel_type_diesel">Дизел</string>
+    <string name="obd_fuel_type_lpg">ТНГ</string>
+    <string name="obd_fuel_type_bifuel_propane">Двогоривни радни Пропан</string>
 </resources>
