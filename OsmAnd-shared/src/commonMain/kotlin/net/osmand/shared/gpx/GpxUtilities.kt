@@ -729,10 +729,10 @@ object GpxUtilities {
 		progress?.progress(1)
 	}
 
-	fun assignExtensionWriter(wptPt: WptPt, pluginsExtensions: Map<String, String>) {
+	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
-		for ((key, value) in pluginsExtensions) {
+		for ((key, value) in extensions) {
 			if (key.startsWith(GPXTPX_PREFIX)) {
 				gpxtpxExtensions[key] = value
 			} else {
