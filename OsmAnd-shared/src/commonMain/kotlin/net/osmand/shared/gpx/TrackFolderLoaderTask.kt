@@ -9,13 +9,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.extensions.currentTimeMillis
-import net.osmand.shared.extensions.format
-import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallbackEx
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.PlatformUtil
 
 class TrackFolderLoaderTask(
 	private val folder: TrackFolder,
@@ -73,6 +70,7 @@ class TrackFolderLoaderTask(
 	override fun onPostExecute(result: TrackFolder) {
 		val cachedRootFolder = cachedRootFolder
 		if (result === cachedRootFolder) folder.update(cachedRootFolder)
+		resetCachedData(folder)
 		listener.loadTracksFinished(folder)
 		SmartFolderHelper.notifyUpdateListeners()
 	}
@@ -117,7 +115,7 @@ class TrackFolderLoaderTask(
 						launch {
 							log.info("Loading track subfolder = $subfolder")
 							scanFolder(subfolder, progress, trackItems)
-							folder.addSubFolder(subfolder)
+							taskSync.synchronize { folder.addSubFolder(subfolder) }
 						}
 					} else if (GpxHelper.isGpxFile(file)) {
 						val item = TrackItem(file)
@@ -141,7 +139,7 @@ class TrackFolderLoaderTask(
 						}
 					}
 				}
-				folder.addTrackItems(batchTrackItems)
+				taskSync.synchronize { folder.addTrackItems(batchTrackItems) }
 			}
 		}
 		if (isCancelled()) return@coroutineScope
