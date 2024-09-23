@@ -5933,4 +5933,5 @@
     <string name="no_photos_available_descr">В это местоположение еще не было добавлено ни одной пользовательской фотографии</string>
     <string name="no_photos_available">Нет доступных фотографий</string>
     <string name="wikimedia">Викимедиа</string>
+    <string name="percent_unit">%</string>
 </resources>
