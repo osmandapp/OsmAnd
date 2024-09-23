@@ -156,7 +156,12 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 			return true;
 		});
 		if (isUrl) {
-			view.setOnClickListener(v -> AndroidUtils.openUrl(app, description, nightMode));
+			view.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					AndroidUtils.openUrl(activity, description, nightMode);
+				}
+			});
 		}
 
 		container.addView(view);
