@@ -56,6 +56,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.mapcontextmenu.builders.ContextMenuUIComponents;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -123,10 +124,11 @@ public class MenuBuilder {
 	private static final int NEARBY_POI_MAX_RADIUS = 1000;
 	private static final int NEARBY_POI_SEARCH_FACTOR = 2;
 
+	protected OsmandApplication app;
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
-	protected OsmandApplication app;
 	protected OsmAndAppCustomization customization;
+	protected ContextMenuUIComponents uiComponents;
 
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
@@ -199,6 +201,7 @@ public class MenuBuilder {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.customization = app.getAppCustomization();
+		this.uiComponents = new ContextMenuUIComponents(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
 		this.galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
@@ -1249,7 +1252,7 @@ public class MenuBuilder {
 	}
 
 	public int dpToPx(float dp) {
-		return AndroidUtils.dpToPx(app, dp);
+		return uiComponents.dpToPx(dp);
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
@@ -1625,7 +1628,7 @@ public class MenuBuilder {
 
 	@ColorInt
 	protected int getColor(@ColorRes int resId) {
-		return ColorUtilities.getColor(mapActivity, resId);
+		return uiComponents.getColor(resId);
 	}
 
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {

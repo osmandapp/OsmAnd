@@ -36,6 +36,8 @@ public class AdditionalInfoBundle {
 
 	private final OsmandApplication app;
 	private final Map<String, String> additionalInfo;
+	private Map<String, String> filteredAdditionalInfo = null;
+	private Map<String, Object> localizedAdditionalInfo = null;
 
 
 	public AdditionalInfoBundle(@NonNull OsmandApplication app,
@@ -45,27 +47,33 @@ public class AdditionalInfoBundle {
 	}
 
 	@NonNull
-	public Map<String, Object> getFilteredLocalizedInfo(@NonNull String locale) {
-		return GroupAdditionalInfoByLocaleAlgorithm.execute(app, getFilteredInfo(), locale);
+	public Map<String, Object> getFilteredLocalizedInfo() {
+		if (localizedAdditionalInfo == null) {
+			localizedAdditionalInfo = GroupInfoByLocaleAlgorithm.execute(app, getFilteredInfo());
+		}
+		return localizedAdditionalInfo;
 	}
 
 	@NonNull
 	public Map<String, String> getFilteredInfo() {
-		Map<String, String> result = new HashMap<>();
-		for (String origKey : getAdditionalInfoKeys()) {
-			String key;
-			if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
-				key = origKey.replace(AMENITY_PREFIX, "");
-			} else if (origKey.startsWith(AMENITY_PREFIX)) {
-				continue;
-			} else {
-				key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
+		if (filteredAdditionalInfo == null) {
+			Map<String, String> result = new HashMap<>();
+			for (String origKey : getAdditionalInfoKeys()) {
+				String key;
+				if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
+					key = origKey.replace(AMENITY_PREFIX, "");
+				} else if (origKey.startsWith(AMENITY_PREFIX)) {
+					continue;
+				} else {
+					key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
+				}
+				if (!HIDDEN_EXTENSIONS.contains(key)) {
+					result.put(key, get(key));
+				}
 			}
-			if (!HIDDEN_EXTENSIONS.contains(key)) {
-				result.put(key, get(key));
-			}
+			filteredAdditionalInfo = result;
 		}
-		return result;
+		return filteredAdditionalInfo;
 	}
 
 	public boolean containsAny(@NonNull String ... keys) {
