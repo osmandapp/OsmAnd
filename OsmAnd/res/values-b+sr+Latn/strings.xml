@@ -5909,4 +5909,20 @@
     <string name="no_photos_available">Nema dostupnih fotografija</string>
     <string name="wikimedia">Vikimedia</string>
     <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_not_provided">Nije navedena vrsta goriva</string>
+    <string name="obd_fuel_type_gasoline">Benzin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_diesel">Dizel</string>
+    <string name="obd_fuel_type_lpg">TNG</string>
+    <string name="obd_fuel_type_cng">KPG</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="obd_fuel_type_electric">Električna</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Dvogorivni radni Benzin</string>
+    <string name="obd_fuel_type_bifuel_methanol">Dvogorivni radni Metanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Dvogorivni radni Etanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Dvogorivni radni TNG</string>
+    <string name="obd_fuel_type_bifuel_cng">Dvogorivni radni KPG</string>
+    <string name="obd_fuel_type_bifuel_propane">Dvogorivni radni Propan</string>
+    <string name="obd_fuel_type_bifuel_electricity">Dvogorivni radni Električna</string>
 </resources>
