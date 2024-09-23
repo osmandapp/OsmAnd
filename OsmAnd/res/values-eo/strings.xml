@@ -5910,4 +5910,10 @@
     <string name="obd_fuel_type_bifuel_methanol">plurbrulaĵa, nun metanolo</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_bifuel_ethanol">plurbrulaĵa, nun etanolo</string>
+    <string name="obd_fuel_type_bifuel_lpg">plurbrulaĵa, nun LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">plurbrulaĵa, nun CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">plurbrulaĵa, nun propano</string>
+    <string name="obd_fuel_type_bifuel_electricity">plurbrulaĵa, nun elektro</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">plurbrulaĵa, nun elektro kaj brulmotoro</string>
+    <string name="obd_fuel_type_hybrid_gasoline">hibrida, nun benzino</string>
 </resources>
