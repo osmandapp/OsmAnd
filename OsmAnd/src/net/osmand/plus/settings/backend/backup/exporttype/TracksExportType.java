@@ -3,7 +3,7 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
@@ -36,7 +36,7 @@ class TracksExportType extends AbstractFileExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<File> files = new ArrayList<>();
-		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItems();
+		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItemsBlocking();
 		for (GpxDataItem item : gpxItems) {
 			File file = SharedUtil.jFile(item.getFile());
 			if (file.exists() && !file.isDirectory()) {

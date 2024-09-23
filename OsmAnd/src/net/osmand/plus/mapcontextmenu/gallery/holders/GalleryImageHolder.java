@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.gallery.holders;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator.GRID_SCREEN_ITEM_SPACE_DP;
 import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.ImageHolderType.*;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
@@ -22,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryContextHelper;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -90,7 +89,7 @@ public class GalleryImageHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = mapActivity.getMyApplication();
 		int sizeInPx;
 		if (type == SPAN_RESIZABLE) {
-			int spanCount = GalleryContextHelper.getSettingsSpanCount(mapActivity);
+			int spanCount = GalleryController.getSettingsSpanCount(mapActivity);
 			int recyclerViewPadding = AndroidUtils.dpToPx(app, 13);
 			int itemSpace = AndroidUtils.dpToPx(app, GRID_SCREEN_ITEM_SPACE_DP * 2);
 			int screenWidth;

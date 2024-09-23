@@ -227,7 +227,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		int previousVisibleIdx = -1;
 		boolean ignorePrevious = false;
 
-		for (int i = startLocationIndex; i < locationProvider.getSize(); i++) {
+		for (int i = startLocationIndex - (startLocationIndex > 0 ? 1 : 0); i < locationProvider.getSize(); i++) {
 			style = getStyle(i, defaultWayStyle);
 			if (shouldSkipLocation(simplification, styleMap, i)) {
 				continue;

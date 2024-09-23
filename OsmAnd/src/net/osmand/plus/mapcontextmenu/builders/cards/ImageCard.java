@@ -370,13 +370,4 @@ public abstract class ImageCard extends AbstractCard {
 			}
 		};
 	}
-
-	public enum ImageCardType {
-		OTHER,
-		MAPILLARY_AMENITY,
-		WIKIDATA,
-		WIKIMEDIA,
-		OPR,
-		MAPILLARY
-	}
 }

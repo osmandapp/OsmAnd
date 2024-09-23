@@ -5,22 +5,36 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KCollectionUtils
 import kotlin.math.max
 
 class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	TracksGroup, ComparableTracksGroup {
 	private var dirFile: KFile
 	private val parentFolder: TrackFolder?
-	private var trackItems: MutableList<TrackItem> = ArrayList()
-	private var subFolders: MutableList<TrackFolder> = ArrayList()
-	private var flattenedTrackItems: MutableList<TrackItem>? = null
-	private var flattenedSubFolders: MutableList<TrackFolder>? = null
+	private var trackItems = listOf<TrackItem>()
+	private var subFolders = listOf<TrackFolder>()
+	private var flattenedTrackItems: List<TrackItem>? = null
+	private var flattenedSubFolders: List<TrackFolder>? = null
 	private var folderAnalysis: TrackFolderAnalysis? = null
 	private var lastModified: Long = -1
 
 	init {
 		this.dirFile = dirFile
 		this.parentFolder = parentFolder
+	}
+
+	constructor(trackFolder: TrackFolder) : this(trackFolder.dirFile, trackFolder.parentFolder) {
+		update(trackFolder)
+	}
+
+	fun update(folder: TrackFolder) {
+		trackItems = folder.trackItems.toList()
+		subFolders = folder.subFolders.toList()
+		flattenedTrackItems = folder.flattenedTrackItems?.toList()
+		flattenedSubFolders = folder.flattenedSubFolders?.toList()
+		folderAnalysis = folder.folderAnalysis
+		lastModified = folder.lastModified
 	}
 
 	override fun getName(): String {
@@ -53,16 +67,28 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return subFolders
 	}
 
-	override fun getTrackItems(): MutableList<TrackItem> {
+	override fun getTrackItems(): List<TrackItem> {
 		return trackItems
 	}
 
-	fun setSubFolders(subFolders: MutableList<TrackFolder>) {
-		this.subFolders = subFolders
+	fun setSubFolders(subFolders: List<TrackFolder>) {
+		this.subFolders = ArrayList(subFolders)
+	}
+
+	fun addSubFolder(subFolder: TrackFolder) {
+		this.subFolders = KCollectionUtils.addToList(this.subFolders, subFolder)
 	}
 
 	fun setTrackItems(trackItems: MutableList<TrackItem>) {
-		this.trackItems = trackItems
+		this.trackItems = ArrayList(trackItems)
+	}
+
+	fun addTrackItem(trackItem: TrackItem) {
+		this.trackItems = KCollectionUtils.addToList(this.trackItems, trackItem)
+	}
+
+	fun addTrackItems(trackItems: List<TrackItem>) {
+		this.trackItems = KCollectionUtils.addAllToList(this.trackItems, trackItems)
 	}
 
 	val isEmpty: Boolean
@@ -74,31 +100,33 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		get() = getFlattenedTrackItems().size
 
 	fun getFlattenedTrackItems(): List<TrackItem> {
+		var flattenedTrackItems = this.flattenedTrackItems
 		if (flattenedTrackItems == null) {
-			flattenedTrackItems = ArrayList()
+			flattenedTrackItems = mutableListOf()
 			val stack: ArrayDeque<TrackFolder> = ArrayDeque()
 			stack.add(this)
 			while (!stack.isEmpty()) {
 				val current: TrackFolder = stack.removeLast()
-				flattenedTrackItems!!.addAll(current.trackItems)
-				for (folder in current.getSubFolders()) {
+				flattenedTrackItems.addAll(current.trackItems)
+				for (folder in current.subFolders) {
 					stack.addLast(folder)
 				}
 			}
+			this.flattenedTrackItems = flattenedTrackItems
 		}
-		return flattenedTrackItems!!
+		return flattenedTrackItems
 	}
 
 	fun getFlattenedSubFolders(): List<TrackFolder> {
 		var flattenedSubFolders = this.flattenedSubFolders
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = ArrayList()
+			flattenedSubFolders = mutableListOf()
 			val stack = ArrayDeque<TrackFolder>()
 			stack.addLast(this)
 			while (!stack.isEmpty()) {
 				val current: TrackFolder = stack.removeLast()
-				flattenedSubFolders.addAll(current.getSubFolders())
-				for (folder in current.getSubFolders()) {
+				flattenedSubFolders.addAll(current.subFolders)
+				for (folder in current.subFolders) {
 					stack.addLast(folder)
 				}
 			}
@@ -134,12 +162,12 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun clearData() {
-		resetCashedData()
-		trackItems.clear()
-		subFolders.clear()
+		resetCachedData()
+		trackItems = ArrayList()
+		subFolders = ArrayList()
 	}
 
-	fun resetCashedData() {
+	fun resetCachedData() {
 		lastModified = -1
 		flattenedTrackItems = null
 		flattenedSubFolders = null

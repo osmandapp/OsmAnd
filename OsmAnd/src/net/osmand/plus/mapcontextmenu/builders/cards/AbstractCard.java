@@ -29,18 +29,19 @@ import net.osmand.plus.widgets.WebViewEx;
 
 public abstract class AbstractCard {
 
-	private final MapActivity mapActivity;
-	private final OsmandApplication app;
+	protected final OsmandApplication app;
+	protected final MapActivity mapActivity;
+
 	protected View view;
 
 	public abstract int getCardLayoutId();
 
-	public AbstractCard(MapActivity mapActivity) {
+	public AbstractCard(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 	}
 
-	public View build(Context ctx) {
+	public View build(@NonNull Context ctx) {
 		view = LayoutInflater.from(ctx).inflate(getCardLayoutId(), null);
 		update();
 		return view;
@@ -59,11 +60,11 @@ public abstract class AbstractCard {
 	@SuppressLint("SetJavaScriptEnabled")
 	@SuppressWarnings("deprecation")
 	public static void openUrl(@NonNull Activity ctx,
-								  @NonNull OsmandApplication app,
-								  @Nullable String title,
-								  @NonNull String url,
-								  boolean externalLink,
-								  boolean hasImageUrl) {
+	                           @NonNull OsmandApplication app,
+	                           @Nullable String title,
+	                           @NonNull String url,
+	                           boolean externalLink,
+	                           boolean hasImageUrl) {
 		if (externalLink) {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
@@ -86,12 +87,7 @@ public abstract class AbstractCard {
 		topBar.setTitle(title);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
-		topBar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-			}
-		});
+		topBar.setNavigationOnClickListener(v -> dialog.dismiss());
 
 		WebView wv = new WebViewEx(ctx);
 		wv.setWebViewClient(new WebViewClient() {
@@ -129,12 +125,12 @@ public abstract class AbstractCard {
 		dialog.show();
 	}
 
-	private static int getResIdFromAttribute(Context ctx, int attr) {
+	private static int getResIdFromAttribute(@NonNull Context ctx, int attr) {
 		if (attr == 0) {
 			return 0;
 		}
-		TypedValue typedvalueattr = new TypedValue();
-		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
-		return typedvalueattr.resourceId;
+		TypedValue value = new TypedValue();
+		ctx.getTheme().resolveAttribute(attr, value, true);
+		return value.resourceId;
 	}
 }

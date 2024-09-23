@@ -4,7 +4,6 @@ import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGES_C
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ScaleGestureDetector;
@@ -40,14 +39,14 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 	protected static final float SCALE_MULTIPLIER = 3f;
 
-	private Toolbar toolbar;
+	private GalleryController controller;
 
+	private Toolbar toolbar;
 	private GalleryGridRecyclerView recyclerView;
 
-	private GalleryContextHelper galleryContextHelper;
-	private GalleryGridAdapter galleryGridAdapter;
+	private GalleryGridAdapter adapter;
 	private ScaleGestureDetector scaleDetector;
-	private GridLayoutManager gridLayoutManager;
+	private GridLayoutManager layoutManager;
 
 	private float newScaleFactor;
 
@@ -59,7 +58,7 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		galleryContextHelper = app.getGalleryContextHelper();
+		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -77,26 +76,26 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 			@Override
 			public void onGlobalLayout() {
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				galleryGridAdapter = new GalleryGridAdapter(getMapActivity(), galleryContextHelper,
-						getImageCardListener(), recyclerView.getMeasuredWidth(), true, nightMode);
-				galleryGridAdapter.setResizeBySpanCount(true);
+				adapter = new GalleryGridAdapter(requireMapActivity(), getImageCardListener(),
+						recyclerView.getMeasuredWidth(), true, nightMode);
+				adapter.setResizeBySpanCount(true);
 
 				List<Object> items = new ArrayList<>();
 				items.add(IMAGES_COUNT_TYPE);
-				items.addAll(galleryContextHelper.getOnlinePhotoCards());
-				galleryGridAdapter.setItems(items);
+				items.addAll(controller.getOnlinePhotoCards());
+				adapter.setItems(items);
 
-				recyclerView.setAdapter(galleryGridAdapter);
+				recyclerView.setAdapter(adapter);
 				recyclerView.setScaleDetector(scaleDetector);
 
-				gridLayoutManager = new GridLayoutManager(app, GalleryContextHelper.getSettingsSpanCount(getMapActivity()));
-				gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+				layoutManager = new GridLayoutManager(app, GalleryController.getSettingsSpanCount(requireMapActivity()));
+				layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 					@Override
 					public int getSpanSize(int position) {
-						return galleryGridAdapter.getItemViewType(position) == IMAGE_TYPE ? 1 : gridLayoutManager.getSpanCount();
+						return adapter.getItemViewType(position) == IMAGE_TYPE ? 1 : layoutManager.getSpanCount();
 					}
 				});
-				recyclerView.setLayoutManager(gridLayoutManager);
+				recyclerView.setLayoutManager(layoutManager);
 				GalleryGridItemDecorator itemDecorator = new GalleryGridItemDecorator(app);
 				recyclerView.addItemDecoration(itemDecorator);
 			}
@@ -109,13 +108,10 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	@NonNull
 	private ImageCardListener getImageCardListener() {
-		return new ImageCardListener() {
-			@Override
-			public void onImageClicked(@NonNull ImageCard imageCard) {
-				GalleryPhotoPagerFragment.showInstance(getMapActivity(), galleryContextHelper.getImageCardFromUrl(imageCard.getImageUrl()));
-			}
-		};
+		return imageCard -> GalleryPhotoPagerFragment.showInstance(requireMapActivity(),
+				controller.getImageCardFromUrl(imageCard.getImageUrl()));
 	}
 
 	private void setupScaleDetector() {
@@ -132,13 +128,13 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 					float a = (1 - detector.getScaleFactor()) * SCALE_MULTIPLIER;
 					newScaleFactor = newScaleFactor + a;
 				}
-				int previousCount = GalleryContextHelper.getSettingsSpanCount(getMapActivity());
+				int previousCount = GalleryController.getSettingsSpanCount(requireMapActivity());
 				int newCount = (int) newScaleFactor + previousCount;
 
 				if (newCount != previousCount) {
 					newScaleFactor = 0;
 					if (newCount <= MAX_GALLERY_GRID_SPAN_COUNT && newCount >= MIN_GALLERY_GRID_SPAN_COUNT) {
-						GalleryContextHelper.setSpanSettings(getMapActivity(), newCount);
+						GalleryController.setSpanSettings(requireMapActivity(), newCount);
 						updateSpan();
 						zoomedForPinch = true;
 					}
@@ -161,18 +157,18 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateSpan() {
-		gridLayoutManager.setSpanCount(GalleryContextHelper.getSettingsSpanCount(getMapActivity()));
-		for (int i = 0; i < galleryGridAdapter.getItemCount(); i++) {
-			Object object = galleryGridAdapter.getItems().get(i);
+		layoutManager.setSpanCount(GalleryController.getSettingsSpanCount(requireMapActivity()));
+		for (int i = 0; i < adapter.getItemCount(); i++) {
+			Object object = adapter.getItems().get(i);
 			if (object instanceof ImageCard) {
-				galleryGridAdapter.notifyItemChanged(i);
+				adapter.notifyItemChanged(i);
 			}
 		}
 	}
 
 	private void setupToolbar() {
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-		tvTitle.setText(getMapActivity().getContextMenu().getTitleStr());
+		tvTitle.setText(requireMapActivity().getContextMenu().getTitleStr());
 
 		ImageView navigationIcon = toolbar.findViewById(R.id.back_button);
 		navigationIcon.setOnClickListener(view -> {
@@ -195,8 +191,10 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 
 
 	private void onBackPressed() {
-		FragmentManager manager = getMapActivity().getSupportFragmentManager();
-		manager.popBackStack();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
 	}
 
 	@Override
@@ -212,17 +210,31 @@ public class GalleryGridFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
+	@Nullable
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return (MapActivity) requireActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

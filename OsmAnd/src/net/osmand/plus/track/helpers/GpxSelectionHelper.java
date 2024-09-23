@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
@@ -33,6 +33,7 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -355,7 +356,7 @@ public class GpxSelectionHelper {
 	public SelectedGpxFile selectGpxFile(@NonNull GpxFile gpx, @NonNull GpxSelectionParams params) {
 		boolean showOnMap = params.isShowOnMap();
 		boolean isCurrentRecordingTrack = gpx.isShowCurrentTrack();
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.getPath()));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new KFile(gpx.getPath()));
 		SelectedGpxFile selectedFile = isCurrentRecordingTrack ?
 				savingTrackHelper.getCurrentTrack() : getSelectedFileByPath(gpx.getPath());
 		if (!isCurrentRecordingTrack && (showOnMap || !params.shouldUpdateSelected())) {

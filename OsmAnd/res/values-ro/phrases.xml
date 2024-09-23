@@ -1996,7 +1996,7 @@
     <string name="poi_tomb_tumulus">Tip: tumoră</string>
     <string name="poi_tomb_war_grave">Tip: mormânt de război</string>
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
-    <string name="poi_defibrillator">Defibrilator</string>
+    <string name="poi_defibrillator">Defibrilator;AED</string>
     <string name="poi_cairn">Cairn</string>
     <string name="poi_step_condition_rough">Starea pasului: dur</string>
     <string name="poi_step_condition_uneven">Starea pasului: neuniformă</string>
@@ -4868,4 +4868,9 @@
     <string name="poi_property_management">Birou de administrare proprietăți</string>
     <string name="poi_engineer">Birou de inginer</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
+    <string name="poi_cash_in">Depozit în numerar</string>
+    <string name="poi_cash_in_yes">Da</string>
+    <string name="poi_cash_in_no">Nu</string>
+    <string name="poi_cash_in_customers">Clienți</string>
+    <string name="poi_diet_pescetarian_no">Dietă pescărească: nu</string>
 </resources>

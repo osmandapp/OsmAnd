@@ -35,6 +35,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -44,6 +45,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
 	public static final String SELECTED_POSITION_KEY = "selected_position_key";
 
+	private GalleryController controller;
+
 	private ImageView sourceView;
 	private TextView dateView;
 	private TextView authorView;
@@ -63,12 +67,18 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
-	private GalleryContextHelper galleryContextHelper;
+	private DownloadMetadataListener listener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		galleryContextHelper = app.getGalleryContextHelper();
+		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+		listener = card -> {
+			if (card.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
+				Metadata metadata = card.getWikiImage().getMetadata();
+				setMetaData(metadata.getAuthor(), metadata.getDate());
+			}
+		};
 	}
 
 	@Nullable
@@ -84,11 +94,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		toolbar.setLayoutParams(params);
 
 		sourceView = view.findViewById(R.id.source_icon);
-		dateView = view.findViewById(R.id.date);
-		dateView.setTextColor(ColorUtilities.getTertiaryTextColor(app, nightMode));
-
-		authorView = view.findViewById(R.id.author);
-		authorView.setTextColor(ColorUtilities.getTertiaryTextColor(app, nightMode));
+		setupMetadataRow(view);
 
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
@@ -101,7 +107,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		}
 
 		ViewPager photoPager = view.findViewById(R.id.photo_pager);
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), galleryContextHelper.getOnlinePhotoCards(), this);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), controller.getOnlinePhotoCards(), this);
 		photoPager.setAdapter(adapter);
 		photoPager.setCurrentItem(selectedPosition);
 		photoPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -112,7 +118,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			@Override
 			public void onPageSelected(int position) {
 				selectedPosition = position;
-				updateImageDescription(getSelectedImageCard());
+				updateImageDescriptionRow(getSelectedImageCard());
 			}
 
 			@Override
@@ -124,8 +130,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 		setupToolbar(view);
 		setupOnBackPressedCallback();
-		updateImageDescription(getSelectedImageCard());
-
+		updateImageDescriptionRow(getSelectedImageCard());
 		return view;
 	}
 
@@ -135,37 +140,51 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	public void updateImageDescription() {
-		updateImageDescription(getSelectedImageCard());
-	}
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
+		if (imageCard instanceof WikiImageCard wikiImageCard) {
+			dateView.setVisibility(View.VISIBLE);
+			authorView.setVisibility(View.VISIBLE);
+			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			String date = metadata.getDate();
+			String author = metadata.getAuthor();
+			String license = metadata.getLicense();
+			if (!wikiImageCard.isMetaDataDownloaded() &&
+					(Algorithms.isEmpty(date) || Algorithms.isEmpty(author) || Algorithms.isEmpty(license))) {
+				controller.addMetaDataListener(listener);
+				controller.downloadWikiMetaData(wikiImageCard);
+			} else {
+				setMetaData(metadata.getAuthor(), metadata.getDate());
+			}
+		} else {
+			dateView.setVisibility(View.INVISIBLE);
+			authorView.setVisibility(View.INVISIBLE);
+		}
 
-	private void updateImageDescription(@NonNull ImageCard imageCard) {
 		Drawable icon = app.getUIUtilities().getIcon(imageCard.getTopIconId());
 		if (icon != null) {
 			sourceView.setImageDrawable(icon);
 		} else {
 			sourceView.setVisibility(View.GONE);
 		}
+	}
 
-		String date = getDate();
-		String fullDate = app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.shared_string_date), date != null ? date : "");
+	private void setMetaData(@Nullable String author, @Nullable String date) {
+		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_date), date != null ? date : "");
 		dateView.setText(fullDate);
 
-		String author = getAuthor();
-		String fullAuthorString = app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.shared_string_author), author != null ? author : "");
+		String fullAuthorString = getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_author), author != null ? author : "");
 		authorView.setText(fullAuthorString);
 	}
 
-	@Nullable
-	private String getDate() {
-		return null;
-	}
+	private void setupMetadataRow(ViewGroup view) {
+		dateView = view.findViewById(R.id.date);
+		dateView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
 
-	@Nullable
-	private String getAuthor() {
-		return null;
+		authorView = view.findViewById(R.id.author);
+		authorView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
+		setMetaData("", "");
 	}
 
 	public void toggleUi() {
@@ -237,8 +256,8 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
 		backButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_close, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
-		backButton.setContentDescription(app.getString(R.string.shared_string_close));
-		backButton.setOnClickListener(view1 -> onBackPressed());
+		backButton.setContentDescription(getString(R.string.shared_string_close));
+		backButton.setOnClickListener(v -> onBackPressed());
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = toolbar.findViewById(R.id.share_button);
@@ -259,7 +278,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.setType("text/plain");
 			sendIntent.putExtra(Intent.EXTRA_TEXT, getSelectedImageCard().getImageHiresUrl());
-			Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+			Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
 
 			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
 		}
@@ -282,7 +301,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 					ImageCard card = getSelectedImageCard();
 					if (card instanceof WikiImageCard wikiImageCard) {
 						AbstractCard.openUrl(getMapActivity(), app, card.getTitle(),
-								wikiImageCard.wikiImage.getUrlWithCommonAttributions(), false, false);
+								wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), false, false);
 					}
 				})
 				.create());
@@ -317,7 +336,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 				startDownloading(fileName, url);
 			} else {
 				AndroidUtils.hasPermission(getMapActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-				ActivityCompat.requestPermissions(getMapActivity(), new String[]{
+				ActivityCompat.requestPermissions(getMapActivity(), new String[] {
 						Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}
@@ -336,7 +355,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	}
 
 	private ImageCard getSelectedImageCard() {
-		return galleryContextHelper.getOnlinePhotoCards().get(selectedPosition);
+		return controller.getOnlinePhotoCards().get(selectedPosition);
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -377,6 +396,12 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		controller.removeMetaDataListener(listener);
 	}
 
 	private MapActivity getMapActivity() {

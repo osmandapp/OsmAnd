@@ -13,7 +13,7 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;

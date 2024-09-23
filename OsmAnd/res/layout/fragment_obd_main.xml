@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:clickable="true"
+	android:fitsSystemWindows="false"
+	android:focusable="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height_expanded"
+		android:background="?attr/actionModeBackground">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/actionModeBackground"
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMargin="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+			app:scrimAnimationDuration="0"
+			app:title="@string/external_sensors_plugin_name">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:fitsSystemWindows="true"
+				app:layout_collapseMode="pin"
+				app:menu="@menu/ble_sensors_menu">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/content_padding"
+		android:orientation="vertical">
+
+		<EditText
+			android:id="@+id/responses"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:background="#111" />
+
+		<EditText
+			android:id="@+id/device_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/content_padding_half"
+			android:background="#111"
+			android:hint="device name" />
+
+
+		<Button
+			android:id="@+id/connect"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/content_padding_half"
+			android:text="Connect" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn1"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp1"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn2"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp2"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn3"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp3"
+					android:layout_width="match_parent"
+					android:layout_height="80dp"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn4"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp4"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn5"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp5"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn6"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp6"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn7"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp7"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn8"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp8"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn9"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp9"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn10"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp10"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn11"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp11"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ToggleButton
+					android:id="@+id/btn12"
+					android:layout_width="300dp"
+					android:layout_height="40dp" />
+
+				<EditText
+					android:id="@+id/resp12"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginLeft="@dimen/content_padding_half" />
+			</LinearLayout>
+
+		</LinearLayout>
+	</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

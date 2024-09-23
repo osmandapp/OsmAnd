@@ -11,7 +11,10 @@ import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
-	public WikiImage wikiImage;
+
+	private final WikiImage wikiImage;
+
+	private boolean metadataDownloaded;
 
 	public WikiImageCard(@NonNull MapActivity mapActivity, @NonNull WikiImage wikiImage) {
 		super(mapActivity, null);
@@ -25,13 +28,26 @@ public class WikiImageCard extends ImageCard {
 		this.url = this.imageUrl;
 		this.imageHiresUrl = wikiImage.getImageHiResUrl();
 
-		View.OnClickListener onClickListener = v -> openUrl(getMapActivity(), getMyApplication(),
-				getTitle(), wikiImage.getUrlWithCommonAttributions(), false, false);
+		View.OnClickListener listener = v -> openUrl(mapActivity, app, getTitle(),
+				wikiImage.getUrlWithCommonAttributions(), false, false);
 
 		if (!Algorithms.isEmpty(buttonText)) {
-			this.onButtonClickListener = onClickListener;
+			this.onButtonClickListener = listener;
 		} else {
-			this.onClickListener = onClickListener;
+			this.onClickListener = listener;
 		}
+	}
+
+	@NonNull
+	public WikiImage getWikiImage() {
+		return wikiImage;
+	}
+
+	public boolean isMetaDataDownloaded() {
+		return metadataDownloaded;
+	}
+
+	public void setMetaDataDownloaded(boolean metadataDownloaded) {
+		this.metadataDownloaded = metadataDownloaded;
 	}
 }

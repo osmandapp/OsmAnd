@@ -19,6 +19,7 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.text.Collator;
@@ -68,7 +69,8 @@ public class TracksCard extends MapBaseCard {
 	}
 
 	private GpxDataItem getDataItem(GPXInfo info) {
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
+		KFile file = new KFile(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR), info.getFileName());
+		return app.getGpxDbHelper().getItem(file);
 	}
 
 	@SuppressLint("DefaultLocale")

@@ -3913,7 +3913,7 @@
     <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede kortopdateringer hver måned og time.</string>
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
-    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag til, at du nu kan nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
@@ -5907,4 +5907,25 @@
     <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
     <string name="no_photos_available">Ingen fotos tilgængelige</string>
     <string name="wikimedia">Wikimedia</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_gasoline">Benzin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Ethanol</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="obd_fuel_type_lpg">Flaskegas</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybrid-benzin</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybrid-ethanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybrid-diesel</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybrid-brint</string>
+    <string name="obd_fuel_type_hydrogen">Brint</string>
+    <string name="obd_fuel_type_unknown">Ukendt brændstoftype</string>
+    <string name="obd_widget_group">Køretøjets parametre</string>
+    <string name="obd_fuel_type_electric">Elektrisk</string>
+    <string name="obd_fuel_type_cng">Komprimeret naturgas (CNG)</string>
+    <string name="obd_fuel_type_not_provided">Ingen brændstoftype angivet</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid el- og forbrændingsmotor</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybrid-elektrisk</string>
 </resources>

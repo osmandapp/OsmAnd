@@ -41,7 +41,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.routing.RouteColorize;
@@ -200,7 +200,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
+		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItemsBlocking();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			Integer color = dataItem.getParameter(COLOR);
 			if (Algorithms.objectEquals(prevColor, color)) {

@@ -18,6 +18,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class WikiCoreHelper {
 
@@ -35,15 +36,15 @@ public class WikiCoreHelper {
 	private static final int THUMB_SIZE = 480;
 	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
 	private static final int DEPT_CAT_LIMIT = 1;
-	
-	
+
+
 	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
 		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
 		String wikidataId = tags.getOrDefault(Amenity.WIKIDATA, "");
 		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
 		String wikiTitle = tags.get(Amenity.WIKIPEDIA);
 		String wikiCategory = "";
-		int urlInd = wikiTitle == null? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
+		int urlInd = wikiTitle == null ? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
 		if (urlInd > 0) {
 			String prefix = wikiTitle.substring(0, urlInd);
 			String lang = prefix.substring(prefix.lastIndexOf("/") + 1, prefix.length());
@@ -77,11 +78,14 @@ public class WikiCoreHelper {
 				if (!Algorithms.isEmpty(wikiTitle)) {
 					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
+				if (!Algorithms.isEmpty(wikidataId)) {
+					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
+				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
 			}
 			if (url.length() > 0) {
-				getImagesOsmAndAPIRequest(url, wikiImages);
+				getImagesOsmAndAPIRequestV2(url, wikiImages);
 			}
 		} else {
 			if (!Algorithms.isEmpty(wikidataId)) {
@@ -125,7 +129,7 @@ public class WikiCoreHelper {
 		}
 		return wikiImages;
 	}
-	
+
 
 	protected static List<WikiImage> getWikidataImageWikidata(String wikidataId, List<WikiImage> wikiImages) {
 		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
@@ -144,6 +148,18 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
+	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages) {
+		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class);
+		if (response != null && !Algorithms.isEmpty(response.images)) {
+			for (Map<String, Object> image : response.images) {
+				WikiImage wikiImage = parseImageDataWithMetaData(image);
+				if (wikiImage != null) {
+					wikiImages.add(wikiImage);
+				}
+			}
+		}
+		return wikiImages;
+	}
 
 	private static List<WikiImage> getImagesOsmAndAPIRequest(String url, List<WikiImage> wikiImages) {
 		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class);
@@ -158,6 +174,31 @@ public class WikiCoreHelper {
 			}
 		}
 		return wikiImages;
+	}
+
+	private static WikiImage parseImageDataWithMetaData(Map<String, Object> image) {
+		String imageUrl = (String) image.get("image");
+		if (!Algorithms.isEmpty(image)) {
+			WikiImage wikiImage = parseImageDataFromFile(imageUrl);
+			if (wikiImage != null) {
+				Metadata metadata = wikiImage.getMetadata();
+
+				String date = (String) image.get("date");
+				if (date != null) {
+					metadata.setDate(date);
+				}
+				String author = (String) image.get("author");
+				if (date != null) {
+					metadata.setAuthor(author);
+				}
+				String license = (String) image.get("license");
+				if (date != null) {
+					metadata.setLicense(license);
+				}
+				return wikiImage;
+			}
+		}
+		return null;
 	}
 
 	private static WikiImage parseImageDataFromFile(String imageUrl) {
@@ -201,6 +242,12 @@ public class WikiCoreHelper {
 		}
 		LOG.error(errorMessage);
 		return null;
+	}
+
+	public static class OsmandAPIResponseV2 {
+		@SerializedName("features-v2")
+		@Expose
+		private final Set<Map<String, Object>> images = null;
 	}
 
 	public static class OsmandAPIResponse {

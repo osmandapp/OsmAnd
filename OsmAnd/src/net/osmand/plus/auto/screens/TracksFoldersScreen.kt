@@ -1,30 +1,35 @@
 package net.osmand.plus.auto.screens
 
-import android.os.AsyncTask
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarColor
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants.GPX_INDEX_DIR
-import net.osmand.SharedUtil
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.configmap.tracks.TrackTabsHelper
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.FileUtils
 import net.osmand.shared.extensions.kFile
+import net.osmand.shared.gpx.TrackFolderLoaderTask
+import net.osmand.shared.gpx.TrackFolderLoaderTask.LoadTracksListener
+import net.osmand.shared.gpx.data.TrackFolder
 
 class TracksFoldersScreen(
     carContext: CarContext,
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext),
-    TrackFolderLoaderTask.LoadTracksListener {
+    LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
     private val trackTabsHelper: TrackTabsHelper = TrackTabsHelper(app)
 
@@ -58,8 +63,8 @@ class TracksFoldersScreen(
 
     private fun reloadTracks() {
         val folder = TrackFolder(FileUtils.getExistingDir(app, GPX_INDEX_DIR).kFile(), null)
-        asyncLoader = TrackFolderLoaderTask(app, folder, this)
-        asyncLoader!!.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        asyncLoader = TrackFolderLoaderTask(folder, this, true)
+        asyncLoader!!.execute()
     }
 
 

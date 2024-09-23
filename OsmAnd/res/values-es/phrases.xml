@@ -2027,7 +2027,7 @@
     <string name="poi_step_condition_rough">Estado de los escalones: pésimo</string>
     <string name="poi_cairn">Cairn</string>
     <string name="poi_memorial_fassade_decoration">Decoración de la fachada</string>
-    <string name="poi_defibrillator">Desfibrilador;AED</string>
+    <string name="poi_defibrillator">Desfibrilador;AED;DEA:DESA</string>
     <string name="poi_defibrillator_yes">Desfibrilador: sí</string>
     <string name="poi_tomb_war_grave">Tipo: guerra</string>
     <string name="poi_tomb_tumulus">Tipo: túmulo</string>

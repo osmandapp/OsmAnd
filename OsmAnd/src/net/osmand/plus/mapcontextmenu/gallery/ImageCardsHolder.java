@@ -1,70 +1,73 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.MAPILLARY;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.MAPILLARY_AMENITY;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.OPR;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.OTHER;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.WIKIDATA;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType.WIKIMEDIA;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY_AMENITY;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.OTHER;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.WIKIDATA;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.WIKIMEDIA;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ImageCardsHolder {
 
-	private final Map<ImageCard.ImageCardType, List<ImageCard>> cardsByType = new HashMap<>();
+	private final LatLon latLon;
+	private final Map<String, String> params;
+	private final Map<ImageCardType, List<ImageCard>> cardsByType = new LinkedHashMap<>();
 
-	public boolean add(@NonNull ImageCard.ImageCardType type, @Nullable ImageCard image) {
-		if (image != null) {
-			List<ImageCard> list = cardsByType.get(type);
-			if (list != null) {
-				list.add(image);
-			} else {
-				list = new ArrayList<>();
-				list.add(image);
-				cardsByType.put(type, list);
-			}
-			return true;
-		}
-		return false;
+	public ImageCardsHolder(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
+		this.latLon = latLon;
+		this.params = params;
 	}
 
 	@NonNull
-	public List<ImageCard> getOrderedList() {
-		return getCardList(OTHER, MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OPR);
+	public LatLon getLatLon() {
+		return latLon;
 	}
 
 	@NonNull
-	public List<ImageCard> getMapillaryList() {
-		return getCardList(MAPILLARY);
+	public Map<String, String> getParams() {
+		return params;
 	}
 
-	private List<ImageCard> getCardList(ImageCard.ImageCardType... types) {
-		List<ImageCard> result = new ArrayList<>();
-		for (ImageCard.ImageCardType cardType : types) {
-			List<ImageCard> typeCards = cardsByType.get(cardType);
-			if (!Algorithms.isEmpty(typeCards)) {
-				result.addAll(cardsByType.get(cardType));
+	@NonNull
+	public List<ImageCard> getOrderedCards() {
+		return getCardsWithTypes(OTHER, MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA);
+	}
+
+	@NonNull
+	public List<ImageCard> getMapillaryCards() {
+		return getCardsWithTypes(MAPILLARY);
+	}
+
+	@NonNull
+	private List<ImageCard> getCardsWithTypes(@NonNull ImageCardType... types) {
+		List<ImageCard> list = new ArrayList<>();
+		for (ImageCardType type : types) {
+			List<ImageCard> cards = cardsByType.get(type);
+			if (!Algorithms.isEmpty(cards)) {
+				list.addAll(cards);
 			}
 		}
-		return result;
+		return list;
 	}
 
-	@Nullable
-	public ImageCard getFirstItem() {
-		List<ImageCard> result = getOrderedList();
-		if (!Algorithms.isEmpty(result)) {
-			return result.get(0);
+	public void addCard(@NonNull ImageCardType type, @NonNull ImageCard card) {
+		List<ImageCard> cards = cardsByType.get(type);
+		if (cards != null) {
+			cards.add(card);
+		} else {
+			cards = new ArrayList<>();
+			cards.add(card);
+			cardsByType.put(type, cards);
 		}
-		return null;
 	}
-
 }
