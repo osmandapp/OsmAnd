@@ -5909,4 +5909,5 @@
     <string name="obd_fuel_type_bifuel_gasoline">plurbrulaĵa, nun benzino</string>
     <string name="obd_fuel_type_bifuel_methanol">plurbrulaĵa, nun metanolo</string>
     <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_bifuel_ethanol">plurbrulaĵa, nun etanolo</string>
 </resources>
