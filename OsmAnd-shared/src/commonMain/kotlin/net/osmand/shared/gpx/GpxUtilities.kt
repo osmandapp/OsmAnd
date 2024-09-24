@@ -178,6 +178,11 @@ object GpxUtilities {
 				val gpxColor = GpxColor.getColorFromName(colorString)
 				if (gpxColor != null) {
 					return gpxColor.color
+				} else {
+					try {
+						return colorString.toInt()
+					} catch (_: NumberFormatException) {
+					}
 				}
 			}
 		}
