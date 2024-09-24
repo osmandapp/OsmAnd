@@ -12,8 +12,8 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	TracksGroup, ComparableTracksGroup {
 	private var dirFile: KFile
 	private val parentFolder: TrackFolder?
-	private var trackItems = listOf<TrackItem>()
-	private var subFolders = listOf<TrackFolder>()
+	private var trackItems = mutableListOf<TrackItem>()
+	private var subFolders = mutableListOf<TrackFolder>()
 	private var flattenedTrackItems: List<TrackItem>? = null
 	private var flattenedSubFolders: List<TrackFolder>? = null
 	private var folderAnalysis: TrackFolderAnalysis? = null
@@ -29,8 +29,8 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun update(folder: TrackFolder) {
-		trackItems = folder.trackItems.toList()
-		subFolders = folder.subFolders.toList()
+		trackItems = ArrayList(folder.trackItems)
+		subFolders = ArrayList(folder.subFolders)
 		flattenedTrackItems = folder.flattenedTrackItems?.toList()
 		flattenedSubFolders = folder.flattenedSubFolders?.toList()
 		folderAnalysis = folder.folderAnalysis
@@ -76,7 +76,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun addSubFolder(subFolder: TrackFolder) {
-		this.subFolders = KCollectionUtils.addToList(this.subFolders, subFolder)
+		this.subFolders.add(subFolder)
 	}
 
 	fun setTrackItems(trackItems: MutableList<TrackItem>) {
@@ -84,11 +84,11 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	fun addTrackItem(trackItem: TrackItem) {
-		this.trackItems = KCollectionUtils.addToList(this.trackItems, trackItem)
+		this.trackItems.add(trackItem)
 	}
 
 	fun addTrackItems(trackItems: List<TrackItem>) {
-		this.trackItems = KCollectionUtils.addAllToList(this.trackItems, trackItems)
+		this.trackItems.addAll(trackItems)
 	}
 
 	val isEmpty: Boolean
