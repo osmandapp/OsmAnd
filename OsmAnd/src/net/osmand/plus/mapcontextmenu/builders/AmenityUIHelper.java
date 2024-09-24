@@ -741,6 +741,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	                        CollapsableView collapsableView, int textColor, boolean isWiki,
 	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
 	                        boolean matchWidthDivider, int textLinesLimit) {
+		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);

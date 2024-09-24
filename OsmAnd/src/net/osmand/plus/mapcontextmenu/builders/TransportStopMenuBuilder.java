@@ -20,6 +20,7 @@ public class TransportStopMenuBuilder extends MenuBuilder {
 	public void buildInternal(View view) {
 		Amenity amenity = transportStop.getAmenity();
 		if (amenity != null) {
+			boolean light = isLightContent();
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, amenity);
 			builder.setLatLon(getLatLon());
 			builder.setLight(light);

@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -40,7 +39,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -77,7 +75,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -129,7 +126,6 @@ public class MenuBuilder {
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
-	protected boolean light;
 	private Amenity amenity;
 	private LatLon latLon;
 	private boolean hidden;
@@ -298,7 +294,6 @@ public class MenuBuilder {
 	}
 
 	public void setLight(boolean light) {
-		this.light = light;
 		uiComponents.setLightContent(light);
 	}
 
@@ -449,7 +444,7 @@ public class MenuBuilder {
 			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
 
 			horizontalLine.setLayoutParams(llHorLineParams);
-			horizontalLine.setBackgroundColor(getColor(light ? R.color.divider_color_light : R.color.divider_color_dark));
+			horizontalLine.setBackgroundColor(getColor(isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
 			((LinearLayout) view).addView(horizontalLine);
 		}
 		uiComponents.buildDetailsRow(view, icon, text, textPrefix, textSuffix, collapsableView, parentRow);
@@ -459,6 +454,7 @@ public class MenuBuilder {
 	private void buildWithinRow(@NonNull View view, @Nullable Drawable icon, @NonNull String text,
 	                            @NonNull String textPrefix, @Nullable CollapsableView collapsableView,
 	                            @Nullable MenuObject menuObject, boolean parentRow) {
+		boolean light = isLightContent();
 		if (!isFirstRow() && !parentRow) {
 			View horizontalLine = new View(view.getContext());
 			horizontalLine.setTag(DIVIDER_ROW_KEY);
@@ -785,6 +781,7 @@ public class MenuBuilder {
 	public View buildRow(View view, Drawable icon, String buttonText, String textPrefix, String text,
 	                     int textColor, String secondaryText, boolean collapsable, CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -993,6 +990,7 @@ public class MenuBuilder {
 		View.OnClickListener onClickListener = v -> {
 			showDescriptionDialog(view.getContext(), description, descriptionLabel);
 		};
+		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -1150,6 +1148,7 @@ public class MenuBuilder {
 	}
 
 	public void buildRowDivider(@NonNull View view, int index) {
+		boolean light = isLightContent();
 		View horizontalLine = new View(view.getContext());
 		horizontalLine.setTag(DIVIDER_ROW_KEY);
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
@@ -1169,6 +1168,7 @@ public class MenuBuilder {
 
 	protected void buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
 		Context ctx = container.getContext();
+		boolean light = isLightContent();
 
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(ctx, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
@@ -1244,38 +1244,8 @@ public class MenuBuilder {
 		plainMenuItems.clear();
 	}
 
-	public Drawable getRowIcon(int iconId) {
-		UiUtilities iconsCache = app.getUIUtilities();
-		return iconsCache.getIcon(iconId, light ? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
-	}
-
-	public Drawable getThemedIcon(int iconId) {
-		return app.getUIUtilities().getThemedIcon(iconId);
-	}
-
-	public Drawable getRowIcon(Context ctx, String fileName) {
-		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
-		if (d != null) {
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			d.setColorFilter(getColor(light
-					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark), PorterDuff.Mode.SRC_IN);
-			return d;
-		} else {
-			return null;
-		}
-	}
-
-	public int dpToPx(float dp) {
-		return uiComponents.dpToPx(dp);
-	}
-
-	public Drawable getCollapseIcon(boolean collapsed) {
-		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up,
-				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
-	}
-
-	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
+	private void buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {
+		boolean light = isLightContent();
 		LinearLayout baseView = new LinearLayout(view.getContext());
 		baseView.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -1353,8 +1323,6 @@ public class MenuBuilder {
 		baseView.setOnClickListener(listener);
 
 		((ViewGroup) view).addView(baseView);
-
-		return baseView;
 	}
 
 	private View createIntervalView(Context ctx, TransportStopRoute route, LinearLayout.LayoutParams titleParams,
@@ -1398,19 +1366,16 @@ public class MenuBuilder {
 	}
 
 	private View.OnClickListener createTransportRoutesViewClickListener(TransportStopRoute r) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				OsmandMapTileView mapView = getMapActivity().getMapView();
-				MapContextMenu mm = getMapActivity().getContextMenu();
-				PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-						r.getDescription(getMapActivity().getMyApplication(), false));
-				mm.show(latLon, pd, r);
-				TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-				stopsLayer.setRoute(r);
-				int zoom = r.calculateZoom(0, mapView.getCurrentRotatedTileBox());
-				mapView.setIntZoom(zoom);
-			}
+		return v -> {
+			OsmandMapTileView mapView = getMapActivity().getMapView();
+			MapContextMenu mm = getMapActivity().getContextMenu();
+			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+					r.getDescription(getMapActivity().getMyApplication(), false));
+			mm.show(latLon, pd, r);
+			TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+			stopsLayer.setRoute(r);
+			int zoom = r.calculateZoom(0, mapView.getCurrentRotatedTileBox());
+			mapView.setIntZoom(zoom);
 		};
 	}
 
@@ -1422,7 +1387,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
-		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !isLightContent()));
 		textView.setText(text);
 		return new CollapsableView(textView, this, collapsed);
 	}
@@ -1441,13 +1406,10 @@ public class MenuBuilder {
 			name += " (" + OsmAndFormatter.getFormattedDistance(dist, app) + ")";
 			button.setText(name);
 
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
-					mapActivity.getMyApplication().getOsmandMap().setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
-				}
+			button.setOnClickListener(v -> {
+				LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
+				mapActivity.getContextMenu().show(latLon, pointDescription, poi);
+				app.getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
 			});
 			view.addView(button);
 		}
@@ -1467,52 +1429,37 @@ public class MenuBuilder {
 	private View createSearchMoreButton(Context context, PoiUIFilter filter) {
 		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
 		buttonShowAll.setText(app.getString(R.string.search_more));
-		buttonShowAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.getFragmentsHelper().showQuickSearch(filter, latLon);
-			}
-		});
+		buttonShowAll.setOnClickListener(v ->
+				mapActivity.getFragmentsHelper().showQuickSearch(filter, latLon));
 		return buttonShowAll;
 	}
 
 	private View createShowOnMap(Context context, PoiUIFilter filter) {
 		TextViewEx buttonShowAll = buildButtonInCollapsableView(context, false, false);
 		buttonShowAll.setText(app.getString(R.string.shared_string_show_on_map));
-		buttonShowAll.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
+		buttonShowAll.setOnClickListener(v -> {
+			PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
+			poiFiltersHelper.clearGeneralSelectedPoiFilters();
+			poiFiltersHelper.addSelectedPoiFilter(filter);
+			QuickSearchToolbarController controller = new QuickSearchToolbarController();
+			controller.setTitle(filter.getName());
+
+			controller.setOnBackButtonClickListener(v1 -> {
+				if (mapContextMenu != null) {
+					mapContextMenu.show();
+				}
+			});
+			controller.setOnTitleClickListener(v2 ->
+					mapActivity.getFragmentsHelper().showQuickSearch(filter));
+
+			controller.setOnCloseButtonClickListener(v3 -> {
 				poiFiltersHelper.clearGeneralSelectedPoiFilters();
-				poiFiltersHelper.addSelectedPoiFilter(filter);
-				QuickSearchToolbarController controller = new QuickSearchToolbarController();
-				controller.setTitle(filter.getName());
-				controller.setOnBackButtonClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (mapContextMenu != null) {
-							mapContextMenu.show();
-						}
-					}
-				});
-				controller.setOnTitleClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						mapActivity.getFragmentsHelper().showQuickSearch(filter);
-					}
-				});
-				controller.setOnCloseButtonClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						poiFiltersHelper.clearGeneralSelectedPoiFilters();
-						mapActivity.hideTopToolbar(controller);
-						mapActivity.refreshMap();
-					}
-				});
-				mapContextMenu.hideMenus();
-				mapActivity.showTopToolbar(controller);
+				mapActivity.hideTopToolbar(controller);
 				mapActivity.refreshMap();
-			}
+			});
+			mapContextMenu.hideMenus();
+			mapActivity.showTopToolbar(controller);
+			mapActivity.refreshMap();
 		});
 		return buttonShowAll;
 	}
@@ -1534,6 +1481,7 @@ public class MenuBuilder {
 	}
 
 	protected TextViewEx buildButtonInCollapsableView(Context context, boolean selected, boolean showAll, boolean singleLine) {
+		boolean light = isLightContent();
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(context, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
 		LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(llWikiButtonParams, 0, 0, 0, dpToPx(8f));
@@ -1563,7 +1511,6 @@ public class MenuBuilder {
 		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);
 		button.setEllipsize(TextUtils.TruncateAt.END);
-
 		return button;
 	}
 
@@ -1582,6 +1529,7 @@ public class MenuBuilder {
 	}
 
 	private void buildGetWikipediaBanner(ViewGroup viewGroup) {
+		boolean light = isLightContent();
 		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
 		LinearLayout view = buildCollapsableContentView(app, false, true);
 
@@ -1644,6 +1592,30 @@ public class MenuBuilder {
 	@ColorInt
 	protected int getColor(@ColorRes int resId) {
 		return uiComponents.getColor(resId);
+	}
+
+	public Drawable getRowIcon(int iconId) {
+		return uiComponents.getRowIcon(iconId);
+	}
+
+	public Drawable getThemedIcon(int iconId) {
+		return uiComponents.getThemedIcon(iconId);
+	}
+
+	public Drawable getRowIcon(Context ctx, String fileName) {
+		return uiComponents.getRowIcon(ctx, fileName);
+	}
+
+	public int dpToPx(float dp) {
+		return uiComponents.dpToPx(dp);
+	}
+
+	public Drawable getCollapseIcon(boolean collapsed) {
+		return uiComponents.getCollapseIcon(collapsed);
+	}
+
+	protected boolean isLightContent() {
+		return uiComponents.isLightContent();
 	}
 
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {

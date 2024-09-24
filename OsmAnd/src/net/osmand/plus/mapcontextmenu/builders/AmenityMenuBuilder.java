@@ -52,7 +52,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
-		rowsBuilder.setLight(light);
+		rowsBuilder.setLight(isLightContent());
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
