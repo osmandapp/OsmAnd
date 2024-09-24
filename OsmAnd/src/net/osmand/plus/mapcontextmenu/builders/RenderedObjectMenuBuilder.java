@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.NativeLibrary.RenderedObject;
 import android.os.AsyncTask;
 
 import android.view.ViewGroup;
@@ -7,20 +8,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.NativeLibrary;
+import net.osmand.CallbackWithObject;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OsmUtils;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +29,10 @@ import java.util.Map;
 public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	QuadRect bbox;
-	NativeLibrary.RenderedObject renderedObject;
+	RenderedObject renderedObject;
+	private static final int SEARCH_POI_RADIUS = 50;
 
-	public RenderedObjectMenuBuilder(@NonNull MapActivity mapActivity, @NonNull NativeLibrary.RenderedObject renderedObject) {
+	public RenderedObjectMenuBuilder(@NonNull MapActivity mapActivity, @NonNull RenderedObject renderedObject) {
 		super(mapActivity, getSyntheticAmenity(mapActivity, renderedObject));
 		bbox = renderedObject.getBbox();
 		this.renderedObject = renderedObject;
@@ -38,27 +40,20 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 
 	private void searchAmenity(ViewGroup view, Object object) {
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(view);
-		PoiUIFilter filter = getPoiFilterForAmenity(amenity);
-		if (filter != null) {
-			execute(new SearchAmenitiesTask(filter, new SearchAmenityForRenderedObjectListener() {
-				@Override
-				public void onFinish(Amenity am) {
-					ViewGroup viewGroup = viewGroupRef.get();
-					if (viewGroup == null) {
-						return;
-					}
-					if (am != null) {
-						amenity = am;
-						amenity.setX(renderedObject.getX());
-						amenity.setY(renderedObject.getY());
-						additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-					}
-					rebuild(viewGroup, object);
-				}
-			}));
-		} else {
-			rebuild(view, object);
-		}
+		execute(new SearchAmenitiesTask(app, renderedObject, am -> {
+			ViewGroup viewGroup = viewGroupRef.get();
+			if (viewGroup == null) {
+				return false;
+			}
+			if (am != null) {
+				amenity = am;
+				amenity.setX(renderedObject.getX());
+				amenity.setY(renderedObject.getY());
+				additionalInfo = amenity.getAmenityExtensions(app.getPoiTypes(), false);
+			}
+			RenderedObjectMenuBuilder.this.rebuild(viewGroup, object);
+			return true;
+		}));
 	}
 
 	@Override
@@ -70,7 +65,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		super.build(view, object);
 	}
 
-	private static Amenity getSyntheticAmenity(@NonNull MapActivity mapActivity, @NonNull NativeLibrary.RenderedObject renderedObject) {
+	private static Amenity getSyntheticAmenity(@NonNull MapActivity mapActivity, @NonNull RenderedObject renderedObject) {
 		Amenity am = new Amenity();
 		OsmandApplication app = mapActivity.getMyApplication();
 		MapPoiTypes mapPoiTypes = app.getPoiTypes();
@@ -98,11 +93,12 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 				}
 				pt = mapPoiTypes.getPoiTypeByKey(value);
 			} else {
-				pt = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
-			}
-			if (pt != null) {
-				subtype = value;
-				continue;
+				PoiType poiType = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+				if (poiType != null) {
+					otherPt = pt != null ? poiType : otherPt;
+					subtype = pt == null ? value : subtype;
+					pt = pt == null ? poiType : pt;
+				}
 			}
 			if (Algorithms.isEmpty(value) && otherPt == null) {
 				otherPt = mapPoiTypes.getPoiTypeByKey(tag);
@@ -139,46 +135,49 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 		return am;
 	}
 
-	private class SearchAmenitiesTask extends AsyncTask<Void, Void, Amenity> {
+	private static class SearchAmenitiesTask extends AsyncTask<Void, Void, Amenity> {
 
-		private final PoiUIFilter filter;
-		private final SearchAmenityForRenderedObjectListener listener;
+		private final CallbackWithObject<Amenity> listener;
 		private final QuadRect rect;
 		private final long osmId;
+		private final OsmandApplication app;
 
-		private SearchAmenitiesTask(PoiUIFilter filter, SearchAmenityForRenderedObjectListener listener) {
-			this.filter = filter;
+		private SearchAmenitiesTask(OsmandApplication application, RenderedObject renderedObject, CallbackWithObject<Amenity> listener) {
 			this.listener = listener;
-			double l = MapUtils.get31LongitudeX((int)bbox.left);
-			double r = MapUtils.get31LongitudeX((int)bbox.right);
-			double t = MapUtils.get31LatitudeY((int)bbox.top);
-			double b = MapUtils.get31LatitudeY((int)bbox.bottom);
-			rect = new QuadRect(l, t, r, b);
+			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
+			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
+			rect = MapUtils.calculateLatLonBbox(lat, lon, SEARCH_POI_RADIUS);
 			osmId = OsmUtils.getOsmObjectId(renderedObject);
+			app = application;
 		}
 
 		@Override
 		protected Amenity doInBackground(Void... params) {
-			List<Amenity> amenities = Collections.emptyList();
-			amenities = filter.searchAmenities(rect.top, rect.left, rect.bottom, rect.right, -1, null);
-			for (Amenity am : amenities) {
-				long id = OsmUtils.getOsmObjectId(am);
-				if (id == osmId) {
-					return am;
-				}
+			List<Amenity> amenities = app.getResourceManager().searchAmenities(
+					BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
+					rect.top, rect.left, rect.bottom, rect.right,
+					-1, true,
+					new ResultMatcher<>() {
+						@Override
+						public boolean publish(Amenity amenity) {
+							long id = OsmUtils.getOsmObjectId(amenity);
+							return id == osmId;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+			});
+			if (amenities.size() > 0) {
+				return amenities.get(0);
 			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Amenity amenity) {
-			if (listener != null) {
-				listener.onFinish(amenity);
-			}
+			listener.processResult(amenity);
 		}
-	}
-
-	private interface SearchAmenityForRenderedObjectListener {
-		void onFinish(Amenity amenity);
 	}
 }
