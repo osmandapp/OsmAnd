@@ -3034,7 +3034,7 @@
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de ruta</string>
     <string name="routing_attr_piste_type_skitour_description">Itineraris d\'esquí de ruta.</string>
-    <string name="routing_attr_freeride_policy_description">\'Camp a través\' i \'Fora pistes\' són vies no oficials. Normalment no estan regulades ni mantingudes ni revisades de nit. Entrant-hi, sereu responsables del que passi.</string>
+    <string name="routing_attr_freeride_policy_description">\'Camp a través\' i \'Fora pistes\' són vies no oficials. Normalment, no estan regulades ni mantingudes ni revisades de nit. Entrant-hi, sereu responsables del que passi.</string>
     <string name="turn_screen_on_router">Activa pantalla si cal maniobrar</string>
     <string name="turn_on_profile_desc">Per utilitzar aquest paràmetre heu d\'activar almenys un perfil d\'aplicació.</string>
     <string name="rendering_attr_winter_road_name">Carretera sobre la neu</string>
@@ -4252,7 +4252,7 @@
     <string name="auto_backup_preference_desc">Per defecte, Android desa còpies de seguretat dels favorits, fitxes de mapes i configuració d\'OsmAnd per restaurar-los en dispositius nous o després de la reinstal·lació. Aquesta còpia de seguretat està limitada a 25 MB.
 \nQuan utilitzeu OsmAnd Cloud, això pot provocar malentesos després de la reinstal·lació.</string>
     <string name="routing_attr_motor_type_lpg_name">Gas liquat del petroli (GLP)</string>
-    <string name="voice_prompts_timetable">Temps dels avisos per veu</string>
+    <string name="voice_prompts_timetable">Nombre d\'avisos de veu</string>
     <string name="kg">kg</string>
     <string name="select_nav_profile_dialog_message">El «Tipus de navegació» selecciona com es calculen les rutes, amb motors de navegació en línia i fora de línia disponibles.</string>
     <string name="routing_attr_short_way_description">Ruta més curta optimitzada (baix consum)</string>
@@ -4514,4 +4514,18 @@
     <string name="shared_string_no_internet_connection">No hi ha connexió a internet</string>
     <string name="no_photos_available">No hi ha fotos disponibles</string>
     <string name="no_internet_descr">Comproveu la connexió i torneu a provar-ho.</string>
+    <string name="no_photos_available_descr">Encara no s\'ha afegit cap foto d\'usuaris per aquest lloc</string>
+    <string name="type_of_activity">Tipus d\'activitat</string>
+    <string name="change_activity">Canvia l\'activitat</string>
+    <string name="quick_action_navigation_view_title">Vista de navegació</string>
+    <string name="quick_action_switch_compass_desc">Un commutador per canviar l\'orientació del mapa.</string>
+    <string name="raster_layers_action_descr">Canvia les capes de raster</string>
+    <string name="contour_layers_action_descr">Canvia les capes de corbes de nivell</string>
+    <string name="change_zoom_action_descr">Canvia el zoom del mapa.</string>
+    <string name="graph_axis">Eixos de la gràfica</string>
+    <string name="y_axis_description">Seleccioneu fins a dues opcions per l\'eix Y.</string>
+    <string name="quick_action_verb_navigate">Navega</string>
+    <string name="quick_action_drawer_title">Menú lateral</string>
+    <string name="quick_action_search_view_title">Vista de cerca</string>
+    <string name="quick_action_navigation_view_desc">Un commutador per obrir o tancar la vista de navegació.</string>
 </resources>
