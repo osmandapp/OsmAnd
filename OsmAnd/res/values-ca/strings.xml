@@ -4507,4 +4507,11 @@
     <string name="weather_source_GFS_title">GFS</string>
     <string name="shared_string_all_icons">Totes les icones</string>
     <string name="profile_icon">Icona del perfil</string>
+    <string name="unit_volt">V</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Obre al navegador</string>
+    <string name="shared_string_source">Font</string>
+    <string name="shared_string_no_internet_connection">No hi ha connexió a internet</string>
+    <string name="no_photos_available">No hi ha fotos disponibles</string>
+    <string name="no_internet_descr">Comproveu la connexió i torneu a provar-ho.</string>
 </resources>
