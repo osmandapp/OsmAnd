@@ -17,9 +17,7 @@ actual class NativeFile actual constructor(actual val file: KFile) {
 
 	private val filePath = file.path()
 
-	actual fun absolutePath(): String {
-		TODO("Not yet implemented")
-	}
+	actual fun absolutePath(): String = filePath
 
 	actual fun isDirectory(): Boolean {
 		return memScoped {
