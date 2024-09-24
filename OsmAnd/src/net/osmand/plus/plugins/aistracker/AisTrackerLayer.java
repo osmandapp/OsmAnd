@@ -65,12 +65,110 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         initTimer();
         startNetworkListener();
 
-        // for test purposes: remove later...
+        // for test purposes: remove/disable later...
         //initTestObject1();
         //initTestObject2();
         //initTestObject3();
         //initTestObject4();
+        //testCrossingTimes();
         //testCpa();
+        //initFakePosition();
+    }
+
+    private void testCrossingTimes() {
+        // here some tests for the geo (CPA) calculation
+        // intention is to test the function to calculate times of two objects with crossing courses
+        // define 12 positions on two courses: position a1 ... a6 at course line A (course 90°)
+        //   and position b1 ... b6 at course line B (course 45°)
+        // the positions are taken from a (paper) map
+        // for coordinate transformation see https://www.koordinaten-umrechner.de
+        AisTrackerHelper.Cpa cpa = new AisTrackerHelper.Cpa();
+        Location a1 = new Location("test", 49.5d, -3.266667d); // 49°30'N, 3°16'W
+        Location a2 = new Location("test", 49.5d, -3.166667d); // 49°30'N, 3°10'W
+        Location a3 = new Location("test", 49.5d, -3.116667d); // 49°30'N, 3°7'W
+        Location a4 = new Location("test", 49.5d, -3.093333d); // 49°30'N, 3°5.6'W
+        Location a5 = new Location("test", 49.5d, -3.05d); // 49°30'N, 3°3'W
+        Location a6 = new Location("test", 49.5d, -3.016667d); // 49°30'N, 3°1'W
+        Location b1 = new Location("test", 49.395d, -3.25d); // 49°23.7'N, 3°15'W
+        Location b2 = new Location("test", 49.441667d, -3.183333d); // 49°26.5'N, 3°11'W
+        Location b3 = new Location("test", 49.47d, -3.133333d); // 49°28.2'N, 3°8'W
+        Location b4 = new Location("test", 49.5d, -3.093333d); // 49°30'N, 3°5.6'W
+        Location b5 = new Location("test", 49.513333d, -3.066667d); // 49°30.8'N, 3°4'W
+        Location b6 = new Location("test", 49.538333d, -3.033333d); // 49°32.3'N, 3°2'W
+        a1.setSpeed(knotsToMeterPerSecond(1.0f)); a1.setBearing(90.0f);
+        a2.setSpeed(knotsToMeterPerSecond(1.0f)); a2.setBearing(90.0f);
+        a3.setSpeed(knotsToMeterPerSecond(1.0f)); a3.setBearing(90.0f);
+        a4.setSpeed(knotsToMeterPerSecond(1.0f)); a4.setBearing(90.0f);
+        a5.setSpeed(knotsToMeterPerSecond(1.0f)); a5.setBearing(90.0f);
+        a6.setSpeed(knotsToMeterPerSecond(1.0f)); a6.setBearing(90.0f);
+        b1.setSpeed(knotsToMeterPerSecond(1.0f)); b1.setBearing(45.0f);
+        b2.setSpeed(knotsToMeterPerSecond(1.0f)); b2.setBearing(45.0f);
+        b3.setSpeed(knotsToMeterPerSecond(1.0f)); b3.setBearing(45.0f);
+        b4.setSpeed(knotsToMeterPerSecond(1.0f)); b4.setBearing(45.0f);
+        b5.setSpeed(knotsToMeterPerSecond(1.0f)); b5.setBearing(45.0f);
+        b6.setSpeed(knotsToMeterPerSecond(1.0f)); b6.setBearing(45.0f);
+        // now trigger the calculations:
+        cpa.reset(); getCpa(a3, b2, cpa); // expected: t1>0, t2>0
+        Log.d("AisTrackerLayer", "# test(a3, b2): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a3, b3, cpa); // expected: t1>0, t2>0
+        Log.d("AisTrackerLayer", "# test(a3, b3): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a3, b4, cpa); // expected: t1>0, t2->0
+        Log.d("AisTrackerLayer", "# test(a3, b4): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a3, b5, cpa); // expected: t1>0, t2<0
+        Log.d("AisTrackerLayer", "# test(a3, b5): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a3, b6, cpa); // expected: t1>0, t2<0
+        Log.d("AisTrackerLayer", "# test(a3, b6): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a4, b2, cpa); // expected: t1->0, t2>0
+        Log.d("AisTrackerLayer", "# test(a4, b2): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a4, b3, cpa); // expected: t1->0, t2>0
+        Log.d("AisTrackerLayer", "# test(a4, b3): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a4, b4, cpa); // expected: t1->0, t2->0
+        Log.d("AisTrackerLayer", "# test(a4, b4): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a4, b5, cpa); // expected: t1->0, t2<0
+        Log.d("AisTrackerLayer", "# test(a4, b5): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a4, b6, cpa); // expected: t1->0, t2<0
+        Log.d("AisTrackerLayer", "# test(a4, b6): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a5, b2, cpa); // expected: t1<0, t2>0
+        Log.d("AisTrackerLayer", "# test(a5, b2): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a5, b3, cpa); // expected: t1<0, t2>0
+        Log.d("AisTrackerLayer", "# test(a5, b3): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a5, b4, cpa); // expected: t1<0, t2->0
+        Log.d("AisTrackerLayer", "# test(a5, b4): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a5, b5, cpa); // expected: t1<0, t2<0
+        Log.d("AisTrackerLayer", "# test(a5, b5): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+        cpa.reset(); getCpa(a5, b6, cpa); // expected: t1<0, t2<0
+        Log.d("AisTrackerLayer", "# test(a5, b6): t1->" + cpa.getCrossingTime1() +
+                ", t2->" + cpa.getCrossingTime2() + ", CPA-Dist-> " + cpa.getCpaDist() +
+                ", TCPA ->" + cpa.getTcpa());
+
     }
 
     private void testCpa() {
@@ -242,6 +340,28 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
                     +  ", " + LocationConvert.convertLongitude(y5.getLongitude(), FORMAT_MINUTES, true));
             Log.d("AisTrackerLayer", "# test4: dist1: " + meterToMiles(y4.distanceTo(y5)));
         }
+    }
+
+    private void initFakePosition() {
+        // fake the own position, course and speed to a (fixed) hard coded value
+        double fakeLat = 50.76077d;
+        double fakeLon = 7.08747d;
+        float fakeCOG = 340.0f;
+        //float fakeCOG = 100.0f;
+        float fakeSOG = 3.0f;
+        Location fake = new Location("test", fakeLat, fakeLon);
+        fake.setBearing(fakeCOG);
+        fake.setSpeed(knotsToMeterPerSecond(fakeSOG));
+        AisObject.fakeOwnPosition(fake);
+        Log.d("AisTrackerLayer", "initFakePosition: fake: " + fake.toString());
+        // in order to visualize this faked (own) position on the map, create an AIS object at this location...
+        AisObject ais = new AisObject(324578, 1, 20, 0, 1, (int)fakeCOG,
+                fakeCOG, fakeSOG, fakeLat, fakeLon, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(324578, 5, 0, "own-position", "fake", 60 /* passenger */, 56,
+                65, 8, 12, 2,
+                "home", 8, 15, 22, 5);
+        updateAisObjectList(ais);
     }
 
     private void initTestObject1() {
