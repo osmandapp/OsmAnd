@@ -99,6 +99,7 @@ public class AisObject {
     private static int cpaWarningTime = AIS_CPA_DEFAULT_WARNING_TIME; // in minutes
     private static float cpaWarningDistance = AIS_CPA_WARNING_DEFAULT_DISTANCE; // in miles
     private static Location ownPosition = null; // used to calculate distances, CPA etc.
+    private static boolean ownPositionFaked = false; // used for test purposes to fake own position
     private AisObjType objectClass;
     private Bitmap bitmap = null;
     private boolean bitmapValid = false;
@@ -557,7 +558,15 @@ public class AisObject {
     }
 
     /* return true if the vessel gets too close with the own position in the future
-    * (danger of collusion) */
+    * (danger of collusion);
+    * this situation occurs if all of the following conditions hold:
+    *  (1) the calculated TCPA is in the future (>0)
+    *  (2) the calculated CPA is not bigger than the configured warning distance
+    *  (3) the calculated TCPA is not bigger than the configured warning time
+    *  (4) the time when the own course crosses the course of the other vessel
+    *      is not in the past
+    *  (5) the time when the course of the other vessel crosses the own course
+    *      is not in the past  */
     private boolean checkCpaWarning() {
         if (isMovable() && (objectClass != AIS_AIRPLANE) && (cpaWarningTime > 0)) {
             if (checkForCpaTimeout() && (ownPosition != null)) {
@@ -570,7 +579,10 @@ public class AisObject {
             if (cpa.isValid()) {
                 double tcpa = cpa.getTcpa();
                 if (tcpa > 0.0f) {
-                    return ((tcpa * 60.0d) <= cpaWarningTime) && (cpa.getCpaDist() <= cpaWarningDistance);
+                    return ((cpa.getCpaDist() <= cpaWarningDistance) &&
+                            ((tcpa * 60.0d) <= cpaWarningTime) &&
+                            (cpa.getCrossingTime1() >= 0.0d) &&
+                            (cpa.getCrossingTime2() >= 0.0d));
                 }
             }
         }
@@ -595,7 +607,11 @@ public class AisObject {
     public static void setVesselLostTimeout(int timeInMinutes) { vesselLostTimeoutInMinutes = timeInMinutes; }
     public static void setCpaWarningTime(int warningTime) { cpaWarningTime = warningTime; }
     public static void setCpaWarningDistance(float warningDistance) { cpaWarningDistance = warningDistance; }
-    public static void setOwnPosition(Location position) { ownPosition = position; }
+    public static void setOwnPosition(Location position) { if (!ownPositionFaked) { ownPosition = position; }}
+    public static void fakeOwnPosition(Location fakePosition) { // used for test purposes
+        ownPosition = fakePosition;
+        ownPositionFaked = fakePosition != null;
+    }
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed

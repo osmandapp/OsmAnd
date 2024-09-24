@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 
@@ -17,9 +18,10 @@ public final class AisTrackerHelper {
     private static long lastCorrectionUpdate = 0;
     private static double correctionFactor = 1.0d;
     private static final long maxCorrectionUpdateAgeInMin = 60;
+
     private static class Vector {
-        public double x; // Latitude (grows in North direction)
-        public double y; // Longitude (grows in East direction)
+        public double x; // Longitude (grows in East direction)
+        public double y; // Latitude (grows in North direction)
         public Vector(double a, double b) {
             this.x = a;
             this.y = b;
@@ -39,6 +41,8 @@ public final class AisTrackerHelper {
         private float cpaDist; // in miles
         private Location newPos1; // position of first object at time tcpa
         private Location newPos2; // position of first object at time tcpa
+        private double t1 = 0.0d; // time for object 1 to cross the course of object 2
+        private double t2 = 0.0d; // time for object 2 to cross the course of object 1
         private boolean valid;
         public Cpa() {
             reset();
@@ -49,11 +53,19 @@ public final class AisTrackerHelper {
             newPos1 = null;
             newPos2 = null;
             valid = false;
+            t1 = t2 = 0.0d;
         }
         public void setTcpa(double x) { this.tcpa = x; }
         public void setCpaDist(float x) { this.cpaDist = x; }
         public void setCpaPos1(Location loc) { this.newPos1 = loc; }
         public void setCpaPos2(Location loc) { this.newPos2 = loc; }
+        public void setCrossingTimes(@Nullable Pair<Double, Double> t) {
+            if (t != null) {
+                t1 = t.first; t2 = t.second;
+            }
+        };
+        public double getCrossingTime1() { return t1; }
+        public double getCrossingTime2() { return t2; }
         public double getTcpa() { return tcpa; }
         public float getCpaDist() { return cpaDist; }
         public Location getCpaPos1() { return newPos1; }
@@ -64,9 +76,9 @@ public final class AisTrackerHelper {
 
     /* calculate the Time to Closest Point of Approach (TCPA) of two moving objects:
     *  object 1 at position x and velocity vector vx
-    *  object 2 at position y and velocity vectoy vy,
-    *  For the calculation, cartesian ccordinates are assumed with a cartesian distance metricx
-    *  -> attention: by using sherical coordinates, this will produce an error! */
+    *  object 2 at position y and velocity vector vy,
+    *  For the calculation, cartesian coordinates are assumed with a cartesian distance metric
+    *  -> attention: by using spherical coordinates, this will produce an error! */
     private static double getTcpa(@NonNull Vector x, @NonNull Vector y,
                                   @NonNull Vector vx, @NonNull Vector vy, double lonCorrection) {
         Vector dx = new Vector( y.sub(x));
@@ -76,7 +88,7 @@ public final class AisTrackerHelper {
             // avoid div by 0 or invalid lonCorrection
             return INVALID_TCPA;
         }
-        return -(((dx.x * dv.x) + (dx.y * dv.y / lonCorrection)) / divisor);
+        return -(((dx.x * dv.x / lonCorrection) + (dx.y * dv.y)) / divisor);
     }
 
     /* to calculate the Time to Closest Point of Approach (TCPA) between the objects x and y,
@@ -91,12 +103,7 @@ public final class AisTrackerHelper {
     }
 
     public static double getTcpa(@NonNull Location ownLocation, @NonNull Location otherLocation) {
-        long now = System.currentTimeMillis();
-        if (((now - lastCorrectionUpdate) / 1000 / 60) > maxCorrectionUpdateAgeInMin) {
-            correctionFactor = getLonCorrection(ownLocation);
-            lastCorrectionUpdate = now;
-        }
-        return getTcpa(ownLocation, otherLocation, correctionFactor);
+        return getTcpa(ownLocation, otherLocation, getLonCorrection(ownLocation));
     }
 
     @Nullable
@@ -129,7 +136,7 @@ public final class AisTrackerHelper {
         return getCpa(x, y, false);
     }
 
-    /* caluclate the distance between the given objects at their Closest Point of Approach (CPA) */
+    /* calculate the distance between the given objects at their Closest Point of Approach (CPA) */
     public static float getCpaDistance(@NonNull Location x, @NonNull Location y) {
         Location cpaX = getCpa1(x,y);
         Location cpaY = getCpa2(x,y);
@@ -147,6 +154,8 @@ public final class AisTrackerHelper {
             if (tcpa != INVALID_TCPA) {
                 Location cpaX = getNewPosition(ownLocation, tcpa);
                 Location cpaY = getNewPosition(otherLocation, tcpa);
+                Pair<Double, Double>crossingTimes = getCrossingTimes(ownLocation, otherLocation);
+                result.setCrossingTimes(crossingTimes);
                 result.setTcpa(tcpa);
                 result.setCpaPos1(cpaX);
                 result.setCpaPos2(cpaY);
@@ -164,6 +173,37 @@ public final class AisTrackerHelper {
         return res;
     }
 
+    /* This method takes the two locations (including position, course and speed)
+       and calculates the time when the two objects reach the location where the course lines
+       are crossing.
+       for each object, the time may be different or even in the past, hence a pair of two
+       times is returned
+       in error case or if the courses do not cross each other, Null is returned
+    * */
+    @Nullable
+    private static Pair<Double, Double> getCrossingTimes(@NonNull Location x, @NonNull Location y) {
+        double lonCorrection = getLonCorrection(x);
+        Vector vX = locationToVector(x, lonCorrection); // position 1 at time t0
+        Vector vY = locationToVector(y, lonCorrection); // position 2 at time t0
+        Vector vVX = courseToVector(x.getBearing(), getSpeedInKnots(x)); // velocity vector 1
+        Vector vVY = courseToVector(y.getBearing(), getSpeedInKnots(y)); // velocity vector 2
+        Vector vDXY = vX.sub(vY); // position difference at time t0
+        double divisor = vVX.x * vVY.y - vVX.y * vVY.x;
+        if ((Math.abs(divisor) < 1.0E-10f) || (lonCorrection < 1.0E-10f)) {
+            // avoid div by 0 or invalid lonCorrection
+            Log.d("AisTrackerHelper", "getCollisionTimes(): Division by 0: divisor->"
+                    + divisor + ", lonCorrection->" + lonCorrection);
+            return null;
+        }
+        Pair result = new Pair<Double, Double>((vVY.x * vDXY.y - vVY.y * vDXY.x) / divisor,
+                (vVX.x * vDXY.y - vVX.y * vDXY.x) / divisor);
+        /* Log.d("AisTrackerHelper", "getCollisionTimes(): t1->"
+                + result.first.toString() + ", t2->" + result.second.toString());
+         */
+
+        return result;
+    }
+
     @Nullable
     public static Location getNewPosition(@Nullable Location loc, double timeInHours) {
         if (loc != null) {
@@ -176,8 +216,10 @@ public final class AisTrackerHelper {
                 newX.setLatitude(b.getLatitude());
                 return newX;
             } else {
-                Log.d("AisTrackerHelper", "getNewPosition(): loc.hasBearing->"
-                        + loc.hasBearing() + ", loc.hasSpeed->" + loc.hasSpeed());
+                /* Log.d("AisTrackerHelper", "getNewPosition(): loc.hasBearing->"
+                        + loc.hasBearing() + ", loc.hasSpeed->" + loc.hasSpeed()
+                        + ", speed->" + loc.getSpeed());
+                 */
                 return null;
             }
         } else {
@@ -185,7 +227,7 @@ public final class AisTrackerHelper {
         }
     }
 
-    private static double getLonCorrection(@Nullable Location loc) {
+    private static double calculateLonCorrection(@Nullable Location loc) {
         if (loc != null) {
             Location x = new Location(loc);
             // simulate a "measurement" trip towards East...
@@ -201,6 +243,15 @@ public final class AisTrackerHelper {
         return 1.0f; // fallback
     }
 
+    private static double getLonCorrection(@Nullable Location loc) {
+        long now = System.currentTimeMillis();
+        if (((now - lastCorrectionUpdate) / 1000 / 60) > maxCorrectionUpdateAgeInMin) {
+            correctionFactor = calculateLonCorrection(loc);
+            lastCorrectionUpdate = now;
+        }
+        return correctionFactor;
+    }
+
     public static float knotsToMeterPerSecond(float speed) {
         return speed * 1852 / 3600;
     }
@@ -211,7 +262,7 @@ public final class AisTrackerHelper {
         return x / 1852.0f;
     }
 
-    /* calculate a velocity vector from givem course (COG) and speed (SOG).
+    /* calculate a velocity vector from given course (COG) and speed (SOG).
        COG is given as heading, SOG as scalar */
     @NonNull
     private static Vector courseToVector(double cog, double sog) {
@@ -219,12 +270,16 @@ public final class AisTrackerHelper {
         while (alpha < 0) { alpha += 360.0d; }
         while (alpha >= 360.0d ) { alpha -= 360.0d; }
         alpha = Math.toRadians(alpha);
-        return new Vector(Math.sin(alpha) * sog, Math.cos(alpha) * sog);
+        return new Vector(Math.cos(alpha) * sog, Math.sin(alpha) * sog);
     }
 
     @NonNull
     private static Vector locationToVector(@NonNull Location loc) {
-        return new Vector(loc.getLatitude() * 60.0, loc.getLongitude() * 60.0);
+        return new Vector(loc.getLongitude() * 60.0, loc.getLatitude() * 60.0);
+    }
+
+    private static Vector locationToVector(@NonNull Location loc, double lonCorrection) {
+        return new Vector(loc.getLongitude() * 60.0 / lonCorrection, loc.getLatitude() * 60.0);
     }
 
     private static boolean checkSpeedAndBearing(@NonNull Location x, @NonNull Location y) {
