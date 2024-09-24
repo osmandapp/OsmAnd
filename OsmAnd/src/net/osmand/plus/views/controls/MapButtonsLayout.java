@@ -55,9 +55,10 @@ public class MapButtonsLayout extends FrameLayout {
 		if (OsmandMapLayer.intersects(intersections, currentBounds, false)) {
 			params = updateButtonPosition(button, intersections);
 		}
-		params.rightMargin = snapToGrid(params.rightMargin);
-		params.bottomMargin = snapToGrid(params.bottomMargin);
-
+		if (!isSnappedToGrid(params.rightMargin) || !isSnappedToGrid(params.bottomMargin)) {
+			params.rightMargin = snapToGrid(params.rightMargin);
+			params.bottomMargin = snapToGrid(params.bottomMargin);
+		}
 		button.setLayoutParams(params);
 		button.saveMargins();
 	}
@@ -80,11 +81,12 @@ public class MapButtonsLayout extends FrameLayout {
 		LayoutParams originalParams = (LayoutParams) button.getLayoutParams();
 		LayoutParams params = new LayoutParams(originalParams);
 
+		int size = button.getSize();
 		int maxStepsX = getWidth() / gridSize;
 		int maxStepsY = getHeight() / gridSize;
 		int maxSteps = Math.max(maxStepsX, maxStepsY);
-		int minRightMargin = getWidth() - button.getWidth();
-		int minBottomMargin = getHeight() - button.getHeight();
+		int minRightMargin = getWidth() - size;
+		int minBottomMargin = getHeight() - size;
 
 		for (int step = 1; step <= maxSteps; step++) {
 			for (double[] direction : DIRECTIONS) {
@@ -111,7 +113,13 @@ public class MapButtonsLayout extends FrameLayout {
 	@NonNull
 	private static QuadRect getRect(@NonNull MapButton button, @NonNull LayoutParams params) {
 		int size = button.getSize();
-		return new QuadRect(params.rightMargin + size, params.bottomMargin + size, params.rightMargin, params.bottomMargin);
+		int radius = button.getShadowRadius();
+		return new QuadRect(params.rightMargin + size - radius, params.bottomMargin + size - radius,
+				params.rightMargin + radius, params.bottomMargin + radius);
+	}
+
+	private boolean isSnappedToGrid(int margin) {
+		return margin % gridSize == 0;
 	}
 
 	private int snapToGrid(int margin) {
