@@ -6,6 +6,10 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLIN
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.DIVIDER_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_POI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_WIKI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.WITHIN_POLYGONS_ROW_KEY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +32,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -56,7 +59,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.mapcontextmenu.builders.ContextMenuUIComponents;
+import net.osmand.plus.mapcontextmenu.builders.MenuUIComponents;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -69,7 +72,6 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
-import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -112,12 +114,6 @@ public class MenuBuilder {
 	public static final int TITLE_LIMIT = 60;
 
 	protected static final String[] arrowChars = {"=>", " - "};
-	protected static final String WITHIN_POLYGONS_ROW_KEY = "within_polygons";
-	protected static final String NEAREST_WIKI_KEY = "nearest_wiki_key";
-	protected static final String NEAREST_POI_KEY = "nearest_poi_key";
-	protected static final String DIVIDER_ROW_KEY = "divider_row_key";
-	protected static final String NAMES_ROW_KEY = "names_row_key";
-	protected static final String ALT_NAMES_ROW_KEY = "alt_names_row_key";
 
 	private static final int NEARBY_MAX_POI_COUNT = 10;
 	private static final int NEARBY_POI_MIN_RADIUS = 250;
@@ -128,7 +124,7 @@ public class MenuBuilder {
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmAndAppCustomization customization;
-	protected ContextMenuUIComponents uiComponents;
+	protected MenuUIComponents uiComponents;
 
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
@@ -201,7 +197,7 @@ public class MenuBuilder {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.customization = app.getAppCustomization();
-		this.uiComponents = new ContextMenuUIComponents(mapActivity);
+		this.uiComponents = new MenuUIComponents(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
 		this.galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
@@ -303,6 +299,7 @@ public class MenuBuilder {
 
 	public void setLight(boolean light) {
 		this.light = light;
+		uiComponents.setLightContent(light);
 	}
 
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
@@ -439,6 +436,24 @@ public class MenuBuilder {
 			llv.addView(container);
 		}
 		return new CollapsableView(llv, this, true);
+	}
+
+	protected void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
+	                               @Nullable String textPrefix, @Nullable String textSuffix,
+	                               @Nullable CollapsableView collapsableView, boolean parentRow) {
+		if (!isFirstRow() && !parentRow) {
+			View horizontalLine = new View(view.getContext());
+			horizontalLine.setTag(DIVIDER_ROW_KEY);
+			LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+			llHorLineParams.gravity = Gravity.BOTTOM;
+			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
+
+			horizontalLine.setLayoutParams(llHorLineParams);
+			horizontalLine.setBackgroundColor(getColor(light ? R.color.divider_color_light : R.color.divider_color_dark));
+			((LinearLayout) view).addView(horizontalLine);
+		}
+		uiComponents.buildDetailsRow(view, icon, text, textPrefix, textSuffix, collapsableView, parentRow);
+		rowBuilt();
 	}
 
 	private void buildWithinRow(@NonNull View view, @Nullable Drawable icon, @NonNull String text,
@@ -1086,7 +1101,7 @@ public class MenuBuilder {
 	}
 
 	protected void copyToClipboard(String text, Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		uiComponents.copyToClipboard(text, ctx);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {

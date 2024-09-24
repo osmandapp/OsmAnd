@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_POI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_WIKI_KEY;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
