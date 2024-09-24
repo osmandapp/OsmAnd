@@ -4674,7 +4674,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y mantente a la derecha</string>
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
-    <string name="compass_click_desc">Sugerencia: pulsa el botón de la brújula para cambiar el modo de la orientación del mapa.</string>
+    <string name="compass_click_desc">Toca dos veces el botón de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="altitude_correction">Corrección de la elevación</string>
     <string name="kg">kg</string>
