@@ -106,7 +106,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         Integer[] entryValues = {3, 5, 7, 10, 12, 15, 20};
         String[] entries = new String[entryValues.length];
         for (int i = 0; i < entryValues.length; i++) {
-            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to ressource file
+            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to resource file
         }
         ListPreferenceEx objectLostTimeout = findPreference(plugin.AIS_OBJ_LOST_TIMEOUT.getId());
         if (objectLostTimeout != null) {
@@ -119,9 +119,9 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         Integer[] entryValues = {2, 3, 4, 5, 7, 10, 15, 100 /* disabled: must be bigger than the biggest value of setupObjectLostTimeout() */};
         String[] entries = new String[entryValues.length];
         for (int i = 0; i < entryValues.length - 1; i++) {
-            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to ressource file
+            entries[i] = entryValues[i] + " " + "minutes"; // TODO: move to resource file
         }
-        entries[entryValues.length - 1] = "disabled"; // TODO: move to ressource file
+        entries[entryValues.length - 1] = "disabled"; // TODO: move to resource file
 
         ListPreferenceEx objectLostTimeout = findPreference(plugin.AIS_SHIP_LOST_TIMEOUT.getId());
         if (objectLostTimeout != null) {
@@ -136,7 +136,7 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         entries[0] = "disabled";
         for (int i = 1; i < entryValues.length; i++) {
             entries[i] = entryValues[i] + " ";
-            entries[i] += entryValues[i].equals(1) ? "minute" : "minutes"; // TODO: move to ressource file
+            entries[i] += entryValues[i].equals(1) ? "minute" : "minutes"; // TODO: move to resource file
         }
         ListPreferenceEx cpaWarningTime = findPreference(plugin.AIS_CPA_WARNING_TIME.getId());
         if (cpaWarningTime != null) {
@@ -149,12 +149,13 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
     }
     @SuppressLint("DefaultLocale")
     private void setupCpaWarningDistance(boolean enabled) {
-        Float[] entryValues = {0.5f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+        Float[] entryValues = {0.02f, 0.05f, 0.1f, 0.2f, 0.5f, 1.0f, 2.0f};
         String[] entries = new String[entryValues.length];
         for (int i = 0; i < entryValues.length; i++) {
             entries[i] = (ceil(entryValues[i]) == entryValues[i]) ?
-                    String.format("%.0f ", entryValues[i]) : String.format("%.1f ", entryValues[i]);
-            entries[i] += entryValues[i].equals(1.0f) ? "nautical mile" : "nautical miles"; // TODO: move to ressource file
+                    String.format("%.0f ", entryValues[i]) :
+                    ((entryValues[i] < 0.1f) ? String.format("%.2f ", entryValues[i]) : String.format("%.1f ", entryValues[i]));
+            entries[i] += entryValues[i].equals(1.0f) ? "nautical mile" : "nautical miles"; // TODO: move to resource file
         }
         ListPreferenceEx cpaWarningDistance = findPreference(plugin.AIS_CPA_WARNING_DISTANCE.getId());
         if (cpaWarningDistance != null) {
