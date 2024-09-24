@@ -297,7 +297,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 			for (AmenityInfoRow infoRow : infoRows) {
 				View container = createRowContainer(app, null);
-				buildDetailsRow(container, null, infoRow.text, infoRow.textPrefix, null, null, false);
+				buildDetailsRow(container, null, infoRow.text, infoRow.textPrefix, null, null, false, null);
 				llv.addView(container);
 			}
 			collapsableView = new CollapsableView(llv, this, true);
@@ -574,7 +574,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			String hint = app.getString(altName ? R.string.shared_string_alt_name : R.string.shared_string_name);
 			buildDetailsRow(amenitiesRow, getRowIcon(R.drawable.ic_action_map_language), name,
 					app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, nameLocale.getDisplayLanguage()), null,
-					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage(), hint) : null, true);
+					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage(), hint) : null, true, null);
 			viewGroup.addView(amenitiesRow);
 		}
 	}
@@ -592,7 +592,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				View amenitiesRow = createRowContainer(app, null);
 				buildDetailsRow(amenitiesRow, null, name,
 						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
-						null, null, false);
+						null, null, false, null);
 				llv.addView(amenitiesRow);
 			}
 		}

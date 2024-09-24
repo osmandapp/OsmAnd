@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,7 +56,8 @@ public class MenuUIComponents {
 
 	public void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
 	                            @Nullable String textPrefix, @Nullable String textSuffix,
-	                            @Nullable CollapsableView collapsableView, boolean parentRow) {
+	                            @Nullable CollapsableView collapsableView, boolean parentRow,
+	                            @Nullable OnClickListener onClickListener) {
 		boolean collapsable = collapsableView != null;
 
 		LinearLayout baseView = new LinearLayout(view.getContext());
@@ -100,8 +102,8 @@ public class MenuUIComponents {
 		if (!Algorithms.isEmpty(textPrefix)) {
 			textPrefixView = new TextView(view.getContext());
 			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			int topMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
-			AndroidUtils.setMargins(llTextParams, topMargin, dpToPx(8f), 0, 0);
+			int startMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
+			AndroidUtils.setMargins(llTextParams, startMargin, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTextSize(12);
 			textPrefixView.setTextColor(getColor(R.color.text_color_secondary_light));
@@ -111,11 +113,33 @@ public class MenuUIComponents {
 			textPrefixView.setText(textPrefix);
 		}
 
+		TextView textSuffixView = null;
+		if (!Algorithms.isEmpty(textSuffix)) {
+			textSuffixView = new TextView(view.getContext());
+			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			int startMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
+			AndroidUtils.setMargins(llTextParams, startMargin, 0, 0, dpToPx(8f));
+			textSuffixView.setLayoutParams(llTextParams);
+			textSuffixView.setTextSize(12);
+			textSuffixView.setTextColor(getColor(R.color.text_color_secondary_light));
+			textSuffixView.setEllipsize(TextUtils.TruncateAt.END);
+			textSuffixView.setMinLines(1);
+			textSuffixView.setMaxLines(1);
+			textSuffixView.setText(textSuffix);
+		}
+
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		int topMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
-		AndroidUtils.setMargins(llTextParams, topMargin,
-				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
+		int startMargin = parentRow ? (icon == null ? dpToPx(16f) : 0) : 0;
+		int topMargin = dpToPx(2f);
+		int bottomMargin = dpToPx(2f);
+		if (textPrefixView == null) {
+			topMargin = collapsable && textSuffix == null ? dpToPx(13f) : dpToPx(8f);
+		}
+		if (textSuffixView == null) {
+			bottomMargin = collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f);
+		}
+		AndroidUtils.setMargins(llTextParams, startMargin, topMargin, 0, bottomMargin);
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !isLightContent()));
@@ -133,6 +157,9 @@ public class MenuUIComponents {
 			llText.addView(textPrefixView);
 		}
 		llText.addView(textView);
+		if (textSuffixView != null) {
+			llText.addView(textSuffixView);
+		}
 
 		ImageView iconViewCollapse = new ImageView(view.getContext());
 		if (collapsableView != null) {
@@ -165,6 +192,8 @@ public class MenuUIComponents {
 				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
 			baseView.addView(collapsableView.getContentView());
+		} else if (onClickListener != null) {
+			ll.setOnClickListener(onClickListener);
 		}
 		((LinearLayout) view).addView(baseView);
 	}

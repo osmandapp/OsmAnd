@@ -411,10 +411,10 @@ public class MenuBuilder {
 				List<MenuObject> menuObjects = MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, getLatLon());
 				Context context = viewGroup.getContext();
 				View rowContainer = createRowContainer(context, WITHIN_POLYGONS_ROW_KEY);
-				buildWithinRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
-						app.getString(R.string.transport_nearby_routes),
+				buildDetailsRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
+						app.getString(R.string.transport_nearby_routes),null,
 						MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
-						getWithinCollapsableView(menuObjects), null, true);
+						getWithinCollapsableView(menuObjects),  true, null);
 				viewGroup.addView(rowContainer);
 			}
 		}
@@ -426,8 +426,17 @@ public class MenuBuilder {
 		for (int i = 0; i < menuObjects.size(); i++) {
 			MenuObject menuObject = menuObjects.get(i);
 			View container = createRowContainer(app, null);
-			buildWithinRow(container, null, menuObject.getTitleStr(),
-					MenuObjectUtils.getSecondLineText(menuObject), null, menuObject, false);
+			String title = menuObject.getTitleStr();
+			String textPrefix = MenuObjectUtils.getSecondLineText(menuObject);
+			OnClickListener onClickListener = v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					IContextMenuProvider contextObject = mapActivity.getMapLayers().getPoiMapLayer();
+					ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+					contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), contextObject);
+				}
+			};
+			buildDetailsRow(container, null, title, textPrefix, null, null, false, onClickListener);
 			llv.addView(container);
 		}
 		return new CollapsableView(llv, this, true);
@@ -435,7 +444,8 @@ public class MenuBuilder {
 
 	protected void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
 	                               @Nullable String textPrefix, @Nullable String textSuffix,
-	                               @Nullable CollapsableView collapsableView, boolean parentRow) {
+	                               @Nullable CollapsableView collapsableView, boolean parentRow,
+	                               @Nullable OnClickListener onClickListener) {
 		if (!isFirstRow() && !parentRow) {
 			View horizontalLine = new View(view.getContext());
 			horizontalLine.setTag(DIVIDER_ROW_KEY);
@@ -447,7 +457,7 @@ public class MenuBuilder {
 			horizontalLine.setBackgroundColor(getColor(isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
 			((LinearLayout) view).addView(horizontalLine);
 		}
-		uiComponents.buildDetailsRow(view, icon, text, textPrefix, textSuffix, collapsableView, parentRow);
+		uiComponents.buildDetailsRow(view, icon, text, textPrefix, textSuffix, collapsableView, parentRow, onClickListener);
 		rowBuilt();
 	}
 
