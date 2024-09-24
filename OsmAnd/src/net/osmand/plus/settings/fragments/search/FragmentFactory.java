@@ -1,10 +1,10 @@
 package net.osmand.plus.settings.fragments.search;
 
+import static net.osmand.plus.settings.fragments.search.SettingsSearchConfigurer.setConfigureSettingsSearch;
+
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
@@ -12,10 +12,8 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
 import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentFactory;
-import de.KnollFrank.lib.settingssearch.fragment.FragmentFactory;
-import de.KnollFrank.lib.settingssearch.provider.PrepareShow;
 
-class FragmentFactoryAndPrepareShow implements FragmentFactory, PrepareShow {
+class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.FragmentFactory {
 
 	@Override
 	public Fragment instantiate(final String fragmentClassName,
@@ -24,11 +22,6 @@ class FragmentFactoryAndPrepareShow implements FragmentFactory, PrepareShow {
 		final Fragment fragment = _instantiate(fragmentClassName, src, context);
 		setConfigureSettingsSearch(fragment, true);
 		return fragment;
-	}
-
-	@Override
-	public void prepareShow(final PreferenceFragmentCompat preferenceFragment) {
-		setConfigureSettingsSearch(preferenceFragment, false);
 	}
 
 	private static Fragment _instantiate(final String fragmentClassName,
@@ -49,17 +42,5 @@ class FragmentFactoryAndPrepareShow implements FragmentFactory, PrepareShow {
 		if (src.host() instanceof final BaseSettingsFragment baseSettingsFragment) {
 			fragment.setArguments(baseSettingsFragment.buildArguments());
 		}
-	}
-
-	private static void setConfigureSettingsSearch(final Fragment fragment, final boolean configureSettingsSearch) {
-		final Bundle arguments = getBundle(fragment);
-		arguments.putBoolean(BaseSettingsFragment.CONFIGURE_SETTINGS_SEARCH, configureSettingsSearch);
-		fragment.setArguments(arguments);
-	}
-
-	private static Bundle getBundle(final Fragment fragment) {
-		return fragment.getArguments() != null ?
-				fragment.getArguments() :
-				new Bundle();
 	}
 }

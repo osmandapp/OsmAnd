@@ -41,14 +41,13 @@ public class SettingsSearchButtonHelper {
 	}
 
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
-		final FragmentFactoryAndPrepareShow fragmentFactoryAndPrepareShow = new FragmentFactoryAndPrepareShow();
 		return SearchPreferenceFragments
 				.builder(
 						createSearchConfiguration(),
 						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager())
-				.withFragmentFactory(fragmentFactoryAndPrepareShow)
+				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider(settings))
-				.withPrepareShow(fragmentFactoryAndPrepareShow)
+				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(createCustomSearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(
 						(hostOfPreference, preference) ->
