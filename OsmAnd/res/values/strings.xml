@@ -1166,7 +1166,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Hint: Tap the compass button to switch the map orientation mode.</string>
+    <string name="compass_click_desc">Double tap the compass button to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
