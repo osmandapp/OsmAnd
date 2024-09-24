@@ -4711,7 +4711,7 @@
     <string name="true_bearing_wdiget_desc">Angulo inter la vera nordo, via pozicio kaj la alcela loko.</string>
     <string name="first_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la unua map-marko.</string>
     <string name="second_marker_widget_desc">Vi povas agordi la fenestraĵon por montri distancon aŭ proksimuman tempon de alveno al la dua map-marko.</string>
-    <string name="compass_click_desc">Konsilo: frapetu la bildsimbolon de kompaso por ŝanĝi reĝimon de map-turniĝo.</string>
+    <string name="compass_click_desc">Duoble frapetu la bildsimbolon de kompaso por ŝanĝi reĝimon de map-turniĝo.</string>
     <string name="average_speed_skip_stops_desc">Rapido malplia ol %1$s ne enkalkuliĝos al la mezuma rapido.</string>
     <string name="time_to_intermediate_widget_desc">Montras tempon de alveno kaj pluan tempon al la unua intercelo. Tempo estas senĉese aktualigata dum navigado. Kiam intercelo estos pasigita, la fenestraĵo montros tempon al la sekva intercelo.</string>
     <string name="distance_to_intermediate_widget_desc">Montras plian distancon al la unua intercelo. Kiam intercelo estos pasigita, la fenestraĵo montros distancon al la sekva intercelo.</string>
