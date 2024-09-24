@@ -120,9 +120,9 @@
     <string name="poi_railway_platform">Andana de tren;Andana de ferrocarril;Andana ferroviària;Plataforma de tren</string>
     <string name="poi_halt">Parada de tren</string>
     <string name="poi_subway_entrance">Entrada de metro</string>
-    <string name="poi_subway_station">Sí</string>
+    <string name="poi_subway_station">Sí;Estació de metro</string>
     <string name="poi_taxi">Parada de taxis</string>
-    <string name="poi_aerodrome">Aeroport</string>
+    <string name="poi_aerodrome">Aeroport;Aeròdrom</string>
     <string name="poi_helipad">Heliport</string>
     <string name="poi_runway">Pista d\'aterratge</string>
     <string name="poi_aeroway_terminal">Terminal d\'aeroport</string>
@@ -448,7 +448,7 @@
     <string name="poi_forest">Bosc amb manteniment humà</string>
     <string name="poi_farmyard">Granja</string>
     <string name="poi_landuse_railway">Àrea ferroviària</string>
-    <string name="poi_shop_yes">Basar</string>
+    <string name="poi_shop_yes">Botiga</string>
     <string name="poi_turning_circle">Mini-rotonda</string>
     <string name="poi_mineshaft">Pou de mina</string>
     <string name="poi_adit">Boca de mina</string>
@@ -460,10 +460,10 @@
     <string name="poi_hotel">Hotel</string>
     <string name="poi_hostel">Alberg</string>
     <string name="poi_motel">Motel</string>
-    <string name="poi_alpine_hut">Refugi de muntanya</string>
-    <string name="poi_chalet">Xalet</string>
+    <string name="poi_alpine_hut">Refugi de muntanya;Refugi</string>
+    <string name="poi_chalet">Xalet;Refugi</string>
     <string name="poi_apartment">Apartament</string>
-    <string name="poi_wilderness_hut">Cabana</string>
+    <string name="poi_wilderness_hut">Refugi lliure;Cabana</string>
     <string name="poi_place_of_worship">Temple</string>
     <string name="poi_religion_christian">Cristianisme</string>
     <string name="poi_religion_jewish">Judaisme</string>
@@ -547,7 +547,7 @@
     <string name="poi_attraction_swing_carousel">Cavallets de gronxadors</string>
     <string name="poi_attraction_train">Trenet de fira</string>
     <string name="poi_guest_house">Casa d\'hostes</string>
-    <string name="poi_cabin">Cabana</string>
+    <string name="poi_cabin">Cabana;Refugi</string>
     <string name="poi_piste_snow_park">Pista de neu per infants</string>
     <string name="poi_piste_playground">Pista infantil</string>
     <string name="poi_arts_centre">Centre artístic</string>
@@ -678,8 +678,8 @@
     <string name="poi_craft_saddler">Baster</string>
     <string name="poi_craft_sailmaker">Drassana</string>
     <string name="poi_craft_stand_builder">Aparadors i estands</string>
-    <string name="poi_lean_to">Cobert</string>
-    <string name="poi_hunting_lodge">Refugi de caça</string>
+    <string name="poi_lean_to">Cobert;Refugi</string>
+    <string name="poi_hunting_lodge">Refugi de caça;Refugi</string>
     <string name="poi_picnic_table">Taula de berena</string>
     <string name="poi_craft_winery">Celler</string>
     <string name="poi_stripclub">Club d\'striptease</string>
@@ -1059,7 +1059,7 @@
     <string name="poi_landfill_waste_nuclear">Residus radioactius</string>
     <string name="poi_brownfield">Camp per rehabilitar</string>
     <string name="poi_start_date">Data d\'inici</string>
-    <string name="poi_wheelchair_yes">Cadira de rodes</string>
+    <string name="poi_wheelchair_yes">Sí;Cadira de rodes</string>
     <string name="poi_generator_source_diesel">Font d\'energia: dièsel</string>
     <string name="poi_generator_source_nuclear">Font d\'energia: nuclear</string>
     <string name="poi_generator_source_solar">Font d\'energia: solar</string>
@@ -1161,7 +1161,7 @@
     <string name="poi_pump_manual">Manual</string>
     <string name="poi_pump_powered">Motoritzada</string>
     <string name="poi_pump_no">Sense bomba</string>
-    <string name="poi_pump_yes">Sí</string>
+    <string name="poi_pump_yes">Sí;Bomba</string>
     <string name="poi_water_characteristic_mineral">Mineral</string>
     <string name="poi_water_characteristic_mud">Característica de l\'aigua: argilosa</string>
     <string name="poi_water_characteristic_sulfuric">Sulfúrica</string>
@@ -3049,4 +3049,8 @@
     <string name="poi_payment_ep_cash_yes">Targeta moneder (Geldkarte)</string>
     <string name="poi_events_venue">Saló d\'esdeveniments</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
+    <string name="poi_access_yes">Accés permès</string>
+    <string name="poi_cash_in">Dipòsit en efectiu</string>
+    <string name="poi_access_permit">Permís requerit</string>
+    <string name="poi_shop_general">Botiga generalista</string>
 </resources>
