@@ -1347,7 +1347,7 @@
     <string name="poi_public_bath">Baño público</string>
     <string name="poi_toilets_access_public">Acceso ós servizos: público</string>
     <string name="poi_vending_public_transport_tickets">Billetes de transporte público</string>
-    <string name="poi_vending_parking_tickets_public_transport_tickets">Billetes de aparcamento e transporte público</string>
+    <string name="poi_vending_parking_tickets_public_transport_tickets">Billetes de aparcadoiro;Billetes de transporte público</string>
     <string name="poi_vending_coffee">Café</string>
     <string name="poi_vending_public_transport_plans">Plans de transporte público</string>
     <string name="poi_memorial_obelisk">Obelisco</string>
@@ -1710,7 +1710,7 @@
     <string name="poi_service_bicycle_diy_no">Ferramentas para autoarranxado: non</string>
     <string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: non</string>
     <string name="poi_service_bicycle_chaintool_no">Ferramentas para a cadea: non</string>
-    <string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda man</string>
+    <string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda man;Bicicletas de segunda man;Bicicletas usadas</string>
     <string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda man: non</string>
     <string name="poi_bicycle_repair_station">Estación de arranxo para bicicletas</string>
     <string name="poi_ramp_bicycle_yes">Rampla para bicicletas: si</string>
@@ -1725,8 +1725,8 @@
     <string name="poi_pharmacy_dispensing">Dispensa receitas médicas</string>
     <string name="poi_scout_camp">Campamento de exploradores</string>
     <string name="poi_backcountry">Acampada libre</string>
-    <string name="poi_drive_in">Compra dende o coche</string>
-    <string name="poi_drive_through">Servizo no automóbil</string>
+    <string name="poi_drive_in">Servizo no automóbil</string>
+    <string name="poi_drive_through">Dende o automóbil</string>
     <string name="poi_microbrewery">Cervexaría artesanal</string>
     <string name="poi_seasonal">Estacional</string>
     <string name="poi_motorcycle_services">Servizos</string>
@@ -1759,12 +1759,12 @@
     <string name="poi_cocktails_yes">Si;Cócteis</string>
     <string name="poi_self_service_yes">Si;Autoservizo</string>
     <string name="poi_automated_yes">Si;Automatizado</string>
-    <string name="poi_brushless_yes">Si</string>
-    <string name="poi_toilets_yes">Si</string>
+    <string name="poi_brushless_yes">Si:Sen vasoiriña</string>
+    <string name="poi_toilets_yes">Si;Aseos</string>
     <string name="poi_resource_sand">Area</string>
     <string name="poi_resource_sandstone">Arenito</string>
     <string name="poi_beach_sand">Area</string>
-    <string name="poi_bench_yes">Si</string>
+    <string name="poi_bench_yes">Si;Asento</string>
     <string name="poi_surveillance_yes">Vixiancia: si</string>
     <string name="poi_service_bicycle_charging_yes">Cargador eléctrico: si</string>
     <string name="poi_backcountry_yes">Si</string>
@@ -1781,7 +1781,7 @@
     <string name="poi_handrail_yes">Varanda: si</string>
     <string name="poi_ramp_yes">Rampla: si</string>
     <string name="poi_ramp_wheelchair_yes">Rampla para cadeiras de rodas: si</string>
-    <string name="poi_ramp_stroller_yes">Rampla (cocheciños): si</string>
+    <string name="poi_ramp_stroller_yes">Rampla (cochiños): si</string>
     <string name="poi_ramp_luggage_yes">Rampla para bagaxes: si</string>
     <string name="poi_defibrillator_yes">Desfibrilador: si</string>
     <string name="poi_horse_yes">Cabalos: permitido</string>
@@ -2132,7 +2132,7 @@
     <string name="poi_automated_no">Non automatizado</string>
     <string name="poi_full_service_yes">Servizo completo</string>
     <string name="poi_brushless_no">Vasoira xiratoria: non</string>
-    <string name="poi_car_wash_no">Non</string>
+    <string name="poi_car_wash_no">Non;Lavado de automóbiles: non</string>
     <string name="poi_male_yes">Homes</string>
     <string name="poi_male_no">Prohibido para homes</string>
     <string name="poi_female_yes">Mulleres</string>
@@ -2227,7 +2227,7 @@
     <string name="poi_resource_salt">Sal</string>
     <string name="poi_resource_silica">Sílice</string>
     <string name="poi_resource_silver">Prata</string>
-    <string name="poi_resource_slate_iron_ore_copper">Louxa;mena de ferro;cobre</string>
+    <string name="poi_resource_slate_iron_ore_copper">Louxa;mineral de ferro;cobre</string>
     <string name="poi_resource_stone">Pedra</string>
     <string name="poi_resource_tin">Estaño</string>
     <string name="poi_resource_tuff">Tobo</string>
@@ -2326,7 +2326,7 @@
     <string name="poi_route_railway_ref">Liña ferroviaria</string>
     <string name="poi_historic_yes">Atracción histórica</string>
     <string name="poi_shop_additional_yes">Con tenda</string>
-    <string name="poi_service_bicycle_retail_yes">Venda</string>
+    <string name="poi_service_bicycle_retail_yes">Retallista;Comercio polo miúdo;Venda de bicicletas</string>
     <string name="poi_service_bicycle_repair_yes">Arranxo</string>
     <string name="poi_service_bicycle_rental_yes">Alugamento</string>
     <string name="poi_service_bicycle_pump_yes">Inchadoiro</string>
@@ -3101,7 +3101,7 @@
     <string name="poi_xmas_day_date">Nadal: período para o acontecemento</string>
     <string name="poi_xmas_note">Nadal: nota</string>
     <string name="poi_xmas_opening_hours">Nadal: horario de apertura</string>
-    <string name="poi_drink_wine_retail">Viño: venda</string>
+    <string name="poi_drink_wine_retail">Viño: retallista (comercio polo miúdo)</string>
     <string name="poi_drink_wine_served">Viño: servido</string>
     <string name="poi_energy_supplier">Oficina de fornecedor da enerxía</string>
     <string name="poi_electronics_repair_computer">Arranxo de electrónicos: computadores</string>
