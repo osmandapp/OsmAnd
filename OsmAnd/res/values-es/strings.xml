@@ -5820,7 +5820,7 @@
     <string name="navigation_position_icon">Icono de posición de navegación</string>
     <string name="resting_position_icon_summary">Icono que se muestra cuando no te estás moviendo.</string>
     <string name="resting_position_icon">Icono de tu ubicación cuando estás parado</string>
-    <string name="profile_icon">Icono de perfil</string>
+    <string name="profile_icon">Icono del perfil</string>
     <string name="navigation_position_icon_summary">Icono que se muestra mientras navegas o te mueves.</string>
     <string name="rendering_value_pale_name">Pálido</string>
     <string name="navigation_position">Posición de navegación</string>
