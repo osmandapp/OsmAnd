@@ -17,11 +17,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
@@ -150,9 +151,10 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		}
 
 		private void checkAnalysisUpdate() {
-			gpxDbHelper.getItem(file); // simulate multiple calls for getting GpxDataItem
-			if (GpxDbHelper.readTrackItemCount > 2) {
-				throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
+			gpxDbHelper.getItem(SharedUtil.kFile(file)); // simulate multiple calls for getting GpxDataItem
+			long readItemCount = gpxDbHelper.getReadTrackItemCount();
+			if (readItemCount > 2) {
+				throw new AssertionError("To many updates of analysis " + readItemCount);
 			}
 		}
 
