@@ -5821,16 +5821,16 @@
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Vælg kortets orientering</string>
     <string name="shared_string_all_icons">Alle ikoner</string>
-    <string name="navigation_position_icon_summary">Ikonet vises, mens du navigerer eller bevæger dig.</string>
+    <string name="navigation_position_icon_summary">Ikon, der vises, mens du navigerer eller bevæger dig.</string>
     <string name="resting_position_icon">Ikon for hvileposition</string>
     <string name="rendering_value_pale_name">Bleg</string>
-    <string name="profile_icon">Profil-ikon</string>
+    <string name="profile_icon">Profilikon</string>
     <string name="navigation_position_icon">Ikon for navigationsposition</string>
-    <string name="resting_position_icon_summary">Ikonet vises, når du ikke er i bevægelse.</string>
+    <string name="resting_position_icon_summary">Ikon, der vises, når du ikke bevæger dig.</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Hvile- og navigationsposition</string>
     <string name="view_angle_description">Viser det kegleformede område, du aktuelt vender mod</string>
-    <string name="view_angle">Synsvinkel</string>
+    <string name="view_angle">Betragtningsvinkel</string>
     <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
     <string name="location_radius">Placeringsradius</string>
     <string name="resting_position">Hvileposition</string>
