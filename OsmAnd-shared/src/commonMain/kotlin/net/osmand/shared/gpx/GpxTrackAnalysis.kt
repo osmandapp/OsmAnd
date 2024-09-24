@@ -168,7 +168,9 @@ class GpxTrackAnalysis {
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
 	fun isTimeSpecified(): Boolean {
-		return startTime != Long.MAX_VALUE && startTime != 0L
+		val startTime = startTime
+		val endTime = endTime
+		return startTime != Long.MAX_VALUE && startTime != 0L && endTime != Long.MIN_VALUE && endTime != 0L
 	}
 
 	fun isTimeMoving(): Boolean {

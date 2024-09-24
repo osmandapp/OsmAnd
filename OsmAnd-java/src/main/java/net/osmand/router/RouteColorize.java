@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class RouteColorize {
 
 	public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters

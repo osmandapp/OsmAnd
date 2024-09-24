@@ -1533,7 +1533,7 @@
     <string name="poi_ramp_luggage_yes">Rampe pour bagages : oui</string>
     <string name="poi_ramp_luggage_no">Rampe pour bagages : non</string>
     <string name="poi_cairn">Cairn</string>
-    <string name="poi_defibrillator">Défibrillateur</string>
+    <string name="poi_defibrillator">Défibrillateur;DAE</string>
     <string name="poi_defibrillator_yes">Défibrillateur : oui</string>
     <string name="poi_tomb_tumulus">Type : tumulus</string>
     <string name="poi_tomb_columbarium">Type : columbarium</string>

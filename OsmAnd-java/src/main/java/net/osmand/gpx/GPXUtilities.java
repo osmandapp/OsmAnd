@@ -53,6 +53,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
 
+@Deprecated
 public class GPXUtilities {
 
 	public static final Log log = PlatformUtil.getLog(GPXUtilities.class);

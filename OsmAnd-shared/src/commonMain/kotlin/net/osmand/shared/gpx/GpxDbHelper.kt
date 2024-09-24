@@ -4,6 +4,11 @@ import co.touchlab.stately.collections.ConcurrentMutableList
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import co.touchlab.stately.concurrency.Synchronizable
 import co.touchlab.stately.concurrency.synchronize
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
@@ -11,7 +16,7 @@ import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxReader.GpxDbReaderCallback
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
-import kotlin.random.Random
+
 
 object GpxDbHelper : GpxDbReaderCallback {
 	val log = LoggerFactory.getLogger("GpxDbHelper")
@@ -51,17 +56,32 @@ object GpxDbHelper : GpxDbReaderCallback {
 	private suspend fun loadGpxItems() {
 		val start = currentTimeMillis()
 		val items = getItems()
-		val fileExistenceMap = items.associate { it.file to it.file.exists() }
+		val startEx = currentTimeMillis()
+		val fileExistenceMap = getFileExistenceMap(items)
+		log.info("Time to getFileExistenceMap ${currentTimeMillis() - startEx} ms, ${items.size} items")
 
+		val itemsToCache = mutableMapOf<KFile, GpxDataItem>()
+		val itemsToRemove = mutableSetOf<KFile>()
 		items.forEach { item ->
 			val file = item.file
 			if (fileExistenceMap[file] == true) {
-				dataItems[file] = item
+				itemsToCache[file] = item
 			} else {
-				remove(file)
+				itemsToRemove.add(file)
 			}
 		}
+		putToCacheBulk(itemsToCache);
+		removeFromCacheBulk(itemsToRemove);
 		log.info("Time to loadGpxItems ${currentTimeMillis() - start} ms, ${items.size} items")
+	}
+
+	private suspend fun getFileExistenceMap(
+		items: List<GpxDataItem>,
+		batchSize: Int = 100
+	): Map<KFile, Boolean> = coroutineScope {
+		items.chunked(batchSize).map { batch ->
+			async(Dispatchers.IO) { batch.associate { it.file to it.file.exists() } }
+		}.awaitAll().fold(mutableMapOf()) { acc, map -> acc.apply { putAll(map) } }
 	}
 
 	private fun loadGpxDirItems() {
@@ -94,6 +114,14 @@ object GpxDbHelper : GpxDbReaderCallback {
 		} else {
 			dirItems.remove(file)
 		}
+	}
+
+	private fun putToCacheBulk(itemsToCache: Map<KFile, GpxDataItem>) {
+		dataItems.putAll(itemsToCache)
+	}
+
+	private fun removeFromCacheBulk(filesToRemove: Set<KFile>) {
+		dataItems.keys.removeAll(filesToRemove)
 	}
 
 	fun rename(currentFile: KFile, newFile: KFile): Boolean {

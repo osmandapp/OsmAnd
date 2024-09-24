@@ -31,7 +31,8 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 			items.addAll(folder.getTrackItems())
 		}
 		var totalDistanceSum = 0.0
-		for (trackItem in items.sortedBy { it.name }) {
+		var timeSpanSum = 0.0
+		for (trackItem in items) {
 			val dataItem = trackItem.dataItem
 			val analysis = dataItem?.getAnalysis()
 			if (analysis != null) {
@@ -43,11 +44,12 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 					fileSize += file.length()
 				}
 				if (analysis.isTimeSpecified()) {
-					timeSpan = (timeSpan + analysis.getDurationInMs() / 1000.0).toInt()
+					timeSpanSum += analysis.getDurationInMs() / 1000.0
 				}
 			}
 		}
 		totalDistance = totalDistanceSum.toFloat()
+		timeSpan = timeSpanSum.toInt()
 		tracksCount = items.size
 
 		log.info(">>>> ${folder.getName()} = (tracks: $tracksCount, totalDistance: ${"%.2f".format(totalDistance)}, " +
