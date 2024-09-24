@@ -3309,7 +3309,7 @@
     <string name="monitoring_min_speed_descr_side_effect">Kõrvaltoime: teie rajal puuduvad kõik lõigud, kus minimaalse kiiruse kriteerium ei olnud täidetud (nt kus lükkate oma ratta järsust mäest üles). Samuti puudub teave puhkeperioodide, näiteks puhkepauside kohta. See mõjutab iga analüüsi või järeltöötlust, näiteks kui proovite määrata reisi kogupikkust, liikumisaega või keskmist kiirust.</string>
     <string name="monitoring_min_speed_descr_recommendation">Soovitus: proovige kõigepealt kasutada liikumisandurit minimaalse nihkefiltri (B) kaudu, kuna see võib anda paremaid tulemusi ja te kaotate vähem andmeid. Kui teie rajad jäävad madalatel kiirustel lärmakaks, proovige siin nullist erinevat väärtust. Pange tähele, et mõned mõõtmised ei pruugi kiiruse väärtust üldse anda (mõned võrgupõhised meetodid), sellisel juhul ei salvestaks te midagi.</string>
     <string name="monitoring_min_speed_descr_remark">Märkus: kiirus &gt; 0 kontroll: enamik GPS-kiibikomplekte teatab kiiruse väärtuse ainult siis, kui algoritm määrab teie liikumise, ja mitte ükski, kui te pole. Seega kasutab filtri sätte &gt; 0 kasutamine teatud mõttes GPS-kiibistiku liikumistuvastust. Kuid isegi kui seda siin salvestuse ajal ei filtreerita, kasutame seda funktsiooni oma GPX analüüsis korrigeeritud vahemaa määramiseks, st sellel väljal kuvatav väärtus on liikumisel salvestatud vahemaa.</string>
-    <string name="monitoring_min_accuracy_descr">See registreerib ainult minimaalse täpsusnäiduga mõõdetud punktid (meetrites / jalgades, nagu Androidi teatas teie kiibistiku kohta). Täpsus on mõõtmiste lähedus tegelikule asukohale ega ole otseselt seotud täpsusega, mis on korduvate mõõtmiste hajumine.</string>
+    <string name="monitoring_min_accuracy_descr">See registreerib ainult minimaalse täpsusnäiduga mõõdetud punktid (meetrites / jalgades, nagu Android teatas sinu nutiseadme kiibistiku kohta). Täpsus on mõõtmiste lähedus tegelikule asukohale ega ole otseselt seotud täpsusega, mis on korduvate mõõtmiste hajumine.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Kõrvaltoime: täpsusega filtreerimise tulemusel võivad punktid olla näiteks sildade all, puude all, kõrgete hoonete vahel või teatud ilmastikutingimuste korral.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Soovitus: raske on ennustada, mida salvestatakse ja mida mitte, võib-olla oleks parem see filter välja lülitada.</string>
     <string name="monitoring_min_accuracy_descr_remark">Märkus: kui GPS oleks välja lülitatud vahetult enne salvestust, võib esimese mõõdetud punkti täpsus olla vähenenud, nii et meie koodis võiksime enne punkti salvestamist oodata umbes sekund (või salvestada 3 järjestikuse punkti parimad andmed jne.), kuid seda pole veel rakendatud.</string>
@@ -3562,7 +3562,7 @@
     <string name="screen_timeout_descr">Kui %1$s on sisse lülitatud, siis aktiivseks loetav aeg sõltub sellest.</string>
     <string name="default_screen_timeout">Ekraani väljalülitamise vaikimisi aeg</string>
     <string name="shared_string_tones">toonid</string>
-    <string name="shared_string_meters">meetrit</string>
+    <string name="shared_string_meters">Meetrid</string>
     <string name="details_dialog_decr">Näita või peida täiendavaid andmeid kaardil</string>
     <string name="export_profile_dialog_description">Vali koos profiiliga eksporditavad lisaandmed.</string>
     <string name="profile_prefs_reset_successful">Kõik profiili seadistused on lähtestatud.</string>
@@ -3896,7 +3896,7 @@
     <string name="shared_string_server_url">Serveri aadress</string>
     <string name="shared_string_enter_param">Sisesta parameeter</string>
     <string name="keep_it_empty_if_not">Vastasel korral jäta tühjaks</string>
-    <string name="online_routing_example_hint">Kohaviit võigi parameetritega näeb välja nii:</string>
+    <string name="online_routing_example_hint">Kohaviit kõigi parameetritega näeb välja nii:</string>
     <string name="test_route_calculation">Proovi marsruudi arvutust</string>
     <string name="routing_engine_vehicle_type_driving">Sõites</string>
     <string name="routing_engine_vehicle_type_foot">Jalgsi</string>
