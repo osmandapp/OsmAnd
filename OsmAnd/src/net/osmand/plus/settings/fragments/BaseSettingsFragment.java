@@ -904,14 +904,30 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return preference;
 	}
 
+	public static @NonNull Fragment createFragment(final String fragmentClassName,
+												   final @NonNull Context context,
+												   final @Nullable ApplicationMode appMode,
+												   final @NonNull Bundle args,
+												   final @Nullable Fragment target) {
+		final Fragment fragment = Fragment.instantiate(context, fragmentClassName);
+		if (appMode != null) {
+			args.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
+		fragment.setArguments(args);
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
+
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {
-		return showInstance(activity, screenType, null);
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, null, new Bundle(), null);
+		return showFragment(fragment, activity, screenType.fragmentName);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
 									   @NonNull SettingsScreenType screenType,
 									   @Nullable ApplicationMode appMode) {
-		return showInstance(activity, screenType, appMode, new Bundle(), null);
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, appMode, new Bundle(), null);
+		return showFragment(fragment, activity, screenType.fragmentName);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
@@ -919,18 +935,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 									   @Nullable ApplicationMode appMode,
 									   @NonNull Bundle args,
 									   @Nullable Fragment target) {
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, appMode, args, target);
+		return showFragment(fragment, activity, screenType.fragmentName);
+	}
+
+	public static boolean showFragment(final Fragment fragment,
+										final @NonNull FragmentActivity activity,
+										final String fragmentName) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			String tag = screenType.fragmentName;
-			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
-				Fragment fragment = Fragment.instantiate(activity, tag);
-				if (appMode != null) {
-					args.putString(APP_MODE_KEY, appMode.getStringKey());
-				}
-				fragment.setArguments(args);
-				fragment.setTargetFragment(target, 0);
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, fragmentName)) {
 				fragmentManager.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, tag)
+						.replace(R.id.fragmentContainer, fragment, fragmentName)
 						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;

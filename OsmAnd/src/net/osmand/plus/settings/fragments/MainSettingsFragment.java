@@ -5,6 +5,7 @@ import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -31,6 +34,8 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.Info;
+import net.osmand.plus.settings.fragments.search.InfoProvider;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
@@ -41,9 +46,10 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
-public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
+public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback, InfoProvider {
 
 	public static final String TAG = MainSettingsFragment.class.getName();
 
@@ -122,9 +128,9 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE,
-					ApplicationMode.valueOfStringKey(prefId, null));
+		final Optional<Info> info = getInfo(preference);
+		if (info.isPresent()) {
+			info.get().showFragment(info.get().createFragment(getContext()));
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
@@ -163,6 +169,40 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		}
 
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<Info> getInfo(final Preference preference) {
+		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
+			final String fragmentName = SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
+			return Optional.of(
+					new Info() {
+
+						@Override
+						public Class<? extends Fragment> getClazz() {
+							return FragmentFactory.loadFragmentClass(getActivity().getClassLoader(), fragmentName);
+						}
+
+						@Override
+						public Fragment createFragment(final Context context) {
+							return BaseSettingsFragment.createFragment(
+									fragmentName,
+									context,
+									ApplicationMode.valueOfStringKey(preference.getKey(), null),
+									new Bundle(),
+									null);
+						}
+
+						@Override
+						public boolean showFragment(final Fragment fragment) {
+							return BaseSettingsFragment.showFragment(
+									fragment,
+									getActivity(),
+									fragmentName);
+						}
+					});
+		}
+		return Optional.empty();
 	}
 
 	private void setupLocalBackup() {
