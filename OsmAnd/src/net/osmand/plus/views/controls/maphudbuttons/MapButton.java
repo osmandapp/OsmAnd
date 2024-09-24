@@ -409,6 +409,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return AndroidUtils.dpToPx(getContext(), params.getSize());
 	}
 
+	public int getShadowRadius() {
+		return shadowRadius;
+	}
+
 	@NonNull
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_quick_action", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
