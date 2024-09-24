@@ -746,6 +746,8 @@ public class MapRendererContext {
 		}
 		object.markAsPolygon(true);
 		object.setOrder(order);
+		object.setLabelX(mapObject.getLabelCoordinateX());
+		object.setLabelY(mapObject.getLabelCoordinateY());
 
 		if (Algorithms.isEmpty(object.getName())) {
 			String captionInNativeLanguage = mapObject.getCaptionInNativeLanguage();

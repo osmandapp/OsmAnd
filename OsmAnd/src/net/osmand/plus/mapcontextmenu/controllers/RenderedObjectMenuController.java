@@ -12,14 +12,12 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.RenderedObjectMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
@@ -27,15 +25,11 @@ public class RenderedObjectMenuController extends MenuController {
 	private static final String POI_PREFIX = "poi";
 
 	private RenderedObject renderedObject;
-	private final List<String> DEFAULT_TAGS = new ArrayList<>() {{
-		add("amenity");
-		add("landuse");
-	}};
 
 	public RenderedObjectMenuController(@NonNull MapActivity mapActivity,
 	                                    @NonNull PointDescription pointDescription,
 	                                    @NonNull RenderedObject renderedObject) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		super(new RenderedObjectMenuBuilder(mapActivity, renderedObject), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		setRenderedObject(renderedObject);
 	}
