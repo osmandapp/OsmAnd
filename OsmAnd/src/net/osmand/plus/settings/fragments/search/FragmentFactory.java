@@ -27,16 +27,20 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	private static Fragment _instantiate(final String fragmentClassName,
 										 final Optional<PreferenceWithHost> src,
 										 final Context context) {
-		if (src.isPresent() && src.get().host() instanceof final InfoProvider infoProvider) {
-			final Optional<Info> info = infoProvider.getInfo(src.get().preference());
-			// FK-TODO: refactor using methods of Optional
-			if (info.isPresent()) {
-				return info.get().createPreferenceFragment(context, null);
-			}
-		}
-		final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
-		src.ifPresent(_src -> configureFragment(fragment, _src));
-		return fragment;
+		return FragmentFactory
+				.instantiate(src, context)
+				.orElseGet(() -> {
+					final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);
+					src.ifPresent(_src -> configureFragment(fragment, _src));
+					return fragment;
+				});
+	}
+
+	private static Optional<Fragment> instantiate(final Optional<PreferenceWithHost> src, final Context context) {
+		return src
+				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof InfoProvider)
+				.flatMap(preferenceWithHost -> ((InfoProvider) preferenceWithHost.host()).getInfo(preferenceWithHost.preference()))
+				.map(info -> info.createPreferenceFragment(context, null));
 	}
 
 	private static void configureFragment(final Fragment fragment, final PreferenceWithHost src) {
