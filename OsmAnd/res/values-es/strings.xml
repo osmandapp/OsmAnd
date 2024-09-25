@@ -3526,7 +3526,7 @@
     <string name="app_mode_ski_snowmobile">Motonieve</string>
     <string name="custom_osmand_plugin">Complemento personalizado de OsmAnd</string>
     <string name="shared_string_items">Elementos</string>
-    <string name="select_wikipedia_article_langs">Marca los idiomas de los artículos de Wikipedia en el mapa. Cambia a cualquier idioma disponible mientras lees el artículo.</string>
+    <string name="select_wikipedia_article_langs">Selecciona los idiomas de los artículos de Wikipedia en el mapa. Cambia a cualquier idioma disponible mientras lees el artículo.</string>
     <string name="some_articles_may_not_available_in_lang">Es posible que algunos artículos de Wikipedia no estén disponibles en tu idioma.</string>
     <string name="lang_zhyue">Cantonés</string>
     <string name="lang_tt">Tártaro</string>

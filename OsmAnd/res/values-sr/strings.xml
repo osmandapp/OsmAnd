@@ -4662,7 +4662,7 @@
     <string name="download_heightmap_maps">Висинска карта</string>
     <string name="av_notes_photo_widget_desc">Тап по справици ће усликати слику.</string>
     <string name="compass_always_visible">Увек видљиво</string>
-    <string name="compass_click_desc">Тапните по компасу ради промене усмерења карте.</string>
+    <string name="compass_click_desc">Дупло тапните по компасу ради промене усмерења карте.</string>
     <string name="compass_desc">Приказује усмерење ка северу.</string>
     <string name="go_to_marker_location">Иди на положај ознаке</string>
     <string name="altitude_correction">Исправка надморске висине</string>

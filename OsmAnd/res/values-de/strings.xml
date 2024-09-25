@@ -4722,7 +4722,7 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um die Art der Kartenausrichtung zu ändern.</string>
+    <string name="compass_click_desc">Doppeltes Tippen auf die Kompass-Schaltfläche wechselt den Kartenausrichtungsmodus.</string>
     <string name="compass_desc">Zeigt Richtung Norden.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
@@ -5940,4 +5940,14 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Wasserstoff</string>
     <string name="obd_fuel_type_unknown">Unbekannter Kraftstoff</string>
     <string name="obd_widget_group">Fahrzeugangaben</string>
+    <string name="obd_air_intake_temp">Ansauglufttemperatur</string>
+    <string name="obd_ambient_air_temp">Umgebungslufttemperatur</string>
+    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur des Motors</string>
+    <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
+    <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
+    <string name="obd_fuel_type">Kraftstofftyp</string>
+    <string name="obd_plugin_name">Fahrzeugangaben</string>
+    <string name="obd_plugin_description">Zugriff auf Ihre Fahrzeuginformationen über das OBD-Protokoll</string>
+    <string name="obd_support">OBD Unterstützung</string>
+    <string name="obd_battery_voltage">Batteriespannung</string>
 </resources>
