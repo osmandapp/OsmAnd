@@ -4,10 +4,8 @@ import androidx.preference.Preference;
 
 import java.util.Optional;
 
-// FK-TODO: rename
 @FunctionalInterface
-public interface InfoProvider {
+public interface PreferenceFragmentHandlerProvider {
 
-	// FK-TODO: rename method
-	Optional<Info> getInfo(Preference preference);
+	Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(Preference preference);
 }

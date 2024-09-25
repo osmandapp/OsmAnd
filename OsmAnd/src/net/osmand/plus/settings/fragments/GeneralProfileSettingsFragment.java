@@ -36,8 +36,8 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.fragments.search.Info;
-import net.osmand.plus.settings.fragments.search.InfoProvider;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -53,7 +53,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider, InfoProvider {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider, PreferenceFragmentHandlerProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -393,9 +393,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			show(preferenceDialog.get());
 			return true;
 		}
-		final Optional<Info> info = getInfo(preference);
-		if (info.isPresent()) {
-			info.get().showPreferenceFragment(info.get().createPreferenceFragment(getContext(), this));
+		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
+		if (preferenceFragmentHandler.isPresent()) {
+			preferenceFragmentHandler.get().showPreferenceFragment(
+					preferenceFragmentHandler.get().createPreferenceFragment(
+							getContext(),
+							this));
 			return true;
 		}
 		String key = preference.getKey();
@@ -414,10 +417,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	@Override
-	public Optional<Info> getInfo(final Preference preference) {
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
 		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(preference.getKey())) {
 			return Optional.of(
-					new Info() {
+					new PreferenceFragmentHandler() {
 
 						@Override
 						public String getClassNameOfPreferenceFragment() {

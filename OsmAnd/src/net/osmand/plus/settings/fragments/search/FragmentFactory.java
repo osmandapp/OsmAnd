@@ -38,9 +38,9 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 
 	private static Optional<Fragment> instantiate(final Optional<PreferenceWithHost> src, final Context context) {
 		return src
-				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof InfoProvider)
-				.flatMap(preferenceWithHost -> ((InfoProvider) preferenceWithHost.host()).getInfo(preferenceWithHost.preference()))
-				.map(info -> info.createPreferenceFragment(context, null));
+				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
+				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
+				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, null));
 	}
 
 	private static void configureFragment(final Fragment fragment, final PreferenceWithHost src) {

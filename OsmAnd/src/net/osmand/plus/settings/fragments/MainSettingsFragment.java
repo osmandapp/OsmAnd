@@ -34,8 +34,8 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
-import net.osmand.plus.settings.fragments.search.Info;
-import net.osmand.plus.settings.fragments.search.InfoProvider;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback, InfoProvider {
+public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback, PreferenceFragmentHandlerProvider {
 
 	public static final String TAG = MainSettingsFragment.class.getName();
 
@@ -128,9 +128,12 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		final Optional<Info> info = getInfo(preference);
-		if (info.isPresent()) {
-			info.get().showPreferenceFragment(info.get().createPreferenceFragment(getContext(), this));
+		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
+		if (preferenceFragmentHandler.isPresent()) {
+			preferenceFragmentHandler.get().showPreferenceFragment(
+					preferenceFragmentHandler.get().createPreferenceFragment(
+							getContext(),
+							this));
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
@@ -172,10 +175,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	}
 
 	@Override
-	public Optional<Info> getInfo(final Preference preference) {
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
 		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
 			return Optional.of(
-					new Info() {
+					new PreferenceFragmentHandler() {
 
 						@Override
 						public String getClassNameOfPreferenceFragment() {

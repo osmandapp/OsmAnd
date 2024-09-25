@@ -5,8 +5,7 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
-// FK-TODO: rename
-public interface Info {
+public interface PreferenceFragmentHandler {
 
 	String getClassNameOfPreferenceFragment();
 

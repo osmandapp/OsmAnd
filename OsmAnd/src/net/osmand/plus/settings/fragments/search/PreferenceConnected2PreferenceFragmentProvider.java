@@ -9,10 +9,10 @@ class PreferenceConnected2PreferenceFragmentProvider implements de.KnollFrank.li
 
 	@Override
 	public Optional<String> getClassNameOfConnectedPreferenceFragment(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
-		return hostOfPreference instanceof final InfoProvider infoProvider ?
-				infoProvider
-						.getInfo(preference)
-						.map(Info::getClassNameOfPreferenceFragment) :
+		return hostOfPreference instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider ?
+				preferenceFragmentHandlerProvider
+						.getPreferenceFragmentHandler(preference)
+						.map(PreferenceFragmentHandler::getClassNameOfPreferenceFragment) :
 				Optional.empty();
 	}
 }
