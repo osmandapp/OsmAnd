@@ -5934,4 +5934,11 @@
     <string name="no_photos_available">Нет доступных фотографий</string>
     <string name="wikimedia">Викимедиа</string>
     <string name="percent_unit">%</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_widget_group">Показатели автомобиля</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">об/мин</string>
+    <string name="obd_speed_desc">Виджет показывает скорость автомобиля через датчик OBD</string>
+    <string name="obd_rpm_desc">Виджет показывает обороты тахометра автомобиля через датчик OBD</string>
+    <string name="unit_volt">В</string>
 </resources>
