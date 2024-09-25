@@ -29,8 +29,9 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 										 final Context context) {
 		if (src.isPresent() && src.get().host() instanceof final InfoProvider infoProvider) {
 			final Optional<Info> info = infoProvider.getInfo(src.get().preference());
+			// FK-TODO: refactor using methods of Optional
 			if (info.isPresent()) {
-				return info.get().createFragment(context);
+				return info.get().createPreferenceFragment(context, null);
 			}
 		}
 		final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context);

@@ -20,6 +20,7 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -35,6 +36,8 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.fragments.search.Info;
+import net.osmand.plus.settings.fragments.search.InfoProvider;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -50,7 +53,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider, InfoProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -390,6 +393,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			show(preferenceDialog.get());
 			return true;
 		}
+		final Optional<Info> info = getInfo(preference);
+		if (info.isPresent()) {
+			info.get().showPreferenceFragment(info.get().createPreferenceFragment(getContext(), this));
+			return true;
+		}
 		String key = preference.getKey();
 		ApplicationMode appMode = getSelectedAppMode();
 		if (settings.DRIVING_REGION.getId().equals(key)) {
@@ -402,11 +410,42 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			controller.setCallback(this);
 			return true;
 		}
-		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(key)) {
-			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
-			return true;
-		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<Info> getInfo(final Preference preference) {
+		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(preference.getKey())) {
+			// FK-TODO: Info erzeugen und in PreferenceConnected2PreferenceFragmentProvider diese Info abfragen statt dem folgenden DRY-IF:
+			return Optional.of(
+					new Info() {
+
+						@Override
+						public String getClassNameOfPreferenceFragment() {
+							return EXTERNAL_INPUT_DEVICE.fragmentName;
+						}
+
+						@Override
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+									getClassNameOfPreferenceFragment(),
+									context,
+									getSelectedAppMode(),
+									new Bundle(),
+									target);
+						}
+
+						@Override
+						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+							return BaseSettingsFragment.showFragment(
+									preferenceFragment,
+									requireActivity(),
+									getClassNameOfPreferenceFragment());
+						}
+					}
+			);
+		}
+		return Optional.empty();
 	}
 
 	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,

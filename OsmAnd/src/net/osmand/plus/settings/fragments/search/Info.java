@@ -3,14 +3,14 @@ package net.osmand.plus.settings.fragments.search;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 // FK-TODO: rename
 public interface Info {
 
-	// FK-TODO: remove method
-	Class<? extends Fragment> getClazz();
+	String getClassNameOfPreferenceFragment();
 
-	Fragment createFragment(final Context context);
+	PreferenceFragmentCompat createPreferenceFragment(Context context, final Fragment target);
 
-	boolean showFragment(Fragment fragment);
+	boolean showPreferenceFragment(PreferenceFragmentCompat preferenceFragment);
 }

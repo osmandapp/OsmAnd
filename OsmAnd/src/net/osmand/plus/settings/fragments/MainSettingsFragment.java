@@ -17,10 +17,10 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.OsmandApplication;
@@ -130,7 +130,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		String prefId = preference.getKey();
 		final Optional<Info> info = getInfo(preference);
 		if (info.isPresent()) {
-			info.get().showFragment(info.get().createFragment(getContext()));
+			info.get().showPreferenceFragment(info.get().createPreferenceFragment(getContext(), this));
 			return true;
 		} else if (CREATE_PROFILE.equals(prefId)) {
 			if (getActivity() != null) {
@@ -174,31 +174,30 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	public Optional<Info> getInfo(final Preference preference) {
 		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			final String fragmentName = SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
 			return Optional.of(
 					new Info() {
 
 						@Override
-						public Class<? extends Fragment> getClazz() {
-							return FragmentFactory.loadFragmentClass(getActivity().getClassLoader(), fragmentName);
+						public String getClassNameOfPreferenceFragment() {
+							return SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
 						}
 
 						@Override
-						public Fragment createFragment(final Context context) {
-							return BaseSettingsFragment.createFragment(
-									fragmentName,
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+									getClassNameOfPreferenceFragment(),
 									context,
 									ApplicationMode.valueOfStringKey(preference.getKey(), null),
 									new Bundle(),
-									null);
+									target);
 						}
 
 						@Override
-						public boolean showFragment(final Fragment fragment) {
+						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
 							return BaseSettingsFragment.showFragment(
-									fragment,
+									preferenceFragment,
 									getActivity(),
-									fragmentName);
+									getClassNameOfPreferenceFragment());
 						}
 					});
 		}
@@ -312,7 +311,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		final SettingsSearchButtonHelper settingsSearchButtonHelper =
 				new SettingsSearchButtonHelper(
 						this,
-						settings,
 						R.id.fragmentContainer);
 		settingsSearchButtonHelper.configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
