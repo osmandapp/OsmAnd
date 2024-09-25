@@ -9,7 +9,6 @@ class PreferenceConnected2PreferenceFragmentProvider implements de.KnollFrank.li
 
 	@Override
 	public Optional<String> getClassNameOfConnectedPreferenceFragment(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
-		// FK-FIXME: MainExternalInputDevicesFragment muß in der FragmentFactory (genauer: FragmentFactoryAndPrepareShow) korrekt instanziiert werden und zwar genau wie in GeneralProfileSettingsFragment.onPreferenceClick() { ... showInstance() ... }
 		return hostOfPreference instanceof final InfoProvider infoProvider ?
 				infoProvider
 						.getInfo(preference)
