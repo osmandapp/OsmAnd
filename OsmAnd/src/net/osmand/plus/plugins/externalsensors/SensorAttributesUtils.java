@@ -90,7 +90,7 @@ public class SensorAttributesUtils {
 
 			attribute.setAttributeValue(tag, value);
 
-			if (!analysis.hasData(tag) && attribute.hasValidValue(tag) && analysis.getTotalDistance() > 0) {
+			if (!analysis.hasData(tag) && attribute.hasValidValue(tag)) {
 				analysis.setHasData(tag, true);
 			}
 		}
