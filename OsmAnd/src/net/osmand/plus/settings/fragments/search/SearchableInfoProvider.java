@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import androidx.preference.Preference;
+
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -11,29 +13,27 @@ import java.util.List;
 import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.common.Lists;
-import de.KnollFrank.lib.settingssearch.search.provider.SearchableInfoProvider;
 
-class CustomSearchableInfoProviderFactory {
+class SearchableInfoProvider implements de.KnollFrank.lib.settingssearch.search.provider.SearchableInfoProvider {
 
-	public static SearchableInfoProvider createCustomSearchableInfoProvider() {
-		return preference -> {
-			if (preference instanceof final ListPreferenceEx listPreferenceEx) {
-				return Optional.of(getSearchableInfo(listPreferenceEx));
-			}
-			if (preference instanceof final SwitchPreferenceEx switchPreferenceEx) {
-				return Optional.of(getSearchableInfo(switchPreferenceEx));
-			}
-			if (preference instanceof final MultiSelectBooleanPreference multiSelectBooleanPreference) {
-				return Optional.of(getSearchableInfo(multiSelectBooleanPreference));
-			}
-			if (preference instanceof final EditTextPreferenceEx editTextPreferenceEx) {
-				return Optional.of(getSearchableInfo(editTextPreferenceEx));
-			}
-			if (preference instanceof final SizePreference sizePreference) {
-				return Optional.of(getSizePreferenceSearchableInfo(sizePreference));
-			}
-			return Optional.empty();
-		};
+	@Override
+	public Optional<String> getSearchableInfo(final Preference preference) {
+		if (preference instanceof final ListPreferenceEx listPreferenceEx) {
+			return Optional.of(getSearchableInfo(listPreferenceEx));
+		}
+		if (preference instanceof final SwitchPreferenceEx switchPreferenceEx) {
+			return Optional.of(getSearchableInfo(switchPreferenceEx));
+		}
+		if (preference instanceof final MultiSelectBooleanPreference multiSelectBooleanPreference) {
+			return Optional.of(getSearchableInfo(multiSelectBooleanPreference));
+		}
+		if (preference instanceof final EditTextPreferenceEx editTextPreferenceEx) {
+			return Optional.of(getSearchableInfo(editTextPreferenceEx));
+		}
+		if (preference instanceof final SizePreference sizePreference) {
+			return Optional.of(getSizePreferenceSearchableInfo(sizePreference));
+		}
+		return Optional.empty();
 	}
 
 	private static String getSearchableInfo(final ListPreferenceEx preference) {

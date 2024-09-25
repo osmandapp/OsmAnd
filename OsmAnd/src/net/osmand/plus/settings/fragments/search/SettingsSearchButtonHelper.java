@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.CustomSearchableInfoProviderFactory.createCustomSearchableInfoProvider;
-
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,14 +42,8 @@ public class SettingsSearchButtonHelper {
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
-				.withSearchableInfoProvider(createCustomSearchableInfoProvider())
-				.withPreferenceDialogAndSearchableInfoProvider(
-						(hostOfPreference, preference) ->
-								// FK-TODO: handle more preference dialogs, which shall be searchable
-								// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
-								hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider ?
-										searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference) :
-										Optional.empty())
+				.withSearchableInfoProvider(new SearchableInfoProvider())
+				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.build();
 	}
 

@@ -4,7 +4,7 @@ import static net.osmand.plus.settings.fragments.search.SettingsSearchConfigurer
 
 import androidx.preference.PreferenceFragmentCompat;
 
-class PrepareShow implements de.KnollFrank.lib.settingssearch.provider.PrepareShow{
+class PrepareShow implements de.KnollFrank.lib.settingssearch.provider.PrepareShow {
 
 	@Override
 	public void prepareShow(final PreferenceFragmentCompat preferenceFragment) {
