@@ -432,7 +432,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			dir.mkdirs();
 			dir.setLastModified(System.currentTimeMillis());
 		}
-		reloadTracks();
+		reloadTracks(true);
 	}
 
 	@Override
@@ -483,7 +483,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void reloadTracks() {
-		reloadTracks(true);
+		reloadTracks(false);
 	}
 
 	protected void reloadTracks(boolean forceLoad) {

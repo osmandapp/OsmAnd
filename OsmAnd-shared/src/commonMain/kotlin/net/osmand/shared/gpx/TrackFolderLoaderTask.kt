@@ -27,6 +27,7 @@ class TrackFolderLoaderTask(
 		private const val PROGRESS_BATCH_SIZE = 70
 
 		private var cachedRootFolder: TrackFolder? = null
+		private var cachedDbItemsVersion = -1
 	}
 
 	private var loadingTime = 0L
@@ -35,7 +36,7 @@ class TrackFolderLoaderTask(
 	private var progressSync = Synchronizable()
 
 	private fun shouldLoadFolder(cachedRootFolder: TrackFolder?) =
-		forceLoad || cachedRootFolder == null || !folder.isRootFolder
+		forceLoad || cachedRootFolder == null || !folder.isRootFolder || cachedDbItemsVersion != GpxDbHelper.getItemsVersion()
 
 	override fun onPreExecute() {
 		if (shouldLoadFolder(cachedRootFolder)) listener.loadTracksStarted()
@@ -59,6 +60,7 @@ class TrackFolderLoaderTask(
 		loadGPXFolder(folder, progress)
 		if (folder.isRootFolder) {
 			Companion.cachedRootFolder = TrackFolder(folder)
+			cachedDbItemsVersion = GpxDbHelper.getItemsVersion()
 		}
 
 		listener.tracksLoaded(folder)
@@ -155,7 +157,7 @@ class TrackFolderLoaderTask(
 				if (file == item.file) {
 					trackItem.dataItem = item
 				}
-				if (lastItem) {
+				if (lastItem && !isRunning()) {
 					resetCachedData(folder)
 					listener.deferredLoadTracksFinished(folder)
 				}

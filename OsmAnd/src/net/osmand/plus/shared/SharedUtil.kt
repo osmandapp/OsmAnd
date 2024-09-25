@@ -7,6 +7,8 @@ import net.osmand.gpx.GPXUtilities
 import net.osmand.shared.KException
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.extensions.jFile
+import net.osmand.shared.extensions.kFile
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxUtilities
@@ -57,14 +59,10 @@ object SharedUtil {
 	}
 
 	@JvmStatic
-	fun kFile(file: File): KFile {
-		return KFile(file.absolutePath)
-	}
+	fun kFile(file: File): KFile = file.kFile()
 
 	@JvmStatic
-	fun jFile(file: KFile): File {
-		return File(file.absolutePath())
-	}
+	fun jFile(file: KFile): File = file.jFile()
 
 	@JvmStatic
 	fun kException(e: Exception): KException {
@@ -405,6 +403,7 @@ object SharedUtil {
 	@JvmStatic
 	fun kGpxFile(gpxFile: GPXFile): GpxFile {
 		val kGpxFile = GpxFile(gpxFile.author)
+		kGpxFile.path = gpxFile.path
 		if (gpxFile.metadata != null) {
 			kGpxFile.metadata = kMetadata(gpxFile.metadata)
 		}

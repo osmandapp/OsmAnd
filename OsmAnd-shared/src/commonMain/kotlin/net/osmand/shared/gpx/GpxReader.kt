@@ -8,11 +8,8 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 
-class GpxReader(
-	private val readingItems: MutableList<KFile>,
-	private val readingItemsMap: MutableMap<KFile, GpxDataItem>,
-	private val listener: GpxDbReaderCallback?
-) : KAsyncTask<Unit, GpxDataItem, Unit>(true) {
+class GpxReader(private val adapter: GpxReaderAdapter)
+	: KAsyncTask<Unit, GpxDataItem, Unit>(true) {
 
 	companion object {
 		private val log = LoggerFactory.getLogger("GpxReader")
@@ -23,7 +20,8 @@ class GpxReader(
 	}
 
 	private val database: GpxDatabase = GpxDbHelper.getGPXDatabase()
-	var file: KFile? = null
+	private var currentFile: KFile? = null
+	private var currentItem: GpxDataItem? = null
 
 	override suspend fun doInBackground(vararg params: Unit) {
 		waitForInitialization()
@@ -37,45 +35,56 @@ class GpxReader(
 	}
 
 	private fun doReading() {
-		log.info(">>>> start GpxReader ===== ")
 		var filesCount = 0
 		val conn = database.openConnection(false)
 		if (conn != null) {
 			try {
-				file = readingItems.removeFirstOrNull()
+				var file: KFile?
+				var item: GpxDataItem?
+				pullNextFileItem()
+				file = currentFile
+				item = currentItem
 				while (file != null && !isCancelled()) {
-					var item = readingItemsMap.remove(file)
 					if (GpxDbUtils.isAnalyseNeeded(item)) {
-						item = updateGpxDataItem(conn, item, file!!)
+						item = updateGpxDataItem(conn, item, file)
 					}
 					if (item != null) {
-						listener?.onGpxDataItemRead(item)
+						adapter.onGpxDataItemRead(item)
 						publishProgress(item)
 					}
-					file = readingItems.removeFirstOrNull()
+
+					pullNextFileItem()
+					file = currentFile
+					item = currentItem
 					filesCount++
 				}
 			} catch (e: Exception) {
 				log.error(e.message)
 			} finally {
 				conn.close()
-				log.info(">>>> done GpxReader ===== filesCount=$filesCount")
 			}
 		} else {
 			cancel()
 		}
 	}
 
+	private fun pullNextFileItem() {
+		adapter.pullNextFileItem {
+			currentFile = it?.first
+			currentItem = it?.second
+		}
+	}
+
 	override fun onProgressUpdate(vararg values: GpxDataItem) {
-		listener?.onProgressUpdate(*values)
+		adapter.onProgressUpdate(*values)
 	}
 
 	override fun onCancelled() {
-		listener?.onReadingCancelled()
+		adapter.onReadingCancelled()
 	}
 
 	override fun onPostExecute(result: Unit) {
-		listener?.onReadingFinished(this, isCancelled())
+		adapter.onReadingFinished(this, isCancelled())
 	}
 
 	private fun updateGpxDataItem(conn: SQLiteConnection, item: GpxDataItem?, file: KFile): GpxDataItem {
@@ -134,12 +143,16 @@ class GpxReader(
 		}
 	}
 
-	fun isReading(): Boolean = readingItems.isNotEmpty() || file != null
+	fun isReading(): Boolean = isRunning()
 
-	interface GpxDbReaderCallback {
-		fun onGpxDataItemRead(item: GpxDataItem)
-		fun onProgressUpdate(vararg dataItems: GpxDataItem)
-		fun onReadingCancelled()
-		fun onReadingFinished(reader: GpxReader, cancelled: Boolean)
+	fun isReading(file: KFile): Boolean = currentFile == file
+
+	interface GpxReaderAdapter {
+		fun pullNextFileItem(action: ((Pair<KFile, GpxDataItem>?) -> Unit)? = null): Pair<KFile, GpxDataItem>?
+
+		fun onGpxDataItemRead(item: GpxDataItem) {}
+		fun onProgressUpdate(vararg dataItems: GpxDataItem) {}
+		fun onReadingCancelled() {}
+		fun onReadingFinished(reader: GpxReader, cancelled: Boolean) {}
 	}
 }

@@ -1321,8 +1321,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return coloringType.getName(routeInfoAttribute);
 		} else {
 			if (!isCurrentTrack) {
-				dataItem.setParameter(COLORING_TYPE, defaultColoringType);
-				gpxDbHelper.updateDataItem(dataItem);
+				gpxDbHelper.updateDataItemParameter(dataItem, COLORING_TYPE, defaultColoringType);
 			}
 			return defaultColoringType;
 		}

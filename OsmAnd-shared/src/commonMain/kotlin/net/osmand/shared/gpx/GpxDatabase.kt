@@ -30,8 +30,8 @@ class GpxDatabase {
 		const val TMP_NAME_COLUMN_COUNT = "itemsCount"
 		const val UNKNOWN_TIME_THRESHOLD = 10L
 		val GPX_UPDATE_PARAMETERS_START = "UPDATE $GPX_TABLE_NAME SET "
-		val GPX_FIND_BY_NAME_AND_DIR =
-			" WHERE ${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
+		val GPX_FIND_BY_NAME_AND_DIR = " WHERE ${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
+		val GPX_NAME_AND_DIR = "${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
 		val GPX_MIN_CREATE_DATE =
 			"SELECT MIN(${FILE_CREATION_TIME.columnName}) FROM $GPX_TABLE_NAME WHERE ${FILE_CREATION_TIME.columnName} > $UNKNOWN_TIME_THRESHOLD"
 		val GPX_MAX_COLUMN_VALUE = "SELECT MAX(%s) FROM $GPX_TABLE_NAME"
@@ -132,6 +132,31 @@ class GpxDatabase {
 					"DELETE FROM $tableName $GPX_FIND_BY_NAME_AND_DIR",
 					arrayOf(fileName, fileDir)
 				)
+				return true
+			}
+			return false
+		} finally {
+			db?.close()
+		}
+	}
+
+	fun remove(files: Collection<KFile>): Boolean {
+		if (files.isEmpty()) return false
+
+		val time = currentTimeMillis()
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(false)
+			db?.let {
+				val fileDeletionMap = files.groupBy { GpxDbUtils.getTableName(it) }
+				fileDeletionMap.forEach { (tableName, files) ->
+					files.chunked(BATCH_SIZE).forEach { batch ->
+						val deleteConditions = batch.joinToString(separator = " OR ") { "($GPX_NAME_AND_DIR)" }
+						val args: Array<Any?> = batch.flatMap { listOf(it.name(), GpxDbUtils.getGpxFileDir(it)) }.toTypedArray()
+						db.execSQL("DELETE FROM $tableName WHERE $deleteConditions", args)
+					}
+				}
+				log.info("Remove gpx files from db count=${files.size} in ${currentTimeMillis() - time} ms")
 				return true
 			}
 			return false
