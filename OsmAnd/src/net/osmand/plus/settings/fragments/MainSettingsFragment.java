@@ -128,6 +128,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
+		// FK-TODO: move to base class. Dito all other onPreferenceClick() methods
 		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
 		if (preferenceFragmentHandler.isPresent()) {
 			preferenceFragmentHandler.get().showPreferenceFragment(

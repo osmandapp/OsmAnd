@@ -26,9 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
@@ -60,6 +62,8 @@ import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -81,9 +85,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
-public class RouteParametersFragment extends BaseSettingsFragment {
+public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -245,7 +250,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupOsmAndRouteServicePrefs(@NonNull ApplicationMode am, @NonNull PreferenceScreen screen,
-	                                          @NonNull SwitchPreferenceEx fastRoute) {
+											  @NonNull SwitchPreferenceEx fastRoute) {
 		GeneralRouter router = app.getRouter(am);
 		clearParameters();
 		if (router != null) {
@@ -546,7 +551,14 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		ApplicationMode appMode = getSelectedAppMode();
-		if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
+		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
+		if (preferenceFragmentHandler.isPresent()) {
+			preferenceFragmentHandler.get().showPreferenceFragment(
+					preferenceFragmentHandler.get().createPreferenceFragment(
+							getContext(),
+							this));
+			return true;
+		} else if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
 			showSeekbarSettingsDialog(getActivity(), appMode);
 		} else if (HAZMAT_TRANSPORTING_ENABLED.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
@@ -570,12 +582,43 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				showSingleSelectionDialog(ViaFerrataDialogController.PROCESS_ID, controller);
 				controller.setCallback(this);
 			}
-		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
-			BaseSettingsFragment.showInstance(requireActivity(), DANGEROUS_GOODS, appMode, new Bundle(), this);
 		} else if (settings.USE_DISCRETE_AUTO_ZOOM.getId().equals(prefId)) {
 			showAutoZoomDialog(preference);
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
+		if (DANGEROUS_GOODS_USA.equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceFragmentHandler() {
+
+						@Override
+						public String getClassNameOfPreferenceFragment() {
+							return DANGEROUS_GOODS.fragmentName;
+						}
+
+						@Override
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+									getClassNameOfPreferenceFragment(),
+									context,
+									getSelectedAppMode(),
+									new Bundle(),
+									null);
+						}
+
+						@Override
+						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+							return BaseSettingsFragment.showFragment(
+									preferenceFragment,
+									requireActivity(),
+									getClassNameOfPreferenceFragment());
+						}
+					});
+		}
+		return Optional.empty();
 	}
 
 	@Override
@@ -630,9 +673,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private static void setupAngleSlider(float[] angleValue,
-	                                     View sliderView,
-	                                     boolean nightMode,
-	                                     int activeColor) {
+										 View sliderView,
+										 boolean nightMode,
+										 int activeColor) {
 
 		Slider angleBar = sliderView.findViewById(R.id.angle_slider);
 		TextView angleTv = sliderView.findViewById(R.id.angle_text);
@@ -1006,7 +1049,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	public static void updateSelectedParameters(OsmandApplication app, ApplicationMode mode,
-	                                            List<RoutingParameter> parameters, String selectedParameterId) {
+												List<RoutingParameter> parameters, String selectedParameterId) {
 		for (RoutingParameter p : parameters) {
 			String parameterId = p.getId();
 			setRoutingParameterSelected(app.getSettings(), mode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
@@ -1015,7 +1058,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
-	                                                String parameterId, boolean defaultBoolean, boolean isChecked) {
+													String parameterId, boolean defaultBoolean, boolean isChecked) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
 		if (mode != null) {
 			property.setModeValue(mode, isChecked);
