@@ -551,14 +551,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		ApplicationMode appMode = getSelectedAppMode();
-		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
-		if (preferenceFragmentHandler.isPresent()) {
-			preferenceFragmentHandler.get().showPreferenceFragment(
-					preferenceFragmentHandler.get().createPreferenceFragment(
-							getContext(),
-							this));
-			return true;
-		} else if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
+		if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
 			showSeekbarSettingsDialog(getActivity(), appMode);
 		} else if (HAZMAT_TRANSPORTING_ENABLED.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();

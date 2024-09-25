@@ -384,34 +384,30 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		final Optional<SearchablePreferenceDialog> preferenceDialog =
-				createPreferenceDialog(
-						preference,
-						this,
-						Optional.empty());
-		if (preferenceDialog.isPresent()) {
-			show(preferenceDialog.get());
-			return true;
+		{
+			final Optional<SearchablePreferenceDialog> preferenceDialog =
+					createPreferenceDialog(
+							preference,
+							this,
+							Optional.empty());
+			if (preferenceDialog.isPresent()) {
+				show(preferenceDialog.get());
+				return true;
+			}
 		}
-		final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = getPreferenceFragmentHandler(preference);
-		if (preferenceFragmentHandler.isPresent()) {
-			preferenceFragmentHandler.get().showPreferenceFragment(
-					preferenceFragmentHandler.get().createPreferenceFragment(
-							getContext(),
-							this));
-			return true;
-		}
-		String key = preference.getKey();
-		ApplicationMode appMode = getSelectedAppMode();
-		if (settings.DRIVING_REGION.getId().equals(key)) {
-			showDrivingRegionDialog();
-			return true;
-		}
-		if (settings.ROTATE_MAP.getId().equals(key)) {
-			CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
-			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
-			controller.setCallback(this);
-			return true;
+		{
+			String key = preference.getKey();
+			ApplicationMode appMode = getSelectedAppMode();
+			if (settings.DRIVING_REGION.getId().equals(key)) {
+				showDrivingRegionDialog();
+				return true;
+			}
+			if (settings.ROTATE_MAP.getId().equals(key)) {
+				CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
+				showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
+				controller.setCallback(this);
+				return true;
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}

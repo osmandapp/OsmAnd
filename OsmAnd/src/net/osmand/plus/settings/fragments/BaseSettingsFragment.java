@@ -70,6 +70,8 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -81,6 +83,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
@@ -329,7 +332,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
+		if (this instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider) {
+			final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = preferenceFragmentHandlerProvider.getPreferenceFragmentHandler(preference);
+			if (preferenceFragmentHandler.isPresent()) {
+				preferenceFragmentHandler.get().showPreferenceFragment(
+						preferenceFragmentHandler.get().createPreferenceFragment(
+								getContext(),
+								this));
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -940,8 +953,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showFragment(final Fragment fragment,
-										final @NonNull FragmentActivity activity,
-										final String fragmentName) {
+									   final @NonNull FragmentActivity activity,
+									   final String fragmentName) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, fragmentName)) {
