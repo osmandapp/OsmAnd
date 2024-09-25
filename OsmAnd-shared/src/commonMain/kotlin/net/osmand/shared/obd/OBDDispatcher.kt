@@ -141,11 +141,17 @@ object OBDDispatcher {
 		readStatusListener = listener
 	}
 
-	fun setReadWriteStreams(readStream: Source, writeStream: Sink) {
+	fun setReadWriteStreams(readStream: Source?, writeStream: Sink?) {
 		scope?.cancel()
 		inputStream = readStream
 		outputStream = writeStream
-		startReadObdLooper()
+		if(readStream != null && writeStream != null) {
+			startReadObdLooper()
+		}
+	}
+
+	fun stopReading() {
+		setReadWriteStreams(null, null)
 	}
 
 	private fun consumeResponse(command: OBDCommand, result: String) {

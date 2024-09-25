@@ -101,9 +101,9 @@ object OBDDataComputer {
 		FUEL_LEFT_DISTANCE(true,
 			listOf(OBD_FUEL_LEVEL_COMMAND),
 			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
-		FUEL_LEFT_LITERS(false,
-			listOf(OBD_FUEL_LEVEL_COMMAND),
-			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
+//		FUEL_LEFT_LITERS(false,
+//			listOf(OBD_FUEL_LEVEL_COMMAND),
+//			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
 		FUEL_LEFT_PERCENT(false,
 			listOf(OBD_FUEL_LEVEL_COMMAND),
 			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
@@ -231,7 +231,7 @@ object OBDDataComputer {
 					null
 				}
 
-				FUEL_LEFT_LITERS,
+//				FUEL_LEFT_LITERS,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].doubleValue
