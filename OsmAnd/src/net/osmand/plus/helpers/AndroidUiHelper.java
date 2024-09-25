@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
@@ -109,6 +110,16 @@ public class AndroidUiHelper {
 			}
 		}
 		return orientation;
+	}
+
+	public static boolean isViewInBounds(@NonNull View view, float x, float y){
+		Rect outRect = new Rect();
+		int[] location = new int[2];
+
+		view.getDrawingRect(outRect);
+		view.getLocationOnScreen(location);
+		outRect.offset(location[0], location[1]);
+		return outRect.contains((int) x, (int) y);
 	}
 
 	public static boolean updateVisibility(@Nullable View view, boolean visible) {

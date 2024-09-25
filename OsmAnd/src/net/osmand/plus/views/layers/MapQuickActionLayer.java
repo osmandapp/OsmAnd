@@ -139,6 +139,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		}
 	}
 
+	public List<QuickActionButton> getActionButtons() {
+		return actionButtons;
+	}
+
 	public void refreshLayer() {
 		setSelectedButton(null);
 		isLayerOn = mapButtonsHelper.hasEnabledButtons();

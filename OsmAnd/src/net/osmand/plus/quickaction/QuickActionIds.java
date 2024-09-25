@@ -70,4 +70,5 @@ public class QuickActionIds {
 	public static final int OPEN_SEARCH_VIEW_ACTION = 70;
 	public static final int SHOW_HIDE_DRAWER_ACTION = 71;
 	public static final int NAVIGATE_PREVIOUS_SCREEN_ACTION = 72;
+	public static final int LOCK_SCREEN_ACTION = 73;
 }
