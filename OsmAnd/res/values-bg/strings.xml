@@ -1020,7 +1020,7 @@
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
     <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери за контрол на скоростта и ограничения на скоростта.</string>
     <string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
-    <string name="driving_region_descr">Изберете регион на шофиране: САЩ, Европа, Великобритания, Азия или друг.</string>
+    <string name="driving_region_descr">Изберете областта на шофиране: САЩ, Европа, Великобритания, Азия или друг.</string>
     <string name="driving_region">Район на шофиране</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">САЩ</string>
@@ -2266,7 +2266,7 @@
     <string name="login_open_street_map_org">Вход в OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Влизане с OpenStreetMap</string>
     <string name="osm_live_subscription_desc">Абонаментът дава възможност за почасови, ежедневни, седмични обновявания и за неограничено изтегляне за всички карти в световен мащаб.</string>
-    <string name="select_wikipedia_article_langs">Изберете езиците на които Уикипедия публикациите ще се появяват на картата. Можете да превключвате между наличните езици докато четете публикацията.</string>
+    <string name="select_wikipedia_article_langs">Изберете езиците, на които публикациите в Уикипедия ще се появяват на картата. Можете да превключвате между наличните езици докато ги четете.</string>
     <string name="extra_maps_menu_group">Допълнителни карти</string>
     <string name="opr_use_dev_url">Използване на test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
@@ -2295,7 +2295,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Избягване на зони с ниски емисии</string>
     <string name="search_more">Търсене на други…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_and_restore">Резервни копия и възстановяване</string>
+    <string name="backup_and_restore">Резервно копие и възстановяване</string>
     <string name="last_backup">Последно резервно копие</string>
     <string name="duration_ago">Преди %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
@@ -3428,7 +3428,7 @@
     <string name="external_sensor_widgets">Външни сензори</string>
     <string name="how_to_use">Как да използвате:</string>
     <string name="reset_all_settings_desc">Възстановяване на настройките по подразбиране\?</string>
-    <string name="compass_click_desc">Съвет: Докоснете бутона с компаса, за да превключите режима на ориентация на картата.</string>
+    <string name="compass_click_desc">Докоснете два пъти бутона с компаса, за да превключите режима на ориентация на картата.</string>
     <string name="map_marker_average_speed_desc">Задайте интервала от време, за който да бъде усреднена скоростта (за оценка на времето на пристигане).</string>
     <string name="parking_widget_desc">Показва разстоянието от центъра на екрана до мястото на паркиране.</string>
     <string name="lanes_widgets_desc">Показва схема на лентите на текущия път и подчертава тези, които трябва да използвате при маршрутизиране.</string>
@@ -4348,4 +4348,10 @@
     <string name="remove_key_assignment">Премахване на клавишната комбинация</string>
     <string name="remove_key_assignment_summary">Клавишната комбинация на избраното действие ще бъде премахната.</string>
     <string name="next_segment">Следващия отсечка</string>
+    <string name="osm_live_plan_pricing">Ценови планове</string>
+    <string name="osm_live_payment_3_months_title">Всеки три месеца</string>
+    <string name="osm_live_payment_monthly_title">Месечно</string>
+    <string name="annual_subscription">Годишен абонамент</string>
+    <string name="osm_live_payment_annual_title">Годишно</string>
+    <string name="monthly_subscription">Месечен абонамент</string>
 </resources>
