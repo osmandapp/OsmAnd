@@ -416,7 +416,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public Optional<Info> getInfo(final Preference preference) {
 		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(preference.getKey())) {
-			// FK-TODO: Info erzeugen und in PreferenceConnected2PreferenceFragmentProvider diese Info abfragen statt dem folgenden DRY-IF:
 			return Optional.of(
 					new Info() {
 
