@@ -5174,7 +5174,7 @@
     <string name="distance_to_destination_widget_desc">Vidžet prikazuje preostalo rastojanje do poslednje dolazne tačke.</string>
     <string name="second_next_turn_widget_desc">Widget prikazuje podatke o tvom drugom narednom skretanju koje je omogućeno ukoliko skrenete u okviru prilaznog rastojanja.</string>
     <string name="next_turn_widget_desc">Vidžet prikazuje podatke o tvom sledećem skretanju sa slikom manevra skretanja i rastojanjem do njega.</string>
-    <string name="compass_click_desc">Tapni na ikonu kompasa radi promene orijentacije mape.</string>
+    <string name="compass_click_desc">Duplo tapni na ikonu kompasa radi promene orijentacije mape.</string>
     <string name="map_marker_average_speed_desc">Odredi vremensko razdoblje prosečne brzine (korišćeno za procenu vremena pristizanja).</string>
     <string name="switch_widget_mode_desc">Dodirom na vidžet menjaš načine rada.</string>
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila biće izbegnuti.</string>
