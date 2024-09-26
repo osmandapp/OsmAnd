@@ -315,6 +315,8 @@ public class AisObject {
                     default:
                         this.objectClass = AIS_ATON;
                 }
+            } else if (msgTypes.contains(18)) {
+                this.objectClass = AIS_VESSEL;
             } else {
                 switch (ais_navStatus) {
                     // see https://gpsd.gitlab.io/gpsd/AIVDM.html#_types_1_2_and_3_position_report_class_a
@@ -437,7 +439,7 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
                 return Color.LTGRAY;
             default:
-                return 0; // black
+                return 0; // transparent
         }
     }
 
@@ -568,7 +570,7 @@ public class AisObject {
     *  (5) the time when the course of the other vessel crosses the own course
     *      is not in the past  */
     private boolean checkCpaWarning() {
-        if (isMovable() && (objectClass != AIS_AIRPLANE) && (cpaWarningTime > 0)) {
+        if (isMovable() && (objectClass != AIS_AIRPLANE) && (cpaWarningTime > 0) && (ais_sog > 0.0d)) {
             if (checkForCpaTimeout() && (ownPosition != null)) {
                 Location aisPosition = getCurrentLocation();
                 if (aisPosition != null) {

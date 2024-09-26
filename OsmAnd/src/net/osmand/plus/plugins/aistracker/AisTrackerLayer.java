@@ -355,13 +355,22 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         AisObject.fakeOwnPosition(fake);
         Log.d("AisTrackerLayer", "initFakePosition: fake: " + fake.toString());
         // in order to visualize this faked (own) position on the map, create an AIS object at this location...
-        AisObject ais = new AisObject(324578, 1, 20, 0, 1, (int)fakeCOG,
-                fakeCOG, fakeSOG, fakeLat, fakeLon, 0.0);
+        AisObject ais = new AisObject(324578, 18, 20, AisObjectConstants.INVALID_NAV_STATUS,
+                AisObjectConstants.INVALID_MANEUVER_INDICATOR,
+                (int)fakeCOG, fakeCOG, fakeSOG, fakeLat, fakeLon, AisObjectConstants.INVALID_ROT);
         updateAisObjectList(ais);
-        ais = new AisObject(324578, 5, 0, "own-position", "fake", 60 /* passenger */, 56,
-                65, 8, 12, 2,
-                "home", 8, 15, 22, 5);
+        ais = new AisObject(324578, 24, 0, "callsign", "fake", 60, 56,
+                65, 8, 12, AisObjectConstants.INVALID_DRAUGHT,
+                "home", AisObjectConstants.INVALID_ETA, AisObjectConstants.INVALID_ETA,
+                AisObjectConstants.INVALID_ETA_HOUR, AisObjectConstants.INVALID_ETA_MIN);
         updateAisObjectList(ais);
+        //AisObject ais = new AisObject(324578, 1, 20, 0, 1, (int)fakeCOG,
+        //        fakeCOG, fakeSOG, fakeLat, fakeLon, 0.0);
+        //updateAisObjectList(ais);
+        //ais = new AisObject(324578, 5, 0, "own-position", "fake", 60 /* passenger */, 56,
+        //        65, 8, 12, 2,
+        //        "home", 8, 15, 22, 5);
+        //updateAisObjectList(ais);
     }
 
     private void initTestObject1() {
