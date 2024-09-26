@@ -236,8 +236,8 @@ public class GpxDialogs {
 				item.setSelected(!item.getSelected());
 				alertDialogAdapter.notifyDataSetInvalidated();
 				if (position == 0 && showCurrentGpx && item.getSelected()) {
-					OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-					if (monitoringPlugin == null) {
+					OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
+					if (plugin == null) {
 						AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 						confirm.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							Bundle params = new Bundle();
@@ -247,8 +247,8 @@ public class GpxDialogs {
 						confirm.setNegativeButton(R.string.shared_string_cancel, null);
 						confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 						confirm.show();
-					} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						monitoringPlugin.askShowTripRecordingDialog(activity);
+					} else if (!plugin.isRecordingTrack()) {
+						plugin.askShowTripRecordingDialog(activity);
 					}
 				}
 			} else {
