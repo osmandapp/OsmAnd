@@ -248,7 +248,7 @@ object GpxDbHelper : GpxReaderAdapter {
 			return null
 		}
 		val item = dataItems[file]
-		if (GpxDbUtils.isAnalyseNeeded(item)) {
+		if (GpxDbUtils.isAnalyseNeeded(item) && GpxDataItem.isRegularTrack(file)) {
 			readGpxItem(file, item, callback)
 		}
 		return item
