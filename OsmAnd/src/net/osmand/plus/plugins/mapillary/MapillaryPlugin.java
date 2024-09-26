@@ -271,13 +271,13 @@ public class MapillaryPlugin extends OsmandPlugin {
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.addView(mapillaryCardsRow.getGalleryView());
 
-		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, true);
+		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, app.getSettings().MAPILLARY_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && mapillaryCards == null) {
 				menuBuilder.startLoadingImages();
 			}
 		});
-		menuBuilder.buildRow(view, R.drawable.ic_action_photo_dark, null, app.getString(R.string.street_level_imagery), 0, true,
+		menuBuilder.buildRow(view, R.drawable.ic_action_photo_street, null, app.getString(R.string.street_level_imagery), 0, true,
 				collapsableView, false, 1, false, null, false);
 
 		if (needUpdateOnly && mapillaryCards != null) {

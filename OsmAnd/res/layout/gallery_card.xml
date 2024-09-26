@@ -4,7 +4,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	android:paddingStart="@dimen/content_padding"
 	android:paddingBottom="@dimen/content_padding_small">
 
 	<androidx.recyclerview.widget.RecyclerView
@@ -17,6 +16,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/content_padding"
+		android:paddingHorizontal="@dimen/content_padding"
 		app:dialogButtonHeight="@dimen/dialog_button_height"
 		app:dialogButtonTitle="@string/shared_string_view_all"
 		app:dialogButtonTopMargin="@dimen/content_padding_small"

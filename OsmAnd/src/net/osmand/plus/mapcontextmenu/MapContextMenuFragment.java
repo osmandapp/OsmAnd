@@ -170,11 +170,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
-		DialogManager dialogManager = app.getDialogManager();
-		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
-		if (controller == null) {
-			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
-		}
 
 		map = mapActivity.getMapView();
 		displayPositionManager = mapActivity.getMapPositionManager();
@@ -1328,15 +1323,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		}
 		super.onPause();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		MapActivity mapActivity = requireMapActivity();
-		if (!mapActivity.isChangingConfigurations()) {
-			app.getDialogManager().unregister(GalleryController.PROCESS_ID);
-		}
 	}
 
 	@Override

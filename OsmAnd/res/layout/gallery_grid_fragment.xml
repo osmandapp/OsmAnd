@@ -49,25 +49,6 @@
 					app:typefaceWeight="medium"
 					tools:text="@string/map_widget_left" />
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/action_button"
-					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-					android:layout_width="@dimen/toolbar_height"
-					android:layout_height="@dimen/toolbar_height"
-					android:layout_gravity="center"
-					android:tint="?attr/default_icon_color"
-					tools:srcCompat="@drawable/ic_action_appearance" />
-
-				<androidx.appcompat.widget.AppCompatImageView
-					android:id="@+id/options_button"
-					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-					android:layout_width="@dimen/toolbar_height"
-					android:layout_height="@dimen/toolbar_height"
-					android:layout_gravity="center"
-					android:contentDescription="@string/shared_string_more_actions"
-					android:tint="?attr/default_icon_color"
-					tools:srcCompat="@drawable/ic_overflow_menu_white" />
-
 			</LinearLayout>
 
 		</androidx.appcompat.widget.Toolbar>
@@ -92,7 +73,8 @@
 				android:layout_height="match_parent"
 				android:background="?attr/list_background_color"
 				android:clipToPadding="false"
-				android:paddingHorizontal="13dp" />
+				android:paddingHorizontal="13dp"
+				android:paddingBottom="@dimen/content_padding"/>
 
 		</LinearLayout>
 

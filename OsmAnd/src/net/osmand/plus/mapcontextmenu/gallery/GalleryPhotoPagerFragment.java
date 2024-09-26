@@ -29,6 +29,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.squareup.picasso.Picasso;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -43,6 +45,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
+import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.Metadata;
@@ -54,6 +57,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
+	public static final int PRELOAD_THUMBNAILS_COUNT = 5;
 	public static final String SELECTED_POSITION_KEY = "selected_position_key";
 
 	private GalleryController controller;
@@ -61,6 +65,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	private ImageView sourceView;
 	private TextView dateView;
 	private TextView authorView;
+	private TextView licenseView;
 	private View descriptionShadow;
 	private View descriptionContainer;
 	private Toolbar toolbar;
@@ -76,7 +81,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		listener = card -> {
 			if (card.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
 				Metadata metadata = card.getWikiImage().getMetadata();
-				setMetaData(metadata.getAuthor(), metadata.getDate());
+				setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 			}
 		};
 	}
@@ -117,7 +122,9 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void onPageSelected(int position) {
+				boolean shouldPreloadNext = selectedPosition < position;
 				selectedPosition = position;
+				preloadThumbNails(shouldPreloadNext);
 				updateImageDescriptionRow(getSelectedImageCard());
 			}
 
@@ -130,8 +137,49 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 		setupToolbar(view);
 		setupOnBackPressedCallback();
+		preloadThumbNails();
 		updateImageDescriptionRow(getSelectedImageCard());
 		return view;
+	}
+
+	private void preloadThumbNails() {
+		preloadThumbNails(true);
+		preloadThumbNails(false);
+	}
+
+	private void preloadThumbNails(boolean next) {
+		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
+		if (imageCards.size() <= 1) {
+			return;
+		}
+
+		if (next) {
+			int startPreloadThumbnailIndex = selectedPosition + 1;
+			if (startPreloadThumbnailIndex >= imageCards.size()) {
+				return;
+			}
+			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex + PRELOAD_THUMBNAILS_COUNT;
+			if (lastPreloadThumbnailIndex >= imageCards.size()) {
+				lastPreloadThumbnailIndex = imageCards.size() - 1;
+			}
+			for (int i = selectedPosition; i < lastPreloadThumbnailIndex; i++) {
+				ImageCard card = imageCards.get(i);
+				Picasso.get().load(card.getThumbnailUrl()).fetch();
+			}
+		} else {
+			int startPreloadThumbnailIndex = selectedPosition - 1;
+			if (startPreloadThumbnailIndex < 0) {
+				return;
+			}
+			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex - PRELOAD_THUMBNAILS_COUNT;
+			if (lastPreloadThumbnailIndex < 0) {
+				lastPreloadThumbnailIndex = 0;
+			}
+			for (int i = selectedPosition; i > lastPreloadThumbnailIndex; i--) {
+				ImageCard card = imageCards.get(i);
+				Picasso.get().load(card.getThumbnailUrl()).fetch();
+			}
+		}
 	}
 
 	@Override
@@ -148,12 +196,13 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			String date = metadata.getDate();
 			String author = metadata.getAuthor();
 			String license = metadata.getLicense();
-			if (!wikiImageCard.isMetaDataDownloaded() &&
-					(Algorithms.isEmpty(date) || Algorithms.isEmpty(author) || Algorithms.isEmpty(license))) {
+			if (!wikiImageCard.isMetaDataDownloaded() && (Algorithms.isEmpty(date) || date.equals("Unknown")
+					|| Algorithms.isEmpty(author) || author.equals("Unknown")
+					|| Algorithms.isEmpty(license) || license.equals("Unknown"))) {
 				controller.addMetaDataListener(listener);
 				controller.downloadWikiMetaData(wikiImageCard);
 			} else {
-				setMetaData(metadata.getAuthor(), metadata.getDate());
+				setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 			}
 		} else {
 			dateView.setVisibility(View.INVISIBLE);
@@ -168,23 +217,34 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void setMetaData(@Nullable String author, @Nullable String date) {
+	private void setMetaData(@Nullable String author, @Nullable String date, @Nullable String license) {
+		String formattedDate = WikiAlgorithms.formatWikiDate(date);
+		if (Algorithms.isEmpty(formattedDate)) {
+			formattedDate = date;
+		}
 		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
-				getString(R.string.shared_string_date), date != null ? date : "");
+				getString(R.string.shared_string_date), formattedDate != null && !formattedDate.equals("Unknown") ? formattedDate : "");
 		dateView.setText(fullDate);
 
 		String fullAuthorString = getString(R.string.ltr_or_rtl_combine_via_colon,
-				getString(R.string.shared_string_author), author != null ? author : "");
+				getString(R.string.shared_string_author), author != null && !author.equals("Unknown") ? author : "");
 		authorView.setText(fullAuthorString);
+
+		String licenseString = getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_license), license != null && !license.equals("Unknown") ? license : "");
+		licenseView.setText(licenseString);
 	}
 
 	private void setupMetadataRow(ViewGroup view) {
 		dateView = view.findViewById(R.id.date);
-		dateView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
+		dateView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
 
 		authorView = view.findViewById(R.id.author);
-		authorView.setTextColor(ColorUtilities.getColor(app, R.color.app_bar_secondary_light));
-		setMetaData("", "");
+		authorView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
+
+		licenseView = view.findViewById(R.id.license);
+		licenseView.setTextColor(ColorUtilities.getColor(app, R.color.text_color_tertiary_light));
+		setMetaData("", "", "");
 	}
 
 	public void toggleUi() {
@@ -298,10 +358,10 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
 				.setTitleId(R.string.open_in_browser)
 				.setOnClickListener(item -> {
+					FragmentActivity activity = getActivity();
 					ImageCard card = getSelectedImageCard();
-					if (card instanceof WikiImageCard wikiImageCard) {
-						AbstractCard.openUrl(getMapActivity(), app, card.getTitle(),
-								wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), false, false);
+					if (activity != null && card instanceof WikiImageCard wikiImageCard) {
+						AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
 					}
 				})
 				.create());
@@ -336,7 +396,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 				startDownloading(fileName, url);
 			} else {
 				AndroidUtils.hasPermission(getMapActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-				ActivityCompat.requestPermissions(getMapActivity(), new String[] {
+				ActivityCompat.requestPermissions(getMapActivity(), new String[]{
 						Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}

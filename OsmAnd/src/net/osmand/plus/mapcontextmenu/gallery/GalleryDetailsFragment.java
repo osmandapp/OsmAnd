@@ -27,6 +27,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
+import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.Metadata;
@@ -112,10 +113,16 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		if (!Algorithms.isEmpty(author)) {
 			buildItem(container, getString(R.string.shared_string_author), author, R.drawable.ic_action_user, true, false);
 		}
+
 		String date = metadata != null ? metadata.getDate() : null;
-		if (!Algorithms.isEmpty(date)) {
-			buildItem(container, getString(R.string.shared_string_added), date, R.drawable.ic_action_sort_by_date, true, false);
+		String formattedDate = WikiAlgorithms.formatWikiDate(date);
+		if (Algorithms.isEmpty(formattedDate)) {
+			formattedDate = date;
 		}
+		if (!Algorithms.isEmpty(formattedDate)) {
+			buildItem(container, getString(R.string.shared_string_added), formattedDate, R.drawable.ic_action_sort_by_date, true, false);
+		}
+
 		int iconId = card.getTopIconId();
 		buildItem(container, getString(R.string.shared_string_source), getSourceTypeName(card), iconId, false, false);
 
@@ -123,7 +130,13 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		if (!Algorithms.isEmpty(license)) {
 			buildItem(container, getString(R.string.shared_string_license), license, R.drawable.ic_action_copyright, true, false);
 		}
-		String link = !Algorithms.isEmpty(card.getImageHiresUrl()) ? card.getImageHiresUrl() : card.getImageUrl();
+
+		String link;
+		if (card instanceof WikiImageCard wikiImageCard) {
+			link = wikiImageCard.getWikiImage().getUrlWithCommonAttributions();
+		} else {
+			link = !Algorithms.isEmpty(card.getImageHiresUrl()) ? card.getImageHiresUrl() : card.getImageUrl();
+		}
 		buildItem(container, getString(R.string.shared_string_link), link, R.drawable.ic_action_link, true, true);
 	}
 
