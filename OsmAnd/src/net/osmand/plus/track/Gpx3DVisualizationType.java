@@ -11,9 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.SensorAttributesUtils;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.CollectionUtils;
 
@@ -63,7 +61,7 @@ public enum Gpx3DVisualizationType {
 	private static final Float SPEED_TO_HEIGHT_SCALE = 10.0f;
 	private static final Float TEMPERATURE_TO_HEIGHT_OFFSET = 100.0f;
 
-	public static double getPointElevation(@NonNull WptPt point, @NonNull Track3DStyle style) {
+	public static double getPointElevation(@NonNull WptPt point, @NonNull Track3DStyle style, boolean heightmapsActive) {
 		double pointElevation = getValidElevation(point.getEle());
 		Gpx3DVisualizationType type = style.getVisualizationType();
 
@@ -75,7 +73,7 @@ public enum Gpx3DVisualizationType {
 			case HEART_RATE, BICYCLE_CADENCE, BICYCLE_POWER, TEMPERATURE, SPEED_SENSOR ->
 					getSensorElevation(point, type);
 		};
-		boolean addGpxHeight = is3DMapsEnabled() && !CollectionUtils.equalsToAny(type, ALTITUDE, NONE);
+		boolean addGpxHeight = heightmapsActive && !CollectionUtils.equalsToAny(type, ALTITUDE, NONE);
 		return addGpxHeight ? elevation + pointElevation : elevation;
 	}
 
@@ -106,10 +104,5 @@ public enum Gpx3DVisualizationType {
 
 	private static double getValidElevation(double elevation) {
 		return Double.isNaN(elevation) ? 0 : elevation;
-	}
-
-	private static boolean is3DMapsEnabled() {
-		SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
-		return plugin != null && plugin.is3DMapsEnabled();
 	}
 }

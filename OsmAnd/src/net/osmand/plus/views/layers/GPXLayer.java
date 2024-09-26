@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
@@ -57,6 +58,7 @@ import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -520,6 +522,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return Arrays.hashCode(o);
 	}
 
+	private boolean isHeightmapsActive() {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			return mapRendererContext.isHeightmapsActive();
+		}
+		return false;
+	}
+
 	private void drawSelectedFilesSplits(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
 	                                     @NonNull List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
@@ -546,6 +556,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	                                           @NonNull List<SelectedGpxFile> selectedGPXFiles, boolean forceUpdate) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			boolean changed = forceUpdate;
+			boolean heightmapsActive = isHeightmapsActive();
 			int startFinishPointsCount = 0;
 			int splitLabelsCount = 0;
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
@@ -618,8 +629,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							WptPt start = segment.getPoints().get(0);
 							WptPt finish = segment.getPoints().get(segment.getPoints().size() - 1);
 							if (visualizationType != Gpx3DVisualizationType.NONE && trackLinePosition == Gpx3DLinePositionType.TOP) {
-								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(start, track3DStyle));
-								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle));
+								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(start, track3DStyle, heightmapsActive));
+								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle, heightmapsActive));
 							}
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.getLon()), Utilities.get31TileNumberY(finish.getLat())));
@@ -643,7 +654,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							if (visualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
 								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179));
 							} else {
-								float labelHeight = (float) Gpx3DVisualizationType.getPointElevation(point, track3DStyle);
+								float labelHeight = (float) Gpx3DVisualizationType.getPointElevation(point, track3DStyle, heightmapsActive);
 								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), labelHeight);
 							}
 							splitLabels.add(splitLabel);
