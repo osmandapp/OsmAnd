@@ -62,7 +62,11 @@ public class SensorAttributesUtils {
 	}
 
 	public static float getPointAttribute(@NonNull WptPt wptPt, @NonNull String key, float defaultValue) {
-		return Algorithms.parseFloatSilently(wptPt.getExtensionsToRead().get(key), defaultValue);
+		String value = wptPt.getDeferredExtensionsToRead().get(key);
+		if (Algorithms.isEmpty(value)) {
+			value = wptPt.getExtensionsToRead().get(key);
+		}
+		return Algorithms.parseFloatSilently(value, defaultValue);
 	}
 
 	public static void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
