@@ -96,6 +96,22 @@ object OBDUtils {
 		return INVALID_RESPONSE_CODE
 	}
 
+	fun parseVINResponse(response: String): String {
+		val responseParts = response.split(" ")
+
+		if (responseParts[0] == "49" &&
+			responseParts[1] == OBDCommand.OBD_VIN_COMMAND.command.lowercase() &&
+			responseParts.size > 3) {
+			val vinBuilder = StringBuilder()
+			for (i in 3 .. responseParts.size) {
+				val hexByte = responseParts[i]
+				vinBuilder.append(hexByte.toInt(16).toChar())
+			}
+			return vinBuilder.toString()
+		}
+		return INVALID_RESPONSE_CODE
+	}
+
 	fun parseFuelConsumptionRateResponse(response: String): String {
 		val hexValues = response.trim().split(" ")
 		if (hexValues.size >= 4 && hexValues[0] == "41" && hexValues[1] == OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND.command.lowercase()) {
