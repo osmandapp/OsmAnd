@@ -22,8 +22,12 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
@@ -77,6 +81,12 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 						file = new File(ImportHelper.getGpxDestinationDir(app, true), SELECTED_GPX_NAME);
 						gpxFile.setPath(file.getAbsolutePath());
 						selectionHelper.selectGpxFile(gpxFile, GpxSelectionParams.getDefaultSelectionParams());
+
+						KQuadRect rect = gpxFile.getRect();
+						if (rect.getLeft() != 0 && rect.getRight() != 0) {
+							app.getOsmandMap().getMapView().fitRectToMap(rect.getLeft(), rect.getRight(),
+									rect.getTop(), rect.getBottom(), (int) rect.width(), (int) rect.height(), 0);
+						}
 					}
 				}
 			});
@@ -110,6 +120,8 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		private static final int LOW_FPS_VALUE = 15;
 		private static final int LOW_FPS_COUNT = 10;
 
+		private GpxTrackAnalysis analysis;
+
 		private int checksCounter;
 		private int lowFpsCounter;
 
@@ -124,7 +136,7 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 				checksCounter++;
 
 				checkFPS();
-				checkAnalysisUpdate();
+				checkAnalysisUpdate(); // simulate multiple calls for getting GpxDataItem
 
 				if (isIdleNow()) {
 					notifyIdleTransition();
@@ -151,10 +163,21 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		}
 
 		private void checkAnalysisUpdate() {
-			gpxDbHelper.getItem(SharedUtil.kFile(file)); // simulate multiple calls for getting GpxDataItem
-			long readItemCount = gpxDbHelper.getReadTrackItemCount();
-			if (readItemCount > 2) {
-				throw new AssertionError("To many updates of analysis " + readItemCount);
+			GpxDataItem dataItem = gpxDbHelper.getItem(SharedUtil.kFile(file), new GpxDataItemCallback() {
+				@Override
+				public boolean isCancelled() {
+					return false;
+				}
+
+				@Override
+				public void onGpxDataItemReady(@NotNull GpxDataItem item) {
+					if (analysis != item.getAnalysis()) {
+						throw new AssertionError("To many updates of analysis ");
+					}
+				}
+			});
+			if (analysis == null && dataItem != null) {
+				analysis = dataItem.getAnalysis();
 			}
 		}
 
