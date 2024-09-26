@@ -414,6 +414,10 @@ object GpxUtilities {
 
 	fun writeGpxFile(file: KFile, gpxFile: GpxFile): KException? {
 		return try {
+			file.getParentFile()?.createDirectories()
+			if (KAlgorithms.isEmpty(gpxFile.path)) {
+				gpxFile.path = if (file.isAbsolute()) file.path() else file.absolutePath()
+			}
 			writeGpx(file, null, gpxFile, null)
 		} catch (e: KException) {
 			log.error("Failed to write gpx '$file.path()'", e)
