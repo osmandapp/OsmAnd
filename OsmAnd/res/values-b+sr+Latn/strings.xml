@@ -1034,7 +1034,7 @@
     <string name="int_continuosly">Kontinuirano</string>
     <string name="bg_service_sleep_mode_on">Zaustavi 
 \n rad u pozadini</string>
-    <string name="map_widget_transparent">Prozirnost vidžeta</string>
+    <string name="map_widget_transparent">Prozirni vidžeti</string>
     <string name="map_widget_view_direction">Smer gledanja</string>
     <string name="select_navigation_mode">Vrsta prevoza:</string>
     <string name="recalculate_route_to_your_location">Način prevoza:</string>
@@ -2561,7 +2561,7 @@
     <string name="additional_actions_descr">Pristupi ovim radnjama tapkanjam na dugme „%1$s”.</string>
     <string name="move_inside_category">Možeš pomerati stavke samo unutar kategorije.</string>
     <string name="developer_plugin">Dodatak za programere</string>
-    <string name="replace_point_descr">Zameni drugu tačku sa ovom.</string>
+    <string name="replace_point_descr">Zameni tačku sa drugom.</string>
     <string name="app_mode_ski_touring">Skijaški program</string>
     <string name="app_mode_ski_snowmobile">Motorne sanke</string>
     <string name="custom_osmand_plugin">Proizvoljni dodatak OsmAnd-a</string>
