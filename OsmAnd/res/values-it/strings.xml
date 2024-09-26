@@ -5919,4 +5919,19 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Bifuel a idrogeno</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Ibrida a idrogeno</string>
     <string name="obd_fuel_type_hydrogen">Idrogeno</string>
+    <string name="obd_fuel_type_electric">Elettrico</string>
+    <string name="obd_fuel_type_bifuel_electricity">Bicarburante elettrico</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Biocarburante con motore a combustione e elettrico</string>
+    <string name="obd_fuel_type_unknown">Tipo di carburante sconosciuto</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_widget_group">Misure del veicolo</string>
+    <string name="rpm_unit">giri/min</string>
+    <string name="obd_speed_desc">Mostra la velocità del veicolo sopra il sensore OBD</string>
+    <string name="obd_fuel_consumption_rate">Tasso di consumo del carburante</string>
+    <string name="obd_fuel_left_distance">Carburante restante (distanza)</string>
+    <string name="obd_fuel_type">Tipo di carburante</string>
+    <string name="obd_plugin_name">Misure del veicolo</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_rpm">Giri/minuto</string>
+    <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
 </resources>
