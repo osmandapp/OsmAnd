@@ -33,7 +33,6 @@ object GpxDbHelper : GpxReaderAdapter {
 	private const val READER_TASKS_LIMIT = 4
 	private var readers = mutableListOf<GpxReader>()
 	private var readerSync = Synchronizable()
-	var readTrackItemCount: Long = 0
 
 	private var initialized: Boolean = false
 
@@ -250,7 +249,6 @@ object GpxDbHelper : GpxReaderAdapter {
 		}
 		val item = dataItems[file]
 		if (GpxDbUtils.isAnalyseNeeded(item)) {
-			readTrackItemCount++
 			readGpxItem(file, item, callback)
 		}
 		return item
