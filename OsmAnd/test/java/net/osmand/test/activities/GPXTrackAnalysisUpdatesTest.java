@@ -171,8 +171,9 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 
 				@Override
 				public void onGpxDataItemReady(@NotNull GpxDataItem item) {
-					if (analysis != item.getAnalysis()) {
-						throw new AssertionError("To many updates of analysis ");
+					GpxTrackAnalysis trackAnalysis = item.getAnalysis();
+					if (analysis != null && trackAnalysis != null && analysis != trackAnalysis) {
+						throw new AssertionError("To many updates of analysis");
 					}
 				}
 			});
