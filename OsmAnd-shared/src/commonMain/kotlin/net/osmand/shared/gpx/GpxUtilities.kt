@@ -743,6 +743,7 @@ object GpxUtilities {
 			} else {
 				regularExtensions[key] = value
 			}
+			wptPt.getDeferredExtensionsToWrite()[key] = value
 		}
 		if (regularExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
