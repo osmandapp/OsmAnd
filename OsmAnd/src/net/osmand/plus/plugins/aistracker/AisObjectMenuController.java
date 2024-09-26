@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.aistracker;
 
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON_VIRTUAL;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 
@@ -146,7 +149,7 @@ public class AisObjectMenuController extends MenuController {
             }
         }
         if (msgTypes.contains(21)) { // ATON (aid to navigation)
-            addMenuItem("ATON Type",  aisObject.getAidTypeString());
+            addMenuItem("Aid Type",  aisObject.getAidTypeString());
             addMenuItemDimension();
         } else if (msgTypes.contains(9)) { // SAR aircraft
             addMenuItem("Object Type", "SAR Aircraft");
@@ -229,24 +232,31 @@ public class AisObjectMenuController extends MenuController {
     @NonNull
     @Override
     public String getTypeStr() {
-        String res = "";
+        String result = "";
         SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
+        AisObjectConstants.AisObjType objectClass = aisObject.getObjectClass();
         for (Integer i : new Integer[]{5, 19, 24}) {
             if (msgTypes.contains(i)) {
-                res += aisObject.getShipTypeString();
+                result += aisObject.getShipTypeString();
                 break;
             }
         }
         for (Integer i : new Integer[]{1, 2, 3}) {
             if (msgTypes.contains(i)) {
-                if (res.isEmpty()) {
-                    res = "Vessel";
+                if (result.isEmpty()) {
+                    result = "Vessel";
                 }
-                res += ": " + aisObject.getNavStatusString() + ".";
+                result += ": " + aisObject.getNavStatusString() + ".";
                 break;
             }
         }
-        return (res.isEmpty() ? "AIS object" : res);
+        if ((objectClass == AIS_ATON) || (objectClass == AIS_ATON_VIRTUAL)) {
+            int aidType = aisObject.getAidType();
+            if (aidType != UNSPECIFIED_AID_TYPE) {
+                result = aisObject.getAidTypeString();
+            }
+        }
+        return (result.isEmpty() ? "AIS object" : result);
     }
 
     @Override
