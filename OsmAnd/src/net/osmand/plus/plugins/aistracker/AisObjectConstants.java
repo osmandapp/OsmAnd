@@ -31,7 +31,6 @@ public final class AisObjectConstants {
         AIS_VESSEL_PASSENGER,
         AIS_VESSEL_FREIGHT,
         AIS_VESSEL_COMMERCIAL,
-        AIS_VESSEL_LOST, // only dummy value, not assigned by a real vessel
         AIS_LANDSTATION,
         AIS_AIRPLANE,
         AIS_SART,

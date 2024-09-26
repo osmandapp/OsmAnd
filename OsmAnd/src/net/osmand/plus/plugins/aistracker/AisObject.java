@@ -1,36 +1,7 @@
 package net.osmand.plus.plugins.aistracker;
 
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_AIRPLANE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON_VIRTUAL;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_INVALID;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_LANDSTATION;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_SART;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL_COMMERCIAL;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL_FAST;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL_FREIGHT;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL_PASSENGER;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_VESSEL_SPORT;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.COUNTRY_CODES;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ALTITUDE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_COG;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_DIMENSION;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_DRAUGHT;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ETA;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ETA_HOUR;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ETA_MIN;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_HEADING;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_LAT;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_LON;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_MANEUVER_INDICATOR;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_NAV_STATUS;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ROT;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SHIP_TYPE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SOG;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.CPA_UPDATE_TIMEOUT_IN_SECONDS;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.*;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.*;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getNewPosition;
 import static net.osmand.plus.plugins.aistracker.AisTrackerPlugin.AIS_CPA_DEFAULT_WARNING_TIME;
@@ -408,8 +379,6 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
             case AIS_INVALID:
                 return R.drawable.ais_vessel;
-            case AIS_VESSEL_LOST:
-                return R.drawable.ais_vessel_cross;
             case AIS_LANDSTATION:
                 return R.drawable.ais_land;
             case AIS_AIRPLANE:
@@ -463,7 +432,7 @@ public class AisObject {
     private void setColor() {
         if (isLost(vesselLostTimeoutInMinutes)) {
             if (isMovable()) {
-                this.bitmapColor = 0; // black
+                this.bitmapColor = 0; // transparent
             }
         } else {
             this.bitmapColor = selectColor(this.objectClass);
@@ -679,20 +648,10 @@ public class AisObject {
         }
         return newLocation;
     }
-    @Nullable
-    public String getCallSign() {
-        return this.ais_callSign;
-    }
-    @Nullable
-    public String getShipName() {
-        return this.ais_shipName;
-    }
-    @Nullable
-    public String getDestination() {
-        return this.ais_destination;
-    }
-    @NonNull
-    public String getCountryCode() { return this.countryCode; }
+    @Nullable public String getCallSign() { return this.ais_callSign; }
+    @Nullable public String getShipName() { return this.ais_shipName; }
+    @Nullable public String getDestination() { return this.ais_destination; }
+    @NonNull  public String getCountryCode() { return this.countryCode; }
     public AisObjType getObjectClass() { return this.objectClass; }
     public long getLastUpdate() { return this.lastUpdate; }
     public static long getLastMessageReceived() { return lastMessageReceived; }
@@ -967,4 +926,5 @@ public class AisObject {
         }
         return dist;
     }
+    public boolean getSignalLostState() { return (isLost(vesselLostTimeoutInMinutes) && isMovable()); }
 }

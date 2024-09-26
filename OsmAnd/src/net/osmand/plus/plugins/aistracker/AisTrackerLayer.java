@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.aistracker;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.knotsToMeterPerSecond;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.meterToMiles;
+import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.*;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 
 import android.content.Context;
@@ -32,6 +33,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
@@ -398,7 +400,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         AisObject ais = new AisObject(878121, 4, 50.736d, 7.100d);
         updateAisObjectList(ais);
         // AIDS
-        ais = new AisObject( 521077, 21, 50.735d, 7.101d, 2,
+        ais = new AisObject( 521077, 21, 50.735d, 7.101d, 1,
                 0, 0, 0, 0);
         updateAisObjectList(ais);
     }
@@ -592,11 +594,23 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     public PointDescription getObjectName(Object o) {
         if (o instanceof AisObject) {
             AisObject ais = ((AisObject) o);
+            AisObjectConstants.AisObjType objectClass = ais.getObjectClass();
             if (ais.getShipName() != null) {
-                return new PointDescription("AIS object", ais.getShipName());
+                return new PointDescription("AIS object", ais.getShipName() +
+                        (ais.getSignalLostState() ? " (signal lost)" : ""));
+            } else if (objectClass == AIS_LANDSTATION) {
+                return new PointDescription("AIS object", "Land Station with MMSI " + ais.getMmsi());
+            } else if (objectClass == AIS_AIRPLANE) {
+                return new PointDescription("AIS object", "Airplane with MMSI " +
+                        ais.getMmsi() + (ais.getSignalLostState() ? " (signal lost)" : ""));
+            } else if ((objectClass == AIS_ATON) || (objectClass == AIS_ATON_VIRTUAL)) {
+                return new PointDescription("AIS object", "Aid to Navigation");
+            } else if (objectClass == AIS_SART) {
+                return new PointDescription("AIS object", "SART (Search and Rescue Transmitter)");
             }
             return new PointDescription("AIS object",
-                    "AIS object with MMSI " + ais.getMmsi());
+                    "AIS object with MMSI " + ais.getMmsi() +
+                            (ais.getSignalLostState() ? " (signal lost)" : ""));
         }
         return null;
     }
