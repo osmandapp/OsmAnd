@@ -30,6 +30,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
+import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
@@ -194,8 +195,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	@SuppressLint("MissingPermission")
-	fun getPairedOBDDevicesList(activity: Activity): List<String> {
-		var deviceList = listOf<String>()
+	fun getPairedOBDDevicesList(activity: Activity): List<BTDeviceInfo> {
+		var deviceList = listOf<BTDeviceInfo>()
 		if (BLEUtils.isBLEEnabled(activity) && AndroidUtils.hasBLEPermission(activity)) {
 			val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
 			bluetoothAdapter?.let { adapter ->
@@ -203,7 +204,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				val pairedDevices = adapter.bondedDevices.toList()
 				deviceList = pairedDevices.filter { device ->
 					device.uuids?.any { parcelUuid -> parcelUuid.uuid == uuid } == true
-				}.map { it.name ?: "Unknown Device" }
+				}.map { if (it != null) BTDeviceInfo(it.name, it.address) else  BTDeviceInfo.UNKNOWN_DEVICE }
 			}
 
 		} else {
@@ -221,10 +222,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				OBDDispatcher.stopReading()
 			}
 		}
+		connectedDevice = null
 	}
 
 	@SuppressLint("MissingPermission")
-	fun connectToObd(activity: Activity, name: String): Boolean {
+	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
 		if (connectedDevice == null) {
 			if (BLEUtils.isBLEEnabled(activity)) {
 				if (AndroidUtils.hasBLEPermission(activity)) {
@@ -242,7 +244,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 							LOG.debug(it.name)
 						}
 						val obdDevice: BluetoothDevice? =
-							pairedDevices.find { it.name == name }
+							pairedDevices.find { it.name == deviceInfo.name && it.address == deviceInfo.address }
 						connectedDevice = obdDevice
 						connectToDevice(activity)
 					}
@@ -253,7 +255,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		} else {
 			socket?.close()
 			connectedDevice = null
-			connectToObd(activity, name)
+			connectToObd(activity, deviceInfo)
 		}
 		return socket != null && socket?.isConnected == true
 	}

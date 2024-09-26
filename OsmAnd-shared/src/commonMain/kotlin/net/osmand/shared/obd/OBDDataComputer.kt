@@ -101,7 +101,8 @@ object OBDDataComputer {
 		FUEL_LEFT_DISTANCE(true,
 			listOf(OBD_FUEL_LEVEL_COMMAND),
 			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
-//		FUEL_LEFT_LITERS(false,
+
+		//		FUEL_LEFT_LITERS(false,
 //			listOf(OBD_FUEL_LEVEL_COMMAND),
 //			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
 		FUEL_LEFT_PERCENT(false,
@@ -122,6 +123,9 @@ object OBDDataComputer {
 		FUEL_TYPE(false,
 			listOf(OBD_FUEL_TYPE_COMMAND),
 			{ data -> OBDIntValue(OBD_FUEL_TYPE_COMMAND, data) }),
+		VIN(false,
+			listOf(OBD_VIN_COMMAND),
+			{ data -> OBDStringValue(OBD_VIN_COMMAND, data) }),
 		TEMPERATURE_COOLANT(false,
 			listOf(OBD_ENGINE_COOLANT_TEMP_COMMAND),
 			{ data -> OBDIntValue(OBD_ENGINE_COOLANT_TEMP_COMMAND, data) });
@@ -247,6 +251,12 @@ object OBDDataComputer {
 						null
 					}
 				}
+
+				VIN -> if (locValues.size > 0) {
+					(locValues[locValues.size - 1] as OBDStringValue).value
+				} else {
+					null
+				}
 			}
 		}
 
@@ -313,6 +323,19 @@ object OBDDataComputer {
 				} catch (error: NumberFormatException) {
 					log.error("Can\'t parse ${it.getValue()} to Int")
 				}
+			}
+			return accepted
+		}
+	}
+
+	class OBDStringValue(cmd: OBDCommand, data: Map<OBDCommand, OBDDataField?>) :
+		OBDValue(cmd, data) {
+		var value = ""
+		override fun acceptData(dataField: OBDDataField?): Boolean {
+			var accepted = false
+			dataField?.let {
+				value = it.getValue()
+				accepted = true
 			}
 			return accepted
 		}

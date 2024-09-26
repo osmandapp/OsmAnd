@@ -28,6 +28,7 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.SPEED
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.VIN
 
 class OBDMainFragment : BaseOsmAndFragment() {
 	private var deviceName: EditText? = null
@@ -42,6 +43,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var fuelTypeBtn: Button? = null
 	private var fuelLeftPersBtn: Button? = null
 	private var tempAmbientBtn: Button? = null
+	private var vinBtn: Button? = null
 	private var fuelLeftDistResp: EditText? = null
 	private var fuelLeftLitersResp: EditText? = null
 	private var fuelConsumptionResp: EditText? = null
@@ -49,7 +51,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var speedResp: EditText? = null
 	private var tempIntakeResp: EditText? = null
 	private var tempCoolantResp: EditText? = null
-	private var resp8: EditText? = null
+	private var vinResp: EditText? = null
 	private var fuelTypeResp: EditText? = null
 	private var fuelLeftPersResp: EditText? = null
 	private var tempAmbientResp: EditText? = null
@@ -106,6 +108,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelTypeBtn = view.findViewById(R.id.btn9)
 		fuelLeftPersBtn = view.findViewById(R.id.btn10)
 		tempAmbientBtn = view.findViewById(R.id.btn11)
+		vinBtn = view.findViewById(R.id.btn12)
 		fuelLeftDistBtn?.text = "fuel left distance"
 		fuelLeftLitersBtn?.text = "fuel left liters"
 		fuelConsumptionBtn?.text = "fuel consumption"
@@ -117,6 +120,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelTypeBtn?.text = "fuel type"
 		fuelLeftPersBtn?.text = "fuel left percent"
 		tempAmbientBtn?.text = "ambient air temperature"
+		vinBtn?.text = "vin"
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -180,6 +184,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 				BATTERY_VOLTAGE -> updateWidgetData(batteryVoltageResp, result)
 				FUEL_TYPE -> updateWidgetData(fuelTypeResp, result)
 				TEMPERATURE_COOLANT -> updateWidgetData(tempCoolantResp, result)
+				VIN -> updateWidgetData(vinResp, result)
 			}
 		}
 

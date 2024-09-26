@@ -22,6 +22,7 @@ import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.shared.data.BTDeviceInfo
 
 class VehicleMetricsSettingsFragment : BaseOsmAndFragment() {
 	private var plugin: VehicleMetricsPlugin? = null
@@ -30,7 +31,7 @@ class VehicleMetricsSettingsFragment : BaseOsmAndFragment() {
 	var adapter: DeviceAdapter? = null
 	var emptyView: View? = null
 
-	private var items = listOf<String>()
+	private var items = listOf<BTDeviceInfo>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -127,23 +128,26 @@ class VehicleMetricsSettingsFragment : BaseOsmAndFragment() {
 		}
 	}
 
-	class DeviceAdapter(private val items: List<String>) :
+	class DeviceAdapter(private val items: List<BTDeviceInfo>) :
 		RecyclerView.Adapter<DeviceAdapter.ViewHolder>() {
 		var selectedPosition: Int = RecyclerView.NO_POSITION
 
 		class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 			val textView: TextView = itemView.findViewById(android.R.id.text1)
+			val subTextView: TextView = itemView.findViewById(android.R.id.text2)
 		}
 
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val view = LayoutInflater.from(parent.context)
-				.inflate(android.R.layout.simple_list_item_1, parent, false)
+				.inflate(android.R.layout.simple_list_item_2, parent, false)
 			return ViewHolder(view)
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-			holder.textView.text = items[position]
+			holder.textView.text = items[position].name
+			holder.subTextView.text = items[position].address
 			holder.textView.setTextColor(Color.BLACK)
+			holder.subTextView.setTextColor(Color.GRAY)
 			if (position == selectedPosition) {
 				holder.itemView.setBackgroundColor(Color.LTGRAY)
 			} else {
