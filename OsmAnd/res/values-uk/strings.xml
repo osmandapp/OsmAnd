@@ -4715,7 +4715,7 @@
     <string name="compass_visible_if_map_rotated">Показується після повороту мапи</string>
     <string name="compass_always_hidden">Постійно прихований</string>
     <string name="compass_always_visible">Показується постійно</string>
-    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб змінити режим орієнтації мапи.</string>
+    <string name="compass_click_desc">Двічі торкніться віджета компаса, щоб змінити режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колір ізоліній глибин</string>
     <string name="auto_backup_preference_desc">Типово Android створює резервні копії Закладок, ключів мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія має обмеження у 25 МБ.
