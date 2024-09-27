@@ -67,6 +67,7 @@
 
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
+    <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
