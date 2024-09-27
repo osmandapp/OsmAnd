@@ -28,14 +28,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
@@ -54,7 +54,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.osmedit.EditPoiViewPager;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -105,7 +104,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OpenstreetmapUtil openstreetmapUtil;
 
 	private EditPoiData editPoiData;
-	private EditPoiViewPager viewPager;
+	private ViewPager2 viewPager;
 	private ExtendedEditText poiTypeEditText;
 
 	private OnSaveButtonClickListener onSaveButtonClickListener;
@@ -151,17 +150,18 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		viewPager = view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
+		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+		PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(this, basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 			@Override
-			public void onPageScrolled(int i, float v, int i1) {
-
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 
 			@Override
-			public void onPageSelected(int i) {
-				Fragment pageFragment = pagerAdapter.getItem(i);
+			public void onPageSelected(int position) {
+				Fragment pageFragment = pagerAdapter.createFragment(position);
 				((OnFragmentActivatedListener) pageFragment).onFragmentActivated();
 				if (pageFragment instanceof OnSaveButtonClickListener) {
 					onSaveButtonClickListener = (OnSaveButtonClickListener) pageFragment;
@@ -171,40 +171,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 
 			@Override
-			public void onPageScrollStateChanged(int i) {
-
+			public void onPageScrollStateChanged(int state) {
+				super.onPageScrollStateChanged(state);
 			}
 		});
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 		// tabLayout.setupWithViewPager(viewPager);
 		// Hack due to bug in design support library v22.2.1
 		// https://code.google.com/p/android/issues/detail?id=180462
 		// TODO remove in new version
-		if (Build.VERSION.SDK_INT >= 11) {
-			if (ViewCompat.isLaidOut(tabLayout)) {
-				tabLayout.setupWithViewPager(viewPager);
-			} else {
-				tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-					@Override
-					public void onLayoutChange(View v, int left, int top, int right, int bottom,
-					                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
-						tabLayout.setupWithViewPager(viewPager);
-						tabLayout.removeOnLayoutChangeListener(this);
-					}
-				});
-			}
+		if (ViewCompat.isLaidOut(tabLayout)) {
+			TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)));
+			mediator.attach();
 		} else {
-			ViewTreeObserver vto = view.getViewTreeObserver();
-			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
+			tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 				@Override
-				public void onGlobalLayout() {
-					if (getActivity() != null) {
-						tabLayout.setupWithViewPager(viewPager);
-					}
+				public void onLayoutChange(View v, int left, int top, int right, int bottom,
+				                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)));
+					mediator.attach();
+					tabLayout.removeOnLayoutChangeListener(this);
 				}
 			});
 		}
@@ -714,29 +703,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static class PoiInfoPagerAdapter extends FragmentPagerAdapter {
+	public static class PoiInfoPagerAdapter extends FragmentStateAdapter {
 
 		private final Fragment[] fragments = {new BasicEditPoiFragment(), new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
-		PoiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
-			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+		PoiInfoPagerAdapter(Fragment fm, String basicTitle, String extendedTitle) {
+			super(fm);
 			titles = new String[] {basicTitle, extendedTitle};
 		}
 
-		@Override
-		public int getCount() {
-			return fragments.length;
+		public CharSequence getPageTitle(int position) {
+			return titles[position];
 		}
 
+		@NonNull
 		@Override
-		public Fragment getItem(int position) {
+		public Fragment createFragment(int position) {
 			return fragments[position];
 		}
 
 		@Override
-		public CharSequence getPageTitle(int position) {
-			return titles[position];
+		public int getItemCount() {
+			return fragments.length;
 		}
 	}
 
