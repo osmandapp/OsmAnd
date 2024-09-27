@@ -5957,4 +5957,9 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Híbrido con hidrógeno</string>
     <string name="obd_widget_group">Métricas del panel de control</string>
     <string name="obd_plugin_name">Métricas del panel de control</string>
+    <string name="unknown_bt_device">Dispositivo desconocido</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Código VIN a través de OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Configuración de métricas del vehículo</string>
+    <string name="reset_average_speed">Restablecer velocidad media</string>
 </resources>
