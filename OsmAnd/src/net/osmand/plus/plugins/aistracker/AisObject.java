@@ -77,6 +77,7 @@ public class AisObject {
     private int bitmapColor;
     private AisTrackerHelper.Cpa cpa;
     private long lastCpaUpdate = 0;
+    private boolean vesselAtRest = false; // if true, draw a circle instead of a bitmap
 
     public AisObject(int mmsi, int msgType, double lat, double lon) {
         initObj(mmsi, msgType);
@@ -414,7 +415,8 @@ public class AisObject {
 
     private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
         invalidateBitmap();
-        if (isLost(vesselLostTimeoutInMinutes)) {
+        vesselAtRest = isVesselAtRest();
+        if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
                 this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel_cross);
                 this.bitmapValid = true;
@@ -430,7 +432,7 @@ public class AisObject {
     }
 
     private void setColor() {
-        if (isLost(vesselLostTimeoutInMinutes)) {
+        if (isLost(vesselLostTimeoutInMinutes) && !vesselAtRest) {
             if (isMovable()) {
                 this.bitmapColor = 0; // transparent
             }
@@ -459,6 +461,15 @@ public class AisObject {
         }
     }
 
+    private void drawCircle(float locationX, float locationY,
+                            @NonNull Paint paint, @NonNull Canvas canvas) {
+        Paint localPaint = new Paint(paint);
+        localPaint.setColor(Color.DKGRAY);
+        canvas.drawCircle(locationX, locationY, 22.0f, localPaint);
+        localPaint.setColor(this.bitmapColor);
+        canvas.drawCircle(locationX, locationY, 18.0f, localPaint);
+    }
+
     public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
                      @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
         updateBitmap(mapLayer, paint);
@@ -470,14 +481,18 @@ public class AisObject {
             int locationY = tileBox.getPixYFromLatNoRot(this.ais_position.getLatitude());
             float fx =  locationX - this.bitmap.getWidth() / 2.0f;
             float fy =  locationY - this.bitmap.getHeight() / 2.0f;
-            if (this.needRotation()) {
+            if (!vesselAtRest && this.needRotation()) {
                 float rotation = 0;
                 if (this.ais_cog != INVALID_COG) { rotation = (float)this.ais_cog; }
                 else if (this.ais_heading != INVALID_HEADING ) { rotation = this.ais_heading; }
                 canvas.rotate(rotation, locationX, locationY);
             }
-            canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
-            if ((speedFactor > 0) && (!isLost(vesselLostTimeoutInMinutes))) {
+            if (vesselAtRest) {
+                drawCircle(locationX, locationY, paint, canvas);
+            } else {
+                canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
+            }
+            if ((speedFactor > 0) && (!isLost(vesselLostTimeoutInMinutes)) && !vesselAtRest) {
                 float lineStartX = locationX;
                 float lineLength = (float)this.bitmap.getHeight() * speedFactor;
                 float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
@@ -526,6 +541,32 @@ public class AisObject {
             return isMovable();
         }
         return false;
+    }
+    /* return true if a vessel is moored etc. and needs to be drawn as a circle */
+    private boolean isVesselAtRest() {
+        switch (this.objectClass) {
+            case AIS_VESSEL:
+            case AIS_VESSEL_SPORT:
+            case AIS_VESSEL_FAST:
+            case AIS_VESSEL_PASSENGER:
+            case AIS_VESSEL_FREIGHT:
+            case AIS_VESSEL_COMMERCIAL:
+                switch (this.ais_navStatus) {
+                    case 5: // moored
+                        return true;
+                    default:
+                        if (msgTypes.contains(18) || msgTypes.contains(24)
+                        ||  msgTypes.contains(1)  || msgTypes.contains(3)) {
+                            if ((ais_cog == INVALID_COG /* maybe remove this condition */)
+                                    && (ais_sog == 0.0d)) {
+                                return true;
+                            }
+                        }
+                        return false;
+                }
+            default:
+                return false;
+        }
     }
 
     /* return true if the vessel gets too close with the own position in the future
@@ -926,5 +967,7 @@ public class AisObject {
         }
         return dist;
     }
-    public boolean getSignalLostState() { return (isLost(vesselLostTimeoutInMinutes) && isMovable()); }
+    public boolean getSignalLostState() {
+        return (isLost(vesselLostTimeoutInMinutes) && isMovable() && !vesselAtRest);
+    }
 }
