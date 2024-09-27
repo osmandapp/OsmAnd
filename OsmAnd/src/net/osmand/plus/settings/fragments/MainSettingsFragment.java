@@ -192,7 +192,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
 							return BaseSettingsFragment.showFragment(
 									preferenceFragment,
-									getActivity(),
+									requireActivity(),
 									getClassNameOfPreferenceFragment());
 						}
 					});
