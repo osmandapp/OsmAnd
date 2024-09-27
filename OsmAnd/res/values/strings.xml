@@ -10,9 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="unknown_bt_device">Unknown device</string>
-    <string name="obd_vin">VIN</string>
-    <string name="obd_vin_desc">VIN code over OBD</string>
+	<string name="reset_average_speed">Reset average speed</string>
+	<string name="unknown_bt_device">Unknown device</string>
+	<string name="obd_vin">VIN</string>
+	<string name="obd_vin_desc">VIN code over OBD</string>
     <string name="unit_volt">V</string>
 	<string name="wikimedia">Wikimedia</string>
 	<string name="open_in_browser">Open in browser</string>
