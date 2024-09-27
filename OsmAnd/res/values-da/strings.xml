@@ -5960,5 +5960,10 @@
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Får adgang til dine køretøjsoplysninger via OBD-protokollen</string>
-    <string name="obd_plugin_name">Køretøjets målinger</string>
+    <string name="obd_plugin_name">Køretøjets parametre</string>
+    <string name="unknown_bt_device">Ukendt enhed</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">VIN-kode via OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjets parametre</string>
+    <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
 </resources>
