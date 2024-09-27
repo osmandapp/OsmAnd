@@ -3683,7 +3683,7 @@
     <string name="poi_hgv_yes">Si:LGV;HGV;Camión;Camións;Vehículo pesado de mercadorías</string>
     <string name="poi_hgv_destination">Destino;Acceso para camións só ao destino</string>
     <string name="poi_hgv_permissive">Permitido;Acceso permitido para camións</string>
-    <string name="poi_hgv_designated">Indicado;Acceso indicado para camións</string>
+    <string name="poi_hgv_designated">Sinalizado;Acceso sinalizado para camións</string>
     <string name="poi_hgv_delivery">Entregas;Acceso para camións de reparto</string>
     <string name="poi_goods_yes">Si:Acceso a vehículos comerciais lixeiros</string>
     <string name="poi_goods_designated">Indicado;Indicado para vehículos comerciais lixeiros</string>
