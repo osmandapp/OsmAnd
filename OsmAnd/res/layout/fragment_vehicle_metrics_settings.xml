@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/actionModeBackground">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			app:title="@string/vehicle_metrics_plugin_settings" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/available_devices_list"
+		android:layout_width="match_parent"
+		android:layout_height="200dp"
+		android:background="#eee" />
+
+	<TextView
+		android:id="@+id/empty_view"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="Please, pair OBD device first"
+		android:textColor="@android:color/darker_gray"
+		android:textSize="18sp"
+		android:visibility="gone" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding_half"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/connectBtn"
+			android:layout_width="120dp"
+			android:layout_height="40dp" />
+
+		<TextView
+			android:id="@+id/status"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/content_padding"
+			android:gravity="center_vertical" />
+
+	</LinearLayout>
+
+</LinearLayout>

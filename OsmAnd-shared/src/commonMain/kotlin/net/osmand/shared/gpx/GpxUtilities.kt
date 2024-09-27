@@ -414,6 +414,10 @@ object GpxUtilities {
 
 	fun writeGpxFile(file: KFile, gpxFile: GpxFile): KException? {
 		return try {
+			file.getParentFile()?.createDirectories()
+			if (KAlgorithms.isEmpty(gpxFile.path)) {
+				gpxFile.path = if (file.isAbsolute()) file.path() else file.absolutePath()
+			}
 			writeGpx(file, null, gpxFile, null)
 		} catch (e: KException) {
 			log.error("Failed to write gpx '$file.path()'", e)
@@ -743,6 +747,7 @@ object GpxUtilities {
 			} else {
 				regularExtensions[key] = value
 			}
+			wptPt.getDeferredExtensionsToWrite()[key] = value
 		}
 		if (regularExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
@@ -970,7 +975,7 @@ object GpxUtilities {
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
 			if (gpxFile.error != null) {
-				log.info("Error reading gpx ${gpxFile.path}")
+				log.info("Error reading gpx ${gpxFile.path}: ${gpxFile.error!!.message}")
 			}
 			gpxFile
 		} catch (e: IOException) {

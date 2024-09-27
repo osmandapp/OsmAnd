@@ -10,7 +10,6 @@ import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Track3DStyle;
 import net.osmand.shared.routing.ColoringType;
-import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -97,7 +96,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 			Track3DStyle track3DStyle = getTrack3DStyle();
 			if (hasMapRenderer() && track3DStyle != null && track3DStyle.getVisualizationType().is3dType()) {
-				updateGpx3dWay(tb, points, routeSegments);
+				updateGpx3dWay(tb, points, routeSegments, isHeightmapsActive());
 			} else if (coloringType.isTrackSolid()) {
 				if (hasMapRenderer()) {
 					Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
@@ -109,7 +108,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				}
 			} else if (coloringType.isGradient()) {
 				if (hasMapRenderer()) {
-					updateGpxGradientWay(tb, points);
+					updateGpxGradientWay(tb, points, isHeightmapsActive());
 				} else {
 					updateWay(new GeometryWayWptPtProvider(points), tb);
 				}
@@ -123,12 +122,12 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		}
 	}
 
-	protected void updateGpxGradientWay(@NonNull RotatedTileBox tb, @NonNull List<WptPt> points) {
+	protected void updateGpxGradientWay(@NonNull RotatedTileBox tb, @NonNull List<WptPt> points, boolean heightmapsActive) {
 		List<RouteColorizationPoint> colorizationPoints = new ArrayList<>();
 		List<Float> pointHeights = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);
-			pointHeights.add((float) getPointElevation(wptPt));
+			pointHeights.add((float) getPointElevation(wptPt, heightmapsActive));
 			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), 0);
 			point.setPrimaryColor(getPointGradientColor(coloringType, wptPt));
 			colorizationPoints.add(point);
@@ -136,7 +135,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
 	}
 
-	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points, @Nullable List<RouteSegmentResult> segments) {
+	protected void updateGpx3dWay(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points,
+	                              @Nullable List<RouteSegmentResult> segments, boolean heightmapsActive) {
 		ColoringType outlineColoringType = getOutlineColoringType();
 		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
 		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
@@ -144,7 +144,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);
-			double value = getPointElevation(wptPt);
+			double value = getPointElevation(wptPt, heightmapsActive);
 			RouteColorizationPoint point = new RouteColorizationPoint(i, wptPt.getLat(), wptPt.getLon(), value);
 			point.setPrimaryColor(getPointColor(coloringType, wptPt, routeColors, i));
 			if (outlineColoringType != null) {
@@ -155,9 +155,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		updateWay(new Geometry3DWayProvider(colorization), createGradient3DStyles(colorization), tileBox);
 	}
 
-	private double getPointElevation(@NonNull WptPt point) {
+	private double getPointElevation(@NonNull WptPt point, boolean heightmapsActive) {
 		Track3DStyle style = getTrack3DStyle();
-		return style != null ? Gpx3DVisualizationType.getPointElevation(point, style) : 0;
+		return style != null ? Gpx3DVisualizationType.getPointElevation(point, style, heightmapsActive) : 0;
 	}
 
 	@ColorInt

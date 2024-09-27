@@ -180,6 +180,7 @@ object SharedUtil {
 	@JvmStatic
 	fun jGpxFile(gpxFile: GpxFile): GPXFile {
 		val jGpxFile = GPXFile(gpxFile.author)
+		jGpxFile.path = gpxFile.path
 		jGpxFile.metadata = jMetadata(gpxFile.metadata)
 		val jTracks = jGpxFile.tracks
 		for (track in gpxFile.tracks) {
