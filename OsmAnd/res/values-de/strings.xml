@@ -5950,4 +5950,14 @@
     <string name="obd_plugin_description">Zugriff auf Ihre Fahrzeuginformationen über das OBD-Protokoll</string>
     <string name="obd_support">OBD Unterstützung</string>
     <string name="obd_battery_voltage">Batteriespannung</string>
+    <string name="obd_rpm_desc">Zeigt mithilfe des OBD-Sensors die Drehzahl des Fahrzeugtachos an</string>
+    <string name="obd_air_intake_temp_desc">Zeigt mithilfe des OBD-Sensors die Ansauglufttemperatur des Fahrzeugs an</string>
+    <string name="obd_ambient_air_temp_desc">Zeigt mithilfe des OBD-Sensors die Umgebungslufttemperatur an</string>
+    <string name="obd_engine_coolant_temp_desc">Zeigt mithilfe des OBD-Sensors die Motorkühlmitteltemperatur an</string>
+    <string name="obd_battery_voltage_desc">Zeigt mithilfe des OBD-Sensors die Batteriespannung an</string>
+    <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem linken Kraftstoffstand noch fahren kann</string>
+    <string name="obd_fuel_level_desc">Zeigt mithilfe des OBD-Sensors den Kraftstoffstand des Fahrzeugs an</string>
+    <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
+    <string name="obd_fuel_level">Kraftstoffstand</string>
+    <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
 </resources>

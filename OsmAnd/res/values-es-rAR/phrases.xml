@@ -3674,7 +3674,7 @@
     <string name="poi_trailer_designated">Designado;Designado para remolques</string>
     <string name="poi_motorcycle_yes">Sí;Motocicleta</string>
     <string name="poi_motorcycle_permissive">Permisivo;Acceso permisivo para motocicletas</string>
-    <string name="poi_motorcycle_destination">Destino;Acceso para motocicletas sólo a destino</string>
+    <string name="poi_motorcycle_destination">Destino;Acceso para motocicletas solo a destino</string>
     <string name="poi_motorcycle_designated">Designado;Designado para motocicletas</string>
     <string name="poi_moped_yes">Sí;Ciclomotor</string>
     <string name="poi_moped_designated">Designado;Designado para ciclomotores</string>
