@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="reset_average_speed">Reset average speed</string>
     <string name="unit_volt">V</string>
 	<string name="wikimedia">Wikimedia</string>
 	<string name="open_in_browser">Open in browser</string>
