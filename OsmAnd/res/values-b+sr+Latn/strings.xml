@@ -5966,4 +5966,5 @@
     <string name="unknown_bt_device">Nepoznat uređaj</string>
     <string name="obd_vin_desc">VIN kod preko OBD-a</string>
     <string name="reset_average_speed">Poništi prosečnu brzinu</string>
+    <string name="vehicle_metrics_plugin_settings">Podešavanja metrike vozila</string>
 </resources>
