@@ -3508,7 +3508,6 @@
 \n隨時從您的 Google Play 設定中管理或取消您的訂閱。</string>
     <string name="search_poi_types">搜尋 POI 類型</string>
     <string name="search_poi_types_descr">組合來自不同分類的 POI 類型。點擊開關以全選，點擊左側選取分類。</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">快速動作</string>
     <string name="radius_ruler_item">半徑尺規</string>
@@ -3771,7 +3770,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s 資料僅供道路使用，請使用「兩點間的路線」計算路線以檢視圖表。</string>
     <string name="message_graph_will_be_available_after_recalculation">請稍候。
 \n重新計算路線後即可使用圖表。</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">本機地圖</string>
     <string name="icon_group_amenity">便利設施</string>
     <string name="icon_group_special">特殊</string>

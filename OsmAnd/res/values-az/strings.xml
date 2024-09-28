@@ -2051,7 +2051,6 @@
     <string name="shared_string_is_saved">saxlanıldı</string>
     <string name="sort_name_descending">Ad: Z – A</string>
     <string name="sort_name_ascending">Ad: A – Z</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_sport">İdman</string>
     <string name="login_account">Hesab</string>
     <string name="user_login">İstifadəçi adı</string>

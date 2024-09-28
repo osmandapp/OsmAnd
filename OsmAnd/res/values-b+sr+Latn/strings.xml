@@ -3053,7 +3053,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Slobodno vreme</string>
     <string name="icon_group_special">Specijalna</string>
     <string name="icon_group_transport">Prevoz</string>

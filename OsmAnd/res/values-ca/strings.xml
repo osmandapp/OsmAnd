@@ -1454,7 +1454,6 @@
     <string name="mark_to_delete">Marqueu per esborrar</string>
     <string name="simulate_your_location">Simula la vostra ubicació</string>
     <string name="drawer">Llista senzilla</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntes més freqüents, canvis recents i altres.</string>
     <string name="routing_settings_2">Paràmetres de navegació</string>
     <string name="general_settings_2">Paràmetres generals</string>
@@ -3680,7 +3679,6 @@
     <string name="shared_string_always">Sempre</string>
     <string name="screen_control">Control de pantalla</string>
     <string name="development">Desenvolupament</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="use_native_pt_desc">Canvieu el càlcul de rutes de Transport Public a Java (segur)</string>
     <string name="start_finish_icons">Icones d\'inici i final</string>
     <string name="contour_lines_thanks">Gràcies per comprar \'Corbes de nivell\'</string>

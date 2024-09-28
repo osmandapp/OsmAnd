@@ -2562,7 +2562,6 @@
     <string name="in_app_purchase_desc">Eenmalige betaling</string>
     <string name="in_app_purchase_desc_ex">Eens aangekocht, kun je het permanent blijven gebruiken.</string>
     <string name="purchase_unlim_title">%1$s Kopen</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Onbeperkte downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="unlock_all_features">Ontgrendel alle OsmAnd-functies</string>
@@ -3365,7 +3364,6 @@
     <string name="search_poi_types_descr">Combineer POI-types uit verschillende categorieën. Tik op \"Selecteer alles\" om alles binnen een categorie te selecteren, of kies individuele types.</string>
     <string name="extra_maps_menu_group">Extra kaarten</string>
     <string name="download_unsupported_action">Niet ondersteunde actie %1$s</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Sneltoets</string>
     <string name="radius_ruler_item">Radius liniaal</string>
@@ -3664,7 +3662,6 @@
     <string name="shared_string_graph">Grafiek</string>
     <string name="message_graph_will_be_available_after_recalculation">Wacht totdat route herberekend is.
 \nNa herberekening is de grafiek zichtbaar.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_track_descr">Kies een trackbestand om te volgen of importeer het vanaf je apparaat.</string>
     <string name="shared_string_custom">Aangepast</string>
     <string name="perform_oauth_authorization_description">Voer een OAuth-login uit om osm edit functies te gebruiken</string>
@@ -4363,7 +4360,6 @@
     <string name="shared_string_not_included">Niet inbegrepen</string>
     <string name="cancel_anytime_in_gplay">Annuleer het abonnement op elk moment via Google Play.</string>
     <string name="nautical_depth">Zeediepte</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="send_crash_log">Crashrapport verzenden</string>
     <string name="you_can_get_feature_as_part_of_pattern">Verkrijg \"%1$s\" als onderdeel van het %2$s abonnement. Vergelijking:</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
