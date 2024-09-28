@@ -218,18 +218,24 @@ public class AisObject {
             case 32: // Towing
             case 33: // Dredging
             case 34: // Diving ops
-            case 35: // Military ops
             case 50: // Pilot Vessel
-            case 51: // Search and Rescue vessel
             case 52: // Tug
             case 53: // Port Tender
             case 54: // Anti-pollution equipment
-            case 55: // Law Enforcement
             case 56: // Spare - Local Vessel
             case 57: // Spare - Local Vessel
-            case 58: // Medical Transport
             case 59: // Noncombatant ship according to RR Resolution No. 18
                 this.objectClass = AIS_VESSEL_COMMERCIAL;
+                break;
+
+            case 35: // Military ops
+            case 55: // Law Enforcement
+                this.objectClass = AIS_VESSEL_AUTHORITIES;
+                break;
+
+            case 51: // Search and Rescue vessel
+            case 58: // Medical Transport
+                this.objectClass = AIS_VESSEL_SAR;
                 break;
 
             case 36: // Sailing
@@ -378,6 +384,8 @@ public class AisObject {
             case AIS_VESSEL_PASSENGER:
             case AIS_VESSEL_FREIGHT:
             case AIS_VESSEL_COMMERCIAL:
+            case AIS_VESSEL_AUTHORITIES:
+            case AIS_VESSEL_SAR:
             case AIS_INVALID:
                 return R.drawable.ais_vessel;
             case AIS_LANDSTATION:
@@ -408,6 +416,10 @@ public class AisObject {
                 return Color.GRAY;
             case AIS_VESSEL_COMMERCIAL:
                 return Color.LTGRAY;
+            case AIS_VESSEL_AUTHORITIES:
+                return 0x556b2f; //  darkolivegreen
+            case AIS_VESSEL_SAR:
+                return 0xfa8072; // salmon
             default:
                 return 0; // transparent
         }
@@ -511,6 +523,8 @@ public class AisObject {
             case AIS_VESSEL_PASSENGER:
             case AIS_VESSEL_FREIGHT:
             case AIS_VESSEL_COMMERCIAL:
+            case AIS_VESSEL_AUTHORITIES:
+            case AIS_VESSEL_SAR:
             case AIS_AIRPLANE:
                 return true;
             default:
@@ -551,6 +565,8 @@ public class AisObject {
             case AIS_VESSEL_PASSENGER:
             case AIS_VESSEL_FREIGHT:
             case AIS_VESSEL_COMMERCIAL:
+            case AIS_VESSEL_AUTHORITIES:
+            case AIS_VESSEL_SAR:
                 switch (this.ais_navStatus) {
                     case 5: // moored
                         return true;
