@@ -5954,4 +5954,9 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Двогоривно радно Водоник</string>
     <string name="obd_battery_voltage_desc">Приказује напон батерије преко ДНВ сензора</string>
     <string name="obd_fuel_left_distance_desc">Показује раздаљину коју возило може да пређе са преосталим горивом преко ОБД сензора</string>
+    <string name="unknown_bt_device">Непознати уређај</string>
+    <string name="vehicle_metrics_plugin_settings">Подешавања метрике возила</string>
+    <string name="obd_vin">ИБВ</string>
+    <string name="obd_vin_desc">ИБВ код преко ДНВ</string>
+    <string name="reset_average_speed">Ресетуј просечну брзину</string>
 </resources>
