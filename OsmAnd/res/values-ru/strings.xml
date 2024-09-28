@@ -79,7 +79,7 @@
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
-    <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
+    <string name="animate_my_location_desc">Плавное панорамирование карты при движении. Вносит небольшую задержку.</string>
     <string name="display_zoom_level">Масштаб: %1$s</string>
     <string name="favorite_group_name">Имя группы</string>
     <string name="change_color">Выбрать цвет</string>
@@ -334,7 +334,7 @@
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
     <string name="map_widget_av_notes">Медиазаметки</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-плагин для линий высот</string>
+    <string name="osmand_srtm_short_description_80_chars">Плагин OsmAnd для офлайн-топографических функций, таких как контурные линии, отмывка рельефа, уклоны</string>
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
     <string name="audionotes_location_not_defined">Нажмите «Использовать позицию…», чтобы добавить заметку к месту.</string>
     <string name="map_widget_audionotes">Аудиозаметки</string>
@@ -4754,7 +4754,7 @@
     <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
     <string name="compass_always_hidden">Скрыт</string>
     <string name="compass_always_visible">Виден</string>
-    <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
+    <string name="compass_click_desc">Двойное нажатие на компас переключает режим ориентации.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
@@ -5938,7 +5938,7 @@
     <string name="obd_widget_group">Показатели ТС</string>
     <string name="obd_rpm">Обороты</string>
     <string name="rpm_unit">об/мин</string>
-    <string name="obd_speed_desc">Виджет показывает скорость автомобиля по датчику OBD</string>
+    <string name="obd_speed_desc">Виджет показывает скорость транспортного средства по датчику OBD</string>
     <string name="obd_rpm_desc">Виджет показывает обороты с тахометра транспортного средства по датчику OBD</string>
     <string name="unit_volt">В</string>
     <string name="obd_air_intake_temp_desc">Виджет показывает температуру всасываемого воздуха по датчику OBD</string>
@@ -5960,4 +5960,9 @@
     <string name="obd_fuel_consumption_rate_desc">Виджет показывает расход топлива транспортным средством на основе данных OBD и местоположения</string>
     <string name="obd_plugin_name">Показатели ТС</string>
     <string name="obd_support">Поддержка OBD</string>
+    <string name="unknown_bt_device">Неизвестное устройство</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">VIN-код по OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Настройки показателей ТС</string>
+    <string name="reset_average_speed">Сбросить среднюю скорость</string>
 </resources>

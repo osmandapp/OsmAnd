@@ -5960,4 +5960,9 @@
     <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
     <string name="obd_fuel_level">Kraftstoffstand</string>
     <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
+    <string name="unknown_bt_device">Unbekanntes Gerät</string>
+    <string name="obd_vin">VIN (Fahrzeug Identifizierung Nummer)</string>
+    <string name="obd_vin_desc">VIN-Code über OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Fahrzeugmetrik-Einstellungen</string>
+    <string name="reset_average_speed">Durchschnittliche Geschwindigkeit zurücksetzen</string>
 </resources>
