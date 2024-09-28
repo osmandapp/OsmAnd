@@ -4683,7 +4683,7 @@
     <string name="auto_backup_title">Backup automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
-    <string name="compass_click_desc">Astuce : appuyez sur la boussole pour basculer entre les modes d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Appuyez deux fois sur la boussole pour basculer entre les modes d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Appuyez sur le gadget pour prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Appuyez sur le gadget pour enregistrer une vidéo.</string>
@@ -5947,4 +5947,8 @@
     <string name="obd_plugin_description">Accède aux informations de votre véhicule via le protocole OBD</string>
     <string name="obd_support">Prise en charge de l\'OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Affiche la consommation de carburant du véhicule selon l\'OBD et la localisation</string>
+    <string name="unknown_bt_device">Appareil inconnu</string>
+    <string name="obd_vin">VIN</string>
+    <string name="vehicle_metrics_plugin_settings">Paramètres de mesure du véhicule</string>
+    <string name="reset_average_speed">Effacer la vitesse moyenne</string>
 </resources>
