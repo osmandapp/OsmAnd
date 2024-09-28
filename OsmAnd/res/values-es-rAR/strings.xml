@@ -5973,4 +5973,9 @@
     <string name="obd_fuel_type">Tipo de combustible</string>
     <string name="obd_plugin_description">Accede a la información de tu vehículo mediante el protocolo OBD</string>
     <string name="obd_support">Compatibilidad OBD</string>
+    <string name="reset_average_speed">Reiniciar la velocidad promedio</string>
+    <string name="unknown_bt_device">Dispositivo desconocido</string>
+    <string name="obd_vin">VIN</string>
+    <string name="vehicle_metrics_plugin_settings">Ajustes de «Estadísticas del vehículo»</string>
+    <string name="obd_vin_desc">Código VIN sobre OBD</string>
 </resources>
