@@ -5951,4 +5951,9 @@
     <string name="obd_rpm_desc">Montras rivoluan rapidon de motoro raportatan de OBD-sentilo</string>
     <string name="obd_fuel_type_desc">Montras specon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_engine_coolant_temp_desc">Montras temperaturon de malvarmiga likvaĵo raportatan de OBD-sentilo</string>
+    <string name="unknown_bt_device">Nekonata aparato</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Montras VIN-numeron raportatan de OBD-sentilo</string>
+    <string name="vehicle_metrics_plugin_settings">Agordoj pri statistikoj pri veturilo</string>
+    <string name="reset_average_speed">Nuligi mezuman rapidon</string>
 </resources>
