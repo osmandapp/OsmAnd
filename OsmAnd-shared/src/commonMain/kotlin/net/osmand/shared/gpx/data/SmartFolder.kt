@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.util.KCollectionUtils
 
@@ -19,7 +20,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	@Serializable
 	var creationTime = 0L
 
-	@Serializable
+	@Serializable(with = TrackFilterSerializer::class)
 	var filters: MutableList<BaseTrackFilter>? = null
 
 	@Transient
@@ -65,5 +66,9 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	fun resetItems() {
 		trackItems = ArrayList()
 		folderAnalysis = null
+	}
+
+	override fun equals(other: Any?): Boolean {
+		return super.equals(other)
 	}
 }

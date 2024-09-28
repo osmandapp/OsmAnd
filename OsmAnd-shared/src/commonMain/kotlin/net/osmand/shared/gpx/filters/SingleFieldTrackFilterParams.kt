@@ -1,6 +1,9 @@
 package net.osmand.shared.gpx.filters
 
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 open class SingleFieldTrackFilterParams {
 	open fun hasSelectAllVariant(): Boolean {
 		return false

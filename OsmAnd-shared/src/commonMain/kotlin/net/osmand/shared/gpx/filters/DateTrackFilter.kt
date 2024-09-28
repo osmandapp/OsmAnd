@@ -9,26 +9,47 @@ import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 
-class DateTrackFilter(trackFilterType: TrackFilterType, dateFrom: Long,
-	filterChangedListener: FilterChangedListener?) : BaseTrackFilter(trackFilterType, filterChangedListener) {
+@Serializable
+class DateTrackFilter : BaseTrackFilter {
 
-	var initialValueFrom = dateFrom
+	constructor(
+		trackFilterType: TrackFilterType, dateFrom: Long,
+		filterChangedListener: FilterChangedListener?) : super(
+		trackFilterType,
+		filterChangedListener) {
+		initialValueFrom = dateFrom
+		initialValueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom)
+			.toLocalDateTime(TimeZone.currentSystemDefault())
+		valueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom)
+			.toLocalDateTime(TimeZone.currentSystemDefault())
+		valueFrom = initialValueFrom
+		valueTo = initialValueTo
+	}
+
+	var initialValueFrom: Long
 	var initialValueTo = currentTimeMillis()
 
-	private var initialValueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom).toLocalDateTime(TimeZone.currentSystemDefault())
-	private var initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo).toLocalDateTime(TimeZone.currentSystemDefault())
-	private var valueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom).toLocalDateTime(TimeZone.currentSystemDefault())
-	private var valueToDateTime = Instant.fromEpochMilliseconds(initialValueTo).toLocalDateTime(TimeZone.currentSystemDefault())
+	private var initialValueFromDateTime: LocalDateTime
+
+	private var initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo)
+		.toLocalDateTime(TimeZone.currentSystemDefault())
+	private var valueFromDateTime: LocalDateTime
+	private var valueToDateTime = Instant.fromEpochMilliseconds(initialValueTo)
+		.toLocalDateTime(TimeZone.currentSystemDefault())
 
 	private fun updateDateTime() {
-		initialValueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom).toLocalDateTime(TimeZone.currentSystemDefault())
-		initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo).toLocalDateTime(TimeZone.currentSystemDefault())
-		valueFromDateTime = Instant.fromEpochMilliseconds(valueFrom).toLocalDateTime(TimeZone.currentSystemDefault())
-		valueToDateTime = Instant.fromEpochMilliseconds(valueTo).toLocalDateTime(TimeZone.currentSystemDefault())
+		initialValueFromDateTime = Instant.fromEpochMilliseconds(initialValueFrom)
+			.toLocalDateTime(TimeZone.currentSystemDefault())
+		initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo)
+			.toLocalDateTime(TimeZone.currentSystemDefault())
+		valueFromDateTime = Instant.fromEpochMilliseconds(valueFrom)
+			.toLocalDateTime(TimeZone.currentSystemDefault())
+		valueToDateTime =
+			Instant.fromEpochMilliseconds(valueTo).toLocalDateTime(TimeZone.currentSystemDefault())
 	}
 
 	@Serializable
-	var valueFrom = initialValueFrom
+	var valueFrom: Long = 0
 		set(value) {
 			field = value
 			updateDateTime()
@@ -36,7 +57,7 @@ class DateTrackFilter(trackFilterType: TrackFilterType, dateFrom: Long,
 		}
 
 	@Serializable
-	var valueTo = initialValueTo
+	var valueTo: Long = 0
 		set(value) {
 			field = value
 			updateDateTime()
@@ -56,7 +77,7 @@ class DateTrackFilter(trackFilterType: TrackFilterType, dateFrom: Long,
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 
 		trackItem.dataItem?.let {
-			it.getParameter<Long>(GpxParameter.FILE_CREATION_TIME)?.let{creationTime ->
+			it.getParameter<Long>(GpxParameter.FILE_CREATION_TIME)?.let { creationTime ->
 				return creationTime in valueFrom..valueTo
 			}
 		}

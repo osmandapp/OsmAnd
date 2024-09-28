@@ -84,8 +84,7 @@ object TrackFiltersHelper {
 	fun createFilter(
 		trackFilterType: TrackFilterType,
 		filterChangedListener: FilterChangedListener?): BaseTrackFilter {
-		val newFilter: BaseTrackFilter
-		newFilter = when (trackFilterType.filterType) {
+		val newFilter: BaseTrackFilter = when (trackFilterType.filterType) {
 			TEXT -> {
 				createTextFilter(
 					trackFilterType,
