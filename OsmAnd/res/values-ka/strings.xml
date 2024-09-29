@@ -1707,7 +1707,6 @@
     <string name="routing_attr_length_name">სიგრძე</string>
     <string name="item_deleted">%1$s წაშლილია</string>
     <string name="routing_attr_difficulty_preference_name">არჩეული სირთულე</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="icon_group_amenity">კომფორტი</string>
     <string name="icon_group_special">სპეციალური</string>
     <string name="icon_group_transport">ტრანსპორტი</string>

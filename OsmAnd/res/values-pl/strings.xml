@@ -3627,7 +3627,6 @@
     <string name="item_deleted">Usunięto %1$s</string>
     <string name="speed_cameras_restart_descr">Uruchom ponownie aplikację, aby usunąć wszystkie dane o fotoradarach.</string>
     <string name="shared_string_uninstall_and_restart">Odinstaluj i zrestartuj</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lenght_limit_description">Podaj długość pojazdu, niektóre ograniczenia tras mogą być stosowane dla długich pojazdów.</string>
     <string name="speed_cameras_removed_descr">To urządzenie nie ma fotoradarów.</string>
     <string name="use_volume_buttons_as_zoom_descr">Steruj poziomem powiększenia mapy za pomocą przycisków głośności na urządzeniu.</string>
@@ -3772,7 +3771,6 @@
     <string name="clear_osm_token">Wyczyść token OpenStreetMap OAuth</string>
     <string name="osm_edit_logout_success">Wylogowano</string>
     <string name="file_already_imported">Plik jest już zaimportowany do OsmAnd</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="use_two_phase_routing">Użyj 2-fazowego algorytmu routingu A *</string>

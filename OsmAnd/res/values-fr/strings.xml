@@ -3517,7 +3517,6 @@
     <string name="radius_ruler_item">Règle de mesure par rayon</string>
     <string name="map_markers_item">Marques</string>
     <string name="legend_item_description">Guide des symboles cartographiques</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Action rapide</string>
     <string name="measure_distance_item">Mesurer une distance</string>
@@ -3778,7 +3777,6 @@
 \nLe graphique sera disponible à l\'issue du calcul d\'itinéraire.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="shared_string_local_maps">Cartes locales</string>
     <string name="icon_group_amenity">Loisir</string>
     <string name="icon_group_special">Spécial</string>
