@@ -16,7 +16,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
-public class FinishTripRecordingAction extends BaseTripRecordingAction {
+public class FinishTripRecordingAction extends BaseMonitoringAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(FINISH_TRIP_RECORDING_ACTION,
 			"finish.trip.recording", FinishTripRecordingAction.class)
@@ -39,9 +39,9 @@ public class FinishTripRecordingAction extends BaseTripRecordingAction {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			if (!plugin.isRecordingTrack()) {
+			if (!isRecordingTrack()) {
 				app.showToastMessage(R.string.start_trip_recording_first_m);
-			} else if (!plugin.hasDataToSave()) {
+			} else if (!hasDataToSave()) {
 				app.showToastMessage(R.string.track_does_not_contain_data_to_save);
 			} else {
 				plugin.finishRecording();
