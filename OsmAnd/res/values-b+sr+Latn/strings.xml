@@ -2143,7 +2143,7 @@
     <string name="marker_save_as_track_descr">Izvezi markere u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
     <string name="shared_string_sort">Sortiranje</string>
-    <string name="plan_route">Planiranje rute</string>
+    <string name="plan_route">Plan rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja pozicija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
@@ -2930,7 +2930,7 @@
     <string name="osm_edit_closed_note">Zatvorena OSM beleška</string>
     <string name="set_working_days_to_continue">Podesi radne dane za nastavak</string>
     <string name="route_between_points">Ruta između tačaka</string>
-    <string name="plan_a_route">Planiranje rute</string>
+    <string name="plan_a_route">Plan rute</string>
     <string name="add_to_a_track">Dodaj u trasu</string>
     <string name="track_show_start_finish_icons">Prikazati ikonu za početak i kraj</string>
     <string name="select_track_width">Izaberi širinu</string>
