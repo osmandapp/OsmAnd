@@ -36,6 +36,7 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
@@ -198,8 +199,13 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 						R.layout.popup_list_text_item, options));
 				popup.setOnItemClickListener((parent, view, position, id) -> {
 					selectedSplitInterval = position;
-					GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
-					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), params);
+					GpxFile gpxFile = getGpx();
+					GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+					SelectedGpxFile sf = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
+					if (sf == null) {
+						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
+						sf = gpxSelectionHelper.selectGpxFile(gpxFile, params);
+					}
 					List<GpxDisplayGroup> groups = getDisplayGroups();
 					if (groups.size() > 0) {
 						updateSplit(groups, sf);
