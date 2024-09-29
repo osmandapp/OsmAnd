@@ -171,7 +171,7 @@ public class HelpArticleUtils {
 				return ctx.getString(R.string.website);
 			case "troubleshooting_third_links":
 				return ctx.getString(R.string.third_links);
-			case "Movies list":
+			case "troubleshooting_movies_list":
 				return ctx.getString(R.string.movies_list);
 			case "personal_maps_resources":
 				return ctx.getString(R.string.maps_and_resources);
