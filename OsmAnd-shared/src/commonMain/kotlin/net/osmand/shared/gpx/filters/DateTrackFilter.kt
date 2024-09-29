@@ -5,7 +5,9 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.extensions.minLocalDateTime
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 
@@ -26,14 +28,19 @@ class DateTrackFilter : BaseTrackFilter {
 		valueTo = initialValueTo
 	}
 
-	var initialValueFrom: Long
+	@Transient
+	var initialValueFrom: Long = 0
+	@Transient
 	var initialValueTo = currentTimeMillis()
 
-	private var initialValueFromDateTime: LocalDateTime
+	@Transient
+	private var initialValueFromDateTime: LocalDateTime = minLocalDateTime()
 
+	@Transient
 	private var initialValueToDateTime = Instant.fromEpochMilliseconds(initialValueTo)
 		.toLocalDateTime(TimeZone.currentSystemDefault())
-	private var valueFromDateTime: LocalDateTime
+	@Transient
+	private var valueFromDateTime: LocalDateTime = minLocalDateTime()
 	private var valueToDateTime = Instant.fromEpochMilliseconds(initialValueTo)
 		.toLocalDateTime(TimeZone.currentSystemDefault())
 
