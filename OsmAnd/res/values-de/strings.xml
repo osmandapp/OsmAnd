@@ -2051,8 +2051,8 @@
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine Trackdateien.</string>
-    <string name="gpx_no_tracks_title_folder">Trackdateien können dem Ordner hinzugefügt werden.</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine Trackdateien</string>
+    <string name="gpx_no_tracks_title_folder">Trackdateien können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Weitere hinzufügen …</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
