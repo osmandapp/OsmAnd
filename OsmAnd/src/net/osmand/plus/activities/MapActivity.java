@@ -1365,8 +1365,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
-		if (app.getLockHelper().isScreenLocked()) {
-			return app.getLockHelper().getLockGestureDetector(this).onTouchEvent(event);
+		if (lockHelper.isScreenLocked()) {
+			return lockHelper.getLockGestureDetector(this).onTouchEvent(event);
 		}
 
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
