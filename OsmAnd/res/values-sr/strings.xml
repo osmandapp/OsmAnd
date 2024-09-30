@@ -5752,14 +5752,14 @@
     <string name="tomorrow">Сутрадан</string>
     <string name="map_settings_weather_wind_animation">Опонашање ветра</string>
     <string name="daynight_mode_sensor_summary">Користи светлосни пријемник уређаја као прекидач између светлих и тамних тема у складу са разинама околишног светла.</string>
-    <string name="daynight_mode_sunrise_sunset_summary">Аутоматски пребацује између дневне и ноћне теме на основу местног времена изласка и заласка сунца.</string>
-    <string name="daynight_mode_night_summary">Увек приказује карту у тамној теми, погодној за ноћне услове или услове слабог осветљења.</string>
-    <string name="daynight_mode_day_summary">Увек приказуј карту у светлој теми, погодној за видљивост током дана.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Аутоматски пребацује између дневне и ноћне теме на основу локалног времена изласка и заласка сунца.</string>
+    <string name="daynight_mode_night_summary">Увек приказује мапу у тамној теми, погодној за ноћне услове или услове слабог осветљења.</string>
+    <string name="daynight_mode_day_summary">Увек приказује мапу у светлој теми, идеално за видљивост током дана.</string>
     <string name="daynight_mode_app_theme">Тема програма</string>
     <string name="key_event_action_continuous_zoom_out">Непрекидно умањење</string>
     <string name="remove_key_assignment_summary">Додељивање дугмади за изабрану радњу ће бити уклоњено.</string>
     <string name="remove_key_assignment">Уклони додељивање дугмади</string>
-    <string name="daynight_mode_app_theme_summary">Приказ карте је у складу са општом темом програма — дневни начин за светлу тему и ноћни начин за тамну тему</string>
+    <string name="daynight_mode_app_theme_summary">Приказ мапе је у складу са општом темом апликације — дневни режим за светлу тему и ноћни режим за тамну тему</string>
     <string name="key_event_action_continuous_zoom_in">Непрекидно увећање</string>
     <string name="weather_data_sources_prompt">ОсмАнд пружа податке временских прилика из два извора:</string>
     <string name="weather_source_ecmwf_description">Европско средиште за средњерочна предвиђања временских прилика</string>
@@ -5958,4 +5958,18 @@
     <string name="obd_vin">ИБВ</string>
     <string name="obd_vin_desc">ИБВ код преко ДНВ</string>
     <string name="reset_average_speed">Ресетуј просечну брзину</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="new_segment_started_m">Почело је снимање новог сегмента путање.</string>
+    <string name="new_trip_segment">Нови сегмент путовања</string>
+    <string name="quick_action_start_pause_recording">Дугме за покретање, паузирање или наставак снимања ГПКС стазе.</string>
+    <string name="quick_action_verb_start_pause">Покрени / Паузирај</string>
+    <string name="help_article_personal_color_palette_schemes_name">Шеме боја</string>
+    <string name="track_does_not_contain_data_to_save">Путања не садржи податке за чување.</string>
+    <string name="quick_action_finish_trip_recording_summary">Дугме за чување ГПКС стазе и завршетак снимања путовања.</string>
+    <string name="start_trip_recording_first_m">Прво започните снимање путовања.</string>
+    <string name="quick_action_new_trip_segment">Дугме за покретање новог сегмента у текућем ГПКС снимању стазе.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Дугме за чување тренутно снимљеног путовања као ГПКС фајла и наставак снимања нове стазе без прекида.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Снимљено путовање и наставите</string>
+    <string name="movies_list">Листа филмова</string>
+    <string name="third_links">Други линкови</string>
 </resources>
