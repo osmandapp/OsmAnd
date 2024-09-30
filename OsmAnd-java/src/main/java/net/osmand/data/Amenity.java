@@ -709,7 +709,7 @@ public class Amenity extends MapObject {
 					nonTranslated = tagValue.value;
 				}
 				if (tagValue.tag.equals("place")) {
-					type = City.CityType.valueOf(tagValue.value.toUpperCase());
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
 					isCity = true;
 				}
 			}
@@ -725,7 +725,7 @@ public class Amenity extends MapObject {
 		if (type == null) {
 			return false;
 		}
-		return type == City.CityType.CITY || type == City.CityType.TOWN || type == City.CityType.HAMLET;
+		return type.storedAsSeparateAdminEntity();
 	}
 
 	public List<LatLon> getPolygon() {
