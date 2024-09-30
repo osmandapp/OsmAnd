@@ -5960,4 +5960,15 @@
     <string name="obd_vin_desc">Código VIN a través de OBD</string>
     <string name="vehicle_metrics_plugin_settings">Configuración de métricas del vehículo</string>
     <string name="reset_average_speed">Restablecer velocidad media</string>
+    <string name="start_trip_recording_first_m">Por favor, inicie primero la grabación del viaje.</string>
+    <string name="new_segment_started_m">Comenzó la grabación de un nuevo segmento de pista.</string>
+    <string name="quick_action_new_trip_segment">Un botón para iniciar un nuevo segmento en la grabación de la pista GPX en curso.</string>
+    <string name="track_does_not_contain_data_to_save">La pista no contiene datos para guardar.</string>
+    <string name="quick_action_finish_trip_recording_summary">Un botón para guardar la pista GPX y finalizar la grabación del viaje.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Un botón para guardar el viaje actual grabado como un archivo GPX y continuar grabando una nueva pista sin interrupciones.</string>
+    <string name="new_trip_segment">Nuevo tramo del viaje</string>
+    <string name="quick_action_start_pause_recording">Un botón para iniciar, pausar o reanudar la grabación de la pista GPX.</string>
+    <string name="quick_action_verb_start_pause">Iniciar / Pausar</string>
+    <string name="help_article_personal_color_palette_schemes_name">Combinación de colores</string>
+    <string name="movies_list">Lista de vídeos</string>
 </resources>
