@@ -108,10 +108,12 @@ public class HelpArticleUtils {
 			case "plugins_custom":
 				return ctx.getString(R.string.custom_osmand_plugin);
 			case "search":
+			case "web_web_search":
 				return ctx.getString(R.string.shared_string_search);
 			case "map_legend":
 				return ctx.getString(R.string.map_legend);
 			case "map":
+			case "web_web_map":
 				return ctx.getString(R.string.shared_string_map);
 			case "map_configure_map_menu":
 				return ctx.getString(R.string.configure_map);
@@ -137,10 +139,12 @@ public class HelpArticleUtils {
 			case "personal_myplaces":
 				return ctx.getString(R.string.shared_string_my_places);
 			case "personal_osmand_cloud":
+			case "web_web_cloud":
 				return ctx.getString(R.string.osmand_cloud);
 			case "personal_tracks":
 				return ctx.getString(R.string.shared_string_gpx_tracks);
 			case "plan_route_create_route":
+			case "web_planner":
 				return ctx.getString(R.string.plan_a_route);
 			case "plan_route_travel_guides":
 				return ctx.getString(R.string.wikivoyage_travel_guide);
@@ -161,6 +165,18 @@ public class HelpArticleUtils {
 				return ctx.getString(R.string.map_widget_config);
 			case "widgets_quick_action":
 				return ctx.getString(R.string.quick_action_item);
+			case "plugins_topography":
+				return ctx.getString(R.string.srtm_plugin_name);
+			case "web":
+				return ctx.getString(R.string.website);
+			case "troubleshooting_third_links":
+				return ctx.getString(R.string.third_links);
+			case "troubleshooting_movies_list":
+				return ctx.getString(R.string.movies_list);
+			case "personal_maps_resources":
+				return ctx.getString(R.string.maps_and_resources);
+			case "route_parameters":
+				return ctx.getString(R.string.route_parameters);
 		}
 		return null;
 	}
