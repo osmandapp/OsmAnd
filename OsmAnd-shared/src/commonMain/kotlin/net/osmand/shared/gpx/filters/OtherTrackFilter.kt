@@ -5,10 +5,14 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 
-class OtherTrackFilter(
-	trackFilterType: TrackFilterType,
-	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(trackFilterType, filterChangedListener) {
+@Serializable
+class OtherTrackFilter : BaseTrackFilter {
+
+	constructor(
+		trackFilterType: TrackFilterType,
+		filterChangedListener: FilterChangedListener?) : super(
+		trackFilterType,
+		filterChangedListener)
 
 	@Serializable
 	var selectedParams = ArrayList<OtherTrackParam>()
@@ -93,7 +97,7 @@ class OtherTrackFilter(
 					selectedParams.add(OtherTrackParam.WITH_WAYPOINTS)
 				}
 			}
-			filterChangedListener?.onFilterChanged()
+			super.initWithValue(value)
 		}
 	}
 

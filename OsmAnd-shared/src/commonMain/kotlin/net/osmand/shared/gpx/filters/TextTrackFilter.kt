@@ -1,16 +1,22 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.PlatformUtil
 
-class TextTrackFilter(
-	trackFilterType: TrackFilterType,
-	filterChangedListener: FilterChangedListener?)
-	: BaseTrackFilter(trackFilterType, filterChangedListener) {
+@Serializable
+class TextTrackFilter
+	: BaseTrackFilter {
+
+	constructor(
+		trackFilterType: TrackFilterType,
+		filterChangedListener: FilterChangedListener?) : super(
+		trackFilterType,
+		filterChangedListener)
 
 	@Serializable
 	var value = ""
@@ -22,6 +28,7 @@ class TextTrackFilter(
 			filterChangedListener?.onFilterChanged()
 		}
 
+	@Transient
 	private var nameMatcher = createMatcher()
 
 	private fun updateMatcher() {
@@ -29,11 +36,13 @@ class TextTrackFilter(
 	}
 
 	private fun createMatcher(): KStringMatcher {
-		return PlatformUtil.getOsmAndContext().getNameStringMatcher(value.trim { it <= ' ' },
+		return PlatformUtil.getOsmAndContext().getNameStringMatcher(
+			value.trim { it <= ' ' },
 			KStringMatcherMode.CHECK_CONTAINS)
 	}
 
-	override fun isTrackAccepted(trackItem: TrackItem): Boolean = nameMatcher.matches(trackItem.name)
+	override fun isTrackAccepted(trackItem: TrackItem): Boolean =
+		nameMatcher.matches(trackItem.name)
 
 	override fun isEnabled(): Boolean = !KAlgorithms.isEmpty(value)
 
