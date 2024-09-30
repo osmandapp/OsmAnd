@@ -86,7 +86,13 @@ class DateTrackFilter : BaseTrackFilter {
 				initialValueFrom = valueFrom
 			}
 			updateDateTime()
+			super.initWithValue(value)
 		}
+	}
+
+	override fun initFilter() {
+		super.initFilter()
+		updateDateTime()
 	}
 
 	override fun equals(other: Any?): Boolean {

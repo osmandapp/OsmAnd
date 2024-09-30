@@ -1,13 +1,12 @@
 package net.osmand.shared.gpx.filters
 
-import kotlinx.datetime.Clock
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxParameter
-import net.osmand.shared.gpx.filters.FilterType.TEXT
-import net.osmand.shared.gpx.filters.FilterType.RANGE
 import net.osmand.shared.gpx.filters.FilterType.DATE_RANGE
 import net.osmand.shared.gpx.filters.FilterType.OTHER
+import net.osmand.shared.gpx.filters.FilterType.RANGE
 import net.osmand.shared.gpx.filters.FilterType.SINGLE_FIELD_LIST
+import net.osmand.shared.gpx.filters.FilterType.TEXT
 import kotlin.reflect.KClass
 
 object TrackFiltersHelper {

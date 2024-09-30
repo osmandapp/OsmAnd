@@ -97,7 +97,7 @@ class OtherTrackFilter : BaseTrackFilter {
 					selectedParams.add(OtherTrackParam.WITH_WAYPOINTS)
 				}
 			}
-			filterChangedListener?.onFilterChanged()
+			super.initWithValue(value)
 		}
 	}
 

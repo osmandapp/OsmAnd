@@ -115,7 +115,7 @@ open class ListTrackFilter : BaseTrackFilter {
 					allItemsCollection[item] = 0
 				}
 			}
-			filterChangedListener?.onFilterChanged()
+			super.initWithValue(value)
 		}
 	}
 

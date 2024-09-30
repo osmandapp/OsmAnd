@@ -61,7 +61,7 @@ object TrackFilterSerializer : KSerializer<List<BaseTrackFilter>?> {
 						jsonDecoder.json.decodeFromJsonElement<ListTrackFilter>(jsonObject)
 					}
 				}
-			}
+			}.apply { initFilter() }
 		}
 	}
 }
