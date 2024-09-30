@@ -5944,4 +5944,9 @@
     <string name="obd_plugin_name">車輛指標</string>
     <string name="obd_plugin_description">透過 OBD 協定存取您的車輛資訊</string>
     <string name="obd_support">OBD 支援</string>
+    <string name="obd_vin">車輛識別號碼</string>
+    <string name="obd_vin_desc">透過 OBD 讀取 VIN 碼</string>
+    <string name="vehicle_metrics_plugin_settings">車輛指標設定</string>
+    <string name="unknown_bt_device">未知裝置</string>
+    <string name="reset_average_speed">重設平均速率</string>
 </resources>

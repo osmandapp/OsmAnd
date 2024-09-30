@@ -5953,4 +5953,9 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hibrid hidrogén</string>
     <string name="obd_fuel_type_bifuel_propane">Propánnal működő Bifuel</string>
+    <string name="reset_average_speed">Átlagsebesség nullázása</string>
+    <string name="unknown_bt_device">Ismeretlen eszköz</string>
+    <string name="obd_vin_desc">OBD általi VIN-kód</string>
+    <string name="vehicle_metrics_plugin_settings">Járműmetrika beállítások</string>
+    <string name="obd_vin">VIN</string>
 </resources>

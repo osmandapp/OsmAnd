@@ -5949,4 +5949,5 @@
     <string name="obd_vin">VIN</string>
     <string name="vehicle_metrics_plugin_settings">Paramètres de mesure du véhicule</string>
     <string name="reset_average_speed">Effacer la vitesse moyenne</string>
+    <string name="obd_vin_desc">Code VIN par OBD</string>
 </resources>
