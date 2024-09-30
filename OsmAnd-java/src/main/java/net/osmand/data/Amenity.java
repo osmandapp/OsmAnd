@@ -697,21 +697,33 @@ public class Amenity extends MapObject {
 		}
 		String result = null;
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			String translated = "";
+			String nonTranslated = "";
+			City.CityType type = null;
 			for (TagValuePair tagValue : entry.getValue()) {
-				if (tagValue.tag.endsWith("city:" + lang)) {
-					if (result == null) {
-						result = tagValue.value;
-					} else {
-						result += ", " + tagValue.value;
-					}
-					break;
+				if (tagValue.tag.endsWith("name:" + lang)) {
+					translated = tagValue.value;
 				}
-				if (tagValue.tag.endsWith("city")) {
-					result = tagValue.value;
+				if (tagValue.tag.endsWith("name")) {
+					nonTranslated = tagValue.value;
 				}
+				if (tagValue.tag.equals("place")) {
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+				}
+			}
+			String name = translated.isEmpty() ? nonTranslated : translated;
+			if (!name.isEmpty() && isCityTypeAccept(type)) {
+				result = result == null ? name : result + ", " + name;
 			}
 		}
 		return result;
+	}
+
+	private boolean isCityTypeAccept(City.CityType type) {
+		if (type == null) {
+			return false;
+		}
+		return type.storedAsSeparateAdminEntity();
 	}
 
 	public List<LatLon> getPolygon() {
