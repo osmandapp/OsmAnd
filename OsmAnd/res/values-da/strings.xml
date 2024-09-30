@@ -5755,7 +5755,7 @@
     <string name="missing_maps_ignore">Brug downloadede kort</string>
     <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
-    <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til nattetid eller svage lysforhold.</string>
+    <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til natlige eller svage lysforhold.</string>
     <string name="daynight_mode_day_summary">Viser altid kortet i et lyst tema, ideelt til synlighed i dagtimerne.</string>
     <string name="daynight_mode_app_theme">App-tema</string>
     <string name="key_event_action_continuous_zoom_out">Kontinuerligt zoom ud</string>
@@ -5764,7 +5764,7 @@
     <string name="remove_key_assignment">Fjern tasttildeling</string>
     <string name="map_settings_weather_wind_animation">Animation af vind</string>
     <string name="tomorrow">I morgen</string>
-    <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema - dagtilstand ved et lyst tema og nattilstand ved et mørkt tema</string>
+    <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema — dagtilstand for et lyst tema og nattilstand for et mørkt tema</string>
     <string name="shared_string_modify">Tilpas</string>
     <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
@@ -5962,4 +5962,19 @@
     <string name="obd_vin_desc">VIN-kode via OBD</string>
     <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjets parametre</string>
     <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
+    <string name="quick_action_finish_trip_recording_summary">En knap til at gemme GPX-sporet og afslutte optagelse af tur.</string>
+    <string name="start_trip_recording_first_m">Start optagelse af tur først.</string>
+    <string name="new_segment_started_m">Startede optagelse af et nyt sporsegment.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Optaget tur og fortsæt</string>
+    <string name="quick_action_new_trip_segment">En knap til at starte et nyt segment i den igangværende GPX-sporoptagelse.</string>
+    <string name="new_trip_segment">Nyt tursegment</string>
+    <string name="quick_action_start_pause_recording">En knap til at starte, sætte på pause eller genoptage optagelsen af GPX-sporet.</string>
+    <string name="quick_action_verb_start_pause">Start / Pause</string>
+    <string name="help_article_personal_color_palette_schemes_name">Farvesammensætninger</string>
+    <string name="movies_list">Filmliste</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">En knap til at gemme den aktuelt optagne tur som en GPX-fil og fortsætte optagelsen af et nyt spor uden afbrydelse.</string>
+    <string name="track_does_not_contain_data_to_save">Sporet indeholder ikke data, der skal gemmes.</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
 </resources>
