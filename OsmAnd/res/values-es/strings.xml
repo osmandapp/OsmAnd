@@ -5973,4 +5973,6 @@
     <string name="movies_list">Lista de vídeos</string>
     <string name="quick_action_save_recorded_trip_and_continue">Viaje grabado y continuación</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="third_links">Enlaces de terceros</string>
+    <string name="tracker_item">Rastreador de OsmAnd</string>
 </resources>
