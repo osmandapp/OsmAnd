@@ -18,7 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.shared.gpx.GpxFile;
 
-public class SaveRecordedTripAndContinueAction extends BaseTripRecordingAction {
+public class SaveRecordedTripAndContinueAction extends BaseMonitoringAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SAVE_RECORDED_TRIP_AND_CONTINUE_ACTION,
 			"save.trip.and.continue", SaveRecordedTripAndContinueAction.class)
@@ -41,9 +41,9 @@ public class SaveRecordedTripAndContinueAction extends BaseTripRecordingAction {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			if (!plugin.isRecordingTrack()) {
+			if (!isRecordingTrack()) {
 				app.showToastMessage(R.string.start_trip_recording_first_m);
-			} else if (!plugin.hasDataToSave()) {
+			} else if (!hasDataToSave()) {
 				app.showToastMessage(R.string.track_does_not_contain_data_to_save);
 			} else {
 				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();

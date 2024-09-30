@@ -7,13 +7,13 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
-abstract class BaseTripRecordingAction extends QuickAction {
+abstract class BaseMonitoringAction extends QuickAction {
 
-	public BaseTripRecordingAction(QuickActionType actionType) {
+	public BaseMonitoringAction(QuickActionType actionType) {
 		super(actionType);
 	}
 
-	public BaseTripRecordingAction(QuickAction quickAction) {
+	public BaseMonitoringAction(QuickAction quickAction) {
 		super(quickAction);
 	}
 

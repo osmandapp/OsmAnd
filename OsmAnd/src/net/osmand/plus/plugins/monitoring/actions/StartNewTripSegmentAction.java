@@ -16,7 +16,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
-public class StartNewTripSegmentAction extends BaseTripRecordingAction {
+public class StartNewTripSegmentAction extends BaseMonitoringAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(START_NEW_TRIP_SEGMENT_ACTION,
 			"start.new.trip.segment", StartNewTripSegmentAction.class)
@@ -39,7 +39,7 @@ public class StartNewTripSegmentAction extends BaseTripRecordingAction {
 		OsmandMonitoringPlugin plugin = getPlugin();
 		if (plugin != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			if (plugin.isRecordingTrack()) {
+			if (isRecordingTrack()) {
 				app.getSavingTrackHelper().startNewSegment();
 				app.showToastMessage(R.string.new_segment_started_m);
 			} else {
