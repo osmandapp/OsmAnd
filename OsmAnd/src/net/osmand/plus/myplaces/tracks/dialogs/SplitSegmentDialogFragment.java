@@ -66,6 +66,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 
 	private TrkSegment segment;
 	private GpxDisplayItem item;
+	private SelectedGpxFile selectedGpxFile;
 
 	private final List<String> options = new ArrayList<>();
 	private final List<Double> distanceSplit = new ArrayList<>();
@@ -87,6 +88,11 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		GpxFile gpxFile = getGpx();
+		if (gpxFile != null) {
+			selectedGpxFile = new SelectedGpxFile();
+			selectedGpxFile.setGpxFile(gpxFile, app);
+		}
 		minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
 		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
 		minMaxSpeedPaint.setStyle(Paint.Style.FILL);
@@ -199,16 +205,9 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 						R.layout.popup_list_text_item, options));
 				popup.setOnItemClickListener((parent, view, position, id) -> {
 					selectedSplitInterval = position;
-					GpxFile gpxFile = getGpx();
-					GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-					SelectedGpxFile sf = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
-					if (sf == null) {
-						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
-						sf = gpxSelectionHelper.selectGpxFile(gpxFile, params);
-					}
 					List<GpxDisplayGroup> groups = getDisplayGroups();
 					if (groups.size() > 0) {
-						updateSplit(groups, sf);
+						updateSplit(groups, selectedGpxFile);
 					}
 					popup.dismiss();
 					updateSplitIntervalView(splitIntervalView);
@@ -414,7 +413,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private boolean shouldDismiss() {
-		return displayHelper == null || item == null || segment == null;
+		return displayHelper == null || selectedGpxFile == null || item == null || segment == null;
 	}
 
 	private class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
