@@ -2759,7 +2759,7 @@
     <string name="shared_string_paused">Pauzirano</string>
     <string name="shared_string_pause">&amp;Pauziraj</string>
     <string name="shared_string_continue">Nastavi</string>
-    <string name="shared_string_resume">Rezime</string>
+    <string name="shared_string_resume">Nastavi</string>
     <string name="shared_string_notifications">Obaveštenja</string>
     <string name="trip_rec_notification_settings_desc">Prikazuj obaveštenje koje omogućava pokretanje snimanja putovanja.</string>
     <string name="trip_rec_notification_settings">Uključi brzo snimanje</string>
@@ -3053,7 +3053,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Slobodno vreme</string>
     <string name="icon_group_special">Specijalna</string>
     <string name="icon_group_transport">Prevoz</string>
@@ -3862,7 +3861,7 @@
     <string name="profile_type_user_string">Korisnički profil</string>
     <string name="release_3_9">• Dodata je mogućnost za izvoz i uvoz svih podataka, uključujući podešavanja, izvore, moja mesta
 \n
-\n • Planiranje rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
+\n • Plan rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
 \n
 \n • Dodan je način prijave OAuth za OpenStritMap, poboljšano korisničko sučelje prozorčića OSM-a
 \n
@@ -5208,7 +5207,7 @@
     <string name="help_article_map_tracks_on_map_name">Trase i rute</string>
     <string name="help_article_map_vector_maps_name">Vektorske mape (stil mape)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_plan_route_name">Planiranje rute</string>
+    <string name="help_article_plan_route_name">Plan rute</string>
     <string name="help_article_troubleshooting_crash_logs_name">Dnevnik rušenja programa</string>
     <string name="help_article_troubleshooting_general_name">Generalno</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Snimanje trase</string>
@@ -5962,4 +5961,9 @@
     <string name="obd_plugin_description">Pristupa informacijama o vašem vozilu preko OBD protokola</string>
     <string name="obd_engine_coolant_temp_desc">Prikazuje temperaturu rashladne tečnosti motora preko OBD senzora</string>
     <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
+    <string name="obd_vin">VIN</string>
+    <string name="unknown_bt_device">Nepoznat uređaj</string>
+    <string name="obd_vin_desc">VIN kod preko OBD-a</string>
+    <string name="reset_average_speed">Poništi prosečnu brzinu</string>
+    <string name="vehicle_metrics_plugin_settings">Podešavanja metrike vozila</string>
 </resources>

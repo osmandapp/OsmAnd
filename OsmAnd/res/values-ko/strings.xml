@@ -3952,7 +3952,6 @@
     <string name="token_is_not_valid">토큰은 유효하지 않습니다</string>
     <string name="check_for_updates">업데이트 확인</string>
     <string name="download_cloud_version">클라우드 버전 다운로드</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="select_layer">레이어 선택</string>
     <string name="beats_per_minute_short">bpm</string>
     <string name="ant_plus_searching">찾는 중</string>

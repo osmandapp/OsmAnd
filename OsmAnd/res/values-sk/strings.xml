@@ -2687,7 +2687,6 @@
     <string name="in_app_purchase_desc">Jednorazová platba</string>
     <string name="in_app_purchase_desc_ex">Po zakúpení bude pre vás trvalo dostupné.</string>
     <string name="purchase_unlim_title">Kúpiť - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Neobmedzené sťahovania</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="unlock_all_features">Odomknite všetky funkcie OsmAnd</string>
@@ -3774,7 +3773,6 @@
     <string name="message_need_calculate_route_before_show_graph">Údaje %1$s sú dostupné len na cestách, pre ich získanie musíte vypočítať trasu pomocou “Trasa medzi bodmi”.</string>
     <string name="message_graph_will_be_available_after_recalculation">Počkajte na prepočet trasy.
 \nGraf bude dostupný po prepočte.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Lokálne mapy</string>
     <string name="icon_group_amenity">Občianska vybavenosť</string>
     <string name="icon_group_special">Špeciálne</string>
@@ -4119,7 +4117,6 @@
     <string name="unlimited_map_downloads">Neobmedzený počet stiahnutých máp</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage offline</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="nautical_depth">Námorná hĺbka</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získajte “%1$s” ako súčasť: predplatné %2$s. Porovnanie:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s alebo %2$s</string>
@@ -4691,7 +4688,7 @@
     <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
     <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
     <string name="widget_with_dot">Nástroj.</string>
-    <string name="compass_click_desc">Pomôcka: Stlačte tlačidlo kompasu pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_click_desc">Dvakrát stlačte tlačidlo kompasu pre prepnutie režimu orientácie mapy.</string>
     <string name="compass_desc">Zobrazuje smer k severu.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
@@ -4974,7 +4971,6 @@
     <string name="download_cloud_version">Stiahnuť verziu z cloudu</string>
     <string name="shared_string_do_not_exist">Neexistuje</string>
     <string name="last_sync">Posledná synchronizácia</string>
-    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportovať do súboru</string>
     <string name="si_nm_mt">Námorné míle/metre</string>
     <string name="si_nm_ft">Námorné míle/stopy</string>
@@ -5886,4 +5882,29 @@
     <string name="contour_layers_action_descr">Zmeniť vrstvy vrstevníc</string>
     <string name="type_of_activity">Druh aktivity</string>
     <string name="change_activity">Zmeniť aktivitu</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_not_provided">Nezadaný druh paliva</string>
+    <string name="obd_fuel_type_gasoline">Benzín</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_diesel">Nafta</string>
+    <string name="obd_fuel_type_lpg">LPG (skvapalnený plyn)</string>
+    <string name="obd_fuel_type_cng">CNG (stlačený plyn)</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_fuel_type_unknown">Neznámy druh paliva</string>
+    <string name="reset_average_speed">Vymazať priemernú rýchlosť</string>
+    <string name="obd_vin_desc">VIN kód cez OBD</string>
+    <string name="unknown_bt_device">Neznáme zariadenie</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_propane">Propán</string>
+    <string name="obd_fuel_type_electric">Elektrina</string>
+    <string name="shared_string_decrease">Znížiť</string>
+    <string name="shared_string_increase">Zvýšiť</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Otvoriť v prehliadači</string>
+    <string name="shared_string_source">Zdroj</string>
+    <string name="shared_string_no_internet_connection">Nie je pripojenie k internetu</string>
+    <string name="no_internet_descr">Prosím skontrolujte pripojenie a skúste znovu.</string>
+    <string name="no_photos_available_descr">K tejto lokalite zatiaľ neboli pridané žiadne fotografie používateľov</string>
+    <string name="no_photos_available">Nie sú dostupné žiadne fotografie</string>
 </resources>

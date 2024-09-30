@@ -3498,7 +3498,6 @@ POIの更新は利用できません</string>
     <string name="ui_customization">ユーザーインターフェイスのカスタマイズ</string>
     <string name="extra_maps_menu_group">追加マップ</string>
     <string name="download_unsupported_action">%1$sのアクションはサポートされていません</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">クイックアクション</string>
     <string name="radius_ruler_item">半径定規</string>
@@ -3779,7 +3778,6 @@ POIの更新は利用できません</string>
     <string name="file_already_imported">ファイルはすでにOsmAndにインポートされています</string>
     <string name="icon_group_amenity">店舗・施設</string>
     <string name="shared_string_local_maps">ローカルマップ</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_special">特別</string>
     <string name="icon_group_transport">交通</string>
     <string name="icon_group_service">設備・技術</string>

@@ -3782,7 +3782,6 @@
     <string name="shared_string_graph">תרשים</string>
     <string name="message_graph_will_be_available_after_recalculation">נא להמתין.
 \nהתרשים יהיה זמין לאחר חישוב מחדש.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">מפות מקומיות</string>
     <string name="icon_group_amenity">שירות לציבור</string>
     <string name="icon_group_special">מיוחד</string>
@@ -5035,4 +5034,21 @@
     <string name="quick_action_map_overlay">שכבת על</string>
     <string name="quick_action_map_style">סגנון מפה</string>
     <string name="missing_maps_ignore_details">המפות שהורדו מכסות את הנתיב שלך? אפשר לנווט באמצעות אם האזור הזה לא מוכר לך.</string>
+    <string name="wikimedia">ויקימדיה</string>
+    <string name="open_in_browser">פתיחה בדפדפן</string>
+    <string name="shared_string_source">מקור</string>
+    <string name="shared_string_no_internet_connection">אין חיבור לאינטרנט</string>
+    <string name="no_internet_descr">נא לבדוק את החיבור לאינטרנט ולנסות שוב.</string>
+    <string name="no_photos_available_descr">לא נוספו תמונות משתמשים למקום הזה עדיין</string>
+    <string name="contour_layers_action_descr">שינוי שכבות מתאר</string>
+    <string name="search_action_descr">פתיחת החיפוש.</string>
+    <string name="no_photos_available">אין תמונות זמינות</string>
+    <string name="my_location_action_descr">מירכוז המפה על המקום הנוכחי שלך.</string>
+    <string name="drawer_button_description">פתיחת התפריט הראשי.</string>
+    <string name="reset_average_speed">איפוס המהירות הממוצעת</string>
+    <string name="unknown_bt_device">התקן לא ידוע</string>
+    <string name="shared_string_decrease">הפחתה</string>
+    <string name="shared_string_increase">הגדלה</string>
+    <string name="change_zoom_action_descr">שינוי התקריב במפה.</string>
+    <string name="navigation_action_descr">פתיחת הניווט.</string>
 </resources>

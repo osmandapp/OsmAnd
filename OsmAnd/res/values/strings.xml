@@ -20,9 +20,13 @@
     <string name="new_trip_segment">New trip segment</string>
     <string name="quick_action_start_pause_recording">A button to start, pause or resume recording of the GPX track.</string>
     <string name="quick_action_verb_start_pause">Start / Pause</string>
-    <string name="unknown_bt_device">Unknown device</string>
-    <string name="obd_vin">VIN</string>
-    <string name="obd_vin_desc">VIN code over OBD</string>
+	<string name="help_article_personal_color_palette_schemes_name">Color Schemes</string>
+	<string name="movies_list">Movies list</string>
+	<string name="third_links">Third Links</string>
+	<string name="reset_average_speed">Reset average speed</string>
+	<string name="unknown_bt_device">Unknown device</string>
+	<string name="obd_vin">VIN</string>
+	<string name="obd_vin_desc">VIN code over OBD</string>
     <string name="unit_volt">V</string>
 	<string name="wikimedia">Wikimedia</string>
 	<string name="open_in_browser">Open in browser</string>

@@ -3601,7 +3601,6 @@
     <string name="lang_ur">Urdu</string>
     <string name="lang_tg">Tayiko</string>
     <string name="lang_bar">Bávaro</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="legend_item_description">La guía para la simbología de un mapa.</string>
     <string name="parking_positions">Posiciones de aparcamiento</string>
     <string name="turn_screen_on_power_button_disabled">Desactivado. Es necesario activar «Mantener la pantalla encendida» en «Tiempo de espera al encender».</string>
@@ -3760,7 +3759,6 @@
     <string name="development">Desarrollo</string>
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
     <string name="shared_string_local_maps">Mapas locales</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="icon_group_amenity">Comodidad</string>
     <string name="icon_group_special">Especial</string>
     <string name="icon_group_transport">Transporte</string>
@@ -5957,4 +5955,9 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Híbrido con hidrógeno</string>
     <string name="obd_widget_group">Métricas del panel de control</string>
     <string name="obd_plugin_name">Métricas del panel de control</string>
+    <string name="unknown_bt_device">Dispositivo desconocido</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Código VIN a través de OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Configuración de métricas del vehículo</string>
+    <string name="reset_average_speed">Restablecer velocidad media</string>
 </resources>

@@ -1,5 +1,6 @@
 package net.osmand;
 
+import android.os.Build;
 import android.util.Xml;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.zip.ZipException;
+
+import dalvik.system.ZipPathValidator;
 
 /**
  * That class is replacing of standard LogFactory due to
@@ -31,6 +36,10 @@ public class PlatformUtil {
 	public static String TAG = "net.osmand"; //$NON-NLS-1$
 
 	private static OsmandRegions osmandRegions;
+
+	static {
+		setupZipPathValidator();
+	}
 
 	private static class OsmandLogImplementation implements Log {
 
@@ -133,8 +142,6 @@ public class PlatformUtil {
 			return android.util.Log.isLoggable(TAG, android.util.Log.VERBOSE);
 		}
 
-
-
 		@Override
 		public boolean isDebugEnabled() {
 			// For debug purposes always true
@@ -204,4 +211,29 @@ public class PlatformUtil {
 		return Xml.newSerializer();
 	}
 
+	public static void setupZipPathValidator() {
+		if (Build.VERSION.SDK_INT >= 34) {
+			ZipPathValidator.setCallback(new ZipPathValidator.Callback() {
+				@Override
+				public void onZipEntryAccess(@NonNull String path) throws ZipException {
+					// Skip this check as we have such paths in OSF files ("/tracks/name.gpx")
+					//if (path.startsWith("/")) {
+					//	 throw new ZipException("Invalid zip entry path: " + path);
+					//}
+					if (path.contains("..")) {
+						// If the string does contain "..", break it down into its actual name elements to
+						// ensure it actually contains ".." as a name, not just a name like "foo..bar" or even
+						// "foo..", which should be fine.
+						File file = new File(path);
+						while (file != null) {
+							if (file.getName().equals("..")) {
+								throw new ZipException("Invalid zip entry path: " + path);
+							}
+							file = file.getParentFile();
+						}
+					}
+				}
+			});
+		}
+	}
 }

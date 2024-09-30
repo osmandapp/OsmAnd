@@ -2657,7 +2657,6 @@
     <string name="in_app_purchase">Køb i app</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
@@ -3497,7 +3496,6 @@
     <string name="favorites_item">Favoritter</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="navigation_profiles_item">Navigationsprofiler</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="osmand_purchases_item">OsmAnd køb</string>
     <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
     <string name="create_edit_poi">Opret eller rediger IP</string>
@@ -3635,7 +3633,6 @@
     <string name="all_next_segments_will_be_recalc">Alle efterfølgende segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="all_previous_segments_will_be_recalc">Alle tidligere segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="start_finish_icons">Start- og slutikoner</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
     <string name="routing_attr_length_name">Længde</string>
     <string name="contour_lines_thanks">Tak for dit køb af \'Topografi\'</string>
@@ -3929,7 +3926,6 @@
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
     <string name="continue_with">Fortsæt med %1$s</string>
@@ -5960,5 +5956,10 @@
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Får adgang til dine køretøjsoplysninger via OBD-protokollen</string>
-    <string name="obd_plugin_name">Køretøjets målinger</string>
+    <string name="obd_plugin_name">Køretøjets parametre</string>
+    <string name="unknown_bt_device">Ukendt enhed</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">VIN-kode via OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjets parametre</string>
+    <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
 </resources>

@@ -975,7 +975,7 @@ object GpxUtilities {
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
 			if (gpxFile.error != null) {
-				log.info("Error reading gpx ${gpxFile.path}")
+				log.info("Error reading gpx ${gpxFile.path}: ${gpxFile.error!!.message}")
 			}
 			gpxFile
 		} catch (e: IOException) {

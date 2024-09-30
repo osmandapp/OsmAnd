@@ -93,6 +93,9 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		if (gpxFile.error == null) {
 			val analyser = PlatformUtil.getOsmAndContext().getTrackPointsAnalyser()
 			updatedItem.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser))
+			if (!updatedItem.isRegularTrack()) {
+				return updatedItem
+			}
 			val creationTime: Long = updatedItem.requireParameter(GpxParameter.FILE_CREATION_TIME)
 			if (creationTime <= 0) {
 				updatedItem.setParameter(GpxParameter.FILE_CREATION_TIME, GpxUtilities.getCreationTime(gpxFile))
