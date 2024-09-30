@@ -392,6 +392,9 @@ public class NativeLibrary {
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
+	protected static native ByteBuffer getGeotiffTile(
+		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
+
 	/**/
 	// Empty native impl
 	/*
