@@ -5,16 +5,22 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
-import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AverageSpeedWidget extends SimpleWidget {
 
@@ -75,6 +81,26 @@ public class AverageSpeedWidget extends SimpleWidget {
 			FormattedValue formattedAverageSpeed = OsmAndFormatter.getFormattedSpeedValue(averageSpeed, app);
 			setText(formattedAverageSpeed.value, formattedAverageSpeed.unit);
 		}
+	}
+
+	@Nullable
+	@Override
+	protected List<PopUpMenuItem> getWidgetActions() {
+		List<PopUpMenuItem> actions = new ArrayList<>();
+		UiUtilities uiUtilities = app.getUIUtilities();
+		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+
+		actions.add(new PopUpMenuItem.Builder(app)
+				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_reset_to_default_dark, iconColor))
+				.setTitleId(R.string.reset_average_speed)
+				.setOnClickListener(item -> resetAverageSpeed())
+				.showTopDivider(true)
+				.create());
+		return actions;
+	}
+
+	public void resetAverageSpeed() {
+		averageSpeedComputer.resetLocations();
 	}
 
 	@Override

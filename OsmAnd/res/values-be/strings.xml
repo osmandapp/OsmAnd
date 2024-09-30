@@ -3796,7 +3796,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Калі ласка, пачакайце.
 \nГрафік будзе даступны пасля пераразліку маршруту.</string>
     <string name="shared_string_local_maps">Лакальныя мапы</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Выгоды</string>
     <string name="icon_group_special">Адмысловыя</string>
     <string name="icon_group_transport">Транспарт</string>

@@ -3030,7 +3030,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Vänligen vänta.
 \nGrafen kommer bli tillgänglig efter att färdvägen omberäknats.</string>
     <string name="shared_string_local_maps">Lokala kartor</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="icon_group_transport">Kollektivtrafik</string>
     <string name="icon_group_amenity">bekvämligheter</string>
@@ -4077,7 +4076,6 @@
     <string name="cloud_all_changes_uploaded">Alla ändringar har laddats upp</string>
     <string name="cloud_all_changes_downloaded">Alla ändringar är nedladdade</string>
     <string name="backup_error_failed_to_fetch_remote_items">Misslyckades att hämta listan över filer från servern.</string>
-    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportera till fil</string>
     <string name="shared_string_purchased_on">Köpt</string>
     <string name="open_weather_action_description">Ger dig möjlighet att öppna en vy med detaljerad väderinformation.</string>

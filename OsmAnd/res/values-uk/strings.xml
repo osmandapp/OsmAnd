@@ -3787,7 +3787,6 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s дані доступні лише для доріг, прокладіть маршрут за допомогою «Маршрут між точками», щоб побачити графіки.</string>
     <string name="message_graph_will_be_available_after_recalculation">Будь ласка, зачекайте.
 \nГрафік буде доступний після перебудування маршруту.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Місцеві мапи</string>
     <string name="icon_group_amenity">Зручності</string>
     <string name="icon_group_special">Спеціальні</string>
@@ -4715,7 +4714,7 @@
     <string name="compass_visible_if_map_rotated">Показується після повороту мапи</string>
     <string name="compass_always_hidden">Постійно прихований</string>
     <string name="compass_always_visible">Показується постійно</string>
-    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб змінити режим орієнтації мапи.</string>
+    <string name="compass_click_desc">Двічі торкніться віджета компаса, щоб змінити режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колір ізоліній глибин</string>
     <string name="auto_backup_preference_desc">Типово Android створює резервні копії Закладок, ключів мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія має обмеження у 25 МБ.

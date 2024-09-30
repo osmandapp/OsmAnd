@@ -42,6 +42,11 @@ class KFile {
 		return if (parent != null) KFile(parent) else null
 	}
 
+	fun isPathEmpty():Boolean {
+		val path = path()
+		return path.isEmpty() || path == "." || path == Path.DIRECTORY_SEPARATOR
+	}
+
 	fun exists(): Boolean = nativeFile.exists()
 
 	fun isAbsolute(): Boolean = path.isAbsolute

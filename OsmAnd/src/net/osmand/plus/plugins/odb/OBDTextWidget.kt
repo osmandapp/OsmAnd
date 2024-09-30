@@ -68,6 +68,10 @@ class OBDTextWidget @JvmOverloads constructor(
 				obdDataWidgetType = OBDTypeWidget.FUEL_TYPE
 				formatter = OBDFuelTypeFormatter()
 			}
+			VIN -> {
+				obdDataWidgetType = OBDTypeWidget.VIN
+				formatter = OBDComputerWidgetFormatter("%s")
+			}
 		}
 		//todo implement setting correct time for widget (0 for instant)
 		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, averageTimeSeconds, formatter)

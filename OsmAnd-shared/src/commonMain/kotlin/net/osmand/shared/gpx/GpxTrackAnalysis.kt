@@ -463,10 +463,10 @@ class GpxTrackAnalysis {
 	private fun addWptAttribute(
 		point: WptPt, attribute: PointAttributes, pointsAnalyser: TrackPointsAnalyser?
 	) {
-		if (!hasSpeedData() && attribute.speed > 0 && totalDistance > 0) {
+		if (!hasSpeedData() && attribute.speed > 0) {
 			setHasData(POINT_SPEED, true)
 		}
-		if (!hasElevationData() && !attribute.elevation.isNaN() && totalDistance > 0) {
+		if (!hasElevationData() && !attribute.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
 		}
 		pointsAnalyser?.onAnalysePoint(this, point, attribute)

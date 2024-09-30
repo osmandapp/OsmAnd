@@ -171,7 +171,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	private void reloadTracks() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			foldersHelper.reloadTracks(true);
+			foldersHelper.reloadTracks();
 		}
 	}
 

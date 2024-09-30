@@ -10,8 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
-    <string name="lock_screen">Lock screen</string>
+	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
+	<string name="lock_screen">Lock screen</string>
+	<string name="reset_average_speed">Reset average speed</string>
+	<string name="unknown_bt_device">Unknown device</string>
+	<string name="obd_vin">VIN</string>
+	<string name="obd_vin_desc">VIN code over OBD</string>
     <string name="unit_volt">V</string>
 	<string name="wikimedia">Wikimedia</string>
 	<string name="open_in_browser">Open in browser</string>
@@ -65,6 +69,7 @@
 
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
+    <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
@@ -1168,7 +1173,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Hint: Tap the compass button to switch the map orientation mode.</string>
+    <string name="compass_click_desc">Double tap the compass button to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>

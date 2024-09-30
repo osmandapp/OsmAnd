@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.odb.dialogs
 
+//import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITERS
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,18 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_DISTANCE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITERS
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_TYPE
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.RPM
@@ -27,12 +28,10 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.SPEED
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.VIN
 
 class OBDMainFragment : BaseOsmAndFragment() {
-	private var appBar: AppBarLayout? = null
-	private var responsesView: EditText? = null
 	private var deviceName: EditText? = null
-	private var connectBtn: Button? = null
 	private var fuelLeftDistBtn: Button? = null
 	private var fuelLeftLitersBtn: Button? = null
 	private var fuelConsumptionBtn: Button? = null
@@ -44,6 +43,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var fuelTypeBtn: Button? = null
 	private var fuelLeftPersBtn: Button? = null
 	private var tempAmbientBtn: Button? = null
+	private var vinBtn: Button? = null
 	private var fuelLeftDistResp: EditText? = null
 	private var fuelLeftLitersResp: EditText? = null
 	private var fuelConsumptionResp: EditText? = null
@@ -51,7 +51,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var speedResp: EditText? = null
 	private var tempIntakeResp: EditText? = null
 	private var tempCoolantResp: EditText? = null
-	private var resp8: EditText? = null
+	private var vinResp: EditText? = null
 	private var fuelTypeResp: EditText? = null
 	private var fuelLeftPersResp: EditText? = null
 	private var tempAmbientResp: EditText? = null
@@ -75,9 +75,16 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		return R.layout.fragment_obd_main
 	}
 
+	private fun setupToolbar(view: View) {
+		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
+		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(app))
+		toolbar.setNavigationContentDescription(R.string.shared_string_close)
+		toolbar.setNavigationOnClickListener { v: View? -> requireActivity().onBackPressed() }
+	}
+
 	private fun setupUI(view: View) {
-		appBar = view.findViewById(R.id.appbar)
-		responsesView = view.findViewById(R.id.responses)
+		setupToolbar(view)
 		fuelLeftDistResp = view.findViewById(R.id.resp1)
 		fuelLeftLitersResp = view.findViewById(R.id.resp2)
 		fuelConsumptionResp = view.findViewById(R.id.resp3)
@@ -90,18 +97,6 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelLeftPersResp = view.findViewById(R.id.resp10)
 		tempAmbientResp = view.findViewById(R.id.resp11)
 		deviceName = view.findViewById(R.id.device_name)
-		connectBtn = view.findViewById(R.id.connect)
-		connectBtn?.setOnClickListener {
-//			val devName = it
-			val devName = "Android-Vlink"
-			Thread {
-				if (plugin?.connectToObd(requireActivity(), devName) == true) {
-					addToResponses("Connected to ${plugin?.getConnectedDeviceName()}")
-				} else {
-					addToResponses("Can't connect to $devName")
-				}
-			}.start()
-		}
 		fuelLeftDistBtn = view.findViewById(R.id.btn1)
 		fuelLeftLitersBtn = view.findViewById(R.id.btn2)
 		fuelConsumptionBtn = view.findViewById(R.id.btn3)
@@ -113,6 +108,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelTypeBtn = view.findViewById(R.id.btn9)
 		fuelLeftPersBtn = view.findViewById(R.id.btn10)
 		tempAmbientBtn = view.findViewById(R.id.btn11)
+		vinBtn = view.findViewById(R.id.btn12)
 		fuelLeftDistBtn?.text = "fuel left distance"
 		fuelLeftLitersBtn?.text = "fuel left liters"
 		fuelConsumptionBtn?.text = "fuel consumption"
@@ -124,6 +120,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelTypeBtn?.text = "fuel type"
 		fuelLeftPersBtn?.text = "fuel left percent"
 		tempAmbientBtn?.text = "ambient air temperature"
+		vinBtn?.text = "vin"
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,13 +131,6 @@ class OBDMainFragment : BaseOsmAndFragment() {
 
 
 	}
-
-
-	override fun onDestroyView() {
-		super.onDestroyView()
-		appBar = null
-	}
-
 
 	companion object {
 		val TAG = OBDMainFragment::class.java.simpleName
@@ -156,27 +146,23 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		}
 	}
 
-	fun addToResponses(msg: String) {
-		app.runInUIThread {
-			responsesView?.setText("${responsesView?.text}\n***$msg")
-		}
-	}
-
 	private val widgets = mutableListOf<OBDDataComputer.OBDComputerWidget>()
 
 	override fun onStart() {
 		super.onStart()
 		OBDDataComputer.OBDTypeWidget.entries.forEach {
-			widgets.add(OBDDataComputer.registerWidget(it, 0) )
+			widgets.add(OBDDataComputer.registerWidget(it, 0))
 		}
 		updateWidgets()
 	}
 
-	private fun updateWidgets(){
+	private fun updateWidgets() {
 		widgets.forEach {
-			updateWidgetsData(it.type, if(it.computeValue() == null) " - " else it.computeValue().toString())
+			updateWidgetsData(
+				it.type,
+				if (it.computeValue() == null) " - " else it.computeValue().toString())
 		}
-		handler.postDelayed({updateWidgets()}, 100)
+		handler.postDelayed({ updateWidgets() }, 100)
 	}
 
 	override fun onStop() {
@@ -190,7 +176,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 				SPEED -> updateWidgetData(speedResp, result)
 				RPM -> updateWidgetData(rpmResp, result)
 				FUEL_LEFT_DISTANCE -> updateWidgetData(fuelLeftDistResp, result)
-				FUEL_LEFT_LITERS -> updateWidgetData(fuelLeftLitersResp, result)
+//				FUEL_LEFT_LITERS -> updateWidgetData(fuelLeftLitersResp, result)
 				FUEL_LEFT_PERCENT -> updateWidgetData(fuelLeftPersResp, result)
 				FUEL_CONSUMPTION_RATE -> updateWidgetData(fuelConsumptionResp, result)
 				TEMPERATURE_INTAKE -> updateWidgetData(tempIntakeResp, result)
@@ -198,6 +184,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 				BATTERY_VOLTAGE -> updateWidgetData(batteryVoltageResp, result)
 				FUEL_TYPE -> updateWidgetData(fuelTypeResp, result)
 				TEMPERATURE_COOLANT -> updateWidgetData(tempCoolantResp, result)
+				VIN -> updateWidgetData(vinResp, result)
 			}
 		}
 

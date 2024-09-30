@@ -727,4 +727,12 @@ public class Amenity extends MapObject {
 		}
 		return res;
 	}
+
+	public void setX(TIntArrayList x) {
+		this.x = x;
+	}
+
+	public void setY(TIntArrayList y) {
+		this.y = y;
+	}
 }

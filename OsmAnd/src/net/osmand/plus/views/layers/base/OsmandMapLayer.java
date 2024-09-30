@@ -234,7 +234,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
-	protected void updateResources(){
+	protected void updateResources() {
 
 	}
 
@@ -339,23 +339,33 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	@NonNull
-	public static QuadTree<QuadRect> initBoundIntersections(RotatedTileBox tileBox) {
-		QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+	public static QuadTree<QuadRect> initBoundIntersections(@NonNull RotatedTileBox tileBox) {
+		return initBoundIntersections(tileBox.getPixWidth(), tileBox.getPixHeight());
+	}
+
+	@NonNull
+	public static QuadTree<QuadRect> initBoundIntersections(float width, float height) {
+		QuadRect bounds = new QuadRect(0, 0, width, height);
 		bounds.inset(-bounds.width() / 4, -bounds.height() / 4);
 		return new QuadTree<>(bounds, 4, 0.6f);
 	}
 
-	public static boolean intersects(QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
-		List<QuadRect> result = new ArrayList<>();
+	public static boolean intersects(@NonNull QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
 		QuadRect visibleRect = calculateRect(x, y, width, height);
-		boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-		for (QuadRect r : result) {
-			if (QuadRect.intersects(r, visibleRect)) {
+		return intersects(boundIntersections, visibleRect, true);
+	}
+
+	public static boolean intersects(@NonNull QuadTree<QuadRect> boundIntersections, @NonNull QuadRect visibleRect, boolean insert) {
+		List<QuadRect> result = new ArrayList<>();
+		boundIntersections.queryInBox(new QuadRect(visibleRect), result);
+		for (QuadRect rect : result) {
+			if (QuadRect.intersects(rect, visibleRect)) {
 				return true;
 			}
 		}
-		boundIntersections.insert(visibleRect,
-				new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
+		if (insert) {
+			boundIntersections.insert(visibleRect, new QuadRect(visibleRect));
+		}
 		return false;
 	}
 
