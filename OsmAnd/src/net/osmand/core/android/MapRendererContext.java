@@ -88,7 +88,7 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
-	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
+	private static boolean IGNORE_CORE_PRELOADED_STYLES = true; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
 
