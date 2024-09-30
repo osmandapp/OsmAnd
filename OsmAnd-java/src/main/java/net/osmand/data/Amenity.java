@@ -697,7 +697,6 @@ public class Amenity extends MapObject {
 		}
 		String result = null;
 		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
-			boolean isCity = false;
 			String translated = "";
 			String nonTranslated = "";
 			City.CityType type = null;
@@ -710,11 +709,10 @@ public class Amenity extends MapObject {
 				}
 				if (tagValue.tag.equals("place")) {
 					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
-					isCity = true;
 				}
 			}
 			String name = translated.isEmpty() ? nonTranslated : translated;
-			if (isCity && !name.isEmpty() && isCityTypeAccept(type)) {
+			if (!name.isEmpty() && isCityTypeAccept(type)) {
 				result = result == null ? name : result + ", " + name;
 			}
 		}
