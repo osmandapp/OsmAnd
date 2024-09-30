@@ -139,6 +139,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		}
 	}
 
+	@NonNull
 	public List<QuickActionButton> getActionButtons() {
 		return actionButtons;
 	}

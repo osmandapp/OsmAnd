@@ -14,7 +14,6 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.actions.LockScreenAction;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
@@ -42,13 +41,7 @@ public class QuickActionButton extends MapButton {
 
 		setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			if (app.getLockHelper().isScreenLocked()) {
-				for (QuickAction action : buttonState.getQuickActions()) {
-					if (action instanceof LockScreenAction) {
-						layer.onActionSelected(buttonState, action);
-					}
-				}
-			} else if (!buttonState.isDefaultButton() && buttonState.isSingleAction()) {
+			if (!buttonState.isDefaultButton() && buttonState.isSingleAction()) {
 				List<QuickAction> actions = buttonState.getQuickActions();
 				layer.onActionSelected(buttonState, actions.get(0));
 			} else if (!showTutorialIfNeeded()) {

@@ -1,7 +1,5 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.helpers.AndroidUiHelper.isViewInBounds;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -28,9 +26,6 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
-import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
 import org.apache.commons.logging.Log;
 
@@ -42,7 +37,7 @@ public class LockHelper implements SensorEventListener {
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
-	private static boolean LOCK_SCREEN = false;
+	private static boolean lockScreen = false;
 
 	@Nullable
 	private WakeLock wakeLock;
@@ -137,11 +132,11 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	public void toggleLockScreen(){
-		LOCK_SCREEN = !LOCK_SCREEN;
+		lockScreen = !lockScreen;
 	}
 
 	public boolean isScreenLocked(){
-		return LOCK_SCREEN;
+		return lockScreen;
 	}
 
 	private void timedUnlock(long millis) {
@@ -225,87 +220,8 @@ public class LockHelper implements SensorEventListener {
 
 	public GestureDetector getLockGestureDetector(@NonNull MapActivity mapActivity) {
 		if (gestureDetector == null) {
-			gestureDetector = new LockGestureDetector(mapActivity, new GestureDetector.OnGestureListener() {
-				@Override
-				public boolean onDown(@NonNull MotionEvent e) {
-					return false;
-				}
-
-				@Override
-				public void onShowPress(@NonNull MotionEvent e) {
-
-				}
-
-				@Override
-				public boolean onSingleTapUp(@NonNull MotionEvent e) {
-					QuickActionButton actionButton = getPressedQuickActionButton(mapActivity, e);
-					if (actionButton != null) {
-						actionButton.performClick();
-						return true;
-					}
-					return false;
-				}
-
-				@Override
-				public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
-					return false;
-				}
-
-				@Override
-				public void onLongPress(@NonNull MotionEvent e) {
-
-				}
-
-				@Override
-				public boolean onFling(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
-					return false;
-				}
-			});
+			gestureDetector = LockGestureDetector.getDetector(mapActivity);
 		}
-
 		return gestureDetector;
-	}
-
-	public class LockGestureDetector extends GestureDetector {
-		private final MapActivity mapActivity;
-		private QuickActionButton pressedActionButton;
-
-		public LockGestureDetector(@NonNull MapActivity mapActivity, @NonNull OnGestureListener listener) {
-			super(mapActivity, listener);
-			this.mapActivity = mapActivity;
-		}
-
-		@Override
-		public boolean onTouchEvent(MotionEvent ev) {
-			if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-				pressedActionButton = getPressedQuickActionButton(mapActivity, ev);
-				if (pressedActionButton != null) {
-					pressedActionButton.setPressed(true);
-				}
-			} else if (ev.getAction() == MotionEvent.ACTION_UP) {
-				if (pressedActionButton != null) {
-					pressedActionButton.setPressed(false);
-				}
-			}
-			return super.onTouchEvent(ev);
-		}
-	}
-
-	private QuickActionButton getPressedQuickActionButton(@NonNull MapActivity mapActivity, @NonNull MotionEvent ev) {
-		float x = ev.getX();
-		float y = ev.getY();
-
-		MapQuickActionLayer quickActionLayer = mapActivity.getMapLayers().getMapQuickActionLayer();
-		for (QuickActionButton actionButton : quickActionLayer.getActionButtons()) {
-			QuickActionButtonState buttonState = actionButton.getButtonState();
-			if (buttonState != null) {
-				for (QuickAction action : buttonState.getQuickActions()) {
-					if (action instanceof LockScreenAction && isViewInBounds(actionButton, x, y)) {
-						return actionButton;
-					}
-				}
-			}
-		}
-		return null;
 	}
 }
