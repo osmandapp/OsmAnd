@@ -10,12 +10,8 @@ import net.osmand.shared.util.SerialNames
 @Serializable
 open class ListTrackFilter : BaseTrackFilter {
 
-	constructor(
-		trackFilterType: TrackFilterType,
-		filterChangedListener: FilterChangedListener?) : super(
-		trackFilterType,
-		filterChangedListener) {
-	}
+	constructor(trackFilterType: TrackFilterType, filterChangedListener: FilterChangedListener?) :
+			super(trackFilterType, filterChangedListener)
 
 	var collectionFilterParams: SingleFieldTrackFilterParams
 
@@ -111,11 +107,8 @@ open class ListTrackFilter : BaseTrackFilter {
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is ListTrackFilter) {
 			setSelectedItems(
-				if (value.selectedItems == null) {
-					ArrayList()
-				} else {
-					ArrayList(value.selectedItems)
-				})
+				ArrayList(value.selectedItems)
+			)
 			for (item in selectedItems) {
 				if (!allItems.contains(item)) {
 					allItems.add(item)

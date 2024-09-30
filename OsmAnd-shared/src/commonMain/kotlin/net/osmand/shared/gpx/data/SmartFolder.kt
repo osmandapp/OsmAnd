@@ -14,21 +14,18 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	@Transient
 	private var trackItems: List<TrackItem>? = null
 
-	constructor() : this("") {
-	}
+	constructor() : this("")
 
 	@Serializable
 	var creationTime = 0L
 
 	@Serializable(with = TrackFilterSerializer::class)
-	var filters: MutableList<BaseTrackFilter>? = null
+	var filters: List<BaseTrackFilter>? = null
 
 	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
 
-	override fun getName(): String {
-		return folderName
-	}
+	override fun getName() = folderName
 
 	override fun getTrackItems(): List<TrackItem> {
 		var trackItems = this.trackItems
@@ -55,20 +52,12 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return analysis
 	}
 
-	override fun getDirName(): String {
-		return folderName
-	}
+	override fun getDirName() = folderName
 
-	override fun lastModified(): Long {
-		return creationTime
-	}
+	override fun lastModified() = creationTime
 
 	fun resetItems() {
 		trackItems = ArrayList()
 		folderAnalysis = null
-	}
-
-	override fun equals(other: Any?): Boolean {
-		return super.equals(other)
 	}
 }
