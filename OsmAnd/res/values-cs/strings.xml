@@ -5900,4 +5900,5 @@
     <string name="start_trip_recording_first_m">Nejprve spusťte záznam cesty.</string>
     <string name="new_segment_started_m">Zahájení nahrávání nového segmentu trasy.</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Tlačítko pro uložení aktuální zaznamenané cesty jako souboru GPX a pokračování v nahrávání nové trasy bez přerušení.</string>
+    <string name="quick_action_new_trip_segment">Tlačítko pro spuštění nového segmentu v probíhajícím záznamu stopy GPX.</string>
 </resources>
