@@ -3700,7 +3700,7 @@
     <string name="poi_ford_stepping_stones">Step-stone bridge</string>
     <string name="poi_ford">Ford</string>
     <string name="poi_emergency_access_point">Emergency access point</string>
-    <string name="poi_ses_station">SES station</string>
+    <string name="poi_disaster_response">SES station</string>
     <string name="poi_ambulance_station">Ambulance station</string>
     <string name="poi_grit_bin">Grit bin</string>
     <string name="poi_fire_water_pond">Fire water pond</string>

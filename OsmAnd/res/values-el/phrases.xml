@@ -279,7 +279,7 @@
     <string name="poi_fire_water_pond">Δεξαμενή νερού κατάσβεσης</string>
     <string name="poi_grit_bin">Κάδος αλατιού</string>
     <string name="poi_ambulance_station">Σταθμός ασθενοφόρων</string>
-    <string name="poi_ses_station">Σταθμός SES</string>
+    <string name="poi_disaster_response">Σταθμός SES</string>
     <string name="poi_emergency_access_point">Σημείο επείσουσας πρόσβασης</string>
     <string name="poi_ford">Υδάτινο πέρασμα / Ιρλανδική διάβαση</string>
     <string name="poi_ford_stepping_stones">Πέρασμα με πέτρες</string>

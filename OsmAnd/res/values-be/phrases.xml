@@ -100,7 +100,7 @@
     <string name="poi_fire_water_pond">Пажарны вадаём</string>
     <string name="poi_grit_bin">Скрыня з пяском</string>
     <string name="poi_ambulance_station">Станцыя хуткай дапамогі</string>
-    <string name="poi_ses_station">Санэпідэмстанцыя</string>
+    <string name="poi_disaster_response">Санэпідэмстанцыя</string>
     <string name="poi_emergency_access_point">Таблічка з кодам для службы выратавання</string>
     <string name="poi_ford">Брод</string>
     <string name="poi_mountain_pass">Перавал</string>

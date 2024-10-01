@@ -206,7 +206,7 @@
     <string name="poi_fire_station">Paloasema</string>
     <string name="poi_emergency_phone">Hätäpuhelin</string>
     <string name="poi_ambulance_station">Ambulanssiasema</string>
-    <string name="poi_ses_station">SES asema</string>
+    <string name="poi_disaster_response">SES asema</string>
     <string name="poi_ford">Kahluupaikka</string>
     <string name="poi_ford_stepping_stones">Astinkivisilta</string>
     <string name="poi_mountain_pass">Vuoristosola</string>

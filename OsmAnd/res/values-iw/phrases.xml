@@ -363,7 +363,7 @@
     <string name="poi_fire_water_pond">מאגר מים לכיבוי אש</string>
     <string name="poi_grit_bin">תיבת מלח</string>
     <string name="poi_ambulance_station">תחנת אמבולנס</string>
-    <string name="poi_ses_station">תחנת שירות לאסון לאומי</string>
+    <string name="poi_disaster_response">תחנת שירות לאסון לאומי</string>
     <string name="poi_emergency_access_point">נקודת התקשרות בחירום</string>
     <string name="poi_ford_stepping_stones">גשר אבנים</string>
     <string name="poi_mountain_pass">שביל בהר</string>

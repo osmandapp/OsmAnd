@@ -1826,7 +1826,7 @@
     <string name="poi_shop_craft">Tenda de materiais de artes e traballos manuais (artesanía)</string>
     <string name="poi_fire_flapper">Cortalumes</string>
     <string name="poi_fire_water_pond">Lagoa de auga para incendios</string>
-    <string name="poi_ses_station">Servizo de emerxencia (SES)</string>
+    <string name="poi_disaster_response">Servizo de emerxencia (SES)</string>
     <string name="poi_traffic_calming_cushion">Coxín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_table">Plataforma elevada</string>

@@ -2026,7 +2026,7 @@
     <string name="poi_toilets_no">Án salerna</string>
     <string name="poi_fire_flapper">Slökkviliðskústur</string>
     <string name="poi_fire_water_pond">Slökkviliðsvatnsból</string>
-    <string name="poi_ses_station">SES-neyðarstöð</string>
+    <string name="poi_disaster_response">SES-neyðarstöð</string>
     <string name="poi_commercial">Landnotkun í atvinnuskyni</string>
     <string name="poi_retail">Landnotkun fyrir verslun</string>
     <string name="poi_register_office">Skrifstofa þjóðskrár</string>

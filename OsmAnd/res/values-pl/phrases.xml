@@ -98,7 +98,7 @@
     <string name="poi_fire_water_pond">Zbiornik przeciwpożarowy</string>
     <string name="poi_grit_bin">Piasek gaśniczy</string>
     <string name="poi_ambulance_station">Stacja karetek pogotowia</string>
-    <string name="poi_ses_station">Powiadamianie kryzysowe</string>
+    <string name="poi_disaster_response">Powiadamianie kryzysowe</string>
     <string name="poi_mountain_pass">Przejście górskie</string>
     <string name="poi_ford">Bród</string>
     <string name="poi_gate">Bramka</string>
