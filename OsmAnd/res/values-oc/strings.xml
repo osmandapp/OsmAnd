@@ -1882,7 +1882,6 @@
     <string name="app_mode_kayak">Caiac</string>
     <string name="icon_group_travel">Viatge</string>
     <string name="icon_group_symbols">Simbòl</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="message_graph_will_be_available_after_recalculation">Esperatz.
 \nLo grafic serà disponible après lo recalcul dau percors.</string>
     <string name="use_live_routing">Donadas d\'OsmAnd Live</string>

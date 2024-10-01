@@ -101,7 +101,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
 		swipeRefresh.setOnRefreshListener(() -> {
-			reloadTracks();
+			reloadTracks(true);
 			swipeRefresh.setRefreshing(false);
 		});
 	}

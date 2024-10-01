@@ -13,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
 
+import org.apache.commons.logging.Log;
+
 public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
+	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
 
@@ -58,7 +63,7 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 		imageView = view.findViewById(R.id.image);
 
 		ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
-		Picasso.get().load(imageCard.getImageUrl()).into(imageView);
+		downloadThumbnail(imageCard);
 
 		imageView.setOnDoubleTapListener(new SimpleOnGestureListener() {
 			@Override
@@ -71,6 +76,30 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 				return false;
 			}
 		});
+	}
+
+	private void downloadThumbnail(@NonNull ImageCard imageCard) {
+		Picasso.get()
+				.load(imageCard.getThumbnailUrl())
+				.into(imageView, new Callback() {
+					@Override
+					public void onSuccess() {
+						downloadHiResImage(imageCard);
+					}
+
+					@Override
+					public void onError(Exception e) {
+						downloadHiResImage(imageCard);
+						LOG.error(e);
+					}
+				});
+	}
+
+	private void downloadHiResImage(@NonNull ImageCard imageCard) {
+		Picasso.get()
+				.load(imageCard.getGalleryFullSizeUrl())
+				.placeholder(imageView.getDrawable())
+				.into(imageView);
 	}
 
 	@Override

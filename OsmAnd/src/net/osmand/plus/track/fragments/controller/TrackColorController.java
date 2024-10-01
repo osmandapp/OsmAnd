@@ -200,12 +200,11 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItemsBlocking();
+		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			Integer color = dataItem.getParameter(COLOR);
 			if (Algorithms.objectEquals(prevColor, color)) {
-				dataItem.setParameter(COLOR, newColor);
-				gpxDbHelper.updateDataItem(dataItem);
+				gpxDbHelper.updateDataItemParameter(dataItem, COLOR, newColor);
 			}
 		}
 		List<SelectedGpxFile> files = app.getSelectedGpxHelper().getSelectedGPXFiles();

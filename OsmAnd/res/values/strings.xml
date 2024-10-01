@@ -10,6 +10,25 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
+	<string name="lock_screen">Lock screen</string>
+    <string name="track_does_not_contain_data_to_save">Track doesn\'t contain data to save.</string>
+    <string name="quick_action_finish_trip_recording_summary">A button to save the GPX track and finish trip recording.</string>
+    <string name="start_trip_recording_first_m">Please start trip recording first.</string>
+    <string name="new_segment_started_m">Started recording a new track segment.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">A button to save the current recorded trip as a GPX file and continue recording a new track without interruption.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Recorded Trip &amp; Continue</string>
+    <string name="quick_action_new_trip_segment">A button to start a new segment in the ongoing GPX track recording.</string>
+    <string name="new_trip_segment">New trip segment</string>
+    <string name="quick_action_start_pause_recording">A button to start, pause or resume recording of the GPX track.</string>
+    <string name="quick_action_verb_start_pause">Start / Pause</string>
+	<string name="help_article_personal_color_palette_schemes_name">Color Schemes</string>
+	<string name="movies_list">Movies list</string>
+	<string name="third_links">Third Links</string>
+	<string name="reset_average_speed">Reset average speed</string>
+	<string name="unknown_bt_device">Unknown device</string>
+	<string name="obd_vin">VIN</string>
+	<string name="obd_vin_desc">VIN code over OBD</string>
     <string name="unit_volt">V</string>
 	<string name="wikimedia">Wikimedia</string>
 	<string name="open_in_browser">Open in browser</string>
@@ -63,6 +82,7 @@
 
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
+    <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>

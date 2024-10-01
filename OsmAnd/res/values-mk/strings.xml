@@ -1024,7 +1024,6 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_special">Poesbno</string>
     <string name="icon_group_amenity">Udobnost</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Lokalni karti</string>
     <string name="osm_edit_logout_success">Odjaven</string>
     <string name="clear_osm_token">Isčistete go OpenStreetMap OAuth tokenot</string>

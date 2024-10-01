@@ -1030,7 +1030,7 @@
     <string name="poi_fire_flapper">Požarna loputa</string>
     <string name="poi_fire_hose">Brizgalna cev</string>
     <string name="poi_grit_bin">Posoda za pesek</string>
-    <string name="poi_ses_station">Državna služba za nujne primere</string>
+    <string name="poi_disaster_response">Državna služba za nujne primere</string>
     <string name="poi_emergency_access_point">Dostopna točka v sili</string>
     <string name="poi_ford">Plitvina</string>
     <string name="poi_ford_stepping_stones">Stopničasti most</string>

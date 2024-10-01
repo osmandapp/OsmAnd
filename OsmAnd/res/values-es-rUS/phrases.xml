@@ -142,7 +142,7 @@
     <string name="poi_fire_water_pond">Estanque de agua contra incendios</string>
     <string name="poi_grit_bin">Contenedor de arena</string>
     <string name="poi_ambulance_station">Estación de ambulancias</string>
-    <string name="poi_ses_station">Defensa civil (SES);Protección civil</string>
+    <string name="poi_disaster_response">Defensa civil (SES);Protección civil</string>
     <string name="poi_emergency_access_point">Punto de acceso de emergencia</string>
     <string name="poi_ford">Vado</string>
     <string name="poi_mountain_pass">Paso de montaña</string>

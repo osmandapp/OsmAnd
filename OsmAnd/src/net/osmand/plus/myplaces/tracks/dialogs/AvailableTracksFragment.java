@@ -115,7 +115,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
 		swipeRefresh.setOnRefreshListener(() -> {
-			reloadTracks();
+			reloadTracks(true);
 			swipeRefresh.setRefreshing(false);
 		});
 	}
@@ -137,7 +137,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		smartFolderHelper.addUpdateListener(this);
 		if (!trackFoldersHelper.isImporting()) {
 			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
-				reloadTracks(false);
+				reloadTracks();
 			} else {
 				updateContent();
 			}

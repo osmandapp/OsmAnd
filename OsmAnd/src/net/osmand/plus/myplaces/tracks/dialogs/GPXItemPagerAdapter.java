@@ -38,6 +38,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.shared.gpx.GpxFile;
@@ -174,7 +175,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		if (isShowCurrentTrack()) {
 			GpxFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
-				analysis = gpxFile.getAnalysis(0);
+				analysis = gpxFile.getAnalysis(0, null, null, PluginsHelper.getTrackPointsAnalyser());
 				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 			}
 		} else if (getFilteredGpxFile() != null) {

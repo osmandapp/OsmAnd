@@ -3682,7 +3682,6 @@
     <string name="wiki_menu_download_descr">Απαιτούνται πρόσθετοι χάρτες για να προβάλετε τα ΣΕ της Wikipedia στον χάρτη.</string>
     <string name="select_wikipedia_article_langs">Επιλέξτε τις γλώσσες για τα άρθρα Wikipedia στον χάρτη. Αλλάξτε σε οποιαδήποτε διαθέσιμη γλώσσα κατά την ανάγνωση του άρθρου.</string>
     <string name="radius_ruler_item">Χάρακας ακτίνας</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="map_markers_desc">Το γραφικό στοιχείο δείχνει την απόσταση ή την εκτιμώμενη ώρα άφιξης (ETA) για τους δύο πρώτους δείκτες στη λίστα δεικτών χάρτη.</string>
     <string name="shared_string_next_sunset">Επόμενο ηλιοβασίλεμα</string>
     <string name="shared_string_next_sunrise">Επόμενη ανατολή</string>

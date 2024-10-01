@@ -1470,7 +1470,6 @@
     <string name="waypoint_visit_before">Bisitatu aurretik</string>
     <string name="simulate_your_location">Simulatu zure kokapena</string>
     <string name="drawer">Zerrenda soila</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Maiz egindako galderak, azken aldaketak, eta bestelakoak.</string>
     <string name="routing_settings_2">Nabigazio ezarpenak</string>
     <string name="shared_string_deselect">Desautatu</string>
@@ -3783,7 +3782,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Itxaron mesedez.
 \nIbilbidea birkalkulatu ondoren grafikoa eskuragarri egongo da.</string>
     <string name="shared_string_local_maps">Tokiko mapak</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_special">Berezia</string>
     <string name="icon_group_transport">Garraioa</string>
     <string name="icon_group_service">Zerbitzua</string>

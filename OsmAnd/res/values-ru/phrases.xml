@@ -121,7 +121,7 @@
     <string name="poi_fire_water_pond">Пожарный водоём</string>
     <string name="poi_grit_bin">Ящик с песком</string>
     <string name="poi_ambulance_station">Станция скорой помощи;Скорая помощь</string>
-    <string name="poi_ses_station">Станция SES</string>
+    <string name="poi_disaster_response">Станция SES</string>
     <string name="poi_emergency_access_point">Табличка с кодом для службы спасения</string>
     <string name="poi_ford">Брод</string>
     <string name="poi_ford_stepping_stones">Рудиментарный мост из камней</string>
@@ -4389,4 +4389,16 @@
     <string name="poi_diet_pescetarian_no">Пескетарианская диета: нет</string>
     <string name="poi_cash_in_customers">Клиенты</string>
     <string name="poi_engineer">Инженерный офис</string>
+    <string name="poi_indoor_seating_yes">Места внутри: да</string>
+    <string name="poi_cash_in">Депозит наличными</string>
+    <string name="poi_indoor_seating_bar_table">Места внутри: барный стол</string>
+    <string name="poi_indoor_seating_no">Нет мест внутри</string>
+    <string name="poi_music_venue">Музыкальная площадка</string>
+    <string name="poi_us_maps_recreation_area_activity">Зона отдыха</string>
+    <string name="poi_self_checkout">Касса самообслуживания</string>
+    <string name="poi_impromptu">Импровизированный</string>
+    <string name="poi_reservation">Бронирование</string>
+    <string name="poi_waste_accepted">Принимаемые отходы</string>
+    <string name="poi_photo_booth">Фотобудка;Фотокабина</string>
+    <string name="poi_second_hand_filter">Товары, бывшие в употреблении</string>
 </resources>

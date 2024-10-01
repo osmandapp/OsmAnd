@@ -2051,8 +2051,8 @@
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="shared_string_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine Trackdateien.</string>
-    <string name="gpx_no_tracks_title_folder">Trackdateien können dem Ordner hinzugefügt werden.</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine Trackdateien</string>
+    <string name="gpx_no_tracks_title_folder">Trackdateien können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Weitere hinzufügen …</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
@@ -2674,7 +2674,6 @@
     <string name="in_app_purchase_desc">Einmalige Zahlung</string>
     <string name="in_app_purchase_desc_ex">Nach dem Kauf steht es Ihnen dauerhaft zur Verfügung.</string>
     <string name="purchase_unlim_title">Kaufen - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unbegrenzte Downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
@@ -3525,7 +3524,6 @@
     <string name="map_markers_item">Kartenmarkierungen</string>
     <string name="favorites_item">Favoriten</string>
     <string name="divider_descr">Elemente unterhalb dieses Punktes werden durch einen Trenner getrennt.</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="travel_item">Reisen (Wikivoyage und Wikipedia)</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
@@ -3786,7 +3784,6 @@
     <string name="perform_oauth_authorization_description">Anmelden mit OAuth zur Nutzung der osmedit-Funktionen</string>
     <string name="use_two_phase_routing">2-Phasen-A*-Routing-Algorithmus verwenden</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s Daten sind nur auf Straßen verfügbar, Sie müssen eine Route mit „Route zwischen Punkten“ berechnen, um eine grafische Darstellung zu erhalten.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="message_graph_will_be_available_after_recalculation">Bitte warten Sie.
 \nDie Grafik wird nach der Neuberechnung der Route verfügbar sein.</string>
@@ -4722,7 +4719,7 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um die Art der Kartenausrichtung zu ändern.</string>
+    <string name="compass_click_desc">Doppeltes Tippen auf die Kompass-Schaltfläche wechselt den Kartenausrichtungsmodus.</string>
     <string name="compass_desc">Zeigt Richtung Norden.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
@@ -4979,7 +4976,6 @@
     <string name="shared_string_do_not_exist">Nicht vorhanden</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fehler beim Abrufen der Dateiliste vom Server.</string>
     <string name="last_sync">Letzte Synchronisierung</string>
-    <string name="import_export">Import/Export</string>
     <string name="export_to_file">In Datei exportieren</string>
     <string name="res_unknown">Unbekannt</string>
     <string name="shared_string_modified">Geändert</string>
@@ -5940,4 +5936,29 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Wasserstoff</string>
     <string name="obd_fuel_type_unknown">Unbekannter Kraftstoff</string>
     <string name="obd_widget_group">Fahrzeugangaben</string>
+    <string name="obd_air_intake_temp">Ansauglufttemperatur</string>
+    <string name="obd_ambient_air_temp">Umgebungslufttemperatur</string>
+    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur des Motors</string>
+    <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
+    <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
+    <string name="obd_fuel_type">Kraftstofftyp</string>
+    <string name="obd_plugin_name">Fahrzeugangaben</string>
+    <string name="obd_plugin_description">Zugriff auf Ihre Fahrzeuginformationen über das OBD-Protokoll</string>
+    <string name="obd_support">OBD Unterstützung</string>
+    <string name="obd_battery_voltage">Batteriespannung</string>
+    <string name="obd_rpm_desc">Zeigt mithilfe des OBD-Sensors die Drehzahl des Fahrzeugtachos an</string>
+    <string name="obd_air_intake_temp_desc">Zeigt mithilfe des OBD-Sensors die Ansauglufttemperatur des Fahrzeugs an</string>
+    <string name="obd_ambient_air_temp_desc">Zeigt mithilfe des OBD-Sensors die Umgebungslufttemperatur an</string>
+    <string name="obd_engine_coolant_temp_desc">Zeigt mithilfe des OBD-Sensors die Motorkühlmitteltemperatur an</string>
+    <string name="obd_battery_voltage_desc">Zeigt mithilfe des OBD-Sensors die Batteriespannung an</string>
+    <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem linken Kraftstoffstand noch fahren kann</string>
+    <string name="obd_fuel_level_desc">Zeigt mithilfe des OBD-Sensors den Kraftstoffstand des Fahrzeugs an</string>
+    <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
+    <string name="obd_fuel_level">Kraftstoffstand</string>
+    <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
+    <string name="unknown_bt_device">Unbekanntes Gerät</string>
+    <string name="obd_vin">VIN (Fahrzeug Identifizierung Nummer)</string>
+    <string name="obd_vin_desc">VIN-Code über OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Fahrzeugmetrik-Einstellungen</string>
+    <string name="reset_average_speed">Durchschnittliche Geschwindigkeit zurücksetzen</string>
 </resources>

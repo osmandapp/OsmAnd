@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="shared_string_local_maps">Takaṛḍa tadɣarant</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_service">Tanafut</string>
     <string name="shared_string_name"/>
     <string name="shared_string_all"/>

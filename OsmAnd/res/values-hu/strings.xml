@@ -3773,7 +3773,6 @@
     <string name="osm_edit_logout_success">Kijelentkezett</string>
     <string name="use_two_phase_routing">Kétszakaszos A* útvonaltervezési algoritmus használata</string>
     <string name="file_already_imported">A fájl már importálva van az OsmAndba</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="snowmobile_render_descr">Motorosszán vezetéshez külön utakkal és pályákkal.</string>
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak utakról állnak rendelkezésre. Az ábrák megtekintéséhez az „Útvonal tervezése pontok között” funkcióval számítsa ki az útvonalat.</string>
@@ -4695,7 +4694,7 @@
     <string name="compass_visible_if_map_rotated">Látható, ha a térkép el van forgatva</string>
     <string name="compass_always_hidden">Mindig el van rejtve</string>
     <string name="compass_always_visible">Mindig látható</string>
-    <string name="compass_click_desc">Tipp: Koppintson az iránytű gombra a térkép tájolási módjai közötti váltáshoz.</string>
+    <string name="compass_click_desc">Dupla koppintás az iránytű gombon vált a térkép tájolási módjai között.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak vastagsága</string>
@@ -5954,4 +5953,9 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hibrid hidrogén</string>
     <string name="obd_fuel_type_bifuel_propane">Propánnal működő Bifuel</string>
+    <string name="reset_average_speed">Átlagsebesség nullázása</string>
+    <string name="unknown_bt_device">Ismeretlen eszköz</string>
+    <string name="obd_vin_desc">OBD általi VIN-kód</string>
+    <string name="vehicle_metrics_plugin_settings">Járműmetrika beállítások</string>
+    <string name="obd_vin">VIN</string>
 </resources>

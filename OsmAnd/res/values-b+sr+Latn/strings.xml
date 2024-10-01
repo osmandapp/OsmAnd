@@ -2143,7 +2143,7 @@
     <string name="marker_save_as_track_descr">Izvezi markere u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
     <string name="shared_string_sort">Sortiranje</string>
-    <string name="plan_route">Planiranje rute</string>
+    <string name="plan_route">Plan rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja pozicija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
@@ -2759,7 +2759,7 @@
     <string name="shared_string_paused">Pauzirano</string>
     <string name="shared_string_pause">&amp;Pauziraj</string>
     <string name="shared_string_continue">Nastavi</string>
-    <string name="shared_string_resume">Rezime</string>
+    <string name="shared_string_resume">Nastavi</string>
     <string name="shared_string_notifications">Obaveštenja</string>
     <string name="trip_rec_notification_settings_desc">Prikazuj obaveštenje koje omogućava pokretanje snimanja putovanja.</string>
     <string name="trip_rec_notification_settings">Uključi brzo snimanje</string>
@@ -2930,7 +2930,7 @@
     <string name="osm_edit_closed_note">Zatvorena OSM beleška</string>
     <string name="set_working_days_to_continue">Podesi radne dane za nastavak</string>
     <string name="route_between_points">Ruta između tačaka</string>
-    <string name="plan_a_route">Planiranje rute</string>
+    <string name="plan_a_route">Plan rute</string>
     <string name="add_to_a_track">Dodaj u trasu</string>
     <string name="track_show_start_finish_icons">Prikazati ikonu za početak i kraj</string>
     <string name="select_track_width">Izaberi širinu</string>
@@ -3053,7 +3053,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Slobodno vreme</string>
     <string name="icon_group_special">Specijalna</string>
     <string name="icon_group_transport">Prevoz</string>
@@ -3862,7 +3861,7 @@
     <string name="profile_type_user_string">Korisnički profil</string>
     <string name="release_3_9">• Dodata je mogućnost za izvoz i uvoz svih podataka, uključujući podešavanja, izvore, moja mesta
 \n
-\n • Planiranje rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
+\n • Plan rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
 \n
 \n • Dodan je način prijave OAuth za OpenStritMap, poboljšano korisničko sučelje prozorčića OSM-a
 \n
@@ -5174,7 +5173,7 @@
     <string name="distance_to_destination_widget_desc">Vidžet prikazuje preostalo rastojanje do poslednje dolazne tačke.</string>
     <string name="second_next_turn_widget_desc">Widget prikazuje podatke o tvom drugom narednom skretanju koje je omogućeno ukoliko skrenete u okviru prilaznog rastojanja.</string>
     <string name="next_turn_widget_desc">Vidžet prikazuje podatke o tvom sledećem skretanju sa slikom manevra skretanja i rastojanjem do njega.</string>
-    <string name="compass_click_desc">Tapni na ikonu kompasa radi promene orijentacije mape.</string>
+    <string name="compass_click_desc">Duplo tapni na ikonu kompasa radi promene orijentacije mape.</string>
     <string name="map_marker_average_speed_desc">Odredi vremensko razdoblje prosečne brzine (korišćeno za procenu vremena pristizanja).</string>
     <string name="switch_widget_mode_desc">Dodirom na vidžet menjaš načine rada.</string>
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila biće izbegnuti.</string>
@@ -5208,7 +5207,7 @@
     <string name="help_article_map_tracks_on_map_name">Trase i rute</string>
     <string name="help_article_map_vector_maps_name">Vektorske mape (stil mape)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_plan_route_name">Planiranje rute</string>
+    <string name="help_article_plan_route_name">Plan rute</string>
     <string name="help_article_troubleshooting_crash_logs_name">Dnevnik rušenja programa</string>
     <string name="help_article_troubleshooting_general_name">Generalno</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Snimanje trase</string>
@@ -5962,4 +5961,23 @@
     <string name="obd_plugin_description">Pristupa informacijama o vašem vozilu preko OBD protokola</string>
     <string name="obd_engine_coolant_temp_desc">Prikazuje temperaturu rashladne tečnosti motora preko OBD senzora</string>
     <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
+    <string name="obd_vin">VIN</string>
+    <string name="unknown_bt_device">Nepoznat uređaj</string>
+    <string name="obd_vin_desc">VIN kod preko OBD-a</string>
+    <string name="reset_average_speed">Poništi prosečnu brzinu</string>
+    <string name="vehicle_metrics_plugin_settings">Podešavanja metrike vozila</string>
+    <string name="track_does_not_contain_data_to_save">Putanja ne sadrži podatke za čuvanje.</string>
+    <string name="quick_action_finish_trip_recording_summary">Dugme za čuvanje GPKS staze i završetak snimanja putovanja.</string>
+    <string name="start_trip_recording_first_m">Prvo započnite snimanje putovanja.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Snimljeno putovanje i nastavite</string>
+    <string name="help_article_personal_color_palette_schemes_name">Šeme boja</string>
+    <string name="quick_action_new_trip_segment">Dugme za pokretanje novog segmenta u tekućem GPKS snimanju staze.</string>
+    <string name="new_segment_started_m">Počelo je snimanje novog segmenta putanje.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Dugme za čuvanje trenutno snimljenog putovanja kao GPKS fajla i nastavak snimanja nove staze bez prekida.</string>
+    <string name="third_links">Drugi linkovi</string>
+    <string name="new_trip_segment">Novi segment putovanja</string>
+    <string name="quick_action_start_pause_recording">Dugme za pokretanje, pauziranje ili nastavak snimanja GPKS staze.</string>
+    <string name="quick_action_verb_start_pause">Pokreni / Pauziraj</string>
+    <string name="movies_list">Lista filmova</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

@@ -3848,7 +3848,6 @@
 \nسيتوفر الرسم البياني بعد إعادة الحساب.</string>
     <string name="snowmobile_render_descr">للقيادة على الجليد مع طرق ومسارات مخصصة.</string>
     <string name="shared_string_graph">رسم بياني</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">الخرائط المحلية</string>
     <string name="icon_group_amenity">راحة</string>
     <string name="icon_group_special">خاص</string>

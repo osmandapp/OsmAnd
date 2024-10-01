@@ -392,6 +392,9 @@ public class NativeLibrary {
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
+	protected static native ByteBuffer getGeotiffTile(
+		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
+
 	/**/
 	// Empty native impl
 	/*
@@ -736,7 +739,7 @@ public class NativeLibrary {
 				left = Math.min(left, x);
 				right = Math.max(right, x);
 				top = Math.min(top, y);
-				bottom = Math.max(top, y);
+				bottom = Math.max(bottom, y);
 			}
 			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
 		}

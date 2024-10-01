@@ -3197,7 +3197,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Vă rugăm să așteptați.
 \nGraficul va fi disponibil după recalcularea traseului.</string>
     <string name="shared_string_local_maps">Hărți locale</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Facilități</string>
     <string name="icon_group_special">Speciale</string>
     <string name="icon_group_transport">Transporturi</string>
@@ -4975,7 +4974,6 @@
     <string name="cloud_no_conflicts">Nu sunt conflicte.</string>
     <string name="shared_string_do_not_exist">Nu există</string>
     <string name="last_sync">Ultima sincronizare</string>
-    <string name="import_export">Import/Export</string>
     <string name="export_to_file">Exportă în fișier</string>
     <string name="shared_string_expires">Expiră</string>
     <string name="open_weather_action_description">Vă permite să deschideți un ecran cu informații meteo detaliate.</string>

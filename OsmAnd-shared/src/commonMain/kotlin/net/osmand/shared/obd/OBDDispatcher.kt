@@ -26,7 +26,6 @@ object OBDDispatcher {
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
 	private const val TERMINATE_SYMBOL = "\r\r>"
 	private const val RESPONSE_LINE_TERMINATOR = "\r"
-	private const val READ_DATA_COMMAND_CODE = "01"
 	private var job: Job? = null
 	private var scope: CoroutineScope? = null
 	private var readStatusListener: OBDReadStatusListener? = null
@@ -49,12 +48,12 @@ object OBDDispatcher {
 						for (command in commandQueue) {
 							if (command.isStale) {
 								val cachedCommandResponse = staleCommandsCache[command]
-								if (cachedCommandResponse != null) {
+								if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
 									consumeResponse(command, cachedCommandResponse)
 									continue
 								}
 							}
-							val fullCommand = "$READ_DATA_COMMAND_CODE${command.command}\r"
+							val fullCommand = "${command.commandGroup}${command.command}\r"
 							val bufferToWrite = Buffer()
 							bufferToWrite.write(fullCommand.encodeToByteArray())
 							outStream.write(bufferToWrite, bufferToWrite.size)
@@ -99,7 +98,14 @@ object OBDDispatcher {
 							}
 							var response = resultRaw.toString()
 							response = response.replace(TERMINATE_SYMBOL, "")
-							val listResponses = response.split(RESPONSE_LINE_TERMINATOR)
+							var listResponses = response.split(RESPONSE_LINE_TERMINATOR)
+//							val listResponses = if(command.isMultiPartResponse) {
+//								listOf(response)
+//							} else {
+//							}
+							if(command.isMultiPartResponse) {
+								listResponses = listOf(response.split(RESPONSE_LINE_TERMINATOR).subList(2, listResponses.size).joinToString(separator = ""))
+							}
 							for (responseIndex in 1 until listResponses.size) {
 								val result = command.parseResponse(listResponses[responseIndex])
 								log.debug("raw_response_$responseIndex: $result")
@@ -141,11 +147,17 @@ object OBDDispatcher {
 		readStatusListener = listener
 	}
 
-	fun setReadWriteStreams(readStream: Source, writeStream: Sink) {
+	fun setReadWriteStreams(readStream: Source?, writeStream: Sink?) {
 		scope?.cancel()
 		inputStream = readStream
 		outputStream = writeStream
-		startReadObdLooper()
+		if(readStream != null && writeStream != null) {
+			startReadObdLooper()
+		}
+	}
+
+	fun stopReading() {
+		setReadWriteStreams(null, null)
 	}
 
 	private fun consumeResponse(command: OBDCommand, result: String) {
@@ -155,6 +167,7 @@ object OBDDispatcher {
 			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.AIR_INTAKE_TEMP, result)
 			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.COOLANT_TEMP, result)
 			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_TYPE, result)
+			OBDCommand.OBD_VIN_COMMAND -> OBDDataField(OBDDataFieldType.VIN, result)
 			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_LVL, result)
 			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDDataField(OBDDataFieldType.AMBIENT_AIR_TEMP, result)
 			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDDataField(OBDDataFieldType.BATTERY_VOLTAGE, result)

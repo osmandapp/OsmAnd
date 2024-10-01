@@ -3784,7 +3784,6 @@
 \n
 \nÞú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
     <string name="shared_string_graph">Graf</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="shared_string_local_maps">Staðkort</string>
     <string name="icon_group_amenity">Aðstaða</string>
     <string name="icon_group_special">Sértákn</string>

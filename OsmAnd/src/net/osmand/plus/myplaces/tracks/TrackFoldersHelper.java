@@ -125,6 +125,10 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.gpxImportListener = gpxImportListener;
 	}
 
+	public void reloadTracks() {
+		reloadTracks(false);
+	}
+
 	public void reloadTracks(boolean forceLoad) {
 		if (asyncLoader != null) {
 			asyncLoader.cancel();
@@ -438,7 +442,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, tracksGroups, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
-				reloadTracks(true);
+				reloadTracks();
 			}
 		});
 		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -474,7 +478,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 						if (gpxImportListener != null) {
 							gpxImportListener.onImportFinished();
 						}
-						reloadTracks(true);
+						reloadTracks();
 					}
 				});
 				boolean singleTrack = filesUri.size() == 1;
@@ -503,7 +507,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			SaveExistingFileListener listener = getSaveFileListener(src, dest);
 			FileExistBottomSheet.showInstance(manager, dest.getName(), listener);
 		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
-			reloadTracks(true);
+			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
@@ -515,7 +519,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			@Override
 			public void saveExistingFile(boolean overwrite) {
 				if (moveFile(overwrite)) {
-					reloadTracks(true);
+					reloadTracks();
 				} else {
 					app.showToastMessage(R.string.file_can_not_be_moved);
 				}

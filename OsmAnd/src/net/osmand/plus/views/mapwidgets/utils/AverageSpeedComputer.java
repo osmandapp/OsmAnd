@@ -148,6 +148,10 @@ public class AverageSpeedComputer extends AverageValueComputer {
 		}
 	}
 
+	public void resetLocations() {
+		locations.clear();
+	}
+
 	private static class SegmentsList {
 
 		private final Segment[] segments;

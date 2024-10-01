@@ -3288,7 +3288,6 @@
     <string name="message_graph_will_be_available_after_recalculation">请稍候。
 \n图表将在重新计算路线后可用。</string>
     <string name="shared_string_local_maps">本地地图</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">便利设施</string>
     <string name="icon_group_special">特殊</string>
     <string name="voice_prompts_timetable">语音提示时间</string>

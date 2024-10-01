@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.api.KStateChangedListener
@@ -28,6 +28,12 @@ object SmartFolderHelper {
 		override fun stateChanged(change: String) {
 			onSettingsChanged()
 		}
+	}
+
+	val json = Json {
+		isLenient = true
+		ignoreUnknownKeys = true
+		classDiscriminator = "className"
 	}
 
 	init {
@@ -101,7 +107,7 @@ object SmartFolderHelper {
 		val newFolder = SmartFolder(name)
 		newFolder.creationTime = currentTimeMillis()
 		newFolder.filters = enabledFilters
-		KCollectionUtils.addToList(smartFolderCollection, newFolder)
+		smartFolderCollection = KCollectionUtils.addToList(smartFolderCollection, newFolder)
 		updateSmartFolderItems(newFolder)
 		writeSettings()
 		notifyFolderCreatedListeners(newFolder)
@@ -151,7 +157,7 @@ object SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		val json = json.encodeToString(smartFolderCollection)
 		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}

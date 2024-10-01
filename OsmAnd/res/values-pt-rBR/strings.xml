@@ -2608,7 +2608,6 @@
     <string name="in_app_purchase_desc">Pagamento uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez adquirido, ele sempre será disponível para você.</string>
     <string name="purchase_unlim_title">Comprar - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Downloads ilimitados</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="purchase_dialog_title">Escolher plano</string>
@@ -3774,7 +3773,6 @@
     <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota usando “Rota entre pontos” para ver os gráficos.</string>
     <string name="message_graph_will_be_available_after_recalculation">Por favor, espere.
 \nO gráfico estará disponível após o recálculo da rota.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">Mapas locais</string>
     <string name="icon_group_amenity">Amenidade</string>
     <string name="icon_group_special">Especial</string>

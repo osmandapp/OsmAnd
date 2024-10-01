@@ -5,6 +5,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
+import kotlinx.cinterop.value
 import platform.Foundation.NSDate
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSFileModificationDate
@@ -23,6 +24,7 @@ actual class NativeFile actual constructor(actual val file: KFile) {
 		return memScoped {
 			val isDirectory = alloc<BooleanVar>()
 			NSFileManager.defaultManager.fileExistsAtPath(filePath, isDirectory.ptr)
+			isDirectory.value
 		}
 	}
 
