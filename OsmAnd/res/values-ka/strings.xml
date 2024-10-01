@@ -3285,6 +3285,8 @@
     <string name="select_data_to_import">აირჩიეთ შემოსატანი მონაცემები.</string>
     <string name="none_point_error">დაამატეთ ერთი წერტილი მაინც.</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">ყინულიანი გზების თავიდან არიდება.</string>
-    <string name="one_image_per_tile">ერთი გამოსახულების ფაილი ერთი ფილისთვის.</string>
+    <string name="one_image_per_tile">ერთი გამოსახულების ფაილი თითოეული ფილისთვის</string>
     <string name="keep_both_desc">შემოტანილი ელემენტები პრეფიქსით დაემატება</string>
+    <string name="units_and_formats">ერთეულები და ფორმატები</string>
+    <string name="switch_start_finish">საწყისი წერტილის და დანიშნულების პუნქტის შებრუნება</string>
 </resources>

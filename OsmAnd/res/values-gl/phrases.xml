@@ -3958,4 +3958,5 @@
     <string name="poi_heating_yes">Si;Calefacción</string>
     <string name="poi_heating_filter">Calefacción</string>
     <string name="poi_agrarian_yes">Si;Agrícola</string>
+    <string name="poi_furniture_no">Non</string>
 </resources>

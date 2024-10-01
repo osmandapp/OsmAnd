@@ -5949,4 +5949,19 @@
     <string name="vehicle_metrics_plugin_settings">車輛指標設定</string>
     <string name="unknown_bt_device">未知裝置</string>
     <string name="reset_average_speed">重設平均速率</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_finish_trip_recording_summary">儲存 GPS 軌跡並結束旅程錄製的按鈕。</string>
+    <string name="start_trip_recording_first_m">請先開始旅程錄製。</string>
+    <string name="new_segment_started_m">開始錄製新的軌跡片段。</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">一個按鈕，用來將目前錄製的旅程儲存為 GPX 檔案，並繼續錄製新軌跡而不中斷。</string>
+    <string name="quick_action_save_recorded_trip_and_continue">錄製旅程並繼續</string>
+    <string name="quick_action_new_trip_segment">在進行中的 GPX 軌跡錄製中開始新區段的按鈕。</string>
+    <string name="new_trip_segment">新旅程區段</string>
+    <string name="quick_action_start_pause_recording">開始、暫停或繼續 GPX 軌跡錄製的按鈕。</string>
+    <string name="quick_action_verb_start_pause">開始 / 暫停</string>
+    <string name="help_article_personal_color_palette_schemes_name">配色方案</string>
+    <string name="movies_list">電影清單</string>
+    <string name="third_links">第三個連結</string>
+    <string name="track_does_not_contain_data_to_save">軌跡不包含要儲存的資料。</string>
+    <string name="tracker_item">OsmAnd 追蹤程式</string>
 </resources>
