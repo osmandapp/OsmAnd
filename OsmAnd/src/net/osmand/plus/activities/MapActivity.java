@@ -311,7 +311,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		lockHelper.setLockUIAdapter(this);
-		lockHelper.addLockScreenListener(this);
 		keyEventHelper.setMapActivity(this);
 		mIsDestroyed = false;
 		if (mapViewWithLayers != null) {
@@ -559,7 +558,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		importHelper.setUiActivity(this);
-		lockHelper.setMapActivity(this);
 
 		long time = System.currentTimeMillis();
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -964,7 +962,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewWithLayers.onDestroy();
 		}
 		lockHelper.setLockUIAdapter(null);
-		lockHelper.removeLockScreenListener();
 		keyEventHelper.setMapActivity(null);
 		extendedMapActivity.onDestroy(this);
 

@@ -46,8 +46,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	private final Handler uiHandler;
 	private final OsmandApplication app;
-	@Nullable
-	private MapActivity mapActivity;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
 	private CommonPreference<Boolean> useSystemScreenTimeout;
@@ -78,6 +76,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
+		settings.APPLICATION_MODE.addListener(this);
 		lockRunnable = this::lock;
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
@@ -134,14 +133,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 				lockUIAdapter.lock();
 			}
 		}
-	}
-
-	public void toggleLockScreen(){
-		lockScreen = !lockScreen;
-	}
-
-	public boolean isScreenLocked(){
-		return lockScreen;
 	}
 
 	private void timedUnlock(long millis) {
@@ -227,29 +218,30 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	 * LockScreenAction part
 	 */
 
-	public void addLockScreenListener(@Nullable MapActivity mapActivity) {
-		setMapActivity(mapActivity);
-		app.getSettings().APPLICATION_MODE.addListener(this);
+
+	public void toggleLockScreen() {
+		lockScreen = !lockScreen;
 	}
 
-	public void removeLockScreenListener() {
-		app.getSettings().APPLICATION_MODE.removeListener(this);
+	public boolean isScreenLocked() {
+		return lockScreen;
+	}
+
+	public void unlockScreen() {
+		lockScreen = false;
 	}
 
 	@Override
 	public void stateChanged(ApplicationMode mode) {
-		if (mapActivity != null) {
-			List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getButtonsStates();
-			ApplicationMode currentMode = app.getSettings().getApplicationMode();
-			LockHelper lockHelper = app.getLockHelper();
+		List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getButtonsStates();
+		ApplicationMode currentMode = app.getSettings().getApplicationMode();
 
-			if (lastApplicationMode != currentMode && lockHelper.isScreenLocked()) {
-				if (!hasLockScreenAction(buttonStates)) {
-					lockHelper.toggleLockScreen();
-				}
+		if (isScreenLocked() && lastApplicationMode != currentMode) {
+			if (!hasLockScreenAction(buttonStates)) {
+				unlockScreen();
 			}
-			lastApplicationMode = currentMode;
 		}
+		lastApplicationMode = currentMode;
 	}
 
 	private boolean hasLockScreenAction(@NonNull List<QuickActionButtonState> mapButtonStates) {
@@ -264,10 +256,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 			}
 		}
 		return false;
-	}
-
-	public void setMapActivity(@Nullable MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
 	}
 
 	public GestureDetector getLockGestureDetector(@NonNull MapActivity mapActivity) {
