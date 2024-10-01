@@ -53,7 +53,7 @@ import net.osmand.wiki.Metadata;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
+public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements DownloadMetadataListener {
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
@@ -72,18 +72,19 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
-	private DownloadMetadataListener listener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-		listener = card -> {
-			if (card.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
-				Metadata metadata = card.getWikiImage().getMetadata();
-				setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
-			}
-		};
+	}
+
+	@Override
+	public void onMetadataDownloaded(@NonNull WikiImageCard imageCard) {
+		if (imageCard.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
+			Metadata metadata = imageCard.getWikiImage().getMetadata();
+			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
+		}
 	}
 
 	@Nullable
@@ -199,7 +200,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 			if (!wikiImageCard.isMetaDataDownloaded() && (Algorithms.isEmpty(date) || date.equals("Unknown")
 					|| Algorithms.isEmpty(author) || author.equals("Unknown")
 					|| Algorithms.isEmpty(license) || license.equals("Unknown"))) {
-				controller.addMetaDataListener(listener);
+				controller.addMetaDataListener(this);
 				controller.downloadWikiMetaData(wikiImageCard);
 			} else {
 				setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
@@ -219,9 +220,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 
 	private void setMetaData(@Nullable String author, @Nullable String date, @Nullable String license) {
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
-		if (Algorithms.isEmpty(formattedDate)) {
-			formattedDate = date;
-		}
+
 		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
 				getString(R.string.shared_string_date), formattedDate != null && !formattedDate.equals("Unknown") ? formattedDate : "");
 		dateView.setText(fullDate);
@@ -461,7 +460,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.removeMetaDataListener(listener);
+		controller.removeMetaDataListener(this);
 	}
 
 	private MapActivity getMapActivity() {

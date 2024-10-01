@@ -188,6 +188,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				}
 			}
 		});
+
+		DialogManager dialogManager = mapActivity.getMyApplication().getDialogManager();
+		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
+		if (controller == null) {
+			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
+		}
 	}
 
 	@Override
@@ -1323,6 +1329,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		}
 		super.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !mapActivity.isChangingConfigurations()) {
+			GalleryController galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+			if (galleryController != null) {
+				galleryController.clearListeners();
+			}
+		}
 	}
 
 	@Override

@@ -89,6 +89,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE;
 	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE;
 	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO;
+	public final CommonPreference<Boolean> MAPILLARY_PHOTOS_ROW_COLLAPSED;
 
 	private MapActivity mapActivity;
 
@@ -111,6 +112,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		MAPILLARY_FILTER_FROM_DATE = registerLongPreference("mapillary_filter_from_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_TO_DATE = registerLongPreference("mapillary_filter_to_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_PANO = registerBooleanPreference("mapillary_filter_pano", false).makeGlobal().makeShared();
+		MAPILLARY_PHOTOS_ROW_COLLAPSED = registerBooleanPreference("mapillary_menu_collapsed", true).makeGlobal().makeShared();
 	}
 
 	@Override
@@ -271,7 +273,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.addView(mapillaryCardsRow.getGalleryView());
 
-		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, app.getSettings().MAPILLARY_PHOTOS_ROW_COLLAPSED);
+		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, MAPILLARY_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && mapillaryCards == null) {
 				menuBuilder.startLoadingImages();

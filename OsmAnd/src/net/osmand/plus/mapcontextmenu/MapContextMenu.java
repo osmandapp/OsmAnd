@@ -23,7 +23,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
@@ -37,7 +36,6 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -438,11 +436,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				mapActivity.getMyApplication().logEvent("open_context_menu");
 				showInternal();
 			}
-			DialogManager dialogManager = mapActivity.getMyApplication().getDialogManager();
-			GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
-			if (controller == null) {
-				dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
-			}
 		}
 	}
 
@@ -533,10 +526,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				mapActivity.refreshMap();
 			}
-		}
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && !mapActivity.isChangingConfigurations()) {
-			mapActivity.getMyApplication().getDialogManager().unregister(GalleryController.PROCESS_ID);
 		}
 		return result;
 	}

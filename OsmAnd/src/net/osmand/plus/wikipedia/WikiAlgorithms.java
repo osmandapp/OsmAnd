@@ -77,21 +77,22 @@ public class WikiAlgorithms {
 		if (date == null) {
 			return null;
 		}
-		String formattedDate = null;
 		String cleanDate = date.startsWith("+") ? date.substring(1) : date;
 		cleanDate = cleanDate.endsWith("Z") ? cleanDate.substring(0, cleanDate.length() - 1) : cleanDate;
 		try {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 			SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
 			Date dateTime = inputFormat.parse(cleanDate);
-			String dateTimeString = outputFormat.format(dateTime);
-			if (!Algorithms.isEmpty(dateTimeString)) {
-				formattedDate = dateTimeString;
+			if (dateTime != null) {
+				String dateTimeString = outputFormat.format(dateTime);
+				if (!Algorithms.isEmpty(dateTimeString)) {
+					return dateTimeString;
+				}
 			}
+			return date;
 		} catch (Exception exception) {
 			LOG.error(exception);
 		}
-
-		return formattedDate;
+		return date;
 	}
 }
