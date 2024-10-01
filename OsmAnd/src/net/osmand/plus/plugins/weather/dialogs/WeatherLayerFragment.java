@@ -42,6 +42,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private static final long MS_IN_DAY = 24 * 60 * 60 * 1000;
 
 	private WeatherBand weatherBand;
+	private boolean isSliderDragging = false;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -124,8 +125,20 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			tvCurrentValue.setText(formatAlpha(value));
 			slider.setValue(value);
 
+			slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+				@Override
+				public void onStartTrackingTouch(@NonNull Slider slider) {
+					isSliderDragging = true;
+				}
+
+				@Override
+				public void onStopTrackingTouch(@NonNull Slider slider) {
+					isSliderDragging = false;
+				}
+			});
+
 			slider.addOnChangeListener((slider_, newValue, fromUser) -> {
-				if (fromUser) {
+				if (fromUser && !isSliderDragging) {
 					weatherBand.getAlphaPreference().set(newValue);
 					tvCurrentValue.setText(formatAlpha(newValue));
 					WeatherTileResourcesManager weatherTileResourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
