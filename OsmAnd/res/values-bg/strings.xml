@@ -4362,4 +4362,5 @@
     <string name="shared_string_source">Източник</string>
     <string name="shared_string_no_internet_connection">Няма връзка с интернет</string>
     <string name="no_internet_descr">Проверете връзката и пробвайте отново.</string>
+    <string name="track_does_not_contain_data_to_save">Трасето не съдържа информация, която да бъде запазена.</string>
 </resources>
