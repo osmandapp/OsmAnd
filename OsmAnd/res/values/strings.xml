@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
+	<string name="lock_screen">Lock screen</string>
     <string name="track_does_not_contain_data_to_save">Track doesn\'t contain data to save.</string>
     <string name="quick_action_finish_trip_recording_summary">A button to save the GPX track and finish trip recording.</string>
     <string name="start_trip_recording_first_m">Please start trip recording first.</string>

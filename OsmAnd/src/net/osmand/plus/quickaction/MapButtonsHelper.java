@@ -391,6 +391,7 @@ public class MapButtonsHelper {
 		allTypes.add(OpenSearchViewAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
+		allTypes.add(LockScreenAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
