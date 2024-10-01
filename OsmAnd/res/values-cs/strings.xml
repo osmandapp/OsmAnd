@@ -5894,4 +5894,10 @@
     <string name="no_internet_descr">Zkontrolujte připojení a zkuste to znovu.</string>
     <string name="no_photos_available_descr">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="no_photos_available">Nejsou dostupné žádné fotografie</string>
+    <string name="quick_action_finish_trip_recording_summary">Tlačítko pro uložení trasy GPX a ukončení záznamu cesty.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Zaznamenaná cesta a pokračování</string>
+    <string name="track_does_not_contain_data_to_save">Trasa neobsahuje data, která by bylo možné uložit.</string>
+    <string name="start_trip_recording_first_m">Nejprve spusťte záznam cesty.</string>
+    <string name="new_segment_started_m">Zahájení nahrávání nového segmentu trasy.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Tlačítko pro uložení aktuální zaznamenané cesty jako souboru GPX a pokračování v nahrávání nové trasy bez přerušení.</string>
 </resources>
