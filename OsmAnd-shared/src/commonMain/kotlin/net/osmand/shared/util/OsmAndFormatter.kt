@@ -25,8 +25,8 @@ object OsmAndFormatter {
 		val mc = PlatformUtil.getOsmAndContext().getSpeedSystem()
 		return when (mc) {
 			KILOMETERS_PER_HOUR -> formattedValueSrc / 3.6f
-			MILES_PER_HOUR -> (formattedValueSrc * METERS_IN_ONE_MILE / 3.6 * 1000).toFloat()
-			NAUTICALMILES_PER_HOUR -> (formattedValueSrc * METERS_IN_ONE_NAUTICALMILE / 3.6 * 1000).toFloat()
+			MILES_PER_HOUR -> (formattedValueSrc * METERS_IN_ONE_MILE / 3.6 / 1000).toFloat()
+			NAUTICALMILES_PER_HOUR -> (formattedValueSrc * METERS_IN_ONE_NAUTICALMILE / 3.6 / 1000).toFloat()
 			else -> formattedValueSrc
 		}
 	}
