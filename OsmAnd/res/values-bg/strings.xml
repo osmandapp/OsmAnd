@@ -2208,7 +2208,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Изчакайте.
 \nГрафиката ще е достъпна след преизчисляване на маршрута.</string>
     <string name="shared_string_local_maps">Местни карти</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Удобства</string>
     <string name="icon_group_special">Специални</string>
     <string name="icon_group_transport">Транспорт</string>
@@ -4354,4 +4353,13 @@
     <string name="annual_subscription">Годишен абонамент</string>
     <string name="osm_live_payment_annual_title">Годишно</string>
     <string name="monthly_subscription">Месечен абонамент</string>
+    <string name="unit_volt">В</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="unknown_bt_device">Неизвестно устройство</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">VIN код през OBD</string>
+    <string name="open_in_browser">Отваряне в браузър</string>
+    <string name="shared_string_source">Източник</string>
+    <string name="shared_string_no_internet_connection">Няма връзка с интернет</string>
+    <string name="no_internet_descr">Проверете връзката и пробвайте отново.</string>
 </resources>

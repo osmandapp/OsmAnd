@@ -2,13 +2,14 @@ package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 
 @Serializable
-abstract class BaseTrackFilter(
+sealed class BaseTrackFilter(
 	@Serializable
 	@SerialName("filterType") val trackFilterType: TrackFilterType,
-	var filterChangedListener: FilterChangedListener?) {
+	@Transient var filterChangedListener: FilterChangedListener? = null) {
 
 	abstract fun isEnabled(): Boolean
 

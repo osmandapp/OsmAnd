@@ -116,7 +116,7 @@
     <string name="poi_fire_hose">Požiarna hadica</string>
     <string name="poi_fire_water_pond">Požiarna nádrž</string>
     <string name="poi_grit_bin">Kontajner na posypový materiál</string>
-    <string name="poi_ses_station">Stanica civilnej ochrany</string>
+    <string name="poi_disaster_response">Stanica civilnej ochrany</string>
     <string name="poi_emergency_access_point">Bod príchodu záchrany</string>
     <string name="poi_ford">Brod</string>
     <string name="poi_mountain_pass">Horský priesmyk</string>
@@ -2008,7 +2008,7 @@
     <string name="poi_ramp_stroller_no">Rampa pre detské kočíky: nie</string>
     <string name="poi_ramp_bicycle_no">Rampa pre bicykle: nie</string>
     <string name="poi_ramp_luggage_no">Rampa pre batožinu: nie</string>
-    <string name="poi_defibrillator">Defibrilátor</string>
+    <string name="poi_defibrillator">Defibrilátor;AED</string>
     <string name="poi_site_type_city">Veľkomesto</string>
     <string name="poi_prison_camp">Bývalý väzenský tábor</string>
     <string name="poi_concentration_camp">Typ: koncentračný tábor</string>

@@ -316,7 +316,7 @@
     <string name="poi_racquet">Racquetball</string>
     <string name="poi_fire_flapper">Pala battifuoco</string>
     <string name="poi_fire_hose">Manichetta antincendio</string>
-    <string name="poi_ses_station">Stazione protezione civile</string>
+    <string name="poi_disaster_response">Stazione protezione civile</string>
     <string name="poi_grit_bin">Cassone di sabbia</string>
     <string name="poi_fire_water_pond">Bacino anti-incendio</string>
     <string name="poi_emergency_access_point">Punto di accesso di emergenza</string>

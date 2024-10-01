@@ -143,4 +143,5 @@
     <string name="unit_of_length_descr">Ŝanĝi unuojn por reprezenti distancoj.</string>
     <string name="logcat_buffer">Bufro logcat</string>
     <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

@@ -185,7 +185,7 @@
     <string name="poi_fire_water_pond">Reservatório de água contra incêndios</string>
     <string name="poi_grit_bin">Caixa de sal-gema</string>
     <string name="poi_ambulance_station">Posto de ambulância</string>
-    <string name="poi_ses_station">Serviço de emergência</string>
+    <string name="poi_disaster_response">Serviço de emergência</string>
     <string name="poi_emergency_access_point">Ponto de acesso de emergência</string>
     <string name="poi_ford">Vau</string>
     <string name="poi_ford_stepping_stones">Ponte pedonal em pedras separadas</string>

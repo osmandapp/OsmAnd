@@ -157,7 +157,7 @@
     <string name="poi_fire_water_pond">消火用ため池</string>
     <string name="poi_grit_bin">砂箱／防滑材・融雪剤</string>
     <string name="poi_ambulance_station">救急車待機所</string>
-    <string name="poi_ses_station">SESレスキュー待機所</string>
+    <string name="poi_disaster_response">SESレスキュー待機所</string>
     <string name="poi_emergency_access_point">森林内番地札</string>
     <string name="poi_ford">道路上水没地点</string>
     <string name="poi_mountain_pass">峠</string>

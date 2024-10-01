@@ -205,7 +205,7 @@
     <string name="poi_fire_hydrant">Hidrant</string>
     <string name="poi_fire_hose">Vatrogasno crevo</string>
     <string name="poi_ambulance_station">Ambulanta</string>
-    <string name="poi_ses_station">SES stanica</string>
+    <string name="poi_disaster_response">SES stanica</string>
     <string name="poi_emergency_access_point">Tačka za okupljanje u slučaju nužde</string>
     <string name="poi_ford">Zaliv</string>
     <string name="poi_mountain_pass">Planinski prolaz</string>

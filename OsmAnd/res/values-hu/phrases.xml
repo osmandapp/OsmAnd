@@ -597,7 +597,7 @@
     <string name="poi_scuba_diving_shop">Búvárfelszerelés-bolt</string>
     <string name="poi_stationery">Papírbolt</string>
     <string name="poi_tyres">Autógumibolt</string>
-    <string name="poi_ses_station">State Emergency Service (állami vészhelyzeti szolgálat), AUS</string>
+    <string name="poi_disaster_response">State Emergency Service (állami vészhelyzeti szolgálat), AUS</string>
     <string name="poi_emergency_access_point">Vészhelyzeti elérési pont</string>
     <string name="poi_ford_stepping_stones">Lépőkövek</string>
     <string name="poi_vehicle_inspection">Műszaki vizsgáló állomás</string>

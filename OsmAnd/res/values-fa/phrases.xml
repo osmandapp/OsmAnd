@@ -98,7 +98,7 @@
     <string name="poi_fire_water_pond">استخر آب آتش نشانی</string>
     <string name="poi_grit_bin">شن بن</string>
     <string name="poi_ambulance_station">ایستگاه آمبولانس</string>
-    <string name="poi_ses_station">ایستگاه SES</string>
+    <string name="poi_disaster_response">ایستگاه SES</string>
     <string name="poi_emergency_access_point">نقطه دسترسی اضطراری</string>
     <string name="poi_ford">گدار</string>
     <string name="poi_mountain_pass">ایستگاه کوهستانی</string>

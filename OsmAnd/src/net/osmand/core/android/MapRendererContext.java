@@ -116,6 +116,7 @@ public class MapRendererContext {
 	private volatile MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
+	private boolean heightmapsActive;
 
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
@@ -145,8 +146,13 @@ public class MapRendererContext {
 	public MapRendererView getMapRendererView() {
 		return mapRendererView;
 	}
+
 	public boolean isVectorLayerEnabled() {
 		return !app.getSettings().MAP_ONLINE_DATA.get();
+	}
+
+	public boolean isHeightmapsActive() {
+		return heightmapsActive;
 	}
 
 	public void setNightMode(boolean nightMode) {
@@ -403,11 +409,15 @@ public class MapRendererContext {
 			SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 			if (srtmPlugin == null || !srtmPlugin.is3DMapsEnabled()) {
 				mapRendererView.resetElevationDataProvider();
+				heightmapsActive = false;
 				return;
 			}
 			GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
 			int elevationTileSize = mapRendererView.getElevationDataTileSize();
 			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(geoTiffCollection, elevationTileSize));
+			heightmapsActive = true;
+		} else {
+			heightmapsActive = false;
 		}
 	}
 	public void resetHeightmapProvider() {

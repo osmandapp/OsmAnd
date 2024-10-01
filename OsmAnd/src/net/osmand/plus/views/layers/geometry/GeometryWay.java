@@ -7,10 +7,12 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.VectorLineArrowsProvider;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
@@ -100,6 +102,14 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	@Nullable
 	public MapRendererView getMapRenderer() {
 		return context.getMapRenderer();
+	}
+
+	protected boolean isHeightmapsActive() {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			return mapRendererContext.isHeightmapsActive();
+		}
+		return false;
 	}
 
 	protected void updateWay(@NonNull GeometryWayProvider locationProvider, @NonNull RotatedTileBox tb) {
