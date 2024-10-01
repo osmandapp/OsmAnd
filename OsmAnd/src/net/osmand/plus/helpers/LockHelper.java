@@ -12,26 +12,28 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.actions.LockScreenAction;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
 import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-public class LockHelper implements SensorEventListener {
+public class LockHelper implements SensorEventListener, StateChangedListener<ApplicationMode> {
 
 	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
 
@@ -44,12 +46,15 @@ public class LockHelper implements SensorEventListener {
 
 	private final Handler uiHandler;
 	private final OsmandApplication app;
+	@Nullable
+	private MapActivity mapActivity;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
 	private CommonPreference<Boolean> useSystemScreenTimeout;
 	private CommonPreference<Boolean> turnScreenOnPowerButton;
 	private CommonPreference<Boolean> turnScreenOnNavigationInstructions;
 
+	private ApplicationMode lastApplicationMode;
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
 	private final Runnable lockRunnable;
@@ -216,6 +221,53 @@ public class LockHelper implements SensorEventListener {
 
 	public void setLockUIAdapter(@Nullable LockUIAdapter adapter) {
 		lockUIAdapter = adapter;
+	}
+
+	/**
+	 * LockScreenAction part
+	 */
+
+	public void addLockScreenListener(@Nullable MapActivity mapActivity) {
+		setMapActivity(mapActivity);
+		app.getSettings().APPLICATION_MODE.addListener(this);
+	}
+
+	public void removeLockScreenListener() {
+		app.getSettings().APPLICATION_MODE.removeListener(this);
+	}
+
+	@Override
+	public void stateChanged(ApplicationMode mode) {
+		if (mapActivity != null) {
+			List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getButtonsStates();
+			ApplicationMode currentMode = app.getSettings().getApplicationMode();
+			LockHelper lockHelper = app.getLockHelper();
+
+			if (lastApplicationMode != currentMode && lockHelper.isScreenLocked()) {
+				if (!hasLockScreenAction(buttonStates)) {
+					lockHelper.toggleLockScreen();
+				}
+			}
+			lastApplicationMode = currentMode;
+		}
+	}
+
+	private boolean hasLockScreenAction(@NonNull List<QuickActionButtonState> mapButtonStates) {
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (!buttonState.isEnabled()) {
+				continue;
+			}
+			for (QuickAction action : buttonState.getQuickActions()) {
+				if (action instanceof LockScreenAction) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
 	public GestureDetector getLockGestureDetector(@NonNull MapActivity mapActivity) {
