@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
@@ -13,7 +14,8 @@ open class ListTrackFilter : BaseTrackFilter {
 	constructor(trackFilterType: TrackFilterType, filterChangedListener: FilterChangedListener?) :
 			super(trackFilterType, filterChangedListener)
 
-	var collectionFilterParams: SingleFieldTrackFilterParams
+	@Transient
+	lateinit var collectionFilterParams: SingleFieldTrackFilterParams
 
 	init {
 		val additionalData = trackFilterType.additionalData
