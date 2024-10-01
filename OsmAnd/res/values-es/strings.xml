@@ -1565,7 +1565,7 @@
     <string name="archive_wikipedia_data">Tienes datos de Wikipedia viejos e incompatibles. ¿Archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_bpy">Bishnupriya Manipuri</string>
-    <string name="lang_ml">Malayalam</string>
+    <string name="lang_ml">Malayálam (Malabar)</string>
     <string name="lang_os">Osetio</string>
     <string name="lang_nb">Noruego Bokmål</string>
     <string name="lang_vo">Volapuque</string>
@@ -3473,13 +3473,13 @@
     <string name="lang_pnb">Panyabí</string>
     <string name="lang_nap">Napolitano</string>
     <string name="lang_mn">Mongol</string>
-    <string name="lang_min">Minangkabau</string>
+    <string name="lang_min">Idioma minangkabau</string>
     <string name="lang_mg">Malgache</string>
     <string name="lang_ky">Kirguís</string>
     <string name="lang_gu">Guyaratí</string>
     <string name="lang_cv">Chuvasio</string>
     <string name="lang_ce">Checheno</string>
-    <string name="lang_ba">Bashkir</string>
+    <string name="lang_ba">Baskir</string>
     <string name="lang_lmo">Lombardo</string>
     <string name="osm_live_payment_subscription_management">El pago se carga en la cuenta de Google Play al confirmar la compra.
 \n
@@ -5342,7 +5342,7 @@
     <string name="help_article_navigation_routing_name">Parámetros de la ruta</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutas en bicicleta (BTT)</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Rutas en barco</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">Brouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Rutas en coche (camión, moto)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Ruta directa al punto (barco)</string>
     <string name="help_article_navigation_routing_horse_routing_name">Rutas a caballo</string>
@@ -5439,7 +5439,7 @@
     <string name="filter_tracks_count">Filtrar: %d</string>
     <string name="date_of_creation">Fecha de creación</string>
     <string name="filter_screen_title">Filtrar</string>
-    <string name="shared_string_cache">Cache</string>
+    <string name="shared_string_cache">Caché</string>
     <string name="widget_available_ram_desc">Muestra la memoria disponible asignada a OsmAnd.</string>
     <string name="sort_size_descending">El más grande primero</string>
     <string name="delete_map">Borrar el mapa</string>
