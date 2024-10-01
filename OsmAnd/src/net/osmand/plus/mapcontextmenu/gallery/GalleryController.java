@@ -15,7 +15,10 @@ import net.osmand.plus.mapcontextmenu.gallery.tasks.LoadImageMetadataTask;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +29,8 @@ public class GalleryController implements IDialogController {
 	private final OsmandApplication app;
 
 	private ImageCardsHolder currentCardsHolder;
-	private final List<DownloadMetadataListener> listeners = new ArrayList<>();
+	private final List<WeakReference<DownloadMetadataListener>> listeners = new LinkedList<>();
+
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -48,13 +52,19 @@ public class GalleryController implements IDialogController {
 
 
 	public void addMetaDataListener(@NonNull DownloadMetadataListener listener) {
-		if (!listeners.contains(listener)) {
-			listeners.add(listener);
+		if (!listeners.contains(new WeakReference<>(listener))) {
+			listeners.add(new WeakReference<>(listener));
 		}
 	}
 
 	public void removeMetaDataListener(@NonNull DownloadMetadataListener listener) {
-		listeners.remove(listener);
+		Iterator<WeakReference<DownloadMetadataListener>> it = listeners.iterator();
+		while (it.hasNext()) {
+			DownloadMetadataListener metadataListener = it.next().get();
+			if (metadataListener == listener) {
+				it.remove();
+			}
+		}
 	}
 
 	public void downloadWikiMetaData(@NonNull WikiImageCard card) {
@@ -63,8 +73,12 @@ public class GalleryController implements IDialogController {
 	}
 
 	private void notifyMetaDataDownloaded(@NonNull WikiImageCard wikiImageCard) {
-		for (DownloadMetadataListener listener : listeners) {
-			if (listener != null) {
+		Iterator<WeakReference<DownloadMetadataListener>> it = listeners.iterator();
+		while (it.hasNext()) {
+			DownloadMetadataListener listener = it.next().get();
+			if (listener == null) {
+				it.remove();
+			} else {
 				listener.onMetadataDownloaded(wikiImageCard);
 			}
 		}
@@ -109,6 +123,11 @@ public class GalleryController implements IDialogController {
 		} else {
 			app.getSettings().CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE.set(newSpanCount);
 		}
+	}
+
+	public void clearListeners() {
+		listeners.clear();
+		clearHolder();
 	}
 
 	public interface DownloadMetadataListener {

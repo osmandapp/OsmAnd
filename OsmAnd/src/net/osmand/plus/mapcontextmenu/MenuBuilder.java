@@ -661,9 +661,7 @@ public class MenuBuilder {
 				LinearLayout.LayoutParams.WRAP_CONTENT));
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.addView(onlinePhotoCardsRow.getGalleryView());
-
-		CollapsableView collapsableView = new CollapsableView(parent, this, false);
-		collapsableView.setCollapsed(false);
+		CollapsableView collapsableView = new CollapsableView(parent, this, app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
 			if (!collapsed && onlinePhotoCards == null) {
 				startLoadingImages();

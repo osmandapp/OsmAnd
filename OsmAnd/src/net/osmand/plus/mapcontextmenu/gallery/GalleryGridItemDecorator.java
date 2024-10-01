@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
 import net.osmand.plus.utils.AndroidUtils;
@@ -41,6 +42,7 @@ public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
 				}
 				case MAIN -> {
 					outRect.right = standardItemOffsetInPx;
+					outRect.left = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 				}
 				case STANDARD -> {
 					outRect.right = standardItemOffsetInPx;

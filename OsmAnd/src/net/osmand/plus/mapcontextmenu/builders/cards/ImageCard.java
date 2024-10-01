@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
 import net.osmand.PlatformUtil;
@@ -32,6 +33,9 @@ import java.util.Locale;
 
 public abstract class ImageCard extends AbstractCard {
 	private static final Log LOG = PlatformUtil.getLog(ImageCard.class);
+	private static final int THUMBNAIL_WIDTH = 12;
+	private static final int GALLERY_FULL_SIZE_WIDTH = 1280;
+
 	protected String type;
 	// Image location
 	protected LatLon location;
@@ -194,6 +198,22 @@ public abstract class ImageCard extends AbstractCard {
 
 	public String getImageHiresUrl() {
 		return imageHiresUrl;
+	}
+
+	@Nullable
+	public String getThumbnailUrl() {
+		if (Algorithms.isEmpty(getImageHiresUrl())) {
+			return null;
+		}
+		return getImageHiresUrl() + "?width=" + THUMBNAIL_WIDTH;
+	}
+
+	@Nullable
+	public String getGalleryFullSizeUrl() {
+		if (Algorithms.isEmpty(getImageHiresUrl())) {
+			return null;
+		}
+		return getImageHiresUrl() + "?width=" + GALLERY_FULL_SIZE_WIDTH;
 	}
 
 	public boolean isExternalLink() {
