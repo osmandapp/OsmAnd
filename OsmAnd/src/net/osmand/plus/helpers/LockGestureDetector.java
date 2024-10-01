@@ -41,8 +41,8 @@ public class LockGestureDetector extends GestureDetector {
 	private static Pair<QuickAction, QuickActionButton> getPressedLockAction(@NonNull MapActivity mapActivity, @NonNull MotionEvent ev) {
 		float x = ev.getRawX();
 		float y = ev.getRawY();
-		QuickActionButton quickActionButton = null;
-		QuickAction lockAction = null;
+		QuickActionButton quickActionButton;
+		QuickAction lockAction;
 		MapQuickActionLayer quickActionLayer = mapActivity.getMapLayers().getMapQuickActionLayer();
 		for (QuickActionButton actionButton : quickActionLayer.getActionButtons()) {
 			QuickActionButtonState buttonState = actionButton.getButtonState();
@@ -51,12 +51,10 @@ public class LockGestureDetector extends GestureDetector {
 					if (action instanceof LockScreenAction && AndroidUtils.getViewBoundOnScreen(actionButton).contains((int) x, (int) y)) {
 						quickActionButton = actionButton;
 						lockAction = action;
+						return new Pair<>(lockAction, quickActionButton);
 					}
 				}
 			}
-		}
-		if (lockAction != null) {
-			return new Pair<>(lockAction, quickActionButton);
 		}
 		return null;
 	}
