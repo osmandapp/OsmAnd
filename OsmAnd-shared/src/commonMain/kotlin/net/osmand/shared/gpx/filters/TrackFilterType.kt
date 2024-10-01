@@ -1,11 +1,13 @@
 package net.osmand.shared.gpx.filters
 
+import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.filters.OtherTrackParam.VISIBLE_ON_MAP
 import net.osmand.shared.gpx.filters.OtherTrackParam.WITH_WAYPOINTS
 import net.osmand.shared.util.Localization
 import net.osmand.shared.util.PlatformUtil
 
+@Serializable
 enum class TrackFilterType(
 	private val nameResId: String,
 	val filterType: FilterType,
@@ -27,14 +29,14 @@ enum class TrackFilterType(
 		FilterType.RANGE,
 		GpxParameter.TIME_SPAN,
 		MeasureUnitType.TIME_DURATION,
-		listOf(0L, TrackFiltersConstants.DEFAULT_MAX_VALUE.toLong()),
+		listOf(0L, TrackFiltersConstants.DURATION_MAX_VALUE.toLong()),
 		false),
 	TIME_IN_MOTION(
 		"moving_time",
 		FilterType.RANGE,
 		GpxParameter.TIME_MOVING,
 		MeasureUnitType.TIME_DURATION,
-		listOf(0L, TrackFiltersConstants.DEFAULT_MAX_VALUE.toLong()),
+		listOf(0L, TrackFiltersConstants.DURATION_MAX_VALUE.toLong()),
 		false),
 	LENGTH(
 		"routing_attr_length_name",

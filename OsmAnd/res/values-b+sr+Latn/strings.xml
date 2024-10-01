@@ -2143,7 +2143,7 @@
     <string name="marker_save_as_track_descr">Izvezi markere u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
     <string name="shared_string_sort">Sortiranje</string>
-    <string name="plan_route">Planiranje rute</string>
+    <string name="plan_route">Plan rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja pozicija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
@@ -2930,7 +2930,7 @@
     <string name="osm_edit_closed_note">Zatvorena OSM beleška</string>
     <string name="set_working_days_to_continue">Podesi radne dane za nastavak</string>
     <string name="route_between_points">Ruta između tačaka</string>
-    <string name="plan_a_route">Planiranje rute</string>
+    <string name="plan_a_route">Plan rute</string>
     <string name="add_to_a_track">Dodaj u trasu</string>
     <string name="track_show_start_finish_icons">Prikazati ikonu za početak i kraj</string>
     <string name="select_track_width">Izaberi širinu</string>
@@ -5966,4 +5966,18 @@
     <string name="obd_vin_desc">VIN kod preko OBD-a</string>
     <string name="reset_average_speed">Poništi prosečnu brzinu</string>
     <string name="vehicle_metrics_plugin_settings">Podešavanja metrike vozila</string>
+    <string name="track_does_not_contain_data_to_save">Putanja ne sadrži podatke za čuvanje.</string>
+    <string name="quick_action_finish_trip_recording_summary">Dugme za čuvanje GPKS staze i završetak snimanja putovanja.</string>
+    <string name="start_trip_recording_first_m">Prvo započnite snimanje putovanja.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Snimljeno putovanje i nastavite</string>
+    <string name="help_article_personal_color_palette_schemes_name">Šeme boja</string>
+    <string name="quick_action_new_trip_segment">Dugme za pokretanje novog segmenta u tekućem GPKS snimanju staze.</string>
+    <string name="new_segment_started_m">Počelo je snimanje novog segmenta putanje.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Dugme za čuvanje trenutno snimljenog putovanja kao GPKS fajla i nastavak snimanja nove staze bez prekida.</string>
+    <string name="third_links">Drugi linkovi</string>
+    <string name="new_trip_segment">Novi segment putovanja</string>
+    <string name="quick_action_start_pause_recording">Dugme za pokretanje, pauziranje ili nastavak snimanja GPKS staze.</string>
+    <string name="quick_action_verb_start_pause">Pokreni / Pauziraj</string>
+    <string name="movies_list">Lista filmova</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

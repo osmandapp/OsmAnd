@@ -5907,4 +5907,9 @@
     <string name="no_internet_descr">Prosím skontrolujte pripojenie a skúste znovu.</string>
     <string name="no_photos_available_descr">K tejto lokalite zatiaľ neboli pridané žiadne fotografie používateľov</string>
     <string name="no_photos_available">Nie sú dostupné žiadne fotografie</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_plugin_name">Merania vozidla</string>
+    <string name="obd_plugin_description">Sprístupní informácie o vozidle cez protokol OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Nastavenia Meraní vozidla</string>
+    <string name="obd_support">Podpora OBD</string>
 </resources>

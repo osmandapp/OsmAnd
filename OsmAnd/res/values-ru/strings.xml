@@ -5964,4 +5964,8 @@
     <string name="obd_vin_desc">VIN-код по OBD</string>
     <string name="vehicle_metrics_plugin_settings">Настройки показателей ТС</string>
     <string name="reset_average_speed">Сбросить среднюю скорость</string>
+    <string name="quick_action_finish_trip_recording_summary">Кнопка сохранения трека GPX и завершения записи маршрута.</string>
+    <string name="start_trip_recording_first_m">Сначала начните запись поездки.</string>
+    <string name="new_segment_started_m">Начало записи нового сегмента трека.</string>
+    <string name="track_does_not_contain_data_to_save">Трек не содержит данных для сохранения.</string>
 </resources>
