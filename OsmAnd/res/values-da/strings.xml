@@ -5977,4 +5977,8 @@
     <string name="track_does_not_contain_data_to_save">Sporet indeholder ikke data, der skal gemmes.</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="third_links">Tredje-links</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="lock_screen">Lås skærm</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
 </resources>
