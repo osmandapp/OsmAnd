@@ -673,7 +673,7 @@
     <string name="hello">OsmAnd navigacija</string>
     <string name="show_transport_over_map">Prikazati stanice transporta</string>
     <string name="show_transport_over_map_description">Prikazati stanice javnog prevoza na mapi.</string>
-    <string name="transport">Transport</string>
+    <string name="transport">Prevoz</string>
     <string name="transport_route_distance">Udaljenosti u planu puta</string>
     <string name="transport_stops_to_pass">prolazno zaustavljanje</string>
     <string name="transport_to_go_before">naredna udaljenost</string>
@@ -4944,7 +4944,7 @@
     <string name="map_3d_mode_action">3D prikaz</string>
     <string name="rendering_value_sector3_name">Sektor 3</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
-    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Mali</string>
     <string name="rendering_value_name_only_name">Samo ime</string>
@@ -5807,7 +5807,7 @@
     <string name="quick_action_verb_show_hide">Prikazati / Sakriti</string>
     <string name="quick_action_verb_pause_resume">Pauziranje / Nastavak</string>
     <string name="quick_action_verb_turn_on_off">Uključivanje / Isključivanje</string>
-    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_verb_start_stop">Početak / Završetak</string>
     <string name="weather_screen">Ekran s vremenskom prognozom</string>
     <string name="quick_action_map_style">Stil mape</string>
     <string name="quick_action_remove_next_destination">Sledeća odredišna tačka</string>
@@ -5980,4 +5980,6 @@
     <string name="quick_action_verb_start_pause">Pokreni / Pauziraj</string>
     <string name="movies_list">Lista filmova</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="lock_screen">Zaključan ekran</string>
+    <string name="lock_screen_description">Uključuje ili isključuje zaključavanja ekrana zbog nenamernog dodira</string>
 </resources>

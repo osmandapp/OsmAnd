@@ -5971,5 +5971,7 @@
     <string name="movies_list">Filmlista</string>
     <string name="quick_action_start_pause_recording">Gomb a GPX nyomvonal rögzítésének indításához, szüneteltetéséhez vagy folytatásához.</string>
     <string name="quick_action_verb_start_pause">Indítás / szüneteltetés</string>
-    <string name="third_links">Harmadik link</string>
+    <string name="third_links">Harmadik linkek</string>
+    <string name="lock_screen">Képernyő zárolása</string>
+    <string name="lock_screen_description">Engedélyezi vagy letiltja az érintőképernyő funkcióit a véletlen érintések elkerülése érdekében</string>
 </resources>

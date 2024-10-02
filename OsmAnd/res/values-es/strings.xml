@@ -210,7 +210,7 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">mi</string>
+    <string name="mile">ml</string>
     <string name="send_location_way_choose_title">Compartir ubicación usando</string>
     <string name="send_location_sms_pattern">Ubicación: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace web «%1$s» o el enlace interno de Android «%2$s»</string>
@@ -354,7 +354,7 @@
     <string name="network_provider">Red</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">segundos</string>
-    <string name="int_min">min.</string>
+    <string name="int_min">min</string>
     <string name="background_service_int_descr">Intervalo de activación del modo reposo:</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="background_service_provider_descr">Método de ubicación usado del modo reposo:</string>
@@ -1137,7 +1137,7 @@
     <string name="lang_ko">Coreano</string>
     <string name="lang_lv">Letón</string>
     <string name="lang_lt">Lituano</string>
-    <string name="lang_mr">Marathi</string>
+    <string name="lang_mr">Maratí</string>
     <string name="lang_no">Noruego Bokmål</string>
     <string name="lang_pl">Polaco</string>
     <string name="lang_pt">Portugués</string>
@@ -1289,7 +1289,7 @@
     <string name="speak_poi">PDI cercanos</string>
     <string name="shared_string_all">Todo</string>
     <string name="index_tours">Excursiones</string>
-    <string name="int_hour">h</string>
+    <string name="int_hour">hr.</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabación de viaje</string>
@@ -3596,7 +3596,7 @@
     <string name="divider_descr">Los elementos debajo de este punto están separados por un divisor.</string>
     <string name="lang_zhminnan">Min del Sur</string>
     <string name="lang_yo">Yoruba</string>
-    <string name="lang_war">Waray</string>
+    <string name="lang_war">Samareño, Waray</string>
     <string name="lang_uz">Uzbeco</string>
     <string name="lang_ur">Urdu</string>
     <string name="lang_tg">Tayiko</string>
@@ -3657,7 +3657,7 @@
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
-    <string name="monitoring_control_start">REC</string>
+    <string name="monitoring_control_start">Grabar</string>
     <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activado desde el widget «Grabación de viaje» en el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
     <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
@@ -5975,4 +5975,6 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="third_links">Enlaces de terceros</string>
     <string name="tracker_item">Rastreador de OsmAnd</string>
+    <string name="lock_screen_description">Activa o desactiva la pantalla táctil para evitar toques accidentales</string>
+    <string name="lock_screen">Pantalla de bloqueo</string>
 </resources>
