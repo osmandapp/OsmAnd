@@ -6,10 +6,10 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLIN
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.DIVIDER_ROW_KEY;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_POI_KEY;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NEAREST_WIKI_KEY;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.WITHIN_POLYGONS_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.DIVIDER_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -57,7 +57,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.mapcontextmenu.builders.MenuUIComponents;
+import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -121,7 +121,7 @@ public class MenuBuilder {
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
 	protected OsmAndAppCustomization customization;
-	protected MenuUIComponents uiComponents;
+	protected MenuRowBuilder menuRowBuilder;
 
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	protected boolean firstRow;
@@ -193,7 +193,7 @@ public class MenuBuilder {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.customization = app.getAppCustomization();
-		this.uiComponents = new MenuUIComponents(mapActivity);
+		this.menuRowBuilder = new MenuRowBuilder(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
 		this.galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
@@ -294,7 +294,7 @@ public class MenuBuilder {
 	}
 
 	public void setLight(boolean light) {
-		uiComponents.setLightContent(light);
+		menuRowBuilder.setLightContent(light);
 	}
 
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
@@ -446,18 +446,8 @@ public class MenuBuilder {
 	                               @Nullable String textPrefix, @Nullable String textSuffix,
 	                               @Nullable CollapsableView collapsableView, boolean parentRow,
 	                               @Nullable OnClickListener onClickListener) {
-		if (!isFirstRow() && !parentRow) {
-			View horizontalLine = new View(view.getContext());
-			horizontalLine.setTag(DIVIDER_ROW_KEY);
-			LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-			llHorLineParams.gravity = Gravity.BOTTOM;
-			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
-
-			horizontalLine.setLayoutParams(llHorLineParams);
-			horizontalLine.setBackgroundColor(getColor(isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
-			((LinearLayout) view).addView(horizontalLine);
-		}
-		uiComponents.buildDetailsRow(view, icon, text, textPrefix, textSuffix, collapsableView, parentRow, onClickListener);
+		menuRowBuilder.buildDetailsRow(view, icon, text, textPrefix, textSuffix,
+				collapsableView, isFirstRow(), parentRow, onClickListener);
 		rowBuilt();
 	}
 
@@ -973,7 +963,7 @@ public class MenuBuilder {
 	}
 
 	protected void copyToClipboard(String text, Context ctx) {
-		uiComponents.copyToClipboard(text, ctx);
+		menuRowBuilder.copyToClipboard(text, ctx);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {
@@ -1465,31 +1455,31 @@ public class MenuBuilder {
 
 	@ColorInt
 	protected int getColor(@ColorRes int resId) {
-		return uiComponents.getColor(resId);
+		return menuRowBuilder.getColor(resId);
 	}
 
 	public Drawable getRowIcon(int iconId) {
-		return uiComponents.getRowIcon(iconId);
+		return menuRowBuilder.getRowIcon(iconId);
 	}
 
 	public Drawable getThemedIcon(int iconId) {
-		return uiComponents.getThemedIcon(iconId);
+		return menuRowBuilder.getThemedIcon(iconId);
 	}
 
 	public Drawable getRowIcon(Context ctx, String fileName) {
-		return uiComponents.getRowIcon(ctx, fileName);
+		return menuRowBuilder.getRowIcon(ctx, fileName);
 	}
 
 	public int dpToPx(float dp) {
-		return uiComponents.dpToPx(dp);
+		return menuRowBuilder.dpToPx(dp);
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
-		return uiComponents.getCollapseIcon(collapsed);
+		return menuRowBuilder.getCollapseIcon(collapsed);
 	}
 
 	protected boolean isLightContent() {
-		return uiComponents.isLightContent();
+		return menuRowBuilder.isLightContent();
 	}
 
 	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {

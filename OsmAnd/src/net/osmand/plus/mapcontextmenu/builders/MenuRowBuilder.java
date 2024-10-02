@@ -30,7 +30,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-public class MenuUIComponents {
+public class MenuRowBuilder {
 
 	public static final String WITHIN_POLYGONS_ROW_KEY = "within_polygons";
 	public static final String NEAREST_WIKI_KEY = "nearest_wiki_key";
@@ -44,7 +44,7 @@ public class MenuUIComponents {
 	private final UiUtilities iconsCache;
 	private boolean isLightContent;
 
-	public MenuUIComponents(@NonNull MapActivity mapActivity) {
+	public MenuRowBuilder(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.iconsCache = app.getUIUtilities();
@@ -56,8 +56,20 @@ public class MenuUIComponents {
 
 	public void buildDetailsRow(@NonNull View view, @Nullable Drawable icon, @Nullable String text,
 	                            @Nullable String textPrefix, @Nullable String textSuffix,
-	                            @Nullable CollapsableView collapsableView, boolean parentRow,
-	                            @Nullable OnClickListener onClickListener) {
+	                            @Nullable CollapsableView collapsableView, boolean firstRow,
+	                            boolean parentRow, @Nullable OnClickListener onClickListener) {
+		if (!firstRow && !parentRow) {
+			View horizontalLine = new View(view.getContext());
+			horizontalLine.setTag(DIVIDER_ROW_KEY);
+			LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+			llHorLineParams.gravity = Gravity.BOTTOM;
+			AndroidUtils.setMargins(llHorLineParams, icon != null ? dpToPx(64f) : 0, 0, 0, 0);
+
+			horizontalLine.setLayoutParams(llHorLineParams);
+			horizontalLine.setBackgroundColor(getColor(isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
+			((LinearLayout) view).addView(horizontalLine);
+		}
+
 		boolean collapsable = collapsableView != null;
 
 		LinearLayout baseView = new LinearLayout(view.getContext());

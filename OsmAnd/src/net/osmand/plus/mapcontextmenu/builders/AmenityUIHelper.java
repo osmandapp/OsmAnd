@@ -7,8 +7,8 @@ import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
 import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.ALT_NAMES_ROW_KEY;
-import static net.osmand.plus.mapcontextmenu.builders.MenuUIComponents.NAMES_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
 import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_YARDS;
@@ -312,13 +312,12 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (key.startsWith(COLLAPSABLE_PREFIX) || key.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
 			return null;
 		}
-		if (key.equals("image")
-				|| key.equals("mapillary")
-				|| key.equals("subway_region")
+		if (CollectionUtils.equalsToAny(key, "image", "mapillary", "subway_region")
 				|| (key.equals("note") && !osmEditingEnabled)
 				|| key.startsWith("lang_yes")) {
 			return null;
 		}
+		String baseKey = key.contains(":") ? key.split(":")[0] : key;
 
 		int iconId = 0;
 		int textColor = 0;
@@ -414,10 +413,10 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		} else if (key.startsWith("name:")) {
 			return null;
-		} else if (Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
+		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
 			needLinks = false;
-		} else if (OPENING_HOURS.equals(key)) {
+		} else if (OPENING_HOURS.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
 			collapsableView = getCollapsableTextView(context, true,
 					vl.replace("; ", "\n").replace(",", ", "));
@@ -437,16 +436,16 @@ public class AmenityUIHelper extends MenuBuilder {
 			vl = vl.replace("; ", "\n");
 			needLinks = false;
 
-		} else if (Amenity.PHONE.equals(key)) {
+		} else if (Amenity.PHONE.equals(baseKey)) {
 			iconId = R.drawable.ic_action_call_dark;
 			isPhoneNumber = true;
-		} else if (Amenity.MOBILE.equals(key)) {
+		} else if (Amenity.MOBILE.equals(baseKey)) {
 			iconId = R.drawable.ic_action_phone;
 			isPhoneNumber = true;
-		} else if (Amenity.WEBSITE.equals(key)) {
+		} else if (Amenity.WEBSITE.equals(baseKey)) {
 			iconId = R.drawable.ic_world_globe_dark;
 			isUrl = true;
-		} else if (Amenity.CUISINE.equals(key)) {
+		} else if (Amenity.CUISINE.equals(baseKey)) {
 			iconId = R.drawable.ic_action_cuisine;
 			StringBuilder sb = new StringBuilder();
 			for (String c : vl.split(";")) {
@@ -464,17 +463,17 @@ public class AmenityUIHelper extends MenuBuilder {
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
 		} else {
-			if (key.contains(Amenity.DESCRIPTION)) {
+			if (baseKey.contains(Amenity.DESCRIPTION)) {
 				iconId = R.drawable.ic_action_note_dark;
 			} else if (isWikipediaLink) {
 				iconId = R.drawable.ic_plugin_wikipedia;
-			} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
+			} else if (baseKey.equals("addr:housename") || baseKey.equals("whitewater:rapid_name")) {
 				iconId = R.drawable.ic_action_poi_name;
-			} else if (key.equals("operator") || key.equals("brand")) {
+			} else if (baseKey.equals("operator") || baseKey.equals("brand")) {
 				iconId = R.drawable.ic_action_poi_brand;
-			} else if (key.equals("internet_access_fee_yes")) {
+			} else if (baseKey.equals("internet_access_fee_yes")) {
 				iconId = R.drawable.ic_action_internet_access_fee;
-			} else if (key.equals("instagram")) {
+			} else if (baseKey.equals("instagram")) {
 				iconId = R.drawable.ic_action_social_instagram;
 			} else {
 				iconId = R.drawable.ic_action_info_dark;
@@ -664,6 +663,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		DISTANCE_FORMAT.setRoundingMode(RoundingMode.CEILING);
 		String formattedValue = value;
 		String formattedPrefix = prefix;
+		boolean formatted = true;
 		switch (key) {
 			case "width":
 			case "height":
@@ -719,6 +719,16 @@ public class AmenityUIHelper extends MenuBuilder {
 				break;
 			case "wikipedia":
 				formattedPrefix = app.getString(R.string.shared_string_wikipedia);
+				break;
+			default:
+				formatted = false;
+		}
+		if (!formatted && formattedPrefix.contains(" (")) {
+			String[] prefixParts = formattedPrefix.split(" [(]");
+			if (prefixParts.length == 2) {
+				formattedPrefix = app.getString(R.string.ltr_or_rtl_combine_via_colon, prefixParts[0],
+						Algorithms.capitalizeFirstLetterAndLowercase(prefixParts[1]).replaceAll("[()]", ""));
+			}
 		}
 		return new String[] {formattedPrefix, formattedValue};
 	}

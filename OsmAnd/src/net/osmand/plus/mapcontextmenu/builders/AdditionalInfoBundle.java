@@ -49,7 +49,7 @@ public class AdditionalInfoBundle {
 	@NonNull
 	public Map<String, Object> getFilteredLocalizedInfo() {
 		if (localizedAdditionalInfo == null) {
-			localizedAdditionalInfo = GroupInfoByLocaleAlgorithm.execute(app, getFilteredInfo());
+			localizedAdditionalInfo = MergeLocalizedTagsAlgorithm.execute(app, getFilteredInfo());
 		}
 		return localizedAdditionalInfo;
 	}
