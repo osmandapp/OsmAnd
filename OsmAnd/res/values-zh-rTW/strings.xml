@@ -5964,4 +5964,6 @@
     <string name="third_links">第三個連結</string>
     <string name="track_does_not_contain_data_to_save">軌跡不包含要儲存的資料。</string>
     <string name="tracker_item">OsmAnd 追蹤程式</string>
+    <string name="lock_screen_description">啟用或停用觸控螢幕功能，防止意外點擊</string>
+    <string name="lock_screen">鎖定螢幕</string>
 </resources>
