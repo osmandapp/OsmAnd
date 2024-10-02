@@ -5968,4 +5968,6 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="import_export">Importieren/exportieren</string>
     <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="lock_screen">Bildschirm sperren</string>
+    <string name="lock_screen_description">Touchfunktion aktivieren oder deaktivieren, um versehentliche Berührungen zu verhindern</string>
 </resources>
