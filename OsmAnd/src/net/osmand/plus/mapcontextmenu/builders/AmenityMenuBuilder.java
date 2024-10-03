@@ -1,20 +1,19 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
+import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
-import net.osmand.plus.helpers.LocaleHelper;
-import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.util.Algorithms;
@@ -23,7 +22,6 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -54,52 +52,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
-		rowsBuilder.setLight(light);
+		rowsBuilder.setLight(isLightContent());
 		rowsBuilder.setLatLon(getLatLon());
 		rowsBuilder.setCollapseExpandListener(getCollapseExpandListener());
 		rowsBuilder.buildInternal(view);
 
 		buildNearestRows((ViewGroup) view);
-		buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);
-		buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
-	}
-
-	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
-		if (namesMap.values().size() > 0) {
-			Locale nameLocale = LocaleHelper.getPreferredNameLocale(app, namesMap.keySet());
-			if (nameLocale == null) {
-				String localeId = (String) namesMap.values().toArray()[0];
-				nameLocale = new Locale(localeId);
-			}
-			String name = namesMap.get(nameLocale.getLanguage());
-
-			Context context = viewGroup.getContext();
-			View amenitiesRow = createRowContainer(context, altName ? ALT_NAMES_ROW_KEY : NAMES_ROW_KEY);
-			String hint = app.getString(altName ? R.string.shared_string_alt_name : R.string.shared_string_name);
-			rowsBuilder.buildNamesRow(amenitiesRow, getRowIcon(R.drawable.ic_action_map_language), name,
-					app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, nameLocale.getDisplayLanguage()),
-					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage(), hint) : null, true);
-			viewGroup.addView(amenitiesRow);
-		}
-	}
-
-	protected CollapsableView getNamesCollapsableView(Map<String, String> mapNames, @Nullable String excludedLanguageKey,
-	                                                  String hint) {
-		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-		for (int i = 0; i < mapNames.size(); i++) {
-			String key = (String) mapNames.keySet().toArray()[i];
-			if (!key.equals(excludedLanguageKey)) {
-				Locale locale = new Locale(key);
-				String name = mapNames.get(key);
-
-				View amenitiesRow = createRowContainer(app, null);
-				rowsBuilder.buildNamesRow(amenitiesRow, null, name,
-						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
-						null, false);
-				llv.addView(amenitiesRow);
-			}
-		}
-		return new CollapsableView(llv, this, true);
+		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);
+		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
 	}
 
 	private void buildNearestRows(ViewGroup viewGroup) {
