@@ -987,6 +987,10 @@ public class AndroidUtils {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
 	}
 
+	public static boolean isLayoutMirrored(@NonNull View view) {
+		return ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_RTL;
+	}
+
 	public static boolean isLayoutRtl(Context ctx) {
 		return isSupportRTL() && getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
