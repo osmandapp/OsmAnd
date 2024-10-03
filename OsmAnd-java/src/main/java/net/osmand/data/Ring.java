@@ -1,10 +1,6 @@
 package net.osmand.data;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.CoordinateList;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -13,6 +9,10 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapAlgorithms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A ring is a list of CONTIGUOUS ways that form a simple boundary or an area. <p />
@@ -86,7 +86,7 @@ public class Ring implements Comparable<Ring> {
 			Node prev = lastNode;
 			for(int i = 0; i < border.getNodes().size(); i++) {
 				Node current = border.getNodes().get(i);
-				if(current == null) {
+				if(current == null || current.isPropagated()) {
 					continue;
 				}
 				int i1 = getIndexedLessOrEq(current.getLatitude());
@@ -127,7 +127,13 @@ public class Ring implements Comparable<Ring> {
 	}
 
 	public List<Node> getBorder() {
-		return border.getNodes();
+		List<Node> list = new ArrayList<>();
+		for (Node n : border.getNodes()) {
+			if (n != null && !n.isPropagated()) {
+				list.add(n);
+			}
+		}
+		return list;
 	}
 
 

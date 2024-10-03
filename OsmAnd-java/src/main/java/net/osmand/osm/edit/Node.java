@@ -50,4 +50,8 @@ public class Node extends Entity implements Serializable {
 	public boolean compareNode(Node thatObj) {
 		return this.compareEntity(thatObj);
 	}
+
+	public boolean isPropagated() {
+		return (getId() & 1) == EntityType.WAY.ordinal();
+	}
 }
