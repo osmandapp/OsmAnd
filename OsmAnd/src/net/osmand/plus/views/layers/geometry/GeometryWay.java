@@ -389,7 +389,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		float passedDist = 0;
 		int firstX31 = -1;
 		int firstY31 = -1;
-		boolean renew = true;
+		boolean create = !previousVisible || startLocationIndexCached == -1;
+		boolean update = false;
 		for (List<DrawPathData31> pathsDataList : pathsData31Cache) {
 			if (drawNext) {
 				croppedPathsData31.add(pathsDataList);
@@ -398,7 +399,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			List<DrawPathData31> newPathsDataList = new ArrayList<>();
 			for (DrawPathData31 pathData : pathsDataList) {
-				if (drawNext && startLocationIndexCached == -1) {
+				if (drawNext) {
 					newPathsDataList.add(pathData);
 					continue;
 				}
@@ -421,11 +422,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 								heights.add(pathData.heights.get(i));
 							}
 							if (firstX31 == -1) {
-								passedDist += pathData.distances.get(i);
+								if (index >= startLocationIndexCached) {
+									passedDist += pathData.distances.get(i);
+								}
 								firstX31 = pathData.tx.get(i);
 								firstY31 = pathData.ty.get(i);
 							}
-						} else if (index >= startLocationIndexCached) {
+						} else if (!update && index >= startLocationIndexCached) {
 							if (pathData.distances.get(i) == 0 && i > 0) {
 								passedDist += (float) MapUtils.measuredDist31(
 										pathData.tx.get(i - 1), pathData.ty.get(i - 1), pathData.tx.get(i), pathData.ty.get(i));
@@ -435,38 +438,36 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						}
 					}
 					if (previousVisible) {
-						if (startLocationIndexCached != -1) {
-							if (!this.points.isEmpty() && firstX31 != -1) {
-								GeometryWayPoint firstPnt = this.points.get(0);
-								passedDist += (float) MapUtils.measuredDist31(firstX31, firstY31, firstPnt.tx31, firstPnt.ty31);
-								renew = false;
-							}
-						} else {
+						if (startLocationIndexCached == -1) {
 							startLocationIndexCached = startLocationIndex;
 						}
+						if (!update && !this.points.isEmpty() && firstX31 != -1) {
+							GeometryWayPoint firstPnt = this.points.get(0);
+							passedDist += (float) MapUtils.measuredDist31(firstX31, firstY31, firstPnt.tx31, firstPnt.ty31);
+							update = true;
+						}
+					} else {
+						drawNext = true;
 					}
-					if (!renew) {
-						break;
-					}
-					if (tx.size() > 1) {
+					if (create && tx.size() > 1) {
 						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style);
 						if (!heights.isEmpty()) {
 							newPathData.heights = heights;
 						}
 						newPathsDataList.add(newPathData);
 					}
-					drawNext = true;
 				}
 			}
-			if (!renew) {
-				break;
+			if (create) {
+				croppedPathsData31.add(newPathsDataList);
+				drawPathLine(tb, newPathsDataList);
 			}
-			croppedPathsData31.add(newPathsDataList);
-			drawPathLine(tb, newPathsDataList);
 		}
-		if (!renew) {
+		if (update) {
 			updatePathLine(passedDist);
-			return null;
+			if (!create) {
+				return null;
+			}
 		}
 		if (shouldDrawArrows()) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
@@ -482,7 +483,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 
-		return drawNext ? croppedPathsData31 : null;
+		return create ? croppedPathsData31 : null;
 	}
 
 	protected boolean shouldDrawArrows() {
