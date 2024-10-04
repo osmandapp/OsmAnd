@@ -152,8 +152,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	override fun getLogoResourceId(): Int {
-		return R.drawable.ic_action_external_sensor
-//		return R.drawable.ic_action_car_info
+		return R.drawable.ic_action_car_info
 	}
 
 	override fun getAssetResourceImage(): Drawable? {
