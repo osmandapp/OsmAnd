@@ -5972,4 +5972,7 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="quick_action_verb_start_pause">Старт/Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Цветовые схемы</string>
+    <string name="new_trip_segment">Новый сегмент маршрута</string>
+    <string name="lock_screen">Блокировка экрана OsmAnd</string>
+    <string name="quick_action_start_pause_recording">Кнопка для запуска, приостановки или возобновления записи GPX-трека.</string>
 </resources>

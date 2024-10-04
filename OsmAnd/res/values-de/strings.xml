@@ -1610,7 +1610,7 @@
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
-    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_new">Newari / Nepal Bhasa</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
@@ -5615,7 +5615,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Schrittweise</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Auto-Zoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
@@ -5970,4 +5970,14 @@
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lock_screen">Bildschirm sperren</string>
     <string name="lock_screen_description">Touchfunktion aktivieren oder deaktivieren, um versehentliche Berührungen zu verhindern</string>
+    <string name="track_does_not_contain_data_to_save">Track enthält keine zu speichernden Daten.</string>
+    <string name="start_trip_recording_first_m">Bitte zuerst die Reiseaufzeichnung starten.</string>
+    <string name="quick_action_finish_trip_recording_summary">Eine Schaltfläche zum Speichern des GPX-Tracks und Beenden der Reiseaufzeichnung.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Eine Schaltfläche zum Speichern der aktuell aufgezeichneten Reise als GPX-Datei und zum Fortsetzen der Aufzeichnung eines neuen Tracks ohne Unterbrechung.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Aufgezeichnete Reise &amp; Weiter</string>
+    <string name="new_trip_segment">Neuer Reiseabschnitt</string>
+    <string name="quick_action_start_pause_recording">Eine Schaltfläche zum Starten, Anhalten oder Fortsetzen der Aufzeichnung des GPX-Tracks.</string>
+    <string name="third_links">Externe Links</string>
+    <string name="new_segment_started_m">Die Aufzeichnung eines neuen Tracksegments wurde gestartet.</string>
+    <string name="quick_action_new_trip_segment">Eine Schaltfläche zum Starten eines neuen Segments in der laufenden GPX-Track-Aufzeichnung.</string>
 </resources>

@@ -5969,4 +5969,5 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
+    <string name="lock_screen">Блокування екрану</string>
 </resources>
