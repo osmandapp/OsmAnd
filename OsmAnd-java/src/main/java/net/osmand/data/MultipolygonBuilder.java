@@ -1,19 +1,12 @@
 package net.osmand.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
+
+import java.util.*;
 
 /**
  * The idea of multipolygon:
