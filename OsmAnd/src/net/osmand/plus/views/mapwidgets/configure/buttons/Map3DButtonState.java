@@ -93,11 +93,11 @@ public class Map3DButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		String iconName = isDefaultElevationAngle() ? "ic_action_2d" : "ic_action_3d";
+		String iconName = isFlatMapMode() ? "ic_action_3d" : "ic_action_2d";
 		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
-	public boolean isDefaultElevationAngle() {
+	public boolean isFlatMapMode() {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
 	}
 }
