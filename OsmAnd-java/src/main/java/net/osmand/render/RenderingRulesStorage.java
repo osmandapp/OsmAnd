@@ -72,22 +72,34 @@ public class RenderingRulesStorage {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException;
 	}
 
-	public static RenderingRulesStorage initFromResources(String styleName, String resourceName) {
+	public static RenderingRulesStorage initFromResources(String... resourceFileNames) {
 		try {
-			final RenderingRulesStorage storage = new RenderingRulesStorage(styleName,
-					readRenderingConstantsFromIS(RenderingRulesStorage.class.getResourceAsStream(resourceName)));
-			final RenderingRulesStorageResolver resolver = (name, ref) -> {
-				final String resource = name + ".render.xml";
-				final RenderingRulesStorage depends = new RenderingRulesStorage(name,
-						readRenderingConstantsFromIS(RenderingRulesStorage.class.getResourceAsStream(resource)));
-				final InputStream depStream = RenderingRulesStorage.class.getResourceAsStream(resource);
-				depends.parseRulesFromXmlInputStream(depStream, ref, false);
-				depStream.close();
-				return depends;
-			};
-			final InputStream xmlStream = RenderingRulesStorage.class.getResourceAsStream(resourceName);
-			storage.parseRulesFromXmlInputStream(xmlStream, resolver, false);
-			xmlStream.close();
+			RenderingRulesStorage storage = null;
+			final String BASE_EXT = ".render.xml";
+			final String ADDON_EXT = ".addon.render.xml";
+			for (String resourceName : resourceFileNames) {
+				boolean addon = resourceName.endsWith(ADDON_EXT);
+				String styleName = resourceName.replace(ADDON_EXT, "").replace(BASE_EXT, "");
+				Map<String, String> constants = readRenderingConstantsFromIS(
+						RenderingRulesStorage.class.getResourceAsStream(resourceName));
+				if (storage == null) {
+					storage = new RenderingRulesStorage(styleName, constants);
+				} else {
+					storage.renderingConstants.putAll(constants);
+				}
+				final RenderingRulesStorageResolver resolver = (name, ref) -> {
+					final String resource = name + (addon ? ADDON_EXT : BASE_EXT);
+					final RenderingRulesStorage depends = new RenderingRulesStorage(name,
+							readRenderingConstantsFromIS(RenderingRulesStorage.class.getResourceAsStream(resource)));
+					final InputStream depStream = RenderingRulesStorage.class.getResourceAsStream(resource);
+					depends.parseRulesFromXmlInputStream(depStream, ref, false);
+					depStream.close();
+					return depends;
+				};
+				final InputStream xmlStream = RenderingRulesStorage.class.getResourceAsStream(resourceName);
+				storage.parseRulesFromXmlInputStream(xmlStream, resolver, addon);
+				xmlStream.close();
+			}
 			return storage;
 		} catch (XmlPullParserException e) {
 			throw new RuntimeException(e);
