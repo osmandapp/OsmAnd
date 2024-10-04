@@ -9,10 +9,10 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Track3DStyle;
-import net.osmand.shared.routing.ColoringType;
-import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -44,12 +44,12 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                @Nullable Track3DStyle track3DStyle,
 	                                @NonNull ColoringType coloringType,
 	                                @Nullable String routeInfoAttribute,
-	                                @Nullable String gradientPaletteName) {
+	                                @Nullable String gradientPalette) {
 		boolean track3DStyleChanged = !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
-		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
-				|| this.coloringType != coloringType || track3DStyleChanged
-				|| coloringType == ColoringType.ATTRIBUTE && !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute)
-				|| !Algorithms.objectEquals(getTrack3DStyle(), track3DStyle);
+		boolean gradientPaletteChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPalette);
+		boolean coloringTypeChanged = gradientPaletteChanged || track3DStyleChanged
+				|| this.coloringType != coloringType || coloringType == ColoringType.ATTRIBUTE
+				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
 		if (coloringTypeChanged) {
@@ -64,9 +64,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (getTrack3DStyle() != track3DStyle) {
-			resetSymbolProviders();
-		}
 		updateTrack3DStyle(track3DStyle);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
@@ -79,7 +76,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.drawDirectionArrows = drawDirectionArrows;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
-		this.gradientPalette = gradientPaletteName;
+		this.gradientPalette = gradientPalette;
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points,
@@ -140,7 +137,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		ColoringType outlineColoringType = getOutlineColoringType();
 		List<RouteColorizationPoint> colorization = new ArrayList<>(points.size());
 		List<Integer> routeColors = coloringType.isRouteInfoAttribute()
- 				? getRouteInfoAttributesColors(RouteProvider.locationsFromSharedWpts(points), segments) : null;
+				? getRouteInfoAttributesColors(RouteProvider.locationsFromSharedWpts(points), segments) : null;
 
 		for (int i = 0; i < points.size(); i++) {
 			WptPt wptPt = points.get(i);

@@ -4,11 +4,11 @@ import net.osmand.shared.routing.Gpx3DWallColorType
 import net.osmand.util.Algorithms
 
 class Track3DStyle(
-	var visualizationType: Gpx3DVisualizationType,
-	var wallColorType: Gpx3DWallColorType,
-	var linePositionType: Gpx3DLinePositionType,
-	var exaggeration: Float,
-	var elevation: Float
+	val visualizationType: Gpx3DVisualizationType,
+	val wallColorType: Gpx3DWallColorType,
+	val linePositionType: Gpx3DLinePositionType,
+	val exaggeration: Float,
+	val elevation: Float
 ) {
 
 	override fun equals(other: Any?): Boolean {
