@@ -5975,4 +5975,5 @@
     <string name="tracker_item">Rastreador de OsmAnd</string>
     <string name="lock_screen_description">Activa o desactiva la pantalla táctil para evitar toques accidentales</string>
     <string name="lock_screen">Pantalla de bloqueo</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botón para mostrar u ocultar ediciones locales de OSM en el mapa.</string>
 </resources>
