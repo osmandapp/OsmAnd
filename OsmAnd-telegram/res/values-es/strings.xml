@@ -118,10 +118,10 @@
     <string name="shared_string_welcome">Bienvenido</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
-    <string name="mile">mi</string>
+    <string name="mile">ml</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="nm">Milla náutica</string>
+    <string name="nm">nmi</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="nm_h">Nudo</string>

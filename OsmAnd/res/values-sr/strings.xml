@@ -1954,8 +1954,8 @@
     <string name="app_mode_pedestrian">Пешачење</string>
     <string name="navigate_point_latitude">Географска ширина</string>
     <string name="navigate_point_longitude">Географска дужина</string>
-    <string name="navigate_point_format_DM">DDD MM.MMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
+    <string name="navigate_point_format_DM">ДДД ММ.МММ</string>
+    <string name="navigate_point_format_DMS">ДДД ММ СС.С</string>
     <string name="search_address_top_text">Адреса</string>
     <string name="search_address_region">Област</string>
     <string name="search_address_city">Град</string>
@@ -2086,7 +2086,7 @@
     <string name="search_POI_level_btn">Нађи још</string>
     <string name="Closest_Amenities">Најближе услуге</string>
     <string name="navigate_point_top_text">Унесите ширину и дужину у одабраном облику (D - степени, M - минути, S - секунде)</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_D">ДДД.ДДДДД</string>
     <string name="search_address_street_option">Раскрсница улица</string>
     <string name="context_menu_item_update_map">Освежи карту</string>
     <string name="context_menu_item_create_poi">Направи тачку занимања</string>
@@ -4040,7 +4040,7 @@
     <string name="shared_string_min_height">Мин. висина</string>
     <string name="shared_string_max_height">Макс. висина</string>
     <string name="language_description">Одаберите жељени језик и тип гласовног навођења.</string>
-    <string name="tts_title">TTS</string>
+    <string name="tts_title">ТТС</string>
     <string name="recorded_description">Снимљени звукови звуче боље, али могу да изговоре само унапред снимљене фразе: инструкције скретања. Не могу да изговоре имена улица и тачака од интереса.</string>
     <string name="use_system_language">Користи системски језик</string>
     <string name="shared_string_itinerary">Итеринер</string>
@@ -5972,4 +5972,6 @@
     <string name="quick_action_save_recorded_trip_and_continue">Снимљено путовање и наставите</string>
     <string name="movies_list">Листа филмова</string>
     <string name="third_links">Други линкови</string>
+    <string name="lock_screen">Закључај екран</string>
+    <string name="lock_screen_description">Омогућава или онемогућава функцију екрана осетљивог на додир да спречи случајне додире</string>
 </resources>

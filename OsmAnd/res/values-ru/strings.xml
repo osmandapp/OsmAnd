@@ -5968,4 +5968,8 @@
     <string name="start_trip_recording_first_m">Сначала начните запись поездки.</string>
     <string name="new_segment_started_m">Начало записи нового сегмента трека.</string>
     <string name="track_does_not_contain_data_to_save">Трек не содержит данных для сохранения.</string>
+    <string name="third_links">Сторонние ссылки</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_verb_start_pause">Старт/Пауза</string>
+    <string name="help_article_personal_color_palette_schemes_name">Цветовые схемы</string>
 </resources>

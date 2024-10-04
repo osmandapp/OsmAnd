@@ -294,8 +294,10 @@ public abstract class MapRenderingTypes {
 				rtype.propagateToNodes = MapRulType.PropagateToNodesType.END;
 			} else if ("center".equals(propagateToNodes)) {
 				rtype.propagateToNodes = MapRulType.PropagateToNodesType.CENTER;
-			} else if ("border".equals(propagateToNodes)) {
-				rtype.propagateToNodes = MapRulType.PropagateToNodesType.BORDER;
+			} else if ("border".equals(propagateToNodes) || "borderin".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.BORDERIN;
+			} else if ("borderout".equals(propagateToNodes)) {
+				rtype.propagateToNodes = MapRulType.PropagateToNodesType.BORDEROUT;
 			}
 		}
 		String propagateToNodesPrefix = parser.getAttributeValue("", "propagateToNodesPrefix");
@@ -763,7 +765,12 @@ public abstract class MapRenderingTypes {
 			START,
 			END,
 			CENTER,
-			BORDER
+			BORDERIN,
+			BORDEROUT;
+
+			public boolean isBorder() {
+				return this == PropagateToNodesType.BORDERIN || this == PropagateToNodesType.BORDEROUT;
+			}
 		}
 
 	}
