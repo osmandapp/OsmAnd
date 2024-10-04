@@ -5974,4 +5974,5 @@
     <string name="third_links">Harmadik linkek</string>
     <string name="lock_screen">Képernyő zárolása</string>
     <string name="lock_screen_description">Engedélyezi vagy letiltja az érintőképernyő funkcióit a véletlen érintések elkerülése érdekében</string>
+    <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
 </resources>
