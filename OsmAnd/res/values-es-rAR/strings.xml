@@ -5993,4 +5993,5 @@
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lock_screen">Bloquear pantalla</string>
     <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
+    <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
 </resources>
