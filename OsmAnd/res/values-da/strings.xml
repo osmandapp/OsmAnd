@@ -5981,4 +5981,5 @@
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="lock_screen">Lås skærm</string>
     <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
+    <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
 </resources>

@@ -64,8 +64,8 @@
     <string name="user_name">Nombre de usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org.</string>
     <string name="user_password">Contraseña</string>
-    <string name="osmand_service">Modo reposo</string>
-    <string name="osmand_service_descr">OsmAnd se ejecuta en modo reposo con la pantalla apagada.</string>
+    <string name="osmand_service">Modo en segundo plano</string>
+    <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano con la pantalla apagada.</string>
     <string name="switch_to_raster_map_to_see">Descarga un mapa vectorial sin conexión de esta ubicación en «Menú → Descargar mapas», o cambia al complemento de «Mapas en línea».</string>
     <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
     <string name="download_files_question_space">¿Descargar {0} archivo(s)\?
@@ -210,7 +210,7 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">ml</string>
+    <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Compartir ubicación usando</string>
     <string name="send_location_sms_pattern">Ubicación: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace web «%1$s» o el enlace interno de Android «%2$s»</string>
@@ -347,7 +347,7 @@
     <string name="context_menu_item_search_poi">Buscar PDI</string>
     <string name="use_trackball_descr">Usa un dispositivo con rueda de desplazamiento para mover el mapa.</string>
     <string name="use_trackball">Usar rueda de desplazamiento</string>
-    <string name="background_service_wait_int_descr">Define el tiempo de espera máximo permitido para cada corrección de la ubicación en modo reposo.</string>
+    <string name="background_service_wait_int_descr">Define el tiempo de espera máximo permitido para cada corrección de la ubicación en segundo plano.</string>
     <string name="background_service_wait_int">Máxima espera para posicionamiento</string>
     <string name="where_am_i">¿Dónde estoy?</string>
     <string name="process_navigation_service">Servicio de navegación OsmAnd</string>
@@ -355,13 +355,13 @@
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">segundos</string>
     <string name="int_min">min</string>
-    <string name="background_service_int_descr">Intervalo de activación del modo reposo:</string>
+    <string name="background_service_int_descr">Intervalo de activación que usa el servicio en segundo plano:</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
-    <string name="background_service_provider_descr">Método de ubicación usado del modo reposo:</string>
+    <string name="background_service_provider_descr">Método de ubicación que usa el servicio en segundo plano:</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
     <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
-    <string name="background_router_service">Ejecutar OsmAnd en modo reposo</string>
-    <string name="off_router_service_no_gps_available">El servicio de navegación en modo reposo, necesita un proveedor de ubicación para activarse.</string>
+    <string name="background_router_service">Ejecutar OsmAnd en segundo plano</string>
+    <string name="off_router_service_no_gps_available">El servicio de navegación en segundo plano necesita un proveedor de ubicación para activarse.</string>
     <string name="hide_poi_filter">Ocultar filtro</string>
     <string name="show_poi_filter">Mostrar filtro</string>
     <string name="search_poi_filter">Filtro</string>
@@ -593,7 +593,7 @@
     <string name="shared_string_clear">Limpiar</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Guardar como</string>
-    <string name="edit_filter_delete_dialog_title">¿Borrar este filtro\?</string>
+    <string name="edit_filter_delete_dialog_title">¿Quiere eliminar este filtro?</string>
     <string name="edit_filter_delete_message">Filtro «%1$s» borrado</string>
     <string name="edit_filter_create_message">Filtro «%1$s» creado</string>
     <string name="offline_navigation_not_available">La navegación sin conexión de OsmAnd, no está disponible temporalmente.</string>
@@ -765,10 +765,8 @@
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="screen_is_locked">Pulsar el icono del candado para desbloquear</string>
     <string name="bg_service_screen_unlock">Desbloquear</string>
-    <string name="bg_service_sleep_mode_off">Ejecutar 
-\n aplicación en modo reposo</string>
-    <string name="bg_service_sleep_mode_on">Parar 
-\n servicio en modo reposo</string>
+    <string name="bg_service_sleep_mode_off">Ejecutar\n aplicación en segundo plano</string>
+    <string name="bg_service_sleep_mode_on">Dejar de\n ejecutar en segundo plano</string>
     <string name="int_continuosly">Continuamente</string>
     <string name="email">correo electrónico</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -858,7 +856,7 @@
     <string name="rendering_attr_roadColors_name">Esquema de color del camino</string>
     <string name="zxing_barcode_scanner_not_found">Aplicación ZXing Barcode Scanner no instalada. ¿Buscar en Google Play?</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
-    <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también\?</string>
+    <string name="background_service_is_enabled_question">El servicio de OsmAnd aún se está ejecutando en segundo plano. ¿Quiere pararlo también?</string>
     <string name="safe_mode_description">Ejecutar aplicación en modo seguro (más lento).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">Ejecutando aplicación en modo seguro (desactivar en «Ajustes»).</string>
@@ -911,7 +909,7 @@
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para vídeo.</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
     <string name="av_settings_descr">Configura los ajustes de audio y video.</string>
-    <string name="av_settings">Ajustes de notas multimedia</string>
+    <string name="av_settings">Configuración de audio/vídeo</string>
     <string name="recording_error">Error de grabación</string>
     <string name="recording_camera_not_available">Cámara no disponible</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.
@@ -1243,9 +1241,9 @@
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
     <string name="keep_navigation_service">Conservar</string>
     <string name="stop_navigation_service">Parar</string>
-    <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
+    <string name="enable_sleep_mode">Activar modo en segundo plano del GPS</string>
     <string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
-    <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
+    <string name="sleep_mode_stop_dialog">¿Parar modo en segundo plano del GPS?</string>
     <string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se usarán nombres en inglés o locales).</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
@@ -1277,7 +1275,7 @@
     <string name="rendering_attr_coloredBuildings_name">Colorear edificios según el tipo</string>
     <string name="av_camera_pic_size">Tamaño de fotografía</string>
     <string name="av_camera_pic_size_descr">Define el tamaño de la fotografía</string>
-    <string name="rendering_value_browse_map_name">Ver mapa</string>
+    <string name="rendering_value_browse_map_name">Explorar mapa</string>
     <string name="rendering_value_car_name">Automóvil</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">A pie</string>
@@ -1289,7 +1287,7 @@
     <string name="speak_poi">PDI cercanos</string>
     <string name="shared_string_all">Todo</string>
     <string name="index_tours">Excursiones</string>
-    <string name="int_hour">hr.</string>
+    <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabación de viaje</string>
@@ -1388,10 +1386,10 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Indica un servidor proxy.</string>
     <string name="settings_privacy">Privacidad</string>
-    <string name="enable_proxy_title">Activar proxy HTTP</string>
+    <string name="enable_proxy_title">Activar «proxy» HTTP</string>
     <string name="enable_proxy_descr">Configura un proxy HTTP para todas las peticiones de red.</string>
-    <string name="proxy_host_title">Servidor proxy</string>
-    <string name="proxy_port_title">Puerto Proxy</string>
+    <string name="proxy_host_title">Anfitrión de «proxy»</string>
+    <string name="proxy_port_title">Puerto de «proxy»</string>
     <string name="proxy_port_descr">Define el número de puerto del proxy (p.e. 8118).</string>
     <string name="proxy_host_descr">Define el nombre del proxy (p.e. 127.0.0.1).</string>
     <string name="version_settings_descr">Descargar versiones nocturnas.</string>
@@ -1659,7 +1657,7 @@
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Grabación de viaje</string>
     <string name="shared_string_navigation">Navegación</string>
-    <string name="osmand_running_in_background">Ejecutar en modo reposo</string>
+    <string name="osmand_running_in_background">Ejecutar en segundo plano</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
     <string name="favourites_context_menu_add">Añadir favorito</string>
     <string name="roads">Caminos</string>
@@ -1674,7 +1672,7 @@
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
     <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Por favor activa el plugin \"Topografía\"</string>
+    <string name="activate_srtm_plugin">Active el complemento «Topografía»</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
@@ -1823,7 +1821,7 @@
     <string name="clear_updates_proposition_message">Quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
     <string name="add_time_span">Añadir lapso de tiempo</string>
     <string name="road_blocked">Camino bloqueado</string>
-    <string name="shared_string_select">Elegir</string>
+    <string name="shared_string_select">Seleccionar</string>
     <string name="switch_start_finish">Invertir puntos de partida y destino</string>
     <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
     <string name="number_of_contributors">Número de editores</string>
@@ -2048,7 +2046,7 @@
     <string name="shared_string_filters">Filtros</string>
     <string name="apply_filters">Aplicar filtros</string>
     <string name="save_filter">Guardar filtro</string>
-    <string name="delete_filter">Borrar filtro</string>
+    <string name="delete_filter">Eliminar filtro</string>
     <string name="new_filter">Nuevo filtro</string>
     <string name="new_filter_desc">Ingresa el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
     <string name="rendering_value_fine_name">Muy fino</string>
@@ -2392,10 +2390,10 @@
     <string name="map_widget_ruler_control">Regla radial</string>
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
-    <string name="ascent_descent">Ascenso/Descenso</string>
+    <string name="ascent_descent">Ascenso/descenso</string>
     <string name="moving_time">Tiempo en movimiento</string>
-    <string name="max_min">Máx/Min</string>
-    <string name="min_max">Min/Máx</string>
+    <string name="max_min">Máx./mín.</string>
+    <string name="min_max">Mín./máx.</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="quick_action_resume_pause_navigation">Pausar o reanudar navegación</string>
     <string name="quick_action_resume_pause_navigation_descr">Un botón que pausa o reanuda la navegación.</string>
@@ -2976,7 +2974,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Guardar primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
-    <string name="profile_alert_delete_msg">Eliminar el perfil \"%s\"</string>
+    <string name="profile_alert_delete_msg">Eliminar el perfil «%s»</string>
     <string name="select_base_profile_dialog_title">Elige un perfil para comenzar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, lo que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados a los que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
@@ -5342,7 +5340,7 @@
     <string name="help_article_navigation_routing_name">Parámetros de la ruta</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutas en bicicleta (BTT)</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Rutas en barco</string>
-    <string name="help_article_navigation_routing_brouter_name">Brouter</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Rutas en coche (camión, moto)</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Ruta directa al punto (barco)</string>
     <string name="help_article_navigation_routing_horse_routing_name">Rutas a caballo</string>
@@ -5446,7 +5444,7 @@
     <string name="standard_maps">Mapas estándar</string>
     <string name="shared_string_created">Creado</string>
     <string name="wikipedia_and_travel_maps">Wikipedia y Mapas de viaje</string>
-    <string name="rendering_styles">Estilos de renderizado</string>
+    <string name="rendering_styles">Estilos de representación</string>
     <string name="sort_country_name_ascending">Nombre del país: A - Z</string>
     <string name="weather_online">El tiempo en Internet</string>
     <string name="map_is_up_to_date">El mapa %1$s está actualizado.</string>
@@ -5461,7 +5459,7 @@
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
     <string name="add_smart_folder">Agregar una carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
-    <string name="edit_filter">Editar el filtro</string>
+    <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista).</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
@@ -5594,7 +5592,7 @@
 \n
 \nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
-    <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">Las subcarpetas de «%1$s» están ordenadas por: «%2$s»</string>
     <string name="special_routing_cpp">Tipo de ruta especial</string>
     <string name="add_button">Añadir un botón</string>
     <string name="custom_buttons">Botones personalizados</string>
@@ -5615,12 +5613,12 @@
     <string name="shared_sting_all_colors">Todos los colores</string>
     <string name="auto_zoom_smooth">Suave</string>
     <string name="auto_zoom_discrete">Discreto</string>
-    <string name="auto_zoom">Zoom automático</string>
+    <string name="auto_zoom">Zum automático</string>
     <string name="java_safe">Java (seguro)</string>
     <string name="gpx_approximation">Aproximación GPX</string>
     <string name="routing_type">Tipo de ruta</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="routing_type_a_star_2_phase">A* bifásico</string>
     <string name="routing_type_a_star_classic">A* clásico</string>
     <string name="release_4_7">• Nuevo widget \"Velocímetro\" compatible con Android Auto
 \n
@@ -5884,7 +5882,7 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Mostrar senderos para motos de cross</string>
     <string name="raster_layers_action_descr">Cambiar capas rasterizadas</string>
     <string name="contour_layers_action_descr">Cambiar capas del contorno</string>
-    <string name="change_zoom_action_descr">Cambiar el zoom del mapa.</string>
+    <string name="change_zoom_action_descr">Cambiar el zum del mapa.</string>
     <string name="search_action_descr">Abre la búsqueda.</string>
     <string name="drawer_button_description">Abre el menú principal.</string>
     <string name="navigation_action_descr">Abre la navegación.</string>
@@ -5977,4 +5975,5 @@
     <string name="tracker_item">Rastreador de OsmAnd</string>
     <string name="lock_screen_description">Activa o desactiva la pantalla táctil para evitar toques accidentales</string>
     <string name="lock_screen">Pantalla de bloqueo</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botón para mostrar u ocultar ediciones locales de OSM en el mapa.</string>
 </resources>
