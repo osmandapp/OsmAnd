@@ -3032,7 +3032,7 @@
     <string name="edit_profile_nav_settings_subtitle">Navigationseinstellungen für das Profil auswählen</string>
     <string name="routing_attr_max_num_changes_description">Bestimmen Sie die maximale Anzahl an Umstiegen</string>
     <string name="routing_attr_max_num_changes_name">Anzahl der Umstiege</string>
-    <string name="app_mode_offroad">Offroad</string>
+    <string name="app_mode_offroad">Gelände</string>
     <string name="external_input_device">Externe Eingabegeräte</string>
     <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
     <string name="turn_screen_on_time_descr">Stellen Sie ein, wie lange der Bildschirm eingeschaltet bleiben soll.</string>
@@ -3372,7 +3372,7 @@
 \nSie kann in den Android-Einstellungen unter „Apps“ deinstalliert werden.</string>
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_routing">Routenführung</string>
     <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
     <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf „Importieren“, um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>

@@ -5975,4 +5975,9 @@
     <string name="new_trip_segment">Новый сегмент маршрута</string>
     <string name="lock_screen">Блокировка экрана OsmAnd</string>
     <string name="quick_action_start_pause_recording">Кнопка для запуска, приостановки или возобновления записи GPX-трека.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Кнопка для сохранения текущего записываемого маршрута в виде GPX-файла и продолжения записи нового трека без прерывания.</string>
+    <string name="quick_action_new_trip_segment">Кнопка для начала нового сегмента в текущей записи трека GPX.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Запись маршрута и продолжение</string>
+    <string name="quick_action_showhide_osm_edits_descr">Переключатель для отображения или скрытия правок OSM на карте.</string>
+    <string name="lock_screen_description">Включение/отключение сенсорного экрана для предотвращения случайных нажатий</string>
 </resources>

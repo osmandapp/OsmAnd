@@ -347,7 +347,7 @@
     <string name="context_menu_item_search_poi">Buscar PDI</string>
     <string name="use_trackball_descr">Usa un dispositivo con rueda de desplazamiento para mover el mapa.</string>
     <string name="use_trackball">Usar rueda de desplazamiento</string>
-    <string name="background_service_wait_int_descr">Define el tiempo de espera máximo permitido para cada corrección de la ubicación en segundo plano.</string>
+    <string name="background_service_wait_int_descr">Fija el tiempo de espera máximo permitido para cada corrección de la posición en segundo plano.</string>
     <string name="background_service_wait_int">Máxima espera para posicionamiento</string>
     <string name="where_am_i">¿Dónde estoy?</string>
     <string name="process_navigation_service">Servicio de navegación OsmAnd</string>
@@ -357,7 +357,7 @@
     <string name="int_min">min</string>
     <string name="background_service_int_descr">Intervalo de activación que usa el servicio en segundo plano:</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
-    <string name="background_service_provider_descr">Método de ubicación que usa el servicio en segundo plano:</string>
+    <string name="background_service_provider_descr">Método de localización utilizado por el servicio en segundo plano:</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
     <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
     <string name="background_router_service">Ejecutar OsmAnd en segundo plano</string>
@@ -593,7 +593,7 @@
     <string name="shared_string_clear">Limpiar</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Guardar como</string>
-    <string name="edit_filter_delete_dialog_title">¿Quiere eliminar este filtro?</string>
+    <string name="edit_filter_delete_dialog_title">¿Eliminar este filtro?</string>
     <string name="edit_filter_delete_message">Filtro «%1$s» borrado</string>
     <string name="edit_filter_create_message">Filtro «%1$s» creado</string>
     <string name="offline_navigation_not_available">La navegación sin conexión de OsmAnd, no está disponible temporalmente.</string>
@@ -766,7 +766,7 @@
     <string name="screen_is_locked">Pulsar el icono del candado para desbloquear</string>
     <string name="bg_service_screen_unlock">Desbloquear</string>
     <string name="bg_service_sleep_mode_off">Ejecutar\n aplicación en segundo plano</string>
-    <string name="bg_service_sleep_mode_on">Dejar de\n ejecutar en segundo plano</string>
+    <string name="bg_service_sleep_mode_on">Detener\n ejecución en segundo plano</string>
     <string name="int_continuosly">Continuamente</string>
     <string name="email">correo electrónico</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -909,8 +909,8 @@
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para vídeo.</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
     <string name="av_settings_descr">Configura los ajustes de audio y video.</string>
-    <string name="av_settings">Configuración de audio/vídeo</string>
-    <string name="recording_error">Error de grabación</string>
+    <string name="av_settings">Ajustes del audio/vídeo</string>
+    <string name="recording_error">Grabación fallida</string>
     <string name="recording_camera_not_available">Cámara no disponible</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.
 \n%1$s</string>
@@ -1389,7 +1389,7 @@
     <string name="enable_proxy_title">Activar «proxy» HTTP</string>
     <string name="enable_proxy_descr">Configura un proxy HTTP para todas las peticiones de red.</string>
     <string name="proxy_host_title">Anfitrión de «proxy»</string>
-    <string name="proxy_port_title">Puerto de «proxy»</string>
+    <string name="proxy_port_title">Puerto del proxy</string>
     <string name="proxy_port_descr">Define el número de puerto del proxy (p.e. 8118).</string>
     <string name="proxy_host_descr">Define el nombre del proxy (p.e. 127.0.0.1).</string>
     <string name="version_settings_descr">Descargar versiones nocturnas.</string>
@@ -1672,8 +1672,8 @@
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
     <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Active el complemento «Topografía»</string>
-    <string name="later">Luego</string>
+    <string name="activate_srtm_plugin">Por favor active el módulo «Topografía»</string>
+    <string name="later">Más tarde</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
     <string name="favorite_category_dublicate_message">Utiliza un nombre de categoría que no exista ya.</string>
