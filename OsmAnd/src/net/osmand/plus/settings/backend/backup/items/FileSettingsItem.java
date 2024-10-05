@@ -181,7 +181,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 		this.file = file;
 		this.appPath = app.getAppPath(null);
 		String fileName = getFileName();
-		SettingsHelper.LOG.info(">>>> FileSettingsItem file.getPath()=" + file.getPath() + " file.getAbsolutePath()=" + file.getAbsolutePath() + " appPath=" + app.getAppPath(null).getPath());
 		if (fileName != null) {
 			this.subtype = FileSubtype.getSubtypeByFileName(fileName);
 		}
