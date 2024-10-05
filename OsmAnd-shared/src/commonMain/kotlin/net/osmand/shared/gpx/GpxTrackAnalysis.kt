@@ -469,6 +469,7 @@ class GpxTrackAnalysis {
 		if (!hasElevationData() && !attribute.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
 		}
+		point.attributes = attribute
 		pointsAnalyser?.onAnalysePoint(this, point, attribute)
 		pointAttributes.add(attribute)
 	}
