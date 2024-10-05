@@ -4730,8 +4730,7 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.
-\nTapez avec 2 doigts sur la carte pour afficher la distance séparant ces 2 points.</string>
+    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.\nTapez simultanément avec 2 doigts sur la carte pour afficher la distance séparant 2 points.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
@@ -5964,4 +5963,8 @@
     <string name="third_links">Liens tiers</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Bouton pour sauvegarder la trace en cours dans un fichier GPX et démarrer l’enregistrement d’une nouvelle trace sans interruption.</string>
     <string name="tracker_item">OsmAnd tracker</string>
+    <string name="lock_screen_description">Active ou désactive l\'écran tactile pour éviter les appuis involontaires</string>
+    <string name="lock_screen">Verrouiller l’écran</string>
+    <string name="help_article_personal_color_palette_schemes_name">Jeux de couleurs</string>
+    <string name="quick_action_showhide_osm_edits_descr">Bouton pour afficher ou masquer les modifications OSM apportées à la carte.</string>
 </resources>
