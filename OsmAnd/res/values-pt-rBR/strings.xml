@@ -5938,4 +5938,5 @@
     <string name="obd_support">Suporte a OBD</string>
     <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
     <string name="obd_plugin_description">Acessa as informações do seu veículo pelo protocolo OBD</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Viagem gravada &amp; Continuar</string>
 </resources>
