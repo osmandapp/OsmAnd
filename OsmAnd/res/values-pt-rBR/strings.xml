@@ -4724,7 +4724,7 @@
     <string name="compass_visible_if_map_rotated_desc">Escondido quando o Norte está para cima</string>
     <string name="compass_always_hidden">Sempre escondido</string>
     <string name="compass_always_visible">Sempre visível</string>
-    <string name="compass_click_desc">Dica: toque no botão da bússola para alternar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Toque no botão da bússola para alternar o modo de orientação do mapa.</string>
     <string name="widget_with_dot">Widget.</string>
     <string name="download_complete">Download completo</string>
     <string name="favorite_delete_group">Excluir grupo</string>
@@ -5932,4 +5932,10 @@
     <string name="quick_action_finish_trip_recording_summary">Um botão para salvar a trilha GPX e concluir o registro da viagem.</string>
     <string name="start_trip_recording_first_m">Inicie a gravação da viagem primeiro.</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Um botão para salvar a viagem gravada atual como um arquivo GPX e continuar a gravar uma nova trilha sem interrupção.</string>
+    <string name="obd_fuel_type_desc">Mostra o tipo de combustível do veículo pelo sensor OBD</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="obd_support">Suporte a OBD</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
+    <string name="obd_plugin_description">Acessa as informações do seu veículo pelo protocolo OBD</string>
 </resources>
