@@ -2961,7 +2961,7 @@
     <string name="third_party_routing_type">Tredjepartsruteberegning</string>
     <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
     <string name="application_profiles">App-profiler</string>
-    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Genvej\' under \'Indstillinger\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét element til listen i \'Genvej\'-indstillingerne</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint og downhill skiløb</string>
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend og nordisk skiløb</string>
