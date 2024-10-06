@@ -2986,7 +2986,7 @@
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise ungepflegt, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
-    <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
+    <string name="quick_action_need_to_add_item_to_list">Mindestens ein Element der Liste in den „Schnellaktion“ Einstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
     <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
@@ -5770,7 +5770,7 @@
     <string name="missing_maps_ignore_details">Decken heruntergeladene Karten Ihre Route ab? Navigieren Sie mit ihnen, wenn Sie sich in der Gegend auskennen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
-    <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
+    <string name="quick_action_terrain_color_scheme">Gelände Farbschema</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
     <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
