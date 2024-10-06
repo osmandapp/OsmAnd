@@ -5944,7 +5944,7 @@
     <string name="obd_support">Compatibilidad OBD</string>
     <string name="obd_fuel_type_hybrid_regenerative">Híbrido regenerativo</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Combustible dual con hidrógeno</string>
-    <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo»</string>
+    <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo</string>
     <string name="obd_battery_voltage">Voltaje de batería</string>
     <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
     <string name="obd_fuel_type">Tipo de combustible</string>
