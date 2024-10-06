@@ -15,7 +15,9 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
-import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
+import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.preferences.CommonPreference
@@ -48,8 +50,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
-	private var connectedDevice: BluetoothDevice? = null
+//	private var connectedDevice: BluetoothDevice? = null
+	private var connectedDeviceInfo: BTDeviceInfo? = null
 	var socket: BluetoothSocket? = null
+	private var scanDevicesListener: ScanDevicesListener? = null
+
+
+	interface ScanDevicesListener {
+		fun onScanFinished(foundDevices: List<BTDeviceInfo>)
+	}
 
 	init {
 		OBDDispatcher.setReadStatusListener(this)
@@ -187,7 +196,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				.setIcon(R.drawable.ic_action_sensor)
 				.setListener { _: OnDataChangeUiAdapter?, _: View?, _: ContextMenuItem?, _: Boolean ->
 					app.logEvent("obdOpen")
-					OBDMainFragment.showInstance(mapActivity.supportFragmentManager)
+					OBDDevicesListFragment.showInstance(mapActivity.supportFragmentManager)
 					true
 				})
 		}
@@ -221,12 +230,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				OBDDispatcher.stopReading()
 			}
 		}
-		connectedDevice = null
+		connectedDeviceInfo = null
+//		connectedDevice = null
 	}
 
 	@SuppressLint("MissingPermission")
 	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
-		if (connectedDevice == null) {
+		if (connectedDeviceInfo == null) {
 			if (BLEUtils.isBLEEnabled(activity)) {
 				if (AndroidUtils.hasBLEPermission(activity)) {
 					if (socket != null && socket?.isConnected == true) {
@@ -238,14 +248,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
 						adapter.cancelDiscovery()
 						val pairedDevices = adapter.bondedDevices.toList()
-						pairedDevices.indices
-						pairedDevices.forEach {
-							LOG.debug(it.name)
-						}
+//						pairedDevices.indices
+//						pairedDevices.forEach {
+//							LOG.debug(it.name)
+//						}
 						val obdDevice: BluetoothDevice? =
 							pairedDevices.find { it.name == deviceInfo.name && it.address == deviceInfo.address }
-						connectedDevice = obdDevice
-						connectToDevice(activity)
+						if(obdDevice != null) {
+							connectedDeviceInfo = BTDeviceInfo(deviceInfo.name, deviceInfo.address)
+							connectToDevice(activity, obdDevice)
+						}
 					}
 				} else {
 					AndroidUtils.requestBLEPermissions(activity)
@@ -253,16 +265,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			}
 		} else {
 			socket?.close()
-			connectedDevice = null
+			connectedDeviceInfo = null
 			connectToObd(activity, deviceInfo)
 		}
-		return socket != null && socket?.isConnected == true
+		return socket?.isConnected == true
 	}
 
 	@SuppressLint("MissingPermission")
-	private fun connectToDevice(activity: Activity) {
+	private fun connectToDevice(activity: Activity, connectedDevice: BluetoothDevice) {
 		try {
-			socket = connectedDevice?.createRfcommSocketToServiceRecord(uuid)
+			socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
 			socket?.apply {
 				connect()
 				if (isConnected) {
@@ -272,7 +284,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 					app.runInUIThread {
 						Toast.makeText(
 							activity,
-							"Connected to ${connectedDevice?.name ?: "Unknown device"}",
+							"Connected to ${connectedDevice.name ?: "Unknown device"}",
 							Toast.LENGTH_LONG).show()
 					}
 				}
@@ -282,7 +294,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			app.runInUIThread {
 				Toast.makeText(
 					activity,
-					"Can\'t connect to ${connectedDevice?.name ?: "Unknown device"}",
+					"Can\'t connect to ${connectedDevice.name ?: "Unknown device"}",
 					Toast.LENGTH_LONG).show()
 			}
 		}
@@ -293,9 +305,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 
-	@SuppressLint("MissingPermission")
 	fun getConnectedDeviceName(): String? {
-		return connectedDevice?.name
+		return connectedDeviceInfo?.name
+	}
+
+	fun getConnectedDeviceInfo(): BTDeviceInfo? {
+		return connectedDeviceInfo
 	}
 
 	fun isConnected(): Boolean {
@@ -322,4 +337,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				location.time,
 				KLatLon(location.latitude, location.longitude)))
 	}
+
+	fun setScanDevicesListener(listener: ScanDevicesListener?) {
+		scanDevicesListener = listener
+	}
+
+
 }
