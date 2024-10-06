@@ -5972,7 +5972,7 @@
     <string name="reset_average_speed">Reiniciar la velocidad promedio</string>
     <string name="unknown_bt_device">Dispositivo desconocido</string>
     <string name="obd_vin">VIN</string>
-    <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo»</string>
+    <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo</string>
     <string name="obd_vin_desc">Código VIN sobre OBD</string>
     <string name="quick_action_save_recorded_trip_and_continue">Grabar viaje y continuar</string>
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
