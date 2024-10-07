@@ -5461,7 +5461,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista).</string>
+    <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista.)</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>
@@ -5872,7 +5872,7 @@
     <string name="quick_action_search_view_desc">Un conmutador para abrir o cerrar la vista de búsqueda.</string>
     <string name="quick_action_search_view_title">Vista de búsqueda</string>
     <string name="quick_action_navigation_view_desc">Un conmutador para abrir o cerrar la navegación.</string>
-    <string name="quick_action_navigation_view_title">Visualizar navegación.</string>
+    <string name="quick_action_navigation_view_title">Vista de navegación</string>
     <string name="quick_action_switch_compass_desc">Un conmutador para cambiar la orientación del mapa.</string>
     <string name="corner_radius">Radio de giro</string>
     <string name="shared_string_dp">dp</string>
