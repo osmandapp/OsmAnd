@@ -394,9 +394,7 @@
     <string name="shared_string_no_thanks">不需要，謝謝</string>
     <string name="basemap_missing">下載基本的全球地圖，以低縮放級別獲得含蓋全球的全景。</string>
     <string name="vector_data_missing">下載(「離線」)資料以便使用離線地圖。</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\n長按選項"</string>
+    <string name="local_index_gpx_info_show">\n\n長按選項</string>
     <string name="local_index_installed">本機版本</string>
     <string name="local_index_items_backuped">已停用 %2$d 項中的 %1$d 項。</string>
     <string name="local_index_items_deleted">已刪除 %2$d 項中的 %1$d 項。</string>
@@ -1165,9 +1163,7 @@
     <string name="gpx_selection_track">%1$s \n軌跡 %2$s</string>
     <string name="loading_smth">正在載入 %1$s …</string>
     <string name="map_widget_plain_time">目前時間</string>
-    <string name="selected_gpx_info_show">"
-\n
-\n長按以在地圖上檢視"</string>
+    <string name="selected_gpx_info_show">\n\n長按以在地圖上檢視</string>
     <string name="delay_navigation_start">自動開始轉向建議指引</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
@@ -5966,4 +5962,5 @@
     <string name="tracker_item">OsmAnd 追蹤程式</string>
     <string name="lock_screen_description">啟用或停用觸控螢幕功能，防止意外點擊</string>
     <string name="lock_screen">鎖定螢幕</string>
+    <string name="quick_action_showhide_osm_edits_descr">在地圖上顯示或隱藏在地 OSM 編輯的按鈕。</string>
 </resources>
