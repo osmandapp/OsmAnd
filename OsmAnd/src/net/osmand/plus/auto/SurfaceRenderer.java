@@ -359,12 +359,12 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						offscreenMapRendererView.setAzimuth(0);
 						mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
 						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
-						offscreenMapRendererView.setElevationAngle(elevationAngle);
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
 							mapRendererContext.setMapRendererView(offscreenMapRendererView);
 							mapView.setMapRenderer(offscreenMapRendererView);
+							mapView.setElevationAngle(elevationAngle);
 							mapView.addElevationListener(this);
 							getApp().getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 							PluginsHelper.refreshLayers(getApp(), null);
