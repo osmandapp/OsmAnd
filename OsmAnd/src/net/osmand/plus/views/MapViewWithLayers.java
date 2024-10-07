@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.views.OsmandMapTileView.MIN_ALLOWED_ELEVATION_ANGLE;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -77,6 +79,7 @@ public class MapViewWithLayers extends FrameLayout {
 		boolean useOpenglRender = app.useOpenGlRenderer();
 		surfaceView.setMapView(!useOpenglRender && !useAndroidAuto ? mapView : null);
 		if (useOpenglRender && !useAndroidAuto) {
+			mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE);
 			setupAtlasMapRendererView();
 			mapLayersView.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
