@@ -18,20 +18,23 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
-import net.osmand.shared.gpx.GpxFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.track.GpxDialogs;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.gpx.GpxFile;
 
-public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
+public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener, SearchablePreferenceDialog {
 
 	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 
@@ -233,7 +236,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 
 		TextView startTextview = startItem.findViewById(R.id.title);
 		startTextview.setText(simulation.isRouteAnimating() ? R.string.shared_string_control_stop : R.string.shared_string_control_start);
-		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop  : R.drawable.ic_play_dark,
+		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop : R.drawable.ic_play_dark,
 				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 	}
 
@@ -268,20 +271,45 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SimulateLocationFragment fragment = new SimulateLocationFragment();
-			fragment.setGpxFile(gpxFile);
-			fragment.usedOnMap = usedOnMap;
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
+		final SimulateLocationFragment instance = createInstance(gpxFile, usedOnMap);
+		instance.show(manager, instance.app);
+	}
+
+	public static SimulateLocationFragment createInstance(final @Nullable GpxFile gpxFile, final boolean usedOnMap) {
+		final SimulateLocationFragment fragment = new SimulateLocationFragment();
+		fragment.setGpxFile(gpxFile);
+		fragment.usedOnMap = usedOnMap;
+		return fragment;
 	}
 
 	@Override
 	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
 		updateCard();
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, this, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getView().<TextViewEx>findViewById(R.id.title).getText(),
+				getTitle(trackItem),
+				getTitle(speedItem),
+				getTitle(startItem));
+	}
+
+	private CharSequence getTitle(final LinearLayout item) {
+		return item.<TextViewEx>findViewById(R.id.title).getText();
 	}
 }

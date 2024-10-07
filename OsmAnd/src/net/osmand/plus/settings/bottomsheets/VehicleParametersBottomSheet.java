@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,17 +28,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeData;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
-import net.osmand.plus.settings.fragments.ApplyQueryType;
-import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -46,8 +49,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
-public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
+public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
@@ -62,12 +66,17 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 	private SizePreference sizePreference;
 	private HorizontalChipsView chipsView;
 	private List<ChipItem> chips;
+	private boolean configureSettingsSearch = false;
+
+	public void setConfigureSettingsSearch(final boolean configureSettingsSearch) {
+		this.configureSettingsSearch = configureSettingsSearch;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null) {
+		if (view != null && !configureSettingsSearch) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
 		return view;
@@ -229,21 +238,43 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		return formatter.format(input);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	public static @NonNull VehicleParametersBottomSheet createInstance(final String key,
+																	   final Fragment target,
+																	   final boolean usedOnMap,
+																	   final @Nullable ApplicationMode appMode,
+																	   final boolean configureSettingsSearch,
+																	   final Optional<Preference> preference) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, key);
+
+		final VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
+		fragment.setTargetFragment(target, 0);
+		preference.ifPresent(fragment::setPreference);
+		fragment.setConfigureSettingsSearch(configureSettingsSearch);
+		return fragment;
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
 		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(", ", _getText(R.id.title), _getText(R.id.description));
+	}
+
+	private CharSequence _getText(final @IdRes int id) {
+		final View mainView = items.get(0).getView();
+		return mainView.<TextView>findViewById(id).getText();
 	}
 }

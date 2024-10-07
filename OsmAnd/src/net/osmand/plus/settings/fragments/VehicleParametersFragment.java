@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -33,7 +34,8 @@ import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeType;
@@ -43,10 +45,14 @@ import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.Map;
+import java.util.Optional;
 
-public class VehicleParametersFragment extends BaseSettingsFragment {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class VehicleParametersFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 
@@ -87,8 +93,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter,
-	                                      @Nullable GeneralRouterProfile profile,
-	                                      @Nullable String derivedProfile) {
+										  @Nullable GeneralRouterProfile profile,
+										  @Nullable String derivedProfile) {
 		if (parameter == null || profile == null) {
 			return;
 		}
@@ -175,7 +181,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(DEFAULT_SPEED)) {
+		if (DEFAULT_SPEED.equals(preference.getKey())) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				ApplicationMode mode = getSelectedAppMode();
@@ -189,24 +195,74 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (preference instanceof SizePreference) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
-						this, false, getSelectedAppMode());
-			}
-		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				ListPreferenceEx pref = (ListPreferenceEx) preference;
-				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
-						pref.getTitle().toString(), pref.getDescription(),
-						getSelectedAppMode(), false, pref.getEntries(),
-						pref.getEntryValues(), pref.getValueIndex());
-			}
+		final Optional<SearchablePreferenceDialog> preferenceDialog =
+				createPreferenceDialog(
+						preference,
+						this,
+						false,
+						Optional.empty());
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
+		}
+	}
+
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(
+			final Preference preference,
+			final VehicleParametersFragment target,
+			final boolean configureSettingsSearch,
+			final Optional<Preference> preferenceParam) {
+		if (preference instanceof SizePreference) {
+			return Optional.of(
+					VehicleParametersBottomSheet
+							.createInstance(
+									preference.getKey(),
+									target,
+									false,
+									getSelectedAppMode(),
+									configureSettingsSearch,
+									preferenceParam));
+		}
+		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
+			final ListPreferenceEx pref = (ListPreferenceEx) preference;
+			return Optional.of(
+					SimpleSingleSelectionBottomSheet
+							.createInstance(
+									target,
+									preference.getKey(),
+									pref.getTitle().toString(),
+									pref.getDescription(),
+									getSelectedAppMode(),
+									false,
+									pref.getEntries(),
+									pref.getEntryValues(),
+									pref.getValueIndex()));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		if (DEFAULT_SPEED.equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+							new Fragment(),
+							_preferenceDialog -> new VehicleSpeedHelper(app, getSelectedAppMode()).getSearchableInfo()));
+		}
+		return this
+				.createPreferenceDialog(preference, null, true, Optional.of(preference))
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
