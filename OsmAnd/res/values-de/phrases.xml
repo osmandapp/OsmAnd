@@ -469,7 +469,7 @@
     <string name="poi_seamark_wreck">Wrack</string>
     <string name="poi_second_hand">Gebrauchtwarenladen</string>
     <string name="poi_service_tyres">Reifenhändler</string>
-    <string name="poi_ses_station">SES-Station</string>
+    <string name="poi_disaster_response">SES-Station</string>
     <string name="poi_sewing">Nähbedarf</string>
     <string name="poi_shelter">Unterstand</string>
     <string name="poi_ship_chandler">Schiffsausrüster</string>
@@ -4873,4 +4873,5 @@
     <string name="poi_cash_in_no">Nein</string>
     <string name="poi_cash_in_customers">Kunden</string>
     <string name="poi_diet_pescetarian_no">Pescetarische Ernährung: nein</string>
+    <string name="poi_osmand_access_main_tag">Zugang</string>
 </resources>

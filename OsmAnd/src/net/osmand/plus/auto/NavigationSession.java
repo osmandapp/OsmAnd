@@ -220,6 +220,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStop(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
+		settings.setLastKnownMapElevation(app.getOsmandMap().getMapView().getElevationAngle());
 		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated();
 		if (defaultAppMode != null && !routing) {
 			settings.setApplicationMode(defaultAppMode);

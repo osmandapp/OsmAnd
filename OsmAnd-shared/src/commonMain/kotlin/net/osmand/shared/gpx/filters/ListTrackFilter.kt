@@ -1,19 +1,21 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.MultiNameSerializer
 import net.osmand.shared.util.SerialNames
 
-open class ListTrackFilter(
-	trackFilterType: TrackFilterType,
-	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(trackFilterType, filterChangedListener) {
+@Serializable
+open class ListTrackFilter : BaseTrackFilter {
 
-	var collectionFilterParams: SingleFieldTrackFilterParams
+	constructor(trackFilterType: TrackFilterType, filterChangedListener: FilterChangedListener?) :
+			super(trackFilterType, filterChangedListener)
+
+	@Transient
+	lateinit var collectionFilterParams: SingleFieldTrackFilterParams
 
 	init {
 		val additionalData = trackFilterType.additionalData
@@ -49,8 +51,12 @@ open class ListTrackFilter(
 		return !KAlgorithms.isEmpty(selectedItems)
 	}
 
-	@SerialNames("selectedItems", "selectedFolders", "selectedCities", "selectedColors", "selectedWidths")
-	@Serializable(with = MultiNameSerializer::class)
+	@SerialNames(
+		"selectedItems",
+		"selectedFolders",
+		"selectedCities",
+		"selectedColors",
+		"selectedWidths")
 	var selectedItems = ArrayList<String>()
 		protected set
 	var allItems: MutableList<String> = arrayListOf()
@@ -103,18 +109,15 @@ open class ListTrackFilter(
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is ListTrackFilter) {
 			setSelectedItems(
-				if (value.selectedItems == null) {
-					ArrayList()
-				} else {
-					ArrayList(value.selectedItems)
-				})
+				ArrayList(value.selectedItems)
+			)
 			for (item in selectedItems) {
 				if (!allItems.contains(item)) {
 					allItems.add(item)
 					allItemsCollection[item] = 0
 				}
 			}
-			filterChangedListener?.onFilterChanged()
+			super.initWithValue(value)
 		}
 	}
 

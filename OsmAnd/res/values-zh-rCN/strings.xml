@@ -4353,7 +4353,7 @@
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
-    <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
+    <string name="compass_click_desc">双击指南针按钮以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
     <string name="side_marker_eta">预计的到达时间</string>
     <string name="download_complete">下载完成</string>

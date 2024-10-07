@@ -36,7 +36,6 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -432,9 +431,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                 @Nullable PointDescription pointDescription,
 	                 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && init(latLon, pointDescription, object)) {
-			mapActivity.getMyApplication().logEvent("open_context_menu");
-			showInternal();
+		if (mapActivity != null) {
+			if (init(latLon, pointDescription, object)) {
+				mapActivity.getMyApplication().logEvent("open_context_menu");
+				showInternal();
+			}
 		}
 	}
 

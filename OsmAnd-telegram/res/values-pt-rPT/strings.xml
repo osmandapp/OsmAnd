@@ -278,4 +278,5 @@
     <string name="location_source_summary">Por padrão, o OsmAnd instalado do Google Play usa os Google Play Services para determinar a localização.
 \n
 \nSe obter informações de localização imprecisas ou usa aparelho sem os Serviços do Google Play, tente mudar para a API do Android</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

@@ -265,7 +265,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	private fun filterChanged(): Boolean {
 		var changed = false
 
-		var initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
+		val initialFilters: List<BaseTrackFilter>? = if (smartFolder == null) {
 			this.initialFilterState.appliedFilters
 		} else {
 			smartFolder?.filters

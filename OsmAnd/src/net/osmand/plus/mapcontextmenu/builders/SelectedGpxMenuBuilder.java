@@ -161,6 +161,8 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildCategoryView(View view, String name) {
+		boolean light = isLightContent();
+
 		if (!isFirstRow()) {
 			buildRowDivider(view);
 		}
@@ -182,6 +184,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 	}
 
 	public void buildCustomAddressLine(LinearLayout ll) {
+		boolean light = isLightContent();
 		int gpxSmallIconMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_icon_margin);
 		int gpxSmallTextMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_text_margin);
 		float gpxTextSize = ll.getResources().getDimension(R.dimen.default_desc_text_size);

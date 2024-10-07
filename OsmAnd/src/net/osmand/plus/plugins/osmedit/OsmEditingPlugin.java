@@ -28,13 +28,13 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -232,6 +232,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		quickActionTypes.add(AddPOIAction.TYPE);
 		quickActionTypes.add(AddOSMBugAction.TYPE);
 		quickActionTypes.add(ShowHideOSMBugAction.TYPE);
+		quickActionTypes.add(ShowHideOSMEditsAction.TYPE);
 		return quickActionTypes;
 	}
 

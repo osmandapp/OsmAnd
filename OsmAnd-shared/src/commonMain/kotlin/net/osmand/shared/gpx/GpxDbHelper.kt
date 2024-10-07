@@ -16,6 +16,7 @@ import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxReader.GpxReaderAdapter
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.PlatformUtil
 
 
 object GpxDbHelper : GpxReaderAdapter {
@@ -79,8 +80,10 @@ object GpxDbHelper : GpxReaderAdapter {
 		items: List<GpxDataItem>,
 		batchSize: Int = 100
 	): Map<KFile, Boolean> = coroutineScope {
+		val gpxPath = PlatformUtil.getOsmAndContext().getGpxDir().path()
 		items.chunked(batchSize).map { batch ->
-			async(Dispatchers.IO) { batch.associate { it.file to it.file.exists() } }
+			async(Dispatchers.IO) { batch.associate {
+				it.file to (it.file.exists() && it.file.path().startsWith(gpxPath)) } }
 		}.awaitAll().fold(mutableMapOf()) { acc, map -> acc.apply { putAll(map) } }
 	}
 

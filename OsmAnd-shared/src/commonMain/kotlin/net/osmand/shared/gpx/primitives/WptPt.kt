@@ -2,9 +2,9 @@ package net.osmand.shared.gpx.primitives
 
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.PlatformUtil
 
 class WptPt : GpxExtensions {
 	var firstPoint = false
@@ -28,6 +28,7 @@ class WptPt : GpxExtensions {
 	var slopeColor = 0
 	var colourARGB = 0
 	var distance = 0.0
+	var attributes: PointAttributes? = null
 
 	constructor()
 

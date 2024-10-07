@@ -581,8 +581,9 @@ public class AndroidNetworkUtils {
 
 	public static String downloadFile(@NonNull String url, @NonNull File fileToSave, boolean gzip, @Nullable IProgress progress) {
 		String error = null;
+		HttpURLConnection connection = null;
 		try {
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setConnectTimeout(CONNECT_TIMEOUT);
 			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
@@ -617,6 +618,10 @@ public class AndroidNetworkUtils {
 				error = CANCELLED_MSG;
 			}
 			LOG.warn("Cannot download file: " + url, e);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
 		if (progress != null) {
 			progress.finishTask();
@@ -627,11 +632,12 @@ public class AndroidNetworkUtils {
 	public static long downloadModifiedFile(
 			@NonNull String url, @NonNull File fileToSave, boolean gzip, long lastTime, @Nullable IProgress progress) {
 		long result = -1;
+		HttpURLConnection connection = null;
 		try {
 			if (progress != null) {
 				progress.startTask(url, 0);
 			}
-			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setConnectTimeout(CONNECT_TIMEOUT);
 			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
@@ -675,6 +681,10 @@ public class AndroidNetworkUtils {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
 		} catch (Exception e) {
 			LOG.warn("Cannot download file: " + url, e);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
 		if (progress != null) {
 			progress.finishTask();

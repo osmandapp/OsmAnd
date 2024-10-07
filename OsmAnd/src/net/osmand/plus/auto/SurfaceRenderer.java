@@ -35,13 +35,14 @@ import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 /**
  * A very simple implementation of a renderer for the app's background surface.
  */
-public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener {
+public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener, ElevationListener {
 	private static final String TAG = "SurfaceRenderer";
 
 	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 30;
@@ -81,6 +82,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
+		void onElevationChanging(float angle);
 	}
 
 	public final SurfaceCallback mSurfaceCallback = new SurfaceCallback() {
@@ -272,7 +274,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null) {
 				int adjustedTiltAngle = mapView.getAdjustedTiltAngle(mapView.getZoom(), true);
 				mapView.getAnimatedDraggingThread().startTilting(
-						offscreenMapRendererView.getElevationAngle() < DEFAULT_ELEVATION_ANGLE ? DEFAULT_ELEVATION_ANGLE : adjustedTiltAngle, 0.0f);
+						mapView.getElevationAngle() < DEFAULT_ELEVATION_ANGLE ? DEFAULT_ELEVATION_ANGLE : adjustedTiltAngle, 0.0f);
 			}
 		}
 	}
@@ -355,13 +357,15 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 						offscreenMapRendererView.setAzimuth(0);
+						mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
 						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
-						offscreenMapRendererView.setElevationAngle(elevationAngle);
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
 							mapRendererContext.setMapRendererView(offscreenMapRendererView);
 							mapView.setMapRenderer(offscreenMapRendererView);
+							mapView.setElevationAngle(elevationAngle);
+							mapView.addElevationListener(this);
 							getApp().getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 							PluginsHelper.refreshLayers(getApp(), null);
 							offscreenMapRendererView.addListener(this);
@@ -380,6 +384,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			AtlasMapRendererView offscreenMapRendererView = this.offscreenMapRendererView;
 			this.offscreenMapRendererView = null;
 			if (mapView != null) {
+				mapView.removeElevationListener(this);
 				mapView.getAnimatedDraggingThread().toggleAnimations();
 				if (mapView.getMapRenderer() == offscreenMapRendererView) {
 					mapView.setMapRenderer(null);
@@ -458,5 +463,17 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public double getVisibleAreaWidth() {
 		return visibleArea != null ? visibleArea.width() : 0f;
+	}
+
+	@Override
+	public void onElevationChanging(float angle) {
+		SurfaceRendererCallback callback = this.callback;
+		if (callback != null) {
+			callback.onElevationChanging(angle);
+		}
+	}
+
+	@Override
+	public void onStopChangingElevation(float angle) {
 	}
 }

@@ -713,7 +713,9 @@ public class MapRendererContext {
 			for (int i = 0; i < polygons.size(); i++) {
 				MapObject polygon = polygons.get(i);
 				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
-				res.add(renderedObject);
+				if (renderedObject != null) {
+					res.add(renderedObject);
+				}
 			}
 		}
 		return res;
@@ -726,6 +728,9 @@ public class MapRendererContext {
 		for (int i = 0; i < tagsKeys.size(); i++) {
 			String key = tagsKeys.get(i);
 			String value = tags.get(key);
+			if ("osmand_change".equals(key) && "delete".equals(value)) {
+				return null;
+			}
 			object.putTag(key, value);
 		}
 
@@ -734,6 +739,9 @@ public class MapRendererContext {
 		for (int i = 0; i < namesKeys.size(); i++) {
 			String key = namesKeys.get(i);
 			String value = names.get(key);
+			if ("osmand_change".equals(key) && "delete".equals(value)) {
+				return null;
+			}
 			object.setName(key, value);
 		}
 

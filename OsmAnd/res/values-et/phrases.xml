@@ -164,7 +164,7 @@
     <string name="poi_fire_water_pond">Tuletõrjetiik</string>
     <string name="poi_grit_bin">Liivatuskast</string>
     <string name="poi_ambulance_station">Kiirabijaam</string>
-    <string name="poi_ses_station">SES jaam</string>
+    <string name="poi_disaster_response">SES jaam</string>
     <string name="poi_emergency_access_point">Asukohatuvastuspunkt hädaolukorras</string>
     <string name="poi_ford">Koolmekoht</string>
     <string name="poi_bed">Voodipesu pood</string>

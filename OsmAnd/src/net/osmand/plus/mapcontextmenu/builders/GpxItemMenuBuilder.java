@@ -49,6 +49,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 	}
 
 	public void buildCustomAddressLine(LinearLayout ll) {
+		boolean light = isLightContent();
 		int gpxSmallIconMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_icon_margin);
 		int gpxSmallTextMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_text_margin);
 		float gpxTextSize = ll.getResources().getDimension(R.dimen.default_desc_text_size);
