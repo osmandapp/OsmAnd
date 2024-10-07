@@ -3009,7 +3009,7 @@
     <string name="show_compass_ruler">Прикажи лењир компас</string>
     <string name="hide_compass_ruler">Сакриј лењир компас</string>
     <string name="select_base_profile_dialog_message">Засновите свој произвољни налог на једном од подразумеваних налога, којим се одређују основне поставке као што су подразуемвана видљивост справица или јединице брзине и даљине. Ово су подразумевани применљиви налози, заједно са примерима произвољних налога којима се може проширити:</string>
-    <string name="quick_action_need_to_add_item_to_list">Додајте бар једну ставку на поставкама у „Брзим радњама“</string>
+    <string name="quick_action_need_to_add_item_to_list">Додајте бар једну ставку на поставкама у Брзим радњама</string>
     <string name="routing_attr_piste_type_downhill_name">Алпско и скијање спуштање</string>
     <string name="routing_attr_piste_type_downhill_description">Падине алпског скијања или спуштања и приступ скијаштим жичарама.</string>
     <string name="routing_attr_piste_type_nordic_name">Пољско и нордијско скијање</string>
@@ -5777,7 +5777,7 @@
     <string name="quick_action_remove_next_destination">Следећа одредишна тачка</string>
     <string name="quick_action_map_style">Начин приказа карте</string>
     <string name="quick_action_location_by_gpx">Положај по ГПИксу</string>
-    <string name="quick_action_terrain_color_scheme">Образац боја околиша</string>
+    <string name="quick_action_terrain_color_scheme">Теренска шема боја</string>
     <string name="quick_action_directions_from">Почетна тачка</string>
     <string name="quick_action_destination">Одредиште</string>
     <string name="quick_action_move_map_left">Карту према лево</string>
