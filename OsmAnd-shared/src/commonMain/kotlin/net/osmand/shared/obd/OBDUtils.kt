@@ -78,12 +78,12 @@ object OBDUtils {
 
 	fun parseVINResponse(response: IntArray): OBDDataField<Any> {
 		val vin = StringBuilder()
-		for (element in response) {
-			vin.append(element.toChar())
+		for (i in 1 until response.size) {
+			vin.append(response[i].toChar())
 		}
 		return OBDDataField(
 			OBDDataFieldType.VIN,
-			response[0])
+			vin)
 	}
 
 	fun parseFuelConsumptionRateResponse(response: IntArray): OBDDataField<Any> {
