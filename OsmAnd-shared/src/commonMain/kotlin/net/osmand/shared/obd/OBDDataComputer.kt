@@ -21,7 +21,7 @@ object OBDDataComputer {
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 
-	fun acceptValue(value: Map<OBDCommand, OBDDataField?>) {
+	fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 		for (widget in widgets) {
 			widget.acceptValue(value)
 		}
@@ -84,55 +84,32 @@ object OBDDataComputer {
 	private fun updateRequiredCommands() {
 		OBDDispatcher.clearCommands()
 		widgets.forEach { widget ->
-			widget.type.requiredCommands.forEach { OBDDispatcher.addCommand(it) }
+			OBDDispatcher.addCommand(widget.type.requiredCommand)
 		}
 	}
 
 	enum class OBDTypeWidget(
 		val locationNeeded: Boolean,
-		val requiredCommands: List<OBDCommand>,
-		val valueCreator: (Map<OBDCommand, OBDDataField?>) -> OBDValue) {
-		SPEED(false,
-			listOf(OBD_SPEED_COMMAND),
-			{ data -> OBDIntValue(OBD_SPEED_COMMAND, data) }),
-		RPM(false,
-			listOf(OBD_RPM_COMMAND),
-			{ data -> OBDIntValue(OBD_RPM_COMMAND, data) }),
-		FUEL_LEFT_DISTANCE(true,
-			listOf(OBD_FUEL_LEVEL_COMMAND),
-			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
+		val requiredCommand: OBDCommand
+	) {
+		SPEED(false, OBD_SPEED_COMMAND),
+		RPM(false, OBD_RPM_COMMAND),
+		FUEL_LEFT_DISTANCE(true, OBD_FUEL_LEVEL_COMMAND),
 
-		//		FUEL_LEFT_LITERS(false,
-//			listOf(OBD_FUEL_LEVEL_COMMAND),
-//			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
-		FUEL_LEFT_PERCENT(false,
-			listOf(OBD_FUEL_LEVEL_COMMAND),
-			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
-		FUEL_CONSUMPTION_RATE(false,
-			listOf(OBD_FUEL_LEVEL_COMMAND),
-			{ data -> OBDValue(OBD_FUEL_LEVEL_COMMAND, data) }),
-		TEMPERATURE_INTAKE(false,
-			listOf(OBD_AIR_INTAKE_TEMP_COMMAND),
-			{ data -> OBDIntValue(OBD_AIR_INTAKE_TEMP_COMMAND, data) }),
-		TEMPERATURE_AMBIENT(false,
-			listOf(OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
-			{ data -> OBDIntValue(OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, data) }),
-		BATTERY_VOLTAGE(false,
-			listOf(OBD_BATTERY_VOLTAGE_COMMAND),
-			{ data -> OBDValue(OBD_BATTERY_VOLTAGE_COMMAND, data) }),
-		FUEL_TYPE(false,
-			listOf(OBD_FUEL_TYPE_COMMAND),
-			{ data -> OBDIntValue(OBD_FUEL_TYPE_COMMAND, data) }),
-		VIN(false,
-			listOf(OBD_VIN_COMMAND),
-			{ data -> OBDStringValue(OBD_VIN_COMMAND, data) }),
-		TEMPERATURE_COOLANT(false,
-			listOf(OBD_ENGINE_COOLANT_TEMP_COMMAND),
-			{ data -> OBDIntValue(OBD_ENGINE_COOLANT_TEMP_COMMAND, data) });
+		//	FUEL_LEFT_LITERS(false, OBD_FUEL_LEVEL_COMMAND),
+		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND),
+		FUEL_CONSUMPTION_RATE(false, OBD_FUEL_LEVEL_COMMAND),
+		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND),
+		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
+		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND),
+		FUEL_TYPE(false, OBD_FUEL_TYPE_COMMAND),
+		VIN(false, OBD_VIN_COMMAND),
+		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND);
 	}
 
-	private fun averageDouble(values: List<OBDValue>): Double? =
-		if (values.isNotEmpty()) values.sumOf { it.doubleValue } / values.size else null
+	private fun averageDouble(values: List<OBDDataField<Any>>): Double? =
+		if (values.isNotEmpty()) values.filter { it.value is Double }
+			.sumOf { it.value as Double } / values.size else null
 
 	open class OBDComputerWidgetFormatter(val pattern: String = "%s") {
 		open fun format(v: Any?): String {
@@ -154,7 +131,7 @@ object OBDDataComputer {
 		val formatter: OBDComputerWidgetFormatter,
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
-		private var values: MutableList<OBDValue> = ArrayList()
+		private var values: MutableList<OBDDataField<Any>> = ArrayList()
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
@@ -178,7 +155,7 @@ object OBDDataComputer {
 				BATTERY_VOLTAGE,
 				RPM -> {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
-						locValues[locValues.size - 1].doubleValue
+						locValues[locValues.size - 1].value
 					} else {
 						averageDouble(locValues)
 					}
@@ -188,7 +165,7 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[0]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = first.doubleValue - last.doubleValue
+						val diffPerc = first.value as Float - last.value as Float
 						val diffTime = last.timestamp - first.timestamp
 						println("diftime $diffTime; diffPerc $diffPerc")
 						diffPerc / diffTime * 1000 * 3600
@@ -202,7 +179,7 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[0]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = last.doubleValue - first.doubleValue
+						val diffPerc = last.value as Float - first.value as Float
 						if (diffPerc > 0) {
 							var start = 0
 							var end = locations.size - 1
@@ -227,7 +204,7 @@ object OBDDataComputer {
 								}
 							}
 							if (dist > 0) {
-								val lastPerc = last.doubleValue
+								val lastPerc = last.value as Float
 								lastPerc / diffPerc * dist
 							}
 						}
@@ -238,7 +215,7 @@ object OBDDataComputer {
 //				FUEL_LEFT_LITERS,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
-						locValues[locValues.size - 1].doubleValue
+						locValues[locValues.size - 1].value
 					} else {
 						null
 					}
@@ -246,25 +223,24 @@ object OBDDataComputer {
 
 				FUEL_TYPE -> {
 					if (locValues.size > 0) {
-						locValues[locValues.size - 1].doubleValue
+						locValues[locValues.size - 1].value
 					} else {
 						null
 					}
 				}
 
 				VIN -> if (locValues.size > 0) {
-					(locValues[locValues.size - 1] as OBDStringValue).value
+					(locValues[locValues.size - 1]).value
 				} else {
 					null
 				}
 			}
 		}
 
-		fun acceptValue(value: Map<OBDCommand, OBDDataField?>) {
-			val obdValue = type.valueCreator(value)
-			if (obdValue.isAccepted) {
+		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
+			value[type.requiredCommand]?.let {
 				version++
-				values.add(obdValue)
+				values.add(it)
 			}
 		}
 
@@ -281,63 +257,6 @@ object OBDDataComputer {
 			if (inWindow > 0 && inWindow < values.size - 1) {
 				values = values.subList(inWindow, values.size)
 			}
-		}
-	}
-
-	open class OBDValue() {
-		var timestamp = currentTimeMillis()
-		var isAccepted: Boolean = false
-			protected set
-		var doubleValue: Double = 0.0
-
-		constructor(cmd: OBDCommand, data: Map<OBDCommand, OBDDataField?>) : this() {
-			val dataField = data[cmd]
-			dataField?.let {
-				doubleValue = it.getValue().toDouble()
-			}
-			isAccepted = acceptData(dataField)
-		}
-
-		protected open fun acceptData(dataField: OBDDataField?): Boolean {
-			var accepted = false
-			dataField?.let {
-				try {
-					doubleValue = it.getValue().toDouble()
-					accepted = true
-				} catch (error: NumberFormatException) {
-					log.error("Can\'t parse ${it.getValue()} to Double")
-				}
-			}
-			return accepted
-		}
-	}
-
-	class OBDIntValue(cmd: OBDCommand, data: Map<OBDCommand, OBDDataField?>) : OBDValue(cmd, data) {
-		var intValue = 0
-		override fun acceptData(dataField: OBDDataField?): Boolean {
-			var accepted = false
-			dataField?.let {
-				try {
-					intValue = it.getValue().toInt()
-					accepted = true
-				} catch (error: NumberFormatException) {
-					log.error("Can\'t parse ${it.getValue()} to Int")
-				}
-			}
-			return accepted
-		}
-	}
-
-	class OBDStringValue(cmd: OBDCommand, data: Map<OBDCommand, OBDDataField?>) :
-		OBDValue(cmd, data) {
-		var value = ""
-		override fun acceptData(dataField: OBDDataField?): Boolean {
-			var accepted = false
-			dataField?.let {
-				value = it.getValue()
-				accepted = true
-			}
-			return accepted
 		}
 	}
 }

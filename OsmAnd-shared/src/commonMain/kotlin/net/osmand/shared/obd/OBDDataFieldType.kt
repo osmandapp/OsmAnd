@@ -10,6 +10,7 @@ enum class OBDDataFieldType(val nameId: String, private val unitNameId: String) 
 	BATTERY_VOLTAGE("obd_battery_voltage_desc", "unit_volt"),
 	AIR_INTAKE_TEMP("obd_air_intake_temp_desc", "degree_celsius"),
 	COOLANT_TEMP("obd_engine_coolant_temp", "degree_celsius"),
+	FUEL_CONSUMPTION_RATE("obd_fuel_consumption_rate", "liter_per_hour"),
 	VIN("obd_vin", ""),
 	FUEL_TYPE("obd_fuel_type", "");
 
