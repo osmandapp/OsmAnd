@@ -111,6 +111,8 @@ object OBDDispatcher {
 	}
 
 	fun stopReading() {
+		log.debug("stop reading")
 		setReadWriteStreams(null, null)
+		log.debug("after stop reading")
 	}
 }

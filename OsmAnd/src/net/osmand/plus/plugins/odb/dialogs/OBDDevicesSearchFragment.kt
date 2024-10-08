@@ -37,19 +37,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 
     companion object {
         val TAG: String = OBDDevicesSearchFragment::class.java.simpleName
-        private const val BLE_SEARCH_KEY: String = "BLE_SEARCH"
-        private const val ANT_SEARCH_KEY: String = "ANT_SEARCH"
-        fun showInstance(manager: FragmentManager, bleSearch: Boolean, antSearch: Boolean) {
+        fun showInstance(manager: FragmentManager) {
             if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
                 val fragment = OBDDevicesSearchFragment()
-                val args = Bundle()
-                if (bleSearch) {
-                    args.putBoolean(BLE_SEARCH_KEY, true)
-                }
-                if (antSearch) {
-                    args.putBoolean(ANT_SEARCH_KEY, true)
-                }
-                fragment.arguments = args
                 fragment.retainInstance = true
                 manager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment, TAG)
@@ -122,7 +112,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
                 foundDevicesCountView?.text =
                     String.format(formatString, devices.size)
             }
-            adapter.setItems(devices as List<Any>)
+            adapter.items = devices
         }
     }
 
@@ -132,11 +122,6 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
         savedInstanceState: Bundle?
     ): View? {
         val newView = super.onCreateView(inflater, container, savedInstanceState)
-        val args = savedInstanceState ?: arguments
-        if (args != null) {
-            bleSearch = args.getBoolean(BLE_SEARCH_KEY, false)
-            antSearch = args.getBoolean(ANT_SEARCH_KEY, false)
-        }
         updateCurrentStateView()
         return newView
     }
@@ -165,7 +150,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
     }
 
     private fun startSearch() {
-        plugin?.setScanDevicesListener(this)
+        vehicleMetricsPlugin?.setScanDevicesListener(this)
 //        if (bleSearch) {
 //            plugin.searchBLEDevices()
 //        } else if (antSearch) {
@@ -175,7 +160,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 
     override fun onPause() {
         super.onPause()
-        plugin?.setScanDevicesListener(null)
+        vehicleMetricsPlugin?.setScanDevicesListener(null)
     }
 
     override fun onDestroyView() {

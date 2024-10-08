@@ -42,7 +42,9 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): IntArray {
+		log.debug("before runImpl")
 		var response = runImpl(fullCommand)
+		log.debug("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))

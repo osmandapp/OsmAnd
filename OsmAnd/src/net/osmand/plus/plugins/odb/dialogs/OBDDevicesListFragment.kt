@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter.FoundDevicesMenuListener
+import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnSensorNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
@@ -24,7 +26,9 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 
 class OBDDevicesListFragment : OBDDevicesBaseFragment(),
-	FoundDevicesMenuListener
+	FoundDevicesMenuListener,
+	OnSensorNameChangedCallback
+
 //	,
 //	DeviceListener,
 //	OnSaveSensorPropertyCallback,
@@ -112,7 +116,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	private fun showPairNewSensorBottomSheet() {
-//		PairNewDeviceBottomSheet.showInstance(requireActivity().supportFragmentManager)
+		OBDDevicesSearchFragment.showInstance(requireActivity().supportFragmentManager)
 	}
 
 	override fun setupToolbar(view: View) {
@@ -162,60 +166,55 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	//		}
 	//	}
 	private fun updatePairedSensorsList() {
-		val connectedDevice = plugin?.getConnectedDeviceInfo()
-		val devices = plugin?.getPairedOBDDevicesList(requireActivity())
-		val connectedDevices: MutableList<BTDeviceInfo> = ArrayList()
-		val disconnectedDevices: MutableList<BTDeviceInfo> = ArrayList()
-		if (Algorithms.isEmpty(devices)) {
-			emptyView!!.visibility = View.VISIBLE
-			contentView!!.visibility = View.GONE
-			app.runInUIThread { appBar!!.setExpanded(true, false) }
-		} else {
-			devices?.let {
-				for (device in it) {
-					if (device.address == connectedDevice?.address) {
-						connectedDevices.add(device)
-					} else {
-						disconnectedDevices.add(device)
-					}
+		vehicleMetricsPlugin?.let { plugin ->
+			val connectedDevice = plugin.getConnectedDeviceInfo()
+			val connectedDevices: List<BTDeviceInfo> =
+				if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
+			val disconnectedDevices =
+				plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
+			if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
+				emptyView!!.visibility = View.VISIBLE
+				contentView!!.visibility = View.GONE
+				app.runInUIThread { appBar!!.setExpanded(true, false) }
+			} else {
+				app.runInUIThread {
+					appBar!!.setExpanded(false, false)
+					connectedListAdapter!!.items = ArrayList<Any>(connectedDevices)
+					disconnectedListAdapter!!.items = ArrayList<Any>(disconnectedDevices)
+					contentView!!.visibility = View.VISIBLE
+					emptyView!!.visibility = View.GONE
+					val hasConnectedDevices = connectedDevices.isNotEmpty()
+					val hasDisConnectedDevices = disconnectedDevices.isNotEmpty()
+					connectedPrompt!!.visibility =
+						if (hasConnectedDevices) View.VISIBLE else View.GONE
+					disconnectedPrompt!!.visibility =
+						if (hasDisConnectedDevices) View.VISIBLE else View.GONE
+					dividerBetweenDeviceGroups!!.visibility =
+						if (hasConnectedDevices && hasDisConnectedDevices) View.VISIBLE else View.GONE
 				}
-			}
-			app.runInUIThread {
-				appBar!!.setExpanded(false, false)
-				connectedListAdapter!!.setItems(ArrayList<Any>(connectedDevices))
-				disconnectedListAdapter!!.setItems(ArrayList<Any>(disconnectedDevices))
-				contentView!!.visibility = View.VISIBLE
-				emptyView!!.visibility = View.GONE
-				val hasConnectedDevices = connectedDevices.size > 0
-				val hasDisConnectedDevices = disconnectedDevices.size > 0
-				connectedPrompt!!.visibility = if (hasConnectedDevices) View.VISIBLE else View.GONE
-				disconnectedPrompt!!.visibility =
-					if (hasDisConnectedDevices) View.VISIBLE else View.GONE
-				dividerBetweenDeviceGroups!!.visibility =
-					if (hasConnectedDevices && hasDisConnectedDevices) View.VISIBLE else View.GONE
 			}
 		}
 	}
 
 	override fun onDisconnect(device: BTDeviceInfo) {
-//		plugin.disconnectDevice(device)
+		vehicleMetricsPlugin?.disconnect()
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		plugin?.connectToObd(requireActivity(), device)
+		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
 	}
 
 	override fun onSettings(device: BTDeviceInfo) {
+		OBDMainFragment.showInstance(requireActivity().supportFragmentManager)
 //		showInstance(
 //			requireActivity().supportFragmentManager, device)
 	}
 
 	override fun onRename(device: BTDeviceInfo) {
-//		EditDevicePropertyDialog.showInstance(
-//			requireActivity(),
-//			this,
-//			device,
-//			DeviceChangeableProperty.NAME)
+		RenameOBDDialog.showInstance(
+			requireActivity(),
+			this,
+			device)
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
@@ -227,15 +226,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 //		updatePairedSensorsList()
 //	}
 
-//	override fun changeSensorPropertyValue(
-//		sensorId: String,
-//		property: DeviceChangeableProperty,
-//		newName: String) {
-//		if (property == DeviceChangeableProperty.NAME) {
-////			plugin.changeDeviceName(sensorId, newName)
-//			updatePairedSensorsList()
-//		}
-//	}
+	override fun onSensorNameChanged() {
+		updatePairedSensorsList()
+	}
 
 	fun onDeviceConnecting(device: BTDeviceInfo) {}
 	fun onDeviceConnect(

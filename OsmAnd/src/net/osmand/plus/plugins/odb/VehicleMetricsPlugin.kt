@@ -2,12 +2,13 @@ package net.osmand.plus.plugins.odb
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Toast
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
@@ -15,10 +16,9 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin
-import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.plus.settings.backend.ApplicationModeBean
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
@@ -38,6 +38,7 @@ import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataFieldType.*
 import net.osmand.shared.obd.OBDDispatcher
+import net.osmand.util.Algorithms
 import okio.IOException
 import okio.sink
 import okio.source
@@ -46,15 +47,18 @@ import java.util.UUID
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	OBDDispatcher.OBDReadStatusListener {
 	private val settings: OsmandSettings = app.settings
+	val USED_OBD_DEVICES = registerStringPreference(
+		"used_obd_devices",
+		"").makeGlobal().cache();
+	val LAST_CONNECTED_OBD_DEVICE = registerStringPreference(
+		"last_connected_obd_device",
+		"").makeGlobal().cache();
 
-	val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
-//	private var connectedDevice: BluetoothDevice? = null
 	private var connectedDeviceInfo: BTDeviceInfo? = null
 	var socket: BluetoothSocket? = null
 	private var scanDevicesListener: ScanDevicesListener? = null
-
 
 	interface ScanDevicesListener {
 		fun onScanFinished(foundDevices: List<BTDeviceInfo>)
@@ -212,7 +216,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				val pairedDevices = adapter.bondedDevices.toList()
 				deviceList = pairedDevices.filter { device ->
 					device.uuids?.any { parcelUuid -> parcelUuid.uuid == uuid } == true
-				}.map { if (it != null) BTDeviceInfo(it.name, it.address) else  BTDeviceInfo.UNKNOWN_DEVICE }
+				}.map {
+					if (it != null) BTDeviceInfo(
+						it.name,
+						it.address) else BTDeviceInfo.UNKNOWN_DEVICE
+				}
 			}
 
 		} else {
@@ -248,14 +256,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
 						adapter.cancelDiscovery()
 						val pairedDevices = adapter.bondedDevices.toList()
-//						pairedDevices.indices
-//						pairedDevices.forEach {
-//							LOG.debug(it.name)
-//						}
 						val obdDevice: BluetoothDevice? =
 							pairedDevices.find { it.name == deviceInfo.name && it.address == deviceInfo.address }
-						if(obdDevice != null) {
-							connectedDeviceInfo = BTDeviceInfo(deviceInfo.name, deviceInfo.address)
+						if (obdDevice != null) {
 							connectToDevice(activity, obdDevice)
 						}
 					}
@@ -278,6 +281,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			socket?.apply {
 				connect()
 				if (isConnected) {
+					onDeviceConnected(connectedDevice)
 					val input = inputStream.source()
 					val output = outputStream.sink()
 					OBDDispatcher.setReadWriteStreams(input, output)
@@ -297,6 +301,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 					"Can\'t connect to ${connectedDevice.name ?: "Unknown device"}",
 					Toast.LENGTH_LONG).show()
 			}
+		}
+	}
+
+	@SuppressLint("MissingPermission")
+	private fun onDeviceConnected(connectedDevice: BluetoothDevice) {
+		connectedDeviceInfo = BTDeviceInfo(connectedDevice.name, connectedDevice.address)
+		connectedDeviceInfo?.let {
+			saveDeviceToUsedOBDDevicesList(it)
+			setLastConnectedDevice(it)
 		}
 	}
 
@@ -342,5 +355,60 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		scanDevicesListener = listener
 	}
 
+	fun getUsedOBDDevicesList(): List<BTDeviceInfo> {
+		val savedDevicesList = USED_OBD_DEVICES.get()
+		val gson = GsonBuilder().create()
+		val t = object : TypeToken<List<BTDeviceInfo>?>() {}.type
+		val arr: List<BTDeviceInfo>? = gson.fromJson(savedDevicesList, t)
+		return arr?.toList() ?: emptyList()
+	}
 
+	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
+		val currentList = getUsedOBDDevicesList().toMutableList()
+		val savedDevice = currentList.find { it.address == deviceInfo.address }
+		if (savedDevice == null) {
+			currentList.add(deviceInfo)
+			writeUsedOBDDevicesList(currentList)
+		} else {
+			if (savedDevice.name != deviceInfo.name) {
+				currentList.remove(savedDevice)
+				currentList.add(deviceInfo)
+				writeUsedOBDDevicesList(currentList)
+			}
+		}
+	}
+
+	fun removeDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
+		val currentList = getUsedOBDDevicesList().toMutableList()
+		currentList.remove(deviceInfo)
+		writeUsedOBDDevicesList(currentList)
+	}
+
+	private fun writeUsedOBDDevicesList(list: List<BTDeviceInfo>) {
+		val gson = GsonBuilder().create()
+		USED_OBD_DEVICES.set(gson.toJson(list))
+	}
+
+	private fun setLastConnectedDevice(deviceInfo: BTDeviceInfo?) {
+		val gson = GsonBuilder().create()
+		LAST_CONNECTED_OBD_DEVICE.set(if (deviceInfo != null) gson.toJson(deviceInfo) else "")
+	}
+
+	private fun getLastConnectedDevice(): BTDeviceInfo? {
+		val savedDevice = LAST_CONNECTED_OBD_DEVICE.get()
+		return if (Algorithms.isEmpty(savedDevice)) {
+			null
+		} else {
+			val gson = GsonBuilder().create()
+			gson.fromJson(savedDevice, BTDeviceInfo::class.java)
+		}
+	}
+
+	override fun mapActivityCreate(activity: MapActivity) {
+		super.mapActivityCreate(activity)
+		val lastConnectedDevice = getLastConnectedDevice()
+		if (connectedDeviceInfo == null && lastConnectedDevice != null) {
+			connectToObd(activity, lastConnectedDevice)
+		}
+	}
 }

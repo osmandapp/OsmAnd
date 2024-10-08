@@ -18,10 +18,10 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
 abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
-	protected var plugin: VehicleMetricsPlugin? = null
+	protected var vehicleMetricsPlugin: VehicleMetricsPlugin? = null
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		plugin = PluginsHelper.getPlugin(
+		vehicleMetricsPlugin = PluginsHelper.getPlugin(
 			VehicleMetricsPlugin::class.java)
 	}
 
