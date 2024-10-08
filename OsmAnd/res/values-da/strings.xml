@@ -5889,7 +5889,6 @@
     <string name="map_3d_mode_action_descr">Skift kortets hældning.</string>
     <string name="drawer_button_description">Åbner hovedmenuen.</string>
     <string name="configure_map_description">Skift kortstil, lag eller andre indstillinger.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Vis motocross-stier</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Vis motocross-stier</string>
     <string name="raster_layers_action_descr">Skift raster-lag</string>
     <string name="type_of_activity">Aktivitetstype</string>

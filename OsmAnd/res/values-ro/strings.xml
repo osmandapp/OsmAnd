@@ -5899,7 +5899,6 @@
     <string name="map_3d_mode_action_descr">Modificați înclinarea hărții.</string>
     <string name="type_of_activity">Tip de activitate</string>
     <string name="change_activity">Schimbă activitatea</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Arată trasee de biciclete de teren</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Arată trasee de biciclete de teren</string>
     <string name="drawer_button_description">Deschide meniul principal.</string>
     <string name="configure_map_description">Modificare stil hartă, straturi sau alte setări.</string>

@@ -5885,7 +5885,6 @@
     <string name="map_3d_mode_action_descr">Kartenneigung ändern.</string>
     <string name="drawer_button_description">Öffnet das Hauptmenü.</string>
     <string name="configure_map_description">Ändert den Kartenstil, Ebenen oder andere Einstellungen.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Trails anzeigen</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Dirtbike-Trails anzeigen</string>
     <string name="type_of_activity">Art der Aktivität</string>
     <string name="change_activity">Aktivität ändern</string>

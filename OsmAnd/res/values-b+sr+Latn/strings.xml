@@ -5891,7 +5891,6 @@
     <string name="navigation_action_descr">Otvaranje navigacije.</string>
     <string name="my_location_action_descr">Centrira mapu na tvojoj trenutnoj lokaciji.</string>
     <string name="configure_map_description">Promeni stil mape, slojeve ili druga podešavanja.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Prikazati staze za bicikle</string>
     <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
     <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
