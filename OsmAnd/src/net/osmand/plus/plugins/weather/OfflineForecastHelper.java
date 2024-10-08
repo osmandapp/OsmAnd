@@ -834,7 +834,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public void removePreferences(@NonNull String regionId) {
 		String[] prefKeys = getPreferenceKeys(regionId);
-		settings.removeFromGlobalPreferences(prefKeys);
+		settings.removeGlobalPreferences(prefKeys);
 	}
 
 	private void updateWeatherLayers() {
