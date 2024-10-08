@@ -7,7 +7,6 @@ import static android.widget.ImageView.ScaleType.CENTER;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
-import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
@@ -30,9 +29,11 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 import androidx.core.util.Pair;
 
 import net.osmand.plus.OsmandApplication;
@@ -47,7 +48,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapButtonsLayout;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -99,15 +100,20 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this(context, attrs, 0);
 	}
 
-	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
+	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
+	}
+
+	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs,
+	                 @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.settings = app.getSettings();
 		this.uiUtilities = app.getUIUtilities();
-		this.strokeWidth = AndroidUtils.dpToPx(app, 1);
-		this.shadowRadius = AndroidUtils.dpToPx(app, 2);
-		this.shadowPadding = AndroidUtils.dpToPx(app, 3);
+		this.strokeWidth = AndroidUtils.dpToPx(context, 1);
+		this.shadowRadius = AndroidUtils.dpToPx(context, 2);
+		this.shadowPadding = AndroidUtils.dpToPx(context, 3);
 
 		imageView = new ImageView(context, attrs, defStyleAttr);
 		imageView.setClickable(false);
@@ -179,7 +185,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 				setScaleX(1.5f);
 				setScaleY(1.5f);
 				setAlpha(0.95f);
-				setOnTouchListener(new MapButtonTouchListener());
+				setOnTouchListener(new MapButtonTouchListener(mapActivity));
 				return true;
 			});
 		}
@@ -378,16 +384,16 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 				Pair<Integer, Integer> margins = preference.getPortraitFabMargins();
 				Pair<Integer, Integer> defMargins = preference.getDefaultPortraitMargins();
-				setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
+				FabMarginPreference.setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
 			} else {
 				Pair<Integer, Integer> margins = preference.getLandscapeFabMargin();
 				Pair<Integer, Integer> defMargins = preference.getDefaultLandscapeMargins();
-				setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
+				FabMarginPreference.setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
 			}
 		}
 		ViewParent parent = getParent();
-		if (parent instanceof MapButtonsLayout layout) {
-			layout.updateButton(this);
+		if (parent instanceof MapHudLayout layout) {
+			layout.updateButton(this, false);
 		}
 	}
 
