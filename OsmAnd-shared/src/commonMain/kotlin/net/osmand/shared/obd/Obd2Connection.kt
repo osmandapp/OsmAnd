@@ -5,7 +5,7 @@ import net.osmand.shared.util.LoggerFactory
 
 class Obd2Connection(private val connection: UnderlyingTransport) {
 	enum class COMMAND_TYPE(val code: Int) {
-		LIVE(0x41), FREEZE(0x42)
+		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
 	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")

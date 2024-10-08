@@ -68,7 +68,7 @@ object OBDDispatcher {
 							val hexCode = "%02X".format(command.command)
 							val fullCommand = "$hexGroupCode$hexCode"
 							val commandResult =
-								obd2Connection!!.run(fullCommand, command.command)
+								obd2Connection!!.run(fullCommand, command.command, command.commandType)
 							sensorDataCache[command] = command.parseResponse(commandResult)
 						}
 					} catch (error: IOException) {

@@ -92,6 +92,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		speedResp = view.findViewById(R.id.resp5)
 		tempIntakeResp = view.findViewById(R.id.resp6)
 		tempCoolantResp = view.findViewById(R.id.resp7)
+		vinResp = view.findViewById(R.id.resp12)
 		batteryVoltageResp = view.findViewById(R.id.resp8)
 		fuelTypeResp = view.findViewById(R.id.resp9)
 		fuelLeftPersResp = view.findViewById(R.id.resp10)
