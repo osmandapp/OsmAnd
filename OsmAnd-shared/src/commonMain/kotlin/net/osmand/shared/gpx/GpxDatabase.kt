@@ -198,7 +198,6 @@ class GpxDatabase {
 	private fun readItemFile(query: SQLiteCursor): KFile {
 		var fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
 		val fileName = query.getString(query.getColumnIndex(FILE_NAME.columnName))
-		log.info(">>>> ++++ readItemFile fileDir=$fileDir fileName=$fileName")
 
 		val appDir = PlatformUtil.getOsmAndContext().getAppDir()
 		val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
@@ -208,7 +207,6 @@ class GpxDatabase {
 		fileDir = fileDir.replace(gpxDir.toString(), "")
 		fileDir = fileDir.replace(appDir.toString(), "")
 		val dir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
-		log.info(">>>> ==== readItemFile fileDir=$fileDir dir=$dir gpxDir=$gpxDir")
 		return KFile(dir, fileName)
 	}
 

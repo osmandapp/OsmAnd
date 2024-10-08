@@ -2290,7 +2290,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mapRenderer != null) {
 			mapRenderer.setElevationAngle(angle);
 		}
-		settings.setLastKnownMapElevation(angle);
 		notifyOnElevationChanging(angle);
 	}
 

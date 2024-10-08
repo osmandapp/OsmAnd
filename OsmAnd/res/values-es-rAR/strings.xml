@@ -257,9 +257,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nMantén pulsado para ver en el mapa"</string>
+    <string name="selected_gpx_info_show">\n\nMantén pulsado para ver en el mapa</string>
     <string name="local_index_gpx_info_show">\n\nMantén pulsado para opciones</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
     <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
@@ -5974,7 +5972,7 @@
     <string name="reset_average_speed">Reiniciar la velocidad promedio</string>
     <string name="unknown_bt_device">Dispositivo desconocido</string>
     <string name="obd_vin">VIN</string>
-    <string name="vehicle_metrics_plugin_settings">Ajustes de «Estadísticas del vehículo»</string>
+    <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo</string>
     <string name="obd_vin_desc">Código VIN sobre OBD</string>
     <string name="quick_action_save_recorded_trip_and_continue">Grabar viaje y continuar</string>
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
@@ -5988,7 +5986,10 @@
     <string name="quick_action_start_pause_recording">Un botón que inicia, pausa o reanuda la grabación de la traza GPX.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="help_article_personal_color_palette_schemes_name">Esquemas de colores</string>
-    <string name="movies_list">Lista de películas</string>
+    <string name="movies_list">Listado de videos</string>
     <string name="third_links">Enlaces externos</string>
     <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="lock_screen">Bloquear pantalla</string>
+    <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
+    <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
 </resources>

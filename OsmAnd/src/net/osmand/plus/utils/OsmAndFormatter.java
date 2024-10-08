@@ -93,6 +93,9 @@ public class OsmAndFormatter {
 	private static final char WEST = 'W';
 	private static final char EAST = 'E';
 
+	public static final String LTR_MARK = "\u200e";
+	public static final String RTL_MARK = "\u200f";
+
 	static {
 		setTwelveHoursFormatting(false, Locale.getDefault());
 		fixed2.setMinimumFractionDigits(2);
@@ -851,18 +854,13 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder(LTR_MARK);
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
-			boolean isLeftToRight = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR;
-			String rtlCoordinates = isLeftToRight ? "" : "\u200f";
-			String rtlCoordinatesPunctuation = isLeftToRight ? ", " : " ,";
-			result
-					.append(rtlCoordinates)
-					.append(formatCoordinate(lat, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
-					.append(lat > 0 ? NORTH : SOUTH).append(rtlCoordinates).append(rtlCoordinatesPunctuation).append(rtlCoordinates)
-					.append(formatCoordinate(lon, outputFormat)).append(rtlCoordinates).append(" ").append(rtlCoordinates)
+			result.append(formatCoordinate(lat, outputFormat)).append(" ")
+					.append(lat > 0 ? NORTH : SOUTH).append(", ")
+					.append(formatCoordinate(lon, outputFormat)).append(" ")
 					.append(lon > 0 ? EAST : WEST);
 		} else if (outputFormat == UTM_FORMAT) {
 			ZonedUTMPoint utmPoint = new ZonedUTMPoint(new LatLonPoint(lat, lon));
@@ -888,14 +886,14 @@ public class OsmAndFormatter {
 			formatSymbols.setDecimalSeparator('.');
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
-			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
 			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
 			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
 			formatSymbols.setDecimalSeparator('.');
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
-			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		}
 		return result.toString();
 	}
@@ -937,6 +935,10 @@ public class OsmAndFormatter {
 					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
+	}
+
+	public static String markLTR(String text) {
+		return LTR_MARK + text;
 	}
 
 	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {

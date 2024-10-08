@@ -75,4 +75,5 @@ public class QuickActionIds {
 	public static final int SAVE_RECORDED_TRIP_AND_CONTINUE_ACTION = 75;
 	public static final int FINISH_TRIP_RECORDING_ACTION = 76;
 	public static final int LOCK_SCREEN_ACTION = 77;
+	public static final int SHOW_HIDE_OSM_EDITS_ACTION = 78;
 }

@@ -120,6 +120,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		buildCommentRow(view, wpt.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
+			boolean light = isLightContent();
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), amenityExtensions);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());

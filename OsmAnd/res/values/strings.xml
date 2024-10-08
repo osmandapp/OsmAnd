@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
 	<string name="liter_per_hour">l/h</string>
 	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
 	<string name="lock_screen">Lock screen</string>

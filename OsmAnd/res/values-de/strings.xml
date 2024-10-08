@@ -376,9 +376,7 @@
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
     <string name="vector_data_missing">Bitte Offline-Daten herunterladen, damit Karten offline verwendet werden können.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nFür Optionen lang tippen"</string>
+    <string name="local_index_gpx_info_show">\n\nFür Optionen lang tippen</string>
     <string name="local_index_installed">Lokale Version</string>
     <string name="local_index_items_backuped">%1$d von %2$d Datei(en) deaktiviert.</string>
     <string name="local_index_items_deleted">%1$d von %2$d Datei(en) gelöscht.</string>
@@ -1198,9 +1196,7 @@
     <string name="shared_string_my_places">Meine Orte</string>
     <string name="loading_smth">%1$s wird geladen …</string>
     <string name="map_widget_plain_time">Aktuelle Zeit</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nZur Darstellung auf der Karte lange tippen"</string>
+    <string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte lange tippen</string>
     <string name="delay_navigation_start">Navigation automatisch starten</string>
     <string name="save_as_favorites_points">Als Favoritengruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Ziele auswählen</string>
@@ -1471,7 +1467,7 @@
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
     <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
-    <string name="shared_string_export">Export</string>
+    <string name="shared_string_export">Exportieren</string>
     <string name="watch">Ansehen</string>
     <string name="share_note">Notiz mitteilen</string>
     <string name="days_behind">Tage alt</string>
@@ -1610,7 +1606,7 @@
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
-    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_new">Newari / Nepal Bhasa</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
@@ -2154,7 +2150,7 @@
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
-    <string name="shared_string_max">Max</string>
+    <string name="shared_string_max">Max.</string>
     <string name="shared_string_start_time">Startzeitpunkt</string>
     <string name="shared_string_end_time">Endzeitpunkt</string>
     <string name="shared_string_color">Farbe</string>
@@ -2990,7 +2986,7 @@
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise ungepflegt, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
-    <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
+    <string name="quick_action_need_to_add_item_to_list">Mindestens ein Element der Liste in den „Schnellaktion“ Einstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
     <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
@@ -3020,7 +3016,7 @@
 \n• Weitere Fehlerbehebungen
 \n
 \n</string>
-    <string name="app_mode_monowheel">Monowheel</string>
+    <string name="app_mode_monowheel">Einreifen</string>
     <string name="app_mode_scooter">Motorroller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
@@ -3036,7 +3032,7 @@
     <string name="edit_profile_nav_settings_subtitle">Navigationseinstellungen für das Profil auswählen</string>
     <string name="routing_attr_max_num_changes_description">Bestimmen Sie die maximale Anzahl an Umstiegen</string>
     <string name="routing_attr_max_num_changes_name">Anzahl der Umstiege</string>
-    <string name="app_mode_offroad">Offroad</string>
+    <string name="app_mode_offroad">Gelände</string>
     <string name="external_input_device">Externe Eingabegeräte</string>
     <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
     <string name="turn_screen_on_time_descr">Stellen Sie ein, wie lange der Bildschirm eingeschaltet bleiben soll.</string>
@@ -3376,7 +3372,7 @@
 \nSie kann in den Android-Einstellungen unter „Apps“ deinstalliert werden.</string>
     <string name="shared_string_menu">Menü</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_routing">Routenführung</string>
     <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
     <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf „Importieren“, um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
     <string name="export_profile_dialog_description">Zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
@@ -3448,7 +3444,7 @@
     <string name="slope_read_more">Lesen Sie mehr über Hangneigung in %1$s.</string>
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigung auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung des Reliefs werden zusätzliche Karten benötigt.</string>
-    <string name="shared_string_min">Min</string>
+    <string name="shared_string_min">Min.</string>
     <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hangneigung, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
@@ -5344,7 +5340,7 @@
     <string name="help_article_navigation_setup_route_details_name">Routendetails</string>
     <string name="help_article_navigation_setup_route_navigation_name">Routenvorbereitung</string>
     <string name="help_article_personal_name">Meine Daten</string>
-    <string name="help_article_personal_import_export_name">Import / Export</string>
+    <string name="help_article_personal_import_export_name">Importieren / Exportieren</string>
     <string name="help_article_personal_profiles_name">Profile (Einstellungen)</string>
     <string name="help_article_personal_storage_name">Speicher</string>
     <string name="help_article_plan_route_name">Route planen</string>
@@ -5615,7 +5611,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Schrittweise</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Auto-Zoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
@@ -5774,7 +5770,7 @@
     <string name="missing_maps_ignore_details">Decken heruntergeladene Karten Ihre Route ab? Navigieren Sie mit ihnen, wenn Sie sich in der Gegend auskennen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
-    <string name="quick_action_terrain_color_scheme">Farbschema des Geländes</string>
+    <string name="quick_action_terrain_color_scheme">Gelände Farbschema</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
     <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
@@ -5961,4 +5957,24 @@
     <string name="obd_vin_desc">VIN-Code über OBD</string>
     <string name="vehicle_metrics_plugin_settings">Fahrzeugmetrik-Einstellungen</string>
     <string name="reset_average_speed">Durchschnittliche Geschwindigkeit zurücksetzen</string>
+    <string name="quick_action_verb_start_pause">Start / Pause</string>
+    <string name="help_article_personal_color_palette_schemes_name">Farbschemen</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="movies_list">Filmliste</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="import_export">Importieren/exportieren</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="lock_screen">Bildschirm sperren</string>
+    <string name="lock_screen_description">Touchfunktion aktivieren oder deaktivieren, um versehentliche Berührungen zu verhindern</string>
+    <string name="track_does_not_contain_data_to_save">Track enthält keine zu speichernden Daten.</string>
+    <string name="start_trip_recording_first_m">Bitte zuerst die Reiseaufzeichnung starten.</string>
+    <string name="quick_action_finish_trip_recording_summary">Eine Schaltfläche zum Speichern des GPX-Tracks und Beenden der Reiseaufzeichnung.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Eine Schaltfläche zum Speichern der aktuell aufgezeichneten Reise als GPX-Datei und zum Fortsetzen der Aufzeichnung eines neuen Tracks ohne Unterbrechung.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Aufgezeichnete Reise &amp; Weiter</string>
+    <string name="new_trip_segment">Neuer Reiseabschnitt</string>
+    <string name="quick_action_start_pause_recording">Eine Schaltfläche zum Starten, Anhalten oder Fortsetzen der Aufzeichnung des GPX-Tracks.</string>
+    <string name="third_links">Externe Links</string>
+    <string name="new_segment_started_m">Die Aufzeichnung eines neuen Tracksegments wurde gestartet.</string>
+    <string name="quick_action_new_trip_segment">Eine Schaltfläche zum Starten eines neuen Segments in der laufenden GPX-Track-Aufzeichnung.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Schaltfläche zum Ein- und Ausblenden von lokalen OSM-Bearbeitungen auf der Karte.</string>
 </resources>

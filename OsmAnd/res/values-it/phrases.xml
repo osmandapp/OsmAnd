@@ -347,7 +347,7 @@
     <string name="poi_public_transport_platform_trolleybus">Fermata filobus</string>
     <string name="poi_railway_station">Stazione ferroviaria</string>
     <string name="poi_water_well">Pozzo</string>
-    <string name="poi_standpipe">Fontanella</string>
+    <string name="poi_standpipe">Tubazione montante d\'acqua</string>
     <string name="poi_water_works">Impianto idrico</string>
     <string name="poi_boatyard">Cantiere navale</string>
     <string name="poi_water_tower">Torre idrica</string>
