@@ -5859,7 +5859,6 @@
     <string name="driving_region_uk">Reino Unido y similares</string>
     <string name="contour_layers_action_descr">Cambia las capas del contorno</string>
     <string name="change_zoom_action_descr">Cambia el zum del mapa.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar senderos para motocross</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Muestra senderos para motocross</string>
     <string name="route_roundabout_exit">Toma la %1$dª salida</string>
     <string name="help_article_map_tracks_name">Trazas</string>

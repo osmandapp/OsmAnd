@@ -5879,7 +5879,6 @@
     <string name="corner_radius">Raio do canto</string>
     <string name="contour_layers_action_descr">Alterar camadas de contorno</string>
     <string name="type_of_activity">Tipo de atividade</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar trilhas de terra para bicicletas</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>

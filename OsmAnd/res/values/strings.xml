@@ -50,7 +50,7 @@
     <string name="map_3d_mode_action_descr">Change map tilt.</string>
     <string name="drawer_button_description">Opens the main menu.</string>
     <string name="configure_map_description">Change map style, layers, or other settings.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirt bike trails</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
     <string name="type_of_activity">Type of activity</string>
     <string name="change_activity">Change activity</string>

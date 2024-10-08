@@ -5883,7 +5883,6 @@
     <string name="navigation_action_descr">Отвара навођење.</string>
     <string name="my_location_action_descr">Средишти карту на Вашем тренутном положају.</string>
     <string name="map_3d_mode_action_descr">Промени нагиб карте.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Прикажи утабане бициклистичке стазе</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Прикажи утабане бициклистичке стазе</string>
     <string name="raster_layers_action_descr">Промени сликовне слојеве</string>
     <string name="drawer_button_description">Отвара главног изборника.</string>

@@ -5887,7 +5887,6 @@
     <string name="drawer_button_description">Abre el menú principal.</string>
     <string name="navigation_action_descr">Abre la navegación.</string>
     <string name="configure_map_description">Cambiar el estilo del mapa, las capas u otras configuraciones.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar senderos para motos de cross</string>
     <string name="type_of_activity">Tipo de actividad</string>
     <string name="change_activity">Cambiar actividad</string>
     <string name="shared_string_increase">Aumentar</string>

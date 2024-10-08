@@ -5885,7 +5885,6 @@
     <string name="map_3d_mode_action_descr">Térképdőlés módosítása.</string>
     <string name="drawer_button_description">Megnyitja a főmenüt.</string>
     <string name="configure_map_description">Térkép stílusának, rétegeinek, egyéb beállításainak módosítása.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Crossmotor utak mutatása</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Crossmotor utak mutatása</string>
     <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
     <string name="change_activity">Tevékenység módosítása</string>
