@@ -683,6 +683,25 @@ public class OsmandSettings {
 		settingsAPI.edit(profilePrefs).remove(LAST_PREFERENCES_EDIT_TIME).commit();
 	}
 
+	public void removePreferences(@NonNull List<CommonPreference<?>> preferences) {
+		List<String> globalIds = new ArrayList<>();
+		List<String> profileIds = new ArrayList<>();
+		for (CommonPreference<?> preference : preferences) {
+			String id = preference.getId();
+			if (preference.isGlobal()) {
+				globalIds.add(id);
+			} else {
+				profileIds.add(id);
+			}
+		}
+		if (!globalIds.isEmpty()) {
+			removeGlobalPreferences(globalIds.toArray(new String[]{}));
+		}
+		if (!profileIds.isEmpty()) {
+			removeProfilePreferences(profileIds.toArray(new String[]{}));
+		}
+	}
+
 	public void removeGlobalPreferences(@NonNull String... prefIds) {
 		removePreferences(globalPreferences, prefIds);
 	}

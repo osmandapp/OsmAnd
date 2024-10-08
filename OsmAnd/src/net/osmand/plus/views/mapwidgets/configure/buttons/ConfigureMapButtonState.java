@@ -19,7 +19,7 @@ public class ConfigureMapButtonState extends MapButtonState {
 
 	public ConfigureMapButtonState(@NonNull OsmandApplication app) {
 		super(app, LAYERS_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull
