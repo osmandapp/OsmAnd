@@ -116,8 +116,8 @@
     <string name="depth_contour_descr">Контуры морских глубин и отметки.</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
-    <string name="quick_action_auto_zoom">Переключатель автомасштаба карты</string>
-    <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
+    <string name="quick_action_auto_zoom">Автомасштаб карты</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка включения автомасштабирования на основе скорости.</string>
     <string name="quick_action_auto_zoom_on">Включить автомасштабирование</string>
     <string name="quick_action_auto_zoom_off">Выключить автомасштабирование</string>
     <string name="quick_action_add_destination_desc">Добавление нового пункта назначения в центре экрана. Ранее выбранный конечный пункт станет последним промежуточным.</string>
