@@ -353,7 +353,7 @@
     <string name="lang_ko">Kóreska</string>
     <string name="lang_lv">Lettneska</string>
     <string name="lang_lt">Litháíska</string>
-    <string name="lang_mr">Marathi</string>
+    <string name="lang_mr">Marathí</string>
     <string name="lang_no">Norskt bókmál</string>
     <string name="lang_fa">Persneska</string>
     <string name="lang_pl">Pólska</string>
@@ -556,7 +556,7 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mi/klst</string>
-    <string name="mile">mi</string>
+    <string name="mile">míl</string>
     <string name="add_waypoint_dialog_added">GPX-ferilpunkti \'\'{0}\'\' var bætt við</string>
     <string name="add_waypoint_dialog_title">Bæta ferilpunkti við GPX-feril</string>
     <string name="amenity_type_administrative">Stjórnsýsla</string>
@@ -4650,7 +4650,7 @@
     <string name="live_update_frequency_hour_variant">Uppfærslur korta eru athugaðar á klukkustundar fresti.</string>
     <string name="altitude_correction">Hæðarleiðrétting</string>
     <string name="kg">kg</string>
-    <string name="compass_click_desc">Ábending: Ýttu á áttavitahnappinn til að breyta stefnu kortsins.</string>
+    <string name="compass_click_desc">Ýttu tvisvar á áttavitahnappinn til að breyta stefnu kortsins.</string>
     <string name="average_speed_skip_stops">Taka mið af stoppum</string>
     <string name="gps_info_widget_desc">Sýnir fjölda gervitungla sem tækið finnur og notar í augnablikinu.</string>
     <string name="max_speed_widget_desc">Sýnir hraðatakmarkanir á veginum sem verið er að aka.</string>
@@ -5706,4 +5706,9 @@
     <string name="unchanged_parameter_summary">Hver ferill mun halda sínum færibreytum.</string>
     <string name="location_radius">Radíus staðsetningar</string>
     <string name="rendering_attr_alpineHiking_name">Flokkun stíga í erfiðleikastig</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Drulluhjólaleiðir</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Sýna drulluhjólaleiðir</string>
+    <string name="battery_saving_mode">Rafhlöðusparnaðarhamur</string>
+    <string name="vertical_exaggeration_description">Með því að breyta gildi kvarðans geturðu ýkt þrívíddaryfirborðið.</string>
+    <string name="track_vertical_exaggeration_description">Með því að breyta gildi kvarðans geturðu breytt hæð þrívíddarferilsins.</string>
 </resources>
