@@ -5981,4 +5981,6 @@
     <string name="lock_screen">Lås skærm</string>
     <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
     <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
+    <string name="liter_per_hour">l/t</string>
 </resources>

@@ -5966,4 +5966,6 @@
     <string name="lock_screen">Verrouiller l’écran</string>
     <string name="help_article_personal_color_palette_schemes_name">Jeux de couleurs</string>
     <string name="quick_action_showhide_osm_edits_descr">Bouton pour afficher ou masquer les modifications OSM apportées à la carte.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Sentiers en terre pour vélos</string>
+    <string name="liter_per_hour">l/h</string>
 </resources>
