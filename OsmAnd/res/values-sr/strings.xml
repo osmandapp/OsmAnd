@@ -5883,7 +5883,7 @@
     <string name="navigation_action_descr">Отвара навођење.</string>
     <string name="my_location_action_descr">Средишти карту на Вашем тренутном положају.</string>
     <string name="map_3d_mode_action_descr">Промени нагиб карте.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Прикажи утабане бициклистичке стазе</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Приказ стаза теренских мотоцикла</string>
     <string name="raster_layers_action_descr">Промени сликовне слојеве</string>
     <string name="drawer_button_description">Отвара главног изборника.</string>
     <string name="configure_map_description">Промени начин приказа карте, слојеве или друге поставке.</string>
@@ -5974,4 +5974,6 @@
     <string name="lock_screen">Закључај екран</string>
     <string name="lock_screen_description">Омогућава или онемогућава функцију екрана осетљивог на додир да спречи случајне додире</string>
     <string name="quick_action_showhide_osm_edits_descr">Дугме за приказ или сакривање локалних ОСМ измена на мапи.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Стазе теренских мотоцикла</string>
+    <string name="liter_per_hour">l/h</string>
 </resources>
