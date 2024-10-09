@@ -1,26 +1,5 @@
 package net.osmand.router;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.PlatformUtil;
@@ -40,6 +19,15 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.*;
 
 public class RouteResultPreparation {
 
@@ -1280,6 +1268,9 @@ public class RouteResultPreparation {
 		if (rr.getObject().roundabout()) {
 			return processRoundaboutTurn(result, i, leftSide, prev, rr);
 		}
+		if (rr.getObject().miniRoundabout() && prev.getObject().miniRoundabout()) {
+			return processMiniRoundaboutTurn(result, i, leftSide);
+		}
 		TurnType t = null;
 		if (prev != null) {
 			// avoid small zigzags is covered at (search for "zigzags")
@@ -1455,6 +1446,34 @@ public class RouteResultPreparation {
 			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
 		}
 		return t;
+	}
+
+	private TurnType processMiniRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide) {
+		RouteSegmentResult currentSegm = result.get(i);
+		RouteSegmentResult prevSegm = result.get(i - 1);
+		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+		boolean clockwise = currentSegm.getObject().isClockwise(leftSide);
+		if(!Algorithms.isEmpty(attachedRoutes)) {
+			RoadSplitStructure rs = calculateSimpleRoadSplitStructure(prevSegm, currentSegm, attachedRoutes);
+			int rightAttaches = rs.roadsOnRight;
+			int leftAttaches = rs.roadsOnLeft;
+			int exit = 1;
+			if (clockwise) {
+				exit += leftAttaches;
+			} else {
+				exit += rightAttaches;
+			}
+			TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
+			float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(currentSegm.getBearingBegin(), prevSegm.getBearingEnd());
+			float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(currentSegm.getBearingBegin(), prevSegm.getBearingEnd() + 180);
+			if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
+				t.setTurnAngle(turnAngleBasedOnCircle) ;
+			} else {
+				t.setTurnAngle(turnAngleBasedOnOutRoads) ;
+			}
+			return t;
+		}
+		return null;
 	}
 	
 	private static class AttachedRoadInfo {
@@ -1660,6 +1679,29 @@ public class RouteResultPreparation {
 
 		
 		return TurnType.valueOf(keepTurnType, leftSide);
+	}
+
+	private RoadSplitStructure calculateSimpleRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, List<RouteSegmentResult> attachedRoutes) {
+		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
+		double currentAngle = MapUtils.normalizeDegrees360(currentSegm.getBearingBegin());
+		RoadSplitStructure rs = new RoadSplitStructure();
+		for (RouteSegmentResult attached : attachedRoutes) {
+			double attachedAngle = MapUtils.normalizeDegrees360(attached.getBearingBegin());
+			boolean rightSide;
+			if (prevAngle > currentAngle) {
+				rightSide = attachedAngle > currentAngle && attachedAngle < prevAngle;
+			} else {
+				boolean leftSide = attachedAngle > prevAngle && attachedAngle < currentAngle;
+				rightSide = !leftSide;
+			}
+
+			if (rightSide) {
+				rs.roadsOnRight++;
+			} else {
+				rs.roadsOnLeft++;
+			}
+		}
+		return rs;
 	}
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
