@@ -1,14 +1,10 @@
 package net.osmand.plus.configmap.routes;
 
-import static net.osmand.osm.OsmRouteType.ALPINE;
-import static net.osmand.osm.OsmRouteType.BICYCLE;
-import static net.osmand.osm.OsmRouteType.HIKING;
-import static net.osmand.osm.OsmRouteType.HORSE;
-import static net.osmand.osm.OsmRouteType.MTB;
-import static net.osmand.osm.OsmRouteType.SKI;
-import static net.osmand.osm.OsmRouteType.WATER;
+import static net.osmand.osm.OsmRouteType.*;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -36,6 +32,7 @@ public class RouteUtils {
 	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
 	public static final String SHOW_MTB_SCALE = "showMtbScale";
 	public static final String SHOW_MTB_SCALE_UPHILL = "showMtbScaleUphill";
+	public static final String TRAVEL_ROUTES = "travel_routes";
 
 	public static void showRendererSnackbarForAttr(@NonNull MapActivity activity,
 	                                               @NonNull String attrName, boolean nightMode,
@@ -97,4 +94,30 @@ public class RouteUtils {
 		return attrs;
 	}
 
+	@DrawableRes
+	public static int getIconIdForAttr(@NonNull String attrName) {
+		if (BICYCLE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_bicycle_dark;
+		} else if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_mountain_bike;
+		} else if (WATER.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_kayak;
+		} else if (HORSE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_horse;
+		} else if (HIKING.getRenderingPropertyAttr().equals(attrName)
+				|| ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_trekking_dark;
+		} else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_skiing;
+		} else if (FITNESS.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.mx_sport_athletics;
+		} else if (RUNNING.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.mx_running;
+		} else if (TRAVEL_ROUTES.equals(attrName)) {
+			return R.drawable.mm_routes;
+		} else if (DIRTBIKE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_dirt_motorcycle;
+		}
+		return INVALID_ID;
+	}
 }

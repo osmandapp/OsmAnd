@@ -1,17 +1,16 @@
 package net.osmand.shared.obd
 
-open class OBDDataField(
+import net.osmand.shared.extensions.currentTimeMillis
+
+open class OBDDataField<T>(
 	val type: OBDDataFieldType,
-	private val stringValue: String) {
+	val value: T) {
+	var timestamp = currentTimeMillis()
 	fun getDisplayName(): String {
 		return type.getDisplayName()
 	}
 
 	fun getDisplayUnit(): String {
 		return type.getDisplayUnit()
-	}
-
-	open fun getValue(): String {
-		return stringValue
 	}
 }

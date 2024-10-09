@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">Палеонтологічний об’єкт</string>
-    <string name="poi_bakery">Пекарня</string>
+    <string name="poi_bakery">Булочна</string>
     <string name="poi_alcohol">Спиртні напої</string>
     <string name="poi_convenience">Міні-маркет</string>
     <string name="poi_mall">Торговельний центр</string>
@@ -4873,4 +4873,5 @@
     <string name="poi_cash_in_customers">Клієнти</string>
     <string name="poi_cash_in">Поповнення готівки</string>
     <string name="poi_diet_pescetarian_no">Пескетаріанська дієта: ні</string>
+    <string name="poi_osmand_access_main_tag">Доступ</string>
 </resources>

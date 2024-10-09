@@ -4363,4 +4363,8 @@
     <string name="shared_string_no_internet_connection">Няма връзка с интернет</string>
     <string name="no_internet_descr">Проверете връзката и пробвайте отново.</string>
     <string name="track_does_not_contain_data_to_save">Трасето не съдържа информация, която да бъде запазена.</string>
+    <string name="quick_action_finish_trip_recording_summary">Бутон за запзване на трасето в GPX и приключване на записа на пътуването.</string>
+    <string name="new_segment_started_m">Започнат запис на нов сегмент от трасето.</string>
+    <string name="lock_screen_description">Включва или изключва сензорния екран, за да предотврати случайни докосвания</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон за запазване на текущото записано пътуване като GPX файл и продължаване на записа на нова следа без прекъсване.</string>
 </resources>

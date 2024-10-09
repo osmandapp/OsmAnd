@@ -5877,7 +5877,6 @@
     <string name="map_3d_mode_action_descr">Cambia l\'inclinazione della mappa.</string>
     <string name="drawer_button_description">Apre il menu principale.</string>
     <string name="configure_map_description">Modifica lo stile della mappa, i livelli o altre impostazioni.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostra percorsi per moto da cross</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Mostra percorsi per bici da cross</string>
     <string name="contour_layers_action_descr">Cambia i livelli di contorno</string>
     <string name="type_of_activity">Tipo di attività</string>

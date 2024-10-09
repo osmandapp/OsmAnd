@@ -5876,7 +5876,6 @@
     <string name="map_3d_mode_action_descr">Zmeniť sklon mapy.</string>
     <string name="drawer_button_description">Otvorí hlavné menu.</string>
     <string name="configure_map_description">Zmeniť štýl mapy, vrstvy a iné nastavenia.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Zobraziť blatisté cyklocesty</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Zobraziť blatisté cyklocesty</string>
     <string name="raster_layers_action_descr">Zmeniť rastrové vrstvy</string>
     <string name="contour_layers_action_descr">Zmeniť vrstvy vrstevníc</string>

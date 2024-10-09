@@ -67,7 +67,7 @@ public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.viewWidth = viewWidth;
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 	}
 
 	public void setItems(@NonNull List<Object> items) {

@@ -5903,7 +5903,6 @@
     <string name="raster_layers_action_descr">Cambia las capas rasterizadas</string>
     <string name="my_location_action_descr">Centra el mapa en tu ubicación actual.</string>
     <string name="contour_layers_action_descr">Cambia las capas del contorno</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar senderos para motocross</string>
     <string name="type_of_activity">Tipo de actividad</string>
     <string name="change_activity">Cambiar actividad</string>
     <string name="shared_string_increase">Aumentar</string>

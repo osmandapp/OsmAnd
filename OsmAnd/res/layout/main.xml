@@ -20,9 +20,9 @@
 				android:id="@+id/map_view_with_layers"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:orientation="vertical"/>
+				android:orientation="vertical" />
 
-			<FrameLayout
+			<net.osmand.plus.views.controls.MapHudLayout
 				android:id="@+id/MapHudButtonsOverlay"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
@@ -45,10 +45,7 @@
 					android:id="@+id/MapHudButtonsOverlayQuickActions"
 					layout="@layout/map_hud_quick_actions" />
 
-				<include
-					android:id="@+id/MapHudButtonsOverlay3DMode"
-					layout="@layout/map_hud_3d_mode" />
-			</FrameLayout>
+			</net.osmand.plus.views.controls.MapHudLayout>
 
 			<FrameLayout
 				android:layout_width="match_parent"
@@ -73,8 +70,6 @@
 				android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 		</FrameLayout>
-
-
 
 	</LinearLayout>
 

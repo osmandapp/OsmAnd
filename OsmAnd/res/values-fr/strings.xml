@@ -5871,7 +5871,6 @@
     <string name="raster_layers_action_descr">Modifier les couches matricielles</string>
     <string name="contour_layers_action_descr">Modifier les couches de lignes de niveau</string>
     <string name="configure_map_description">Modifier le style de carte, les couches ou d\'autres paramètres.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Afficher les sentiers de terre pour vélos</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Afficher les sentiers de terre pour vélos</string>
     <string name="change_zoom_action_descr">Modifier le zoom de la carte.</string>
     <string name="search_action_descr">Ouvre la recherche.</string>

@@ -826,6 +826,15 @@ public class AndroidUtils {
 		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
 	}
 
+	@NonNull
+	public static Rect getViewBoundOnWindow(@NonNull View view) {
+		int[] pixel = new int[2];
+		view.getLocationInWindow(pixel);
+		int left = pixel[0];
+		int top = pixel[1];
+		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
+	}
+
 	public static int[] getCenterViewCoordinates(@NonNull View view) {
 		int[] coordinates = new int[2];
 		view.getLocationOnScreen(coordinates);

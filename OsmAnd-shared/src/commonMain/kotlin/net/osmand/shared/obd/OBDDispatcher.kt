@@ -7,8 +7,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
-import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.extensions.format
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
 import okio.Buffer
@@ -24,12 +23,11 @@ object OBDDispatcher {
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
-	private const val TERMINATE_SYMBOL = "\r\r>"
-	private const val RESPONSE_LINE_TERMINATOR = "\r"
 	private var job: Job? = null
 	private var scope: CoroutineScope? = null
 	private var readStatusListener: OBDReadStatusListener? = null
-	private val sensorDataCache = HashMap<OBDCommand, OBDDataField?>()
+	private val sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
+	private var obd2Connection: Obd2Connection? = null
 
 	interface OBDReadStatusListener {
 		fun onIOError()
@@ -41,81 +39,37 @@ object OBDDispatcher {
 		scope!!.launch {
 			try {
 				log.debug("Start reading obd with $inputStream and $outputStream")
-				while (inputStream != null && outputStream != null) {
-					val inStream = inputStream!!
-					val outStream = outputStream!!
+				obd2Connection = Obd2Connection(object : UnderlyingTransport {
+					override fun write(bytes: ByteArray) {
+						val buffer = Buffer()
+						buffer.write(bytes)
+						outputStream?.write(buffer, buffer.size)
+					}
+
+					override fun readByte(): Byte? {
+						val readBuffer = Buffer()
+						return if (inputStream?.read(readBuffer, 1) == 1L) {
+							readBuffer.readByte()
+						} else {
+							null
+						}
+					}
+				})
+				while (true) {
 					try {
 						for (command in commandQueue) {
 							if (command.isStale) {
 								val cachedCommandResponse = staleCommandsCache[command]
 								if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
-									consumeResponse(command, cachedCommandResponse)
 									continue
 								}
 							}
-							val fullCommand = "${command.commandGroup}${command.command}\r"
-							val bufferToWrite = Buffer()
-							bufferToWrite.write(fullCommand.encodeToByteArray())
-							outStream.write(bufferToWrite, bufferToWrite.size)
-							outStream.flush()
-							log.debug("sent $fullCommand command")
-							val readBuffer = Buffer()
-							var resultRaw = StringBuilder()
-							var readResponseFailed = false
-							try {
-								val startReadTime = currentTimeMillis()
-								while (true) {
-									if (Clock.System.now()
-											.toEpochMilliseconds() - startReadTime > 3000) {
-										readResponseFailed = true
-										log.error("Read command ${command.name} timeout")
-										break
-									}
-									val bytesRead = inStream.read(readBuffer, 1024)
-									log.debug("read $bytesRead bytes")
-									if (bytesRead == -1L) {
-										log.debug("end of stream")
-										break
-									}
-									val receivedData = readBuffer.readByteArray()
-									resultRaw.append(receivedData.decodeToString())
-
-									log.debug("response so far ${resultRaw}")
-									if (resultRaw.contains(TERMINATE_SYMBOL)) {
-										log.debug("found terminator")
-										break
-									} else {
-										log.debug("no terminator found")
-										log.debug("${resultRaw.lines().size}")
-
-									}
-								}
-							} catch (e: IOException) {
-								log.error("Error reading data: ${e.message}")
-							}
-							if (readResponseFailed) {
-								continue
-							}
-							var response = resultRaw.toString()
-							response = response.replace(TERMINATE_SYMBOL, "")
-							var listResponses = response.split(RESPONSE_LINE_TERMINATOR)
-//							val listResponses = if(command.isMultiPartResponse) {
-//								listOf(response)
-//							} else {
-//							}
-							if(command.isMultiPartResponse) {
-								listResponses = listOf(response.split(RESPONSE_LINE_TERMINATOR).subList(2, listResponses.size).joinToString(separator = ""))
-							}
-							for (responseIndex in 1 until listResponses.size) {
-								val result = command.parseResponse(listResponses[responseIndex])
-								log.debug("raw_response_$responseIndex: $result")
-								consumeResponse(command, result)
-								if (command.isStale) {
-									staleCommandsCache[command] = result
-									break
-								}
-							}
-							log.info("response. ${command.name} **${response.replace('\\', '\\')}")
+							val hexGroupCode = "%02X".format(command.commandGroup)
+							val hexCode = "%02X".format(command.command)
+							val fullCommand = "$hexGroupCode$hexCode"
+							val commandResult =
+								obd2Connection!!.run(fullCommand, command.command, command.commandType)
+							sensorDataCache[command] = command.parseResponse(commandResult)
 						}
 					} catch (error: IOException) {
 						log.error("Run OBD looper error. $error")
@@ -151,27 +105,12 @@ object OBDDispatcher {
 		scope?.cancel()
 		inputStream = readStream
 		outputStream = writeStream
-		if(readStream != null && writeStream != null) {
+		if (readStream != null && writeStream != null) {
 			startReadObdLooper()
 		}
 	}
 
 	fun stopReading() {
 		setReadWriteStreams(null, null)
-	}
-
-	private fun consumeResponse(command: OBDCommand, result: String) {
-		sensorDataCache[command] = when (command) {
-			OBDCommand.OBD_RPM_COMMAND -> OBDDataField(OBDDataFieldType.RPM,  result)
-			OBDCommand.OBD_SPEED_COMMAND -> OBDDataField(OBDDataFieldType.SPEED, result)
-			OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.AIR_INTAKE_TEMP, result)
-			OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> OBDDataField(OBDDataFieldType.COOLANT_TEMP, result)
-			OBDCommand.OBD_FUEL_TYPE_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_TYPE, result)
-			OBDCommand.OBD_VIN_COMMAND -> OBDDataField(OBDDataFieldType.VIN, result)
-			OBDCommand.OBD_FUEL_LEVEL_COMMAND -> OBDDataField(OBDDataFieldType.FUEL_LVL, result)
-			OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> OBDDataField(OBDDataFieldType.AMBIENT_AIR_TEMP, result)
-			OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> OBDDataField(OBDDataFieldType.BATTERY_VOLTAGE, result)
-			else -> null
-		}
 	}
 }

@@ -5891,7 +5891,6 @@
     <string name="map_3d_mode_action_descr">Alterar inclinação do mapa.</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhos de terra para bicicletas</string>
     <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Mostrar trilhos de terra para bicicletas</string>
     <string name="shared_string_dp">dp</string>
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>

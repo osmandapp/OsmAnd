@@ -5899,7 +5899,7 @@
     <string name="raster_layers_action_descr">Змінити растрові шари</string>
     <string name="type_of_activity">Тип активності</string>
     <string name="change_activity">Змінити активність</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Показати стежки для ґрунтового велосипеда</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Стежки для ґрунтового велосипеда</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
     <string name="shared_string_decrease">Зменшити</string>
     <string name="shared_string_increase">Збільшити</string>
@@ -5907,7 +5907,7 @@
     <string name="no_photos_available">Фото відсутні</string>
     <string name="open_in_browser">Відкрити в браузері</string>
     <string name="shared_string_source">Джерело</string>
-    <string name="shared_string_no_internet_connection">Немає підключення до Інтернету</string>
+    <string name="shared_string_no_internet_connection">Зʼєднання з інтернетом відсутнє</string>
     <string name="no_internet_descr">Будь ласка, перевірте з\'єднання та спробуйте ще раз.</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
@@ -5969,5 +5969,7 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
-    <string name="lock_screen">Блокування екрану</string>
+    <string name="lock_screen">Блокування екрана</string>
+    <string name="quick_action_verb_start_pause">Старт / Пауза</string>
+    <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
 </resources>

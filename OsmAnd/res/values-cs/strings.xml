@@ -5853,7 +5853,6 @@
     <string name="rendering_attr_alpineHiking_name">Stupeň obtížnosti turistických tras</string>
     <string name="raster_layers_action_descr">Změnit rastrové vrstvy</string>
     <string name="configure_map_description">Změna stylu mapy, vrstev nebo jiných nastavení.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Zobrazit stezky pro terénní kola</string>
     <string name="change_activity">Změnit aktivitu</string>
     <string name="background_opacity">Neprůhlednost pozadí</string>
     <string name="app_mode_suv">SUV</string>
