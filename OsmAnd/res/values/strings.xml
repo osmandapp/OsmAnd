@@ -10,6 +10,22 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="release_4_9">
+        • Added a full-screen gallery viewer for Wikimedia images\n\n
+        • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
+        • Added the ability to assign activities to tracks and filter them accordingly\n\n
+        • Implemented new quick actions for trip recording and touchscreen lock\n\n
+        • Introduced customizable map button appearance and a precise grid\n\n
+        • Added a context menu and a \"Reset average speed\" action to widgets\n\n
+        • Added new route layer \"Dirt Bike trails\"\n\n
+        • Fixed \"Auto-record track during navigation\"\n\n
+        • Fixed issue with fliped coordinates in RTL\n\n
+        • Fixed missed sensor data for currently recording track\n\n 
+        • Added information about surrounding areas for the selected point\n\n
+        • Added quick action to control visibility of OSM Edits\n\n
+        • Separated visibility parameters for Terrain colorization options\n\n
+        • Added a tappable icon to display access or other road or path attributes\n\n
+    </string>
     <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
 	<string name="liter_per_hour">l/h</string>
 	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
