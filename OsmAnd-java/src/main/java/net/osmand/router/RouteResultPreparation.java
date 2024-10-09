@@ -22,6 +22,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import net.osmand.router.RoadSplitStructure.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -1259,18 +1260,12 @@ public class RouteResultPreparation {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
+		RoundaboutTurn roundaboutTurn = new RoundaboutTurn(result, i, leftSide);
+		if (roundaboutTurn.isRoundaboutExist()) {
+			return roundaboutTurn.getRoundaboutType();
+		}
 		RouteSegmentResult prev = result.get(i - 1) ;
-		if(prev.getObject().roundabout()) {
-			// already analyzed!
-			return null;
-		}
 		RouteSegmentResult rr = result.get(i);
-		if (rr.getObject().roundabout()) {
-			return processRoundaboutTurn(result, i, leftSide, prev, rr);
-		}
-		if (rr.getObject().miniRoundabout() && prev.getObject().miniRoundabout()) {
-			return processMiniRoundaboutTurn(result, i, leftSide);
-		}
 		TurnType t = null;
 		if (prev != null) {
 			// avoid small zigzags is covered at (search for "zigzags")
@@ -1398,122 +1393,6 @@ public class RouteResultPreparation {
 		}
 		return turnSet;
 	}
-
-	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
-			RouteSegmentResult rr) {
-		int exit = 1;
-		RouteSegmentResult last = rr;
-		RouteSegmentResult firstRoundabout = rr;
-		RouteSegmentResult lastRoundabout = rr;
-		
-		for (int j = i; j < result.size(); j++) {
-			RouteSegmentResult rnext = result.get(j);
-			last = rnext;
-			if (rnext.getObject().roundabout()) {
-				lastRoundabout = rnext;
-				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
-				int k = rnext.getStartPointIndex();
-				if (j == i) {
-					// first exit could be immediately after roundabout enter
-//					k = plus ? k + 1 : k - 1;
-				}
-				while (k != rnext.getEndPointIndex()) {
-					int attachedRoads = rnext.getAttachedRoutes(k).size();
-					if(attachedRoads > 0) {
-						exit++;
-					}
-					k = plus ? k + 1 : k - 1;
-				}
-			} else {
-				break;
-			}
-		}
-		// combine all roundabouts
-		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
-		// usually covers more than expected
-		float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd());
-		// Angle based on circle method tries 
-		// 1. to calculate antinormal to roundabout circle on roundabout entrance and 
-		// 2. normal to roundabout circle on roundabout exit
-		// 3. calculate angle difference
-		// This method doesn't work if you go from S to N touching only 1 point of roundabout, 
-		// but it is very important to identify very sharp or very large angle to understand did you pass whole roundabout or small entrance
-		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
-		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
-			// correctly identify if angle is +- 180, so we approach from left or right side
-			t.setTurnAngle(turnAngleBasedOnCircle) ;
-		} else {
-			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
-		}
-		return t;
-	}
-
-	private TurnType processMiniRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide) {
-		RouteSegmentResult currentSegm = result.get(i);
-		RouteSegmentResult prevSegm = result.get(i - 1);
-		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
-		boolean clockwise = currentSegm.getObject().isClockwise(leftSide);
-		if(!Algorithms.isEmpty(attachedRoutes)) {
-			RoadSplitStructure rs = calculateSimpleRoadSplitStructure(prevSegm, currentSegm, attachedRoutes);
-			int rightAttaches = rs.roadsOnRight;
-			int leftAttaches = rs.roadsOnLeft;
-			int exit = 1;
-			if (clockwise) {
-				exit += leftAttaches;
-			} else {
-				exit += rightAttaches;
-			}
-			TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
-			float turnAngleBasedOnOutRoads = (float) MapUtils.degreesDiff(currentSegm.getBearingBegin(), prevSegm.getBearingEnd());
-			float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(currentSegm.getBearingBegin(), prevSegm.getBearingEnd() + 180);
-			if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
-				t.setTurnAngle(turnAngleBasedOnCircle) ;
-			} else {
-				t.setTurnAngle(turnAngleBasedOnOutRoads) ;
-			}
-			return t;
-		}
-		return null;
-	}
-	
-	private static class AttachedRoadInfo {
-		int[] parsedLanes;
-		double attachedAngle;
-		int lanes;
-		int speakPriority;
-		public boolean attachedOnTheRight;
-		public int turnType;
-	}
-	private class RoadSplitStructure {
-		boolean keepLeft = false;
-		boolean keepRight = false;
-		boolean speak = false;
-		
-		List<AttachedRoadInfo> leftLanesInfo = new ArrayList<>();
-		int leftLanes = 0;
-		int leftMaxPrio = 0;
-		int roadsOnLeft = 0;
-		
-		List<AttachedRoadInfo> rightLanesInfo = new ArrayList<>();
-		int rightLanes = 0;
-		int rightMaxPrio = 0;
-		int roadsOnRight = 0;
-		
-		public boolean allAreStraight() {
-			for (AttachedRoadInfo angle : leftLanesInfo) {
-				if (Math.abs(angle.attachedAngle) > TURN_SLIGHT_DEGREE) {
-					return false;
-				}
-			}
-			for (AttachedRoadInfo angle : rightLanesInfo) {
-				if (Math.abs(angle.attachedAngle) > TURN_SLIGHT_DEGREE) {
-					return false;
-				}
-			}
-			return true;
-		}
-	}
-
 
 	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, boolean twiceRoadPresent) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
@@ -1679,29 +1558,6 @@ public class RouteResultPreparation {
 
 		
 		return TurnType.valueOf(keepTurnType, leftSide);
-	}
-
-	private RoadSplitStructure calculateSimpleRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, List<RouteSegmentResult> attachedRoutes) {
-		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
-		double currentAngle = MapUtils.normalizeDegrees360(currentSegm.getBearingBegin());
-		RoadSplitStructure rs = new RoadSplitStructure();
-		for (RouteSegmentResult attached : attachedRoutes) {
-			double attachedAngle = MapUtils.normalizeDegrees360(attached.getBearingBegin());
-			boolean rightSide;
-			if (prevAngle > currentAngle) {
-				rightSide = attachedAngle > currentAngle && attachedAngle < prevAngle;
-			} else {
-				boolean leftSide = attachedAngle > prevAngle && attachedAngle < currentAngle;
-				rightSide = !leftSide;
-			}
-
-			if (rightSide) {
-				rs.roadsOnRight++;
-			} else {
-				rs.roadsOnLeft++;
-			}
-		}
-		return rs;
 	}
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,

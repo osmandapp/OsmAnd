@@ -701,22 +701,6 @@ public class RouteDataObject {
 		return false;
 	}
 
-	public boolean miniRoundabout() {
-		if (pointTypes != null) {
-			for (int[] tt : pointTypes) {
-				if (tt == null) {
-					continue;
-				}
-				for (int t : tt) {
-					RouteTypeRule r = region.quickGetEncodingRule(t);
-					if (r.getValue().equals("mini_roundabout"))
-						return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public boolean isClockwise(boolean leftSide) {
 		if (pointTypes != null) {
 			for (int[] tt : pointTypes) {
