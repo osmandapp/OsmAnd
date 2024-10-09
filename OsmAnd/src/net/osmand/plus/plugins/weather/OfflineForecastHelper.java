@@ -68,7 +68,6 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -834,7 +833,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public void removePreferences(@NonNull String regionId) {
 		String[] prefKeys = getPreferenceKeys(regionId);
-		settings.removeGlobalPreferences(prefKeys);
+		settings.removeFromGlobalPreferences(prefKeys);
 	}
 
 	private void updateWeatherLayers() {

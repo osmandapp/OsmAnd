@@ -160,7 +160,7 @@ public class FabMarginPreference {
 	}
 
 	@NonNull
-	public List<CommonPreference<?>> getPreferences() {
+	public List<CommonPreference<?>> getInternalPrefs() {
 		return Arrays.asList(fabMarginXPortrait, fabMarginYPortrait, fabMarginXLandscape, fabMarginYLandscape);
 	}
 }

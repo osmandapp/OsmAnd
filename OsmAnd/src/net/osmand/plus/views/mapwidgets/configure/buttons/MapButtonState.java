@@ -161,7 +161,7 @@ public abstract class MapButtonState {
 
 	@NonNull
 	protected FabMarginPreference addPreference(@NonNull FabMarginPreference fabMarginPreference) {
-		allPreferences.addAll(fabMarginPreference.getPreferences());
+		allPreferences.addAll(fabMarginPreference.getInternalPrefs());
 		return fabMarginPreference;
 	}
 
