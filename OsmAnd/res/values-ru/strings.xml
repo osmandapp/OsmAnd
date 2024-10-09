@@ -5980,4 +5980,5 @@
     <string name="quick_action_save_recorded_trip_and_continue">Запись маршрута и продолжение</string>
     <string name="quick_action_showhide_osm_edits_descr">Переключатель для отображения или скрытия правок OSM на карте.</string>
     <string name="lock_screen_description">Включение/отключение сенсорного экрана для предотвращения случайных нажатий</string>
+    <string name="liter_per_hour">л/ч</string>
 </resources>
