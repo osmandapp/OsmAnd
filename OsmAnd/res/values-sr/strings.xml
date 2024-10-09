@@ -625,7 +625,7 @@
     <string name="rendering_attr_moreDetailed_name">Више појединости</string>
     <string name="rendering_attr_lessDetailed_name">Мање појединости</string>
     <string name="rendering_attr_hideAccess_name">Забране приступа</string>
-    <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа и путарина</string>
+    <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
     <string name="rendering_attr_showCycleRoutes_name">Бициклистичке стазе</string>
