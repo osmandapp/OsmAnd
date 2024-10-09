@@ -69,7 +69,9 @@ object OBDDispatcher {
 							val fullCommand = "$hexGroupCode$hexCode"
 							val commandResult =
 								obd2Connection!!.run(fullCommand, command.command, command.commandType)
-							sensorDataCache[command] = command.parseResponse(commandResult)
+							if(commandResult.isValid()) {
+								sensorDataCache[command] = command.parseResponse(commandResult.result)
+							}
 						}
 					} catch (error: IOException) {
 						log.error("Run OBD looper error. $error")

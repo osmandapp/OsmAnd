@@ -22,7 +22,7 @@ class OBDTest {
 		var fuelLevel = fuelLevelStart
 		var time: Long = currentTimeMillis()
 		for (i in 0 .. 600) {
-			val map = HashMap<OBDCommand, OBDDataField>()
+			val map = HashMap<OBDCommand, OBDDataField<Any>>()
 			map[OBDCommand.OBD_FUEL_LEVEL_COMMAND] = OBDDataField(OBDDataFieldType.FUEL_LVL, fuelLevel.toString())
 			OBDDataComputer.acceptValue(map)
 			val now = currentTimeMillis()

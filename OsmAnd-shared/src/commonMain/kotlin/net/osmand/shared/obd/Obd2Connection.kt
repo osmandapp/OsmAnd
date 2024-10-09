@@ -41,7 +41,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 	fun run(
 		fullCommand: String,
 		command: Int,
-		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): IntArray {
+		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
 		var response = runImpl(fullCommand)
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
@@ -59,10 +59,11 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"BUSERROR",
 			"STOPPED"
 		)
+		log.debug("post-processed response without side data $response")
 		when (response) {
-			"OK" -> return intArrayOf(1)
-			"?" -> return intArrayOf(0)
-			"NODATA" -> return intArrayOf()
+			"OK" -> return OBDResponse.OK
+			"?" -> return OBDResponse.QUESTION_MARK
+			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> throw Exception("connection failure")
 			"CANERROR" -> throw Exception("CAN bus error")
 		}
@@ -75,7 +76,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			} else {
 				hexValues = hexValues.copyOfRange(2, hexValues.size)
 			}
-			return hexValues
+			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
 			log.debug(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
@@ -157,11 +158,11 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		var basePid = 1
 		for (pid in pids) {
 			val responseData = run(pid, 0x01)
-			if (responseData.size >= 6) {
-				val byte0 = responseData[2].toByte()
-				val byte1 = responseData[3].toByte()
-				val byte2 = responseData[4].toByte()
-				val byte3 = responseData[5].toByte()
+			if (responseData.result.size >= 6) {
+				val byte0 = responseData.result[2].toByte()
+				val byte1 = responseData.result[3].toByte()
+				val byte2 = responseData.result[4].toByte()
+				val byte3 = responseData.result[5].toByte()
 				log.debug(
 					"Supported PID at base $basePid payload %02X%02X%02X%02X".format(
 						byte0,
