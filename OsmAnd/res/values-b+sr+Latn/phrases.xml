@@ -4874,4 +4874,8 @@
     <string name="poi_diet_pescetarian_no">Pesketarska dieta: ne</string>
     <string name="poi_cash_in">Keš depozit</string>
     <string name="poi_osmand_access_main_tag">Pristup</string>
+    <string name="poi_payment_parco_no">Parko se ne prima</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">Parkster se ne prima</string>
+    <string name="poi_payment_parco_yes">Parko</string>
 </resources>
