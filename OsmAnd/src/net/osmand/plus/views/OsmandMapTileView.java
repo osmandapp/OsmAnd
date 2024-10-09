@@ -22,14 +22,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
-import android.view.GestureDetector;
+import android.view.*;
 import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.InputDevice;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -348,6 +342,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 				return super.onTouchEvent(event);
 			}
+
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
@@ -355,7 +350,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					return;
 				}
 
-				Zoom zoom = new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
+				Zoom zoom = getCurrentZoom();
 				if (zoom.isZoomOutAllowed()) {
 					zoom.zoomOut();
 					getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
@@ -596,7 +591,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimatingSync();
 		}
 
-		Zoom zoom = new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
+		Zoom zoom = getCurrentZoom();
+		int previousZoom = zoom.getBaseZoom();
 
 		if (zoomStep > 0 && !zoom.isZoomInAllowed()) {
 			Toast.makeText(application, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
@@ -609,7 +605,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		zoom.changeZoom(zoomStep);
 		animatedDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
 		if (adjustTiltAngle && MultiTouchSupport.isTiltSupportEnabled(application)) {
-			adjustTiltAngle(zoom);
+			adjustTiltAngle(zoom, previousZoom);
 		}
 
 		mapViewTrackingUtilities.setZoomTime(System.currentTimeMillis());
@@ -636,11 +632,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		setElevationAngle(angle);
 	}
 
-	private void adjustTiltAngle(@NonNull Zoom zoom) {
+	private void adjustTiltAngle(@NonNull Zoom zoom, int previousZoom) {
 		int baseZoom = zoom.getBaseZoom();
 		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
+			float previousAngle = getElevationAngle();
 			int angle = getAdjustedTiltAngle(baseZoom, false);
-			animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
+			if (baseZoom >= previousZoom || angle >= previousAngle) {
+				animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
+			}
 		}
 	}
 
@@ -813,6 +812,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getZoom() {
 		return currentViewport.getZoom();
+	}
+
+	@NonNull
+	public Zoom getCurrentZoom() {
+		return new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
 	}
 
 	public int getBaseZoom() {
@@ -1535,8 +1539,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void zoomToAnimate(@NonNull RotatedTileBox initialViewport, float deltaZoom, int centerX, int centerY) {
-		Zoom zoom = new Zoom(initialViewport.getZoom(), (float) initialViewport.getZoomFloatPart(), getMinZoom(), getMaxZoom());
+	private void zoomToAnimate(@NonNull RotatedTileBox tileBox, float deltaZoom, int centerX, int centerY) {
+		Zoom zoom = new Zoom(tileBox.getZoom(), (float) tileBox.getZoomFloatPart(), getMinZoom(), getMaxZoom());
 		zoom.calculateAnimatedZoom(currentViewport.getZoom(), deltaZoom);
 		boolean notify = !(doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode());
 		zoomToAnimate(zoom.getBaseZoom(), zoom.getZoomAnimation(), centerX, centerY, notify);
@@ -2197,7 +2201,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public boolean onDoubleTap(MotionEvent e) {
 			LOG.debug("onDoubleTap getZoom()");
 			if (doubleTapScaleDetector != null && !doubleTapScaleDetector.isInZoomMode()) {
-				Zoom zoom = new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
+				Zoom zoom = getCurrentZoom();
 				if (zoom.isZoomInAllowed()) {
 					zoom.zoomIn();
 
