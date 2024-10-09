@@ -1385,7 +1385,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
-    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa i putarina</string>
+    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa</string>
     <string name="rendering_attr_hideAccess_name">Zabrane pristupa</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
@@ -1975,7 +1975,7 @@
     <string name="lang_lt">Litvanski</string>
     <string name="lang_lv">Letonski</string>
     <string name="lang_ko">Korejski</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kanada</string>
     <string name="lang_ja">Japanski</string>
     <string name="lang_it">Italijanski</string>
     <string name="lang_id">Indonezijski</string>
