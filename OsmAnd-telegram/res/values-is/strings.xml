@@ -113,7 +113,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="gps_network_not_enabled">Kveikja á \"Staðsetning\"\?</string>
     <string name="connected_account">Tengdur aðgangur</string>
-    <string name="mile">mi</string>
+    <string name="mile">míl</string>
     <string name="proxy_username">Notandanafn</string>
     <string name="shared_string_authorization">Heimild</string>
     <string name="unit_of_length">Lengdareiningar</string>
