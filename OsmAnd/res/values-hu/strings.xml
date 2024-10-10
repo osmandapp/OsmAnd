@@ -5885,7 +5885,7 @@
     <string name="map_3d_mode_action_descr">Térképdőlés módosítása.</string>
     <string name="drawer_button_description">Megnyitja a főmenüt.</string>
     <string name="configure_map_description">Térkép stílusának, rétegeinek, egyéb beállításainak módosítása.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Crossmotor utak mutatása</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Krosszmotor utak mutatása</string>
     <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
     <string name="change_activity">Tevékenység módosítása</string>
     <string name="type_of_activity">Tevékenység típusa</string>
@@ -5974,4 +5974,7 @@
     <string name="lock_screen">Képernyő zárolása</string>
     <string name="lock_screen_description">Engedélyezi vagy letiltja az érintőképernyő funkcióit a véletlen érintések elkerülése érdekében</string>
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
+    <string name="liter_per_hour">l/óra</string>
+    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez\n\n</string>
 </resources>
