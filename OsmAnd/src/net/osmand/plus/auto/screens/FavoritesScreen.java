@@ -13,6 +13,7 @@ import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.CarLocation;
 import androidx.car.app.model.DistanceSpan;
+import androidx.car.app.model.Header;
 import androidx.car.app.model.ItemList;
 import androidx.car.app.model.Metadata;
 import androidx.car.app.model.Place;
@@ -44,6 +45,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -58,6 +60,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 	@Nullable
 	private FavoriteGroup selectedGroup;
 	private CompassMode initialCompassMode;
+	private boolean isLeastRecentyUsedGroup;
 
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
@@ -66,6 +69,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		selectedGroup = group;
+		isLeastRecentyUsedGroup = selectedGroup == null;
 		getLifecycle().addObserver(new DefaultLifecycleObserver() {
 			@Override
 			public void onDestroy(@NonNull LifecycleOwner owner) {
@@ -93,13 +97,26 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 	@NonNull
 	@Override
 	public Template onGetTemplate() {
+		boolean sortFavByDistance = getApp().getSettings().SORT_FAV_BY_DISTANCE.get();
 		ItemList.Builder listBuilder = new ItemList.Builder();
-		setupFavorites(listBuilder);
+		setupFavorites(listBuilder, sortFavByDistance);
 		return new PlaceListNavigationTemplate.Builder()
 				.setItemList(listBuilder.build())
-				.setTitle(getApp().getString(R.string.shared_string_favorites))
+				.setHeader(new Header.Builder()
+						.setTitle(getApp().getString(R.string.shared_string_favorites))
+						.setStartHeaderAction(Action.BACK)
+						.addEndHeaderAction(new Action.Builder()
+								.setIcon(new CarIcon.Builder(
+										IconCompat.createWithResource(getCarContext(), sortFavByDistance ? R.drawable.ic_action_sort_short_to_long : R.drawable.ic_action_sort_date_31))
+										.build())
+								.setOnClickListener(() -> {
+									getApp().getSettings().SORT_FAV_BY_DISTANCE.set(!sortFavByDistance);
+									invalidate();
+								})
+								.build())
+						.build()
+				)
 				.setActionStrip(new ActionStrip.Builder().addAction(createSearchAction()).build())
-				.setHeaderAction(Action.BACK)
 				.build();
 	}
 
@@ -108,19 +125,20 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		return ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST;
 	}
 
-	private void setupFavorites(ItemList.Builder listBuilder) {
+	private void setupFavorites(ItemList.Builder listBuilder, boolean sortFavByDistance) {
+		OsmandSettings settings = getApp().getSettings();
+		List<FavouritePoint> favoritePoints = getFavorites();
+		int limitedSize = Math.min(favoritePoints.size(), getContentLimit() -1);
 		LatLon location = getApp().getMapViewTrackingUtilities().getDefaultLocation();
-		List<FavouritePoint> favoritesPoints = getFavorites();
-		int favoritesPointsSize = favoritesPoints.size();
-		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
-		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
+		List<FavoritePointDistance> limitedFavoritePointDistances = toLimitedSortedPointDistanceList(favoritePoints, location, sortFavByDistance, limitedSize);
+		List<FavouritePoint> limitedFavoritePoints = new ArrayList<>(limitedSize);
 		QuadRect mapRect = new QuadRect();
-		if (!Algorithms.isEmpty(limitedFavoritesPoints)) {
-			OsmandSettings settings = getApp().getSettings();
+		if (!Algorithms.isEmpty(limitedFavoritePointDistances)) {
 			initialCompassMode = settings.getCompassMode();
 			getApp().getMapViewTrackingUtilities().switchCompassModeTo(CompassMode.NORTH_IS_UP);
 		}
-		for (FavouritePoint point : limitedFavoritesPoints) {
+		for (FavoritePointDistance favoritePointDistance : limitedFavoritePointDistances) {
+			FavouritePoint point = favoritePointDistance.favorite;
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
 			Algorithms.extendRectToContainPoint(mapRect, longitude, latitude);
@@ -129,10 +147,8 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
 					AndroidUtils.drawableToBitmap(PointImageUtils.getFromPoint(getApp(), color, false, point)))).build();
 			String description = point.getSpecialPointType() != null ? point.getDescription() : point.getCategory();
-			double dist = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
-					location.getLatitude(), location.getLongitude());
 			SpannableString address = new SpannableString(Algorithms.isEmpty(description) ? " " : "  • " + description);
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(getApp(), dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(getApp(), favoritePointDistance.distance));
 			address.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			listBuilder.addItem(new Row.Builder()
 					.setTitle(title)
@@ -142,9 +158,43 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 					.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
+			limitedFavoritePoints.add(point);
 		}
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritePoints);
 		adjustMapToRect(location, mapRect);
 	}
+
+	private static class FavoritePointDistance {
+		private final FavouritePoint favorite;
+		private final double distance;
+		FavoritePointDistance(FavouritePoint favorite, double dist) {
+			this.favorite = favorite;
+			this.distance = dist;
+		}
+	}
+
+	private static List<FavoritePointDistance> toPointDistanceList(List<FavouritePoint> points, LatLon location) {
+		List<FavoritePointDistance> returnList = new ArrayList<>(points.size());
+		for (FavouritePoint point : points) {
+			returnList.add(new FavoritePointDistance(point, MapUtils.getDistance(point.getLatitude(), point.getLongitude(), location.getLatitude(), location.getLongitude())));
+		}
+		return returnList;
+	};
+
+	private List<FavoritePointDistance> toLimitedSortedPointDistanceList(List<FavouritePoint> points, LatLon location, boolean sortByDistance, int limitedSize) {
+		if (sortByDistance && !isLeastRecentyUsedGroup) {
+			List<FavoritePointDistance> pointDistances = toPointDistanceList(points, location);
+			Collections.sort(pointDistances, Comparator.comparingDouble(pointDistance -> pointDistance.distance));
+			return pointDistances.subList(0, limitedSize);
+		} else {
+			Collections.sort(points, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
+			List<FavoritePointDistance> pointDistances = toPointDistanceList(points.subList(0, limitedSize), location);
+			if (sortByDistance) {
+				Collections.sort(pointDistances, Comparator.comparingDouble(pointDistance -> pointDistance.distance));
+			}
+			return pointDistances;
+		}
+	};
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {
 		SearchResult result = new SearchResult();
@@ -163,7 +213,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		} else {
 			filteredFavorites.addAll(selectedGroup.getPoints());
 		}
-		Collections.sort(filteredFavorites, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
 		return filteredFavorites;
 	}
 
