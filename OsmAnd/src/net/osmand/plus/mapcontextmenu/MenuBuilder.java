@@ -72,7 +72,6 @@ import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
@@ -304,9 +303,7 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class)) {
-			buildWithinRow(view);
-		}
+		buildWithinRow(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -412,9 +409,9 @@ public class MenuBuilder {
 				Context context = viewGroup.getContext();
 				View rowContainer = createRowContainer(context, WITHIN_POLYGONS_ROW_KEY);
 				buildDetailsRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
-						app.getString(R.string.transport_nearby_routes),null,
+						app.getString(R.string.transport_nearby_routes), null,
 						MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
-						getWithinCollapsableView(menuObjects),  true, null);
+						getWithinCollapsableView(menuObjects), true, null);
 				viewGroup.addView(rowContainer);
 			}
 		}
