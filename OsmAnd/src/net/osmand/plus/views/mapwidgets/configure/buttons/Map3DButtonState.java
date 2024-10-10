@@ -29,8 +29,8 @@ public class Map3DButtonState extends MapButtonState {
 
 	public Map3DButtonState(@NonNull OsmandApplication app) {
 		super(app, MAP_3D_HUD_ID);
-		fabMarginPref = new FabMarginPreference(app, "map_3d_mode_margin");
-		visibilityPref = settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class).makeProfile().cache();
+		fabMarginPref = addPreference(new FabMarginPreference(app, "map_3d_mode_margin"));
+		visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
 
 		int portraitMargin = AndroidUtils.calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing);
 		int landscapeMargin = AndroidUtils.calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land);

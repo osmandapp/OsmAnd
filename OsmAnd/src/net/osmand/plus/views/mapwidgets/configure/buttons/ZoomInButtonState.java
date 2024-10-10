@@ -18,7 +18,7 @@ public class ZoomInButtonState extends MapButtonState {
 
 	public ZoomInButtonState(@NonNull OsmandApplication app) {
 		super(app, ZOOM_IN_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull

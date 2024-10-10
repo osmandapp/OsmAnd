@@ -47,6 +47,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by okorsun on 23.12.16.
@@ -339,6 +340,35 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	public void invalidateRelatedButtons(@NonNull QuickActionButton trigger) {
+		for (QuickActionButton actionButton : getActionButtons()) {
+			if (isActionButtonsRelated(actionButton, trigger)) {
+				actionButton.setInvalidated(true);
+			}
+		}
+	}
+
+	private boolean isActionButtonsRelated(@NonNull QuickActionButton b1,
+	                                       @NonNull QuickActionButton b2) {
+		QuickActionButtonState s1 = b1.getButtonState();
+		QuickActionButtonState s2 = b2.getButtonState();
+		if (s1 != null && s2 != null) {
+			if (s1.isSingleAction() && s2.isSingleAction()) {
+				QuickAction a1 = s1.getQuickActions().get(0);
+				QuickAction a2 = s2.getQuickActions().get(0);
+				return Objects.equals(a1.getType(), a2.getType());
+
+				// There also can be types those have related UI elements and so should be
+				// updated at the same time. We should implement such functionality.
+				// For example, we can create a collection with nodes, each node is a list
+				// of action types that are related to each other.
+			} else {
+				return Objects.equals(s1.getId(), s2.getId());
+			}
+		}
+		return false;
 	}
 
 	@Override

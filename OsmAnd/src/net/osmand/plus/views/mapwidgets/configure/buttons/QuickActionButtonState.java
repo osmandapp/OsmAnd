@@ -47,14 +47,14 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", false).makeProfile();
-		this.namePref = settings.registerStringPreference(id + "_name", null).makeGlobal().makeShared();
-		this.quickActionsPref = settings.registerStringPreference(id + "_list", null).makeGlobal().makeShared().storeLastModifiedTime();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
+		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
+		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 
 		int portraitMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
 		int landscapeMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
-		fabMarginPref = new FabMarginPreference(app, id + "_fab_margin");
+		fabMarginPref = addPreference(new FabMarginPreference(app, id + "_fab_margin"));
 		fabMarginPref.setDefaultPortraitMargins(Pair.create(0, portraitMargin));
 		fabMarginPref.setDefaultLandscapeMargins(Pair.create(landscapeMargin, 0));
 	}

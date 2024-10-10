@@ -18,7 +18,7 @@ public class ZoomOutButtonState extends MapButtonState {
 
 	public ZoomOutButtonState(@NonNull OsmandApplication app) {
 		super(app, ZOOM_OUT_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull

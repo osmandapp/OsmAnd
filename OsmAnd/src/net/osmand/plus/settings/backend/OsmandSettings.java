@@ -683,8 +683,40 @@ public class OsmandSettings {
 		settingsAPI.edit(profilePrefs).remove(LAST_PREFERENCES_EDIT_TIME).commit();
 	}
 
+	public void removePreferences(@NonNull Collection<CommonPreference<?>> preferences) {
+		Set<String> globalIds = new HashSet<>();
+		Set<String> profileIds = new HashSet<>();
+		for (CommonPreference<?> preference : preferences) {
+			String id = preference.getId();
+			if (preference.isGlobal()) {
+				globalIds.add(id);
+			} else {
+				profileIds.add(id);
+			}
+		}
+		if (!globalIds.isEmpty()) {
+			removeFromGlobalPreferences(globalIds.toArray(new String[]{}));
+		}
+		if (!profileIds.isEmpty()) {
+			removeFromModePreferences(profileIds.toArray(new String[]{}));
+		}
+	}
+
 	public void removeFromGlobalPreferences(@NonNull String... prefIds) {
-		SettingsEditor editor = settingsAPI.edit(globalPreferences);
+		removeFromPreferencesImpl(globalPreferences, prefIds);
+	}
+
+	public void removeFromModePreferences(@NonNull String... prefIds) {
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			Object preferences = getProfilePreferences(appMode);
+			if (preferences != null) {
+				removeFromPreferencesImpl(preferences, prefIds);
+			}
+		}
+	}
+
+	private void removeFromPreferencesImpl(@NonNull Object preferences, @NonNull String... prefIds) {
+		SettingsEditor editor = settingsAPI.edit(preferences);
 		for (String prefId : prefIds) {
 			editor.remove(prefId);
 		}

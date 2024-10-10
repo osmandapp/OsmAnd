@@ -13,6 +13,9 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class FabMarginPreference {
 
 	private static final String X_PORTRAIT_MARGIN = "_x_portrait_margin";
@@ -154,5 +157,10 @@ public class FabMarginPreference {
 
 	public void setDefaultLandscapeMargins(@NonNull Pair<Integer, Integer> margins) {
 		this.defaultLandscapeMargins = margins;
+	}
+
+	@NonNull
+	public List<CommonPreference<?>> getInternalPrefs() {
+		return Arrays.asList(fabMarginXPortrait, fabMarginYPortrait, fabMarginXLandscape, fabMarginYLandscape);
 	}
 }
