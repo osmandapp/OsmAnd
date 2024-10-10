@@ -116,8 +116,8 @@
     <string name="depth_contour_descr">Контуры морских глубин и отметки.</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
-    <string name="quick_action_auto_zoom">Переключатель автомасштаба карты</string>
-    <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
+    <string name="quick_action_auto_zoom">Автомасштаб карты</string>
+    <string name="quick_action_auto_zoom_desc">Кнопка включения автомасштабирования на основе скорости.</string>
     <string name="quick_action_auto_zoom_on">Включить автомасштабирование</string>
     <string name="quick_action_auto_zoom_off">Выключить автомасштабирование</string>
     <string name="quick_action_add_destination_desc">Добавление нового пункта назначения в центре экрана. Ранее выбранный конечный пункт станет последним промежуточным.</string>
@@ -5972,4 +5972,14 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="quick_action_verb_start_pause">Старт/Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Цветовые схемы</string>
+    <string name="new_trip_segment">Новый сегмент маршрута</string>
+    <string name="lock_screen">Блокировка экрана OsmAnd</string>
+    <string name="quick_action_start_pause_recording">Кнопка для запуска, приостановки или возобновления записи GPX-трека.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Кнопка для сохранения текущего записываемого маршрута в виде GPX-файла и продолжения записи нового трека без прерывания.</string>
+    <string name="quick_action_new_trip_segment">Кнопка для начала нового сегмента в текущей записи трека GPX.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Запись маршрута и продолжение</string>
+    <string name="quick_action_showhide_osm_edits_descr">Переключатель для отображения или скрытия правок OSM на карте.</string>
+    <string name="lock_screen_description">Включение/отключение сенсорного экрана для предотвращения случайных нажатий</string>
+    <string name="liter_per_hour">л/ч</string>
+    <string name="release_4_9">• Добавлен полноэкранный просмотр галереи изображений из Викимедиа\n\n• Добавлен новый плагин «Показатели ТС» для мониторинга производительности транспортного средства с использованием протокола OBD-II\n\n• Добавлена возможность назначать трекам активности и фильтровать их соответствующим образом\n\n• Реализованы новые быстрые действия для записи маршрута и блокировки сенсорного экрана\n\n• Введены настраиваемый внешний вид кнопок на карте и сетка для их привязки\n\n• Добавлено контекстное меню и действие «Сбросить среднюю скорость» для виджетов\n\n• Добавлен новый слой маршрута «Трассы для мотокросса»\n\n• Исправлена функция «Автозапись трека при навигации»\n\n• Исправлена проблема с перевернутыми координатами в RTL\n\n• Исправлено отсутствие данных датчиков для текущего записываемого трека\n\n• Добавлена информация об окружающих областях для выбранной точки\n\n• Добавлено быстрое действие для управления видимостью правок OSM\n\n• Разделены параметры видимости для опций окраски рельефа\n\n• Добавлен значок, который можно нажимать для отображения доступа или других атрибутов дороги или пути\n\n</string>
 </resources>

@@ -402,7 +402,7 @@
     <string name="tap_on_map_to_hide_interface_descr">Puudutus kaardil kuvab või peidab juhtnupud ja vidinad.</string>
     <string name="tap_on_map_to_hide_interface">Täisekraanirežiim</string>
     <string name="mark_passed">Märgi läbituks</string>
-    <string name="rename_marker">Nimeta marker ümber</string>
+    <string name="rename_marker">Muuda markeri nime</string>
     <string name="digits_quantity">Komakohtade arv</string>
     <string name="shared_string_right">Paremale</string>
     <string name="shared_string_left">Vasakule</string>
@@ -1169,7 +1169,7 @@
     <string name="shared_string_deselect_all">Eemalda kõik valikud</string>
     <string name="shared_string_clear">Tühjenda</string>
     <string name="shared_string_clear_all">Tühjenda kõik</string>
-    <string name="shared_string_rename">Nimeta ümber</string>
+    <string name="shared_string_rename">Muuda nime</string>
     <string name="shared_string_apply">Rakenda</string>
     <string name="shared_string_io_error">I/O viga</string>
     <string name="shared_string_unexpected_error">Ootamatu viga</string>
@@ -1191,7 +1191,7 @@
     <string name="osmand_parking_plugin_name">Parkimiskoht</string>
     <string name="osmand_distance_planning_plugin_name">Kauguse kalkulaator ja planeerimistöövahend</string>
     <string name="osm_editing_plugin_name">OpenStreetMap\'i muutmine</string>
-    <string name="rename_failed">Ümbernimetamine ei õnnestunud.</string>
+    <string name="rename_failed">Nime muutmine ei õnnestunud.</string>
     <string name="days_behind">päeva maas</string>
     <string name="watch">Vaata</string>
     <string name="rendering_attr_pisteGrooming_name">Nõlva hooldus</string>
@@ -1260,7 +1260,7 @@
     <string name="speed_limit_exceed">Kiiruspiirangu tolerants</string>
     <string name="speed_limit_exceed_message">Vali kiiruspiirangu tolerantsi marginaal, mida ületades saad häälhoiatuse.</string>
     <string name="fav_point_dublicate">Antud korduv lemmiku nimi</string>
-    <string name="fav_point_dublicate_message">Korduvuse vältimiseks nimetatud lemmik ümber %1$s.</string>
+    <string name="fav_point_dublicate_message">Korduvuse vältimiseks muutsime lemmiku uueks nimeks %1$s.</string>
     <string name="text_size_descr">Määra teksti suurus kaardil.</string>
     <string name="text_size">Teksti suurus</string>
     <string name="traffic_warning_speed_limit">Kiiruspiirang</string>
@@ -1930,7 +1930,7 @@
     <string name="city_type_village">Küla</string>
     <string name="city_type_town">Linn</string>
     <string name="city_type_city">Suurlinn</string>
-    <string name="file_can_not_be_renamed">Faili ümbernimetamine ebaõnnestus.</string>
+    <string name="file_can_not_be_renamed">Faili nime muutmine ei õnnestunud.</string>
     <string name="file_with_name_already_exists">Sellise nimega fail on juba olemas.</string>
     <string name="poi_filter_by_name">Otsi nime järgi</string>
     <string name="button_upgrade_osmandplus">Uuenda versioonile OsmAnd+</string>
@@ -2669,7 +2669,7 @@
     <string name="avoid_roads_msg">Vali alternatiivne teekond, valides välditavad teed</string>
     <string name="use_opengl_render_descr">Kasuta riistvarakiirendatud OpenGL tuge (võib kasutada rohkem akut või mitte töötada väga vanades seadmetes).</string>
     <string name="lock_screen_request_explanation">%1$s vajab seda luba ekraani välja lülitamiseks energiasäästu nimel.</string>
-    <string name="fav_point_emoticons_message">Emotikone sisaldava stringi salvestamiseks faili nimetati lemmik ümber \'%1$s\'.</string>
+    <string name="fav_point_emoticons_message">Emotikone sisaldava stringi salvestamiseks faili mutsime lemmiku uueks nimeks \'%1$s\'.</string>
     <string name="background_service_is_enabled_question">OsmAnd taustateenus töötab endiselt. Kas see ka lõpetada\?</string>
     <string name="save_track_to_gpx_globally_descr">GPX faili üldist asukoha logimist saab sisse või välja lülitada kaardil oleva GPX logimisvidina abil.</string>
     <string name="live_monitoring_m_descr">Saada jälgimisandmed kindlaksmääratud veebiteenusele kui GPX logimine on sisse lülitatud.</string>
@@ -3076,7 +3076,7 @@
     <string name="quick_favorites_name_preset">Nime eelseade</string>
     <string name="favorite_autofill_toast_text">" salvestatud "</string>
     <string name="favorite_empty_place_name">Koht</string>
-    <string name="quick_action_duplicates">Dubleerimise vältimiseks nimetati kiirtegevus ümber %1$s.</string>
+    <string name="quick_action_duplicates">Dubleerimise vältimiseks muutsime kiirtegevuse uueks nimeks %1$s.</string>
     <string name="quick_action_duplicate">Kiirtegevuse nime duplikaat</string>
     <string name="quick_action_poi_show">Kuva %1$s</string>
     <string name="quick_action_poi_hide">Peida %1$s</string>
@@ -3966,7 +3966,7 @@
     <string name="temporary_conditional_routing_descr">Kasuta tee piiranguid, mis on kaardil hetkel aktiivsed</string>
     <string name="routing_attr_driving_style_description">Vali sõidu eesmärk, et leida lühem, kiirem või turvalisem marsruut</string>
     <string name="edit_track">Muuda rada</string>
-    <string name="rename_track">Nimeta teekond ümber</string>
+    <string name="rename_track">Muuda teekonna nime</string>
     <string name="show_track_on_map">Kuva teekond kaardil</string>
     <string name="restart">Taaskäivita</string>
     <string name="shared_strings_all_regions">Kõik piirkonnad</string>

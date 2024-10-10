@@ -233,6 +233,23 @@
 				android:layout_marginLeft="@dimen/content_padding_half" />
 		</LinearLayout>
 
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:orientation="horizontal">
+
+			<ToggleButton
+				android:id="@+id/btn13"
+				android:layout_width="250dp"
+				android:layout_height="match_parent" />
+
+			<EditText
+				android:id="@+id/resp13"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginLeft="@dimen/content_padding_half" />
+		</LinearLayout>
+
 	</LinearLayout>
 
 </LinearLayout>

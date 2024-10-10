@@ -325,7 +325,7 @@
     <string name="poi_guest_house">Pensionat</string>
     <string name="poi_hostel">Vandrerhjem</string>
     <string name="poi_motel">Motel</string>
-    <string name="poi_alpine_hut">Alpehytte</string>
+    <string name="poi_alpine_hut">Bjerghytte;Shelter</string>
     <string name="poi_chalet">Udlejningshytte</string>
     <string name="poi_place_of_worship">Sted for tilbedelse</string>
     <string name="poi_religion_christian">Kristendom</string>
@@ -716,7 +716,7 @@
     <string name="poi_charity">Genbrugsbutik, velgørenhed</string>
     <string name="poi_photo">Fotoforretning</string>
     <string name="poi_tomb">Gravkammer</string>
-    <string name="poi_wilderness_hut">Vildmarkshytte</string>
+    <string name="poi_wilderness_hut">Vildmarkshytte;Shelter</string>
     <string name="poi_payment_terminal">Betalingsterminal</string>
     <string name="poi_piste">Piste</string>
     <string name="poi_observation_tower">Udsigtstårn</string>
@@ -1650,7 +1650,7 @@
     <string name="poi_shelter_type_picnic_shelter">Picnic</string>
     <string name="poi_shelter_type_weather_shelter">Tarp</string>
     <string name="poi_shelter_type_lean_to">Shelter</string>
-    <string name="poi_shelter_type_basic_hut">Hytte</string>
+    <string name="poi_shelter_type_basic_hut">Primitiv hytte</string>
     <string name="poi_shelter_type_building">Bygning</string>
     <string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
     <string name="poi_shelter_type_rock_shelter">Klippehule</string>
@@ -1932,7 +1932,7 @@
     <string name="poi_tents_no">Telte ikke tilladt</string>
     <string name="poi_openfire_yes">Åben ild tilladt</string>
     <string name="poi_openfire_no">Åben ild ikke tilladt</string>
-    <string name="poi_backcountry_yes">Ja</string>
+    <string name="poi_backcountry_yes">Ja;Vildmark</string>
     <string name="poi_backcountry_no">Nej</string>
     <string name="poi_scout_yes">Ja</string>
     <string name="poi_scout_no">Spejderlejr: nej</string>
@@ -2789,7 +2789,7 @@
     <string name="poi_information_contents">Indhold</string>
     <string name="poi_clock_option">Yderligere</string>
     <string name="poi_scout_camp">Spejderlejr</string>
-    <string name="poi_backcountry">Bagland</string>
+    <string name="poi_backcountry">Vildmark</string>
     <string name="poi_resort_type">Type</string>
     <string name="poi_piste_difficulty">Pistesværhedsgrad</string>
     <string name="poi_piste_grooming">Pistepleje</string>
@@ -4053,4 +4053,7 @@
     <string name="poi_direction">Retning</string>
     <string name="poi_us_maps_recreation_area_activity_group_picnicking">Gruppe-picnic</string>
     <string name="poi_us_maps_recreation_area_activity_picnicking">Picnic</string>
+    <string name="poi_us_maps_recreation_area_activity_campground_camping">Camping på campingplads</string>
+    <string name="poi_osmand_access_main_tag">Adgang</string>
+    <string name="poi_us_maps_recreation_area_facility_warming_hut">Varmehytte</string>
 </resources>

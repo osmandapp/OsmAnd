@@ -10,7 +10,29 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="release_4_9">
+        • Added a full-screen gallery viewer for Wikimedia images\n\n
+        • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
+        • Added the ability to assign activities to tracks and filter them accordingly\n\n
+        • Implemented new quick actions for trip recording and touchscreen lock\n\n
+        • Introduced customizable map button appearance and a precise grid\n\n
+        • Added a context menu and a \"Reset average speed\" action to widgets\n\n
+        • Added new route layer \"Dirt Bike trails\"\n\n
+        • Fixed \"Auto-record track during navigation\"\n\n
+        • Fixed issue with fliped coordinates in RTL\n\n
+        • Fixed missed sensor data for currently recording track\n\n
+        • Added information about surrounding areas for the selected point\n\n
+        • Added quick action to control visibility of OSM Edits\n\n
+        • Separated visibility parameters for Terrain colorization options\n\n
+        • Added a tappable icon to display access or other road or path attributes\n\n
+    </string>
 
+    <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
+    <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
+    <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
+    <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>
+    <string name="connect_obd_instructions_step4">4. Tap \'Connect,\' and select your scanner from the list.</string>
     <string name="learn_more_about_obd_sensors_link">Learn more about sensors.</string>
     <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
 	<string name="liter_per_hour">l/h</string>
@@ -52,7 +74,7 @@
     <string name="map_3d_mode_action_descr">Change map tilt.</string>
     <string name="drawer_button_description">Opens the main menu.</string>
     <string name="configure_map_description">Change map style, layers, or other settings.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirt bike trails</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
     <string name="type_of_activity">Type of activity</string>
     <string name="change_activity">Change activity</string>
@@ -4288,8 +4310,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
-    <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access and toll restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
@@ -5867,10 +5888,4 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
-    <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
-    <string name="obd_how_to_connect">How to connect:</string>
-    <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
-    <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
-    <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>
-    <string name="connect_obd_instructions_step4">4. Tap \'Connect,\' and select your scanner from the list.</string>
 </resources>

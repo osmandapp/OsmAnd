@@ -4401,4 +4401,12 @@
     <string name="poi_waste_accepted">Принимаемые отходы</string>
     <string name="poi_photo_booth">Фотобудка;Фотокабина</string>
     <string name="poi_second_hand_filter">Товары, бывшие в употреблении</string>
+    <string name="poi_antenna">Антенна</string>
+    <string name="poi_aboriginal_lands">Земли аборигенов</string>
+    <string name="poi_property_management">Управляющая компания;ЖКХ</string>
+    <string name="poi_lock_name">Шлюз</string>
+    <string name="poi_lock_ref">Номер шлюза</string>
+    <string name="poi_border_zone">Пограничная зона</string>
+    <string name="poi_lock_height">Высота шлюза</string>
+    <string name="poi_assembly_point">Место сбора;Пункт сбора</string>
 </resources>

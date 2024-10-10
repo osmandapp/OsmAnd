@@ -4873,4 +4873,5 @@
     <string name="poi_nfs_yes">Spravuje Lesní služba Spojených států</string>
     <string name="poi_us_maps_recreation_area_facility_group_shelter">Přístřešek pro skupiny</string>
     <string name="poi_blm_yes">Spravuje úřad Bureau Of Land Management</string>
+    <string name="poi_osmand_access_main_tag">Přístup</string>
 </resources>

@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static android.view.Gravity.BOTTOM;
+import static android.view.Gravity.END;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -7,9 +11,11 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +31,9 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.CompassButton;
 import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -49,6 +57,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapButton> mapButtons = new ArrayList<>();
 	private List<MapButton> customMapButtons = new ArrayList<>();
+	private Map3DButton map3DButton;
 	private CompassButton compassButton;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
@@ -88,15 +97,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 			initTopControls();
-			initFabButtons(mapActivity);
 			mapTransparencyHelper.initTransparencyBar();
 			initMapButtons();
+			initFabButtons(mapActivity);
 			updateControls(mapView.getCurrentRotatedTileBox(), null);
 		} else {
 			mapButtons = new ArrayList<>();
 			customMapButtons = new ArrayList<>();
 			mapTransparencyHelper.destroyTransparencyBar();
 			mapRouteInfoMenu = null;
+			map3DButton = null;
 			compassButton = null;
 		}
 	}
@@ -118,10 +128,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addMapButton(compassButton);
 	}
 
-	private void initFabButtons(@NonNull MapActivity mapActivity) {
-		Map3DButton map3DButton = mapActivity.findViewById(R.id.map_3d_button);
+	private void initFabButtons(@NonNull MapActivity activity) {
+		boolean nightMode = app.getDaynightHelper().isNightMode();
+		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
+		MapHudLayout container = activity.findViewById(R.id.MapHudButtonsOverlay);
+
+		if (map3DButton != null) {
+			container.removeView(map3DButton);
+		}
+		map3DButton = (Map3DButton) inflater.inflate(R.layout.map_3d_button, container, false);
 		map3DButton.setUseCustomPosition(true);
 		addMapButton(map3DButton);
+
+		container.addView(map3DButton, new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, BOTTOM | END));
+		container.updateButtons();
 	}
 
 	public void setControlsClickable(boolean clickable) {
@@ -287,6 +307,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void refreshButtons() {
 		for (MapButton button : getAllMapButtons()) {
 			button.update();
+			button.updateMargins();
 		}
 	}
 

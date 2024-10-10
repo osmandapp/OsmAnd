@@ -434,9 +434,7 @@
     <string name="shared_string_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej tak</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nTryk og hold for valgmuligheder"</string>
+    <string name="local_index_gpx_info_show">\n\nTryk og hold for valgmuligheder</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \nOsmAnd er en open source-navigationsapp med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning.
@@ -1170,9 +1168,7 @@
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
     <string name="map_widget_plain_time">Aktuel tid</string>
     <string name="shared_string_waypoint">Rutepunkt</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nTryk og hold for at se på kortet"</string>
+    <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kortet</string>
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
@@ -1195,7 +1191,7 @@
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
-    <string name="rendering_attr_showAccess_name">Vis adgangs- og vejafgiftsbegrænsninger</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelruter</string>
@@ -2961,7 +2957,7 @@
     <string name="third_party_routing_type">Tredjepartsruteberegning</string>
     <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
     <string name="application_profiles">App-profiler</string>
-    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Genvej\' under \'Indstillinger\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét element til listen i \'Genvej\'-indstillingerne</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint og downhill skiløb</string>
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend og nordisk skiløb</string>
@@ -5889,7 +5885,6 @@
     <string name="map_3d_mode_action_descr">Skift kortets hældning.</string>
     <string name="drawer_button_description">Åbner hovedmenuen.</string>
     <string name="configure_map_description">Skift kortstil, lag eller andre indstillinger.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Vis motocross-stier</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Vis motocross-stier</string>
     <string name="raster_layers_action_descr">Skift raster-lag</string>
     <string name="type_of_activity">Aktivitetstype</string>
@@ -5917,7 +5912,7 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid-brint</string>
     <string name="obd_fuel_type_hydrogen">Brint</string>
     <string name="obd_fuel_type_unknown">Ukendt brændstoftype</string>
-    <string name="obd_widget_group">Køretøjets parametre</string>
+    <string name="obd_widget_group">Køretøjsparametre</string>
     <string name="obd_fuel_type_electric">Elektrisk</string>
     <string name="obd_fuel_type_cng">Komprimeret naturgas (CNG)</string>
     <string name="obd_fuel_type_not_provided">Ingen brændstoftype angivet</string>
@@ -5956,11 +5951,11 @@
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Får adgang til dine køretøjsoplysninger via OBD-protokollen</string>
-    <string name="obd_plugin_name">Køretøjets parametre</string>
+    <string name="obd_plugin_name">Køretøjsparametre</string>
     <string name="unknown_bt_device">Ukendt enhed</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">VIN-kode via OBD</string>
-    <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjets parametre</string>
+    <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjsparametre</string>
     <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
     <string name="quick_action_finish_trip_recording_summary">En knap til at gemme GPX-sporet og afslutte optagelse af tur.</string>
     <string name="start_trip_recording_first_m">Start optagelse af tur først.</string>
@@ -5981,4 +5976,8 @@
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="lock_screen">Lås skærm</string>
     <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
+    <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
+    <string name="liter_per_hour">l/t</string>
+    <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter\n\n</string>
 </resources>

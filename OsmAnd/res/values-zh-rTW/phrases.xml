@@ -4873,4 +4873,5 @@
     <string name="poi_cash_in_customers">顧客</string>
     <string name="poi_diet_pescetarian_no">魚素飲食：否</string>
     <string name="poi_cash_in">現金存款</string>
+    <string name="poi_osmand_access_main_tag">進入</string>
 </resources>

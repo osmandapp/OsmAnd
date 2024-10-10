@@ -5880,7 +5880,6 @@
     <string name="map_3d_mode_action_descr">Ŝanĝi klinecon de mapo.</string>
     <string name="drawer_button_description">Malfermi la ĉefmenuon.</string>
     <string name="configure_map_description">Ŝanĝi map-stilon, tavolojn kaj aliajn agordojn.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Kursoj por terenaj motorcikloj</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Montri kursojn por ekstervojaj motorcikloj</string>
     <string name="raster_layers_action_descr">Ŝanĝi rastrumajn tavolojn</string>
     <string name="change_zoom_action_descr">Alĝustigi map-pligrandigon.</string>

@@ -40,9 +40,9 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
@@ -51,7 +51,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public final class NavigationScreen extends BaseAndroidAutoScreen implements SurfaceRendererCallback,
-		IRouteInformationListener, DefaultLifecycleObserver {
+		IRouteInformationListener, DefaultLifecycleObserver, ElevationListener {
 
 	@NonNull
 	private final NavigationListener listener;
@@ -107,55 +107,23 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onResume(@NonNull LifecycleOwner owner) {
 		DefaultLifecycleObserver.super.onResume(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
-		if(navigationSession != null) {
+		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if(surfaceRenderer != null) {
+			if (surfaceRenderer != null) {
 				surfaceRenderer.setCallback(this);
 			}
 		}
-		OsmandMapTileView mapView = getMapView();
-		if (mapView != null) {
-			mapView.addElevationListener(elevationListener);
-		}
 	}
-
-	@Nullable
-	OsmandMapTileView getMapView() {
-		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
-		if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
-			return surfaceRenderer.getMapView();
-		}
-		return null;
-	}
-
-	OsmandMapTileView.ElevationListener elevationListener = new OsmandMapTileView.ElevationListener() {
-		@Override
-		public void onElevationChanging(float angle) {
-			boolean currentUse3DButton = use3DButton;
-			updateUse3DButton();
-			if (currentUse3DButton != use3DButton) {
-				invalidate();
-			}
-		}
-
-		@Override
-		public void onStopChangingElevation(float angle) {
-		}
-	};
 
 	@Override
 	public void onPause(@NonNull LifecycleOwner owner) {
 		DefaultLifecycleObserver.super.onPause(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
-		if(navigationSession != null) {
+		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if(surfaceRenderer != null) {
+			if (surfaceRenderer != null) {
 				surfaceRenderer.setCallback(null);
 			}
-		}
-		OsmandMapTileView mapView = getMapView();
-		if (mapView != null) {
-			mapView.removeElevationListener(elevationListener);
 		}
 	}
 
@@ -192,6 +160,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	private SurfaceRenderer getSurfaceRenderer() {
 		NavigationSession session = getApp().getCarNavigationSession();
 		return session != null ? session.getNavigationCarSurface() : null;
+	}
+
+	@Nullable
+	OsmandMapTileView getMapView() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()) {
+			return surfaceRenderer.getMapView();
+		}
+		return null;
 	}
 
 	/**
@@ -476,5 +453,18 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	@Override
+	public void onElevationChanging(float angle) {
+		boolean currentUse3DButton = use3DButton;
+		updateUse3DButton();
+		if (currentUse3DButton != use3DButton) {
+			invalidate();
+		}
+	}
+
+	@Override
+	public void onStopChangingElevation(float angle) {
 	}
 }
