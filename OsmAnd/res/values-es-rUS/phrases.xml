@@ -4969,4 +4969,8 @@
     <string name="poi_cash_in_customers">Solo clientes</string>
     <string name="poi_diet_pescetarian_no">Dieta pescetariana: No</string>
     <string name="poi_osmand_access_main_tag">Acceso</string>
+    <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_payment_parco_no">No acepta Parco</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">No acepta Parkster</string>
 </resources>
