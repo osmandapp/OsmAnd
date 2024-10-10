@@ -20,6 +20,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_DISTANCE
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_TYPE
@@ -35,6 +36,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var fuelLeftDistBtn: Button? = null
 	private var fuelLeftLitersBtn: Button? = null
 	private var fuelConsumptionBtn: Button? = null
+	private var fuelConsumptionRateBtn: Button? = null
 	private var rpmBtn: Button? = null
 	private var speedBtn: Button? = null
 	private var tempIntakeBtn: Button? = null
@@ -47,6 +49,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 	private var fuelLeftDistResp: EditText? = null
 	private var fuelLeftLitersResp: EditText? = null
 	private var fuelConsumptionResp: EditText? = null
+	private var fuelConsumptionRateResp: EditText? = null
 	private var rpmResp: EditText? = null
 	private var speedResp: EditText? = null
 	private var tempIntakeResp: EditText? = null
@@ -88,6 +91,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelLeftDistResp = view.findViewById(R.id.resp1)
 		fuelLeftLitersResp = view.findViewById(R.id.resp2)
 		fuelConsumptionResp = view.findViewById(R.id.resp3)
+		fuelConsumptionRateResp = view.findViewById(R.id.resp13)
 		rpmResp = view.findViewById(R.id.resp4)
 		speedResp = view.findViewById(R.id.resp5)
 		tempIntakeResp = view.findViewById(R.id.resp6)
@@ -101,6 +105,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelLeftDistBtn = view.findViewById(R.id.btn1)
 		fuelLeftLitersBtn = view.findViewById(R.id.btn2)
 		fuelConsumptionBtn = view.findViewById(R.id.btn3)
+		fuelConsumptionRateBtn = view.findViewById(R.id.btn13)
 		rpmBtn = view.findViewById(R.id.btn4)
 		speedBtn = view.findViewById(R.id.btn5)
 		tempIntakeBtn = view.findViewById(R.id.btn6)
@@ -113,6 +118,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		fuelLeftDistBtn?.text = "fuel left distance"
 		fuelLeftLitersBtn?.text = "fuel left liters"
 		fuelConsumptionBtn?.text = "fuel consumption"
+		fuelConsumptionRateBtn?.text = "fuel consumption_rete"
 		rpmBtn?.text = "rpm"
 		speedBtn?.text = "speed"
 		tempIntakeBtn?.text = "intake air temp"
@@ -180,6 +186,7 @@ class OBDMainFragment : BaseOsmAndFragment() {
 //				FUEL_LEFT_LITERS -> updateWidgetData(fuelLeftLitersResp, result)
 				FUEL_LEFT_PERCENT -> updateWidgetData(fuelLeftPersResp, result)
 				FUEL_CONSUMPTION_RATE -> updateWidgetData(fuelConsumptionResp, result)
+				FUEL_CONSUMPTION_RATE_SENSOR -> updateWidgetData(fuelConsumptionResp, result)
 				TEMPERATURE_INTAKE -> updateWidgetData(tempIntakeResp, result)
 				TEMPERATURE_AMBIENT -> updateWidgetData(tempAmbientResp, result)
 				BATTERY_VOLTAGE -> updateWidgetData(batteryVoltageResp, result)

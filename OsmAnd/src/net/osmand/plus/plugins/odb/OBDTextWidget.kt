@@ -36,6 +36,11 @@ class OBDTextWidget @JvmOverloads constructor(
 				formatter = OBDComputerWidgetFormatter("%.0f")
 				averageTimeSeconds = 5 * 60
 			}
+			FUEL_CONSUMPTION_RATE_SENSOR -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR
+				formatter = OBDComputerWidgetFormatter("%.0f")
+				averageTimeSeconds = 5 * 60
+			}
 			FUEL_LEFT_DISTANCE -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_DISTANCE
 				formatter = OBDComputerWidgetFormatter("%.0f")
