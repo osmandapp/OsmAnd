@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="screen_is_locked_by_external_button">Touch screen is locked. To unlock, press the "%1$s" button, or tap the on-screen button.</string>
+    <string name="screen_is_unlocked">Touch screen is unlocked.</string>
+    <string name="screen_is_locked_by_action_button">Touch screen is locked. Tap on button to unlock.</string>
     <string name="release_4_9">
         • Added a full-screen gallery viewer for Wikimedia images\n\n
         • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
