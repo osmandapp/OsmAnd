@@ -1728,7 +1728,7 @@
     <string name="rendering_attr_moreDetailed_name">更多细节</string>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
     <string name="rendering_attr_hideAccess_name">访问限制</string>
-    <string name="rendering_attr_showAccess_name">显示访问限制和收费</string>
+    <string name="rendering_attr_showAccess_name">显示访问限制</string>
     <string name="no_index_file_to_download">下载未找到，请检查您的互联网连接。</string>
     <string name="select_index_file_to_download">什么也没找到。但您可以自行制作（参考 https://osmand.net）。</string>
     <string name="none_selected_gpx">首先长按以指定 GPX 文件。</string>
@@ -4471,7 +4471,7 @@
     <string name="off_road_render_descr">基于“Topo”风格的越野驾驶，并与绿色卫星图像一起使用作为底图。减少了主干道的厚度，增加了轨迹、小路及自行车和其他路线的厚度。</string>
     <string name="routing_attr_piste_type_nordic_description">适合北欧或越野滑雪的小径。</string>
     <string name="routing_attr_allow_skating_only_name">只允许滑冰路线</string>
-    <string name="routing_attr_difficulty_preference_description">倾向于这种难度的路线，尽管如果时间较短，在更难或更容易的滑雪道上的路线仍是可能的。</string>
+    <string name="routing_attr_difficulty_preference_description">倾向于这种难度的路线，尽管如果时间较短，使用更难或更容易的滑雪道的路线仍是可能的。</string>
     <string name="visited_screens">访问过的屏幕</string>
     <string name="make_active">设为活跃</string>
     <string name="index_item_world_wikivoyage">全球维基导游条目</string>
