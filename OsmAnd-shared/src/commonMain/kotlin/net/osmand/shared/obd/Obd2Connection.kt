@@ -83,7 +83,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			log.debug(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
-			throw e
+			return OBDResponse.ERROR
 		}
 	}
 

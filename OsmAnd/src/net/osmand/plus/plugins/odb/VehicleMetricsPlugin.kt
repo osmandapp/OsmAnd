@@ -233,13 +233,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	fun disconnect() {
 		socket?.apply {
 			if (isConnected) {
-				close()
-				socket = null
 				OBDDispatcher.stopReading()
+				close()
 			}
 		}
+		socket = null
 		connectedDeviceInfo = null
-//		connectedDevice = null
 	}
 
 	@SuppressLint("MissingPermission")

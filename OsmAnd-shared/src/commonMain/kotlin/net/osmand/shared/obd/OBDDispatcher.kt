@@ -68,19 +68,30 @@ object OBDDispatcher {
 							val hexCode = "%02X".format(command.command)
 							val fullCommand = "$hexGroupCode$hexCode"
 							val commandResult =
-								obd2Connection!!.run(fullCommand, command.command, command.commandType)
-							if(commandResult.isValid()) {
-								sensorDataCache[command] = command.parseResponse(commandResult.result)
+								obd2Connection!!.run(
+									fullCommand,
+									command.command,
+									command.commandType)
+							if (commandResult.isValid()) {
+								if (commandResult.result.size >= command.responseLength) {
+									sensorDataCache[command] =
+										command.parseResponse(commandResult.result)
+								} else {
+									log.error("Incorrect response length for command $command")
+								}
 							}
 						}
 					} catch (error: IOException) {
 						log.error("Run OBD looper error. $error")
+						if(inputStream == null || outputStream == null) {
+							break
+						}
 						readStatusListener?.onIOError()
 					}
 					OBDDataComputer.acceptValue(sensorDataCache)
 				}
 			} catch (cancelError: CancellationException) {
-				log.debug("OBD reading canceled")
+				log.error("OBD reading canceled")
 			}
 		}
 	}
