@@ -1359,13 +1359,9 @@
     <string name="gpx_info_distance">Rastojanje: %1$s (%2$s tačaka)</string>
     <string name="gpx_info_waypoints">Međuodredišta: %1$s</string>
     <string name="gpx_info_subtracks">Podtrase: %1$s</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nPritisni duže za opcije"</string>
+    <string name="local_index_gpx_info_show">\n\nPritisni duže za opcije</string>
     <string name="delay_navigation_start">Automatski pokreni vodiča za skretanje</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nPritisni duže za prikaz na mapi"</string>
+    <string name="selected_gpx_info_show">\n\nPritisni duže za prikaz na mapi</string>
     <string name="shared_string_waypoint">Međuodredište</string>
     <string name="map_widget_plain_time">Trenutno vreme</string>
     <string name="loading_smth">Učitavanje %1$s…</string>
