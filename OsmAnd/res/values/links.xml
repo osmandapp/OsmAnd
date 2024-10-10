@@ -45,6 +45,7 @@
     <string name="docs_legal_terms_of_use" translatable="false">https://osmand.net/docs/legal/terms-of-use</string>
     <string name="docs_legal_privacy_policy" translatable="false">https://osmand.net/docs/legal/privacy-policy</string>
     <string name="docs_external_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/external-sensors</string>
+    <string name="docs_obd_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/obd2-sensors</string>
     <string name="docs_external_sensors_unknown_type" translatable="false">https://docs.osmand.net/docs/intro</string>
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
     <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>

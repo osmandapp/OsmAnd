@@ -31,9 +31,15 @@ object OBDUtils {
 	}
 
 	fun parseSpeedResponse(response: IntArray): OBDDataField<Any> {
-		return OBDDataField(
-			OBDDataFieldType.SPEED,
-			response[0])
+		if(response.isNotEmpty()) {
+			return OBDDataField(
+				OBDDataFieldType.SPEED,
+				response[0])
+		} else {
+			return OBDDataField(
+				OBDDataFieldType.SPEED,
+				0)
+		}
 	}
 
 	fun parseIntakeAirTempResponse(response: IntArray): OBDDataField<Any> {
