@@ -108,9 +108,13 @@ object OBDDataComputer {
 		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND);
 	}
 
-	private fun averageDouble(values: List<OBDDataField<Any>>): Double? =
-		if (values.isNotEmpty()) values.filter { it.value is Double }
-			.sumOf { it.value as Double } / values.size else null
+	private fun averageNumber(values: List<OBDDataField<Any>>): Double? =
+		if (values.isNotEmpty()) values
+			.filter { it.value is Number }
+			.map { (it.value as Number).toDouble() }
+			.sumOf { it } / values.size
+		else
+			null
 
 	open class OBDComputerWidgetFormatter(val pattern: String = "%s") {
 		open fun format(v: Any?): String {
@@ -159,7 +163,7 @@ object OBDDataComputer {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
 					} else {
-						averageDouble(locValues)
+						averageNumber(locValues)
 					}
 				}
 
