@@ -1145,7 +1145,7 @@
     <string name="live_monitoring_start">Начало на проследяване в реално време</string>
     <string name="live_monitoring_stop">Край на проследяване в реално време</string>
     <string name="rendering_attr_hideAccess_name">Ограничения за достъп</string>
-    <string name="rendering_attr_showAccess_name">Ограничения за достъп и пътни такси</string>
+    <string name="rendering_attr_showAccess_name">Ограничения на достъпа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Качество на пътя</string>
     <string name="rendering_attr_showSurfaces_name">Вид на пътната настилка</string>
     <string name="rendering_attr_showCycleRoutes_name">Велосипедни маршрути</string>
