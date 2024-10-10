@@ -28,6 +28,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.OBD_FUEL_TYPE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
@@ -100,6 +101,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
+		regWidgetVisibility(OBD_FUEL_TYPE, all);
 		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
 				HORSE, TRAIN);
 		regWidgetVisibility(MAX_SPEED, none);
@@ -119,6 +121,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SUN_POSITION, all);
 		regWidgetAvailability(GLIDE_TARGET, all);
 		regWidgetAvailability(GLIDE_AVERAGE, all);
+		regWidgetAvailability(OBD_FUEL_TYPE, all);
 
 		// vertical
 		regWidgetVisibility(STREET_NAME, CAR);

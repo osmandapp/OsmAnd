@@ -149,7 +149,6 @@
     <string name="buffer_time">Waktu kadaluwarsa buffer</string>
     <string name="time_zone_descr">Pilih zona waktu untuk ditampilkan pada pesan lokasi Anda.</string>
     <string name="set_time_timeline_descr">Pilih waktu untuk ditampilkan</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="min_logging_accuracy_descr">Saring: tidak ada pencatatan kecuali akurasi dicapai</string>
     <string name="proxy_port">Port</string>
     <string name="shared_string_error">Terjadi kesalahan</string>

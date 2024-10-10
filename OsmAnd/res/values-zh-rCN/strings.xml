@@ -1728,7 +1728,7 @@
     <string name="rendering_attr_moreDetailed_name">更多细节</string>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
     <string name="rendering_attr_hideAccess_name">访问限制</string>
-    <string name="rendering_attr_showAccess_name">显示访问限制和收费</string>
+    <string name="rendering_attr_showAccess_name">显示访问限制</string>
     <string name="no_index_file_to_download">下载未找到，请检查您的互联网连接。</string>
     <string name="select_index_file_to_download">什么也没找到。但您可以自行制作（参考 https://osmand.net）。</string>
     <string name="none_selected_gpx">首先长按以指定 GPX 文件。</string>
@@ -2385,7 +2385,7 @@
     <string name="mapillary_menu_date_from">从</string>
     <string name="mapillary_menu_title_username">用户名</string>
     <string name="mapillary_menu_edit_text_hint">输入用户名</string>
-    <string name="mapillary_menu_title_dates">日期</string>
+    <string name="shared_string_date">日期</string>
     <string name="mapillary_menu_descr_username">仅查看特定用户添加的图像</string>
     <string name="mapillary_menu_descr_dates">只查看新增加的图片</string>
     <string name="mapillary_menu_filter_description">按提交者、日期或类型筛选图像。仅在特写缩放中有效。</string>
@@ -3288,7 +3288,6 @@
     <string name="message_graph_will_be_available_after_recalculation">请稍候。
 \n图表将在重新计算路线后可用。</string>
     <string name="shared_string_local_maps">本地地图</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">便利设施</string>
     <string name="icon_group_special">特殊</string>
     <string name="voice_prompts_timetable">语音提示时间</string>
@@ -4354,7 +4353,7 @@
     <string name="true_bearing_wdiget_desc">从您所在位置观察到的真北与目标点之间的角度。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深线配色方案</string>
     <string name="rendering_attr_depthContourWidth_description">等深线宽度</string>
-    <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
+    <string name="compass_click_desc">双击指南针按钮以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
     <string name="side_marker_eta">预计的到达时间</string>
     <string name="download_complete">下载完成</string>
@@ -4472,7 +4471,7 @@
     <string name="off_road_render_descr">基于“Topo”风格的越野驾驶，并与绿色卫星图像一起使用作为底图。减少了主干道的厚度，增加了轨迹、小路及自行车和其他路线的厚度。</string>
     <string name="routing_attr_piste_type_nordic_description">适合北欧或越野滑雪的小径。</string>
     <string name="routing_attr_allow_skating_only_name">只允许滑冰路线</string>
-    <string name="routing_attr_difficulty_preference_description">倾向于这种难度的路线，尽管如果时间较短，在更难或更容易的滑雪道上的路线仍是可能的。</string>
+    <string name="routing_attr_difficulty_preference_description">倾向于这种难度的路线，尽管如果时间较短，使用更难或更容易的滑雪道的路线仍是可能的。</string>
     <string name="visited_screens">访问过的屏幕</string>
     <string name="make_active">设为活跃</string>
     <string name="index_item_world_wikivoyage">全球维基导游条目</string>

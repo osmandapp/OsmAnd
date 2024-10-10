@@ -120,8 +120,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		if (activity != null) {
 			boolean nightMode = app.getDaynightHelper().isNightMode();
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
-			ViewGroup container = activity.findViewById(R.id.quick_actions_container);
-			container.removeAllViews();
+			ViewGroup container = activity.findViewById(R.id.MapHudButtonsOverlay);
+			for (QuickActionButton button : actionButtons) {
+				container.removeView(button);
+			}
 
 			List<QuickActionButton> buttons = new ArrayList<>();
 			List<QuickActionButtonState> buttonStates = mapButtonsHelper.getButtonsStates();
@@ -137,6 +139,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			actionButtons = buttons;
 			mapButtonStates = buttonStates;
 		}
+	}
+
+	@NonNull
+	public List<QuickActionButton> getActionButtons() {
+		return actionButtons;
 	}
 
 	public void refreshLayer() {

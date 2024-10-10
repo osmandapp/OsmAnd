@@ -673,7 +673,7 @@
     <string name="hello">OsmAnd navigacija</string>
     <string name="show_transport_over_map">Prikazati stanice transporta</string>
     <string name="show_transport_over_map_description">Prikazati stanice javnog prevoza na mapi.</string>
-    <string name="transport">Transport</string>
+    <string name="transport">Prevoz</string>
     <string name="transport_route_distance">Udaljenosti u planu puta</string>
     <string name="transport_stops_to_pass">prolazno zaustavljanje</string>
     <string name="transport_to_go_before">naredna udaljenost</string>
@@ -1385,7 +1385,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
-    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa i putarina</string>
+    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa</string>
     <string name="rendering_attr_hideAccess_name">Zabrane pristupa</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
@@ -1975,7 +1975,7 @@
     <string name="lang_lt">Litvanski</string>
     <string name="lang_lv">Letonski</string>
     <string name="lang_ko">Korejski</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kanada</string>
     <string name="lang_ja">Japanski</string>
     <string name="lang_it">Italijanski</string>
     <string name="lang_id">Indonezijski</string>
@@ -2086,7 +2086,7 @@
     <string name="mapillary_menu_title_username">Korisničko ime</string>
     <string name="mapillary_menu_descr_username">Pregledaj samo slike koje su dodate</string>
     <string name="mapillary_menu_edit_text_hint">Unesi korisničko ime</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="mapillary_menu_descr_dates">Pregledaj samo dodate slike</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="shared_string_to">Do</string>
@@ -2143,7 +2143,7 @@
     <string name="marker_save_as_track_descr">Izvezi markere u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
     <string name="shared_string_sort">Sortiranje</string>
-    <string name="plan_route">Planiranje rute</string>
+    <string name="plan_route">Plan rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja pozicija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
@@ -2759,7 +2759,7 @@
     <string name="shared_string_paused">Pauzirano</string>
     <string name="shared_string_pause">&amp;Pauziraj</string>
     <string name="shared_string_continue">Nastavi</string>
-    <string name="shared_string_resume">Rezime</string>
+    <string name="shared_string_resume">Nastavi</string>
     <string name="shared_string_notifications">Obaveštenja</string>
     <string name="trip_rec_notification_settings_desc">Prikazuj obaveštenje koje omogućava pokretanje snimanja putovanja.</string>
     <string name="trip_rec_notification_settings">Uključi brzo snimanje</string>
@@ -2930,7 +2930,7 @@
     <string name="osm_edit_closed_note">Zatvorena OSM beleška</string>
     <string name="set_working_days_to_continue">Podesi radne dane za nastavak</string>
     <string name="route_between_points">Ruta između tačaka</string>
-    <string name="plan_a_route">Planiranje rute</string>
+    <string name="plan_a_route">Plan rute</string>
     <string name="add_to_a_track">Dodaj u trasu</string>
     <string name="track_show_start_finish_icons">Prikazati ikonu za početak i kraj</string>
     <string name="select_track_width">Izaberi širinu</string>
@@ -3041,7 +3041,7 @@
     <string name="complex_routing_descr">Dvofazno usmeravanje za auto navigaciju.</string>
     <string name="use_fast_recalculation_desc">Preračunava samo početni deo puta, korisno za duga putovanja.</string>
     <string name="use_native_pt">Razvoj lokalnog javnog prevoza</string>
-    <string name="use_native_pt_desc">Prebaci se na Java (bezbedno) izrečunavanje rute javnog prevoza</string>
+    <string name="use_native_pt_desc">Prebaci se na Java (bezbedno) izračunavanje rute javnog prevoza</string>
     <string name="perform_oauth_authorization_description">Prijavi se pomoću OAuth -a radi korišćenja mogućnosti uređivanja OpenStritMapa</string>
     <string name="perform_oauth_authorization">Prijavi se preko OAuth-a</string>
     <string name="clear_osm_token">Obriši OpenStreetMap OAuth token</string>
@@ -3053,7 +3053,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Slobodno vreme</string>
     <string name="icon_group_special">Specijalna</string>
     <string name="icon_group_transport">Prevoz</string>
@@ -3862,7 +3861,7 @@
     <string name="profile_type_user_string">Korisnički profil</string>
     <string name="release_3_9">• Dodata je mogućnost za izvoz i uvoz svih podataka, uključujući podešavanja, izvore, moja mesta
 \n
-\n • Planiranje rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
+\n • Plan rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
 \n
 \n • Dodan je način prijave OAuth za OpenStritMap, poboljšano korisničko sučelje prozorčića OSM-a
 \n
@@ -4476,7 +4475,7 @@
     <string name="memory_allocated_for_routing">Memorija dodeljena za izračunavanje ruta</string>
     <string name="shared_storage">Deljeno skladište</string>
     <string name="icon_group_industrial">Industrija</string>
-    <string name="quick_action_toggle_preference">Prekidač promene stanja podešavanja.</string>
+    <string name="quick_action_toggle_preference">Prekidač promene podešavanja.</string>
     <string name="display_route_tracks">Prikazati trase</string>
     <string name="display_route_tracks_as_poi">Prikazati trase kao TOI</string>
     <string name="approx_safe_mode">Bezbedno zaokruživanje podataka GPX-a</string>
@@ -4945,7 +4944,7 @@
     <string name="map_3d_mode_action">3D prikaz</string>
     <string name="rendering_value_sector3_name">Sektor 3</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
-    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Mali</string>
     <string name="rendering_value_name_only_name">Samo ime</string>
@@ -5174,7 +5173,7 @@
     <string name="distance_to_destination_widget_desc">Vidžet prikazuje preostalo rastojanje do poslednje dolazne tačke.</string>
     <string name="second_next_turn_widget_desc">Widget prikazuje podatke o tvom drugom narednom skretanju koje je omogućeno ukoliko skrenete u okviru prilaznog rastojanja.</string>
     <string name="next_turn_widget_desc">Vidžet prikazuje podatke o tvom sledećem skretanju sa slikom manevra skretanja i rastojanjem do njega.</string>
-    <string name="compass_click_desc">Tapni na ikonu kompasa radi promene orijentacije mape.</string>
+    <string name="compass_click_desc">Duplo tapni na ikonu kompasa radi promene orijentacije mape.</string>
     <string name="map_marker_average_speed_desc">Odredi vremensko razdoblje prosečne brzine (korišćeno za procenu vremena pristizanja).</string>
     <string name="switch_widget_mode_desc">Dodirom na vidžet menjaš načine rada.</string>
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila biće izbegnuti.</string>
@@ -5208,7 +5207,7 @@
     <string name="help_article_map_tracks_on_map_name">Trase i rute</string>
     <string name="help_article_map_vector_maps_name">Vektorske mape (stil mape)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_plan_route_name">Planiranje rute</string>
+    <string name="help_article_plan_route_name">Plan rute</string>
     <string name="help_article_troubleshooting_crash_logs_name">Dnevnik rušenja programa</string>
     <string name="help_article_troubleshooting_general_name">Generalno</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Snimanje trase</string>
@@ -5808,7 +5807,7 @@
     <string name="quick_action_verb_show_hide">Prikazati / Sakriti</string>
     <string name="quick_action_verb_pause_resume">Pauziranje / Nastavak</string>
     <string name="quick_action_verb_turn_on_off">Uključivanje / Isključivanje</string>
-    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_verb_start_stop">Početak / Završetak</string>
     <string name="weather_screen">Ekran s vremenskom prognozom</string>
     <string name="quick_action_map_style">Stil mape</string>
     <string name="quick_action_remove_next_destination">Sledeća odredišna tačka</string>
@@ -5892,11 +5891,98 @@
     <string name="navigation_action_descr">Otvaranje navigacije.</string>
     <string name="my_location_action_descr">Centrira mapu na tvojoj trenutnoj lokaciji.</string>
     <string name="configure_map_description">Promeni stil mape, slojeve ili druga podešavanja.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Prikazati staze za bicikle</string>
     <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
     <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Prikazati staze za bicikle</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Prikaz staza terenskih motocikla</string>
     <string name="type_of_activity">Tip aktivnosti</string>
     <string name="change_activity">Promeni aktivnost</string>
+    <string name="shared_string_increase">Povećanje</string>
+    <string name="shared_string_decrease">Smanjenje</string>
+    <string name="open_in_browser">Otvori u pretraživaču</string>
+    <string name="shared_string_source">Izvor</string>
+    <string name="shared_string_no_internet_connection">Nema interneta</string>
+    <string name="no_internet_descr">Proveri svoju vezu i pokušaj ponovo.</string>
+    <string name="no_photos_available_descr">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
+    <string name="no_photos_available">Nema dostupnih fotografija</string>
+    <string name="wikimedia">Vikimedia</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_not_provided">Nije navedena vrsta goriva</string>
+    <string name="obd_fuel_type_gasoline">Benzin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_diesel">Dizel</string>
+    <string name="obd_fuel_type_lpg">TNG</string>
+    <string name="obd_fuel_type_cng">KPG</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="obd_fuel_type_electric">Električno</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Dvogorivno radno Benzin</string>
+    <string name="obd_fuel_type_bifuel_methanol">Dvogorivno radno Metanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Dvogorivno radno Etanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Dvogorivno radno TNG</string>
+    <string name="obd_fuel_type_bifuel_cng">Dvogorivno radno KPG</string>
+    <string name="obd_fuel_type_bifuel_propane">Dvogorivno radno Propan</string>
+    <string name="obd_fuel_type_bifuel_electricity">Dvogorivno radno Električno</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hibridno Benzinsko</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Dvogorivno radno Električna i sa US mašina</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hibridno Etanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hibridno Dizel</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hibridno Električna i sa US mašina</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hibridno Regenerativno</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Dvogorivno radno Vodonik</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hibridno Vodonik</string>
+    <string name="obd_fuel_type_hydrogen">Vodonik</string>
+    <string name="obd_fuel_type_unknown">Nepoznati tip goriva</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_fuel_type_hybrid_electric">Hibridno Električno</string>
+    <string name="obd_widget_group">Metrika vozila</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="obd_speed_desc">Prikazuje brzinu vozila preko OBD senzora</string>
+    <string name="obd_rpm_desc">Prikazuje tahometarski RPM preko OBD senzora</string>
+    <string name="obd_air_intake_temp_desc">Prikazuje temperaturu usisnog vazduha vozila preko OBD senzora</string>
+    <string name="obd_ambient_air_temp_desc">Prikazuje temperaturu ambijentalnog vazduha preko OBD senzora</string>
+    <string name="obd_battery_voltage_desc">Prikazuje napon baterije preko OBD senzora</string>
+    <string name="obd_fuel_level_desc">Prikazuje nivo goriva u vozilu preko OBD senzora</string>
+    <string name="obd_fuel_type_desc">Prikazuje vrstu goriva vozila preko OBD senzora</string>
+    <string name="obd_air_intake_temp">Temperatura ulaznog vazduha</string>
+    <string name="obd_ambient_air_temp">Temperatura ambijentalnog vazduha</string>
+    <string name="obd_battery_voltage">Napon baterije</string>
+    <string name="obd_engine_coolant_temp">Temperatura rashladne tečnosti motora</string>
+    <string name="obd_fuel_level">Nivo goriva</string>
+    <string name="obd_fuel_consumption_rate">Stopa potrošnje goriva</string>
+    <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
+    <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
+    <string name="obd_fuel_type">Tip goriva</string>
+    <string name="obd_plugin_name">Metrika vozila</string>
+    <string name="obd_support">OBD podrška</string>
+    <string name="obd_plugin_description">Pristupa informacijama o vašem vozilu preko OBD protokola</string>
+    <string name="obd_engine_coolant_temp_desc">Prikazuje temperaturu rashladne tečnosti motora preko OBD senzora</string>
+    <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
+    <string name="obd_vin">VIN</string>
+    <string name="unknown_bt_device">Nepoznat uređaj</string>
+    <string name="obd_vin_desc">VIN kod preko OBD-a</string>
+    <string name="reset_average_speed">Poništi prosečnu brzinu</string>
+    <string name="vehicle_metrics_plugin_settings">Podešavanja metrike vozila</string>
+    <string name="track_does_not_contain_data_to_save">Putanja ne sadrži podatke za čuvanje.</string>
+    <string name="quick_action_finish_trip_recording_summary">Dugme za čuvanje GPX staze i završetak snimanja putovanja.</string>
+    <string name="start_trip_recording_first_m">Prvo započni snimanje putovanja.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Snimljeno putovanje i nastavi</string>
+    <string name="help_article_personal_color_palette_schemes_name">Šeme boja</string>
+    <string name="quick_action_new_trip_segment">Dugme za pokretanje novog segmenta u tekućem GPX snimanju staze.</string>
+    <string name="new_segment_started_m">Počelo je snimanje novog segmenta putanje.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Dugme za čuvanje trenutno snimljenog putovanja kao GPX fajla i nastavak snimanja nove staze bez prekida.</string>
+    <string name="third_links">Drugi linkovi</string>
+    <string name="new_trip_segment">Novi segment putovanja</string>
+    <string name="quick_action_start_pause_recording">Dugme za pokretanje, pauziranje ili nastavak snimanja GPX staze.</string>
+    <string name="quick_action_verb_start_pause">Pokreni / Pauziraj</string>
+    <string name="movies_list">Lista filmova</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="lock_screen">Zaključan ekran</string>
+    <string name="lock_screen_description">Uključuje ili isključuje zaključavanja ekrana zbog nenamernog dodira</string>
+    <string name="quick_action_showhide_osm_edits_descr">Dugme za prikaz ili skrivanje lokalnih OSM izmena na mapi.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze terenskih motocikla</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje\n\n</string>
 </resources>

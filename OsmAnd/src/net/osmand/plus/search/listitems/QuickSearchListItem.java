@@ -125,7 +125,7 @@ public class QuickSearchListItem {
 			Amenity amenity = (Amenity) searchResult.object;
 			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 		}
-		return alternateName != null ? alternateName + " • " : typeName;
+		return alternateName != null ? typeName + " • " + alternateName : typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {

@@ -4,11 +4,13 @@ import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import net.osmand.Location;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONObject;
 
@@ -80,6 +82,7 @@ public class Amenity extends MapObject {
 	private TIntArrayList x;
 	private String mapIconName;
 	private int order;
+	private Map<Integer, List<TagValuePair>> tagGroups;
 
 	public int getOrder() {
 		return order;
@@ -87,6 +90,20 @@ public class Amenity extends MapObject {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public Map<Integer, List<TagValuePair>> getTagGroups() {
+		return tagGroups;
+	}
+
+	public void addTagGroup(int id, List<TagValuePair> tagValues) {
+		if (tagGroups == null) {
+			tagGroups = new HashMap<Integer, List<TagValuePair>>();
+		}
+		tagGroups.put(id, tagValues);
+	}
+	public void setTagGroups(Map<Integer, List<TagValuePair>> tagGroups) {
+		this.tagGroups = tagGroups;
 	}
 
 	public static class AmenityRoutePoint {
@@ -672,5 +689,62 @@ public class Amenity extends MapObject {
 			}
 		}
 		return alternateName;
+	}
+
+	public String getCityFromTagGroups(String lang) {
+		if (tagGroups == null) {
+			return null;
+		}
+		String result = null;
+		for (Map.Entry<Integer, List<TagValuePair>> entry : tagGroups.entrySet()) {
+			String translated = "";
+			String nonTranslated = "";
+			City.CityType type = null;
+			for (TagValuePair tagValue : entry.getValue()) {
+				if (tagValue.tag.endsWith("name:" + lang)) {
+					translated = tagValue.value;
+				}
+				if (tagValue.tag.endsWith("name")) {
+					nonTranslated = tagValue.value;
+				}
+				if (tagValue.tag.equals("place")) {
+					type = City.CityType.valueFromString(tagValue.value.toUpperCase());
+				}
+			}
+			String name = translated.isEmpty() ? nonTranslated : translated;
+			if (!name.isEmpty() && isCityTypeAccept(type)) {
+				result = result == null ? name : result + ", " + name;
+			}
+		}
+		return result;
+	}
+
+	private boolean isCityTypeAccept(City.CityType type) {
+		if (type == null) {
+			return false;
+		}
+		return type.storedAsSeparateAdminEntity();
+	}
+
+	public List<LatLon> getPolygon() {
+		List<LatLon> res = new ArrayList<>();
+		if (x == null) {
+			return res;
+		}
+		for (int i = 0; i < getX().size(); i++) {
+			int x = getX().get(i);
+			int y = getY().get(i);
+			LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			res.add(l);
+		}
+		return res;
+	}
+
+	public void setX(TIntArrayList x) {
+		this.x = x;
+	}
+
+	public void setY(TIntArrayList y) {
+		this.y = y;
 	}
 }

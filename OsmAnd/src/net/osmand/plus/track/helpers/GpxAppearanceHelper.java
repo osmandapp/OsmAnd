@@ -14,11 +14,12 @@ import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.shared.gpx.GpxDataItem;
@@ -31,14 +32,12 @@ import java.io.File;
 
 public class GpxAppearanceHelper {
 
-	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final GpxDbHelper gpxDbHelper;
 
 	private TrackDrawInfo trackDrawInfo;
 
 	public GpxAppearanceHelper(@NonNull OsmandApplication app) {
-		this.app = app;
 		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
 	}
@@ -233,7 +232,7 @@ public class GpxAppearanceHelper {
 
 	@Nullable
 	public <T> T getAppearanceParameter(@NonNull File file, @NonNull GpxParameter parameter) {
-		GpxDataItem item = gpxDbHelper.getItem(file);
+		GpxDataItem item = gpxDbHelper.getItem(SharedUtil.kFile(file));
 		if (item != null) {
 			return getAppearanceParameter(item, parameter);
 		}

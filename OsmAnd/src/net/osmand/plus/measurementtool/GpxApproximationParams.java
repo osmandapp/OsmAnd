@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.LocationsHolder;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
 

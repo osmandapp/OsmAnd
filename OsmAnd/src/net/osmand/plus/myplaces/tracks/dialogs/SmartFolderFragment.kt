@@ -66,7 +66,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 			.setTitleId(R.string.shared_string_refresh)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_update))
 			.setOnClickListener {
-				reloadTracks()
+				reloadTracks(true)
 			}
 			.showTopDivider(true)
 			.create())

@@ -50,7 +50,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
@@ -143,6 +143,7 @@ import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1290,7 +1291,7 @@ public class OsmandAidlApi {
 			item.setParameter(API_IMPORTED, true);
 			app.getGpxDbHelper().add(item);
 		} else {
-			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
+			GpxDataItem item = app.getGpxDbHelper().getItem(SharedUtil.kFile(destination));
 			if (item != null) {
 				item.setParameter(COLOR, col);
 				item.setParameter(API_IMPORTED, true);
@@ -1529,28 +1530,26 @@ public class OsmandAidlApi {
 	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = SharedUtil.jFile(dataItem.getFile());
-			if (file.exists()) {
-				String fileName = file.getName();
-				String absolutePath = file.getAbsolutePath();
-				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
-				long fileSize = file.length();
-				Integer color = dataItem.getParameter(COLOR);
-				String colorName = "";
-				if (color != null) {
-					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
-				}
-				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
-				GpxTrackAnalysis analysis = dataItem.getAnalysis();
-				if (analysis != null) {
-					details = createGpxFileDetailsV2(analysis);
-				}
-				net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
-				gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
-
-				files.add(gpxFile);
+			KFile file = dataItem.getFile();
+			String fileName = file.name();
+			String absolutePath = file.absolutePath();
+			boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
+			long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
+			long fileSize = file.length();
+			Integer color = dataItem.getParameter(COLOR);
+			String colorName = "";
+			if (color != null) {
+				colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 			}
+			net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
+			GpxTrackAnalysis analysis = dataItem.getAnalysis();
+			if (analysis != null) {
+				details = createGpxFileDetailsV2(analysis);
+			}
+			net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
+			gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
+
+			files.add(gpxFile);
 		}
 		return true;
 	}
@@ -1558,19 +1557,17 @@ public class OsmandAidlApi {
 	boolean getImportedGpx(List<AGpxFile> files) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = SharedUtil.jFile(dataItem.getFile());
-			if (file.exists()) {
-				String fileName = file.getName();
-				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
-				long fileSize = file.length();
-				AGpxFileDetails details = null;
-				GpxTrackAnalysis analysis = dataItem.getAnalysis();
-				if (analysis != null) {
-					details = createGpxFileDetails(analysis);
-				}
-				files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+			KFile file = dataItem.getFile();
+			String fileName = file.name();
+			boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.absolutePath()) != null;
+			long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
+			long fileSize = file.length();
+			AGpxFileDetails details = null;
+			GpxTrackAnalysis analysis = dataItem.getAnalysis();
+			if (analysis != null) {
+				details = createGpxFileDetails(analysis);
 			}
+			files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
 		}
 		return true;
 	}
@@ -1578,13 +1575,11 @@ public class OsmandAidlApi {
 	String getGpxColor(String gpxFileName) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			File file = SharedUtil.jFile(dataItem.getFile());
-			if (file.exists()) {
-				if (file.getName().equals(gpxFileName)) {
-					Integer color = dataItem.getParameter(COLOR);
-					if (color != null) {
-						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
-					}
+			KFile file = dataItem.getFile();
+			if (file.name().equals(gpxFileName)) {
+				Integer color = dataItem.getParameter(COLOR);
+				if (color != null) {
+					return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 			}
 		}
@@ -1600,7 +1595,7 @@ public class OsmandAidlApi {
 		}
 
 		if (file != null && file.exists()) {
-			GpxDataItem item = app.getGpxDbHelper().getItem(file);
+			GpxDataItem item = app.getGpxDbHelper().getItem(SharedUtil.kFile(file));
 			boolean apiImported = item != null ? item.getParameter(API_IMPORTED) : false;
 			if (apiImported) {
 				return FileUtils.removeGpxFile(app, file);

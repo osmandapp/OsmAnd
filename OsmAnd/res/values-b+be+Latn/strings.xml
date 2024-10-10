@@ -2367,7 +2367,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_to">Da</string>
     <string name="mapillary_menu_date_from">Ad</string>
     <string name="mapillary_menu_descr_dates">Pahliadzieć toĺki dadanyja vyjavy</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
     <string name="mapillary_menu_descr_username">Pahliadzieć toĺki vyjavy dadanyja</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndLocationProvider;

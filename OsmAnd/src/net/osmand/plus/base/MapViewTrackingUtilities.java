@@ -336,8 +336,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				movingTime = 0;
 			} else {
 				movingTime = movingToMyLocation
-						? (long) Math.min(timeDiff * 0.7, MOVE_ANIMATION_TIME)
-						: MOVE_ANIMATION_TIME;
+						? (long) Math.min(timeDiff * 0.7, MOVE_ANIMATION_TIME) : 0;
 			}
 		}
 

@@ -24,6 +24,7 @@ import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
@@ -250,7 +251,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> {
 				if (item.getAnalysis() != null) {
 					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}

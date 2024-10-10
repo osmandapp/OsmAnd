@@ -37,6 +37,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 public class NativeLibrary {
 
@@ -391,6 +392,9 @@ public class NativeLibrary {
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 
+	protected static native ByteBuffer getGeotiffTile(
+		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
+
 	/**/
 	// Empty native impl
 	/*
@@ -549,10 +553,10 @@ public class NativeLibrary {
 	}
 
 	public static class RenderedObject extends MapObject {
-		private Map<String, String> tags = new LinkedHashMap<>();
+		private final Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect();
-		private TIntArrayList x = new TIntArrayList();
-		private TIntArrayList y = new TIntArrayList();
+		private final TIntArrayList x = new TIntArrayList();
+		private final TIntArrayList y = new TIntArrayList();
 		private String iconRes;
 		private int order;
 		private boolean visible;
@@ -560,6 +564,7 @@ public class NativeLibrary {
 		private LatLon labelLatLon;
 		private int labelX = 0;
 		private int labelY = 0;
+		private boolean isPolygon;
 
 		public Map<String, String> getTags() {
 			return tags;
@@ -658,6 +663,14 @@ public class NativeLibrary {
 			this.labelY = labelY;
 		}
 
+		public void markAsPolygon(boolean isPolygon) {
+			this.isPolygon = isPolygon;
+		}
+
+		public boolean isPolygon() {
+			return isPolygon;
+		}
+
 		public List<String> getOriginalNames() {
 			List<String> names = new ArrayList<>();
 			if (!Algorithms.isEmpty(name)) {
@@ -689,6 +702,46 @@ public class NativeLibrary {
 				}
 			}
 			return null;
+		}
+
+		@Override
+		public String toString() {
+			String s = getClass().getSimpleName() + " " + name;
+			String link = OsmUtils.getOsmUrlForId(this);
+			String tags = OsmUtils.getPrintTags(this);
+			s += s.contains(link) ? "" : " " + link;
+			s += s.contains(tags) ? "" : " " + tags;
+			return s;
+		}
+
+		public List<LatLon> getPolygon() {
+			List<LatLon> res = new ArrayList<>();
+			for (int i = 0; i < this.x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				LatLon l = new LatLon(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				res.add(l);
+			}
+			return res;
+		}
+
+		public QuadRect getRectLatLon() {
+			if (x.size() == 0) {
+				return null;
+			}
+			int left = x.get(0);
+			int right = left;
+			int top = y.get(0);
+			int bottom = top;
+			for (int i = 0; i < x.size(); i++) {
+				int x = this.x.get(i);
+				int y = this.y.get(i);
+				left = Math.min(left, x);
+				right = Math.max(right, x);
+				top = Math.min(top, y);
+				bottom = Math.max(bottom, y);
+			}
+			return new QuadRect(MapUtils.get31LongitudeX(left), MapUtils.get31LatitudeY(top), MapUtils.get31LongitudeX(right), MapUtils.get31LatitudeY(bottom));
 		}
 	}
 }

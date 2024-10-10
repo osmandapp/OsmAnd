@@ -1,7 +1,15 @@
 package net.osmand.shared.gpx
 
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.data.StringIntPair
+import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
@@ -22,8 +30,8 @@ class GpxDatabase {
 		const val TMP_NAME_COLUMN_COUNT = "itemsCount"
 		const val UNKNOWN_TIME_THRESHOLD = 10L
 		val GPX_UPDATE_PARAMETERS_START = "UPDATE $GPX_TABLE_NAME SET "
-		val GPX_FIND_BY_NAME_AND_DIR =
-			" WHERE ${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
+		val GPX_FIND_BY_NAME_AND_DIR = " WHERE ${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
+		val GPX_NAME_AND_DIR = "${FILE_NAME.columnName} = ? AND ${FILE_DIR.columnName} = ?"
 		val GPX_MIN_CREATE_DATE =
 			"SELECT MIN(${FILE_CREATION_TIME.columnName}) FROM $GPX_TABLE_NAME WHERE ${FILE_CREATION_TIME.columnName} > $UNKNOWN_TIME_THRESHOLD"
 		val GPX_MAX_COLUMN_VALUE = "SELECT MAX(%s) FROM $GPX_TABLE_NAME"
@@ -32,6 +40,8 @@ class GpxDatabase {
 		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s NOT NULL AND %1\$s <> '' "
 		val GET_ITEM_COUNT_COLLECTION_BASE =
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
+
+		val BATCH_SIZE = 100
 	}
 
 	init {
@@ -122,6 +132,31 @@ class GpxDatabase {
 					"DELETE FROM $tableName $GPX_FIND_BY_NAME_AND_DIR",
 					arrayOf(fileName, fileDir)
 				)
+				return true
+			}
+			return false
+		} finally {
+			db?.close()
+		}
+	}
+
+	fun remove(files: Collection<KFile>): Boolean {
+		if (files.isEmpty()) return false
+
+		val time = currentTimeMillis()
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(false)
+			db?.let {
+				val fileDeletionMap = files.groupBy { GpxDbUtils.getTableName(it) }
+				fileDeletionMap.forEach { (tableName, files) ->
+					files.chunked(BATCH_SIZE).forEach { batch ->
+						val deleteConditions = batch.joinToString(separator = " OR ") { "($GPX_NAME_AND_DIR)" }
+						val args: Array<Any?> = batch.flatMap { listOf(it.name(), GpxDbUtils.getGpxFileDir(it)) }.toTypedArray()
+						db.execSQL("DELETE FROM $tableName WHERE $deleteConditions", args)
+					}
+				}
+				log.info("Remove gpx files from db count=${files.size} in ${currentTimeMillis() - time} ms")
 				return true
 			}
 			return false
@@ -307,7 +342,7 @@ class GpxDatabase {
 		return folderCollection
 	}
 
-	fun getGpxDataItems(): List<GpxDataItem> {
+	fun getGpxDataItemsSync(): List<GpxDataItem> {
 		val items = mutableSetOf<GpxDataItem>()
 		var db: SQLiteConnection? = null
 		try {
@@ -329,6 +364,79 @@ class GpxDatabase {
 			db?.close()
 		}
 		return items.toList()
+	}
+
+	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
+
+	suspend fun getGpxDataItems(): List<GpxDataItem> = coroutineScope {
+		val items = mutableListOf<GpxDataItem>()
+		val deferredResults = mutableListOf<Deferred<List<GpxDataItem>>>()
+		var offset = 0
+		val itemsCount = getGpxDirItemsCount()
+		while (offset < itemsCount) {
+			val currentOffset = offset
+			val deferredBatch = async(Dispatchers.IO) {
+				var db: SQLiteConnection? = null
+				try {
+					db = openConnection(true)
+					if (db != null) {
+						fetchBatchData(db, currentOffset, BATCH_SIZE)
+					} else {
+						emptyList()
+					}
+				} finally {
+					db?.close()
+				}
+			}
+			deferredResults.add(deferredBatch)
+			offset += BATCH_SIZE
+		}
+
+		deferredResults.awaitAll().forEach { batchItems ->
+			items.addAll(batchItems)
+		}
+		return@coroutineScope items.toList()
+	}
+
+	private fun getGpxDirItemsCount(): Int {
+		var res = 0
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(true)
+			db?.let {
+				var query: SQLiteCursor? = null
+				try {
+					query = db.rawQuery("SELECT COUNT(*) FROM $GPX_TABLE_NAME", null)
+					if (query != null && query.moveToFirst()) {
+						res = query.getInt(0)
+					}
+				} finally {
+					query?.close()
+				}
+			}
+		} finally {
+			db?.close()
+		}
+		return res
+	}
+
+	private fun fetchBatchData(db: SQLiteConnection, offset: Int, batchSize: Int): List<GpxDataItem> {
+		val time = currentTimeMillis()
+		val batchItems = mutableListOf<GpxDataItem>()
+		var query: SQLiteCursor? = null
+		try {
+			val paginatedQuery = "${GpxDbUtils.getSelectGpxQuery()} ORDER BY ${FILE_NAME.columnName} LIMIT $batchSize OFFSET $offset"
+			query = db.rawQuery(paginatedQuery, null)
+			if (query != null && query.moveToFirst()) {
+				do {
+					batchItems.add(readGpxDataItem(query))
+				} while (query.moveToNext())
+			}
+		} finally {
+			query?.close()
+		}
+		log.info("loadGpxItems fetchBatchData offset=$offset batchItems=${batchItems.size} in ${currentTimeMillis() - time} ms")
+		return batchItems
 	}
 
 	fun getGpxDirItems(): List<GpxDirItem> {
@@ -390,6 +498,24 @@ class GpxDatabase {
 			query?.close()
 		}
 		return null
+	}
+
+	fun isDataItemExists(file: KFile, db: SQLiteConnection): Boolean {
+		val name = file.name()
+		val dir = GpxDbUtils.getGpxFileDir(file)
+		val gpxFile = GpxDbUtils.isGpxFile(file)
+		val selectQuery =
+			if (gpxFile) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
+		var query: SQLiteCursor? = null
+		try {
+			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			if (query != null && query.moveToFirst()) {
+				return true
+			}
+		} finally {
+			query?.close()
+		}
+		return false
 	}
 }
 

@@ -13,9 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.FileUtils;

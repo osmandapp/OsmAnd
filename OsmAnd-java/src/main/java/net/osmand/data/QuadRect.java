@@ -34,10 +34,10 @@ public class QuadRect {
 			this.top = top;
 			this.bottom = bottom;
 		} else {
-			this.left = left < right ? Math.min(left, this.left) : Math.max(left, this.left);
-			this.right = left < right ? Math.max(right, this.right) : Math.min(right, this.right);
-			this.top = top < bottom ? Math.min(top, this.top) : Math.max(top, this.top);
-			this.bottom = top < bottom ? Math.max(bottom, this.bottom) : Math.min(bottom, this.bottom);
+			this.left = left <= right ? Math.min(left, this.left) : Math.max(left, this.left);
+			this.right = left <= right ? Math.max(right, this.right) : Math.min(right, this.right);
+			this.top = top <= bottom ? Math.min(top, this.top) : Math.max(top, this.top);
+			this.bottom = top <= bottom ? Math.max(bottom, this.bottom) : Math.min(bottom, this.bottom);
 		}
 	}
 	

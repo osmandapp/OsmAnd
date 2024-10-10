@@ -434,9 +434,7 @@
     <string name="shared_string_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej tak</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nTryk og hold for valgmuligheder"</string>
+    <string name="local_index_gpx_info_show">\n\nTryk og hold for valgmuligheder</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \nOsmAnd er en open source-navigationsapp med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning.
@@ -1170,9 +1168,7 @@
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
     <string name="map_widget_plain_time">Aktuel tid</string>
     <string name="shared_string_waypoint">Rutepunkt</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nTryk og hold for at se på kortet"</string>
+    <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kortet</string>
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
@@ -1195,7 +1191,7 @@
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Adgangsbegrænsninger</string>
-    <string name="rendering_attr_showAccess_name">Vis adgangs- og vejafgiftsbegrænsninger</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelruter</string>
@@ -1470,7 +1466,7 @@
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
     <string name="shared_string_tracks">Spor</string>
-    <string name="shared_string_currently_recording_track">Optager spor</string>
+    <string name="shared_string_currently_recording_track">Igangværende sporoptagelse</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
@@ -2384,7 +2380,7 @@
     <string name="wrong_user_name">Forkert brugernavn</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
-    <string name="mapillary_menu_title_dates">Dato</string>
+    <string name="shared_string_date">Dato</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
@@ -2657,7 +2653,6 @@
     <string name="in_app_purchase">Køb i app</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
@@ -2962,7 +2957,7 @@
     <string name="third_party_routing_type">Tredjepartsruteberegning</string>
     <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
     <string name="application_profiles">App-profiler</string>
-    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Genvej\' under \'Indstillinger\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét element til listen i \'Genvej\'-indstillingerne</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint og downhill skiløb</string>
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend og nordisk skiløb</string>
@@ -3497,7 +3492,6 @@
     <string name="favorites_item">Favoritter</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="navigation_profiles_item">Navigationsprofiler</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="osmand_purchases_item">OsmAnd køb</string>
     <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
     <string name="create_edit_poi">Opret eller rediger IP</string>
@@ -3635,7 +3629,6 @@
     <string name="all_next_segments_will_be_recalc">Alle efterfølgende segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="all_previous_segments_will_be_recalc">Alle tidligere segmenter genberegnes ved hjælp af den valgte profil.</string>
     <string name="start_finish_icons">Start- og slutikoner</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
     <string name="routing_attr_length_name">Længde</string>
     <string name="contour_lines_thanks">Tak for dit køb af \'Topografi\'</string>
@@ -3913,7 +3906,7 @@
     <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede kortopdateringer hver måned og time.</string>
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
-    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok OpenStreetMap-bidrag til, at du nu kan nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
@@ -3929,7 +3922,6 @@
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
     <string name="continue_with">Fortsæt med %1$s</string>
@@ -4368,7 +4360,7 @@
 \nDu bedes ændre lageret fra Delt lager til tilgængeligt lager. Hvis dette ikke gøres, vil appen miste adgangen til dine data: herunder offline-kort, GPX-spor, etc.</string>
     <string name="delete_history_items_descr">Slet valgte historikelementer\?</string>
     <string name="delete_history_items">Slet %1$s historikelementer\?</string>
-    <string name="quick_action_toggle_preference">En skifter til at ændre præference.</string>
+    <string name="quick_action_toggle_preference">Et skifter til at ændre præference.</string>
     <string name="copying_file">Kopierer fil %1$s…</string>
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
     <string name="progress_complete">%1$s fuldført</string>
@@ -4718,7 +4710,7 @@
 \nNår du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
     <string name="compass_always_visible">Altid synlig</string>
     <string name="compass_always_hidden">Altid skjult</string>
-    <string name="compass_click_desc">Tip: Tryk på kompass-knappen for at skifte kortets orientering.</string>
+    <string name="compass_click_desc">Dobbelttryk på kompas-knappen for at skifte kortets orienteringstilstand.</string>
     <string name="auto_25_chars_route_tr_kl">Drej til højre og hold til venstre</string>
     <string name="auto_25_chars_route_tr_kr">Drej til højre og hold til højre</string>
     <string name="auto_25_chars_route_tu_kl">Foretag U-vending og hold til venstre</string>
@@ -5759,7 +5751,7 @@
     <string name="missing_maps_ignore">Brug downloadede kort</string>
     <string name="daynight_mode_sensor_summary">Bruger enhedens lyssensor til at skifte mellem lyse og mørke temaer alt efter det omgivende lysniveau.</string>
     <string name="daynight_mode_sunrise_sunset_summary">Skifter automatisk mellem dag- og nattemaer baseret på lokale solopgangs- og solnedgangstider.</string>
-    <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til nattetid eller svage lysforhold.</string>
+    <string name="daynight_mode_night_summary">Viser altid kortet i et mørkt tema, der er velegnet til natlige eller svage lysforhold.</string>
     <string name="daynight_mode_day_summary">Viser altid kortet i et lyst tema, ideelt til synlighed i dagtimerne.</string>
     <string name="daynight_mode_app_theme">App-tema</string>
     <string name="key_event_action_continuous_zoom_out">Kontinuerligt zoom ud</string>
@@ -5768,7 +5760,7 @@
     <string name="remove_key_assignment">Fjern tasttildeling</string>
     <string name="map_settings_weather_wind_animation">Animation af vind</string>
     <string name="tomorrow">I morgen</string>
-    <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema - dagtilstand ved et lyst tema og nattilstand ved et mørkt tema</string>
+    <string name="daynight_mode_app_theme_summary">Kortets visning tilpasses appens overordnede tema — dagtilstand for et lyst tema og nattilstand for et mørkt tema</string>
     <string name="shared_string_modify">Tilpas</string>
     <string name="weather_source_GFS_description">Globalt prognosesystem fra nationale centre for miljøforudsigelser</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
@@ -5821,16 +5813,16 @@
 \nIDLE 1k: %4$s</string>
     <string name="choose_map_orientation">Vælg kortets orientering</string>
     <string name="shared_string_all_icons">Alle ikoner</string>
-    <string name="navigation_position_icon_summary">Ikonet vises, mens du navigerer eller bevæger dig.</string>
+    <string name="navigation_position_icon_summary">Ikon, der vises, mens du navigerer eller bevæger dig.</string>
     <string name="resting_position_icon">Ikon for hvileposition</string>
     <string name="rendering_value_pale_name">Bleg</string>
-    <string name="profile_icon">Profil-ikon</string>
+    <string name="profile_icon">Profilikon</string>
     <string name="navigation_position_icon">Ikon for navigationsposition</string>
-    <string name="resting_position_icon_summary">Ikonet vises, når du ikke er i bevægelse.</string>
+    <string name="resting_position_icon_summary">Ikon, der vises, når du ikke bevæger dig.</string>
     <string name="navigation_position">Navigationsposition</string>
     <string name="resting_navigation_position">Hvile- og navigationsposition</string>
     <string name="view_angle_description">Viser det kegleformede område, du aktuelt vender mod</string>
-    <string name="view_angle">Synsvinkel</string>
+    <string name="view_angle">Betragtningsvinkel</string>
     <string name="location_radius_description">Viser det cirkulære område, der repræsenterer din aktuelle placeringsnøjagtighed</string>
     <string name="location_radius">Placeringsradius</string>
     <string name="resting_position">Hvileposition</string>
@@ -5893,9 +5885,99 @@
     <string name="map_3d_mode_action_descr">Skift kortets hældning.</string>
     <string name="drawer_button_description">Åbner hovedmenuen.</string>
     <string name="configure_map_description">Skift kortstil, lag eller andre indstillinger.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Vis motocross-stier</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Vis motocross-stier</string>
     <string name="raster_layers_action_descr">Skift raster-lag</string>
     <string name="type_of_activity">Aktivitetstype</string>
     <string name="change_activity">Skift aktivitet</string>
+    <string name="shared_string_increase">Øg</string>
+    <string name="shared_string_decrease">Mindsk</string>
+    <string name="open_in_browser">Åbn i browser</string>
+    <string name="shared_string_source">Kilde</string>
+    <string name="shared_string_no_internet_connection">Ingen internetforbindelse</string>
+    <string name="no_internet_descr">Tjek din forbindelse og prøv igen.</string>
+    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photos_available">Ingen fotos tilgængelige</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_gasoline">Benzin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Ethanol</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="obd_fuel_type_lpg">Flaskegas</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybrid-benzin</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybrid-ethanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybrid-diesel</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybrid-brint</string>
+    <string name="obd_fuel_type_hydrogen">Brint</string>
+    <string name="obd_fuel_type_unknown">Ukendt brændstoftype</string>
+    <string name="obd_widget_group">Køretøjsparametre</string>
+    <string name="obd_fuel_type_electric">Elektrisk</string>
+    <string name="obd_fuel_type_cng">Komprimeret naturgas (CNG)</string>
+    <string name="obd_fuel_type_not_provided">Ingen brændstoftype angivet</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid el- og forbrændingsmotor</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybrid-elektrisk</string>
+    <string name="obd_fuel_type_bifuel_lpg">To-brændstofkøretøj, der kører på flaskegas</string>
+    <string name="obd_fuel_type_bifuel_cng">To-brændstofkøretøj, der kører på komprimeret naturgas</string>
+    <string name="obd_fuel_type_bifuel_propane">To-brændstofkøretøj, der kører på propan</string>
+    <string name="obd_fuel_type_bifuel_electricity">To-brændstofkøretøj, der kører på el</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">To-brændstofkøretøj, der kører på el- og forbrændingsmotor</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">To-brændstofkøretøj, der kører på brint</string>
+    <string name="shared_string_obd">OBD (Diagnoseudtag)</string>
+    <string name="obd_speed_desc">Viser køretøjets hastighed via OBD-sensor</string>
+    <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller RPM via OBD-sensor</string>
+    <string name="obd_air_intake_temp_desc">Viser køretøjets indsugningslufttemperatur via OBD-sensor</string>
+    <string name="obd_rpm">RPM (Omdrejninger pr. minut)</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="obd_engine_coolant_temp_desc">Viser motorens kølevæsketemperatur via OBD-sensor</string>
+    <string name="obd_battery_voltage_desc">Viser batterispænding via OBD-sensor</string>
+    <string name="obd_fuel_level_desc">Viser køretøjets brændstofniveau via OBD-sensor</string>
+    <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
+    <string name="obd_fuel_type_desc">Viser køretøjets brændstoftype via OBD-sensor</string>
+    <string name="obd_air_intake_temp">Temperatur på indsugningsluft</string>
+    <string name="obd_ambient_air_temp">Omgivende lufttemperatur</string>
+    <string name="obd_battery_voltage">Batterispænding</string>
+    <string name="obd_fuel_consumption_rate_desc">Viser køretøjets brændstofforbrug baseret på OBD og placering</string>
+    <string name="obd_support">OBD-understøttelse</string>
+    <string name="obd_ambient_air_temp_desc">Viser den omgivende lufttemperatur via OBD-sensor</string>
+    <string name="obd_fuel_type_bifuel_ethanol">To-brændstofkøretøj, der kører på ethanol</string>
+    <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
+    <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
+    <string name="obd_engine_coolant_temp">Motorens kølevæsketemperatur</string>
+    <string name="obd_fuel_level">Brændstofniveau</string>
+    <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
+    <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
+    <string name="obd_fuel_type">Brændstoftype</string>
+    <string name="obd_plugin_description">Får adgang til dine køretøjsoplysninger via OBD-protokollen</string>
+    <string name="obd_plugin_name">Køretøjsparametre</string>
+    <string name="unknown_bt_device">Ukendt enhed</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">VIN-kode via OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Indstillinger for køretøjsparametre</string>
+    <string name="reset_average_speed">Nulstil gennemsnitshastighed</string>
+    <string name="quick_action_finish_trip_recording_summary">En knap til at gemme GPX-sporet og afslutte optagelse af tur.</string>
+    <string name="start_trip_recording_first_m">Start optagelse af tur først.</string>
+    <string name="new_segment_started_m">Startede optagelse af et nyt sporsegment.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Optaget tur og fortsæt</string>
+    <string name="quick_action_new_trip_segment">En knap til at starte et nyt segment i den igangværende GPX-sporoptagelse.</string>
+    <string name="new_trip_segment">Nyt tursegment</string>
+    <string name="quick_action_start_pause_recording">En knap til at starte, sætte på pause eller genoptage optagelsen af GPX-sporet.</string>
+    <string name="quick_action_verb_start_pause">Start / Pause</string>
+    <string name="help_article_personal_color_palette_schemes_name">Farvesammensætninger</string>
+    <string name="movies_list">Filmliste</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">En knap til at gemme den aktuelt optagne tur som en GPX-fil og fortsætte optagelsen af et nyt spor uden afbrydelse.</string>
+    <string name="track_does_not_contain_data_to_save">Sporet indeholder ikke data, der skal gemmes.</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="third_links">Tredje-links</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="lock_screen">Lås skærm</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
+    <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
+    <string name="liter_per_hour">l/t</string>
+    <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter\n\n</string>
 </resources>

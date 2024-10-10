@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;

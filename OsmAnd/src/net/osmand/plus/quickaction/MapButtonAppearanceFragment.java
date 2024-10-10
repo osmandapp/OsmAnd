@@ -1,6 +1,8 @@
 package net.osmand.plus.quickaction;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -23,6 +27,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonCard;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -141,7 +146,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> {
-			saveChanges();
+			applyChanges();
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
@@ -150,11 +155,37 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		});
 	}
 
-	private void saveChanges() {
-		buttonState.getSizePref().set(appearanceParams.getSize());
-		buttonState.getOpacityPref().set(appearanceParams.getOpacity());
-		buttonState.getCornerRadiusPref().set(appearanceParams.getCornerRadius());
-		buttonState.getIconPref().set(appearanceParams.getIconName());
+	private void applyChanges() {
+		saveChanges(false);
+		showAllModesSnackbar();
+	}
+
+	private void showAllModesSnackbar() {
+		View containerView = getView();
+		if (containerView != null) {
+			String name = settings.getApplicationMode().toHumanString();
+			String text = app.getString(R.string.changes_applied_to_profile, name);
+			SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, name);
+			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
+					.setAction(R.string.apply_to_all_profiles, view -> saveChanges(true));
+			UiUtilities.setupSnackbarVerticalLayout(snackbar);
+			UiUtilities.setupSnackbar(snackbar, nightMode);
+			snackbar.show();
+		}
+	}
+
+	private void saveChanges(boolean applyToAllProfiles) {
+		if (applyToAllProfiles) {
+			settings.setPreferenceForAllModes(buttonState.getSizePref().getId(), appearanceParams.getSize());
+			settings.setPreferenceForAllModes(buttonState.getOpacityPref().getId(), appearanceParams.getOpacity());
+			settings.setPreferenceForAllModes(buttonState.getCornerRadiusPref().getId(), appearanceParams.getCornerRadius());
+			settings.setPreferenceForAllModes(buttonState.getIconPref().getId(), appearanceParams.getIconName());
+		} else {
+			buttonState.getSizePref().set(appearanceParams.getSize());
+			buttonState.getOpacityPref().set(appearanceParams.getOpacity());
+			buttonState.getCornerRadiusPref().set(appearanceParams.getCornerRadius());
+			buttonState.getIconPref().set(appearanceParams.getIconName());
+		}
 	}
 
 	private void updateContent() {
@@ -252,7 +283,10 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 
 			MapButtonAppearanceFragment fragment = new MapButtonAppearanceFragment();
 			fragment.setArguments(args);
-			manager.beginTransaction().replace(R.id.fragmentContainer, fragment, TAG).addToBackStack(TAG).commitAllowingStateLoss();
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 }

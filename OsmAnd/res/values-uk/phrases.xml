@@ -98,7 +98,7 @@
     <string name="poi_fire_water_pond">Пожежний ставок</string>
     <string name="poi_grit_bin">Ящик з піском</string>
     <string name="poi_ambulance_station">Станція швидкої медичної допомоги</string>
-    <string name="poi_ses_station">Санепідемстанція</string>
+    <string name="poi_disaster_response">Санепідемстанція</string>
     <string name="poi_emergency_access_point">Місце отримання невідкладної допомоги</string>
     <string name="poi_ford">Брід</string>
     <string name="poi_mountain_pass">Перевал</string>
@@ -1936,7 +1936,7 @@
     <string name="poi_depth">Глибина</string>
     <string name="poi_payment_dogecoin_yes">Dogecoin</string>
     <string name="poi_artwork_type_installation">Вид: інсталяція</string>
-    <string name="poi_defibrillator">Дефібрилятор</string>
+    <string name="poi_defibrillator">Дефібрилятор;АЗД</string>
     <string name="poi_salt_yes">Сіль</string>
     <string name="poi_artwork_type_mosaic">Вид: мозаїка</string>
     <string name="poi_defibrillator_yes">Дефібрилятор: є</string>
@@ -4873,4 +4873,5 @@
     <string name="poi_cash_in_customers">Клієнти</string>
     <string name="poi_cash_in">Поповнення готівки</string>
     <string name="poi_diet_pescetarian_no">Пескетаріанська дієта: ні</string>
+    <string name="poi_osmand_access_main_tag">Доступ</string>
 </resources>

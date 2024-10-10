@@ -299,7 +299,7 @@ public class MapButtonsHelper {
 	public boolean isActionNameUnique(@NonNull List<QuickAction> actions, @NonNull QuickAction quickAction) {
 		for (QuickAction action : actions) {
 			if (quickAction.getId() != action.getId()
-					&& Algorithms.stringsEqual(quickAction.getName(app), action.getName(app))) {
+					&& Algorithms.stringsEqual(quickAction.getExtendedName(app), action.getExtendedName(app))) {
 				return false;
 			}
 		}
@@ -391,6 +391,7 @@ public class MapButtonsHelper {
 		allTypes.add(OpenSearchViewAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
+		allTypes.add(LockScreenAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);

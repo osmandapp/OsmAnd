@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
@@ -120,14 +120,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 			boolean filtersChanged = false;
 			TracksSearchFilter searchFilter = (TracksSearchFilter) adapter.getFilter();
 			List<BaseTrackFilter> currentFilters = searchFilter.getAppliedFilters();
-			if (currentFilters.size() != smartFolder.getFilters().size()) {
-				filtersChanged = true;
-			} else {
-				for (BaseTrackFilter folderFilter : smartFolder.getFilters()) {
-					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
-					if (currentFilter == null || !currentFilter.equals(folderFilter)) {
-						filtersChanged = true;
-						break;
+			List<BaseTrackFilter> filters = smartFolder.getFilters();
+			if (filters != null) {
+				if (currentFilters.size() != filters.size()) {
+					filtersChanged = true;
+				} else {
+					for (BaseTrackFilter folderFilter : filters) {
+						BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
+						if (currentFilter == null || !currentFilter.equals(folderFilter)) {
+							filtersChanged = true;
+							break;
+						}
 					}
 				}
 			}

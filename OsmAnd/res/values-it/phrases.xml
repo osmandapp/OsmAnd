@@ -316,7 +316,7 @@
     <string name="poi_racquet">Racquetball</string>
     <string name="poi_fire_flapper">Pala battifuoco</string>
     <string name="poi_fire_hose">Manichetta antincendio</string>
-    <string name="poi_ses_station">Stazione protezione civile</string>
+    <string name="poi_disaster_response">Stazione protezione civile</string>
     <string name="poi_grit_bin">Cassone di sabbia</string>
     <string name="poi_fire_water_pond">Bacino anti-incendio</string>
     <string name="poi_emergency_access_point">Punto di accesso di emergenza</string>
@@ -347,7 +347,7 @@
     <string name="poi_public_transport_platform_trolleybus">Fermata filobus</string>
     <string name="poi_railway_station">Stazione ferroviaria</string>
     <string name="poi_water_well">Pozzo</string>
-    <string name="poi_standpipe">Fontanella</string>
+    <string name="poi_standpipe">Tubazione montante d\'acqua</string>
     <string name="poi_water_works">Impianto idrico</string>
     <string name="poi_boatyard">Cantiere navale</string>
     <string name="poi_water_tower">Torre idrica</string>
@@ -1259,7 +1259,7 @@
     <string name="poi_bench">Panca</string>
     <string name="poi_food_court">Corte del cibo</string>
     <string name="poi_cutline">Linea di taglio</string>
-    <string name="poi_toilets">Toilette, Servizi igienici</string>
+    <string name="poi_toilets">Toilette</string>
     <string name="poi_payment_terminal">Terminale di pagamento</string>
     <string name="poi_stone">Notevole pietra</string>
     <string name="poi_fog_signal">Segnale da nebbia</string>
@@ -1982,8 +1982,8 @@
     <string name="poi_photo_studio">Studio fotografico</string>
     <string name="poi_reef">Barriera corallina</string>
     <string name="poi_wheelchair_accessibility">Accessibilità in carrozzina</string>
-    <string name="poi_toilets_wheelchair_yes">Accesso alla toletta in carrozzina: sì</string>
-    <string name="poi_toilets_wheelchair_no">Accesso alla toletta in carrozzina: no</string>
+    <string name="poi_toilets_wheelchair_yes">Accesso ai bagni in carrozzina: sì</string>
+    <string name="poi_toilets_wheelchair_no">Accesso ai bagni in carrozzina: no</string>
     <string name="poi_wheelchair_description">Descrizione per utenti in carrozzina</string>
     <string name="poi_ramp_wheelchair_yes">Rampa per carrozzina: sì</string>
     <string name="poi_ramp_wheelchair_no">Rampa per carrozzina: No</string>
@@ -4371,4 +4371,7 @@
     <string name="poi_lavoir">Lavatoio</string>
     <string name="poi_medical_supply_orthotics">Ortesi</string>
     <string name="poi_massage_chiropractic">Chiropratico</string>
+    <string name="poi_toilets_position_squat">Posizione della toilette: turca</string>
+    <string name="poi_toilets_position_urinal">Positizione della toilette: orinale</string>
+    <string name="poi_toilets_position_seated">Posizione sulla toilette: seduta</string>
 </resources>

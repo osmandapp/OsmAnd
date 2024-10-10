@@ -2385,7 +2385,7 @@
     <string name="shared_string_to">إلى</string>
     <string name="mapillary_menu_date_from">مِن</string>
     <string name="mapillary_menu_descr_dates">عرض الصور المضافة في فترة زمنية معينة</string>
-    <string name="mapillary_menu_title_dates">التاريخ</string>
+    <string name="shared_string_date">التاريخ</string>
     <string name="mapillary_menu_edit_text_hint">اسم المستخدم</string>
     <string name="mapillary_menu_descr_username">عرض صور أضافها مستخدم معين</string>
     <string name="mapillary_menu_title_username">اسم المستخدم</string>
@@ -3848,7 +3848,6 @@
 \nسيتوفر الرسم البياني بعد إعادة الحساب.</string>
     <string name="snowmobile_render_descr">للقيادة على الجليد مع طرق ومسارات مخصصة.</string>
     <string name="shared_string_graph">رسم بياني</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="shared_string_local_maps">الخرائط المحلية</string>
     <string name="icon_group_amenity">راحة</string>
     <string name="icon_group_special">خاص</string>

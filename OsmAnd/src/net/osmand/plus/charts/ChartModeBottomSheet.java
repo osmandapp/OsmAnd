@@ -247,7 +247,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 		return item;
 	}
 
-	public List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
+	public static List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
 		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
 			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIME_OF_DAY) {
@@ -262,7 +262,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableDefaultYTypes(@NonNull GpxTrackAnalysis analysis) {
+	public static List<GPXDataSetType[]> getAvailableDefaultYTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasElevationData = analysis.hasElevationData();
 		boolean hasSpeedData = analysis.hasSpeedData();
@@ -277,7 +277,7 @@ public class ChartModeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
+	public static List<GPXDataSetType[]> getAvailableSensorYTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		return availableTypes;

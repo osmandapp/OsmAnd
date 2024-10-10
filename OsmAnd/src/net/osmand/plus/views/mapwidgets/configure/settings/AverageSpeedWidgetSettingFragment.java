@@ -59,6 +59,7 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 		setupSkipStopsSetting();
 		themedInflater.inflate(R.layout.divider, container);
 		super.setupContent(themedInflater, container);
+		setupSettingAction(themedInflater, container);
 	}
 
 	private void setupIntervalSliderCard() {
@@ -83,6 +84,16 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 
 		skipStopsContainer.setOnClickListener(v -> skipStopsToggle.setChecked(!skipStopsToggle.isChecked()));
 		skipStopsContainer.setBackground(getPressedStateDrawable());
+	}
+
+	private void setupSettingAction(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+		themedInflater.inflate(R.layout.divider, container);
+		View actionView = themedInflater.inflate(R.layout.setting_action_button, null);
+		actionView.setBackground(getPressedStateDrawable());
+		actionView.setOnClickListener(v -> speedWidget.resetAverageSpeed());
+		TextView title = actionView.findViewById(R.id.action_title);
+		title.setText(R.string.reset_average_speed);
+		container.addView(actionView);
 	}
 
 	@Override

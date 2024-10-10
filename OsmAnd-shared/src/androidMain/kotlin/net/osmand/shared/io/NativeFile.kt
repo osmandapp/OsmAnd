@@ -6,7 +6,13 @@ import java.io.File
 
 actual class NativeFile actual constructor(actual val file: KFile) {
 
-	private var jFile = file.jFile()
+	private var jFile = File(file.path())
+
+	actual fun absolutePath(): String = jFile.absolutePath
+
+	actual fun isDirectory(): Boolean = jFile.isDirectory
+
+	actual fun exists(): Boolean = jFile.exists()
 
 	actual fun length(): Long = jFile.length()
 

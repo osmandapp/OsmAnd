@@ -7,7 +7,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;

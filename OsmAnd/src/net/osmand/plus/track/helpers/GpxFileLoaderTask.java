@@ -8,17 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxUtilities;
 
 import java.io.File;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
-
-import okio.Okio;
 
 @SuppressWarnings("deprecation")
 public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {

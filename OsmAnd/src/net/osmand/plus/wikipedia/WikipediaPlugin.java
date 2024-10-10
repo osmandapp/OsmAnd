@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
+import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.OTHER;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +37,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -279,7 +280,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 		}
 		if (imageCard != null) {
-			holder.add(ImageCard.ImageCardType.OTHER, imageCard);
+			holder.addCard(OTHER, imageCard);
 			return true;
 		}
 		return false;

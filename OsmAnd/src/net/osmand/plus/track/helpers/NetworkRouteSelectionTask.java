@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.base.BaseLoadAsyncTask;

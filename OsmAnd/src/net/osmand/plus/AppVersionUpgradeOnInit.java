@@ -8,6 +8,8 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
+import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
+import static net.osmand.plus.plugins.srtm.TerrainMode.TerrainType.HEIGHT;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
@@ -45,6 +47,7 @@ import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -133,8 +136,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_07 = 4707;
 	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
 	public static final int VERSION_4_8_01 = 4801;
+	public static final int VERSION_4_8_02 = 4802;
 
-	public static final int LAST_APP_VERSION = VERSION_4_8_01;
+	public static final int LAST_APP_VERSION = VERSION_4_8_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -282,6 +286,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_8_01) {
 					migrateFixedNorthToManualRotatedCompassMode(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_02) {
+					migrateTerrainModeDefaultPreferences(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -952,6 +959,28 @@ public class AppVersionUpgradeOnInit {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			if (settings.getCompassMode(mode) == CompassMode.NORTH_IS_UP) {
 				settings.setCompassMode(CompassMode.MANUALLY_ROTATED, mode);
+			}
+		}
+	}
+
+	private void migrateTerrainModeDefaultPreferences(@NonNull OsmandSettings settings) {
+		OsmandPreference<Integer> oldDefaultMinZoomPref = new IntPreference(settings, DEFAULT_KEY + "_min_zoom", 0);
+		OsmandPreference<Integer> oldDefaultMaxZoomPref = new IntPreference(settings, DEFAULT_KEY + "_max_zoom", 0);
+		OsmandPreference<Integer> oldDefaultTransparencyPref = new IntPreference(settings, DEFAULT_KEY + "_transparency", 0);
+
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			Integer oldMinZoom = oldDefaultMinZoomPref.getModeValue(mode);
+			Integer oldMaxZoom = oldDefaultMaxZoomPref.getModeValue(mode);
+			Integer oldTransparencyZoom = oldDefaultTransparencyPref.getModeValue(mode);
+			for (TerrainMode terrainMode : TerrainMode.values(app)) {
+				if (terrainMode.isDefaultMode() && terrainMode.getType() != HEIGHT) {
+					if (oldDefaultMinZoomPref.isSetForMode(mode) && oldDefaultMaxZoomPref.isSetForMode(mode)) {
+						terrainMode.setZoomValues(oldMinZoom, oldMaxZoom);
+					}
+					if (oldDefaultTransparencyPref.isSetForMode(mode)) {
+						terrainMode.setTransparency(oldTransparencyZoom);
+					}
+				}
 			}
 		}
 	}

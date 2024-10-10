@@ -7,4 +7,7 @@ class GpxDirItem(file: KFile) : DataItem(file) {
 	override fun isValidValue(parameter: GpxParameter, value: Any?): Boolean {
 		return parameter.isAppearanceParameter() && (value == null || parameter.typeClass == value::class)
 	}
+
+	override fun getParameters(): Map<GpxParameter, Any?> =
+		GpxParameter.getGpxDirParameters().associateWith { parameter -> getParameter(parameter) }
 }

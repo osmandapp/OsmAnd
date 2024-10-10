@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static com.google.android.material.slider.LabelFormatter.LABEL_FLOATING;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -30,12 +32,14 @@ public class ButtonSizeCard extends SliderButtonsCard {
 
 	protected void setupSlider(@NonNull View view) {
 		super.setupSlider(view);
+		UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 
 		slider.setValueTo(MAX_BUTTON_SIZE);
 		slider.setValueFrom(MIN_BUTTON_SIZE);
 		slider.setStepSize(BUTTON_SIZE_STEP);
 		slider.setValue(appearanceParams.getSize());
-		UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
+		slider.setLabelBehavior(LABEL_FLOATING);
+		slider.setLabelFormatter(ButtonSizeCard.this::getFormattedValue);
 	}
 
 	protected void onValueSelected(float value) {

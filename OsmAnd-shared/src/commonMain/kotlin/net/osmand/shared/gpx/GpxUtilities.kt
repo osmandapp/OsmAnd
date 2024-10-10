@@ -178,6 +178,11 @@ object GpxUtilities {
 				val gpxColor = GpxColor.getColorFromName(colorString)
 				if (gpxColor != null) {
 					return gpxColor.color
+				} else {
+					try {
+						return colorString.toInt()
+					} catch (_: NumberFormatException) {
+					}
 				}
 			}
 		}
@@ -409,6 +414,10 @@ object GpxUtilities {
 
 	fun writeGpxFile(file: KFile, gpxFile: GpxFile): KException? {
 		return try {
+			file.getParentFile()?.createDirectories()
+			if (KAlgorithms.isEmpty(gpxFile.path)) {
+				gpxFile.path = if (file.isAbsolute()) file.path() else file.absolutePath()
+			}
 			writeGpx(file, null, gpxFile, null)
 		} catch (e: KException) {
 			log.error("Failed to write gpx '$file.path()'", e)
@@ -729,15 +738,16 @@ object GpxUtilities {
 		progress?.progress(1)
 	}
 
-	fun assignExtensionWriter(wptPt: WptPt, pluginsExtensions: Map<String, String>) {
+	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
-		for ((key, value) in pluginsExtensions) {
+		for ((key, value) in extensions) {
 			if (key.startsWith(GPXTPX_PREFIX)) {
 				gpxtpxExtensions[key] = value
 			} else {
 				regularExtensions[key] = value
 			}
+			wptPt.getDeferredExtensionsToWrite()[key] = value
 		}
 		if (regularExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
@@ -965,7 +975,7 @@ object GpxUtilities {
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
 			if (gpxFile.error != null) {
-				log.info("Error reading gpx ${gpxFile.path}")
+				log.info("Error reading gpx ${gpxFile.path}: ${gpxFile.error!!.message}")
 			}
 			gpxFile
 		} catch (e: IOException) {

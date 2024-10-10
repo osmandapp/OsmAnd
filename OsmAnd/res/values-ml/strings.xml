@@ -1734,7 +1734,7 @@
     <string name="add_point_after">"അടുത്ത ബിന്ദുവായ്  ചേര്‍ക്കുക "</string>
     <string name="shared_string_options">ഐച്ഛികങ്ങള്‍</string>
     <string name="shared_string_reset">വീണ്ടും തുടങ്ങുക</string>
-    <string name="mapillary_menu_title_dates">"തിയതി "</string>
+    <string name="shared_string_date">"തിയതി "</string>
     <string name="mapillary_menu_title_username">ഉപയോക്തൃനാമം</string>
     <string name="shared_string_install">സ്ഥാപിക്കുക</string>
     <string name="srtm_color_scheme">നിറങ്ങളുടെ സ്കീം</string>

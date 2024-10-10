@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
@@ -25,11 +25,12 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.io.KFile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,15 +93,16 @@ public class GpxSettingsItem extends FileSettingsItem {
 				savedFile = ((FileSettingsItemReader) reader).getSavedFile();
 			}
 			if (savedFile != null) {
+				KFile kSavedFile = SharedUtil.kFile(savedFile);
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-				boolean readItem = gpxDbHelper.hasGpxDataItem(savedFile);
+				boolean readItem = gpxDbHelper.hasGpxDataItem(kSavedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
 					dataItem = new GpxDataItem(SharedUtil.kFile(savedFile));
 					readItem = !gpxDbHelper.add(dataItem);
 				}
 				if (readItem) {
-					dataItem = gpxDbHelper.getItem(savedFile, this::updateGpxParams);
+					dataItem = gpxDbHelper.getItem(kSavedFile, this::updateGpxParams);
 				}
 				if (dataItem != null) {
 					updateGpxParams(dataItem);
@@ -134,7 +136,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void createGpxAppearanceInfo() {
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(app, item));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> appearanceInfo = new GpxAppearanceInfo(app, item));
 		if (dataItem != null) {
 			appearanceInfo = new GpxAppearanceInfo(app, dataItem);
 		}
@@ -165,8 +167,9 @@ public class GpxSettingsItem extends FileSettingsItem {
 					gpxHelper.selectGpxFile(gpxFile, params);
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-				if (!gpxDbHelper.hasGpxDataItem(file)) {
-					gpxDbHelper.add(new GpxDataItem(SharedUtil.kFile(file)));
+				KFile kFile = SharedUtil.kFile(file);
+				if (!gpxDbHelper.hasGpxDataItem(kFile)) {
+					gpxDbHelper.add(new GpxDataItem(kFile));
 				}
 			}
 		};

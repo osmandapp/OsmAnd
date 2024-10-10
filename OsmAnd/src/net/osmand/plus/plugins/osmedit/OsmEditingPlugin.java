@@ -7,10 +7,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_IT
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
-import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
-import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,13 +28,13 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
-import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -80,7 +78,6 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -91,6 +88,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
@@ -234,6 +232,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		quickActionTypes.add(AddPOIAction.TYPE);
 		quickActionTypes.add(AddOSMBugAction.TYPE);
 		quickActionTypes.add(ShowHideOSMBugAction.TYPE);
+		quickActionTypes.add(ShowHideOSMEditsAction.TYPE);
 		return quickActionTypes;
 	}
 
@@ -347,7 +346,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
-			isEditable = isOsmUrlAvailable((MapObject) selectedObj);
+			isEditable = OsmUtils.isOsmUrlAvailable((MapObject) selectedObj);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
@@ -602,16 +601,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
-		if (object instanceof Amenity) {
-			Amenity amenity = (Amenity) object;
-			String link = getOsmUrlForId(amenity);
+		if (object instanceof Amenity amenity) {
+			String link = OsmUtils.getOsmUrlForId(amenity);
 			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 						0, false, null, true, 0, true, null, false);
 			}
-		} else if (object instanceof RenderedObject) {
-			RenderedObject renderedObject = (RenderedObject) object;
-			String link = getOsmUrlForId(renderedObject);
+		} else if (object instanceof RenderedObject renderedObject) {
+			String link = OsmUtils.getOsmUrlForId(renderedObject);
 			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
 						null, true, 0, true, null, false);
@@ -713,53 +710,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 
 		return description;
-	}
-
-	public static boolean isOsmUrlAvailable(@NonNull MapObject object) {
-		Long id = object.getId();
-		return id != null && id > 0;
-	}
-
-	public static long getOsmObjectId(@NonNull MapObject object) {
-		long originalId = -1;
-		Long id = object.getId();
-		if (id != null) {
-			if (object instanceof RenderedObject) {
-				id >>= 1;
-			}
-			if (MapSelectionHelper.isShiftedID(id)) {
-				originalId = MapSelectionHelper.getOsmId(id);
-			} else {
-				int shift = object instanceof Amenity ? AMENITY_ID_RIGHT_SHIFT : SHIFT_ID;
-				originalId = id >> shift;
-			}
-		}
-		return originalId;
-	}
-
-	@Nullable
-	public static EntityType getOsmEntityType(@NonNull MapObject object) {
-		if (isOsmUrlAvailable(object)) {
-			Long id = object.getId();
-			long originalId = id >> 1;
-			long relationShift = 1L << 41;
-			if (originalId > relationShift) {
-				return EntityType.RELATION;
-			} else {
-				return id % 2 == MapObject.WAY_MODULO_REMAINDER ? EntityType.WAY : EntityType.NODE;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	public static String getOsmUrlForId(@NonNull MapObject mapObject) {
-		EntityType type = getOsmEntityType(mapObject);
-		if (type != null) {
-			long osmId = getOsmObjectId(mapObject);
-			return "https://www.openstreetmap.org/" + type.name().toLowerCase(Locale.US) + "/" + osmId;
-		}
-		return null;
 	}
 
 	@Override

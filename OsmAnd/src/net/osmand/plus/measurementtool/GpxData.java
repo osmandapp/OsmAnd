@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.QuadRect;
 

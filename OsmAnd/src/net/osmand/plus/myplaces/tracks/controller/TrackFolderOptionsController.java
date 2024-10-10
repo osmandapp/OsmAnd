@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -174,7 +174,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		File newDir = new File(oldDir.getParentFile(), newName);
 		if (oldDir.renameTo(newDir)) {
 			trackFolder.setDirFile(SharedUtil.kFile(newDir));
-			trackFolder.resetCashedData();
+			trackFolder.resetCachedData();
 
 			List<File> files = new ArrayList<>();
 			for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {

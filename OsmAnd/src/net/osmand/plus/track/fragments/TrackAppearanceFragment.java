@@ -1,7 +1,5 @@
 package net.osmand.plus.track.fragments;
-import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 
-import static net.osmand.gpx.GpxParameter.*;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
@@ -11,6 +9,7 @@ import static net.osmand.plus.track.cards.Track3DCard.WALL_HEIGHT_BUTTON_INDEX;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
@@ -49,7 +48,6 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
@@ -62,7 +60,6 @@ import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -76,8 +73,6 @@ import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -87,10 +82,14 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.io.KFile;
+import net.osmand.shared.routing.ColoringType;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,7 +181,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				restoreSelectedGpxFile(trackDrawInfo.getFilePath(), trackDrawInfo.isCurrentRecording());
 			}
 			if (!trackDrawInfo.isCurrentRecording()) {
-				gpxDataItem = gpxDbHelper.getItem(new File(trackDrawInfo.getFilePath()));
+				gpxDataItem = gpxDbHelper.getItem(new KFile(trackDrawInfo.getFilePath()));
 			}
 			showStartFinishIconsInitialValue = savedInstanceState.getBoolean(SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY,
 					settings.CURRENT_TRACK_SHOW_START_FINISH.get());
@@ -208,7 +207,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					}
 				};
 				String filePath = selectedGpxFile.getGpxFile().getPath();
-				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
+				gpxDataItem = gpxDbHelper.getItem(new KFile(filePath), callback);
 				trackDrawInfo = new TrackDrawInfo(app, filePath, gpxDataItem);
 			}
 		}

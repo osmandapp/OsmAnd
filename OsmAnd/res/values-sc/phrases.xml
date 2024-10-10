@@ -86,7 +86,7 @@
     <string name="poi_emergency_phone">Telèfonu de emergèntzia</string>
     <string name="poi_fire_hydrant">Idrante</string>
     <string name="poi_fire_extinguisher">Istudadore</string>
-    <string name="poi_ses_station">Istatzione \"protezione civile\"</string>
+    <string name="poi_disaster_response">Istatzione \"protezione civile\"</string>
     <string name="poi_emergency_access_point">Logu de intrada de emergèntzia</string>
     <string name="poi_ford">Badu</string>
     <string name="poi_mountain_pass">Coladòrgiu montanu</string>

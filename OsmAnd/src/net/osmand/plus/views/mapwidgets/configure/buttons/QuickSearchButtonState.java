@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
 import androidx.annotation.NonNull;
@@ -52,6 +52,6 @@ public class QuickSearchButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_action_search_dark", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams("ic_action_search_dark", SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 }

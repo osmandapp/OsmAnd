@@ -25,6 +25,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmAndConstants;
@@ -40,7 +42,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
@@ -48,6 +49,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -124,7 +126,7 @@ public class GpxDialogs {
 
 			private GpxDataItem getDataItem(GPXInfo info) {
 				return app.getGpxDbHelper().getItem(
-						new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()),
+						new KFile(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR), info.getFileName()),
 						gpxDataItemCallback);
 			}
 
@@ -234,8 +236,8 @@ public class GpxDialogs {
 				item.setSelected(!item.getSelected());
 				alertDialogAdapter.notifyDataSetInvalidated();
 				if (position == 0 && showCurrentGpx && item.getSelected()) {
-					OsmandMonitoringPlugin monitoringPlugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-					if (monitoringPlugin == null) {
+					OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
+					if (plugin == null) {
 						AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 						confirm.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							Bundle params = new Bundle();
@@ -245,8 +247,8 @@ public class GpxDialogs {
 						confirm.setNegativeButton(R.string.shared_string_cancel, null);
 						confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 						confirm.show();
-					} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-						monitoringPlugin.askShowTripRecordingDialog(activity);
+					} else if (!plugin.isRecordingTrack()) {
+						plugin.askShowTripRecordingDialog(activity);
 					}
 				}
 			} else {

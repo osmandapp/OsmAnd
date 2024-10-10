@@ -103,12 +103,9 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonClear)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (fragmentManager != null && hasDataToSave()) {
-							TripRecordingClearDataBottomSheet.showInstance(fragmentManager, TripRecordingOptionsBottomSheet.this);
-						}
+				.setOnClickListener(v -> {
+					if (fragmentManager != null && hasDataToSave()) {
+						TripRecordingClearDataBottomSheet.showInstance(fragmentManager, TripRecordingOptionsBottomSheet.this);
 					}
 				})
 				.create());
@@ -117,12 +114,9 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonDiscard)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (fragmentManager != null) {
-							TripRecordingDiscardBottomSheet.showInstance(fragmentManager, TripRecordingOptionsBottomSheet.this);
-						}
+				.setOnClickListener(v -> {
+					if (fragmentManager != null) {
+						TripRecordingDiscardBottomSheet.showInstance(fragmentManager, TripRecordingOptionsBottomSheet.this);
 					}
 				})
 				.create());
@@ -131,13 +125,10 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonOnline)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean wasOnlineMonitored = !settings.LIVE_MONITORING.get();
-						settings.LIVE_MONITORING.set(wasOnlineMonitored);
-						createItem(buttonOnline, wasOnlineMonitored ? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
-					}
+				.setOnClickListener(v -> {
+					boolean wasOnlineMonitored = !settings.LIVE_MONITORING.get();
+					settings.LIVE_MONITORING.set(wasOnlineMonitored);
+					createItem(buttonOnline, wasOnlineMonitored ? ItemType.STOP_ONLINE : ItemType.START_ONLINE);
 				})
 				.create());
 

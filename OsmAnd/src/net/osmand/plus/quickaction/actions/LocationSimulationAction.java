@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -216,7 +217,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> {
 				if (item.getAnalysis() != null) {
 					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}

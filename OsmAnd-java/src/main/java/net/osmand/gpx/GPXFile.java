@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Deprecated
 public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public String author;

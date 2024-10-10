@@ -154,6 +154,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 	}
 
+	public String getPreferredMapLangLC() {
+		return getPreferredMapLang().toLowerCase();
+	}
+
 	public String getPreferredMapLang() {
 		return builder.getPreferredMapLang();
 	}

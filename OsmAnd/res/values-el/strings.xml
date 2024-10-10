@@ -1730,7 +1730,7 @@
     <string name="mapillary_menu_title_tile_cache">Κρυφή μνήμη πλακιδίου</string>
     <string name="wrong_user_name">Εσφαλμένο όνομα χρήστη</string>
     <string name="mapillary_menu_descr_dates">Προβολή μόνο των προσθετημένων εικόνων</string>
-    <string name="mapillary_menu_title_dates">Ημερομηνία</string>
+    <string name="shared_string_date">Ημερομηνία</string>
     <string name="mapillary_menu_edit_text_hint">Πληκτρολογήστε όνομα χρήστη</string>
     <string name="mapillary_menu_descr_username">Προβολή μόνο των εικόνων που προστέθηκαν από</string>
     <string name="mapillary_menu_filter_description">Φιλτράρετε εικόνες κατά υποβάλλοντα, κατά ημερομηνία ή κατά τύπο. Μόνο ενεργό σε κοντινή εστίαση.</string>
@@ -3682,7 +3682,6 @@
     <string name="wiki_menu_download_descr">Απαιτούνται πρόσθετοι χάρτες για να προβάλετε τα ΣΕ της Wikipedia στον χάρτη.</string>
     <string name="select_wikipedia_article_langs">Επιλέξτε τις γλώσσες για τα άρθρα Wikipedia στον χάρτη. Αλλάξτε σε οποιαδήποτε διαθέσιμη γλώσσα κατά την ανάγνωση του άρθρου.</string>
     <string name="radius_ruler_item">Χάρακας ακτίνας</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="map_markers_desc">Το γραφικό στοιχείο δείχνει την απόσταση ή την εκτιμώμενη ώρα άφιξης (ETA) για τους δύο πρώτους δείκτες στη λίστα δεικτών χάρτη.</string>
     <string name="shared_string_next_sunset">Επόμενο ηλιοβασίλεμα</string>
     <string name="shared_string_next_sunrise">Επόμενη ανατολή</string>

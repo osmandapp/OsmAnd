@@ -9,9 +9,9 @@ import androidx.annotation.WorkerThread;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.TrackItem;
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+@Deprecated
 public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	private static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
@@ -128,9 +129,9 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			folder.resetCashedData();
+			folder.resetCachedData();
 		}
-		rootFolder.resetCashedData();
+		rootFolder.resetCachedData();
 	}
 
 	@Nullable

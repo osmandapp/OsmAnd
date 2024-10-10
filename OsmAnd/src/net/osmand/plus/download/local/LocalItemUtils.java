@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
@@ -79,7 +80,7 @@ public class LocalItemUtils {
 		if (type == MULTIMEDIA_NOTES) {
 			item.setAttachedObject(new Recording(file));
 		} else if (type == TRACKS) {
-			item.setAttachedObject(app.getGpxDbHelper().getItem(file, item::setAttachedObject));
+			item.setAttachedObject(app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item::setAttachedObject));
 		} else if (type == TILES_DATA) {
 			ITileSource template = null;
 			if (file.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(file)) {

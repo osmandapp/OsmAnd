@@ -2,12 +2,19 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.ColoringType
+import net.osmand.shared.util.PlatformUtil
 
 class GpxDataItem(
 	file: KFile
 ) : DataItem(file) {
 
 	private var analysis: GpxTrackAnalysis? = null
+
+	companion object {
+		fun isRegularTrack(file: KFile) = file.path().startsWith(PlatformUtil.getOsmAndContext().getGpxDir().path())
+	}
+
+	fun isRegularTrack() = Companion.isRegularTrack(file)
 
 	fun getAnalysis(): GpxTrackAnalysis? {
 		return analysis
@@ -150,4 +157,46 @@ class GpxDataItem(
 			else -> {}
 		}
 	}
+
+	inline fun <reified T: Any> getAppearanceParameter(parameter: GpxParameter): T? {
+		var value: Any? = getAppearanceParameter<Any>(this, parameter)
+		if (value == null) {
+			value = parameter.defaultValue
+		}
+		return castGpxParameter<T>(parameter, value)
+	}
+
+	inline fun <reified T: Any> getAppearanceParameter(file: KFile, parameter: GpxParameter): T? {
+		val item = GpxDbHelper.getItem(file)
+		if (item != null) {
+			return getAppearanceParameter<T>(item, parameter)
+		}
+		return null
+	}
+
+	inline fun <reified T: Any> getAppearanceParameter(item: GpxDataItem, parameter: GpxParameter): T? {
+		var value: T? = item.getParameter(parameter)
+		if (value != null) {
+			return castGpxParameter<T>(parameter, value)
+		}
+		val dir = item.file.getParentFile()
+		if (dir != null) {
+			val dirItem = GpxDbHelper.getGpxDirItem(dir)
+			value = dirItem.getParameter(parameter)
+			if (value != null) {
+				return castGpxParameter<T>(parameter, value)
+			}
+		}
+		return null
+	}
+
+	inline fun <reified T : Any> castGpxParameter(parameter: GpxParameter, value: Any?): T? {
+		return if (parameter.typeClass.isInstance(value)) value as? T else null
+	}
+
+	override fun getParameters(): Map<GpxParameter, Any?> =
+		GpxParameter.entries.associateWith { parameter ->
+			if (parameter.analysisParameter) analysis?.getGpxParameter(parameter)
+			else getParameter(parameter)
+		}
 }

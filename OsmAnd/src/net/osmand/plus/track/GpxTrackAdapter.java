@@ -13,22 +13,22 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -203,7 +203,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 				notifyItemChanged(gpxInfoList.indexOf(info));
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()), callback);
+		return app.getGpxDbHelper().getItem(new KFile(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR), info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {

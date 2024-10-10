@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
@@ -459,12 +460,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(@NonNull MapObject object) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
+		EntityType type = OsmUtils.getOsmEntityType(object);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmEditingPlugin.getOsmObjectId(object);
+		long entityId = OsmUtils.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,

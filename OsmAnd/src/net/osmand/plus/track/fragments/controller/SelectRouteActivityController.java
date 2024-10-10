@@ -17,7 +17,7 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.helpers.RouteActivityHelper;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.track.fragments.SelectRouteActivityFragment;
 import net.osmand.plus.track.helpers.RouteActivitySearchFilter;
 import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;

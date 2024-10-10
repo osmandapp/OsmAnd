@@ -3,7 +3,7 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;

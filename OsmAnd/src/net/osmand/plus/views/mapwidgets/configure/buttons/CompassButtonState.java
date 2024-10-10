@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_HIDDEN;
 import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
@@ -22,7 +22,9 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.CompassDrawable;
+import net.osmand.util.Algorithms;
 
 public class CompassButtonState extends MapButtonState {
 
@@ -92,11 +94,36 @@ public class CompassButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
+	public ButtonAppearanceParams createAppearanceParams() {
+		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
+
+		String iconName = iconPref.get();
+		int iconId = AndroidUtils.getDrawableId(app, iconPref.get());
+		if (Algorithms.isEmpty(iconName) || CompassMode.isCompassIconId(iconId)) {
+			iconName = defaultParams.getIconName();
+		}
+		int size = sizePref.get();
+		if (size <= 0) {
+			size = defaultParams.getSize();
+		}
+		float opacity = opacityPref.get();
+		if (opacity < 0) {
+			opacity = defaultParams.getOpacity();
+		}
+		int cornerRadius = cornerRadiusPref.get();
+		if (cornerRadius < 0) {
+			cornerRadius = defaultParams.getCornerRadius();
+		}
+		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);
+	}
+
+	@NonNull
+	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		CompassMode compassMode = settings.getCompassMode();
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightMode();
 		String iconName = app.getResources().getResourceEntryName(compassMode.getIconId().getIconId(nightMode));
-		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams(iconName, SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
 	@Nullable

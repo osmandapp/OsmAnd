@@ -1,10 +1,10 @@
 package net.osmand.shared.gpx
 
-import kotlinx.datetime.Clock
-import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import net.osmand.shared.api.SettingsAPI
+import net.osmand.shared.KAsyncTask
 import net.osmand.shared.api.KStateChangedListener
+import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
@@ -12,11 +12,12 @@ import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.KBackgroundTask
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.PlatformUtil
 
-class SmartFolderHelper {
+object SmartFolderHelper {
+
+	private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
 
 	private var smartFolderCollection: List<SmartFolder> = listOf()
 	private var allAvailableTrackItems = HashSet<TrackItem>()
@@ -29,8 +30,10 @@ class SmartFolderHelper {
 		}
 	}
 
-	companion object {
-		private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
+	val json = Json {
+		isLenient = true
+		ignoreUnknownKeys = true
+		classDiscriminator = "className"
 	}
 
 	init {
@@ -104,7 +107,7 @@ class SmartFolderHelper {
 		val newFolder = SmartFolder(name)
 		newFolder.creationTime = currentTimeMillis()
 		newFolder.filters = enabledFilters
-		KCollectionUtils.addToList(smartFolderCollection, newFolder)
+		smartFolderCollection = KCollectionUtils.addToList(smartFolderCollection, newFolder)
 		updateSmartFolderItems(newFolder)
 		writeSettings()
 		notifyFolderCreatedListeners(newFolder)
@@ -154,7 +157,7 @@ class SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		val json = json.encodeToString(smartFolderCollection)
 		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}
@@ -273,10 +276,9 @@ class SmartFolderHelper {
 		return allAvailableTrackItems
 	}
 
+	private class SmartFoldersUpdateTask : KAsyncTask<Unit, Unit, Unit>() {
 
-	private inner class SmartFoldersUpdateTask : KBackgroundTask<Unit>() {
-
-		override fun doInBackground() {
+		override suspend fun doInBackground(vararg params: Unit) {
 			readSettings()
 			updateAllSmartFoldersItems()
 		}

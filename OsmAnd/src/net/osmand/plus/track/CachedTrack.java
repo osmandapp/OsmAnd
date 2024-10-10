@@ -5,12 +5,9 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDraw
 
 import android.util.Pair;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.SharedUtil;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.GpxFile;
@@ -29,7 +26,6 @@ import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

@@ -255,7 +255,7 @@
     <string name="poi_fire_hose">Margue d’incendi</string>
     <string name="poi_grit_bin">Caissa de sabla</string>
     <string name="poi_ambulance_station">Estacion d’ambulàncias</string>
-    <string name="poi_ses_station">Estacion de proteccion civila</string>
+    <string name="poi_disaster_response">Estacion de proteccion civila</string>
     <string name="poi_emergency_access_point">Ponch d’accès d’urgéncia</string>
     <string name="poi_ford">Ga</string>
     <string name="poi_mountain_pass">Còl (pas, pòrt)</string>

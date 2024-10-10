@@ -3952,7 +3952,6 @@
     <string name="token_is_not_valid">토큰은 유효하지 않습니다</string>
     <string name="check_for_updates">업데이트 확인</string>
     <string name="download_cloud_version">클라우드 버전 다운로드</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="select_layer">레이어 선택</string>
     <string name="beats_per_minute_short">bpm</string>
     <string name="ant_plus_searching">찾는 중</string>
@@ -4322,7 +4321,7 @@
     <string name="routing_attr_freeride_policy_name">오프-피스트</string>
     <string name="map_settings_weather_temp">온도</string>
     <string name="trip_recording_duration_widget_desc">현재 기록된 이동 시간을 표시합니다.</string>
-    <string name="mapillary_menu_title_dates">일자</string>
+    <string name="shared_string_date">일자</string>
     <string name="map_settings_weather_air_pressure">공기의 압력</string>
     <string name="map_settings_weather_precip">제출하기</string>
     <string name="routing_attr_allow_expert_name">전문 경로 허용</string>

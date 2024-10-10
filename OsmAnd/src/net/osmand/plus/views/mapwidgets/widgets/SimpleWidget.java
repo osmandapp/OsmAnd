@@ -217,6 +217,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 					.setOnClickListener(item -> ConfigureWidgetsFragment.showInstance(mapActivity, widgetInfo.getWidgetPanel(), appMode, widgetId, true))
 					.create());
 
+			List<PopUpMenuItem> widgetActions = getWidgetActions();
+			if (!Algorithms.isEmpty(widgetActions)) {
+				items.addAll(widgetActions);
+			}
+
 			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
 			if (fragment != null) {
 				items.add(new PopUpMenuItem.Builder(app)
@@ -229,7 +234,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 							WidgetSettingsBaseFragment.showFragment(manager, args, null, fragment);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
-						.showTopDivider(true)
+						.showTopDivider(Algorithms.isEmpty(widgetActions))
 						.create());
 			}
 
@@ -259,6 +264,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			displayData.layoutId = R.layout.popup_menu_item_full_divider;
 			PopUpMenu.show(displayData);
 		}
+	}
+
+	@Nullable
+	protected List<PopUpMenuItem> getWidgetActions() {
+		return null;
 	}
 
 	@Override

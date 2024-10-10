@@ -7,15 +7,13 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.RouteActivityHelper;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
 import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class InfoCard extends BaseMetadataCard {
 

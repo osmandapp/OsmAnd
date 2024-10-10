@@ -100,7 +100,7 @@
     <string name="poi_fire_water_pond">Blusvijver</string>
     <string name="poi_grit_bin">Gritkist</string>
     <string name="poi_ambulance_station">Ambulancepost</string>
-    <string name="poi_ses_station">Nooddiensten</string>
+    <string name="poi_disaster_response">Nooddiensten</string>
     <string name="poi_emergency_access_point">Nood-toegangspunt</string>
     <string name="poi_ford">Doorwaadbare plaats</string>
     <string name="poi_mountain_pass">Bergpas</string>

@@ -57196,20 +57196,6 @@ public final class OsmandOdb {
      */
     long getId();
 
-    // repeated uint32 tagGroups = 9 [packed = true];
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    java.util.List<java.lang.Integer> getTagGroupsList();
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    int getTagGroupsCount();
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    int getTagGroups(int index);
-
     // optional string openingHours = 10;
     /**
      * <code>optional string openingHours = 10;</code>
@@ -57345,6 +57331,20 @@ public final class OsmandOdb {
      * </pre>
      */
     int getPrecisionXY();
+
+    // repeated uint32 tagGroups = 17 [packed = true];
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    java.util.List<java.lang.Integer> getTagGroupsList();
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    int getTagGroupsCount();
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    int getTagGroups(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.OsmAndPoiBoxDataAtom}
@@ -57464,27 +57464,6 @@ public final class OsmandOdb {
               id_ = input.readUInt64();
               break;
             }
-            case 72: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                tagGroups_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              tagGroups_.add(input.readUInt32());
-              break;
-            }
-            case 74: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
-                tagGroups_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                tagGroups_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
             case 82: {
               bitField0_ |= 0x00000020;
               openingHours_ = input.readBytes();
@@ -57506,9 +57485,9 @@ public final class OsmandOdb {
               break;
             }
             case 112: {
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
                 textCategories_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00001000;
+                mutable_bitField0_ |= 0x00000800;
               }
               textCategories_.add(input.readUInt32());
               break;
@@ -57516,9 +57495,9 @@ public final class OsmandOdb {
             case 114: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800) && input.getBytesUntilLimit() > 0) {
                 textCategories_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00001000;
+                mutable_bitField0_ |= 0x00000800;
               }
               while (input.getBytesUntilLimit() > 0) {
                 textCategories_.add(input.readUInt32());
@@ -57527,9 +57506,9 @@ public final class OsmandOdb {
               break;
             }
             case 122: {
-              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
                 textValues_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00002000;
+                mutable_bitField0_ |= 0x00001000;
               }
               textValues_.add(input.readBytes());
               break;
@@ -57537,6 +57516,27 @@ public final class OsmandOdb {
             case 128: {
               bitField0_ |= 0x00000200;
               precisionXY_ = input.readInt32();
+              break;
+            }
+            case 136: {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                tagGroups_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00004000;
+              }
+              tagGroups_.add(input.readUInt32());
+              break;
+            }
+            case 138: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000) && input.getBytesUntilLimit() > 0) {
+                tagGroups_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00004000;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                tagGroups_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -57553,14 +57553,14 @@ public final class OsmandOdb {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           subcategories_ = java.util.Collections.unmodifiableList(subcategories_);
         }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          tagGroups_ = java.util.Collections.unmodifiableList(tagGroups_);
-        }
-        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
           textCategories_ = java.util.Collections.unmodifiableList(textCategories_);
         }
-        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
           textValues_ = new com.google.protobuf.UnmodifiableLazyStringList(textValues_);
+        }
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+          tagGroups_ = java.util.Collections.unmodifiableList(tagGroups_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -57801,30 +57801,6 @@ public final class OsmandOdb {
     public long getId() {
       return id_;
     }
-
-    // repeated uint32 tagGroups = 9 [packed = true];
-    public static final int TAGGROUPS_FIELD_NUMBER = 9;
-    private java.util.List<java.lang.Integer> tagGroups_;
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getTagGroupsList() {
-      return tagGroups_;
-    }
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    public int getTagGroupsCount() {
-      return tagGroups_.size();
-    }
-    /**
-     * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-     */
-    public int getTagGroups(int index) {
-      return tagGroups_.get(index);
-    }
-    private int tagGroupsMemoizedSerializedSize = -1;
 
     // optional string openingHours = 10;
     public static final int OPENINGHOURS_FIELD_NUMBER = 10;
@@ -58099,6 +58075,30 @@ public final class OsmandOdb {
       return precisionXY_;
     }
 
+    // repeated uint32 tagGroups = 17 [packed = true];
+    public static final int TAGGROUPS_FIELD_NUMBER = 17;
+    private java.util.List<java.lang.Integer> tagGroups_;
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getTagGroupsList() {
+      return tagGroups_;
+    }
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    public int getTagGroupsCount() {
+      return tagGroups_.size();
+    }
+    /**
+     * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+     */
+    public int getTagGroups(int index) {
+      return tagGroups_.get(index);
+    }
+    private int tagGroupsMemoizedSerializedSize = -1;
+
     private void initFields() {
       dx_ = 0;
       dy_ = 0;
@@ -58107,7 +58107,6 @@ public final class OsmandOdb {
       name_ = "";
       nameEn_ = "";
       id_ = 0L;
-      tagGroups_ = java.util.Collections.emptyList();
       openingHours_ = "";
       site_ = "";
       phone_ = "";
@@ -58115,6 +58114,7 @@ public final class OsmandOdb {
       textCategories_ = java.util.Collections.emptyList();
       textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       precisionXY_ = 0;
+      tagGroups_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -58157,13 +58157,6 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeUInt64(8, id_);
       }
-      if (getTagGroupsList().size() > 0) {
-        output.writeRawVarint32(74);
-        output.writeRawVarint32(tagGroupsMemoizedSerializedSize);
-      }
-      for (int i = 0; i < tagGroups_.size(); i++) {
-        output.writeUInt32NoTag(tagGroups_.get(i));
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(10, getOpeningHoursBytes());
       }
@@ -58184,6 +58177,13 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(16, precisionXY_);
+      }
+      if (getTagGroupsList().size() > 0) {
+        output.writeRawVarint32(138);
+        output.writeRawVarint32(tagGroupsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < tagGroups_.size(); i++) {
+        output.writeUInt32NoTag(tagGroups_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -58232,20 +58232,6 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(8, id_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < tagGroups_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(tagGroups_.get(i));
-        }
-        size += dataSize;
-        if (!getTagGroupsList().isEmpty()) {
-          size += 1;
-          size += com.google.protobuf.CodedOutputStream
-              .computeInt32SizeNoTag(dataSize);
-        }
-        tagGroupsMemoizedSerializedSize = dataSize;
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getOpeningHoursBytes());
@@ -58283,6 +58269,20 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(16, precisionXY_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tagGroups_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(tagGroups_.get(i));
+        }
+        size += dataSize;
+        if (!getTagGroupsList().isEmpty()) {
+          size += 2;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        tagGroupsMemoizedSerializedSize = dataSize;
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -58414,21 +58414,21 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000020);
         id_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
-        tagGroups_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
         openingHours_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         site_ = "";
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         phone_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         note_ = "";
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         textCategories_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         precisionXY_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        tagGroups_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
@@ -58488,42 +58488,42 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000010;
         }
         result.id_ = id_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          tagGroups_ = java.util.Collections.unmodifiableList(tagGroups_);
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.tagGroups_ = tagGroups_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000020;
         }
         result.openingHours_ = openingHours_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000040;
         }
         result.site_ = site_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000080;
         }
         result.phone_ = phone_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000100;
         }
         result.note_ = note_;
-        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((bitField0_ & 0x00000800) == 0x00000800)) {
           textCategories_ = java.util.Collections.unmodifiableList(textCategories_);
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00000800);
         }
         result.textCategories_ = textCategories_;
-        if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
           textValues_ = new com.google.protobuf.UnmodifiableLazyStringList(
               textValues_);
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
         }
         result.textValues_ = textValues_;
-        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00000200;
         }
         result.precisionXY_ = precisionXY_;
+        if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          tagGroups_ = java.util.Collections.unmodifiableList(tagGroups_);
+          bitField0_ = (bitField0_ & ~0x00004000);
+        }
+        result.tagGroups_ = tagGroups_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -58579,40 +58579,30 @@ public final class OsmandOdb {
         if (other.hasId()) {
           setId(other.getId());
         }
-        if (!other.tagGroups_.isEmpty()) {
-          if (tagGroups_.isEmpty()) {
-            tagGroups_ = other.tagGroups_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureTagGroupsIsMutable();
-            tagGroups_.addAll(other.tagGroups_);
-          }
-          onChanged();
-        }
         if (other.hasOpeningHours()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           openingHours_ = other.openingHours_;
           onChanged();
         }
         if (other.hasSite()) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           site_ = other.site_;
           onChanged();
         }
         if (other.hasPhone()) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000200;
           phone_ = other.phone_;
           onChanged();
         }
         if (other.hasNote()) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000400;
           note_ = other.note_;
           onChanged();
         }
         if (!other.textCategories_.isEmpty()) {
           if (textCategories_.isEmpty()) {
             textCategories_ = other.textCategories_;
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00000800);
           } else {
             ensureTextCategoriesIsMutable();
             textCategories_.addAll(other.textCategories_);
@@ -58622,7 +58612,7 @@ public final class OsmandOdb {
         if (!other.textValues_.isEmpty()) {
           if (textValues_.isEmpty()) {
             textValues_ = other.textValues_;
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00001000);
           } else {
             ensureTextValuesIsMutable();
             textValues_.addAll(other.textValues_);
@@ -58631,6 +58621,16 @@ public final class OsmandOdb {
         }
         if (other.hasPrecisionXY()) {
           setPrecisionXY(other.getPrecisionXY());
+        }
+        if (!other.tagGroups_.isEmpty()) {
+          if (tagGroups_.isEmpty()) {
+            tagGroups_ = other.tagGroups_;
+            bitField0_ = (bitField0_ & ~0x00004000);
+          } else {
+            ensureTagGroupsIsMutable();
+            tagGroups_.addAll(other.tagGroups_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -59106,72 +59106,6 @@ public final class OsmandOdb {
         return this;
       }
 
-      // repeated uint32 tagGroups = 9 [packed = true];
-      private java.util.List<java.lang.Integer> tagGroups_ = java.util.Collections.emptyList();
-      private void ensureTagGroupsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          tagGroups_ = new java.util.ArrayList<java.lang.Integer>(tagGroups_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getTagGroupsList() {
-        return java.util.Collections.unmodifiableList(tagGroups_);
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public int getTagGroupsCount() {
-        return tagGroups_.size();
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public int getTagGroups(int index) {
-        return tagGroups_.get(index);
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public Builder setTagGroups(
-          int index, int value) {
-        ensureTagGroupsIsMutable();
-        tagGroups_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public Builder addTagGroups(int value) {
-        ensureTagGroupsIsMutable();
-        tagGroups_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public Builder addAllTagGroups(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTagGroupsIsMutable();
-        super.addAll(values, tagGroups_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 tagGroups = 9 [packed = true];</code>
-       */
-      public Builder clearTagGroups() {
-        tagGroups_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
-        onChanged();
-        return this;
-      }
-
       // optional string openingHours = 10;
       private java.lang.Object openingHours_ = "";
       /**
@@ -59182,7 +59116,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasOpeningHours() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional string openingHours = 10;</code>
@@ -59234,7 +59168,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000080;
         openingHours_ = value;
         onChanged();
         return this;
@@ -59247,7 +59181,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearOpeningHours() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         openingHours_ = getDefaultInstance().getOpeningHours();
         onChanged();
         return this;
@@ -59264,7 +59198,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000080;
         openingHours_ = value;
         onChanged();
         return this;
@@ -59276,7 +59210,7 @@ public final class OsmandOdb {
        * <code>optional string site = 11;</code>
        */
       public boolean hasSite() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string site = 11;</code>
@@ -59316,7 +59250,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000100;
         site_ = value;
         onChanged();
         return this;
@@ -59325,7 +59259,7 @@ public final class OsmandOdb {
        * <code>optional string site = 11;</code>
        */
       public Builder clearSite() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         site_ = getDefaultInstance().getSite();
         onChanged();
         return this;
@@ -59338,7 +59272,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000100;
         site_ = value;
         onChanged();
         return this;
@@ -59350,7 +59284,7 @@ public final class OsmandOdb {
        * <code>optional string phone = 12;</code>
        */
       public boolean hasPhone() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string phone = 12;</code>
@@ -59390,7 +59324,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000200;
         phone_ = value;
         onChanged();
         return this;
@@ -59399,7 +59333,7 @@ public final class OsmandOdb {
        * <code>optional string phone = 12;</code>
        */
       public Builder clearPhone() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         phone_ = getDefaultInstance().getPhone();
         onChanged();
         return this;
@@ -59412,7 +59346,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000200;
         phone_ = value;
         onChanged();
         return this;
@@ -59424,7 +59358,7 @@ public final class OsmandOdb {
        * <code>optional string note = 13;</code>
        */
       public boolean hasNote() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <code>optional string note = 13;</code>
@@ -59464,7 +59398,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00000400;
         note_ = value;
         onChanged();
         return this;
@@ -59473,7 +59407,7 @@ public final class OsmandOdb {
        * <code>optional string note = 13;</code>
        */
       public Builder clearNote() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         note_ = getDefaultInstance().getNote();
         onChanged();
         return this;
@@ -59486,7 +59420,7 @@ public final class OsmandOdb {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00000400;
         note_ = value;
         onChanged();
         return this;
@@ -59495,9 +59429,9 @@ public final class OsmandOdb {
       // repeated uint32 textCategories = 14;
       private java.util.List<java.lang.Integer> textCategories_ = java.util.Collections.emptyList();
       private void ensureTextCategoriesIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
           textCategories_ = new java.util.ArrayList<java.lang.Integer>(textCategories_);
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
          }
       }
       /**
@@ -59581,7 +59515,7 @@ public final class OsmandOdb {
        */
       public Builder clearTextCategories() {
         textCategories_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         onChanged();
         return this;
       }
@@ -59589,9 +59523,9 @@ public final class OsmandOdb {
       // repeated string textValues = 15;
       private com.google.protobuf.LazyStringList textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureTextValuesIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
           textValues_ = new com.google.protobuf.LazyStringArrayList(textValues_);
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00001000;
          }
       }
       /**
@@ -59661,7 +59595,7 @@ public final class OsmandOdb {
        */
       public Builder clearTextValues() {
         textValues_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         onChanged();
         return this;
       }
@@ -59689,7 +59623,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public boolean hasPrecisionXY() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>optional int32 precisionXY = 16;</code>
@@ -59709,7 +59643,7 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder setPrecisionXY(int value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00002000;
         precisionXY_ = value;
         onChanged();
         return this;
@@ -59722,8 +59656,74 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearPrecisionXY() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         precisionXY_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 tagGroups = 17 [packed = true];
+      private java.util.List<java.lang.Integer> tagGroups_ = java.util.Collections.emptyList();
+      private void ensureTagGroupsIsMutable() {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+          tagGroups_ = new java.util.ArrayList<java.lang.Integer>(tagGroups_);
+          bitField0_ |= 0x00004000;
+         }
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getTagGroupsList() {
+        return java.util.Collections.unmodifiableList(tagGroups_);
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public int getTagGroupsCount() {
+        return tagGroups_.size();
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public int getTagGroups(int index) {
+        return tagGroups_.get(index);
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public Builder setTagGroups(
+          int index, int value) {
+        ensureTagGroupsIsMutable();
+        tagGroups_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public Builder addTagGroups(int value) {
+        ensureTagGroupsIsMutable();
+        tagGroups_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public Builder addAllTagGroups(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureTagGroupsIsMutable();
+        super.addAll(values, tagGroups_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tagGroups = 17 [packed = true];</code>
+       */
+      public Builder clearTagGroups() {
+        tagGroups_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00004000);
         onChanged();
         return this;
       }
@@ -76261,11 +76261,11 @@ public final class OsmandOdb {
       "DataAtom\"\234\002\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030" +
       "\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n",
       "\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006na" +
-      "meEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\025\n\ttagGroups\030\t \003(" +
-      "\rB\002\020\001\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(" +
-      "\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCa" +
-      "tegories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013pr" +
-      "ecisionXY\030\020 \001(\005\"\032\n\007IdTable\022\017\n\007routeId\030\001 " +
+      "meEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n" +
+      " \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004not" +
+      "e\030\r \001(\t\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextV" +
+      "alues\030\017 \003(\t\022\023\n\013precisionXY\030\020 \001(\005\022\025\n\ttagG" +
+      "roups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable\022\017\n\007routeId\030\001 " +
       "\003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004" +
       "from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tR" +
       "outeData\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004" +
@@ -76587,7 +76587,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor,
-              new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "TagGroups", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", "PrecisionXY", });
+              new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", "PrecisionXY", "TagGroups", });
           internal_static_OsmAnd_OBF_IdTable_descriptor =
             getDescriptor().getMessageTypes().get(38);
           internal_static_OsmAnd_OBF_IdTable_fieldAccessorTable = new

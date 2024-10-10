@@ -27,7 +27,7 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCar
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;

@@ -9,6 +9,7 @@ kotlin {
         // Experimental Kotlin Gradle Plugin API opt-in
         compilerOptions {
             jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+            freeCompilerArgs.add("-Xjvm-default=all")
         }
     }
 
@@ -21,6 +22,7 @@ kotlin {
     def sqliterVersion = "1.3.1"
     def sqliteJDBCVersion = "3.34.0"
     def commonLoggingVersion = "1.2"
+    def statelyVersion = "2.1.0"
 
     sourceSets {
         commonMain {
@@ -31,6 +33,7 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
                 implementation "org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion"
                 implementation "com.squareup.okio:okio:$okioVersion"
+                implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
             }
         }
         jvmMain {

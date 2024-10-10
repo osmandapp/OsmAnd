@@ -126,6 +126,6 @@ public class MyLocationButton extends MapButton {
 		pressed.setColor(backgroundPressedColor);
 		pressed.setCornerRadius(cornerRadius);
 
-		setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
+		imageView.setBackground(AndroidUtils.createPressedStateListDrawable(normal, pressed));
 	}
 }

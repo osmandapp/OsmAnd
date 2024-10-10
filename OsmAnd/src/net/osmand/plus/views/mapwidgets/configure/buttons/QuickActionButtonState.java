@@ -198,7 +198,7 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
-		if (!iconPref.isSet()) {
+		if (Algorithms.isEmpty(iconPref.get())) {
 			if (isSingleAction()) {
 				int iconId = getQuickActions().get(0).getIconRes(app);
 				if (iconId > 0) {

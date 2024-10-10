@@ -179,7 +179,7 @@ public class GpsFilterHelper {
 
 		@Nullable
 		private List<GpxDisplayGroup> processSplit(@NonNull GpxFile gpxFile) {
-			List<GpxDataItem> dataItems = app.getGpxDbHelper().getSplitItems();
+			List<GpxDataItem> dataItems = app.getGpxDbHelper().getSplitItemsBlocking();
 			for (GpxDataItem dataItem : dataItems) {
 				if (dataItem.getFile().absolutePath().equals(gpxFile.getPath())) {
 					return app.getGpxDisplayHelper().processSplitSync(gpxFile, dataItem);

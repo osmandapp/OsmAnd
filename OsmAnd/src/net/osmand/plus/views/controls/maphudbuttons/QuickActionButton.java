@@ -1,10 +1,6 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
-import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
-
 import android.content.Context;
-import android.os.Vibrator;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
@@ -49,15 +45,7 @@ public class QuickActionButton extends MapButton {
 				boolean visible = layer.isWidgetVisibleForButton(this);
 				layer.setSelectedButton(visible ? null : this);
 			}
-		});
-		setOnLongClickListener(v -> {
-			Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
-			vibrator.vibrate(VIBRATE_SHORT);
-			setScaleX(1.5f);
-			setScaleY(1.5f);
-			setAlpha(0.95f);
-			setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, this, buttonState.getFabMarginPref()));
-			return true;
+			setInvalidated(true);
 		});
 	}
 

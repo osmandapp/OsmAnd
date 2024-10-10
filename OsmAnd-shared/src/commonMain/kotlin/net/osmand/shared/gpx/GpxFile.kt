@@ -16,6 +16,7 @@ import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.util.KMapUtils
 import kotlin.collections.set
 
+
 class GpxFile : GpxExtensions {
 	var author: String? = null
 	var metadata = Metadata()
@@ -775,6 +776,14 @@ class GpxFile : GpxExtensions {
 		dest.pointsGroups = pointsGroups
 
 		dest.addRouteKeyTags(this.getRouteKeyTags())
+
+		dest.path = this.path
+		dest.showCurrentTrack = this.showCurrentTrack
+		dest.hasAltitude = this.hasAltitude
+		dest.modifiedTime = currentTimeMillis()
+		dest.pointsModifiedTime = dest.modifiedTime
+		dest.copyExtensions(this)
+
 		return dest
 	}
 

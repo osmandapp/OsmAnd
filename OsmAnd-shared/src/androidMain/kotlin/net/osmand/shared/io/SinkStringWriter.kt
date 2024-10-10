@@ -1,6 +1,5 @@
 package net.osmand.shared.io
 
-import okio.BufferedSink
 import okio.IOException
 import okio.Sink
 import okio.buffer
@@ -8,11 +7,17 @@ import java.io.StringWriter
 
 class SinkStringWriter(sink: Sink) : StringWriter() {
 
-	private val bufferedSink: BufferedSink = sink.buffer()
+	private val bufferedSink = sink.buffer()
 
 	@Throws(IOException::class)
 	override fun write(c: Int) {
-		bufferedSink.writeUtf8CodePoint(c)
+		bufferedSink.writeUtf8(c.toChar().toString())
+	}
+
+	override fun write(str: String?) {
+		if (str != null) {
+			bufferedSink.writeUtf8(str)
+		}
 	}
 
 	@Throws(IOException::class)
@@ -30,8 +35,7 @@ class SinkStringWriter(sink: Sink) : StringWriter() {
 		bufferedSink.flush()
 	}
 
-	@Throws(IOException::class)
-	override fun close() {
-		bufferedSink.close()
+	override fun toString(): String {
+		return bufferedSink.toString()
 	}
 }

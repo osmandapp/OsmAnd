@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.shared.gpx.DataItem;
@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class GpxDbHelper implements GpxDbReaderCallback {
 	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
 	private final OsmandApplication app;
@@ -181,7 +182,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public List<GpxDataItem> getItems() {
-		return database.getGpxDataItems();
+		return database.getGpxDataItemsBlocking();
 	}
 
 	@NonNull

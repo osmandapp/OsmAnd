@@ -168,8 +168,8 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 			GeometryGradient3DWayStyle<?> style = getGradient3DWayStyle();
 			style.currColor = currentPoint.getPrimaryColor();
 			style.nextColor = nextPoint.getPrimaryColor();
-			style.currOutlineColor = currentPoint.getPrimaryColor();
-			style.nextOutlineColor = nextPoint.getPrimaryColor();
+			style.currOutlineColor = currentPoint.getSecondaryColor();
+			style.nextOutlineColor = nextPoint.getSecondaryColor();
 
 			styleMap.put(i, style);
 			updateTrack3DStyle(style, track3DStyle);

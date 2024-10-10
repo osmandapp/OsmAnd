@@ -507,7 +507,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 				if (animateZoom) {
 					animatingMapZoom = false;
 				}
-				if (!stopped && finishAnimationCallback != null) {
+				if (finishAnimationCallback != null) {
 					finishAnimationCallback.run();
 				}
 				if (!stopped) {
@@ -521,9 +521,9 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 				if (!stopped) {
 					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAnimationCallback);
-					if (finishAnimationCallback != null) {
-						finishAnimationCallback.run();
-					}
+				}
+				if (finishAnimationCallback != null) {
+					finishAnimationCallback.run();
 				}
 				if (!stopped) {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);

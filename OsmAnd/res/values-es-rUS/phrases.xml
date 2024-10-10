@@ -142,7 +142,7 @@
     <string name="poi_fire_water_pond">Estanque de agua contra incendios</string>
     <string name="poi_grit_bin">Contenedor de arena</string>
     <string name="poi_ambulance_station">Estación de ambulancias</string>
-    <string name="poi_ses_station">Defensa civil (SES);Protección civil</string>
+    <string name="poi_disaster_response">Defensa civil (SES);Protección civil</string>
     <string name="poi_emergency_access_point">Punto de acceso de emergencia</string>
     <string name="poi_ford">Vado</string>
     <string name="poi_mountain_pass">Paso de montaña</string>
@@ -827,7 +827,7 @@
     <string name="poi_breakwater">Rompeolas</string>
     <string name="poi_basin">Cuenca</string>
     <string name="poi_crane">Grúa</string>
-    <string name="poi_tree">Árbol</string>
+    <string name="poi_tree">Árbol;Arbol</string>
     <string name="poi_abandoned">Abandonado</string>
     <string name="poi_disused">En desuso</string>
     <string name="poi_groyne">Espigón</string>
@@ -2027,7 +2027,7 @@
     <string name="poi_step_condition_rough">Estado de los escalones: pésimo</string>
     <string name="poi_cairn">Cairn</string>
     <string name="poi_memorial_fassade_decoration">Decoración de la fachada</string>
-    <string name="poi_defibrillator">Desfibrilador</string>
+    <string name="poi_defibrillator">Desfibrilador;AED</string>
     <string name="poi_defibrillator_yes">Desfibrilador: sí</string>
     <string name="poi_tomb_war_grave">Tipo: guerra</string>
     <string name="poi_tomb_tumulus">Tipo: túmulo</string>
@@ -2817,7 +2817,7 @@
     <string name="poi_xmas_pyramid">Pirámide navideña</string>
     <string name="poi_xmas_shop">Tienda navideña</string>
     <string name="poi_xmas_shop_christmas_tree">Venta de árboles</string>
-    <string name="poi_xmas_tree">Árbol navideño</string>
+    <string name="poi_xmas_tree">Árbol navideño;Árbol de navidad;Arbol navideño</string>
     <string name="poi_xmas_day_date">Período de fecha para evento navideño</string>
     <string name="poi_xmas_note">Navidad: nota</string>
     <string name="poi_xmas_opening_hours">Navidad: horario de atención;horario de apertura</string>
@@ -3674,7 +3674,7 @@
     <string name="poi_trailer_designated">Designado;Designado para remolques</string>
     <string name="poi_motorcycle_yes">Sí;Motocicleta</string>
     <string name="poi_motorcycle_permissive">Permisivo;Acceso permisivo para motocicletas</string>
-    <string name="poi_motorcycle_destination">Destino;Acceso para motocicletas sólo a destino</string>
+    <string name="poi_motorcycle_destination">Destino;Acceso para motocicletas solo a destino</string>
     <string name="poi_motorcycle_designated">Designado;Designado para motocicletas</string>
     <string name="poi_moped_yes">Sí;Ciclomotor</string>
     <string name="poi_moped_designated">Designado;Designado para ciclomotores</string>
@@ -4215,7 +4215,7 @@
     <string name="poi_computer_sales_yes">Sí;Venta de computadoras;Venta de ordenadores</string>
     <string name="poi_computer_repair_yes">Sí;Reparación de computadoras;Taller de computadoras;Reparación de ordenadores;Taller de ordenadores</string>
     <string name="poi_computer_sales">Venta de computadoras</string>
-    <string name="poi_computer_repair">Reparación de computadoras</string>
+    <string name="poi_computer_repair">Reparación de computadoras;Reparación de ordenadores</string>
     <string name="poi_computer_parts">Partes para computadoras</string>
     <string name="poi_museum_art">Arte</string>
     <string name="poi_museum_gallery">Galería</string>
@@ -4963,4 +4963,14 @@
     <string name="poi_mcdonalds">McDonald\'s</string>
     <string name="poi_engineer">Oficina del ingeniero</string>
     <string name="poi_property_management">Oficina del gestor inmobiliario</string>
+    <string name="poi_cash_in">Depositar efectivo</string>
+    <string name="poi_cash_in_yes">Si</string>
+    <string name="poi_cash_in_no">No</string>
+    <string name="poi_cash_in_customers">Solo clientes</string>
+    <string name="poi_diet_pescetarian_no">Dieta pescetariana: No</string>
+    <string name="poi_osmand_access_main_tag">Acceso</string>
+    <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_payment_parco_no">No acepta Parco</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">No acepta Parkster</string>
 </resources>

@@ -19,7 +19,7 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.osmand.SharedUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;

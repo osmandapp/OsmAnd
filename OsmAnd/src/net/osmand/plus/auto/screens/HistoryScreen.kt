@@ -19,7 +19,7 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import net.osmand.SharedUtil
+import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripHelper
@@ -28,11 +28,12 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
-import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.shared.extensions.kFile
 import net.osmand.shared.gpx.GpxDataItem
+import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 
@@ -93,21 +94,17 @@ class HistoryScreen(
 		val results = historyHelper.getHistoryEntries(true)
 		val resultsSize = results.size
 		searchItems = ArrayList()
-		var limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
+		val limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
 		for (result in limitedResults) {
 			val searchResult =
 				SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
 			val listItem = QuickSearchListItem(app, searchResult)
 			if (listItem.searchResult.objectType == ObjectType.GPX_TRACK && listItem.searchResult.location == null) {
-				var gpxInfo = listItem.searchResult.relatedObject as GPXInfo
-				var gpxFile = gpxInfo.gpxFile
+				val gpxInfo = listItem.searchResult.relatedObject as GPXInfo
+				val gpxFile = gpxInfo.gpxFile
 				if (gpxFile == null) {
 					gpxInfo.file?.let { file ->
-						val item = gpxDbHelper.getItem(file) {
-							updateSearchResult(
-								listItem.searchResult,
-								it)
-						}
+						val item = gpxDbHelper.getItem(file.kFile()) { updateSearchResult(listItem.searchResult, it) }
 						if (item != null) {
 							updateSearchResult(listItem.searchResult, item)
 						}
@@ -154,7 +151,7 @@ class HistoryScreen(
 				val dist = if (item.searchResult.location == null) {
 					0.0
 				} else {
-					var startLocation = item.searchResult.location
+					val startLocation = item.searchResult.location
 					rowBuilder.setMetadata(
 						Metadata.Builder().setPlace(
 							Place.Builder(

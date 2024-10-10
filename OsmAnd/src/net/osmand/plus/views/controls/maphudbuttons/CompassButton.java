@@ -15,8 +15,6 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -85,10 +83,10 @@ public class CompassButton extends MapButton {
 		if (this.mapRotation != mapRotation) {
 			this.mapRotation = mapRotation;
 
-			if (getDrawable() instanceof CompassDrawable drawable) {
+			if (imageView.getDrawable() instanceof CompassDrawable drawable) {
 				drawable.setMapRotation(mapRotation);
 			}
-			invalidate();
+			imageView.invalidate();
 		}
 		CompassMode compassMode = settings.getCompassMode();
 		setContentDescription(app.getString(compassMode.getTitleId()));
@@ -178,7 +176,7 @@ public class CompassButton extends MapButton {
 	}
 
 	@Nullable
-	public ImageView moveToSpecialPosition(@NonNull ViewGroup container, @NonNull LayoutParams params) {
+	public View moveToSpecialPosition(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params) {
 		ViewGroup parent = (ViewGroup) getParent();
 		if (parent != null) {
 			cancelHideAnimation();

@@ -135,7 +135,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				buttonState.setEnabled(object.getBoolean("enabled"));
 
 				String iconName = object.optString("icon");
-				if (Algorithms.isEmpty(iconName)) {
+				if (!Algorithms.isEmpty(iconName)) {
 					buttonState.getIconPref().set(iconName);
 				}
 				int size = object.optInt("size");
@@ -143,11 +143,11 @@ public class QuickActionsSettingsItem extends SettingsItem {
 					buttonState.getSizePref().set(size);
 				}
 				int cornerRadius = object.optInt("corner_radius");
-				if (cornerRadius > 0) {
+				if (cornerRadius >= 0) {
 					buttonState.getCornerRadiusPref().set(cornerRadius);
 				}
 				float opacity = (float) object.optDouble("opacity");
-				if (opacity > 0) {
+				if (opacity >= 0) {
 					buttonState.getOpacityPref().set(opacity);
 				}
 			} else {

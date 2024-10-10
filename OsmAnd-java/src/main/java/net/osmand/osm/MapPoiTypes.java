@@ -24,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -101,6 +102,10 @@ public class MapPoiTypes {
 
 	public boolean isInit() {
 		return init;
+	}
+
+	public boolean isOtherCategory(PoiCategory poiCategory) {
+		return Objects.equals(otherCategory, poiCategory);
 	}
 
 	public PoiCategory getOtherPoiCategory() {
@@ -570,7 +575,7 @@ public class MapPoiTypes {
                         }
                         case "poi_additional_category" -> lastPoiAdditionalCategory = null;
 	                    default -> {
-		                    if (!name.equals("poi_additional") && !name.equals("poi_reference")) {
+		                    if (!name.equals("poi_additional") && !name.equals("poi_reference") && !name.equals("poi_types")) {
 			                    log.warn("Unknown end tag encountered: " + name);
 		                    }
 	                    }

@@ -118,7 +118,6 @@ actual class XmlSerializer actual constructor() {
 	@Throws(IOException::class)
 	actual fun close() {
 		flush()
-
 		outputStream?.close()
 		stringWriter?.close()
 	}

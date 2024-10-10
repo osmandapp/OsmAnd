@@ -168,7 +168,9 @@ class GpxTrackAnalysis {
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
 	fun isTimeSpecified(): Boolean {
-		return startTime != Long.MAX_VALUE && startTime != 0L
+		val startTime = startTime
+		val endTime = endTime
+		return startTime != Long.MAX_VALUE && startTime != 0L && endTime != Long.MIN_VALUE && endTime != 0L
 	}
 
 	fun isTimeMoving(): Boolean {
@@ -290,6 +292,8 @@ class GpxTrackAnalysis {
 		var sensorCadenceCount = 0
 		var totalSensorCadenceSum = 0.0
 
+		var _totalDistance = 0.0f
+
 		points = 0
 
 		pointAttributes = mutableListOf()
@@ -304,7 +308,7 @@ class GpxTrackAnalysis {
 			expectedRouteDuration += getExpectedRouteSegmentDuration(s)
 
 			for (j in 0 until numberOfPoints) {
-				val point = s.get(j)
+				val point = s[j]
 				if (j == 0 && locationStart == null) {
 					locationStart = point
 					setLatLonStart(point.lat, point.lon)
@@ -350,7 +354,7 @@ class GpxTrackAnalysis {
 					//net.osmand.Location.distanceBetween(
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
-					totalDistance += calculations[0]
+					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
 
@@ -441,6 +445,9 @@ class GpxTrackAnalysis {
 			}
 			processElevationDiff(s)
 		}
+
+		totalDistance = _totalDistance
+
 		checkUnspecifiedValues(fileTimeStamp)
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount)
 
@@ -456,12 +463,13 @@ class GpxTrackAnalysis {
 	private fun addWptAttribute(
 		point: WptPt, attribute: PointAttributes, pointsAnalyser: TrackPointsAnalyser?
 	) {
-		if (!hasSpeedData() && attribute.speed > 0 && totalDistance > 0) {
+		if (!hasSpeedData() && attribute.speed > 0) {
 			setHasData(POINT_SPEED, true)
 		}
-		if (!hasElevationData() && !attribute.elevation.isNaN() && totalDistance > 0) {
+		if (!hasElevationData() && !attribute.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
 		}
+		point.attributes = attribute
 		pointsAnalyser?.onAnalysePoint(this, point, attribute)
 		pointAttributes.add(attribute)
 	}
