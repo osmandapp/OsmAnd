@@ -76,9 +76,9 @@
     <string name="rendering_attr_moreDetailed_name">Máis detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricións de acceso</string>
-    <string name="rendering_attr_showAccess_name">Amosar restricións do acceso e portaxes ou peaxes</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Amosar calidade das estradas</string>
-    <string name="rendering_attr_showSurfaces_name">Amosar superficie das estradas</string>
+    <string name="rendering_attr_showAccess_name">Amosar as restricións de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Amosar a calidade das estradas</string>
+    <string name="rendering_attr_showSurfaces_name">Amosar a superficie das estradas</string>
     <string name="rendering_attr_showCycleRoutes_name">Amosar ciclovías</string>
     <string name="no_index_file_to_download">Non foi posíbel atopar as descargas; comproba a túa conexión á Internet.</string>
     <string name="select_index_file_to_download">Non se atopou ren. Se non dás atopado a túa rexión, a podes facer ti mesmo (ollar https://osmand.net).</string>
