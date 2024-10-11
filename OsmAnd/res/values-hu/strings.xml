@@ -1250,7 +1250,7 @@
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevesebb részlet</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showAccess_name">Behajtási és útdíjjal kapcsolatos korlátozások megjelenítése</string>
+    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
@@ -5977,4 +5977,7 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
     <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez\n\n</string>
+    <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
+    <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Érintse meg a gombot a feloldáshoz.</string>
+    <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
 </resources>
