@@ -1088,7 +1088,7 @@
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати обмеження доступу та плати за проїзд</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показувати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Веломаршрути</string>
@@ -5972,4 +5972,23 @@
     <string name="lock_screen">Блокування екрана</string>
     <string name="quick_action_verb_start_pause">Старт / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
+    <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
+    <string name="start_trip_recording_first_m">Будь ласка, спочатку почніть запис треку.</string>
+    <string name="new_segment_started_m">Початок запису нового сегмента треку.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Запис маршруту і продовження</string>
+    <string name="new_trip_segment">Новий сегмент маршруту</string>
+    <string name="quick_action_start_pause_recording">Кнопка для запуску, призупинення або відновлення запису GPX-треку.</string>
+    <string name="track_does_not_contain_data_to_save">Трек не містить даних для збереження.</string>
+    <string name="lock_screen_description">Увімкнення/вимкнення сенсорного екрана для запобігання випадковим натисканням</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Кнопка для збереження поточної записаної поїздки у вигляді файлу GPX і продовження запису нового треку без переривання.</string>
+    <string name="quick_action_new_trip_segment">Кнопка для початку нового сегмента у поточному записі GPX-треку.</string>
+    <string name="movies_list">Список фільмів</string>
+    <string name="third_links">Сторонні посилання</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_showhide_osm_edits_descr">Кнопка для показу або приховування локальних редагувань OSM на мапі.</string>
+    <string name="release_4_9">- Додано повноекранний перегляд галереї зображень з Вікімедіа\n\n- Додано новий плагін «Показники ТЗ» для моніторингу продуктивності машини з використанням протоколу OBD-II\n\n- Додано можливість призначати трекам активності та фільтрувати їх відповідним чином\n\n- Реалізовано нові швидкі дії для запису маршруту та блокування сенсорного екрана\n\n- Введено зовнішній вигляд кнопок на карті, що налаштовується, і сітка для їх прив\'язки\n\n- Додано контекстне меню і дію «Скинути середню швидкість» для віджетів\n\n- Додано новий шар маршруту «Траси для мотокросу»\n\n- Виправлено функцію «Автозапис треку під час навігації»\n\n- Виправлено проблему з перевернутими координатами в RTL\n\n- Виправлено відсутність даних датчиків для поточного записуваного треку\n\n- Додано інформацію про навколишні області для обраної точки\n\n- Додано швидку дію для управління видимістю правок OSM\n\n- Розділено параметри видимості для опцій забарвлення рельєфу\n\n- Додано значок, який можна натискати для відображення доступу або інших атрибутів дороги або шляху\n\n</string>
+    <string name="liter_per_hour">л/год</string>
+    <string name="screen_is_unlocked">Сенсорний екран розблоковано.</string>
+    <string name="screen_is_locked_by_action_button">Сенсорний екран заблоковано. Натисніть на кнопку, щоб розблокувати.</string>
+    <string name="screen_is_locked_by_external_button">Сенсорний екран заблоковано. Для розблокування натисніть кнопку %1$s або торкніться кнопки на екрані.</string>
 </resources>

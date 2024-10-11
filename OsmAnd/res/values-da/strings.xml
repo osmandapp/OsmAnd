@@ -1466,7 +1466,7 @@
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
     <string name="shared_string_tracks">Spor</string>
-    <string name="shared_string_currently_recording_track">Optager spor</string>
+    <string name="shared_string_currently_recording_track">Igangværende sporoptagelse</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
@@ -5980,4 +5980,7 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
     <string name="liter_per_hour">l/t</string>
     <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter\n\n</string>
+    <string name="screen_is_locked_by_external_button">Den berøringsfølsomme skærm er låst. For at låse op skal du trykke på %1$s-knappen eller trykke på knappen på skærmen.</string>
+    <string name="screen_is_unlocked">Den berøringsfølsomme skærm er låst op.</string>
+    <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knap for at låse op.</string>
 </resources>

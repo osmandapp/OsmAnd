@@ -3,16 +3,19 @@ package net.osmand.plus.quickaction.actions;
 import static net.osmand.plus.quickaction.QuickActionIds.LOCK_SCREEN_ACTION;
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
@@ -35,8 +38,36 @@ public class LockScreenAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
+		toggleLockScreen(mapActivity, null);
+	}
+
+	@Override
+	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
+		toggleLockScreen(mapActivity, event);
+		return true;
+	}
+
+	private void toggleLockScreen(@NonNull MapActivity mapActivity, @Nullable KeyEvent event){
 		mapActivity.getMyApplication().getLockHelper().toggleLockScreen();
 		mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
+		showToast(mapActivity, event);
+	}
+
+	private void showToast(@NonNull MapActivity mapActivity, @Nullable KeyEvent event) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		String toastString;
+		if (app.getLockHelper().isScreenLocked()) {
+			if (event != null) {
+				int keyCode = event.getKeyCode();
+				String keyLabel = KeySymbolMapper.getKeySymbol(mapActivity, keyCode);
+				toastString = app.getString(R.string.screen_is_locked_by_external_button, keyLabel);
+			} else {
+				toastString = app.getString(R.string.screen_is_locked_by_action_button);
+			}
+		} else {
+			toastString = app.getString(R.string.screen_is_unlocked);
+		}
+		mapActivity.getMyApplication().showToastMessage(toastString);
 	}
 
 	@Override
@@ -50,6 +81,6 @@ public class LockScreenAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		return app.getLockHelper().isScreenLocked() ? R.drawable.ic_action_touch_screen_unlock : R.drawable.ic_action_touch_screen_lock;
+		return app.getLockHelper().isScreenLocked() ? R.drawable.ic_action_lock_open : R.drawable.ic_action_lock;
 	}
 }

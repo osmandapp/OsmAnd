@@ -4526,4 +4526,13 @@
     <string name="quick_action_drawer_title">Menú lateral</string>
     <string name="quick_action_search_view_title">Vista de cerca</string>
     <string name="quick_action_navigation_view_desc">Un commutador per obrir o tancar la vista de navegació.</string>
+    <string name="track_does_not_contain_data_to_save">La traça no inclou dades per desar.</string>
+    <string name="quick_action_finish_trip_recording_summary">Un botó per desar la traça GPX i finalitzar l\'enregistrament .</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botó per mostrar o ocultar les edicions locals d\'OSM al mapa.</string>
+    <string name="release_4_9">• S\'ha afegit un visualitzador de pantalla completa per a la galeria d\'imatges de la Wikimedia\n\n• S\'ha introduït un nou connector \"Mètriques del vehicle\" per controlar el rendiment del vehicle utilitzant el protocol OBD-II\n\n• S\'ha afegit la possibilitat d\'assignar activitats a les pistes i filtrar-les en conseqüència\n\n• S\'han implementat noves dreceres per l\'enregistrament de trajectes i el blocat de la pantalla tàctil\n\n• S\'ha afegit la modificació de l\'aparença dels botons del mapa i una quadrícula precisa\n\n• Nou menú de context i la acció \"Restableix velocitat mitjana\" als ginys\n\n• S\'ha afegit una nova capa de ruta \"Rutes per motocròs\"\n\n• S\'ha corregit \"Enregistrament automàtic de la ruta durant la navegació\"\n\n• S\'ha corregit l\'error de les coordenades bescanviades en RTL\n\n• S\'ha corregit la pèrdua de dades del sensor en l\'enregistrament de la traça actual\n\n• S\'ha afegit informació de zones properes al punt seleccionat\n\n• S\'ha afegit una drecera per controlar la visibilitat de les edicions OSM\n\n• Diferents paràmetres de visibilitat per a les opcions d\'acoloriment del terreny\n\n• S\'ha afegit una icona tàctil per mostrar l\'accés o d\'altres atributs de la ruta o del camí\n\n</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="lock_screen_description">Habilita o desactiva la pantalla tàctil per evitar contactes accidentals</string>
+    <string name="lock_screen">Bloca la pantalla</string>
+    <string name="start_trip_recording_first_m">Si us plau, primer inicieu l\'enregistrament del viatge.</string>
+    <string name="new_segment_started_m">S\'ha iniciat l\'enregistrament d\'un nou segment de traça.</string>
 </resources>
