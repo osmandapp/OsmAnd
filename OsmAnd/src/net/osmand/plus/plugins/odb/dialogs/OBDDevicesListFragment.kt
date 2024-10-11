@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter.FoundDevicesMenuListener
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnSensorNameChangedCallback
@@ -64,7 +63,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		val sensorIcon = view.findViewById<ImageView>(R.id.sensor_icon)
 		sensorIcon.setBackgroundResource(if (nightMode) R.drawable.bg_empty_external_device_list_icon_night else R.drawable.bg_empty_external_device_list_icon_day)
 		sensorIcon.setImageResource(if (nightMode) R.drawable.img_help_vehicle_metrics_night else R.drawable.img_help_vehicle_metrics_day)
-		val docsLinkText = app.getString(R.string.learn_more_about_obd_sensors_link)
+		val docsLinkText = app.getString(R.string.learn_more_about_obd_sensors)
 		val spannable =
 			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { unused: Void? ->
 				val activity = activity
@@ -166,7 +165,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	//		}
 	//	}
 	private fun updatePairedSensorsList() {
-		vehicleMetricsPlugin?.let { plugin ->
+		plugin?.let { plugin ->
 			val connectedDevice = plugin.getConnectedDeviceInfo()
 			val connectedDevices: List<BTDeviceInfo> =
 				if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
@@ -197,11 +196,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDisconnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.disconnect()
+		plugin?.disconnect()
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
+		plugin?.connectToObd(requireActivity(), device)
 	}
 
 	override fun onSettings(device: BTDeviceInfo) {

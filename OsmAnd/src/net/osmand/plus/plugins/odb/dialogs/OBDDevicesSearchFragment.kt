@@ -150,7 +150,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
     }
 
     private fun startSearch() {
-        vehicleMetricsPlugin?.setScanDevicesListener(this)
+        plugin?.setScanDevicesListener(this)
 //        if (bleSearch) {
 //            plugin.searchBLEDevices()
 //        } else if (antSearch) {
@@ -160,7 +160,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 
     override fun onPause() {
         super.onPause()
-        vehicleMetricsPlugin?.setScanDevicesListener(null)
+        plugin?.setScanDevicesListener(null)
     }
 
     override fun onDestroyView() {
