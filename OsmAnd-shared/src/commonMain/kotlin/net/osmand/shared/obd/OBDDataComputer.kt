@@ -9,6 +9,7 @@ import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import kotlin.math.max
 import net.osmand.shared.obd.OBDCommand.*
+import net.osmand.shared.util.Localization
 
 object OBDDataComputer {
 
@@ -90,27 +91,35 @@ object OBDDataComputer {
 
 	enum class OBDTypeWidget(
 		val locationNeeded: Boolean,
-		val requiredCommand: OBDCommand
+		val requiredCommand: OBDCommand,
+		val nameId: String
 	) {
-		SPEED(false, OBD_SPEED_COMMAND),
-		RPM(false, OBD_RPM_COMMAND),
-		FUEL_LEFT_DISTANCE(true, OBD_FUEL_LEVEL_COMMAND),
+		SPEED(false, OBD_SPEED_COMMAND, "shared_string_speed"),
+		RPM(false, OBD_RPM_COMMAND, "obd_rpm"),
+		FUEL_LEFT_DISTANCE(true, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_distance"),
+		//	FUEL_LEFT_LITERS(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_liters"),
+		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_level"),
+		FUEL_CONSUMPTION_RATE(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_consumption_rate"),
+		FUEL_CONSUMPTION_RATE_SENSOR(false, OBD_FUEL_CONSUMPTION_RATE_COMMAND, "obd_fuel_consumption_rate"),
+		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND, "obd_air_intake_temp"),
+		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, "obd_ambient_air_temp"),
+		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND, "obd_battery_voltage"),
+		FUEL_TYPE(false, OBD_FUEL_TYPE_COMMAND, "obd_fuel_type"),
+		VIN(false, OBD_VIN_COMMAND, "obd_vin"),
+		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND, "obd_engine_coolant_temp");
 
-		//	FUEL_LEFT_LITERS(false, OBD_FUEL_LEVEL_COMMAND),
-		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND),
-		FUEL_CONSUMPTION_RATE(false, OBD_FUEL_LEVEL_COMMAND),
-		FUEL_CONSUMPTION_RATE_SENSOR(false, OBD_FUEL_CONSUMPTION_RATE_COMMAND),
-		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND),
-		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND),
-		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND),
-		FUEL_TYPE(false, OBD_FUEL_TYPE_COMMAND),
-		VIN(false, OBD_VIN_COMMAND),
-		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND);
+		fun getTitle(): String {
+			return Localization.getString(nameId)
+		}
 	}
 
-	private fun averageDouble(values: List<OBDDataField<Any>>): Double? =
-		if (values.isNotEmpty()) values.filter { it.value is Double }
-			.sumOf { it.value as Double } / values.size else null
+	private fun averageNumber(values: List<OBDDataField<Any>>): Double? =
+		if (values.isNotEmpty()) values
+			.filter { it.value is Number }
+			.map { (it.value as Number).toDouble() }
+			.sumOf { it } / values.size
+		else
+			null
 
 	open class OBDComputerWidgetFormatter(val pattern: String = "%s") {
 		open fun format(v: Any?): String {
@@ -159,7 +168,7 @@ object OBDDataComputer {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
 					} else {
-						averageDouble(locValues)
+						averageNumber(locValues)
 					}
 				}
 

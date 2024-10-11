@@ -42,7 +42,9 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		log.debug("before runImpl")
 		var response = runImpl(fullCommand)
+		log.debug("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
@@ -81,7 +83,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			log.debug(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
-			throw e
+			return OBDResponse.ERROR
 		}
 	}
 
