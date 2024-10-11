@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog
-import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
-import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter.FoundDevicesMenuListener
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnSensorNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
@@ -26,13 +25,9 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 
 class OBDDevicesListFragment : OBDDevicesBaseFragment(),
-	FoundDevicesMenuListener,
-	OnSensorNameChangedCallback
+	OBDDevicesAdapter.OBDDeviceItemListener,
+	OnSensorNameChangedCallback, VehicleMetricsPlugin.ConnectionStateListener
 
-//	,
-//	DeviceListener,
-//	OnSaveSensorPropertyCallback,
-//	ForgetDeviceListener
 {
 	protected var dividerBeforeButton: View? = null
 	protected var dividerBetweenDeviceGroups: View? = null
@@ -42,8 +37,8 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	protected var disconnectedPrompt: View? = null
 	protected var connectedList: RecyclerView? = null
 	protected var disconnectedList: RecyclerView? = null
-	private var connectedListAdapter: PairedDevicesAdapter? = null
-	private var disconnectedListAdapter: PairedDevicesAdapter? = null
+	private var connectedListAdapter: OBDDevicesAdapter? = null
+	private var disconnectedListAdapter: OBDDevicesAdapter? = null
 	private var appBar: AppBarLayout? = null
 	private var noBluetoothCard: View? = null
 	override val layoutId: Int
@@ -81,8 +76,8 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty))
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional))
 		setupOpenBtSettingsButton(view.findViewById(R.id.bt_settings_button_container))
-		connectedListAdapter = PairedDevicesAdapter(app, nightMode, this)
-		disconnectedListAdapter = PairedDevicesAdapter(app, nightMode, this)
+		connectedListAdapter = OBDDevicesAdapter(app, nightMode, this)
+		disconnectedListAdapter = OBDDevicesAdapter(app, nightMode, this)
 		connectedList?.adapter = connectedListAdapter
 		disconnectedList?.adapter = disconnectedListAdapter
 	}
@@ -144,27 +139,16 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 
 	override fun onResume() {
 		super.onResume()
+		vehicleMetricsPlugin?.setConnectionStateListener(this)
 		noBluetoothCard!!.visibility =
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) View.GONE else View.VISIBLE
-		//		updatePairedSensorsListeners(true);
 		updatePairedSensorsList()
 	}
 
-	//	@Override
-	//	public void onPause() {
-	//		super.onPause();
-	//		updatePairedSensorsListeners(false);
-	//	}
-	//	private void updatePairedSensorsListeners(boolean add) {
-	//		List<BTDeviceInfo> devices = plugin.getPairedOBDDevicesList(requireActivity());
-	//		for (BTDeviceInfo device : devices) {
-	//			if (add) {
-	//				device.addListener(this);
-	//			} else {
-	//				device.removeListener(this);
-	//			}
-	//		}
-	//	}
+	override fun onPause() {
+		super.onPause()
+		vehicleMetricsPlugin?.setConnectionStateListener(null)
+	}
 	private fun updatePairedSensorsList() {
 		vehicleMetricsPlugin?.let { plugin ->
 			val connectedDevice = plugin.getConnectedDeviceInfo()
@@ -206,8 +190,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 
 	override fun onSettings(device: BTDeviceInfo) {
 		OBDMainFragment.showInstance(requireActivity().supportFragmentManager)
-//		showInstance(
-//			requireActivity().supportFragmentManager, device)
 	}
 
 	override fun onRename(device: BTDeviceInfo) {
@@ -218,7 +200,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
-//		showInstance(requireActivity().supportFragmentManager, this, device)
 	}
 
 //	override fun onForgetSensorConfirmed(device:BTDeviceInfo) {
@@ -230,19 +211,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		updatePairedSensorsList()
 	}
 
-	fun onDeviceConnecting(device: BTDeviceInfo) {}
-	fun onDeviceConnect(
-		device: BTDeviceInfo,
-		result: Boolean,
-		error: String?) {
-		app.runInUIThread { updatePairedSensorsList() }
+	override fun onDeviceClicked(device: BTDeviceInfo) {
+		OBDMainFragment.showInstance(requireActivity().supportFragmentManager/*, device*/)
 	}
-
-	fun onDeviceDisconnect(device: BTDeviceInfo) {
-		app.runInUIThread { updatePairedSensorsList() }
-	}
-
-//	override fun onSensorData(sensor: AbstractSensor, data: SensorData) {}
 
 	companion object {
 		val TAG = OBDDevicesListFragment::class.java.simpleName
@@ -256,5 +227,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 					.commitAllowingStateLoss()
 			}
 		}
+	}
+
+	override fun onStateChanged(foundDevice: BTDeviceInfo) {
+		app.runInUIThread { updatePairedSensorsList() }
 	}
 }

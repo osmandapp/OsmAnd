@@ -59,9 +59,19 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	private var connectedDeviceInfo: BTDeviceInfo? = null
 	var socket: BluetoothSocket? = null
 	private var scanDevicesListener: ScanDevicesListener? = null
+	private var connectionStateListener: ConnectionStateListener? = null
+
+	enum class OBDConnectionState {
+		CONNECTED, CONNECTING, DISCONNECTED
+	}
+
 
 	interface ScanDevicesListener {
 		fun onScanFinished(foundDevices: List<BTDeviceInfo>)
+	}
+
+	interface ConnectionStateListener {
+		fun onStateChanged(state: OBDConnectionState)
 	}
 
 	init {
@@ -239,6 +249,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 		socket = null
 		connectedDeviceInfo = null
+		connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED)
 	}
 
 	@SuppressLint("MissingPermission")
@@ -246,6 +257,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		if (connectedDeviceInfo == null) {
 			if (BLEUtils.isBLEEnabled(activity)) {
 				if (AndroidUtils.hasBLEPermission(activity)) {
+					connectionStateListener?.onStateChanged(OBDConnectionState.CONNECTING)
 					if (socket != null && socket?.isConnected == true) {
 						socket?.close()
 						socket = null
@@ -259,6 +271,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 							pairedDevices.find { it.name == deviceInfo.name && it.address == deviceInfo.address }
 						if (obdDevice != null) {
 							connectToDevice(activity, obdDevice)
+						} else {
+							connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED)
 						}
 					}
 				} else {
@@ -310,6 +324,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
+		connectionStateListener?.onStateChanged(OBDConnectionState.CONNECTED)
 	}
 
 	override fun getSettingsScreenType(): SettingsScreenType {
@@ -354,6 +369,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		scanDevicesListener = listener
 	}
 
+	fun setConnectionStateListener(listener: ConnectionStateListener?) {
+		connectionStateListener = listener
+	}
+
 	fun getUsedOBDDevicesList(): List<BTDeviceInfo> {
 		val savedDevicesList = USED_OBD_DEVICES.get()
 		val gson = GsonBuilder().create()
@@ -362,7 +381,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return arr?.toList() ?: emptyList()
 	}
 
-	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
+	fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
 		val currentList = getUsedOBDDevicesList().toMutableList()
 		val savedDevice = currentList.find { it.address == deviceInfo.address }
 		if (savedDevice == null) {
