@@ -76,10 +76,10 @@
     <string name="rendering_attr_moreDetailed_name">Máis detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricións de acceso</string>
-    <string name="rendering_attr_showAccess_name">Amosar restricións do acceso e portaxes ou peaxes</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Amosar calidade das estradas</string>
-    <string name="rendering_attr_showSurfaces_name">Amosar superficie das estradas</string>
-    <string name="rendering_attr_showCycleRoutes_name">Amosar ciclovías</string>
+    <string name="rendering_attr_showAccess_name">Amosar as restricións de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Amosar a calidade das estradas</string>
+    <string name="rendering_attr_showSurfaces_name">Amosar a superficie das estradas</string>
+    <string name="rendering_attr_showCycleRoutes_name">Amosar os carrís bici (ciclovías)</string>
     <string name="no_index_file_to_download">Non foi posíbel atopar as descargas; comproba a túa conexión á Internet.</string>
     <string name="select_index_file_to_download">Non se atopou ren. Se non dás atopado a túa rexión, a podes facer ti mesmo (ollar https://osmand.net).</string>
     <string name="none_selected_gpx">Especifica primeiro un ficheiro GPX mantendo premido.</string>
@@ -4193,4 +4193,8 @@
     <string name="quick_action_to_my_location">Á miña localización</string>
     <string name="choose_map_orientation">Escoller a orientación do mapa</string>
     <string name="backup_and_restore">Copia de seguranza e restauración</string>
+    <string name="lock_screen_description">Activa ou desactiva a funcionalidade da pantalla táctil para evitar toques accidentais</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botón para amosar ou agochar as edicións locais de OSM no mapa.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Engadiuse un visor de galerías a pantalla completa para imaxes de Wikimedia\n\n• Introduciuse un novo complemento «Métricas do vehículo» para supervisar o rendemento do vehículo mediante o protocolo OBD-II\n\n• Engadiuse a posibilidade de asignar actividades ás pistas e filtralas en consecuencia\n\n• Implementáronse novas accións rápidas para a gravación de viaxes e o bloqueo da pantalla táctil\n\n• Introduciuse o aspecto do botón do mapa personalizábel e unha cuadrícula precisa\n\n• Engadiuse un menú contextual e unha acción «Restablecer a velocidade media» aos trebellos\n\n• Engadiuse unha nova capa de ruta «Vieiros moto/bici de terra»\n\n• Corrixiuse a función «Gravación automática da pista durante a navegación»\n\n• Solucionouse un problema coas coordenadas invertidas en RTL\n\n• Corrixíronse os datos do sensor perdidos para a pista de gravación actualmente\n\n• Engadiuse información sobre as áreas circundantes para o punto seleccionado\n\n• Engadiuse unha acción rápida para controlar a visibilidade das edicións de OSM\n\n• Parámetros de visibilidade separados para as opcións de coloración do terreo\n\n• Engadiuse unha icona na que se pode tocar para amosar o acceso ou outros atributos da estrada ou camiño\n\n</string>
 </resources>

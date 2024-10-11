@@ -12,13 +12,13 @@ import com.google.gson.reflect.TypeToken
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.aidlapi.OsmAndCustomizationConstants
+import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_VEHICLE_METRICS_ID
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.plus.settings.backend.ApplicationModeBean
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
@@ -205,7 +205,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		mapActivity: MapActivity,
 		helper: ContextMenuAdapter) {
 		if (isActive) {
-			helper.addItem(ContextMenuItem(OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID)
+			helper.addItem(ContextMenuItem(DRAWER_VEHICLE_METRICS_ID)
 				.setTitleId(R.string.obd_plugin_name, mapActivity)
 				.setIcon(R.drawable.ic_action_sensor)
 				.setListener { _: OnDataChangeUiAdapter?, _: View?, _: ContextMenuItem?, _: Boolean ->

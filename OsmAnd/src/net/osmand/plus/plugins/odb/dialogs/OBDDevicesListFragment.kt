@@ -59,7 +59,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		val sensorIcon = view.findViewById<ImageView>(R.id.sensor_icon)
 		sensorIcon.setBackgroundResource(if (nightMode) R.drawable.bg_empty_external_device_list_icon_night else R.drawable.bg_empty_external_device_list_icon_day)
 		sensorIcon.setImageResource(if (nightMode) R.drawable.img_help_vehicle_metrics_night else R.drawable.img_help_vehicle_metrics_day)
-		val docsLinkText = app.getString(R.string.learn_more_about_obd_sensors_link)
+		val docsLinkText = app.getString(R.string.learn_more_about_obd_sensors)
 		val spannable =
 			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { unused: Void? ->
 				val activity = activity
@@ -229,7 +229,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		}
 	}
 
-	override fun onStateChanged(foundDevice: BTDeviceInfo) {
+	override fun onStateChanged(state: VehicleMetricsPlugin.OBDConnectionState) {
 		app.runInUIThread { updatePairedSensorsList() }
 	}
 }

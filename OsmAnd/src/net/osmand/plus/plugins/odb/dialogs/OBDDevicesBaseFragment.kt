@@ -18,19 +18,17 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
 abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
-	protected var vehicleMetricsPlugin: VehicleMetricsPlugin? = null
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		vehicleMetricsPlugin = PluginsHelper.getPlugin(
-			VehicleMetricsPlugin::class.java)
-	}
+
+	protected val vehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 
 	@get:LayoutRes
 	protected abstract val layoutId: Int
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
-		savedInstanceState: Bundle?): View? {
+		savedInstanceState: Bundle?
+	): View? {
 		updateNightMode()
 		val view = themedInflater.inflate(layoutId, container, false)
 		setupToolbar(view)
