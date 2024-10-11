@@ -11,6 +11,7 @@ import androidx.annotation.ColorRes
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
@@ -19,7 +20,7 @@ import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 
-class OBDMainFragment : OBDDevicesBaseFragment() {
+class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener {
 
 	private val handler = Handler(Looper.getMainLooper())
 	private val widgets = mutableListOf<OBDComputerWidget>()
@@ -56,12 +57,11 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 
 	private fun setupConnectionState(view: View) {
 		val connected = vehicleMetricsPlugin!!.isConnected()
-		val device = vehicleMetricsPlugin.getConnectedDeviceInfo()
 
 		val connectedText = app.getString(
 			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
 		)
-		view.findViewById<TextView>(R.id.device_name).text = device?.name
+		view.findViewById<TextView>(R.id.device_name).text = device.name
 		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
 			R.string.ltr_or_rtl_combine_via_comma,
 			connectedText,
@@ -105,15 +105,16 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 			if (it.getConnectedDeviceName() != null) {
 				it.disconnect()
 			} else {
-				Thread {
-					it.connectToObd(requireActivity(), device)
-					view?.let {
-						Handler(Looper.getMainLooper()).post {
-							setupConnectionState(it)
-							setupConnectionButton(it)
-						}
-					}
-				}.start()
+				Thread { it.connectToObd(requireActivity(), device) }.start()
+			}
+		}
+	}
+
+	override fun onStateChanged(state: VehicleMetricsPlugin.OBDConnectionState) {
+		app.runInUIThread {
+			view?.let {
+				setupConnectionState(it)
+				setupConnectionButton(it)
 			}
 		}
 	}
@@ -179,6 +180,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 		super.onResume()
 		updateEnable = true
 		startHandler()
+		vehicleMetricsPlugin?.setConnectionStateListener(this)
 	}
 
 	private fun startHandler() {
@@ -193,6 +195,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 	override fun onPause() {
 		super.onPause()
 		updateEnable = false
+		vehicleMetricsPlugin?.setConnectionStateListener(null)
 	}
 
 	override fun onDestroy() {
