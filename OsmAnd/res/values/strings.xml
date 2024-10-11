@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Vehicle info</string>
     <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
     <string name="obd_how_to_connect">How to connect:</string>

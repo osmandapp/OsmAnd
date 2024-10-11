@@ -217,6 +217,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(device)
 	}
+
+	fun onDeviceClicked(device: BTDeviceInfo) {
+        OBDMainFragment.showInstance(requireActivity().supportFragmentManager, device)
+    }
 }

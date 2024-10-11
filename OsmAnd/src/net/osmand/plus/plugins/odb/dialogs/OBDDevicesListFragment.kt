@@ -189,7 +189,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onSettings(device: BTDeviceInfo) {
-		OBDMainFragment.showInstance(requireActivity().supportFragmentManager)
+		OBDMainFragment.showInstance(requireActivity().supportFragmentManager, device)
 	}
 
 	override fun onRename(device: BTDeviceInfo) {
@@ -212,7 +212,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDeviceClicked(device: BTDeviceInfo) {
-		OBDMainFragment.showInstance(requireActivity().supportFragmentManager/*, device*/)
+		OBDMainFragment.showInstance(requireActivity().supportFragmentManager, device)
 	}
 
 	companion object {

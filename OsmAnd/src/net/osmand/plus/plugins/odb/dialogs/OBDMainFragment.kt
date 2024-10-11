@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType
+import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
@@ -21,6 +24,8 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 	private val handler = Handler(Looper.getMainLooper())
 	private val widgets = mutableListOf<OBDComputerWidget>()
 	private val dataRows = mutableListOf<View>()
+
+	private lateinit var device: BTDeviceInfo
 
 	private var updateEnable = false
 
@@ -44,6 +49,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 
 	override fun setupUI(view: View) {
 		setupConnectionState(view)
+		setupConnectionButton(view)
 		setupVehicleInfo(view)
 		setupReceivedData(view)
 	}
@@ -59,7 +65,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
 			R.string.ltr_or_rtl_combine_via_comma,
 			connectedText,
-			app.getString(R.string.external_device_ble)
+			app.getString(R.string.shared_string_bluetooth)
 		)
 
 		view.findViewById<ImageView?>(R.id.widget_icon).apply {
@@ -74,6 +80,40 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 				setImageDrawable(uiUtilities.getIcon(if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night))
 			} else {
 				setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_car_obd2))
+			}
+		}
+	}
+
+	private fun setupConnectionButton(view: View) {
+		val container = view.findViewById<ViewGroup>(R.id.pair_btn)
+		container.removeAllViews()
+
+		val button = DialogButton(view.context)
+		if (vehicleMetricsPlugin?.isConnected() == true) {
+			button.setButtonType(DialogButtonType.SECONDARY)
+			button.setTitle(getString(R.string.external_device_details_disconnect))
+		} else {
+			button.setButtonType(DialogButtonType.PRIMARY)
+			button.setTitle(getString(R.string.external_device_details_connect))
+		}
+		button.setOnClickListener { toggleConnection() }
+		container.addView(button)
+	}
+
+	private fun toggleConnection() {
+		vehicleMetricsPlugin?.let {
+			if (it.getConnectedDeviceName() != null) {
+				it.disconnect()
+			} else {
+				Thread {
+					it.connectToObd(requireActivity(), device)
+					view?.let {
+						Handler(Looper.getMainLooper()).post {
+							setupConnectionState(it)
+							setupConnectionButton(it)
+						}
+					}
+				}.start()
 			}
 		}
 	}
@@ -164,9 +204,10 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 		const val TAG: String = "VehicleMetricsFragment"
 		const val UPDATE_INTERVAL_MILLIS = 100L
 
-		fun showInstance(manager: FragmentManager) {
+		fun showInstance(manager: FragmentManager, device: BTDeviceInfo) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = OBDMainFragment()
+				fragment.device = device
 				fragment.retainInstance = true
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
