@@ -5,6 +5,7 @@ import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.fragment.app.FragmentManager
@@ -30,7 +31,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 	}
 
 	override val layoutId: Int
-		get() = R.layout.fragment_obd_devices_list
+		get() = R.layout.fragment_obd_main
 
 	override fun setupToolbar(view: View) {
 		view.findViewById<ImageButton>(R.id.close_button).apply {
@@ -48,13 +49,39 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 	}
 
 	private fun setupConnectionState(view: View) {
+		val connected = plugin!!.isConnected()
+		val device = plugin.getConnectedDeviceInfo()
 
+		val connectedText = app.getString(
+			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
+		)
+		view.findViewById<TextView>(R.id.device_name).text = device?.name
+		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
+			R.string.ltr_or_rtl_combine_via_comma,
+			connectedText,
+			app.getString(R.string.external_device_ble)
+		)
+
+		view.findViewById<ImageView?>(R.id.widget_icon).apply {
+			background = uiUtilities.getIcon(
+				if (connected) {
+					if (nightMode) R.drawable.bg_widget_type_icon_dark else R.drawable.bg_widget_type_icon_light
+				} else {
+					if (nightMode) R.drawable.bg_widget_type_disconnected_icon_dark else R.drawable.bg_widget_type_disconnected_icon_light
+				}
+			)
+			if (connected) {
+				setImageDrawable(uiUtilities.getIcon(if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night))
+			} else {
+				setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_car_obd2))
+			}
+		}
 	}
 
 	private fun setupVehicleInfo(view: View) {
 		view.findViewById<ViewGroup>(R.id.info_container)?.apply {
 			removeAllViews()
-			createWidgetView(OBDTypeWidget.VIN, this)
+			createWidgetView(OBDTypeWidget.VIN, this, true)
 		}
 	}
 
@@ -63,13 +90,17 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 			removeAllViews()
 			OBDTypeWidget.entries.forEach {
 				if (it != OBDTypeWidget.VIN) {
-					createWidgetView(it, this)
+					createWidgetView(it, this, it == OBDTypeWidget.entries.last())
 				}
 			}
 		}
 	}
 
-	private fun createWidgetView(widgetType: OBDTypeWidget, container: ViewGroup) {
+	private fun createWidgetView(
+		widgetType: OBDTypeWidget,
+		container: ViewGroup,
+		lastItem: Boolean
+	) {
 		val widget = OBDDataComputer.registerWidget(widgetType, 0)
 		widgets.add(widget)
 
@@ -77,6 +108,7 @@ class OBDMainFragment : OBDDevicesBaseFragment() {
 		itemView.findViewById<TextView>(R.id.title).text = widget.type.getTitle()
 		itemView.tag = widget
 		container.addView(itemView)
+		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), !lastItem)
 		dataRows.add(itemView)
 	}
 

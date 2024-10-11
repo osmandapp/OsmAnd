@@ -19,15 +19,11 @@ import net.osmand.plus.utils.ColorUtilities
 
 abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
 
-	protected var plugin: VehicleMetricsPlugin? = null
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
-	}
+	protected val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 
 	@get:LayoutRes
 	protected abstract val layoutId: Int
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
