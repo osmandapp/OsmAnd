@@ -31,6 +31,7 @@ object OBDDispatcher {
 
 	interface OBDReadStatusListener {
 		fun onIOError()
+		fun onInitConnectionFailed()
 	}
 
 	private fun startReadObdLooper() {
@@ -54,8 +55,12 @@ object OBDDispatcher {
 							null
 						}
 					}
+
+					override fun onInitFailed() {
+						readStatusListener?.onInitConnectionFailed()
+					}
 				})
-				while (true) {
+				while (obd2Connection?.initialized == true) {
 					try {
 						for (command in commandQueue) {
 							if (command.isStale) {
@@ -83,7 +88,7 @@ object OBDDispatcher {
 						}
 					} catch (error: IOException) {
 						log.error("Run OBD looper error. $error")
-						if(inputStream == null || outputStream == null) {
+						if (inputStream == null || outputStream == null) {
 							break
 						}
 						readStatusListener?.onIOError()
