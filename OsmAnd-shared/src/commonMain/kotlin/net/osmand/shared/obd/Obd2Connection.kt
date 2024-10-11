@@ -2,6 +2,7 @@ package net.osmand.shared.obd
 
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
+import okio.IOException
 
 class Obd2Connection(private val connection: UnderlyingTransport) {
 	enum class COMMAND_TYPE(val code: Int) {
@@ -10,9 +11,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 	private val log = LoggerFactory.getLogger("Obd2Connection")
+	var initialized = false
 
 	init {
-		runInitCommands()
+		try {
+			runInitCommands()
+			initialized = true
+		} catch (error: IOException) {
+			connection.onInitFailed()
+		}
 	}
 
 	private fun runInitCommands() {
@@ -194,4 +201,5 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
 	fun readByte(): Byte?
+	fun onInitFailed()
 }

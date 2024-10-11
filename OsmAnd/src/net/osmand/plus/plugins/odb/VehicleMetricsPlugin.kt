@@ -358,6 +358,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 //		}
 	}
 
+	override fun onInitConnectionFailed() {
+		disconnect()
+	}
+
 	override fun updateLocation(location: Location) {
 		OBDDataComputer.registerLocation(
 			OBDDataComputer.OBDLocation(
