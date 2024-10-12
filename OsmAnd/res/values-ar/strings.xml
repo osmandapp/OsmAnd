@@ -2203,7 +2203,7 @@
     <string name="sorted_by_distance">مرتبة حسب المسافة</string>
     <string name="shared_string_overview">نظرة عامة</string>
     <string name="quick_action_auto_zoom">التكبير التلقائي</string>
-    <string name="quick_action_auto_zoom_on">قم بتشغيل التكبير التلقائي</string>
+    <string name="quick_action_auto_zoom_on">بتشغيل التكبير التلقائي</string>
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
     <string name="analyze_on_map">تحليل</string>
     <string name="shared_string_visible">مرئي</string>
@@ -4518,7 +4518,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">إظهار علامات الملاحظة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">الأيقونات عند التكبيرات المنخفضة</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">عرض تخطيطي للأيقونات عند التكبيرات المنخفضة</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">لا تخفي أنفاق الممرات المائية</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">زيادة الرؤية لأنفاق الممرات المائية</string>
     <string name="shared_string_open_street_map">خريطة الشارع المفتوح</string>
     <string name="rendering_value_all_name">الكل</string>
     <string name="rendering_attr_seabedDetail_name">تفاصيل قاع البحر</string>
@@ -4769,7 +4769,7 @@
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
     <string name="compass_always_visible">مرئي دائما</string>
-    <string name="compass_click_desc">تلميح: انقر زر البوصلة لتبديل وضع اتجاه الخريطة.</string>
+    <string name="compass_click_desc">اضغط مرتين على زر البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
@@ -4796,7 +4796,7 @@
     <string name="available_as_part_of_subscription_plan">متوفر كجزء من اشتراك %1$s.</string>
     <string name="included_in_your_current_plan">مضمنة في خطتك الحالية \"%1$s\"</string>
     <string name="download_heightmap_maps">خريطة الارتفاع</string>
-    <string name="favorite_confirm_delete_group">هل أنت متأكد من أنك تريد حذف مجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
+    <string name="favorite_confirm_delete_group">هل تريد حذف المجموعة \"%1$s\" وجميع النقاط المضمنة (%2$d)؟</string>
     <string name="favorite_delete_group">حذف المجموعة</string>
     <string name="display_position">عرض الموقف</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
@@ -5118,7 +5118,7 @@
 \n• إيماءات خريطة ثابتة للإمالة والتكبير والتدوير
 \n
 \n</string>
-    <string name="sort_duration_ascending">مدة أقصر أولا</string>
+    <string name="sort_duration_ascending">أقصر مدة أولا</string>
     <string name="sort_duration_descending">أطول مدة أولا</string>
     <string name="sort_distance_ascending">أقصر مسافة أولا</string>
     <string name="sort_distance_descending">أطول مسافة أولا</string>
@@ -5161,7 +5161,7 @@
     <string name="ant_plus_pair_bluetooth_prompt">يمكنك إقران مستشعرات بلوتوث LE و ANT + مع أوسماند.</string>
     <string name="file_already_exists_description">\"%1$s\". يوجد ملف بهذا الاسم . سيتم استبدال جميع التغييرات التي تم إجراؤها بالإصدار الحالي.</string>
     <string name="file_already_exists">الملف موجود مسبقا</string>
-    <string name="nav_profile_confirm_delete">هل أنت متأكد أنك تريد حذف \"%1$s\"؟</string>
+    <string name="nav_profile_confirm_delete">حذف \"%1$s\"؟</string>
     <string name="external_device_low_battery">البطارية ضعيفة</string>
     <string name="external_device_forget_sensor">إزالة المستشعر</string>
     <string name="external_device_forget_sensor_description">سيُحذف من القائمة ستكون قادراً على ربط هذا المستشعرمجدداً في أي وقت.</string>
@@ -5273,9 +5273,7 @@
     <string name="osmand_cloud_deleting_account_descr">في غضون لحظات قليلة ، سيتم حذف جميع بياناتك وحسابك من أوسماند آيكلاود.
 \n
 \nتظل جميع البيانات الموجودة على الجهاز كما هي.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">هل أنت متأكد من أنك تريد حذف حساب OsmAnd Cloud؟
-\n
-\nلا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">هل أنت متأكد من حذف حساب أوسماند آيكلاود؟\n\nلا يمكن التراجع عن هذا الإجراء.</string>
     <string name="osmand_cloud_delete_account_confirmation">حذف الحساب؟</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">سيتم تسجيل خروج الأجهزة الثانوية من أوسماند آيكلاود وستفقد الوصول إلى الميزات المدفوعة.</string>
     <string name="folder_export_empty_error">لا شيء للتصدير ، المجلد فارغ</string>
@@ -5287,7 +5285,7 @@
     <string name="free_account">حساب مجاني</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">لن يؤدي هذا إلى إلغاء اشتراكك في أوسماند برو.</string>
     <string name="manage_subscriptions">إدارة الاشتراكات.</string>
-    <string name="delete_account_warning">هل أنت متأكد من أنك تريد حذف حساب %1$s؟</string>
+    <string name="delete_account_warning">حذف حساب %1$s؟</string>
     <string name="shared_string_deleting">جار الحذف</string>
     <string name="backup_error_delete_account_email_match">البريد الإلكتروني لا يتطابق مع اسم مستخدم تسجيل الدخول</string>
     <string name="action_cannot_be_undone">لا يمكن التراجع عن هذا الإجراء.</string>
@@ -5499,7 +5497,7 @@
     <string name="map_is_up_to_date">خريطة %1$s محدثة.</string>
     <string name="sort_size_ascending">الحجم الصغير أولا</string>
     <string name="sort_country_name_descending">اسم البلد: ي - أ</string>
-    <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
+    <string name="delete_map_description">حذف الخريطة %1$s؟</string>
     <string name="maps_and_resources">خرائط ومصادر</string>
     <string name="shared_string_cache">الذاكرة المؤقتة</string>
     <string name="with_waypoints">مع نقاط الطريق</string>
@@ -5520,7 +5518,7 @@
     <string name="filter_screen_title">فلتر</string>
     <string name="widget_available_ram">ذاكرة الوصول العشوائي المتاحة</string>
     <string name="terrain_maps">خرائط التضاريس</string>
-    <string name="smart_folder_name_present">هكذا ملف ذكي موجود بالفعل</string>
+    <string name="smart_folder_name_present">هذا المجلد الذكي موجود بالفعل</string>
     <string name="smart_folder_saved">تم حفظ الملف الذكي</string>
     <string name="add_smart_folder">أضف ملف ذكي</string>
     <string name="empty_name">اسم فارغ</string>
@@ -5532,7 +5530,7 @@
     <string name="no_config_smart_folder_title">غير مهيأ</string>
     <string name="discard_filter_changes">تجاهل تغييرات الفلتر</string>
     <string name="shared_string_loading">قيد التحميل</string>
-    <string name="discard_filter_changes_prompt">هل أنت متأكد من أنك تريد إعادة ضبط جميع الفلاتر الى الوضع الافتراضي؟</string>
+    <string name="discard_filter_changes_prompt">إعادة تعيين كافة الفلاتر؟</string>
     <string name="no_config_smart_folder_description">الملفات الذكية تسمح بتجميع المسارات بواسطة تطبيق الفلاتر</string>
     <string name="loading_tracks">إعادة تحميل المسارات</string>
     <string name="searching_matching_tracks">ابحث في جميع المسارات المتطابقة</string>
@@ -5587,7 +5585,7 @@
     <string name="shared_string_reassign">إعادة التعيين</string>
     <string name="reset_key_assignments">إعادة تعيين المهام الرئيسية</string>
     <string name="key_event_action_emit_navigation_hint">إرسال تلميح التنقل</string>
-    <string name="remove_type_q">هل أنت متأكد أنك تريد إزالة النوع \"%1$s\"؟</string>
+    <string name="remove_type_q">إزالة النوع \"%1$s\"؟</string>
     <string name="shared_string_action">إجراء</string>
     <string name="add_new_type">إضافة نوع جديد</string>
     <string name="key_event_action_move_up">حرك للأعلى</string>
@@ -5599,7 +5597,7 @@
     <string name="key_is_already_assigned_error">تم بالفعل تعيين المفتاح \"%1$s\" للإجراء: \"%2$s\"</string>
     <string name="key_event_action_open_navigation_view">فتح طريقة عرض التنقل</string>
     <string name="add_row">اضف سطر</string>
-    <string name="discard_changes_prompt">هل أنت متأكد أنك تريد تجاهل التغييرات؟</string>
+    <string name="discard_changes_prompt">تجاهل التغييرات؟</string>
     <string name="shared_string_eta">ETA</string>
     <string name="external_input_device_title">جهاز إدخال خارجي</string>
     <string name="row_number">الصف %1$s</string>
@@ -5634,7 +5632,7 @@
     <string name="shared_string_activity">النشاط</string>
     <string name="shared_string_keywords">الكلمات الدلالية</string>
     <string name="shared_string_additional">إضافي</string>
-    <string name="sorted_sufolders_toast">تُفرز المجلدات الفرعية في \"%1$s\" بحسب: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">يتم فرز المجلدات الفرعية في \"%1$s\" حسب: \"%2$s\"</string>
     <string name="battery_optimization_banner_content">يمكن أن يؤدي تحسين بطارية أندرويد إلى حدوث فجوات وعدم دقة في المسارات المسجلة.</string>
     <string name="dont_ask_anymore">لا تسأل مرة أخرى</string>
     <string name="battery_optimization_settings">إعدادات تحسين البطارية</string>
@@ -5801,15 +5799,14 @@
     <string name="choose_map_orientation">اختر توجه الخريطة</string>
     <string name="quick_action_directions_from">نقطة البداية</string>
     <string name="quick_action_destination">الوجهة</string>
-    <string name="energy_avg_info_description">مستوى البطارية في الدقيقة: %1$s
-\nاستهلاك الطاقة (ميليأمبير): %2$s</string>
-    <string name="quick_action_terrain_color_scheme">مخطط لون الإقليم</string>
+    <string name="energy_avg_info_description">مستوى البطارية في الدقيقة: %1$s\nاستهلاك الطاقة (ميلي أمبير): %2$s</string>
+    <string name="quick_action_terrain_color_scheme">مخطط ألوان التضاريس</string>
     <string name="quick_action_to_my_location">إلى موقعي</string>
     <string name="quick_action_move_map_down">الخريطة الى الأسفل</string>
     <string name="quick_action_move_map_up">الخريطة الى الأعلى</string>
     <string name="quick_action_new_route">مسار جديد</string>
     <string name="shared_string_set">تحديد</string>
-    <string name="shared_string_create">انشئ</string>
+    <string name="shared_string_create">إنشاء</string>
     <string name="quick_action_remove_next_destination">نقطة الوجهة التالية</string>
     <string name="missing_maps_ignore_details">هل تغطي الخرائط التي تم تنزيلها مسارك؟ تواصل معهم إذا كنت على دراية بالمنطقة.</string>
     <string name="assigned_keys">المفاتيح المخصصة</string>
@@ -5954,7 +5951,7 @@
     <string name="obd_rpm_desc">يظهر عداد سرعة دوران السيارة RPM عبر مستشعر OBD</string>
     <string name="obd_air_intake_temp_desc">يعرض درجة حرارة الهواء الداخل للمركبة عبر مستشعر OBD</string>
     <string name="obd_rpm">RPM</string>
-    <string name="rpm_unit">rpm</string>
+    <string name="rpm_unit">دورة بالدقيقة</string>
     <string name="obd_fuel_left_distance_desc">يوضح المسافة التي يمكن للمركبة قطعها على مستوى الوقود الأيسر فوق مستشعر OBD</string>
     <string name="obd_fuel_level_desc">يعرض مستوى وقود السيارة عبر مستشعر OBD</string>
     <string name="obd_engine_coolant_temp_desc">يعرض درجة حرارة سائل تبريد المحرك عبر مستشعر OBD</string>
