@@ -73,8 +73,14 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
-			"UNABLETOCONNECT" -> throw Exception("connection failure")
-			"CANERROR" -> throw Exception("CAN bus error")
+			"UNABLETOCONNECT" -> {
+				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+			"CANERROR" -> {
+				log.error("CAN bus error")
+				return OBDResponse.ERROR
+			}
 		}
 		try {
 			var hexValues = toHexValues(response)
