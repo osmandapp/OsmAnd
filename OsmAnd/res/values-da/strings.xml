@@ -1466,7 +1466,7 @@
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
     <string name="shared_string_tracks">Spor</string>
-    <string name="shared_string_currently_recording_track">Igangværende sporoptagelse</string>
+    <string name="shared_string_currently_recording_track">Sporet, der optages nu</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
     <string name="shared_string_collapse">Fold sammen</string>
