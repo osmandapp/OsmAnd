@@ -6021,4 +6021,5 @@
     <string name="obd_widget_group">مقاييس المركبات</string>
     <string name="screen_is_unlocked">تم فتح قفل شاشة اللمس.</string>
     <string name="screen_is_locked_by_action_button">شاشة اللمس مقفلة. اضغط على الزر لفتح القفل.</string>
+    <string name="obd_fuel_left_distance">الوقود المتبقي (المسافة)</string>
 </resources>
