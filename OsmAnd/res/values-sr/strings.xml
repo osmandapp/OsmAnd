@@ -5948,7 +5948,7 @@
     <string name="obd_fuel_type">Тип горива</string>
     <string name="obd_plugin_name">Метрика возила</string>
     <string name="obd_support">ДНВ подршка</string>
-    <string name="obd_plugin_description">Приступа информацијама о вашем возилу преко ДНВ протокола</string>
+    <string name="obd_plugin_description">Пратите кључне метрике возила користећи ДНВ-ИИ протокол. Приступ подацима укључујући: * Брзина мотора * Потрошња горива * Преостало гориво * Раздаљина од покретања мотора * Усисна температура * Температура околине * Температура расхладне течности * Брзина возила * Проценат батерије</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Двогоривно радно Водоник</string>
     <string name="obd_battery_voltage_desc">Приказује напон батерије преко ДНВ сензора</string>
     <string name="obd_fuel_left_distance_desc">Показује раздаљину коју возило може да пређе са преосталим горивом преко ОБД сензора</string>
@@ -5980,4 +5980,14 @@
     <string name="screen_is_locked_by_external_button">Екран осетљив на додир је закључан. Да бисте откључали, притисните дугме %1$s или додирните дугме на екрану.</string>
     <string name="screen_is_unlocked">Екран осетљив на додир је откључан.</string>
     <string name="screen_is_locked_by_action_button">Екран осетљив на додир је закључан. Додирните дугме да бисте откључали.</string>
+    <string name="connect_obd_instructions_step1">1. Повежите скенер са ДНВ-ИИ портом вашег возила.</string>
+    <string name="obd_how_to_connect">Како повезати:</string>
+    <string name="connect_obd_instructions_step4">4. Додирните „Повежи се“ и изаберите ваш скенер са листе.</string>
+    <string name="shared_string_bluetooth">Блутут</string>
+    <string name="obd_vehicle_info">Инфо возила</string>
+    <string name="connect_obd_instructions_title">ОсмАнд подржава Блутут везе са ДНВ-ИИ скенерима.</string>
+    <string name="connect_obd_instructions_step2">2. Укључите мотор вашег возила</string>
+    <string name="connect_obd_instructions_step3">3. Омогућите Блутут на вашем уређају</string>
+    <string name="learn_more_about_obd_sensors">Сазнајте више о сензорима.</string>
+    <string name="obd_fuel_left_liters">Преостало гориво (литара)</string>
 </resources>
