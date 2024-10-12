@@ -15,14 +15,14 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
-import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter.OBDDeviceItemListener
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.data.BTDeviceInfo
 
-class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ScanDevicesListener,
+class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
+	VehicleMetricsPlugin.ScanOBDDevicesListener,
 	PairedDevicesAdapter.PairedDevicesMenuListener {
 
 	private var currentState = SearchStates.NOTHING_FOUND
@@ -33,9 +33,6 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 	private var foundDevicesCountView: TextView? = null
 	private lateinit var pairedDevicesAdapter: PairedDevicesAdapter
 	private lateinit var foundDevicesAdapter: OBDDevicesAdapter
-	private var bleSearch: Boolean = false
-	private var antSearch: Boolean = false
-	private var devicesList: List<BTDeviceInfo>? = null
 
 	companion object {
 		val TAG: String = OBDDevicesSearchFragment::class.java.simpleName
@@ -109,20 +106,6 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 		foundDevicesRecyclerView?.adapter = foundDevicesAdapter
 	}
 
-	private fun bindFoundDevices(devices: List<BTDeviceInfo>) {
-		if (devices.isEmpty()) {
-			setCurrentState(SearchStates.NOTHING_FOUND)
-		} else {
-			setCurrentState(SearchStates.DEVICES_LIST)
-			val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
-			formatString?.let {
-				foundDevicesCountView?.text =
-					String.format(formatString, devices.size)
-			}
-			pairedDevicesAdapter.items = devices
-		}
-	}
-
 	override fun onStart() {
 		super.onStart()
 		pairedDevicesAdapter.items =
@@ -141,11 +124,13 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		currentState = if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
-			SearchStates.NO_BLUETOOTH
-		} else {
-			SearchStates.DEVICES_LIST
-		}
+		setCurrentState(
+			if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
+				SearchStates.NO_BLUETOOTH
+			} else {
+				SearchStates.DEVICES_LIST
+			}
+		)
 	}
 
 	override fun onResume() {
@@ -199,8 +184,8 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 		)
 	}
 
-	override fun onScanFinished(foundDevices: List<BTDeviceInfo>) {
-		bindFoundDevices(foundDevices)
+	override fun onDeviceFound(foundDevice: BTDeviceInfo) {
+		//todo add new device
 	}
 
 	internal enum class SearchStates {
@@ -211,15 +196,4 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.
 		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
 		activity?.onBackPressed()
 	}
-
-	override fun onSave(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.saveDeviceToUsedOBDDevicesList(device)
-	}
-
-	override fun onForget(device: BTDeviceInfo) {
-	}
-
-	fun onDeviceClicked(device: BTDeviceInfo) {
-        OBDMainFragment.showInstance(requireActivity().supportFragmentManager, device)
-    }
 }

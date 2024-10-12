@@ -16,7 +16,7 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
-import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnSensorNameChangedCallback
+import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
@@ -26,17 +26,15 @@ import net.osmand.util.Algorithms
 
 class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	OBDDevicesAdapter.OBDDeviceItemListener,
-	OnSensorNameChangedCallback, VehicleMetricsPlugin.ConnectionStateListener
-
-{
-	protected var dividerBeforeButton: View? = null
-	protected var dividerBetweenDeviceGroups: View? = null
-	protected var emptyView: View? = null
-	protected var contentView: View? = null
-	protected var connectedPrompt: View? = null
-	protected var disconnectedPrompt: View? = null
-	protected var connectedList: RecyclerView? = null
-	protected var disconnectedList: RecyclerView? = null
+	OnDeviceNameChangedCallback, VehicleMetricsPlugin.ConnectionStateListener {
+	private var dividerBeforeButton: View? = null
+	private var dividerBetweenDeviceGroups: View? = null
+	private var emptyView: View? = null
+	private var contentView: View? = null
+	private var connectedPrompt: View? = null
+	private var disconnectedPrompt: View? = null
+	private var connectedList: RecyclerView? = null
+	private var disconnectedList: RecyclerView? = null
 	private var connectedListAdapter: OBDDevicesAdapter? = null
 	private var disconnectedListAdapter: OBDDevicesAdapter? = null
 	private var appBar: AppBarLayout? = null
@@ -61,7 +59,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		sensorIcon.setImageResource(if (nightMode) R.drawable.img_help_vehicle_metrics_night else R.drawable.img_help_vehicle_metrics_day)
 		val docsLinkText = app.getString(R.string.learn_more_about_obd_sensors)
 		val spannable =
-			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { unused: Void? ->
+			UiUtilities.createClickableSpannable(docsLinkText, docsLinkText) { _: Void? ->
 				val activity = activity
 				if (activity != null) {
 					AndroidUtils.openUrl(
@@ -90,7 +88,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 		dismissButton.layoutParams = layoutParams
 		view.requestLayout()
-		dismissButton.setOnClickListener { v: View? -> showPairNewSensorBottomSheet() }
+		dismissButton.setOnClickListener { _: View? -> showPairNewSensorBottomSheet() }
 		AndroidUiHelper.updateVisibility(dismissButton, true)
 	}
 
@@ -102,7 +100,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 		dismissButton.layoutParams = layoutParams
 		view.requestLayout()
-		dismissButton.setOnClickListener { v: View? ->
+		dismissButton.setOnClickListener { _: View? ->
 			val intentOpenBluetoothSettings = Intent()
 			intentOpenBluetoothSettings.setAction(Settings.ACTION_BLUETOOTH_SETTINGS)
 			startActivity(intentOpenBluetoothSettings)
@@ -140,7 +138,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	override fun onResume() {
 		super.onResume()
 		vehicleMetricsPlugin?.setConnectionStateListener(this)
-		noBluetoothCard!!.visibility =
+		noBluetoothCard?.visibility =
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) View.GONE else View.VISIBLE
 		updatePairedSensorsList()
 	}
@@ -149,32 +147,35 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		super.onPause()
 		vehicleMetricsPlugin?.setConnectionStateListener(null)
 	}
+
 	private fun updatePairedSensorsList() {
-		vehicleMetricsPlugin?.let { plugin ->
-			val connectedDevice = plugin.getConnectedDeviceInfo()
-			val connectedDevices: List<BTDeviceInfo> =
-				if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
-			val disconnectedDevices =
-				plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
-			if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
-				emptyView!!.visibility = View.VISIBLE
-				contentView!!.visibility = View.GONE
-				app.runInUIThread { appBar?.setExpanded(true, false) }
-			} else {
-				app.runInUIThread {
-					appBar?.setExpanded(false, false)
-					connectedListAdapter!!.items = ArrayList<Any>(connectedDevices)
-					disconnectedListAdapter!!.items = ArrayList<Any>(disconnectedDevices)
-					contentView!!.visibility = View.VISIBLE
-					emptyView!!.visibility = View.GONE
-					val hasConnectedDevices = connectedDevices.isNotEmpty()
-					val hasDisConnectedDevices = disconnectedDevices.isNotEmpty()
-					connectedPrompt!!.visibility =
-						if (hasConnectedDevices) View.VISIBLE else View.GONE
-					disconnectedPrompt!!.visibility =
-						if (hasDisConnectedDevices) View.VISIBLE else View.GONE
-					dividerBetweenDeviceGroups!!.visibility =
-						if (hasConnectedDevices && hasDisConnectedDevices) View.VISIBLE else View.GONE
+		if (view != null) {
+			vehicleMetricsPlugin?.let { plugin ->
+				val connectedDevice = plugin.getConnectedDeviceInfo()
+				val connectedDevices: List<BTDeviceInfo> =
+					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
+				val disconnectedDevices =
+					plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
+				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
+					emptyView?.visibility = View.VISIBLE
+					contentView?.visibility = View.GONE
+					app.runInUIThread { appBar?.setExpanded(true, false) }
+				} else {
+					app.runInUIThread {
+						appBar?.setExpanded(false, false)
+						connectedListAdapter?.items = ArrayList<Any>(connectedDevices)
+						disconnectedListAdapter?.items = ArrayList<Any>(disconnectedDevices)
+						contentView?.visibility = View.VISIBLE
+						emptyView?.visibility = View.GONE
+						val hasConnectedDevices = connectedDevices.isNotEmpty()
+						val hasDisConnectedDevices = disconnectedDevices.isNotEmpty()
+						connectedPrompt?.visibility =
+							if (hasConnectedDevices) View.VISIBLE else View.GONE
+						disconnectedPrompt?.visibility =
+							if (hasDisConnectedDevices) View.VISIBLE else View.GONE
+						dividerBetweenDeviceGroups?.visibility =
+							if (hasConnectedDevices && hasDisConnectedDevices) View.VISIBLE else View.GONE
+					}
 				}
 			}
 		}
@@ -207,7 +208,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 //		updatePairedSensorsList()
 //	}
 
-	override fun onSensorNameChanged() {
+	override fun onNameChanged() {
 		updatePairedSensorsList()
 	}
 
@@ -216,7 +217,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	companion object {
-		val TAG = OBDDevicesListFragment::class.java.simpleName
+		val TAG: String = OBDDevicesListFragment::class.java.simpleName
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = OBDDevicesListFragment()

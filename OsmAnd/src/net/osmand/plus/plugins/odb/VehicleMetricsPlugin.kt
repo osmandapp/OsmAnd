@@ -4,7 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import com.google.gson.GsonBuilder
@@ -58,7 +63,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDeviceInfo: BTDeviceInfo? = null
 	var socket: BluetoothSocket? = null
-	private var scanDevicesListener: ScanDevicesListener? = null
+	private var scanDevicesListener: ScanOBDDevicesListener? = null
 	private var connectionStateListener: ConnectionStateListener? = null
 
 	enum class OBDConnectionState {
@@ -66,8 +71,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 
-	interface ScanDevicesListener {
-		fun onScanFinished(foundDevices: List<BTDeviceInfo>)
+	interface ScanOBDDevicesListener {
+		fun onDeviceFound(foundDevice: BTDeviceInfo)
 	}
 
 	interface ConnectionStateListener {
@@ -369,7 +374,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				KLatLon(location.latitude, location.longitude)))
 	}
 
-	fun setScanDevicesListener(listener: ScanDevicesListener?) {
+	fun setScanDevicesListener(listener: ScanOBDDevicesListener?) {
 		scanDevicesListener = listener
 	}
 
@@ -424,6 +429,51 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			val gson = GsonBuilder().create()
 			gson.fromJson(savedDevice, BTDeviceInfo::class.java)
 		}
+	}
+
+	private val bluetoothReceiver = object : BroadcastReceiver() {
+		@SuppressLint("MissingPermission")
+		override fun onReceive(context: Context, intent: Intent) {
+			if (AndroidUtils.hasBLEPermission(context)) {
+				when (intent.action) {
+					BluetoothDevice.ACTION_FOUND -> {
+						val device: BluetoothDevice? =
+							if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+								intent.getParcelableExtra(
+									BluetoothDevice.EXTRA_DEVICE,
+									BluetoothDevice::class.java)
+							} else {
+								@Suppress("DEPRECATION")
+								intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) as? BluetoothDevice
+							}
+						device?.let {
+							if (it.bondState != BluetoothDevice.BOND_BONDED) {
+								scanDevicesListener?.onDeviceFound(BTDeviceInfo(it.name, it.address))
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@SuppressLint("MissingPermission")
+	fun searchUnboundDevices(activity: Activity) {
+		if (BLEUtils.isBLEEnabled(activity) && AndroidUtils.hasBLEPermission(activity)) {
+			val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
+			bluetoothAdapter?.startDiscovery()
+		}
+	}
+
+	override fun mapActivityPause(activity: MapActivity) {
+		super.mapActivityPause(activity)
+		activity.unregisterReceiver(bluetoothReceiver)
+	}
+
+	override fun mapActivityResume(activity: MapActivity) {
+		super.mapActivityResume(activity)
+		val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+		activity.registerReceiver(bluetoothReceiver, filter)
 	}
 
 	override fun mapActivityCreate(activity: MapActivity) {
