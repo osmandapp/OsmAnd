@@ -5981,5 +5981,5 @@
     <string name="connect_obd_instructions_step3">3. Activez le Bluetooth sur votre appareil</string>
     <string name="connect_obd_instructions_step4">4. Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
     <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
-    <string name="obd_fuel_left_liters">Essence restante (litres)</string>
+    <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
 </resources>
