@@ -5953,7 +5953,7 @@
     <string name="obd_fuel_type">Tip goriva</string>
     <string name="obd_plugin_name">Metrika vozila</string>
     <string name="obd_support">OBD podrška</string>
-    <string name="obd_plugin_description">Pristupa informacijama o vašem vozilu preko OBD protokola</string>
+    <string name="obd_plugin_description">Pratite ključne metrike vozila koristeći OBD-II protokol. Pristup podacima uključujući: * Brzina motora * Potrošnja goriva * Preostalo gorivo * Razdaljina od pokretanja motora * Usisna temperatura * Temperatura okoline * Temperatura rashladne tečnosti * Brzina vozila * Procenat baterije</string>
     <string name="obd_engine_coolant_temp_desc">Prikazuje temperaturu rashladne tečnosti motora preko OBD senzora</string>
     <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
     <string name="obd_vin">VIN</string>
@@ -5984,4 +5984,5 @@
     <string name="screen_is_locked_by_external_button">Ekran je zaključan. Za otključavanje pritisni dugme %1$s ili dodirni dugme na ekranu.</string>
     <string name="screen_is_unlocked">Ekran je otključan.</string>
     <string name="screen_is_locked_by_action_button">Ekran je zaključan. Dodirni dugme za otključavanje.</string>
+    <string name="obd_fuel_left_liters">Preostalo gorivo (litara)</string>
 </resources>
