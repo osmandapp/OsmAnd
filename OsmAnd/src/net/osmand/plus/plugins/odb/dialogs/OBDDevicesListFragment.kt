@@ -159,10 +159,10 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 			if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 				emptyView!!.visibility = View.VISIBLE
 				contentView!!.visibility = View.GONE
-				app.runInUIThread { appBar!!.setExpanded(true, false) }
+				app.runInUIThread { appBar?.setExpanded(true, false) }
 			} else {
 				app.runInUIThread {
-					appBar!!.setExpanded(false, false)
+					appBar?.setExpanded(false, false)
 					connectedListAdapter!!.items = ArrayList<Any>(connectedDevices)
 					disconnectedListAdapter!!.items = ArrayList<Any>(disconnectedDevices)
 					contentView!!.visibility = View.VISIBLE
