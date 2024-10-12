@@ -5940,7 +5940,7 @@
     <string name="obd_battery_voltage">Tension de la batterie</string>
     <string name="obd_engine_coolant_temp">Température du liquide de refroidissement du moteur</string>
     <string name="obd_fuel_type">Type de carburant</string>
-    <string name="obd_plugin_description">Accède aux informations de votre véhicule via le protocole OBD</string>
+    <string name="obd_plugin_description">Surveillez les mesures clés de votre véhicule en utilisant le protocole OBD-II. Accédez aux données incluant : * Vitesse du moteur * Consommation d\'essence * Essence restante * Distance depuis le démarrage du moteur * Température intérieure * Température ambiante * Température de refroidissement * Vitesse du véhicule * Pourcentage de batterie</string>
     <string name="obd_support">Prise en charge de l\'OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Affiche la consommation de carburant du véhicule selon l\'OBD et la localisation</string>
     <string name="unknown_bt_device">Appareil inconnu</string>
@@ -5972,4 +5972,14 @@
     <string name="screen_is_unlocked">L\'écran tactile est déverrouillé.</string>
     <string name="screen_is_locked_by_action_button">L\'écran tactile est verrouillé. Appuyez sur le bouton pour déverrouiller.</string>
     <string name="screen_is_locked_by_external_button">L\'écran tactile est verrouillé. Pour le déverrouiller, utilisez le bouton %1$s ou appuyez sur le bouton à l\'écran.</string>
+    <string name="obd_vehicle_info">Informations du véhicule</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="connect_obd_instructions_step2">2. Allumez le moteur de votre véhicule</string>
+    <string name="connect_obd_instructions_title">OsmAnd supporte les connexions Bluetooth à des scanneurs OBD-II.</string>
+    <string name="obd_how_to_connect">Comment se connecter :</string>
+    <string name="connect_obd_instructions_step1">1. Connectez le scanneur au port OBD-II de votre véhicule.</string>
+    <string name="connect_obd_instructions_step3">3. Activez le Bluetooth sur votre appareil</string>
+    <string name="connect_obd_instructions_step4">4. Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
+    <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
+    <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
 </resources>

@@ -5938,7 +5938,7 @@
     <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
     <string name="obd_fuel_type">Kraftstofftyp</string>
     <string name="obd_plugin_name">Fahrzeugangaben</string>
-    <string name="obd_plugin_description">Zugriff auf Ihre Fahrzeuginformationen über das OBD-Protokoll</string>
+    <string name="obd_plugin_description">Überwachen Sie wichtige Fahrzeugdaten über das OBD-II-Protokoll. Zugriff auf Daten einschließlich: * Motordrehzahl * Kraftstoffverbrauch * Verbleibender Kraftstoff * Entfernung seit Motorstart * Ansaugtemperatur * Umgebungstemperatur * Kühlmitteltemperatur * Fahrzeuggeschwindigkeit * Batterieanteil</string>
     <string name="obd_support">OBD Unterstützung</string>
     <string name="obd_battery_voltage">Batteriespannung</string>
     <string name="obd_rpm_desc">Zeigt mithilfe des OBD-Sensors die Drehzahl des Fahrzeugtachos an</string>
@@ -5982,4 +5982,14 @@
     <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücke die %1$s-Taste oder tippe auf die Schaltfläche auf dem Bildschirm.</string>
     <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
     <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippe zum Entsperren auf die Schaltfläche.</string>
+    <string name="connect_obd_instructions_step1">1. Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
+    <string name="connect_obd_instructions_step2">2. Den Motor Ihres Fahrzeugs einschalten</string>
+    <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
+    <string name="connect_obd_instructions_step4">4. Auf \"Verbinden“ tippen und den Scanner aus der Liste auswählen.</string>
+    <string name="connect_obd_instructions_title">OsmAnd unterstützt Bluetooth-Verbindungen zu OBD-II-Scannern.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Fahrzeuginformation</string>
+    <string name="obd_how_to_connect">Verbindung herstellen:</string>
+    <string name="connect_obd_instructions_step3">3. Bluetooth auf Ihrem Gerät aktivieren</string>
+    <string name="obd_fuel_left_liters">Verbleibender Kraftstoff (Liter)</string>
 </resources>
