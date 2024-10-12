@@ -680,9 +680,7 @@
     <string name="shared_string_no_thanks">لا شكراً</string>
     <string name="basemap_missing">خريطة العالم العامة (التي تغطي العالم كله بتقريب صغير) مفقودة. يرجى القيام بتحميل World_basemap_x.obf للحصول على نظرة شاملة.</string>
     <string name="vector_data_missing">البيانات المحلية (التي لا تحتاج إلى ربط بالإنترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تحميلها بغرض استخدام الخرائط من دون اتصال.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nاضغط مطولاً للخيارات"</string>
+    <string name="local_index_gpx_info_show">\n\nاضغط مطولاً للخيارات</string>
     <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
@@ -833,9 +831,7 @@
     <string name="interrupt_music_descr">إيقاف أصوات الوسائط عند التوجيهات الصوتية.</string>
     <string name="interrupt_music">إيقاف الأصوات</string>
     <string name="loading_smth">جار التحميل %1$s …</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nاضغط مطولاً للرؤية على الخريطة"</string>
+    <string name="selected_gpx_info_show">\n\nاضغط مطولاً للرؤية على الخريطة</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
     <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
@@ -6022,4 +6018,39 @@
     <string name="screen_is_unlocked">تم فتح قفل شاشة اللمس.</string>
     <string name="screen_is_locked_by_action_button">شاشة اللمس مقفلة. اضغط على الزر لفتح القفل.</string>
     <string name="obd_fuel_left_distance">الوقود المتبقي (المسافة)</string>
+    <string name="obd_fuel_type">نوع الوقود</string>
+    <string name="obd_plugin_name">مقاييس المركبات</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="delete_widget_description">سيتم حذف هذا الودجت. يمكنك استعادته لاحقًا في شاشة التخصيص.</string>
+    <string name="delete_widget">حذف الودجت؟</string>
+    <string name="rendering_attr_alpineHiking_name">تصنيف صعوبات المشي الطويل</string>
+    <string name="obd_vehicle_info">معلومات المركبة</string>
+    <string name="connect_obd_instructions_title">يدعم أوسماند اتصالات بلوتوث مع أجهزة المسح الضوئي OBD-II.</string>
+    <string name="obd_how_to_connect">كيفية الاتصال:</string>
+    <string name="connect_obd_instructions_step1">1. قم بتوصيل الماسح الضوئي بمنفذ OBD-II الموجود في سيارتك.</string>
+    <string name="connect_obd_instructions_step2">2. قم بتشغيل محرك سيارتك</string>
+    <string name="connect_obd_instructions_step3">3. قم بتمكين البلوتوث على جهازك</string>
+    <string name="connect_obd_instructions_step4">4. انقر فوق \"اتصال\"، ثم حدد الماسح الضوئي الخاص بك من القائمة.</string>
+    <string name="learn_more_about_obd_sensors">تعرف على المزيد حول أجهزة الاستشعار.</string>
+    <string name="obd_fuel_left_liters">الوقود المتبقي (لتر)</string>
+    <string name="background_opacity">خلفية معتمة</string>
+    <string name="corner_radius">نصف قطر الزاوية</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">محور الرسم البياني</string>
+    <string name="y_axis_description">حدد ما يصل إلى خيارين لمحور Y.</string>
+    <string name="obd_plugin_description">الوصول إلى معلومات سيارتك عبر بروتوكول OBD</string>
+    <string name="obd_support">دعم OBD</string>
+    <string name="shared_string_bluetooth">البلوتوث</string>
+    <string name="quick_action_search_view_desc">مفتاح التبديل لفتح أو إغلاق عرض البحث.</string>
+    <string name="quick_action_search_view_title">عرض البحث</string>
+    <string name="shared_string_interface">الواجهة</string>
+    <string name="quick_action_previous_screen_desc">مفتاح التبديل للانتقال إلى الشاشة السابقة.</string>
+    <string name="quick_action_previous_screen_title">الشاشة السابقة</string>
+    <string name="quick_action_verb_navigate">التنقل</string>
+    <string name="quick_action_drawer_desc">مفتاح التبديل لإظهار القائمة الجانبية أو إخفائها.</string>
+    <string name="quick_action_navigation_view_desc">مفتاح التبديل لفتح أو إغلاق عرض التنقل.</string>
+    <string name="quick_action_navigation_view_title">عرض الملاحة</string>
+    <string name="quick_action_switch_compass_desc">مفتاح تبديل لتبديل اتجاه الخريطة.</string>
+    <string name="quick_action_drawer_title">القائمة الجانبية</string>
 </resources>
