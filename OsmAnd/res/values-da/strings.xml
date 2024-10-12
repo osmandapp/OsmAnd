@@ -279,7 +279,7 @@
     <string name="accessibility_mode">Tilgængelighedstilstand</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="default_buttons_support">Støt</string>
-    <string name="info_button">Information</string>
+    <string name="info_button">Info</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="gpx_tags_txt">Mærker</string>
     <string name="accessibility_mode_descr">Aktiverer funktionerne for handicappede brugere.</string>
@@ -5950,7 +5950,7 @@
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
-    <string name="obd_plugin_description">Får adgang til dine køretøjsoplysninger via OBD-protokollen</string>
+    <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder: * Motorens omdrejningshastighed * Brændstofforbrug * Resterende brændstof * Afstand siden motorstart * Indtagstemperatur * Omgivelsestemperatur * Kølevæskes temperatur * Køretøjets hastighed * Batteriprocent</string>
     <string name="obd_plugin_name">Køretøjsparametre</string>
     <string name="unknown_bt_device">Ukendt enhed</string>
     <string name="obd_vin">VIN</string>
@@ -5983,4 +5983,14 @@
     <string name="screen_is_locked_by_external_button">Den berøringsfølsomme skærm er låst. For at låse op skal du trykke på %1$s-knappen eller trykke på knappen på skærmen.</string>
     <string name="screen_is_unlocked">Den berøringsfølsomme skærm er låst op.</string>
     <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knap for at låse op.</string>
+    <string name="connect_obd_instructions_title">OsmAnd understøtter Bluetooth-forbindelser til OBD-II-scannere.</string>
+    <string name="connect_obd_instructions_step2">2. Tænd køretøjets motor</string>
+    <string name="connect_obd_instructions_step3">3. Aktivér Bluetooth på din enhed</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Info om køretøj</string>
+    <string name="obd_how_to_connect">Sådan får du forbindelse:</string>
+    <string name="connect_obd_instructions_step1">1. Tilslut scanneren til køretøjets OBD-II-stik.</string>
+    <string name="connect_obd_instructions_step4">4. Tryk på \"Opret forbindelse,\" og vælg din scanner på listen.</string>
+    <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
+    <string name="obd_fuel_left_liters">Resterende brændstof (liter)</string>
 </resources>

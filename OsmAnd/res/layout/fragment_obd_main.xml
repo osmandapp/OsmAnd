@@ -3,252 +3,85 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/bg_color"
+	android:background="?attr/activity_background_color"
 	android:clickable="true"
-	android:fitsSystemWindows="false"
-	android:orientation="vertical"
-	android:focusable="true">
-
-	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/appbar"
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/toolbar_height"
-		android:background="?attr/actionModeBackground">
-
-		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/toolbar_height" />
-
-	</com.google.android.material.appbar.AppBarLayout>
+	android:focusable="true"
+	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/content"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/content_padding"
+		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<LinearLayout
+		<include layout="@layout/connected_device_card" />
+
+		<ScrollView
 			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
+			android:layout_height="match_parent">
 
-			<ToggleButton
-				android:id="@+id/btn1"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp1"
+			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding_half">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal"
-			android:visibility="gone">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
 
-			<ToggleButton
-				android:id="@+id/btn2"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/obd_vehicle_info"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium" />
 
-			<EditText
-				android:id="@+id/resp2"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
+					<LinearLayout
+						android:id="@+id/info_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical" />
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
+				</LinearLayout>
 
-			<ToggleButton
-				android:id="@+id/btn3"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
 
-			<EditText
-				android:id="@+id/resp3"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/external_device_details_received_data"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium" />
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
+					<LinearLayout
+						android:id="@+id/data_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical" />
 
-			<ToggleButton
-				android:id="@+id/btn4"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
+				</LinearLayout>
 
-			<EditText
-				android:id="@+id/resp4"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
+			</LinearLayout>
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn5"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp5"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn6"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp6"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn7"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp7"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn8"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp8"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn9"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp9"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn10"
-				android:layout_width="250dp"
-				android:layout_height="40dp" />
-
-			<EditText
-				android:id="@+id/resp10"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn11"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp11"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn12"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp12"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal">
-
-			<ToggleButton
-				android:id="@+id/btn13"
-				android:layout_width="250dp"
-				android:layout_height="match_parent" />
-
-			<EditText
-				android:id="@+id/resp13"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_marginLeft="@dimen/content_padding_half" />
-		</LinearLayout>
+		</ScrollView>
 
 	</LinearLayout>
 

@@ -10,6 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Vehicle info</string>
+    <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
+    <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
+    <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
+    <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>
+    <string name="connect_obd_instructions_step4">4. Tap \'Connect,\' and select your scanner from the list.</string>
+    <string name="learn_more_about_obd_sensors">Learn more about sensors.</string>
     <string name="screen_is_locked_by_external_button">Touch screen is locked. To unlock, press the "%1$s" button, or tap the on-screen button.</string>
     <string name="screen_is_unlocked">Touch screen is unlocked.</string>
     <string name="screen_is_locked_by_action_button">Touch screen is locked. Tap on button to unlock.</string>
@@ -22,8 +31,8 @@
         • Added a context menu and a \"Reset average speed\" action to widgets\n\n
         • Added new route layer \"Dirt Bike trails\"\n\n
         • Fixed \"Auto-record track during navigation\"\n\n
-        • Fixed issue with fliped coordinates in RTL\n\n
-        • Fixed missed sensor data for currently recording track\n\n 
+        • Fixed issue with flipped coordinates in RTL\n\n
+        • Fixed missed sensor data for currently recording track\n\n
         • Added information about surrounding areas for the selected point\n\n
         • Added quick action to control visibility of OSM Edits\n\n
         • Separated visibility parameters for Terrain colorization options\n\n
@@ -124,11 +133,21 @@
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
     <string name="obd_fuel_left_distance">Fuel left (distance)</string>
+    <string name="obd_fuel_left_liters">Fuel left (liters)</string>
     <string name="obd_fuel_type">Fuel type</string>
 
 
     <string name="obd_plugin_name">Vehicle Metrics</string>
-    <string name="obd_plugin_description">Accesses you vehicle information over OBD protocol</string>
+    <string name="obd_plugin_description">Monitor key vehicle metrics using the OBD-II protocol. Access data including:
+* Engine speed
+* Fuel consumption
+* Remaining fuel
+* Distance since engine start
+* Intake temperature
+* Ambient temperature
+* Coolant temperature
+* Vehicle speed
+* Battery percentage</string>
     <string name="obd_support">OBD support</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>
@@ -222,7 +241,6 @@
     <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Weather screen</string>
-
     <string name="shared_string_all_icons">All icons</string>
     <string name="profile_icon">Profile icon</string>
     <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>

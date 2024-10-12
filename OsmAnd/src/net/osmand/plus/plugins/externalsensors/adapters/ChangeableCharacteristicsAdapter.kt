@@ -33,7 +33,7 @@ class ChangeableCharacteristicsAdapter(
 		val property = items[position]
 		holder.name.text = app.getString(property.displayNameResId)
 		AndroidUiHelper.updateVisibility(holder.divider, true)
-		val value = plugin.getFormattedDevicePropertyValue(device, property)
+		val value = plugin?.getFormattedDevicePropertyValue(device, property)
 		val unitsId = property.getUnitsResId(app, true)
 		if (unitsId == 0) {
 			holder.value.text = value
