@@ -1698,7 +1698,7 @@
     <string name="map_downloaded_descr">La carte %1$s est prête à être utilisée.</string>
     <string name="shared_string_qr_code">QR code</string>
     <string name="enter_country_name">Saisissez le pays</string>
-    <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Veuillez télécharger cette carte pour un affichage sommaire.</string>
+    <string name="world_map_download_descr">La carte mondiale de base (qui couvre le monde entier à un faible niveau de zoom) est manquante ou pas à jour. Veuillez télécharger cette carte pour un affichage sommaire.</string>
     <string name="new_version">Nouvelle version</string>
     <string name="begin_with_osmand_menu_group">Premiers pas avec OsmAnd</string>
     <string name="features_menu_group">Fonctionnalités</string>
@@ -5064,7 +5064,7 @@
     <string name="shared_string_alt_name">Autre dénomination</string>
     <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
     <string name="metric_lbs">livres</string>
-    <string name="weather_forecast_is_outdated">Les prévisions ne sont plus à jour.</string>
+    <string name="weather_forecast_is_outdated">Les prévisions ne sont pas à jour.</string>
     <string name="shared_string_all_world">Monde entier</string>
     <string name="shared_string_pounds">livres</string>
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
@@ -5693,8 +5693,8 @@
     <string name="maps_that_also_be_used">Cartes qui seront également utilisées : %1$s</string>
     <string name="getting_list_of_required_maps">Récupération de la liste des cartes requises…</string>
     <string name="required_maps">Cartes requises</string>
-    <string name="missing_maps_header">Cartes manquantes ou périmées</string>
-    <string name="missing_maps_description">Pour calculer cet itinéraire, certaines cartes hors ligne sont manquantes ou périmées. Veuillez télécharger ou mettre à jour ces cartes.</string>
+    <string name="missing_maps_header">Cartes manquantes ou pas à jour</string>
+    <string name="missing_maps_description">Pour calculer cet itinéraire, certaines cartes hors ligne sont manquantes ou pas à jour. Veuillez télécharger ou mettre à jour ces cartes.</string>
     <string name="shared_string_osm_id">ID OSM</string>
     <string name="route_line_use_coloring_altitude">La ligne d\'itinéraire est colorée selon l\'altitude.</string>
     <string name="delete_actions_button_confirmation">Êtes-vous certain de vouloir supprimer \"%1$s\" avec toutes les actions ajoutées ?</string>
