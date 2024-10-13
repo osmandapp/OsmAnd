@@ -151,7 +151,7 @@
     <string name="any_poi">Било који</string>
     <string name="layer_route">Путања</string>
     <string name="auto_follow_route_navigation_descr">Самоусредиштење карте само током навођења.</string>
-    <string name="auto_follow_location_enabled">Смоусредиштење карте током употребе.</string>
+    <string name="auto_follow_location_enabled">Самоусредиштење карте током употребе.</string>
     <string name="day_night_info_description">Излазак сунца: %1$s \nЗалазак сунца: %2$s</string>
     <string name="day_night_info">Подаци о дану/ноћи</string>
     <string name="map_widget_renderer">Начин приказа карте</string>
