@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceDialog.Companion.showInstance
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
@@ -25,7 +26,7 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.Algorithms
 
 class OBDDevicesListFragment : OBDDevicesBaseFragment(),
-	OBDDevicesAdapter.OBDDeviceItemListener,
+	OBDDevicesAdapter.OBDDeviceItemListener, ForgetOBDDeviceDialog.ForgetDeviceListener,
 	OnDeviceNameChangedCallback, VehicleMetricsPlugin.ConnectionStateListener {
 	private var dividerBeforeButton: View? = null
 	private var dividerBetweenDeviceGroups: View? = null
@@ -163,8 +164,8 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				} else {
 					app.runInUIThread {
 						appBar?.setExpanded(false, false)
-						connectedListAdapter?.items = ArrayList<Any>(connectedDevices)
-						disconnectedListAdapter?.items = ArrayList<Any>(disconnectedDevices)
+						connectedListAdapter?.items = ArrayList(connectedDevices)
+						disconnectedListAdapter?.items = ArrayList(disconnectedDevices)
 						contentView?.visibility = View.VISIBLE
 						emptyView?.visibility = View.GONE
 						val hasConnectedDevices = connectedDevices.isNotEmpty()
@@ -201,12 +202,15 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
+		showInstance(requireActivity().supportFragmentManager, this, device.address)
 	}
 
-//	override fun onForgetSensorConfirmed(device:BTDeviceInfo) {
-////		plugin.unpairDevice(device)
-//		updatePairedSensorsList()
-//	}
+	override fun onForgetSensorConfirmed(deviceId: String) {
+		//todo remove device
+//		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList()
+//		plugin.unpairDevice(device)
+		updatePairedSensorsList()
+	}
 
 	override fun onNameChanged() {
 		updatePairedSensorsList()

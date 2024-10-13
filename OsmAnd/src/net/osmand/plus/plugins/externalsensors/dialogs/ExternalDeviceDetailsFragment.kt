@@ -286,7 +286,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     }
 
     private fun onForgetDevice() {
-        showInstance(requireActivity().supportFragmentManager, this, device)
+        showInstance(requireActivity().supportFragmentManager, this, device.deviceId)
     }
 
     override fun onResume() {

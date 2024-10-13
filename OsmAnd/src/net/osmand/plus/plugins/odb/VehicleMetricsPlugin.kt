@@ -29,6 +29,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
+import net.osmand.plus.utils.BLEUtils.getAliasName
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
@@ -233,7 +234,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 					device.uuids?.any { parcelUuid -> parcelUuid.uuid == uuid } == true
 				}.map {
 					if (it != null) BTDeviceInfo(
-						it.name,
+						it.getAliasName(activity),
 						it.address) else BTDeviceInfo.UNKNOWN_DEVICE
 				}
 			}
@@ -273,7 +274,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						adapter.cancelDiscovery()
 						val pairedDevices = adapter.bondedDevices.toList()
 						val obdDevice: BluetoothDevice? =
-							pairedDevices.find { it.name == deviceInfo.name && it.address == deviceInfo.address }
+							pairedDevices.find { it.getAliasName(activity) == deviceInfo.name && it.address == deviceInfo.address }
 						if (obdDevice != null) {
 							connectToDevice(activity, obdDevice)
 						} else {
@@ -299,14 +300,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			socket?.apply {
 				connect()
 				if (isConnected) {
-					onDeviceConnected(connectedDevice)
+					onDeviceConnected(BTDeviceInfo(connectedDevice.getAliasName(activity), connectedDevice.address))
 					val input = inputStream.source()
 					val output = outputStream.sink()
 					OBDDispatcher.setReadWriteStreams(input, output)
 					app.runInUIThread {
 						Toast.makeText(
 							activity,
-							"Connected to ${connectedDevice.name ?: "Unknown device"}",
+							"Connected to ${connectedDevice.getAliasName(activity)}",
 							Toast.LENGTH_LONG).show()
 					}
 				}
@@ -316,15 +317,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			app.runInUIThread {
 				Toast.makeText(
 					activity,
-					"Can\'t connect to ${connectedDevice.name ?: "Unknown device"}",
+					"Can\'t connect to ${connectedDevice.getAliasName(activity)}",
 					Toast.LENGTH_LONG).show()
 			}
 		}
 	}
 
 	@SuppressLint("MissingPermission")
-	private fun onDeviceConnected(connectedDevice: BluetoothDevice) {
-		connectedDeviceInfo = BTDeviceInfo(connectedDevice.name, connectedDevice.address)
+	private fun onDeviceConnected(btDeviceInfo: BTDeviceInfo) {
+		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
@@ -390,7 +391,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return arr?.toList() ?: emptyList()
 	}
 
-	fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
+	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
 		val currentList = getUsedOBDDevicesList().toMutableList()
 		val savedDevice = currentList.find { it.address == deviceInfo.address }
 		if (savedDevice == null) {
@@ -448,7 +449,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 							}
 						device?.let {
 							if (it.bondState != BluetoothDevice.BOND_BONDED) {
-								scanDevicesListener?.onDeviceFound(BTDeviceInfo(it.name, it.address))
+								scanDevicesListener?.onDeviceFound(BTDeviceInfo(it.getAliasName(context), it.address))
 							}
 						}
 					}

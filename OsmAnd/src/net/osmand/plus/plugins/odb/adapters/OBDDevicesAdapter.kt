@@ -26,12 +26,11 @@ open class OBDDevicesAdapter(
 	RecyclerView.Adapter<FoundDeviceViewHolder>() {
 	protected val plugin = PluginsHelper.getPlugin(
 		VehicleMetricsPlugin::class.java)
-	var items: List<Any> = ArrayList()
+	var items: List<BTDeviceInfo> = listOf()
 		@SuppressLint("NotifyDataSetChanged")
 		set(value) {
 			field = value
 			notifyDataSetChanged()
-
 		}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoundDeviceViewHolder {

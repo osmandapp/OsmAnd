@@ -20,6 +20,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.data.BTDeviceInfo
+import net.osmand.util.CollectionUtils
 
 class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	VehicleMetricsPlugin.ScanOBDDevicesListener,
@@ -32,7 +33,6 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	private var stateDevicesListView: View? = null
 	private var foundDevicesCountView: TextView? = null
 	private lateinit var pairedDevicesAdapter: PairedDevicesAdapter
-	private lateinit var foundDevicesAdapter: OBDDevicesAdapter
 
 	companion object {
 		val TAG: String = OBDDevicesSearchFragment::class.java.simpleName
@@ -99,17 +99,13 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		recyclerView?.layoutManager = LinearLayoutManager(context)
 		pairedDevicesAdapter = PairedDevicesAdapter(app, nightMode, this)
 		recyclerView?.adapter = pairedDevicesAdapter
-		val foundDevicesRecyclerView: RecyclerView? =
-			stateDevicesListView?.findViewById(R.id.found_devices_list)
-		foundDevicesRecyclerView?.layoutManager = LinearLayoutManager(context)
-		foundDevicesAdapter = PairedDevicesAdapter(app, nightMode, this)
-		foundDevicesRecyclerView?.adapter = foundDevicesAdapter
 	}
 
 	override fun onStart() {
 		super.onStart()
 		pairedDevicesAdapter.items =
 			vehicleMetricsPlugin?.getPairedOBDDevicesList(requireActivity()) ?: emptyList()
+		updateCurrentStateView()
 	}
 
 	override fun onCreateView(
@@ -145,7 +141,10 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	}
 
 	private fun startSearch() {
-		vehicleMetricsPlugin?.setScanDevicesListener(this)
+		activity?.let {
+			vehicleMetricsPlugin?.setScanDevicesListener(this)
+			vehicleMetricsPlugin?.searchUnboundDevices(it)
+		}
 	}
 
 	override fun onPause() {
@@ -182,10 +181,19 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			stateDevicesListView,
 			currentState == SearchStates.DEVICES_LIST
 		)
+		val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
+		formatString?.let {
+			foundDevicesCountView?.text =
+				String.format(formatString, pairedDevicesAdapter.items.size)
+		}
 	}
 
 	override fun onDeviceFound(foundDevice: BTDeviceInfo) {
-		//todo add new device
+		if(pairedDevicesAdapter.items.find { it.address == foundDevice.address } == null) {
+			val newItems = CollectionUtils.addToList(pairedDevicesAdapter.items, foundDevice)
+			pairedDevicesAdapter.items = newItems.sortedBy { item -> item.name }
+			updateCurrentStateView()
+		}
 	}
 
 	internal enum class SearchStates {
