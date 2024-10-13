@@ -2425,7 +2425,7 @@
     <string name="edit_line">Rediger linje</string>
     <string name="add_point_before">Tilføj punkt før</string>
     <string name="add_point_after">Tilføj punkt efter</string>
-    <string name="shared_string_options">Indstillinger</string>
+    <string name="shared_string_options">Mere</string>
     <string name="measurement_tool_snap_to_road_descr">Forbinder punkterne med ruter for den valgte profil.</string>
     <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
