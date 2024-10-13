@@ -40,7 +40,8 @@ public class SettingsSearchButtonHelper {
 				.builder(
 						createSearchConfiguration(),
 						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
-						SearchablePreferenceScreenGraphDAOProvider.Mode.LOAD_GRAPH)
+						SearchablePreferenceScreenGraphDAOProvider.Mode.LOAD_GRAPH,
+						R.raw.searchable_preference_screen_graph)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
