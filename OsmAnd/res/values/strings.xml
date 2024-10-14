@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="obd_widget_vehicle_speed">Vehicle speed</string>
+    <string name="obd_widget_engine_speed">Engine speed</string>
     <string name="obd_nothing_found_description">Please check the following:\n
 – Ensure Bluetooth is turned on\n
 – Vehicle engine is running\n
@@ -140,11 +142,11 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_left_distance_desc">Shows distance vehicle can drive on left fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
-    <string name="obd_air_intake_temp">Intake air temperature</string>
-    <string name="obd_ambient_air_temp">Ambient air temperature</string>
+    <string name="obd_air_intake_temp">Intake temperature</string>
+    <string name="obd_ambient_air_temp">Ambient temperature</string>
     <string name="obd_battery_voltage">Battery voltage</string>
-    <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
-    <string name="obd_fuel_level">Fuel level</string>
+    <string name="obd_engine_coolant_temp">Coolant temperature</string>
+    <string name="obd_fuel_level">Fuel Efficiency</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
     <string name="obd_fuel_left_distance">Fuel left (distance)</string>
