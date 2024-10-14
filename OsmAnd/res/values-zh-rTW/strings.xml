@@ -1192,7 +1192,7 @@
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">存取限制</string>
-    <string name="rendering_attr_showAccess_name">顯示進入與收費限制</string>
+    <string name="rendering_attr_showAccess_name">顯示進入限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
@@ -5937,7 +5937,7 @@
     <string name="obd_fuel_left_distance">剩餘燃料（距離）</string>
     <string name="obd_fuel_type">燃料類型</string>
     <string name="obd_plugin_name">車輛指標</string>
-    <string name="obd_plugin_description">透過 OBD 協定存取您的車輛資訊</string>
+    <string name="obd_plugin_description">使用 OBD-II 通訊協定監控主要車輛指標。存取的資料包括 * 引擎速度 * 油耗 * 剩餘燃料 * 引擎啟動距離 * 進氣溫度 * 環境溫度 * 冷卻溫度 * 車速 * 電池百分比</string>
     <string name="obd_support">OBD 支援</string>
     <string name="obd_vin">車輛識別號碼</string>
     <string name="obd_vin_desc">透過 OBD 讀取 VIN 碼</string>
@@ -5962,4 +5962,20 @@
     <string name="lock_screen_description">啟用或停用觸控螢幕功能，防止意外點擊</string>
     <string name="lock_screen">鎖定螢幕</string>
     <string name="quick_action_showhide_osm_edits_descr">在地圖上顯示或隱藏在地 OSM 編輯的按鈕。</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">顯示越野車路線</string>
+    <string name="shared_string_bluetooth">藍牙</string>
+    <string name="obd_vehicle_info">車輛資訊</string>
+    <string name="connect_obd_instructions_title">OsmAnd 支援藍牙連線至 OBD-II 掃描器。</string>
+    <string name="obd_how_to_connect">如何連線：</string>
+    <string name="connect_obd_instructions_step2">2. 開啟您的車輛引擎</string>
+    <string name="connect_obd_instructions_step3">3. 在您的裝置上啟用藍牙</string>
+    <string name="learn_more_about_obd_sensors">取得更多關於感應器的資訊。</string>
+    <string name="screen_is_unlocked">觸控螢幕已解鎖。</string>
+    <string name="screen_is_locked_by_action_button">已鎖定觸控螢幕。輕點按鈕以解鎖。</string>
+    <string name="connect_obd_instructions_step1">1. 將掃描器連線至您車輛的 OBD-II 連接埠。</string>
+    <string name="connect_obd_instructions_step4">4. 點擊「連線」並從清單中選取您的掃描器。</string>
+    <string name="screen_is_locked_by_external_button">已鎖定觸控螢幕。要解鎖，請按 %1$s 按鈕，或是輕點螢幕上的按鈕。</string>
+    <string name="obd_fuel_left_liters">剩餘燃料（公升）</string>
+    <string name="liter_per_hour">公升/小時</string>
+    <string name="release_4_9">- 新增維基媒體影像的全螢幕圖庫檢視程式\n\n - 推出新的外掛程式「Vehicle Metrics」，可使用 OBD-II 通訊協定監控車輛性能\n\n - 新增為軌跡指派活動並據此過濾的功能\n\n - 針對旅程記錄與觸控螢幕鎖定實作新的快速動作\n\n - 加入可自訂的地圖按鈕外觀與精確的網格\n\n - 為小工具新增情境選單與「重設平均速度」動作\n\n - 新增路線圖層「越野腳踏車路徑」\n\n - 修正「導航時自動記錄軌跡」的問題\n\n - 修正在 RTL 中坐標翻轉的問題\n\n - 修正遺漏目前記錄路徑的感應器資料的問題\n\n - 新增所選點周圍區域的資訊\n\n - 新增快速動作以控制 OSM 編輯的能見度\n\n - 分開地形著色選項的可見度參數\n\n - 新增可點選的圖示，以顯示通道或其他道路或小徑屬性\n\n</string>
 </resources>
