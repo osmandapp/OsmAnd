@@ -5959,4 +5959,5 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">l/h</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
 </resources>
