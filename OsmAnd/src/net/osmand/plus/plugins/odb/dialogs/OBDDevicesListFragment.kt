@@ -202,13 +202,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
-		showInstance(requireActivity().supportFragmentManager, this, device.address)
+		ForgetOBDDeviceDialog.showInstance(requireActivity().supportFragmentManager, this, device.address)
 	}
 
 	override fun onForgetSensorConfirmed(deviceId: String) {
-		//todo remove device
-//		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList()
-//		plugin.unpairDevice(device)
+		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
 		updatePairedSensorsList()
 	}
 

@@ -136,8 +136,10 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 		val target = targetFragment
 		if (target is OnDeviceNameChangedCallback) {
 			plugin?.let {
-//				it.changeDeviceName()
-				target.onNameChanged()
+				deviceAddress?.let { address ->
+					it.setDeviceName(address, newName)
+					target.onNameChanged()
+				}
 			}
 		}
 	}

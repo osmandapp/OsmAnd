@@ -66,17 +66,6 @@
 					android:layout_marginRight="16dp"
 					android:scaleType="fitCenter" />
 
-<!--				<net.osmand.plus.widgets.TextViewEx-->
-<!--					android:layout_width="match_parent"-->
-<!--					android:layout_height="wrap_content"-->
-<!--					android:layout_marginStart="@dimen/content_padding"-->
-<!--					android:layout_marginTop="@dimen/content_padding"-->
-<!--					android:layout_marginEnd="@dimen/content_padding"-->
-<!--					android:lineSpacingExtra="5sp"-->
-<!--					android:text="@string/obd_pair_bluetooth_prompt"-->
-<!--					android:textColor="?android:textColorSecondary"-->
-<!--					android:textSize="@dimen/default_list_text_size"-->
-<!--					android:textStyle="normal" />-->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

@@ -8,18 +8,20 @@ import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceBaseDialog
 
 class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {
 	private lateinit var deviceId: String
+	override val layoutId: Int
+		get() = super.layoutId
 
 	companion object {
 		fun showInstance(
 			manager: FragmentManager,
 			targetFragment: Fragment,
-			device: AbstractDevice<*>) {
+			deviceId: String) {
 			if (targetFragment !is ForgetDeviceListener) {
 				throw IllegalArgumentException("target fragment should implement ForgetDeviceListener")
 			}
 			val fragment = ForgetOBDDeviceDialog()
 			val args = Bundle()
-			args.putString(DEVICE_ID_KEY, device.deviceId)
+			args.putString(DEVICE_ID_KEY, deviceId)
 			fragment.arguments = args
 			fragment.setTargetFragment(targetFragment, 0)
 			fragment.show(manager, TAG)

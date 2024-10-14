@@ -119,10 +119,9 @@ open class OBDDevicesAdapter(
 		val forgetItem = optionsMenu.menu.add(
 			2, 4, Menu.NONE,
 			R.string.external_device_menu_forget)
-		forgetItem.setIcon(R.drawable.ic_action_sensor_remove)
 		forgetItem.setIcon(
 			app.uiUtilities.getIcon(
-				R.drawable.ic_action_sensor_remove,
+				R.drawable.ic_action_obd2_connector_disconnect,
 				menuIconColor))
 		forgetItem.setOnMenuItemClickListener { _: MenuItem? ->
 			deviceClickListener?.onForget(device)

@@ -12,9 +12,11 @@ import net.osmand.plus.base.BottomSheetDialogFragment
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 
+
 abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 	private var nightMode = false
 	private lateinit var app: OsmandApplication
+	open val layoutId = R.layout.forget_obd_device_dialog
 
 	companion object {
 		const val TAG = "ForgetDeviceDialog"
@@ -39,7 +41,7 @@ abstract class ForgetDeviceBaseDialog : BottomSheetDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 
-		val view: View = inflater.inflate(R.layout.forget_device_dialog, container, false)
+		val view: View = inflater.inflate(layoutId, container, false)
 
 		val forgetButton = view.findViewById<View>(R.id.forget_btn)
 		val forgetButtonText = forgetButton.findViewById<TextView>(R.id.button_text)

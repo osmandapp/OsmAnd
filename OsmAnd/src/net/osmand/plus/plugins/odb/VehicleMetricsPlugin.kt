@@ -300,7 +300,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			socket?.apply {
 				connect()
 				if (isConnected) {
-					onDeviceConnected(BTDeviceInfo(connectedDevice.getAliasName(activity), connectedDevice.address))
+					onDeviceConnected(
+						BTDeviceInfo(
+							connectedDevice.getAliasName(activity),
+							connectedDevice.address))
 					val input = inputStream.source()
 					val output = outputStream.sink()
 					OBDDispatcher.setReadWriteStreams(input, output)
@@ -406,7 +409,19 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
-	fun removeDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
+	fun setDeviceName(address: String, newName: String) {
+		removeDeviceToUsedOBDDevicesList(address)
+		saveDeviceToUsedOBDDevicesList(BTDeviceInfo(newName, address))
+	}
+
+	fun removeDeviceToUsedOBDDevicesList(address: String) {
+		val device = getUsedOBDDevicesList().find { info -> info.address == address }
+		if (device != null) {
+			removeDeviceToUsedOBDDevicesList(device)
+		}
+	}
+
+	private fun removeDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
 		val currentList = getUsedOBDDevicesList().toMutableList()
 		currentList.remove(deviceInfo)
 		writeUsedOBDDevicesList(currentList)
@@ -449,7 +464,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 							}
 						device?.let {
 							if (it.bondState != BluetoothDevice.BOND_BONDED) {
-								scanDevicesListener?.onDeviceFound(BTDeviceInfo(it.getAliasName(context), it.address))
+								scanDevicesListener?.onDeviceFound(
+									BTDeviceInfo(
+										it.getAliasName(
+											context), it.address))
 							}
 						}
 					}

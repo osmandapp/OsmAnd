@@ -71,6 +71,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
 			startActivity(intentOpenBluetoothSettings)
 		}
+		val noBluetoothDescription =
+			parentView.findViewById<TextView>(R.id.no_bluetooth_description)
+		noBluetoothDescription.setText(R.string.obd_bluetooth_off_description)
 		AndroidUiHelper.updateVisibility(openSettingButton, true)
 	}
 
@@ -118,26 +121,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		return newView
 	}
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setCurrentState(
-			if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
-				SearchStates.NO_BLUETOOTH
-			} else {
-				SearchStates.DEVICES_LIST
-			}
-		)
-	}
-
 	override fun onResume() {
 		super.onResume()
-		if (currentState == SearchStates.NO_BLUETOOTH && AndroidUtils.isBluetoothEnabled(
-				requireActivity())) {
-			setCurrentState(SearchStates.DEVICES_LIST)
-		}
-		if (currentState == SearchStates.DEVICES_LIST) {
-			startSearch()
-		}
+		updateCurrentStateView()
 	}
 
 	private fun startSearch() {
@@ -160,14 +146,14 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		stateDevicesListView = null
 	}
 
-	private fun setCurrentState(newState: SearchStates) {
-		if (currentState != newState) {
-			currentState = newState
-			updateCurrentStateView()
-		}
-	}
-
 	private fun updateCurrentStateView() {
+		currentState = if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
+			SearchStates.NO_BLUETOOTH
+		} else if (pairedDevicesAdapter.items.isEmpty()) {
+			SearchStates.NOTHING_FOUND
+		} else {
+			SearchStates.DEVICES_LIST
+		}
 		AndroidUiHelper.updateVisibility(
 			stateNoBluetoothView,
 			currentState == SearchStates.NO_BLUETOOTH
@@ -189,7 +175,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDeviceFound(foundDevice: BTDeviceInfo) {
-		if(pairedDevicesAdapter.items.find { it.address == foundDevice.address } == null) {
+		if (pairedDevicesAdapter.items.find { it.address == foundDevice.address } == null) {
 			val newItems = CollectionUtils.addToList(pairedDevicesAdapter.items, foundDevice)
 			pairedDevicesAdapter.items = newItems.sortedBy { item -> item.name }
 			updateCurrentStateView()
