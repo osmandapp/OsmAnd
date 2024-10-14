@@ -5973,7 +5973,7 @@
     <string name="obd_vin">VIN</string>
     <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo</string>
     <string name="obd_vin_desc">Código VIN sobre OBD</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Grabar viaje y continuar</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Grabación de viaje y continuar</string>
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
     <string name="quick_action_finish_trip_recording_summary">Un botón que guarda la traza GPX y finaliza la grabación del viaje.</string>
     <string name="start_trip_recording_first_m">Iniciar la grabación del viaje antes.</string>
