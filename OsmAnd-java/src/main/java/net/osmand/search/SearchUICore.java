@@ -828,9 +828,6 @@ public class SearchUICore {
 		@Override
 		public boolean publish(SearchResult object) {
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
-				if (object.object instanceof Amenity a) {
-					object.alternateName = a.getCityFromTagGroups(phrase.getSettings().getLang());
-				}
 				if (Algorithms.isEmpty(object.alternateName)) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
