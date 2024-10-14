@@ -5938,4 +5938,25 @@
     <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
     <string name="obd_plugin_description">Acessa as informações do seu veículo pelo protocolo OBD</string>
     <string name="quick_action_save_recorded_trip_and_continue">Viagem gravada &amp; Continuar</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Funcionamento bicombustível a gasolina</string>
+    <string name="obd_fuel_type_bifuel_cng">Funcionamento bicombustível a GNV</string>
+    <string name="obd_fuel_type_bifuel_propane">Funcionamento bicombustível a propano</string>
+    <string name="obd_fuel_type_bifuel_electricity">Funcionamento bicombustível a eletricidade</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Funcionamento bicombustível elétrico e combustão</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Híbrido a etanol</string>
+    <string name="obd_fuel_type_hybrid_electric">Híbrido elétrico</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="screen_is_unlocked">A tela sensível ao toque está desbloqueada.</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Código VIN através do OBD</string>
+    <string name="obd_fuel_type_bifuel_methanol">Funcionamento bicombustível a metanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Funcionamento bicombustível a GLP</string>
+    <string name="obd_vehicle_info">Informação do veículo</string>
+    <string name="obd_how_to_connect">Como conectar:</string>
+    <string name="connect_obd_instructions_step3">3. Ative o Bluetooth no seu dispositivo</string>
+    <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
+    <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
+    <string name="liter_per_hour">l/h</string>
 </resources>
