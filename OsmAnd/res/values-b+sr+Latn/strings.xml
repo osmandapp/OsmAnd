@@ -1359,13 +1359,9 @@
     <string name="gpx_info_distance">Rastojanje: %1$s (%2$s tačaka)</string>
     <string name="gpx_info_waypoints">Međuodredišta: %1$s</string>
     <string name="gpx_info_subtracks">Podtrase: %1$s</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nPritisni duže za opcije"</string>
+    <string name="local_index_gpx_info_show">\n\nPritisni duže za opcije</string>
     <string name="delay_navigation_start">Automatski pokreni vodiča za skretanje</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nPritisni duže za prikaz na mapi"</string>
+    <string name="selected_gpx_info_show">\n\nPritisni duže za prikaz na mapi</string>
     <string name="shared_string_waypoint">Međuodredište</string>
     <string name="map_widget_plain_time">Trenutno vreme</string>
     <string name="loading_smth">Učitavanje %1$s…</string>
@@ -1385,7 +1381,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
-    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa i putarina</string>
+    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa</string>
     <string name="rendering_attr_hideAccess_name">Zabrane pristupa</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
@@ -1975,7 +1971,7 @@
     <string name="lang_lt">Litvanski</string>
     <string name="lang_lv">Letonski</string>
     <string name="lang_ko">Korejski</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kanada</string>
     <string name="lang_ja">Japanski</string>
     <string name="lang_it">Italijanski</string>
     <string name="lang_id">Indonezijski</string>
@@ -5894,7 +5890,7 @@
     <string name="raster_layers_action_descr">Promeni rasterske slojeve</string>
     <string name="drawer_button_description">Otvaranje glavnog menija.</string>
     <string name="map_3d_mode_action_descr">Promeni nagib karte.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Prikazati staze za bicikle</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Prikaz staza terenskih motocikla</string>
     <string name="type_of_activity">Tip aktivnosti</string>
     <string name="change_activity">Promeni aktivnost</string>
     <string name="shared_string_increase">Povećanje</string>
@@ -5982,4 +5978,10 @@
     <string name="lock_screen">Zaključan ekran</string>
     <string name="lock_screen_description">Uključuje ili isključuje zaključavanja ekrana zbog nenamernog dodira</string>
     <string name="quick_action_showhide_osm_edits_descr">Dugme za prikaz ili skrivanje lokalnih OSM izmena na mapi.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze terenskih motocikla</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje\n\n</string>
+    <string name="screen_is_locked_by_external_button">Ekran je zaključan. Za otključavanje pritisni dugme %1$s ili dodirni dugme na ekranu.</string>
+    <string name="screen_is_unlocked">Ekran je otključan.</string>
+    <string name="screen_is_locked_by_action_button">Ekran je zaključan. Dodirni dugme za otključavanje.</string>
 </resources>

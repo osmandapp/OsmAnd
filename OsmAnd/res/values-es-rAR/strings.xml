@@ -243,7 +243,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -3054,7 +3054,7 @@
     <string name="app_mode_camper">Casa rodante (camper)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
-    <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
+    <string name="rendering_attr_showLez_name">Zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Ruta: distancia %1$s, tiempo de navegación %2$s
@@ -5559,7 +5559,7 @@
     <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
     <string name="shared_string_reassign">Reasignar</string>
     <string name="reset_key_assignments">Restablecer asignaciones de teclas</string>
-    <string name="rendering_attr_showToll_description">Muestra las restricciones de peajes en las carreteras</string>
+    <string name="rendering_attr_showToll_description">Muestra las restricciones de peajes en las rutas</string>
     <string name="target_elevation">Elevación del objetivo</string>
     <string name="shared_string_eta">ETA</string>
     <string name="lang_zh_hans">Chino simplificado</string>
@@ -5899,7 +5899,7 @@
     <string name="map_3d_mode_action_descr">Cambia la inclinación del mapa.</string>
     <string name="drawer_button_description">Abre el menú principal.</string>
     <string name="configure_map_description">Cambia el estilo del mapa, las capas y otros ajustes.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Muestra senderos para motocross</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Muestra senderos para motos todoterreno</string>
     <string name="raster_layers_action_descr">Cambia las capas rasterizadas</string>
     <string name="my_location_action_descr">Centra el mapa en tu ubicación actual.</string>
     <string name="contour_layers_action_descr">Cambia las capas del contorno</string>
@@ -5991,4 +5991,10 @@
     <string name="lock_screen">Bloquear pantalla</string>
     <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
     <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Senderos para motos todoterreno</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Se ha añadido un visor de imágenes de Wikimedia a pantalla completa.\n\n• Se ha añadido un nuevo complemento « Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II.\n\n• Se ha añadido la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se han implementado nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil.\n\n• Se ha añadido la personalización de los botones del mapa y una cuadrícula precisa.\n\n• Se ha añadido a los widgets un menú contextual y la acción «Restablecer velocidad media».\n\n• Se ha añadido una nueva capa de ruta «Senderos para motos todoterreno».\n\n• Se ha corregido la «Grabación automática de la traza al navegar».\n\n• Se ha corregido el problema con las coordenadas invertidas en RTL\n\n• Se ha corregido la falta de datos del sensor para la traza en curso.\n\n• Se ha añadido información sobre las áreas circundantes para el punto marcado.\n\n• Se ha añadido una acción rápida para controlar la visibilidad de las ediciones de OSM.\n\n• Se han separado los parámetros de visibilidad para las opciones de coloración del terreno.\n\n• Se ha añadido un icono táctil para mostrar el acceso u otros atributos de caminos o senderos.\n\n</string>
+    <string name="screen_is_locked_by_action_button">Pantalla táctil bloqueada. Pulsa el botón para desbloquearla.</string>
+    <string name="screen_is_locked_by_external_button">La pantalla táctil está bloqueada. Para desbloquearla, pulsa el botón «%1$s» o el botón en la pantalla.</string>
+    <string name="screen_is_unlocked">Pantalla táctil desbloqueada.</string>
 </resources>

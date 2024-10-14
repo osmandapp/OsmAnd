@@ -4873,4 +4873,5 @@
     <string name="poi_diet_pescetarian_no">Régime pescétarien : non</string>
     <string name="poi_cash_in_yes">Oui</string>
     <string name="poi_cash_in_no">Non</string>
+    <string name="poi_osmand_access_main_tag">Accès</string>
 </resources>

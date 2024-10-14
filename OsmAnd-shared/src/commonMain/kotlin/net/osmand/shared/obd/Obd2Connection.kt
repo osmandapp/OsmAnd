@@ -2,6 +2,7 @@ package net.osmand.shared.obd
 
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
+import okio.IOException
 
 class Obd2Connection(private val connection: UnderlyingTransport) {
 	enum class COMMAND_TYPE(val code: Int) {
@@ -10,9 +11,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 	private val log = LoggerFactory.getLogger("Obd2Connection")
+	var initialized = false
 
 	init {
-		runInitCommands()
+		try {
+			runInitCommands()
+			initialized = true
+		} catch (error: IOException) {
+			connection.onInitFailed()
+		}
 	}
 
 	private fun runInitCommands() {
@@ -41,8 +48,10 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 	fun run(
 		fullCommand: String,
 		command: Int,
-		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): IntArray {
+		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		log.debug("before runImpl")
 		var response = runImpl(fullCommand)
+		log.debug("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
@@ -59,12 +68,19 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"BUSERROR",
 			"STOPPED"
 		)
+		log.debug("post-processed response without side data $response")
 		when (response) {
-			"OK" -> return intArrayOf(1)
-			"?" -> return intArrayOf(0)
-			"NODATA" -> return intArrayOf()
-			"UNABLETOCONNECT" -> throw Exception("connection failure")
-			"CANERROR" -> throw Exception("CAN bus error")
+			"OK" -> return OBDResponse.OK
+			"?" -> return OBDResponse.QUESTION_MARK
+			"NODATA" -> return OBDResponse.NO_DATA
+			"UNABLETOCONNECT" -> {
+				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+			"CANERROR" -> {
+				log.error("CAN bus error")
+				return OBDResponse.ERROR
+			}
 		}
 		try {
 			var hexValues = toHexValues(response)
@@ -75,12 +91,12 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			} else {
 				hexValues = hexValues.copyOfRange(2, hexValues.size)
 			}
-			return hexValues
+			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
 			log.debug(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
-			throw e
+			return OBDResponse.ERROR
 		}
 	}
 
@@ -157,11 +173,11 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		var basePid = 1
 		for (pid in pids) {
 			val responseData = run(pid, 0x01)
-			if (responseData.size >= 6) {
-				val byte0 = responseData[2].toByte()
-				val byte1 = responseData[3].toByte()
-				val byte2 = responseData[4].toByte()
-				val byte3 = responseData[5].toByte()
+			if (responseData.result.size >= 6) {
+				val byte0 = responseData.result[2].toByte()
+				val byte1 = responseData.result[3].toByte()
+				val byte2 = responseData.result[4].toByte()
+				val byte3 = responseData.result[5].toByte()
 				log.debug(
 					"Supported PID at base $basePid payload %02X%02X%02X%02X".format(
 						byte0,
@@ -191,4 +207,5 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
 	fun readByte(): Byte?
+	fun onInitFailed()
 }

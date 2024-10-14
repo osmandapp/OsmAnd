@@ -680,7 +680,7 @@
     <string name="poi_industrial_water_purification">Tegund: vatnshreinsistöð</string>
     <string name="poi_industrial_port">Tegund: höfn</string>
     <string name="poi_industrial_depot">Tegund: lager</string>
-    <string name="poi_defibrillator">Hjartastuðtæki</string>
+    <string name="poi_defibrillator">Hjartastuðtæki;AED</string>
     <string name="poi_tomb_pyramid">Tegund: pýramídi</string>
     <string name="poi_stone_type_coat_of_arms">Tegund: skjaldarmerki</string>
     <string name="poi_square">Torg</string>
@@ -4912,4 +4912,18 @@
     <string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Náttúruverndarsvæði</string>
     <string name="poi_blm_yes">Stýrt af Bureau Of Land Management</string>
     <string name="poi_property_management">Skrifstofa eignaumsýslu</string>
+    <string name="poi_us_maps_recreation_area_facility_horse_stanchion">Hestabás</string>
+    <string name="poi_us_maps_recreation_area_facility_warming_hut">Vermiskýli</string>
+    <string name="poi_cash_in">Afhending reiðufjár</string>
+    <string name="poi_cash_in_yes">Já</string>
+    <string name="poi_cash_in_no">Nei</string>
+    <string name="poi_cash_in_customers">Viðskiptavinir</string>
+    <string name="poi_us_maps_recreation_area_facility">Aðstaða á leiksvæði</string>
+    <string name="poi_via">í gegnum</string>
+    <string name="poi_osmand_access_main_tag">Aðgangur</string>
+    <string name="poi_diet_pescetarian_no">Fiskætumatur: nei</string>
+    <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_payment_parco_no">Ekki tekið við Parco</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">Ekki tekið við Parkster</string>
 </resources>

@@ -2239,7 +2239,7 @@
     <string name="poi_step_condition_uneven">Condição dos degraus: irregular</string>
     <string name="poi_step_condition_rough">Condição dos degraus: acidentada</string>
     <string name="poi_cairn">Moledro / mariola</string>
-    <string name="poi_defibrillator">Desfibrilhador</string>
+    <string name="poi_defibrillator">Desfibrilhador;DAE;AED</string>
     <string name="poi_defibrillator_yes">Desfibrilhador: sim</string>
     <string name="poi_tomb_war_grave">Tipo: túmulo de guerra</string>
     <string name="poi_tomb_tumulus">Tipo: túmulo</string>
@@ -4873,4 +4873,9 @@
     <string name="poi_cash_in_no">Não</string>
     <string name="poi_cash_in_customers">Clientes</string>
     <string name="poi_diet_pescetarian_no">Dieta pescetariana: não</string>
+    <string name="poi_osmand_access_main_tag">Acesso</string>
+    <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_payment_parco_no">Parco não aceite</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">Parkster não aceite</string>
 </resources>

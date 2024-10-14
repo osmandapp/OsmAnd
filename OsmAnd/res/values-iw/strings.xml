@@ -1543,7 +1543,7 @@
     <string name="rendering_attr_moreDetailed_name">פרטים נוספים</string>
     <string name="rendering_attr_lessDetailed_name">פחות פרטים</string>
     <string name="rendering_attr_hideAccess_name">הגבלות גישה</string>
-    <string name="rendering_attr_showAccess_name">הצגת הגבלות גישה ועמלות</string>
+    <string name="rendering_attr_showAccess_name">הצגת הגבלות גישה</string>
     <string name="rendering_attr_showSurfaceGrade_name">הצגת איכות הדרך</string>
     <string name="rendering_attr_showSurfaces_name">הצגת משטח הדרך</string>
     <string name="rendering_attr_showCycleRoutes_name">נתיבי רכיבה</string>

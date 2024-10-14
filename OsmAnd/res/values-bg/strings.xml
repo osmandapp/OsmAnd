@@ -683,7 +683,7 @@
     <string name="osmand_routing_experimental">Офлайн навигацията на OsmAnd е пробна версия и не работи пълноценно на дистанции по-големи от 20км.\n\nУслугата за навигация временно е превключена на онлайн от CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Посочената папка не е намерена.</string>
     <string name="application_dir">Папка за данни</string>
-    <string name="osmand_net_previously_installed">Инсталирана е предна версия на OsmAnd. Всички записани данни ще бъдат достъпни за новото приложение. Единствено записаните в любими места ще трябва да бъдат ре-импортирани.</string>
+    <string name="osmand_net_previously_installed">Всички записани данни ще бъдат достъпни в новото издание, единствено Избраните трябва да бъдат изнесени от старото приложение и внесени в новото.</string>
     <string name="build_installed">Версия {0} беше успешно инсталирана ({1}).</string>
     <string name="downloading_build">Изтегляне на издание…</string>
     <string name="install_selected_build">Искате ли да инсталирате OsmAnd - {0} от {1} {2} МБ?</string>
@@ -1145,7 +1145,7 @@
     <string name="live_monitoring_start">Начало на проследяване в реално време</string>
     <string name="live_monitoring_stop">Край на проследяване в реално време</string>
     <string name="rendering_attr_hideAccess_name">Ограничения за достъп</string>
-    <string name="rendering_attr_showAccess_name">Ограничения за достъп и пътни такси</string>
+    <string name="rendering_attr_showAccess_name">Ограничения на достъпа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Качество на пътя</string>
     <string name="rendering_attr_showSurfaces_name">Вид на пътната настилка</string>
     <string name="rendering_attr_showCycleRoutes_name">Велосипедни маршрути</string>

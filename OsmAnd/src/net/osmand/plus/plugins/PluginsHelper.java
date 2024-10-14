@@ -463,6 +463,7 @@ public class PluginsHelper {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Nullable
 	public static <T extends OsmandPlugin> T getPlugin(Class<T> clz) {
 		for (OsmandPlugin lr : getAvailablePlugins()) {
 			if (clz.isInstance(lr)) {

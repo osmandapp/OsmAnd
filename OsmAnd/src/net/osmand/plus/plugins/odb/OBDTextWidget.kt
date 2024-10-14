@@ -18,7 +18,7 @@ class OBDTextWidget @JvmOverloads constructor(
 	private val fieldType: OBDWidgetDataFieldType, customId: String? = null,
 	widgetsPanel: WidgetsPanel? = null) :
 	SimpleWidget(mapActivity, fieldType.widgetType, customId, widgetsPanel) {
-	private val plugin: VehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
+	private val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 	private val widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
 
@@ -33,6 +33,11 @@ class OBDTextWidget @JvmOverloads constructor(
 			}
 			FUEL_CONSUMPTION_RATE -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE
+				formatter = OBDComputerWidgetFormatter("%.0f")
+				averageTimeSeconds = 5 * 60
+			}
+			FUEL_CONSUMPTION_RATE_SENSOR -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR
 				formatter = OBDComputerWidgetFormatter("%.0f")
 				averageTimeSeconds = 5 * 60
 			}

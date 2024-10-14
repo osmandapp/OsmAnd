@@ -625,7 +625,7 @@
     <string name="rendering_attr_moreDetailed_name">Више појединости</string>
     <string name="rendering_attr_lessDetailed_name">Мање појединости</string>
     <string name="rendering_attr_hideAccess_name">Забране приступа</string>
-    <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа и путарина</string>
+    <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
     <string name="rendering_attr_showCycleRoutes_name">Бициклистичке стазе</string>
@@ -5883,7 +5883,7 @@
     <string name="navigation_action_descr">Отвара навођење.</string>
     <string name="my_location_action_descr">Средишти карту на Вашем тренутном положају.</string>
     <string name="map_3d_mode_action_descr">Промени нагиб карте.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Прикажи утабане бициклистичке стазе</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Приказ стаза теренских мотоцикла</string>
     <string name="raster_layers_action_descr">Промени сликовне слојеве</string>
     <string name="drawer_button_description">Отвара главног изборника.</string>
     <string name="configure_map_description">Промени начин приказа карте, слојеве или друге поставке.</string>
@@ -5974,4 +5974,10 @@
     <string name="lock_screen">Закључај екран</string>
     <string name="lock_screen_description">Омогућава или онемогућава функцију екрана осетљивог на додир да спречи случајне додире</string>
     <string name="quick_action_showhide_osm_edits_descr">Дугме за приказ или сакривање локалних ОСМ измена на мапи.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Стазе теренских мотоцикла</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Додан је прегледник галерије преко целог екрана за слике Викимедије\n\n • Уведен је нови додатак „Метрика возила“ за праћење перформанси возила користећи ДНВ-ИИ протокол\n\n • Додата могућност додељивања активности стазама и филтрирања у складу са тим\n\n • Имплементиране нове брзе акције за снимање путовања и закључавање екрана на додир\n\n • Уведен је прилагодљив изглед дугмета мапе и прецизна мрежа\n\n • Додат је контекстни мени и акција „Ресет просечне брзине“ у виџете\n\n • Додан је нови слој руте „Стазе теренских мотоцикла“\n\n • Исправљено „Аутоматско снимање стазе током навигације“\n\n • Решен проблем са преокренутим координатама у РТЛ-у\n\n • Исправљени пропуштени подаци сензора за тренутно снимљену стазу\n\n • Додате информације о околним подручјима за изабрану тачку\n\n • Додата брза акција за контролу видљивости ОСМ измена\n\n • Одвојени параметри видљивости за опције бојења терена\n\n • Додата икона која се може додирнути за приказ приступа или других атрибута пута или путање\n\n</string>
+    <string name="screen_is_locked_by_external_button">Екран осетљив на додир је закључан. Да бисте откључали, притисните дугме %1$s или додирните дугме на екрану.</string>
+    <string name="screen_is_unlocked">Екран осетљив на додир је откључан.</string>
+    <string name="screen_is_locked_by_action_button">Екран осетљив на додир је закључан. Додирните дугме да бисте откључали.</string>
 </resources>

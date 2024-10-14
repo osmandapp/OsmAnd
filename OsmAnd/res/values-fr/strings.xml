@@ -722,7 +722,7 @@
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
     <string name="osmand_parking_plugin_description">Mémorisez la position de votre véhicule et soyez alertés avant la fin de durée du stationnement. Pour placer le marqueur, sélectionnez un point sur la carte, allez dans \"Actions\" et sélectionnez \"Stationnement\".</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
-    <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
+    <string name="context_menu_item_add_parking_point">Emplacement de stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
@@ -1254,7 +1254,7 @@
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
     <string name="rendering_attr_hideAccess_name">Accès restreints</string>
-    <string name="rendering_attr_showAccess_name">Afficher les accès restreints et à péage</string>
+    <string name="rendering_attr_showAccess_name">Afficher les restrictions d\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Itinéraires cyclables</string>
@@ -2593,7 +2593,7 @@
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="transport_nearby_routes">À moins de</string>
+    <string name="transport_nearby_routes">Situé dans / à moins de</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
     <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -5966,4 +5966,10 @@
     <string name="lock_screen">Verrouiller l’écran</string>
     <string name="help_article_personal_color_palette_schemes_name">Jeux de couleurs</string>
     <string name="quick_action_showhide_osm_edits_descr">Bouton pour afficher ou masquer les modifications OSM apportées à la carte.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Sentiers en terre pour vélos</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Ajout d\'une visionneuse de galerie plein écran pour les images Wikimédia\n\n• Introduction d\'un nouveau plugin \"Relevés du véhicule\" pour surveiller les performances du véhicule en utilisant le protocole OBD-II\n\n• Ajout de la possibilité d\'assigner des activités aux traces et de les filtrer en conséquence\n\n• Implémentation de nouvelles actions rapides pour l\'enregistrement des trajets et le verrouillage de l\'écran tactile\n\n• Introduction d\'un de bouton de carte personnalisable et d\'une grille précise\n\n• Ajout d\'un menu contextuel et d\'une action \"Réinitialiser la vitesse moyenne\" aux widgets\n\n• Ajout d\'une nouvelle couche d\'itinéraire \"Sentiers de terre pour vélos\"\n\n• Correction de l\'erreur \"Auto-enregistrement de la trace pendant la navigation\"\n\n• Correction du problème avec les coordonnées inversées en RTL\n\n• Correction des données manquantes du capteur pour la trace actuellement enregistrée\n\n•Ajout d\'informations sur les zones environnantes pour le point sélectionné\n\n• Ajout d\'une action rapide pour contrôler la visibilité des modifications OSM\n\n• Séparation des paramètres de visibilité pour les options de coloration du terrain\n\n• Ajout d\'une icône tactile pour afficher l\'accès ou d\'autres attributs des routes ou des sentiers\n\n</string>
+    <string name="screen_is_unlocked">L\'écran tactile est déverrouillé.</string>
+    <string name="screen_is_locked_by_action_button">L\'écran tactile est verrouillé. Appuyez sur le bouton pour déverrouiller.</string>
+    <string name="screen_is_locked_by_external_button">L\'écran tactile est verrouillé. Pour le déverrouiller, utilisez le bouton %1$s ou appuyez sur le bouton à l\'écran.</string>
 </resources>

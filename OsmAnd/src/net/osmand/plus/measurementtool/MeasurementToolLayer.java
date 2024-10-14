@@ -1,14 +1,7 @@
 package net.osmand.plus.measurementtool;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PathEffect;
-import android.graphics.PathMeasure;
-import android.graphics.PointF;
+import android.graphics.*;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -26,15 +19,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXUtilities;
-//import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.render.OsmandDashPathEffect;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable.RenderableSegment;
@@ -51,6 +41,7 @@ import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,6 +54,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	private static final int START_ZOOM = 8;
 	private static final int MIN_POINTS_PERCENTILE = 20;
+	private static final int MAX_VISIBLE_POINTS = 30;
 	// roughly 10 points per tile
 	private static final double MIN_DISTANCE_TO_SHOW_REF_ZOOM = MapUtils.getTileDistanceWidth(START_ZOOM) / 10;
 
@@ -506,10 +498,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		return mapActivity != null && inMeasurementMode && mapActivity.getFragmentsHelper().getGpsFilterFragment() == null;
 	}
 
-	private boolean isInTileBox(RotatedTileBox tb, WptPt point) {
-		QuadRect latLonBounds = tb.getLatLonBounds();
-		return point.getLatitude() >= latLonBounds.bottom && point.getLatitude() <= latLonBounds.top
-				&& point.getLongitude() >= latLonBounds.left && point.getLongitude() <= latLonBounds.right;
+	private boolean isInTileBox(@NonNull QuadRect rect, @NonNull WptPt point) {
+		double y = point.getLatitude();
+		double x = point.getLongitude();
+		return rect.contains(x, y, x, y);
 	}
 
 	private void drawSegmentLines(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, boolean forceDraw) {
@@ -668,7 +660,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 			points.addAll(editingCtx.getAfterPoints());
 			showPointsZoomCache = zoom;
-			boolean showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(points, showPointsZoomCache);
+			boolean showPointsMinZoom = points.size() > 0 && calcZoomToShowPoints(tileBox, points, showPointsZoomCache);
 			if (mapRenderer != null) {
 				if ((showPointsMinZoom && !this.showPointsMinZoom) || oldMovedPointRedraw) {
 					clearPointsProvider();
@@ -710,34 +702,41 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<WptPt> points) {
+		QuadRect rect = tileBox.getLatLonBounds();
 		for (int i = 0; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			if (isInTileBox(tileBox, point)) {
+			if (isInTileBox(rect, point)) {
 				drawPointIcon(canvas, tileBox, point, false);
 			}
 		}
 	}
 
-	private boolean calcZoomToShowPoints(List<WptPt> points, int currentZoom) {
-		List<Double> distances = new ArrayList<>();
+	private boolean calcZoomToShowPoints(@NonNull RotatedTileBox tileBox, @NonNull List<WptPt> points, int currentZoom) {
 		if (currentZoom >= 21) {
 			return true;
 		}
 		if (currentZoom < START_ZOOM) {
 			return false;
 		}
+		int counter = 0;
 		WptPt prev = null;
+		QuadRect rect = tileBox.getLatLonBounds();
+		List<Double> distances = new ArrayList<>();
+
 		for (WptPt wptPt : points) {
 			if (prev != null) {
 				double dist = MapUtils.getDistance(wptPt.getLat(), wptPt.getLon(), prev.getLat(), prev.getLon());
 				distances.add(dist);
+			}
+			if (counter <= MAX_VISIBLE_POINTS && isInTileBox(rect, wptPt)) {
+				counter++;
 			}
 			prev = wptPt;
 		}
 		Collections.sort(distances);
 		double dist = Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
 		int zoomMultiplier = (1 << (currentZoom - START_ZOOM));
-		return dist > (MIN_DISTANCE_TO_SHOW_REF_ZOOM / zoomMultiplier);
+		return dist > (MIN_DISTANCE_TO_SHOW_REF_ZOOM / zoomMultiplier) || counter <= MAX_VISIBLE_POINTS;
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb, boolean forceDraw) {

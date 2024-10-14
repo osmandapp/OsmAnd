@@ -81,6 +81,9 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		noteText = sendOsmNoteView.findViewById(R.id.note_text);
 		noteText.setText(((OsmNotesPoint) poi[0]).getText());
 		noteText.setSelection(noteText.getText().length());
+		if (noteText.requestFocus() && getActivity() != null) {
+			AndroidUtils.showSoftKeyboard(getActivity(), noteText);
+		}
 		TextInputLayout noteHint = sendOsmNoteView.findViewById(R.id.note_hint);
 		noteHint.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
 		accountBlockView = sendOsmNoteView.findViewById(R.id.account_container);
@@ -101,19 +104,16 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);
 		int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
-		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				updateSignIn(isChecked);
-				if (nightMode) {
-					uploadAnonymously.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
-				} else {
-					uploadAnonymously.setBackgroundResource(
-							isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
-				}
-				uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
+		uploadAnonymously.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			updateSignIn(isChecked);
+			if (nightMode) {
+				uploadAnonymously.setBackgroundResource(
+						isChecked ? R.drawable.layout_bg_dark_solid : R.drawable.layout_bg_dark);
+			} else {
+				uploadAnonymously.setBackgroundResource(
+						isChecked ? R.drawable.layout_bg_solid : R.drawable.layout_bg);
 			}
+			uploadAnonymously.setPadding(paddingSmall, 0, paddingSmall, 0);
 		});
 		LinearLayout account = accountBlockView.findViewById(R.id.account_container);
 		account.setOnClickListener(v -> {
