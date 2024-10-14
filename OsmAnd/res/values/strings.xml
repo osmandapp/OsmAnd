@@ -25,6 +25,10 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_vehicle_info">Vehicle info</string>
     <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
     <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step">1. Connect the scanner to your vehicle\'s OBD-II port.\n\n
+2. Turn on your vehicle\'s engine\n\n
+3. Enable Bluetooth on your device\n\n
+4. Tap \'%1$s\' and select your scanner from the list.</string>
     <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
     <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
     <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>

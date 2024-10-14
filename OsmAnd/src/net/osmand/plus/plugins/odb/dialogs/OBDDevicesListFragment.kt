@@ -79,12 +79,15 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		disconnectedListAdapter = OBDDevicesAdapter(app, nightMode, this)
 		connectedList?.adapter = connectedListAdapter
 		disconnectedList?.adapter = disconnectedListAdapter
+		val connectInstructions = view.findViewById<TextView>(R.id.connect_instructions)
+		connectInstructions.text = String.format(app.getString(R.string.connect_obd_instructions_step),
+			app.getString(R.string.external_device_details_connect))
 	}
 
 	private fun setupPairSensorButton(view: View) {
 		val dismissButton = view.findViewById<DialogButton>(R.id.dismiss_button)
 		dismissButton.setButtonType(DialogButtonType.SECONDARY)
-		dismissButton.setTitleId(R.string.ant_plus_pair_new_sensor)
+		dismissButton.setTitleId(R.string.external_device_details_connect)
 		val layoutParams = dismissButton.layoutParams
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 		dismissButton.layoutParams = layoutParams
