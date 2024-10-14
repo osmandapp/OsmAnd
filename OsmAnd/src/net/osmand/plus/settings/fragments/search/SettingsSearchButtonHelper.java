@@ -12,7 +12,8 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphDAOProvider;
+import de.KnollFrank.lib.settingssearch.graph.ComputeAndPersist;
+import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphLoader;
 
 public class SettingsSearchButtonHelper {
 
@@ -39,14 +40,23 @@ public class SettingsSearchButtonHelper {
 		return SearchPreferenceFragments
 				.builder(
 						createSearchConfiguration(),
-						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager(),
-						SearchablePreferenceScreenGraphDAOProvider.Mode.LOAD_GRAPH,
-						R.raw.searchable_preference_screen_graph)
+						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager())
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
+				.withWrapSearchablePreferenceScreenGraphProvider(
+						(searchablePreferenceScreenGraphProvider, preferenceManager) -> {
+							final boolean persist = false;
+							return persist ?
+									new ComputeAndPersist(
+											searchablePreferenceScreenGraphProvider,
+											preferenceManager.getContext()) :
+									new SearchablePreferenceScreenGraphLoader(
+											R.raw.searchable_preference_screen_graph,
+											preferenceManager);
+						})
 				.build();
 	}
 
