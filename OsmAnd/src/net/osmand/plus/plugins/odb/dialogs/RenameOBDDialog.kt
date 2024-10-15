@@ -60,7 +60,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 			propertyName.setText(R.string.shared_string_name)
 			propertyValueView.hasClearButton = true
 			plugin?.let {
-				val pairedDevices = plugin.getPairedOBDDevicesList(requireActivity())
+				val pairedDevices = plugin.getUsedOBDDevicesList()
 				device = pairedDevices.find { it.address == deviceAddress }
 				propertyOldValueValue = device?.name ?: ""
 				textInput?.setText(propertyOldValueValue);
