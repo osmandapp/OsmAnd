@@ -18,14 +18,14 @@ class OBDTextWidget @JvmOverloads constructor(
 	private val fieldType: OBDWidgetDataFieldType, customId: String? = null,
 	widgetsPanel: WidgetsPanel? = null) :
 	SimpleWidget(mapActivity, fieldType.widgetType, customId, widgetsPanel) {
-	private val plugin: VehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
+	private val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 	private val widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
 
 	init {
 		val obdDataWidgetType: OBDTypeWidget
 		var formatter = OBDComputerWidgetFormatter()
-		var averageTimeSeconds = 15
+		var averageTimeSeconds = 0
 		when(fieldType) {
 			RPM -> {
 				obdDataWidgetType = OBDTypeWidget.RPM

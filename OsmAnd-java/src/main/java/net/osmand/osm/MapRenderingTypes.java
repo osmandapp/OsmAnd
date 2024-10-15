@@ -295,6 +295,7 @@ public abstract class MapRenderingTypes {
 				rtype.propagateToNodesPrefix = propagateToNodesPrefix;
 			}
 			rtype.propagateIf = parseMultiTagValue(parser, "propagateIf");
+			rtype.propagateNetworkIf = parseMultiTagValue(parser, "propagateNetworkIf");
 			return rtype;
 		}
 		return null;
@@ -581,6 +582,7 @@ public abstract class MapRenderingTypes {
 		public PropagateToNodesType propagateToNodes;
 		public String propagateToNodesPrefix;
 		public Map<String, String> propagateIf;
+		public Map<String, String> propagateNetworkIf;
 	}
 	
 	public static class MapRulType {

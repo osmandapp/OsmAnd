@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:clickable="true"
+	android:fitsSystemWindows="false"
+	android:focusable="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height_expanded"
+		android:background="?attr/actionModeBackground">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+			android:id="@+id/toolbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height_expanded"
+			android:background="?attr/actionModeBackground"
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMargin="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+			app:scrimAnimationDuration="0"
+			app:title="@string/obd_plugin_name">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:fitsSystemWindows="true"
+				app:layout_collapseMode="pin"
+				app:menu="@menu/ble_sensors_menu">
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+		app:layout_scrollFlags="scroll">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:id="@+id/empty_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<ImageView
+					android:id="@+id/sensor_icon"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="16dp"
+					android:layout_marginTop="24dp"
+					android:layout_marginRight="16dp"
+					android:scaleType="fitCenter" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="@dimen/content_padding">
+
+					<TextView
+						android:id="@+id/titleText"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/content_padding"
+						android:text="@string/connect_obd_instructions_title"
+						android:textSize="16sp" />
+
+					<TextView
+						android:id="@+id/howToConnectText"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/content_padding_half"
+						android:text="@string/obd_how_to_connect"
+						android:textSize="16sp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/connect_instructions"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding_half"
+						android:layout_marginBottom="@dimen/content_padding_half"
+						android:text="@string/connect_obd_instructions_step" />
+
+				</LinearLayout>
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/learn_more_button"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:text="@string/terms_of_service_desc"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<include
+					android:id="@+id/pair_btn_empty"
+					layout="@layout/bottom_buttons" />
+
+			</LinearLayout> <!--Empty view-->
+
+			<LinearLayout
+				android:id="@+id/devices_content"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/no_bluetooth_card"
+					layout="@layout/no_bluetooth_card" />
+
+				<androidx.core.widget.NestedScrollView
+					android:layout_width="match_parent"
+					android:layout_height="0dp"
+					android:layout_weight="1">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<TextView
+							android:id="@+id/connected_prompt"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_extra_large"
+							android:layout_marginTop="@dimen/content_padding_medium"
+							android:lineSpacingExtra="3sp"
+							android:text="@string/external_device_connected"
+							android:textColor="@color/preference_category_title"
+							android:textSize="@dimen/default_desc_text_size"
+							app:typefaceWeight="medium" />
+
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/connected_devices_list"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+						<TextView
+							android:id="@+id/disconnected_prompt"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/content_padding_extra_large"
+							android:layout_marginTop="@dimen/content_padding_medium"
+							android:lineSpacingExtra="3sp"
+							android:text="@string/external_device_disconnected"
+							android:textColor="@color/preference_category_title"
+							android:textSize="@dimen/default_desc_text_size"
+							app:typefaceWeight="medium" />
+
+						<include
+							android:id="@+id/divider_between_device_groups"
+							layout="@layout/divider" />
+
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/disconnected_devices_list"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+					</LinearLayout>
+
+				</androidx.core.widget.NestedScrollView>
+
+				<include
+					android:id="@+id/pair_btn_additional_divider"
+					layout="@layout/divider" />
+
+				<include
+					android:id="@+id/pair_btn_additional"
+					layout="@layout/bottom_buttons" />
+
+			</LinearLayout>
+
+			<include
+				android:id="@+id/state_no_bluetooth"
+				layout="@layout/no_bluetooth_view" />
+
+		</FrameLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

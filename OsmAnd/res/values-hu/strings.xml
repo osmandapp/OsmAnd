@@ -1250,7 +1250,7 @@
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevesebb részlet</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showAccess_name">Behajtási és útdíjjal kapcsolatos korlátozások megjelenítése</string>
+    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
@@ -5885,7 +5885,7 @@
     <string name="map_3d_mode_action_descr">Térképdőlés módosítása.</string>
     <string name="drawer_button_description">Megnyitja a főmenüt.</string>
     <string name="configure_map_description">Térkép stílusának, rétegeinek, egyéb beállításainak módosítása.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Crossmotor utak mutatása</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Krosszmotor utak mutatása</string>
     <string name="raster_layers_action_descr">Raszter rétegek módosítása</string>
     <string name="change_activity">Tevékenység módosítása</string>
     <string name="type_of_activity">Tevékenység típusa</string>
@@ -5946,7 +5946,7 @@
     <string name="obd_fuel_consumption_rate_desc">Az üzemanyag fogyasztást mutatja az OBD adatai alapján</string>
     <string name="obd_fuel_left_distance">Megtehető távolság</string>
     <string name="obd_fuel_type">Üzemanyag típus</string>
-    <string name="obd_plugin_description">Hozzáfér a jármű adataihoz OBD protokollon keresztül</string>
+    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz: * Motor fordulatszám * Üzemanyag-fogyasztás * Maradék üzemanyag * A motor indítása óta megtett távolság * Beszívott levegő hőmérséklete * Környezeti hőmérséklet * Hűtőfolyadék hőmérséklete * A jármű sebessége * Akkumulátor töltöttsége</string>
     <string name="obd_support">OBD támogatás</string>
     <string name="obd_plugin_name">Járműmetrika</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
@@ -5974,4 +5974,20 @@
     <string name="lock_screen">Képernyő zárolása</string>
     <string name="lock_screen_description">Engedélyezi vagy letiltja az érintőképernyő funkcióit a véletlen érintések elkerülése érdekében</string>
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
+    <string name="liter_per_hour">l/óra</string>
+    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez\n\n</string>
+    <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
+    <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Érintse meg a gombot a feloldáshoz.</string>
+    <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
+    <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II eszközöket.</string>
+    <string name="connect_obd_instructions_step2">2. Indítsa el a jármű motorját</string>
+    <string name="connect_obd_instructions_step3">3. Engedélyezze a Bluetooth-t a telefonján</string>
+    <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II eszközt a listáról.</string>
+    <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
+    <string name="obd_fuel_left_liters">Maradék üzemanyag (l)</string>
+    <string name="obd_vehicle_info">Jármű információ</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="connect_obd_instructions_step1">1. Csatlakoztassa az eszközt a járműve OBD-II portjához.</string>
+    <string name="obd_how_to_connect">Hogyan csatlakoztatható:</string>
 </resources>

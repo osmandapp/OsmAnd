@@ -3,19 +3,100 @@ package net.osmand.shared.extensions
 import platform.Foundation.NSString
 import platform.Foundation.stringWithFormat
 
-actual fun String.format(vararg args: Any?): String =
-	// This ugly work around is because varargs can't be passed to Objective-C
-	when (args.size) {
-		0 -> NSString.stringWithFormat(this)
-		1 -> NSString.stringWithFormat(this, args[0])
-		2 -> NSString.stringWithFormat(this, args[0], args[1])
-		3 -> NSString.stringWithFormat(this, args[0], args[1], args[2])
-		4 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3])
-		5 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4])
-		6 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4], args[5])
-		7 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4], args[5], args[6])
-		8 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
-		9 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8])
-		10 -> NSString.stringWithFormat(this, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9])
-		else -> throw IllegalStateException("ios String.format() can only accept up to 10 arguments")
+actual fun String.format(vararg args: Any?): String {
+	val resultStringBuilder = StringBuilder()
+	var index = 0
+	var indexedArgs = 0
+
+	while (index < this.length) {
+		if (this[index] == '%' && index + 1 < this.length) {
+			var argIndex: Int? = null
+			var indexed = false
+			var width: Int? = null
+			var precision: Int? = null
+			var argType: Char? = null
+
+			var formatSpecifierStart = index + 1
+
+			// Check for indexed argument (e.g., %1$d)
+			if (this[formatSpecifierStart].isDigit()) {
+				var numberStart = formatSpecifierStart
+				while (numberStart < this.length && this[numberStart].isDigit()) {
+					numberStart++
+				}
+				if (numberStart < this.length && this[numberStart] == '$') {
+					argIndex = this.substring(formatSpecifierStart, numberStart).toInt() - 1
+					formatSpecifierStart = numberStart + 1
+					indexed = true
+				}
+			}
+
+			// Check for width and precision (e.g., %8.2f)
+			var widthStart = formatSpecifierStart
+			while (widthStart < this.length && this[widthStart].isDigit()) {
+				widthStart++
+			}
+
+			if (widthStart > formatSpecifierStart) {
+				width = this.substring(formatSpecifierStart, widthStart).toInt()
+				formatSpecifierStart = widthStart
+			}
+
+			if (formatSpecifierStart < this.length && this[formatSpecifierStart] == '.') {
+				val precisionStart = formatSpecifierStart + 1
+				var precisionEnd = precisionStart
+				while (precisionEnd < this.length && this[precisionEnd].isDigit()) {
+					precisionEnd++
+				}
+				if (precisionEnd > precisionStart) {
+					precision = this.substring(precisionStart, precisionEnd).toInt()
+					formatSpecifierStart = precisionEnd
+				}
+			}
+
+			// Get the argument type (e.g., 'd' or 'f')
+			if (formatSpecifierStart < this.length) {
+				argType = this[formatSpecifierStart]
+			}
+
+			when (argType) {
+				's', '@' -> {
+					val i = if (indexed && argIndex != null) argIndex else indexedArgs
+					indexedArgs++
+					resultStringBuilder.append(args[i])
+					index = formatSpecifierStart
+				}
+
+				'd', 'f' -> {
+					val formatStringBuilder = StringBuilder()
+					formatStringBuilder.append('%')
+					width?.let { formatStringBuilder.append(it) }
+					precision?.let { formatStringBuilder.append('.').append(it) }
+					formatStringBuilder.append(argType)
+					val i = if (indexed && argIndex != null) argIndex else indexedArgs
+					indexedArgs++
+
+					val format = formatStringBuilder.toString()
+					resultStringBuilder.append(when (args[i]) {
+						is Int -> NSString.stringWithFormat(format, args[i] as Int)
+						is Float -> NSString.stringWithFormat(format, args[i] as Float)
+						is Double -> NSString.stringWithFormat(format, args[i] as Double)
+						is Long -> NSString.stringWithFormat(format, args[i] as Long)
+						else -> args[i]?.toString() ?: "null"
+					})
+
+					index = formatSpecifierStart
+				}
+
+				else -> {
+					resultStringBuilder.append('%') // Handle case where '%' is not followed by known specifier
+				}
+			}
+		} else {
+			resultStringBuilder.append(this[index]) // Copy regular characters
+		}
+		index++
 	}
+
+	return resultStringBuilder.toString()
+}

@@ -2,6 +2,7 @@ package net.osmand.shared.obd
 
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
+import okio.IOException
 
 class Obd2Connection(private val connection: UnderlyingTransport) {
 	enum class COMMAND_TYPE(val code: Int) {
@@ -10,9 +11,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 	private val log = LoggerFactory.getLogger("Obd2Connection")
+	var initialized = false
 
 	init {
-		runInitCommands()
+		try {
+			runInitCommands()
+			initialized = true
+		} catch (error: IOException) {
+			connection.onInitFailed()
+		}
 	}
 
 	private fun runInitCommands() {
@@ -42,7 +49,9 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		log.debug("before runImpl")
 		var response = runImpl(fullCommand)
+		log.debug("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
@@ -64,8 +73,14 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
-			"UNABLETOCONNECT" -> throw Exception("connection failure")
-			"CANERROR" -> throw Exception("CAN bus error")
+			"UNABLETOCONNECT" -> {
+				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+			"CANERROR" -> {
+				log.error("CAN bus error")
+				return OBDResponse.ERROR
+			}
 		}
 		try {
 			var hexValues = toHexValues(response)
@@ -81,7 +96,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			log.debug(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
-			throw e
+			return OBDResponse.ERROR
 		}
 	}
 
@@ -192,4 +207,5 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
 	fun readByte(): Byte?
+	fun onInitFailed()
 }
