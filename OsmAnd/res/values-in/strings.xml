@@ -5930,7 +5930,7 @@
     <string name="obd_fuel_consumption_rate">Tingkat konsumsi bahan bakar</string>
     <string name="obd_fuel_left_distance">Bahan bakar tersisa (jarak)</string>
     <string name="obd_fuel_type_desc">Menampilkan jenis bahan bakar kendaraan melalui sensor OBD</string>
-    <string name="obd_plugin_description">Mengakses informasi kendaraan Anda melalui protokol OBD</string>
+    <string name="obd_plugin_description">Pantau metrik kendaraan utama menggunakan protokol OBD-II. Akses data termasuk: * Kecepatan mesin * Konsumsi bahan bakar * Bahan bakar tersisa * Jarak sejak penilaian mesin * Suhu masukan * Suhu sekitar * Suhu pendingin * Kecepatan kendaraan * Persentase baterai</string>
     <string name="quick_action_previous_screen_desc">Saklar untuk navigasi ke layar sebelumnya.</string>
     <string name="quick_action_drawer_desc">Saklar untuk menampilkan atau menyembunyikan menu samping.</string>
     <string name="quick_action_drawer_title">Menu samping</string>
@@ -5957,4 +5957,14 @@
     <string name="key_event_action_continuous_zoom_in">Perbesaran berkelanjutan</string>
     <string name="rendering_avg_info">Statistik perenderan (rata-rata 1 / 5 / 15 menit)</string>
     <string name="release_4_9">• Menambahkan penampil galeri layar penuh untuk gambar Wikimedia\n\n• Memperkenalkan plugin baru “Metrik Kendaraan” untuk memantau kinerja kendaraan menggunakan protokol OBD-II\n\n• Menambahkan kemampuan untuk menetapkan aktivitas ke trek dan memfilternya\n\n• Menerapkan tindakan cepat baru untuk perekaman perjalanan dan kunci layar sentuh\n\n• Memperkenalkan tampilan tombol peta yang dapat disesuaikan dan kisi-kisi yang tepat\n\n• Menambahkan menu konteks dan tindakan “Atur ulang kecepatan rata-rata” ke widget\n\n• Menambahkan lapisan rute baru “Jalur Sepeda Tanah”\n\n• Memperbaiki “Rekam lintasan secara otomatis selama navigasi”\n\n• Memperbaiki masalah dengan koordinat yang terbalik di RTL\n\n• Memperbaiki data sensor yang terlewat untuk trek yang sedang direkam\n\n• Menambahkan informasi tentang area sekitar untuk titik yang dipilih\n\n• Menambahkan tindakan cepat untuk mengontrol visibilitas dari OSM Edits\n\n• Parameter visibilitas yang terpisah untuk opsi pewarnaan Terrain\n\n• Menambahkan ikon yang dapat diketuk untuk menampilkan akses atau atribut jalan atau jalur lainnya\n\n</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="connect_obd_instructions_title">OsmAnd mendukung koneksi Bluetooth ke pemindai OBD-II.</string>
+    <string name="obd_vehicle_info">Info kendaraan</string>
+    <string name="connect_obd_instructions_step1">1. Hubungkan pemindai ke porta OBD-II kendaraan Anda.</string>
+    <string name="connect_obd_instructions_step2">2. Nyalakan mesin kendaraan Anda</string>
+    <string name="obd_how_to_connect">Cara menghubungkan:</string>
+    <string name="connect_obd_instructions_step3">3. Aktifkan Bluetooth di perangkat Anda</string>
+    <string name="connect_obd_instructions_step4">4. Ketuk \'Hubungkan\' dan pilih pemindai Anda dari daftar.</string>
+    <string name="learn_more_about_obd_sensors">Pelajari lebih lanjut tentang sensor.</string>
+    <string name="obd_fuel_left_liters">Bahan bakar tersisa (liter)</string>
 </resources>

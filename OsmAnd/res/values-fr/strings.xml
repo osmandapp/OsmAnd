@@ -5961,7 +5961,7 @@
     <string name="quick_action_start_pause_recording">Bouton pour démarrer, suspendre ou reprendre l\'enregistrement de la trace GPX.</string>
     <string name="third_links">Liens tiers</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Bouton pour sauvegarder la trace en cours dans un fichier GPX et démarrer l’enregistrement d’une nouvelle trace sans interruption.</string>
-    <string name="tracker_item">Traqueur OsmAnd</string>
+    <string name="tracker_item">Suivi de position par OsmAnd</string>
     <string name="lock_screen_description">Active ou désactive l\'écran tactile pour éviter les appuis involontaires</string>
     <string name="lock_screen">Verrouiller l’écran</string>
     <string name="help_article_personal_color_palette_schemes_name">Jeux de couleurs</string>

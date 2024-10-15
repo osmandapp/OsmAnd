@@ -1247,7 +1247,7 @@
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
     <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýto</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="pause_navigation">Pozastavit navigaci</string>
@@ -2640,7 +2640,7 @@
     <string name="delete_search_history">Vymazat historii hledání</string>
     <string name="download_images">Stáhnout obrázky</string>
     <string name="download_maps_travel">Cestovní průvodce</string>
-    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="shared_string_wikivoyage" translatable="false">Wikivoyage</string>
     <string name="article_removed">Článek odstraněn</string>
     <string name="wikivoyage_search_hint">Hledejte stát, město nebo kraj</string>
     <string name="shared_string_read">Číst</string>
@@ -4800,7 +4800,7 @@
     <string name="altitude_correction">Korekce nadmořské výšky</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nevyjíždějte mimo sjezdovky</string>
     <string name="map_marker_average_speed_desc">Zadejte časový interval pro průměrování rychlosti (používá se pro odhad času příjezdu).</string>
-    <string name="map_widget_zoom_level">Zoom level</string>
+    <string name="map_widget_zoom_level">Úroveň přiblížení</string>
     <string name="external_sensors_plugin_name">Externí senzory</string>
     <string name="external_sensors_plugin_description">Přístup k externím senzorům, které snímají např. srdeční tep, rychlost jízdy na kole, výkon nebo kadenci. Vyžaduje, aby vaše zařízení bylo připojeno k příslušným senzorům prostřednictvím protokolu bezdrátové osobní sítě ANT+.</string>
     <string name="marker_1st">První značka</string>
@@ -5909,7 +5909,7 @@
     <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny motoru</string>
     <string name="obd_fuel_level">Hladina paliva</string>
     <string name="obd_plugin_name">Metriky vozidel</string>
-    <string name="obd_plugin_description">Přístup k informacím o vozidle prostřednictvím protokolu OBD</string>
+    <string name="obd_plugin_description">Sledování klíčových parametrů vozidla pomocí protokolu OBD-II. Přístup k datům včetně: * Otáčky motoru * Spotřeba paliva * Zbývající palivo * Vzdálenost od nastartování motoru * Teplota sání * Teplota okolí * Teplota chladicí kapaliny * Rychlost vozidla * Procento baterie</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="obd_ambient_air_temp">Teplota okolního vzduchu</string>
     <string name="obd_battery_voltage">Napětí baterie</string>
@@ -5967,4 +5967,20 @@
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="quick_action_showhide_osm_edits_descr">Tlačítko pro zobrazení nebo skrytí místních úprav OSM na mapě.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Stezky pro terénní kola</string>
+    <string name="obd_vehicle_info">Info o vozidle</string>
+    <string name="obd_how_to_connect">Postup připojení:</string>
+    <string name="connect_obd_instructions_step1">1. Připojte skener k portu OBD-II vozidla.</string>
+    <string name="connect_obd_instructions_step2">2. Nastartujte motor vozidla</string>
+    <string name="connect_obd_instructions_step3">3. Povolte v zařízení Bluetooth</string>
+    <string name="connect_obd_instructions_step4">4. Klepněte na možnost „Připojit“ a vyberte skener ze seznamu.</string>
+    <string name="obd_fuel_left_liters">Zbývající palivo (litry)</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="connect_obd_instructions_title">OsmAnd podporuje připojení Bluetooth ke skenerům OBD-II.</string>
+    <string name="learn_more_about_obd_sensors">Další informace o senzorech.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="screen_is_locked_by_external_button">Dotyková obrazovka je uzamčená. Chcete-li odemknout, stiskněte tlačítko %1$s nebo klepněte na tlačítko na obrazovce.</string>
+    <string name="screen_is_unlocked">Dotyková obrazovka je odemčená.</string>
+    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je uzamčená. Klepnutím na tlačítko odemkněte.</string>
+    <string name="release_4_9">- Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n - Zavedení nového zásuvného modulu „Vehicle Metrics“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n - Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n - Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n - Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n - Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n - Přidána nová vrstva tras „Dirt Bike trails“\n\n - Opravena funkce „Automatický záznam trasy během navigace“\n\n - Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n - Opravena chybějící data snímačů pro aktuálně zaznamenávanou trasu\n\n - Přidány informace o okolních oblastech pro vybraný bod\n\n - Přidána rychlá akce pro kontrolu viditelnosti úprav OSM\n\n - Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n - Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout\n\n</string>
 </resources>
