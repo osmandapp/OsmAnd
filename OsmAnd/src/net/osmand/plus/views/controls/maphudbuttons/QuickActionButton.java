@@ -45,7 +45,7 @@ public class QuickActionButton extends MapButton {
 				boolean visible = layer.isWidgetVisibleForButton(this);
 				layer.setSelectedButton(visible ? null : this);
 			}
-			setInvalidated(true);
+			layer.invalidateRelatedButtons(QuickActionButton.this);
 		});
 	}
 

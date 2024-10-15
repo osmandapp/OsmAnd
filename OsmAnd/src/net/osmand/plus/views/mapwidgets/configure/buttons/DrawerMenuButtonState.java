@@ -18,7 +18,7 @@ public class DrawerMenuButtonState extends MapButtonState {
 
 	public DrawerMenuButtonState(@NonNull OsmandApplication app) {
 		super(app, MENU_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull

@@ -18,7 +18,7 @@ public class MyLocationButtonState extends MapButtonState {
 
 	public MyLocationButtonState(@NonNull OsmandApplication app) {
 		super(app, BACK_TO_LOC_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull

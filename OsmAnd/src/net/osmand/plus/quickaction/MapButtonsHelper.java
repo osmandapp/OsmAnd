@@ -600,6 +600,7 @@ public class MapButtonsHelper {
 
 	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
 		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		buttonState.onButtonStateRemoved();
 		updateActiveActions();
 		notifyUpdates();
 	}

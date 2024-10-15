@@ -80,14 +80,14 @@ public class CompassButtonState extends MapButtonState {
 	private CommonPreference<CompassVisibility> createVisibilityPref() {
 		CommonPreference<CompassVisibility> preference = (CommonPreference<CompassVisibility>) settings.getPreference("compass_visibility");
 		if (preference == null) {
-			preference = new EnumStringPreference<>(settings, "compass_visibility", ALWAYS_VISIBLE, CompassVisibility.values()) {
+			preference = addPreference(new EnumStringPreference<>(settings, "compass_visibility", ALWAYS_VISIBLE, CompassVisibility.values()) {
 
 				@Override
 				public CompassVisibility getModeValue(ApplicationMode mode) {
 					CompassVisibility customizationValue = CompassVisibility.getFromCustomization(app, mode);
 					return isSetForMode(mode) || customizationValue == null ? super.getModeValue(mode) : customizationValue;
 				}
-			}.makeProfile().cache();
+			}).makeProfile().cache();
 		}
 		return preference;
 	}
