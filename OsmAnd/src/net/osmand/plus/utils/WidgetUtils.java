@@ -16,10 +16,10 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.SimpleWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -48,7 +48,7 @@ public class WidgetUtils {
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = createDuplicateWidget(activity, widgetId, panel, widgetsFactory, appMode);
 			if (widgetInfo != null) {
-				if (addToNext != null && selectedWidget != null && widgetInfo instanceof SimpleWidgetInfo) {
+				if (addToNext != null && selectedWidget != null && widgetInfo.widget instanceof ISupportMultiRow) {
 					addWidgetToSpecificPlace(activity, widgetInfo, panel, appMode, selectedWidget, addToNext);
 				} else {
 					addWidgetToEnd(activity, widgetInfo, panel, appMode);

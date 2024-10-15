@@ -58,11 +58,11 @@ public class MapWidgetsFactory {
 	public MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel) {
 		switch (widgetType) {
 			case NEXT_TURN:
-				return new NextTurnWidget(mapActivity, false);
+				return new NextTurnWidget(mapActivity, customId, false, panel);
 			case SMALL_NEXT_TURN:
-				return new NextTurnWidget(mapActivity, true);
+				return new NextTurnWidget(mapActivity, customId, true , panel);
 			case SECOND_NEXT_TURN:
-				return new SecondNextTurnWidget(mapActivity);
+				return new SecondNextTurnWidget(mapActivity, customId, panel);
 			case COORDINATES_CURRENT_LOCATION:
 				return new CoordinatesCurrentLocationWidget(mapActivity);
 			case COORDINATES_MAP_CENTER:

@@ -1,12 +1,9 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,28 +22,22 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import net.osmand.plus.settings.enums.WidgetSize;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SimpleWidget extends TextInfoWidget {
+public abstract class SimpleWidget extends TextInfoWidget implements ISupportWidgetResizing, ISupportMultiRow {
 
 	private final SimpleWidgetState widgetState;
 
@@ -78,7 +67,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		findViews();
 		updateWidgetView();
 		view.setOnLongClickListener(v -> {
-			showContextWidgetMenu(v);
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), verticalWidget, nightMode);
 			return true;
 		});
 	}
@@ -193,77 +182,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 		updateInfo(null);
 		updateWidgetView();
-	}
-
-	public void showContextWidgetMenu(@NonNull View view) {
-		List<PopUpMenuItem> items = new ArrayList<>();
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		String widgetId = customId != null ? customId : widgetType.id;
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-		ApplicationMode appMode = settings.getApplicationMode();
-
-		if (widgetInfo != null) {
-			UiUtilities uiUtilities = app.getUIUtilities();
-			int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(isVerticalWidget() ? R.string.add_widget_to_the_left : R.string.add_widget_above)
-					.setIcon(uiUtilities.getPaintedIcon(isVerticalWidget() ? R.drawable.ic_action_add_item_left : R.drawable.ic_action_add_item_above, iconColor))
-					.setOnClickListener(item -> ConfigureWidgetsFragment.showInstance(mapActivity, widgetInfo.getWidgetPanel(), appMode, widgetId, false))
-					.create());
-
-			items.add(new PopUpMenuItem.Builder(app)
-					.setIcon(uiUtilities.getPaintedIcon(isVerticalWidget() ? R.drawable.ic_action_add_item_right : R.drawable.ic_action_add_item_below, iconColor))
-					.setTitleId(isVerticalWidget() ? R.string.add_widget_to_the_right : R.string.add_widget_below)
-					.setOnClickListener(item -> ConfigureWidgetsFragment.showInstance(mapActivity, widgetInfo.getWidgetPanel(), appMode, widgetId, true))
-					.create());
-
-			List<PopUpMenuItem> widgetActions = getWidgetActions();
-			if (!Algorithms.isEmpty(widgetActions)) {
-				items.addAll(widgetActions);
-			}
-
-			WidgetSettingsBaseFragment fragment = widgetType != null ? widgetType.getSettingsFragment(app, widgetInfo) : null;
-			if (fragment != null) {
-				items.add(new PopUpMenuItem.Builder(app)
-						.setTitleId(R.string.shared_string_settings)
-						.setOnClickListener(item -> {
-							Bundle args = new Bundle();
-							args.putString(KEY_WIDGET_ID, widgetInfo.key);
-							args.putString(KEY_APP_MODE, appMode.getStringKey());
-							FragmentManager manager = mapActivity.getSupportFragmentManager();
-							WidgetSettingsBaseFragment.showFragment(manager, args, null, fragment);
-						})
-						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
-						.showTopDivider(Algorithms.isEmpty(widgetActions))
-						.create());
-			}
-
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(R.string.shared_string_delete)
-					.setOnClickListener(item -> {
-						AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
-						builder.setTitle(getString(R.string.delete_widget));
-						builder.setMessage(R.string.delete_widget_description);
-						builder.setNegativeButton(R.string.shared_string_cancel, null)
-								.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-									widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, false, true);
-								});
-						builder.show();
-					})
-					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_delete_outlined, iconColor))
-					.showTopDivider(true)
-					.create());
-
-			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-			displayData.anchorView = view;
-			displayData.menuItems = items;
-			displayData.nightMode = nightMode;
-			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
-			displayData.showCompound = false;
-			displayData.customDropDown = false;
-			displayData.layoutId = R.layout.popup_menu_item_full_divider;
-			PopUpMenu.show(displayData);
-		}
 	}
 
 	@Nullable

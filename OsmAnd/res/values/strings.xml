@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
+	<string name="route_guidance">Route guidance</string>
     <string name="obd_widget_vehicle_speed">Vehicle speed</string>
     <string name="obd_widget_engine_speed">Engine speed</string>
     <string name="obd_nothing_found_description">Please check the following:\n
