@@ -92,7 +92,7 @@
 				android:layout_marginTop="@dimen/external_devices_empty_content_centre_margin"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:lineSpacingExtra="5sp"
-				android:text="@string/ant_plus_searching_text"
+				android:text="@string/obd_searching_text"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_list_text_size"
 				app:layout_constraintLeft_toLeftOf="parent"
@@ -111,7 +111,7 @@
 				android:lineSpacingExtra="5sp"
 				android:paddingStart="@dimen/content_padding_small"
 				android:paddingEnd="@dimen/content_padding_small"
-				android:text="@string/ant_plus_searching_text_description"
+				android:text="@string/obd_searching_text_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				app:layout_constraintLeft_toLeftOf="parent"
@@ -152,7 +152,7 @@
 				android:layout_marginTop="@dimen/external_devices_empty_content_centre_margin"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:lineSpacingExtra="5sp"
-				android:text="@string/ant_plus_nothing_found_text"
+				android:text="@string/obd_nothing_found_text"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_list_text_size"
 				app:layout_constraintLeft_toLeftOf="parent"
@@ -169,7 +169,7 @@
 				android:layout_marginEnd="@dimen/content_padding"
 				android:gravity="center"
 				android:lineSpacingExtra="5sp"
-				android:text="@string/ant_plus_nothing_found_description"
+				android:text="@string/obd_nothing_found_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				app:layout_constraintLeft_toLeftOf="parent"
@@ -209,11 +209,6 @@
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/paired_devices_list"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent" />
-
-			<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/found_devices_list"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent" />
 

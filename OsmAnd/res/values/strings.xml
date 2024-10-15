@@ -10,10 +10,27 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="obd_widget_vehicle_speed">Vehicle speed</string>
+    <string name="obd_widget_engine_speed">Engine speed</string>
+    <string name="obd_nothing_found_description">Please check the following:\n
+– Ensure Bluetooth is turned on\n
+– Vehicle engine is running\n
+– Make sure your device is within range of the scanner.</string>
+    <string name="obd_nothing_found_text">No scanners found</string>
+    <string name="obd_bluetooth_off_description">Turn on Bluetooth find and connect scanners.</string>
+    <string name="obd_searching_text_description">Please keep your device close to the scanner. Ensure the vehicle\'s engine is running.</string>
+    <string name="obd_searching_text">Searching for scanners</string>
+    <string name="obd_device_forget_sensor">Forget scanner</string>
+    <string name="obd_device_forget_sensor_description">Scanner will be removed from the list.
+You will be able to pair this scanner again at any time.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Vehicle info</string>
     <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
     <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step">1. Connect the scanner to your vehicle\'s OBD-II port.\n\n
+2. Turn on your vehicle\'s engine\n\n
+3. Enable Bluetooth on your device\n\n
+4. Tap \'%1$s\' and select your scanner from the list.</string>
     <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
     <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
     <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>
@@ -125,11 +142,11 @@
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_left_distance_desc">Shows distance vehicle can drive on left fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
-    <string name="obd_air_intake_temp">Intake air temperature</string>
-    <string name="obd_ambient_air_temp">Ambient air temperature</string>
+    <string name="obd_air_intake_temp">Intake temperature</string>
+    <string name="obd_ambient_air_temp">Ambient temperature</string>
     <string name="obd_battery_voltage">Battery voltage</string>
-    <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
-    <string name="obd_fuel_level">Fuel level</string>
+    <string name="obd_engine_coolant_temp">Coolant temperature</string>
+    <string name="obd_fuel_level">Fuel Efficiency</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
     <string name="obd_fuel_left_distance">Fuel left (distance)</string>

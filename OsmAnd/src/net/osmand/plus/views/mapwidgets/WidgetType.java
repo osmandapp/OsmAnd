@@ -110,15 +110,15 @@ public enum WidgetType {
 
 	AIDL_WIDGET("aidl_widget", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
-	OBD_SPEED("obd_speed", R.string.shared_string_speed, R.string.obd_speed_desc, R.drawable.widget_speed_day, R.drawable.widget_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_RPM("obd_rpm", R.string.obd_rpm, R.string.obd_rpm_desc, R.drawable.widget_sensor_speed_day, R.drawable.widget_sensor_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_SPEED("obd_speed", R.string.obd_widget_vehicle_speed, R.string.obd_speed_desc, R.drawable.widget_obd_speed_day, R.drawable.widget_obd_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_RPM("obd_rpm", R.string.obd_widget_engine_speed, R.string.obd_rpm_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_LEVEL("obd_fuel_level", R.string.obd_fuel_level, R.string.obd_fuel_level_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_LEFT_DISTANCE("obd_fuel_left_distance", R.string.obd_fuel_left_distance, R.string.obd_fuel_left_distance_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_CONSUMPTION_RATE("obd_fuel_consumption_rate", R.string.obd_fuel_consumption_rate, R.string.obd_fuel_consumption_rate_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_obd_temperature_coolant_day, R.drawable.widget_obd_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_LEVEL("obd_fuel_level", R.string.obd_fuel_level, R.string.obd_fuel_level_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_LEFT_DISTANCE("obd_fuel_left_distance", R.string.obd_fuel_left_distance, R.string.obd_fuel_left_distance_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_CONSUMPTION_RATE("obd_fuel_consumption_rate", R.string.obd_fuel_consumption_rate, R.string.obd_fuel_consumption_rate_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_VIN("obd_vin", R.string.obd_vin, R.string.obd_vin_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
