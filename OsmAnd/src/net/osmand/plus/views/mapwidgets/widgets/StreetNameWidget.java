@@ -226,14 +226,16 @@ public class StreetNameWidget extends MapWidget {
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield);
+				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
 		return false;
 	}
 
-	private boolean setShieldImage(@NonNull RoadShield shield) {
+	public static boolean setShieldImage(@NonNull RoadShield shield, @NonNull MapActivity mapActivity,
+	                                     @NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
 		String shieldValue = shield.getValue();
@@ -244,7 +246,7 @@ public class StreetNameWidget extends MapWidget {
 			return false;
 		}
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
-				.getSearchRequestWithAppliedCustomRules(storage, isNightMode());
+				.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 		for (int type : types) {
 			RouteTypeRule routeTypeRule = object.region.quickGetEncodingRule(type);
@@ -298,7 +300,7 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
-		ImageView imageView = new ImageView(view.getContext());
+		ImageView imageView = new ImageView(mapActivity);
 		int viewSize = AndroidUtils.dpToPx(app, 40f);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
 		int padding = AndroidUtils.dpToPx(app, 4f);
@@ -402,7 +404,7 @@ public class StreetNameWidget extends MapWidget {
 		return mapActivity.findViewById(R.id.street_name_widget_special_container);
 	}
 
-	private static class StreetNameWidgetParams {
+	static class StreetNameWidgetParams {
 
 		private final OsmandApplication app;
 		private final OsmandSettings settings;

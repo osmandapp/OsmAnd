@@ -18,6 +18,7 @@ import net.osmand.plus.views.controls.WidgetsPagerAdapter.PageViewHolder;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -110,38 +111,38 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	public void collectVisibleViews(@NonNull Map<Integer, List<View>> visibleViews,
 	                                @NonNull Set<MapWidgetInfo> widgets,
 	                                @NonNull ApplicationMode appMode) {
-		Map<Integer, List<TextInfoWidget>> textInfoWidgets = new TreeMap<>();
+		Map<Integer, List<MapWidget>> textInfoWidgets = new TreeMap<>();
 		for (MapWidgetInfo widgetInfo : widgets) {
 			if (widgetInfo.isEnabledForAppMode(appMode)) {
-				TextInfoWidget widget = (TextInfoWidget) widgetInfo.widget;
+				MapWidget widget = widgetInfo.widget;
 				addWidgetViewToPage(textInfoWidgets, widgetInfo.pageIndex, widget);
 			}
 		}
 
-		for (Map.Entry<Integer, List<TextInfoWidget>> entry : textInfoWidgets.entrySet()) {
+		for (Map.Entry<Integer, List<MapWidget>> entry : textInfoWidgets.entrySet()) {
 			List<View> widgetsViews = new ArrayList<>();
-			for (TextInfoWidget widget : entry.getValue()) {
+			for (MapWidget widget : entry.getValue()) {
 				if (widget.isViewVisible()) {
 					widgetsViews.add(widget.getView());
 				}
-				widget.updateBannerVisibility(false);
+				if (widget instanceof TextInfoWidget infoWidget) {
+					infoWidget.updateBannerVisibility(false);
+				}
 			}
 			if (Algorithms.isEmpty(widgetsViews)) {
-				TextInfoWidget widget = entry.getValue().get(0);
+				MapWidget widget = entry.getValue().get(0);
 				widgetsViews.add(widget.getView());
-				widget.updateBannerVisibility(textInfoWidgets.size() > 1);
+				if (widget instanceof TextInfoWidget infoWidget) {
+					infoWidget.updateBannerVisibility(textInfoWidgets.size() > 1);
+				}
 			}
 			visibleViews.put(entry.getKey(), widgetsViews);
 		}
 	}
 
-	private void addWidgetViewToPage(@NonNull Map<Integer, List<TextInfoWidget>> textInfoWidgets,
-	                                 int pageIndex, @NonNull TextInfoWidget widget) {
-		List<TextInfoWidget> widgetsViews = textInfoWidgets.get(pageIndex);
-		if (widgetsViews == null) {
-			widgetsViews = new ArrayList<>();
-			textInfoWidgets.put(pageIndex, widgetsViews);
-		}
+	private void addWidgetViewToPage(@NonNull Map<Integer, List<MapWidget>> textInfoWidgets,
+	                                 int pageIndex, @NonNull MapWidget widget) {
+		List<MapWidget> widgetsViews = textInfoWidgets.computeIfAbsent(pageIndex, k -> new ArrayList<>());
 		widgetsViews.add(widget);
 	}
 

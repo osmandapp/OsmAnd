@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/widget_bg"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/simple_widget_medium_height"
+	android:orientation="vertical"
+	android:paddingVertical="3dp"
+	android:paddingStart="12dp"
+	android:paddingEnd="16dp">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		tools:ignore="UselessParent">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/arrow_icon"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_gravity="center"
+			android:layout_marginEnd="12dp"
+			android:gravity="center"
+			app:srcCompat="@drawable/ic_action_remove_dark" />
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="top"
+					android:layout_weight="1"
+					android:orientation="horizontal">
+
+					<TextView
+						android:id="@+id/distance_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical|start"
+						android:layout_marginEnd="3dp"
+						android:gravity="start|center"
+						android:includeFontPadding="false"
+						android:maxLines="1"
+						android:textColor="@color/text_color_primary_light"
+						android:textSize="26sp"
+						tools:text="200" />
+
+					<TextView
+						android:id="@+id/distance_sub_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="start|center"
+						android:includeFontPadding="false"
+						android:maxLines="1"
+						android:textColor="@color/text_color_secondary_light"
+						android:textSize="26sp"
+						tools:text="m" />
+
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/map_exit_ref"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:background="@drawable/bg_navigation_widget_exit"
+					android:minWidth="@dimen/map_widget_height"
+					android:paddingHorizontal="8dp"
+					android:textColor="@color/card_and_list_background_light"
+					android:textSize="18sp"
+					android:visibility="gone"
+					tools:text="Exit 8"
+					tools:visibility="visible" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/street_name_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/map_shields_container"
+					android:layout_width="wrap_content"
+					android:layout_height="36dp"
+					android:layout_gravity="center"
+					android:layout_marginEnd="6dp"
+					android:gravity="center"
+					android:orientation="horizontal"/>
+
+				<TextView
+					android:id="@+id/street_text"
+					android:layout_width="wrap_content"
+					android:layout_height="32dp"
+					android:layout_gravity="center_vertical"
+					android:gravity="start|center"
+					android:includeFontPadding="false"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="@color/text_color_primary_light"
+					android:textSize="18sp"
+					tools:text="Street" />
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

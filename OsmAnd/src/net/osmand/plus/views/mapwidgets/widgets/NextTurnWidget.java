@@ -10,16 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;
 
 public class NextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	public NextTurnWidget(@NonNull MapActivity mapActivity, boolean horizontalMini) {
-		super(mapActivity, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, horizontalMini);
+	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId, boolean horizontalMini, @Nullable WidgetsPanel panel) {
+		super(mapActivity, customId, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, panel, horizontalMini);
 		setOnClickListener(getOnClickListener());
 	}
 
@@ -27,7 +29,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	 * Uncomment to test rendering
 	 */
 	@NonNull
-	private OnClickListener getOnClickListener() {
+	protected OnClickListener getOnClickListener() {
 		return new View.OnClickListener() {
 //			int i = 0;
 //			boolean leftSide = false;
@@ -56,9 +58,11 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 	}
 
 	@Override
-	public void updateInfo(@Nullable DrawSettings drawSettings) {
+	public void updateNavigationInfo(@Nullable DrawSettings drawSettings) {
 		boolean followingMode = routingHelper.isFollowingMode()
 				|| locationProvider.getLocationSimulation().isRouteAnimating();
+		StreetNameWidget.StreetNameWidgetParams params = new StreetNameWidget.StreetNameWidgetParams(mapActivity);
+		CurrentStreetName streetName = params.streetName;
 		TurnType turnType = null;
 		boolean deviatedFromRoute = false;
 		int turnImminent = 0;
@@ -72,12 +76,14 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 			} else {
 				NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
 				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
+					streetName = routingHelper.getCurrentName(r);
 					turnType = r.directionInfo.getTurnType();
 					nextTurnDistance = r.distanceTo;
 					turnImminent = r.imminent;
 				}
 			}
 		}
+		setStreetName(streetName);
 		setTurnType(turnType);
 		setTurnImminent(turnImminent, deviatedFromRoute);
 		setTurnDistance(nextTurnDistance);

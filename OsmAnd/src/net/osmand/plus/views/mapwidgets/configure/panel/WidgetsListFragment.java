@@ -273,7 +273,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			title.setText(widgetInfo.getTitle(app));
 
 			WidgetType widgetType = widgetInfo.getWidgetType();
-			WidgetGroup widgetGroup = widgetType == null ? null : widgetType.getGroup();
+			WidgetGroup widgetGroup = widgetType == null ? null : widgetType.getGroup(selectedPanel);
 			if (widgetGroup != null) {
 				TextView description = view.findViewById(R.id.description);
 				description.setText(widgetGroup.titleId);
@@ -371,9 +371,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	@Nullable
 	public static String getListItemName(Object item, @NonNull OsmandApplication app, boolean nightMode) {
-		if (item instanceof WidgetType) {
-			WidgetType widgetType = (WidgetType) item;
-			WidgetGroup widgetGroup = widgetType.getGroup();
+		if (item instanceof WidgetType widgetType) {
+			WidgetGroup widgetGroup = widgetType.getGroup(widgetType.getPanel(app.getSettings()));
 			return widgetGroup != null
 					? String.valueOf(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode))
 					: app.getString(widgetType.titleId);
@@ -396,7 +395,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		List<WidgetType> individualWidgets = new ArrayList<>();
 		List<WidgetType> result = new ArrayList<>();
 		for (WidgetType widget : widgets) {
-			WidgetGroup group = widget.getGroup();
+			WidgetGroup group = widget.getGroup(selectedPanel);
 			if (group != null && !visitedGroups.contains(group)) {
 				visitedGroups.add(group);
 				result.add(widget);
@@ -412,7 +411,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		for (int i = 0; i < widgets.size(); i++) {
 			WidgetType widgetType = widgets.get(i);
-			WidgetGroup widgetGroup = widgetType.getGroup();
+			WidgetGroup widgetGroup = widgetType.getGroup(selectedPanel);
 
 			View view = inflater.inflate(R.layout.configure_screen_widget_item, availableWidgetsContainer, false);
 

@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
+    <string name="route_guidance">Route guidance</string>
     <string name="release_4_9">
         • Added a full-screen gallery viewer for Wikimedia images\n\n
         • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
