@@ -54,7 +54,7 @@ actual fun String.format(vararg args: Any?): String {
 				}
 			}
 
-			// Get the argument type (e.g., 'd' or 'f')
+			// Get the argument type (e.g., 'd', 'f', ...)
 			if (formatSpecifierStart < this.length) {
 				argType = this[formatSpecifierStart]
 			}
@@ -67,7 +67,7 @@ actual fun String.format(vararg args: Any?): String {
 					index = formatSpecifierStart
 				}
 
-				'd', 'f' -> {
+				'd', 'f', 'x', 'X' -> {
 					val formatStringBuilder = StringBuilder()
 					formatStringBuilder.append('%')
 					width?.let { formatStringBuilder.append(it) }
