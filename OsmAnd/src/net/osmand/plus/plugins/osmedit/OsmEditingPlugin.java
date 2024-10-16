@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
@@ -88,7 +89,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
@@ -346,7 +346,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
-			isEditable = OsmUtils.isOsmUrlAvailable((MapObject) selectedObj);
+			isEditable = ObfConstants.isOsmUrlAvailable((MapObject) selectedObj);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem(MAP_CONTEXT_MENU_CREATE_POI)
@@ -602,13 +602,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, Object object) {
 		if (object instanceof Amenity amenity) {
-			String link = OsmUtils.getOsmUrlForId(amenity);
+			String link = ObfConstants.getOsmUrlForId(amenity);
 			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link,
 						0, false, null, true, 0, true, null, false);
 			}
 		} else if (object instanceof RenderedObject renderedObject) {
-			String link = OsmUtils.getOsmUrlForId(renderedObject);
+			String link = ObfConstants.getOsmUrlForId(renderedObject);
 			if (!Algorithms.isEmpty(link)) {
 				menuBuilder.buildRow(view, R.drawable.ic_action_info_dark, null, link, 0, false,
 						null, true, 0, true, null, false);
