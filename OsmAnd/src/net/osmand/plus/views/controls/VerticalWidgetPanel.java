@@ -22,17 +22,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -232,16 +232,16 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateValueAlign(visibleViewsInRowCount <= 1);
+			if(widgetInfo.widget instanceof ISupportMultiRow supportMultiRow){
+				supportMultiRow.updateValueAlign(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
 
 	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateFullRowState(visibleViewsInRowCount <= 1);
+			if(widgetInfo.widget instanceof ISupportMultiRow supportMultiRow){
+				supportMultiRow.updateFullRowState(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
@@ -390,12 +390,10 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		}
 
 		private void setupWidgetSize(@NonNull MapWidgetInfo firstWidgetInfo, @NonNull MapWidgetInfo widgetInfo) {
-			if (firstWidgetInfo.widget instanceof SimpleWidget && widgetInfo.widget instanceof SimpleWidget) {
-				SimpleWidget firstSimpleWidget = (SimpleWidget) firstWidgetInfo.widget;
-				SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-				if (firstSimpleWidget.getWidgetSizePref().get() != simpleWidget.getWidgetSizePref().get()) {
-					simpleWidget.getWidgetSizePref().set(firstSimpleWidget.getWidgetSizePref().get());
-					simpleWidget.recreateView();
+			if (firstWidgetInfo.widget instanceof ISupportWidgetResizing firstResizableWidget && widgetInfo.widget instanceof ISupportWidgetResizing secondResizableWidget) {
+				if (firstResizableWidget.getWidgetSizePref().get() != secondResizableWidget.getWidgetSizePref().get()) {
+					secondResizableWidget.getWidgetSizePref().set(firstResizableWidget.getWidgetSizePref().get());
+					secondResizableWidget.recreateView();
 				}
 			}
 		}

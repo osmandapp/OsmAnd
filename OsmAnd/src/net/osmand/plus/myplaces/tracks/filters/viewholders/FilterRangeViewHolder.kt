@@ -204,7 +204,7 @@ open class FilterRangeViewHolder(
 	open fun getDisplayMaxValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMaxValue())
-		return formattedValue.valueSrc.toInt()
+		return ceil(formattedValue.valueSrc).toInt()
 	}
 
 	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {

@@ -1035,8 +1035,7 @@
     <string name="gpx_option_reverse_route">ஜிபிஎக்ஸ் திசையை பின்னோக்கு</string>
     <string name="gpx_option_destination_point">நடப்பு இலக்கு பயன்படுத்தவும்</string>
     <string name="gpx_option_from_start_point">முழு பாதையில் செல்க</string>
-    <string name="switch_to_vector_map_to_see">"
-\n"</string>
+    <string name="switch_to_vector_map_to_see">\n\n</string>
     <string name="choose_audio_stream">குரல் வழிநடத்துதல் வெளியீடு</string>
     <string name="voice_stream_voice_call">தொலைபேசி அழைப்பு ஆடியோ (கார் BT ஸ்டீரியோவை குறுக்கிடவும்)</string>
     <string name="voice_stream_notification">அறிவிப்பு ஆடியோ</string>

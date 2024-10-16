@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.MenuCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -27,14 +26,12 @@ open class OBDDevicesAdapter(
 	RecyclerView.Adapter<FoundDeviceViewHolder>() {
 	protected val plugin = PluginsHelper.getPlugin(
 		VehicleMetricsPlugin::class.java)
-	var items: List<Any> = ArrayList()
+	var items: List<BTDeviceInfo> = listOf()
 		@SuppressLint("NotifyDataSetChanged")
 		set(value) {
 			field = value
 			notifyDataSetChanged()
-
 		}
-	protected var uiUtils: UiUtilities = app.uiUtilities
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoundDeviceViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, nightMode)
@@ -53,7 +50,7 @@ open class OBDDevicesAdapter(
 		holder.description.visibility = View.VISIBLE
 		holder.description.text = device.address
 		holder.description.gravity = Gravity.CENTER_VERTICAL
-		holder.itemView.setOnClickListener { v: View? ->
+		holder.itemView.setOnClickListener { _: View? ->
 			deviceClickListener?.onDeviceClicked(device)
 		}
 		holder.icon.setImageDrawable(
@@ -62,7 +59,7 @@ open class OBDDevicesAdapter(
 				nightMode))
 		holder.menuIcon.visibility = View.VISIBLE
 		holder.menuIcon.setOnClickListener { v: View -> showOptionsMenu(v, device) }
-		holder.itemView.setOnClickListener { v: View? ->
+		holder.itemView.setOnClickListener { _: View? ->
 			if (plugin != null /* && plugin.isDevicePaired(device)*/) {
 				deviceClickListener?.onSettings(device)
 			}
@@ -73,7 +70,7 @@ open class OBDDevicesAdapter(
 
 	protected open fun showOptionsMenu(view: View, device: BTDeviceInfo) {
 		val optionsMenu = PopupMenu(view.context, view)
-		(optionsMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
+		optionsMenu.setForceShowIcon(true)
 		MenuCompat.setGroupDividerEnabled(optionsMenu.menu, true)
 		val connectedDevice = plugin?.getConnectedDeviceInfo()
 		val isConnected = connectedDevice != null && Algorithms.stringsEqual(
@@ -86,7 +83,7 @@ open class OBDDevicesAdapter(
 			app.uiUtilities.getIcon(
 				if (isConnected) R.drawable.ic_action_obd2_connector_disconnect else R.drawable.ic_action_obd2_connector_disable,
 				menuIconColor))
-		enableDisableItem.setOnMenuItemClickListener { item: MenuItem? ->
+		enableDisableItem.setOnMenuItemClickListener { _: MenuItem? ->
 			if (isConnected) {
 				deviceClickListener?.onDisconnect(device)
 			} else {
@@ -102,32 +99,31 @@ open class OBDDevicesAdapter(
 			app.uiUtilities.getIcon(
 				R.drawable.ic_action_settings_outlined,
 				menuIconColor))
-		settingsItem.setOnMenuItemClickListener { item: MenuItem? ->
+		settingsItem.setOnMenuItemClickListener { _: MenuItem? ->
 			deviceClickListener?.onSettings(device)
 			optionsMenu.dismiss()
 			true
 		}
-//		val renameItem = optionsMenu.menu.add(
-//			1, 3, Menu.NONE,
-//			R.string.shared_string_rename)
-//		renameItem.setIcon(
-//			app.uiUtilities.getIcon(
-//				R.drawable.ic_action_edit_outlined,
-//				menuIconColor))
-//		renameItem.setOnMenuItemClickListener { item: MenuItem? ->
-//			deviceClickListener?.onRename(device)
-//			optionsMenu.dismiss()
-//			true
-//		}
+		val renameItem = optionsMenu.menu.add(
+			1, 3, Menu.NONE,
+			R.string.shared_string_rename)
+		renameItem.setIcon(
+			app.uiUtilities.getIcon(
+				R.drawable.ic_action_edit_outlined,
+				menuIconColor))
+		renameItem.setOnMenuItemClickListener { item: MenuItem? ->
+			deviceClickListener?.onRename(device)
+			optionsMenu.dismiss()
+			true
+		}
 		val forgetItem = optionsMenu.menu.add(
 			2, 4, Menu.NONE,
 			R.string.external_device_menu_forget)
-		forgetItem.setIcon(R.drawable.ic_action_sensor_remove)
 		forgetItem.setIcon(
 			app.uiUtilities.getIcon(
-				R.drawable.ic_action_sensor_remove,
+				R.drawable.ic_action_obd2_connector_disconnect,
 				menuIconColor))
-		forgetItem.setOnMenuItemClickListener { item: MenuItem? ->
+		forgetItem.setOnMenuItemClickListener { _: MenuItem? ->
 			deviceClickListener?.onForget(device)
 			optionsMenu.dismiss()
 			true

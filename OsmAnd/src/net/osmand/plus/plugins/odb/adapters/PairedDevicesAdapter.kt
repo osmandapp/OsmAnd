@@ -61,7 +61,5 @@ class PairedDevicesAdapter(
 
 	interface PairedDevicesMenuListener {
 		fun onConnect(device: BTDeviceInfo)
-		fun onSave(device: BTDeviceInfo)
-		fun onForget(device: BTDeviceInfo)
 	}
 }

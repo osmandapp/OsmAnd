@@ -5940,7 +5940,7 @@
     <string name="obd_fuel_consumption_rate">Consumo de combustible</string>
     <string name="obd_fuel_consumption_rate_desc">Muestra el consumo de combustible del vehículo según el OBD y la ubicación</string>
     <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
-    <string name="obd_plugin_description">Accede a la información de su vehículo a través del protocolo OBD</string>
+    <string name="obd_plugin_description">Supervise las métricas clave del vehículo utilizando el protocolo OBD-II. Acceda a datos que incluyen: * Velocidad del motor * Consumo de combustible * Combustible restante * Distancia desde el arranque del motor * Temperatura de admisión * Temperatura ambiente * Temperatura del refrigerante * Velocidad del vehículo * Porcentaje de batería</string>
     <string name="obd_support">Soporte OBD</string>
     <string name="unit_volt">V</string>
     <string name="shared_string_obd">OBD</string>
@@ -5981,4 +5981,14 @@
     <string name="screen_is_unlocked">La pantalla táctil está desbloqueada.</string>
     <string name="screen_is_locked_by_action_button">La pantalla táctil está bloqueada. Pulse el botón para desbloquearla.</string>
     <string name="screen_is_locked_by_external_button">La pantalla táctil está bloqueada. Para desbloquearla, presione el botón %1$s o pulse el botón en la pantalla.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Información del vehículo</string>
+    <string name="connect_obd_instructions_title">OsmAnd admite conexiones Bluetooth a escáneres OBD-II.</string>
+    <string name="obd_how_to_connect">¿Cómo conectarse?:</string>
+    <string name="connect_obd_instructions_step1">1. Conecte el escáner al puerto OBD-II de su vehículo.</string>
+    <string name="connect_obd_instructions_step2">2. Encienda el motor de su vehículo</string>
+    <string name="connect_obd_instructions_step3">3. Habilite el Bluetooth en su dispositivo</string>
+    <string name="connect_obd_instructions_step4">4. Pulse “Conectar” y seleccione su escáner de la lista.</string>
+    <string name="learn_more_about_obd_sensors">Obtenga más información sobre los sensores.</string>
+    <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
 </resources>

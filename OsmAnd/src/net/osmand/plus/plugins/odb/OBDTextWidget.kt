@@ -25,7 +25,7 @@ class OBDTextWidget @JvmOverloads constructor(
 	init {
 		val obdDataWidgetType: OBDTypeWidget
 		var formatter = OBDComputerWidgetFormatter()
-		var averageTimeSeconds = 15
+		var averageTimeSeconds = 0
 		when(fieldType) {
 			RPM -> {
 				obdDataWidgetType = OBDTypeWidget.RPM

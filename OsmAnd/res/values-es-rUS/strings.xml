@@ -5968,7 +5968,7 @@
     <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
     <string name="quick_action_finish_trip_recording_summary">Un botón que guarda la traza GPX y finaliza la grabación del viaje.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Grabar viaje y continuar</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Grabación de viaje y continuar</string>
     <string name="quick_action_new_trip_segment">Un botón que inicia un nuevo segmento en la grabación actual de la traza GPX.</string>
     <string name="help_article_personal_color_palette_schemes_name">Esquemas de colores</string>
     <string name="movies_list">Listado de videos</string>

@@ -18,9 +18,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 
-public class TextInfoWidget extends MapWidget {
+public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 
 	protected static final String NO_VALUE = "—";
 

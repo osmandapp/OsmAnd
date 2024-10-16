@@ -19,6 +19,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class MapButtonState {
 
 	protected final OsmandApplication app;
@@ -26,6 +29,7 @@ public abstract class MapButtonState {
 	protected final UiUtilities uiUtilities;
 
 	protected final String id;
+	protected final List<CommonPreference<?>> allPreferences;
 	protected final CommonPreference<String> iconPref;
 	protected final CommonPreference<Integer> sizePref;
 	protected final CommonPreference<Float> opacityPref;
@@ -36,11 +40,12 @@ public abstract class MapButtonState {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.uiUtilities = app.getUIUtilities();
+		this.allPreferences = new ArrayList<>();
 
-		this.iconPref = settings.registerStringPreference(id + "_icon", null).makeProfile().cache();
-		this.sizePref = settings.registerIntPreference(id + "_size", -1).makeProfile().cache();
-		this.opacityPref = settings.registerFloatPreference(id + "_opacity", -1).makeProfile().cache();
-		this.cornerRadiusPref = settings.registerIntPreference(id + "_corner_radius", -1).makeProfile().cache();
+		this.iconPref = addPreference(settings.registerStringPreference(id + "_icon", null)).makeProfile().cache();
+		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
+		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
+		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
 	}
 
 	@NonNull
@@ -142,6 +147,22 @@ public abstract class MapButtonState {
 		opacityPref.setModeValue(toMode, opacityPref.getModeValue(fromMode));
 		cornerRadiusPref.setModeValue(toMode, cornerRadiusPref.getModeValue(fromMode));
 		getVisibilityPref().setModeValue(toMode, getVisibilityPref().getModeValue(fromMode));
+	}
+
+	public void onButtonStateRemoved() {
+		settings.removePreferences(allPreferences);
+	}
+
+	@NonNull
+	protected <T> CommonPreference<T> addPreference(@NonNull CommonPreference<T> preference) {
+		allPreferences.add(preference);
+		return preference;
+	}
+
+	@NonNull
+	protected FabMarginPreference addPreference(@NonNull FabMarginPreference fabMarginPreference) {
+		allPreferences.addAll(fabMarginPreference.getInternalPrefs());
+		return fabMarginPreference;
 	}
 
 	public boolean hasCustomAppearance() {

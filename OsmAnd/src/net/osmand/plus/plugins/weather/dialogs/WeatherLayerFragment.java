@@ -138,14 +138,12 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			});
 
 			slider.addOnChangeListener((slider_, newValue, fromUser) -> {
-				if (fromUser) {
+				if (fromUser && !isSliderDragging) {
+					weatherBand.getAlphaPreference().set(newValue);
 					tvCurrentValue.setText(formatAlpha(newValue));
-					if (!isSliderDragging) {
-						weatherBand.getAlphaPreference().set(newValue);
-						WeatherTileResourcesManager weatherTileResourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
-						if (weatherTileResourcesManager != null) {
-							weatherTileResourcesManager.clearDbCache(System.currentTimeMillis() + MAX_FORECAST_DAYS * MS_IN_DAY);
-						}
+					WeatherTileResourcesManager weatherTileResourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
+					if (weatherTileResourcesManager != null) {
+						weatherTileResourcesManager.clearDbCache(System.currentTimeMillis() + MAX_FORECAST_DAYS * MS_IN_DAY);
 					}
 				}
 			});

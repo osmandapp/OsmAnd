@@ -5797,7 +5797,7 @@
     <string name="obd_fuel_left_distance_desc">Birtir vegalengdina í gegnum OBD-skynjara sem farartæki getur keyrt með því eldsneyti sem eftir er</string>
     <string name="obd_fuel_type_desc">Birtir gerð eldsneytis á farartæki í gegnum OBD-skynjara</string>
     <string name="obd_fuel_consumption_rate_desc">Birtir eldsneytiseyðslu farartækis út frá OBD-skynjara og staðsetningu</string>
-    <string name="obd_plugin_description">Gefur aðgang að upplýsingum farartækis í gegnum OBD-samskiptamáta</string>
+    <string name="obd_plugin_description">Gefur aðgang að upplýsingum farartækis í gegnum OBD-II samskiptamáta. Fáðu aðgang að gögnum á borð við: * Snúningshraða vélar * Eldsnytiseyðslu* Eldsneytisbirgðum * Vegalengd síðan vél var ræst * Inntakshita * Umhverfishita * Kælihita * Hraða farartækis * Hleðsluprósentu rafhlöðu</string>
     <string name="obd_fuel_type_hybrid_diesel">Tvinn-dísel</string>
     <string name="obd_fuel_type_hybrid_electric">Tvinn-rafmagns</string>
     <string name="obd_fuel_type_bifuel_ethanol">Tveggja eldsneytistegunda farartæki sem keyrir á etanóli</string>
@@ -5828,4 +5828,17 @@
     <string name="quick_action_save_recorded_trip_and_continue_summary">Hnappur til að vista fyrirliggjandi skráða ferð sem GPX-skrá og halda óhindrað áfram skráningu nýs ferils.</string>
     <string name="quick_action_start_pause_recording">Hnappur til að byrja, setja í bið eða halda áfram með skráningu GPX-ferils.</string>
     <string name="daynight_mode_sensor_summary">Notar ljósnema tækisins til að skipta á milli ljósra og dökkra þema miðað við styrk umhverfislýsingar.</string>
+    <string name="connect_obd_instructions_step3">3. Virkjaðu Bluetooth á tækinu þínu</string>
+    <string name="screen_is_locked_by_action_button">Snertiskjárinn er læstur. Ýttu á hnapp til að aflæsa.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Upplýsingar farartækis</string>
+    <string name="connect_obd_instructions_title">OsmAnd styður Bluetooth-tengingar við OBD-II skanna.</string>
+    <string name="obd_how_to_connect">Hvernig skal tengjast:</string>
+    <string name="connect_obd_instructions_step1">1. Tengdu skannann við OBD-II gátt farartækisins.</string>
+    <string name="connect_obd_instructions_step2">2. Ræstu vél farartækisins</string>
+    <string name="connect_obd_instructions_step4">4. Ýttu á \'Tengjast,\' og veldu skannann þinn úr listanum.</string>
+    <string name="learn_more_about_obd_sensors">Læra meira um skynjara.</string>
+    <string name="screen_is_locked_by_external_button">Snertiskjárinn er læstur. Til að aflæsa honum skaltu ýta á %1$s-hnappinn eða hnappinn á skjánum.</string>
+    <string name="screen_is_unlocked">Snertiskjárinn er ólæstur.</string>
+    <string name="obd_fuel_left_liters">Eldsneyti eftir (lítrar)</string>
 </resources>

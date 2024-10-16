@@ -37,6 +37,8 @@ class GpxDatabase {
 		val GPX_MAX_COLUMN_VALUE = "SELECT MAX(%s) FROM $GPX_TABLE_NAME"
 		val CHANGE_NULL_TO_EMPTY_STRING_QUERY_PART =
 			"case when %1\$s is null then '' else %1\$s end as %1\$s"
+		val CHANGE_NULL_TO_EMPTY_GROUP_CONDITION_STRING_QUERY_PART =
+			"case when %1\$s is null then '' else %1\$s end"
 		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s NOT NULL AND %1\$s <> '' "
 		val GET_ITEM_COUNT_COLLECTION_BASE =
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
@@ -304,6 +306,8 @@ class GpxDatabase {
 	): List<StringIntPair> {
 		val column1 =
 			if (includeEmptyValues) CHANGE_NULL_TO_EMPTY_STRING_QUERY_PART.format(columnName) else columnName
+		val group =
+			if (includeEmptyValues) CHANGE_NULL_TO_EMPTY_GROUP_CONDITION_STRING_QUERY_PART.format(columnName) else columnName
 		val includeEmptyValuesPart =
 			if (includeEmptyValues) "" else INCLUDE_NON_NULL_COLUMN_CONDITION.format(columnName)
 		val orderBy = if (sortByName) columnName else TMP_NAME_COLUMN_COUNT
@@ -311,7 +315,7 @@ class GpxDatabase {
 		val query = GET_ITEM_COUNT_COLLECTION_BASE.format(
 			column1,
 			includeEmptyValuesPart,
-			columnName,
+			group,
 			orderBy,
 			sortDirection
 		)
