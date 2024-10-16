@@ -5950,7 +5950,7 @@
     <string name="obd_fuel_consumption_rate">Расход топлива</string>
     <string name="obd_fuel_left_distance">Оставшееся топливо (расстояние)</string>
     <string name="obd_fuel_type">Тип топлива</string>
-    <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Скорость двигателя * Расход топлива * Оставшееся количество топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость ТС * Процент заряда батареи.</string>
+    <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Обороты двигателя * Расход топлива * Оставшееся количество топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость ТС * Процент заряда батареи.</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру окружающего воздуха по датчику OBD</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя по датчику OBD</string>
     <string name="obd_fuel_level_desc">Виджет показывает уровень топлива в транспортном средстве по датчику OBD</string>
@@ -6007,4 +6007,16 @@
     <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель ТС работает.</string>
     <string name="obd_searching_text">Поиск сканеров</string>
     <string name="obd_device_forget_sensor_description">Сканер будет удален из списка. Вы сможете снова подключить этот сканер в любое время.</string>
+    <string name="obd_fuel_consumption_rate_l_h">Расход топлива (л/ч)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Показывает расход топлива транспортного средства на основе расчетов (л/ч)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Показывает расход топлива транспортного средства на основе показаний датчика (л/ч)</string>
+    <string name="obd_fuel_level_liter">Уровень топлива (л)</string>
+    <string name="obd_fuel_level_percent">Уровень топлива (%)</string>
+    <string name="obd_fuel_left_percent">Остаток топлива (%)</string>
+    <string name="obd_fuel_left_liter">Остаток топлива (л)</string>
+    <string name="obd_fuel_left_km">Остаток топлива (км)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Расход топлива (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Расход топлива л/ч</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Расход топлива %/ч</string>
+    <string name="obd_fuel_consumption_rate_sensor">Расход топлива (датчик)</string>
 </resources>
