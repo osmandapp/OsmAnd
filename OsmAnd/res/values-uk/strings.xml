@@ -5991,4 +5991,6 @@
     <string name="screen_is_unlocked">Сенсорний екран розблоковано.</string>
     <string name="screen_is_locked_by_action_button">Сенсорний екран заблоковано. Натисніть на кнопку, щоб розблокувати.</string>
     <string name="screen_is_locked_by_external_button">Сенсорний екран заблоковано. Для розблокування натисніть кнопку %1$s або торкніться кнопки на екрані.</string>
+    <string name="route_guidance">Маршрутні вказівки</string>
+    <string name="route_guidance_desc">Забезпечує прокладання маршруту в реальному часі, включаючи відстань до наступного повороту, назву дороги, поточну назву вулиці та інформацію про смугу руху. Віджети активні під час навігації.</string>
 </resources>
