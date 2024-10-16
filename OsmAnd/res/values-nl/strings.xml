@@ -2325,13 +2325,7 @@
 \n OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteun je het project, het ontwikkelen van nieuwe functies, en ontvang je de laatste updates.
 \n
 \n Een paar van de belangrijkste functies:</string>
-    <string name="osmand_plus_extended_description_part2">" Navigatie
-\n • Online (snel) of offline (zonder roamingkosten in het buitenland)
-\n • Stap-voor-stap stembegeleiding (met opgenomen of TTS-stemmen)
-\n • Optioneel met rijstrookindicatie, weergave van straatnamen en geschatte aankomsttijd
-\n • Ondersteuning voor tussenstops op de route
-\n • Automatische herberekening bij het afwijken van de route
-\n • Zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
+    <string name="osmand_plus_extended_description_part2">" Navigatie\n\n • Online (snel) of offline (zonder roamingkosten in het buitenland)\n\n • Stap-voor-stap stembegeleiding (met opgenomen of TTS-stemmen)\n\n • Optioneel met rijstrookindicatie, weergave van straatnamen en geschatte aankomsttijd\n\n • Ondersteuning voor tussenstops op de route\n\n • Automatische herberekening bij het afwijken van de route\n\n • Zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
     <string name="osmand_plus_extended_description_part3">Kaartweergave
 \n • Positie en richting tonen
 \n • Kaart draaien in kompas- of bewegingsrichting
