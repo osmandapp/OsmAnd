@@ -1200,7 +1200,7 @@
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
     <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu a mýto</string>
+    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
     <string name="rendering_attr_showCycleRoutes_name">Cyklotrasy</string>
@@ -2276,27 +2276,8 @@
 \n • Voliteľné nahrávanie výletu do GPX súboru (lokálneho alebo online služby)
 \n • Voliteľné zobrazenie rýchlosti a nadmorskej výšky
 \n • Zobrazenie vrstevníc a tieňovania svahov (s doplnkovými modulmi)</string>
-    <string name="osmand_plus_extended_description_part7">Prispievajte priamo do OpenStreetMap
-\n • Hláste chyby v údajoch
-\n • Odosielajte GPX stopy do OSM priamo z aplikácie
-\n • Pridajte body záujmu a priamo ich odošlite do OSM (alebo neskôr, ak ste offline)
-\n • Voliteľné nahrávanie výletu na pozadí (keď je zariadenie v režime spánku)
-\n OsmAnd je aktívne vyvíjaný slobodný softvér. Každý môže prispieť do aplikácie hlásením chýb, vylepšením prekladu alebo programovaním nových funkcií. Projekt tiež závisí od finančných príspevkov na vývoj a testovanie nových funkcií.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Približná kvalita pokrytia máp: 
-\n • Západná Európa: **** 
-\n • Východná Európa: *** 
-\n • Rusko: *** 
-\n • Severná Amerika: *** 
-\n • Južná Amerika: ** 
-\n • Ázia: ** 
-\n • Japonsko a Kórea: *** 
-\n • Blízky Východ: ** 
-\n • Afrika: ** 
-\n • Antarktída: * 
-\n Väčšina krajín sveta je k dispozícii na stiahnutie. 
-\n Od Afganistanu po Zimbabwe, od Austrálie po USA. Argentína, Brazília, Kanada, Francúzsko, Nemecko, Mexiko, Spojené kráľovstvo, Španielsko, Slovensko, …
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Prispievajte priamo do OpenStreetMap\n • Hláste chyby v údajoch\n • Odosielajte GPX stopy do OSM priamo z aplikácie\n • Pridajte body záujmu a priamo ich odošlite do OSM (alebo neskôr, ak ste offline)\n • Voliteľné nahrávanie výletu na pozadí (keď je zariadenie v režime spánku)\n OsmAnd je aktívne vyvíjaný slobodný softvér. Každý môže prispieť do aplikácie hlásením chýb, vylepšením prekladu alebo programovaním nových funkcií. Projekt tiež závisí od finančných príspevkov na vývoj a testovanie nových funkcií.</string>
+    <string name="osmand_plus_extended_description_part8">Približná kvalita pokrytia máp:\n • Západná Európa: ****\n • Východná Európa: ***\n • Rusko: ***\n • Severná Amerika: ***\n • Južná Amerika: **\n • Ázia: **\n • Japonsko a Kórea: ***\n • Blízky Východ: **\n • Afrika: **\n • Antarktída: *\n Väčšina krajín sveta je k dispozícii na stiahnutie.\n Od Afganistanu po Zimbabwe, od Austrálie po USA. Argentína, Brazília, Kanada, Francúzsko, Nemecko, Mexiko, Spojené kráľovstvo, Španielsko, Slovensko, …</string>
     <string name="restore_purchases">Obnoviť nákupy</string>
     <string name="depth_contour_descr">Hĺbkové vrstevnice (izobaty) a značky v moriach.</string>
     <string name="sea_depth_thanks">Ďakujeme za zakúpenie \"Námorných hĺbkových vrstevníc\"</string>
@@ -4551,15 +4532,7 @@
     <string name="map_widget_current_speed">Súčasná rýchlosť</string>
     <string name="page_number">Strana %1$s</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Stredne pokročilí</string>
-    <string name="release_4_2">• Prepracovanie nástrojov na obrazovke: nový vzhľad, zoskupenie na stránky, možnosť zmeny poradia a kombinácií ako potrebujete.
-\n
-\n • Turistické / cyklistické / cestovné trasy: stlačte symbol trasy a získajte informácie o trase.
-\n
-\n • Skupiny obľúbených bodov: nastavte predvolený vzhľad pre nové body v skupine.
-\n
-\n • Opravy: automatická aktualizácia online dlaždíc
-\n
-\n</string>
+    <string name="release_4_2">• Prepracovanie nástrojov na obrazovke: nový vzhľad, zoskupenie na stránky, možnosť zmeny poradia a kombinácií ako potrebujete.\n\n • Turistické / cyklistické / cestovné trasy: stlačte symbol trasy a získajte informácie o trase.\n\n • Skupiny obľúbených bodov: nastavte predvolený vzhľad pre nové body v skupine.\n\n • Opravy: automatická aktualizácia online dlaždíc</string>
     <string name="av_def_action_choose">Na vyžiadanie</string>
     <string name="street_name_widget_desc">Nástroj Názov ulice zobrazuje názov aktuálnej ulice s priamou šípkou alebo názov nasledujúcej ulice spolu so šípkou označujúcou nasledovné zabočenie.</string>
     <string name="coordinates_widget_desc">Zobrazuje zemepisné súradnice aktuálnej polohy.</string>
@@ -4804,31 +4777,7 @@
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, frekvencia pedálovania a srdcový tep.</string>
     <string name="external_sensors_support">Podpora externých senzorov</string>
-    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy verzie 2 (OpenGL), aj s pohľadom 2.5D
-\n
-\n • Plynulá animácia zmien polohy počas pohybu
-\n
-\n • Nové nástroje pre súradnice stredu mapy a nadmorskej výšky pre zemepisné polohy
-\n
-\n • \"Vzdialenosť k označenému bodu\": pridané možnosti veľkosti textu
-\n
-\n • Nástroj \"Mapové značky\": pridaná možnosť zmeny správania po kliku
-\n
-\n • Opravená možnosť \"Umiestnenie polohy\"
-\n
-\n • GPX: pridaná podpora pre značky \"link\", \"cmt\", \"desc\" a pre vlastné rozšírenia
-\n
-\n • Preusporiadaný zoznam \"Námorných máp\"
-\n
-\n • Pridaná podpora pre senzory ANT+
-\n
-\n • Pridaná možnosť vypnutia UUID pre sťahovanie
-\n
-\n • Nastaviteľná predpoveď pre čas výletu počas chôdze/turistike/behu
-\n
-\n • Opravený výstup zvuku a správanie ovládača hlasitosti
-\n
-\n</string>
+    <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy verzie 2 (OpenGL), aj s pohľadom 2.5D\n\n • Plynulá animácia zmien polohy počas pohybu\n\n • Nové nástroje pre súradnice stredu mapy a nadmorskej výšky pre zemepisné polohy\n\n • \"Vzdialenosť k označenému bodu\": pridané možnosti veľkosti textu\n\n • Nástroj \"Mapové značky\": pridaná možnosť zmeny správania po kliku\n\n • Opravená možnosť \"Umiestnenie polohy\"\n\n • GPX: pridaná podpora pre značky \"link\", \"cmt\", \"desc\" a pre vlastné rozšírenia\n\n • Preusporiadaný zoznam \"Námorných máp\"\n\n • Pridaná podpora pre senzory ANT+\n\n • Pridaná možnosť vypnutia UUID pre sťahovanie\n\n • Nastaviteľná predpoveď pre čas výletu počas chôdze/turistike/behu\n\n • Opravený výstup zvuku a správanie ovládača hlasitosti</string>
     <string name="show_borders_of_downloaded_maps">Zobraziť hranice stiahnutých máp</string>
     <string name="show_map_symbols">Zobraziť mapové symboly</string>
     <string name="show_map_symbols_desc">Texty, čísla ciest a iné.</string>
@@ -5024,37 +4973,7 @@
     <string name="local_version_do_not_exist">Neexistuje lokálna verzia.</string>
     <string name="shared_string_in_progress">Prebieha</string>
     <string name="movement_speed">Rýchlosť pohybu</string>
-    <string name="release_4_4">• Vylepšené menu \"Stopy\" v \"Nastaviť mapu\"
-\n
-\n • Kontextové menu teraz zobrazuje preložené názvy pre body záujmu
-\n
-\n • Pridaná možnosť zdieľať trasu pomocou linky
-\n
-\n • Pridaná jednotka dĺžky \"Námorné míle/stopu\"
-\n
-\n • V orientácii mapy pridaný nový pevný režim
-\n
-\n • Zjednodušená úvodná obrazovka
-\n
-\n • Opravené umiestnenie polohy v režime rozdelenej obrazovky v systéme Android Auto
-\n
-\n • Pridaný graf \"Rýchlosť/Sklon\" pre analýzu stopy
-\n
-\n • Systém Android 13 presunul výber jazyka aplikácie do systémových nastavení
-\n
-\n • Opravené chyby pri zobrazení miest pre vegánov
-\n
-\n • Pridaná možnosť stiahnuť online dlaždice používané ako prekrývacie alebo podkladové mapy
-\n
-\n • Pridaná podpora pre imperiálne merné jednotky vo \"Vlastnostiach vozidla\"
-\n
-\n • Nový profil pre moped
-\n
-\n • \"Zobrazenie polohy\" má pridanú novú možnosť \"Automatické\"
-\n
-\n • Opravené gestá na mape pre sklopenie, priblíženie a otáčanie
-\n
-\n</string>
+    <string name="release_4_4">• Vylepšené menu \"Stopy\" v \"Nastaviť mapu\"\n\n • Kontextové menu teraz zobrazuje preložené názvy pre body záujmu\n\n • Pridaná možnosť zdieľať trasu pomocou linky\n\n • Pridaná jednotka dĺžky \"Námorné míle/stopu\"\n\n • V orientácii mapy pridaný nový pevný režim\n\n • Zjednodušená úvodná obrazovka\n\n • Opravené umiestnenie polohy v režime rozdelenej obrazovky v systéme Android Auto\n\n • Pridaný graf \"Rýchlosť/Sklon\" pre analýzu stopy\n\n • Systém Android 13 presunul výber jazyka aplikácie do systémových nastavení\n\n • Opravené chyby pri zobrazení miest pre vegánov\n\n • Pridaná možnosť stiahnuť online dlaždice používané ako prekrývacie alebo podkladové mapy\n\n • Pridaná podpora pre imperiálne merné jednotky vo \"Vlastnostiach vozidla\"\n\n • Nový profil pre moped\n\n • \"Zobrazenie polohy\" má pridanú novú možnosť \"Automatické\"\n\n • Opravené gestá na mape pre sklopenie, priblíženie a otáčanie</string>
     <string name="app_mode_moped">Moped</string>
     <string name="generate_slope_from_3d_maps">Generovať rastrové mapy sklonov svahov z 3D máp</string>
     <string name="disable_vertex_hillshade_3d">Vypnúť bodové tieňované svahy v 3D</string>
@@ -5089,29 +5008,7 @@
     <string name="delete_map">Vymazať mapu</string>
     <string name="standard_maps">Štandardné mapy</string>
     <string name="max_altitude">Max. nadm. výška</string>
-    <string name="release_4_6">• Android Auto: Pridaný 3D režim
-\n
-\n • Stopy: Doplnené filtre a chytré priečinky, znížená spotreba pamäte pre väčšie súbory
-\n
-\n • Vylepšený horný a dolný panel nástrojov, aby mohli pojať všetky nástroje
-\n
-\n • Vylepšená správa lokálnych zdrojov
-\n
-\n • Nastaviteľné mapovanie tlačidiel pre externé ovládače
-\n
-\n • Nové nástroje: \"Pomer kĺzavosti\" a \"Poloha slnka\"
-\n
-\n • OsmAnd Cloud: Prístup k vymazaným súborom
-\n
-\n • Vylepšené farbenie stôp v režime sklonu svahov s novým symetrickým gradientom
-\n
-\n • Vyriešené problémy s priehľadným stavovým riadkom
-\n
-\n • Pridaná podpora pre nástroj teploty ANT+
-\n
-\n • Pridaný nástroj \"Dostupná pamať RAM\"
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: Pridaný 3D režim\n\n • Stopy: Doplnené filtre a chytré priečinky, znížená spotreba pamäte pre väčšie súbory\n\n • Vylepšený horný a dolný panel nástrojov, aby mohli pojať všetky nástroje\n\n • Vylepšená správa lokálnych zdrojov\n\n • Nastaviteľné mapovanie tlačidiel pre externé ovládače\n\n • Nové nástroje: \"Pomer kĺzavosti\" a \"Poloha slnka\"\n\n • OsmAnd Cloud: Prístup k vymazaným súborom\n\n • Vylepšené farbenie stôp v režime sklonu svahov s novým symetrickým gradientom\n\n • Vyriešené problémy s priehľadným stavovým riadkom\n\n • Pridaná podpora pre nástroj teploty ANT+\n\n • Pridaný nástroj \"Dostupná pamäť RAM\"</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="app_mode_baby_transport">Preprava detí</string>
     <string name="wikipedia_and_travel_maps">Wikipédia a cestovné mapy</string>
@@ -5463,49 +5360,7 @@
 \n
 \nTáto akcia sa nedá odvolať.</string>
     <string name="osmand_cloud_delete_account_confirmation">Vymazať účet?</string>
-    <string name="release_4_5">• Snímače BLE/ANT+: prepracované pripojenie, zápis a zobrazovanie prijatých údajov do GPX
-\n
-\n • Bezplatné zálohovanie obľúbených bodov a nastavení do \"OsmAnd Cloud\"
-\n
-\n • Nový formát terénnych máp s podporou 3D reliéfom
-\n
-\n • Správa stôp: zmenené rozhranie, pridané triedenie, podpora vnorených priečinkov
-\n
-\n • Android Auto: nové úvodné menu pre prístup k obľúbeným bodom, stopám a kategóriám bodov záujmu
-\n
-\n • Jeden zoznam nástrojov pre horný/dolný panel
-\n
-\n • Nový profil \"Vlak\", ktorý umožňuje výpočet trás po železnici
-\n
-\n • Vrstevnice fungujú s akýmkoľvek \"zdrojom máp\"
-\n
-\n • Rozšírený zoznam predvolených akcií pre externé klávesnice
-\n
-\n • Vlastné súbory pre výpočet trasy, pridané voľby pre výmaz alebo prepis
-\n
-\n • Pridaná voľba pre \"hlásenie o odchýlení od trasy\"
-\n
-\n • Úvodná obrazovka: pridaná možnosť obnoviť stav OsmAndu zo súboru
-\n
-\n • Pridané triedy \"nebezpečných látok\" pre navigáciu nákladných áut v Severnej Amerike
-\n
-\n • Pridaná podpora pre navigáciu chodcov cez \"Via ferrata\"
-\n
-\n • Pridaná stupnica \"CAI\" pre klasifikovanie obtiažnosti trás
-\n
-\n • Opravený výber jazyka pre aplikáciu
-\n
-\n • Pridaná podpora pre tématické ikony
-\n
-\n • OsmAnd Cloud: pridaná možnosť odstrániť účet
-\n
-\n • Prístupnosť: veľkosť tlačidiel pre dotyk zmenená na 48 dp; opravená chyba s mapovým rozhraním viditeľným pre čítačky obrazovky
-\n
-\n • Prepracované hlasové pokyny v japončine
-\n
-\n • Prepracované vyhodnotenie zmeny sklonu a nadmorskej výšky
-\n
-\n</string>
+    <string name="release_4_5">• Snímače BLE/ANT+: prepracované pripojenie, zápis a zobrazovanie prijatých údajov do GPX\n\n • Bezplatné zálohovanie obľúbených bodov a nastavení do \"OsmAnd Cloud\"\n\n • Nový formát terénnych máp s podporou 3D reliéfom\n\n • Správa stôp: zmenené rozhranie, pridané triedenie, podpora vnorených priečinkov\n\n • Android Auto: nové úvodné menu pre prístup k obľúbeným bodom, stopám a kategóriám bodov záujmu\n\n • Jeden zoznam nástrojov pre horný/dolný panel\n\n • Nový profil \"Vlak\", ktorý umožňuje výpočet trás po železnici\n\n • Vrstevnice fungujú s akýmkoľvek \"zdrojom máp\"\n\n • Rozšírený zoznam predvolených akcií pre externé klávesnice\n\n • Vlastné súbory pre výpočet trasy, pridané voľby pre výmaz alebo prepis\n\n • Pridaná voľba pre \"hlásenie o odchýlení od trasy\"\n\n • Úvodná obrazovka: pridaná možnosť obnoviť stav OsmAndu zo súboru\n\n • Pridané triedy \"nebezpečných látok\" pre navigáciu nákladných áut v Severnej Amerike\n\n • Pridaná podpora pre navigáciu chodcov cez \"Via ferrata\"\n\n • Pridaná stupnica \"CAI\" pre klasifikovanie obtiažnosti trás\n\n • Opravený výber jazyka pre aplikáciu\n\n • Pridaná podpora pre tématické ikony\n\n • OsmAnd Cloud: pridaná možnosť odstrániť účet\n\n • Prístupnosť: veľkosť tlačidiel pre dotyk zmenená na 48 dp; opravená chyba s mapovým rozhraním viditeľným pre čítačky obrazovky\n\n • Prepracované hlasové pokyny v japončine\n\n • Prepracované vyhodnotenie zmeny sklonu a nadmorskej výšky</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Druhotné zariadenia budú odpojené od OsmAnd Cloud a stratia prístup k plateným funkciám.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Všetky údaje v OsmAnd Cloud budú %1$s. Údaje v zariadení zostanú nedotknuté.</string>
     <string name="shared_string_deleting">Odstraňovanie</string>
@@ -5621,25 +5476,7 @@
     <string name="distance_during_navigation_description">Zvoľte ako sa bude zobrazovať informácia o vzdialenosti v navigačných nástrojoch (vzdialenosť k bodu, nasledujúce odbočenie, jazdné pruhy).
 \n
 \nZvoľte “%1$s” pre presné čísla alebo “%2$s” pre lepšiu čitateľnosť.</string>
-    <string name="release_4_7">• Nový nástroj \"Tachometer\" kompatibilný s Android Auto
-\n
-\n • Nastavte obrazovku mapy pridaním viacerých tlačidiel \"rýchlej akcie\"
-\n
-\n • Zlepšená čitateľnosť údajov v grafoch
-\n
-\n • Pridané filtre podľa údajov senzorov pre stopy
-\n
-\n • Zlepšené upravovanie vzhľadu pre skupiny stôp
-\n
-\n • Pridaná podpora ďalších značiek v GPX
-\n
-\n • Nastaviteľná \"Vzdialenosť počas navigácie\": zvoľte medzi presnými a zaokrúhlenými číslami
-\n
-\n • Zjednotené rozhranie pre výber stôp
-\n
-\n • Prihlásenie do OpenStreetMap prepnuté na OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• Nový nástroj \"Tachometer\" kompatibilný s Android Auto\n\n • Nastavte obrazovku mapy pridaním viacerých tlačidiel \"rýchlej akcie\"\n\n • Zlepšená čitateľnosť údajov v grafoch\n\n • Pridané filtre podľa údajov senzorov pre stopy\n\n • Zlepšené upravovanie vzhľadu pre skupiny stôp\n\n • Pridaná podpora ďalších značiek v GPX\n\n • Nastaviteľná \"Vzdialenosť počas navigácie\": zvoľte medzi presnými a zaokrúhlenými číslami\n\n • Zjednotené rozhranie pre výber stôp\n\n • Prihlásenie do OpenStreetMap prepnuté na OAuth 2.0</string>
     <string name="shared_string_unchanged">Nezmenené</string>
     <string name="unchanged_parameter_summary">Každá stopa si zachová vlastné parametre.</string>
     <string name="map_widget_map_scale">Mierka mapy</string>
@@ -5651,29 +5488,7 @@
     <string name="change_default_appearance_confirmation">Zmeniť predvolený vzhľad %1$s?</string>
     <string name="use_3d_track_visualization">3D vizualizácia</string>
     <string name="apply_only_to_new">Aplikovať iba na nové</string>
-    <string name="release_4_8">• Nová možnosť pre zafarbenie terénu podľa \"nadmorskej výšky\"
-\n
-\n • Vlastné palety farieb pre terén, stopy a trasy
-\n
-\n • 3D verzia pre ikony polohy
-\n
-\n • Rýchle akcie môžu byť priradené k externým klávesám
-\n
-\n • Počasie: zmena rozhrania, pridaná animácia vetra
-\n
-\n • Vylepšenia 3D stôp: nové možnosti zobrazenia a zafarbenia
-\n
-\n • Rozšírený výber turistických trás na mape
-\n
-\n • Možnosť aby téma aplikácie sledovala režim mapy
-\n
-\n • Opravené štatistiky stôp, triedenie a vyhľadávanie
-\n
-\n • Upravovanie OSM: odstránené prihlasovanie pomocou mena a hesla
-\n
-\n • Od Androidu 14 sa používa systémový panel zdieľania
-\n
-\n</string>
+    <string name="release_4_8">• Nová možnosť pre zafarbenie terénu podľa \"nadmorskej výšky\"\n\n • Vlastné palety farieb pre terén, stopy a trasy\n\n • 3D verzia pre ikony polohy\n\n • Rýchle akcie môžu byť priradené k externým klávesám\n\n • Počasie: zmena rozhrania, pridaná animácia vetra\n\n • Vylepšenia 3D stôp: nové možnosti zobrazenia a zafarbenia\n\n • Rozšírený výber turistických trás na mape\n\n • Možnosť aby téma aplikácie sledovala režim mapy\n\n • Opravené štatistiky stôp, triedenie a vyhľadávanie\n\n • Upravovanie OSM: odstránené prihlasovanie pomocou mena a hesla\n\n • Od Androidu 14 sa používa systémový panel zdieľania</string>
     <string name="change_default_tracks_appearance_confirmation">Aplikovať zmeny na existujúce stopy v priečinku, alebo iba na nové?</string>
     <string name="shared_string_changes">Zmeny</string>
     <string name="shared_string_scale">Mierka</string>
@@ -5911,4 +5726,9 @@
     <string name="obd_plugin_description">Sprístupní informácie o vozidle cez protokol OBD</string>
     <string name="vehicle_metrics_plugin_settings">Nastavenia Meraní vozidla</string>
     <string name="obd_support">Podpora OBD</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Cesty pre terénne bicykle</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="wikivoyage_offline">Wikivoyage v režime offline</string>
+    <string name="import_export">Import/export</string>
 </resources>
