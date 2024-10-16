@@ -459,27 +459,7 @@
 \n - Ingen adgang til Wikipedia-interessepunkter offline
 \n
 \n OsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ er en open source-navigationsapp med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning.
-\n
-\nOsmAnd+ er den betalte appversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer.
-\n
-\nNogle af hovedfunktionerne:
-\n - Komplet offline-funktionalitet (gem hentede vektorkort eller kortfliser på enhedens hukommelsseskort)
-\n - Kompakte offline vektorkort for hele verden
-\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
-\n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing
-\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hælning
-\n
-\n - Offline-søgning efter adresser og steder (IP)
-\n - Offline-ruteberegning til mediumafstande
-\n - Bil-, cykel- og fodgængertilstande med:
-\n - valgfri automatisk dag/nat-visning
-\n - valgfri hastighedsafhængig kortzoom
-\n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning
-\n - valgfri vognbanevejledning, visning af hastighedsgrænser, optagede stemmer eller TTS-stemmer
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ er en open source-navigationsapp med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. \n \nOsmAnd+ er den betalte appversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. \n \nNogle af hovedfunktionerne: \n - Komplet offline-funktionalitet (gem hentede vektorkort eller kortfliser på enhedens hukommelsseskort) \n - Kompakte offline vektorkort for hele verden \n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd \n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing \n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hælning \n \n - Offline-søgning efter adresser og steder (IP) \n - Offline-ruteberegning til mediumafstande \n - Bil-, cykel- og fodgængertilstande med: \n - valgfri automatisk dag/nat-visning \n - valgfri hastighedsafhængig kortzoom \n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning \n - valgfri vognbanevejledning, visning af hastighedsgrænser, optagede stemmer eller TTS-stemmer</string>
     <string name="city_type_hamlet">lille landsby</string>
     <string name="city_type_town">By</string>
     <string name="city_type_city">Stor by</string>
@@ -2182,11 +2162,7 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis og verdensomspændende OpenStreetMap (OSM)-data af høj kvalitet.
 \n
 \nNyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og topografisk (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>
-    <string name="osmand_extended_description_part7">Bidrag til OSM
-\n • Rapporter fejl i data
-\n • Overfør GPX-spor til OSM direkte
-\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)
-\n</string>
+    <string name="osmand_extended_description_part7">Bidrag til OSM \n • Rapporter fejl i data \n • Overfør GPX-spor til OSM direkte \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)</string>
     <string name="osmand_extended_description_part8">OsmAnd er aktivt udviklet open source software. Alle kan bidrage til appen ved at rapportere programfejl, forbedre oversættelser eller kodning af nye funktioner. Derudover projektet er afhængig af økonomiske bidrag til kodning og test af nye funktionaliteter.
 \n Anslået kortdækning og kvalitet:
 \n • Vesteuropa: ****  
@@ -2201,34 +2177,9 @@
 \n • Antarktis: *  
 \n De fleste lande i verden kan hentes!  
 \n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
-    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM  
-\n • Rapporter fejl i data  
-\n • Overfør GPX-spor direkte til OSM  
-\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)  
-\n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
-\n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter
-\n</string>
-    <string name="osmand_extended_description_part2">GPS-navigation
-\n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand
-\n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer)
-\n • Rutens genberegnes ved afvigelse  
-\n • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs
-\n • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk
-\n • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides
-\n • Kortzoom tilpasser sig hastigheden
-\n • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater
-\n • Understøtter mellemliggende punkter på ruten
-\n • Optag eller overfør et GPX-spor og følg det
-\n</string>
-    <string name="osmand_extended_description_part3">Kort
-\n • Viser IP\'er (interessepunkter) i nærheden
-\n • Justerer kortet til bevægelsesretning (eller kompas)
-\n • Viser hvor man er og hvad der kigges på
-\n • Del placering, så andre kan finde dig
-\n • Gem vigtige steder i \'Favoritter\'
-\n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde .
-\n• Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   \n • Rapporter fejl i data   \n • Overfør GPX-spor direkte til OSM   \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) \n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter</string>
+    <string name="osmand_extended_description_part2">GPS-navigation \n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand \n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer) \n • Rutens genberegnes ved afvigelse   \n • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs \n • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk \n • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides \n • Kortzoom tilpasser sig hastigheden \n • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater \n • Understøtter mellemliggende punkter på ruten \n • Optag eller overfør et GPX-spor og følg det</string>
+    <string name="osmand_extended_description_part3">Kort \n • Viser IP\'er (interessepunkter) i nærheden \n • Justerer kortet til bevægelsesretning (eller kompas) \n • Viser hvor man er og hvad der kigges på \n • Del placering, så andre kan finde dig \n • Gem vigtige steder i \'Favoritter\' \n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde . \n• Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
     <string name="osmand_extended_description_part4">Skikort 
 \nUdvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.</string>
     <string name="osmand_extended_description_part5">Cykling
@@ -2237,13 +2188,7 @@
 \n • Se hastighed og højde
 \n • GPX optagelse kan optage turen og dele den
 \n • Via ekstra udvidelser kan der aktiveres højdekurver og terrænskygger</string>
-    <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur
-\n • Kortet viser gang- og vandrestier
-\n • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur
-\n • Offentlig transport (busser, sporvogne, tog), herunder linjenavne, hjælper til at navigere i en ny by
-\n • GPS-navigation i fodgængertilstand laver ruten ved hjælp af gangstier
-\n • Overfør og følg en GPX-rute eller optag og del egne ruter
-\n</string>
+    <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur \n • Kortet viser gang- og vandrestier \n • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur \n • Offentlig transport (busser, sporvogne, tog), herunder linjenavne, hjælper til at navigere i en ny by \n • GPS-navigation i fodgængertilstand laver ruten ved hjælp af gangstier \n • Overfør og følg en GPX-rute eller optag og del egne ruter</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis, verdensomspændende, og højkvalitet data fra OpenStreetMap (OSM).
 \n Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og topografi, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere.
 \n
@@ -2258,14 +2203,7 @@
 \n  • Automatisk genberegning, ved afvigelse fra ruten
 \n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
 \n</string>
-    <string name="osmand_plus_extended_description_part3">Kortvisning  
-\n • Vis position og orientering  
-\n • Juster eventuelt kortet efter kompas eller bevægelsesretning  
-\n • Gem de vigtigste steder som foretrukne  
-\n • Vis IP\'er (interessepunktr) i nærheden  
-\n • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed  
-\n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Kortvisning   \n • Vis position og orientering   \n • Juster eventuelt kortet efter kompas eller bevægelsesretning   \n • Gem de vigtigste steder som foretrukne   \n • Vis IP\'er (interessepunktr) i nærheden   \n • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed   \n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
     <string name="osmand_plus_extended_description_part4">Brug OSM og Wikipedia data  
 \n • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden  
 \n • OSM data til hvert land eller område  
@@ -2274,12 +2212,7 @@
 \n • Kompakte offline vektorkort opdateret mindst en gang om måneden 
 \n
 \n • Vælg mellem komplette områdedata eller kun veje (Eksempel: hele Japan er 700 MB eller 200 MB for vejnettet, der er en del heraf)</string>
-    <string name="osmand_plus_extended_description_part5">Sikkerhedsfunktioner  
-\n • Valgfri automatisk skift til dag-/natvisning  
-\n • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse
-\n • Valgfri hastighedsafhængig zoom  
-\n • Del placering, så dine venner kan finde dig
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Sikkerhedsfunktioner   \n • Valgfri automatisk skift til dag-/natvisning   \n • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse \n • Valgfri hastighedsafhængig zoom   \n • Del placering, så dine venner kan finde dig</string>
     <string name="osmand_plus_extended_description_part6">Cykel og fodgænger-funktioner
 \n • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
 \n • Særlige navigations- og visningstilstande for cyklister og fodgængere
@@ -2287,20 +2220,7 @@
 \n • Valgfri turoptagelse til lokal GPX-fil eller online tjeneste
 \n • Valgfri hastigheds og højdevisning
 \n • Visning af højdekurver og terrænskygger (med ekstra udvidelse)</string>
-    <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
-\n • Vesteuropa: ****
-\n • Østeuropa: ***
-\n • Rusland: ***
-\n • Nordamerika: ***
-\n • Sydamerika: **
-\n • Asien: **
-\n • Japan &amp; Korea: ***
-\n • Mellemøsten: **
-\n • Afrika: **
-\n • Antarktis: *
-\n De fleste lande i verden kan hentes
-\n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet: \n • Vesteuropa: **** \n • Østeuropa: *** \n • Rusland: *** \n • Nordamerika: *** \n • Sydamerika: ** \n • Asien: ** \n • Japan &amp; Korea: *** \n • Mellemøsten: ** \n • Afrika: ** \n • Antarktis: * \n De fleste lande i verden kan downloades \n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …</string>
     <string name="fonts_header">Skrifttyper for kort</string>
     <string name="restore_purchases">Gendan køb</string>
     <string name="shared_string_visible">Synlig</string>
@@ -2994,25 +2914,7 @@
     <string name="shared_string_crash">Nedbrud</string>
     <string name="last_launch_crashed">Sidste kørsel af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve
-\n
-\n • Tilpas enhver profilers standard- og min/max hastigheder
-\n
-\n • Tilføjet et modul til de aktuelle koordinater
-\n
-\n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet
-\n
-\n • Rettet logføring af baggrundsspor
-\n
-\n • Forbedret hentning af kort i baggrunden
-\n
-\n • Rettet Wikipedia sprogvalg
-\n
-\n • Rettet kompasknappens opførsel under navigationen
-\n
-\n • Andre fejlrettelser
-\n
-\n</string>
+    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve \n \n • Tilpas enhver profilers standard- og min/max hastigheder \n \n • Tilføjet et modul til de aktuelle koordinater \n \n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet \n \n • Rettet logføring af baggrundsspor \n \n • Forbedret hentning af kort i baggrunden \n \n • Rettet Wikipedia sprogvalg \n \n • Rettet kompasknappens opførsel under navigationen \n \n • Andre fejlrettelser</string>
     <string name="app_mode_personal_transporter">Person transport</string>
     <string name="app_mode_monowheel">Monohjul</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -3189,23 +3091,7 @@
     <string name="routing_attr_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
     <string name="update_all_maps">Opdater alle kort</string>
     <string name="update_all_maps_q">Opdater alle (%1$d) kort\?</string>
-    <string name="release_3_5">• Opdaterede program-og profilindstillinger: indstillinger er nu arrangement efter type. Hver profil kan tilpasses separat.
-\n
-\n• Ny dialog til hentning af kort, foreslår et kort ved visning
-\n
-\n• Nattema rettelser
-\n
-\n• Løste flere routing problemer i hele verden
-\n
-\n• Opdateret højdekurvekort med mere detaljeret vejnet
-\n
-\n• Rettet oversvømmede områder rundt om i verden
-\n
-\n• Ski routing: tilføjet højdeprofil og rute kompleksitet til rutedetaljer
-\n
-\n• Andre fejlrettelser
-\n
-\n</string>
+    <string name="release_3_5">• Opdaterede program-og profilindstillinger: indstillinger er nu arrangement efter type. Hver profil kan tilpasses separat. \n \n• Ny dialog til hentning af kort, foreslår et kort ved visning \n \n• Nattema rettelser \n \n• Løste flere routing problemer i hele verden \n \n• Opdateret højdekurvekort med mere detaljeret vejnet \n \n• Rettet oversvømmede områder rundt om i verden \n \n• Ski routing: tilføjet højdeprofil og rute kompleksitet til rutedetaljer \n \n• Andre fejlrettelser</string>
     <string name="apply_preference_to_all_profiles">Anvend denne ændring på alle eller den valgte profil.</string>
     <string name="shared_preference">Delt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
@@ -3993,19 +3879,7 @@
 \n
 \nFind vejledninger om, hvordan du bidrager, på vores websted %1$s.</string>
     <string name="routing_attr_height_obstacles_description">Den forventede rejsetid vil afspejle højdepåvirkningen. Ruteberegningsvalg kan hjælpe med at undgå stejle opkørsler:</string>
-    <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod
-\n
-\n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer
-\n
-\n - OsmAnd Live-opdateringer flyttet til \"Downloads &gt; Opdateringer\"
-\n
-\n - Spor kan nu farves efter højde, hastighed eller hældning.
-\n
-\n - Der er tilføjet mulighed for at ændre rutelinjens udseende.
-\n
-\n - Opdateret dialogboks \"Turoptagelse\"
-\n
-\n</string>
+    <string name="release_4_0_beta">- Tilføjet mulighed for at downloade højdekurver i fod \n \n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer \n \n - OsmAnd Live-opdateringer flyttet til \"Downloads &gt; Opdateringer\" \n \n - Spor kan nu farves efter højde, hastighed eller hældning. \n \n - Der er tilføjet mulighed for at ændre rutelinjens udseende. \n \n - Opdateret dialogboks \"Turoptagelse\"</string>
     <string name="search_more">Søg mere…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="backup_and_restore">Sikkerhedskopiering og gendannelse</string>
@@ -4146,15 +4020,7 @@
     <string name="route_between_points_desc">Vælg, hvordan du vil forbinde punkterne, enten ved hjælp af en lige linje eller ved at beregne en rute mellem dem som angivet nedenfor.</string>
     <string name="shared_string_gpx_route">Spor rute</string>
     <string name="context_menu_item_add_waypoint">Tilføj spor-rutepunkt</string>
-    <string name="release_3_9">• Tilføjet mulighed for at eksportere eller importere alle data inklusiv indstillinger, ressourcer, mine steder
-\n
-\n • Planlæg rute: grafer for sporsegmenter med rute og tilføjet mulighed for at oprette og redigere flere sporelementer
-\n
-\n • Tilføjet OAuth godkendelsesmetode for OpenStreetMap, forbedret brugerflade for OSM dialoger
-\n
-\n • Understøttelse af brugerdefinerede farver for favoritter og spor-rutepunkter
-\n
-\n</string>
+    <string name="release_3_9">• Tilføjet mulighed for at eksportere eller importere alle data inklusiv indstillinger, ressourcer, mine steder \n \n • Planlæg rute: grafer for sporsegmenter med rute og tilføjet mulighed for at oprette og redigere flere sporelementer \n \n • Tilføjet OAuth godkendelsesmetode for OpenStreetMap, forbedret brugerflade for OSM dialoger \n \n • Understøttelse af brugerdefinerede farver for favoritter og spor-rutepunkter</string>
     <string name="disable_recording_once_app_killed_descrp">Sporlogning sættes på pause, når appen afsluttes (via seneste apps). (OsmAnd-baggrundsindikatoren forsvinder fra Android-meddelelseslinjen.)</string>
     <string name="osm_live_payment_subscription_management_hw">Betalingen opkræves fra din AppGallery-konto, når du bekræfter købet.
 \n
@@ -4165,27 +4031,7 @@
     <string name="send_logcat_log">Send logcat-log</string>
     <string name="attribute">Egenskab</string>
     <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af spor\" på kortet).</string>
-    <string name="release_4_0">• Sikkerhedskopiering til skyen
-\n
-\n • Tilføjet nattilstand for \"Topo\" kortstil
-\n
-\n • Tilføjet mulighed for at downloade konturlinjer i fod
-\n
-\n • Spor kan nu farvelægges efter højde, hastighed eller hældning
-\n
-\n • Opdateret \"turoptagelse\" dialog
-\n
-\n • Afstand ved tryk flytte fra Radiusmåler til en separat indstilling
-\n
-\n • Ruteplanlægning: Du kan nu ændre navigationsindstillinger, få adgang til kortindstillinger og søge uden at forlade ruteplanlægningen
-\n
-\n • Ny \"Køb\" skærm med detaljeret købsinfo
-\n
-\n • Tilføjet mulighed for at ændre rutelinjens udseende
-\n
-\n • OsmAnd Live opdateringer flyttet til \"Downloads &gt; Opdateringer\"
-\n
-\n</string>
+    <string name="release_4_0">• Sikkerhedskopiering til skyen \n \n • Tilføjet nattilstand for \"Topo\" kortstil \n \n • Tilføjet mulighed for at downloade konturlinjer i fod \n \n • Spor kan nu farvelægges efter højde, hastighed eller hældning \n \n • Opdateret \"turoptagelse\" dialog \n \n • Afstand ved tryk flytte fra Radiusmåler til en separat indstilling \n \n • Ruteplanlægning: Du kan nu ændre navigationsindstillinger, få adgang til kortindstillinger og søge uden at forlade ruteplanlægningen \n \n • Ny \"Køb\" skærm med detaljeret købsinfo \n \n • Tilføjet mulighed for at ændre rutelinjens udseende \n \n • OsmAnd Live opdateringer flyttet til \"Downloads &gt; Opdateringer\"</string>
     <string name="use_native_pt_desc">Skift til Java (sikker) ruteberegning med offentlig transport</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s data er kun tilgængelige på veje, beregn en rute ved hjælp af \"Rute mellem punkter\" for at se graferne.</string>
     <string name="add_online_routing_engine">Tilføj online ruteberegningsmotor</string>
@@ -4200,31 +4046,7 @@
 \nDu kan kontakte OsmAnd support for at undersøge det.</string>
     <string name="empty_state_my_tracks_desc">Importer eller optag sporfiler</string>
     <string name="monitoring_control_start">Optag</string>
-    <string name="release_3_6">- Profiler: Nu kan du ændre rækkefølge, indstille ikonet for kortet, ændre alle indstillinger for basisprofiler og gendanne dem tilbage til standardindstillingerne
-\n
-\n - Tilføjet afkørselsnummer i navigationen
-\n
-\n - Opdateret udvidelses-indstillinger
-\n
-\n - Opdateret Indstillinger-skærm for hurtigere adgang til alle profiler
-\n
-\n - Tilføjet mulighed for at kopiere indstillinger fra en anden profil
-\n
-\n - Tilføjet mulighed for at ændre en rækkefølge eller skjule IP-kategorier i søgning
-\n
-\n - Korrekt justerede IP-ikoner på kortet
-\n
-\n - Tilføjet solnedgang/solopgangsdata til Konfigurer kortet
-\n
-\n - Der er tilføjet ikoner for hjem/arbejde på kortet
-\n
-\n - Tilføjet understøttelse af flerlinjebeskrivelse i Indstillinger
-\n
-\n - Tilføjet korrekt translitteration i kortet over Japan
-\n
-\n - Tilføjet kort over Antarktis
-\n
-\n</string>
+    <string name="release_3_6">- Profiler: Nu kan du ændre rækkefølge, indstille ikonet for kortet, ændre alle indstillinger for basisprofiler og gendanne dem tilbage til standardindstillingerne \n \n - Tilføjet afkørselsnummer i navigationen \n \n - Opdateret udvidelses-indstillinger \n \n - Opdateret Indstillinger-skærm for hurtigere adgang til alle profiler \n \n - Tilføjet mulighed for at kopiere indstillinger fra en anden profil \n \n - Tilføjet mulighed for at ændre en rækkefølge eller skjule IP-kategorier i søgning \n \n - Korrekt justerede IP-ikoner på kortet \n \n - Tilføjet solnedgang/solopgangsdata til Konfigurer kortet \n \n - Der er tilføjet ikoner for hjem/arbejde på kortet \n \n - Tilføjet understøttelse af flerlinjebeskrivelse i Indstillinger \n \n - Tilføjet korrekt translitteration i kortet over Japan \n \n - Tilføjet kort over Antarktis</string>
     <string name="release_3_7">- Nye offline kort med hældninger
 \n
 \n - Fuld tilpasning af favoritter og GPX-rutepunkter - brugerdefinerede farver, ikoner og former
@@ -4245,21 +4067,7 @@
 \n
 \n</string>
     <string name="announcement_time_passing">Passerer</string>
-    <string name="release_3_8">- Opdateret Planlæg en rute-funktion: gør det muligt at bruge forskellige navigationstyper pr. segment og inkludere spor
-\n
-\n - Ny Udseende-menu for spor: vælg farve, tykkelse, visning af retningspile, start- og målikoner
-\n
-\n - Forbedret synlighed af cykelknudepunkter.
-\n
-\n - Spor kan nu trykkes på, har kontekstmenu med grundlæggende oplysninger.
-\n
-\n - Forbedrede søgealgoritmer
-\n
-\n - Forbedrede \'Følg spor\'-mulighed i Navigation
-\n
-\n - Rettet problemer med import/eksport af profilindstillinger
-\n
-\n</string>
+    <string name="release_3_8">- Opdateret Planlæg en rute-funktion: gør det muligt at bruge forskellige navigationstyper pr. segment og inkludere spor \n \n - Ny Udseende-menu for spor: vælg farve, tykkelse, visning af retningspile, start- og målikoner \n \n - Forbedret synlighed af cykelknudepunkter. \n \n - Spor kan nu trykkes på, har kontekstmenu med grundlæggende oplysninger. \n \n - Forbedrede søgealgoritmer \n \n - Forbedrede \'Følg spor\'-mulighed i Navigation \n \n - Rettet problemer med import/eksport af profilindstillinger</string>
     <string name="no_items_of_type_message">Du har ikke ingen elementer af denne type</string>
     <string name="routeInfo_tracktype_description">Farvelæg ruten eller sporlinjen i henhold overfladesammensætning. Anvendes typisk, når vejnettet er overvejende ikke-asfalteret.</string>
     <string name="routeInfo_winter_ice_road_description">Farvelæg ruten eller sporlinjen efter dens vintervejklassificering.</string>
@@ -4321,31 +4129,7 @@
     <string name="markers_history_is_disabled_descr">Aktiver historik for huske en liste over besøgte kortmarkører.</string>
     <string name="is_disabled">%1$s er deaktiveret</string>
     <string name="map_markers_history">Kortmarkørhistorik</string>
-    <string name="release_4_1">• Tilføjet indledende understøttelse af Android Auto
-\n
-\n • Opdatering af brugergrænseflade til søgning efter UTM-koordinater
-\n
-\n • GPS-filter til GPS-spor
-\n
-\n •Højde-modul (Pro)
-\n
-\n • Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner
-\n
-\n • Ruteplanlægning: vil bruge den valgte profil efter start
-\n
-\n • Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard
-\n
-\n • Tilføjet skærm til administration af al historik i appen
-\n
-\n • Kortets orientering nulstilles ikke efter genstart af appen
-\n
-\n • Forbedret gengivelse af SRTM-højdemarkører
-\n
-\n • Rettet arabiske korttekster
-\n
-\n • Rettet forskellige problemer med ruteføring
-\n
-\n</string>
+    <string name="release_4_1">• Tilføjet indledende understøttelse af Android Auto \n \n • Opdatering af brugergrænseflade til søgning efter UTM-koordinater \n \n • GPS-filter til GPS-spor \n \n •Højde-modul (Pro) \n \n • Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner \n \n • Ruteplanlægning: vil bruge den valgte profil efter start \n \n • Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard \n \n • Tilføjet skærm til administration af al historik i appen \n \n • Kortets orientering nulstilles ikke efter genstart af appen \n \n • Forbedret gengivelse af SRTM-højdemarkører \n \n • Rettet arabiske korttekster \n \n • Rettet forskellige problemer med ruteføring</string>
     <string name="safe_settings">Sikker</string>
     <string name="approx_safe_mode">Sikker gpx-approksimation</string>
     <string name="use_external_timestamps">Brug eksterne tidsstempler</string>
@@ -4557,15 +4341,7 @@
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Kun hvis nødvendigt</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Gå ikke uden for pisterne</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Mellemsvær</string>
-    <string name="release_4_2">• Nyt design på moduler: Nyt udseende, gruppér efter sider, ændr rækkefølge og kombinér, som du vil.
-\n
-\n • Vandre- / cykel- / rejseruter: Tryk på rutesymbolet og få detaljerede oplysninger om ruten.
-\n
-\n • Favoritgrupper: Indstil standardudseende for nye punkter i gruppen.
-\n
-\n • Rettelser: online flise-kort auto-opdatering.
-\n
-\n</string>
+    <string name="release_4_2">• Nyt design på moduler: Nyt udseende, gruppér efter sider, ændr rækkefølge og kombinér, som du vil. \n \n • Vandre- / cykel- / rejseruter: Tryk på rutesymbolet og få detaljerede oplysninger om ruten. \n \n • Favoritgrupper: Indstil standardudseende for nye punkter i gruppen \n \n • Rettelser: online flise-kort auto-opdatering</string>
     <string name="turn_on_public_transport_description">Slå til for at se ruter med offentlige transport på kortet.</string>
     <string name="coordinates_widget_secondary_desc">Du kan ændre koordinatformatet i %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
@@ -4808,31 +4584,7 @@
     <string name="shared_string_terms_of_use">Vilkår for anvendelse</string>
     <string name="speak_gps_signal_status">Meddel tab og genoprettelse af GPS-signal</string>
     <string name="speak_route_recalculation">Meddel genberegning af rute</string>
-    <string name="release_4_3">• Ny, hurtigere Version 2 (OpenGL)-kortgengivelsesmotor med 2,5D-visning
-\n
-\n • Glidende animation for ændringer i placering under bevægelse
-\n
-\n • Nyt modul med koordinater for kortcentrum og højde for geoplaceringer
-\n
-\n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse
-\n
-\n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikopførsel
-\n
-\n • Indstillingen \"Placering af position\" blev rettet
-\n
-\n • GPX: tilføjede understøttelse af \"link\", \"cmt\", \"desc\" tags og for alle brugerdefinerede udvidelser
-\n
-\n • Omorganiseret liste over \"Nautiske kort\".
-\n
-\n • Der er tilføjet understøttelse af ANT+-sensorer
-\n
-\n • Tilføjet mulighed for at deaktivere UUID for download
-\n
-\n • Standardhastighed justerbar prognose for højdeafhængige gå-/vandre-/løbeturtider
-\n
-\n • Rettet lydoutput og lydstyrkereguleringen
-\n
-\n</string>
+    <string name="release_4_3">• Ny, hurtigere Version 2 (OpenGL)-kortgengivelsesmotor med 2,5D-visning \n \n • Glidende animation for ændringer i placering under bevægelse \n \n • Nyt modul med koordinater for kortcentrum og højde for geoplaceringer \n \n • \"Afstand til tryk\" tilføjet muligheder for tekststørrelse \n \n • Modulet \"Kortmarkør\": tilføjet mulighed for at ændre klikopførsel \n \n • Indstillingen \"Placering af position\" blev rettet \n \n • GPX: tilføjede understøttelse af \"link\", \"cmt\", \"desc\" tags og for alle brugerdefinerede udvidelser \n \n • Omorganiseret liste over \"Nautiske kort\". \n \n • Der er tilføjet understøttelse af ANT+-sensorer \n \n • Tilføjet mulighed for at deaktivere UUID for download \n \n • Standardhastighed justerbar prognose for højdeafhængige gå-/vandre-/løbeturtider \n \n • Rettet lydoutput og lydstyrkereguleringen</string>
     <string name="purchases_feature_desc_external_sensors">Vis og registrer data fra eksterne sensorer: cykelhastighed, cykeleffekt, kadence og puls.</string>
     <string name="external_sensors_support">Understøttelse af eksterne sensorer</string>
     <string name="show_map_symbols">Vis kortsymboler</string>
@@ -5023,37 +4775,7 @@
     <string name="movement_speed">Bevægelseshastighed</string>
     <string name="simulation_position_description">Vælg en sporfil, der skal bruges som kilde til bevægelse af en placering.</string>
     <string name="shared_string_add_manually">Tilføj manuelt…</string>
-    <string name="release_4_4">• Forbedret menuen \"Spor\" i \"Konfigurer kort\"
-\n
-\n • Kontekstmenuen viser nu lokaliserede navne for IP\'er
-\n
-\n • Tilføjet mulighed for at dele rute via link
-\n
-\n -• Tilføjet længdeenheden \"Nautiske mil/fod\"
-\n
-\n • Kortorientering tilføjet ny fast tilstand
-\n
-\n • Forenklet startskærm
-\n
-\n • Rettet positionsplacering i delt skræm-tilstand i Android Auto
-\n
-\n • Tilføjet \"hastighed/hældning\"-graf til sporanalyse
-\n
-\n • Android 13 flyttet valg af app-sprog til systemindstillingerne
-\n
-\n • Rettet problemer med visning af veganske steder
-\n
-\n • Tilføjet mulighed for at downloade online fliser, der bruges som \"Overlejrings\"- eller \"Underlejrings\"-kort
-\n
-\n • Tilføjet understøttelse af engelske måleenheder for \"Køretøjsparametre\"
-\n
-\n • Ny knallertprofil
-\n
-\n • \"Visningsposition\" tilføjet ny indstilling \"Automatisk\"
-\n
-\n • Rettet kortbevægelser for tilt, zoom og rotation
-\n
-\n</string>
+    <string name="release_4_4">• Forbedret menuen \"Spor\" i \"Konfigurer kort\" \n \n • Kontekstmenuen viser nu lokaliserede navne for IP\'er \n \n • Tilføjet mulighed for at dele rute via link \n \n -• Tilføjet længdeenheden \"Nautiske mil/fod\" \n \n • Kortorientering tilføjet ny fast tilstand \n \n • Forenklet startskærm \n \n • Rettet positionsplacering i delt skræm-tilstand i Android Auto \n \n • Tilføjet \"hastighed/hældning\"-graf til sporanalyse \n \n • Android 13 flyttet valg af app-sprog til systemindstillingerne \n \n • Rettet problemer med visning af veganske steder \n \n • Tilføjet mulighed for at downloade online fliser, der bruges som \"Overlejrings\"- eller \"Underlejrings\"-kort \n \n • Tilføjet understøttelse af engelske måleenheder for \"Køretøjsparametre\" \n \n • Ny knallertprofil \n \n • \"Visningsposition\" tilføjet ny indstilling \"Automatisk\" \n \n • Rettet kortbevægelser for tilt, zoom og rotation</string>
     <string name="sort_duration_ascending">Korteste varighed først</string>
     <string name="selected_value">Valgt værdi</string>
     <string name="sort_duration_descending">Længste varighed først</string>
@@ -5230,49 +4952,7 @@
     <string name="verify_account_deletion_descr">Vi skal bekræfte din konto, før du sletter den.
 \n
 \nIndtast den e-mail-adresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
-    <string name="release_4_5">• BLE/ANT+ sensors: omarbejdet forbindelse, skrivning og visning af modtagne data til GPX
-\n
-\n • Gratis backup af favoritter og indstillinger til \"OsmAnd Cloud\"
-\n
-\n • Nyt format til terrænkort med understøttelse af 3D-relief 
-\n
-\n • Håndtering af spor: opdateret brugergrænseflade, tilføjet sortering, understøttelse af indlejrede mapper
-\n
-\n • Android Auto: ny startmenu til adgang til favoritter, spor og POI-kategorier 
-\n
-\n • En liste over moduler til top-/bundpanelet
-\n
-\n • Ny \"Tog\"-profil, der gør det muligt at beregne jernbaneruter
-\n
-\n • Konturlinjer fungerer med enhver \"kortkilde\" 
-\n
-\n • Udvidet liste over standardhandlinger for eksterne tastaturer
-\n
-\n • Brugerdefinerede ruteberegnings-filer, tilføjede muligheder for at slette eller overskrive 
-\n
-\n • Tilføjet mulighed for at \"Meddel afvigelse fra ruten\"
-\n
-\n • Startskærm: tilføjet mulighed for at gendanne OsmAnd-tilstand fra fil
-\n
-\n • Tilføjet \"Farlige marteriales\"-klasser for Lastbilnavigation i Nordamerika
-\n
-\n • Tilføjet understøttelse af \"Via ferrata\" til fodgængerruter
-\n
-\n • Tilføjet \"CAI\"-skala til klassificering af ruternes sværhedsgrad
-\n
-\n • Rettet sprogvalg pr. app
-\n
-\n • Tilføjet understøttelse af temaikoner
-\n
-\n • OsmAnd Cloud: tilføjet mulighed for at slette konto
-\n
-\n • Tilgængelighed: Touch-målstørrelse for knapper ændret til 48 dp; løst problem med kort-brugergrænseflade synlig for skærmlæsere
-\n
-\n • Japanske stemmemeddelelser omarbejdet 
-\n
-\n • Evaluering af højdeændringer og hældninger omarbejdet
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ sensors: omarbejdet forbindelse, skrivning og visning af modtagne data til GPX \n \n • Gratis backup af favoritter og indstillinger til \"OsmAnd Cloud\" \n \n • Nyt format til terrænkort med understøttelse af 3D-relief \n \n • Håndtering af spor: opdateret brugergrænseflade, tilføjet sortering, understøttelse af indlejrede mapper \n \n • Android Auto: ny startmenu til adgang til favoritter, spor og POI-kategorier \n \n • En liste over moduler til top-/bundpanelet \n \n • Ny \"Tog\"-profil, der gør det muligt at beregne jernbaneruter \n \n • Konturlinjer fungerer med enhver \"kortkilde\" \n \n • Udvidet liste over standardhandlinger for eksterne tastaturer \n \n • Brugerdefinerede ruteberegnings-filer, tilføjede muligheder for at slette eller overskrive \n \n • Tilføjet mulighed for at \"Meddel afvigelse fra ruten\" \n \n • Startskærm: tilføjet mulighed for at gendanne OsmAnd-tilstand fra fil \n \n • Tilføjet \"Farlige marteriales\"-klasser for Lastbilnavigation i Nordamerika \n \n • Tilføjet understøttelse af \"Via ferrata\" til fodgængerruter \n \n • Tilføjet \"CAI\"-skala til klassificering af ruternes sværhedsgrad \n \n • Rettet sprogvalg pr. app \n \n • Tilføjet understøttelse af temaikoner \n \n • OsmAnd Cloud: tilføjet mulighed for at slette konto \n \n • Tilgængelighed: Touch-målstørrelse for knapper ændret til 48 dp; løst problem med kort-brugergrænseflade synlig for skærmlæsere \n \n • Japanske stemmemeddelelser omarbejdet \n \n • Evaluering af højdeændringer og hældninger omarbejdet</string>
     <string name="free_favorites_backup_description">Registrér dig hos OsmAnd Cloud for at få gratis sikkerhedskopiering af favoritter og indstillinger.</string>
     <string name="get_osmand_cloud">Få OsmAnd Cloud</string>
     <string name="free_account">Gratis konto</string>
@@ -5402,29 +5082,7 @@
     <string name="help_article_plan_route_web_name">Ruteplanlægning på nettet</string>
     <string name="live_monitoring_adress_descr">Angiv webadressen med parameter-syntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatur</string>
-    <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand
-\n
-\n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer
-\n
-\n • Forbedrede modulpaneler i top og bund til at rumme alle moduler
-\n
-\n • Forbedret lokal ressourceforvaltning
-\n
-\n • Brugerdefinerbar knaptilknytning til eksterne controllere
-\n
-\n • Nye moduler: \"Glidetal\" og \"Solens position\"
-\n
-\n • OsmAnd Cloud: Nu med adgang til slettede filer
-\n
-\n • Forbedret sporfarvning i hældningstilstand med ny symmetrisk gradient
-\n
-\n • Løst problemer med gennemsigtig statuslinje
-\n
-\n • Tilføjet understøttelse af ANT+ temperatur-modul
-\n
-\n • Introduceret \"Tilgængelig RAM\"-modul
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: Tilføjet 3D-tilstand \n \n • Spor: Introduceret filtre og smarte mapper, optimeret hukommelse til større filer \n \n • Forbedrede modulpaneler i top og bund til at rumme alle moduler \n \n • Forbedret lokal ressourceforvaltning \n \n • Brugerdefinerbar knaptilknytning til eksterne controllere \n \n • Nye moduler: \"Glidetal\" og \"Solens position\" \n \n • OsmAnd Cloud: Nu med adgang til slettede filer \n \n • Forbedret sporfarvning i hældningstilstand med ny symmetrisk gradient \n \n • Løst problemer med gennemsigtig statuslinje \n \n • Tilføjet understøttelse af ANT+ temperatur-modul \n \n • Introduceret \"Tilgængelig RAM\"-modul</string>
     <string name="sensor_temperature_desc">Viser temperatur fra sensor</string>
     <string name="app_mode_baby_transport">Baby-transport</string>
     <string name="app_mode_paragliding">Paragliding</string>
@@ -5620,25 +5278,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-faset</string>
     <string name="shared_sting_all_colors">Alle farver</string>
     <string name="lang_ta_in">Tamilsk (Indien)</string>
-    <string name="release_4_7">• Nyt \"Speedometer\"-modul kompatibelt med Android Auto
-\n
-\n • Konfigurér kortskærmen ved at tilføje flere \"Hurtig handling\"-knapper
-\n
-\n • Forbedret læsbarhed af data i grafer
-\n
-\n • Tilføjet filtre efter sensordata til spor
-\n
-\n • Forbedret tilpasning af udseende for grupper af spor
-\n
-\n • Tilføjet understøttelse af yderligere GPX-tags
-\n
-\n • Tilpas \"Afstand under navigation\": Vælg mellem præcise eller afrundede tal.
-\n
-\n • Samlet brugergrænseflade til valg af spor
-\n
-\n • OpenStreetMap-login ændret til OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• Nyt \"Speedometer\"-modul kompatibelt med Android Auto \n \n • Konfigurér kortskærmen ved at tilføje flere \"Hurtig handling\"-knapper \n \n • Forbedret læsbarhed af data i grafer \n \n • Tilføjet filtre efter sensordata til spor \n \n • Forbedret tilpasning af udseende for grupper af spor \n \n • Tilføjet understøttelse af yderligere GPX-tags \n \n • Tilpas \"Afstand under navigation\": Vælg mellem præcise eller afrundede tal. \n \n • Samlet brugergrænseflade til valg af spor \n \n • OpenStreetMap-login ændret til OAuth 2.0</string>
     <string name="precise">Præcis</string>
     <string name="round_up">Rund op</string>
     <string name="distance_during_navigation_description">Vælg, hvordan afstandsinformation skal vises i navigationsmoduler (afstand til punkt, næste sving, baner).
@@ -5660,29 +5300,7 @@
     <string name="shared_string_changes">Ændringer</string>
     <string name="apply_only_to_new">Anvend kun på nye</string>
     <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
-    <string name="release_4_8">• Ny mulighed for terrænfarvning \"Højde\"
-\n
-\n • Brugerdefinerede farvepaletter til terræn, spor og ruter
-\n
-\n • 3D-variant til ikoner for placeringsposition
-\n
-\n • Hurtige handlinger kan nu tildeles til eksterne tastaturer
-\n
-\n • Vejret: Brugerflade-opdatering, tilføjet vindanimation
-\n
-\n • Forbedringer af 3D-spor: nye visualiserings- og farvelægningsmuligheder
-\n
-\n • Udvidet udvalg af turistruter på kortet
-\n
-\n • Tilføjet mulighed for app-tema for at følge korttilstand
-\n
-\n • Rettet sporstatistik, sortering og søgning
-\n
-\n • OSM-redigering: slettet metode til godkendelse af login/adgangskode
-\n
-\n • Skift til systemdelingsark fra Android 14
-\n
-\n</string>
+    <string name="release_4_8">• Ny mulighed for terrænfarvning \"Højde\" \n \n • Brugerdefinerede farvepaletter til terræn, spor og ruter \n \n • 3D-variant til ikoner for placeringsposition \n \n • Hurtige handlinger kan nu tildeles til eksterne tastaturer \n \n • Vejret: Brugerflade-opdatering, tilføjet vindanimation \n \n • Forbedringer af 3D-spor: nye visualiserings- og farvelægningsmuligheder \n \n • Udvidet udvalg af turistruter på kortet \n \n • Tilføjet mulighed for app-tema for at følge korttilstand \n \n • Rettet sporstatistik, sortering og søgning \n \n • OSM-redigering: slettet metode til godkendelse af login/adgangskode \n \n • Skift til systemdelingsark fra Android 14</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Yderligere kort er nødvendige for at se terræn på kortet.</string>
     <string name="vertical_exaggeration_description">Ved at ændre skalaværdien kan du fremhæve 3D-relieffet.</string>
@@ -5936,8 +5554,8 @@
     <string name="obd_fuel_level_desc">Viser køretøjets brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_type_desc">Viser køretøjets brændstoftype via OBD-sensor</string>
-    <string name="obd_air_intake_temp">Temperatur på indsugningsluft</string>
-    <string name="obd_ambient_air_temp">Omgivende lufttemperatur</string>
+    <string name="obd_air_intake_temp">Temperatur på indsugning</string>
+    <string name="obd_ambient_air_temp">Omgivende temperatur</string>
     <string name="obd_battery_voltage">Batterispænding</string>
     <string name="obd_fuel_consumption_rate_desc">Viser køretøjets brændstofforbrug baseret på OBD og placering</string>
     <string name="obd_support">OBD-understøttelse</string>
@@ -5945,8 +5563,8 @@
     <string name="obd_fuel_type_bifuel_ethanol">To-brændstofkøretøj, der kører på ethanol</string>
     <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
-    <string name="obd_engine_coolant_temp">Motorens kølevæsketemperatur</string>
-    <string name="obd_fuel_level">Brændstofniveau</string>
+    <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
+    <string name="obd_fuel_level">Brændstoføkonomi</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
@@ -5979,7 +5597,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
     <string name="liter_per_hour">l/t</string>
-    <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter\n\n</string>
+    <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter</string>
     <string name="screen_is_locked_by_external_button">Den berøringsfølsomme skærm er låst. For at låse op skal du trykke på %1$s-knappen eller trykke på knappen på skærmen.</string>
     <string name="screen_is_unlocked">Den berøringsfølsomme skærm er låst op.</string>
     <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knap for at låse op.</string>
@@ -5993,4 +5611,16 @@
     <string name="connect_obd_instructions_step4">4. Tryk på \"Opret forbindelse,\" og vælg din scanner på listen.</string>
     <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
     <string name="obd_fuel_left_liters">Resterende brændstof (liter)</string>
+    <string name="route_guidance_desc">Giver rutevejledning i realtid, herunder afstand til næste sving, vejnavn, aktuelt gadenavn og oplysninger om vognbane. Moduler er aktive under navigation.</string>
+    <string name="route_guidance">Rutevejledning</string>
+    <string name="obd_widget_vehicle_speed">Køretøjets hastighed</string>
+    <string name="obd_widget_engine_speed">Motorens omdrejningshastighed</string>
+    <string name="obd_nothing_found_description">Tjek venligst følgende:\n – Sørg for, at Bluetooth er slået til\n – Køretøjets motor er i gang\n – Sørg for, at din enhed er inden for scannerens rækkevidde.</string>
+    <string name="obd_nothing_found_text">Ingen scannere fundet</string>
+    <string name="obd_bluetooth_off_description">Slå Bluetooth til og find og tilslut scannere.</string>
+    <string name="obd_searching_text_description">Hold din enhed tæt på scanneren. Sørg for, at køretøjets motor er i gang.</string>
+    <string name="obd_device_forget_sensor">Glem scanner</string>
+    <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
+    <string name="obd_searching_text">Søger efter scannere</string>
+    <string name="connect_obd_instructions_step">1. Tilslut scanneren til bilens OBD-II-indgang.\n\n 2. Tænd for køretøjets motor\n\n 3. Aktivér Bluetooth på din enhed\n\n 4. Tryk på \'%1$s\' og vælg din scanner fra listen.</string>
 </resources>
