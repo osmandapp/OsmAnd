@@ -5948,14 +5948,14 @@
     <string name="obd_battery_voltage">Напряжение батареи</string>
     <string name="obd_fuel_level">Уровень топлива</string>
     <string name="obd_fuel_consumption_rate">Расход топлива</string>
-    <string name="obd_fuel_left_distance">Оставшееся топливо (расстояние)</string>
+    <string name="obd_fuel_left_distance">Остаток топлива (расстояние)</string>
     <string name="obd_fuel_type">Тип топлива</string>
-    <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Обороты двигателя * Расход топлива * Оставшееся количество топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость ТС * Процент заряда батареи.</string>
+    <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Обороты двигателя * Расход топлива * Остаток топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость * Процент заряда батареи.</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру окружающего воздуха по датчику OBD</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя по датчику OBD</string>
     <string name="obd_fuel_level_desc">Виджет показывает уровень топлива в транспортном средстве по датчику OBD</string>
     <string name="obd_fuel_type_desc">Виджет показывает тип топлива транспортного средства по датчику OBD</string>
-    <string name="obd_engine_coolant_temp">t° охлаждающей жидкости двигателя</string>
+    <string name="obd_engine_coolant_temp">t° охлаждающей жидкости</string>
     <string name="obd_fuel_consumption_rate_desc">Виджет показывает расход топлива транспортным средством на основе данных OBD и местоположения</string>
     <string name="obd_plugin_name">Показатели ТС</string>
     <string name="obd_support">Поддержка OBD</string>
