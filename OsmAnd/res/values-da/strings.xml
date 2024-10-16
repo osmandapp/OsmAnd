@@ -5564,7 +5564,7 @@
     <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
     <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
-    <string name="obd_fuel_level">Brændstoføkonomi</string>
+    <string name="obd_fuel_level">Brændstoføkonomi (%%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
