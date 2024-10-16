@@ -5950,7 +5950,7 @@
     <string name="obd_fuel_consumption_rate">Расход топлива</string>
     <string name="obd_fuel_left_distance">Оставшееся топливо (расстояние)</string>
     <string name="obd_fuel_type">Тип топлива</string>
-    <string name="obd_plugin_description">Доступ к информации о вашем транспортном средстве (ТС) по протоколу OBD</string>
+    <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Скорость двигателя * Расход топлива * Оставшееся количество топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость ТС * Процент заряда батареи.</string>
     <string name="obd_ambient_air_temp_desc">Виджет показывает температуру окружающего воздуха по датчику OBD</string>
     <string name="obd_engine_coolant_temp_desc">Виджет показывает температуру охлаждающей жидкости двигателя по датчику OBD</string>
     <string name="obd_fuel_level_desc">Виджет показывает уровень топлива в транспортном средстве по датчику OBD</string>
@@ -5997,4 +5997,14 @@
     <string name="obd_fuel_left_liters">Осталось топлива (литров)</string>
     <string name="route_guidance">Маршрутные маневры</string>
     <string name="route_guidance_desc">Предоставляет указания по маршруту в режиме реального времени, включая расстояние до следующего поворота, название дороги, текущее название улицы и информацию о полосе движения. Виджеты активны во время навигации.</string>
+    <string name="obd_widget_vehicle_speed">Скорость</string>
+    <string name="obd_widget_engine_speed">Обороты двигателя</string>
+    <string name="obd_nothing_found_text">Сканеры не найдены</string>
+    <string name="obd_device_forget_sensor">Удалить сканер</string>
+    <string name="connect_obd_instructions_step">1. Подключите сканер к порту OBD-II транспортного средства.\n\n2. Запустите двигатель ТС.\n\n3. Включите Bluetooth на устройстве.\n\n4. Нажмите «%1$s» и выберите ваш сканер из списка.</string>
+    <string name="obd_bluetooth_off_description">Включите Bluetooth для поиска и подключения сканеров.</string>
+    <string name="obd_nothing_found_description">Пожалуйста, проверьте следующее:\n - Bluetooth включен;\n - двигатель автомобиля работает;\n - ваше устройство находится в зоне действия сканера.</string>
+    <string name="obd_searching_text_description">Пожалуйста, держите устройство поближе к сканеру. Убедитесь, что двигатель ТС работает.</string>
+    <string name="obd_searching_text">Поиск сканеров</string>
+    <string name="obd_device_forget_sensor_description">Сканер будет удален из списка. Вы сможете снова подключить этот сканер в любое время.</string>
 </resources>
