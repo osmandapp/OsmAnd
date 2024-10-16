@@ -5980,7 +5980,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Dugme za prikaz ili skrivanje lokalnih OSM izmena na mapi.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze terenskih motocikla</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje\n\n</string>
+    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje</string>
     <string name="screen_is_locked_by_external_button">Ekran je zaključan. Za otključavanje pritisni dugme %1$s ili dodirni dugme na ekranu.</string>
     <string name="screen_is_unlocked">Ekran je otključan.</string>
     <string name="screen_is_locked_by_action_button">Ekran je zaključan. Dodirni dugme za otključavanje.</string>
@@ -5991,7 +5991,19 @@
     <string name="connect_obd_instructions_step2">2. Pokreni motor vozila</string>
     <string name="obd_how_to_connect">Sad se poveži:</string>
     <string name="connect_obd_instructions_step1">1. Spoj skener na OBD-II priključak u vozilu.</string>
-    <string name="connect_obd_instructions_step3">3. Omogući Bluetooth na svom uređaju</string>
+    <string name="connect_obd_instructions_step3">3. Omogući Bluetooth na uređaju</string>
     <string name="connect_obd_instructions_step4">4. Tapni \'Poveži se\' i odaberi svoj skener s liste.</string>
     <string name="learn_more_about_obd_sensors">Saznaj više o senzorima.</string>
+    <string name="route_guidance">Navođenje rutom</string>
+    <string name="obd_widget_vehicle_speed">Brzina vozila</string>
+    <string name="obd_widget_engine_speed">Broj obrtaja motora</string>
+    <string name="obd_nothing_found_text">Nema skenera</string>
+    <string name="obd_searching_text">Traženje skenera</string>
+    <string name="obd_device_forget_sensor">Zaboravi skener</string>
+    <string name="obd_device_forget_sensor_description">Skener će biti uklonjen s liste. Možeš ponovo upariti ovaj skener u bilo kojem trenutku.</string>
+    <string name="connect_obd_instructions_step">1. Spoj skener na OBD-II priključak vozila.\n\n2. Uključi motor vozila\n\n3. Omogući Bluetooth na svom uređaju\n\n4. Dodirni \'%1$s\' i odaberi svoj skener s liste.</string>
+    <string name="route_guidance_desc">Omogućuje navođenje rutom u stvarnom vremenu, uključujući udaljenost do sledećeg skretanja, naziv ulice, trenutni naziv ulice i informacije o traci. Widžeti su aktivni tokom navigacije.</string>
+    <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
+    <string name="obd_bluetooth_off_description">Uključi Bluetooth traženje i povezivanje skenera.</string>
+    <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
 </resources>
