@@ -123,6 +123,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onResume() {
 		super.onResume()
+		startSearch()
 		updateCurrentStateView()
 	}
 

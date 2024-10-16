@@ -19,6 +19,7 @@ object OBDDataComputer {
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
+	var fuelTank = 52f
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 
@@ -96,11 +97,22 @@ object OBDDataComputer {
 	) {
 		SPEED(false, OBD_SPEED_COMMAND, "shared_string_speed"),
 		RPM(false, OBD_RPM_COMMAND, "obd_rpm"),
-		FUEL_LEFT_DISTANCE(true, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_distance"),
-		//	FUEL_LEFT_LITERS(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_liters"),
-		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_level"),
-		FUEL_CONSUMPTION_RATE(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_consumption_rate"),
-		FUEL_CONSUMPTION_RATE_SENSOR(false, OBD_FUEL_CONSUMPTION_RATE_COMMAND, "obd_fuel_consumption_rate"),
+		FUEL_LEFT_KM(true, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_distance"),
+		FUEL_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_level"),
+		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_percent"),
+		FUEL_LEFT_LITER(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_liter"),
+		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_percent_hour"),
+		FUEL_CONSUMPTION_RATE_LITER_HOUR(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_liter_hour"),
+		FUEL_CONSUMPTION_RATE_SENSOR(
+			false,
+			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
+			"obd_fuel_consumption_rate_scanner"),
 		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND, "obd_air_intake_temp"),
 		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, "obd_ambient_air_temp"),
 		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND, "obd_battery_voltage"),
@@ -149,7 +161,12 @@ object OBDDataComputer {
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
-				value = formatter.format(compute())
+				val computedValue = compute()
+				value = if ("N/A" == computedValue) {
+					"N/A"
+				} else {
+					formatter.format(compute())
+				}
 				cachedVersion = v
 			}
 			return value
@@ -157,6 +174,9 @@ object OBDDataComputer {
 
 		private fun compute(): Any? {
 			val locValues = ArrayList(values)
+			if (locValues.size > 0 && locValues[0] == OBDDataField.NO_DATA) {
+				return "N/A"
+			}
 			return when (type) {
 				TEMPERATURE_AMBIENT,
 				TEMPERATURE_COOLANT,
@@ -172,7 +192,7 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_CONSUMPTION_RATE -> {
+				FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> {
 					if (locValues.size >= 2) {
 						val first = locValues[0]
 						val last = locValues[locValues.size - 1]
@@ -185,7 +205,20 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_LEFT_DISTANCE -> {
+				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
+					if (locValues.size >= 2) {
+						val first = locValues[0]
+						val last = locValues[locValues.size - 1]
+						val diffPerc = first.value as Float - last.value as Float
+						val diffTime = last.timestamp - first.timestamp
+						println("diftime $diffTime; diffPerc $diffPerc")
+						fuelTank * diffPerc / 100 / diffTime * 1000 * 3600
+					} else {
+						null
+					}
+				}
+
+				FUEL_LEFT_KM -> {
 					// works for window > 15 min
 					if (locValues.size >= 2) {
 						val first = locValues[0]
@@ -223,8 +256,23 @@ object OBDDataComputer {
 					null
 				}
 
-//				FUEL_LEFT_LITERS,
 				FUEL_LEFT_PERCENT -> {
+					if (locValues.size > 0) {
+						100 - locValues[locValues.size - 1].value as Float
+					} else {
+						null
+					}
+				}
+
+				FUEL_LEFT_LITER -> {
+					if (locValues.size > 0) {
+						fuelTank * (100 - locValues[locValues.size - 1].value as Float) / 100
+					} else {
+						null
+					}
+				}
+
+				FUEL_PERCENT -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].value
 					} else {
@@ -250,8 +298,15 @@ object OBDDataComputer {
 
 		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 			value[type.requiredCommand]?.let {
-				version++
-				values.add(it)
+				if (it == OBDDataField.NO_DATA) {
+					if(values.isEmpty()) {
+						version++
+					}
+					values = mutableListOf(it)
+				} else {
+					version++
+					values.add(it)
+				}
 			}
 		}
 

@@ -28,6 +28,7 @@ object OBDDispatcher {
 	private var readStatusListener: OBDReadStatusListener? = null
 	private val sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
 	private var obd2Connection: Obd2Connection? = null
+	var useInfoLogging = false
 
 	interface OBDReadStatusListener {
 		fun onIOError()
@@ -39,7 +40,7 @@ object OBDDispatcher {
 		scope = CoroutineScope(Dispatchers.IO + job!!)
 		scope!!.launch {
 			try {
-				log.debug("Start reading obd with $inputStream and $outputStream")
+				log("Start reading obd with $inputStream and $outputStream")
 				obd2Connection = Obd2Connection(object : UnderlyingTransport {
 					override fun write(bytes: ByteArray) {
 						val buffer = Buffer()
@@ -84,6 +85,8 @@ object OBDDispatcher {
 								} else {
 									log.error("Incorrect response length for command $command")
 								}
+							} else if(commandResult == OBDResponse.NO_DATA) {
+								sensorDataCache[command] = OBDDataField.NO_DATA
 							}
 						}
 					} catch (error: IOException) {
@@ -129,8 +132,16 @@ object OBDDispatcher {
 	}
 
 	fun stopReading() {
-		log.debug("stop reading")
+		log("stop reading")
 		setReadWriteStreams(null, null)
-		log.debug("after stop reading")
+		log("after stop reading")
+	}
+
+	private fun log(msg: String) {
+		if(useInfoLogging) {
+			log.info(msg)
+		} else {
+			log.debug(msg)
+		}
 	}
 }

@@ -102,14 +102,20 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
 		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
 		val fuelLevelWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEVEL)
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEVEL_PERCENT)
 		widgetsInfos.add(creator.createWidgetInfo(fuelLevelWidget))
 		val fuelLeftDistanceWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_DISTANCE)
 		widgetsInfos.add(creator.createWidgetInfo(fuelLeftDistanceWidget))
-		val fuelConsumptionRateWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateWidget))
+		val fuelConsumptionRateLiterHourWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateLiterHourWidget))
+		val fuelConsumptionRatePercentHourWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRatePercentHourWidget))
+		val fuelConsumptionRateSensorWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateSensorWidget))
 		val fuelTypeWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_TYPE)
 		widgetsInfos.add(creator.createWidgetInfo(fuelTypeWidget))
@@ -144,17 +150,25 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				mapActivity,
 				OBDWidgetDataFieldType.BATTERY_VOLTAGE)
 
-			WidgetType.OBD_FUEL_LEVEL -> return OBDTextWidget(
+			WidgetType.OBD_FUEL_LEVEL_PERCENT -> return OBDTextWidget(
 				mapActivity,
-				OBDWidgetDataFieldType.FUEL_LVL)
+				OBDWidgetDataFieldType.FUEL_LEFT_PERCENT)
 
 			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(
 				mapActivity,
 				OBDWidgetDataFieldType.FUEL_LEFT_DISTANCE)
 
-			WidgetType.OBD_FUEL_CONSUMPTION_RATE -> return OBDTextWidget(
+			WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> return OBDTextWidget(
 				mapActivity,
-				OBDWidgetDataFieldType.FUEL_CONSUMPTION_RATE)
+				OBDWidgetDataFieldType.FUEL_CONSUMPTION_RATE_PERCENT_HOUR)
+
+			WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_CONSUMPTION_RATE_SENSOR)
+
+			WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR -> return OBDTextWidget(
+				mapActivity,
+				OBDWidgetDataFieldType.FUEL_CONSUMPTION_RATE_LITER_HOUR)
 
 			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
 				mapActivity,
@@ -330,6 +344,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	private fun onDeviceConnected(btDeviceInfo: BTDeviceInfo) {
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
+			OBDDataComputer.fuelTank = 52f //todo implement setting correct fuel tank
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}

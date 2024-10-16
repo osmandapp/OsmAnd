@@ -26,62 +26,90 @@ class OBDTextWidget @JvmOverloads constructor(
 		val obdDataWidgetType: OBDTypeWidget
 		var formatter = OBDComputerWidgetFormatter()
 		var averageTimeSeconds = 0
-		when(fieldType) {
+
+		when (fieldType) {
 			RPM -> {
 				obdDataWidgetType = OBDTypeWidget.RPM
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
-			FUEL_CONSUMPTION_RATE -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE
+
+			FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR
 				formatter = OBDComputerWidgetFormatter("%.0f")
 				averageTimeSeconds = 5 * 60
 			}
+
+			FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR
+				formatter = OBDComputerWidgetFormatter("%.0f")
+				averageTimeSeconds = 5 * 60
+			}
+
 			FUEL_CONSUMPTION_RATE_SENSOR -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR
-				formatter = OBDComputerWidgetFormatter("%.0f")
-				averageTimeSeconds = 5 * 60
+				formatter = OBDComputerWidgetFormatter("%.2f")
 			}
+
 			FUEL_LEFT_DISTANCE -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_DISTANCE
+				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_KM
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
+
 			SPEED -> {
 				obdDataWidgetType = OBDTypeWidget.SPEED
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
-			FUEL_LVL -> {
+
+			FUEL_LEFT_PERCENT -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_PERCENT
 				formatter = OBDComputerWidgetFormatter("%.2f")
 			}
+
+			FUEL_LEFT_LITER -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_LITER
+				formatter = OBDComputerWidgetFormatter("%.2f")
+			}
+
+			FUEL_LVL_PERCENT -> {
+				obdDataWidgetType = OBDTypeWidget.FUEL_PERCENT
+				formatter = OBDComputerWidgetFormatter("%.2f")
+			}
+
 			AMBIENT_AIR_TEMP -> {
 				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_AMBIENT
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
+
 			BATTERY_VOLTAGE -> {
 				obdDataWidgetType = OBDTypeWidget.BATTERY_VOLTAGE
 				formatter = OBDComputerWidgetFormatter("%.2f")
 			}
+
 			AIR_INTAKE_TEMP -> {
 				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_INTAKE
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
+
 			COOLANT_TEMP -> {
 				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_COOLANT
 				formatter = OBDComputerWidgetFormatter("%.0f")
 			}
+
 			FUEL_TYPE -> {
 				obdDataWidgetType = OBDTypeWidget.FUEL_TYPE
 				formatter = OBDFuelTypeFormatter()
 			}
+
 			VIN -> {
 				obdDataWidgetType = OBDTypeWidget.VIN
 				formatter = OBDComputerWidgetFormatter("%s")
 			}
 		}
 		//todo implement setting correct time for widget (0 for instant)
-		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, averageTimeSeconds, formatter)
+		widgetComputer =
+			OBDDataComputer.registerWidget(obdDataWidgetType, averageTimeSeconds, formatter)
 	}
-	
+
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
 		val data = widgetComputer.computeValue()
 		val textData: String
@@ -93,7 +121,7 @@ class OBDTextWidget @JvmOverloads constructor(
 			textData = data.toString()
 			subtext = fieldType.dataType.getDisplayUnit()
 		}
-		if(!Algorithms.objectEquals(textData, cacheTextData)) {
+		if (!Algorithms.objectEquals(textData, cacheTextData)) {
 			setText(textData, subtext)
 			cacheTextData = textData
 		}

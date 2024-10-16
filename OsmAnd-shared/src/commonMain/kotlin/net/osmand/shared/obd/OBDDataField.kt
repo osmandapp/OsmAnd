@@ -13,4 +13,8 @@ open class OBDDataField<T>(
 	fun getDisplayUnit(): String {
 		return type.getDisplayUnit()
 	}
+
+	companion object {
+		val NO_DATA = OBDDataField<Any>(OBDDataFieldType.NO_DATA, 0)
+	}
 }

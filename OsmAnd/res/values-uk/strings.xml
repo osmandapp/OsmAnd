@@ -5956,7 +5956,7 @@
     <string name="obd_battery_voltage_desc">Віджет показує напругу акумулятора за датчиком OBD</string>
     <string name="obd_fuel_left_distance_desc">Віджет показує відстань, яку може проїхати машина на залишковому рівні пального за датчиком OBD</string>
     <string name="obd_engine_coolant_temp">t° охолоджувальної рідини двигуна</string>
-    <string name="obd_fuel_level">Рівень пального</string>
+    <string name="obd_fuel_level">Рівень пального (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
     <string name="obd_fuel_left_distance">Залишок пального (відстань)</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
