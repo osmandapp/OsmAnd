@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import static net.osmand.plus.settings.fragments.search.SearchablePreferenceScreenGraphProviderWrapper.wrapSearchablePreferenceScreenGraphProvider;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,28 +14,30 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.settingssearch.graph.ComputeAndPersist;
-import de.KnollFrank.lib.settingssearch.graph.SearchablePreferenceScreenGraphLoader;
 
 public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
+	private final GraphDAOMode graphDAOMode;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
-									  final @IdRes int fragmentContainerViewId) {
+									  final @IdRes int fragmentContainerViewId,
+									  final GraphDAOMode graphDAOMode) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
+		this.graphDAOMode = graphDAOMode;
 	}
 
 	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
-		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment());
+		onClickShowSearchPreferenceFragment(searchPreferenceButton);
 		searchPreferenceButton.setImageDrawable(rootSearchPreferenceFragment.getIcon(R.drawable.searchpreference_ic_search));
 		searchPreferenceButton.setVisibility(View.VISIBLE);
 	}
 
-	private void showSearchPreferenceFragment() {
-		createSearchPreferenceFragments().showSearchPreferenceFragment();
+	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
+		final SearchPreferenceFragments searchPreferenceFragments = createSearchPreferenceFragments();
+		searchPreferenceButton.setOnClickListener(v -> searchPreferenceFragments.showSearchPreferenceFragment());
 	}
 
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
@@ -47,16 +51,11 @@ public class SettingsSearchButtonHelper {
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.withWrapSearchablePreferenceScreenGraphProvider(
-						(searchablePreferenceScreenGraphProvider, preferenceManager) -> {
-							final boolean persist = false;
-							return persist ?
-									new ComputeAndPersist(
-											searchablePreferenceScreenGraphProvider,
-											preferenceManager.getContext()) :
-									new SearchablePreferenceScreenGraphLoader(
-											R.raw.searchable_preference_screen_graph,
-											preferenceManager);
-						})
+						(searchablePreferenceScreenGraphProvider, preferenceManager) ->
+								wrapSearchablePreferenceScreenGraphProvider(
+										searchablePreferenceScreenGraphProvider,
+										preferenceManager,
+										graphDAOMode))
 				.build();
 	}
 
