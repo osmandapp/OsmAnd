@@ -5053,4 +5053,5 @@
     <string name="navigation_action_descr">פתיחת הניווט.</string>
     <string name="battery_saving_mode">מצב חסכון בסוללה</string>
     <string name="obd_vehicle_info">פרטי כלי הרכב</string>
+    <string name="obd_how_to_connect">איך להתחבר:</string>
 </resources>

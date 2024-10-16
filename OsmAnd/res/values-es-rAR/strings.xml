@@ -3221,7 +3221,7 @@
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">«%1$s» importado(s).</string>
     <string name="rendering_value_white_name">Blanco</string>
-    <string name="swap_two_places">Alternar %1$s y %2$s</string>
+    <string name="swap_two_places">Invertir %1$s y %2$s</string>
     <string name="route_start_point">Punto de partida</string>
     <string name="default_speed_dialog_msg">Estima el tiempo de llegada para los tipos de caminos desconocidos, y limita la velocidad para todos los caminos (puede afectar a la ruta)</string>
     <string name="track_saved">Traza guardada</string>
