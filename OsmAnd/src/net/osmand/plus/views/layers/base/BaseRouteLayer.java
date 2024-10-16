@@ -58,6 +58,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
+	private Boolean shouldShowDirectionArrows;
 
 	//OpenGL
 	//kOutlineColor 150, 0, 0, 0
@@ -150,6 +151,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 			routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(mode);
 			routeGradientPalette = settings.ROUTE_GRADIENT_PALETTE.getModeValue(mode);
 		}
+
 	}
 
 	@Override
@@ -182,6 +184,15 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	public void setDirectionArrowsColor(@Nullable Integer directionArrowsColor) {
 		this.directionArrowsColor = directionArrowsColor;
+	}
+
+	public boolean shouldShowDirectionArrows() {
+		return shouldShowDirectionArrows != null ? shouldShowDirectionArrows :
+				previewRouteLineInfo == null || previewRouteLineInfo.shouldShowDirectionArrows();
+	}
+
+	public void setShouldShowDirectionArrows(@Nullable Boolean shouldShowDirectionArrows) {
+		this.shouldShowDirectionArrows = shouldShowDirectionArrows;
 	}
 
 	protected float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
