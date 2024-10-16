@@ -1039,27 +1039,8 @@
     <string name="select_navigation_mode">Vrsta prevoza:</string>
     <string name="recalculate_route_to_your_location">Način prevoza:</string>
     <string name="filterpoi_activity">Kreiraj TOI filter</string>
-    <string name="osmand_plus_extended_description_part8">Približna pokrivenost mape i kvalitet: 
-\n • Zapadna Evropa: **** 
-\n • Istočna Evropa: *** 
-\n • Rusija: *** 
-\n • Severna Amerika: *** 
-\n • Južna Amerika: ** 
-\n • Azija: ** 
-\n • Japan i Koreja: *** 
-\n • Bliski istok: ** 
-\n • Afrika: ** 
-\n • Antarktik: * 
-\n Većina država na svetu se može skinuti 
-\n Od Avganistana do Šri Lanke, gore od Aljaske do Australije. Argentina, Brazil, Kanada, Francuska, Nemačka, Meksiko, Velika Britanija, Španija, …
-\n</string>
-    <string name="osmand_plus_extended_description_part7">Doprinesi direktno OSM-u
-\n • Prijavljuj greške u podacima
-\n • Otpremaj GPX putovanja neposredno iz programa
-\n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisti na internetu)
-\n • Moguće snimanje putovanja i u pozadini (dok je uređaj u stanju mirovanja)
-\n OsmAnd aktivno razvija softver otvorenog koda. Svako može da doprinese programu prijavljujući greške, poboljšavajući prevode ili razvijajući nove mogućnosti. Dodatno se projekat oslanja i na novčanu pomoć radi novčane pomoći programiranju i probi novih mogućnosti.
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Približna pokrivenost mape i kvalitet: \n • Zapadna Evropa: **** \n • Istočna Evropa: *** \n • Rusija: *** \n • Severna Amerika: *** \n • Južna Amerika: ** \n • Azija: ** \n • Japan i Koreja: *** \n • Bliski istok: ** \n • Afrika: ** \n • Antarktik: * \n Većina država na svetu se može skinuti \n Od Avganistana do Šri Lanke, gore od Aljaske do Australije. Argentina, Brazil, Kanada, Francuska, Nemačka, Meksiko, Velika Britanija, Španija, …</string>
+    <string name="osmand_plus_extended_description_part7">Doprinesi direktno OSM-u \n • Prijavljuj greške u podacima \n • Otpremaj GPX putovanja neposredno iz programa \n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisti na internetu) \n • Moguće snimanje putovanja i u pozadini (dok je uređaj u stanju mirovanja) \n OsmAnd aktivno razvija softver otvorenog koda. Svako može da doprinese programu prijavljujući greške, poboljšavajući prevode ili razvijajući nove mogućnosti. Dodatno se projekat oslanja i na novčanu pomoć radi novčane pomoći programiranju i probi novih mogućnosti.</string>
     <string name="osmand_plus_extended_description_part6">Mogućnost rada za bicikliste i pešake 
 \n • Pregled staza za pešanjenje, hodanje i bicikle, sjajno za delovanje van kuće 
 \n • Posebno traženje puta i načina izgleda za bicikle i pešake 
@@ -1067,12 +1048,7 @@
 \n • Dodatak snimanja puta u mestnu datoteku GPXa ili mrežne usluge 
 \n • Dodatak prikaza brzine i nadmorske visine 
 \n • Prikaz konturnih linija i visinskih obrisa (preko dodatka)</string>
-    <string name="osmand_plus_extended_description_part5">Bezbednosne mogućnosti 
-\n • Dodatak samostalnog prekaziva dnevnog/noćnog rada 
-\n • Dodatak prikazivanja ograničenja brzine, sa podsetnikom ako je prekoračite 
-\n • Dodatak približavanja puta u zavisnosti od brzine kretanja 
-\n • Deljenjem tvoje lokacije, prijatelji mogu da te nađu
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Bezbednosne mogućnosti \n • Dodatak samostalnog prekaziva dnevnog/noćnog rada \n • Dodatak prikazivanja ograničenja brzine, sa podsetnikom ako je prekoračite \n • Dodatak približavanja puta u zavisnosti od brzine kretanja \n • Deljenjem tvoje lokacije, prijatelji mogu da te nađu</string>
     <string name="osmand_plus_extended_description_part4">Korišćenje OSM-a i podataka sa Vikipedije 
 \n • Visokokvalitetni podaci sa najboljih projekata sa zajedničkim radom 
 \n • Podaci OSM-a dostupni po državi ili oblasti 
@@ -1081,49 +1057,15 @@
 \n • Kompaktne vektorske mape bez interneta koje se osvežavaju bar jednom mesečno 
 \n 
 \n • Izabir između celokupnih podataka oblasti ili samo mreže puteva (primer: ceo Japan je 700MB, a samo putevi su 200MB)</string>
-    <string name="osmand_plus_extended_description_part3">Pregled mape
-\n • Prikazuje lokaciju i pravac
-\n • Dodatno poravnjavanje slike prema kompasu ili smeru kretanja
-\n • Čuvanje najbitnijih mesta u omiljenim mestima
-\n • Prikazati TOI u blizini
-\n • Prikazuje odgovarajuće slike sa mreže, satelitske snimke (sa Binga), različite preklapajuće slojeve za obilaske/navođenje sa stazama GPXa i dodatne slojeve sa podesivom prozirnošću
-\n • Mogućnost prikazivanja imena na mapi: na engleskom, lokalnom jeziku ili slovni izgovor
-\n</string>
-    <string name="osmand_plus_extended_description_part2">Navođenje 
-\n • Radi preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje) 
-\n • Glasovno navođenje od skretanja do skretanja (snimljeni ili pretvoreni glasovi) 
-\n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska 
-\n • Podrška za usputne tačke na putu 
-\n • Samostalno preračunavanje puta kada se odaljite sa rute 
-\n • Pretraga mesta po adresi, vrsti (npr. gostione, prenoćišta, gorivne crpne stanice, muzeji), ili po koordinatama 
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Pregled mape \n • Prikazuje lokaciju i pravac \n • Dodatno poravnjavanje slike prema kompasu ili smeru kretanja \n • Čuvanje najbitnijih mesta u omiljenim mestima \n • Prikazati TOI u blizini \n • Prikazuje odgovarajuće slike sa mreže, satelitske snimke (sa Binga), različite preklapajuće slojeve za obilaske/navođenje sa stazama GPXa i dodatne slojeve sa podesivom prozirnošću \n • Mogućnost prikazivanja imena na mapi: na engleskom, lokalnom jeziku ili slovni izgovor</string>
+    <string name="osmand_plus_extended_description_part2">Navođenje \n • Radi preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje) \n • Glasovno navođenje od skretanja do skretanja (snimljeni ili pretvoreni glasovi) \n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska \n • Podrška za usputne tačke na putu \n • Samostalno preračunavanje puta kada se odaljite sa rute \n • Pretraga mesta po adresi, vrsti (npr. gostione, prenoćišta, gorivne crpne stanice, muzeji), ili po koordinatama</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) je program za mape i navođenje koja pristupa besplatnim visokokvalitetnim podacima OSM-a iz celog sveta. 
 \n Uživajte u prikaznom i glasovnom navođenju, pregledu TOI, pravljenjem i upravljanjem putanjama GPXa, korišćenjem izobata i podacima o visini, izboru između prikaza vožnje, biciklizma, pešačenja, izmena na OSM-u i još mnogo toga. 
 \n 
 \n OsmAnd+ je izdanje programa koja se plaća. Njegovom kupovinom, podržavate projekat, plaćate razvoj novih mogućnosti i primate najnovija osveženja. 
 \n 
 \n Neke od glavnih osobina:</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ je program slobodnog koda za navođenje sa pristupom raznim zemaljskim podacima OSM-a. Svi podaci na mapi (vektorski ili sličice mape) se mogu uskladištiti na memorijsku mapicu telefona za upotrebu i bez interneta. Nude se mogućnosti navođenja i sa i bez beze sa internetom, uključujući u glasovno navođenje.
-\n
-\n OsmAnd+ je izdanje programa koja se plaća, a njenom kupovinom, podržavate projekat, prilažete razvoju novih mogućnosti i primate najnovija unapređenja.
-\n
-\n Neke od osnovnih mogućnosti:
-\n - Potpuna mogućnost rada bez interneta (skladištenje preuzetih vektorskih mapa i sličica na skladište telefona)
-\n - Dostupne su celokupne vektorske mape celog sveta za rad bez interneta
-\n - Neograničena preuzimanja država ili oblati neposredno iz programa
-\n - Podrška rada Vikipedije bez interneta (preuzimanje Vikipedijih TOI), sjajno za turistička razgledanja
-\n - Mogućnost dodavanja različitih dodatnih slojeva, kao što su nivo GPXa ili staze za navođenje. TOI, omiljene tačke, izohipse, stanice javnog prevoza, dodatne mape sa podesivom prozirnošću
-\n
-\n - Pretraga bez interneta za adrese i TOI
-\n - Navođenje bez potrebe za internetom za udaljenosti srednjeg dometa
-\n - Načini rada za automobil, biciklu i pešake sa dodatnim:
-\n - Samostalnim prebacivanjem dnevnog/ noćnog načina rada
-\n - Približavanje prikaza zavisno od brzine
-\n - Okretanjem mape prema kompasu ili pravcu kretanja
-\n - Navođenjem u odgovarajuću traku, prikaz ograničenja brzine, snimljeni i stvoreni glasovi za navođenje
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n OsmAnd+ je program slobodnog koda za navođenje sa pristupom raznim zemaljskim podacima OSM-a. Svi podaci na mapi (vektorski ili sličice mape) se mogu uskladištiti na memorijsku mapicu telefona za upotrebu i bez interneta. Nude se mogućnosti navođenja i sa i bez beze sa internetom, uključujući u glasovno navođenje. \n \n OsmAnd+ je izdanje programa koja se plaća, a njenom kupovinom, podržavate projekat, prilažete razvoju novih mogućnosti i primate najnovija unapređenja. \n \n Neke od osnovnih mogućnosti: \n - Potpuna mogućnost rada bez interneta (skladištenje preuzetih vektorskih mapa i sličica na skladište telefona) \n - Dostupne su celokupne vektorske mape celog sveta za rad bez interneta \n - Neograničena preuzimanja država ili oblati neposredno iz programa \n - Podrška rada Vikipedije bez interneta (preuzimanje Vikipedijih TOI), sjajno za turistička razgledanja \n - Mogućnost dodavanja različitih dodatnih slojeva, kao što su nivo GPXa ili staze za navođenje. TOI, omiljene tačke, izohipse, stanice javnog prevoza, dodatne mape sa podesivom prozirnošću \n \n - Pretraga bez interneta za adrese i TOI \n - Navođenje bez potrebe za internetom za udaljenosti srednjeg dometa \n - Načini rada za automobil, biciklu i pešake sa dodatnim: \n - Samostalnim prebacivanjem dnevnog/ noćnog načina rada \n - Približavanje prikaza zavisno od brzine \n - Okretanjem mape prema kompasu ili pravcu kretanja \n - Navođenjem u odgovarajuću traku, prikaz ograničenja brzine, snimljeni i stvoreni glasovi za navođenje</string>
     <string name="osmand_plus_short_description_80_chars">Globalni pregled mapa na mobilnim uređajima i navođenje OSM mapama sa i bez interneta</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
     <string name="osmand_extended_description_part8">OsmAnd je otvorenog koda na kojoj se aktivno radi. Svako može da doprinese programu tako što će da prijavljuje greške, poboljšava prevode ili da programira nove mogućnosti. Dodatno, projekat se oslanja na novčane priloge radi ulaganja u razvoj i proveru novih mogućnosti.
@@ -1140,18 +1082,8 @@
 \n • Antarktik: *
 \n Većina država na svetu se može preuzeti!
 \n Dobijaš pouzdanog vodiča u državi - bilo da je to Francuska, Nemačka, Meksiko, Velika Britanija, Holandija, SAD, Rusija, Brazil ili neka druga.</string>
-    <string name="osmand_extended_description_part7">Doprinesite OSM-u
-\n • Prijavljuj greške u podacima
-\n • Uvezi rute GPX neposredno iz programa
-\n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisi na internetu)
-\n</string>
-    <string name="osmand_extended_description_part6">Šetanje, planinarenje, gradske ture
-\n • Mapa pokazuje pešačke i planinarske staze
-\n • Vikipedija na tvom jeziku može reći mnogo za vreme putovanja po gradu
-\n • Stanice javnog prevoza (autobusi, tramvaji, vozovi), uključujući i imena linija će pomoći kretanje po nepoznatom gradu
-\n • Navođenje GPS-om u režimu pešačenja pravi rutu koristeći staze na kojima se može proći peške
-\n • Uvezi i prati tragove GPX rute ili snimaj i deli sopstvene
-\n</string>
+    <string name="osmand_extended_description_part7">Doprinesite OSM-u \n • Prijavljuj greške u podacima \n • Uvezi rute GPX neposredno iz programa \n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisi na internetu)</string>
+    <string name="osmand_extended_description_part6">Šetanje, planinarenje, gradske ture \n • Mapa pokazuje pešačke i planinarske staze \n • Vikipedija na tvom jeziku može reći mnogo za vreme putovanja po gradu \n • Stanice javnog prevoza (autobusi, tramvaji, vozovi), uključujući i imena linija će pomoći kretanje po nepoznatom gradu \n • Navođenje GPS-om u režimu pešačenja pravi rutu koristeći staze na kojima se može proći peške \n • Uvezi i prati tragove GPX rute ili snimaj i deli sopstvene</string>
     <string name="osmand_extended_description_part5">Biciklizam
 \n • Nađite biciklističke staze na mapama
 \n • Navođenje GPS-om za bicikle pronalazi rutu na biciklističkim stazama
@@ -1160,27 +1092,8 @@
 \n • Uz još dodataka možeš da uključiš i izohipse i osenčen reljef</string>
     <string name="osmand_extended_description_part4">Skijanje
 \n OsmAndov dodatak za skijaške mape omogućava pregled skijaške staze uz njihovu težinu i dodatne podatke, kao što su lokaciju skijaških žičara i ostalih objekata.</string>
-    <string name="osmand_extended_description_part3">Mapa 
-\n • Prikazati TOI u blizini 
-\n • Podešavanje mape prema pravcu kretanja (ili kompasu) 
-\n • Prikazuje Vaš lokaciju i pravac u kom je telefon usmeren 
-\n • Deli lokaciju da prijatelji mogu da te nađu 
-\n • Držite najbitnija mesta u „Omiljenim“ 
-\n • Dozvoljava da izaberete kako prikazujete imena na mapi: na engleskom, oblasnom jeziku ili slovni izgovor 
-\n • Prikazuje odgovarajuće slike sa mreže, satelitske snimke (sa Binga), različite preklapajuće slojeve za obilaske/navođenje sa stazama GPXa i dodatne slojeve sa podesivom prozirnošću
-\n</string>
-    <string name="osmand_extended_description_part2">GPS navigacija
-\n • Odabir između navođenja preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje)
-\n • Glasovno navođenje od vrata do vrata (snimljeni ili sintetizovani glasovi)
-\n • Samostalno preračunavanje puta kada se udaljite sa rute
-\n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska
-\n • Samostalno menjanje dnevnog/ noćnog prikaza za bezbednije putovanje
-\n • Prikaz ograničenja brzine i podsetnik kada je prekoračite
-\n • Približavanje mape se prilagođava brzini
-\n • Pretraga mesta po adresi, vrsti (npr. kafane, prenoćišta, pumpe, muzeji), ili po koordinatama
-\n • Podrška za međuodredišta
-\n • Snimanje ili uvoz ruta GPX-a i njihovo praćenje
-\n</string>
+    <string name="osmand_extended_description_part3">Mapa \n • Prikazati TOI u blizini \n • Podešavanje mape prema pravcu kretanja (ili kompasu) \n • Prikazuje Vaš lokaciju i pravac u kom je telefon usmeren \n • Deli lokaciju da prijatelji mogu da te nađu \n • Držite najbitnija mesta u „Omiljenim“ \n • Dozvoljava da izaberete kako prikazujete imena na mapi: na engleskom, oblasnom jeziku ili slovni izgovor \n • Prikazuje odgovarajuće slike sa mreže, satelitske snimke (sa Binga), različite preklapajuće slojeve za obilaske/navođenje sa stazama GPXa i dodatne slojeve sa podesivom prozirnošću</string>
+    <string name="osmand_extended_description_part2">GPS navigacija \n • Odabir između navođenja preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje) \n • Glasovno navođenje od vrata do vrata (snimljeni ili sintetizovani glasovi) \n • Samostalno preračunavanje puta kada se udaljite sa rute \n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska \n • Samostalno menjanje dnevnog/ noćnog prikaza za bezbednije putovanje \n • Prikaz ograničenja brzine i podsetnik kada je prekoračite \n • Približavanje mape se prilagođava brzini \n • Pretraga mesta po adresi, vrsti (npr. kafane, prenoćišta, pumpe, muzeji), ili po koordinatama \n • Podrška za međuodredišta \n • Snimanje ili uvoz ruta GPX-a i njihovo praćenje</string>
     <string name="osmand_extended_description_part1">OsmAnd je aplikacija za mape i navigaciju s pristupom besplatnim, svetskim i visokokvalitetnim OSM podacima.
 \n
 \n Uživaj u prikazanom i glasovnom navođenju, pregledu TOI, pravljenjem i upravljanjem putanjama GPXa, korišćenjem izobata i podacima o visini (kroz dodatak), izboru između načina vožnje, bicikla, pešačenja, izmena na OSM-u i još mnogo toga.</string>
@@ -2440,31 +2353,7 @@
     <string name="use_system_screen_timeout">Koristi sistemsko vreme odlaganja gašenja ekrana</string>
     <string name="reset_to_default_category_button_promo">Povratak na podrazumevano će postaviti redosled razvrstavanja na podrazumevano stanje posle ugradnje programa.</string>
     <string name="copy_coordinates">Kopiraj koordinate</string>
-    <string name="release_3_6">• Nalozi: sada možete promeniti redosled, postaviti sličicu mape, promeniti sve podešavanja osnovnih profila i povratiti ih nazad na podrazumevane vrednosti 
-\n 
-\n • Dodati brojevi izlaza prilikom navođenja 
-\n 
-\n • Preuređene su podešavanja dodataka 
-\n 
-\n • Preuređen je prikaz postavki za brži pristup svim nalozima 
-\n 
-\n • Dodata je mogućnost za umnožavanje postavki iz drugog profila 
-\n 
-\n • Dodata je mogućnost promene redosleda ili skrivanja vrsti TOI u Pretrazi 
-\n 
-\n • Ispravno su poravnate sličice TOI na mapi 
-\n 
-\n • Dodati su podaci izlaska i zalaska sunca na podešavanju mape 
-\n 
-\n • Na mapu je dodata sličica kuća/posao 
-\n 
-\n • Dodata je podrška za opise iz više redova u podešavanjima 
-\n 
-\n • Dodato je ispravno preslovljavanje na mapu Japana 
-\n 
-\n • Dodata je mapa Antarktika
-\n
-\n</string>
+    <string name="release_3_6">• Nalozi: sada možete promeniti redosled, postaviti sličicu mape, promeniti sve podešavanja osnovnih profila i povratiti ih nazad na podrazumevane vrednosti \n \n • Dodati brojevi izlaza prilikom navođenja \n \n • Preuređene su podešavanja dodataka \n \n • Preuređen je prikaz postavki za brži pristup svim nalozima \n \n • Dodata je mogućnost za umnožavanje postavki iz drugog profila \n \n • Dodata je mogućnost promene redosleda ili skrivanja vrsti TOI u Pretrazi \n \n • Ispravno su poravnate sličice TOI na mapi \n \n • Dodati su podaci izlaska i zalaska sunca na podešavanju mape \n \n • Na mapu je dodata sličica kuća/posao \n \n • Dodata je podrška za opise iz više redova u podešavanjima \n \n • Dodato je ispravno preslovljavanje na mapu Japana \n \n • Dodata je mapa Antarktika</string>
     <string name="clear_recorded_data">Očisti snimljene podatke</string>
     <string name="routing_profile_direct_to">Dikretno-na-tačku</string>
     <string name="route_recalculation_dist_descr">Ruta biće preračunata ako je udaljenost do puta veća od odabrane odrednice</string>
@@ -3003,21 +2892,7 @@
     <string name="shared_string_is_saved">je sačuvano</string>
     <string name="one_point_error">Dodaj bar dve tačke.</string>
     <string name="shared_string_redo">Ponovi</string>
-    <string name="release_3_8">• Osvežena je mogućnost rute: omogućava upotrebu različitih vrsta navođenja po delu i uključivanje ruta
-\n
-\n • Novi meni za trase: Odaberi boju, debljinu, strelice smera prikaza, sličice početka i završetka
-\n
-\n • Poboljšana je vidljivost biciklističkih čvorova.
-\n
-\n • Trase se sada mogu tapkati, imaju priručni meni sa osnovnim podacima.
-\n
-\n • Poboljšani su motori pretrage
-\n
-\n • Poboljšane su mogućnosti praćenja trasa u navođenju
-\n
-\n • Rešeni problemi sa uvozom / izvozom podešavanja profila
-\n
-\n</string>
+    <string name="release_3_8">• Osvežena je mogućnost rute: omogućava upotrebu različitih vrsta navođenja po delu i uključivanje ruta \n \n • Novi meni za trase: Odaberi boju, debljinu, strelice smera prikaza, sličice početka i završetka \n \n • Poboljšana je vidljivost biciklističkih čvorova. \n \n • Trase se sada mogu tapkati, imaju priručni meni sa osnovnim podacima. \n \n • Poboljšani su motori pretrage \n \n • Poboljšane su mogućnosti praćenja trasa u navođenju \n \n • Rešeni problemi sa uvozom / izvozom podešavanja profila</string>
     <string name="sort_last_modified">Poslednje izmenjeno</string>
     <string name="sort_name_descending">Ime: Z - A</string>
     <string name="sort_name_ascending">Ime: A - Z</string>
@@ -3441,27 +3316,7 @@
     <string name="app_mode_personal_transporter">Lični transport</string>
     <string name="precision_hdop">Vodoravna tačnost: %s</string>
     <string name="precision_hdop_and_vdop">Vodoravna preciznost: %1$s, uspravna: %2$s</string>
-    <string name="release_3_4">• Primenljivi nalozi: stvaranje proizvoljnih profila za sopstvene potrebe, sa proizvoljnom sličicom i bojom 
-\n 
-\n • Postavi proizvoljne max/min brzine na podrazumevane profile 
-\n 
-\n • Dodata je widget za trenutne koordinate 
-\n 
-\n • Dodata mogućnost da se prikazuje kompas i lenjir za prečnik na mapi 
-\n 
-\n • Popravljeno je pozadinsko beleženje putanja 
-\n 
-\n • Unapređeno je pozadinsko preuzimanje mapa 
-\n 
-\n • Vraćena je mogućnost \'Uključivanje ekrana\' 
-\n 
-\n • Popravljen je izbor jezika na Vikipediji 
-\n 
-\n • Ispravljeno je ponašanje dugmeta za kompas prilikom navođenja 
-\n 
-\n • Ostale ispravke grešaka
-\n
-\n</string>
+    <string name="release_3_4">• Primenljivi nalozi: stvaranje proizvoljnih profila za sopstvene potrebe, sa proizvoljnom sličicom i bojom \n \n • Postavi proizvoljne max/min brzine na podrazumevane profile \n \n • Dodata je widget za trenutne koordinate \n \n • Dodata mogućnost da se prikazuje kompas i lenjir za prečnik na mapi \n \n • Popravljeno je pozadinsko beleženje putanja \n \n • Unapređeno je pozadinsko preuzimanje mapa \n \n • Vraćena je mogućnost \'Uključivanje ekrana\' \n \n • Popravljen je izbor jezika na Vikipediji \n \n • Ispravljeno je ponašanje dugmeta za kompas prilikom navođenja \n \n • Ostale ispravke grešaka</string>
     <string name="app_mode_ufo">NLO</string>
     <string name="routing_attr_max_num_changes_name">Broj izmena</string>
     <string name="routing_attr_max_num_changes_description">Odaberi gornju granicu broja izmena</string>
@@ -3656,23 +3511,7 @@
     <string name="shared_string_memory_used_mb_desc">Iskorišćeno %1$s MB</string>
     <string name="shared_string_memory_used_gb_desc">Iskorišćeno %1$s GB</string>
     <string name="shared_string_memory_used_tb_desc">Iskorišćeno %1$s TB</string>
-    <string name="release_3_5">• Osežene su podešavanja programa i nprofila. Zgodno ređanje postavki po vrstama, i mogućnosti za menjanje svakog profila 
-\n 
-\n • Novi prozor za preuzimanje mapi koji preporučuje mape za preuzimanje dok se razgleda mapa 
-\n 
-\n • Popravke za tamnu temu 
-\n 
-\n • Ispravljeno je nekoliko grešaka u navođenju svuda po svetu 
-\n 
-\n • Osvežena je osnovna mapa sa bogatijom mrežom puteva 
-\n 
-\n • Poravljene su poplavljene oblasti svuda po svetu 
-\n 
-\n • Skijaško navođenje: dodati su nalozi nadmorske visine i složenost staza prilikom gledanja detalja staza 
-\n 
-\n • Ostale ispravke grešaka
-\n
-\n</string>
+    <string name="release_3_5">• Osežene su podešavanja programa i nprofila. Zgodno ređanje postavki po vrstama, i mogućnosti za menjanje svakog profila \n \n • Novi prozor za preuzimanje mapi koji preporučuje mape za preuzimanje dok se razgleda mapa \n \n • Popravke za tamnu temu \n \n • Ispravljeno je nekoliko grešaka u navođenju svuda po svetu \n \n • Osvežena je osnovna mapa sa bogatijom mrežom puteva \n \n • Poravljene su poplavljene oblasti svuda po svetu \n \n • Skijaško navođenje: dodati su nalozi nadmorske visine i složenost staza prilikom gledanja detalja staza \n \n • Ostale ispravke grešaka</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferiranje makadama više od asfaltriranog puta za rutiranje.</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferiranje makadama</string>
     <string name="shared_preference">Deljene</string>
@@ -3855,15 +3694,7 @@
     <string name="plan_route_add_new_segment">Dodaj novi segment</string>
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Korisnički profil</string>
-    <string name="release_3_9">• Dodata je mogućnost za izvoz i uvoz svih podataka, uključujući podešavanja, izvore, moja mesta
-\n
-\n • Plan rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta
-\n
-\n • Dodan je način prijave OAuth za OpenStritMap, poboljšano korisničko sučelje prozorčića OSM-a
-\n
-\n • Podrška za prilagođene boje za omiljene i prolazne tačke trase
-\n
-\n</string>
+    <string name="release_3_9">• Dodata je mogućnost za izvoz i uvoz svih podataka, uključujući podešavanja, izvore, moja mesta \n \n • Plan rute: grafikoni za odsečke sa putanjom, i dodata je mogućnost stvaranja i uređivanja višestrukih odsečaka ruta \n \n • Dodan je način prijave OAuth za OpenStritMap, poboljšano korisničko sučelje prozorčića OSM-a \n \n • Podrška za prilagođene boje za omiljene i prolazne tačke trase</string>
     <string name="reverse_all_points">Obrnuti red tački</string>
     <string name="profile_by_default_description">Odaberi profil koje će se koristiti po pokretanju aplikacije.</string>
     <string name="shared_string_last_used">Poslednje korišćeno</string>
@@ -4018,19 +3849,7 @@
     <string name="in_grace_period">U grejs periodu</string>
     <string name="on_hold">Na čekanju</string>
     <string name="expired">Isteklo</string>
-    <string name="release_4_0_beta">• Dodata mogućnost preuzimanja izohipsi u stopama
-\n
-\n• Planirajte pejzaž rute: dodati jezičci da se prebacuje između tačaka i grafika
-\n
-\n• Ažuriranja OsmAnd Live su premeštena u „Preuzimanja &gt; Ažuriranja”
-\n
-\n • Trase sada mogu da se oboje po visini, brzini ili nagibu.
-\n
-\n • Dodata opcija da se izmeni izgled linija za navođenje
-\n
-\n • Ažuriran dijalog za „Snimanje puta”
-\n
-\n</string>
+    <string name="release_4_0_beta">• Dodata mogućnost preuzimanja izohipsi u stopama \n \n• Planirajte pejzaž rute: dodati jezičci da se prebacuje između tačaka i grafika \n \n• Ažuriranja OsmAnd Live su premeštena u „Preuzimanja &gt; Ažuriranja” \n \n • Trase sada mogu da se oboje po visini, brzini ili nagibu. \n \n • Dodata opcija da se izmeni izgled linija za navođenje \n \n • Ažuriran dijalog za „Snimanje puta”</string>
     <string name="update_all_maps_added">Ažuriraj sve mape dodate na %1$s?</string>
     <string name="exit_number">Broj izlaza</string>
     <string name="announce_when_exceeded">Obavestiti na prekoračenu brzinu</string>
@@ -4400,15 +4219,7 @@
     <string name="no_altitude_data">Nema podataka o nadmorskoj visini</string>
     <string name="shared_string_speed">Brzina</string>
     <string name="app_mode_mountain_bicycle">Planinski bicikl</string>
-    <string name="release_4_2">• Preoblikovanje widget-a: novi izgled i osećaj, grupisanje po stranicama, promenite redosled i uskladite kako želite.
-\n
-\n • Trase za pešačenje / biciklizam / putovanja: dodirnite znamenje rute i dobijte potpune podatke o putanji.
-\n
-\n • Omiljene grupe: podesite podrazumevani izgled novih tačaka u grupi
-\n
-\n • Ispravke: samostalno osvežavanje sličica mape na internetu
-\n
-\n</string>
+    <string name="release_4_2">• Preoblikovanje widget-a: novi izgled i osećaj, grupisanje po stranicama, promenite redosled i uskladite kako želite. \n \n • Trase za pešačenje / biciklizam / putovanja: dodirnite znamenje rute i dobijte potpune podatke o putanji. \n \n • Omiljene grupe: podesite podrazumevani izgled novih tačaka u grupi \n \n • Ispravke: samostalno osvežavanje sličica mape na internetu</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ne idi van staze</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Samo ako je neophodno</string>
     <string name="routing_attr_freeride_policy_allow_name">Dozvoli</string>
@@ -4484,31 +4295,7 @@
     <string name="continue_on_phone">Nastavi na mobilnom uređaju</string>
     <string name="location_access_request_title">OsmAndu je potrebna dozvola za lokaciju radi navođenja.</string>
     <string name="shared_string_articles">Članci</string>
-    <string name="release_4_1">• Dodata početna podrška za Android Auto
-\n
-\n • Osvežavanje korisničkog interfejsa za pretragu koordinata UTM
-\n
-\n• GPS filter GPX trasa
-\n
-\n • Widget za visinski profil (izdanja pro)
-\n
-\n • Omiljeno: dodata je mogućnost pregleda nedavno korišćenih sličica
-\n
-\n • Planiranje rute: koristiće se izabrani profil nakon pokretanja
-\n
-\n • Popravljen je nivo Mapilarija, priključak je sada podrazumevano onemogućen
-\n
-\n • Dodat je prikaz za upravljanje celokupnom istorijom u programu
-\n
-\n • Usmerenje mape se ne vraća na početno nakon ponovnog pokretanja programa
-\n
-\n • Poboljšano je prikazivanje oznake visine SRTM
-\n
-\n • Ispravljeni su arapski natpisi mapa
-\n
-\n • Ispravljeni su različiti problemi sa navođenjem
-\n
-\n</string>
+    <string name="release_4_1">• Dodata početna podrška za Android Auto \n \n • Osvežavanje korisničkog interfejsa za pretragu koordinata UTM \n \n• GPS filter GPX trasa \n \n • Widget za visinski profil (izdanja pro) \n \n • Omiljeno: dodata je mogućnost pregleda nedavno korišćenih sličica \n \n • Planiranje rute: koristiće se izabrani profil nakon pokretanja \n \n • Popravljen je nivo Mapilarija, priključak je sada podrazumevano onemogućen \n \n • Dodat je prikaz za upravljanje celokupnom istorijom u programu \n \n • Usmerenje mape se ne vraća na početno nakon ponovnog pokretanja programa \n \n • Poboljšano je prikazivanje oznake visine SRTM \n \n • Ispravljeni su arapski natpisi mapa \n \n • Ispravljeni su različiti problemi sa navođenjem</string>
     <string name="shared_string_details">Detalji</string>
     <string name="routing_attr_allow_gate_description">Dozvoli upotrebu vrata</string>
     <string name="service_is_not_available_please_try_later">Usluga nije dostupna. Molimo pokušaj ponovo kasnije.</string>
@@ -4524,27 +4311,7 @@
     <string name="backup_restore_now">Vrati sada</string>
     <string name="backup_setup">Podesi bekap</string>
     <string name="backup_welcome_back_descr">Vrati podatke na ovom uređaju koristeći OsmAnd Cloud.</string>
-    <string name="release_4_0">• Smeštanje u Cloud
-\n
-\n • Dodat je noćni način rada za prikaz mapa „Topo”.
-\n
-\n • Dodata je mogućnost da se izohipse preuzmu u stopama
-\n
-\n • Trasa sada mogu biti obojene po visini, brzini ili nagibu
-\n
-\n • Osvežen je prozor „Snimanje ruta”
-\n
-\n • Udaljenost na klik je pomerena iz lenjira sa prečnikom u posebnu mogućnost
-\n
-\n • Planiranje puta: sada možeš promeniti mogućnosti navođenja, pristupiti podešavanjima mape i tražiti po mapi bez napuštanja planiranja puta
-\n
-\n • Novi prikaz „Kupovina” sa podrobnim podacima o kupovini
-\n
-\n • Dodata je mogućnost promene izgleda linije rute
-\n
-\n • Ažuriranje OsmAnda Live su pomerena u „Preuzmi mape”
-\n
-\n</string>
+    <string name="release_4_0">• Smeštanje u Cloud \n \n • Dodat je noćni način rada za prikaz mapa „Topo”. \n \n • Dodata je mogućnost da se izohipse preuzmu u stopama \n \n • Trasa sada mogu biti obojene po visini, brzini ili nagibu \n \n • Osvežen je prozor „Snimanje ruta” \n \n • Udaljenost na klik je pomerena iz lenjira sa prečnikom u posebnu mogućnost \n \n • Planiranje puta: sada možeš promeniti mogućnosti navođenja, pristupiti podešavanjima mape i tražiti po mapi bez napuštanja planiranja puta \n \n • Novi prikaz „Kupovina” sa podrobnim podacima o kupovini \n \n • Dodata je mogućnost promene izgleda linije rute \n \n • Ažuriranje OsmAnda Live su pomerena u „Preuzmi mape”</string>
     <string name="backup_error_user_is_not_registered">Nijedan korisnik nije registrovan sa tom adresom e-mail adresom</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažeći ili je istekao token</string>
     <string name="no_activity_for_intent">Ugradi program koji može da izvede ovu radnju.</string>
@@ -5174,29 +4941,7 @@
     <string name="switch_widget_mode_desc">Dodirom na vidžet menjaš načine rada.</string>
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila biće izbegnuti.</string>
     <string name="goods_delivery_desc">Dostavna vozila mogu biti zabranjena na nekim putevima.</string>
-    <string name="release_4_6">• Android Auto: Dodat 3D mod
-\n
-\n• Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove
-\n
-\n• Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove
-\n
-\n• Poboljšano upravljanje lokalnim resursima
-\n
-\n• Prilagodljivo mapiranje dugmeta za spoljne kontrolere
-\n
-\n• Novi vidžet: \'Koeficijent klizanja\' i \'Položaj sunca\'
-\n
-\n • OsmAnd Cloud: Sada pristupi izbrisanim fajlovima
-\n
-\n• Poboljšano bojenje trase u načinu nagiba s novim simetričnim prelazom
-\n
-\n• Eliminiše probleme s transparentnom statusnom linijom
-\n
-\n• Dodata podrška za vidžet ANT + temperature vidžet
-\n
-\n• Predstavljen vidžet \"Dostupan RAM\"
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: Dodat 3D mod \n \n• Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove \n \n• Trase: Uvedeni filteri i pametne mape, optimizovana memorija za veće fajlove \n \n• Poboljšano upravljanje lokalnim resursima \n \n• Prilagodljivo mapiranje dugmeta za spoljne kontrolere \n \n• Novi vidžet: \'Koeficijent klizanja\' i \'Položaj sunca\' \n \n • OsmAnd Cloud: Sada pristupi izbrisanim fajlovima \n \n• Poboljšano bojenje trase u načinu nagiba s novim simetričnim prelazom \n \n• Eliminiše probleme s transparentnom statusnom linijom \n \n• Dodata podrška za vidžet ANT + temperature vidžet \n \n• Predstavljen vidžet \"Dostupan RAM\"</string>
     <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta.</string>
     <string name="average_glide_time_interval_desc">Odredite međuvreme za određivanje proseka jedrenja.</string>
@@ -5299,37 +5044,7 @@
     <string name="si_nm_ft">Nautičke milje/stope</string>
     <string name="av_audio_format_bottom_sheet_descr">Označi format zvučnog zapisa. Vrsta zvučnog fajla je 3GPP (.3gp).</string>
     <string name="value_downloaded_of_mb">Preuzima se %1$.1f/%2$.1f MB</string>
-    <string name="release_4_4">• Poboljšan je meni „Trase“ u „podešavanjima mape“
-\n
-\n • Priručni meni sada prikazuje mestne nazive TOI
-\n
-\n • Dodata je mogućnost deljenja rute vezom
-\n
-\n • Didata je jedinica rastojanja „pomorske milje/stope“
-\n
-\n • Usmerenje mape dodaje novi nepokretan način
-\n
-\n • Uprošćen je početni matični prikaz
-\n
-\n • Nepromenljivo mesto lokacija u podeljenom prikazu Android auta
-\n
-\n • Dodat je grafički prikaz za proučavanje „Brzina/nagib“
-\n
-\n • Android 13 je premestio jezik programa u podešavanja sistema
-\n
-\n • Ispravljena je greška prilikom prikaza mesta pošćenja
-\n
-\n • Dodata je mogućnost preuzimanja tilova sa interneta koristeći „frontalne“ ili „podmetnute“ mape
-\n
-\n • Dodata je mogućnost upotrebe imperijalne merne jedinice za „osobine vozila“
-\n
-\n • Novi presek moped
-\n
-\n • „lokaciju prikaza“ je dobio novu mogućnost „samostalan“
-\n
-\n • Ispravljeno je upravljanje pokretima kartom za nagib, približavanje i obrtanje
-\n
-\n</string>
+    <string name="release_4_4">• Poboljšan je meni „Trase“ u „podešavanjima mape“ \n \n • Priručni meni sada prikazuje mestne nazive TOI \n \n • Dodata je mogućnost deljenja rute vezom \n \n • Didata je jedinica rastojanja „pomorske milje/stope“ \n \n • Usmerenje mape dodaje novi nepokretan način \n \n • Uprošćen je početni matični prikaz \n \n • Nepromenljivo mesto lokacija u podeljenom prikazu Android auta \n \n • Dodat je grafički prikaz za proučavanje „Brzina/nagib“ \n \n • Android 13 je premestio jezik programa u podešavanja sistema \n \n • Ispravljena je greška prilikom prikaza mesta pošćenja \n \n • Dodata je mogućnost preuzimanja tilova sa interneta koristeći „frontalne“ ili „podmetnute“ mape \n \n • Dodata je mogućnost upotrebe imperijalne merne jedinice za „osobine vozila“ \n \n • Novi presek moped \n \n • „lokaciju prikaza“ je dobio novu mogućnost „samostalan“ \n \n • Ispravljeno je upravljanje pokretima kartom za nagib, približavanje i obrtanje</string>
     <string name="changes">Izmene %1$s</string>
     <string name="upload_change">Preuzimanje izmena</string>
     <string name="cloud_conflicts">Konflikt</string>
@@ -5424,31 +5139,7 @@
     <string name="map_widget_camera_tilt">Nagnutost kamere</string>
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje brzinu putovanja</string>
     <string name="nautical_depth_points">Tačke dubine mora</string>
-    <string name="release_4_3">• Novo, brža verzija 2, motora za obradu mape (Opengl), sa pogledom u 2.5 dimenzije
-\n
-\n • Glatko oživljavanje izmene lokacija pri kretanju
-\n
-\n • Novi widžet za koordinate središta mape i visinu za geografske lokacije
-\n
-\n • „Razmak za kucanje“ dodata mogućnost veličine dodatog slova
-\n
-\n • Widžet map marker: dodata je mogućnost izmene ponašanja na klik.
-\n
-\n • Ispravka mogućnosti „Prikaži lokaciju“
-\n
-\n • GPX: dodata podrška za oznake „vezu“, „cmt“, „silaz“ i bilo koje proizvoljno proširenje
-\n
-\n • Preuređen spisak „Plovne mape“
-\n
-\n • Dodatna podrška za ANT + senzore
-\n
-\n • Dodatna mogućnost za onemogućavanje jedinstvenog ličnog broja preuzimanja
-\n
-\n • Podesiva podrazumevana brzina vremenskih prilika za hodanje/planinarenje/trčanje zavisno od nadmorske visine
-\n
-\n • Ispravljeno ponašanje zvučnog izlaza i klizača glasnoće
-\n
-\n</string>
+    <string name="release_4_3">• Novo, brža verzija 2, motora za obradu mape (Opengl), sa pogledom u 2.5 dimenzije \n \n • Glatko oživljavanje izmene lokacija pri kretanju \n \n • Novi widžet za koordinate središta mape i visinu za geografske lokacije \n \n • „Razmak za kucanje“ dodata mogućnost veličine dodatog slova \n \n • Widžet map marker: dodata je mogućnost izmene ponašanja na klik. \n \n • Ispravka mogućnosti „Prikaži lokaciju“ \n \n • GPX: dodata podrška za oznake „vezu“, „cmt“, „silaz“ i bilo koje proizvoljno proširenje \n \n • Preuređen spisak „Plovne mape“ \n \n • Dodatna podrška za ANT + senzore \n \n • Dodatna mogućnost za onemogućavanje jedinstvenog ličnog broja preuzimanja \n \n • Podesiva podrazumevana brzina vremenskih prilika za hodanje/planinarenje/trčanje zavisno od nadmorske visine \n \n • Ispravljeno ponašanje zvučnog izlaza i klizača glasnoće</string>
     <string name="speak_gps_signal_status">Najavljuje gubljenje jačine signala GPS-a i povratak</string>
     <string name="map_widget_rendering_fps">Obrada mape u slikama po sekundi</string>
     <string name="purchases_feature_desc_cross_buy">Koristi svoje mogućnosti pretplate na različitim platformama (Andorid/Ios/veb) bez dodatnih troškova.</string>
@@ -5521,49 +5212,7 @@
     <string name="shared_string_cache">Keš</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>
-    <string name="release_4_5">• BLE/ANT+ senzori: prepravljena veza, pisanje i pregled primljenih podataka GPX -u
-\n
-\n• Besplatna sigurnosna kopija za favorite i postavke u \'Osmand Cloud\'
-\n
-\n• Novi format za karte terena s 3D podrškom za pomoć
-\n
-\n• Upravljanje trasama: Ažurirano korisnički interfejs, dodano sortiranje, podrška grupisanim folderima
-\n
-\n• Android Auto: Novi Start Menu za favorite, zapise i TOI kategorije
-\n
-\n• Jedna lista widžeta za gornju/donju ploču
-\n
-\n• Novi profil \'voza\', omogućava izračunavanje železničkih ruta
-\n
-\n• Contour Lines funkcioniše s bilo kojim \'izvorom karte\'
-\n
-\n• Prošireni popis zadanih radnji za spoljnu tastaturu
-\n
-\n• Prilagođene datoteke usmeravanja, dodane opcije za brisanje ili prepisivanje
-\n
-\n• Dodana opcija za \'najavljivanje odstupanja od rute\'
-\n
-\n• Ekran za pokretanje: dodana opcija Obnovite stanje OsmAnd iz datoteke
-\n
-\n• Dodana klasa \'opasnih materijala\' za kamionske navigacije u Severnoj Americi
-\n
-\n• Dodana podrška \'putem Ferrata\' za pešačko naviđenje
-\n
-\n• Dodana \'CAI\' lestvica za poteškoće klasifikacije ruta
-\n
-\n• Fiksni odabir jezika po aplikaciji
-\n
-\n• Dodana podrška za tematske ikone
-\n
-\n• Osmand Cloud: dodana opcija za brisanje naloga
-\n
-\n• Pristupačnost: dodirnite veličinu cilja za dugme promenjene na 48 dp; Popravljeni problem s izgledom karte vidljivo za čitanje ekrana
-\n
-\n• Japanski glas je prepravljen
-\n
-\n• Promena nadmorske visine i procena nagiba je prerađena
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ senzori: prepravljena veza, pisanje i pregled primljenih podataka GPX -u \n \n• Besplatna sigurnosna kopija za favorite i postavke u \'Osmand Cloud\' \n \n• Novi format za karte terena s 3D podrškom za pomoć \n \n• Upravljanje trasama: Ažurirano korisnički interfejs, dodano sortiranje, podrška grupisanim folderima \n \n• Android Auto: Novi Start Menu za favorite, zapise i TOI kategorije \n \n• Jedna lista widžeta za gornju/donju ploču \n \n• Novi profil \'voza\', omogućava izračunavanje železničkih ruta \n \n• Contour Lines funkcioniše s bilo kojim \'izvorom karte\' \n \n• Prošireni popis zadanih radnji za spoljnu tastaturu \n \n• Prilagođene datoteke usmeravanja, dodane opcije za brisanje ili prepisivanje \n \n• Dodana opcija za \'najavljivanje odstupanja od rute\' \n \n• Ekran za pokretanje: dodana opcija Obnovite stanje OsmAnd iz datoteke \n \n• Dodana klasa \'opasnih materijala\' za kamionske navigacije u Severnoj Americi \n \n• Dodana podrška \'putem Ferrata\' za pešačko naviđenje \n \n• Dodana \'CAI\' lestvica za poteškoće klasifikacije ruta \n \n• Fiksni odabir jezika po aplikaciji \n \n• Dodana podrška za tematske ikone \n \n• Osmand Cloud: dodana opcija za brisanje naloga \n \n• Pristupačnost: dodirnite veličinu cilja za dugme promenjene na 48 dp; Popravljeni problem s izgledom karte vidljivo za čitanje ekrana \n \n• Japanski glas je prepravljen \n \n• Promena nadmorske visine i procena nagiba je prerađena</string>
     <string name="battery_optimization_banner_content">Android optimizacija baterije može uzrokovati netačnosti u snimljenim putanjama.</string>
     <string name="dont_ask_anymore">Ne pitati više</string>
     <string name="battery_optimization_settings">Podešavanje optimizacija baterije</string>
@@ -5624,25 +5273,7 @@
     <string name="routing_type">Tip rutiranja</string>
     <string name="shared_sting_all_colors">Sve boje</string>
     <string name="lang_ta_in">Tamilski (Indija)</string>
-    <string name="release_4_7">• Novi vidžet \"brzinometar\" kompatibilan s Android Autom
-\n
-\n• Konfiguriši interfejs mape dodavanjem višestrukih dugmadi \"Brza radnja\".
-\n
-\n• Poboljšana čitljivost podataka u grafikonima
-\n
-\n• Dodani filteri prema podacima senzora za tragove
-\n
-\n• Poboljšano prilagođavanje izgleda za grupu putanja
-\n
-\n• Dodata podrška za dodatne GPX oznake
-\n
-\n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva
-\n
-\n• Jedinstven korisnički interfejs za odabir staza
-\n
-\n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• Novi vidžet \"brzinometar\" kompatibilan s Android Autom \n \n• Konfiguriši interfejs mape dodavanjem višestrukih dugmadi \"Brza radnja\". \n \n• Poboljšana čitljivost podataka u grafikonima \n \n• Dodani filteri prema podacima senzora za tragove \n \n• Poboljšano prilagođavanje izgleda za grupu putanja \n \n• Dodata podrška za dodatne GPX oznake \n \n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva \n \n• Jedinstven korisnički interfejs za odabir staza \n \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0</string>
     <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
 \n
 \nOdaberi “%1$s”za tačne brojeve ili “%2$s” za lakšu čitljivost.</string>
@@ -5664,29 +5295,7 @@
     <string name="apply_only_to_new">Primenjivati samo na nove</string>
     <string name="change_default_tracks_appearance_confirmation">Primeniti promene na postojeće trase na mapi ili samo na nove?</string>
     <string name="shared_string_changes">Promene</string>
-    <string name="release_4_8">• Nova opcija bojenja terena „Visina“
-\n
-\n • Prilagođene palete boja za teren, staze i rute
-\n
-\n • 3D varijanta za ikone položaja lokacije
-\n
-\n • Brze radnje se sada mogu dodeliti spoljnim tastaturama
-\n
-\n • Vreme: Osvežavanje korisničkog interfejsa, dodata animacija vetra
-\n
-\n • Poboljšanja 3D staza: nove opcije vizuelizacije i kolorizacije
-\n
-\n • Proširen izbor turističkih ruta na mapi
-\n
-\n • Dodata opcija teme aplikacije za praćenje režima mape
-\n
-\n • Popravljena statistika staza, sortiranje i pretraga
-\n
-\n • OSM uređivanje: izbrisani način autorizacije prijave/lozinke
-\n
-\n • Prelazak na sistem deljenja lista počevši od Android 14
-\n
-\n</string>
+    <string name="release_4_8">• Nova opcija bojenja terena „Visina“ \n \n • Prilagođene palete boja za teren, staze i rute \n \n • 3D varijanta za ikone položaja lokacije \n \n • Brze radnje se sada mogu dodeliti spoljnim tastaturama \n \n • Vreme: Osvežavanje korisničkog interfejsa, dodata animacija vetra \n \n • Poboljšanja 3D staza: nove opcije vizuelizacije i kolorizacije \n \n • Proširen izbor turističkih ruta na mapi \n \n • Dodata opcija teme aplikacije za praćenje režima mape \n \n • Popravljena statistika staza, sortiranje i pretraga \n \n • OSM uređivanje: izbrisani način autorizacije prijave/lozinke \n \n • Prelazak na sistem deljenja lista počevši od Android 14</string>
     <string name="vertical_exaggeration">Vertikalno uvećanje</string>
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
@@ -5942,11 +5551,11 @@
     <string name="obd_battery_voltage_desc">Prikazuje napon baterije preko OBD senzora</string>
     <string name="obd_fuel_level_desc">Prikazuje nivo goriva u vozilu preko OBD senzora</string>
     <string name="obd_fuel_type_desc">Prikazuje vrstu goriva vozila preko OBD senzora</string>
-    <string name="obd_air_intake_temp">Temperatura ulaznog vazduha</string>
-    <string name="obd_ambient_air_temp">Temperatura ambijentalnog vazduha</string>
+    <string name="obd_air_intake_temp">Ulazna temperatura</string>
+    <string name="obd_ambient_air_temp">Ambijentalna temperatura</string>
     <string name="obd_battery_voltage">Napon baterije</string>
-    <string name="obd_engine_coolant_temp">Temperatura rashladne tečnosti motora</string>
-    <string name="obd_fuel_level">Nivo goriva</string>
+    <string name="obd_engine_coolant_temp">Temperatura rashladne tečnosti</string>
+    <string name="obd_fuel_level">Efikasnost goriva</string>
     <string name="obd_fuel_consumption_rate">Stopa potrošnje goriva</string>
     <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
     <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
@@ -5980,7 +5589,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Dugme za prikaz ili skrivanje lokalnih OSM izmena na mapi.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze terenskih motocikla</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje\n\n</string>
+    <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje</string>
     <string name="screen_is_locked_by_external_button">Ekran je zaključan. Za otključavanje pritisni dugme %1$s ili dodirni dugme na ekranu.</string>
     <string name="screen_is_unlocked">Ekran je otključan.</string>
     <string name="screen_is_locked_by_action_button">Ekran je zaključan. Dodirni dugme za otključavanje.</string>
@@ -5991,7 +5600,19 @@
     <string name="connect_obd_instructions_step2">2. Pokreni motor vozila</string>
     <string name="obd_how_to_connect">Sad se poveži:</string>
     <string name="connect_obd_instructions_step1">1. Spoj skener na OBD-II priključak u vozilu.</string>
-    <string name="connect_obd_instructions_step3">3. Omogući Bluetooth na svom uređaju</string>
+    <string name="connect_obd_instructions_step3">3. Omogući Bluetooth na uređaju</string>
     <string name="connect_obd_instructions_step4">4. Tapni \'Poveži se\' i odaberi svoj skener s liste.</string>
     <string name="learn_more_about_obd_sensors">Saznaj više o senzorima.</string>
+    <string name="route_guidance">Navođenje rutom</string>
+    <string name="obd_widget_vehicle_speed">Brzina vozila</string>
+    <string name="obd_widget_engine_speed">Broj obrtaja motora</string>
+    <string name="obd_nothing_found_text">Nema skenera</string>
+    <string name="obd_searching_text">Traženje skenera</string>
+    <string name="obd_device_forget_sensor">Zaboravi skener</string>
+    <string name="obd_device_forget_sensor_description">Skener će biti uklonjen s liste. Možeš ponovo upariti ovaj skener u bilo kojem trenutku.</string>
+    <string name="connect_obd_instructions_step">1. Spoj skener na OBD-II priključak vozila.\n\n2. Uključi motor vozila\n\n3. Omogući Bluetooth na svom uređaju\n\n4. Dodirni \'%1$s\' i odaberi svoj skener s liste.</string>
+    <string name="route_guidance_desc">Omogućuje navođenje rutom u stvarnom vremenu, uključujući udaljenost do sledećeg skretanja, naziv ulice, trenutni naziv ulice i informacije o traci. Widžeti su aktivni tokom navigacije.</string>
+    <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
+    <string name="obd_bluetooth_off_description">Uključi Bluetooth traženje i povezivanje skenera.</string>
+    <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
 </resources>

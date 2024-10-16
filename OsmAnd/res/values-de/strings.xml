@@ -5931,9 +5931,9 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Wasserstoff</string>
     <string name="obd_fuel_type_unknown">Unbekannter Kraftstoff</string>
     <string name="obd_widget_group">Fahrzeugdaten</string>
-    <string name="obd_air_intake_temp">Ansauglufttemperatur</string>
-    <string name="obd_ambient_air_temp">Umgebungslufttemperatur</string>
-    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur des Motors</string>
+    <string name="obd_air_intake_temp">Ansaugtemperatur</string>
+    <string name="obd_ambient_air_temp">Umgebungstemperatur</string>
+    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur</string>
     <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
     <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
     <string name="obd_fuel_type">Kraftstofftyp</string>
@@ -5949,7 +5949,7 @@
     <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem verbliebenen Kraftstoffstand noch fahren kann</string>
     <string name="obd_fuel_level_desc">Zeigt mithilfe des OBD-Sensors den Kraftstoffstand des Fahrzeugs an</string>
     <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
-    <string name="obd_fuel_level">Kraftstoffstand</string>
+    <string name="obd_fuel_level">Kraftstoffverbrauch</string>
     <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
     <string name="unknown_bt_device">Unbekanntes Gerät</string>
     <string name="obd_vin">VIN (Fahrgestell-Identifikationsnummer)</string>
@@ -5978,7 +5978,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Schaltfläche zum Ein- und Ausblenden von lokalen OSM-Bearbeitungen auf der Karte.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Strecken</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen\n\n</string>
+    <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
     <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücken Sie die Taste %1$s oder tippen Sie auf die Schaltfläche auf dem Bildschirm.</string>
     <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
     <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippen Sie zum Entsperren auf die Schaltfläche.</string>
@@ -5992,4 +5992,16 @@
     <string name="obd_how_to_connect">Verbindung herstellen:</string>
     <string name="connect_obd_instructions_step3">3. Bluetooth auf Ihrem Gerät aktivieren</string>
     <string name="obd_fuel_left_liters">Verbleibender Kraftstoff (Liter)</string>
+    <string name="obd_nothing_found_text">Keine Scanner gefunden</string>
+    <string name="obd_bluetooth_off_description">Bluetooth einschalten, um Scanner zu finden und zu verbinden.</string>
+    <string name="obd_searching_text">Suche nach Scannern</string>
+    <string name="obd_device_forget_sensor">Scanner verwerfen</string>
+    <string name="obd_searching_text_description">Bitte halten Sie Ihr Gerät in der Nähe des Scanners. Stellen Sie sicher, dass der Motor des Fahrzeugs läuft.</string>
+    <string name="obd_nothing_found_description">Bitte überprüfen Sie Folgendes:\n - Stellen Sie sicher, dass Bluetooth eingeschaltet ist.\n - Der Fahrzeugmotor läuft\n - Stellen Sie sicher, dass sich Ihr Gerät in Reichweite des Scanners befindet.</string>
+    <string name="obd_device_forget_sensor_description">Der Scanner wird aus der Liste entfernt. Sie können diesen Scanner jederzeit wieder koppeln.</string>
+    <string name="connect_obd_instructions_step">1. Schließen Sie den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs an.\n\n 2. Schalten Sie den Motor Ihres Fahrzeugs ein.\n\n 3. Aktivieren Sie Bluetooth auf Ihrem Gerät\n\n 4. Tippen Sie auf „%1$s“ und wählen Sie Ihren Scanner aus der Liste aus.</string>
+    <string name="route_guidance_desc">Bietet Routenführung in Echtzeit, einschließlich Entfernung bis zur nächsten Abbiegung, Straßenname, aktueller Straßenname und Fahrbahninformationen. Die Widgets sind während der Navigation aktiv.</string>
+    <string name="obd_widget_vehicle_speed">Fahrzeuggeschwindigkeit</string>
+    <string name="route_guidance">Routenführung</string>
+    <string name="obd_widget_engine_speed">Motordrehzahl</string>
 </resources>
