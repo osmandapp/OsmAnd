@@ -33,7 +33,7 @@ public class MapHudLayout extends FrameLayout {
 	private static final double[][] DIRECTIONS = getAvailableDirections();
 
 	private final Paint gridPaint;
-	private final int gridSize;
+	private final float gridSize;
 
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
@@ -50,7 +50,7 @@ public class MapHudLayout extends FrameLayout {
 	public MapHudLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		this.gridSize = AndroidUtils.dpToPx(context, 8);
+		this.gridSize = AndroidUtils.dpToPxF(context, 8);
 
 		this.gridPaint = new Paint();
 		gridPaint.setColor(Color.BLACK);
@@ -95,18 +95,22 @@ public class MapHudLayout extends FrameLayout {
 		}
 	}
 
-	public static int roundCoordinate(int coord, int screenSize, int cellSize) {
-		int start = coord - coord % cellSize;
-		if (2 * start < screenSize) {
-			return start;
+	public static int roundCoordinate(int coord, int screenSize, float cellSize) {
+		if (coord > cellSize / 2) {
+			// easier drag & drop
+			coord += cellSize / 2;
 		}
-		int end = (screenSize - coord);
-		end = end - end % cellSize;
-		int ret = screenSize - end - cellSize;
+		int fullCells = (int) (coord / cellSize);
+		if (2 * fullCells * cellSize < screenSize) {
+			return (int) (fullCells * cellSize);
+		}
+		float end = (screenSize - coord);
+		fullCells = (int) (end / cellSize) + 1;
+		float ret = screenSize - fullCells * cellSize;
 		if (ret * 2 < screenSize) {
 			ret += cellSize;
 		}
-		return ret;
+		return (int) ret;
 	}
 
 	@Override
@@ -115,42 +119,42 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 
-	@NonNull
-	private LayoutParams updateButtonPosition(@NonNull MapButton button, @NonNull QuadTree<QuadRect> intersections) {
-		int width = getMeasuredWidth();
-		int height = getMeasuredHeight();
-		int buttonWidth = button.getMeasuredWidth();
-		int buttonHeight = button.getMeasuredHeight();
-
-		int maxRightMargin = width - buttonWidth;
-		int maxBottomMargin = height - buttonHeight;
-
-		int maxStepsX = width / gridSize;
-		int maxStepsY = height / gridSize;
-		int maxSteps = Math.max(maxStepsX, maxStepsY);
-
-		LayoutParams params = (LayoutParams) button.getLayoutParams();
-		for (int step = 1; step <= maxSteps; step++) {
-			for (double[] direction : DIRECTIONS) {
-				int newRightMargin = (int) (params.rightMargin + direction[0] * step * gridSize);
-				int newBottomMargin = (int) (params.bottomMargin + direction[1] * step * gridSize);
-
-				newRightMargin = Math.max(0, Math.min(newRightMargin, maxRightMargin));
-				newBottomMargin = Math.max(0, Math.min(newBottomMargin, maxBottomMargin));
-
-				int newLeft = width - newRightMargin - buttonWidth;
-				int newTop = height - newBottomMargin - buttonHeight;
-
-				QuadRect newRect = new QuadRect(newLeft, newTop, newLeft + buttonWidth, newTop + buttonHeight);
-				if (!OsmandMapLayer.intersects(intersections, newRect, false)) {
-					params.rightMargin = newRightMargin;
-					params.bottomMargin = newBottomMargin;
-					return params;
-				}
-			}
-		}
-		return params;
-	}
+//	@NonNull
+//	private LayoutParams updateButtonPosition(@NonNull MapButton button, @NonNull QuadTree<QuadRect> intersections) {
+//		int width = getMeasuredWidth();
+//		int height = getMeasuredHeight();
+//		int buttonWidth = button.getMeasuredWidth();
+//		int buttonHeight = button.getMeasuredHeight();
+//
+//		int maxRightMargin = width - buttonWidth;
+//		int maxBottomMargin = height - buttonHeight;
+//
+//		int maxStepsX = width / gridSize;
+//		int maxStepsY = height / gridSize;
+//		int maxSteps = Math.max(maxStepsX, maxStepsY);
+//
+//		LayoutParams params = (LayoutParams) button.getLayoutParams();
+//		for (int step = 1; step <= maxSteps; step++) {
+//			for (double[] direction : DIRECTIONS) {
+//				int newRightMargin = (int) (params.rightMargin + direction[0] * step * gridSize);
+//				int newBottomMargin = (int) (params.bottomMargin + direction[1] * step * gridSize);
+//
+//				newRightMargin = Math.max(0, Math.min(newRightMargin, maxRightMargin));
+//				newBottomMargin = Math.max(0, Math.min(newBottomMargin, maxBottomMargin));
+//
+//				int newLeft = width - newRightMargin - buttonWidth;
+//				int newTop = height - newBottomMargin - buttonHeight;
+//
+//				QuadRect newRect = new QuadRect(newLeft, newTop, newLeft + buttonWidth, newTop + buttonHeight);
+//				if (!OsmandMapLayer.intersects(intersections, newRect, false)) {
+//					params.rightMargin = newRightMargin;
+//					params.bottomMargin = newBottomMargin;
+//					return params;
+//				}
+//			}
+//		}
+//		return params;
+//	}
 
 	@NonNull
 	private QuadRect getRect(@NonNull View view) {

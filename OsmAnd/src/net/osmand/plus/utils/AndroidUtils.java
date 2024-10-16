@@ -636,13 +636,14 @@ public class AndroidUtils {
 		return (int) height;
 	}
 
+	public static float dpToPxF(@NonNull Context ctx, float dp) {
+		Resources r = ctx.getResources();
+		return TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
+	}
+
 	public static int dpToPx(@NonNull Context ctx, float dp) {
 		Resources r = ctx.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
+		return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
 	}
 
 	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
