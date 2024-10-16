@@ -5564,7 +5564,7 @@
     <string name="obd_fuel_type_bifuel_gasoline">To-brændstofkøretøj, der kører på benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">To-brændstofkøretøj, der kører på metanol</string>
     <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
-    <string name="obd_fuel_level">Brændstoføkonomi</string>
+    <string name="obd_fuel_level">Brændstoføkonomi (%%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
@@ -5623,4 +5623,16 @@
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
     <string name="obd_searching_text">Søger efter scannere</string>
     <string name="connect_obd_instructions_step">1. Tilslut scanneren til bilens OBD-II-indgang.\n\n 2. Tænd for køretøjets motor\n\n 3. Aktivér Bluetooth på din enhed\n\n 4. Tryk på \'%1$s\' og vælg din scanner fra listen.</string>
+    <string name="obd_fuel_consumption_rate_l_h">Brændstofforbrug (l/t)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Brændstofforbrug (sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/t)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (l/t)</string>
+    <string name="obd_fuel_level_liter">Brændstofniveau (l)</string>
+    <string name="obd_fuel_level_percent">Brændstofniveau (%%)</string>
+    <string name="obd_fuel_left_percent">Brændstof tilbage (%)</string>
+    <string name="obd_fuel_left_liter">Brændstof tilbage (l)</string>
+    <string name="obd_fuel_left_km">Brændstof tilbage (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Brændstofforbrug (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug l/t</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Brændstofforbrug %/t</string>
 </resources>
