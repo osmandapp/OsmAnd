@@ -6000,4 +6000,8 @@
     <string name="obd_nothing_found_description">Bitte überprüfen Sie Folgendes:\n - Stellen Sie sicher, dass Bluetooth eingeschaltet ist.\n - Der Fahrzeugmotor läuft\n - Stellen Sie sicher, dass sich Ihr Gerät in Reichweite des Scanners befindet.</string>
     <string name="obd_device_forget_sensor_description">Der Scanner wird aus der Liste entfernt. Sie können diesen Scanner jederzeit wieder koppeln.</string>
     <string name="connect_obd_instructions_step">1. Schließen Sie den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs an.\n\n 2. Schalten Sie den Motor Ihres Fahrzeugs ein.\n\n 3. Aktivieren Sie Bluetooth auf Ihrem Gerät\n\n 4. Tippen Sie auf „%1$s“ und wählen Sie Ihren Scanner aus der Liste aus.</string>
+    <string name="route_guidance_desc">Bietet Routenführung in Echtzeit, einschließlich Entfernung bis zur nächsten Abbiegung, Straßenname, aktueller Straßenname und Fahrbahninformationen. Die Widgets sind während der Navigation aktiv.</string>
+    <string name="obd_widget_vehicle_speed">Fahrzeuggeschwindigkeit</string>
+    <string name="route_guidance">Routenführung</string>
+    <string name="obd_widget_engine_speed">Motordrehzahl</string>
 </resources>
