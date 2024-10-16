@@ -16,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class WikiCoreHelper {
 	private static final int THUMB_SIZE = 480;
 	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
 	private static final int DEPT_CAT_LIMIT = 1;
+	private static final List<String> IMAGE_EXTENSIONS = new ArrayList<>(Arrays.asList(".jpeg", ".jpg", ".png", ".gif"));
 
 
 	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
@@ -153,12 +155,21 @@ public class WikiCoreHelper {
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (Map<String, Object> image : response.images) {
 				WikiImage wikiImage = parseImageDataWithMetaData(image);
-				if (wikiImage != null) {
+				if (wikiImage != null && isUrlFileImage(wikiImage)) {
 					wikiImages.add(wikiImage);
 				}
 			}
 		}
 		return wikiImages;
+	}
+
+	private static boolean isUrlFileImage(WikiImage wikiImage) {
+		String path = wikiImage.getImageHiResUrl();
+		int lastIndexOfDot = path.lastIndexOf('.');
+		if (lastIndexOfDot != -1) {
+			return IMAGE_EXTENSIONS.contains(path.substring(lastIndexOfDot).toLowerCase());
+		}
+		return false;
 	}
 
 	private static List<WikiImage> getImagesOsmAndAPIRequest(String url, List<WikiImage> wikiImages) {
