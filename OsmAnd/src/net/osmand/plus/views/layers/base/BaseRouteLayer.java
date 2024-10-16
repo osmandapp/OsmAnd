@@ -3,14 +3,7 @@ package net.osmand.plus.views.layers.base;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
@@ -24,7 +17,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -35,6 +27,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -121,7 +114,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		if (routeColoringType.isCustomColor()) {
 			updateCustomColor(night);
 		} else {
-			directionArrowsColor = null;
+			setDirectionArrowsColor(null);
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
 			routeLineColor = attrs.paint.getColor();
 		}
@@ -140,7 +133,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 
 		if (routeLineColor != customColor) {
-			directionArrowsColor = ColorUtilities.getContrastColor(getContext(), customColor, false);
+			setDirectionArrowsColor(ColorUtilities.getContrastColor(getContext(), customColor, false));
 		}
 		routeLineColor = customColor;
 	}
@@ -179,6 +172,16 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	@ColorInt
 	public int getRouteLineColor() {
 		return routeLineColor;
+	}
+
+	@ColorInt
+	@Nullable
+	public Integer getDirectionArrowsColor() {
+		return directionArrowsColor;
+	}
+
+	public void setDirectionArrowsColor(@Nullable Integer directionArrowsColor) {
+		this.directionArrowsColor = directionArrowsColor;
 	}
 
 	protected float getRouteLineWidth(@NonNull RotatedTileBox tileBox) {
