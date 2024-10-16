@@ -78,18 +78,18 @@ public class MapHudLayout extends FrameLayout {
 		int height = button.getMeasuredHeight();
 
 		if (width > 0 && height > 0) {
-			int x = roundCoordinate(params.rightMargin, width, gridSize);
-			int y = roundCoordinate(params.bottomMargin, height, gridSize);
+			int sw = getWidth();
+			int sh = getHeight();
+			int x = roundCoordinate(params.rightMargin, sw, gridSize);
+			int y = roundCoordinate(params.bottomMargin, sh, gridSize);
 			if ((params.rightMargin != x) || (params.bottomMargin != y)) {
 				LOG.info(String.format("Correct %d, %d -> %d, %d",
 						params.rightMargin, params.bottomMargin, x, y));
 				params.rightMargin = x;
 				params.bottomMargin = y;
-
 				button.setLayoutParams(params);
 			}
 		}
-
 		if (save) {
 			button.saveMargins();
 		}
