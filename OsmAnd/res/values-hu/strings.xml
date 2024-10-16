@@ -179,9 +179,7 @@
     <string name="shared_string_no_thanks">Nem szükséges</string>
     <string name="basemap_missing">Töltse le a világ alaptérképét, hogy áttekintő nézetet kapjon az egész Földről alacsony nagyítási szint mellett.</string>
     <string name="vector_data_missing">Adatok letöltése térképek offline használatához.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nHosszú érintés a beállításokhoz"</string>
+    <string name="local_index_gpx_info_show">\n\nHosszú érintés a beállításokhoz</string>
     <string name="local_index_installed">Helyi verzió</string>
     <string name="local_index_items_backuped">%2$d elemből %1$d inaktiválva.</string>
     <string name="local_index_items_deleted">%2$d elemből %1$d törölve.</string>
@@ -797,27 +795,7 @@
 \n - wikipédia-POI offline elérés nélkül
 \n
 \n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Kérjük, fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval.
-\n
-\n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket.
-\n
-\n Néhány fontos funkció:
-\n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
-\n - Kompakt vektoros térképek az egész világról
-\n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból
-\n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló
-\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtviszonyokkal
-\n - Címek és helyek (érdekes pontok) offline keresése
-\n - Offline útvonaltervezés közepes távolságra
-\n
-\n- Autós, kerékpáros és gyalogos módok a következő beállításokkal:
-\n - Éjszakai/nappali nézet automatikus átkapcsolása
-\n - Sebességfüggő térképnagyítás
-\n - Térképigazítás iránytű vagy mozgásirány szerint
-\n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtviszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
     <string name="snap_to_road">Úthoz illesztés</string>
@@ -854,7 +832,7 @@
     <string name="rendering_attr_roadColors_description">Útszínséma kiválasztása:</string>
     <string name="rendering_attr_roadColors_name">Útszín sémája</string>
     <string name="close_changeset">Módosításkészlet lezárása</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Google Playen?</string>
+    <string name="zxing_barcode_scanner_not_found">A ZXing Barcode Scanner alkalmazás nincs feltelepítve. Megkeresi a Google Playen?</string>
     <string name="background_service_is_enabled_question">Az OsmAnd háttérszolgáltatása még fut. Azt is leállítja\?</string>
     <string name="safe_mode_description">Az alkalmazás biztonságos (lassabb) módban futtatása.</string>
     <string name="safe_mode">Csökkentett mód</string>
@@ -1184,9 +1162,7 @@
     <string name="layer_amenity_label">Pontfeliratok (érdekes pontok, kedvencek)</string>
     <string name="map_widget_plain_time">Jelenlegi idő</string>
     <string name="shared_string_waypoint">Útpont</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nHosszú érintés a térképen való megtekintéshez"</string>
+    <string name="selected_gpx_info_show">\n\nHosszú érintés a térképen való megtekintéshez</string>
     <string name="delay_navigation_start">Részletes navigáció indítása automatikusan</string>
     <string name="shared_string_selected_lowercase">kijelölve</string>
     <string name="gpx_split_interval">Felosztási intervallum</string>
@@ -2250,20 +2226,7 @@
     <string name="shared_string_install">Telepítés</string>
     <string name="open_mapillary">Mapillary megnyitása</string>
     <string name="mapillary_image">Mapillary-fénykép</string>
-    <string name="osmand_plus_extended_description_part8">Hozzávetőleges lefedettség és térképminőség: 
-\n • Nyugat-Európa: **** 
-\n • Kelet-Európa: *** 
-\n • Oroszország: *** 
-\n • Észak-Amerika: *** 
-\n • Dél-Amerika: ** 
-\n • Ázsia: ** 
-\n • Japán és Korea: *** 
-\n • Közel-Kelet: ** 
-\n • Afrika: ** 
-\n • Antarktisz: * 
-\n A világ legtöbb országa letölthető. 
-\n Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország…
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Hozzávetőleges lefedettség és térképminőség: \n • Nyugat-Európa: **** \n • Kelet-Európa: *** \n • Oroszország: *** \n • Észak-Amerika: *** \n • Dél-Amerika: ** \n • Ázsia: ** \n • Japán és Korea: *** \n • Közel-Kelet: ** \n • Afrika: ** \n • Antarktisz: * \n A világ legtöbb országa letölthető. \n Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország, Mexikó, Egyesült Királyság, Spanyolország,…</string>
     <string name="distance_moving">Korrigált távolság</string>
     <string name="shared_string_permissions">Engedélyek</string>
     <string name="import_gpx_failed_descr">Nem sikerült a fájl importálása. Győződjék meg arról, hogy az OsmAndnak van engedélye a fájl olvasására.</string>
@@ -2674,39 +2637,10 @@
     <string name="transport_nearby_routes">Ezen belül:</string>
     <string name="shared_string_launch">Indítás</string>
     <string name="lang_gn_py">guarani</string>
-    <string name="osmand_extended_description_part2">GPS navigáció
-\n • Válasszon az offline (nincs roamingdíj külföldön) vagy online (gyorsabb) mód között
-\n • Kanyaronkénti hangutasítások vezetik végig az úton (felvett ill. előállított hangok)
-\n • Az útvonalterv újratervezésre kerül, ha eltér attól
-\n • Sávvezérlés, utcanevek, és becsült érkezési idő segít az úton
-\n • Az út biztonságosabbá tételéhez a nappali/éjszakai mód automatikusan vált
-\n • Sebességhatárok megjelenítése, és értesítés, ha túllépi azt
-\n • A térkép nagyítási szintje követi a sebességet
-\n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint
-\n • Köztes pontok támogatása az útitervben
-\n • Saját GPX sávok rögzítése, vagy azok feltöltése és követése
-\n</string>
-    <string name="osmand_extended_description_part3">Térkép
-\n • POI-k (érdekes helyek) megjelenítése a közelében
-\n • A térkép módosítása a mozgási iránya (vagy az iránytű) alapján
-\n • A pozíció és az irány megjelenítése, amerre tekint
-\n • A pozíció megosztása, hogy a barátai megtalálhassák
-\n • A legfontosabb helyei „Kedvencként” tárolása
-\n • Kiválaszthatja, hogyan jelenjenek meg a nevek a térképen: angolul, helyi nyelven, vagy fonetikus átírással
-\n • Speciális online csempék megjelenítése, műholdnézet (a Bingről), különböző fedőrétegek, mint túra/navigációs GPX sávok, és további állítható átlátszóságú rétegek
-\n</string>
-    <string name="osmand_extended_description_part6">Séta, túra, városnézés
-\n • A térkép megjeleníti a séta- és túraútvonalakat
-\n • A Wikipédia sok minden elmondhat az előnyben részesített nyelvén egy városnézés során
-\n • Tömegközlekedési megállók (busz, villamos, vonal), vonalnevekkel, melyek segítenek tájékozódni egy új városban
-\n • A gyalogos módban a GPS navigáció gyalogutakból állítja össze az útvonalat
-\n • GPX útvonalak feltöltése és követése, vagy saját rögzítése és megosztása.
-\n</string>
-    <string name="osmand_extended_description_part7">Közreműködés az OSM-ben
-\n • Adathibák jelentése
-\n • GPX nyomvonalak feltöltése az OSM-be, közvetlenül az alkalmazásból
-\n • POI-k hozzáadása, és közvetlen feltöltés az OSM-be (vagy később, ha offline vagy)
-\n</string>
+    <string name="osmand_extended_description_part2">GPS navigáció \n • Válasszon az offline (nincs roamingdíj külföldön) vagy online (gyorsabb) mód között \n • Kanyaronkénti hangutasítások vezetik végig az úton (felvett ill. előállított hangok) \n • Az útvonalterv újratervezésre kerül, ha eltér attól \n • Sávvezérlés, utcanevek, és becsült érkezési idő segít az úton \n • Az út biztonságosabbá tételéhez a nappali/éjszakai mód automatikusan vált \n • Sebességhatárok megjelenítése, és értesítés, ha túllépi azt \n • A térkép nagyítási szintje követi a sebességet \n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint \n • Köztes pontok támogatása az útitervben \n • Saját GPX sávok rögzítése, vagy azok feltöltése és követése</string>
+    <string name="osmand_extended_description_part3">Térkép \n • POI-k (érdekes helyek) megjelenítése a közelében \n • A térkép módosítása a mozgási iránya (vagy az iránytű) alapján \n • A pozíció és az irány megjelenítése, amerre tekint \n • A pozíció megosztása, hogy a barátai megtalálhassák \n • A legfontosabb helyei „Kedvencként” tárolása \n • Kiválaszthatja, hogyan jelenjenek meg a nevek a térképen: angolul, helyi nyelven, vagy fonetikus átírással \n • Speciális online csempék megjelenítése, műholdnézet (a Bingről), különböző fedőrétegek, mint túra/navigációs GPX sávok, és további állítható átlátszóságú rétegek</string>
+    <string name="osmand_extended_description_part6">Séta, túra, városnézés \n • A térkép megjeleníti a séta- és túraútvonalakat \n • A Wikipédia sok minden elmondhat az előnyben részesített nyelvén egy városnézés során \n • Tömegközlekedési megállók (busz, villamos, vonal), vonalnevekkel, melyek segítenek tájékozódni egy új városban \n • A gyalogos módban a GPS navigáció gyalogutakból állítja össze az útvonalat \n • GPX útvonalak feltöltése és követése, vagy saját rögzítése és megosztása</string>
+    <string name="osmand_extended_description_part7">Közreműködés az OSM-ben \n • Adathibák jelentése \n • GPX nyomvonalak feltöltése az OSM-be, közvetlenül az alkalmazásból \n • POI-k hozzáadása, és közvetlen feltöltés az OSM-be (vagy később, ha offline vagy)</string>
     <string name="osmand_extended_description_part8">Az OsmAnd egy aktívan fejlesztett nyílt forráskódú szoftver. Mindenki közreműködhet az alkalmazásban a hibák bejelentésével, a fordítások javításával vagy az új funkció programozásával. Továbbá a projekt az adományokra támaszkodik az új funkciók fejlesztésekor és azok tesztelésekor. 
 \n Közelítő térképlefedettség és minőség: 
 \n • Nyugat-Európa: **** 
@@ -2727,14 +2661,7 @@
 \n Az OsmAnd+ az alkalmazás fizetős verziója. A megvásárlásával támogatja a projektet, finanszírozza az új funkciók fejlesztését, és megkapja a legújabb frissítéseket.
 \n
 \n Néhány a főbb funkciókból:</string>
-    <string name="osmand_plus_extended_description_part2">Navigáció
-\n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik
-\n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok)
-\n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő
-\n • Köztes pontok támogatása az útitervben
-\n • Az útvonal újratervezése kerül, ha letér róla
-\n• Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigáció \n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik \n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok) \n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő \n • Köztes pontok támogatása az útitervben \n • Az útvonal újratervezése kerül, ha letér róla \n• Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint</string>
     <string name="quick_action_switch_day_night_descr">Az OsmAnd éjszakai és nappali módja között váltó kapcsoló.</string>
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
@@ -3185,14 +3112,7 @@
     <string name="get_discount_first_few_part">%1$s az első %2$s</string>
     <string name="get_discount_second_part">Utána %1$s</string>
     <string name="price_and_discount">%1$s • %2$s megtakarítás</string>
-    <string name="osmand_plus_extended_description_part3">Térképnézet
-\n • Megjeleníti a pozícióját és az irányát
-\n • Választható térképigazítás az iránytű vagy a mozgás iránya alapján
-\n • Mentse el legfontosabb helyeit a Kedvencek közé
-\n • Jelenítse meg az Önhöz közeli érdekes pontokat (POI-kat)
-\n • Jelenítsen meg speciális online térképcsempéket, műholdképeket (Bing), különböző fedőrétegeket, például turisztikai/navigációs GPX-nyomvonalakat és további fedőrétegeket és állítsa be átlátszóságukat
-\n • Tetszés szerint megjelenítheti a helyneveket magyarul, angolul, a helyi nyelven vagy fonetikus átírással
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Térképnézet \n • Megjeleníti a pozícióját és az irányát \n • Választható térképigazítás az iránytű vagy a mozgás iránya alapján \n • Mentse el legfontosabb helyeit a Kedvencek közé \n • Jelenítse meg az Önhöz közeli érdekes pontokat (POI-kat) \n • Jelenítsen meg speciális online térképcsempéket, műholdképeket (Bing), különböző fedőrétegeket, például turisztikai/navigációs GPX-nyomvonalakat és további fedőrétegeket és állítsa be átlátszóságukat \n • Tetszés szerint megjelenítheti a helyneveket magyarul, angolul, a helyi nyelven vagy fonetikus átírással</string>
     <string name="osmand_plus_extended_description_part4">Az OSM és a Wikipédia adatainak használata
 \n • Kiváló minőségű adatok a világ legjobb együttműködésen alapuló projektjeiből
 \n • Országonként vagy régiónként rendelkezésre álló OSM-adatok
@@ -3201,12 +3121,7 @@
 \n • Kompakt offline vektoros térképek, legalább havi frissítéssel
 \n
 \n • Választási lehetőség a teljes régiós térkép és a kizárólag az úthálózatot mutató térkép között (Például Japán összesen 700 MB, az úthálózat ebből csupán 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Biztonsági funkciók
-\n • Beállítható automatikus átkapcsolás éjszakai/nappali módra
-\n • Beállítható sebességkorlátozás megjelenítése, túllépés esetén figyelmeztetéssel
-\n • Beállítható sebességfüggő térképnagyítás
-\n • Ossza meg helyzetét, hogy mások megtalálhassák
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Biztonsági funkciók \n • Beállítható automatikus átkapcsolás éjszakai/nappali módra \n • Beállítható sebességkorlátozás megjelenítése, túllépés esetén figyelmeztetéssel \n • Beállítható sebességfüggő térképnagyítás \n • Ossza meg helyzetét, hogy mások megtalálhassák</string>
     <string name="osmand_plus_extended_description_part6">Kerékpáros és gyalogos funkciók
 \n • Gyalog- és turistautak, valamint kerékpáros ösvények megtekintése, szabadtéri tevékenységekhez kitűnő
 \n • Speciális kerékpáros és gyalogos útvonal-tervezési és megjelenítési módok
@@ -3214,51 +3129,9 @@
 \n • Bekapcsolható útvonalrögzítés helyi GPX-fájlba vagy online módon
 \n • Bekapcsolható sebesség- és magasságkijelzés
 \n • Szintvonalak és domborzatárnyékolás megjelenítése (bővítmény telepítése után)</string>
-    <string name="osmand_plus_extended_description_part7">Szerkessze közvetlenül az OpenStreetMapet
-\n • Jelentsen be hibákat
-\n • Töltsön fel GPX-nyomvonalakat az OSM-re közvetlenül az alkalmazásból
-\n • Adjon hozzá érdekes pontokat és töltse fel őket közvetlenül (vagy később offline módon) az OSM-re
-\n • Beállítható útvonalrögzítés a háttérben is (miközben a készülék alvó üzemmódban van)
-\n Az OsmAnd aktívan fejlesztett nyílt forráskódú szoftver. Bárki közreműködhet az alkalmazás fejlesztésében hibák bejelentésével, a fordítások javításával vagy új funkciók kódolásával. A projekt az új funkciók kódolásánek és tesztelésének finanszírozását lehetővé tevő pénzügyi hozzájárulásoktól függ.
-\n</string>
-    <string name="release_3_4">• Alkalmazásprofilok: egyedi profil létrehozása saját igényei szerint, egyedi ikonnal és színnel
-\n
-\n • Most már minden profilban testreszabhatók az alapértelmezések és legkisebb/legnagyobb sebességek
-\n
-\n • Új modul a jelenlegi koordinátáknak
-\n
-\n • Új opciók az iránytű és a sugárirányú vonalzó térképen való megjelenítéséhez
-\n
-\n • A háttérben történő nyomvonalrögzítés hibáinak javítása
-\n
-\n • Háttérben történő térképletöltés javítása
-\n
-\n • A „Képernyő bekapcsolása” opció visszaállítása
-\n
-\n • A Wikipédia-nyelv kijelölésének javítása
-\n
-\n • Az iránytűgomb navigáció közbeni viselkedésének javítása
-\n
-\n • Más hibajavítások
-\n
-\n</string>
-    <string name="release_3_5">• Frissített alkalmazás- és profilbeállítások: a beállítások most típusonként vannak elrendezve. Minden profil külön-külön testreszabható. 
-\n 
-\n • Az új térképletöltési párbeszédablak böngészés közben javaslatot tesz a letöltendő térképre 
-\n 
-\n • Az sötét téma hibáinak javítása 
-\n 
-\n • Számos útvonaltervezési probléma javítása világszerte 
-\n 
-\n • Frissített alaptérkép részletesebb úthálózattal 
-\n 
-\n • Elárasztott területek javítása világszerte 
-\n 
-\n • Sí útvonaltervezés: magassági profil és útvonalbonyolultság hozzáadása az útvonal részleteihez 
-\n 
-\n • További hibajavítások
-\n
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Szerkessze közvetlenül az OpenStreetMapet \n • Jelentsen be hibákat \n • Töltsön fel GPX-nyomvonalakat az OSM-re közvetlenül az alkalmazásból \n • Adjon hozzá érdekes pontokat és töltse fel őket közvetlenül (vagy később offline módon) az OSM-re \n • Beállítható útvonalrögzítés a háttérben is (miközben a készülék alvó üzemmódban van) \n Az OsmAnd aktívan fejlesztett nyílt forráskódú szoftver. Bárki közreműködhet az alkalmazás fejlesztésében hibák bejelentésével, a fordítások javításával vagy új funkciók kódolásával. A projekt az új funkciók kódolásánek és tesztelésének finanszírozását lehetővé tevő pénzügyi hozzájárulásoktól függ.</string>
+    <string name="release_3_4">• Alkalmazásprofilok: egyedi profil létrehozása saját igényei szerint, egyedi ikonnal és színnel \n \n • Most már minden profilban testreszabhatók az alapértelmezések és legkisebb/legnagyobb sebességek \n \n • Új modul a jelenlegi koordinátáknak \n \n • Új opciók az iránytű és a sugárirányú vonalzó térképen való megjelenítéséhez \n \n • A háttérben történő nyomvonalrögzítés hibáinak javítása \n \n • Háttérben történő térképletöltés javítása \n \n • A „Képernyő bekapcsolása” opció visszaállítása \n \n • A Wikipédia-nyelv kijelölésének javítása \n \n • Az iránytűgomb navigáció közbeni viselkedésének javítása \n \n • Más hibajavítások</string>
+    <string name="release_3_5">• Frissített alkalmazás- és profilbeállítások: a beállítások most típusonként vannak elrendezve. Minden profil külön-külön testreszabható. \n \n • Az új térképletöltési párbeszédablak böngészés közben javaslatot tesz a letöltendő térképre \n \n • A sötét téma hibáinak javítása \n \n • Számos útvonaltervezési probléma javítása világszerte \n \n • Frissített alaptérkép részletesebb úthálózattal \n \n • Elárasztott területek javítása világszerte \n \n • Sí útvonaltervezés: magassági profil és útvonalbonyolultság hozzáadása az útvonal részleteihez \n \n • További hibajavítások</string>
     <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak. Ezután kérni fog egy célpontot vagy elindítja az útvonaltervezést.</string>
     <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
     <string name="reset_all_profile_settings_descr">Összes profilbeállítás visszaállítása az alapértelmezett állapotba.</string>
@@ -3613,31 +3486,7 @@
     <string name="plan_a_route">Egy útvonal tervezése</string>
     <string name="add_to_a_track">Hozzáadás nyomvonalhoz</string>
     <string name="pass_whole_track_descr">A nyomvonal elérendő pontja</string>
-    <string name="release_3_6">• Profilok: most már módosíthatja a sorrendet, beállíthat egy ikont a térképen, megváltoztathatja az alapprofilok összes beállítását, és visszaállíthatja azokat az alapértelmezett értékekre
-\n
-\n • Kijárat száma megjelenik navigálásnál
-\n
-\n • Átdolgozott bővítmény-beállítások
-\n
-\n • Átdolgozott beállítás-képernyő az összes profil gyors eléréséhez
-\n
-\n • Beállítások másolása egy másik profilból
-\n
-\n • POI-kategóriák sorrendjének módosítása vagy elrejtésük a Keresésben
-\n
-\n • Helyesen igazított POI-ikonok a térképen
-\n
-\n • Napkelte / napnyugta adatai a Térkép konfigurálásához
-\n
-\n • Otthon / munkahely ikonok a térképen
-\n
-\n • Többsoros leírás támogatása a Beállításoknál
-\n
-\n • Helyes átírás Japán térképénél
-\n
-\n • Antarktisz-térkép
-\n
-\n</string>
+    <string name="release_3_6">• Profilok: most már módosíthatja a sorrendet, beállíthat egy ikont a térképen, megváltoztathatja az alapprofilok összes beállítását, és visszaállíthatja azokat az alapértelmezett értékekre \n \n • Kijárat száma megjelenik navigálásnál \n \n • Átdolgozott bővítmény-beállítások \n \n • Átdolgozott beállítás-képernyő az összes profil gyors eléréséhez \n \n • Beállítások másolása egy másik profilból \n \n • POI-kategóriák sorrendjének módosítása vagy elrejtésük a Keresésben \n \n • Helyesen igazított POI-ikonok a térképen \n \n • Napkelte / napnyugta adatai a Térkép konfigurálásához \n \n • Otthon / munkahely ikonok a térképen \n \n • Többsoros leírás támogatása a Beállításoknál \n \n • Helyes átírás Japán térképénél \n \n • Antarktisz-térkép</string>
     <string name="gpx_split_interval_descr">Válassza ki, hogy a nyomvonalon milyen távolság- vagy időintervallumok jelzései jelenjenek meg.</string>
     <string name="monitoring_min_distance_descr">Ennek a szűrőnek a bekapcsolása kiküszöböli további adatok rögzítését akkor, ha mozgás gyakorlatilag nem érzékelhető. Emellett javul a nyomvonalak térbeli megjelenése, utólagos feldolgozás nélkül is.</string>
     <string name="multimedia_rec_split_title">Felvétel vágása</string>
@@ -3732,21 +3581,7 @@
     <string name="route_between_points_add_track_desc">Jelölje ki azt a nyomvonalfájlt, amelyhez az új szakasz hozzáadódjon.</string>
     <string name="show_gpx">Nyomvonalak</string>
     <string name="shared_string_redo">Mégis</string>
-    <string name="release_3_8">• Frissített útvonaltervezési funkció: szakaszonként különböző navigációtípusok használhatók és nyomvonalak is beilleszthetők
-\n
-\n • Új megjelenési menü a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kiindulás és célpont ikonjait
-\n
-\n • Kerékpáros csomópontok jobb láthatósága
-\n
-\n • Nyomvonalra koppintással megnyíló helyi menü a nyomvonalak az alapvető adataival
-\n
-\n • Továbbfejlesztett keresési algoritmusok
-\n
-\n • Javított nyomvonalkövetési beállítások a Navigációban
-\n
-\n • Javítva a profilbeállítások importálásával / exportálásával kapcsolatos problémák
-\n
-\n</string>
+    <string name="release_3_8">• Frissített útvonaltervezési funkció: szakaszonként különböző navigációtípusok használhatók és nyomvonalak is beilleszthetők \n \n • Új megjelenési menü a nyomvonalakhoz: válassza ki a színt, a vastagságot, kapcsolja be az iránynyilakat és a kiindulás és célpont ikonjait \n \n • Kerékpáros csomópontok jobb láthatósága \n \n • Nyomvonalra koppintással megnyíló helyi menü a nyomvonalak az alapvető adataival \n \n • Továbbfejlesztett keresési algoritmusok \n \n • Javított nyomvonalkövetési beállítások a Navigációban \n \n • Javítva a profilbeállítások importálásával / exportálásával kapcsolatos problémák</string>
     <string name="sort_last_modified">Utolsó módosítás</string>
     <string name="sort_name_descending">Név: Z–A</string>
     <string name="sort_name_ascending">Név: A–Z</string>
@@ -3848,15 +3683,7 @@
     <string name="plan_route_split_before">Elvágás ez előtt:</string>
     <string name="plan_route_split_after">Elvágás ez után:</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
-    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is
-\n
-\n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére
-\n
-\n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM párbeszédpanelek felhasználói felületének javítása
-\n
-\n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál
-\n
-\n</string>
+    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is \n \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére \n \n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM párbeszédpanelek felhasználói felületének javítása \n \n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál</string>
     <string name="profile_type_osmand_string">OsmAnd profil</string>
     <string name="profile_type_user_string">Felhasználói profil</string>
     <string name="reverse_all_points">Összes pont megfordítása</string>
@@ -3994,19 +3821,7 @@
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
     <string name="trip_recording_show_start_dialog_setting">Ha le van tiltva, akkor a felvétel azonnal elindul a modul vagy a menüelem megérintése után, kihagyva a megerősítő párbeszédpanelt.</string>
-    <string name="release_4_0_beta">• Új lehetőség: szintvonalak letöltése (méter mellett) lábban
-\n
-\n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz
-\n
-\n• Az OsmAnd Live frissítések átköltöztek a „Letöltések &gt; Frissítések” helyre
-\n
-\n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők
-\n
-\n• A navigációs útvonal megjelenése módosítható
-\n
-\n• Frissült az „Utazás felvétele” párbeszédpanel
-\n
-\n</string>
+    <string name="release_4_0_beta">• Új lehetőség: szintvonalak letöltése (méter mellett) lábban \n \n• Útvonaltervezési környezet: hozzáadott fülek a pontok és grafikonok közötti váltáshoz \n \n• Az OsmAnd Live frissítések átköltöztek a „Letöltések &gt; Frissítések” helyre \n \n• A nyomvonalak már magasság, sebesség vagy lejtés szerint is színezhetők \n \n• A navigációs útvonal megjelenése módosítható \n \n• Frissült az „Utazás felvétele” párbeszédpanel</string>
     <string name="shared_string_route_line">Útvonal</string>
     <string name="customize_route_line">Útvonaljelző csík testreszabása</string>
     <string name="specify_color_for_map_mode">Szín meghatározása a következő térképmódhoz: %1$s.</string>
@@ -4168,27 +3983,7 @@
     <string name="backup_error_subscription_was_expired">Lejárt előfizetés</string>
     <string name="backup_error_user_is_already_registered">Ezt az e-mail-címet egy másik fiók már használja</string>
     <string name="duration_moment_ago">egy pillanattal ezelőtt</string>
-    <string name="release_4_0">• Felhőalapú biztonsági mentés
-\n
-\n • Éjszakai üzemmód hozzáadása a „Topo” térképstílushoz
-\n
-\n • Szintvonalak letöltése lábban (a méter mellett)
-\n
-\n • Nyomvonalak színezése magasság, sebesség vagy lejtés szerint
-\n
-\n • Frissített „Utazás rögzítése” párbeszédpanel
-\n
-\n • A koppintással mért távolság átkerült a Sugárvonalból egy önálló beállításba
-\n
-\n • Útvonaltervezés: Mostantól az útvonaltervezés elhagyása nélkül is módosíthatja a navigációs beállításokat, elérheti a térkép konfigurációját és a keresést.
-\n
-\n • Új „Vásárlás” képernyő részletes információkkal
-\n
-\n • Új beállítás: az útvonalvonal megjelenésének módosítása
-\n
-\n • Az OsmAnd Live frissítések átkerültek a „Letöltések &gt; Frissítések” menüpontba
-\n
-\n</string>
+    <string name="release_4_0">• Felhőalapú biztonsági mentés \n \n • Éjszakai üzemmód hozzáadása a „Topo” térképstílushoz \n \n • Szintvonalak letöltése lábban (a méter mellett) \n \n • Nyomvonalak színezése magasság, sebesség vagy lejtés szerint \n \n • Frissített „Utazás rögzítése” párbeszédpanel \n \n • A koppintással mért távolság átkerült a Sugárvonalból egy önálló beállításba \n \n • Útvonaltervezés: Mostantól az útvonaltervezés elhagyása nélkül is módosíthatja a navigációs beállításokat, elérheti a térkép konfigurációját és a keresést. \n \n • Új „Vásárlás” képernyő részletes információkkal \n \n • Új beállítás: az útvonalvonal megjelenésének módosítása \n \n • Az OsmAnd Live frissítések átkerültek a „Letöltések &gt; Frissítések” menüpontba</string>
     <string name="enter_verification_code">Egyszeri jelszó megadása</string>
     <string name="logout_from_osmand_cloud">Kijelentkezés az OsmAnd Cloudból</string>
     <string name="logout_from_osmand_cloud_decsr">Kijelentkezik\?
@@ -4298,31 +4093,7 @@
     <string name="rendering_attr_natureReserves_name">Természetvédelmi terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
-    <string name="release_4_1">• Android Auto kezdeti támogatása
-\n
-\n • Felhasználói felület frissítése az UTM koordináták kereséséhez
-\n
-\n • GPS szűrő a GPX nyomvonalakhoz
-\n
-\n • Tengerszint feletti magasságot megjelenítő modul (Pro)
-\n
-\n • Kedvencek: megtekinthetők a legutóbb használt ikonok
-\n
-\n • Útvonaltervezés: indítás után a kiválasztott profil használata
-\n
-\n • Javult a Mapillary-réteg, a bővítmény mostantól alapértelmezés szerint le van tiltva
-\n
-\n • Új képernyő az alkalmazásban lévő összes előzmény kezeléséhez
-\n
-\n • Az alkalmazás újraindítása után a térkép tájolása nem áll vissza az alapértelmezés szerinti irányba
-\n
-\n • Javult az SRTM magasságjelző megjelenítése
-\n
-\n • Javultak az arab térképfeliratok
-\n
-\n • Különböző útvonaltervezési problémák javítása
-\n
-\n</string>
+    <string name="release_4_1">• Android Auto kezdeti támogatása \n \n • Felhasználói felület frissítése az UTM koordináták kereséséhez \n \n • GPS szűrő a GPX nyomvonalakhoz \n \n • Tengerszint feletti magasságot megjelenítő modul (Pro) \n \n • Kedvencek: megtekinthetők a legutóbb használt ikonok \n \n • Útvonaltervezés: indítás után a kiválasztott profil használata \n \n • Javult a Mapillary-réteg, a bővítmény mostantól alapértelmezés szerint le van tiltva \n \n • Új képernyő az alkalmazásban lévő összes előzmény kezeléséhez \n \n • Az alkalmazás újraindítása után a térkép tájolása nem áll vissza az alapértelmezés szerinti irányba \n \n • Javult az SRTM magasságjelző megjelenítése \n \n • Javultak az arab térképfeliratok \n \n • Különböző útvonaltervezési problémák javítása</string>
     <string name="android_auto_purchase_request_title">Ha az OsmAndot az Android Autóval kívánja használni, vásárolja meg az OsmAnd Pro vagy a Maps+ alkalmazást</string>
     <string name="continue_on_phone">Folytatás a mobileszközön</string>
     <string name="location_access_request_title">Az OsmAndnak a Hely engedélyre van szüksége a navigációhoz.</string>
@@ -4557,15 +4328,7 @@
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Ne térjen le a pályáról</string>
     <string name="on_with_params">%1$s ezen: %2$s</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Középhaladó</string>
-    <string name="release_4_2">• Újratervezett modulok: új megjelenés és élmény, oldalak szerinti csoportosítás, sorrendmódosítás és tetszés szerinti kombinálhatóság.
-\n
-\n • Túrázás / Kerékpározás / Utazási útvonalak: koppintás az útvonal-szimbólumra a részletes útvonal-információkhoz.
-\n
-\n • Kedvenc csoportok: a csoport új pontjainak alapértelmezett megjelenésének beállítása
-\n
-\n • Javítások: online csempetérképek automatikus frissítése
-\n
-\n</string>
+    <string name="release_4_2">• Újratervezett modulok: új megjelenés és élmény, oldalak szerinti csoportosítás, sorrendmódosítás és tetszés szerinti kombinálhatóság. \n \n • Túrázás / Kerékpározás / Utazási útvonalak: koppintás az útvonal-szimbólumra a részletes útvonal-információkhoz. \n \n • Kedvenc csoportok: a csoport új pontjainak alapértelmezett megjelenésének beállítása \n \n • Javítások: online csempetérképek automatikus frissítése</string>
     <string name="turn_on_public_transport_description">Kapcsolja be a tömegközlekedési útvonalak megtekintéséhez a térképen.</string>
     <string name="av_notes_choose_action_widget_desc">Válasszon műveletet.</string>
     <string name="current_time_widget_desc">Megjeleníti a készüléke által szolgáltatott aktuális időt.</string>
@@ -4810,31 +4573,7 @@
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpár-sebesség, -teljesítmény, pedálfordulatszám, valamint pulzusszám.</string>
     <string name="speak_route_recalculation">Útvonal újratervezésének bemondása</string>
-    <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel
-\n
-\n • Folytonos animáció a mozgás közbeni helyváltoztatáskor
-\n
-\n • Új modul a térkép középpontjának koordinátáival és a hely magasságával
-\n
-\n • „Távolság koppintásra” szövegméret beállítások hozzáadva
-\n
-\n • A „Térképjelző” modul: lehetőség a kattintási viselkedés megváltoztatására
-\n
-\n • Javított „Pozícióelhelyezés” opció
-\n
-\n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez
-\n
-\n • A „Hajózási térképek” lista módosítása
-\n
-\n • Hozzáadva az ANT+ érzékelők támogatása
-\n
-\n • Hozzáadva az UUID letöltés letiltásának lehetősége
-\n
-\n • Alapértelmezett sebességgel állítható előrejelzés a magasságtól függő gyaloglási/túrázási/futási időkhöz
-\n
-\n • Hangkimenet és hangerőcsúszka viselkedésének javítása
-\n
-\n</string>
+    <string name="release_4_3">Új, gyorsabb 2-es verziójú (OpenGL) térkép-megjelenítő motor, 2.5D nézettel \n \n • Folytonos animáció a mozgás közbeni helyváltoztatáskor \n \n • Új modul a térkép középpontjának koordinátáival és a hely magasságával \n \n • „Távolság koppintásra” szövegméret beállítások hozzáadva \n \n • A „Térképjelző” modul: lehetőség a kattintási viselkedés megváltoztatására \n \n • Javított „Pozícióelhelyezés” opció \n \n • GPX: támogatás hozzáadva a „link”, „cmt”, „desc” címkékhez és bármilyen egyéni kiterjesztéshez \n \n • A „Hajózási térképek” lista módosítása \n \n • Hozzáadva az ANT+ érzékelők támogatása \n \n • Hozzáadva az UUID letöltés letiltásának lehetősége \n \n • Alapértelmezett sebességgel állítható előrejelzés a magasságtól függő gyaloglási/túrázási/futási időkhöz \n \n • Hangkimenet és hangerőcsúszka viselkedésének javítása</string>
     <string name="show_map_symbols_desc">Szöveg, közlekedési táblák stb.</string>
     <string name="show_borders_of_downloaded_maps">Letöltött térképpel rendelkező területek eltérő színnel</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
@@ -5023,37 +4762,7 @@
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>
     <string name="movement_speed">Mozgási sebesség</string>
-    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
-\n
-\n • A helyi menü most a POI lokalizált neveit jeleníti meg
-\n
-\n • Lehetőség az útvonal megosztására linken keresztül
-\n
-\n • „Tengeri mérföld/láb” hosszúságegység hozzáadva
-\n
-\n • A térképtájolás új rögzített móddal bővült
-\n
-\n • Egyszerűsített kezdőképernyő
-\n
-\n • Helypozíció javítása osztott képernyős módban az Android Auto-ban
-\n
-\n • „Sebesség/lejtés” grafikon hozzáadva a nyomvonal-elemzéshez
-\n
-\n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba
-\n
-\n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
-\n
-\n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére
-\n
-\n • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
-\n
-\n • Új Moped profil
-\n
-\n • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
-\n
-\n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
-\n
-\n</string>
+    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben \n \n • A helyi menü most a POI lokalizált neveit jeleníti meg \n \n • Lehetőség az útvonal megosztására linken keresztül \n \n • „Tengeri mérföld/láb” hosszúságegység hozzáadva \n \n • A térképtájolás új rögzített móddal bővült \n \n • Egyszerűsített kezdőképernyő \n \n • Helypozíció javítása osztott képernyős módban az Android Auto-ban \n \n • „Sebesség/lejtés” grafikon hozzáadva a nyomvonal-elemzéshez \n \n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba \n \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása \n \n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére \n \n • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél \n \n • Új Moped profil \n \n • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció \n \n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához</string>
     <string name="sort_duration_ascending">Először a legrövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
@@ -5234,49 +4943,7 @@
     <string name="free_favorites_backup">Kedvencek mentése ingyenesen</string>
     <string name="get_osmand_cloud">Használja a OsmAnd Cloud-ot</string>
     <string name="free_account">Ingyenes fiók</string>
-    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben
-\n
-\n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba
-\n
-\n • Új formátumú domborzati térképek 3D domborzat támogatással
-\n
-\n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása
-\n
-\n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez
-\n
-\n • Egyforma modullista az alsó/felső panelhez
-\n
-\n • Új vonat profil, vasúti útvonalak megtervezéséhez
-\n
-\n • Szintvonalak minden térképforráshoz
-\n
-\n • Kibővitett lista a külső billentyűzetek alapértelmezett műveleteihez
-\n
-\n • Egyéni útvonalfájlok, törlési és felülírási lehetőség
-\n
-\n • „Útvonaltól való eltérés bemondása” funkció
-\n
-\n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból
-\n
-\n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika)
-\n
-\n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez
-\n
-\n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához
-\n
-\n • Javítva az alkalmazásonkénti nyelvválasztás funkció
-\n
-\n • Témaikonok támogatása
-\n
-\n • OsmAnd Cloud: fiók törlésének lehetősége
-\n
-\n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térképkezelőfelülettel kapcsolatos probléma
-\n
-\n • A japán hangutasítások átdolgozva
-\n
-\n • A magasságváltozás és a lejtés átdolgozva
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben \n \n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az OsmAnd Cloudba \n \n • Új formátumú domborzati térképek 3D domborzat támogatással \n \n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása \n \n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez \n \n • Egyforma modullista az alsó/felső panelhez \n \n • Új vonat profil, vasúti útvonalak megtervezéséhez \n \n • Szintvonalak minden térképforráshoz \n \n • Kibővitett lista a külső billentyűzetek alapértelmezett műveleteihez \n \n • Egyéni útvonalfájlok, törlési és felülírási lehetőség \n \n • „Útvonaltól való eltérés bemondása” funkció \n \n • Kezdőképernyő: OsmAnd állapotának helyreállítása fájlból \n \n • Veszélyes anyagok osztályai hozzáadva a teherautós navigációhoz (Észak-Amerika) \n \n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez \n \n • CAI (Club Alpino Italiano) skála az útvonalak nehézségének osztályozásához \n \n • Javítva az alkalmazásonkénti nyelvválasztás funkció \n \n • Témaikonok támogatása \n \n • OsmAnd Cloud: fiók törlésének lehetősége \n \n • Akadálymentesítés: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térképkezelőfelülettel kapcsolatos probléma \n \n • A japán hangutasítások átdolgozva \n \n • A magasságváltozás és a lejtés átdolgozva</string>
     <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
     <string name="cache_size">Gyorsítótár méret</string>
     <string name="shared_string_avoid">Elkerülés</string>
@@ -5402,29 +5069,7 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Android Auto: 3D mód hozzáadva
-\n
-\n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára
-\n
-\n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához
-\n
-\n • Továbbfejlesztett helyi erőforrás-kezelés
-\n
-\n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
-\n
-\n • Új widgetek: „Siklószám” és „Nap állása”
-\n
-\n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
-\n
-\n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel
-\n
-\n • Az átlátszó állapotsorral kapcsolatos probléma javítva
-\n
-\n • Hozzáadott támogatás az ANT+ hőmérséklet widgethez
-\n
-\n • Bemutatjuk az \"Elérhető RAM\" widgetet
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új widgetek: „Siklószám” és „Nap állása” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet widgethez \n \n • Bemutatjuk az \"Elérhető RAM\" widgetet</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
@@ -5620,25 +5265,7 @@
     <string name="java_safe">Java (biztonságos)</string>
     <string name="shared_sting_all_colors">Összes szín</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="release_4_7">• Új „Sebességmérő” modul, amely kompatibilis az Android Autóval
-\n
-\n • Térképképernyő konfigurálása több „Gyorsművelet” gombbal
-\n
-\n • Jobban olvasható adatok a grafikonokon
-\n
-\n • Szenzoradatalapú szűrők a nyomvonalakhoz
-\n
-\n • Nyomvonalcsoportok megjelenésének jobb testreszabhatósága
-\n
-\n • További GPX-címkék támogatása
-\n
-\n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között
-\n
-\n • Egységes felhasználói felület a nyomvonalválasztásához
-\n
-\n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott
-\n
-\n</string>
+    <string name="release_4_7">• Új „Sebességmérő” modul, amely kompatibilis az Android Autóval \n \n • Térképképernyő konfigurálása több „Gyorsművelet” gombbal \n \n • Jobban olvasható adatok a grafikonokon \n \n • Szenzoradatalapú szűrők a nyomvonalakhoz \n \n • Nyomvonalcsoportok megjelenésének jobb testreszabhatósága \n \n • További GPX-címkék támogatása \n \n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között \n \n • Egységes felhasználói felület a nyomvonalválasztásához \n \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott</string>
     <string name="precise">Pontos</string>
     <string name="round_up">Kerekítés</string>
     <string name="distance_during_navigation">Távolságok a navigálás során</string>
@@ -5660,29 +5287,7 @@
     <string name="shared_string_changes">Módosítások</string>
     <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
     <string name="apply_only_to_new">Alkalmazás csak az újra</string>
-    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség
-\n
-\n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz
-\n
-\n • 3D változat a helypozíció ikonokhoz
-\n
-\n • A gyorsműveletek most külső billentyűzethez is rendelhetők
-\n
-\n • Időjárás: a felhasználói felület frissítése, hozzáadott szél animáció
-\n
-\n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek
-\n
-\n • Kibővített turistaútvonalak választéka a térképen
-\n
-\n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez
-\n
-\n • Javított nyomvonal-statisztika, -rendezés és -keresés
-\n
-\n • OSM szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód
-\n
-\n • Váltás a rendszermegosztási lapra az Android 14-től
-\n
-\n</string>
+    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség \n \n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz \n \n • 3D változat a helypozíció ikonokhoz \n \n • A gyorsműveletek most külső billentyűzethez is rendelhetők \n \n • Időjárás: a felhasználói felület frissítése, hozzáadott szél animáció \n \n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek \n \n • Kibővített turistaútvonalak választéka a térképen \n \n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez \n \n • Javított nyomvonal-statisztika, -rendezés és -keresés \n \n • OSM szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód \n \n • Váltás a rendszermegosztási lapra az Android 14-től</string>
     <string name="shared_string_scale">Skála</string>
     <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
     <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
@@ -5941,7 +5546,7 @@
     <string name="obd_ambient_air_temp">Környezeti levegő hőmérséklete</string>
     <string name="obd_battery_voltage">Akkumulátor feszültség</string>
     <string name="obd_engine_coolant_temp">Hűtőfolyadék hőmérséklete</string>
-    <string name="obd_fuel_level">Üzemanyagszint</string>
+    <string name="obd_fuel_level">Üzemanyag hatékonyság</string>
     <string name="obd_fuel_consumption_rate">Üzemanyag fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Az üzemanyag fogyasztást mutatja az OBD adatai alapján</string>
     <string name="obd_fuel_left_distance">Megtehető távolság</string>
@@ -5976,18 +5581,30 @@
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
-    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez\n\n</string>
+    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Érintse meg a gombot a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
     <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II eszközöket.</string>
     <string name="connect_obd_instructions_step2">2. Indítsa el a jármű motorját</string>
     <string name="connect_obd_instructions_step3">3. Engedélyezze a Bluetooth-t a telefonján</string>
-    <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II eszközt a listáról.</string>
+    <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II szkennert a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
     <string name="obd_fuel_left_liters">Maradék üzemanyag (l)</string>
     <string name="obd_vehicle_info">Jármű információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step1">1. Csatlakoztassa az eszközt a járműve OBD-II portjához.</string>
+    <string name="connect_obd_instructions_step1">1. Csatlakoztassa a szkennert a járműve OBD-II portjához.</string>
     <string name="obd_how_to_connect">Hogyan csatlakoztatható:</string>
+    <string name="route_guidance">Útvonalvezetés</string>
+    <string name="obd_widget_vehicle_speed">Jármű sebesség</string>
+    <string name="obd_widget_engine_speed">Motor fordulatszám</string>
+    <string name="obd_nothing_found_text">Nem található szkenner</string>
+    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth keresést és kapcsolja be a szkennert.</string>
+    <string name="obd_searching_text_description">Tartsa készülékét a szkenner közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
+    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke a szkenner hatókörén belül van.</string>
+    <string name="obd_searching_text">Szkennerek keresése</string>
+    <string name="obd_device_forget_sensor">Szkenner elfelejtése</string>
+    <string name="obd_device_forget_sensor_description">A szkenner törlődik a listáról. Ezt a szkennert bármikor újra párosíthatja.</string>
+    <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, az aktuális utca nevét és a sávinformációkat. A widgetek navigáció közben aktívak.</string>
+    <string name="connect_obd_instructions_step">1. Csatlakoztassa a szkennert járműve OBD-II portjához.\n\n 2. Indítsa el a járműve motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson erre: „%1$s” és válassza ki a szkennert a listából.</string>
 </resources>
