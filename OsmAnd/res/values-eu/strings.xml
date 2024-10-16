@@ -255,26 +255,7 @@
 \nOsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.
-\n
-\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.
-\n
-\nEzaugarri nagusi batzuk:
-\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
-\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
-\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
-\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
-\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
-\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
-\n- Kotxea, bizikleta eta oinezkoentzat modua:
-\n- Aukerazko egun/gau ikuspegi automatizatua
-\n- Aukerazko abiaduraren araberako maparen zooma
-\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa
-\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥
-\n"</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)\n\n\n\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.\n\n\n\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.\n\n\n\nEzaugarri nagusi batzuk:\n\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)\n\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri\n\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean\n\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak\n\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak\n\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)\n\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako\n\n- Kotxea, bizikleta eta oinezkoentzat modua:\n\n- Aukerazko egun/gau ikuspegi automatizatua\n\n- Aukerazko abiaduraren araberako maparen zooma\n\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa\n\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥\n\n"</string>
     <string name="filterpoi_activity">Sortu interesguneen iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Garraio modua:</string>
@@ -5020,51 +5001,7 @@
     <string name="simulation_position_description">Hautatu kokapena mugitzeko iturri gisa erabiliko den arrasto-fitxategi bat.</string>
     <string name="empty_tracks">Ez duzu arrasto-fitxategirik.</string>
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
-    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
-\n
-\n
-\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
-\n
-\n
-\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
-\n
-\n
-\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
-\n
-\n
-\n • Maparen orientazioak modu finko berria gehitu du
-\n
-\n
-\n • Hasierako pantaila sinplifikatua
-\n
-\n
-\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
-\n
-\n
-\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
-\n
-\n
-\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
-\n
-\n
-\n • Leku beganoak bistaratzeko arazoak konpondu dira
-\n
-\n
-\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da
-\n
-\n
-\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"
-\n
-\n
-\n • Ziklomotor profil berria
-\n
-\n
-\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"
-\n
-\n
-\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
-\n
-\n"</string>
+    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean\n\n\n\n\n\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain\n\n\n\n\n\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da\n\n\n\n\n\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da\n\n\n\n\n\n • Maparen orientazioak modu finko berria gehitu du\n\n\n\n\n\n • Hasierako pantaila sinplifikatua\n\n\n\n\n\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n\n\n\n\n\n\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko\n\n\n\n\n\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du\n\n\n\n\n\n • Leku beganoak bistaratzeko arazoak konpondu dira\n\n\n\n\n\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da\n\n\n\n\n\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"\n\n\n\n\n\n • Ziklomotor profil berria\n\n\n\n\n\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"\n\n\n\n\n\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira\n\n\n\n"</string>
     <string name="switch_folder">Aldatu karpeta</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" OsmAnd Cloud-etik ezabatu\?</string>
     <string name="shared_string_delete_file">Ezabatu fitxategia</string>
