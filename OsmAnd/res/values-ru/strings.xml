@@ -5995,4 +5995,6 @@
     <string name="connect_obd_instructions_step4">4. Нажмите «Подключиться» и выберите ваш сканер из списка.</string>
     <string name="learn_more_about_obd_sensors">Узнать больше о датчиках.</string>
     <string name="obd_fuel_left_liters">Осталось топлива (литров)</string>
+    <string name="route_guidance">Маршрутные маневры</string>
+    <string name="route_guidance_desc">Предоставляет указания по маршруту в режиме реального времени, включая расстояние до следующего поворота, название дороги, текущее название улицы и информацию о полосе движения. Виджеты активны во время навигации.</string>
 </resources>
