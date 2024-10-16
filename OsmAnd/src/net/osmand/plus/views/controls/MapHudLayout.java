@@ -50,7 +50,7 @@ public class MapHudLayout extends FrameLayout {
 	public MapHudLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		this.gridSize = AndroidUtils.dpToPx(context, 48);
+		this.gridSize = AndroidUtils.dpToPx(context, 8);
 
 		this.gridPaint = new Paint();
 		gridPaint.setColor(Color.BLACK);
@@ -71,23 +71,21 @@ public class MapHudLayout extends FrameLayout {
 		QuadRect currentBounds = getRect(button);
 		QuadTree<QuadRect> intersections = initBoundIntersections(button);
 		LayoutParams params = (LayoutParams) button.getLayoutParams();
-
 //		if (OsmandMapLayer.intersects(intersections, currentBounds, false)) {
 //			params = updateButtonPosition(button, intersections);
 //		}
-//		if (!isSnappedToGrid(params.rightMargin) || !isSnappedToGrid(params.bottomMargin)) {
-//			params.rightMargin = snapToGrid(params.rightMargin);
-//			params.bottomMargin = snapToGrid(params.bottomMargin);
-//		}
-
 		int width = button.getMeasuredWidth();
 		int height = button.getMeasuredHeight();
 
 		if (width > 0 && height > 0) {
-			int[] a = transformCoordinates(params.rightMargin, params.bottomMargin, width, height, gridSize);
-			if ((params.rightMargin != a[0]) || (params.bottomMargin != a[1])) {
-				params.rightMargin = a[0];
-				params.bottomMargin = a[1];
+			int x = roundCoordinate(params.rightMargin, width, gridSize);
+			int y = roundCoordinate(params.bottomMargin, height, gridSize);
+			if ((params.rightMargin != x) || (params.bottomMargin != y)) {
+				LOG.info(String.format("Correct %d, %d -> %d, %d",
+						params.rightMargin, params.bottomMargin, x, y));
+				params.rightMargin = x;
+				params.bottomMargin = y;
+
 				button.setLayoutParams(params);
 			}
 		}
@@ -95,19 +93,6 @@ public class MapHudLayout extends FrameLayout {
 		if (save) {
 			button.saveMargins();
 		}
-	}
-
-	public static int[] transformCoordinates(int x, int y, int w, int h, int cellSize) {
-		int nx = roundCoordinate(x, w, cellSize);
-		int ny = roundCoordinate(y, h, cellSize);
-		System.out.printf("%d %d (%d, %d)-> %d %d\n", x, y, w, h, nx, ny);
-		LOG.debug(String.format(Locale.US, "%d %d (%d, %d)-> %d %d\n", x, y, w, h, nx, ny));
-
-		int[] a = new int[2];
-		a[0] = nx;
-		a[1] = ny;
-
-		return a;
 	}
 
 	public static int roundCoordinate(int coord, int screenSize, int cellSize) {
@@ -127,25 +112,8 @@ public class MapHudLayout extends FrameLayout {
 	@Override
 	protected void onDraw(@NotNull Canvas canvas) {
 		super.onDraw(canvas);
-//		drawGridLines(canvas);
 	}
 
-	private void drawGridLines(Canvas canvas) {
-		int width = getWidth();
-		int height = getHeight();
-
-		// Draw vertical grid lines
-		for (int x = 0; x < width; x += gridSize) {
-			int nx = roundCoordinate(x, width, gridSize);  // Round to nearest grid point
-			canvas.drawLine(nx, 0, nx, height, gridPaint); // Draw vertical line
-		}
-
-		// Draw horizontal grid lines
-		for (int y = 0; y < height; y += gridSize) {
-			int ny = roundCoordinate(y, height, gridSize);  // Round to nearest grid point
-			canvas.drawLine(0, ny, width, ny, gridPaint);   // Draw horizontal line
-		}
-	}
 
 	@NonNull
 	private LayoutParams updateButtonPosition(@NonNull MapButton button, @NonNull QuadTree<QuadRect> intersections) {
@@ -218,13 +186,6 @@ public class MapHudLayout extends FrameLayout {
 		}
 	}
 
-	private boolean isSnappedToGrid(int margin) {
-		return margin % gridSize == 0;
-	}
-
-	private int snapToGrid(int margin) {
-		return Math.round((float) margin / gridSize) * gridSize;
-	}
 
 	private static double[][] getAvailableDirections() {
 		double[][] directions = new double[16][2];
