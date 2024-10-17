@@ -384,13 +384,13 @@ public class MapActivityActions extends MapActions {
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
 	                                           boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
-				useIntermediatePointsByDefault, showMenu, menuState, false);
+				useIntermediatePointsByDefault, showMenu, menuState, null);
 	}
 
 	@Override
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
-	                                           boolean showMenu, int menuState, boolean passWholeRoute) {
+	                                           boolean showMenu, int menuState, @Nullable Boolean passWholeRoute) {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
 				useIntermediatePointsByDefault, showMenu, menuState, passWholeRoute);
 		if (showMenu) {

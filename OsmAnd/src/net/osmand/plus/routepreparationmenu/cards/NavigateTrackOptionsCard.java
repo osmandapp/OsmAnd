@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 
@@ -59,11 +59,11 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		TextView description = parameterView.findViewById(R.id.description);
 		description.setText(R.string.pass_whole_track_descr);
 
-		boolean enabled = passWholeRoute.isSelected(app.getSettings());
+		boolean enabled = passWholeRoute.isSelected(settings);
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsView, nightMode);
 
 		TextRadioItem leftButton = createRadioButton(getString(R.string.start_of_the_track), (radioItem, view) -> {
-			if (!passWholeRoute.isSelected(app.getSettings())) {
+			if (!passWholeRoute.isSelected(settings)) {
 				applyParameter(passWholeRoute, true);
 				return true;
 			}
@@ -71,7 +71,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		});
 
 		TextRadioItem rightButton = createRadioButton(getString(R.string.nearest_point), (radioItem, view) -> {
-			if (passWholeRoute.isSelected(app.getSettings())) {
+			if (passWholeRoute.isSelected(settings)) {
 				applyParameter(passWholeRoute, false);
 				return true;
 			}
@@ -109,11 +109,11 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(parameterView, true);
 		LinearLayout buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
 
-		boolean enabled = parameter.isSelected(app.getSettings());
+		boolean enabled = parameter.isSelected(settings);
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsView, nightMode);
 
 		TextRadioItem leftButton = createRadioButton(leftButtonTitle, (radioItem, view) -> {
-			if (parameter.isSelected(app.getSettings())) {
+			if (parameter.isSelected(settings)) {
 				applyParameter(parameter, false);
 				return true;
 			}
@@ -121,7 +121,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		});
 
 		TextRadioItem rightButton = createRadioButton(rightButtonTitle, (radioItem, view) -> {
-			if (!parameter.isSelected(app.getSettings())) {
+			if (!parameter.isSelected(settings)) {
 				applyParameter(parameter, true);
 				return true;
 			}
@@ -132,7 +132,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		radioGroup.setSelectedItem(enabled ? rightButton : leftButton);
 	}
 
-	private void applyParameter(LocalRoutingParameter parameter, boolean isChecked) {
+	private void applyParameter(@NonNull LocalRoutingParameter parameter, boolean isChecked) {
 		app.getRoutingOptionsHelper().applyRoutingParameter(parameter, isChecked);
 		notifyCardPressed();
 	}
