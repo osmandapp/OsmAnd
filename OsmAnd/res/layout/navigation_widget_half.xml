@@ -7,7 +7,7 @@
 	android:layout_height="@dimen/simple_widget_medium_height"
 	android:orientation="vertical"
 	android:paddingHorizontal="16dp"
-	android:paddingVertical="3dp">
+	android:paddingTop="3dp">
 
 	<FrameLayout
 		android:id="@+id/container"
@@ -61,7 +61,7 @@
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="36dp"
+			android:layout_height="33dp"
 			android:layout_gravity="bottom"
 			android:orientation="horizontal">
 
