@@ -34,6 +34,7 @@ public class MapHudLayout extends FrameLayout {
 
 	private final Paint gridPaint;
 	private final float gridSize;
+	private final float shadowSize;
 
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
@@ -51,7 +52,7 @@ public class MapHudLayout extends FrameLayout {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.gridSize = AndroidUtils.dpToPxF(context, 8);
-
+		this.shadowSize = AndroidUtils.dpToPxF(context, 2);
 		this.gridPaint = new Paint();
 		gridPaint.setColor(Color.BLACK);
 		gridPaint.setStrokeWidth(1f);
@@ -95,22 +96,16 @@ public class MapHudLayout extends FrameLayout {
 		}
 	}
 
-	public static int roundCoordinate(int coord, int screenSize, float cellSize) {
-		if (coord > cellSize / 2) {
-			// easier drag & drop
-			coord += cellSize / 2;
-		}
-		int fullCells = (int) (coord / cellSize);
+	private static int margin = 1;
+	public int roundCoordinate(int coord, int screenSize, float cellSize) {
+		int fullCells = (int) Math.max(((coord + cellSize) / cellSize), margin);
 		if (2 * fullCells * cellSize < screenSize) {
-			return (int) (fullCells * cellSize);
+			return (int) (fullCells * cellSize - shadowSize);
 		}
-		float end = (screenSize - coord);
-		fullCells = (int) (end / cellSize) + 1;
+		float end = (screenSize - (coord - cellSize / 2));
+		fullCells = (int) (end / cellSize);
 		float ret = screenSize - fullCells * cellSize;
-		if (ret * 2 < screenSize) {
-			ret += cellSize;
-		}
-		return (int) ret;
+		return (int) (ret);
 	}
 
 	@Override
