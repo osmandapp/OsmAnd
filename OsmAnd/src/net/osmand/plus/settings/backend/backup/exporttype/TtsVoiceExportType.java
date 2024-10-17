@@ -5,6 +5,7 @@ import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -39,7 +40,7 @@ class TtsVoiceExportType extends AbstractVoiceExportType {
 	}
 
 	@Override
-	protected boolean shouldSkipLocalItem(@NonNull LocalItem localItem) {
+	protected boolean shouldSkipLocalItem(@NonNull OsmandApplication app, @NonNull LocalItem localItem) {
 		return localItem.getType() == TTS_VOICE_DATA && Algorithms.stringsEqual(localItem.getFile().getName(), "en-tts");
 	}
 }

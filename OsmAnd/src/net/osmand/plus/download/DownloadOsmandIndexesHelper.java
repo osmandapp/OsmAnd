@@ -144,8 +144,7 @@ public class DownloadOsmandIndexesHelper {
 	public static void downloadTtsWithoutInternet(@NonNull OsmandApplication app, @NonNull IndexItem item) {
 		try {
 			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
-			ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile);
-			boolean changedDate = de.targetFile.setLastModified(de.dateModified);
+			boolean changedDate = ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile, de.dateModified);
 			if (!changedDate) {
 				log.error("Set last timestamp is not supported");
 			}
@@ -415,6 +414,10 @@ public class DownloadOsmandIndexesHelper {
 			this.source = source;
 			this.destination = destination;
 			this.combinedMode = combinedMode;
+		}
+
+		public Long getVersionTime() {
+			return version != null ? version.getTime() : null;
 		}
 	}
 }
