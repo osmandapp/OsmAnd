@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>

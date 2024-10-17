@@ -69,10 +69,9 @@ object OBDDataComputer {
 
 	fun registerWidget(
 		type: OBDTypeWidget,
-		averageTimeSeconds: Int,
-		formatter: OBDComputerWidgetFormatter = OBDComputerWidgetFormatter()
+		averageTimeSeconds: Int
 	): OBDComputerWidget {
-		val widget = OBDComputerWidget(formatter, type, averageTimeSeconds)
+		val widget = OBDComputerWidget(type, averageTimeSeconds)
 		widgets = KCollectionUtils.addToList(widgets, widget)
 		updateRequiredCommands()
 		return widget
@@ -93,32 +92,72 @@ object OBDDataComputer {
 	enum class OBDTypeWidget(
 		val locationNeeded: Boolean,
 		val requiredCommand: OBDCommand,
-		val nameId: String
+		val nameId: String,
+		val formatter: OBDComputerWidgetFormatter
 	) {
-		SPEED(false, OBD_SPEED_COMMAND, "shared_string_speed"),
-		RPM(false, OBD_RPM_COMMAND, "obd_rpm"),
-		FUEL_LEFT_KM(true, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_distance"),
-		FUEL_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_level"),
-		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_percent"),
-		FUEL_LEFT_LITER(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_liter"),
+		SPEED(
+			false,
+			OBD_SPEED_COMMAND,
+			"shared_string_speed",
+			OBDComputerWidgetFormatter("%.0f")),
+		RPM(
+			false,
+			OBD_RPM_COMMAND,
+			"obd_rpm",
+			OBDComputerWidgetFormatter("%.0f")),
+		FUEL_LEFT_KM(
+			true,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_distance",
+			OBDComputerWidgetFormatter("%.0f")),
+		FUEL_LEFT_PERCENT(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_percent",
+			OBDComputerWidgetFormatter("%.2f")),
+		FUEL_LEFT_LITER(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_liter",
+			OBDComputerWidgetFormatter("%.2f")),
 		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_percent_hour"),
+			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.0f")),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_liter_hour"),
+			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.0f")),
 		FUEL_CONSUMPTION_RATE_SENSOR(
 			false,
 			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
-			"obd_fuel_consumption_rate_scanner"),
-		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND, "obd_air_intake_temp"),
-		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, "obd_ambient_air_temp"),
-		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND, "obd_battery_voltage"),
-		FUEL_TYPE(false, OBD_FUEL_TYPE_COMMAND, "obd_fuel_type"),
-		VIN(false, OBD_VIN_COMMAND, "obd_vin"),
-		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND, "obd_engine_coolant_temp");
+			"obd_fuel_consumption_rate_scanner", OBDComputerWidgetFormatter("%.2f")),
+		TEMPERATURE_INTAKE(
+			false,
+			OBD_AIR_INTAKE_TEMP_COMMAND,
+			"obd_air_intake_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		TEMPERATURE_AMBIENT(
+			false,
+			OBD_AMBIENT_AIR_TEMPERATURE_COMMAND,
+			"obd_ambient_air_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		BATTERY_VOLTAGE(
+			false,
+			OBD_BATTERY_VOLTAGE_COMMAND,
+			"obd_battery_voltage",
+			OBDComputerWidgetFormatter("%.2f")),
+		FUEL_TYPE(
+			false,
+			OBD_FUEL_TYPE_COMMAND,
+			"obd_fuel_type",
+			OBDFuelTypeFormatter()),
+		VIN(false, OBD_VIN_COMMAND, "obd_vin", OBDComputerWidgetFormatter("%s")),
+		TEMPERATURE_COOLANT(
+			false,
+			OBD_ENGINE_COOLANT_TEMP_COMMAND,
+			"obd_engine_coolant_temp",
+			OBDComputerWidgetFormatter("%.0f"));
 
 		fun getTitle(): String {
 			return Localization.getString(nameId)
@@ -150,7 +189,6 @@ object OBDDataComputer {
 	}
 
 	class OBDComputerWidget(
-		val formatter: OBDComputerWidgetFormatter,
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
 		private var values: MutableList<OBDDataField<Any>> = ArrayList()
@@ -161,12 +199,7 @@ object OBDDataComputer {
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
-				val computedValue = compute()
-				value = if ("N/A" == computedValue) {
-					"N/A"
-				} else {
-					formatter.format(compute())
-				}
+				value = compute()
 				cachedVersion = v
 			}
 			return value
@@ -272,14 +305,6 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_PERCENT -> {
-					if (locValues.size > 0) {
-						locValues[locValues.size - 1].value
-					} else {
-						null
-					}
-				}
-
 				FUEL_TYPE -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].value
@@ -299,7 +324,7 @@ object OBDDataComputer {
 		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 			value[type.requiredCommand]?.let {
 				if (it == OBDDataField.NO_DATA) {
-					if(values.isEmpty()) {
+					if (values.isEmpty()) {
 						version++
 					}
 					values = mutableListOf(it)
