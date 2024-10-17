@@ -5555,7 +5555,7 @@
     <string name="obd_ambient_air_temp">Ambijentalna temperatura</string>
     <string name="obd_battery_voltage">Napon baterije</string>
     <string name="obd_engine_coolant_temp">Temperatura rashladne tečnosti</string>
-    <string name="obd_fuel_level">Efikasnost goriva</string>
+    <string name="obd_fuel_level">Efikasnost goriva (%%)</string>
     <string name="obd_fuel_consumption_rate">Stopa potrošnje goriva</string>
     <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
     <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
