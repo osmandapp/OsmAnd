@@ -109,7 +109,7 @@ public class NavigateGpxHelper {
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 
-			boolean passWholeRoute = navigationParams.isPassWholeRoute();
+			Boolean passWholeRoute = navigationParams.isPassWholeRoute();
 			boolean checkLocationPermission = navigationParams.isCheckLocationPermission();
 			if (routingHelper.isFollowingMode() && !navigationParams.isForce()) {
 				WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
