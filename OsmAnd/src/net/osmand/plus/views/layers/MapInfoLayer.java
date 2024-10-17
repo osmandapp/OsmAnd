@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -220,9 +221,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void recreateControls() {
-		if (getMapActivity() != null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
 			resetCashedTheme();
 			ApplicationMode appMode = settings.getApplicationMode();
+			clearCustomContainers(mapActivity);
 			widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 			topWidgetsPanel.update(drawSettings);
 			bottomWidgetsPanel.update(drawSettings);
@@ -240,6 +243,13 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 		if (bottomWidgetsPanel != null) {
 			bottomWidgetsPanel.update(drawSettings);
+		}
+	}
+
+	private void clearCustomContainers(MapActivity mapActivity) {
+		ViewGroup lanesCustomContainer = mapActivity.findViewById(R.id.lanes_widget_special_position);
+		if (lanesCustomContainer != null) {
+			lanesCustomContainer.removeAllViews();
 		}
 	}
 
