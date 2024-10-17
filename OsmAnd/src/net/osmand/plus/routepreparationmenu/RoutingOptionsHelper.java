@@ -218,7 +218,7 @@ public class RoutingOptionsHelper {
 		routingHelper.onSettingsChanged(rp.getApplicationMode(), true);
 	}
 
-	public void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
+	private void updateGpxRoutingParameter(OtherLocalRoutingParameter gpxParam) {
 		GPXRouteParamsBuilder rp = app.getRoutingHelper().getCurrentGPXRoute();
 		OsmandSettings settings = app.getSettings();
 		boolean selected = gpxParam.isSelected(settings);
@@ -263,6 +263,7 @@ public class RoutingOptionsHelper {
 				rp.setCalculateOsmAndRouteParts(selected);
 				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
+				settings.GPX_PASS_WHOLE_ROUTE.set(selected);
 				rp.setPassWholeRoute(selected);
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.GPX_ROUTE_CALC.set(selected);
