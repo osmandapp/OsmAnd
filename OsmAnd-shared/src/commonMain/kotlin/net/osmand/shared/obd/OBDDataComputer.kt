@@ -227,12 +227,7 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> {
 					if (locValues.size >= 2) {
-						val first = locValues[0]
-						val last = locValues[locValues.size - 1]
-						val diffPerc = first.value as Float - last.value as Float
-						val diffTime = last.timestamp - first.timestamp
-						println("diftime $diffTime; diffPerc $diffPerc")
-						diffPerc / diffTime * 1000 * 3600
+						calculateFuelConsumption(locValues)
 					} else {
 						null
 					}
@@ -240,12 +235,7 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						val first = locValues[0]
-						val last = locValues[locValues.size - 1]
-						val diffPerc = first.value as Float - last.value as Float
-						val diffTime = last.timestamp - first.timestamp
-						println("diftime $diffTime; diffPerc $diffPerc")
-						fuelTank * diffPerc / 100 / diffTime * 1000 * 3600
+						fuelTank * calculateFuelConsumption(locValues) / 100
 					} else {
 						null
 					}
@@ -256,33 +246,19 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[0]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = last.value as Float - first.value as Float
-						if (diffPerc > 0) {
-							var start = 0
-							var end = locations.size - 1
-							while (start < locations.size) {
-								if (locations[start].time > first.timestamp) {
-									break
-								}
-								start++
-							}
-							while (end >= 0) {
-								if (locations[end].time < last.timestamp) {
-									break
-								}
-								end--
-							}
-							var dist = 0.0
-							if (start < end) {
-								for (k in start until end) {
+						if (first.location != null && last.location != null) {
+							val diffPerc = last.value as Float - first.value as Float
+							if (diffPerc > 0) {
+								var dist = 0.0
+								for (i in 0 until locValues.size - 1) {
 									dist += KMapUtils.getDistance(
-										locations[start].latLon,
-										locations[end].latLon)
+										locations[i].latLon,
+										locations[i + 1].latLon)
 								}
-							}
-							if (dist > 0) {
-								val lastPerc = last.value as Float
-								lastPerc / diffPerc * dist
+								if (dist > 0) {
+									val lastPerc = last.value
+									lastPerc / diffPerc * dist
+								}
 							}
 						}
 					}
@@ -291,7 +267,7 @@ object OBDDataComputer {
 
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
-						100 - locValues[locValues.size - 1].value as Float
+						locValues[locValues.size - 1].value as Float
 					} else {
 						null
 					}
@@ -299,7 +275,7 @@ object OBDDataComputer {
 
 				FUEL_LEFT_LITER -> {
 					if (locValues.size > 0) {
-						fuelTank * (100 - locValues[locValues.size - 1].value as Float) / 100
+						fuelTank * (locValues[locValues.size - 1].value as Float) / 100
 					} else {
 						null
 					}
@@ -321,6 +297,15 @@ object OBDDataComputer {
 			}
 		}
 
+		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
+			val first = locValues[locValues.size - 2]
+			val last = locValues[locValues.size - 1]
+			val diffPerc = first.value as Float - last.value as Float
+			val diffTime = last.timestamp - first.timestamp
+			println("diftime $diffTime; diffPerc $diffPerc")
+			return diffPerc / diffTime * 1000 * 3600
+		}
+
 		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 			value[type.requiredCommand]?.let {
 				if (it == OBDDataField.NO_DATA) {
@@ -329,8 +314,26 @@ object OBDDataComputer {
 					}
 					values = mutableListOf(it)
 				} else {
-					version++
-					values.add(it)
+					when (type) {
+						FUEL_LEFT_KM -> {
+							if (locations.isNotEmpty()) {
+								it.location = locations.last()
+							}
+						}
+
+						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
+							if (values.isEmpty() || values[value.size - 1].value != it.value) {
+								version++
+								values.add(it)
+							}
+						}
+
+						else -> {
+							version++
+							values.add(it)
+						}
+					}
 				}
 			}
 		}
