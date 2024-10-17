@@ -1,7 +1,8 @@
 package net.osmand.plus.quickaction;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ButtonPositionSize {
-
 	public static final int CELL_SIZE_DP = 8;
 	public static final int DEF_MARGIN = 4;
 
@@ -14,43 +15,116 @@ public class ButtonPositionSize {
 	public int marginX = 0, marginY = 0; // in 8dp scale
 	public int width = 7, height = 7; // in 8dp scale including shadow
 	public boolean xMove = false, yMove = false;
+	public String id;
 
-	public int toIntValue() {
-		int vl = 0;
+	public ButtonPositionSize(String id, int sz8dp, boolean left, boolean top) {
+		this.id = id;
+		width = height = sz8dp;
+		this.left = left;
+		this.top = top;
+	}
+
+	public ButtonPositionSize setMoveVertical() {
+		this.yMove = true;
+		return this;
+	}
+
+	public ButtonPositionSize setMoveHorizonta() {
+		this.xMove = true;
+		return this;
+	}
+
+	public long toLongValue() {
+		long vl = 0;
 		vl = (vl << 1) + (top ? 1 : 0);
 		vl = (vl << 1) + (yMove ? 1 : 0);
-		vl = (vl << MAX_MARGIN_BITS) + Math.max(marginY, MARGIN_MASK);
-		vl = (vl << MAX_SIZE_BITS) + Math.max(height, SIZE_MASK);
+		vl = (vl << MAX_MARGIN_BITS) + Math.min(marginY, MARGIN_MASK);
+		vl = (vl << MAX_SIZE_BITS) + Math.min(height, SIZE_MASK);
 		vl = (vl << 1) + (left ? 1 : 0);
 		vl = (vl << 1) + (xMove ? 1 : 0);
-		vl = (vl << MAX_MARGIN_BITS) + Math.max(marginX, MARGIN_MASK);
-		vl = (vl << MAX_SIZE_BITS) + Math.max(width, SIZE_MASK);
+		vl = (vl << MAX_MARGIN_BITS) + Math.min(marginX, MARGIN_MASK);
+		vl = (vl << MAX_SIZE_BITS) + Math.min(width, SIZE_MASK);
 		return vl;
 	}
 
-	public int getXMarginPix(boolean left, int widthPx, float dpToPix) {
-		if (left == this.left) {
-			return (int) ((marginX * CELL_SIZE_DP + DEF_MARGIN) * dpToPix);
-		}
-		return 0; // TODO
+	public int getYMarginPix(float dpToPix) {
+		return (int) ((marginY * CELL_SIZE_DP + DEF_MARGIN) * dpToPix);
 	}
 
-	public void fromIntValue(int v) {
-		width = v & SIZE_MASK;
+	public int getXMarginPix(float dpToPix) {
+		return (int) ((marginX * CELL_SIZE_DP + DEF_MARGIN) * dpToPix);
+	}
+
+	public void fromLongValue(long v) {
+		width = (int) (v & SIZE_MASK);
 		v = v >> MAX_SIZE_BITS;
-		marginX = v & MARGIN_MASK;
+		marginX = (int) (v & MARGIN_MASK);
 		v = v >> MAX_MARGIN_BITS;
 		xMove = v % 2 == 1;
 		v = v >> 1;
 		left = v % 2 == 1;
 		v = v >> 1;
-		height = v & SIZE_MASK;
+		height = (int) (v & SIZE_MASK);
 		v = v >> MAX_SIZE_BITS;
-		marginY = v & MARGIN_MASK;
+		marginY = (int) (v & MARGIN_MASK);
 		v = v >> MAX_MARGIN_BITS;
 		yMove = v % 2 == 1;
 		v = v >> 1;
 		top = v % 2 == 1;
 		v = v >> 1;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Pos %10s x=(%s->%d%s), y=(%s->%d%s), w=%2d, h=%2d", id, left ? "left " : "right", marginX,
+				xMove ? "+" : " ", top ? "top " : "bott", marginY, yMove ? "+" : " ", width, height);
+	}
+
+	public boolean overlap(ButtonPositionSize b) {
+		if (this.left == b.left && this.top == b.top) {
+			boolean intersect = this.marginX < b.marginX + b.width && this.marginX + this.width > b.marginX;
+			intersect &= this.marginY < b.marginY + b.height && this.marginY + this.height > b.marginY;
+			return intersect;
+		}
+		return false;
+	}
+
+	public static void computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
+		for (int i = 1; i < buttons.size(); i++) {
+			boolean overlap = true;
+			ButtonPositionSize btn = buttons.get(i);
+			while (overlap) {
+				overlap = false;
+				for (int j = 0; j < i; j++) {
+					ButtonPositionSize b2 = buttons.get(j);
+					if (b2.overlap(btn)) {
+						overlap = true;
+						if (btn.xMove || !btn.yMove) {
+							btn.marginX = space + b2.marginX + b2.width;
+						}
+						if (btn.yMove) {
+							btn.marginY = space + b2.marginY + b2.height;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public static List<ButtonPositionSize> defaultLayoutExample() {
+		List<ButtonPositionSize> lst = new ArrayList<ButtonPositionSize>();
+		lst.add(new ButtonPositionSize("zoomOut", 7, false, false).setMoveVertical());
+		lst.add(new ButtonPositionSize("zoomIn", 7, false, false).setMoveVertical());
+		lst.add(new ButtonPositionSize("myLoc", 7, false, false).setMoveHorizonta());
+
+		lst.add(new ButtonPositionSize("drawer", 7, true, false).setMoveHorizonta());
+		lst.add(new ButtonPositionSize("navigation", 7, true, false).setMoveHorizonta());
+		lst.add(new ButtonPositionSize("ruler", 10, true, false).setMoveHorizonta());
+
+		lst.add(new ButtonPositionSize("configMap", 6, true, true).setMoveHorizonta());
+		lst.add(new ButtonPositionSize("search", 6, true, true).setMoveHorizonta());
+		lst.add(new ButtonPositionSize("compass", 6, true, true).setMoveVertical());
+		return lst;
 	}
 }
