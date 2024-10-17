@@ -1,10 +1,9 @@
-package net.osmand.plus.quickaction;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonPositionSize {
 	public static final int CELL_SIZE_DP = 8;
-	public static final int DEF_MARGIN = 4;
+	public static final int DEF_MARGIN_DP = 4;
 
 	private static final int MAX_MARGIN_BITS = 10;
 	private static final int MAX_SIZE_BITS = 6;
@@ -46,13 +45,43 @@ public class ButtonPositionSize {
 		vl = (vl << MAX_SIZE_BITS) + Math.min(width, SIZE_MASK);
 		return vl;
 	}
-
-	public int getYMarginPix(float dpToPix) {
-		return (int) ((marginY * CELL_SIZE_DP + DEF_MARGIN) * dpToPix);
+	
+	
+	public void calcGridFromBottomRight(float dpToPix, int widthPx, int heightPx, int xRight, int yBottom) {
+		// TODO test
+		float calc;
+		if (xRight < widthPx / 2) {
+			this.left = true;
+			calc = xRight / dpToPix - this.width;
+		} else {
+			this.left = false;
+			calc = (widthPx - xRight) / dpToPix;
+		}
+		this.marginX = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
+		if (yBottom < heightPx / 2) {
+			this.top = true;
+			calc = yBottom / dpToPix - this.height;
+		} else {
+			this.top = false;
+			calc = (heightPx - yBottom) / dpToPix;
+		}
+		this.marginY = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
 	}
 
-	public int getXMarginPix(float dpToPix) {
-		return (int) ((marginX * CELL_SIZE_DP + DEF_MARGIN) * dpToPix);
+	public int getYStartPix(float dpToPix) {
+		return (int) ((marginY * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
+	}
+	
+	public int getYEndPix(float dpToPix) {
+		return (int) (((marginY + width) * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
+	}
+
+	public int getXStartPix(float dpToPix) {
+		return (int) ((marginX * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
+	}
+	
+	public int getXEndPix(float dpToPix) {
+		return (int) (((marginX + width) * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
 
 	public void fromLongValue(long v) {
@@ -90,10 +119,11 @@ public class ButtonPositionSize {
 	}
 
 	public static void computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
+		int MAX_ITERATIONS = 1000, iter = 0;
 		for (int i = 1; i < buttons.size(); i++) {
 			boolean overlap = true;
 			ButtonPositionSize btn = buttons.get(i);
-			while (overlap) {
+			while (overlap && iter++ < MAX_ITERATIONS) {
 				overlap = false;
 				for (int j = 0; j < i; j++) {
 					ButtonPositionSize b2 = buttons.get(j);
@@ -108,6 +138,7 @@ public class ButtonPositionSize {
 						break;
 					}
 				}
+				
 			}
 		}
 	}
