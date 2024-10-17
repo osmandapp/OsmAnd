@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 
