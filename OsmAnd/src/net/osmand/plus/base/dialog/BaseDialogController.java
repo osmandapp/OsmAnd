@@ -13,7 +13,6 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
 import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
-import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseDialogController implements IDialogController {
