@@ -5546,7 +5546,7 @@
     <string name="obd_ambient_air_temp">Környezeti levegő hőmérséklete</string>
     <string name="obd_battery_voltage">Akkumulátor feszültség</string>
     <string name="obd_engine_coolant_temp">Hűtőfolyadék hőmérséklete</string>
-    <string name="obd_fuel_level">Üzemanyag hatékonyság</string>
+    <string name="obd_fuel_level">Üzemanyag hatékonyság (%%)</string>
     <string name="obd_fuel_consumption_rate">Üzemanyag fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Az üzemanyag fogyasztást mutatja az OBD adatai alapján</string>
     <string name="obd_fuel_left_distance">Megtehető távolság</string>
@@ -5590,7 +5590,7 @@
     <string name="connect_obd_instructions_step3">3. Engedélyezze a Bluetooth-t a telefonján</string>
     <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II szkennert a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
-    <string name="obd_fuel_left_liters">Maradék üzemanyag (l)</string>
+    <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
     <string name="obd_vehicle_info">Jármű információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_step1">1. Csatlakoztassa a szkennert a járműve OBD-II portjához.</string>
@@ -5607,4 +5607,16 @@
     <string name="obd_device_forget_sensor_description">A szkenner törlődik a listáról. Ezt a szkennert bármikor újra párosíthatja.</string>
     <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, az aktuális utca nevét és a sávinformációkat. A widgetek navigáció közben aktívak.</string>
     <string name="connect_obd_instructions_step">1. Csatlakoztassa a szkennert járműve OBD-II portjához.\n\n 2. Indítsa el a járműve motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson erre: „%1$s” és válassza ki a szkennert a listából.</string>
+    <string name="obd_fuel_consumption_rate_sensor">Üzemanyag fogyasztás (érzékelő)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Számítások alapján mutatja a jármű üzemanyag fogyasztását liter/órában</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Érzékelő adatai alapján mutatja a jármű üzemanyag fogyasztását liter/órában</string>
+    <string name="obd_fuel_level_liter">Üzemanyagszint (l)</string>
+    <string name="obd_fuel_level_percent">Üzemanyagszint (%%)</string>
+    <string name="obd_fuel_left_percent">Maradék üzemanyag (%)</string>
+    <string name="obd_fuel_left_liter">Maradék üzemanyag (l)</string>
+    <string name="obd_fuel_left_km">Megtehető táv (km)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Üzemanyag fogyasztás %/óra</string>
+    <string name="obd_fuel_consumption_rate_l_h">Üzemanyag fogyasztás (l/óra)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Üzemanyag fogyasztás (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Üzemanyag fogyasztás l/óra</string>
 </resources>
