@@ -1,7 +1,6 @@
 package net.osmand.plus.views.controls;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -22,9 +21,6 @@ import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Locale;
 
 public class MapHudLayout extends FrameLayout {
 
@@ -89,6 +85,20 @@ public class MapHudLayout extends FrameLayout {
 				params.rightMargin = x;
 				params.bottomMargin = y;
 				button.setLayoutParams(params);
+
+				float frameSize = button.getFrameSize();
+				float imageSize = button.getImageSize();
+				float widthDp = AndroidUtils.pxToDpF(getContext(), width);
+				float heightDp = AndroidUtils.pxToDpF(getContext(), height);
+
+				int imageWidth = button.getImageView().getMeasuredWidth();
+				int imageHeight = button.getImageView().getMeasuredHeight();
+				float imageWidthDp = AndroidUtils.pxToDpF(getContext(), imageWidth);
+				float imageHeightDp = AndroidUtils.pxToDpF(getContext(), imageHeight);
+
+				LOG.info("widthDp " + widthDp + " heightDp " + heightDp
+						+ " imageWidthDp " + imageWidthDp + " imageHeightDp " + imageHeightDp
+						+ " frameSize " + frameSize + " imageSize " + imageSize);
 			}
 		}
 		if (save) {
@@ -107,12 +117,6 @@ public class MapHudLayout extends FrameLayout {
 		float ret = screenSize - fullCells * cellSize;
 		return (int) (ret);
 	}
-
-	@Override
-	protected void onDraw(@NotNull Canvas canvas) {
-		super.onDraw(canvas);
-	}
-
 
 //	@NonNull
 //	private LayoutParams updateButtonPosition(@NonNull MapButton button, @NonNull QuadTree<QuadRect> intersections) {

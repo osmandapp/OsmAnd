@@ -113,7 +113,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this.uiUtilities = app.getUIUtilities();
 		this.strokeWidth = AndroidUtils.dpToPx(context, 1);
 		this.shadowRadius = AndroidUtils.dpToPx(context, 2);
-		this.shadowPadding = AndroidUtils.dpToPx(context, 3);
+		this.shadowPadding = AndroidUtils.dpToPx(context, 4);
 
 		imageView = new ImageView(context, attrs, defStyleAttr);
 		imageView.setClickable(false);
@@ -145,6 +145,11 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public void setMapActivity(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
+	}
+
+	@NonNull
+	public ImageView getImageView() {
+		return imageView;
 	}
 
 	@Nullable
@@ -278,21 +283,23 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void updateSize() {
-		int size = getSize() + shadowPadding;
-		ViewGroup.LayoutParams params = getLayoutParams();
+		updateSize(this, (int) getFrameSize());
+		updateSize(imageView, (int) getImageSize());
+	}
+
+	protected void updateSize(@NonNull View view, int size) {
+		ViewGroup.LayoutParams params = view.getLayoutParams();
 		params.height = size;
 		params.width = size;
-		setLayoutParams(params);
+		view.setLayoutParams(params);
 	}
 
 	protected void updateBackground() {
 		Context context = getContext();
-		int size = getSize();
 		float opacity = appearanceParams.getOpacity();
 		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
 
 		GradientDrawable normal = new GradientDrawable();
-		normal.setSize(size, size);
 		normal.setShape(RECTANGLE);
 		normal.setColor(ColorUtilities.getColorWithAlpha(backgroundColor, opacity));
 		normal.setCornerRadius(cornerRadius);
@@ -301,7 +308,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		}
 
 		GradientDrawable pressed = new GradientDrawable();
-		pressed.setSize(size, size);
 		pressed.setShape(RECTANGLE);
 		pressed.setColor(backgroundPressedColor);
 		pressed.setCornerRadius(cornerRadius);
@@ -410,9 +416,13 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		}
 	}
 
-	public int getSize() {
+	public float getFrameSize() {
+		return getImageSize() + shadowPadding * 2;
+	}
+
+	public float getImageSize() {
 		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
-		return AndroidUtils.dpToPx(getContext(), params.getSize());
+		return AndroidUtils.dpToPxF(getContext(), params.getSize());
 	}
 
 	public int getShadowRadius() {
