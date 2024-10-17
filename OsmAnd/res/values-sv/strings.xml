@@ -5711,4 +5711,10 @@
     <string name="connect_obd_instructions_title">OsmAnd stödjer Bluetooth-anslutning till OBD-II skannrar.</string>
     <string name="obd_how_to_connect">Så ansluter du:</string>
     <string name="obd_vehicle_info">Fordonsinformation</string>
+    <string name="route_guidance">Ruttvägledning</string>
+    <string name="obd_fuel_consumption_rate_sensor">Bränsleförbrukning (sensor)</string>
+    <string name="obd_fuel_level_liter">Bränslenivå (l)</string>
+    <string name="obd_fuel_level_percent">Bränslenivå (%%)</string>
+    <string name="obd_widget_vehicle_speed">Fordonets hastighet</string>
+    <string name="liter_per_hour">l/tim</string>
 </resources>
