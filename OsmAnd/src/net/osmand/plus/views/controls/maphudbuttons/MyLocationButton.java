@@ -111,17 +111,14 @@ public class MyLocationButton extends MapButton {
 
 	protected void updateBackground() {
 		Context context = getContext();
-		int size = AndroidUtils.dpToPx(context, appearanceParams.getSize());
 		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
 
 		GradientDrawable normal = new GradientDrawable();
-		normal.setSize(size, size);
 		normal.setShape(RECTANGLE);
 		normal.setColor(ColorUtilities.getColorWithAlpha(backgroundColor, appearanceParams.getOpacity()));
 		normal.setCornerRadius(cornerRadius);
 
 		GradientDrawable pressed = new GradientDrawable();
-		pressed.setSize(size, size);
 		pressed.setShape(RECTANGLE);
 		pressed.setColor(backgroundPressedColor);
 		pressed.setCornerRadius(cornerRadius);
