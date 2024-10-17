@@ -3507,7 +3507,7 @@
     <string name="shared_string_square">Cuadrado</string>
     <string name="shared_string_circle">Círculo</string>
     <string name="shared_string_octagon">Octágono</string>
-    <string name="shared_string_min">Min</string>
+    <string name="shared_string_min">Min.</string>
     <string name="ui_customization_short_descr">Elementos del menú lateral y menú contextual</string>
     <string name="shared_string_drawer">Menú lateral</string>
     <string name="context_menu_actions">Acciones del menú contextual</string>
@@ -5936,7 +5936,7 @@
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
     <string name="obd_ambient_air_temp">Temperatura ambiente</string>
     <string name="obd_battery_voltage">Voltaje de la batería</string>
-    <string name="obd_fuel_level">Consumo de combustible</string>
+    <string name="obd_fuel_level">Ahorro de combustible (%%)</string>
     <string name="obd_fuel_consumption_rate">Consumo de combustible</string>
     <string name="obd_fuel_consumption_rate_desc">Muestra el consumo de combustible del vehículo según el OBD y la ubicación</string>
     <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
@@ -6003,4 +6003,16 @@
     <string name="obd_device_forget_sensor">Olvidar el escáner</string>
     <string name="obd_device_forget_sensor_description">El escáner se eliminará de la lista. Podrá volver a emparejar este escáner en cualquier momento.</string>
     <string name="connect_obd_instructions_step">1. Conecte el escáner al puerto OBD-II de su vehículo.\n\n 2. Arranca el vehículo\n\n 3. Activa el Bluetooth en tu dispositivo\n\n 4. Pulsa \'%1$s\' y selecciona tu escáner en la lista.</string>
+    <string name="obd_fuel_consumption_rate_l_h">Consumo (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Índice de consumo (sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Muestra el consumo de combustible del vehículo según cálculos (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo de combustible del vehículo según el sensor (l/h)</string>
+    <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
+    <string name="obd_fuel_level_percent">Nivel de combustible (%%)</string>
+    <string name="obd_fuel_left_percent">Combustible restante (%)</string>
+    <string name="obd_fuel_left_liter">Combustible restante (l)</string>
+    <string name="obd_fuel_left_km">Combustible restante (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Consumo de combustible l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Consumo de combustible %/h</string>
 </resources>
