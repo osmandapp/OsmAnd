@@ -5550,7 +5550,7 @@
     <string name="obd_ambient_air_temp">Амбијентална температура</string>
     <string name="obd_battery_voltage">Напон батерије</string>
     <string name="obd_engine_coolant_temp">Температура расхладне течности</string>
-    <string name="obd_fuel_level">Ефикасност горива</string>
+    <string name="obd_fuel_level">Ефикасност горива (%%)</string>
     <string name="obd_fuel_consumption_rate">Стопа потрошње горива</string>
     <string name="obd_fuel_consumption_rate_desc">Приказује стопу потрошње горива возила на основу ДНВ локације</string>
     <string name="obd_fuel_left_distance">Преостало гориво (растојање)</string>
@@ -5611,4 +5611,16 @@
     <string name="obd_nothing_found_description">Молимо проверите следеће:\n – Уверите се да је Блутут укључен\n – Мотор возила ради\n – Уверите се да је ваш уређај у домету скенера.</string>
     <string name="obd_device_forget_sensor_description">Скенер ће бити уклоњен са листе. Моћи ћете поново да упарите овај скенер у било ком тренутку.</string>
     <string name="connect_obd_instructions_step">1. Повежите скенер са ДНВ-ИИ портом вашег возила.\n\n 2. Укључите мотор вашег возила\n\n 3. Омогућите Блутут на свом уређају\n\n 4. Додирните „%1$s“ и изаберите свој скенер са листе.</string>
+    <string name="obd_fuel_consumption_rate_sensor">Брзина потрошње горива (сензор)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Приказује потрошњу горива возила на основу прорачуна (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Приказује потрошњу горива возила на основу сензора (l/h)</string>
+    <string name="obd_fuel_level_liter">Ниво горива (l)</string>
+    <string name="obd_fuel_level_percent">Ниво горива (%%)</string>
+    <string name="obd_fuel_left_percent">Преостало гориво (%)</string>
+    <string name="obd_fuel_left_liter">Преостало гориво (l)</string>
+    <string name="obd_fuel_left_km">Преостало гориво (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Брзина потрошње горива (днв)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Брзина потрошње горива l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Брзина потрошње горива %/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Брзина потрошње горива (l/h)</string>
 </resources>

@@ -4430,4 +4430,6 @@
     <string name="percent_unit">%</string>
     <string name="rpm_unit">об/мин</string>
     <string name="vehicle_metrics_plugin_settings">Настройки показатели превозно средство</string>
+    <string name="obd_widget_vehicle_speed">Скорост на превозното средство</string>
+    <string name="obd_widget_engine_speed">Скорост на двигателя</string>
 </resources>

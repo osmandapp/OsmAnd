@@ -5520,7 +5520,7 @@
     <string name="obd_fuel_left_distance_desc">Affiche la distance que le véhicule peut parcourir avec le niveau de carburant restant via le capteur OBD</string>
     <string name="obd_air_intake_temp">Température d\'admission</string>
     <string name="obd_ambient_air_temp">Température ambiante</string>
-    <string name="obd_fuel_level">Efficacité du carburant</string>
+    <string name="obd_fuel_level">Efficacité du carburant (%%)</string>
     <string name="obd_fuel_left_distance">Carburant restant (distance)</string>
     <string name="obd_fuel_type_not_provided">Type de carburant non spécifié</string>
     <string name="unit_volt">V</string>
@@ -5608,4 +5608,16 @@
     <string name="obd_device_forget_sensor_description">Le scanner sera retiré de la liste. Vous pourrez ré-appairer ce scanner à tout moment.</string>
     <string name="obd_searching_text_description">Veuillez garder votre appareil à proximité du scanner. Assurez-vous que le moteur du véhicule est en marche.</string>
     <string name="connect_obd_instructions_step">1. Connectez le scanner au port OBD-II de votre véhicule.\n\n2. Allumez le moteur de votre véhicule\n\n3. Activez le Bluetooth sur votre appareil\n\n4. Appuyez sur « %1$s » et sélectionnez votre scanner dans la liste.</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Affiche la consommation d\'essence du véhicule, basé sur des calculs (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation d\'essence du véhicule, basé sur un capteur (l/h)</string>
+    <string name="obd_fuel_level_liter">Niveau d\'essence (l)</string>
+    <string name="obd_fuel_level_percent">Niveau d\'essence (%%)</string>
+    <string name="obd_fuel_left_percent">Essence restante (%)</string>
+    <string name="obd_fuel_left_liter">Essence restante (l)</string>
+    <string name="obd_fuel_left_km">Essence restante (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Consommation d\'essence (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Consommation d\'essence l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Consommation d\'essence %/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Consommation d\'essence (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Consommation d\'essence (capteur)</string>
 </resources>

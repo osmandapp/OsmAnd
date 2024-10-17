@@ -757,27 +757,7 @@
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
-\n
-\n OsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden almacenarse en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
-\n
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
-\n
-\n Algunas de las funciones principales:
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas vectoriales compactos sin conexión, disponibles en todo el mundo
-\n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
-\n - Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, paradas de transporte público, mapas adicionales con transparencia personalizable, características topográficas como curvas de nivel/sombreado/pendientes.
-\n
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Rutas sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según brújula o dirección del movimiento
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)\n\nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden almacenarse en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.\n\nOsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.\n\nAlgunas de las funciones principales:\n- Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)\n- Mapas vectoriales compactos sin conexión, disponibles en todo el mundo\n- Descarga ilimitada de mapas de países o regiones directamente desde la aplicación\n- Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo\n- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, paradas de transporte público, mapas adicionales con transparencia personalizable, características topográficas como curvas de nivel/sombreado/pendientes.\n\n- Búsqueda sin conexión de direcciones y sitios (PDI)\n- Rutas sin conexión para distancias de rango medio\n- Modos de automóvil, bicicleta y peatón con opcional:\n- Cambio automático de modo diurno/nocturno\n- Zum del mapa según la velocidad\n- Alineación del mapa, según brújula o dirección del movimiento\n- Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
     <string name="select_navigation_mode">Modo de transporte:</string>
@@ -2177,15 +2157,7 @@
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elige entre los modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">Navegación GPS\n• Elige entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta\n• Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Muestra los límites de velocidad y obtiene un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Busca destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Graba tu viaje o sube una traza GPX y síguela</string>
-    <string name="osmand_extended_description_part3">Mapa 
-\n • Muestra PDI (puntos de interés) a tu alrededor 
-\n • Ajusta el mapa a la dirección del movimiento (o brújula) 
-\n • Muestra tu ubicación y la dirección hacia dónde miras 
-\n • Comparte la ubicación para que tus amigos te encuentren 
-\n • Guarda sitios importantes en «Mis favoritos» 
-\n • Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética 
-\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
-\n</string>
+    <string name="osmand_extended_description_part3">Mapa\n• Muestra PDI (puntos de interés) a tu alrededor\n• Ajusta el mapa a la dirección del movimiento (o brújula)\n• Muestra tu ubicación y la dirección hacia dónde miras\n• Comparte la ubicación para que tus amigos te encuentren\n• Guarda sitios importantes en «Mis favoritos»\n• Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
     <string name="osmand_extended_description_part5">Ciclismo
@@ -2194,18 +2166,8 @@
 \n• Vea la velocidad y altitud
 \n• La opción de grabación GPX, permite grabar el viaje y compartirlo
 \n• Mediante un complemento adicional, puedes activar las curvas de nivel y el sombreado</string>
-    <string name="osmand_extended_description_part6">Caminar, senderismo, turismo de ciudad 
-\n • El mapa muestra las rutas para caminar y de senderismo 
-\n • Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística 
-\n • Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayuda a navegar en una nueva ciudad 
-\n • Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo 
-\n • Sube y sigue una ruta GPX o graba y comparte tus propias rutas
-\n</string>
-    <string name="osmand_extended_description_part7">Contribuye con OSM 
-\n • Informa sobre problemas de datos en el mapa 
-\n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)
-\n</string>
+    <string name="osmand_extended_description_part6">Caminata, senderismo, turismo de ciudad\n• El mapa muestra las rutas para caminar y de senderismo\n• Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística\n• Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayuda a navegar en una nueva ciudad\n• Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo\n• Sube y sigue una ruta GPX o graba y comparte tus propias rutas</string>
+    <string name="osmand_extended_description_part7">Contribuye con OSM\n• Informa sobre problemas de datos en el mapa\n• Sube trazas GPX a OSM directamente desde la aplicación\n• Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)</string>
     <string name="osmand_extended_description_part8">OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para financiar el desarrollo y las pruebas de nuevas funcionalidades.
 \n Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2220,22 +2182,8 @@
 \n • Antártida: *
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="osmand_plus_extended_description_part2">Navegación GPS
-\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
-\n • Admite puntos intermedios en el itinerario
-\n • La ruta se recalcula al salirse de la misma
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica
-\n</string>
-    <string name="osmand_plus_extended_description_part3">Vista del mapa 
-\n • Muestra tu ubicación y orientación 
-\n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
-\n • Guarda sitios importantes en «Favoritos» 
-\n • Muestra PDI (puntos de interés) a tu alrededor 
-\n • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable 
-\n • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navegación GPS\n• Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)\n• Guía por voz giro-a-giro (voces grabadas y sintetizadas)\n• (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino\n• Admite puntos intermedios en el itinerario\n• La ruta se recalcula al salirse de la misma\n• Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica</string>
+    <string name="osmand_plus_extended_description_part3">Vista del mapa\n• Muestra tu ubicación y orientación\n• (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula)\n• Guarda sitios importantes en «Favoritos»\n• Muestra PDI (puntos de interés) a tu alrededor\n• Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable\n• Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia
 \n • Información de alta calidad del mejor proyecto colaborativo del mundo
 \n • Datos OSM disponibles por país o región
@@ -2244,12 +2192,7 @@
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes
 \n
 \n • Elige entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
-    <string name="osmand_plus_extended_description_part5">Funciones de seguridad
-\n • (Opcional) El modo diurno/nocturno se alterna automáticamente
-\n • (Opcional) Visualización del límite de velocidad, con aviso al excederte
-\n • (Opcional) Zum del mapa según la velocidad
-\n • Comparte la ubicación para que tus amigos puedan encontrarte
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Funciones de seguridad\n• (Opcional) El modo diurno/nocturno se alterna automáticamente\n• (Opcional) Visualización del límite de velocidad, con aviso al excederte\n• (Opcional) Zum del mapa según la velocidad\n• Comparte la ubicación para que tus amigos puedan encontrarte</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón
 \n • Visualización de caminos para caminar, senderismo y ciclismo, ideal para actividades al aire libre
 \n • Navegación especial y modos de visualización para bicicletas y peatones
@@ -5599,7 +5542,7 @@
     <string name="obd_fuel_left_distance_desc">Muestra la distancia a recorrer con el nivel de combustible restante según el sensor OBD</string>
     <string name="obd_fuel_type_desc">Muestra el tipo de combustible según el sensor OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
-    <string name="obd_fuel_level">Eficiencia del combustible</string>
+    <string name="obd_fuel_level">Eficiencia del combustible (%%)</string>
     <string name="obd_fuel_type_bifuel_cng">Combustible dual con GNC</string>
     <string name="obd_fuel_type_bifuel_propane">Combustible dual con propano</string>
     <string name="obd_fuel_type_hybrid_diesel">Híbrido a diésel</string>
@@ -5669,4 +5612,16 @@
     <string name="obd_device_forget_sensor">Desvincular escáner</string>
     <string name="obd_device_forget_sensor_description">El escáner será quitado de la lista. Podrás vincular este escáner de nuevo en cualquier momento.</string>
     <string name="connect_obd_instructions_step">1. Conecta el escáner al puerto OBD-II del vehículo.\n\n2. Enciende el motor del vehículo\n\n3. Activa el Bluetooth del dispositivo\n\n4. Pulsa «%1$s» y elige el escáner del listado.</string>
+    <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo del combustible del vehículo según el sensor (l/h)</string>
+    <string name="obd_fuel_left_percent">Combustible restante (%)</string>
+    <string name="obd_fuel_left_liter">Combustible restante (l)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Tasa de consumo del combustible en l/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Tasa de consumo del combustible (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Muestra la tasa de consumo del combustible del vehículo según los cálculos (l/h)</string>
+    <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
+    <string name="obd_fuel_left_km">Combustible restante (km)</string>
+    <string name="obd_fuel_level_percent">Nivel de combustible (%%)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo del combustible (obd)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Tasa de consumo del combustible en %/h</string>
 </resources>
