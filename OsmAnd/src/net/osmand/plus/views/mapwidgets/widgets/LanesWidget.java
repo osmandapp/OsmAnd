@@ -46,6 +46,7 @@ public class LanesWidget extends MapWidget {
 
 	private int cachedDist;
 	private int shadowRadius;
+	boolean specialPosition;
 
 	public LanesWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, LANES);
@@ -115,8 +116,22 @@ public class LanesWidget extends MapWidget {
 			updateLanes(lanes, imminent, distance);
 		}
 
-		AndroidUiHelper.updateVisibility(view, visible);
+		updateVisibility(visible);
+	}
+
+	@Override
+	public boolean updateVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+		boolean updatedVisibility = super.updateVisibility(visible);
+
+		if (specialPosition && updatedVisibility) {
+			ViewGroup specialContainer = getSpecialContainer();
+			specialContainer.removeAllViews();
+			if (visible) {
+				specialContainer.addView(view);
+			}
+		}
+		return updatedVisibility;
 	}
 
 	private void updateLanes(@NonNull int[] lanes, int imminent, int distance) {
@@ -163,8 +178,9 @@ public class LanesWidget extends MapWidget {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
-		boolean specialPosition = followingWidgets.isEmpty();
+		specialPosition = followingWidgets.isEmpty();
 		if (specialPosition) {
+			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view);
@@ -175,7 +191,7 @@ public class LanesWidget extends MapWidget {
 	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
 		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of LanesWidget is lost
-		getSpecialContainer().removeAllViews();
+		getSpecialContainer().removeView(view);
 	}
 
 	@NonNull

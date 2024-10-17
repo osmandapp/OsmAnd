@@ -52,7 +52,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	protected boolean horizontalMini;
 	protected int deviatedPath;
 	protected int nextTurnDistance;
-	private final TurnDrawable turnDrawable;
+	private TurnDrawable turnDrawable;
 
 	private ImageView topImageView;
 	private TextView topTextView;
@@ -430,7 +430,13 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			TextView oldExitView = exitView;
 			ImageView oldArrowView = arrowView;
 			View oldShieldContainer = shieldImagesContainer;
+			TurnType type = turnDrawable.getTurnType();
+			int turnImminent = turnDrawable.getTurnImminent();
+			boolean deviatedFromRoute = turnDrawable.isDeviatedFromRoute();
 			setupViews();
+			turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
+			turnDrawable.setTurnType(type);
+			turnDrawable.setTurnImminent(turnImminent,deviatedFromRoute);
 			setVerticalImage(turnDrawable);
 			copyView(shieldImagesContainer, oldShieldContainer);
 			copyView(arrowView, oldArrowView);
