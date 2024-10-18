@@ -124,7 +124,7 @@ public class OverviewCard extends MapBaseCard {
 		if (routeActivity != null) {
 			ImageView activityIcon = view.findViewById(R.id.activity_icon);
 			TextView activityTitle = view.findViewById(R.id.activity_title);
-			activityIcon.setImageResource(AndroidUtils.getIconId(app, routeActivity.getIconName()));
+			activityIcon.setImageResource(AndroidUtils.getActivityIconId(app, routeActivity));
 			activityTitle.setText(routeActivity.getLabel());
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.activity_container), true);
 		} else {
