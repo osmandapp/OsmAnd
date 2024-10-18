@@ -22,30 +22,7 @@
 				android:layout_height="match_parent"
 				android:orientation="vertical" />
 
-			<net.osmand.plus.views.controls.MapHudLayout
-				android:id="@+id/MapHudButtonsOverlay"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:fitsSystemWindows="true">
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayTop"
-					layout="@layout/map_hud_top" />
-
-				<FrameLayout
-					android:id="@+id/left_side_menu"
-					android:layout_width="0dp"
-					android:layout_height="0dp" />
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayBottom"
-					layout="@layout/map_hud_bottom" />
-
-				<include
-					android:id="@+id/MapHudButtonsOverlayQuickActions"
-					layout="@layout/map_hud_quick_actions" />
-
-			</net.osmand.plus.views.controls.MapHudLayout>
+			<include layout="@layout/map_hud_layout" />
 
 			<FrameLayout
 				android:layout_width="match_parent"
