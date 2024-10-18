@@ -20,8 +20,9 @@ import net.osmand.plus.card.icon.CircleIconPaletteElements;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,6 +46,7 @@ public class EditorIconController extends BaseDialogController {
 	public static final String LAST_USED_KEY = "last_used_icons";
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
+	public static final String ACTIVITIES_KEY = "activities";
 
 	protected final List<IconsCategory> categories = new ArrayList<>();
 	private IconsCategory selectedCategory;
@@ -71,6 +73,7 @@ public class EditorIconController extends BaseDialogController {
 	protected void initIconCategories() {
 		initLastUsedCategory();
 		initAssetsCategories();
+		initActivitiesCategory();
 		initPoiPoiCategories();
 		sortCategories();
 	}
@@ -87,6 +90,22 @@ public class EditorIconController extends BaseDialogController {
 			categories.addAll(readCategoriesFromAssets(Arrays.asList(SPECIAL_KEY, SYMBOLS_KEY)));
 		} catch (JSONException e) {
 			LOG.error(e.getMessage());
+		}
+	}
+
+	protected void initActivitiesCategory() {
+		List<String> iconKeys = new ArrayList<>();
+		RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
+		for (RouteActivity activity : routeActivityHelper.getActivities()) {
+			EditorIconUtils.retrieveIconKey(app, activity, key -> {
+				if (!iconKeys.contains(key)) {
+					iconKeys.add(key);
+				}
+			});
+		}
+		if (!Algorithms.isEmpty(iconKeys)) {
+			String translatedName = getString(R.string.shared_string_activity);
+			categories.add(new IconsCategory(ACTIVITIES_KEY, translatedName, iconKeys));
 		}
 	}
 
@@ -240,16 +259,11 @@ public class EditorIconController extends BaseDialogController {
 	public IconsPaletteElements<String> getPaletteElements(@NonNull Context context, boolean nightMode) {
 		if (paletteElements == null || paletteElements.isNightMode() != nightMode) {
 			paletteElements = new CircleIconPaletteElements<>(context, nightMode) {
+				static final int DEFAULT_ICON_ID = R.drawable.ic_action_search_dark;
+
 				@Override
 				protected Drawable getIconDrawable(@NonNull String iconName, boolean isSelected) {
-					int iconId = AndroidUtils.getDrawableId(app, iconName);
-					if (iconId <= 0) {
-						iconId = RenderingIcons.getBigIconResourceId(iconName);
-					}
-					if (iconId <= 0) {
-						iconId = R.drawable.ic_action_search_dark;
-					}
-					return getContentIcon(iconId);
+					return getContentIcon(AndroidUtils.getDrawableId(app, iconName, DEFAULT_ICON_ID));
 				}
 			};
 		}

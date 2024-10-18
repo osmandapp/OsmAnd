@@ -94,8 +94,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 
 	@DrawableRes
 	public int getIconId() {
-		int iconId = RenderingIcons.getBigIconResourceId(iconName);
-		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
+		return AndroidUtils.getDrawableId(app, iconName, DEFAULT_UI_ICON_ID);
 	}
 
 	public void setIcon(@DrawableRes int iconId) {
