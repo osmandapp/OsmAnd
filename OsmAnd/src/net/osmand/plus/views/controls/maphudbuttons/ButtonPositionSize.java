@@ -154,7 +154,7 @@ public class ButtonPositionSize {
 
 		lst.add(new ButtonPositionSize(MENU_HUD_ID, 7, true, false).setMoveHorizontal());
 		lst.add(new ButtonPositionSize(ROUTE_PLANNING_HUD_ID, 7, true, false).setMoveHorizontal());
-		lst.add(new ButtonPositionSize("ruler", 10, true, false).setMoveHorizontal());
+//		lst.add(new ButtonPositionSize("ruler", 10, true, false).setMoveHorizontal());
 
 		lst.add(new ButtonPositionSize(LAYERS_HUD_ID, 6, true, true).setMoveHorizontal());
 		lst.add(new ButtonPositionSize(QUICK_SEARCH_HUD_ID, 6, true, true).setMoveHorizontal());

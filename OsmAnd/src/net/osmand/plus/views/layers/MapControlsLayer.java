@@ -293,6 +293,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			button.update();
 			button.updateMargins();
 		}
+		mapHudLayout.updateButtons();
 	}
 
 	@Override
