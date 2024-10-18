@@ -144,7 +144,6 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	) {
 		val widget = OBDDataComputer.registerWidget(widgetType, 0)
 		widgets.add(widget)
-
 		val itemView = themedInflater.inflate(R.layout.device_characteristic_item, container, false)
 		itemView.findViewById<TextView>(R.id.title).text = widget.type.getTitle()
 		itemView.tag = widget
@@ -159,21 +158,31 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	}
 
 	private fun updateWidgetsData(view: View, widget: OBDComputerWidget) {
-		val value = if (widget.computeValue() == null) " - " else widget.computeValue().toString()
-		view.findViewById<TextView>(R.id.value).apply {
-			if (text.toString() != value) {
-				text = value
+		vehicleMetricsPlugin?.apply {
+			val value = getWidgetValue(widget)
+			view.findViewById<TextView>(R.id.value).apply {
+				if (text.toString() != value) {
+					text = value
+				}
+			}
+			val unit = getWidgetUnit(widget)
+			view.findViewById<TextView>(R.id.unit).apply {
+				if (text.toString() != unit) {
+					text = unit
+				}
 			}
 		}
 	}
 
 	private fun updateWidgets() {
-		dataRows.forEach {
-			if (it.tag is OBDComputerWidget) {
-				app.runInUIThread { updateWidgetsData(it, it.tag as OBDComputerWidget) }
+		app.runInUIThread {
+			dataRows.forEach {
+				if (it.tag is OBDComputerWidget) {
+					updateWidgetsData(it, it.tag as OBDComputerWidget)
+				}
 			}
+			handler.postDelayed({ updateWidgets() }, 100)
 		}
-		handler.postDelayed({ updateWidgets() }, 100)
 	}
 
 	override fun onResume() {

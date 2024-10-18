@@ -5925,7 +5925,7 @@
     <string name="screen_is_unlocked">Layar sentuh dibuka.</string>
     <string name="screen_is_locked_by_action_button">Layar sentuh dikunci. Ketuk pada tombol untuk membuka.</string>
     <string name="background_opacity">Opasitas latar belakang</string>
-    <string name="obd_fuel_level">Efisiensi bahan bakar (%%)</string>
+    <string name="obd_fuel_level">Efisiensi bahan bakar (%)</string>
     <string name="obd_plugin_name">Metrik kendaraan</string>
     <string name="obd_fuel_consumption_rate">Tingkat konsumsi bahan bakar</string>
     <string name="obd_fuel_left_distance">Bahan bakar tersisa (jarak)</string>
@@ -5976,7 +5976,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan perhitungan (l/j)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan sensor (l/j)</string>
     <string name="obd_fuel_level_liter">Tingkat bahan bakar (l)</string>
-    <string name="obd_fuel_level_percent">Tingkat bahan bakar (%%)</string>
+    <string name="obd_fuel_level_percent">Tingkat bahan bakar (%)</string>
     <string name="obd_fuel_left_percent">Bahan bakar tersisa (%)</string>
     <string name="obd_fuel_left_liter">Bahan bakar tersisa (l)</string>
     <string name="obd_fuel_left_km">Bahan bakar tersisa (km)</string>

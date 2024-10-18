@@ -4398,7 +4398,7 @@
     <string name="obd_ambient_air_temp">t⁰ на околна среда</string>
     <string name="obd_battery_voltage">Напрежение в акумулатора</string>
     <string name="obd_engine_coolant_temp">t⁰ на охлаждаща течност</string>
-    <string name="obd_fuel_level">Ефективност на гориво (%%)</string>
+    <string name="obd_fuel_level">Ефективност на гориво (%)</string>
     <string name="obd_fuel_consumption_rate">Разход на гориво</string>
     <string name="obd_fuel_left_distance">Оставащо гориво (разстояние)</string>
     <string name="obd_fuel_consumption_rate_desc">Показва разхода на гориво на превозното средство спрямо сензора на OBD</string>

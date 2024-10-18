@@ -11,13 +11,15 @@
 	Thx - Hardy
 -->
 
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (l/h)</string>
 
     <string name="obd_fuel_level_liter">Fuel level (l)</string>
-    <string name="obd_fuel_level_percent">Fuel level (%%)</string>
+    <string name="obd_fuel_level_percent">Fuel level (%)</string>
     <string name="obd_fuel_left_percent">Fuel left (%)</string>
     <string name="obd_fuel_left_liter">Fuel left (l)</string>
     <string name="obd_fuel_left_km">Fuel left (km)</string>
@@ -163,7 +165,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_ambient_air_temp">Ambient temperature</string>
     <string name="obd_battery_voltage">Battery voltage</string>
     <string name="obd_engine_coolant_temp">Coolant temperature</string>
-    <string name="obd_fuel_level">Fuel Efficiency (%%)</string>
+    <string name="obd_fuel_level">Fuel Efficiency (%)</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
     <string name="obd_fuel_left_distance">Fuel left (distance)</string>

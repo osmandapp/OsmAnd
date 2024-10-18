@@ -5936,7 +5936,7 @@
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
     <string name="obd_ambient_air_temp">Temperatura ambiente</string>
     <string name="obd_battery_voltage">Voltaje de la batería</string>
-    <string name="obd_fuel_level">Ahorro de combustible (%%)</string>
+    <string name="obd_fuel_level">Ahorro de combustible (%)</string>
     <string name="obd_fuel_consumption_rate">Consumo de combustible</string>
     <string name="obd_fuel_consumption_rate_desc">Muestra el consumo de combustible del vehículo según el OBD y la ubicación</string>
     <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
@@ -6008,7 +6008,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Muestra el consumo de combustible del vehículo según cálculos (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo de combustible del vehículo según el sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
-    <string name="obd_fuel_level_percent">Nivel de combustible (%%)</string>
+    <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
     <string name="obd_fuel_left_percent">Combustible restante (%)</string>
     <string name="obd_fuel_left_liter">Combustible restante (l)</string>
     <string name="obd_fuel_left_km">Combustible restante (km)</string>
