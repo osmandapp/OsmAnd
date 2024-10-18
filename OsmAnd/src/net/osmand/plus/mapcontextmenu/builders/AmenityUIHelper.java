@@ -97,6 +97,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
+	private static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
 
 	private final MetricsConstants metricSystem;
 	private final AdditionalInfoBundle additionalInfo;
@@ -512,6 +513,13 @@ public class AmenityUIHelper extends MenuBuilder {
 				String catKey = poiType.getCategory().getKeyName();
 				List<PoiType> list = collectedPoiTypes.computeIfAbsent(catKey, s -> new ArrayList<>());
 				list.add(poiType);
+			} else if (baseKey.startsWith(US_MAPS_RECREATION_AREA)) {
+				String translatedUsMapsKey = app.getPoiTypes().getPoiTranslator().getTranslation(baseKey);
+				if (!Algorithms.isEmpty(translatedUsMapsKey)) {
+					textPrefix = translatedUsMapsKey;
+				} else {
+					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
+				}
 			} else {
 				textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(key);
 			}
