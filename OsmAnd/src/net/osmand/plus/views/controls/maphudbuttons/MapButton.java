@@ -24,7 +24,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -33,7 +32,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
-import androidx.core.util.Pair;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,12 +40,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -197,9 +193,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public void setUseCustomPosition(boolean useCustomPosition) {
 		this.useCustomPosition = useCustomPosition;
 
-		MapButtonState buttonState = getButtonState();
-		FabMarginPreference marginPreference = buttonState != null ? buttonState.getFabMarginPref() : null;
-		if (useCustomPosition && marginPreference != null) {
+		if (useCustomPosition) {
 			setOnLongClickListener(v -> {
 				Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
 				vibrator.vibrate(VIBRATE_SHORT);
@@ -370,7 +364,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	@Override
 	public void onViewAttachedToWindow(@NonNull View v) {
 		if (mapActivity != null) {
-			updateMargins();
 			setInvalidated(true);
 			update();
 		}
@@ -396,39 +389,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return AndroidUiHelper.updateVisibility(this, visible);
 	}
 
-	public void updateMargins() {
-		if (mapActivity == null) {
-			return;
-		}
-		MapButtonState buttonState = getButtonState();
-		FabMarginPreference preference = buttonState != null ? buttonState.getFabMarginPref() : null;
-		if (preference != null && useCustomPosition) {
-			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				Pair<Integer, Integer> margins = preference.getPortraitFabMargins();
-				Pair<Integer, Integer> defMargins = preference.getDefaultPortraitMargins();
-				FabMarginPreference.setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
-			} else {
-				Pair<Integer, Integer> margins = preference.getLandscapeFabMargin();
-				Pair<Integer, Integer> defMargins = preference.getDefaultLandscapeMargins();
-				FabMarginPreference.setFabButtonMargin(mapActivity, this, margins, defMargins.first, defMargins.second);
-			}
-		}
-		ViewParent parent = getParent();
-		if (parent instanceof MapHudLayout layout) {
-			layout.updateButtonPosition(this, getPositionSize());
-		}
-	}
-
 	public void saveMargins() {
 		MapButtonState buttonState = getButtonState();
-		FabMarginPreference preference = buttonState != null ? buttonState.getFabMarginPref() : null;
-		if (mapActivity != null && useCustomPosition && preference != null) {
-			MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
-			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-			} else {
-				preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-			}
+		if (buttonState != null && useCustomPosition) {
+
 		}
 	}
 

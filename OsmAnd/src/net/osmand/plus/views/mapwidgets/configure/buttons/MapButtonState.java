@@ -14,7 +14,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
@@ -91,11 +90,6 @@ public abstract class MapButtonState {
 	@NonNull
 	public abstract CommonPreference getVisibilityPref();
 
-	@Nullable
-	public FabMarginPreference getFabMarginPref() {
-		return null;
-	}
-
 	@NonNull
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
@@ -161,12 +155,6 @@ public abstract class MapButtonState {
 	protected <T> CommonPreference<T> addPreference(@NonNull CommonPreference<T> preference) {
 		allPreferences.add(preference);
 		return preference;
-	}
-
-	@NonNull
-	protected FabMarginPreference addPreference(@NonNull FabMarginPreference fabMarginPreference) {
-		allPreferences.addAll(fabMarginPreference.getInternalPrefs());
-		return fabMarginPreference;
 	}
 
 	public boolean hasCustomAppearance() {

@@ -158,9 +158,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		for (QuickActionButton button : actionButtons) {
 			button.update();
-//			if (isLayerOn) { // TODO delete
-//				button.updateMargins();
-//			}
 		}
 		if (isLayerOn) {
 			mapHudLayout.updateButtons();

@@ -1,8 +1,6 @@
 package net.osmand.plus.views.controls;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -26,7 +24,10 @@ public class MapHudLayout extends FrameLayout {
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
 
+<<<<<<< HEAD
 	private final Paint gridPaint;
+=======
+>>>>>>> b9b2466d6e9e509d19d19c5934a97a63f2cd5dd3
 	private final float dpToPx;
 
 	public MapHudLayout(@NonNull Context context) {
@@ -45,10 +46,13 @@ public class MapHudLayout extends FrameLayout {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.dpToPx = AndroidUtils.dpToPxF(getContext(), 1);
+<<<<<<< HEAD
 		this.gridPaint = new Paint();
 		gridPaint.setColor(Color.BLACK);
 		gridPaint.setStrokeWidth(1f);
 		setWillNotDraw(false);
+=======
+>>>>>>> b9b2466d6e9e509d19d19c5934a97a63f2cd5dd3
 	}
 
 	public void updateButtons() {
@@ -139,5 +143,4 @@ public class MapHudLayout extends FrameLayout {
 			button.saveMargins();
 		}
 	}
-
 }
