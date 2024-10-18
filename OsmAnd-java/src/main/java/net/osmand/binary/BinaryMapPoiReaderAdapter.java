@@ -64,6 +64,8 @@ public class BinaryMapPoiReaderAdapter {
 		int right31;
 		int top31;
 		int bottom31;
+
+		int bboxHash = 0;
 		
 		public int getLeft31() {
 			return left31;
@@ -130,6 +132,13 @@ public class BinaryMapPoiReaderAdapter {
 
 		public List<TagValuePair> getTagValues(int id) {
 			return tagGroups.getOrDefault(id, new ArrayList<>());
+		}
+
+		public int getBboxHash() {
+			if (bboxHash == 0) {
+				bboxHash = Objects.hash(left31, top31, right31, bottom31);
+			}
+			return bboxHash;
 		}
 
 	}
@@ -818,6 +827,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
+				am.setRegionHash(region.getBboxHash());
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
 				x = (codedIS.readSInt32() + (px << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;

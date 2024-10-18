@@ -83,6 +83,7 @@ public class Amenity extends MapObject {
 	private String mapIconName;
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
+	private int regionHash;
 
 	public int getOrder() {
 		return order;
@@ -102,8 +103,17 @@ public class Amenity extends MapObject {
 		}
 		tagGroups.put(id, tagValues);
 	}
+
 	public void setTagGroups(Map<Integer, List<TagValuePair>> tagGroups) {
 		this.tagGroups = tagGroups;
+	}
+
+	public void setRegionHash(int hash) {
+		regionHash = hash;
+	}
+
+	public int getRegionHash() {
+		return regionHash;
 	}
 
 	public static class AmenityRoutePoint {
