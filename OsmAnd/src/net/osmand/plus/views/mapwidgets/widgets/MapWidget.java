@@ -152,7 +152,11 @@ public abstract class MapWidget {
 
 	@NonNull
 	protected String getString(@StringRes int stringId, Object... args) {
-		return app.getString(stringId, args);
+		if(args.length > 0) {
+			return app.getString(stringId, args);
+		} else {
+			return app.getString(stringId);
+		}
 	}
 
 	@NonNull

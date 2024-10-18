@@ -92,7 +92,7 @@ public class Map3DButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowMap3DButton();
+		boolean shouldShowFabButton = visibilityHelper.shouldShowMap3DButton();
 		Map3DModeVisibility visibility = buttonState.getVisibility();
 
 		return app.useOpenGlRenderer() && shouldShowFabButton

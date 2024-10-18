@@ -83,7 +83,7 @@ public class SelectRouteActivityController extends BaseDialogController
 					displayData.addDisplayItem(new DisplayItem()
 							.setLayoutId(defLayoutId)
 							.setTitle(routeActivity.getLabel())
-							.setNormalIcon(iconsCache.getThemedIcon(AndroidUtils.getIconId(app, routeActivity.getIconName())))
+							.setNormalIcon(iconsCache.getThemedIcon(AndroidUtils.getActivityIconId(app, routeActivity)))
 							.setControlsColor(activeColor)
 							.setTag(routeActivity)
 					);
@@ -133,7 +133,7 @@ public class SelectRouteActivityController extends BaseDialogController
 
 			List<DisplayItem> searchResults = new ArrayList<>();
 			for (RouteActivity activity : filteredActivities) {
-				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
+				int iconId = AndroidUtils.getActivityIconId(app, activity);
 				searchResults.add(new DisplayItem()
 						.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_radio_btn)
 						.setTitle(activity.getLabel())

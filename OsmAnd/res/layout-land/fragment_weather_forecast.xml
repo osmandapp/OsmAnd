@@ -52,11 +52,17 @@
 	<FrameLayout
 		android:id="@+id/map_controls_container"
 		android:layout_width="0dp"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_gravity="bottom"
 		android:layout_marginHorizontal="@dimen/content_padding_half"
 		android:layout_marginBottom="@dimen/content_padding_small_half"
 		android:layout_weight="1">
+
+		<include
+			layout="@layout/map_compass_button"
+			android:layout_width="@dimen/map_small_button_size"
+			android:layout_height="@dimen/map_small_button_size"
+			android:layout_marginStart="@dimen/map_button_spacing" />
 
 		<include
 			layout="@layout/map_ruler"

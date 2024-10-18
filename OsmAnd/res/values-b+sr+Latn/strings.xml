@@ -5555,7 +5555,7 @@
     <string name="obd_ambient_air_temp">Ambijentalna temperatura</string>
     <string name="obd_battery_voltage">Napon baterije</string>
     <string name="obd_engine_coolant_temp">Temperatura rashladne tečnosti</string>
-    <string name="obd_fuel_level">Efikasnost goriva (%%)</string>
+    <string name="obd_fuel_level">Efikasnost goriva (%)</string>
     <string name="obd_fuel_consumption_rate">Stopa potrošnje goriva</string>
     <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
     <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
@@ -5615,16 +5615,16 @@
     <string name="obd_nothing_found_description">Proveriti sledeće:\n – Proveri je li Bluetooth uključen\n – Motor vozila radi\n – Proveri je li uređaj u dometu skenera.</string>
     <string name="obd_bluetooth_off_description">Uključi Bluetooth traženje i povezivanje skenera.</string>
     <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
-    <string name="obd_fuel_consumption_rate_sensor">Potrošnje goriva (senzor)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Potrošnja goriva (senzor)</string>
     <string name="obd_fuel_level_liter">Nivo goriva (l)</string>
     <string name="obd_fuel_left_liter">Preostalo goriva (l)</string>
     <string name="obd_fuel_left_km">Preostalo goriva za (km)</string>
-    <string name="obd_fuel_consumption_rate_scanner">Potrošnje goriva (OBD)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Potrošnja goriva (OBD)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Potrošnja goriva l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Potrošnja goriva %/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Potrošnje goriva (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Potrošnja goriva (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Prikazuje potrošnju goriva na temelju senzora (l/h)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Prikazuje potrošnje goriva na temelju proračuna (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Prikazuje potrošnju goriva na temelju proračuna (l/h)</string>
     <string name="obd_fuel_left_percent">Preostalo goriva (%)</string>
-    <string name="obd_fuel_level_percent">Nivo goriva (%%)</string>
+    <string name="obd_fuel_level_percent">Nivo goriva (%)</string>
 </resources>

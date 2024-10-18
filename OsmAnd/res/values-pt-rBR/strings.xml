@@ -5889,7 +5889,7 @@
     <string name="obd_ambient_air_temp">Temperatura do ambiente</string>
     <string name="obd_battery_voltage">Voltagem da bateria</string>
     <string name="obd_engine_coolant_temp">Temperatura do líquido de arrefecimento</string>
-    <string name="obd_fuel_level">Eficiência de combustível (%%)</string>
+    <string name="obd_fuel_level">Eficiência de combustível (%)</string>
     <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
     <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
     <string name="obd_fuel_type">Tipo de combustível</string>
@@ -5961,7 +5961,7 @@
     <string name="obd_fuel_consumption_rate_sensor">Taxa de consumo de combustível (sensor)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra a taxa de consumo de combustível do veículo com base no sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nível de combustível (l)</string>
-    <string name="obd_fuel_level_percent">Nível de combustível (%%)</string>
+    <string name="obd_fuel_level_percent">Nível de combustível (%)</string>
     <string name="obd_fuel_left_liter">Combustível restante (l)</string>
     <string name="obd_fuel_left_km">Combustível restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Taxa de consumo de combustível (obd)</string>

@@ -54,12 +54,10 @@ class MapButtonIconController extends EditorIconController {
 	@Override
 	protected void initIconCategories() {
 		initCustomCategory();
-		initLastUsedCategory();
-		initAssetsCategories();
-		initPoiPoiCategories();
-		sortCategories();
+		super.initIconCategories();
 	}
 
+	@Override
 	protected void initLastUsedCategory() {
 		lastUsedIcons = readLastUsedIcons();
 		if (!Algorithms.isEmpty(lastUsedIcons)) {

@@ -5702,11 +5702,11 @@
     <string name="percent_unit">%</string>
     <string name="rpm_unit">sn/mín</string>
     <string name="obd_rpm">SN/MÍN</string>
-    <string name="obd_air_intake_temp">Lofthitastig inntaks</string>
-    <string name="obd_ambient_air_temp">Lofthitastig umhverfis</string>
+    <string name="obd_air_intake_temp">Hitastig inntaks</string>
+    <string name="obd_ambient_air_temp">Hitastig umhverfis</string>
     <string name="obd_battery_voltage">Rafhlöðuspenna</string>
-    <string name="obd_engine_coolant_temp">Kælihitastig farartækis</string>
-    <string name="obd_fuel_level">Magn eldsneytis</string>
+    <string name="obd_engine_coolant_temp">Kælihitastig</string>
+    <string name="obd_fuel_level">Magn eldsneytis (%%)</string>
     <string name="obd_fuel_consumption_rate">Eldsneytiseyðsla</string>
     <string name="obd_fuel_left_distance">Eldsneyti eftir (vegalengd)</string>
     <string name="obd_fuel_type">Tegund eldsneytis</string>

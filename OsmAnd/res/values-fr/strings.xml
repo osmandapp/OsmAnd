@@ -5520,7 +5520,7 @@
     <string name="obd_fuel_left_distance_desc">Affiche la distance que le véhicule peut parcourir avec le niveau de carburant restant via le capteur OBD</string>
     <string name="obd_air_intake_temp">Température d\'admission</string>
     <string name="obd_ambient_air_temp">Température ambiante</string>
-    <string name="obd_fuel_level">Efficacité du carburant (%%)</string>
+    <string name="obd_fuel_level">Efficacité du carburant (%)</string>
     <string name="obd_fuel_left_distance">Carburant restant (distance)</string>
     <string name="obd_fuel_type_not_provided">Type de carburant non spécifié</string>
     <string name="unit_volt">V</string>
@@ -5611,7 +5611,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Affiche la consommation d\'essence du véhicule, basé sur des calculs (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation d\'essence du véhicule, basé sur un capteur (l/h)</string>
     <string name="obd_fuel_level_liter">Niveau d\'essence (l)</string>
-    <string name="obd_fuel_level_percent">Niveau d\'essence (%%)</string>
+    <string name="obd_fuel_level_percent">Niveau d\'essence (%)</string>
     <string name="obd_fuel_left_percent">Essence restante (%)</string>
     <string name="obd_fuel_left_liter">Essence restante (l)</string>
     <string name="obd_fuel_left_km">Essence restante (km)</string>
