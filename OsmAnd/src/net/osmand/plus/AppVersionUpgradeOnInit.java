@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -870,16 +869,6 @@ public class AppVersionUpgradeOnInit {
 				actionsPref.setModeValue(appMode, value);
 			}
 		}
-
-		FabMarginPreference oldFabMarginPref = new FabMarginPreference(app, "quick_fab_margin");
-		FabMarginPreference fabMarginPref = new FabMarginPreference(app, DEFAULT_BUTTON_ID + "_fab_margin");
-		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			Pair<Integer, Integer> portrait = oldFabMarginPref.getPortraitFabMargins(appMode);
-			Pair<Integer, Integer> landscape = oldFabMarginPref.getLandscapeFabMargin(appMode);
-
-			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
-			fabMarginPref.setLandscapeFabMargin(appMode, landscape.first, landscape.second);
-		}
 	}
 
 	private void migrateProfileQuickActionButtons() {
@@ -904,7 +893,6 @@ public class AppVersionUpgradeOnInit {
 							newState.getNamePref().set(name);
 							newState.getQuickActionsPref().set(preferences.getString(key + "_list", null));
 							copyPreferenceForAllModes(oldState.getVisibilityPref(), newState.getVisibilityPref());
-							copyFabMarginPreferenceForAllModes(oldState.getFabMarginPref(), newState.getFabMarginPref());
 
 							globalButtons.put(name, newState);
 						}
@@ -921,13 +909,6 @@ public class AppVersionUpgradeOnInit {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			newPref.setModeValue(mode, oldPref.getModeValue(mode));
 		}
-	}
-
-	private void copyFabMarginPreferenceForAllModes(@NonNull FabMarginPreference oldPref, @NonNull FabMarginPreference newPref) {
-		copyPreferenceForAllModes(oldPref.getFabMarginXPortrait(), newPref.getFabMarginXPortrait());
-		copyPreferenceForAllModes(oldPref.getFabMarginYPortrait(), newPref.getFabMarginYPortrait());
-		copyPreferenceForAllModes(oldPref.getFabMarginXLandscape(), newPref.getFabMarginXLandscape());
-		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
 	}
 
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
