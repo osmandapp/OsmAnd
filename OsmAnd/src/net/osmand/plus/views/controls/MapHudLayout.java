@@ -123,7 +123,8 @@ public class MapHudLayout extends FrameLayout {
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
-					positionSize.left, params.rightMargin, positionSize.top, params.bottomMargin);
+					positionSize.left, positionSize.left ?  params.leftMargin : params.rightMargin,
+					positionSize.top, positionSize.top ?  params.topMargin : params.bottomMargin);
 		}
 		updateButtons(); // relayout to avoid overlap
 

@@ -62,14 +62,19 @@ public class MapButtonTouchListener implements OnTouchListener {
 	}
 
 	private void moveButton(@NonNull View view, @NonNull MotionEvent event) {
+		ButtonPositionSize s = buttonState.getPositionSize();
 		FrameLayout parent = (FrameLayout) view.getParent();
 		FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
 		int deltaX = (int) (initialTouchX - event.getRawX());
 		int deltaY = (int) (initialTouchY - event.getRawY());
+		if (s.left) {
+			deltaX = -deltaX;
+		}
+		if (s.top) {
+			deltaY = -deltaY;
+		}
 		int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding);
 		int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding);
-
-		ButtonPositionSize s = buttonState.getPositionSize();
 		if (view.getHeight() + newMarginY <= parent.getHeight() - padding && newMarginY > 0) {
 			if (s.top) {
 				param.topMargin = newMarginY;
