@@ -61,7 +61,7 @@ public class MapHudLayout extends FrameLayout {
 
 	public void updateButtons() {
 		List<ButtonPositionSize> list = ButtonPositionSize.defaultLayoutExample();
-		ButtonPositionSize.computeNonOverlap((int) gridSize, list);
+		ButtonPositionSize.computeNonOverlap(8, list);
 
 		Map<String, ButtonPositionSize> map = new HashMap<>();
 		for (ButtonPositionSize positionSize : list) {
@@ -75,9 +75,8 @@ public class MapHudLayout extends FrameLayout {
 				ButtonPositionSize positionSize = map.get(id);
 				if (positionSize != null) {
 					updateButtonPosition(button, positionSize);
-				} else {
-					updateButton(button, false);
 				}
+				updateButton(button, false);
 			}
 		}
 	}
