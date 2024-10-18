@@ -51,23 +51,23 @@ public class ButtonPositionSize {
 		return vl;
 	}
 
-	public void calcGridFromBottomRight(float dpToPix, int widthPx, int heightPx, int xRight, int yBottom) {
-		// TODO test
+	public void calcGridPositionFromPixel(float dpToPix, int widthPx, int heightPx,
+										boolean gravLeft, int x, boolean gravTop, int y) {
 		float calc;
-		if (xRight < widthPx / 2) {
-			this.left = false;
-			calc = xRight / dpToPix - this.width;
+		if (x < widthPx / 2) {
+			this.left = gravLeft;
+			calc = x / dpToPix ;
 		} else {
-			this.left = true;
-			calc = (widthPx - xRight) / dpToPix;
+			this.left = !gravLeft;
+			calc = (widthPx - x) / dpToPix - this.width * CELL_SIZE_DP;
 		}
 		this.marginX = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
-		if (yBottom < heightPx / 2) {
-			this.top = false;
-			calc = yBottom / dpToPix - this.height;
+		if (y < heightPx / 2) {
+			this.top = gravTop;
+			calc = y / dpToPix ;
 		} else {
-			this.top = true;
-			calc = (heightPx - yBottom) / dpToPix;
+			this.top = !gravTop;
+			calc = (heightPx - y) / dpToPix - this.height * CELL_SIZE_DP;
 		}
 		this.marginY = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
 	}
