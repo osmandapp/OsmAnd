@@ -1,7 +1,12 @@
+package net.osmand.plus.views.controls.maphudbuttons;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonPositionSize {
+
 	public static final int CELL_SIZE_DP = 8;
 	public static final int DEF_MARGIN_DP = 4;
 
@@ -28,7 +33,7 @@ public class ButtonPositionSize {
 		return this;
 	}
 
-	public ButtonPositionSize setMoveHorizonta() {
+	public ButtonPositionSize setMoveHorizontal() {
 		this.xMove = true;
 		return this;
 	}
@@ -45,8 +50,7 @@ public class ButtonPositionSize {
 		vl = (vl << MAX_SIZE_BITS) + Math.min(width, SIZE_MASK);
 		return vl;
 	}
-	
-	
+
 	public void calcGridFromBottomRight(float dpToPix, int widthPx, int heightPx, int xRight, int yBottom) {
 		// TODO test
 		float calc;
@@ -71,7 +75,7 @@ public class ButtonPositionSize {
 	public int getYStartPix(float dpToPix) {
 		return (int) ((marginY * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
-	
+
 	public int getYEndPix(float dpToPix) {
 		return (int) (((marginY + width) * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
@@ -79,7 +83,7 @@ public class ButtonPositionSize {
 	public int getXStartPix(float dpToPix) {
 		return (int) ((marginX * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
-	
+
 	public int getXEndPix(float dpToPix) {
 		return (int) (((marginX + width) * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
@@ -138,24 +142,23 @@ public class ButtonPositionSize {
 						break;
 					}
 				}
-				
 			}
 		}
 	}
 
 	public static List<ButtonPositionSize> defaultLayoutExample() {
-		List<ButtonPositionSize> lst = new ArrayList<ButtonPositionSize>();
-		lst.add(new ButtonPositionSize("zoomOut", 7, false, false).setMoveVertical());
-		lst.add(new ButtonPositionSize("zoomIn", 7, false, false).setMoveVertical());
-		lst.add(new ButtonPositionSize("myLoc", 7, false, false).setMoveHorizonta());
+		List<ButtonPositionSize> lst = new ArrayList<>();
+		lst.add(new ButtonPositionSize(ZOOM_OUT_HUD_ID, 7, false, false).setMoveVertical());
+		lst.add(new ButtonPositionSize(ZOOM_IN_HUD_ID, 7, false, false).setMoveVertical());
+		lst.add(new ButtonPositionSize(BACK_TO_LOC_HUD_ID, 7, false, false).setMoveHorizontal());
 
-		lst.add(new ButtonPositionSize("drawer", 7, true, false).setMoveHorizonta());
-		lst.add(new ButtonPositionSize("navigation", 7, true, false).setMoveHorizonta());
-		lst.add(new ButtonPositionSize("ruler", 10, true, false).setMoveHorizonta());
+		lst.add(new ButtonPositionSize(MENU_HUD_ID, 7, true, false).setMoveHorizontal());
+		lst.add(new ButtonPositionSize(ROUTE_PLANNING_HUD_ID, 7, true, false).setMoveHorizontal());
+		lst.add(new ButtonPositionSize("ruler", 10, true, false).setMoveHorizontal());
 
-		lst.add(new ButtonPositionSize("configMap", 6, true, true).setMoveHorizonta());
-		lst.add(new ButtonPositionSize("search", 6, true, true).setMoveHorizonta());
-		lst.add(new ButtonPositionSize("compass", 6, true, true).setMoveVertical());
+		lst.add(new ButtonPositionSize(LAYERS_HUD_ID, 6, true, true).setMoveHorizontal());
+		lst.add(new ButtonPositionSize(QUICK_SEARCH_HUD_ID, 6, true, true).setMoveHorizontal());
+		lst.add(new ButtonPositionSize(COMPASS_HUD_ID, 6, true, true).setMoveVertical());
 		return lst;
 	}
 }

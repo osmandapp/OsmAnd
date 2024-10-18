@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -17,10 +18,15 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MapHudLayout extends FrameLayout {
 
@@ -54,12 +60,52 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public void updateButtons() {
+		List<ButtonPositionSize> list = ButtonPositionSize.defaultLayoutExample();
+		ButtonPositionSize.computeNonOverlap((int) gridSize, list);
+
+		Map<String, ButtonPositionSize> map = new HashMap<>();
+		for (ButtonPositionSize positionSize : list) {
+			map.put(positionSize.id, positionSize);
+		}
+
 		for (int i = 0; i < getChildCount(); i++) {
 			View child = getChildAt(i);
 			if (child instanceof MapButton button && button.getVisibility() == VISIBLE) {
-				updateButton(button, false);
+				String id = button.getButtonId();
+				ButtonPositionSize positionSize = map.get(id);
+				if (positionSize != null) {
+					LayoutParams params = (LayoutParams) button.getLayoutParams();
+					updateButtonPosition(params, positionSize);
+				} else {
+					updateButton(button, false);
+				}
 			}
 		}
+	}
+
+	private void updateButtonPosition(@NonNull LayoutParams params, @NonNull ButtonPositionSize positionSize) {
+		int gravity = 0;
+		float dp = AndroidUtils.dpToPxF(getContext(), 1);
+
+		if (positionSize.left) {
+			gravity |= Gravity.START;
+			params.rightMargin = 0;
+			params.leftMargin = positionSize.getXStartPix(dp);
+		} else {
+			gravity |= Gravity.END;
+			params.leftMargin = 0;
+			params.rightMargin = positionSize.getXStartPix(dp);
+		}
+		if (positionSize.top) {
+			gravity |= Gravity.TOP;
+			params.bottomMargin = 0;
+			params.topMargin = positionSize.getYStartPix(dp);
+		} else {
+			gravity |= Gravity.BOTTOM;
+			params.topMargin = 0;
+			params.bottomMargin = positionSize.getYStartPix(dp);
+		}
+		params.gravity = gravity;
 	}
 
 	public void updateButton(@NonNull MapButton button, boolean save) {
