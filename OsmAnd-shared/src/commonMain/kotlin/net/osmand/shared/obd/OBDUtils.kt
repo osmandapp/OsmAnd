@@ -57,7 +57,8 @@ object OBDUtils {
 	}
 
 	fun parseBatteryVoltageResponse(response: IntArray): OBDDataField<Any> {
-		return OBDDataField(((response[0] * 256) + response[1]) / 1000)
+		val result = ((response[0] * 256) + response[1]).toFloat() / 1000
+		return OBDDataField(result)
 	}
 
 	fun parseFuelTypeResponse(response: IntArray): OBDDataField<Any> {

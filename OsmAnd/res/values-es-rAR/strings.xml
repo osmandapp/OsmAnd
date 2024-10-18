@@ -5542,7 +5542,7 @@
     <string name="obd_fuel_left_distance_desc">Muestra la distancia a recorrer con el nivel de combustible restante según el sensor OBD</string>
     <string name="obd_fuel_type_desc">Muestra el tipo de combustible según el sensor OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
-    <string name="obd_fuel_level">Eficiencia del combustible (%%)</string>
+    <string name="obd_fuel_level">Eficiencia del combustible (%)</string>
     <string name="obd_fuel_type_bifuel_cng">Combustible dual con GNC</string>
     <string name="obd_fuel_type_bifuel_propane">Combustible dual con propano</string>
     <string name="obd_fuel_type_hybrid_diesel">Híbrido a diésel</string>
@@ -5621,7 +5621,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Muestra la tasa de consumo del combustible del vehículo según los cálculos (l/h)</string>
     <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
     <string name="obd_fuel_left_km">Combustible restante (km)</string>
-    <string name="obd_fuel_level_percent">Nivel de combustible (%%)</string>
+    <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo del combustible (obd)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Tasa de consumo del combustible en %/h</string>
 </resources>

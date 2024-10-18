@@ -5546,7 +5546,7 @@
     <string name="obd_ambient_air_temp">Környezeti levegő hőmérséklete</string>
     <string name="obd_battery_voltage">Akkumulátor feszültség</string>
     <string name="obd_engine_coolant_temp">Hűtőfolyadék hőmérséklete</string>
-    <string name="obd_fuel_level">Üzemanyag hatékonyság (%%)</string>
+    <string name="obd_fuel_level">Üzemanyag hatékonyság (%)</string>
     <string name="obd_fuel_consumption_rate">Üzemanyag fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Az üzemanyag fogyasztást mutatja az OBD adatai alapján</string>
     <string name="obd_fuel_left_distance">Megtehető távolság</string>
@@ -5611,7 +5611,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Számítások alapján mutatja a jármű üzemanyag fogyasztását liter/órában</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Érzékelő adatai alapján mutatja a jármű üzemanyag fogyasztását liter/órában</string>
     <string name="obd_fuel_level_liter">Üzemanyagszint (l)</string>
-    <string name="obd_fuel_level_percent">Üzemanyagszint (%%)</string>
+    <string name="obd_fuel_level_percent">Üzemanyagszint (%)</string>
     <string name="obd_fuel_left_percent">Maradék üzemanyag (%)</string>
     <string name="obd_fuel_left_liter">Maradék üzemanyag (l)</string>
     <string name="obd_fuel_left_km">Megtehető táv (km)</string>

@@ -104,7 +104,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
 		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
 		val fuelLevelWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEVEL_PERCENT)
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_PERCENT)
 		widgetsInfos.add(creator.createWidgetInfo(fuelLevelWidget))
 		val fuelLeftDistanceWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_DISTANCE)
@@ -158,9 +158,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				WidgetType.OBD_BATTERY_VOLTAGE,
 				OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE)
 
-			WidgetType.OBD_FUEL_LEVEL_PERCENT -> return OBDTextWidget(
+			WidgetType.OBD_FUEL_LEFT_PERCENT -> return OBDTextWidget(
 				mapActivity,
-				WidgetType.OBD_FUEL_LEVEL_PERCENT,
+				WidgetType.OBD_FUEL_LEFT_PERCENT,
 				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT)
 
 			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(

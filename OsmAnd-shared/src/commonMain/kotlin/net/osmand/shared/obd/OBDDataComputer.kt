@@ -104,7 +104,7 @@ object OBDDataComputer {
 			false,
 			OBD_RPM_COMMAND,
 			"obd_rpm",
-			OBDComputerWidgetFormatter("%.0f")),
+			OBDComputerWidgetFormatter("%d")),
 		FUEL_LEFT_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
@@ -323,7 +323,7 @@ object OBDDataComputer {
 
 						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
-							if (values.isEmpty() || values[value.size - 1].value != it.value) {
+							if (values.isEmpty() || values[values.size - 1].value != it.value) {
 								version++
 								values.add(it)
 							}
