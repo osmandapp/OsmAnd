@@ -24,6 +24,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
@@ -230,5 +231,13 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 		}
 		return super.getIcon(iconId, color, nightMode, mapIcon);
+	}
+
+	@Nullable
+	@Override
+	public ButtonPositionSize getButtonPositionSize() {
+		ButtonAppearanceParams params = createAppearanceParams();
+		int size = (params.getSize() / 8) + 1;
+		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical().setMoveHorizontal();
 	}
 }

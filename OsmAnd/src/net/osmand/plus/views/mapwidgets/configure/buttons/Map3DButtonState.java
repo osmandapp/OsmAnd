@@ -9,6 +9,7 @@ import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +20,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class Map3DButtonState extends MapButtonState {
 
@@ -99,5 +101,13 @@ public class Map3DButtonState extends MapButtonState {
 
 	public boolean isFlatMapMode() {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
+	}
+
+	@Nullable
+	@Override
+	public ButtonPositionSize getButtonPositionSize() {
+		ButtonAppearanceParams params = createAppearanceParams();
+		int size = (params.getSize() / 8) + 1;
+		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical().setMoveHorizontal();
 	}
 }

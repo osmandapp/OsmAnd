@@ -120,9 +120,7 @@ public abstract class MapButtonState {
 	}
 
 	@Nullable
-	public ButtonPositionSize getButtonPositionSize() {
-		return null;
-	}
+	public abstract ButtonPositionSize getButtonPositionSize();
 
 	@Nullable
 	public Drawable getIcon(@ColorInt int color, boolean nightMode, boolean mapIcon) {
