@@ -81,11 +81,19 @@ public class MapHudLayout extends FrameLayout {
 				}
 			}
 		}
+		// TODO delete log.info
+		for(ButtonPositionSize b : map.values()) {
+			LOG.info("BTNS " + b.toString());
+		}
 		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+		LOG.info("BTNS ----------");
+		for(ButtonPositionSize b : map.values()) {
+			LOG.info("BTNS " + b.toString());
+		}
 		return map;
 	}
 
-	private void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize positionSize) {
+	public void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize positionSize) {
 		int gravity = 0;
 		int marginX = positionSize.getXStartPix(dpToPx);
 		int marginY = positionSize.getYStartPix(dpToPx);
@@ -126,9 +134,9 @@ public class MapHudLayout extends FrameLayout {
 			int height = getHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
-//			positionSize.calcGridFromBottomRight(dpToPx, width, height, params.rightMargin, params.bottomMargin);
+			positionSize.calcGridFromBottomRight(dpToPx, width, height, params.rightMargin, params.bottomMargin);
 		}
-//		updateButtons();
+		updateButtons(); // relayout to avoid overlap
 
 		if (save) {
 			button.saveMargins();

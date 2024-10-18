@@ -55,18 +55,18 @@ public class ButtonPositionSize {
 		// TODO test
 		float calc;
 		if (xRight < widthPx / 2) {
-			this.left = true;
+			this.left = false;
 			calc = xRight / dpToPix - this.width;
 		} else {
-			this.left = false;
+			this.left = true;
 			calc = (widthPx - xRight) / dpToPix;
 		}
 		this.marginX = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
 		if (yBottom < heightPx / 2) {
-			this.top = true;
+			this.top = false;
 			calc = yBottom / dpToPix - this.height;
 		} else {
-			this.top = false;
+			this.top = true;
 			calc = (heightPx - yBottom) / dpToPix;
 		}
 		this.marginY = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));

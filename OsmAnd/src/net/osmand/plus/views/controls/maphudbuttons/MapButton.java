@@ -415,7 +415,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		}
 		ViewParent parent = getParent();
 		if (parent instanceof MapHudLayout layout) {
-			layout.updateButton(this, false);
+			layout.updateButtonPosition(this, getPositionSize());
 		}
 	}
 
