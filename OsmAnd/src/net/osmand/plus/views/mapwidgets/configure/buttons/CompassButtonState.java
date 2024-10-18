@@ -142,6 +142,6 @@ public class CompassButtonState extends MapButtonState {
 	public ButtonPositionSize getButtonPositionSize() {
 		ButtonAppearanceParams params = createAppearanceParams();
 		int size = (params.getSize() / 8) + 1;
-		return new ButtonPositionSize(getId(), size + 1, true, true).setMoveVertical();
+		return new ButtonPositionSize(getId(), size, true, true).setMoveVertical();
 	}
 }
