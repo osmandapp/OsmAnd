@@ -168,6 +168,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				WidgetType.OBD_FUEL_LEFT_DISTANCE,
 				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM)
 
+			WidgetType.OBD_FUEL_LEFT_LITER -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_FUEL_LEFT_LITER,
+				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER)
+
 			WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
@@ -548,7 +553,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Int)
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Float)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature((data as Int).toFloat())
 
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,

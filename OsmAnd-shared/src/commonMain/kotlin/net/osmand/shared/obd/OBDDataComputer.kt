@@ -71,6 +71,11 @@ object OBDDataComputer {
 		type: OBDTypeWidget,
 		averageTimeSeconds: Int
 	): OBDComputerWidget {
+		for (widget in widgets) {
+			if (widget.type == type && widget.averageTimeSeconds == averageTimeSeconds) {
+				return widget
+			}
+		}
 		val widget = OBDComputerWidget(type, averageTimeSeconds)
 		widgets = KCollectionUtils.addToList(widgets, widget)
 		updateRequiredCommands()

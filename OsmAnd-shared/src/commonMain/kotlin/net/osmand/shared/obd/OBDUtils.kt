@@ -37,17 +37,17 @@ object OBDUtils {
 	}
 
 	fun parseIntakeAirTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
+		val result = response[0] - 40
 		return OBDDataField(result)
 	}
 
 	fun parseAmbientTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
+		val result = response[0] - 40
 		return OBDDataField(result)
 	}
 
 	fun parseEngineCoolantTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
+		val result = response[0] - 40
 		return OBDDataField(result)
 	}
 
