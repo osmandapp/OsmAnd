@@ -101,9 +101,9 @@ public class MapButtonTouchListener implements OnTouchListener {
 
 	private void setUpInitialValues(@NonNull View view, @NonNull MotionEvent event) {
 		MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();
-
-		initialMarginX = params.rightMargin;
-		initialMarginY = params.bottomMargin;
+		ButtonPositionSize s = buttonState.getPositionSize();
+		initialMarginX = s.left ? params.leftMargin : params.rightMargin;
+		initialMarginY = s.top ? params.topMargin : params.bottomMargin;
 
 		initialTouchX = event.getRawX();
 		initialTouchY = event.getRawY();
