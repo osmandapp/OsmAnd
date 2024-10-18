@@ -111,14 +111,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public View moveCompassButton(@NonNull ViewGroup destLayout, @NonNull ViewGroup.LayoutParams params) {
-		return compassButton.moveToSpecialPosition(destLayout, params);
-	}
-
-	public void restoreCompassButton() {
-		compassButton.moveToDefaultPosition();
-	}
-
 	private void initTopControls() {
 		MapActivity activity = requireMapActivity();
 		compassButton = activity.findViewById(R.id.map_compass_button);
