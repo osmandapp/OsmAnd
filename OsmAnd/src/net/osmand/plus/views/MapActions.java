@@ -9,8 +9,6 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -54,6 +52,7 @@ public class MapActions {
 			builder.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			builder.setSelectedSegment(settings.GPX_SEGMENT_INDEX.get());
 			builder.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
+			builder.setPassWholeRoute(settings.GPX_PASS_WHOLE_ROUTE.get());
 
 			ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 			if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
@@ -88,8 +87,10 @@ public class MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, boolean passWholeRoute) {
-		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu,
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu,
+	                                           @Nullable Boolean passWholeRoute) {
+		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName,
+				useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE, passWholeRoute);
 	}
 
@@ -101,11 +102,12 @@ public class MapActions {
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
 	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
-		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState, false);
+		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState, null);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState, boolean passWholeRoute) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState,
+	                                           @Nullable Boolean passWholeRoute) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
@@ -132,7 +134,8 @@ public class MapActions {
 		// then set gpx
 		setGPXRouteParams(gpxFile);
 		GPXRouteParamsBuilder currentGPXRoute = routingHelper.getCurrentGPXRoute();
-		if (currentGPXRoute != null) {
+		// override "pass whole route" option only if it's present
+		if (currentGPXRoute != null && passWholeRoute != null) {
 			currentGPXRoute.setPassWholeRoute(passWholeRoute);
 		}
 		// then update start and destination point
