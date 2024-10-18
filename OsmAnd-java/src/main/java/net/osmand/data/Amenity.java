@@ -1,8 +1,6 @@
 package net.osmand.data;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
-
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.AbstractPoiType;
@@ -11,23 +9,13 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 
-import gnu.trove.list.array.TIntArrayList;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 
 public class Amenity extends MapObject {
@@ -83,7 +71,7 @@ public class Amenity extends MapObject {
 	private String mapIconName;
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
-	private int regionHash;
+	private String regionName;
 
 	public int getOrder() {
 		return order;
@@ -108,12 +96,12 @@ public class Amenity extends MapObject {
 		this.tagGroups = tagGroups;
 	}
 
-	public void setRegionHash(int hash) {
-		regionHash = hash;
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
 	}
 
-	public int getRegionHash() {
-		return regionHash;
+	public String getRegionName() {
+		return regionName;
 	}
 
 	public static class AmenityRoutePoint {
