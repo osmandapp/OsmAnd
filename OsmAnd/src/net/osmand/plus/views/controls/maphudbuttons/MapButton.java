@@ -206,7 +206,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 				setScaleX(1.5f);
 				setScaleY(1.5f);
 				setAlpha(0.95f);
-				setOnTouchListener(new MapButtonTouchListener(mapActivity));
+				setOnTouchListener(new MapButtonTouchListener(this, mapActivity));
 				return true;
 			});
 		}

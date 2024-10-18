@@ -11,20 +11,22 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.MapHudLayout;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 public class MapButtonTouchListener implements OnTouchListener {
 
+	private final MapButton buttonState;
 	private final int padding;
 	private int initialMarginX = 0;
 	private int initialMarginY = 0;
 	private float initialTouchX = 0;
 	private float initialTouchY = 0;
 
-	public MapButtonTouchListener(@NonNull Context context) {
-		padding = AndroidUtils.calculateTotalSizePx(context, R.dimen.map_button_margin);
+	public MapButtonTouchListener(MapButton buttonState, @NonNull Context context) {
+		this.buttonState = buttonState;
+		padding = AndroidUtils.dpToPx(context, ButtonPositionSize.DEF_MARGIN_DP);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -64,14 +66,23 @@ public class MapButtonTouchListener implements OnTouchListener {
 		FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
 		int deltaX = (int) (initialTouchX - event.getRawX());
 		int deltaY = (int) (initialTouchY - event.getRawY());
-		int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding * 2);
-		int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding * 2);
+		int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding);
+		int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding);
 
+		ButtonPositionSize s = buttonState.getPositionSize();
 		if (view.getHeight() + newMarginY <= parent.getHeight() - padding && newMarginY > 0) {
-			param.bottomMargin = newMarginY;
+			if (s.top) {
+				param.topMargin = newMarginY;
+			} else {
+				param.bottomMargin = newMarginY;
+			}
 		}
 		if (view.getWidth() + newMarginX <= parent.getWidth() - padding && newMarginX > 0) {
-			param.rightMargin = newMarginX;
+			if (s.left) {
+				param.leftMargin = newMarginX;
+			} else {
+				param.rightMargin = newMarginX;
+			}
 		}
 		view.setLayoutParams(param);
 	}
