@@ -119,6 +119,7 @@ public class MapHudLayout extends FrameLayout {
 		ButtonPositionSize positionSize = button.getPositionSize();
 		if (positionSize != null) {
 			int width = getWidth();
+			// TODO this height incorrect cause it includes statusbar?
 			int height = getHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
