@@ -417,9 +417,9 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
                 return Color.LTGRAY;
             case AIS_VESSEL_AUTHORITIES:
-                return 0x556b2f; //  darkolivegreen
+                return Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
             case AIS_VESSEL_SAR:
-                return 0xfa8072; // salmon
+                return Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
             default:
                 return 0; // transparent
         }
@@ -476,6 +476,7 @@ public class AisObject {
     private void drawCircle(float locationX, float locationY,
                             @NonNull Paint paint, @NonNull Canvas canvas) {
         Paint localPaint = new Paint(paint);
+        localPaint.setColorFilter(null);
         localPaint.setColor(Color.DKGRAY);
         canvas.drawCircle(locationX, locationY, 22.0f, localPaint);
         localPaint.setColor(this.bitmapColor);
