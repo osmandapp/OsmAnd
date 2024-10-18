@@ -61,7 +61,7 @@ public class MapHudLayout extends FrameLayout {
 
 	public void updateButtons() {
 		List<ButtonPositionSize> list = ButtonPositionSize.defaultLayoutExample();
-		ButtonPositionSize.computeNonOverlap(8, list);
+		ButtonPositionSize.computeNonOverlap(0, list);
 
 		Map<String, ButtonPositionSize> map = new HashMap<>();
 		for (ButtonPositionSize positionSize : list) {
