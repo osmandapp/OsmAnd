@@ -6,11 +6,13 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class DrawerMenuButtonState extends MapButtonState {
 
@@ -55,5 +57,13 @@ public class DrawerMenuButtonState extends MapButtonState {
 		boolean dashboard = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
 		String iconName = dashboard ? "ic_dashboard" : "ic_navigation_drawer";
 		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+	}
+
+	@Nullable
+	@Override
+	public ButtonPositionSize getButtonPositionSize() {
+		ButtonAppearanceParams params = createAppearanceParams();
+		int size = (params.getSize() / 8) + 1;
+		return new ButtonPositionSize(getId(), size, true, false).setMoveHorizontal();
 	}
 }

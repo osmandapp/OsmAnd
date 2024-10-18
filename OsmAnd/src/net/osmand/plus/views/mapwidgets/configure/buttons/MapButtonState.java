@@ -17,6 +17,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -116,6 +117,11 @@ public abstract class MapButtonState {
 			cornerRadius = defaultParams.getCornerRadius();
 		}
 		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);
+	}
+
+	@Nullable
+	public ButtonPositionSize getButtonPositionSize() {
+		return null;
 	}
 
 	@Nullable

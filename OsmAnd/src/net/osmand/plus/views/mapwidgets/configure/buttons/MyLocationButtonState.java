@@ -6,11 +6,13 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class MyLocationButtonState extends MapButtonState {
 
@@ -53,5 +55,13 @@ public class MyLocationButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_my_location", BIG_SIZE_DP, OPAQUE_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@Nullable
+	@Override
+	public ButtonPositionSize getButtonPositionSize() {
+		ButtonAppearanceParams params = createAppearanceParams();
+		int size = (params.getSize() / 8) + 1;
+		return new ButtonPositionSize(getId(), size, false, false).setMoveHorizontal();
 	}
 }

@@ -21,11 +21,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 import org.apache.commons.logging.Log;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MapHudLayout extends FrameLayout {
@@ -60,14 +61,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public void updateButtons() {
-		List<ButtonPositionSize> list = ButtonPositionSize.defaultLayoutExample();
-		ButtonPositionSize.computeNonOverlap(0, list);
-
-		Map<String, ButtonPositionSize> map = new HashMap<>();
-		for (ButtonPositionSize positionSize : list) {
-			map.put(positionSize.id, positionSize);
-		}
-
+		Map<String, ButtonPositionSize> map = getButtonPositionSizes();
 		for (int i = 0; i < getChildCount(); i++) {
 			View child = getChildAt(i);
 			if (child instanceof MapButton button && button.getVisibility() == VISIBLE) {
@@ -79,6 +73,23 @@ public class MapHudLayout extends FrameLayout {
 				updateButton(button, false);
 			}
 		}
+	}
+
+	@NonNull
+	private Map<String, ButtonPositionSize> getButtonPositionSizes() {
+		Map<String, ButtonPositionSize> map = new LinkedHashMap<>();
+		for (int i = 0; i < getChildCount(); i++) {
+			View child = getChildAt(i);
+			if (child instanceof MapButton button && button.getVisibility() == VISIBLE) {
+				MapButtonState buttonState = button.getButtonState();
+				ButtonPositionSize positionSize = buttonState != null ? buttonState.getButtonPositionSize() : null;
+				if (positionSize != null) {
+					map.put(positionSize.id, positionSize);
+				}
+			}
+		}
+		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+		return map;
 	}
 
 	private void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize positionSize) {
