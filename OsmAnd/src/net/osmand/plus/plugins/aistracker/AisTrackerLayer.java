@@ -72,6 +72,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         //initTestObject2();
         //initTestObject3();
         //initTestObject4();
+        //initTestObject5();
         //testCrossingTimes();
         //testCpa();
         //initFakePosition();
@@ -387,12 +388,14 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     }
     private void initTestObject2() {
         // sailing boat
-        AisObject ais = new AisObject(454011, 1, 20, 8, 0, 120,
-                125.0, 4.4, 50.737d, 7.098d, 0.0);
+        AisObject ais = new AisObject(454011, 18, 20, AisObjectConstants.INVALID_NAV_STATUS,
+                AisObjectConstants.INVALID_MANEUVER_INDICATOR,
+                125, 125.0, 4.4, 50.737d, 7.098d, AisObjectConstants.INVALID_ROT);
         updateAisObjectList(ais);
-        ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
-                0, 0, 0, 0,
-                "@@@", 0, 0, 0, 0);
+        ais = new AisObject(454011, 24, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
+                0, 0, 0, AisObjectConstants.INVALID_DRAUGHT,
+                "home", AisObjectConstants.INVALID_ETA, AisObjectConstants.INVALID_ETA,
+                AisObjectConstants.INVALID_ETA_HOUR, AisObjectConstants.INVALID_ETA_MIN);
         updateAisObjectList(ais);
     }
     private void initTestObject3() {
@@ -407,6 +410,17 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     private void initTestObject4() {
         // aircraft
         AisObject ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
+        updateAisObjectList(ais);
+    }
+    private void initTestObject5() {
+        // law enforcement
+        AisObject ais = new AisObject(34569, 1, 20, 5, 1, 15,
+                25.0, 8.4, 50.739d, 7.0931d, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(34569, 5, 0, "TEST-CALLSIGN3",
+                "Mecklenburg Vorpommern", 55 /* law enforcement */, 26,
+                5, 8, 4, 1,
+                "Potsdam", 8, 15, 22, 5);
         updateAisObjectList(ais);
     }
 
