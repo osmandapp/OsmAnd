@@ -141,8 +141,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addMapButton(createMapButton(inflater, R.layout.map_search_button));
 		addMapButton(createMapButton(inflater, R.layout.map_compass_button));
 
-		addMapButton(createMapButton(inflater, R.layout.map_zoom_in_button));
 		addMapButton(createMapButton(inflater, R.layout.map_zoom_out_button));
+		addMapButton(createMapButton(inflater, R.layout.map_zoom_in_button));
 		addMapButton(createMapButton(inflater, R.layout.my_location_button));
 
 		addMapButton(createMapButton(inflater, R.layout.drawer_menu_button));
@@ -291,7 +291,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void refreshButtons() {
 		for (MapButton button : getAllMapButtons()) {
 			button.update();
-			button.updateMargins();
+			// TODO @chumva not needed
+//			button.updateMargins();
 		}
 		mapHudLayout.updateButtons();
 	}
