@@ -31,22 +31,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@+id/map_part_dashboard"
-                    android:contentDescription="@string/back_to_map"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/dashboard_map_top_padding">
+	            <FrameLayout
+		            android:id="@+id/map_part_dashboard"
+		            android:layout_width="match_parent"
+		            android:layout_height="@dimen/dashboard_map_top_padding"
+		            android:contentDescription="@string/back_to_map">
 
-                    <Button
-                        android:id="@+id/map_download_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/shared_string_download"
-                        android:visibility="gone"/>
-                </FrameLayout>
+		            <Button
+			            android:id="@+id/map_download_button"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="center"
+			            android:text="@string/shared_string_download"
+			            android:visibility="gone" />
 
-                <LinearLayout
+		            <include
+			            layout="@layout/map_compass_button"
+			            android:visibility="gone" />
+
+	            </FrameLayout>
+
+	            <LinearLayout
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
