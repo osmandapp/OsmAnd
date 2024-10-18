@@ -48,6 +48,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -217,9 +218,6 @@ public enum WidgetType {
 	}
 
 	public WidgetGroup getGroup() {
-		if (group == ALTITUDE && !ALTITUDE_MAP_CENTER.isAllowed()) {
-			return null;
-		}
 		return group;
 	}
 
@@ -420,7 +418,7 @@ public enum WidgetType {
 
 	@NonNull
 	public static List<WidgetType> getProWidgets() {
-		return Collections.singletonList(ELEVATION_PROFILE);
+		return Arrays.asList(ELEVATION_PROFILE, ALTITUDE_MAP_CENTER);
 	}
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {
