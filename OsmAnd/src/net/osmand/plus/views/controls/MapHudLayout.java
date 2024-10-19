@@ -107,6 +107,8 @@ public class MapHudLayout extends FrameLayout {
 		}
 		params.gravity = gravity;
 
+		button.setLayoutParams(params);
+
 		boolean top = (params.gravity & Gravity.TOP) == Gravity.TOP;
 		boolean left = (params.gravity & Gravity.START) == Gravity.START;
 
@@ -127,10 +129,9 @@ public class MapHudLayout extends FrameLayout {
 					positionSize.left, positionSize.left ?  params.leftMargin : params.rightMargin,
 					positionSize.top, positionSize.top ?  params.topMargin : params.bottomMargin);
 		}
-		updateButtons(); // relayout to avoid overlap
-
 		if (save) {
 			button.saveMargins();
 		}
+		updateButtons(); // relayout to avoid overlap
 	}
 }

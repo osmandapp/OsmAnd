@@ -37,6 +37,7 @@ public class QuickActionButtonState extends MapButtonState {
 	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
 	private final CommonPreference<String> quickActionsPref;
+	private final CommonPreference<Long> positionPref;
 
 	private final MapQuickActionLayer quickActionLayer;
 
@@ -48,6 +49,7 @@ public class QuickActionButtonState extends MapButtonState {
 		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
 		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
 	}
 
 	@Override
@@ -116,6 +118,12 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public CommonPreference<Boolean> getVisibilityPref() {
 		return visibilityPref;
+	}
+
+	@Nullable
+	@Override
+	public CommonPreference<Long> getPositionPref() {
+		return positionPref;
 	}
 
 	@NonNull

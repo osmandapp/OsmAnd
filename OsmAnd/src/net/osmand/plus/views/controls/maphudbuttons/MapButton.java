@@ -40,6 +40,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -144,7 +145,15 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public ButtonPositionSize getPositionSize() {
 		if (positionSize == null) {
 			MapButtonState buttonState = getButtonState();
-			positionSize = buttonState != null ? buttonState.getButtonPositionSize() : null;
+			if (buttonState != null) {
+				positionSize = buttonState.getButtonPositionSize();
+
+				CommonPreference<Long> preference = buttonState.getPositionPref();
+				Long value = preference != null ? preference.get() : null;
+				if (value != null && value > 0) {
+					positionSize.fromLongValue(preference.get());
+				}
+			}
 		}
 		return positionSize;
 	}
@@ -391,8 +400,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	public void saveMargins() {
 		MapButtonState buttonState = getButtonState();
-		if (buttonState != null && useCustomPosition) {
-
+		ButtonPositionSize positionSize = getPositionSize();
+		CommonPreference<Long> positionPref = buttonState != null ? buttonState.getPositionPref() : null;
+		if (positionSize != null && positionPref != null && useCustomPosition) {
+			positionPref.set(positionSize.toLongValue());
 		}
 	}
 
@@ -403,10 +414,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public float getImageSize() {
 		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
 		return AndroidUtils.dpToPxF(getContext(), params.getSize());
-	}
-
-	public float getShadowPadding() {
-		return shadowPadding;
 	}
 
 	@NonNull

@@ -90,6 +90,11 @@ public abstract class MapButtonState {
 	@NonNull
 	public abstract CommonPreference getVisibilityPref();
 
+	@Nullable
+	public CommonPreference<Long> getPositionPref() {
+		return null;
+	}
+
 	@NonNull
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();

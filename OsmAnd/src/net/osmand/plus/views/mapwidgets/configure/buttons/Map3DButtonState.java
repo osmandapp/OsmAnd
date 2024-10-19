@@ -21,13 +21,17 @@ import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class Map3DButtonState extends MapButtonState {
 
-	public final CommonPreference<Map3DModeVisibility> visibilityPref;
+	private final CommonPreference<Long> positionPref;
+	private final CommonPreference<Map3DModeVisibility> visibilityPref;
+
 	private float elevationAngle = DEFAULT_ELEVATION_ANGLE;
 
 
 	public Map3DButtonState(@NonNull OsmandApplication app) {
 		super(app, MAP_3D_HUD_ID);
-		visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
+
+		this.visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
+		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
 	}
 
 	@NonNull
@@ -74,6 +78,12 @@ public class Map3DButtonState extends MapButtonState {
 	@Override
 	public CommonPreference<Map3DModeVisibility> getVisibilityPref() {
 		return visibilityPref;
+	}
+
+	@Nullable
+	@Override
+	public CommonPreference<Long> getPositionPref() {
+		return positionPref;
 	}
 
 	@NonNull
