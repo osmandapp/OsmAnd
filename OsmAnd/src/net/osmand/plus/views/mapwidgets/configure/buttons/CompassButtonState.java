@@ -137,11 +137,10 @@ public class CompassButtonState extends MapButtonState {
 		return drawable;
 	}
 
-	@Nullable
+	@NonNull
 	@Override
-	public ButtonPositionSize getButtonPositionSize() {
-		ButtonAppearanceParams params = createAppearanceParams();
-		int size = (params.getSize() / 8) + 1;
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (SMALL_SIZE_DP / 8) + 1;
 		return new ButtonPositionSize(getId(), size, true, true).setMoveVertical();
 	}
 }

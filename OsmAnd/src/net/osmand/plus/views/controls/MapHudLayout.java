@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 import org.apache.commons.logging.Log;
 
@@ -63,9 +64,10 @@ public class MapHudLayout extends FrameLayout {
 		for (int i = 0; i < getChildCount(); i++) {
 			View child = getChildAt(i);
 			if (child instanceof MapButton button && button.getVisibility() == VISIBLE) {
-				ButtonPositionSize positionSize = button.getPositionSize();
-				if (positionSize != null) {
-					map.put(positionSize.id, positionSize);
+				MapButtonState buttonState = button.getButtonState();
+				if (buttonState != null) {
+					ButtonPositionSize position = buttonState.getPositionSize();
+					map.put(position.id, buttonState.getPositionSize());
 				}
 			}
 		}
@@ -113,24 +115,25 @@ public class MapHudLayout extends FrameLayout {
 		boolean left = (params.gravity & Gravity.START) == Gravity.START;
 
 		LOG.info("params " + button.getButtonId() + (left ? " left " : " right ")
-				+ (top ? "top " : "bott ") + "marginX " + marginX + "marginY " + marginY);
+				+ (top ? "top " : "bott ") + "marginX " + marginX + " marginY " + marginY);
 		LOG.info(positionSize);
 	}
 
 	public void updateButton(@NonNull MapButton button, boolean save) {
-		ButtonPositionSize positionSize = button.getPositionSize();
-		if (positionSize != null) {
+		MapButtonState buttonState = button.getButtonState();
+		if (buttonState != null) {
+			ButtonPositionSize positionSize = buttonState.getPositionSize();
 			int width = getWidth();
 			// TODO this height incorrect cause it includes statusbar?
 			int height = getHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
-					positionSize.left, positionSize.left ?  params.leftMargin : params.rightMargin,
-					positionSize.top, positionSize.top ?  params.topMargin : params.bottomMargin);
+					positionSize.left, positionSize.left ? params.leftMargin : params.rightMargin,
+					positionSize.top, positionSize.top ? params.topMargin : params.bottomMargin);
 		}
 		if (save) {
-			button.saveMargins();
+			button.savePosition();
 		}
 		updateButtons(); // relayout to avoid overlap
 	}

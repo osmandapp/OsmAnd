@@ -1,5 +1,7 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.MotionEvent;
@@ -17,16 +19,16 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 public class MapButtonTouchListener implements OnTouchListener {
 
-	private final MapButton buttonState;
+	private final MapButtonState buttonState;
 	private final int padding;
 	private int initialMarginX = 0;
 	private int initialMarginY = 0;
 	private float initialTouchX = 0;
 	private float initialTouchY = 0;
 
-	public MapButtonTouchListener(MapButton buttonState, @NonNull Context context) {
+	public MapButtonTouchListener(@NonNull MapButtonState buttonState, @NonNull Context context) {
 		this.buttonState = buttonState;
-		padding = AndroidUtils.dpToPx(context, ButtonPositionSize.DEF_MARGIN_DP);
+		padding = AndroidUtils.dpToPx(context, DEF_MARGIN_DP);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

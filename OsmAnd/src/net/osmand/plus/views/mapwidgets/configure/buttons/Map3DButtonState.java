@@ -9,7 +9,6 @@ import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,7 +20,6 @@ import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class Map3DButtonState extends MapButtonState {
 
-	private final CommonPreference<Long> positionPref;
 	private final CommonPreference<Map3DModeVisibility> visibilityPref;
 
 	private float elevationAngle = DEFAULT_ELEVATION_ANGLE;
@@ -31,7 +29,6 @@ public class Map3DButtonState extends MapButtonState {
 		super(app, MAP_3D_HUD_ID);
 
 		this.visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
-		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
 	}
 
 	@NonNull
@@ -80,12 +77,6 @@ public class Map3DButtonState extends MapButtonState {
 		return visibilityPref;
 	}
 
-	@Nullable
-	@Override
-	public CommonPreference<Long> getPositionPref() {
-		return positionPref;
-	}
-
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
@@ -97,11 +88,10 @@ public class Map3DButtonState extends MapButtonState {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
 	}
 
-	@Nullable
+	@NonNull
 	@Override
-	public ButtonPositionSize getButtonPositionSize() {
-		ButtonAppearanceParams params = createAppearanceParams();
-		int size = (params.getSize() / 8) + 1;
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (BIG_SIZE_DP / 8) + 1;
 		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical().setMoveHorizontal();
 	}
 }

@@ -37,7 +37,6 @@ public class QuickActionButtonState extends MapButtonState {
 	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
 	private final CommonPreference<String> quickActionsPref;
-	private final CommonPreference<Long> positionPref;
 
 	private final MapQuickActionLayer quickActionLayer;
 
@@ -49,7 +48,6 @@ public class QuickActionButtonState extends MapButtonState {
 		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
 		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
-		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
 	}
 
 	@Override
@@ -118,12 +116,6 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public CommonPreference<Boolean> getVisibilityPref() {
 		return visibilityPref;
-	}
-
-	@Nullable
-	@Override
-	public CommonPreference<Long> getPositionPref() {
-		return positionPref;
 	}
 
 	@NonNull
@@ -223,11 +215,10 @@ public class QuickActionButtonState extends MapButtonState {
 		return super.getIcon(iconId, color, nightMode, mapIcon);
 	}
 
-	@Nullable
+	@NonNull
 	@Override
-	public ButtonPositionSize getButtonPositionSize() {
-		ButtonAppearanceParams params = createAppearanceParams();
-		int size = (params.getSize() / 8) + 1;
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (BIG_SIZE_DP / 8) + 1;
 		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical().setMoveHorizontal();
 	}
 }

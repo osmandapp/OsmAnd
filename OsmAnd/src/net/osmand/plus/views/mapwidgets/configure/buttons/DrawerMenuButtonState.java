@@ -6,7 +6,6 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,11 +58,10 @@ public class DrawerMenuButtonState extends MapButtonState {
 		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
 	}
 
-	@Nullable
+	@NonNull
 	@Override
-	public ButtonPositionSize getButtonPositionSize() {
-		ButtonAppearanceParams params = createAppearanceParams();
-		int size = (params.getSize() / 8) + 1;
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (BIG_SIZE_DP / 8) + 1;
 		return new ButtonPositionSize(getId(), size, true, false).setMoveHorizontal();
 	}
 }

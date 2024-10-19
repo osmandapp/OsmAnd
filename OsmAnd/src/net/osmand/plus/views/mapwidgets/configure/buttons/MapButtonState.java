@@ -34,6 +34,8 @@ public abstract class MapButtonState {
 	protected final CommonPreference<Integer> sizePref;
 	protected final CommonPreference<Float> opacityPref;
 	protected final CommonPreference<Integer> cornerRadiusPref;
+	protected final CommonPreference<Long> positionPref;
+	protected final ButtonPositionSize positionSize;
 
 	public MapButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		this.id = id;
@@ -46,6 +48,8 @@ public abstract class MapButtonState {
 		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
 		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
+		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
+		this.positionSize = createButtonPosition();
 	}
 
 	@NonNull
@@ -66,6 +70,9 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public abstract ButtonAppearanceParams createDefaultAppearanceParams();
+
+	@NonNull
+	public abstract ButtonPositionSize createDefaultButtonPosition();
 
 	@NonNull
 	public CommonPreference<String> getIconPref() {
@@ -90,9 +97,14 @@ public abstract class MapButtonState {
 	@NonNull
 	public abstract CommonPreference getVisibilityPref();
 
-	@Nullable
+	@NonNull
 	public CommonPreference<Long> getPositionPref() {
-		return null;
+		return positionPref;
+	}
+
+	@NonNull
+	public ButtonPositionSize getPositionSize() {
+		return positionSize;
 	}
 
 	@NonNull
@@ -118,8 +130,16 @@ public abstract class MapButtonState {
 		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);
 	}
 
-	@Nullable
-	public abstract ButtonPositionSize getButtonPositionSize();
+	@NonNull
+	protected ButtonPositionSize createButtonPosition() {
+		ButtonPositionSize position = createDefaultButtonPosition();
+
+		Long value = positionPref.get();
+		if (value != null && value > 0) {
+			position.fromLongValue(value);
+		}
+		return position;
+	}
 
 	@Nullable
 	public Drawable getIcon(@ColorInt int color, boolean nightMode, boolean mapIcon) {

@@ -6,7 +6,6 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -57,11 +56,10 @@ public class ZoomOutButtonState extends MapButtonState {
 		return new ButtonAppearanceParams("ic_zoom_out", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
-	@Nullable
+	@NonNull
 	@Override
-	public ButtonPositionSize getButtonPositionSize() {
-		ButtonAppearanceParams params = createAppearanceParams();
-		int size = (params.getSize() / 8) + 1;
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (BIG_SIZE_DP / 8) + 1;
 		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical();
 	}
 }

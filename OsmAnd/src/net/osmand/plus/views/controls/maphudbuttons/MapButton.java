@@ -40,7 +40,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -65,7 +64,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected MapActivity mapActivity;
 	protected WidgetsVisibilityHelper visibilityHelper;
 
-	protected ButtonPositionSize positionSize;
 	protected ButtonAppearanceParams appearanceParams;
 	protected ButtonAppearanceParams customAppearanceParams;
 
@@ -141,23 +139,6 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return buttonState != null ? buttonState.getId() : "";
 	}
 
-	@Nullable
-	public ButtonPositionSize getPositionSize() {
-		if (positionSize == null) {
-			MapButtonState buttonState = getButtonState();
-			if (buttonState != null) {
-				positionSize = buttonState.getButtonPositionSize();
-
-				CommonPreference<Long> preference = buttonState.getPositionPref();
-				Long value = preference != null ? preference.get() : null;
-				if (value != null && value > 0) {
-					positionSize.fromLongValue(preference.get());
-				}
-			}
-		}
-		return positionSize;
-	}
-
 	@NonNull
 	public OsmandMapTileView getMapView() {
 		return app.getOsmandMap().getMapView();
@@ -202,14 +183,15 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public void setUseCustomPosition(boolean useCustomPosition) {
 		this.useCustomPosition = useCustomPosition;
 
-		if (useCustomPosition) {
+		MapButtonState buttonState = getButtonState();
+		if (useCustomPosition && buttonState != null) {
 			setOnLongClickListener(v -> {
 				Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
 				vibrator.vibrate(VIBRATE_SHORT);
 				setScaleX(1.5f);
 				setScaleY(1.5f);
 				setAlpha(0.95f);
-				setOnTouchListener(new MapButtonTouchListener(this, mapActivity));
+				setOnTouchListener(new MapButtonTouchListener(buttonState, mapActivity));
 				return true;
 			});
 		}
@@ -398,12 +380,11 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return AndroidUiHelper.updateVisibility(this, visible);
 	}
 
-	public void saveMargins() {
+	public void savePosition() {
 		MapButtonState buttonState = getButtonState();
-		ButtonPositionSize positionSize = getPositionSize();
-		CommonPreference<Long> positionPref = buttonState != null ? buttonState.getPositionPref() : null;
-		if (positionSize != null && positionPref != null && useCustomPosition) {
-			positionPref.set(positionSize.toLongValue());
+		if (buttonState != null && useCustomPosition) {
+			ButtonPositionSize positionSize = buttonState.getPositionSize();
+			buttonState.getPositionPref().set(positionSize.toLongValue());
 		}
 	}
 
