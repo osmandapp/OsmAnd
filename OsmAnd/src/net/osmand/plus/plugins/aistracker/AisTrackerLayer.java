@@ -414,7 +414,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     }
     private void initTestObject5() {
         // law enforcement
-        AisObject ais = new AisObject(34569, 1, 20, 5, 1, 15,
+        AisObject ais = new AisObject(34569, 1, 20, 5 /* moored */, 1, 15,
                 25.0, 8.4, 50.739d, 7.0931d, 0.0);
         updateAisObjectList(ais);
         ais = new AisObject(34569, 5, 0, "TEST-CALLSIGN3",
