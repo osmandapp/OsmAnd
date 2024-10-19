@@ -33,6 +33,7 @@ public final class AisObjectConstants {
         AIS_VESSEL_COMMERCIAL,
         AIS_VESSEL_AUTHORITIES,
         AIS_VESSEL_SAR,
+        AIS_VESSEL_OTHER,
         AIS_LANDSTATION,
         AIS_AIRPLANE,
         AIS_SART,

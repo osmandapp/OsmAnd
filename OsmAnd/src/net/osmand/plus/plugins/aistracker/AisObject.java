@@ -276,7 +276,7 @@ public class AisObject {
             case 94: // Other Type, Hazardous category D
             case 99: // Other Type, no additional information
             default:
-                this.objectClass = AIS_VESSEL;
+                this.objectClass = AIS_VESSEL_OTHER;
                 break;
         }
         /* for the case that no ship type was transmitted... */
@@ -399,6 +399,7 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
             case AIS_VESSEL_AUTHORITIES:
             case AIS_VESSEL_SAR:
+            case AIS_VESSEL_OTHER:
             case AIS_INVALID:
                 return R.drawable.ais_vessel;
             case AIS_LANDSTATION:
@@ -433,6 +434,8 @@ public class AisObject {
                 return Color.argb(0xff, 0x55, 0x6b, 0x2f); // 0x556b2f: darkolivegreen
             case AIS_VESSEL_SAR:
                 return Color.argb(0xff, 0xfa, 0x80, 0x72); // 0xfa8072: salmon
+            case AIS_VESSEL_OTHER:
+                return Color.argb(0xff, 0x00, 0xbf, 0xff); // 0x00bfff: deepskyblue
             default:
                 return 0; // transparent
         }
@@ -539,6 +542,7 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
             case AIS_VESSEL_AUTHORITIES:
             case AIS_VESSEL_SAR:
+            case AIS_VESSEL_OTHER:
             case AIS_AIRPLANE:
                 return true;
             default:
@@ -581,6 +585,7 @@ public class AisObject {
             case AIS_VESSEL_COMMERCIAL:
             case AIS_VESSEL_AUTHORITIES:
             case AIS_VESSEL_SAR:
+            case AIS_VESSEL_OTHER:
                 switch (this.ais_navStatus) {
                     case 5: // moored
                         /* sometimes the ais_navStatus is wrong and contradicts other data... */
