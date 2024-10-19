@@ -24,6 +24,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -332,13 +334,11 @@ public class AisObject {
     }
 
     public void set(@NonNull AisObject ais) {
+        /* attention: this method does not produce an exact copy of the given object */
         this.ais_mmsi = ais.getMmsi();
         this.ais_msgType = ais.getMsgType();
         if (ais.getTimestamp() != 0) { this.ais_timeStamp = ais.getTimestamp(); }
         if (ais.getImo() != 0 ) { this.ais_imo = ais.getImo(); }
-        if (ais.getHeading() != INVALID_HEADING ) { this.ais_heading = ais.getHeading(); }
-        if (ais.getNavStatus() != INVALID_NAV_STATUS ) { this.ais_navStatus = ais.getNavStatus(); }
-        if (ais.getManInd() != INVALID_MANEUVER_INDICATOR ) { this.ais_manInd = ais.getManInd(); }
         if (ais.getShipType() != INVALID_SHIP_TYPE ) { this.ais_shipType = ais.getShipType(); }
         if (ais.getDimensionToBow() != INVALID_DIMENSION ) { this.ais_dimensionToBow = ais.getDimensionToBow(); }
         if (ais.getDimensionToStern() != INVALID_DIMENSION ) { this.ais_dimensionToStern = ais.getDimensionToStern(); }
@@ -351,19 +351,32 @@ public class AisObject {
         if (ais.getAltitude() != INVALID_ALTITUDE) { this.ais_altitude = ais.getAltitude(); }
         if (ais.getAidType() != UNSPECIFIED_AID_TYPE) { this.ais_aidType = ais.getAidType(); }
         if (ais.getDraught() != INVALID_DRAUGHT) { this.ais_draught = ais.getDraught(); }
-        if (ais.getCog() != INVALID_COG) { this.ais_cog = ais.getCog(); }
-        if (ais.getSog() != INVALID_SOG) { this.ais_sog = ais.getSog(); }
-        if (ais.getRot() != INVALID_ROT) { this.ais_rot = ais.getRot(); }
         if (ais.getPosition() != null) { this.ais_position = ais.getPosition(); }
         if (ais.getCallSign() != null) { this.ais_callSign = ais.getCallSign(); }
         if (ais.getShipName() != null) { this.ais_shipName = ais.getShipName(); }
         if (ais.getDestination() != null ) { this.ais_destination = ais.getDestination(); }
 
-        this.countryCode = ais.getCountryCode();
+        /* the following values may change its value from VALID to INVALID,
+           hence overwriting with INVALID is accepted in some cases... */
+        final List<Integer> msgListHeading = Arrays.asList(1, 2, 3, 18, 19, 27);
+        final List<Integer> msgListStatus = Arrays.asList(1, 2, 3, 27);
+        final List<Integer> msgListCourse = Arrays.asList(1, 2, 3, 9, 18, 19, 27);
+        if (msgListHeading.contains(ais_msgType)) {
+            this.ais_heading = ais.getHeading();
+        }
+        if (msgListStatus.contains(ais_msgType)) {
+            this.ais_navStatus = ais.getNavStatus();
+            this.ais_manInd = ais.getManInd();
+            this.ais_rot = ais.getRot();
+        }
+        if (msgListCourse.contains(ais_msgType)) {
+            this.ais_cog = ais.getCog();
+            this.ais_sog = ais.getSog();
+        }
 
-        /* this method does not produce an exact copy of the given object, here are the differences: */
+        this.countryCode = ais.getCountryCode();
         this.lastUpdate = System.currentTimeMillis();
-        lastMessageReceived = this.lastUpdate;
+        lastMessageReceived = this.lastUpdate; // lastMessageReceived is a static variable for the entire AisObject class
         if (this.msgTypes == null) {
             this.msgTypes = new TreeSet<>();
         }
@@ -570,12 +583,13 @@ public class AisObject {
             case AIS_VESSEL_SAR:
                 switch (this.ais_navStatus) {
                     case 5: // moored
-                        return true;
+                        /* sometimes the ais_navStatus is wrong and contradicts other data... */
+                        return (ais_cog == INVALID_COG) || (ais_sog < 0.2d);
                     default:
                         if (msgTypes.contains(18) || msgTypes.contains(24)
                         ||  msgTypes.contains(1)  || msgTypes.contains(3)) {
                             if ((ais_cog == INVALID_COG /* maybe remove this condition */)
-                                    && (ais_sog == 0.0d)) {
+                                    && (ais_sog < 0.2d)) {
                                 return true;
                             }
                         }
