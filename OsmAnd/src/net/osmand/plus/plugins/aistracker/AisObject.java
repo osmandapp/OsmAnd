@@ -545,6 +545,8 @@ public class AisObject {
             case AIS_VESSEL_OTHER:
             case AIS_AIRPLANE:
                 return true;
+            case AIS_INVALID:
+                return (this.ais_sog != INVALID_SOG) && (this.ais_sog > 0.0d);
             default:
                 return false;
         }
