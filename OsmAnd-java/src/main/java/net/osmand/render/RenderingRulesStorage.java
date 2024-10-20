@@ -71,31 +71,7 @@ public class RenderingRulesStorage {
 	public interface RenderingRulesStorageResolver {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException;
 	}
-
-	public static RenderingRulesStorage initFromResources(String styleName, String resourceName) {
-		try {
-			final RenderingRulesStorage storage = new RenderingRulesStorage(styleName,
-					readRenderingConstantsFromIS(RenderingRulesStorage.class.getResourceAsStream(resourceName)));
-			final RenderingRulesStorageResolver resolver = (name, ref) -> {
-				final String resource = name + ".render.xml";
-				final RenderingRulesStorage depends = new RenderingRulesStorage(name,
-						readRenderingConstantsFromIS(RenderingRulesStorage.class.getResourceAsStream(resource)));
-				final InputStream depStream = RenderingRulesStorage.class.getResourceAsStream(resource);
-				depends.parseRulesFromXmlInputStream(depStream, ref, false);
-				depStream.close();
-				return depends;
-			};
-			final InputStream xmlStream = RenderingRulesStorage.class.getResourceAsStream(resourceName);
-			storage.parseRulesFromXmlInputStream(xmlStream, resolver, false);
-			xmlStream.close();
-			return storage;
-		} catch (XmlPullParserException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
+	
 	public RenderingRulesStorage(String name, Map<String, String> renderingConstants){
 		getDictionaryValue("");
 		this.renderingName = name;
@@ -640,9 +616,26 @@ public class RenderingRulesStorage {
 			styleName = "test";
 			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
-
-		final Map<String, String> renderingConstants = readRenderingConstantsFromIS(defaultIS);
+		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 		
+		try {
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+			parser.setInput(defaultIS, "UTF-8");
+			int tok;
+			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+				if (tok == XmlPullParser.START_TAG) {
+					String tagName = parser.getName();
+					if (tagName.equals("renderingConstant")) {
+						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
+							renderingConstants.put(parser.getAttributeValue("", "name"), 
+									parser.getAttributeValue("", "value"));
+						}
+					}
+				}
+			}
+		} finally {
+			defaultIS.close();
+		}
 		RenderingRulesStorage storage = new RenderingRulesStorage(styleName, renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -706,8 +699,12 @@ public class RenderingRulesStorage {
 		//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
 	}
 
-	public static Map<String, String> readRenderingConstantsFromIS(InputStream is) throws XmlPullParserException, IOException {
+	public static RenderingRulesStorage getTestStorageForStyle(String filePath) throws XmlPullParserException, IOException  {
+		RenderingRulesStorage.STORE_ATTRIBUTES = true;
 		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+
+		InputStream is = new FileInputStream(filePath);
+		// buggy attributes
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
@@ -726,15 +723,6 @@ public class RenderingRulesStorage {
 		} finally {
 			is.close();
 		}
-		return renderingConstants;
-	}
-
-	public static RenderingRulesStorage getTestStorageForStyle(String filePath) throws XmlPullParserException, IOException  {
-		RenderingRulesStorage.STORE_ATTRIBUTES = true;
-
-		InputStream is = new FileInputStream(filePath);
-		Map<String, String> renderingConstants = readRenderingConstantsFromIS(is);
-
 		is = new FileInputStream(filePath);
 		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
