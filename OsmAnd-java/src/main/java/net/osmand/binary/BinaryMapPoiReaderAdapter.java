@@ -656,7 +656,7 @@ public class BinaryMapPoiReaderAdapter {
 							}
 						}
 					}
-					if (matches) {
+					if (matches && !isDuplicateRouteTrackPoi(am, req)) {
 						req.collectRawData(am);
 						req.publish(am);
 					}
@@ -667,6 +667,29 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 		}
+	}
+
+	private boolean isDuplicateRouteTrackPoi(Amenity am, SearchRequest<Amenity> req) {
+		final String ROUTES = "routes";
+		final String ROUTE_ID = "route_id";
+		final String ROUTE_OSM_PREFIX = "osm_";
+		final String ROUTE_TRACK = "route_track";
+		if (am.getType() != null && am.getSubType() != null && ROUTES.equals(am.getType().getKeyName())
+				&& (ROUTE_TRACK.equals(am.getSubType()) || am.getSubType().startsWith(ROUTE_OSM_PREFIX))
+				&& am.getAdditionalInfo(ROUTE_ID) != null) {
+			final String routeId = am.getAdditionalInfo(ROUTE_ID);
+			final String type = am.getType().getKeyName();
+			final String subType = am.getSubType();
+			for (Amenity res : req.getSearchResults()) {
+				if (res.getType() != null && res.getSubType() != null &&
+						routeId.equals(res.getAdditionalInfo(ROUTE_ID)) &&
+						type.equals(res.getType().getKeyName()) &&
+						subType.equals(res.getSubType())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private boolean readPoiData(int left31, int right31, int top31, int bottom31,
@@ -698,7 +721,7 @@ public class BinaryMapPoiReaderAdapter {
 				long oldLim = codedIS.pushLimitLong((long) len);
 				Amenity am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region, true);
 				codedIS.popLimit(oldLim);
-				if (am != null) {
+				if (am != null && !isDuplicateRouteTrackPoi(am, req) /* really deduplicate here? */) {
 					if (toSkip != null) {
 						int xp = (int) MapUtils.getTileNumberX(zSkip, am.getLocation().getLongitude());
 						int yp = (int) MapUtils.getTileNumberY(zSkip, am.getLocation().getLatitude());
