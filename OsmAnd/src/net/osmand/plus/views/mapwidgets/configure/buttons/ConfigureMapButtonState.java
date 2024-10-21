@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class ConfigureMapButtonState extends MapButtonState {
 
@@ -21,6 +20,7 @@ public class ConfigureMapButtonState extends MapButtonState {
 	public ConfigureMapButtonState(@NonNull OsmandApplication app) {
 		super(app, LAYERS_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
+		setupButtonPosition(true, true, true, false, false);
 	}
 
 	@NonNull
@@ -41,6 +41,11 @@ public class ConfigureMapButtonState extends MapButtonState {
 	}
 
 	@Override
+	public int getDefaultSize() {
+		return SMALL_SIZE_DP;
+	}
+
+	@Override
 	public boolean isEnabled() {
 		return visibilityPref.get();
 	}
@@ -55,13 +60,6 @@ public class ConfigureMapButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		return new ButtonAppearanceParams(appMode.getIconName(), SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
-	}
-
-	@NonNull
-	@Override
-	public ButtonPositionSize createDefaultButtonPosition() {
-		int size = (SMALL_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, true, true).setMoveHorizontal();
+		return new ButtonAppearanceParams(appMode.getIconName(), getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 }

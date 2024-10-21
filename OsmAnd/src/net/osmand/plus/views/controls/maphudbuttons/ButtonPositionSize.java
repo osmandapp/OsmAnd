@@ -24,6 +24,10 @@ public class ButtonPositionSize {
 	public boolean xMove = false, yMove = false, randomMove = false;
 	public String id;
 
+	public ButtonPositionSize(String id) {
+		this(id, 7, true, true);
+	}
+
 	public ButtonPositionSize(String id, int sz8dp, boolean left, boolean top) {
 		this.id = id;
 		width = height = sz8dp;
@@ -43,6 +47,11 @@ public class ButtonPositionSize {
 
 	public ButtonPositionSize setMoveRandom() {
 		this.randomMove = true;
+		return this;
+	}
+
+	public ButtonPositionSize setSize(int sz8dp) {
+		this.width = this.height = sz8dp;
 		return this;
 	}
 
