@@ -547,6 +547,9 @@ public class MapPoiTypes {
                                 }
                             }
                         }
+						case "poi_types" -> {
+							// just ignore the root tag of poi_types.xml
+						}
 	                    default -> log.warn("Unknown start tag encountered: " + name);
                     }
 				} else if (tok == XmlPullParser.END_TAG) {

@@ -1493,13 +1493,13 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
-	public BinaryMapIndexReader[] getQuickSearchFiles() {
+	public BinaryMapIndexReader[] getQuickSearchFiles(boolean includeTravelObf) {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
 			BinaryMapIndexReader shallowReader = r.getShallowReader();
 			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData()) &&
-					!r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					(includeTravelObf || !r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT))) {
 				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
 				if (reader != null) {
 					readers.add(reader);

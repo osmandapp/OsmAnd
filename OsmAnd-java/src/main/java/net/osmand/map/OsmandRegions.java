@@ -829,6 +829,8 @@ public class OsmandRegions {
 					it.remove();
 				} else if (region.getRegionId().contains("basemap")) {
 					it.remove();
+				} else if (region.getRegionId().startsWith("World_")) {
+					it.remove();
 				}
 			} else {
 				it.remove();
