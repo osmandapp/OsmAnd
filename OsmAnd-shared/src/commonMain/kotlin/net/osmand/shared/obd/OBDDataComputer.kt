@@ -110,10 +110,30 @@ object OBDDataComputer {
 			OBD_RPM_COMMAND,
 			"obd_rpm",
 			OBDComputerWidgetFormatter("%d")),
+		ENGINE_RUNTIME(
+			false,
+			OBD_ENGINE_RUNTIME_COMMAND,
+			"obd_engine_runtime",
+			OBDComputerWidgetFormatter("%s")),
+		FUEL_PRESSURE(
+			false,
+			OBD_FUEL_PRESSURE_COMMAND,
+			"obd_fuel_pressure",
+			OBDComputerWidgetFormatter("%d")),
 		FUEL_LEFT_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_left_distance",
+			OBDComputerWidgetFormatter("%.0f")),
+		CALCULATED_ENGINE_LOAD(
+			false,
+			OBD_CALCULATED_ENGINE_LOAD_COMMAND,
+			"obd_calculated_engine_load",
+			OBDComputerWidgetFormatter("%.0f")),
+		THROTTLE_POSITION(
+			false,
+			OBD_THROTTLE_POSITION_COMMAND,
+			"obd_throttle_position",
 			OBDComputerWidgetFormatter("%.0f")),
 		FUEL_LEFT_PERCENT(
 			false,
@@ -141,6 +161,11 @@ object OBDDataComputer {
 			false,
 			OBD_AIR_INTAKE_TEMP_COMMAND,
 			"obd_air_intake_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		ENGINE_OIL_TEMPERATURE(
+			false,
+			OBD_ENGINE_OIL_TEMPERATURE_COMMAND,
+			"obd_engine_oil_temperature",
 			OBDComputerWidgetFormatter("%.0f")),
 		TEMPERATURE_AMBIENT(
 			false,
@@ -212,16 +237,18 @@ object OBDDataComputer {
 
 		private fun compute(): Any? {
 			val locValues = ArrayList(values)
-			if (locValues.size > 0 && locValues[0] == OBDDataField.NO_DATA) {
+			if (locValues.size > 0 && locValues[locValues.size - 1] == OBDDataField.NO_DATA) {
 				return "N/A"
 			}
 			return when (type) {
 				TEMPERATURE_AMBIENT,
 				TEMPERATURE_COOLANT,
 				TEMPERATURE_INTAKE,
+				ENGINE_OIL_TEMPERATURE,
 				SPEED,
 				BATTERY_VOLTAGE,
 				FUEL_CONSUMPTION_RATE_SENSOR,
+				FUEL_PRESSURE,
 				RPM -> {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
@@ -270,6 +297,8 @@ object OBDDataComputer {
 					null
 				}
 
+				THROTTLE_POSITION,
+				CALCULATED_ENGINE_LOAD,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].value as Float
@@ -286,14 +315,8 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_TYPE -> {
-					if (locValues.size > 0) {
-						locValues[locValues.size - 1].value
-					} else {
-						null
-					}
-				}
-
+				FUEL_TYPE,
+				ENGINE_RUNTIME,
 				VIN -> if (locValues.size > 0) {
 					(locValues[locValues.size - 1]).value
 				} else {
@@ -305,7 +328,7 @@ object OBDDataComputer {
 		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
 			val first = locValues[locValues.size - 2]
 			val last = locValues[locValues.size - 1]
-			val diffPerc = first.value as Float - last.value as Float
+			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 			val diffTime = last.timestamp - first.timestamp
 			println("diftime $diffTime; diffPerc $diffPerc")
 			return diffPerc / diffTime * 1000 * 3600

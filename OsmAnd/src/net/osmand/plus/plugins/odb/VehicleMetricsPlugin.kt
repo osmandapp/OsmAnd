@@ -143,10 +143,25 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				WidgetType.OBD_RPM,
 				OBDDataComputer.OBDTypeWidget.RPM)
 
+			WidgetType.OBD_ENGINE_RUNTIME -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_ENGINE_RUNTIME,
+				OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME)
+
+			WidgetType.OBD_FUEL_PRESSURE -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_FUEL_PRESSURE,
+				OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE)
+
 			WidgetType.OBD_AIR_INTAKE_TEMP -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_AIR_INTAKE_TEMP,
 				OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE)
+
+			WidgetType.ENGINE_OIL_TEMPERATURE -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.ENGINE_OIL_TEMPERATURE,
+				OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE)
 
 			WidgetType.OBD_AMBIENT_AIR_TEMP -> return OBDTextWidget(
 				mapActivity,
@@ -162,6 +177,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				mapActivity,
 				WidgetType.OBD_FUEL_LEFT_PERCENT,
 				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT)
+
+			WidgetType.OBD_CALCULATED_ENGINE_LOAD -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_CALCULATED_ENGINE_LOAD,
+				OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD)
+
+			WidgetType.OBD_THROTTLE_POSITION -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_THROTTLE_POSITION,
+				OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION)
 
 			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(
 				mapActivity,
@@ -552,9 +577,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Int)
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
+			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature((data as Int).toFloat())
 
+			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)//todo time
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
@@ -562,7 +589,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
+			OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD,
+			OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
 			OBDDataComputer.OBDTypeWidget.VIN,
+			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE,
 			OBDDataComputer.OBDTypeWidget.RPM -> data
 		}
 
@@ -573,8 +603,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
+			OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE -> app.getString(R.string.kpa_unit)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getDistanceUnit()
+			OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD,
+			OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT -> app.getString(R.string.percent_unit)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> app.getString(R.string.liter)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> app.getString(R.string.percent_hour)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
@@ -582,10 +616,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
+			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> getTemperatureUnit().symbol
 
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE -> app.getString(R.string.unit_volt)
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
+			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
 			OBDDataComputer.OBDTypeWidget.VIN -> null
 		}
 	}
@@ -596,6 +632,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		} else {
 			temperature * 1.8f + 32
 		}
+	}
+
+	private fun getFormattedTime(time: Int): String {
+		return OsmAndFormatter.getFormattedDuration(time.toLong(), app)
 	}
 
 	private fun getConvertedSpeed(speed: Int): Float {
