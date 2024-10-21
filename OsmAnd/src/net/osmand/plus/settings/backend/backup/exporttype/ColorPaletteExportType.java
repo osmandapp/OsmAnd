@@ -13,7 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.resources.CachedAssetsVersion;
+import net.osmand.plus.resources.AssetsCollection;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -21,7 +21,10 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -99,9 +102,13 @@ public class ColorPaletteExportType extends LocalResourcesExportType {
 	protected boolean shouldSkipLocalItem(@NonNull OsmandApplication app, @NonNull LocalItem localItem) {
 		File file = localItem.getFile();
 		ResourceManager resourceManager = app.getResourceManager();
-		CachedAssetsVersion cachedAssetsVersion = resourceManager.getCachedAssetsVersion();
-		Long versionTime = cachedAssetsVersion.getVersionTime(file);
-		boolean notTrackedOrModified = versionTime == null || versionTime < file.lastModified();
-		return !notTrackedOrModified;
+		try {
+			AssetsCollection assetsCollection = resourceManager.getAssets();
+			Long versionTime = assetsCollection.getVersionTime(file);
+			boolean notTrackedOrModified = versionTime == null || versionTime < file.lastModified();
+			return !notTrackedOrModified;
+		} catch (XmlPullParserException | IOException e) {
+			return false;
+		}
 	}
 }
