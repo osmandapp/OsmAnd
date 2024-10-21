@@ -9,33 +9,26 @@ import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class Map3DButtonState extends MapButtonState {
 
-	public final FabMarginPreference fabMarginPref;
-	public final CommonPreference<Map3DModeVisibility> visibilityPref;
+	private final CommonPreference<Map3DModeVisibility> visibilityPref;
+
 	private float elevationAngle = DEFAULT_ELEVATION_ANGLE;
 
 
 	public Map3DButtonState(@NonNull OsmandApplication app) {
 		super(app, MAP_3D_HUD_ID);
-		fabMarginPref = addPreference(new FabMarginPreference(app, "map_3d_mode_margin"));
-		visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
 
-		int portraitMargin = AndroidUtils.calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing);
-		int landscapeMargin = AndroidUtils.calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land);
-		fabMarginPref.setDefaultPortraitMargins(Pair.create(portraitMargin, portraitMargin));
-		fabMarginPref.setDefaultLandscapeMargins(Pair.create(landscapeMargin, landscapeMargin));
+		this.visibilityPref = addPreference(settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class)).makeProfile().cache();
 	}
 
 	@NonNull
@@ -80,12 +73,6 @@ public class Map3DButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public FabMarginPreference getFabMarginPref() {
-		return fabMarginPref;
-	}
-
-	@NonNull
-	@Override
 	public CommonPreference<Map3DModeVisibility> getVisibilityPref() {
 		return visibilityPref;
 	}
@@ -99,5 +86,12 @@ public class Map3DButtonState extends MapButtonState {
 
 	public boolean isFlatMapMode() {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
+	}
+
+	@NonNull
+	@Override
+	public ButtonPositionSize createDefaultButtonPosition() {
+		int size = (BIG_SIZE_DP / 8) + 1;
+		return new ButtonPositionSize(getId(), size, false, false).setMoveRandom();
 	}
 }

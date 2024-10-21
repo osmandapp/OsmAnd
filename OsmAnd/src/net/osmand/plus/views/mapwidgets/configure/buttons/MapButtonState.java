@@ -14,9 +14,9 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -34,6 +34,8 @@ public abstract class MapButtonState {
 	protected final CommonPreference<Integer> sizePref;
 	protected final CommonPreference<Float> opacityPref;
 	protected final CommonPreference<Integer> cornerRadiusPref;
+	protected final CommonPreference<Long> positionPref;
+	protected final ButtonPositionSize positionSize;
 
 	public MapButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		this.id = id;
@@ -46,6 +48,8 @@ public abstract class MapButtonState {
 		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
 		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
+		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
+		this.positionSize = createButtonPosition();
 	}
 
 	@NonNull
@@ -66,6 +70,9 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public abstract ButtonAppearanceParams createDefaultAppearanceParams();
+
+	@NonNull
+	public abstract ButtonPositionSize createDefaultButtonPosition();
 
 	@NonNull
 	public CommonPreference<String> getIconPref() {
@@ -90,9 +97,14 @@ public abstract class MapButtonState {
 	@NonNull
 	public abstract CommonPreference getVisibilityPref();
 
-	@Nullable
-	public FabMarginPreference getFabMarginPref() {
-		return null;
+	@NonNull
+	public CommonPreference<Long> getPositionPref() {
+		return positionPref;
+	}
+
+	@NonNull
+	public ButtonPositionSize getPositionSize() {
+		return positionSize;
 	}
 
 	@NonNull
@@ -116,6 +128,17 @@ public abstract class MapButtonState {
 			cornerRadius = defaultParams.getCornerRadius();
 		}
 		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);
+	}
+
+	@NonNull
+	protected ButtonPositionSize createButtonPosition() {
+		ButtonPositionSize position = createDefaultButtonPosition();
+
+		Long value = positionPref.get();
+		if (value != null && value > 0) {
+			position.fromLongValue(value);
+		}
+		return position;
 	}
 
 	@Nullable
@@ -157,12 +180,6 @@ public abstract class MapButtonState {
 	protected <T> CommonPreference<T> addPreference(@NonNull CommonPreference<T> preference) {
 		allPreferences.add(preference);
 		return preference;
-	}
-
-	@NonNull
-	protected FabMarginPreference addPreference(@NonNull FabMarginPreference fabMarginPreference) {
-		allPreferences.addAll(fabMarginPreference.getInternalPrefs());
-		return fabMarginPreference;
 	}
 
 	public boolean hasCustomAppearance() {
