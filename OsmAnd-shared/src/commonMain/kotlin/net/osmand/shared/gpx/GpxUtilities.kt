@@ -306,9 +306,9 @@ object GpxUtilities {
 		fun toStringBundle(): StringBundle {
 			val bundle = StringBundle()
 			bundle.putString("name", name)
-//			color?.let {
+			if (color != 0) {
 				bundle.putString("color", KAlgorithms.colorToString(color))
-//			}
+			}
 			if (!KAlgorithms.isEmpty(iconName)) {
 				bundle.putString(ICON_NAME_EXTENSION, iconName)
 			}

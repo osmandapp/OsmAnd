@@ -12,7 +12,7 @@ actual fun String.format(vararg args: Any?): String {
 		if (this[index] == '%' && index + 1 < this.length) {
 			var argIndex: Int? = null
 			var indexed = false
-			var width: Int? = null
+			var width: String? = null
 			var precision: Int? = null
 			var argType: Char? = null
 
@@ -38,7 +38,7 @@ actual fun String.format(vararg args: Any?): String {
 			}
 
 			if (widthStart > formatSpecifierStart) {
-				width = this.substring(formatSpecifierStart, widthStart).toInt()
+				width = this.substring(formatSpecifierStart, widthStart)
 				formatSpecifierStart = widthStart
 			}
 

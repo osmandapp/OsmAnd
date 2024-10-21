@@ -37,8 +37,8 @@ object SmartFolderHelper {
 	}
 
 	init {
-		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "")
-		osmAndSettings.addPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
+		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
 		readSettings()
 	}
 
@@ -50,9 +50,9 @@ object SmartFolderHelper {
 
 	private fun readSettings() {
 		val newCollection = ArrayList<SmartFolder>()
-		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
+		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
 		if (!KAlgorithms.isEmpty(settingsJson)) {
-			TrackFilterList.parseFilters(settingsJson)?.let { savedFilters ->
+			TrackFilterList.parseFilters(settingsJson!!)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
 					smartFolder.filters?.let {
 						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()

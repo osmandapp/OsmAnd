@@ -64,7 +64,9 @@ class SQLiteAPIImpl : SQLiteAPI {
 					when (obj) {
 						is String -> bindString(index + 1, obj)
 						is Long -> bindLong(index + 1, obj)
+						is Int -> bindLong(index + 1, obj.toLong())
 						is Double -> bindDouble(index + 1, obj)
+						is Float -> bindDouble(index + 1, obj.toDouble())
 						is ByteArray -> bindBlob(index + 1, obj)
 						null -> bindNull(index + 1)
 					}

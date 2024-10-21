@@ -33,6 +33,8 @@ import android.graphics.drawable.*;
 import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.StatFs;
@@ -72,7 +74,9 @@ import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -646,6 +650,14 @@ public class AndroidUtils {
 		return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
 	}
 
+	public static float pxToDpF(@NonNull Context ctx, int px) {
+		if (VERSION.SDK_INT >= VERSION_CODES.UPSIDE_DOWN_CAKE) {
+			return TypedValue.deriveDimension(COMPLEX_UNIT_DIP, px, ctx.getResources().getDisplayMetrics());
+		} else {
+			return px / dpToPxF(ctx, 1);
+		}
+	}
+
 	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		float scaleCoef = app.getOsmandMap().getCarDensityScaleCoef();
@@ -683,6 +695,26 @@ public class AndroidUtils {
 		TypedValue outValue = new TypedValue();
 		ctx.getResources().getValue(resId, outValue, true);
 		return outValue.getFloat();
+	}
+
+	@DrawableRes
+	public static int getActivityIconId(@NonNull OsmandApplication app, @Nullable RouteActivity activity) {
+		return activity != null
+				? getDrawableId(app, activity.getIconName(), R.drawable.ic_action_info_dark)
+				: R.drawable.ic_action_activity;
+	}
+
+	public static boolean hasDrawableId(@NonNull OsmandApplication app, @NonNull String iconName) {
+		return getDrawableId(app, iconName, 0) != 0;
+	}
+
+	@DrawableRes
+	public static int getDrawableId(@NonNull OsmandApplication app, @NonNull String iconName, @DrawableRes int defRes) {
+		int iconId = getDrawableId(app, iconName);
+		if (iconId <= 0) {
+			iconId = RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return iconId > 0 ? iconId : defRes;
 	}
 
 	public static int getDrawableId(OsmandApplication app, String id) {
@@ -1191,12 +1223,6 @@ public class AndroidUtils {
 	public static int getActivityTypeIcon(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
 		int iconId = ctx.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", ctx.getPackageName());
 		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
-	}
-
-	@DrawableRes
-	public static int getIconId(@NonNull Context ctx, @NonNull String resourceName) {
-		int iconId = ctx.getResources().getIdentifier(resourceName, "drawable", ctx.getPackageName());
-		return iconId != 0 ? iconId : R.drawable.ic_action_info_dark;
 	}
 
 	@NonNull

@@ -799,27 +799,7 @@
 \n - Žiadny prístup k offline bodom záujmu z Wikipédie
 \n
 \n OsmAnd je aktívne vyvíjaný a náš projekt a jeho ďalší pokrok závisí od finančných príspevkov na rozvoj a testovanie nových funkcii. Prosím, zvážte nákup OsmAnd+ alebo financovanie konkrétnych nových funkcií alebo všeobecný dar na https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizované navigačné pokyny)
-\n
-\n OsmAnd+ je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. Ponúka offline a online smerovacie funkcie, vrátane hlasových pokynov pre každé zabočenie (\'turn-by-turn\').
-\n
-\nOsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie.
-\n
-\n Niektoré z hlavných funkcií:
-\n - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia)
-\n - Kompaktné offline vektorové mapy pre celý svet
-\n - Neobmedzené sťahovanie máp krajín a regiónov priamo z aplikácie
-\n - Funkcia offline Wikipédie (sťahovanie bodov záujmu z Wikipédie), výborné pre objavovanie miest
-\n - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, Body záujmu, Obľúbené, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou, topografické objekty ako vrstevnice/tieňované svahy/slony svahov
-\n
-\n - Offline vyhľadávanie adries a miest (POI)
-\n - Offline smerovanie (navigácia) na stredné vzdialenosti
-\n - Režimy pre auto, bicykel a chodcov s voliteľnými nastaveniami:
-\n - Automatickým denným / nočným režimom
-\n - Približovanie mapy v závislosti na rýchlosti
-\n - Otáčanie mapy podľa kompasu alebo smeru pohybu
-\n - Navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané aj TTS hlasy (prevod textu na reč)
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizované navigačné pokyny)\n\n OsmAnd+ je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. Ponúka offline a online smerovacie funkcie, vrátane hlasových pokynov pre každé zabočenie (\'turn-by-turn\').\n\nOsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie.\n\n Niektoré z hlavných funkcií:\n - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia)\n - Kompaktné offline vektorové mapy pre celý svet\n - Neobmedzené sťahovanie máp krajín a regiónov priamo z aplikácie\n - Funkcia offline Wikipédie (sťahovanie bodov záujmu z Wikipédie), výborné pre objavovanie miest\n - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, Body záujmu, Obľúbené, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou, topografické objekty ako vrstevnice/tieňované svahy/slony svahov\n\n - Offline vyhľadávanie adries a miest (POI)\n - Offline smerovanie (navigácia) na stredné vzdialenosti\n - Režimy pre auto, bicykel a chodcov s voliteľnými nastaveniami:\n - Automatickým denným / nočným režimom\n - Približovanie mapy v závislosti na rýchlosti\n - Otáčanie mapy podľa kompasu alebo smeru pohybu\n - Navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané aj TTS hlasy (prevod textu na reč)</string>
     <string name="gps_not_available">Povoľte v nastaveniach GPS</string>
     <string name="map_widget_monitoring_services">Monitorovacie služby</string>
     <string name="no_route">Žiadna cesta</string>
@@ -2178,27 +2158,8 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom k voľným a kvalitným celosvetovým údajom z OpenStreetMap (OSM).
 \n
 \n Používajte hlasovú aj optickú navigáciu, zobrazenie bodov záujmu, vytváranie a spravovanie GPX stôp, znázornenie vrstevníc a topografických údajov (pomocou doplnkového modulu), režimy auta, cyklistu, chodca, editáciu OSM a omnoho viac.</string>
-    <string name="osmand_extended_description_part2">GPS navigácia
-\n • Zvoľte medzi režimom online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)
-\n • Hlasové navádzanie po jednotlivých zákrutách vás prevedú trasou (nahraté aj syntetizované hlasy)
-\n • Automatické prepočítanie trasy ak sa odchýlite z trasy
-\n • Navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa
-\n • Pre bezpečnejšiu jazdu sa automaticky prepína denný a nočný režim
-\n • Zobraziť obmedzenia rýchlosti a dostať upozornenie pri ich prekročení
-\n • Priblíženie mapy sa prispôsobuje rýchlosti
-\n • Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc
-\n • Umožňuje zadať prechodné body trasy
-\n • Nahrajte alebo odošlite GPX stopu a nasledujte ju
-\n</string>
-    <string name="osmand_extended_description_part3">Mapa 
-\n • Zobrazenie POI (bodov záujmu) v okolí
-\n • Možnosť zobrazenia mapy v smere pohybu (alebo kompasu)
-\n • Zobrazovanie vašej pozície a orientácie na mape
-\n • Zdieľajte polohu, aby vás priatelia modli nájsť
-\n • Uloženie obľúbených miest
-\n • Môže zvoliť ako zobraziť názvy na mape: v angličtine, lokálnom jazyku alebo foneticky
-\n • Umožňuje zobraziť špecializované podkladové mapy z Internetu, satelitné snímky (z Bing), rôzne prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie vrstvy s nastaviteľnou priehľadnosťou
-\n</string>
+    <string name="osmand_extended_description_part2">GPS navigácia \n • Zvoľte medzi režimom online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)\n • Hlasové navádzanie po jednotlivých zákrutách vás prevedú trasou (nahraté aj syntetizované hlasy)\n • Automatické prepočítanie trasy ak sa odchýlite z trasy\n • Navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa\n • Pre bezpečnejšiu jazdu sa automaticky prepína denný a nočný režim\n • Zobraziť obmedzenia rýchlosti a dostať upozornenie pri ich prekročení\n • Priblíženie mapy sa prispôsobuje rýchlosti\n • Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc\n • Umožňuje zadať prechodné body trasy\n • Nahrajte alebo odošlite GPX stopu a nasledujte ju</string>
+    <string name="osmand_extended_description_part3">Mapa\n • Zobrazenie POI (bodov záujmu) v okolí\n • Možnosť zobrazenia mapy v smere pohybu (alebo kompasu)\n • Zobrazovanie vašej pozície a orientácie na mape\n • Zdieľajte polohu, aby vás priatelia modli nájsť\n • Uloženie obľúbených miest\n • Môže zvoliť ako zobraziť názvy na mape: v angličtine, lokálnom jazyku alebo foneticky\n • Umožňuje zobraziť špecializované podkladové mapy z Internetu, satelitné snímky (z Bing), rôzne prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie vrstvy s nastaviteľnou priehľadnosťou</string>
     <string name="osmand_extended_description_part4">Lyžovanie
 \n Modul lyžiarskych máp umožňuje zobraziť náročnosť zjazdoviek a ďalšie údaje, ako poloha vlekov a iných služieb.</string>
     <string name="osmand_extended_description_part5">Bicyklovanie
@@ -2207,18 +2168,8 @@
 \n • Môžete vidieť rýchlosť a nadmorskú výšku
 \n • Nahrávanie GPX umožňuje nahrať výlet a zdieľať ho
 \n • Doplnkovým modulom môžete zobraziť vrstevnice a tieňovanie svahov</string>
-    <string name="osmand_extended_description_part6">Prechádzky, turistika, prehliadky miest 
-\n • Mapy obsahujú aj cesty pre chodcov a turistov 
-\n • Wikipédia vo vašom jazyku vám povie veľa počas potuliek mestom 
-\n • Zastávky hromadnej dopravy (autobus, električka, vlak) vrátane názvov liniek 
-\n • GPS navigácia v režime chodca vytvorí trasu po cestách pre peších 
-\n • Môžete odoslať a nasledovať GPX trasu výletu alebo nahrať a zdieľať vlastné
-\n</string>
-    <string name="osmand_extended_description_part7">Prispievajte do OSM 
-\n • Hláste chyby v mape 
-\n • Odosielajte GPX stopy do OSM priamo z aplikácie 
-\n • Pridávajte body záujmu a priamo ich odošlite do OSM (alebo neskôr, ak ste offline)
-\n</string>
+    <string name="osmand_extended_description_part6">Prechádzky, turistika, prehliadky miest\n • Mapy obsahujú aj cesty pre chodcov a turistov\n • Wikipédia vo vašom jazyku vám povie veľa počas potuliek mestom\n • Zastávky hromadnej dopravy (autobus, električka, vlak) vrátane názvov liniek\n • GPS navigácia v režime chodca vytvorí trasu po cestách pre peších\n • Môžete odoslať a nasledovať GPX trasu výletu alebo nahrať a zdieľať vlastné</string>
+    <string name="osmand_extended_description_part7">Prispievajte do OSM\n • Hláste chyby v mape\n • Odosielajte GPX stopy do OSM priamo z aplikácie\n • Pridávajte body záujmu a priamo ich odošlite do OSM (alebo neskôr, ak ste offline)</string>
     <string name="osmand_extended_description_part8">OsmAnd je aktívne vyvíjaný slobodný softvér. Každý môže prispieť do aplikácie hlásením chýb, vylepšením prekladu alebo programovaním nových funkcií. Projektu tiež závisí od finančných príspevkov na vývoj a testovanie nových funkcií.
 \n Približná kvalita pokrytia máp:
 \n • Západná Európa: ****
@@ -2239,22 +2190,8 @@
 \n OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie.
 \n
 \n Niektoré hlavné funkcie:</string>
-    <string name="osmand_plus_extended_description_part2">Navigácia
-\n • Funguje online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)
-\n • Hlasové navádzanie po jednotlivých zákrutách (nahraté aj syntetizované hlasy)
-\n • Voliteľné navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa
-\n • Umožňuje zadať prechodné body trasy
-\n • Automatické prepočítanie trasy ak sa odchýlite z trasy
-\n • Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc
-\n</string>
-    <string name="osmand_plus_extended_description_part3">Zobrazenie mapy 
-\n • Zobrazovanie vašej pozície a orientácie na mape 
-\n • Možnosť otočenia mapy v smere pohybu podľa kompasu 
-\n • Uloženie najdôležitejších miest ako Obľúbených bodov 
-\n • Zobrazenie POI (bodov záujmu) v okolí 
-\n • Možnosť zobraziť špecializované podkladové mapy z Internetu, satelitné snímky (z Bing), prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie vrstvy s nastaviteľnou priehľadnosťou 
-\n • Voliteľne môže zobraziť názvy v angličtine, lokálnom jazyku alebo foneticky
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigácia\n • Funguje online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)\n • Hlasové navádzanie po jednotlivých zákrutách (nahraté aj syntetizované hlasy)\n • Voliteľné navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa\n • Umožňuje zadať prechodné body trasy\n • Automatické prepočítanie trasy ak sa odchýlite z trasy\n • Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc</string>
+    <string name="osmand_plus_extended_description_part3">Zobrazenie mapy\n • Zobrazovanie vašej pozície a orientácie na mape\n • Možnosť otočenia mapy v smere pohybu podľa kompasu\n • Uloženie najdôležitejších miest ako Obľúbených bodov\n • Zobrazenie POI (bodov záujmu) v okolí\n • Možnosť zobraziť špecializované podkladové mapy z Internetu, satelitné snímky (z Bing), prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie vrstvy s nastaviteľnou priehľadnosťou\n • Voliteľne môže zobraziť názvy v angličtine, lokálnom jazyku alebo foneticky</string>
     <string name="osmand_plus_extended_description_part4">Využívajte údaje z OpenStreetMap a Wikipédie 
 \n • Informácie vysokej kvality z najlepších projektov spolupráce sveta 
 \n • Údaje OpenStreetMap dostupné podľa krajiny alebo regiónu 
@@ -2263,12 +2200,7 @@
 \n • Kompaktné vektorové offline mapy 
 \n 
 \n • Možnosť voľby medzi kompletnými mapami alebo len cestnou sieťou (napr. celé Japonsko má 700 MB, jeho cestná sieť iba 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Bezpečnostné funkcie
-\n • Voliteľné automatické prepínanie medzi denným a nočným režimom
-\n • Voliteľné zobrazenie povolenej rýchlosti s upozornením na jej prekročenie
-\n • Voliteľné približovanie mapy podľa rýchlosti
-\n • Zdieľajte vašu polohu s priateľmi, aby vás mohli nájsť
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Bezpečnostné funkcie\n • Voliteľné automatické prepínanie medzi denným a nočným režimom\n • Voliteľné zobrazenie povolenej rýchlosti s upozornením na jej prekročenie\n • Voliteľné približovanie mapy podľa rýchlosti\n • Zdieľajte vašu polohu s priateľmi, aby vás mohli nájsť</string>
     <string name="osmand_plus_extended_description_part6">Funkcie pre cyklistov a chodcov
 \n • Mapy obsahujú aj cesty pre chodcov, turistov a cyklistov - vhodné pre aktivity v prírode
 \n • Špeciálne režimy zobrazenia a navigácie pre chodcov a cyklistov
@@ -2969,27 +2901,7 @@
     <string name="shared_string_crash">Pád aplikácie</string>
     <string name="last_launch_crashed">Posledný beh OsmAnd zlyhal. Prosíme pomôžte nám vylepšiť OsmAnd zdieľaním správy o chybe.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou 
-\n 
-\n • Možnosť nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch 
-\n 
-\n • Pridaný nástroj s aktuálnymi súradnicami 
-\n 
-\n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru 
-\n 
-\n • Opravené zaznamenávanie stopy na pozadí 
-\n 
-\n • Vylepšené sťahovanie máp na pozadí 
-\n 
-\n • Návrat voľby \'Zapnúť obrazovku\' 
-\n 
-\n • Opravený výber jazyka Wikipedie 
-\n 
-\n • Opravené správanie tlačidla kompasu počas navigácie 
-\n 
-\n • Ďalšie opravy chýb
-\n
-\n</string>
+    <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou\n\n • Možnosť nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch\n\n • Pridaný nástroj s aktuálnymi súradnicami\n\n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru\n\n • Opravené zaznamenávanie stopy na pozadí\n\n • Vylepšené sťahovanie máp na pozadí\n\n • Návrat voľby \'Zapnúť obrazovku\'\n\n • Opravený výber jazyka Wikipedie\n\n • Opravené správanie tlačidla kompasu počas navigácie\n\n • Ďalšie opravy chýb</string>
     <string name="app_mode_personal_transporter">Osobný transportér</string>
     <string name="app_mode_monowheel">Koleso (monowheel)</string>
     <string name="app_mode_scooter">Skúter</string>
@@ -3165,23 +3077,7 @@
     <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
     <string name="update_all_maps">Aktualizovať všetky mapy</string>
     <string name="update_all_maps_q">Aktualizovať všetky (%1$d) mapy\?</string>
-    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Nastavenia sú usporiadané podľa typu. Každý profil môže byť upravený samostatne. 
-\n 
-\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania 
-\n 
-\n • Opravy tmavého vzhľadu 
-\n 
-\n • Opravené niektoré chyby navigácie 
-\n 
-\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou 
-\n 
-\n • Opravené \'zaplavené\' územia po svete 
-\n 
-\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť 
-\n 
-\n • Opravy iných chýb
-\n
-\n</string>
+    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Nastavenia sú usporiadané podľa typu. Každý profil môže byť upravený samostatne.\n\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania\n\n • Opravy tmavého vzhľadu\n\n • Opravené niektoré chyby navigácie\n\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou\n\n • Opravené \'zaplavené\' územia po svete\n\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť\n\n • Opravy iných chýb</string>
     <string name="apply_preference_to_all_profiles">Aplikovať túto zmenu na všetky alebo len práve zvolený profil.</string>
     <string name="shared_preference">Zdieľané</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
@@ -3326,31 +3222,7 @@
     <string name="monitoring_min_distance_descr_side_effect">Vedľajšie efekty: Obdobia pokoja nie sú vôbec zaznamenané, alebo každé len jedným bodom. Malé pohyby (napr. do strany na zaznačenie možnej odbočky na výlete) môžu byť odfiltrované. Váš súbor bude obsahovať menej informácií pre následné spracovanie, ale môže zachovať chyby GPS spôsobené zlým príjmom alebo efektmi GPS čipu.</string>
     <string name="monitoring_min_distance_descr_recommendation">Odporúčanie: Nastavte posun 5 metrov ak nepotrebujete zaznamenať drobné detaily trasy a tiež nepotrebujete zaznamenávať údaje o obdobiach bez pohybu.</string>
     <string name="clear_recorded_data">Vymazať zaznamenané údaje</string>
-    <string name="release_3_6">• Profily: teraz môžete zmeniť poradie, nastaviť ikonu pre mapu, zmeniť všetky nastavenia základných profilov a resetovať ich do východzieho stavu
-\n
-\n • V navigácii bolo pridané číslo výjazdu
-\n
-\n • Prepracované nastavenia zásuvných modulov
-\n
-\n • Prepracovaná obrazovka nastavení pre rýchly prístup ku všetkým profilom
-\n
-\n • Pridaná možnosť kopírovať nastavenia z iného profilu
-\n
-\n • Pridaná možnosť skryť alebo zmeniť poradie kategórií bodov záujmu pri hľadaní
-\n
-\n • Spresnené umiestnenie ikon bodov záujmu na mape
-\n
-\n • Do nastavenia mapy pridané údaje o východe / západe slnka
-\n
-\n • Na mape boli pridané ikony Domov a Práca
-\n
-\n • V nastaveniach bola pridaná podpora pre viacriadkové popisy
-\n
-\n • V mape Japonska bola pridaná správna transliterácia
-\n
-\n • Pridaná mapa Antarktídy
-\n
-\n</string>
+    <string name="release_3_6">• Profily: teraz môžete zmeniť poradie, nastaviť ikonu pre mapu, zmeniť všetky nastavenia základných profilov a resetovať ich do východzieho stavu\n\n • V navigácii bolo pridané číslo výjazdu\n\n • Prepracované nastavenia zásuvných modulov\n\n • Prepracovaná obrazovka nastavení pre rýchly prístup ku všetkým profilom\n\n • Pridaná možnosť kopírovať nastavenia z iného profilu\n\n • Pridaná možnosť skryť alebo zmeniť poradie kategórií bodov záujmu pri hľadaní\n\n • Spresnené umiestnenie ikon bodov záujmu na mape\n\n • Do nastavenia mapy pridané údaje o východe / západe slnka\n\n • Na mape boli pridané ikony Domov a Práca\n\n • V nastaveniach bola pridaná podpora pre viacriadkové popisy\n\n • V mape Japonska bola pridaná správna transliterácia\n\n • Pridaná mapa Antarktídy</string>
     <string name="copy_coordinates">Kopírovať súradnice</string>
     <string name="routing_profile_direct_to">Priamo k bodu</string>
     <string name="sort_by_category">Zoradiť podľa kategórie</string>
@@ -3708,21 +3580,7 @@
     <string name="gpx_monitoring_start">Pokračovať v nahrávaní výletu</string>
     <string name="one_point_error">Prosím pridajte aspoň dva body.</string>
     <string name="shared_string_redo">Vykonať znova</string>
-    <string name="release_3_8">• Vylepšená funkcia plánovania trasy: umožňuje použiť rôzne typy navigácie pre úseky trasy a začlenenie stôp
-\n
-\n • Nové menu pre vzhľad stôp: zvoľte farbu, hrúbku, smerové šípky, ikony štartu a cieľa
-\n
-\n • Zlepšená viditeľnosť bodov pre bicykle.
-\n
-\n • Stopy je teraz možné aktivovať a majú kontextové menu so základnými údajmi.
-\n
-\n • Zlepšený algoritmus vyhľadávania
-\n
-\n • Zlepšené možnosti nasledovania stopy v navigácii
-\n
-\n • Opravené problémy s importom a exportom nastavení profilov
-\n
-\n</string>
+    <string name="release_3_8">• Vylepšená funkcia plánovania trasy: umožňuje použiť rôzne typy navigácie pre úseky trasy a začlenenie stôp\n\n • Nové menu pre vzhľad stôp: zvoľte farbu, hrúbku, smerové šípky, ikony štartu a cieľa\n\n • Zlepšená viditeľnosť bodov pre bicykle.\n\n • Stopy je teraz možné aktivovať a majú kontextové menu so základnými údajmi.\n\n • Zlepšený algoritmus vyhľadávania\n\n • Zlepšené možnosti nasledovania stopy v navigácii\n\n • Opravené problémy s importom a exportom nastavení profilov</string>
     <string name="sort_last_modified">Naposledy zmenené</string>
     <string name="sort_name_descending">Názov: Z – A</string>
     <string name="sort_name_ascending">Názov: A – Z</string>
@@ -3824,15 +3682,7 @@
     <string name="plan_route_split_before">Rozdeliť predtým</string>
     <string name="plan_route_split_after">Rozdeliť po</string>
     <string name="plan_route_add_new_segment">Pridať nový segment</string>
-    <string name="release_3_9">• Pridaná možnosť exportu a importu všetkých údajov vrátane nastavení, zdrojov, mojich miest
-\n
-\n• Plánovanie trasy: grafy pre segmenty trasy s trasou a pridaná možnosť vytvárať a upravovať viac segmentov trasy
-\n
-\n• Pridaná metóda autentifikácie OAuth pre OpenStreetMap, vylepšené užívateľské rozhranie dialógov OSM
-\n
-\n• Podpora vlastných farieb pre obľúbené položky a sledovanie trasových bodov
-\n
-\n</string>
+    <string name="release_3_9">• Pridaná možnosť exportu a importu všetkých údajov vrátane nastavení, zdrojov, mojich miest\n\n • Plánovanie trasy: grafy pre segmenty trasy s trasou a pridaná možnosť vytvárať a upravovať viac segmentov trasy\n\n • Pridaná metóda autentifikácie OAuth pre OpenStreetMap, vylepšené užívateľské rozhranie dialógov OSM\n\n • Podpora vlastných farieb pre obľúbené položky a sledovanie trasových bodov</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Profil používateľa</string>
     <string name="reverse_all_points">Otočiť všetky body</string>
@@ -3970,19 +3820,7 @@
     <string name="lost_data_warning">Všetky neuložené údaje budú stratené.</string>
     <string name="show_start_dialog">Zobraziť úvodné okno</string>
     <string name="trip_recording_show_start_dialog_setting">Ak je vypnuté, záznam začne hneď po stlačení nástroja alebo položky v menu a preskočí okno nastavenia.</string>
-    <string name="release_4_0_beta">• Pridaná možnosť stiahnutia Vrstevníc v stopách
-\n
-\n• Plánovať trasy: pridané prepínače medzi bodmi a grafmi
-\n
-\n• Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
-\n
-\n • Stopy je teraz možné vyfarbiť podľa nadmorskej výšky, rýchlosti alebo sklonu svahu.
-\n
-\n • Pridaná možnosť zmeny vzhľadu navigačnej trasy.
-\n
-\n • Vylepšené okno \"Záznam výletu\"
-\n
-\n</string>
+    <string name="release_4_0_beta">• Pridaná možnosť stiahnutia Vrstevníc v stopách\n\n• Plánovať trasy: pridané prepínače medzi bodmi a grafmi\n\n• Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"\n\n • Stopy je teraz možné vyfarbiť podľa nadmorskej výšky, rýchlosti alebo sklonu svahu.\n\n • Pridaná možnosť zmeny vzhľadu navigačnej trasy.\n\n • Vylepšené okno \"Záznam výletu\"</string>
     <string name="customize_route_line">Upraviť navigačnú trasu</string>
     <string name="shared_string_route_line">Navigačná trasa</string>
     <string name="specify_color_for_map_mode">Zadajte farbu pre režim mapy %1$s.</string>
@@ -4152,27 +3990,7 @@
     <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy so sivými tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
     <string name="purchases_feature_desc_wikivoyage">Skúmajte sprievodcov Wikivoyage offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
     <string name="purchases_feature_desc_wikipedia">Poskytuje offline všetky články Wikipédie vzťahujúce sa k geografickým miestam, čím vám pomôže spoznať navštevované miesta na vašom výlete jednoduchým stlačením na mape. Nezabudnite si stiahnuť mapy Wikipédie pre príslušný región.</string>
-    <string name="release_4_0">• Zálohovanie do Cloudu
-\n
-\n • Pridaný nočný režim pre mapový štýl \"Topo\"
-\n
-\n • Pridaná možnosť stiahnuť vrstevnice v stopách namiesto metrov
-\n
-\n • Stopy môžu byť vyfarbené podľa výšky, rýchlosti alebo sklonu
-\n
-\n • Vylepšené okno \"Záznam výletu\"
-\n
-\n • Meranie vzdialenosti stlačením presunuté z polomerového pravítka do samostatnej možnosti
-\n
-\n • Plánovanie trasy: môžete zmeniť navigačné nastavenia, nastaviť mapu a hľadať bez opustenia plánovania trasy
-\n
-\n • Nová obrazovka \"Nákupy\" s informáciami o nákupe funkcií
-\n
-\n • Pridaná možnosť zmeniť vzhľad navigačnej čiary
-\n
-\n • Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
-\n
-\n</string>
+    <string name="release_4_0">• Zálohovanie do Cloudu\n\n • Pridaný nočný režim pre mapový štýl \"Topo\"\n\n • Pridaná možnosť stiahnuť vrstevnice v stopách namiesto metrov\n\n • Stopy môžu byť vyfarbené podľa výšky, rýchlosti alebo sklonu\n\n • Vylepšené okno \"Záznam výletu\"\n\n • Meranie vzdialenosti stlačením presunuté z polomerového pravítka do samostatnej možnosti\n\n • Plánovanie trasy: môžete zmeniť navigačné nastavenia, nastaviť mapu a hľadať bez opustenia plánovania trasy\n\n • Nová obrazovka \"Nákupy\" s informáciami o nákupe funkcií\n\n • Pridaná možnosť zmeniť vzhľad navigačnej čiary\n\n • Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"</string>
     <string name="purchases_feature_desc_combined_wiki">Skúmajte články Wikipédie bez pripojenia na internet. Offline údaje rozdelené podľa krajín a dostupné vo všetkých jazykoch.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Získajte neobmedzené sťahovania všetkých kontinentov a regiónov offline máp.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Získajte prístup k pravidelným mesačným aktualizáciám pre offline mapy.</string>
@@ -4273,31 +4091,7 @@
     <string name="rendering_attr_natureReserves_name">Prírodné rezervácie</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
-    <string name="release_4_1">• Prvotná podpora pre Android Auto
-\n
-\n • Zmena rozhrania pre vyhľadávanie súradníc UTM
-\n
-\n • GPS Filter pre GPX stopy
-\n
-\n • Nástroj nadmorskej výšky (Pro)
-\n
-\n • Obľúbené: pridaná možnosť zobraziť naposledy použité ikony
-\n
-\n • Plánovanie trasy: po spustení použije práve vybraný profil
-\n
-\n • Opravená vrstva Mapillary, modul je teraz predvolene vypnutý
-\n
-\n • Pridaná obrazovka na správu všetkých histórií v aplikácii
-\n
-\n • Orientácia mapy nie je resetovaná po reštarte aplikácie
-\n
-\n • Vylepšené vykreslenie výškovej značky SRTM
-\n
-\n • Opravené zobrazenie arabských názvov na mape
-\n
-\n • Opravené rôzne problémy výpočtu trasy
-\n
-\n</string>
+    <string name="release_4_1">• Prvotná podpora pre Android Auto\n\n • Zmena rozhrania pre vyhľadávanie súradníc UTM\n\n • GPS Filter pre GPX stopy\n\n • Nástroj nadmorskej výšky (Pro)\n\n • Obľúbené: pridaná možnosť zobraziť naposledy použité ikony\n\n • Plánovanie trasy: po spustení použije práve vybraný profil\n\n • Opravená vrstva Mapillary, modul je teraz predvolene vypnutý\n\n • Pridaná obrazovka na správu všetkých histórií v aplikácii\n\n • Orientácia mapy nie je resetovaná po reštarte aplikácie\n\n • Vylepšené vykreslenie výškovej značky SRTM\n\n • Opravené zobrazenie arabských názvov na mape\n\n • Opravené rôzne problémy výpočtu trasy</string>
     <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v nastaveniach.</string>
     <string name="shared_storage_warning_description">Kvôli zmenám prístupových pravidiel v systéme Android, stratí od novembra 2021 OsmAnd 4.2 prístup k zdieľanému úložisku.
 \n
@@ -5723,7 +5517,7 @@
     <string name="no_photos_available">Nie sú dostupné žiadne fotografie</string>
     <string name="percent_unit">%</string>
     <string name="obd_plugin_name">Merania vozidla</string>
-    <string name="obd_plugin_description">Sprístupní informácie o vozidle cez protokol OBD</string>
+    <string name="obd_plugin_description">Sledujte kľúčové parametre vozidla pomocou protokolu OBD-II. Získajte údaje vrátane: * Rýchlosť otáčok * Spotreba paliva * Zostávajúce palivo * Vzdialednosť od naštartovania motora * Teplota nasávania * Teplota okolia * Teplota chladiacej kvapaliny * Rýchlosť vozidla * Percento batérie</string>
     <string name="vehicle_metrics_plugin_settings">Nastavenia Meraní vozidla</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
@@ -5731,4 +5525,13 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="wikivoyage_offline">Wikivoyage v režime offline</string>
     <string name="import_export">Import/export</string>
+    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je uzamknutá. Stlačte tlačidlo pre odomknutie.</string>
+    <string name="track_does_not_contain_data_to_save">Stopa neobsahuje údaje, ktoré by bolo možné uložiť.</string>
+    <string name="screen_is_locked_by_external_button">Dotyková obrazovka je uzamknutá. Pre odomknutie stlačte tlačidlo %1$s alebo sa dotknite tlačidla na obrazovke.</string>
+    <string name="screen_is_unlocked">Dotyková obrazovka je odomknutá.</string>
+    <string name="lock_screen_description">Zapne alebo vypne funkciu dotykovej obrazovky, aby sa zabránilo náhodným stlačeniam</string>
+    <string name="lock_screen">Zamknutie obrazovky</string>
+    <string name="quick_action_showhide_osm_edits_descr">Tlačidlo pre zobrazenie alebo skrytie lokálnych úprav OSM v mape.</string>
+    <string name="release_4_9">• Pridaný celoobrazovkový zobrazovač galérie pre obrázky Wikimedia\n\n • Pridaný nový modul \"Merania vozidla\" pre sledovanie výkonu vozidla pomocou protokolu OBD-II\n\n • Pridaná možnosť priradenia aktivít k stopám a filtrovania podľa nich\n\n • Pridaná rýchla akcia pre nahrávanie výletu a uzamknutie obrazovky\n\n • Pridaný modifikovateľný vzhľad tlačidla mapy a presná mriežka\n\n • Pridané kontextové menu a akcia \"Resetovať priemernú rýchlosť\" do nástrojov\n\n • Pridaná nová vrstva trás \"Trasy pre terénne bicykle\"\n\n • Opravené \"Automatické nahrávanie stopy počas navigácie\"\n\n • Opravený problém s vymenenými súradnicami v jazykoch čítaných sprava doľava\n\n • Opravené chýbajúce údaje zo senzorov pre práve nahrávanú stopu\n\n • Pridané informácie o okolitých oblastiach pre zvolený bod\n\n • Pridaná rýchla akcia pre ovládanie viditeľnosti Úprav OSM\n\n • Oddelené parametre pre viditeľnosť v možnostiach zafarbenia terénu\n\n • Pridaná stlačiteľná ikona pre zobrazenie povolení prístupu a iných vlastností ciest</string>
+    <string name="liter_per_hour">l/h</string>
 </resources>

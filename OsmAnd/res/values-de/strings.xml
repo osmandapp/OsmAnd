@@ -5241,49 +5241,7 @@
     <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
     <string name="cache_size">Cachegröße</string>
     <string name="routing_attr_allow_via_ferrata_name">Bergroute (Klettersteig)</string>
-    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet
-\n
-\n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“
-\n
-\n • Neues Format für Geländekarten mit 3D-Reliefunterstützung
-\n
-\n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner
-\n
-\n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien
-\n
-\n • Eine Liste von Widgets für das obere/untere Bedienfeld
-\n
-\n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken
-\n
-\n • Konturlinien funktionieren mit jeder „Kartenquelle“
-\n
-\n • Erweiterte Liste von Standardaktionen für externe Tastaturen
-\n
-\n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt
-\n
-\n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt
-\n
-\n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt
-\n
-\n • „Gefährliche Materialien“-Klassen für Lkw-Navigation in Nordamerika hinzugefügt
-\n
-\n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt
-\n
-\n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt
-\n
-\n • Sprachauswahl pro App korrigiert
-\n
-\n • Unterstützung für thematische Symbole hinzugefügt
-\n
-\n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt
-\n
-\n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war
-\n
-\n • Japanische Sprachansagen überarbeitet
-\n
-\n • Höhenänderung und Neigungsauswertung überarbeitet
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet \n \n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“ \n \n • Neues Format für Geländekarten mit 3D-Reliefunterstützung \n \n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner \n \n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien \n \n • Eine Liste von Widgets für das obere/untere Bedienfeld \n \n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken \n \n • Konturlinien funktionieren mit jeder „Kartenquelle“ \n \n • Erweiterte Liste von Standardaktionen für externe Tastaturen \n \n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt \n \n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt \n \n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt \n \n • „Gefährliche Materialien“-Klassen für Lkw-Navigation in Nordamerika hinzugefügt \n \n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt \n \n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt \n \n • Sprachauswahl pro App korrigiert \n \n • Unterstützung für thematische Symbole hinzugefügt \n \n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt \n \n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war \n \n • Japanische Sprachansagen überarbeitet \n \n • Höhenänderung und Neigungsauswertung überarbeitet</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raster-SQLiteDB für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
@@ -5423,29 +5381,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt
-\n
-\n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien
-\n
-\n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen
-\n
-\n• Verbessertes lokales Ressourcenmanagement
-\n
-\n• Anpassbare Tastenbelegung für externe Controller
-\n
-\n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“
-\n
-\n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien
-\n
-\n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten
-\n
-\n• Probleme mit transparenter Statusleiste behoben
-\n
-\n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt
-\n
-\n• Widget „Verfügbarer RAM“ eingeführt
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt \n \n• Widget „Verfügbarer RAM“ eingeführt</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
@@ -5619,25 +5555,7 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
-    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto
-\n
-\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“
-\n
-\n• Lesbarkeit der Daten in Diagrammen verbessert
-\n
-\n• Filter nach Sensordaten für Strecken hinzugefügt
-\n
-\n• Anpassung des Aussehens für Trackgruppen verbessert
-\n
-\n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
-\n
-\n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
-\n
-\n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht
-\n
-\n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
-\n
-\n</string>
+    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto \n \n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“ \n \n• Lesbarkeit der Daten in Diagrammen verbessert \n \n• Filter nach Sensordaten für Strecken hinzugefügt \n \n• Anpassung des Aussehens für Trackgruppen verbessert \n \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt \n \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen \n \n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht \n \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt</string>
     <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Entfernung während der Navigation</string>
@@ -5659,29 +5577,7 @@
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
-    <string name="release_4_8">• Neue Geländefarboption „Höhe“
-\n
-\n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen
-\n
-\n• 3D-Variante für Standortpositionssymbole
-\n
-\n• Schnellaktionen können jetzt externen Tastaturen zugewiesen werden
-\n
-\n• Wetter: Benutzeroberfläche aktualisiert, Windanimation hinzugefügt
-\n
-\n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen
-\n
-\n• Erweiterte Auswahl an Touristenrouten auf der Karte
-\n
-\n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen
-\n
-\n• Track-Statistiken, Sortierung und Suche korrigiert
-\n
-\n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht
-\n
-\n• Wechsel zum System-Share-Sheet ab Android 14
-\n
-\n</string>
+    <string name="release_4_8">• Neue Geländefarboption „Höhe“ \n \n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen \n \n• 3D-Variante für Standortpositionssymbole \n \n• Schnellaktionen können jetzt externen Tastaturen zugewiesen werden \n \n• Wetter: Benutzeroberfläche aktualisiert, Windanimation hinzugefügt \n \n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen \n \n• Erweiterte Auswahl an Touristenrouten auf der Karte \n \n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen \n \n• Track-Statistiken, Sortierung und Suche korrigiert \n \n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht \n \n• Wechsel zum System-Share-Sheet ab Android 14</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Gelände auf der Karte anzuzeigen.</string>
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
@@ -5949,7 +5845,7 @@
     <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem verbliebenen Kraftstoffstand noch fahren kann</string>
     <string name="obd_fuel_level_desc">Zeigt mithilfe des OBD-Sensors den Kraftstoffstand des Fahrzeugs an</string>
     <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
-    <string name="obd_fuel_level">Kraftstoffverbrauch</string>
+    <string name="obd_fuel_level">Kraftstoffverbrauch (%%)</string>
     <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
     <string name="unknown_bt_device">Unbekanntes Gerät</string>
     <string name="obd_vin">VIN (Fahrgestell-Identifikationsnummer)</string>
@@ -6004,4 +5900,16 @@
     <string name="obd_widget_vehicle_speed">Fahrzeuggeschwindigkeit</string>
     <string name="route_guidance">Routenführung</string>
     <string name="obd_widget_engine_speed">Motordrehzahl</string>
+    <string name="obd_fuel_consumption_rate_l_h">Kraftstoffverbrauch (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Kraftstoffverbrauch (Sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Zeigt den berechneten Kraftstoffverbrauch des Fahrzeugs an (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Zeigt den vom Sensor gemessenen Kraftstoffverbrauch des Fahrzeugs an (l/h)</string>
+    <string name="obd_fuel_level_liter">Kraftstoffstand (l)</string>
+    <string name="obd_fuel_level_percent">Kraftstoffstand (%%)</string>
+    <string name="obd_fuel_left_percent">Verbleibender Kraftstoff (%)</string>
+    <string name="obd_fuel_left_liter">Verbleibender Kraftstoff (l)</string>
+    <string name="obd_fuel_left_km">Verbleibender Kraftstoff (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Kraftstoffverbrauch (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Kraftstoffverbrauch l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Kraftstoffverbrauch %/h</string>
 </resources>

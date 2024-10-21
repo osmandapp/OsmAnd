@@ -4056,4 +4056,6 @@
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Camping på campingplads</string>
     <string name="poi_osmand_access_main_tag">Adgang</string>
     <string name="poi_us_maps_recreation_area_facility_warming_hut">Varmehytte</string>
+    <string name="poi_osmand_foot_tunnel_no">Tunnel forbudt for fodgængere</string>
+    <string name="poi_osmand_bicycle_tunnel_no">Tunnel forbudt for cyklister</string>
 </resources>

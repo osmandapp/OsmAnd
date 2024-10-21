@@ -67,10 +67,10 @@ public class MapButtonTouchListener implements OnTouchListener {
 		int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding * 2);
 		int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding * 2);
 
-		if (view.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0) {
+		if (view.getHeight() + newMarginY <= parent.getHeight() - padding && newMarginY > 0) {
 			param.bottomMargin = newMarginY;
 		}
-		if (view.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
+		if (view.getWidth() + newMarginX <= parent.getWidth() - padding && newMarginX > 0) {
 			param.rightMargin = newMarginX;
 		}
 		view.setLayoutParams(param);
