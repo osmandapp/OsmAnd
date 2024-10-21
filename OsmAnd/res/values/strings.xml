@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="speedometer_maximum">Maximum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
