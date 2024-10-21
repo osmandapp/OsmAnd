@@ -119,6 +119,7 @@ public class ResourceManager {
 
 	private final OsmandApplication context;
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
+	private final CachedAssetsVersion cachedAssetsVersion = new CachedAssetsVersion();
 
 	private boolean reloadingIndexes;
 
@@ -329,6 +330,11 @@ public class ResourceManager {
 
 	public void removeResourceListener(ResourceListener listener) {
 		resourceListeners.remove(listener);
+	}
+
+	@NonNull
+	public CachedAssetsVersion getCachedAssetsVersion() {
+		return cachedAssetsVersion;
 	}
 
 	public boolean checkIfObjectDownloaded(String downloadName) {
@@ -798,8 +804,11 @@ public class ResourceManager {
 	                                 boolean firstInstall,
 	                                 boolean overwrite,
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
+		cachedAssetsVersion.clear();
+		cachedAssetsVersion.setBasePath(appDataDir.getAbsolutePath());
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
+			cachedAssetsVersion.putVersion(asset.destination, asset.version);
 			String[] modes = asset.combinedMode.split("\\|");
 			if (modes.length == 0) {
 				log.error("Mode '" + asset.combinedMode + "' is not valid");
@@ -845,15 +854,20 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.version != null &&
-						destinationFile.lastModified() < asset.version.getTime()) {
+				} else if (asset.version != null && destinationFile.lastModified() < asset.version.getTime()) {
 					shouldCopy = true;
 				}
 			}
 			if (shouldCopy) {
-				copyAssets(assetManager, asset.source, destinationFile);
+				copyAssets(assetManager, asset.source, destinationFile, asset.getVersionTime());
 			}
 		}
+	}
+
+	public static boolean copyAssets(AssetManager assetManager, String assetName,
+	                                 File file, Long lastModifiedTime) throws IOException {
+		copyAssets(assetManager, assetName, file);
+		return lastModifiedTime != null && file.setLastModified(lastModifiedTime);
 	}
 
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
