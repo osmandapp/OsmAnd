@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>
