@@ -83,13 +83,18 @@ public class MapHudLayout extends FrameLayout {
 		return map;
 	}
 
-	public void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize positionSize) {
-		int gravity = 0;
-		int marginX = positionSize.getXStartPix(dpToPx);
-		int marginY = positionSize.getYStartPix(dpToPx);
+	public void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize position) {
 		LayoutParams params = (LayoutParams) button.getLayoutParams();
+		updateButtonParams(params, position);
+		button.setLayoutParams(params);
+	}
 
-		if (positionSize.left) {
+	public void updateButtonParams(@NonNull LayoutParams params, @NonNull ButtonPositionSize position) {
+		int gravity = 0;
+		int marginX = position.getXStartPix(dpToPx);
+		int marginY = position.getYStartPix(dpToPx);
+
+		if (position.left) {
 			gravity |= Gravity.START;
 			params.rightMargin = 0;
 			params.leftMargin = marginX;
@@ -98,7 +103,7 @@ public class MapHudLayout extends FrameLayout {
 			params.leftMargin = 0;
 			params.rightMargin = marginX;
 		}
-		if (positionSize.top) {
+		if (position.top) {
 			gravity |= Gravity.TOP;
 			params.bottomMargin = 0;
 			params.topMargin = marginY;
@@ -109,14 +114,12 @@ public class MapHudLayout extends FrameLayout {
 		}
 		params.gravity = gravity;
 
-		button.setLayoutParams(params);
-
 		boolean top = (params.gravity & Gravity.TOP) == Gravity.TOP;
 		boolean left = (params.gravity & Gravity.START) == Gravity.START;
 
-		LOG.info("params " + button.getButtonId() + (left ? " left " : " right ")
+		LOG.info("params " + position.id + (left ? " left " : " right ")
 				+ (top ? "top " : "bott ") + "marginX " + marginX + " marginY " + marginY);
-		LOG.info(positionSize);
+		LOG.info(position);
 	}
 
 	public void updateButton(@NonNull MapButton button, boolean save) {

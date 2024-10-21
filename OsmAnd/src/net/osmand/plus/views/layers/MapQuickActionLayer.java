@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.view.Gravity.BOTTOM;
-import static android.view.Gravity.END;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.annotation.SuppressLint;
@@ -11,6 +9,7 @@ import android.graphics.PointF;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -139,7 +138,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 				button.setMapActivity(activity);
 				button.setUseCustomPosition(true);
 
-				mapHudLayout.addView(button, new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, BOTTOM | END));
+				LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+				mapHudLayout.updateButtonParams(params, state.getPositionSize());
+				mapHudLayout.addView(button, params);
 				buttons.add(button);
 			}
 			actionButtons = buttons;
