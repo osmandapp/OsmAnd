@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -9,13 +7,9 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,13 +24,11 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.MapHudLayout;
+import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,7 +45,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final MapActionsHelper mapActionsHelper;
 	private final MapTransparencyHelper mapTransparencyHelper;
 
-	private MapHudLayout mapHudLayout;
 	private List<MapButton> mapButtons = new ArrayList<>();
 	private List<MapButton> customMapButtons = new ArrayList<>();
 
@@ -101,7 +92,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			customMapButtons = new ArrayList<>();
 			mapTransparencyHelper.destroyTransparencyBar();
 			mapRouteInfoMenu = null;
-			mapHudLayout = null;
 		}
 	}
 
@@ -128,48 +118,26 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void initMapButtons() {
 		MapActivity activity = requireMapActivity();
-		mapHudLayout = activity.findViewById(R.id.map_hud_layout);
 
-		for (MapButton button : mapButtons) {
-			mapHudLayout.removeView(button);
-		}
+		Map3DButton map3DButton = activity.findViewById(R.id.map_3d_button);
+		map3DButton.setUseCustomPosition(true);
+		addMapButton(map3DButton);
 
-		boolean nightMode = app.getDaynightHelper().isNightMode();
-		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
+		addMapButton(activity.findViewById(R.id.map_layers_button));
+		addMapButton(activity.findViewById(R.id.map_search_button));
+		addMapButton(activity.findViewById(R.id.map_compass_button));
 
-		addMapButton(createMapButton(inflater, R.layout.configure_map_button));
-		addMapButton(createMapButton(inflater, R.layout.map_search_button));
-		addMapButton(createMapButton(inflater, R.layout.map_compass_button));
+		addMapButton(activity.findViewById(R.id.map_zoom_in_button));
+		addMapButton(activity.findViewById(R.id.map_zoom_out_button));
+		addMapButton(activity.findViewById(R.id.map_my_location_button));
 
-		addMapButton(createMapButton(inflater, R.layout.map_zoom_out_button));
-		addMapButton(createMapButton(inflater, R.layout.map_zoom_in_button));
-		addMapButton(createMapButton(inflater, R.layout.my_location_button));
-
-		MapButton button = createMapButton(inflater, R.layout.map_3d_button);
-		button.setUseCustomPosition(true);
-		addMapButton(button);
-
-		addMapButton(createMapButton(inflater, R.layout.drawer_menu_button));
-		addMapButton(createMapButton(inflater, R.layout.navigation_menu_button));
-
-		setInvalidated(true);
-	}
-
-	@NonNull
-	private MapButton createMapButton(@NonNull LayoutInflater inflater, @LayoutRes int layoutId) {
-		return (MapButton) inflater.inflate(layoutId, mapHudLayout, false);
+		addMapButton(activity.findViewById(R.id.map_menu_button));
+		addMapButton(activity.findViewById(R.id.map_route_info_button));
 	}
 
 	private void addMapButton(@NonNull MapButton mapButton) {
-		mapButton.setMapActivity(requireMapActivity());
-
-		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-		MapButtonState buttonState = mapButton.getButtonState();
-		if (buttonState != null) {
-			mapHudLayout.updateButtonParams(params, buttonState.getPositionSize());
-		}
-		mapHudLayout.addView(mapButton, params);
 		mapButtons.add(mapButton);
+		mapButton.setMapActivity(requireMapActivity());
 	}
 
 	public void addCustomMapButton(@NonNull MapButton mapButton) {
@@ -299,17 +267,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void refreshButtons() {
 		for (MapButton button : getAllMapButtons()) {
 			button.update();
+			button.updateMargins();
 		}
-		mapHudLayout.updateButtons();
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		updateControls(nightMode);
-
-		if (invalidated) {
-			app.runInUIThread(this::refreshButtons);
-		}
 	}
 
 	private void updateControls(@Nullable DrawSettings drawSettings) {

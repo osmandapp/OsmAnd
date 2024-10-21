@@ -18,7 +18,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class NavigationMenuButtonState extends MapButtonState {
 
@@ -80,12 +79,5 @@ public class NavigationMenuButtonState extends MapButtonState {
 			return AndroidUtils.getDrawableForDirection(app, drawable);
 		}
 		return drawable;
-	}
-
-	@NonNull
-	@Override
-	public ButtonPositionSize createDefaultButtonPosition() {
-		int size = (BIG_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, true, false).setMoveHorizontal();
 	}
 }
