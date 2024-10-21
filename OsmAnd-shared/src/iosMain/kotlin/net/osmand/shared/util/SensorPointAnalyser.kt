@@ -34,7 +34,7 @@ object SensorPointAnalyser {
 		}
 	}
 
-	private fun getPointAttribute(wptPt: WptPt, key: String, defaultValue: Float): Float {
+	fun getPointAttribute(wptPt: WptPt, key: String, defaultValue: Float): Float {
 		var value = wptPt.getDeferredExtensionsToRead()[key]
 		if (value.isNullOrEmpty()) {
 			value = wptPt.getExtensionsToRead()[key]
