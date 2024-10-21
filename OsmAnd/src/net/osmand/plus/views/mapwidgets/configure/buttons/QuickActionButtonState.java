@@ -219,6 +219,6 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public ButtonPositionSize createDefaultButtonPosition() {
 		int size = (BIG_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical().setMoveHorizontal();
+		return new ButtonPositionSize(getId(), size, false, false).setMoveRandom();
 	}
 }

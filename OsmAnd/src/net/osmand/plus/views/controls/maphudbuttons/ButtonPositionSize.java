@@ -4,8 +4,11 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ButtonPositionSize {
+
+	private static final Random RANDOM = new Random();
 
 	public static final int CELL_SIZE_DP = 8;
 	public static final int DEF_MARGIN_DP = 4;
@@ -18,7 +21,7 @@ public class ButtonPositionSize {
 	public boolean left = true, top = true; // right, bottom false
 	public int marginX = 0, marginY = 0; // in 8dp scale
 	public int width = 7, height = 7; // in 8dp scale including shadow
-	public boolean xMove = false, yMove = false;
+	public boolean xMove = false, yMove = false, randomMove = false;
 	public String id;
 
 	public ButtonPositionSize(String id, int sz8dp, boolean left, boolean top) {
@@ -38,8 +41,14 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public ButtonPositionSize setMoveRandom() {
+		this.randomMove = true;
+		return this;
+	}
+
 	public long toLongValue() {
 		long vl = 0;
+		vl = (vl << 1) + (randomMove ? 1 : 0);
 		vl = (vl << 1) + (top ? 1 : 0);
 		vl = (vl << 1) + (yMove ? 1 : 0);
 		vl = (vl << MAX_MARGIN_BITS) + Math.min(marginY, MARGIN_MASK);
@@ -105,12 +114,16 @@ public class ButtonPositionSize {
 		v = v >> 1;
 		top = v % 2 == 1;
 		v = v >> 1;
+		randomMove = v % 2 == 1;
+		v = v >> 1;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Pos %10s x=(%s->%d%s), y=(%s->%d%s), w=%2d, h=%2d", id, left ? "left " : "right", marginX,
-				xMove ? "+" : " ", top ? "top " : "bott", marginY, yMove ? "+" : " ", width, height);
+		return String.format("Pos %10s x=(%s->%d%s), y=(%s->%d%s), random=%s, w=%2d, h=%2d", id,
+				left ? "left " : "right", marginX, xMove ? "+" : " ",
+				top ? "top " : "bott", marginY, yMove ? "+" : " ",
+				randomMove ? "true" : "false", width, height);
 	}
 
 	public boolean overlap(ButtonPositionSize b) {
@@ -133,10 +146,13 @@ public class ButtonPositionSize {
 					ButtonPositionSize b2 = buttons.get(j);
 					if (b2.overlap(btn)) {
 						overlap = true;
-						if (btn.xMove || !btn.yMove) {
+
+						boolean xMove = btn.xMove || btn.randomMove && RANDOM.nextBoolean();
+						boolean yMove = btn.yMove || btn.randomMove && RANDOM.nextBoolean();
+						if (xMove || !yMove) {
 							btn.marginX = space + b2.marginX + b2.width;
 						}
-						if (btn.yMove) {
+						if (yMove) {
 							btn.marginY = space + b2.marginY + b2.height;
 						}
 						break;
