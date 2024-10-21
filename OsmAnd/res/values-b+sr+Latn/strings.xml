@@ -5627,4 +5627,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Prikazuje potrošnju goriva na temelju proračuna (l/h)</string>
     <string name="obd_fuel_left_percent">Preostalo goriva (%)</string>
     <string name="obd_fuel_level_percent">Nivo goriva (%)</string>
+    <string name="liter">l</string>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="percent_hour">%/h</string>
 </resources>
