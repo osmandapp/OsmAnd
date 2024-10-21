@@ -221,7 +221,7 @@ object OBDDataComputer {
 	class OBDComputerWidget(
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
-		private var values: MutableList<OBDDataField<Any>> = ArrayList()
+		private var values: List<OBDDataField<Any>> = ArrayList()
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
@@ -353,13 +353,13 @@ object OBDDataComputer {
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 							if (values.isEmpty() || values[values.size - 1].value != it.value) {
 								version++
-								values.add(it)
+								values = KCollectionUtils.addToList(values, it)
 							}
 						}
 
 						else -> {
 							version++
-							values.add(it)
+							values = KCollectionUtils.addToList(values, it)
 						}
 					}
 				}

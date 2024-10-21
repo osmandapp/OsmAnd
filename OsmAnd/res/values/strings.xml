@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="simulate_obd">Simulate obd data</string>
     <string name="obd_engine_runtime">Engine runtime</string>
     <string name="obd_engine_runtime_desc">Shows vehicle engine runtime obtained from obd scanner</string>
     <string name="obd_throttle_position">Throttle position</string>

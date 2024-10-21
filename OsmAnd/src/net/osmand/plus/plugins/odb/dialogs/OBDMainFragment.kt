@@ -207,11 +207,6 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		vehicleMetricsPlugin?.setConnectionStateListener(null)
 	}
 
-	override fun onDestroy() {
-		super.onDestroy()
-		widgets.forEach { OBDDataComputer.removeWidget(it) }
-	}
-
 	companion object {
 		const val TAG: String = "VehicleMetricsFragment"
 		const val UPDATE_INTERVAL_MILLIS = 100L

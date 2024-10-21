@@ -28,4 +28,15 @@ enum class OBDCommand(
 	fun parseResponse(response: IntArray): OBDDataField<Any> {
 		return responseParser.invoke(response)
 	}
+
+	companion object {
+		fun getByCode(commandGroup: Int, commandId: Int): OBDCommand? {
+			for (command in entries) {
+				if (command.commandGroup == commandGroup && command.command == commandId) {
+					return command
+				}
+			}
+			return null
+		}
+	}
 }

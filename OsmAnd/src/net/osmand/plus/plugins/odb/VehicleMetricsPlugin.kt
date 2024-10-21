@@ -45,6 +45,7 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
+import net.osmand.shared.obd.ODBSimulationSource
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 import okio.IOException
@@ -327,6 +328,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						socket?.close()
 						socket = null
 					}
+
+					if (settings.SIMULATE_OBD_DATA.get()) {
+						onDeviceConnected(deviceInfo)
+						val simulator = ODBSimulationSource()
+						val input = simulator.reader
+						val output = simulator.writer
+						OBDDispatcher.setReadWriteStreams(input, output)
+						return true
+					}
+
 					val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
 					bluetoothAdapter?.let { adapter ->
 						LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
