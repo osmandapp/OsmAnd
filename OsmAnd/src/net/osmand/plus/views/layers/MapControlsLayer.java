@@ -308,6 +308,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		updateControls(nightMode);
 
 		if (invalidated) {
+			setInvalidated(false);
 			app.runInUIThread(this::refreshButtons);
 		}
 	}

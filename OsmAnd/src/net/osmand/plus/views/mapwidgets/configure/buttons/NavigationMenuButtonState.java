@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
 
@@ -18,7 +17,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class NavigationMenuButtonState extends MapButtonState {
 
@@ -27,6 +25,7 @@ public class NavigationMenuButtonState extends MapButtonState {
 	public NavigationMenuButtonState(@NonNull OsmandApplication app) {
 		super(app, ROUTE_PLANNING_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
+		setupButtonPosition(true, false, true, false, false);
 	}
 
 	@NonNull
@@ -69,7 +68,7 @@ public class NavigationMenuButtonState extends MapButtonState {
 		} else {
 			iconName = "ic_action_gdirections_dark";
 		}
-		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+		return new ButtonAppearanceParams(iconName, getDefaultSize(), OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
 	}
 
 	@Nullable
@@ -80,12 +79,5 @@ public class NavigationMenuButtonState extends MapButtonState {
 			return AndroidUtils.getDrawableForDirection(app, drawable);
 		}
 		return drawable;
-	}
-
-	@NonNull
-	@Override
-	public ButtonPositionSize createDefaultButtonPosition() {
-		int size = (BIG_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, true, false).setMoveHorizontal();
 	}
 }

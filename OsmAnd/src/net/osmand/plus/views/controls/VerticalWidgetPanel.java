@@ -298,6 +298,10 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
 	}
 
+	public boolean isTopPanel() {
+		return topPanel;
+	}
+
 	private void addVerticalDivider(@NonNull ViewGroup container) {
 		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
 	}

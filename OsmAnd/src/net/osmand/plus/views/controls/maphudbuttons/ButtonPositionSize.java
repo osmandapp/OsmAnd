@@ -2,8 +2,11 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class ButtonPositionSize {
@@ -24,6 +27,10 @@ public class ButtonPositionSize {
 	public boolean xMove = false, yMove = false, randomMove = false;
 	public String id;
 
+	public ButtonPositionSize(String id) {
+		this(id, 7, true, true);
+	}
+
 	public ButtonPositionSize(String id, int sz8dp, boolean left, boolean top) {
 		this.id = id;
 		width = height = sz8dp;
@@ -43,6 +50,12 @@ public class ButtonPositionSize {
 
 	public ButtonPositionSize setMoveRandom() {
 		this.randomMove = true;
+		return this;
+	}
+
+	public ButtonPositionSize setSize(int width8dp, int height8dp) {
+		this.width = width8dp;
+		this.height = height8dp;
 		return this;
 	}
 
@@ -118,15 +131,22 @@ public class ButtonPositionSize {
 		v = v >> 1;
 	}
 
+	@NonNull
 	@Override
 	public String toString() {
-		return String.format("Pos %10s x=(%s->%d%s), y=(%s->%d%s), random=%s, w=%2d, h=%2d", id,
+		return String.format(Locale.US, "Pos %10s x=(%s->%d%s), y=(%s->%d%s), random=%s, w=%2d, h=%2d", id,
 				left ? "left " : "right", marginX, xMove ? "+" : " ",
 				top ? "top " : "bott", marginY, yMove ? "+" : " ",
 				randomMove ? "true" : "false", width, height);
 	}
 
-	public boolean overlap(ButtonPositionSize b) {
+	public boolean overlap(ButtonPositionSize b, boolean xMoveAvailable, boolean yMoveAvailable) {
+		if (this.top == b.top && xMoveAvailable) {
+			return this.marginY < b.marginY + b.height && this.marginY + this.height > b.marginY;
+		}
+		if (this.left == b.left && yMoveAvailable) {
+			return this.marginX < b.marginX + b.width && this.marginX + this.width > b.marginX;
+		}
 		if (this.left == b.left && this.top == b.top) {
 			boolean intersect = this.marginX < b.marginX + b.width && this.marginX + this.width > b.marginX;
 			intersect &= this.marginY < b.marginY + b.height && this.marginY + this.height > b.marginY;
@@ -135,7 +155,7 @@ public class ButtonPositionSize {
 		return false;
 	}
 
-	public static void computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
+	public static void computeNonOverlap(int space, int width, int height, List<ButtonPositionSize> buttons) {
 		int MAX_ITERATIONS = 1000, iter = 0;
 		for (int i = 1; i < buttons.size(); i++) {
 			boolean overlap = true;
@@ -144,12 +164,17 @@ public class ButtonPositionSize {
 				overlap = false;
 				for (int j = 0; j < i; j++) {
 					ButtonPositionSize b2 = buttons.get(j);
-					if (b2.overlap(btn)) {
+
+					boolean xMoveUnavailable = b2.width + btn.width >= width;
+					boolean yMoveUnavailable = b2.height + btn.height >= height;
+
+					if (b2.overlap(btn, xMoveUnavailable, yMoveUnavailable)) {
 						overlap = true;
 
-						boolean xMove = btn.xMove || btn.randomMove && RANDOM.nextBoolean();
-						boolean yMove = btn.yMove || btn.randomMove && RANDOM.nextBoolean();
-						if (xMove || !yMove) {
+						boolean xMove = (btn.xMove || btn.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable;
+						boolean yMove = (btn.yMove || btn.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable;
+
+						if (xMove) {
 							btn.marginX = space + b2.marginX + b2.width;
 						}
 						if (yMove) {
