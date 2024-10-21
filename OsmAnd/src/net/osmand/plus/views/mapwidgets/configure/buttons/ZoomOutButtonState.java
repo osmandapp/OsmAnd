@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class ZoomOutButtonState extends MapButtonState {
 
@@ -54,12 +53,5 @@ public class ZoomOutButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_zoom_out", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
-	}
-
-	@NonNull
-	@Override
-	public ButtonPositionSize createDefaultButtonPosition() {
-		int size = (BIG_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, false, false).setMoveVertical();
 	}
 }

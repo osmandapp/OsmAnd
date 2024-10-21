@@ -23,7 +23,6 @@ import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.CompassDrawable;
 import net.osmand.util.Algorithms;
 
@@ -135,12 +134,5 @@ public class CompassButtonState extends MapButtonState {
 			return new CompassDrawable(drawable);
 		}
 		return drawable;
-	}
-
-	@NonNull
-	@Override
-	public ButtonPositionSize createDefaultButtonPosition() {
-		int size = (SMALL_SIZE_DP / 8) + 1;
-		return new ButtonPositionSize(getId(), size, true, true).setMoveVertical();
 	}
 }
