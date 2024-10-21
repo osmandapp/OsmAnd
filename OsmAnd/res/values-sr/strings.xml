@@ -5623,4 +5623,7 @@
     <string name="obd_fuel_consumption_rate_liter_hour">Брзина потрошње горива l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Брзина потрошње горива %/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Брзина потрошње горива (l/h)</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
+    <string name="speedometer_maximum">Максимум</string>
 </resources>
