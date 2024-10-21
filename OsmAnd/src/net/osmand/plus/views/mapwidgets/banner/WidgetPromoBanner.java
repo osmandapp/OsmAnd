@@ -18,7 +18,6 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class WidgetPromoBanner extends MapBaseCard {
 
@@ -65,11 +64,7 @@ public class WidgetPromoBanner extends MapBaseCard {
 		AndroidUtils.setBackground(shield, shieldBg);
 
 		container.setOnClickListener(v -> {
-			if (widgetData.getTitleId() == WidgetType.ALTITUDE_MAP_CENTER.titleId) {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
-			} else {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
-			}
+			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
 		});
 	}
 
