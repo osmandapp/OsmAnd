@@ -545,15 +545,15 @@ public class SpeedometerWidget {
 	}
 
 	private void setSpeedLimitDescription() {
+		boolean visible = false;
 		if (isUsaOrCanadaRegion()) {
 			if (speedLimitDescription != null) {
 				String textLimitDescription = app.getString(isCanadaRegion() ? R.string.speedometer_maximum : R.string.shared_string_limit).toUpperCase();
 				speedLimitDescription.setText(textLimitDescription);
-				AndroidUiHelper.updateVisibility(speedLimitDescription, true);
+				visible = true;
 			}
-		} else {
-			AndroidUiHelper.updateVisibility(speedLimitDescription, false);
 		}
+		AndroidUiHelper.updateVisibility(speedLimitDescription, visible);
 	}
 
 	private boolean isUsaOrCanadaRegion() {
