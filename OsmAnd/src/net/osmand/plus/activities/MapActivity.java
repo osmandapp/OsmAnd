@@ -428,7 +428,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void updateProgress(int progress) {
 		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
-		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
+		if (findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE) {
 			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() || isOnlineRoutingWithApproximation()) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
 				return;
@@ -1604,7 +1604,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	protected List<View> getHidingViews() {
 		List<View> views = new ArrayList<>();
-		View mainContainer = findViewById(R.id.MapHudButtonsOverlay);
+		View mainContainer = findViewById(R.id.map_hud_layout);
 		if (mainContainer != null) {
 			views.add(mainContainer);
 		}

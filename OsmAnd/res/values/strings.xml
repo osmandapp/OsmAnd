@@ -11,13 +11,32 @@
 	Thx - Hardy
 -->
 
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (l/km)</string>
+    <string name="simulate_obd">Simulate obd data</string>
+    <string name="obd_engine_runtime">Engine runtime</string>
+    <string name="obd_engine_runtime_desc">Shows vehicle engine runtime obtained from obd scanner</string>
+    <string name="obd_throttle_position">Throttle position</string>
+    <string name="obd_throttle_position_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Fuel pressure</string>
+    <string name="obd_fuel_pressure_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
+    <string name="obd_calculated_engine_load">Calculated engine load</string>
+    <string name="obd_calculated_engine_load_desc">Shows vehicle calculated engine load based on sensor</string>
+    <string name="obd_engine_oil_temperature">Engine oil temperature</string>
+    <string name="obd_engine_oil_temperature_desc">Shows vehicle engine oil temperature obtained from obd scanner</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (l/h)</string>
 
     <string name="obd_fuel_level_liter">Fuel level (l)</string>
-    <string name="obd_fuel_level_percent">Fuel level (%%)</string>
+    <string name="obd_fuel_level_percent">Fuel level (%)</string>
     <string name="obd_fuel_left_percent">Fuel left (%)</string>
     <string name="obd_fuel_left_liter">Fuel left (l)</string>
     <string name="obd_fuel_left_km">Fuel left (km)</string>
@@ -163,7 +182,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_ambient_air_temp">Ambient temperature</string>
     <string name="obd_battery_voltage">Battery voltage</string>
     <string name="obd_engine_coolant_temp">Coolant temperature</string>
-    <string name="obd_fuel_level">Fuel Efficiency (%%)</string>
+    <string name="obd_fuel_level">Fuel Efficiency (%)</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
     <string name="obd_fuel_left_distance">Fuel left (distance)</string>

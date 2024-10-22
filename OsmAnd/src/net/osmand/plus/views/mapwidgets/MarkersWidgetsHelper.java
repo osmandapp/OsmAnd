@@ -64,7 +64,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 
 	public boolean isMapMarkersBarWidgetVisible() {
 		boolean visible = isBarWidgetsVisible();
-		return visible && mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+		return visible && mapActivity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
 	}
 
 	private boolean isBarWidgetsVisible() {

@@ -43,9 +43,7 @@ public class InfoCard extends BaseMetadataCard {
 				? routeActivity.getLabel()
 				: app.getString(R.string.shared_string_none);
 
-		Drawable icon = getContentIcon(routeActivity != null
-				? AndroidUtils.getIconId(app, routeActivity.getIconName())
-				: R.drawable.ic_action_activity);
+		Drawable icon = getContentIcon(AndroidUtils.getActivityIconId(app, routeActivity));
 
 		createItemRow(getString(R.string.shared_string_activity), label, icon).setOnClickListener(
 				v -> SelectRouteActivityController.showDialog(activity, routeActivitySelectionHelper)

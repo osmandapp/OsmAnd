@@ -1,7 +1,6 @@
 package net.osmand.plus.views.controls;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -22,9 +21,6 @@ import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import org.apache.commons.logging.Log;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Locale;
 
 public class MapHudLayout extends FrameLayout {
 
@@ -34,7 +30,6 @@ public class MapHudLayout extends FrameLayout {
 
 	private final Paint gridPaint;
 	private final float gridSize;
-	private final float shadowSize;
 
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
@@ -52,7 +47,6 @@ public class MapHudLayout extends FrameLayout {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.gridSize = AndroidUtils.dpToPxF(context, 8);
-		this.shadowSize = AndroidUtils.dpToPxF(context, 2);
 		this.gridPaint = new Paint();
 		gridPaint.setColor(Color.BLACK);
 		gridPaint.setStrokeWidth(1f);
@@ -81,14 +75,29 @@ public class MapHudLayout extends FrameLayout {
 		if (width > 0 && height > 0) {
 			int sw = getWidth();
 			int sh = getHeight();
-			int x = roundCoordinate(params.rightMargin, sw, gridSize);
-			int y = roundCoordinate(params.bottomMargin, sh, gridSize);
+
+			int x = roundCoordinate(params.rightMargin, sw, gridSize, button.getShadowPadding());
+			int y = roundCoordinate(params.bottomMargin, sh, gridSize, button.getShadowPadding());
 			if ((params.rightMargin != x) || (params.bottomMargin != y)) {
 				LOG.info(String.format("Correct %d, %d -> %d, %d",
 						params.rightMargin, params.bottomMargin, x, y));
 				params.rightMargin = x;
 				params.bottomMargin = y;
 				button.setLayoutParams(params);
+
+				float frameSize = button.getFrameSize();
+				float imageSize = button.getImageSize();
+				float widthDp = AndroidUtils.pxToDpF(getContext(), width);
+				float heightDp = AndroidUtils.pxToDpF(getContext(), height);
+
+				int imageWidth = button.getImageView().getMeasuredWidth();
+				int imageHeight = button.getImageView().getMeasuredHeight();
+				float imageWidthDp = AndroidUtils.pxToDpF(getContext(), imageWidth);
+				float imageHeightDp = AndroidUtils.pxToDpF(getContext(), imageHeight);
+
+				LOG.info("widthDp " + widthDp + " heightDp " + heightDp
+						+ " imageWidthDp " + imageWidthDp + " imageHeightDp " + imageHeightDp
+						+ " frameSize " + frameSize + " imageSize " + imageSize);
 			}
 		}
 		if (save) {
@@ -97,22 +106,17 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private static int margin = 1;
-	public int roundCoordinate(int coord, int screenSize, float cellSize) {
+
+	public int roundCoordinate(int coord, int screenSize, float cellSize, float shadowPadding) {
 		int fullCells = (int) Math.max(((coord + cellSize) / cellSize), margin);
 		if (2 * fullCells * cellSize < screenSize) {
-			return (int) (fullCells * cellSize - shadowSize);
+			return (int) (fullCells * cellSize - shadowPadding);
 		}
 		float end = (screenSize - (coord - cellSize / 2));
 		fullCells = (int) (end / cellSize);
 		float ret = screenSize - fullCells * cellSize;
 		return (int) (ret);
 	}
-
-	@Override
-	protected void onDraw(@NotNull Canvas canvas) {
-		super.onDraw(canvas);
-	}
-
 
 //	@NonNull
 //	private LayoutParams updateButtonPosition(@NonNull MapButton button, @NonNull QuadTree<QuadRect> intersections) {
@@ -155,7 +159,7 @@ public class MapHudLayout extends FrameLayout {
 	private QuadRect getRect(@NonNull View view) {
 		Rect rect = AndroidUtils.getViewBoundOnWindow(view);
 		if (view instanceof MapButton button) {
-			int radius = button.getShadowRadius();
+			int radius = (int) button.getShadowPadding();
 			return new QuadRect(rect.left - radius, rect.top - radius, rect.right + radius, rect.bottom + radius);
 		} else {
 			return new QuadRect(rect.left, rect.top, rect.right, rect.bottom);

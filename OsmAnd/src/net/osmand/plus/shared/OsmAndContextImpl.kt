@@ -84,7 +84,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		}
 	}
 
-	override fun getTrackPointsAnalyser(): TrackPointsAnalyser =
+	override fun getTrackPointsAnalyser(): TrackPointsAnalyser? =
 		PluginsHelper.getTrackPointsAnalyser()
 
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
