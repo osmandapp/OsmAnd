@@ -3,10 +3,12 @@ package net.osmand.plus.resources;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +39,17 @@ public class AssetsCollection {
 	public Long getVersionTime(@NonNull String destination) {
 		AssetEntry assetEntry = map.get(destination);
 		return assetEntry != null ? assetEntry.getVersionTime() : null;
+	}
+
+	@NonNull
+	public List<AssetEntry> getFilteredEntries(@NonNull CallbackWithObject<AssetEntry> condition) {
+		List<AssetEntry> result = new ArrayList<>();
+		for (AssetEntry entry : getEntrys()) {
+			if (condition.processResult(entry)) {
+				result.add(entry);
+			}
+		}
+		return result;
 	}
 
 	@NonNull
