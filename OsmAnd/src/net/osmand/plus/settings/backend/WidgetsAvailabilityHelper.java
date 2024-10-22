@@ -12,8 +12,8 @@ import static net.osmand.plus.settings.backend.ApplicationMode.PUBLIC_TRANSPORT;
 import static net.osmand.plus.settings.backend.ApplicationMode.SKI;
 import static net.osmand.plus.settings.backend.ApplicationMode.TRAIN;
 import static net.osmand.plus.settings.backend.ApplicationMode.TRUCK;
-import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.BATTERY;
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_SPEED;
@@ -28,7 +28,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.WidgetType.OBD_FUEL_TYPE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
@@ -120,7 +119,6 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SUN_POSITION, all);
 		regWidgetAvailability(GLIDE_TARGET, all);
 		regWidgetAvailability(GLIDE_AVERAGE, all);
-		regWidgetAvailability(OBD_FUEL_TYPE, all);
 
 		// vertical
 		regWidgetVisibility(STREET_NAME, CAR);

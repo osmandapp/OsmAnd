@@ -128,9 +128,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		val fuelConsumptionRateSensorWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR)
 		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateSensorWidget))
-		val fuelTypeWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_TYPE)
-		widgetsInfos.add(creator.createWidgetInfo(fuelTypeWidget))
 		val engineCoolantTempWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
 		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
@@ -262,12 +259,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				customId,
 				widgetsPanel)
 
-			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_TYPE,
-				OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
-				customId,
-				widgetsPanel)
+//			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
+//				mapActivity,
+//				WidgetType.OBD_FUEL_TYPE,
+//				OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
+//				customId,
+//				widgetsPanel)
 
 			WidgetType.OBD_ENGINE_COOLANT_TEMP -> return OBDTextWidget(
 				mapActivity,
