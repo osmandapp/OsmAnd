@@ -158,9 +158,10 @@ public class MapHudLayout extends FrameLayout {
 					positionSize.left, positionSize.left ? params.leftMargin : params.rightMargin,
 					positionSize.top, positionSize.top ? params.topMargin : params.bottomMargin);
 		}
+		updateButtons(); // relayout to avoid overlap
+
 		if (save) {
 			button.savePosition();
 		}
-		updateButtons(); // relayout to avoid overlap
 	}
 }

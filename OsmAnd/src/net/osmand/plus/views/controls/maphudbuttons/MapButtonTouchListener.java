@@ -94,7 +94,6 @@ public class MapButtonTouchListener implements OnTouchListener {
 		view.setLayoutParams(param);
 	}
 
-
 	private int interpolate(int value, int divider, int boundsSize) {
 		if (value <= divider && value > 0) {
 			return value * value / divider;

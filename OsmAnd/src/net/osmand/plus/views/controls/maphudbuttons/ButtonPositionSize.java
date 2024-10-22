@@ -164,27 +164,32 @@ public class ButtonPositionSize {
 				overlap = false;
 				for (int j = 0; j < i; j++) {
 					ButtonPositionSize b2 = buttons.get(j);
-
-					boolean xMoveUnavailable = b2.width + btn.width >= width;
-					boolean yMoveUnavailable = b2.height + btn.height >= height;
-
-					if (b2.overlap(btn, xMoveUnavailable, yMoveUnavailable)) {
-						overlap = true;
-
-						boolean xMove = (btn.xMove || btn.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable;
-						boolean yMove = (btn.yMove || btn.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable;
-
-						if (xMove) {
-							btn.marginX = space + b2.marginX + b2.width;
-						}
-						if (yMove) {
-							btn.marginY = space + b2.marginY + b2.height;
-						}
+					overlap = computeNonOverlap(space, width, height, btn, b2);
+					if (overlap) {
 						break;
 					}
 				}
 			}
 		}
+	}
+
+	public static boolean computeNonOverlap(int space, int width, int height, ButtonPositionSize btn, ButtonPositionSize b2) {
+		boolean xMoveUnavailable = b2.width + btn.width >= width;
+		boolean yMoveUnavailable = b2.height + btn.height >= height;
+
+		if (b2.overlap(btn, xMoveUnavailable, yMoveUnavailable)) {
+			boolean xMove = (btn.xMove || btn.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable;
+			boolean yMove = (btn.yMove || btn.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable;
+
+			if (xMove) {
+				btn.marginX = space + b2.marginX + b2.width;
+			}
+			if (yMove) {
+				btn.marginY = space + b2.marginY + b2.height;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public static List<ButtonPositionSize> defaultLayoutExample() {
