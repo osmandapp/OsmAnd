@@ -423,8 +423,16 @@ public class MenuBuilder {
 		for (int i = 0; i < menuObjects.size(); i++) {
 			MenuObject menuObject = menuObjects.get(i);
 			View container = createRowContainer(app, null);
+			String rowTextPrefix, rowText;
 			String title = menuObject.getTitleStr();
-			String textPrefix = MenuObjectUtils.getSecondLineText(menuObject);
+			if (title.contains(":")) {
+				String[] splitTitle = title.split(":", 2);
+				rowTextPrefix = splitTitle[0];
+				rowText = Algorithms.capitalizeFirstLetter(splitTitle[1].trim());
+			} else {
+				rowTextPrefix = MenuObjectUtils.getSecondLineText(menuObject);
+				rowText = title;
+			}
 			OnClickListener onClickListener = v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
@@ -433,7 +441,7 @@ public class MenuBuilder {
 					contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), contextObject);
 				}
 			};
-			buildDetailsRow(container, null, title, textPrefix, null, null, false, onClickListener);
+			buildDetailsRow(container, null, rowText, rowTextPrefix, null, null, false, onClickListener);
 			llv.addView(container);
 		}
 		return new CollapsableView(llv, this, true);
