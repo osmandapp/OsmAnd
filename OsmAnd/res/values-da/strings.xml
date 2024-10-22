@@ -335,13 +335,13 @@
     <string name="offline_edition_descr">Hvis offline redigering er aktiveret, vil ændringer først blive gemt lokalt og uploadet på forespørgsel. Ellers vil ændringer blive uploadet øjeblikkeligt.</string>
     <string name="update_poi_does_not_change_indexes">Interessepunkt-ændringer lavet i appen påvirker ikke hentede kort, ændringer gemmes som en fil på enheden i stedet.</string>
     <string name="local_openstreetmap_uploading">Overfører…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} interessepunkt/noter blev overført</string>
+    <string name="local_openstreetmap_were_uploaded">{0} interessepunkt/bemærkninger blev overført</string>
     <string name="local_openstreetmap_uploadall">Send alt</string>
     <string name="local_openstreetmap_upload">Send redigering til OSM</string>
     <string name="local_openstreetmap_delete">Slet redigering</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
-    <string name="local_openstreetmap_settings">OSM interessepunkter/noter gemt på enheden</string>
-    <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter i enhedens database.</string>
+    <string name="local_openstreetmap_settings">OSM interessepunkter/bemærkninger gemt på enheden</string>
+    <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/bemærkninger i enhedens database.</string>
     <string name="live_monitoring_interval_descr">Indstil interval for onlinesporing.</string>
     <string name="live_monitoring_interval">Interval for online sporing</string>
     <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
@@ -655,7 +655,7 @@
     <string name="thanks_yandex_traffic">Tak til Yandex for trafikinfo.</string>
     <string name="layer_yandex_traffic">Yandex trafik</string>
     <string name="layer_route">Rute</string>
-    <string name="layer_osm_bugs">OSM-noter (online)</string>
+    <string name="layer_osm_bugs">OSM-bemærkninger (online)</string>
     <string name="layer_map">Vælg kortkilde…</string>
     <string name="menu_layers">Kortlag</string>
     <string name="context_menu_item_search_poi">Søg efter interessepunkt</string>
@@ -1718,21 +1718,21 @@
     <string name="shared_string_location">Placering</string>
     <string name="context_menu_item_delete_waypoint">Slet GPX-rutepunkt?</string>
     <string name="context_menu_item_edit_waypoint">Rediger GPX-rutepunkt</string>
-    <string name="context_menu_item_open_note">Åbn OSM-note</string>
-    <string name="osm_edit_reopened_note">Genåbnet OSM-note</string>
-    <string name="osm_edit_commented_note">Kommenteret OSM-note</string>
-    <string name="osm_edit_created_note">Oprettet OSM-note</string>
-    <string name="osn_bug_name">OSM-note</string>
-    <string name="osn_add_dialog_title">Opret note</string>
+    <string name="context_menu_item_open_note">Lav OSM-bemærkning</string>
+    <string name="osm_edit_reopened_note">Genåbnet OSM-bemærkning</string>
+    <string name="osm_edit_commented_note">Kommenteret OSM-bemærkning</string>
+    <string name="osm_edit_created_note">Oprettet OSM-bemærkning</string>
+    <string name="osn_bug_name">OSM-bemærkning</string>
+    <string name="osn_add_dialog_title">Opret bemærkning</string>
     <string name="osn_comment_dialog_title">Tilføj kommentar</string>
-    <string name="osn_reopen_dialog_title">Genåbn note</string>
-    <string name="osn_close_dialog_title">Luk note</string>
-    <string name="osn_add_dialog_success">Note oprettet</string>
-    <string name="osn_add_dialog_error">Noten kunne ikke oprettes.</string>
-    <string name="osn_close_dialog_error">Noten kunne ikke lukkes.</string>
+    <string name="osn_reopen_dialog_title">Genåbn bemærkning</string>
+    <string name="osn_close_dialog_title">Luk bemærkning</string>
+    <string name="osn_add_dialog_success">Bemærkning oprettet</string>
+    <string name="osn_add_dialog_error">Bemærkningen kunne ikke oprettes.</string>
+    <string name="osn_close_dialog_error">Bemærkningen kunne ikke lukkes.</string>
     <string name="shared_string_commit">Udfør</string>
     <string name="poi_dialog_reopen">Genåbn</string>
-    <string name="osn_close_dialog_success">Note lukket</string>
+    <string name="osn_close_dialog_success">Bemærkning lukket</string>
     <string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
     <string name="osm_save_offline">Gem offline</string>
@@ -1840,9 +1840,9 @@
 \n(Tilgængelig lagerplads er kun {2} MB.)</string>
     <string name="download_files_question_space_with_temp">Hent {0} filer\?
 \n{3} MB brugt midlertidigt, {1} MB permanent. (af {2} MB.)</string>
-    <string name="upload_osm_note">Overfør OSM-note</string>
+    <string name="upload_osm_note">Overfør OSM-bemærkning</string>
     <string name="upload_anonymously">Overfør anonymt</string>
-    <string name="upload_osm_note_description">Overfør OSM-noter anonymt eller ved brug af OpenStreetMap.org-profil.</string>
+    <string name="upload_osm_note_description">Overfør OSM-bemærkning anonymt eller ved brug af OpenStreetMap.org-profil.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
     <string name="show_transparency_seekbar">Vis glider for gennemsigtighed</string>
@@ -2064,7 +2064,7 @@
     <string name="quick_action_take_audio_note_descr">En knap til at tilføje en lydnote midt på skærmen.</string>
     <string name="quick_action_take_video_note_descr">En knap til at tilføje en videonote midt på skærmen.</string>
     <string name="quick_action_take_photo_note_descr">En knap til at tilføje en fotonote midt på skærmen.</string>
-    <string name="quick_action_add_osm_bug_descr">En knap til at tilføje en OSM-note midt på skærmen.</string>
+    <string name="quick_action_add_osm_bug_descr">En knap til at tilføje en OSM-bemærkning midt på skærmen.</string>
     <string name="quick_action_add_poi_descr">En knap yik at tilføje et interessepunkt midt på skærmen.</string>
     <string name="quick_action_navigation_voice_descr">En til/fra-knap for at deaktiverer eller aktivere stemmevejledning under navigation.</string>
     <string name="quick_action_add_parking_descr">En knap til at tilføje en parkeringsplacering midt på skærmen.</string>
@@ -2273,7 +2273,7 @@
     <string name="hide_from_zoom_level">Begynd at skjule fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
     <string name="search_favorites">Søg i Favoritter</string>
-    <string name="quick_action_showhide_osmbugs_descr">Knap til at vise eller skjule OSM-noter på kortet.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Knap til at vise eller skjule OSM-bemærkninger på kortet.</string>
     <string name="restart_search">Start søgning igen</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
@@ -2403,9 +2403,9 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">Undgår isglatte veje og vadesteder.</string>
     <string name="make_round_trip_descr">Tilføj kopi af udgangspunkt som destination.</string>
     <string name="make_round_trip">Foretag rundtur</string>
-    <string name="osn_modify_dialog_error">Kunne ikke ændre note.</string>
+    <string name="osn_modify_dialog_error">Kunne ikke ændre bemærkning.</string>
     <string name="osn_modify_dialog_title">Ændr note</string>
-    <string name="context_menu_item_modify_note">Ændr OSM-note</string>
+    <string name="context_menu_item_modify_note">Ændr OSM-bemærkning</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="show_map">Vis kort</string>
     <string name="route_is_calculated">Ruten beregnes</string>
@@ -2453,7 +2453,7 @@
     <string name="looking_for_tracks_with_waypoints">Søger efter spor med rutepunkter</string>
     <string name="shared_string_more_without_dots">Mere</string>
     <string name="empty_state_osm_edits">Opret eller rediger OpenStreetMap-objekter</string>
-    <string name="empty_state_osm_edits_descr">Opret eller ændr OpenStreetMap-interessepunkter, åbn eller kommenter OSM-noter, og bidrag med optagede GPX-filer.</string>
+    <string name="empty_state_osm_edits_descr">Opret eller ændr OpenStreetMap-interessepunkter, åbn eller kommenter OSM-bemærkninger, og bidrag med optagede GPX-filer.</string>
     <string name="shared_string_deleted">Slettet</string>
     <string name="shared_string_edited">Redigeret</string>
     <string name="shared_string_added">Tilføjet</string>
@@ -2497,15 +2497,15 @@
     <string name="copy_location_name">Kopiér placering/IP-navn</string>
     <string name="toast_empty_name_error">Unavngivet placering</string>
     <string name="show_closed_notes">Vis lukkede noter</string>
-    <string name="switch_osm_notes_visibility_desc">Vis eller skjul OSM-noter på kortet.</string>
+    <string name="switch_osm_notes_visibility_desc">Vis eller skjul OSM-bemærkninger på kortet.</string>
     <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM-redigeringsværktøjer.</string>
     <string name="osc_file_desc">OSC - velegnet som eksport til OpenStreetMap.</string>
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Eksportér som OSM-noter, IP\'er, eller begge dele.</string>
+    <string name="osm_edits_export_desc">Eksportér som OSM-bemærkninger, IP\'er, eller begge dele.</string>
     <string name="all_data">Alle data</string>
-    <string name="osm_notes">OSM-noter</string>
+    <string name="osm_notes">OSM-bemærkninger</string>
     <string name="tunnel_warning">Tunnel forude</string>
     <string name="show_tunnels">Tunneler</string>
     <string name="shared_string_current">Nuværende</string>
@@ -3169,7 +3169,7 @@
     <string name="live_monitoring">Online sporing</string>
     <string name="save_track_logging_accuracy">Lognøjagtighed</string>
     <string name="tracks_view_descr">Dine optagede spor er i %1$s eller i OsmAnd-mappen.</string>
-    <string name="multimedia_notes_view_descr">Noter er i %1$s.</string>
+    <string name="multimedia_notes_view_descr">Dine OSM-bemærkninger er i %1$s.</string>
     <string name="video_notes">Videonoter</string>
     <string name="photo_notes">Fotonoter</string>
     <string name="route_recalculation">Genberegning af rute</string>
@@ -3429,7 +3429,7 @@
     <string name="app_mode_motor_scooter">Scooter</string>
     <string name="app_mode_wheelchair">Kørestol</string>
     <string name="app_mode_go_cart">Go cart</string>
-    <string name="osm_edit_closed_note">Lukkede OSM-note</string>
+    <string name="osm_edit_closed_note">Lukkede OSM-bemærkning</string>
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="one_image_per_tile">En billedfil pr. kortflise</string>
     <string name="online_map_url_helper_text">Angiv eller indsæt URL-adressen til onlinekilden.</string>
@@ -3559,8 +3559,8 @@
     <string name="markers_history">Markørhistorik</string>
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
     <string name="enter_text_separated">Indtast mærker adskilt af komma.</string>
-    <string name="osm_edit_close_note">Luk OSM-note</string>
-    <string name="osm_edit_comment_note">Kommentér OSM-note</string>
+    <string name="osm_edit_close_note">Luk OSM-bemærkning</string>
+    <string name="osm_edit_comment_note">Kommentér OSM-bemærkning</string>
     <string name="osm_login_descr">Log ind ved hjælp af OAuth-metoden eller med dit OSM-brugernavn og adgangskode.</string>
     <string name="shared_string_add_photo">Tilføj fotos</string>
     <string name="register_on_openplacereviews">Tilmeld på
@@ -3584,7 +3584,7 @@
     <string name="export_not_enough_space_descr">Enheden har kun %1$s fri. Frigør plads, eller fravælg nogle elementer fra eksport.</string>
     <string name="select_groups_for_import">Vælg grupper, der skal importeres.</string>
     <string name="select_items_for_import">Vælg emner, der skal importeres.</string>
-    <string name="use_dev_url_descr">Skift til dev.openstreetmap.org i stedet for openstreetmap.org for at teste overførelse af OSM-note / IP / GPX.</string>
+    <string name="use_dev_url_descr">Skift til dev.openstreetmap.org i stedet for openstreetmap.org for at teste overførelse af OSM-bemærkning / IP / GPX.</string>
     <string name="use_dev_url">Brug dev.openstreetmap.org</string>
     <string name="cannot_upload_image">Kan ikke overføre billedet, prøv igen senere</string>
     <string name="select_picture">Vælg billede</string>
@@ -4234,8 +4234,8 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Retmig-mærker</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Øg synlighed af vandveje</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Vis retmig-mærker</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_name">Notat-mærker</string>
-    <string name="rendering_attr_OSMMapperAssistantNote_description">Vis notat-mærker</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Bemærkning-mærker</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Vis bemærkning-mærker</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skematisk visning af ikoner ved lave zoomniveauer</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Øg synlighed af vandvejstunneller</string>
@@ -5635,4 +5635,7 @@
     <string name="obd_fuel_consumption_rate_scanner">Brændstofforbrug (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug l/t</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Brændstofforbrug %/t</string>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="percent_hour">%/t</string>
+    <string name="liter">l</string>
 </resources>

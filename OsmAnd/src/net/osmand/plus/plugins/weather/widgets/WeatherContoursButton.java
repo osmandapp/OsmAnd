@@ -29,7 +29,7 @@ import java.util.List;
 
 public class WeatherContoursButton extends MapButton {
 
-	private final WeatherPlugin plugin;
+	private final WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
 	public WeatherContoursButton(@NonNull Context context) {
 		this(context, null);
@@ -41,8 +41,6 @@ public class WeatherContoursButton extends MapButton {
 
 	public WeatherContoursButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		this.plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-
 		setOnClickListener(v -> chooseContours());
 	}
 
@@ -117,7 +115,8 @@ public class WeatherContoursButton extends MapButton {
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		boolean contourSelected = plugin.getSelectedForecastContoursType() != null;
+		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+		boolean contourSelected = plugin != null && plugin.getSelectedForecastContoursType() != null;
 		String iconName = contourSelected ? "ic_plugin_srtm" : "ic_action_contour_lines_disable";
 		return new ButtonAppearanceParams(iconName, 52, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}

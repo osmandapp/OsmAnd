@@ -62,6 +62,20 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
+	<FrameLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/toolbar_height">
+
+		<include
+			layout="@layout/map_compass_button"
+			android:layout_width="@dimen/map_small_button_size"
+			android:layout_height="@dimen/map_small_button_size"
+			android:layout_marginStart="@dimen/map_button_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin" />
+
+	</FrameLayout>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

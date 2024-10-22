@@ -4878,4 +4878,6 @@
     <string name="poi_payment_parco_no">Parco nicht akzeptiert</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">Parkster nicht akzeptiert</string>
+    <string name="poi_osmand_foot_tunnel_no">Tunnel für Fußgänger verboten</string>
+    <string name="poi_osmand_bicycle_tunnel_no">Tunnel für Radfahrer verboten</string>
 </resources>

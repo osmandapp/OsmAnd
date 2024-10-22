@@ -24,7 +24,7 @@ interface OsmAndContext {
 	fun isGpxFileVisible(path: String): Boolean
 	fun getSelectedFileByPath(path: String): GpxFile?
 	fun getNameStringMatcher(name: String, mode: KStringMatcherMode): KStringMatcher
-	fun getTrackPointsAnalyser(): TrackPointsAnalyser
+	fun getTrackPointsAnalyser(): TrackPointsAnalyser?
 	fun getAssetAsString(name: String): String?
 	fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback)
 }

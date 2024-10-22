@@ -6015,4 +6015,7 @@
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Consumo de combustible l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Consumo de combustible %/h</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
+    <string name="speedometer_maximum">Máximo</string>
 </resources>

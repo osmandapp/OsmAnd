@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
     <string name="l_100km">l/100km</string>
     <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>

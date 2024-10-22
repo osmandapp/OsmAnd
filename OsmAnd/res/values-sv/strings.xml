@@ -5717,4 +5717,8 @@
     <string name="obd_fuel_level_percent">Bränslenivå (%)</string>
     <string name="obd_widget_vehicle_speed">Fordonets hastighet</string>
     <string name="liter_per_hour">l/tim</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Off-road motorcykel-leder</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Visa leder för off-road motorcykel (cross, enduro)</string>
+    <string name="type_of_activity">Aktivitetstyp</string>
+    <string name="change_activity">Byt aktivitet</string>
 </resources>

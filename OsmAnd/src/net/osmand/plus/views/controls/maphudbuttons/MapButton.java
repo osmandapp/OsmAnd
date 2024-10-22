@@ -2,7 +2,6 @@ package net.osmand.plus.views.controls.maphudbuttons;
 
 import static android.graphics.Region.Op.DIFFERENCE;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.widget.ImageView.ScaleType.CENTER;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
@@ -104,8 +103,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs,
-	                 @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.app = (OsmandApplication) context.getApplicationContext();
@@ -114,13 +112,21 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this.strokeWidth = AndroidUtils.dpToPx(context, 1);
 		this.shadowRadius = AndroidUtils.dpToPx(context, 2);
 		this.shadowPadding = AndroidUtils.dpToPxF(context, 4);
-
-		imageView = new ImageView(context, attrs, defStyleAttr);
-		imageView.setClickable(false);
-		imageView.setFocusable(false);
-		addView(imageView, new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT, Gravity.CENTER));
+		this.imageView = setupImageView(context, attrs, defStyleAttr, defStyleRes);
 
 		init();
+	}
+
+	@NonNull
+	protected ImageView setupImageView(@NonNull Context context, @Nullable AttributeSet attrs,
+	                                   @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+		int imageSize = (int) getImageSize();
+		ImageView imageView = new ImageView(context, attrs, defStyleAttr, defStyleRes);
+		imageView.setClickable(false);
+		imageView.setFocusable(false);
+		addView(imageView, new FrameLayout.LayoutParams(imageSize, imageSize, Gravity.CENTER));
+
+		return imageView;
 	}
 
 	protected void init() {
