@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="dynamic_icon_type_summary">Icon changes based on action state.</string>
+    <string name="shared_string_dynamic">Dynamic</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
     <string name="l_100km">l/100km</string>
