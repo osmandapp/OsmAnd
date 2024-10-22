@@ -428,11 +428,7 @@ public class MenuBuilder {
 			if (title.contains(":")) {
 				String[] splitTitle = title.split(":", 2);
 				rowTextPrefix = splitTitle[0];
-				rowText = splitTitle[1];
-				if (rowText.startsWith(" ")) {
-					rowText = rowText.substring(1);
-				}
-				rowText = Algorithms.capitalizeFirstLetter(rowText);
+				rowText = Algorithms.capitalizeFirstLetter(splitTitle[1].trim());
 			} else {
 				rowTextPrefix = MenuObjectUtils.getSecondLineText(menuObject);
 				rowText = title;
