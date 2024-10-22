@@ -2280,7 +2280,6 @@ public class BinaryMapIndexReader {
 	private static boolean testTransportSearch = false;
 	private static boolean testPoiRouteByName = true;
 	private static boolean testPoiRouteByType = true;
-	private static boolean testPoiRouteByRouteId = true;
 
 	private static int sleft = MapUtils.get31TileNumberX(27.55079);
 	private static int sright = MapUtils.get31TileNumberX(27.55317);
@@ -2329,20 +2328,15 @@ public class BinaryMapIndexReader {
 			}
 		}
 
-		if (testPoiRouteByName || testPoiRouteByType || testPoiRouteByRouteId) {
-			int y = MapUtils.get31TileNumberY(36.023431), x = MapUtils.get31TileNumberX(14.298406); // Malta
+		if (testPoiRouteByName || testPoiRouteByType) {
+			int y = MapUtils.get31TileNumberY(36.023431);
+			int x = MapUtils.get31TileNumberX(14.298406);
 			if (testPoiRouteByName) {
-				testPoiSearchByName(reader, "Gozo Coastal Walk", x, y); // Gozo Island osm_hiking track
-//				testPoiSearchByName(reader, "PWB", x, y); // ref of Planet Walk Bugibba on Malta
+				testPoiSearchByName(reader, "Gozo Coastal Walk", x, y); // Malta - Gozo Island - osm_hiking track
 			}
 			if (testPoiRouteByType) {
 				testPoiSearchByType(reader, "routes", "osm_hiking", x, y);
-//				testPoiSearchByType(reader, "routes", "osm_bicycle", x, y);
-//				testPoiSearchByType(reader, "routes", "osm_mtb", x, y);
 //				testPoiSearchByType(reader, "routes", null, x, y);
-			}
-			if (testPoiRouteByRouteId) {
-				// TODO
 			}
 		}
 
