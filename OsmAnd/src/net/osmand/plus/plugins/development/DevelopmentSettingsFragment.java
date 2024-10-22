@@ -72,6 +72,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
 		setupBatterySavingModePref();
+		setupSimulateOBDDataPref();
 		setupDebugRenderingInfoPref();
 		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
@@ -127,6 +128,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private void setupBatterySavingModePref() {
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
 		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
+		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupSimulateOBDDataPref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
+		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 

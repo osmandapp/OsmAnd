@@ -9,7 +9,6 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
-	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 	private val log = LoggerFactory.getLogger("Obd2Connection")
 	var initialized = false
 
@@ -74,9 +73,11 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> {
+				initialized = false
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
+
 			"CANERROR" -> {
 				log.error("CAN bus error")
 				return OBDResponse.ERROR
@@ -200,6 +201,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			basePid += 0x20
 		}
 		return result
+	}
+
+	companion object {
+		private val initCommands =
+			arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+
+		fun isInitCommand(command: String): Boolean {
+			return initCommands.contains(command)
+		}
 	}
 
 }

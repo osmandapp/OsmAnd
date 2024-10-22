@@ -28,6 +28,11 @@ object OBDUtils {
 		return OBDDataField(result)
 	}
 
+	fun parseEngineRuntime(response: IntArray): OBDDataField<Any> {
+		val result = (256 * response[0]) + response[1]
+		return OBDDataField(result)
+	}
+
 	fun parseSpeedResponse(response: IntArray): OBDDataField<Any> {
 		return if(response.isNotEmpty()) {
 			OBDDataField(response[0])
@@ -36,22 +41,17 @@ object OBDUtils {
 		}
 	}
 
-	fun parseIntakeAirTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
+	fun parseTempResponse(response: IntArray): OBDDataField<Any> {
+		val result = response[0] - 40
 		return OBDDataField(result)
 	}
 
-	fun parseAmbientTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
+	fun parseFuelPressureResponse(response: IntArray): OBDDataField<Any> {
+		val result = response[0] * 3
 		return OBDDataField(result)
 	}
 
-	fun parseEngineCoolantTempResponse(response: IntArray): OBDDataField<Any> {
-		val result = response[0] * (100.0f / 255.0f)
-		return OBDDataField(result)
-	}
-
-	fun parseFuelLevelResponse(response: IntArray): OBDDataField<Any> {
+	fun parsePercentResponse(response: IntArray): OBDDataField<Any> {
 		val result = response[0] * (100.0f / 255.0f)
 		return OBDDataField(result)
 	}

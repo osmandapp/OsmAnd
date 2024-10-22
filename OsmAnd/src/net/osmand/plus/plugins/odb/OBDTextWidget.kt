@@ -11,12 +11,12 @@ import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.util.Algorithms
 
-class OBDTextWidget @JvmOverloads constructor(
+class OBDTextWidget(
 	mapActivity: MapActivity,
 	widgetType: WidgetType,
 	fieldType: OBDTypeWidget,
-	customId: String? = null,
-	widgetsPanel: WidgetsPanel? = null) :
+	customId: String?,
+	widgetsPanel: WidgetsPanel?) :
 	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel) {
 	private val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 	private val widgetComputer: OBDComputerWidget
@@ -27,7 +27,8 @@ class OBDTextWidget @JvmOverloads constructor(
 		var averageTimeSeconds = 0
 
 		if (fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR ||
-			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR) {
+			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
+			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM) {
 			averageTimeSeconds = 5 * 60
 		}
 

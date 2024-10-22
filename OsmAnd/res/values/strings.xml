@@ -12,6 +12,22 @@
 -->
 
     <string name="speedometer_maximum">Maximum</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (l/km)</string>
+    <string name="simulate_obd">Simulate obd data</string>
+    <string name="obd_engine_runtime">Engine runtime</string>
+    <string name="obd_engine_runtime_desc">Shows vehicle engine runtime obtained from obd scanner</string>
+    <string name="obd_throttle_position">Throttle position</string>
+    <string name="obd_throttle_position_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Fuel pressure</string>
+    <string name="obd_fuel_pressure_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
+    <string name="obd_calculated_engine_load">Calculated engine load</string>
+    <string name="obd_calculated_engine_load_desc">Shows vehicle calculated engine load based on sensor</string>
+    <string name="obd_engine_oil_temperature">Engine oil temperature</string>
+    <string name="obd_engine_oil_temperature_desc">Shows vehicle engine oil temperature obtained from obd scanner</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>

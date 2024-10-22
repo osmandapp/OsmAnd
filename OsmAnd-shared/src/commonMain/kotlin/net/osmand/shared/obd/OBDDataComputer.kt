@@ -71,6 +71,11 @@ object OBDDataComputer {
 		type: OBDTypeWidget,
 		averageTimeSeconds: Int
 	): OBDComputerWidget {
+		for (widget in widgets) {
+			if (widget.type == type && widget.averageTimeSeconds == averageTimeSeconds) {
+				return widget
+			}
+		}
 		val widget = OBDComputerWidget(type, averageTimeSeconds)
 		widgets = KCollectionUtils.addToList(widgets, widget)
 		updateRequiredCommands()
@@ -105,10 +110,30 @@ object OBDDataComputer {
 			OBD_RPM_COMMAND,
 			"obd_rpm",
 			OBDComputerWidgetFormatter("%d")),
+		ENGINE_RUNTIME(
+			false,
+			OBD_ENGINE_RUNTIME_COMMAND,
+			"obd_engine_runtime",
+			OBDComputerWidgetFormatter("%s")),
+		FUEL_PRESSURE(
+			false,
+			OBD_FUEL_PRESSURE_COMMAND,
+			"obd_fuel_pressure",
+			OBDComputerWidgetFormatter("%d")),
 		FUEL_LEFT_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_left_distance",
+			OBDComputerWidgetFormatter("%.0f")),
+		CALCULATED_ENGINE_LOAD(
+			false,
+			OBD_CALCULATED_ENGINE_LOAD_COMMAND,
+			"obd_calculated_engine_load",
+			OBDComputerWidgetFormatter("%.0f")),
+		THROTTLE_POSITION(
+			false,
+			OBD_THROTTLE_POSITION_COMMAND,
+			"obd_throttle_position",
 			OBDComputerWidgetFormatter("%.0f")),
 		FUEL_LEFT_PERCENT(
 			false,
@@ -124,6 +149,10 @@ object OBDDataComputer {
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.0f")),
+		FUEL_CONSUMPTION_RATE_LITER_KM(
+			true,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.0f")),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
@@ -136,6 +165,11 @@ object OBDDataComputer {
 			false,
 			OBD_AIR_INTAKE_TEMP_COMMAND,
 			"obd_air_intake_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		ENGINE_OIL_TEMPERATURE(
+			false,
+			OBD_ENGINE_OIL_TEMPERATURE_COMMAND,
+			"obd_engine_oil_temperature",
 			OBDComputerWidgetFormatter("%.0f")),
 		TEMPERATURE_AMBIENT(
 			false,
@@ -191,7 +225,7 @@ object OBDDataComputer {
 	class OBDComputerWidget(
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
-		private var values: MutableList<OBDDataField<Any>> = ArrayList()
+		private var values: List<OBDDataField<Any>> = ArrayList()
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
@@ -207,16 +241,18 @@ object OBDDataComputer {
 
 		private fun compute(): Any? {
 			val locValues = ArrayList(values)
-			if (locValues.size > 0 && locValues[0] == OBDDataField.NO_DATA) {
+			if (locValues.size > 0 && locValues[locValues.size - 1] == OBDDataField.NO_DATA) {
 				return "N/A"
 			}
 			return when (type) {
 				TEMPERATURE_AMBIENT,
 				TEMPERATURE_COOLANT,
 				TEMPERATURE_INTAKE,
+				ENGINE_OIL_TEMPERATURE,
 				SPEED,
 				BATTERY_VOLTAGE,
 				FUEL_CONSUMPTION_RATE_SENSOR,
+				FUEL_PRESSURE,
 				RPM -> {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
@@ -241,30 +277,50 @@ object OBDDataComputer {
 					}
 				}
 
+				FUEL_CONSUMPTION_RATE_LITER_KM -> {
+					20f //todo implement calculation
+				}
+
 				FUEL_LEFT_KM -> {
 					// works for window > 15 min
 					if (locValues.size >= 2) {
-						val first = locValues[0]
+						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						if (first.location != null && last.location != null) {
-							val diffPerc = last.value as Float - first.value as Float
-							if (diffPerc > 0) {
-								var dist = 0.0
-								for (i in 0 until locValues.size - 1) {
+						val diffPerc = first.value as Float - last.value as Float
+						if (diffPerc > 0) {
+							var start = 0
+							var end = locations.size - 1
+							while (start < locations.size) {
+								if (locations[start].time > first.timestamp) {
+									break
+								}
+								start++
+							}
+							while (end >= 0) {
+								if (locations[end].time < last.timestamp) {
+									break
+								}
+								end--
+							}
+							var dist = 0.0
+							if (start < end) {
+								for (k in start until end) {
 									dist += KMapUtils.getDistance(
-										locations[i].latLon,
-										locations[i + 1].latLon)
+										locations[start].latLon,
+										locations[end].latLon)
 								}
-								if (dist > 0) {
-									val lastPerc = last.value
-									lastPerc / diffPerc * dist
-								}
+							}
+							if (dist > 0) {
+								val lastPerc = last.value
+								return lastPerc * dist / diffPerc
 							}
 						}
 					}
 					null
 				}
 
+				THROTTLE_POSITION,
+				CALCULATED_ENGINE_LOAD,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].value as Float
@@ -281,14 +337,8 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_TYPE -> {
-					if (locValues.size > 0) {
-						locValues[locValues.size - 1].value
-					} else {
-						null
-					}
-				}
-
+				FUEL_TYPE,
+				ENGINE_RUNTIME,
 				VIN -> if (locValues.size > 0) {
 					(locValues[locValues.size - 1]).value
 				} else {
@@ -300,7 +350,7 @@ object OBDDataComputer {
 		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
 			val first = locValues[locValues.size - 2]
 			val last = locValues[locValues.size - 1]
-			val diffPerc = first.value as Float - last.value as Float
+			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 			val diffTime = last.timestamp - first.timestamp
 			println("diftime $diffTime; diffPerc $diffPerc")
 			return diffPerc / diffTime * 1000 * 3600
@@ -315,23 +365,19 @@ object OBDDataComputer {
 					values = mutableListOf(it)
 				} else {
 					when (type) {
-						FUEL_LEFT_KM -> {
-							if (locations.isNotEmpty()) {
-								it.location = locations.last()
-							}
-						}
-
+						FUEL_LEFT_KM,
+						FUEL_CONSUMPTION_RATE_LITER_KM,
 						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 							if (values.isEmpty() || values[values.size - 1].value != it.value) {
 								version++
-								values.add(it)
+								values = KCollectionUtils.addToList(values, it)
 							}
 						}
 
 						else -> {
 							version++
-							values.add(it)
+							values = KCollectionUtils.addToList(values, it)
 						}
 					}
 				}
