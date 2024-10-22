@@ -149,6 +149,10 @@ object OBDDataComputer {
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.0f")),
+		FUEL_CONSUMPTION_RATE_LITER_KM(
+			true,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.0f")),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
@@ -273,24 +277,42 @@ object OBDDataComputer {
 					}
 				}
 
+				FUEL_CONSUMPTION_RATE_LITER_KM -> {
+					20f //todo implement calculation
+				}
+
 				FUEL_LEFT_KM -> {
 					// works for window > 15 min
 					if (locValues.size >= 2) {
-						val first = locValues[0]
+						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						if (first.location != null && last.location != null) {
-							val diffPerc = last.value as Float - first.value as Float
-							if (diffPerc > 0) {
-								var dist = 0.0
-								for (i in 0 until locValues.size - 1) {
+						val diffPerc = first.value as Float - last.value as Float
+						if (diffPerc > 0) {
+							var start = 0
+							var end = locations.size - 1
+							while (start < locations.size) {
+								if (locations[start].time > first.timestamp) {
+									break
+								}
+								start++
+							}
+							while (end >= 0) {
+								if (locations[end].time < last.timestamp) {
+									break
+								}
+								end--
+							}
+							var dist = 0.0
+							if (start < end) {
+								for (k in start until end) {
 									dist += KMapUtils.getDistance(
-										locations[i].latLon,
-										locations[i + 1].latLon)
+										locations[start].latLon,
+										locations[end].latLon)
 								}
-								if (dist > 0) {
-									val lastPerc = last.value
-									lastPerc / diffPerc * dist
-								}
+							}
+							if (dist > 0) {
+								val lastPerc = last.value
+								return lastPerc * dist / diffPerc
 							}
 						}
 					}
@@ -343,12 +365,8 @@ object OBDDataComputer {
 					values = mutableListOf(it)
 				} else {
 					when (type) {
-						FUEL_LEFT_KM -> {
-							if (locations.isNotEmpty()) {
-								it.location = locations.last()
-							}
-						}
-
+						FUEL_LEFT_KM,
+						FUEL_CONSUMPTION_RATE_LITER_KM,
 						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 							if (values.isEmpty() || values[values.size - 1].value != it.value) {

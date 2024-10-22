@@ -10,6 +10,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import com.google.gson.GsonBuilder
@@ -56,6 +58,10 @@ import java.util.UUID
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	OBDDispatcher.OBDReadStatusListener {
 	private val settings: OsmandSettings = app.settings
+	private var mapActivity: MapActivity? = null
+	private val handler = Handler(Looper.myLooper()!!)
+	private val RECONNECT_DELAY = 5000L
+
 	val USED_OBD_DEVICES = registerStringPreference(
 		"used_obd_devices",
 		"").makeGlobal().cache();
@@ -116,6 +122,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		val fuelConsumptionRatePercentHourWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR)
 		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRatePercentHourWidget))
+		val fuelConsumptionRateLiterKmWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateLiterKmWidget))
 		val fuelConsumptionRateSensorWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR)
 		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateSensorWidget))
@@ -137,92 +146,135 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			WidgetType.OBD_SPEED -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_SPEED,
-				OBDDataComputer.OBDTypeWidget.SPEED)
+				OBDDataComputer.OBDTypeWidget.SPEED,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_RPM -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_RPM,
-				OBDDataComputer.OBDTypeWidget.RPM)
+				OBDDataComputer.OBDTypeWidget.RPM,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_ENGINE_RUNTIME -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_ENGINE_RUNTIME,
-				OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME)
+				OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_PRESSURE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_PRESSURE,
-				OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE)
+				OBDDataComputer.OBDTypeWidget.FUEL_PRESSURE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_AIR_INTAKE_TEMP -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_AIR_INTAKE_TEMP,
-				OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE)
+				OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.ENGINE_OIL_TEMPERATURE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.ENGINE_OIL_TEMPERATURE,
-				OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE)
+				OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_AMBIENT_AIR_TEMP -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_AMBIENT_AIR_TEMP,
-				OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT)
+				OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_BATTERY_VOLTAGE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_BATTERY_VOLTAGE,
-				OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE)
+				OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_LEFT_PERCENT -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_LEFT_PERCENT,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT)
+				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_CALCULATED_ENGINE_LOAD -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_CALCULATED_ENGINE_LOAD,
-				OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD)
+				OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_THROTTLE_POSITION -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_THROTTLE_POSITION,
-				OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION)
+				OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_LEFT_DISTANCE,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM)
+				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_LEFT_LITER -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_LEFT_LITER,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER)
+				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR)
+				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+				customId,
+				widgetsPanel)
+
+			WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM -> return OBDTextWidget(
+				mapActivity,
+				WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM,
+				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR)
+				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR)
+				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_FUEL_TYPE -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_FUEL_TYPE,
-				OBDDataComputer.OBDTypeWidget.FUEL_TYPE)
+				OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
+				customId,
+				widgetsPanel)
 
 			WidgetType.OBD_ENGINE_COOLANT_TEMP -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_ENGINE_COOLANT_TEMP,
-				OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT)
+				OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
+				customId,
+				widgetsPanel)
 
 			else -> null
 		}
@@ -429,13 +481,21 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	override fun onIOError() {
-//		socket?.apply {
-//			if(!isConnected) {
-//				connectedDevice?.let { device ->
-//					connectToDevice()
-//				}
-//			}
-//		}
+		socket?.apply {
+			close()
+			disconnect()
+			handler.removeCallbacksAndMessages(null)
+			handler.postDelayed({reconnectObd()}, RECONNECT_DELAY)
+		}
+	}
+
+	private fun reconnectObd() {
+		mapActivity?.let {
+			val lastConnectedDevice = getLastConnectedDevice()
+			if (connectedDeviceInfo == null && lastConnectedDevice != null) {
+				connectToObd(it, lastConnectedDevice)
+			}
+		}
 	}
 
 	override fun onInitConnectionFailed() {
@@ -557,6 +617,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	override fun mapActivityPause(activity: MapActivity) {
 		super.mapActivityPause(activity)
+		mapActivity = null
 		try {
 			activity.unregisterReceiver(bluetoothReceiver)
 		} catch (_: IllegalArgumentException) {
@@ -565,6 +626,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	override fun mapActivityResume(activity: MapActivity) {
 		super.mapActivityResume(activity)
+		mapActivity = activity
 		val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
 		activity.registerReceiver(bluetoothReceiver, filter)
 	}
@@ -586,14 +648,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 		val convertedData = when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Int)
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Int)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature((data as Int).toFloat())
 
-			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)//todo time
+			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
@@ -634,6 +697,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
 			OBDDataComputer.OBDTypeWidget.VIN -> null
+
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> app.getString(R.string.l_100km)
 		}
 	}
 
@@ -655,8 +720,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return formattedValue.valueSrc
 	}
 
-	private fun getConvertedDistance(speed: Int): Float {
-		val formattedValue = OsmAndFormatter.getFormattedDistanceValue(speed.toFloat() * 1000, app)
+	private fun getConvertedDistance(distance: Double): Float {
+		val formattedValue = OsmAndFormatter.getFormattedDistanceValue(distance.toFloat(), app)
 		return formattedValue.valueSrc
 	}
 

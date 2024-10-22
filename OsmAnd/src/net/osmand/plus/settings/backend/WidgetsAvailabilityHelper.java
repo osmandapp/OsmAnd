@@ -101,7 +101,6 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
-		regWidgetVisibility(OBD_FUEL_TYPE, all);
 		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
 				HORSE, TRAIN);
 		regWidgetVisibility(MAX_SPEED, none);

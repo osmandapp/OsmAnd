@@ -87,6 +87,8 @@ object OBDDispatcher {
 								}
 							} else if(commandResult == OBDResponse.NO_DATA) {
 								sensorDataCache[command] = OBDDataField.NO_DATA
+							} else if(commandResult == OBDResponse.ERROR) {
+								readStatusListener?.onIOError()
 							}
 						}
 					} catch (error: IOException) {

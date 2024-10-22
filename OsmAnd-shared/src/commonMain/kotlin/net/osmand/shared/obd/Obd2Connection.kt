@@ -73,6 +73,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> {
+				initialized = false
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
