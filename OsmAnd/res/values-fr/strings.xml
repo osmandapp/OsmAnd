@@ -5611,7 +5611,7 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation de carburant du véhicule grâce à un capteur (l/h)</string>
     <string name="obd_fuel_level_liter">Niveau de carburant (l)</string>
-    <string name="obd_fuel_level_percent">Niveau de carburant (%%)</string>
+    <string name="obd_fuel_level_percent">Niveau de carburant (%)</string>
     <string name="obd_fuel_left_percent">Carburant restant (%)</string>
     <string name="obd_fuel_left_liter">Carburant restant (l)</string>
     <string name="obd_fuel_left_km">Carburant restant (km)</string>
@@ -5620,4 +5620,7 @@
     <string name="obd_fuel_consumption_rate_percent_hour">Consommation de carburant %/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Consommation d\'essence (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Consommation d\'essence (capteur)</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
 </resources>

@@ -5991,4 +5991,7 @@
     <string name="obd_device_forget_sensor_description">Pemindai akan dihapus dari daftar. Anda akan dapat menyandingkan pemindai ini lagi kapan pun.</string>
     <string name="obd_fuel_consumption_rate_l_h">Tingkat konsumsi bahan bakar (l/j)</string>
     <string name="connect_obd_instructions_step">1. Hubungkan pemindai ke porta OBD-II kendaraan Anda.\n\n 2. Nyalakan mesin kendaraan Anda\n\n 3. Aktifkan Bluetooth di perangkat Anda\n\n 4. Ketuk \'%1$s\' dan pilih pemindai Anda dari daftar.</string>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/j</string>
 </resources>
