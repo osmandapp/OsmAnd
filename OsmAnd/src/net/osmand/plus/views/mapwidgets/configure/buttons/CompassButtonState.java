@@ -33,6 +33,7 @@ public class CompassButtonState extends MapButtonState {
 	public CompassButtonState(@NonNull OsmandApplication app) {
 		super(app, COMPASS_HUD_ID);
 		visibilityPref = createVisibilityPref();
+		setupButtonPosition(true, true, false, true, false);
 	}
 
 	@NonNull
@@ -50,6 +51,11 @@ public class CompassButtonState extends MapButtonState {
 	@Override
 	public int getDefaultLayoutId() {
 		return R.layout.map_compass_button;
+	}
+
+	@Override
+	public int getDefaultSize() {
+		return SMALL_SIZE_DP;
 	}
 
 	@Override
@@ -123,7 +129,7 @@ public class CompassButtonState extends MapButtonState {
 		CompassMode compassMode = settings.getCompassMode();
 		boolean nightMode = app.getDaynightHelper().isNightMode();
 		String iconName = app.getResources().getResourceEntryName(compassMode.getIconId().getIconId(nightMode));
-		return new ButtonAppearanceParams(iconName, SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams(iconName, getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
 	@Nullable

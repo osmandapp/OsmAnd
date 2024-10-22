@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
@@ -19,6 +18,7 @@ public class ZoomOutButtonState extends MapButtonState {
 	public ZoomOutButtonState(@NonNull OsmandApplication app) {
 		super(app, ZOOM_OUT_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
+		setupButtonPosition(false, false, false, true, false);
 	}
 
 	@NonNull
@@ -52,6 +52,6 @@ public class ZoomOutButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_zoom_out", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams("ic_zoom_out", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 }

@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
@@ -19,6 +18,7 @@ public class ZoomInButtonState extends MapButtonState {
 	public ZoomInButtonState(@NonNull OsmandApplication app) {
 		super(app, ZOOM_IN_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
+		setupButtonPosition(false, false, false, true, false);
 	}
 
 	@NonNull
@@ -52,6 +52,6 @@ public class ZoomInButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_zoom_in", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams("ic_zoom_in", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 }
