@@ -81,7 +81,7 @@ open class OBDDevicesAdapter(
 			if (isConnected) R.string.external_device_details_disconnect else R.string.external_device_details_connect)
 		enableDisableItem.setIcon(
 			app.uiUtilities.getIcon(
-				if (isConnected) R.drawable.ic_action_obd2_connector_disconnect else R.drawable.ic_action_obd2_connector_disable,
+				if (isConnected) R.drawable.ic_action_obd2_connector_disconnect else R.drawable.ic_action_obd2_connector,
 				menuIconColor))
 		enableDisableItem.setOnMenuItemClickListener { _: MenuItem? ->
 			if (isConnected) {
@@ -121,7 +121,7 @@ open class OBDDevicesAdapter(
 			R.string.external_device_menu_forget)
 		forgetItem.setIcon(
 			app.uiUtilities.getIcon(
-				R.drawable.ic_action_obd2_connector_disconnect,
+				R.drawable.ic_action_obd2_connector_disable,
 				menuIconColor))
 		forgetItem.setOnMenuItemClickListener { _: MenuItem? ->
 			deviceClickListener?.onForget(device)

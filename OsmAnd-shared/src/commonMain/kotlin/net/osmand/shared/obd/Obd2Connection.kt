@@ -11,6 +11,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private val log = LoggerFactory.getLogger("Obd2Connection")
 	var initialized = false
+	var isFinished = false
 
 	init {
 		try {
@@ -31,7 +32,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		val response = StringBuilder()
 		log.debug("runImpl($command)")
 		connection.write((command + "\r").encodeToByteArray())
-		while (true) {
+		while (!isFinished) {
 			val value = connection.readByte() ?: continue
 			val c = value.toChar()
 			// this is the prompt, stop here
@@ -48,6 +49,9 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		if(isFinished) {
+			return OBDResponse.ERROR
+		}
 		log.debug("before runImpl")
 		var response = runImpl(fullCommand)
 		log.debug("after runImpl")
@@ -73,7 +77,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> {
-				initialized = false
+				isFinished = true
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
