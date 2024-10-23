@@ -64,7 +64,10 @@ class ODBSimulationSource {
 				OBDCommand.OBD_SPEED_COMMAND -> toNormalizedHex(99)
 				OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> toNormalizedHex(100)
 				OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> toNormalizedHex(80)
-				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> "NODATA"
+				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> {
+					bufferToRead = "NODATA"
+					return@runBlocking
+				}
 				OBDCommand.OBD_FUEL_TYPE_COMMAND -> "01"
 				OBDCommand.OBD_FUEL_LEVEL_COMMAND -> {
 					val curTime = currentTimeMillis()

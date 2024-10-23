@@ -9,7 +9,6 @@ import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSetti
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment;
-import net.osmand.plus.plugins.odb.dialogs.VehicleMetricsSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
