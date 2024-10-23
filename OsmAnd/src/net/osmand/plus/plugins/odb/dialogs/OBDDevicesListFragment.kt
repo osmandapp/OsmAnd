@@ -162,7 +162,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				val disconnectedDevices =
 					plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
 						.toMutableList()
-				if (disconnectedDevices.isEmpty() && settings.SIMULATE_OBD_DATA.get()) {
+				if (connectedDevices.isEmpty() && disconnectedDevices.isEmpty() && settings.SIMULATE_OBD_DATA.get()) {
 					disconnectedDevices.add(BTDeviceInfo("Simulation Device", ""))
 				}
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {

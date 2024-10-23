@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import net.osmand.Location
 import net.osmand.PlatformUtil
+import net.osmand.StateChangedListener
 import net.osmand.aidlapi.OsmAndCustomizationConstants
 import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_VEHICLE_METRICS_ID
 import net.osmand.plus.OsmandApplication
@@ -301,7 +302,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		for (command in OBDCommand.entries) {
 			OBDDispatcher.addCommand(command)
 		}
+		settings.SIMULATE_OBD_DATA.addListener(simulateOBDListener)
 		return true
+	}
+
+	private val simulateOBDListener = StateChangedListener<Boolean> { enabled ->
+		if (!enabled) {
+			disconnect()
+		}
 	}
 
 	fun registerBooleanPref(prefId: String, defValue: Boolean): CommonPreference<Boolean> {
@@ -356,9 +364,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	fun disconnect() {
+		OBDDispatcher.stopReading()
 		socket?.apply {
 			if (isConnected) {
-				OBDDispatcher.stopReading()
 				close()
 			}
 		}
@@ -482,7 +490,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			close()
 			disconnect()
 			handler.removeCallbacksAndMessages(null)
-			handler.postDelayed({reconnectObd()}, RECONNECT_DELAY)
+			handler.postDelayed({ reconnectObd() }, RECONNECT_DELAY)
 		}
 	}
 
@@ -523,16 +531,18 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	private fun saveDeviceToUsedOBDDevicesList(deviceInfo: BTDeviceInfo) {
-		val currentList = getUsedOBDDevicesList().toMutableList()
-		val savedDevice = currentList.find { it.address == deviceInfo.address }
-		if (savedDevice == null) {
-			currentList.add(deviceInfo)
-			writeUsedOBDDevicesList(currentList)
-		} else {
-			if (savedDevice.name != deviceInfo.name) {
-				currentList.remove(savedDevice)
+		if (deviceInfo.address.isNotEmpty()) {
+			val currentList = getUsedOBDDevicesList().toMutableList()
+			val savedDevice = currentList.find { it.address == deviceInfo.address }
+			if (savedDevice == null) {
 				currentList.add(deviceInfo)
 				writeUsedOBDDevicesList(currentList)
+			} else {
+				if (savedDevice.name != deviceInfo.name) {
+					currentList.remove(savedDevice)
+					currentList.add(deviceInfo)
+					writeUsedOBDDevicesList(currentList)
+				}
 			}
 		}
 	}
