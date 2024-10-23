@@ -166,6 +166,15 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		return createDefaultAppearanceParams();
 	}
 
+	@Nullable
+	public ButtonPositionSize getPositionSize() {
+		MapButtonState buttonState = getButtonState();
+		if (buttonState != null) {
+			return useCustomPosition ? buttonState.getPositionSize() : buttonState.getDefaultPositionSize();
+		}
+		return null;
+	}
+
 	public void setCustomAppearanceParams(@Nullable ButtonAppearanceParams customAppearanceParams) {
 		this.customAppearanceParams = customAppearanceParams;
 	}
@@ -178,6 +187,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	public void setAlwaysVisible(boolean alwaysVisible) {
 		this.alwaysVisible = alwaysVisible;
+	}
+
+	public boolean isUseCustomPosition() {
+		return useCustomPosition;
 	}
 
 	public void setUseCustomPosition(boolean useCustomPosition) {

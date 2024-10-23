@@ -40,6 +40,7 @@ public abstract class MapButtonState {
 	protected final CommonPreference<Integer> cornerRadiusPref;
 	protected final CommonPreference<Long> positionPref;
 	protected final ButtonPositionSize positionSize;
+	protected final ButtonPositionSize defaultPositionSize;
 
 	private final StateChangedListener<Integer> sizeListener;
 
@@ -56,8 +57,12 @@ public abstract class MapButtonState {
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
 		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
 		this.positionSize = createButtonPosition();
+		this.defaultPositionSize = createButtonPosition();
 
-		sizeListener = change -> updatePositionSize(positionSize);
+		sizeListener = change -> {
+			updatePositionSize(positionSize);
+			updatePositionSize(defaultPositionSize);
+		};
 		sizePref.addListener(sizeListener);
 	}
 
@@ -118,6 +123,11 @@ public abstract class MapButtonState {
 	}
 
 	@NonNull
+	public ButtonPositionSize getDefaultPositionSize() {
+		return setupButtonPosition(defaultPositionSize);
+	}
+
+	@NonNull
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
 
@@ -141,8 +151,9 @@ public abstract class MapButtonState {
 	}
 
 	@NonNull
-	protected ButtonPositionSize createButtonPosition() {
+	public ButtonPositionSize createButtonPosition() {
 		ButtonPositionSize position = new ButtonPositionSize(getId());
+		setupButtonPosition(position);
 
 		Long value = positionPref.get();
 		if (value != null && value > 0) {
@@ -153,12 +164,21 @@ public abstract class MapButtonState {
 		return position;
 	}
 
-	protected void setupButtonPosition(boolean left, boolean top, boolean xMove, boolean yMove, boolean randomMove) {
-		positionSize.left = left;
-		positionSize.top = top;
-		positionSize.xMove = xMove;
-		positionSize.yMove = yMove;
-		positionSize.randomMove = randomMove;
+	@NonNull
+	protected abstract ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position);
+
+	@NonNull
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position, boolean left, boolean top,
+	                                                 boolean xMove, boolean yMove, boolean randomMove) {
+		position.left = left;
+		position.top = top;
+		position.xMove = xMove;
+		position.yMove = yMove;
+		position.randomMove = randomMove;
+		position.marginX = 0;
+		position.marginY = 0;
+
+		return position;
 	}
 
 	private void updatePositionSize(@NonNull ButtonPositionSize position) {

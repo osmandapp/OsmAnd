@@ -1,16 +1,18 @@
 package net.osmand.plus.views.controls;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -20,11 +22,15 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapHudLayout extends FrameLayout {
 
 	private static final Log LOG = PlatformUtil.getLog(MapHudLayout.class);
+
+	private final List<MapButton> mapButtons = new ArrayList<>();
+	private final Map<View, ButtonPositionSize> widgetPositions = new LinkedHashMap<>();
 
 	private final float dpToPx;
 	private final int statusBarHeight;
@@ -43,75 +49,143 @@ public class MapHudLayout extends FrameLayout {
 
 	public MapHudLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
-		this.dpToPx = AndroidUtils.dpToPxF(getContext(), 1);
+
+		this.dpToPx = AndroidUtils.dpToPxF(context, 1);
 		this.statusBarHeight = AndroidUtils.getStatusBarHeight(context);
+	}
+
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+
+		addPosition(findViewById(R.id.widget_top_bar));
+		addPosition(findViewById(R.id.map_left_widgets_panel));
+		addPosition(findViewById(R.id.map_right_widgets_panel));
+		addPosition(findViewById(R.id.top_widgets_panel));
+		addPosition(findViewById(R.id.map_bottom_widgets_panel));
+	}
+
+	private void addPosition(@Nullable View view) {
+		if (view != null) {
+			addChangeListeners(view);
+			widgetPositions.put(view, createWidgetPosition(view));
+		}
+	}
+
+	private void addChangeListeners(@NonNull View view) {
+		view.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+			if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
+				updateButtons();
+			}
+		});
+		view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
+			@Override
+			public void onViewAttachedToWindow(@NonNull View v) {
+				updateButtons();
+			}
+
+			@Override
+			public void onViewDetachedFromWindow(@NonNull View v) {
+				updateButtons();
+			}
+		});
+	}
+
+
+	@NonNull
+	public List<MapButton> getMapButtons() {
+		return mapButtons;
+	}
+
+	public void addMapButton(@NonNull MapButton button) {
+		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+		ButtonPositionSize position = button.getPositionSize();
+		if (position != null) {
+			updateButtonParams(params, position);
+		}
+		addView(button, params);
+		mapButtons.add(button);
+	}
+
+	public void removeMapButton(@NonNull MapButton button) {
+		removeView(button);
+		mapButtons.remove(button);
 	}
 
 	public void updateButtons() {
 		if (getWidth() <= 0 && getHeight() <= 0) {
 			return;
 		}
-		Map<String, ButtonPositionSize> map = getButtonPositionSizes();
-		for (int i = 0; i < getChildCount(); i++) {
-			View child = getChildAt(i);
-			if (child instanceof MapButton button && button.getVisibility() == VISIBLE) {
-				String id = button.getButtonId();
-				ButtonPositionSize positionSize = map.get(id);
-				if (positionSize != null) {
-					updateButtonPosition(button, positionSize);
-				}
+		Map<View, ButtonPositionSize> map = getButtonPositionSizes();
+		for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
+			View view = entry.getKey();
+			if (view instanceof MapButton button) {
+				updateButtonPosition(button, entry.getValue());
 			}
 		}
 	}
 
 	@NonNull
-	private Map<String, ButtonPositionSize> getButtonPositionSizes() {
-		Map<String, ButtonPositionSize> map = new LinkedHashMap<>();
-		collectButtonPositions(this, map);
+	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
+		Map<View, ButtonPositionSize> positions = collectPositions();
 
 		int width = (int) AndroidUtils.pxToDpF(getContext(), getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), getHeight()) / 8;
-		ButtonPositionSize.computeNonOverlap(1, width, height, new ArrayList<>(map.values()));
 
-		return map;
+		for (ButtonPositionSize b : positions.values()) {
+			LOG.info("BTNS " + b.toString());
+		}
+		ButtonPositionSize.computeNonOverlap(1, width, height, new ArrayList<>(positions.values()));
+		LOG.info("BTNS ----------");
+		for (ButtonPositionSize b : positions.values()) {
+			LOG.info("BTNS " + b.toString());
+		}
+		return positions;
 	}
 
-	private void collectButtonPositions(@NonNull ViewGroup parent, @NonNull Map<String, ButtonPositionSize> map) {
-		for (int i = 0; i < parent.getChildCount(); i++) {
-			View child = parent.getChildAt(i);
-			if (child.getVisibility() == VISIBLE) {
-				if (child instanceof MapButton || child instanceof SideWidgetsPanel || child instanceof VerticalWidgetPanel) {
-					ButtonPositionSize position = getButtonPositionSize(child);
-					if (position != null) {
-						map.put(position.id, position);
-					}
-				} else if (child instanceof ViewGroup) {
-					collectButtonPositions((ViewGroup) child, map);
+	@NonNull
+	private Map<View, ButtonPositionSize> collectPositions() {
+		Map<View, ButtonPositionSize> map = new LinkedHashMap<>();
+
+		for (Map.Entry<View, ButtonPositionSize> entry : widgetPositions.entrySet()) {
+			View view = entry.getKey();
+			if (view.getVisibility() == VISIBLE) {
+				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
+				map.put(view, position);
+			}
+		}
+		for (MapButton button : mapButtons) {
+			if (button.getVisibility() == VISIBLE) {
+				ButtonPositionSize position = button.getPositionSize();
+				if (position != null) {
+					map.put(button, position);
 				}
 			}
 		}
+		return map;
 	}
 
-	@Nullable
-	private ButtonPositionSize getButtonPositionSize(@NonNull View view) {
-		if (view instanceof MapButton button) {
-			MapButtonState buttonState = button.getButtonState();
-			return buttonState != null ? buttonState.getPositionSize() : null;
-		} else {
-			int width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
-			int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
-
-			ButtonPositionSize position = new ButtonPositionSize(getResources().getResourceEntryName(view.getId()));
-			position.setSize(width, height);
-
-			if (view instanceof VerticalWidgetPanel panel) {
-				position.top = panel.isTopPanel();
-			} else if (view instanceof SideWidgetsPanel panel) {
-				position.top = true;
-				position.left = !panel.rightSide;
-			}
-			return position;
+	@NonNull
+	private ButtonPositionSize createWidgetPosition(@NonNull View view) {
+		String name = getResources().getResourceEntryName(view.getId());
+		ButtonPositionSize position = new ButtonPositionSize(name);
+		if (view instanceof VerticalWidgetPanel panel) {
+			position.top = panel.isTopPanel();
+		} else if (view instanceof SideWidgetsPanel panel) {
+			position.top = true;
+			position.left = !panel.rightSide;
+		} else if (view.getId() == R.id.widget_top_bar) {
+			position.top = true;
 		}
+		return updateWidgetPosition(view, position);
+	}
+
+	@NonNull
+	private ButtonPositionSize updateWidgetPosition(@NonNull View view, @NonNull ButtonPositionSize position) {
+		int width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
+		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
+		position.setSize(width, height);
+		return position;
 	}
 
 	public void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize position) {
