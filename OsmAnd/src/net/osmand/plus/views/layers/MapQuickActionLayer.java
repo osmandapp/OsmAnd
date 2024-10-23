@@ -142,6 +142,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			}
 			actionButtons = buttons;
 			mapButtonStates = buttonStates;
+			mapHudLayout.updateButtons();
 		}
 	}
 
