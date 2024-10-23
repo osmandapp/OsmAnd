@@ -58,7 +58,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private VerticalWidgetPanel topWidgetsPanel;
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
-	private View mapRulerLayout;
+	private RulerWidget rulerWidget;
 	private AlarmWidget alarmWidget;
 	private SpeedometerWidget speedometerWidget;
 	private List<RulerWidget> rulerWidgets;
@@ -96,7 +96,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
-			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
+			rulerWidget = mapActivity.findViewById(R.id.map_ruler_layout);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
 
 			registerAllControls(mapActivity);
@@ -123,7 +123,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			bottomWidgetsPanel = null;
 			leftWidgetsPanel = null;
 			rightWidgetsPanel = null;
-			mapRulerLayout = null;
+			rulerWidget = null;
 			androidAutoMapPlaceholderView = null;
 
 			drawSettings = null;
@@ -217,7 +217,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView);
 		speedometerWidget.setVisibility(false);
 
-		setupRulerWidget(mapRulerLayout);
+		setupRulerWidget(rulerWidget);
 		widgetRegistry.registerAllControls(mapActivity);
 	}
 
@@ -262,10 +262,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	@Nullable
-	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
+	public RulerWidget setupRulerWidget(@NonNull RulerWidget widget) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RulerWidget widget = new RulerWidget(app, mapRulerView);
 			widget.setVisibility(false);
 
 			TextState state = calculateTextState(false);

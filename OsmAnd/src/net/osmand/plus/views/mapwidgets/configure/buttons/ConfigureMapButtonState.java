@@ -66,6 +66,6 @@ public class ConfigureMapButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, true, true, true, false, false);
+		return setupButtonPosition(position, true, true, false, true, false);
 	}
 }
