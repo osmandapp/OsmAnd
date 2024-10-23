@@ -73,28 +73,14 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private void addChangeListeners(@NonNull View view) {
-		view.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-			if (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom) {
-				updateButtons();
-			}
-		});
-		view.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
-			@Override
-			public void onViewAttachedToWindow(@NonNull View v) {
-				updateButtons();
-			}
-
-			@Override
-			public void onViewDetachedFromWindow(@NonNull View v) {
-				updateButtons();
-			}
-		});
-	}
-
-
-	@NonNull
-	public List<MapButton> getMapButtons() {
-		return mapButtons;
+		if (view instanceof ViewChangeProvider provider) {
+			provider.setSizeListener((v, w, h, oldw, oldh) -> {
+				if (w != oldw || h != oldh) {
+					post(this::updateButtons);
+				}
+			});
+			provider.setVisibilityListener((v, visibility) -> post(this::updateButtons));
+		}
 	}
 
 	public void addMapButton(@NonNull MapButton button) {
@@ -128,18 +114,11 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
 		Map<View, ButtonPositionSize> positions = collectPositions();
-
 		int width = (int) AndroidUtils.pxToDpF(getContext(), getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), getHeight()) / 8;
 
-		for (ButtonPositionSize b : positions.values()) {
-			LOG.info("BTNS " + b.toString());
-		}
 		ButtonPositionSize.computeNonOverlap(1, width, height, new ArrayList<>(positions.values()));
-		LOG.info("BTNS ----------");
-		for (ButtonPositionSize b : positions.values()) {
-			LOG.info("BTNS " + b.toString());
-		}
+
 		return positions;
 	}
 
@@ -167,7 +146,7 @@ public class MapHudLayout extends FrameLayout {
 
 	@NonNull
 	private ButtonPositionSize createWidgetPosition(@NonNull View view) {
-		String name = getResources().getResourceEntryName(view.getId());
+		String name = getViewName(view);
 		ButtonPositionSize position = new ButtonPositionSize(name);
 		if (view instanceof VerticalWidgetPanel panel) {
 			position.top = panel.isTopPanel();
@@ -178,6 +157,10 @@ public class MapHudLayout extends FrameLayout {
 			position.top = true;
 		}
 		return updateWidgetPosition(view, position);
+	}
+
+	private String getViewName(@NonNull View view) {
+		return getResources().getResourceEntryName(view.getId());
 	}
 
 	@NonNull
@@ -236,5 +219,21 @@ public class MapHudLayout extends FrameLayout {
 			button.savePosition();
 		}
 		updateButtons(); // relayout to avoid overlap
+	}
+
+	public interface VisibilityChangeListener {
+		void onVisibilityChanged(@NonNull View view, int visibility);
+	}
+
+	public interface SizeChangeListener {
+		void onSizeChanged(@NonNull View view, int w, int h, int oldw, int oldh);
+	}
+
+	public interface ViewChangeProvider {
+
+		void setSizeListener(@Nullable SizeChangeListener listener);
+
+		void setVisibilityListener(@Nullable VisibilityChangeListener listener);
+
 	}
 }
