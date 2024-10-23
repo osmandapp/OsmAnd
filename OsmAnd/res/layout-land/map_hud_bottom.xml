@@ -101,7 +101,15 @@
 
 			<!-- RULER -->
 
-			<include layout="@layout/map_ruler" />
+			<LinearLayout
+				android:id="@+id/map_ruler_container"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom">
+
+				<include layout="@layout/map_ruler" />
+
+			</LinearLayout>
 
 			<!-- TRANSPARENCY -->
 
