@@ -243,7 +243,9 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		}
 	}
 
-	override fun onStateChanged(state: VehicleMetricsPlugin.OBDConnectionState) {
+	override fun onStateChanged(
+		state: VehicleMetricsPlugin.OBDConnectionState,
+		deviceInfo: BTDeviceInfo?) {
 		app.runInUIThread { updatePairedSensorsList() }
 	}
 }
