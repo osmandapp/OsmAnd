@@ -68,7 +68,7 @@
 \n
 \nOsmAnd 正在積極開發，專案也持續的發展，依賴資金捐助以用於開發和測試新的功能。請考慮購買 OsmAnd+ 或是資助特定的新功能，又或在 https://osmand.net 網站上捐款。</string>
     <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 \n \nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 \n \n一些主要的功能： \n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） \n- 全球離線向量圖資 \n- 直接由手機下載各國或區域圖資 \n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵 \n \n- 離線查詢地址、場所(POI) \n- 中程距離的離線路線 \n- 汽車、自行車、步行模式有多種選項： \n- 自動日夜模式切換 \n- 可依據速度選擇地圖縮放 \n- 根據羅盤或行進方向進行地圖對齊 \n- 車道引導、速限顯示、使用真人語音或文字轉語音</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 \n \nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 \n \n一些主要的功能： \n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） \n- 提供簡潔的全世界向量地圖 \n- 直接從應用程式下載國家或區域地圖 \n- 離線維基百科功能（下載維基百興趣點），非常適合觀光使用 \n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵 \n \n- 離線查詢地址、場所(POI) \n- 中程距離的離線路線 \n- 汽車、自行車、步行模式有多種選項： \n- 自動日夜模式切換 \n- 可依據速度選擇地圖縮放 \n- 根據羅盤或行進方向進行地圖對齊 \n- 車道引導、速限顯示、使用真人語音或文字轉語音</string>
     <string name="filterpoi_activity">建立 POI 篩選</string>
     <string name="recalculate_route_to_your_location">交通模式：</string>
     <string name="select_navigation_mode">交通模式：</string>
@@ -5615,4 +5615,20 @@
     <string name="speedometer_maximum">最大</string>
     <string name="liter">公升</string>
     <string name="percent_hour">%/小時</string>
+    <string name="l_100km">公升/100公里</string>
+    <string name="obd_fuel_consumption_rate_l_km">燃料消耗率（公升/公里）</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">顯示根據計算而得的車輛燃料消耗率（公升/公里）</string>
+    <string name="simulate_obd">模擬 OBD 資料</string>
+    <string name="obd_engine_runtime">引擎運轉時間</string>
+    <string name="obd_engine_runtime_desc">顯示從 OBD 掃描器取得的車輛引擎運轉時間</string>
+    <string name="kpa_unit">千帕</string>
+    <string name="obd_throttle_position_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
+    <string name="obd_calculated_engine_load">計算得出的引擎負載</string>
+    <string name="obd_calculated_engine_load_desc">顯示根據感應器計算得出的車輛引擎負載</string>
+    <string name="obd_engine_oil_temperature">引擎機油溫度</string>
+    <string name="obd_engine_oil_temperature_desc">顯示從 OBD 掃描器取得的車輛引擎機油溫度</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
+    <string name="obd_throttle_position">油門位置</string>
+    <string name="obd_fuel_pressure">燃料壓力</string>
+    <string name="obd_fuel_pressure_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
 </resources>

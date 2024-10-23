@@ -6018,4 +6018,20 @@
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="speedometer_maximum">Máximo</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Mostrar el consumo de combustible (l/km)</string>
+    <string name="simulate_obd">Simular datos OBD</string>
+    <string name="obd_engine_runtime">Tiempo del motor funcionando</string>
+    <string name="obd_throttle_position">Posición del acelerador</string>
+    <string name="obd_fuel_pressure">Presión del combustible</string>
+    <string name="obd_fuel_pressure_desc">Muestra la presión del combustible del vehículo (presión de medición) obtenida del escáner OBD</string>
+    <string name="obd_calculated_engine_load">Carga del motor calculada</string>
+    <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
+    <string name="obd_engine_oil_temperature_desc">Muestra la temperatura del aceite del motor obtenida por el escáner OBD</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo (%/h)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Consumo de combustible (l/km)</string>
+    <string name="obd_engine_runtime_desc">Muestra el tiempo de funcionamiento del motor obtenido del escáner obd</string>
+    <string name="obd_throttle_position_desc">Muestra la presión del combustible del vehículo (presión de medición) obtenida del escáner OBD</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_calculated_engine_load_desc">Muestra la carga del motor calculada del vehículo basada en el sensor</string>
 </resources>
