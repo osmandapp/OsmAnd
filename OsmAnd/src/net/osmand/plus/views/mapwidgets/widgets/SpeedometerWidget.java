@@ -223,7 +223,9 @@ public class SpeedometerWidget {
 			setSpeedText(String.valueOf(PREVIEW_VALUE), formattedSpeed.unit);
 			setSpeedLimitText(String.valueOf(PREVIEW_VALUE));
 			setSpeedLimitDescription();
-			speedLimitContainer.setVisibility(settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS ? View.VISIBLE : View.INVISIBLE);
+			if (speedLimitContainer != null) {
+				speedLimitContainer.setVisibility(settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS ? View.VISIBLE : View.INVISIBLE);
+			}
 		}
 	}
 
@@ -274,7 +276,10 @@ public class SpeedometerWidget {
 					setSpeedLimitText(speedLimitText);
 				}
 				AndroidUiHelper.updateVisibility(view, true);
-				speedLimitContainer.setVisibility(alarm != null ? View.VISIBLE : View.INVISIBLE);
+				if (speedLimitContainer != null) {
+					speedLimitContainer.setVisibility(alarm != null ? View.VISIBLE : View.INVISIBLE);
+				}
+
 				float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 				speedExceed = formattedSpeed.valueSrc > 0 && cachedSpeedLimit > 0 &&
 						formattedSpeed.valueSrc > cachedSpeedLimit + delta;
