@@ -465,7 +465,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	override fun getSettingsScreenType(): SettingsScreenType {
-		return SettingsScreenType.VEHICLE_METRICS_SETTINGS
+		return if(isConnected()) {
+			SettingsScreenType.VEHICLE_CONNECTED_METRICS_SETTINGS
+		} else {
+			SettingsScreenType.VEHICLE_METRICS_SETTINGS
+		}
 	}
 
 
@@ -478,7 +482,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	fun isConnected(): Boolean {
-		return socket?.isConnected == true
+		return getConnectedDeviceInfo() != null
 	}
 
 	companion object {
