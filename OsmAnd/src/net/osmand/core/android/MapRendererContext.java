@@ -706,14 +706,16 @@ public class MapRendererContext {
 	}
 
 	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
-		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
 		List<RenderedObject> res = new ArrayList<>();
-		if (polygons.size() > 0) {
-			for (int i = 0; i < polygons.size(); i++) {
-				MapObject polygon = polygons.get(i);
-				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
-				if (renderedObject != null) {
-					res.add(renderedObject);
+		if (mapPrimitivesProvider != null) {
+			MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+			if (polygons.size() > 0) {
+				for (int i = 0; i < polygons.size(); i++) {
+					MapObject polygon = polygons.get(i);
+					RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
+					if (renderedObject != null) {
+						res.add(renderedObject);
+					}
 				}
 			}
 		}
