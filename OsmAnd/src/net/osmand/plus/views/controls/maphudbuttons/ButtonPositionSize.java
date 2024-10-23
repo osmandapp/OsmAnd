@@ -110,6 +110,10 @@ public class ButtonPositionSize {
 		return (int) (((marginX + width) * CELL_SIZE_DP + DEF_MARGIN_DP) * dpToPix);
 	}
 
+	public int getWidthPix(float dpToPix) {
+		return (int) ((width * CELL_SIZE_DP) * dpToPix);
+	}
+
 	public void fromLongValue(long v) {
 		width = (int) (v & SIZE_MASK);
 		v = v >> MAX_SIZE_BITS;

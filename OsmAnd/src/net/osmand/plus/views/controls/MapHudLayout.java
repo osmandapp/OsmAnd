@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
@@ -72,6 +74,8 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.map_right_widgets_panel));
 		addPosition(findViewById(R.id.top_widgets_panel));
 		addPosition(findViewById(R.id.map_bottom_widgets_panel));
+
+		updateRulerWidget(findViewById(R.id.map_ruler_container));
 	}
 
 	private void addPosition(@Nullable View view) {
@@ -252,6 +256,15 @@ public class MapHudLayout extends FrameLayout {
 
 	private int getAdjustedHeight() {
 		return getHeight() - statusBarHeight;
+	}
+
+	private void updateRulerWidget(@NonNull View widget) {
+		MapButtonsHelper helper = app.getMapButtonsHelper();
+		ButtonPositionSize drawer = helper.getDrawerMenuButtonState().getPositionSize();
+		ButtonPositionSize navigation = helper.getNavigationMenuButtonState().getPositionSize();
+
+		MarginLayoutParams params = (MarginLayoutParams) widget.getLayoutParams();
+		params.setMarginStart((int) (drawer.getWidthPix(dpToPx) + navigation.getWidthPix(dpToPx) + DEF_MARGIN_DP * dpToPx));
 	}
 
 	public interface VisibilityChangeListener {
