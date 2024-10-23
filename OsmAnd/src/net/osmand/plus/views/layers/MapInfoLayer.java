@@ -205,7 +205,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		additionalWidgets = new ArrayList<>();
 
 		if (topToolbarView == null) {
-			topToolbarView = new TopToolbarView(mapActivity);
+			topToolbarView = mapActivity.findViewById(R.id.widget_top_bar);
+			topToolbarView.setMapActivity(mapActivity);
 		}
 		updateTopToolbar(false);
 
@@ -254,7 +255,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void updateRow(MapWidget widget) {
-		if(getMapActivity() != null || !getMapActivity().isActivityDestroyed()) {
+		if (getMapActivity() != null || !getMapActivity().isActivityDestroyed()) {
 			topWidgetsPanel.updateRow(widget);
 			bottomWidgetsPanel.updateRow(widget);
 		}

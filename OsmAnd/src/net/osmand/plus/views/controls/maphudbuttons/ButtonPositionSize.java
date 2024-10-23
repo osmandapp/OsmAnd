@@ -140,11 +140,11 @@ public class ButtonPositionSize {
 				randomMove ? "true" : "false", width, height);
 	}
 
-	public boolean overlap(ButtonPositionSize b, boolean xMoveAvailable, boolean yMoveAvailable) {
-		if (this.top == b.top && xMoveAvailable) {
+	public boolean overlap(ButtonPositionSize b, boolean xMoveUnavailable, boolean yMoveUnavailable) {
+		if (this.top == b.top && xMoveUnavailable) {
 			return this.marginY < b.marginY + b.height && this.marginY + this.height > b.marginY;
 		}
-		if (this.left == b.left && yMoveAvailable) {
+		if (this.left == b.left && yMoveUnavailable) {
 			return this.marginX < b.marginX + b.width && this.marginX + this.width > b.marginX;
 		}
 		if (this.left == b.left && this.top == b.top) {
@@ -153,6 +153,10 @@ public class ButtonPositionSize {
 			return intersect;
 		}
 		return false;
+	}
+
+	public boolean canBeMoved() {
+		return xMove || yMove || randomMove;
 	}
 
 	public static void computeNonOverlap(int space, int width, int height, List<ButtonPositionSize> buttons) {
@@ -178,18 +182,27 @@ public class ButtonPositionSize {
 		boolean yMoveUnavailable = b2.height + btn.height >= height;
 
 		if (b2.overlap(btn, xMoveUnavailable, yMoveUnavailable)) {
-			boolean xMove = (btn.xMove || btn.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable;
-			boolean yMove = (btn.yMove || btn.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable;
-
-			if (xMove) {
-				btn.marginX = space + b2.marginX + b2.width;
+			if (btn.canBeMoved()) {
+				return moveButton(space, btn, b2, xMoveUnavailable, yMoveUnavailable);
+			} else if (b2.canBeMoved()) {
+				return moveButton(space, b2, btn, xMoveUnavailable, yMoveUnavailable);
 			}
-			if (yMove) {
-				btn.marginY = space + b2.marginY + b2.height;
-			}
-			return true;
 		}
 		return false;
+	}
+
+	private static boolean moveButton(int space, ButtonPositionSize buttonToMove, ButtonPositionSize overlappedButton,
+	                                  boolean xMoveUnavailable, boolean yMoveUnavailable) {
+		boolean xMove = ((buttonToMove.xMove || buttonToMove.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable);
+		boolean yMove = ((buttonToMove.yMove || buttonToMove.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable);
+
+		if (xMove) {
+			buttonToMove.marginX = space + overlappedButton.marginX + overlappedButton.width;
+		}
+		if (yMove) {
+			buttonToMove.marginY = space + overlappedButton.marginY + overlappedButton.height;
+		}
+		return xMove || yMove;
 	}
 
 	public static List<ButtonPositionSize> defaultLayoutExample() {
