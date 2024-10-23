@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.odb.dialogs
 
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -32,6 +33,15 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	private lateinit var device: BTDeviceInfo
 
 	private var updateEnable = false
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		if (!this::device.isInitialized) {
+			vehicleMetricsPlugin?.getConnectedDeviceInfo()?.let {
+				device = it
+			}
+		}
+	}
 
 	@ColorRes
 	override fun getStatusBarColorId(): Int {
