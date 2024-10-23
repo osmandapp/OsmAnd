@@ -2496,7 +2496,7 @@
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
     <string name="copy_location_name">Kopiér placering/IP-navn</string>
     <string name="toast_empty_name_error">Unavngivet placering</string>
-    <string name="show_closed_notes">Vis lukkede noter</string>
+    <string name="show_closed_notes">Vis lukkede bemærkninger</string>
     <string name="switch_osm_notes_visibility_desc">Vis eller skjul OSM-bemærkninger på kortet.</string>
     <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM-redigeringsværktøjer.</string>
     <string name="osc_file_desc">OSC - velegnet som eksport til OpenStreetMap.</string>
@@ -5638,4 +5638,20 @@
     <string name="speedometer_maximum">Maksimum</string>
     <string name="percent_hour">%/t</string>
     <string name="liter">l</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
+    <string name="l_100km">l/100 km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/km)</string>
+    <string name="simulate_obd">Simulér obd-data</string>
+    <string name="obd_engine_runtime_desc">Viser køretid for køretøjets motor hentet fra obd-scanner</string>
+    <string name="obd_engine_runtime">Motorens køretid</string>
+    <string name="obd_throttle_position">Gashåndtagets position</string>
+    <string name="obd_throttle_position_desc">Viser køretøjets brændstoftryk (målertryk) opnået fra obd-scanner</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Brændstoftryk</string>
+    <string name="obd_calculated_engine_load">Beregnet motorbelastning</string>
+    <string name="obd_calculated_engine_load_desc">Viser køretøjets beregnede motorbelastning baseret på sensoren</string>
+    <string name="obd_fuel_pressure_desc">Viser køretøjets brændstoftryk (målertryk) opnået fra obd-scanner</string>
+    <string name="obd_engine_oil_temperature">Motoroliens temperatur</string>
+    <string name="obd_engine_oil_temperature_desc">Viser køretøjets motorolietemperatur opnået fra obd-scanner</string>
 </resources>
