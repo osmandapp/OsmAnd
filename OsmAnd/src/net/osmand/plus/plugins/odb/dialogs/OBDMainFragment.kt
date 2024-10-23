@@ -9,9 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.adapters.OBDMainFragmentAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
@@ -23,8 +25,9 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener {
 
 	private val handler = Handler(Looper.getMainLooper())
-	private val widgets = mutableListOf<OBDComputerWidget>()
-	private val dataRows = mutableListOf<View>()
+	private val items = mutableListOf<Any>()
+
+	private lateinit var adapter: OBDMainFragmentAdapter
 
 	private lateinit var device: BTDeviceInfo
 
@@ -51,8 +54,15 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	override fun setupUI(view: View) {
 		setupConnectionState(view)
 		setupConnectionButton(view)
-		setupVehicleInfo(view)
-		setupReceivedData(view)
+		setupVehicleInfo()
+		setupReceivedData()
+		setupList(view)
+	}
+
+	private fun setupList(view: View) {
+		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity())
+		view.findViewById<RecyclerView>(R.id.recycler_view)?.adapter = adapter
+		adapter.items = ArrayList(items)
 	}
 
 	private fun setupConnectionState(view: View) {
@@ -86,6 +96,9 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	private fun setupConnectionButton(view: View) {
 		val container = view.findViewById<ViewGroup>(R.id.pair_btn)
+		val params = container.layoutParams
+		params.height = app.resources.getDimensionPixelSize(R.dimen.acceptable_touch_radius)
+		container.layoutParams = params
 		container.removeAllViews()
 
 		val button = DialogButton(view.context)
@@ -119,37 +132,22 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		}
 	}
 
-	private fun setupVehicleInfo(view: View) {
-		view.findViewById<ViewGroup>(R.id.info_container)?.apply {
-			removeAllViews()
-			createWidgetView(OBDTypeWidget.VIN, this, true)
-		}
+	private fun setupVehicleInfo() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_VEHICLE_TYPE)
+		val widget = OBDDataComputer.registerWidget(OBDTypeWidget.VIN, 0)
+		items.add(widget)
 	}
 
-	private fun setupReceivedData(view: View) {
-		view.findViewById<ViewGroup>(R.id.data_container)?.apply {
-			removeAllViews()
-			OBDTypeWidget.entries.forEach {
-				if (it != OBDTypeWidget.VIN) {
-					createWidgetView(it, this, it == OBDTypeWidget.entries.last())
-				}
+	private fun setupReceivedData() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
+		OBDTypeWidget.entries.forEach {
+			if (it != OBDTypeWidget.VIN) {
+				val widget = OBDDataComputer.registerWidget(it, 0)
+				items.add(widget)
 			}
 		}
-	}
-
-	private fun createWidgetView(
-		widgetType: OBDTypeWidget,
-		container: ViewGroup,
-		lastItem: Boolean
-	) {
-		val widget = OBDDataComputer.registerWidget(widgetType, 0)
-		widgets.add(widget)
-		val itemView = themedInflater.inflate(R.layout.device_characteristic_item, container, false)
-		itemView.findViewById<TextView>(R.id.title).text = widget.type.getTitle()
-		itemView.tag = widget
-		container.addView(itemView)
-		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.divider), !lastItem)
-		dataRows.add(itemView)
 	}
 
 	override fun onStart() {
@@ -157,31 +155,19 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		updateWidgets()
 	}
 
-	private fun updateWidgetsData(view: View, widget: OBDComputerWidget) {
-		vehicleMetricsPlugin?.apply {
-			val value = getWidgetValue(widget)
-			view.findViewById<TextView>(R.id.value).apply {
-				if (text.toString() != value) {
-					text = value
-				}
-			}
-			val unit = getWidgetUnit(widget)
-			view.findViewById<TextView>(R.id.unit).apply {
-				if (text.toString() != unit) {
-					text = unit
-				}
-			}
-		}
-	}
-
 	private fun updateWidgets() {
-		app.runInUIThread {
-			dataRows.forEach {
-				if (it.tag is OBDComputerWidget) {
-					updateWidgetsData(it, it.tag as OBDComputerWidget)
+		items.forEach {
+			if (it is OBDComputerWidget) {
+				val value = vehicleMetricsPlugin?.getWidgetValue(it)
+				val unit = vehicleMetricsPlugin?.getWidgetUnit(it)
+				val widget = adapter.lastSavedValueMap[it]
+				if (!widget?.first.equals(value) or !widget?.second.equals(unit)) {
+					adapter.notifyItemChanged(
+						items.indexOf(it),
+						OBDMainFragmentAdapter.UPDATE_VALUE_PAYLOAD_TYPE
+					)
 				}
 			}
-			handler.postDelayed({ updateWidgets() }, 100)
 		}
 	}
 
