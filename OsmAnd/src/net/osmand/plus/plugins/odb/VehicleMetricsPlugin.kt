@@ -357,8 +357,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			}
 
 		} else {
-			Toast.makeText(activity, "Please, grant BLUETOOTH_SCAN permission", Toast.LENGTH_LONG)
-				.show()
+			AndroidUtils.requestBLEPermissions(activity)
 		}
 		return deviceList
 	}
@@ -623,6 +622,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		if (BLEUtils.isBLEEnabled(activity) && AndroidUtils.hasBLEPermission(activity)) {
 			val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
 			bluetoothAdapter?.startDiscovery()
+		} else {
+			AndroidUtils.requestBLEPermissions(activity)
 		}
 	}
 
