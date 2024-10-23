@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -38,11 +40,14 @@ public abstract class MapButtonState {
 	protected final CommonPreference<Integer> sizePref;
 	protected final CommonPreference<Float> opacityPref;
 	protected final CommonPreference<Integer> cornerRadiusPref;
-	protected final CommonPreference<Long> positionPref;
+	protected final CommonPreference<Long> portraitPositionPref;
+	protected final CommonPreference<Long> landscapePositionPref;
 	protected final ButtonPositionSize positionSize;
 	protected final ButtonPositionSize defaultPositionSize;
 
 	private final StateChangedListener<Integer> sizeListener;
+
+	private boolean portrait;
 
 	public MapButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		this.id = id;
@@ -55,13 +60,14 @@ public abstract class MapButtonState {
 		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
 		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
-		this.positionPref = addPreference(settings.registerLongPreference(id + "_position", -1)).makeProfile().cache();
+		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_portrait_position", -1)).makeProfile().cache();
+		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_landscape_position", -1)).makeProfile().cache();
 		this.positionSize = createButtonPosition();
 		this.defaultPositionSize = createButtonPosition();
 
 		sizeListener = change -> {
-			updatePositionSize(positionSize);
-			updatePositionSize(defaultPositionSize);
+			updatePosition(positionSize);
+			updatePosition(defaultPositionSize);
 		};
 		sizePref.addListener(sizeListener);
 	}
@@ -113,8 +119,13 @@ public abstract class MapButtonState {
 	public abstract CommonPreference getVisibilityPref();
 
 	@NonNull
-	public CommonPreference<Long> getPositionPref() {
-		return positionPref;
+	public CommonPreference<Long> getPortraitPositionPref() {
+		return portraitPositionPref;
+	}
+
+	@NonNull
+	public CommonPreference<Long> getLandscapePositionPref() {
+		return landscapePositionPref;
 	}
 
 	@NonNull
@@ -124,7 +135,9 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public ButtonPositionSize getDefaultPositionSize() {
-		return setupButtonPosition(defaultPositionSize);
+		ButtonPositionSize position = setupButtonPosition(defaultPositionSize);
+		updatePosition(position);
+		return position;
 	}
 
 	@NonNull
@@ -152,15 +165,8 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public ButtonPositionSize createButtonPosition() {
-		ButtonPositionSize position = new ButtonPositionSize(getId());
-		setupButtonPosition(position);
-
-		Long value = positionPref.get();
-		if (value != null && value > 0) {
-			position.fromLongValue(value);
-		}
-		updatePositionSize(position);
-
+		ButtonPositionSize position = setupButtonPosition(new ButtonPositionSize(getId()));
+		updatePosition(position);
 		return position;
 	}
 
@@ -181,7 +187,22 @@ public abstract class MapButtonState {
 		return position;
 	}
 
-	private void updatePositionSize(@NonNull ButtonPositionSize position) {
+	public void activityUpdated(@NonNull MapActivity mapActivity) {
+		this.portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+	}
+
+	public void savePosition() {
+		ButtonPositionSize positionSize = getPositionSize();
+		CommonPreference<Long> preference = portrait ? portraitPositionPref : landscapePositionPref;
+		preference.set(positionSize.toLongValue());
+	}
+
+	private void updatePosition(@NonNull ButtonPositionSize position) {
+		CommonPreference<Long> preference = portrait ? portraitPositionPref : landscapePositionPref;
+		Long value = preference.get();
+		if (value != null && value > 0) {
+			position.fromLongValue(value);
+		}
 		int size = sizePref.get();
 		if (size <= 0) {
 			size = getDefaultSize();
@@ -209,8 +230,9 @@ public abstract class MapButtonState {
 		iconPref.resetModeToDefault(appMode);
 		sizePref.resetModeToDefault(appMode);
 		opacityPref.resetModeToDefault(appMode);
-		positionPref.resetModeToDefault(appMode);
 		cornerRadiusPref.resetModeToDefault(appMode);
+		portraitPositionPref.resetModeToDefault(appMode);
+		landscapePositionPref.resetModeToDefault(appMode);
 		getVisibilityPref().resetModeToDefault(appMode);
 	}
 

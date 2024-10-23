@@ -193,8 +193,19 @@ public class ButtonPositionSize {
 
 	private static boolean moveButton(int space, ButtonPositionSize buttonToMove, ButtonPositionSize overlappedButton,
 	                                  boolean xMoveUnavailable, boolean yMoveUnavailable) {
-		boolean xMove = ((buttonToMove.xMove || buttonToMove.randomMove && RANDOM.nextBoolean() || yMoveUnavailable) && !xMoveUnavailable);
-		boolean yMove = ((buttonToMove.yMove || buttonToMove.randomMove && RANDOM.nextBoolean() || xMoveUnavailable) && !yMoveUnavailable);
+		boolean xMoveSupported = buttonToMove.xMove;
+		boolean yMoveSupported = buttonToMove.yMove;
+
+		if (!xMoveSupported && !yMoveSupported && buttonToMove.randomMove) {
+			if (RANDOM.nextBoolean()) {
+				xMoveSupported = true;
+			} else {
+				yMoveSupported = true;
+			}
+		}
+
+		boolean xMove = ((xMoveSupported || yMoveUnavailable) && !xMoveUnavailable);
+		boolean yMove = ((yMoveSupported || xMoveUnavailable) && !yMoveUnavailable);
 
 		if (xMove) {
 			buttonToMove.marginX = space + overlappedButton.marginX + overlappedButton.width;
