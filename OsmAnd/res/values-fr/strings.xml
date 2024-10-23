@@ -5623,4 +5623,12 @@
     <string name="speedometer_maximum">Maximum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/km)</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="simulate_obd">Simuler des données OBD</string>
+    <string name="obd_engine_runtime">Temps d\'activité du moteur</string>
+    <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
+    <string name="obd_engine_runtime_desc">Affiche le temps d\'activité du moteur du véhicule, obtenu à partir du scanneur OBD</string>
 </resources>
