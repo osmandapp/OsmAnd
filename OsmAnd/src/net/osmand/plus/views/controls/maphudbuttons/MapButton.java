@@ -147,6 +147,11 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public void setMapActivity(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
+
+		MapButtonState buttonState = getButtonState();
+		if (buttonState != null) {
+			buttonState.activityUpdated(mapActivity);
+		}
 	}
 
 	@NonNull
@@ -167,10 +172,10 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	@Nullable
-	public ButtonPositionSize getPositionSize() {
+	public ButtonPositionSize getDefaultPositionSize() {
 		MapButtonState buttonState = getButtonState();
 		if (buttonState != null) {
-			return useCustomPosition ? buttonState.getPositionSize() : buttonState.getDefaultPositionSize();
+			return buttonState.getDefaultPositionSize();
 		}
 		return null;
 	}
@@ -396,8 +401,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public void savePosition() {
 		MapButtonState buttonState = getButtonState();
 		if (buttonState != null && useCustomPosition) {
-			ButtonPositionSize positionSize = buttonState.getPositionSize();
-			buttonState.getPositionPref().set(positionSize.toLongValue());
+			buttonState.savePosition();
 		}
 	}
 

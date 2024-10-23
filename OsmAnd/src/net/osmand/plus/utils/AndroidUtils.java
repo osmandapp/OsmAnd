@@ -1402,4 +1402,27 @@ public class AndroidUtils {
 		}
 		return context;
 	}
+
+	@NonNull
+	public static int[] getRelativeMargins(@NonNull View parentView, @NonNull View view) {
+		int[] childLocation = new int[2];
+		int[] parentLocation = new int[2];
+
+		view.getLocationInWindow(childLocation);
+		parentView.getLocationInWindow(parentLocation);
+
+		int topMargin = childLocation[1] - parentLocation[1];
+		int leftMargin = childLocation[0] - parentLocation[0];
+
+		int childWidth = view.getWidth();
+		int childHeight = view.getHeight();
+
+		int parentWidth = parentView.getWidth();
+		int parentHeight = parentView.getHeight();
+
+		int rightMargin = (parentWidth - leftMargin - childWidth);
+		int bottomMargin = (parentHeight - topMargin - childHeight);
+
+		return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
+	}
 }
