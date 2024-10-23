@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -12,8 +10,6 @@ import android.graphics.PointF;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -36,7 +32,6 @@ import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -131,7 +126,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapHudLayout = activity.findViewById(R.id.map_hud_layout);
 
 		for (MapButton button : mapButtons) {
-			mapHudLayout.removeView(button);
+			mapHudLayout.removeMapButton(button);
 		}
 
 		boolean nightMode = app.getDaynightHelper().isNightMode();
@@ -145,31 +140,26 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addMapButton(createMapButton(inflater, R.layout.map_zoom_in_button));
 		addMapButton(createMapButton(inflater, R.layout.my_location_button));
 
+		addMapButton(createMapButton(inflater, R.layout.drawer_menu_button));
+		addMapButton(createMapButton(inflater, R.layout.navigation_menu_button));
+
 		MapButton button = createMapButton(inflater, R.layout.map_3d_button);
 		button.setUseCustomPosition(true);
 		addMapButton(button);
-
-		addMapButton(createMapButton(inflater, R.layout.drawer_menu_button));
-		addMapButton(createMapButton(inflater, R.layout.navigation_menu_button));
 
 		setInvalidated(true);
 	}
 
 	@NonNull
 	private MapButton createMapButton(@NonNull LayoutInflater inflater, @LayoutRes int layoutId) {
-		return (MapButton) inflater.inflate(layoutId, mapHudLayout, false);
+		MapButton button = (MapButton) inflater.inflate(layoutId, mapHudLayout, false);
+		button.setMapActivity(requireMapActivity());
+		return button;
 	}
 
 	private void addMapButton(@NonNull MapButton mapButton) {
-		mapButton.setMapActivity(requireMapActivity());
-
-		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-		MapButtonState buttonState = mapButton.getButtonState();
-		if (buttonState != null) {
-			mapHudLayout.updateButtonParams(params, buttonState.getPositionSize());
-		}
-		mapHudLayout.addView(mapButton, params);
 		mapButtons.add(mapButton);
+		mapHudLayout.addMapButton(mapButton);
 	}
 
 	public void addCustomMapButton(@NonNull MapButton mapButton) {

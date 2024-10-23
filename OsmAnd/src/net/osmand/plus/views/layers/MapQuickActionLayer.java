@@ -9,7 +9,6 @@ import android.graphics.PointF;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -127,7 +126,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 
 			for (QuickActionButton button : actionButtons) {
-				mapHudLayout.removeView(button);
+				mapHudLayout.removeMapButton(button);
 			}
 
 			List<QuickActionButton> buttons = new ArrayList<>();
@@ -138,10 +137,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 				button.setMapActivity(activity);
 				button.setUseCustomPosition(true);
 
-				LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-				mapHudLayout.updateButtonParams(params, state.getPositionSize());
-				mapHudLayout.addView(button, params);
 				buttons.add(button);
+				mapHudLayout.addMapButton(button);
 			}
 			actionButtons = buttons;
 			mapButtonStates = buttonStates;

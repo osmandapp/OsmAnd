@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class NavigationMenuButtonState extends MapButtonState {
 
@@ -25,7 +26,6 @@ public class NavigationMenuButtonState extends MapButtonState {
 	public NavigationMenuButtonState(@NonNull OsmandApplication app) {
 		super(app, ROUTE_PLANNING_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
-		setupButtonPosition(true, false, true, false, false);
 	}
 
 	@NonNull
@@ -79,5 +79,11 @@ public class NavigationMenuButtonState extends MapButtonState {
 			return AndroidUtils.getDrawableForDirection(app, drawable);
 		}
 		return drawable;
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, true, false, true, false, false);
 	}
 }

@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class MyLocationButtonState extends MapButtonState {
 
@@ -18,7 +19,6 @@ public class MyLocationButtonState extends MapButtonState {
 	public MyLocationButtonState(@NonNull OsmandApplication app) {
 		super(app, BACK_TO_LOC_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
-		setupButtonPosition(false, false, true, false, false);
 	}
 
 	@NonNull
@@ -53,5 +53,11 @@ public class MyLocationButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_my_location", getDefaultSize(), OPAQUE_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, false, false, true, false, false);
 	}
 }
