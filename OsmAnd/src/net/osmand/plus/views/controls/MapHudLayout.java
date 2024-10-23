@@ -191,10 +191,11 @@ public class MapHudLayout extends FrameLayout {
 			int parentWidth = getWidth();
 			int parentHeight = getAdjustedHeight();
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
-
-			position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight,
-					position.left, position.left ? margins[0] : margins[2],
-					position.top, position.top ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
+			if (margins[0] >= 0 && margins[1] >= 0 && margins[2] >= 0 && margins[3] >= 0) {
+				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight,
+						position.left, position.left ? margins[0] : margins[2],
+						position.top, position.top ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
+			}
 		}
 		return position;
 	}
