@@ -209,7 +209,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void animateMapControls(boolean show) {
 		MapActivity mapActivity = requireMapActivity();
-		View mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
+		MapHudLayout mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
 		View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
 		View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
 
@@ -245,6 +245,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					mapHudButtonsBottom.setTranslationY(transBottomInitial);
 					mapHudLayout.setAlpha(alphaInitial);
 				}
+				mapHudLayout.updateButtons();
 				mapActivity.updateStatusBarColor();
 			}
 		});
