@@ -372,8 +372,8 @@
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
-    <string name="navigate_point_northing">Al norte</string>
-    <string name="navigate_point_easting">Al este</string>
+    <string name="navigate_point_northing">Longitud al norte</string>
+    <string name="navigate_point_easting">Latitud al este</string>
     <string name="use_opengl_render_descr">Usa el renderizado OpenGL acelerado por hardware (podría consumir más batería o no funcionar en dispositivos antiguos).</string>
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
