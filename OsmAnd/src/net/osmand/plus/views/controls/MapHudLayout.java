@@ -145,7 +145,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	@NonNull
-	private Map<View, ButtonPositionSize> collectPositions() {
+	public Map<View, ButtonPositionSize> collectPositions() {
 		Map<View, ButtonPositionSize> map = new LinkedHashMap<>();
 
 		for (Map.Entry<View, ButtonPositionSize> entry : widgetPositions.entrySet()) {

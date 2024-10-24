@@ -219,6 +219,6 @@ public class QuickActionButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, false, false);
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, true, true);
 	}
 }
