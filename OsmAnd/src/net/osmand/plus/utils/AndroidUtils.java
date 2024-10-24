@@ -1,6 +1,7 @@
 package net.osmand.plus.utils;
 
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
@@ -1297,7 +1298,8 @@ public class AndroidUtils {
 					hasPermission(context, BLUETOOTH_CONNECT);
 		} else {
 			return hasPermission(context, BLUETOOTH) &&
-					hasPermission(context, BLUETOOTH_ADMIN);
+					hasPermission(context, BLUETOOTH_ADMIN) &&
+					hasPermission(context, ACCESS_FINE_LOCATION);
 		}
 	}
 
@@ -1307,6 +1309,10 @@ public class AndroidUtils {
 	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
 
 	public static boolean requestBLEPermissions(@NonNull Activity activity) {
+		return requestBLEPermissions(activity, BLUETOOTH_CONNECT_REQUEST_CODE);
+	}
+
+	public static boolean requestBLEPermissions(@NonNull Activity activity, int requestCode) {
 		List<String> permissions = new ArrayList<>();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
@@ -1322,12 +1328,15 @@ public class AndroidUtils {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
 				permissions.add(BLUETOOTH_ADMIN);
 			}
+			if (!AndroidUtils.hasPermission(activity, ACCESS_FINE_LOCATION)) {
+				permissions.add(ACCESS_FINE_LOCATION);
+			}
 		}
 		if (!Algorithms.isEmpty(permissions)) {
 			ActivityCompat.requestPermissions(
 					activity,
 					permissions.toArray(new String[0]),
-					BLUETOOTH_CONNECT_REQUEST_CODE);
+					requestCode);
 
 		}
 		return Algorithms.isEmpty(permissions);

@@ -33,6 +33,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	private var stateDevicesListView: View? = null
 	private var foundDevicesCountView: TextView? = null
 	private lateinit var pairedDevicesAdapter: PairedDevicesAdapter
+	private var pairingDevice: BTDeviceInfo? = null
 
 	companion object {
 		val TAG: String = OBDDevicesSearchFragment::class.java.simpleName
@@ -130,7 +131,11 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	private fun startSearch() {
 		activity?.let {
 			vehicleMetricsPlugin?.setScanDevicesListener(this)
-			vehicleMetricsPlugin?.searchUnboundDevices(it)
+			if (AndroidUtils.hasBLEPermission(it)) {
+				vehicleMetricsPlugin?.searchUnboundDevices(it)
+			} else {
+				AndroidUtils.requestBLEPermissions(it, VehicleMetricsPlugin.REQUEST_BT_PERMISSION_CODE)
+			}
 		}
 	}
 
@@ -183,12 +188,34 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		}
 	}
 
+	override fun onDevicePaired(pairedDevice: BTDeviceInfo) {
+		if (pairingDevice?.address == pairedDevice.address) {
+			vehicleMetricsPlugin?.connectToObd(requireActivity(), pairedDevice)
+			activity?.onBackPressed()
+		}
+	}
+
+	override fun onDevicePairingFailed() {
+		pairingDevice = null
+	}
+
 	internal enum class SearchStates {
 		NO_BLUETOOTH, NOTHING_FOUND, DEVICES_LIST
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
-		activity?.onBackPressed()
+		activity?.let {
+			vehicleMetricsPlugin?.let { plugin ->
+				if (plugin.isPaired(it, device)) {
+					plugin.connectToObd(requireActivity(), device)
+					it.onBackPressed()
+				} else {
+					if (pairingDevice == null) {
+						pairingDevice = device
+						plugin.pairDevice(it, device)
+					}
+				}
+			}
+		}
 	}
 }
