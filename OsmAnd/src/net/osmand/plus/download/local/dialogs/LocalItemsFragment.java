@@ -234,7 +234,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			if (!Algorithms.isEmpty(group.getItems())) {
 				long size = group.getSize();
 				String title = group.getName(app);
-				String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, size));
+				String sizeDescription = group.getSizeDescription(app);
+				String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, sizeDescription);
 				memoryItems.add(new MemoryItem(text, size, ColorUtilities.getActiveColor(app, nightMode)));
 			}
 
