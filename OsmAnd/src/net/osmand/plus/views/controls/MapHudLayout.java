@@ -139,7 +139,17 @@ public class MapHudLayout extends FrameLayout {
 		int width = (int) AndroidUtils.pxToDpF(getContext(), getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), getHeight()) / 8;
 
+		LOG.info("--------START--------");
+		Map<View, ButtonPositionSize> map = collectPositions();
+		for (ButtonPositionSize b : map.values()) {
+			LOG.info(b + " value = " + b.toLongValue());
+		}
+		LOG.info("--------");
 		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(positions.values()));
+		for (ButtonPositionSize b : map.values()) {
+			LOG.info(b + " value = " + b.toLongValue());
+		}
+		LOG.info("--------END--------");
 
 		return positions;
 	}

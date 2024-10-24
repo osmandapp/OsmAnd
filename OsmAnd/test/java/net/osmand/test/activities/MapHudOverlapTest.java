@@ -131,35 +131,41 @@ public class MapHudOverlapTest extends AndroidTest {
 	public static List<ButtonPositionSize> defaultLayoutExample() {
 		List<ButtonPositionSize> lst = new ArrayList<>();
 
-		lst.add(new ButtonPositionSize("top_widgets_panel").fromLongValue(343601184819L));
-		lst.add(new ButtonPositionSize("map.view.layers").fromLongValue(103082491910L));
-		lst.add(new ButtonPositionSize("map.view.quick_search").fromLongValue(68722819078L));
-		lst.add(new ButtonPositionSize("map.view.compass").fromLongValue(103082491910L));
+		lst.add(new ButtonPositionSize("map_left_widgets_panel").fromLongValue(343901601804L));
+		lst.add(new ButtonPositionSize("map_right_widgets_panel").fromLongValue(343903830029L));
+		lst.add(new ButtonPositionSize("top_widgets_panel").fromLongValue(343602233395L));
+		lst.add(new ButtonPositionSize("map_bottom_widgets_panel").fromLongValue(412326428723L));
+		lst.add(new ButtonPositionSize("map.view.layers").fromLongValue(103552253958L));
+		lst.add(new ButtonPositionSize("map.view.quick_search").fromLongValue(69192581574L));
+		lst.add(new ButtonPositionSize("map.view.compass").fromLongValue(103787134982L));
 		lst.add(new ButtonPositionSize("map.view.zoom_out").fromLongValue(171802624007L));
-		lst.add(new ButtonPositionSize("map.view.zoom_id").fromLongValue(171802624007L));
-		lst.add(new ButtonPositionSize("map.view.back_to_loc").fromLongValue(137442951175L));
-		lst.add(new ButtonPositionSize("map.view.menu").fromLongValue(137442820103L));
-		lst.add(new ButtonPositionSize("map.view.route_planning").fromLongValue(137442820103L));
-		lst.add(new ButtonPositionSize("map.view.map_3d").fromLongValue(17351639047L));
-		lst.add(new ButtonPositionSize("quick_actions_1729512772882").fromLongValue(103653573767L));
-		lst.add(new ButtonPositionSize("quick_actions_1729512776587").fromLongValue(103888453959L));
-		lst.add(new ButtonPositionSize("quick_actions_1729512779928").fromLongValue(172037570695L));
-		lst.add(new ButtonPositionSize("quick_actions_1729588947725").fromLongValue(69226725575L));
+		lst.add(new ButtonPositionSize("map.view.zoom_id").fromLongValue(172071059463L));
+		lst.add(new ButtonPositionSize("map.view.back_to_loc").fromLongValue(137442951687L));
+		lst.add(new ButtonPositionSize("map.view.menu").fromLongValue(138080354311L));
+		lst.add(new ButtonPositionSize("map.view.route_planning").fromLongValue(138080354823L));
+		lst.add(new ButtonPositionSize("map.view.map_3d").fromLongValue(172238898375L));
+		lst.add(new ButtonPositionSize("quick_actions").fromLongValue(103083213639L));
+		lst.add(new ButtonPositionSize("quick_actions_1729770291750").fromLongValue(103385203975L));
+		lst.add(new ButtonPositionSize("quick_actions_1729770294329").fromLongValue(103653639943L));
+		lst.add(new ButtonPositionSize("quick_actions_1729770296201").fromLongValue(103418626951L));
 
-//		MapHudOverlapTest Pos top_widgets_panel x=(left ->0 ), y=(top ->0 ), w=51, h= 7 value = 343601184819
-//		MapHudOverlapTest Pos map.view.layers x=(left ->0 ), y=(top ->0+), w= 6, h= 6 value = 103082491910
-//		MapHudOverlapTest Pos map.view.quick_search x=(left ->0+), y=(top ->0 ), w= 6, h= 6 value = 68722819078
-//		MapHudOverlapTest Pos map.view.compass x=(left ->0 ), y=(top ->0+), w= 6, h= 6 value = 103082491910
-//		MapHudOverlapTest Pos map.view.zoom_out x=(right->0 ), y=(bott->0+), w= 7, h= 7 value = 171802624007
-//		MapHudOverlapTest Pos map.view.zoom_id x=(right->0 ), y=(bott->0+), w= 7, h= 7 value = 171802624007
-//		MapHudOverlapTest Pos map.view.back_to_loc x=(right->0+), y=(bott->0 ), w= 7, h= 7 value = 137442951175
-//		MapHudOverlapTest Pos map.view.menu x=(left ->0+), y=(bott->0 ), w= 7, h= 7 value = 137442820103
-//		MapHudOverlapTest Pos map.view.route_planning x=(left ->0+), y=(bott->0 ), w= 7, h= 7 value = 137442820103
-//		MapHudOverlapTest Pos map.view.map_3d x=(right->0+), y=(bott->517 ), w= 7, h= 7 value = 17351639047
-//		MapHudOverlapTest Pos quick_actions_1729512772882 x=(right->18 ), y=(top ->17+), w= 7, h= 7 value = 103653573767
-//		MapHudOverlapTest Pos quick_actions_1729512776587 x=(right->5 ), y=(top ->24+), w= 7, h= 7 value = 103888453959
-//		MapHudOverlapTest Pos quick_actions_1729512779928 x=(right->2+), y=(bott->7+), w= 7, h= 7 value = 172037570695
-//		MapHudOverlapTest Pos quick_actions_1729588947725 x=(right->3 ), y=(top ->15 ), w= 7, h= 7 value = 69226725575
+//		Pos map_left_widgets_panel x=(left ->0 ), y=(top ->9 ), w=12, h= 4 value = 343901601804 {main}
+//		Pos map_right_widgets_panel x=(right->0 ), y=(top ->9 ), w=13, h= 8 value = 343903830029 {main}
+//		Pos top_widgets_panel x=(left ->0 ), y=(top ->0 ), w=51, h= 9 value = 343602233395 {main}
+//		Pos map_bottom_widgets_panel x=(left ->0 ), y=(bott->0 ), w=51, h=18 value = 412326428723 {main}
+//		Pos map.view.layers x=(left ->0 ), y=(top ->14+), w= 6, h= 6 value = 103552253958 {main}
+//		Pos map.view.quick_search x=(left ->7+), y=(top ->14 ), w= 6, h= 6 value = 69192581574 {main}
+//		Pos map.view.compass x=(left ->0 ), y=(top ->21+), w= 6, h= 6 value = 103787134982 {main}
+//		Pos map.view.zoom_out x=(right->0 ), y=(bott->0+), w= 7, h= 7 value = 171802624007 {main}
+//		Pos map.view.zoom_id x=(right->0 ), y=(bott->8+), w= 7, h= 7 value = 172071059463 {main}
+//		Pos map.view.back_to_loc x=(right->8+), y=(bott->0 ), w= 7, h= 7 value = 137442951687 {main}
+//		Pos map.view.menu x=(left ->0+), y=(bott->19 ), w= 7, h= 7 value = 138080354311 {main}
+//		Pos map.view.route_planning x=(left ->8+), y=(bott->19 ), w= 7, h= 7 value = 138080354823 {main}
+//		Pos map.view.map_3d x=(right->19+), y=(bott->13+), w= 7, h= 7 value = 172238898375 {main}
+//		Pos quick_actions x=(right->13+), y=(top ->0+), w= 7, h= 7 value = 103083213639 {main}
+//		Pos quick_actions_1729770291750 x=(right->20+), y=(top ->9+), w= 7, h= 7 value = 103385203975 {main}
+//		Pos quick_actions_1729770294329 x=(right->28+), y=(top ->17+), w= 7, h= 7 value = 103653639943 {main}
+//		Pos quick_actions_1729770296201 x=(left ->14+), y=(top ->10+), w= 7, h= 7 value = 103418626951 {main}
 
 //		lst.add(new ButtonPositionSize("topPanel", 7, POS_FULL_WIDTH, POS_TOP).setMoveDescendantsVertical());
 //
