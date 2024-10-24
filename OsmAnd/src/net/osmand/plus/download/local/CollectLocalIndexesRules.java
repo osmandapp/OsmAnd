@@ -1,6 +1,7 @@
 package net.osmand.plus.download.local;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
@@ -57,11 +58,16 @@ public class CollectLocalIndexesRules {
 	}
 
 	public boolean isSeparatelyCalculatedSizeLimitReached(@NonNull LocalItemType type, long size) {
-		Long limit = typesToCalculateSizeSeparately.get(type);
+		Long limit = getCalculationSizeLimit(type);
 		if (limit != null && limit > 0) {
 			return size > limit;
 		}
 		return false;
+	}
+
+	@Nullable
+	public Long getCalculationSizeLimit(@NonNull LocalItemType type) {
+		return typesToCalculateSizeSeparately.get(type);
 	}
 
 	public static class Builder {

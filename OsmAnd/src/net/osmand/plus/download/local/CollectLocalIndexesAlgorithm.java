@@ -37,7 +37,7 @@ public class CollectLocalIndexesAlgorithm {
 		for (File directory : rules.getDirectories()) {
 			collectFiles(categories, directory, rules.shouldAddUnknown(directory));
 		}
-		applySeparatelyCalculatedSize();
+		applySeparatelyCalculatedSize(categories.values());
 		return categories;
 	}
 
@@ -60,12 +60,7 @@ public class CollectLocalIndexesAlgorithm {
 
 	private boolean shouldSkipDirectory(@NonNull File directory) {
 		LocalItem localItem = getSeparatelyCalculationSizeItem(directory);
-		if (localItem != null) {
-			LocalItemType type = localItem.getType();
-			Boolean limitReached = calculationLimitReached.get(type);
-			return limitReached != null && limitReached;
-		}
-		return false;
+		return localItem != null && isCalculatedSizeLimitReached(localItem.getType());
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
@@ -151,13 +146,29 @@ public class CollectLocalIndexesAlgorithm {
 		return null;
 	}
 
-	private void applySeparatelyCalculatedSize() {
-		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
-			Long size = separateSizeItemCalculations.get(localItem);
-			if (size != null) {
-				localItem.setSize(size);
+	private void applySeparatelyCalculatedSize(@NonNull Collection<LocalCategory> categories) {
+		for (LocalItemType type : separateSizeTypeCalculations.keySet()) {
+			if (isCalculatedSizeLimitReached(type)) {
+				Long limit = rules.getCalculationSizeLimit(type);
+				LocalGroup group = getLocalGroupByType(categories, type);
+				if (group != null && limit != null) {
+					group.setLimitedSize(limit);
+				}
 			}
 		}
+		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
+			Long size = separateSizeItemCalculations.get(localItem);
+			if (size != null && !isCalculatedSizeLimitReached(localItem.getType())) {
+				localItem.setSize(size);
+			} else {
+				localItem.setSize(-1);
+			}
+		}
+	}
+
+	private boolean isCalculatedSizeLimitReached(@NonNull LocalItemType type) {
+		Boolean limitReached = calculationLimitReached.get(type);
+		return limitReached != null && limitReached;
 	}
 
 	@Nullable

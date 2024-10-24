@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,11 +54,15 @@ public class LocalGroup {
 		}
 	}
 
-	public long getSize() {
+	private long getTotalItemsSize() {
 		long size = 0;
 		for (BaseLocalItem item : items.values()) {
 			size += item.getSize();
 		}
 		return size;
+	}
+
+	public boolean hasSizeLimit() {
+		return limitedSize > 0;
 	}
 }
