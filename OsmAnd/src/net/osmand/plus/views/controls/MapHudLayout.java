@@ -4,6 +4,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
@@ -181,11 +182,12 @@ public class MapHudLayout extends FrameLayout {
 		String name = getViewName(view);
 		ButtonPositionSize position = new ButtonPositionSize(name);
 		if (view instanceof VerticalWidgetPanel panel) {
-			position.posV = panel.isTopPanel() ? POS_TOP : POS_BOTTOM;
 			position.setMoveDescendantsVertical();
+			position.setPositionVertical(panel.isTopPanel() ? POS_TOP : POS_BOTTOM);
+			position.setPositionHorizontal(POS_FULL_WIDTH);
 		} else if (view instanceof SideWidgetsPanel panel) {
-			position.posV = POS_TOP;
-			position.posH = panel.rightSide ? POS_RIGHT : POS_LEFT;
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
 
 			if (AndroidUiHelper.isOrientationPortrait(getContext())) {
 				position.setMoveDescendantsVertical();
@@ -193,8 +195,9 @@ public class MapHudLayout extends FrameLayout {
 				position.setMoveDescendantsHorizontal();
 			}
 		} else if (view.getId() == R.id.widget_top_bar) {
-			position.posV = POS_TOP;
 			position.setMoveDescendantsVertical();
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(POS_FULL_WIDTH);
 		}
 		return updateWidgetPosition(view, position);
 	}

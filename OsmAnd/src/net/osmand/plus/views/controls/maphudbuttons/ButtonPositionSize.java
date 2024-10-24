@@ -79,6 +79,18 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public ButtonPositionSize setPositionHorizontal(int posH) {
+		this.posH = posH;
+		validate();
+		return this;
+	}
+
+	public ButtonPositionSize setPositionVertical(int posV) {
+		this.posV = posV;
+		validate();
+		return this;
+	}
+
 	public boolean isLeft() {
 		return posH == POS_LEFT;
 	}
