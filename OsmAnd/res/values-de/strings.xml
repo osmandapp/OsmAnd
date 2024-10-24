@@ -5931,4 +5931,5 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zeigt den rechnerischen Kraftstoffverbrauch des Fahrzeugs an (%/h)</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_calculated_engine_load_desc">Zeigt die vom Sensor berechnete Motorlast des Fahrzeugs an</string>
+    <string name="bt_start_pair_failed">Kopplung mit Gerät kann nicht gestartet werden</string>
 </resources>
