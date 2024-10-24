@@ -95,6 +95,11 @@ public abstract class MapButtonState {
 	@NonNull
 	public abstract ButtonAppearanceParams createDefaultAppearanceParams();
 
+	@Nullable
+	public String getSavedIconName() {
+		return iconPref.get();
+	}
+
 	@NonNull
 	public CommonPreference<String> getIconPref() {
 		return iconPref;
@@ -144,7 +149,7 @@ public abstract class MapButtonState {
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
 
-		String iconName = iconPref.get();
+		String iconName = getSavedIconName();
 		if (Algorithms.isEmpty(iconName)) {
 			iconName = defaultParams.getIconName();
 		}

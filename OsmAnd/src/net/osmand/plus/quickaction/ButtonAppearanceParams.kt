@@ -9,6 +9,13 @@ data class ButtonAppearanceParams(
 	var cornerRadius: Int
 ) {
 
+	constructor(originalParams: ButtonAppearanceParams) : this(
+		originalParams.iconName,
+		originalParams.size,
+		originalParams.opacity,
+		originalParams.cornerRadius
+	)
+
 	fun readBundle(bundle: Bundle) {
 		iconName = bundle.getString(ICON_NAME_KEY)
 		size = bundle.getInt(SIZE_KEY)

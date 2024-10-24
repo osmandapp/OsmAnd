@@ -48,11 +48,9 @@ public class DayNightModeAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity
-			&& ((MapActivity) context).getMyApplication().getDaynightHelper().isNightMode()) {
-			return R.drawable.ic_action_map_day;
-		}
-		return R.drawable.ic_action_map_night;
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		boolean nightMode = app.getDaynightHelper().isNightMode();
+		return nightMode ? R.drawable.ic_action_map_day : R.drawable.ic_action_map_night;
 	}
 
 	@Override

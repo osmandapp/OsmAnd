@@ -88,8 +88,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		return iconName;
 	}
 
-	public void setIconName(@NonNull String iconName) {
-		this.iconName = iconName;
+	public void setIconName(@Nullable String iconName) {
+		this.iconName = iconName != null ? iconName : DEFAULT_ICON_NAME;
 	}
 
 	@DrawableRes
@@ -307,7 +307,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@NonNull String icon) {
+	public void onIconSelectedFromPalette(@Nullable String icon) {
 		setIconName(icon);
 		updateContent();
 	}

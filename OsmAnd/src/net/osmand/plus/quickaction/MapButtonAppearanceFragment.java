@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DYNAMIC_ICON_KEY;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -35,6 +37,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements CardListener, OnIconsPaletteListener<String> {
 
@@ -200,7 +203,12 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void updateButtons() {
-		mapButtonCard.updateButton();
+		ButtonAppearanceParams params = appearanceParams;
+		if (Objects.equals(DYNAMIC_ICON_KEY, appearanceParams.getIconName())) {
+			params = new ButtonAppearanceParams(appearanceParams);
+			params.setIconName(buttonState.createAppearanceParams().getIconName());
+		}
+		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
 	}
 
@@ -220,7 +228,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@NonNull String iconName) {
+	public void onIconSelectedFromPalette(@Nullable String iconName) {
 		appearanceParams.setIconName(iconName);
 		updateButtons();
 	}
