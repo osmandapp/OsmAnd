@@ -44,6 +44,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
@@ -51,7 +54,7 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class MapButton extends FrameLayout implements OnAttachStateChangeListener {
+public abstract class MapButton extends FrameLayout implements OnAttachStateChangeListener, ViewChangeProvider {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
@@ -86,6 +89,9 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected int backgroundColor;
 	@ColorInt
 	protected int backgroundPressedColor;
+
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
 
 	public MapButton(@NonNull Context context) {
 		this(context, null);
@@ -417,5 +423,31 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	@NonNull
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_quick_action", BIG_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 }
