@@ -5646,4 +5646,5 @@
     <string name="obd_calculated_engine_load_desc">Prikazuje izračunato opterećenje motora vozila na osnovu senzora</string>
     <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
     <string name="obd_engine_oil_temperature_desc">Prikazuje temperaturu motornog ulja vozila dobijenu iz obd skenera</string>
+    <string name="bt_start_pair_failed">Nije moguće pokrenuti uparivanje s uređajem</string>
 </resources>
