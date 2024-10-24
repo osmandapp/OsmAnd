@@ -64,13 +64,6 @@
 					android:layout_marginBottom="@dimen/map_button_margin"
 					android:orientation="horizontal">
 
-					<include layout="@layout/drawer_menu_button" />
-
-					<include
-						layout="@layout/navigation_menu_button"
-						android:layout_width="@dimen/map_button_size"
-						android:layout_height="@dimen/map_button_size"
-						android:layout_marginStart="@dimen/map_button_spacing_land" />
 
 					<FrameLayout
 						android:layout_width="wrap_content"
@@ -108,7 +101,15 @@
 
 			<!-- RULER -->
 
-			<include layout="@layout/map_ruler" />
+			<LinearLayout
+				android:id="@+id/map_ruler_container"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom">
+
+				<include layout="@layout/map_ruler" />
+
+			</LinearLayout>
 
 			<!-- TRANSPARENCY -->
 
@@ -163,44 +164,6 @@
 				tools:visibility="visible" />
 
 		</FrameLayout>
-
-		<!-- RIGHT BUTTONS -->
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="bottom"
-			android:layout_marginStart="@dimen/map_button_spacing_land"
-			android:layout_marginLeft="@dimen/map_button_spacing_land"
-			android:layout_marginEnd="@dimen/map_button_margin"
-			android:layout_marginRight="@dimen/map_button_margin"
-			android:layout_marginBottom="@dimen/map_button_margin">
-
-			<include
-				android:id="@+id/map_my_location_button"
-				layout="@layout/my_location_button"
-				android:layout_width="@dimen/map_button_size"
-				android:layout_height="@dimen/map_button_size"
-				android:layout_gravity="bottom" />
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="bottom"
-				android:layout_marginStart="@dimen/map_button_spacing_land"
-				android:orientation="vertical">
-
-				<include layout="@layout/map_zoom_in_button" />
-
-				<include
-					layout="@layout/map_zoom_out_button"
-					android:layout_width="@dimen/map_button_size"
-					android:layout_height="@dimen/map_button_size"
-					android:layout_marginTop="@dimen/map_button_spacing_land" />
-
-			</LinearLayout>
-
-		</LinearLayout>
 
 	</LinearLayout>
 

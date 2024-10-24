@@ -422,7 +422,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 								heights.add(pathData.heights.get(i));
 							}
 							if (firstX31 == -1) {
-								if (index >= startLocationIndexCached) {
+								if (index >= startLocationIndexCached && index > 0) {
 									passedDist += pathData.distances.get(i);
 								}
 								firstX31 = pathData.tx.get(i);

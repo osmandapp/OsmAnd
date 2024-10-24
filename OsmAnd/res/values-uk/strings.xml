@@ -5560,7 +5560,7 @@
     <string name="map_widget_sun_position">Розташування сонця</string>
     <string name="add_new_button">Додати нову кнопку</string>
     <string name="map_widget_sun_position_desc">Показує час до сходу або заходу сонця.</string>
-    <string name="rendering_attr_showToll_name">Показати обмеження плати за проїзд</string>
+    <string name="rendering_attr_showToll_name">Показати обмеження по оплаті за проїзд</string>
     <string name="reset_key_assignments_desc">Усі призначення кнопок для вибраного типу буде вилучено.</string>
     <string name="lang_zh_hans">Китайська спрощена</string>
     <string name="shared_string_reassign">Перепризначити</string>
@@ -5956,7 +5956,7 @@
     <string name="obd_battery_voltage_desc">Віджет показує напругу акумулятора за датчиком OBD</string>
     <string name="obd_fuel_left_distance_desc">Віджет показує відстань, яку може проїхати машина на залишковому рівні пального за датчиком OBD</string>
     <string name="obd_engine_coolant_temp">t° охолоджувальної рідини двигуна</string>
-    <string name="obd_fuel_level">Рівень пального</string>
+    <string name="obd_fuel_level">Рівень пального (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
     <string name="obd_fuel_left_distance">Залишок пального (відстань)</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
@@ -5969,7 +5969,7 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
-    <string name="lock_screen">Блокування екрана</string>
+    <string name="lock_screen">Блокування екрану</string>
     <string name="quick_action_verb_start_pause">Старт / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
@@ -5991,4 +5991,6 @@
     <string name="screen_is_unlocked">Сенсорний екран розблоковано.</string>
     <string name="screen_is_locked_by_action_button">Сенсорний екран заблоковано. Натисніть на кнопку, щоб розблокувати.</string>
     <string name="screen_is_locked_by_external_button">Сенсорний екран заблоковано. Для розблокування натисніть кнопку %1$s або торкніться кнопки на екрані.</string>
+    <string name="route_guidance">Маршрутні вказівки</string>
+    <string name="route_guidance_desc">Забезпечує прокладання маршруту в реальному часі, включаючи відстань до наступного повороту, назву дороги, поточну назву вулиці та інформацію про смугу руху. Віджети активні під час навігації.</string>
 </resources>

@@ -19,6 +19,7 @@ object OBDDataComputer {
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
+	var fuelTank = 52f
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 
@@ -68,10 +69,14 @@ object OBDDataComputer {
 
 	fun registerWidget(
 		type: OBDTypeWidget,
-		averageTimeSeconds: Int,
-		formatter: OBDComputerWidgetFormatter = OBDComputerWidgetFormatter()
+		averageTimeSeconds: Int
 	): OBDComputerWidget {
-		val widget = OBDComputerWidget(formatter, type, averageTimeSeconds)
+		for (widget in widgets) {
+			if (widget.type == type && widget.averageTimeSeconds == averageTimeSeconds) {
+				return widget
+			}
+		}
+		val widget = OBDComputerWidget(type, averageTimeSeconds)
 		widgets = KCollectionUtils.addToList(widgets, widget)
 		updateRequiredCommands()
 		return widget
@@ -92,21 +97,101 @@ object OBDDataComputer {
 	enum class OBDTypeWidget(
 		val locationNeeded: Boolean,
 		val requiredCommand: OBDCommand,
-		val nameId: String
+		val nameId: String,
+		val formatter: OBDComputerWidgetFormatter
 	) {
-		SPEED(false, OBD_SPEED_COMMAND, "shared_string_speed"),
-		RPM(false, OBD_RPM_COMMAND, "obd_rpm"),
-		FUEL_LEFT_DISTANCE(true, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_distance"),
-		//	FUEL_LEFT_LITERS(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_left_liters"),
-		FUEL_LEFT_PERCENT(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_level"),
-		FUEL_CONSUMPTION_RATE(false, OBD_FUEL_LEVEL_COMMAND, "obd_fuel_consumption_rate"),
-		FUEL_CONSUMPTION_RATE_SENSOR(false, OBD_FUEL_CONSUMPTION_RATE_COMMAND, "obd_fuel_consumption_rate"),
-		TEMPERATURE_INTAKE(false, OBD_AIR_INTAKE_TEMP_COMMAND, "obd_air_intake_temp"),
-		TEMPERATURE_AMBIENT(false, OBD_AMBIENT_AIR_TEMPERATURE_COMMAND, "obd_ambient_air_temp"),
-		BATTERY_VOLTAGE(false, OBD_BATTERY_VOLTAGE_COMMAND, "obd_battery_voltage"),
-		FUEL_TYPE(false, OBD_FUEL_TYPE_COMMAND, "obd_fuel_type"),
-		VIN(false, OBD_VIN_COMMAND, "obd_vin"),
-		TEMPERATURE_COOLANT(false, OBD_ENGINE_COOLANT_TEMP_COMMAND, "obd_engine_coolant_temp");
+		SPEED(
+			false,
+			OBD_SPEED_COMMAND,
+			"shared_string_speed",
+			OBDComputerWidgetFormatter("%.0f")),
+		RPM(
+			false,
+			OBD_RPM_COMMAND,
+			"obd_rpm",
+			OBDComputerWidgetFormatter("%d")),
+		ENGINE_RUNTIME(
+			false,
+			OBD_ENGINE_RUNTIME_COMMAND,
+			"obd_engine_runtime",
+			OBDComputerWidgetFormatter("%s")),
+		FUEL_PRESSURE(
+			false,
+			OBD_FUEL_PRESSURE_COMMAND,
+			"obd_fuel_pressure",
+			OBDComputerWidgetFormatter("%d")),
+		FUEL_LEFT_KM(
+			true,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_distance",
+			OBDComputerWidgetFormatter("%.0f")),
+		CALCULATED_ENGINE_LOAD(
+			false,
+			OBD_CALCULATED_ENGINE_LOAD_COMMAND,
+			"obd_calculated_engine_load",
+			OBDComputerWidgetFormatter("%.0f")),
+		THROTTLE_POSITION(
+			false,
+			OBD_THROTTLE_POSITION_COMMAND,
+			"obd_throttle_position",
+			OBDComputerWidgetFormatter("%.0f")),
+		FUEL_LEFT_PERCENT(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_percent",
+			OBDComputerWidgetFormatter("%.2f")),
+		FUEL_LEFT_LITER(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_left_liter",
+			OBDComputerWidgetFormatter("%.2f")),
+		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.0f")),
+		FUEL_CONSUMPTION_RATE_LITER_KM(
+			true,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.0f")),
+		FUEL_CONSUMPTION_RATE_LITER_HOUR(
+			false,
+			OBD_FUEL_LEVEL_COMMAND,
+			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.0f")),
+		FUEL_CONSUMPTION_RATE_SENSOR(
+			false,
+			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
+			"obd_fuel_consumption_rate_scanner", OBDComputerWidgetFormatter("%.2f")),
+		TEMPERATURE_INTAKE(
+			false,
+			OBD_AIR_INTAKE_TEMP_COMMAND,
+			"obd_air_intake_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		ENGINE_OIL_TEMPERATURE(
+			false,
+			OBD_ENGINE_OIL_TEMPERATURE_COMMAND,
+			"obd_engine_oil_temperature",
+			OBDComputerWidgetFormatter("%.0f")),
+		TEMPERATURE_AMBIENT(
+			false,
+			OBD_AMBIENT_AIR_TEMPERATURE_COMMAND,
+			"obd_ambient_air_temp",
+			OBDComputerWidgetFormatter("%.0f")),
+		BATTERY_VOLTAGE(
+			false,
+			OBD_BATTERY_VOLTAGE_COMMAND,
+			"obd_battery_voltage",
+			OBDComputerWidgetFormatter("%.2f")),
+		FUEL_TYPE(
+			false,
+			OBD_FUEL_TYPE_COMMAND,
+			"obd_fuel_type",
+			OBDFuelTypeFormatter()),
+		VIN(false, OBD_VIN_COMMAND, "obd_vin", OBDComputerWidgetFormatter("%s")),
+		TEMPERATURE_COOLANT(
+			false,
+			OBD_ENGINE_COOLANT_TEMP_COMMAND,
+			"obd_engine_coolant_temp",
+			OBDComputerWidgetFormatter("%.0f"));
 
 		fun getTitle(): String {
 			return Localization.getString(nameId)
@@ -138,10 +223,9 @@ object OBDDataComputer {
 	}
 
 	class OBDComputerWidget(
-		val formatter: OBDComputerWidgetFormatter,
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
-		private var values: MutableList<OBDDataField<Any>> = ArrayList()
+		private var values: List<OBDDataField<Any>> = ArrayList()
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
@@ -149,7 +233,7 @@ object OBDDataComputer {
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
-				value = formatter.format(compute())
+				value = compute()
 				cachedVersion = v
 			}
 			return value
@@ -157,13 +241,18 @@ object OBDDataComputer {
 
 		private fun compute(): Any? {
 			val locValues = ArrayList(values)
+			if (locValues.size > 0 && locValues[locValues.size - 1] == OBDDataField.NO_DATA) {
+				return "N/A"
+			}
 			return when (type) {
 				TEMPERATURE_AMBIENT,
 				TEMPERATURE_COOLANT,
 				TEMPERATURE_INTAKE,
+				ENGINE_OIL_TEMPERATURE,
 				SPEED,
 				BATTERY_VOLTAGE,
 				FUEL_CONSUMPTION_RATE_SENSOR,
+				FUEL_PRESSURE,
 				RPM -> {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
@@ -172,74 +261,77 @@ object OBDDataComputer {
 					}
 				}
 
-				FUEL_CONSUMPTION_RATE -> {
+				FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> {
 					if (locValues.size >= 2) {
-						val first = locValues[0]
-						val last = locValues[locValues.size - 1]
-						val diffPerc = first.value as Float - last.value as Float
-						val diffTime = last.timestamp - first.timestamp
-						println("diftime $diffTime; diffPerc $diffPerc")
-						diffPerc / diffTime * 1000 * 3600
+						calculateFuelConsumption(locValues)
 					} else {
 						null
 					}
 				}
 
-				FUEL_LEFT_DISTANCE -> {
-					// works for window > 15 min
+				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						val first = locValues[0]
+						fuelTank * calculateFuelConsumption(locValues) / 100
+					} else {
+						null
+					}
+				}
+
+				FUEL_CONSUMPTION_RATE_LITER_KM -> {
+					if (locValues.size >= 2) {
+						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = last.value as Float - first.value as Float
+						val diffPerc =
+							(first.value as Number).toFloat() - (last.value as Number).toFloat()
 						if (diffPerc > 0) {
-							var start = 0
-							var end = locations.size - 1
-							while (start < locations.size) {
-								if (locations[start].time > first.timestamp) {
-									break
-								}
-								start++
-							}
-							while (end >= 0) {
-								if (locations[end].time < last.timestamp) {
-									break
-								}
-								end--
-							}
-							var dist = 0.0
-							if (start < end) {
-								for (k in start until end) {
-									dist += KMapUtils.getDistance(
-										locations[start].latLon,
-										locations[end].latLon)
-								}
-							}
-							if (dist > 0) {
-								val lastPerc = last.value as Float
-								lastPerc / diffPerc * dist
+							val difLiter = fuelTank * diffPerc / 100
+							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
+							if (distance > 0) {
+								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
+								return 100 * difLiter / (distance / 1000)
 							}
 						}
 					}
 					null
 				}
 
-//				FUEL_LEFT_LITERS,
+				FUEL_LEFT_KM -> {
+					if (locValues.size >= 2) {
+						val first = locValues[locValues.size - 2]
+						val last = locValues[locValues.size - 1]
+						val diffPerc = first.value as Float - last.value as Float
+						if (diffPerc > 0) {
+							val dist = getDistanceForTimePeriod(first.timestamp, last.timestamp)
+							if (dist > 0) {
+								val lastPerc = last.value
+								log.debug("left km. fuelLvl $lastPerc; distance $dist; difPercent $diffPerc; result ${lastPerc * dist / diffPerc}")
+								return lastPerc * dist / diffPerc
+							}
+						}
+					}
+					null
+				}
+
+				THROTTLE_POSITION,
+				CALCULATED_ENGINE_LOAD,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
-						locValues[locValues.size - 1].value
+						locValues[locValues.size - 1].value as Float
 					} else {
 						null
 					}
 				}
 
-				FUEL_TYPE -> {
+				FUEL_LEFT_LITER -> {
 					if (locValues.size > 0) {
-						locValues[locValues.size - 1].value
+						fuelTank * (locValues[locValues.size - 1].value as Float) / 100
 					} else {
 						null
 					}
 				}
 
+				FUEL_TYPE,
+				ENGINE_RUNTIME,
 				VIN -> if (locValues.size > 0) {
 					(locValues[locValues.size - 1]).value
 				} else {
@@ -248,10 +340,65 @@ object OBDDataComputer {
 			}
 		}
 
+		private fun getDistanceForTimePeriod(startTime: Long, endTime: Long): Double {
+			var start = 0
+			var end = locations.size - 1
+			while (start < locations.size) {
+				if (locations[start].time > startTime) {
+					break
+				}
+				start++
+			}
+			while (end >= 0) {
+				if (locations[end].time < endTime) {
+					break
+				}
+				end--
+			}
+			var dist = 0.0
+			if (start < end) {
+				for (k in start until end) {
+					dist += KMapUtils.getDistance(
+						locations[k].latLon,
+						locations[k + 1].latLon)
+				}
+			}
+			return dist
+		}
+
+		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
+			val first = locValues[0]
+			val last = locValues[locValues.size - 1]
+			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
+			val diffTime = last.timestamp - first.timestamp
+			return diffPerc / diffTime * 1000 * 3600
+		}
+
 		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 			value[type.requiredCommand]?.let {
-				version++
-				values.add(it)
+				if (it == OBDDataField.NO_DATA) {
+					if (values.isEmpty()) {
+						version++
+					}
+					values = mutableListOf(it)
+				} else {
+					when (type) {
+						FUEL_LEFT_KM,
+						FUEL_CONSUMPTION_RATE_LITER_KM,
+						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
+							if (values.isEmpty() || values[values.size - 1].value != it.value) {
+								version++
+								values = KCollectionUtils.addToList(values, it)
+							}
+						}
+
+						else -> {
+							version++
+							values = KCollectionUtils.addToList(values, it)
+						}
+					}
+				}
 			}
 		}
 

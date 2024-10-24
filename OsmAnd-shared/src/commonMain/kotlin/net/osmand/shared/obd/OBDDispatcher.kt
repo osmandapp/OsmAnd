@@ -28,6 +28,7 @@ object OBDDispatcher {
 	private var readStatusListener: OBDReadStatusListener? = null
 	private val sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
 	private var obd2Connection: Obd2Connection? = null
+	var useInfoLogging = false
 
 	interface OBDReadStatusListener {
 		fun onIOError()
@@ -39,7 +40,7 @@ object OBDDispatcher {
 		scope = CoroutineScope(Dispatchers.IO + job!!)
 		scope!!.launch {
 			try {
-				log.debug("Start reading obd with $inputStream and $outputStream")
+				log("Start reading obd with $inputStream and $outputStream")
 				obd2Connection = Obd2Connection(object : UnderlyingTransport {
 					override fun write(bytes: ByteArray) {
 						val buffer = Buffer()
@@ -60,40 +61,46 @@ object OBDDispatcher {
 						readStatusListener?.onInitConnectionFailed()
 					}
 				})
-				while (obd2Connection?.initialized == true) {
-					try {
-						for (command in commandQueue) {
-							if (command.isStale) {
-								val cachedCommandResponse = staleCommandsCache[command]
-								if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
-									continue
+				if(obd2Connection?.initialized == true) {
+					while (obd2Connection?.isFinished == false) {
+						try {
+							for (command in commandQueue) {
+								if (command.isStale) {
+									val cachedCommandResponse = staleCommandsCache[command]
+									if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
+										continue
+									}
+								}
+								val hexGroupCode = "%02X".format(command.commandGroup)
+								val hexCode = "%02X".format(command.command)
+								val fullCommand = "$hexGroupCode$hexCode"
+								val commandResult =
+									obd2Connection!!.run(
+										fullCommand,
+										command.command,
+										command.commandType)
+								if (commandResult.isValid()) {
+									if (commandResult.result.size >= command.responseLength) {
+										sensorDataCache[command] =
+											command.parseResponse(commandResult.result)
+									} else {
+										log.error("Incorrect response length for command $command")
+									}
+								} else if(commandResult == OBDResponse.NO_DATA) {
+									sensorDataCache[command] = OBDDataField.NO_DATA
+								} else if(commandResult == OBDResponse.ERROR) {
+									readStatusListener?.onIOError()
 								}
 							}
-							val hexGroupCode = "%02X".format(command.commandGroup)
-							val hexCode = "%02X".format(command.command)
-							val fullCommand = "$hexGroupCode$hexCode"
-							val commandResult =
-								obd2Connection!!.run(
-									fullCommand,
-									command.command,
-									command.commandType)
-							if (commandResult.isValid()) {
-								if (commandResult.result.size >= command.responseLength) {
-									sensorDataCache[command] =
-										command.parseResponse(commandResult.result)
-								} else {
-									log.error("Incorrect response length for command $command")
-								}
+						} catch (error: IOException) {
+							log.error("Run OBD looper error. $error")
+							if (inputStream == null || outputStream == null) {
+								break
 							}
+							readStatusListener?.onIOError()
 						}
-					} catch (error: IOException) {
-						log.error("Run OBD looper error. $error")
-						if (inputStream == null || outputStream == null) {
-							break
-						}
-						readStatusListener?.onIOError()
+						OBDDataComputer.acceptValue(sensorDataCache)
 					}
-					OBDDataComputer.acceptValue(sensorDataCache)
 				}
 			} catch (cancelError: CancellationException) {
 				log.error("OBD reading canceled")
@@ -125,12 +132,22 @@ object OBDDispatcher {
 		outputStream = writeStream
 		if (readStream != null && writeStream != null) {
 			startReadObdLooper()
+		} else {
+			obd2Connection?.isFinished = true
 		}
 	}
 
 	fun stopReading() {
-		log.debug("stop reading")
+		log("stop reading")
 		setReadWriteStreams(null, null)
-		log.debug("after stop reading")
+		log("after stop reading")
+	}
+
+	private fun log(msg: String) {
+		if(useInfoLogging) {
+			log.info(msg)
+		} else {
+			log.debug(msg)
+		}
 	}
 }

@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.view.Gravity.BOTTOM;
-import static android.view.Gravity.END;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.annotation.SuppressLint;
@@ -10,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -40,6 +37,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
@@ -63,6 +61,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 	private List<QuickActionButton> actionButtons = new ArrayList<>();
 	private List<QuickActionButtonState> mapButtonStates = new ArrayList<>();
+
+	private MapHudLayout mapHudLayout;
 	private QuickActionButton selectedButton;
 	private QuickActionsWidget quickActionsWidget;
 
@@ -107,10 +107,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
-			updateButtons();
 			isLayerOn = mapButtonsHelper.hasEnabledButtons();
+			mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
 			quickActionsWidget = mapActivity.findViewById(R.id.quick_action_widget);
+
+			updateButtons();
 		} else {
+			mapHudLayout = null;
 			quickActionsWidget = null;
 			actionButtons = new ArrayList<>();
 		}
@@ -121,24 +124,25 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		if (activity != null) {
 			boolean nightMode = app.getDaynightHelper().isNightMode();
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
-			ViewGroup container = activity.findViewById(R.id.MapHudButtonsOverlay);
+
 			for (QuickActionButton button : actionButtons) {
-				container.removeView(button);
+				mapHudLayout.removeMapButton(button);
 			}
 
 			List<QuickActionButton> buttons = new ArrayList<>();
 			List<QuickActionButtonState> buttonStates = mapButtonsHelper.getButtonsStates();
 			for (QuickActionButtonState state : buttonStates) {
-				QuickActionButton button = (QuickActionButton) inflater.inflate(R.layout.map_quick_actions_button, container, false);
+				QuickActionButton button = (QuickActionButton) inflater.inflate(R.layout.map_quick_actions_button, mapHudLayout, false);
 				button.setButtonState(state);
 				button.setMapActivity(activity);
 				button.setUseCustomPosition(true);
 
-				container.addView(button, new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, BOTTOM | END));
 				buttons.add(button);
+				mapHudLayout.addMapButton(button);
 			}
 			actionButtons = buttons;
 			mapButtonStates = buttonStates;
+			mapHudLayout.updateButtons();
 		}
 	}
 
@@ -153,9 +157,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		for (QuickActionButton button : actionButtons) {
 			button.update();
-			if (isLayerOn) {
-				button.updateMargins();
-			}
+		}
+		if (isLayerOn) {
+			mapHudLayout.updateButtons();
 		}
 	}
 

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.router.*;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.JsonObject;
@@ -27,17 +26,26 @@ import gnu.trove.list.array.TIntArrayList;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.ObfConstants;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.router.HHRoutePlanner;
+import net.osmand.router.NativeTransportRoutingResult;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RouteResultPreparation;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
+import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 public class NativeLibrary {
 
@@ -707,8 +715,8 @@ public class NativeLibrary {
 		@Override
 		public String toString() {
 			String s = getClass().getSimpleName() + " " + name;
-			String link = OsmUtils.getOsmUrlForId(this);
-			String tags = OsmUtils.getPrintTags(this);
+			String link = ObfConstants.getOsmUrlForId(this);
+			String tags = ObfConstants.getPrintTags(this);
 			s += s.contains(link) ? "" : " " + link;
 			s += s.contains(tags) ? "" : " " + tags;
 			return s;

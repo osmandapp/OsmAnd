@@ -64,7 +64,6 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -707,14 +706,16 @@ public class MapRendererContext {
 	}
 
 	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
-		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
 		List<RenderedObject> res = new ArrayList<>();
-		if (polygons.size() > 0) {
-			for (int i = 0; i < polygons.size(); i++) {
-				MapObject polygon = polygons.get(i);
-				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
-				if (renderedObject != null) {
-					res.add(renderedObject);
+		if (mapPrimitivesProvider != null) {
+			MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+			if (polygons.size() > 0) {
+				for (int i = 0; i < polygons.size(); i++) {
+					MapObject polygon = polygons.get(i);
+					RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
+					if (renderedObject != null) {
+						res.add(renderedObject);
+					}
 				}
 			}
 		}

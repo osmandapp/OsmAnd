@@ -68,26 +68,7 @@
 \n
 \nOsmAnd 正在積極開發，專案也持續的發展，依賴資金捐助以用於開發和測試新的功能。請考慮購買 OsmAnd+ 或是資助特定的新功能，又或在 https://osmand.net 網站上捐款。</string>
     <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。
-\n
-\nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。
-\n
-\n一些主要的功能：
-\n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間）
-\n- 全球離線向量圖資
-\n- 直接由手機下載各國或區域圖資
-\n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵
-\n
-\n- 離線查詢地址、場所(POI)
-\n- 中程距離的離線路線
-\n- 汽車、自行車、步行模式有多種選項：
-\n- 自動日夜模式切換
-\n- 可依據速度選擇地圖縮放
-\n- 根據羅盤或行進方向進行地圖對齊
-\n- 車道引導、速限顯示、使用真人語音或文字轉語音
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 \n \nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 \n \n一些主要的功能： \n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） \n- 提供簡潔的全世界向量地圖 \n- 直接從應用程式下載國家或區域地圖 \n- 離線維基百科功能（下載維基百興趣點），非常適合觀光使用 \n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵 \n \n- 離線查詢地址、場所(POI) \n- 中程距離的離線路線 \n- 汽車、自行車、步行模式有多種選項： \n- 自動日夜模式切換 \n- 可依據速度選擇地圖縮放 \n- 根據羅盤或行進方向進行地圖對齊 \n- 車道引導、速限顯示、使用真人語音或文字轉語音</string>
     <string name="filterpoi_activity">建立 POI 篩選</string>
     <string name="recalculate_route_to_your_location">交通模式：</string>
     <string name="select_navigation_mode">交通模式：</string>
@@ -2189,26 +2170,8 @@
     <string name="right_side_navigation">靠右行駛</string>
     <string name="shared_string_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
-    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： 
-\n• 西歐： **** 
-\n• 東歐： *** 
-\n• 俄羅斯： *** 
-\n• 北美洲： *** 
-\n• 南美洲： ** 
-\n• 亞洲：** 
-\n• 日本與韓國： *** 
-\n• 中東： ** 
-\n• 非洲： ** 
-\n• 南極洲： * 
-\n全球大多數國家都可以下載 
-\n從阿富汗到辛巴威，從澳洲到美國、阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …
-\n</string>
-    <string name="osmand_plus_extended_description_part5">安全功能
-\n• 任選的自動日/夜檢視切換
-\n• 任選的速限顯示功能，如果您超速了它會提醒
-\n• 取決於速度的地圖縮放選項 
-\n• 分享您所在的位置的功能，這樣您的朋友能找到您
-\n</string>
+    <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： \n• 西歐： **** \n• 東歐： *** \n• 俄羅斯： *** \n• 北美洲： *** \n• 南美洲： ** \n• 亞洲：** \n• 日本與韓國： *** \n• 中東： ** \n• 非洲： ** \n• 南極洲： * \n全球大多數國家都可以下載 \n從阿富汗到辛巴威，從澳洲到美國、阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …</string>
+    <string name="osmand_plus_extended_description_part5">安全功能 \n• 任選的自動日/夜檢視切換 \n• 任選的速限顯示功能，如果您超速了它會提醒 \n• 取決於速度的地圖縮放選項 \n• 分享您所在的位置的功能，這樣您的朋友能找到您</string>
     <string name="osmand_plus_extended_description_part6">自行車和步行功能
 \n• 檢視人行道、登山健行步道和自行車道，非常適合戶外活動
 \n• 特殊的自行車和行人的路線和顯示模式
@@ -2216,28 +2179,11 @@
 \n• 任選的旅程錄製到裝置端 GPX 檔案或線上服務
 \n• 任選的速度和高度顯示
 \n• 顯示等高線和地形陰影（須有額外的外掛程式）</string>
-    <string name="osmand_plus_extended_description_part7">直接貢獻給 OSM 
-\n• 回報地圖錯誤 
-\n• 直接從應用程式上傳 GPX 軌跡到 OSM 
-\n• 新增 POI 並直接上傳至 OSM（如果是離線使用則會在稍後上傳） 
-\n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下） 
-\nOsmAnd 是仍在積極開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。
-\n</string>
+    <string name="osmand_plus_extended_description_part7">直接貢獻給 OSM \n• 回報地圖錯誤 \n• 直接從應用程式上傳 GPX 軌跡到 OSM \n• 新增 POI 並直接上傳至 OSM（如果是離線使用則會在稍後上傳） \n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下） \nOsmAnd 是仍在積極開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。</string>
     <string name="osmand_extended_description_part1">OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的 OSM 資料。
 \n
 \n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線與地形資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>
-    <string name="osmand_extended_description_part2">GPS 導航 
-\n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇 
-\n• 轉向建議語音導航（真人和合成語音） 
-\n• 當您偏離了行駛路線時將會重新計算路線 
-\n• 車道導引、街道名稱和預計抵達時間將會一路陪伴您 
-\n• 為了讓您的旅程更安全，有日／夜模式自動切換 
-\n• 顯示速度限制，如果超速了則會提醒您 
-\n• 依您的速度調整地圖縮放 
-\n• 按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理座標搜尋目的地 
-\n• 支援在您的旅程中加入中轉點 
-\n• 錄製自己的或上傳一個 GPX 軌跡並跟隨它
-\n</string>
+    <string name="osmand_extended_description_part2">GPS 導航 \n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇 \n• 轉向建議語音導航（真人和合成語音） \n• 當您偏離了行駛路線時將會重新計算路線 \n• 車道導引、街道名稱和預計抵達時間將會一路陪伴您 \n• 為了讓您的旅程更安全，有日／夜模式自動切換 \n• 顯示速度限制，如果超速了則會提醒您 \n• 依您的速度調整地圖縮放 \n• 按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理座標搜尋目的地 \n• 支援在您的旅程中加入中轉點 \n• 錄製自己的或上傳一個 GPX 軌跡並跟隨它</string>
     <string name="osmand_plus_extended_description_part4">使用 OSM 和維基百科的資料 
 \n• 來自世界最好的協作專案所得的高品質資訊 
 \n• OSM 資料可用在每個國家或地區 
@@ -2246,32 +2192,10 @@
 \n• 密集的離線向量地圖更新，至少每月一次
 \n 
 \n• 可在完整的區域資料還是只有公路網之間選擇（舉例來說：整個日本就有 700 MB 而公路網部分僅有 200 MB）</string>
-    <string name="osmand_plus_extended_description_part2">導航
-\n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇
-\n• 轉向建議(turn by turn)語音導航（真人和合成語音）
-\n• 車道導引、街道名稱和預計抵達時間會有一路的幫助
-\n• 支援中轉點於您的旅程
-\n• 當您偏離了行駛路線，重建改道規劃
-\n• 您可以按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理坐標搜尋目的地
-\n</string>
-    <string name="osmand_plus_extended_description_part3">地圖檢視 
-\n• 分享您的位置，讓您的朋友能找到您 
-\n• 調整地圖到您的移動方向（或羅盤） 
-\n• 保存您最重要的地點於我的最愛 
-\n• 顯示您週遭的 POI（興趣點） 
-\n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 
-\n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫
-\n</string>
+    <string name="osmand_plus_extended_description_part2">導航 \n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇 \n• 轉向建議(turn by turn)語音導航（真人和合成語音） \n• 車道導引、街道名稱和預計抵達時間會有一路的幫助 \n• 支援中轉點於您的旅程 \n• 當您偏離了行駛路線，重建改道規劃 \n• 您可以按照地址、類別（例如：停車場、餐廳、旅店、加油站、博物館）或地理坐標搜尋目的地</string>
+    <string name="osmand_plus_extended_description_part3">地圖檢視 \n• 分享您的位置，讓您的朋友能找到您 \n• 調整地圖到您的移動方向（或羅盤） \n• 保存您最重要的地點於我的最愛 \n• 顯示您週遭的 POI（興趣點） \n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫</string>
     <string name="shared_string_visible">可見的</string>
-    <string name="osmand_extended_description_part3">地圖 
-\n• 顯示您週遭的 POI（興趣點） 
-\n• 調整地圖到您的移動方向（或羅盤） 
-\n• 顯示的位置和您正在觀看的方向 
-\n• 分享您的位置，讓您的朋友能找到您 
-\n• 保存您最重要的地點於我的收藏 
-\n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫 
-\n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊／導航 GPX 軌跡以及可自訂透明度的額外圖層
-\n</string>
+    <string name="osmand_extended_description_part3">地圖 \n• 顯示您週遭的 POI（興趣點） \n• 調整地圖到您的移動方向（或羅盤） \n• 顯示的位置和您正在觀看的方向 \n• 分享您的位置，讓您的朋友能找到您 \n• 保存您最重要的地點於我的收藏 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫 \n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊／導航 GPX 軌跡以及可自訂透明度的額外圖層</string>
     <string name="osmand_extended_description_part5">自行車
 \n• 在地圖找到自行車道
 \n• GPS 導航在自行車模式下，使用自行車道構建您的路線
@@ -2292,20 +2216,10 @@
 \n• 南極洲： * 
 \n全球大多數國家都可以下載！ 
 \n在您的國家獲得可靠的導航 - 無論是法國、德國、墨西哥、英國、西班牙、荷蘭、美國、俄羅斯、巴西或其他任何的國家。</string>
-    <string name="osmand_extended_description_part7">為 OSM 做出貢獻
-\n• 回報資料錯誤
-\n• 從應用程式直接將 GPX 軌跡上傳到 OSM
-\n• 增加 POI 並直接將其上傳到 OSM（或如果離線則之後上傳）
-\n</string>
+    <string name="osmand_extended_description_part7">為 OSM 做出貢獻 \n• 回報資料錯誤 \n• 從應用程式直接將 GPX 軌跡上傳到 OSM \n• 增加 POI 並直接將其上傳到 OSM（或如果離線則之後上傳）</string>
     <string name="osmand_extended_description_part4">滑雪
 \nOsmAnd 滑雪地圖外掛元件，使您能夠看到滑雪道與複雜程度和一些附加的資訊，如滑雪纜車和其它設施的位置。</string>
-    <string name="osmand_extended_description_part6">步行、登山健行、市區旅遊 
-\n• 地圖會顯示您的步行和登山健行路徑 
-\n• 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事 
-\n• 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航 
-\n• GPS 導航在行人模式下，使用步行路徑構建您的路線 
-\n• 上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線
-\n</string>
+    <string name="osmand_extended_description_part6">步行、登山健行、市區旅遊 \n• 地圖會顯示您的步行和登山健行路徑 \n• 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事 \n• 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航 \n• GPS 導航在行人模式下，使用步行路徑構建您的路線 \n• 上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的 OSM 圖資。
 \n享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線與地形資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。
 \n
@@ -2981,27 +2895,7 @@
     <string name="shared_string_crash">當機</string>
     <string name="last_launch_crashed">OsmAnd 上次當機了。請透過分享錯誤訊息給我們來協助改善 OsmAnd。</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• 應用程式設定檔：按您的需求建立自訂的設定檔，可自訂圖示與顏色 
-\n 
-\n • 現在可以自訂任何設定檔的預設值與最小／最大速度 
-\n 
-\n • 新增目前經緯度的小工具 
-\n 
-\n • 新增在地圖上顯示羅盤與半徑尺規的選項 
-\n 
-\n • 修復背景軌跡記錄 
-\n 
-\n • 改善背景地圖下載 
-\n 
-\n • 「將螢幕開啟」選項重返 
-\n 
-\n • 修復維基百科語言選取 
-\n 
-\n • 修復在導航時的羅盤按鈕行為 
-\n 
-\n • 其他臭蟲修復
-\n
-\n</string>
+    <string name="release_3_4">• 應用程式設定檔：按您的需求建立自訂的設定檔，可自訂圖示與顏色 \n \n • 現在可以自訂任何設定檔的預設值與最小／最大速度 \n \n • 新增目前經緯度的小工具 \n \n • 新增在地圖上顯示羅盤與半徑尺規的選項 \n \n • 修復背景軌跡記錄 \n \n • 改善背景地圖下載 \n \n • 「將螢幕開啟」選項重返 \n \n • 修復維基百科語言選取 \n \n • 修復在導航時的羅盤按鈕行為 \n \n • 其他臭蟲修復</string>
     <string name="app_mode_personal_transporter">個人運輸工具</string>
     <string name="app_mode_monowheel">單輪</string>
     <string name="app_mode_scooter">速克達</string>
@@ -3177,23 +3071,7 @@
     <string name="routing_attr_prefer_unpaved_description">偏好無鋪面道路。</string>
     <string name="update_all_maps">更新所有地圖</string>
     <string name="update_all_maps_q">更新所有 (%1$d) 地圖？</string>
-    <string name="release_3_5">• 更新的應用程式與設定檔設定。方便地按照類型排列，並可自訂每個設定檔 
-\n 
-\n • 新的在瀏覽時建議下載地圖的對話框 
-\n 
-\n • 夜間模式修復 
-\n 
-\n • 修復世界各地的路徑規劃問題 
-\n 
-\n • 更新有更詳細路網的底圖 
-\n 
-\n • 修復世界各地淹水的地方 
-\n 
-\n • 滑雪路徑：新增海拔設定檔與路徑複雜度到路徑詳細資訊中 
-\n 
-\n • 其他臭蟲修復
-\n
-\n</string>
+    <string name="release_3_5">• 更新的應用程式與設定檔設定。方便地按照類型排列，並可自訂每個設定檔 \n \n • 新的在瀏覽時建議下載地圖的對話框 \n \n • 夜間模式修復 \n \n • 修復世界各地的路徑規劃問題 \n \n • 更新有更詳細路網的底圖 \n \n • 修復世界各地淹水的地方 \n \n • 滑雪路徑：新增海拔設定檔與路徑複雜度到路徑詳細資訊中 \n \n • 其他臭蟲修復</string>
     <string name="apply_preference_to_all_profiles">套用此變更到所有或選定的設定檔。</string>
     <string name="shared_preference">共享</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好無鋪面道路</string>
@@ -3327,31 +3205,7 @@
 \n 
 \n若啟用，OsmAnd 將會使用系統逾時設定。</string>
     <string name="clear_recorded_data">清除已紀錄的資料</string>
-    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原 
-\n 
-\n • 在導航中新增了出口編號 
-\n 
-\n • 改善外掛程式設定 
-\n 
-\n • 改善後的設定畫面可快速存取所有設定檔 
-\n 
-\n • 新增了可從其他設定複製設定的選項 
-\n 
-\n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能 
-\n 
-\n • 在地圖上正確地對齊 POI 圖示 
-\n 
-\n • 新增日落／日出資料到設定地圖中 
-\n 
-\n • 在地圖上新增家／工作地點的圖示 
-\n 
-\n • 在設定中新增了對多行描述的支援 
-\n 
-\n • 在日本地圖中加入了正確的音譯 
-\n 
-\n • 新增了南極洲的地圖
-\n
-\n</string>
+    <string name="release_3_6">• 設定檔：現在您可以變更順序、設定地圖圖示、變更基本設定檔的所有設定以及將它們復原 \n \n • 在導航中新增了出口編號 \n \n • 改善外掛程式設定 \n \n • 改善後的設定畫面可快速存取所有設定檔 \n \n • 新增了可從其他設定複製設定的選項 \n \n • 新增了在搜尋中變更順序或隱藏 POI 分類的功能 \n \n • 在地圖上正確地對齊 POI 圖示 \n \n • 新增日落／日出資料到設定地圖中 \n \n • 在地圖上新增家／工作地點的圖示 \n \n • 在設定中新增了對多行描述的支援 \n \n • 在日本地圖中加入了正確的音譯 \n \n • 新增了南極洲的地圖</string>
     <string name="copy_coordinates">複製座標</string>
     <string name="routing_profile_direct_to">點對點</string>
     <string name="sort_by_category">按分類排序</string>
@@ -3720,21 +3574,7 @@
     <string name="shared_string_is_saved">已儲存</string>
     <string name="one_point_error">請至少新增兩個點。</string>
     <string name="shared_string_redo">重做</string>
-    <string name="release_3_8">• 更新「規劃路線」功能：允許每個路段使用不同的導航類型並包含軌跡
-\n
-\n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始與結束圖示
-\n
-\n • 改善自行車節點的能見度
-\n
-\n • 軌跡現在是可點擊的，且有包含基本資訊的內容選單
-\n
-\n • 改進了搜尋演算法
-\n
-\n • 改進了導航中的「跟隨軌跡」選項
-\n
-\n • 修復設定檔的匯入／匯出問題
-\n
-\n</string>
+    <string name="release_3_8">• 更新「規劃路線」功能：允許每個路段使用不同的導航類型並包含軌跡 \n \n • 新的軌跡外觀選項：選取顏色、厚度、開啟方向箭頭與開始與結束圖示 \n \n • 改善自行車節點的能見度 \n \n • 軌跡現在是可點擊的，且有包含基本資訊的內容選單 \n \n • 改進了搜尋演算法 \n \n • 改進了導航中的「跟隨軌跡」選項 \n \n • 修復設定檔的匯入／匯出問題</string>
     <string name="sort_last_modified">最後修改時間</string>
     <string name="sort_name_descending">名稱：Z – A</string>
     <string name="sort_name_ascending">名稱：A – Z</string>
@@ -3836,15 +3676,7 @@
     <string name="plan_route_split_before">分離前</string>
     <string name="plan_route_split_after">分離後</string>
     <string name="plan_route_add_new_segment">加入新線段</string>
-    <string name="release_3_9">• 新增匯出與匯入所有資料（包含設定、資源與我的位置）的選項
-\n
-\n • 路線計畫：有路線的軌跡線段圖，並有建立與編輯多個軌跡線段的功能
-\n
-\n • 加入 OpenStreetMap 的 OAuth 驗證方式，改善 OSM 對話框的使用者介面
-\n
-\n • 支援自訂最愛與軌跡航點的顏色
-\n
-\n</string>
+    <string name="release_3_9">• 新增匯出與匯入所有資料（包含設定、資源與我的位置）的選項 \n \n • 路線計畫：有路線的軌跡線段圖，並有建立與編輯多個軌跡線段的功能 \n \n • 加入 OpenStreetMap 的 OAuth 驗證方式，改善 OSM 對話框的使用者介面 \n \n • 支援自訂最愛與軌跡航點的顏色</string>
     <string name="profile_type_osmand_string">OsmAnd 設定檔</string>
     <string name="profile_type_user_string">使用者設定檔</string>
     <string name="reverse_all_points">反轉所有點</string>
@@ -3985,19 +3817,7 @@
     <string name="customize_route_line">自訂路線</string>
     <string name="shared_string_route_line">路線</string>
     <string name="specify_color_for_map_mode">指定地圖模式的顏色：%1$s。</string>
-    <string name="release_4_0_beta">• 新增以英呎為單位下載等高線
-\n
-\n • 規劃路線樣式：新增切換點與圖形的分頁
-\n
-\n • OsmAnd Live 更新移動至「下載 &gt; 更新」
-\n
-\n • 現在可以使用海拔、速度或坡度來為軌跡著色了。
-\n
-\n • 新增變更路線外觀的選項。
-\n
-\n • 更新「旅程錄製」對話框
-\n
-\n</string>
+    <string name="release_4_0_beta">• 新增以英呎為單位下載等高線 \n \n • 規劃路線樣式：新增切換點與圖形的分頁 \n \n • OsmAnd Live 更新移動至「下載 &gt; 更新」 \n \n • 現在可以使用海拔、速度或坡度來為軌跡著色了。 \n \n • 新增變更路線外觀的選項。 \n \n • 更新「旅程錄製」對話框</string>
     <string name="no_purchases">您沒有任何購買</string>
     <string name="new_device_account">新裝置／新帳號</string>
     <string name="contact_support_description">如果您有任何問題，請於 %1$s 聯絡我們。</string>
@@ -4156,27 +3976,7 @@
     <string name="backup_error_user_is_not_registered">沒有使用者使用該電子郵件地址註冊</string>
     <string name="backup_error_no_valid_subscription">無有效的訂閱</string>
     <string name="enter_verification_code">輸入一次性密碼</string>
-    <string name="release_4_0">• 雲端備份
-\n
-\n • 為「Topo」地圖樣式新增了夜間模式
-\n
-\n • 新增了以英呎為單位下載等高線的選項
-\n
-\n • 軌跡現在可以按照高度、速度或坡度上色了
-\n
-\n • 更新了「旅程錄製」對話框
-\n
-\n • 點擊距離從半徑尺規移動至單獨的選項
-\n
-\n • 計畫路線：您現在不需要離開計畫路線模式模式就可以變更導航選項、存取地圖設定與搜尋
-\n
-\n • 新的「購買」畫面，包含了關於更詳細的購買資訊
-\n
-\n • 新增變更路線外觀的選項
-\n
-\n • OsmAnd Live 更新移動至「下載」→「更新」
-\n
-\n</string>
+    <string name="release_4_0">• 雲端備份 \n \n • 為「Topo」地圖樣式新增了夜間模式 \n \n • 新增了以英呎為單位下載等高線的選項 \n \n • 軌跡現在可以按照高度、速度或坡度上色了 \n \n • 更新了「旅程錄製」對話框 \n \n • 點擊距離從半徑尺規移動至單獨的選項 \n \n • 計畫路線：您現在不需要離開計畫路線模式模式就可以變更導航選項、存取地圖設定與搜尋 \n \n • 新的「購買」畫面，包含了關於更詳細的購買資訊 \n \n • 新增變更路線外觀的選項 \n \n • OsmAnd Live 更新移動至「下載」→「更新」</string>
     <string name="duration_moment_ago">剛才</string>
     <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 訂閱已過期，請續訂以使用備份。您仍然可以從雲端還原資料。</string>
     <string name="contour_lines_hillshade_slope">等高線、地形陰影、坡度</string>
@@ -4286,31 +4086,7 @@
     <string name="rendering_attr_natureReserves_name">自然保留區</string>
     <string name="included_categories">包含分類</string>
     <string name="shared_string_articles">文章</string>
-    <string name="release_4_1">• 新增對 Android Auto 的初步支援
-\n
-\n • UTM 座標搜尋的使用者介面
-\n
-\n • GPX 軌跡的 GPS 過濾條件
-\n
-\n • 海拔小工具 (Pro)
-\n
-\n • 最愛：新增檢視最近使用圖示的功能
-\n
-\n • 路線規劃：啟動後將使用選定的設定檔
-\n
-\n • 修復 Mapillary 圖層，外掛程式目前預設停用
-\n
-\n • 新增管理應用程式中所有歷史紀錄的畫面
-\n
-\n • 重新啟動應用程式後不會重設地圖方向
-\n
-\n • 改善 SRTM 高度標記繪製
-\n
-\n • 修復地圖上的阿拉伯文顯示問題
-\n
-\n • 修復了不同的路徑規劃問題
-\n
-\n</string>
+    <string name="release_4_1">• 新增對 Android Auto 的初步支援 \n \n • UTM 座標搜尋的使用者介面 \n \n • GPX 軌跡的 GPS 過濾條件 \n \n • 海拔小工具 (Pro) \n \n • 最愛：新增檢視最近使用圖示的功能 \n \n • 路線規劃：啟動後將使用選定的設定檔 \n \n • 修復 Mapillary 圖層，外掛程式目前預設停用 \n \n • 新增管理應用程式中所有歷史紀錄的畫面 \n \n • 重新啟動應用程式後不會重設地圖方向 \n \n • 改善 SRTM 高度標記繪製 \n \n • 修復地圖上的阿拉伯文顯示問題 \n \n • 修復了不同的路徑規劃問題</string>
     <string name="continue_on_phone">在行動裝置上繼續</string>
     <string name="location_access_request_title">OsmAnd 需要「位置」權限才能導航。</string>
     <string name="location_access_request_action">授予存取權限</string>
@@ -4544,15 +4320,7 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">無偏好</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">偏好越野滑雪道</string>
     <string name="routing_attr_difficulty_preference_expert_name">專家</string>
-    <string name="release_4_2">• 重新設計小工具：新的外觀、按頁面分組、根據您的需求變更順序與組合
-\n
-\n • 遠足/騎腳踏車/旅行路線：點擊路線符號並取得關於路線的完整資訊
-\n
-\n • 收藏群組：為群組中的新點設定預設外觀
-\n
-\n • 修復：線上圖磚地圖自動更新
-\n
-\n</string>
+    <string name="release_4_2">• 重新設計小工具：新的外觀、按頁面分組、根據您的需求變更順序與組合 \n \n • 遠足/騎腳踏車/旅行路線：點擊路線符號並取得關於路線的完整資訊 \n \n • 收藏群組：為群組中的新點設定預設外觀 \n \n • 修復：線上圖磚地圖自動更新</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">中等</string>
     <string name="turn_on_public_transport_description">開啟以在地圖上檢視大眾運輸路線。</string>
     <string name="av_def_action_choose">根據要求</string>
@@ -4797,31 +4565,7 @@
     <string name="speak_gps_signal_status">通報 GPS 訊號遺失和恢復</string>
     <string name="speak_route_recalculation">通報路線重新計算</string>
     <string name="purchases_feature_desc_external_sensors">顯示並記錄來自外部感應器的資料：自行車速度、自行車功率、踩踏頻率與心率。</string>
-    <string name="release_4_3">• 新的、較快速的第二版 (OpenGL) 地圖繪製引擎，包含了 2.5D 檢視
-\n
-\n • 運動時位置變化的平滑動畫
-\n
-\n • 用於地圖中心座標與地理位置海拔的新小工具
-\n
-\n • 「到點擊位置的距離」：新增文字大小選項
-\n
-\n • 「地圖標記」小工具：新增用來變更點擊行為的選項
-\n
-\n • 修復「顯示位置」選項
-\n
-\n • GPX：新增「link」、「cmt」、「desc」等標籤與任何擴充的支援
-\n
-\n • 重新整理的「航海地圖」清單
-\n
-\n • 新增對 ANT+ 感應器的支援
-\n
-\n • 新增用來停用下載 UUID 的選項
-\n
-\n • 依賴於海拔的步行/遠足/跑步旅行時間的預設速度可調預測
-\n
-\n • 修復音訊輸出與音量滑桿行為
-\n
-\n</string>
+    <string name="release_4_3">• 新的、較快速的第二版 (OpenGL) 地圖繪製引擎，包含了 2.5D 檢視 \n \n • 運動時位置變化的平滑動畫 \n \n • 用於地圖中心座標與地理位置海拔的新小工具 \n \n • 「到點擊位置的距離」：新增文字大小選項 \n \n • 「地圖標記」小工具：新增用來變更點擊行為的選項 \n \n • 修復「顯示位置」選項 \n \n • GPX：新增「link」、「cmt」、「desc」等標籤與任何擴充的支援 \n \n • 重新整理的「航海地圖」清單 \n \n • 新增對 ANT+ 感應器的支援 \n \n • 新增用來停用下載 UUID 的選項 \n \n • 依賴於海拔的步行/遠足/跑步旅行時間的預設速度可調預測 \n \n • 修復音訊輸出與音量滑桿行為</string>
     <string name="external_sensors_support">外部感應器支援</string>
     <string name="show_borders_of_downloaded_maps">顯示已下載地圖的邊界</string>
     <string name="show_map_symbols">顯示地圖符號</string>
@@ -5011,37 +4755,7 @@
     <string name="shared_string_original">原始</string>
     <string name="movement_speed">移動速率</string>
     <string name="shared_string_add_manually">手動新增……</string>
-    <string name="release_4_4">• 改進的「設定地圖」中的「軌跡」選單
-\n
-\n • 情境選單現在會顯示 POI 的在地化名稱
-\n
-\n • 新增了透過連結分享路線規劃的選項
-\n
-\n • 新增「海浬/英呎」長度單位
-\n
-\n • 地圖方向現在新增了新的固定模式
-\n
-\n • 簡化的開始畫面
-\n
-\n • Android Auto 的分割畫面模式下的固定位置
-\n
-\n • 新增了用於軌跡分析的「速率/坡度」圖表
-\n
-\n • Android 13 將應用程式語言選擇移動至系統設定
-\n
-\n • 修復了顯示素食場所的問題
-\n
-\n • 新增了下載線上圖磚作為「覆蓋層」或「底層」地圖的可能性
-\n
-\n • 在「車輛參數」中新增了對英制單位的支援
-\n
-\n • 新的輕便摩托車設定檔
-\n
-\n • 「顯示位置」新增了「自動」選項
-\n
-\n • 修復了傾斜、縮放與旋轉的地圖手勢
-\n
-\n</string>
+    <string name="release_4_4">• 改進的「設定地圖」中的「軌跡」選單 \n \n • 情境選單現在會顯示 POI 的在地化名稱 \n \n • 新增了透過連結分享路線規劃的選項 \n \n • 新增「海浬/英呎」長度單位 \n \n • 地圖方向現在新增了新的固定模式 \n \n • 簡化的開始畫面 \n \n • Android Auto 的分割畫面模式下的固定位置 \n \n • 新增了用於軌跡分析的「速率/坡度」圖表 \n \n • Android 13 將應用程式語言選擇移動至系統設定 \n \n • 修復了顯示素食場所的問題 \n \n • 新增了下載線上圖磚作為「覆蓋層」或「底層」地圖的可能性 \n \n • 在「車輛參數」中新增了對英制單位的支援 \n \n • 新的輕便摩托車設定檔 \n \n • 「顯示位置」新增了「自動」選項 \n \n • 修復了傾斜、縮放與旋轉的地圖手勢</string>
     <string name="sort_date_descending">最舊日期優先</string>
     <string name="selected_value">已選取的值</string>
     <string name="sort_duration_ascending">最短時間優先</string>
@@ -5223,49 +4937,7 @@
     <string name="get_osmand_cloud">取得 OsmAnd 雲端</string>
     <string name="free_account">免費帳號</string>
     <string name="folder_export_empty_error">沒有可匯出的內容，資料夾為空</string>
-    <string name="release_4_5">• BLE/ANT+ 偵測器：重新設計了連線、寫入與檢視接收到的資料到 GPX 的流程
-\n
-\n • 免費備份最愛與設定到「OsmAnd Cloud」
-\n
-\n • 支援 3D 地形陰影的地形圖新格式
-\n
-\n • 軌跡管理：更新的使用者介面、新增排序、支援巢狀資料夾
-\n
-\n • Android Auto：用於存取最愛、軌跡與 POI 類別的新開始選單
-\n
-\n • 頂部/底部面板的一個小工具清單
-\n
-\n • 新的「鐵路」設定檔，用以計算鐵道路線
-\n
-\n • 等高線現在可以與任何「地圖來源」共同運作
-\n
-\n • 外部鍵盤預設動作的擴展清單
-\n
-\n • 自訂路線規劃檔案，新增選項以刪除或覆寫
-\n
-\n • 新增了「偏離路線時宣佈」選項
-\n
-\n • 開始畫面：新增選項以從檔案還原 OsmAnd 狀態
-\n
-\n • 在北美新增了「危險材料」類別卡車導航
-\n
-\n • 對步行路線規劃新增了「鐵索攀岩」路線規劃的支援
-\n
-\n • 新增用於路線難度分級的「CAI」等級
-\n
-\n • 修復了不同應用程式語言選擇的問題
-\n
-\n • 新增了主題化圖示的支援
-\n
-\n • OsmAnd Cloud：新增刪除帳號的選項
-\n
-\n • 無障礙功能：按鈕的觸控目標大小變更為 48 dp；修復了地圖使用者介面對螢幕閱讀程式可見的問題
-\n
-\n • 日語語音提示重新設計
-\n
-\n • 重新設計高度變化與坡度評估
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ 偵測器：重新設計了連線、寫入與檢視接收到的資料到 GPX 的流程 \n \n • 免費備份最愛與設定到「OsmAnd Cloud」 \n \n • 支援 3D 地形陰影的地形圖新格式 \n \n • 軌跡管理：更新的使用者介面、新增排序、支援巢狀資料夾 \n \n • Android Auto：用於存取最愛、軌跡與 POI 類別的新開始選單 \n \n • 頂部/底部面板的一個小工具清單 \n \n • 新的「鐵路」設定檔，用以計算鐵道路線 \n \n • 等高線現在可以與任何「地圖來源」共同運作 \n \n • 外部鍵盤預設動作的擴展清單 \n \n • 自訂路線規劃檔案，新增選項以刪除或覆寫 \n \n • 新增了「偏離路線時宣佈」選項 \n \n • 開始畫面：新增選項以從檔案還原 OsmAnd 狀態 \n \n • 在北美新增了「危險材料」類別卡車導航 \n \n • 對步行路線規劃新增了「鐵索攀岩」路線規劃的支援 \n \n • 新增用於路線難度分級的「CAI」等級 \n \n • 修復了不同應用程式語言選擇的問題 \n \n • 新增了主題化圖示的支援 \n \n • OsmAnd Cloud：新增刪除帳號的選項 \n \n • 無障礙功能：按鈕的觸控目標大小變更為 48 dp；修復了地圖使用者介面對螢幕閱讀程式可見的問題 \n \n • 日語語音提示重新設計 \n \n • 重新設計高度變化與坡度評估</string>
     <string name="routing_attr_allow_via_ferrata_description">配有固定纜繩、柱子、梯子與橋樑的山路。</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路線（鐵索攀岩）</string>
     <string name="free_settings_backup">免費設定備份</string>
@@ -5390,29 +5062,7 @@
     <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• Android Auto：新增 3D 模式
-\n
-\n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量
-\n
-\n • 強化的頂部與底部小工具面板以容納所有小工具
-\n
-\n • 改善的本機資源管理
-\n
-\n • 外部控制器的可自訂按鈕對應
-\n
-\n • 新的小工具：「滑翔比」與「太陽位置」
-\n
-\n • OsmAnd Cloud：現在可以存取已刪除的檔案
-\n
-\n • 使用新的對稱漸層強化坡度模式下的軌跡著色
-\n
-\n • 解決了透明狀態列的問題
-\n
-\n • 新增了對 ANT+ 溫度小工具的支援
-\n
-\n • 引入了「可用記憶體」小工具
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto：新增 3D 模式 \n \n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量 \n \n • 強化的頂部與底部小工具面板以容納所有小工具 \n \n • 改善的本機資源管理 \n \n • 外部控制器的可自訂按鈕對應 \n \n • 新的小工具：「滑翔比」與「太陽位置」 \n \n • OsmAnd Cloud：現在可以存取已刪除的檔案 \n \n • 使用新的對稱漸層強化坡度模式下的軌跡著色 \n \n • 解決了透明狀態列的問題 \n \n • 新增了對 ANT+ 溫度小工具的支援 \n \n • 引入了「可用記憶體」小工具</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
     <string name="app_mode_baby_transport">嬰兒運輸</string>
     <string name="with_waypoints">有航點</string>
@@ -5607,25 +5257,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="shared_sting_all_colors">所有顏色</string>
     <string name="lang_ta_in">泰米爾語（印度）</string>
-    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具
-\n
-\n • 透過新增多個「快速操作」按鈕來設定地圖畫面
-\n
-\n • 改善圖表中資料的可讀性
-\n
-\n • 新增了按軌跡的感應器資料過濾功能
-\n
-\n • 改善的軌跡群組外觀自訂
-\n
-\n • 新增了對其他 GPX 標籤的支援
-\n
-\n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇
-\n
-\n • 用於軌跡選擇的統一使用者介面
-\n
-\n • OpenStreetMap 登入已切換至 OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具 \n \n • 透過新增多個「快速操作」按鈕來設定地圖畫面 \n \n • 改善圖表中資料的可讀性 \n \n • 新增了按軌跡的感應器資料過濾功能 \n \n • 改善的軌跡群組外觀自訂 \n \n • 新增了對其他 GPX 標籤的支援 \n \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇 \n \n • 用於軌跡選擇的統一使用者介面 \n \n • OpenStreetMap 登入已切換至 OAuth 2.0</string>
     <string name="precise">精確</string>
     <string name="distance_during_navigation_description">選擇距離資訊在導航小工具中的顯示方式（到點的距離、下一個轉彎、車道）。
 \n
@@ -5647,29 +5279,7 @@
     <string name="change_default_tracks_appearance_confirmation">套用變更到資料夾中既有的軌跡或是僅套用到新的？</string>
     <string name="shared_string_changes">變更</string>
     <string name="apply_only_to_new">僅套用到新的</string>
-    <string name="release_4_8">• 新的地形著色選項「海拔」
-\n
-\n • 地形、軌跡與路線的自訂調色板
-\n
-\n • 位置圖示的 3D 變體
-\n
-\n • 現在可以將快速動作分配給外接鍵盤
-\n
-\n • 天氣：更新使用者介面，新增風的動畫
-\n
-\n • 3D 軌跡改進：新的視覺化與著色選項
-\n
-\n • 地圖上旅遊路線的更多選擇
-\n
-\n • 新增應用程式佈景主題選項以遵循地圖模式
-\n
-\n • 修復了軌跡統計、排序與搜尋
-\n
-\n • OSM 編輯：已刪除帳號/密碼授權方法
-\n
-\n • 從 Android 14 開始切換至系統 Sharesheet
-\n
-\n</string>
+    <string name="release_4_8">• 新的地形著色選項「海拔」 \n \n • 地形、軌跡與路線的自訂調色板 \n \n • 位置圖示的 3D 變體 \n \n • 現在可以將快速動作分配給外接鍵盤 \n \n • 天氣：更新使用者介面，新增風的動畫 \n \n • 3D 軌跡改進：新的視覺化與著色選項 \n \n • 地圖上旅遊路線的更多選擇 \n \n • 新增應用程式佈景主題選項以遵循地圖模式 \n \n • 修復了軌跡統計、排序與搜尋 \n \n • OSM 編輯：已刪除帳號/密碼授權方法 \n \n • 從 Android 14 開始切換至系統 Sharesheet</string>
     <string name="shared_string_scale">比例尺</string>
     <string name="vertical_exaggeration">垂直誇大</string>
     <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
@@ -5928,10 +5538,10 @@
     <string name="obd_fuel_left_distance_desc">透過 OBD 感應器顯示車輛剩餘油量的行駛距離</string>
     <string name="obd_fuel_type_desc">透過 OBD 感應器顯示車輛燃料類型</string>
     <string name="obd_air_intake_temp">進氣溫度</string>
-    <string name="obd_ambient_air_temp">環境空氣溫度</string>
+    <string name="obd_ambient_air_temp">環境溫度</string>
     <string name="obd_battery_voltage">電池電壓</string>
-    <string name="obd_engine_coolant_temp">引擎冷卻溫度</string>
-    <string name="obd_fuel_level">油量</string>
+    <string name="obd_engine_coolant_temp">冷卻溫度</string>
+    <string name="obd_fuel_level">油量 (%)</string>
     <string name="obd_fuel_consumption_rate">油耗</string>
     <string name="obd_fuel_consumption_rate_desc">顯示以 OBD 感應器位置為基礎的油耗</string>
     <string name="obd_fuel_left_distance">剩餘燃料（距離）</string>
@@ -5977,5 +5587,48 @@
     <string name="screen_is_locked_by_external_button">已鎖定觸控螢幕。要解鎖，請按 %1$s 按鈕，或是輕點螢幕上的按鈕。</string>
     <string name="obd_fuel_left_liters">剩餘燃料（公升）</string>
     <string name="liter_per_hour">公升/小時</string>
-    <string name="release_4_9">- 新增維基媒體影像的全螢幕圖庫檢視程式\n\n - 推出新的外掛程式「Vehicle Metrics」，可使用 OBD-II 通訊協定監控車輛性能\n\n - 新增為軌跡指派活動並據此過濾的功能\n\n - 針對旅程記錄與觸控螢幕鎖定實作新的快速動作\n\n - 加入可自訂的地圖按鈕外觀與精確的網格\n\n - 為小工具新增情境選單與「重設平均速度」動作\n\n - 新增路線圖層「越野腳踏車路徑」\n\n - 修正「導航時自動記錄軌跡」的問題\n\n - 修正在 RTL 中坐標翻轉的問題\n\n - 修正遺漏目前記錄路徑的感應器資料的問題\n\n - 新增所選點周圍區域的資訊\n\n - 新增快速動作以控制 OSM 編輯的能見度\n\n - 分開地形著色選項的可見度參數\n\n - 新增可點選的圖示，以顯示通道或其他道路或小徑屬性\n\n</string>
+    <string name="release_4_9">- 新增維基媒體影像的全螢幕圖庫檢視程式\n\n - 推出新的外掛程式「Vehicle Metrics」，可使用 OBD-II 通訊協定監控車輛性能\n\n - 新增為軌跡指派活動並據此過濾的功能\n\n - 針對旅程記錄與觸控螢幕鎖定實作新的快速動作\n\n - 加入可自訂的地圖按鈕外觀與精確的網格\n\n - 為小工具新增情境選單與「重設平均速度」動作\n\n - 新增路線圖層「越野腳踏車路徑」\n\n - 修正「導航時自動記錄軌跡」的問題\n\n - 修正在 RTL 中坐標翻轉的問題\n\n - 修正遺漏目前記錄路徑的感應器資料的問題\n\n - 新增所選點周圍區域的資訊\n\n - 新增快速動作以控制 OSM 編輯的能見度\n\n - 分開地形著色選項的可見度參數\n\n - 新增可點選的圖示，以顯示通道或其他道路或小徑屬性</string>
+    <string name="route_guidance_desc">提供即時路線指引，包括到下個轉彎的距離、道路名稱、目前街道名稱與車道資訊。小工具會在導航時啟動。</string>
+    <string name="route_guidance">路線指引</string>
+    <string name="obd_widget_vehicle_speed">車輛速度</string>
+    <string name="obd_nothing_found_text">找不到掃描器</string>
+    <string name="obd_searching_text_description">請將裝置靠近掃描器。確定車輛引擎正在運轉。</string>
+    <string name="obd_bluetooth_off_description">開啟藍牙尋找並連結掃描器。</string>
+    <string name="obd_widget_engine_speed">引擎速度</string>
+    <string name="obd_nothing_found_description">請檢查以下項目：\n – 確定藍牙已開啟\n – 車輛引擎正在運轉\n – 確定您的裝置在掃描器的範圍內。</string>
+    <string name="obd_device_forget_sensor_description">將會從清單中移除掃描器。您隨時都可以再次配對此掃描器。</string>
+    <string name="obd_searching_text">正在搜尋掃描器</string>
+    <string name="obd_device_forget_sensor">忘記掃描器</string>
+    <string name="connect_obd_instructions_step">1. 將掃描器連結至您車輛的 OBD-II 連接埠\n\n 2. 開啟車輛引擎\n\n 3. 啟用您裝置的藍牙\n\n 4. 點選「%1$s」，然後從清單中選取您的掃描器。</string>
+    <string name="obd_fuel_consumption_rate_sensor">燃料消耗率（感應器）</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">顯示根據計算所得的車輛燃料消耗率（公升/小時）</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">顯示根據感應器所得的車輛燃料消耗率（公升/小時）</string>
+    <string name="obd_fuel_level_liter">油量（公升）</string>
+    <string name="obd_fuel_level_percent">油量 (%)</string>
+    <string name="obd_fuel_left_percent">剩餘燃料 (%)</string>
+    <string name="obd_fuel_left_liter">剩餘燃料（公升）</string>
+    <string name="obd_fuel_left_km">剩餘燃料（公里）</string>
+    <string name="obd_fuel_consumption_rate_scanner">燃料消耗率 (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">燃料消耗率（公升/小時）</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">燃料消耗率（%/小時）</string>
+    <string name="obd_fuel_consumption_rate_l_h">燃料消耗率（公升/小時）</string>
+    <string name="speedometer_maximum">最大</string>
+    <string name="liter">公升</string>
+    <string name="percent_hour">%/小時</string>
+    <string name="l_100km">公升/100公里</string>
+    <string name="obd_fuel_consumption_rate_l_km">燃料消耗率（公升/公里）</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">顯示根據計算而得的車輛燃料消耗率（公升/公里）</string>
+    <string name="simulate_obd">模擬 OBD 資料</string>
+    <string name="obd_engine_runtime">引擎運轉時間</string>
+    <string name="obd_engine_runtime_desc">顯示從 OBD 掃描器取得的車輛引擎運轉時間</string>
+    <string name="kpa_unit">千帕</string>
+    <string name="obd_throttle_position_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
+    <string name="obd_calculated_engine_load">計算得出的引擎負載</string>
+    <string name="obd_calculated_engine_load_desc">顯示根據感應器計算得出的車輛引擎負載</string>
+    <string name="obd_engine_oil_temperature">引擎機油溫度</string>
+    <string name="obd_engine_oil_temperature_desc">顯示從 OBD 掃描器取得的車輛引擎機油溫度</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">顯示根據計算得出的車輛燃料消耗率（%/小時）</string>
+    <string name="obd_throttle_position">油門位置</string>
+    <string name="obd_fuel_pressure">燃料壓力</string>
+    <string name="obd_fuel_pressure_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
 </resources>

@@ -4,6 +4,7 @@ import net.osmand.shared.KException
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 
 actual object PlatformUtil {
 
@@ -20,6 +21,8 @@ actual object PlatformUtil {
 	actual fun getOsmAndContext(): OsmAndContext = osmAndContext
 
 	actual fun getSQLiteAPI(): SQLiteAPI = sqliteApi
+
+	actual fun getTrackPointsAnalyser(): TrackPointsAnalyser? = osmAndContext.getTrackPointsAnalyser()
 
 	fun getKotlinException(e: java.lang.Exception): KException = KException(e.message, e)
 

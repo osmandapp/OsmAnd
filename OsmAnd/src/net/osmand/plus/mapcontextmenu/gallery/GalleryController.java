@@ -127,7 +127,6 @@ public class GalleryController implements IDialogController {
 
 	public void clearListeners() {
 		listeners.clear();
-		clearHolder();
 	}
 
 	public interface DownloadMetadataListener {

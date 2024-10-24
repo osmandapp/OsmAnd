@@ -310,7 +310,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			RouteActivityHelper helper = app.getRouteActivityHelper();
 			RouteActivity activity = helper.findRouteActivity(selectedId);
 			if (activity != null) {
-				int iconId = AndroidUtils.getIconId(app, activity.getIconName());
+				int iconId = AndroidUtils.getActivityIconId(app, activity);
 				preference.setIcon(getContentIcon(iconId));
 				preference.setSummary(activity.getLabel());
 			} else {

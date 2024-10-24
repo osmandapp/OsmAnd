@@ -446,10 +446,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 							routeColoringType : ColoringType.DEFAULT;
 			int routeLineColor = getRouteLineColor();
 			float routeLineWidth = getRouteLineWidth(tb);
-			boolean shouldShowDirectionArrows = previewRouteLineInfo == null
-					|| previewRouteLineInfo.shouldShowDirectionArrows();
+			boolean shouldShowDirectionArrows = shouldShowDirectionArrows();
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
-					directionArrowsColor, actualColoringType, routeInfoAttribute, routeGradientPalette);
+					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
 			boolean routeUpdated = routeGeometry.updateRoute(tb, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
@@ -643,7 +642,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			DISTANCE_ACTION = 110;
 		}
 		double actionDist = 0;
-		Location previousAction = null; 
+		Location previousAction = null;
 		List<ActionPoint> actionPoints = new ArrayList<>();
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {

@@ -80,7 +80,8 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 		connectedList?.adapter = connectedListAdapter
 		disconnectedList?.adapter = disconnectedListAdapter
 		val connectInstructions = view.findViewById<TextView>(R.id.connect_instructions)
-		connectInstructions.text = String.format(app.getString(R.string.connect_obd_instructions_step),
+		connectInstructions.text = String.format(
+			app.getString(R.string.connect_obd_instructions_step),
 			app.getString(R.string.external_device_details_connect))
 	}
 
@@ -160,6 +161,10 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
 				val disconnectedDevices =
 					plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
+						.toMutableList()
+				if (connectedDevices.isEmpty() && disconnectedDevices.isEmpty() && settings.SIMULATE_OBD_DATA.get()) {
+					disconnectedDevices.add(BTDeviceInfo("Simulation Device", ""))
+				}
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
 					contentView?.visibility = View.GONE
@@ -205,7 +210,10 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onForget(device: BTDeviceInfo) {
-		ForgetOBDDeviceDialog.showInstance(requireActivity().supportFragmentManager, this, device.address)
+		ForgetOBDDeviceDialog.showInstance(
+			requireActivity().supportFragmentManager,
+			this,
+			device.address)
 	}
 
 	override fun onForgetSensorConfirmed(deviceId: String) {

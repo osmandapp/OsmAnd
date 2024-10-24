@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class ConfigureMapButtonState extends MapButtonState {
 
@@ -40,6 +41,11 @@ public class ConfigureMapButtonState extends MapButtonState {
 	}
 
 	@Override
+	public int getDefaultSize() {
+		return SMALL_SIZE_DP;
+	}
+
+	@Override
 	public boolean isEnabled() {
 		return visibilityPref.get();
 	}
@@ -54,6 +60,12 @@ public class ConfigureMapButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		return new ButtonAppearanceParams(appMode.getIconName(), SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams(appMode.getIconName(), getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, true, true, false, true, false);
 	}
 }

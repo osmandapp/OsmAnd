@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
 
@@ -11,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class DrawerMenuButtonState extends MapButtonState {
 
@@ -54,6 +54,12 @@ public class DrawerMenuButtonState extends MapButtonState {
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		boolean dashboard = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
 		String iconName = dashboard ? "ic_dashboard" : "ic_navigation_drawer";
-		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+		return new ButtonAppearanceParams(iconName, getDefaultSize(), OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, true, false, true, false, false);
 	}
 }

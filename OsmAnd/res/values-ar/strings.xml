@@ -6050,4 +6050,5 @@
     <string name="quick_action_navigation_view_title">عرض الملاحة</string>
     <string name="quick_action_switch_compass_desc">مفتاح تبديل لتبديل اتجاه الخريطة.</string>
     <string name="quick_action_drawer_title">القائمة الجانبية</string>
+    <string name="route_guidance_desc">يوفر إرشادات طريق مباشرةً، بما في ذلك المسافة إلى المنعطف التالي واسم الطريق واسم الشارع الحالي ومعلومات المسار. تكون الأدوات نشطة أثناء التنقل.</string>
 </resources>
