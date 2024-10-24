@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.car.app.CarAppService;
 import androidx.car.app.Session;
 import androidx.car.app.validation.HostValidator;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * details, see the <a href="https://developer.android.com/training/cars/navigation">Android for
  * Cars Library developer guide</a>.
  */
-public final class NavigationCarAppService extends CarAppService {
+public final class NavigationCarAppService extends CarAppService implements ActivityCompat.OnRequestPermissionsResultCallback {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
 	private boolean foreground = false;
@@ -46,8 +47,22 @@ public final class NavigationCarAppService extends CarAppService {
 	}
 
 	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		int result = super.onStartCommand(intent, flags, startId);
+		getApp().setNavigationCarAppService(this);
+		return result;
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		getApp().setAndroidAutoPermissionRequestResultListener(this);
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		getApp().setAndroidAutoPermissionRequestResultListener(null);
 		getApp().setNavigationCarAppService(null);
 	}
 
@@ -55,13 +70,13 @@ public final class NavigationCarAppService extends CarAppService {
 	@NonNull
 	public Session onCreateSession() {
 		OsmandApplication app = getApp();
-		getApp().setNavigationCarAppService(this);
 		startForegroundWithPermission(app);
 		NavigationSession session = new NavigationSession();
 		session.getLifecycle()
 				.addObserver(new DefaultLifecycleObserver() {
 					@Override
 					public void onDestroy(@NonNull LifecycleOwner owner) {
+						foreground = false;
 						stopForeground(STOP_FOREGROUND_REMOVE);
 					}
 				});
@@ -69,17 +84,17 @@ public final class NavigationCarAppService extends CarAppService {
 		return session;
 	}
 
-	private void startForegroundWithPermission(OsmandApplication app) {
-		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
+	private void startForegroundWithPermission(@NonNull OsmandApplication app) {
+		if (!foreground && app.getCarNavigationSession() != null && OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
 			foreground = true;
 			Notification notification = app.getNotificationHelper().buildCarAppNotification();
 			startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
 		}
 	}
 
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		List<String> permissionsList = Arrays.asList(permissions);
-		if (permissionsList.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
+		if (getApp().getCarNavigationSession() != null && permissionsList.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
 				permissionsList.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
 			startForegroundWithPermission(getApp());
 		}

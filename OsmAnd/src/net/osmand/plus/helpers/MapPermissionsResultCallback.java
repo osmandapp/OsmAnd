@@ -42,9 +42,9 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 				controlsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
-			NavigationCarAppService navigationCarAppService = app.getNavigationCarAppService();
-			if (navigationCarAppService != null) {
-				navigationCarAppService.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			OnRequestPermissionsResultCallback aaCallback = app.getAndroidAutoPermissionRequestResultListener();
+			if (aaCallback != null) {
+				aaCallback.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
 			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
