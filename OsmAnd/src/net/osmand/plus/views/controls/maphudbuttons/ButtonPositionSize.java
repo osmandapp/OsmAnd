@@ -149,7 +149,7 @@ public class ButtonPositionSize {
 		return (int) ((width * CELL_SIZE_DP) * dpToPix);
 	}
 
-	public void fromLongValue(long v) {
+	public ButtonPositionSize fromLongValue(long v) {
 		width = (int) (v & SIZE_MASK);
 		v = v >> MAX_SIZE_BITS;
 		marginX = (int) (v & MARGIN_MASK);
@@ -168,6 +168,7 @@ public class ButtonPositionSize {
 		v = v >> 2;
 		moveDescendants = (int) (v % 4);
 		v = v >> 2;
+		return this;
 	}
 
 	@Override
