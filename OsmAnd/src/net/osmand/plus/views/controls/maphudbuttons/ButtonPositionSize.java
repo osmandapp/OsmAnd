@@ -79,6 +79,22 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public boolean isLeft() {
+		return posH == POS_LEFT;
+	}
+
+	public boolean isRight() {
+		return posH == POS_RIGHT;
+	}
+
+	public boolean isTop() {
+		return posV == POS_TOP;
+	}
+
+	public boolean isBottom() {
+		return posV == POS_BOTTOM;
+	}
+	
 	public long toLongValue() {
 		long vl = 0;
 		vl = (vl << 2) + moveDescendants;
@@ -201,7 +217,6 @@ public class ButtonPositionSize {
 				ButtonPositionSize check = buttons.get(i);
 				if (button.overlap(check)) {
 					overlap = true;
-					System.out.println("Move " + check + " because " + button);
 					moveButton(space, check, button);
 					fixedPos = i;
 					break;
