@@ -6034,4 +6034,5 @@
     <string name="obd_throttle_position_desc">Muestra la presión del combustible del vehículo (presión de medición) obtenida del escáner OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_calculated_engine_load_desc">Muestra la carga del motor calculada del vehículo basada en el sensor</string>
+    <string name="bt_start_pair_failed">No se puede iniciar el emparejamiento con el dispositivo</string>
 </resources>
