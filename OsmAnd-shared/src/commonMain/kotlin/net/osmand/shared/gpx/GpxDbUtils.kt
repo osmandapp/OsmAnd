@@ -7,6 +7,7 @@ import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_DIR_TABLE_NAME
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_TABLE_NAME
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 import kotlin.collections.set
 
@@ -174,6 +175,31 @@ object GpxDbUtils {
 
 		db.execSQL(getGpxIndexQuery())
 		db.execSQL(getGpxDirIndexQuery())
+
+		if (oldVersion < 29) {
+			val colorsToUpdate = mutableMapOf<String, String>()
+			val query = db.rawQuery("SELECT ${COLOR.columnName} FROM $GPX_TABLE_NAME", null)
+			if (query != null && query.moveToFirst()) {
+				do {
+					var value = queryColumnValue(query, COLOR)
+					if (value != null && value is String && !value.isEmpty()) {
+						val colorInt = GpxUtilities.parseColor(value)
+						if (colorInt != null) {
+							val colorStr = KAlgorithms.colorToString(colorInt)
+							if (value != colorStr) {
+								colorsToUpdate[value] = colorStr
+							}
+						}
+					}
+				} while (query.moveToNext())
+			}
+			if (!colorsToUpdate.isEmpty()) {
+				colorsToUpdate.forEach {
+					db.execSQL("UPDATE $GPX_TABLE_NAME SET ${COLOR.columnName} = ? " +
+							"WHERE ${COLOR.columnName} = ?", arrayOf(it.value, it.key))
+				}
+			}
+		}
 	}
 
 	private fun addIfMissingGpxTableColumn(columnNamesLC: MutableSet<String>, db: SQLiteConnection, parameter: GpxParameter) {
