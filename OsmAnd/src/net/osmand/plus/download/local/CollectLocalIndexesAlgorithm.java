@@ -12,6 +12,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,6 +20,9 @@ public class CollectLocalIndexesAlgorithm {
 
 	private final OsmandApplication app;
 	private final CollectLocalIndexesRules rules;
+
+	private final Map<LocalItem, Long> separateSizeItemCalculations = new HashMap<>();
+	private final Map<LocalItemType, Long> separateSizeTypeCalculations = new HashMap<>();
 
 	private CollectLocalIndexesAlgorithm(@NonNull CollectLocalIndexesRules rules) {
 		this.app = rules.getApp();
@@ -30,6 +34,7 @@ public class CollectLocalIndexesAlgorithm {
 		for (File directory : rules.getDirectories()) {
 			collectFiles(categories, directory, rules.shouldAddUnknown(directory));
 		}
+		applySeparatelyCalculatedSize();
 		return categories;
 	}
 
@@ -43,6 +48,8 @@ public class CollectLocalIndexesAlgorithm {
 
 				if (file.isDirectory()) {
 					collectFiles(categories, file, addUnknown);
+				} else {
+					calculateSizeSeparatelyIfNeeded(file);
 				}
 			}
 		}
@@ -68,6 +75,7 @@ public class CollectLocalIndexesAlgorithm {
 			LocalItem item = new LocalItem(file, itemType);
 			LocalItemUtils.updateItem(app, item);
 			category.addLocalItem(item);
+			addSeparatelyCalculationItemIfNeeded(item);
 		}
 	}
 
@@ -88,6 +96,44 @@ public class CollectLocalIndexesAlgorithm {
 		LocalItem item = new LocalItem(file, itemType);
 		LocalItemUtils.updateItem(app, item);
 		((LiveGroupItem) liveGroup).addLocalItem(item);
+	}
+
+	private void addSeparatelyCalculationItemIfNeeded(@NonNull LocalItem item) {
+		LocalItemType itemType = item.getType();
+		if (rules.shouldCalculateSizeSeparately(itemType)) {
+			separateSizeItemCalculations.put(item, 0L);
+			if (!separateSizeTypeCalculations.containsKey(itemType)) {
+				separateSizeTypeCalculations.put(itemType, 0L);
+			}
+		}
+	}
+
+	private void calculateSizeSeparatelyIfNeeded(@NonNull File file) {
+		long fileSize = file.length();
+		String filePath = file.getAbsolutePath();
+		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
+			String basePath = localItem.getPath();
+			if (filePath.startsWith(basePath)) {
+				Long itemSize = separateSizeItemCalculations.get(localItem);
+				itemSize = itemSize == null ? fileSize : itemSize + fileSize;
+				separateSizeItemCalculations.put(localItem, itemSize);
+
+				LocalItemType type = localItem.getType();
+				Long typeSize = separateSizeTypeCalculations.get(type);
+				typeSize = typeSize == null ? fileSize : typeSize + fileSize;
+				separateSizeTypeCalculations.put(type, typeSize);
+				break;
+			}
+		}
+	}
+
+	private void applySeparatelyCalculatedSize() {
+		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
+			Long size = separateSizeItemCalculations.get(localItem);
+			if (size != null) {
+				localItem.setSize(size);
+			}
+		}
 	}
 
 	@NonNull

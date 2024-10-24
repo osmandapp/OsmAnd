@@ -58,6 +58,7 @@ public class LocalIndexHelper {
 				.addDirectoryIfNotPresent(internalDir, false)
 				.addDirectoryIfNotPresent(externalDir, true)
 				.addForcedAddUnknownDirectory(noBackupDir)
+				.addTypeToCalculateSizeSeparately(TILES_DATA)
 				.build();
 
 		return CollectLocalIndexesAlgorithm.execute(collectingRules);

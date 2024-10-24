@@ -283,7 +283,7 @@ public class LocalItemUtils {
 
 	@NonNull
 	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
-		String size = AndroidUtils.formatSize(context, item.getFile().length());
+		String size = AndroidUtils.formatSize(context, item.getSize());
 		if (item.getType() == CACHE) {
 			return size;
 		} else if (item.getType() == COLOR_DATA) {
