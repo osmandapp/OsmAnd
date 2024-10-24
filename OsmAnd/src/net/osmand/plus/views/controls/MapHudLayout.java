@@ -137,21 +137,7 @@ public class MapHudLayout extends FrameLayout {
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
 		Map<View, ButtonPositionSize> positions = collectPositions();
-		int width = (int) AndroidUtils.pxToDpF(getContext(), getWidth()) / 8;
-		int height = (int) AndroidUtils.pxToDpF(getContext(), getHeight()) / 8;
-
-		LOG.info("--------START--------");
-		Map<View, ButtonPositionSize> map = collectPositions();
-		for (ButtonPositionSize b : map.values()) {
-			LOG.info(b + " value = " + b.toLongValue());
-		}
-		LOG.info("--------");
 		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(positions.values()));
-		for (ButtonPositionSize b : map.values()) {
-			LOG.info(b + " value = " + b.toLongValue());
-		}
-		LOG.info("--------END--------");
-
 		return positions;
 	}
 
@@ -226,6 +212,9 @@ public class MapHudLayout extends FrameLayout {
 						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
 						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
 			}
+		} else {
+			position.marginX = 0;
+			position.marginY = 0;
 		}
 		return position;
 	}
