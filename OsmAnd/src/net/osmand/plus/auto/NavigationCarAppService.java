@@ -1,5 +1,6 @@
 package net.osmand.plus.auto;
 
+import android.Manifest;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -16,7 +17,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-import net.osmand.plus.utils.AndroidUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Entry point for the templated app.
@@ -28,6 +31,7 @@ import net.osmand.plus.utils.AndroidUtils;
 public final class NavigationCarAppService extends CarAppService {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
+	private boolean foreground = false;
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -42,13 +46,6 @@ public final class NavigationCarAppService extends CarAppService {
 	}
 
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		int result = super.onStartCommand(intent, flags, startId);
-		getApp().setNavigationCarAppService(this);
-		return result;
-	}
-
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		getApp().setNavigationCarAppService(null);
@@ -58,11 +55,8 @@ public final class NavigationCarAppService extends CarAppService {
 	@NonNull
 	public Session onCreateSession() {
 		OsmandApplication app = getApp();
-		Notification notification = app.getNotificationHelper().buildCarAppNotification();
-		if(OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
-			startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
-		}
-
+		getApp().setNavigationCarAppService(this);
+		startForegroundWithPermission(app);
 		NavigationSession session = new NavigationSession();
 		session.getLifecycle()
 				.addObserver(new DefaultLifecycleObserver() {
@@ -73,6 +67,22 @@ public final class NavigationCarAppService extends CarAppService {
 				});
 
 		return session;
+	}
+
+	private void startForegroundWithPermission(OsmandApplication app) {
+		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
+			foreground = true;
+			Notification notification = app.getNotificationHelper().buildCarAppNotification();
+			startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+		}
+	}
+
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		List<String> permissionsList = Arrays.asList(permissions);
+		if (permissionsList.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
+				permissionsList.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+			startForegroundWithPermission(getApp());
+		}
 	}
 
 	@NonNull
