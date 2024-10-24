@@ -76,28 +76,36 @@ public class MapHudLayout extends FrameLayout {
 		super.onFinishInflate();
 
 		addPosition(findViewById(R.id.widget_top_bar));
-		addPosition(findViewById(R.id.map_left_widgets_panel));
-		addPosition(findViewById(R.id.map_right_widgets_panel));
+
 		addPosition(findViewById(R.id.top_widgets_panel));
 		addPosition(findViewById(R.id.map_bottom_widgets_panel));
+
+		addPosition(findViewById(R.id.map_left_widgets_panel));
+		addPosition(findViewById(R.id.map_right_widgets_panel));
 
 		updateRulerWidget(findViewById(R.id.map_ruler_container));
 	}
 
 	private void addPosition(@Nullable View view) {
 		if (view != null) {
-			addChangeListeners(view);
+			addSizeListener(view);
+			addVisibilityListeners(view);
 			widgetPositions.put(view, createWidgetPosition(view));
 		}
 	}
 
-	private void addChangeListeners(@NonNull View view) {
+	private void addSizeListener(@NonNull View view) {
 		if (view instanceof ViewChangeProvider provider) {
 			provider.setSizeListener((v, width, height, oldWidth, oldHeight) -> {
 				if (width != oldWidth || height != oldHeight) {
 					refresh();
 				}
 			});
+		}
+	}
+
+	private void addVisibilityListeners(@NonNull View view) {
+		if (view instanceof ViewChangeProvider provider) {
 			provider.setVisibilityListener((v, visibility) -> refresh());
 		}
 	}
@@ -136,9 +144,19 @@ public class MapHudLayout extends FrameLayout {
 
 	@NonNull
 	private Map<View, ButtonPositionSize> getButtonPositionSizes() {
-		Map<View, ButtonPositionSize> positions = collectPositions();
-		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(positions.values()));
-		return positions;
+		Map<View, ButtonPositionSize> map = collectPositions();
+//		LOG.info("--------START--------");
+//		for (ButtonPositionSize b : map.values()) {
+//			LOG.info(b + " value = " + b.toLongValue());
+//		}
+//		LOG.info("--------");
+		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+//		for (ButtonPositionSize b : map.values()) {
+//			LOG.info(b + " value = " + b.toLongValue());
+//		}
+//		LOG.info("--------END--------");
+
+		return map;
 	}
 
 	@NonNull
@@ -212,9 +230,6 @@ public class MapHudLayout extends FrameLayout {
 						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
 						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
 			}
-		} else {
-			position.marginX = 0;
-			position.marginY = 0;
 		}
 		return position;
 	}
