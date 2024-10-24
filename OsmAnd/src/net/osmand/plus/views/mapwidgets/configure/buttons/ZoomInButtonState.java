@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
 
@@ -58,6 +60,6 @@ public class ZoomInButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, false, false, false, true, false);
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, false, true);
 	}
 }

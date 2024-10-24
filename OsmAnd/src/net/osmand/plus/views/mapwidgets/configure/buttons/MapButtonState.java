@@ -174,13 +174,12 @@ public abstract class MapButtonState {
 	protected abstract ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position);
 
 	@NonNull
-	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position, boolean left, boolean top,
-	                                                 boolean xMove, boolean yMove, boolean randomMove) {
-		position.left = left;
-		position.top = top;
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position,
+	                                                 int posH, int posV, boolean xMove, boolean yMove) {
+		position.posH = posH;
+		position.posV = posV;
 		position.xMove = xMove;
 		position.yMove = yMove;
-		position.randomMove = randomMove;
 		position.marginX = 0;
 		position.marginY = 0;
 

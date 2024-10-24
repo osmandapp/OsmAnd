@@ -42,7 +42,7 @@ public class ButtonPositionSize {
 		this.id = id;
 		width = height = sz8dp;
 		this.posH = left ? POS_LEFT : POS_RIGHT;
-		this.posV = top ? POS_TOP: POS_BOTTOM;
+		this.posV = top ? POS_TOP : POS_BOTTOM;
 	}
 
 	public ButtonPositionSize(String id, int sz8dp, int posH, int posV) {
@@ -78,6 +78,22 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public boolean isLeft() {
+		return posH == POS_LEFT;
+	}
+
+	public boolean isRight() {
+		return posH == POS_RIGHT;
+	}
+
+	public boolean isTop() {
+		return posV == POS_TOP;
+	}
+
+	public boolean isBottom() {
+		return posV == POS_BOTTOM;
+	}
+
 	public long toLongValue() {
 		long vl = 0;
 		vl = (vl << 2) + moveDescendants;
@@ -93,13 +109,13 @@ public class ButtonPositionSize {
 	}
 
 	public void calcGridPositionFromPixel(float dpToPix, int widthPx, int heightPx,
-										  boolean gravLeft, int x, boolean gravTop, int y) {
+	                                      boolean gravLeft, int x, boolean gravTop, int y) {
 		float calc;
 		if (x < widthPx / 2) {
-			this.posH = gravLeft? POS_LEFT : POS_RIGHT;
+			this.posH = gravLeft ? POS_LEFT : POS_RIGHT;
 			calc = x / dpToPix;
 		} else {
-			this.posH = gravLeft? POS_RIGHT : POS_LEFT;
+			this.posH = gravLeft ? POS_RIGHT : POS_LEFT;
 			calc = (widthPx - x) / dpToPix - this.width * CELL_SIZE_DP;
 		}
 		this.marginX = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
@@ -177,7 +193,6 @@ public class ButtonPositionSize {
 		return intersectHorizontal && intersectVertical;
 	}
 
-
 	public static void computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
 		int MAX_ITERATIONS = 1000, iter = 0;
 		for (int fixedPos = buttons.size() - 1; fixedPos >= 0; ) {
@@ -187,7 +202,7 @@ public class ButtonPositionSize {
 			}
 			boolean overlap = false;
 			ButtonPositionSize button = buttons.get(fixedPos);
-			for(int i = fixedPos + 1; i < buttons.size(); i++) {
+			for (int i = fixedPos + 1; i < buttons.size(); i++) {
 				ButtonPositionSize check = buttons.get(i);
 				if (button.overlap(check)) {
 					overlap = true;
@@ -200,7 +215,6 @@ public class ButtonPositionSize {
 				fixedPos--;
 			}
 		}
-
 	}
 
 	private static void moveButton(int space, ButtonPositionSize toMove, ButtonPositionSize overlap) {
@@ -226,5 +240,4 @@ public class ButtonPositionSize {
 			toMove.marginY = space + overlap.marginY + overlap.height;
 		}
 	}
-
 }
