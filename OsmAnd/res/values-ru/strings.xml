@@ -6038,4 +6038,5 @@
     <string name="obd_engine_oil_temperature_desc">Виджет показывает температуру масла в двигателе транспортного средства, полученную с помощью сканера OBD</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (л/км)</string>
     <string name="obd_engine_oil_temperature">t° моторного масла</string>
+    <string name="movies_list">Список роликов</string>
 </resources>
