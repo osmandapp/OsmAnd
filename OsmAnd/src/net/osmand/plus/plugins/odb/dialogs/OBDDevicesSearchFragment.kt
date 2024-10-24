@@ -195,6 +195,10 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 		}
 	}
 
+	override fun onDevicePairingFailed() {
+		pairingDevice = null
+	}
+
 	internal enum class SearchStates {
 		NO_BLUETOOTH, NOTHING_FOUND, DEVICES_LIST
 	}

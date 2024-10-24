@@ -87,6 +87,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	interface ScanOBDDevicesListener {
 		fun onDeviceFound(foundDevice: BTDeviceInfo)
 		fun onDevicePaired(pairedDevice: BTDeviceInfo)
+		fun onDevicePairingFailed()
 	}
 
 	interface ConnectionStateListener {
@@ -680,6 +681,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 								BluetoothDevice.BOND_NONE -> {
 									pairingDevice = null
+									scanDevicesListener?.onDevicePairingFailed()
 								}
 
 								else -> {}
