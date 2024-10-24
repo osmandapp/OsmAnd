@@ -114,7 +114,10 @@ public class MapHudOverlapTest extends AndroidTest {
 				LOG.info(b + " value = " + b.toLongValue());
 			}
 			LOG.info("--------");
-			ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+			boolean overlapFixed = ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(map.values()));
+			if (!overlapFixed) {
+				throw new AssertionError("Relayout is broken");
+			}
 			for (ButtonPositionSize b : map.values()) {
 				LOG.info(b + " value = " + b.toLongValue());
 			}

@@ -13,15 +13,15 @@ public class ButtonPositionSize {
 	public static final int MOVE_DESCENDANTS_ANY = 0;
 	public static final int MOVE_DESCENDANTS_VERTICAL = 1;
 	public static final int MOVE_DESCENDANTS_HORIZONTAL = 2;
-	
+
 	public static final int POS_FULL_WIDTH = 0;
 	public static final int POS_LEFT = 1;
 	public static final int POS_RIGHT = 2;
-	
+
 	public static final int POS_FULL_HEIGHT = 0;
 	public static final int POS_TOP = 1;
 	public static final int POS_BOTTOM = 2;
-	
+
 	private static final int MAX_MARGIN_BITS = 10;
 	private static final int MAX_SIZE_BITS = 6;
 	private static final int MARGIN_MASK = (1 << MAX_MARGIN_BITS) - 1;
@@ -42,9 +42,9 @@ public class ButtonPositionSize {
 		this.id = id;
 		width = height = sz8dp;
 		this.posH = left ? POS_LEFT : POS_RIGHT;
-		this.posV = top ? POS_TOP: POS_BOTTOM;
+		this.posV = top ? POS_TOP : POS_BOTTOM;
 	}
-	
+
 	public ButtonPositionSize(String id, int sz8dp, int posH, int posV) {
 		this.id = id;
 		width = height = sz8dp;
@@ -57,12 +57,12 @@ public class ButtonPositionSize {
 		this.yMove = true;
 		return this;
 	}
-	
+
 	public ButtonPositionSize setMoveDescendantsVertical() {
 		this.moveDescendants = MOVE_DESCENDANTS_VERTICAL;
 		return this;
 	}
-	
+
 	public ButtonPositionSize setMoveDescendantsHorizontal() {
 		this.moveDescendants = MOVE_DESCENDANTS_HORIZONTAL;
 		return this;
@@ -94,7 +94,7 @@ public class ButtonPositionSize {
 	public boolean isBottom() {
 		return posV == POS_BOTTOM;
 	}
-	
+
 	public long toLongValue() {
 		long vl = 0;
 		vl = (vl << 2) + moveDescendants;
@@ -113,10 +113,10 @@ public class ButtonPositionSize {
 	                                      boolean gravLeft, int x, boolean gravTop, int y) {
 		float calc;
 		if (x < widthPx / 2) {
-			this.posH = gravLeft? POS_LEFT : POS_RIGHT;
+			this.posH = gravLeft ? POS_LEFT : POS_RIGHT;
 			calc = x / dpToPix;
 		} else {
-			this.posH = gravLeft? POS_RIGHT : POS_LEFT;
+			this.posH = gravLeft ? POS_RIGHT : POS_LEFT;
 			calc = (widthPx - x) / dpToPix - this.width * CELL_SIZE_DP;
 		}
 		this.marginX = Math.max(0, Math.round((calc - DEF_MARGIN_DP) / CELL_SIZE_DP));
@@ -204,16 +204,16 @@ public class ButtonPositionSize {
 	}
 
 
-	public static void computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
+	public static boolean computeNonOverlap(int space, List<ButtonPositionSize> buttons) {
 		int MAX_ITERATIONS = 1000, iter = 0;
 		for (int fixedPos = buttons.size() - 1; fixedPos >= 0; ) {
 			if (iter++ > MAX_ITERATIONS) {
 				System.err.println("Relayout is broken");
-				break;
+				return false;
 			}
 			boolean overlap = false;
 			ButtonPositionSize button = buttons.get(fixedPos);
-			for(int i = fixedPos + 1; i < buttons.size(); i++) {
+			for (int i = fixedPos + 1; i < buttons.size(); i++) {
 				ButtonPositionSize check = buttons.get(i);
 				if (button.overlap(check)) {
 					overlap = true;
@@ -226,9 +226,9 @@ public class ButtonPositionSize {
 				fixedPos--;
 			}
 		}
-		
+		return true;
 	}
-	
+
 	private static void moveButton(int space, ButtonPositionSize toMove, ButtonPositionSize overlap) {
 		boolean xMove = false;
 		boolean yMove = false;
