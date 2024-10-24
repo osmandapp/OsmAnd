@@ -88,24 +88,18 @@ public class MapHudLayout extends FrameLayout {
 
 	private void addPosition(@Nullable View view) {
 		if (view != null) {
-			addSizeListener(view);
-			addVisibilityListeners(view);
+			addChangeListeners(view);
 			widgetPositions.put(view, createWidgetPosition(view));
 		}
 	}
 
-	private void addSizeListener(@NonNull View view) {
+	private void addChangeListeners(@NonNull View view) {
 		if (view instanceof ViewChangeProvider provider) {
 			provider.setSizeListener((v, width, height, oldWidth, oldHeight) -> {
 				if (width != oldWidth || height != oldHeight) {
 					refresh();
 				}
 			});
-		}
-	}
-
-	private void addVisibilityListeners(@NonNull View view) {
-		if (view instanceof ViewChangeProvider provider) {
 			provider.setVisibilityListener((v, visibility) -> refresh());
 		}
 	}
@@ -120,6 +114,8 @@ public class MapHudLayout extends FrameLayout {
 		if (position != null) {
 			updateButtonParams(params, position);
 		}
+		addChangeListeners(button);
+
 		addView(button, params);
 		mapButtons.add(button);
 	}
