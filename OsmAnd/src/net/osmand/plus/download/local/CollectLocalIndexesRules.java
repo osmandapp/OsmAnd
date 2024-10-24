@@ -7,6 +7,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,12 +18,12 @@ public class CollectLocalIndexesRules {
 	private final OsmandApplication app;
 	private final Map<File, Boolean> directories;
 	private final Set<File> forcedAddUnknownDirectories;
-	private final Set<LocalItemType> typesToCalculateSizeSeparately;
+	private final Map<LocalItemType, Long> typesToCalculateSizeSeparately;
 
 	private CollectLocalIndexesRules(@NonNull OsmandApplication app,
 	                                 @NonNull Map<File, Boolean> directories,
 	                                 @NonNull Set<File> forcedAddUnknownDirectories,
-	                                 @NonNull Set<LocalItemType> typesToCalculateSizeSeparately) {
+	                                 @NonNull Map<LocalItemType, Long> typesToCalculateSizeSeparately) {
 		this.app = app;
 		this.directories = directories;
 		this.forcedAddUnknownDirectories = forcedAddUnknownDirectories;
@@ -52,7 +53,15 @@ public class CollectLocalIndexesRules {
 	}
 
 	public boolean shouldCalculateSizeSeparately(@NonNull LocalItemType type) {
-		return typesToCalculateSizeSeparately.contains(type);
+		return typesToCalculateSizeSeparately.containsKey(type);
+	}
+
+	public boolean isSeparatelyCalculatedSizeLimitReached(@NonNull LocalItemType type, long size) {
+		Long limit = typesToCalculateSizeSeparately.get(type);
+		if (limit != null && limit > 0) {
+			return size > limit;
+		}
+		return false;
 	}
 
 	public static class Builder {
@@ -60,7 +69,7 @@ public class CollectLocalIndexesRules {
 		private final OsmandApplication app;
 		private final Map<File, Boolean> directories = new LinkedHashMap<>();
 		private final Set<File> forcedAddUnknownDirectories = new HashSet<>();
-		private final Set<LocalItemType> typesToCalculateSizeSeparately = new HashSet<>();
+		private final Map<LocalItemType, Long> typesToCalculateSizeSeparately = new HashMap<>();
 
 		public Builder(@NonNull OsmandApplication app) {
 			this.app = app;
@@ -79,7 +88,11 @@ public class CollectLocalIndexesRules {
 		}
 
 		public Builder addTypeToCalculateSizeSeparately(@NonNull LocalItemType type) {
-			typesToCalculateSizeSeparately.add(type);
+			return addTypeToCalculateSizeSeparately(type, -1);
+		}
+
+		public Builder addTypeToCalculateSizeSeparately(@NonNull LocalItemType type, long limit) {
+			typesToCalculateSizeSeparately.put(type, limit);
 			return this;
 		}
 

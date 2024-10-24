@@ -5,6 +5,7 @@ import static net.osmand.plus.download.local.LocalItemType.OTHER;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.dialogs.LiveGroupItem;
@@ -12,6 +13,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,6 +25,7 @@ public class CollectLocalIndexesAlgorithm {
 
 	private final Map<LocalItem, Long> separateSizeItemCalculations = new HashMap<>();
 	private final Map<LocalItemType, Long> separateSizeTypeCalculations = new HashMap<>();
+	private final Map<LocalItemType, Boolean> calculationLimitReached = new HashMap<>();
 
 	private CollectLocalIndexesAlgorithm(@NonNull CollectLocalIndexesRules rules) {
 		this.app = rules.getApp();
@@ -42,7 +45,7 @@ public class CollectLocalIndexesAlgorithm {
 	                          @NonNull File directory, boolean addUnknown) {
 		addUnknown = rules.shouldAddUnknown(directory, addUnknown);
 		File[] listFiles = directory.listFiles();
-		if (!Algorithms.isEmpty(listFiles)) {
+		if (!Algorithms.isEmpty(listFiles) && !shouldSkipDirectory(directory)) {
 			for (File file : listFiles) {
 				addFile(categories, file, addUnknown);
 
@@ -53,6 +56,16 @@ public class CollectLocalIndexesAlgorithm {
 				}
 			}
 		}
+	}
+
+	private boolean shouldSkipDirectory(@NonNull File directory) {
+		LocalItem localItem = getSeparatelyCalculationSizeItem(directory);
+		if (localItem != null) {
+			LocalItemType type = localItem.getType();
+			Boolean limitReached = calculationLimitReached.get(type);
+			return limitReached != null && limitReached;
+		}
+		return false;
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
@@ -109,22 +122,33 @@ public class CollectLocalIndexesAlgorithm {
 	}
 
 	private void calculateSizeSeparatelyIfNeeded(@NonNull File file) {
+		LocalItem localItem = getSeparatelyCalculationSizeItem(file);
+		if (localItem == null) return;
+
 		long fileSize = file.length();
+		Long itemSize = separateSizeItemCalculations.get(localItem);
+		itemSize = itemSize == null ? fileSize : itemSize + fileSize;
+		separateSizeItemCalculations.put(localItem, itemSize);
+
+		LocalItemType type = localItem.getType();
+		Long typeSize = separateSizeTypeCalculations.get(type);
+		typeSize = typeSize == null ? fileSize : typeSize + fileSize;
+		separateSizeTypeCalculations.put(type, typeSize);
+
+		boolean limitReached = rules.isSeparatelyCalculatedSizeLimitReached(type, typeSize);
+		calculationLimitReached.put(type, limitReached);
+	}
+
+	@Nullable
+	private LocalItem getSeparatelyCalculationSizeItem(@NonNull File file) {
 		String filePath = file.getAbsolutePath();
 		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
 			String basePath = localItem.getPath();
 			if (filePath.startsWith(basePath)) {
-				Long itemSize = separateSizeItemCalculations.get(localItem);
-				itemSize = itemSize == null ? fileSize : itemSize + fileSize;
-				separateSizeItemCalculations.put(localItem, itemSize);
-
-				LocalItemType type = localItem.getType();
-				Long typeSize = separateSizeTypeCalculations.get(type);
-				typeSize = typeSize == null ? fileSize : typeSize + fileSize;
-				separateSizeTypeCalculations.put(type, typeSize);
-				break;
+				return localItem;
 			}
 		}
+		return null;
 	}
 
 	private void applySeparatelyCalculatedSize() {
@@ -134,6 +158,18 @@ public class CollectLocalIndexesAlgorithm {
 				localItem.setSize(size);
 			}
 		}
+	}
+
+	@Nullable
+	private LocalGroup getLocalGroupByType(@NonNull Collection<LocalCategory> categories,
+	                                       @NonNull LocalItemType type) {
+		for (LocalCategory category : categories) {
+			LocalGroup group = category.getGroups().get(type);
+			if (group != null) {
+				return group;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

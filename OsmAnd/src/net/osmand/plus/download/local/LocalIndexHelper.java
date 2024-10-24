@@ -38,6 +38,8 @@ import java.util.Map;
 
 public class LocalIndexHelper {
 
+	private static final Long TILES_DATA_SIZE_CALCULATION_LIMIT = 5_000_000L;
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final ResourceManager resourceManager;
@@ -58,7 +60,7 @@ public class LocalIndexHelper {
 				.addDirectoryIfNotPresent(internalDir, false)
 				.addDirectoryIfNotPresent(externalDir, true)
 				.addForcedAddUnknownDirectory(noBackupDir)
-				.addTypeToCalculateSizeSeparately(TILES_DATA)
+				.addTypeToCalculateSizeSeparately(TILES_DATA, TILES_DATA_SIZE_CALCULATION_LIMIT)
 				.build();
 
 		return CollectLocalIndexesAlgorithm.execute(collectingRules);
