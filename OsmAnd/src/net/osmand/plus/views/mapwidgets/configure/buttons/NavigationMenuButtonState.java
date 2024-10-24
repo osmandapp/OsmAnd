@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
 
 import android.graphics.drawable.Drawable;
 
@@ -84,6 +86,6 @@ public class NavigationMenuButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, true, false, true, false, false);
+		return setupButtonPosition(position, POS_LEFT, POS_BOTTOM, true, false);
 	}
 }

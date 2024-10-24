@@ -110,6 +110,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		touchEvent = 0;
 	}
 
+	@Nullable
+	public MapHudLayout getMapHudLayout() {
+		return mapHudLayout;
+	}
+
 	public boolean switchToRoutePlanningLayout() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (!routingHelper.isRoutePlanningMode() && routingHelper.isFollowingMode()) {

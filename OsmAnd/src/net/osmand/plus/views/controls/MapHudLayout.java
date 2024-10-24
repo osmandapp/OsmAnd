@@ -3,6 +3,11 @@ package net.osmand.plus.views.controls;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +22,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
@@ -134,13 +140,23 @@ public class MapHudLayout extends FrameLayout {
 		int width = (int) AndroidUtils.pxToDpF(getContext(), getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), getHeight()) / 8;
 
-		ButtonPositionSize.computeNonOverlap(1, width, height, new ArrayList<>(positions.values()));
+		LOG.info("--------START--------");
+		Map<View, ButtonPositionSize> map = collectPositions();
+		for (ButtonPositionSize b : map.values()) {
+			LOG.info(b + " value = " + b.toLongValue());
+		}
+		LOG.info("--------");
+		ButtonPositionSize.computeNonOverlap(1, new ArrayList<>(positions.values()));
+		for (ButtonPositionSize b : map.values()) {
+			LOG.info(b + " value = " + b.toLongValue());
+		}
+		LOG.info("--------END--------");
 
 		return positions;
 	}
 
 	@NonNull
-	private Map<View, ButtonPositionSize> collectPositions() {
+	public Map<View, ButtonPositionSize> collectPositions() {
 		Map<View, ButtonPositionSize> map = new LinkedHashMap<>();
 
 		for (Map.Entry<View, ButtonPositionSize> entry : widgetPositions.entrySet()) {
@@ -166,12 +182,22 @@ public class MapHudLayout extends FrameLayout {
 		String name = getViewName(view);
 		ButtonPositionSize position = new ButtonPositionSize(name);
 		if (view instanceof VerticalWidgetPanel panel) {
-			position.top = panel.isTopPanel();
+			position.setMoveDescendantsVertical();
+			position.setPositionVertical(panel.isTopPanel() ? POS_TOP : POS_BOTTOM);
+			position.setPositionHorizontal(POS_FULL_WIDTH);
 		} else if (view instanceof SideWidgetsPanel panel) {
-			position.top = true;
-			position.left = !panel.rightSide;
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(panel.rightSide ? POS_RIGHT : POS_LEFT);
+
+			if (AndroidUiHelper.isOrientationPortrait(getContext())) {
+				position.setMoveDescendantsVertical();
+			} else {
+				position.setMoveDescendantsHorizontal();
+			}
 		} else if (view.getId() == R.id.widget_top_bar) {
-			position.top = true;
+			position.setMoveDescendantsVertical();
+			position.setPositionVertical(POS_TOP);
+			position.setPositionHorizontal(POS_FULL_WIDTH);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -197,8 +223,8 @@ public class MapHudLayout extends FrameLayout {
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
 			if (margins[0] >= 0 && margins[1] >= 0 && margins[2] >= 0 && margins[3] >= 0) {
 				position.calcGridPositionFromPixel(dpToPx, parentWidth, parentHeight,
-						position.left, position.left ? margins[0] : margins[2],
-						position.top, position.top ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
+						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
+						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
 			}
 		}
 		return position;
@@ -225,7 +251,7 @@ public class MapHudLayout extends FrameLayout {
 		int marginX = position.getXStartPix(dpToPx);
 		int marginY = position.getYStartPix(dpToPx);
 
-		if (position.left) {
+		if (position.isLeft()) {
 			gravity = Gravity.START;
 			rightMargin = 0;
 			leftMargin = marginX;
@@ -234,7 +260,7 @@ public class MapHudLayout extends FrameLayout {
 			leftMargin = 0;
 			rightMargin = marginX;
 		}
-		if (position.top) {
+		if (position.isTop()) {
 			gravity |= Gravity.TOP;
 			bottomMargin = 0;
 			topMargin = marginY;
@@ -267,8 +293,8 @@ public class MapHudLayout extends FrameLayout {
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
-					positionSize.left, positionSize.left ? params.leftMargin : params.rightMargin,
-					positionSize.top, positionSize.top ? params.topMargin : params.bottomMargin);
+					positionSize.isLeft(), positionSize.isLeft() ? params.leftMargin : params.rightMargin,
+					positionSize.isTop(), positionSize.isTop() ? params.topMargin : params.bottomMargin);
 		}
 		if (save) {
 			button.savePosition();

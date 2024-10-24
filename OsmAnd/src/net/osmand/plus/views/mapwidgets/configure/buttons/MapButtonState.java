@@ -60,8 +60,8 @@ public abstract class MapButtonState {
 		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
 		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
-		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_portrait_position", -1)).makeProfile().cache();
-		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_landscape_position", -1)).makeProfile().cache();
+		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_position_portrait", -1)).makeProfile().cache();
+		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_position_landscape", -1)).makeProfile().cache();
 		this.positionSize = createButtonPosition();
 		this.defaultPositionSize = createButtonPosition();
 
@@ -174,13 +174,12 @@ public abstract class MapButtonState {
 	protected abstract ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position);
 
 	@NonNull
-	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position, boolean left, boolean top,
-	                                                 boolean xMove, boolean yMove, boolean randomMove) {
-		position.left = left;
-		position.top = top;
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position,
+	                                                 int posH, int posV, boolean xMove, boolean yMove) {
+		position.posH = posH;
+		position.posV = posV;
 		position.xMove = xMove;
 		position.yMove = yMove;
-		position.randomMove = randomMove;
 		position.marginX = 0;
 		position.marginY = 0;
 
