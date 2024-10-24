@@ -13,8 +13,10 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+import net.osmand.plus.utils.AndroidUtils;
 
 /**
  * Entry point for the templated app.
@@ -57,7 +59,9 @@ public final class NavigationCarAppService extends CarAppService {
 	public Session onCreateSession() {
 		OsmandApplication app = getApp();
 		Notification notification = app.getNotificationHelper().buildCarAppNotification();
-		startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+		if(OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
+			startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+		}
 
 		NavigationSession session = new NavigationSession();
 		session.getLifecycle()
