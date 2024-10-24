@@ -5643,4 +5643,5 @@
     <string name="obd_calculated_engine_load_desc">Muestra la carga calculada del motor, según el sensor</string>
     <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
     <string name="obd_engine_oil_temperature_desc">Muestra la temperatura del aceite del motor, según el escáner OBD</string>
+    <string name="bt_start_pair_failed">No es posible vincular con el dispositivo</string>
 </resources>
