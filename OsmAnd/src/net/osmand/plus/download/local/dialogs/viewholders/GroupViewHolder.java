@@ -55,8 +55,7 @@ public class GroupViewHolder extends RecyclerView.ViewHolder {
 		CategoryType categoryType = itemType.getCategoryType();
 
 		title.setText(itemType.toHumanString(app));
-		String sizeDescription = group.getSizeDescription(app);
-		description.setText(sizeDescription);
+		description.setText(group.getSizeDescription(app));
 		icon.setImageDrawable(uiUtilities.getIcon(itemType.getIconId(), categoryType.getColorId()));
 
 		itemView.setOnClickListener(v -> {

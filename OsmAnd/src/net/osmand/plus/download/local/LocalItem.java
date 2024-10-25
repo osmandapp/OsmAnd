@@ -49,13 +49,13 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 		return fileName;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
-	}
-
 	@Override
 	public long getSize() {
 		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 	public boolean isBackuped(@NonNull OsmandApplication app) {

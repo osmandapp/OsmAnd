@@ -17,7 +17,8 @@ public class LocalGroup {
 
 	private final LocalItemType type;
 	private final Map<String, BaseLocalItem> items = new HashMap<>();
-	private long limitedSize = -1;
+
+	private long sizeLimit = -1;
 
 	public LocalGroup(@NonNull LocalItemType type) {
 		this.type = type;
@@ -47,7 +48,7 @@ public class LocalGroup {
 		items.put(key, item);
 	}
 
-	public void removeItem(@NonNull OsmandApplication app,  @NonNull BaseLocalItem item) {
+	public void removeItem(@NonNull OsmandApplication app, @NonNull BaseLocalItem item) {
 		if (item instanceof LocalItem) {
 			items.remove(((LocalItem) item).getFileName());
 		} else {
@@ -55,8 +56,8 @@ public class LocalGroup {
 		}
 	}
 
-	public void setLimitedSize(long limitedSize) {
-		this.limitedSize = limitedSize;
+	public void setSizeLimit(long sizeLimit) {
+		this.sizeLimit = sizeLimit;
 	}
 
 	@NonNull
@@ -66,7 +67,7 @@ public class LocalGroup {
 	}
 
 	public long getSize() {
-		return hasSizeLimit() ? limitedSize : getTotalItemsSize();
+		return hasSizeLimit() ? sizeLimit : getTotalItemsSize();
 	}
 
 	private long getTotalItemsSize() {
@@ -78,6 +79,6 @@ public class LocalGroup {
 	}
 
 	public boolean hasSizeLimit() {
-		return limitedSize > 0;
+		return sizeLimit > 0;
 	}
 }

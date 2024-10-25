@@ -32,7 +32,8 @@ public class CollectLocalIndexesAlgorithm {
 		this.rules = rules;
 	}
 
-	private Map<CategoryType, LocalCategory> executeImpl() {
+	@NonNull
+	private Map<CategoryType, LocalCategory> execute() {
 		Map<CategoryType, LocalCategory> categories = new TreeMap<>();
 		for (File directory : rules.getDirectories()) {
 			collectFiles(categories, directory, rules.shouldAddUnknown(directory));
@@ -103,7 +104,7 @@ public class CollectLocalIndexesAlgorithm {
 		}
 		LocalItem item = new LocalItem(file, itemType);
 		LocalItemUtils.updateItem(app, item);
-		((LiveGroupItem) liveGroup).addLocalItem(item);
+		liveGroup.addLocalItem(item);
 	}
 
 	private void addSeparatelyCalculationItemIfNeeded(@NonNull LocalItem item) {
@@ -152,7 +153,7 @@ public class CollectLocalIndexesAlgorithm {
 				Long limit = rules.getCalculationSizeLimit(type);
 				LocalGroup group = getLocalGroupByType(categories, type);
 				if (group != null && limit != null) {
-					group.setLimitedSize(limit);
+					group.setSizeLimit(limit);
 				}
 			}
 		}
@@ -185,6 +186,6 @@ public class CollectLocalIndexesAlgorithm {
 
 	@NonNull
 	public static Map<CategoryType, LocalCategory> execute(@NonNull CollectLocalIndexesRules rules) {
-		return new CollectLocalIndexesAlgorithm(rules).executeImpl();
+		return new CollectLocalIndexesAlgorithm(rules).execute();
 	}
 }

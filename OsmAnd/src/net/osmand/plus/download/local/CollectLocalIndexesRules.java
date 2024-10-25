@@ -93,18 +93,13 @@ public class CollectLocalIndexesRules {
 			return this;
 		}
 
-		public Builder addTypeToCalculateSizeSeparately(@NonNull LocalItemType type) {
-			return addTypeToCalculateSizeSeparately(type, -1);
-		}
-
 		public Builder addTypeToCalculateSizeSeparately(@NonNull LocalItemType type, long limit) {
 			typesToCalculateSizeSeparately.put(type, limit);
 			return this;
 		}
 
 		public CollectLocalIndexesRules build() {
-			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories,
-					typesToCalculateSizeSeparately);
+			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories, typesToCalculateSizeSeparately);
 		}
 	}
 }

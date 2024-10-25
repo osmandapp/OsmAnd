@@ -43,10 +43,10 @@ public class LocalItemInfoCard extends BaseCard {
 		String date = format.format(localItem.getLastModified());
 		setupRow(container.findViewById(R.id.data), getString(R.string.shared_string_created), date, false);
 
+		long size = localItem.getSize();
 		View sizeRow = container.findViewById(R.id.size);
-		AndroidUiHelper.updateVisibility(sizeRow, localItem.getSize() > 0);
-		String formattedSize = AndroidUtils.formatSize(app, localItem.getSize());
-		setupRow(container.findViewById(R.id.size), getString(R.string.shared_string_size), formattedSize, true);
+		AndroidUiHelper.updateVisibility(sizeRow, size > 0);
+		setupRow(sizeRow, getString(R.string.shared_string_size), AndroidUtils.formatSize(app, size), true);
 	}
 
 	private void setupRow(@NonNull View view, @Nullable String title, @Nullable String description, boolean lastItem) {
