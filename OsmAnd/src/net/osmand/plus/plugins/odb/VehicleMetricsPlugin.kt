@@ -57,6 +57,7 @@ import net.osmand.util.Algorithms
 import okio.IOException
 import okio.sink
 import okio.source
+import org.json.JSONObject
 import java.util.UUID
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
@@ -861,4 +862,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return app.weatherHelper.weatherSettings.weatherTempUnit.get()
 	}
 
+	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
+		super.attachAdditionalInfoToRecordedTrack(location, json)
+		val rawData = OBDDispatcher.getRawData()
+		for (command in rawData.keys) {
+			val dataField = rawData[command]
+			json.put(command.toString(), dataField?.value)
+		}
+		for(widget in OBDDataComputer.widgets) {
+			json.put(widget.type.toString(), getWidgetValue(widget))
+		}
+	}
 }
