@@ -1,11 +1,10 @@
 package net.osmand.binary;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -17,7 +16,6 @@ import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
@@ -51,6 +49,9 @@ public class GeocodingUtilities {
 
 		@Override
 		public int compare(GeocodingResult o1, GeocodingResult o2) {
+			if ((int) o1.getDistance() == (int) o2.getDistance()) {
+				return Double.compare(o1.getCityDistance(), o2.getCityDistance());
+			}
 			return Double.compare(o1.getDistance(), o2.getDistance());
 		}
 	};
@@ -85,6 +86,7 @@ public class GeocodingUtilities {
 		public Street street;
 		public City city;
 		private double dist = -1;
+		private double cityDist = -1;
 
 		public LatLon getLocation() {
 			return connectionPoint;
@@ -108,6 +110,13 @@ public class GeocodingUtilities {
 				}
 			}
 			return dist;
+		}
+
+		public double getCityDistance() {
+			if (cityDist == -1 && city != null && searchPoint != null) {
+				cityDist = MapUtils.getDistance(city.getLocation(), searchPoint);
+			}
+			return cityDist;
 		}
 
 		@Override
