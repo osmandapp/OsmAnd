@@ -18,7 +18,7 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	private final File file;
 	private final String path;
 	private final String fileName;
-	private final long size;
+	private long size;
 
 	@Nullable
 	private Object attachedObject;
@@ -52,6 +52,10 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	@Override
 	public long getSize() {
 		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 	public boolean isBackuped(@NonNull OsmandApplication app) {
