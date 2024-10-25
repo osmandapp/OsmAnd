@@ -78,7 +78,6 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.widget_top_bar));
 
 		addPosition(findViewById(R.id.top_widgets_panel));
-		addPosition(findViewById(R.id.map_bottom_widgets_panel));
 
 		addPosition(findViewById(R.id.map_left_widgets_panel));
 		addPosition(findViewById(R.id.map_right_widgets_panel));
@@ -87,7 +86,6 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.recording_note_layout));
 		addPosition(findViewById(R.id.move_marker_bottom_sheet));
 		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
-		addPosition(findViewById(R.id.bottomFragmentContainer));
 	}
 
 	private void addPosition(@Nullable View view) {
@@ -229,8 +227,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveDescendantsHorizontal();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
-		} else if (id == R.id.bottomFragmentContainer || id == R.id.add_gpx_point_bottom_sheet
-				|| id == R.id.move_marker_bottom_sheet || id == R.id.recording_note_layout) {
+		} else if (id == R.id.add_gpx_point_bottom_sheet || id == R.id.move_marker_bottom_sheet || id == R.id.recording_note_layout) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_FULL_WIDTH);
@@ -355,7 +352,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	public interface SizeChangeListener {
-		void onSizeChanged(@NonNull View view, int w, int h, int oldw, int oldh);
+		void onSizeChanged(@NonNull View view, int w, int h, int oldWidth, int oldHeight);
 	}
 
 	public interface ViewChangeProvider {

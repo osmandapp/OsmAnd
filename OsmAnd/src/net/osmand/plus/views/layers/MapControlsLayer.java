@@ -48,6 +48,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final MapActionsHelper mapActionsHelper;
 	private final MapTransparencyHelper mapTransparencyHelper;
 
+	private View mapHudContainer;
 	private MapHudLayout mapHudLayout;
 	private List<MapButton> mapButtons = new ArrayList<>();
 	private List<MapButton> customMapButtons = new ArrayList<>();
@@ -97,6 +98,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapTransparencyHelper.destroyTransparencyBar();
 			mapRouteInfoMenu = null;
 			mapHudLayout = null;
+			mapHudContainer = null;
 		}
 	}
 
@@ -128,7 +130,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void initMapButtons() {
 		MapActivity activity = requireMapActivity();
-		mapHudLayout = activity.findViewById(R.id.map_hud_layout);
+		mapHudContainer = activity.findViewById(R.id.map_hud_container);
+		mapHudLayout = mapHudContainer.findViewById(R.id.map_hud_layout);
 
 		for (MapButton button : mapButtons) {
 			mapHudLayout.removeMapButton(button);
@@ -195,7 +198,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void showMapControls() {
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			mapHudLayout.setVisibility(View.VISIBLE);
+			mapHudContainer.setVisibility(View.VISIBLE);
 		} else {
 			animateMapControls(true);
 		}
@@ -207,7 +210,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void hideMapControls() {
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			mapHudLayout.setVisibility(View.INVISIBLE);
+			mapHudContainer.setVisibility(View.INVISIBLE);
 		} else {
 			animateMapControls(false);
 		}
@@ -227,7 +230,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		AnimatorSet set = new AnimatorSet();
 		set.setDuration(300).playTogether(
-				ObjectAnimator.ofFloat(mapHudLayout, View.ALPHA, alphaInitial, alphaFinal),
+				ObjectAnimator.ofFloat(mapHudContainer, View.ALPHA, alphaInitial, alphaFinal),
 				ObjectAnimator.ofFloat(mapHudButtonsTop, View.TRANSLATION_Y, transTopInitial, transTopFinal),
 				ObjectAnimator.ofFloat(mapHudButtonsBottom, View.TRANSLATION_Y, transBottomInitial, transBottomFinal)
 		);
@@ -236,7 +239,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onAnimationStart(Animator animation) {
 				super.onAnimationStart(animation);
 				if (show) {
-					mapHudLayout.setVisibility(View.VISIBLE);
+					mapHudContainer.setVisibility(View.VISIBLE);
 				}
 			}
 
@@ -244,10 +247,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onAnimationEnd(Animator animation) {
 				super.onAnimationEnd(animation);
 				if (!show) {
-					mapHudLayout.setVisibility(View.INVISIBLE);
+					mapHudContainer.setVisibility(View.INVISIBLE);
 					mapHudButtonsTop.setTranslationY(transTopInitial);
 					mapHudButtonsBottom.setTranslationY(transBottomInitial);
-					mapHudLayout.setAlpha(alphaInitial);
+					mapHudContainer.setAlpha(alphaInitial);
 				}
 				mapHudLayout.updateButtons();
 
@@ -261,7 +264,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public boolean isMapControlsVisible() {
-		return mapHudLayout != null && mapHudLayout.getVisibility() == View.VISIBLE;
+		return mapHudContainer != null && mapHudContainer.getVisibility() == View.VISIBLE;
 	}
 
 	public void switchMapControlsVisibility(boolean switchNavBarVisibility) {
