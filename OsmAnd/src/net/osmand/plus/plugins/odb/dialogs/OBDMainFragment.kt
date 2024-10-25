@@ -199,8 +199,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun onStateChanged(
 		state: VehicleMetricsPlugin.OBDConnectionState,
-		deviceInfo: BTDeviceInfo?) {
-		if (device.address == deviceInfo?.address) {
+		deviceInfo: BTDeviceInfo) {
+		if (device.address == deviceInfo.address) {
 			currentConnectedState = state
 		}
 		app.runInUIThread {
