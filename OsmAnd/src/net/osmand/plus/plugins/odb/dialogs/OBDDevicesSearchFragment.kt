@@ -134,7 +134,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			if (AndroidUtils.hasBLEPermission(it)) {
 				vehicleMetricsPlugin?.searchUnboundDevices(it)
 			} else {
-				AndroidUtils.requestBLEPermissions(it, VehicleMetricsPlugin.REQUEST_BT_PERMISSION_CODE)
+				AndroidUtils.requestBLEPermissions(
+					it,
+					VehicleMetricsPlugin.REQUEST_BT_PERMISSION_CODE)
 			}
 		}
 	}
@@ -190,7 +192,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onDevicePaired(pairedDevice: BTDeviceInfo) {
 		if (pairingDevice?.address == pairedDevice.address) {
-			vehicleMetricsPlugin?.connectToObd(requireActivity(), pairedDevice)
+			Thread {
+				vehicleMetricsPlugin?.connectToObd(requireActivity(), pairedDevice)
+			}.start()
 			activity?.onBackPressed()
 		}
 	}
@@ -204,18 +208,20 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		activity?.let {
-			vehicleMetricsPlugin?.let { plugin ->
-				if (plugin.isPaired(it, device)) {
-					plugin.connectToObd(requireActivity(), device)
-					it.onBackPressed()
-				} else {
-					if (pairingDevice == null) {
-						pairingDevice = device
-						plugin.pairDevice(it, device)
+		Thread {
+			activity?.let {
+				vehicleMetricsPlugin?.let { plugin ->
+					if (plugin.isPaired(it, device)) {
+						plugin.connectToObd(requireActivity(), device)
+						it.onBackPressed()
+					} else {
+						if (pairingDevice == null) {
+							pairingDevice = device
+							plugin.pairDevice(it, device)
+						}
 					}
 				}
 			}
-		}
+		}.start()
 	}
 }

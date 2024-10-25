@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -195,7 +196,17 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
+		Thread {
+			if(vehicleMetricsPlugin?.connectToObd(requireActivity(), device) != true) {
+			app.runInUIThread {
+				Toast.makeText(
+					activity,
+					app.getString(R.string.failed_connect_obd, device.name),
+					Toast.LENGTH_LONG).show()
+			}
+
+			}
+		}.start()
 	}
 
 	override fun onSettings(device: BTDeviceInfo) {

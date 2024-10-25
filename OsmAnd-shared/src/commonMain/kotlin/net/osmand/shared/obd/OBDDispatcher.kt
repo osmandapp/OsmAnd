@@ -84,7 +84,7 @@ object OBDDispatcher {
 										sensorDataCache[command] =
 											command.parseResponse(commandResult.result)
 									} else {
-										log.error("Incorrect response length for command $command")
+										log("Incorrect response length for command $command")
 									}
 								} else if(commandResult == OBDResponse.NO_DATA) {
 									sensorDataCache[command] = OBDDataField.NO_DATA
@@ -93,7 +93,7 @@ object OBDDispatcher {
 								}
 							}
 						} catch (error: IOException) {
-							log.error("Run OBD looper error. $error")
+							log("Run OBD looper error. $error")
 							if (inputStream == null || outputStream == null) {
 								break
 							}
@@ -103,7 +103,7 @@ object OBDDispatcher {
 					}
 				}
 			} catch (cancelError: CancellationException) {
-				log.error("OBD reading canceled")
+				log("OBD reading canceled")
 			}
 		}
 	}
