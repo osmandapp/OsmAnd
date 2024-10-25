@@ -5451,4 +5451,19 @@
 	<string name="poi_osmand_foot_prohibited_tunnel">Tunnel prohibited for pedestrians</string>
 	<string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel prohibited for cyclists</string>
 
+	<string name="poi_route_article">Travel Articles</string>
+	<string name="poi_route_article_point">Travel Points</string>
+	<string name="poi_route_track">Other routes</string>
+	<string name="poi_route_track_point">Other routes points</string>
+	<string name="poi_activities_bicycle">Bicycle</string>
+	<string name="poi_activities_trekking">Hiking</string>
+	<string name="poi_activities_running">Running</string>
+	<string name="poi_activities_pedestrian">Walking</string>
+	<string name="poi_activities_kayak">Water sports</string>
+	<string name="poi_activities_horse">Horse riding</string>
+	<string name="poi_activities_skiing">Winter sports</string>
+	<string name="poi_activities_snowmobile">Snowmobile</string>
+	<string name="poi_activities_fitness">Fitness trails</string>
+	<string name="poi_activities_inline_skates">Inline skates</string>
+	<string name="poi_activities_mountain_bike">Mountain biking</string>
 </resources>
