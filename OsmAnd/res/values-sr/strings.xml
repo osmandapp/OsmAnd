@@ -5642,4 +5642,5 @@
     <string name="obd_engine_runtime_desc">Приказује време рада мотора возила добијено од днв скенера</string>
     <string name="obd_throttle_position_desc">Приказује притисак горива у возилу (манометарски притисак) добијен од днв скенера</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Приказује потрошњу горива возила на основу прорачуна (%/h)</string>
+    <string name="bt_start_pair_failed">Није могуће покренути упаривање са уређајем</string>
 </resources>
