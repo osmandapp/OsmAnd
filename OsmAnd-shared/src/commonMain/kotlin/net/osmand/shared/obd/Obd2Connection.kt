@@ -30,7 +30,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private fun runImpl(command: String): String {
 		val response = StringBuilder()
-		log.debug("runImpl($command)")
+		log("runImpl($command)")
 		connection.write((command + "\r").encodeToByteArray())
 		while (!isFinished) {
 			val value = connection.readByte() ?: continue
@@ -41,7 +41,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			response.append(c)
 		}
 		val responseValue = response.toString()
-		log.debug("runImpl() returned $responseValue")
+		log("runImpl() returned $responseValue")
 		return responseValue
 	}
 
@@ -52,15 +52,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		if(isFinished) {
 			return OBDResponse.ERROR
 		}
-		log.debug("before runImpl")
+		log("before runImpl")
 		var response = runImpl(fullCommand)
-		log.debug("after runImpl")
+		log("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
 			response = response.substring(unspacedCommand.length)
 		response = unpackLongFrame(response)
-		log.debug("post-processed response $response")
+		log("post-processed response $response")
 		response = removeSideData(
 			response,
 			"SEARCHING",
@@ -71,7 +71,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"BUSERROR",
 			"STOPPED"
 		)
-		log.debug("post-processed response without side data $response")
+		log("post-processed response without side data $response")
 		when (response) {
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
@@ -92,13 +92,13 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			if (hexValues.size < 3 ||
 				hexValues[0] != commandType.code ||
 				hexValues[1] != command) {
-				log.debug("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
+				log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
 			} else {
 				hexValues = hexValues.copyOfRange(2, hexValues.size)
 			}
 			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
-			log.debug(
+			log(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
 			return OBDResponse.ERROR
@@ -183,7 +183,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 				val byte1 = responseData.result[3].toByte()
 				val byte2 = responseData.result[4].toByte()
 				val byte3 = responseData.result[5].toByte()
-				log.debug(
+				log(
 					"Supported PID at base $basePid payload %02X%02X%02X%02X".format(
 						byte0,
 						byte1,
@@ -196,7 +196,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 					for (bitIndex in 7 downTo 0) {
 						if (bitSet.getBit(byteIndex, bitIndex)) {
 							val command = basePid + 8 * byteIndex + 7 - bitIndex
-							log.debug("Command $command found supported")
+							log("Command $command found supported")
 							result.add(command)
 						}
 					}
@@ -205,6 +205,14 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			basePid += 0x20
 		}
 		return result
+	}
+
+	private fun log(msg: String) {
+		if(OBDDispatcher.useInfoLogging) {
+			log.info(msg)
+		} else {
+			log.debug(msg)
+		}
 	}
 
 	companion object {

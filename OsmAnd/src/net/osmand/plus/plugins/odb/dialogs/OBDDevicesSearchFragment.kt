@@ -134,7 +134,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 			if (AndroidUtils.hasBLEPermission(it)) {
 				vehicleMetricsPlugin?.searchUnboundDevices(it)
 			} else {
-				AndroidUtils.requestBLEPermissions(it, VehicleMetricsPlugin.REQUEST_BT_PERMISSION_CODE)
+				AndroidUtils.requestBLEPermissions(
+					it,
+					VehicleMetricsPlugin.REQUEST_BT_PERMISSION_CODE)
 			}
 		}
 	}

@@ -26,6 +26,8 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.OsmandPlugin
+import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
@@ -424,6 +426,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						socket?.close()
 						socket = null
 					}
+					OBDDispatcher.useInfoLogging =
+						PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
 
 					if (settings.SIMULATE_OBD_DATA.get()) {
 						onDeviceConnected(deviceInfo)
@@ -492,12 +496,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				OBDConnectionState.DISCONNECTED,
 				deviceToConnect)
 			LOG.error("Can't connect to device. $error")
-			app.runInUIThread {
-				Toast.makeText(
-					activity,
-					"Can\'t connect to ${connectedDevice.getAliasName(activity)}",
-					Toast.LENGTH_LONG).show()
-			}
 		}
 	}
 
@@ -700,7 +698,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		permissions: Array<out String>,
 		grantResults: IntArray) {
 		super.handleRequestPermissionsResult(requestCode, permissions, grantResults)
-		if(requestCode == REQUEST_BT_PERMISSION_CODE) {
+		if (requestCode == REQUEST_BT_PERMISSION_CODE) {
 			for (grantResult in grantResults) {
 				if (grantResult != PackageManager.PERMISSION_GRANTED) {
 					return
