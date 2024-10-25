@@ -1381,11 +1381,11 @@
     <string name="poi_brushless_yes">Sì;Senza spazzole</string>
     <string name="poi_brushless_no">Senza spazzola: no</string>
     <string name="poi_car_wash_no">No;Autolavaggio: no</string>
-    <string name="poi_public_bath">Bagno pubblico</string>
+    <string name="poi_public_bath">Terme</string>
     <string name="poi_indoor_no">Esterno</string>
     <string name="poi_toilets_yes">Sì;Servizi igenici</string>
     <string name="poi_toilets_access_customers">Accesso a servizi igienici: clienti</string>
-    <string name="poi_toilets_access_permissive">Accesso a servizi igienici: permissiva</string>
+    <string name="poi_toilets_access_permissive">Accesso a servizi igienici: permissivo</string>
     <string name="poi_toilets_access_community">Accesso a servizi igienici: comunità</string>
     <string name="poi_toilets_access_public">Accesso a servizi igienici: pubblico</string>
     <string name="poi_maxstay">Limite tempo di parcheggio</string>

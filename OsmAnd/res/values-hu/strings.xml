@@ -5638,4 +5638,5 @@
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
     <string name="obd_calculated_engine_load_desc">Megjeleníti a jármű számított motorterhelését az érzékelő alapján</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti számítások alapján a jármű üzemanyag-fogyasztási arányát (%/óra)</string>
+    <string name="bt_start_pair_failed">Nem lehet kezdeményezni a párosítást az eszközzel</string>
 </resources>
