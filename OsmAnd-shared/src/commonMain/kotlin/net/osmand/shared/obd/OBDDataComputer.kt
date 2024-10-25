@@ -299,11 +299,11 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = first.value as Float - last.value as Float
+						val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 						if (diffPerc > 0) {
 							val dist = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (dist > 0) {
-								val lastPerc = last.value
+								val lastPerc = last.value.toFloat()
 								log.debug("left km. fuelLvl $lastPerc; distance $dist; difPercent $diffPerc; result ${lastPerc * dist / diffPerc}")
 								return lastPerc * dist / diffPerc
 							}
