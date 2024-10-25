@@ -1,7 +1,5 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DYNAMIC_ICON_KEY;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -37,7 +35,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements CardListener, OnIconsPaletteListener<String> {
 
@@ -76,6 +73,9 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		if (buttonState != null) {
 			appearanceParams = buttonState.createAppearanceParams();
 			originalAppearanceParams = buttonState.createAppearanceParams();
+			String savedIconName = buttonState.getSavedIconName();
+			appearanceParams.setIconName(savedIconName);
+			originalAppearanceParams.setIconName(savedIconName);
 
 			if (savedInstanceState != null) {
 				appearanceParams.readBundle(savedInstanceState);
@@ -204,9 +204,10 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 
 	private void updateButtons() {
 		ButtonAppearanceParams params = appearanceParams;
-		if (Objects.equals(DYNAMIC_ICON_KEY, appearanceParams.getIconName())) {
+		String iconName = appearanceParams.getIconName();
+		if (Algorithms.isEmpty(iconName)) {
 			params = new ButtonAppearanceParams(appearanceParams);
-			params.setIconName(buttonState.createAppearanceParams().getIconName());
+			params.setIconName(buttonState.getPreferredIconName(iconName));
 		}
 		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
@@ -218,7 +219,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		appearanceParams.setSize(defaultParams.getSize());
 		appearanceParams.setOpacity(defaultParams.getOpacity());
 		appearanceParams.setCornerRadius(defaultParams.getCornerRadius());
-		iconController.update();
+		iconController.updateAfterReset();
 		updateContent();
 	}
 

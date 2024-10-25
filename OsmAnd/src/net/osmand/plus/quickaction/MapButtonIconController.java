@@ -1,7 +1,5 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DYNAMIC_ICON_KEY;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -32,6 +30,7 @@ class MapButtonIconController extends EditorIconController {
 
 	public static final String PROCESS_ID = "map_button_select_icon";
 	public static final String CUSTOM_KEY = "custom";
+	public static final String DYNAMIC_KEY = "use_dynamic_icon";
 
 	private final MapButtonState buttonState;
 	private final ButtonAppearanceParams appearanceParams;
@@ -55,8 +54,7 @@ class MapButtonIconController extends EditorIconController {
 	@Nullable
 	@Override
 	public String getSelectedIconKey() {
-		String savedIconName = buttonState.getSavedIconName();
-		return savedIconName != null ? savedIconName : appearanceParams.getIconName();
+		return appearanceParams.getIconName();
 	}
 
 	@Override
@@ -97,28 +95,34 @@ class MapButtonIconController extends EditorIconController {
 	protected void askInitDynamicCategory() {
 		if (buttonState instanceof QuickActionButtonState state && state.isSingleAction()) {
 			String translatedName = app.getString(R.string.shared_string_dynamic);
-			dynamicCategory = new IconsCategory(DYNAMIC_ICON_KEY, translatedName, new ArrayList<>(), true);
+			dynamicCategory = new IconsCategory(DYNAMIC_KEY, translatedName, new ArrayList<>(), true);
 			categories.add(dynamicCategory);
 		}
 	}
 
-	public void update() {
-		setSelectedCategory(findIconCategory(getSelectedIconKey()));
+	public void updateAfterReset() {
+		setSelectedCategory(findInitialIconCategory());
 	}
 
 	@Override
 	public void setSelectedCategory(@NonNull IconsCategory category) {
 		super.setSelectedCategory(category);
-		if (isDynamicIcon(category.getKey())) {
-			onIconSelectedFromPalette(DYNAMIC_ICON_KEY, null);
+		if (isDynamicIconCategory(category)) {
+			onIconSelectedFromPalette(null, null);
 		}
 	}
 
 	@NonNull
 	@Override
+	protected IconsCategory findInitialIconCategory() {
+		return findIconCategory(buttonState.getSavedIconName());
+	}
+
+	@NonNull
+	@Override
 	protected IconsCategory findIconCategory(@Nullable String iconKey) {
-		return isDynamicIcon(iconKey)
-				&& dynamicCategory != null ? dynamicCategory : super.findIconCategory(iconKey);
+		return iconKey == null && dynamicCategory != null
+				? dynamicCategory : super.findIconCategory(iconKey);
 	}
 
 	@NonNull
@@ -128,7 +132,7 @@ class MapButtonIconController extends EditorIconController {
 
 			@Override
 			public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode, boolean usedOnMap) {
-				if (isDynamicIcon(selectedCategory.getKey())) {
+				if (isDynamicIconCategory(selectedCategory)) {
 					container.removeAllViews();
 					LinearLayout llContainer = createInternalContainer();
 					LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
@@ -151,8 +155,8 @@ class MapButtonIconController extends EditorIconController {
 		};
 	}
 
-	private boolean isDynamicIcon(@Nullable String iconKey) {
-		return Objects.equals(iconKey, DYNAMIC_ICON_KEY);
+	private boolean isDynamicIconCategory(@NonNull IconsCategory category) {
+		return Objects.equals(category.getKey(), DYNAMIC_KEY);
 	}
 
 	public static void onDestroy(@NonNull OsmandApplication app) {

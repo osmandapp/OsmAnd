@@ -65,7 +65,7 @@ public class EditorIconController extends BaseDialogController {
 
 	protected void init() {
 		initIconCategories();
-		this.selectedCategory = findIconCategory(getSelectedIconKey());
+		this.selectedCategory = findInitialIconCategory();
 		this.cardController = createCardController();
 		this.screenController = createScreenController();
 	}
@@ -293,6 +293,11 @@ public class EditorIconController extends BaseDialogController {
 		if (targetFragment instanceof OnIconsPaletteListener<?>) {
 			((OnIconsPaletteListener<String>) targetFragment).onIconSelectedFromPalette(iconKey);
 		}
+	}
+
+	@NonNull
+	protected IconsCategory findInitialIconCategory() {
+		return findIconCategory(getSelectedIconKey());
 	}
 
 	@NonNull
