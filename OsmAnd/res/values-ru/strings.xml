@@ -251,7 +251,7 @@
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
     <string name="rendering_value_thin_name">Тонкая</string>
-    <string name="rendering_value_medium_name">Средняя</string>
+    <string name="rendering_value_medium_name">Средний</string>
     <string name="rendering_value_bold_name">Толстая</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
@@ -6029,7 +6029,7 @@
     <string name="obd_calculated_engine_load_desc">Виджет показывает расчетную нагрузку двигателя транспортного средства на основе показаний датчика</string>
     <string name="speedometer_maximum">Максимум</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (%/ч)</string>
-    <string name="simulate_obd">Моделировать данные OBD</string>
+    <string name="simulate_obd">Имитировать данные OBD</string>
     <string name="obd_fuel_consumption_rate_l_km">Расход топлива (л/км)</string>
     <string name="obd_engine_runtime">Продолжительность работы двигателя</string>
     <string name="obd_engine_runtime_desc">Виджет показывает время работы двигателя транспортного средства, полученное с помощью сканера OBD</string>
@@ -6038,4 +6038,6 @@
     <string name="obd_engine_oil_temperature_desc">Виджет показывает температуру масла в двигателе транспортного средства, полученную с помощью сканера OBD</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Виджет показывает расход топлива транспортного средства на основе расчетов (л/км)</string>
     <string name="obd_engine_oil_temperature">t° моторного масла</string>
+    <string name="movies_list">Список роликов</string>
+    <string name="bt_start_pair_failed">Невозможно инициировать сопряжение с устройством</string>
 </resources>

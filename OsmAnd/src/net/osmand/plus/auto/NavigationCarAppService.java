@@ -1,5 +1,6 @@
 package net.osmand.plus.auto;
 
+import android.Manifest;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -9,12 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.car.app.CarAppService;
 import androidx.car.app.Session;
 import androidx.car.app.validation.HostValidator;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Entry point for the templated app.
@@ -23,9 +29,10 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
  * details, see the <a href="https://developer.android.com/training/cars/navigation">Android for
  * Cars Library developer guide</a>.
  */
-public final class NavigationCarAppService extends CarAppService {
+public final class NavigationCarAppService extends CarAppService implements ActivityCompat.OnRequestPermissionsResultCallback {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(NavigationCarAppService.class);
+	private boolean foreground = false;
 
 	private OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -47,28 +54,49 @@ public final class NavigationCarAppService extends CarAppService {
 	}
 
 	@Override
+	public void onCreate() {
+		super.onCreate();
+		getApp().setAndroidAutoPermissionRequestResultListener(this);
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		getApp().setAndroidAutoPermissionRequestResultListener(null);
 		getApp().setNavigationCarAppService(null);
 	}
 
 	@Override
 	@NonNull
 	public Session onCreateSession() {
-		OsmandApplication app = getApp();
-		Notification notification = app.getNotificationHelper().buildCarAppNotification();
-		startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
-
+		startForegroundWithPermission();
 		NavigationSession session = new NavigationSession();
 		session.getLifecycle()
 				.addObserver(new DefaultLifecycleObserver() {
 					@Override
 					public void onDestroy(@NonNull LifecycleOwner owner) {
+						foreground = false;
 						stopForeground(STOP_FOREGROUND_REMOVE);
 					}
 				});
 
 		return session;
+	}
+
+	private void startForegroundWithPermission() {
+		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(getApp())) {
+			foreground = true;
+			Notification notification = getApp().getNotificationHelper().buildCarAppNotification();
+			startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+		}
+	}
+
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		List<String> permissionsList = Arrays.asList(permissions);
+		if (getApp().getCarNavigationSession() != null && permissionsList.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
+				permissionsList.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+			startForegroundWithPermission();
+		}
 	}
 
 	@NonNull

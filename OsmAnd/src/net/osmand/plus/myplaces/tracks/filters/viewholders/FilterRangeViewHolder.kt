@@ -171,9 +171,12 @@ open class FilterRangeViewHolder(
 	private fun updateValues() {
 		isBinding = true
 		val valueFrom = getDisplayValueFrom(filter)
-		val valueTo = getDisplayValueTo(filter)
+		var valueTo = getDisplayValueTo(filter)
 		val minValue = getDisplayMinValue(filter)
 		val maxValue = getDisplayMaxValue(filter)
+		if(filter.maxValue == filter.valueTo) {
+			valueTo = maxValue
+		}
 		if (maxValue > minValue) {
 			slider.valueTo = maxValue.toFloat()
 			slider.valueFrom = minValue.toFloat()

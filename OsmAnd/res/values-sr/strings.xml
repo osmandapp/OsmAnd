@@ -5626,4 +5626,20 @@
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="speedometer_maximum">Максимум</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Приказује потрошњу горива возила на основу прорачуна (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Потрошња горива (l/km)</string>
+    <string name="simulate_obd">Симулирај днв податке</string>
+    <string name="obd_engine_runtime">Време рада мотора</string>
+    <string name="obd_throttle_position">Позиција гаса</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Притисак горива</string>
+    <string name="obd_fuel_pressure_desc">Приказује притисак горива у возилу (манометарски притисак) добијен од днв скенера</string>
+    <string name="obd_calculated_engine_load">Израчунато оптерећење мотора</string>
+    <string name="obd_calculated_engine_load_desc">Приказује израчунато оптерећење мотора возила на основу сензора</string>
+    <string name="obd_engine_oil_temperature">Температура моторног уља</string>
+    <string name="obd_engine_oil_temperature_desc">Приказује температуру моторног уља возила добијену из днв скенера</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_engine_runtime_desc">Приказује време рада мотора возила добијено од днв скенера</string>
+    <string name="obd_throttle_position_desc">Приказује притисак горива у возилу (манометарски притисак) добијен од днв скенера</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Приказује потрошњу горива возила на основу прорачуна (%/h)</string>
 </resources>

@@ -1,7 +1,11 @@
 package net.osmand.plus.plugins.osmedit;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.PointDescription.POINT_TYPE_OSM_BUG;
+import static net.osmand.data.PointDescription.POINT_TYPE_OSM_NOTE;
 import static net.osmand.plus.AppInitEvents.POI_TYPES_INITIALIZED;
+import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.BUG;
+import static net.osmand.plus.plugins.osmedit.data.OsmPoint.Group.POI;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,9 +30,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
+import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.asynctasks.SaveOsmChangeAsyncTask;
@@ -70,8 +74,10 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	private final List<OsmPoint> drawnOsmEdits = new ArrayList<>();
 
-	private ContextMenuLayer contextMenuLayer;
+	@Nullable
 	private MapTextLayer mapTextLayer;
+	@Nullable
+	private ContextMenuLayer contextMenuLayer;
 
 	//OpenGL
 	private boolean nightMode;
@@ -91,21 +97,22 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
+		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		addInitPoiTypesListener();
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (contextMenuLayer.getMoveableObject() instanceof OsmPoint) {
-			OsmPoint movablePoint = (OsmPoint) contextMenuLayer.getMoveableObject();
-			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			drawPoint(canvas, movablePoint, pf.x, pf.y);
-			setMovableObject(movablePoint.getLatitude(), movablePoint.getLongitude());
-		}
-		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
-			cancelMovableObject();
+		if (contextMenuLayer != null) {
+			if (contextMenuLayer.getMoveableObject() instanceof OsmPoint point) {
+				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
+				drawPoint(canvas, point, pf.x, pf.y);
+				setMovableObject(point.getLatitude(), point.getLongitude());
+			}
+			if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+				cancelMovableObject();
+			}
 		}
 	}
 
@@ -125,7 +132,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 			List<OpenstreetmapPoint> osmPoints = plugin.getDBPOI().getOpenstreetmapPoints();
 			int pointsSize = notesPoints.size() + osmPoints.size();
 			if ((mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() != pointsSize)
-				|| nightMode != settings.isNightMode() || storedTextScale != getTextScale()) {
+					|| nightMode != settings.isNightMode() || storedTextScale != getTextScale()) {
 				clearMapMarkersCollections();
 			}
 			nightMode = settings.isNightMode();
@@ -163,18 +170,21 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		drawnOsmEdits.addAll(drawPoints(canvas, tileBox, objects, fullObjectsLatLon));
 	}
 
+	@NonNull
 	private List<OsmPoint> drawPoints(Canvas canvas, RotatedTileBox tileBox,
-									  List<? extends OsmPoint> objects, List<LatLon> fullObjectsLatLon) {
-		float iconSize = getIconSize(app);
+	                                  List<? extends OsmPoint> objects, List<LatLon> fullObjectsLatLon) {
 		List<OsmPoint> fullObjects = new ArrayList<>();
-		for (OsmPoint o : objects) {
-			if (contextMenuLayer.getMoveableObject() != o) {
-				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				if (tileBox.containsPoint(x, y, iconSize)) {
-					drawPoint(canvas, o, x, y);
-					fullObjects.add(o);
-					fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+		if (contextMenuLayer != null) {
+			float iconSize = getIconSize(app);
+			for (OsmPoint o : objects) {
+				if (contextMenuLayer.getMoveableObject() != o) {
+					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					if (tileBox.containsPoint(x, y, iconSize)) {
+						drawPoint(canvas, o, x, y);
+						fullObjects.add(o);
+						fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+					}
 				}
 			}
 		}
@@ -185,7 +195,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		float textScale = getTextScale();
 		int iconId = getIconId(osmPoint);
 		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+		if (osmPoint.getGroup() == BUG) {
 			backgroundType = BackgroundType.COMMENT;
 		}
 		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
@@ -197,7 +207,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	}
 
 	public int getIconId(OsmPoint osmPoint) {
-		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+		if (osmPoint.getGroup() == POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
 			String poiTranslation = osmP.getEntity().getTag(Entity.POI_TYPE_TAG);
@@ -220,7 +230,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				iconResId = R.drawable.ic_action_info_dark;
 			}
 			return iconResId;
-		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+		} else if (osmPoint.getGroup() == BUG) {
 			return R.drawable.mm_special_symbol_plus;
 		} else {
 			return 0;
@@ -313,16 +323,15 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof OsmPoint) {
-			OsmPoint point = (OsmPoint) o;
+		if (o instanceof OsmPoint point) {
 			String name = "";
 			String type = "";
-			if (point.getGroup() == OsmPoint.Group.POI) {
+			if (point.getGroup() == POI) {
 				name = ((OpenstreetmapPoint) point).getName();
-				type = PointDescription.POINT_TYPE_OSM_NOTE;
-			} else if (point.getGroup() == OsmPoint.Group.BUG) {
+				type = POINT_TYPE_OSM_NOTE;
+			} else if (point.getGroup() == BUG) {
 				name = ((OsmNotesPoint) point).getText();
-				type = PointDescription.POINT_TYPE_OSM_BUG;
+				type = POINT_TYPE_OSM_BUG;
 			}
 			return new PointDescription(type, name);
 		}
@@ -399,7 +408,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		float textScale = getTextScale();
 		int iconId = getIconId(osmPoint);//TODO bug with detect icon
 		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
+		if (osmPoint.getGroup() == BUG) {
 			backgroundType = BackgroundType.COMMENT;
 		}
 		int x = MapUtils.get31TileNumberX(osmPoint.getLongitude());
@@ -409,7 +418,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
 				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
-		Bitmap bitmap  = pointImageDrawable.getBigMergedBitmap(textScale, false);
+		Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 		if (bitmap == null) {
 			return;
 		}

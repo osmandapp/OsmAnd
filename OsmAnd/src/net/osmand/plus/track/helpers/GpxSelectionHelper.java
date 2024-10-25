@@ -111,6 +111,9 @@ public class GpxSelectionHelper {
 						selectGpxFile(gpxEntry.getKey(), selectionParams);
 					}
 				}
+			} else if (gpxEntry.getKey().equals(savingTrackHelper.getCurrentTrack().gpxFile)) {
+				GpxSelectionParams selectionParams = GpxSelectionParams.getDefaultSelectionParams();
+				selectGpxFile(gpxEntry.getKey(), selectionParams);
 			}
 			saveCurrentSelections();
 		}

@@ -3,6 +3,8 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class ZoomInButtonState extends MapButtonState {
 
@@ -18,7 +21,6 @@ public class ZoomInButtonState extends MapButtonState {
 	public ZoomInButtonState(@NonNull OsmandApplication app) {
 		super(app, ZOOM_IN_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
-		setupButtonPosition(false, false, false, true, false);
 	}
 
 	@NonNull
@@ -53,5 +55,11 @@ public class ZoomInButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
 		return new ButtonAppearanceParams("ic_zoom_in", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, false, true);
 	}
 }

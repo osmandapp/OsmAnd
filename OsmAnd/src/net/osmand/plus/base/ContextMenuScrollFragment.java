@@ -124,7 +124,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		setupMapRulerWidget(view, mapLayers);
 	}
 
-	protected boolean alwaysShowButtons(){
+	protected boolean alwaysShowButtons() {
 		return true;
 	}
 
@@ -133,9 +133,8 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	}
 
 	protected void setupMapRulerWidget(@NonNull View view, @NonNull MapLayers mapLayers) {
-		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
-		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
-		rulerWidget = mapInfoLayer.setupRulerWidget(mapRulerView);
+		MapInfoLayer layer = mapLayers.getMapInfoLayer();
+		rulerWidget = layer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
 	}
 
 	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
