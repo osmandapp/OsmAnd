@@ -194,29 +194,28 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void showMapControls() {
-		MapActivity mapActivity = requireMapActivity();
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			mapActivity.findViewById(R.id.map_hud_layout).setVisibility(View.VISIBLE);
+			mapHudLayout.setVisibility(View.VISIBLE);
 		} else {
 			animateMapControls(true);
 		}
-		AndroidUtils.showNavBar(mapActivity);
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			AndroidUtils.showNavBar(activity);
+		}
 	}
 
 	public void hideMapControls() {
-		MapActivity mapActivity = requireMapActivity();
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			mapActivity.findViewById(R.id.map_hud_layout).setVisibility(View.INVISIBLE);
+			mapHudLayout.setVisibility(View.INVISIBLE);
 		} else {
 			animateMapControls(false);
 		}
 	}
 
 	private void animateMapControls(boolean show) {
-		MapActivity mapActivity = requireMapActivity();
-		MapHudLayout mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
-		View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
-		View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
+		View mapHudButtonsTop = mapHudLayout.findViewById(R.id.MapHudButtonsOverlayTop);
+		View mapHudButtonsBottom = mapHudLayout.findViewById(R.id.MapHudButtonsOverlayBottom);
 
 		float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
 		float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
@@ -251,15 +250,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 					mapHudLayout.setAlpha(alphaInitial);
 				}
 				mapHudLayout.updateButtons();
-				mapActivity.updateStatusBarColor();
+
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					activity.updateStatusBarColor();
+				}
 			}
 		});
 		set.start();
 	}
 
 	public boolean isMapControlsVisible() {
-		MapActivity mapActivity = requireMapActivity();
-		return mapActivity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
+		return mapHudLayout != null && mapHudLayout.getVisibility() == View.VISIBLE;
 	}
 
 	public void switchMapControlsVisibility(boolean switchNavBarVisibility) {
