@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -20,6 +22,7 @@ import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
@@ -49,7 +52,6 @@ public class QuickActionButtonState extends MapButtonState {
 		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
 		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
-		setupButtonPosition(false, false, false, false, true);
 	}
 
 	@Override
@@ -223,5 +225,11 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 		}
 		return super.getIcon(iconId, color, nightMode, mapIcon);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, true, true);
 	}
 }

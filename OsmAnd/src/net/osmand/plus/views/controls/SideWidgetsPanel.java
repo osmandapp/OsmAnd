@@ -32,6 +32,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -40,7 +43,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
+public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, ViewChangeProvider {
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
@@ -56,6 +59,9 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 	protected ViewPager2 viewPager;
 	protected WidgetsPagerAdapter adapter;
 	protected LinearLayout dots;
+
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -302,5 +308,31 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer {
 	@NonNull
 	protected OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getContext().getApplicationContext());
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 }

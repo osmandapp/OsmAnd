@@ -76,6 +76,7 @@
 			android:layout_marginBottom="@dimen/map_button_margin">
 
 			<FrameLayout
+				android:id="@+id/measurement_buttons"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
 
@@ -98,20 +99,6 @@
 					android:visibility="gone" />
 
 			</FrameLayout>
-
-			<LinearLayout
-				android:id="@+id/map_ruler_container"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="bottom">
-
-				<include
-					layout="@layout/map_ruler"
-					android:layout_width="@dimen/map_ruler_width"
-					android:layout_height="wrap_content"
-					android:layout_gravity="bottom"
-					android:layout_marginStart="@dimen/map_button_margin" />
-			</LinearLayout>
 
 		</LinearLayout>
 
@@ -147,19 +134,6 @@
 			layout="@layout/add_gpx_point_bottom_sheet"
 			tools:visibility="gone" />
 
-		<FrameLayout
-			android:id="@+id/bottomFragmentContainer"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent" />
-
 	</FrameLayout>
-
-	<net.osmand.plus.views.controls.VerticalWidgetPanel
-		android:id="@+id/map_bottom_widgets_panel"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingTop="5dp"
-		app:topPanel="false" />
 
 </LinearLayout>

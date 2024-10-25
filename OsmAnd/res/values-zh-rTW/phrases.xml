@@ -4878,6 +4878,6 @@
     <string name="poi_payment_parco_no">不接受 Parco</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">不接受 Parkster</string>
-    <string name="poi_osmand_foot_tunnel_no">隧道禁止行人通行</string>
-    <string name="poi_osmand_bicycle_tunnel_no">隧道禁止腳踏車騎士通行</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">隧道禁止行人通行</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">隧道禁止腳踏車騎士通行</string>
 </resources>

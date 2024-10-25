@@ -61,47 +61,49 @@ object OBDDispatcher {
 						readStatusListener?.onInitConnectionFailed()
 					}
 				})
-				while (obd2Connection?.initialized == true) {
-					try {
-						for (command in commandQueue) {
-							if (command.isStale) {
-								val cachedCommandResponse = staleCommandsCache[command]
-								if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
-									continue
+				if(obd2Connection?.initialized == true) {
+					while (obd2Connection?.isFinished == false) {
+						try {
+							for (command in commandQueue) {
+								if (command.isStale) {
+									val cachedCommandResponse = staleCommandsCache[command]
+									if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
+										continue
+									}
+								}
+								val hexGroupCode = "%02X".format(command.commandGroup)
+								val hexCode = "%02X".format(command.command)
+								val fullCommand = "$hexGroupCode$hexCode"
+								val commandResult =
+									obd2Connection!!.run(
+										fullCommand,
+										command.command,
+										command.commandType)
+								if (commandResult.isValid()) {
+									if (commandResult.result.size >= command.responseLength) {
+										sensorDataCache[command] =
+											command.parseResponse(commandResult.result)
+									} else {
+										log("Incorrect response length for command $command")
+									}
+								} else if(commandResult == OBDResponse.NO_DATA) {
+									sensorDataCache[command] = OBDDataField.NO_DATA
+								} else if(commandResult == OBDResponse.ERROR) {
+									readStatusListener?.onIOError()
 								}
 							}
-							val hexGroupCode = "%02X".format(command.commandGroup)
-							val hexCode = "%02X".format(command.command)
-							val fullCommand = "$hexGroupCode$hexCode"
-							val commandResult =
-								obd2Connection!!.run(
-									fullCommand,
-									command.command,
-									command.commandType)
-							if (commandResult.isValid()) {
-								if (commandResult.result.size >= command.responseLength) {
-									sensorDataCache[command] =
-										command.parseResponse(commandResult.result)
-								} else {
-									log.error("Incorrect response length for command $command")
-								}
-							} else if(commandResult == OBDResponse.NO_DATA) {
-								sensorDataCache[command] = OBDDataField.NO_DATA
-							} else if(commandResult == OBDResponse.ERROR) {
-								readStatusListener?.onIOError()
+						} catch (error: IOException) {
+							log("Run OBD looper error. $error")
+							if (inputStream == null || outputStream == null) {
+								break
 							}
+							readStatusListener?.onIOError()
 						}
-					} catch (error: IOException) {
-						log.error("Run OBD looper error. $error")
-						if (inputStream == null || outputStream == null) {
-							break
-						}
-						readStatusListener?.onIOError()
+						OBDDataComputer.acceptValue(sensorDataCache)
 					}
-					OBDDataComputer.acceptValue(sensorDataCache)
 				}
 			} catch (cancelError: CancellationException) {
-				log.error("OBD reading canceled")
+				log("OBD reading canceled")
 			}
 		}
 	}
@@ -130,6 +132,8 @@ object OBDDispatcher {
 		outputStream = writeStream
 		if (readStream != null && writeStream != null) {
 			startReadObdLooper()
+		} else {
+			obd2Connection?.isFinished = true
 		}
 	}
 

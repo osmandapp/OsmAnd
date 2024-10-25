@@ -64,7 +64,10 @@ class ODBSimulationSource {
 				OBDCommand.OBD_SPEED_COMMAND -> toNormalizedHex(99)
 				OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> toNormalizedHex(100)
 				OBDCommand.OBD_ENGINE_COOLANT_TEMP_COMMAND -> toNormalizedHex(80)
-				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> "NODATA"
+				OBDCommand.OBD_FUEL_CONSUMPTION_RATE_COMMAND -> {
+					bufferToRead = "NODATA>"
+					return@runBlocking
+				}
 				OBDCommand.OBD_FUEL_TYPE_COMMAND -> "01"
 				OBDCommand.OBD_FUEL_LEVEL_COMMAND -> {
 					val curTime = currentTimeMillis()
@@ -98,10 +101,12 @@ class ODBSimulationSource {
 		override fun read(sink: Buffer, byteCount: Long): Long {
 			bufferToRead?.let {
 				val readCount = min(byteCount, it.length.toLong())
-				val data = it.substring(0, readCount.toInt())
-				bufferToRead = it.substring(readCount.toInt())
-				sink.writeUtf8(data)
-				return readCount
+				if(readCount > 0) {
+					val data = it.substring(0, readCount.toInt())
+					bufferToRead = it.substring(readCount.toInt())
+					sink.writeUtf8(data)
+					return readCount
+				}
 			}
 			return 0
 		}

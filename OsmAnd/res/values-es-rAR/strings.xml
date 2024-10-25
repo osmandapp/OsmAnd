@@ -372,8 +372,8 @@
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
-    <string name="navigate_point_northing">Al norte</string>
-    <string name="navigate_point_easting">Al este</string>
+    <string name="navigate_point_northing">Longitud al norte</string>
+    <string name="navigate_point_easting">Latitud al este</string>
     <string name="use_opengl_render_descr">Usa el renderizado OpenGL acelerado por hardware (podría consumir más batería o no funcionar en dispositivos antiguos).</string>
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
@@ -5624,4 +5624,24 @@
     <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo del combustible (obd)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Tasa de consumo del combustible en %/h</string>
+    <string name="liter">l</string>
+    <string name="speedometer_maximum">Máximo</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra la tasa de consumo del combustible, según los cálculos (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Tasa de consumo del combustible (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Muestra la tasa de consumo del combustible, según los cálculos (l/km)</string>
+    <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
+    <string name="obd_engine_runtime_desc">Muestra el tiempo de funcionamiento del motor, según el escáner OBD</string>
+    <string name="simulate_obd">Simular datos OBD</string>
+    <string name="obd_throttle_position">Ubicación del acelerador</string>
+    <string name="obd_throttle_position_desc">Muestra la presión del combustible (presión manométrica) según el escáner OBD</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Presión del combustible</string>
+    <string name="obd_fuel_pressure_desc">Muestra la presión del combustible (presión manométrica) según el escáner OBD</string>
+    <string name="obd_calculated_engine_load">Carga calculada del motor</string>
+    <string name="obd_calculated_engine_load_desc">Muestra la carga calculada del motor, según el sensor</string>
+    <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
+    <string name="obd_engine_oil_temperature_desc">Muestra la temperatura del aceite del motor, según el escáner OBD</string>
+    <string name="bt_start_pair_failed">No es posible vincular con el dispositivo</string>
 </resources>
