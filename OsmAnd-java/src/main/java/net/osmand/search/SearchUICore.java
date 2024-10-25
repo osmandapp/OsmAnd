@@ -290,10 +290,10 @@ public class SearchUICore {
 								similarityRadius = 50000;
 							}
 							final String ROUTE_ID = "route_id";
-							final String ROUTE_OSM_PREFIX = "osm_";
 							final String ROUTE_TRACK = "route_track";
+							final String ROUTE_TYPE_PREFIX = "activities_";
 							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
-								&& (subType1.startsWith(ROUTE_OSM_PREFIX) || subType1.equals(ROUTE_TRACK))) {
+								&& (subType1.startsWith(ROUTE_TYPE_PREFIX) || subType1.equals(ROUTE_TRACK))) {
 								similarityRadius = 50000;
 							}
 						}
