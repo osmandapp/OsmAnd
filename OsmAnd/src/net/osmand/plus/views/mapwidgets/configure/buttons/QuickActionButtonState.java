@@ -30,10 +30,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class QuickActionButtonState extends MapButtonState {
 
 	public static final String DEFAULT_BUTTON_ID = "quick_actions";
+
+	public static final String DEFAULT_ICON_KEY = "ic_quick_action";
 
 	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
@@ -182,23 +185,31 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
-		if (Algorithms.isEmpty(iconPref.get())) {
+		String savedName = getSavedIconName();
+		if (Algorithms.isEmpty(savedName)) {
+			appearanceParams.setIconName(getPreferredIconName(savedName));
+		}
+		return appearanceParams;
+	}
+
+	@Nullable
+	public String getPreferredIconName(@Nullable String originalName, boolean overwriteIfEmpty) {
+		if (Algorithms.isEmpty(originalName) && overwriteIfEmpty) {
 			if (isSingleAction()) {
 				int iconId = getQuickActions().get(0).getIconRes(app);
 				if (iconId > 0) {
-					appearanceParams.setIconName(app.getResources().getResourceEntryName(iconId));
+					return app.getResources().getResourceEntryName(iconId);
 				}
-			} else {
-				appearanceParams.setIconName("ic_quick_action");
 			}
+			return DEFAULT_ICON_KEY;
 		}
-		return appearanceParams;
+		return originalName;
 	}
 
 	@NonNull
 	@Override
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_quick_action", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return new ButtonAppearanceParams(DEFAULT_ICON_KEY, getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
 	}
 
 	@Nullable

@@ -88,14 +88,12 @@ public class NavStartStopAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
-				return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
-			}
-			return helper.getAppMode().getIconRes();
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		RoutingHelper helper = app.getRoutingHelper();
+		if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
+			return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
 		}
-		return super.getIconRes(context);
+		return helper.getAppMode().getIconRes();
 	}
 
 	@Override

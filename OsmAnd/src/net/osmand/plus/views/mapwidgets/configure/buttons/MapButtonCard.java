@@ -23,7 +23,7 @@ import net.osmand.render.RenderingRulesStorage;
 public class MapButtonCard extends MapBaseCard {
 
 	private final MapButtonState buttonState;
-	private final ButtonAppearanceParams customAppearanceParams;
+	private ButtonAppearanceParams customAppearanceParams;
 
 	private MapButton mapButton;
 
@@ -63,8 +63,10 @@ public class MapButtonCard extends MapBaseCard {
 		container.addView(mapButton, new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT, CENTER));
 	}
 
-	public void updateButton() {
+	public void updateButton(@NonNull ButtonAppearanceParams appearanceParams) {
 		if (mapButton != null) {
+			customAppearanceParams = appearanceParams;
+			mapButton.setCustomAppearanceParams(appearanceParams);
 			mapButton.update();
 		}
 	}

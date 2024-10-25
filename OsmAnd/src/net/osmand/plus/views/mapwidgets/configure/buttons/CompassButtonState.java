@@ -105,8 +105,8 @@ public class CompassButtonState extends MapButtonState {
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams defaultParams = createDefaultAppearanceParams();
 
-		String iconName = iconPref.get();
-		int iconId = AndroidUtils.getDrawableId(app, iconPref.get());
+		String iconName = getSavedIconName();
+		int iconId = AndroidUtils.getDrawableId(app, iconName);
 		if (Algorithms.isEmpty(iconName) || CompassMode.isCompassIconId(iconId)) {
 			iconName = defaultParams.getIconName();
 		}
