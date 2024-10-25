@@ -2,7 +2,6 @@ package net.osmand.plus.views.controls;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static net.osmand.plus.OsmAndConstants.UI_HANDLER_MAP_HUD;
-import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.DEF_MARGIN_DP;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_FULL_WIDTH;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
@@ -23,11 +22,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
 import org.apache.commons.logging.Log;
 
@@ -47,6 +46,7 @@ public class MapHudLayout extends FrameLayout {
 
 	private final List<MapButton> mapButtons = new ArrayList<>();
 	private final Map<View, ButtonPositionSize> widgetPositions = new LinkedHashMap<>();
+	private final Map<View, ButtonPositionSize> additionalWidgetPositions = new LinkedHashMap<>();
 
 	private final float dpToPx;
 	private final int statusBarHeight;
@@ -83,7 +83,11 @@ public class MapHudLayout extends FrameLayout {
 		addPosition(findViewById(R.id.map_left_widgets_panel));
 		addPosition(findViewById(R.id.map_right_widgets_panel));
 
-		updateRulerWidget(findViewById(R.id.map_ruler_container));
+		addPosition(findViewById(R.id.measurement_buttons));
+		addPosition(findViewById(R.id.recording_note_layout));
+		addPosition(findViewById(R.id.move_marker_bottom_sheet));
+		addPosition(findViewById(R.id.add_gpx_point_bottom_sheet));
+		addPosition(findViewById(R.id.bottomFragmentContainer));
 	}
 
 	private void addPosition(@Nullable View view) {
@@ -120,6 +124,21 @@ public class MapHudLayout extends FrameLayout {
 		mapButtons.add(button);
 	}
 
+	public void addWidget(@NonNull View view) {
+		ButtonPositionSize position = createWidgetPosition(view);
+		LayoutParams params = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+
+		updateButtonParams(params, position);
+		addChangeListeners(view);
+
+		addView(view, params);
+		additionalWidgetPositions.put(view, position);
+	}
+
+	public void removeWidget(@NonNull View view) {
+		additionalWidgetPositions.remove(view);
+	}
+
 	public void removeMapButton(@NonNull MapButton button) {
 		removeView(button);
 		mapButtons.remove(button);
@@ -132,8 +151,8 @@ public class MapHudLayout extends FrameLayout {
 		Map<View, ButtonPositionSize> map = getButtonPositionSizes();
 		for (Map.Entry<View, ButtonPositionSize> entry : map.entrySet()) {
 			View view = entry.getKey();
-			if (view instanceof MapButton button) {
-				updateButtonPosition(button, entry.getValue());
+			if (view instanceof MapButton || view instanceof RulerWidget) {
+				updatePositionParams(view, entry.getValue());
 			}
 		}
 	}
@@ -174,11 +193,19 @@ public class MapHudLayout extends FrameLayout {
 				}
 			}
 		}
+		for (Map.Entry<View, ButtonPositionSize> entry : additionalWidgetPositions.entrySet()) {
+			View view = entry.getKey();
+			if (view.getVisibility() == VISIBLE) {
+				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
+				map.put(view, position);
+			}
+		}
 		return map;
 	}
 
 	@NonNull
 	private ButtonPositionSize createWidgetPosition(@NonNull View view) {
+		int id = view.getId();
 		String name = getViewName(view);
 		ButtonPositionSize position = new ButtonPositionSize(name);
 		if (view instanceof VerticalWidgetPanel panel) {
@@ -194,10 +221,23 @@ public class MapHudLayout extends FrameLayout {
 			} else {
 				position.setMoveDescendantsHorizontal();
 			}
-		} else if (view.getId() == R.id.widget_top_bar) {
+		} else if (id == R.id.widget_top_bar) {
 			position.setMoveDescendantsVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(POS_FULL_WIDTH);
+		} else if (id == R.id.measurement_buttons) {
+			position.setMoveDescendantsHorizontal();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
+		} else if (id == R.id.bottomFragmentContainer || id == R.id.add_gpx_point_bottom_sheet
+				|| id == R.id.move_marker_bottom_sheet || id == R.id.recording_note_layout) {
+			position.setMoveDescendantsVertical();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_FULL_WIDTH);
+		} else if (view instanceof RulerWidget) {
+			position.setMoveHorizontal();
+			position.setPositionVertical(POS_BOTTOM);
+			position.setPositionHorizontal(POS_LEFT);
 		}
 		return updateWidgetPosition(view, position);
 	}
@@ -213,11 +253,12 @@ public class MapHudLayout extends FrameLayout {
 
 	@NonNull
 	private ButtonPositionSize updateWidgetPosition(@NonNull View view, @NonNull ButtonPositionSize position) {
+		int id = view.getId();
 		int width = (int) AndroidUtils.pxToDpF(getContext(), view.getWidth()) / 8;
 		int height = (int) AndroidUtils.pxToDpF(getContext(), view.getHeight()) / 8;
 		position.setSize(width, height);
 
-		if (view instanceof SideWidgetsPanel) {
+		if (view instanceof SideWidgetsPanel || id == R.id.measurement_buttons) {
 			int parentWidth = getWidth();
 			int parentHeight = getAdjustedHeight();
 			int[] margins = AndroidUtils.getRelativeMargins(this, view);
@@ -226,16 +267,19 @@ public class MapHudLayout extends FrameLayout {
 						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
 						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
 			}
+		} else if (view instanceof RulerWidget) {
+			position.marginX = 0;
+			position.marginY = 0;
 		}
 		return position;
 	}
 
-	public void updateButtonPosition(@NonNull MapButton button, @NonNull ButtonPositionSize position) {
-		LayoutParams params = (LayoutParams) button.getLayoutParams();
+	public void updatePositionParams(@NonNull View view, @NonNull ButtonPositionSize position) {
+		LayoutParams params = (LayoutParams) view.getLayoutParams();
 
 		boolean changed = updateButtonParams(params, position);
 		if (changed) {
-			button.setLayoutParams(params);
+			view.setLayoutParams(params);
 		}
 	}
 
@@ -304,15 +348,6 @@ public class MapHudLayout extends FrameLayout {
 
 	private int getAdjustedHeight() {
 		return getHeight() - statusBarHeight;
-	}
-
-	private void updateRulerWidget(@NonNull View widget) {
-		MapButtonsHelper helper = app.getMapButtonsHelper();
-		ButtonPositionSize drawer = helper.getDrawerMenuButtonState().getPositionSize();
-		ButtonPositionSize navigation = helper.getNavigationMenuButtonState().getPositionSize();
-
-		MarginLayoutParams params = (MarginLayoutParams) widget.getLayoutParams();
-		params.setMarginStart((int) (drawer.getWidthPix(dpToPx) + navigation.getWidthPix(dpToPx) + DEF_MARGIN_DP * dpToPx));
 	}
 
 	public interface VisibilityChangeListener {

@@ -66,6 +66,7 @@
 
 
 					<FrameLayout
+						android:id="@+id/measurement_buttons"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content">
 
@@ -98,18 +99,6 @@
 			android:layout_gravity="bottom"
 			android:layout_marginBottom="@dimen/map_button_margin"
 			android:layout_weight="1">
-
-			<!-- RULER -->
-
-			<LinearLayout
-				android:id="@+id/map_ruler_container"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="bottom">
-
-				<include layout="@layout/map_ruler" />
-
-			</LinearLayout>
 
 			<!-- TRANSPARENCY -->
 

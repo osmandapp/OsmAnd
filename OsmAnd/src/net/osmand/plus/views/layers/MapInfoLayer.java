@@ -4,6 +4,7 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +26,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.controls.WidgetsContainer;
@@ -53,6 +55,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapDisplayPositionManager mapDisplayPositionManager;
 
+	private MapHudLayout mapHudLayout;
 	private SideWidgetsPanel leftWidgetsPanel;
 	private SideWidgetsPanel rightWidgetsPanel;
 	private VerticalWidgetPanel topWidgetsPanel;
@@ -92,12 +95,16 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
+			mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
 			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
-			rulerWidget = mapActivity.findViewById(R.id.map_ruler_layout);
 			androidAutoMapPlaceholderView = mapActivity.findViewById(R.id.AndroidAutoPlaceholder);
+
+			LayoutInflater inflater = mapActivity.getLayoutInflater();
+			rulerWidget = (RulerWidget) inflater.inflate(R.layout.map_ruler, mapHudLayout, false);
+			mapHudLayout.addWidget(rulerWidget);
 
 			registerAllControls(mapActivity);
 			recreateControls();
@@ -118,7 +125,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
+			mapHudLayout.removeWidget(rulerWidget);
 
+			mapHudLayout = null;
 			topWidgetsPanel = null;
 			bottomWidgetsPanel = null;
 			leftWidgetsPanel = null;
