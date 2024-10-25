@@ -496,12 +496,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				OBDConnectionState.DISCONNECTED,
 				deviceToConnect)
 			LOG.error("Can't connect to device. $error")
-			app.runInUIThread {
-				Toast.makeText(
-					activity,
-					"Can\'t connect to ${connectedDevice.getAliasName(activity)}",
-					Toast.LENGTH_LONG).show()
-			}
 		}
 	}
 
