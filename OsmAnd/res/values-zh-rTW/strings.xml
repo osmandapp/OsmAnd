@@ -5631,4 +5631,5 @@
     <string name="obd_throttle_position">油門位置</string>
     <string name="obd_fuel_pressure">燃料壓力</string>
     <string name="obd_fuel_pressure_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
+    <string name="bt_start_pair_failed">無法啟動與裝置的配對</string>
 </resources>
