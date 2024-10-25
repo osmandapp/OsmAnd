@@ -69,8 +69,7 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 	@Override
 	@NonNull
 	public Session onCreateSession() {
-		OsmandApplication app = getApp();
-		startForegroundWithPermission(app);
+		startForegroundWithPermission();
 		NavigationSession session = new NavigationSession();
 		session.getLifecycle()
 				.addObserver(new DefaultLifecycleObserver() {
@@ -84,11 +83,11 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 		return session;
 	}
 
-	private void startForegroundWithPermission(@NonNull OsmandApplication app) {
-		if (!foreground && app.getCarNavigationSession() != null && OsmAndLocationProvider.isLocationPermissionAvailable(app)) {
+	private void startForegroundWithPermission() {
+		if (!foreground && OsmAndLocationProvider.isLocationPermissionAvailable(getApp())) {
 			foreground = true;
-			Notification notification = app.getNotificationHelper().buildCarAppNotification();
-			startForeground(app.getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
+			Notification notification = getApp().getNotificationHelper().buildCarAppNotification();
+			startForeground(getApp().getNotificationHelper().getOsmandNotificationId(NotificationType.CAR_APP), notification);
 		}
 	}
 
@@ -96,7 +95,7 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 		List<String> permissionsList = Arrays.asList(permissions);
 		if (getApp().getCarNavigationSession() != null && permissionsList.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
 				permissionsList.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-			startForegroundWithPermission(getApp());
+			startForegroundWithPermission();
 		}
 	}
 
