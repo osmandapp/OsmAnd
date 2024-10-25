@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -159,12 +160,13 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				val connectedDevice = plugin.getConnectedDeviceInfo()
 				val connectedDevices: List<BTDeviceInfo> =
 					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
-				val disconnectedDevices =
-					plugin.getUsedOBDDevicesList().filter { it.address != connectedDevice?.address }
-						.toMutableList()
-				if (connectedDevices.isEmpty() && disconnectedDevices.isEmpty() && settings.SIMULATE_OBD_DATA.get()) {
-					disconnectedDevices.add(BTDeviceInfo("Simulation Device", ""))
+				val usedDevices = plugin.getUsedOBDDevicesList().toMutableList()
+				if (settings.SIMULATE_OBD_DATA.get()) {
+					usedDevices.add(BTDeviceInfo("Simulation Device", ""))
 				}
+				val disconnectedDevices =
+					usedDevices.filter { it.address != connectedDevice?.address }
+						.toMutableList()
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
 					contentView?.visibility = View.GONE
@@ -245,7 +247,18 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 
 	override fun onStateChanged(
 		state: VehicleMetricsPlugin.OBDConnectionState,
-		deviceInfo: BTDeviceInfo?) {
-		app.runInUIThread { updatePairedSensorsList() }
+		deviceInfo: BTDeviceInfo) {
+		app.runInUIThread {
+			activity?.let {
+				val textId = when (state) {
+					VehicleMetricsPlugin.OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
+					VehicleMetricsPlugin.OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
+					VehicleMetricsPlugin.OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
+				}
+				Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
+					.show()
+			}
+			updatePairedSensorsList()
+		}
 	}
 }
