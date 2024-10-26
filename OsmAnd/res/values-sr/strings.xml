@@ -5643,4 +5643,9 @@
     <string name="obd_throttle_position_desc">Приказује притисак горива у возилу (манометарски притисак) добијен од днв скенера</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Приказује потрошњу горива возила на основу прорачуна (%/h)</string>
     <string name="bt_start_pair_failed">Није могуће покренути упаривање са уређајем</string>
+    <string name="shared_string_dynamic">Динамички</string>
+    <string name="obd_connected_to_device">Повезано са %s</string>
+    <string name="obd_connecting_to_device">Повезивање са %s</string>
+    <string name="dynamic_icon_type_summary">Икона се мења на основу стања радње.</string>
+    <string name="obd_not_connected_to_device">Прекинута веза са %s</string>
 </resources>
