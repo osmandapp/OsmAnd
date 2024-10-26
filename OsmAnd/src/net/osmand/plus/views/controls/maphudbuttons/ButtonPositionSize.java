@@ -91,6 +91,12 @@ public class ButtonPositionSize {
 		return this;
 	}
 
+	public ButtonPositionSize setMargin(int marginX, int marginY) {
+		this.marginX = marginX;
+		this.marginY = marginY;
+		return this;
+	}
+
 	public boolean isLeft() {
 		return posH == POS_LEFT;
 	}
@@ -270,5 +276,4 @@ public class ButtonPositionSize {
 			toMove.marginY = space + overlap.marginY + overlap.height;
 		}
 	}
-
 }
