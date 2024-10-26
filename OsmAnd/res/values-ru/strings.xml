@@ -6040,4 +6040,9 @@
     <string name="obd_engine_oil_temperature">t° моторного масла</string>
     <string name="movies_list">Список роликов</string>
     <string name="bt_start_pair_failed">Невозможно инициировать сопряжение с устройством</string>
+    <string name="shared_string_dynamic">Динамический</string>
+    <string name="obd_connected_to_device">Подключено к %s</string>
+    <string name="obd_not_connected_to_device">Отключено от %s</string>
+    <string name="obd_connecting_to_device">Подключение к %s</string>
+    <string name="dynamic_icon_type_summary">Значок меняется в зависимости от состояния действия.</string>
 </resources>
