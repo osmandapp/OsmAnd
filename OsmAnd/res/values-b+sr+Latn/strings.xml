@@ -5647,4 +5647,9 @@
     <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
     <string name="obd_engine_oil_temperature_desc">Prikazuje temperaturu motornog ulja vozila dobijenu iz obd skenera</string>
     <string name="bt_start_pair_failed">Nije moguće pokrenuti uparivanje s uređajem</string>
+    <string name="shared_string_dynamic">Dinamično</string>
+    <string name="obd_connected_to_device">Povezan na %s</string>
+    <string name="obd_connecting_to_device">Povezivanje s %s</string>
+    <string name="dynamic_icon_type_summary">Ikona se menja na temelju stanja akcije.</string>
+    <string name="obd_not_connected_to_device">Isključeno iz %s</string>
 </resources>
