@@ -5639,4 +5639,9 @@
     <string name="obd_calculated_engine_load_desc">Megjeleníti a jármű számított motorterhelését az érzékelő alapján</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti számítások alapján a jármű üzemanyag-fogyasztási arányát (%/óra)</string>
     <string name="bt_start_pair_failed">Nem lehet kezdeményezni a párosítást az eszközzel</string>
+    <string name="obd_not_connected_to_device">Lecsatlakozva erről: %s</string>
+    <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
+    <string name="shared_string_dynamic">Dinamikus</string>
+    <string name="obd_connected_to_device">Csatlakozva ehhez: %s</string>
+    <string name="obd_connecting_to_device">Csatlakozás ehhez: %s</string>
 </resources>
