@@ -5700,4 +5700,15 @@
     <string name="quick_action_drawer_desc">Przełącznik do pokazywania lub ukrywania menu bocznego.</string>
     <string name="quick_action_drawer_title">Menu boczne</string>
     <string name="shared_string_interface">Interfejs</string>
+    <string name="obd_fuel_consumption_rate_l_km">Wskaźnik zużycia paliwa (l/km)</string>
+    <string name="shared_string_dynamic">Dynamiczny</string>
+    <string name="obd_connected_to_device">Połączono z %s</string>
+    <string name="obd_not_connected_to_device">Rozłączono z %s</string>
+    <string name="obd_connecting_to_device">Łączę z %s</string>
+    <string name="bt_start_pair_failed">Nie można rozpocząć parowania z urządzeniem</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (l/km)</string>
+    <string name="simulate_obd">Symuluj dane obd</string>
+    <string name="dynamic_icon_type_summary">Ikona zmienia się w zależności od stanu akcji.</string>
 </resources>
