@@ -77,6 +77,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<Float> distances;
 		GeometryWayStyle<?> style;
 
+		int lineId;
+
 		public DrawPathData31(@NonNull List<Integer> indexes,
 		                      @NonNull List<Integer> tx, @NonNull List<Integer> ty,
 		                      @Nullable GeometryWayStyle<?> style) {
@@ -335,7 +337,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			VectorLine line = lines.get(i);
 			if (line.getLineId() == lineId) {
 				line.setStartingDistance(startingDistance);
-				return;
+			}
+			if (line.getLineId() < lineId) {
+				line.setIsHidden(true);
 			}
 		}
 	}
@@ -391,6 +395,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				dataArr.clear();
 			}
 			prevStyle = data.style;
+			data.lineId = lineId;
 			dataArr.add(data);
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {
@@ -398,8 +403,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		}
 	}
 
-	public void updatePath(@NonNull VectorLinesCollection collection, float startingDistance) {
-		updateVectorLine(collection, LINE_ID, startingDistance);
+	public void updatePath(@NonNull VectorLinesCollection collection, int lineId, float startingDistance) {
+		updateVectorLine(collection, lineId, startingDistance);
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,

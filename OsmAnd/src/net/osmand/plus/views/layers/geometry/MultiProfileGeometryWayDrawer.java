@@ -50,6 +50,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 				dataArr.clear();
 			}
 			prevStyle = style;
+			data.lineId = lineId;
 			if (style != null && !style.isGap()) {
 				dataArr.add(data);
 			}

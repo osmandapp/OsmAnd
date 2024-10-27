@@ -76,6 +76,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				dataArr.clear();
 			}
 			prevStyle = data.style;
+			data.lineId = lineId;
 			dataArr.add(data);
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {

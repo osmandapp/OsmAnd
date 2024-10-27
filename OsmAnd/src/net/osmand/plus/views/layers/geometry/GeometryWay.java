@@ -30,7 +30,7 @@ import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
 
-public abstract class GeometryWay<T extends GeometryWayContext, D extends GeometryWayDrawer<T>> {
+public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends GeometryWayDrawer<T>> {
 
 	protected static final int INITIAL_POINT_INDEX_SHIFT = 1 << 30;
 	private final Log log = PlatformUtil.getLog(GeometryWay.class);
@@ -60,6 +60,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		int getSize();
 
 		float getHeight(int index);
+
+		boolean isFirstLastLocation(int index);
 	}
 
 	public GeometryWay(T context, D drawer) {
@@ -212,11 +214,12 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		clearArrays();
 
 		GeometryWayStyle<?> defaultWayStyle = getDefaultWayStyle();
+		GeometryWayStyle<?> walkWayStyle = new GeometryWalkWayStyle(getContext());
 		GeometryWayStyle<?> style = defaultWayStyle;
 		boolean previousVisible = false;
 		if (lastProjection != null) {
 			previousVisible = addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-					style, previousVisible, lastProjection, startLocationIndex);
+					startLocationIndex == 0 ? walkWayStyle : defaultWayStyle, previousVisible, lastProjection, startLocationIndex);
 		}
 		Location nextVisiblePoint = getNextVisiblePoint();
 		if (nextVisiblePoint != null) {
@@ -239,6 +242,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 		for (int i = startLocationIndex - (hasMapRenderer  && startLocationIndex > 0 ? 1 : 0); i < locationProvider.getSize(); i++) {
 			style = getStyle(i, defaultWayStyle);
+			if (locationProvider.isFirstLastLocation(i)
+					|| (i < locationProvider.getSize() - 1 && locationProvider.isFirstLastLocation(i + 1))) {
+				style = walkWayStyle;
+			}
 			if (shouldSkipLocation(simplification, styleMap, i)) {
 				continue;
 			}
@@ -257,7 +264,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						addLocation(tb, previous, dist, style, points);
 					} else if (lastProjection != null) {
 						addLocation(tb, lastProjection.getLatitude(), lastProjection.getLongitude(), i - 1, dist, true,
-								getStyle(i - 1, style), points); // first point
+								getStyle(i - 1, walkWayStyle), points); // first point
 					}
 				}
 				addLocation(tb, i, dist, style, points);
@@ -387,6 +394,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		List<List<DrawPathData31>> croppedPathsData31 = new ArrayList<>();
 		boolean drawNext = false;
 		float passedDist = 0;
+		int passedLineId = 0;
 		int firstX31 = -1;
 		int firstY31 = -1;
 		boolean create = !previousVisible || startLocationIndexCached == -1;
@@ -444,7 +452,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						if (!update && !this.points.isEmpty() && firstX31 != -1) {
 							GeometryWayPoint firstPnt = this.points.get(0);
 							passedDist += (float) MapUtils.measuredDist31(firstX31, firstY31, firstPnt.tx31, firstPnt.ty31);
-							update = true;
+							passedLineId = pathData.lineId;
+							update = passedLineId > 0;
 						}
 					} else {
 						drawNext = true;
@@ -458,13 +467,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					}
 				}
 			}
-			if (create) {
+			if (create && !newPathsDataList.isEmpty()) {
 				croppedPathsData31.add(newPathsDataList);
 				drawPathLine(tb, newPathsDataList);
 			}
 		}
 		if (update) {
-			updatePathLine(passedDist);
+			updatePathLine(passedLineId, passedDist);
 			if (!create) {
 				return null;
 			}
@@ -608,12 +617,12 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 	}
 
-	private void updatePathLine(float startingDistance) {
+	private void updatePathLine(int lineId, float startingDistance) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 			if (vectorLinesCollection != null) {
-				drawer.updatePath(vectorLinesCollection, startingDistance);
+				drawer.updatePath(vectorLinesCollection, lineId, startingDistance);
 			}
 		}
 	}
