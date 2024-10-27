@@ -5640,4 +5640,9 @@
     <string name="bt_start_pair_failed">Impossible d\'amorcer l\'association avec l\'appareil</string>
     <string name="obd_calculated_engine_load_desc">Affiche la charge moteur calculée à partir du capteur</string>
     <string name="obd_calculated_engine_load">Charge moteur calculée</string>
+    <string name="shared_string_dynamic">Dynamique</string>
+    <string name="obd_connected_to_device">Connecté à %s</string>
+    <string name="obd_not_connected_to_device">Déconnecté de %s</string>
+    <string name="obd_connecting_to_device">Connexion en cours à %s</string>
+    <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
 </resources>

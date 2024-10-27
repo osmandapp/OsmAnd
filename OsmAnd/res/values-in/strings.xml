@@ -5994,4 +5994,26 @@
     <string name="speedometer_maximum">Maksimum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/j</string>
+    <string name="dynamic_icon_type_summary">Ikon berubah berdasarkan keadaan tindakan.</string>
+    <string name="bt_start_pair_failed">Tidak dapat memulai penyandingan dengan perangkat</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarka perhitungan (%/j)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Tingkat konsumsi bahan bakar (l/km)</string>
+    <string name="obd_engine_runtime">Waktu berjalan mesin</string>
+    <string name="obd_calculated_engine_load_desc">Menampilkan muatan mesin kendaraan yang telah dihitung berdasarkan sensor</string>
+    <string name="obd_not_connected_to_device">Terputus dari %s</string>
+    <string name="obd_connected_to_device">Terhubung ke %s</string>
+    <string name="shared_string_dynamic">Dinamis</string>
+    <string name="obd_connecting_to_device">Menghubungkan ke %s</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan perhitungan (l/km)</string>
+    <string name="simulate_obd">Simulasikan data obd</string>
+    <string name="obd_engine_runtime_desc">Menampilkan waktu berjalan mesin kendaraan dari pemindai obd</string>
+    <string name="obd_throttle_position">Posisi throttle</string>
+    <string name="obd_throttle_position_desc">Menampilkan tekanan bahan bakar kendaraan (pengukur tekanan) dari pemindai obd</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Tekanan bahan bakar</string>
+    <string name="obd_fuel_pressure_desc">Menampilkan tekanan bahan bakar kendaraan (pengukur tekanan) dari pemindai obd</string>
+    <string name="obd_calculated_engine_load">Muatan mesin terhitung</string>
+    <string name="obd_engine_oil_temperature">Suhu minyak mesin</string>
+    <string name="obd_engine_oil_temperature_desc">Menampilkan suhu minyak mesin kendaraan dari pemindai obd</string>
 </resources>

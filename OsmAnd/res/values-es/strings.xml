@@ -6035,4 +6035,9 @@
     <string name="kpa_unit">kPa</string>
     <string name="obd_calculated_engine_load_desc">Muestra la carga del motor calculada del vehículo basada en el sensor</string>
     <string name="bt_start_pair_failed">No se puede iniciar el emparejamiento con el dispositivo</string>
+    <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>
+    <string name="shared_string_dynamic">Dinámico</string>
+    <string name="obd_connected_to_device">Conectado a %s</string>
+    <string name="obd_not_connected_to_device">Desconectado de %s</string>
+    <string name="obd_connecting_to_device">Connectando a %s</string>
 </resources>
