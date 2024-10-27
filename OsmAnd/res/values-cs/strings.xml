@@ -5635,4 +5635,10 @@
     <string name="obd_widget_vehicle_speed">Rychlost vozidla</string>
     <string name="obd_widget_engine_speed">Otáčky motoru</string>
     <string name="connect_obd_instructions_step">1. Připojte skener k portu OBD-II vašeho vozidla.\n\n 2. Zapněte motor vašeho vozidla\n\n 3. Povolte na svém zařízení Bluetooth\n\n 4. Klepněte na \'%1$s\' a vyberte svůj skener ze seznamu.</string>
+    <string name="obd_connected_to_device">Připojeno k %s</string>
+    <string name="obd_not_connected_to_device">Odpojeno od %s</string>
+    <string name="bt_start_pair_failed">Nelze zahájit párování se zařízením</string>
+    <string name="dynamic_icon_type_summary">Ikona se mění podle stavu akce.</string>
+    <string name="shared_string_dynamic">Dynamický</string>
+    <string name="obd_connecting_to_device">Připojení k %s</string>
 </resources>
