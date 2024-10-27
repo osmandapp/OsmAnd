@@ -5055,4 +5055,10 @@
     <string name="obd_vehicle_info">פרטי כלי הרכב</string>
     <string name="obd_how_to_connect">איך להתחבר:</string>
     <string name="speedometer_maximum">מרבי</string>
+    <string name="bt_start_pair_failed">לא ניתן להתחיל צימוד עם התקן</string>
+    <string name="shared_string_dynamic">דינמי</string>
+    <string name="obd_connected_to_device">מחובר אל %s</string>
+    <string name="dynamic_icon_type_summary">שינויי סמל לפי מצב פעולה.</string>
+    <string name="obd_not_connected_to_device">מנותק מ־%s</string>
+    <string name="obd_connecting_to_device">התחברות אל %s</string>
 </resources>
