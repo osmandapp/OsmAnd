@@ -5634,7 +5634,7 @@
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
     <string name="obd_engine_runtime_desc">Muestra el tiempo de funcionamiento del motor, según el escáner OBD</string>
     <string name="simulate_obd">Simular datos OBD</string>
-    <string name="obd_throttle_position">Ubicación del acelerador</string>
+    <string name="obd_throttle_position">Posición del acelerador</string>
     <string name="obd_throttle_position_desc">Muestra la presión del combustible (presión manométrica) según el escáner OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>
