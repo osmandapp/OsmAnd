@@ -367,7 +367,7 @@ object OBDDataComputer {
 		}
 
 		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
-			val first = locValues[0]
+			val first = locValues[locValues.size - 2]
 			val last = locValues[locValues.size - 1]
 			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 			val diffTime = last.timestamp - first.timestamp
