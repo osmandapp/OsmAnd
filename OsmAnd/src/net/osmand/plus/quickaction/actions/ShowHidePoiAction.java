@@ -19,18 +19,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.ViewCreator;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class ShowHidePoiAction extends QuickAction {
 	private static final int defaultActionNameId = R.string.poi;
@@ -108,7 +107,7 @@ public class ShowHidePoiAction extends QuickAction {
 		boolean currentFilters = isCurrentFilters(app, poiFilters);
 
 		mapActivity.getFragmentsHelper().closeQuickSearch();
-		helper.clearGeneralSelectedPoiFilters();
+		helper.clearAllSelectedPoiFilters();
 		if (!currentFilters) {
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
