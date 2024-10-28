@@ -289,6 +289,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					AmenityInfoRow infoRow = createAmenityInfoRow(context, localizedKey, localizedValue, null);
 					if (infoRow != null) {
 						infoRows.add(infoRow);
+						hasWiki = false; // allow another hasWiki at return
 					}
 				}
 			}
