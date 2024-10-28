@@ -5632,4 +5632,9 @@
     <string name="obd_fuel_pressure">燃料壓力</string>
     <string name="obd_fuel_pressure_desc">顯示從 OBD 掃描器取得的車輛燃料壓力（表壓力）</string>
     <string name="bt_start_pair_failed">無法啟動與裝置的配對</string>
+    <string name="shared_string_dynamic">動態</string>
+    <string name="obd_connected_to_device">已連線至 %s</string>
+    <string name="obd_not_connected_to_device">與 %s 斷線</string>
+    <string name="obd_connecting_to_device">正在連線至 %s</string>
+    <string name="dynamic_icon_type_summary">圖示會根據動作狀態變更。</string>
 </resources>
