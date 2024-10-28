@@ -47,6 +47,14 @@ public class CollatorStringMatcher implements StringMatcher {
 		
 	}
 
+	public static void main(String[] args) {
+		CollatorStringMatcher stringMatcher = new CollatorStringMatcher("andreas-hofer-straße", StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+		boolean b1 = stringMatcher.matches("Andreas-Hofer-Straße - Via Andreas Hofer");
+		boolean b2 = stringMatcher.matches("Andreas Hofer Straße  - Via Andreas Hofer");
+		System.out.println(b1 ? "b1=true" : "b1=false");
+		System.out.println(b2 ? "b2=true" : "b2=false");
+	}
+
 	public Collator getCollator() {
 		return collator;
 	}
@@ -195,7 +203,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		return fullText;
 	}
 
-	private static boolean isSpace(char c){
+	public static boolean isSpace(char c){
 		return !Character.isLetter(c) && !Character.isDigit(c);
 	}
 	
