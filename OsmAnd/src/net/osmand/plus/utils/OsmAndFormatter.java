@@ -11,8 +11,6 @@ import android.text.format.DateUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
@@ -328,6 +326,7 @@ public class OsmAndFormatter {
 		public static final boolean DEFAULT_FORCE_TRAILING = true;
 		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
 		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
+		boolean forcePreciseValue = false;
 		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
 
 		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
@@ -351,6 +350,14 @@ public class OsmAndFormatter {
 		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
 			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
 			return this;
+		}
+
+		public void setForcePreciseValue(boolean forceDecimalPlaces) {
+			this.forcePreciseValue = forceDecimalPlaces;
+		}
+
+		public void setExtraDecimalPrecision(int extraDecimalPrecision) {
+			this.extraDecimalPrecision = extraDecimalPrecision;
 		}
 
 	}
@@ -405,7 +412,9 @@ public class OsmAndFormatter {
 		float floatDistance = meters / mainUnitInMeters;
 		boolean forceTrailingZeros = pms.forceTrailingZerosInDecimalMainUnit;
 		int decimalPrecision = pms.extraDecimalPrecision;
-		if (meters >= 100 * mainUnitInMeters) {
+		if(pms.forcePreciseValue) {
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
+		} else if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
 					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
@@ -445,7 +454,6 @@ public class OsmAndFormatter {
 			return formatValue(m, R.string.m, forceTrailingZeros, 0, ctx);
 		}
 	}
-
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
