@@ -390,7 +390,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
 				wikiAmenity.setLocation(getLatLon());
 				String name = additionalInfoFiltered.get("name");
-				if (Algorithms.isEmpty(name)) {
+				if (!Algorithms.isEmpty(name)) {
 					wikiAmenity.setName(name);
 				}
 
