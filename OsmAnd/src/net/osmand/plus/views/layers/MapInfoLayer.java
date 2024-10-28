@@ -120,12 +120,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			if (bottomWidgetsPanel != null) {
 				bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
 			}
+			if (mapHudLayout != null) {
+				mapHudLayout.removeWidget(rulerWidget);
+			}
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 
 			resetCashedTheme();
 			widgetRegistry.clearWidgets();
-			mapHudLayout.removeWidget(rulerWidget);
 
 			mapHudLayout = null;
 			topWidgetsPanel = null;
