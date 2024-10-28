@@ -379,15 +379,15 @@ public class RenderingRuleSearchRequest {
 	}
 
 	@Nullable
-	public String searchIconByTags(@NotNull Map<String, String> tags) {
-		return searchBestPropertyByTransformedTags(tags, RenderingRulesStorage.POINT_RULES,
+	public String searchIconByTags(@NotNull Map<String, String> transformedTags) {
+		return searchTopOrderedPropertyByTags(transformedTags, RenderingRulesStorage.POINT_RULES,
 				storage.PROPS.R_ICON, storage.PROPS.R_ICON_ORDER);
 	}
 
 	@Nullable
-	private String searchBestPropertyByTransformedTags(@NotNull Map<String, String> transformedTags, int rulesNumber,
-	                                                  @NotNull RenderingRuleProperty mainStringProperty,
-	                                                  @Nullable RenderingRuleProperty orderIntProperty) {
+	private String searchTopOrderedPropertyByTags(@NotNull Map<String, String> transformedTags, int rulesNumber,
+	                                              @NotNull RenderingRuleProperty mainStringProperty,
+	                                              @Nullable RenderingRuleProperty orderIntProperty) {
 
 		Map<String, Integer> resultOrderMap = new HashMap<>();
 
