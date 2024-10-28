@@ -5654,4 +5654,10 @@
     <string name="obd_fuel_pressure_desc">Viser køretøjets brændstoftryk (målertryk) opnået fra obd-scanner</string>
     <string name="obd_engine_oil_temperature">Motoroliens temperatur</string>
     <string name="obd_engine_oil_temperature_desc">Viser køretøjets motorolietemperatur opnået fra obd-scanner</string>
+    <string name="shared_string_dynamic">Dynamisk</string>
+    <string name="obd_connecting_to_device">Forbinder til %s</string>
+    <string name="dynamic_icon_type_summary">Ikonet ændres baseret på handlingens tilstand.</string>
+    <string name="obd_connected_to_device">Tilsluttet %s</string>
+    <string name="obd_not_connected_to_device">Afkoblet fra %s</string>
+    <string name="bt_start_pair_failed">Kan ikke starte parring med enhed</string>
 </resources>
