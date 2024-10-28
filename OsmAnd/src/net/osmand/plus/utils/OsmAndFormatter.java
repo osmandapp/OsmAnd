@@ -328,6 +328,7 @@ public class OsmAndFormatter {
 		public static final boolean DEFAULT_FORCE_TRAILING = true;
 		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
 		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
+		boolean forceDecimalPlaces = false;
 		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
 
 		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
@@ -351,6 +352,14 @@ public class OsmAndFormatter {
 		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
 			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
 			return this;
+		}
+
+		public void setForceDecimalPlaces(boolean forceDecimalPlaces) {
+			this.forceDecimalPlaces = forceDecimalPlaces;
+		}
+
+		public void setExtraDecimalPrecision(int extraDecimalPrecision) {
+			this.extraDecimalPrecision = extraDecimalPrecision;
 		}
 
 	}
@@ -444,6 +453,34 @@ public class OsmAndFormatter {
 			}
 			return formatValue(m, R.string.m, forceTrailingZeros, 0, ctx);
 		}
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedPreciseDistanceValue(float meters, @NonNull OsmandApplication ctx,
+	                                                              OsmAndFormatterParams pms) {
+		int mainUnitStr;
+		float mainUnitInMeters;
+		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
+		if (pms == null) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
+		if (pms.isUseLowerBound() && ctx.getSettings().PRECISE_DISTANCE_NUMBERS.get()) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			mainUnitStr = R.string.km;
+			mainUnitInMeters = METERS_IN_KILOMETER;
+		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+			mainUnitStr = R.string.nm;
+			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+		} else {
+			mainUnitStr = R.string.mile;
+			mainUnitInMeters = METERS_IN_ONE_MILE;
+		}
+		float floatDistance = meters / mainUnitInMeters;
+		boolean forceTrailingZeros = pms.forceTrailingZerosInDecimalMainUnit;
+		int decimalPrecision = pms.extraDecimalPrecision;
+		return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
 	}
 
 
