@@ -149,7 +149,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		defaultSpeedPref.setKey(settings.FUEL_TANK_CAPACITY.getId());
 		defaultSpeedPref.setTitle(R.string.fuel_tank_capacity);
 		defaultSpeedPref.setSummary(FuelCapacityHelper.getFormattedValue(app, settings.UNIT_OF_VOLUME.get(), getSelectedAppMode()).format(app));
-		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
+		defaultSpeedPref.setIcon(R.drawable.ic_action_fuel_tank);
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);
 	}

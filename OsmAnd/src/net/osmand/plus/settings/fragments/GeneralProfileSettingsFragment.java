@@ -227,7 +227,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		unitOfVolumePref.setEntries(entries);
 		unitOfVolumePref.setEntryValues(entryValues);
 		unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
-		unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+		unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
 	}
 
 	private void setupPreciseDistanceNumbersPref() {
