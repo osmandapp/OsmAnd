@@ -1493,16 +1493,26 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
-	public BinaryMapIndexReader[] getQuickSearchFiles() {
+	public BinaryMapIndexReader[] getQuickSearchFiles(List<String> ignoreExtensions) {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
-			BinaryMapIndexReader shallowReader = r.getShallowReader();
-			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData()) &&
-					!r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
-				if (reader != null) {
-					readers.add(reader);
+			boolean allow = true;
+			if (!Algorithms.isEmpty(ignoreExtensions)) {
+				for (String ext : ignoreExtensions) {
+					if (r.getFileName().endsWith(ext)) {
+						allow = false;
+						break;
+					}
+				}
+			}
+			if (allow) {
+				BinaryMapIndexReader shallowReader = r.getShallowReader();
+				if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
+					BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
+					if (reader != null) {
+						readers.add(reader);
+					}
 				}
 			}
 		}

@@ -547,10 +547,13 @@ public class MapPoiTypes {
                                 }
                             }
                         }
-	                    default -> log.warn("Unknown start tag encountered: " + name);
+                        case "poi_types" -> {
+                            // just ignore the root tag of poi_types.xml
+                        }
+                        default -> log.warn("Unknown start tag encountered: " + name);
                     }
-				} else if (tok == XmlPullParser.END_TAG) {
-					String name = parser.getName();
+                } else if (tok == XmlPullParser.END_TAG) {
+                    String name = parser.getName();
                     switch (name) {
                         case "poi_filter" -> {
                             if (!lastFilterPoiAdditionalsCategories.isEmpty()) {
