@@ -52,8 +52,6 @@ public class VoiceRouter {
 	private static final int STATUS_TOLD = 5;
 
 	private static final int SPEEDING_ANNOUNCEMENTS_INTERVAL_MS = 120_000;
-	private static final int SPEEDING_ANNOUNCEMENT_CANCEL_MS = 30_000;
-	private static final int SPEEDING_ANNOUNCEMENT_WAITING_MS = 5_000;
 
 	public static final String TO_REF = "toRef";
 	public static final String TO_STREET_NAME = "toStreetName";
@@ -74,7 +72,6 @@ public class VoiceRouter {
 	private boolean playedAndArriveAtTarget;
 	private float playGoAheadDist;
 	private long lastAnnouncedSpeedLimit;
-	private long waitAnnouncedSpeedLimit;
 	private long lastAnnouncedOffRoute;
 	private long waitAnnouncedOffRoute;
 	private boolean suppressDest;
@@ -367,30 +364,18 @@ public class VoiceRouter {
 
 	public void announceSpeedAlarm(int maxSpeed, float speed) {
 		long now = System.currentTimeMillis();
-		if (waitAnnouncedSpeedLimit == 0) {
-			//  Wait 120 seconds after previous announcement
-			if (now - lastAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENTS_INTERVAL_MS) {
-				waitAnnouncedSpeedLimit = now;
-			}
-		} else {
-			// If we wait before more than 30 seconds (reset counter)
-			if (now - waitAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENT_CANCEL_MS) {
-				waitAnnouncedSpeedLimit = 0;
-			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()) {
-				// Wait 5 seconds before playing announcement
-				if (now - waitAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENT_WAITING_MS) {
-					CommandBuilder p = getNewCommandPlayerToPlay();
-					if (p != null) {
-						lastAnnouncedSpeedLimit = now;
-						waitAnnouncedSpeedLimit = 0;
-						p.speedAlarm(maxSpeed, speed);
-					}
-					play(p);
+		if (now - lastAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENTS_INTERVAL_MS) {
+			if (router.getSettings().SPEAK_SPEED_LIMIT.get()) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					lastAnnouncedSpeedLimit = now;
+					p.speedAlarm(maxSpeed, speed);
 				}
+				play(p);
 			}
 		}
 	}
-	
+
 	private boolean isTargetPoint(NextDirectionInfo info) {
 		boolean in = info != null && info.intermediatePoint;
 		boolean target = info == null || info.directionInfo == null
