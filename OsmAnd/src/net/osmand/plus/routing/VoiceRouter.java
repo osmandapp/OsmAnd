@@ -51,6 +51,10 @@ public class VoiceRouter {
 	private static final int STATUS_TURN = 4;
 	private static final int STATUS_TOLD = 5;
 
+	private static final int SPEEDING_ANNOUNCEMENTS_INTERVAL_MS = 120_000;
+	private static final int SPEEDING_ANNOUNCEMENT_CANCEL_MS = 30_000;
+	private static final int SPEEDING_ANNOUNCEMENT_WAITING_MS = 5_000;
+
 	public static final String TO_REF = "toRef";
 	public static final String TO_STREET_NAME = "toStreetName";
 	public static final String TO_DEST = "toDest";
@@ -362,24 +366,27 @@ public class VoiceRouter {
 	}
 
 	public void announceSpeedAlarm(int maxSpeed, float speed) {
-		long ms = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 		if (waitAnnouncedSpeedLimit == 0) {
-			//  Wait 10 seconds before announcement
-			if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
-				waitAnnouncedSpeedLimit = ms;
+			//  Wait 120 seconds after previous announcement
+			if (now - lastAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENTS_INTERVAL_MS) {
+				waitAnnouncedSpeedLimit = now;
 			}
 		} else {
-			// If we wait before more than 20 sec (reset counter)
-			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
+			// If we wait before more than 30 seconds (reset counter)
+			if (now - waitAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENT_CANCEL_MS) {
 				waitAnnouncedSpeedLimit = 0;
-			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get() && ms - waitAnnouncedSpeedLimit > 10 * 1000) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					lastAnnouncedSpeedLimit = ms;
-					waitAnnouncedSpeedLimit = 0;
-					p.speedAlarm(maxSpeed, speed);
+			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()) {
+				// Wait 5 seconds before playing announcement
+				if (now - waitAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENT_WAITING_MS) {
+					CommandBuilder p = getNewCommandPlayerToPlay();
+					if (p != null) {
+						lastAnnouncedSpeedLimit = now;
+						waitAnnouncedSpeedLimit = 0;
+						p.speedAlarm(maxSpeed, speed);
+					}
+					play(p);
 				}
-				play(p);
 			}
 		}
 	}
