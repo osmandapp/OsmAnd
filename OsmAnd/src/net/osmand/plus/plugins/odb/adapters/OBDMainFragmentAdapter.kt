@@ -188,8 +188,14 @@ class OBDMainFragmentAdapter(
 			}
 			val value = plugin.getWidgetValue(widget)
 			val unit = plugin.getWidgetUnit(widget)
+			val hideUnit = value == "N/A" || value == "-"
+			if (hideUnit) {
+				AndroidUiHelper.updateVisibility(unitView, false)
+			} else {
+				AndroidUiHelper.updateVisibility(unitView, true)
+				unitView.text = unit
+			}
 			valueView.text = value
-			unitView.text = unit
 			val valuePair = Pair(value, unit);
 			lastSavedValueMap[widget] = valuePair
 		}
