@@ -64,8 +64,8 @@ class MapButtonIconController extends EditorIconController {
 
 	@Override
 	protected void initIconCategories() {
-		initCustomCategory();
 		askInitDynamicCategory();
+		initCustomCategory();
 		super.initIconCategories();
 	}
 
@@ -93,11 +93,11 @@ class MapButtonIconController extends EditorIconController {
 	}
 
 	protected void askInitDynamicCategory() {
-		if (buttonState instanceof QuickActionButtonState state && state.isSingleAction()) {
+//		if (buttonState instanceof QuickActionButtonState state && state.isSingleAction()) {
 			String translatedName = app.getString(R.string.shared_string_dynamic);
 			dynamicCategory = new IconsCategory(DYNAMIC_KEY, translatedName, new ArrayList<>(), true);
 			categories.add(dynamicCategory);
-		}
+//		}
 	}
 
 	public void updateAfterReset() {
@@ -115,7 +115,7 @@ class MapButtonIconController extends EditorIconController {
 	@NonNull
 	@Override
 	protected IconsCategory findInitialIconCategory() {
-		return findIconCategory(buttonState.getSavedIconName());
+		return findIconCategory(appearanceParams.getIconName());
 	}
 
 	@NonNull

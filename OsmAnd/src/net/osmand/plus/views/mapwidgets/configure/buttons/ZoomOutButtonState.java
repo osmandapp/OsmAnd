@@ -53,8 +53,8 @@ public class ZoomOutButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_zoom_out", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return "ic_zoom_out";
 	}
 
 	@NonNull

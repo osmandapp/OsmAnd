@@ -127,11 +127,10 @@ public class CompassButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
+	public String getDefaultIconName() {
 		CompassMode compassMode = settings.getCompassMode();
 		boolean nightMode = app.getDaynightHelper().isNightMode();
-		String iconName = app.getResources().getResourceEntryName(compassMode.getIconId().getIconId(nightMode));
-		return new ButtonAppearanceParams(iconName, getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return app.getResources().getResourceEntryName(compassMode.getIconId().getIconId(nightMode));
 	}
 
 	@Nullable

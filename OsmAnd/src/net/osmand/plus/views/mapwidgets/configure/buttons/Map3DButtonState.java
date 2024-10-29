@@ -79,9 +79,8 @@ public class Map3DButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		String iconName = isFlatMapMode() ? "ic_action_3d" : "ic_action_2d";
-		return new ButtonAppearanceParams(iconName, getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return isFlatMapMode() ? "ic_action_3d" : "ic_action_2d";
 	}
 
 	public boolean isFlatMapMode() {

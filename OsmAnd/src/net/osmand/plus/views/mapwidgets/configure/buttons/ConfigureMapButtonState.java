@@ -60,9 +60,9 @@ public class ConfigureMapButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
+	public String getDefaultIconName() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		return new ButtonAppearanceParams(appMode.getIconName(), getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return appMode.getIconName();
 	}
 
 	@NonNull
