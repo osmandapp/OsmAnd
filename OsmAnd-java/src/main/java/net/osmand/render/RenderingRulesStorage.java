@@ -4,7 +4,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-import org.jetbrains.annotations.Nullable;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -701,7 +700,7 @@ public class RenderingRulesStorage {
 		return storage;
 	}
 
-	public static RenderingRulesStorage initWithStylesFromResources(@Nullable String... resourceFileNames) {
+	public static RenderingRulesStorage initWithStylesFromResources(String... resourceFileNames) {
 		try {
 			RenderingRulesStorage storage = null;
 			final String BASE_EXT = ".render.xml";

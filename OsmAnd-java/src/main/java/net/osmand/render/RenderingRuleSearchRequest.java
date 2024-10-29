@@ -8,8 +8,6 @@ import static net.osmand.render.RenderingRuleProperty.STRING_TYPE;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.util.Algorithms;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -61,7 +59,7 @@ public class RenderingRuleSearchRequest {
 	}
 
 	public static RenderingRuleSearchRequest initWithCustomProperties(RenderingRulesStorage renderingRules, int zoom,
-	                                                                  @Nullable Map<String, String> customProperties) {
+	                                                                  Map<String, String> customProperties) {
 		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(renderingRules);
 
 		for (RenderingRuleProperty customProp : renderingRules.PROPS.getCustomRules()) {
@@ -378,16 +376,14 @@ public class RenderingRuleSearchRequest {
 		return builder.toString();
 	}
 
-	@Nullable
-	public String searchIconByTags(@NotNull Map<String, String> transformedTags) {
+	public String searchIconByTags(Map<String, String> transformedTags) {
 		return searchTopOrderedPropertyByTags(transformedTags, RenderingRulesStorage.POINT_RULES,
 				storage.PROPS.R_ICON, storage.PROPS.R_ICON_ORDER);
 	}
 
-	@Nullable
-	private String searchTopOrderedPropertyByTags(@NotNull Map<String, String> transformedTags, int rulesNumber,
-	                                              @NotNull RenderingRuleProperty mainStringProperty,
-	                                              @Nullable RenderingRuleProperty orderIntProperty) {
+	private String searchTopOrderedPropertyByTags(Map<String, String> transformedTags, int rulesNumber,
+	                                              RenderingRuleProperty mainStringProperty,
+	                                              RenderingRuleProperty orderIntProperty) {
 
 		Map<String, Integer> resultOrderMap = new HashMap<>();
 
