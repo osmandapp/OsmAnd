@@ -2504,7 +2504,7 @@
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="enter_the_file_name">Escribe el nombre del archivo.</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
-    <string name="transport_nearby_routes">A menos de</string>
+    <string name="transport_nearby_routes">Dentro de</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
     <string name="dd_ddddd_format">GG.GGGGG°</string>
