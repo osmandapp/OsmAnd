@@ -52,6 +52,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -292,6 +293,30 @@ public class LocalItemUtils {
 			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static String getSizeDescription(@NonNull Context context, @NonNull Collection<BaseLocalItem> items) {
+		String formattedSize = AndroidUtils.formatSize(context, calculateItemsSize(items));
+		String prefix = isSizeCalculated(items) ? "" : "≥ ";
+		return prefix + formattedSize;
+	}
+
+	public static boolean isSizeCalculated(@NonNull Collection<BaseLocalItem> items) {
+		for (BaseLocalItem item : items) {
+			if (item instanceof LocalItem localItem && localItem.isSizeCalculationLimitReached()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static long calculateItemsSize(@NonNull Collection<BaseLocalItem> items) {
+		long size = 0;
+		for (BaseLocalItem item : items) {
+			size += item.getSize();
+		}
+		return size;
 	}
 
 	@NonNull

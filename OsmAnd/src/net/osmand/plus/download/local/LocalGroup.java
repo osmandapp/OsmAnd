@@ -56,24 +56,10 @@ public class LocalGroup {
 
 	@NonNull
 	public String getSizeDescription(@NonNull Context context) {
-		String formattedSize = AndroidUtils.formatSize(context, getSize());
-		return isSizeFullyCalculated() ? formattedSize : "≥ " + formattedSize;
-	}
-
-	public boolean isSizeFullyCalculated() {
-		for (BaseLocalItem item : items.values()) {
-			if (item instanceof LocalItem localItem && localItem.isSizeCalculationLimitReached()) {
-				return false;
-			}
-		}
-		return true;
+		return LocalItemUtils.getSizeDescription(context, items.values());
 	}
 
 	public long getSize() {
-		long size = 0;
-		for (BaseLocalItem item : items.values()) {
-			size += item.getSize();
-		}
-		return size;
+		return LocalItemUtils.calculateItemsSize(items.values());
 	}
 }
