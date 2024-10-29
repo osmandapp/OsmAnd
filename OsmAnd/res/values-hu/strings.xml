@@ -4637,12 +4637,7 @@
     <string name="wind_widget_desc">Megjeleníti a szelet a jelenlegi térképközéppontnál.</string>
     <string name="air_pressure_widget_desc">Megjeleníti a légnyomást a jelenlegi térképközéppontnál.</string>
     <string name="weather_widgets_secondary_desc">A mértékegységek az időjárás bővítmény beállításaiban módosíthatók.</string>
-    <string name="weather_plugin_description">Funkciók:
-\n- 24 órás és 7 napos időjárás-előrejelzés 5 rétegben
-\n- helyalapú modulok,
-\n- hőmérsékleti és légnyomásvonalak (izobárok).
-\n
-\nAz időjárási adatok szolgáltatója a Global Forecast System (GFS, %1$s).</string>
+    <string name="weather_plugin_description">Funkciók: \n- 24 órás és 7 napos időjárás-előrejelzés 5 rétegben \n- helyalapú modulok, \n- hőmérsékleti és légnyomásvonalak (izobárok).\n\nAz időjárási adatok szolgáltatója a Global Forecast System (GFS, %1$s).</string>
     <string name="map_widget_sunset_desc">Megjeleníti a következő napnyugta idejét vagy az addig hátralévő időt.</string>
     <string name="map_widget_sunrise_desc">Megjeleníti a következő napkelte idejét vagy az addig hátralévő időt.</string>
     <string name="shared_string_time_left">Hátralévő idő</string>
@@ -5069,7 +5064,7 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új widgetek: „Siklószám” és „Nap állása” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet widgethez \n \n • Bemutatjuk az \"Elérhető RAM\" widgetet</string>
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva \n \n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára \n \n • Továbbfejlesztett felső és alsó modulpanel az összes modul fogadásához \n \n • Továbbfejlesztett helyi erőforrás-kezelés \n \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz \n \n • Új modulok: „Siklószám” és „Nap állása” \n \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz \n \n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel \n \n • Az átlátszó állapotsorral kapcsolatos probléma javítva \n \n • Hozzáadott támogatás az ANT+ hőmérséklet modulhoz \n \n • Bemutatjuk az \"Elérhető RAM\" modult</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
     <string name="app_mode_baby_transport">Babakocsi</string>
     <string name="app_mode_paragliding">Siklóernyőzés</string>
@@ -5408,8 +5403,7 @@
     <string name="weather_screen">Időjárás-képernyő</string>
     <string name="quick_action_map_underlay">Alátétréteg</string>
     <string name="quick_action_remove_next_destination">Következő célpont</string>
-    <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s
-\nEnergiafogyasztás (mAh): %2$s</string>
+    <string name="energy_avg_info_description">Töltöttségi szint / perc: %1$s\nEnergiafogyasztás (mAh): %2$s</string>
     <string name="rendering_avg_info">Megjelenítési statisztika (1/5/15 perces átlagok)</string>
     <string name="rendering_avg_info_description">Képkocka/másodperc a legutóbbi 1000 képre: %1$s
 \nCPU alap: %2$s
@@ -5547,9 +5541,9 @@
     <string name="obd_battery_voltage">Akkumulátor feszültség</string>
     <string name="obd_engine_coolant_temp">Hűtőfolyadék hőmérséklete</string>
     <string name="obd_fuel_level">Üzemanyag-hatékonyság (%)</string>
-    <string name="obd_fuel_consumption_rate">Üzemanyag-fogyasztás</string>
+    <string name="obd_fuel_consumption_rate">Fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
-    <string name="obd_fuel_left_distance">Hátralévő üzemanyag (távolság)</string>
+    <string name="obd_fuel_left_distance">Maradék üzemanyag (távolság)</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
     <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz: * Motor fordulatszám * Üzemanyag-fogyasztás * Maradék üzemanyag * A motor indítása óta megtett távolság * Beszívott levegő hőmérséklete * Környezeti hőmérséklet * Hűtőfolyadék hőmérséklete * A jármű sebessége * Akkumulátor töltöttsége</string>
     <string name="obd_support">OBD támogatás</string>
@@ -5581,7 +5575,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Gomb OSM-szerkesztések megjelenítésére vagy rejtésére a térképen.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Krosszmotor utak</string>
     <string name="liter_per_hour">l/óra</string>
-    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a widgeteknél\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez</string>
+    <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a moduloknál\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
     <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Érintse meg a gombot a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
@@ -5590,7 +5584,7 @@
     <string name="connect_obd_instructions_step3">3. Engedélyezze a Bluetooth-t a telefonján</string>
     <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II szkennert a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
-    <string name="obd_fuel_left_liters">Hátralévő üzemanyag (liter)</string>
+    <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
     <string name="obd_vehicle_info">Jármű információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_step1">1. Csatlakoztassa a szkennert a járműve OBD-II portjához.</string>
@@ -5605,26 +5599,26 @@
     <string name="obd_searching_text">Szkennerek keresése</string>
     <string name="obd_device_forget_sensor">Szkenner elfelejtése</string>
     <string name="obd_device_forget_sensor_description">A szkenner törlődik a listáról. Ezt a szkennert bármikor újra párosíthatja.</string>
-    <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, az aktuális utca nevét és a sávinformációkat. A widgetek navigáció közben aktívak.</string>
+    <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, az aktuális utca nevét és a sávinformációkat. A modulok navigáció közben aktívak.</string>
     <string name="connect_obd_instructions_step">1. Csatlakoztassa a szkennert járműve OBD-II portjához.\n\n 2. Indítsa el a járműve motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson erre: „%1$s” és válassza ki a szkennert a listából.</string>
-    <string name="obd_fuel_consumption_rate_sensor">Üzemanyag-fogyasztás (érzékelő)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Számítások alapján megjeleníti a jármű üzemanyag-fogyasztását liter/órában</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Érzékelő adatai alapján megjeleníti a jármű üzemanyag-fogyasztását liter/órában</string>
+    <string name="obd_fuel_consumption_rate_sensor">Fogyasztás (érzékelő)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Megjeleníti a jármű számított időalapú üzemanyag-fogyasztását liter/órában</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Megjeleníti a jármű üzemanyag-fogyasztását liter/órában az érzékelő adatai alapján</string>
     <string name="obd_fuel_level_liter">Üzemanyagszint (l)</string>
     <string name="obd_fuel_level_percent">Üzemanyagszint (%)</string>
     <string name="obd_fuel_left_percent">Maradék üzemanyag (%)</string>
     <string name="obd_fuel_left_liter">Maradék üzemanyag (l)</string>
     <string name="obd_fuel_left_km">Megtehető táv (km)</string>
-    <string name="obd_fuel_consumption_rate_percent_hour">Üzemanyag-fogyasztás %/óra</string>
-    <string name="obd_fuel_consumption_rate_l_h">Üzemanyag-fogyasztás (l/óra)</string>
-    <string name="obd_fuel_consumption_rate_scanner">Üzemanyag fogyasztás (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Üzemanyag-fogyasztás l/óra</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Fogyasztás %/óra</string>
+    <string name="obd_fuel_consumption_rate_l_h">Fogyasztás (l/óra)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Fogyasztás (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fogyasztás l/óra</string>
     <string name="percent_hour">%/óra</string>
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="l_100km">l/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Üzemanyag fogyasztás (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Számítások alapján megjeleníti a jármű üzemanyag fogyasztását (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fogyasztás (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Megjeleníti a jármű számított távolságalapú üzemanyag fogyasztását (l/km)</string>
     <string name="obd_engine_runtime">Motor üzemideje</string>
     <string name="obd_throttle_position">Fojtószelep helyzete</string>
     <string name="simulate_obd">OBD adatok szimulálása</string>
@@ -5637,7 +5631,7 @@
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
     <string name="obd_calculated_engine_load_desc">Megjeleníti a jármű számított motorterhelését az érzékelő alapján</string>
-    <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti számítások alapján a jármű üzemanyag-fogyasztási arányát (%/óra)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti a jármű számított relatív üzemanyag-fogyasztási arányát (%/óra)</string>
     <string name="bt_start_pair_failed">Nem lehet kezdeményezni a párosítást az eszközzel</string>
     <string name="obd_not_connected_to_device">Lecsatlakozva erről: %s</string>
     <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
