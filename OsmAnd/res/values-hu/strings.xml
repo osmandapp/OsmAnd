@@ -773,28 +773,7 @@
     <string name="map_widget_vector_attributes">Megjelenítési tulajdonságok</string>
     <string name="map_widget_renderer">Térképstílus</string>
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
-\n
-\n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval.
-\n
-\n Néhány fontos funkció:
-\n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
-\n - kompakt vektoros térképek az egész világról
-\n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból
-\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés
-\n - Címek és helyek (érdekes pontok) offline keresése
-\n - Offline útvonaltervezés közepes távolságra
-\n - Autós, kerékpáros és gyalogos módok a következő beállításokkal:
-\n - éjszakai/nappali nézet automatikus átkapcsolása
-\n - sebességfüggő térképnagyítás
-\n - térképigazítás iránytű vagy mozgásirány szerint
-\n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok
-\n
-\n Az OsmAnd ezen ingyenes verziójának korlátozásai:
-\n - letölthető térképek számának korlátozása
-\n - wikipédia-POI offline elérés nélkül
-\n
-\n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Kérjük, fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - kompakt vektoros térképek az egész világról \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - éjszakai/nappali nézet automatikus átkapcsolása \n - sebességfüggő térképnagyítás \n - térképigazítás iránytű vagy mozgásirány szerint \n - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok \n \n Az OsmAnd ezen ingyenes verziójának korlátozásai: \n - letölthető térképek számának korlátozása \n - wikipédia-POI offline elérés nélkül \n \n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy általános adományt a https://osmand.net oldalon.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OSM adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval. \n \n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket. \n \n Néhány fontos funkció: \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén) \n - Kompakt vektoros térképek az egész világról \n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból \n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló \n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek testreszabható átlátszósággal, topográfiai jellemzőkkel, például szintvonalakkal/domborzatárnyékolással/lejtviszonyokkal \n - Címek és helyek (érdekes pontok) offline keresése \n - Offline útvonaltervezés közepes távolságra \n \n- Autós, kerékpáros és gyalogos módok a következő beállításokkal: \n - Éjszakai/nappali nézet automatikus átkapcsolása \n - Sebességfüggő térképnagyítás \n - Térképigazítás iránytű vagy mozgásirány szerint \n - Sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
@@ -825,7 +804,7 @@
     <string name="no_route">Nincs út</string>
     <string name="delete_target_point">Célpont törlése</string>
     <string name="intermediate_point">%1$s köztes célpont</string>
-    <string name="gps_not_available">Kérjük, engedélyezze a GPS-t a beállításokban</string>
+    <string name="gps_not_available">Engedélyezze a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyezze az „Utazás felvétele” bővítményt</string>
     <string name="non_optimal_route_calculation">Esetlegesen nem optimális útvonal tervezése nagyobb távolságokra</string>
@@ -892,7 +871,7 @@
     <string name="av_widget_action_descr">Alapértelmezett modulművelet:</string>
     <string name="av_widget_action">Alapértelmezett modulművelet</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Kérjük, fontolja meg a „Topográfia” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
+    <string name="srtm_paid_version_msg">Fontolja meg a „Topográfia” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Topográfia bővítmény</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">Szinkronizálja a hang- és videójegyzeteket a Dropbox fiókjával.</string>
@@ -934,7 +913,7 @@
     <string name="favourites_list_activity">Kedvenc kijelölése</string>
     <string name="local_openstreetmap_act_title">OSM-módosítások</string>
     <string name="shared_string_more_actions">További műveletek</string>
-    <string name="download_using_mobile_internet">Jelenleg nincs Wi-Fi kapcsolat. Szeretnéd a jelenlegi internetkapcsolatot használni a letöltéshez?</string>
+    <string name="download_using_mobile_internet">Jelenleg nincs Wi-Fi kapcsolat. Szeretné a jelenlegi internetkapcsolatot használni a letöltéshez?</string>
     <string name="cancel_route">Elveti az útvonalat\?</string>
     <string name="cancel_navigation">Navigáció megállítása</string>
     <string name="clear_destination">Célpont törlése</string>
@@ -947,7 +926,7 @@
     <string name="use_kalman_filter_compass_descr">Az iránytű olvasásakor csökkenti a zajt, de növeli a tehetetlenségét.</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
     <string name="local_indexes_cat_srtm">Szintvonalak</string>
-    <string name="wait_current_task_finished">Kérjük, várja meg, amíg a jelenlegi feladat befejeződik</string>
+    <string name="wait_current_task_finished">Várja meg, amíg a jelenlegi feladat befejeződik</string>
     <string name="shared_string_downloading">Letöltés…</string>
     <string name="plugin_distance_point_time">idő</string>
     <string name="plugin_distance_point_hdop">pontosság</string>
@@ -974,7 +953,7 @@
     <string name="delete_point">Pont törlése</string>
     <string name="intermediate_items_sort_return">A köztes célpontok optimális rendezése a célponthoz vezető útvonalon.</string>
     <string name="intermediate_items_sort_by_distance">Rendezés háztól-házig</string>
-    <string name="osb_author_or_password_not_specified">Kérjük, a „Beállítások”-ban adja meg OSM-felhasználónevét és jelszavát</string>
+    <string name="osb_author_or_password_not_specified">A „Beállításokban” adja meg az OSM-felhasználónevét és -jelszavát</string>
     <string name="clear_intermediate_points">Köztes célpontok törlése</string>
     <string name="keep_intermediate_points">Köztes célpontok megtartása</string>
     <string name="new_directions_point_dialog">Már vannak beállított köztes célpontjai.</string>
@@ -1030,7 +1009,7 @@
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
     <string name="base_world_map">Föld alaptérkép</string>
     <string name="map_magnifier">Térképnagyítás</string>
-    <string name="animate_routing_route_not_calculated">Kérjük, először számítsa ki az útvonalat</string>
+    <string name="animate_routing_route_not_calculated">Először számítsa ki az útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
     <string name="shared_string_remember_my_choice">Emlékezzen a választásra</string>
@@ -1380,7 +1359,7 @@
     <string name="version_settings_descr">Napi összeállítások letöltése.</string>
     <string name="shared_string_enable">Engedélyezés</string>
     <string name="shared_string_disable">Letiltás</string>
-    <string name="plugin_install_needs_network">A bővítmény telepítéséhez csatlakoznia kell az internetre.</string>
+    <string name="plugin_install_needs_network">A bővítmény telepítéséhez internetkapcsolat szükséges.</string>
     <string name="shared_string_get">Beszerzés</string>
     <string name="version_settings">Build-ok</string>
     <string name="plugin_ski_name">Sítérképnézet</string>
@@ -1448,7 +1427,7 @@
     <string name="waypoint_visit_before">Megtekintés ez előtt:</string>
     <string name="agps_info">A-GPS információk</string>
     <string name="agps_data_last_downloaded">A-GPS adatok letöltve: %1$s</string>
-    <string name="welcome_header">Üdvözlünk</string>
+    <string name="welcome_header">Üdvözöljük</string>
     <string name="osm_changes_added_to_local_edits">OSM-módosítások hozzáadva a helyi módosításkészlethez</string>
     <string name="mark_to_delete">Megjelölés törlésre</string>
     <string name="shared_string_places">Helyek</string>
@@ -1569,7 +1548,7 @@
     <string name="rate_this_app">Értékeld az alkalmazást</string>
     <string name="user_hates_app_get_feedback">Mondja el, miért.</string>
     <string name="user_hates_app_get_feedback_long">Mondja el javaslatait.</string>
-    <string name="rate_this_app_long">Kérjük, adjon pontszámot az OsmAndnak a Google Playen</string>
+    <string name="rate_this_app_long">Értékelje az OsmAndot a Gplayen</string>
     <string name="download_live_updates">Élő frissítések</string>
     <string name="no_updates_available">Nem érhetők el frissítések</string>
     <string name="we_really_care_about_your_opinion">Véleménye és visszajelzése fontos számunkra.</string>
@@ -1598,7 +1577,7 @@
     <string name="add_opening_hours">Nyitva tartás hozzáadása</string>
     <string name="poi_dialog_poi_type">POI típus</string>
     <string name="number_of_rows_in_dash">Sorok száma a kezdőlapon %1$s</string>
-    <string name="please_specify_poi_type">Kérjük, adja meg a POI típusát.</string>
+    <string name="please_specify_poi_type">Adja meg a POI típusát.</string>
     <string name="working_days">Munkanapok</string>
     <string name="recent_places">Gyakori helyek</string>
     <string name="favourites">Kedvencek</string>
@@ -1643,13 +1622,13 @@
     <string name="show_free_version_banner">Ingyenes verzió banner megjelenítése</string>
     <string name="show_free_version_banner_description">Az ingyenes verzió bannerének megjelenítése a fizetős verzióban is.</string>
     <string name="buy">Vásárlás</string>
-    <string name="activate_seamarks_plugin">Kérjük, aktiválja a „Hajózásitérkép-nézet” bővítményt</string>
-    <string name="activate_srtm_plugin">Kérjük, aktiválja a „Topográfia” bővítményt</string>
+    <string name="activate_seamarks_plugin">Aktiválja a „Hajózásitérkép-nézet” bővítményt</string>
+    <string name="activate_srtm_plugin">Aktiválja a „Topográfia” bővítményt</string>
     <string name="later">Tovább</string>
     <string name="get_full_version">Teljes verzió</string>
     <string name="downloads">Letöltések</string>
     <string name="downloading_number_of_files">%1$d fájl letöltése…</string>
-    <string name="favorite_category_dublicate_message">Kérjük, olyan kategórianevet válasszon, amely még nem létezik.</string>
+    <string name="favorite_category_dublicate_message">Olyan kategórianevet válasszon, amely még nem létezik.</string>
     <string name="favorite_category_name">Kategórianév</string>
     <string name="favorite_category_add_new_title">Új kategória hozzáadása</string>
     <string name="confirm_download_roadmaps">A csak utakat tartalmazó térkép nem szükséges, mert le van töltve a teljes térkép. Letöltöd ennek ellenére?</string>
@@ -1730,7 +1709,7 @@
     <string name="save_poi_without_poi_type_message">Típus nélkül menti a POI-t\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-szerkesztés módosítása</string>
     <string name="shared_string_card_was_hidden">Kártya el lett rejtve</string>
-    <string name="please_specify_poi_type_only_from_list">Kérjük, adja meg a helyes POI-típust, vagy hagyja ki ezt a lépést.</string>
+    <string name="please_specify_poi_type_only_from_list">Adja meg a helyes POI-típust, vagy hagyja ki ezt a lépést.</string>
     <string name="access_from_map_description">A menü gomb az irányítópultot indítja el a menü helyett</string>
     <string name="access_from_map">Elérés a térképről</string>
     <string name="copied_to_clipboard">Vágólapra másolva</string>
@@ -1781,7 +1760,7 @@
     <string name="night">Éjjel</string>
     <string name="select_month_and_country">Hónap és ország:</string>
     <string name="shared_string_remove">Eltávolítás</string>
-    <string name="storage_directory_readonly_desc">Az alkalmazás átváltott belső memóriára, mert a kijelölt adattároló mappa írásvédett. Kérjük, jelöljön ki egy írható tárolómappát.</string>
+    <string name="storage_directory_readonly_desc">Az alkalmazás átváltott belső memóriára, mert a kijelölt adattároló mappa írásvédett. Jelöljön ki egy írható tárolómappát.</string>
     <string name="storage_directory_shared">Osztott memória</string>
     <string name="shared_string_topbar">Felső sáv</string>
     <string name="recalculate_route">Útvonal újratervezése</string>
@@ -1798,13 +1777,13 @@
     <string name="osm_live_month_cost_desc">Havi fizetés</string>
     <string name="osm_live_active">Aktív</string>
     <string name="osm_live_not_active">Inaktív</string>
-    <string name="osm_live_enter_email">Kérjük, érvényes e-mail-címet adjon meg</string>
+    <string name="osm_live_enter_email">Adjon meg egy érvényes e-mail-címet</string>
     <string name="osm_live_enter_user_name">Nyilvános nevet adjon meg</string>
     <string name="osm_live_thanks">Köszönjük az OsmAnd támogatását!
 \nAz új funkciók aktiválásához az OsmAnd újraindítása szükséges.</string>
     <string name="osm_live_region_desc">Az adománya egy részét a megadott régióban tevékenykedő OSM-szerkesztőknek továbbítjuk.</string>
     <string name="osm_live_subscription_settings">Előfizetési beállítások</string>
-    <string name="osm_live_ask_for_purchase">Először kérjük, vásároljon OsmAnd Live előfizetést</string>
+    <string name="osm_live_ask_for_purchase">Először vásároljon OsmAnd Live előfizetést</string>
     <string name="osm_live_header">Ez az előfizetés a világ bármely térképének óránkénti frissítését teszi lehetővé.
 \nA bevételek egy része az OSM közösségnek jut vissza, és OSM szerkesztésenként kerül kifizetésre.
 \nHa szereti az OsmAndot és az OSM-et, és szeretné támogatni a fejlődésüket, ez ennek a tökéletes módja.</string>
@@ -1873,7 +1852,7 @@
     <string name="rec_split_desc">Klipek újraírása, ha a felhasznált hely túllépi a tárolási méretet.</string>
     <string name="rec_split_clip_length_desc">A felvett klipek legnagyobb hossza.</string>
     <string name="rec_split_storage_size_desc">Az összes felvett klip által elfoglalható hely.</string>
-    <string name="no_map_markers_found">Kérjük, vegyen fel jelölőket a térképen</string>
+    <string name="no_map_markers_found">Vegyen fel jelölőket a térképen</string>
     <string name="no_waypoints_found">Nem találhatók útpontok</string>
     <string name="map_widget_bearing">Relatív irányszög</string>
     <string name="access_disable_offroute_recalc_descr">Ne tervezzen újra, miután elhagyja a tervezett útvonalat.</string>
@@ -1960,7 +1939,7 @@
     <string name="osmand_plus_banner_desc">Korlátlan számú térképletöltés és -frissítés, valamint Wikipédia-bővítmény.</string>
     <string name="si_mi_meters">Mérföld, méter</string>
     <string name="search_map">Térkép keresése…</string>
-    <string name="first_usage_wizard_desc">Engedélyezze az OsmAnd-nek a pozíciója meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
+    <string name="first_usage_wizard_desc">Engedélyezze az OsmAnd számára a pozíciója meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
     <string name="location_not_found">Hely nem található</string>
     <string name="no_inet_connection">Nincs internetkapcsolat</string>
     <string name="no_inet_connection_desc_map">A térképek letöltéséhez szükséges.</string>
@@ -1985,7 +1964,7 @@
     <string name="save_filter">Szűrő mentése</string>
     <string name="delete_filter">Szűrő törlése</string>
     <string name="new_filter">Új szűrő</string>
-    <string name="new_filter_desc">Kérjük, adja meg az új szűrő nevét, ami hozzá fog adódni a „Kategóriák” fülhöz.</string>
+    <string name="new_filter_desc">Adja meg az új szűrő nevét, ami hozzá fog adódni a „Kategóriák” fülhöz.</string>
     <string name="lang_kab">kabil</string>
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
@@ -2095,8 +2074,7 @@
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Érvénytelen OLC (Open Location Code)
 \n</string>
-    <string name="navigate_point_olc_info_short">Rövid OLC (Open Location Code)
-\nKérjük, teljes kódot adjon meg</string>
+    <string name="navigate_point_olc_info_short">Rövid OLC (Open Location Code)\nTeljes kódot adjon meg</string>
     <string name="navigate_point_olc_info_area">Érvényes teljes OLC
 \nA következő területet jeleníti meg: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Gomb, amely lépteti az alábbi listát.</string>
@@ -2515,7 +2493,7 @@
     <string name="start_editing_card_description">Szerkesztheti, sőt szerkessze a Wikivoyage szócikkeit. Ossza meg tudását, tapasztalatait, tehetségét és figyelmességét.</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
-    <string name="welcome_to_open_beta">Üdvözlünk a nyílt bétatesztben</string>
+    <string name="welcome_to_open_beta">Üdvözöljük a nyílt bétatesztben</string>
     <string name="wikivoyage_travel_guide">Útikalauzok</string>
     <string name="wikivoyage_travel_guide_descr">Útikalauz a bolygó legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
     <string name="purchase_dialog_travel_description">Az offline útikalauz funkció használatához vásárolja meg az alábbiak egyikét:</string>
@@ -2603,7 +2581,7 @@
     <string name="increase_search_radius_to">Keresési sugár kiterjesztése ekkorára: %1$s</string>
     <string name="point_deleted">%1$s pont törölve</string>
     <string name="coord_input_save_as_track_descr">Hozzáadott %1$s pontot. Adjon meg egy fájlnevet, és koppintson a „Mentés”-re.</string>
-    <string name="error_notification_desc">Kérjük, küldjön egy képernyőképet erről az értesítésről a support@osmand.net címre</string>
+    <string name="error_notification_desc">Küldjön egy képernyőképet erről az értesítésről a support@osmand.net címre</string>
     <string name="mapillary_menu_title_pano">Csak 360°-os képek megjelenítése</string>
     <string name="rendering_value_black_name">Fekete</string>
     <string name="test_voice_desrc">Koppintson egy gombra és hallgassa meg a megfelelő hangutasítást, hogy a hiányzó vagy hibás utasításokat meghallja</string>
@@ -2779,7 +2757,7 @@
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordinátamodul</string>
     <string name="keep_passed_markers_descr">A Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
-    <string name="rate_dialog_descr">Kérjük, ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
+    <string name="rate_dialog_descr">Ossza meg visszajelzését, és értékelje munkánkat a Google Playen.</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
     <string name="make_osmand_better_descr">Engedélyezze, hogy az OsmAnd névtelen alkalmazáshasználati adatokat gyűjtsön és dolgozzon fel. Nem gyűjtünk vagy tárolunk adatokat a helyzetéről vagy az Ön által a térképen megtekintett helyekről. 
@@ -2815,7 +2793,7 @@
     <string name="profile_type_descr_string">Típus: %s</string>
     <string name="profile_type_base_string">Alapprofil</string>
     <string name="profile_alert_need_routing_type_title">Navigációtípus kijelölése</string>
-    <string name="profile_alert_need_routing_type_msg">Kérjük, jelöljön ki egy navigációtípust az új alkalmazásprofilhoz</string>
+    <string name="profile_alert_need_routing_type_msg">Jelöljön ki egy navigációtípust az új alkalmazásprofilhoz</string>
     <string name="profile_alert_need_profile_name_title">Profil nevének megadása</string>
     <string name="profile_alert_need_profile_name_msg">Először meg kell adnia egy profilnevet.</string>
     <string name="profile_alert_duplicate_name_title">Ez a név már létezik</string>
@@ -2838,7 +2816,7 @@
     <string name="minmax_speed_dialog_title">Legkisebb/legnagyobb sebesség beállítása</string>
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
-    <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. Kérjük, a hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
+    <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. A hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
     <string name="app_mode_ufo">UFO (azonosítatlan repülő tárgy)</string>
     <string name="app_mode_personal_transporter">Egyéni személyszállító (pl. Segway)</string>
     <string name="app_mode_monowheel">Egykerekű</string>
@@ -3212,7 +3190,7 @@
     <string name="plugin_disabled">Bővítmény kikapcsolva</string>
     <string name="open_settings">Beállítások megnyitása</string>
     <string name="no_recalculation_setting">Nincs újratervezés</string>
-    <string name="please_provide_profile_name_message">Kérjük, adjon nevet a profilnak</string>
+    <string name="please_provide_profile_name_message">Adjon nevet a profilnak</string>
     <string name="select_data_to_import">Válassza ki az importálandó adatot.</string>
     <string name="keep_both">Mindkettő megtartása</string>
     <string name="replace_all">Az összes cseréje</string>
@@ -3461,7 +3439,7 @@
     <string name="use_volume_buttons_as_zoom_descr">A térképnagyítás szintjének vezérlése a készülék hangerőgombjaival.</string>
     <string name="use_volume_buttons_as_zoom">Hangerőgombok használata nagyításhoz</string>
     <string name="app_mode_inline_skates">Görkorcsolya</string>
-    <string name="please_provide_point_name_error">Kérjük, adjon nevet a pontnak</string>
+    <string name="please_provide_point_name_error">Adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatok kijelölése exportálásra a profillal együtt.</string>
@@ -3611,8 +3589,7 @@
     <string name="snowmobile_render_descr">Motorosszán vezetéshez külön utakkal és pályákkal.</string>
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak utakról állnak rendelkezésre. Az ábrák megtekintéséhez az „Útvonal tervezése pontok között” funkcióval számítsa ki az útvonalat.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Kérjük, várjon.
-\nAz ábra az útvonal újratervezése után lesz látható.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Várjon.\nAz ábra az útvonal újratervezése után lesz látható.</string>
     <string name="shared_string_local_maps">Helyi térképek</string>
     <string name="icon_group_amenity">Hasznos és fontos létesítmény</string>
     <string name="icon_group_special">Különleges</string>
@@ -3675,7 +3652,7 @@
     <string name="select_items_for_import">Importálandó elemek kijelölése.</string>
     <string name="use_dev_url_descr">OSM-jegyzet, POI vagy GPX-nyomvonal feltöltésének teszteléséhez az openstreetmap.org helyett kapcsoljon át a dev.openstreetmap.org-ra.</string>
     <string name="use_dev_url">A dev.openstreetmap.org használata</string>
-    <string name="cannot_upload_image">Nem lehet feltölteni a képet, kérjük, próbálja meg később</string>
+    <string name="cannot_upload_image">Nem lehet feltölteni a képet, próbálja meg később</string>
     <string name="select_picture">Kép kijelölése</string>
     <string name="lang_de_casual">német (tegeződő)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
@@ -3815,7 +3792,7 @@
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
-    <string name="select_another_colorization">Kérjük, válasszon másik színezéstípust.</string>
+    <string name="select_another_colorization">Válasszon másik színezéstípust.</string>
     <string name="trip_recording_logging_interval_info">A naplózási intervallum azt az időközt határozza meg, amelyenként az OsmAnd lekérdezi az aktuális pozícióadatokat.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
@@ -3847,7 +3824,7 @@
     <string name="announce_when_exceeded">Bemondás túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Kimenet</string>
-    <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
+    <string name="srtm_download_single_help_message">Válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
     <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak közötti távolságot. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
@@ -3868,16 +3845,15 @@
     <string name="search_more">További keresés…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="verify_email_address_descr">Hitelesítő kód elküldve ide: %1$s. Kérjük, írja be az alábbi mezőbe.</string>
+    <string name="verify_email_address_descr">Hitelesítő kód elküldve ide: %1$s. Írja be az alábbi mezőbe.</string>
     <string name="verification_code_missing_description">Ez 10 akár perc is lehet. Ha nincs a spam mappában, használja az alábbi gombot.</string>
     <string name="verification_code_missing">Nem kaptam hitelesítő kódot</string>
     <string name="resend_verification_code">Újraküldés</string>
     <string name="cloud_email_already_registered">Ez az e-mail-cím már regisztrálva van.</string>
     <string name="cloud_email_not_registered">Ez az e-mail-címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
     <string name="verify_email_address">E-mail-cím hitelesítése</string>
-    <string name="osmand_cloud_login_descr">Kérjük, írja be a regisztrációhoz használt e-mail-címet. Egy egyszer használatos jelszót küldünk erre.</string>
-    <string name="osmand_cloud_create_account_descr">Kérjük, adja meg az e-mail címét, ahová küldünk egy ellenőrző kódot,
-\nés minden adatát összekapcsoljuk vele.</string>
+    <string name="osmand_cloud_login_descr">Írja be a regisztrációhoz használt e-mail-címet. Egy egyszer használatos jelszót küldünk erre.</string>
+    <string name="osmand_cloud_create_account_descr">Adja meg az e-mail-címét, ahová küldünk egy ellenőrző kódot,\nés minden adatát összekapcsoljuk vele.</string>
     <string name="osmand_cloud_help_descr">Segítségre van szüksége\? Lépjen velünk kapcsolatba itt: %1$s</string>
     <string name="restore_from_file">Visszaállítás fájlból</string>
     <string name="backup_into_file">Biztonsági mentés fájlként</string>
@@ -3900,13 +3876,12 @@
     <string name="shared_string_online">Online</string>
     <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy a következő online útvonaltervezőket: OSRM, Graphhopper, openrouteservice és GPX.</string>
     <string name="shared_string_external">Külső</string>
-    <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját.
-\nKérjük, ellenőrizze internetkapcsolatát.</string>
+    <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját. \nEllenőrízze az internetkapcsolatát.</string>
     <string name="shared_string_predefined">Előre meghatározott</string>
     <string name="backup_complete">A biztonsági mentés kész</string>
     <string name="backup_now">Biztonsági mentés most</string>
     <string name="make_backup">Biztonsági mentés készítése</string>
-    <string name="make_backup_descr">Ezen az eszközön sok változás van, kérjük, készítsen biztonsági mentést ezekről az adatokról, hogy el ne vesszenek.</string>
+    <string name="make_backup_descr">Ezen az eszközön sok változás van, készítsen biztonsági mentést ezekről az adatokról, hogy el ne vesszenek.</string>
     <string name="backup_conflicts">Ütközések</string>
     <string name="backup_confilcts_descr">Egyes fájlokat nem sikerült feltölteni a kiszolgálóra, mert ott egy újabb verzió van tárolva.</string>
     <string name="backup_view_conflicts">Ütközések megtekintése</string>
@@ -4006,7 +3981,7 @@
     <string name="contour_lines_hillshade_slope">Szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
     <string name="backup_deleting_all_data">Összes adat törlése…</string>
     <string name="backup_deleted_all_data">Minden adat törölve.</string>
-    <string name="backup_deleting_all_data_descr">Kérjük, várjon, amíg az OsmAnd törli adatait a felhőből. Az eszközön lévő összes adat érintetlenül marad.</string>
+    <string name="backup_deleting_all_data_descr">Várjon, amíg az OsmAnd törli adatait a felhőből. Az eszközön lévő összes adat érintetlenül marad.</string>
     <string name="backup_deleted_all_data_descr">Minden adata sikeresen törlődött az OsmAnd Cloudból.</string>
     <string name="backup_version_history_removed">Az összes verzióelőzmény el lett távolítva.</string>
     <string name="backup_data_removed">Minden adat el lett távolítva.</string>
@@ -4113,9 +4088,7 @@
     <string name="transparent_status_bar">Átlátszó állapotsor</string>
     <string name="search_history_is_disabled_descr">A keresési előzményeket a beállításokban engedélyezheti.</string>
     <string name="markers_history_is_disabled_descr">A meglátogatott térképjelölők listájának megjegyzéséhez engedélyezze az előzményeket.</string>
-    <string name="shared_storage_warning_description">Az Android új szabályai miatt 2021 novemberétől az OsmAnd 4.2 elveszíti a hozzáférést a megosztott tárhelyhez.
-\n
-\nKérjük, helyezze át az adatmappát Megosztott tárhelyből az elérhető tárhelybe. E nélkül az alkalmazás elveszíti a hozzáférést az adataihoz, például az offline térképekhez, a GPX-nyomvonalakhoz stb.</string>
+    <string name="shared_storage_warning_description">Az Android új szabályai miatt 2021 novemberétől az OsmAnd 4.2 elveszíti a hozzáférést a megosztott tárhelyhez. \n\nHelyezze át az adatmappát a „Megosztott” tárhelyből az elérhető tárhelybe. E nélkül az alkalmazás elveszíti a hozzáférést az adataihoz, például az offline térképekhez, a GPX-nyomvonalakhoz stb.</string>
     <string name="shortcut_navigate_to_work">Navigálás ide: Munkahely</string>
     <string name="history_is_disabled_descr">A legutóbb használt keresési találatok gyorsabb eléréséhez engedélyezze az előzményeket.</string>
     <string name="is_disabled">%1$s le van tiltva</string>
@@ -4237,7 +4210,7 @@
     <string name="gpx_no_routes_descr">A(z) „%1$s” eszközzel fájlhoz adhat útvonalakat.</string>
     <string name="import_tracks">Nyomvonalak importálása</string>
     <string name="select_suggested_points">Javasolt pontok kijelölése</string>
-    <string name="please_provide_group_name_message">Kérjük, nevezze el a csoportot.</string>
+    <string name="please_provide_group_name_message">Adjon nevet a csoportnak.</string>
     <string name="selected_waypoints_descr">A kijelölt útpontok hozzáadódnak a következő nyomvonalhoz: %1$s</string>
     <string name="shared_string_reading_file">Fájl olvasása…</string>
     <string name="all_groups">Minden csoport</string>
@@ -4568,7 +4541,7 @@
     <string name="map_center_widget">Koordináták: térképközéppont</string>
     <string name="send_uuid_preference_desc">A véletlenszerű egyedi felhasználóazonosító (UUID) a következőkre használható: offline térképek letöltése az OsmAnd szerverekről, a szervererőforrások méltányos igénybevételének nyomon követése, a forgalom mintázatainak előrejelzése és anonim havi térképjelentések készítése.</string>
     <string name="terms_of_service_desc">A térképek letöltésével elfogadja a következőket: %1$s és %2$s.</string>
-    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell csatlakoznia a megfelelő szenzorokhoz.</string>
+    <string name="external_sensors_plugin_description">Hozzáférés külső érzékelők adataihoz, mint pl pulzusszám, kerékpársebesség, -teljesítmény és pedálfordulatszám. Az eszközének ANT+ vezeték nélküli személyi hálózati protokollon keresztül kell kapcsolódnia a megfelelő szenzorokhoz.</string>
     <string name="speak_gps_signal_status">GPS-jel elvesztésének és helyreállásának bemondása</string>
     <string name="external_sensors_support">Külső érzékelők támogatása</string>
     <string name="purchases_feature_desc_external_sensors">Külső érzékelők adatainak megjelenítése és rögzítése: kerékpár-sebesség, -teljesítmény, pedálfordulatszám, valamint pulzusszám.</string>
@@ -4579,9 +4552,7 @@
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
     <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
-    <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban.
-\n
-\nKérjük, támogassa a fejlesztéseket a hibanaplója elküldésével.</string>
+    <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban. \n\nTámogassa a fejlesztéseket a hibanaplója elküldésével.</string>
     <string name="map_rendering_engine_descr">A 2-es verzió (OpenGL) egy gyorsabb térkép-megjelenítő motor, amely 2,5D-s nézetet is tartalmaz. Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, régebbi eszközökön pedig még mindig előnyösebb a használata.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
     <string name="share_crash_log">Összeomlási napló megosztása</string>
@@ -4808,7 +4779,7 @@
     <string name="external_device_details_connect">Kapcsolódás</string>
     <string name="ant_plus_bluetooth_off">A Bluetooth ki van kapcsolva</string>
     <string name="ant_plus_searching">Keresés</string>
-    <string name="external_device_disconnected">Szétkapcsolódva</string>
+    <string name="external_device_disconnected">Kapcsolat bontva</string>
     <string name="external_device_connected">Kapcsolódva</string>
     <string name="external_device_characteristic_cadence">Pedálfordulat</string>
     <string name="external_device_characteristic_speed">Sebesség</string>
@@ -4826,8 +4797,8 @@
     <string name="external_device_details_received_data">Fogadott adat</string>
     <string name="external_device_details_speed">Sebesség</string>
     <string name="external_device_details_pair">Párosítás</string>
-    <string name="external_device_details_disconnect">Szétkapcsolás</string>
-    <string name="bluetooth_disconnected">Szétkapcsolódva, %s</string>
+    <string name="external_device_details_disconnect">Kapcsolat bontása</string>
+    <string name="bluetooth_disconnected">Kapcsolat bontva, %s</string>
     <string name="ble_search_again">Keresés újra</string>
     <string name="ant_plus_pair_new_sensor">Új érzékelő párosítása</string>
     <string name="ant_plus_open_settings">Beállítások megnyitása</string>
@@ -4854,7 +4825,7 @@
     <string name="no_search_results">Nincs találat</string>
     <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
     <string name="number_of_tracks">%1$s nyomvonal</string>
-    <string name="device_connected">%1$s kapcsolódva</string>
+    <string name="device_connected">Kapcsolódva ezzel: %1$s</string>
     <string name="bicycle_scd_device_name">Kerékpáros eszköz</string>
     <string name="external_device_blood_pressure">Vérnyomás</string>
     <string name="no_bt_permission">Bluetooth engedély nincs megadva</string>
@@ -4865,7 +4836,7 @@
     <string name="beats_per_minute_short">ütés</string>
     <string name="shared_string_ear_lobe">Fülcimpa</string>
     <string name="shared_string_foot">Láb</string>
-    <string name="device_disconnected">%1$s lekapcsolódott</string>
+    <string name="device_disconnected">Kapcsolat bontva ezzel: %1$s</string>
     <string name="shared_string_hand">Kéz</string>
     <string name="rendering_value_name_only_name">Csak név</string>
     <string name="rendering_value_sectors_name">Szektorok</string>
@@ -4921,10 +4892,8 @@
     <string name="deleting_complete">Törlés kész</string>
     <string name="delete_account">Fiók törlése</string>
     <string name="backup_error_delete_account_email_match">Az e-mail cím nem egyezik a bejelentkezéshez használt felhasználónévvel</string>
-    <string name="verify_account_deletion_descr">A törlés előtt ellenőriznünk kell fiókját.
-\n
-\nKérjük, adja meg az e-mail címet, amellyel regisztrált. A következő lépéshez egyszeri jelszót küld a rendszer.</string>
-    <string name="verify_account">Fiókjának ellenőrzése</string>
+    <string name="verify_account_deletion_descr">A törlés előtt hitelesíteni kell a fiókját.\n\nAdja meg az e-mail-címet, amellyel regisztrált. A következő lépéshez egyszeri jelszót küld a rendszer.</string>
+    <string name="verify_account">Fiókjának hitelesítése</string>
     <string name="osmand_cloud_deleted_account_descr">Minden fiók- és egyéb adat törölve lett az OsmAnd Cloud-ból.</string>
     <string name="osmand_cloud_deleting_account_descr">Pillanatokon belül törölve lesz minden fiók- és egyéb adat az OsmAnd Cloud-ból.
 \n
@@ -5137,7 +5106,7 @@
     <string name="folder">Mappa</string>
     <string name="not_specified">Nem meghatározott</string>
     <string name="key_event_action_zoom_in">Nagyítás</string>
-    <string name="enable_to_use_external_input_device">Külső beviteli eszköz használatának engedélyezése az OsmAnd-nek</string>
+    <string name="enable_to_use_external_input_device">Külső beviteli eszköz használatának engedélyezése az OsmAnd számára</string>
     <string name="key_event_action_change_map_orientation">Térkép tájolás módosítása</string>
     <string name="key_event_action_previous_app_profile">Előző alkalmazásprofil</string>
     <string name="show_toast_about_key_pressed">A lenyomott billentyű kijelzése</string>
@@ -5201,8 +5170,8 @@
     <string name="previous_row_has_complex_widget">Az előző sorban összetett modul van</string>
     <string name="complex_widget_alert">%1$s modul csak a saját sorában helyezhető el.</string>
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
-    <string name="any_connected">Bármelyik csatlakoztatott</string>
-    <string name="any_connected_with_device">Bármelyik csatlakozva: %s</string>
+    <string name="any_connected">Bármelyik összekapcsolt</string>
+    <string name="any_connected_with_device">Bármelyik összekapcsolt: %s</string>
     <string name="shared_string_road_maps">Útitérképek</string>
     <string name="shared_string_all_tracks">Minden nyomvonal</string>
     <string name="shared_string_license">Licenc</string>
@@ -5296,7 +5265,7 @@
     <string name="delete_actions_button">Gomb törlése</string>
     <string name="delete_actions_button_confirmation">Biztos törölni akarja \"%1$s\"-t az összes hozzáadott művelettel együtt?</string>
     <string name="required_maps">Szükséges térképek</string>
-    <string name="missing_maps_description">Néhány ehhez az útvonalhoz szükséges offline térkép hiányzik vagy nem naprakész. Kérjük, töltse le vagy frissítse ezeket a térképeket.</string>
+    <string name="missing_maps_description">Néhány ehhez az útvonalhoz szükséges offline térkép hiányzik vagy nem naprakész. Töltse le vagy frissítse ezeket a térképeket.</string>
     <string name="maps_that_also_be_used">Szintén használt térképek: %1$s</string>
     <string name="getting_list_of_required_maps">A szükséges térképek listájának lekérése…</string>
     <string name="required_maps_calculate_online_summary">A hiányzó térképek listája légvonalú útvonalon alapul. A térképek pontos listájához az OsmAnd online előre ki tudja számítani az útvonalat.</string>
@@ -5493,7 +5462,7 @@
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="shared_string_source">Forrás</string>
     <string name="shared_string_no_internet_connection">Nincs internetkapcsolat</string>
-    <string name="no_internet_descr">Kérjük, ellenőrizze a kapcsolatát és próbálja újra.</string>
+    <string name="no_internet_descr">Ellenőrizze az internetkapcsolatát és próbálja újra.</string>
     <string name="no_photos_available">Nincs elérhető fénykép</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="no_photos_available_descr">Ehhez a helyhez még nem adtak hozzá felhasználói fotókat</string>
@@ -5577,30 +5546,30 @@
     <string name="liter_per_hour">l/óra</string>
     <string name="release_4_9">• Teljes képernyős galérianézegető a Wikimedia képekhez\n\n • Új „Járműmetrika” bővítmény a jármű teljesítményének az OBD-II protokoll segítségével történő nyomon követésére\n\n • Tevékenységek rendelhetők a nyomvonalakhoz, melyek alapján szűrni lehet is őket\n\n • Új gyorsműveletek az utazás rögzítéséhez és az érintőképernyő zárolásához\n\n • Testreszabható térképgomb és precíz rácsok\n\n • Helyi menü és egy \"Átlagsebesség visszaállítása\" művelet a moduloknál\n\n • Új \"Krosszmotor utak\" útvonalréteg\n\n • \"Nyomvonal automatikus rögzítése navigáció közben\" javítása\n\n • Javítva a probléma az elforgatott koordinátákkal az RTL-ben\n\n • Javítva a kihagyott szenzoradatok az aktuálisan rögzített nyomvonalhoz\n\n • Információk a kiválasztott pont környékéről\n\n • Gyorsművelet az OSM-szerkesztések láthatóságának szabályozására\n\n • Külön láthatósági paraméterek a terepszínezési opciókhoz\n\n • Koppintható ikon az út- vagy útvonalattribútumok megjelenítéséhez</string>
     <string name="screen_is_unlocked">Az érintőképernyő feloldva.</string>
-    <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Érintse meg a gombot a feloldáshoz.</string>
+    <string name="screen_is_locked_by_action_button">Az érintőképernyő le van zárva. Koppintson a gombra a feloldáshoz.</string>
     <string name="screen_is_locked_by_external_button">Az érintőképernyő le van zárva. A feloldáshoz nyomja meg a(z) %1$s gombot vagy koppintson a képernyőn megjelenő gombra.</string>
     <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II eszközöket.</string>
     <string name="connect_obd_instructions_step2">2. Indítsa el a jármű motorját</string>
     <string name="connect_obd_instructions_step3">3. Engedélyezze a Bluetooth-t a telefonján</string>
-    <string name="connect_obd_instructions_step4">4. Érintse meg a „Csatlakozás”-t és válassza ki az OBD-II szkennert a listáról.</string>
+    <string name="connect_obd_instructions_step4">4. Koppintson a „Kapcsolódásra” és válassza ki az OBD-olvasót a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
     <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
     <string name="obd_vehicle_info">Jármű információ</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step1">1. Csatlakoztassa a szkennert a járműve OBD-II portjához.</string>
-    <string name="obd_how_to_connect">Hogyan csatlakoztatható:</string>
+    <string name="connect_obd_instructions_step1">1. Helyezze az OBD-olvasó eszközt a járműve OBD-II aljzatába.</string>
+    <string name="obd_how_to_connect">Hogyan működik:</string>
     <string name="route_guidance">Útvonalvezetés</string>
     <string name="obd_widget_vehicle_speed">Jármű sebessége</string>
     <string name="obd_widget_engine_speed">Motor fordulatszáma</string>
-    <string name="obd_nothing_found_text">Nem található szkenner</string>
-    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth keresést és kapcsolja be a szkennert.</string>
-    <string name="obd_searching_text_description">Tartsa készülékét a szkenner közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
-    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke a szkenner hatókörén belül van.</string>
-    <string name="obd_searching_text">Szkennerek keresése</string>
-    <string name="obd_device_forget_sensor">Szkenner elfelejtése</string>
-    <string name="obd_device_forget_sensor_description">A szkenner törlődik a listáról. Ezt a szkennert bármikor újra párosíthatja.</string>
+    <string name="obd_nothing_found_text">Nem található OBD-olvasó</string>
+    <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth keresést és kapcsolja be az OBD-olvasót.</string>
+    <string name="obd_searching_text_description">Tartsa készülékét az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
+    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke az OBD-olvasó hatókörén belül van.</string>
+    <string name="obd_searching_text">OBD-olvasók keresése</string>
+    <string name="obd_device_forget_sensor">OBD-olvasó elfelejtése</string>
+    <string name="obd_device_forget_sensor_description">Az OBD-olvasó törlődik a listáról, de bármikor újra párosíthatja azt.</string>
     <string name="route_guidance_desc">Valós idejű útbaigazítást biztosít, beleértve a következő kanyar távolságát, az út nevét, az aktuális utca nevét és a sávinformációkat. A modulok navigáció közben aktívak.</string>
-    <string name="connect_obd_instructions_step">1. Csatlakoztassa a szkennert járműve OBD-II portjához.\n\n 2. Indítsa el a járműve motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson erre: „%1$s” és válassza ki a szkennert a listából.</string>
+    <string name="connect_obd_instructions_step">1. Helyezze az OBD-olvasó eszközt a járműve OBD-II aljzatába.\n\n 2. Indítsa el a járműve motorját\n\n 3. Engedélyezze a Bluetooth-t a készülékén\n\n 4. Koppintson erre: „%1$s” és válassza ki a szkennert a listából.</string>
     <string name="obd_fuel_consumption_rate_sensor">Fogyasztás (érzékelő)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Megjeleníti a jármű számított időalapú üzemanyag-fogyasztását liter/órában</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Megjeleníti a jármű üzemanyag-fogyasztását liter/órában az érzékelő adatai alapján</string>
@@ -5622,20 +5591,20 @@
     <string name="obd_engine_runtime">Motor üzemideje</string>
     <string name="obd_throttle_position">Fojtószelep helyzete</string>
     <string name="simulate_obd">OBD adatok szimulálása</string>
-    <string name="obd_engine_runtime_desc">Megjeleníti a motor üzemidejét az OBD szkenner adatai alapján</string>
+    <string name="obd_engine_runtime_desc">Megjeleníti a motor üzemidejét az OBD-olvasó adatai alapján</string>
     <string name="obd_calculated_engine_load">Számított motorterhelés</string>
-    <string name="obd_fuel_pressure_desc">Megjeleníti az üzemanyagnyomást az OBD szkenner adatai alapján</string>
-    <string name="obd_engine_oil_temperature_desc">Megjeleníti a motorolaj hőmérsékletét az OBD szkenner adatai alapján</string>
-    <string name="obd_throttle_position_desc">Megjeleníti az üzemanyag nyomást az OBD szkenner adatai alapján</string>
+    <string name="obd_fuel_pressure_desc">Megjeleníti az üzemanyagnyomást az OBD-olvasó adatai alapján</string>
+    <string name="obd_engine_oil_temperature_desc">Megjeleníti a motorolaj hőmérsékletét az OBD-olvasó adatai alapján</string>
+    <string name="obd_throttle_position_desc">Megjeleníti az üzemanyag nyomást az OBD-olvasó adatai alapján</string>
     <string name="obd_engine_oil_temperature">Motorolaj-hőmérséklet</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
     <string name="obd_calculated_engine_load_desc">Megjeleníti a jármű számított motorterhelését az érzékelő alapján</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Megjeleníti a jármű számított relatív üzemanyag-fogyasztási arányát (%/óra)</string>
     <string name="bt_start_pair_failed">Nem lehet kezdeményezni a párosítást az eszközzel</string>
-    <string name="obd_not_connected_to_device">Lecsatlakozva erről: %s</string>
+    <string name="obd_not_connected_to_device">Kapcsolat bontva ezzel: %s</string>
     <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
     <string name="shared_string_dynamic">Dinamikus</string>
-    <string name="obd_connected_to_device">Csatlakozva ehhez: %s</string>
-    <string name="obd_connecting_to_device">Csatlakozás ehhez: %s</string>
+    <string name="obd_connected_to_device">Kapcsolódva ehhez: %s</string>
+    <string name="obd_connecting_to_device">Kapcsolódás ehhez: %s</string>
 </resources>
