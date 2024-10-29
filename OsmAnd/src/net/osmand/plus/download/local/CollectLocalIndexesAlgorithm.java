@@ -13,8 +13,8 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,10 +22,7 @@ public class CollectLocalIndexesAlgorithm {
 
 	private final OsmandApplication app;
 	private final CollectLocalIndexesRules rules;
-
-	private final Map<LocalItem, Long> separateSizeItemCalculations = new HashMap<>();
-	private final Map<LocalItemType, Long> separateSizeTypeCalculations = new HashMap<>();
-	private final Map<LocalItemType, Boolean> calculationLimitReached = new HashMap<>();
+	private final List<LocalItem> separateSizeCalculationItems = new ArrayList<>();
 
 	private CollectLocalIndexesAlgorithm(@NonNull CollectLocalIndexesRules rules) {
 		this.app = rules.getApp();
@@ -38,7 +35,6 @@ public class CollectLocalIndexesAlgorithm {
 		for (File directory : rules.getDirectories()) {
 			collectFiles(categories, directory, rules.shouldAddUnknown(directory));
 		}
-		applySeparatelyCalculatedSize(categories.values());
 		return categories;
 	}
 
@@ -61,7 +57,7 @@ public class CollectLocalIndexesAlgorithm {
 
 	private boolean shouldSkipDirectory(@NonNull File directory) {
 		LocalItem localItem = getSeparatelyCalculationSizeItem(directory);
-		return localItem != null && isCalculatedSizeLimitReached(localItem.getType());
+		return localItem != null && localItem.isSizeCalculationLimitReached();
 	}
 
 	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
@@ -108,77 +104,29 @@ public class CollectLocalIndexesAlgorithm {
 	}
 
 	private void addSeparatelyCalculationItemIfNeeded(@NonNull LocalItem item) {
-		LocalItemType itemType = item.getType();
-		if (rules.shouldCalculateSizeSeparately(itemType)) {
-			separateSizeItemCalculations.put(item, 0L);
-			if (!separateSizeTypeCalculations.containsKey(itemType)) {
-				separateSizeTypeCalculations.put(itemType, 0L);
-			}
+		LocalItemType type = item.getType();
+		Long limit = rules.getCalculationSizeLimit(type);
+		if (limit != null && !separateSizeCalculationItems.contains(item)) {
+			separateSizeCalculationItems.add(item);
+			item.setSizeCalculationLimit(limit);
+			item.setSize(0);
 		}
 	}
 
 	private void calculateSizeSeparatelyIfNeeded(@NonNull File file) {
 		LocalItem localItem = getSeparatelyCalculationSizeItem(file);
-		if (localItem == null) return;
-
-		long fileSize = file.length();
-		Long itemSize = separateSizeItemCalculations.get(localItem);
-		itemSize = itemSize == null ? fileSize : itemSize + fileSize;
-		separateSizeItemCalculations.put(localItem, itemSize);
-
-		LocalItemType type = localItem.getType();
-		Long typeSize = separateSizeTypeCalculations.get(type);
-		typeSize = typeSize == null ? fileSize : typeSize + fileSize;
-		separateSizeTypeCalculations.put(type, typeSize);
-
-		boolean limitReached = rules.isSeparatelyCalculatedSizeLimitReached(type, typeSize);
-		calculationLimitReached.put(type, limitReached);
+		if (localItem != null) {
+			localItem.setSize(localItem.getSize() + file.length());
+		}
 	}
 
 	@Nullable
 	private LocalItem getSeparatelyCalculationSizeItem(@NonNull File file) {
 		String filePath = file.getAbsolutePath();
-		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
+		for (LocalItem localItem : separateSizeCalculationItems) {
 			String basePath = localItem.getPath();
 			if (filePath.startsWith(basePath)) {
 				return localItem;
-			}
-		}
-		return null;
-	}
-
-	private void applySeparatelyCalculatedSize(@NonNull Collection<LocalCategory> categories) {
-		for (LocalItemType type : separateSizeTypeCalculations.keySet()) {
-			if (isCalculatedSizeLimitReached(type)) {
-				Long limit = rules.getCalculationSizeLimit(type);
-				LocalGroup group = getLocalGroupByType(categories, type);
-				if (group != null && limit != null) {
-					group.setSizeLimit(limit);
-				}
-			}
-		}
-		for (LocalItem localItem : separateSizeItemCalculations.keySet()) {
-			Long size = separateSizeItemCalculations.get(localItem);
-			if (size != null && !isCalculatedSizeLimitReached(localItem.getType())) {
-				localItem.setSize(size);
-			} else {
-				localItem.setSize(-1);
-			}
-		}
-	}
-
-	private boolean isCalculatedSizeLimitReached(@NonNull LocalItemType type) {
-		Boolean limitReached = calculationLimitReached.get(type);
-		return limitReached != null && limitReached;
-	}
-
-	@Nullable
-	private LocalGroup getLocalGroupByType(@NonNull Collection<LocalCategory> categories,
-	                                       @NonNull LocalItemType type) {
-		for (LocalCategory category : categories) {
-			LocalGroup group = category.getGroups().get(type);
-			if (group != null) {
-				return group;
 			}
 		}
 		return null;
