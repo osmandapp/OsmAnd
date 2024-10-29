@@ -166,7 +166,12 @@ public class Amenity extends MapObject {
 			return null;
 		}
 		String str = additionalInfo.get(key);
-		str = unzipContent(str);
+		if (str == null && key.contains(":")) {
+			str = additionalInfo.get(key.replaceAll(":", "_-_")); // try content_-_uk after content:uk
+		}
+		if (str != null) {
+			str = unzipContent(str);
+		}
 		return str;
 	}
 
@@ -425,7 +430,7 @@ public class Amenity extends MapObject {
 			return translateName;
 		}
 		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":")) {
+			if (nm.startsWith(tag + ":") || nm.startsWith(tag + "_-_")) {
 				return getAdditionalInfo(nm);
 			}
 		}

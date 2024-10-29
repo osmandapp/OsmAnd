@@ -231,6 +231,9 @@ open class FilterRangeViewHolder(
 		measureUnitType: MeasureUnitType,
 		value: String): OsmAndFormatter.FormattedValue {
 		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
+		val params = OsmAndFormatter.OsmAndFormatterParams()
+		params.setExtraDecimalPrecision(3)
+		params.setForcePreciseValue(true)
 		return when (measureUnitType) {
 			MeasureUnitType.SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
 			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
@@ -240,7 +243,8 @@ open class FilterRangeViewHolder(
 
 			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
 				value.toFloat(),
-				app)
+				app,
+				params)
 
 			MeasureUnitType.TIME_DURATION -> OsmAndFormatter.FormattedValue(
 				value.toFloat() / 1000 / 60,
