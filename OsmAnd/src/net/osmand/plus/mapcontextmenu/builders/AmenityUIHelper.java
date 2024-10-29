@@ -289,6 +289,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					AmenityInfoRow infoRow = createAmenityInfoRow(context, localizedKey, localizedValue, null);
 					if (infoRow != null) {
 						infoRows.add(infoRow);
+						hasWiki = false; // allow another hasWiki at return
 					}
 				}
 			}
@@ -390,7 +391,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
 				wikiAmenity.setLocation(getLatLon());
 				String name = additionalInfoFiltered.get("name");
-				if (Algorithms.isEmpty(name)) {
+				if (!Algorithms.isEmpty(name)) {
 					wikiAmenity.setName(name);
 				}
 
