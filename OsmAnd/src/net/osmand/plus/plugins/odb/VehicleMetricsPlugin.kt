@@ -511,7 +511,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		currentConnectingState = OBDConnectionState.CONNECTED
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
-			OBDDataComputer.fuelTank = 52f //todo implement setting correct fuel tank
+			val mode = app.settings.applicationMode
+			OBDDataComputer.fuelTank = settings.FUEL_TANK_CAPACITY.getModeValue(mode)
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
