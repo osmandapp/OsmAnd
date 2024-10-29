@@ -19,6 +19,7 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	private final String path;
 	private final String fileName;
 	private long size;
+	private long sizeCalculationLimit = -1;
 
 	@Nullable
 	private Object attachedObject;
@@ -49,9 +50,16 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 		return fileName;
 	}
 
+	@NonNull
+	@Override
+	public String getSizeDescription(@NonNull Context context) {
+		String size = super.getSizeDescription(context);
+		return isSizeCalculationLimitReached() ? "≥ " + size : size;
+	}
+
 	@Override
 	public long getSize() {
-		return size;
+		return isSizeCalculationLimitReached() ? sizeCalculationLimit : size;
 	}
 
 	public void setSize(long size) {
@@ -95,6 +103,14 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	@NonNull
 	public String getDescription(@NonNull Context context) {
 		return LocalItemUtils.getItemDescription(context, this);
+	}
+
+	public void setSizeCalculationLimit(long sizeCalculationLimit) {
+		this.sizeCalculationLimit = sizeCalculationLimit;
+	}
+
+	public boolean isSizeCalculationLimitReached() {
+		return sizeCalculationLimit > 0 && sizeCalculationLimit <= size;
 	}
 
 	@Override

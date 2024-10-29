@@ -283,19 +283,14 @@ public class LocalItemUtils {
 
 	@NonNull
 	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
-		long size = item.getSize();
-		String formattedSize = AndroidUtils.formatSize(context, item.getSize());
+		String formattedSize = item.getSizeDescription(context);
 		if (item.getType() == CACHE) {
 			return formattedSize;
 		} else if (item.getType() == COLOR_DATA) {
 			return ColorsPaletteUtils.getPaletteTypeName(context, item.getFile());
 		} else {
 			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
-			if (size > 0) {
-				return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
-			} else {
-				return formattedDate;
-			}
+			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
 		}
 	}
 

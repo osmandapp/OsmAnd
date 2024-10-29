@@ -46,7 +46,7 @@ public class LocalItemInfoCard extends BaseCard {
 		long size = localItem.getSize();
 		View sizeRow = container.findViewById(R.id.size);
 		AndroidUiHelper.updateVisibility(sizeRow, size > 0);
-		setupRow(sizeRow, getString(R.string.shared_string_size), AndroidUtils.formatSize(app, size), true);
+		setupRow(sizeRow, getString(R.string.shared_string_size), localItem.getSizeDescription(app), true);
 	}
 
 	private void setupRow(@NonNull View view, @Nullable String title, @Nullable String description, boolean lastItem) {

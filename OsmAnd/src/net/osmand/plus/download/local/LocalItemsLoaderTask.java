@@ -17,7 +17,7 @@ import java.util.Map;
 public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType, LocalCategory>> {
 
 	private static final long BYTES_IN_MB = 1024 * 1024;
-	private static final long TILES_SIZE_CALCULATION_LIMIT = 5 * BYTES_IN_MB;
+	private static final long TILES_SIZE_CALCULATION_LIMIT = 50 * BYTES_IN_MB;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;

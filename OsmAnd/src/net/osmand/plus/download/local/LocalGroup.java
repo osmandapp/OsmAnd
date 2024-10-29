@@ -18,8 +18,6 @@ public class LocalGroup {
 	private final LocalItemType type;
 	private final Map<String, BaseLocalItem> items = new HashMap<>();
 
-	private long sizeLimit = -1;
-
 	public LocalGroup(@NonNull LocalItemType type) {
 		this.type = type;
 	}
@@ -56,29 +54,26 @@ public class LocalGroup {
 		}
 	}
 
-	public void setSizeLimit(long sizeLimit) {
-		this.sizeLimit = sizeLimit;
-	}
-
 	@NonNull
 	public String getSizeDescription(@NonNull Context context) {
 		String formattedSize = AndroidUtils.formatSize(context, getSize());
-		return hasSizeLimit() ? "≥ " + formattedSize : formattedSize;
+		return isSizeFullyCalculated() ? formattedSize : "≥ " + formattedSize;
+	}
+
+	public boolean isSizeFullyCalculated() {
+		for (BaseLocalItem item : items.values()) {
+			if (item instanceof LocalItem localItem && localItem.isSizeCalculationLimitReached()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public long getSize() {
-		return hasSizeLimit() ? sizeLimit : getTotalItemsSize();
-	}
-
-	private long getTotalItemsSize() {
 		long size = 0;
 		for (BaseLocalItem item : items.values()) {
 			size += item.getSize();
 		}
 		return size;
-	}
-
-	public boolean hasSizeLimit() {
-		return sizeLimit > 0;
 	}
 }

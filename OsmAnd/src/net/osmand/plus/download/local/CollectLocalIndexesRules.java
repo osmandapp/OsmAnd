@@ -53,21 +53,14 @@ public class CollectLocalIndexesRules {
 		return addUnknown;
 	}
 
-	public boolean shouldCalculateSizeSeparately(@NonNull LocalItemType type) {
-		return typesToCalculateSizeSeparately.containsKey(type);
-	}
-
-	public boolean isSeparatelyCalculatedSizeLimitReached(@NonNull LocalItemType type, long size) {
-		Long limit = getCalculationSizeLimit(type);
-		if (limit != null && limit > 0) {
-			return size > limit;
-		}
-		return false;
-	}
-
 	@Nullable
 	public Long getCalculationSizeLimit(@NonNull LocalItemType type) {
 		return typesToCalculateSizeSeparately.get(type);
+	}
+
+	@NonNull
+	public Collection<LocalItemType> getTypesToCalculateSizeSeparately() {
+		return typesToCalculateSizeSeparately.keySet();
 	}
 
 	public static class Builder {
