@@ -366,7 +366,7 @@ public class VoiceRouter {
 	}
 
 	public void announceSpeedAlarm(int maxSpeed, float speed) {
-		long ms = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 		if (waitAnnouncedSpeedLimit == 0) {
 			//  Wait 120 seconds after previous announcement
 			if (now - lastAnnouncedSpeedLimit > SPEEDING_ANNOUNCEMENTS_INTERVAL_MS) {
