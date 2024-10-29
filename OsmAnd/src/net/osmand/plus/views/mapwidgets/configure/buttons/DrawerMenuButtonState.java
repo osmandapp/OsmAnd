@@ -53,10 +53,19 @@ public class DrawerMenuButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
+	public String getDefaultIconName() {
 		boolean dashboard = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
-		String iconName = dashboard ? "ic_dashboard" : "ic_navigation_drawer";
-		return new ButtonAppearanceParams(iconName, getDefaultSize(), OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+		return dashboard ? "ic_dashboard" : "ic_navigation_drawer";
+	}
+
+	@Override
+	public float getDefaultOpacity() {
+		return OPAQUE_ALPHA;
+	}
+
+	@Override
+	public int getDefaultCornerRadius() {
+		return RECTANGULAR_RADIUS_DP;
 	}
 
 	@NonNull

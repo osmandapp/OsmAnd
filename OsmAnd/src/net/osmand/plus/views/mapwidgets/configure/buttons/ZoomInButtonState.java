@@ -7,6 +7,7 @@ import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.PO
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -53,8 +54,8 @@ public class ZoomInButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_zoom_in", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return "ic_zoom_in";
 	}
 
 	@NonNull

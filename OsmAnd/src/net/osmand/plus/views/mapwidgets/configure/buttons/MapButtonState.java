@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
 import android.graphics.drawable.Drawable;
 
@@ -26,7 +28,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class MapButtonState {
 
@@ -86,15 +87,28 @@ public abstract class MapButtonState {
 
 	public abstract boolean isEnabled();
 
+	@NonNull
+	public ButtonAppearanceParams createDefaultAppearanceParams() {
+		return new ButtonAppearanceParams(getDefaultIconName(), getDefaultSize(), getDefaultOpacity(), getDefaultCornerRadius());
+	}
+
 	@LayoutRes
 	public abstract int getDefaultLayoutId();
+
+	@NonNull
+	public abstract String getDefaultIconName();
 
 	public int getDefaultSize() {
 		return BIG_SIZE_DP;
 	}
 
-	@NonNull
-	public abstract ButtonAppearanceParams createDefaultAppearanceParams();
+	public float getDefaultOpacity() {
+		return TRANSPARENT_ALPHA;
+	}
+
+	public int getDefaultCornerRadius() {
+		return ROUND_RADIUS_DP;
+	}
 
 	@Nullable
 	public String getSavedIconName() {
@@ -167,16 +181,6 @@ public abstract class MapButtonState {
 			cornerRadius = defaultParams.getCornerRadius();
 		}
 		return new ButtonAppearanceParams(iconName, size, opacity, cornerRadius);
-	}
-
-	@NonNull
-	public String getPreferredIconName(@Nullable String originalName) {
-		return Objects.requireNonNull(getPreferredIconName(originalName, true));
-	}
-
-	@Nullable
-	public String getPreferredIconName(@Nullable String originalName, boolean overwriteEmpty) {
-		return Algorithms.isEmpty(originalName) && overwriteEmpty ? "" : originalName;
 	}
 
 	@NonNull
