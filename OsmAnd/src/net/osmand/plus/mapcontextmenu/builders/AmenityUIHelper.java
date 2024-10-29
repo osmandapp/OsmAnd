@@ -289,7 +289,6 @@ public class AmenityUIHelper extends MenuBuilder {
 					AmenityInfoRow infoRow = createAmenityInfoRow(context, localizedKey, localizedValue, null);
 					if (infoRow != null) {
 						infoRows.add(infoRow);
-						hasWiki = false; // allow another hasWiki at return
 					}
 				}
 			}
@@ -304,6 +303,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
+		hasWiki = false; // allow another hasWiki try for infoRow at return
 		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
