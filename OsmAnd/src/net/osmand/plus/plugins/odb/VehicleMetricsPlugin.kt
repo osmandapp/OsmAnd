@@ -416,51 +416,39 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	@SuppressLint("MissingPermission")
 	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
-		if(currentConnectingState != OBDConnectionState.DISCONNECTED) {
+		if (currentConnectingState != OBDConnectionState.DISCONNECTED) {
 			disconnect()
 		}
-		if (currentConnectingState == OBDConnectionState.DISCONNECTED) {
-			if (connectedDeviceInfo == null) {
-				if (BLEUtils.isBLEEnabled(activity)) {
-					if (AndroidUtils.hasBLEPermission(activity)) {
-						onConnecting(deviceInfo)
-						if (socket != null && socket?.isConnected == true) {
-							socket?.close()
-							socket = null
-						}
-						OBDDispatcher.useInfoLogging =
-							PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
+		if (BLEUtils.isBLEEnabled(activity)) {
+			if (AndroidUtils.hasBLEPermission(activity)) {
+				onConnecting(deviceInfo)
+				OBDDispatcher.useInfoLogging =
+					PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
 
-						if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
-							onDeviceConnected(deviceInfo)
-							val simulator = ODBSimulationSource()
-							val input = simulator.reader
-							val output = simulator.writer
-							OBDDispatcher.setReadWriteStreams(input, output)
-							return true
-						}
+				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
+					onDeviceConnected(deviceInfo)
+					val simulator = ODBSimulationSource()
+					val input = simulator.reader
+					val output = simulator.writer
+					OBDDispatcher.setReadWriteStreams(input, output)
+					return true
+				}
 
-						val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
-						bluetoothAdapter?.let { adapter ->
-							LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
-							val pairedDevices = adapter.bondedDevices.toList()
-							val obdDevice: BluetoothDevice? =
-								pairedDevices.find { it.address == deviceInfo.address }
-							if (obdDevice != null) {
-								connectToDevice(activity, obdDevice)
-							} else {
-								LOG.debug("bt device ${deviceInfo.name} - ${deviceInfo.address}")
-								onDisconnected(deviceInfo)
-							}
-						}
+				val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
+				bluetoothAdapter?.let { adapter ->
+					LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
+					val pairedDevices = adapter.bondedDevices.toList()
+					val obdDevice: BluetoothDevice? =
+						pairedDevices.find { it.address == deviceInfo.address }
+					if (obdDevice != null) {
+						connectToDevice(activity, obdDevice)
 					} else {
-						AndroidUtils.requestBLEPermissions(activity)
+						LOG.debug("bt device ${deviceInfo.name} - ${deviceInfo.address}")
+						onDisconnected(deviceInfo)
 					}
 				}
 			} else {
-				socket?.close()
-				connectedDeviceInfo = null
-				connectToObd(activity, deviceInfo)
+				AndroidUtils.requestBLEPermissions(activity)
 			}
 		}
 		return socket?.isConnected == true
