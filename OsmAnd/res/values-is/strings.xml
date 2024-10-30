@@ -1965,11 +1965,7 @@
     <string name="rendering_attr_showRoadMaps_description">Veldu þegar birta á kort einungis með vegum:</string>
     <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir, veggöng), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar.</string>
     <string name="osmand_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-    <string name="osmand_extended_description_part7">Leggðu þitt fram til OSM 
-\n • Tilkynntu um villur í gögnum 
-\n • Sendu inn GPX-ferla til OSM beint úr forritinu 
-\n • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
-\n</string>
+    <string name="osmand_extended_description_part7">Leggðu þitt fram til OSM \n • Tilkynntu um villur í gögnum \n • Sendu inn GPX-ferla til OSM beint úr forritinu \n • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)</string>
     <string name="osmand_extended_description_part8">OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir. 
 \n Gæði og áætluð þekja landakorta: 
 \n • Vestur-Evrópa: **** 
@@ -2463,12 +2459,7 @@
 \n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur.
 \n
 \n Nokkrir af helstu eiginleikunum:</string>
-    <string name="osmand_plus_extended_description_part5">Öryggiseiginleikar
-\n • Hægt að velja sjálfvirka skiptingu milli dags- og nætursýnar
-\n • Valkvæð birting hraðatakmarkana, með áminningu ef farið er yfir hraðatakmörk
-\n • Hægt að láta aðdrátt vera háðan hraða
-\n • Deildu staðsetningunni þinni svo að vinir þínir geti fundið þig
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Öryggiseiginleikar \n • Hægt að velja sjálfvirka skiptingu milli dags- og nætursýnar \n • Valkvæð birting hraðatakmarkana, með áminningu ef farið er yfir hraðatakmörk \n • Hægt að láta aðdrátt vera háðan hraða \n • Deildu staðsetningunni þinni svo að vinir þínir geti fundið þig</string>
     <string name="osmand_plus_extended_description_part6">Eiginleikar fyrir hjóla- og göngufólk
 \n • Skoðaðu göngu-, bakpokaferða- og hjólaslóðir, frábært fyrir útilífsfólk
 \n • Sérstakir birtingar- og leiðarvalshamir fyrir hjólandi og gangandi
@@ -2476,14 +2467,7 @@
 \n • Hægt að skrá ferð í GPX-skrá á tækinu eða í þjónustu á netinu
 \n • Valkvæð birting á hraða og hæðarupplýsingum
 \n • Birting á hæðarlínum og hæðaskyggingum (í gegnum forritsviðbót)</string>
-    <string name="osmand_plus_extended_description_part3">Skoðun landakorts 
-\n • Birting á staðsetningu þinni og stefnu 
-\n • Hægt er að láta skjáinn stefna samkvæmt áttavita eða hreyfingarstefnu þinni 
-\n • Vistaðu mikilvæga staði í Eftirlæti 
-\n • Birtu merkisstaði (POI - point of interests) í kringum þig 
-\n • Birtu sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi 
-\n • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Skoðun landakorts \n • Birting á staðsetningu þinni og stefnu \n • Hægt er að láta skjáinn stefna samkvæmt áttavita eða hreyfingarstefnu þinni \n • Vistaðu mikilvæga staði í Eftirlæti \n • Birtu merkisstaði (POI - point of interests) í kringum þig \n • Birtu sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi \n • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \n OsmAnd leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn.
@@ -2506,69 +2490,17 @@
 \n - Enginn aðgangur að ónettengdum Wikipedia-merkisstöðum.
 \n
 \n OsmAnd er í virkri þróun, verkefnið okkar og frekari framfarir byggjast á fjárframlögum til að fjármagna þróun og prófanir á nýjum eiginleikum. Vinsamlega íhugaðu að kaupa OsmAnd+, fjármagna sérstakar nýjar aðgerðir eða gefa almennt framlag á https://osmand.net.</string>
-    <string name="osmand_extended_description_part2">GPS-leiðsögn
-\n • Þú getur valið leiðsögn með nettengingu (hraðvirkt) eða án nettengingar (engin aukagjöld þegar þú ert erlendis) 
-\n • Raddleiðsögn beygju-fyrir-beygju (upptökur eða talgervill) 
-\n • Sjálfvirkur endurútreikningur leiðar þegar farið er út af leið 
-\n • Hægt að gefa ábendingar um akreinaskipti, birta götuheiti og áætlaðan komutíma 
-\n • Til að auka öryggið er hægt að velja sjálfvirka skiptingu milli dags- og nætursýnar 
-\n • Þú getur valið að birta hraðatakmarkanir, með áminningu ef farið er yfir löglegan hraða 
-\n • Hægt að láta aðdrátt vera háðan hraða 
-\n • Leit að stöðum eftir heimilisfangi, eftir tegund (t.d.: veitingastaður, hótel, bensínstöð, safn), eða eftir landfræðilegum hnitum 
-\n • Styður millipunkta á leiðinni þinni 
-\n • Þú getur skráð þinn eigin GPX-feril eða náð í einn slíkan og fylgt honum
-\n</string>
-    <string name="osmand_extended_description_part3">Landakort
-\n • Birtir merkisstaði (POI - point of interests) í kringum þig 
-\n • Hægt er að láta kortið stefna samkvæmt áttavita eða hreyfingarstefnu þinni 
-\n • Sýnir hvar þú ert og hvert þú ert að horfa 
-\n • Deildu staðsetningunni þinni svo að vinir þínir geti fundið þig 
-\n • Vistaðu mikilvæga staði í Eftirlæti 
-\n • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði 
-\n • Birtir sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi 
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-leiðsögn \n • Þú getur valið leiðsögn með nettengingu (hraðvirkt) eða án nettengingar (engin aukagjöld þegar þú ert erlendis) \n • Raddleiðsögn beygju-fyrir-beygju (upptökur eða talgervill) \n • Sjálfvirkur endurútreikningur leiðar þegar farið er út af leið \n • Hægt að gefa ábendingar um akreinaskipti, birta götuheiti og áætlaðan komutíma \n • Til að auka öryggið er hægt að velja sjálfvirka skiptingu milli dags- og nætursýnar \n • Þú getur valið að birta hraðatakmarkanir, með áminningu ef farið er yfir löglegan hraða \n • Hægt að láta aðdrátt vera háðan hraða \n • Leit að stöðum eftir heimilisfangi, eftir tegund (t.d.: veitingastaður, hótel, bensínstöð, safn), eða eftir landfræðilegum hnitum \n • Styður millipunkta á leiðinni þinni \n • Þú getur skráð þinn eigin GPX-feril eða náð í einn slíkan og fylgt honum</string>
+    <string name="osmand_extended_description_part3">Landakort \n • Birtir merkisstaði (POI - point of interests) í kringum þig \n • Hægt er að láta kortið stefna samkvæmt áttavita eða hreyfingarstefnu þinni \n • Sýnir hvar þú ert og hvert þú ert að horfa \n • Deildu staðsetningunni þinni svo að vinir þínir geti fundið þig \n • Vistaðu mikilvæga staði í Eftirlæti \n • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði \n • Birtir sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi</string>
     <string name="osmand_extended_description_part5">Hjólreiðar
 \n • Þú finnur hjólastíga á kortinu
 \n • GPS-leiðsögn í hjólaham getur sett saman ferðina þína með því að nýta sér hjólastíga
 \n • Þú getur séð hraða þinn og hæð
 \n • Skráning GPX-ferla gerir þér kleift að skrá ferðina þína og að deila henni
 \n • Með forritsviðbót geturðu virkjað birtingu á hæðarlínum og skyggingu á landslagi</string>
-    <string name="osmand_extended_description_part6">Ganga, fjallaferð, borgarferð
-\n • Landakortið sýnir þér stíga fyrir göngu- og bakpokaferðir
-\n • Efni af Wikipedia á tungumáli sem þú kýst helst getur sagt þér margt á meðan þú flakkar um borgir
-\n • Biðstöðvar almenningssamgangna (strætó, sporvagnar, lestir) ásamt nöfnum leiða, hjálpa til við að rata í nýrri borg
-\n • GPS-leiðsögn í gönguham getur sett saman ferðina þína með því að nýta sér göngustíga
-\n • Þú getur sent inn og fylgt GPX-ferlum eða skráð og deilt þínum eigin
-\n</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn.
-\n
-\n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur.
-\n
-\n Nokkrir kjarnaeiginleikar:
-\n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu)
-\n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn
-\n - Hægt er að sækja ótakmörkuð lands- eða svæðiskort beint úr forritinu
-\n - aðgangur að ónettengdum Wikipedia-merkisstöðum (sækja)
-\n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi
-\n
-\n - Ónettengd leit að heimilisföngum og stöðum (POI)
-\n - Ónettengd vegvísun á meðalvegalengdum
-\n - Stillingar fyrir akandi, hjólandi og gangandi með:
-\n - val um sjálfvirka skiptingu milli dag-/næturhams
-\n - val um hraðaháða birtingu korta
-\n - val um að stefna korta miðist við áttavita eða hreyfingarstefnu
-\n - val um leiðbeiningar fyrir akreinaskipti, hraðatakmarkanir, upptökur eða TTS-talgervilsraddir
-\n</string>
-    <string name="osmand_plus_extended_description_part2">Leiðsögn
-\n • Virkar með nettengingu (hraðvirkt) eða án nettengingar (engin aukagjöld þegar þú ert erlendis)
-\n • Raddleiðsögn beygju-fyrir-beygju (upptökur eða talgervill)
-\n • Hægt að gefa ábendingar um akreinaskipti, birta götuheiti og áætlaðan komutíma
-\n • Styður millipunkta á leiðinni þinni
-\n • Sjálfvirkur endurútreikningur leiðar þegar farið er út af leið
-\n • Leit að stöðum eftir heimilisfangi, eftir tegund (t.d.: veitingastaður, hótel, bensínstöð, safn), eða eftir landfræðilegum hnitum
-\n</string>
+    <string name="osmand_extended_description_part6">Ganga, fjallaferð, borgarferð \n • Landakortið sýnir þér stíga fyrir göngu- og bakpokaferðir \n • Efni af Wikipedia á tungumáli sem þú kýst helst getur sagt þér margt á meðan þú flakkar um borgir \n • Biðstöðvar almenningssamgangna (strætó, sporvagnar, lestir) ásamt nöfnum leiða, hjálpa til við að rata í nýrri borg \n • GPS-leiðsögn í gönguham getur sett saman ferðina þína með því að nýta sér göngustíga \n • Þú getur sent inn og fylgt GPX-ferlum eða skráð og deilt þínum eigin</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n OsmAnd+ leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn. \n \n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur. \n \n Nokkrir kjarnaeiginleikar: \n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu) \n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn \n - Hægt er að sækja ótakmörkuð lands- eða svæðiskort beint úr forritinu \n - aðgangur að ónettengdum Wikipedia-merkisstöðum (sækja) \n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi \n \n - Ónettengd leit að heimilisföngum og stöðum (POI) \n - Ónettengd vegvísun á meðalvegalengdum \n - Stillingar fyrir akandi, hjólandi og gangandi með: \n - val um sjálfvirka skiptingu milli dag-/næturhams \n - val um hraðaháða birtingu korta \n - val um að stefna korta miðist við áttavita eða hreyfingarstefnu \n - val um leiðbeiningar fyrir akreinaskipti, hraðatakmarkanir, upptökur eða TTS-talgervilsraddir</string>
+    <string name="osmand_plus_extended_description_part2">Leiðsögn \n • Virkar með nettengingu (hraðvirkt) eða án nettengingar (engin aukagjöld þegar þú ert erlendis) \n • Raddleiðsögn beygju-fyrir-beygju (upptökur eða talgervill) \n • Hægt að gefa ábendingar um akreinaskipti, birta götuheiti og áætlaðan komutíma \n • Styður millipunkta á leiðinni þinni \n • Sjálfvirkur endurútreikningur leiðar þegar farið er út af leið \n • Leit að stöðum eftir heimilisfangi, eftir tegund (t.d.: veitingastaður, hótel, bensínstöð, safn), eða eftir landfræðilegum hnitum</string>
     <string name="enter_the_file_name">Settu inn skráarheitið.</string>
     <string name="map_import_error">Villa í innflutningi landakorts</string>
     <string name="map_imported_successfully">Tókst að flytja inn landakort</string>
@@ -2982,27 +2914,7 @@
     <string name="edit_profile_nav_settings_subtitle">Veldu valkosti leiðsagnar fyrir sniðið</string>
     <string name="routing_attr_max_num_changes_description">Tilgreindu efri mörk á fjölda breytinga</string>
     <string name="routing_attr_max_num_changes_name">Fjöldi breytinga</string>
-    <string name="release_3_4">• Forritasnið: útbúðu þín eigin snið fyrir þínar þarfir, með sérniðnum táknmyndum og litum 
-\n 
-\n • Nú er hægt að sérsníða í öllum sniðum jafnt sjálfgefinn hraða sem hámarks-/lágmarkshraða 
-\n 
-\n • Viðmótshluti með fyrirliggjandi hnitum 
-\n 
-\n • Bætt við valkosti til að birta áttavita og vegalengdarradíus á korti 
-\n 
-\n • Lagfærð ferilskráning í bakgrunni 
-\n 
-\n • Lagfært niðurhal korta í bakgrunni 
-\n 
-\n • Valkosturinn \'Kveikja á skjá\' kemur aftur inn 
-\n 
-\n • Lagfært val á tungumálum Wikipedia 
-\n 
-\n • Lagfærð hegðun áttavitahnapps við leiðsögn 
-\n 
-\n • Aðrir lagfærðir gallar
-\n
-\n</string>
+    <string name="release_3_4">• Forritasnið: útbúðu þín eigin snið fyrir þínar þarfir, með sérniðnum táknmyndum og litum \n \n • Nú er hægt að sérsníða í öllum sniðum jafnt sjálfgefinn hraða sem hámarks-/lágmarkshraða \n \n • Viðmótshluti með fyrirliggjandi hnitum \n \n • Bætt við valkosti til að birta áttavita og vegalengdarradíus á korti \n \n • Lagfærð ferilskráning í bakgrunni \n \n • Lagfært niðurhal korta í bakgrunni \n \n • Valkosturinn \'Kveikja á skjá\' kemur aftur inn \n \n • Lagfært val á tungumálum Wikipedia \n \n • Lagfærð hegðun áttavitahnapps við leiðsögn \n \n • Aðrir lagfærðir gallar</string>
     <string name="turn_screen_on_router">Vekja við beygjur</string>
     <string name="turn_screen_on_time_descr">Skilgreindu þann tíma sem kveikt er á skjánum.</string>
     <string name="turn_screen_on_sensor">Nota nálægðarskynjara</string>
@@ -3166,23 +3078,7 @@
     <string name="routing_attr_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
     <string name="update_all_maps">Uppfæra öll kort</string>
     <string name="update_all_maps_q">Á að uppfæra öll (%1$d) kort\?</string>
-    <string name="release_3_5">• Uppfærðar stillingar fyrir forrit og notkunarsnið: Stillingar eru núna flokkaðar eftir gerð þeirra. Hægt er að sérsníða hvert notkunarsnið sérstaklega. 
-\n 
-\n • Nýr niðurhalsgluggi fyrir landakort sem stingur upp á hvaða kort ætti að sækja 
-\n 
-\n • Lagfæringar á dökku þema 
-\n 
-\n • Löguð vandamál við leiðagerð víðsvegar um heiminn 
-\n 
-\n • Uppfært grunnkort með nákvæmara vegakerfi 
-\n 
-\n • Lagfærð flóðasvæði víðsvegar um heiminn 
-\n 
-\n • Skíðaleiðir: bætt við hæðarsniði og flækjustigi leiða í nákvæmari eiginleika leiðar 
-\n 
-\n • Auk ýmissa annarra lagfæringa 
-\n 
-\n</string>
+    <string name="release_3_5">• Uppfærðar stillingar fyrir forrit og notkunarsnið: Stillingar eru núna flokkaðar eftir gerð þeirra. Hægt er að sérsníða hvert notkunarsnið sérstaklega. \n \n • Nýr niðurhalsgluggi fyrir landakort sem stingur upp á hvaða kort ætti að sækja \n \n • Lagfæringar á dökku þema \n \n • Löguð vandamál við leiðagerð víðsvegar um heiminn \n \n • Uppfært grunnkort með nákvæmara vegakerfi \n \n • Lagfærð flóðasvæði víðsvegar um heiminn \n \n • Skíðaleiðir: bætt við hæðarsniði og flækjustigi leiða í nákvæmari eiginleika leiðar \n \n • Auk ýmissa annarra lagfæringa</string>
     <string name="apply_preference_to_all_profiles">Virkja þessa breytingu í öllum eða einungis völdu notkunarsniði.</string>
     <string name="shared_preference">Sameiginlegt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
@@ -4889,7 +4785,7 @@
     <string name="external_device_ble">BLE</string>
     <string name="external_device_ant">ANT</string>
     <string name="ant_plus_bluetooth_off">Slökkt er á Bluetooth</string>
-    <string name="ant_plus_bluetooth_off_description">Kveikja á Bluetooth til að finna og para skynjara.</string>
+    <string name="ant_plus_bluetooth_off_description">Kveiktu á Bluetooth til að finna og para skynjara.</string>
     <string name="ant_plus_searching_text">Leita að skynjurum</string>
     <string name="ant_plus_help_title">Ég veit ekki hvaða tegund skynjara ég er með</string>
     <string name="ant_plus_searching">Leita</string>
@@ -5657,13 +5553,61 @@
     <string name="screen_is_locked_by_action_button">Snertiskjárinn er læstur. Ýttu á hnapp til að aflæsa.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Upplýsingar farartækis</string>
-    <string name="connect_obd_instructions_title">OsmAnd styður Bluetooth-tengingar við OBD-II skanna.</string>
+    <string name="connect_obd_instructions_title">OsmAnd styður Bluetooth-tengingar við OBD-II skynjara.</string>
     <string name="obd_how_to_connect">Hvernig skal tengjast:</string>
-    <string name="connect_obd_instructions_step1">1. Tengdu skannann við OBD-II gátt farartækisins.</string>
+    <string name="connect_obd_instructions_step1">1. Tengdu skynjarann við OBD-II gátt farartækisins.</string>
     <string name="connect_obd_instructions_step2">2. Ræstu vél farartækisins</string>
-    <string name="connect_obd_instructions_step4">4. Ýttu á \'Tengjast,\' og veldu skannann þinn úr listanum.</string>
+    <string name="connect_obd_instructions_step4">4. Ýttu á \'Tengjast,\' og veldu skynjarann þinn úr listanum.</string>
     <string name="learn_more_about_obd_sensors">Læra meira um skynjara.</string>
     <string name="screen_is_locked_by_external_button">Snertiskjárinn er læstur. Til að aflæsa honum skaltu ýta á %1$s-hnappinn eða hnappinn á skjánum.</string>
     <string name="screen_is_unlocked">Snertiskjárinn er ólæstur.</string>
     <string name="obd_fuel_left_liters">Eldsneyti eftir (lítrar)</string>
+    <string name="route_guidance">Leiðsögn leiðar</string>
+    <string name="obd_nothing_found_description">Athugaðu eftirfarandi:\n – Tryggðu að kveikt sé á Bluetooth\n – Vél farartækisins sé í gangi\n – Tryggðu að tækið þitt sé nógu nálægt skynjaranum.</string>
+    <string name="obd_widget_engine_speed">Vélarhraði</string>
+    <string name="obd_nothing_found_text">Engir skynjarar fundust</string>
+    <string name="obd_searching_text">Leita að skynjurum</string>
+    <string name="obd_bluetooth_off_description">Kveiktu á Bluetooth til að finna og tengja skynjara.</string>
+    <string name="obd_searching_text_description">Haltu tækinu þínu nálægt skynjaranum. Gakktu úr skugga um að vélin sé í gangi.</string>
+    <string name="obd_widget_vehicle_speed">Hraði farartækis</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_left_percent">Eldsneyti eftir (%)</string>
+    <string name="obd_fuel_left_liter">Eldsneyti eftir (l)</string>
+    <string name="obd_fuel_left_km">Eldsneyti eftir (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Eldsneytiseyðsla (obd)</string>
+    <string name="obd_device_forget_sensor_description">Skynjari verður fjarlægður af listanum. Þú munt geta parað þennan skynjara aftur hvenær sem er.</string>
+    <string name="shared_string_dynamic">Breytilegt</string>
+    <string name="obd_connected_to_device">Tengt við %s</string>
+    <string name="l_100km">l/100km</string>
+    <string name="dynamic_icon_type_summary">Táknmynd breytist eftir stöðu aðgerðar.</string>
+    <string name="obd_throttle_position_desc">Birtir þrýsting eldsneytis á farartæki frá OBD-skynjara</string>
+    <string name="obd_calculated_engine_load_desc">Birtir reiknað álag á vél byggt á skynjara</string>
+    <string name="speedometer_maximum">Hámark</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/klst</string>
+    <string name="obd_fuel_consumption_rate_l_h">Eldsneytiseyðsla (l/klst)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Eldsneytiseyðsla (skynjari)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Birtir eldsneytiseyðslu farartækis út frá útreikningum (l/klst)</string>
+    <string name="obd_fuel_level_liter">Magn eldsneytis (l)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Birtir eldsneytiseyðslu farartækis út frá skynjara (l/klst)</string>
+    <string name="connect_obd_instructions_step">1. Tengdu skynjarann í OBD-II gátt farartækisins.\n\n 2. Kveiktu á vél farartækisins\n\n 3. Virkjaðu Bluetooth á tækinu þínu\n\n 4. Ýttu á \'%1$s\' og veldu skynjarann þinn úr listanum.</string>
+    <string name="obd_fuel_level_percent">Magn eldsneytis (%)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Eldsneytiseyðsla l/klst</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Birtir eldsneytiseyðslu farartækis út frá útreikningum (%/klst)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Birtir eldsneytiseyðslu farartækis út frá útreikningum (l/km)</string>
+    <string name="obd_engine_runtime_desc">Birtir keyrslutíma vélar farartækis frá OBD-skynjara</string>
+    <string name="obd_throttle_position">Staða inngjafar</string>
+    <string name="obd_fuel_pressure">Þrýstingur eldsneytis</string>
+    <string name="obd_fuel_pressure_desc">Birtir þrýsting eldsneytis á farartæki frá OBD-skynjara</string>
+    <string name="simulate_obd">Líkja eftir OBD-gögnum</string>
+    <string name="obd_engine_runtime">Keyrslutími vélar</string>
+    <string name="obd_calculated_engine_load">Reiknað álag á vél</string>
+    <string name="obd_engine_oil_temperature">Hitastig vélaolíu</string>
+    <string name="obd_not_connected_to_device">Aftengt frá %s</string>
+    <string name="obd_connecting_to_device">Tengist við %s</string>
+    <string name="bt_start_pair_failed">Mistókst að setja af stað pörun við tækið</string>
+    <string name="obd_fuel_consumption_rate_l_km">Eldsneytiseyðsla (l/km)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Eldsneytiseyðsla (%/klst</string>
+    <string name="obd_device_forget_sensor">Gleyma skynjara</string>
+    <string name="obd_engine_oil_temperature_desc">Birtir hitastig vélaolíu farartækis frá OBD-skynjara</string>
 </resources>
