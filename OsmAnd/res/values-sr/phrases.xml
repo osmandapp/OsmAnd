@@ -4883,4 +4883,19 @@
     <string name="poi_payment_parkster_no">Паркстер се не прима</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Тунел забрањен за бициклисте</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Тунел забрањен за пешаке</string>
+    <string name="poi_route_article_point">Тачке на путовањима</string>
+    <string name="poi_activities_trekking">Планинарење</string>
+    <string name="poi_activities_kayak">Спортови на води</string>
+    <string name="poi_activities_horse">Јахање коња</string>
+    <string name="poi_activities_skiing">Зимски спортови</string>
+    <string name="poi_activities_snowmobile">Моторне санке</string>
+    <string name="poi_activities_mountain_bike">Брдски бициклизам</string>
+    <string name="poi_route_article">Чланци о путовањима</string>
+    <string name="poi_route_track">Друге руте</string>
+    <string name="poi_route_track_point">Тачке других рута</string>
+    <string name="poi_activities_bicycle">Бицикл</string>
+    <string name="poi_activities_pedestrian">Пешачење</string>
+    <string name="poi_activities_running">Трчање</string>
+    <string name="poi_activities_fitness">Стазе за трчање</string>
+    <string name="poi_activities_inline_skates">Котураљке</string>
 </resources>

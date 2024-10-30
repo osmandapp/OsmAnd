@@ -647,6 +647,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);
+			if (RouteCalculationResult.FIRST_LAST_LOCATION_PROVIDER.equals(loc.getProvider())) {
+				continue;
+			}
 			if (nf != null) {
 				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
 				if(pnt < routePoint + cd ) {

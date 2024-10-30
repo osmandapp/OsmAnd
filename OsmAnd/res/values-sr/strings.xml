@@ -5571,7 +5571,7 @@
     <string name="new_trip_segment">Нови део путовања</string>
     <string name="quick_action_start_pause_recording">Дугме за покретање, застанак или наставак снимања стазе ГПКС-а.</string>
     <string name="quick_action_verb_start_pause">Покрени / застани</string>
-    <string name="help_article_personal_color_palette_schemes_name">Образац боја</string>
+    <string name="help_article_personal_color_palette_schemes_name">Образаци боја</string>
     <string name="track_does_not_contain_data_to_save">Траг не садржи податке за чување.</string>
     <string name="quick_action_finish_trip_recording_summary">Дугме за чување стазе ГПКС-а и завршетак снимања путовања.</string>
     <string name="start_trip_recording_first_m">Прво започните снимање путовања.</string>
