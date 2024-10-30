@@ -30,6 +30,12 @@ object OBDDataComputer {
 		compute()
 	}
 
+	fun clearCache() {
+		for (widget in widgets) {
+			widget.clearData()
+		}
+	}
+
 	fun registerLocation(l: OBDLocation) {
 		if (widgets.isNotEmpty()) {
 			// concurrency - change collection in one thread. Other places only read
@@ -229,6 +235,13 @@ object OBDDataComputer {
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
+
+		fun clearData() {
+			values = ArrayList()
+			value = null
+			cachedVersion = 0
+			version = 0
+		}
 
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {

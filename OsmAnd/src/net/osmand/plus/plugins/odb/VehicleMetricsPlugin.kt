@@ -378,6 +378,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		socket = null
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
+		setLastConnectedDevice(null)
 		if (lastConnectedDeviceInfo != null) {
 			onDisconnected(lastConnectedDeviceInfo)
 		}
@@ -460,6 +461,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				connectedDeviceInfo = null
 				connectToObd(activity, deviceInfo)
 			}
+		} else {
+			disconnect()
+			connectToObd(activity, deviceInfo)
 		}
 		return socket?.isConnected == true
 	}

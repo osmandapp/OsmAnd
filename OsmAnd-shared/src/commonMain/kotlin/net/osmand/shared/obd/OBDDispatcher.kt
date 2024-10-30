@@ -140,6 +140,8 @@ object OBDDispatcher {
 	fun stopReading() {
 		log("stop reading")
 		setReadWriteStreams(null, null)
+		sensorDataCache.clear()
+		OBDDataComputer.clearCache()
 		log("after stop reading")
 	}
 
