@@ -154,6 +154,8 @@ public class OsmRouteType {
 			case "btt":
 			case "vth":
 			case "mtb ride":
+			case "disused:mtb":
+			case "abandoned:mtb":
 				return MOUNTAINBIKE;
 			case "hiking":
 			case "route=hiking":
@@ -164,6 +166,13 @@ public class OsmRouteType {
 			case "randonnée":
 			case "trekking":
 			case "climbing":
+			case "ferrata":
+			case "via_ferrata":
+			case "proposed:hiking":
+			case "deprecated:hiking":
+			case "abandoned:hiking":
+			case "old_hiking":
+			case "canyoning":
 				return HIKING;
 			case "bike":
 			case "biking":
@@ -194,6 +203,8 @@ public class OsmRouteType {
 			case "network=ncn":
 			case "network=icn":
 			case "network=lcn":
+			case "proposed:bicycle":
+			case "old_bicycle":
 				return CYCLING;
 			case "car":
 			case "motorcar":
@@ -249,6 +260,8 @@ public class OsmRouteType {
 			case "network=iwn":
 			case "network=lwn":
 			case "network=rwn":
+			case "unmarked:foot":
+			case "nordic_walking":
 				return WALKING;
 			case "ling-moto":
 			case "motorbiking":
@@ -277,6 +290,9 @@ public class OsmRouteType {
 			case "lake":
 			case "lakes":
 			case "canal":
+			case "waterway":
+			case "motorboat":
+			case "canoe":
 				return WATER;
 			case "ski":
 			case "skiing":
@@ -289,6 +305,7 @@ public class OsmRouteType {
 			case "лыжня":
 			case "nordic":
 			case "piste":
+			case "piste:type=nordic":
 				return WINTER;
 			case "snowmobile=designated":
 			case "snowmobile=permissive":
@@ -301,6 +318,10 @@ public class OsmRouteType {
 				return RIDING;
 			case "racing":
 				return RACING;
+			case "inline_skates":
+				return INLINE_SKATES;
+			case "fitness_trail":
+				return FITNESS;
 		}
 		return null;
 	}

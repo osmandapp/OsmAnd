@@ -72,7 +72,7 @@ public enum LocationIcon {
 	}
 
 	@Nullable
-	public static String getIconForDefaultModel(@NonNull String modelName){
+	public static String getIconForDefaultModel(@NonNull String modelName) {
 		if (!isModel(modelName)) {
 			return null;
 		}
@@ -97,7 +97,7 @@ public enum LocationIcon {
 		return false;
 	}
 
-	private static List<LocationIcon> getDefaultIcons(){
+	private static List<LocationIcon> getDefaultIcons() {
 		return Arrays.asList(STATIC_DEFAULT, STATIC_CAR, STATIC_BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
 	}
 
@@ -160,6 +160,4 @@ public enum LocationIcon {
 		}
 		return name;
 	}
-
-
 }

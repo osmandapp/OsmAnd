@@ -1153,7 +1153,7 @@
     <string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodoxa etíope tewahido</string>
     <string name="poi_denomination_shaktism">Shaktismo</string>
     <string name="poi_denomination_shingon_shu">Shingon shu</string>
-    <string name="poi_internet_access_fee_yes">Acceso á Internet: baixo pagamento</string>
+    <string name="poi_internet_access_fee_yes">Acceso á Internet: aplican tarifa</string>
     <string name="poi_internet_access_fee_no">Acceso á Internet: de balde</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_club_art">Club de arte</string>
@@ -1377,7 +1377,7 @@
     <string name="poi_location_underground">Localización: subterráneo</string>
     <string name="poi_parking_fee_yes">Si</string>
     <string name="poi_parking_fee_no">Non</string>
-    <string name="poi_parking_fee">Tarifa de aparcamento</string>
+    <string name="poi_parking_fee">Aparcadoiro tarifado</string>
     <string name="poi_outdoor_seating">Mesas ao ar libre</string>
     <string name="poi_takeaway">Comida para levar</string>
     <string name="poi_recycling_accepted_waste">Aceptanse residuos</string>
@@ -1826,7 +1826,7 @@
     <string name="poi_shop_craft">Tenda de materiais de artes e traballos manuais (artesanía)</string>
     <string name="poi_fire_flapper">Cortalumes</string>
     <string name="poi_fire_water_pond">Lagoa de auga para incendios</string>
-    <string name="poi_disaster_response">Servizo de emerxencia (SES)</string>
+    <string name="poi_disaster_response">Centro de emerxencias;Protección Civil;UME</string>
     <string name="poi_traffic_calming_cushion">Coxín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_table">Plataforma elevada</string>
@@ -4134,4 +4134,8 @@
     <string name="poi_payment_parco_no">Non acepta Parco</string>
     <string name="poi_access_general">Acceso xeral</string>
     <string name="poi_parking_fee_filter">Aparcadoiro tarifado</string>
+    <string name="poi_padus_category_fee">Categoría: tarifa</string>
+    <string name="poi_us_maps_recreation_area_fee_description">Descrición da tarifa</string>
+    <string name="poi_agrarian_feed">Alimentación</string>
+    <string name="poi_coffee_filter">Café</string>
 </resources>

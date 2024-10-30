@@ -23,4 +23,8 @@ class FolderSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 	override fun sortDescending(): Boolean {
 		return false
 	}
+
+	override fun includeEmptyValues(): Boolean {
+		return true
+	}
 }

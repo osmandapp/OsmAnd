@@ -1985,13 +1985,7 @@
 \n Hægt er að sækja kort frá flestum heimsins löndum á netinu! 
 \n Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, eða eitthvað annað.</string>
     <string name="osmand_plus_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-    <string name="osmand_plus_extended_description_part7">Leggðu þitt fram til OSM
-\n • Tilkynntu um villur í gögnum
-\n • Sendu inn GPX-ferla til OSM beint úr forritinu
-\n • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
-\n • Mögulegt að skrá ferðina í bakgrunni (einnig þegar tækið er svæft) 
-\n OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Leggðu þitt fram til OSM \n • Tilkynntu um villur í gögnum \n • Sendu inn GPX-ferla til OSM beint úr forritinu \n • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) \n • Mögulegt að skrá ferðina í bakgrunni (einnig þegar tækið er svæft) \n OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.</string>
     <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
     <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
     <string name="gps_status_app_not_found">Forrit til að birta stöðu GPS fannst ekki. Leita á markaðnum?</string>
@@ -2266,20 +2260,7 @@
     <string name="audionotes_location_not_defined">Ýttu á \"Nota staðsetningu …\" til að úthluta minnispunkti á staðsetninguna.</string>
     <string name="native_library_not_running">Forritið er keyrandi í öryggisham (slökktu á þessu í stillingunum).</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner forritið er ekki uppsett. Leita á Google Play markaðnum?</string>
-    <string name="osmand_plus_extended_description_part8">Áætluð kortaþekja og gæði: 
-\n • Vestur-Evrópa: **** 
-\n • Austur-Evrópa: *** 
-\n • Rússland: *** 
-\n • Norður-Ameríka: *** 
-\n • Suður-Ameríka: ** 
-\n • Asía: ** 
-\n • Japan &amp; Kórea: *** 
-\n • Miðausturlönd: ** 
-\n • Afríka: ** 
-\n • Antarktíka: * 
-\n Flest lönd í heiminum eru tiltæk sem niðurhalspakkar
-\n Frá Afghanistan til Simbabve, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Bretland, Spánn, … 
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Áætluð kortaþekja og gæði: \n • Vestur-Evrópa: **** \n • Austur-Evrópa: *** \n • Rússland: *** \n • Norður-Ameríka: *** \n • Suður-Ameríka: ** \n • Asía: ** \n • Japan &amp; Kórea: *** \n • Miðausturlönd: ** \n • Afríka: ** \n • Antarktíka: * \n Flest lönd í heiminum eru tiltæk sem niðurhalspakkar \n Frá Afghanistan til Simbabve, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Bretland, Spánn, …</string>
     <string name="rendering_attr_contourLines_description">Birta frá aðdráttarstigi (krefst hæðarlínugagna):</string>
     <string name="live_monitoring_max_interval_to_send">Tímabiðminni fyrir rakningu með netstuðningi</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Skilgreindu tímabiðminni þar sem geymdar eru staðsetningar sem á að senda án tengingar</string>
@@ -3346,31 +3327,7 @@
     <string name="use_system_screen_timeout_promo">Þetta er sjálfgefið óvirkt: ef OsmAnd keyrir í forgrunni rennur skjárinn ekki út á tíma. 
 \n 
 \nEf þetta er virkt mun OsmAnd nota tímamörk kerfisins.</string>
-    <string name="release_3_6">• Notandasnið: núna geturðu breytt röðun, stillt táknmyndir fyrir kort, breytt öllum stillingum grunnsniða og fært þær aftur á upphaflegar stillingar
-\n
-\n • Bætt við númerum afreina í leiðsögn
-\n
-\n • Endurhönnun á stillingum viðbótar
-\n
-\n • Endurhönnun á stillingaskjánum fyrir flýtiaðgengi að öllum sniðum
-\n
-\n • Bætt við valkosti til að afrita stillingar úr öðrum sniðum
-\n
-\n • Nú er hægt að breyta röðun eða fela flokka merkisstaða í leit
-\n
-\n • Rétt hliðjöfnun táknmynda merkisstaða á kortinu
-\n
-\n • Gögnum fyrir sólarupprás/sólsetur bætt við kortastillingar
-\n
-\n • Táknmyndum fyrir Heima/Vinna bætt við kortið
-\n
-\n • Bætt við stuðningi við margar línur á lýsingum stillinga
-\n
-\n • Bætt við réttum umritunum á kort af Japan
-\n
-\n • Bætt við korti fyrir Suðurskautslandið
-\n
-\n</string>
+    <string name="release_3_6">• Notandasnið: núna geturðu breytt röðun, stillt táknmyndir fyrir kort, breytt öllum stillingum grunnsniða og fært þær aftur á upphaflegar stillingar \n \n • Bætt við númerum afreina í leiðsögn \n \n • Endurhönnun á stillingum viðbótar \n \n • Endurhönnun á stillingaskjánum fyrir flýtiaðgengi að öllum sniðum \n \n • Bætt við valkosti til að afrita stillingar úr öðrum sniðum \n \n • Nú er hægt að breyta röðun eða fela flokka merkisstaða í leit \n \n • Rétt hliðjöfnun táknmynda merkisstaða á kortinu \n \n • Gögnum fyrir sólarupprás/sólsetur bætt við kortastillingar \n \n • Táknmyndum fyrir Heima/Vinna bætt við kortið \n \n • Bætt við stuðningi við margar línur á lýsingum stillinga \n \n • Bætt við réttum umritunum á kort af Japan \n \n • Bætt við korti fyrir Suðurskautslandið</string>
     <string name="plugin_disabled_descr">Þessi viðbót er sérstakt forrit, að það gera það óvirkt mun ekki fjarlægja það.
 \n
 \nHægt er að fjarlægja það með því að fara í \'Forrit\'-stillingar Android.</string>
@@ -3729,21 +3686,7 @@
     <string name="save_global_track_interval_descr">Veldu millibil skráninga í almenna leiðarskráningu (virkjað með viðmótshlutanum \'Skráning ferðar\' á kortinu).</string>
     <string name="gpx_monitoring_stop">Setja skráningu í bið</string>
     <string name="gpx_monitoring_start">Halda áfram með skráningu</string>
-    <string name="release_3_8">• Uppfærðar aðgerðir í skipulagningu leiða: mismunandi leiðsögn á hverjum bút auk slóða
-\n
-\n • Ný útlitsvalmynd fyrir slóðir: val á lit, þykkt, birting stefnuörva, táknmynda við upphaf og endi
-\n
-\n • Bættur sýnileiki hjólreiðahnúta.
-\n
-\n • Hægt að ýta á slóðir, hafa samhengisvalmynd með grunnupplýsingum.
-\n
-\n • Bætt reiknirit leitar
-\n
-\n • Bættir valkostir fyrir \'Fylgja slóð\' í leiðsögn
-\n
-\n • Lagfærð vandamál við inn/útflutning á stillingum sniða
-\n
-\n</string>
+    <string name="release_3_8">• Uppfærðar aðgerðir í skipulagningu leiða: mismunandi leiðsögn á hverjum bút auk slóða \n \n • Ný útlitsvalmynd fyrir slóðir: val á lit, þykkt, birting stefnuörva, táknmynda við upphaf og endi \n \n • Bættur sýnileiki hjólreiðahnúta. \n \n • Hægt að ýta á slóðir, hafa samhengisvalmynd með grunnupplýsingum. \n \n • Bætt reiknirit leitar \n \n • Bættir valkostir fyrir \'Fylgja slóð\' í leiðsögn \n \n • Lagfærð vandamál við inn/útflutning á stillingum sniða</string>
     <string name="message_graph_will_be_available_after_recalculation">Bíddu aðeins.
 \nGrafið verður tiltækt eftir endurútreikning.</string>
     <string name="snowmobile_render_descr">Fyrir akstur vélsleða á sérstökum vegum og slóðum.</string>
@@ -3825,15 +3768,7 @@
     <string name="select_data_to_export">Veldu þau gögn sem á að flytja út í skrána.</string>
     <string name="select_picture">Veldu mynd</string>
     <string name="cannot_upload_image">Mistókst að senda inn mynd, reyndu aftur síðar</string>
-    <string name="release_3_9">• Bætt við möguleika á að flytja út og inn öll gögn, þar með talið stillingar, tilföng, staðir
-\n
-\n • Skipulagning leiða: gröf ferilbúta með leið, bætt við möguleika á að búa til og breyta mörgum ferilbútum
-\n
-\n • Bætt við OAuth-auðkenningarleið fyrir OpenStreetMap, endurbætt viðmót valglugga í OSM
-\n
-\n • Stuðningur við sérsniðna liti í eftirlætum og ferilpunktum
-\n
-\n</string>
+    <string name="release_3_9">• Bætt við möguleika á að flytja út og inn öll gögn, þar með talið stillingar, tilföng, staðir \n \n • Skipulagning leiða: gröf ferilbúta með leið, bætt við möguleika á að búa til og breyta mörgum ferilbútum \n \n • Bætt við OAuth-auðkenningarleið fyrir OpenStreetMap, endurbætt viðmót valglugga í OSM \n \n • Stuðningur við sérsniðna liti í eftirlætum og ferilpunktum</string>
     <string name="plan_route_split_after">Skipta upp á eftir</string>
     <string name="plan_route_add_new_segment">Bæta við nýjum bút</string>
     <string name="plan_route_split_before">Skipta upp á undan</string>
@@ -3971,19 +3906,7 @@
     <string name="select_another_colorization">Veldu aðra tegund litunar.</string>
     <string name="trip_recording_logging_interval_info">Millibil skráninga stillir tímabilið milli þess sem OsmAnd biður um staðsetningargögn.</string>
     <string name="trip_recording_show_start_dialog_setting">Ef þetta er óvirkt, mun upptaka hefjast strax eftir að ýtt er á hnappinn eða valmyndarfærsluna , staðfestingarglugga er þá sleppt.</string>
-    <string name="release_4_0_beta">• Bætt við möguleika á að sækja hæðarlínur í fetum
-\n
-\n • Landslag í leiðaskipulagi: bætt við flipum til að skipta á milli punkta eða grafs
-\n
-\n • Uppfærslur OsmAnd Live færðar í \"Sótt gögn &gt; Uppfærslur\"
-\n
-\n • Ferla er nú hægt að lita eftir hæð, hraða eða halla.
-\n
-\n • Bætt við valkosti á að breyta útliti leiðarlínu leiðsagnar
-\n
-\n • Uppfærður gluggi fyrir \"Skráning ferðar\"
-\n
-\n</string>
+    <string name="release_4_0_beta">• Bætt við möguleika á að sækja hæðarlínur í fetum \n \n • Landslag í leiðaskipulagi: bætt við flipum til að skipta á milli punkta eða grafs \n \n • Uppfærslur OsmAnd Live færðar í \"Sótt gögn &gt; Uppfærslur\" \n \n • Ferla er nú hægt að lita eftir hæð, hraða eða halla. \n \n • Bætt við valkosti á að breyta útliti leiðarlínu leiðsagnar \n \n • Uppfærður gluggi fyrir \"Skráning ferðar\"</string>
     <string name="trip_recording_save_and_continue">Vista og halda áfram</string>
     <string name="lost_data_warning">Öll óvistuð gögn munu tapast.</string>
     <string name="show_start_dialog">Birta upphafsglugga</string>
@@ -4366,52 +4289,8 @@
 \n
 \nFyrirliggjandi útgáfa gagnanna verður vistuð á netþjóninum, en þú munt ekki geta endurstillt í breytingar sem gerðar hafa verið áður.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Fáðu aðgang að tíðari uppfærslum korta. Vikulega, daglega eða á klukkustundar fresti. Uppfærslur eru sóttar í hlutum, einungis fyrir breytt svæði.</string>
-    <string name="release_4_1">• Bætt við frumstuðningi við Android Auto
-\n
-\n • Uppfærsla notandaviðmóts fyrir leit að UTM-hnitum
-\n
-\n • GPS-sía fyrir GPX-ferla
-\n
-\n • Viðmótshluti fyrir hæðarsnið (Pro)
-\n
-\n • Eftirlæti: hægt að skoða nýlega notuð tákn
-\n
-\n • Leiðagerð: notar valið snið eftir ræsingu
-\n
-\n • Lagað Mapillary-lag, viðbótin er núna sjálfgefið óvirk
-\n
-\n • Bætt við skjá til að sýsla með alla vinnsluferla
-\n
-\n • Snúningur korts er ekki núllstilltur eftir endurræsingu
-\n
-\n • Bætt myndgerð SRTM hæðarmerkja
-\n
-\n • Lagfærðar kortaskýringar á arabísku
-\n
-\n • Lagfærð ýmis vandamál við leiðagerð
-\n
-\n</string>
-    <string name="release_4_0">• Öryggisafrit í tölvuský
-\n
-\n • Bætt við næturham fyrir \"Topo\" kortastíl
-\n
-\n • Hægt að sækja hæðarlínur í fetum
-\n
-\n • Hægt er að lita ferla eftir hæð, hraða eða halla
-\n
-\n • Uppfærður gluggi \"Skráning ferðar\"
-\n
-\n • Fjarlægð með því að ýta fært úr mælistiku í sérstakan valkost
-\n
-\n • Skipuleggja leið: Hægt að breyta valkostum leiðsagnar, breyta uppsetningu korts og leita án þess að fara út úr leiðavali
-\n
-\n • Nýr \"Innkaup\" skjár með nákvæmun verslunarferli
-\n
-\n • Hægt að breyta útliti leiðar
-\n
-\n • OsmAnd Live uppfærslur færðar í \"Sótt gögn &gt; Uppfærslur\"
-\n
-\n</string>
+    <string name="release_4_1">• Bætt við frumstuðningi við Android Auto \n \n • Uppfærsla notandaviðmóts fyrir leit að UTM-hnitum \n \n • GPS-sía fyrir GPX-ferla \n \n • Viðmótshluti fyrir hæðarsnið (Pro) \n \n • Eftirlæti: hægt að skoða nýlega notuð tákn \n \n • Leiðagerð: notar valið snið eftir ræsingu \n \n • Lagað Mapillary-lag, viðbótin er núna sjálfgefið óvirk \n \n • Bætt við skjá til að sýsla með alla vinnsluferla \n \n • Snúningur korts er ekki núllstilltur eftir endurræsingu \n \n • Bætt myndgerð SRTM hæðarmerkja \n \n • Lagfærðar kortaskýringar á arabísku \n \n • Lagfærð ýmis vandamál við leiðagerð</string>
+    <string name="release_4_0">• Öryggisafrit í tölvuský \n \n • Bætt við næturham fyrir \"Topo\" kortastíl \n \n • Hægt að sækja hæðarlínur í fetum \n \n • Hægt er að lita ferla eftir hæð, hraða eða halla \n \n • Uppfærður gluggi \"Skráning ferðar\" \n \n • Fjarlægð með því að ýta fært úr mælistiku í sérstakan valkost \n \n • Skipuleggja leið: Hægt að breyta valkostum leiðsagnar, breyta uppsetningu korts og leita án þess að fara út úr leiðavali \n \n • Nýr \"Innkaup\" skjár með nákvæmun verslunarferli \n \n • Hægt að breyta útliti leiðar \n \n • OsmAnd Live uppfærslur færðar í \"Sótt gögn &gt; Uppfærslur\"</string>
     <string name="created_on">Búið til</string>
     <string name="shared_string_size">Stærð</string>
     <string name="turn_arrows">Beygjuörvar</string>
@@ -4495,15 +4374,7 @@
     <string name="rendering_attr_horse_scale_common_name">Algengt</string>
     <string name="shared_string_buttons">Hnappar</string>
     <string name="simulation_constant_mode_desc">Leiðarherming verður framkvæmd með völdum föstum hraða.</string>
-    <string name="release_4_2">• Endurhönnun viðmótshluta: ný framsetning útlits og hegðunar, hópun eftir síðum, hægt að breyta röðun og sameina eftir þörfum.
-\n
-\n • Göngu / Hjóla / Ferða-leiðir: ýttu á tákn leiðar og fáðu allar upplýsingar um leiðina.
-\n
-\n • Eftirlætishópar: stilling á sjálfgefnu útliti nýrra punkta í hópnum.
-\n
-\n • Lagfæringar: nettengdar kortaflísar uppfærast sjálfvirkt.
-\n
-\n</string>
+    <string name="release_4_2">• Endurhönnun viðmótshluta: ný framsetning útlits og hegðunar, hópun eftir síðum, hægt að breyta röðun og sameina eftir þörfum. \n \n • Göngu / Hjóla / Ferða-leiðir: ýttu á tákn leiðar og fáðu allar upplýsingar um leiðina. \n \n • Eftirlætishópar: stilling á sjálfgefnu útliti nýrra punkta í hópnum. \n \n • Lagfæringar: nettengdar kortaflísar uppfærast sjálfvirkt.</string>
     <string name="available_widgets">Tiltækir viðmótshlutar</string>
     <string name="snackbar_page_removed">\"Síðan %1$s\" hefur verið fjarlægð.</string>
     <string name="map_widget_altitude">Hæð núverandi staðsetningar</string>
@@ -4889,31 +4760,7 @@
     <string name="rendering_engine_failed_descr">OsmAnd hefur snúið aftur í \'Útgáfa 1\' kortamyndgerð. Þú getur reynt að skipta aftur yfir í \'Útgáfa 2 (OpenGL)\' myndgerðarvélina í stillingunum.
 \n
 \nHjálpaðu til við að bæta þetta með því að senda okkur atvikaskrána þína.</string>
-    <string name="release_4_3">• Ný, hraðvirkari Útgáfa 2 (OpenGL) myndgerðarvél fyrir kort, með 2.5D-sýn
-\n
-\n • Mýkt hreyfing við breytingar á staðsetningu
-\n
-\n • Nýir viðmótshlutar fyrir hnit og hæð á miðju korts
-\n
-\n • \"Vegalengd að\": fleiri valkostir texta
-\n
-\n • Viðmótshlutinn \"Kortamerki\": hægt að breyta hegðun við smell
-\n
-\n • Lagfært \"Staðsetning á skjá\" kosturinn
-\n
-\n • GPX: bætt við stuðningi við merkin \"link\", \"cmt\", \"desc\" og í sérsniðnum viðbótum
-\n
-\n • \"Sjókort\"-listanum endurraðað
-\n
-\n • Stuðningur við ANT+ skynjara
-\n
-\n • Hægt að birta UUID niðurhals
-\n
-\n • Sjálfgefinn-hraði spá fyrir for tímaútreikning á hæðarháðum göngu/hlaupaleiðum
-\n
-\n • Lagfæringar á hljóði og hljóðstyrkssleða
-\n
-\n</string>
+    <string name="release_4_3">• Ný, hraðvirkari Útgáfa 2 (OpenGL) myndgerðarvél fyrir kort, með 2.5D-sýn \n \n • Mýkt hreyfing við breytingar á staðsetningu \n \n • Nýir viðmótshlutar fyrir hnit og hæð á miðju korts \n \n • \"Vegalengd að\": fleiri valkostir texta \n \n • Viðmótshlutinn \"Kortamerki\": hægt að breyta hegðun við smell \n \n • Lagfært \"Staðsetning á skjá\" kosturinn \n \n • GPX: bætt við stuðningi við merkin \"link\", \"cmt\", \"desc\" og í sérsniðnum viðbótum \n \n • \"Sjókort\"-listanum endurraðað \n \n • Stuðningur við ANT+ skynjara \n \n • Hægt að birta UUID niðurhals \n \n • Sjálfgefinn-hraði spá fyrir for tímaútreikning á hæðarháðum göngu/hlaupaleiðum \n \n • Lagfæringar á hljóði og hljóðstyrkssleða</string>
     <string name="send_uuid_preference_desc">Tilviljanakennt UUID er notað til að sækja ónettengd kort á netþjóna OsmAnd í þeim tilgangi að fylgjast með sanngjarnri notkun á vinnslu netþjónanna, spá fyrir um myndtur netumferðar og til að útbúa mánaðarleg nafnlaus yfirlit um landakortin.</string>
     <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
     <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
@@ -5150,29 +4997,7 @@
     <string name="feature_available_as_part_of_plan">%1$s er boði sem hluti af %2$s-áskriftinni</string>
     <string name="github_discussion">Umræður á GitHub</string>
     <string name="free_favorites_backup">Ókeypis öryggisafrit eftirlæta</string>
-    <string name="release_4_6">• Android Auto: Bætt við 3D-þrívíddarham
-\n
-\n • Ferlar: bætt við síum og snjallmöppum, betri minnisstýring fyrir stórar skrár
-\n
-\n • Bæting á viðmótshlutaspjöldum uppi og niðri þannig að þau taki við öllum viðmótshlutum
-\n
-\n • Bæting á umsýslu staðværra tilfanga
-\n
-\n • Sérsníðanleg úthlutun hnappa fyrir utanaðkomandi stýringar
-\n
-\n • Nýir viðmótshlutar: \"Rennslishlutfall\" og \"Staða sólar\"
-\n
-\n • OsmAnd Cloud: Nú er aðgangur að eyddum skrám
-\n
-\n • Bætt litun ferla í brekkuham (Slope) með nýjum samhverfum litstigli
-\n
-\n • Lagfærð vandamál með gegnsæi stöðustiku
-\n
-\n • Bætt við stuðningi við ANT+ hitastigshluta
-\n
-\n • Kynning á viðmótshluta \"Tiltækt RAM-vinnsluminni\"
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: Bætt við 3D-þrívíddarham \n \n • Ferlar: bætt við síum og snjallmöppum, betri minnisstýring fyrir stórar skrár \n \n • Bæting á viðmótshlutaspjöldum uppi og niðri þannig að þau taki við öllum viðmótshlutum \n \n • Bæting á umsýslu staðværra tilfanga \n \n • Sérsníðanleg úthlutun hnappa fyrir utanaðkomandi stýringar \n \n • Nýir viðmótshlutar: \"Rennslishlutfall\" og \"Staða sólar\" \n \n • OsmAnd Cloud: Nú er aðgangur að eyddum skrám \n \n • Bætt litun ferla í brekkuham (Slope) með nýjum samhverfum litstigli \n \n • Lagfærð vandamál með gegnsæi stöðustiku \n \n • Bætt við stuðningi við ANT+ hitastigshluta \n \n • Kynning á viðmótshluta \"Tiltækt RAM-vinnsluminni\"</string>
     <string name="deleting_complete">Eyðingu lokið</string>
     <string name="help_article_map_tracks_on_map_name">Ferlar og leiðir</string>
     <string name="most_viewed">Oftast skoðað</string>
@@ -5706,7 +5531,7 @@
     <string name="obd_ambient_air_temp">Hitastig umhverfis</string>
     <string name="obd_battery_voltage">Rafhlöðuspenna</string>
     <string name="obd_engine_coolant_temp">Kælihitastig</string>
-    <string name="obd_fuel_level">Magn eldsneytis (%%)</string>
+    <string name="obd_fuel_level">Nýtni eldsneytis (%%)</string>
     <string name="obd_fuel_consumption_rate">Eldsneytiseyðsla</string>
     <string name="obd_fuel_left_distance">Eldsneyti eftir (vegalengd)</string>
     <string name="obd_fuel_type">Tegund eldsneytis</string>

@@ -58,14 +58,14 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
 	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		RenderingLineAttributes attrsPT = getContext().getAttrsPT();
 		float width = attrsPT.paint.getStrokeWidth();
 		float outlineWidth = attrsPT.paint2.getStrokeWidth();
+		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
-			if (prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique())) {
+			if (!dataArr.isEmpty() && prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique())) {
 				if (prevStyle instanceof GeometryTransportWayStyle) {
 					int outlineColor = prevStyle.getStrokeColor(0);
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, prevStyle,
@@ -76,6 +76,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				dataArr.clear();
 			}
 			prevStyle = data.style;
+			data.lineId = lineId;
 			dataArr.add(data);
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {

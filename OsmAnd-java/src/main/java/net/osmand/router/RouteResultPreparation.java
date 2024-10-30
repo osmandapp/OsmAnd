@@ -1,26 +1,5 @@
 package net.osmand.router;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.PlatformUtil;
@@ -40,6 +19,26 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class RouteResultPreparation {
 
@@ -1239,6 +1238,9 @@ public class RouteResultPreparation {
 					TurnType.setTertiaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
 					TurnType.setPrimaryTurn(lanes, i, singleTurn);
 				} else {
+					if (lanes.length == 1) {
+						return;
+					}
 					// disable lane
 					lanes[i] = lanes[i] - 1;
 				}

@@ -1,19 +1,14 @@
 package net.osmand.plus.auto;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
+import static net.osmand.search.core.ObjectType.INDEX_ITEM;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.car.app.model.CarIcon;
-import androidx.car.app.model.CarLocation;
-import androidx.car.app.model.DistanceSpan;
-import androidx.car.app.model.ItemList;
-import androidx.car.app.model.Metadata;
-import androidx.car.app.model.Place;
-import androidx.car.app.model.Row;
+import androidx.car.app.model.*;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
@@ -184,7 +179,7 @@ public class SearchHelper {
 			List<SearchResult> searchResults = new ArrayList<>();
 			for (SearchResult r : resultCollection.getCurrentSearchResults()) {
 				String name = QuickSearchListItem.getName(app, r);
-				if (Algorithms.isEmpty(name)) {
+				if (Algorithms.isEmpty(name) || r.objectType == INDEX_ITEM) {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);

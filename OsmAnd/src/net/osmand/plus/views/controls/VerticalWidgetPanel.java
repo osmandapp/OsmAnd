@@ -23,6 +23,9 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -35,17 +38,9 @@ import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
-public class VerticalWidgetPanel extends LinearLayout implements WidgetsContainer {
+public class VerticalWidgetPanel extends LinearLayout implements WidgetsContainer, ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -53,6 +48,8 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private Map<Integer, Row> visibleRows = new HashMap<>();
 	private boolean topPanel;
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
 	private boolean nightMode;
 
 	public VerticalWidgetPanel(@NonNull Context context) {
@@ -232,7 +229,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if(widgetInfo.widget instanceof ISupportMultiRow supportMultiRow){
+			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
 				supportMultiRow.updateValueAlign(visibleViewsInRowCount <= 1);
 			}
 		}
@@ -240,7 +237,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if(widgetInfo.widget instanceof ISupportMultiRow supportMultiRow){
+			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
 				supportMultiRow.updateFullRowState(visibleViewsInRowCount <= 1);
 			}
 		}
@@ -263,7 +260,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -298,8 +295,38 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
 	}
 
+	public boolean isTopPanel() {
+		return topPanel;
+	}
+
 	private void addVerticalDivider(@NonNull ViewGroup container) {
 		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 
 	private class Row {

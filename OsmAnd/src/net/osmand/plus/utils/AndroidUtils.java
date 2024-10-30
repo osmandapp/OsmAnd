@@ -1,6 +1,7 @@
 package net.osmand.plus.utils;
 
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
@@ -1297,7 +1298,8 @@ public class AndroidUtils {
 					hasPermission(context, BLUETOOTH_CONNECT);
 		} else {
 			return hasPermission(context, BLUETOOTH) &&
-					hasPermission(context, BLUETOOTH_ADMIN);
+					hasPermission(context, BLUETOOTH_ADMIN) &&
+					hasPermission(context, ACCESS_FINE_LOCATION);
 		}
 	}
 
@@ -1307,6 +1309,10 @@ public class AndroidUtils {
 	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
 
 	public static boolean requestBLEPermissions(@NonNull Activity activity) {
+		return requestBLEPermissions(activity, BLUETOOTH_CONNECT_REQUEST_CODE);
+	}
+
+	public static boolean requestBLEPermissions(@NonNull Activity activity, int requestCode) {
 		List<String> permissions = new ArrayList<>();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
@@ -1322,12 +1328,15 @@ public class AndroidUtils {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
 				permissions.add(BLUETOOTH_ADMIN);
 			}
+			if (!AndroidUtils.hasPermission(activity, ACCESS_FINE_LOCATION)) {
+				permissions.add(ACCESS_FINE_LOCATION);
+			}
 		}
 		if (!Algorithms.isEmpty(permissions)) {
 			ActivityCompat.requestPermissions(
 					activity,
 					permissions.toArray(new String[0]),
-					BLUETOOTH_CONNECT_REQUEST_CODE);
+					requestCode);
 
 		}
 		return Algorithms.isEmpty(permissions);
@@ -1401,5 +1410,28 @@ public class AndroidUtils {
 					.createWindowContext(TYPE_APPLICATION_OVERLAY, null);
 		}
 		return context;
+	}
+
+	@NonNull
+	public static int[] getRelativeMargins(@NonNull View parentView, @NonNull View view) {
+		int[] childLocation = new int[2];
+		int[] parentLocation = new int[2];
+
+		view.getLocationInWindow(childLocation);
+		parentView.getLocationInWindow(parentLocation);
+
+		int topMargin = childLocation[1] - parentLocation[1];
+		int leftMargin = childLocation[0] - parentLocation[0];
+
+		int childWidth = view.getWidth();
+		int childHeight = view.getHeight();
+
+		int parentWidth = parentView.getWidth();
+		int parentHeight = parentView.getHeight();
+
+		int rightMargin = (parentWidth - leftMargin - childWidth);
+		int bottomMargin = (parentHeight - topMargin - childHeight);
+
+		return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
 	}
 }

@@ -5983,4 +5983,5 @@
     <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
     <string name="obd_rpm_desc">Mostra as RPM do tacômetro do veículo pelo sensor OBD</string>
     <string name="screen_is_locked_by_external_button">A tela sensível ao toque está bloqueada. Para desbloquear, pressione o botão %1$s ou toque no botão na tela.</string>
+    <string name="shared_string_dynamic">Dinâmico</string>
 </resources>

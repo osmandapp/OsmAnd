@@ -30,6 +30,12 @@ object OBDDataComputer {
 		compute()
 	}
 
+	fun clearCache() {
+		for (widget in widgets) {
+			widget.clearData()
+		}
+	}
+
 	fun registerLocation(l: OBDLocation) {
 		if (widgets.isNotEmpty()) {
 			// concurrency - change collection in one thread. Other places only read
@@ -230,6 +236,13 @@ object OBDDataComputer {
 		private var cachedVersion = 0
 		private var version = 0
 
+		fun clearData() {
+			values = ArrayList()
+			value = null
+			cachedVersion = 0
+			version = 0
+		}
+
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
@@ -278,40 +291,33 @@ object OBDDataComputer {
 				}
 
 				FUEL_CONSUMPTION_RATE_LITER_KM -> {
-					20f //todo implement calculation
-				}
-
-				FUEL_LEFT_KM -> {
-					// works for window > 15 min
 					if (locValues.size >= 2) {
 						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = first.value as Float - last.value as Float
+						val diffPerc =
+							(first.value as Number).toFloat() - (last.value as Number).toFloat()
 						if (diffPerc > 0) {
-							var start = 0
-							var end = locations.size - 1
-							while (start < locations.size) {
-								if (locations[start].time > first.timestamp) {
-									break
-								}
-								start++
+							val difLiter = fuelTank * diffPerc / 100
+							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
+							if (distance > 0) {
+								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
+								return 100 * difLiter / (distance / 1000)
 							}
-							while (end >= 0) {
-								if (locations[end].time < last.timestamp) {
-									break
-								}
-								end--
-							}
-							var dist = 0.0
-							if (start < end) {
-								for (k in start until end) {
-									dist += KMapUtils.getDistance(
-										locations[start].latLon,
-										locations[end].latLon)
-								}
-							}
+						}
+					}
+					null
+				}
+
+				FUEL_LEFT_KM -> {
+					if (locValues.size >= 2) {
+						val first = locValues[locValues.size - 2]
+						val last = locValues[locValues.size - 1]
+						val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
+						if (diffPerc > 0) {
+							val dist = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (dist > 0) {
-								val lastPerc = last.value
+								val lastPerc = last.value.toFloat()
+								log.debug("left km. fuelLvl $lastPerc; distance $dist; difPercent $diffPerc; result ${lastPerc * dist / diffPerc}")
 								return lastPerc * dist / diffPerc
 							}
 						}
@@ -347,12 +353,37 @@ object OBDDataComputer {
 			}
 		}
 
+		private fun getDistanceForTimePeriod(startTime: Long, endTime: Long): Double {
+			var start = 0
+			var end = locations.size - 1
+			while (start < locations.size) {
+				if (locations[start].time > startTime) {
+					break
+				}
+				start++
+			}
+			while (end >= 0) {
+				if (locations[end].time < endTime) {
+					break
+				}
+				end--
+			}
+			var dist = 0.0
+			if (start < end) {
+				for (k in start until end) {
+					dist += KMapUtils.getDistance(
+						locations[k].latLon,
+						locations[k + 1].latLon)
+				}
+			}
+			return dist
+		}
+
 		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
 			val first = locValues[locValues.size - 2]
 			val last = locValues[locValues.size - 1]
 			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 			val diffTime = last.timestamp - first.timestamp
-			println("diftime $diffTime; diffPerc $diffPerc")
 			return diffPerc / diffTime * 1000 * 3600
 		}
 
