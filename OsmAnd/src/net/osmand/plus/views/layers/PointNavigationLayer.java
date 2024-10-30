@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_INTERMEDIATE_POINT;
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_START_POINT;
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_TARGET_POINT;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -226,9 +230,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	private void recreateBitmaps() {
-		mStartPoint = getScaledBitmap(R.drawable.map_start_point);
-		mTargetPoint = getScaledBitmap(R.drawable.map_target_point);
-		mIntermediatePoint = getScaledBitmap(R.drawable.map_intermediate_point);
+		mStartPoint = getScaledBitmap(ROUTE_START_POINT);
+		mTargetPoint = getScaledBitmap(ROUTE_TARGET_POINT);
+		mIntermediatePoint = getScaledBitmap(ROUTE_INTERMEDIATE_POINT);
 		clearMapMarkersCollections();
 	}
 
@@ -326,7 +330,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
-									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	                                   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		TargetPoint newTargetPoint = null;
 		if (o instanceof TargetPoint) {
@@ -357,7 +361,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		applyMovableObject(position);
 	}
 
-	/** OpenGL */
+	/**
+	 * OpenGL
+	 */
 	private void drawMarker(@NonNull MapMarkersCollection markersCollection,
 	                        @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
 		if (!getMapView().hasMapRenderer()) {
@@ -383,7 +389,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
 	}
 
-	/** OpenGL */
+	/**
+	 * OpenGL
+	 */
 	private void initCaptionStyle() {
 		if (!getMapView().hasMapRenderer() || captionStyle != null) {
 			return;
