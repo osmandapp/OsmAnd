@@ -56,6 +56,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String USER_PREFIX = "user_";
 	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
@@ -183,7 +184,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public boolean isTopWikiFilter() {
-		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+		return filterId.equals(TOP_WIKI_FILTER_ID);
 	}
 
 	public boolean isRoutesFilter() {

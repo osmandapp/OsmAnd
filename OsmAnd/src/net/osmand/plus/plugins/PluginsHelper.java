@@ -22,7 +22,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
@@ -91,6 +90,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class PluginsHelper {
@@ -744,10 +744,21 @@ public class PluginsHelper {
 		return preferredLocale;
 	}
 
-	public static void registerCustomPoiFilters(List<PoiUIFilter> poiUIFilters) {
+	public static void registerPoiFilters(@NonNull List<PoiUIFilter> result) {
 		for (OsmandPlugin p : getAvailablePlugins()) {
-			poiUIFilters.addAll(p.getCustomPoiFilters());
+			result.addAll(p.getPoiFilters());
 		}
+	}
+
+	@Nullable
+	public static PoiUIFilter getPoiFilterById(@NonNull String filterId) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			PoiUIFilter filter = p.getPoiFilterById(filterId);
+			if (filter != null) {
+				return filter;
+			}
+		}
+		return null;
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {

@@ -1389,10 +1389,7 @@ public class MenuBuilder {
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
 			} else if (showNearestWiki && latLon != null) {
-				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
-				if (filter != null) {
-					searchSortedAmenities(filter, latLon, listener);
-				}
+				searchSortedAmenities(plugin.getTopWikiPoiFilter(), latLon, listener);
 			}
 		}
 	}
