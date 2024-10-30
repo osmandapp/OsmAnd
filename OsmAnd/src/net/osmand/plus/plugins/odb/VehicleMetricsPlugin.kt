@@ -379,9 +379,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
 		setLastConnectedDevice(null)
-		if (lastConnectedDeviceInfo != null) {
-			onDisconnected(lastConnectedDeviceInfo)
-		}
+		onDisconnected(lastConnectedDeviceInfo)
 	}
 
 	@SuppressLint("MissingPermission")
@@ -418,6 +416,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	@SuppressLint("MissingPermission")
 	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
+		if(currentConnectingState != OBDConnectionState.DISCONNECTED) {
+			disconnect()
+		}
 		if (currentConnectingState == OBDConnectionState.DISCONNECTED) {
 			if (connectedDeviceInfo == null) {
 				if (BLEUtils.isBLEEnabled(activity)) {
@@ -461,9 +462,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				connectedDeviceInfo = null
 				connectToObd(activity, deviceInfo)
 			}
-		} else {
-			disconnect()
-			connectToObd(activity, deviceInfo)
 		}
 		return socket?.isConnected == true
 	}
@@ -495,11 +493,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}.start()
 	}
 
-	private fun onDisconnected(deviceInfo: BTDeviceInfo) {
+	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {
 		currentConnectingState = OBDConnectionState.DISCONNECTED
-		connectionStateListener?.onStateChanged(
-			OBDConnectionState.DISCONNECTED,
-			deviceInfo)
+		deviceInfo?.let {
+			connectionStateListener?.onStateChanged(
+				OBDConnectionState.DISCONNECTED,
+				it)
+		}
 	}
 
 	private fun onConnecting(deviceInfo: BTDeviceInfo) {
