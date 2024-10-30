@@ -4880,4 +4880,19 @@
     <string name="poi_payment_parco_yes">Parko</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunel zabranjen za pešake</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel zabranjen za bicikliste</string>
+    <string name="poi_route_article">Članci o putovanjima</string>
+    <string name="poi_route_article_point">Tačke na putovanjima</string>
+    <string name="poi_route_track">Druge rute</string>
+    <string name="poi_route_track_point">Tačke drugih ruta</string>
+    <string name="poi_activities_bicycle">Bicikl</string>
+    <string name="poi_activities_trekking">Pešačenje</string>
+    <string name="poi_activities_running">Trčanje</string>
+    <string name="poi_activities_pedestrian">Hodanje</string>
+    <string name="poi_activities_kayak">Sportovi na vodi</string>
+    <string name="poi_activities_skiing">Zimski sportovi</string>
+    <string name="poi_activities_inline_skates">Koturaljke</string>
+    <string name="poi_activities_horse">Jahanje konja</string>
+    <string name="poi_activities_snowmobile">Motorne sanke</string>
+    <string name="poi_activities_fitness">Staze za trčanje</string>
+    <string name="poi_activities_mountain_bike">Brdski biciklizam</string>
 </resources>
