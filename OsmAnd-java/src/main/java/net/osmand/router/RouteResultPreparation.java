@@ -2457,29 +2457,29 @@ public class RouteResultPreparation {
 		if (lanesArray.length == 0 || startActiveIndex > endActiveIndex) {
 			return false;
 		}
-		int[] activeLines = new int[endActiveIndex - startActiveIndex + 1];
+		int[] activeLanes = new int[endActiveIndex - startActiveIndex + 1];
 		for (int i = startActiveIndex, j = 0; i <= endActiveIndex; i++, j++) {
-			activeLines[j] = lanesArray[i];
+			activeLanes[j] = lanesArray[i];
 		}
 		boolean possibleSharpLeftOrUTurn = startActiveIndex == 0;
 		boolean possibleSharpRightOrUTurn = endActiveIndex == lanesArray.length - 1;
-		for (int i = 0; i < activeLines.length; i++) {
-			int turnType = TurnType.getPrimaryTurn(activeLines[i]);
-			if (turnType == mainTurnType) {
+		for (int i = 0; i < activeLanes.length; i++) {
+			int primaryTurn = TurnType.getPrimaryTurn(activeLanes[i]);
+			if (primaryTurn == mainTurnType) {
 				return true;
-			} else if (TurnType.isLeftTurnNoUTurn(turnType) && TurnType.isLeftTurnNoUTurn(mainTurnType)) {
+			} else if (mainTurnType == TurnType.C && TurnType.isSlightTurn(primaryTurn)) {
 				return true;
-			} else if (TurnType.isLeftTurnNoUTurn(turnType) && possibleSharpLeftOrUTurn && mainTurnType == TurnType.C) {
+			} else if (TurnType.isLeftTurnNoUTurn(primaryTurn) && TurnType.isLeftTurnNoUTurn(mainTurnType)) {
 				return true;
-			} else if (TurnType.isRightTurnNoUTurn(turnType) && TurnType.isRightTurnNoUTurn(mainTurnType)) {
+			} else if (TurnType.isLeftTurnNoUTurn(primaryTurn) && possibleSharpLeftOrUTurn && mainTurnType == TurnType.C) {
 				return true;
-			} else if (TurnType.isRightTurnNoUTurn(turnType) && possibleSharpRightOrUTurn && mainTurnType == TurnType.C) {
+			} else if (TurnType.isRightTurnNoUTurn(primaryTurn) && TurnType.isRightTurnNoUTurn(mainTurnType)) {
 				return true;
-			} else if (mainTurnType == TurnType.C && TurnType.isSlightTurn(turnType)) {
+			} else if (TurnType.isRightTurnNoUTurn(primaryTurn) && possibleSharpRightOrUTurn && mainTurnType == TurnType.C) {
 				return true;
-			} else if (TurnType.isSharpLeftOrUTurn(turnType) && possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType)) {
+			} else if (TurnType.isSharpLeftOrUTurn(primaryTurn) && possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType)) {
 				return true;
-			} else if (TurnType.isSharpRightOrUTurn(turnType) && possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType)) {
+			} else if (TurnType.isSharpRightOrUTurn(primaryTurn) && possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType)) {
 				return true;
 			}
 		}
@@ -2491,20 +2491,27 @@ public class RouteResultPreparation {
 			return oldTurnType;
 		}
 		int tp = oldTurnType.getValue();
-		int cnt = 0;
 		for (int k = 0; k < lanes.length; k++) {
-			int ln = lanes[k];
-			if ((ln & 1) > 0) {
+			if ((lanes[k] & 1) > 0) {
+				if (TurnType.hasAnyTurnLane(lanes[k], oldTurnType.getValue())) {
+					tp = oldTurnType.getValue();
+					break;
+				}
 				int[] oneActiveLane = {lanes[k]};
 				if (hasAllowedLanes(oldTurnType.getValue(), oneActiveLane, 0, 0)) {
 					tp = TurnType.getPrimaryTurn(lanes[k]);
 				}
-				cnt++;
+			}
+		}
+		int cntActiveLanes = 0;
+		for (int k = 0; k < lanes.length; k++) {
+			if ((lanes[k] & 1) > 0) {
+				cntActiveLanes++;
 			}
 		}
 		TurnType t = TurnType.valueOf(tp, leftSide);
 		// mute when most lanes have a straight/slight direction
-		if (cnt >= 3 && TurnType.isSlightTurn(t.getValue())) {
+		if (cntActiveLanes >= 3 && TurnType.isSlightTurn(t.getValue())) {
 			t.setSkipToSpeak(true);
 		}
 		return t;
