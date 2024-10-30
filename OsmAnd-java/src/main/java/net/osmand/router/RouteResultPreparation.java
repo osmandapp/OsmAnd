@@ -2467,20 +2467,19 @@ public class RouteResultPreparation {
 			int turnType = TurnType.getPrimaryTurn(activeLines[i]);
 			if (turnType == mainTurnType) {
 				return true;
-			}
-			if (TurnType.isLeftTurnNoUTurn(mainTurnType) && TurnType.isLeftTurnNoUTurn(turnType)) {
+			} else if (TurnType.isLeftTurnNoUTurn(turnType) && TurnType.isLeftTurnNoUTurn(mainTurnType)) {
 				return true;
-			}
-			if (TurnType.isRightTurnNoUTurn(mainTurnType) && TurnType.isRightTurnNoUTurn(turnType)) {
+			} else if (TurnType.isLeftTurnNoUTurn(turnType) && possibleSharpLeftOrUTurn && mainTurnType == TurnType.C) {
 				return true;
-			}
-			if (mainTurnType == TurnType.C && TurnType.isSlightTurn(turnType)) {
+			} else if (TurnType.isRightTurnNoUTurn(turnType) && TurnType.isRightTurnNoUTurn(mainTurnType)) {
 				return true;
-			}
-			if (possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType) && TurnType.isSharpLeftOrUTurn(turnType)) {
+			} else if (TurnType.isRightTurnNoUTurn(turnType) && possibleSharpRightOrUTurn && mainTurnType == TurnType.C) {
 				return true;
-			}
-			if (possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType) && TurnType.isSharpRightOrUTurn(turnType)) {
+			} else if (mainTurnType == TurnType.C && TurnType.isSlightTurn(turnType)) {
+				return true;
+			} else if (TurnType.isSharpLeftOrUTurn(turnType) && possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType)) {
+				return true;
+			} else if (TurnType.isSharpRightOrUTurn(turnType) && possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType)) {
 				return true;
 			}
 		}
