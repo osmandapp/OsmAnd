@@ -17,4 +17,7 @@ public class OsmAndAppCustomizationFields {
 	public static int MOVEMENT_NAUTICAL = R.drawable.map_navigation_nautical;
 	public static int MOVEMENT_CAR = R.drawable.map_navigation_car;
 
+	public static int ROUTE_START_POINT = R.drawable.map_start_point;
+	public static int ROUTE_TARGET_POINT = R.drawable.map_target_point;
+	public static int ROUTE_INTERMEDIATE_POINT = R.drawable.map_intermediate_point;
 }
