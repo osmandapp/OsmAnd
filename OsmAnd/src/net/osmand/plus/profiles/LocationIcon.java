@@ -10,6 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmAndAppCustomizationFields;
 import net.osmand.util.CollectionUtils;
 
 import java.io.File;
@@ -18,12 +19,12 @@ import java.util.List;
 
 public enum LocationIcon {
 
-	STATIC_DEFAULT(R.drawable.map_location_default, R.drawable.map_location_default_view_angle, "model_map_default_location"),
-	STATIC_CAR(R.drawable.map_location_car, R.drawable.map_location_car_view_angle, "model_map_car_location"),
-	STATIC_BICYCLE(R.drawable.map_location_bicycle, R.drawable.map_location_bicycle_view_angle, "model_map_bicycle_location"),
-	MOVEMENT_DEFAULT(R.drawable.map_navigation_default, "model_map_car_bearing"),
-	MOVEMENT_NAUTICAL(R.drawable.map_navigation_nautical, "model_map_navigation_nautical"),
-	MOVEMENT_CAR(R.drawable.map_navigation_car, "model_map_navigation_car"),
+	STATIC_DEFAULT(OsmAndAppCustomizationFields.STATIC_DEFAULT, OsmAndAppCustomizationFields.STATIC_DEFAULT_VIEW_ANGLE, "model_map_default_location"),
+	STATIC_CAR(OsmAndAppCustomizationFields.STATIC_CAR, OsmAndAppCustomizationFields.STATIC_CAR_VIEW_ANGLE, "model_map_car_location"),
+	STATIC_BICYCLE(OsmAndAppCustomizationFields.STATIC_BICYCLE, OsmAndAppCustomizationFields.STATIC_BICYCLE_VIEW_ANGLE, "model_map_bicycle_location"),
+	MOVEMENT_DEFAULT(OsmAndAppCustomizationFields.MOVEMENT_DEFAULT, "model_map_car_bearing"),
+	MOVEMENT_NAUTICAL(OsmAndAppCustomizationFields.MOVEMENT_NAUTICAL, "model_map_navigation_nautical"),
+	MOVEMENT_CAR(OsmAndAppCustomizationFields.MOVEMENT_CAR, "model_map_navigation_car"),
 	MODEL();
 
 	@DrawableRes
@@ -72,7 +73,7 @@ public enum LocationIcon {
 	}
 
 	@Nullable
-	public static String getIconForDefaultModel(@NonNull String modelName){
+	public static String getIconForDefaultModel(@NonNull String modelName) {
 		if (!isModel(modelName)) {
 			return null;
 		}
@@ -97,7 +98,7 @@ public enum LocationIcon {
 		return false;
 	}
 
-	private static List<LocationIcon> getDefaultIcons(){
+	private static List<LocationIcon> getDefaultIcons() {
 		return Arrays.asList(STATIC_DEFAULT, STATIC_CAR, STATIC_BICYCLE, MOVEMENT_DEFAULT, MOVEMENT_CAR, MOVEMENT_NAUTICAL);
 	}
 
