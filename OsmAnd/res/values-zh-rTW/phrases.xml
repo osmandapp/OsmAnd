@@ -4880,4 +4880,19 @@
     <string name="poi_payment_parkster_no">不接受 Parkster</string>
     <string name="poi_osmand_foot_prohibited_tunnel">隧道禁止行人通行</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">隧道禁止腳踏車騎士通行</string>
+    <string name="poi_route_track">其他路線</string>
+    <string name="poi_route_track_point">其他路線點</string>
+    <string name="poi_activities_bicycle">腳踏車</string>
+    <string name="poi_activities_horse">騎馬</string>
+    <string name="poi_activities_skiing">冬季運動</string>
+    <string name="poi_activities_snowmobile">雪地摩托車</string>
+    <string name="poi_activities_inline_skates">直排輪鞋</string>
+    <string name="poi_activities_mountain_bike">山區騎乘</string>
+    <string name="poi_route_article_point">旅遊點</string>
+    <string name="poi_route_article">旅遊文章</string>
+    <string name="poi_activities_trekking">健行</string>
+    <string name="poi_activities_running">跑步</string>
+    <string name="poi_activities_pedestrian">步行</string>
+    <string name="poi_activities_kayak">水上運動</string>
+    <string name="poi_activities_fitness">健身路徑</string>
 </resources>
