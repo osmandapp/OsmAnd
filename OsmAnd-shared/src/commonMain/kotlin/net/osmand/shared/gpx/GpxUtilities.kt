@@ -58,6 +58,7 @@ object GpxUtilities {
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val AMENITY_ORIGIN_EXTENSION = "amenity_origin"
+	const val ACTIVITY_TYPE = OSMAND_EXTENSIONS_PREFIX + "activity"
 
 	const val GAP_PROFILE_TYPE = "gap"
 	const val TRKPT_INDEX_EXTENSION = "trkpt_idx"
@@ -85,7 +86,8 @@ object GpxUtilities {
 		"cadence" to PointAttributes.SENSOR_TAG_CADENCE,
 		"temp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"wtemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
-		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A
+		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A,
+		"activity" to ACTIVITY_TYPE
 	)
 
 	const val RADIUS_DIVIDER = 5000
