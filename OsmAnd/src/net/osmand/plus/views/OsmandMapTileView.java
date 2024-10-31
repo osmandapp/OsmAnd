@@ -1681,6 +1681,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, false);
+	}
+
+	public void fitRectToMap(double left, double right, double top, double bottom,
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
 		RotatedTileBox tb = currentViewport.copy();
 		double border = 0.8;
 		int dx = 0;
@@ -1709,14 +1714,33 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
 
+		boolean zoomCorrected = false;
 		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomIn();
+			zoomCorrected = true;
+			if (useSmallZoom) {
+				zoom.smallZoomIn();
+			} else {
+				zoom.zoomIn();
+			}
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
+		if (zoomCorrected && useSmallZoom) {
+			zoomCorrected = false;
+			zoom.smallZoomOut();
 		}
 		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomOut();
+			zoomCorrected = true;
+			if (useSmallZoom) {
+				zoom.smallZoomOut();
+			} else {
+				zoom.zoomOut();
+			}
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+		if (zoomCorrected && useSmallZoom) {
+			zoom.smallZoomIn();
+		}
+		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
@@ -1724,7 +1748,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			clat = tb.getLatFromPixel(x, y);
 			clon = tb.getLonFromPixel(x, y);
 		}
-
+		if (useSmallZoom) {
+			zoom.zoomIn();
+		}
 		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 	}
 
