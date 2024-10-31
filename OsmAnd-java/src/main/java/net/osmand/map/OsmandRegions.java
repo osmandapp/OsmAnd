@@ -103,15 +103,19 @@ public class OsmandRegions {
 		this.translator = translator;
 	}
 
+	private final Object fileLock = new Object();
+
 	public BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File("regions.ocbf");
 		// internal version could be updated
-//		if (!regions.exists()) {
+		synchronized (fileLock) {
 			InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
-			FileOutputStream fous = new FileOutputStream(regions);
-			Algorithms.streamCopy(is, fous);
-			fous.close();
-//		}
+			if (is != null) {
+				FileOutputStream fous = new FileOutputStream(regions);
+				Algorithms.streamCopy(is, fous);
+				fous.close();
+			}
+		}
 		return prepareFile(regions.getAbsolutePath());
 	}
 	
