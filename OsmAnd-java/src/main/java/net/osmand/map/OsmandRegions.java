@@ -108,7 +108,6 @@ public class OsmandRegions {
 	public BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File("regions.ocbf");
 		// internal version could be updated
-
 		synchronized (fileLock) {
 			InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
 			if (is != null) {
