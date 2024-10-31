@@ -31,7 +31,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.*;
@@ -231,7 +230,7 @@ public class DownloadOsmandIndexesHelper {
 				continue;
 			}
 			boolean isCustomVoice = true;
-			for (AssetEntry assetEntry : assetsCollection.getEntrys()) {
+			for (AssetEntry assetEntry : assetsCollection.getEntries()) {
 				if (assetEntry.destination.contains("/" + item.getFileName() + "/")) {
 					isCustomVoice = false;
 					break;

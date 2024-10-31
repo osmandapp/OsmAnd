@@ -41,6 +41,11 @@ class TtsVoiceExportType extends AbstractVoiceExportType {
 
 	@Override
 	protected boolean shouldSkipLocalItem(@NonNull OsmandApplication app, @NonNull LocalItem localItem) {
-		return localItem.getType() == TTS_VOICE_DATA && Algorithms.stringsEqual(localItem.getFile().getName(), "en-tts");
+		return super.shouldSkipLocalItem(app, localItem) || isDefaultEngTts(localItem);
+	}
+
+	private boolean isDefaultEngTts(@NonNull LocalItem localItem) {
+		String fileName = localItem.getFile().getName();
+		return localItem.getType() == TTS_VOICE_DATA && Algorithms.stringsEqual(fileName, "en-tts");
 	}
 }

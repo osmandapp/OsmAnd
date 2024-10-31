@@ -17,6 +17,8 @@ import android.util.DisplayMetrics;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -65,14 +67,13 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -118,7 +119,7 @@ public class ResourceManager {
 	private final BitmapTilesCache bitmapTilesCache;
 	private final GeometryTilesCache mapillaryVectorTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
-	private AssetsCollection assets;
+	private AssetsCollection assetsCollection;
 
 	private final OsmandApplication context;
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
@@ -644,7 +645,7 @@ public class ResourceManager {
 			AssetsCollection assetsCollection = getAssets();
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (AssetEntry asset : assetsCollection.getEntrys()) {
+				for (AssetEntry asset : assetsCollection.getEntries()) {
 					File jsFile = new File(appPath, asset.destination);
 					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX) && asset.destination
 							.endsWith(TTSVOICE_INDEX_EXT_JS)) {
@@ -661,7 +662,7 @@ public class ResourceManager {
 					}
 				}
 			}
-		} catch (XmlPullParserException | IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
@@ -1603,37 +1604,30 @@ public class ResourceManager {
 	}
 
 	@NonNull
-	public AssetsCollection getAssets() throws XmlPullParserException, IOException {
-		return assets == null ? assets = readBundledAssets() : assets;
+	public AssetsCollection getAssets() throws IOException {
+		return assetsCollection == null ? assetsCollection = readBundledAssets() : assetsCollection;
+	}
+
+	private static class AssetEntryList {
+		List<AssetEntry> assets = new ArrayList<>();
 	}
 
 	@NonNull
-	private AssetsCollection readBundledAssets()  throws XmlPullParserException, IOException {
-		AssetManager assetManager = context.getAssets();
+	private AssetsCollection readBundledAssets() throws IOException {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser();
-		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
-		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
-		List<AssetEntry> assets = new ArrayList<>();
-		int next;
-		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
-			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				String source = xmlParser.getAttributeValue(null, "source");
-				String destination = xmlParser.getAttributeValue(null, "destination");
-				String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				AssetEntry ae = new AssetEntry(source, destination, combinedMode);
-				String version = xmlParser.getAttributeValue(null, "version");
-				if (!Algorithms.isEmpty(version)) {
-					try {
-						ae.dateVersion = DATE_FORMAT.parse(version);
-					} catch (ParseException e) {
-						log.error(e.getMessage(), e);
-					}
+		AssetManager assetManager = context.getAssets();
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
+		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
+		for (AssetEntry ae : lst.assets) {
+			if (!Algorithms.isEmpty(ae.version)) {
+				try {
+					ae.dateVersion = DATE_FORMAT.parse(ae.version);
+				} catch (ParseException e) {
+					log.error(e.getMessage(), e);
 				}
-				assets.add(ae);
 			}
 		}
 		isBundledAssetsXml.close();
-		return new AssetsCollection(context, assets);
+		return new AssetsCollection(context, lst.assets);
 	}
 }

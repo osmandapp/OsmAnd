@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class AssetsCollection {
 
-	private final Map<String, AssetEntry> map = new LinkedHashMap<>();
 	private final String basePath;
+	private final Map<String, AssetEntry> map = new LinkedHashMap<>();
 
 	public AssetsCollection(@NonNull OsmandApplication app, @NonNull List<AssetEntry> assets) {
 		assets.forEach(asset -> map.put(asset.destination, asset));
@@ -25,31 +25,34 @@ public class AssetsCollection {
 	}
 
 	@NonNull
-	public Collection<AssetEntry> getEntrys() {
+	public Collection<AssetEntry> getEntries() {
 		return map.values();
+	}
+
+	public boolean isFileDerivedFromAssets(@NonNull File file) {
+		return getAssetEntry(file) != null;
 	}
 
 	@Nullable
 	public Long getVersionTime(@NonNull File file) {
-		String destination = getRelativePath(file);
-		return getVersionTime(destination);
-	}
-
-	@Nullable
-	public Long getVersionTime(@NonNull String destination) {
-		AssetEntry assetEntry = map.get(destination);
+		AssetEntry assetEntry = getAssetEntry(file);
 		return assetEntry != null ? assetEntry.getVersionTime() : null;
 	}
 
 	@NonNull
 	public List<AssetEntry> getFilteredEntries(@NonNull CallbackWithObject<AssetEntry> condition) {
 		List<AssetEntry> result = new ArrayList<>();
-		for (AssetEntry entry : getEntrys()) {
+		for (AssetEntry entry : getEntries()) {
 			if (condition.processResult(entry)) {
 				result.add(entry);
 			}
 		}
 		return result;
+	}
+
+	@Nullable
+	private AssetEntry getAssetEntry(@NonNull File file) {
+		return map.get(getRelativePath(file));
 	}
 
 	@NonNull

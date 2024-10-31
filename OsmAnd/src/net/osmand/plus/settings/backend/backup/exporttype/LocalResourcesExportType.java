@@ -6,8 +6,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.resources.AssetsCollection;
+import net.osmand.plus.resources.ResourceManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +50,20 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 	}
 
 	protected boolean shouldSkipLocalItem(@NonNull OsmandApplication app, @NonNull LocalItem localItem) {
+		if (!localItem.getType().isDerivedFromAssets()) {
+			return false;
+		}
+		ResourceManager resourceManager = app.getResourceManager();
+		try {
+			// Skip files derived from assets that don't contain a version or haven't been modified.
+			File file = localItem.getFile();
+			AssetsCollection assets = resourceManager.getAssets();
+			if (assets.isFileDerivedFromAssets(file)) {
+				Long version = assets.getVersionTime(file);
+				return version == null || version == file.lastModified();
+			}
+		} catch (IOException ignored) {
+		}
 		return false;
 	}
 }
