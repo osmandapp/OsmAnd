@@ -22,7 +22,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
@@ -58,9 +57,7 @@ public class PoiFiltersHelper {
 	private PoiUIFilter customPOIFilter;
 	private PoiUIFilter showAllPOIFilter;
 	private PoiUIFilter topWikiPoiFilter;
-	private List<PoiUIFilter> cacheTopStandardFilters = new ArrayList<>();
-	private List<PoiUIFilter> topStandardFiltersPendingToAdd = new ArrayList<>();
-	private boolean topStandardFiltersCacheInitialized;
+	private List<PoiUIFilter> cacheTopStandardFilters = null;
 	private Set<PoiUIFilter> overwrittenSelectedPoiFilters = new TreeSet<>();
 	private Set<PoiUIFilter> selectedPoiFilters = new TreeSet<>();
 	private boolean useOverwrittenFilters;
@@ -223,8 +220,7 @@ public class PoiFiltersHelper {
 	public void reloadAllPoiFilters() {
 		showAllPOIFilter = null;
 		getShowAllPOIFilter();
-		cacheTopStandardFilters = new ArrayList<>();
-		topStandardFiltersCacheInitialized = false;
+		cacheTopStandardFilters = null;
 		getTopDefinedPoiFilters();
 	}
 
@@ -258,25 +254,9 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
-		MapPoiTypes poiTypes = app.getPoiTypes();
+		initTopDefinedPoiFiltersIfNeeded();
 		List<PoiUIFilter> result = new ArrayList<>();
-
-		// collect top standard filters if poi types are initialized
-		if (!topStandardFiltersCacheInitialized && poiTypes.isInit()) {
-			// user defined
-			List<PoiUIFilter> filters = getUserDefinedPoiFilters(true);
-			// default
-			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {
-				filters.add(new PoiUIFilter(t, app, ""));
-			}
-			PluginsHelper.registerPoiFilters(filters);
-			filters.addAll(topStandardFiltersPendingToAdd);
-			topStandardFiltersPendingToAdd.clear();
-			cacheTopStandardFilters = filters;
-			topStandardFiltersCacheInitialized = true;
-		}
-
-		if (!Algorithms.isEmpty(cacheTopStandardFilters)) {
+		if (cacheTopStandardFilters != null) {
 			for (PoiUIFilter filter : cacheTopStandardFilters) {
 				if (includeDeleted || !filter.isDeleted()) {
 					result.add(filter);
@@ -284,8 +264,22 @@ public class PoiFiltersHelper {
 			}
 			result.add(getShowAllPOIFilter());
 		}
-
 		return result;
+	}
+
+	private void initTopDefinedPoiFiltersIfNeeded() {
+		// collect top standard filters if poi types are initialized
+		MapPoiTypes poiTypes = app.getPoiTypes();
+		if (cacheTopStandardFilters == null && poiTypes.isInit()) {
+			// user defined
+			List<PoiUIFilter> filters = getUserDefinedPoiFilters(true);
+			// default
+			for (AbstractPoiType t : poiTypes.getTopVisibleFilters()) {
+				filters.add(new PoiUIFilter(t, app, ""));
+			}
+			PluginsHelper.registerPoiFilters(filters);
+			cacheTopStandardFilters = filters;
+		}
 	}
 
 	public List<String> getPoiFilterOrders(boolean onlyActive) {
@@ -433,8 +427,9 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean createPoiFilter(@NonNull PoiUIFilter filter, boolean forHistory) {
+		initTopDefinedPoiFiltersIfNeeded();
 		PoiFilterDbHelper helper = openDbHelper();
-		if (helper == null) {
+		if (cacheTopStandardFilters == null || helper == null) {
 			return false;
 		}
 		helper.deleteFilter(helper.getWritableDatabase(), filter, true);
@@ -530,10 +525,9 @@ public class PoiFiltersHelper {
 	}
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
-		if (topStandardFiltersCacheInitialized) {
+		initTopDefinedPoiFiltersIfNeeded();
+		if (cacheTopStandardFilters != null) {
 			cacheTopStandardFilters = CollectionUtils.addToList(cacheTopStandardFilters, filter);
-		} else {
-			topStandardFiltersPendingToAdd = CollectionUtils.addToList(topStandardFiltersPendingToAdd, filter);
 		}
 		return filter;
 	}
