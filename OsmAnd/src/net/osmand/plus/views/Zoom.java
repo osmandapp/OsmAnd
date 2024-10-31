@@ -46,6 +46,23 @@ public class Zoom {
 		changeZoom(-1);
 	}
 
+	public void smallZoomIn() {
+		zoomFloatPart += 0.01f;
+		if (zoomFloatPart > 0.99) {
+			zoomFloatPart = 0;
+			changeZoom(1);
+		}
+	}
+
+	public void smallZoomOut() {
+		if (zoomFloatPart <= 0) {
+			zoomFloatPart = 0.99f;
+			changeZoom(-1);
+		} else {
+			zoomFloatPart -= 0.01f;
+		}
+	}
+
 	public void changeZoom(int step) {
 		baseZoom += step;
 		checkZoomBounds();
