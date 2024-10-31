@@ -343,8 +343,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			} else {
 				amenity = ((TransportStop) selectedObj).getAmenity();
 			}
-			PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
+			if (settings.isInternetConnectionAvailable() && ObfConstants.isOsmUrlAvailable(amenity)) {
+				isEditable = true;
+			} else {
+				PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+				isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
+			}
 		} else if (selectedObj instanceof MapObject) {
 			isEditable = ObfConstants.isOsmUrlAvailable((MapObject) selectedObj);
 		}
