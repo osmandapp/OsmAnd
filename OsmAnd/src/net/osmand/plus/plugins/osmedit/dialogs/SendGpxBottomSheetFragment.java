@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -35,6 +36,10 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -47,6 +52,9 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	private final OsmEditingPlugin plugin = PluginsHelper.requirePlugin(OsmEditingPlugin.class);
 
+	private OsmandApplication app;
+	private GpxDbHelper gpxDbHelper;
+
 	private File[] files;
 	private UploadVisibility uploadVisibility;
 
@@ -56,6 +64,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requiredMyApplication();
+		gpxDbHelper = app.getGpxDbHelper();
 
 		if (uploadVisibility == null) {
 			uploadVisibility = plugin.OSM_UPLOAD_VISIBILITY.get();
@@ -87,8 +97,21 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		String text = tagsText != null ? tagsText.toString() : "";
 
 		if (Algorithms.isEmpty(text)) {
-			tagsField.setText(OSMAND_TAG);
+			tagsField.setText(getTags());
 		}
+	}
+
+	@NonNull
+	private String getTags() {
+		StringBuilder builder = new StringBuilder(OSMAND_TAG);
+		for (File file : files) {
+			GpxDataItem item = gpxDbHelper.getItem(new KFile(file.getPath()));
+			String activity = item != null ? item.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
+			if (!Algorithms.isEmpty(activity)) {
+				builder.append(", ").append(activity);
+			}
+		}
+		return builder.toString();
 	}
 
 	private void setupVisibilityRow(@NonNull View view) {

@@ -646,10 +646,9 @@ public class GpxUiHelper {
 	private static void addDbParametersToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		String activityId = item.getParameter(ACTIVITY_TYPE);
 		if (!Algorithms.isEmpty(activityId)) {
-			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
-			RouteActivity routeActivity = routeActivityHelper.findRouteActivity(activityId);
+			RouteActivityHelper helper = app.getRouteActivityHelper();
 			Metadata metadata = gpxFile.getMetadata();
-			metadata.setRouteActivity(routeActivity, routeActivityHelper.getActivities());
+			metadata.setRouteActivity(helper.findRouteActivity(activityId));
 		}
 		addAppearanceToGpx(app, gpxFile, item);
 	}

@@ -289,8 +289,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		RouteActivity activity = metadata.getRouteActivity(helper.getActivities());
 		if (activity == null) {
 			String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.get();
-			activity = helper.findRouteActivity(selectedId);
-			metadata.setRouteActivity(activity, helper.getActivities());
+			metadata.setRouteActivity(helper.findRouteActivity(selectedId));
 		}
 	}
 
