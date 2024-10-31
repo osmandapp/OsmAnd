@@ -28,13 +28,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
@@ -53,7 +47,6 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -75,23 +68,14 @@ import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragme
 import net.osmand.plus.measurementtool.SaveGpxRouteAsyncTask.SaveGpxRouteListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter.MeasurementAdapterListener;
-import net.osmand.plus.measurementtool.command.AddPointCommand;
-import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
-import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand;
+import net.osmand.plus.measurementtool.command.*;
 import net.osmand.plus.measurementtool.command.ChangeRouteModeCommand.ChangeRouteType;
-import net.osmand.plus.measurementtool.command.ClearPointsCommand;
-import net.osmand.plus.measurementtool.command.DisableApproximationCheckCommand;
-import net.osmand.plus.measurementtool.command.JoinPointsCommand;
-import net.osmand.plus.measurementtool.command.MovePointCommand;
-import net.osmand.plus.measurementtool.command.RemovePointCommand;
-import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.measurementtool.command.ReversePointsCommand;
-import net.osmand.plus.measurementtool.command.SplitPointsCommand;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.MapPosition;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
@@ -101,16 +85,9 @@ import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitud
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.*;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.utils.HeightsResolverTask;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UploadFileTask;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -1156,8 +1133,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
 			hide();
-			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.snap_to_road_image_button,
-					R.id.map_ruler_container);
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.snap_to_road_image_button, R.id.map_ruler_layout);
 			GpsFilterFragment.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile, this);
 		}
 	}
@@ -2292,7 +2268,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		hide();
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		SnapTrackWarningFragment.showInstance(manager, this);
-		AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
+		AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_layout);
 	}
 
 	private void exitApproximationMode() {
@@ -2301,7 +2277,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity != null) {
 			getMeasurementLayer().setTapsDisabled(false);
 			show();
-			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout);
 		}
 	}
 
@@ -2341,7 +2317,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				dismiss(mapActivity);
 			} else {
 				updateSnapToRoadControls();
-				AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+				AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout);
 				show();
 
 				boolean modifiedByFilter = !Algorithms.isEmpty(savedFilePath);

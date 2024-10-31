@@ -616,26 +616,7 @@ public class RenderingRulesStorage {
 			styleName = "test";
 			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
-		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		
-		try {
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(defaultIS, "UTF-8");
-			int tok;
-			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok == XmlPullParser.START_TAG) {
-					String tagName = parser.getName();
-					if (tagName.equals("renderingConstant")) {
-						if (!renderingConstants.containsKey(parser.getAttributeValue("", "name"))) {
-							renderingConstants.put(parser.getAttributeValue("", "name"), 
-									parser.getAttributeValue("", "value"));
-						}
-					}
-				}
-			}
-		} finally {
-			defaultIS.close();
-		}
+		final Map<String, String> renderingConstants = readRenderingConstantsFromInputStream(defaultIS);
 		RenderingRulesStorage storage = new RenderingRulesStorage(styleName, renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -701,11 +682,66 @@ public class RenderingRulesStorage {
 
 	public static RenderingRulesStorage getTestStorageForStyle(String filePath) throws XmlPullParserException, IOException  {
 		RenderingRulesStorage.STORE_ATTRIBUTES = true;
-		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 
 		InputStream is = new FileInputStream(filePath);
-		// buggy attributes
+		final Map<String, String> renderingConstants = readRenderingConstantsFromInputStream(is);
+
+		is = new FileInputStream(filePath);
+		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
+		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
+			@Override
+			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
+				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref, false);
+				return depends;
+			}
+		};
+		storage.parseRulesFromXmlInputStream(is, resolver, false);
+		return storage;
+	}
+
+	public static RenderingRulesStorage initWithStylesFromResources(String... resourceFileNames) {
 		try {
+			RenderingRulesStorage storage = null;
+			final String BASE_EXT = ".render.xml";
+			final String ADDON_EXT = ".addon.render.xml";
+			final String[] defaultStyles = new String[]{"default.render.xml"};
+
+			for (String resourceName : resourceFileNames != null ? resourceFileNames : defaultStyles) {
+				boolean addon = resourceName.endsWith(ADDON_EXT);
+				String styleName = resourceName.replace(ADDON_EXT, "").replace(BASE_EXT, "");
+				Map<String, String> constants = readRenderingConstantsFromInputStream(
+						RenderingRulesStorage.class.getResourceAsStream(resourceName));
+				if (storage == null) {
+					storage = new RenderingRulesStorage(styleName, constants);
+				} else {
+					storage.renderingConstants.putAll(constants);
+				}
+				final RenderingRulesStorage.RenderingRulesStorageResolver resolver = (name, ref) -> {
+					final String resource = name + (addon ? ADDON_EXT : BASE_EXT);
+					final RenderingRulesStorage depends = new RenderingRulesStorage(name,
+							readRenderingConstantsFromInputStream(RenderingRulesStorage.class.getResourceAsStream(resource)));
+					final InputStream depStream = RenderingRulesStorage.class.getResourceAsStream(resource);
+					depends.parseRulesFromXmlInputStream(depStream, ref, false);
+					depStream.close();
+					return depends;
+				};
+				final InputStream xmlStream = RenderingRulesStorage.class.getResourceAsStream(resourceName);
+				storage.parseRulesFromXmlInputStream(xmlStream, resolver, addon);
+				xmlStream.close();
+			}
+			return storage;
+		} catch (XmlPullParserException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static Map<String, String> readRenderingConstantsFromInputStream(InputStream is)
+			throws XmlPullParserException, IOException {
+		Map<String, String> renderingConstants = new LinkedHashMap<>();
+		try (is) {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
 			int tok;
@@ -720,21 +756,8 @@ public class RenderingRulesStorage {
 					}
 				}
 			}
-		} finally {
-			is.close();
 		}
-		is = new FileInputStream(filePath);
-		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
-		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
-			@Override
-			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
-				RenderingRulesStorage depends = new RenderingRulesStorage(name, null);
-				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref, false);
-				return depends;
-			}
-		};
-		storage.parseRulesFromXmlInputStream(is, resolver, false);
-		return storage;
+		return renderingConstants;
 	}
 
 	protected static void printAllRules(RenderingRulesStorage storage) {

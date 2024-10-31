@@ -31,7 +31,7 @@ public class AdditionalInfoBundle {
 	private static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(
 			COLOR_NAME_EXTENSION, ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,
 			PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION, AMENITY_ORIGIN_EXTENSION,
-			NAME, TYPE, SUBTYPE
+			TYPE, SUBTYPE
 	);
 
 	private final OsmandApplication app;

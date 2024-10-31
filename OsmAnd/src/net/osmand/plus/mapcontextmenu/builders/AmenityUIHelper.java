@@ -303,6 +303,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			collapsableView = new CollapsableView(llv, this, true);
 		}
+		hasWiki = false; // allow another hasWiki try for infoRow at return
 		return createAmenityInfoRow(context, headerKey, headerValue, collapsableView);
 	}
 
@@ -390,7 +391,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
 				wikiAmenity.setLocation(getLatLon());
 				String name = additionalInfoFiltered.get("name");
-				if (Algorithms.isEmpty(name)) {
+				if (!Algorithms.isEmpty(name)) {
 					wikiAmenity.setName(name);
 				}
 

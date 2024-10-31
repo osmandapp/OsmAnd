@@ -463,8 +463,8 @@
     <string name="loading_cities">Chargement des villes…</string>
     <string name="poi">PI</string>
     <string name="error_occurred_saving_gpx">Impossible d\'enregistrer le fichier GPX.</string>
-    <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
-    <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire.</string>
+    <string name="error_calculating_route">Impossible de calculer l\'itinéraire</string>
+    <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
     <string name="arrived_at_destination">Vous êtes arrivé.</string>
     <string name="invalid_locations">Coordonnées invalides</string>
@@ -2511,7 +2511,7 @@
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
-    <string name="transport_nearby_routes">Situé dans / à moins de</string>
+    <string name="transport_nearby_routes">Situé à moins de</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
     <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
     <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -5623,4 +5623,26 @@
     <string name="speedometer_maximum">Maximum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/km)</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="simulate_obd">Simuler des données OBD</string>
+    <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
+    <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
+    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
+    <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
+    <string name="obd_throttle_position">Position de l\'aiguille</string>
+    <string name="obd_fuel_pressure">Pression de carburant</string>
+    <string name="obd_fuel_pressure_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanneur obd</string>
+    <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
+    <string name="obd_engine_oil_temperature_desc">Affiche la température de l\'huile moteur à partir du scanneur obd</string>
+    <string name="bt_start_pair_failed">Impossible d\'amorcer l\'association avec l\'appareil</string>
+    <string name="obd_calculated_engine_load_desc">Affiche la charge moteur calculée à partir du capteur</string>
+    <string name="obd_calculated_engine_load">Charge moteur calculée</string>
+    <string name="shared_string_dynamic">Dynamique</string>
+    <string name="obd_connected_to_device">Connecté à %s</string>
+    <string name="obd_not_connected_to_device">Déconnecté de %s</string>
+    <string name="obd_connecting_to_device">Connexion en cours à %s</string>
+    <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
 </resources>

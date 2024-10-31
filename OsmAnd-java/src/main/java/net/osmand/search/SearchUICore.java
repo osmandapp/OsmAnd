@@ -289,6 +289,13 @@ public class SearchUICore {
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
 								similarityRadius = 50000;
 							}
+							final String ROUTE_ID = "route_id";
+							final String ROUTE_TRACK = "route_track";
+							final String ROUTE_TYPE_PREFIX = "activities_";
+							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
+								&& (subType1.startsWith(ROUTE_TYPE_PREFIX) || subType1.equals(ROUTE_TRACK))) {
+								similarityRadius = 50000;
+							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
 						similarityRadius = 100;

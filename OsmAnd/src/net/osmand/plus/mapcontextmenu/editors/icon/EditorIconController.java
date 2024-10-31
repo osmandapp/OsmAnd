@@ -49,7 +49,7 @@ public class EditorIconController extends BaseDialogController {
 	public static final String ACTIVITIES_KEY = "activities";
 
 	protected final List<IconsCategory> categories = new ArrayList<>();
-	private IconsCategory selectedCategory;
+	protected IconsCategory selectedCategory;
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
 
@@ -65,16 +65,16 @@ public class EditorIconController extends BaseDialogController {
 
 	protected void init() {
 		initIconCategories();
-		this.selectedCategory = findIconCategory(getSelectedIconKey());
-		this.cardController = new EditorIconCardController(app, this);
-		this.screenController = new EditorIconScreenController(app, this);
+		this.selectedCategory = findInitialIconCategory();
+		this.cardController = createCardController();
+		this.screenController = createScreenController();
 	}
 
 	protected void initIconCategories() {
 		initLastUsedCategory();
 		initAssetsCategories();
 		initActivitiesCategory();
-		initPoiPoiCategories();
+		initPoiCategories();
 		sortCategories();
 	}
 
@@ -109,8 +109,18 @@ public class EditorIconController extends BaseDialogController {
 		}
 	}
 
-	protected void initPoiPoiCategories() {
+	protected void initPoiCategories() {
 		categories.addAll(readOriginalPoiCategories());
+	}
+
+	@NonNull
+	protected EditorIconCardController createCardController() {
+		return new EditorIconCardController(app, this);
+	}
+
+	@NonNull
+	protected EditorIconScreenController createScreenController() {
+		return new EditorIconScreenController(app, this);
 	}
 
 	protected void sortCategories() {
@@ -274,7 +284,7 @@ public class EditorIconController extends BaseDialogController {
 		return Objects.equals(iconKey, getSelectedIconKey());
 	}
 
-	public void onIconSelectedFromPalette(@NonNull String iconKey, @Nullable String categoryKey) {
+	public void onIconSelectedFromPalette(@Nullable String iconKey, @Nullable String categoryKey) {
 		setSelectedIconKey(iconKey);
 		if (categoryKey != null) {
 			setSelectedCategory(findCategoryByKey(categoryKey));
@@ -286,6 +296,11 @@ public class EditorIconController extends BaseDialogController {
 	}
 
 	@NonNull
+	protected IconsCategory findInitialIconCategory() {
+		return findIconCategory(getSelectedIconKey());
+	}
+
+	@NonNull
 	protected IconsCategory findIconCategory(@Nullable String iconKey) {
 		if (iconKey != null) {
 			for (IconsCategory category : categories) {
@@ -294,7 +309,7 @@ public class EditorIconController extends BaseDialogController {
 				}
 			}
 		}
-		return categories.get(0);
+		return getDefaultCategory();
 	}
 
 	@NonNull
@@ -306,6 +321,11 @@ public class EditorIconController extends BaseDialogController {
 				}
 			}
 		}
+		return getDefaultCategory();
+	}
+
+	@NonNull
+	protected IconsCategory getDefaultCategory() {
 		return categories.get(0);
 	}
 

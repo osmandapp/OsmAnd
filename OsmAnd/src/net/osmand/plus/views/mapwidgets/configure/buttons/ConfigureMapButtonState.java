@@ -4,6 +4,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class ConfigureMapButtonState extends MapButtonState {
 
@@ -20,7 +23,6 @@ public class ConfigureMapButtonState extends MapButtonState {
 	public ConfigureMapButtonState(@NonNull OsmandApplication app) {
 		super(app, LAYERS_HUD_ID);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
-		setupButtonPosition(true, true, true, false, false);
 	}
 
 	@NonNull
@@ -58,8 +60,14 @@ public class ConfigureMapButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
+	public String getDefaultIconName() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		return new ButtonAppearanceParams(appMode.getIconName(), getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+		return appMode.getIconName();
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_LEFT, POS_TOP, false, true);
 	}
 }

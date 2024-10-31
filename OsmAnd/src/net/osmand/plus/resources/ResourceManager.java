@@ -800,9 +800,9 @@ public class ResourceManager {
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
-			String[] modes = asset.combinedMode.split("\\|");
+			String[] modes = asset.mode.split("\\|");
 			if (modes.length == 0) {
-				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				log.error("Mode '" + asset.mode + "' is not valid");
 				continue;
 			}
 			String installMode = null;
@@ -845,8 +845,8 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.version != null &&
-						destinationFile.lastModified() < asset.version.getTime()) {
+				} else if (asset.dateVersion != null &&
+						destinationFile.lastModified() < asset.dateVersion.getTime()) {
 					shouldCopy = true;
 				}
 			}
@@ -1493,16 +1493,26 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
-	public BinaryMapIndexReader[] getQuickSearchFiles() {
+	public BinaryMapIndexReader[] getQuickSearchFiles(List<String> ignoreExtensions) {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
-			BinaryMapIndexReader shallowReader = r.getShallowReader();
-			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData()) &&
-					!r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
-				if (reader != null) {
-					readers.add(reader);
+			boolean allow = true;
+			if (!Algorithms.isEmpty(ignoreExtensions)) {
+				for (String ext : ignoreExtensions) {
+					if (r.getFileName().endsWith(ext)) {
+						allow = false;
+						break;
+					}
+				}
+			}
+			if (allow) {
+				BinaryMapIndexReader shallowReader = r.getShallowReader();
+				if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
+					BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
+					if (reader != null) {
+						readers.add(reader);
+					}
 				}
 			}
 		}

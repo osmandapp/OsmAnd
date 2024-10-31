@@ -138,7 +138,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	protected void initGeometries(float density) {
 		routeWayContext = new RouteGeometryWayContext(getContext(), density);
-		routeWayContext.updatePaints(nightMode, attrs);
+		routeWayContext.updatePaints(nightMode, attrs, attrsW);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 		routeGeometry.baseOrder = getBaseOrder();
 
@@ -337,7 +337,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		nightMode = settings != null && settings.isNightMode();
 
 		if (updatePaints) {
-			routeWayContext.updatePaints(nightMode, attrs);
+			routeWayContext.updatePaints(nightMode, attrs, attrsW);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
 		}
 	}
@@ -647,6 +647,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);
+			if (RouteCalculationResult.FIRST_LAST_LOCATION_PROVIDER.equals(loc.getProvider())) {
+				continue;
+			}
 			if (nf != null) {
 				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
 				if(pnt < routePoint + cd ) {

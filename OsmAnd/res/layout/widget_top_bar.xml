@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.osmand.plus.views.mapwidgets.TopToolbarView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_top_bar"
@@ -148,4 +148,4 @@
 
 	</LinearLayout>
 
-</FrameLayout>
+</net.osmand.plus.views.mapwidgets.TopToolbarView>

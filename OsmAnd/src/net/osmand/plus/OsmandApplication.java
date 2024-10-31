@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarToast;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -157,6 +158,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
+	ActivityCompat.OnRequestPermissionsResultCallback androidAutoPermissionRequestResultListener;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
@@ -695,6 +697,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
 		this.navigationCarAppService = navigationCarAppService;
+	}
+
+	@Nullable
+	public ActivityCompat.OnRequestPermissionsResultCallback getAndroidAutoPermissionRequestResultListener() {
+		return androidAutoPermissionRequestResultListener;
+	}
+
+	public void setAndroidAutoPermissionRequestResultListener(@Nullable ActivityCompat.OnRequestPermissionsResultCallback callback) {
+		this.androidAutoPermissionRequestResultListener = callback;
 	}
 
 	@Nullable

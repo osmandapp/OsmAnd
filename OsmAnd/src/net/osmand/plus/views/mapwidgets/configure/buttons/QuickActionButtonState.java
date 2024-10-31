@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -20,6 +22,7 @@ import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.util.Algorithms;
 
@@ -31,6 +34,8 @@ import java.util.Map;
 public class QuickActionButtonState extends MapButtonState {
 
 	public static final String DEFAULT_BUTTON_ID = "quick_actions";
+
+	public static final String DEFAULT_ICON_KEY = "ic_quick_action";
 
 	private final CommonPreference<Boolean> visibilityPref;
 	private final CommonPreference<String> namePref;
@@ -46,7 +51,6 @@ public class QuickActionButtonState extends MapButtonState {
 		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
 		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
-		setupButtonPosition(false, false, false, false, true);
 	}
 
 	@Override
@@ -180,23 +184,21 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
-		if (Algorithms.isEmpty(iconPref.get())) {
-			if (isSingleAction()) {
-				int iconId = getQuickActions().get(0).getIconRes(app);
-				if (iconId > 0) {
-					appearanceParams.setIconName(app.getResources().getResourceEntryName(iconId));
-				}
-			} else {
-				appearanceParams.setIconName("ic_quick_action");
-			}
+		if (Algorithms.isEmpty(getSavedIconName())) {
+			appearanceParams.setIconName(getDefaultIconName());
 		}
 		return appearanceParams;
 	}
 
 	@NonNull
-	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_quick_action", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		if (isSingleAction()) {
+			int iconId = getQuickActions().get(0).getIconRes(app);
+			if (iconId > 0) {
+				return app.getResources().getResourceEntryName(iconId);
+			}
+		}
+		return DEFAULT_ICON_KEY;
 	}
 
 	@Nullable
@@ -212,5 +214,11 @@ public class QuickActionButtonState extends MapButtonState {
 			}
 		}
 		return super.getIcon(iconId, color, nightMode, mapIcon);
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, true, true);
 	}
 }

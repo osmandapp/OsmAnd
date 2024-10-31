@@ -35,6 +35,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
@@ -126,7 +127,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
 		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_my_location_button));
 
-		View mapRuler = view.findViewById(R.id.map_ruler_layout);
+		RulerWidget mapRuler = view.findViewById(R.id.map_ruler_layout);
 		mapLayers.getMapInfoLayer().setupRulerWidget(mapRuler);
 	}
 
