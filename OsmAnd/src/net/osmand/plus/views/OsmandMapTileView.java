@@ -1714,32 +1714,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
 
-		boolean zoomCorrected = false;
-		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoomCorrected = true;
-			if (useSmallZoom) {
-				zoom.smallZoomIn();
-			} else {
-				zoom.zoomIn();
-			}
-			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
-		}
-		if (zoomCorrected && useSmallZoom) {
-			zoomCorrected = false;
-			zoom.smallZoomOut();
-		}
 		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoomCorrected = true;
-			if (useSmallZoom) {
-				zoom.smallZoomOut();
-			} else {
-				zoom.zoomOut();
-			}
+			zoom.partialZoomOut(useSmallZoom);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		if (zoomCorrected && useSmallZoom) {
+		if (useSmallZoom) {
 			zoom.smallZoomIn();
 		}
+		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
+			zoom.partialZoomIn(useSmallZoom);
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
+		if (useSmallZoom) {
+			zoom.smallZoomOut();
+		}
+		
 		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 
 		if (dy != 0 || dx != 0) {
