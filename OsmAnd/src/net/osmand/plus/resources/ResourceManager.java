@@ -802,10 +802,10 @@ public class ResourceManager {
 	                                 boolean overwrite,
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		AssetsCollection assetsCollection = getAssets();
-		for (AssetEntry asset : assetsCollection.getEntrys()) {
-			String[] modes = asset.combinedMode.split("\\|");
+		for (AssetEntry asset : assetsCollection.getEntries()) {
+			String[] modes = asset.mode.split("\\|");
 			if (modes.length == 0) {
-				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				log.error("Mode '" + asset.mode + "' is not valid");
 				continue;
 			}
 			String installMode = null;
@@ -848,7 +848,7 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.version != null && destinationFile.lastModified() < asset.version.getTime()) {
+				} else if (asset.dateVersion != null && destinationFile.lastModified() < asset.dateVersion.getTime()) {
 					shouldCopy = true;
 				}
 			}
@@ -1625,7 +1625,7 @@ public class ResourceManager {
 				String version = xmlParser.getAttributeValue(null, "version");
 				if (!Algorithms.isEmpty(version)) {
 					try {
-						ae.version = DATE_FORMAT.parse(version);
+						ae.dateVersion = DATE_FORMAT.parse(version);
 					} catch (ParseException e) {
 						log.error(e.getMessage(), e);
 					}

@@ -31,6 +31,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.*;
@@ -187,7 +188,7 @@ public class DownloadOsmandIndexesHelper {
 		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		long installDate = getInstallDate(app);
 
-		for (AssetEntry asset : assetsCollection.getEntrys()) {
+		for (AssetEntry asset : assetsCollection.getEntries()) {
 			String target = asset.destination;
 			boolean isTTS = target.endsWith(TTSVOICE_INDEX_EXT_JS)
 					&& target.startsWith(VOICE_INDEX_DIR)
@@ -379,18 +380,19 @@ public class DownloadOsmandIndexesHelper {
 	public static class AssetEntry {
 		public final String source;
 		public final String destination;
-		public final String combinedMode;
-		public Date version = null;
+		public final String mode;
+		public String version;
+		public Date dateVersion = null;
 
 		public AssetEntry(String source, String destination, String combinedMode) {
 			this.source = source;
 			this.destination = destination;
-			this.combinedMode = combinedMode;
+			this.mode = combinedMode;
 		}
 
 		@Nullable
 		public Long getVersionTime() {
-			return version != null ? version.getTime() : null;
+			return dateVersion != null ? dateVersion.getTime() : null;
 		}
 	}
 }

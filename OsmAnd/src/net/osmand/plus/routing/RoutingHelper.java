@@ -9,7 +9,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,12 +22,13 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -110,7 +110,7 @@ public class RoutingHelper {
 		return provider;
 	}
 
-	void resetRouteWasFinished() {
+	public void resetRouteWasFinished() {
 		routeWasFinished = false;
 	}
 
