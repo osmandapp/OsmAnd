@@ -51,6 +51,7 @@ android {
 			osmandTask.dependsOn(copyRouteActivities)
 			osmandTask.dependsOn(collectHelpContentsStyle)
 			osmandTask.dependsOn(copyColorPalettes)
+			osmandTask.dependsOn(copyBundledAssets)
 			osmandTask.dependsOn(copy3DModels)
 			osmandTask.dependsOn(collectVoiceAssets)
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
