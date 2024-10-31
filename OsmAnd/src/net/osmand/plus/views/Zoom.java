@@ -46,12 +46,17 @@ public class Zoom {
 		changeZoom(-1);
 	}
 
-	public void smallZoomIn() {
-		zoomFloatPart += 0.01f;
-		if (zoomFloatPart > 0.99) {
-			zoomFloatPart = 0;
-			changeZoom(1);
+	public void partialZoom(float deltaZoom) {
+		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
+			deltaZoom--;
+			baseZoom++;
 		}
+		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
+			deltaZoom++;
+			baseZoom--;
+		}
+		zoomFloatPart += deltaZoom;
+		checkZoomBounds();
 	}
 
 	public void smallZoomOut() {
