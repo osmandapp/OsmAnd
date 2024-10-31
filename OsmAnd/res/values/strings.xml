@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="release_5_0" translatable="false"></string>
     <string name="dynamic_icon_type_summary">Icon changes based on action state.</string>
     <string name="shared_string_dynamic">Dynamic</string>
     <string name="obd_connected_to_device">Connected to %s</string>
