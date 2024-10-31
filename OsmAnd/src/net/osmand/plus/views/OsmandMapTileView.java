@@ -1713,32 +1713,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
-
+		float step = useSmallZoom ? 0.1 : 1;
 		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.partialZoomOut(useSmallZoom);
+			zoom.partialChangeZoom(-step);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
 		if (useSmallZoom) {
-			zoom.smallZoomIn();
+			zoom.partialChangeZoom(step);
 		}
 		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.partialZoomIn(useSmallZoom);
+			zoom.partialChangeZoom(step);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
 		if (useSmallZoom) {
-			zoom.smallZoomOut();
+			zoom.partialChangeZoom(-step);
 		}
-		
 		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
-
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
 			clat = tb.getLatFromPixel(x, y);
 			clon = tb.getLonFromPixel(x, y);
-		}
-		if (useSmallZoom) {
-			zoom.zoomIn();
 		}
 		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 	}
