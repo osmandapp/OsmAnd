@@ -104,9 +104,9 @@ class WptPt : GpxExtensions {
 		desc: String?,
 		name: String?,
 		category: String?,
-		color: String,
-		icon: String,
-		background: String
+		color: String?,
+		icon: String?,
+		background: String?
 	) {
 		this.lat = lat
 		this.lon = lon
