@@ -800,9 +800,9 @@ public class ResourceManager {
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
 		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
 		for (AssetEntry asset : assetEntries) {
-			String[] modes = asset.combinedMode.split("\\|");
+			String[] modes = asset.mode.split("\\|");
 			if (modes.length == 0) {
-				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				log.error("Mode '" + asset.mode + "' is not valid");
 				continue;
 			}
 			String installMode = null;
@@ -845,8 +845,8 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.version != null &&
-						destinationFile.lastModified() < asset.version.getTime()) {
+				} else if (asset.dateVersion != null &&
+						destinationFile.lastModified() < asset.dateVersion.getTime()) {
 					shouldCopy = true;
 				}
 			}

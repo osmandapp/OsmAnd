@@ -166,6 +166,13 @@ tasks.register('collectHelpContentsStyle', Copy) {
 	into "assets"
 }
 
+tasks.register('copyBundledAssets', Copy) {
+	from("../../resources/bundled_assets.json") {
+		include "bundled_assets.json"
+	}
+	into "assets"
+}
+
 tasks.register('copyProjDb', Copy) {
 	from("../../resources/proj") {
 		include "proj.db"
@@ -251,6 +258,7 @@ tasks.register('collectExternalResources') {
 			copyMapPOIIcons,
 			copyLargePOIIcons,
 			validateTranslate,
+			copyBundledAssets,
 			copyProjDb,
 			copyColorPalettes,
 			copyPoiCategories,
