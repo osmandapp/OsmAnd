@@ -310,7 +310,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		if (invalidated) {
 			setInvalidated(false);
-			app.runInUIThread(this::refreshButtons);
+			app.runInUIThread(() -> {
+				if (getMapActivity() != null) {
+					refreshButtons();
+				}
+			});
 		}
 	}
 
