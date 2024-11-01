@@ -26,6 +26,8 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.odb.AverageModeSettingFragment;
+import net.osmand.plus.plugins.odb.OBDTextWidget;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -388,6 +390,11 @@ public enum WidgetType {
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
+			if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && obdTextWidget.supportsAverageMode()) {
+				AverageModeSettingFragment settingFragment = new AverageModeSettingFragment();
+				settingFragment.setWidgetType(this);
+				return settingFragment;
+			}
 			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
 			if (simpleWidget.isVerticalWidget()) {
 				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
