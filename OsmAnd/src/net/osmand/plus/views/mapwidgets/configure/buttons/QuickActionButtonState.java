@@ -208,6 +208,12 @@ public class QuickActionButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, true, true);
+		int hash = id.hashCode();
+		int mod = hash == Integer.MIN_VALUE ? 0 : Math.abs(hash % 3);
+
+		boolean xMove = (mod == 0 || mod == 2);
+		boolean yMove = (mod == 1 || mod == 2);
+
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, xMove, yMove);
 	}
 }
