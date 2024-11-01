@@ -765,12 +765,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			return "-"
 		}
 		val convertedData = when (computerWidget.type) {
-			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Int)
+			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number)
 
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
@@ -820,14 +820,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
-	private fun getConvertedTemperature(data: Any): Float {
-		var temperature = 0f
-		temperature = when (data) {
-			is Int -> data.toFloat()
-			is Double -> data.toFloat()
-			else -> data as Float
-		}
-
+	private fun getConvertedTemperature(data: Number): Float {
+		val temperature = data.toFloat()
 		return if (getTemperatureUnit() == TemperatureUnit.CELSIUS) {
 			temperature
 		} else {
@@ -839,7 +833,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return OsmAndFormatter.getFormattedDuration(time.toLong(), app)
 	}
 
-	private fun getConvertedSpeed(speed: Int): Float {
+	private fun getConvertedSpeed(speed: Number): Float {
 		val formattedValue =
 			OsmAndFormatter.getFormattedSpeedValue(speed.toFloat() * 1000 / 3600, app)
 		return formattedValue.valueSrc

@@ -22,7 +22,8 @@ class OBDTextWidget(
 	widgetType: WidgetType,
 	fieldType: OBDTypeWidget,
 	customId: String?,
-	widgetsPanel: WidgetsPanel?) :
+	widgetsPanel: WidgetsPanel?
+) :
 	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel) {
 	private val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
 	private val widgetComputer: OBDComputerWidget
@@ -72,41 +73,44 @@ class OBDTextWidget(
 		if (supportsAverageMode()) {
 			if (averageModePref!!.get()) {
 				widgetComputer.averageTimeSeconds = (measuredIntervalPref!!.get() / 1000).toInt()
-			} else{
+			} else {
 				widgetComputer.averageTimeSeconds = 0
 			}
 			updateWidgetName()
 		}
 	}
 
-	override fun getOnClickListener(): View.OnClickListener {
-		return if(supportsAverageMode()){
+	override fun getOnClickListener(): View.OnClickListener? {
+		return if (supportsAverageMode() && averageModePref != null) {
 			View.OnClickListener { v: View? ->
 				averageModePref!!.set(!averageModePref!!.get())
 				updatePrefs()
 			}
-		} else{
-			super.getOnClickListener()
+		} else {
+			null
 		}
 	}
 
-	override fun getWidgetActions(): List<PopUpMenuItem> {
-		val actions: MutableList<PopUpMenuItem> = ArrayList()
-		val uiUtilities = app.uiUtilities
-		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
+	override fun getWidgetActions(): MutableList<PopUpMenuItem>? {
+		if (supportsAverageMode()) {
+			val actions: MutableList<PopUpMenuItem> = ArrayList()
+			val uiUtilities = app.uiUtilities
+			val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
 
-		actions.add(PopUpMenuItem.Builder(app)
-			.setIcon(
-				uiUtilities.getPaintedIcon(
-					R.drawable.ic_action_reset_to_default_dark,
-					iconColor
+			actions.add(PopUpMenuItem.Builder(app)
+				.setIcon(
+					uiUtilities.getPaintedIcon(
+						R.drawable.ic_action_reset_to_default_dark,
+						iconColor
+					)
 				)
-			)
-			.setTitleId(R.string.reset_average_value)
-			.setOnClickListener { item: PopUpMenuItem? -> resetAverageValue() }
-			.showTopDivider(true)
-			.create())
-		return actions
+				.setTitleId(R.string.reset_average_value)
+				.setOnClickListener { item: PopUpMenuItem? -> resetAverageValue() }
+				.showTopDivider(true)
+				.create())
+			return actions
+		}
+		return null
 	}
 
 	private fun resetAverageValue() {
@@ -132,7 +136,8 @@ class OBDTextWidget(
 		val subtext: String? = plugin?.getWidgetUnit(widgetComputer)
 		val textData: String = plugin?.getWidgetValue(widgetComputer) ?: NO_VALUE
 		if (!Algorithms.objectEquals(textData, cacheTextData) ||
-			!Algorithms.objectEquals(subtext, cacheSubTextData)) {
+			!Algorithms.objectEquals(subtext, cacheSubTextData)
+		) {
 			setText(textData, subtext)
 			cacheTextData = textData
 			cacheSubTextData = subtext
