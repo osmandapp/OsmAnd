@@ -4,6 +4,7 @@ import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
@@ -11,10 +12,10 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiContext;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.render.RenderingIcons;
@@ -64,8 +65,8 @@ public abstract class MapButtonState {
 		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
 		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_position_portrait", -1)).makeProfile().cache();
 		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_position_landscape", -1)).makeProfile().cache();
-		this.positionSize = createButtonPosition();
-		this.defaultPositionSize = createButtonPosition();
+		this.positionSize = setupButtonPosition(new ButtonPositionSize(getId()));
+		this.defaultPositionSize = setupButtonPosition(new ButtonPositionSize(getId()));
 
 		sizeListener = change -> {
 			updatePosition(positionSize);
@@ -139,16 +140,6 @@ public abstract class MapButtonState {
 	public abstract CommonPreference getVisibilityPref();
 
 	@NonNull
-	public CommonPreference<Long> getPortraitPositionPref() {
-		return portraitPositionPref;
-	}
-
-	@NonNull
-	public CommonPreference<Long> getLandscapePositionPref() {
-		return landscapePositionPref;
-	}
-
-	@NonNull
 	public ButtonPositionSize getPositionSize() {
 		return positionSize;
 	}
@@ -184,13 +175,6 @@ public abstract class MapButtonState {
 	}
 
 	@NonNull
-	public ButtonPositionSize createButtonPosition() {
-		ButtonPositionSize position = setupButtonPosition(new ButtonPositionSize(getId()));
-		updatePosition(position);
-		return position;
-	}
-
-	@NonNull
 	protected abstract ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position);
 
 	@NonNull
@@ -206,8 +190,11 @@ public abstract class MapButtonState {
 		return position;
 	}
 
-	public void activityUpdated(@NonNull MapActivity mapActivity) {
-		this.portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+	public void updatePositions(@NonNull @UiContext Context context) {
+		this.portrait = AndroidUiHelper.isOrientationPortrait(context);
+
+		updatePosition(positionSize);
+		updatePosition(defaultPositionSize);
 	}
 
 	public void savePosition() {
@@ -260,6 +247,8 @@ public abstract class MapButtonState {
 		sizePref.setModeValue(toMode, sizePref.getModeValue(fromMode));
 		opacityPref.setModeValue(toMode, opacityPref.getModeValue(fromMode));
 		cornerRadiusPref.setModeValue(toMode, cornerRadiusPref.getModeValue(fromMode));
+		portraitPositionPref.setModeValue(toMode, portraitPositionPref.getModeValue(fromMode));
+		landscapePositionPref.setModeValue(toMode, landscapePositionPref.getModeValue(fromMode));
 		getVisibilityPref().setModeValue(toMode, getVisibilityPref().getModeValue(fromMode));
 	}
 

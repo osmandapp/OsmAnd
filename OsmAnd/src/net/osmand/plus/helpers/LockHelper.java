@@ -233,7 +233,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	@Override
 	public void stateChanged(ApplicationMode mode) {
-		List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getButtonsStates();
+		List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getQuickActionButtonsStates();
 		ApplicationMode currentMode = app.getSettings().getApplicationMode();
 
 		if (isScreenLocked() && lastApplicationMode != currentMode) {

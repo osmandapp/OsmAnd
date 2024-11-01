@@ -130,7 +130,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			}
 
 			List<QuickActionButton> buttons = new ArrayList<>();
-			List<QuickActionButtonState> buttonStates = mapButtonsHelper.getButtonsStates();
+			List<QuickActionButtonState> buttonStates = mapButtonsHelper.getQuickActionButtonsStates();
 			for (QuickActionButtonState state : buttonStates) {
 				QuickActionButton button = (QuickActionButton) inflater.inflate(R.layout.map_quick_actions_button, mapHudLayout, false);
 				button.setButtonState(state);
@@ -330,7 +330,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2f, box.getCenterPixelY() - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
-		if (mapButtonStates != mapButtonsHelper.getButtonsStates()) {
+		if (mapButtonStates != mapButtonsHelper.getQuickActionButtonsStates()) {
 			app.runInUIThread(this::updateButtons);
 		}
 		for (QuickActionButton button : actionButtons) {
