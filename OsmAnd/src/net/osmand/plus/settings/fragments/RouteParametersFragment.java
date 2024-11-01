@@ -234,7 +234,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
-		addDivider(screen);
+		createDividerPref(screen);
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
@@ -381,12 +381,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void addDivider(PreferenceScreen screen) {
-		Preference divider = new Preference(requireContext());
-		divider.setLayoutResource(R.layout.simple_divider_item);
-		screen.addPreference(divider);
-	}
-
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
 		OsmandPreference<Boolean> preference = settings.DISABLE_WRONG_DIRECTION_RECALC;
 		SwitchPreferenceEx switchPreference = createSwitchPreferenceEx(preference.getId(),
@@ -406,7 +400,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode) {
-		addDivider(screen);
+		createDividerPref(screen);
 		setupDevelopmentCategoryHeader(screen);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();

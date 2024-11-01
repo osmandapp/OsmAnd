@@ -34,6 +34,7 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -60,6 +61,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupUnitOfVolumePref();
 		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
@@ -209,6 +211,23 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupUnitOfVolumePref() {
+		VolumeUnit[] unitValues = VolumeUnit.values();
+		String[] entries = new String[unitValues.length];
+		Integer[] entryValues = new Integer[unitValues.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = unitValues[i].toHumanString(app);
+			entryValues[i] = unitValues[i].ordinal();
+		}
+
+		ListPreferenceEx unitOfVolumePref = findPreference(settings.UNIT_OF_VOLUME.getId());
+		unitOfVolumePref.setEntries(entries);
+		unitOfVolumePref.setEntryValues(entryValues);
+		unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
+		unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
 	}
 
 	private void setupPreciseDistanceNumbersPref() {
