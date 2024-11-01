@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.map.OsmandRegions;
@@ -751,6 +752,36 @@ public class AppInitializer implements IProgress {
 				applicationBgInitializing = false;
 			}
 		}, "Initializing app").start();
+	}
+
+	public void addOnStartListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onStart(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
+	}
+
+	public void addOnProgressListener(@NonNull AppInitEvents trackedEvent,
+	                                  @NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+				if (trackedEvent == event) {
+					callback.onResult(init);
+				}
+			}
+		});
+	}
+
+	public void addOnFinishListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onFinish(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
 	}
 
 	public void addListener(@NonNull AppInitializeListener listener) {
