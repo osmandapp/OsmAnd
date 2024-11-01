@@ -55,6 +55,8 @@ import net.osmand.shared.obd.ODBSimulationSource
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 import okio.IOException
+import okio.Sink
+import okio.Source
 import okio.sink
 import okio.source
 import java.util.UUID
@@ -65,6 +67,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	private var mapActivity: MapActivity? = null
 	private val handler = Handler(Looper.myLooper()!!)
 	private val RECONNECT_DELAY = 5000L
+	private val DEFAULT_FUEL_TANK_VOLUME = 52f
 	private var currentConnectingState = OBDConnectionState.DISCONNECTED
 
 	val USED_OBD_DEVICES = registerStringPreference(
@@ -426,11 +429,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 					PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
 
 				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
-					onDeviceConnected(deviceInfo)
 					val simulator = ODBSimulationSource()
-					val input = simulator.reader
-					val output = simulator.writer
-					OBDDispatcher.setReadWriteStreams(input, output)
+					processDeviceConnected(deviceInfo, simulator.reader, simulator.writer)
 					return true
 				}
 
@@ -454,6 +454,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return socket?.isConnected == true
 	}
 
+	private fun processDeviceConnected(deviceInfo: BTDeviceInfo, reader: Source, writer: Sink) {
+		onDeviceConnected(deviceInfo)
+		OBDDispatcher.useInfoLogging =
+			PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
+		OBDDispatcher.setReadWriteStreams(reader, writer)
+	}
+
 	@SuppressLint("MissingPermission")
 	private fun connectToDevice(activity: Activity, connectedDevice: BluetoothDevice) {
 		val deviceToConnect = BTDeviceInfo(
@@ -465,10 +472,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				socket?.apply {
 					connect()
 					if (isConnected) {
-						onDeviceConnected(deviceToConnect)
-						val input = inputStream.source()
-						val output = outputStream.sink()
-						OBDDispatcher.setReadWriteStreams(input, output)
+						processDeviceConnected(deviceToConnect, inputStream.source(), outputStream.sink())
 					} else {
 						LOG.error("Socket not connected")
 						onDisconnected(deviceToConnect)
@@ -503,7 +507,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		currentConnectingState = OBDConnectionState.CONNECTED
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
-			OBDDataComputer.fuelTank = 52f //todo implement setting correct fuel tank
+			OBDDataComputer.fuelTank = DEFAULT_FUEL_TANK_VOLUME
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
