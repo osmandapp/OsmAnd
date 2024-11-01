@@ -412,7 +412,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				if (!Algorithms.isEmpty(extensions)) {
-					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions);
+					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions, "plugins");
 				}
 
 				boolean newInterval = pt.getLat() == 0 && pt.getLon() == 0;
@@ -530,7 +530,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			String pluginsInfo = getPluginsInfo(location);
 			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
 			if (!Algorithms.isEmpty(extensions)) {
-				GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions);
+				GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions, "plugins");
 			}
 
 			insertData(wptPt, pluginsInfo);

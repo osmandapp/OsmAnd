@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -286,6 +287,7 @@ public class TargetPointsHelper {
 		}
 	}
 
+	@Nullable
 	public TargetPoint getPointToNavigate() {
 		return pointToNavigate;
 	}
