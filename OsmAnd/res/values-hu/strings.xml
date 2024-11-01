@@ -5564,7 +5564,7 @@
     <string name="obd_nothing_found_text">Nem található OBD-olvasó</string>
     <string name="obd_bluetooth_off_description">Kapcsolja be a Bluetooth keresést és kapcsolja be az OBD-olvasót.</string>
     <string name="obd_searching_text_description">Tartsa készülékét az OBD-olvasó közelében. Győződjön meg arról, hogy a jármű motorja jár.</string>
-    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – készüléke az OBD-olvasó hatókörén belül van.</string>
+    <string name="obd_nothing_found_description">Ellenőrizze a következőket:\n – a Bluetooth be van-e kapcsolva\n – a motor jár-e\n – OBD aljzat biztosítékja nincs-e kiégve\n – készüléke az OBD-olvasó hatókörén belül van.</string>
     <string name="obd_searching_text">OBD-olvasók keresése</string>
     <string name="obd_device_forget_sensor">OBD-olvasó elfelejtése</string>
     <string name="obd_device_forget_sensor_description">Az OBD-olvasó törlődik a listáról, de bármikor újra párosíthatja azt.</string>
@@ -5607,4 +5607,14 @@
     <string name="shared_string_dynamic">Dinamikus</string>
     <string name="obd_connected_to_device">Kapcsolódva ehhez: %s</string>
     <string name="obd_connecting_to_device">Kapcsolódás ehhez: %s</string>
+    <string name="fuel_tank_capacity">Üzemanyagtartály kapacitása</string>
+    <string name="shared_strings_dimensions">Méretek</string>
+    <string name="imperial_gallons_unit">birodalmi gallon</string>
+    <string name="us_gallons">Amerikai gallon</string>
+    <string name="unit_of_volume_description">A kiválasztott egységek alkalmazása az aktuális profilban lévő összes térfogattal kapcsolatos adatra.</string>
+    <string name="unit_of_volume">Térfogategység</string>
+    <string name="imperial_gallons">Birodalmi gallon</string>
+    <string name="fuel_tank_capacity_description">Adja meg az üzemanyagtartály kapacitását az üzemanyagszint és a fogyasztás pontos nyomon követése érdekében</string>
+    <string name="litres">Liter</string>
+    <string name="us_gallons_unit">gallon</string>
 </resources>
