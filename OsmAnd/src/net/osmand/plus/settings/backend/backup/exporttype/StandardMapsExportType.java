@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -29,7 +30,7 @@ class StandardMapsExportType extends AbstractMapExportType {
 	}
 
 	@Override
-	protected boolean shouldSkipLocalItem(@NonNull LocalItem localItem) {
+	protected boolean shouldSkipLocalItem(@NonNull OsmandApplication app, @NonNull LocalItem localItem) {
 		return localItem.getType() == LocalItemType.MAP_DATA
 				&& BASE_MINI.equalsIgnoreCase(localItem.getFileName());
 	}
