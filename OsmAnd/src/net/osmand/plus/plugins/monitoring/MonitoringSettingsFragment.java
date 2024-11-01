@@ -119,6 +119,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		setupExternalSensorsPref();
 		setupPreselectedRouteActivityPref();
 		setupShowTripRecNotificationPref();
+		setupObdRecordingPref();
 		setupLiveMonitoringPref();
 
 		setupOpenNotesDescrPref();
@@ -261,6 +262,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		SwitchPreferenceEx showTripRecNotification = findPreference(settings.SHOW_TRIP_REC_NOTIFICATION.getId());
 		showTripRecNotification.setDescription(getString(R.string.trip_rec_notification_settings_desc));
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
+	}
+
+	private void setupObdRecordingPref() {
+		SwitchPreferenceEx recordOBDData = findPreference(settings.RECORD_OBD_DATA.getId());
+		recordOBDData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_car_info));
 	}
 
 	private void setupTrackStorageDirectoryPref() {
