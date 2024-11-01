@@ -13,11 +13,16 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 
+import org.apache.commons.logging.Log;
+
 public class MapButtonTouchListener implements OnTouchListener {
+
+	private static final Log LOG = PlatformUtil.getLog(MapButtonTouchListener.class);
 
 	private final MapButtonState buttonState;
 	private final int padding;
@@ -64,34 +69,36 @@ public class MapButtonTouchListener implements OnTouchListener {
 	}
 
 	private void moveButton(@NonNull View view, @NonNull MotionEvent event) {
-		ButtonPositionSize s = buttonState.getPositionSize();
+		ButtonPositionSize size = buttonState.getPositionSize();
 		FrameLayout parent = (FrameLayout) view.getParent();
-		FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
+		MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();
+
 		int deltaX = (int) (initialTouchX - event.getRawX());
 		int deltaY = (int) (initialTouchY - event.getRawY());
-		if (s.isLeft()) {
+		if (size.isLeft()) {
 			deltaX = -deltaX;
 		}
-		if (s.isTop()) {
+		if (size.isTop()) {
 			deltaY = -deltaY;
 		}
 		int newMarginX = interpolate(initialMarginX + deltaX, view.getWidth(), parent.getWidth() - padding);
 		int newMarginY = interpolate(initialMarginY + deltaY, view.getHeight(), parent.getHeight() - padding);
+
 		if (view.getHeight() + newMarginY <= parent.getHeight() - padding && newMarginY > 0) {
-			if (s.isTop()) {
-				param.topMargin = newMarginY;
+			if (size.isTop()) {
+				params.topMargin = newMarginY;
 			} else {
-				param.bottomMargin = newMarginY;
+				params.bottomMargin = newMarginY;
 			}
 		}
 		if (view.getWidth() + newMarginX <= parent.getWidth() - padding && newMarginX > 0) {
-			if (s.isLeft()) {
-				param.leftMargin = newMarginX;
+			if (size.isLeft()) {
+				params.leftMargin = newMarginX;
 			} else {
-				param.rightMargin = newMarginX;
+				params.rightMargin = newMarginX;
 			}
 		}
-		view.setLayoutParams(param);
+		view.setLayoutParams(params);
 	}
 
 	private int interpolate(int value, int divider, int boundsSize) {
@@ -107,9 +114,9 @@ public class MapButtonTouchListener implements OnTouchListener {
 
 	private void setUpInitialValues(@NonNull View view, @NonNull MotionEvent event) {
 		MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();
-		ButtonPositionSize s = buttonState.getPositionSize();
-		initialMarginX = s.isLeft() ? params.leftMargin : params.rightMargin;
-		initialMarginY = s.isTop() ? params.topMargin : params.bottomMargin;
+		ButtonPositionSize size = buttonState.getPositionSize();
+		initialMarginX = size.isLeft() ? params.leftMargin : params.rightMargin;
+		initialMarginY = size.isTop() ? params.topMargin : params.bottomMargin;
 
 		initialTouchX = event.getRawX();
 		initialTouchY = event.getRawY();
