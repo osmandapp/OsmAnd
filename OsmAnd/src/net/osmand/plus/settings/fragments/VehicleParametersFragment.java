@@ -35,7 +35,6 @@ import net.osmand.plus.settings.bottomsheets.FuelTankCapacityBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.vehiclesize.FuelCapacityHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
