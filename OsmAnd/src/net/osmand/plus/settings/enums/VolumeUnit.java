@@ -3,6 +3,7 @@ package net.osmand.plus.settings.enums;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
@@ -14,15 +15,17 @@ public enum VolumeUnit {
 	private final int key;
 	private final int unit;
 
-	VolumeUnit(int key, int unit) {
+	VolumeUnit(@StringRes int key, @StringRes int unit) {
 		this.key = key;
 		this.unit = unit;
 	}
 
+	@NonNull
 	public String toHumanString(@NonNull Context ctx) {
 		return ctx.getString(key);
 	}
 
+	@NonNull
 	public String getUnitSymbol(@NonNull Context ctx) {
 		return ctx.getString(unit);
 	}

@@ -1121,16 +1121,15 @@ public class OsmandSettings {
 			"unit_of_volume", VolumeUnit.LITRES, VolumeUnit.values()) {
 
 		@Override
-		public VolumeUnit getProfileDefaultValue(ApplicationMode mode) {
-			DrivingRegion drivingRegion = DRIVING_REGION.getModeValue(mode);
-			if (drivingRegion == DrivingRegion.UK_AND_OTHERS) {
-				return VolumeUnit.IMPERIAL_GALLONS;
-			} else if (drivingRegion == DrivingRegion.US) {
-				return VolumeUnit.US_GALLONS;
-			} else {
-				return VolumeUnit.LITRES;
-			}
+		public VolumeUnit getDefaultValue() {
+			return DRIVING_REGION.get().volumeUnit;
 		}
+
+		@Override
+		public VolumeUnit getProfileDefaultValue(ApplicationMode mode) {
+			return DRIVING_REGION.getModeValue(mode).volumeUnit;
+		}
+
 	}.makeProfile();
 
 	// fuel tank capacity stored in litres

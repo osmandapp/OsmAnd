@@ -36,6 +36,7 @@ import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.vehiclesize.FuelCapacityHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
@@ -75,19 +76,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 				showDimensionsCategory(parameters, routerProfile, derivedProfile);
 				showFuelCategory(parameters);
-
-				boolean shouldShowOtherCategory = parameters.get(MAX_AXLE_LOAD) != null
-						|| parameters.get(WEIGHT_RATING) != null
-						|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
-				if (shouldShowOtherCategory) {
-					setupDividerPref();
-					setupCategoryPref(R.string.shared_string_other);
-				}
-				setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
-				setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
-				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
-					setupDefaultSpeedPref();
-				}
+				showOtherCategory(parameters, routerProfile);
 			}
 		} else {
 			setupCategoryPref(R.string.shared_string_other);
@@ -95,8 +84,23 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
+	private void showOtherCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile) {
+		boolean shouldShowOtherCategory = parameters.get(MAX_AXLE_LOAD) != null
+				|| parameters.get(WEIGHT_RATING) != null
+				|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
+		if (shouldShowOtherCategory) {
+			createDividerPref();
+			setupCategoryPref(R.string.shared_string_other);
+		}
+		setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
+		setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
+		if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
+			setupDefaultSpeedPref();
+		}
+	}
+
 	private void showFuelCategory(@NonNull Map<String, RoutingParameter> parameters) {
-		setupDividerPref();
+		createDividerPref();
 		setupCategoryPref(R.string.poi_filter_fuel);
 		setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
 		setupFuelTankCapacityPref();
@@ -131,24 +135,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		screen.addPreference(preferenceCategory);
 	}
 
-	private void setupDividerPref() {
-		Preference preference = new PreferenceCategory(requireContext());
-		preference.setLayoutResource(R.layout.simple_divider_item);
-
-		PreferenceScreen screen = getPreferenceScreen();
-		screen.addPreference(preference);
-	}
-
 	private void setupFuelTankCapacityPref() {
-		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
-
+		Context ctx = requireContext();
 		Preference defaultSpeedPref = new Preference(ctx);
 		defaultSpeedPref.setKey(settings.FUEL_TANK_CAPACITY.getId());
 		defaultSpeedPref.setTitle(R.string.fuel_tank_capacity);
-		defaultSpeedPref.setSummary(FuelCapacityHelper.getFormattedValue(app, settings.UNIT_OF_VOLUME.get(), getSelectedAppMode()).format(app));
+		defaultSpeedPref.setSummary(OsmAndFormatter.getFormattedFuelCapacityValue(app, settings.UNIT_OF_VOLUME.get(), getSelectedAppMode()).format(app));
 		defaultSpeedPref.setIcon(getPersistentPrefIcon(R.drawable.ic_action_fuel_tank));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);

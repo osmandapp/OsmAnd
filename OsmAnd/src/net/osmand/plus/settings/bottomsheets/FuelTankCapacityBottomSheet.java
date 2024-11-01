@@ -1,24 +1,14 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -29,10 +19,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.vehiclesize.FuelCapacityHelper;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.chips.ChipItem;
-import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -41,66 +29,27 @@ import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FuelTankCapacityBottomSheet extends BasePreferenceBottomSheet {
+public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = FuelTankCapacityBottomSheet.class.getSimpleName();
 
-	private int contentHeightPrevious;
-	private TextInputLayout tilCaption;
-	private EditText etText;
-	private int buttonsHeight;
-	private int shadowHeight;
-	private ScrollView scrollView;
-	private HorizontalChipsView chipsView;
-
 	private VolumeUnit volumeUnit;
-	private float currentValue;
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null) {
-			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
-		}
-		return view;
-	}
-
-	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			items.add(createBottomSheetItem(app));
-		}
-	}
 
 	@SuppressLint("ClickableViewAccessibility")
-	private BaseBottomSheetItem createBottomSheetItem(OsmandApplication app) {
-		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		View mainView = inflater.inflate(R.layout.bottom_sheet_item_edit_with_chips_view, null);
+	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
 		volumeUnit = app.getSettings().UNIT_OF_VOLUME.getModeValue(getAppMode());
-		List<ChipItem> chips = FuelCapacityHelper.collectChipItems(app, volumeUnit);
+		List<ChipItem> chips = collectChipItems(app, volumeUnit);
 
-		TextView title = mainView.findViewById(R.id.title);
 		title.setText(R.string.fuel_tank_capacity);
-
-		ImageView ivImage = mainView.findViewById(R.id.image_view);
 		AndroidUiHelper.updateVisibility(ivImage, false);
-
-		TextView tvDescription = mainView.findViewById(R.id.description);
 		tvDescription.setText(R.string.fuel_tank_capacity_description);
-
-		TextView tvMetric = mainView.findViewById(R.id.metric);
 		tvMetric.setText(volumeUnit.toHumanString(app));
 
-		chipsView = mainView.findViewById(R.id.chips_view);
-		etText = mainView.findViewById(R.id.text_edit);
-		tilCaption = mainView.findViewById(R.id.text_caption);
-
-		currentValue = FuelCapacityHelper.readSavedValue(app.getSettings(), volumeUnit, getAppMode());
+		currentValue = OsmAndFormatter.readSavedFuelTankCapacity(app.getSettings(), volumeUnit, getAppMode());
 		etText.setText(formatInputValue(currentValue));
 		etText.clearFocus();
 		etText.setOnTouchListener((v, event) -> {
@@ -119,15 +68,6 @@ public class FuelTankCapacityBottomSheet extends BasePreferenceBottomSheet {
 		});
 
 		chipsView.setItems(chips);
-		chipsView.setOnSelectChipListener(chip -> {
-			currentValue = (float) chip.tag;
-			etText.setText(formatInputValue(currentValue));
-			if (etText.hasFocus()) {
-				etText.setSelection(etText.getText().length());
-			}
-			return true;
-		});
-
 		ChipItem selected = chipsView.findChipByTag(currentValue);
 		chipsView.setSelected(selected);
 		return new BaseBottomSheetItem.Builder()
@@ -135,38 +75,31 @@ public class FuelTankCapacityBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 	}
 
-	private ViewTreeObserver.OnGlobalLayoutListener getOnGlobalLayoutListener() {
-		return () -> {
-			Rect visibleDisplayFrame = new Rect();
-			buttonsHeight = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
-			shadowHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_top_shadow_height);
-			scrollView = requireView().findViewById(R.id.scroll_view);
-			scrollView.getWindowVisibleDisplayFrame(visibleDisplayFrame);
-			int contentHeight = visibleDisplayFrame.bottom - visibleDisplayFrame.top - buttonsHeight;
-			if (contentHeightPrevious != contentHeight) {
-				boolean showTopShadow;
-				if (scrollView.getHeight() + shadowHeight > contentHeight) {
-					scrollView.getLayoutParams().height = contentHeight;
-					showTopShadow = false;
-				} else {
-					scrollView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-					showTopShadow = true;
-				}
-				scrollView.requestLayout();
-				scrollView.postDelayed(() -> scrollView.scrollTo(0, scrollView.getHeight()), 300);
-				contentHeightPrevious = contentHeight;
-				drawTopShadow(showTopShadow);
-			}
-		};
-	}
+	@NonNull
+	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app,
+	                                       @NonNull VolumeUnit volumeUnit) {
+		List<ChipItem> chips = new ArrayList<>();
+		String none = app.getString(R.string.shared_string_none);
+		ChipItem chip = new ChipItem(none);
+		chip.title = none;
+		chip.contentDescription = none;
+		chip.tag = 0.0f;
+		chips.add(chip);
 
-	private void updateChips() {
-		ChipItem selected = chipsView.findChipByTag(currentValue);
-		chipsView.setSelected(selected);
-		if (selected != null) {
-			chipsView.notifyDataSetChanged();
-			chipsView.smoothScrollTo(selected);
+		DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
+		for (int i = 1; i <= 11; i++) {
+			float value = 10 * i;
+			String pattern = app.getString(R.string.ltr_or_rtl_combine_via_space);
+			String valueStr = formatter.format(value);
+			String title = String.format(pattern, valueStr, volumeUnit.getUnitSymbol(app));
+			chip = new ChipItem(title);
+			chip.title = title;
+			chip.contentDescription = title;
+			chip.tag = value;
+			chips.add(chip);
 		}
+
+		return chips;
 	}
 
 	private void onCorrectInput() {
@@ -177,22 +110,18 @@ public class FuelTankCapacityBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	protected int getRightBottomButtonTextId() {
-		return R.string.shared_string_apply;
-	}
-
-	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment target = getTargetFragment();
 		if (target instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
-			Float value = FuelCapacityHelper.prepareValueToSave(volumeUnit, currentValue);
+			Float value = OsmAndFormatter.prepareFuelTankCapacityToSave(volumeUnit, currentValue);
 			callback.onConfirmPreferenceChange(preferenceId, value, ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
 	}
 
-	private String formatInputValue(float input) {
+	@Override
+	protected String formatInputValue(float input) {
 		if (input == 0.0f) {
 			return "";
 		}
