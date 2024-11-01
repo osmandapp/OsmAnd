@@ -770,7 +770,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature((data as Int).toFloat())
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data)
 
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
@@ -820,7 +820,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
-	private fun getConvertedTemperature(temperature: Float): Float {
+	private fun getConvertedTemperature(data: Any): Float {
+		var temperature = 0f
+		temperature = when (data) {
+			is Int -> data.toFloat()
+			is Double -> data.toFloat()
+			else -> data as Float
+		}
+
 		return if (getTemperatureUnit() == TemperatureUnit.CELSIUS) {
 			temperature
 		} else {
