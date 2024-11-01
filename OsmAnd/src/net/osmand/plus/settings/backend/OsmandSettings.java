@@ -1117,6 +1117,25 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
+	public final OsmandPreference<VolumeUnit> UNIT_OF_VOLUME = new EnumStringPreference<>(this,
+			"unit_of_volume", VolumeUnit.LITRES, VolumeUnit.values()) {
+
+		@Override
+		public VolumeUnit getDefaultValue() {
+			return DRIVING_REGION.get().volumeUnit;
+		}
+
+		@Override
+		public VolumeUnit getProfileDefaultValue(ApplicationMode mode) {
+			return DRIVING_REGION.getModeValue(mode).volumeUnit;
+		}
+
+	}.makeProfile();
+
+	// fuel tank capacity stored in litres
+	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
+			"fuel_tank_capacity", 0).makeProfile();
+
 
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumStringPreference<RelativeDirectionStyle>(this,

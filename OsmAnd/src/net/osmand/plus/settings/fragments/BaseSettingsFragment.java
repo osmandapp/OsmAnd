@@ -877,6 +877,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return listPreference;
 	}
 
+	public void createDividerPref() {
+		createDividerPref(getPreferenceScreen());
+	}
+
+	public void createDividerPref(PreferenceScreen screen) {
+		Preference preference = new Preference(requireContext());
+		preference.setLayoutResource(R.layout.simple_divider_item);
+
+		screen.addPreference(preference);
+	}
+
 	@NonNull
 	protected Preference requirePreference(@NonNull CharSequence key) {
 		Preference preference = findPreference(key);
