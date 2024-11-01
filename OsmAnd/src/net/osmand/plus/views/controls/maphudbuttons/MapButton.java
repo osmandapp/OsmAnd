@@ -156,7 +156,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 		MapButtonState buttonState = getButtonState();
 		if (buttonState != null) {
-			buttonState.activityUpdated(mapActivity);
+			buttonState.updatePositions(mapActivity);
 		}
 	}
 

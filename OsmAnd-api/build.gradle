@@ -38,7 +38,7 @@ android {
     }
 }
 
-version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "master-snapshot"
+version = System.getenv("OSMAND_BINARIES_IVY_REVISION") ?: "4.9"
 afterEvaluate {
     publishing {
         repositories {

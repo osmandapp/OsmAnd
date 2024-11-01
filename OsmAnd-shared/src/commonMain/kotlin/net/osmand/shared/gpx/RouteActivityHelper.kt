@@ -72,7 +72,7 @@ object RouteActivityHelper {
 	}
 
 	private fun saveRouteActivity(gpxFile: GpxFile, routeActivity: RouteActivity?, callback: OnCompleteCallback? = null) {
-		gpxFile.metadata.setRouteActivity(routeActivity, getActivities())
+		gpxFile.metadata.setRouteActivity(routeActivity)
 		val file = KFile(gpxFile.path)
 		CoroutineScope(Dispatchers.Main).launch {
 			withContext(Dispatchers.IO) {

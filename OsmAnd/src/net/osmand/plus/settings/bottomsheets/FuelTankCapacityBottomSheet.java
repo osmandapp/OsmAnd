@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -13,17 +12,16 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.vehiclesize.SizeData;
-import net.osmand.plus.settings.vehiclesize.SizeType;
-import net.osmand.plus.settings.vehiclesize.VehicleSizes;
+import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.preferences.SizePreference;
-import net.osmand.plus.settings.vehiclesize.containers.Metric;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -31,36 +29,27 @@ import org.apache.commons.logging.Log;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
+public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
-	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
+	public static final String TAG = FuelTankCapacityBottomSheet.class.getSimpleName();
 
-	private SizePreference sizePreference;
+	private VolumeUnit volumeUnit;
 
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
-		sizePreference = (SizePreference) getPreference();
-		VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-		Metric metric = sizePreference.getMetric();
-		SizeType sizeType = sizePreference.getSizeType();
-		SizeData data = vehicleSizes.getSizeData(sizeType);
-		List<ChipItem> chips = vehicleSizes.collectChipItems(app, sizeType, metric);
+		volumeUnit = app.getSettings().UNIT_OF_VOLUME.getModeValue(getAppMode());
+		List<ChipItem> chips = collectChipItems(app, volumeUnit);
 
-		title.setText(sizePreference.getTitle().toString());
+		title.setText(R.string.fuel_tank_capacity);
+		AndroidUiHelper.updateVisibility(ivImage, false);
+		tvDescription.setText(R.string.fuel_tank_capacity_description);
+		tvMetric.setText(volumeUnit.toHumanString(app));
 
-		Drawable icon = getIcon(data.getAssets().getIconId(nightMode));
-		ivImage.setImageDrawable(icon);
-
-		String description = getString(data.getAssets().getDescriptionId());
-		tvDescription.setText(description);
-
-		int metricStringId = vehicleSizes.getMetricStringId(sizeType, metric);
-		tvMetric.setText(metricStringId);
-
-		currentValue = vehicleSizes.readSavedValue(sizePreference);
+		currentValue = OsmAndFormatter.readSavedFuelTankCapacity(app.getSettings(), volumeUnit, getAppMode());
 		etText.setText(formatInputValue(currentValue));
 		etText.clearFocus();
 		etText.setOnTouchListener((v, event) -> {
@@ -73,13 +62,8 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			@Override
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
-				StringBuilder error = new StringBuilder();
-				if (currentValue == 0.0f || vehicleSizes.verifyValue(app, sizeType, metric, currentValue, error)) {
-					onCorrectInput();
-					updateChips();
-				} else {
-					onWrongInput(error.toString());
-				}
+				onCorrectInput();
+				updateChips();
 			}
 		});
 
@@ -91,20 +75,37 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 				.create();
 	}
 
+	@NonNull
+	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app,
+	                                       @NonNull VolumeUnit volumeUnit) {
+		List<ChipItem> chips = new ArrayList<>();
+		String none = app.getString(R.string.shared_string_none);
+		ChipItem chip = new ChipItem(none);
+		chip.title = none;
+		chip.contentDescription = none;
+		chip.tag = 0.0f;
+		chips.add(chip);
+
+		DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
+		for (int i = 1; i <= 11; i++) {
+			float value = 10 * i;
+			String pattern = app.getString(R.string.ltr_or_rtl_combine_via_space);
+			String valueStr = formatter.format(value);
+			String title = String.format(pattern, valueStr, volumeUnit.getUnitSymbol(app));
+			chip = new ChipItem(title);
+			chip.title = title;
+			chip.contentDescription = title;
+			chip.tag = value;
+			chips.add(chip);
+		}
+
+		return chips;
+	}
+
 	private void onCorrectInput() {
 		tilCaption.setErrorEnabled(false);
-		updateApplyButton(true);
-	}
-
-	private void onWrongInput(@NonNull String message) {
-		tilCaption.setErrorEnabled(true);
-		tilCaption.setError(message);
-		updateApplyButton(false);
-	}
-
-	private void updateApplyButton(boolean enable) {
-		rightButton.setEnabled(enable);
-		rightButton.setButtonType(enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED);
+		rightButton.setEnabled(true);
+		rightButton.setButtonType(DialogButtonType.PRIMARY);
 		rightButton.setTitleId(getRightBottomButtonTextId());
 	}
 
@@ -113,8 +114,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		Fragment target = getTargetFragment();
 		if (target instanceof OnConfirmPreferenceChange callback) {
 			String preferenceId = getPreference().getKey();
-			VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-			String value = String.valueOf(vehicleSizes.prepareValueToSave(sizePreference, currentValue));
+			Float value = OsmAndFormatter.prepareFuelTankCapacityToSave(volumeUnit, currentValue);
 			callback.onConfirmPreferenceChange(preferenceId, value, ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
@@ -125,7 +125,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		if (input == 0.0f) {
 			return "";
 		}
-		DecimalFormat formatter = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
 		return formatter.format(input);
 	}
 
@@ -135,7 +135,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 			if (!fm.isStateSaved()) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, key);
-				VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
+				FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
 				fragment.setArguments(args);
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setAppMode(appMode);

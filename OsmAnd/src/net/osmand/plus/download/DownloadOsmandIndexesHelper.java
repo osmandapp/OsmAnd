@@ -12,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 
+import com.google.gson.Gson;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.IndexConstants;
@@ -31,6 +33,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.text.ParseException;
@@ -182,33 +185,25 @@ public class DownloadOsmandIndexesHelper {
 		return items;
 	}
 
+	public static class AssetEntryList {
+		List<AssetEntry> assets = new ArrayList<>();
+	}
 	@NonNull
 	public static List<AssetEntry> getBundledAssets(@NonNull AssetManager assetManager) throws XmlPullParserException, IOException {
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser();
-		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
-		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
-		List<AssetEntry> assets = new ArrayList<>();
-		int next;
-		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
-			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
-				String source = xmlParser.getAttributeValue(null, "source");
-				String destination = xmlParser.getAttributeValue(null, "destination");
-				String combinedMode = xmlParser.getAttributeValue(null, "mode");
-				AssetEntry ae = new AssetEntry(source, destination, combinedMode);
-				String version = xmlParser.getAttributeValue(null, "version");
-				if (!Algorithms.isEmpty(version)) {
-					try {
-						ae.version = DATE_FORMAT.parse(version);
-					} catch (ParseException e) {
-						log.error(e.getMessage(), e);
-					}
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
+		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
+		for (AssetEntry ae : lst.assets) {
+			if (!Algorithms.isEmpty(ae.version)) {
+				try {
+					ae.dateVersion = DATE_FORMAT.parse(ae.version);
+				} catch (ParseException e) {
+					log.error(e.getMessage(), e);
 				}
-				assets.add(ae);
 			}
 		}
 		isBundledAssetsXml.close();
-		return assets;
+		return lst.assets;
 	}
 
 	@NonNull
@@ -408,13 +403,14 @@ public class DownloadOsmandIndexesHelper {
 	public static class AssetEntry {
 		public final String source;
 		public final String destination;
-		public final String combinedMode;
-		public Date version = null;
+		public final String mode;
+		public String version;
+		public Date dateVersion = null;
 
 		public AssetEntry(String source, String destination, String combinedMode) {
 			this.source = source;
 			this.destination = destination;
-			this.combinedMode = combinedMode;
+			this.mode = combinedMode;
 		}
 	}
 }

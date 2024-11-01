@@ -1,12 +1,6 @@
 package net.osmand.plus.plugins.osmedit;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
@@ -21,7 +15,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -29,8 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
-import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
@@ -43,7 +34,6 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.configmap.ConfigureMapMenu;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -72,10 +62,12 @@ import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.plugins.osmedit.quickactions.AddOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
+import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -87,6 +79,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -97,7 +90,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 
@@ -105,6 +97,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
+	public static final String OSMAND_TAG = "osmand";
 	public static final String OSM_MAPPER_PREFIX = "OSMMapper";
 	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
 
@@ -343,8 +336,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			} else {
 				amenity = ((TransportStop) selectedObj).getAmenity();
 			}
-			PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
+			if (!amenity.getType().isWiki()) {
+				if (settings.isInternetConnectionAvailable() && ObfConstants.isOsmUrlAvailable(amenity)) {
+					isEditable = true;
+				} else {
+					PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+					isEditable = poiType != null && !poiType.isNotEditableOsm();
+				}
+			}
 		} else if (selectedObj instanceof MapObject) {
 			isEditable = ObfConstants.isOsmUrlAvailable((MapObject) selectedObj);
 		}
@@ -547,37 +546,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				}
 				sendGPXFiles(activity, fragment, files.toArray(new File[0]));
 			});
-		}
-	}
-
-	public enum UploadVisibility {
-		PUBLIC(R.string.gpxup_public, R.string.gpx_upload_public_visibility_descr),
-		IDENTIFIABLE(R.string.gpxup_identifiable, R.string.gpx_upload_identifiable_visibility_descr),
-		TRACKABLE(R.string.gpxup_trackable, R.string.gpx_upload_trackable_visibility_descr),
-		PRIVATE(R.string.gpxup_private, R.string.gpx_upload_private_visibility_descr);
-
-		@StringRes
-		private final int titleId;
-		@StringRes
-		private final int descriptionId;
-
-		UploadVisibility(int titleId, int descriptionId) {
-			this.titleId = titleId;
-			this.descriptionId = descriptionId;
-		}
-
-		public String asUrlParam() {
-			return name().toLowerCase();
-		}
-
-		@StringRes
-		public int getTitleId() {
-			return titleId;
-		}
-
-		@StringRes
-		public int getDescriptionId() {
-			return descriptionId;
 		}
 	}
 

@@ -57,7 +57,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 	}
 
 	private void setupCustomWidgetsButton() {
-		List<QuickActionButtonState> buttons = mapButtonsHelper.getButtonsStates();
+		List<QuickActionButtonState> buttons = mapButtonsHelper.getQuickActionButtonsStates();
 		List<QuickActionButtonState> enabledButtons = mapButtonsHelper.getEnabledButtonsStates();
 
 		boolean enabled = !enabledButtons.isEmpty();

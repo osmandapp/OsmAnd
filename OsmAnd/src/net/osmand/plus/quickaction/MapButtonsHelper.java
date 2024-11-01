@@ -201,7 +201,7 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickActionButtonState> getButtonsStates() {
+	public List<QuickActionButtonState> getQuickActionButtonsStates() {
 		return quickActionStates;
 	}
 
@@ -211,6 +211,13 @@ public class MapButtonsHelper {
 				compassButtonState, drawerMenuButtonState, navigationMenuButtonState,
 				map3DButtonState, myLocationButtonState, zoomInButtonState, zoomOutButtonState
 		);
+	}
+
+	@NonNull
+	public List<MapButtonState> getAllButtonsStates() {
+		List<MapButtonState> list = new ArrayList<>(getQuickActionButtonsStates());
+		list.addAll(getDefaultButtonsStates());
+		return list;
 	}
 
 	@NonNull
@@ -433,15 +440,17 @@ public class MapButtonsHelper {
 		return list;
 	}
 
-	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
-			buttonState.resetForMode(appMode);
+	public void resetButtonStatesForMode(@NonNull ApplicationMode mode, @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
+			buttonState.resetToDefault(mode);
 		}
 		updateActionTypes();
 	}
 
-	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
+	public void copyButtonStatesFromMode(@NonNull ApplicationMode toAppMode,
+	                                     @NonNull ApplicationMode fromAppMode,
+	                                     @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
 			buttonState.copyForMode(fromAppMode, toAppMode);
 		}
 		updateActionTypes();

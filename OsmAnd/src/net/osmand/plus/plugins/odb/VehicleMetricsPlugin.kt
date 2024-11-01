@@ -67,7 +67,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	private var mapActivity: MapActivity? = null
 	private val handler = Handler(Looper.myLooper()!!)
 	private val RECONNECT_DELAY = 5000L
-	private val DEFAULT_FUEL_TANK_VOLUME = 52f
 	private var currentConnectingState = OBDConnectionState.DISCONNECTED
 
 	val USED_OBD_DEVICES = registerStringPreference(
@@ -507,7 +506,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		currentConnectingState = OBDConnectionState.CONNECTED
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
-			OBDDataComputer.fuelTank = DEFAULT_FUEL_TANK_VOLUME
+			OBDDataComputer.fuelTank = settings.FUEL_TANK_CAPACITY.get()
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
