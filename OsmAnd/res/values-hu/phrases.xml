@@ -4880,4 +4880,14 @@
     <string name="poi_payment_parco_no">Parcót nem fogad el</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">Parkstert nem fogad el</string>
+    <string name="poi_activities_kayak">Vízi sportok</string>
+    <string name="poi_activities_horse">Lovaglás</string>
+    <string name="poi_activities_skiing">Téli sportok</string>
+    <string name="poi_activities_snowmobile">Hójáró</string>
+    <string name="poi_activities_mountain_bike">Hegyi kerékpározás</string>
+    <string name="poi_route_track">Egyéb útvonalak</string>
+    <string name="poi_activities_bicycle">Kerékpározás</string>
+    <string name="poi_activities_running">Futás</string>
+    <string name="poi_activities_pedestrian">Gyaloglás</string>
+    <string name="poi_activities_trekking">Túrázás</string>
 </resources>
