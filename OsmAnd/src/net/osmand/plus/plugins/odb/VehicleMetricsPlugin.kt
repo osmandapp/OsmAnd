@@ -48,6 +48,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
@@ -59,6 +60,7 @@ import okio.Sink
 import okio.Source
 import okio.sink
 import okio.source
+import org.json.JSONObject
 import java.util.UUID
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
@@ -856,4 +858,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return app.weatherHelper.weatherSettings.weatherTempUnit.get()
 	}
 
+	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
+		super.attachAdditionalInfoToRecordedTrack(location, json)
+		val rawData = OBDDispatcher.getRawData()
+		for (command in rawData.keys) {
+			val dataField = rawData[command]
+			if (command.gpxTag != null) {
+				json.put(GpxUtilities.OSMAND_EXTENSIONS_PREFIX + command.gpxTag, dataField?.value)
+			}
+		}
+	}
 }
