@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
@@ -20,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
@@ -142,14 +139,6 @@ public class QuickActionButtonState extends MapButtonState {
 
 	public boolean isSingleAction() {
 		return quickActions.size() == 1;
-	}
-
-	public void resetForMode(@NonNull ApplicationMode appMode) {
-		visibilityPref.resetModeToDefault(appMode);
-	}
-
-	public void copyForMode(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode) {
-		visibilityPref.setModeValue(toAppMode, visibilityPref.getModeValue(fromAppMode));
 	}
 
 	public void saveActions(@NonNull Gson gson) {

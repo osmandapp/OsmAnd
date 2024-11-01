@@ -247,6 +247,8 @@ public abstract class MapButtonState {
 		sizePref.setModeValue(toMode, sizePref.getModeValue(fromMode));
 		opacityPref.setModeValue(toMode, opacityPref.getModeValue(fromMode));
 		cornerRadiusPref.setModeValue(toMode, cornerRadiusPref.getModeValue(fromMode));
+		portraitPositionPref.setModeValue(toMode, portraitPositionPref.getModeValue(fromMode));
+		landscapePositionPref.setModeValue(toMode, landscapePositionPref.getModeValue(fromMode));
 		getVisibilityPref().setModeValue(toMode, getVisibilityPref().getModeValue(fromMode));
 	}
 
