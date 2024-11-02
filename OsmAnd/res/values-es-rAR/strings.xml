@@ -5659,4 +5659,5 @@
     <string name="litres">Litros</string>
     <string name="fuel_tank_capacity_description">Ingresa la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
     <string name="unit_of_volume">Unidad de volúmen</string>
+    <string name="record_obd_data">Grabar estadísticas del vehículo</string>
 </resources>
