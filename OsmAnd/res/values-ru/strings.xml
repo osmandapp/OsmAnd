@@ -6045,4 +6045,15 @@
     <string name="obd_not_connected_to_device">Отключено от %s</string>
     <string name="obd_connecting_to_device">Подключение к %s</string>
     <string name="dynamic_icon_type_summary">Значок меняется в зависимости от состояния действия.</string>
+    <string name="record_obd_data">Запись показателей транспортного средства</string>
+    <string name="fuel_tank_capacity_description">Введите объём бака, чтобы точно отслеживать уровень и расход топлива</string>
+    <string name="shared_strings_dimensions">Размеры</string>
+    <string name="litres">Литры</string>
+    <string name="unit_of_volume_description">Выбранные единицы будут применены ко всем данным, связанным с объемом, в текущем профиле.</string>
+    <string name="unit_of_volume">Единица объема</string>
+    <string name="fuel_tank_capacity">Объём топливного бака</string>
+    <string name="imperial_gallons">Имперские галлоны</string>
+    <string name="us_gallons">Американские галлоны</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons_unit">us gal</string>
 </resources>
