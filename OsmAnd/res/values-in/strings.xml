@@ -6016,4 +6016,15 @@
     <string name="obd_calculated_engine_load">Muatan mesin terhitung</string>
     <string name="obd_engine_oil_temperature">Suhu minyak mesin</string>
     <string name="obd_engine_oil_temperature_desc">Menampilkan suhu minyak mesin kendaraan dari pemindai obd</string>
+    <string name="record_obd_data">Rekam metrik kendaraan</string>
+    <string name="fuel_tank_capacity_description">Masukkan kapasitas tangki Anda untuk melacak tingkat dan konsumsi bahan bakar secara akurat</string>
+    <string name="fuel_tank_capacity">Kapasitas tangki bahan bakar</string>
+    <string name="shared_strings_dimensions">Dimensi</string>
+    <string name="litres">Liter</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galon imperial</string>
+    <string name="us_gallons">Galon AS</string>
+    <string name="unit_of_volume_description">Satuan yang dipilih akan diterapkan ke semua data berkaitan dengan volume dalam profil saat ini.</string>
+    <string name="unit_of_volume">Satuan volume</string>
 </resources>
