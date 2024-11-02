@@ -15,11 +15,12 @@ object OBDDataComputer {
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
+	private const val DEFAULT_FUEL_TANK_CAPACITY = 52f
 	var locations = listOf<OBDLocation>()
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
-	var fuelTank = 52f
+	var fuelTank = DEFAULT_FUEL_TANK_CAPACITY
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 

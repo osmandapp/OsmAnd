@@ -1134,7 +1134,7 @@ public class OsmandSettings {
 
 	// fuel tank capacity stored in litres
 	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
-			"fuel_tank_capacity", 0).makeProfile();
+			"fuel_tank_capacity", 52f).makeProfile();
 
 
 	// cache of metrics constants as they are used very often
