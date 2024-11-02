@@ -5617,4 +5617,5 @@
     <string name="fuel_tank_capacity_description">Adja meg az üzemanyagtartály kapacitását az üzemanyagszint és a fogyasztás pontos nyomon követése érdekében</string>
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gallon</string>
+    <string name="record_obd_data">A jármű mérési adatainak rögzítése</string>
 </resources>
