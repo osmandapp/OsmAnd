@@ -5645,4 +5645,15 @@
     <string name="obd_not_connected_to_device">Déconnecté de %s</string>
     <string name="obd_connecting_to_device">Connexion en cours à %s</string>
     <string name="dynamic_icon_type_summary">L’icône change en fonction de l\'état de l\'action.</string>
+    <string name="record_obd_data">Enregistrer les données du véhicule</string>
+    <string name="fuel_tank_capacity_description">Saisissez la capacité du réservoir pour suivre avec précision le niveau de carburant et la consommation</string>
+    <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
+    <string name="shared_strings_dimensions">Dimensions</string>
+    <string name="litres">Litres</string>
+    <string name="imperial_gallons_unit">galon impérial</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galons impériaux</string>
+    <string name="us_gallons">Gallons américains</string>
+    <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
+    <string name="unit_of_volume">Unité de volume</string>
 </resources>
