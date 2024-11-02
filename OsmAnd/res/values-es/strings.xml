@@ -6050,4 +6050,5 @@
     <string name="unit_of_volume_description">Las unidades seleccionadas se aplicarán a todos los datos relacionados con el volumen en el perfil actual.</string>
     <string name="fuel_tank_capacity_description">Introduce la capacidad de tu depósito para controlar con precisión los niveles de combustible y el consumo</string>
     <string name="imperial_gallons_unit">gal imp</string>
+    <string name="record_obd_data">Registro de métricas del vehículo</string>
 </resources>
