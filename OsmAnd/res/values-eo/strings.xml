@@ -5970,4 +5970,15 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="lock_screen_description">Aktivigi aŭ malaktivigi tuŝekranon por evitigi senintencajn frapetojn</string>
     <string name="lock_screen">Ŝlosi ekranon</string>
+    <string name="record_obd_data">Registri statistikojn pri veturilo</string>
+    <string name="fuel_tank_capacity_description">Enigu enhavecon de via brulaĵujo por precize spuri nivelon kaj konsumon de brulaĵo</string>
+    <string name="fuel_tank_capacity">Enhaveco de brulaĵujo</string>
+    <string name="shared_strings_dimensions">Dimensioj</string>
+    <string name="litres">Litroj</string>
+    <string name="imperial_gallons_unit">gal</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Britaj galjonoj</string>
+    <string name="us_gallons">Usonaj galjonoj</string>
+    <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la elektita profilo.</string>
+    <string name="unit_of_volume">Mezurunuo de volumeno</string>
 </resources>
