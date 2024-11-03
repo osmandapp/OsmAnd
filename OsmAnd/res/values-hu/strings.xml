@@ -5578,10 +5578,10 @@
     <string name="obd_fuel_left_percent">Maradék üzemanyag (%)</string>
     <string name="obd_fuel_left_liter">Maradék üzemanyag (l)</string>
     <string name="obd_fuel_left_km">Megtehető táv (km)</string>
-    <string name="obd_fuel_consumption_rate_percent_hour">Fogyasztás %/óra</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Fogyasztás (%/óra)</string>
     <string name="obd_fuel_consumption_rate_l_h">Fogyasztás (l/óra)</string>
     <string name="obd_fuel_consumption_rate_scanner">Fogyasztás (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Fogyasztás l/óra</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fogyasztás (l/óra)</string>
     <string name="percent_hour">%/óra</string>
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maximum</string>
