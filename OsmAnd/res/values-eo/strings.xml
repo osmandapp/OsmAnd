@@ -1202,7 +1202,7 @@
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
-    <string name="gpx_visibility_txt">Videblo</string>
+    <string name="gpx_visibility_txt">Videbla</string>
     <string name="shared_string_description">Priskribo</string>
     <string name="validate_gpx_upload_name_pwd">Bonvolu enmeti vian uzantnomon kaj pasvorton al OSM por alŝuti GPX-dosierojn.</string>
     <string name="default_buttons_support">Subteni</string>
@@ -5981,4 +5981,6 @@
     <string name="us_gallons">Usonaj galjonoj</string>
     <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la elektita profilo.</string>
     <string name="unit_of_volume">Mezurunuo de volumeno</string>
+    <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
+    <string name="shared_string_dynamic">Dinamika</string>
 </resources>
