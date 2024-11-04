@@ -7,7 +7,6 @@ import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.data.LatLon;
-import net.osmand.shared.util.OsmAndFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
