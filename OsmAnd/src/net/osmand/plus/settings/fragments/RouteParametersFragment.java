@@ -244,6 +244,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
+		// FK-FIXME: If the following condition is false, then disable PreferenceSearch for all development preferences.
 		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 			setupDevelopmentCategoryPreferences(screen, am);
 		}
