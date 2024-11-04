@@ -96,8 +96,8 @@ public class LocationParser {
 
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
-		locPhrase = locPhrase.replace(LTR_MARK, "");
-		locPhrase = locPhrase.replace(RTL_MARK, "");
+		locPhrase = locPhrase.replaceAll(LTR_MARK, "");
+		locPhrase = locPhrase.replaceAll(RTL_MARK, "");
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");
