@@ -53,6 +53,7 @@ public class SettingsSearchButtonHelper {
 				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
+				.withIsPreferenceSearchable(new IsPreferenceSearchable())
 				.build();
 	}
 
