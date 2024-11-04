@@ -260,7 +260,9 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
-		muteAndRemoveTurns(result);
+		if (!ctx.config.showMinorTurns) {
+			muteAndRemoveTurns(result);
+		}
 		addTurnInfoDescriptions(result);
 	}
 
