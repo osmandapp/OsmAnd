@@ -198,6 +198,21 @@ public class BinaryMapRouteReaderAdapter {
 			return 0;
 		}
 
+		public int getConditionalRuleIdByMaxValue() {
+			if (conditional()) {
+				int ruleId = 0;
+				float maxValue = 0;
+				for (RouteTypeCondition c : conditions) {
+					if (Float.parseFloat(c.value) > maxValue) {
+						maxValue = Float.parseFloat(c.value);
+						ruleId = c.ruleid;
+					}
+				}
+				return ruleId;
+			}
+			return 0;
+		}
+
 		public float maxSpeed(int profile) {
 			if (type == (MAXSPEED + profile)) {
 				return floatValue;

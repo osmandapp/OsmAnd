@@ -28,7 +28,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -300,8 +299,10 @@ public class RoutingContext {
 				} else {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
-							if (config.routeCalculationTime != 0) {
+							if (config.routeCalculationTime > 0) {
 								ro.processConditionalTags(config.routeCalculationTime);
+							} else if (config.routeCalculationTime == -1) {
+								ro.boostMaxspeedByMaxConditional(); // used by HHRoutingShortcutCreator
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {

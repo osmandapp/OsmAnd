@@ -531,6 +531,43 @@ public class RouteDataObject {
 		return types;
 	}
 
+	public void boostMaxspeedByMaxConditional() {
+		float definedMaxSpeed = 0;
+		for (int i = 0; i < types.length ; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r != null && "maxspeed".equalsIgnoreCase(r.getTag())) {
+				definedMaxSpeed = r.maxSpeed(RouteTypeRule.PROFILE_NONE);
+				break;
+			}
+		}
+		for (int i = 0; i < types.length ; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r != null && "maxspeed:conditional".equalsIgnoreCase(r.getTag()) && r.conditional()) {
+				int vl = r.getConditionalRuleIdByMaxValue();
+				if (vl != 0) {
+					RouteTypeRule rtr = region.quickGetEncodingRule(vl);
+					if (rtr.maxSpeed(RouteTypeRule.PROFILE_NONE) > definedMaxSpeed) {
+						String nonCondTag = rtr.getTag();
+						int ks;
+						for (ks = 0; ks < types.length; ks++) {
+							RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
+							if (toReplace != null && toReplace.getTag().equals(nonCondTag)) {
+								break;
+							}
+						}
+						if (ks == types.length) {
+							int[] ntypes = new int[types.length + 1];
+							System.arraycopy(types, 0, ntypes, 0, types.length);
+							types = ntypes;
+						}
+						types[ks] = vl;
+					}
+				}
+				break;
+			}
+		}
+	}
+
 	public void processConditionalTags(long conditionalTime) {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
