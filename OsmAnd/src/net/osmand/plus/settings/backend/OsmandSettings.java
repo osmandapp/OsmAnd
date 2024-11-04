@@ -315,9 +315,9 @@ public class OsmandSettings {
 				}
 				return false;
 			}
-		} else if (preference instanceof StringPreference) {
-			if (value instanceof String) {
-				return ((StringPreference) preference).setModeValue(mode, (String) value);
+		} else if (preference instanceof StringPreference stringPref) {
+			if (value instanceof String || (value == null && stringPref.isNullSupported(mode))) {
+				return stringPref.setModeValue(mode, (String) value);
 			}
 		} else {
 			if (value instanceof String) {

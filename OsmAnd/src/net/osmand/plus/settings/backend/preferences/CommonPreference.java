@@ -182,7 +182,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	public T getDefaultValue() {
-		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		return getProfileDefaultValue(getCurrentProfile());
 	}
 
 	@Override
@@ -221,7 +221,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public final void resetToDefault() {
-		T o = getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		T o = getProfileDefaultValue(getCurrentProfile());
 		set(o);
 	}
 
@@ -291,6 +291,18 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	public OsmandPlugin getRelatedPlugin() {
 		return pluginId != null ? PluginsHelper.getPlugin(pluginId) : null;
+	}
+
+	public boolean isNullSupported() {
+		return isNullSupported(getCurrentProfile());
+	}
+
+	public boolean isNullSupported(ApplicationMode mode) {
+		return getProfileDefaultValue(mode) == null;
+	}
+
+	protected ApplicationMode getCurrentProfile() {
+		return settings.APPLICATION_MODE.get();
 	}
 
 	protected String getLastModifiedTimeId() {
