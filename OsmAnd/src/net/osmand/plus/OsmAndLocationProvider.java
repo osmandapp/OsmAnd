@@ -104,6 +104,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private long timeToNotUseOtherGPS;
 	private net.osmand.Location cachedLocation;
 	private net.osmand.Location customLocation;
+	private net.osmand.Location prevLocation;
 
 	private boolean sensorRegistered;
 	private final float[] mGravs = new float[3];
@@ -616,7 +617,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (customLocation != null && timeToNotUseOtherGPS >= System.currentTimeMillis()) {
 			return location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
 		}
-		return false;
+		return prevLocation != null && location != null && prevLocation.getTime() == location.getTime();
 	}
 
 	public void setLocationFromService(net.osmand.Location location) {
@@ -661,6 +662,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (shouldIgnoreLocation(location)) {
 			return;
 		}
+		prevLocation = location;
 		if (location == null) {
 			gpsInfo.reset();
 		}
