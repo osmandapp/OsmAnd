@@ -992,6 +992,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	// Duplicate methods to OsmAndApplication
+	@Nullable
 	public TargetPoint getPointToNavigate() {
 		return app.getTargetPointsHelper().getPointToNavigate();
 	}

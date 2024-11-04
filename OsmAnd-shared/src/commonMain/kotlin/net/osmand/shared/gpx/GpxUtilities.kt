@@ -735,12 +735,12 @@ object GpxUtilities {
 				extensions.remove(BACKGROUND_TYPE_EXTENSION)
 			}
 		}
-		assignExtensionWriter(p, extensions)
+		assignExtensionWriter(p, extensions, "extensions")
 		writeExtensions(serializer, null, p, null)
 		progress?.progress(1)
 	}
 
-	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>) {
+	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>, regularExtensionsKey: String) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
 		for ((key, value) in extensions) {
@@ -752,7 +752,7 @@ object GpxUtilities {
 			wptPt.getDeferredExtensionsToWrite()[key] = value
 		}
 		if (regularExtensions.isNotEmpty()) {
-			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
+			wptPt.setExtensionsWriter(regularExtensionsKey, createExtensionsWriter(regularExtensions, true))
 		}
 		if (gpxtpxExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false))

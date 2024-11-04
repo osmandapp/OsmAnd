@@ -44,9 +44,8 @@ public class ColorsMigrationAlgorithmV2 {
 
 	private final OsmandApplication app;
 
-	public static void doMigration(@NonNull OsmandApplication app) {
-		ColorsMigrationAlgorithmV2 migrationAlgorithm = new ColorsMigrationAlgorithmV2(app);
-		migrationAlgorithm.execute();
+	public static void execute(@NonNull OsmandApplication app) {
+		new ColorsMigrationAlgorithmV2(app).executeImpl();
 	}
 
 	public ColorsMigrationAlgorithmV2(@NonNull OsmandApplication app) {
@@ -69,7 +68,7 @@ public class ColorsMigrationAlgorithmV2 {
 				settings, "route_line_colors_palette", null).makeGlobal();
 	}
 
-	private void execute() {
+	private void executeImpl() {
 		// Collect available colors from the user palette file
 		ColorsCollection newCollection = new FileColorsCollection(app);
 		newCollection.addAllUniqueColors(DefaultPaletteColors.valuesList());

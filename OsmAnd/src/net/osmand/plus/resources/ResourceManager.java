@@ -17,6 +17,8 @@ import android.util.DisplayMetrics;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -43,7 +45,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -72,9 +73,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -116,6 +119,7 @@ public class ResourceManager {
 	private final BitmapTilesCache bitmapTilesCache;
 	private final GeometryTilesCache mapillaryVectorTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
+	private AssetsCollection assetsCollection;
 
 	private final OsmandApplication context;
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
@@ -638,10 +642,10 @@ public class ResourceManager {
 
 	public void copyMissingJSAssets() {
 		try {
-			List<AssetEntry> assets = DownloadOsmandIndexesHelper.getBundledAssets(context.getAssets());
+			AssetsCollection assetsCollection = getAssets();
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (AssetEntry asset : assets) {
+				for (AssetEntry asset : assetsCollection.getEntries()) {
 					File jsFile = new File(appPath, asset.destination);
 					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX) && asset.destination
 							.endsWith(TTSVOICE_INDEX_EXT_JS)) {
@@ -658,7 +662,7 @@ public class ResourceManager {
 					}
 				}
 			}
-		} catch (XmlPullParserException | IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
@@ -798,8 +802,8 @@ public class ResourceManager {
 	                                 boolean firstInstall,
 	                                 boolean overwrite,
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
-		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
-		for (AssetEntry asset : assetEntries) {
+		AssetsCollection assetsCollection = getAssets();
+		for (AssetEntry asset : assetsCollection.getEntries()) {
 			String[] modes = asset.mode.split("\\|");
 			if (modes.length == 0) {
 				log.error("Mode '" + asset.mode + "' is not valid");
@@ -845,15 +849,20 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.dateVersion != null &&
-						destinationFile.lastModified() < asset.dateVersion.getTime()) {
+				} else if (asset.dateVersion != null && destinationFile.lastModified() < asset.dateVersion.getTime()) {
 					shouldCopy = true;
 				}
 			}
 			if (shouldCopy) {
-				copyAssets(assetManager, asset.source, destinationFile);
+				copyAssets(assetManager, asset.source, destinationFile, asset.getVersionTime());
 			}
 		}
+	}
+
+	public static boolean copyAssets(AssetManager assetManager, String assetName,
+	                                 File file, Long lastModifiedTime) throws IOException {
+		copyAssets(assetManager, assetName, file);
+		return lastModifiedTime != null && file.setLastModified(lastModifiedTime);
 	}
 
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
@@ -1592,5 +1601,33 @@ public class ResourceManager {
 
 	public IncrementalChangesManager getChangesManager() {
 		return changesManager;
+	}
+
+	@NonNull
+	public AssetsCollection getAssets() throws IOException {
+		return assetsCollection == null ? assetsCollection = readBundledAssets() : assetsCollection;
+	}
+
+	private static class AssetEntryList {
+		List<AssetEntry> assets = new ArrayList<>();
+	}
+
+	@NonNull
+	private AssetsCollection readBundledAssets() throws IOException {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+		AssetManager assetManager = context.getAssets();
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
+		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
+		for (AssetEntry ae : lst.assets) {
+			if (!Algorithms.isEmpty(ae.version)) {
+				try {
+					ae.dateVersion = DATE_FORMAT.parse(ae.version);
+				} catch (ParseException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+		isBundledAssetsXml.close();
+		return new AssetsCollection(context, lst.assets);
 	}
 }
