@@ -7,11 +7,15 @@ import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.data.LatLon;
+import net.osmand.shared.util.OsmAndFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationParser {
+
+	public static final String LTR_MARK = "\u200e";
+	public static final String RTL_MARK = "\u200f";
 
 	public static class ParsedOpenLocationCode {
 		private final String text;
@@ -93,6 +97,8 @@ public class LocationParser {
 
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
+		locPhrase = locPhrase.replace(LTR_MARK, "");
+		locPhrase = locPhrase.replace(RTL_MARK, "");
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");
