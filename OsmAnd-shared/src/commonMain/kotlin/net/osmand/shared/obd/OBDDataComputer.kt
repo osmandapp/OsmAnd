@@ -15,7 +15,7 @@ object OBDDataComputer {
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
-	private const val DEFAULT_FUEL_TANK_CAPACITY = 52f
+	const val DEFAULT_FUEL_TANK_CAPACITY = 52f
 	var locations = listOf<OBDLocation>()
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
@@ -431,4 +431,5 @@ object OBDDataComputer {
 			}
 		}
 	}
+
 }
