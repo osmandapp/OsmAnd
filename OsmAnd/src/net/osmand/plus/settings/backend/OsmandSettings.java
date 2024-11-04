@@ -96,6 +96,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
@@ -1134,7 +1135,7 @@ public class OsmandSettings {
 
 	// fuel tank capacity stored in litres
 	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
-			"fuel_tank_capacity", 0).makeProfile();
+			"fuel_tank_capacity", OBDDataComputer.DEFAULT_FUEL_TANK_CAPACITY).makeProfile();
 
 
 	// cache of metrics constants as they are used very often
