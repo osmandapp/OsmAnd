@@ -660,6 +660,11 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			float distanceFromTurn = getDistance();
 			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
 				RouteSegmentResult s1 = list.get(n);
+				TurnType t = s1.getTurnType();
+				if (t != null) {
+					// avoid retrieve destination over other turns
+					break;
+				}
 				String s1DnRef = s1.getObject().getDestinationRef(lang,	transliterate, isForwardDirection());
 				boolean dnRefIsEqual = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
 				boolean isMotorwayLink = "motorway_link".equals(s1.getObject().getHighway());
