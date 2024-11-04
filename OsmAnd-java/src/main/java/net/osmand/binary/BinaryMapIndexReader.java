@@ -987,13 +987,7 @@ public class BinaryMapIndexReader {
 					}
 
 					for (MapTree tree : index.trees) {
-						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
-							continue;
-						}
-						codedIS.seek(tree.filePointer);
-						long oldLimit = codedIS.pushLimitLong((long) tree.length);
-						searchMapTreeBounds(tree, index, req, foundSubtrees);
-						codedIS.popLimit(oldLimit);
+						searchMapTreeBoundsCache(tree, index, req, foundSubtrees);
 					}
 
 					Collections.sort(foundSubtrees, new Comparator<MapTree>() {
@@ -1098,11 +1092,32 @@ public class BinaryMapIndexReader {
 		}
 
 	}
+	
+	
+	protected void searchMapTreeBoundsCache(MapTree current, MapTree parent,
+			SearchRequest<BinaryMapDataObject> req, List<MapTree> foundSubtrees) throws IOException {
+		if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
+			return;
+		}
+		if (current.children != null) {
+			for (MapTree ch : current.children) {
+				searchMapTreeBoundsCache(ch, current, req, foundSubtrees);
+			}
+		} else {
+			codedIS.seek(current.filePointer);
+			long oldLimit = codedIS.pushLimitLong((long) current.length);
+			searchMapTreeBounds(current, parent, req, foundSubtrees);
+			codedIS.popLimit(oldLimit);
+		}
+	}
 
 	protected void searchMapTreeBounds(MapTree current, MapTree parent,
 			SearchRequest<BinaryMapDataObject> req, List<MapTree> foundSubtrees) throws IOException {
 		int init = 0;
 		req.numberOfReadSubtrees++;
+		if (current.depth < 7) {
+			current.children = new ArrayList<>();
+		}
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -1152,16 +1167,21 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBox.BOXES_FIELD_NUMBER :
 				// left, ... already initialized
+				
 				MapTree child = new MapTree();
 				child.length = readInt();
+				child.depth = current.depth + 1;
 				child.filePointer = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) child.length);
-				if(current.ocean != null ){
+				if (current.ocean != null) {
 					child.ocean = current.ocean;
 				}
 				searchMapTreeBounds(child, current, req, foundSubtrees);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(child.filePointer + child.length);
+				if(current.children != null) {
+					current.children.add(child);
+				}
 				break;
 			default:
 				skipUnknownField(t);
@@ -2232,12 +2252,15 @@ public class BinaryMapIndexReader {
 
 		long mapDataBlock = 0;
 		Boolean ocean = null;
+		int depth;
 
 		int left = 0;
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
-
+		List<MapTree> children = null;
+		
+		
 		public int getLeft() {
 			return left;
 		}
