@@ -531,40 +531,64 @@ public class RouteDataObject {
 		return types;
 	}
 
-	public void boostMaxspeedByMaxConditional() {
-		float definedMaxSpeed = 0;
-		for (int i = 0; i < types.length ; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r != null && "maxspeed".equalsIgnoreCase(r.getTag())) {
-				definedMaxSpeed = r.maxSpeed(RouteTypeRule.PROFILE_NONE);
-				break;
-			}
-		}
-		for (int i = 0; i < types.length ; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r != null && "maxspeed:conditional".equalsIgnoreCase(r.getTag()) && r.conditional()) {
-				int vl = r.getConditionalRuleIdByMaxValue();
-				if (vl != 0) {
-					RouteTypeRule rtr = region.quickGetEncodingRule(vl);
-					if (rtr.maxSpeed(RouteTypeRule.PROFILE_NONE) > definedMaxSpeed) {
-						String nonCondTag = rtr.getTag();
-						int ks;
-						for (ks = 0; ks < types.length; ks++) {
-							RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
-							if (toReplace != null && toReplace.getTag().equals(nonCondTag)) {
-								break;
-							}
+	public static final String RULE_INT_MAX = "RULE_INT_MAX";
+
+	public void applyBoostedConditionalTags(Map<String, String> boostConditionalTags) {
+		Map<String, Integer> intValues = new HashMap<>();
+		for (int type : types) {
+			RouteTypeRule r = region.quickGetEncodingRule(type);
+			if (r != null) {
+				String key = r.getTag();
+				String rule = boostConditionalTags.get(key);
+				if (rule != null && RULE_INT_MAX.equals(rule)) {
+					try {
+						Integer newValue = Integer.parseInt(r.getValue());
+						Integer oldValue = intValues.get(key);
+						if (oldValue == null || newValue > oldValue) {
+							intValues.put(key, newValue);
 						}
-						if (ks == types.length) {
-							int[] ntypes = new int[types.length + 1];
-							System.arraycopy(types, 0, ntypes, 0, types.length);
-							types = ntypes;
-						}
-						types[ks] = vl;
+					} catch (NumberFormatException e) {
+						continue;
 					}
 				}
-				break;
 			}
+		}
+		for (int type : types) {
+			RouteTypeRule r = region.quickGetEncodingRule(type);
+			if (r != null && r.conditional()) {
+				String key = r.getNonConditionalTag();
+				String rule = boostConditionalTags.get(key);
+				if (rule != null && RULE_INT_MAX.equals(rule)) {
+					Integer existingValue = intValues.get(key);
+					Integer newValue = r.getMaxIntegerConditionalValue();
+					if (newValue != null && (existingValue == null || newValue > existingValue)) {
+						updateTypesByTagValue(key, newValue.toString());
+					}
+				} else if (rule != null) {
+					updateTypesByTagValue(key, rule);
+				}
+			}
+		}
+	}
+
+	private void updateTypesByTagValue(String tag, String value) {
+		int ruleId = region.searchRouteEncodingRule(tag, value);
+		if (ruleId != -1) {
+			int ks;
+			for (ks = 0; ks < types.length; ks++) {
+				RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
+				if (toReplace != null && toReplace.getTag().equals(tag)) {
+					break;
+				}
+			}
+			if (ks == types.length) {
+				int[] ntypes = new int[types.length + 1];
+				System.arraycopy(types, 0, ntypes, 0, types.length);
+				types = ntypes;
+			}
+			types[ks] = ruleId;
+		} else {
+			System.err.printf("updateTypesByTagValue(%s,%s): searchRouteEncodingRule failed\n", tag, value);
 		}
 	}
 

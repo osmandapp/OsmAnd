@@ -299,10 +299,11 @@ public class RoutingContext {
 				} else {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
-							if (config.routeCalculationTime > 0) {
+							if (config.routeCalculationTime != 0) {
 								ro.processConditionalTags(config.routeCalculationTime);
-							} else if (config.routeCalculationTime == -1) {
-								ro.boostMaxspeedByMaxConditional(); // used by HHRoutingShortcutCreator
+							}
+							if (config.boostConditionalTags != null) {
+								ro.applyBoostedConditionalTags(config.boostConditionalTags);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
