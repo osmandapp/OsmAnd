@@ -163,7 +163,6 @@ public class SpeedometerWidget {
 
 		LinearLayout.LayoutParams speedLimitLayoutParams = (LinearLayout.LayoutParams) speedLimitContainer.getLayoutParams();
 		LinearLayout.LayoutParams speedometerLayoutParams = (LinearLayout.LayoutParams) speedometerContainer.getLayoutParams();
-		LinearLayout.LayoutParams speedLimitDescriptionParams = (LinearLayout.LayoutParams) speedLimitDescription.getLayoutParams();
 		if (isUsaOrCanadaRegion()) {
 			speedLimitValueParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
 		} else{
@@ -182,7 +181,6 @@ public class SpeedometerWidget {
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_M);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_M);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
-				speedLimitDescriptionParams.setMargins(0, dpToPx(13), 0, 0);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
 			case LARGE:
@@ -196,7 +194,6 @@ public class SpeedometerWidget {
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_L);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_L);
-				speedLimitDescriptionParams.setMargins(0, dpToPx(16), 0, 0);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
 			case SMALL:
@@ -210,7 +207,6 @@ public class SpeedometerWidget {
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_S);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_S);
-				speedLimitDescriptionParams.setMargins(0, dpToPx(8), 0, 0);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, isCanadaRegion() ? SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S : SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
 		}
