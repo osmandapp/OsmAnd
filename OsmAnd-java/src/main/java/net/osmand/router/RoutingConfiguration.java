@@ -85,6 +85,9 @@ public class RoutingConfiguration {
 	// Parameter to smoother the track itself (could be 0 if it's not recorded track)
 	public float smoothenPointsNoRoute = 5;
 
+	public boolean showMinorTurns = false;
+
+
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
 	}

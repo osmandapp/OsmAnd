@@ -315,9 +315,9 @@ public class OsmandSettings {
 				}
 				return false;
 			}
-		} else if (preference instanceof StringPreference) {
-			if (value instanceof String) {
-				return ((StringPreference) preference).setModeValue(mode, (String) value);
+		} else if (preference instanceof StringPreference stringPref) {
+			if (value instanceof String || (value == null && stringPref.isNullSupported(mode))) {
+				return stringPref.setModeValue(mode, (String) value);
 			}
 		} else {
 			if (value instanceof String) {
@@ -1530,6 +1530,8 @@ public class OsmandSettings {
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
+
+	public final CommonPreference<Boolean> SHOW_MINOR_TURNS = new BooleanPreference(this, "show_minor_turns", true).makeProfile();
 
 	public boolean simulateNavigation;
 	public boolean simulateNavigationStartedFromAdb;
