@@ -5984,4 +5984,20 @@
     <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
     <string name="shared_string_dynamic">Dinamika</string>
     <string name="obd_connected_to_device">Konektita kun %s</string>
+    <string name="obd_not_connected_to_device">Malkonektita de %s</string>
+    <string name="obd_connecting_to_device">Konektata kun %s</string>
+    <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/km)</string>
+    <string name="simulate_obd">Simuli ODB-datumojn</string>
+    <string name="obd_engine_runtime">Labortempo de motoro</string>
+    <string name="obd_engine_runtime_desc">Montras labortempon de motoro raportatan de OBD-sentilo</string>
+    <string name="obd_fuel_pressure">Premo de brulaĵo</string>
+    <string name="obd_fuel_pressure_desc">Montras premon de brulaĵo raportatan de OBD-sentilo</string>
+    <string name="obd_calculated_engine_load">Kalkulita ŝarĝo de motoro</string>
+    <string name="speedometer_maximum">Maksimumo</string>
+    <string name="obd_throttle_position">Pozicio de brulaĵ-valvo</string>
+    <string name="kpa_unit">kPa</string>
 </resources>
