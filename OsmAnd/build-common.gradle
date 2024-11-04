@@ -375,9 +375,9 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.4.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.3.0'
-	implementation 'com.github.KnollFrank:SettingsSearch:3b06794ab3'
+	implementation 'com.github.KnollFrank:SettingsSearch:face5d6a35'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
-	implementation 'com.google.guava:guava:33.2.0-android'
+	implementation 'com.google.guava:guava:33.3.1-android'
 
 	//implementation "androidx.tracing:tracing:1.1.0"
 	//debugImplementation 'androidx.test:monitor:1.6.1'

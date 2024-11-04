@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SearchablePreferenceScreenGraphProviderWrapper.wrapSearchablePreferenceScreenGraphProvider;
-
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,19 +12,18 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataInput;
+import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataMode;
 
 public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
-	private final GraphDAOMode graphDAOMode;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
-									  final @IdRes int fragmentContainerViewId,
-									  final GraphDAOMode graphDAOMode) {
+									  final @IdRes int fragmentContainerViewId) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
-		this.graphDAOMode = graphDAOMode;
 	}
 
 	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
@@ -44,18 +41,18 @@ public class SettingsSearchButtonHelper {
 		return SearchPreferenceFragments
 				.builder(
 						createSearchConfiguration(),
-						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager())
+						rootSearchPreferenceFragment.requireActivity().getSupportFragmentManager(),
+						rootSearchPreferenceFragment.getResources(),
+						new MergedPreferenceScreenDataInput(
+								R.raw.preferences,
+								R.raw.preference_path_by_preference,
+								R.raw.host_by_preference),
+						MergedPreferenceScreenDataMode.PERSIST)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
-				.withWrapSearchablePreferenceScreenGraphProvider(
-						(searchablePreferenceScreenGraphProvider, preferenceManager) ->
-								wrapSearchablePreferenceScreenGraphProvider(
-										searchablePreferenceScreenGraphProvider,
-										preferenceManager,
-										graphDAOMode))
 				.build();
 	}
 
