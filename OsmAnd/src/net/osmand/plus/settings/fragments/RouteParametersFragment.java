@@ -429,6 +429,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
+		developmentCategory.setKey("development");
 		screen.addPreference(developmentCategory);
 	}
 
