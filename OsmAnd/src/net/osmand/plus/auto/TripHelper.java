@@ -154,7 +154,7 @@ public class TripHelper {
 		stepBuilder.setManeuver(maneuver);
 		stepBuilder.setCue(getNextCue(nextDirInfo, turnType, nextTurnType));
 
-		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
+		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 		if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
 			int[] lanes = nextDirInfo.directionInfo.getTurnType().getLanes();
 			int locimminent = nextDirInfo.imminent;
