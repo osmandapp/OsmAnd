@@ -47,7 +47,7 @@ public class SettingsSearchButtonHelper {
 								R.raw.preferences,
 								R.raw.preference_path_by_preference,
 								R.raw.host_by_preference),
-						MergedPreferenceScreenDataMode.LOAD)
+						MergedPreferenceScreenDataMode.PERSIST)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
