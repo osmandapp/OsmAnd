@@ -5278,7 +5278,7 @@
     <string name="round_up">Заокружено</string>
     <string name="upload_local_versions">Отпреми местна издања</string>
     <string name="download_cloud_versions">Преузми издања из облака</string>
-    <string name="map_widget_map_scale">Размера карте</string>
+    <string name="map_widget_map_scale">Размера мапе</string>
     <string name="unchanged_parameter_summary">Сваки траг задржаће своје сопствене одреднице.</string>
     <string name="shared_string_unchanged">Непромењено</string>
     <string name="gpx_approximation_cpp">Рутирање-базирано (C++)</string>
@@ -5659,4 +5659,5 @@
     <string name="imperial_gallons_unit">imp gal</string>
     <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
     <string name="record_obd_data">Сними метрику возила</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Мрежа података</string>
 </resources>
