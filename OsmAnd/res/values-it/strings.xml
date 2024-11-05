@@ -5923,7 +5923,6 @@
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Misure del veicolo</string>
     <string name="rpm_unit">giri/min</string>
-    <string name="obd_speed_desc">Mostra la velocità del veicolo sopra il sensore OBD</string>
     <string name="obd_fuel_consumption_rate">Tasso di consumo del carburante</string>
     <string name="obd_fuel_left_distance">Carburante restante (distanza)</string>
     <string name="obd_fuel_type">Tipo di carburante</string>

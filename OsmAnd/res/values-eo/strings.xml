@@ -5926,12 +5926,8 @@
     <string name="percent_unit">%</string>
     <string name="obd_rpm">Rivolua rapido</string>
     <string name="rpm_unit">riv./min</string>
-    <string name="obd_speed_desc">Montras rapidon de veturilo raportatan de OBD-sentilo</string>
-    <string name="obd_air_intake_temp_desc">Montras temperaturon de eniga aero raportatan de OBD-sentilo</string>
     <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
-    <string name="obd_ambient_air_temp_desc">Montras temperaturon de fona aero raportatan de OBD-sentilo</string>
-    <string name="obd_battery_voltage_desc">Montras tension de baterio raportatan de OBD-sentilo</string>
     <string name="obd_air_intake_temp">Temperaturo de eniga aero</string>
     <string name="obd_ambient_air_temp">Temperaturo de fona aero</string>
     <string name="obd_battery_voltage">Tensio de baterio</string>
@@ -5948,7 +5944,6 @@
     <string name="shared_string_obd">OBD</string>
     <string name="obd_rpm_desc">Montras rivoluan rapidon de motoro raportatan de OBD-sentilo</string>
     <string name="obd_fuel_type_desc">Montras specon de brulaĵo raportatan de OBD-sentilo</string>
-    <string name="obd_engine_coolant_temp_desc">Montras temperaturon de malvarmiga likvaĵo raportatan de OBD-sentilo</string>
     <string name="unknown_bt_device">Nekonata aparato</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">Montras VIN-numeron raportatan de OBD-sentilo</string>

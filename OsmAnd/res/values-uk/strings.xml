@@ -5922,12 +5922,9 @@
     <string name="obd_fuel_type_bifuel_gasoline">Двопаливний бензин</string>
     <string name="obd_fuel_type_bifuel_methanol">Двопаливний метанол</string>
     <string name="obd_fuel_type_bifuel_ethanol">Двопаливний етанол</string>
-    <string name="obd_air_intake_temp_desc">Віджет показує температуру всмоктуваного повітря за датчиком OBD</string>
-    <string name="obd_ambient_air_temp_desc">Віджет показує температуру навколишнього повітря за датчиком OBD</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">Оберти</string>
     <string name="rpm_unit">об/хв</string>
-    <string name="obd_speed_desc">Віджет показує швидкість машини за датчиком OBD</string>
     <string name="obd_rpm_desc">Віджет показує оберти з тахометра машини за датчиком OBD</string>
     <string name="obd_fuel_type_desc">Віджет показує тип пального машини за датчиком OBD</string>
     <string name="obd_air_intake_temp">t° всмоктуваного повітря</string>
@@ -5952,8 +5949,6 @@
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Показники машини</string>
     <string name="vehicle_metrics_plugin_settings">Налаштування показників машини</string>
-    <string name="obd_engine_coolant_temp_desc">Віджет показує температуру охолоджувальної рідини двигуна за датчиком OBD</string>
-    <string name="obd_battery_voltage_desc">Віджет показує напругу акумулятора за датчиком OBD</string>
     <string name="obd_fuel_left_distance_desc">Віджет показує відстань, яку може проїхати машина на залишковому рівні пального за датчиком OBD</string>
     <string name="obd_engine_coolant_temp">t° охолоджувальної рідини двигуна</string>
     <string name="obd_fuel_level">Рівень пального (%)</string>
