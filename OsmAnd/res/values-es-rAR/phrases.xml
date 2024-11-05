@@ -4880,8 +4880,8 @@
     <string name="poi_payment_parkster_no">No acepta Parkster</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Túnel prohibido para peatones</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel prohibido para ciclistas</string>
-    <string name="poi_route_article">Artículos de viaje</string>
-    <string name="poi_route_article_point">Puntos de viaje</string>
+    <string name="poi_route_article">Artículos turísticos</string>
+    <string name="poi_route_article_point">Puntos turísticos</string>
     <string name="poi_route_track">Otras rutas</string>
     <string name="poi_route_track_point">Otros puntos de ruta</string>
     <string name="poi_activities_bicycle">Bicicleta</string>
