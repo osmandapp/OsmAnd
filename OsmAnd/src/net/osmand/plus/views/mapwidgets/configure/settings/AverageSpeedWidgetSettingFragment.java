@@ -69,21 +69,23 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 	}
 
 	private void setupSkipStopsSetting() {
-		View skipStopsContainer = view.findViewById(R.id.skip_stops_container);
-		TextView skipStopsDesc = view.findViewById(R.id.skip_stops_desc);
-		CompoundButton skipStopsToggle = view.findViewById(R.id.skip_stops_toggle);
+		View container = view.findViewById(R.id.skip_stops_container);
+		TextView title = container.findViewById(R.id.title);
+		TextView description = container.findViewById(R.id.description);
+		CompoundButton compoundButton = container.findViewById(R.id.compound_button);
 
 		SpeedConstants speedSystem = settings.SPEED_SYSTEM.getModeValue(appMode);
 		String speedToSkip = String.valueOf(AverageSpeedComputer.getConvertedSpeedToSkip(speedSystem));
 		String speedUnit = speedSystem.toShortString();
 		String formattedSpeedToSkip = getString(R.string.ltr_or_rtl_combine_via_space, speedToSkip, speedUnit);
-		skipStopsDesc.setText(getString(R.string.average_speed_skip_stops_desc, formattedSpeedToSkip));
+		title.setText(R.string.average_speed_skip_stops);
+		description.setText(getString(R.string.average_speed_skip_stops_desc, formattedSpeedToSkip));
 
-		skipStopsToggle.setChecked(countStops);
-		skipStopsToggle.setOnCheckedChangeListener((buttonView, isChecked) -> countStops = isChecked);
+		compoundButton.setChecked(countStops);
+		compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> countStops = isChecked);
 
-		skipStopsContainer.setOnClickListener(v -> skipStopsToggle.setChecked(!skipStopsToggle.isChecked()));
-		skipStopsContainer.setBackground(getPressedStateDrawable());
+		container.setOnClickListener(v -> compoundButton.setChecked(!compoundButton.isChecked()));
+		container.setBackground(getPressedStateDrawable());
 	}
 
 	private void setupSettingAction(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {

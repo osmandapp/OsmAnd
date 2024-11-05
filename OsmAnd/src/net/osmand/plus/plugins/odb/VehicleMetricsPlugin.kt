@@ -76,7 +76,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		"").makeGlobal().cache();
 	val LAST_CONNECTED_OBD_DEVICE = registerStringPreference(
 		"last_connected_obd_device",
-		"").makeGlobal().cache();
+		"").makeGlobal().cache()
 
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
@@ -508,7 +508,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		currentConnectingState = OBDConnectionState.CONNECTED
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
-			OBDDataComputer.fuelTank = settings.FUEL_TANK_CAPACITY.get()
 			saveDeviceToUsedOBDDevicesList(it)
 			setLastConnectedDevice(it)
 		}
@@ -860,9 +859,21 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
 		super.attachAdditionalInfoToRecordedTrack(location, json)
+		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
+		val widgets = registry.allWidgets
+		val mode = app.settings.applicationMode
+		val visibleWidgetCommands = ArrayList<OBDCommand>()
+		for (widgetInfo in widgets) {
+			if (widgetInfo.widget is OBDTextWidget && widgetInfo.isEnabledForAppMode(mode)) {
+				visibleWidgetCommands.add(widgetInfo.widget.getWidgetOBDCommand())
+			}
+		}
 		if (settings.RECORD_OBD_DATA.get()) {
 			val rawData = OBDDispatcher.getRawData()
 			for (command in rawData.keys) {
+				if (!visibleWidgetCommands.contains(command)) {
+					continue
+				}
 				val dataField = rawData[command]
 				if (command.gpxTag != null) {
 					json.put(
