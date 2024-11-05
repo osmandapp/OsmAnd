@@ -875,6 +875,9 @@ public class RouteProvider {
 		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
 		}
+		if (settings.SHOW_MINOR_TURNS.getModeValue(params.mode)) {
+			cf.showMinorTurns = true;
+		}
 		return cf;
 	}
 

@@ -145,6 +145,10 @@ object OBDDispatcher {
 		log("after stop reading")
 	}
 
+	fun getRawData(): HashMap<OBDCommand, OBDDataField<Any>?> {
+		return HashMap(sensorDataCache)
+	}
+
 	private fun log(msg: String) {
 		if(useInfoLogging) {
 			log.info(msg)
