@@ -220,6 +220,14 @@ public abstract class BaseCard {
 	}
 
 	public void updateVisibility(boolean show) {
+		updateVisibility(view, show);
+	}
+
+	public void updateVisibility(int viewId, boolean show) {
+		updateVisibility(view.findViewById(viewId), show);
+	}
+
+	public void updateVisibility(@Nullable View view, boolean show) {
 		AndroidUiHelper.updateVisibility(view, show);
 	}
 

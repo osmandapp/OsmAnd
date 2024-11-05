@@ -127,7 +127,13 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/record_obd_data"
-		tools:icon="@drawable/ic_action_notification" />
+		tools:icon="@drawable/ic_action_car_info" />
+
+	<Preference
+		android:key="record_obd_data_promo"
+		android:layout="@layout/preference_promo_item"
+		android:title="@string/record_obd_data"
+		tools:icon="@drawable/ic_action_car_info" />
 
 	<Preference
 		android:key="logging_data_divider"

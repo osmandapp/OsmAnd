@@ -5544,11 +5544,7 @@
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Prikazuje brzinu vozila preko OBD senzora</string>
     <string name="obd_rpm_desc">Prikazuje tahometarski RPM preko OBD senzora</string>
-    <string name="obd_air_intake_temp_desc">Prikazuje temperaturu usisnog vazduha vozila preko OBD senzora</string>
-    <string name="obd_ambient_air_temp_desc">Prikazuje temperaturu ambijentalnog vazduha preko OBD senzora</string>
-    <string name="obd_battery_voltage_desc">Prikazuje napon baterije preko OBD senzora</string>
     <string name="obd_fuel_level_desc">Prikazuje nivo goriva u vozilu preko OBD senzora</string>
     <string name="obd_fuel_type_desc">Prikazuje vrstu goriva vozila preko OBD senzora</string>
     <string name="obd_air_intake_temp">Ulazna temperatura</string>
@@ -5563,7 +5559,6 @@
     <string name="obd_plugin_name">Metrika vozila</string>
     <string name="obd_support">OBD podrška</string>
     <string name="obd_plugin_description">Pratite ključne metrike vozila koristeći OBD-II protokol. Pristup podacima uključujući: * Brzina motora * Potrošnja goriva * Preostalo gorivo * Razdaljina od pokretanja motora * Usisna temperatura * Temperatura okoline * Temperatura rashladne tečnosti * Brzina vozila * Procenat baterije</string>
-    <string name="obd_engine_coolant_temp_desc">Prikazuje temperaturu rashladne tečnosti motora preko OBD senzora</string>
     <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
     <string name="obd_vin">VIN</string>
     <string name="unknown_bt_device">Nepoznat uređaj</string>
@@ -5635,17 +5630,8 @@
     <string name="obd_fuel_consumption_rate_l_km">Potrošnja goriva (l/km)</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Prikazuje potrošnju goriva vozila na osnovu proračuna (l/km)</string>
     <string name="simulate_obd">Simulira obd podatke</string>
-    <string name="obd_engine_runtime">Vreme rada motora</string>
-    <string name="obd_engine_runtime_desc">Prikazuje vreme rada motora vozila dobijeno od obd skenera</string>
-    <string name="obd_throttle_position">Pozicija gasa</string>
-    <string name="obd_throttle_position_desc">Prikazuje pritisak goriva u vozilu (manometarski pritisak) dobijen od obd skenera</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Pritisak goriva</string>
-    <string name="obd_fuel_pressure_desc">Prikazuje pritisak goriva u vozilu (manometarski pritisak) dobijen od obd skenera</string>
-    <string name="obd_calculated_engine_load">Izračunato opterećenje motora</string>
-    <string name="obd_calculated_engine_load_desc">Prikazuje izračunato opterećenje motora vozila na osnovu senzora</string>
-    <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
-    <string name="obd_engine_oil_temperature_desc">Prikazuje temperaturu motornog ulja vozila dobijenu iz obd skenera</string>
     <string name="bt_start_pair_failed">Nije moguće pokrenuti uparivanje s uređajem</string>
     <string name="shared_string_dynamic">Dinamično</string>
     <string name="obd_connected_to_device">Povezan na %s</string>

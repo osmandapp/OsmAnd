@@ -5551,11 +5551,7 @@
     <string name="obd_connecting_to_device">Pripájam sa k %s</string>
     <string name="bt_start_pair_failed">Nedá sa spustiť párovanie so zariadením</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje rýchlosť spotreby paliva podľa výpočtov (%/h)</string>
-    <string name="obd_engine_runtime">Čas behu motora</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
-    <string name="obd_fuel_pressure_desc">Zobrazuje tlak paliva vozidla zo snímača OBD</string>
-    <string name="obd_calculated_engine_load">Vypočítané zaťaženie motora</string>
-    <string name="obd_engine_oil_temperature">Teplota motorového oleja</string>
     <string name="obd_fuel_level_percent">Úroveň paliva (%)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Spotreba paliva l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotreba paliva %/h</string>
@@ -5571,10 +5567,7 @@
     <string name="obd_fuel_consumption_rate_desc">Zobrazuje rýchlosť spotreby paliva podľa OBD</string>
     <string name="obd_fuel_left_liters">Zostatok paliva (litre)</string>
     <string name="kpa_unit">kPa</string>
-    <string name="obd_engine_runtime_desc">Zobrazuje čas behu motora vozidla zo snímača OBD</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_engine_oil_temperature_desc">Zobrazí teplotu motorového oleja zo snímača OBD</string>
-    <string name="obd_calculated_engine_load_desc">Zobrazí vypočítané zaťaženie motora zo snímača OBD</string>
     <string name="obd_fuel_left_percent">Zostatok paliva (%)</string>
     <string name="obd_fuel_left_liter">Zostatok paliva (l)</string>
     <string name="obd_fuel_left_km">Zostatok paliva (km)</string>

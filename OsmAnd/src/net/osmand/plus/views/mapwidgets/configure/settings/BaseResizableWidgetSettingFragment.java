@@ -73,13 +73,15 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 
 	@Override
 	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
-		themedInflater.inflate(R.layout.resizable_widget_setting, container);
+		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing resizableWidget && resizableWidget.allowResize()) {
+			themedInflater.inflate(R.layout.resizable_widget_setting, container);
 
-		View widgetSizeContainer = container.findViewById(R.id.widget_size_container);
-		widgetSizeContainer.setOnClickListener(v -> showPreferenceDialog(container));
-		widgetSizeContainer.setBackground(getPressedStateDrawable());
-		TextView widgetSizeDescription = container.findViewById(R.id.widget_size_description);
-		widgetSizeDescription.setText(selectedWidgetSize.titleId);
+			View widgetSizeContainer = container.findViewById(R.id.widget_size_container);
+			widgetSizeContainer.setOnClickListener(v -> showPreferenceDialog(container));
+			widgetSizeContainer.setBackground(getPressedStateDrawable());
+			TextView widgetSizeDescription = container.findViewById(R.id.widget_size_description);
+			widgetSizeDescription.setText(selectedWidgetSize.titleId);
+		}
 	}
 
 	private void showPreferenceDialog(ViewGroup container) {

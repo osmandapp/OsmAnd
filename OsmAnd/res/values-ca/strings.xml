@@ -4578,17 +4578,9 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">Mostra el consum de combustible calculat del vehicle (l/km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra el consum de carburant calculat del vehicle (%/h)</string>
     <string name="simulate_obd">Dades odb estimades</string>
-    <string name="obd_engine_runtime">Temps en funcionament del motor</string>
-    <string name="obd_engine_runtime_desc">Mostra el temps en funcionament del motor del vehicle que indica l\'escàner obd</string>
     <string name="obd_throttle_position">Posició de l\'accelerador</string>
-    <string name="obd_throttle_position_desc">Mostra la pressió del combustible del vehicle (pressió d\'injecció) obtinguda de l\'escàner obd</string>
     <string name="kpa_unit">k Pa</string>
     <string name="obd_fuel_pressure">Pressió del combustible</string>
-    <string name="obd_fuel_pressure_desc">Mostra la pressió del combustible del vehicle (pressió d\'injecció) obtinguda de l\'escàner obd</string>
-    <string name="obd_calculated_engine_load">Càrrega calculada del motor</string>
-    <string name="obd_calculated_engine_load_desc">Mostra la càrrega del motor calculada segons el sensor</string>
-    <string name="obd_engine_oil_temperature">Temperatura de l\'oli del motor</string>
-    <string name="obd_engine_oil_temperature_desc">Mostra la temperatura de l\'oli del motor segons l\'escàner obd</string>
     <string name="l_100km">l/100km</string>
     <string name="obd_fuel_consumption_rate_l_km">Consum de combustible (l/km)</string>
     <string name="quick_action_save_recorded_trip_and_continue">Desa el trajecte i continua</string>
@@ -4640,7 +4632,6 @@
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Mostra la velocitat del vehicle que indicar el sensor OBD</string>
     <string name="obd_rpm_desc">Mostra les RPM del tacòmetre del vehicle segons el sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Mostra la distància que pot recórrer el vehicle amb el combustible romanent segons el sensor OBD</string>
     <string name="obd_fuel_type_desc">Mostra el tipus de combustible del vehicle segons el sensor OBD</string>
@@ -4650,10 +4641,8 @@
     <string name="delete_widget_description">S\'esborrarà aquest giny. El podeu tornar a restablir a la pantalla Configuració.</string>
     <string name="obd_fuel_consumption_rate_desc">Mostra la taxa de consum de combustible del vehicle segons OBD i la ubicació</string>
     <string name="add_widget_above">Afegeix el giny a sobre</string>
-    <string name="obd_air_intake_temp_desc">Mostra la temperatura de l\'aire d\'admisió del vehicle segons el sensor OBD</string>
     <string name="vehicle_metrics_plugin_settings">Configuració de les lectures del vehicle</string>
     <string name="obd_fuel_type_hydrogen">Hidrogen</string>
-    <string name="obd_ambient_air_temp_desc">Mostra la temperatura ambient segons el sensor OBD</string>
     <string name="obd_battery_voltage">Voltatge de la bateria</string>
     <string name="obd_engine_coolant_temp">Temperatura del líquid refrigerant</string>
     <string name="obd_fuel_level">Eficiència del combustible (%)</string>
@@ -4673,8 +4662,6 @@
     <string name="delete_widget">Voleu esborrar aquest giny?</string>
     <string name="add_widget_below">Afegeix el giny a sota</string>
     <string name="background_opacity">Opacitat de rerefons</string>
-    <string name="obd_engine_coolant_temp_desc">Mostra la temperatura del líquid refrigerant del motor segons el sensor OBD</string>
-    <string name="obd_battery_voltage_desc">Mostra el voltatge de la bateria segons el sensor OBD</string>
     <string name="add_widget_to_the_right">Afegeix el giny a la dreta</string>
     <string name="add_widget_to_the_left">Afegeix el giny a l\'esquerra</string>
     <string name="obd_fuel_type_hybrid_electric">Híbrid elèctric</string>

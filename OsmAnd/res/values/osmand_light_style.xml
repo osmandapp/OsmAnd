@@ -220,6 +220,7 @@
         <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_light</item>
         <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_light</item>
         <item name="promo_banner_title_color">@color/osmand_pro_item_bg</item>
+        <item name="purchase_pro_badge_icon">@drawable/img_button_pro_day</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 
