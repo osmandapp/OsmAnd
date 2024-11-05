@@ -414,6 +414,11 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	public void updateValueAlign(boolean fullRow) {
 	}
 
+	@Override
+	public boolean allowResize() {
+		return verticalWidget;
+	}
+
 	@NonNull
 	@Override
 	public OsmandPreference<WidgetSize> getWidgetSizePref() {

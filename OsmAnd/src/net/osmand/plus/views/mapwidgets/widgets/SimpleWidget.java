@@ -144,6 +144,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		return widgetState.getShowIconPref();
 	}
 
+	@Override
+	public boolean allowResize() {
+		return isVerticalWidget();
+	}
+
 	@NonNull
 	public OsmandPreference<WidgetSize> getWidgetSizePref() {
 		return widgetState.getWidgetSizePref();

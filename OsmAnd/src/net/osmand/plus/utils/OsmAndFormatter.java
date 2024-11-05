@@ -162,6 +162,21 @@ public class OsmAndFormatter {
 		return formattedTime;
 	}
 
+	public static String getFormattedTimeShort(long seconds, boolean useCurrentTime, boolean shouldShowDay) {
+		Calendar calendar = Calendar.getInstance();
+		if (useCurrentTime) {
+			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
+		} else {
+			calendar.setTimeInMillis(seconds * 1000);
+		}
+		Date date = calendar.getTime();
+		String formattedTime = shortTimeFormatter.format(date, twelveHoursFormat);
+		if (shouldShowDay) {
+			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
+		}
+		return formattedTime;
+	}
+
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
 	}
@@ -593,11 +608,15 @@ public class OsmAndFormatter {
 
 	public static float readSavedFuelTankCapacity(@NonNull OsmandSettings settings, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
 		OsmandPreference<Float> fuelTankCapacity = settings.FUEL_TANK_CAPACITY;
-		float value = fuelTankCapacity.getModeValue(mode);
-		if (value == 0.0f) {
-			return value;
+		float valueInLitres = fuelTankCapacity.getModeValue(mode);
+		if (valueInLitres == 0.0f) {
+			return valueInLitres;
 		}
 
+		return convertLiterToVolumeUnit(volumeUnit, valueInLitres);
+	}
+
+	public static float convertLiterToVolumeUnit(@NonNull VolumeUnit volumeUnit, float value){
 		if (volumeUnit == VolumeUnit.US_GALLONS) {
 			return value / US_GALLONS_IN_LITER;
 		} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {

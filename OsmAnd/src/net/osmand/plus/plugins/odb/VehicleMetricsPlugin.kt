@@ -122,24 +122,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		val batteryVoltageWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
 		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
-		val fuelLevelWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_PERCENT)
-		widgetsInfos.add(creator.createWidgetInfo(fuelLevelWidget))
-		val fuelLeftDistanceWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_LEFT_DISTANCE)
-		widgetsInfos.add(creator.createWidgetInfo(fuelLeftDistanceWidget))
-		val fuelConsumptionRateLiterHourWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateLiterHourWidget))
-		val fuelConsumptionRatePercentHourWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRatePercentHourWidget))
-		val fuelConsumptionRateLiterKmWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateLiterKmWidget))
-		val fuelConsumptionRateSensorWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionRateSensorWidget))
+		val remainingFuelWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_REMAINING_FUEL)
+		widgetsInfos.add(creator.createWidgetInfo(remainingFuelWidget))
+		val fuelConsumptionWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION)
+		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionWidget))
 		val engineCoolantTempWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
 		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
@@ -208,13 +196,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				customId,
 				widgetsPanel)
 
-			WidgetType.OBD_FUEL_LEFT_PERCENT -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_LEFT_PERCENT,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
-				customId,
-				widgetsPanel)
-
 			WidgetType.OBD_CALCULATED_ENGINE_LOAD -> return OBDTextWidget(
 				mapActivity,
 				WidgetType.OBD_CALCULATED_ENGINE_LOAD,
@@ -229,45 +210,17 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				customId,
 				widgetsPanel)
 
-			WidgetType.OBD_FUEL_LEFT_DISTANCE -> return OBDTextWidget(
+			WidgetType.OBD_FUEL_CONSUMPTION -> return OBDFuelConsumptionWidget(
 				mapActivity,
-				WidgetType.OBD_FUEL_LEFT_DISTANCE,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM,
-				customId,
-				widgetsPanel)
-
-			WidgetType.OBD_FUEL_LEFT_LITER -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_LEFT_LITER,
-				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER,
-				customId,
-				widgetsPanel)
-
-			WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+				WidgetType.OBD_FUEL_CONSUMPTION,
 				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
 				customId,
 				widgetsPanel)
 
-			WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM -> return OBDTextWidget(
+			WidgetType.OBD_REMAINING_FUEL -> return OBDRemainingFuelWidget(
 				mapActivity,
-				WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_KM,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM,
-				customId,
-				widgetsPanel)
-
-			WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_CONSUMPTION_RATE_SENSOR,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
-				customId,
-				widgetsPanel)
-
-			WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR -> return OBDTextWidget(
-				mapActivity,
-				WidgetType.OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR,
-				OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
+				WidgetType.OBD_REMAINING_FUEL,
+				OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
 				customId,
 				widgetsPanel)
 
@@ -763,6 +716,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
 
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
@@ -771,7 +725,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT,
 			OBDDataComputer.OBDTypeWidget.CALCULATED_ENGINE_LOAD,
 			OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
@@ -793,7 +746,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT -> app.getString(R.string.percent_unit)
 
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> app.getString(R.string.liter)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> app.getString(R.string.percent_hour)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR -> app.getString(R.string.liter_per_hour)
@@ -812,6 +765,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
+	private fun getFormattedVolume(data: Number): Float {
+		return OsmAndFormatter.convertLiterToVolumeUnit(settings.UNIT_OF_VOLUME.get(), data.toFloat())
+	}
+
 	private fun getConvertedTemperature(data: Number): Float {
 		val temperature = data.toFloat()
 		return if (getTemperatureUnit() == TemperatureUnit.CELSIUS) {
@@ -822,7 +779,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	private fun getFormattedTime(time: Int): String {
-		return OsmAndFormatter.getFormattedDuration(time.toLong(), app)
+		return OsmAndFormatter.getFormattedTimeShort(time.toLong(), false, false)
 	}
 
 	private fun getConvertedSpeed(speed: Number): Float {
