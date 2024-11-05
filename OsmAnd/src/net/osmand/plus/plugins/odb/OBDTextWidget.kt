@@ -138,6 +138,14 @@ open class OBDTextWidget(
 	}
 
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
+		val visible = widgetType.isPurchased(app)
+		updateVisibility(visible)
+		if (visible) {
+			updateSimpleWidgetInfoImpl()
+		}
+	}
+
+	private fun updateSimpleWidgetInfoImpl() {
 		val subtext: String? = plugin?.getWidgetUnit(widgetComputer)
 		val textData: String = plugin?.getWidgetValue(widgetComputer) ?: NO_VALUE
 		if (!Algorithms.objectEquals(textData, cacheTextData) ||

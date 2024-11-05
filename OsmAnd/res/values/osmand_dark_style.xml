@@ -187,6 +187,7 @@
         <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_dark</item>
         <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_dark</item>
         <item name="promo_banner_title_color">@color/active_color_primary_dark</item>
+        <item name="purchase_pro_badge_icon">@drawable/img_button_pro_night</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
 

@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_pro">Pro</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
+    <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
 	<string name="shared_string_hour">Hour</string>
 	<string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
 	<string name="shared_string_volume">Volume</string>

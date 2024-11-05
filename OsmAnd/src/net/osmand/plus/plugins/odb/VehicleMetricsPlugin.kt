@@ -25,6 +25,7 @@ import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_VEHICLE_METRICS_ID
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.plugins.OsmandPlugin
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
@@ -874,7 +875,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				visibleWidgetCommands.add(widgetInfo.widget.getWidgetOBDCommand())
 			}
 		}
-		if (settings.RECORD_OBD_DATA.get()) {
+		if (settings.RECORD_OBD_DATA.get() && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
 			val rawData = OBDDispatcher.getRawData()
 			for (command in rawData.keys) {
 				if (!visibleWidgetCommands.contains(command)) {

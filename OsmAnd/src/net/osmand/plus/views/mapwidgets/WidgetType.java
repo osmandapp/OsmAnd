@@ -289,11 +289,8 @@ public enum WidgetType {
 	}
 
 	public boolean isPurchased(@NonNull Context ctx) {
-		if (getProWidgets().contains(this)) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			return InAppPurchaseUtils.isProWidgetsAvailable(app);
-		}
-		return true;
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return InAppPurchaseUtils.isWidgetPurchased(app, this);
 	}
 
 	public int getDefaultOrder() {
@@ -437,9 +434,9 @@ public enum WidgetType {
 		return null;
 	}
 
-	@NonNull
-	public static List<WidgetType> getProWidgets() {
-		return Arrays.asList(ELEVATION_PROFILE, ALTITUDE_MAP_CENTER);
+	public boolean isProWidget() {
+		return this == ELEVATION_PROFILE || this == ALTITUDE_MAP_CENTER
+				|| (isOBDWidget() && this != OBD_SPEED && this != OBD_RPM);
 	}
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {
@@ -448,6 +445,10 @@ public enum WidgetType {
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
 		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
+	}
+
+	public boolean isOBDWidget() {
+		return getGroup() == VEHICLE_METRICS;
 	}
 
 	@NonNull
