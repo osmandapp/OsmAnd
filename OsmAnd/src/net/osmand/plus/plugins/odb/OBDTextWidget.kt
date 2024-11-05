@@ -69,12 +69,15 @@ open class OBDTextWidget(
 			OBDDataComputer.registerWidget(fieldType, averageTimeSeconds)
 	}
 
-	open fun updatePrefs() {
+	open fun updatePrefs(prefsChanged: Boolean) {
 		if (supportsAverageMode()) {
-			if (averageModePref!!.get()) {
-				widgetComputer.averageTimeSeconds = (measuredIntervalPref!!.get() / 1000).toInt()
+			val newTimeSeconds: Int =
+				if (averageModePref?.get() == true) ((measuredIntervalPref?.get()
+					?: 0) / 1000).toInt() else 0
+			if (prefsChanged) {
+				widgetComputer = OBDDataComputer.registerWidget(widgetComputer.type, newTimeSeconds)
 			} else {
-				widgetComputer.averageTimeSeconds = 0
+				widgetComputer.averageTimeSeconds = newTimeSeconds
 			}
 			updateWidgetName()
 		}
@@ -83,8 +86,10 @@ open class OBDTextWidget(
 	override fun getOnClickListener(): View.OnClickListener? {
 		return if (supportsAverageMode() && averageModePref != null) {
 			View.OnClickListener { v: View? ->
-				averageModePref!!.set(!averageModePref!!.get())
-				updatePrefs()
+				averageModePref?.let {
+					it.set(!it.get())
+					updatePrefs(true)
+				}
 			}
 		} else {
 			null

@@ -718,9 +718,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
 
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(data as Number)
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(data as Number)
+
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM,
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
@@ -748,7 +749,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> app.getString(R.string.percent_hour)
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR,
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHourUnit()
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR -> app.getString(R.string.liter_per_hour)
 
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
@@ -761,7 +762,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME,
 			OBDDataComputer.OBDTypeWidget.VIN -> null
 
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> app.getString(R.string.l_100km)
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistanceUnit()
 		}
 	}
 
@@ -776,6 +777,53 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		} else {
 			temperature * 1.8f + 32
 		}
+	}
+
+	private fun getFormatVolumePerHourUnit(): String {
+		val volumeUnit = settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
+		val hour = app.getString(R.string.int_hour)
+		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, hour)
+	}
+
+	private fun getFormatVolumePerDistanceUnit(): String {
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		val distanceUnit : String = when (mc) {
+			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
+				app.getString(R.string.mile)
+			}
+			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+				app.getString(R.string.nm)
+			}
+			else -> {
+				app.getString(R.string.km)
+			}
+		}
+		val volumeUnit = settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
+		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, distanceUnit)
+	}
+
+	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
+		val volumeResult : Float
+		val volumeUnit = settings.UNIT_OF_VOLUME.get()
+		volumeResult = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, litersPer100km.toFloat())
+
+		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
+		return when (mc) {
+			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE
+			}
+			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
+				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
+			}
+			else -> {
+				volumeResult
+			}
+		}
+	}
+
+	private fun getFormatVolumePerHour(literPerHour: Number): Float {
+		val volumeUnit = settings.UNIT_OF_VOLUME.get()
+		return  OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, literPerHour.toFloat())
 	}
 
 	private fun getFormattedTime(time: Int): String {

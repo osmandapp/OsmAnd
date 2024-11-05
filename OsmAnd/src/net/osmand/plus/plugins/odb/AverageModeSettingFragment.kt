@@ -24,12 +24,12 @@ import net.osmand.plus.widgets.alert.CustomAlert
 class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 	private var selectedAverageMode: Boolean = false
 	private var selectedIntervalMillis: Long = 0
-	private var localSeekBarIntervalMillis: Long = 0
+	private var seekBarIntervalMillis: Long = 0
 
 	private lateinit var inflater: LayoutInflater
 	private var buttonsCard: LinearLayout? = null
-	private var selectedAppMode: ApplicationMode? = null
-	private var availableIntervals: Map<Long, String>? = null
+	private lateinit var selectedAppMode: ApplicationMode
+	private lateinit var availableIntervals: Map<Long, String>
 
 	private lateinit var widget: OBDTextWidget
 	private lateinit var averageValueModePref: OsmandPreference<Boolean>
@@ -79,18 +79,18 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 	}
 
 	private fun setupConfigButtons() {
-		buttonsCard!!.removeAllViews()
+		buttonsCard?.removeAllViews()
 
-		buttonsCard!!.addView(createButtonWithDescription(
+		buttonsCard?.addView(createButtonWithDescription(
 			getString(R.string.shared_string_mode),
-			getModeName(averageValueModePref.getModeValue(appMode)),
+			getModeName(selectedAverageMode),
 			selectedAverageMode,
 		) { showMarkerModeDialog() })
 
 		if (selectedAverageMode) {
-			buttonsCard!!.addView(createButtonWithDescription(
+			buttonsCard?.addView(createButtonWithDescription(
 				getString(R.string.shared_string_interval),
-				availableIntervals!![selectedIntervalMillis]!!,
+				availableIntervals[selectedIntervalMillis],
 				false,
 			) { showSeekbarSettingsDialog() })
 		}
@@ -98,7 +98,7 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private val initialIntervalIndex: Int
 		get() {
-			val intervals: List<Long> = ArrayList(availableIntervals!!.keys)
+			val intervals: List<Long> = ArrayList(availableIntervals.keys)
 			for (i in intervals.indices) {
 				val interval = intervals[i]
 				if (selectedIntervalMillis == interval) {
@@ -120,7 +120,7 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private fun createButtonWithDescription(
 		title: String,
-		desc: String,
+		desc: String?,
 		showShortDivider: Boolean,
 		listener: View.OnClickListener
 	): View {
@@ -146,18 +146,18 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private fun showSeekbarSettingsDialog() {
 		val nightMode = !app.settings.isLightContentForMode(appMode)
-		localSeekBarIntervalMillis = selectedIntervalMillis
+		seekBarIntervalMillis = selectedIntervalMillis
 		val themedContext = UiUtilities.getThemedContext(activity, nightMode)
 		val builder = AlertDialog.Builder(themedContext)
 		val seekbarView = inflater.inflate(R.layout.map_marker_interval_dialog, null, false)
 		builder.setView(seekbarView)
 		builder.setPositiveButton(R.string.shared_string_apply) { dialog, which ->
-			selectedIntervalMillis = localSeekBarIntervalMillis
+			selectedIntervalMillis = seekBarIntervalMillis
 			setupConfigButtons()
 		}
 		builder.setNegativeButton(R.string.shared_string_cancel, null)
 
-		val intervals: List<String> = ArrayList(availableIntervals!!.values)
+		val intervals: List<String> = ArrayList(availableIntervals.values)
 		val minIntervalValue = intervals[0]
 		val maxIntervalValue = intervals[intervals.size - 1]
 
@@ -177,19 +177,19 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 		val intervalStr = app.getString(R.string.shared_string_interval)
 		val intervalsList: List<Map.Entry<Long, String>> = ArrayList(
-			availableIntervals!!.entries
+			availableIntervals.entries
 		)
 		val initialIntervalIndex = initialIntervalIndex
 
 		val slider = seekbarView.findViewById<Slider>(R.id.interval_slider)
 		slider.valueFrom = 0f
-		slider.valueTo = (availableIntervals!!.size - 1).toFloat()
+		slider.valueTo = (availableIntervals.size - 1).toFloat()
 		slider.value = initialIntervalIndex.toFloat()
 		slider.clearOnChangeListeners()
 		slider.addOnChangeListener(Slider.OnChangeListener { slider1: Slider?, intervalIndex: Float, fromUser: Boolean ->
 			val newInterval =
 				intervalsList[intervalIndex.toInt()]
-			localSeekBarIntervalMillis = newInterval.key
+			seekBarIntervalMillis = newInterval.key
 			interval.text = app.getString(
 				R.string.ltr_or_rtl_combine_via_colon,
 				intervalStr,
@@ -227,15 +227,14 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private fun setupListItemBackground(view: View) {
 		val button = view.findViewById<View>(R.id.button_container)
-		val color = selectedAppMode!!.getProfileColor(nightMode)
+		val color = selectedAppMode.getProfileColor(nightMode)
 		val background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f)
 		AndroidUtils.setBackground(button, background)
 	}
 
 	private fun updateToolbarIcon() {
 		val icon = view.findViewById<ImageView>(R.id.icon)
-		val iconId = widget.widgetType!!.getIconId(nightMode)
-		icon.setImageDrawable(getIcon(iconId))
+		widget.widgetType?.getIconId(nightMode)?.let { icon.setImageDrawable(getIcon(it)) }
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -246,10 +245,13 @@ class AverageModeSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	override fun applySettings() {
 		super.applySettings()
+		val prefsChanged = averageValueModePref.getModeValue(appMode) != selectedAverageMode
+				|| averageValueIntervalPref.getModeValue(appMode) != selectedIntervalMillis
+
 		averageValueModePref.setModeValue(appMode, selectedAverageMode)
 		if (selectedAverageMode) {
 			averageValueIntervalPref.setModeValue(appMode, selectedIntervalMillis)
 		}
-		widget.updatePrefs()
+		widget.updatePrefs(prefsChanged)
 	}
 }

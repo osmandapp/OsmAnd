@@ -25,7 +25,7 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private lateinit var inflater: LayoutInflater
 	private var buttonsCard: LinearLayout? = null
-	private var selectedAppMode: ApplicationMode? = null
+	private lateinit var selectedAppMode: ApplicationMode
 
 	private lateinit var widget: OBDFuelConsumptionWidget
 	private lateinit var fuelConsumptionPref: OsmandPreference<FuelConsumptionMode>
@@ -114,7 +114,7 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private fun setupListItemBackground(view: View) {
 		val button = view.findViewById<View>(R.id.button_container)
-		val color = selectedAppMode!!.getProfileColor(nightMode)
+		val color = selectedAppMode.getProfileColor(nightMode)
 		val background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f)
 		AndroidUtils.setBackground(button, background)
 	}
@@ -132,10 +132,13 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	override fun applySettings() {
 		super.applySettings()
+		val prefsChanged =
+			fuelConsumptionPref.getModeValue(appMode) != FuelConsumptionMode.entries[selectedFuelConsumptionMode]
+
 		fuelConsumptionPref.setModeValue(
 			appMode,
 			FuelConsumptionMode.entries[selectedFuelConsumptionMode]
 		)
-		widget.updatePrefs()
+		widget.updatePrefs(prefsChanged)
 	}
 }

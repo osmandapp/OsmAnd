@@ -9,8 +9,9 @@
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
-
 -->
+    <string name="shared_string_hour">Hour</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="shared_string_volume">Volume</string>
     <string name="obd_engine_runtime_desc">Shows shows how long the engine has been running since it was started.</string>
     <string name="obd_engine_runtime">Engine Runtime</string>
@@ -26,9 +27,6 @@
     <string name="obd_engine_oil_temperature">Engine Oil Temperature</string>
     <string name="obd_ambient_air_temp_desc">Shows the temperature outside the vehicle.</string>
     <string name="obd_air_intake_temp_desc">Shows the temperature of the air entering the engine intake manifold.</string>
-    <string name="obd_fuel_consumption_rate_distance_per_volume">Kilometer per liter (Distance per volume)</string>
-    <string name="obd_fuel_consumption_rate_volume_per_100units">Litre per 100 km (Volume per 100 distance units)</string>
-    <string name="obd_fuel_consumption_rate_volume_per_hour">Litre per hour (Volume per hour)</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Use selected units in name.</string>
     <string name="remaining_fuel_description">Shows the amount of fuel left in the vehicle\'s tank</string>
     <string name="remaining_fuel">Remaining fuel</string>

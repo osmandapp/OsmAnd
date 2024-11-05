@@ -25,7 +25,7 @@ class RemainingFuelSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private lateinit var inflater: LayoutInflater
 	private var buttonsCard: LinearLayout? = null
-	private var selectedAppMode: ApplicationMode? = null
+	private lateinit var selectedAppMode: ApplicationMode
 
 	private lateinit var widget: OBDRemainingFuelWidget
 	private lateinit var remainingFuelMode: OsmandPreference<RemainingFuelMode>
@@ -114,7 +114,7 @@ class RemainingFuelSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	private fun setupListItemBackground(view: View) {
 		val button = view.findViewById<View>(R.id.button_container)
-		val color = selectedAppMode!!.getProfileColor(nightMode)
+		val color = selectedAppMode.getProfileColor(nightMode)
 		val background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f)
 		AndroidUtils.setBackground(button, background)
 	}
@@ -132,10 +132,13 @@ class RemainingFuelSettingFragment : BaseSimpleWidgetSettingsFragment() {
 
 	override fun applySettings() {
 		super.applySettings()
+		val prefsChanged =
+			remainingFuelMode.getModeValue(appMode) != RemainingFuelMode.entries[selectedRemainingFuelMode]
+
 		remainingFuelMode.setModeValue(
 			appMode,
 			RemainingFuelMode.entries[selectedRemainingFuelMode]
 		)
-		widget.updatePrefs()
+		widget.updatePrefs(prefsChanged)
 	}
 }

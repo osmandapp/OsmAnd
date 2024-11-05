@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.odb
 
-import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -31,12 +30,26 @@ class OBDRemainingFuelWidget(
 		val averageTimeSeconds = 0
 		val typeWidget = getFieldType()
 
-		OBDDataComputer.removeWidget(widgetComputer)
 		widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
 	}
 
 	private fun getFieldType(): OBDTypeWidget {
 		return remainingFuelMode.get().fieldType
+	}
+
+	override fun updatePrefs(prefsChanged: Boolean) {
+		super.updatePrefs(prefsChanged)
+		val averageTimeSeconds = 0
+		val typeWidget = getFieldType()
+
+		if (prefsChanged) {
+			if (widgetComputer.type != typeWidget && widgetComputer.averageTimeSeconds != 0) {
+				OBDDataComputer.removeWidget(widgetComputer)
+			}
+			widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
+		}
+
+		updateSimpleWidgetInfo(null)
 	}
 
 	private fun registerRemainingFuelPref(customId: String?): OsmandPreference<RemainingFuelMode> {
@@ -50,31 +63,6 @@ class OBDRemainingFuelWidget(
 		)
 			.makeProfile()
 			.cache()
-	}
-
-	override fun updatePrefs() {
-		super.updatePrefs()
-		val averageTimeSeconds = 0
-		val typeWidget = getFieldType()
-
-		OBDDataComputer.removeWidget(widgetComputer)
-		widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
-
-		updateSimpleWidgetInfo(null)
-	}
-
-	override fun getWidgetName(): String? {
-		val widgetName = if (widgetType != null) getString(widgetType.titleId) else null
-
-		if (supportsAverageMode() && !Algorithms.isEmpty(widgetName) && averageModePref?.get() == true) {
-			val formattedInterval = formatIntervals(app, measuredIntervalPref!!.get())
-			return app.getString(
-				R.string.ltr_or_rtl_combine_via_colon,
-				widgetName,
-				formattedInterval
-			)
-		}
-		return widgetName
 	}
 
 	enum class RemainingFuelMode(
