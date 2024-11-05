@@ -1480,7 +1480,7 @@
     <string name="mapillary_menu_descr_tile_cache">Поново учитај плочице да видиш најсвежије податке.</string>
     <string name="mapillary_menu_title_tile_cache">Захват плочица</string>
     <string name="wrong_user_name">Погрешно корисничко име</string>
-    <string name="shared_string_to">Ка</string>
+    <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">Од</string>
     <string name="mapillary_menu_descr_dates">Прегледај само додате слике</string>
     <string name="shared_string_date">Дан</string>
@@ -4875,7 +4875,7 @@
     <string name="tracks_empty_folder_description">Ова фасцикла још увек не садржи икакав траг.</string>
     <string name="tracks_empty_folder">Празна фасцикла</string>
     <string name="map_3d_mode_description">Додирните карту двома прстима и преместите их навише и наниже ради прилагођавања нагиба карте.</string>
-    <string name="shared_string_visible_on_map">Видљиво на карти</string>
+    <string name="shared_string_visible_on_map">Видљиво на мапи</string>
     <string name="no_poi_for_category">Није пронађена тачка занимања</string>
     <string name="rendering_value_sector2_name">Одсечак 2</string>
     <string name="rendering_value_sector3_name">Одсечак 3</string>
@@ -4904,7 +4904,7 @@
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>
     <string name="map_3d_mode_hint">Дуги тап дугмета омогућава промену положаја дугмета.</string>
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
-    <string name="revolutions_per_minute_unit">Обртаја у минути</string>
+    <string name="revolutions_per_minute_unit">ОУМ</string>
     <string name="calculate_offline">Израчунај ван мреже</string>
     <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
     <string name="shared_string_included">Обухваћено</string>
@@ -5094,7 +5094,7 @@
     <string name="clear_key_assignment_desc">Додела тастера за одабрану активност биће уклоњена и постављена на \"Ниједна\".</string>
     <string name="key_assignments">Додељивање тастера</string>
     <string name="battery_optimization_banner_content">Побољшавање учинка батерије андроида може довести до пропуста и нетачности снимљених трагова.</string>
-    <string name="max_sensor_heartrate">Број откуцаја, макс</string>
+    <string name="max_sensor_heartrate">Број откуцаја срца, макс</string>
     <string name="avg_sensor_cadence">Ритам бицикла, просечно</string>
     <string name="avg_sensor_temperature">Температура, просечно</string>
     <string name="max_sensor_speed">Сензор брзине, макс</string>
@@ -5131,7 +5131,7 @@
     <string name="shared_string_button">Дугме</string>
     <string name="shared_string_action">Акција</string>
     <string name="key_event_category_map_interactions">Интеракције са мапом</string>
-    <string name="avg_sensor_heartrate">Број откуцаја, просечно</string>
+    <string name="avg_sensor_heartrate">Број откуцаја срца, просечно</string>
     <string name="max_sensor_cadence">Ритам бицикла, макс</string>
     <string name="max_sensor_bycicle_power">Снага бицикла, макс</string>
     <string name="avg_sensor_bycicle_power">Снага бицикла, просечно</string>
@@ -5205,7 +5205,7 @@
     <string name="save_as_smart_folder">Сачувај као паметан фолдер</string>
     <string name="sort_size_descending">Прво велика величина</string>
     <string name="app_mode_hang_gliding">Парагаљдинг</string>
-    <string name="with_waypoints">Са тачкама путање</string>
+    <string name="with_waypoints">Са међутачкама</string>
     <string name="shared_string_reset_all">Ресетуј све</string>
     <string name="relief_3d">3Д рељеф</string>
     <string name="there_are_no_connected_sensors_of_this_type">Нема повезаних сензора овог типа</string>
@@ -5658,4 +5658,5 @@
     <string name="fuel_tank_capacity_description">Унесите капацитет резервоара да бисте прецизно пратили нивое горива и потрошњу</string>
     <string name="imperial_gallons_unit">imp gal</string>
     <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
+    <string name="record_obd_data">Сними метрику возила</string>
 </resources>

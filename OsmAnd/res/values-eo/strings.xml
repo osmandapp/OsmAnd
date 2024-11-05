@@ -6000,4 +6000,20 @@
     <string name="speedometer_maximum">Maksimumo</string>
     <string name="obd_throttle_position">Pozicio de brulaĵ-valvo</string>
     <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_level_percent">Nivelo de brulaĵo (%)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Konsumo de brulaĵo (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Konsumo de brulaĵo (sentilo)</string>
+    <string name="obd_fuel_level_liter">Nivelo de brulaĵo (l)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/h)</string>
+    <string name="obd_fuel_left_liter">Resta brulaĵo (l)</string>
+    <string name="obd_fuel_left_km">Resta brulaĵo (km)</string>
+    <string name="obd_calculated_engine_load_desc">Montras kalkulitan ŝarĝon de motoro laŭ sentilo</string>
+    <string name="obd_engine_oil_temperature_desc">Montras temperaturon de motoroleo raportatan de OBD-sentilo</string>
+    <string name="obd_fuel_left_percent">Resta brulaĵo (%)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Konsumo de brulaĵo (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo (l/h)</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Montras konsumon de brulaĵo de via veturilo surbaze de sentilo (l/h)</string>
+    <string name="obd_engine_oil_temperature">Temperaturo de motoroleo</string>
+    <string name="liter">l</string>
 </resources>

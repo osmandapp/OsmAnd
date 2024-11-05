@@ -4922,7 +4922,7 @@
     <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på data fra terrænkort (3D). Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
     <string name="error_calculate">Beregningsresultatet er tomt</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="revolutions_per_minute_unit">OPM</string>
+    <string name="revolutions_per_minute_unit">O/M</string>
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort (3D)</string>
@@ -5089,10 +5089,10 @@
     <string name="app_mode_hang_gliding">Hanggliding</string>
     <string name="with_waypoints">Med rutepunkter</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Maks. højde</string>
+    <string name="max_altitude">Maks højde</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Filtrér efter navn</string>
-    <string name="shared_string_reset_all">Nulstil alt</string>
+    <string name="shared_string_reset_all">Nulstil alle</string>
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="date_of_creation">Dato for oprettelse</string>
     <string name="filter_screen_title">Filter</string>
@@ -5193,7 +5193,7 @@
     <string name="trash_is_empty">Papirkurven er tom</string>
     <string name="key_event_action_move_to_my_location">Flyt til Min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
-    <string name="not_specified">Ikke angivet</string>
+    <string name="not_specified">Ikke specificeret</string>
     <string name="download_to_device">Download til enhed</string>
     <string name="key_event_category_map_interactions">Interaktioner med kort</string>
     <string name="key_event_action_move_down">Flyt ned</string>
@@ -5236,16 +5236,16 @@
 \n
 \nHvis du oplever nogle af disse problemer, kan du prøve at ændre batteriforbruget til \'Ubegrænset\'.</string>
     <string name="battery_optimization">Batterioptimering</string>
-    <string name="max_sensor_heartrate">Puls, maks.</string>
+    <string name="max_sensor_heartrate">Puls, maks</string>
     <string name="avg_sensor_heartrate">Puls, gennemsnit</string>
     <string name="avg_sensor_speed">Sensorhastighed, gennemsnit</string>
-    <string name="max_sensor_cadence">Cykelkadence, maks.</string>
+    <string name="max_sensor_cadence">Cykelkadence, maks</string>
     <string name="avg_sensor_cadence">Cykelkadence, gennemsnit</string>
-    <string name="max_sensor_bycicle_power">Cykeleffekt, maks.</string>
-    <string name="avg_sensor_bycicle_power">Cykeleffekt, gennemsnit</string>
-    <string name="max_sensor_temperature">Temperatur, maks.</string>
+    <string name="max_sensor_bycicle_power">Cykelkraft, maks</string>
+    <string name="avg_sensor_bycicle_power">Cykelkraft, gennemsnit</string>
+    <string name="max_sensor_temperature">Temperatur, maks</string>
     <string name="avg_sensor_temperature">Temperatur, gennemsnit</string>
-    <string name="max_sensor_speed">Sensorhastighed, maks.</string>
+    <string name="max_sensor_speed">Sensorhastighed, maks</string>
     <string name="shared_string_activity">Aktivitet</string>
     <string name="shared_string_additional">Yderligere</string>
     <string name="sorted_sufolders_toast">Undermapper i “%1$s” sorteres efter: “%2$s”</string>
@@ -5545,9 +5545,9 @@
     <string name="obd_fuel_type_bifuel_hydrogen">To-brændstofkøretøj, der kører på brint</string>
     <string name="shared_string_obd">OBD (Diagnoseudtag)</string>
     <string name="obd_speed_desc">Viser køretøjets hastighed via OBD-sensor</string>
-    <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller RPM via OBD-sensor</string>
+    <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller O/M via OBD-sensor</string>
     <string name="obd_air_intake_temp_desc">Viser køretøjets indsugningslufttemperatur via OBD-sensor</string>
-    <string name="obd_rpm">RPM (Omdrejninger pr. minut)</string>
+    <string name="obd_rpm">O/M</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_engine_coolant_temp_desc">Viser motorens kølevæsketemperatur via OBD-sensor</string>
     <string name="obd_battery_voltage_desc">Viser batterispænding via OBD-sensor</string>

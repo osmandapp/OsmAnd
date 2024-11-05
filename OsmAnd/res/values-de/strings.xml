@@ -1502,7 +1502,7 @@
     <string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) zu OSM hochladen\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="shared_string_minute_lowercase">min</string>
+    <string name="shared_string_minute_lowercase">Min</string>
     <string name="osmand_parking_time_left">verbleibend</string>
     <string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
     <string name="shared_string_go">Los</string>
@@ -2383,7 +2383,7 @@
     <string name="mapillary_menu_descr_tile_cache">Kacheln neu laden, um nach Datumswerten zu suchen.</string>
     <string name="mapillary_menu_title_tile_cache">Kachelzwischenspeicher</string>
     <string name="wrong_user_name">Falscher Benutzername</string>
-    <string name="shared_string_to">Bis</string>
+    <string name="shared_string_to">Zu</string>
     <string name="mapillary_menu_date_from">Von</string>
     <string name="mapillary_menu_descr_dates">Nur hinzugefügte Bilder betrachten</string>
     <string name="shared_string_date">Datum</string>
@@ -5186,7 +5186,7 @@
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
     <string name="shared_string_new_track">Neuer Track</string>
-    <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
+    <string name="shared_string_visible_on_map">Sichtbar auf Karte</string>
     <string name="delete_track_folder_dialog_message">Dies löscht den Ordner „%1$s“ und alle %2$s darin enthaltenen Tracks.</string>
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
@@ -5199,7 +5199,7 @@
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf (3D) Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="revolutions_per_minute_unit">U/min</string>
+    <string name="revolutions_per_minute_unit">Drehzahl</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
     <string name="terrain_map">Geländekarte (3D)</string>
@@ -5430,7 +5430,7 @@
     <string name="all_folders">Alle Verzeichnisse</string>
     <string name="shared_string_show_less">Weniger anzeigen</string>
     <string name="folder">Verzeichnis</string>
-    <string name="not_specified">Nicht angegeben</string>
+    <string name="not_specified">Nicht spezifiziert</string>
     <string name="key_event_action_zoom_in">Hineinzoomen</string>
     <string name="key_event_action_change_map_orientation">Kartenorientierung ändern</string>
     <string name="press_button_to_link_with_action">Drücken Sie die Schaltfläche auf Ihrem Gerät, um sie der Aktion zuzuweisen: %1$s</string>
@@ -5564,7 +5564,7 @@
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
-    <string name="map_widget_map_scale">Kartenmaßstab</string>
+    <string name="map_widget_map_scale">Maßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
     <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
