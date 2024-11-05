@@ -146,4 +146,10 @@
     <string name="shared_string_back">Назад</string>
     <string name="shared_string_sort">Сортиране</string>
     <string name="shared_string_second_short">с</string>
+    <string name="min_mile">мин/миля</string>
+    <string name="min_km">мин/км</string>
+    <string name="si_min_km">Минути на километър</string>
+    <string name="si_min_m">Минути на миля</string>
+    <string name="shared_string_minute_short">мин</string>
+    <string name="m">м</string>
 </resources>
