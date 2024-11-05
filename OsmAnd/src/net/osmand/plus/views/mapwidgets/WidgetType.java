@@ -1,11 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
@@ -30,26 +29,13 @@ import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseResizableWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.*;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum WidgetType {
@@ -385,6 +371,8 @@ public enum WidgetType {
 			return new AverageGlideWidgetSettingsFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
 			return new ZoomLevelSettingsFragment();
+		} else if (this == LANES) {
+			return new LanesWidgetSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
