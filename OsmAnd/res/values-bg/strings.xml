@@ -1575,7 +1575,7 @@
     <string name="si_min_m">Минути на миля</string>
     <string name="si_nm_h">Морски мили в час (възли)</string>
     <string name="nm_h">вз.</string>
-    <string name="min_mile">мин/м</string>
+    <string name="min_mile">мин/миля</string>
     <string name="map_legend">Легенда на картата</string>
     <string name="shared_string_contact">За контакт</string>
     <string name="share_osm_edits_subject">OSM редакции, споделени чрез OsmAnd</string>
@@ -2081,7 +2081,7 @@
     <string name="select_shape">Изберете форма</string>
     <string name="shared_string_circle">Кръг</string>
     <string name="shared_string_octagon">Осмоъгълник</string>
-    <string name="shared_string_min">Мин.</string>
+    <string name="shared_string_min">Мин</string>
     <string name="ui_customization">Персонализиране на потребителския интерфейс</string>
     <string name="context_menu_actions">Действия в контекстното меню</string>
     <string name="reorder_or_hide_from">Преподреждане или скриване на елементи от %1$s.</string>
@@ -3830,7 +3830,7 @@
     <string name="free_versions_descr">Изтеглете и инсталирайте безплатната версия на OsmAnd</string>
     <string name="shared_string_checked">Отметнато</string>
     <string name="shared_string_avoid">Избягване</string>
-    <string name="max_altitude">Макс. надм. височина</string>
+    <string name="max_altitude">Максимална надморска височина</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Среден коефициент на планиране</string>
     <string name="free_versions">Безплатни издания</string>
@@ -4384,7 +4384,7 @@
     <string name="obd_fuel_type_hydrogen">Водород</string>
     <string name="obd_fuel_type_unknown">Неизвестен вид гориво</string>
     <string name="obd_widget_group">Показатели превозно средство</string>
-    <string name="obd_rpm">Обороти</string>
+    <string name="obd_rpm">об/мин</string>
     <string name="obd_ambient_air_temp_desc">Показва температурата на околната среда спрямо сензора на OBD</string>
     <string name="obd_rpm_desc">Показва оборотите на тахометъра спрямо сензора на OBD</string>
     <string name="obd_speed_desc">Показва скоростта на превозното средство спрямо сензора на OBD</string>
@@ -4432,4 +4432,21 @@
     <string name="vehicle_metrics_plugin_settings">Настройки показатели превозно средство</string>
     <string name="obd_widget_vehicle_speed">Скорост на превозното средство</string>
     <string name="obd_widget_engine_speed">Скорост на двигателя</string>
+    <string name="not_specified">Не е избрано</string>
+    <string name="avg_sensor_speed">Сензор скорост, средна</string>
+    <string name="avg_sensor_heartrate">Пулс, средно</string>
+    <string name="discard_filter_changes_prompt">Нулиране на филтрите?</string>
+    <string name="min_max">Макс/мин</string>
+    <string name="power_watts_unit">Ватове</string>
+    <string name="all_folders">Всички папки</string>
+    <string name="max_sensor_cadence">Вело каданс, макс</string>
+    <string name="max_sensor_heartrate">Пулс, макс</string>
+    <string name="avg_sensor_cadence">Вело каданс, средно</string>
+    <string name="max_sensor_bycicle_power">Вело мощност, макс</string>
+    <string name="revolutions_per_minute_unit">об/мин</string>
+    <string name="max_min">Макс/мин</string>
+    <string name="root_folder">Коренова папка</string>
+    <string name="max_sensor_speed">Сензор скорост, макс</string>
+    <string name="avg_sensor_bycicle_power">Вело мощност, средно</string>
+    <string name="max_sensor_temperature">Температура, макс</string>
 </resources>
