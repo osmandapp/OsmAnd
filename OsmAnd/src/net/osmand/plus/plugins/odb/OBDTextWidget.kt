@@ -6,6 +6,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget
+import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
@@ -14,7 +15,7 @@ import net.osmand.util.Algorithms
 class OBDTextWidget(
 	mapActivity: MapActivity,
 	widgetType: WidgetType,
-	fieldType: OBDTypeWidget,
+	private val fieldType: OBDTypeWidget,
 	customId: String?,
 	widgetsPanel: WidgetsPanel?) :
 	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel) {
@@ -55,5 +56,9 @@ class OBDTextWidget(
 	init {
 		updateInfo(null)
 		setIcons(widgetType)
+	}
+
+	fun getWidgetOBDCommand(): OBDCommand {
+		return  fieldType.requiredCommand
 	}
 }
