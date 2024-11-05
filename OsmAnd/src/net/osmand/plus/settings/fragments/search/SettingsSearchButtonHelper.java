@@ -47,13 +47,13 @@ public class SettingsSearchButtonHelper {
 								R.raw.preferences,
 								R.raw.preference_path_by_preference,
 								R.raw.host_by_preference),
-						MergedPreferenceScreenDataMode.PERSIST)
+						MergedPreferenceScreenDataMode.LOAD)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
-				.withIsPreferenceSearchable(new IsPreferenceSearchable())
+				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 				.build();
 	}
 

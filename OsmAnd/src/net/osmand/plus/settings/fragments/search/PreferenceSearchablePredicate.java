@@ -7,7 +7,7 @@ import net.osmand.plus.R;
 
 import java.util.Set;
 
-class IsPreferenceSearchable implements de.KnollFrank.lib.settingssearch.provider.IsPreferenceSearchable {
+class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.provider.PreferenceSearchablePredicate {
 
 	private static final Set<Integer> NON_SEARCHABLE_LAYOUT_RESIDS =
 			Set.of(
