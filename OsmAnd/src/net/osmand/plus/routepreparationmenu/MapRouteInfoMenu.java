@@ -468,9 +468,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					fragment.updateInfo();
 					if (!routeCalculationInProgress) {
 						fragment.hideRouteCalculationProgressBar();
-						if (!app.getOsmandMap().getMapView().isCarView()) {
-							openMenuAfterCalculation(fragment, app);
-						}
+						openMenuAfterCalculation(fragment, app);
 					}
 				}
 			}
