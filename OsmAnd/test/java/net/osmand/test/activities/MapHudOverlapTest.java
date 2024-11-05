@@ -50,7 +50,7 @@ public class MapHudOverlapTest extends AndroidTest {
 		super.setup();
 
 		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
-		for (QuickActionButtonState buttonState : buttonsHelper.getButtonsStates()) {
+		for (QuickActionButtonState buttonState : buttonsHelper.getQuickActionButtonsStates()) {
 			buttonsHelper.setQuickActionFabState(buttonState, true);
 		}
 		for (MapButtonState buttonState : buttonsHelper.getDefaultButtonsStates()) {

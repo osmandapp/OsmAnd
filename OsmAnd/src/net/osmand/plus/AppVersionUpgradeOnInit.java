@@ -49,6 +49,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.resources.migration.MergeAssetFilesVersionAlgorithm;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -136,8 +137,10 @@ public class AppVersionUpgradeOnInit {
 	// 4801 - 4.8-01 (Migrate north is up compass mode to manually rotated)
 	public static final int VERSION_4_8_01 = 4801;
 	public static final int VERSION_4_8_02 = 4802;
+	// 4803 - 4.8-03 (Merge asset files versions)
+	public static final int VERSION_4_8_03 = 4803;
 
-	public static final int LAST_APP_VERSION = VERSION_4_8_02;
+	public static final int LAST_APP_VERSION = VERSION_4_8_03;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -184,15 +187,10 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")
 						|| Version.getAppVersion(app).equals("3.5.4")) {
 					migratePreferences();
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-							if (event == FAVORITES_INITIALIZED) {
-								migrateHomeWorkParkingToFavorites();
-							}
-						}
-					});
+					app.getAppInitializer().addOnProgressListener(
+							FAVORITES_INITIALIZED,
+							init -> migrateHomeWorkParkingToFavorites()
+					);
 				}
 				if (prevAppVersion < VERSION_3_6) {
 					migratePreferences();
@@ -201,27 +199,18 @@ public class AppVersionUpgradeOnInit {
 					migrateEnumPreferences();
 				}
 				if (prevAppVersion < VERSION_3_7_01) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
-							if (event == FAVORITES_INITIALIZED) {
-								app.getFavoritesHelper().fixBlackBackground();
-							}
-						}
-					});
+					app.getAppInitializer().addOnProgressListener(
+							FAVORITES_INITIALIZED,
+							init -> app.getFavoritesHelper().fixBlackBackground()
+					);
 				}
 				if (prevAppVersion < VERSION_3_8_00) {
 					migrateQuickActionStates();
 				}
 				if (prevAppVersion < VERSION_4_0_00) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onStart(@NonNull AppInitializer init) {
-							new MarkersDb39HelperLegacy(app).migrateMarkersGroups();
-						}
-					});
+					app.getAppInitializer().addOnStartListener(
+							init -> new MarkersDb39HelperLegacy(app).migrateMarkersGroups()
+					);
 				}
 				if (prevAppVersion < VERSION_4_0_03) {
 					migrateStateDependentWidgets();
@@ -255,7 +244,7 @@ public class AppVersionUpgradeOnInit {
 					migrateQuickActionButtons();
 				}
 				if (prevAppVersion < VERSION_4_7_01) {
-					ColorsMigrationAlgorithmV1.doMigration(app);
+					ColorsMigrationAlgorithmV1.execute(app);
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);
@@ -264,21 +253,14 @@ public class AppVersionUpgradeOnInit {
 					migrateLocalSorting(settings);
 				}
 				if (prevAppVersion < VERSION_4_7_04) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-
-						@Override
-						public void onStart(@NonNull AppInitializer init) {
-							migrateProfileQuickActionButtons();
-						}
-					});
+					app.getAppInitializer().addOnStartListener(
+							appInitializer -> migrateProfileQuickActionButtons()
+					);
 				}
 				if (prevAppVersion < VERSION_4_7_05) {
-					app.getAppInitializer().addListener(new AppInitializeListener() {
-						@Override
-						public void onFinish(@NonNull AppInitializer init) {
-							ColorsMigrationAlgorithmV2.doMigration(app);
-						}
-					});
+					app.getAppInitializer().addOnFinishListener(
+							init -> ColorsMigrationAlgorithmV2.execute(app)
+					);
 				}
 				if (prevAppVersion < VERSION_4_7_07) {
 					migrate3DModelKey(settings);
@@ -288,6 +270,11 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_8_02) {
 					migrateTerrainModeDefaultPreferences(settings);
+				}
+				if (prevAppVersion < VERSION_4_8_03) {
+					app.getAppInitializer().addOnFinishListener(
+							init -> MergeAssetFilesVersionAlgorithm.execute(app)
+					);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();

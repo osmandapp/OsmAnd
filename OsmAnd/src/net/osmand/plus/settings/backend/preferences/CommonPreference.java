@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.preferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SettingsAPI;
@@ -155,7 +156,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return valueSaved;
 	}
 
-	public T getProfileDefaultValue(ApplicationMode mode) {
+	public T getProfileDefaultValue(@Nullable ApplicationMode mode) {
 		if (global) {
 			return defaultValue;
 		}
@@ -182,7 +183,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	public T getDefaultValue() {
-		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		return getProfileDefaultValue(getApplicationMode());
 	}
 
 	@Override
@@ -191,7 +192,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public T getModeValue(ApplicationMode mode) {
+	public T getModeValue(@Nullable ApplicationMode mode) {
 		if (global) {
 			return get();
 		} else if (mode == null) {
@@ -221,7 +222,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public final void resetToDefault() {
-		T o = getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		T o = getProfileDefaultValue(getApplicationMode());
 		set(o);
 	}
 
@@ -293,6 +294,14 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return pluginId != null ? PluginsHelper.getPlugin(pluginId) : null;
 	}
 
+	public boolean isNullSupported() {
+		return isNullSupported(getApplicationMode());
+	}
+
+	public boolean isNullSupported(@NonNull ApplicationMode mode) {
+		return isGlobal() ? getDefaultValue() == null : getProfileDefaultValue(mode) == null;
+	}
+
 	protected String getLastModifiedTimeId() {
 		return id + "_last_modified";
 	}
@@ -337,7 +346,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public final String asStringModeValue(ApplicationMode m) {
+	public final String asStringModeValue(@Nullable ApplicationMode m) {
 		T v = getModeValue(m);
 		return toString(v);
 	}
