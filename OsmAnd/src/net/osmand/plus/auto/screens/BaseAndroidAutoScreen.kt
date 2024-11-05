@@ -105,9 +105,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 					mapRect.bottom,
 					tileBox.pixWidth,
 					tileBox.pixHeight,
-					0,
-					0,
-					true
+					0
 				)
 				mapView.refreshMap()
 			}
