@@ -915,7 +915,7 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
-		StringBuilder result = new StringBuilder(LTR_MARK);
+		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
@@ -998,6 +998,7 @@ public class OsmAndFormatter {
 		return sb.toString();
 	}
 
+	// TODO do we need this method at all?
 	public static String markLTR(String text) {
 		return LTR_MARK + text;
 	}
