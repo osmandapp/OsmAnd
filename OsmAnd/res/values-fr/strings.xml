@@ -5632,7 +5632,7 @@
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
     <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
     <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
-    <string name="obd_throttle_position">Position de l\'aiguille</string>
+    <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
     <string name="obd_fuel_pressure_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanneur obd</string>
     <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
@@ -5656,4 +5656,5 @@
     <string name="us_gallons">Gallons américains</string>
     <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
     <string name="unit_of_volume">Unité de volume</string>
+    <string name="wunderlinq_datagrid">Grille de données WunderLINQ</string>
 </resources>
