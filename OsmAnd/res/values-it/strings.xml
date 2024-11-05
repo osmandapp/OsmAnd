@@ -5931,4 +5931,12 @@
     <string name="percent_unit">%</string>
     <string name="obd_rpm">Giri/minuto</string>
     <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
+    <string name="fuel_tank_capacity_description">Inserisci la capacità del serbatoio per monitorare con precisione i livelli di carburante e il consumo</string>
+    <string name="fuel_tank_capacity">Capacità serbatoio</string>
+    <string name="shared_strings_dimensions">Dimensioni</string>
+    <string name="litres">Litri</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galloni imperiali</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons">Galloni americani</string>
 </resources>
