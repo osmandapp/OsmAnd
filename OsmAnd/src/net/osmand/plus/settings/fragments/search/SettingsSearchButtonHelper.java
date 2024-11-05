@@ -54,6 +54,7 @@ public class SettingsSearchButtonHelper {
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
+				.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
 				.build();
 	}
 
