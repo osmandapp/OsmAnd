@@ -65,7 +65,7 @@ public class RoutingConfiguration {
 	public long routeCalculationTime = 0;
 
 	// 1.6.1. Apply "unlimited" :conditional tags (used by HHRoutingShortcutCreator)
-	public Map<String, String> boostConditionalTags;
+	public Map<String, String> ambiguousConditionalTags;
 	
 	// 1.7 Maximum visited segments
 	public int MAX_VISITED = -1;

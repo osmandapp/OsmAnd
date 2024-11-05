@@ -533,19 +533,22 @@ public class RouteDataObject {
 
 	public static final String RULE_INT_MAX = "RULE_INT_MAX";
 
-	public void applyBoostedConditionalTags(Map<String, String> boostConditionalTags) {
-		Map<String, Integer> intValues = new HashMap<>();
+	public void resolveAmbiguousConditionalTags(Map<String, String> ambiguousConditionalTags) {
+		Map<String, Integer> existingIntValues = new HashMap<>();
+
+		// Find corresponding non-conditional tags and save their existing int-values.
+		// Example: maxspeed:conditional (RULE_INT_MAX) will save the value of maxspeed.
 		for (int type : types) {
 			RouteTypeRule r = region.quickGetEncodingRule(type);
-			if (r != null) {
-				String key = r.getTag();
-				String rule = boostConditionalTags.get(key);
+			if (r != null && !r.conditional()) {
+				String key = r.getTag() + ":conditional";
+				String rule = ambiguousConditionalTags.get(key);
 				if (rule != null && RULE_INT_MAX.equals(rule)) {
 					try {
 						Integer newValue = Integer.parseInt(r.getValue());
-						Integer oldValue = intValues.get(key);
+						Integer oldValue = existingIntValues.get(key);
 						if (oldValue == null || newValue > oldValue) {
-							intValues.put(key, newValue);
+							existingIntValues.put(key, newValue);
 						}
 					} catch (NumberFormatException e) {
 						continue;
@@ -553,19 +556,23 @@ public class RouteDataObject {
 				}
 			}
 		}
+
+		// Find conditionals and update their non-conditionals by the rules.
+		// Example: access:conditional ("yes") will always set "access" = "yes"
+		// Example: maxspeed:conditional (RULE_INT_MAX) might set maxspeed = max(existing, conditional)
 		for (int type : types) {
 			RouteTypeRule r = region.quickGetEncodingRule(type);
 			if (r != null && r.conditional()) {
-				String key = r.getNonConditionalTag();
-				String rule = boostConditionalTags.get(key);
+				String key = r.getTag();
+				String rule = ambiguousConditionalTags.get(key);
 				if (rule != null && RULE_INT_MAX.equals(rule)) {
-					Integer existingValue = intValues.get(key);
+					Integer existingValue = existingIntValues.get(key);
 					Integer newValue = r.getMaxIntegerConditionalValue();
 					if (newValue != null && (existingValue == null || newValue > existingValue)) {
-						updateTypesByTagValue(key, newValue.toString());
+						updateTypesByTagValue(r.getNonConditionalTag(), newValue.toString()); // Math.max value
 					}
 				} else if (rule != null) {
-					updateTypesByTagValue(key, rule);
+					updateTypesByTagValue(r.getNonConditionalTag(), rule); // Default rule: set the string value
 				}
 			}
 		}

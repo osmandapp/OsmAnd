@@ -299,11 +299,11 @@ public class RoutingContext {
 				} else {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
+							if (config.ambiguousConditionalTags != null) {
+								ro.resolveAmbiguousConditionalTags(config.ambiguousConditionalTags);
+							}
 							if (config.routeCalculationTime != 0) {
 								ro.processConditionalTags(config.routeCalculationTime);
-							}
-							if (config.boostConditionalTags != null) {
-								ro.applyBoostedConditionalTags(config.boostConditionalTags);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
