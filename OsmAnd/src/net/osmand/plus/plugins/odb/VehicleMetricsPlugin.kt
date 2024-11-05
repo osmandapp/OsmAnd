@@ -38,6 +38,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
 import net.osmand.plus.utils.BLEUtils.getAliasName
+import net.osmand.plus.utils.BLEUtils.getAliasNameOrNull
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
@@ -427,7 +428,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				socket?.apply {
 					connect()
 					if (isConnected) {
-						processDeviceConnected(deviceToConnect, inputStream.source(), outputStream.sink())
+						processDeviceConnected(
+							deviceToConnect,
+							inputStream.source(),
+							outputStream.sink())
 					} else {
 						LOG.error("Socket not connected")
 						onDisconnected(deviceToConnect)
@@ -611,11 +615,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 				device?.let { receivedDevice ->
 					when (intent.action) {
 						BluetoothDevice.ACTION_FOUND -> {
-							if (receivedDevice.bondState != BluetoothDevice.BOND_BONDED) {
-								scanDevicesListener?.onDeviceFound(
-									BTDeviceInfo(
-										receivedDevice.getAliasName(
-											context), receivedDevice.address))
+							val deviceName = receivedDevice.getAliasNameOrNull()
+							deviceName?.let { name ->
+								if (receivedDevice.bondState != BluetoothDevice.BOND_BONDED) {
+									scanDevicesListener?.onDeviceFound(
+										BTDeviceInfo(
+											name,
+											receivedDevice.address))
+								}
 							}
 						}
 
@@ -717,10 +724,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
 
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(data as Number)
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(data as Number)
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(
+				data as Number)
+
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(
+				data as Number)
 
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
@@ -748,7 +759,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.THROTTLE_POSITION,
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT -> app.getString(R.string.percent_unit)
 
-			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
+			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> settings.UNIT_OF_VOLUME.get()
+				.getUnitSymbol(app)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> app.getString(R.string.percent_hour)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHourUnit()
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR -> app.getString(R.string.liter_per_hour)
@@ -768,7 +781,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	private fun getFormattedVolume(data: Number): Float {
-		return OsmAndFormatter.convertLiterToVolumeUnit(settings.UNIT_OF_VOLUME.get(), data.toFloat())
+		return OsmAndFormatter.convertLiterToVolumeUnit(
+			settings.UNIT_OF_VOLUME.get(),
+			data.toFloat())
 	}
 
 	private fun getConvertedTemperature(data: Number): Float {
@@ -788,13 +803,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	private fun getFormatVolumePerDistanceUnit(): String {
 		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
-		val distanceUnit : String = when (mc) {
+		val distanceUnit: String = when (mc) {
 			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
 				app.getString(R.string.mile)
 			}
+
 			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
 				app.getString(R.string.nm)
 			}
+
 			else -> {
 				app.getString(R.string.km)
 			}
@@ -804,18 +821,21 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
-		val volumeResult : Float
+		val volumeResult: Float
 		val volumeUnit = settings.UNIT_OF_VOLUME.get()
-		volumeResult = OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, litersPer100km.toFloat())
+		volumeResult =
+			OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, litersPer100km.toFloat())
 
 		val mc: MetricsConstants = settings.METRIC_SYSTEM.get()
 		return when (mc) {
 			MetricsConstants.MILES_AND_YARDS, MetricsConstants.MILES_AND_FEET, MetricsConstants.MILES_AND_METERS -> {
 				volumeResult * OsmAndFormatter.METERS_IN_ONE_MILE
 			}
+
 			MetricsConstants.NAUTICAL_MILES_AND_FEET, MetricsConstants.NAUTICAL_MILES_AND_METERS -> {
 				volumeResult * OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE
 			}
+
 			else -> {
 				volumeResult
 			}
@@ -824,7 +844,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	private fun getFormatVolumePerHour(literPerHour: Number): Float {
 		val volumeUnit = settings.UNIT_OF_VOLUME.get()
-		return  OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, literPerHour.toFloat())
+		return OsmAndFormatter.convertLiterToVolumeUnit(volumeUnit, literPerHour.toFloat())
 	}
 
 	private fun getFormattedTime(time: Int): String {
@@ -888,6 +908,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						dataField?.value)
 				}
 			}
+		}
+	}
+
+	override fun onCarNavigationSessionCreated() {
+		super.onCarNavigationSessionCreated()
+		val activity = mapActivity
+		val lastConnectedDevice = getLastConnectedDevice()
+		if (currentConnectingState == OBDConnectionState.DISCONNECTED && lastConnectedDevice != null && activity != null) {
+			connectToObd(activity, lastConnectedDevice)
 		}
 	}
 }

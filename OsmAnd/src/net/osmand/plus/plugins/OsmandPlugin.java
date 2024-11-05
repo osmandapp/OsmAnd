@@ -320,7 +320,7 @@ public abstract class OsmandPlugin {
 	}
 
 	@Nullable
-	public GetImageCardsListener getImageCardsListener(){
+	public GetImageCardsListener getImageCardsListener() {
 		return null;
 	}
 
@@ -555,5 +555,9 @@ public abstract class OsmandPlugin {
 
 	public boolean isMapPositionIconNeeded() {
 		return false;
+	}
+
+	public void onCarNavigationSessionCreated() {
+
 	}
 }

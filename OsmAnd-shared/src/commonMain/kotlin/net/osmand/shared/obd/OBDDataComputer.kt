@@ -443,7 +443,7 @@ object OBDDataComputer {
 	}
 
 	private fun getFuelTank(): Float {
-		val fuelTank = osmAndSettings.getAppModeFloatPreference(FUEL_TANK_CAPACITY_SETTING_ID)
+		val fuelTank = osmAndSettings.getFloatPreference(FUEL_TANK_CAPACITY_SETTING_ID)
 		return fuelTank ?: DEFAULT_FUEL_TANK_CAPACITY
 	}
 }

@@ -5583,12 +5583,12 @@
     <string name="screen_is_locked_by_external_button">L\'écran tactile est verrouillé. Pour le déverrouiller, utilisez le bouton %1$s ou appuyez sur le bouton à l\'écran.</string>
     <string name="obd_vehicle_info">Informations du véhicule</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step2">2. Allumez le moteur de votre véhicule</string>
+    <string name="connect_obd_instructions_step2">Allumez le moteur de votre véhicule</string>
     <string name="connect_obd_instructions_title">OsmAnd supporte les connexions Bluetooth à des scanneurs OBD-II.</string>
     <string name="obd_how_to_connect">Comment se connecter :</string>
-    <string name="connect_obd_instructions_step1">1. Connectez le scanneur au port OBD-II de votre véhicule.</string>
-    <string name="connect_obd_instructions_step3">3. Activez le Bluetooth sur votre appareil</string>
-    <string name="connect_obd_instructions_step4">4. Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
+    <string name="connect_obd_instructions_step1">Connectez le scanneur au port OBD-II de votre véhicule.</string>
+    <string name="connect_obd_instructions_step3">Activez le Bluetooth sur votre appareil</string>
+    <string name="connect_obd_instructions_step4">Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
     <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
     <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
     <string name="route_guidance">Guidage routier</string>
