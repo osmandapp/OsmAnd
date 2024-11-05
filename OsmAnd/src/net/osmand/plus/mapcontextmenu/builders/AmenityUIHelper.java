@@ -9,14 +9,14 @@ import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
-import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
-import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
-import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_YARDS;
-import static net.osmand.shared.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_FEET;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKIPEDIA;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
+import static net.osmand.shared.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
+import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_YARDS;
+import static net.osmand.shared.settings.enums.MetricsConstants.NAUTICAL_MILES_AND_FEET;
 import static net.osmand.util.Algorithms.isUrl;
 
 import android.content.Context;
@@ -38,9 +38,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
-import net.osmand.data.LatLon;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -53,7 +53,6 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -63,6 +62,7 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -72,21 +72,8 @@ import org.apache.commons.logging.Log;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
 
 
 public class AmenityUIHelper extends MenuBuilder {
@@ -309,8 +296,8 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@Nullable
 	private AmenityInfoRow createAmenityInfoRow(@NonNull Context context,
-		                                        @NonNull String key, @NonNull String vl,
-		                                        @Nullable CollapsableView collapsableView) {
+	                                            @NonNull String key, @NonNull String vl,
+	                                            @Nullable CollapsableView collapsableView) {
 		if (key.startsWith(COLLAPSABLE_PREFIX) || key.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
 			return null;
 		}
@@ -625,7 +612,11 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Nullable
 	private String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
-		StringBuilder sb = new StringBuilder(value.trim());
+		value = value.trim();
+		if (Algorithms.isEmpty(value)) {
+			return null;
+		}
+		StringBuilder sb = new StringBuilder(value);
 		if (sb.charAt(0) == '/') {
 			sb.deleteCharAt(0);
 		}
@@ -648,11 +639,11 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
 
-		if (urls.containsKey(key)) {
-			return String.format(urls.get(key), value);
-		} else {
-			return null;
+		String url = urls.get(key);
+		if (url != null) {
+			return String.format(url, value);
 		}
+		return null;
 	}
 
 	private String getFormattedInt(String value) {
