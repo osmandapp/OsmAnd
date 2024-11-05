@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import java.util.Calendar;
 
@@ -97,6 +98,17 @@ public class InAppPurchaseUtils {
 				|| checkDeveloperBuildIfNeeded(app, true)
 				|| isHugerockPromoAvailable(app)
 				|| isTripltekPromoAvailable(app);
+	}
+
+	public static boolean isWidgetPurchased(@NonNull OsmandApplication app, @NonNull WidgetType wt) {
+		if (wt.isProWidget()) {
+			return wt.isOBDWidget() ? isVehicleMetricsAvailable(app) : isProWidgetsAvailable(app);
+		}
+		return true;
+	}
+
+	public static boolean isVehicleMetricsAvailable(@NonNull OsmandApplication app) {
+		return isOsmAndProAvailable(app);
 	}
 
 	public static boolean isProWidgetsAvailable(@NonNull OsmandApplication app) {

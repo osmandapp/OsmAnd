@@ -39,6 +39,7 @@ import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
@@ -329,7 +330,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			stateTv.setText(R.string.shared_string_disabled);
 		}
 		AndroidUiHelper.updateVisibility(proIv, !isColoringTypeAvailable());
-		proIv.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+		proIv.setImageResource(PurchasingUtils.getProFeatureIconId(nightMode));
 
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);

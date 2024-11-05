@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.plus.R;
@@ -18,16 +17,17 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 
 public class WidgetPromoBanner extends MapBaseCard {
 
-	private final WidgetData widgetData;
+	private final WidgetType widget;
 
 	public WidgetPromoBanner(@NonNull MapActivity mapActivity,
-	                         @NonNull WidgetData widgetData,
+	                         @NonNull WidgetType widget,
 	                         boolean usedOnMap) {
 		super(mapActivity, usedOnMap);
-		this.widgetData = widgetData;
+		this.widget = widget;
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class WidgetPromoBanner extends MapBaseCard {
 		ImageView ivWidgetIcon = view.findViewById(R.id.widget_icon);
 		ImageView ivPlanIcon = view.findViewById(R.id.subscription_plan_icon);
 
-		tvTitle.setText(widgetData.getTitleId());
-		ivWidgetIcon.setImageResource(widgetData.getIconId(nightMode));
+		tvTitle.setText(widget.titleId);
+		ivWidgetIcon.setImageResource(widget.getIconId(nightMode));
 
 		String subscription = app.getString(R.string.osmand_pro);
 		String description = app.getString(R.string.available_as_part_of_subscription_plan, subscription);
@@ -51,7 +51,6 @@ public class WidgetPromoBanner extends MapBaseCard {
 		ivPlanIcon.setImageResource(getProIconId());
 
 		View container = view.findViewById(R.id.banner_container);
-		View btn = view.findViewById(R.id.button_container);
 		int resId = nightMode ? R.drawable.ripple_solid_dark_6dp : R.drawable.ripple_solid_light_6dp;
 		Drawable selected = AppCompatResources.getDrawable(app, resId);
 		AndroidUtils.setBackground(container, selected);
@@ -59,12 +58,15 @@ public class WidgetPromoBanner extends MapBaseCard {
 		View shield = view.findViewById(R.id.get_button);
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int color = ColorUtilities.getColorWithAlpha(activeColor, 0.3f);
-		Drawable shieldBg = app.getDrawable(R.drawable.btn_background_inactive_light);
+		Drawable shieldBg = AppCompatResources.getDrawable(app, R.drawable.btn_background_inactive_light);
 		shieldBg = UiUtilities.tintDrawable(shieldBg, color);
 		AndroidUtils.setBackground(shield, shieldBg);
 
 		container.setOnClickListener(v -> {
-			ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
+			OsmAndFeature feature = widget.isOBDWidget()
+					? OsmAndFeature.VEHICLE_METRICS
+					: OsmAndFeature.ADVANCED_WIDGETS;
+			ChoosePlanFragment.showInstance(mapActivity, feature);
 		});
 	}
 
@@ -74,27 +76,4 @@ public class WidgetPromoBanner extends MapBaseCard {
 				R.drawable.ic_action_osmand_pro_logo_colored_night :
 				R.drawable.ic_action_osmand_pro_logo_colored;
 	}
-
-	public static class WidgetData {
-		private int titleId;
-		private int icDay;
-		private int icNight;
-
-		public WidgetData(int titleId, int icDay, int icNight) {
-			this.titleId = titleId;
-			this.icDay = icDay;
-			this.icNight = icNight;
-		}
-
-		@StringRes
-		public int getTitleId() {
-			return titleId;
-		}
-
-		@DrawableRes
-		public int getIconId(boolean nightMode) {
-			return nightMode ? icNight : icDay;
-		}
-	}
-
 }

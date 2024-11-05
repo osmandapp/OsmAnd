@@ -3,6 +3,7 @@ package net.osmand.plus.chooseplan.button;
 import android.text.Spannable;
 import android.util.Pair;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -121,5 +122,10 @@ public class PurchasingUtils {
 				iterator.remove();
 			}
 		}
+	}
+
+	@DrawableRes
+	public static int getProFeatureIconId(boolean nightMode) {
+		return nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day;
 	}
 }
