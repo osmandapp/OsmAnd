@@ -1713,11 +1713,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
-		float step = useSmallZoom ? 0.1 : 1;
+		float step = useSmallZoom ? 0.1f : 1f;
 		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
 			zoom.partialChangeZoom(-step);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+
 		if (useSmallZoom) {
 			zoom.partialChangeZoom(step);
 		}
@@ -1735,6 +1736,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			clat = tb.getLatFromPixel(x, y);
 			clon = tb.getLonFromPixel(x, y);
 		}
+
 		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 	}
 
