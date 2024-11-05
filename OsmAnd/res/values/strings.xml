@@ -10,6 +10,34 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="shared_string_hour">Hour</string>
+	<string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+	<string name="shared_string_volume">Volume</string>
+	<string name="obd_engine_runtime_desc">Shows shows how long the engine has been running since it was started.</string>
+	<string name="obd_engine_runtime">Engine Runtime</string>
+	<string name="obd_battery_voltage_desc">Shows the voltage level of the vehicle\'s battery</string>
+	<string name="obd_fuel_pressure_desc">Shows the pressure within the fuel system</string>
+	<string name="obd_throttle_position">Throttle Position</string>
+	<string name="obd_throttle_position_desc">Shows the angle of the throttle plate in the throttle body.</string>
+	<string name="obd_calculated_engine_load_desc">Shows the percentage of the engine’s available power being used at a given moment.</string>
+	<string name="obd_calculated_engine_load">Calculated Engine Load</string>
+	<string name="obd_engine_coolant_temp_desc">Shows the temperature of the engine’s coolant</string>
+	<string name="obd_speed_desc">Shows speed from the Vehicle Speed Sensor (VSS).</string>
+	<string name="obd_engine_oil_temperature_desc">Shows the temperature of the engine oil.</string>
+	<string name="obd_engine_oil_temperature">Engine Oil Temperature</string>
+	<string name="obd_ambient_air_temp_desc">Shows the temperature outside the vehicle.</string>
+	<string name="obd_air_intake_temp_desc">Shows the temperature of the air entering the engine intake manifold.</string>
+	<string name="obd_fuel_consumption_rate_sensor_type">Use selected units in name.</string>
+	<string name="remaining_fuel_description">Shows the amount of fuel left in the vehicle\'s tank</string>
+	<string name="remaining_fuel">Remaining fuel</string>
+	<string name="obd_fuel_consumption_desc">Shows the rate of fuel usage by the engine, calculated based on remaining fuel, tank size, and distance covered as determined by GPS.</string>
+	<string name="obd_fuel_consumption">Fuel consumption</string>
+	<string name="reset_average_value">Reset average value</string>
+	<string name="average_value_slider_description">Select the time interval for measuring the average value.</string>
+	<string name="average_temperature_slider_description">Select the time interval for measuring the average temperature.</string>
+	<string name="shared_string_instant">Instant</string>
+	<string name="current_temperature">Current temperature</string>
+	<string name="average_temperature">Average temperature</string>
     <string name="show_minor_turns_descr">Lanes will be displayed on all passing intersections regardless voice instructions</string>
     <string name="show_minor_turns">Display on minor intersections when navigating straight</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
@@ -36,17 +64,8 @@
     <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (l/km)</string>
     <string name="simulate_obd">Simulate obd data</string>
-    <string name="obd_engine_runtime">Engine runtime</string>
-    <string name="obd_engine_runtime_desc">Shows vehicle engine runtime obtained from obd scanner</string>
-    <string name="obd_throttle_position">Throttle position</string>
-    <string name="obd_throttle_position_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Fuel pressure</string>
-    <string name="obd_fuel_pressure_desc">Shows vehicle fuel pressure (gauge pressure) obtained from obd scanner</string>
-    <string name="obd_calculated_engine_load">Calculated engine load</string>
-    <string name="obd_calculated_engine_load_desc">Shows vehicle calculated engine load based on sensor</string>
-    <string name="obd_engine_oil_temperature">Engine oil temperature</string>
-    <string name="obd_engine_oil_temperature_desc">Shows vehicle engine oil temperature obtained from obd scanner</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
@@ -188,12 +207,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Shows vehicle speed over OBD sensor</string>
     <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
-    <string name="obd_air_intake_temp_desc">Shows vehicle intake air temperature over OBD sensor</string>
-    <string name="obd_ambient_air_temp_desc">Shows ambient air temperature over OBD sensor</string>
-    <string name="obd_engine_coolant_temp_desc">Shows engine coolant temperature over OBD sensor</string>
-    <string name="obd_battery_voltage_desc">Shows battery voltage over OBD sensor</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_left_distance_desc">Shows distance vehicle can drive on left fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>

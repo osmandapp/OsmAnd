@@ -13,7 +13,7 @@ public enum VolumeUnit {
 	US_GALLONS(R.string.us_gallons, R.string.us_gallons_unit);
 
 	private final int key;
-	private final int unit;
+	public final int unit;
 
 	VolumeUnit(@StringRes int key, @StringRes int unit) {
 		this.key = key;

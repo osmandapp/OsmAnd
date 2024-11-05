@@ -5551,11 +5551,7 @@
     <string name="obd_fuel_type_bifuel_ethanol">Combustible dual con etanol</string>
     <string name="obd_fuel_type_bifuel_lpg">Combustible dual con GLP</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Muestra la velocidad del vehículo según el sensor OBD</string>
     <string name="obd_rpm_desc">Muestra las RPM del tacómetro del vehículo según el sensor OBD</string>
-    <string name="obd_air_intake_temp_desc">Muestra la temperatura del aire de admisión del vehículo según el sensor OBD</string>
-    <string name="obd_engine_coolant_temp_desc">Muestra la temperatura del refrigerante del motor según el sensor OBD</string>
-    <string name="obd_battery_voltage_desc">Muestra el voltaje de la batería según el sensor OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
     <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
     <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
@@ -5576,7 +5572,6 @@
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y a combustión</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
-    <string name="obd_ambient_air_temp_desc">Muestra la temperatura ambiente según el sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Muestra la distancia a recorrer con el nivel de combustible restante según el sensor OBD</string>
     <string name="obd_fuel_type_desc">Muestra el tipo de combustible según el sensor OBD</string>
     <string name="obd_ambient_air_temp">Temperatura ambiente</string>
