@@ -5648,4 +5648,14 @@
     <string name="obd_connecting_to_device">Повезивање са %s</string>
     <string name="dynamic_icon_type_summary">Промена сличице на основу стања радње.</string>
     <string name="obd_not_connected_to_device">Прекинута веза са %s</string>
+    <string name="fuel_tank_capacity">Капацитет резервоара за гориво</string>
+    <string name="shared_strings_dimensions">Димензије</string>
+    <string name="litres">Литара</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Империјални галони</string>
+    <string name="us_gallons">Амерички галони</string>
+    <string name="unit_of_volume">Јединица запремине</string>
+    <string name="fuel_tank_capacity_description">Унесите капацитет резервоара да бисте прецизно пратили нивое горива и потрошњу</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
 </resources>

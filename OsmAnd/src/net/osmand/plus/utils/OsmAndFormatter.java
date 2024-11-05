@@ -29,7 +29,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -56,6 +58,9 @@ public class OsmAndFormatter {
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+
+	public static final float IMPERIAL_GALLONS_IN_LITER = 4.54609f;
+	public static final float US_GALLONS_IN_LITER = 3.78541f;
 
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
@@ -566,6 +571,54 @@ public class OsmAndFormatter {
 			default:
 				return formattedValueSrc;
 		}
+	}
+
+	public static FormattedValue getFormattedFuelCapacityValue(@NonNull OsmandApplication app, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		boolean separateWithSpace = false;
+		String textValue;
+		String textUnit;
+		float value = readSavedFuelTankCapacity(settings, volumeUnit, mode);
+		if (value == 0.0f) {
+			textValue = app.getString(R.string.shared_string_none);
+			textUnit = "";
+		} else {
+			DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
+			textValue = formatter.format(value);
+			textUnit = volumeUnit.getUnitSymbol(app);
+			separateWithSpace = true;
+		}
+		return new FormattedValue(value, textValue, textUnit, separateWithSpace);
+	}
+
+	public static float readSavedFuelTankCapacity(@NonNull OsmandSettings settings, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandPreference<Float> fuelTankCapacity = settings.FUEL_TANK_CAPACITY;
+		float value = fuelTankCapacity.getModeValue(mode);
+		if (value == 0.0f) {
+			return value;
+		}
+
+		if (volumeUnit == VolumeUnit.US_GALLONS) {
+			return value / US_GALLONS_IN_LITER;
+		} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+			return value / IMPERIAL_GALLONS_IN_LITER;
+		} else {
+			return value;
+		}
+	}
+
+	public static float prepareFuelTankCapacityToSave(@NonNull VolumeUnit volumeUnit, float value) {
+		float preparedValueToSave = 0;
+		if (value != 0.0f) {
+			if (volumeUnit == VolumeUnit.US_GALLONS) {
+				preparedValueToSave = value * US_GALLONS_IN_LITER;
+			} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+				preparedValueToSave = value * IMPERIAL_GALLONS_IN_LITER;
+			} else {
+				preparedValueToSave = value;
+			}
+		}
+		return preparedValueToSave;
 	}
 
 	@NonNull

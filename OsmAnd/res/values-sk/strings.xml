@@ -5579,4 +5579,15 @@
     <string name="obd_fuel_left_liter">Zostatok paliva (l)</string>
     <string name="obd_fuel_left_km">Zostatok paliva (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Spotreba paliva (OBD)</string>
+    <string name="record_obd_data">Nahrávať merania vozidla</string>
+    <string name="fuel_tank_capacity_description">Zadajte objem nádrže pre správne sledovanie úrovne paliva a spotreby</string>
+    <string name="fuel_tank_capacity">Objem nádrže</string>
+    <string name="shared_strings_dimensions">Rozmery</string>
+    <string name="litres">Litre</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Imperiálne galóny</string>
+    <string name="us_gallons">USA galóny</string>
+    <string name="unit_of_volume_description">Zvolené jednotky sa použijú pre všetky objemové údaje v aktuálnom profile.</string>
+    <string name="unit_of_volume">Jednotka objemu</string>
 </resources>

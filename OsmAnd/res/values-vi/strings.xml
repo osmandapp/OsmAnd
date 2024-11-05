@@ -2014,4 +2014,16 @@
     <string name="routing_attr_carriage_restrictions_description">Xem xét quyền truy cập của những phương tiện được ngựa kéo</string>
     <string name="rendering_attr_seabedDetail_description">Thông tin văn bản bổ sung về phẩm chất bề mặt đáy biển, các loại bề mặt kết hợp, danh mục và phân loại rong biển hoặc cỏ biển</string>
     <string name="location_source_descr">Theo mặc định, OsmAnd được cài từ Cửa hàng Play sử dụng %1$s để xác định vị trí.\n\nNếu bạn thấy thông tin vị trí không đúng hoặc dùng thiết bị không có %2$s, hãy thử chuyển sang \"%3$s\"</string>
+    <string name="predefined_waypoint_appearance_description">Việc chọn hành động này sẽ tự động lưu điểm dừng với các tham số đã được xác định trước.</string>
+    <string name="record_obd_data">Ghi các số liệu về phương tiện</string>
+    <string name="fuel_tank_capacity_description">Nhập dung tích bình xăng để theo dõi mức nhiên liệu và mức tiêu thụ</string>
+    <string name="fuel_tank_capacity">Dung tích bình xăng</string>
+    <string name="shared_strings_dimensions">Kích thước</string>
+    <string name="litres">Lít</string>
+    <string name="imperial_gallons_unit">imp ga-lông</string>
+    <string name="us_gallons_unit">ga-lông</string>
+    <string name="imperial_gallons">Ga-lông hệ đo imperial</string>
+    <string name="us_gallons">Ga-lông hệ US</string>
+    <string name="unit_of_volume_description">Những đơn vị đã chọn sẽ được áp dụng cho tất cả dữ liệu liên quan đến thể tích trong hồ sơ hiện tại.</string>
+    <string name="unit_of_volume">Đơn vị thể tích</string>
 </resources>

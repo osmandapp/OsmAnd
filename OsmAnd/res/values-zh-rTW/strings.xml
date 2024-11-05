@@ -5637,4 +5637,15 @@
     <string name="obd_not_connected_to_device">與 %s 斷線</string>
     <string name="obd_connecting_to_device">正在連線至 %s</string>
     <string name="dynamic_icon_type_summary">圖示會根據動作狀態變更。</string>
+    <string name="fuel_tank_capacity_description">輸入油箱容量，精確追蹤油量與耗油量</string>
+    <string name="fuel_tank_capacity">油箱容量</string>
+    <string name="shared_strings_dimensions">尺寸</string>
+    <string name="litres">公升</string>
+    <string name="imperial_gallons_unit">英制加侖</string>
+    <string name="us_gallons_unit">加侖</string>
+    <string name="imperial_gallons">英制加侖</string>
+    <string name="us_gallons">美制加侖</string>
+    <string name="unit_of_volume_description">選取的單位將套用於目前設定檔中所有與體積相關的資料。</string>
+    <string name="unit_of_volume">體積單位</string>
+    <string name="record_obd_data">記錄車輛指標</string>
 </resources>

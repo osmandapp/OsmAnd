@@ -10,11 +10,9 @@ import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.AssetManager;
-
-import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -22,8 +20,8 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.resources.AssetsCollection;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -33,11 +31,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
 
@@ -147,8 +142,7 @@ public class DownloadOsmandIndexesHelper {
 	public static void downloadTtsWithoutInternet(@NonNull OsmandApplication app, @NonNull IndexItem item) {
 		try {
 			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
-			ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile);
-			boolean changedDate = de.targetFile.setLastModified(de.dateModified);
+			boolean changedDate = ResourceManager.copyAssets(app.getAssets(), de.assetName, de.targetFile, de.dateModified);
 			if (!changedDate) {
 				log.error("Set last timestamp is not supported");
 			}
@@ -173,9 +167,10 @@ public class DownloadOsmandIndexesHelper {
 	private static List<IndexItem> listTtsVoiceIndexes(@NonNull OsmandApplication app, boolean sort) {
 		List<IndexItem> items = new ArrayList<>();
 		try {
-			List<AssetEntry> bundledAssets = getBundledAssets(app.getAssets());
-			items.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
-			items.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
+			ResourceManager resourceManager = app.getResourceManager();
+			AssetsCollection assetsCollection = resourceManager.getAssets();
+			items.addAll(listDefaultTtsVoiceIndexes(app, assetsCollection));
+			items.addAll(listCustomTtsVoiceIndexes(app, assetsCollection));
 		} catch (Exception e) {
 			log.error("Error while loading tts files from assets", e);
 		}
@@ -185,34 +180,14 @@ public class DownloadOsmandIndexesHelper {
 		return items;
 	}
 
-	public static class AssetEntryList {
-		List<AssetEntry> assets = new ArrayList<>();
-	}
 	@NonNull
-	public static List<AssetEntry> getBundledAssets(@NonNull AssetManager assetManager) throws XmlPullParserException, IOException {
-		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
-		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
-		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
-		for (AssetEntry ae : lst.assets) {
-			if (!Algorithms.isEmpty(ae.version)) {
-				try {
-					ae.dateVersion = DATE_FORMAT.parse(ae.version);
-				} catch (ParseException e) {
-					log.error(e.getMessage(), e);
-				}
-			}
-		}
-		isBundledAssetsXml.close();
-		return lst.assets;
-	}
-
-	@NonNull
-	private static List<IndexItem> listDefaultTtsVoiceIndexes(@NonNull OsmandApplication app, @NonNull List<AssetEntry> bundledAssets) {
+	private static List<IndexItem> listDefaultTtsVoiceIndexes(@NonNull OsmandApplication app,
+	                                                          @NonNull AssetsCollection assetsCollection) {
 		List<IndexItem> defaultTTS = new ArrayList<>();
 		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		long installDate = getInstallDate(app);
 
-		for (AssetEntry asset : bundledAssets) {
+		for (AssetEntry asset : assetsCollection.getEntries()) {
 			String target = asset.destination;
 			boolean isTTS = target.endsWith(TTSVOICE_INDEX_EXT_JS)
 					&& target.startsWith(VOICE_INDEX_DIR)
@@ -237,7 +212,8 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	@NonNull
-	private static List<IndexItem> listCustomTtsVoiceIndexes(OsmandApplication app, List<AssetEntry> bundledAssets) {
+	private static List<IndexItem> listCustomTtsVoiceIndexes(@NonNull OsmandApplication app,
+	                                                         @NonNull AssetsCollection assetsCollection) {
 		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
 		List<LocalItem> localItems = new ArrayList<>();
@@ -254,7 +230,7 @@ public class DownloadOsmandIndexesHelper {
 				continue;
 			}
 			boolean isCustomVoice = true;
-			for (AssetEntry assetEntry : bundledAssets) {
+			for (AssetEntry assetEntry : assetsCollection.getEntries()) {
 				if (assetEntry.destination.contains("/" + item.getFileName() + "/")) {
 					isCustomVoice = false;
 					break;
@@ -411,6 +387,11 @@ public class DownloadOsmandIndexesHelper {
 			this.source = source;
 			this.destination = destination;
 			this.mode = combinedMode;
+		}
+
+		@Nullable
+		public Long getVersionTime() {
+			return dateVersion != null ? dateVersion.getTime() : null;
 		}
 	}
 }

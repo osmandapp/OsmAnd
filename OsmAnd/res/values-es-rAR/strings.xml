@@ -5649,4 +5649,15 @@
     <string name="obd_connecting_to_device">Conectando a %s</string>
     <string name="shared_string_dynamic">Dinámico</string>
     <string name="obd_connected_to_device">Conectado a %s</string>
+    <string name="shared_strings_dimensions">Dimensiones</string>
+    <string name="imperial_gallons_unit">gal imp</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galones imperiales</string>
+    <string name="us_gallons">Galones (EEUU)</string>
+    <string name="unit_of_volume_description">Las unidades elegidas serán aplicadas a todos los datos relacionados con el volúmen en el perfil actual.</string>
+    <string name="fuel_tank_capacity">Capacidad del tanque de combustible</string>
+    <string name="litres">Litros</string>
+    <string name="fuel_tank_capacity_description">Ingresa la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
+    <string name="unit_of_volume">Unidad de volúmen</string>
+    <string name="record_obd_data">Grabar estadísticas del vehículo</string>
 </resources>

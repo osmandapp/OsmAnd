@@ -6040,4 +6040,15 @@
     <string name="obd_connected_to_device">Conectado a %s</string>
     <string name="obd_not_connected_to_device">Desconectado de %s</string>
     <string name="obd_connecting_to_device">Connectando a %s</string>
+    <string name="fuel_tank_capacity">Capacidad del depósito</string>
+    <string name="litres">Litros</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galón</string>
+    <string name="us_gallons">Galón líquido estadounidense</string>
+    <string name="shared_strings_dimensions">Capacidad</string>
+    <string name="unit_of_volume">Unidad de volumen</string>
+    <string name="unit_of_volume_description">Las unidades seleccionadas se aplicarán a todos los datos relacionados con el volumen en el perfil actual.</string>
+    <string name="fuel_tank_capacity_description">Introduce la capacidad de tu depósito para controlar con precisión los niveles de combustible y el consumo</string>
+    <string name="imperial_gallons_unit">gal imp</string>
+    <string name="record_obd_data">Registro de métricas del vehículo</string>
 </resources>

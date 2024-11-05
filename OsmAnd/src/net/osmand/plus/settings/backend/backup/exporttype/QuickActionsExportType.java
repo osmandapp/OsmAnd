@@ -36,7 +36,7 @@ class QuickActionsExportType extends AbstractExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
-		List<QuickActionButtonState> buttonStates = new ArrayList<>(buttonsHelper.getButtonsStates());
+		List<QuickActionButtonState> buttonStates = new ArrayList<>(buttonsHelper.getQuickActionButtonsStates());
 		if (buttonStates.size() == 1) {
 			QuickActionButtonState state = buttonStates.get(0);
 			if (state.isDefaultButton() && Algorithms.isEmpty(state.getQuickActions())) {
