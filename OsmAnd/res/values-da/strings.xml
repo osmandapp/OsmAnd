@@ -5671,4 +5671,5 @@
     <string name="us_gallons">US gallons</string>
     <string name="unit_of_volume_description">De valgte enheder vil blive anvendt på alle volumenrelaterede data i den aktuelle profil.</string>
     <string name="unit_of_volume">Volumenenhed</string>
+    <string name="wunderlinq_datagrid">WunderLINQ-datanetværk</string>
 </resources>
