@@ -374,7 +374,7 @@ public enum WidgetType {
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
-			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(widgetInfo);
+			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
 			if (OBDSettingFragment != null){
 				return OBDSettingFragment;
 			}
@@ -396,8 +396,9 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	private WidgetSettingsBaseFragment getOBDWidgetSettings(@Nullable MapWidgetInfo widgetInfo) {
-		if (widgetInfo == null) {
+	private WidgetSettingsBaseFragment getOBDWidgetSettings(@NonNull Context ctx,
+	                                                        @Nullable MapWidgetInfo widgetInfo) {
+		if (widgetInfo == null || !isPurchased(ctx)) {
 			return null;
 		}
 		if (widgetInfo.widget instanceof OBDFuelConsumptionWidget) {
