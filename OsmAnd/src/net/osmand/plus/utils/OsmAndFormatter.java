@@ -932,6 +932,10 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
+		return getFormattedCoordinates(lat, lon, outputFormat, true);
+	}
+
+	public static String getFormattedCoordinates(double lat, double lon, int outputFormat, boolean forceLTR) {
 		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
@@ -973,7 +977,8 @@ public class OsmAndFormatter {
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		}
-		return TextDirectionUtil.markAsLTR(result.toString());
+		String formattedCoordinates = result.toString();
+		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
 	}
 
 

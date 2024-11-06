@@ -174,8 +174,7 @@ public class ShareMenu extends BaseMenuController {
 
 		OsmandSettings settings = ((OsmandApplication) activity.getApplicationContext()).getSettings();
 		int format = settings.COORDINATES_FORMAT.get();
-		String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
-		this.coordinates = TextDirectionUtil.clearDirectionMarks(coordinates);
+		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format, false);
 	}
 
 	public static void startAction(@NonNull Context context, @NonNull ShareItem item,
