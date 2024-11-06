@@ -4880,4 +4880,19 @@
     <string name="poi_payment_parkster_no">Parkster není akceptován</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Tunel pro chodce zakázán</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel se zákazem pro cyklisty</string>
+    <string name="poi_route_article">Články o cestování</string>
+    <string name="poi_route_article_point">Body na cestách</string>
+    <string name="poi_route_track">Další trasy</string>
+    <string name="poi_route_track_point">Další body trasy</string>
+    <string name="poi_activities_bicycle">Kolo</string>
+    <string name="poi_activities_trekking">Pěší turistika</string>
+    <string name="poi_activities_running">Běh</string>
+    <string name="poi_activities_pedestrian">Chůze</string>
+    <string name="poi_activities_kayak">Vodní sporty</string>
+    <string name="poi_activities_horse">Jízda na koni</string>
+    <string name="poi_activities_skiing">Zimní sporty</string>
+    <string name="poi_activities_snowmobile">Sněžný skútr</string>
+    <string name="poi_activities_fitness">Fitness stezky</string>
+    <string name="poi_activities_inline_skates">Inline brusle</string>
+    <string name="poi_activities_mountain_bike">Horská cyklistika</string>
 </resources>
