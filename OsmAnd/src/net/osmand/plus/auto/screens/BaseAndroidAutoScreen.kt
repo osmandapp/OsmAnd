@@ -1,7 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.graphics.Rect
-import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
@@ -95,31 +93,21 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
-				// FIXME revert after start
-				//				val prevElevationAngle: Float = mapView.normalizeElevationAngle(mapView.elevationAngle)
-				mapView.setElevationAngle(90f)
-				mapView.setRotate(0f, true)
-				// DELETE
-//				val tileBox = mapView.rotatedTileBox
-//				val vArea = surfaceRenderer.visibleArea
-//				val rectWidth = mapRect.right - mapRect.left
-//				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
-//				mapRect.left -= rectWidth * coef
-//				mapRect.right += rectWidth * coef
-//				Log.i("net.osmand.dev", "ZOOM " + coef + " map rect" + mapRect)
-//				var dx = 0
-//				if (vArea != null) {
-//					val ltr = vArea.left > (vArea.width() - vArea.right)
-//					if (ltr) {
-//						dx = vArea.left
-//					} else {
-//						dx = -(vArea.width() - vArea.right)
-//					}
-//				}
-				val tb = mapView.getRotatedTileBox()
-				mapView.fitRectToMap(tb,
-					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					0, 0, true
+				val tileBox = mapView.rotatedTileBox
+				val rectWidth = mapRect.right - mapRect.left
+				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
+				val left = mapRect.left - rectWidth * coef
+				val right = mapRect.right + rectWidth * coef
+				mapView.fitRectToMap(
+					left,
+					right,
+					mapRect.top,
+					mapRect.bottom,
+					tileBox.pixWidth,
+					tileBox.pixHeight,
+					0,
+					0,
+					true
 				)
 				mapView.refreshMap()
 			}

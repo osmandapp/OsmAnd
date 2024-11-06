@@ -1682,25 +1682,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
-		RotatedTileBox tb = currentViewport.copy();
-		double border = 0.9;
-		int dx = 0;
-		int dy = 0;
-		int tbw = (int) (tb.getPixWidth() * border);
-		int tbh = (int) (tb.getPixHeight() * border);
-		if (tileBoxWidthPx > 0) {
-			tbw = (int) (tileBoxWidthPx * border);
-			if (marginLeftPx > 0) {
-				int offset = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
-				dx = isLayoutRtl() ? -offset : offset;
-			}
-		} else if (tileBoxHeightPx > 0) {
-			tbh = (int) (tileBoxHeightPx * border);
-			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
-		}
-		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
-		tb.setPixelDimensions(tbw, tbh);
-		fitRectToMap(tb, left, right, top, bottom, dx, dy, true);
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, true);
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
@@ -1717,15 +1699,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 
-	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-	                         int dx, int dy, boolean useSmallZoom) {
+	public void fitRectToMap(double left, double right, double top, double bottom,
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
+		RotatedTileBox tb = currentViewport.copy();
 		float zoomStep = useSmallZoom ? 0.1f : 1f;
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM 1 FROM %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
+		double border = 0.8;
+		int dx = 0;
+		int dy = 0;
+		int tbw = (int) (tb.getPixWidth() * border);
+		int tbh = (int) (tb.getPixHeight() * border);
+		if (tileBoxWidthPx > 0) {
+			tbw = (int) (tileBoxWidthPx * border);
+			if (marginLeftPx > 0) {
+				int offset = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+				dx = isLayoutRtl() ? -offset : offset;
+			}
+		} else if (tileBoxHeightPx > 0) {
+			tbh = (int) (tileBoxHeightPx * border);
+			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
+		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
+		tb.setPixelDimensions(tbw, tbh);
+
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
@@ -1736,26 +1731,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+		zoom.partialChangeZoom(zoomStep);
 		while (zoom.isZoomInAllowed() && fullyContains(tb, left, top, right, bottom)) {
 			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM LAST %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
-		if (zoom.isZoomOutAllowed()) {
-			zoom.partialChangeZoom(-zoomStep);
-			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
-		}
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM TO %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
+		zoom.partialChangeZoom(-zoomStep);
+		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
