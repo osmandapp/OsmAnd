@@ -5664,7 +5664,7 @@
     <string name="vehicle_metrics_obd_ii">Metrika vozila (OBD-II)</string>
     <string name="shared_string_hour">Čas</string>
     <string name="shared_string_volume">Jačina</string>
-    <string name="obd_throttle_position_desc">Prikazuje pritisak goriva (manometarski pritisak) sa OBD skenera</string>
+    <string name="obd_throttle_position_desc">Prikazuje ugao prigušne ploče u kućištu leptira za gas.</string>
     <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
     <string name="average_temperature">Prosečna temperatura</string>
     <string name="remaining_fuel_description">Pokazuje količinu goriva koja je ostala u rezervoaru</string>
