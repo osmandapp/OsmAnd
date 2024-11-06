@@ -9,7 +9,7 @@ import net.osmand.plus.R;
 
 public enum VolumeUnit {
 	LITRES(R.string.litres, R.string.liter),
-	IMPERIAL_GALLONS(R.string.imperial_gallons, R.string.imperial_gallons_unit),
+	IMPERIAL_GALLONS(R.string.imperial_gallons, R.string.us_gallons_unit),
 	US_GALLONS(R.string.us_gallons, R.string.us_gallons_unit);
 
 	private final int key;
