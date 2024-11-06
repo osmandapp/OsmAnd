@@ -1183,7 +1183,7 @@
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
-    <string name="rendering_attr_showAccess_name">Mostra le restrizioni di accesso e di pedaggio</string>
+    <string name="rendering_attr_showAccess_name">Mostra restrizioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Percorsi ciclabili</string>
@@ -2176,7 +2176,7 @@
     <string name="index_item_depth_contours_osmand_ext">Isobate nautiche</string>
     <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero australe</string>
     <string name="index_item_depth_points_northern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero boreale</string>
-    <string name="download_depth_countours">Isobate marine</string>
+    <string name="download_depth_countours">linee batimetriche</string>
     <string name="nautical_maps">Mappe nautiche</string>
     <string name="analyze_on_map">Analizza sulla mappa</string>
     <string name="shared_string_visible">Visibile</string>
@@ -2228,27 +2228,8 @@
     <string name="edit_name">Modifica il nome</string>
     <string name="route_is_too_long_v2">Per lunghe distanze: aggiungere delle mete intermedie se non si ottiene un risultato entro 10 minuti.</string>
     <string name="save_poi_too_many_uppercase">Il nome contiene troppe maiuscole. Continuare\?</string>
-    <string name="osmand_plus_extended_description_part8">Copertura e qualità approssimativa delle mappe: 
-\n • Ovest Europa: **** 
-\n • Est Europa: *** 
-\n • Russia: *** 
-\n • Nord America: *** 
-\n • Sud America: ** 
-\n • Asia: ** 
-\n • Giappone e Corea: *** 
-\n • Medio Oriente: ** 
-\n • Africa: ** 
-\n • Antartide: * 
-\n Molte nazioni del mondo disponibili da scaricare 
-\n Dall\'Afghanistan al Zimbabwe, dall\'Australia agli USA. Argentina, Brasile, Canada, Francia, Germania, Messico, Regno Unito, Spagna, …
-\n</string>
-    <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM 
-\n • Segnala errori nei dati 
-\n • Contribuisci tracce GPX a OSM direttamente dall\'app 
-\n • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline) 
-\n • Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep) 
-\n OsmAnd è software open-source attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
-\n</string>
+    <string name="osmand_plus_extended_description_part8">Copertura e qualità approssimativa delle mappe:\n - Europa occidentale: ****\n - Europa orientale: ***\n - Russia: ***\n - Nord America: ***\n - Sud America: **\n - Asia: **\n - Giappone e Corea: ***\n - Medio Oriente: **\n - Africa: **\n - Antartide: *\n La maggior parte dei Paesi del mondo disponibili per il download\n Dall\'Afghanistan allo Zimbabwe, dall\'Australia agli Stati Uniti. Argentina, Brasile, Canada, Francia, Germania, Messico, Regno Unito, Spagna, …</string>
+    <string name="osmand_plus_extended_description_part7">Contribuisci direttamente a OSM\n - Segnala bug dei dati\n - Carica tracce GPX su OSM direttamente dall\'app\n - Aggiungi POI e caricali direttamente su OSM (o successivamente se offline)\n - Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep)\n OsmAnd è un software open source sviluppato attivamente. Tutti possono contribuire all\'applicazione segnalando bug, migliorando le traduzioni o codificando nuove funzionalità. Inoltre, il progetto si basa su contributi finanziari per finanziare la codifica e il test di nuove funzionalità.</string>
     <string name="osmand_extended_description_part8">OsmAnd è un software open source attivamente sviluppato. Chiunque può contribuire all\'applicazione segnalando degli errori, migliorando la traduzione o programmando nuove funzionalità. Inoltre il progetto si basa anche sui contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
 \n Indicativamente copertura e qualità della mappa:
 \n • Ovest Europa: ****
@@ -3576,7 +3557,7 @@
     <string name="lang_tg">Tagiko</string>
     <string name="lang_sco">Scozzese</string>
     <string name="lang_scn">Siciliano</string>
-    <string name="lang_pnb">Punjabi</string>
+    <string name="lang_pnb">Pangiabi</string>
     <string name="lang_ne">Nepalese</string>
     <string name="lang_nap">Napoletano</string>
     <string name="lang_my">Burmese</string>
@@ -4660,7 +4641,7 @@
     <string name="next_live_update_date_and_time">Prossimo aggiornamento il %1$s alle %2$s.</string>
     <string name="next_live_update_time">Prossimo aggiornamento alle %1$s.</string>
     <string name="altitude_correction">Correzione dell\'altitudine</string>
-    <string name="compass_click_desc">Suggerimento: tocca la bussola per cambiare l\'orientamento della mappa.</string>
+    <string name="compass_click_desc">Tocca la bussola per cambiare l\'orientamento della mappa.</string>
     <string name="marker_2nd">Secondo marcatore</string>
     <string name="auto_25_chars_route_tl_kl">Svolta a sinistra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
@@ -5390,29 +5371,7 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Android Auto: aggiunta la vista 3D
-\n
-\n• Tracce: Introdotti filtri e cartelle intelligenti, memoria ottimizzata per file più grandi
-\n
-\n• Pannelli widget superiore e inferiore migliorati per accogliere tutti i widget
-\n
-\n• Migliorata la gestione delle risorse locali
-\n
-\n• Mappatura dei pulsanti personalizzabile per controller esterni
-\n
-\n• Nuovi widget: \"Rapporto di planata\" e \"Posizione del sole\"
-\n
-\n• OsmAnd Cloud: ora accedi ai file eliminati
-\n
-\n• Colorazione migliorata dei tracciati in modalità Slope con un nuovo gradiente simmetrico
-\n
-\n• Risolti problemi con la barra di stato trasparente
-\n
-\n• Aggiunto supporto per widget temperatura ANT+
-\n
-\n• Aggiunto widget \"RAM disponibile\"
-\n
-\n</string>
+    <string name="release_4_6">- Android Auto: aggiunta la modalità 3D\n\n - Tracce: Introdotti filtri e cartelle intelligenti, ottimizzata la memoria per i file più grandi\n\n - Pannelli widget superiori e inferiori migliorati per ospitare tutti i widget\n\n - Gestione delle risorse locali migliorata\n\n - Mappatura dei pulsanti personalizzabile per i controller esterni\n\n - Nuovi widget: \"Rapporto di planata\" e \"Posizione del sole\".\n\n - OsmAnd Cloud: Ora è possibile accedere ai file cancellati\n\n - Miglioramento della colorazione della pista in modalità Pendenza con un nuovo gradiente simmetrico\n\n - Risolti i problemi con la barra di stato trasparente\n\n - Aggiunto il supporto per il widget della temperatura ANT+\n\n - Introdotto widget \"RAM disponibile</string>
     <string name="shared_string_temperature">Tempertura</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Informazioni sulla navigazione di OsmAnd</string>
     <string name="hillshade_slope">Ombreggiatura dei rilievi, Pendenza</string>
@@ -5612,25 +5571,7 @@
     <string name="shared_sting_all_colors">Tutti i colori</string>
     <string name="routing_type">Tipo di percorso</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="release_4_7">• Nuovo widget \"Tachimetro\" compatibile con Android Auto
-\n
-\n• Configura la schermata della mappa aggiungendo i pulsanti \"Azione rapida\".
-\n
-\n• Migliorata la leggibilità dei dati nei grafici
-\n
-\n• Aggiunta dei filtri in base ai dati dei sensori per le tracce
-\n
-\n• Migliorata la personalizzazione dell\'aspetto per gruppi di tracce
-\n
-\n• Aggiunto il supporto per tag GPX aggiuntivi
-\n
-\n• Personalizza la \"Distanza durante la navigazione\": scegli tra numeri precisi o arrotondati per eccesso
-\n
-\n• L\'interfaccia utente per la selezione delle tracce è stata unificata
-\n
-\n• L\'accesso a OpenStreetMap è passato a OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• Nuovo widget \"Tachimetro\" compatibile con Android Auto \n \n• Configura la schermata della mappa aggiungendo i pulsanti \"Azione rapida\". \n \n• Migliorata la leggibilità dei dati nei grafici \n \n• Aggiunta dei filtri in base ai dati dei sensori per le tracce \n \n• Migliorata la personalizzazione dell\'aspetto per gruppi di tracce \n \n• Aggiunto il supporto per tag GPX aggiuntivi \n \n• Personalizza la \"Distanza durante la navigazione\": scegli tra numeri precisi o arrotondati per eccesso \n \n• L\'interfaccia utente per la selezione delle tracce è stata unificata \n \n• L\'accesso a OpenStreetMap è passato a OAuth 2.0</string>
     <string name="distance_during_navigation">Distanza durante la navigazione</string>
     <string name="auto_zoom_discrete">Discreto</string>
     <string name="distance_during_navigation_description">Scegli la modalità di visualizzazione delle informazioni sulla distanza nei widget di navigazione (distanza dal punto, svolta successiva, corsie).
@@ -5661,29 +5602,7 @@
     <string name="gpx_approximation_geo_java">Basato sulle geometrie (Java, fast)</string>
     <string name="auto_zoom_smooth">Fluido</string>
     <string name="gpx_approximation_java">Basato su routing (Java)</string>
-    <string name="release_4_8">• Nuova opzione di colorazione del terreno \"Altitudine\"
-\n
-\n • Tavolozze di colori personalizzate per terreno, piste e percorsi
-\n
-\n • Variante 3D per le icone della ubicazione della posizione
-\n
-\n • Le azioni rapide possono ora essere assegnate a tastiere esterne
-\n
-\n • Meteo: aggiornamento dell\'interfaccia utente, aggiunta animazione del vento
-\n
-\n • Miglioramenti al tracciato 3D: nuove opzioni di visualizzazione e colorazione
-\n
-\n • Selezione ampliata di percorsi turistici sulla mappa
-\n
-\n • Aggiunta l\'opzione del tema dell\'app per seguire la modalità mappa
-\n
-\n • Risolte le statistiche delle tracce, l\'ordinamento e la ricerca
-\n
-\n • Modifica OSM: metodo di autorizzazione login/password cancellato
-\n
-\n • Passaggio al foglio di condivisione del sistema a partire da Android 14
-\n
-\n</string>
+    <string name="release_4_8">- Nuova opzione di colorazione del terreno \"Altitudine\n\n - Tavolozze di colori personalizzate per terreno, tracce e percorsi\n\n - Variante 3D per le icone di posizione\n\n - Le azioni rapide possono ora essere assegnate a tastiere esterne\n\n - Meteo: Aggiornamento dell\'interfaccia utente, aggiunta animazione del vento\n\n - Miglioramenti alle tracce 3D: nuove opzioni di visualizzazione e colorazione\n\n - Ampliata la selezione di percorsi turistici sulla mappa\n\n - Aggiunta opzione tema dell\'app per seguire la modalità mappa\n\n - Sistemate le statistiche delle tracce, l\'ordinamento e la ricerca\n\n - Modifica OSM: eliminato il metodo di autorizzazione login / password\n\n - Passaggio al foglio di condivisione del sistema a partire da Android 14</string>
     <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" e tutte le azioni aggiunte?</string>
     <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
     <string name="shared_string_osm_id">OSM ID</string>
@@ -5950,9 +5869,9 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (%/h)</string>
     <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/km)</string>
     <string name="simulate_obd">Simula i dati obd</string>
-    <string name="obd_engine_runtime">Tempo di accensione del motore</string>
-    <string name="obd_engine_runtime_desc">Mostra il tempo di funzionamento del motore del veicolo ottenuto dallo scanner obd</string>
-    <string name="obd_throttle_position">Posizione dell\'acceleratore</string>
+    <string name="obd_engine_runtime">Tempo di Accensione del Motore</string>
+    <string name="obd_engine_runtime_desc">Indica il tempo di funzionamento del motore dall\'avvio.</string>
+    <string name="obd_throttle_position">Posizione Acceleratore</string>
     <string name="kpa_unit">kPa</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (l/h)</string>
@@ -5966,7 +5885,7 @@
     <string name="obd_device_forget_sensor_description">Lo scanner verrà rimosso dalla lista. Sarà possibile accoppiare nuovamente questo scanner in qualsiasi momento.</string>
     <string name="connect_obd_instructions_step2">2. Avviare il motore del veicolo</string>
     <string name="connect_obd_instructions_title">OsmAnd supporta le connessioni Bluetooth agli scanner OBD-II.</string>
-    <string name="obd_throttle_position_desc">Mostra la pressione del carburante del veicolo ottenuta dallo scanner obd</string>
+    <string name="obd_throttle_position_desc">Mostra l\'angolo della piastra di accelerazione nel corpo farfallato.</string>
     <string name="route_guidance_desc">Fornisce la guida in tempo reale del percorso, compresa la distanza alla svolta successiva, il nome della strada, il nome della strada percorsa e le informazioni sulla corsia. I widget sono attivi durante la navigazione.</string>
     <string name="obd_widget_vehicle_speed">Velocità del veicolo</string>
     <string name="obd_widget_engine_speed">Velocità del motore</string>
@@ -5986,12 +5905,12 @@
     <string name="obd_vehicle_info">Informazioni sul veicolo</string>
     <string name="learn_more_about_obd_sensors">Scopri di più sui sensori.</string>
     <string name="screen_is_locked_by_action_button">Il touch screen è bloccato. Premere il pulsante per sbloccare.</string>
-    <string name="obd_calculated_engine_load">Carico calcolato sul motore</string>
+    <string name="obd_calculated_engine_load">Carico Calcolato sul Motore</string>
     <string name="obd_fuel_pressure">Pressione del carburante</string>
-    <string name="obd_fuel_pressure_desc">Mostra la pressione del carburante del veicolo ottenuta dallo scanner obd</string>
-    <string name="obd_calculated_engine_load_desc">Mostra il carico sul motore del veicolo calcolato in base al sensore</string>
-    <string name="obd_engine_oil_temperature">Temperatura dell\'olio motore</string>
-    <string name="obd_engine_oil_temperature_desc">Mostra la temperatura dell\'olio del motore del veicolo ottenuta dallo scanner obd</string>
+    <string name="obd_fuel_pressure_desc">Mostra la pressione del carburante del veicolo</string>
+    <string name="obd_calculated_engine_load_desc">Indica la percentuale di potenza disponibile del motore utilizzata in un determinato momento.</string>
+    <string name="obd_engine_oil_temperature">Temperatura Olio Motore</string>
+    <string name="obd_engine_oil_temperature_desc">Mostra la temperatura dell\'olio motore.</string>
     <string name="liter">l</string>
     <string name="obd_device_forget_sensor">Dimentica lo scanner</string>
     <string name="connect_obd_instructions_step1">1. Collegare lo scanner alla porta OBD-II del veicolo.</string>
@@ -6002,4 +5921,66 @@
     <string name="unit_of_volume_description">Le unità selezionate verranno applicate a tutti i dati relativi al volume nel profilo corrente.</string>
     <string name="unit_of_volume">Unità di volume</string>
     <string name="l_100km">l/100 km</string>
+    <string name="lock_screen">Blocco scherno</string>
+    <string name="track_does_not_contain_data_to_save">La traccia non contiene dati da salvare.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitorate le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
+    <string name="vehicle_metrics_obd_ii">Metriche Veicolo (OBD-II)</string>
+    <string name="shared_string_hour">Ora</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+    <string name="shared_string_volume">Volume</string>
+    <string name="obd_speed_desc">Mostra la velocità dal sensore di velocità del veicolo (VSS).</string>
+    <string name="obd_air_intake_temp_desc">Indica la temperatura dell\'aria che entra nel collettore di aspirazione del motore.</string>
+    <string name="remaining_fuel_description">Indica la quantità di carburante rimasta nel serbatoio del veicolo</string>
+    <string name="obd_fuel_consumption">Consumo carburante</string>
+    <string name="reset_average_value">Ripristino valore medio</string>
+    <string name="average_value_slider_description">Selezionare l\'intervallo di tempo per la misurazione del valore medio.</string>
+    <string name="average_temperature_slider_description">Selezionare l\'intervallo di tempo per la misurazione della temperatura media.</string>
+    <string name="show_minor_turns_descr">Le corsie saranno visualizzate su tutte le intersezioni in transito, indipendentemente dalle istruzioni vocali</string>
+    <string name="show_minor_turns">Mostra su intersezioni minori quando si naviga in linea retta</string>
+    <string name="quick_action_finish_trip_recording_summary">Un pulsante per salvare la traccia GPX e terminare la registrazione del viaggio.</string>
+    <string name="start_trip_recording_first_m">Avviare prima la registrazione del percorso.</string>
+    <string name="new_segment_started_m">È iniziata la registrazione di un nuovo tratto del percorso.</string>
+    <string name="movies_list">Lista filmati</string>
+    <string name="obd_fuel_left_distance_desc">Indica la distanza che il veicolo può percorrere con il livello di carburante residuo sul sensore OBD</string>
+    <string name="obd_air_intake_temp">Temperatura aspirazione</string>
+    <string name="obd_ambient_air_temp">Temperatura ambiente</string>
+    <string name="obd_battery_voltage">Tensione batteria</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Usa le unità selezionate nel nome.</string>
+    <string name="shared_string_instant">Istante</string>
+    <string name="average_temperature">Temperatura media</string>
+    <string name="remaining_fuel">Carburante residuo</string>
+    <string name="obd_fuel_consumption_desc">Mostra il tasso di utilizzo del carburante da parte del motore, calcolato in base al carburante rimanente, alle dimensioni del serbatoio e alla distanza percorsa determinata dal GPS.</string>
+    <string name="current_temperature">Temperatura attuale</string>
+    <string name="release_4_9">- Aggiunto un visualizzatore di gallerie a schermo intero per le immagini Wikimedia\n\n - Introdotto un nuovo plugin \"Metriche del veicolo\" per monitorare le prestazioni del veicolo utilizzando il protocollo OBD-II\n\n - Aggiunta la possibilità di assegnare attività alle tracce e di filtrarle di conseguenza\n\n - Implementate nuove azioni rapide per la registrazione del viaggio e il blocco del touchscreen\n\n - Introdotto l\'aspetto personalizzabile dei pulsanti della mappa e una griglia precisa\n\n - Aggiunto un menu contestuale e un\'azione \"Ripristina velocità media\" ai widget\n\n - Aggiunto un nuovo livello di percorso \"Sentieri per moto da strada\".\n\n - Corretta la funzione \"Registrazione automatica della traccia durante la navigazione\".\n\n - Corretto il problema delle coordinate capovolte in RTL\n\n - Corretti i dati del sensore mancanti per la traccia attualmente registrata\n\n - Aggiunte informazioni sulle aree circostanti per il punto selezionato\n\n - Aggiunta un\'azione rapida per controllare la visibilità delle modifiche OSM\n\n - Parametri di visibilità separati per le opzioni di colorazione del terreno\n\n - Aggiunta di un\'icona che può essere toccata per visualizzare l\'accesso o altri attributi di strade o sentieri</string>
+    <string name="obd_fuel_type_desc">Mostra il tipo di carburante del veicolo attraverso il sensore OBD</string>
+    <string name="obd_fuel_consumption_rate_desc">Mostra il tasso di consumo di carburante del veicolo in base a OBD e posizione</string>
+    <string name="obd_plugin_description">Monitorare le principali metriche del veicolo utilizzando il protocollo OBD-II. Accesso a dati quali: * Velocità del motore * Consumo di carburante * Carburante rimanente * Distanza dall\'avvio del motore * Temperatura di aspirazione * Temperatura ambiente * Temperatura del liquido di raffreddamento * Velocità del veicolo * Percentuale della batteria</string>
+    <string name="route_guidance">Guida del percorso</string>
+    <string name="wikivoyage_offline">Wikivoyage non in linea</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="quick_action_new_trip_segment">Un pulsante per avviare un nuovo tratto nella registrazione del percorso GPX in corso.</string>
+    <string name="help_article_personal_color_palette_schemes_name">Schemi Colore</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_battery_voltage_desc">Indica il livello di tensione della batteria del veicolo</string>
+    <string name="obd_engine_coolant_temp_desc">Indica la temperatura del liquido di raffreddamento del motore</string>
+    <string name="obd_fuel_level_desc">Mostra il livello di carburante del veicolo tramite il sensore OBD</string>
+    <string name="obd_engine_coolant_temp">Temperatura liquido raffreddamento</string>
+    <string name="obd_support">Supporto OBD</string>
+    <string name="obd_fuel_level">Efficienza Carburante (%)</string>
+    <string name="lock_screen_description">Abilita o disabilita la funzionalità del touch screen per evitare tocchi accidentali</string>
+    <string name="new_trip_segment">Nuovo tratto del percorso</string>
+    <string name="quick_action_start_pause_recording">Un pulsante per avviare, mettere in pausa o riprendere la registrazione del percorso GPX.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Percorso registrato e proseguimento</string>
+    <string name="quick_action_verb_start_pause">Avvio / Pausa</string>
+    <string name="obd_vin_desc">Codice VIN tramite OBD</string>
+    <string name="reset_average_speed">Azzeramento velocità media</string>
+    <string name="unknown_bt_device">Dispositivo sconosciuto</string>
+    <string name="obd_ambient_air_temp_desc">Indica la temperatura esterna al veicolo.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Pulsante per mostrare o nascondere le modifiche OSM locali sulla mappa.</string>
+    <string name="third_links">Collegamenti a Terzi</string>
+    <string name="vehicle_metrics_plugin_settings">Impostazioni Metriche Veicolo</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Un pulsante per salvare il percorso correntemente registrato come file GPX e continuare a registrare un nuovo tratto senza interruzioni.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per bici da sterrato</string>
+    <string name="obd_fuel_left_liters">Carburante rimanente (litri)</string>
 </resources>
