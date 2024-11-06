@@ -6011,4 +6011,10 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Montras konsumon de brulaĵo de via veturilo surbaze de sentilo (l/h)</string>
     <string name="obd_engine_oil_temperature">Temperaturo de motoroleo</string>
     <string name="liter">l</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Konsumo de brulaĵo (%/h)</string>
+    <string name="obd_nothing_found_description">Certiĝu, ke:\n – Bludento estas aktiva;\n – motoro de la veturilo laboras;\n – via aparato estas ene atingo de la skanilo.</string>
+    <string name="route_guidance">Sciigoj pri kurso</string>
+    <string name="obd_widget_engine_speed">Rivolua rapido de motoro</string>
+    <string name="obd_widget_vehicle_speed">Rapido de veturilo</string>
+    <string name="route_guidance_desc">Liveras jamajn sciigojn pri kurso: distancon ĝis sekva turniĝo, strat-nomon (aktualan kaj sekvan) kaj informojn pri vetur-koridoroj. Fenestraĵoj estas aktivaj dum navigi.</string>
 </resources>

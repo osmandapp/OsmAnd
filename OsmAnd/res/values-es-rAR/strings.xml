@@ -372,8 +372,8 @@
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
-    <string name="navigate_point_northing">Longitud al norte</string>
-    <string name="navigate_point_easting">Latitud al este</string>
+    <string name="navigate_point_northing">Al norte (lon)</string>
+    <string name="navigate_point_easting">Al este (lat)</string>
     <string name="use_opengl_render_descr">Usa el renderizado OpenGL acelerado por hardware (podría consumir más batería o no funcionar en dispositivos antiguos).</string>
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
@@ -5223,7 +5223,7 @@
     <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
     <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
     <string name="avg_sensor_temperature">Temperatura, promedio</string>
-    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
+    <string name="avg_sensor_speed">Sensor de velocidad, promedio</string>
     <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
     <string name="dont_ask_anymore">No preguntar más</string>
     <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
@@ -5235,7 +5235,7 @@
     <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
     <string name="avg_sensor_cadence">Cadencia de la bicicleta, promedio</string>
     <string name="max_sensor_temperature">Temperatura, máx</string>
-    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
+    <string name="max_sensor_speed">Sensor de velocidad, max</string>
     <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="shared_string_activity">Actividad</string>
@@ -5646,4 +5646,5 @@
     <string name="fuel_tank_capacity_description">Ingresa la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
     <string name="unit_of_volume">Unidad de volúmen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
+    <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
 </resources>

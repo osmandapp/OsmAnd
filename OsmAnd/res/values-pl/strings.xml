@@ -5711,4 +5711,15 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (l/km)</string>
     <string name="simulate_obd">Symuluj dane obd</string>
     <string name="dynamic_icon_type_summary">Ikona zmienia się w zależności od stanu akcji.</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Ciśnienie paliwa</string>
+    <string name="obd_engine_runtime_desc">Pokazuje czas pracy silnika pobrany ze skanera obd</string>
+    <string name="obd_engine_runtime">Czas pracy silnika</string>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="fuel_tank_capacity_description">Podaj pojemność zbiornika paliwa, aby precyzyjnie śledzić poziom i zużycie paliwa</string>
+    <string name="fuel_tank_capacity">Pojemność zbiornika paliwa</string>
+    <string name="shared_strings_dimensions">Wymiary</string>
+    <string name="litres">Litry</string>
+    <string name="imperial_gallons">Galony imperialne</string>
+    <string name="unit_of_volume">Jednostka objętości</string>
 </resources>

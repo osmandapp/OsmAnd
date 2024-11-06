@@ -5649,4 +5649,5 @@
     <string name="fuel_tank_capacity_description">Unesi kapacitet goriva u rezervaru za tačno praćenje nivoa i potrošnje goriva</string>
     <string name="us_gallons">US galoni</string>
     <string name="record_obd_data">Snimi metriku vozila</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Mreža podataka</string>
 </resources>

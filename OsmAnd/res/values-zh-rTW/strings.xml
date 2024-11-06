@@ -5634,4 +5634,5 @@
     <string name="unit_of_volume_description">選取的單位將套用於目前設定檔中所有與體積相關的資料。</string>
     <string name="unit_of_volume">體積單位</string>
     <string name="record_obd_data">記錄車輛指標</string>
+    <string name="wunderlinq_datagrid">WunderLINQ 資料網格</string>
 </resources>

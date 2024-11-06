@@ -6017,4 +6017,5 @@
     <string name="us_gallons">Galon AS</string>
     <string name="unit_of_volume_description">Satuan yang dipilih akan diterapkan ke semua data berkaitan dengan volume dalam profil saat ini.</string>
     <string name="unit_of_volume">Satuan volume</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
 </resources>

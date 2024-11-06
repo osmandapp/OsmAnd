@@ -5934,4 +5934,5 @@
     <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugmetriken aufzeichnen</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
 </resources>

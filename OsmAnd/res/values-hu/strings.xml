@@ -5604,4 +5604,5 @@
     <string name="litres">Liter</string>
     <string name="us_gallons_unit">gallon</string>
     <string name="record_obd_data">A jármű mérési adatainak rögzítése</string>
+    <string name="wunderlinq_datagrid">WunderLINQ adatrács</string>
 </resources>

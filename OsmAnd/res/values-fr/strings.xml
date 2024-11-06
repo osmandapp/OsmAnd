@@ -5624,6 +5624,9 @@
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
+    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
+    <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
+    <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
     <string name="bt_start_pair_failed">Impossible d\'amorcer l\'association avec l\'appareil</string>
     <string name="shared_string_dynamic">Dynamique</string>
@@ -5642,4 +5645,5 @@
     <string name="us_gallons">Gallons américains</string>
     <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
     <string name="unit_of_volume">Unité de volume</string>
+    <string name="wunderlinq_datagrid">Grille de données WunderLINQ</string>
 </resources>
