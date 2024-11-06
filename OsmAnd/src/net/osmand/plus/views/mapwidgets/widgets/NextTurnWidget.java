@@ -74,12 +74,12 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 				turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
 				setDeviatePath((int) routingHelper.getRouteDeviation());
 			} else {
-				NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
-				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
-					streetName = routingHelper.getCurrentName(r);
-					turnType = r.directionInfo.getTurnType();
-					nextTurnDistance = r.distanceTo;
-					turnImminent = r.imminent;
+				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
+				if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
+					streetName = CurrentStreetName.createStreetName(info);
+					turnType = info.directionInfo.getTurnType();
+					nextTurnDistance = info.distanceTo;
+					turnImminent = info.imminent;
 				}
 			}
 		}

@@ -65,17 +65,17 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 		int nextTurnDistance = 0;
 		if (routingHelper.isRouteCalculated() && followingMode) {
 			deviatedFromRoute = routingHelper.isDeviatedFromRoute();
-			NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
+			NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
 			if (!deviatedFromRoute) {
-				if (r != null) {
-					r = routingHelper.getNextRouteDirectionInfoAfter(r, nextDirectionInfo, true);
+				if (info != null) {
+					info = routingHelper.getNextRouteDirectionInfoAfter(info, nextDirectionInfo, true);
 				}
 			}
-			if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
-				streetName = routingHelper.getCurrentName(r);
-				turnType = r.directionInfo.getTurnType();
-				turnImminent = r.imminent;
-				nextTurnDistance = r.distanceTo;
+			if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
+				streetName = CurrentStreetName.createStreetName(info);
+				turnType = info.directionInfo.getTurnType();
+				turnImminent = info.imminent;
+				nextTurnDistance = info.distanceTo;
 			}
 		}
 		setStreetName(streetName);
