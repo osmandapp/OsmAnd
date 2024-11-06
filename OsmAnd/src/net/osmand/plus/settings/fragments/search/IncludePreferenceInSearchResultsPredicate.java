@@ -15,11 +15,11 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 	@Override
 	public boolean includePreferenceInSearchResults(final SearchablePreferencePOJO preference,
 													final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
-		return !isPreferenceConnectedToAnInactivePlugin(preference, hostOfPreference);
+		return !isPreferenceConnectedToAnyInactivePlugin(preference, hostOfPreference);
 	}
 
-	private static boolean isPreferenceConnectedToAnInactivePlugin(final SearchablePreferencePOJO preference,
-																   final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
+	private static boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferencePOJO preference,
+																	final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
 		return PluginsHelper
 				.getAvailablePlugins()
 				.stream()
@@ -27,10 +27,9 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, hostOfPreference, inactivePlugin));
 	}
 
-	private static boolean isPreferenceConnectedToPlugin(
-			final SearchablePreferencePOJO preference,
-			final Class<? extends PreferenceFragmentCompat> hostOfPreference,
-			final OsmandPlugin plugin) {
+	private static boolean isPreferenceConnectedToPlugin(final SearchablePreferencePOJO preference,
+														 final Class<? extends PreferenceFragmentCompat> hostOfPreference,
+														 final OsmandPlugin plugin) {
 		return isPreferenceOnSettingsScreen(hostOfPreference, plugin.getSettingsScreenType()) ||
 				PreferenceMarker.isPreferenceConnectedToPlugin(preference, plugin.getClass());
 	}
