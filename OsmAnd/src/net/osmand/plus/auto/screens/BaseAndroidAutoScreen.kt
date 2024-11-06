@@ -98,25 +98,12 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 				// FIXME revert after start
 				//				val prevElevationAngle: Float = mapView.normalizeElevationAngle(mapView.elevationAngle)
 				mapView.setElevationAngle(90f)
+				app.mapViewTrackingUtilities.isMapLinkedToLocation = false
 				mapView.setRotate(0f, true)
-				// DELETE
-//				val tileBox = mapView.rotatedTileBox
-//				val vArea = surfaceRenderer.visibleArea
-//				val rectWidth = mapRect.right - mapRect.left
-//				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
-//				mapRect.left -= rectWidth * coef
-//				mapRect.right += rectWidth * coef
-//				Log.i("net.osmand.dev", "ZOOM " + coef + " map rect" + mapRect)
-//				var dx = 0
-//				if (vArea != null) {
-//					val ltr = vArea.left > (vArea.width() - vArea.right)
-//					if (ltr) {
-//						dx = vArea.left
-//					} else {
-//						dx = -(vArea.width() - vArea.right)
-//					}
-//				}
+				val vArea = surfaceRenderer.visibleArea
 				val tb = mapView.getRotatedTileBox()
+				tb.rotate = 0f
+				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f )
 				mapView.fitRectToMap(tb,
 					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
 					0, 0, true
