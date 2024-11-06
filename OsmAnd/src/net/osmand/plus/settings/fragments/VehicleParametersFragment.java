@@ -74,7 +74,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
 
 				showDimensionsCategory(parameters, routerProfile, derivedProfile);
-				showFuelCategory(parameters);
+				showFuelCategory(parameters, routerProfile);
 				showOtherCategory(parameters, routerProfile);
 			}
 		} else {
@@ -98,11 +98,22 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void showFuelCategory(@NonNull Map<String, RoutingParameter> parameters) {
-		createDividerPref();
-		setupCategoryPref(R.string.poi_filter_fuel);
-		setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
-		setupFuelTankCapacityPref();
+	private void showFuelCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile) {
+		boolean showFuelTankCapacity = routerProfile != null
+				&& routerProfile != GeneralRouterProfile.PEDESTRIAN
+				&& routerProfile != GeneralRouterProfile.BICYCLE
+				&& routerProfile != GeneralRouterProfile.HORSEBACKRIDING
+				&& routerProfile != GeneralRouterProfile.SKI;
+		RoutingParameter motorTypeParameter = parameters.get(MOTOR_TYPE);
+		boolean showCategory = showFuelTankCapacity || motorTypeParameter != null;
+		if (showCategory) {
+			createDividerPref();
+			setupCategoryPref(R.string.poi_filter_fuel);
+		}
+		setupRoutingParameterPref(motorTypeParameter);
+		if (showFuelTankCapacity) {
+			setupFuelTankCapacityPref();
+		}
 	}
 
 	private void showDimensionsCategory(@NonNull Map<String, RoutingParameter> parameters,
@@ -136,10 +147,11 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	private void setupFuelTankCapacityPref() {
 		Context ctx = requireContext();
+		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultSpeedPref = new Preference(ctx);
 		defaultSpeedPref.setKey(settings.FUEL_TANK_CAPACITY.getId());
 		defaultSpeedPref.setTitle(R.string.fuel_tank_capacity);
-		defaultSpeedPref.setSummary(OsmAndFormatter.getFormattedFuelCapacityValue(app, settings.UNIT_OF_VOLUME.get(), getSelectedAppMode()).format(app));
+		defaultSpeedPref.setSummary(OsmAndFormatter.getFormattedFuelCapacityValue(app, settings.UNIT_OF_VOLUME.getModeValue(selectedMode), selectedMode).format(app));
 		defaultSpeedPref.setIcon(getPersistentPrefIcon(R.drawable.ic_action_fuel_tank));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);
