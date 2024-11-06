@@ -6017,4 +6017,9 @@
     <string name="obd_widget_engine_speed">Rivolua rapido de motoro</string>
     <string name="obd_widget_vehicle_speed">Rapido de veturilo</string>
     <string name="route_guidance_desc">Liveras jamajn sciigojn pri kurso: distancon ĝis sekva turniĝo, strat-nomon (aktualan kaj sekvan) kaj informojn pri vetur-koridoroj. Fenestraĵoj estas aktivaj dum navigi.</string>
+    <string name="obd_nothing_found_text">Neniu trovita skanilo</string>
+    <string name="obd_bluetooth_off_description">Aktivigu Bludenton por serĉi kaj konekti skanilojn.</string>
+    <string name="obd_device_forget_sensor">Forgesi skanilon</string>
+    <string name="obd_searching_text_description">Tenu vian aparaton proksime al la skanilo. Certiĝu, ke motoro de la veturilo laboras.</string>
+    <string name="obd_searching_text">Serĉado de skaniloj</string>
 </resources>
