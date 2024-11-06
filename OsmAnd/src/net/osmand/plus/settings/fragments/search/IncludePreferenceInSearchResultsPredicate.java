@@ -8,6 +8,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferencePOJO;
 
@@ -24,7 +26,12 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 				preference,
 				hostOfPreference,
 				DevelopmentSettingsFragment.class,
-				OsmandDevelopmentPlugin.class);
+				OsmandDevelopmentPlugin.class) ||
+				isPreferenceConnectedToInactivePlugin(
+						preference,
+						hostOfPreference,
+						MonitoringSettingsFragment.class,
+						OsmandMonitoringPlugin.class);
 	}
 
 	private static boolean isPreferenceConnectedToInactivePlugin(
