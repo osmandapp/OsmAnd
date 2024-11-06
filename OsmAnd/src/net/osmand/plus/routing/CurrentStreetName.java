@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
@@ -7,6 +9,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -32,34 +35,14 @@ public class CurrentStreetName {
 		return RoutingHelperUtils.formatStreetName(nm, includeRef ? rf : null, dn, "»");
 	}
 
-	@NonNull
-	public static CurrentStreetName getCurrentName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo n) {
+	public static CurrentStreetName getCurrentName(@NonNull RoutingHelper routingHelper, @NonNull NextDirectionInfo info) {
 		CurrentStreetName streetName = new CurrentStreetName();
 		Location l = routingHelper.getLastFixedLocation();
 		AnnounceTimeDistances adt = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		boolean isSet = false;
 		// 1. turn is imminent
-		if (n.distanceTo > 0 && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
-				adt.isTurnStateActive(adt.getSpeed(l), n.distanceTo * 1.3, AnnounceTimeDistances.STATE_PREPARE_TURN)) {
-			String nm = n.directionInfo.getStreetName();
-			String rf = n.directionInfo.getRef();
-			String dn = n.directionInfo.getDestinationName();
-			isSet = !(Algorithms.isEmpty(nm) && Algorithms.isEmpty(rf) && Algorithms.isEmpty(dn));
-			RouteDataObject routeDataObject = n.directionInfo.getRouteDataObject();
-			streetName.shields = RoadShield.create(routeDataObject);
-			streetName.text = RoutingHelperUtils.formatStreetName(nm, rf, dn, "»", streetName.shields);
-			streetName.turnType = n.directionInfo.getTurnType();
-			if (streetName.turnType == null) {
-				streetName.turnType = TurnType.valueOf(TurnType.C, false);
-			}
-			if (n.directionInfo.getExitInfo() != null) {
-				// don't display name of exit street name
-				streetName.exitRef = n.directionInfo.getExitInfo().getRef();
-				if (!isSet && !Algorithms.isEmpty(n.directionInfo.getDestinationName())) {
-					streetName.text = n.directionInfo.getDestinationName();
-					isSet = true;
-				}
-			}
+		if (info.distanceTo > 0 && adt.isTurnStateActive(adt.getSpeed(l), info.distanceTo * 1.3, STATE_PREPARE_TURN)) {
+			isSet = setupStreetName(streetName, info);
 		}
 		// 2. display current road street name
 		if (!isSet) {
@@ -89,5 +72,40 @@ public class CurrentStreetName {
 			streetName.showMarker = true;
 		}
 		return streetName;
+	}
+
+	@NonNull
+	public static CurrentStreetName createStreetName(@NonNull NextDirectionInfo info) {
+		CurrentStreetName streetName = new CurrentStreetName();
+		CurrentStreetName.setupStreetName(streetName, info);
+		return streetName;
+	}
+
+	public static boolean setupStreetName(@NonNull CurrentStreetName streetName, @NonNull NextDirectionInfo info) {
+		boolean isSet = false;
+		if (info.directionInfo != null && !info.directionInfo.getTurnType().isSkipToSpeak()) {
+			String name = info.directionInfo.getStreetName();
+			String ref = info.directionInfo.getRef();
+			String destinationName = info.directionInfo.getDestinationName();
+			isSet = !(Algorithms.isEmpty(name) && Algorithms.isEmpty(ref) && Algorithms.isEmpty(destinationName));
+
+			RouteDataObject dataObject = info.directionInfo.getRouteDataObject();
+			streetName.shields = RoadShield.create(dataObject);
+			streetName.text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "»", streetName.shields);
+			streetName.turnType = info.directionInfo.getTurnType();
+			if (streetName.turnType == null) {
+				streetName.turnType = TurnType.valueOf(TurnType.C, false);
+			}
+			ExitInfo exitInfo = info.directionInfo.getExitInfo();
+			if (exitInfo != null) {
+				// don't display name of exit street name
+				streetName.exitRef = exitInfo.getRef();
+				if (!isSet && !Algorithms.isEmpty(info.directionInfo.getDestinationName())) {
+					streetName.text = info.directionInfo.getDestinationName();
+					isSet = true;
+				}
+			}
+		}
+		return isSet;
 	}
 }

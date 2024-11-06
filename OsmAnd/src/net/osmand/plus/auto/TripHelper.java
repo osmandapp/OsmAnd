@@ -134,15 +134,8 @@ public class TripHelper {
 		AnnounceTimeDistances atd = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		if (nextDirInfo != null && atd != null) {
 			float speed = atd.getSpeed(currentLocation);
-			int dist = nextDirInfo.distanceTo;
 			nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
-			if (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
-				if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
-						(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
-								|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
-					nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
-				}
-			}
+			nextTurnType = getNextTurnType(atd, nextNextDirInfo, speed, nextDirInfo.distanceTo);
 		}
 		stepBuilder.setManeuver(maneuver);
 		stepBuilder.setCue(getNextCue(nextDirInfo, turnType, nextTurnType));
@@ -188,11 +181,12 @@ public class TripHelper {
 		lastStep = step;
 		lastStepTravelEstimate = stepTravelEstimate;
 
-		setupNextNextTurn(tripBuilder, nextNextDirInfo, deviatedFromRoute, leftTurnTimeSec, density);
+		setupNextNextTurn(tripBuilder, nextNextDirInfo, currentLocation, deviatedFromRoute, leftTurnTimeSec, density);
 	}
 
 	private void setupNextNextTurn(@NonNull Builder tripBuilder, @Nullable NextDirectionInfo nextNextDirInfo,
-	                               boolean deviatedFromRoute, int leftTurnTimeSec, float density) {
+	                               @Nullable Location currentLocation, boolean deviatedFromRoute,
+	                               int leftTurnTimeSec, float density) {
 		if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0
 				&& nextNextDirInfo.imminent >= 0 && nextNextDirInfo.directionInfo != null) {
 			Step.Builder nextStepBuilder = new Step.Builder();
@@ -221,7 +215,14 @@ public class TripHelper {
 			TravelEstimate.Builder nextStepTravelEstimateBuilder = new TravelEstimate.Builder(nextStepDistance, nextStepDateTime);
 			nextStepTravelEstimateBuilder.setRemainingTimeSeconds(leftNextTurnTimeSec >= 0 ? leftNextTurnTimeSec : REMAINING_TIME_UNKNOWN);
 
-			nextStepBuilder.setCue(getNextNextCue(nextNextDirInfo));
+			TurnType nextNextTurnType = null;
+			AnnounceTimeDistances atd = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
+			if (atd != null) {
+				float speed = atd.getSpeed(currentLocation);
+				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfoAfter(nextNextDirInfo, new NextDirectionInfo(), true);
+				nextNextTurnType = getNextTurnType(atd, info, speed, nextNextDirInfo.distanceTo);
+			}
+			nextStepBuilder.setCue(getNextNextCue(nextNextDirInfo, nextTurnType, nextNextTurnType));
 
 			Step nextStep = nextStepBuilder.build();
 			TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
@@ -280,6 +281,18 @@ public class TripHelper {
 		}
 	}
 
+	@Nullable
+	private TurnType getNextTurnType(@NonNull AnnounceTimeDistances atd, @Nullable NextDirectionInfo info, float speed, int distance) {
+		if (atd.isTurnStateActive(speed, distance, STATE_TURN_IN)) {
+			if (info != null && info.directionInfo != null &&
+					(atd.isTurnStateActive(speed, info.distanceTo, STATE_TURN_NOW)
+							|| !atd.isTurnStateNotPassed(speed, info.distanceTo, STATE_TURN_IN))) {
+				return info.directionInfo.getTurnType();
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	private String getNextCue(@Nullable NextDirectionInfo info, @Nullable TurnType type, @Nullable TurnType nextTurnType) {
 		String cue = getCue(info);
@@ -292,10 +305,13 @@ public class TripHelper {
 	}
 
 	@NonNull
-	private String getNextNextCue(@NonNull NextDirectionInfo directionInfo) {
-		String cue = getCue(directionInfo);
-		String distance = TripUtils.getFormattedDistanceStr(app, directionInfo.distanceTo);
+	private String getNextNextCue(@NonNull NextDirectionInfo info, @Nullable TurnType nextTurnType, @Nullable TurnType nextNextTurnType) {
+		String cue = getCue(info);
+		String distance = TripUtils.getFormattedDistanceStr(app, info.distanceTo);
 
+		if (Algorithms.isEmpty(cue)) {
+			cue = nextTurnType != null ? TripUtils.nextTurnsToString(app, nextTurnType, nextNextTurnType) : null;
+		}
 		return Algorithms.isEmpty(cue) ? distance : app.getString(R.string.ltr_or_rtl_combine_via_comma, distance, cue);
 	}
 
@@ -346,14 +362,14 @@ public class TripHelper {
 	@Nullable
 	private String defineStreetName(@Nullable NextDirectionInfo nextDirInfo) {
 		if (nextDirInfo != null) {
-			CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
-			String streetName = currentStreetName.text;
+			CurrentStreetName streetName = CurrentStreetName.createStreetName(nextDirInfo);
 
-			if (!Algorithms.isEmpty(streetName)) {
-				String exitRef = currentStreetName.exitRef;
+			String name = streetName.text;
+			if (!Algorithms.isEmpty(name)) {
+				String exitRef = streetName.exitRef;
 				return Algorithms.isEmpty(exitRef)
-						? streetName
-						: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
+						? name
+						: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, name);
 			}
 		}
 		return null;
