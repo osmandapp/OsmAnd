@@ -93,7 +93,7 @@ public class LocationParser {
 
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
-		locPhrase = TextDirectionUtil.clearForcedDirection(locPhrase);
+		locPhrase = TextDirectionUtil.clearDirectionMarks(locPhrase);
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");

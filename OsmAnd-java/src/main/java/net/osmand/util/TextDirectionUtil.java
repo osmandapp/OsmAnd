@@ -13,7 +13,7 @@ public class TextDirectionUtil {
 		return RTL_MARK + text;
 	}
 
-	public static String clearForcedDirection(String text) {
+	public static String clearDirectionMarks(String text) {
 		return text.replaceAll(LTR_MARK, "").replaceAll(RTL_MARK, "");
 	}
 }

@@ -174,7 +174,8 @@ public class ShareMenu extends BaseMenuController {
 
 		OsmandSettings settings = ((OsmandApplication) activity.getApplicationContext()).getSettings();
 		int format = settings.COORDINATES_FORMAT.get();
-		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
+		String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
+		this.coordinates = TextDirectionUtil.clearDirectionMarks(coordinates);
 	}
 
 	public static void startAction(@NonNull Context context, @NonNull ShareItem item,
@@ -246,7 +247,7 @@ public class ShareMenu extends BaseMenuController {
 	public static void sendMessage(@NonNull Context context, @NonNull String text) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setAction(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_TEXT, TextDirectionUtil.clearForcedDirection(text));
+		intent.putExtra(Intent.EXTRA_TEXT, TextDirectionUtil.clearDirectionMarks(text));
 		intent.setType("text/plain");
 		Intent chooserIntent = Intent.createChooser(intent, context.getString(R.string.send_location));
 		AndroidUtils.startActivityIfSafe(context, intent, chooserIntent);
@@ -270,7 +271,7 @@ public class ShareMenu extends BaseMenuController {
 	                                       boolean showToast, int duration) {
 		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
 		if (object instanceof ClipboardManager clipboardManager) {
-			String cleanText = TextDirectionUtil.clearForcedDirection(text);
+			String cleanText = TextDirectionUtil.clearDirectionMarks(text);
 			clipboardManager.setPrimaryClip(ClipData.newPlainText("", cleanText));
 			if (showToast) {
 				String toastMessage = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
