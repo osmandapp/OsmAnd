@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.content.Context;
@@ -418,6 +419,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 				preference.setLayoutResource(R.layout.preference_with_descr);
 				preference.setFragment(plugin.getSettingsScreenType().fragmentName);
+				markPreferenceAsConnectedToPlugin(preference, plugin.getClass());
 
 				category.addPreference(preference);
 			}

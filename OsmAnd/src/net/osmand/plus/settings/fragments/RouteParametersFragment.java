@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE
 import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazmatUsaClass;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
+import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.router.GeneralRouter.ALLOW_VIA_FERRATA;
 import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
@@ -43,6 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
@@ -177,7 +179,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
-	private void setupOsmLiveForPublicTransportPref() {
+	private void setupOsmLiveForPublicTransportPref(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx useOsmLiveForPublicTransport = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.getId(),
 				R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
 		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
@@ -185,20 +187,22 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
 		useOsmLiveForPublicTransport.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForPublicTransport.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(useOsmLiveForPublicTransport, plugin);
 		getPreferenceScreen().addPreference(useOsmLiveForPublicTransport);
 	}
 
-	private void setupNativePublicTransport() {
+	private void setupNativePublicTransport(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
 				R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
 		setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
 		setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
 		setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
 		setupNativePublicTransport.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(setupNativePublicTransport, plugin);
 		getPreferenceScreen().addPreference(setupNativePublicTransport);
 	}
 
-	private void setupOsmLiveForRoutingPref() {
+	private void setupOsmLiveForRoutingPref(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx useOsmLiveForRouting = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_ROUTING.getId(),
 				R.string.use_live_routing, R.layout.preference_with_descr_dialog_and_switch);
 		useOsmLiveForRouting.setDescription(getString(R.string.use_osm_live_routing_description));
@@ -206,6 +210,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		useOsmLiveForRouting.setSummaryOff(R.string.shared_string_disabled);
 		useOsmLiveForRouting.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForRouting.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(useOsmLiveForRouting, plugin);
 		getPreferenceScreen().addPreference(useOsmLiveForRouting);
 	}
 
@@ -244,9 +249,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		// FK-FIXME: If the following condition is false, then disable PreferenceSearch for all development preferences.
-		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-			setupDevelopmentCategoryPreferences(screen, am);
+		final Class<OsmandDevelopmentPlugin> plugin = OsmandDevelopmentPlugin.class;
+		if (PluginsHelper.isActive(plugin)) {
+			setupDevelopmentCategoryPreferences(screen, am, plugin);
 		}
 	}
 
@@ -412,35 +417,37 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		screen.addPreference(routingCategory);
 	}
 
-	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode) {
+	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode, final Class<? extends OsmandPlugin> plugin) {
 		addDivider(screen);
-		setupDevelopmentCategoryHeader(screen);
+		setupDevelopmentCategoryHeader(screen, plugin);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
-			setupOsmLiveForPublicTransportPref();
-			setupNativePublicTransport();
+			setupOsmLiveForPublicTransportPref(plugin);
+			setupNativePublicTransport(plugin);
 		} else {
-			setupRoutingTypePref();
-			setupApproximationTypePref();
-			setupAutoZoomPref();
-			setupOsmLiveForRoutingPref();
+			setupRoutingTypePref(plugin);
+			setupApproximationTypePref(plugin);
+			setupAutoZoomPref(plugin);
+			setupOsmLiveForRoutingPref(plugin);
 		}
 	}
 
-	private void setupDevelopmentCategoryHeader(PreferenceScreen screen) {
+	private void setupDevelopmentCategoryHeader(PreferenceScreen screen, final Class<? extends OsmandPlugin> plugin) {
 		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
 		developmentCategory.setKey("development");
+		markPreferenceAsConnectedToPlugin(developmentCategory, plugin);
 		screen.addPreference(developmentCategory);
 	}
 
-	private void setupAutoZoomPref() {
+	private void setupAutoZoomPref(final Class<? extends OsmandPlugin> plugin) {
 		Preference preference = new Preference(requireContext());
 		preference.setKey(settings.USE_DISCRETE_AUTO_ZOOM.getId());
 		preference.setTitle(R.string.auto_zoom);
 		preference.setLayoutResource(R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_magnifier_plus));
 		preference.setSummary(settings.USE_DISCRETE_AUTO_ZOOM.get() ? R.string.auto_zoom_discrete : R.string.auto_zoom_smooth);
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
@@ -493,7 +500,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		PopUpMenu.show(displayData);
 	}
 
-	private void setupRoutingTypePref() {
+	private void setupRoutingTypePref(final Class<? extends OsmandPlugin> plugin) {
 		RoutingType[] types = RoutingType.values();
 		String[] names = new String[types.length];
 		Integer[] values = new Integer[types.length];
@@ -507,6 +514,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTING_TYPE.getId(), names,
 				values, R.string.routing_type, R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_route_points));
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
@@ -532,7 +540,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		PopUpMenu.show(displayData);
 	}
 
-	private void setupApproximationTypePref() {
+	private void setupApproximationTypePref(final Class<? extends OsmandPlugin> plugin) {
 		ApproximationType[] types = ApproximationType.values();
 		String[] names = new String[types.length];
 		Integer[] values = new Integer[types.length];
@@ -546,6 +554,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		ListPreferenceEx preference = createListPreferenceEx(settings.APPROXIMATION_TYPE.getId(), names,
 				values, R.string.gpx_approximation, R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_attach_track));
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
