@@ -6042,4 +6042,9 @@
     <string name="us_gallons">Американские галлоны</string>
     <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">us gal</string>
+    <string name="shared_string_hour">Час</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>
+    <string name="shared_string_volume">Объём</string>
+    <string name="obd_engine_runtime">Продолжительность работы двигателя</string>
+    <string name="obd_engine_runtime_desc">Показывает, как долго двигатель работает с момента запуска.</string>
 </resources>
