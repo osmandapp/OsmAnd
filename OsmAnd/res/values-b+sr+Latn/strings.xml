@@ -5650,9 +5650,9 @@
     <string name="us_gallons">US galoni</string>
     <string name="record_obd_data">Snimi metriku vozila</string>
     <string name="wunderlinq_datagrid">WunderLINQ mreža podataka</string>
-    <string name="ltr_or_rtl_combine_via_per">%1$s po%2$s</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s po %2$s</string>
     <string name="obd_engine_runtime_desc">Pokazuje koliko dugo je motor radio od pokretanja.</string>
-    <string name="obd_calculated_engine_load_desc">Prikazuje procenjeno opterećenje motora na osnovu podataka senzora</string>
+    <string name="obd_calculated_engine_load_desc">Prikazuje procenjeno opterećenje motora na osnovu podataka senzora.</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Koristi odabrane jedinice u imenu.</string>
     <string name="obd_fuel_consumption_desc">Prikazuje stopu potrošnje goriva na osnovu preostalog goriva, veličine rezervoara i pređene udaljenosti kako je određeno GPS-om.</string>
     <string name="obd_fuel_consumption">Potrošnja goriva</string>
@@ -5664,7 +5664,7 @@
     <string name="vehicle_metrics_obd_ii">Metrika vozila (OBD-II)</string>
     <string name="shared_string_hour">Čas</string>
     <string name="shared_string_volume">Jačina</string>
-    <string name="obd_throttle_position_desc">Prikazuje ugao prigušne ploče u kućištu leptira za gas.</string>
+    <string name="obd_throttle_position_desc">Prikazuje ugao ploče gasa u kućištu leptira za gas.</string>
     <string name="obd_engine_oil_temperature">Temperatura motornog ulja</string>
     <string name="average_temperature">Prosečna temperatura</string>
     <string name="remaining_fuel_description">Pokazuje količinu goriva koja je ostala u rezervoaru</string>
