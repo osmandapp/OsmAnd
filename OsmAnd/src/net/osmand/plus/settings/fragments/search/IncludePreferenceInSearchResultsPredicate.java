@@ -4,6 +4,7 @@ import static net.osmand.plus.settings.fragments.search.PreferenceMarker.isPrefe
 
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -13,16 +14,25 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceP
 class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.settingssearch.provider.IncludePreferenceInSearchResultsPredicate {
 
 	@Override
-	public boolean includePreferenceOfHostInSearchResults(final SearchablePreferencePOJO preference, final Class<? extends PreferenceFragmentCompat> host) {
-		// FK-TODO: handle also all the other plugins besides OsmandDevelopmentPlugin
-		if (isDevelopmentSettingsPreference(preference, host) && !PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-			return false;
-		}
-		return true;
+	public boolean includePreferenceInSearchResults(final SearchablePreferencePOJO preference, final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
+		return !isPreferenceConnectedToAnInactivePlugin(preference, hostOfPreference);
 	}
 
-	private static boolean isDevelopmentSettingsPreference(final SearchablePreferencePOJO preference,
-														   final Class<? extends PreferenceFragmentCompat> host) {
-		return DevelopmentSettingsFragment.class.equals(host) || isPreferenceConnectedToPlugin(preference, OsmandDevelopmentPlugin.class);
+	private static boolean isPreferenceConnectedToAnInactivePlugin(final SearchablePreferencePOJO preference, final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
+		// FK-TODO: handle also all the other plugins besides OsmandDevelopmentPlugin
+		return isPreferenceConnectedToInactivePlugin(
+				preference,
+				hostOfPreference,
+				DevelopmentSettingsFragment.class,
+				OsmandDevelopmentPlugin.class);
+	}
+
+	private static boolean isPreferenceConnectedToInactivePlugin(
+			final SearchablePreferencePOJO preference,
+			final Class<? extends PreferenceFragmentCompat> hostOfPreference,
+			final Class<? extends PreferenceFragmentCompat> preferenceFragment,
+			final Class<? extends OsmandPlugin> plugin) {
+		return (preferenceFragment.equals(hostOfPreference) || isPreferenceConnectedToPlugin(preference, plugin)) &&
+				!PluginsHelper.isActive(plugin);
 	}
 }
