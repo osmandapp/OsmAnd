@@ -3,7 +3,6 @@ package net.osmand.plus.auto.screens;
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
 
 import android.text.SpannableString;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,11 +20,10 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.TripHelper;
@@ -33,10 +31,14 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -60,6 +62,9 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Nullable
 	private GpxFile routeGpxFile;
+
+	private CompassMode savedCompassMode = CompassMode.NORTH_IS_UP;
+	private float prevElevationAngle = 90;
 
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
@@ -141,6 +146,10 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		getApp().getTargetPointsHelper().addListener(stateChangedListener);
+		savedCompassMode = getApp().getSettings().getCompassMode();
+		getApp().getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
+		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+		prevElevationAngle = mapView.normalizeElevationAngle(mapView.getElevationAngle());
 		if (getApp().getRoutingHelper().isRouteCalculated()) {
 			updateRoute(true);
 		} else {
@@ -153,6 +162,9 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.removeListener(this);
+		app.getSettings().setCompassMode(savedCompassMode);
+		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+		mapView.setElevationAngle(prevElevationAngle);
 		if (routingHelper.isRoutePlanningMode()) {
 			app.stopNavigation();
 		}
@@ -233,5 +245,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		if (!calculating) {
 			onNavigate();
 		}
+	}
+
+	@Override
+	protected void adjustMapToRect(@NonNull LatLon location, @NonNull QuadRect mapRect) {
+		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+		mapView.setElevationAngle(90f);
+		getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		mapView.setRotate(0f, true);
+		super.adjustMapToRect(location, mapRect);
 	}
 }

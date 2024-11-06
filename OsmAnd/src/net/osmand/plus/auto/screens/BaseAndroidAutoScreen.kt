@@ -90,19 +90,13 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		}
 	}
 
-	protected fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
+	protected open fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
 		Algorithms.extendRectToContainPoint(mapRect, location.longitude, location.latitude)
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
-				// FIXME revert after start
-				//				val prevElevationAngle: Float = mapView.normalizeElevationAngle(mapView.elevationAngle)
-				mapView.setElevationAngle(90f)
 				app.mapViewTrackingUtilities.isMapLinkedToLocation = false
-				mapView.setRotate(0f, true)
-				val vArea = surfaceRenderer.visibleArea
-				val tb = mapView.getRotatedTileBox()
-				tb.rotate = 0f
+				val tb = mapView.rotatedTileBox
 				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f )
 				mapView.fitRectToMap(tb,
 					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
