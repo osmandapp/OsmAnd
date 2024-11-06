@@ -1681,6 +1681,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, false);
+	}
+
+	public void fitRectToMap(double left, double right, double top, double bottom,
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
 		RotatedTileBox tb = currentViewport.copy();
 		double border = 0.8;
 		int dx = 0;
@@ -1708,16 +1713,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
-
-		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomIn();
-			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
-		}
+		float step = useSmallZoom ? 0.1f : 1f;
 		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomOut();
+			zoom.partialChangeZoom(-step);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
 
+		if (useSmallZoom) {
+			zoom.partialChangeZoom(step);
+		}
+		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
+			zoom.partialChangeZoom(step);
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
+		if (useSmallZoom) {
+			zoom.partialChangeZoom(-step);
+		}
+		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
