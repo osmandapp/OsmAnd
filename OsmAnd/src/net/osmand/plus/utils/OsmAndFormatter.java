@@ -35,6 +35,7 @@ import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
+import net.osmand.util.TextDirectionUtil;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -95,9 +96,6 @@ public class OsmAndFormatter {
 	private static final char SOUTH = 'S';
 	private static final char WEST = 'W';
 	private static final char EAST = 'E';
-
-	public static final String LTR_MARK = "\u200e";
-	public static final String RTL_MARK = "\u200f";
 
 	static {
 		setTwelveHoursFormatting(false, Locale.getDefault());
@@ -975,7 +973,7 @@ public class OsmAndFormatter {
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		}
-		return result.toString();
+		return TextDirectionUtil.markAsLTR(result.toString());
 	}
 
 
@@ -1015,11 +1013,6 @@ public class OsmAndFormatter {
 					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
-	}
-
-	// TODO do we need this method at all?
-	public static String markLTR(String text) {
-		return LTR_MARK + text;
 	}
 
 	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {
