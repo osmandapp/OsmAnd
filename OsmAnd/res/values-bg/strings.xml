@@ -4385,7 +4385,7 @@
     <string name="obd_fuel_type_unknown">Неизвестен вид гориво</string>
     <string name="obd_widget_group">Показатели превозно средство</string>
     <string name="obd_rpm">об/мин</string>
-    <string name="obd_ambient_air_temp_desc">Показва температурата на околната среда спрямо сензора на OBD</string>
+    <string name="obd_ambient_air_temp_desc">Показва температурата на околната среда.</string>
     <string name="obd_rpm_desc">Показва оборотите на тахометъра спрямо сензора на OBD</string>
     <string name="obd_air_intake_temp">t⁰ на постъпващ въздух</string>
     <string name="obd_fuel_level_desc">Показва нивото на горивото спрямо сензора на OBD</string>
@@ -4445,4 +4445,17 @@
     <string name="max_sensor_speed">Сензор скорост, макс</string>
     <string name="avg_sensor_bycicle_power">Вело мощност, средно</string>
     <string name="max_sensor_temperature">Температура, макс</string>
+    <string name="remaining_fuel">Оставащо гориво</string>
+    <string name="reset_average_value">Нулиране на средна стойност</string>
+    <string name="shared_string_instant">Незабавно</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Избраните мерни единици да бъдат добавени в името.</string>
+    <string name="remaining_fuel_description">Показва количеството на оставащото в резервоара гориво</string>
+    <string name="obd_fuel_consumption_desc">Показва разхода на гориво от двигателя, изчислен въз основа на оставащото гориво, размера на резервоара и изминатото разстояние, според GPS.</string>
+    <string name="obd_fuel_consumption">Разход на гориво</string>
+    <string name="average_value_slider_description">Изберете интервала от време, през който да бъде измерена средната стойност.</string>
+    <string name="average_temperature">Средна температура</string>
+    <string name="average_temperature_slider_description">Изберете интервала от време, през който да бъде измерена средната трмпература.</string>
+    <string name="current_temperature">Текуща температура</string>
+    <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора</string>
+    <string name="obd_air_intake_temp_desc">Показва температурата на постъпвщия през въздушната клапа въздух.</string>
 </resources>
