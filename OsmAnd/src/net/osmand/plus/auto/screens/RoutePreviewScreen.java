@@ -3,6 +3,7 @@ package net.osmand.plus.auto.screens;
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
 
 import android.text.SpannableString;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
@@ -47,6 +49,8 @@ import java.util.List;
 public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements IRouteInformationListener,
 		DefaultLifecycleObserver {
 
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(RoutePreviewScreen.class);
+
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
@@ -64,6 +68,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			if (routeGpxFile != null) {
 				QuadRect mapRect = new QuadRect();
 				Algorithms.extendRectToContainRect(mapRect, SharedUtil.jQuadRect(routeGpxFile.getRect()));
+
 				adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 			}
 		}
@@ -207,6 +212,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
 		if (mapRect != null) {
+			LOG.info("ZOOM Route " + mapRect);
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
 		updateRoute(newRoute);
