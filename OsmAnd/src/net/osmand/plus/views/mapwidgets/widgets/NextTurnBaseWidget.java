@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.CurrentStreetName.RoadShield;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
