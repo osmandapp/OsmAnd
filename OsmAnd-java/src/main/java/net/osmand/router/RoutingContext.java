@@ -300,10 +300,10 @@ public class RoutingContext {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
 							if (config.ambiguousConditionalTags != null) {
-								ro.resolveAmbiguousConditionalTags(config.ambiguousConditionalTags);
+								RouteConditionalHelper.resolveAmbiguousConditionalTags(ro, config.ambiguousConditionalTags);
 							}
 							if (config.routeCalculationTime != 0) {
-								ro.processConditionalTags(config.routeCalculationTime);
+								RouteConditionalHelper.processConditionalTags(ro, config.routeCalculationTime);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
