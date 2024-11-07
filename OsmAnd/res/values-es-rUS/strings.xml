@@ -4684,7 +4684,7 @@
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="choose_what_to_sync">Elige qué sincronizar</string>
-    <string name="cloud_sync_progress">Sincronizar... %1$s</string>
+    <string name="cloud_sync_progress">Sincronizando... %1$s</string>
     <string name="checking_progress">Comprobando…</string>
     <string name="shared_string_modified">Editado</string>
     <string name="sync_now">Sincronizar ahora</string>
@@ -5228,7 +5228,7 @@
     <string name="max_sensor_temperature">Temperatura, máx</string>
     <string name="avg_sensor_temperature">Temperatura, promedio</string>
     <string name="avg_sensor_speed">Sensor de velocidad, promedio</string>
-    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» ordenadas por: «%2$s»</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="shared_string_keywords">Palabras clave</string>
     <string name="shared_string_additional">Adicional</string>
@@ -5372,7 +5372,7 @@
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="app_profile">Perfil de la aplicación</string>
-    <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
+    <string name="quick_action_next_app_profile">Perfil siguiente de la aplicación</string>
     <string name="shared_string_set">Definir</string>
     <string name="quick_action_terrain">Tipo de coloreado del terreno</string>
     <string name="quick_action_first_intermediate">Primer destino intermedio</string>
@@ -5384,7 +5384,7 @@
     <string name="quick_action_move_map_right">Mapa a la derecha</string>
     <string name="quick_action_move_map_down">Mapa hacia abajo</string>
     <string name="quick_action_new_route">Nueva ruta</string>
-    <string name="quick_action_previous_app_profile">Perfil de la aplicación anterior</string>
+    <string name="quick_action_previous_app_profile">Perfil anterior de la aplicación</string>
     <string name="shared_string_create">Crear</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="shared_string_simulate">Simular</string>
@@ -5405,7 +5405,7 @@
 \nCPU básica: %2$s
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>
-    <string name="quick_action_to_my_location">Para mi ubicación</string>
+    <string name="quick_action_to_my_location">A mi ubicación</string>
     <string name="quick_action_move_map_left">Mapa a la izquierda</string>
     <string name="quick_action_move_map_up">Mapa hacia arriba</string>
     <string name="quick_action_audio_note">Nota de audio</string>
@@ -5437,7 +5437,7 @@
     <string name="resting_position">Ubicación en reposo</string>
     <string name="navigation_position">Ubicación al navegar</string>
     <string name="resting_navigation_position">Ubicación en reposo y al navegar</string>
-    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
+    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triangular</string>
     <string name="view_angle">Ángulo de visión</string>
     <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
     <string name="location_radius">Radio de ubicación</string>
