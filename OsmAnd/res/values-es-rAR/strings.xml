@@ -4574,10 +4574,10 @@
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
     <string name="release_4_3">• Motor versión 2 (OpenGL): más rápido para visualizar mapas, con vista 2.5D\n\n• Animación suave para los cambios de ubicación al moverse\n\n• Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica\n\n• «Distancia al pulsar»: nuevas opciones de tamaño de texto\n\n• Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones\n\n• Se corrigió la opción «Posición de la ubicación»\n\n• GPX: se agregó soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada\n\n• Se reorganizó la lista de «Mapas náuticos»\n\n• Se agregó soporte para sensores externos ANT+\n\n• Nueva opción para desactivar la descarga del UUID\n\n• Previsión ajustable de la velocidad predefinida para los tiempos de desplazamiento en senderismo, excursionismo o corriendo, en función de la altitud\n\n• Corregido el comportamiento de la salida de audio y del regulador de volumen</string>
-    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
+    <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: velocidad, potencia y cadencia de la bicicleta y ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
     <string name="rendering_engine_failed_descr">OsmAnd volvió el renderizado de mapas a la «Versión 1». Podés intentar volver a cambiar al nuevo motor de renderizado «Versión 2 (OpenGL)» en los Ajustes. \n \nPor favor, ayudá con las mejoras enviando el registro de errores.</string>
-    <string name="show_map_symbols_desc">Texto, señales de tráfico y otros.</string>
+    <string name="show_map_symbols_desc">Texto, señales de tránsito y otros.</string>
     <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd falló recientemente.</string>
     <string name="share_crash_log">Compartir registro de fallos</string>
     <string name="dismiss_changes_descr">Se descartarán todos los cambios.</string>
