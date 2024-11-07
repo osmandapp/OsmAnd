@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -72,7 +73,7 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 				}
 			}
 			if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
-				streetName = CurrentStreetName.createStreetName(info);
+				streetName = TripUtils.getStreetName(app, info, info.directionInfo);
 				turnType = info.directionInfo.getTurnType();
 				turnImminent = info.imminent;
 				nextTurnDistance = info.distanceTo;

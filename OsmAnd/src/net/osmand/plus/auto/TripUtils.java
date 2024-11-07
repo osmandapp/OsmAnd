@@ -1,5 +1,7 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.DEFAULT;
 import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS;
 
@@ -14,10 +16,16 @@ import androidx.car.app.navigation.model.Maneuver;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.router.TurnType;
 import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.util.Algorithms;
 
 public class TripUtils {
 
@@ -159,5 +167,91 @@ public class TripUtils {
 			case TurnType.RNLB -> LaneDirection.SHAPE_UNKNOWN; // Roundabout left
 			default -> LaneDirection.SHAPE_UNKNOWN;
 		};
+	}
+
+	@Nullable
+	public static TurnType getNextTurnType(@NonNull AnnounceTimeDistances atd, @Nullable NextDirectionInfo info, float speed, int distance) {
+		if (atd.isTurnStateActive(speed, distance, STATE_TURN_IN)) {
+			if (info != null && info.directionInfo != null &&
+					(atd.isTurnStateActive(speed, info.distanceTo, STATE_TURN_NOW)
+							|| !atd.isTurnStateNotPassed(speed, info.distanceTo, STATE_TURN_IN))) {
+				return info.directionInfo.getTurnType();
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	public static String getNextTurnDescription(@NonNull OsmandApplication app, @Nullable NextDirectionInfo info,
+	                                            @Nullable TurnType type, @Nullable TurnType nextTurnType) {
+		String description = getTurnDescription(app, info);
+		String turnName = type != null ? nextTurnsToString(app, type, nextTurnType) : "";
+
+		if (type != null && type.isRoundAbout() && !Algorithms.isEmpty(description)) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, turnName, description);
+		}
+		return !Algorithms.isEmpty(description) ? description : turnName;
+	}
+
+	@NonNull
+	public static String getSecondNextTurnDescription(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info,
+	                                                  @Nullable TurnType turnType, @Nullable TurnType nextTurnType) {
+		String description = getTurnDescription(app, info);
+		String distance = getFormattedDistanceStr(app, info.distanceTo);
+
+		if (Algorithms.isEmpty(description)) {
+			description = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : null;
+		}
+		return Algorithms.isEmpty(description) ? distance : app.getString(R.string.ltr_or_rtl_combine_via_comma, distance, description);
+	}
+
+	@Nullable
+	public static String getTurnDescription(@NonNull OsmandApplication app, @Nullable NextDirectionInfo info) {
+		String name = defineStreetName(app, info);
+		String ref = info != null && info.directionInfo != null ? info.directionInfo.getRef() : null;
+		return !Algorithms.isEmpty(name) ? name : ref;
+	}
+
+	@Nullable
+	public static String defineStreetName(@NonNull OsmandApplication app, @Nullable NextDirectionInfo info) {
+		if (info != null) {
+			CurrentStreetName streetName = CurrentStreetName.createStreetName(info);
+
+			String name = streetName.text;
+			if (!Algorithms.isEmpty(name)) {
+				String ref = streetName.exitRef;
+				return Algorithms.isEmpty(ref) ? name : app.getString(R.string.ltr_or_rtl_combine_via_comma, ref, name);
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
+		CurrentStreetName streetName = CurrentStreetName.createStreetName(info);
+		if (Algorithms.isEmpty(streetName.text)) {
+			streetName.text = getTurnDescription(app, info, routeInfo);
+		}
+		return streetName;
+	}
+
+	@Nullable
+	private static String getTurnDescription(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
+		String description = routeInfo.getRef();
+		if (Algorithms.isEmpty(description)) {
+			TurnType turnType = routeInfo.getTurnType();
+			NextDirectionInfo nextInfo = getNextDirectionInfoAfter(app, info);
+			TurnType nextTurnType = nextInfo != null && nextInfo.directionInfo != null ? nextInfo.directionInfo.getTurnType() : null;
+
+			description = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : null;
+		}
+		return description;
+	}
+
+	@Nullable
+	private static NextDirectionInfo getNextDirectionInfoAfter(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info) {
+		RoutingHelper helper = app.getRoutingHelper();
+		boolean onRoute = !helper.isDeviatedFromRoute();
+		return onRoute ? helper.getNextRouteDirectionInfoAfter(info, new NextDirectionInfo(), true) : null;
 	}
 }

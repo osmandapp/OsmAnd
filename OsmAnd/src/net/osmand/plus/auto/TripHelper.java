@@ -1,8 +1,6 @@
 package net.osmand.plus.auto;
 
 import static androidx.car.app.navigation.model.TravelEstimate.REMAINING_TIME_UNKNOWN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -24,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
@@ -135,10 +132,10 @@ public class TripHelper {
 		if (nextDirInfo != null && atd != null) {
 			float speed = atd.getSpeed(currentLocation);
 			nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
-			nextTurnType = getNextTurnType(atd, nextNextDirInfo, speed, nextDirInfo.distanceTo);
+			nextTurnType = TripUtils.getNextTurnType(atd, nextNextDirInfo, speed, nextDirInfo.distanceTo);
 		}
 		stepBuilder.setManeuver(maneuver);
-		stepBuilder.setCue(getNextCue(nextDirInfo, turnType, nextTurnType));
+		stepBuilder.setCue(TripUtils.getNextTurnDescription(app, nextDirInfo, turnType, nextTurnType));
 
 		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 		if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
@@ -220,9 +217,9 @@ public class TripHelper {
 			if (atd != null) {
 				float speed = atd.getSpeed(currentLocation);
 				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfoAfter(nextNextDirInfo, new NextDirectionInfo(), true);
-				nextNextTurnType = getNextTurnType(atd, info, speed, nextNextDirInfo.distanceTo);
+				nextNextTurnType = TripUtils.getNextTurnType(atd, info, speed, nextNextDirInfo.distanceTo);
 			}
-			nextStepBuilder.setCue(getNextNextCue(nextNextDirInfo, nextTurnType, nextNextTurnType));
+			nextStepBuilder.setCue(TripUtils.getSecondNextTurnDescription(app, nextNextDirInfo, nextTurnType, nextNextTurnType));
 
 			Step nextStep = nextStepBuilder.build();
 			TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
@@ -281,47 +278,6 @@ public class TripHelper {
 		}
 	}
 
-	@Nullable
-	private TurnType getNextTurnType(@NonNull AnnounceTimeDistances atd, @Nullable NextDirectionInfo info, float speed, int distance) {
-		if (atd.isTurnStateActive(speed, distance, STATE_TURN_IN)) {
-			if (info != null && info.directionInfo != null &&
-					(atd.isTurnStateActive(speed, info.distanceTo, STATE_TURN_NOW)
-							|| !atd.isTurnStateNotPassed(speed, info.distanceTo, STATE_TURN_IN))) {
-				return info.directionInfo.getTurnType();
-			}
-		}
-		return null;
-	}
-
-	@NonNull
-	private String getNextCue(@Nullable NextDirectionInfo info, @Nullable TurnType type, @Nullable TurnType nextTurnType) {
-		String cue = getCue(info);
-		String turnName = type != null ? TripUtils.nextTurnsToString(app, type, nextTurnType) : "";
-
-		if (type != null && type.isRoundAbout() && !Algorithms.isEmpty(cue)) {
-			return app.getString(R.string.ltr_or_rtl_combine_via_comma, turnName, cue);
-		}
-		return !Algorithms.isEmpty(cue) ? cue : turnName;
-	}
-
-	@NonNull
-	private String getNextNextCue(@NonNull NextDirectionInfo info, @Nullable TurnType nextTurnType, @Nullable TurnType nextNextTurnType) {
-		String cue = getCue(info);
-		String distance = TripUtils.getFormattedDistanceStr(app, info.distanceTo);
-
-		if (Algorithms.isEmpty(cue)) {
-			cue = nextTurnType != null ? TripUtils.nextTurnsToString(app, nextTurnType, nextNextTurnType) : null;
-		}
-		return Algorithms.isEmpty(cue) ? distance : app.getString(R.string.ltr_or_rtl_combine_via_comma, distance, cue);
-	}
-
-	@Nullable
-	private String getCue(@Nullable NextDirectionInfo info) {
-		String name = defineStreetName(info);
-		String ref = info != null && info.directionInfo != null ? info.directionInfo.getRef() : null;
-		return !Algorithms.isEmpty(name) ? name : ref;
-	}
-
 	@NonNull
 	public Pair<Destination, TravelEstimate> getDestination(@NonNull TargetPoint pointToNavigate) {
 		Destination.Builder destBuilder = new Destination.Builder();
@@ -356,22 +312,6 @@ public class TripHelper {
 	@Nullable
 	private String defineStreetName() {
 		NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-		return defineStreetName(directionInfo);
-	}
-
-	@Nullable
-	private String defineStreetName(@Nullable NextDirectionInfo nextDirInfo) {
-		if (nextDirInfo != null) {
-			CurrentStreetName streetName = CurrentStreetName.createStreetName(nextDirInfo);
-
-			String name = streetName.text;
-			if (!Algorithms.isEmpty(name)) {
-				String exitRef = streetName.exitRef;
-				return Algorithms.isEmpty(exitRef)
-						? name
-						: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, name);
-			}
-		}
-		return null;
+		return TripUtils.defineStreetName(app, directionInfo);
 	}
 }
