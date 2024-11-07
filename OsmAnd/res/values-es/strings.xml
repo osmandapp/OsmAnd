@@ -6068,4 +6068,6 @@
     <string name="obd_fuel_pressure_desc">Muestra la presión dentro del sistema de combustible</string>
     <string name="obd_air_intake_temp_desc">Muestra la temperatura del aire que entra en el colector de admisión del motor.</string>
     <string name="obd_engine_coolant_temp_desc">Muestra la temperatura del refrigerante del motor</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Las unidades de medida seleccionadas que se agregarán al nombre.</string>
+    <string name="obd_throttle_position_desc">Muestra el ángulo del pedal del acelerador en el cuerpo del acelerador.</string>
 </resources>
