@@ -4580,7 +4580,7 @@
     <string name="show_map_symbols_desc">Texto, señales de tráfico y otros.</string>
     <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd falló recientemente.</string>
     <string name="share_crash_log">Compartir registro de fallos</string>
-    <string name="dismiss_changes_descr">Todos los cambios serán descartados.</string>
+    <string name="dismiss_changes_descr">Se descartarán todos los cambios.</string>
     <string name="dismiss_changes">¿Descartar cambios\?</string>
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
@@ -4695,10 +4695,10 @@
     <string name="deleted_file">Archivo borrado</string>
     <string name="sync_now">Sincronizar ahora</string>
     <string name="local_changes">Cambios locales</string>
-    <string name="cloud_version_will_be_removed">La versión en la nube será quitada</string>
-    <string name="cloud_changes_will_be_dismissed">Los cambios en la nube serán descartados</string>
-    <string name="local_file_will_be_restored">El archivo local será restaurado</string>
-    <string name="local_changes_will_be_dismissed">Los cambios locales serán descartados</string>
+    <string name="cloud_version_will_be_removed">Se quitará la versión en la nube</string>
+    <string name="cloud_changes_will_be_dismissed">Se descartarán los cambios en la nube</string>
+    <string name="local_file_will_be_restored">Se restaurará el archivo local</string>
+    <string name="local_changes_will_be_dismissed">Se descartarán los cambios locales</string>
     <string name="cloud_conflicts">Conflictos</string>
     <string name="cloud_conflict">Conflicto</string>
     <string name="upload_all">Enviar todos</string>
@@ -4761,7 +4761,7 @@
     <string name="local_version_do_not_exist">No existe una versión local.</string>
     <string name="delete_cloud_version">Borrar versión en la nube</string>
     <string name="shared_string_delete_file">Borrar archivo</string>
-    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»\n\n• El menú contextual muestra ahora los nombres traducidos de los PDI\n\n• Se ha añadido la opción para compartir una ruta a través de un enlace\n\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»\n\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»\n\n• Se ha simplificado la pantalla de inicio\n\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto\n\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza\n\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema\n\n• Se han corregido problemas de visualización con los lugares veganos\n\n• Se ha añadido la posibilidad de descargar teselas en línea usadas como mapas «Superpuestos» o «Subyacentes»\n\n• Ahora se admiten unidades imperiales en «Parámetros del vehículo»\n\n• Se ha añadido un nuevo perfil de «Ciclomotor»\n\n• Se ha añadido la opción «Automático» en «Posición de la ubicación»\n\n• Se ha corregido los gestos del mapa para la inclinación, zum y rotación</string>
+    <string name="release_4_4">• Se mejoró el menú «Trazas» en «Configurar mapa»\n\n• El menú contextual muestra ahora los nombres traducidos de los PDI\n\n• Se agregó la opción para compartir una ruta a través de un enlace\n\n• Se agregó la unidad de longitud «Millas náuticas/pies»\n\n• Se agregó un nuevo modo fijo en la «Orientación del mapa»\n\n• Se simplificó la pantalla de inicio\n\n• Se corrigió la «Posición de ubicación» con modo de pantalla dividida en Android Auto\n\n• Se agregó el gráfico «Velocidad/pendiente» para el análisis de la traza\n\n• Desde Android 13 se movió la elección del idioma de la aplicación a los ajustes del sistema\n\n• Se corrigieron los problemas de visualización con los lugares veganos\n\n• Se agregó la posibilidad de descargar teselas en línea usadas como mapas «Superpuestos» o «Subyacentes»\n\n• Ahora se admiten unidades imperiales en «Parámetros del vehículo»\n\n• Se agregó un nuevo perfil de «Ciclomotor»\n\n• Se agregó la opción «Automático» en «Posición de la ubicación»\n\n• Se corrigieron los gestos del mapa para la inclinación, zum y rotación</string>
     <string name="shared_string_add_manually">Añadir manualmente…</string>
     <string name="sort_duration_ascending">Duración ascendente</string>
     <string name="sort_duration_descending">Duración descendente</string>
@@ -4828,10 +4828,7 @@
     <string name="external_device_details_speed">Velocidad</string>
     <string name="external_device_details_information">Información</string>
     <string name="external_device_details_battery">Batería</string>
-    <string name="ant_plus_nothing_found_description">Asegúrate de que
-\n- El Bluetooth esté activado
-\n- El sensor esté activado
-\n- Este dispositivo se encuentre cerca del sensor</string>
+    <string name="ant_plus_nothing_found_description">Asegurate de que \n- El Bluetooth esté activado \n- El sensor esté activado \n- Este dispositivo esté cerca del sensor</string>
     <string name="external_device_details_connection">Conexión</string>
     <string name="external_device_details_disconnect">Desconectar</string>
     <string name="bluetooth_disconnected">Desconectado, %s</string>
@@ -4850,7 +4847,7 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Podés vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
-    <string name="ant_plus_bluetooth_off_description">Activa los sensores de búsqueda y vinculación de Bluetooth.</string>
+    <string name="ant_plus_bluetooth_off_description">Activá los sensores de búsqueda y vinculación del Bluetooth.</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="file_already_exists">El archivo ya existe</string>
     <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
@@ -4888,7 +4885,7 @@
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Mantené pulsado para cambiar la ubicación del botón.</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
-    <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
+    <string name="map_3d_mode_description">Pulsá en el mapa con 2 dedos y deslizá hacia arriba o abajo para ajustar la inclinación del mapa.</string>
     <string name="delete_folder_question">¿Borrar carpeta\?</string>
     <string name="delete_folder">Borrar carpeta</string>
     <string name="shared_string_new_track">Nueva traza</string>
@@ -4931,7 +4928,7 @@
 \n
 \nEsta acción no puede deshacerse.</string>
     <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
-    <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios serán desvinculados de OsmAnd Cloud y se perderá acceso a las funciones de pago.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desvincularán de OsmAnd Cloud y se perderá el acceso a las funciones de pago.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos en el dispositivo se mantienen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
@@ -5066,7 +5063,7 @@
     <string name="copy_build_version">Copiar versión de la complicación</string>
     <string name="help_article_widgets_info_widgets_name">Widgets de información</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Android Auto: Se ha añadido el modo 3D\n\n• Trazas: Se añadieron filtros y carpetas inteligentes para las trazas y se ha optimizado la memoria para archivos grandes\n\n• Se añadieron filas para los paneles de widget superior e inferior, con admisión a todos los widgets\n\n• Se ha mejorado la gestión local de recursos\n\n• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.\n\n• Se ha añadido el widget «Relación de planeo» y «Ubicacion del Sol»\n\n• OsmAnd Cloud: Ahora puedes acceder a archivos eliminados\n\n• Mejora en la coloración de trazas en modo pendiente con nuevo gradiente simétrico\n\n• Se han corregido los problemas de transparencia en la barra de estado\n\n• Se ha añadido el widget de temperatura en ANT+\n\n• Se ha añadido el widget «RAM disponible»</string>
+    <string name="release_4_6">• Android Auto: Se agregó el modo 3D\n\n• Trazas: Se agregaron filtros y carpetas inteligentes para las trazas y se optimizó la memoria para archivos grandes\n\n• Se agregaron filas para los paneles de widget superior e inferior, con admisión a todos los widgets\n\n• Se mejoró la gestión local de recursos\n\n• Se agregó la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.\n\n• Se agregó el widget «Relación de planeo» y «Ubicación del Sol»\n\n• OsmAnd Cloud: Ahora podés acceder a archivos borrados\n\n• Se mejoró la coloración de trazas en modo pendiente con un nuevo gradiente simétrico\n\n• Se corrigieron los problemas de transparencia en la barra de estado\n\n• Se agregó el widget de temperatura en ANT+\n\n• Se agregó el widget «RAM disponible»</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sensor_temperature_desc">Muestra la temperatura del sensor</string>
     <string name="app_mode_baby_transport">Transporte de bebés</string>
@@ -5262,7 +5259,7 @@
     <string name="routing_type">Tipo de navegación</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="shared_sting_all_colors">Todos los colores</string>
-    <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto\n\n• Configura la pantalla añadiendo varios botones de «Acción rápida»\n\n• Mejora de legibilidad de los datos en los gráficos\n\n• Se añadieron filtros de datos del sensor para las trazas\n\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.\n\n• Ahora se admiten etiquetas GPX adicionales\n\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados\n\n• Interfaz de usuario unificada para la selección de trazas\n\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2</string>
+    <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto\n\n• Configurá la pantalla añadiendo varios botones de «Acción rápida»\n\n• Se mejoró la legibilidad de los datos en los gráficos\n\n• Se añadieron filtros de datos del sensor para las trazas\n\n• Se mejoró la personalización de la interfaz para los grupos de trazas.\n\n• Ahora se admiten etiquetas GPX adicionales\n\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados\n\n• Interfaz de usuario unificada para la selección de trazas\n\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2</string>
     <string name="precise">Preciso</string>
     <string name="round_up">Redondear</string>
     <string name="distance_during_navigation_description">Elegí cómo se muestra la información de distancia en los widgets de navegación (distancia al punto, próximo giro, carriles). \n \nElegí «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
@@ -5458,7 +5455,7 @@
     <string name="height_cache">Altitud</string>
     <string name="add_widget_below">Añadir widget debajo</string>
     <string name="delete_widget">¿Borrar widget?</string>
-    <string name="delete_widget_description">Este widget será borrado. Puedes restaurarlo luego en «Configurar pantalla».</string>
+    <string name="delete_widget_description">Este widget se borrará. Podés restaurarlo luego en «Configurar pantalla».</string>
     <string name="battery_saving_mode">Modo ahorro de batería</string>
     <string name="app_mode_suv">SUV</string>
     <string name="y_axis_description">Marcá hasta dos opciones para el eje Y.</string>
@@ -5546,7 +5543,7 @@
     <string name="obd_fuel_consumption_rate_desc">Muestra el consumo de combustible del vehículo según el sensor OBD</string>
     <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
     <string name="obd_fuel_type">Tipo de combustible</string>
-    <string name="obd_plugin_description">Controla los indicadores principales del vehículo usando el protocolo OBD-II. Accede a datos como: * Revoluciones del motor * Consumo de combustible * Combustible restante * Distancia desde el arranque del motor * Temperatura de admisión * Temperatura ambiente * Temperatura del refrigerante * Velocidad del vehículo * Porcentaje de la batería</string>
+    <string name="obd_plugin_description">Controlá los indicadores principales del vehículo usando el protocolo OBD-II y accedé a datos como:\n* Revoluciones del motor\n* Consumo de combustible\n* Combustible restante\n* Distancia desde el arranque del motor\n* Temperatura de admisión\n* Temperatura ambiente\n* Temperatura del refrigerante\n* Velocidad del vehículo\n* Porcentaje de la batería</string>
     <string name="obd_support">Compatibilidad OBD</string>
     <string name="reset_average_speed">Reiniciar la velocidad promedio</string>
     <string name="unknown_bt_device">Dispositivo desconocido</string>
@@ -5557,7 +5554,7 @@
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
     <string name="quick_action_finish_trip_recording_summary">Un botón que guarda la traza GPX y finaliza la grabación del viaje.</string>
     <string name="start_trip_recording_first_m">Iniciá la grabación del viaje antes.</string>
-    <string name="new_segment_started_m">Se ha iniciado a grabar un nuevo segmento de la traza.</string>
+    <string name="new_segment_started_m">Se inició a grabar un nuevo segmento de la traza.</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Un botón que guarda la grabación del viaje actual en un archivo GPX y sigue grabando una nueva traza sin interrupción.</string>
     <string name="quick_action_new_trip_segment">Un botón que inicia un nuevo segmento en la grabación actual de la traza GPX.</string>
     <string name="new_trip_segment">Nuevo segmento del viaje</string>
@@ -5594,7 +5591,7 @@
     <string name="obd_nothing_found_description">Por favor, revisá lo siguiente:\n - Que el Bluetooth esté activado.\n - Que el motor del vehículo esté encendido.\n - Que el dispositivo esté cerca del escáner.</string>
     <string name="obd_nothing_found_text">No se encontraron escáneres</string>
     <string name="obd_bluetooth_off_description">Activá el Bluetooth para buscar y conectar con el escáner.</string>
-    <string name="obd_searching_text_description">Por favor, mantén el dispositivo cerca del escáner. Asegúrate de que el motor del vehículo está funcionando.</string>
+    <string name="obd_searching_text_description">Mantené el dispositivo cerca del escáner y asegurate de que el motor del vehículo esté funcionando.</string>
     <string name="obd_searching_text">Buscando escáneres</string>
     <string name="obd_device_forget_sensor">Desvincular escáner</string>
     <string name="obd_device_forget_sensor_description">El escáner se quitará de la lista. Podrás vincular este escáner de nuevo en cualquier momento.</string>
