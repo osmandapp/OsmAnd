@@ -167,6 +167,10 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
+	var hasLongDistance: Boolean
+		get() = getGpxParameter(GpxParameter.IS_LONG_DISTANCE) as Boolean
+		set(value) = setGpxParameter(GpxParameter.IS_LONG_DISTANCE, value)
+
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
 		val endTime = endTime
@@ -354,6 +358,11 @@ class GpxTrackAnalysis {
 					//net.osmand.Location.distanceBetween(
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
+
+					if (calculations[0] > 1000) { // 1000 m
+						hasLongDistance = true
+					}
+
 					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
