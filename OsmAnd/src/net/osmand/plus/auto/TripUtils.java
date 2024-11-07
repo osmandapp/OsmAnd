@@ -29,14 +29,12 @@ import net.osmand.util.Algorithms;
 
 public class TripUtils {
 
-	public static boolean shouldKeepLeft(@Nullable TurnType t) {
-		return t != null && (t.getValue() == TurnType.TL || t.getValue() == TurnType.TSHL
-				|| t.getValue() == TurnType.TSLL || t.getValue() == TurnType.TU || t.getValue() == TurnType.KL);
+	public static boolean shouldKeepLeft(@Nullable TurnType type) {
+		return type != null && TurnType.isLeftTurn(type.getValue());
 	}
 
-	public static boolean shouldKeepRight(@Nullable TurnType t) {
-		return t != null && (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR
-				|| t.getValue() == TurnType.TSLR || t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR);
+	public static boolean shouldKeepRight(@Nullable TurnType type) {
+		return type != null && TurnType.isRightTurn(type.getValue());
 	}
 
 	@NonNull
@@ -215,7 +213,7 @@ public class TripUtils {
 	@Nullable
 	public static String defineStreetName(@NonNull OsmandApplication app, @Nullable NextDirectionInfo info) {
 		if (info != null) {
-			CurrentStreetName streetName = CurrentStreetName.createStreetName(info);
+			CurrentStreetName streetName = new CurrentStreetName(info);
 
 			String name = streetName.text;
 			if (!Algorithms.isEmpty(name)) {
@@ -228,7 +226,7 @@ public class TripUtils {
 
 	@NonNull
 	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
-		CurrentStreetName streetName = CurrentStreetName.createStreetName(info);
+		CurrentStreetName streetName = new CurrentStreetName(info);
 		if (Algorithms.isEmpty(streetName.text)) {
 			streetName.text = getTurnDescription(app, info, routeInfo);
 		}
