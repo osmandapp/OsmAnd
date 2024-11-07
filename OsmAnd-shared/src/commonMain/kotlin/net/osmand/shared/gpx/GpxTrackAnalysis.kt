@@ -49,6 +49,8 @@ class GpxTrackAnalysis {
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
 
+	var maxDistanceBetweenPoints = 0.0F
+
 	var hasSpeedInTrack = false
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
@@ -166,10 +168,6 @@ class GpxTrackAnalysis {
 	var totalDistance: Float
 		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
-
-	var maxDistanceBetweenPoints: Float
-		get() = (getGpxParameter(GpxParameter.MAX_DISTANCE_BETWEEN_POINTS) as Double).toFloat()
-		set(value) = setGpxParameter(GpxParameter.MAX_DISTANCE_BETWEEN_POINTS, value.toDouble())
 
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
