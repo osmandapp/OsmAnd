@@ -5929,16 +5929,16 @@
     <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
     <string name="obd_air_intake_temp">Temperaturo de eniga aero</string>
-    <string name="obd_ambient_air_temp">Temperaturo de fona aero</string>
+    <string name="obd_ambient_air_temp">Temperaturo de ĉirkaŭaĵo</string>
     <string name="obd_battery_voltage">Tensio de baterio</string>
     <string name="obd_engine_coolant_temp">Temperaturo de malvarmiga likvaĵo</string>
-    <string name="obd_fuel_level">Brulaĵ-nivelo</string>
+    <string name="obd_fuel_level">Brulaĵa efikeco (%)</string>
     <string name="obd_plugin_name">Statistikoj pri veturilo</string>
     <string name="obd_fuel_consumption_rate">Konsum-rapido de brulaĵo</string>
     <string name="obd_fuel_consumption_rate_desc">Montras konsum-rapidon de brulaĵo raportatan de OBD-sentilo</string>
-    <string name="obd_fuel_left_distance">Brulaĵ-nivelo (distanco)</string>
+    <string name="obd_fuel_left_distance">Resta brulaĵo (distanco)</string>
     <string name="obd_fuel_type">Speco de brulaĵo</string>
-    <string name="obd_plugin_description">Liveras informojn pri via veturilo raportatajn per la protokolo OBD.</string>
+    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro\n• konsumo de brulaĵo\n• resta brulaĵo\n• distanco ekde starto de motoro\n• temperaturo en eniga aer-kolektilo\n• temperaturo de ĉirkaŭaĵo\n• temperaturo de malvarmiga likvaĵo\n• rapido de veturilo\n• tensio de baterio</string>
     <string name="obd_support">Subteno por OBD</string>
     <string name="obd_fuel_type_hydrogen">hidrogeno</string>
     <string name="shared_string_obd">OBD</string>
@@ -6056,4 +6056,13 @@
     <string name="connect_obd_instructions_title">OsmAnd ebligas konekti per Bludento al skaniloj OBD-II.</string>
     <string name="obd_vehicle_info">Informoj pri veturilo</string>
     <string name="shared_string_bluetooth">Bludento</string>
+    <string name="connect_obd_instructions_step4">4. Frapetu “Konekti” kaj elektu vian skanilon el la listo.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="obd_fuel_left_liters">Resta brulaĵo (litroj)</string>
+    <string name="connect_obd_instructions_step">1. Konektu la skanilon al konektilo OBD-II de via veturilo.\n\n2. Ekfunkciu motoron.\n\n3. Aktivigu Bludenton ĉe via aparato.\n\n4. Frapetu “%1$s” kaj elektu vian skanilon el la listo.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Butono por montri/kaŝi lokajn OSM-redaktojn sur la mapo.</string>
+    <string name="connect_obd_instructions_step1">1. Konektu la skanilon al konektilo OBD-II de via veturilo.</string>
+    <string name="obd_how_to_connect">Kiel konekti:</string>
+    <string name="connect_obd_instructions_step2">2. Ekfunkciu motoron.</string>
+    <string name="connect_obd_instructions_step3">3. Aktivigu Bludenton ĉe via aparato.</string>
 </resources>
