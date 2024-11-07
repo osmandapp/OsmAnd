@@ -13,6 +13,7 @@ class GpxTrackAnalysis {
 
 	companion object {
 		const val ANALYSIS_VERSION = 1
+		const val MAX_DISTANCE_BETWEEN_POINTS = 1000
 
 		fun prepareInformation(
 			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
@@ -359,7 +360,7 @@ class GpxTrackAnalysis {
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
 
-					if (calculations[0] > 1000) { // 1000 m
+					if (calculations[0] > MAX_DISTANCE_BETWEEN_POINTS) {
 						hasLongDistance = true
 					}
 
