@@ -2,9 +2,11 @@ package net.osmand.plus.auto;
 
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
@@ -191,7 +193,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	};
 
 	public SurfaceRenderer(@NonNull CarContext carContext, @NonNull Lifecycle lifecycle) {
-		this.handler = new Handler();
+		this.handler = new Handler(Looper.getMainLooper());
 		this.carContext = carContext;
 		this.surfaceView = new CarSurfaceView(carContext, this);
 		lifecycle.addObserver(this);
@@ -234,7 +236,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	@Override
 	public void onFrameReady(MapRendererView mapRendererView) {
-		//renderFrame();
+//		renderFrame();
 		sendRenderFrameMsg();
 	}
 
@@ -294,6 +296,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	public void updateLocation(@Nullable Location location) {
 		//renderFrame();
+		sendRenderFrameMsg();
 	}
 
 	@NonNull
@@ -429,8 +432,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
-		} catch (Exception ignored) {
-			// Ignored
+		} catch (Exception e) {
+			Log.w(TAG, "Render frame err: " + e.getMessage());
 		}
 	}
 
@@ -439,14 +442,20 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
+		Bitmap bmp = null;
+		if (offscreenMapRendererView != null) {
+			// retrieve bitmap outside lock canvas
+			bmp = offscreenMapRendererView.getBitmap();
+		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
 			boolean newDarkMode = carContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
-			if (offscreenMapRendererView != null)
-				canvas.drawBitmap(offscreenMapRendererView.getBitmap(), 0, 0, null);
+			if (bmp != null) {
+				canvas.drawBitmap(bmp, 0, 0, null);
+			}
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
 			if (callback != null) {
