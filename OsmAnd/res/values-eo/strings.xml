@@ -6049,4 +6049,11 @@
     <string name="screen_is_unlocked">Tuŝekrano estas malŝlosita.</string>
     <string name="screen_is_locked_by_action_button">Tuŝekrano estas ŝlosita. Frapetu la butonon por malŝlosi.</string>
     <string name="screen_is_locked_by_external_button">Tuŝekrano estas ŝlosita. Por malŝlosi, premu la butonon %1$s aŭ frapetu la surekranan butonon.</string>
+    <string name="show_minor_turns_descr">Sciigoj pri vetur-koridoroj estos montrataj ĉe ĉiuj vojkruciĝoj malgraŭ voĉaj sciigoj</string>
+    <string name="wunderlinq_datagrid">WunderLINQ-datum-krado</string>
+    <string name="show_minor_turns">Montri ĉe nesignifaj vojkruciĝoj dum veturi rekten</string>
+    <string name="obd_device_forget_sensor_description">Skanilo estos forigita el la listo. Vi ĉiam povos denove kupli tiun ĉi skanilon.</string>
+    <string name="connect_obd_instructions_title">OsmAnd ebligas konekti per Bludento al skaniloj OBD-II.</string>
+    <string name="obd_vehicle_info">Informoj pri veturilo</string>
+    <string name="shared_string_bluetooth">Bludento</string>
 </resources>
