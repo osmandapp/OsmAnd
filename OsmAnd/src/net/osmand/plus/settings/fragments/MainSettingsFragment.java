@@ -169,35 +169,34 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	@Override
 	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
-		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			return Optional.of(
-					new PreferenceFragmentHandler() {
+		return Optional
+				.ofNullable(ApplicationMode.valueOfStringKey(preference.getKey(), null))
+				.map(applicationMode ->
+						new PreferenceFragmentHandler() {
 
-						@Override
-						public String getClassNameOfPreferenceFragment() {
-							return SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
-						}
+							@Override
+							public String getClassNameOfPreferenceFragment() {
+								return SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
+							}
 
-						@Override
-						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
-							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
-									getClassNameOfPreferenceFragment(),
-									context,
-									ApplicationMode.valueOfStringKey(preference.getKey(), null),
-									new Bundle(),
-									target);
-						}
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+								return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+										getClassNameOfPreferenceFragment(),
+										context,
+										applicationMode,
+										new Bundle(),
+										target);
+							}
 
-						@Override
-						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
-							return BaseSettingsFragment.showFragment(
-									preferenceFragment,
-									requireActivity(),
-									getClassNameOfPreferenceFragment());
-						}
-					});
-		}
-		return Optional.empty();
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return BaseSettingsFragment.showFragment(
+										preferenceFragment,
+										requireActivity(),
+										getClassNameOfPreferenceFragment());
+							}
+						});
 	}
 
 	private void setupLocalBackup() {
