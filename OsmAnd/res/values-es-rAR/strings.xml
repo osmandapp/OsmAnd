@@ -4576,18 +4576,16 @@
     <string name="release_4_3">• Nuevo motor versión 2 (OpenGL) más rápido al visualizar mapas, con vista 2.5D\n\n• Animación suave para los cambios de ubicación al moverse\n\n• Nuevos widgets con las coordenadas del centro del mapa y la elevación de la ubicación geográfica\n\n• «Distancia al pulsar»: nuevas opciones de tamaño de texto\n\n• Widget «Marcador del mapa»: nueva opción para cambiar el comportamiento de las pulsaciones\n\n• Se ha corregido la opción «Posición de la ubicación»\n\n• GPX: se ha añadido soporte para las etiquetas «link», «cmt», «desc» y para cualquier extensión personalizada\n\n• Se ha reorganizado la lista de «Mapas náuticos»\n\n• Se ha añadido soporte para sensores externos ANT+\n\n• Nueva opción para desactivar la descarga del UUID\n\n• Previsión ajustable de la velocidad predefinida para los tiempos de desplazamiento en senderismo, excursionismo o corriendo, en función de la altitud\n\n• Corregido el comportamiento de la salida de audio y del regulador de volumen</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
-    <string name="rendering_engine_failed_descr">OsmAnd ha vuelto el renderizado de mapas a la «Versión 1». Puedes intentar volver a cambiar al nuevo motor de renderizado «Versión 2 (OpenGL)» en los Ajustes.
-\n
-\nPor favor, ayuda con las mejoras enviando el registro de errores.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd volvió el renderizado de mapas a la «Versión 1». Podés intentar volver a cambiar al nuevo motor de renderizado «Versión 2 (OpenGL)» en los Ajustes. \n \nPor favor, ayudá con las mejoras enviando el registro de errores.</string>
     <string name="show_map_symbols_desc">Texto, señales de tráfico y otros.</string>
-    <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd ha fallado recientemente.</string>
+    <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd falló recientemente.</string>
     <string name="share_crash_log">Compartir registro de fallos</string>
     <string name="dismiss_changes_descr">Todos los cambios serán descartados.</string>
     <string name="dismiss_changes">¿Descartar cambios\?</string>
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
     <string name="map_rendering_engine_v2">Versión 2 (OpenGL)</string>
-    <string name="map_rendering_engine_descr">La versión 2 (OpenGL) del motor de renderizado de mapas, es más rápido y también cuenta con vista 2.5D. El renderizado de la versión 1, era el predefinido antes de OsmAnd 4.3 y sigue siendo preferible para los dispositivos más antiguos.</string>
+    <string name="map_rendering_engine_descr">La versión 2 (OpenGL) del motor de renderizado de mapas es más rápida y también cuenta con vista 2.5D. El renderizado de la versión 1 era el predefinido antes de OsmAnd 4.3 y sigue siendo preferible para dispositivos más antiguos.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
@@ -4630,7 +4628,7 @@
 \nLos datos meteorológicos son provistos por el Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_layers">Capas</string>
     <string name="shared_string_weather">Meteorología</string>
-    <string name="explore_weather_forecast">Explora el pronóstico meteorológico.</string>
+    <string name="explore_weather_forecast">Explorá el pronóstico meteorológico.</string>
     <string name="shared_string_contours">Contornos</string>
     <string name="empty_screen_weather_temperature_layer">Activar para ver la capa de temperatura en el mapa.</string>
     <string name="weather_precip_in">in</string>
@@ -4645,7 +4643,7 @@
     <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_hectopascals">Hectopascales</string>
     <string name="empty_screen_weather_contours">Activar para ver los bordes meteorológicos en el mapa.</string>
-    <string name="switch_mode_by_tapping_on_widget">Alterna el modo pulsando en el widget.</string>
+    <string name="switch_mode_by_tapping_on_widget">Alterná el modo pulsando en el widget.</string>
     <string name="map_widget_sunset_desc">Muestra la hora del próximo atardecer o el tiempo que queda hasta éste.</string>
     <string name="shared_string_next_sunset">Próximo atardecer</string>
     <string name="shared_string_sunset">Atardecer</string>
@@ -4659,7 +4657,7 @@
     <string name="turn_on_nautical_depth_description">Activar para ver los datos de profundidad náutica en el mapa.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de la línea</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
-    <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
+    <string name="storage_migration_fragment_close_descr">La copia sólo se completó en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="quick_action_precipitation_layer">Un botón que alterna la capa de precipitación en el mapa.</string>
     <string name="quick_action_cloud_layer">Un botón que alterna la capa de nubes en el mapa.</string>
     <string name="temperature_layer">Capa de temperatura</string>
@@ -4684,7 +4682,7 @@
     <string name="open_weather_action">Ver meteorología</string>
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="shared_string_expires">Expira</string>
-    <string name="choose_what_to_sync">Elige qué sincronizar</string>
+    <string name="choose_what_to_sync">Elegí qué sincronizar</string>
     <string name="checking_progress">Comprobando…</string>
     <string name="shared_string_modified">Editado</string>
     <string name="res_unknown">Desconocido</string>
@@ -4714,12 +4712,12 @@
     <string name="import_export">Importar/exportar</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="changes">Cambios %1$s</string>
-    <string name="cloud_sync_progress">Sincronizar... %1$s</string>
+    <string name="cloud_sync_progress">Sincronizando... %1$s</string>
     <string name="cloud_changes">Cambios en la nube</string>
     <string name="cloud_all_changes_uploaded_descr">Todos los cambios hechos en este dispositivo están sincronizados con OsmAnd Cloud.</string>
     <string name="upload_change">Subir cambio</string>
     <string name="backup_error_failed_to_fetch_remote_items">No se pudo obtener la lista de archivos del servidor.</string>
-    <string name="av_audio_format_bottom_sheet_descr">Elige un formato de audio. El formato de archivo del audio es 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Elegí un formato de audio. El formato de archivo del audio es 3GPP (.3gp).</string>
     <string name="si_nm_ft">Millas/pies náuticos</string>
     <string name="si_nm_mt">Millas/metros náuticos</string>
     <string name="set_up_backup">Configurar copia de seguridad</string>
@@ -4730,7 +4728,7 @@
     <string name="skip_download">Omitir descarga</string>
     <string name="determine_location">Permítenos determinar tu ubicación</string>
     <string name="share_link">Compartir enlace</string>
-    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usá el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_minimal">Pitido: mínimo</string>
     <string name="sound_beep_simple">Pitido: simple</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
@@ -4740,10 +4738,10 @@
     <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
-    <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
+    <string name="no_visible_tracks_description">Marcá las trazas a mostrar en el mapa.</string>
     <string name="recently_visible">Visibles recientemente %1$s</string>
-    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
-    <string name="empty_tracks">No tienes archivos de trazas.</string>
+    <string name="empty_tracks_description">Podés importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
+    <string name="empty_tracks">No tenés archivos de trazas.</string>
     <string name="shared_string_select_recent">Marcar reciente</string>
     <string name="change_appearance">Cambiar aspecto</string>
     <string name="switch_folder">Alternar carpeta</string>
@@ -4759,7 +4757,7 @@
     <string name="shared_string_in_progress">En curso</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Velocidad de movimiento</string>
-    <string name="simulation_position_description">Marca un archivo de traza a usar como guía de movimiento.</string>
+    <string name="simulation_position_description">Marcá un archivo de traza a usar como guía de movimiento.</string>
     <string name="local_version_do_not_exist">No existe una versión local.</string>
     <string name="delete_cloud_version">Borrar versión en la nube</string>
     <string name="shared_string_delete_file">Borrar archivo</string>
@@ -4780,10 +4778,10 @@
     <string name="enable_3d_maps">Activar mapas en 3D</string>
     <string name="app_mode_climbing">Escalada</string>
     <string name="clear_online_cache_description">Esto vaciará la memoria caché de las teselas meteorológicas en línea.</string>
-    <string name="offline_weather_forecast_desc">Puedes descargar la previsión meteorológica para 7 días.</string>
+    <string name="offline_weather_forecast_desc">Podés descargar la previsión meteorológica para 7 días.</string>
     <string name="clear_online_cache">Borrar la caché en línea</string>
     <string name="token_is_not_valid">Clave («Token») inválida</string>
-    <string name="common_weight_limit_error">El valor mínimo es «%1$s» %2$s. Usa el perfil «%3$s» si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="common_weight_limit_error">El valor mínimo es «%1$s» %2$s. Usá el perfil «%3$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="shared_string_pounds">libras</string>
     <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
     <string name="shared_string_all_world">Todo el mundo</string>
@@ -4806,7 +4804,7 @@
     <string name="external_device_characteristic_total_distance">Distancia total</string>
     <string name="external_device_forget_sensor">Olvidar sensor</string>
     <string name="external_device_characteristic_battery_level">Batería</string>
-    <string name="external_device_forget_sensor_description">El sensor será quitado de la lista. Podrá volver a vincular este sensor en cualquier momento.</string>
+    <string name="external_device_forget_sensor_description">El sensor se quitará de la lista. Podrás volver a vincular este sensor en cualquier momento.</string>
     <string name="external_device_connected">Conectado</string>
     <string name="external_device_details_received_data">Datos recibidos</string>
     <string name="external_device_characteristic_speed">Velocidad</string>
@@ -4845,12 +4843,12 @@
     <string name="ant_plus_nothing_found_text">Incapaz de encontrar cualquier sensor</string>
     <string name="ant_plus_searching_text">Buscando sensores</string>
     <string name="ant_plus_searching">Buscando</string>
-    <string name="ant_plus_searching_text_description">Acerca el dispositivo al sensor. Debes activar el sensor para que OsmAnd pueda encontrarlo.</string>
+    <string name="ant_plus_searching_text_description">Acercá el dispositivo al sensor. Debés activar el sensor para que OsmAnd pueda encontrarlo.</string>
     <string name="ant_plus_help_title">Desconozco el tipo de sensor</string>
     <string name="ant_plus_pair_new_sensor_ble">Vincular sensor de Bluetooth LE</string>
     <string name="ant_plus_pair_new_sensor">Vincular nuevo sensor</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de ANT+</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Podés vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
     <string name="ant_plus_bluetooth_off_description">Activa los sensores de búsqueda y vinculación de Bluetooth.</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
@@ -4875,7 +4873,7 @@
     <string name="shared_string_foot">Pie</string>
     <string name="running_scds_device_name">Dispositivo para «Correr»</string>
     <string name="rendering_attr_lightDetail_name">Detalles de alumbrado</string>
-    <string name="rendering_attr_lightDetail_description">Predefinido: nombre de la baliza náutica (carácter de luz.grupo.período), elige información adicional sobre los sectores 1 al 3 o el carácter de luz del sector 1 al 5</string>
+    <string name="rendering_attr_lightDetail_description">Predefinido: nombre de la baliza náutica (carácter de luz.grupo.período), elegí información adicional sobre los sectores 1 al 3 o el carácter de luz del sector 1 al 5</string>
     <string name="rendering_value_sectors_name">Sectores</string>
     <string name="rendering_value_sector1_name">Sector 1</string>
     <string name="rendering_value_sector2_name">Sector 2</string>
@@ -4888,7 +4886,7 @@
     <string name="no_poi_for_category">PDI no encontrado</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
-    <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
+    <string name="map_3d_mode_hint">Mantené pulsado para cambiar la ubicación del botón.</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
     <string name="delete_folder_question">¿Borrar carpeta\?</string>
@@ -4915,14 +4913,12 @@
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
     <string name="terrain_map">Mapa topográfico (3D)</string>
     <string name="relief_3d">Relieve 3D</string>
-    <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>
+    <string name="relief_3d_description">Obtené y observá el modelo a escala de tu barrio o de todo el continente.</string>
     <string name="deleting_complete">Borrado completo</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
-    <string name="verify_account_deletion_descr">Debemos comprobar tu cuenta antes de borrarla.
-\n
-\nIngresa el correo electrónico con el cual fue registrado. Se te enviará la contraseña de un solo uso para el siguiente paso.</string>
+    <string name="verify_account_deletion_descr">Debemos comprobar tu cuenta antes de borrarla. \n \nIngresá el correo electrónico con el cual fue registrada. Se te enviará la contraseña de un solo uso para el siguiente paso.</string>
     <string name="verify_account">Comprobar cuenta</string>
-    <string name="slope_legend_description">La pendiente usa colores para visualizar la inclinación del terreno. Puedes leer más sobre «Pendientes» en %1$s.</string>
+    <string name="slope_legend_description">La pendiente usa colores para visualizar la inclinación del terreno. Podés leer más sobre «Pendientes» en %1$s.</string>
     <string name="terrain_category_description">Curvas de nivel del terreno, sombreados en tonos grises e indicaciones de pendientes en colores, mostrando picos y tierras bajas.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
     <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
@@ -4941,7 +4937,7 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_account_warning">Esta cuenta y todos sus datos serán %1$s.</string>
-    <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
+    <string name="free_favorites_backup_description">Registrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
     <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX\n\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»\n\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D\n\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas\n\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI\n\n• Se ha mejorado la lista de widgets para el panel superior/inferior\n\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias\n\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»\n\n• Se ha ampliado la lista de acciones predefinidas para teclados externos\n\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta\n\n• Se ha añadido la opción para «Anunciar desvío de la ruta»\n\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo\n\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica\n\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales\n\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas\n\n• Se ha corregido la elección del idioma por aplicación\n\n• Se ha añadido soporte para iconos temáticos\n\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta\n\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla\n\n• Se han revisado las indicaciones de voz en japonés\n\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente</string>
@@ -5044,14 +5040,14 @@
     <string name="shared_string_setup">Configuración</string>
     <string name="user_guide">Guía del usuario</string>
     <string name="help_article_widgets_radius_ruler_name">Regla radial y brújula</string>
-    <string name="telegram_chats_descr">Únete a uno de nuestros chats locales de Telegram.</string>
+    <string name="telegram_chats_descr">Unite a uno de nuestros chats locales de Telegram.</string>
     <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Discusiones de GitHub</string>
-    <string name="free_versions_descr">Descarga e instala la versión gratuita de OsmAnd</string>
+    <string name="free_versions_descr">Descargá e instalá la versión gratuita de OsmAnd</string>
     <string name="about_osmand">Sobre OsmAnd</string>
     <string name="send_logcat_log_descr">Archivo de registro detallado</string>
     <string name="send_crash_log_descr">Contiene sólo datos sobre los cuelgues de la aplicación</string>
-    <string name="open_issue_on_github_descr">Haz preguntas, propone características</string>
+    <string name="open_issue_on_github_descr">Hacé preguntas, proponé características</string>
     <string name="open_issue_on_github">Abrir una discusión en GitHub</string>
     <string name="report_an_issues">Informar un problema</string>
     <string name="free_versions">Versiones gratuitas</string>
@@ -5150,7 +5146,7 @@
     <string name="key_event_action_previous_app_profile">Perfil de aplicación anterior</string>
     <string name="show_toast_about_key_pressed">Mostrar notificación sobre la tecla pulsada</string>
     <string name="key_event_action_move_left">Mover a la izquierda</string>
-    <string name="press_button_to_link_with_action">Pulsa el botón en el dispositivo para asignarle la acción: %1$s</string>
+    <string name="press_button_to_link_with_action">Presioná el botón en el dispositivo para asignarle la acción: %1$s</string>
     <string name="deletion_error">Error de borrado</string>
     <string name="key_event_action_move_right">Mover a la derecha</string>
     <string name="shared_string_button">Botón</string>
@@ -5227,16 +5223,14 @@
     <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
     <string name="dont_ask_anymore">No preguntar más</string>
     <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
-    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.
-\n
-\nSi experimenta alguno de estos problemas, puede intentar cambiar el uso de la batería a «Sin restricciones».</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas. \n \nSi experimentas alguno de estos problemas, podés intentar cambiar el uso de la batería a «Sin restricciones».</string>
     <string name="battery_optimization">Optimización de la batería</string>
     <string name="avg_sensor_heartrate">Ritmo cardíaco, promedio</string>
     <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
     <string name="avg_sensor_cadence">Cadencia de la bicicleta, promedio</string>
     <string name="max_sensor_temperature">Temperatura, máx</string>
     <string name="max_sensor_speed">Sensor de velocidad, max</string>
-    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» ordenadas por: «%2$s»</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="shared_string_activity">Actividad</string>
     <string name="shared_string_keywords">Palabras clave</string>
@@ -5271,9 +5265,7 @@
     <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto\n\n• Configura la pantalla añadiendo varios botones de «Acción rápida»\n\n• Mejora de legibilidad de los datos en los gráficos\n\n• Se añadieron filtros de datos del sensor para las trazas\n\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.\n\n• Ahora se admiten etiquetas GPX adicionales\n\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados\n\n• Interfaz de usuario unificada para la selección de trazas\n\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2</string>
     <string name="precise">Preciso</string>
     <string name="round_up">Redondear</string>
-    <string name="distance_during_navigation_description">Elige cómo se muestra la información de distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
-\n
-\nElige «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
+    <string name="distance_during_navigation_description">Elegí cómo se muestra la información de distancia en los widgets de navegación (distancia al punto, próximo giro, carriles). \n \nElegí «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
     <string name="distance_during_navigation">Distancia al navegar</string>
     <string name="download_cloud_versions">Descargar versiones de la nube</string>
     <string name="upload_local_versions">Cargar versiones locales</string>
@@ -5321,8 +5313,8 @@
     <string name="title_3d_track">Traza 3D</string>
     <string name="track_line">Línea de la traza</string>
     <string name="downward_gradient">Gradiente descendente</string>
-    <string name="explore_3d_track_description">¡Explora la traza en 3D interactivo! Visualiza la altura, la velocidad y más, directamente en el mapa.</string>
-    <string name="track_vertical_exaggeration_description">Cambiando el valor de la escala, puedes cambiar la altura de la traza 3D.</string>
+    <string name="explore_3d_track_description">¡Explorá la traza en 3D interactivo! Visualizá la altura, la velocidad y más, directamente en el mapa.</string>
+    <string name="track_vertical_exaggeration_description">Cambiando el valor de la escala, podés cambiar la altura de la traza 3D.</string>
     <string name="gpx_approximation_geo_cpp">Basado en la geometría (C++, rápido)</string>
     <string name="allow_display_on_top_description">Permite mostrar los textos del mapa encima del otro</string>
     <string name="allow_display_on_top">Permitir superposición de elementos</string>
@@ -5346,7 +5338,7 @@
     <string name="clear_all_key_shortcuts_summary">Se quitarán todas las asignaciones de tecla para el periférico elegido.</string>
     <string name="no_assigned_keys">Sin teclas asignadas</string>
     <string name="shared_string_key">Tecla</string>
-    <string name="no_assigned_keys_desc">Elige una acción y asigna una tecla para el botón «Añadir».</string>
+    <string name="no_assigned_keys_desc">Elegí una acción y asigná una tecla para el botón «Añadir».</string>
     <string name="key_assignment_add_action">Añadir acción</string>
     <string name="key_name_pattern">Tecla «%1$s»</string>
     <string name="key_assignment_add_key">Añadir tecla</string>
@@ -5355,7 +5347,7 @@
     <string name="user_palette">Paleta del usuario</string>
     <string name="shared_string_colors">Colores</string>
     <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
-    <string name="contact_support_retry">Prueba de nuevo o contacta con nosotros</string>
+    <string name="contact_support_retry">Probá de nuevo o contactá con nosotros</string>
     <string name="missing_maps_ignore">Usar mapas descargados</string>
     <string name="daynight_mode_app_theme_summary">La pantalla del mapa se vincula al tema general de la aplicación: «modo diurno» para un tema claro y «modo nocturno» para un tema oscuro</string>
     <string name="daynight_mode_sensor_summary">Usa el sensor de luz del dispositivo para alternar entre temas claros y oscuros, según la luz de ambiente.</string>
@@ -5375,18 +5367,18 @@
     <string name="quick_action_directions_from">Punto de inicio</string>
     <string name="quick_action_move_map_left">Mapa a la izquierda</string>
     <string name="quick_action_move_map_right">Mapa a la derecha</string>
-    <string name="quick_action_previous_app_profile">Perfil de la aplicación anterior</string>
-    <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
+    <string name="quick_action_previous_app_profile">Perfil anterior de la aplicación</string>
+    <string name="quick_action_next_app_profile">Perfil siguiente de la aplicación</string>
     <string name="quick_action_audio_note">Nota de audio</string>
     <string name="quick_action_track_waypoint">Punto de referencia de la traza</string>
     <string name="quick_action_parking_place">Lugar de estacionamiento</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="quick_action_verb_show_hide">Mostrar / Ocultar</string>
-    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Puedes navegar con ellos si conoces la zona.</string>
+    <string name="missing_maps_ignore_details">¿Los mapas descargados cubren tu ruta? Podés navegar con ellos si conocés la zona.</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_destination">Destino</string>
-    <string name="quick_action_to_my_location">Para mi ubicación</string>
+    <string name="quick_action_to_my_location">A mi ubicación</string>
     <string name="quick_action_move_map_down">Mapa hacia abajo</string>
     <string name="quick_action_move_map_up">Mapa hacia arriba</string>
     <string name="quick_action_new_route">Nueva ruta</string>
@@ -5419,7 +5411,7 @@
 \nCPU básica: %2$s
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>
-    <string name="choose_map_orientation">Elige la orientación del mapa</string>
+    <string name="choose_map_orientation">Elegí la orientación del mapa</string>
     <string name="shared_string_all_icons">Todos los iconos</string>
     <string name="navigation_position_icon_summary">Icono que se muestra al navegar o moverse.</string>
     <string name="navigation_position_icon">Icono de la ubicación al navegar</string>
@@ -5435,18 +5427,18 @@
 \nCPU (celdas): %2$s
 \nCPU (inactiva): %3$s
 \nCPU (GPU libre): %4$s</string>
-    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
+    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triangular</string>
     <string name="resting_position">Ubicación en reposo</string>
     <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
-    <string name="auto_25_chars_route_tr">Gira a la derecha</string>
-    <string name="auto_25_chars_route_tshr">Gira fuerte a la derecha</string>
-    <string name="auto_25_chars_route_tslr">Gira leve a la derecha</string>
-    <string name="auto_25_chars_route_tl">Gira a la izquierda</string>
-    <string name="auto_25_chars_route_tshl">Gira fuerte a la izquierda</string>
-    <string name="auto_25_chars_route_tsll">Gira leve a la izquierda</string>
+    <string name="auto_25_chars_route_tr">Girá a la derecha</string>
+    <string name="auto_25_chars_route_tshr">Girá fuerte a la derecha</string>
+    <string name="auto_25_chars_route_tslr">Girá leve a la derecha</string>
+    <string name="auto_25_chars_route_tl">Girá a la izquierda</string>
+    <string name="auto_25_chars_route_tshl">Girá fuerte a la izquierda</string>
+    <string name="auto_25_chars_route_tsll">Girá leve a la izquierda</string>
     <string name="auto_25_chars_route_tu">Da la vuelta</string>
-    <string name="auto_25_chars_route_kl">Mantente a la izquierda</string>
-    <string name="auto_25_chars_route_kr">Mantente a la derecha</string>
+    <string name="auto_25_chars_route_kl">Mantenete a la izquierda</string>
+    <string name="auto_25_chars_route_kr">Mantenete a la derecha</string>
     <string name="driving_region_india">India</string>
     <string name="driving_region_uk">Reino Unido y similares</string>
     <string name="hugerock_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
@@ -5459,7 +5451,7 @@
     <string name="compass_click_north_is_up">Para cambiar el modo de orientación, mantén pulsado</string>
     <string name="help_article_map_tracks_name">Trazas</string>
     <string name="help_article_map_routes_name">Rutas</string>
-    <string name="route_roundabout_exit">Toma la %1$dª salida</string>
+    <string name="route_roundabout_exit">Tomá la %1$dª salida</string>
     <string name="add_widget_above">Añadir widget encima</string>
     <string name="add_widget_to_the_right">Añadir widget a la derecha</string>
     <string name="add_widget_to_the_left">Añadir widget a la izquierda</string>
@@ -5469,7 +5461,7 @@
     <string name="delete_widget_description">Este widget será borrado. Puedes restaurarlo luego en «Configurar pantalla».</string>
     <string name="battery_saving_mode">Modo ahorro de batería</string>
     <string name="app_mode_suv">SUV</string>
-    <string name="y_axis_description">Marca hasta dos opciones para el eje Y.</string>
+    <string name="y_axis_description">Marcá hasta dos opciones para el eje Y.</string>
     <string name="graph_axis">Eje gráfico</string>
     <string name="rendering_attr_alpineHiking_name">Dificultad de las rutas de senderismo</string>
     <string name="shared_string_interface">Interfaz</string>
@@ -5503,12 +5495,12 @@
     <string name="open_in_browser">Abrir en el navegador</string>
     <string name="shared_string_source">Origen</string>
     <string name="shared_string_no_internet_connection">Sin conexión a Internet</string>
-    <string name="no_internet_descr">Comprueba tu conexión e intenta de nuevo.</string>
+    <string name="no_internet_descr">Comprobá tu conexión e intentá de nuevo.</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="no_photos_available_descr">Aún no se añadieron fotos de usuarios a esta ubicación</string>
     <string name="no_photos_available">Sin fotos disponibles</string>
     <string name="obd_fuel_type_not_provided">No se indica el tipo de combustible</string>
-    <string name="obd_fuel_type_gasoline">Gasolina, Nafta, Bencina</string>
+    <string name="obd_fuel_type_gasoline">Nafta, Gasolina, Bencina</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
     <string name="obd_fuel_type_ethanol">Etanol</string>
     <string name="obd_fuel_type_diesel">Diésel</string>
@@ -5517,13 +5509,13 @@
     <string name="obd_fuel_type_lpg">Gas licuado de petróleo (GLP)</string>
     <string name="obd_fuel_type_cng">GNC</string>
     <string name="obd_fuel_type_propane">Propano</string>
-    <string name="obd_fuel_type_bifuel_gasoline">Combustible dual con gasolina</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Combustible dual con nafta</string>
     <string name="obd_fuel_type_bifuel_methanol">Combustible dual con metanol</string>
     <string name="obd_fuel_type_bifuel_ethanol">Combustible dual con etanol</string>
     <string name="obd_fuel_type_bifuel_lpg">Combustible dual con GLP</string>
     <string name="obd_fuel_type_bifuel_electricity">Combustible dual con electricidad</string>
     <string name="obd_fuel_type_bifuel_electric_combustion">Combustible dual con electricidad y motor a combustión</string>
-    <string name="obd_fuel_type_hybrid_gasoline">Híbrido a gasolina</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Híbrido a nafta</string>
     <string name="obd_fuel_type_hybrid_ethanol">Híbrido a etanol</string>
     <string name="obd_fuel_type_hybrid_electric">Híbrido eléctrico</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y a combustión</string>
@@ -5564,49 +5556,49 @@
     <string name="quick_action_save_recorded_trip_and_continue">Grabación de viaje y continuar</string>
     <string name="track_does_not_contain_data_to_save">La traza no tiene datos que guardar.</string>
     <string name="quick_action_finish_trip_recording_summary">Un botón que guarda la traza GPX y finaliza la grabación del viaje.</string>
-    <string name="start_trip_recording_first_m">Iniciar la grabación del viaje antes.</string>
+    <string name="start_trip_recording_first_m">Iniciá la grabación del viaje antes.</string>
     <string name="new_segment_started_m">Se ha iniciado a grabar un nuevo segmento de la traza.</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Un botón que guarda la grabación del viaje actual en un archivo GPX y continúa grabando una nueva traza sin interrupción.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Un botón que guarda la grabación del viaje actual en un archivo GPX y sigue grabando una nueva traza sin interrupción.</string>
     <string name="quick_action_new_trip_segment">Un botón que inicia un nuevo segmento en la grabación actual de la traza GPX.</string>
     <string name="new_trip_segment">Nuevo segmento del viaje</string>
     <string name="quick_action_verb_start_pause">Iniciar / Pausar</string>
     <string name="quick_action_start_pause_recording">Un botón que inicia, pausa o reanuda la grabación de la traza GPX.</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="help_article_personal_color_palette_schemes_name">Esquemas de colores</string>
-    <string name="movies_list">Listado de videos</string>
+    <string name="movies_list">Lista de videos</string>
     <string name="third_links">Enlaces externos</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lock_screen">Bloquear pantalla</string>
-    <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
+    <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar toques accidentales</string>
     <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Senderos para motos todoterreno</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• Se ha añadido un visor de imágenes de Wikimedia a pantalla completa\n\n• Se ha añadido un nuevo complemento « Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II\n\n• Se ha añadido la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se han implementado nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil\n\n• Se ha añadido la personalización de los botones del mapa y una cuadrícula precisa\n\n• Se ha añadido a los widgets un menú contextual y la acción «Restablecer velocidad media»\n\n• Se ha añadido una nueva capa de ruta «Senderos para motos todoterreno»\n\n• Se ha corregido la «Grabación automática de la traza al navegar»\n\n• Se ha corregido el problema con las coordenadas invertidas en RTL\n\n• Se ha corregido la falta de datos del sensor para la traza en curso\n\n• Se ha añadido información sobre las áreas circundantes para el punto marcado\n\n• Se ha añadido una acción rápida para controlar la visibilidad de las ediciones de OSM\n\n• Se han separado los parámetros de visibilidad para las opciones de coloración del terreno\n\n• Se ha añadido un icono táctil para mostrar el acceso u otros atributos de caminos o senderos</string>
-    <string name="screen_is_locked_by_action_button">Pantalla táctil bloqueada. Pulsa el botón para desbloquearla.</string>
-    <string name="screen_is_locked_by_external_button">La pantalla táctil está bloqueada. Para desbloquearla, pulsa el botón «%1$s» o el botón en la pantalla.</string>
+    <string name="release_4_9">• Se agregó un visor de imágenes de Wikimedia a pantalla completa\n\n• Se agregó un nuevo complemento « Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II\n\n• Se agregó la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se implementaron nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil\n\n• Se agregó la personalización de los botones del mapa y una cuadrícula precisa\n\n• Se agregó a los widgets un menú contextual y la acción «Restablecer velocidad media»\n\n• Se agregó una nueva capa de ruta «Senderos para motos todoterreno»\n\n• Se corrigió la «Grabación automática de la traza al navegar»\n\n• Se corrigió el problema con las coordenadas invertidas en RTL\n\n• Se corrigió la falta de datos del sensor para la traza en curso\n\n• Se agregó información sobre las áreas circundantes para el punto marcado\n\n• Se agregó una acción rápida para controlar la visibilidad de las ediciones de OSM\n\n• Se separaron los parámetros de visibilidad para las opciones de coloración del terreno\n\n• Se agregó un ícono táctil para mostrar el acceso u otros atributos de caminos o senderos</string>
+    <string name="screen_is_locked_by_action_button">Pantalla táctil bloqueada. Pulsá el botón para desbloquearla.</string>
+    <string name="screen_is_locked_by_external_button">La pantalla táctil está bloqueada. Para desbloquearla, pulsá el botón «%1$s» o el botón en la pantalla.</string>
     <string name="screen_is_unlocked">Pantalla táctil desbloqueada.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_title">OsmAnd admite conexiones Bluetooth a escáneres OBD-II.</string>
-    <string name="connect_obd_instructions_step4">4. Pulsa «Conectar» y elige tu escáner en el listado.</string>
+    <string name="connect_obd_instructions_step4">4. Pulsá «Conectar» y elegí tu escáner en la lista.</string>
     <string name="obd_vehicle_info">Datos del vehículo</string>
     <string name="obd_how_to_connect">Cómo conectarse:</string>
-    <string name="connect_obd_instructions_step1">1. Conecta el escáner al puerto OBD-II del vehículo.</string>
-    <string name="connect_obd_instructions_step2">2. Enciende el motor del vehiculo</string>
-    <string name="connect_obd_instructions_step3">3. Activa el Bluetooth del dispositivo</string>
-    <string name="learn_more_about_obd_sensors">Véase más sobre los sensores.</string>
+    <string name="connect_obd_instructions_step1">1. Conectá el escáner al puerto OBD-II del vehículo.</string>
+    <string name="connect_obd_instructions_step2">2. Encendé el motor del vehículo</string>
+    <string name="connect_obd_instructions_step3">3. Activá el Bluetooth del dispositivo</string>
+    <string name="learn_more_about_obd_sensors">Ver más sobre los sensores.</string>
     <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
-    <string name="route_guidance_desc">Proporciona orientación sobre la ruta en tiempo real, incluida la distancia hasta el siguiente giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
+    <string name="route_guidance_desc">Proporciona orientación sobre la ruta en tiempo real, incluida la distancia hasta el próximo giro, el nombre de la ruta, la calle actual e información sobre el carril. Los widgets se activan al navegar.</string>
     <string name="route_guidance">Guías de ruta</string>
     <string name="obd_widget_vehicle_speed">Velocidad del vehículo</string>
     <string name="obd_widget_engine_speed">Revoluciones del motor</string>
-    <string name="obd_nothing_found_description">Por favor, comprueba lo siguiente:\n - El Bluetooth esté activado.\n - El motor del vehículo esté encendido.\n - El dispositivo esté dentro del rango del escáner.</string>
+    <string name="obd_nothing_found_description">Por favor, revisá lo siguiente:\n - Que el Bluetooth esté activado.\n - Que el motor del vehículo esté encendido.\n - Que el dispositivo esté cerca del escáner.</string>
     <string name="obd_nothing_found_text">No se encontraron escáneres</string>
-    <string name="obd_bluetooth_off_description">Activa el Bluetooth para buscar y conectar con el escáner.</string>
+    <string name="obd_bluetooth_off_description">Activá el Bluetooth para buscar y conectar con el escáner.</string>
     <string name="obd_searching_text_description">Por favor, mantén el dispositivo cerca del escáner. Asegúrate de que el motor del vehículo está funcionando.</string>
     <string name="obd_searching_text">Buscando escáneres</string>
     <string name="obd_device_forget_sensor">Desvincular escáner</string>
-    <string name="obd_device_forget_sensor_description">El escáner será quitado de la lista. Podrás vincular este escáner de nuevo en cualquier momento.</string>
-    <string name="connect_obd_instructions_step">1. Conecta el escáner al puerto OBD-II del vehículo.\n\n2. Enciende el motor del vehículo\n\n3. Activa el Bluetooth del dispositivo\n\n4. Pulsa «%1$s» y elige el escáner del listado.</string>
+    <string name="obd_device_forget_sensor_description">El escáner se quitará de la lista. Podrás vincular este escáner de nuevo en cualquier momento.</string>
+    <string name="connect_obd_instructions_step">1. Conectá el escáner al puerto OBD-II del vehículo.\n\n2. Encendé el motor del vehículo\n\n3. Activá el Bluetooth del dispositivo\n\n4. Pulsá «%1$s» y elegí el escáner de la lista.</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo del combustible del vehículo según el sensor (l/h)</string>
     <string name="obd_fuel_left_percent">Combustible restante (%)</string>
@@ -5629,8 +5621,8 @@
     <string name="simulate_obd">Simular datos OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>
-    <string name="bt_start_pair_failed">No es posible vincular con el dispositivo</string>
-    <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>
+    <string name="bt_start_pair_failed">No se puede vincular con el dispositivo</string>
+    <string name="dynamic_icon_type_summary">El ícono cambia según el estado de la acción.</string>
     <string name="obd_not_connected_to_device">Desconectado de %s</string>
     <string name="obd_connecting_to_device">Conectando a %s</string>
     <string name="shared_string_dynamic">Dinámico</string>
@@ -5640,16 +5632,16 @@
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galones imperiales</string>
     <string name="us_gallons">Galones (EEUU)</string>
-    <string name="unit_of_volume_description">Las unidades elegidas serán aplicadas a todos los datos relacionados con el volúmen en el perfil actual.</string>
+    <string name="unit_of_volume_description">Las unidades elegidas se aplicarán a todos los datos relacionados con el volumen en el perfil actual.</string>
     <string name="fuel_tank_capacity">Capacidad del tanque de combustible</string>
     <string name="litres">Litros</string>
-    <string name="fuel_tank_capacity_description">Ingresa la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
-    <string name="unit_of_volume">Unidad de volúmen</string>
+    <string name="fuel_tank_capacity_description">Ingresá la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
+    <string name="unit_of_volume">Unidad de volumen</string>
     <string name="record_obd_data">Grabar estadísticas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Realiza un seguimiento de los datos vitales del vehículo usando el protocolo OBD-II. Supervisa valores clave como la velocidad, las revoluciones del motor, el consumo de combustible y mucho más.</string>
     <string name="vehicle_metrics_obd_ii">Estadísticas del vehículo (OBD-II)</string>
-    <string name="shared_string_volume">Volúmen</string>
+    <string name="shared_string_volume">Volumen</string>
     <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
     <string name="obd_battery_voltage_desc">Muestra el nivel de tensión de la batería del vehículo</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Usar las unidades elegidas en el nombre.</string>
@@ -5676,7 +5668,7 @@
     <string name="obd_throttle_position">Posición del acelerador</string>
     <string name="obd_calculated_engine_load_desc">Muestra el porcentaje de potencia disponible del motor que se está usando en un momento dado.</string>
     <string name="obd_engine_oil_temperature_desc">Muestra la temperatura del aceite del motor.</string>
-    <string name="obd_engine_oil_temperature">Temperatura de aceite del motor</string>
+    <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
     <string name="obd_speed_desc">Muestra la velocidad del sensor de velocidad del vehículo (VSS).</string>
     <string name="obd_fuel_pressure_desc">Muestra la presión dentro del sistema de combustible</string>
 </resources>
