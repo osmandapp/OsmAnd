@@ -30,6 +30,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ElevationChartAppearance;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -114,7 +115,11 @@ public class SimpleRouteCard extends MapBaseCard {
 		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData()) {
-			ChartUtils.setupElevationChart(chart, 10f, 4f, false);
+			ElevationChartAppearance appearance = new ElevationChartAppearance();
+			appearance.setTopOffset(10f);
+			appearance.setBottomOffset(4f);
+			appearance.setUseGesturesAndScale(false);
+			ChartUtils.setupElevationChart(chart, appearance);
 
 			LineData data = lineData;
 			if (data == null) {

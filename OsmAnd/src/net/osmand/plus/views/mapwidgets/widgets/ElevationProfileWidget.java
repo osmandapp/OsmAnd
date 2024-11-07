@@ -381,9 +381,6 @@ public class ElevationProfileWidget extends MapWidget {
 		ElevationChartAppearance appearance = new ElevationChartAppearance();
 		appearance.setContext(themedContext);
 		appearance.setMarkerIcon(markerIcon);
-		appearance.setTopOffset(24f);
-		appearance.setBottomOffset(16f);
-		appearance.setUseGesturesAndScale(true);
 		ChartUtils.setupElevationChart(chart, appearance);
 
 		chart.setHighlightPerTapEnabled(false);
