@@ -54,7 +54,7 @@ import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
-import net.osmand.shared.obd.ODBSimulationSource
+import net.osmand.shared.obd.OBDSimulationSource
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 import okio.IOException
@@ -385,7 +385,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 					PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
 
 				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
-					val simulator = ODBSimulationSource()
+					val simulator = OBDSimulationSource()
 					processDeviceConnected(deviceInfo, simulator.reader, simulator.writer)
 					return true
 				}
