@@ -167,6 +167,10 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
+	var maxDistanceBetweenPoints: Float
+		get() = getGpxParameter(GpxParameter.MAX_DISTANCE_BETWEEN_POINTS) as Float
+		set(value) = setGpxParameter(GpxParameter.MAX_DISTANCE_BETWEEN_POINTS, value)
+
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
 		val endTime = endTime
@@ -354,6 +358,11 @@ class GpxTrackAnalysis {
 					//net.osmand.Location.distanceBetween(
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
+
+					if (calculations[0] > maxDistanceBetweenPoints) {
+						maxDistanceBetweenPoints = calculations[0]
+					}
+
 					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
