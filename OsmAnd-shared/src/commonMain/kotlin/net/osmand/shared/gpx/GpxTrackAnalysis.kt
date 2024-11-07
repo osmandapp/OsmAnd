@@ -49,6 +49,8 @@ class GpxTrackAnalysis {
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
 
+	var maxDistanceBetweenPoints = 0.0F
+
 	var hasSpeedInTrack = false
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
@@ -354,6 +356,11 @@ class GpxTrackAnalysis {
 					//net.osmand.Location.distanceBetween(
 					//	prev.lat, prev.lon, point.lat, point.lon, calculations
 					//)
+
+					if (calculations[0] > maxDistanceBetweenPoints) {
+						maxDistanceBetweenPoints = calculations[0]
+					}
+
 					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
