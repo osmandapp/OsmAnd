@@ -802,7 +802,7 @@ public class RoutingHelper {
 
 	@NonNull
 	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return CurrentStreetName.getCurrentName(this, n);
+		return new CurrentStreetName(this, n);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {

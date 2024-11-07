@@ -18,7 +18,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.shared.SharedUtil
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
+import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.settings.enums.CompassMode
@@ -163,7 +163,7 @@ class TracksScreen(
 			}
 			val address =
 				SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
-			val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist.toDouble()))
+			val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist.toDouble()))
 			address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
 			listBuilder.addItem(Row.Builder()
 				.setTitle(title)

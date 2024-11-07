@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIELDS_QUANTITY;
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
-
 import static java.lang.Math.min;
 
 import android.graphics.drawable.Drawable;
@@ -22,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.CurrentStreetName.RoadShield;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
@@ -210,7 +209,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		}
 		List<RoadShield> shields = streetName.shields;
 		if (!shields.isEmpty() && app.getRendererRegistry().getCurrentSelectedRenderer() != null) {
-			if(!shields.equals(cachedRoadShields) || (shields.equals(cachedRoadShields) && shieldImagesContainer.getChildCount() == 0)){
+			if (!shields.equals(cachedRoadShields) || (shields.equals(cachedRoadShields) && shieldImagesContainer.getChildCount() == 0)) {
 				if (setRoadShield(shields)) {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
 					int indexOf = streetName.text.indexOf("»");
@@ -220,7 +219,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 				} else {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 				}
-			} else AndroidUiHelper.updateVisibility(shieldImagesContainer, shields.equals(cachedRoadShields));
+			} else {
+				AndroidUiHelper.updateVisibility(shieldImagesContainer, shields.equals(cachedRoadShields));
+			}
 			cachedRoadShields = shields;
 		} else if (shields.isEmpty()) {
 			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
@@ -441,7 +442,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			setupViews();
 			turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
 			turnDrawable.setTurnType(type);
-			turnDrawable.setTurnImminent(turnImminent,deviatedFromRoute);
+			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
 			setVerticalImage(turnDrawable);
 			copyView(shieldImagesContainer, oldShieldContainer);
 			copyView(arrowView, oldArrowView);
@@ -469,7 +470,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		view.setVisibility(oldContainer.getVisibility());
 	}
 
-	protected View.OnClickListener getOnClickListener(){
+	protected View.OnClickListener getOnClickListener() {
 		return null;
 	}
 
