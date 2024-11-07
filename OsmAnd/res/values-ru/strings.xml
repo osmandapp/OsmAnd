@@ -6046,7 +6046,7 @@
     <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>
     <string name="shared_string_volume">Объём</string>
     <string name="obd_engine_runtime">Продолжительность работы двигателя</string>
-    <string name="obd_engine_runtime_desc">Показывает, как долго двигатель работает с момента запуска.</string>
+    <string name="obd_engine_runtime_desc">Виджет показывает как долго двигатель работает с момента запуска.</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Отслеживайте важные данные транспортного средства с использованием протокола OBD-II. Контролируйте ключевые показатели, такие как скорость, обороты двигателя, расход топлива и многое другое.</string>
     <string name="reset_average_value">Сбросить среднее значение</string>
     <string name="average_value_slider_description">Выберите временной интервал для измерения среднего значения.</string>
@@ -6058,7 +6058,7 @@
     <string name="show_minor_turns">Отображение на второстепенных перекрестках при движении прямо</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Использовать выбранные единицы в названии.</string>
     <string name="remaining_fuel_description">Виджет показывает количество топлива, оставшегося в баке транспортного средства</string>
-    <string name="remaining_fuel">Оставшееся топливо</string>
+    <string name="remaining_fuel">Остаток топлива</string>
     <string name="obd_fuel_consumption_desc">Виджет показывает скорость использования топлива двигателем, рассчитанную на основе оставшегося топлива, размера бака и пройденного расстояния, определенного по GPS.</string>
     <string name="obd_fuel_consumption">Расход топлива</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
