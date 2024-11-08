@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIELDS_QUANTITY;
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
-
 import static java.lang.Math.min;
 
 import android.graphics.drawable.Drawable;
@@ -22,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.CurrentStreetName.RoadShield;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
@@ -208,19 +207,16 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 			return;
 		}
+		if (!Algorithms.isEmpty(streetName.text)) {
+			streetName.text = removeSymbol(streetName.text);
+		}
 		List<RoadShield> shields = streetName.shields;
 		if (!shields.isEmpty() && app.getRendererRegistry().getCurrentSelectedRenderer() != null) {
-			if(!shields.equals(cachedRoadShields) || (shields.equals(cachedRoadShields) && shieldImagesContainer.getChildCount() == 0)){
-				if (setRoadShield(shields)) {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
-					int indexOf = streetName.text.indexOf("»");
-					if (indexOf > 0) {
-						streetName.text = streetName.text.substring(indexOf);
-					}
-				} else {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
-				}
-			} else AndroidUiHelper.updateVisibility(shieldImagesContainer, shields.equals(cachedRoadShields));
+			if (!shields.equals(cachedRoadShields) || (shields.equals(cachedRoadShields) && shieldImagesContainer.getChildCount() == 0)) {
+				AndroidUiHelper.updateVisibility(shieldImagesContainer, setRoadShield(shields));
+			} else {
+				AndroidUiHelper.updateVisibility(shieldImagesContainer, shields.equals(cachedRoadShields));
+			}
 			cachedRoadShields = shields;
 		} else if (shields.isEmpty()) {
 			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
@@ -230,7 +226,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (Algorithms.isEmpty(streetName.exitRef)) {
 			AndroidUiHelper.updateVisibility(exitView, false);
 		} else {
-			exitView.setText(streetName.exitRef);
+			String exit = app.getString(R.string.shared_string_exit);
+			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, streetName.exitRef);
+			exitView.setText(exitViewText);
 			AndroidUiHelper.updateVisibility(exitView, true);
 		}
 
@@ -239,6 +237,13 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else if (!streetName.text.equals(streetView.getText().toString())) {
 			streetView.setText(streetName.text);
 		}
+	}
+
+	public static String removeSymbol(String input) {
+		if (input.startsWith("» ")) {
+			return input.replace("» ", "");
+		}
+		return input;
 	}
 
 	public void setVerticalImage(@Nullable TurnDrawable imageDrawable) {
@@ -441,7 +446,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			setupViews();
 			turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
 			turnDrawable.setTurnType(type);
-			turnDrawable.setTurnImminent(turnImminent,deviatedFromRoute);
+			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
 			setVerticalImage(turnDrawable);
 			copyView(shieldImagesContainer, oldShieldContainer);
 			copyView(arrowView, oldArrowView);
@@ -469,7 +474,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		view.setVisibility(oldContainer.getVisibility());
 	}
 
-	protected View.OnClickListener getOnClickListener(){
+	protected View.OnClickListener getOnClickListener() {
 		return null;
 	}
 

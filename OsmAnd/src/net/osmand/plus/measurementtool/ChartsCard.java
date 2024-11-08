@@ -499,7 +499,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			ChartUtils.setupElevationChart(commonGraphAdapter.getChart(), 24f, 16f, true);
+			ChartUtils.setupElevationChart(commonGraphAdapter.getChart());
 			List<ILineDataSet> dataSets = ChartUtils.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);

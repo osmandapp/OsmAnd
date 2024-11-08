@@ -26,13 +26,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -116,7 +116,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 				coordinates += ", " + secondCoordinateText;
 			}
 			if (ShareMenu.copyToClipboard(app, coordinates)) {
-				showShareSnackbar(OsmAndFormatter.markLTR(coordinates));
+				showShareSnackbar(TextDirectionUtil.markAsLTR(coordinates));
 			}
 		}
 	}
@@ -241,7 +241,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	private void setCoordinateText(@NonNull TextView textView, @NonNull String text) {
-		AndroidUtils.setTruncatedText(textView, OsmAndFormatter.markLTR(text));
+		AndroidUtils.setTruncatedText(textView, TextDirectionUtil.markAsLTR(text));
 	}
 
 	protected void setCoordinateIcon(@NonNull ImageView imageView, @NonNull Drawable drawable) {

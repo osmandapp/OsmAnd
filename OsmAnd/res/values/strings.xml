@@ -12,7 +12,6 @@
 -->
 
     <string name="connect_new_scanner">Connect new scanner</string>
-    <string name="shared_string_pro">Pro</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
     <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
 	<string name="shared_string_hour">Hour</string>
@@ -50,7 +49,6 @@
     <string name="fuel_tank_capacity">Fuel tank capacity</string>
     <string name="shared_strings_dimensions">Dimensions</string>
     <string name="litres">Litres</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperial gallons</string>
     <string name="us_gallons">US gallons</string>

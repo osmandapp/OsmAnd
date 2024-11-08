@@ -19,6 +19,7 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
@@ -26,9 +27,9 @@ import net.osmand.data.ValueHolder;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
@@ -112,7 +113,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		Distance distance = null;
 		int leftTimeSec = 0;
 		if (newRoute && rh.isRoutePlanningMode()) {
-			distance = TripHelper.getDistance(app, rh.getLeftDistance());
+			distance = TripUtils.getDistance(app, rh.getLeftDistance());
 			leftTimeSec = rh.getLeftTime();
 		}
 		if (distance != null && leftTimeSec > 0) {
@@ -203,6 +204,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		RoutingHelper rh = getApp().getRoutingHelper();
+		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
+		if (mapRect != null) {
+			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
+		}
 		updateRoute(newRoute);
 	}
 

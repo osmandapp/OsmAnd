@@ -31,6 +31,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.charts.ElevationChartAppearance;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -669,8 +670,11 @@ public class TrackDetailsMenu {
 
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		boolean useHours = analysis.getTimeSpan() != 0 && analysis.getTimeSpan() / HOUR_IN_MILLIS > 0;
-		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.getStartTime(), useHours);
-		ChartUtils.setupElevationChart(chart, markerView, 24, 16, true);
+
+		ElevationChartAppearance appearance = new ElevationChartAppearance();
+		appearance.setContext(themedContext);
+		appearance.setMarkerView(new GpxMarkerView(themedContext, analysis.getStartTime(), useHours));
+		ChartUtils.setupElevationChart(chart, appearance);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null) {

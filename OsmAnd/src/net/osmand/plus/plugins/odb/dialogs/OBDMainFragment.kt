@@ -23,7 +23,8 @@ import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.util.Algorithms
 
-class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener {
+class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
+	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
 
 	private val handler = Handler(Looper.getMainLooper())
 	private val items = mutableListOf<Any>()
@@ -74,15 +75,17 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun setupUI(view: View) {
 		progress = view.findViewById(R.id.progress_bar)
+		items.clear()
 		setupConnectionState(view)
 		updateButtonState(view)
 		setupVehicleInfo()
 		setupReceivedData()
+		setupSettingsCard()
 		setupList(view)
 	}
 
 	private fun setupList(view: View) {
-		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity())
+		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity(), device, this)
 		view.findViewById<RecyclerView>(R.id.recycler_view)?.adapter = adapter
 		adapter.items = ArrayList(items)
 	}
@@ -227,6 +230,13 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		}
 	}
 
+	private fun setupSettingsCard() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_SETTINGS_TYPE)
+		items.add(OBDMainFragmentAdapter.NAME_ITEM_TYPE)
+		items.add(OBDMainFragmentAdapter.FORGET_SENSOR_TYPE)
+	}
+
 	override fun onStart() {
 		super.onStart()
 		updateWidgets()
@@ -290,5 +300,15 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 					.commitAllowingStateLoss()
 			}
 		}
+	}
+
+	override fun onNameChanged() {
+		view?.findViewById<TextView>(R.id.device_name)?.text = device.name
+		adapter.notifyDataSetChanged()
+	}
+
+	override fun onForgetSensorConfirmed(deviceId: String) {
+		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
+		view?.let { setupUI(it) }
 	}
 }

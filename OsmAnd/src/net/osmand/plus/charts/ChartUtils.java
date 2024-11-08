@@ -12,7 +12,6 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
@@ -26,6 +25,7 @@ import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -71,27 +71,32 @@ public class ChartUtils {
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
 
 	public static void setupElevationChart(ElevationChart chart) {
-		setupElevationChart(chart, 24f, 16f, true);
+		setupElevationChart(chart, new ElevationChartAppearance());
 	}
 
-	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
-	                                       boolean useGesturesAndScale) {
-		setupElevationChart(chart, topOffset, bottomOffset, useGesturesAndScale, null);
-	}
+	public static void setupElevationChart(@NonNull ElevationChart chart,
+	                                       @NonNull ElevationChartAppearance appearance) {
+		Context context = appearance.getContext() != null ? appearance.getContext() : chart.getContext();
 
-	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
-	                                       boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
-		GpxMarkerView markerView = new GpxMarkerView(chart.getContext(), markerIcon);
-		setupElevationChart(chart, markerView, topOffset, bottomOffset, useGesturesAndScale);
-	}
+		int labelsColor = appearance.getLabelsColor() != null
+				? appearance.getLabelsColor()
+				: ContextCompat.getColor(context, R.color.text_color_secondary_light);
 
-	public static void setupElevationChart(@NonNull ElevationChart chart, @NonNull GpxMarkerView markerView, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
-		Context context = chart.getContext();
-		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
-		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
-		int xAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
-		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor,
-				yAxisGridColor, FontCache.getMediumFont(), useGesturesAndScale);
+		int yAxisGridColor = appearance.getYAxisGridColor() != null
+				? appearance.getYAxisGridColor()
+				: AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
+
+		int xAxisGridColor = appearance.getXAxisGridColor() != null
+				? appearance.getXAxisGridColor()
+				: AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
+
+		MarkerView markerView = appearance.getMarkerView() != null
+				? appearance.getMarkerView()
+				: new GpxMarkerView(context, appearance.getMarkerIcon());
+
+		chart.setupGPXChart(markerView, appearance.getTopOffset(), appearance.getBottomOffset(),
+				xAxisGridColor, labelsColor, yAxisGridColor, FontCache.getMediumFont(),
+				appearance.getUseGesturesAndScale());
 	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {

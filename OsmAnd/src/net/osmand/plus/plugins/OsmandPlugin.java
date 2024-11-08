@@ -247,8 +247,14 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<PoiUIFilter> getCustomPoiFilters() {
+	@NonNull
+	protected List<PoiUIFilter> getPoiFilters() {
 		return Collections.emptyList();
+	}
+
+	@Nullable
+	protected PoiUIFilter getPoiFilterById(@NonNull String filterId) {
+		return null;
 	}
 
 	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {

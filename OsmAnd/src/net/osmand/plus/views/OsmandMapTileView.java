@@ -85,6 +85,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
@@ -1681,11 +1682,30 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, true);
+	}
+
+	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
+		// if at least one point is not inside the boundary, return false
+		if (!tb.containsLatLon(top, left)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, left)) {
+			return false;
+		} else if (!tb.containsLatLon(top, right)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, right)) {
+			return false;
+		}
+		return true;
+	}
+
+	public void fitRectToMap(double left, double right, double top, double bottom,
+	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
 		RotatedTileBox tb = currentViewport.copy();
+		float zoomStep = useSmallZoom ? 0.1f : 1f;
 		double border = 0.8;
 		int dx = 0;
 		int dy = 0;
-
 		int tbw = (int) (tb.getPixWidth() * border);
 		int tbh = (int) (tb.getPixHeight() * border);
 		if (tileBoxWidthPx > 0) {
@@ -1704,20 +1724,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
-
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
-
-		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomIn();
+		while (zoom.isZoomOutAllowed() && !fullyContains(tb, left, top, right, bottom)) {
+			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomOut();
+		zoom.partialChangeZoom(zoomStep);
+		while (zoom.isZoomInAllowed() && fullyContains(tb, left, top, right, bottom)) {
+			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-
+		zoom.partialChangeZoom(-zoomStep);
+		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
