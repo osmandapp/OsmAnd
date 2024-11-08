@@ -287,6 +287,8 @@ object OBDDataComputer {
 				FUEL_CONSUMPTION_RATE_PERCENT_HOUR -> {
 					if (locValues.size >= 2) {
 						calculateFuelConsumption(locValues)
+					} else if (locValues.size == 1) {
+						Float.NaN
 					} else {
 						null
 					}
@@ -295,6 +297,8 @@ object OBDDataComputer {
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
 						getFuelTank() * calculateFuelConsumption(locValues) / 100
+					} else if (locValues.size == 1) {
+						Float.NaN
 					} else {
 						null
 					}
@@ -314,8 +318,12 @@ object OBDDataComputer {
 								return 100 * difLiter / (distance / 1000)
 							}
 						}
+						null
+					} else if (locValues.size == 1) {
+						Float.NaN
+					} else {
+						null
 					}
-					null
 				}
 
 				FUEL_LEFT_KM -> {
@@ -332,8 +340,12 @@ object OBDDataComputer {
 								return lastPerc * dist / diffPerc
 							}
 						}
+						null
+					} else if (locValues.size == 1) {
+						Float.NaN
+					} else {
+						null
 					}
-					null
 				}
 
 				FUEL_LEFT_PERCENT -> {

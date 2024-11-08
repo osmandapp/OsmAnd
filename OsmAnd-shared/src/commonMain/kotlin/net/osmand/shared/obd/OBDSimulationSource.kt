@@ -17,6 +17,7 @@ class OBDSimulationSource {
 	private var bufferToRead: String? = null
 	private var fuelLeftLvl = 255
 	private var lastFuelChangedTime = 0L
+	private val NEW_DATA_PACK_DELAY = 2000L
 	private val CHANGE_FUEL_LV_TIMEOUT = 15000
 	private val log = LoggerFactory.getLogger("ODBSimulationSource")
 	private var showFuelPeak = true
@@ -50,7 +51,7 @@ class OBDSimulationSource {
 			val command = splitCommand[1]
 			val obdCommand = OBDCommand.getByCode(commandCode.toInt(16), command.toInt(16))
 			if (obdCommand?.ordinal == OBDCommand.entries.size - 1) {
-				delay(200)
+				delay(NEW_DATA_PACK_DELAY)
 			}
 			val response = when (obdCommand) {
 				OBDCommand.OBD_VIN_COMMAND -> ""

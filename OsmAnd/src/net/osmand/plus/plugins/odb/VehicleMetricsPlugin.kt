@@ -717,6 +717,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		} else if (data == null) {
 			return "-"
 		}
+		if (computerWidget.type.requiredCommand == OBDCommand.OBD_FUEL_LEVEL_COMMAND && data == Float.NaN) {
+			return if (computerWidget.type == OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM) ">50" else "<50"
+		}
 		val convertedData = when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM -> getConvertedDistance(data as Double)
