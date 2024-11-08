@@ -95,7 +95,7 @@ open class RangeTrackFilter<T : Comparable<T>>
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(trackFilterType.property!!)
 			?: return false
 		val comparableValue = getComparableValue(value)
-		return comparableValue > valueFrom && comparableValue < valueTo
+		return comparableValue in valueFrom..valueTo
 				|| comparableValue < minValue && valueFrom == minValue
 				|| comparableValue > maxValue && valueTo == maxValue
 	}
