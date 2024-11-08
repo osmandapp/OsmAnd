@@ -284,9 +284,9 @@ public class MapHudLayout extends FrameLayout {
 		boolean changed = false;
 
 		int gravity;
-		int leftMargin;
+		int startMargin;
 		int topMargin;
-		int rightMargin;
+		int endMargin;
 		int bottomMargin;
 
 		int marginX = position.getXStartPix(dpToPx);
@@ -294,12 +294,12 @@ public class MapHudLayout extends FrameLayout {
 
 		if (position.isLeft()) {
 			gravity = Gravity.START;
-			rightMargin = 0;
-			leftMargin = marginX;
+			endMargin = 0;
+			startMargin = marginX;
 		} else {
 			gravity = Gravity.END;
-			leftMargin = 0;
-			rightMargin = marginX;
+			startMargin = 0;
+			endMargin = marginX;
 		}
 		if (position.isTop()) {
 			gravity |= Gravity.TOP;
@@ -310,13 +310,14 @@ public class MapHudLayout extends FrameLayout {
 			topMargin = 0;
 			bottomMargin = marginY;
 		}
-		if (leftMargin != params.leftMargin || topMargin != params.topMargin
-				|| rightMargin != params.rightMargin || bottomMargin != params.bottomMargin) {
+		if (startMargin != params.getMarginStart() || topMargin != params.topMargin
+				|| endMargin != params.getMarginEnd() || bottomMargin != params.bottomMargin) {
 			changed = true;
-			params.leftMargin = leftMargin;
+
 			params.topMargin = topMargin;
-			params.rightMargin = rightMargin;
 			params.bottomMargin = bottomMargin;
+			params.setMarginStart(startMargin);
+			params.setMarginEnd(endMargin);
 		}
 		if (params.gravity != gravity) {
 			changed = true;
@@ -334,7 +335,7 @@ public class MapHudLayout extends FrameLayout {
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
-					positionSize.isLeft(), positionSize.isLeft() ? params.leftMargin : params.rightMargin,
+					positionSize.isLeft(), positionSize.isLeft() ? params.getMarginStart() : params.getMarginEnd(),
 					positionSize.isTop(), positionSize.isTop() ? params.topMargin : params.bottomMargin);
 		}
 		if (save) {

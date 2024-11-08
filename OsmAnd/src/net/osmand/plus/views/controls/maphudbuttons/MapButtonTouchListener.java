@@ -26,6 +26,8 @@ public class MapButtonTouchListener implements OnTouchListener {
 
 	private final MapButtonState buttonState;
 	private final int padding;
+	private final boolean layoutRtl;
+
 	private int initialMarginX = 0;
 	private int initialMarginY = 0;
 	private float initialTouchX = 0;
@@ -33,7 +35,8 @@ public class MapButtonTouchListener implements OnTouchListener {
 
 	public MapButtonTouchListener(@NonNull MapButtonState buttonState, @NonNull Context context) {
 		this.buttonState = buttonState;
-		padding = AndroidUtils.dpToPx(context, DEF_MARGIN_DP);
+		this.layoutRtl = AndroidUtils.isLayoutRtl(context);
+		this.padding = AndroidUtils.dpToPx(context, DEF_MARGIN_DP);
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -75,7 +78,8 @@ public class MapButtonTouchListener implements OnTouchListener {
 
 		int deltaX = (int) (initialTouchX - event.getRawX());
 		int deltaY = (int) (initialTouchY - event.getRawY());
-		if (size.isLeft()) {
+
+		if (layoutRtl != size.isLeft()) {
 			deltaX = -deltaX;
 		}
 		if (size.isTop()) {
@@ -93,9 +97,9 @@ public class MapButtonTouchListener implements OnTouchListener {
 		}
 		if (view.getWidth() + newMarginX <= parent.getWidth() - padding && newMarginX > 0) {
 			if (size.isLeft()) {
-				params.leftMargin = newMarginX;
+				params.setMarginStart(newMarginX);
 			} else {
-				params.rightMargin = newMarginX;
+				params.setMarginEnd(newMarginX);
 			}
 		}
 		view.setLayoutParams(params);
@@ -115,7 +119,7 @@ public class MapButtonTouchListener implements OnTouchListener {
 	private void setUpInitialValues(@NonNull View view, @NonNull MotionEvent event) {
 		MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();
 		ButtonPositionSize size = buttonState.getPositionSize();
-		initialMarginX = size.isLeft() ? params.leftMargin : params.rightMargin;
+		initialMarginX = size.isLeft() ? params.getMarginStart() : params.getMarginEnd();
 		initialMarginY = size.isTop() ? params.topMargin : params.bottomMargin;
 
 		initialTouchX = event.getRawX();
