@@ -52,6 +52,7 @@ import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.obd.OBDCommand
+import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
 import net.osmand.shared.obd.OBDSimulationSource
@@ -368,7 +369,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	@SuppressLint("MissingPermission")
-	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
+	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo) {
 		if (currentConnectingState != OBDConnectionState.DISCONNECTED) {
 			disconnect()
 		}
@@ -376,33 +377,44 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
 				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
-					val simulator = OBDSimulationSource()
-					processDeviceConnected(deviceInfo, simulator.reader, simulator.writer)
-					return true
-				}
+					createOBDDispatcher()
+					obdDispatcher?.connect(object : OBDConnector {
+						val deviceToConnect = deviceInfo
+						override fun connect(): Pair<Source, Sink> {
+							val simulator = OBDSimulationSource()
+							return Pair(simulator.reader, simulator.writer)
+						}
 
-				val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
-				bluetoothAdapter?.let { adapter ->
-					LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
-					val pairedDevices = adapter.bondedDevices.toList()
-					val obdDevice: BluetoothDevice? =
-						pairedDevices.find { it.address == deviceInfo.address }
-					if (obdDevice != null) {
-						connectToDevice(activity, obdDevice)
-					} else {
-						LOG.debug("bt device ${deviceInfo.name} - ${deviceInfo.address}")
-						onDisconnected(deviceInfo)
+						override fun onConnectionSuccess() {
+							onDeviceConnected(deviceToConnect)
+						}
+
+						override fun onConnectionFailed() {
+							onDisconnected(deviceToConnect)
+						}
+					})
+				} else {
+					val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
+					bluetoothAdapter?.let { adapter ->
+						LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
+						val pairedDevices = adapter.bondedDevices.toList()
+						val obdDevice: BluetoothDevice? =
+							pairedDevices.find { it.address == deviceInfo.address }
+						if (obdDevice != null) {
+							connectToDevice(activity, obdDevice)
+						} else {
+							LOG.debug("bt device ${deviceInfo.name} - ${deviceInfo.address}")
+							onDisconnected(deviceInfo)
+						}
 					}
 				}
 			} else {
 				AndroidUtils.requestBLEPermissions(activity)
 			}
 		}
-		return socket?.isConnected == true
 	}
 
-	private fun processDeviceConnected(deviceInfo: BTDeviceInfo, reader: Source, writer: Sink) {
-		onDeviceConnected(deviceInfo)
+	private fun createOBDDispatcher() {
 		obdDispatcher?.let {
 			it.setReadStatusListener(null)
 			it.stopReading()
@@ -411,34 +423,39 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		obdDispatcher?.setReadStatusListener(this)
 		obdDispatcher?.useInfoLogging =
 			PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
-		obdDispatcher?.setReadWriteStreams(reader, writer)
 	}
 
 	@SuppressLint("MissingPermission")
 	private fun connectToDevice(activity: Activity, connectedDevice: BluetoothDevice) {
-		val deviceToConnect = BTDeviceInfo(
-			connectedDevice.getAliasName(activity),
-			connectedDevice.address)
-		Thread {
-			try {
-				socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
-				socket?.apply {
-					connect()
-					if (isConnected) {
-						processDeviceConnected(
-							deviceToConnect,
-							inputStream.source(),
-							outputStream.sink())
-					} else {
-						LOG.error("Socket not connected")
-						onDisconnected(deviceToConnect)
+		createOBDDispatcher()
+		obdDispatcher?.connect(object : OBDConnector {
+			val deviceToConnect = BTDeviceInfo(
+				connectedDevice.getAliasName(activity),
+				connectedDevice.address)
+
+			override fun connect(): Pair<Source, Sink>? {
+				try {
+					socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
+					socket?.apply {
+						connect()
+						if (isConnected) {
+							return Pair(inputStream.source(), outputStream.sink())
+						}
 					}
+				} catch (error: IOException) {
+					LOG.error("Can't connect to device. $error")
 				}
-			} catch (error: IOException) {
-				onDisconnected(deviceToConnect)
-				LOG.error("Can't connect to device. $error")
+				return null
 			}
-		}.start()
+
+			override fun onConnectionSuccess() {
+				onDeviceConnected(deviceToConnect)
+			}
+
+			override fun onConnectionFailed() {
+				onDisconnected(deviceToConnect)
+			}
+		})
 	}
 
 	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {

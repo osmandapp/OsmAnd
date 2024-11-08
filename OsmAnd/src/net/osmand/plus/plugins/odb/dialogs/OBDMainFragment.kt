@@ -164,9 +164,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				pairBtnTextColorId = disconnectedStateBtnTextColor
 				pairBtnTextId = R.string.external_device_details_connect
 				pairButton.setOnClickListener {
-					Thread {
-						vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
-					}.start()
+					vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
 				}
 			}
 		}

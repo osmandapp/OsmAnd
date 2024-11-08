@@ -35,76 +35,91 @@ class OBDDispatcher {
 		fun onInitConnectionFailed()
 	}
 
-	private fun startReadObdLooper() {
+	fun connect(connector: OBDConnector) {
 		job = Job()
 		scope = CoroutineScope(Dispatchers.IO + job!!)
 		scope!!.launch {
 			try {
-				log("Start reading obd with $inputStream and $outputStream")
-				OBDDataComputer.obdDispatcher = this@OBDDispatcher
-				obd2Connection = Obd2Connection(object : UnderlyingTransport {
-					override fun write(bytes: ByteArray) {
-						val buffer = Buffer()
-						buffer.write(bytes)
-						outputStream?.write(buffer, buffer.size)
-					}
-
-					override fun readByte(): Byte? {
-						val readBuffer = Buffer()
-						return if (inputStream?.read(readBuffer, 1) == 1L) {
-							readBuffer.readByte()
-						} else {
-							null
-						}
-					}
-
-					override fun onInitFailed() {
-						readStatusListener?.onInitConnectionFailed()
-					}
-				}, this@OBDDispatcher)
-				if(obd2Connection?.initialized == true) {
-					while (obd2Connection?.isFinished == false) {
-						try {
-							for (command in commandQueue) {
-								if (command.isStale) {
-									val cachedCommandResponse = staleCommandsCache[command]
-									if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
-										continue
-									}
-								}
-								val hexGroupCode = "%02X".format(command.commandGroup)
-								val hexCode = "%02X".format(command.command)
-								val fullCommand = "$hexGroupCode$hexCode"
-								val commandResult =
-									obd2Connection!!.run(
-										fullCommand,
-										command.command,
-										command.commandType)
-								if (commandResult.isValid()) {
-									if (commandResult.result.size >= command.responseLength) {
-										sensorDataCache[command] =
-											command.parseResponse(commandResult.result)
-									} else {
-										log("Incorrect response length for command $command")
-									}
-								} else if(commandResult == OBDResponse.NO_DATA) {
-									sensorDataCache[command] = OBDDataField.NO_DATA
-								} else if(commandResult == OBDResponse.ERROR) {
-									readStatusListener?.onIOError()
-								}
-							}
-						} catch (error: IOException) {
-							log("Run OBD looper error. $error")
-							if (inputStream == null || outputStream == null) {
-								break
-							}
-							readStatusListener?.onIOError()
-						}
-						OBDDataComputer.acceptValue(sensorDataCache)
-					}
+				val connectionResult = connector.connect()
+				if (connectionResult == null) {
+					connector.onConnectionFailed()
+				} else {
+					connector.onConnectionSuccess()
+					inputStream = connectionResult.first
+					outputStream = connectionResult.second
+					startReadObdLooper()
 				}
+
 			} catch (cancelError: CancellationException) {
 				log("OBD reading canceled")
+			}
+		}
+	}
+
+	private fun startReadObdLooper() {
+		log("Start reading obd with $inputStream and $outputStream")
+		OBDDataComputer.obdDispatcher = this@OBDDispatcher
+		obd2Connection = Obd2Connection(object : UnderlyingTransport {
+			override fun write(bytes: ByteArray) {
+				val buffer = Buffer()
+				buffer.write(bytes)
+				outputStream?.write(buffer, buffer.size)
+			}
+
+			override fun readByte(): Byte? {
+				val readBuffer = Buffer()
+				return if (inputStream?.read(readBuffer, 1) == 1L) {
+					readBuffer.readByte()
+				} else {
+					null
+				}
+			}
+
+			override fun onInitFailed() {
+				readStatusListener?.onInitConnectionFailed()
+			}
+		}, this@OBDDispatcher)
+		if (obd2Connection?.initialized == true) {
+			while (obd2Connection != null && obd2Connection?.isFinished == false) {
+				try {
+					for (command in commandQueue) {
+						if (command.isStale) {
+							val cachedCommandResponse = staleCommandsCache[command]
+							if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
+								continue
+							}
+						}
+						val hexGroupCode = "%02X".format(command.commandGroup)
+						val hexCode = "%02X".format(command.command)
+						val fullCommand = "$hexGroupCode$hexCode"
+						val commandResult =
+							obd2Connection?.run(
+								fullCommand,
+								command.command,
+								command.commandType)
+						commandResult?.let {
+							if (it.isValid()) {
+								if (it.result.size >= command.responseLength) {
+									sensorDataCache[command] =
+										command.parseResponse(it.result)
+								} else {
+									log("Incorrect response length for command $command")
+								}
+							} else if (it == OBDResponse.NO_DATA) {
+								sensorDataCache[command] = OBDDataField.NO_DATA
+							} else if (it == OBDResponse.ERROR) {
+								readStatusListener?.onIOError()
+							}
+						}
+					}
+				} catch (error: IOException) {
+					log("Run OBD looper error. $error")
+					if (inputStream == null || outputStream == null) {
+						break
+					}
+					readStatusListener?.onIOError()
+				}
+				OBDDataComputer.acceptValue(sensorDataCache)
 			}
 		}
 	}
@@ -127,7 +142,7 @@ class OBDDispatcher {
 		readStatusListener = listener
 	}
 
-	fun setReadWriteStreams(readStream: Source?, writeStream: Sink?) {
+	private fun setReadWriteStreams(readStream: Source?, writeStream: Sink?) {
 		scope?.cancel()
 		inputStream = readStream
 		outputStream = writeStream
@@ -141,6 +156,7 @@ class OBDDispatcher {
 	fun stopReading() {
 		log("stop reading")
 		setReadWriteStreams(null, null)
+		scope?.cancel()
 		scope = null
 		sensorDataCache.clear()
 		OBDDataComputer.clearCache()
@@ -153,7 +169,7 @@ class OBDDispatcher {
 	}
 
 	private fun log(msg: String) {
-		if(useInfoLogging) {
+		if (useInfoLogging) {
 			log.info(msg)
 		} else {
 			log.debug(msg)
