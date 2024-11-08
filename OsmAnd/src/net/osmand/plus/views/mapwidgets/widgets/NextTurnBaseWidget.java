@@ -207,18 +207,13 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
 			return;
 		}
+		if (!Algorithms.isEmpty(streetName.text)) {
+			streetName.text = removeSymbol(streetName.text);
+		}
 		List<RoadShield> shields = streetName.shields;
 		if (!shields.isEmpty() && app.getRendererRegistry().getCurrentSelectedRenderer() != null) {
 			if (!shields.equals(cachedRoadShields) || (shields.equals(cachedRoadShields) && shieldImagesContainer.getChildCount() == 0)) {
-				if (setRoadShield(shields)) {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
-					int indexOf = streetName.text.indexOf("»");
-					if (indexOf > 0) {
-						streetName.text = streetName.text.substring(indexOf);
-					}
-				} else {
-					AndroidUiHelper.updateVisibility(shieldImagesContainer, false);
-				}
+				AndroidUiHelper.updateVisibility(shieldImagesContainer, setRoadShield(shields));
 			} else {
 				AndroidUiHelper.updateVisibility(shieldImagesContainer, shields.equals(cachedRoadShields));
 			}
@@ -231,7 +226,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (Algorithms.isEmpty(streetName.exitRef)) {
 			AndroidUiHelper.updateVisibility(exitView, false);
 		} else {
-			exitView.setText(streetName.exitRef);
+			String exit = app.getString(R.string.shared_string_exit);
+			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, streetName.exitRef);
+			exitView.setText(exitViewText);
 			AndroidUiHelper.updateVisibility(exitView, true);
 		}
 
@@ -240,6 +237,13 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else if (!streetName.text.equals(streetView.getText().toString())) {
 			streetView.setText(streetName.text);
 		}
+	}
+
+	public static String removeSymbol(String input) {
+		if (input.matches("^»\\s.*")) {
+			return input.replaceFirst("^»\\s", "");
+		}
+		return input;
 	}
 
 	public void setVerticalImage(@Nullable TurnDrawable imageDrawable) {
