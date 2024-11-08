@@ -83,6 +83,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private LayerDrawable projectionIcon;
 
+	private boolean isCreated;
+
 	//OpenGL
 	private final RenderState renderState = new RenderState();
 	private LocationPointsTileProvider trackChartPointsProvider;
@@ -173,7 +175,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		MapRendererView mapRenderer = getMapRenderer();
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
-
+			isCreated = true;
 			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
 			updateRouteColors(nightMode);
@@ -188,7 +190,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 				drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			}
-		} else {
+		} else if (isCreated) {
+			isCreated = false;
 			resetLayer();
 		}
 		mapActivityInvalidated = false;
