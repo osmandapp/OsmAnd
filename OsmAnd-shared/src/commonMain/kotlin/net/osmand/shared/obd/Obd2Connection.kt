@@ -4,7 +4,7 @@ import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
 import okio.IOException
 
-class Obd2Connection(private val connection: UnderlyingTransport) {
+class Obd2Connection(private val connection: UnderlyingTransport, private val obdDispatcher: OBDDispatcher) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
@@ -208,7 +208,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 	}
 
 	private fun log(msg: String) {
-		if(OBDDispatcher.useInfoLogging) {
+		if(obdDispatcher.useInfoLogging) {
 			log.info(msg)
 		} else {
 			log.debug(msg)

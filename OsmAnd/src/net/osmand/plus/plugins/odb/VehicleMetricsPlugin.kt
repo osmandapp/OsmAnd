@@ -87,6 +87,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	private var scanDevicesListener: ScanOBDDevicesListener? = null
 	private var connectionStateListener: ConnectionStateListener? = null
 	private var pairingDevice: BTDeviceInfo? = null
+	private var obdDispatcher: OBDDispatcher? = null
 
 	enum class OBDConnectionState {
 		CONNECTED, CONNECTING, DISCONNECTED
@@ -101,10 +102,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	interface ConnectionStateListener {
 		fun onStateChanged(state: OBDConnectionState, deviceInfo: BTDeviceInfo)
-	}
-
-	init {
-		OBDDispatcher.setReadStatusListener(this)
 	}
 
 	override fun createWidgets(
@@ -265,9 +262,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	override fun init(app: OsmandApplication, activity: Activity?): Boolean {
-		for (command in OBDCommand.entries) {
-			OBDDispatcher.addCommand(command)
-		}
 		settings.SIMULATE_OBD_DATA.addListener(simulateOBDListener)
 		return true
 	}
@@ -328,7 +322,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	fun disconnect() {
-		OBDDispatcher.stopReading()
+		obdDispatcher?.stopReading()
 		socket?.apply {
 			if (isConnected) {
 				close()
@@ -381,9 +375,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
-				OBDDispatcher.useInfoLogging =
-					PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
-
 				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
 					val simulator = OBDSimulationSource()
 					processDeviceConnected(deviceInfo, simulator.reader, simulator.writer)
@@ -412,9 +403,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	private fun processDeviceConnected(deviceInfo: BTDeviceInfo, reader: Source, writer: Sink) {
 		onDeviceConnected(deviceInfo)
-		OBDDispatcher.useInfoLogging =
+		obdDispatcher?.let {
+			it.setReadStatusListener(null)
+			it.stopReading()
+		}
+		obdDispatcher = OBDDispatcher()
+		obdDispatcher?.setReadStatusListener(this)
+		obdDispatcher?.useInfoLogging =
 			PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
-		OBDDispatcher.setReadWriteStreams(reader, writer)
+		obdDispatcher?.setReadWriteStreams(reader, writer)
 	}
 
 	@SuppressLint("MissingPermission")
@@ -899,16 +896,18 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			}
 		}
 		if (settings.RECORD_OBD_DATA.get() && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
-			val rawData = OBDDispatcher.getRawData()
-			for (command in rawData.keys) {
-				if (!visibleWidgetCommands.contains(command)) {
-					continue
-				}
-				val dataField = rawData[command]
-				if (command.gpxTag != null) {
-					json.put(
-						GpxUtilities.OSMAND_EXTENSIONS_PREFIX + command.gpxTag,
-						dataField?.value)
+			val rawData = obdDispatcher?.getRawData()
+			rawData?.let { data ->
+				for (command in data.keys) {
+					if (!visibleWidgetCommands.contains(command)) {
+						continue
+					}
+					val dataField = rawData[command]
+					if (command.gpxTag != null) {
+						json.put(
+							GpxUtilities.OSMAND_EXTENSIONS_PREFIX + command.gpxTag,
+							dataField?.value)
+					}
 				}
 			}
 		}

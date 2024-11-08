@@ -16,7 +16,7 @@ import okio.Sink
 import okio.Source
 
 
-object OBDDispatcher {
+class OBDDispatcher {
 
 	private var commandQueue = listOf<OBDCommand>()
 	private val staleCommandsCache: MutableMap<OBDCommand, String> = HashMap()
@@ -41,6 +41,7 @@ object OBDDispatcher {
 		scope!!.launch {
 			try {
 				log("Start reading obd with $inputStream and $outputStream")
+				OBDDataComputer.obdDispatcher = this@OBDDispatcher
 				obd2Connection = Obd2Connection(object : UnderlyingTransport {
 					override fun write(bytes: ByteArray) {
 						val buffer = Buffer()
@@ -60,7 +61,7 @@ object OBDDispatcher {
 					override fun onInitFailed() {
 						readStatusListener?.onInitConnectionFailed()
 					}
-				})
+				}, this@OBDDispatcher)
 				if(obd2Connection?.initialized == true) {
 					while (obd2Connection?.isFinished == false) {
 						try {
@@ -140,8 +141,10 @@ object OBDDispatcher {
 	fun stopReading() {
 		log("stop reading")
 		setReadWriteStreams(null, null)
+		scope = null
 		sensorDataCache.clear()
 		OBDDataComputer.clearCache()
+		obd2Connection = null
 		log("after stop reading")
 	}
 

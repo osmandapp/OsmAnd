@@ -26,6 +26,11 @@ object OBDDataComputer {
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
+	var obdDispatcher: OBDDispatcher? = null
+		set(value) {
+			field = value
+			updateRequiredCommands()
+		}
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 
@@ -100,9 +105,11 @@ object OBDDataComputer {
 	}
 
 	private fun updateRequiredCommands() {
-		OBDDispatcher.clearCommands()
-		widgets.forEach { widget ->
-			OBDDispatcher.addCommand(widget.type.requiredCommand)
+		obdDispatcher?.apply {
+			clearCommands()
+			widgets.forEach { widget ->
+				addCommand(widget.type.requiredCommand)
+			}
 		}
 	}
 
