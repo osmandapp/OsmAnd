@@ -4490,10 +4490,10 @@
     <string name="average_speed_skip_stops_desc">Velocidades inferiores a %1$s serán contadas y afectará a la velocidad media.</string>
     <string name="connect_with_straight_line">Conectar con una línea recta</string>
     <string name="without_profiles_changing">Sin cambios de perfiles</string>
-    <string name="shared_string_only_missing">Sólo faltantes</string>
+    <string name="shared_string_only_missing">Solo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
     <string name="attach_roads_descr">Aproxima la traza a los caminos permitidos para navegar entre puntos y asociar indicaciones de giros precisos y propiedades de la ruta.</string>
-    <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
+    <string name="attach_roads_warning">Solo se puede adjuntar al camino una traza grabada.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
@@ -4508,8 +4508,7 @@
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo a medir con la velocidad media para calcular la hora de llegada estimada.</string>
     <string name="shared_string_large">Grande</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
-\nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
+    <string name="distance_by_tap_use_description">Pulsá en el mapa para ver la distancia entre la ubicación actual y el punto pulsado. \nPulsá con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
     <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
@@ -4528,12 +4527,10 @@
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
-    <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
+    <string name="purchases_feature_desc_cross_buy">Usá las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="external_sensor_widgets">Sensores externos</string>
-    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
-\nDebes instalar o actualizar el servicio para el complemento ANT+.
-\n¿Quieres abrir Play Store para hacer eso\?</string>
+    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s». \nDebés instalar o actualizar el servicio para el complemento ANT+. \n¿Querés abrir Play Store para hacer eso?</string>
     <string name="ant_missing_dependency">Falta la dependencia</string>
     <string name="ant_go_to_store">Ir a la tienda</string>
     <string name="ant_read_data">Leer datos</string>
@@ -4559,7 +4556,7 @@
     <string name="map_center_widget">Coordenadas: centro del mapa</string>
     <string name="current_location_widget">Coordenadas: ubicación actual</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Accede a sensores externos para leer, por ejemplo, el ritmo cardíaco, la velocidad en bicicleta y la potencia o cadencia del pedaleo. Debes conectar tu dispositivo con sensores que admitan el protocolo de red personal inalámbrica ANT+.</string>
+    <string name="external_sensors_plugin_description">Accedé a sensores externos para leer, por ejemplo, el ritmo cardíaco, la velocidad en bicicleta y la potencia o cadencia del pedaleo. Debés conectar tu dispositivo con sensores que admitan el protocolo de red personal inalámbrica ANT+.</string>
     <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar en el centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="map_widget_altitude_current_location_desc">Muestra la altitud sobre el nivel del mar en la ubicación geográfica actual.</string>
@@ -4568,7 +4565,7 @@
     <string name="location_simulation_cutoff">La simulación omite los primeros metros</string>
     <string name="location_simulation_speedup">Velocidad de simulación</string>
     <string name="send_uuid_preference_desc">El UUID aleatorio se usa para descargar mapas sin conexión de los servidores de OsmAnd, supervisar el uso justo de los recursos del servidor, predecir patrones de tráfico y generar informes anónimos de mapas mensuales.</string>
-    <string name="terms_of_service_desc">Al descargar los mapas, aceptas los %1$s y %2$s.</string>
+    <string name="terms_of_service_desc">Al descargar los mapas, aceptás los %1$s y %2$s.</string>
     <string name="shared_string_terms_of_use">Términos de uso</string>
     <string name="map_widget_rendering_fps_desc">Muestra que tan rápido se ven y actualizan el mapa y sus elementos , expresada en fotogramas por segundo (FPS).</string>
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
