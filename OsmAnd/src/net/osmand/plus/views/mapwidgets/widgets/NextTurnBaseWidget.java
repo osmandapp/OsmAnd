@@ -240,8 +240,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	public static String removeSymbol(String input) {
-		if (input.matches("^»\\s.*")) {
-			return input.replaceFirst("^»\\s", "");
+		if (input.startsWith("» ")) {
+			return input.replace("» ", "");
 		}
 		return input;
 	}
