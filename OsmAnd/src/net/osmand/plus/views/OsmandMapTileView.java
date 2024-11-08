@@ -1101,17 +1101,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (view instanceof CarSurfaceView) {
 			SurfaceRenderer renderer = ((CarSurfaceView) view).getSurfaceRenderer();
 			long ms = SystemClock.elapsedRealtime();
-			synchronized (renderer) {
-				try {
-					// make copy to avoid concurrency
-					RotatedTileBox viewportToDraw = currentViewport.copy();
-					renderer.renderFrame(viewportToDraw, drawSettings);
-				} catch (Exception e) {
-					// ignore
-				}
-				if (MEASURE_FPS) {
-					main.calculateFPS(ms, SystemClock.elapsedRealtime());
-				}
+			try {
+				// make copy to avoid concurrency
+				RotatedTileBox viewportToDraw = currentViewport.copy();
+				renderer.renderFrame(viewportToDraw, drawSettings);
+			} catch (Exception e) {
+				// ignore
+			}
+			if (MEASURE_FPS) {
+				main.calculateFPS(ms, SystemClock.elapsedRealtime());
 			}
 		} else {
 			view.invalidate();

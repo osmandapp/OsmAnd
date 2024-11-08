@@ -4,6 +4,8 @@ import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
@@ -63,6 +65,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private Surface surface;
 	@Nullable
 	private SurfaceContainer surfaceContainer;
+
+	@Nullable
+	private Bitmap offscreenBitmap;
 
 	@Nullable
 	private Rect visibleArea;
@@ -329,8 +334,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					setupOffscreenRenderer();
 				}
 			});
-		} else
+		} else {
 			setupOffscreenRenderer();
+		}
 	}
 
 	public void setupOffscreenRenderer() {
@@ -437,15 +443,28 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 	}
 
-	public void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public synchronized void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (mapView == null || surface == null || !surface.isValid()) {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		Bitmap bmp = null;
+
 		if (offscreenMapRendererView != null) {
 			// retrieve bitmap outside lock canvas
-			bmp = offscreenMapRendererView.getBitmap();
+			Bitmap offscreenBitmapSrc = offscreenMapRendererView.getBitmap(null);
+			if (offscreenBitmapSrc != null) {
+				if (offscreenBitmap == null || offscreenBitmap.getWidth() != offscreenBitmapSrc.getWidth() ||
+						offscreenBitmap.getHeight() != offscreenBitmapSrc.getHeight()) {
+					offscreenBitmap = Bitmap.createBitmap(offscreenBitmapSrc.getWidth(), offscreenBitmapSrc.getWidth(), Bitmap.Config.ARGB_8888);
+				}
+				Matrix matrix = new Matrix();
+				matrix.preScale(1.0f, -1.0f);
+				Canvas canvas = new Canvas(offscreenBitmap);
+				canvas.setMatrix(matrix);
+				canvas.drawBitmap(offscreenBitmapSrc, 0, 0, new Paint());
+			} else {
+				offscreenBitmap = null;
+			}
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
@@ -453,8 +472,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
-			if (bmp != null) {
-				canvas.drawBitmap(bmp, 0, 0, null);
+			if (offscreenBitmap != null) {
+				canvas.drawBitmap(offscreenBitmap, 0, 0, null);
 			}
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
