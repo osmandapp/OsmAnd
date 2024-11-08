@@ -1,10 +1,7 @@
 package net.osmand.plus.auto;
 
 import static androidx.car.app.navigation.model.TravelEstimate.REMAINING_TIME_UNKNOWN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
@@ -13,7 +10,6 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
@@ -26,12 +22,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -122,18 +115,15 @@ public class TripHelper {
 
 		}
 		if (turnType != null) {
-			TurnDrawable drawable = new TurnDrawable(app, false);
 			int height = (int) (TURN_IMAGE_SIZE_DP * density);
 			int width = (int) (TURN_IMAGE_SIZE_DP * density);
-			drawable.setBounds(0, 0, width, height);
-			drawable.setTurnType(turnType);
-			drawable.setTurnImminent(turnImminent, deviatedFromRoute);
-			Bitmap turnBitmap = drawableToBitmap(drawable, width, height);
-			turnBuilder = new Maneuver.Builder(getManeuverType(turnType));
+			Bitmap bitmap = createTurnBitmap(turnType, deviatedFromRoute, turnImminent, width, height);
+
+			turnBuilder = new Maneuver.Builder(TripUtils.getManeuverType(turnType));
 			if (turnType.isRoundAbout()) {
 				turnBuilder.setRoundaboutExitNumber(turnType.getExitOut());
 			}
-			turnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(turnBitmap)).build());
+			turnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(bitmap)).build());
 		} else {
 			turnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
 		}
@@ -141,18 +131,11 @@ public class TripHelper {
 		AnnounceTimeDistances atd = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		if (nextDirInfo != null && atd != null) {
 			float speed = atd.getSpeed(currentLocation);
-			int dist = nextDirInfo.distanceTo;
 			nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
-			if (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
-				if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
-						(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
-								|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
-					nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
-				}
-			}
+			nextTurnType = TripUtils.getNextTurnType(atd, nextNextDirInfo, speed, nextDirInfo.distanceTo);
 		}
 		stepBuilder.setManeuver(maneuver);
-		stepBuilder.setCue(getNextCue(nextDirInfo, turnType, nextTurnType));
+		stepBuilder.setCue(TripUtils.getNextTurnDescription(app, nextDirInfo, turnType, nextTurnType));
 
 		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 		if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
@@ -166,30 +149,7 @@ public class TripHelper {
 			}
 			//int dist = nextDirInfo.distanceTo;
 			if (lanes != null) {
-				for (int lane : lanes) {
-					int firstTurnType = TurnType.getPrimaryTurn(lane);
-					int secondTurnType = TurnType.getSecondaryTurn(lane);
-					int thirdTurnType = TurnType.getTertiaryTurn(lane);
-					Lane.Builder laneBuilder = new Lane.Builder();
-					laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(firstTurnType, leftSide)), (lane & 1) == 1));
-					if (secondTurnType > 0) {
-						laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(secondTurnType, leftSide)), false));
-					}
-					if (thirdTurnType > 0) {
-						laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(thirdTurnType, leftSide)), false));
-					}
-					stepBuilder.addLane(laneBuilder.build());
-				}
-				LanesDrawable lanesDrawable = new LanesDrawable(app, 1f,
-						TURN_LANE_IMAGE_SIZE * density,
-						TURN_LANE_IMAGE_MIN_DELTA * density,
-						TURN_LANE_IMAGE_MARGIN * density,
-						TURN_LANE_IMAGE_SIZE * density);
-				lanesDrawable.lanes = lanes;
-				lanesDrawable.imminent = locimminent == 0;
-				lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode();
-				lanesDrawable.updateBounds(); // prefer 500 x 74 dp
-				Bitmap lanesBitmap = drawableToBitmap(lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
+				Bitmap lanesBitmap = createLanesBitmap(stepBuilder, lanes, locimminent, leftSide, density);
 				stepBuilder.setLanesImage(new CarIcon.Builder(IconCompat.createWithBitmap(lanesBitmap)).build());
 			}
 		}
@@ -207,7 +167,7 @@ public class TripHelper {
 
 		int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 		long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-		Distance stepDistance = getFormattedDistance(app, nextTurnDistance);
+		Distance stepDistance = TripUtils.getFormattedDistance(app, nextTurnDistance);
 		DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 		TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 		stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec >= 0 ? leftTurnTimeSec : REMAINING_TIME_UNKNOWN);
@@ -218,20 +178,23 @@ public class TripHelper {
 		lastStep = step;
 		lastStepTravelEstimate = stepTravelEstimate;
 
-		// Next next turn
-		if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0 && nextNextDirInfo.imminent >= 0 && nextNextDirInfo.directionInfo != null) {
+		setupNextNextTurn(tripBuilder, nextNextDirInfo, currentLocation, deviatedFromRoute, leftTurnTimeSec, density);
+	}
+
+	private void setupNextNextTurn(@NonNull Builder tripBuilder, @Nullable NextDirectionInfo nextNextDirInfo,
+	                               @Nullable Location currentLocation, boolean deviatedFromRoute,
+	                               int leftTurnTimeSec, float density) {
+		if (nextNextDirInfo != null && nextNextDirInfo.distanceTo > 0
+				&& nextNextDirInfo.imminent >= 0 && nextNextDirInfo.directionInfo != null) {
 			Step.Builder nextStepBuilder = new Step.Builder();
 			Maneuver.Builder nextTurnBuilder;
-			nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
+			TurnType nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
 			if (nextTurnType != null) {
-				TurnDrawable drawable = new TurnDrawable(app, false);
-				int height = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
 				int width = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
-				drawable.setBounds(0, 0, width, height);
-				drawable.setTurnType(nextTurnType);
-				drawable.setTurnImminent(nextNextDirInfo.imminent, deviatedFromRoute);
-				Bitmap turnBitmap = drawableToBitmap(drawable, width, height);
-				nextTurnBuilder = new Maneuver.Builder(getManeuverType(nextTurnType));
+				int height = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
+				Bitmap turnBitmap = createTurnBitmap(nextTurnType, deviatedFromRoute, nextNextDirInfo.imminent, width, height);
+
+				nextTurnBuilder = new Maneuver.Builder(TripUtils.getManeuverType(nextTurnType));
 				if (nextTurnType.isRoundAbout()) {
 					nextTurnBuilder.setRoundaboutExitNumber(nextTurnType.getExitOut());
 				}
@@ -244,17 +207,61 @@ public class TripHelper {
 
 			int leftNextTurnTimeSec = leftTurnTimeSec + nextNextDirInfo.directionInfo.getExpectedTime();
 			long nextTurnArrivalTime = System.currentTimeMillis() + leftNextTurnTimeSec * 1000L;
-			Distance nextStepDistance = getFormattedDistance(app, nextNextDirInfo.distanceTo);
+			Distance nextStepDistance = TripUtils.getFormattedDistance(app, nextNextDirInfo.distanceTo);
 			DateTimeWithZone nextStepDateTime = DateTimeWithZone.create(nextTurnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder nextStepTravelEstimateBuilder = new TravelEstimate.Builder(nextStepDistance, nextStepDateTime);
 			nextStepTravelEstimateBuilder.setRemainingTimeSeconds(leftNextTurnTimeSec >= 0 ? leftNextTurnTimeSec : REMAINING_TIME_UNKNOWN);
 
-			nextStepBuilder.setCue(getNextNextCue(nextNextDirInfo));
+			TurnType nextNextTurnType = null;
+			AnnounceTimeDistances atd = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
+			if (atd != null) {
+				float speed = atd.getSpeed(currentLocation);
+				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfoAfter(nextNextDirInfo, new NextDirectionInfo(), true);
+				nextNextTurnType = TripUtils.getNextTurnType(atd, info, speed, nextNextDirInfo.distanceTo);
+			}
+			nextStepBuilder.setCue(TripUtils.getSecondNextTurnDescription(app, nextNextDirInfo, nextTurnType, nextNextTurnType));
 
 			Step nextStep = nextStepBuilder.build();
 			TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
 			tripBuilder.addStep(nextStep, nextStepTravelEstimate);
 		}
+	}
+
+	@NonNull
+	private Bitmap createLanesBitmap(@NonNull Step.Builder builder, int[] lanes, int imminent, boolean leftSide, float density) {
+		for (int lane : lanes) {
+			int firstTurnType = TurnType.getPrimaryTurn(lane);
+			int secondTurnType = TurnType.getSecondaryTurn(lane);
+			int thirdTurnType = TurnType.getTertiaryTurn(lane);
+			Lane.Builder laneBuilder = new Lane.Builder();
+			laneBuilder.addDirection(LaneDirection.create(TripUtils.getLaneDirection(TurnType.valueOf(firstTurnType, leftSide)), (lane & 1) == 1));
+			if (secondTurnType > 0) {
+				laneBuilder.addDirection(LaneDirection.create(TripUtils.getLaneDirection(TurnType.valueOf(secondTurnType, leftSide)), false));
+			}
+			if (thirdTurnType > 0) {
+				laneBuilder.addDirection(LaneDirection.create(TripUtils.getLaneDirection(TurnType.valueOf(thirdTurnType, leftSide)), false));
+			}
+			builder.addLane(laneBuilder.build());
+		}
+		LanesDrawable lanesDrawable = new LanesDrawable(app, 1f,
+				TURN_LANE_IMAGE_SIZE * density,
+				TURN_LANE_IMAGE_MIN_DELTA * density,
+				TURN_LANE_IMAGE_MARGIN * density,
+				TURN_LANE_IMAGE_SIZE * density);
+		lanesDrawable.lanes = lanes;
+		lanesDrawable.imminent = imminent == 0;
+		lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode();
+		lanesDrawable.updateBounds(); // prefer 500 x 74 dp
+		return drawableToBitmap(lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
+	}
+
+	@NonNull
+	private Bitmap createTurnBitmap(@NonNull TurnType turnType, boolean deviatedFromRoute, int imminent, int width, int height) {
+		TurnDrawable drawable = new TurnDrawable(app, false);
+		drawable.setBounds(0, 0, width, height);
+		drawable.setTurnType(turnType);
+		drawable.setTurnImminent(imminent, deviatedFromRoute);
+		return drawableToBitmap(drawable, width, height);
 	}
 
 	private void updateDestination(@NonNull Builder builder) {
@@ -271,93 +278,6 @@ public class TripHelper {
 		}
 	}
 
-	private boolean shouldKeepLeft(@Nullable TurnType t) {
-		return t != null && (t.getValue() == TurnType.TL || t.getValue() == TurnType.TSHL
-				|| t.getValue() == TurnType.TSLL || t.getValue() == TurnType.TU || t.getValue() == TurnType.KL);
-	}
-
-	private boolean shouldKeepRight(@Nullable TurnType t) {
-		return t != null && (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR
-				|| t.getValue() == TurnType.TSLR || t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR);
-	}
-
-	@NonNull
-	private String getNextCue(@Nullable NextDirectionInfo info, @Nullable TurnType type, @Nullable TurnType nextTurnType) {
-		String cue = getCue(info);
-		String turnName = type != null ? nextTurnsToString(app, type, nextTurnType) : "";
-
-		if (type != null && type.isRoundAbout() && !Algorithms.isEmpty(cue)) {
-			return app.getString(R.string.ltr_or_rtl_combine_via_comma, turnName, cue);
-		}
-		return !Algorithms.isEmpty(cue) ? cue : turnName;
-	}
-
-	@NonNull
-	private String getNextNextCue(@NonNull NextDirectionInfo directionInfo) {
-		String cue = getCue(directionInfo);
-		String distance = getFormattedDistanceStr(app, directionInfo.distanceTo);
-
-		return Algorithms.isEmpty(cue) ? distance : app.getString(R.string.ltr_or_rtl_combine_via_comma, distance, cue);
-	}
-
-	@Nullable
-	private String getCue(@Nullable NextDirectionInfo info) {
-		String name = defineStreetName(info);
-		String ref = info != null && info.directionInfo != null ? info.directionInfo.getRef() : null;
-		return !Algorithms.isEmpty(name) ? name : ref;
-	}
-
-	private String nextTurnsToString(@NonNull Context ctx, @NonNull TurnType type, @Nullable TurnType nextTurnType) {
-		if (type.isRoundAbout()) {
-			if (shouldKeepLeft(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_roundabout_kl, type.getExitOut());
-			} else if (shouldKeepRight(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_roundabout_kr, type.getExitOut());
-			} else {
-				return ctx.getString(R.string.route_roundabout_exit, type.getExitOut());
-			}
-		} else if (type.getValue() == TurnType.TU || type.getValue() == TurnType.TRU) {
-			if (shouldKeepLeft(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tu_kl);
-			} else if (shouldKeepRight(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tu_kr);
-			} else {
-				return ctx.getString(R.string.auto_25_chars_route_tu);
-			}
-		} else if (type.getValue() == TurnType.C) {
-			return ctx.getString(R.string.route_head);
-		} else if (type.getValue() == TurnType.TSLL) {
-			return ctx.getString(R.string.auto_25_chars_route_tsll);
-		} else if (type.getValue() == TurnType.TL) {
-			if (shouldKeepLeft(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tl_kl);
-			} else if (shouldKeepRight(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tl_kr);
-			} else {
-				return ctx.getString(R.string.auto_25_chars_route_tl);
-			}
-		} else if (type.getValue() == TurnType.TSHL) {
-			return ctx.getString(R.string.auto_25_chars_route_tshl);
-		} else if (type.getValue() == TurnType.TSLR) {
-			return ctx.getString(R.string.auto_25_chars_route_tslr);
-		} else if (type.getValue() == TurnType.TR) {
-			if (shouldKeepLeft(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tr_kl);
-			} else if (shouldKeepRight(nextTurnType)) {
-				return ctx.getString(R.string.auto_25_chars_route_tr_kr);
-			} else {
-				return ctx.getString(R.string.auto_25_chars_route_tr);
-			}
-		} else if (type.getValue() == TurnType.TSHR) {
-			return ctx.getString(R.string.auto_25_chars_route_tshr);
-		} else if (type.getValue() == TurnType.KL) {
-			return ctx.getString(R.string.auto_25_chars_route_kl);
-		} else if (type.getValue() == TurnType.KR) {
-			return ctx.getString(R.string.auto_25_chars_route_kr);
-		}
-		return "";
-	}
-
 	@NonNull
 	public Pair<Destination, TravelEstimate> getDestination(@NonNull TargetPoint pointToNavigate) {
 		Destination.Builder destBuilder = new Destination.Builder();
@@ -369,7 +289,7 @@ public class TripHelper {
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = getDistance(app, routingHelper.getLeftDistance());
+		Distance distance = TripUtils.getDistance(app, routingHelper.getLeftDistance());
 		int leftTimeSec = routingHelper.getLeftTime();
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
@@ -389,130 +309,9 @@ public class TripHelper {
 		return bitmap;
 	}
 
-	private static String getFormattedDistanceStr(@NonNull OsmandApplication app, double meters) {
-		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		return OsmAndFormatter.getFormattedDistance((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
-	}
-
-	private static Distance getFormattedDistance(@NonNull OsmandApplication app, double meters) {
-		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
-
-		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
-	}
-
-	public static Distance getDistance(@NonNull OsmandApplication app, double meters) {
-		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.DEFAULT, mc);
-
-		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
-	}
-
-	@Distance.Unit
-	private static int getDistanceUnit(@StringRes int unitId) {
-		if (unitId == R.string.m) {
-			return Distance.UNIT_METERS;
-		} else if (unitId == R.string.yard) {
-			return Distance.UNIT_YARDS;
-		} else if (unitId == R.string.foot) {
-			return Distance.UNIT_FEET;
-		} else if (unitId == R.string.mile || unitId == R.string.nm) {
-			return Distance.UNIT_MILES;
-		} else if (unitId == R.string.km) {
-			return Distance.UNIT_KILOMETERS;
-		}
-		return Distance.UNIT_METERS;
-	}
-
-	private int getManeuverType(@NonNull TurnType turnType) {
-		switch (turnType.getValue()) {
-			case TurnType.C:
-				return Maneuver.TYPE_STRAIGHT; // continue (go straight)
-			case TurnType.TL:
-				return Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
-			case TurnType.TSLL:
-				return Maneuver.TYPE_TURN_SLIGHT_LEFT; // turn slightly left
-			case TurnType.TSHL:
-				return Maneuver.TYPE_TURN_SHARP_LEFT; // turn sharply left
-			case TurnType.TR:
-				return Maneuver.TYPE_TURN_NORMAL_RIGHT; // turn right
-			case TurnType.TSLR:
-				return Maneuver.TYPE_TURN_SLIGHT_RIGHT; // turn slightly right
-			case TurnType.TSHR:
-				return Maneuver.TYPE_TURN_SHARP_RIGHT; // turn sharply right
-			case TurnType.KL:
-				return Maneuver.TYPE_KEEP_LEFT; // keep left
-			case TurnType.KR:
-				return Maneuver.TYPE_KEEP_RIGHT; // keep right
-			case TurnType.TU:
-				return Maneuver.TYPE_U_TURN_LEFT; // U-turn
-			case TurnType.TRU:
-				return Maneuver.TYPE_U_TURN_RIGHT; // Right U-turn
-			case TurnType.OFFR:
-				return Maneuver.TYPE_UNKNOWN; // Off route
-			case TurnType.RNDB:
-				return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW; // Roundabout
-			case TurnType.RNLB:
-				return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW; // Roundabout left
-			default:
-				return Maneuver.TYPE_UNKNOWN;
-		}
-	}
-
-	private int getLaneDirection(@NonNull TurnType turnType) {
-		switch (turnType.getValue()) {
-			case TurnType.C:
-				return LaneDirection.SHAPE_STRAIGHT; // continue (go straight)
-			case TurnType.TL:
-				return LaneDirection.SHAPE_NORMAL_LEFT; // turn left
-			case TurnType.TSLL:
-				return LaneDirection.SHAPE_SLIGHT_LEFT; // turn slightly left
-			case TurnType.TSHL:
-				return LaneDirection.SHAPE_SHARP_LEFT; // turn sharply left
-			case TurnType.TR:
-				return LaneDirection.SHAPE_NORMAL_RIGHT; // turn right
-			case TurnType.TSLR:
-				return LaneDirection.SHAPE_SLIGHT_RIGHT; // turn slightly right
-			case TurnType.TSHR:
-				return LaneDirection.SHAPE_SHARP_RIGHT; // turn sharply right
-			case TurnType.KL:
-				return LaneDirection.SHAPE_SLIGHT_LEFT; // keep left
-			case TurnType.KR:
-				return LaneDirection.SHAPE_SLIGHT_RIGHT; // keep right
-			case TurnType.TU:
-				return LaneDirection.SHAPE_U_TURN_LEFT; // U-turn
-			case TurnType.TRU:
-				return LaneDirection.SHAPE_U_TURN_RIGHT; // Right U-turn
-			case TurnType.OFFR:
-				return LaneDirection.SHAPE_UNKNOWN; // Off route
-			case TurnType.RNDB:
-				return LaneDirection.SHAPE_UNKNOWN; // Roundabout
-			case TurnType.RNLB:
-				return LaneDirection.SHAPE_UNKNOWN; // Roundabout left
-			default:
-				return LaneDirection.SHAPE_UNKNOWN;
-		}
-	}
-
 	@Nullable
 	private String defineStreetName() {
 		NextDirectionInfo directionInfo = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-		return defineStreetName(directionInfo);
-	}
-
-	@Nullable
-	private String defineStreetName(@Nullable NextDirectionInfo nextDirInfo) {
-		if (nextDirInfo != null) {
-			CurrentStreetName currentStreetName = routingHelper.getCurrentName(nextDirInfo);
-			String streetName = currentStreetName.text;
-
-			if (!Algorithms.isEmpty(streetName)) {
-				String exitRef = currentStreetName.exitRef;
-				return Algorithms.isEmpty(exitRef)
-						? streetName
-						: app.getString(R.string.ltr_or_rtl_combine_via_comma, exitRef, streetName);
-			}
-		}
-		return null;
+		return TripUtils.defineStreetName(app, directionInfo);
 	}
 }

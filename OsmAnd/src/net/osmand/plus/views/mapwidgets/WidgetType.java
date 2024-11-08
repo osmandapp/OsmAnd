@@ -1,11 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
@@ -26,30 +25,23 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.odb.AverageModeSettingFragment;
+import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget;
+import net.osmand.plus.plugins.odb.dialogs.FuelConsumptionSettingFragment;
+import net.osmand.plus.plugins.odb.OBDFuelConsumptionWidget;
+import net.osmand.plus.plugins.odb.OBDTextWidget;
+import net.osmand.plus.plugins.odb.dialogs.RemainingFuelSettingFragment;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseResizableWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.*;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum WidgetType {
@@ -115,23 +107,18 @@ public enum WidgetType {
 
 	OBD_SPEED("obd_speed", R.string.obd_widget_vehicle_speed, R.string.obd_speed_desc, R.drawable.widget_obd_speed_day, R.drawable.widget_obd_speed_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_RPM("obd_rpm", R.string.obd_widget_engine_speed, R.string.obd_rpm_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_ENGINE_RUNTIME("obd_engine_runtime", R.string.obd_engine_runtime, R.string.obd_engine_runtime_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_PRESSURE("obd_fuel_pressure", R.string.obd_fuel_pressure, R.string.obd_fuel_pressure_desc, R.drawable.widget_obd_engine_speed_day, R.drawable.widget_obd_engine_speed_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_ENGINE_RUNTIME("obd_engine_runtime", R.string.obd_engine_runtime, R.string.obd_engine_runtime_desc, R.drawable.widget_obd_engine_runtime_day, R.drawable.widget_obd_engine_runtime_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_PRESSURE("obd_fuel_pressure", R.string.obd_fuel_pressure, R.string.obd_fuel_pressure_desc, R.drawable.widget_obd_fuel_pressure_day, R.drawable.widget_obd_fuel_pressure_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_AIR_INTAKE_TEMP("obd_intake_air_temp", R.string.obd_air_intake_temp, R.string.obd_air_intake_temp_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT),
-	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_intake_day, R.drawable.widget_obd_temperature_intake_night, 0, VEHICLE_METRICS, RIGHT),
+	ENGINE_OIL_TEMPERATURE("obd_engine_oil_temperature", R.string.obd_engine_oil_temperature, R.string.obd_engine_oil_temperature_desc, R.drawable.widget_obd_temperature_engine_oil_day, R.drawable.widget_obd_temperature_engine_oil_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_AMBIENT_AIR_TEMP("obd_ambient_air_temp", R.string.obd_ambient_air_temp, R.string.obd_ambient_air_temp_desc, R.drawable.widget_obd_temperature_outside_day, R.drawable.widget_obd_temperature_outside_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_BATTERY_VOLTAGE("obd_battery_voltage", R.string.obd_battery_voltage, R.string.obd_battery_voltage_desc, R.drawable.widget_obd_battery_voltage_day, R.drawable.widget_obd_battery_voltage_night, 0, VEHICLE_METRICS, RIGHT),
 	OBD_ENGINE_COOLANT_TEMP("obd_engine_coolant_temp", R.string.obd_engine_coolant_temp, R.string.obd_engine_coolant_temp_desc, R.drawable.widget_obd_temperature_coolant_day, R.drawable.widget_obd_temperature_coolant_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_LEFT_PERCENT("obd_fuel_left_percent", R.string.obd_fuel_level_percent, R.string.obd_fuel_level_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_THROTTLE_POSITION("obd_throttle_position", R.string.obd_throttle_position, R.string.obd_throttle_position_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_LEFT_LITER("obd_fuel_left_liter", R.string.obd_fuel_level_liter, R.string.obd_fuel_level_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_LEFT_DISTANCE("obd_fuel_left_distance", R.string.obd_fuel_left_distance, R.string.obd_fuel_left_distance_desc, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_REMAINING_FUEL("obd_remaining_fuel", R.string.remaining_fuel, R.string.remaining_fuel_description, R.drawable.widget_obd_fuel_remaining_day, R.drawable.widget_obd_fuel_remaining_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_CALCULATED_ENGINE_LOAD("obd_calculated_engine_load", R.string.obd_calculated_engine_load, R.string.obd_calculated_engine_load_desc, R.drawable.widget_obd_engine_calculated_load_day, R.drawable.widget_obd_engine_calculated_load_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_THROTTLE_POSITION("obd_throttle_position", R.string.obd_throttle_position, R.string.obd_throttle_position_desc, R.drawable.widget_obd_throttle_position_day, R.drawable.widget_obd_throttle_position_night, 0, VEHICLE_METRICS, RIGHT),
 
-	OBD_FUEL_CONSUMPTION_RATE_LITER_KM("obd_fuel_consumption_rate_liter_km", R.string.obd_fuel_consumption_rate_l_km, R.string.obd_fuel_consumption_rate_l_h_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_CONSUMPTION_RATE_PERCENT_HOUR("obd_fuel_consumption_rate_percent_hour", R.string.obd_fuel_consumption_rate_percent_hour, R.string.obd_fuel_consumption_rate_percent_hour_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_CONSUMPTION_RATE_LITER_HOUR("obd_fuel_consumption_rate_liter_hour", R.string.obd_fuel_consumption_rate_l_h, R.string.obd_fuel_consumption_rate_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
-	OBD_FUEL_CONSUMPTION_RATE_SENSOR("obd_fuel_consumption_rate_sensor", R.string.obd_fuel_consumption_rate_sensor, R.string.obd_fuel_consumption_rate_sensor_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
+	OBD_FUEL_CONSUMPTION("obd_fuel_consumption", R.string.obd_fuel_consumption, R.string.obd_fuel_consumption_desc, R.drawable.widget_obd_fuel_consumption_day, R.drawable.widget_obd_fuel_consumption_night, 0, VEHICLE_METRICS, RIGHT),
 //	OBD_VIN("obd_vin", R.string.obd_vin, R.string.obd_vin_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 //	OBD_FUEL_TYPE("obd_fuel_type", R.string.obd_fuel_type, R.string.obd_fuel_type_desc, R.drawable.widget_weather_temperature_day, R.drawable.widget_weather_temperature_night, 0, VEHICLE_METRICS, RIGHT),
 
@@ -302,11 +289,8 @@ public enum WidgetType {
 	}
 
 	public boolean isPurchased(@NonNull Context ctx) {
-		if (getProWidgets().contains(this)) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			return InAppPurchaseUtils.isProWidgetsAvailable(app);
-		}
-		return true;
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return InAppPurchaseUtils.isWidgetPurchased(app, this);
 	}
 
 	public int getDefaultOrder() {
@@ -385,9 +369,16 @@ public enum WidgetType {
 			return new AverageGlideWidgetSettingsFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
 			return new ZoomLevelSettingsFragment();
+		} else if (this == LANES) {
+			return new LanesWidgetSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
+			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
+			if (OBDSettingFragment != null){
+				return OBDSettingFragment;
+			}
+
 			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
 			if (simpleWidget.isVerticalWidget()) {
 				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
@@ -400,6 +391,28 @@ public enum WidgetType {
 				settingFragment.setWidgetType(this);
 				return settingFragment;
 			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private WidgetSettingsBaseFragment getOBDWidgetSettings(@NonNull Context ctx,
+	                                                        @Nullable MapWidgetInfo widgetInfo) {
+		if (widgetInfo == null || !isPurchased(ctx)) {
+			return null;
+		}
+		if (widgetInfo.widget instanceof OBDFuelConsumptionWidget) {
+			FuelConsumptionSettingFragment settingFragment = new FuelConsumptionSettingFragment();
+			settingFragment.setWidgetType(this);
+			return settingFragment;
+		} else if (widgetInfo.widget instanceof OBDRemainingFuelWidget) {
+			RemainingFuelSettingFragment settingFragment = new RemainingFuelSettingFragment();
+			settingFragment.setWidgetType(this);
+			return settingFragment;
+		} else if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && obdTextWidget.supportsAverageMode()) {
+			AverageModeSettingFragment settingFragment = new AverageModeSettingFragment();
+			settingFragment.setWidgetType(this);
+			return settingFragment;
 		}
 		return null;
 	}
@@ -422,9 +435,9 @@ public enum WidgetType {
 		return null;
 	}
 
-	@NonNull
-	public static List<WidgetType> getProWidgets() {
-		return Arrays.asList(ELEVATION_PROFILE, ALTITUDE_MAP_CENTER);
+	public boolean isProWidget() {
+		return this == ELEVATION_PROFILE || this == ALTITUDE_MAP_CENTER
+				|| (isOBDWidget() && this != OBD_SPEED && this != OBD_RPM);
 	}
 
 	public static boolean isOriginalWidget(@NonNull String widgetId) {
@@ -433,6 +446,10 @@ public enum WidgetType {
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
 		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
+	}
+
+	public boolean isOBDWidget() {
+		return getGroup() == VEHICLE_METRICS;
 	}
 
 	@NonNull

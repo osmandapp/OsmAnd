@@ -20,11 +20,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
-import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -36,11 +31,12 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin.PluginInstallListener;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -51,6 +47,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.plus.plugins.online.OnlineOsmandPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -76,6 +73,9 @@ import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -83,15 +83,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class PluginsHelper {
 
@@ -471,6 +463,17 @@ public class PluginsHelper {
 			}
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@NonNull
+	public static <T extends OsmandPlugin> T requirePlugin(Class<T> clz) {
+		for (OsmandPlugin lr : getAvailablePlugins()) {
+			if (clz.isInstance(lr)) {
+				return (T) lr;
+			}
+		}
+		throw new IllegalStateException("Plugin " + clz.getSimpleName() + " not available");
 	}
 
 	public static OsmandPlugin getPlugin(String id) {
@@ -881,9 +884,9 @@ public class PluginsHelper {
 				trackPointsAnalysers.add(analyser);
 			}
 		}
-		if(!isActive(ExternalSensorsPlugin.class)) {
+		if (!isActive(ExternalSensorsPlugin.class)) {
 			OsmandPlugin plugin = getPlugin(ExternalSensorsPlugin.class);
-			if(plugin != null) {
+			if (plugin != null) {
 				trackPointsAnalysers.add(plugin.getTrackPointsAnalyser());
 			}
 		}

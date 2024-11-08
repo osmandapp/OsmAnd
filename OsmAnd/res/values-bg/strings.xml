@@ -4385,12 +4385,7 @@
     <string name="obd_fuel_type_unknown">Неизвестен вид гориво</string>
     <string name="obd_widget_group">Показатели превозно средство</string>
     <string name="obd_rpm">Обороти</string>
-    <string name="obd_ambient_air_temp_desc">Показва температурата на околната среда спрямо сензора на OBD</string>
     <string name="obd_rpm_desc">Показва оборотите на тахометъра спрямо сензора на OBD</string>
-    <string name="obd_speed_desc">Показва скоростта на превозното средство спрямо сензора на OBD</string>
-    <string name="obd_air_intake_temp_desc">Показва температурата на постъпващия въздух спрямо сензора на OBD</string>
-    <string name="obd_engine_coolant_temp_desc">Показва температурата на охлаждащата течност спрямо сензора на OBD</string>
-    <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора спрямо сензора на OBD</string>
     <string name="obd_air_intake_temp">t⁰ на постъпващ въздух</string>
     <string name="obd_fuel_level_desc">Показва нивото на горивото спрямо сензора на OBD</string>
     <string name="obd_fuel_left_distance_desc">Показва разстоянието, което превозното средство може да измине с оставащото гориво спрямо сензора на OBD</string>

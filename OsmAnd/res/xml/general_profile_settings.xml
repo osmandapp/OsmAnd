@@ -66,6 +66,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/default_speed_system" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="unit_of_volume"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/unit_of_volume" />
+
 	<Preference
 		android:key="precise_distance_numbers"
 		android:layout="@layout/preference_with_descr"

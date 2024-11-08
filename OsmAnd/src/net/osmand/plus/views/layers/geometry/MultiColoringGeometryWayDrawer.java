@@ -71,11 +71,11 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	protected void drawGradient(@NonNull VectorLinesCollection collection, int baseOrder,
 	                            boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
+		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
-			if (prevStyle != null && data.style == null) {
+			if (!dataArr.isEmpty() && prevStyle != null && data.style == null) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 				dataArr.clear();
 			}

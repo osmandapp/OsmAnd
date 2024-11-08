@@ -1,13 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
+import static net.osmand.shared.gpx.GpxParameter.*;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,18 +14,8 @@ import androidx.annotation.Nullable;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.RouteActivityHelper;
-import net.osmand.shared.gpx.primitives.Metadata;
-import net.osmand.shared.gpx.primitives.RouteActivity;
-import net.osmand.shared.gpx.primitives.Track;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -41,10 +25,20 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.simulation.SimulationProvider;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidDbUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
@@ -59,15 +53,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInformationListener {
 
@@ -303,8 +289,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		RouteActivity activity = metadata.getRouteActivity(helper.getActivities());
 		if (activity == null) {
 			String selectedId = settings.CURRENT_TRACK_ROUTE_ACTIVITY.get();
-			activity = helper.findRouteActivity(selectedId);
-			metadata.setRouteActivity(activity, helper.getActivities());
+			metadata.setRouteActivity(helper.findRouteActivity(selectedId));
 		}
 	}
 
@@ -427,7 +412,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				if (!Algorithms.isEmpty(extensions)) {
-					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions);
+					GpxUtilities.INSTANCE.assignExtensionWriter(pt, extensions, "plugins");
 				}
 
 				boolean newInterval = pt.getLat() == 0 && pt.getLon() == 0;
@@ -545,7 +530,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			String pluginsInfo = getPluginsInfo(location);
 			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
 			if (!Algorithms.isEmpty(extensions)) {
-				GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions);
+				GpxUtilities.INSTANCE.assignExtensionWriter(wptPt, extensions, "plugins");
 			}
 
 			insertData(wptPt, pluginsInfo);

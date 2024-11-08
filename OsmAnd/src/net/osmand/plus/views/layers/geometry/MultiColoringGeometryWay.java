@@ -97,7 +97,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		}
 	}
 
-	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
+	public void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
 		this.track3DStyle = track3DStyle;
 		if (!styleMap.isEmpty()) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
@@ -112,6 +112,10 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				}
 			}
 		}
+	}
+
+	public void updateColoringType(@NonNull ColoringType routeColoringType) {
+		coloringType = routeColoringType;
 	}
 
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
@@ -289,9 +293,9 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
 	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
-	                                  boolean previousVisible, Location lastPoint, int startLocationIndex) {
+	                                  Location lastPoint, int startLocationIndex) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, previousVisible, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex);
 		if (!added) {
 			return false;
 		}

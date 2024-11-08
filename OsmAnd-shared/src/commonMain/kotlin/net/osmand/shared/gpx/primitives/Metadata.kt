@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.primitives
 
+import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.util.KAlgorithms
 
 class Metadata : GpxExtensions {
@@ -59,28 +60,19 @@ class Metadata : GpxExtensions {
 	}
 
 	fun getRouteActivity(activities: List<RouteActivity>): RouteActivity? {
-		return findRouteActivity(getKeywordAt(0), activities)
+		return findRouteActivity(getExtensionsToRead()[GpxUtilities.ACTIVITY_TYPE], activities)
 	}
 
 	private fun findRouteActivity(id: String?, activities: List<RouteActivity>): RouteActivity? {
 		return id?.let { activities.firstOrNull { it.id == id } }
 	}
 
-	fun setRouteActivity(activity: RouteActivity?, activities: List<RouteActivity>) {
-		if (this.keywords != null) {
-			val keywords = this.keywords!!.split(",")
-			val previousActivity = findRouteActivity(keywords[0], activities)
-			val startIndex = if (previousActivity != null) 1 else 0
-			val keywordsBuilder = StringBuilder(activity?.id ?: "")
-			for (i in startIndex until keywords.size) {
-				if (keywordsBuilder.isNotEmpty()) {
-					keywordsBuilder.append(",")
-				}
-				keywordsBuilder.append(keywords[i])
-			}
-			this.keywords = keywordsBuilder.toString()
+	fun setRouteActivity(activity: RouteActivity?) {
+		val extensionsToWrite = getExtensionsToWrite()
+		if (activity == null) {
+			extensionsToWrite.remove(GpxUtilities.ACTIVITY_TYPE)
 		} else {
-			this.keywords = activity?.id
+			extensionsToWrite[GpxUtilities.ACTIVITY_TYPE] = activity.id
 		}
 	}
 

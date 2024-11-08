@@ -260,7 +260,7 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
-		muteAndRemoveTurns(result);
+		muteAndRemoveTurns(result, ctx);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -2318,7 +2318,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private void muteAndRemoveTurns(List<RouteSegmentResult> result) {
+	private void muteAndRemoveTurns(List<RouteSegmentResult> result, RoutingContext ctx) {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
@@ -2334,6 +2334,9 @@ public class RouteResultPreparation {
 					continue;
 				}
 				turnType.setSkipToSpeak(true);
+				if (ctx.config.showMinorTurns) {
+					continue;
+				}
 				if (turnType.goAhead()) {
 					int uniqDirections = turnType.countDirections();
 					if (uniqDirections >= 3) {

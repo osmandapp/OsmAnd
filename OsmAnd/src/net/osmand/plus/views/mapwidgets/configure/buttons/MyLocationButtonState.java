@@ -53,8 +53,13 @@ public class MyLocationButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_my_location", getDefaultSize(), OPAQUE_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return "ic_my_location";
+	}
+
+	@Override
+	public float getDefaultOpacity() {
+		return OPAQUE_ALPHA;
 	}
 
 	@NonNull

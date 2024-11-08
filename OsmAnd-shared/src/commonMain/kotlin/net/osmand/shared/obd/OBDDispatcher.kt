@@ -140,7 +140,13 @@ object OBDDispatcher {
 	fun stopReading() {
 		log("stop reading")
 		setReadWriteStreams(null, null)
+		sensorDataCache.clear()
+		OBDDataComputer.clearCache()
 		log("after stop reading")
+	}
+
+	fun getRawData(): HashMap<OBDCommand, OBDDataField<Any>?> {
+		return HashMap(sensorDataCache)
 	}
 
 	private fun log(msg: String) {

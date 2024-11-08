@@ -207,7 +207,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		String iconName = appearanceParams.getIconName();
 		if (Algorithms.isEmpty(iconName)) {
 			params = new ButtonAppearanceParams(appearanceParams);
-			params.setIconName(buttonState.getPreferredIconName(iconName));
+			params.setIconName(buttonState.getDefaultIconName());
 		}
 		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
@@ -215,7 +215,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 
 	private void resetAppearance() {
 		ButtonAppearanceParams defaultParams = buttonState.createDefaultAppearanceParams();
-		appearanceParams.setIconName(defaultParams.getIconName());
+		appearanceParams.setIconName(null);
 		appearanceParams.setSize(defaultParams.getSize());
 		appearanceParams.setOpacity(defaultParams.getOpacity());
 		appearanceParams.setCornerRadius(defaultParams.getCornerRadius());

@@ -6,20 +6,7 @@ import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import static net.osmand.shared.gpx.GpxParameter.ACTIVITY_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
-import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.shared.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.*;
 import static net.osmand.util.Algorithms.formatDuration;
 
 import android.app.Activity;
@@ -44,19 +31,18 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
@@ -72,10 +58,10 @@ import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.primitives.Metadata;
-import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -92,8 +78,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-;
 
 public class GpxUiHelper {
 
@@ -662,10 +646,9 @@ public class GpxUiHelper {
 	private static void addDbParametersToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		String activityId = item.getParameter(ACTIVITY_TYPE);
 		if (!Algorithms.isEmpty(activityId)) {
-			RouteActivityHelper routeActivityHelper = app.getRouteActivityHelper();
-			RouteActivity routeActivity = routeActivityHelper.findRouteActivity(activityId);
+			RouteActivityHelper helper = app.getRouteActivityHelper();
 			Metadata metadata = gpxFile.getMetadata();
-			metadata.setRouteActivity(routeActivity, routeActivityHelper.getActivities());
+			metadata.setRouteActivity(helper.findRouteActivity(activityId));
 		}
 		addAppearanceToGpx(app, gpxFile, item);
 	}

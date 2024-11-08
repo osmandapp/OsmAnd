@@ -5,10 +5,10 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
@@ -21,15 +21,7 @@ import org.apache.commons.logging.Log;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class TravelLocalDataHelper {
@@ -505,7 +497,9 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_CONTENT_JSON, article.contentsJson);
 							rowsMap.put(BOOKMARKS_COL_CONTENT, article.content);
 							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
-							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GpxUtilities.INSTANCE.asString(article.gpxFile)));
+							if (article.gpxFile != null) {
+								rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GpxUtilities.INSTANCE.asString(article.gpxFile)));
+							}
 
 							conn.execSQL(AndroidDbUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
 									rowsMap.values().toArray());

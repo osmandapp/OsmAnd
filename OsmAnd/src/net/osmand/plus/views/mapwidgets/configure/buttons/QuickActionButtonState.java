@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
 import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_RIGHT;
 
@@ -20,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
@@ -30,7 +27,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class QuickActionButtonState extends MapButtonState {
 
@@ -49,8 +45,8 @@ public class QuickActionButtonState extends MapButtonState {
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
-		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
-		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
+		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal();
+		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 	}
 
@@ -145,14 +141,6 @@ public class QuickActionButtonState extends MapButtonState {
 		return quickActions.size() == 1;
 	}
 
-	public void resetForMode(@NonNull ApplicationMode appMode) {
-		visibilityPref.resetModeToDefault(appMode);
-	}
-
-	public void copyForMode(@NonNull ApplicationMode fromAppMode, @NonNull ApplicationMode toAppMode) {
-		visibilityPref.setModeValue(toAppMode, visibilityPref.getModeValue(fromAppMode));
-	}
-
 	public void saveActions(@NonNull Gson gson) {
 		Type type = new TypeToken<List<QuickAction>>() {}.getType();
 		quickActionsPref.set(gson.toJson(quickActions, type));
@@ -185,31 +173,21 @@ public class QuickActionButtonState extends MapButtonState {
 	@Override
 	public ButtonAppearanceParams createAppearanceParams() {
 		ButtonAppearanceParams appearanceParams = super.createAppearanceParams();
-		String savedName = getSavedIconName();
-		if (Algorithms.isEmpty(savedName)) {
-			appearanceParams.setIconName(getPreferredIconName(savedName));
+		if (Algorithms.isEmpty(getSavedIconName())) {
+			appearanceParams.setIconName(getDefaultIconName());
 		}
 		return appearanceParams;
 	}
 
-	@Nullable
-	public String getPreferredIconName(@Nullable String originalName, boolean overwriteIfEmpty) {
-		if (Algorithms.isEmpty(originalName) && overwriteIfEmpty) {
-			if (isSingleAction()) {
-				int iconId = getQuickActions().get(0).getIconRes(app);
-				if (iconId > 0) {
-					return app.getResources().getResourceEntryName(iconId);
-				}
-			}
-			return DEFAULT_ICON_KEY;
-		}
-		return originalName;
-	}
-
 	@NonNull
-	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams(DEFAULT_ICON_KEY, getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		if (isSingleAction()) {
+			int iconId = getQuickActions().get(0).getIconRes(app);
+			if (iconId > 0) {
+				return app.getResources().getResourceEntryName(iconId);
+			}
+		}
+		return DEFAULT_ICON_KEY;
 	}
 
 	@Nullable
@@ -230,6 +208,12 @@ public class QuickActionButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
-		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, true, true);
+		int hash = id.hashCode();
+		int mod = hash == Integer.MIN_VALUE ? 0 : Math.abs(hash % 3);
+
+		boolean xMove = (mod == 0 || mod == 2);
+		boolean yMove = (mod == 1 || mod == 2);
+
+		return setupButtonPosition(position, POS_RIGHT, POS_BOTTOM, xMove, yMove);
 	}
 }

@@ -5,7 +5,7 @@
 	package="net.osmand.plus">
 
 	<permission
-		android:name="net.osmand.SERVICE_PERMISSION"
+		android:name="${applicationId}.SERVICE_PERMISSION"
 		android:protectionLevel="signature" />
 
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -1137,7 +1137,7 @@
 			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"
-			android:permission="net.osmand.SERVICE_PERMISSION"
+			android:permission="${applicationId}.SERVICE_PERMISSION"
 			android:foregroundServiceType="location"
 			android:stopWithTask="false">
 		</service>
@@ -1161,7 +1161,7 @@
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false"
 			android:exported="true"
-			android:permission="net.osmand.SERVICE_PERMISSION"
+			android:permission="${applicationId}.SERVICE_PERMISSION"
 			android:foregroundServiceType="dataSync" />
 
 		<meta-data android:name="com.google.android.gms.car.application"
@@ -1173,7 +1173,7 @@
 			tools:ignore="MetadataTagInsideApplicationTag" />
 
 		<service
-			android:process="net.osmand.plus"
+			android:process="${applicationId}"
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
 			android:foregroundServiceType="location"
 			android:exported="true">

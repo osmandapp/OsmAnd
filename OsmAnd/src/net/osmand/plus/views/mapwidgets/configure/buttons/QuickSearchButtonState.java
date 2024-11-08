@@ -59,8 +59,8 @@ public class QuickSearchButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_action_search_dark", getDefaultSize(), TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return "ic_action_search_dark";
 	}
 
 	@NonNull

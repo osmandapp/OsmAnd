@@ -1,8 +1,10 @@
 package net.osmand.shared.obd
 
+import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.extensions.format
+import net.osmand.shared.obd.OBDCommand.*
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.*
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.KMapUtils
@@ -10,16 +12,19 @@ import net.osmand.shared.util.LoggerFactory
 import kotlin.math.max
 import net.osmand.shared.obd.OBDCommand.*
 import net.osmand.shared.util.Localization
+import net.osmand.shared.util.PlatformUtil
 
 object OBDDataComputer {
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
+	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
+	const val DEFAULT_FUEL_TANK_CAPACITY = 52f
+	private const val FUEL_TANK_CAPACITY_SETTING_ID = "fuel_tank_capacity"
 	var locations = listOf<OBDLocation>()
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
 	var timeoutForInstantValuesSeconds = 0
-	var fuelTank = 52f
 
 	class OBDLocation(val time: Long, val latLon: KLatLon)
 
@@ -28,6 +33,12 @@ object OBDDataComputer {
 			widget.acceptValue(value)
 		}
 		compute()
+	}
+
+	fun clearCache() {
+		for (widget in widgets) {
+			widget.clearData()
+		}
 	}
 
 	fun registerLocation(l: OBDLocation) {
@@ -230,6 +241,13 @@ object OBDDataComputer {
 		private var cachedVersion = 0
 		private var version = 0
 
+		fun clearData() {
+			values = ArrayList()
+			value = null
+			cachedVersion = 0
+			version = 0
+		}
+
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
@@ -253,6 +271,9 @@ object OBDDataComputer {
 				BATTERY_VOLTAGE,
 				FUEL_CONSUMPTION_RATE_SENSOR,
 				FUEL_PRESSURE,
+				THROTTLE_POSITION,
+				CALCULATED_ENGINE_LOAD,
+
 				RPM -> {
 					if (averageTimeSeconds == 0 && locValues.size > 0) {
 						locValues[locValues.size - 1].value
@@ -271,7 +292,7 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						fuelTank * calculateFuelConsumption(locValues) / 100
+						getFuelTank() * calculateFuelConsumption(locValues) / 100
 					} else {
 						null
 					}
@@ -284,7 +305,7 @@ object OBDDataComputer {
 						val diffPerc =
 							(first.value as Number).toFloat() - (last.value as Number).toFloat()
 						if (diffPerc > 0) {
-							val difLiter = fuelTank * diffPerc / 100
+							val difLiter = getFuelTank() * diffPerc / 100
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0) {
 								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
@@ -299,7 +320,8 @@ object OBDDataComputer {
 					if (locValues.size >= 2) {
 						val first = locValues[locValues.size - 2]
 						val last = locValues[locValues.size - 1]
-						val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
+						val diffPerc =
+							(first.value as Number).toFloat() - (last.value as Number).toFloat()
 						if (diffPerc > 0) {
 							val dist = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (dist > 0) {
@@ -312,8 +334,6 @@ object OBDDataComputer {
 					null
 				}
 
-				THROTTLE_POSITION,
-				CALCULATED_ENGINE_LOAD,
 				FUEL_LEFT_PERCENT -> {
 					if (locValues.size > 0) {
 						locValues[locValues.size - 1].value as Float
@@ -324,7 +344,7 @@ object OBDDataComputer {
 
 				FUEL_LEFT_LITER -> {
 					if (locValues.size > 0) {
-						fuelTank * (locValues[locValues.size - 1].value as Float) / 100
+						getFuelTank() * (locValues[locValues.size - 1].value as Float) / 100
 					} else {
 						null
 					}
@@ -402,6 +422,10 @@ object OBDDataComputer {
 			}
 		}
 
+		fun resetLocations() {
+			values = ArrayList()
+		}
+
 		fun cleanup(now: Long) {
 			val timeout =
 				if (averageTimeSeconds > 0) averageTimeSeconds else timeoutForInstantValuesSeconds
@@ -416,5 +440,10 @@ object OBDDataComputer {
 				values = values.subList(inWindow, values.size)
 			}
 		}
+	}
+
+	private fun getFuelTank(): Float {
+		val fuelTank = osmAndSettings.getAppModeFloatPreference(FUEL_TANK_CAPACITY_SETTING_ID)
+		return fuelTank ?: DEFAULT_FUEL_TANK_CAPACITY
 	}
 }

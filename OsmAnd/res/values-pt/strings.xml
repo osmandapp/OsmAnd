@@ -5960,10 +5960,6 @@
     <string name="new_trip_segment">Novo segmento de viagem</string>
     <string name="quick_action_start_pause_recording">Um botão para iniciar, pausar ou retomar a gravação do trilho GPX.</string>
     <string name="release_4_9">• Adicionado um visualizador de galeria de ecrã inteiropara imagens Wikimedia\n\n • Introduzido um novo complemento “Métricas do veículo” para monitorizar o desempenho do veículo utilizando o protocolo OBD-II\n\n • Adicionada a capacidade de atribuir atividades a trilhos e filtrá-los em conformidade\n\n • Implementação de novas ações rápidas para gravação de viagens e bloqueio do ecrã tátil\n\n • Introdução de um aspeto personalizável do botão do mapa e de uma grelha precisa\n\n • Adicionado um menu de contexto e uma ação “Repor a velocidade média” aos widgets\n\n • Adicionada uma nova camada de percurso “Trilhos de motas fora de estrada”\n\n • Corrigido o “Registo automático de trajeto durante a navegação”\n\n • Corrigido o problema com coordenadas invertidas em RTL\n\n • Corrigida a falta de dados do sensor para o percurso atualmente gravado\n\n • Adicionada informação sobre as áreas circundantes para o ponto selecionado\n\n • Adicionada ação rápida para controlar a visibilidade das edições OSM\n\n • Parâmetros de visibilidade separados para as opções de colorização do terreno\n\n • Adicionado um ícone que pode ser tocado para mostrar o acesso ou outros atributos de estradas ou caminhos\n\n</string>
-    <string name="obd_speed_desc">Mostra a velocidade do veículo através do sensor OBD</string>
-    <string name="obd_ambient_air_temp_desc">Mostra a temperatura do ar ambiente através do sensor OBD</string>
-    <string name="obd_engine_coolant_temp_desc">Mostra a temperatura do líquido de arrefecimento do motor através do sensor OBD</string>
-    <string name="obd_battery_voltage_desc">Mostra a voltagem da bateria através do sensor OBD</string>
     <string name="obd_fuel_level_desc">Mostra o nível de combustível do veículo através do sensor OBD</string>
     <string name="obd_air_intake_temp">Temperatura do ar de admissão</string>
     <string name="obd_ambient_air_temp">Temperatura do ar ambiente</string>
@@ -5978,7 +5974,6 @@
     <string name="obd_rpm_desc">Mostra as RPM do tacómetro do veículo através do sensor OBD</string>
     <string name="tracker_item">Rastreador OsmAnd</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
-    <string name="obd_air_intake_temp_desc">Mostra a temperatura do ar de admissão do veículo através do sensor OBD</string>
     <string name="obd_fuel_type_desc">Mostra o tipo de combustível do veículo através do sensor OBD</string>
     <string name="obd_battery_voltage">Voltagem da bateria</string>
     <string name="obd_plugin_description">Acede às informações do seu veículo através do protocolo OBD</string>

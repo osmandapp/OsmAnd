@@ -4424,7 +4424,6 @@
     <string name="obd_fuel_left_km">Καύσιμο που έμεινε (km)</string>
     <string name="obd_connected_to_device">Συνδέθηκε με %s</string>
     <string name="obd_connecting_to_device">Συνδέεται με %s</string>
-    <string name="obd_engine_oil_temperature">Θερμοκρασία λαδιού μηχανής</string>
     <string name="quick_action_verb_start_pause">Έναρξη / Παύση</string>
     <string name="shared_string_normal">Φυσιολογικό</string>
     <string name="shared_string_original">Αυθεντικό</string>

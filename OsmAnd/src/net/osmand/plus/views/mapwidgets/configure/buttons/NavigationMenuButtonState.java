@@ -60,17 +60,23 @@ public class NavigationMenuButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		String iconName;
+	public String getDefaultIconName() {
 		int routePlanningBtnImage = MapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage();
 		if (routePlanningBtnImage != 0) {
-			iconName = app.getResources().getResourceEntryName(routePlanningBtnImage);
-		} else if (app.getRoutingHelper().isFollowingMode()) {
-			iconName = "ic_action_start_navigation";
-		} else {
-			iconName = "ic_action_gdirections_dark";
+			return app.getResources().getResourceEntryName(routePlanningBtnImage);
 		}
-		return new ButtonAppearanceParams(iconName, getDefaultSize(), OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+		boolean isFollowingMode = app.getRoutingHelper().isFollowingMode();
+		return isFollowingMode ? "ic_action_start_navigation" : "ic_action_gdirections_dark";
+	}
+
+	@Override
+	public float getDefaultOpacity() {
+		return OPAQUE_ALPHA;
+	}
+
+	@Override
+	public int getDefaultCornerRadius() {
+		return RECTANGULAR_RADIUS_DP;
 	}
 
 	@Nullable
