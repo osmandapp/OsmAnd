@@ -220,8 +220,8 @@ public class PoiFiltersHelper {
 	public void reloadAllPoiFilters() {
 		showAllPOIFilter = null;
 		getShowAllPOIFilter();
-		cacheTopStandardFilters = null;
-		getTopDefinedPoiFilters();
+		setTopStandardFilters(null);
+		getTopStandardFilters();
 	}
 
 	public List<PoiUIFilter> getUserDefinedPoiFilters(boolean includeDeleted) {
@@ -254,10 +254,10 @@ public class PoiFiltersHelper {
 
 	@NonNull
 	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
-		initTopDefinedPoiFiltersIfNeeded();
 		List<PoiUIFilter> result = new ArrayList<>();
-		if (cacheTopStandardFilters != null) {
-			for (PoiUIFilter filter : cacheTopStandardFilters) {
+		List<PoiUIFilter> standardFilters = getTopStandardFilters();
+		if (standardFilters != null) {
+			for (PoiUIFilter filter : standardFilters) {
 				if (includeDeleted || !filter.isDeleted()) {
 					result.add(filter);
 				}
@@ -267,7 +267,8 @@ public class PoiFiltersHelper {
 		return result;
 	}
 
-	private void initTopDefinedPoiFiltersIfNeeded() {
+	@Nullable
+	private List<PoiUIFilter> getTopStandardFilters() {
 		// collect top standard filters if poi types are initialized
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		if (cacheTopStandardFilters == null && poiTypes.isInit()) {
@@ -280,6 +281,11 @@ public class PoiFiltersHelper {
 			PluginsHelper.registerPoiFilters(filters);
 			cacheTopStandardFilters = filters;
 		}
+		return cacheTopStandardFilters;
+	}
+	
+	private void setTopStandardFilters(@Nullable List<PoiUIFilter> topStandardFilters) {
+		this.cacheTopStandardFilters = topStandardFilters;
 	}
 
 	public List<String> getPoiFilterOrders(boolean onlyActive) {
@@ -427,24 +433,24 @@ public class PoiFiltersHelper {
 	}
 
 	public boolean createPoiFilter(@NonNull PoiUIFilter filter, boolean forHistory) {
-		initTopDefinedPoiFiltersIfNeeded();
 		PoiFilterDbHelper helper = openDbHelper();
-		if (cacheTopStandardFilters == null || helper == null) {
+		List<PoiUIFilter> standardFilters = getTopStandardFilters();
+		if (standardFilters == null || helper == null) {
 			return false;
 		}
 		helper.deleteFilter(helper.getWritableDatabase(), filter, true);
 
 		Set<PoiUIFilter> filtersToRemove = new HashSet<>();
-		for (PoiUIFilter f : cacheTopStandardFilters) {
+		for (PoiUIFilter f : standardFilters) {
 			if (Objects.equals(f.getFilterId(), filter.getFilterId())) {
 				filtersToRemove.add(f);
 			}
 		}
-		cacheTopStandardFilters = CollectionUtils.removeAllFromList(cacheTopStandardFilters, filtersToRemove);
+		setTopStandardFilters(standardFilters = CollectionUtils.removeAllFromList(standardFilters, filtersToRemove));
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			addTopPoiFilter(filter);
-			Collections.sort(cacheTopStandardFilters);
+			Collections.sort(standardFilters);
 		}
 		helper.close();
 		return res;
@@ -525,9 +531,9 @@ public class PoiFiltersHelper {
 	}
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
-		initTopDefinedPoiFiltersIfNeeded();
-		if (cacheTopStandardFilters != null) {
-			cacheTopStandardFilters = CollectionUtils.addToList(cacheTopStandardFilters, filter);
+		List<PoiUIFilter> standardFilters = getTopStandardFilters();
+		if (standardFilters != null) {
+			setTopStandardFilters(CollectionUtils.addToList(standardFilters, filter));
 		}
 		return filter;
 	}

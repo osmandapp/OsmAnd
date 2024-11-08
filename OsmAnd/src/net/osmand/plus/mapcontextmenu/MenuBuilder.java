@@ -1386,10 +1386,11 @@ public class MenuBuilder {
 	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
 		WikipediaPlugin plugin = PluginsHelper.getEnabledPlugin(WikipediaPlugin.class);
 		if (plugin != null) {
+			PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
-			} else if (showNearestWiki && latLon != null) {
-				searchSortedAmenities(plugin.getTopWikiPoiFilter(), latLon, listener);
+			} else if (showNearestWiki && latLon != null && wikiFilter != null) {
+				searchSortedAmenities(wikiFilter, latLon, listener);
 			}
 		}
 	}
