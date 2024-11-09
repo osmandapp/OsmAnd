@@ -3982,12 +3982,12 @@
     <string name="backup_error_file_not_available">Archivo no disponible</string>
     <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
     <string name="backup_error_token_is_not_valid_or_expired">Clave inválida o vencida</string>
-    <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
+    <string name="backup_error_user_is_not_registered">Ningún usuario se registró con ese correo electrónico</string>
     <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
-    <string name="release_4_0">• Copia de seguridad en la nube\n\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo»\n\n• Se ha añadido la opción de descargar las curvas de nivel en pies\n\n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente\n\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»\n\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada\n\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta\n\n• Se ha añadido la opción de «Compra» con información detallada de las compras\n\n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta\n\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones»</string>
+    <string name="release_4_0">• Copia de seguridad en la nube\n\n• Se agregó el modo nocturno para el estilo de mapa «Topo»\n\n• Se agregó la opción de descargar las curvas de nivel en pies\n\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente\n\n• Se actualizó el cuadro de diálogo «Grabación de viaje»\n\n• La «Distancia al pulsar» se movió de la regla radial a una opción separada\n\n• Planificar ruta: Ahora podés cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta\n\n• Se agregó la opción de «Compra» con información detallada de las compras\n\n• Se agregó la opción de cambiar el aspecto de la línea de la ruta\n\n• Las actualizaciones de OsmAnd Live se movieron a «Descargas → Actualizaciones»</string>
     <string name="duration_moment_ago">hace instantes</string>
-    <string name="logout_from_osmand_cloud">Cerrar sesión en OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
