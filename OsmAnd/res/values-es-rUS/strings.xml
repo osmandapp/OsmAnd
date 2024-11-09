@@ -4201,7 +4201,7 @@
     <string name="gps_filter_speed_altitude_desc">Sólo los puntos de la traza que coincidan con el intervalo definido aparecerán en el gráfico y el mapa, el resto quedará oculto.</string>
     <string name="distance_between_points">Distancia entre puntos</string>
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
-    <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
+    <string name="storage_migration_wrong_folder_warning">No se encontraron datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
@@ -4212,7 +4212,7 @@
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
-    <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="turn_arrows_descr">Elige si se muestran las flechas de giro en la línea de ruta.</string>
     <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
     <string name="shared_string_not_used">Sin usar</string>
     <string name="waypoint_appearance">Aspecto del punto de referencia</string>
