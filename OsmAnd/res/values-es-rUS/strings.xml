@@ -4254,7 +4254,7 @@
     <string name="list_of_groups">Lista de grupos</string>
     <string name="edit_category">Editar categoría</string>
     <string name="shared_string_shape">Forma</string>
-    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
+    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos dentro del grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
     <string name="rendering_attr_showFitnessTrails_description">Muestra los circuitos aeróbicos</string>
     <string name="stop_download">Parar descarga</string>
@@ -4265,7 +4265,7 @@
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
-    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="move_map_to_select_area">Mueve el mapa para elegir el área necesaria.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
     <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
