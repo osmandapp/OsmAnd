@@ -63,13 +63,9 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetSettingsFragment() {
 		selectedAppMode = settings.applicationMode
 		availableIntervals = getAvailableIntervals()
 
-		if (temperatureUnitPref != null) {
-			selectedTemperatureUnit = temperatureUnitPref!!.getModeValue(appMode)
-		}
-		if (averageValueIntervalPref != null && averageValueModePref != null) {
-			selectedIntervalMillis = averageValueIntervalPref!!.getModeValue(appMode)
-			selectedAverageMode = averageValueModePref!!.getModeValue(appMode)
-		}
+		selectedTemperatureUnit = temperatureUnitPref?.getModeValue(appMode) ?: selectedTemperatureUnit
+		selectedIntervalMillis = averageValueIntervalPref?.getModeValue(appMode) ?: selectedIntervalMillis
+		selectedAverageMode = averageValueModePref?.getModeValue(appMode) ?: selectedAverageMode
 
 		updateToolbarIcon()
 		setupConfigButtons()
@@ -86,31 +82,47 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetSettingsFragment() {
 	}
 
 	private fun setupConfigButtons() {
-		buttonsCard?.removeAllViews()
+		val buttonsList: MutableList<ButtonItem> = ArrayList()
 
 		val showAverageButtons = averageValueModePref != null && averageValueIntervalPref != null
 		if (temperatureUnitPref != null) {
-			buttonsCard?.addView(createButtonWithDescription(
-				getString(R.string.shared_string_temperature),
-				app.getString(selectedTemperatureUnit.titleId),
-				showAverageButtons,
-			) { showTemperatureDialog() })
+			buttonsList.add(
+				ButtonItem(
+					getString(R.string.shared_string_temperature),
+					app.getString(selectedTemperatureUnit.titleId)
+				) { showTemperatureDialog() })
 		}
 
 		if (showAverageButtons) {
-			buttonsCard?.addView(createButtonWithDescription(
-				getString(R.string.shared_string_mode),
-				getModeName(selectedAverageMode),
-				selectedAverageMode,
-			) { showMarkerModeDialog() })
+			buttonsList.add(
+				ButtonItem(
+					getString(R.string.shared_string_mode),
+					getModeName(selectedAverageMode)
+				) { showMarkerModeDialog() })
 
 			if (selectedAverageMode) {
-				buttonsCard?.addView(createButtonWithDescription(
-					getString(R.string.shared_string_interval),
-					availableIntervals[selectedIntervalMillis],
-					false,
-				) { showSeekbarSettingsDialog() })
+				buttonsList.add(
+					ButtonItem(
+						getString(R.string.shared_string_interval),
+						availableIntervals[selectedIntervalMillis]
+					) { showSeekbarSettingsDialog() })
 			}
+		}
+
+		creteItems(buttonsList)
+	}
+
+	private fun creteItems(buttonsList: MutableList<ButtonItem>) {
+		buttonsCard?.removeAllViews()
+		buttonsList.forEachIndexed { index, buttonItem ->
+			buttonsCard?.addView(
+				createButtonWithDescription(
+					buttonItem.title,
+					buttonItem.desc,
+					buttonItem.listener,
+					index != buttonsList.lastIndex
+				)
+			)
 		}
 	}
 
@@ -139,8 +151,8 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetSettingsFragment() {
 	private fun createButtonWithDescription(
 		title: String,
 		desc: String?,
-		showShortDivider: Boolean,
-		listener: View.OnClickListener
+		listener: View.OnClickListener,
+		showShortDivider: Boolean
 	): View {
 		val view = inflater.inflate(R.layout.configure_screen_list_item, null)
 
@@ -299,4 +311,6 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetSettingsFragment() {
 		val prefsChanged = averageChanged || temperatureChanged
 		widget.updatePrefs(prefsChanged)
 	}
+
+	inner class ButtonItem(var title: String, var desc: String?, var listener: View.OnClickListener)
 }

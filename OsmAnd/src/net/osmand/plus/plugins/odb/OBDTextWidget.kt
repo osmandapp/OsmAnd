@@ -27,7 +27,7 @@ open class OBDTextWidget(
 	customId: String?,
 	widgetsPanel: WidgetsPanel?) :
 	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel), OBDWidgetOptions {
-	private val plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
+	private val plugin = PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
 	protected var widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
 	private var cacheSubTextData: String? = null
