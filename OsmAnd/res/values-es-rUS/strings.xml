@@ -3628,7 +3628,7 @@
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
     <string name="user_login">Ingresar</string>
     <string name="use_login_password">Usar nombre de usuario y contraseña</string>
-    <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
+    <string name="subscription_payment_issue_title">Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
@@ -3824,7 +3824,7 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="specify_color_for_map_mode">Define el color para el modo de mapa «%1$s».</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo del mapa «%1$s».</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, contacta con nosotros en %1$s.</string>
