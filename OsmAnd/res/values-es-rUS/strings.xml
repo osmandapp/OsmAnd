@@ -3901,7 +3901,7 @@
     <string name="backup_complete">Copia de seguridad completa</string>
     <string name="backup_now">Respaldar ahora</string>
     <string name="make_backup">Crear copia de seguridad</string>
-    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, crea una copia de seguridad de estos datos para no perderlos.</string>
     <string name="backup_conflicts">Conflictos</string>
     <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
     <string name="backup_view_conflicts">Ver conflictos</string>
