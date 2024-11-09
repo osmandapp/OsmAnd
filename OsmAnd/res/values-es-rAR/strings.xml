@@ -4141,8 +4141,8 @@
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
-    <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
-    <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
+    <string name="shared_storage_last_step">Podés definir una nueva carpeta de datos después.</string>
+    <string name="shared_storage_third_step">Concedé acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="shared_storage_first_step">Pulsa «%1$s».
 \nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s».
