@@ -5966,4 +5966,5 @@
     <string name="obd_engine_oil_temperature_desc">Zeigt die Temperatur des Motoröls an.</string>
     <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Starten gelaufen ist.</string>
     <string name="obd_throttle_position">Drosselklappenstellung</string>
+    <string name="shared_string_volume">Menge</string>
 </resources>
