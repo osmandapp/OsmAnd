@@ -4137,7 +4137,7 @@
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="progress_complete">%1$s completo</string>
-    <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
+    <string name="storage_found_files_descr">Pulsá «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
