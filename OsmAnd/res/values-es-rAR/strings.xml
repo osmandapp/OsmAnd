@@ -4298,7 +4298,7 @@
 \nEn las intersecciones, la simulación reducirá la velocidad.
 \nSe aplicarán penalizaciones adicionales en semáforos, señales de pare, etc.</string>
     <string name="simulation_real_mode_title">Simulación realista</string>
-    <string name="simulation_constant_mode_desc">La simulación se realizará con una velocidad constante elegida.</string>
+    <string name="simulation_constant_mode_desc">La simulación se realizará con la velocidad constante elegida.</string>
     <string name="simulation_constant_mode_title">Velocidad constante</string>
     <string name="simulation_preview_mode_desc">La velocidad de la simulación será máxima en los tramos rectos y disminuirá sólo en las intersecciones.</string>
     <string name="speed_mode">Modo de velocidad</string>
