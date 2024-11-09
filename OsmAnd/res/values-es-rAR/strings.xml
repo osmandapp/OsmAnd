@@ -3949,7 +3949,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtené acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtené acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtené acceso a actualizaciones de mapas con mayor frecuencia, elegí entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtené OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No perdés los datos al reinstalar. Hacé copias de seguridad y restaurá toda la información fácilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtené OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No perdés los datos al reinstalar. Creá copias de seguridad y restaurá toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
