@@ -634,7 +634,7 @@
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
     <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
-    <string name="rendering_attr_showAccess_name">Aliraj baroj kaj vojpagejoj</string>
+    <string name="rendering_attr_showAccess_name">Aliraj limigoj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
@@ -731,9 +731,9 @@
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points">%1$s punktoj</string>
     <string name="gpx_selection_point">Punkto %1$s</string>
-    <string name="gpx_selection_route_points">%1$s\nPunktoj de kurso: %2$s</string>
-    <string name="gpx_selection_points">%1$s\nPunktoj</string>
-    <string name="gpx_selection_track">%1$s\nKurso %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nPunktoj de kurso: %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunktoj</string>
+    <string name="gpx_selection_track">%1$s \nKurso %2$s</string>
     <string name="gpx_file_is_empty">Malplena GPX-dosiero</string>
     <string name="osmo_edit_color">Vidiga koloro</string>
     <string name="int_days">tagoj</string>
@@ -1073,7 +1073,7 @@
 \n– sen aliro al eksterretaj vikipediaj interesejoj
 \n
 \nOsmAnd estas konstante evoluigata kaj ĝia plua evoluigo dependas de monaj donacoj por subteni programadon kaj testadon de novaj ebloj. Bonvolu konsideri aĉeti OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto ĉe https://osmand.net.</string>
-    <string name="day_night_info_description">Sunleviĝo: %1$s\nSunsubiro: %2$s</string>
+    <string name="day_night_info_description">Sunleviĝo: %1$s \nSunsubiro: %2$s</string>
     <string name="day_night_info">Informo pri tago/nokto</string>
     <string name="filterpoi_activity">Krei filtrilon de interesejo</string>
     <string name="recalculate_route_to_your_location">Transporta speco:</string>
@@ -4692,7 +4692,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Elektu la %1$d-an elveturejon kaj veturu ĉe dekstra flanko</string>
     <string name="relative_bearing_widget_desc">Angulo inter direkto de via movado kaj la alcela loko.</string>
     <string name="connect_with_straight_line">Konekti per rekta linio</string>
-    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por difini kurson inter punktoj kaj por akiri precizajn informojn pri turniĝoj kaj ŝoseoj.</string>
+    <string name="attach_roads_descr">Alproksimigi vian spuron al vojoj por difini kurson inter punktoj kaj por akiri precizajn informojn pri kurbiĝoj kaj ŝoseo.</string>
     <string name="auto_25_chars_route_tl_kr">Turniĝu maldekstren kaj veturu ĉe dekstra flanko</string>
     <string name="auto_25_chars_route_tu_kl">Turniĝu malantaŭen kaj veturu ĉe maldekstra flanko</string>
     <string name="auto_backup_preference_desc">Implicite Android konservas sekurkopiojn de ŝatataj punktoj, map-ĵetonoj kaj agordoj de la aplikaĵo por restarigi ilin en novaj aparatoj post reinstali. Tiu sekurkopio estas limigita al 25 MB.
@@ -4716,8 +4716,8 @@
     <string name="distance_to_intermediate_widget_desc">Montras plian distancon al la unua intercelo. Kiam intercelo estos pasigita, la fenestraĵo montros distancon al la sekva intercelo.</string>
     <string name="time_to_destination_widget_desc">Montras tempon de alveno aŭ pluan tempon al la fina celo. Tempo estas senĉese rekalkulata dum navigado.</string>
     <string name="distance_to_destination_widget_desc">Montras plian distancon al la fina celo.</string>
-    <string name="second_next_turn_widget_desc">Montras informojn pri via post-sekva turniĝo kaj aktiviĝos dum alproksimiĝi turniĝon.</string>
-    <string name="next_turn_widget_desc">Montras informojn pri via sekva turniĝo, bildsimbolon de manovro kaj distancon al la turniĝo.</string>
+    <string name="second_next_turn_widget_desc">Montras informojn pri via postsekva kurbiĝo kaj aktiviĝos dum alproksimiĝi kurbiĝon.</string>
+    <string name="next_turn_widget_desc">Montras informojn pri via sekva kurbiĝo, bildsimbolon de manovro kaj distancon al la kurbiĝo.</string>
     <string name="widget_with_dot">Fenestraĵo.</string>
     <string name="compass_visible_if_map_rotated_desc">Kaŝita kiam nordo troviĝas ĉe supro de la mapo</string>
     <string name="compass_visible_if_map_rotated">Nur kiam mapo turnita</string>
@@ -5639,9 +5639,7 @@
     <string name="distance_during_navigation">Distanco dum navigi</string>
     <string name="precise">Preciza</string>
     <string name="round_up">Rondigita</string>
-    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva turniĝo, Vetur-koridoroj).
-\n
-\nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
+    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva kurbiĝo, Vetur-koridoroj). \n \nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
     <string name="download_cloud_versions">Elŝuti nubajn versiojn</string>
     <string name="upload_local_versions">Alŝuti lokajn versiojn</string>
     <string name="map_widget_map_scale">Skalo de mapo</string>
@@ -6016,7 +6014,7 @@
     <string name="route_guidance">Sciigoj pri kurso</string>
     <string name="obd_widget_engine_speed">Rivolua rapido de motoro</string>
     <string name="obd_widget_vehicle_speed">Rapido de veturilo</string>
-    <string name="route_guidance_desc">Liveras jamajn sciigojn pri kurso: distancon ĝis sekva turniĝo, strat-nomon (aktualan kaj sekvan) kaj informojn pri vetur-koridoroj. Fenestraĵoj estas aktivaj dum navigi.</string>
+    <string name="route_guidance_desc">Liveras jamajn sciigojn pri kurso: distancon ĝis sekva kurbiĝo, strat-nomon (aktualan kaj sekvan) kaj informojn pri vetur-koridoroj. Fenestraĵoj estas aktivaj dum navigi.</string>
     <string name="obd_nothing_found_text">Neniu trovita skanilo</string>
     <string name="obd_bluetooth_off_description">Aktivigu Bludenton por serĉi kaj konekti skanilojn.</string>
     <string name="obd_device_forget_sensor">Forgesi skanilon</string>
