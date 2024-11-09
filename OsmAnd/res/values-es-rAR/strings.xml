@@ -3829,7 +3829,7 @@
     <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies\n\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos\n\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones»\n\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente\n\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta\n\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»</string>
     <string name="no_purchases">No tenés compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
-    <string name="contact_support_description">Si tenés alguna duda, ponete en contacto con nosotros en %1$s.</string>
+    <string name="contact_support_description">Si tenés alguna duda, contacta con nosotros en %1$s.</string>
     <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsá sobre «%1$s», o contacta con nuestro equipo de asistencia.</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="troubleshooting">Solución de problemas</string>
