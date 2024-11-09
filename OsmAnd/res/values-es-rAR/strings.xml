@@ -3896,17 +3896,16 @@
     <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, Graphhopper, openrouteservice o GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Provisto por %1$s</string>
-    <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
-\nComprueba la conexión a Internet.</string>
+    <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas. \nRevisá la conexión a Internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
     <string name="backup_complete">Copia de seguridad completa</string>
     <string name="backup_now">Respaldar ahora</string>
     <string name="make_backup">Crear copia de seguridad</string>
-    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, creá una copia de seguridad de estos datos para no perderlos.</string>
     <string name="backup_conflicts">Conflictos</string>
     <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
     <string name="backup_view_conflicts">Ver conflictos</string>
-    <string name="backup_no_internet_descr">Comprobá la conexión a Internet y volvé a descargar.</string>
+    <string name="backup_no_internet_descr">Revisá la conexión a Internet y volvé a descargar.</string>
     <string name="backup_pause_all">Pausar todo</string>
     <string name="upload_local_version">Cargar versión local</string>
     <string name="download_server_version">Descargar versión del servidor</string>
