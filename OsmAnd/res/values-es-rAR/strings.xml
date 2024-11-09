@@ -3880,7 +3880,7 @@
     <string name="restore_from_file">Restaurar desde archivo</string>
     <string name="osmand_cloud_help_descr">¿Necesitas ayuda? Contactanos en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresá tu correo electrónico, se enviará un código de verificación \ny todos los datos se vincularán a él.</string>
-    <string name="osmand_cloud_login_descr">Ingresá el correo electrónico usado para el registro. Te enviaremos una contraseña de un solo uso.</string>
+    <string name="osmand_cloud_login_descr">Ingresá el correo electrónico usado para el registro. Te enviaremos un código de verificación único.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Agregalo en el siguiente campo.</string>
     <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
