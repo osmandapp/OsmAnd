@@ -4173,12 +4173,11 @@
     <string name="add_to_group">Añadir al grupo</string>
     <string name="app_modes_options">Elegir modos de aplicación</string>
     <string name="shared_string_memory">Memoria</string>
-    <string name="memory_allocated_for_routing_ds">Mayor asignación de memoria acelerá el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones.
-\nNo afecta a la velocidad de cálculo de rutas cortas.</string>
+    <string name="memory_allocated_for_routing_ds">Mayor asignación de memoria acelera el cálculo de rutas largas (más de 500 km), pero puede afectar al rendimiento de otras aplicaciones. \nNo afecta a la velocidad de cálculo de rutas cortas.</string>
     <string name="memory_allocated_for_routing">Memoria asignada para navegación</string>
     <string name="reading_files">Leyendo archivos…</string>
-    <string name="no_items_selected_warning">Marca al menos un elemento</string>
-    <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
+    <string name="no_items_selected_warning">Marcá al menos un elemento</string>
+    <string name="display_groups_visibility_dialog_description">Podés controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
     <string name="shared_string_hide_all">Ocultar todo</string>
     <string name="exit_without_saving_warning">¿Salir sin guardar los cambios\?</string>
     <string name="shared_string_show_slope">Mostrar pendiente</string>
@@ -4195,13 +4194,13 @@
 \nNótese que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="shared_string_statistics">Estadísticas</string>
-    <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
+    <string name="storage_migration_wrong_folder_warning">No se encontraron datos de OsmAnd en la carpeta elegida. Intentá de nuevo.</string>
     <string name="gps_filter_precision">Precisión del GPS</string>
     <string name="save_changes_into_file">Guardar cambios en el archivo</string>
     <string name="shared_string_precision">Precisión</string>
     <string name="distance_between_points">Distancia entre puntos</string>
     <string name="save_as_copy">Guardar como copia</string>
-    <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
+    <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Podés guardar los cambios manualmente.</string>
     <string name="shared_string_gps_filter">Filtro del GPS</string>
     <string name="use_routing_fallback">Navegación alternativa (sin conexión)</string>
     <string name="created_on">Creado el</string>
