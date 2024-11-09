@@ -3988,8 +3988,7 @@
     <string name="release_4_0">• Copia de seguridad en la nube\n\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo»\n\n• Se ha añadido la opción de descargar las curvas de nivel en pies\n\n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente\n\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»\n\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada\n\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta\n\n• Se ha añadido la opción de «Compra» con información detallada de las compras\n\n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta\n\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones»</string>
     <string name="duration_moment_ago">hace instantes</string>
     <string name="logout_from_osmand_cloud">Cerrar sesión en OsmAnd Cloud</string>
-    <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
-\nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
+    <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
     <string name="backup_deleting_all_data">Borrando todos los datos…</string>
@@ -4026,7 +4025,7 @@
     <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual. \n \nQuizás falten cargar mapas.</string>
     <string name="online_direct_line_maps_link">Revisá los mapas necesarios.</string>
     <string name="offline_maps_required_descr">Faltan algunos mapas sin conexión necesarios para esta ruta.</string>
-    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no pudo determinar una ruta con tus ajustes. \n \nQuizás falten mapas cargados, podés ejecutar una comprobación en línea para los mapas necesarios.</string>
+    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no pudo determinar una ruta con tus ajustes. \n \nQuizás falten cargar mapas, podés ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
     <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
