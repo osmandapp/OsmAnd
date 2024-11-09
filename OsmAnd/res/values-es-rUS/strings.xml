@@ -4041,7 +4041,7 @@
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
-    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
+    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tardar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
@@ -4157,8 +4157,7 @@
 \nLa aplicación cargará los datos usando la nueva carpeta.</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
-    <string name="shared_storage_first_step">Pulsa «%1$s».
-\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_first_step">Pulsa «%1$s». \nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
     <string name="copying_completed">Copiado</string>
