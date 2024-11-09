@@ -3949,7 +3949,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtené OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No perdés los datos al reinstalar. Hacé copias de seguridad y restaurá toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
@@ -3960,11 +3960,11 @@
     <string name="continue_with">Continuar con %1$s</string>
     <string name="not_available_with">No disponible con %1$s</string>
     <string name="redeem_promo_code">Canjear código promocional</string>
-    <string name="osmand_maps_plus_tagline">Obtén funciones ampliadas</string>
-    <string name="osmand_pro_tagline">Obtén todas las funciones</string>
+    <string name="osmand_maps_plus_tagline">Obtené funciones ampliadas</string>
+    <string name="osmand_pro_tagline">Obtené todas las funciones</string>
     <string name="shared_string_learn_more">Más información</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Puedes cancelarlo cuando quieras en la AppGallery de Huawei</string>
-    <string name="cancel_anytime_in_gplay">Puedes cancelarlo cuando quieras en Google Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Podés cancelarlo cuando quieras en la AppGallery de Huawei</string>
+    <string name="cancel_anytime_in_gplay">Podés cancelarlo cuando quieras en Google Play.</string>
     <string name="shared_string_not_included">No incluido</string>
     <string name="shared_string_includes">Incluido</string>
     <string name="complete_purchase">Completar compra</string>
@@ -3989,7 +3989,7 @@
     <string name="duration_moment_ago">hace instantes</string>
     <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
-    <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
+    <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» venció, renovála para usar la copia de seguridad. Aún podés restaurar los datos de la nube.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
     <string name="backup_deleting_all_data">Borrando todos los datos…</string>
     <string name="backup_deleted_all_data">Se borraron todos los datos.</string>
