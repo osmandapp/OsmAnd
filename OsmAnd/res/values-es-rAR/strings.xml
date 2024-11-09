@@ -4026,18 +4026,16 @@
     <string name="direct_line_maps_required_descr">El cálculo de la ruta demora más de lo habitual.
 \n
 \nQuizás algunos mapas no estén cargados.</string>
-    <string name="online_direct_line_maps_link">Consulta los mapas necesarios.</string>
+    <string name="online_direct_line_maps_link">Revisá los mapas necesarios.</string>
     <string name="offline_maps_required_descr">Faltan algunos mapas sin conexión necesarios para esta ruta.</string>
-    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no ha podido determinar una ruta con tus ajustes.
-\n
-\nQuizás algunos mapas no están cargados, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
+    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no pudo determinar una ruta con tus ajustes. \n \nQuizás falten mapas cargados, podés ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
     <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
     <string name="benefits_for_contributors_primary_descr">Los colaboradores activos de OpenStreetMap.org pueden beneficiarse de actualizaciones ilimitadas de los mapas cada hora.</string>
-    <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
+    <string name="benefits_for_contributors_secondary_descr">Accedé a OpenStreetMap para comprobar si tenés derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, hiciste suficientes contribuciones a OpenStreetMap y ahora podés disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
