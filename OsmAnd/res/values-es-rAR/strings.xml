@@ -4292,24 +4292,24 @@
     <string name="bottom_widgets_panel">Panel inferior</string>
     <string name="shared_string_item">Elemento</string>
     <string name="shared_string_buttons">Botones</string>
-    <string name="configure_screen_widgets_descr">Elige la pantalla a añadir o el widgets a reorganizar.</string>
+    <string name="configure_screen_widgets_descr">Elegí la pantalla para agregar o reorganizar los widgets.</string>
     <string name="osm_carto_render_descr">Similar al estilo OpenStreetMap-carto usado en el sitio principal de OSM</string>
     <string name="simulation_real_mode_desc">En los tramos rectos, la velocidad será aproximada a la máxima permitida.
 \nEn las intersecciones, la simulación reducirá la velocidad.
 \nSe aplicarán penalizaciones adicionales en semáforos, señales de pare, etc.</string>
     <string name="simulation_real_mode_title">Simulación realista</string>
-    <string name="simulation_constant_mode_desc">La simulación será realizada con una velocidad constante elegida.</string>
+    <string name="simulation_constant_mode_desc">La simulación se realizará con una velocidad constante elegida.</string>
     <string name="simulation_constant_mode_title">Velocidad constante</string>
     <string name="simulation_preview_mode_desc">La velocidad de la simulación será máxima en los tramos rectos y disminuirá sólo en las intersecciones.</string>
     <string name="speed_mode">Modo de velocidad</string>
     <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
     <string name="simulation_preview_mode_title">Modo de previsualización rápida</string>
     <string name="map_widget_altitude">Altitud de la ubicación actual</string>
-    <string name="add_page">Añadir página</string>
+    <string name="add_page">Agregar página</string>
     <string name="page_number">Página %1$s</string>
     <string name="map_widget_distance_to_destination">Distancia al destino</string>
     <string name="map_widget_current_speed">Velocidad actual</string>
-    <string name="apply_to_existing_points_descr">¿Aplicar cambios a los puntos existentes del grupo o sólo a los nuevos\?</string>
+    <string name="apply_to_existing_points_descr">¿Aplicar cambios a los puntos existentes del grupo o solo a los nuevos?</string>
     <string name="apply_to_existing_favorites_descr">¿Aplicar cambios a los puntos favoritos existentes del grupo o solo a los nuevos\?</string>
     <string name="apply_to_existing">Aplicar a existentes</string>
     <string name="apply_only_to_new_points">Aplicar solo a puntos nuevos</string>
@@ -4317,7 +4317,7 @@
     <string name="change_default_appearance">Cambiar el aspecto predefinido</string>
     <string name="on_with_params">%1$s en %2$s</string>
     <string name="shared_string_symbol">Símbolo</string>
-    <string name="routing_attr_freeride_policy_only_if_necessary_name">Sólo si es necesario</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Solo si es necesario</string>
     <string name="routing_attr_freeride_policy_allow_name">Permitir</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferir salirse de la pista</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Sin preferencias</string>
@@ -4396,12 +4396,12 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Pulsá el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_intermediate">Tiempo al punto intermedio</string>
     <string name="map_widget_distance_to_intermediate">Distancia al punto intermedio</string>
-    <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
+    <string name="radius_ruler_mode_desc">Pulsá el widget para alternar el modo de «Regla radial».</string>
     <string name="lang_sat">Santalí</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
@@ -4409,7 +4409,7 @@
     <string name="map_widget_average_speed">Velocidad media</string>
     <string name="transport_hazmat_no_desc">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
     <string name="transport_hazmat_title">Transporte de materiales peligrosos</string>
-    <string name="transport_hazmat_yes_desc">Marca la categoría correspondiente.</string>
+    <string name="transport_hazmat_yes_desc">Marcá la categoría correspondiente.</string>
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos ligeros (mercancías)</string>
@@ -4417,15 +4417,15 @@
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="routing_attr_motor_type_gas_name">Gas natural comprimido (GNC)</string>
-    <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
+    <string name="routing_attr_motor_type_description">Elegí el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="routing_attr_motor_type_name">Combustible del motor</string>
     <string name="routing_attr_motor_type_lpg_name">Gas licuado de petróleo (GLP)</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
     <string name="routing_attr_motor_type_petrol_name">Gasolina, Nafta, Bencina</string>
-    <string name="switch_widget_mode_desc">Pulsa el widget para alternar los modos.</string>
+    <string name="switch_widget_mode_desc">Pulsá el widget para alternar los modos.</string>
     <string name="side_marker_eta">Hora estimada de llegada</string>
-    <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
+    <string name="goods_delivery_desc_3">Solo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="includes_osm_changes_until">Incluye cambios de OSM hechos hasta %1$s.</string>
     <string name="next_live_update_date_and_time">Próxima actualización el %1$s a las %2$s.</string>
@@ -4451,13 +4451,13 @@
     <string name="shared_string_duplicate">Duplicar</string>
     <string name="av_notes_photo_widget_desc">Pulsá el widget para fotografiar.</string>
     <string name="av_notes_audio_widget_desc">Pulsá el widget para grabar una nota de audio.</string>
-    <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
+    <string name="av_notes_video_widget_desc">Pulsá el widget para grabar un video.</string>
     <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
     <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
     <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
-    <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
+    <string name="second_marker_widget_desc">Podés configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
     <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
     <string name="distance_to_destination_widget_desc">Muestra la distancia que queda hasta el último punto de destino.</string>
     <string name="second_next_turn_widget_desc">Muestra la información sobre el segundo próximo giro, que se activa al aproximarse a este giro.</string>
@@ -4471,7 +4471,7 @@
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
 \nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
-    <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
+    <string name="first_marker_widget_desc">Podés configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
     <string name="compass_click_desc">Mantén pulsado el botón de la brújula para cambiar el modo de orientación del mapa.</string>
