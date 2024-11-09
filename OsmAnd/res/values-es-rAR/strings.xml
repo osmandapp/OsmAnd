@@ -4023,9 +4023,7 @@
     <string name="walking_route_osmc_description">Colorea las rutas según su color local individual (si está presente en OpenStreetMap) y el tipo (internacional, regional, local).</string>
     <string name="travel_routes">Rutas turísticas</string>
     <string name="setting_supported_by_style">Este ajuste es provisto por el estilo de mapa «%1$s»</string>
-    <string name="direct_line_maps_required_descr">El cálculo de la ruta demora más de lo habitual.
-\n
-\nQuizás algunos mapas no estén cargados.</string>
+    <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual. \n \nQuizás falten cargar mapas.</string>
     <string name="online_direct_line_maps_link">Revisá los mapas necesarios.</string>
     <string name="offline_maps_required_descr">Faltan algunos mapas sin conexión necesarios para esta ruta.</string>
     <string name="online_maps_required_descr">Lamentablemente, OsmAnd no pudo determinar una ruta con tus ajustes. \n \nQuizás falten mapas cargados, podés ejecutar una comprobación en línea para los mapas necesarios.</string>
@@ -4038,7 +4036,7 @@
     <string name="benefits_for_contributors_secondary_descr">Accedé a OpenStreetMap para comprobar si tenés derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
-    <string name="enough_contributions_descr">¡Felicitaciones, hiciste suficientes contribuciones a OpenStreetMap y ahora podés disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
+    <string name="enough_contributions_descr">¡Felicitaciones, hiciste suficientes contribuciones a OpenStreetMap y ahora disfrutás de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tardar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
