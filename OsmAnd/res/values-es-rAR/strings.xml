@@ -4211,7 +4211,7 @@
     <string name="turn_arrows_descr">Elegí si se indican las flechas de giro en la línea de ruta.</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
-    <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», donde se podrá cambiar el nombre y el aspecto.</string>
+    <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», donde podrás cambiar el nombre y el aspecto.</string>
     <string name="waypoint_appearance">Aspecto del punto de referencia</string>
     <string name="track_file">Archivo de la traza</string>
     <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
@@ -4239,7 +4239,7 @@
     <string name="gpx_no_routes_descr">Usá la herramienta «%1$s» para agregar la ruta al archivo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="please_provide_group_name_message">Indicá el nombre del grupo.</string>
-    <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
+    <string name="selected_waypoints_descr">Los puntos de referencia marcados se agregarán a la traza «%1$s»</string>
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
     <string name="list_of_groups">Lista de grupos</string>
@@ -4252,14 +4252,14 @@
     <string name="location_source_descr">Si instalaste OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación. \n \nSi obtenés información inexacta de la ubicación o usás un dispositivo sin «%2$s», intentá cambiar a «%3$s»</string>
     <string name="location_source">Proveedor de ubicación</string>
     <string name="shared_string_shape">Forma</string>
-    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
+    <string name="default_appearance_desc">La forma, el color y el ícono predefinido se aplicarán a los puntos favoritos dentro del grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
     <string name="edit_category">Editar categoría</string>
     <string name="stop_download">Parar descarga</string>
     <string name="estimated_download_size">Tamaño estimado de descarga</string>
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
-    <string name="stop_download_desc">La descarga está incompleta. Si la interrumpís ahora, sólo podrás ver una parte de las teselas.</string>
+    <string name="stop_download_desc">La descarga está incompleta. Si se interrumpe ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="number_of_tiles">Número de teselas</string>
     <string name="move_map_to_select_area">Mové el mapa para elegir el área necesaria.</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
