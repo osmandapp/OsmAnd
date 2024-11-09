@@ -3165,7 +3165,7 @@
     <string name="login_and_pass">Nombre de usuario y contraseña</string>
     <string name="plugin_global_prefs_info">Los ajustes de este complemento son globales y se aplican a todos los perfiles</string>
     <string name="osm_editing">Edición de OSM</string>
-    <string name="osm_edits_view_descr">Vea todas las ediciones aún no subidas o errores de OSM en «%1$s». Los cambios ya cargados no se mostrarán más.</string>
+    <string name="osm_edits_view_descr">Ve todas las ediciones aún no subidas o errores de OSM en «%1$s». Los cambios ya cargados no se mostrarán más.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">El icono se muestra mientras se navega o se mueve.</string>
     <string name="select_map_icon_descr">El icono se muestra en reposo.</string>
@@ -3613,8 +3613,7 @@
     <string name="use_two_phase_routing">Usar el algoritmo de navegación A* bifásica</string>
     <string name="shared_string_graph">Gráfico</string>
     <string name="message_need_calculate_route_before_show_graph">Los datos de «%1$s» sólo están disponibles con los caminos, calcula una ruta usando «Ruta entre puntos» para ver los gráficos.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Ten paciencia.
-\nEl gráfico estará disponible al recalcular la ruta.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Tené paciencia. \nEl gráfico estará disponible al recalcular la ruta.</string>
     <string name="shared_string_local_maps">Mapas locales</string>
     <string name="icon_group_amenity">Comodidad</string>
     <string name="icon_group_special">Especial</string>
@@ -3627,7 +3626,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd usa MGRS, similar al formato UTM de la OTAN.</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Añadir al menos dos puntos</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Agregá al menos dos puntos</string>
     <string name="manage_subscription">Gestionar suscripción</string>
     <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
@@ -3635,23 +3634,21 @@
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="login_open_street_map">Iniciar sesión en OpenStreetMap</string>
     <string name="login_open_street_map_org">Ingresar en OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Debes iniciar sesión para subir los cambios nuevos o modificados.
-\n
-\nUsa las credenciales de OAuth u OpenStreetMap.</string>
+    <string name="open_street_map_login_mode">Debes iniciar sesión para subir los cambios nuevos o modificados. \n \nUsá las credenciales de OAuth u OpenStreetMap.</string>
     <string name="use_login_password">Usar nombre de usuario y contraseña</string>
     <string name="login_account">Cuenta</string>
     <string name="user_login">Ingresar</string>
     <string name="sign_in_with_open_street_map">Ingresar con OpenStreetMap</string>
     <string name="markers_history">Historial de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar archivo GPX a OpenStreetMap</string>
-    <string name="enter_text_separated">Ingresa etiquetas separadas por comas.</string>
-    <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
+    <string name="enter_text_separated">Ingresá etiquetas separadas por comas.</string>
+    <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con vos) estarán disponibles a través de la API pública de GPS.</string>
     <string name="gpx_upload_private_visibility_descr">«Privado» significa que la traza no aparecerá en ninguna lista pública, pero el conjunto de puntos seguirá estando disponible en orden cronológico a través de la API pública de GPS y sin marcas de tiempo.</string>
     <string name="gpx_upload_public_visibility_descr">«Público» significa que la traza se mostrará públicamente en tus trazas GPS y en las lista públicas de trazas GPS y con marcas de tiempo en crudo. Los datos servidos a través de la API no harán referencia a tu página de trazas. Las marcas de tiempo de los puntos no estarán disponibles a través de la API pública de GPS, y los puntos de la ruta no se ordenarán de manera cronológica.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Identificable» significa que la traza se mostrará públicamente en tus trazas GPS y en las listas públicas de trazas GPS, es decir que otros usuarios podrán descargar la traza en bruto y asociarla a tu nombre de usuario. Los datos públicos servidos a través de la API con marcas de tiempo GPS harán referencia a la página original de la traza.</string>
     <string name="osm_edit_close_note">Cerrar nota de OSM</string>
     <string name="osm_edit_comment_note">Comentar nota de OSM</string>
-    <string name="osm_login_descr">Inicia sesión con las credenciales de OAuth u OpenStreetMap.</string>
+    <string name="osm_login_descr">Iniciá sesión con las credenciales de OAuth u OpenStreetMap.</string>
     <string name="shared_string_add_photo">Añadir foto</string>
     <string name="register_on_openplacereviews">Registrarse en
 \nOpenPlaceReviews.org</string>
@@ -3663,9 +3660,9 @@
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="shared_string_resources">Recursos</string>
     <string name="approximate_file_size">Tamaño aproximado del archivo</string>
-    <string name="select_data_to_export">Marca los datos a exportar al archivo.</string>
+    <string name="select_data_to_export">Marcá los datos a exportar al archivo.</string>
     <string name="file_size_needed_for_import">Necesario para importar</string>
-    <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, libera algo de espacio o desmarca algunos elementos a exportar.</string>
+    <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, liberá algo de espacio o desmarcá algunos elementos a exportar.</string>
     <string name="export_not_enough_space">Sin espacio suficiente</string>
     <string name="add_to_mapillary">Añadir a Mapillary</string>
     <string name="add_to_opr">Añadir a OpenPlaceReviews</string>
@@ -3673,11 +3670,11 @@
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
 \nWeb / Wikimedia (fotos de PDI según datos de OpenStreetMap).</string>
-    <string name="select_groups_for_import">Marca los grupos a ex/importar.</string>
-    <string name="select_items_for_import">Marca los elementos a ex/importar.</string>
-    <string name="use_dev_url_descr">Cambia a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
+    <string name="select_groups_for_import">Marcá los grupos a ex/importar.</string>
+    <string name="select_items_for_import">Marcá los elementos a ex/importar.</string>
+    <string name="use_dev_url_descr">Cambiá a la versión para desarrolladores «dev.openstreetmap.org» en lugar de openstreetmap.org para probar la carga de PDI, notas de OSM y archivos GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
-    <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
+    <string name="cannot_upload_image">No se puede subir la imagen, intentálo más tarde</string>
     <string name="select_picture">Elegir imagen</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
@@ -3689,7 +3686,7 @@
     <string name="profile_type_osmand_string">Perfil de OsmAnd</string>
     <string name="profile_type_user_string">Perfil de usuario</string>
     <string name="reverse_all_points">Invertir todos los puntos</string>
-    <string name="profile_by_default_description">Elige el perfil que será usado al iniciar la aplicación.</string>
+    <string name="profile_by_default_description">Elegí el perfil que será usado al iniciar la aplicación.</string>
     <string name="shared_string_last_used">Último usado</string>
     <string name="routing_attr_prefer_hiking_routes_description">Prefiere rutas de senderismo</string>
     <string name="routing_attr_prefer_hiking_routes_name">Preferir rutas de senderismo</string>
@@ -3730,7 +3727,7 @@
     <string name="announcement_time_prepare_long">Preparación larga</string>
     <string name="announcement_time_prepare">Prepararse</string>
     <string name="announcement_time_off_route">Fuera de la ruta</string>
-    <string name="announcement_time_arrive">Has llegado al destino</string>
+    <string name="announcement_time_arrive">Llegaste al destino</string>
     <string name="shared_string_turn">Giros</string>
     <string name="announcement_time_intervals">Intervalos de tiempo y distancia</string>
     <string name="announcement_time_descr">El tiempo de anuncio de las diferentes indicaciones por voz depende del tipo de mensaje, la velocidad de navegación actual y la velocidad de navegación predefinida.</string>
@@ -3786,11 +3783,11 @@
     <string name="map_widget_distance_by_tap">Distancia al pulsar</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="select_segments">Elegir segmentos</string>
-    <string name="select_segments_description">«%1$s» contiene más de un segmento, define el tramo para la navegación.</string>
+    <string name="select_segments_description">«%1$s» contiene más de un segmento, definí el tramo para la navegación.</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
-    <string name="routing_attr_driving_style_description">Elige el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
+    <string name="routing_attr_driving_style_description">Elegí el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
     <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
@@ -3811,13 +3808,13 @@
     <string name="delete_updates">Borrar actualizaciones</string>
     <string name="live_update_delete_updates_msg">¿Borrar todas las actualizaciones en vivo de «%s»\?</string>
     <string name="purchases">Compras</string>
-    <string name="select_category_descr">Marca una categoría o añade una nueva</string>
+    <string name="select_category_descr">Marcá una categoría o agregá una nueva</string>
     <string name="track_recording_will_be_continued">La grabación continuará.</string>
     <string name="copy_poi_name">Copiar nombre del PDI</string>
     <string name="shared_string_interval">Intervalo</string>
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
-    <string name="select_another_colorization">Elige otro tipo de color.</string>
+    <string name="select_another_colorization">Elegí otro tipo de color.</string>
     <string name="trip_recording_logging_interval_info">El intervalo de registro define el período de tiempo en el que OsmAnd pedirá los datos de la ubicación actual.</string>
     <string name="trip_recording_save_and_continue">Guardar y continuar</string>
     <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
