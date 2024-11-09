@@ -3906,7 +3906,7 @@
     <string name="backup_conflicts">Conflictos</string>
     <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
     <string name="backup_view_conflicts">Ver conflictos</string>
-    <string name="backup_no_internet_descr">Comprueba la conexión a Internet y vuelve a descargar.</string>
+    <string name="backup_no_internet_descr">Comprobá la conexión a Internet y volvé a descargar.</string>
     <string name="backup_pause_all">Pausar todo</string>
     <string name="upload_local_version">Cargar versión local</string>
     <string name="download_server_version">Descargar versión del servidor</string>
@@ -3924,11 +3924,11 @@
 \n
 \nLa versión actual de los datos se guardará en el servidor, pero no podrás volver a los cambios anteriores.</string>
     <string name="backup_data">Datos de la copia de seguridad</string>
-    <string name="select_backup_data_descr">Marca los datos y carpetas para la copia de seguridad.</string>
-    <string name="backup_restore_data_descr">Restaura los datos en el dispositivo, usando copias de seguridad en línea.</string>
+    <string name="select_backup_data_descr">Marcá los datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaurá los datos en el dispositivo, usando copias de seguridad en línea.</string>
     <string name="backup_restore_data">Restaurar datos</string>
     <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
-    <string name="choose_what_to_restore">Elige qué restaurar.</string>
+    <string name="choose_what_to_restore">Elegí qué restaurar.</string>
     <string name="restore_selected_data">Restaurar datos marcados</string>
     <string name="receiving_data_from_server">Recibiendo datos del servidor…</string>
     <string name="restore_complete">Restaurado</string>
@@ -3943,12 +3943,12 @@
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
     <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, sombreados en tonos grises e indicaciones de pendientes en colores, mostrando picos y tierras bajas.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explora Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explorá Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Incluye todos los artículos sin conexión de Wikipedia relacionados al lugar, ayudándote a conocer mejor los puntos visitados en el viaje, con simples pulsaciones en el mapa. No olvides descargar los mapas de Wikipedia de las respectivas regiones.</string>
-    <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
-    <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
-    <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
+    <string name="purchases_feature_desc_combined_wiki">Explorá los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Obtené acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Obtené acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Obtené acceso a actualizaciones de mapas con mayor frecuencia, elegí entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
     <string name="purchases_feature_desc_osmand_cloud">Obtené OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No perdés los datos al reinstalar. Hacé copias de seguridad y restaurá toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
