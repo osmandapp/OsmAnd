@@ -3872,12 +3872,12 @@
     <string name="last_backup">Última copia de seguridad</string>
     <string name="duration_ago">hace %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Haz una copia de seguridad y restaura toda la información fácilmente.</string>
+    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Crea una copia de seguridad y restaura toda la información fácilmente.</string>
     <string name="local_backup">Copia de seguridad local</string>
     <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
     <string name="backup_into_file">Crear copia de seguridad local</string>
     <string name="restore_from_file">Restaurar desde archivo</string>
-    <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
+    <string name="osmand_cloud_help_descr">¿Necesitas ayuda? Contacta con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
     <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Te enviaremos un código de verificación único.</string>
