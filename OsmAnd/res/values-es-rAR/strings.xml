@@ -3830,10 +3830,10 @@
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
-    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
+    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsá sobre «%1$s», o ponete en contacto con nuestro equipo de asistencia.</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="troubleshooting">Solución de problemas</string>
-    <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
+    <string name="troubleshooting_description">Seguí este enlace si tenés algún problema con las compras.</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Suscripción anual</string>
     <string name="monthly_subscription">Suscripción mensual</string>
@@ -3851,12 +3851,12 @@
     <string name="output">Salida</string>
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
-    <string name="srtm_download_list_help_message">OsmAnd provee datos sobre las curvas de nivel en metros y pies. Vuelve a descargar el archivo para cambiar el formato.</string>
-    <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provee datos sobre las curvas de nivel en metros y pies. Volvé a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_single_help_message">Marcá la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
     <string name="shared_string_max_height">Altura máx.</string>
     <string name="shared_string_min_height">Altura mín.</string>
-    <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
+    <string name="language_description">Marcá el idioma preferido y el tipo de indicaciones por voz.</string>
     <string name="tts_description">El sistema de texto a voz (TTS) puede pronunciar todo tipo de avisos: nombres de calles y PDI, indicaciones de giro, etc.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">La voz grabada suena mejor, pero sólo puede pronunciar frases pregrabadas: indicaciones de giro. No puede anunciar los nombres de las calles o de los PDI.</string>
@@ -3875,7 +3875,7 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Creá una copia de seguridad y restaurá toda la información fácilmente.</string>
     <string name="local_backup">Copia de seguridad local</string>
-    <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
+    <string name="local_backup_descr">Creá una copia de seguridad o restaurá los datos de un archivo local.</string>
     <string name="backup_into_file">Crear copia de seguridad local</string>
     <string name="restore_from_file">Restaurar desde archivo</string>
     <string name="osmand_cloud_help_descr">¿Necesitás ayuda? Contactanos en %1$s</string>
