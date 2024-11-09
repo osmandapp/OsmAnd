@@ -4261,7 +4261,7 @@
     <string name="estimated_download_size">Tamaño estimado de descarga</string>
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
-    <string name="stop_download_desc">La descarga está incompleta. Si interrumpes la descarga ahora, sólo podrás ver una parte de las teselas.</string>
+    <string name="stop_download_desc">La descarga está incompleta. Si la interrumpís ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="number_of_tiles">Número de teselas</string>
     <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
@@ -4300,7 +4300,7 @@
     <string name="simulation_real_mode_title">Simulación realista</string>
     <string name="simulation_constant_mode_desc">La simulación se realizará con la velocidad constante elegida.</string>
     <string name="simulation_constant_mode_title">Velocidad constante</string>
-    <string name="simulation_preview_mode_desc">La velocidad de la simulación será máxima en los tramos rectos y disminuirá sólo en las intersecciones.</string>
+    <string name="simulation_preview_mode_desc">La velocidad de la simulación será máxima en los tramos rectos y disminuirá solo en las intersecciones.</string>
     <string name="speed_mode">Modo de velocidad</string>
     <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
     <string name="simulation_preview_mode_title">Modo de previsualización rápida</string>
