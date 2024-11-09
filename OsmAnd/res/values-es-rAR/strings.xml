@@ -4186,12 +4186,9 @@
     <string name="shared_string_uphill">Ascenso</string>
     <string name="shared_string_downhill">Descenso</string>
     <string name="elevation_profile">Perfil de elevación</string>
-    <string name="gps_filter_hdop_desc">Define el valor máximo permitido para la dilución de precisión horizontal (HDOP).
-\nLos puntos con un valor más alto serán ocultados.</string>
+    <string name="gps_filter_hdop_desc">Definí el valor máximo permitido para la dilución de precisión horizontal (HDOP). \nLos puntos con un valor más alto se ocultarán.</string>
     <string name="gps_filter_speed_altitude_desc">Sólo los puntos de la traza que coincidan con el intervalo definido aparecerán en el gráfico y el mapa, el resto quedará oculto.</string>
-    <string name="gps_filter_smoothing_desc">Define el umbral de distancia entre puntos.
-\nSerán ocultados los puntos de la traza que no estén al menos a esta distancia del último punto visible.
-\nNótese que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
+    <string name="gps_filter_smoothing_desc">Definí el umbral de distancia entre puntos. \nSe ocultarán los puntos de la traza que no estén al menos a esta distancia del último punto visible. \nNotar que umbrales altos pueden simplificar demasiado la geometría de la traza.</string>
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="shared_string_statistics">Estadísticas</string>
     <string name="storage_migration_wrong_folder_warning">No se encontraron datos de OsmAnd en la carpeta elegida. Intentá de nuevo.</string>
@@ -4207,7 +4204,7 @@
     <string name="shared_string_size">Tamaño</string>
     <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no esté disponible.</string>
     <string name="turn_arrows">Flechas de giro</string>
-    <string name="turn_arrows_descr">Elegí si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="turn_arrows_descr">Elegí si se muestran las flechas de giro en la línea de ruta.</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», donde podrás cambiar el nombre y el aspecto.</string>
