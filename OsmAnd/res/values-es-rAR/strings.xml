@@ -3893,7 +3893,7 @@
     <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
     <string name="shared_string_offline">Desconectado</string>
     <string name="shared_string_online">En línea</string>
-    <string name="osmand_online_routing_promo">Usá plantillas predefinidas o agregá navegadores en línea admitidos como OSRM, Graphhopper, openrouteservice o GPX.</string>
+    <string name="osmand_online_routing_promo">Usá plantillas predefinidas o agregá navegadores en línea admitidos como OSRM, GraphHopper, OpenRouteService o GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Provisto por %1$s</string>
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas. \nRevisá la conexión a Internet.</string>
