@@ -3830,7 +3830,7 @@
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
     <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
-    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsá sobre «%1$s», o ponete en contacto con nuestro equipo de asistencia.</string>
+    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsá sobre «%1$s», o contacta con nuestro equipo de asistencia.</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="troubleshooting">Solución de problemas</string>
     <string name="troubleshooting_description">Seguí este enlace si tenés algún problema con las compras.</string>
