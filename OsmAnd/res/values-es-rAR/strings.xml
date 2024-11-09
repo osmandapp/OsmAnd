@@ -4040,7 +4040,7 @@
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
-    <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
+    <string name="enough_contributions_descr">¡Felicitaciones, hiciste suficientes contribuciones a OpenStreetMap y ahora podés disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
@@ -4049,14 +4049,10 @@
     <string name="purchases_restored">Compras restauradas</string>
     <string name="grey_color_undefined">Los tramos sin datos son grises.</string>
     <string name="cancel_anytime_in_amazon_app">Puede cancelarse en cualquier momento desde la aplicación de Amazon</string>
-    <string name="amz_manage_subscription_descr">Gestiona la suscripción usando la aplicación de Amazon o su página web.</string>
+    <string name="amz_manage_subscription_descr">Gestioná la suscripción usando la aplicación de Amazon o su página web.</string>
     <string name="empty_category_name">Nombre de categoría vacío</string>
-    <string name="no_activity_for_intent">Instala una aplicación que pueda realizar esta acción.</string>
-    <string name="osm_live_payment_subscription_management_amz">El pago se carga en la cuenta de Amazon al confirmar la compra.
-\n
-\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
-\n
-\nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
+    <string name="no_activity_for_intent">Instalá una aplicación que pueda realizar esta acción.</string>
+    <string name="osm_live_payment_subscription_management_amz">El pago se carga en la cuenta de Amazon al confirmar la compra. \n \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. \n \nGestioná o cancelá las suscripciones cuando quieras, en los ajustes de Amazon.</string>
     <string name="no_items_of_type_message">No existen elementos de este tipo</string>
     <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía por su composición superficial. Suele aplicarse cuando la red de caminos está en gran parte sin pavimentar.</string>
     <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino en invierno.</string>
@@ -4066,8 +4062,8 @@
     <string name="add_group_to_markers">Añadir grupo a la lista de marcadores</string>
     <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
     <string name="start_point">Iniciar</string>
-    <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
-    <string name="service_is_not_available_please_try_later">Servicio no disponible. Intenta más tarde.</string>
+    <string name="mapillary_menu_filter_description_new">Filtrá imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
+    <string name="service_is_not_available_please_try_later">Servicio no disponible. Intentá más tarde.</string>
     <string name="shared_string_files">Archivos</string>
     <string name="travel_route_types">Tipos de rutas</string>
     <string name="sample_wikivoyage">Ejemplo de Wikiviajes</string>
@@ -4092,32 +4088,30 @@
     <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido al cambio en el acceso al almacenamiento de Android.</string>
     <string name="shared_string_details">Detalles</string>
     <string name="rendering_attr_natureReserves_name">Reserva natural</string>
-    <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por tanto sólo OsmAnd puede acceder a los datos.</string>
+    <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por lo tanto sólo OsmAnd puede acceder a los datos.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
     <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto\n\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM\n\n• Filtro del GPS para la traza GPX\n\n• Widget de elevación (Pro)\n\n• Favoritos: se ha añadido la posibilidad de ver los iconos usados recientemente\n\n• Planificación de rutas: se usa el perfil elegido tras la ejecución\n\n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida\n\n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación\n\n• La orientación del mapa no se restablece luego de reiniciar la aplicación\n\n• Se ha mejorado la visualización del marcador SRTM de altura\n\n• Se han corregido los subtítulos de los mapas en árabe\n\n• Se ha corregido diferentes problemas de navegación</string>
     <string name="location_access_request_result">Aprobado: %1$s Rechazado: %2$s</string>
     <string name="android_auto_map_placeholder_title">El mapa se muestra en la pantalla del vehículo.</string>
-    <string name="android_auto_purchase_request_title">Comprar «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
-    <string name="android_auto_map_placeholder_descr">Desconecta el dispositivo de Android Auto para ver el mapa en la aplicación.</string>
+    <string name="android_auto_purchase_request_title">Comprá «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
+    <string name="android_auto_map_placeholder_descr">Desconectá el dispositivo de Android Auto para ver el mapa en la aplicación.</string>
     <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar.</string>
     <string name="location_access_request_action">Dar acceso</string>
     <string name="continue_on_phone">Continuar en el dispositivo móvil</string>
-    <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido.
-\n
-\nPor favor, mueve la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
-    <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes.</string>
+    <string name="shared_storage_warning_description">Debido a las nuevas reglas de Android, a partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido. \n \nPor favor, mové la carpeta de datos del almacenamiento compartido al almacenamiento disponible, de lo contrario la aplicación perderá el acceso a los datos como mapas sin conexión, trazas GPX y etc.</string>
+    <string name="search_history_is_disabled_descr">Podés activar el historial de búsqueda en los ajustes.</string>
     <string name="is_disabled">%1$s desactivado</string>
     <string name="clear_all_history_warning">¿Borrar todos los registros del historial de la aplicación, incluyendo el historial de búsqueda, navegación y marcadores\?</string>
     <string name="shortcut_navigate_to_home">Ir a «Casa»</string>
     <string name="clear_all_history">Vaciar todo el historial</string>
-    <string name="history_actions_descr">Puedes exportar el historial a un archivo.</string>
+    <string name="history_actions_descr">Podés exportar el historial a un archivo.</string>
     <string name="navigation_history">Historial de navegación</string>
     <string name="shortcut_start_recording">Iniciar grabación</string>
-    <string name="markers_history_is_disabled_descr">Activa el historial para recordar una lista de los marcadores de mapa visitados.</string>
-    <string name="history_is_disabled_descr">Activa el historial para acceder más rápido a los últimos resultados.</string>
+    <string name="markers_history_is_disabled_descr">Activá el historial para recordar una lista de los marcadores de mapa visitados.</string>
+    <string name="history_is_disabled_descr">Activá el historial para acceder más rápido a los últimos resultados.</string>
     <string name="map_markers_history">Historial de los marcadores del mapa</string>
-    <string name="history_preferences_descr">Puedes desactivar el registro del historial individualmente para cada tipo de historial.</string>
+    <string name="history_preferences_descr">Podés desactivar el registro del historial individualmente para cada tipo de historial.</string>
     <string name="shortcut_navigate_to">Navegar a…</string>
     <string name="shortcut_navigate_to_work">Ir a «Trabajo»</string>
     <string name="transparent_status_bar_descr">Mostrar mapa debajo de la barra de estado</string>
@@ -4127,7 +4121,7 @@
     <string name="use_external_timestamps">Usar marcas de tiempo externas</string>
     <string name="approx_safe_mode">Aproximación segura de GPX</string>
     <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
-    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar una lista de los complementos disponibles en «Menú → Complementos».</string>
+    <string name="no_plugins_enabled">No tenés ningún complemento activado. Podés encontrar una lista de los complementos disponibles en «Menú → Complementos».</string>
     <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="display_route_tracks">Mostrar trazas</string>
@@ -4145,9 +4139,7 @@
     <string name="shared_storage_third_step">Concedé acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
     <string name="shared_storage_first_step">Pulsa «%1$s».
 \nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
-    <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s».
-\n
-\nCopia todos los datos a la nueva carpeta.</string>
+    <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s». \n \nCopiá todos los datos a la nueva carpeta.</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
     <string name="shared_string_copy_to">Copiar a</string>
@@ -4164,7 +4156,7 @@
 \n
 \nLa aplicación cargará los datos usando la nueva carpeta.</string>
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
-    <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones ilimitadas de mapas por hora.</string>
+    <string name="not_enough_contributions_descr">Necesitás un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones ilimitadas de mapas por hora.</string>
     <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
     <string name="migration_files_present">Hay %1$d archivo(s) (%2$s) en la ubicación «%3$s» y no pueden sobrescribirse.</string>
     <string name="fold_unfold">Contraer/expandir</string>
