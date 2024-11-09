@@ -4042,7 +4042,7 @@
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, hiciste suficientes contribuciones a OpenStreetMap y ahora podés disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
-    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
+    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tardar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
@@ -4080,8 +4080,8 @@
     <string name="routing_attr_prefer_tactile_paving_description">Preferir el pavimento táctil</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimento táctil</string>
     <string name="search_title">Buscar: %1$s</string>
-    <string name="upload_gpx_description_hint">Al dejarlo vacío, serán usados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
-    <string name="exit_pan_mode_descr">Pulsa «Elegir» para salir del modo panorámico</string>
+    <string name="upload_gpx_description_hint">Al dejarlo vacío, se usarán los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
+    <string name="exit_pan_mode_descr">Pulsá «Elegir» para salir del modo panorámico</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
     <string name="purchases_feature_desc_android_auto">Transmite los mapas y navegación sin conexión de OsmAnd en la pantalla del vehículo y se integra con los controles del mismo.</string>
     <string name="icon_group_nautical">Náutico</string>
@@ -4091,7 +4091,7 @@
     <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por lo tanto sólo OsmAnd puede acceder a los datos.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
-    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto\n\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM\n\n• Filtro del GPS para la traza GPX\n\n• Widget de elevación (Pro)\n\n• Favoritos: se ha añadido la posibilidad de ver los iconos usados recientemente\n\n• Planificación de rutas: se usa el perfil elegido tras la ejecución\n\n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida\n\n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación\n\n• La orientación del mapa no se restablece luego de reiniciar la aplicación\n\n• Se ha mejorado la visualización del marcador SRTM de altura\n\n• Se han corregido los subtítulos de los mapas en árabe\n\n• Se ha corregido diferentes problemas de navegación</string>
+    <string name="release_4_1">• Se agregó compatibilidad inicial con Android Auto\n\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM\n\n• Filtro del GPS para la traza GPX\n\n• Widget de elevación (Pro)\n\n• Favoritos: se agregó la posibilidad de ver los íconos usados recientemente\n\n• Planificación de rutas: se usa el perfil elegido tras la ejecución\n\n• Se corrigió la capa de Mapillary, el complemento se desactiva de forma predefinida\n\n• Se agregó una pantalla para gestionar todo el historial de la aplicación\n\n• La orientación del mapa no se restablece luego de reiniciar la aplicación\n\n• Se mejoró la visualización del marcador SRTM de altura\n\n• Se corrigieron los subtítulos de los mapas en árabe\n\n• Se corrigieron diferentes problemas de navegación</string>
     <string name="location_access_request_result">Aprobado: %1$s Rechazado: %2$s</string>
     <string name="android_auto_map_placeholder_title">El mapa se muestra en la pantalla del vehículo.</string>
     <string name="android_auto_purchase_request_title">Comprá «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
@@ -4136,11 +4136,10 @@
     <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_storage_last_step">Podés definir una nueva carpeta de datos después.</string>
-    <string name="shared_storage_third_step">Concedé acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
-    <string name="shared_storage_first_step">Pulsa «%1$s».
-\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_third_step">Concedé acceso a la carpeta. Sin esto, OsmAnd no puede copiar los archivos.</string>
+    <string name="shared_storage_first_step">Pulsá «%1$s». \nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_migration_descr">Debido a los cambios en el acceso al almacenamiento en Android, OsmAnd ya no puede usar «%1$s». \n \nCopiá todos los datos a la nueva carpeta.</string>
-    <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
+    <string name="shared_storage_second_step">Pulsá en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
     <string name="shared_string_copy_to">Copiar a</string>
     <string name="skip_confirmation">Sí, omitir</string>
