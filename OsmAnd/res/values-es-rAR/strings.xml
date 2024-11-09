@@ -4208,7 +4208,7 @@
     <string name="shared_string_size">Tamaño</string>
     <string name="use_routing_fallback_description">Usar la navegación sin conexión cuando la navegación en línea no esté disponible.</string>
     <string name="turn_arrows">Flechas de giro</string>
-    <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="turn_arrows_descr">Elegí si se indican las flechas de giro en la línea de ruta.</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="always_ask_waypoint_appearance_description">Al pulsar esta acción se abrirá la pantalla «Añadir punto de referencia», donde se podrá cambiar el nombre y el aspecto.</string>
@@ -4234,11 +4234,11 @@
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todo</string>
     <string name="rendering_value_omit_name">Omitir</string>
-    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
+    <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegás y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_title">Sin rutas</string>
-    <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para añadir la ruta al archivo.</string>
+    <string name="gpx_no_routes_descr">Usá la herramienta «%1$s» para agregar la ruta al archivo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
-    <string name="please_provide_group_name_message">Indica el nombre del grupo.</string>
+    <string name="please_provide_group_name_message">Indicá el nombre del grupo.</string>
     <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
     <string name="shared_string_reading_file">Leyendo archivo…</string>
     <string name="all_groups">Todos los grupos</string>
@@ -4247,11 +4247,9 @@
     <string name="exit_import_descr">¿Salir sin guardar los cambios\?</string>
     <string name="exit_import">¿Salir\?</string>
     <string name="import_tracks">Importar trazas</string>
-    <string name="import_tracks_descr">En «%1$s» existen %2$s trazas separadas. Elige las trazas a importar.</string>
+    <string name="import_tracks_descr">En «%1$s» existen %2$s trazas separadas. Elegí las trazas a importar.</string>
     <string name="select_suggested_points">Marcar los puntos sugeridos</string>
-    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
-\n
-\nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
+    <string name="location_source_descr">Si instalaste OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación. \n \nSi obtenés información inexacta de la ubicación o usás un dispositivo sin «%2$s», intentá cambiar a «%3$s»</string>
     <string name="location_source">Proveedor de ubicación</string>
     <string name="shared_string_shape">Forma</string>
     <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
@@ -4263,7 +4261,7 @@
     <string name="shared_string_complete">completo</string>
     <string name="stop_download_desc">La descarga está incompleta. Si la interrumpís ahora, sólo podrás ver una parte de las teselas.</string>
     <string name="number_of_tiles">Número de teselas</string>
-    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="move_map_to_select_area">Mové el mapa para elegir el área necesaria.</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
     <string name="rendering_attr_showFitnessTrails_description">Muestra los circuitos aeróbicos</string>
     <string name="rendering_attr_showFitnessTrails_name">Circuitos aeróbicos</string>
