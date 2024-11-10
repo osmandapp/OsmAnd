@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.MainThread
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import net.osmand.Location
@@ -32,7 +33,6 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
@@ -55,6 +55,7 @@ import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDConnector
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDispatcher
+import net.osmand.shared.obd.OBDDispatcher.OBDReadStatusListener
 import net.osmand.shared.obd.OBDSimulationSource
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
@@ -66,34 +67,31 @@ import okio.source
 import org.json.JSONObject
 import java.util.UUID
 
-class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
-	OBDDispatcher.OBDReadStatusListener {
-	private val settings: OsmandSettings = app.settings
+class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
 	private var mapActivity: MapActivity? = null
-	private val handler = Handler(Looper.myLooper()!!)
-	private val RECONNECT_DELAY = 5000L
-	private var currentConnectingState = OBDConnectionState.DISCONNECTED
 
-	val USED_OBD_DEVICES = registerStringPreference(
-		"used_obd_devices",
-		"").makeGlobal().cache();
-	val LAST_CONNECTED_OBD_DEVICE = registerStringPreference(
-		"last_connected_obd_device",
-		"").makeGlobal().cache()
+	private val handler = Handler(Looper.getMainLooper())
+	private val RECONNECT_DELAY = 5000L
+	private var connectionState = OBDConnectionState.DISCONNECTED
+
+	val USED_OBD_DEVICES =
+		registerStringPreference("used_obd_devices", "").makeGlobal().cache();
+	val LAST_CONNECTED_OBD_DEVICE =
+		registerStringPreference("last_connected_obd_device", "").makeGlobal().cache()
 
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
 	private var connectedDeviceInfo: BTDeviceInfo? = null
-	var socket: BluetoothSocket? = null
 	private var scanDevicesListener: ScanOBDDevicesListener? = null
 	private var connectionStateListener: ConnectionStateListener? = null
 	private var pairingDevice: BTDeviceInfo? = null
+
+	private var socket: BluetoothSocket? = null
 	private var obdDispatcher: OBDDispatcher? = null
 
 	enum class OBDConnectionState {
 		CONNECTED, CONNECTING, DISCONNECTED
 	}
-
 
 	interface ScanOBDDevicesListener {
 		fun onDeviceFound(foundDevice: BTDeviceInfo)
@@ -103,6 +101,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	interface ConnectionStateListener {
 		fun onStateChanged(state: OBDConnectionState, deviceInfo: BTDeviceInfo)
+	}
+
+	private fun BluetoothSocket?.safeClose() {
+		try {
+			this?.close()
+		} catch (e: IOException) {
+			LOG.error(e.message, e)
+		}
 	}
 
 	override fun createWidgets(
@@ -273,18 +279,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
-	fun registerBooleanPref(prefId: String, defValue: Boolean): CommonPreference<Boolean> {
-		return registerBooleanPreference(prefId, defValue).makeGlobal().makeShared()
-	}
-
-	fun registerIntPref(prefId: String, defValue: Int): CommonPreference<Int> {
-		return registerIntPreference(prefId, defValue).makeGlobal().makeShared()
-	}
-
-	fun registerStringPref(prefId: String, defValue: String?): CommonPreference<String> {
-		return registerStringPreference(prefId, defValue).makeGlobal().makeShared()
-	}
-
 	public override fun registerOptionsMenuItems(
 		mapActivity: MapActivity,
 		helper: ContextMenuAdapter) {
@@ -305,8 +299,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		var deviceList = listOf<BTDeviceInfo>()
 		if (BLEUtils.isBLEEnabled(activity) && AndroidUtils.hasBLEPermission(activity)) {
 			val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
-			bluetoothAdapter?.let { adapter ->
-				val pairedDevices = adapter.bondedDevices.toList()
+			bluetoothAdapter?.apply {
+				val pairedDevices = bondedDevices.toList()
 				deviceList = pairedDevices.filter { device ->
 					device.uuids?.any { parcelUuid -> parcelUuid.uuid == uuid } == true
 				}.map {
@@ -324,11 +318,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	fun disconnect() {
 		obdDispatcher?.stopReading()
-		socket?.apply {
-			if (isConnected) {
-				close()
-			}
-		}
+		socket?.safeClose()
 		socket = null
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
@@ -337,11 +327,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	@SuppressLint("MissingPermission")
-	fun isPaired(activity: Activity, deviceInfo: BTDeviceInfo): Boolean {
-		return getRemoteDevice(
-			activity,
-			deviceInfo.address)?.bondState == BluetoothDevice.BOND_BONDED
-	}
+	fun isPaired(activity: Activity, deviceInfo: BTDeviceInfo): Boolean =
+		getRemoteDevice(activity, deviceInfo.address)?.bondState == BluetoothDevice.BOND_BONDED
 
 	@SuppressLint("MissingPermission")
 	private fun getRemoteDevice(activity: Activity, address: String): BluetoothDevice? {
@@ -356,48 +343,34 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	fun pairDevice(activity: Activity, device: BTDeviceInfo) {
 		if (BLEUtils.isBLEEnabled(activity) && AndroidUtils.hasBLEPermission(activity)) {
 			val btDevice = getRemoteDevice(activity, device.address)
-			btDevice?.let {
-				val isBondingStarted = it.createBond()
+			btDevice?.apply {
+				val isBondingStarted = createBond()
 				if (!isBondingStarted) {
 					Toast.makeText(activity, R.string.bt_start_pair_failed, Toast.LENGTH_SHORT)
 						.show()
 				} else {
-					pairingDevice = BTDeviceInfo(it.getAliasName(activity), device.address)
+					pairingDevice = BTDeviceInfo(getAliasName(activity), device.address)
 				}
 			}
 		}
 	}
 
 	@SuppressLint("MissingPermission")
+	@MainThread
 	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo) {
-		if (currentConnectingState != OBDConnectionState.DISCONNECTED) {
+		if (connectionState != OBDConnectionState.DISCONNECTED) {
 			disconnect()
 		}
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
 				if (settings.SIMULATE_OBD_DATA.get() && deviceInfo.address.isEmpty()) {
-					createOBDDispatcher()
-					obdDispatcher?.connect(object : OBDConnector {
-						val deviceToConnect = deviceInfo
-						override fun connect(): Pair<Source, Sink> {
-							val simulator = OBDSimulationSource()
-							return Pair(simulator.reader, simulator.writer)
-						}
-
-						override fun onConnectionSuccess() {
-							onDeviceConnected(deviceToConnect)
-						}
-
-						override fun onConnectionFailed() {
-							onDisconnected(deviceToConnect)
-						}
-					})
+					connectToSimulator(deviceInfo)
 				} else {
 					val bluetoothAdapter = BLEUtils.getBluetoothAdapter(activity)
-					bluetoothAdapter?.let { adapter ->
-						LOG.debug("adapter.isDiscovering ${adapter.isDiscovering}")
-						val pairedDevices = adapter.bondedDevices.toList()
+					bluetoothAdapter?.apply {
+						LOG.debug("adapter.isDiscovering $isDiscovering")
+						val pairedDevices = bondedDevices.toList()
 						val obdDevice: BluetoothDevice? =
 							pairedDevices.find { it.address == deviceInfo.address }
 						if (obdDevice != null) {
@@ -414,28 +387,49 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		}
 	}
 
-	private fun createOBDDispatcher() {
-		obdDispatcher?.let {
-			it.setReadStatusListener(null)
-			it.stopReading()
+	private fun createOBDDispatcher(): OBDDispatcher {
+		obdDispatcher?.apply {
+			setReadStatusListener(null)
+			stopReading()
 		}
-		obdDispatcher = OBDDispatcher()
-		obdDispatcher?.setReadStatusListener(this)
-		obdDispatcher?.useInfoLogging =
-			PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
+		val debug = PluginsHelper.getPlugin(OsmandDevelopmentPlugin::class.java)?.isEnabled == true
+		val obdDispatcher = OBDDispatcher(debug)
+		obdDispatcher.setReadStatusListener(this)
+		this.obdDispatcher = obdDispatcher
+		return obdDispatcher
+	}
+
+	private fun connectToSimulator(deviceInfo: BTDeviceInfo) {
+		createOBDDispatcher().connect(object : OBDConnector {
+			val deviceToConnect = deviceInfo
+			override fun connect(): Pair<Source, Sink> {
+				val simulator = OBDSimulationSource()
+				return Pair(simulator.reader, simulator.writer)
+			}
+
+			override fun onConnectionSuccess() {
+				handler.post { onDeviceConnected(deviceToConnect) }
+			}
+
+			override fun onConnectionFailed() {
+				handler.post { onDisconnected(deviceToConnect) }
+			}
+		})
 	}
 
 	@SuppressLint("MissingPermission")
 	private fun connectToDevice(activity: Activity, connectedDevice: BluetoothDevice) {
-		createOBDDispatcher()
-		obdDispatcher?.connect(object : OBDConnector {
+		createOBDDispatcher().connect(object : OBDConnector {
 			val deviceToConnect = BTDeviceInfo(
 				connectedDevice.getAliasName(activity),
 				connectedDevice.address)
 
+			init {
+				socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
+			}
+
 			override fun connect(): Pair<Source, Sink>? {
 				try {
-					socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
 					socket?.apply {
 						connect()
 						if (isConnected) {
@@ -449,35 +443,31 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			}
 
 			override fun onConnectionSuccess() {
-				onDeviceConnected(deviceToConnect)
+				handler.post { onDeviceConnected(deviceToConnect) }
 			}
 
 			override fun onConnectionFailed() {
-				onDisconnected(deviceToConnect)
+				handler.post { onDisconnected(deviceToConnect) }
 			}
 		})
 	}
 
 	private fun onDisconnected(deviceInfo: BTDeviceInfo?) {
-		currentConnectingState = OBDConnectionState.DISCONNECTED
+		connectionState = OBDConnectionState.DISCONNECTED
 		deviceInfo?.let {
-			connectionStateListener?.onStateChanged(
-				OBDConnectionState.DISCONNECTED,
-				it)
+			connectionStateListener?.onStateChanged(OBDConnectionState.DISCONNECTED, it)
 		}
 	}
 
 	private fun onConnecting(deviceInfo: BTDeviceInfo) {
-		currentConnectingState = OBDConnectionState.CONNECTING
-		connectionStateListener?.onStateChanged(
-			OBDConnectionState.CONNECTING,
-			deviceInfo)
+		connectionState = OBDConnectionState.CONNECTING
+		connectionStateListener?.onStateChanged(OBDConnectionState.CONNECTING, deviceInfo)
 	}
 
 	@SuppressLint("MissingPermission")
 	private fun onDeviceConnected(btDeviceInfo: BTDeviceInfo) {
 		LOG.debug("Device connected ${btDeviceInfo.name}")
-		currentConnectingState = OBDConnectionState.CONNECTED
+		connectionState = OBDConnectionState.CONNECTED
 		connectedDeviceInfo = btDeviceInfo
 		connectedDeviceInfo?.let {
 			saveDeviceToUsedOBDDevicesList(it)
@@ -514,7 +504,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 
 	override fun onIOError() {
 		socket?.apply {
-			close()
+			safeClose()
 			disconnect()
 			handler.removeCallbacksAndMessages(null)
 			handler.postDelayed({ reconnectObd() }, RECONNECT_DELAY)
@@ -626,16 +616,14 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 						intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) as? BluetoothDevice
 					}
 
-				device?.let { receivedDevice ->
+				device?.apply {
 					when (intent.action) {
 						BluetoothDevice.ACTION_FOUND -> {
-							val deviceName = receivedDevice.getAliasNameOrNull()
+							val deviceName = getAliasNameOrNull()
 							deviceName?.let { name ->
-								if (receivedDevice.bondState != BluetoothDevice.BOND_BONDED) {
+								if (bondState != BluetoothDevice.BOND_BONDED) {
 									scanDevicesListener?.onDeviceFound(
-										BTDeviceInfo(
-											name,
-											receivedDevice.address))
+										BTDeviceInfo(name, address))
 								}
 							}
 						}
@@ -647,11 +635,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 									BluetoothDevice.BOND_NONE)
 							when (bondState) {
 								BluetoothDevice.BOND_BONDED -> {
-									if (receivedDevice.address == pairingDevice?.address) {
+									if (address == pairingDevice?.address) {
 										scanDevicesListener?.onDevicePaired(
-											BTDeviceInfo(
-												receivedDevice.getAliasName(context),
-												receivedDevice.address))
+											BTDeviceInfo(getAliasName(context), address))
 										pairingDevice = null
 									}
 								}
@@ -731,8 +717,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		} else if (data == null) {
 			return "-"
 		}
-		if (computerWidget.type.requiredCommand == OBDCommand.OBD_FUEL_LEVEL_COMMAND && data == Float.NaN) {
-			return if (computerWidget.type == OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM) ">50" else "<50"
+		if (computerWidget.type.requiredCommand == OBDCommand.OBD_FUEL_LEVEL_COMMAND) {
+			var isNan = (data is Float) && data.isNaN()
+			isNan = isNan || (data is Double) && data.isNaN()
+			if (isNan) {
+				return if (computerWidget.type == OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM) ">50" else "<50"
+			}
 		}
 		val convertedData = when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getConvertedSpeed(data as Number)
@@ -934,7 +924,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		super.onCarNavigationSessionCreated()
 		val activity = mapActivity
 		val lastConnectedDevice = getLastConnectedDevice()
-		if (currentConnectingState == OBDConnectionState.DISCONNECTED && lastConnectedDevice != null && activity != null) {
+		if (connectionState == OBDConnectionState.DISCONNECTED && lastConnectedDevice != null && activity != null) {
 			connectToObd(activity, lastConnectedDevice)
 		}
 	}

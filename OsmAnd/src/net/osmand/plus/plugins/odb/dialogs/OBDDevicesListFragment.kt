@@ -17,6 +17,7 @@ import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
@@ -250,19 +251,17 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onStateChanged(
-		state: VehicleMetricsPlugin.OBDConnectionState,
+		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
-		app.runInUIThread {
-			activity?.let {
-				val textId = when (state) {
-					VehicleMetricsPlugin.OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
-					VehicleMetricsPlugin.OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
-					VehicleMetricsPlugin.OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
-				}
-				Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
-					.show()
+		activity?.let {
+			val textId = when (state) {
+				OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
+				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
+				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
 			}
-			updatePairedSensorsList()
+			Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
+				.show()
 		}
+		updatePairedSensorsList()
 	}
 }
