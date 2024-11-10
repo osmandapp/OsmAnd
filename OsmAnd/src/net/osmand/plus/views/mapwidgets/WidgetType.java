@@ -25,7 +25,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
-import net.osmand.plus.plugins.odb.AverageModeSettingFragment;
+import net.osmand.plus.plugins.odb.OBDWidgetSettingFragment;
 import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget;
 import net.osmand.plus.plugins.odb.dialogs.FuelConsumptionSettingFragment;
 import net.osmand.plus.plugins.odb.OBDFuelConsumptionWidget;
@@ -41,7 +41,6 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public enum WidgetType {
@@ -409,8 +408,8 @@ public enum WidgetType {
 			RemainingFuelSettingFragment settingFragment = new RemainingFuelSettingFragment();
 			settingFragment.setWidgetType(this);
 			return settingFragment;
-		} else if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && obdTextWidget.supportsAverageMode()) {
-			AverageModeSettingFragment settingFragment = new AverageModeSettingFragment();
+		} else if (widgetInfo.widget instanceof OBDTextWidget obdTextWidget && (obdTextWidget.supportsAverageMode() || obdTextWidget.isTemperatureWidget())) {
+			OBDWidgetSettingFragment settingFragment = new OBDWidgetSettingFragment();
 			settingFragment.setWidgetType(this);
 			return settingFragment;
 		}

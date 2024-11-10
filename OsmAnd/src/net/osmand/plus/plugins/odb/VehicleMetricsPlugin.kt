@@ -704,6 +704,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	fun getWidgetValue(computerWidget: OBDDataComputer.OBDComputerWidget): String {
+		return getWidgetValue(computerWidget, null)
+	}
+
+	fun getWidgetValue(computerWidget: OBDDataComputer.OBDComputerWidget, obdWidgetOptions: OBDWidgetOptions?): String {
 		val data = computerWidget.computeValue()
 		if (data == "N/A") {
 			return "N/A"
@@ -716,7 +720,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number, obdWidgetOptions)
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
 
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(data as Number)
@@ -739,6 +743,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 	}
 
 	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget): String? {
+		return getWidgetUnit(computerWidget, null)
+	}
+
+	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget, obdWidgetOptions: OBDWidgetOptions?): String? {
 		return when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
@@ -756,7 +764,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> getTemperatureUnit().symbol
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> (obdWidgetOptions?.getTemperatureUnit()?.symbol ?: getTemperatureUnit().symbol)
 
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE -> app.getString(R.string.unit_volt)
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
@@ -771,9 +779,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app),
 		return OsmAndFormatter.convertLiterToVolumeUnit(settings.UNIT_OF_VOLUME.get(), data.toFloat())
 	}
 
-	private fun getConvertedTemperature(data: Number): Float {
+	private fun getConvertedTemperature(data: Number, obdWidgetOptions: OBDWidgetOptions?): Float {
+		val temperatureUnit = obdWidgetOptions?.getTemperatureUnit()?: getTemperatureUnit()
 		val temperature = data.toFloat()
-		return if (getTemperatureUnit() == TemperatureUnit.CELSIUS) {
+		return if (temperatureUnit == TemperatureUnit.CELSIUS) {
 			temperature
 		} else {
 			temperature * 1.8f + 32
