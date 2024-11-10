@@ -8,8 +8,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter
 import net.osmand.data.Amenity
 import net.osmand.data.City
 import net.osmand.osm.PoiCategory
-import net.osmand.plus.AppInitializeListener
-import net.osmand.plus.AppInitializer
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.shared.api.CityNameCallback
@@ -88,15 +86,10 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 		PluginsHelper.getTrackPointsAnalyser()
 
 	override fun searchNearestCityName(latLon: KLatLon, callback: CityNameCallback) {
-		if (app.isApplicationInitializing) {
-			app.appInitializer.addListener(object : AppInitializeListener {
-				override fun onFinish(init: AppInitializer) {
-					searchNearestCity(latLon, callback)
-				}
-			})
-		} else {
-			searchNearestCity(latLon, callback)
+		while (app.isApplicationInitializing) {
+			Thread.sleep(50)
 		}
+		searchNearestCity(latLon, callback)
 	}
 
 	private fun searchNearestCity(latLon: KLatLon, callback: CityNameCallback) {
