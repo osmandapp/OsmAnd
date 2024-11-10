@@ -74,8 +74,19 @@ object GpxUtilities {
 	const val TRAVEL_GPX_CONVERT_MULT_2 = 5
 
 	private const val GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+	// Example: "2008-05-15T09:17:18Z"
+
 	private const val GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
+	// Example: "2008-05-15T09:17:18"
+
 	private const val GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX"
+	// Example: "2008-05-15T09:17:18+02:00"
+
+	private const val GPX_TIME_PATTERN_Z = "yyyy-MM-dd'T'HH:mm'Z'"
+	// Example: "2008-05-15T09:17Z"
+
+	private const val GPX_TIME_PATTERN_GMT = "EEE MMM dd HH:mm:ss zzz yyyy"
+	// Example: "Thu May 15 09:17:18 GMT 2008"
 
 	private val SUPPORTED_EXTENSION_TAGS = mapOf(
 		"heartrate" to PointAttributes.SENSOR_TAG_HEART_RATE,
@@ -888,19 +899,35 @@ object GpxUtilities {
 		return parseTime(text, getTimeFormatterTZ())
 	}
 
+	private fun preprocessGpxTime(input: String): String {
+		var processedText = input
+		processedText = processedText.replace("anZ", "Z")
+		// fix 2005-05-07T05:45:04+04:00Z
+		return if (processedText.contains("+") || processedText.contains("-")) {
+			processedText.removeSuffix("Z")
+		} else {
+			processedText
+		}
+	}
+
 	private fun parseTime(text: String, format: DateTimeFormat<DateTimeComponents>): Long {
-		var time: Long = 0
-		try {
-			time = flexibleGpxTimeParser(text, format)
-		} catch (e: Exception) {
+		val processedText = preprocessGpxTime(text)
+		val formats = listOf(
+			format,
+			getTimeNoTimeZoneFormatter(),
+			getTimeFormatterZ(),
+			getTimeFormatterGmt()
+		)
+		for (fmt in formats) {
 			try {
-				time = getTimeNoTimeZoneFormatter().parse(text).toInstantUsingOffset()
-					.toEpochMilliseconds()
+				return flexibleGpxTimeParser(processedText, fmt)
 			} catch (e: Exception) {
-				log.error("Failed to parse date $text", e)
+				// Continue to the next format
 			}
 		}
-		return time
+		val errorMessage = "Failed to parse date: $text"
+		log.error(errorMessage)
+		return 0
 	}
 
 	@Throws(Exception::class)
@@ -911,6 +938,7 @@ object GpxUtilities {
 		var text = timeStr
 		var ms = 0.0
 		val isIndex = text.indexOf('.')
+		val hadZ = text.endsWith("Z")
 		if (isIndex > 0) {
 			var esIndex = isIndex + 1
 			while (esIndex < text.length && text[esIndex].isDigit()) {
@@ -918,6 +946,9 @@ object GpxUtilities {
 			}
 			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
 			text = text.substring(0, isIndex) + text.substring(esIndex)
+		}
+		if (hadZ && !text.endsWith("Z")) {
+			text += "Z"
 		}
 		return parser.parse(text).toInstantUsingOffset()
 			.toEpochMilliseconds() + (ms * 1000).toLong()
@@ -959,6 +990,20 @@ object GpxUtilities {
 	private fun getTimeFormatterTZ(): DateTimeFormat<DateTimeComponents> {
 		return DateTimeComponents.Format {
 			byUnicodePattern(GPX_TIME_PATTERN_TZ)
+		}
+	}
+
+	@OptIn(FormatStringsInDatetimeFormats::class)
+	private fun getTimeFormatterZ(): DateTimeFormat<DateTimeComponents> {
+		return DateTimeComponents.Format {
+			byUnicodePattern(GPX_TIME_PATTERN_Z)
+		}
+	}
+
+	@OptIn(FormatStringsInDatetimeFormats::class)
+	private fun getTimeFormatterGmt(): DateTimeFormat<DateTimeComponents> {
+		return DateTimeComponents.Format {
+			byUnicodePattern(GPX_TIME_PATTERN_GMT)
 		}
 	}
 
