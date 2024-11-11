@@ -3489,10 +3489,10 @@
     <string name="routing_attr_length_name">Longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
-    <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Controlá el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
-    <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
+    <string name="please_provide_point_name_error">Agregá un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
     <string name="plugin_wikipedia_description">Obtené información sobre los puntos de interés de Wikipedia, una guía de bolsillo sin conexión que incluye artículos sobre objetos y destinos.</string>
@@ -3506,7 +3506,7 @@
     <string name="route_between_points">Ruta entre puntos</string>
     <string name="plan_a_route">Planificar ruta</string>
     <string name="add_to_a_track">Añadir a una traza</string>
-    <string name="add_hidden_group_info">El punto añadido se encuentra en «%s». Desoculta el grupo elegido para mostrarlo en el mapa.</string>
+    <string name="add_hidden_group_info">El punto agregado se encuentra en «%s». Desocultá el grupo elegido para mostrarlo en el mapa.</string>
     <string name="track_show_start_finish_icons">Mostrar los iconos de inicio y fin</string>
     <string name="select_track_width">Elegí la anchura</string>
     <string name="gpx_split_interval_descr">Elegí el intervalo de la traza en el que se mostrarán las marcas con la distancia o el tiempo.</string>
