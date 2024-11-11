@@ -3583,7 +3583,7 @@
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>
     <string name="shared_string_redo">Rehacer</string>
-    <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite usar diferentes tipos de navegación por segmento y la inclusión de trazas\n\n• Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio y fin\n\n• Mejoras en la visibilidad de los nodos de bicicleta\n\n• Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica\n\n• Algoritmos de búsqueda mejorados\n\n• Mejoras en las opciones de seguimiento de la navegación\n\n• Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles</string>
+    <string name="release_3_8">• Se actualizó la función «Planificar ruta»: te permite usar diferentes tipos de navegación por segmento y la inclusión de trazas\n\n• Nuevo menú con el aspecto de las trazas: elegí el color, el grosor, mostrar las flechas de dirección y los íconos de inicio y fin\n\n• Mejoras en la visibilidad de los nodos de bicicleta\n\n• Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica\n\n• Algoritmos de búsqueda mejorados\n\n• Mejoras en las opciones de seguimiento de la navegación\n\n• Se solucionaron los problemas de la importación y exportación en los ajustes de los perfiles</string>
     <string name="sort_last_modified">Último modificado</string>
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
@@ -3994,7 +3994,7 @@
     <string name="backup_data_removed">Se quitaron todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
     <string name="backup_do_not_have_any">Aún no tenés copias de seguridad en línea</string>
-    <string name="backup_dont_have_any_descr">Define una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
+    <string name="backup_dont_have_any_descr">Creá una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Es genial verte de nuevo!</string>
     <string name="backup_welcome_back_descr">Restaurá los datos del dispositivo usando OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar copia de seguridad</string>
