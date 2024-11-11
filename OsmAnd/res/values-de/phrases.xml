@@ -1880,9 +1880,9 @@
     <string name="poi_shelter_type_public_transport">Öffentlicher Verkehr</string>
     <string name="poi_shelter_type_picnic_shelter">Picknick-Unterstand</string>
     <string name="poi_shelter_type_weather_shelter">Wetter-Unterstand</string>
-    <string name="poi_shelter_type_lean_to">Anbau</string>
+    <string name="poi_shelter_type_lean_to">offene Hütte mit Pultdach</string>
     <string name="poi_shelter_type_building">Gebäude</string>
-    <string name="poi_shelter_type_basic_hut">Hütte</string>
+    <string name="poi_shelter_type_basic_hut">einfache Hütte</string>
     <string name="poi_shelter_type_wildlife_hide">Tierschutz</string>
     <string name="poi_shelter_type_rock_shelter">Felsüberhang</string>
     <string name="poi_shelter_type_sun_shelter">Sonnenschutz</string>

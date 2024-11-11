@@ -4932,4 +4932,21 @@
     <string name="poi_us_maps_recreation_area_facility_rapid">Flúð</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Fjársjóðaleit á strönd</string>
     <string name="poi_us_maps_recreation_area_activity_interpretive_areas">Túlkunarsvæði</string>
+    <string name="poi_activities_inline_skates">Línuskautar</string>
+    <string name="poi_activities_mountain_bike">Fjallahjólreiðar</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Göng bönnuð fyrir gangandi</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Göng bönnuð fyrir hjólandi</string>
+    <string name="poi_route_article">Ferðagreinar</string>
+    <string name="poi_route_article_point">Punktar ferðar</string>
+    <string name="poi_route_track">Aðrar leiðir</string>
+    <string name="poi_route_track_point">Punktar í öðrum leiðum</string>
+    <string name="poi_activities_bicycle">Hjólandi</string>
+    <string name="poi_activities_trekking">Gönguferðir</string>
+    <string name="poi_activities_running">Hlaupandi</string>
+    <string name="poi_activities_pedestrian">Gangandi</string>
+    <string name="poi_activities_kayak">Vatnaíþróttir</string>
+    <string name="poi_activities_horse">Hestaferðir</string>
+    <string name="poi_activities_skiing">Vetraríþróttir</string>
+    <string name="poi_activities_snowmobile">Vélsleðar</string>
+    <string name="poi_activities_fitness">Fitness-leiðir</string>
 </resources>
