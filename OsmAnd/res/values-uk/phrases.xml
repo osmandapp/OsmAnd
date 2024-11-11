@@ -98,7 +98,7 @@
     <string name="poi_fire_water_pond">Пожежний ставок</string>
     <string name="poi_grit_bin">Ящик з піском</string>
     <string name="poi_ambulance_station">Станція швидкої медичної допомоги</string>
-    <string name="poi_disaster_response">Санепідемстанція</string>
+    <string name="poi_disaster_response">Станція швидкого реагування</string>
     <string name="poi_emergency_access_point">Місце отримання невідкладної допомоги</string>
     <string name="poi_ford">Брід</string>
     <string name="poi_mountain_pass">Перевал</string>
@@ -4874,4 +4874,25 @@
     <string name="poi_cash_in">Поповнення готівки</string>
     <string name="poi_diet_pescetarian_no">Пескетаріанська дієта: ні</string>
     <string name="poi_osmand_access_main_tag">Доступ</string>
+    <string name="poi_payment_parkster_yes">Паркер</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Тунель заборонений для пішоходів</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Тунель заборонений для велосипедистів</string>
+    <string name="poi_route_article">Статті про подорожі</string>
+    <string name="poi_route_article_point">Пункти</string>
+    <string name="poi_route_track">Інші маршрути</string>
+    <string name="poi_route_track_point">Інші пункти маршруту</string>
+    <string name="poi_activities_bicycle">Велосипед</string>
+    <string name="poi_activities_trekking">Піший туризм</string>
+    <string name="poi_activities_running">Біг</string>
+    <string name="poi_activities_pedestrian">Ходьба</string>
+    <string name="poi_activities_kayak">Водні види спорту</string>
+    <string name="poi_activities_horse">Верхова їзда</string>
+    <string name="poi_activities_skiing">Зимові види спорту</string>
+    <string name="poi_activities_snowmobile">Снігохід</string>
+    <string name="poi_activities_fitness">Фітнес-стежки</string>
+    <string name="poi_activities_inline_skates">Роликові ковзани</string>
+    <string name="poi_activities_mountain_bike">Катання на гірських велосипедах</string>
+    <string name="poi_payment_parco_no">Паркомісце не прийнято</string>
+    <string name="poi_payment_parco_yes">Паркомісце</string>
+    <string name="poi_payment_parkster_no">Паркер не прийнято</string>
 </resources>
