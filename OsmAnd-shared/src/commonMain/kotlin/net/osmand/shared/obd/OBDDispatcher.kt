@@ -21,7 +21,6 @@ class OBDDispatcher(val debug: Boolean = false) {
 
 	interface OBDReadStatusListener {
 		fun onIOError()
-		fun onInitConnectionFailed()
 	}
 
 	fun connect(connector: OBDConnector) {
@@ -41,6 +40,9 @@ class OBDDispatcher(val debug: Boolean = false) {
 			} catch (e: Exception) {
 				log("Unexpected error in connect: ${e.message}")
 				readStatusListener?.onIOError()
+			} finally {
+				connector.disconnect()
+				cleanupResources()
 			}
 		}
 	}
@@ -67,10 +69,6 @@ class OBDDispatcher(val debug: Boolean = false) {
 		override fun readByte(): Byte? {
 			val readBuffer = Buffer()
 			return if (inputStream?.read(readBuffer, 1) == 1L) readBuffer.readByte() else null
-		}
-
-		override fun onInitFailed() {
-			readStatusListener?.onInitConnectionFailed()
 		}
 	}
 
@@ -118,14 +116,15 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private fun cleanupResources() {
 		inputStream = null
 		outputStream = null
-		obd2Connection?.finish()
+		OBDDataComputer.clearCache()
+		obd2Connection = null
+		readStatusListener = null
 	}
 
 	fun stopReading() {
 		log("stop reading")
-		cleanupResources()
 		scope.cancel()
-		OBDDataComputer.clearCache()
+		obd2Connection?.finish()
 		log("after stop reading")
 	}
 

@@ -98,7 +98,7 @@ class OBDSimulationSource {
 	}
 
 	private fun toNormalizedHex(data: Int): String {
-		val hexString = data.toString(16).uppercase()
+		val hexString = data.toUInt().toString(16).uppercase()
 		return if (hexString.length % 2 != 0) {
 			"0$hexString"
 		} else {

@@ -86,7 +86,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private var connectionStateListener: ConnectionStateListener? = null
 	private var pairingDevice: BTDeviceInfo? = null
 
-	private var socket: BluetoothSocket? = null
 	private var obdDispatcher: OBDDispatcher? = null
 
 	enum class OBDConnectionState {
@@ -316,10 +315,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		return deviceList
 	}
 
+	@MainThread
 	fun disconnect() {
 		obdDispatcher?.stopReading()
-		socket?.safeClose()
-		socket = null
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
 		setLastConnectedDevice(null)
@@ -396,6 +394,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val obdDispatcher = OBDDispatcher(debug)
 		obdDispatcher.setReadStatusListener(this)
 		this.obdDispatcher = obdDispatcher
+		OBDDataComputer.obdDispatcher = obdDispatcher
 		return obdDispatcher
 	}
 
@@ -414,12 +413,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			override fun onConnectionFailed() {
 				handler.post { onDisconnected(deviceToConnect) }
 			}
+
+			override fun disconnect() {
+			}
 		})
 	}
 
 	@SuppressLint("MissingPermission")
 	private fun connectToDevice(activity: Activity, connectedDevice: BluetoothDevice) {
 		createOBDDispatcher().connect(object : OBDConnector {
+			private var socket: BluetoothSocket? = null
 			val deviceToConnect = BTDeviceInfo(
 				connectedDevice.getAliasName(activity),
 				connectedDevice.address)
@@ -440,6 +443,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 					LOG.error("Can't connect to device. $error")
 				}
 				return null
+			}
+
+			override fun disconnect() {
+				socket?.apply {
+					safeClose()
+					socket = null
+				}
 			}
 
 			override fun onConnectionSuccess() {
@@ -503,12 +513,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	override fun onIOError() {
-		socket?.apply {
-			safeClose()
-			disconnect()
-			handler.removeCallbacksAndMessages(null)
-			handler.postDelayed({ reconnectObd() }, RECONNECT_DELAY)
-		}
+		handler.post { disconnect() }
+		handler.removeCallbacksAndMessages(null)
+		handler.postDelayed({ reconnectObd() }, RECONNECT_DELAY)
 	}
 
 	private fun reconnectObd() {
@@ -518,10 +525,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				connectToObd(it, lastConnectedDevice)
 			}
 		}
-	}
-
-	override fun onInitConnectionFailed() {
-		disconnect()
 	}
 
 	override fun updateLocation(location: Location) {
@@ -714,7 +717,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		return getWidgetValue(computerWidget, null)
 	}
 
-	fun getWidgetValue(computerWidget: OBDDataComputer.OBDComputerWidget, obdWidgetOptions: OBDWidgetOptions?): String {
+	fun getWidgetValue(
+		computerWidget: OBDDataComputer.OBDComputerWidget,
+		obdWidgetOptions: OBDWidgetOptions?): String {
 		val data = computerWidget.computeValue()
 		if (data == "N/A") {
 			return "N/A"
@@ -734,10 +739,17 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(data as Number, obdWidgetOptions)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT -> getConvertedTemperature(
+				data as Number,
+				obdWidgetOptions)
+
 			OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITER -> getFormattedVolume(data as Number)
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(data as Number)
-			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(data as Number)
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR -> getFormatVolumePerHour(
+				data as Number)
+
+			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM -> getFormatVolumePerDistance(
+				data as Number)
+
 			OBDDataComputer.OBDTypeWidget.ENGINE_RUNTIME -> getFormattedTime(data as Int)
 			OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR,
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE,
@@ -758,7 +770,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		return getWidgetUnit(computerWidget, null)
 	}
 
-	fun getWidgetUnit(computerWidget: OBDDataComputer.OBDComputerWidget, obdWidgetOptions: OBDWidgetOptions?): String? {
+	fun getWidgetUnit(
+		computerWidget: OBDDataComputer.OBDComputerWidget,
+		obdWidgetOptions: OBDWidgetOptions?): String? {
 		return when (computerWidget.type) {
 			OBDDataComputer.OBDTypeWidget.SPEED -> getSpeedUnit()
 			OBDDataComputer.OBDTypeWidget.RPM -> app.getString(R.string.rpm_unit)
@@ -778,7 +792,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT,
 			OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE,
 			OBDDataComputer.OBDTypeWidget.ENGINE_OIL_TEMPERATURE,
-			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> (obdWidgetOptions?.getTemperatureUnit()?.symbol ?: getTemperatureUnit().symbol)
+			OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT -> (obdWidgetOptions?.getTemperatureUnit()?.symbol
+				?: getTemperatureUnit().symbol)
 
 			OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE -> app.getString(R.string.unit_volt)
 			OBDDataComputer.OBDTypeWidget.FUEL_TYPE,
@@ -796,7 +811,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	private fun getConvertedTemperature(data: Number, obdWidgetOptions: OBDWidgetOptions?): Float {
-		val temperatureUnit = obdWidgetOptions?.getTemperatureUnit()?: getTemperatureUnit()
+		val temperatureUnit = obdWidgetOptions?.getTemperatureUnit() ?: getTemperatureUnit()
 		val temperature = data.toFloat()
 		return if (temperatureUnit == TemperatureUnit.CELSIUS) {
 			temperature

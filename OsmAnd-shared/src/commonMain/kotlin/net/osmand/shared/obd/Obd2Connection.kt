@@ -3,7 +3,9 @@ package net.osmand.shared.obd
 import net.osmand.shared.util.LoggerFactory
 import okio.IOException
 
-class Obd2Connection(private val connection: UnderlyingTransport, private val obdDispatcher: OBDDispatcher) {
+class Obd2Connection(
+	private val connection: UnderlyingTransport,
+	private val obdDispatcher: OBDDispatcher) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
@@ -13,12 +15,8 @@ class Obd2Connection(private val connection: UnderlyingTransport, private val ob
 	private var finished = false
 
 	init {
-		try {
-			runInitCommands()
-			initialized = true
-		} catch (error: IOException) {
-			connection.onInitFailed()
-		}
+		runInitCommands()
+		initialized = true
 	}
 
 	fun isFinished() = finished
@@ -199,5 +197,4 @@ class Obd2Connection(private val connection: UnderlyingTransport, private val ob
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
 	fun readByte(): Byte?
-	fun onInitFailed()
 }
