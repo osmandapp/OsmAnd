@@ -2862,7 +2862,7 @@
     <string name="shared_string_octagon">八边形</string>
     <string name="shared_string_min">最小</string>
     <string name="developer_plugin">开发者插件</string>
-    <string name="replace_point_descr">以此替换另一点。</string>
+    <string name="replace_point_descr">以该点替换另一个点。</string>
     <string name="app_mode_ski_snowmobile">雪地摩托</string>
     <string name="shared_string_languages">语言</string>
     <string name="shared_string_language">语言</string>
@@ -3103,7 +3103,7 @@
     <string name="shared_string_bearing">方向</string>
     <string name="app_mode_wheelchair_forward">轮椅向前</string>
     <string name="add_to_a_track">添加到轨迹</string>
-    <string name="track_show_start_finish_icons">显示开始和完成图标</string>
+    <string name="track_show_start_finish_icons">显示开始和结束图标</string>
     <string name="select_track_width">选择宽度</string>
     <string name="screen_timeout">屏幕超时</string>
     <string name="app_mode_enduro_motorcycle">耐力赛摩托车</string>
@@ -5730,4 +5730,6 @@
     <string name="fixed_height">固定高度</string>
     <string name="explore_3d_track_description">在交互式 3D 中探索轨迹！在地图上直接显示高度、速度等信息。</string>
     <string name="missing_maps_header">地图缺失或过时</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">使用 OBD-II 协议追踪重要的车辆数据。监控车速、发动机转速、油耗等关键指标。</string>
+    <string name="release_4_8">- 新的地形着色选项 \"高度\n\n - 地形、轨迹和路线的自定义调色板\n\n - 位置图标的 3D 变体\n\n - 快速操作现在可分配给外部键盘\n\n - 天气：用户界面更新，增加了风的动画效果\n\n - 3D 轨迹改进：新的可视化和着色选项\n\n - 扩大了地图上旅游路线的选择范围\n\n - 为地图模式添加了应用程序主题选项\n\n - 修复了轨迹统计、排序和搜索功能\n\n - OSM 编辑：删除登录 / 密码授权的方法\n\n - 从 Android 14 开始切换到系统共享表</string>
 </resources>
