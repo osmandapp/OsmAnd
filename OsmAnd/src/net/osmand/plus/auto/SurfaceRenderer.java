@@ -3,6 +3,7 @@ package net.osmand.plus.auto;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
@@ -441,6 +442,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
+			canvas.drawColor(Color.LTGRAY);
 			boolean newDarkMode = carContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
