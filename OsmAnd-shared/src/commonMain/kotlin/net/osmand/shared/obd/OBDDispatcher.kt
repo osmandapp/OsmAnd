@@ -55,7 +55,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 				commandQueue.forEach { command ->
 					handleCommand(command, connection)
 				}
-				OBDDataComputer.acceptValue(sensorDataCache)
+				if (isConnected(connection)) OBDDataComputer.acceptValue(sensorDataCache)
 			}
 		}
 	}
@@ -76,7 +76,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 		inputStream != null && outputStream != null && !connection.isFinished()
 
 	private fun handleCommand(command: OBDCommand, connection: Obd2Connection) {
-		if (command.isStale && sensorDataCache[command] != null) {
+		if (!isConnected(connection) || (command.isStale && sensorDataCache[command] != null)) {
 			return
 		}
 
@@ -123,7 +123,6 @@ class OBDDispatcher(val debug: Boolean = false) {
 
 	fun stopReading() {
 		log("stop reading")
-		scope.cancel()
 		obd2Connection?.finish()
 		log("after stop reading")
 	}
