@@ -1204,13 +1204,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		}
 
+		List<TrkSegment> oldSegments = new ArrayList<>();
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
 		if (renderedSegments != null) {
 			Iterator<TrkSegment> it = renderedSegments.iterator();
 			while (it.hasNext()) {
 				TrkSegment renderedSegment = it.next();
 				if (!segments.contains(renderedSegment)) {
-					resetSymbolProviders(renderedSegment);
+					if (renderedSegment.getRenderer() instanceof RenderableSegment renderableSegment) {
+						oldSegments.add(renderedSegment);
+					} else {
+						resetSymbolProviders(renderedSegment);
+					}
 					it.remove();
 				}
 			}
@@ -1228,6 +1233,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderer.setBorderPaint(borderPaint);
 				ts.setRenderer(renderer);
 				GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
+				geometryWay.updateTrack3DStyle(track3DStyle);
+				geometryWay.updateColoringType(coloringType);
+				if (!oldSegments.isEmpty() && oldSegments.get(0).getRenderer() instanceof RenderableSegment renderableSegment) {
+					geometryWay.vectorLinesCollection = renderableSegment.getGeometryWay().vectorLinesCollection;
+					geometryWay.vectorLineArrowsProvider = renderableSegment.getGeometryWay().vectorLineArrowsProvider;
+					oldSegments.remove(0);
+				}
 				geometryWay.baseOrder = baseOrder--;
 				renderer.setGeometryWay(geometryWay);
 				newTsRenderer = true;
@@ -1256,6 +1268,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 				}
 			}
+		}
+		for (TrkSegment oldSegment : oldSegments) {
+			resetSymbolProviders(oldSegment);
 		}
 	}
 

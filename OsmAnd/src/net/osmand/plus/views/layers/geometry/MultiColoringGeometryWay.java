@@ -97,7 +97,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		}
 	}
 
-	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
+	public void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
 		this.track3DStyle = track3DStyle;
 		if (!styleMap.isEmpty()) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
@@ -112,6 +112,10 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				}
 			}
 		}
+	}
+
+	public void updateColoringType(@NonNull ColoringType routeColoringType) {
+		coloringType = routeColoringType;
 	}
 
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {

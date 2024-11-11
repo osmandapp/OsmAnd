@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
@@ -468,6 +469,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
+			canvas.drawColor(Color.LTGRAY);
 			boolean newDarkMode = carContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;

@@ -7,6 +7,7 @@
     android:focusable="true">
 
     <LinearLayout
+        android:id="@+id/elevation_profile_widget_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/list_background_color"
@@ -29,6 +30,7 @@
             </FrameLayout>
 
             <View
+                android:id="@+id/statistics_block_divider_1"
                 android:layout_width="1dp"
                 android:layout_height="@dimen/horizontal_divider_height"
                 android:layout_gravity="center"
@@ -45,6 +47,7 @@
             </FrameLayout>
 
             <View
+                android:id="@+id/statistics_block_divider_2"
                 android:layout_width="1dp"
                 android:layout_height="@dimen/horizontal_divider_height"
                 android:layout_gravity="center"
