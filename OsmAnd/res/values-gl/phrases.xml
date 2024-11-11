@@ -37,7 +37,7 @@
     <string name="poi_motorcycle">Tenda de motos</string>
     <string name="poi_musical_instrument">Instrumentos musicais</string>
     <string name="poi_newsagent">Venda de prensa</string>
-    <string name="poi_organic">Produtos ecolóxicos</string>
+    <string name="poi_organic">Produtos orgánicos</string>
     <string name="poi_paint">Tenda de pinturas</string>
     <string name="poi_pet">Tenda de animais</string>
     <string name="poi_second_hand">Tenda de segunda man</string>
@@ -361,8 +361,8 @@
     <string name="poi_anime">Tenda de anime</string>
     <string name="poi_bag">Tenda de bolsos e/ou maletas</string>
     <string name="poi_hardware">Ferraxaría</string>
-    <string name="poi_shop">Tenda</string>
-    <string name="poi_shop_food">Tenda de comestíbeis e supermercado</string>
+    <string name="poi_shop">Tenda;Almacén</string>
+    <string name="poi_shop_food">Tenda de barrio e supermercado</string>
     <string name="poi_emergency">Urxencias</string>
     <string name="poi_transportation">Transporte</string>
     <string name="poi_road_obstacle">Obstáculo na estrada</string>
@@ -400,7 +400,7 @@
     <string name="poi_pasta">Tenda de pasta</string>
     <string name="poi_camera">Cámaras e lentes</string>
     <string name="poi_music">Tenda de música</string>
-    <string name="poi_optician">Óptica</string>
+    <string name="poi_optician">Optometrísta</string>
     <string name="poi_tyres">Tenda de rodas</string>
     <string name="poi_watches">Reloxaría</string>
     <string name="poi_games">Xogos</string>
@@ -765,7 +765,7 @@
     <string name="poi_pastry">Confeitaría</string>
     <string name="poi_vending_machine">Máquina expendedora</string>
     <string name="poi_baby_goods">Produtos de bebés</string>
-    <string name="poi_garden_furniture">Mobiliario do xardín</string>
+    <string name="poi_garden_furniture">Mobiliario de xardín</string>
     <string name="poi_glaziery">Tenda de vidro</string>
     <string name="poi_ticket">Portelo</string>
     <string name="poi_window_blind">Tenda de persianas</string>
@@ -1070,13 +1070,13 @@
     <string name="poi_fishing">Equipamento de pesca</string>
     <string name="poi_frame">Tenda de molduras</string>
     <string name="poi_free_flying">Artigos de voo libre</string>
-    <string name="poi_gas">Tenda de gas líquido</string>
-    <string name="poi_shop_yes">Tenda xeral</string>
-    <string name="poi_hearing_aids">Aparellos auditivos</string>
+    <string name="poi_gas">Tenda de gas licuado;Bombonas de gas</string>
+    <string name="poi_shop_yes">Tenda</string>
+    <string name="poi_hearing_aids">Audiófonos;Próteses auditivas</string>
     <string name="poi_herbalist">Herboristaría</string>
     <string name="poi_hifi">Tenda de equipos de son</string>
     <string name="poi_houseware">Tenda de artigos domésticos</string>
-    <string name="poi_outdoor">Tenda de actividades ó ar libre</string>
+    <string name="poi_outdoor">Tenda de artigos para actividades ao ar libre</string>
     <string name="poi_ship_chandler">Fornecedor de navíos</string>
     <string name="poi_trade">Posto comercial</string>
     <string name="poi_variety_store">Tenda de artigos variados</string>
@@ -1094,7 +1094,7 @@
     <string name="poi_aeroway_gate">Porta de embarque</string>
     <string name="poi_slipway">Rampla náutica</string>
     <string name="poi_deli">Delicia;Delicatessen</string>
-    <string name="poi_medical_supply">Fornecementos médicos</string>
+    <string name="poi_medical_supply">Subministracións médicas</string>
     <string name="poi_ford_stepping_stones">Pedras de pasaxe en río</string>
     <string name="poi_lift_gate">Barreira levadiza</string>
     <string name="poi_traffic_calming_island">Illa de tránsito</string>
@@ -1389,7 +1389,7 @@
     <string name="poi_socket_type3_output_filter">Saída tipo 3</string>
     <string name="poi_glacier_type">Tipo de glaciar</string>
     <string name="poi_checkpoint_type">Tipo de posto de control</string>
-    <string name="poi_convenience">Tenda de comestíbeis</string>
+    <string name="poi_convenience">Tenda de barrio</string>
     <string name="poi_halt">Parada de ferrocarril;Parada de tren; Estación de ferrocarril;Estación ferroviaría;Estación de tren;Estación</string>
     <string name="poi_railway_buffer_stop">Fin da vía</string>
     <string name="poi_food_court">Estabelecemento de comidas</string>
@@ -1916,7 +1916,7 @@
     <string name="poi_seamark_building">Edificio náutico</string>
     <string name="poi_seamark_bridge">Ponte náutica</string>
     <string name="poi_buoy_cardinal">Boia cardinal</string>
-    <string name="poi_daymark">"Marcaxe do día "</string>
+    <string name="poi_daymark">Sinal diurno</string>
     <string name="poi_seamark_dyke">Dique náutico</string>
     <string name="poi_harbour_basin">Conca do porto</string>
     <string name="poi_landmark">Referencia terrestre</string>
@@ -2005,13 +2005,13 @@
     <string name="poi_historic_aircraft">Aeronave histórica</string>
     <string name="poi_counselling_type_victim_yes">Asesoramento (vítimas): si</string>
     <string name="poi_counselling_type_violence_yes">Asesoramento (violencia): si</string>
-    <string name="poi_provided_for_infant_yes">"Atende meniños: si "</string>
+    <string name="poi_provided_for_infant_yes">Atende meniños: si</string>
     <string name="poi_provided_for_toddler_yes">Atende crianzas pequenas: si</string>
     <string name="poi_provided_for_child_yes">Atende crianzas: si</string>
     <string name="poi_provided_for_adult_yes">Atende adultos: si</string>
     <string name="poi_provided_for_woman_yes">Atende mulleres: si</string>
     <string name="poi_provided_for_girl_yes">Atende mozas: si</string>
-    <string name="poi_provided_for_man_yes">"Atende homes: si "</string>
+    <string name="poi_provided_for_man_yes">Atende homes: si</string>
     <string name="poi_provided_for_boy_yes">Atende mozos: si</string>
     <string name="poi_treat_inpatient_yes">Servizos hospitalarios: si</string>
     <string name="poi_counselling_yes">Asesoramento: si</string>
@@ -2363,7 +2363,7 @@
     <string name="poi_parish">Oficina parroquial</string>
     <string name="poi_fuel_91ul">Combustíbel 91UL</string>
     <string name="poi_fuel_100ll">Combustíbel 100LL</string>
-    <string name="poi_fuel_autogas">Autogas</string>
+    <string name="poi_fuel_autogas">Autogás (GLP)</string>
     <string name="poi_fuel_jeta1">Combustíbel Jet A-1</string>
     <string name="poi_fuel_adblue">Aditivo para escapes de diesel</string>
     <string name="poi_fuel_wood">Combustíbel: madeira</string>
@@ -4183,4 +4183,11 @@
     <string name="poi_laundry_service_filter">Servizo de lavandaría</string>
     <string name="poi_dry_cleaning_filter">Limpeza en seco;Tinturaría</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
+    <string name="poi_medical_supply_mobility">Mobilidade</string>
+    <string name="poi_medical_supply_orthopedic">Ortopedia</string>
+    <string name="poi_medical_supply_orthotics">Ortoprotesia</string>
+    <string name="poi_medical_supply_diagnostic">Diagnóstico</string>
+    <string name="poi_medical_supply_diabetic">Diabética</string>
+    <string name="poi_medical_supply_home_care">Atención domiciliaria</string>
+    <string name="poi_medical_supply_respiratory">Respiratorio</string>
 </resources>
