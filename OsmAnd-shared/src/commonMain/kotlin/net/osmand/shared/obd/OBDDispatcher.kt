@@ -7,6 +7,7 @@ import net.osmand.shared.util.LoggerFactory
 import okio.Buffer
 import okio.Sink
 import okio.Source
+import kotlin.coroutines.CoroutineContext
 
 class OBDDispatcher(val debug: Boolean = false) {
 
@@ -16,7 +17,6 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
 	private var readStatusListener: OBDReadStatusListener? = null
 	private var sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
-	private var obd2Connection: Obd2Connection? = null
 	private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
 	interface OBDReadStatusListener {
@@ -33,7 +33,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 					connector.onConnectionSuccess()
 					inputStream = connectionResult.first
 					outputStream = connectionResult.second
-					startReadObdLooper()
+					startReadObdLooper(coroutineContext)
 				}
 			} catch (cancelError: CancellationException) {
 				log("OBD reading canceled")
@@ -47,16 +47,20 @@ class OBDDispatcher(val debug: Boolean = false) {
 		}
 	}
 
-	private fun startReadObdLooper() {
+	private fun startReadObdLooper(context: CoroutineContext) {
 		log("Start reading obd with $inputStream and $outputStream")
-		obd2Connection = Obd2Connection(createTransport(), this)
-		obd2Connection?.let { connection ->
+		val connection = Obd2Connection(createTransport(), this)
+		try {
 			while (isConnected(connection)) {
 				commandQueue.forEach { command ->
+					context.ensureActive()
 					handleCommand(command, connection)
 				}
+				context.ensureActive()
 				OBDDataComputer.acceptValue(sensorDataCache)
 			}
+		} finally {
+			connection.finish()
 		}
 	}
 
@@ -117,14 +121,12 @@ class OBDDispatcher(val debug: Boolean = false) {
 		inputStream = null
 		outputStream = null
 		OBDDataComputer.clearCache()
-		obd2Connection = null
 		readStatusListener = null
 	}
 
 	fun stopReading() {
 		log("stop reading")
 		scope.cancel()
-		obd2Connection?.finish()
 		log("after stop reading")
 	}
 
