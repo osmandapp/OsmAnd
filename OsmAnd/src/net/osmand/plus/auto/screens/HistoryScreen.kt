@@ -22,7 +22,7 @@ import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.shared.SharedUtil
 import net.osmand.data.LatLon
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
+import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.helpers.SearchHistoryHelper
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
@@ -163,7 +163,7 @@ class HistoryScreen(
 						location.latitude, location.longitude)
 				}
 				val address = SpannableString(" ")
-				val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
+				val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
 				address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
 				rowBuilder.addText(address)
 				listBuilder.addItem(rowBuilder.build())

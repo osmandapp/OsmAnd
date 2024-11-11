@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.CurrentStreetName.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
