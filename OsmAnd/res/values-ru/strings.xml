@@ -6075,4 +6075,5 @@
     <string name="obd_engine_oil_temperature_desc">Виджет показывает температуру моторного масла.</string>
     <string name="obd_fuel_pressure_desc">Виджет показывает давление в топливной системе</string>
     <string name="obd_air_intake_temp_desc">Виджет показывает температуру воздуха, поступающего во впускной коллектор двигателя.</string>
+    <string name="preview_next_turn">Предпросмотр следующего поворота</string>
 </resources>
