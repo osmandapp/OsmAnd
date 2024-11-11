@@ -45,7 +45,8 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			val deviceName = getString(DEVICE_NAME_KEY) ?: ""
 			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
 			device = if (connectedDevice != null &&
-				(deviceAddress == connectedDevice.address || Algorithms.isEmpty(deviceAddress))) {
+				(deviceAddress == connectedDevice.address ||
+						(Algorithms.isEmpty(deviceAddress) && Algorithms.isEmpty(deviceName)))) {
 				deviceConnectionState = OBDConnectionState.CONNECTED
 				connectedDevice
 			} else {
