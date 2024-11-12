@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShiel
 import static java.lang.Math.min;
 
 import android.graphics.drawable.Drawable;
+import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	protected boolean horizontalMini;
 	protected int deviatedPath;
 	protected int nextTurnDistance;
+	private final TextPaint textPaint = new TextPaint();
 	private TurnDrawable turnDrawable;
 
 	private ImageView topImageView;
@@ -342,7 +344,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			super.updateColors(textState);
 			updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor,
 					textState.textBold, textState.textShadowRadius);
-			turnDrawable.setTextPaint(topTextView.getPaint());
+
+			textPaint.set(topTextView.getPaint());
+			textPaint.setColor(textState.textColor);
+			turnDrawable.setTextPaint(textPaint);
 			turnDrawable.invalidateSelf();
 		}
 	}
