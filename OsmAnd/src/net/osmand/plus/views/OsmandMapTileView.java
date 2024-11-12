@@ -1720,12 +1720,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 	                         int dx, int dy, boolean useSmallZoom) {
 		float zoomStep = useSmallZoom ? 0.1f : 1f;
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM 1 FROM %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
@@ -1740,22 +1734,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM LAST %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
 		if (zoom.isZoomOutAllowed()) {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		LOG.info(String.format(Locale.ENGLISH,
-				"FIXME ZOOM TO %.6f, %.6f - %.6f, %.6f - z=%.2f - fit %.6f, %.6f - %.6f, %.6f ",
-				tb.getLeftTopLatLon().getLatitude(), tb.getLeftTopLatLon().getLongitude(),
-				tb.getRightBottomLatLon().getLatitude(), tb.getRightBottomLatLon().getLongitude(),
-				tb.getZoom() + tb.getZoomFloatPart(),
-				top, left, bottom, right));
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
