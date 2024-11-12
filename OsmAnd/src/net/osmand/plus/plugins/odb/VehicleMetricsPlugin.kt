@@ -910,20 +910,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
 		super.attachAdditionalInfoToRecordedTrack(location, json)
-		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
-		val widgets = registry.allWidgets
 		val mode = app.settings.applicationMode
-		val visibleWidgetCommands = ArrayList<OBDCommand>()
-		for (widgetInfo in widgets) {
-			if (widgetInfo.widget is OBDTextWidget && widgetInfo.isEnabledForAppMode(mode)) {
-				visibleWidgetCommands.add(widgetInfo.widget.getWidgetOBDCommand())
-			}
-		}
+		val commandNames: List<String>? = settings.TRIP_RECORDING_VEHICLE_METRICS.getStringsListForProfile(mode)
+		val selectedCommands: List<OBDCommand> = commandNames?.mapNotNull { name ->
+			runCatching { OBDCommand.valueOf(name) }.getOrNull()
+		} ?: emptyList()
 		if (settings.RECORD_OBD_DATA.get() && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
 			val rawData = obdDispatcher?.getRawData()
 			rawData?.let { data ->
 				for (command in data.keys) {
-					if (!visibleWidgetCommands.contains(command)) {
+					if (!selectedCommands.contains(command)) {
 						continue
 					}
 					val dataField = rawData[command]

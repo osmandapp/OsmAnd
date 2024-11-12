@@ -1728,6 +1728,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> RECORD_OBD_DATA = new BooleanPreference(this, "record_obd_data", false).makeProfile();
 
+	public final ListStringPreference TRIP_RECORDING_VEHICLE_METRICS = (ListStringPreference) new ListStringPreference(this, "trip_recording_vehicle_metrics", null, ";").makeShared().makeGlobal();
+
 	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();
 
 	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference(this, "live_monitoring_interval", 5000).makeProfile();

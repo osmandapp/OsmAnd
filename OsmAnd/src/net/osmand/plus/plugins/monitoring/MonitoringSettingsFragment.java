@@ -73,6 +73,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 	private static final String RECORD_OBD_DATA_PROMO = "record_obd_data_promo";
+	private static final String RECORD_OBD_DATA = "record_obd_data";
 
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	boolean showSwitchProfile;
@@ -268,8 +269,15 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
-	private void setupObdRecordingPref() {
+	public void setupObdRecordingPref() {
 		SwitchPreferenceEx preference = findPreference(settings.RECORD_OBD_DATA.getId());
+		String summary = app.getString(R.string.shared_string_none);;
+		List<String> enabledCommands = app.getSettings().TRIP_RECORDING_VEHICLE_METRICS.getStringsList();
+		if (!Algorithms.isEmpty(enabledCommands)) {
+			summary = String.valueOf(enabledCommands.size());
+		}
+		preference.setSummary(summary);
+
 		Preference promo = findPreference(RECORD_OBD_DATA_PROMO);
 
 		boolean purchased = InAppPurchaseUtils.isVehicleMetricsAvailable(app);
@@ -530,6 +538,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (fm != null) {
 				ApplicationMode appMode = getSelectedAppMode();
 				SingleSelectPreferenceBottomSheet.showInstance(fm, prefId, this, false, appMode, true, true);
+			}
+		} else if (prefId.equals(RECORD_OBD_DATA)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				VehicleMetricsRecordingFragment.showInstance(mapActivity, this);
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
