@@ -104,8 +104,7 @@ public class CollectLocalIndexesAlgorithm {
 	}
 
 	private void addSeparatelyCalculationItemIfNeeded(@NonNull LocalItem item) {
-		LocalItemType type = item.getType();
-		Long limit = rules.getCalculationSizeLimit(type);
+		Long limit = rules.getCalculationSizeLimit(item);
 		if (limit != null && !separateSizeCalculationItems.contains(item)) {
 			separateSizeCalculationItems.add(item);
 			item.setSizeCalculationLimit(limit);
