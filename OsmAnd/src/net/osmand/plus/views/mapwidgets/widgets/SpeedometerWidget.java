@@ -238,13 +238,14 @@ public class SpeedometerWidget {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		updateInfo(drawSettings, false, app.getDaynightHelper().isNightMode());
+		boolean nightMode = drawSettings != null ? drawSettings.isNightMode() : app.getDaynightHelper().isNightMode();
+		updateInfo(drawSettings, false, nightMode);
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings, boolean drawBitmap, boolean nightMode) {
 		setupWidget();
 		if (view != null) {
-			updateColor(drawSettings != null ? drawSettings.isNightMode() : nightMode);
+			updateColor(nightMode);
 		}
 		boolean show = shouldShowWidget();
 		if (show) {
