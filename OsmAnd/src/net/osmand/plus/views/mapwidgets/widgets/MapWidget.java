@@ -145,14 +145,13 @@ public abstract class MapWidget {
 				AndroidUiHelper.updateVisibility(textShadow, false);
 			}
 		}
-
 		text.setTextColor(textColor);
 		text.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	@NonNull
 	protected String getString(@StringRes int stringId, Object... args) {
-		if(args.length > 0) {
+		if (args.length > 0) {
 			return app.getString(stringId, args);
 		} else {
 			return app.getString(stringId);
