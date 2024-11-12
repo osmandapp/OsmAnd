@@ -5667,4 +5667,5 @@
     <string name="obd_throttle_position">油門位置</string>
     <string name="obd_fuel_pressure_desc">顯示燃油系統內的壓力</string>
     <string name="obd_ambient_air_temp_desc">顯示車外溫度。</string>
+    <string name="preview_next_turn">預覽下個轉彎</string>
 </resources>
