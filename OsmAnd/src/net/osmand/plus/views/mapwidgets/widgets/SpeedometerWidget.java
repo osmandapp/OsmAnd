@@ -20,6 +20,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.text.TextPaint;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -167,6 +168,7 @@ public class SpeedometerWidget {
 		previousWidgetSize = newWidgetSize;
 
 		LinearLayout.LayoutParams speedLimitLayoutParams = (LinearLayout.LayoutParams) speedLimitContainer.getLayoutParams();
+		speedLimitLayoutParams.gravity = Gravity.CENTER;
 		LinearLayout.LayoutParams speedometerLayoutParams = (LinearLayout.LayoutParams) speedometerContainer.getLayoutParams();
 		if (isUsaOrCanadaRegion()) {
 			speedLimitValueParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -329,7 +331,7 @@ public class SpeedometerWidget {
 
 					if (speedLimitBitmap != null) {
 						drawSpeedLimitPart(density, paint, shadowColor, newWidgetSize, speedLimitWidth,
-								speedLimitHeight, speedLimitBitmap, widgetCanvas, speedometerLeft);
+								speedLimitHeight, speedLimitBitmap, widgetCanvas, speedometerLeft, nightMode);
 					}
 				}
 			} else {
@@ -380,7 +382,7 @@ public class SpeedometerWidget {
 
 	private void drawSpeedLimitPart(float density, Paint paint, int shadowColor, WidgetSize newWidgetSize,
 	                                float speedLimitWidth, float speedLimitHeight, Bitmap speedLimitBitmap,
-	                                Canvas widgetCanvas, float speedometerLeft) {
+	                                Canvas widgetCanvas, float speedometerLeft, boolean nightMode) {
 		if (widgetBitmap == null) {
 			return;
 		}
@@ -404,7 +406,7 @@ public class SpeedometerWidget {
 		}
 		widgetCanvas.drawBitmap(speedLimitBitmap, alertRect.left, alertRect.top, null);
 		drawSpeedLimit(widgetCanvas, newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_TEXT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEED_LIMIT_TEXT_SIZE_S : SPEED_LIMIT_TEXT_SIZE_M,
-				density, alertRect, lastNightMode, newWidgetSize);
+				density, alertRect, nightMode, newWidgetSize);
 	}
 
 	private void drawSpeedLimit(Canvas canvas, int textSize, float density, Rect alertRect, boolean nightMode, WidgetSize newWidgetSize) {
