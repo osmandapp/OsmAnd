@@ -8,9 +8,7 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.Collator;
 import net.osmand.IndexConstants;
-import net.osmand.OsmAndCollator;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
@@ -47,7 +45,6 @@ public class TrackTabsHelper {
 
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
 	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-	private final Collator collator = OsmAndCollator.primaryCollator();
 
 	public TrackTabsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -59,6 +56,18 @@ public class TrackTabsHelper {
 	@NonNull
 	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
 		return itemsSelectionHelper;
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs(boolean checkParentName) {
+		List<TrackTab> result = new ArrayList<>(trackTabs.values());
+		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), checkParentName));
+		return result;
+	}
+
+	@Nullable
+	public TrackTab getTrackTab(@NonNull String key) {
+		return trackTabs.get(key);
 	}
 
 	@NonNull
@@ -103,33 +112,14 @@ public class TrackTabsHelper {
 		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
-		for (TrackTab tab : sortTrackTabs(getAllSmartFoldersTabs())) {
+		for (TrackTab tab : getAllSmartFoldersTabs()) {
 			trackTabs.put(tab.getTypeName(), tab);
 		}
-		for (TrackTab tab : sortTrackTabs(folderTabs)) {
+		for (TrackTab tab : folderTabs.values()) {
 			trackTabs.put(tab.getTypeName(), tab);
 		}
 		loadTabsSortModes();
 		sortTrackTabs();
-	}
-
-	private List<TrackTab> sortTrackTabs(Map<String, TrackTab> folderTabs) {
-		List<TrackTab> sortedTabs = new ArrayList<>(folderTabs.values());
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
-		String trackRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
-		String sortModeKey = tabsSortModes.get(trackRootDir);
-		if (sortModeKey != null) {
-			sortMode = TracksSortMode.getByValue(sortModeKey);
-		}
-		int sign = sortMode == TracksSortMode.NAME_DESCENDING ? -1 : 1;
-		// PRELIMINARY: Should ultimately use TracksComparator for trackTabs, similar to trackFolders
-		Collections.sort(sortedTabs, (tab1, tab2) -> {
-			String name1 = tab1.getTypeName();
-			String name2 = tab2.getTypeName();
-			return sign * collator.compare(name1, name2);
-		});
-		return sortedTabs;
 	}
 
 	private void updateSelectTrackTabs(@NonNull TrackFolder folder) {
@@ -245,13 +235,13 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	private Map<String, TrackTab> getAllSmartFoldersTabs() {
-		Map<String, TrackTab> smartFoldersTabs = new LinkedHashMap<>();
+	private List<TrackTab> getAllSmartFoldersTabs() {
+		List<TrackTab> smartFoldersTabs = new ArrayList<>();
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
 			TrackTab folderTab = new TrackTab(folder);
 			folderTab.items.add(TYPE_SORT_TRACKS);
 			folderTab.items.addAll(folder.getTrackItems());
-			smartFoldersTabs.put(folderTab.getTypeName(), folderTab);
+			smartFoldersTabs.add(folderTab);
 		}
 		return smartFoldersTabs;
 	}
@@ -307,7 +297,7 @@ public class TrackTabsHelper {
 	}
 
 	public void sortTrackTab(@NonNull TrackTab trackTab) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
+		LatLon latLon = getDefaultLocation();
 		if (trackTab.type == TrackTabType.ON_MAP) {
 			List<Object> visibleItems = getVisibleItems();
 			List<Object> recentlyVisibleItems = getRecentlyVisibleItems();
@@ -345,5 +335,17 @@ public class TrackTabsHelper {
 			tabsSortModes.put(name, sortType);
 		}
 		settings.saveTabsSortModes(tabsSortModes);
+	}
+
+	@NonNull
+	private TracksSortMode getRootSortMode() {
+		String rootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
+		String key = settings.getTrackSortModes().get(rootDir);
+		return key != null ? TracksSortMode.getByValue(key) : TracksSortMode.getDefaultSortMode();
+	}
+
+	@NonNull
+	private LatLon getDefaultLocation() {
+		return app.getMapViewTrackingUtilities().getDefaultLocation();
 	}
 }

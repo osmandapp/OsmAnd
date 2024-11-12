@@ -159,7 +159,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 
 	@Nullable
 	public TrackTab getTab(@NonNull String name) {
-		for (TrackTab trackTab : getTrackTabs()) {
+		for (TrackTab trackTab : getSortedTrackTabs()) {
 			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
 				updateTrackItemsVisibility(trackTab);
 				return trackTab;

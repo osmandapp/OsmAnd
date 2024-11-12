@@ -42,9 +42,8 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		nightMode = isNightMode(true);
 
 		Fragment target = getTargetFragment();
-		if (target instanceof TracksTabsFragment) {
-			TracksTabsFragment fragment = (TracksTabsFragment) target;
-			trackTabs = fragment.getTrackTabs();
+		if (target instanceof TracksTabsFragment fragment) {
+			trackTabs = fragment.getSortedTrackTabs(true);
 			selectedTab = fragment.getSelectedTab();
 		}
 	}

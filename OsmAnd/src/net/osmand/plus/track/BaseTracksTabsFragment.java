@@ -61,7 +61,6 @@ import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -115,13 +114,13 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	protected void setupTabLayout(@NonNull View view) {
 		viewPager = view.findViewById(R.id.view_pager);
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		tabLayout = view.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light);
 		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
 			@Override
 			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-				TrackTab trackTab = getTrackTabs().get(position);
+				TrackTab trackTab = getSortedTrackTabs().get(position);
 
 				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -155,8 +154,13 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@NonNull
-	public List<TrackTab> getTrackTabs() {
-		return new ArrayList<>(trackTabsHelper.getTrackTabs().values());
+	public List<TrackTab> getSortedTrackTabs() {
+		return getSortedTrackTabs(false);
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs(boolean checkParentName) {
+		return trackTabsHelper.getSortedTrackTabs(checkParentName);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
@@ -166,12 +170,12 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@Nullable
 	public TrackTab getSelectedTab() {
-		List<TrackTab> trackTabs = getTrackTabs();
+		List<TrackTab> trackTabs = getSortedTrackTabs();
 		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
 	}
 
 	public void setSelectedTab(@NonNull String name) {
-		List<TrackTab> trackTabs = getTrackTabs();
+		List<TrackTab> trackTabs = getSortedTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
 			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
@@ -183,7 +187,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@Nullable
 	public TrackTab getTab(@NonNull String name) {
-		for (TrackTab trackTab : getTrackTabs()) {
+		for (TrackTab trackTab : getSortedTrackTabs()) {
 			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
 				return trackTab;
 			}
@@ -209,7 +213,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Override
 	public void onResume() {
 		super.onResume();
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		if (tabs.size() != tabSize) {
 			setTabs(tabs);
 		}

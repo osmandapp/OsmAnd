@@ -228,7 +228,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
 			}
 			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-			TrackTab allTracksTab = trackTabsHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			TrackTab allTracksTab = trackTabsHelper.getTrackTab(TrackTabType.ALL.name());
 			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 		}
 	}
@@ -277,7 +277,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
+			String tabName = preselectedTabParams.getPreselectedTabName(app, getSortedTrackTabs());
 			TrackTab trackTab = getTab(tabName);
 			if (trackTab != null) {
 				setSelectedTab(tabName);

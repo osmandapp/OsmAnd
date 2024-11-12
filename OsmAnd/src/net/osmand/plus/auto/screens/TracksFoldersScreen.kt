@@ -81,7 +81,7 @@ class TracksFoldersScreen(
                 .setTitle(app.getString(R.string.sort_last_modified))
                 .setImage(iconLastModified)
                 .setBrowsable(true)
-                .setOnClickListener { onClickTabFolder(trackTabsHelper.trackTabs[TrackTabType.ALL.name]!!) }
+                .setOnClickListener { onClickTabFolder(trackTabsHelper.getTrackTab(TrackTabType.ALL.name)!!) }
                 .build())
 
         if (trackTabsHelper.trackTabs.isEmpty()) {
@@ -93,7 +93,7 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in trackTabsHelper.trackTabs.values) {
+        for (trackTab in trackTabsHelper.getSortedTrackTabs(false)) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }

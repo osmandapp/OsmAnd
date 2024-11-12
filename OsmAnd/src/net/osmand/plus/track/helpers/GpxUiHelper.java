@@ -189,10 +189,10 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getFolderName(@NonNull Context context, @NonNull File dir, boolean includeParentDir) {
+	public static String getFolderName(@NonNull File dir, boolean includeParentDir) {
 		String name = dir.getName();
 		if (GPX_INDEX_DIR.equals(name + File.separator)) {
-			return context.getString(R.string.shared_string_tracks);
+			return Algorithms.capitalizeFirstLetter(name);
 		}
 		String dirPath = dir.getPath() + File.separator;
 		if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
