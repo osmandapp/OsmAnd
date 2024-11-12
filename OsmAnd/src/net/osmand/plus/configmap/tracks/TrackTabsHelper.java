@@ -8,7 +8,9 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
@@ -29,7 +31,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,7 +47,7 @@ public class TrackTabsHelper {
 
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
 	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-
+	private final Collator collator = OsmAndCollator.primaryCollator();
 
 	public TrackTabsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -102,39 +103,31 @@ public class TrackTabsHelper {
 		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
-		for (TrackTab tab : sortTabOrder(getAllSmartFoldersTabs())) {
+		for (TrackTab tab : sortTrackTabs(getAllSmartFoldersTabs())) {
 			trackTabs.put(tab.getTypeName(), tab);
 		}
-		for (TrackTab tab : sortTabOrder(folderTabs)) {
+		for (TrackTab tab : sortTrackTabs(folderTabs)) {
 			trackTabs.put(tab.getTypeName(), tab);
 		}
 		loadTabsSortModes();
 		sortTrackTabs();
 	}
 
-	private List<TrackTab> sortTabOrder(Map<String, TrackTab> folderTabs) {
+	private List<TrackTab> sortTrackTabs(Map<String, TrackTab> folderTabs) {
 		List<TrackTab> sortedTabs = new ArrayList<>(folderTabs.values());
 		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		TracksSortMode rootSortModeTemp = TracksSortMode.getDefaultSortMode();
+		TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 		String trackRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
-		if (tabsSortModes.containsKey(trackRootDir)) {
-			rootSortModeTemp = TracksSortMode.getByValue(tabsSortModes.get(trackRootDir));
+		String sortModeKey = tabsSortModes.get(trackRootDir);
+		if (sortModeKey != null) {
+			sortMode = TracksSortMode.getByValue(sortModeKey);
 		}
-		final TracksSortMode rootSortMode = rootSortModeTemp;
-		//LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		//Collections.sort(sortedTabs, new TracksComparator(rootSortMode, latLon));
-		// PRELIMINARY: Should ultimately use TracksComparator for trackTabs, similar to trackFolders:
-    		Collections.sort(sortedTabs, new Comparator<TrackTab>() {
-		        @Override
-			public int compare(TrackTab tab1, TrackTab tab2) {
-				switch (rootSortMode) {
-					case NAME_ASCENDING:
-						return tab1.getTypeName().compareTo(tab2.getTypeName());
-					case NAME_DESCENDING:
-						return -tab1.getTypeName().compareTo(tab2.getTypeName());
-				}
-				return tab1.getTypeName().compareTo(tab2.getTypeName());
-			}
+		int sign = sortMode == TracksSortMode.NAME_DESCENDING ? -1 : 1;
+		// PRELIMINARY: Should ultimately use TracksComparator for trackTabs, similar to trackFolders
+		Collections.sort(sortedTabs, (tab1, tab2) -> {
+			String name1 = tab1.getTypeName();
+			String name2 = tab2.getTypeName();
+			return sign * collator.compare(name1, name2);
 		});
 		return sortedTabs;
 	}
