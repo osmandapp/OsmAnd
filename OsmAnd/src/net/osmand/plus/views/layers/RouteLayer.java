@@ -522,9 +522,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					}
 					if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
 						Location nextRouteLocation = locations.get(currentAnimatedRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper,
-								lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation);
+						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
