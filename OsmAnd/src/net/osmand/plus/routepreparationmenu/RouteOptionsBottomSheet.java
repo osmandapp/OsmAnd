@@ -452,7 +452,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
-		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(requireContext() , nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);

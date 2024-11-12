@@ -340,8 +340,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
-			updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor, textState.textBold,
-					textState.textShadowRadius);
+			updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor,
+					textState.textBold, textState.textShadowRadius);
+			turnDrawable.setTextPaint(topTextView.getPaint());
+			turnDrawable.invalidateSelf();
 		}
 	}
 
