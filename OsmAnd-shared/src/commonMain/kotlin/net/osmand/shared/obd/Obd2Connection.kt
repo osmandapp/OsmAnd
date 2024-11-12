@@ -1,25 +1,28 @@
 package net.osmand.shared.obd
 
-import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
 import okio.IOException
 
-class Obd2Connection(private val connection: UnderlyingTransport) {
+class Obd2Connection(
+	private val connection: UnderlyingTransport,
+	private val obdDispatcher: OBDDispatcher) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
 	private val log = LoggerFactory.getLogger("Obd2Connection")
-	var initialized = false
-	var isFinished = false
+	private var initialized = false
+	private var finished = false
 
 	init {
-		try {
-			runInitCommands()
-			initialized = true
-		} catch (error: IOException) {
-			connection.onInitFailed()
-		}
+		runInitCommands()
+		initialized = true
+	}
+
+	fun isFinished() = finished
+
+	fun finish() {
+		finished = true
 	}
 
 	private fun runInitCommands() {
@@ -32,7 +35,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		val response = StringBuilder()
 		log("runImpl($command)")
 		connection.write((command + "\r").encodeToByteArray())
-		while (!isFinished) {
+		while (!finished) {
 			val value = connection.readByte() ?: continue
 			val c = value.toChar()
 			// this is the prompt, stop here
@@ -49,7 +52,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
-		if(isFinished) {
+		if (finished) {
 			return OBDResponse.ERROR
 		}
 		log("before runImpl")
@@ -77,7 +80,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> {
-				isFinished = true
+				finished = true
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
@@ -172,46 +175,11 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		}
 	}
 
-	fun getSupportedPIDs(): Set<Int> {
-		val result = mutableSetOf<Int>()
-		val pids = arrayOf("0100", "0120", "0140", "0160")
-		var basePid = 1
-		for (pid in pids) {
-			val responseData = run(pid, 0x01)
-			if (responseData.result.size >= 6) {
-				val byte0 = responseData.result[2].toByte()
-				val byte1 = responseData.result[3].toByte()
-				val byte2 = responseData.result[4].toByte()
-				val byte3 = responseData.result[5].toByte()
-				log(
-					"Supported PID at base $basePid payload %02X%02X%02X%02X".format(
-						byte0,
-						byte1,
-						byte2,
-						byte3
-					)
-				)
-				val bitSet = FourByteBitSet(byte0, byte1, byte2, byte3)
-				for (byteIndex in 0..3) {
-					for (bitIndex in 7 downTo 0) {
-						if (bitSet.getBit(byteIndex, bitIndex)) {
-							val command = basePid + 8 * byteIndex + 7 - bitIndex
-							log("Command $command found supported")
-							result.add(command)
-						}
-					}
-				}
-			}
-			basePid += 0x20
-		}
-		return result
-	}
-
 	private fun log(msg: String) {
-		if(OBDDispatcher.useInfoLogging) {
-			log.info(msg)
-		} else {
+		if (obdDispatcher.debug) {
 			log.debug(msg)
+		} else {
+			log.info(msg)
 		}
 	}
 
@@ -229,5 +197,4 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 interface UnderlyingTransport {
 	fun write(bytes: ByteArray)
 	fun readByte(): Byte?
-	fun onInitFailed()
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDMainFragmentAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -35,21 +36,21 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	private lateinit var device: BTDeviceInfo
 
 	private var updateEnable = false
-	private var currentConnectedState: VehicleMetricsPlugin.OBDConnectionState =
-		VehicleMetricsPlugin.OBDConnectionState.DISCONNECTED
+	private var deviceConnectionState: OBDConnectionState = OBDConnectionState.DISCONNECTED
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		arguments?.let {
+		arguments?.apply {
 			val connectedDevice = vehicleMetricsPlugin?.getConnectedDeviceInfo()
-			val deviceName = it.getString(DEVICE_NAME_KEY) ?: ""
-			val deviceAddress = it.getString(DEVICE_ADDRESS_KEY) ?: ""
+			val deviceName = getString(DEVICE_NAME_KEY) ?: ""
+			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
 			device = if (connectedDevice != null &&
-				(deviceAddress == connectedDevice.address || Algorithms.isEmpty(deviceAddress))) {
-				currentConnectedState = VehicleMetricsPlugin.OBDConnectionState.CONNECTED
+				(deviceAddress == connectedDevice.address ||
+						(Algorithms.isEmpty(deviceAddress) && Algorithms.isEmpty(deviceName)))) {
+				deviceConnectionState = OBDConnectionState.CONNECTED
 				connectedDevice
 			} else {
-				currentConnectedState = VehicleMetricsPlugin.OBDConnectionState.DISCONNECTED
+				deviceConnectionState = OBDConnectionState.DISCONNECTED
 				BTDeviceInfo(deviceName, deviceAddress)
 			}
 		}
@@ -91,7 +92,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	}
 
 	private fun setupConnectionState(view: View) {
-		val connected = currentConnectedState == VehicleMetricsPlugin.OBDConnectionState.CONNECTED
+		val connected = deviceConnectionState == OBDConnectionState.CONNECTED
 
 		val connectedText = app.getString(
 			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
@@ -141,20 +142,18 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		var pairBtnTextColorId = 0
 		var pairBtnTextId = 0
 		var isConnecting = false
-		when (currentConnectedState) {
-			VehicleMetricsPlugin.OBDConnectionState.CONNECTED -> {
+		when (deviceConnectionState) {
+			OBDConnectionState.CONNECTED -> {
 				lightResId = connectedStateBtnBgColorLight
 				darkResId = connectedStateBtnBgColorDark
 				pairBtnTextColorId = connectedStateBtnTextColor
 				pairBtnTextId = R.string.external_device_details_disconnect
 				pairButton.setOnClickListener {
-					Thread {
-						vehicleMetricsPlugin?.disconnect()
-					}.start()
+					vehicleMetricsPlugin?.disconnect()
 				}
 			}
 
-			VehicleMetricsPlugin.OBDConnectionState.CONNECTING -> {
+			OBDConnectionState.CONNECTING -> {
 				lightResId = connectingStateBtnBgColorLight
 				darkResId = connectingStateBtnBgColorDark
 				pairButton.setOnClickListener(null)
@@ -167,9 +166,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				pairBtnTextColorId = disconnectedStateBtnTextColor
 				pairBtnTextId = R.string.external_device_details_connect
 				pairButton.setOnClickListener {
-					Thread {
-						vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
-					}.start()
+					vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
 				}
 			}
 		}
@@ -201,16 +198,14 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	}
 
 	override fun onStateChanged(
-		state: VehicleMetricsPlugin.OBDConnectionState,
+		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
 		if (device.address == deviceInfo.address) {
-			currentConnectedState = state
+			deviceConnectionState = state
 		}
-		app.runInUIThread {
-			view?.let {
-				setupConnectionState(it)
-				updateButtonState(it)
-			}
+		view?.let {
+			setupConnectionState(it)
+			updateButtonState(it)
 		}
 	}
 

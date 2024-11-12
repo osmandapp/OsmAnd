@@ -9,14 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceDialog.Companion.showInstance
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog.OnDeviceNameChangedCallback
 import net.osmand.plus.utils.AndroidUtils
@@ -73,23 +74,27 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 			}
 		val learnMore = view.findViewById<TextView>(R.id.learn_more_button)
 		UiUtilities.setupClickableText(learnMore, spannable, nightMode)
-		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty))
-		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional))
+		setupPairSensorButton(
+			view.findViewById(R.id.pair_btn_empty),
+			R.string.external_device_details_connect)
+		setupPairSensorButton(
+			view.findViewById(R.id.pair_btn_additional),
+			R.string.connect_new_scanner)
 		setupOpenBtSettingsButton(view.findViewById(R.id.bt_settings_button_container))
 		connectedListAdapter = OBDDevicesAdapter(app, nightMode, this)
 		disconnectedListAdapter = OBDDevicesAdapter(app, nightMode, this)
 		connectedList?.adapter = connectedListAdapter
 		disconnectedList?.adapter = disconnectedListAdapter
-		val connectInstructions = view.findViewById<TextView>(R.id.connect_instructions)
+		val connectInstructions = view.findViewById<TextView>(R.id.connect_instructions4)
 		connectInstructions.text = String.format(
-			app.getString(R.string.connect_obd_instructions_step),
+			app.getString(R.string.connect_obd_instructions_step4),
 			app.getString(R.string.external_device_details_connect))
 	}
 
-	private fun setupPairSensorButton(view: View) {
+	private fun setupPairSensorButton(view: View, @StringRes titleId: Int) {
 		val dismissButton = view.findViewById<DialogButton>(R.id.dismiss_button)
 		dismissButton.setButtonType(DialogButtonType.SECONDARY)
-		dismissButton.setTitleId(R.string.external_device_details_connect)
+		dismissButton.setTitleId(titleId)
 		val layoutParams = dismissButton.layoutParams
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
 		dismissButton.layoutParams = layoutParams
@@ -246,19 +251,17 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onStateChanged(
-		state: VehicleMetricsPlugin.OBDConnectionState,
+		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
-		app.runInUIThread {
-			activity?.let {
-				val textId = when (state) {
-					VehicleMetricsPlugin.OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
-					VehicleMetricsPlugin.OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
-					VehicleMetricsPlugin.OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
-				}
-				Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
-					.show()
+		activity?.let {
+			val textId = when (state) {
+				OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
+				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
+				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
 			}
-			updatePairedSensorsList()
+			Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
+				.show()
 		}
+		updatePairedSensorsList()
 	}
 }
