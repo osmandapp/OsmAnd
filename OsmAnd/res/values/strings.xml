@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+
+    <string name="av_audio_sample_rate">Audio sample rate</string>
+    <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
     <string name="connect_new_scanner">Connect new scanner</string>
     <string name="preview_next_turn">Preview next turn</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
