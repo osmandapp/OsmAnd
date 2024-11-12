@@ -18,6 +18,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/auto_zoom_map" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="auto_zoom_3d_angle"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/auto_zoom_3d_angle" />
+
 	<SwitchPreferenceCompat
 		android:key="preview_next_turn"
 		android:layout="@layout/preference_switch"
