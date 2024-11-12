@@ -33,7 +33,6 @@ class Obd2Connection(
 
 	private fun runImpl(command: String): String {
 		val response = StringBuilder()
-		log("runImpl($command)")
 		connection.write((command + "\r").encodeToByteArray())
 		while (!finished) {
 			val value = connection.readByte() ?: continue
@@ -44,7 +43,7 @@ class Obd2Connection(
 			response.append(c)
 		}
 		val responseValue = response.toString()
-		log("runImpl() returned $responseValue")
+		log("runImpl($command) returned $responseValue")
 		return responseValue
 	}
 
@@ -55,15 +54,12 @@ class Obd2Connection(
 		if (finished) {
 			return OBDResponse.ERROR
 		}
-		log("before runImpl")
 		var response = runImpl(fullCommand)
-		log("after runImpl")
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
 			response = response.substring(unspacedCommand.length)
 		response = unpackLongFrame(response)
-		log("post-processed response $response")
 		response = removeSideData(
 			response,
 			"SEARCHING",
@@ -74,7 +70,6 @@ class Obd2Connection(
 			"BUSERROR",
 			"STOPPED"
 		)
-		log("post-processed response without side data $response")
 		when (response) {
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK

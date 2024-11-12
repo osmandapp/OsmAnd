@@ -33,7 +33,6 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
@@ -401,8 +400,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private fun connectToSimulator(deviceInfo: BTDeviceInfo) {
 		createOBDDispatcher().connect(object : OBDConnector {
 			val deviceToConnect = deviceInfo
+			val simulator = OBDSimulationSource()
 			override fun connect(): Pair<Source, Sink> {
-				val simulator = OBDSimulationSource()
 				return Pair(simulator.reader, simulator.writer)
 			}
 
