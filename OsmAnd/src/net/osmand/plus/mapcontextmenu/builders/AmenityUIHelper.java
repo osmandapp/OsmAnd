@@ -41,6 +41,7 @@ import androidx.core.util.PatternsCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -400,7 +401,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else {
 				return null;
 			}
-		} else if (key.startsWith("name:")) {
+		} else if (MapObject.isNameLangTag(key)) {
 			return null;
 		} else if (Amenity.COLLECTION_TIMES.equals(baseKey) || Amenity.SERVICE_TIMES.equals(baseKey)) {
 			iconId = R.drawable.ic_action_time;
