@@ -31,6 +31,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
@@ -723,6 +724,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
 		this.carNavigationSession = carNavigationSession;
+		List<OsmandPlugin> enabledPlugins = PluginsHelper.getEnabledPlugins();
+		for (OsmandPlugin plugin: enabledPlugins) {
+			plugin.onCarNavigationSessionCreated();
+		}
 	}
 
 	public void refreshCarScreen() {
