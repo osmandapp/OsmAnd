@@ -5682,4 +5682,5 @@
     <string name="obd_speed_desc">Prikazuje brzinu sa senzora brzine (VSS).</string>
     <string name="obd_ambient_air_temp_desc">Pokazuje spoljnu temperaturu.</string>
     <string name="obd_battery_voltage_desc">Prikazuje nivo napona akumulatora vozila</string>
+    <string name="preview_next_turn">Pregled sledećeg skretanja</string>
 </resources>
