@@ -284,6 +284,7 @@
 	<dimen name="content_padding_extra_large">72dp</dimen>
 	<dimen name="content_padding_large">48dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
+	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
