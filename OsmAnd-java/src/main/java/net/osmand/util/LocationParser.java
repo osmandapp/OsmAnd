@@ -13,9 +13,6 @@ import java.util.List;
 
 public class LocationParser {
 
-	public static final String LTR_MARK = "\u200e";
-	public static final String RTL_MARK = "\u200f";
-
 	public static class ParsedOpenLocationCode {
 		private final String text;
 		private String code;
@@ -96,8 +93,7 @@ public class LocationParser {
 
 	public static LatLon parseLocation(String locPhrase) {
 		locPhrase = locPhrase.trim();
-		locPhrase = locPhrase.replaceAll(LTR_MARK, "");
-		locPhrase = locPhrase.replaceAll(RTL_MARK, "");
+		locPhrase = TextDirectionUtil.clearDirectionMarks(locPhrase);
 		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");

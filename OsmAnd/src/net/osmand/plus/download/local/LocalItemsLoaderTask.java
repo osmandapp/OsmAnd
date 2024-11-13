@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -52,7 +53,14 @@ public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType
 				.addDirectoryIfNotPresent(internalDir, false)
 				.addDirectoryIfNotPresent(externalDir, true)
 				.addForcedAddUnknownDirectory(noBackupDir)
-				.addTypeToCalculateSizeSeparately(TILES_DATA, TILES_SIZE_CALCULATION_LIMIT)
+				.setSizeLimitCondition(localItem -> {
+					if (localItem.getType() == TILES_DATA) {
+						File file = localItem.getFile();
+						boolean isSQLite = file.getName().endsWith(IndexConstants.SQLITE_EXT);
+						return !isSQLite ? TILES_SIZE_CALCULATION_LIMIT : -1;
+					}
+					return null;
+				})
 				.build();
 
 		return CollectLocalIndexesAlgorithm.execute(collectingRules);

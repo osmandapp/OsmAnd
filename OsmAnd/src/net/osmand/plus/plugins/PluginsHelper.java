@@ -747,10 +747,21 @@ public class PluginsHelper {
 		return preferredLocale;
 	}
 
-	public static void registerCustomPoiFilters(List<PoiUIFilter> poiUIFilters) {
+	public static void registerPoiFilters(@NonNull List<PoiUIFilter> result) {
 		for (OsmandPlugin p : getAvailablePlugins()) {
-			poiUIFilters.addAll(p.getCustomPoiFilters());
+			result.addAll(p.getPoiFilters());
 		}
+	}
+
+	@Nullable
+	public static PoiUIFilter getPoiFilterById(@NonNull String filterId) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			PoiUIFilter filter = p.getPoiFilterById(filterId);
+			if (filter != null) {
+				return filter;
+			}
+		}
+		return null;
 	}
 
 	public static Collection<DashFragmentData> getPluginsCardsList() {

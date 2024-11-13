@@ -73,9 +73,28 @@ object GpxUtilities {
 	const val TRAVEL_GPX_CONVERT_MULT_1 = 2
 	const val TRAVEL_GPX_CONVERT_MULT_2 = 5
 
-	private const val GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-	private const val GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
-	private const val GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX"
+	private const val GPX_TIME_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+
+	class TimePatterns {
+		companion object {
+			val formats = mutableListOf<DateTimeFormat<DateTimeComponents>>()
+			init {
+				val patterns = listOf(
+					"yyyy-MM-dd'T'HH:mm:ssXXXXX",     // GPX_TIME_PATTERN_TZ
+					"yyyy-MM-dd'T'HH:mm:ss",          // GPX_TIME_PATTERN_NO_TZ
+					"yyyy-MM-dd'T'HH:mmXXXXX",        // GPX_TIME_PATTERN_NO_SECONDS
+					"yyyy-MM-dd'T'HH:mm",             // GPX_TIME_PATTERN_NO_SECONDS_NO_TZ
+					"yyyy-MM-dd'T'HH:mm:ssXXXXX'Z'",  // GPX_TIME_PATTERN_TZ_EXTRA_Z
+					"yyyy-MM-dd'T'HH:mm:ssXXXX",      // GPX_TIME_PATTERN_TZ_NO_SEPARATOR
+					// Note: any pattern updates must be covered by ParseTimeTest.kt
+				);
+				for (pattern in patterns) {
+					formats.add(DateTimeComponents.Format { byUnicodePattern(pattern) })
+				}
+			}
+		}
+	}
 
 	private val SUPPORTED_EXTENSION_TAGS = mapOf(
 		"heartrate" to PointAttributes.SENSOR_TAG_HEART_RATE,
@@ -884,43 +903,33 @@ object GpxUtilities {
 		return format.format(Instant.fromEpochMilliseconds(time).toLocalDateTime(TimeZone.UTC))
 	}
 
-	fun parseTime(text: String): Long {
-		return parseTime(text, getTimeFormatterTZ())
-	}
+	fun parseTime(iso8601text: String): Long {
+		var milliseconds = 0.0
+		var noFractionalSeconds = iso8601text;
+		val isIndex = noFractionalSeconds.indexOf('.')
 
-	private fun parseTime(text: String, format: DateTimeFormat<DateTimeComponents>): Long {
-		var time: Long = 0
-		try {
-			time = flexibleGpxTimeParser(text, format)
-		} catch (e: Exception) {
-			try {
-				time = getTimeNoTimeZoneFormatter().parse(text).toInstantUsingOffset()
-					.toEpochMilliseconds()
-			} catch (e: Exception) {
-				log.error("Failed to parse date $text", e)
-			}
-		}
-		return time
-	}
-
-	@Throws(Exception::class)
-	private fun flexibleGpxTimeParser(
-		timeStr: String,
-		parser: DateTimeFormat<DateTimeComponents>
-	): Long {
-		var text = timeStr
-		var ms = 0.0
-		val isIndex = text.indexOf('.')
 		if (isIndex > 0) {
 			var esIndex = isIndex + 1
-			while (esIndex < text.length && text[esIndex].isDigit()) {
+			while (esIndex < noFractionalSeconds.length && noFractionalSeconds[esIndex].isDigit()) {
 				esIndex++
 			}
-			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
-			text = text.substring(0, isIndex) + text.substring(esIndex)
+			milliseconds = ("0" + noFractionalSeconds.substring(isIndex, esIndex)).toDouble()
+			noFractionalSeconds = noFractionalSeconds.substring(0, isIndex) + noFractionalSeconds.substring(esIndex)
 		}
-		return parser.parse(text).toInstantUsingOffset()
-			.toEpochMilliseconds() + (ms * 1000).toLong()
+
+		val rfc3339 = noFractionalSeconds.replaceFirst(' ', 'T'); // RFC 3339 profile of ISO 8601 allows spaces
+
+		for (fmt in TimePatterns.formats) {
+			try {
+				return fmt.parse(rfc3339).toInstantUsingOffset()
+					.toEpochMilliseconds() + (milliseconds * 1000).toLong()
+			} catch (e: Exception) {
+				// Continue to the next format
+			}
+		}
+		val errorMessage = "Failed to parse date: $iso8601text"
+		log.error(errorMessage)
+		return 0
 	}
 
 	fun getCreationTime(gpxFile: GpxFile?): Long {
@@ -944,21 +953,7 @@ object GpxUtilities {
 	private fun getTimeFormatter(): DateTimeFormat<LocalDateTime> {
 		@OptIn(FormatStringsInDatetimeFormats::class)
 		return LocalDateTime.Format {
-			byUnicodePattern(GPX_TIME_PATTERN)
-		}
-	}
-
-	@OptIn(FormatStringsInDatetimeFormats::class)
-	private fun getTimeNoTimeZoneFormatter(): DateTimeFormat<DateTimeComponents> {
-		return DateTimeComponents.Format {
-			byUnicodePattern(GPX_TIME_NO_TIMEZONE_PATTERN)
-		}
-	}
-
-	@OptIn(FormatStringsInDatetimeFormats::class)
-	private fun getTimeFormatterTZ(): DateTimeFormat<DateTimeComponents> {
-		return DateTimeComponents.Format {
-			byUnicodePattern(GPX_TIME_PATTERN_TZ)
+			byUnicodePattern(GPX_TIME_FORMATTER)
 		}
 	}
 
