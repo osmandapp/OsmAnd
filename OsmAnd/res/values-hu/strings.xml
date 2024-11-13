@@ -5637,4 +5637,5 @@
     <string name="obd_throttle_position_desc">Megjeleníti a fojtószelepházban lévő fojtószeleplap szögét.</string>
     <string name="obd_calculated_engine_load_desc">Megjeleníti, hogy adott pillanatban a rendelkezésre álló motorteljesítmény hány százaléka van kihasználva.</string>
     <string name="obd_engine_runtime">Motor üzemidő</string>
+    <string name="preview_next_turn">Következő kanyarodás előnézete</string>
 </resources>

@@ -5688,4 +5688,5 @@
     <string name="obd_engine_oil_temperature_desc">Viser temperaturen på motorolien.</string>
     <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for køretøjet.</string>
     <string name="obd_battery_voltage_desc">Viser spændingsniveauet på køretøjets batteri</string>
+    <string name="preview_next_turn">Forhåndsvis næste sving</string>
 </resources>

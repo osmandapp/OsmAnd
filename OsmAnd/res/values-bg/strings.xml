@@ -4458,4 +4458,5 @@
     <string name="current_temperature">Текуща температура</string>
     <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора</string>
     <string name="obd_air_intake_temp_desc">Показва температурата на постъпвщия през въздушната клапа въздух.</string>
+    <string name="preview_next_turn">Преглед следващ завой</string>
 </resources>

@@ -174,7 +174,7 @@
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mi/h</string>
-    <string name="mile">mi</string>
+    <string name="mile">km</string>
     <string name="send_location_way_choose_title">Condividi la posizione usando</string>
     <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Per vedere la posizione segui il link web %1$s o il collegamento Android %2$s</string>
@@ -2660,7 +2660,7 @@
     <string name="shared_string_launch">Lancia</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="cubic_m">m³</string>
-    <string name="metric_ton">t</string>
+    <string name="metric_ton">ton</string>
     <string name="shared_string_capacity">Capacità</string>
     <string name="shared_string_width">Larghezza</string>
     <string name="shared_string_height">Altezza</string>
@@ -3217,7 +3217,7 @@
     <string name="plugin_disabled_descr">Questo plugin è un\' applicazione separata: disabilitandolo non lo rimuovi.
 \n
 \nPuò essere disinstallato nell\'impostazione \"Applicazioni\" di Android.</string>
-    <string name="shared_string_menu">Menu</string>
+    <string name="shared_string_menu">Menù</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="no_recalculation_setting">Disattiva ricalcolo</string>
     <string name="route_recalculation_dist_title">Distanza minima per il ricalcolo del percorso</string>

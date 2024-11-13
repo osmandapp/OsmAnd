@@ -5678,4 +5678,5 @@
     <string name="obd_speed_desc">Приказује брзину од сензора брзине возила (СБВ).</string>
     <string name="obd_ambient_air_temp_desc">Приказује температуру ван возила.</string>
     <string name="obd_battery_voltage_desc">Показује ниво напона акумулатора возила</string>
+    <string name="preview_next_turn">Преглед следећег скретања</string>
 </resources>
