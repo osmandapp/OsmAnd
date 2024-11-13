@@ -5750,14 +5750,19 @@
     <string name="connect_obd_instructions_title">OsmAnd ebligas konekti per Bludento al skaniloj OBD-II.</string>
     <string name="obd_vehicle_info">Informoj pri veturilo</string>
     <string name="shared_string_bluetooth">Bludento</string>
-    <string name="connect_obd_instructions_step4">4. Frapetu “Konekti” kaj elektu vian skanilon el la listo.</string>
+    <string name="connect_obd_instructions_step4">Premu la butonon “%1$s” kaj elektu vian skanilon el la listo.</string>
     <string name="liter_per_hour">l/h</string>
     <string name="obd_fuel_left_liters">Resta brulaĵo (litroj)</string>
     <string name="connect_obd_instructions_step">1. Konektu la skanilon al konektilo OBD-II de via veturilo.\n\n2. Ekfunkciu motoron.\n\n3. Aktivigu Bludenton ĉe via aparato.\n\n4. Frapetu “%1$s” kaj elektu vian skanilon el la listo.</string>
     <string name="quick_action_showhide_osm_edits_descr">Butono por montri/kaŝi lokajn OSM-redaktojn sur la mapo.</string>
-    <string name="connect_obd_instructions_step1">1. Konektu la skanilon al konektilo OBD-II de via veturilo.</string>
+    <string name="connect_obd_instructions_step1">Konektu la skanilon al konektilo OBD-II de via veturilo.</string>
     <string name="obd_how_to_connect">Kiel konekti:</string>
-    <string name="connect_obd_instructions_step2">2. Ekfunkciu motoron.</string>
-    <string name="connect_obd_instructions_step3">3. Aktivigu Bludenton ĉe via aparato.</string>
+    <string name="connect_obd_instructions_step2">Ekfunkciu motoron.</string>
+    <string name="connect_obd_instructions_step3">Aktivigu Bludenton ĉe via aparato.</string>
     <string name="obd_throttle_position_desc">Montras malfermecon de brulaĵ-valvo en la korpo de brulaĵ-valvo.</string>
+    <string name="auto_zoom_3d_angle">Angulo de aŭtomata skalado</string>
+    <string name="av_audio_sample_rate">Sona specimenrapido</string>
+    <string name="av_audio_sample_rate_descr">Elekti specimen-rapidon (samplorapidon) de sondosiero.</string>
+    <string name="preview_next_turn">Antaŭvidi sekvan kurbiĝon</string>
+    <string name="connect_new_scanner">Konekti novan skanilon</string>
 </resources>
