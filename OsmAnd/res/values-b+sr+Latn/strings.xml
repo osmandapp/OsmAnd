@@ -5579,15 +5579,15 @@
     <string name="quick_action_verb_start_pause">Pokreni / Pauziraj</string>
     <string name="movies_list">Lista filmova</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="lock_screen">Zaključan ekran</string>
-    <string name="lock_screen_description">Uključuje ili isključuje zaključavanja ekrana zbog nenamernog dodira</string>
+    <string name="lock_screen">Zaključaj ekran</string>
+    <string name="lock_screen_description">Omogućava ili onemogućava funkciju ekrana osetljivog na dodir da spreči slučajne dodire</string>
     <string name="quick_action_showhide_osm_edits_descr">Dugme za prikaz ili skrivanje lokalnih OSM izmena na mapi.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Prikaži staze terenskih motocikla</string>
     <string name="liter_per_hour">l/h</string>
     <string name="release_4_9">• Dodan je preglednik galerije preko celog ekrana za slike Vikimedije\n\n • Uveden je novi dodatak „Metrika vozila“ za praćenje performansi vozila koristeći OBD-II protokol\n\n • Dodata mogućnost dodeljivanja aktivnosti stazama i filtriranja u skladu sa tim\n\n • Implementirane nove brze akcije za snimanje putovanja i zaključavanje ekrana na dodir\n\n • Uveden je prilagodljiv izgled dugmeta mape i precizna mreža\n\n • Dodat je kontekstni meni i akcija „Reset prosečne brzine“ u vidžete\n\n • Dodan je novi sloj rute „Staze terenskih motocikla“\n\n • Ispravljeno „Automatsko snimanje staze tokom navigacije“\n\n • Rešen problem sa preokrenutim koordinatama u RTL-u\n\n • Ispravljeni propušteni podaci senzora za trenutno snimljenu stazu\n\n • Dodate informacije o okolnim područjima za izabranu tačku\n\n • Dodata brza akcija za kontrolu vidljivosti OSM izmena\n\n • Odvojeni parametri vidljivosti za opcije kolorizacije terena\n\n • Dodata ikona koja se može dodirnuti za prikaz pristupa ili drugih atributa puta ili putanje</string>
     <string name="screen_is_locked_by_external_button">Ekran je zaključan. Za otključavanje pritisni dugme %1$s ili dodirni dugme na ekranu.</string>
-    <string name="screen_is_unlocked">Ekran je otključan.</string>
-    <string name="screen_is_locked_by_action_button">Ekran je zaključan. Dodirni dugme za otključavanje.</string>
+    <string name="screen_is_unlocked">Ekran osetljiv na dodir je otključan.</string>
+    <string name="screen_is_locked_by_action_button">Ekran osetljiv na dodir je zaključan. Dodirnite dugme da biste otključali.</string>
     <string name="obd_fuel_left_liters">Preostalo gorivo (litara)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Informacije o vozilu</string>
@@ -5596,7 +5596,7 @@
     <string name="obd_how_to_connect">Kako se povezati:</string>
     <string name="connect_obd_instructions_step1">Spoj skener na OBD-II priključak u vozilu.</string>
     <string name="connect_obd_instructions_step3">Omogući Bluetooth na uređaju</string>
-    <string name="connect_obd_instructions_step4">Tapni \'Poveži se\' i odaberi svoj skener s liste.</string>
+    <string name="connect_obd_instructions_step4">Tapni \'%1$s\', i odaberi svoj skener s liste.</string>
     <string name="learn_more_about_obd_sensors">Saznaj više o senzorima.</string>
     <string name="route_guidance">Navođenje rutom</string>
     <string name="obd_widget_vehicle_speed">Brzina vozila</string>
@@ -5683,4 +5683,8 @@
     <string name="obd_ambient_air_temp_desc">Pokazuje spoljnu temperaturu.</string>
     <string name="obd_battery_voltage_desc">Prikazuje nivo napona akumulatora vozila</string>
     <string name="preview_next_turn">Pregled sledećeg skretanja</string>
+    <string name="av_audio_sample_rate">Brzina uzorkovanja zvuka</string>
+    <string name="av_audio_sample_rate_descr">Izaberite brzinu uzorkovanja zvuka.</string>
+    <string name="connect_new_scanner">Poveži novi skener</string>
+    <string name="auto_zoom_3d_angle">Auto zum 3D ugao</string>
 </resources>
