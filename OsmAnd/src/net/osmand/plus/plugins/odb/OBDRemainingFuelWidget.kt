@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.odb
 
+import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -35,6 +36,17 @@ class OBDRemainingFuelWidget(
 
 	private fun getFieldType(): OBDTypeWidget {
 		return remainingFuelMode.get().fieldType
+	}
+
+	override fun getOnClickListener(): View.OnClickListener {
+		return View.OnClickListener { v: View? ->
+			nextMode()
+		}
+	}
+
+	private fun nextMode(){
+		remainingFuelMode.set(remainingFuelMode.get().next())
+		updatePrefs(true)
 	}
 
 	override fun updatePrefs(prefsChanged: Boolean) {
@@ -102,6 +114,11 @@ class OBDRemainingFuelWidget(
 			} else {
 				return app.getString(R.string.percent_unit)
 			}
+		}
+
+		fun next(): RemainingFuelMode {
+			val nextItemIndex = (ordinal + 1) % RemainingFuelMode.entries.size
+			return RemainingFuelMode.entries[nextItemIndex]
 		}
 	}
 }

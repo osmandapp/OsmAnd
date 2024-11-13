@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.odb
 
+import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -54,6 +55,17 @@ class OBDFuelConsumptionWidget(
 		}
 
 		updateSimpleWidgetInfo(null)
+	}
+
+	override fun getOnClickListener(): View.OnClickListener {
+		return View.OnClickListener { v: View? ->
+			nextMode()
+		}
+	}
+
+	private fun nextMode(){
+		fuelConsumptionMode.set(fuelConsumptionMode.get().next())
+		updatePrefs(true)
 	}
 
 	private fun getAverageTime(typeWidget: OBDTypeWidget): Int {
@@ -113,6 +125,10 @@ class OBDFuelConsumptionWidget(
 				rightText = app.getString(R.string.shared_string_hour).lowercase()
 			}
 			return app.getString(R.string.ltr_or_rtl_combine_via_per, leftText, rightText)
+		}
+		fun next(): FuelConsumptionMode {
+			val nextItemIndex = (ordinal + 1) % FuelConsumptionMode.entries.size
+			return FuelConsumptionMode.entries[nextItemIndex]
 		}
 	}
 }

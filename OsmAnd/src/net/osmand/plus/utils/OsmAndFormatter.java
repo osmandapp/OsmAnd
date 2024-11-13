@@ -160,7 +160,7 @@ public class OsmAndFormatter {
 		return formattedTime;
 	}
 
-	public static String getFormattedTimeShort(long seconds, boolean useCurrentTime, boolean shouldShowDay) {
+	public static String getFormattedTimeShort24(long seconds, boolean useCurrentTime, boolean shouldShowDay) {
 		Calendar calendar = Calendar.getInstance();
 		if (useCurrentTime) {
 			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
@@ -168,7 +168,7 @@ public class OsmAndFormatter {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
 		Date date = calendar.getTime();
-		String formattedTime = shortTimeFormatter.format(date, twelveHoursFormat);
+		String formattedTime = shortTimeFormatter.format(date, false);
 		if (shouldShowDay) {
 			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}

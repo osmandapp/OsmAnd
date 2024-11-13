@@ -872,7 +872,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	private fun getFormattedTime(time: Int): String {
-		return OsmAndFormatter.getFormattedTimeShort(time.toLong(), false, false)
+		return OsmAndFormatter.getFormattedTimeShort24(time.toLong(), false, false)
 	}
 
 	private fun getConvertedSpeed(speed: Number): Float {

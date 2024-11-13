@@ -163,6 +163,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
+			widgets.sort((w1, w2) -> app.getString(w1.titleId).compareTo(app.getString(w2.titleId)));
 			inflateWidgetsList(widgets);
 		} else if (aidlWidgetData != null) {
 			inflateAidlWidget(aidlWidgetData);

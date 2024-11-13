@@ -158,24 +158,24 @@ object OBDDataComputer {
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_left_percent",
-			OBDComputerWidgetFormatter("%.2f")),
+			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_LEFT_LITER(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
 			"obd_fuel_left_liter",
-			OBDComputerWidgetFormatter("%.2f")),
+			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.0f")),
+			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_LITER_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.0f")),
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.0f")),
+			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_SENSOR(
 			false,
 			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
