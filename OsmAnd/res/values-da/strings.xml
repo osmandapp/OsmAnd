@@ -5488,7 +5488,7 @@
     <string name="quick_action_drawer_title">Sidemenu</string>
     <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
     <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
-    <string name="shared_string_interface">Brugerflade</string>
+    <string name="shared_string_interface">Grænseflade</string>
     <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
     <string name="quick_action_search_view_title">Søgevisning</string>
     <string name="quick_action_navigation_view_title">Navigationsvisning</string>
@@ -5590,14 +5590,14 @@
     <string name="third_links">Tredje-links</string>
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="lock_screen">Lås skærm</string>
-    <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer trykfølsom skærmfunktionalitet for at forhindre utilsigtede tryk</string>
     <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
     <string name="liter_per_hour">l/t</string>
     <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter</string>
     <string name="screen_is_locked_by_external_button">Den berøringsfølsomme skærm er låst. For at låse op skal du trykke på %1$s-knappen eller trykke på knappen på skærmen.</string>
     <string name="screen_is_unlocked">Den berøringsfølsomme skærm er låst op.</string>
-    <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knap for at låse op.</string>
+    <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knappen for at låse op.</string>
     <string name="connect_obd_instructions_title">OsmAnd understøtter Bluetooth-forbindelser til OBD-II-scannere.</string>
     <string name="connect_obd_instructions_step2">Tænd køretøjets motor</string>
     <string name="connect_obd_instructions_step3">Aktivér Bluetooth på din enhed</string>
@@ -5689,4 +5689,8 @@
     <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for køretøjet.</string>
     <string name="obd_battery_voltage_desc">Viser spændingsniveauet på køretøjets batteri</string>
     <string name="preview_next_turn">Forhåndsvis næste sving</string>
+    <string name="av_audio_sample_rate">Lydsamplingsfrekvens</string>
+    <string name="av_audio_sample_rate_descr">Vælg lydsamplingsfrekvens.</string>
+    <string name="connect_new_scanner">Tilslut ny scanner</string>
+    <string name="auto_zoom_3d_angle">Auto-zoom 3D-vinkel</string>
 </resources>

@@ -5575,18 +5575,18 @@
     <string name="quick_action_save_recorded_trip_and_continue">Снимљено путовање и наставите</string>
     <string name="movies_list">Списак филмова</string>
     <string name="third_links">Остале везе</string>
-    <string name="lock_screen">Закључај заслон</string>
-    <string name="lock_screen_description">Омогућава или онемогућава рад заслона осетљивог на додир ради спречавања случајних додира</string>
+    <string name="lock_screen">Закључај екран</string>
+    <string name="lock_screen_description">Омогућава или онемогућава функцију екрана осетљивог на додир да спречи случајне додире</string>
     <string name="quick_action_showhide_osm_edits_descr">Дугме за приказ или сакривање местних измена ОСМ-а на карти.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Стазе теренских мотоцикла</string>
     <string name="liter_per_hour">l/h</string>
     <string name="release_4_9">• Додан је прегледник слика преко целог заслона за слике Викимедије\n\n • Уведен је нови додатак „Метрика возила“ за праћење учинка возила користећи ДНВ-ИИ протокол\n\n • Додата могућност додељивања дејстава стазама и одабира у складу са тим\n\n • Примењена су нова брза дејства за снимање путовања и закључавање заслона на додир\n\n • Уведен је прилагодљив изглед дугмета карте и тачна мрежа\n\n • Додат је приручни изборник и дејство „Поништавање просечне брзине“ у справице\n\n • Додан је нови слој путање „Стазе теренских мотоцикла“\n\n • Исправљено је „Самостално снимање стазе током навођења“\n\n • Решен је проблем са преокренутим координатама у РТЛ-у\n\n • Исправљено је пропуштање података пријемника за тренутно снимљени траг\n\n • Додати су подаци о околним подручјима за изабрану тачку\n\n • Додато је брзо дејство за управљање видљивости измена ОСМ-а\n\n • Одвојене су одреднице видљивости за могућности бојења терена\n\n • Додата је сличица која се може додирнути за приказ приступа или других својстава пута или путање</string>
     <string name="screen_is_locked_by_external_button">Заслон осетљив на додир је закључан. Ради откључавања притисните дугме %1$s или додирните дугме на заслону.</string>
-    <string name="screen_is_unlocked">Заслон осетљив на додир је откључан.</string>
-    <string name="screen_is_locked_by_action_button">Заслон осетљив на додир је закључан. Додирните дугме ради откључавања.</string>
+    <string name="screen_is_unlocked">Екран осетљив на додир је откључан.</string>
+    <string name="screen_is_locked_by_action_button">Екран осетљив на додир је закључан. Додирните дугме да бисте откључали.</string>
     <string name="connect_obd_instructions_step1">Повежите пријемник са прикључком ДНВ-ИИ свог возила.</string>
     <string name="obd_how_to_connect">Како повезати:</string>
-    <string name="connect_obd_instructions_step4">Додирните „Повежи се“ и изаберите свог пријемника са списка.</string>
+    <string name="connect_obd_instructions_step4">Додирните \'%1$s\', и изаберите свог пријемника са списка.</string>
     <string name="shared_string_bluetooth">Блутут</string>
     <string name="obd_vehicle_info">Подаци возила</string>
     <string name="connect_obd_instructions_title">ОсмАнд подржава Блутут везе са пријемницима ДНВ-ИИ.</string>
@@ -5679,4 +5679,8 @@
     <string name="obd_ambient_air_temp_desc">Приказује температуру ван возила.</string>
     <string name="obd_battery_voltage_desc">Показује ниво напона акумулатора возила</string>
     <string name="preview_next_turn">Преглед следећег скретања</string>
+    <string name="av_audio_sample_rate">Брзина узорковања звука</string>
+    <string name="av_audio_sample_rate_descr">Изабери брзину узорковања звука.</string>
+    <string name="connect_new_scanner">Повежи нови пријемник</string>
+    <string name="auto_zoom_3d_angle">Ауто зум 3Д угао</string>
 </resources>
