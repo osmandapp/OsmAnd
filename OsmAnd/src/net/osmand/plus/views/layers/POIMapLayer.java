@@ -1,7 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 
@@ -602,26 +604,29 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = view.getMapActivity();
-		TravelHelper travelHelper = app.getTravelHelper();
 		if (mapActivity != null && object instanceof Amenity) {
+			TravelHelper travelHelper = app.getTravelHelper();
 			Amenity amenity = (Amenity) object;
-			if (amenity.getSubType().equals(ROUTE_TRACK)) {
-				TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
-				if (travelGpx == null) {
+			String subType = amenity.getSubType();
+			if (amenity.getType().getKeyName().equals(ROUTES)) {
+				if (subType.equals(ROUTE_ARTICLE)) {
+					String lang = app.getLanguage();
+					lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
+					String name = amenity.getName(lang);
+					TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+					if (article == null) {
+						return true;
+					}
+					travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+					return true;
+				} else if (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTE_ACTIVITIES_PREFIX)) {
+					TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+					if (travelGpx == null) {
+						return true;
+					}
+					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
 					return true;
 				}
-				travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
-				return true;
-			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
-				String lang = app.getLanguage();
-				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
-				String name = amenity.getName(lang);
-				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-				if (article == null) {
-					return true;
-				}
-				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
-				return true;
 			}
 		}
 		return false;
