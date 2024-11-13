@@ -5638,4 +5638,8 @@
     <string name="obd_calculated_engine_load_desc">Megjeleníti, hogy adott pillanatban a rendelkezésre álló motorteljesítmény hány százaléka van kihasználva.</string>
     <string name="obd_engine_runtime">Motor üzemidő</string>
     <string name="preview_next_turn">Következő kanyarodás előnézete</string>
+    <string name="av_audio_sample_rate">Hang mintavételi arány</string>
+    <string name="av_audio_sample_rate_descr">Válassza ki a hang mintavételi arányát.</string>
+    <string name="connect_new_scanner">Csatlakoztasson új olvasót</string>
+    <string name="auto_zoom_3d_angle">Automatikus zoom 3D szög</string>
 </resources>
