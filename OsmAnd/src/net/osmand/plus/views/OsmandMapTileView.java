@@ -1682,28 +1682,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
-		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, true);
-	}
-
-	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
-		// if at least one point is not inside the boundary, return false
-		if (!tb.containsLatLon(top, left)) {
-			return false;
-		} else if (!tb.containsLatLon(bottom, left)) {
-			return false;
-		} else if (!tb.containsLatLon(top, right)) {
-			return false;
-		} else if (!tb.containsLatLon(bottom, right)) {
-			return false;
-		}
-		return true;
-	}
-
-	public void fitRectToMap(double left, double right, double top, double bottom,
-	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
 		RotatedTileBox tb = currentViewport.copy();
-		float zoomStep = useSmallZoom ? 0.1f : 1f;
-		double border = 0.8;
+		double border = 0.9;
 		int dx = 0;
 		int dy = 0;
 		int tbw = (int) (tb.getPixWidth() * border);
@@ -1720,7 +1700,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
+		fitRectToMap(tb, left, right, top, bottom, dx, dy, true);
+	}
 
+	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
+		// if at least one point is not inside the boundary, return false
+		if (!tb.containsLatLon(top, left)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, left)) {
+			return false;
+		} else if (!tb.containsLatLon(top, right)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, right)) {
+			return false;
+		}
+		return true;
+	}
+
+	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+	                         int dx, int dy, boolean useSmallZoom) {
+		float zoomStep = useSmallZoom ? 0.1f : 1f;
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
@@ -1731,13 +1730,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		zoom.partialChangeZoom(zoomStep);
 		while (zoom.isZoomInAllowed() && fullyContains(tb, left, top, right, bottom)) {
 			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		zoom.partialChangeZoom(-zoomStep);
-		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		if (zoom.isZoomOutAllowed()) {
+			zoom.partialChangeZoom(-zoomStep);
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
