@@ -917,7 +917,9 @@ object GpxUtilities {
 			noFractionalSeconds = noFractionalSeconds.substring(0, isIndex) + noFractionalSeconds.substring(esIndex)
 		}
 
-		val rfc3339 = noFractionalSeconds.replaceFirst(' ', 'T'); // RFC 3339 profile of ISO 8601 allows spaces
+		// Do trim ([ \t\r\n] etc) to avoid XML-tag parsing nuances.
+		// Replace Date-Time space-delimiter -> "T" (RFC3339 in ISO8601)
+		val rfc3339 = noFractionalSeconds.trim().replaceFirst(' ', 'T');
 
 		for (fmt in TimePatterns.formats) {
 			try {
@@ -927,7 +929,7 @@ object GpxUtilities {
 				// Continue to the next format
 			}
 		}
-		val errorMessage = "Failed to parse date: $iso8601text"
+		val errorMessage = "Failed to parse date: '$iso8601text'"
 		log.error(errorMessage)
 		return 0
 	}
