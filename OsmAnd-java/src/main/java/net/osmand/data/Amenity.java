@@ -1,6 +1,8 @@
 package net.osmand.data;
 
-import gnu.trove.list.array.TIntArrayList;
+import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.AbstractPoiType;
@@ -9,13 +11,13 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
 import org.json.JSONObject;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class Amenity extends MapObject {
@@ -243,7 +245,7 @@ public class Amenity extends MapObject {
 	public void setAdditionalInfo(String tag, String value) {
 		if ("name".equals(tag)) {
 			setName(value);
-		} else if (tag.startsWith("name:")) {
+		} else if (isNameLangTag(tag)) {
 			setName(tag.substring("name:".length()), value);
 		} else {
 			if (this.additionalInfo == null) {

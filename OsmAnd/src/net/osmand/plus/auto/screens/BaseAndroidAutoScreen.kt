@@ -1,5 +1,7 @@
 package net.osmand.plus.auto.screens
 
+import android.graphics.Rect
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
@@ -88,26 +90,17 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		}
 	}
 
-	protected fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
+	protected open fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
 		Algorithms.extendRectToContainPoint(mapRect, location.longitude, location.latitude)
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
-				val tileBox = mapView.rotatedTileBox
-				val rectWidth = mapRect.right - mapRect.left
-				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
-				val left = mapRect.left - rectWidth * coef
-				val right = mapRect.right + rectWidth * coef
-				mapView.fitRectToMap(
-					left,
-					right,
-					mapRect.top,
-					mapRect.bottom,
-					tileBox.pixWidth,
-					tileBox.pixHeight,
-					0,
-					0,
-					true
+				app.mapViewTrackingUtilities.isMapLinkedToLocation = false
+				val tb = mapView.rotatedTileBox
+				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f )
+				mapView.fitRectToMap(tb,
+					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
+					0, 0, true
 				)
 				mapView.refreshMap()
 			}

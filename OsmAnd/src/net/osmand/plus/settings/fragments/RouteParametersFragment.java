@@ -234,7 +234,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
-		createDividerPref(screen);
+		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
@@ -400,7 +400,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode) {
-		createDividerPref(screen);
+		addDividerPref();
 		setupDevelopmentCategoryHeader(screen);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();

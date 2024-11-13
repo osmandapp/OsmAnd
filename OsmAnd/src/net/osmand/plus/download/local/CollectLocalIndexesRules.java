@@ -8,7 +8,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,16 +18,16 @@ public class CollectLocalIndexesRules {
 	private final OsmandApplication app;
 	private final Map<File, Boolean> directories;
 	private final Set<File> forcedAddUnknownDirectories;
-	private final Map<LocalItemType, Long> typesToCalculateSizeSeparately;
+	private final SizeLimitCondition checkSizeLimitCondition;
 
 	private CollectLocalIndexesRules(@NonNull OsmandApplication app,
 	                                 @NonNull Map<File, Boolean> directories,
 	                                 @NonNull Set<File> forcedAddUnknownDirectories,
-	                                 @NonNull Map<LocalItemType, Long> typesToCalculateSizeSeparately) {
+	                                 @Nullable SizeLimitCondition sizeLimitCondition) {
 		this.app = app;
 		this.directories = directories;
 		this.forcedAddUnknownDirectories = forcedAddUnknownDirectories;
-		this.typesToCalculateSizeSeparately = typesToCalculateSizeSeparately;
+		this.checkSizeLimitCondition = sizeLimitCondition;
 	}
 
 	@NonNull
@@ -54,13 +53,13 @@ public class CollectLocalIndexesRules {
 	}
 
 	@Nullable
-	public Long getCalculationSizeLimit(@NonNull LocalItemType type) {
-		return typesToCalculateSizeSeparately.get(type);
+	public Long getCalculationSizeLimit(@NonNull LocalItem localItem) {
+		return checkSizeLimitCondition != null ? checkSizeLimitCondition.execute(localItem) : null;
 	}
 
-	@NonNull
-	public Collection<LocalItemType> getTypesToCalculateSizeSeparately() {
-		return typesToCalculateSizeSeparately.keySet();
+	public interface SizeLimitCondition {
+		@Nullable
+		Long execute(@NonNull LocalItem localItem);
 	}
 
 	public static class Builder {
@@ -68,7 +67,7 @@ public class CollectLocalIndexesRules {
 		private final OsmandApplication app;
 		private final Map<File, Boolean> directories = new LinkedHashMap<>();
 		private final Set<File> forcedAddUnknownDirectories = new HashSet<>();
-		private final Map<LocalItemType, Long> typesToCalculateSizeSeparately = new HashMap<>();
+		private SizeLimitCondition checkSizeLimitCondition;
 
 		public Builder(@NonNull OsmandApplication app) {
 			this.app = app;
@@ -86,13 +85,13 @@ public class CollectLocalIndexesRules {
 			return this;
 		}
 
-		public Builder addTypeToCalculateSizeSeparately(@NonNull LocalItemType type, long limit) {
-			typesToCalculateSizeSeparately.put(type, limit);
+		public Builder setSizeLimitCondition(@Nullable SizeLimitCondition checkSizeLimitCondition) {
+			this.checkSizeLimitCondition = checkSizeLimitCondition;
 			return this;
 		}
 
 		public CollectLocalIndexesRules build() {
-			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories, typesToCalculateSizeSeparately);
+			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories, checkSizeLimitCondition);
 		}
 	}
 }

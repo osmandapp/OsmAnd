@@ -21,6 +21,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
 		setupAutoFollowPref();
 		setupAutoZoomMapPref();
+		setupAutoZoom3dAnglePref();
 		setupPreviewNextTurnPref();
 		setupSnapToRoadPref();
 	}
@@ -67,6 +68,18 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		autoZoomMapPref.setEntryValues(entryValues);
 		autoZoomMapPref.setValue(selectedIndex);
 		autoZoomMapPref.setPersistent(false);
+	}
+
+	private void setupAutoZoom3dAnglePref() {
+		Integer[] entryValues = {20, 25, 30, 35, 40};
+		String[] entries = new String[entryValues.length];
+		for (int i = 0; i < entryValues.length; i++) {
+			entries[i] = entryValues[i] + " " + getString(R.string.shared_string_degrees);
+		}
+
+		ListPreferenceEx autoZoom3dAngle = findPreference(settings.AUTO_ZOOM_3D_ANGLE.getId());
+		autoZoom3dAngle.setEntries(entries);
+		autoZoom3dAngle.setEntryValues(entryValues);
 	}
 
 	private void setupSnapToRoadPref() {
