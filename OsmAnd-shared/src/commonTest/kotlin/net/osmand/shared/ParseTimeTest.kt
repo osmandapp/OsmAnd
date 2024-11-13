@@ -29,6 +29,10 @@ class ParseTimeTest {
         assertEquals(1323785716011, GpxUtilities.parseTime("2011-12-13T14:15:16.0111111Z"));
         assertEquals(1323785716333, GpxUtilities.parseTime("2011-12-13T14:15:16.333+0000"));
         assertEquals(1323785716333, GpxUtilities.parseTime("2011-12-13T14:15:16.333+00:00"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.00000Z"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.000Z"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.0Z"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16.Z"));
 
         // GPX_TIME_PATTERN_NO_TZ
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13T14:15:16"));
@@ -42,8 +46,16 @@ class ParseTimeTest {
         // GPX_TIME_PATTERN_TZ_EXTRA_Z 2005-05-07T05:45:04+04:00Z
         assertEquals(1323778516000, GpxUtilities.parseTime("2011-12-13T14:15:16+02:00Z"));
 
-        // " " -> "T" fix (Spaces are not allowed in ISO 8601, but allowed in its profile RFC 3339)
+        // Test: " " -> "T" (Spaces are not allowed in ISO 8601, but allowed in its profile RFC 3339)
         assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13 14:15:16Z"));
         assertEquals(1323785716777, GpxUtilities.parseTime("2011-12-13 14:15:16.7777777Z"));
+
+        // Test: trim, [\r\n]
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13 14:15:16Z "));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13 14:15:16Z\t"));
+        assertEquals(1323785716000, GpxUtilities.parseTime(" 2011-12-13 14:15:16Z\n"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("2011-12-13 14:15:16Z  \t\t"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("\r\n2011-12-13 14:15:16Z\r\n"));
+        assertEquals(1323785716000, GpxUtilities.parseTime("\t\t  2011-12-13 14:15:16Z  \t\t"));
     }
 }
