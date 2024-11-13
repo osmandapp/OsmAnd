@@ -12,8 +12,6 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataInput;
-import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataMode;
 
 public class SettingsSearchButtonHelper {
 
@@ -42,12 +40,7 @@ public class SettingsSearchButtonHelper {
 				.builder(
 						createSearchConfiguration(),
 						rootSearchPreferenceFragment.requireActivity().getSupportFragmentManager(),
-						rootSearchPreferenceFragment.getResources(),
-						new MergedPreferenceScreenDataInput(
-								R.raw.preferences,
-								R.raw.preference_path_by_preference,
-								R.raw.host_by_preference),
-						MergedPreferenceScreenDataMode.PERSIST)
+						rootSearchPreferenceFragment.getResources())
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
