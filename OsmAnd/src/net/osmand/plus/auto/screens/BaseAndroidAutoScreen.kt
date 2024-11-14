@@ -47,7 +47,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		result: SearchResult
 	) {
 		screenManager.pushForResult(
-			RoutePreviewScreen(carContext, settingsAction, result)
+			RoutePreviewScreen(carContext, settingsAction, result, true)
 		) { obj: Any? ->
 			obj?.let {
 				onSearchResultSelected(result)

@@ -368,7 +368,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				} else {
 					result.localeName = label;
 				}
-				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
 						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 						if (hasStarted()) {
@@ -495,7 +495,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			}
 
 			screenManager.popToRoot();
-			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
 					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 					if (hasStarted()) {
