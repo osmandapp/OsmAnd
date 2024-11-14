@@ -14,7 +14,6 @@ import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -53,8 +52,6 @@ import java.text.SimpleDateFormat;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
-
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(MapViewTrackingUtilities.class);
 
 	public static final float COMPASS_HEADING_THRESHOLD = 1.0f;
 	private static final int MAP_LINKED_LOCATION_TIME_MS = 60 * 60 * 1000;
@@ -241,10 +238,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 		long locationTime = System.currentTimeMillis();
 		long movingTime = locationTime - prevLocationTime;
-		LOG.info(">>>> updateLocation" +
-				"\n>>>> movingTime=" + movingTime +
-				"\n>>>> prevLocation=" + (prevLocation != null ? prevLocation.toString() : "null") +
-				"\n>>>> location=" + (location != null ? location.toString() : "null"));
 		myLocation = location;
 		myLocationTime = locationTime;
 
@@ -352,9 +345,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, fixedZoomDuration)
 				: null;
 
+		int elevationAngle = zoomParams != null ? settings.AUTO_ZOOM_3D_ANGLE.get() : 0;
 		mapView.getAnimatedDraggingThread().startMoving(
 				location.getLatitude(), location.getLongitude(), zoomParams,
-				false, rotation, movingTime, false,
+				false, rotation, elevationAngle, movingTime, false,
 				() -> movingToMyLocation = false);
 	}
 
@@ -374,7 +368,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					: null;
 			mapView.getAnimatedDraggingThread().startMoving(
 					location.getLatitude(), location.getLongitude(), zoomParams,
-					pendingRotation, rotation, movingTime, false,
+					pendingRotation, rotation, 0, movingTime, false,
 					() -> movingToMyLocation = false);
 		} else {
 			if (autoZoom != null) {

@@ -119,6 +119,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private boolean forceUpdateBufferImage;
 	private boolean forceUpdateOnDraw;
 
+	private boolean isCreated;
+
 	public MeasurementToolLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
@@ -338,6 +340,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		boolean hasMapRenderer = hasMapRenderer();
 		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
+			isCreated = true;
 			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || forceUpdateBufferImage || mapActivityInvalidated || mapRendererChanged;
 			if (mapRendererChanged) {
 				this.mapRendererChanged = false;
@@ -378,7 +381,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				drawTrackChartPoints(trackChartPoints, canvas, tb);
 			}
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		} else if (hasMapRenderer) {
+		} else if (hasMapRenderer && isCreated) {
+			isCreated = false;
 			clearCachedCounters();
 			clearCachedRenderables();
 			clearPointsProvider();

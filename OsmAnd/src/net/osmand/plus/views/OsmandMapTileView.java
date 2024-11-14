@@ -85,6 +85,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
@@ -1682,10 +1683,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
-		double border = 0.8;
+		double border = 0.9;
 		int dx = 0;
 		int dy = 0;
-
 		int tbw = (int) (tb.getPixWidth() * border);
 		int tbh = (int) (tb.getPixHeight() * border);
 		if (tileBoxWidthPx > 0) {
@@ -1700,24 +1700,44 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
+		fitRectToMap(tb, left, right, top, bottom, dx, dy, true);
+	}
 
+	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
+		// if at least one point is not inside the boundary, return false
+		if (!tb.containsLatLon(top, left)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, left)) {
+			return false;
+		} else if (!tb.containsLatLon(top, right)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, right)) {
+			return false;
+		}
+		return true;
+	}
+
+	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+	                         int dx, int dy, boolean useSmallZoom) {
+		float zoomStep = useSmallZoom ? 0.1f : 1f;
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
-
 		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
 		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
 		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
-
-		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomIn();
+		while (zoom.isZoomOutAllowed() && !fullyContains(tb, left, top, right, bottom)) {
+			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
-			zoom.zoomOut();
+		while (zoom.isZoomInAllowed() && fullyContains(tb, left, top, right, bottom)) {
+			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-
+		if (zoom.isZoomOutAllowed()) {
+			zoom.partialChangeZoom(-zoomStep);
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
 		if (dy != 0 || dx != 0) {
 			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
@@ -2180,7 +2200,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				startZooming = true;
 			}
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION) && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
 				startRotating = true;
 			} else {
 				relAngle = 0;
@@ -2188,6 +2208,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				changeZoomPosition((float) deltaZoom, relAngle);
+			}
+		}
+
+		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
+			if (startRotating) {
+				return true;
+			} else if (!startZooming) {
+				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_2_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_3_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_1_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_2_ANGLE_THRESHOLD;
+			} else {
+				return Math.abs(angle) >= ZONE_1_ANGLE_THRESHOLD;
 			}
 		}
 

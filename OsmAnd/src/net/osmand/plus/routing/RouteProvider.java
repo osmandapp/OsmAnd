@@ -822,7 +822,7 @@ public class RouteProvider {
 		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 	}
 
-	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,
+	private RoutingConfiguration initOsmAndRoutingConfig(Builder builder, RouteCalculationParams params, OsmandSettings settings,
 	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
@@ -857,7 +857,7 @@ public class RouteProvider {
 		}
 		OsmandApplication app = settings.getContext();
 		DirectionPointsHelper helper = app.getAvoidSpecificRoads().getPointsHelper();
-		config.setDirectionPoints(helper.getDirectionPoints(params.mode));
+		builder.setDirectionPoints(helper.getDirectionPoints(params.mode));
 
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
@@ -869,13 +869,15 @@ public class RouteProvider {
 		log.warn("Use " + nativeMemoryLimitMb + " MB of native memory ");
 		String derivedProfile = params.mode.getDerivedProfile();
 		String routingProfile = "default".equals(derivedProfile) ? params.mode.getRoutingProfile() : derivedProfile;
-		RoutingConfiguration cf = config.build(routingProfile, params.start.hasBearing() ?
-						params.start.getBearing() / 180d * Math.PI : null,
-				memoryLimits, paramsR);
+		Double direction = params.start.hasBearing() ? params.start.getBearing() / 180d * Math.PI : null;
+
+		RoutingConfiguration configuration = builder.build(routingProfile, direction, memoryLimits, paramsR);
 		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
-			cf.routeCalculationTime = System.currentTimeMillis();
+			configuration.routeCalculationTime = System.currentTimeMillis();
 		}
-		return cf;
+		configuration.showMinorTurns = settings.SHOW_MINOR_TURNS.getModeValue(params.mode);
+
+		return configuration;
 	}
 
 	private RouteCalculationResult calcOfflineRouteImpl(RouteCalculationParams params,

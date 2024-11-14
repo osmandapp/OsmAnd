@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.CurrentStreetName.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -115,7 +113,8 @@ public class RoutingHelperUtils {
 	                                              @NonNull Location location,
 	                                              @NonNull Location previousRouteLocation,
 	                                              @NonNull Location currentRouteLocation,
-	                                              @NonNull Location nextRouteLocation) {
+	                                              @NonNull Location nextRouteLocation,
+	                                              boolean previewNextTurn) {
 		double dist = location.distanceTo(projection);
 		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
 		if (dist >= maxDist) {
@@ -127,10 +126,14 @@ public class RoutingHelperUtils {
 				previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
 				currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
 		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
-		float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
-		float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing)
-				* projectionOffsetN * projectionOffsetN;
-		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
+
+		float approximatedBearing = currentSegmentBearing;
+		if (previewNextTurn) {
+			float offset = projectionOffsetN * projectionOffsetN;
+			float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
+			float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing) * offset;
+			approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
+		}
 
 		boolean setApproximated = true;
 		if (location.hasBearing() && dist >= maxDist / 2) {

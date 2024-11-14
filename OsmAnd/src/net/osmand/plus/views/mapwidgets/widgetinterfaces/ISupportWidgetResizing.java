@@ -10,4 +10,5 @@ public interface ISupportWidgetResizing {
 	OsmandPreference<WidgetSize> getWidgetSizePref();
 
 	void recreateView();
+	boolean allowResize();
 }

@@ -5541,14 +5541,9 @@
     <string name="percent_unit">%</string>
     <string name="rpm_unit">tr/min</string>
     <string name="obd_rpm">Tours/minute</string>
-    <string name="obd_speed_desc">Affiche la vitesse du véhicule via le capteur OBD</string>
     <string name="obd_rpm_desc">Affiche le régime du véhicule via le capteur OBD</string>
-    <string name="obd_battery_voltage_desc">Affiche la tension de la batterie via le capteur OBD</string>
     <string name="obd_plugin_name">Mesures du véhicule</string>
-    <string name="obd_air_intake_temp_desc">Affiche la température de l\'air d\'admission du véhicule via le capteur OBD</string>
-    <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air ambiant via le capteur OBD</string>
     <string name="obd_fuel_consumption_rate">Taux de consommation de carburant</string>
-    <string name="obd_engine_coolant_temp_desc">Affiche la température du liquide de refroidissement du moteur via le capteur OBD</string>
     <string name="obd_fuel_level_desc">Affiche le niveau de carburant du véhicule via le capteur OBD</string>
     <string name="obd_fuel_type_desc">Affiche le type de carburant du véhicule via le capteur OBD</string>
     <string name="obd_battery_voltage">Tension de la batterie</string>
@@ -5588,12 +5583,12 @@
     <string name="screen_is_locked_by_external_button">L\'écran tactile est verrouillé. Pour le déverrouiller, utilisez le bouton %1$s ou appuyez sur le bouton à l\'écran.</string>
     <string name="obd_vehicle_info">Informations du véhicule</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step2">2. Allumez le moteur de votre véhicule</string>
+    <string name="connect_obd_instructions_step2">Allumez le moteur de votre véhicule</string>
     <string name="connect_obd_instructions_title">OsmAnd supporte les connexions Bluetooth à des scanneurs OBD-II.</string>
     <string name="obd_how_to_connect">Comment se connecter :</string>
-    <string name="connect_obd_instructions_step1">1. Connectez le scanneur au port OBD-II de votre véhicule.</string>
-    <string name="connect_obd_instructions_step3">3. Activez le Bluetooth sur votre appareil</string>
-    <string name="connect_obd_instructions_step4">4. Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
+    <string name="connect_obd_instructions_step1">Connectez le scanneur au port OBD-II de votre véhicule.</string>
+    <string name="connect_obd_instructions_step3">Activez le Bluetooth sur votre appareil</string>
+    <string name="connect_obd_instructions_step4">Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
     <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
     <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
     <string name="route_guidance">Guidage routier</string>
@@ -5628,18 +5623,12 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
-    <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
     <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
     <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
-    <string name="obd_throttle_position">Position de l\'aiguille</string>
+    <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
-    <string name="obd_fuel_pressure_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanneur obd</string>
-    <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
-    <string name="obd_engine_oil_temperature_desc">Affiche la température de l\'huile moteur à partir du scanneur obd</string>
     <string name="bt_start_pair_failed">Impossible d\'amorcer l\'association avec l\'appareil</string>
-    <string name="obd_calculated_engine_load_desc">Affiche la charge moteur calculée à partir du capteur</string>
-    <string name="obd_calculated_engine_load">Charge moteur calculée</string>
     <string name="shared_string_dynamic">Dynamique</string>
     <string name="obd_connected_to_device">Connecté à %s</string>
     <string name="obd_not_connected_to_device">Déconnecté de %s</string>
@@ -5656,4 +5645,5 @@
     <string name="us_gallons">Gallons américains</string>
     <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
     <string name="unit_of_volume">Unité de volume</string>
+    <string name="wunderlinq_datagrid">Grille de données WunderLINQ</string>
 </resources>

@@ -17,9 +17,11 @@ public class OpenWunderLINQDatagridAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(OPEN_WUNDERLINQ_DATAGRID_ACTION,
 			"open.wunderlinq.datagrid", OpenWunderLINQDatagridAction.class)
-			.nameRes(R.string.key_event_action_open_wunderlinq_datagrid)
-			.iconRes(R.drawable.ic_action_settings)
-			.nameActionRes(R.string.shared_string_open);
+			.nameActionRes(R.string.shared_string_open)
+			.nameRes(R.string.wunderlinq_datagrid)
+			.iconRes(R.drawable.ic_action_data_grid)
+			.category(QuickActionType.INTERFACE)
+			.nonEditable();
 
 	private static final String APP_PATH = "wunderlinq://datagrid";
 

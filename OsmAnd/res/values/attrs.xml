@@ -124,6 +124,7 @@
         <attr name="purchase_sc_selected_plan_bg" format="color"/>
         <attr name="purchase_sc_header_icon_bg" format="color"/>
         <attr name="promo_banner_title_color" format="color"/>
+        <attr name="purchase_pro_badge_icon" format="reference"/>
 
         <attr name="bottom_bar_background_color" format="color" />
 

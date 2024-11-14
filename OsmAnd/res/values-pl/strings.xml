@@ -5711,4 +5711,22 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">Pokazuje zużycie paliwa pojazdu na podstawie obliczeń (l/km)</string>
     <string name="simulate_obd">Symuluj dane obd</string>
     <string name="dynamic_icon_type_summary">Ikona zmienia się w zależności od stanu akcji.</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Ciśnienie paliwa</string>
+    <string name="obd_engine_runtime_desc">Pokazuje, jak długo silnik pracował od momentu uruchomienia.</string>
+    <string name="obd_engine_runtime">Czas pracy silnika</string>
+    <string name="speedometer_maximum">Maksimum</string>
+    <string name="fuel_tank_capacity_description">Podaj pojemność zbiornika paliwa, aby precyzyjnie śledzić poziom i zużycie paliwa</string>
+    <string name="fuel_tank_capacity">Pojemność zbiornika paliwa</string>
+    <string name="shared_strings_dimensions">Wymiary</string>
+    <string name="litres">Litry</string>
+    <string name="imperial_gallons">Galony imperialne</string>
+    <string name="unit_of_volume">Jednostka objętości</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Śledź istotne dane pojazdu za pomocą protokołu OBD-II. Monitoruj kluczowe wskaźniki, takie jak prędkość, obroty silnika, zużycie paliwa i inne.</string>
+    <string name="vehicle_metrics_obd_ii">Dane pojazdu (OBD-II)</string>
+    <string name="shared_string_hour">Godzina</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Pokazuje zużycie paliwa przez pojazd na podstawie obliczeń (l/h)</string>
+    <string name="obd_fuel_pressure_desc">Pokazuje ciśnienie w układzie paliwowym</string>
+    <string name="obd_fuel_consumption_rate_sensor">Wskaźnik zużycia paliwa (czujnik)</string>
+    <string name="obd_battery_voltage_desc">Pokazuje poziom napięcia akumulatora pojazdu</string>
 </resources>

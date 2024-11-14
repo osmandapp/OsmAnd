@@ -13,7 +13,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -46,7 +46,7 @@ public class WikipediaPoiMenu {
 		int toggleActionStringId = R.string.shared_string_wikipedia;
 		int languageActionStringId = R.string.shared_string_language;
 		int spaceHeight = app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_big_item_height);
-		boolean enabled = app.getPoiFilters().isPoiFilterSelected(PoiFiltersHelper.getTopWikiPoiFilterId());
+		boolean enabled = app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.TOP_WIKI_FILTER_ID);
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 
 		OnRowItemClick l = new OnRowItemClick() {

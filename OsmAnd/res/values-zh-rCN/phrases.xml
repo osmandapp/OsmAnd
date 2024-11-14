@@ -1723,7 +1723,7 @@
     <string name="poi_butcher_lamb">羊肉</string>
     <string name="poi_butcher_pork">猪肉</string>
     <string name="poi_butcher_halal">清真</string>
-    <string name="poi_origin">原产地</string>
+    <string name="poi_origin">来源</string>
     <string name="poi_tobacco_yes">是；烟草</string>
     <string name="poi_membership_yes">是；会员资格</string>
     <string name="poi_membership_no">否</string>
@@ -3153,4 +3153,7 @@
     <string name="poi_lock_ref">船闸编号</string>
     <string name="poi_lock_height">船闸高度</string>
     <string name="poi_pump_status_locked">水泵状态：上锁</string>
+    <string name="poi_office_diplomatic">外交机构</string>
+    <string name="poi_organic_only">仅限；仅限有机</string>
+    <string name="poi_operational_status_broken">损毁</string>
 </resources>

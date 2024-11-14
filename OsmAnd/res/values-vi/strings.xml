@@ -590,8 +590,6 @@
     <string name="obd_fuel_consumption_rate_l_km">Mức tiêu thụ nhiên liêu (lít/km)</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Hiện mức tiêu thụ nhiên liệu dựa trên sự tính toán (lít/km)</string>
     <string name="simulate_obd">Mô phỏng dữ liệu obd</string>
-    <string name="obd_engine_runtime">Thời gian hoạt động của động cơ</string>
-    <string name="obd_engine_runtime_desc">Hiện thời gian hoạt động của động cơ được lấy từ máy quét obd</string>
     <string name="quick_action_switch_compass_desc">Một nút bật/tắt để chuyển đổi hướng xoay của bản đồ.</string>
     <string name="add_widget_below">Thêm ô thông tin xuống dưới</string>
     <string name="route_roundabout_exit">Đi theo lối ra số %1$d</string>
@@ -1176,7 +1174,7 @@
     <string name="obd_nothing_found_description">Vui lòng kiểm tra những thứ sau:\n – Đảm bảo rằng Bluetooth được bật\n – Động cơ của xe đang chạy\n – Đảm bảo rằng thiết bị của bạn nằm trong vùng của máy quét.</string>
     <string name="obd_device_forget_sensor_description">Máy quét sẽ bị loại bỏ khởi danh sách. Bạn có thể ghép nối lại với máy quét này bất kỳ lúc nào.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step3">3. Bật Bluetooth trên thiết bị của bạn</string>
+    <string name="connect_obd_instructions_step3">Bật Bluetooth trên thiết bị của bạn</string>
     <string name="screen_is_unlocked">Màn hình cảm ứng được mở khoá.</string>
     <string name="screen_is_locked_by_external_button">Màn hình cảm ứng bị khoá. Để mở khoá, nhấn nút %1$s, hoặc chạm vào nút trên màn hình.</string>
     <string name="obd_support">Hỗ trợ OBD</string>
@@ -1205,9 +1203,6 @@
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_air_intake_temp_desc">Hiện nhiệt độ gió vào xe qua cảm biến OBD</string>
-    <string name="obd_ambient_air_temp_desc">Hiện nhiệt độ không khí xung quanh qua cảm biến OBD</string>
-    <string name="obd_engine_coolant_temp_desc">Hiện nhiệt độ chất làm mát động cơ qua cảm biến OBD</string>
     <string name="obd_fuel_left_distance_desc">Hiện quãng đường xe đi được với mức nhiên liệu còn lại qua cảm biến OBD</string>
     <string name="obd_engine_coolant_temp">Nhiệt độ chất làm mát</string>
     <string name="obd_plugin_name">Phép đo phương tiện</string>
@@ -1233,7 +1228,6 @@
     <string name="app_mode_paragliding">Dù lượn</string>
     <string name="files_with_route_restrictions">Những tệp với những giới hạn tuyến đường</string>
     <string name="shared_string_copy_to">Sao chép đến</string>
-    <string name="obd_throttle_position">Vị trí ga</string>
     <string name="liter">l</string>
     <string name="type_of_activity">Loại hoạt động</string>
     <string name="obd_fuel_type_ethanol">Ethanol</string>
@@ -1289,9 +1283,6 @@
     <string name="max_speed_none">không có</string>
     <string name="dynamic_icon_type_summary">Biểu tượng thay đổi dựa trên tình trạng của hành động.</string>
     <string name="shared_string_dynamic">Động</string>
-    <string name="obd_throttle_position_desc">Hiện áp suất nhiên liệu của phương tiện (áp suất đo) được lấy từ máy quét obd</string>
-    <string name="obd_engine_oil_temperature">Nhiệt đồ dầu động cơ</string>
-    <string name="obd_engine_oil_temperature_desc">Hiện nhiệt độ dầu động cơ của phương tiện được lấy từ máy quét obd</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Mức tiêu thụ nhiên liệu (l/h)</string>
     <string name="obd_fuel_level_liter">Mức nhiên liệu (l)</string>
@@ -1300,7 +1291,7 @@
     <string name="obd_bluetooth_off_description">Bật Bluetooth để tìm và kết nối với máy quét.</string>
     <string name="obd_searching_text_description">Vui lòng giữ thiết bị của bạn gần máy quét. Đảm bảo rằng động cơ xe đang hoạt động.</string>
     <string name="connect_obd_instructions_step">1. Kết nối máy quét tới cổng OBD-II trên xe của bạn.\n\n 2. Bật động cơ xe\n\n 3. Bật Bluetooth trên thiết bị của bạn\n\n 4. Chạm vào \'%1$s\' và chọn máy quét của bạn từ danh sách.</string>
-    <string name="connect_obd_instructions_step4">4. Chạm vào \'Kết nối\' và chọn máy quét của bạn từ danh sách.</string>
+    <string name="connect_obd_instructions_step4">Chạm vào \'Kết nối\' và chọn máy quét của bạn từ danh sách.</string>
     <string name="learn_more_about_obd_sensors">Tìm hiểu thêm về các cảm biến.</string>
     <string name="screen_is_locked_by_action_button">Màn hình cảm ứng bị khoá. Chạm vào nút để mở khoá.</string>
     <string name="unit_volt">V</string>
@@ -1309,7 +1300,6 @@
     <string name="obd_fuel_type_bifuel_cng">CNG nhiên liệu kép</string>
     <string name="obd_fuel_type_hybrid_regenerative">Tái tạo Lai</string>
     <string name="obd_fuel_type_unknown">Không rõ loại nhiên loại</string>
-    <string name="obd_speed_desc">Hiện vận tốc của xe qua cảm biến OBD</string>
     <string name="obd_rpm_desc">Hiện tốc độ quay RPM qua cảm biển OBD</string>
     <string name="show_debug_info_description">Hiển thị thông tin đồ hoạ về vị trí của mỗi văn bản của bản đồ</string>
     <string name="upward_gradient">Độ dốc đi lên</string>
@@ -1330,8 +1320,8 @@
     <string name="shared_storage_first_step">Nhấn \"%1$s\".\nTrình quản lý tệp mở nơi cần tìm và mở thư mục osmand.</string>
     <string name="folder_access_denied">Cần cấp quyền để truy cập đến thư mục đã chọn.</string>
     <string name="obd_how_to_connect">Cách kết nối:</string>
-    <string name="connect_obd_instructions_step1">1. Kết nối máy quét tới cổng OBD-II trên xe của bạn.</string>
-    <string name="connect_obd_instructions_step2">2. Bật động cơ xe</string>
+    <string name="connect_obd_instructions_step1">Kết nối máy quét tới cổng OBD-II trên xe của bạn.</string>
+    <string name="connect_obd_instructions_step2">Bật động cơ xe</string>
     <string name="obd_vehicle_info">Thông tin xe</string>
     <string name="connect_obd_instructions_title">OsmAnd hỗ trợ kết nối Bluetooth tới những máy quét OBD-II.</string>
     <string name="routing_attr_avoid_cobblestone_name">Tránh đá cuội</string>
@@ -1434,9 +1424,6 @@
     <string name="other_location">Khác</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Áp suất nhiên liệu</string>
-    <string name="obd_fuel_pressure_desc">Hiện áp suất nhiên liệu của phương tiện (áp suất đo) được lấy từ máy quét obd</string>
-    <string name="obd_calculated_engine_load">Đã tính toán tải động cơ</string>
-    <string name="obd_calculated_engine_load_desc">Hiện tải động cơ đã tính toán của phương tiện dựa trên cảm biến</string>
     <string name="obd_fuel_left_percent">Nhiên liệu còn lại (%)</string>
     <string name="obd_fuel_left_liter">Nhiên liệu còn lại (l)</string>
     <string name="obd_fuel_left_km">Nhiên liệu còn lại (km)</string>
@@ -1521,7 +1508,6 @@
     <string name="obd_fuel_type_hybrid_hydrogen">Hydrogen Lai</string>
     <string name="obd_widget_group">Đơn vị đo phương tiện</string>
     <string name="vehicle_metrics_plugin_settings">Cài đặt Đơn vị đo phương tiện</string>
-    <string name="obd_battery_voltage_desc">Hiện điện áp pin qua cảm biến OBD</string>
     <string name="obd_fuel_level_desc">Hiện mức nhiên liệu của xe qua cảm biến OBD</string>
     <string name="obd_air_intake_temp">Nhiệt độ vào</string>
     <string name="obd_fuel_consumption_rate">Mức tiêu thụ nhiên liệu</string>

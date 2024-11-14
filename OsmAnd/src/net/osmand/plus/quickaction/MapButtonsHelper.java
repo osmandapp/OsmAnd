@@ -18,6 +18,7 @@ import net.osmand.plus.configmap.routes.actions.*;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.*;
+import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.*;
@@ -396,6 +397,7 @@ public class MapButtonsHelper {
 		// interface
 		allTypes.add(OpenNavigationViewAction.TYPE);
 		allTypes.add(OpenSearchViewAction.TYPE);
+		allTypes.add(OpenWunderLINQDatagridAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
 		allTypes.add(LockScreenAction.TYPE);

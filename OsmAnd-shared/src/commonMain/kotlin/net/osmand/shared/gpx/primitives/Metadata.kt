@@ -36,6 +36,18 @@ class Metadata : GpxExtensions {
 		copyExtensions(source)
 	}
 
+	fun isEmpty(): Boolean {
+		return name.isNullOrEmpty() &&
+				desc.isNullOrEmpty() &&
+				link.isNullOrEmpty() &&
+				keywords.isNullOrEmpty() &&
+				time == 0L &&
+				author == null &&
+				copyright == null &&
+				bounds == null &&
+				getExtensionsToRead().isEmpty()
+	}
+
 	fun getArticleTitle(): String? {
 		return getExtensionsToRead()["article_title"]
 	}

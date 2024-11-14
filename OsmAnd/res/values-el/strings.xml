@@ -1348,7 +1348,7 @@
     <string name="tips_and_tricks_descr">Συχνές ερωτήσεις, πρόσφατες αλλαγές και άλλα.</string>
     <string name="shared_string_unexpected_error">Αναπάντεχο σφάλμα</string>
     <string name="shared_string_currently_recording_track">Τρέχουσα καταγραφή ίχνους</string>
-    <string name="plugin_nautical_name">Προβολή Ναυτικού χάρτη</string>
+    <string name="plugin_nautical_name">Προβολή ναυτικού χάρτη</string>
     <string name="rename_failed">Η μετονομασία απέτυχε.</string>
     <string name="days_behind">ημέρες πίσω</string>
     <string name="back_to_map">Πίσω στο χάρτη</string>
@@ -1720,7 +1720,7 @@
     <string name="improve_coverage_mapillary">Βελτίωση κάλυψης φωτογραφίας με Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Εγκαταστήστε το Mapillary για να προσθέσετε φωτογραφίες σε αυτήν την τοποθεσία του χάρτη.</string>
     <string name="no_photos_descr">Χωρίς φωτογραφίες εδώ.</string>
-    <string name="mapillary_action_descr">Μοιραστείτε την θέα σας στο δρόμο μέσω του Mapillary.</string>
+    <string name="mapillary_action_descr">Μοιραστείτε την θέα σας στο επίπεδο του δρόμου μέσω του Mapillary.</string>
     <string name="mapillary_widget">Γραφικό στοιχείο Mapillary</string>
     <string name="mapillary_widget_descr">Επιτρέπει γρήγορες συνεισφορές στο Mapillary.</string>
     <string name="mapillary_descr">Διαδικτυακές φωτογραφίες δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, αποτυπώστε τον κόσμο.</string>
@@ -3416,7 +3416,7 @@
     <string name="shared_string_add_profile">Προσθήκη κατατομής (προφίλ)</string>
     <string name="change_application_profile">Αλλαγή κατατομής (προφίλ) εφαρμογής</string>
     <string name="profiles_for_action_not_found">Αδυναμία εύρεσης τέτοιων κατατομών (προφίλ).</string>
-    <string name="index_item_world_basemap_detailed">Παγκόσμιος χάρτης προεπισκόπησης (λεπτομερής)</string>
+    <string name="index_item_world_basemap_detailed">Προεπισκόπηση παγκόσμιου χάρτη (λεπτομερής)</string>
     <string name="unsupported_type_error">Μη υποστηριζόμενος τύπος</string>
     <string name="width_limit_description">Δώστε το πλάτος του οχήματός σας, κάποιοι περιορισμοί μπορεί να εφαρμόζονται για πλατιά οχήματα.</string>
     <string name="height_limit_description">Δώστε το ύψος του οχήματός σας, κάποιοι περιορισμοί διαδρομής μπορεί να εφαρμόζονται για υψηλά οχήματα.</string>
@@ -4174,7 +4174,7 @@
     <string name="modified_file">Τροποποιημένο αρχείο</string>
     <string name="bottom_widgets_panel">Κάτω πίνακας</string>
     <string name="empty_name">Κενό όνομα</string>
-    <string name="simulation_preview_mode_title">Προεπισκόπηση γρήγορης λειτουργίας</string>
+    <string name="simulation_preview_mode_title">Λειτουργία γρήγορης προεπισκόπησης</string>
     <string name="exit_number">Αριθμός εξόδου</string>
     <string name="shared_string_modified">Τροποποιημένα</string>
     <string name="current_speed_widget_desc">Δείχνει την τρέχουσα ταχύτητα σας, όπως αναφέρεται μέσω GPS.</string>
@@ -4424,7 +4424,6 @@
     <string name="obd_fuel_left_km">Καύσιμο που έμεινε (km)</string>
     <string name="obd_connected_to_device">Συνδέθηκε με %s</string>
     <string name="obd_connecting_to_device">Συνδέεται με %s</string>
-    <string name="obd_engine_oil_temperature">Θερμοκρασία λαδιού μηχανής</string>
     <string name="quick_action_verb_start_pause">Έναρξη / Παύση</string>
     <string name="shared_string_normal">Φυσιολογικό</string>
     <string name="shared_string_original">Αυθεντικό</string>

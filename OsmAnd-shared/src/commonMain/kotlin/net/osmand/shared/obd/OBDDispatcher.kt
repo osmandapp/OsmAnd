@@ -1,121 +1,112 @@
 package net.osmand.shared.obd
 
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
 import okio.Buffer
-import okio.IOException
 import okio.Sink
 import okio.Source
+import kotlin.coroutines.CoroutineContext
 
-
-object OBDDispatcher {
+class OBDDispatcher(val debug: Boolean = false) {
 
 	private var commandQueue = listOf<OBDCommand>()
-	private val staleCommandsCache: MutableMap<OBDCommand, String> = HashMap()
 	private var inputStream: Source? = null
 	private var outputStream: Sink? = null
 	private val log = LoggerFactory.getLogger("OBDDispatcher")
-	private var job: Job? = null
-	private var scope: CoroutineScope? = null
 	private var readStatusListener: OBDReadStatusListener? = null
-	private val sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
-	private var obd2Connection: Obd2Connection? = null
-	var useInfoLogging = false
+	private var sensorDataCache = HashMap<OBDCommand, OBDDataField<Any>?>()
+	private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
 	interface OBDReadStatusListener {
 		fun onIOError()
-		fun onInitConnectionFailed()
 	}
 
-	private fun startReadObdLooper() {
-		job = Job()
-		scope = CoroutineScope(Dispatchers.IO + job!!)
-		scope!!.launch {
+	fun connect(connector: OBDConnector) {
+		scope.launch {
 			try {
-				log("Start reading obd with $inputStream and $outputStream")
-				obd2Connection = Obd2Connection(object : UnderlyingTransport {
-					override fun write(bytes: ByteArray) {
-						val buffer = Buffer()
-						buffer.write(bytes)
-						outputStream?.write(buffer, buffer.size)
-					}
-
-					override fun readByte(): Byte? {
-						val readBuffer = Buffer()
-						return if (inputStream?.read(readBuffer, 1) == 1L) {
-							readBuffer.readByte()
-						} else {
-							null
-						}
-					}
-
-					override fun onInitFailed() {
-						readStatusListener?.onInitConnectionFailed()
-					}
-				})
-				if(obd2Connection?.initialized == true) {
-					while (obd2Connection?.isFinished == false) {
-						try {
-							for (command in commandQueue) {
-								if (command.isStale) {
-									val cachedCommandResponse = staleCommandsCache[command]
-									if (cachedCommandResponse != null && cachedCommandResponse != OBDUtils.INVALID_RESPONSE_CODE) {
-										continue
-									}
-								}
-								val hexGroupCode = "%02X".format(command.commandGroup)
-								val hexCode = "%02X".format(command.command)
-								val fullCommand = "$hexGroupCode$hexCode"
-								val commandResult =
-									obd2Connection!!.run(
-										fullCommand,
-										command.command,
-										command.commandType)
-								if (commandResult.isValid()) {
-									if (commandResult.result.size >= command.responseLength) {
-										sensorDataCache[command] =
-											command.parseResponse(commandResult.result)
-									} else {
-										log("Incorrect response length for command $command")
-									}
-								} else if(commandResult == OBDResponse.NO_DATA) {
-									sensorDataCache[command] = OBDDataField.NO_DATA
-								} else if(commandResult == OBDResponse.ERROR) {
-									readStatusListener?.onIOError()
-								}
-							}
-						} catch (error: IOException) {
-							log("Run OBD looper error. $error")
-							if (inputStream == null || outputStream == null) {
-								break
-							}
-							readStatusListener?.onIOError()
-						}
-						OBDDataComputer.acceptValue(sensorDataCache)
-					}
+				val connectionResult = connector.connect()
+				if (connectionResult == null) {
+					connector.onConnectionFailed()
+				} else {
+					connector.onConnectionSuccess()
+					inputStream = connectionResult.first
+					outputStream = connectionResult.second
+					startReadObdLooper(coroutineContext)
 				}
 			} catch (cancelError: CancellationException) {
 				log("OBD reading canceled")
+			} catch (e: Exception) {
+				log("Unexpected error in connect: ${e.message}")
+				readStatusListener?.onIOError()
+			} finally {
+				connector.disconnect()
+				cleanupResources()
+			}
+		}
+	}
+
+	private fun startReadObdLooper(context: CoroutineContext) {
+		log("Start reading obd with $inputStream and $outputStream")
+		val connection = Obd2Connection(createTransport(), this)
+		try {
+			while (isConnected(connection)) {
+				commandQueue.forEach { command ->
+					context.ensureActive()
+					handleCommand(command, connection)
+				}
+				context.ensureActive()
+				OBDDataComputer.acceptValue(sensorDataCache)
+			}
+		} finally {
+			connection.finish()
+		}
+	}
+
+	private fun createTransport(): UnderlyingTransport = object : UnderlyingTransport {
+		override fun write(bytes: ByteArray) {
+			val buffer = Buffer().apply { write(bytes) }
+			outputStream?.write(buffer, buffer.size)
+		}
+
+		override fun readByte(): Byte? {
+			val readBuffer = Buffer()
+			return if (inputStream?.read(readBuffer, 1) == 1L) readBuffer.readByte() else null
+		}
+	}
+
+	private fun isConnected(connection: Obd2Connection): Boolean =
+		inputStream != null && outputStream != null && !connection.isFinished()
+
+	private fun handleCommand(command: OBDCommand, connection: Obd2Connection) {
+		if (command.isStale && sensorDataCache[command] != null) {
+			return
+		}
+
+		val fullCommand = "%02X%02X".format(command.commandGroup, command.command)
+		val commandResult = connection.run(fullCommand, command.command, command.commandType)
+		commandResult.let {
+			when {
+				it.isValid() && it.result.size >= command.responseLength -> {
+					sensorDataCache[command] = command.parseResponse(it.result)
+				}
+
+				it == OBDResponse.NO_DATA -> sensorDataCache[command] = OBDDataField.NO_DATA
+				it == OBDResponse.ERROR -> readStatusListener?.onIOError()
+				else -> log("Incorrect response length or unknown error for command $command")
 			}
 		}
 	}
 
 	fun addCommand(commandToRead: OBDCommand) {
-		if (commandQueue.indexOf(commandToRead) == -1) {
+		if (!commandQueue.contains(commandToRead)) {
 			commandQueue = KCollectionUtils.addToList(commandQueue, commandToRead)
 		}
 	}
 
 	fun clearCommands() {
-		commandQueue = listOf()
+		commandQueue = emptyList()
 	}
 
 	fun removeCommand(commandToStopReading: OBDCommand) {
@@ -126,34 +117,26 @@ object OBDDispatcher {
 		readStatusListener = listener
 	}
 
-	fun setReadWriteStreams(readStream: Source?, writeStream: Sink?) {
-		scope?.cancel()
-		inputStream = readStream
-		outputStream = writeStream
-		if (readStream != null && writeStream != null) {
-			startReadObdLooper()
-		} else {
-			obd2Connection?.isFinished = true
-		}
+	private fun cleanupResources() {
+		inputStream = null
+		outputStream = null
+		OBDDataComputer.clearCache()
+		readStatusListener = null
 	}
 
 	fun stopReading() {
 		log("stop reading")
-		setReadWriteStreams(null, null)
-		sensorDataCache.clear()
-		OBDDataComputer.clearCache()
+		scope.cancel()
 		log("after stop reading")
 	}
 
-	fun getRawData(): HashMap<OBDCommand, OBDDataField<Any>?> {
-		return HashMap(sensorDataCache)
-	}
+	fun getRawData(): HashMap<OBDCommand, OBDDataField<Any>?> = HashMap(sensorDataCache)
 
 	private fun log(msg: String) {
-		if(useInfoLogging) {
-			log.info(msg)
-		} else {
+		if (debug) {
 			log.debug(msg)
+		} else {
+			log.info(msg)
 		}
 	}
 }

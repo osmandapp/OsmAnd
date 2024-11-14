@@ -18,6 +18,22 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/auto_zoom_map" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="auto_zoom_3d_angle"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/auto_zoom_3d_angle" />
+
+	<SwitchPreferenceCompat
+		android:key="preview_next_turn"
+		android:layout="@layout/preference_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/preview_next_turn" />
+
+	<Preference
+		android:layout="@layout/divider_half_item_with_background"
+		android:selectable="false" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="snap_to_road"
 		android:layout="@layout/preference_dialog_and_switch"

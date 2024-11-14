@@ -4873,4 +4873,26 @@
     <string name="poi_cash_in_no">ne</string>
     <string name="poi_cash_in_customers">nur klientoj</string>
     <string name="poi_diet_pescetarian_no">Senvianda (escepte fiŝoj) dieto: ne</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Tunelo malpermesata por piedirantoj</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Tunelo malpermesata por biciklistoj</string>
+    <string name="poi_osmand_access_main_tag">Aliro</string>
+    <string name="poi_route_article">Vojaĝaj artikoloj</string>
+    <string name="poi_route_article_point">Vojaĝaj punktoj</string>
+    <string name="poi_route_track">Aliaj kursoj</string>
+    <string name="poi_route_track_point">Aliaj kursoj: punktoj</string>
+    <string name="poi_activities_bicycle">Biciklado</string>
+    <string name="poi_activities_trekking">Marŝado</string>
+    <string name="poi_activities_running">Kurado</string>
+    <string name="poi_activities_pedestrian">Irado</string>
+    <string name="poi_activities_kayak">Akvaj sportoj</string>
+    <string name="poi_activities_horse">Ĉevalrajdado</string>
+    <string name="poi_activities_skiing">Vintraj sportoj</string>
+    <string name="poi_activities_snowmobile">Motorsledado</string>
+    <string name="poi_activities_fitness">Vojetoj de sportiloj</string>
+    <string name="poi_activities_inline_skates">Rulglitado</string>
+    <string name="poi_activities_mountain_bike">Montbiciklado</string>
+    <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_payment_parco_no">Parco malakceptata</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">Parkster malakceptata</string>
 </resources>

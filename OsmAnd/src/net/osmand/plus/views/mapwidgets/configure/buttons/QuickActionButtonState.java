@@ -45,8 +45,8 @@ public class QuickActionButtonState extends MapButtonState {
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
-		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().makeShared();
-		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().makeShared().storeLastModifiedTime();
+		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal();
+		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 	}
 

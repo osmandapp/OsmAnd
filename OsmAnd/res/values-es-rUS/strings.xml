@@ -196,7 +196,7 @@
     <string name="map_widget_right">Panel derecho</string>
     <string name="map_widget_left">Panel izquierdo</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="search_radius_proximity">A menos de</string>
+    <string name="search_radius_proximity">Dentro de</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como «%1$s»</string>
     <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
@@ -372,8 +372,8 @@
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
     <string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
-    <string name="navigate_point_northing">Al norte</string>
-    <string name="navigate_point_easting">Al este</string>
+    <string name="navigate_point_northing">Al norte (lon)</string>
+    <string name="navigate_point_easting">Al este (lat)</string>
     <string name="use_opengl_render_descr">Usa el renderizado OpenGL acelerado por hardware (podría consumir más batería o no funcionar en dispositivos antiguos).</string>
     <string name="error_avoid_specific_road">No se ha encontrado un desvío</string>
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
@@ -2504,7 +2504,7 @@
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="enter_the_file_name">Escribe el nombre del archivo.</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
-    <string name="transport_nearby_routes">A menos de</string>
+    <string name="transport_nearby_routes">Dentro de</string>
     <string name="distance_farthest">Más lejos primero</string>
     <string name="distance_nearest">Más cerca primero</string>
     <string name="enter_lon">Ingresar longitud</string>
@@ -3628,7 +3628,7 @@
     <string name="file_already_imported">El archivo ya fue importado en OsmAnd</string>
     <string name="user_login">Ingresar</string>
     <string name="use_login_password">Usar nombre de usuario y contraseña</string>
-    <string name="subscription_payment_issue_title">Hay un problema con la suscripción. Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
+    <string name="subscription_payment_issue_title">Pulsa el botón para ir a los ajustes de la suscripción de Google Play y corregir el método de pago.</string>
     <string name="subscription_paused_title">La suscripción a OsmAnd Live se ha pausado</string>
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="subscription_expired_title">La suscripción a OsmAnd Live ha caducado</string>
@@ -3824,11 +3824,11 @@
     <string name="trip_recording_show_start_dialog_setting">Si se desactiva, la grabación será iniciada al pulsar el widget o el elemento del menú, saltándose el diálogo de confirmación.</string>
     <string name="customize_route_line">Personalizar línea de ruta</string>
     <string name="shared_string_route_line">Línea de ruta</string>
-    <string name="specify_color_for_map_mode">Define el color para el modo de mapa «%1$s».</string>
+    <string name="specify_color_for_map_mode">Define el color para el modo del mapa «%1$s».</string>
     <string name="no_purchases">No tienes compras</string>
     <string name="new_device_account">Nuevo dispositivo / nueva cuenta</string>
-    <string name="contact_support_description">Si tienes alguna duda, ponte en contacto con nosotros en %1$s.</string>
-    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o ponte en contacto con nuestro equipo de asistencia.</string>
+    <string name="contact_support_description">Si tienes alguna duda, contacta con nosotros en %1$s.</string>
+    <string name="empty_purchases_description">Si tus compras no aparecen aquí, pulsa sobre «%1$s», o contacta con nuestro equipo de asistencia.</string>
     <string name="contact_support">Contacto con soporte</string>
     <string name="troubleshooting">Solución de problemas</string>
     <string name="troubleshooting_description">Sigue este enlace si tienes algún problema con las compras.</string>
@@ -3872,15 +3872,15 @@
     <string name="last_backup">Última copia de seguridad</string>
     <string name="duration_ago">hace %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Haz una copia de seguridad y restaura toda la información fácilmente.</string>
+    <string name="osmand_cloud_authorize_descr">Nunca pierdas tus datos. Crea una copia de seguridad y restaura toda la información fácilmente.</string>
     <string name="local_backup">Copia de seguridad local</string>
     <string name="local_backup_descr">Crea una copia de seguridad o restaura los datos de un archivo local.</string>
     <string name="backup_into_file">Crear copia de seguridad local</string>
     <string name="restore_from_file">Restaurar desde archivo</string>
-    <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
+    <string name="osmand_cloud_help_descr">¿Necesitas ayuda? Contacta con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
-    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos una contraseña de un solo uso.</string>
+    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Te enviaremos un código de verificación único.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
     <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
@@ -3892,7 +3892,7 @@
     <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
     <string name="shared_string_offline">Desconectado</string>
     <string name="shared_string_online">En línea</string>
-    <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, Graphhopper, openrouteservice o GPX.</string>
+    <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, GraphHopper, OpenRouteService o GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Provisto por %1$s</string>
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
@@ -3901,7 +3901,7 @@
     <string name="backup_complete">Copia de seguridad completa</string>
     <string name="backup_now">Respaldar ahora</string>
     <string name="make_backup">Crear copia de seguridad</string>
-    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, haz una copia de seguridad de estos datos para no perderlos.</string>
+    <string name="make_backup_descr">Hay muchos cambios en este dispositivo, crea una copia de seguridad de estos datos para no perderlos.</string>
     <string name="backup_conflicts">Conflictos</string>
     <string name="backup_confilcts_descr">Algunos archivos no se pudieron cargar porque existe una versión más reciente en el servidor.</string>
     <string name="backup_view_conflicts">Ver conflictos</string>
@@ -3948,7 +3948,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtén acceso a las actualizaciones mensuales de los mapas sin conexión.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obtén acceso a actualizaciones de mapas con mayor frecuencia, elige entre: actualizaciones horarias, diarias o semanales. Las actualizaciones se descargan de forma incremental, sólo para el área modificada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Crea copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
@@ -3980,21 +3980,20 @@
     <string name="backup_error_size_is_exceeded">Tamaño máximo de OsmAnd Cloud excedido (%1$s)</string>
     <string name="backup_error_gzip_only_supported_upload">El archivo debe enviarse en formato «.gzip»</string>
     <string name="backup_error_file_not_available">Archivo no disponible</string>
-    <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
+    <string name="backup_error_token_is_not_valid">Hay un problema con el ID del dispositivo o la clave proporcionada</string>
     <string name="backup_error_token_is_not_valid_or_expired">Clave inválida o vencida</string>
-    <string name="backup_error_user_is_not_registered">Ningún usuario se encuentra registrado con ese correo electrónico</string>
-    <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
-    <string name="release_4_0">• Copia de seguridad en la nube\n\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo»\n\n• Se ha añadido la opción de descargar las curvas de nivel en pies\n\n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente\n\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»\n\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada\n\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta\n\n• Se ha añadido la opción de «Compra» con información detallada de las compras\n\n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta\n\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones»</string>
+    <string name="backup_error_user_is_not_registered">Ningún usuario se ha registrado con ese correo electrónico</string>
+    <string name="enter_verification_code">Ingresa el código de verificación</string>
+    <string name="release_4_0">• Copia de seguridad en la nube\n\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo»\n\n• Se ha añadido la opción de descargar las curvas de nivel en pies\n\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente\n\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»\n\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada\n\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta\n\n• Se ha añadido la opción de «Compra» con información detallada de las compras\n\n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta\n\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones»</string>
     <string name="duration_moment_ago">hace instantes</string>
-    <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha caducado, renuévala para usar la copia de seguridad. Todavía se pueden restaurar los datos de la nube.</string>
+    <string name="backup_error_subscription_was_expired_descr">La suscripción a «OsmAnd Pro» ha vencido, renuévala para usar la copia de seguridad. Aún puedes restaurar los datos de la nube.</string>
     <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
-    <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
-    <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
-\nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
+    <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">¿Cerrar sesión? \nDeberás volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
     <string name="backup_deleting_all_data">Borrando todos los datos…</string>
     <string name="backup_deleted_all_data">Se borraron todos los datos.</string>
     <string name="backup_deleting_all_data_descr">Espera hasta que OsmAnd borre tus datos de la nube. Todos los datos del dispositivo permanecen intactos.</string>
-    <string name="backup_deleted_all_data_descr">Todos tus datos han sido borrados con éxito de OsmAnd Cloud.</string>
+    <string name="backup_deleted_all_data_descr">Todos tus datos se borraron correctamente de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
@@ -4021,15 +4020,11 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorea las rutas según su tipo de red de nodos (internacional, regional, local).</string>
     <string name="walking_route_osmc_description">Colorea las rutas según su color local individual (si está presente en OpenStreetMap) y el tipo (internacional, regional, local).</string>
     <string name="travel_routes">Rutas turísticas</string>
-    <string name="setting_supported_by_style">Este ajuste es provisto por el estilo de mapa «%1$s»</string>
-    <string name="direct_line_maps_required_descr">El cálculo de la ruta demora más de lo habitual.
-\n
-\nQuizás algunos mapas no estén cargados.</string>
-    <string name="online_direct_line_maps_link">Consulta los mapas necesarios.</string>
+    <string name="setting_supported_by_style">Este ajuste lo provee el estilo de mapa «%1$s»</string>
+    <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual. \n \nQuizás falten cargar algunos mapas.</string>
+    <string name="online_direct_line_maps_link">Revisa los mapas necesarios.</string>
     <string name="offline_maps_required_descr">Faltan algunos mapas sin conexión necesarios para esta ruta.</string>
-    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no ha podido determinar una ruta con tus ajustes.
-\n
-\nQuizás algunos mapas no están cargados, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
+    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no pudo determinar una ruta con tus ajustes. \n \nQuizás falten cargar algunos mapas, puedes ejecutar una comprobación en línea para los mapas necesarios.</string>
     <string name="online_maps_searching_descr">Buscando mapas en línea…</string>
     <string name="reset_to_original">Reiniciar al original</string>
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
@@ -4041,7 +4036,7 @@
     <string name="available_until">Disponible hasta el %1$s</string>
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
-    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
+    <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tardar varias horas.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
@@ -4157,8 +4152,7 @@
 \nLa aplicación cargará los datos usando la nueva carpeta.</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
-    <string name="shared_storage_first_step">Pulsa «%1$s».
-\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_first_step">Pulsa «%1$s». \nEl gestor de archivos se abrirá donde deberías encontrar y abrir la carpeta «osmand».</string>
     <string name="shared_storage_second_step">Pulsa en «Usar esta carpeta».</string>
     <string name="folder_access_denied">Se necesitan permisos para acceder a la carpeta elegida.</string>
     <string name="copying_completed">Copiado</string>
@@ -4201,7 +4195,7 @@
     <string name="gps_filter_speed_altitude_desc">Sólo los puntos de la traza que coincidan con el intervalo definido aparecerán en el gráfico y el mapa, el resto quedará oculto.</string>
     <string name="distance_between_points">Distancia entre puntos</string>
     <string name="gps_filter_actions_description">OsmAnd aplicará los cambios a la traza, sin actualizar el archivo. Puedes guardar los cambios manualmente.</string>
-    <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
+    <string name="storage_migration_wrong_folder_warning">No se encontraron datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
@@ -4212,7 +4206,7 @@
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
-    <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
+    <string name="turn_arrows_descr">Elige si se muestran las flechas de giro en la línea de ruta.</string>
     <string name="navigate_point_format_swiss_grid">Sistema suizo (CH1903)</string>
     <string name="shared_string_not_used">Sin usar</string>
     <string name="waypoint_appearance">Aspecto del punto de referencia</string>
@@ -4254,7 +4248,7 @@
     <string name="list_of_groups">Lista de grupos</string>
     <string name="edit_category">Editar categoría</string>
     <string name="shared_string_shape">Forma</string>
-    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos añadidos al grupo.</string>
+    <string name="default_appearance_desc">La forma, el color y el icono predefinido serán aplicados a los puntos favoritos dentro del grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
     <string name="rendering_attr_showFitnessTrails_description">Muestra los circuitos aeróbicos</string>
     <string name="stop_download">Parar descarga</string>
@@ -4265,7 +4259,7 @@
     <string name="stop_and_exit">Parar y salir</string>
     <string name="shared_string_complete">completo</string>
     <string name="zoom_levels_difference_description">Una gran diferencia entre los niveles de zum, puede aumentar el tamaño de los datos descargados.</string>
-    <string name="move_map_to_select_area">Mover el mapa para elegir el área necesaria.</string>
+    <string name="move_map_to_select_area">Mueve el mapa para elegir el área necesaria.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rutas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rutas para correr</string>
     <string name="routeInfo_horse_scale_name">Dificultad de los senderos ecuestres</string>
@@ -4684,7 +4678,7 @@
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado el</string>
     <string name="choose_what_to_sync">Elige qué sincronizar</string>
-    <string name="cloud_sync_progress">Sincronizar... %1$s</string>
+    <string name="cloud_sync_progress">Sincronizando... %1$s</string>
     <string name="checking_progress">Comprobando…</string>
     <string name="shared_string_modified">Editado</string>
     <string name="sync_now">Sincronizar ahora</string>
@@ -5227,15 +5221,15 @@
     <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
     <string name="max_sensor_temperature">Temperatura, máx</string>
     <string name="avg_sensor_temperature">Temperatura, promedio</string>
-    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
-    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
+    <string name="avg_sensor_speed">Sensor de velocidad, promedio</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» ordenadas por: «%2$s»</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="shared_string_keywords">Palabras clave</string>
     <string name="shared_string_additional">Adicional</string>
     <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
     <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
     <string name="battery_optimization">Optimización de la batería</string>
-    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
+    <string name="max_sensor_speed">Sensor de velocidad, max</string>
     <string name="special_routing_cpp">Tipo de navegación especial</string>
     <string name="custom_map_button_name_present">Ese botón ya existe</string>
     <string name="add_button">Añadir botón</string>
@@ -5372,7 +5366,7 @@
     <string name="quick_action_map_style">Estilo del mapa</string>
     <string name="quick_action_remove_next_destination">Siguiente punto de destino</string>
     <string name="app_profile">Perfil de la aplicación</string>
-    <string name="quick_action_next_app_profile">Perfil de la aplicación siguiente</string>
+    <string name="quick_action_next_app_profile">Perfil siguiente de la aplicación</string>
     <string name="shared_string_set">Definir</string>
     <string name="quick_action_terrain">Tipo de coloreado del terreno</string>
     <string name="quick_action_first_intermediate">Primer destino intermedio</string>
@@ -5384,7 +5378,7 @@
     <string name="quick_action_move_map_right">Mapa a la derecha</string>
     <string name="quick_action_move_map_down">Mapa hacia abajo</string>
     <string name="quick_action_new_route">Nueva ruta</string>
-    <string name="quick_action_previous_app_profile">Perfil de la aplicación anterior</string>
+    <string name="quick_action_previous_app_profile">Perfil anterior de la aplicación</string>
     <string name="shared_string_create">Crear</string>
     <string name="shared_string_replace">Reemplazar</string>
     <string name="shared_string_simulate">Simular</string>
@@ -5405,7 +5399,7 @@
 \nCPU básica: %2$s
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>
-    <string name="quick_action_to_my_location">Para mi ubicación</string>
+    <string name="quick_action_to_my_location">A mi ubicación</string>
     <string name="quick_action_move_map_left">Mapa a la izquierda</string>
     <string name="quick_action_move_map_up">Mapa hacia arriba</string>
     <string name="quick_action_audio_note">Nota de audio</string>
@@ -5437,7 +5431,7 @@
     <string name="resting_position">Ubicación en reposo</string>
     <string name="navigation_position">Ubicación al navegar</string>
     <string name="resting_navigation_position">Ubicación en reposo y al navegar</string>
-    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triángular</string>
+    <string name="view_angle_description">Muestra la dirección de la vista actual con un área triangular</string>
     <string name="view_angle">Ángulo de visión</string>
     <string name="location_radius_description">Muestra el área circular que representa la exactitud de la ubicación actual</string>
     <string name="location_radius">Radio de ubicación</string>
@@ -5551,11 +5545,7 @@
     <string name="obd_fuel_type_bifuel_ethanol">Combustible dual con etanol</string>
     <string name="obd_fuel_type_bifuel_lpg">Combustible dual con GLP</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Muestra la velocidad del vehículo según el sensor OBD</string>
     <string name="obd_rpm_desc">Muestra las RPM del tacómetro del vehículo según el sensor OBD</string>
-    <string name="obd_air_intake_temp_desc">Muestra la temperatura del aire de admisión del vehículo según el sensor OBD</string>
-    <string name="obd_engine_coolant_temp_desc">Muestra la temperatura del refrigerante del motor según el sensor OBD</string>
-    <string name="obd_battery_voltage_desc">Muestra el voltaje de la batería según el sensor OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisión</string>
     <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
     <string name="lock_screen_description">Activa o desactiva la funcionalidad de la pantalla táctil para evitar pulsaciones accidentales</string>
@@ -5576,7 +5566,6 @@
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y a combustión</string>
     <string name="percent_unit">%</string>
     <string name="obd_rpm">RPM</string>
-    <string name="obd_ambient_air_temp_desc">Muestra la temperatura ambiente según el sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Muestra la distancia a recorrer con el nivel de combustible restante según el sensor OBD</string>
     <string name="obd_fuel_type_desc">Muestra el tipo de combustible según el sensor OBD</string>
     <string name="obd_ambient_air_temp">Temperatura ambiente</string>
@@ -5599,10 +5588,10 @@
     <string name="obd_vehicle_info">Datos del vehículo</string>
     <string name="obd_how_to_connect">Cómo conectarse:</string>
     <string name="connect_obd_instructions_step">1. Conecta el escáner al puerto OBD-II del vehículo.\n\n2. Enciende el motor del vehículo\n\n3. Activa el Bluetooth del dispositivo\n\n4. Pulsa «%1$s» y elige el escáner del listado.</string>
-    <string name="connect_obd_instructions_step1">1. Conecta el escáner al puerto OBD-II del vehículo.</string>
-    <string name="connect_obd_instructions_step2">2. Enciende el motor del vehiculo</string>
-    <string name="connect_obd_instructions_step3">3. Activa el Bluetooth del dispositivo</string>
-    <string name="connect_obd_instructions_step4">4. Pulsa «Conectar» y elige tu escáner en el listado.</string>
+    <string name="connect_obd_instructions_step1">Conecta el escáner al puerto OBD-II del vehículo.</string>
+    <string name="connect_obd_instructions_step2">Enciende el motor del vehiculo</string>
+    <string name="connect_obd_instructions_step3">Activa el Bluetooth del dispositivo</string>
+    <string name="connect_obd_instructions_step4">Pulsa «Conectar» y elige tu escáner en el listado.</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasa de consumo del combustible (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
     <string name="learn_more_about_obd_sensors">Véase más sobre los sensores.</string>
@@ -5622,4 +5611,41 @@
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_title">OsmAnd admite conexiones Bluetooth a escáneres OBD-II.</string>
     <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
+    <string name="liter">l</string>
+    <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
+    <string name="record_obd_data">Grabar estadísticas del vehículo</string>
+    <string name="obd_not_connected_to_device">Desconectado de %s</string>
+    <string name="obd_engine_runtime">Tiempo de funcionamiento del motor</string>
+    <string name="obd_engine_runtime_desc">Muestra el tiempo de funcionamiento del motor, según el escáner OBD</string>
+    <string name="obd_calculated_engine_load_desc">Muestra la carga calculada del motor, según el sensor</string>
+    <string name="bt_start_pair_failed">No es posible vincular con el dispositivo</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra la tasa de consumo del combustible, según los cálculos (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Tasa de consumo del combustible (l/km)</string>
+    <string name="obd_throttle_position_desc">Muestra la presión del combustible (presión manométrica) según el escáner OBD</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Presión del combustible</string>
+    <string name="obd_fuel_pressure_desc">Muestra la presión del combustible (presión manométrica) según el escáner OBD</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
+    <string name="obd_engine_oil_temperature_desc">Muestra la temperatura del aceite del motor, según el escáner OBD</string>
+    <string name="shared_string_dynamic">Dinámico</string>
+    <string name="obd_connected_to_device">Conectado a %s</string>
+    <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>
+    <string name="obd_connecting_to_device">Conectando a %s</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Muestra la tasa de consumo del combustible, según los cálculos (l/km)</string>
+    <string name="obd_throttle_position">Posición del acelerador</string>
+    <string name="obd_calculated_engine_load">Carga calculada del motor</string>
+    <string name="speedometer_maximum">Máximo</string>
+    <string name="fuel_tank_capacity_description">Ingresa la capacidad del tanque para controlar con precisión los niveles de combustible y su consumo</string>
+    <string name="fuel_tank_capacity">Capacidad del tanque de combustible</string>
+    <string name="shared_strings_dimensions">Dimensiones</string>
+    <string name="litres">Litros</string>
+    <string name="imperial_gallons_unit">gal imp</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Galones imperiales</string>
+    <string name="us_gallons">Galones (EEUU)</string>
+    <string name="unit_of_volume_description">Las unidades elegidas serán aplicadas a todos los datos relacionados con el volúmen en el perfil actual.</string>
+    <string name="unit_of_volume">Unidad de volúmen</string>
+    <string name="simulate_obd">Simular datos OBD</string>
 </resources>

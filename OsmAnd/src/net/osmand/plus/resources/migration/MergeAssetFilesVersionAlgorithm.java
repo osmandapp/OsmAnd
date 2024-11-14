@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.resources.AssetsCollection;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 
@@ -70,8 +71,8 @@ public class MergeAssetFilesVersionAlgorithm {
 	}
 
 	private boolean isContentIdentical(@NonNull InputStream is1, @NonNull InputStream is2) throws IOException {
-		String md5Digest1 = DigestUtils.md5Hex(is1);
-		String md5Digest2 = DigestUtils.md5Hex(is2);
+		String md5Digest1 = new String(Hex.encodeHex(DigestUtils.md5(is1)));
+		String md5Digest2 = new String(Hex.encodeHex(DigestUtils.md5(is2)));
 		return Objects.equals(md5Digest1, md5Digest2);
 	}
 }

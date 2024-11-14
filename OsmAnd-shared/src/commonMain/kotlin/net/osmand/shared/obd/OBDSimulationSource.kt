@@ -12,13 +12,15 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class ODBSimulationSource {
+class OBDSimulationSource {
 
 	private var bufferToRead: String? = null
 	private var fuelLeftLvl = 255
 	private var lastFuelChangedTime = 0L
+	private val NEW_DATA_PACK_DELAY = 2000L
 	private val CHANGE_FUEL_LV_TIMEOUT = 15000
 	private val log = LoggerFactory.getLogger("ODBSimulationSource")
+	private var showFuelPeak = true
 
 	val writer: Sink = object : Sink {
 		override fun close() {
@@ -49,7 +51,7 @@ class ODBSimulationSource {
 			val command = splitCommand[1]
 			val obdCommand = OBDCommand.getByCode(commandCode.toInt(16), command.toInt(16))
 			if (obdCommand?.ordinal == OBDCommand.entries.size - 1) {
-				delay(200)
+				delay(NEW_DATA_PACK_DELAY)
 			}
 			val response = when (obdCommand) {
 				OBDCommand.OBD_VIN_COMMAND -> ""
@@ -68,15 +70,25 @@ class ODBSimulationSource {
 					bufferToRead = "NODATA>"
 					return@runBlocking
 				}
+
 				OBDCommand.OBD_FUEL_TYPE_COMMAND -> "01"
 				OBDCommand.OBD_FUEL_LEVEL_COMMAND -> {
 					val curTime = currentTimeMillis()
 					if (curTime - lastFuelChangedTime > CHANGE_FUEL_LV_TIMEOUT) {
 						lastFuelChangedTime = curTime
 						fuelLeftLvl = max(0, --fuelLeftLvl)
+						if (fuelLeftLvl < 255 * 80 / 100) {
+							fuelLeftLvl = 250
+							showFuelPeak = true
+						}
 					}
 					log.debug("fuelLeftLvl $fuelLeftLvl; curTime $curTime; lastFuelChangedTime $lastFuelChangedTime")
-					toNormalizedHex(fuelLeftLvl)
+					if (fuelLeftLvl < 255 * 90 / 100 && showFuelPeak) {
+						showFuelPeak = false
+						toNormalizedHex(250)
+					} else {
+						toNormalizedHex(fuelLeftLvl)
+					}
 				}
 
 				null -> ""
@@ -86,7 +98,7 @@ class ODBSimulationSource {
 	}
 
 	private fun toNormalizedHex(data: Int): String {
-		val hexString = data.toString(16).uppercase()
+		val hexString = data.toUInt().toString(16).uppercase()
 		return if (hexString.length % 2 != 0) {
 			"0$hexString"
 		} else {
@@ -101,7 +113,7 @@ class ODBSimulationSource {
 		override fun read(sink: Buffer, byteCount: Long): Long {
 			bufferToRead?.let {
 				val readCount = min(byteCount, it.length.toLong())
-				if(readCount > 0) {
+				if (readCount > 0) {
 					val data = it.substring(0, readCount.toInt())
 					bufferToRead = it.substring(readCount.toInt())
 					sink.writeUtf8(data)

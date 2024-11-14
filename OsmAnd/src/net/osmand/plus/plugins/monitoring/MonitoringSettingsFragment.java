@@ -28,7 +28,11 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -69,6 +73,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String EXTERNAL_SENSORS = "open_sensor_settings";
 	private static final String PRESELECTED_ROUTE_ACTIVITY = "current_track_route_activity";
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
+	private static final String RECORD_OBD_DATA_PROMO = "record_obd_data_promo";
+	private static final String RECORD_OBD_DATA = "record_obd_data";
 
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	boolean showSwitchProfile;
@@ -264,9 +270,27 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		showTripRecNotification.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
 	}
 
-	private void setupObdRecordingPref() {
-		SwitchPreferenceEx recordOBDData = findPreference(settings.RECORD_OBD_DATA.getId());
-		recordOBDData.setIcon(getPersistentPrefIcon(R.drawable.ic_action_car_info));
+	public void setupObdRecordingPref() {
+		Preference preference = findPreference(RECORD_OBD_DATA);
+		String summary = app.getString(R.string.shared_string_none);;
+		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
+		if (plugin != null) {
+			List<String> enabledCommands = plugin.getTRIP_RECORDING_VEHICLE_METRICS().getStringsListForProfile(getSelectedAppMode());
+			if (!Algorithms.isEmpty(enabledCommands)) {
+				summary = String.valueOf(enabledCommands.size());
+			}
+		}
+		preference.setSummary(summary);
+
+		Preference promo = findPreference(RECORD_OBD_DATA_PROMO);
+
+		boolean purchased = InAppPurchaseUtils.isVehicleMetricsAvailable(app);
+		preference.setVisible(purchased && PluginsHelper.isEnabled(VehicleMetricsPlugin.class));
+		promo.setVisible(!purchased);
+
+		int iconId = R.drawable.ic_action_car_info;
+		preference.setIcon(getPersistentPrefIcon(iconId));
+		promo.setIcon(getContentIcon(iconId));
 	}
 
 	private void setupTrackStorageDirectoryPref() {
@@ -459,6 +483,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				SelectRouteActivityController.showDialog(mapActivity, getRouteActivitySelectionHelper());
+			}
+		} else if (RECORD_OBD_DATA_PROMO.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.VEHICLE_METRICS);
+			}
+		} else if (RECORD_OBD_DATA.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				VehicleMetricsRecordingFragment.showInstance(mapActivity, this, getSelectedAppMode());
 			}
 		}
 		return super.onPreferenceClick(preference);

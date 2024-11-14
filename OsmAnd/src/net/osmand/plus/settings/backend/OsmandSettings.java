@@ -96,6 +96,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
@@ -314,9 +315,22 @@ public class OsmandSettings {
 				}
 				return false;
 			}
-		} else if (preference instanceof StringPreference) {
-			if (value instanceof String) {
-				return ((StringPreference) preference).setModeValue(mode, (String) value);
+		} else if (preference instanceof ListStringPreference listStringPreference) {
+			if (value instanceof List<?> || (value == null && listStringPreference.isNullSupported(mode))) {
+				if (value == null) {
+					listStringPreference.setStringsListForProfile(mode,null);
+				} else {
+					List<?> list = (List<?>) value;
+					boolean isListOfString = list.stream().allMatch(element -> element instanceof String);
+					if (isListOfString) {
+						List<String> listOfString = (List<String>) list;
+						listStringPreference.setStringsListForProfile(mode, listOfString);
+					}
+				}
+			}
+		} else if (preference instanceof StringPreference stringPref) {
+			if (value instanceof String || (value == null && stringPref.isNullSupported(mode))) {
+				return stringPref.setModeValue(mode, (String) value);
 			}
 		} else {
 			if (value instanceof String) {
@@ -1134,7 +1148,7 @@ public class OsmandSettings {
 
 	// fuel tank capacity stored in litres
 	public final OsmandPreference<Float> FUEL_TANK_CAPACITY = new FloatPreference(this,
-			"fuel_tank_capacity", 0).makeProfile();
+			"fuel_tank_capacity", OBDDataComputer.DEFAULT_FUEL_TANK_CAPACITY).makeProfile();
 
 
 	// cache of metrics constants as they are used very often
@@ -1456,6 +1470,8 @@ public class OsmandSettings {
 		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.CLOSE);
 	}
 
+	public final CommonPreference<Integer> AUTO_ZOOM_3D_ANGLE = new IntPreference(this, "auto_zoom_3d_angle", 25).makeProfile().cache();
+
 	public final CommonPreference<Integer> DELAY_TO_START_NAVIGATION = new IntPreference(this, "delay_to_start_navigation", -1) {
 
 		public Integer getDefaultValue() {
@@ -1474,6 +1490,7 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
+	public final CommonPreference<Boolean> PREVIEW_NEXT_TURN = new BooleanPreference(this, "preview_next_turn", true).makeProfile().cache();
 	public final CommonPreference<MarkerDisplayOption> VIEW_ANGLE_VISIBILITY = new EnumStringPreference<>(this, "view_angle_visibility", MarkerDisplayOption.RESTING, MarkerDisplayOption.values()).makeProfile().makeShared();
 	public final CommonPreference<MarkerDisplayOption> LOCATION_RADIUS_VISIBILITY = new EnumStringPreference<>(this, "location_radius_visibility", MarkerDisplayOption.RESTING_NAVIGATION, MarkerDisplayOption.values()).makeProfile().makeShared();
 
@@ -1529,6 +1546,8 @@ public class OsmandSettings {
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
+
+	public final CommonPreference<Boolean> SHOW_MINOR_TURNS = new BooleanPreference(this, "show_minor_turns", true).makeProfile();
 
 	public boolean simulateNavigation;
 	public boolean simulateNavigationStartedFromAdb;
@@ -1722,7 +1741,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", true).makeProfile();
 
-	public final CommonPreference<Boolean> RECORD_OBD_DATA = new BooleanPreference(this, "record_obd_data", false).makeProfile();
 
 	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();
 
