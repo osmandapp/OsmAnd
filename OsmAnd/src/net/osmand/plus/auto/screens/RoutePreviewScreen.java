@@ -2,6 +2,8 @@ package net.osmand.plus.auto.screens;
 
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
@@ -67,6 +70,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private CompassMode savedCompassMode = CompassMode.NORTH_IS_UP;
 	private float prevElevationAngle = 90;
+	private float prevRotationAngle = 0;
+	private boolean prevMapLinkedToLocation = false;
 
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
@@ -148,11 +153,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		getApp().getTargetPointsHelper().addListener(stateChangedListener);
-		savedCompassMode = getApp().getSettings().getCompassMode();
-		getApp().getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
+		prevMapLinkedToLocation = getApp().getMapViewTrackingUtilities().isMapLinkedToLocation();
 		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+		savedCompassMode = getApp().getSettings().getCompassMode();
+		prevRotationAngle = mapView.getRotate();
+		getApp().getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.getElevationAngle());
-		if (getApp().getRoutingHelper().isRouteCalculated()) {
+		NavigationSession navigationSession = getSession();
+		if (getApp().getRoutingHelper().isRouteCalculated() && navigationSession != null && navigationSession.isCarNavigationActive()) {
 			updateRoute(true);
 		} else {
 			prepareRoute();
@@ -164,9 +172,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.removeListener(this);
-		app.getSettings().setCompassMode(savedCompassMode);
-		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-		mapView.setElevationAngle(prevElevationAngle);
 		if (routingHelper.isRoutePlanningMode()) {
 			app.stopNavigation();
 		}
@@ -177,6 +182,30 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
 		recenterMap();
+	}
+
+	@Override
+	public void onResume(@NonNull LifecycleOwner owner) {
+		if (getApp().getRoutingHelper().isRouteCalculated()) {
+			zoomMapToRoute();
+		}
+	}
+
+	@Override
+	public void onStop(@NonNull LifecycleOwner owner) {
+		if(getApp().getSettings().getCompassMode() != savedCompassMode) {
+			getApp().getSettings().setCompassMode(savedCompassMode);
+		}
+		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+		if(mapView.getElevationAngle() != prevElevationAngle) {
+			mapView.setElevationAngle(prevElevationAngle);
+		}
+		if(mapView.getRotate() != prevRotationAngle) {
+			mapView.setRotate(prevRotationAngle, true);
+		}
+		if(prevMapLinkedToLocation != getApp().getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+			getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(prevMapLinkedToLocation);
+		}
 	}
 
 	@NonNull
@@ -223,13 +252,16 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		zoomMapToRoute();
+		updateRoute(newRoute);
+	}
+
+	private void zoomMapToRoute() {
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
 		if (mapRect != null) {
-			LOG.info("ZOOM Route " + mapRect);
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
-		updateRoute(newRoute);
 	}
 
 	@Override
