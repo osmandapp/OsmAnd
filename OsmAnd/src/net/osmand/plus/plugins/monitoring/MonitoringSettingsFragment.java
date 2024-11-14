@@ -32,6 +32,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -270,18 +271,21 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	public void setupObdRecordingPref() {
-		SwitchPreferenceEx preference = findPreference(settings.RECORD_OBD_DATA.getId());
+		Preference preference = findPreference(RECORD_OBD_DATA);
 		String summary = app.getString(R.string.shared_string_none);;
-		List<String> enabledCommands = app.getSettings().TRIP_RECORDING_VEHICLE_METRICS.getStringsList();
-		if (!Algorithms.isEmpty(enabledCommands)) {
-			summary = String.valueOf(enabledCommands.size());
+		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
+		if (plugin != null) {
+			List<String> enabledCommands = plugin.getTRIP_RECORDING_VEHICLE_METRICS().getStringsListForProfile(getSelectedAppMode());
+			if (!Algorithms.isEmpty(enabledCommands)) {
+				summary = String.valueOf(enabledCommands.size());
+			}
 		}
 		preference.setSummary(summary);
 
 		Preference promo = findPreference(RECORD_OBD_DATA_PROMO);
 
 		boolean purchased = InAppPurchaseUtils.isVehicleMetricsAvailable(app);
-		preference.setVisible(purchased);
+		preference.setVisible(purchased && PluginsHelper.isEnabled(VehicleMetricsPlugin.class));
 		promo.setVisible(!purchased);
 
 		int iconId = R.drawable.ic_action_car_info;
@@ -485,6 +489,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (mapActivity != null) {
 				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.VEHICLE_METRICS);
 			}
+		} else if (RECORD_OBD_DATA.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				VehicleMetricsRecordingFragment.showInstance(mapActivity, this, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -538,11 +547,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			if (fm != null) {
 				ApplicationMode appMode = getSelectedAppMode();
 				SingleSelectPreferenceBottomSheet.showInstance(fm, prefId, this, false, appMode, true, true);
-			}
-		} else if (prefId.equals(RECORD_OBD_DATA)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				VehicleMetricsRecordingFragment.showInstance(mapActivity, this);
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);

@@ -39,5 +39,13 @@ enum class OBDCommand(
 			}
 			return null
 		}
+
+		fun getCommand(name: String): OBDCommand? {
+			return try {
+				OBDCommand.valueOf(name)
+			} catch (e: IllegalArgumentException) {
+				null
+			}
+		}
 	}
 }

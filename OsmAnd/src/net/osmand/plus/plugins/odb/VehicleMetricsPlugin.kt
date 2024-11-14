@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment
 import net.osmand.plus.plugins.weather.units.TemperatureUnit
 import net.osmand.plus.settings.backend.ApplicationMode
+import net.osmand.plus.settings.backend.preferences.ListStringPreference
 import net.osmand.plus.settings.fragments.SettingsScreenType
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.BLEUtils
@@ -77,6 +78,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		registerStringPreference("used_obd_devices", "").makeGlobal().cache();
 	val LAST_CONNECTED_OBD_DEVICE =
 		registerStringPreference("last_connected_obd_device", "").makeGlobal().cache()
+
+	val TRIP_RECORDING_VEHICLE_METRICS : ListStringPreference =
+		registerListStringPreference("trip_recording_vehicle_metrics", null, ";").makeProfile().makeShared() as ListStringPreference
 
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
@@ -911,11 +915,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
 		super.attachAdditionalInfoToRecordedTrack(location, json)
 		val mode = app.settings.applicationMode
-		val commandNames: List<String>? = settings.TRIP_RECORDING_VEHICLE_METRICS.getStringsListForProfile(mode)
-		val selectedCommands: List<OBDCommand> = commandNames?.mapNotNull { name ->
-			runCatching { OBDCommand.valueOf(name) }.getOrNull()
+		val commandNames: List<String>? = TRIP_RECORDING_VEHICLE_METRICS.getStringsListForProfile(mode)
+		val selectedCommands: List<OBDCommand> = commandNames?.mapNotNull {
+			OBDCommand.getCommand(it)
 		} ?: emptyList()
-		if (settings.RECORD_OBD_DATA.get() && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
+		if (!Algorithms.isEmpty(selectedCommands) && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
 			val rawData = obdDispatcher?.getRawData()
 			rawData?.let { data ->
 				for (command in data.keys) {

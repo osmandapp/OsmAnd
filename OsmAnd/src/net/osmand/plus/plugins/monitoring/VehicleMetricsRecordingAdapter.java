@@ -90,10 +90,9 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		Object item = items.get(position);
 		if (holder instanceof ItemHolder viewHolder) {
-			if (item instanceof CommandItem command) {
-				boolean lastItemInCategory = (position + 1 < items.size() && !(items.get(position + 1) instanceof CommandItem)) || position == items.size() - 1;
-				viewHolder.bindView(mapActivity, command, nightMode, lastItemInCategory);
-			}
+			VehicleMetricsItem command = (VehicleMetricsItem) item;
+			boolean lastItemInCategory = (position + 1 < items.size() && !(items.get(position + 1) instanceof VehicleMetricsItem)) || position == items.size() - 1;
+			viewHolder.bindView(mapActivity, command, nightMode, lastItemInCategory);
 		} else if (holder instanceof CategoryHolder viewHolder) {
 			if (item instanceof VehicleMetricsRecordingCategory category) {
 				viewHolder.bindView(category);
@@ -111,7 +110,7 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
-		if (object instanceof CommandItem) {
+		if (object instanceof VehicleMetricsItem) {
 			return ITEM_TYPE;
 		} else if (object instanceof VehicleMetricsRecordingCategory) {
 			return CATEGORY_TYPE;
@@ -156,20 +155,20 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 			divider = itemView.findViewById(R.id.divider_bottom);
 		}
 
-		public void bindView(@NonNull MapActivity mapActivity, @NonNull CommandItem commandItem, boolean nightMode, boolean lastItemInCategory) {
+		public void bindView(@NonNull MapActivity mapActivity, @NonNull VehicleMetricsItem commandItem, boolean nightMode, boolean lastItemInCategory) {
 			int dp48 = getDimen(mapActivity.getMyApplication(), R.dimen.bottom_sheet_list_item_height);
 			itemView.setMinimumHeight(dp48);
 
-			titleView.setText(commandItem.name());
-			boolean checked = listener.isCommandSelected(commandItem.command());
+			titleView.setText(commandItem.nameId);
+			boolean checked = listener.isCommandSelected(commandItem.command);
 			checkBoxView.setChecked(checked);
-			updateIcon(checked, commandItem.iconId());
+			updateIcon(checked, commandItem.iconId);
 
 			itemView.setOnClickListener(v -> {
-				listener.onCommandClick(commandItem.command());
-				boolean newState = listener.isCommandSelected(commandItem.command());
+				listener.onCommandClick(commandItem.command);
+				boolean newState = listener.isCommandSelected(commandItem.command);
 				checkBoxView.setChecked(newState);
-				updateIcon(newState, commandItem.iconId());
+				updateIcon(newState, commandItem.iconId);
 			});
 
 			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkBoxView);
