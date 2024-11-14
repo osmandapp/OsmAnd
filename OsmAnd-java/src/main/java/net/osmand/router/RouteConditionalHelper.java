@@ -9,7 +9,7 @@ import java.util.Map;
 public class RouteConditionalHelper {
 	public static final String RULE_INT_MAX = "RULE_INT_MAX";
 
-	public static void resolveAmbiguousConditionalTags(RouteDataObject rdo, Map<String, String> ambiguousConditionalTags) {
+	public void resolveAmbiguousConditionalTags(RouteDataObject rdo, Map<String, String> ambiguousConditionalTags) {
 		Map<String, Integer> existingIntValues = new HashMap<>();
 
 		// Find corresponding non-conditional tags and save their existing int-values.
@@ -54,7 +54,7 @@ public class RouteConditionalHelper {
 		}
 	}
 
-	public static void processConditionalTags(RouteDataObject rdo, long conditionalTime) {
+	public void processConditionalTags(RouteDataObject rdo, long conditionalTime) {
 		int sz = rdo.types.length;
 		for (int i = 0; i < sz; i++) {
 			BinaryMapRouteReaderAdapter.RouteTypeRule r = rdo.region.quickGetEncodingRule(rdo.types[i]);
@@ -104,7 +104,7 @@ public class RouteConditionalHelper {
 		}
 	}
 
-	public static void updateTypesByTagValue(RouteDataObject rdo, String tag, String value) {
+	public void updateTypesByTagValue(RouteDataObject rdo, String tag, String value) {
 		int ruleId = rdo.region.searchRouteEncodingRule(tag, value);
 		if (ruleId > 0) {
 			updateTypesByTagRuleId(rdo, tag, ruleId);
@@ -113,7 +113,7 @@ public class RouteConditionalHelper {
 		}
 	}
 
-	public static void updateTypesByTagRuleId(RouteDataObject rdo, String tag, int ruleId) {
+	public void updateTypesByTagRuleId(RouteDataObject rdo, String tag, int ruleId) {
 		if (ruleId > 0) {
 			int ks;
 			for (ks = 0; ks < rdo.types.length; ks++) {

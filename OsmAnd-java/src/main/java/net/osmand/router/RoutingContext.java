@@ -52,6 +52,7 @@ public class RoutingContext {
 	public final RouteCalculationMode calculationMode;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
+	private RouteConditionalHelper conditionalHelper = new RouteConditionalHelper();
 	public NativeLibrary nativeLib;
 	
 	// 0. Reference to native routingcontext for multiple routes
@@ -300,10 +301,10 @@ public class RoutingContext {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
 							if (config.ambiguousConditionalTags != null) {
-								RouteConditionalHelper.resolveAmbiguousConditionalTags(ro, config.ambiguousConditionalTags);
+								conditionalHelper.resolveAmbiguousConditionalTags(ro, config.ambiguousConditionalTags);
 							}
 							if (config.routeCalculationTime != 0) {
-								RouteConditionalHelper.processConditionalTags(ro, config.routeCalculationTime);
+								conditionalHelper.processConditionalTags(ro, config.routeCalculationTime);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
