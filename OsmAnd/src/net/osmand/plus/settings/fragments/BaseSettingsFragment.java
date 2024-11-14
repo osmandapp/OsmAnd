@@ -120,7 +120,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
-		// FK-TODO: remove configureSettingsSearch code
 		configureSettingsSearch = args != null && args.getBoolean(CONFIGURE_SETTINGS_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
