@@ -16,14 +16,14 @@ public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final LocalIndexesSizeController sizeController;
+	private final LocalSizeController sizeController;
 	@Nullable
 	private final LoadItemsListener listener;
 
 	public LocalItemsLoaderTask(@NonNull OsmandApplication app, @Nullable LoadItemsListener listener) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.sizeController = LocalIndexesSizeController.requireInstance(app);
+		this.sizeController = LocalSizeController.requireInstance(app);
 		this.listener = listener;
 	}
 
