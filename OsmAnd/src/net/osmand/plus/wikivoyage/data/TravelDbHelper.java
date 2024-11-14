@@ -203,7 +203,6 @@ public class TravelDbHelper implements TravelHelper {
 		}
 	}
 
-
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
 	}
@@ -711,6 +710,11 @@ public class TravelDbHelper implements TravelHelper {
 		}
 		String nm = tb.getName();
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
+	}
+
+	@Override
+	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
+		return false; // stub
 	}
 
 	@Nullable

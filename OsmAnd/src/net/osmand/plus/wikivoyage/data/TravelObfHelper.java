@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
+import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
@@ -206,8 +207,15 @@ public class TravelObfHelper implements TravelHelper {
 		return popularArticles;
 	}
 
+	@Override
+	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
+		return tags.containsKey(ROUTE_ID) && "segment".equals(tags.get(ROUTE));
+	}
+
 	@Nullable
 	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String filter, @Nullable String ref) {
+		final String lcFilter = filter != null ? filter.toLowerCase() : null;
+		final String lcSearchRef = ref != null ? ref.toLowerCase() : null;
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -221,9 +229,14 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				if ((Algorithms.objectEquals(amenity.getRouteId(), filter)
-						|| Algorithms.objectEquals(amenity.getName(), filter))
-						&& Algorithms.objectEquals(amenity.getRef(), ref)) {
+				final String aRef = amenity.getRef();
+				final String aName = amenity.getName();
+				final String aRouteId = amenity.getRouteId();
+				final String lcRef = aRef != null ? aRef.toLowerCase() : null;
+				final String lcName = aName != null ? aName.toLowerCase() : null;
+				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
+				if ((Algorithms.objectEquals(lcRouteId, lcFilter) || Algorithms.objectEquals(lcName, lcFilter))
+						&& (lcSearchRef == null || Algorithms.objectEquals(lcRef, lcSearchRef))) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
