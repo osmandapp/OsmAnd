@@ -200,8 +200,7 @@ public class MapLayers {
 		overlayTransparencyListener = change -> app.runInUIThread(() -> {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
-				mapTileLayer.setAlpha(255 - change);
-				mapVectorLayer.setAlpha(255 - change);
+				mapVectorLayer.setSymbolsAlpha(255 - change);
 				mapRenderer.requestRender();
 			}
 		});
