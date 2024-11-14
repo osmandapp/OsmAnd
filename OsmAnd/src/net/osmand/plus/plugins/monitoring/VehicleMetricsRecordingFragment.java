@@ -89,8 +89,11 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 
 		navigationIcon = toolbar.findViewById(R.id.close_button);
 		recyclerView = view.findViewById(R.id.recycler_view);
-		selectAllButton = view.findViewById(R.id.select_all);
-		applyButton = view.findViewById(R.id.apply_button);
+		selectAllButton = view.findViewById(R.id.dismiss_button);
+		applyButton = view.findViewById(R.id.right_bottom_button);
+		AndroidUiHelper.updateVisibility(applyButton, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
+
 		selectedCommands = new HashSet<>();
 		preference = PluginsHelper.requirePlugin(VehicleMetricsPlugin.class).getTRIP_RECORDING_VEHICLE_METRICS();
 
@@ -126,7 +129,7 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 			adapter.notifyDataSetChanged();
 		});
 
-		applyButton = view.findViewById(R.id.apply_button);
+		applyButton.setTitleId(R.string.shared_string_apply);
 		applyButton.setOnClickListener(v -> {
 			applyPreferenceWithSnackBar(new ArrayList<>(selectedCommands));
 			dismiss();

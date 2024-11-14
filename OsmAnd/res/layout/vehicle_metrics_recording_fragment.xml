@@ -24,48 +24,6 @@
 		android:layout_height="0dp"
 		android:layout_weight="1" />
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom"
-		android:orientation="vertical">
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/buttons_shadow"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/abp__shadow_height"
-			android:scaleType="fitXY"
-			app:srcCompat="@drawable/bg_shadow_list_top" />
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_ex_height"
-			android:background="?attr/list_background_color"
-			android:orientation="horizontal"
-			android:paddingHorizontal="@dimen/content_padding">
-
-			<net.osmand.plus.widgets.dialogbutton.DialogButton
-				android:id="@+id/select_all"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:paddingEnd="@dimen/content_padding_half"
-				app:dialogButtonTitle="@string/shared_string_select_all"
-				app:dialogButtonType="secondary" />
-
-			<net.osmand.plus.widgets.dialogbutton.DialogButton
-				android:id="@+id/apply_button"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:paddingStart="@dimen/content_padding_half"
-				app:dialogButtonTitle="@string/shared_string_apply"
-				app:dialogButtonType="primary" />
-
-		</LinearLayout>
-
-	</LinearLayout>
+	<include layout="@layout/bottom_buttons" />
 
 </LinearLayout>
