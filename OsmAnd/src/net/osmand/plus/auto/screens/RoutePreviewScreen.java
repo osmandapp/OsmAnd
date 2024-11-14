@@ -250,7 +250,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
 		if (mapRect != null) {
-			LOG.info("ZOOM Route " + mapRect);
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
 	}

@@ -1432,6 +1432,10 @@ public class AndroidUtils {
 		int rightMargin = (parentWidth - leftMargin - childWidth);
 		int bottomMargin = (parentHeight - topMargin - childHeight);
 
-		return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
+		if (isLayoutRtl(parentView.getContext())) {
+			return new int[] {rightMargin, topMargin, leftMargin, bottomMargin};
+		} else {
+			return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
+		}
 	}
 }
