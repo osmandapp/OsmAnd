@@ -186,7 +186,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			new Handler(Looper.getMainLooper()).postDelayed(() -> {
 				zoomMapToRoute();
 			}, 500);
-			zoomMapToRoute();
 		}
 	}
 
