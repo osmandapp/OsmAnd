@@ -1,9 +1,11 @@
 package net.osmand.plus.plugins.odb
 
+import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.plus.utils.next
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.shared.obd.OBDDataComputer
@@ -35,6 +37,17 @@ class OBDRemainingFuelWidget(
 
 	private fun getFieldType(): OBDTypeWidget {
 		return remainingFuelMode.get().fieldType
+	}
+
+	override fun getOnClickListener(): View.OnClickListener {
+		return View.OnClickListener { v: View? ->
+			nextMode()
+		}
+	}
+
+	private fun nextMode(){
+		remainingFuelMode.set(remainingFuelMode.get().next())
+		updatePrefs(true)
 	}
 
 	override fun updatePrefs(prefsChanged: Boolean) {
