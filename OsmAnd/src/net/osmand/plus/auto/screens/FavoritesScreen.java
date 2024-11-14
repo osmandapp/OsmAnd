@@ -29,7 +29,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.auto.TripHelper;
+import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -132,7 +132,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 			double dist = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					location.getLatitude(), location.getLongitude());
 			SpannableString address = new SpannableString(Algorithms.isEmpty(description) ? " " : "  • " + description);
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(getApp(), dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(getApp(), dist));
 			address.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			listBuilder.addItem(new Row.Builder()
 					.setTitle(title)

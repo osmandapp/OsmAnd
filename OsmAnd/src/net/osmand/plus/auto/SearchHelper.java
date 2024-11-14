@@ -262,7 +262,7 @@ public class SearchHelper {
 			float dist = (float) MapUtils.getDistance(placeLocation, searchLocation);
 			SpannableString description = !Algorithms.isEmpty(typeName)
 					? new SpannableString("  • " + typeName) : new SpannableString(" ");
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist));
 			description.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			builder.addText(description);
 			builder.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(

@@ -11,6 +11,5 @@ interface SettingsAPI {
 	fun addFloatPreferenceListener(name: String, listener: KStateChangedListener<Float>)
 
 	fun getFloatPreference(name: String): Float?
-	fun getAppModeFloatPreference(name: String): Float?
 	fun setFloatPreference(name: String, value: Float)
 }

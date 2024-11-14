@@ -4400,7 +4400,7 @@
     <string name="obd_fuel_type">Вид на горивото</string>
     <string name="obd_support">Поддръжка на OBD</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step1">1. Включете скенера към куплунга за OBD-II.</string>
+    <string name="connect_obd_instructions_step1">Включете скенера към куплунга за OBD-II.</string>
     <string name="obd_fuel_type_not_provided">Вида гориво не е посочен</string>
     <string name="obd_fuel_type_propane">Пропан</string>
     <string name="obd_fuel_type_cng">Природен газ</string>
@@ -4412,9 +4412,9 @@
     <string name="obd_vehicle_info">Информация за превозното средство</string>
     <string name="connect_obd_instructions_title">OsmAnd поддържа връзка със скенери на OBD-II през Blurtooth.</string>
     <string name="obd_how_to_connect">Как да свържете:</string>
-    <string name="connect_obd_instructions_step2">2. Включете двигателя.</string>
-    <string name="connect_obd_instructions_step3">3. Включете Bluetooth на устройството.</string>
-    <string name="connect_obd_instructions_step4">4. Докоснете „Свързване“ и изберете скенера от списъка.</string>
+    <string name="connect_obd_instructions_step2">Включете двигателя.</string>
+    <string name="connect_obd_instructions_step3">Включете Bluetooth на устройството.</string>
+    <string name="connect_obd_instructions_step4">Докоснете „Свързване“ и изберете скенера от списъка.</string>
     <string name="learn_more_about_obd_sensors">Научете повече за сензорите.</string>
     <string name="obd_fuel_left_liters">Оставащо гориво (литри)</string>
     <string name="obd_fuel_type_electric">Електричество</string>

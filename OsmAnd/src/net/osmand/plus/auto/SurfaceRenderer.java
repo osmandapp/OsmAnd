@@ -3,6 +3,7 @@ package net.osmand.plus.auto;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
@@ -45,7 +46,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener, ElevationListener {
 	private static final String TAG = "SurfaceRenderer";
 
-	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 30;
+	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 20;
 
 	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.025;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
@@ -441,6 +442,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
+			canvas.drawColor(Color.LTGRAY);
 			boolean newDarkMode = carContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;

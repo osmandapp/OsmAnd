@@ -345,9 +345,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, fixedZoomDuration)
 				: null;
 
+		int elevationAngle = zoomParams != null ? settings.AUTO_ZOOM_3D_ANGLE.get() : 0;
 		mapView.getAnimatedDraggingThread().startMoving(
 				location.getLatitude(), location.getLongitude(), zoomParams,
-				false, rotation, movingTime, false,
+				false, rotation, elevationAngle, movingTime, false,
 				() -> movingToMyLocation = false);
 	}
 
@@ -367,7 +368,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					: null;
 			mapView.getAnimatedDraggingThread().startMoving(
 					location.getLatitude(), location.getLongitude(), zoomParams,
-					pendingRotation, rotation, movingTime, false,
+					pendingRotation, rotation, 0, movingTime, false,
 					() -> movingToMyLocation = false);
 		} else {
 			if (autoZoom != null) {
