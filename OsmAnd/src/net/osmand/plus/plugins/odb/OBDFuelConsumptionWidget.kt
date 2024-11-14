@@ -5,6 +5,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.plus.utils.next
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.shared.obd.OBDDataComputer
@@ -125,10 +126,6 @@ class OBDFuelConsumptionWidget(
 				rightText = app.getString(R.string.shared_string_hour).lowercase()
 			}
 			return app.getString(R.string.ltr_or_rtl_combine_via_per, leftText, rightText)
-		}
-		fun next(): FuelConsumptionMode {
-			val nextItemIndex = (ordinal + 1) % FuelConsumptionMode.entries.size
-			return FuelConsumptionMode.entries[nextItemIndex]
 		}
 	}
 }
