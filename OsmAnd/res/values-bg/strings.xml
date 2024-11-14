@@ -4365,7 +4365,7 @@
     <string name="track_does_not_contain_data_to_save">Трасето не съдържа информация, която да бъде запазена.</string>
     <string name="quick_action_finish_trip_recording_summary">Бутон за запзване на трасето в GPX и приключване на записа на пътуването.</string>
     <string name="new_segment_started_m">Започнат запис на нов сегмент от трасето.</string>
-    <string name="lock_screen_description">Включва или изключва сензорния екран, за да предотврати случайни докосвания</string>
+    <string name="lock_screen_description">Включване или изключване на екрана, за да бъдат предотвратени нежелани докосвания</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон за запазване на текущото записано пътуване като GPX файл и продължаване на записа на нова следа без прекъсване.</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
@@ -4459,4 +4459,11 @@
     <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора</string>
     <string name="obd_air_intake_temp_desc">Показва температурата на постъпвщия през въздушната клапа въздух.</string>
     <string name="preview_next_turn">Преглед следващ завой</string>
+    <string name="connect_new_scanner">Свързване на нов скенер</string>
+    <string name="av_audio_sample_rate">Честота на аудио дискретизация</string>
+    <string name="av_audio_sample_rate_descr">Избор на честота на аудио дискретизация.</string>
+    <string name="auto_zoom_3d_angle">Ъгъл при триизмерно увеличаване</string>
+    <string name="lock_screen">Заключване на екрана</string>
+    <string name="screen_is_locked_by_action_button">Екранът е заключен. Докоснете бутона, за да го отключите.</string>
+    <string name="screen_is_unlocked">Екранът е отключен.</string>
 </resources>
