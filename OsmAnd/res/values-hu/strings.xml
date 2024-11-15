@@ -5642,4 +5642,6 @@
     <string name="av_audio_sample_rate_descr">Válassza ki a hang mintavételi arányát.</string>
     <string name="connect_new_scanner">Csatlakoztasson új olvasót</string>
     <string name="auto_zoom_3d_angle">Automatikus zoom 3D szög</string>
+    <string name="vehicle_metrics_recording_description">Válassza ki a GPX-fájlba elmentendő paramétereket.</string>
+    <string name="shared_string_engine">Motor</string>
 </resources>
