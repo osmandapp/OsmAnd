@@ -4889,4 +4889,7 @@
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parco_no">Parco teenus pole kasutatav</string>
     <string name="poi_payment_parco_yes">Parco</string>
+    <string name="poi_name_right">Nimi paremal poolel</string>
+    <string name="poi_name_left">Nimi vasakul poolel</string>
+    <string name="poi_name_etymology">Nime etümoloogia</string>
 </resources>
