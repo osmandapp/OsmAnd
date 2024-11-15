@@ -23,7 +23,7 @@ public class LoadImageMetadataTask extends AsyncTask<Void, Void, Void> {
 
 	private static final String WIKI_MEDIA_ACTION_RAW = "?action=raw";
 	private static final String WIKI_MEDIA_BASE_URL = "https://commons.wikimedia.org/wiki/File:";
-	private static final String OSMAND_PARSE_URL = "https://osmand.net/routing/search/parse-image-info";
+	private static final String OSMAND_PARSE_URL = "https://osmand.net/search/parse-image-info";
 
 	private final OsmandApplication app;
 	private final WikiImageCard imageCard;
