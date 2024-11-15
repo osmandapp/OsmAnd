@@ -1686,7 +1686,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
-		double border = 0.85;
+		double border = 0.8;
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
