@@ -105,6 +105,9 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		if (searchResult.objectType == GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = gpxInfo.getFile();
+			if (file == null) {
+				return;
+			}
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
 			if (selectedGpxFile == null) {
 				GpxFileLoaderTask.loadGpxFile(file, null, gpxFile -> {
