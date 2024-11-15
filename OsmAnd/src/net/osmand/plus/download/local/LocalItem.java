@@ -118,7 +118,7 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	}
 
 	public boolean isSizeCalculating(@NonNull Context context) {
-		return LocalSizeController.isSizeCalculating(context, this);
+		return LocalItemUtils.isSizeCalculating(context, this);
 	}
 
 	@Override

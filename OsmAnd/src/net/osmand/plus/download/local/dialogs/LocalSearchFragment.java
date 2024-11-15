@@ -233,7 +233,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Override
 	public void onResume() {
 		super.onResume();
-		LocalSizeController.addListener(app, this);
+		LocalSizeController.addCalculationListener(app, this);
 
 		if (!Algorithms.isEmpty(searchText)) {
 			searchEditText.setText(searchText);
@@ -246,7 +246,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	@Override
 	public void onPause() {
 		super.onPause();
-		LocalSizeController.removeListener(app, this);
+		LocalSizeController.removeCalculationListener(app, this);
 		AndroidUiHelper.updateActionBarVisibility(getDownloadActivity(), true);
 	}
 

@@ -271,14 +271,14 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	public void onResume() {
 		super.onResume();
 		updateToolbar();
-		LocalSizeController.addListener(app, this);
+		LocalSizeController.addCalculationListener(app, this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		updateToolbar();
-		LocalSizeController.removeListener(app, this);
+		LocalSizeController.removeCalculationListener(app, this);
 
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {

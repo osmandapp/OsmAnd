@@ -1,7 +1,6 @@
 package net.osmand.plus.download.local
 
 import android.content.Context
-import androidx.annotation.Nullable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,6 +9,8 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController
 import net.osmand.util.Algorithms
 import java.io.File
+import java.util.Collections
+import java.util.concurrent.ConcurrentHashMap
 
 class LocalSizeController private constructor(val app: OsmandApplication) : IDialogController {
 
@@ -19,12 +20,12 @@ class LocalSizeController private constructor(val app: OsmandApplication) : IDia
 		private const val TILES_SIZE_CALCULATION_LIMIT = 50L * BYTES_IN_MB
 
 		@JvmStatic
-		fun addListener(app: OsmandApplication, listener: LocalSizeCalculationListener) {
+		fun addCalculationListener(app: OsmandApplication, listener: LocalSizeCalculationListener) {
 			requireInstance(app).calculationListeners.add(listener)
 		}
 
 		@JvmStatic
-		fun removeListener(app: OsmandApplication, listener: LocalSizeCalculationListener) {
+		fun removeCalculationListener(app: OsmandApplication, listener: LocalSizeCalculationListener) {
 			requireInstance(app).calculationListeners.remove(listener)
 		}
 
@@ -38,7 +39,7 @@ class LocalSizeController private constructor(val app: OsmandApplication) : IDia
 			if (item.type == LocalItemType.TILES_DATA) {
 				val app = context.applicationContext as OsmandApplication
 				val controller = requireInstance(app)
-				return controller.getCachedSize(item) == null && controller.isFullSizeMode(item)
+				return controller.cachedSize[item.path] == null && controller.isFullSizeMode(item)
 			}
 			return false
 		}
@@ -55,12 +56,12 @@ class LocalSizeController private constructor(val app: OsmandApplication) : IDia
 		}
 	}
 
-	private val cachedSize = mutableMapOf<String, Long>()
-	private val fullSizeMode = mutableSetOf<String>()
-	private val calculationListeners = mutableSetOf<LocalSizeCalculationListener>()
+	private val cachedSize = ConcurrentHashMap<String, Long>()
+	private val fullSizeMode = Collections.synchronizedSet(mutableSetOf<String>())
+	private val calculationListeners = Collections.synchronizedSet(mutableSetOf<LocalSizeCalculationListener>())
 
 	private fun calculateFullSizeImpl(localItem: LocalItem) {
-		val key = localItem.file.absolutePath
+		val key = localItem.path
 		fullSizeMode.add(key)
 		cachedSize.remove(key)
 		notifyOnSizeCalculationEvent(localItem)
@@ -75,30 +76,20 @@ class LocalSizeController private constructor(val app: OsmandApplication) : IDia
 	fun updateLocalItemSizeIfNeeded(localItem: LocalItem) {
 		if (localItem.type == LocalItemType.TILES_DATA) {
 			val file = localItem.file
-			var size = getCachedSize(localItem)
+			var size = cachedSize[localItem.path]
 			val calculationLimit = getSizeCalculationLimit(localItem)
 			if (size == null) {
 				size = calculateSize(file, calculationLimit)
-				saveCachedSize(file, size)
+				cachedSize[localItem.path] = size
 			}
 			localItem.size = size
 			localItem.setSizeCalculationLimit(calculationLimit)
 		}
 	}
 
-	@Nullable
-	private fun getCachedSize(localItem: LocalItem): Long? {
-		val file = localItem.file
-		return cachedSize[file.absolutePath]
-	}
-
-	private fun saveCachedSize(file: File, size: Long) {
-		cachedSize[file.absolutePath] = size
-	}
-
 	private fun getSizeCalculationLimit(localItem: LocalItem): Long {
 		if (localItem.type == LocalItemType.TILES_DATA && !isFullSizeMode(localItem)) {
-			if (localItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+			if (!localItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return TILES_SIZE_CALCULATION_LIMIT
 			}
 		}
@@ -106,8 +97,7 @@ class LocalSizeController private constructor(val app: OsmandApplication) : IDia
 	}
 
 	private fun isFullSizeMode(localItem: LocalItem): Boolean {
-		val key = localItem.file.absolutePath
-		return fullSizeMode.contains(key)
+		return fullSizeMode.contains(localItem.path)
 	}
 
 	private fun calculateSize(file: File, limit: Long): Long {

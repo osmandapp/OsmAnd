@@ -133,7 +133,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onResume() {
 		super.onResume();
 		app.getImportHelper().addImportTaskListener(this);
-		LocalSizeController.addListener(app, this);
+		LocalSizeController.addCalculationListener(app, this);
 		if (categories == null && (asyncLoader == null || asyncLoader.getStatus() == Status.FINISHED)) {
 			reloadData();
 		}
@@ -143,7 +143,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onDestroy() {
 		super.onDestroy();
 		app.getImportHelper().removeImportTaskListener(this);
-		LocalSizeController.removeListener(app, this);
+		LocalSizeController.removeCalculationListener(app, this);
 		if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
 			asyncLoader.cancel(false);
 		}
