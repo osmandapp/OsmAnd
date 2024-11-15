@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 
 public class SettingsSearchButtonHelper {
 
@@ -40,7 +41,8 @@ public class SettingsSearchButtonHelper {
 				.builder(
 						createSearchConfiguration(),
 						rootSearchPreferenceFragment.requireActivity().getSupportFragmentManager(),
-						rootSearchPreferenceFragment.getResources())
+						rootSearchPreferenceFragment.requireContext(),
+						OnUiThreadRunnerFactory.fromActivity(rootSearchPreferenceFragment.requireActivity()))
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
